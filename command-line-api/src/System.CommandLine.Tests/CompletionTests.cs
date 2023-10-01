@@ -63,9 +63,15 @@ namespace System.CommandLine.Tests
 
             var rootCommand = new CliCommand("root") { subcommand1 };
 
-            rootCommand.Options.Add(
-                new CliOption<string>("--three") { Description = "option three", Recursive = true }
-            );
+            rootCommand
+                .Options
+                .Add(
+                    new CliOption<string>("--three")
+                    {
+                        Description = "option three",
+                        Recursive = true
+                    }
+                );
 
             var completions = subcommand2.GetCompletions(CompletionContext.Empty);
 
@@ -212,13 +218,15 @@ namespace System.CommandLine.Tests
             var originOption = new CliOption<string>("--origin");
             var cloneOption = new CliOption<string>("--clone");
 
-            cloneOption.CompletionSources.Add(ctx =>
-            {
-                var opt1Value = ctx.ParseResult.GetValue(originOption);
-                return !string.IsNullOrWhiteSpace(opt1Value)
-                    ? new[] { opt1Value }
-                    : Array.Empty<string>();
-            });
+            cloneOption
+                .CompletionSources
+                .Add(ctx =>
+                {
+                    var opt1Value = ctx.ParseResult.GetValue(originOption);
+                    return !string.IsNullOrWhiteSpace(opt1Value)
+                        ? new[] { opt1Value }
+                        : Array.Empty<string>();
+                });
 
             CliRootCommand rootCommand = new CliRootCommand { originOption, cloneOption };
 
@@ -842,9 +850,9 @@ namespace System.CommandLine.Tests
         {
             var argument = new CliArgument<DayOfWeek>("day");
             argument.CompletionSources.Clear();
-            argument.CompletionSources.Add(
-                new[] { "mon", "tues", "wed", "thur", "fri", "sat", "sun" }
-            );
+            argument
+                .CompletionSources
+                .Add(new[] { "mon", "tues", "wed", "thur", "fri", "sat", "sun" });
             var command = new CliCommand("the-command") { argument };
             CliConfiguration simpleConfig = new(command);
             var completions = command.Parse("the-command s", simpleConfig).GetCompletions();
@@ -916,10 +924,13 @@ namespace System.CommandLine.Tests
 
             var result = rootCommand.Parse("--day SleepyDay", simpleConfig);
 
-            result.Errors
+            result
+                .Errors
                 .Should()
                 .ContainSingle()
-                .Which.Message.Should()
+                .Which
+                .Message
+                .Should()
                 .Be(
                     $"Cannot parse argument 'SleepyDay' for option '--day' as expected type 'System.DayOfWeek'. Did you mean one of the following?{NewLine}Friday{NewLine}Monday{NewLine}Saturday{NewLine}Sunday{NewLine}Thursday{NewLine}Tuesday{NewLine}Wednesday"
                 );

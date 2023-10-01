@@ -21,24 +21,24 @@ namespace Microsoft.Extensions.Logging.Generators
     {
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-            IncrementalValuesProvider<ClassDeclarationSyntax> classDeclarations =
-                context.SyntaxProvider
-                    .ForAttributeWithMetadataName(
+            IncrementalValuesProvider<ClassDeclarationSyntax> classDeclarations = context
+                .SyntaxProvider
+                .ForAttributeWithMetadataName(
 #if !ROSLYN4_4_OR_GREATER
-                        context,
+                    context,
 #endif
-                        Parser.LoggerMessageAttribute,
-                        (node, _) => node is MethodDeclarationSyntax,
-                        (context, _) => context.TargetNode.Parent as ClassDeclarationSyntax
-                    )
-                    .Where(static m => m is not null);
+                    Parser.LoggerMessageAttribute,
+                    (node, _) => node is MethodDeclarationSyntax,
+                    (context, _) => context.TargetNode.Parent as ClassDeclarationSyntax
+                )
+                .Where(static m => m is not null);
 
             IncrementalValueProvider<(
                 Compilation,
                 ImmutableArray<ClassDeclarationSyntax>
-            )> compilationAndClasses = context.CompilationProvider.Combine(
-                classDeclarations.Collect()
-            );
+            )> compilationAndClasses = context
+                .CompilationProvider
+                .Combine(classDeclarations.Collect());
 
             context.RegisterSourceOutput(
                 compilationAndClasses,

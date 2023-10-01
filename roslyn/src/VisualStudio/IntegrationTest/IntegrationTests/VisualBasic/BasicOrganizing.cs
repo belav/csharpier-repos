@@ -35,19 +35,24 @@ Class Test
 End Class"
             );
             VisualStudio.ExecuteCommand("Edit.RemoveAndSort");
-            VisualStudio.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.OrganizeDocument
-            );
-            VisualStudio.Editor.Verify.TextContains(
-                @"Imports System.Runtime.CompilerServices
+            VisualStudio
+                .Workspace
+                .WaitForAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.OrganizeDocument
+                );
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"Imports System.Runtime.CompilerServices
 Imports System.Runtime.InteropServices
 Class Test
     Sub Method(<CallerMemberName> Optional str As String = Nothing)
         Dim data As COMException
     End Sub
 End Class"
-            );
+                );
         }
     }
 }

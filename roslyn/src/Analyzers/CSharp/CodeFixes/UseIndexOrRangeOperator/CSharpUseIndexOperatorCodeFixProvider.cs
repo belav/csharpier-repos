@@ -65,10 +65,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
                 var diagnostic in diagnostics.OrderByDescending(d => d.Location.SourceSpan.Start)
             )
             {
-                var node = diagnostic.Location.FindNode(
-                    getInnermostNodeForTie: true,
-                    cancellationToken
-                );
+                var node = diagnostic
+                    .Location
+                    .FindNode(getInnermostNodeForTie: true, cancellationToken);
 
                 editor.ReplaceNode(
                     node,

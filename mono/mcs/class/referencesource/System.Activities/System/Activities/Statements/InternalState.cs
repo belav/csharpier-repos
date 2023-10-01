@@ -273,10 +273,9 @@ namespace System.Activities.Statements
                     InternalTransition originalTransition;
 
                     if (
-                        originalInternalState.triggerInternalTransitionMapping.TryGetValue(
-                            triggerMatch,
-                            out originalTransition
-                        )
+                        originalInternalState
+                            .triggerInternalTransitionMapping
+                            .TryGetValue(triggerMatch, out originalTransition)
                     )
                     {
                         originalTriggerInUpdatedDefinition++;
@@ -720,9 +719,9 @@ namespace System.Activities.Statements
                                     updatedIndex++
                                 )
                                 {
-                                    Activity condition = transition.TransitionDataList[
-                                        updatedIndex
-                                    ].Condition;
+                                    Activity condition = transition
+                                        .TransitionDataList[updatedIndex]
+                                        .Condition;
                                     Fx.Assert(
                                         null != condition,
                                         "Conditional transition must have Condition activity."
@@ -967,11 +966,13 @@ namespace System.Activities.Statements
                 InternalTransition transition = this.GetInternalTransition(
                     eventManager.CurrentBeingProcessedEvent.TriggedId
                 );
-                Activity action = transition.TransitionDataList[
-                    -1 == eventManager.CurrentConditionIndex
-                        ? 0
-                        : eventManager.CurrentConditionIndex
-                ].Action;
+                Activity action = transition
+                    .TransitionDataList[
+                        -1 == eventManager.CurrentConditionIndex
+                            ? 0
+                            : eventManager.CurrentConditionIndex
+                    ]
+                    .Action;
 
                 if (action != null)
                 {
@@ -1020,14 +1021,15 @@ namespace System.Activities.Statements
 
         Activity<bool> GetCondition(int triggerIndex, int conditionIndex)
         {
-            return this.internalTransitions[triggerIndex].TransitionDataList[
-                conditionIndex
-            ].Condition;
+            return this.internalTransitions[triggerIndex]
+                .TransitionDataList[conditionIndex]
+                .Condition;
         }
 
         string GetTo(int triggerIndex, int conditionIndex = 0)
         {
-            return this.internalTransitions[triggerIndex].TransitionDataList[conditionIndex]
+            return this.internalTransitions[triggerIndex]
+                .TransitionDataList[conditionIndex]
                 .To
                 .StateId;
         }

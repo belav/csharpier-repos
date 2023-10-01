@@ -153,9 +153,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             )
             {
                 if (
-                    !_options.NewLines.HasFlag(
-                        NewLinePlacement.BeforeOpenBraceInObjectCollectionArrayInitializers
-                    )
+                    !_options
+                        .NewLines
+                        .HasFlag(
+                            NewLinePlacement.BeforeOpenBraceInObjectCollectionArrayInitializers
+                        )
                 )
                 {
                     operation = CreateAdjustSpacesOperation(1, AdjustSpacesOption.ForceSpaces);
@@ -228,9 +230,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             )
             {
                 if (
-                    !_options.NewLines.HasFlag(
-                        NewLinePlacement.BeforeOpenBraceInLambdaExpressionBody
-                    )
+                    !_options
+                        .NewLines
+                        .HasFlag(NewLinePlacement.BeforeOpenBraceInLambdaExpressionBody)
                 )
                 {
                     operation = CreateAdjustSpacesOperation(1, AdjustSpacesOption.ForceSpaces);
@@ -244,9 +246,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             )
             {
                 if (
-                    !_options.NewLines.HasFlag(
-                        NewLinePlacement.BeforeOpenBraceInObjectCollectionArrayInitializers
-                    )
+                    !_options
+                        .NewLines
+                        .HasFlag(
+                            NewLinePlacement.BeforeOpenBraceInObjectCollectionArrayInitializers
+                        )
                 )
                 {
                     operation = CreateAdjustSpacesOperation(1, AdjustSpacesOption.ForceSpaces);
@@ -405,9 +409,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             )
             {
                 if (
-                    _options.NewLines.HasFlag(
-                        NewLinePlacement.BeforeOpenBraceInObjectCollectionArrayInitializers
-                    )
+                    _options
+                        .NewLines
+                        .HasFlag(
+                            NewLinePlacement.BeforeOpenBraceInObjectCollectionArrayInitializers
+                        )
                 )
                 {
                     return CreateAdjustNewLinesOperation(1, AdjustNewLinesOption.PreserveLines);
@@ -518,9 +524,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             )
             {
                 if (
-                    _options.NewLines.HasFlag(
-                        NewLinePlacement.BeforeOpenBraceInLambdaExpressionBody
-                    )
+                    _options
+                        .NewLines
+                        .HasFlag(NewLinePlacement.BeforeOpenBraceInLambdaExpressionBody)
                 )
                 {
                     return CreateAdjustNewLinesOperation(
@@ -541,9 +547,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             )
             {
                 if (
-                    _options.NewLines.HasFlag(
-                        NewLinePlacement.BeforeOpenBraceInObjectCollectionArrayInitializers
-                    )
+                    _options
+                        .NewLines
+                        .HasFlag(
+                            NewLinePlacement.BeforeOpenBraceInObjectCollectionArrayInitializers
+                        )
                 )
                 {
                     return CreateAdjustNewLinesOperation(1, AdjustNewLinesOption.PreserveLines);

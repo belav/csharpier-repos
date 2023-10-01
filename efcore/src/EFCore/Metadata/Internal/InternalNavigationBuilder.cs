@@ -179,10 +179,9 @@ public class InternalNavigationBuilder
                 && (
                     Metadata.IsOnDependent
                         ? foreignKey.Builder.CanSetIsRequired(required, configurationSource)
-                        : foreignKey.Builder.CanSetIsRequiredDependent(
-                            required,
-                            configurationSource
-                        )
+                        : foreignKey
+                            .Builder
+                            .CanSetIsRequiredDependent(required, configurationSource)
                 )
             : Metadata.IsOnDependent
                 && foreignKey.Builder.CanSetIsRequired(required, configurationSource);
@@ -219,19 +218,28 @@ public class InternalNavigationBuilder
                 }
 
                 return Metadata.IsOnDependent
-                    ? foreignKey.Builder
+                    ? foreignKey
+                        .Builder
                         .IsRequired(required, configurationSource)!
-                        .Metadata.DependentToPrincipal!.Builder
-                    : foreignKey.Builder
+                        .Metadata
+                        .DependentToPrincipal!
+                        .Builder
+                    : foreignKey
+                        .Builder
                         .IsRequiredDependent(required, configurationSource)!
-                        .Metadata.PrincipalToDependent!.Builder;
+                        .Metadata
+                        .PrincipalToDependent!
+                        .Builder;
             }
 
             if (Metadata.IsOnDependent)
             {
-                return foreignKey.Builder
+                return foreignKey
+                    .Builder
                     .IsRequired(required, configurationSource)!
-                    .Metadata.DependentToPrincipal!.Builder;
+                    .Metadata
+                    .DependentToPrincipal!
+                    .Builder;
             }
 
             throw new InvalidOperationException(

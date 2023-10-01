@@ -28,11 +28,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         public void BasicToCSharp()
         {
             var csProj = new ProjectUtils.Project("CSProj");
-            VisualStudio.SolutionExplorer.AddProject(
-                csProj,
-                WellKnownProjectTemplates.ClassLibrary,
-                LanguageNames.CSharp
-            );
+            VisualStudio
+                .SolutionExplorer
+                .AddProject(csProj, WellKnownProjectTemplates.ClassLibrary, LanguageNames.CSharp);
 
             var project = new ProjectUtils.Project(ProjectName);
             VisualStudio.SolutionExplorer.OpenFile(project, "Class1.vb");
@@ -46,11 +44,10 @@ Class C
 End Class
 "
             );
-            VisualStudio.Editor.Verify.CodeAction(
-                "Generate new type...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction("Generate new type...", applyFix: true, blockUntilComplete: false);
 
             GenerateTypeDialog.VerifyOpen();
             GenerateTypeDialog.SetAccessibility("Public");
@@ -98,11 +95,10 @@ End Class
 "
             );
 
-            VisualStudio.Editor.Verify.CodeAction(
-                "Generate new type...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction("Generate new type...", applyFix: true, blockUntilComplete: false);
             var project = new ProjectUtils.Project(ProjectName);
 
             GenerateTypeDialog.VerifyOpen();
@@ -138,11 +134,9 @@ End Class
         public void CheckFoldersPopulateComboBox()
         {
             var project = new ProjectUtils.Project(ProjectName);
-            VisualStudio.SolutionExplorer.AddFile(
-                project,
-                @"folder1\folder2\GenerateTypeTests.vb",
-                open: true
-            );
+            VisualStudio
+                .SolutionExplorer
+                .AddFile(project, @"folder1\folder2\GenerateTypeTests.vb", open: true);
 
             SetUpEditor(
                 @"Class C
@@ -152,11 +146,10 @@ End Class
 End Class
 "
             );
-            VisualStudio.Editor.Verify.CodeAction(
-                "Generate new type...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction("Generate new type...", applyFix: true, blockUntilComplete: false);
 
             GenerateTypeDialog.VerifyOpen();
             GenerateTypeDialog.SetTargetFileToNewName("Other");

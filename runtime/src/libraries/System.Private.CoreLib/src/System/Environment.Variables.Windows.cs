@@ -17,11 +17,13 @@ namespace System
             uint length;
             while (
                 (
-                    length = Interop.Kernel32.GetEnvironmentVariable(
-                        variable,
-                        ref builder.GetPinnableReference(),
-                        (uint)builder.Capacity
-                    )
+                    length = Interop
+                        .Kernel32
+                        .GetEnvironmentVariable(
+                            variable,
+                            ref builder.GetPinnableReference(),
+                            (uint)builder.Capacity
+                        )
                 ) > builder.Capacity
             )
             {
@@ -45,11 +47,13 @@ namespace System
         internal static string? GetEnvironmentVariableCore_NoArrayPool(string variable)
         {
             Span<char> span = stackalloc char[128];
-            uint length = Interop.Kernel32.GetEnvironmentVariable(
-                variable,
-                ref MemoryMarshal.GetReference(span),
-                (uint)span.Length
-            );
+            uint length = Interop
+                .Kernel32
+                .GetEnvironmentVariable(
+                    variable,
+                    ref MemoryMarshal.GetReference(span),
+                    (uint)span.Length
+                );
             return length > 0 && length <= span.Length
                 ? span.Slice(0, (int)length).ToString()
                 : null;

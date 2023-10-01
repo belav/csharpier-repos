@@ -60,18 +60,15 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
 
             foreach (var diagnostic in diagnostics)
             {
-                var expressionToCoalesce = diagnostic.AdditionalLocations[0].FindNode(
-                    getInnermostNodeForTie: true,
-                    cancellationToken
-                );
-                var ifStatement = diagnostic.AdditionalLocations[1].FindNode(
-                    getInnermostNodeForTie: true,
-                    cancellationToken
-                );
-                var whenTrueStatement = diagnostic.AdditionalLocations[2].FindNode(
-                    getInnermostNodeForTie: true,
-                    cancellationToken
-                );
+                var expressionToCoalesce = diagnostic
+                    .AdditionalLocations[0]
+                    .FindNode(getInnermostNodeForTie: true, cancellationToken);
+                var ifStatement = diagnostic
+                    .AdditionalLocations[1]
+                    .FindNode(getInnermostNodeForTie: true, cancellationToken);
+                var whenTrueStatement = diagnostic
+                    .AdditionalLocations[2]
+                    .FindNode(getInnermostNodeForTie: true, cancellationToken);
 
                 editor.RemoveNode(ifStatement);
                 editor.ReplaceNode(

@@ -44,14 +44,16 @@ public class RequestBodyPipeFeature : IRequestBodyPipeFeature
                     _defaultReaderOptions
                 );
 
-                _context.Response.OnCompleted(
-                    (self) =>
-                    {
-                        ((PipeReader)self).Complete();
-                        return Task.CompletedTask;
-                    },
-                    _internalPipeReader
-                );
+                _context
+                    .Response
+                    .OnCompleted(
+                        (self) =>
+                        {
+                            ((PipeReader)self).Complete();
+                            return Task.CompletedTask;
+                        },
+                        _internalPipeReader
+                    );
             }
 
             return _internalPipeReader;

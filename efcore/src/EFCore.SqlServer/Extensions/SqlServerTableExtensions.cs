@@ -27,12 +27,14 @@ public static class SqlServerTableExtensions
             return isSqlOutputClauseUsed;
         }
 
-        isSqlOutputClauseUsed = table.EntityTypeMappings.All(
-            e =>
-                ((IEntityType)e.TypeBase).IsSqlOutputClauseUsed(
-                    StoreObjectIdentifier.Table(table.Name, table.Schema)
-                )
-        );
+        isSqlOutputClauseUsed = table
+            .EntityTypeMappings
+            .All(
+                e =>
+                    ((IEntityType)e.TypeBase).IsSqlOutputClauseUsed(
+                        StoreObjectIdentifier.Table(table.Name, table.Schema)
+                    )
+            );
 
         table.SetRuntimeAnnotation(
             SqlServerAnnotationNames.UseSqlOutputClause,

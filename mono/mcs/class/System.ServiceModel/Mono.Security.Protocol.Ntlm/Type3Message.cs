@@ -190,9 +190,9 @@ namespace Mono.Security.Protocol.Ntlm
 
         public override byte[] GetBytes()
         {
-            byte[] domain = Encoding.Unicode.GetBytes(
-                _domain.ToUpper(CultureInfo.InvariantCulture)
-            );
+            byte[] domain = Encoding
+                .Unicode
+                .GetBytes(_domain.ToUpper(CultureInfo.InvariantCulture));
             byte[] user = Encoding.Unicode.GetBytes(_username);
             byte[] host = Encoding.Unicode.GetBytes(_host.ToUpper(CultureInfo.InvariantCulture));
 

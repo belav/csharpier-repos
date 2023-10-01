@@ -214,7 +214,8 @@ public class TypeMap
     public Type MakeGenericType(Type type) =>
         type.IsGenericTypeDefinition
             ? type.MakeGenericType(
-                SourceType.GenericTypeArguments
+                SourceType
+                    .GenericTypeArguments
                     .Concat(DestinationType.GenericTypeArguments)
                     .Take(type.GenericParametersCount())
                     .ToArray()
@@ -257,7 +258,8 @@ public class TypeMap
         {
             properties = Profile
                 .CreateTypeDetails(DestinationType)
-                .WriteAccessors.Select(p => p.Name)
+                .WriteAccessors
+                .Select(p => p.Name)
                 .Where(p => !ConstructorParameterMatches(p))
                 .Except(MappedMembers().Select(m => m.DestinationName))
                 .Except(PathMaps.Select(p => p.MemberPath.First.Name));
@@ -265,11 +267,13 @@ public class TypeMap
         else
         {
             var ignoredSourceMembers = _details
-                ?.SourceMemberConfigs?.Where(smc => smc.IsIgnored())
+                ?.SourceMemberConfigs
+                ?.Where(smc => smc.IsIgnored())
                 .Select(pm => pm.SourceMember.Name);
             properties = Profile
                 .CreateTypeDetails(SourceType)
-                .ReadAccessors.Select(p => p.Name)
+                .ReadAccessors
+                .Select(p => p.Name)
                 .Except(MappedMembers().Select(m => m.GetSourceMemberName()))
                 .Except(IncludedMembersNames)
                 .Except(IncludedMembers.Select(m => m.GetMember()?.Name))
@@ -600,7 +604,8 @@ public class TypeMap
         private void ApplyIncludedMemberTypeMap(IncludedMember includedMember, TypeMap thisMap)
         {
             var typeMap = includedMember.TypeMap;
-            var includedMemberMaps = typeMap.PropertyMaps
+            var includedMemberMaps = typeMap
+                .PropertyMaps
                 .Where(m => m.CanResolveValue && thisMap.GetPropertyMap(m) == null)
                 .Select(p => new PropertyMap(p, thisMap, includedMember))
                 .ToArray();
@@ -722,7 +727,8 @@ public class TypeMap
                 return Array.Empty<PathMap>();
             }
             PathMaps ??= new();
-            return inheritedTypeMap.PathMaps
+            return inheritedTypeMap
+                .PathMaps
                 .Where(baseConfig => GetPathMap(baseConfig.MemberPath) == null)
                 .ToArray();
         }

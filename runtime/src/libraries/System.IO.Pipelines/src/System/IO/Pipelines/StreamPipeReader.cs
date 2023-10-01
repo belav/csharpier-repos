@@ -296,7 +296,8 @@ namespace System.IO.Pipelines
                         if (reader.UseZeroByteReads && reader._bufferedBytes == 0)
                         {
                             // Wait for data by doing 0 byte read before
-                            await reader.InnerStream
+                            await reader
+                                .InnerStream
                                 .ReadAsync(Memory<byte>.Empty, tokenSource.Token)
                                 .ConfigureAwait(false);
                         }
@@ -305,11 +306,13 @@ namespace System.IO.Pipelines
                         {
                             reader.AllocateReadTail(minimumSize);
 
-                            Memory<byte> buffer = reader._readTail!.AvailableMemory.Slice(
-                                reader._readTail.End
-                            );
+                            Memory<byte> buffer = reader
+                                ._readTail!
+                                .AvailableMemory
+                                .Slice(reader._readTail.End);
 
-                            int length = await reader.InnerStream
+                            int length = await reader
+                                .InnerStream
                                 .ReadAsync(buffer, tokenSource.Token)
                                 .ConfigureAwait(false);
 

@@ -274,9 +274,9 @@ namespace Microsoft.Extensions.Options.Generators
                 $"var context = new global::System.ComponentModel.DataAnnotations.ValidationContext(options);"
             );
 
-            int capacity = modelToValidate.MembersToValidate.Max(
-                static vm => vm.ValidationAttributes.Count
-            );
+            int capacity = modelToValidate
+                .MembersToValidate
+                .Max(static vm => vm.ValidationAttributes.Count);
             if (capacity > 0)
             {
                 OutLn(

@@ -105,17 +105,19 @@ namespace System.ServiceModel.Configuration
                 Type CTMType = Type.GetType(this.WebContentTypeMapperType, true);
                 if (!typeof(WebContentTypeMapper).IsAssignableFrom(CTMType))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR2.GetString(
-                                SR2.ConfigInvalidWebContentTypeMapper,
-                                CTMType,
-                                ConfigurationStringsWebContentTypeMapperType,
-                                typeof(WebMessageEncodingBindingElement),
-                                typeof(WebContentTypeMapper)
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR2.GetString(
+                                    SR2.ConfigInvalidWebContentTypeMapper,
+                                    CTMType,
+                                    ConfigurationStringsWebContentTypeMapperType,
+                                    typeof(WebMessageEncodingBindingElement),
+                                    typeof(WebContentTypeMapper)
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 try
                 {
@@ -124,18 +126,20 @@ namespace System.ServiceModel.Configuration
                 }
                 catch (MissingMethodException innerException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR2.GetString(
-                                SR2.ConfigWebContentTypeMapperNoConstructor,
-                                CTMType,
-                                ConfigurationStringsWebContentTypeMapperType,
-                                typeof(WebMessageEncodingBindingElement),
-                                typeof(WebContentTypeMapper)
-                            ),
-                            innerException
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR2.GetString(
+                                    SR2.ConfigWebContentTypeMapperNoConstructor,
+                                    CTMType,
+                                    ConfigurationStringsWebContentTypeMapperType,
+                                    typeof(WebMessageEncodingBindingElement),
+                                    typeof(WebContentTypeMapper)
+                                ),
+                                innerException
+                            )
+                        );
                 }
             }
 #pragma warning suppress 56506 // bindingElement is checked for null in base.ApplyConfiguration()

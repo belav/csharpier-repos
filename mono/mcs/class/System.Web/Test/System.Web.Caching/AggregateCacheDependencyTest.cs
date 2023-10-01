@@ -79,15 +79,17 @@ namespace MonoTests.System.Web.Caching
 
             string original = "MONO";
 
-            HttpRuntime.Cache.Insert(
-                "key",
-                original,
-                aggregate,
-                absoluteExpiration,
-                slidingExpiration,
-                priority,
-                null
-            );
+            HttpRuntime
+                .Cache
+                .Insert(
+                    "key",
+                    original,
+                    aggregate,
+                    absoluteExpiration,
+                    slidingExpiration,
+                    priority,
+                    null
+                );
 
             string cachedValue = HttpRuntime.Cache.Get("key") as string;
             Assert.IsNotNull(cachedValue, "#A1");
@@ -122,15 +124,17 @@ namespace MonoTests.System.Web.Caching
 
             string original = "MONO";
 
-            HttpRuntime.Cache.Insert(
-                "key",
-                original,
-                aggregate,
-                absoluteExpiration,
-                slidingExpiration,
-                priority,
-                null
-            );
+            HttpRuntime
+                .Cache
+                .Insert(
+                    "key",
+                    original,
+                    aggregate,
+                    absoluteExpiration,
+                    slidingExpiration,
+                    priority,
+                    null
+                );
 
             string cachedValue = HttpRuntime.Cache.Get("key") as string;
             Assert.IsNotNull(cachedValue, "#A1");
@@ -164,15 +168,17 @@ namespace MonoTests.System.Web.Caching
 
             string original = "MONO";
 
-            HttpRuntime.Cache.Insert(
-                "key",
-                original,
-                aggregate,
-                absoluteExpiration,
-                slidingExpiration,
-                priority,
-                null
-            );
+            HttpRuntime
+                .Cache
+                .Insert(
+                    "key",
+                    original,
+                    aggregate,
+                    absoluteExpiration,
+                    slidingExpiration,
+                    priority,
+                    null
+                );
 
             string cachedValue = HttpRuntime.Cache.Get("key") as string;
             Assert.IsNotNull(cachedValue, "#A1");

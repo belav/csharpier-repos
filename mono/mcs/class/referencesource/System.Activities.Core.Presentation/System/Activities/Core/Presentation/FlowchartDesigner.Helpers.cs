@@ -300,9 +300,9 @@ namespace System.Activities.Core.Presentation
                 if (connPoint != null)
                 {
                     outGoingConnectors.AddRange(
-                        connPoint.AttachedConnectors.Where(
-                            p => FreeFormPanel.GetSourceConnectionPoint(p).Equals(connPoint)
-                        )
+                        connPoint
+                            .AttachedConnectors
+                            .Where(p => FreeFormPanel.GetSourceConnectionPoint(p).Equals(connPoint))
                     );
                 }
             }
@@ -318,9 +318,12 @@ namespace System.Activities.Core.Presentation
                 if (connPoint != null)
                 {
                     inComingConnectors.AddRange(
-                        connPoint.AttachedConnectors.Where(
-                            p => FreeFormPanel.GetDestinationConnectionPoint(p).Equals(connPoint)
-                        )
+                        connPoint
+                            .AttachedConnectors
+                            .Where(
+                                p =>
+                                    FreeFormPanel.GetDestinationConnectionPoint(p).Equals(connPoint)
+                            )
                     );
                 }
             }

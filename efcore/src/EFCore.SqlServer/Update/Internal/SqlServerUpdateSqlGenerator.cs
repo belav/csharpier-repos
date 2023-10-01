@@ -61,13 +61,15 @@ public class SqlServerUpdateSqlGenerator : UpdateAndSelectSqlGenerator, ISqlServ
         // Otherwise fall back to INSERT ... OUTPUT INTO @inserted; SELECT ... FROM @inserted.
         var table = StoreObjectIdentifier.Table(command.TableName, command.Schema);
 
-        return command.ColumnModifications.All(
-            o =>
-                !o.IsKey
-                || !o.IsRead
-                || o.Property?.GetValueGenerationStrategy(table)
-                    == SqlServerValueGenerationStrategy.IdentityColumn
-        )
+        return command
+            .ColumnModifications
+            .All(
+                o =>
+                    !o.IsKey
+                    || !o.IsRead
+                    || o.Property?.GetValueGenerationStrategy(table)
+                        == SqlServerValueGenerationStrategy.IdentityColumn
+            )
             ? AppendInsertAndSelectOperation(
                 commandStringBuilder,
                 command,
@@ -310,7 +312,8 @@ public class SqlServerUpdateSqlGenerator : UpdateAndSelectSqlGenerator, ISqlServ
         var writeOperations = firstCommand.ColumnModifications.Where(o => o.IsWrite).ToList();
         var keyOperations = firstCommand.ColumnModifications.Where(o => o.IsKey).ToList();
 
-        var writableOperations = modificationCommands[0].ColumnModifications
+        var writableOperations = modificationCommands[0]
+            .ColumnModifications
             .Where(
                 o =>
                     o.Property?.GetValueGenerationStrategy(table)
@@ -381,7 +384,8 @@ public class SqlServerUpdateSqlGenerator : UpdateAndSelectSqlGenerator, ISqlServ
         }
 
         if (
-            firstCommand.Entries
+            firstCommand
+                .Entries
                 .SelectMany(e => e.EntityType.GetAllBaseTypesInclusive())
                 .Any(e => e.IsMemoryOptimized())
         )
@@ -440,13 +444,15 @@ public class SqlServerUpdateSqlGenerator : UpdateAndSelectSqlGenerator, ISqlServ
         // MERGE ... OUTPUT INTO is faster.
         if (
             modificationCommands.Count < MergeIntoMinimumThreshold
-            && firstCommand.ColumnModifications.All(
-                o =>
-                    !o.IsKey
-                    || !o.IsRead
-                    || o.Property?.GetValueGenerationStrategy(table)
-                        == SqlServerValueGenerationStrategy.IdentityColumn
-            )
+            && firstCommand
+                .ColumnModifications
+                .All(
+                    o =>
+                        !o.IsKey
+                        || !o.IsRead
+                        || o.Property?.GetValueGenerationStrategy(table)
+                            == SqlServerValueGenerationStrategy.IdentityColumn
+                )
         )
         {
             requiresTransaction = true;
@@ -799,9 +805,9 @@ public class SqlServerUpdateSqlGenerator : UpdateAndSelectSqlGenerator, ISqlServ
 
         if (storedProcedure.ReturnValue is not null)
         {
-            var returnValueModification = command.ColumnModifications.First(
-                c => c.Column is IStoreStoredProcedureReturnValue
-            );
+            var returnValueModification = command
+                .ColumnModifications
+                .First(c => c.Column is IStoreStoredProcedureReturnValue);
 
             Check.DebugAssert(
                 returnValueModification.UseCurrentValueParameter,

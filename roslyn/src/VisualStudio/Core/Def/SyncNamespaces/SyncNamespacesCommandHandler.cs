@@ -68,9 +68,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SyncNamespaces
                 .ConfigureAwait(false);
             if (menuCommandService != null)
             {
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await _threadingContext
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
                 VisualStudioCommandHandlerHelpers.AddCommand(
                     menuCommandService,
                     ID.RoslynCommands.SyncNamespaces,
@@ -100,13 +100,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SyncNamespaces
             else
             {
                 // Is a solution node. Do we contain any C# projects?
-                visible = _workspace.CurrentSolution.Projects.Any(
-                    project =>
-                        project.Language.Equals(
-                            LanguageNames.CSharp,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                );
+                visible = _workspace
+                    .CurrentSolution
+                    .Projects
+                    .Any(
+                        project =>
+                            project
+                                .Language
+                                .Equals(LanguageNames.CSharp, StringComparison.OrdinalIgnoreCase)
+                    );
             }
 
             var enabled = visible && !VisualStudioCommandHandlerHelpers.IsBuildActive();
@@ -139,13 +141,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SyncNamespaces
             else
             {
                 // The solution node is selected, so collect all the C# projects for update.
-                var projects = _workspace.CurrentSolution.Projects
+                var projects = _workspace
+                    .CurrentSolution
+                    .Projects
                     .Where(
                         project =>
-                            project.Language.Equals(
-                                LanguageNames.CSharp,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            project
+                                .Language
+                                .Equals(LanguageNames.CSharp, StringComparison.OrdinalIgnoreCase)
                     )
                     .ToImmutableArray();
 
@@ -160,13 +163,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SyncNamespaces
             var projectFilePath = projectHierarchy.TryGetProjectFilePath();
 
             var solution = _workspace.CurrentSolution;
-            return solution.Projects
+            return solution
+                .Projects
                 .Where(
                     project =>
-                        project.FilePath?.Equals(
-                            projectFilePath,
-                            StringComparison.OrdinalIgnoreCase
-                        ) == true
+                        project
+                            .FilePath
+                            ?.Equals(projectFilePath, StringComparison.OrdinalIgnoreCase) == true
                 )
                 .ToImmutableArrayOrEmpty();
         }
@@ -189,14 +192,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SyncNamespaces
                 showProgress: true,
                 (operationContext) =>
                 {
-                    solution = _threadingContext.JoinableTaskFactory.Run(
-                        () =>
-                            syncService.SyncNamespacesAsync(
-                                projects,
-                                options,
-                                operationContext.UserCancellationToken
-                            )
-                    );
+                    solution = _threadingContext
+                        .JoinableTaskFactory
+                        .Run(
+                            () =>
+                                syncService.SyncNamespacesAsync(
+                                    projects,
+                                    options,
+                                    operationContext.UserCancellationToken
+                                )
+                        );
                 }
             );
 
@@ -204,8 +209,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SyncNamespaces
             {
                 if (_workspace.CurrentSolution.GetChanges(solution).GetProjectChanges().Any())
                 {
-                    var previewChangeService =
-                        _workspace.Services.GetRequiredService<IPreviewDialogService>();
+                    var previewChangeService = _workspace
+                        .Services
+                        .GetRequiredService<IPreviewDialogService>();
                     var newSolution = previewChangeService.PreviewChanges(
                         title: EditorFeaturesResources.Preview_Changes,
                         helpString: "vs.csharp.refactoring.preview",

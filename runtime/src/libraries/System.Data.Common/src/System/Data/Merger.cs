@@ -226,9 +226,11 @@ namespace System.Data
                         key = GetSrcKey(src, dst);
                         if (key.HasValue)
                         {
-                            ndxSearch = dst._primaryKey.Key.GetSortIndex(
-                                DataViewRowState.OriginalRows | DataViewRowState.Added
-                            );
+                            ndxSearch = dst._primaryKey
+                                .Key
+                                .GetSortIndex(
+                                    DataViewRowState.OriginalRows | DataViewRowState.Added
+                                );
                         }
                     }
 
@@ -465,9 +467,11 @@ namespace System.Data
                     {
                         for (int i = oldCount; i < targetTable.Columns.Count; i++)
                         {
-                            targetTable.Columns[i].CopyExpressionFrom(
-                                table.Columns[targetTable.Columns[i].ColumnName]!
-                            );
+                            targetTable
+                                .Columns[i]
+                                .CopyExpressionFrom(
+                                    table.Columns[targetTable.Columns[i].ColumnName]!
+                                );
                         }
                     }
 

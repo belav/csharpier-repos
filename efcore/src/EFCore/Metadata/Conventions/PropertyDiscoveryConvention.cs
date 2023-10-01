@@ -47,11 +47,9 @@ public class PropertyDiscoveryConvention
         foreach (var propertyInfo in complexType.GetRuntimeProperties().Values)
         {
             if (
-                !Dependencies.MemberClassifier.IsCandidatePrimitiveProperty(
-                    propertyInfo,
-                    model,
-                    out _
-                )
+                !Dependencies
+                    .MemberClassifier
+                    .IsCandidatePrimitiveProperty(propertyInfo, model, out _)
             )
             {
                 continue;
@@ -97,11 +95,9 @@ public class PropertyDiscoveryConvention
         foreach (var propertyInfo in entityType.GetRuntimeProperties().Values)
         {
             if (
-                !Dependencies.MemberClassifier.IsCandidatePrimitiveProperty(
-                    propertyInfo,
-                    model,
-                    out var mapping
-                )
+                !Dependencies
+                    .MemberClassifier
+                    .IsCandidatePrimitiveProperty(propertyInfo, model, out var mapping)
                 || ((Model)model).FindIsComplexConfigurationSource(
                     propertyInfo.GetMemberType().UnwrapNullableType()
                 ) != null
@@ -113,9 +109,9 @@ public class PropertyDiscoveryConvention
             var propertyBuilder = entityTypeBuilder.Property(propertyInfo);
             if (mapping?.ElementTypeMapping != null)
             {
-                var elementType = propertyInfo.PropertyType.TryGetElementType(
-                    typeof(IEnumerable<>)
-                );
+                var elementType = propertyInfo
+                    .PropertyType
+                    .TryGetElementType(typeof(IEnumerable<>));
                 if (elementType != null)
                 {
                     propertyBuilder?.SetElementType(elementType);

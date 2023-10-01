@@ -41,9 +41,11 @@ namespace System.ServiceModel.Dispatcher
             if (this.service != null)
             {
                 if (this.service.State == CommunicationState.Closed)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ObjectDisposedException(this.service.GetType().ToString())
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ObjectDisposedException(this.service.GetType().ToString())
+                        );
 
                 this.service.OnAddChannelDispatcher(item);
             }
@@ -64,9 +66,11 @@ namespace System.ServiceModel.Dispatcher
             if (this.service != null)
             {
                 if (this.service.State == CommunicationState.Closed)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ObjectDisposedException(this.service.GetType().ToString())
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ObjectDisposedException(this.service.GetType().ToString())
+                        );
             }
 
             if (this.service != null)

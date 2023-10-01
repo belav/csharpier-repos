@@ -204,7 +204,8 @@ internal sealed partial class CSharpUseCollectionExpressionForFluentDiagnosticAn
 
         // We don't want to offer this feature on top of some builder-type.  They will commonly end with something like
         // `builder.ToImmutable()`.  We want that case to be handled by the 'ForBuilder' analyzer instead.
-        var expressionType = state.SemanticModel
+        var expressionType = state
+            .SemanticModel
             .GetTypeInfo(memberAccess.Expression, cancellationToken)
             .Type;
         if (

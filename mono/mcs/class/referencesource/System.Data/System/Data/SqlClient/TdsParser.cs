@@ -31,9 +31,10 @@ namespace System.Data.SqlClient
     sealed internal class TdsParser
     {
         private static int _objectTypeCount; // Bid counter
-        internal readonly int _objectID = System.Threading.Interlocked.Increment(
-            ref _objectTypeCount
-        );
+        internal readonly int _objectID = System
+            .Threading
+            .Interlocked
+            .Increment(ref _objectTypeCount);
 
         static Task completedTask;
         static Task CompletedTask
@@ -492,12 +493,12 @@ namespace System.Data.SqlClient
                 _connHandler != null,
                 "SqlConnectionInternalTds handler can not be null at this point."
             );
-            _connHandler.TimeoutErrorInternal.EndPhase(
-                SqlConnectionTimeoutErrorPhase.PreLoginBegin
-            );
-            _connHandler.TimeoutErrorInternal.SetAndBeginPhase(
-                SqlConnectionTimeoutErrorPhase.InitializeConnection
-            );
+            _connHandler
+                .TimeoutErrorInternal
+                .EndPhase(SqlConnectionTimeoutErrorPhase.PreLoginBegin);
+            _connHandler
+                .TimeoutErrorInternal
+                .SetAndBeginPhase(SqlConnectionTimeoutErrorPhase.InitializeConnection);
 
             bool fParallel = _connHandler.ConnectionOptions.MultiSubnetFailover;
 
@@ -552,11 +553,13 @@ namespace System.Data.SqlClient
                 // the pool. See Webdata 104293.
                 // This should not apply to routing, as it is not an alias change, routed connection
                 // should still use VNN of AlwaysOn cluster as server for pooling purposes.
-                connHandler.PoolGroupProviderInfo.AliasCheck(
-                    serverInfo.PreRoutingServerName == null
-                        ? serverInfo.ResolvedServerName
-                        : serverInfo.PreRoutingServerName
-                );
+                connHandler
+                    .PoolGroupProviderInfo
+                    .AliasCheck(
+                        serverInfo.PreRoutingServerName == null
+                            ? serverInfo.ResolvedServerName
+                            : serverInfo.PreRoutingServerName
+                    );
             }
             _state = TdsParserState.OpenNotLoggedIn;
             _physicalStateObj.SniContext = SniContext.Snix_PreLoginBeforeSuccessfullWrite; // SQL BU DT 376766
@@ -564,12 +567,12 @@ namespace System.Data.SqlClient
 
             bool marsCapable = false;
 
-            _connHandler.TimeoutErrorInternal.EndPhase(
-                SqlConnectionTimeoutErrorPhase.InitializeConnection
-            );
-            _connHandler.TimeoutErrorInternal.SetAndBeginPhase(
-                SqlConnectionTimeoutErrorPhase.SendPreLoginHandshake
-            );
+            _connHandler
+                .TimeoutErrorInternal
+                .EndPhase(SqlConnectionTimeoutErrorPhase.InitializeConnection);
+            _connHandler
+                .TimeoutErrorInternal
+                .SetAndBeginPhase(SqlConnectionTimeoutErrorPhase.SendPreLoginHandshake);
 
             UInt32 result = SNINativeMethodWrapper.SniGetConnectionId(
                 _physicalStateObj.Handle,
@@ -584,12 +587,12 @@ namespace System.Data.SqlClient
             Bid.Trace("<sc.TdsParser.Connect|SEC> Sending prelogin handshake\n");
             SendPreLoginHandshake(instanceName, encrypt);
 
-            _connHandler.TimeoutErrorInternal.EndPhase(
-                SqlConnectionTimeoutErrorPhase.SendPreLoginHandshake
-            );
-            _connHandler.TimeoutErrorInternal.SetAndBeginPhase(
-                SqlConnectionTimeoutErrorPhase.ConsumePreLoginHandshake
-            );
+            _connHandler
+                .TimeoutErrorInternal
+                .EndPhase(SqlConnectionTimeoutErrorPhase.SendPreLoginHandshake);
+            _connHandler
+                .TimeoutErrorInternal
+                .SetAndBeginPhase(SqlConnectionTimeoutErrorPhase.ConsumePreLoginHandshake);
 
             _physicalStateObj.SniContext = SniContext.Snix_PreLogin;
 
@@ -3405,9 +3408,10 @@ namespace System.Data.SqlClient
                             if (newCodePage != _defaultCodePage)
                             {
                                 _defaultCodePage = newCodePage;
-                                _defaultEncoding = System.Text.Encoding.GetEncoding(
-                                    _defaultCodePage
-                                );
+                                _defaultEncoding = System
+                                    .Text
+                                    .Encoding
+                                    .GetEncoding(_defaultCodePage);
                             }
                             _defaultLCID = env.newCollation.LCID;
                         }
@@ -4410,11 +4414,11 @@ namespace System.Data.SqlClient
                     string data;
                     try
                     {
-                        data = System.Text.Encoding.Unicode.GetString(
-                            tokenData,
-                            checked((int)dataOffset),
-                            checked((int)dataLen)
-                        );
+                        data = System
+                            .Text
+                            .Encoding
+                            .Unicode
+                            .GetString(tokenData, checked((int)dataOffset), checked((int)dataLen));
                     }
                     catch (ArgumentOutOfRangeException e)
                     {
@@ -5257,11 +5261,13 @@ namespace System.Data.SqlClient
                                 // iib.
                                 // now read the remaining values off the wire for this row
                                 if (
-                                    !stateObj.Parser.TrySkipRow(
-                                        metadata,
-                                        sharedState._nextColumnHeaderToRead,
-                                        stateObj
-                                    )
+                                    !stateObj
+                                        .Parser
+                                        .TrySkipRow(
+                                            metadata,
+                                            sharedState._nextColumnHeaderToRead,
+                                            stateObj
+                                        )
                                 )
                                 {
                                     throw SQL.SynchronousCallMayNotPend();
@@ -7106,11 +7112,11 @@ namespace System.Data.SqlClient
                 case TdsEnums.SQLNVARCHAR:
                 case TdsEnums.SQLNTEXT:
                 {
-                    string strValue = System.Text.Encoding.Unicode.GetString(
-                        unencryptedBytes,
-                        0,
-                        length
-                    );
+                    string strValue = System
+                        .Text
+                        .Encoding
+                        .Unicode
+                        .GetString(unencryptedBytes, 0, length);
 
                     // If this is a fixed length type, pad with spaces to get to the fixed length size.
                     if (tdsType == TdsEnums.SQLNCHAR)
@@ -9672,9 +9678,9 @@ namespace System.Data.SqlClient
                 "SqlConnectionInternalTds handler can not be null at this point."
             );
             _connHandler.TimeoutErrorInternal.EndPhase(SqlConnectionTimeoutErrorPhase.LoginBegin);
-            _connHandler.TimeoutErrorInternal.SetAndBeginPhase(
-                SqlConnectionTimeoutErrorPhase.ProcessConnectionAuth
-            );
+            _connHandler
+                .TimeoutErrorInternal
+                .SetAndBeginPhase(SqlConnectionTimeoutErrorPhase.ProcessConnectionAuth);
 
             // get the password up front to use in sspi logic below
             byte[] encryptedPassword = null;
@@ -11440,11 +11446,9 @@ namespace System.Data.SqlClient
 
                                     if (!isNull)
                                     {
-                                        udtVal = _connHandler.Connection.GetBytes(
-                                            value,
-                                            out format,
-                                            out maxsize
-                                        );
+                                        udtVal = _connHandler
+                                            .Connection
+                                            .GetBytes(value, out format, out maxsize);
 
                                         Debug.Assert(
                                             null != udtVal,
@@ -15544,13 +15548,9 @@ namespace System.Data.SqlClient
 
                 bytesRead = stateObj.ReadPlpBytesChunk(stateObj._bTmp, 0, bytesRead);
 
-                charsRead = stateObj._plpdecoder.GetChars(
-                    stateObj._bTmp,
-                    0,
-                    bytesRead,
-                    buff,
-                    offst
-                );
+                charsRead = stateObj
+                    ._plpdecoder
+                    .GetChars(stateObj._bTmp, 0, bytesRead, buff, offst);
                 charsLeft -= charsRead;
                 offst += charsRead;
                 totalcharsRead += charsRead;
@@ -15743,14 +15743,16 @@ namespace System.Data.SqlClient
                 _fPreserveTransaction,
                 null == _connHandler
                     ? "(null)"
-                    : _connHandler.ConnectionOptions.MultiSubnetFailover.ToString(
-                        (IFormatProvider)null
-                    ),
+                    : _connHandler
+                        .ConnectionOptions
+                        .MultiSubnetFailover
+                        .ToString((IFormatProvider)null),
                 null == _connHandler
                     ? "(null)"
-                    : _connHandler.ConnectionOptions.TransparentNetworkIPResolution.ToString(
-                        (IFormatProvider)null
-                    )
+                    : _connHandler
+                        .ConnectionOptions
+                        .TransparentNetworkIPResolution
+                        .ToString((IFormatProvider)null)
             );
         }
 

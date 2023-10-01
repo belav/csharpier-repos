@@ -175,7 +175,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.InheritanceMargin
             Assert.Equal(expectedItem.LineNumber, actualItem.LineNumber);
             Assert.Equal(expectedItem.MemberName, actualItem.DisplayTexts.JoinText());
             Assert.Equal(expectedItem.Targets.Length, actualItem.TargetItems.Length);
-            var expectedTargets = expectedItem.Targets
+            var expectedTargets = expectedItem
+                .Targets
                 .Select(info => TestInheritanceTargetItem.Create(info, testWorkspace))
                 .OrderBy(target => target.TargetSymbolName)
                 .ToImmutableArray();
@@ -212,10 +213,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.InheritanceMargin
             }
             else
             {
-                var actualDocumentSpans = actualTarget.DefinitionItem.SourceSpans
+                var actualDocumentSpans = actualTarget
+                    .DefinitionItem
+                    .SourceSpans
                     .OrderBy(documentSpan => documentSpan.SourceSpan.Start)
                     .ToImmutableArray();
-                var expectedDocumentSpans = expectedTarget.DocumentSpans
+                var expectedDocumentSpans = expectedTarget
+                    .DocumentSpans
                     .OrderBy(documentSpan => documentSpan.SourceSpan.Start)
                     .ToImmutableArray();
                 Assert.Equal(expectedDocumentSpans.Length, actualDocumentSpans.Length);
@@ -280,12 +284,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.InheritanceMargin
                     : s_outOffProcessComposition
             );
 
-            var testHostDocument1 = testWorkspace.Documents.Single(
-                doc => doc.Project.AssemblyName.Equals("Assembly1")
-            );
-            var testHostDocument2 = testWorkspace.Documents.Single(
-                doc => doc.Project.AssemblyName.Equals("Assembly2")
-            );
+            var testHostDocument1 = testWorkspace
+                .Documents
+                .Single(doc => doc.Project.AssemblyName.Equals("Assembly1"));
+            var testHostDocument2 = testWorkspace
+                .Documents
+                .Single(doc => doc.Project.AssemblyName.Equals("Assembly2"));
             await VerifyTestMemberInDocumentAsync(
                     testWorkspace,
                     testHostDocument1,
@@ -426,10 +430,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.InheritanceMargin
                             {
                                 if (annotatedSpans.TryGetValue(tag, out var spans))
                                 {
-                                    var document =
-                                        testWorkspace.CurrentSolution.GetRequiredDocument(
-                                            testHostDocument.Id
-                                        );
+                                    var document = testWorkspace
+                                        .CurrentSolution
+                                        .GetRequiredDocument(testHostDocument.Id);
                                     builder.AddRange(
                                         spans.Select(span => new DocumentSpan(document, span))
                                     );
@@ -575,13 +578,15 @@ public class {|target2:Bar|} : IBar
             var itemOnLine3 = new TestInheritanceMemberItem(
                 lineNumber: 3,
                 memberName: "interface IBar2",
-                targets: ImmutableArray<TargetInfo>.Empty.Add(
-                    new TargetInfo(
-                        targetSymbolDisplayName: "IBar",
-                        locationTag: "target1",
-                        relationship: InheritanceRelationship.InheritedInterface
+                targets: ImmutableArray<TargetInfo>
+                    .Empty
+                    .Add(
+                        new TargetInfo(
+                            targetSymbolDisplayName: "IBar",
+                            locationTag: "target1",
+                            relationship: InheritanceRelationship.InheritedInterface
+                        )
                     )
-                )
             );
 
             return VerifyInSingleDocumentAsync(

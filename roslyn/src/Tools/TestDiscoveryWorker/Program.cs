@@ -72,20 +72,23 @@ if ((output = await sr.ReadLineAsync().ConfigureAwait(false)) is not null)
 
     if (sink.AnyWriteFailures)
     {
-        await Console.Error
+        await Console
+            .Error
             .WriteLineAsync($"Channel failed to write for '{assemblyFileName}'")
             .ConfigureAwait(false);
         return ExitFailure;
     }
 
 #if NET6_0_OR_GREATER
-    await Console.Out
+    await Console
+        .Out
         .WriteLineAsync(
             $"Discovered {testsToWrite.Count} tests in {Path.GetFileName(assemblyFileName)} (.NET Core)"
         )
         .ConfigureAwait(false);
 #else
-    await Console.Out
+    await Console
+        .Out
         .WriteLineAsync(
             $"Discovered {testsToWrite.Count} tests in {Path.GetFileName(assemblyFileName)} (.NET Framework)"
         )

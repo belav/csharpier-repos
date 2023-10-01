@@ -16,10 +16,9 @@ namespace System.Activities.Core.Presentation
     {
         public DelegateArgumentsValueEditor()
         {
-            this.InlineEditorTemplate =
-                EditorCategoryTemplateDictionary.Instance.GetCategoryTemplate(
-                    "DelegateArguments_InlineTemplate"
-                );
+            this.InlineEditorTemplate = EditorCategoryTemplateDictionary
+                .Instance
+                .GetCategoryTemplate("DelegateArguments_InlineTemplate");
         }
 
         public override void ShowDialog(
@@ -37,9 +36,9 @@ namespace System.Activities.Core.Presentation
                     null
                 );
             EditingContext context = ((IModelTreeItem)parentModelItem).ModelTreeManager.Context;
-            ModelItemDictionary inputData = parentModelItem.Properties[
-                propertyValue.ParentProperty.PropertyName
-            ].Dictionary;
+            ModelItemDictionary inputData = parentModelItem
+                .Properties[propertyValue.ParentProperty.PropertyName]
+                .Dictionary;
             DynamicArgumentDesignerOptions options = new DynamicArgumentDesignerOptions();
             options.Title = propertyValue.ParentProperty.DisplayName;
 

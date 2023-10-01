@@ -501,9 +501,11 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                 typeof(HubT),
                 loggerFactory: LoggerFactory
             );
-            var payload = Encoding.UTF8.GetBytes(
-                "{\"protocol\": \"json\",\"version\": 1}\u001e{\"type\":1, \"invocationId\":\"1\", \"target\": \"Echo\", \"arguments\":[\"hello\"]}\u001e"
-            );
+            var payload = Encoding
+                .UTF8
+                .GetBytes(
+                    "{\"protocol\": \"json\",\"version\": 1}\u001e{\"type\":1, \"invocationId\":\"1\", \"target\": \"Echo\", \"arguments\":[\"hello\"]}\u001e"
+                );
 
             using (var client = new TestClient())
             {
@@ -564,9 +566,11 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
     [Fact]
     public async Task HubMessageOverTheMaxMessageSizeThrows()
     {
-        var payload = Encoding.UTF8.GetBytes(
-            "{\"type\":1, \"invocationId\":\"1\", \"target\": \"Echo\", \"arguments\":[\"hello\"]}\u001e"
-        );
+        var payload = Encoding
+            .UTF8
+            .GetBytes(
+                "{\"type\":1, \"invocationId\":\"1\", \"target\": \"Echo\", \"arguments\":[\"hello\"]}\u001e"
+            );
         var maximumMessageSize = payload.Length - 10;
 
         using (StartVerifiableLog())
@@ -592,11 +596,13 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
             }
         }
 
-        var exceptionLog = TestSink.Writes.Where(
-            w =>
-                string.Equals(w.LoggerName, "Microsoft.AspNetCore.SignalR.HubConnectionHandler")
-                && (w.Exception is InvalidDataException ide)
-        );
+        var exceptionLog = TestSink
+            .Writes
+            .Where(
+                w =>
+                    string.Equals(w.LoggerName, "Microsoft.AspNetCore.SignalR.HubConnectionHandler")
+                    && (w.Exception is InvalidDataException ide)
+            );
         Assert.Single(exceptionLog);
         Assert.Equal(
             exceptionLog.First().Exception.Message,
@@ -607,9 +613,11 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
     [Fact]
     public async Task ChunkedHubMessageOverTheMaxMessageSizeThrows()
     {
-        var payload = Encoding.UTF8.GetBytes(
-            "{\"type\":1, \"invocationId\":\"1\", \"target\": \"Echo\", \"arguments\":[\"hello\"]}\u001e"
-        );
+        var payload = Encoding
+            .UTF8
+            .GetBytes(
+                "{\"type\":1, \"invocationId\":\"1\", \"target\": \"Echo\", \"arguments\":[\"hello\"]}\u001e"
+            );
         var maximumMessageSize = payload.Length - 10;
 
         using (StartVerifiableLog())
@@ -627,12 +635,16 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
             {
                 var connectionHandlerTask = await client.ConnectAsync(connectionHandler);
 
-                await client.Connection.Application.Output.WriteAsync(
-                    payload.AsMemory(0, payload.Length / 2)
-                );
-                await client.Connection.Application.Output.WriteAsync(
-                    payload.AsMemory(payload.Length / 2)
-                );
+                await client
+                    .Connection
+                    .Application
+                    .Output
+                    .WriteAsync(payload.AsMemory(0, payload.Length / 2));
+                await client
+                    .Connection
+                    .Application
+                    .Output
+                    .WriteAsync(payload.AsMemory(payload.Length / 2));
 
                 client.Dispose();
 
@@ -640,11 +652,13 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
             }
         }
 
-        var exceptionLog = TestSink.Writes.Where(
-            w =>
-                string.Equals(w.LoggerName, "Microsoft.AspNetCore.SignalR.HubConnectionHandler")
-                && (w.Exception is InvalidDataException ide)
-        );
+        var exceptionLog = TestSink
+            .Writes
+            .Where(
+                w =>
+                    string.Equals(w.LoggerName, "Microsoft.AspNetCore.SignalR.HubConnectionHandler")
+                    && (w.Exception is InvalidDataException ide)
+            );
         Assert.Single(exceptionLog);
         Assert.Equal(
             exceptionLog.First().Exception.Message,
@@ -655,15 +669,21 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
     [Fact]
     public async Task ManyHubMessagesOneOverTheMaxMessageSizeThrows()
     {
-        var payload1 = Encoding.UTF8.GetBytes(
-            "{\"type\":1, \"invocationId\":\"1\", \"target\": \"Echo\", \"arguments\":[\"one\"]}\u001e"
-        );
-        var payload2 = Encoding.UTF8.GetBytes(
-            "{\"type\":1, \"invocationId\":\"2\", \"target\": \"Echo\", \"arguments\":[\"two\"]}\u001e"
-        );
-        var payload3 = Encoding.UTF8.GetBytes(
-            "{\"type\":1, \"invocationId\":\"3\", \"target\": \"Echo\", \"arguments\":[\"three\"]}\u001e"
-        );
+        var payload1 = Encoding
+            .UTF8
+            .GetBytes(
+                "{\"type\":1, \"invocationId\":\"1\", \"target\": \"Echo\", \"arguments\":[\"one\"]}\u001e"
+            );
+        var payload2 = Encoding
+            .UTF8
+            .GetBytes(
+                "{\"type\":1, \"invocationId\":\"2\", \"target\": \"Echo\", \"arguments\":[\"two\"]}\u001e"
+            );
+        var payload3 = Encoding
+            .UTF8
+            .GetBytes(
+                "{\"type\":1, \"invocationId\":\"3\", \"target\": \"Echo\", \"arguments\":[\"three\"]}\u001e"
+            );
 
         // Between the first and the second payload so we'll end up slicing with some remaining in the slice for
         // the next message
@@ -711,11 +731,13 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
             }
         }
 
-        var exceptionLog = TestSink.Writes.Where(
-            w =>
-                string.Equals(w.LoggerName, "Microsoft.AspNetCore.SignalR.HubConnectionHandler")
-                && (w.Exception is InvalidDataException ide)
-        );
+        var exceptionLog = TestSink
+            .Writes
+            .Where(
+                w =>
+                    string.Equals(w.LoggerName, "Microsoft.AspNetCore.SignalR.HubConnectionHandler")
+                    && (w.Exception is InvalidDataException ide)
+            );
         Assert.Single(exceptionLog);
         Assert.Equal(
             exceptionLog.First().Exception.Message,
@@ -726,15 +748,21 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
     [Fact]
     public async Task ManyHubMessagesUnderTheMessageSizeButConfiguredWithMax()
     {
-        var payload1 = Encoding.UTF8.GetBytes(
-            "{\"type\":1, \"invocationId\":\"1\", \"target\": \"Echo\", \"arguments\":[\"one\"]}\u001e"
-        );
-        var payload2 = Encoding.UTF8.GetBytes(
-            "{\"type\":1, \"invocationId\":\"2\", \"target\": \"Echo\", \"arguments\":[\"two\"]}\u001e"
-        );
-        var payload3 = Encoding.UTF8.GetBytes(
-            "{\"type\":1, \"invocationId\":\"3\", \"target\": \"Echo\", \"arguments\":[\"three\"]}\u001e"
-        );
+        var payload1 = Encoding
+            .UTF8
+            .GetBytes(
+                "{\"type\":1, \"invocationId\":\"1\", \"target\": \"Echo\", \"arguments\":[\"one\"]}\u001e"
+            );
+        var payload2 = Encoding
+            .UTF8
+            .GetBytes(
+                "{\"type\":1, \"invocationId\":\"2\", \"target\": \"Echo\", \"arguments\":[\"two\"]}\u001e"
+            );
+        var payload3 = Encoding
+            .UTF8
+            .GetBytes(
+                "{\"type\":1, \"invocationId\":\"3\", \"target\": \"Echo\", \"arguments\":[\"three\"]}\u001e"
+            );
 
         // Bigger than all 3 messages
         var maximumMessageSize = payload3.Length + 10;
@@ -2882,9 +2910,12 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
 
             using (var client = new TestClient())
             {
-                client.Connection.User.AddIdentity(
-                    new ClaimsIdentity(new[] { new Claim(ClaimTypes.NameIdentifier, "name") })
-                );
+                client
+                    .Connection
+                    .User
+                    .AddIdentity(
+                        new ClaimsIdentity(new[] { new Claim(ClaimTypes.NameIdentifier, "name") })
+                    );
                 var connectionHandlerTask = await client.ConnectAsync(connectionHandler);
 
                 await client.Connected.DefaultTimeout();
@@ -2931,15 +2962,20 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
 
             using (var client = new TestClient())
             {
-                client.Connection.Features.Set<IConnectionLifetimeNotificationFeature>(
-                    new TestConnectionLifetimeNotification()
-                );
+                client
+                    .Connection
+                    .Features
+                    .Set<IConnectionLifetimeNotificationFeature>(
+                        new TestConnectionLifetimeNotification()
+                    );
 
                 var connectionHandlerTask = await client.ConnectAsync(connectionHandler);
 
                 await client.Connected.DefaultTimeout();
 
-                client.Connection.Features
+                client
+                    .Connection
+                    .Features
                     .Get<IConnectionLifetimeNotificationFeature>()
                     .RequestClose();
 
@@ -3007,9 +3043,12 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
 
             using (var client = new TestClient())
             {
-                client.Connection.User.AddIdentity(
-                    new ClaimsIdentity(new[] { new Claim(ClaimTypes.NameIdentifier, "name") })
-                );
+                client
+                    .Connection
+                    .User
+                    .AddIdentity(
+                        new ClaimsIdentity(new[] { new Claim(ClaimTypes.NameIdentifier, "name") })
+                    );
 
                 // Setup a HttpContext to make sure it flows to the AuthHandler correctly
                 var httpConnectionContext = new HttpContextFeatureImpl();
@@ -3123,8 +3162,9 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                         .AddSignalR()
                         .AddMessagePackProtocol(options =>
                         {
-                            options.SerializerOptions =
-                                MessagePackSerializerOptions.Standard.WithResolver(
+                            options.SerializerOptions = MessagePackSerializerOptions
+                                .Standard
+                                .WithResolver(
                                     CompositeResolver.Create(
                                         new CustomFormatter(),
                                         options.SerializerOptions.Resolver
@@ -4498,7 +4538,10 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                     .ConnectAsync(connectionHandler)
                     .DefaultTimeout();
 
-                await client.Connection.Application.Output
+                await client
+                    .Connection
+                    .Application
+                    .Output
                     .WriteAsync(Encoding.UTF8.GetBytes(new[] { '{' }))
                     .DefaultTimeout();
 
@@ -5030,11 +5073,13 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
         }
 
         Assert.Single(
-            TestSink.Writes.Where(
-                w =>
-                    w.LoggerName == "Microsoft.AspNetCore.SignalR.Internal.DefaultHubDispatcher"
-                    && w.EventId.Name == "ClosingStreamWithBindingError"
-            )
+            TestSink
+                .Writes
+                .Where(
+                    w =>
+                        w.LoggerName == "Microsoft.AspNetCore.SignalR.Internal.DefaultHubDispatcher"
+                        && w.EventId.Name == "ClosingStreamWithBindingError"
+                )
         );
     }
 
@@ -5067,11 +5112,13 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
         }
 
         Assert.Single(
-            TestSink.Writes.Where(
-                w =>
-                    w.LoggerName == "Microsoft.AspNetCore.SignalR.Internal.DefaultHubDispatcher"
-                    && w.EventId.Name == "UnexpectedCompletion"
-            )
+            TestSink
+                .Writes
+                .Where(
+                    w =>
+                        w.LoggerName == "Microsoft.AspNetCore.SignalR.Internal.DefaultHubDispatcher"
+                        && w.EventId.Name == "UnexpectedCompletion"
+                )
         );
     }
 
@@ -5333,11 +5380,13 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
         }
 
         Assert.Single(
-            TestSink.Writes.Where(
-                w =>
-                    w.LoggerName == "Microsoft.AspNetCore.SignalR.Internal.DefaultHubDispatcher"
-                    && w.EventId.Name == "ClosingStreamWithBindingError"
-            )
+            TestSink
+                .Writes
+                .Where(
+                    w =>
+                        w.LoggerName == "Microsoft.AspNetCore.SignalR.Internal.DefaultHubDispatcher"
+                        && w.EventId.Name == "ClosingStreamWithBindingError"
+                )
         );
     }
 
@@ -5389,11 +5438,13 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
         }
 
         Assert.Single(
-            TestSink.Writes.Where(
-                w =>
-                    w.LoggerName == "Microsoft.AspNetCore.SignalR.Internal.DefaultHubDispatcher"
-                    && w.EventId.Name == "ClosingStreamWithBindingError"
-            )
+            TestSink
+                .Writes
+                .Where(
+                    w =>
+                        w.LoggerName == "Microsoft.AspNetCore.SignalR.Internal.DefaultHubDispatcher"
+                        && w.EventId.Name == "ClosingStreamWithBindingError"
+                )
         );
     }
 

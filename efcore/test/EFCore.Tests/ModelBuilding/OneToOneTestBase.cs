@@ -3134,20 +3134,24 @@ public abstract partial class ModelBuilderTest
 
             Assert.Equal(
                 typeof(int?),
-                modelBuilder.Model
+                modelBuilder
+                    .Model
                     .FindEntityType(typeof(Nob))
                     .GetForeignKeys()
                     .Single()
-                    .Properties.Single()
+                    .Properties
+                    .Single()
                     .ClrType
             );
             Assert.Equal(
                 typeof(string),
-                modelBuilder.Model
+                modelBuilder
+                    .Model
                     .FindEntityType(typeof(Hob))
                     .GetForeignKeys()
                     .Single()
-                    .Properties.Single()
+                    .Properties
+                    .Single()
                     .ClrType
             );
         }
@@ -3172,20 +3176,24 @@ public abstract partial class ModelBuilderTest
 
             Assert.Equal(
                 typeof(int?),
-                modelBuilder.Model
+                modelBuilder
+                    .Model
                     .FindEntityType(typeof(Nob))
                     .GetForeignKeys()
                     .Single()
-                    .Properties.Single()
+                    .Properties
+                    .Single()
                     .ClrType
             );
             Assert.Equal(
                 typeof(string),
-                modelBuilder.Model
+                modelBuilder
+                    .Model
                     .FindEntityType(typeof(Hob))
                     .GetForeignKeys()
                     .Single()
-                    .Properties.Single()
+                    .Properties
+                    .Single()
                     .ClrType
             );
         }
@@ -4146,10 +4154,13 @@ public abstract partial class ModelBuilderTest
 
             Assert.Equal(
                 "ShadowId",
-                modelBuilder.Model
+                modelBuilder
+                    .Model
                     .FindEntityType(typeof(Beta))
                     .FindNavigation("FirstNav")
-                    .ForeignKey.Properties.Single()
+                    .ForeignKey
+                    .Properties
+                    .Single()
                     .Name
             );
         }
@@ -4170,10 +4181,13 @@ public abstract partial class ModelBuilderTest
 
             Assert.Equal(
                 "ShadowId",
-                modelBuilder.Model
+                modelBuilder
+                    .Model
                     .FindEntityType(typeof(Beta))
                     .FindNavigation("FirstNav")
-                    .ForeignKey.Properties.Single()
+                    .ForeignKey
+                    .Properties
+                    .Single()
                     .Name
             );
         }
@@ -4189,11 +4203,13 @@ public abstract partial class ModelBuilderTest
                 b => b.HasOne<Beta>().WithOne().HasForeignKey<Quarks>("_forUp").IsRequired()
             );
 
-            var fkProperty = modelBuilder.Model
+            var fkProperty = modelBuilder
+                .Model
                 .FindEntityType(typeof(Quarks))
                 .GetForeignKeys()
                 .Single()
-                .Properties.Single();
+                .Properties
+                .Single();
             Assert.Equal("_forUp", fkProperty.Name);
             Assert.Equal(typeof(int), fkProperty.ClrType);
             Assert.Equal("_forUp", fkProperty.FieldInfo.Name);
@@ -4266,7 +4282,8 @@ public abstract partial class ModelBuilderTest
 
             modelBuilder.FinalizeModel();
 
-            var fk = modelBuilder.Model
+            var fk = modelBuilder
+                .Model
                 .FindEntityType(typeof(OneToOnePrincipalEntity))
                 .FindNavigation("NavOneToOneDependentEntity")
                 .ForeignKey;
@@ -4296,7 +4313,8 @@ public abstract partial class ModelBuilderTest
 
             modelBuilder.FinalizeModel();
 
-            var fk = modelBuilder.Model
+            var fk = modelBuilder
+                .Model
                 .FindEntityType(typeof(OneToOnePrincipalEntity))
                 .FindNavigation("NavOneToOneDependentEntity")
                 .ForeignKey;
@@ -4326,7 +4344,8 @@ public abstract partial class ModelBuilderTest
 
             modelBuilder.FinalizeModel();
 
-            var fk = modelBuilder.Model
+            var fk = modelBuilder
+                .Model
                 .FindEntityType(typeof(OneToOnePrincipalEntity))
                 .FindNavigation("NavOneToOneDependentEntity")
                 .ForeignKey;
@@ -4356,7 +4375,8 @@ public abstract partial class ModelBuilderTest
 
             modelBuilder.FinalizeModel();
 
-            var fk = modelBuilder.Model
+            var fk = modelBuilder
+                .Model
                 .FindEntityType(typeof(OneToOnePrincipalEntity))
                 .FindNavigation("NavOneToOneDependentEntity")
                 .ForeignKey;
@@ -4623,7 +4643,8 @@ public abstract partial class ModelBuilderTest
 
             modelBuilder.FinalizeModel();
 
-            var fk = modelBuilder.Model
+            var fk = modelBuilder
+                .Model
                 .FindEntityType(typeof(OneToOnePrincipalEntity))
                 .FindNavigation("NavOneToOneDependentEntity")
                 .ForeignKey;
@@ -4648,7 +4669,8 @@ public abstract partial class ModelBuilderTest
 
             modelBuilder.FinalizeModel();
 
-            var fk = modelBuilder.Model
+            var fk = modelBuilder
+                .Model
                 .FindEntityType(typeof(OneToOnePrincipalEntity))
                 .FindNavigation(nameof(OneToOnePrincipalEntity.NavOneToOneDependentEntity))
                 .ForeignKey;
@@ -4679,7 +4701,8 @@ public abstract partial class ModelBuilderTest
 
             modelBuilder.FinalizeModel();
 
-            var fk = modelBuilder.Model
+            var fk = modelBuilder
+                .Model
                 .FindEntityType(typeof(OneToOnePrincipalEntityWithAnnotation))
                 .FindNavigation("NavOneToOneDependentEntityWithAnnotation")
                 .ForeignKey;
@@ -4711,10 +4734,13 @@ public abstract partial class ModelBuilderTest
 
             Assert.Equal(
                 "Id",
-                modelBuilder.Model
+                modelBuilder
+                    .Model
                     .FindEntityType(typeof(Book))
                     .FindNavigation(Book.BookDetailsNavigation.Name)
-                    .ForeignKey.Properties.Single()
+                    .ForeignKey
+                    .Properties
+                    .Single()
                     .Name
             );
         }
@@ -4753,7 +4779,8 @@ public abstract partial class ModelBuilderTest
                 .Entity<OneToOneDependentEntity>()
                 .HasOne(e => e.NavOneToOnePrincipalEntity);
 
-            var fk = modelBuilder.Model
+            var fk = modelBuilder
+                .Model
                 .FindEntityType(typeof(OneToOneDependentEntity))
                 .FindNavigation(OneToOneDependentEntity.NavigationProperty)
                 .ForeignKey;

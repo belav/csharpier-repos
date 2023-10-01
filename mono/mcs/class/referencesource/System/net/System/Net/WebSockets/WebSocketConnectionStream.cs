@@ -215,9 +215,10 @@ namespace System.Net.WebSockets
                         this.m_ConnectStream.Connection.ServicePoint != null,
                         "connection.ServicePoint should not be null."
                     );
-                    this.m_ConnectStream.Connection.ServicePoint.CloseConnectionGroup(
-                        this.m_ConnectionGroupName
-                    );
+                    this.m_ConnectStream
+                        .Connection
+                        .ServicePoint
+                        .CloseConnectionGroup(this.m_ConnectionGroupName);
                 }
                 base.Close();
             }
@@ -736,11 +737,10 @@ namespace System.Net.WebSockets
                 }
 
                 WebSocketHelpers.ThrowIfConnectionAborted(connection.m_InnerStream, false);
-                return connection.m_InnerStream.NetworkStream.BeginMultipleWrite(
-                    buffers,
-                    callback,
-                    asyncState
-                );
+                return connection
+                    .m_InnerStream
+                    .NetworkStream
+                    .BeginMultipleWrite(buffers, callback, asyncState);
             }
 
             private static void EndMultipleWrite(IAsyncResult asyncResult)
@@ -1109,9 +1109,9 @@ namespace System.Net.WebSockets
 
                 if (eventArgs.SocketError != SocketError.Success)
                 {
-                    thisPtr.m_WriteTaskCompletionSource.TrySetException(
-                        new SocketException(eventArgs.SocketError)
-                    );
+                    thisPtr
+                        .m_WriteTaskCompletionSource
+                        .TrySetException(new SocketException(eventArgs.SocketError));
                 }
                 else
                 {
@@ -1155,9 +1155,9 @@ namespace System.Net.WebSockets
                 {
                     if (!thisPtr.m_IgnoreReadError)
                     {
-                        thisPtr.m_ReadTaskCompletionSource.TrySetException(
-                            new SocketException(eventArgs.SocketError)
-                        );
+                        thisPtr
+                            .m_ReadTaskCompletionSource
+                            .TrySetException(new SocketException(eventArgs.SocketError));
                     }
                     else
                     {

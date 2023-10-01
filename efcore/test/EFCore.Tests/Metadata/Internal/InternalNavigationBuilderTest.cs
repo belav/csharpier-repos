@@ -329,13 +329,18 @@ public class InternalNavigationBuilderTest
     [ConditionalFact]
     public void Can_configure_IsRequired_on_to_principal_nonUnique()
     {
-        var builder = CreateInternalNavigationBuilder().Metadata.ForeignKey.Builder
+        var builder = CreateInternalNavigationBuilder()
+            .Metadata
+            .ForeignKey
+            .Builder
             .HasNavigation(
                 nameof(OrderDetails.Order),
                 pointsToPrincipal: true,
                 ConfigurationSource.Explicit
             )
-            .Metadata.DependentToPrincipal.Builder;
+            .Metadata
+            .DependentToPrincipal
+            .Builder;
         builder.IsRequired(true, ConfigurationSource.Explicit);
 
         Assert.True(builder.Metadata.ForeignKey.IsRequired);
@@ -345,7 +350,8 @@ public class InternalNavigationBuilderTest
     public void Can_configure_IsRequired_on_to_dependent_unique()
     {
         var foreignKey = CreateInternalNavigationBuilder().Metadata.ForeignKey;
-        foreignKey = foreignKey.Builder
+        foreignKey = foreignKey
+            .Builder
             .HasNavigations(
                 nameof(OrderDetails.Order),
                 nameof(Order.SingleDetails),
@@ -362,7 +368,8 @@ public class InternalNavigationBuilderTest
     public void Can_configure_IsRequired_on_to_principal_unique()
     {
         var foreignKey = CreateInternalNavigationBuilder().Metadata.ForeignKey;
-        foreignKey = foreignKey.Builder
+        foreignKey = foreignKey
+            .Builder
             .HasNavigations(
                 nameof(OrderDetails.Order),
                 nameof(Order.SingleDetails),

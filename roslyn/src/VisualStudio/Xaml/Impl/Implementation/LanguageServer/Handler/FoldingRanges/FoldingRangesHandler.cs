@@ -45,8 +45,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                 return foldingRanges.ToArrayAndFree();
             }
 
-            var xamlStructureService =
-                document.Project.Services.GetService<IXamlStructureService>();
+            var xamlStructureService = document
+                .Project
+                .Services
+                .GetService<IXamlStructureService>();
             if (xamlStructureService == null)
             {
                 return foldingRanges.ToArrayAndFree();

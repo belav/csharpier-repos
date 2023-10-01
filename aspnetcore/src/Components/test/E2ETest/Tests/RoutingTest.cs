@@ -1927,7 +1927,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
 
         var currentWindowScrollY = BrowserScrollY;
         var test1VerticalLocation = app.FindElement(By.Id("test1")).Location.Y;
-        var currentRelativeUrl = _serverFixture.RootUri
+        var currentRelativeUrl = _serverFixture
+            .RootUri
             .MakeRelativeUri(new Uri(Browser.Url))
             .ToString();
         Assert.Equal("subdir/LongPageWithHash#test1", currentRelativeUrl);
@@ -1945,7 +1946,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
 
         var currentWindowScrollY = BrowserScrollY;
         var test1VerticalLocation = app.FindElement(By.Id("test1")).Location.Y;
-        var currentRelativeUrl = _serverFixture.RootUri
+        var currentRelativeUrl = _serverFixture
+            .RootUri
             .MakeRelativeUri(new Uri(Browser.Url))
             .ToString();
         Assert.Equal("subdir/LongPageWithHash?color=green&number=123#test1", currentRelativeUrl);
@@ -1963,7 +1965,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
 
         var currentWindowScrollY = BrowserScrollY;
         var test1VerticalLocation = app.FindElement(By.Id("test1")).Location.Y;
-        var currentRelativeUrl = _serverFixture.RootUri
+        var currentRelativeUrl = _serverFixture
+            .RootUri
             .MakeRelativeUri(new Uri(Browser.Url))
             .ToString();
         Assert.Equal("subdir/LongPageWithHash/11#test1", currentRelativeUrl);
@@ -1981,7 +1984,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
 
         var currentWindowScrollY = BrowserScrollY;
         var test1VerticalLocation = app.FindElement(By.Id("test1")).Location.Y;
-        var currentRelativeUrl = _serverFixture.RootUri
+        var currentRelativeUrl = _serverFixture
+            .RootUri
             .MakeRelativeUri(new Uri(Browser.Url))
             .ToString();
         Assert.Equal("subdir/LongPageWithHash/11?color=green&number=123#test1", currentRelativeUrl);
@@ -2000,7 +2004,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
 
         var currentWindowScrollY = BrowserScrollY;
         var test2VerticalLocation = app.FindElement(By.Id("test2")).Location.Y;
-        var currentRelativeUrl = _serverFixture.RootUri
+        var currentRelativeUrl = _serverFixture
+            .RootUri
             .MakeRelativeUri(new Uri(Browser.Url))
             .ToString();
         Assert.Equal("subdir/LongPageWithHash2#test2", currentRelativeUrl);
@@ -2019,7 +2024,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
 
         var currentWindowScrollY = BrowserScrollY;
         var test2VerticalLocation = app.FindElement(By.Id("test2")).Location.Y;
-        var currentRelativeUrl = _serverFixture.RootUri
+        var currentRelativeUrl = _serverFixture
+            .RootUri
             .MakeRelativeUri(new Uri(Browser.Url))
             .ToString();
         Assert.Equal("subdir/LongPageWithHash2#test2", currentRelativeUrl);
@@ -2037,7 +2043,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
 
         var currentWindowScrollY = BrowserScrollY;
         var test1VerticalLocation = app.FindElement(By.Id("test1")).Location.Y;
-        var currentRelativeUrl = _serverFixture.RootUri
+        var currentRelativeUrl = _serverFixture
+            .RootUri
             .MakeRelativeUri(new Uri(Browser.Url))
             .ToString();
         Assert.Equal("subdir/LongPageWithHash#test1", currentRelativeUrl);
@@ -2055,7 +2062,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
 
         var currentWindowScrollY = BrowserScrollY;
         var test1VerticalLocation = app.FindElement(By.Id("test1")).Location.Y;
-        var currentRelativeUrl = _serverFixture.RootUri
+        var currentRelativeUrl = _serverFixture
+            .RootUri
             .MakeRelativeUri(new Uri(Browser.Url))
             .ToString();
         Assert.Equal("subdir/LongPageWithHash?color=green&number=123#test1", currentRelativeUrl);
@@ -2073,7 +2081,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
 
         var currentWindowScrollY = BrowserScrollY;
         var test1VerticalLocation = app.FindElement(By.Id("test1")).Location.Y;
-        var currentRelativeUrl = _serverFixture.RootUri
+        var currentRelativeUrl = _serverFixture
+            .RootUri
             .MakeRelativeUri(new Uri(Browser.Url))
             .ToString();
         Assert.Equal("subdir/LongPageWithHash/22#test1", currentRelativeUrl);
@@ -2091,7 +2100,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
 
         var currentWindowScrollY = BrowserScrollY;
         var test1VerticalLocation = app.FindElement(By.Id("test1")).Location.Y;
-        var currentRelativeUrl = _serverFixture.RootUri
+        var currentRelativeUrl = _serverFixture
+            .RootUri
             .MakeRelativeUri(new Uri(Browser.Url))
             .ToString();
         Assert.Equal("subdir/LongPageWithHash/22?color=green&number=123#test1", currentRelativeUrl);

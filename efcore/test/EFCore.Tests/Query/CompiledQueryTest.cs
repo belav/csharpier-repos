@@ -24,7 +24,8 @@ public class CompiledQueryTest
             ),
             Assert
                 .Throws<InvalidOperationException>(() => query(context2, new Bar()).ToList())
-                .Message.Replace("\r", "")
+                .Message
+                .Replace("\r", "")
                 .Replace("\n", ""),
             ignoreWhiteSpaceDifferences: true
         );

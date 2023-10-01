@@ -284,7 +284,8 @@ public class DbContextPoolingTest
 
         Assert.Equal(
             64,
-            scope.ServiceProvider
+            scope
+                .ServiceProvider
                 .GetRequiredService<PooledContext>()
                 .GetService<IDbContextOptions>()
                 .FindExtension<CoreOptionsExtension>()!
@@ -352,7 +353,8 @@ public class DbContextPoolingTest
 
         Assert.Equal(
             1024,
-            scope.ServiceProvider
+            scope
+                .ServiceProvider
                 .GetRequiredService<PooledContext>()
                 .GetService<IDbContextOptions>()
                 .FindExtension<CoreOptionsExtension>()!
@@ -573,8 +575,9 @@ public class DbContextPoolingTest
 
         using var scope = serviceProvider.CreateScope();
 
-        var context =
-            scope.ServiceProvider.GetRequiredService<WithParameterlessConstructorContext>();
+        var context = scope
+            .ServiceProvider
+            .GetRequiredService<WithParameterlessConstructorContext>();
 
         Assert.Equal("Options", context.ConstructorUsed);
     }
@@ -588,9 +591,9 @@ public class DbContextPoolingTest
 
         using var scope = serviceProvider.CreateScope();
 
-        var factory = scope.ServiceProvider.GetRequiredService<
-            IDbContextFactory<WithParameterlessConstructorContext>
-        >();
+        var factory = scope
+            .ServiceProvider
+            .GetRequiredService<IDbContextFactory<WithParameterlessConstructorContext>>();
         using var context = factory.CreateDbContext();
 
         Assert.Equal("Options", context.ConstructorUsed);
@@ -688,10 +691,12 @@ public class DbContextPoolingTest
         async Task<DbContext> GetContextAsync(IServiceScope serviceScope) =>
             useFactory
                 ? async
-                    ? await serviceScope.ServiceProvider
+                    ? await serviceScope
+                        .ServiceProvider
                         .GetService<IDbContextFactory<DbContext>>()!
                         .CreateDbContextAsync()
-                    : serviceScope.ServiceProvider
+                    : serviceScope
+                        .ServiceProvider
                         .GetService<IDbContextFactory<DbContext>>()!
                         .CreateDbContext()
                 : serviceScope.ServiceProvider.GetService<DbContext>();
@@ -1663,9 +1668,9 @@ public class DbContextPoolingTest
             : BuildServiceProvider<PooledContext>();
 
         var scope = serviceProvider.CreateScope();
-        var lease = scope.ServiceProvider.GetRequiredService<
-            IScopedDbContextLease<PooledContext>
-        >();
+        var lease = scope
+            .ServiceProvider
+            .GetRequiredService<IScopedDbContextLease<PooledContext>>();
         var context = lease.Context;
 
         await Dispose(scope, async);
@@ -1673,14 +1678,14 @@ public class DbContextPoolingTest
         await Dispose(scope, async);
 
         using var scope1 = serviceProvider.CreateScope();
-        var lease1 = scope1.ServiceProvider.GetRequiredService<
-            IScopedDbContextLease<PooledContext>
-        >();
+        var lease1 = scope1
+            .ServiceProvider
+            .GetRequiredService<IScopedDbContextLease<PooledContext>>();
 
         using var scope2 = serviceProvider.CreateScope();
-        var lease2 = scope2.ServiceProvider.GetRequiredService<
-            IScopedDbContextLease<PooledContext>
-        >();
+        var lease2 = scope2
+            .ServiceProvider
+            .GetRequiredService<IScopedDbContextLease<PooledContext>>();
 
         Assert.Same(context, lease1.Context);
         Assert.NotSame(lease1.Context, lease2.Context);

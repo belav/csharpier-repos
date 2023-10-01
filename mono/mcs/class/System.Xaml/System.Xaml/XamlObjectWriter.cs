@@ -398,7 +398,9 @@ namespace System.Xaml
                 if (state.FactoryMethod != null)
                 {
                     var contents = (List<object>)state.Value;
-                    var mi = state.Type.UnderlyingType
+                    var mi = state
+                        .Type
+                        .UnderlyingType
                         .GetMethods(static_flags)
                         .FirstOrDefault(
                             mii =>

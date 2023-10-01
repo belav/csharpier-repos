@@ -417,12 +417,14 @@ namespace System.Threading.Tasks.Tests
                 alreadyCompletedTask.Wait();
                 bool doIt = true;
 
-                Task<int> alreadyFaultedTask = Task<int>.Factory.StartNew(() =>
-                {
-                    if (doIt)
-                        throw new Exception("FAULTED!");
-                    return 42;
-                });
+                Task<int> alreadyFaultedTask = Task<int>
+                    .Factory
+                    .StartNew(() =>
+                    {
+                        if (doIt)
+                            throw new Exception("FAULTED!");
+                        return 42;
+                    });
                 try
                 {
                     alreadyFaultedTask.Wait();
@@ -1203,12 +1205,14 @@ namespace System.Threading.Tasks.Tests
             Task<int> mcw1 = t.ContinueWith(
                     delegate(Task antecedent)
                     {
-                        Task<int> inner = Task<int>.Factory.StartNew(
-                            delegate
-                            {
-                                throw new InvalidOperationException();
-                            }
-                        );
+                        Task<int> inner = Task<int>
+                            .Factory
+                            .StartNew(
+                                delegate
+                                {
+                                    throw new InvalidOperationException();
+                                }
+                            );
 
                         return inner;
                     }
@@ -1222,12 +1226,14 @@ namespace System.Threading.Tasks.Tests
                     delegate(Task antecedent)
                     {
                         throwException();
-                        Task<int> inner = Task<int>.Factory.StartNew(
-                            delegate
-                            {
-                                return 0;
-                            }
-                        );
+                        Task<int> inner = Task<int>
+                            .Factory
+                            .StartNew(
+                                delegate
+                                {
+                                    return 0;
+                                }
+                            );
 
                         return inner;
                     }
@@ -1237,23 +1243,27 @@ namespace System.Threading.Tasks.Tests
             mcwExceptionChecker(mcw2, "Task antecedent, throw in returned Future");
 
             // Test mcw off of future
-            Task<int> f = Task<int>.Factory.StartNew(
-                delegate
-                {
-                    return 0;
-                }
-            );
+            Task<int> f = Task<int>
+                .Factory
+                .StartNew(
+                    delegate
+                    {
+                        return 0;
+                    }
+                );
 
             // Throw in the returned future
             mcw1 = f.ContinueWith(
                     delegate(Task<int> antecedent)
                     {
-                        Task<int> inner = Task<int>.Factory.StartNew(
-                            delegate
-                            {
-                                throw new InvalidOperationException();
-                            }
-                        );
+                        Task<int> inner = Task<int>
+                            .Factory
+                            .StartNew(
+                                delegate
+                                {
+                                    throw new InvalidOperationException();
+                                }
+                            );
 
                         return inner;
                     }
@@ -1267,12 +1277,14 @@ namespace System.Threading.Tasks.Tests
                     delegate(Task<int> antecedent)
                     {
                         throwException();
-                        Task<int> inner = Task<int>.Factory.StartNew(
-                            delegate
-                            {
-                                return 0;
-                            }
-                        );
+                        Task<int> inner = Task<int>
+                            .Factory
+                            .StartNew(
+                                delegate
+                                {
+                                    return 0;
+                                }
+                            );
 
                         return inner;
                     }
@@ -1346,27 +1358,31 @@ namespace System.Threading.Tasks.Tests
             AsyncExceptionChecker(asyncTask, "Task-based FromAsync(beginMethod, ...)");
 
             // Try Task<string>.Factory.FromAsync(iar,...)
-            Task<string> asyncFuture = Task<string>.Factory.FromAsync(
-                fac.StartRead(10, null, null),
-                delegate(IAsyncResult iar)
-                {
-                    throwException();
-                    return fac.EndRead(iar);
-                }
-            );
+            Task<string> asyncFuture = Task<string>
+                .Factory
+                .FromAsync(
+                    fac.StartRead(10, null, null),
+                    delegate(IAsyncResult iar)
+                    {
+                        throwException();
+                        return fac.EndRead(iar);
+                    }
+                );
 
             AsyncExceptionChecker(asyncFuture, "Future-based FromAsync(iar, ...)");
 
-            asyncFuture = Task<string>.Factory.FromAsync(
-                fac.StartRead,
-                delegate(IAsyncResult iar)
-                {
-                    throwException();
-                    return fac.EndRead(iar);
-                },
-                10,
-                null
-            );
+            asyncFuture = Task<string>
+                .Factory
+                .FromAsync(
+                    fac.StartRead,
+                    delegate(IAsyncResult iar)
+                    {
+                        throwException();
+                        return fac.EndRead(iar);
+                    },
+                    10,
+                    null
+                );
 
             AsyncExceptionChecker(asyncFuture, "Future-based FromAsync(beginMethod, ...)");
         }
@@ -1486,14 +1502,16 @@ namespace System.Threading.Tasks.Tests
             );
 
             Task i2 = null;
-            Task t2 = Task<int>.Factory.StartNew(
-                () =>
-                {
-                    i2 = new Task(() => { }, TaskCreationOptions.AttachedToParent);
-                    return 42;
-                },
-                TaskCreationOptions.DenyChildAttach
-            );
+            Task t2 = Task<int>
+                .Factory
+                .StartNew(
+                    () =>
+                    {
+                        i2 = new Task(() => { }, TaskCreationOptions.AttachedToParent);
+                        return 42;
+                    },
+                    TaskCreationOptions.DenyChildAttach
+                );
 
             // ctor/Start, Task and Future
             Task i3 = null;

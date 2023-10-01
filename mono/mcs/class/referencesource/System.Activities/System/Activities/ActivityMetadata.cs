@@ -279,10 +279,12 @@ namespace System.Activities
             }
             if (extensionType.IsValueType)
             {
-                throw FxTrace.Exception.Argument(
-                    "extensionType",
-                    SR.RequireExtensionOnlyAcceptsReferenceTypes(extensionType.FullName)
-                );
+                throw FxTrace
+                    .Exception
+                    .Argument(
+                        "extensionType",
+                        SR.RequireExtensionOnlyAcceptsReferenceTypes(extensionType.FullName)
+                    );
             }
             this.activity.RequireExtension(extensionType);
         }

@@ -417,18 +417,19 @@ namespace System.Data.Mapping.Update.Internal
             }
 
             // order by Container.Table
-            result = StringComparer.Ordinal.Compare(
-                this.m_processor.Table.Name,
-                other.m_processor.Table.Name
-            );
+            result = StringComparer
+                .Ordinal
+                .Compare(this.m_processor.Table.Name, other.m_processor.Table.Name);
             if (0 != result)
             {
                 return result;
             }
-            result = StringComparer.Ordinal.Compare(
-                this.m_processor.Table.EntityContainer.Name,
-                other.m_processor.Table.EntityContainer.Name
-            );
+            result = StringComparer
+                .Ordinal
+                .Compare(
+                    this.m_processor.Table.EntityContainer.Name,
+                    other.m_processor.Table.EntityContainer.Name
+                );
             if (0 != result)
             {
                 return result;

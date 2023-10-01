@@ -563,9 +563,9 @@ namespace System.Security.Cryptography.Pkcs
 
             for (int i = 0; i < _signedData.SignerInfos.Length; i++)
             {
-                ref AlgorithmIdentifierAsn signerAlg = ref _signedData.SignerInfos[
-                    i
-                ].DigestAlgorithm;
+                ref AlgorithmIdentifierAsn signerAlg = ref _signedData
+                    .SignerInfos[i]
+                    .DigestAlgorithm;
 
                 if (candidate.Equals(ref signerAlg))
                 {

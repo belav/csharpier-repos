@@ -279,7 +279,8 @@ public class StructuralTypeProjectionExpression : Expression
                 .GetConcreteDerivedTypesInclusive()
                 .Select(e => (string)e.GetDiscriminatorValue()!)
                 .ToList();
-            var whenClauses = caseExpression.WhenClauses
+            var whenClauses = caseExpression
+                .WhenClauses
                 .Where(
                     wc =>
                         entityTypesToSelect.Contains(

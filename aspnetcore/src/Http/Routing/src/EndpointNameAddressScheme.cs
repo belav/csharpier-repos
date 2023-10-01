@@ -96,7 +96,8 @@ internal sealed class EndpointNameAddressScheme : IEndpointAddressScheme<string>
         static string? GetEndpointName(Endpoint endpoint)
         {
             if (
-                endpoint.Metadata
+                endpoint
+                    .Metadata
                     .GetMetadata<ISuppressLinkGenerationMetadata>()
                     ?.SuppressLinkGeneration == true
             )

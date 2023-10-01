@@ -111,11 +111,13 @@ namespace System.Security.Cryptography.Asn1.Pkcs7
                 sequenceReader.ThrowIfNotEmpty();
             }
 
-            System.Security.Cryptography.Asn1.Pkcs7.EncryptedContentInfoAsn.Decode(
-                ref sequenceReader,
-                rebind,
-                out decoded.EncryptedContentInfo
-            );
+            System
+                .Security
+                .Cryptography
+                .Asn1
+                .Pkcs7
+                .EncryptedContentInfoAsn
+                .Decode(ref sequenceReader, rebind, out decoded.EncryptedContentInfo);
 
             if (
                 sequenceReader.HasData
@@ -134,11 +136,12 @@ namespace System.Security.Cryptography.Asn1.Pkcs7
 
                     while (collectionReader.HasData)
                     {
-                        System.Security.Cryptography.Asn1.AttributeAsn.Decode(
-                            ref collectionReader,
-                            rebind,
-                            out tmpItem
-                        );
+                        System
+                            .Security
+                            .Cryptography
+                            .Asn1
+                            .AttributeAsn
+                            .Decode(ref collectionReader, rebind, out tmpItem);
                         tmpList.Add(tmpItem);
                     }
 

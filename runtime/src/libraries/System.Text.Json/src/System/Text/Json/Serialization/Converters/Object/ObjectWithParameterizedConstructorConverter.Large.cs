@@ -24,13 +24,15 @@ namespace System.Text.Json.Serialization.Converters
         {
             Debug.Assert(jsonParameterInfo.ShouldDeserialize);
 
-            bool success = jsonParameterInfo.EffectiveConverter.TryReadAsObject(
-                ref reader,
-                jsonParameterInfo.ParameterType,
-                jsonParameterInfo.Options,
-                ref state,
-                out object? arg
-            );
+            bool success = jsonParameterInfo
+                .EffectiveConverter
+                .TryReadAsObject(
+                    ref reader,
+                    jsonParameterInfo.ParameterType,
+                    jsonParameterInfo.Options,
+                    ref state,
+                    out object? arg
+                );
 
             if (success && !(arg == null && jsonParameterInfo.IgnoreNullTokensOnRead))
             {

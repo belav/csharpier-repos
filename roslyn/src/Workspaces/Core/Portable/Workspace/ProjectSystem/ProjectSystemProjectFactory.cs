@@ -73,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
         )
         {
             Workspace = workspace;
-            WorkspaceListener = workspace.Services
+            WorkspaceListener = workspace
+                .Services
                 .GetRequiredService<IWorkspaceAsynchronousOperationListenerProvider>()
                 .GetListener();
 
@@ -584,7 +585,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                     // PERF: call GetProjectState instead of GetProject, otherwise creating a new project might force all
                     // Project instances to get created.
                     foreach (
-                        PortableExecutableReference reference in solutionChanges.Solution
+                        PortableExecutableReference reference in solutionChanges
+                            .Solution
                             .GetProjectState(projectIdToRetarget)!
                             .MetadataReferences
                     )
@@ -604,7 +606,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                                 reference.Properties.Aliases,
                                 reference.Properties.EmbedInteropTypes
                             );
-                            var newSolution = solutionChanges.Solution
+                            var newSolution = solutionChanges
+                                .Solution
                                 .RemoveMetadataReference(projectIdToRetarget, reference)
                                 .AddProjectReference(projectIdToRetarget, projectReference);
 
@@ -613,11 +616,9 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                                 newSolution
                             );
 
-                            GetReferenceInfo_NoLock(
-                                projectIdToRetarget
-                            ).ConvertedProjectReferences.Add(
-                                (reference.FilePath!, projectReference)
-                            );
+                            GetReferenceInfo_NoLock(projectIdToRetarget)
+                                .ConvertedProjectReferences
+                                .Add((reference.FilePath!, projectReference));
 
                             // We have converted one, but you could have more than one reference with different aliases
                             // that we need to convert, so we'll keep going
@@ -664,8 +665,9 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
             if (projectWithMetadataReference.Language != referencedProject.Language)
             {
                 if (
-                    projectWithMetadataReference.LanguageServices.GetService<ICompilationFactoryService>()
-                        != null
+                    projectWithMetadataReference
+                        .LanguageServices
+                        .GetService<ICompilationFactoryService>() != null
                     && referencedProject.LanguageServices.GetService<ICompilationFactoryService>()
                         == null
                 )
@@ -735,7 +737,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                                 )
                             );
 
-                        var newSolution = solutionChanges.Solution
+                        var newSolution = solutionChanges
+                            .Solution
                             .RemoveProjectReference(
                                 projectIdToRetarget,
                                 convertedReference.projectReference
@@ -786,9 +789,9 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                         embedInteropTypes: properties.EmbedInteropTypes
                     );
 
-                    GetReferenceInfo_NoLock(referencingProject).ConvertedProjectReferences.Add(
-                        (path, projectReference)
-                    );
+                    GetReferenceInfo_NoLock(referencingProject)
+                        .ConvertedProjectReferences
+                        .Add((path, projectReference));
 
                     return projectReference;
                 }
@@ -912,7 +915,9 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                         // we might not find the path at all: when we receive the file changed event, we aren't checking if the file is still
                         // in the workspace at that time; it's possible it might have already been removed.
                         foreach (
-                            var portableExecutableReference in project.MetadataReferences.OfType<PortableExecutableReference>()
+                            var portableExecutableReference in project
+                                .MetadataReferences
+                                .OfType<PortableExecutableReference>()
                         )
                         {
                             if (portableExecutableReference.FilePath == fullFilePath)
@@ -927,7 +932,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                                         portableExecutableReference.Properties
                                     );
 
-                                var newSolution = solutionChanges.Solution
+                                var newSolution = solutionChanges
+                                    .Solution
                                     .RemoveMetadataReference(
                                         project.Id,
                                         portableExecutableReference

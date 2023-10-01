@@ -148,7 +148,8 @@ public class CascadingAuthenticationStateTest
         var component = new UseCascadingAuthenticationStateComponent();
         renderer.AssignRootComponentId(component);
         component.TriggerRender();
-        var receiveAuthStateId = renderer.Batches
+        var receiveAuthStateId = renderer
+            .Batches
             .Single()
             .GetComponentFrames<ReceiveAuthStateComponent>()
             .Single()

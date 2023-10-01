@@ -41,8 +41,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             CancellationToken cancellationToken
         )
         {
-            var storageService =
-                project.LanguageServices.SolutionServices.GetPersistentStorageService();
+            var storageService = project
+                .LanguageServices
+                .SolutionServices
+                .GetPersistentStorageService();
             var documentKey = DocumentKey.ToDocumentKey(
                 ProjectKey.ToProjectKey(solutionKey, project),
                 document
@@ -177,8 +179,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             CancellationToken cancellationToken
         )
         {
-            var persistentStorageService =
-                project.LanguageServices.SolutionServices.GetPersistentStorageService();
+            var persistentStorageService = project
+                .LanguageServices
+                .SolutionServices
+                .GetPersistentStorageService();
             return SaveAsync(
                 solutionKey,
                 project,

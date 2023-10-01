@@ -376,7 +376,8 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         public static IEnumerable<object[]> GetValidMemberNames() =>
-            typeof(PropertyNameTestsDynamic).Assembly
+            typeof(PropertyNameTestsDynamic)
+                .Assembly
                 .GetTypes()
                 .SelectMany(
                     t =>

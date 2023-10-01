@@ -52,7 +52,8 @@ namespace System.Text.RegularExpressions.Generator
             // - DiagnosticData in the case of a failure that should end the compilation
             // - (RegexMethod regexMethod, string runnerFactoryImplementation, Dictionary<string, string[]> requiredHelpers) in the case of valid regex
             // - (RegexMethod regexMethod, string reason, DiagnosticData diagnostic) in the case of a limited-support regex
-            IncrementalValueProvider<ImmutableArray<object>> results = context.SyntaxProvider
+            IncrementalValueProvider<ImmutableArray<object>> results = context
+                .SyntaxProvider
                 // Find all MethodDeclarationSyntax nodes attributed with GeneratedRegex and gather the required information.
                 // The predicate will be run once for every attributed node in the same file that's being modified.
                 // The transform will be run once for every attributed node in the compilation.

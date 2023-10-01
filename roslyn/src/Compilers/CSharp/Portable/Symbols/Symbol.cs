@@ -437,7 +437,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (location.SourceSpan.Length != 0)
                 {
-                    SyntaxToken token = location.SourceTree
+                    SyntaxToken token = location
+                        .SourceTree
                         .GetRoot()
                         .FindToken(location.SourceSpan.Start);
                     if (token.Kind() != SyntaxKind.None)
@@ -979,15 +980,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 
 #nullable disable
 
-        private static readonly SymbolDisplayFormat s_debuggerDisplayFormat =
-            SymbolDisplayFormat.TestFormat
-                .AddMiscellaneousOptions(
-                    SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
-                        | SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
-                )
-                .WithCompilerInternalOptions(
-                    SymbolDisplayCompilerInternalOptions.IncludeContainingFileForFileTypes
-                );
+        private static readonly SymbolDisplayFormat s_debuggerDisplayFormat = SymbolDisplayFormat
+            .TestFormat
+            .AddMiscellaneousOptions(
+                SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
+                    | SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
+            )
+            .WithCompilerInternalOptions(
+                SymbolDisplayCompilerInternalOptions.IncludeContainingFileForFileTypes
+            );
 
         internal virtual string GetDebuggerDisplay()
         {
@@ -1445,13 +1446,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             foreach (var modifier in modifiers)
             {
                 if (
-                    (
-                        (CSharpCustomModifier)modifier
-                    ).ModifierSymbol.GetUnificationUseSiteDiagnosticRecursive(
-                        ref result,
-                        owner,
-                        ref checkedTypes
-                    )
+                    ((CSharpCustomModifier)modifier)
+                        .ModifierSymbol
+                        .GetUnificationUseSiteDiagnosticRecursive(
+                            ref result,
+                            owner,
+                            ref checkedTypes
+                        )
                 )
                 {
                     return true;
@@ -1471,11 +1472,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             foreach (var parameter in parameters)
             {
                 if (
-                    parameter.TypeWithAnnotations.GetUnificationUseSiteDiagnosticRecursive(
-                        ref result,
-                        owner,
-                        ref checkedTypes
-                    )
+                    parameter
+                        .TypeWithAnnotations
+                        .GetUnificationUseSiteDiagnosticRecursive(
+                            ref result,
+                            owner,
+                            ref checkedTypes
+                        )
                     || GetUnificationUseSiteDiagnosticRecursive(
                         ref result,
                         parameter.RefCustomModifiers,

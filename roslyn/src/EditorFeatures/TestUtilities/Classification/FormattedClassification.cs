@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
         private static readonly ImmutableDictionary<
             string,
             string
-        > s_classificationPrefixToTestHelperMap = ImmutableDictionary<string, string>.Empty
+        > s_classificationPrefixToTestHelperMap = ImmutableDictionary<string, string>
+            .Empty
             .Add("regex - ", "Regex.")
             .Add("json - ", "Json.")
             .Add("xml doc comment - ", "XmlDoc.")

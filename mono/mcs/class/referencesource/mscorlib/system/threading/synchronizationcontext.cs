@@ -189,12 +189,15 @@ namespace System.Threading
             {
                 fixed (IntPtr* pWaitHandles = waitHandles)
                 {
-                    return System.Threading.WaitHandle.Wait_internal(
-                        pWaitHandles,
-                        waitHandles.Length,
-                        waitAll,
-                        millisecondsTimeout
-                    );
+                    return System
+                        .Threading
+                        .WaitHandle
+                        .Wait_internal(
+                            pWaitHandles,
+                            waitHandles.Length,
+                            waitAll,
+                            millisecondsTimeout
+                        );
                 }
             }
         }

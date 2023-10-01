@@ -94,22 +94,26 @@ namespace System.CommandLine.Tests
             };
 
             var midCommand1 = new CliCommand("midCommand1") { leafCommand };
-            midCommand1.Options.Add(
-                new CliOption<string>("--three1")
-                {
-                    Description = "option three 1",
-                    Recursive = true
-                }
-            );
+            midCommand1
+                .Options
+                .Add(
+                    new CliOption<string>("--three1")
+                    {
+                        Description = "option three 1",
+                        Recursive = true
+                    }
+                );
 
             var midCommand2 = new CliCommand("midCommand2") { leafCommand };
-            midCommand2.Options.Add(
-                new CliOption<string>("--three2")
-                {
-                    Description = "option three 2",
-                    Recursive = true
-                }
-            );
+            midCommand2
+                .Options
+                .Add(
+                    new CliOption<string>("--three2")
+                    {
+                        Description = "option three 2",
+                        Recursive = true
+                    }
+                );
 
             var rootCommand = new CliCommand("root") { midCommand1, midCommand2 };
 

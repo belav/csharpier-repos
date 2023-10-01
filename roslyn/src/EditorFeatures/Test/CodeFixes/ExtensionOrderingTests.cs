@@ -170,7 +170,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             var codeFixService = (CodeFixService)ExportProvider.GetExportedValue<ICodeFixService>();
             var codeFixPriorityMap = codeFixService
                 .GetTestAccessor()
-                .GetFixerPriorityPerLanguageMap(services: null!)[language].Value;
+                .GetFixerPriorityPerLanguageMap(services: null!)[language]
+                .Value;
 
             Assert.True(codeFixPriorityMap.Count > 0);
 

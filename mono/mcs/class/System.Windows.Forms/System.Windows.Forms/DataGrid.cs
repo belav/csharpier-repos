@@ -845,18 +845,15 @@ namespace System.Windows.Forms
         {
             get
             {
-                return CurrentTableStyle.GridColumnStyles[columnIndex].GetColumnValueAtRow(
-                    ListManager,
-                    rowIndex
-                );
+                return CurrentTableStyle
+                    .GridColumnStyles[columnIndex]
+                    .GetColumnValueAtRow(ListManager, rowIndex);
             }
             set
             {
-                CurrentTableStyle.GridColumnStyles[columnIndex].SetColumnValueAtRow(
-                    ListManager,
-                    rowIndex,
-                    value
-                );
+                CurrentTableStyle
+                    .GridColumnStyles[columnIndex]
+                    .SetColumnValueAtRow(ListManager, rowIndex, value);
 
                 // UIA Framework: Raising changes in datasource.
                 OnUIAGridCellChanged(
@@ -1166,9 +1163,9 @@ namespace System.Windows.Forms
         {
             if (is_changing)
             {
-                CurrentTableStyle.GridColumnStyles[current_cell.ColumnNumber].Abort(
-                    current_cell.RowNumber
-                );
+                CurrentTableStyle
+                    .GridColumnStyles[current_cell.ColumnNumber]
+                    .Abort(current_cell.RowNumber);
                 is_changing = false;
                 InvalidateRowHeader(current_cell.RowNumber);
             }
@@ -1203,9 +1200,9 @@ namespace System.Windows.Forms
             if (is_changing)
             {
                 if (current_cell.ColumnNumber < CurrentTableStyle.GridColumnStyles.Count)
-                    CurrentTableStyle.GridColumnStyles[current_cell.ColumnNumber].Abort(
-                        current_cell.RowNumber
-                    );
+                    CurrentTableStyle
+                        .GridColumnStyles[current_cell.ColumnNumber]
+                        .Abort(current_cell.RowNumber);
                 InvalidateRowHeader(current_cell.RowNumber);
             }
 
@@ -1765,11 +1762,9 @@ namespace System.Windows.Forms
                     }
                     else
                     {
-                        CurrentTableStyle.GridColumnStyles[testinfo.Column].OnMouseDown(
-                            e,
-                            testinfo.Row,
-                            testinfo.Column
-                        );
+                        CurrentTableStyle
+                            .GridColumnStyles[testinfo.Column]
+                            .OnMouseDown(e, testinfo.Row, testinfo.Column);
                     }
 
                     break;
@@ -1827,9 +1822,9 @@ namespace System.Windows.Forms
                         return;
 
                     ListSortDirection direction = ListSortDirection.Ascending;
-                    PropertyDescriptor prop = CurrentTableStyle.GridColumnStyles[
-                        testinfo.Column
-                    ].PropertyDescriptor;
+                    PropertyDescriptor prop = CurrentTableStyle
+                        .GridColumnStyles[testinfo.Column]
+                        .PropertyDescriptor;
                     IBindingList list = (IBindingList)ListManager.List;
 
                     if (list.SortProperty != null)
@@ -2025,9 +2020,9 @@ namespace System.Windows.Forms
                         + CurrentTableStyle.GridColumnStyles[resize_column].Width
                     < 0
                 )
-                    resize_column_width_delta = -CurrentTableStyle.GridColumnStyles[
-                        resize_column
-                    ].Width;
+                    resize_column_width_delta = -CurrentTableStyle
+                        .GridColumnStyles[resize_column]
+                        .Width;
                 CurrentTableStyle.GridColumnStyles[resize_column].Width +=
                     resize_column_width_delta;
                 width_of_all_columns += resize_column_width_delta;
@@ -3026,14 +3021,16 @@ namespace System.Windows.Forms
             is_editing = true;
             is_changing = false;
 
-            CurrentTableStyle.GridColumnStyles[CurrentColumn].Edit(
-                ListManager,
-                CurrentRow,
-                GetCellBounds(CurrentRow, CurrentColumn),
-                _readonly,
-                null,
-                true
-            );
+            CurrentTableStyle
+                .GridColumnStyles[CurrentColumn]
+                .Edit(
+                    ListManager,
+                    CurrentRow,
+                    GetCellBounds(CurrentRow, CurrentColumn),
+                    _readonly,
+                    null,
+                    true
+                );
         }
 
         private void EndEdit()

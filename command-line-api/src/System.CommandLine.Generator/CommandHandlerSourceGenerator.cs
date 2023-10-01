@@ -85,7 +85,7 @@ namespace System.CommandLine
         private class GeneratedHandler_{handlerCount} : {CliActionType}
         {{
             public GeneratedHandler_{handlerCount}(
-                {invocation.DelegateType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)} method"
+                {invocation .DelegateType .ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)} method"
             );
 
             if (methodParameters.Length > 0)
@@ -113,7 +113,8 @@ namespace System.CommandLine
                 Method = method;"
             );
             foreach (
-                var propertyAssignment in invocation.Parameters
+                var propertyAssignment in invocation
+                    .Parameters
                     .Select(x => x.GetPropertyAssignment())
                     .Where(x => !string.IsNullOrWhiteSpace(x))
             )
@@ -128,11 +129,12 @@ namespace System.CommandLine
                 $@"
             }}
                 
-            public {invocation.DelegateType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)} Method {{ get; }}"
+            public {invocation .DelegateType .ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)} Method {{ get; }}"
             );
 
             foreach (
-                var propertyDeclaration in invocation.Parameters
+                var propertyDeclaration in invocation
+                    .Parameters
                     .Select(x => x.GetPropertyDeclaration())
                     .Where(x => !string.IsNullOrWhiteSpace(x))
             )
@@ -168,7 +170,8 @@ namespace System.CommandLine
             DelegateInvocation invocation
         )
         {
-            return invocation.Parameters
+            return invocation
+                .Parameters
                 .Select(x => x.GetMethodParameter())
                 .Where(x => !string.IsNullOrWhiteSpace(x.Name))
                 .ToArray();
@@ -200,7 +203,7 @@ namespace System.CommandLine
 
             builder.Append(
                 $@"
-            {invocation.DelegateType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)} method"
+            {invocation .DelegateType .ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)} method"
             );
 
             if (methodParameters.Length > 0)

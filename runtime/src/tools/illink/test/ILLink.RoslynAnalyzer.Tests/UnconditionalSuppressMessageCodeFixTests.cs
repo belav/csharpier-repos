@@ -58,16 +58,18 @@ namespace System.Diagnostics.CodeAnalysis
                 ReferenceAssemblies = TestCaseUtils.Net6PreviewAssemblies
             };
             test.ExpectedDiagnostics.AddRange(baselineExpected);
-            test.TestState.AnalyzerConfigFiles.Add(
-                (
-                    "/.editorconfig",
-                    SourceText.From(
-                        @$"
+            test.TestState
+                .AnalyzerConfigFiles
+                .Add(
+                    (
+                        "/.editorconfig",
+                        SourceText.From(
+                            @$"
 is_global = true
 build_property.{MSBuildPropertyOptionNames.EnableTrimAnalyzer} = true"
+                        )
                     )
-                )
-            );
+                );
             test.FixedState.ExpectedDiagnostics.AddRange(fixedExpected);
             return test.RunAsync();
         }
@@ -86,16 +88,18 @@ build_property.{MSBuildPropertyOptionNames.EnableTrimAnalyzer} = true"
                 ReferenceAssemblies = TestCaseUtils.Net6PreviewAssemblies
             };
             test.ExpectedDiagnostics.AddRange(baselineExpected);
-            test.TestState.AnalyzerConfigFiles.Add(
-                (
-                    "/.editorconfig",
-                    SourceText.From(
-                        @$"
+            test.TestState
+                .AnalyzerConfigFiles
+                .Add(
+                    (
+                        "/.editorconfig",
+                        SourceText.From(
+                            @$"
 is_global = true
 build_property.{MSBuildPropertyOptionNames.EnableSingleFileAnalyzer} = true"
+                        )
                     )
-                )
-            );
+                );
             test.FixedState.ExpectedDiagnostics.AddRange(fixedExpected);
             return test.RunAsync();
         }
@@ -114,16 +118,18 @@ build_property.{MSBuildPropertyOptionNames.EnableSingleFileAnalyzer} = true"
                 ReferenceAssemblies = TestCaseUtils.Net6PreviewAssemblies
             };
             test.ExpectedDiagnostics.AddRange(baselineExpected);
-            test.TestState.AnalyzerConfigFiles.Add(
-                (
-                    "/.editorconfig",
-                    SourceText.From(
-                        @$"
+            test.TestState
+                .AnalyzerConfigFiles
+                .Add(
+                    (
+                        "/.editorconfig",
+                        SourceText.From(
+                            @$"
 is_global = true
 build_property.{MSBuildPropertyOptionNames.EnableAotAnalyzer} = true"
+                        )
                     )
-                )
-            );
+                );
             test.FixedState.ExpectedDiagnostics.AddRange(fixedExpected);
             return test.RunAsync();
         }

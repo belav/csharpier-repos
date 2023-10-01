@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.MakeStatementAsynchronous
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
-            var root = await context.Document
+            var root = await context
+                .Document
                 .GetRequiredSyntaxRootAsync(context.CancellationToken)
                 .ConfigureAwait(false);
             var node = root.FindNode(diagnostic.Location.SourceSpan, getInnermostNodeForTie: true);
@@ -68,10 +69,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.MakeStatementAsynchronous
         {
             foreach (var diagnostic in diagnostics)
             {
-                var node = diagnostic.Location.FindNode(
-                    getInnermostNodeForTie: true,
-                    cancellationToken
-                );
+                var node = diagnostic
+                    .Location
+                    .FindNode(getInnermostNodeForTie: true, cancellationToken);
                 var statementToFix = TryGetStatementToFix(node);
                 if (statementToFix != null)
                 {

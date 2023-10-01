@@ -348,10 +348,10 @@ namespace System.Data.Linq
             }
 
             // As the object have been deleted, it needs to leave the cache
-            this.Session.Context.Services.RemoveCachedObjectLike(
-                trackedObject.Type,
-                trackedObject.Original
-            );
+            this.Session
+                .Context
+                .Services
+                .RemoveCachedObjectLike(trackedObject.Type, trackedObject.Original);
 
             // Now that our cache is in sync, we accept the changes
             this.trackedObject.AcceptChanges();
@@ -483,9 +483,9 @@ namespace System.Data.Linq
             this.metaMember = metaMember;
             this.originalValue = metaMember.StorageAccessor.GetBoxedValue(conflict.Original);
             this.databaseValue = metaMember.StorageAccessor.GetBoxedValue(conflict.Database);
-            this.currentValue = metaMember.StorageAccessor.GetBoxedValue(
-                conflict.TrackedObject.Current
-            );
+            this.currentValue = metaMember
+                .StorageAccessor
+                .GetBoxedValue(conflict.TrackedObject.Current);
         }
 
         /// <summary>
@@ -525,11 +525,9 @@ namespace System.Data.Linq
         /// </summary>
         public void Resolve(object value)
         {
-            this.conflict.TrackedObject.RefreshMember(
-                this.metaMember,
-                RefreshMode.OverwriteCurrentValues,
-                value
-            );
+            this.conflict
+                .TrackedObject
+                .RefreshMember(this.metaMember, RefreshMode.OverwriteCurrentValues, value);
             this.isResolved = true;
             this.conflict.OnMemberResolved();
         }
@@ -539,11 +537,9 @@ namespace System.Data.Linq
         /// </summary>
         public void Resolve(RefreshMode refreshMode)
         {
-            this.conflict.TrackedObject.RefreshMember(
-                this.metaMember,
-                refreshMode,
-                this.databaseValue
-            );
+            this.conflict
+                .TrackedObject
+                .RefreshMember(this.metaMember, refreshMode, this.databaseValue);
             this.isResolved = true;
             this.conflict.OnMemberResolved();
         }

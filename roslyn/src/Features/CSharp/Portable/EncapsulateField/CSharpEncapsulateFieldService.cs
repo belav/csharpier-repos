@@ -249,12 +249,15 @@ namespace Microsoft.CodeAnalysis.CSharp.EncapsulateField
         }
 
         private static bool IsNew(IFieldSymbol field) =>
-            field.DeclaringSyntaxReferences.Any(
-                static d =>
-                    d.GetSyntax()
-                        .GetAncestor<FieldDeclarationSyntax>()
-                        .Modifiers.Any(SyntaxKind.NewKeyword)
-            );
+            field
+                .DeclaringSyntaxReferences
+                .Any(
+                    static d =>
+                        d.GetSyntax()
+                            .GetAncestor<FieldDeclarationSyntax>()
+                            .Modifiers
+                            .Any(SyntaxKind.NewKeyword)
+                );
 
         private static string GenerateFieldName(string correspondingPropertyName) =>
             char.ToLower(correspondingPropertyName[0]).ToString() + correspondingPropertyName[1..];
@@ -274,8 +277,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EncapsulateField
         internal override IEnumerable<SyntaxNode> GetConstructorNodes(
             INamedTypeSymbol containingType
         ) =>
-            containingType.Constructors.SelectMany(
-                c => c.DeclaringSyntaxReferences.Select(d => d.GetSyntax())
-            );
+            containingType
+                .Constructors
+                .SelectMany(c => c.DeclaringSyntaxReferences.Select(d => d.GetSyntax()));
     }
 }

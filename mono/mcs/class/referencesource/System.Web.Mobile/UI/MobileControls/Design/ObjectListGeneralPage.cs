@@ -223,9 +223,9 @@ namespace System.Web.UI.Design.MobileControls
             }
             catch (Exception)
             {
-                _txtItemsPerPage.Text = objectList.ItemsPerPage.ToString(
-                    CultureInfo.InvariantCulture
-                );
+                _txtItemsPerPage.Text = objectList
+                    .ItemsPerPage
+                    .ToString(CultureInfo.InvariantCulture);
             }
 
             objectList.BackCommandText = _txtBackCommandText.Text;

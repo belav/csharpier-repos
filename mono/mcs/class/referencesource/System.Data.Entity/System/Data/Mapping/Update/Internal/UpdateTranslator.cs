@@ -314,9 +314,9 @@ namespace System.Data.Mapping.Update.Internal
                             EdmProperty keyMember = (EdmProperty)principalType.KeyMembers[i];
 
                             // Find corresponding foreign key value
-                            int constraintOrdinal = constraint.FromProperties.IndexOf(
-                                (EdmProperty)keyMember
-                            );
+                            int constraintOrdinal = constraint
+                                .FromProperties
+                                .IndexOf((EdmProperty)keyMember);
                             int recordOrdinal = record.GetOrdinal(
                                 constraint.ToProperties[constraintOrdinal].Name
                             );
@@ -330,9 +330,9 @@ namespace System.Data.Mapping.Update.Internal
 
                         if (!hasNullValue)
                         {
-                            EntitySet principalSet = associationSet.AssociationSetEnds[
-                                constraint.FromRole.Name
-                            ].EntitySet;
+                            EntitySet principalSet = associationSet
+                                .AssociationSetEnds[constraint.FromRole.Name]
+                                .EntitySet;
                             if (1 == keyValues.Length)
                             {
                                 principalKey = new EntityKey(principalSet, keyValues[0]);
@@ -662,9 +662,10 @@ namespace System.Data.Mapping.Update.Internal
 
                 // determine if type compensation is required
                 IExtendedDataRecord recordWithMetadata = (IExtendedDataRecord)targetRecord;
-                EdmMember member = recordWithMetadata.DataRecordInfo.FieldMetadata[
-                    context.RecordOrdinal
-                ].FieldType;
+                EdmMember member = recordWithMetadata
+                    .DataRecordInfo
+                    .FieldMetadata[context.RecordOrdinal]
+                    .FieldType;
 
                 value = value ?? DBNull.Value; // records expect DBNull rather than null
                 value = AlignReturnValue(value, member, context);
@@ -690,10 +691,14 @@ namespace System.Data.Mapping.Update.Internal
                 )
                 {
                     throw EntityUtil.Update(
-                        System.Data.Entity.Strings.Update_NullReturnValueForNonNullableMember(
-                            member.Name,
-                            member.DeclaringType.FullName
-                        ),
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .Update_NullReturnValueForNonNullableMember(
+                                member.Name,
+                                member.DeclaringType.FullName
+                            ),
                         null
                     );
                 }
@@ -735,12 +740,16 @@ namespace System.Data.Mapping.Update.Internal
                     {
                         Type userClrType = clrEnumType ?? clrType;
                         throw EntityUtil.Update(
-                            System.Data.Entity.Strings.Update_ReturnValueHasUnexpectedType(
-                                value.GetType().FullName,
-                                userClrType.FullName,
-                                member.Name,
-                                member.DeclaringType.FullName
-                            ),
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .Update_ReturnValueHasUnexpectedType(
+                                    value.GetType().FullName,
+                                    userClrType.FullName,
+                                    member.Name,
+                                    member.DeclaringType.FullName
+                                ),
                             e
                         );
                     }
@@ -894,8 +903,10 @@ namespace System.Data.Mapping.Update.Internal
                 }
 
                 // add function parameters
-                IEnumerable<KeyValuePair<string, TypeUsage>> functionParams =
-                    functionMapping.Function.Parameters.Select(
+                IEnumerable<KeyValuePair<string, TypeUsage>> functionParams = functionMapping
+                    .Function
+                    .Parameters
+                    .Select(
                         paramInfo =>
                             new KeyValuePair<string, TypeUsage>(paramInfo.Name, paramInfo.TypeUsage)
                     );

@@ -113,9 +113,9 @@ namespace Mono.Linker.Tests.Extensions
             string name
         )
         {
-            return provider.CustomAttributes.Any(
-                ca => ca.AttributeType.Resolve().DerivesFrom(name)
-            );
+            return provider
+                .CustomAttributes
+                .Any(ca => ca.AttributeType.Resolve().DerivesFrom(name));
         }
 
         public static bool DerivesFrom(this TypeDefinition type, string baseTypeName)
@@ -245,9 +245,10 @@ namespace Mono.Linker.Tests.Extensions
                         .Append(", ");
 
                 sb.Append(
-                    method.Parameters[
-                        method.Parameters.Count - 1
-                    ].ParameterType.GetDisplayNameWithoutNamespace()
+                    method
+                        .Parameters[method.Parameters.Count - 1]
+                        .ParameterType
+                        .GetDisplayNameWithoutNamespace()
                 );
             }
 

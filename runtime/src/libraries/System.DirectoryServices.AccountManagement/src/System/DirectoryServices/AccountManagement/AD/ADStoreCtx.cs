@@ -2726,11 +2726,9 @@ namespace System.DirectoryServices.AccountManagement
 
                     ContextOptions remoteOptions = DefaultContextOptions.ADDefaultContextOption;
 
-                    PrincipalContext remoteCtx = SDSCache.Domain.GetContext(
-                        domainName,
-                        this.credentials,
-                        remoteOptions
-                    );
+                    PrincipalContext remoteCtx = SDSCache
+                        .Domain
+                        .GetContext(domainName, this.credentials, remoteOptions);
                     foreignStoreCtx = remoteCtx.QueryCtx;
                 }
 

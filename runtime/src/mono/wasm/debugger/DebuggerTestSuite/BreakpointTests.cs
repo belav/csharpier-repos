@@ -1486,12 +1486,12 @@ namespace DebuggerTests
                     "BoundaryBp",
                     2
                 );
-                var line_decorated_fun = bp_decorated_fun.Value["locations"][0][
-                    "lineNumber"
-                ].Value<int>();
-                var col_decorated_fun = bp_decorated_fun.Value["locations"][0][
-                    "columnNumber"
-                ].Value<int>();
+                var line_decorated_fun = bp_decorated_fun
+                    .Value["locations"][0]["lineNumber"]
+                    .Value<int>();
+                var col_decorated_fun = bp_decorated_fun
+                    .Value["locations"][0]["columnNumber"]
+                    .Value<int>();
                 await SendCommandAndCheck(
                     null,
                     debuggingAction,

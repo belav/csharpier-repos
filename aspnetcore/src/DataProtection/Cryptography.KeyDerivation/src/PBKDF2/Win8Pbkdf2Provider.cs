@@ -112,12 +112,9 @@ internal sealed unsafe class Win8Pbkdf2Provider : IPbkdf2Provider
                 int cbPasswordBufferUsed; // we're not filling the entire buffer, just a partial buffer
                 fixed (char* pszPassword = password)
                 {
-                    cbPasswordBufferUsed = Encoding.UTF8.GetBytes(
-                        pszPassword,
-                        password.Length,
-                        pbPasswordBuffer,
-                        cbPasswordBuffer
-                    );
+                    cbPasswordBufferUsed = Encoding
+                        .UTF8
+                        .GetBytes(pszPassword, password.Length, pbPasswordBuffer, cbPasswordBuffer);
                 }
 
                 return PasswordToPbkdfKeyHandleStep2(

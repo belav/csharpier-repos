@@ -102,10 +102,9 @@ internal partial class ConvertInterpolatedStringToRawStringProvider
 
                 if (
                     canBeSingleLine
-                    && !document.Text.AreOnSameLine(
-                        interpolation.OpenBraceToken,
-                        interpolation.CloseBraceToken
-                    )
+                    && !document
+                        .Text
+                        .AreOnSameLine(interpolation.OpenBraceToken, interpolation.CloseBraceToken)
                 )
                     canBeSingleLine = false;
             }
@@ -299,9 +298,10 @@ internal partial class ConvertInterpolatedStringToRawStringProvider
                     ? CleanInterpolatedString(rawStringExpression, cancellationToken)
                     : rawStringExpression;
 
-            var startLine = document.Text.Lines.GetLineFromPosition(
-                GetAnchorNode(document, stringExpression).SpanStart
-            );
+            var startLine = document
+                .Text
+                .Lines
+                .GetLineFromPosition(GetAnchorNode(document, stringExpression).SpanStart);
             var rootAnchorIndentation = GetIndentationStringForToken(
                 document.Text,
                 formattingOptions,
@@ -445,7 +445,8 @@ internal partial class ConvertInterpolatedStringToRawStringProvider
         int start
     )
     {
-        var interpolation = stringExpression.Contents
+        var interpolation = stringExpression
+            .Contents
             .OfType<InterpolationSyntax>()
             .Single(i => i.Span.Contains(start));
         var interpolationLine = text.Lines.GetLineFromPosition(interpolation.SpanStart);

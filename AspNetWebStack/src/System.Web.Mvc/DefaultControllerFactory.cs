@@ -277,10 +277,9 @@ namespace System.Web.Mvc
             Type match;
             if (
                 routeData != null
-                && routeData.DataTokens.TryGetValue(
-                    RouteDataTokenKeys.Namespaces,
-                    out routeNamespacesObj
-                )
+                && routeData
+                    .DataTokens
+                    .TryGetValue(RouteDataTokenKeys.Namespaces, out routeNamespacesObj)
             )
             {
                 IEnumerable<string> routeNamespaces = routeNamespacesObj as IEnumerable<string>;

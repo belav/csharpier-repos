@@ -1917,12 +1917,9 @@ namespace System.Xml
 
         public override short[] ReadInt16Array(string localName, string namespaceUri)
         {
-            return Int16ArrayHelperWithString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                _quotas.MaxArrayLength
-            );
+            return Int16ArrayHelperWithString
+                .Instance
+                .ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
         }
 
         public override short[] ReadInt16Array(
@@ -1930,22 +1927,16 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return Int16ArrayHelperWithDictionaryString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                _quotas.MaxArrayLength
-            );
+            return Int16ArrayHelperWithDictionaryString
+                .Instance
+                .ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
         }
 
         public override int[] ReadInt32Array(string localName, string namespaceUri)
         {
-            return Int32ArrayHelperWithString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                _quotas.MaxArrayLength
-            );
+            return Int32ArrayHelperWithString
+                .Instance
+                .ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
         }
 
         public override int[] ReadInt32Array(
@@ -1953,22 +1944,16 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return Int32ArrayHelperWithDictionaryString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                _quotas.MaxArrayLength
-            );
+            return Int32ArrayHelperWithDictionaryString
+                .Instance
+                .ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
         }
 
         public override long[] ReadInt64Array(string localName, string namespaceUri)
         {
-            return Int64ArrayHelperWithString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                _quotas.MaxArrayLength
-            );
+            return Int64ArrayHelperWithString
+                .Instance
+                .ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
         }
 
         public override long[] ReadInt64Array(
@@ -1976,22 +1961,16 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return Int64ArrayHelperWithDictionaryString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                _quotas.MaxArrayLength
-            );
+            return Int64ArrayHelperWithDictionaryString
+                .Instance
+                .ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
         }
 
         public override float[] ReadSingleArray(string localName, string namespaceUri)
         {
-            return SingleArrayHelperWithString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                _quotas.MaxArrayLength
-            );
+            return SingleArrayHelperWithString
+                .Instance
+                .ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
         }
 
         public override float[] ReadSingleArray(
@@ -1999,22 +1978,16 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return SingleArrayHelperWithDictionaryString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                _quotas.MaxArrayLength
-            );
+            return SingleArrayHelperWithDictionaryString
+                .Instance
+                .ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
         }
 
         public override double[] ReadDoubleArray(string localName, string namespaceUri)
         {
-            return DoubleArrayHelperWithString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                _quotas.MaxArrayLength
-            );
+            return DoubleArrayHelperWithString
+                .Instance
+                .ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
         }
 
         public override double[] ReadDoubleArray(
@@ -2022,22 +1995,16 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return DoubleArrayHelperWithDictionaryString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                _quotas.MaxArrayLength
-            );
+            return DoubleArrayHelperWithDictionaryString
+                .Instance
+                .ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
         }
 
         public override decimal[] ReadDecimalArray(string localName, string namespaceUri)
         {
-            return DecimalArrayHelperWithString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                _quotas.MaxArrayLength
-            );
+            return DecimalArrayHelperWithString
+                .Instance
+                .ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
         }
 
         public override decimal[] ReadDecimalArray(
@@ -2045,22 +2012,16 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return DecimalArrayHelperWithDictionaryString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                _quotas.MaxArrayLength
-            );
+            return DecimalArrayHelperWithDictionaryString
+                .Instance
+                .ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
         }
 
         public override DateTime[] ReadDateTimeArray(string localName, string namespaceUri)
         {
-            return DateTimeArrayHelperWithString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                _quotas.MaxArrayLength
-            );
+            return DateTimeArrayHelperWithString
+                .Instance
+                .ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
         }
 
         public override DateTime[] ReadDateTimeArray(
@@ -2068,22 +2029,16 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return DateTimeArrayHelperWithDictionaryString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                _quotas.MaxArrayLength
-            );
+            return DateTimeArrayHelperWithDictionaryString
+                .Instance
+                .ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
         }
 
         public override Guid[] ReadGuidArray(string localName, string namespaceUri)
         {
-            return GuidArrayHelperWithString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                _quotas.MaxArrayLength
-            );
+            return GuidArrayHelperWithString
+                .Instance
+                .ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
         }
 
         public override Guid[] ReadGuidArray(
@@ -2091,22 +2046,16 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return GuidArrayHelperWithDictionaryString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                _quotas.MaxArrayLength
-            );
+            return GuidArrayHelperWithDictionaryString
+                .Instance
+                .ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
         }
 
         public override TimeSpan[] ReadTimeSpanArray(string localName, string namespaceUri)
         {
-            return TimeSpanArrayHelperWithString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                _quotas.MaxArrayLength
-            );
+            return TimeSpanArrayHelperWithString
+                .Instance
+                .ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
         }
 
         public override TimeSpan[] ReadTimeSpanArray(
@@ -2114,12 +2063,9 @@ namespace System.Xml
             XmlDictionaryString namespaceUri
         )
         {
-            return TimeSpanArrayHelperWithDictionaryString.Instance.ReadArray(
-                this,
-                localName,
-                namespaceUri,
-                _quotas.MaxArrayLength
-            );
+            return TimeSpanArrayHelperWithDictionaryString
+                .Instance
+                .ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
         }
 
         public string GetOpenElements()
@@ -2153,10 +2099,9 @@ namespace System.Xml
             byte[] prefixBuffer = _node.Prefix.GetString(out prefixOffset, out prefixLength);
             int localNameOffset,
                 localNameLength;
-            byte[] localNameBuffer = _node.LocalName.GetString(
-                out localNameOffset,
-                out localNameLength
-            );
+            byte[] localNameBuffer = _node
+                .LocalName
+                .GetString(out localNameOffset, out localNameLength);
             writer.WriteStartElement(
                 prefixBuffer,
                 prefixOffset,
@@ -2177,16 +2122,14 @@ namespace System.Xml
             {
                 int prefixOffset,
                     prefixLength;
-                byte[] prefixBuffer = attributeNode.Prefix.GetString(
-                    out prefixOffset,
-                    out prefixLength
-                );
+                byte[] prefixBuffer = attributeNode
+                    .Prefix
+                    .GetString(out prefixOffset, out prefixLength);
                 int localNameOffset,
                     localNameLength;
-                byte[] localNameBuffer = attributeNode.LocalName.GetString(
-                    out localNameOffset,
-                    out localNameLength
-                );
+                byte[] localNameBuffer = attributeNode
+                    .LocalName
+                    .GetString(out localNameOffset, out localNameLength);
                 writer.WriteStartAttribute(
                     prefixBuffer,
                     prefixOffset,
@@ -2203,10 +2146,10 @@ namespace System.Xml
                 Debug.Assert(qnameType == QNameType.Xmlns);
                 int prefixOffset,
                     prefixLength;
-                byte[] prefixBuffer = attributeNode.Namespace.Prefix.GetString(
-                    out prefixOffset,
-                    out prefixLength
-                );
+                byte[] prefixBuffer = attributeNode
+                    .Namespace
+                    .Prefix
+                    .GetString(out prefixOffset, out prefixLength);
                 int nsOffset,
                     nsLength;
                 byte[] nsBuffer = attributeNode.Namespace.Uri.GetString(out nsOffset, out nsLength);
@@ -2228,10 +2171,9 @@ namespace System.Xml
             byte[] prefixBuffer = _node.Prefix.GetString(out prefixOffset, out prefixLength);
             int localNameOffset,
                 localNameLength;
-            byte[] localNameBuffer = _node.LocalName.GetString(
-                out localNameOffset,
-                out localNameLength
-            );
+            byte[] localNameBuffer = _node
+                .LocalName
+                .GetString(out localNameOffset, out localNameLength);
             writer.WriteEndElement(
                 prefixBuffer,
                 prefixOffset,

@@ -74,11 +74,11 @@ namespace System.Security.Policy
         public SecurityElement ToXml(PolicyLevel level)
         {
             SecurityElement root = new SecurityElement("IMembershipCondition");
-            System.Security.Util.XMLUtil.AddClassAttribute(
-                root,
-                this.GetType(),
-                this.GetType().FullName
-            );
+            System
+                .Security
+                .Util
+                .XMLUtil
+                .AddClassAttribute(root, this.GetType(), this.GetType().FullName);
             root.AddAttribute("version", "1");
             return root;
         }

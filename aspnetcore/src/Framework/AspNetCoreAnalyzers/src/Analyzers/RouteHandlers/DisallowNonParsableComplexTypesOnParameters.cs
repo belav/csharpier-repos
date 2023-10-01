@@ -53,9 +53,9 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
             }
 
             var syntax = (ParameterSyntax)
-                handlerDelegateParameter.DeclaringSyntaxReferences[0].GetSyntax(
-                    context.CancellationToken
-                );
+                handlerDelegateParameter
+                    .DeclaringSyntaxReferences[0]
+                    .GetSyntax(context.CancellationToken);
             var location = syntax.GetLocation();
 
             if (
@@ -118,13 +118,13 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
             // the route pattern or not. If it is and it has a custom [FromRoute(Name = "blah")] attribute then
             // RouteParameterName and we'll be able to find it by looking it up in the route pattern (thus confirming
             // that it is a route parameter).
-            var resolvedParameter = routeUsage.UsageContext.ResolvedParameters.FirstOrDefault(
-                rp => rp.Symbol.Name == handlerDelegateParameter.Name
-            );
-            var isRouteParameter = routeUsage.RoutePattern.TryGetRouteParameter(
-                resolvedParameter.RouteParameterName,
-                out var _
-            );
+            var resolvedParameter = routeUsage
+                .UsageContext
+                .ResolvedParameters
+                .FirstOrDefault(rp => rp.Symbol.Name == handlerDelegateParameter.Name);
+            var isRouteParameter = routeUsage
+                .RoutePattern
+                .TryGetRouteParameter(resolvedParameter.RouteParameterName, out var _);
             return isRouteParameter;
         }
 

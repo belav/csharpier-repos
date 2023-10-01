@@ -276,9 +276,9 @@ namespace Mono.Cecil
             {
                 InterfaceImplRow intfsRow = intfsTable[i];
                 TypeDefinition owner = GetTypeDefAt(intfsRow.Class);
-                owner.Interfaces.Add(
-                    GetTypeDefOrRef(intfsRow.Interface, new GenericContext(owner))
-                );
+                owner
+                    .Interfaces
+                    .Add(GetTypeDefOrRef(intfsRow.Interface, new GenericContext(owner)));
             }
         }
 
@@ -300,12 +300,14 @@ namespace Mono.Cecil
                             owner.Overrides.Add(GetMethodDefAt(implRow.MethodDeclaration.RID));
                             break;
                         case TokenType.MemberRef:
-                            owner.Overrides.Add(
-                                (MethodReference)GetMemberRefAt(
-                                    implRow.MethodDeclaration.RID,
-                                    new GenericContext(owner)
-                                )
-                            );
+                            owner
+                                .Overrides
+                                .Add(
+                                    (MethodReference)GetMemberRefAt(
+                                        implRow.MethodDeclaration.RID,
+                                        new GenericContext(owner)
+                                    )
+                                );
                             break;
                     }
                 }

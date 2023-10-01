@@ -74,19 +74,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 _subjectBuffer.ChangedLowPriority += OnTextBufferChanged;
 
                 foreach (
-                    var view in session._textBufferAssociatedViewService.GetAssociatedTextViews(
-                        _subjectBuffer
-                    )
+                    var view in session
+                        ._textBufferAssociatedViewService
+                        .GetAssociatedTextViews(_subjectBuffer)
                 )
                 {
                     ConnectToView(view);
                 }
 
-                session.UndoManager.CreateStartRenameUndoTransaction(
-                    workspace,
-                    subjectBuffer,
-                    session
-                );
+                session
+                    .UndoManager
+                    .CreateStartRenameUndoTransaction(workspace, subjectBuffer, session);
 
                 _isBufferReadOnly = new DynamicReadOnlyRegionQuery(
                     isEdit => !_session._isApplyingEdit
@@ -131,8 +129,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 {
                     // We will compute the new read only regions to be all spans that are not currently in an editable span
                     var editableSpans = GetEditableSpansForSnapshot(_subjectBuffer.CurrentSnapshot);
-                    var entireBufferSpan =
-                        _subjectBuffer.CurrentSnapshot.GetSnapshotSpanCollection();
+                    var entireBufferSpan = _subjectBuffer
+                        .CurrentSnapshot
+                        .GetSnapshotSpanCollection();
                     var newReadOnlySpans = NormalizedSnapshotSpanCollection.Difference(
                         entireBufferSpan,
                         new NormalizedSnapshotSpanCollection(editableSpans)
@@ -201,14 +200,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             private void RaiseSpansChanged() => this.SpansChanged?.Invoke();
 
             internal IEnumerable<RenameTrackingSpan> GetRenameTrackingSpans() =>
-                _referenceSpanToLinkedRenameSpanMap.Values
+                _referenceSpanToLinkedRenameSpanMap
+                    .Values
                     .Where(r => r.Type != RenameSpanKind.None)
                     .Concat(_conflictResolutionRenameTrackingSpans);
 
             internal IEnumerable<SnapshotSpan> GetEditableSpansForSnapshot(
                 ITextSnapshot snapshot
             ) =>
-                _referenceSpanToLinkedRenameSpanMap.Values
+                _referenceSpanToLinkedRenameSpanMap
+                    .Values
                     .Where(r => r.Type != RenameSpanKind.None)
                     .Select(r => r.TrackingSpan.GetSpan(snapshot));
 
@@ -231,17 +232,21 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                     foreach (var span in spans)
                     {
                         var document = _baseDocuments.First();
-                        var renameableSpan = _session._renameInfo.GetReferenceEditSpan(
-                            new InlineRenameLocation(document, span),
-                            GetTriggerText(document, span),
-                            CancellationToken.None
-                        );
+                        var renameableSpan = _session
+                            ._renameInfo
+                            .GetReferenceEditSpan(
+                                new InlineRenameLocation(document, span),
+                                GetTriggerText(document, span),
+                                CancellationToken.None
+                            );
                         var trackingSpan = new RenameTrackingSpan(
-                            _subjectBuffer.CurrentSnapshot.CreateTrackingSpan(
-                                renameableSpan.ToSpan(),
-                                SpanTrackingMode.EdgeInclusive,
-                                TrackingFidelityMode.Forward
-                            ),
+                            _subjectBuffer
+                                .CurrentSnapshot
+                                .CreateTrackingSpan(
+                                    renameableSpan.ToSpan(),
+                                    SpanTrackingMode.EdgeInclusive,
+                                    TrackingFidelityMode.Forward
+                                ),
                             RenameSpanKind.Reference
                         );
 
@@ -326,16 +331,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                     _activeSpan = _referenceSpanToLinkedRenameSpanMap
                         .Where(
                             kvp =>
-                                kvp.Value.TrackingSpan
+                                kvp.Value
+                                    .TrackingSpan
                                     .GetSpan(args.After)
                                     .Contains(boundingIntersectionSpan)
                         )
                         .Single()
                         .Key;
-                    _session.UndoManager.OnTextChanged(
-                        this.ActiveTextView.Selection,
-                        singleTrackingSpanTouched
-                    );
+                    _session
+                        .UndoManager
+                        .OnTextChanged(this.ActiveTextView.Selection, singleTrackingSpanTouched);
                 }
             }
 
@@ -347,12 +352,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             {
                 // in tests `ActiveTextview` could be null so don't depend on it
                 return ActiveTextView == null
-                    || _referenceSpanToLinkedRenameSpanMap.Values
+                    || _referenceSpanToLinkedRenameSpanMap
+                        .Values
                         .Select(
                             renameTrackingSpan =>
-                                renameTrackingSpan.TrackingSpan.GetSpan(
-                                    _subjectBuffer.CurrentSnapshot
-                                )
+                                renameTrackingSpan
+                                    .TrackingSpan
+                                    .GetSpan(_subjectBuffer.CurrentSnapshot)
                         )
                         .All(
                             s =>
@@ -374,22 +380,27 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                     return;
                 }
 
-                _session.UndoManager.ApplyCurrentState(
-                    _subjectBuffer,
-                    s_propagateSpansEditTag,
-                    _referenceSpanToLinkedRenameSpanMap.Values
-                        .Where(r => r.Type != RenameSpanKind.None)
-                        .Select(r => r.TrackingSpan)
-                );
+                _session
+                    .UndoManager
+                    .ApplyCurrentState(
+                        _subjectBuffer,
+                        s_propagateSpansEditTag,
+                        _referenceSpanToLinkedRenameSpanMap
+                            .Values
+                            .Where(r => r.Type != RenameSpanKind.None)
+                            .Select(r => r.TrackingSpan)
+                    );
 
                 if (updateSelection && _activeSpan.HasValue && this.ActiveTextView != null)
                 {
                     var snapshot = _subjectBuffer.CurrentSnapshot;
-                    _session.UndoManager.UpdateSelection(
-                        this.ActiveTextView,
-                        _subjectBuffer,
-                        _referenceSpanToLinkedRenameSpanMap[_activeSpan.Value].TrackingSpan
-                    );
+                    _session
+                        .UndoManager
+                        .UpdateSelection(
+                            this.ActiveTextView,
+                            _subjectBuffer,
+                            _referenceSpanToLinkedRenameSpanMap[_activeSpan.Value].TrackingSpan
+                        );
                 }
             }
 
@@ -448,24 +459,30 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                     // TODO: why does the following line stop responding when uncommented?
                     // newDocument.GetTextChangesAsync(this.baseDocuments.Single(d => d.Id == newDocument.Id), cancellationToken).WaitAndGetResult(cancellationToken).Reverse();
 
-                    _session.UndoManager.CreateConflictResolutionUndoTransaction(
-                        _subjectBuffer,
-                        () =>
-                        {
-                            using var edit = _subjectBuffer.CreateEdit(
-                                EditOptions.DefaultMinimalChange,
-                                null,
-                                s_propagateSpansEditTag
-                            );
-
-                            foreach (var change in changes)
+                    _session
+                        .UndoManager
+                        .CreateConflictResolutionUndoTransaction(
+                            _subjectBuffer,
+                            () =>
                             {
-                                edit.Replace(change.Span.Start, change.Span.Length, change.NewText);
-                            }
+                                using var edit = _subjectBuffer.CreateEdit(
+                                    EditOptions.DefaultMinimalChange,
+                                    null,
+                                    s_propagateSpansEditTag
+                                );
 
-                            edit.ApplyAndLogExceptions();
-                        }
-                    );
+                                foreach (var change in changes)
+                                {
+                                    edit.Replace(
+                                        change.Span.Start,
+                                        change.Span.Length,
+                                        change.NewText
+                                    );
+                                }
+
+                                edit.ApplyAndLogExceptions();
+                            }
+                        );
 
                     // 2. We want to update referenceSpanToLinkedRenameSpanMap where spans were affected by conflict resolution.
                     // We also need to add the remaining document edits to conflictResolutionRenameTrackingSpans
@@ -544,11 +561,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                             linkedDocumentsMightConflict = false;
 
                             // Only need to check the new span's content
-                            var firstDocumentNewText = conflictResolution.NewSolution
+                            var firstDocumentNewText = conflictResolution
+                                .NewSolution
                                 .GetDocument(firstDocumentReplacements.document.Id)
                                 .GetTextSynchronously(cancellationToken);
-                            var firstDocumentNewSpanText =
-                                firstDocumentReplacements.Item2.SelectAsArray(
+                            var firstDocumentNewSpanText = firstDocumentReplacements
+                                .Item2
+                                .SelectAsArray(
                                     replacement =>
                                         firstDocumentNewText.ToString(replacement.NewSpan)
                                 );
@@ -562,7 +581,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                                     continue;
                                 }
 
-                                var documentNewText = conflictResolution.NewSolution
+                                var documentNewText = conflictResolution
+                                    .NewSolution
                                     .GetDocument(document.Id)
                                     .GetTextSynchronously(cancellationToken);
                                 for (var i = 0; i < replacements.Length; i++)
@@ -607,10 +627,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
                         // Show merge conflicts comments as unresolvable conflicts, and do not
                         // show any other rename-related spans that overlap a merge conflict comment.
-                        mergeResult.MergeConflictCommentSpans.TryGetValue(
-                            document.Id,
-                            out var mergeConflictComments
-                        );
+                        mergeResult
+                            .MergeConflictCommentSpans
+                            .TryGetValue(document.Id, out var mergeConflictComments);
                         mergeConflictComments ??=
                             SpecializedCollections.EmptyEnumerable<TextSpan>();
 
@@ -620,11 +639,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
                             _conflictResolutionRenameTrackingSpans.Add(
                                 new RenameTrackingSpan(
-                                    _subjectBuffer.CurrentSnapshot.CreateTrackingSpan(
-                                        conflict.ToSpan(),
-                                        SpanTrackingMode.EdgeInclusive,
-                                        TrackingFidelityMode.Forward
-                                    ),
+                                    _subjectBuffer
+                                        .CurrentSnapshot
+                                        .CreateTrackingSpan(
+                                            conflict.ToSpan(),
+                                            SpanTrackingMode.EdgeInclusive,
+                                            TrackingFidelityMode.Forward
+                                        ),
                                     RenameSpanKind.UnresolvedConflict
                                 )
                             );
@@ -641,17 +662,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                                 && kind != RenameSpanKind.Complexified
                             )
                             {
-                                var linkedRenameSpan = _session._renameInfo.GetConflictEditSpan(
-                                    new InlineRenameLocation(newDocument, replacement.NewSpan),
-                                    GetTriggerText(newDocument, replacement.NewSpan),
-                                    GetWithoutAttributeSuffix(
-                                        _session.ReplacementText,
-                                        document
-                                            .GetLanguageService<LanguageService.ISyntaxFactsService>()
-                                            .IsCaseSensitive
-                                    ),
-                                    cancellationToken
-                                );
+                                var linkedRenameSpan = _session
+                                    ._renameInfo
+                                    .GetConflictEditSpan(
+                                        new InlineRenameLocation(newDocument, replacement.NewSpan),
+                                        GetTriggerText(newDocument, replacement.NewSpan),
+                                        GetWithoutAttributeSuffix(
+                                            _session.ReplacementText,
+                                            document
+                                                .GetLanguageService<LanguageService.ISyntaxFactsService>()
+                                                .IsCaseSensitive
+                                        ),
+                                        cancellationToken
+                                    );
 
                                 if (linkedRenameSpan.HasValue)
                                 {
@@ -664,11 +687,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                                         _referenceSpanToLinkedRenameSpanMap[
                                             replacement.OriginalSpan
                                         ] = new RenameTrackingSpan(
-                                            _subjectBuffer.CurrentSnapshot.CreateTrackingSpan(
-                                                linkedRenameSpan.Value.ToSpan(),
-                                                SpanTrackingMode.EdgeInclusive,
-                                                TrackingFidelityMode.Forward
-                                            ),
+                                            _subjectBuffer
+                                                .CurrentSnapshot
+                                                .CreateTrackingSpan(
+                                                    linkedRenameSpan.Value.ToSpan(),
+                                                    SpanTrackingMode.EdgeInclusive,
+                                                    TrackingFidelityMode.Forward
+                                                ),
                                             kind
                                         );
                                     }
@@ -686,9 +711,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
                                     if (
                                         _activeSpan.HasValue
-                                        && _activeSpan.Value.IntersectsWith(
-                                            replacement.OriginalSpan
-                                        )
+                                        && _activeSpan
+                                            .Value
+                                            .IntersectsWith(replacement.OriginalSpan)
                                     )
                                     {
                                         _activeSpan = null;
@@ -705,11 +730,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                                 {
                                     _conflictResolutionRenameTrackingSpans.Add(
                                         new RenameTrackingSpan(
-                                            _subjectBuffer.CurrentSnapshot.CreateTrackingSpan(
-                                                replacement.NewSpan.ToSpan(),
-                                                SpanTrackingMode.EdgeInclusive,
-                                                TrackingFidelityMode.Forward
-                                            ),
+                                            _subjectBuffer
+                                                .CurrentSnapshot
+                                                .CreateTrackingSpan(
+                                                    replacement.NewSpan.ToSpan(),
+                                                    SpanTrackingMode.EdgeInclusive,
+                                                    TrackingFidelityMode.Forward
+                                                ),
                                             kind
                                         )
                                     );
@@ -795,8 +822,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                             return textChanges;
                         }
 
-                        var textDiffService =
-                            oldDocument.Project.Solution.Services.GetService<IDocumentTextDifferencingService>();
+                        var textDiffService = oldDocument
+                            .Project
+                            .Solution
+                            .Services
+                            .GetService<IDocumentTextDifferencingService>();
                         return await textDiffService
                             .GetTextChangesAsync(oldDocument, newDocument, cancellationToken)
                             .ConfigureAwait(false);
@@ -818,9 +848,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             {
                 _session._threadingContext.ThrowIfNotOnUIThread();
 
-                var textDiffService =
-                    preMergeDocument.Project.Solution.Services.GetService<IDocumentTextDifferencingService>();
-                var contentType = preMergeDocument.Project.Services
+                var textDiffService = preMergeDocument
+                    .Project
+                    .Solution
+                    .Services
+                    .GetService<IDocumentTextDifferencingService>();
+                var contentType = preMergeDocument
+                    .Project
+                    .Services
                     .GetService<IContentTypeLanguageService>()
                     .GetDefaultContentType();
 
@@ -853,11 +888,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                             preMergeDocumentTextString,
                             contentType
                         );
-                    var trackingSpan = buffer.CurrentSnapshot.CreateTrackingSpan(
-                        replacement.NewSpan.ToSpan(),
-                        SpanTrackingMode.EdgeExclusive,
-                        TrackingFidelityMode.Forward
-                    );
+                    var trackingSpan = buffer
+                        .CurrentSnapshot
+                        .CreateTrackingSpan(
+                            replacement.NewSpan.ToSpan(),
+                            SpanTrackingMode.EdgeExclusive,
+                            TrackingFidelityMode.Forward
+                        );
 
                     using (
                         var edit = _subjectBuffer.CreateEdit(
@@ -938,7 +975,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                     var selection = textView.Selection;
                     var snapshot = openTextBufferManager._subjectBuffer.CurrentSnapshot;
 
-                    var containingSpans = openTextBufferManager._referenceSpanToLinkedRenameSpanMap
+                    var containingSpans = openTextBufferManager
+                        ._referenceSpanToLinkedRenameSpanMap
                         .Select(kvp =>
                         {
                             // GetSpanInView() can return an empty collection if the tracking span isn't mapped to anything
@@ -996,9 +1034,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                         var anchorPoint = new VirtualSnapshotPoint(
                             textView.TextSnapshot,
                             _anchor.HasValue
-                            && _openTextBufferManager._referenceSpanToLinkedRenameSpanMap.Keys.Any(
-                                s => s.OverlapsWith(anchorSpan)
-                            )
+                            && _openTextBufferManager
+                                ._referenceSpanToLinkedRenameSpanMap
+                                .Keys
+                                .Any(s => s.OverlapsWith(anchorSpan))
                                 ? GetNewEndpoint(_anchorSpan) - _anchor.Value
                                 : selection.AnchorPoint.Position
                         );
@@ -1007,9 +1046,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                         var activePoint = new VirtualSnapshotPoint(
                             textView.TextSnapshot,
                             _active.HasValue
-                            && _openTextBufferManager._referenceSpanToLinkedRenameSpanMap.Keys.Any(
-                                s => s.OverlapsWith(activeSpan)
-                            )
+                            && _openTextBufferManager
+                                ._referenceSpanToLinkedRenameSpanMap
+                                .Keys
+                                .Any(s => s.OverlapsWith(activeSpan))
                                 ? GetNewEndpoint(_activeSpan) - _active.Value
                                 : selection.ActivePoint.Position
                         );
@@ -1021,16 +1061,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 private SnapshotPoint GetNewEndpoint(TextSpan span)
                 {
                     var snapshot = _openTextBufferManager._subjectBuffer.CurrentSnapshot;
-                    var endPoint =
-                        _openTextBufferManager._referenceSpanToLinkedRenameSpanMap.TryGetValue(
-                            span,
-                            out var renameTrackingSpan
-                        )
-                            ? renameTrackingSpan.TrackingSpan.GetEndPoint(snapshot)
-                            : _openTextBufferManager._referenceSpanToLinkedRenameSpanMap
-                                .First(kvp => kvp.Key.OverlapsWith(span))
-                                .Value.TrackingSpan.GetEndPoint(snapshot);
-                    return _openTextBufferManager.ActiveTextView.BufferGraph
+                    var endPoint = _openTextBufferManager
+                        ._referenceSpanToLinkedRenameSpanMap
+                        .TryGetValue(span, out var renameTrackingSpan)
+                        ? renameTrackingSpan.TrackingSpan.GetEndPoint(snapshot)
+                        : _openTextBufferManager
+                            ._referenceSpanToLinkedRenameSpanMap
+                            .First(kvp => kvp.Key.OverlapsWith(span))
+                            .Value
+                            .TrackingSpan
+                            .GetEndPoint(snapshot);
+                    return _openTextBufferManager
+                        .ActiveTextView
+                        .BufferGraph
                         .MapUpToBuffer(
                             endPoint,
                             PointTrackingMode.Positive,

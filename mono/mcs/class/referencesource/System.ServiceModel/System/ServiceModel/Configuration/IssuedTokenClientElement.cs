@@ -104,9 +104,11 @@ namespace System.ServiceModel.Configuration
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
+                    );
             }
             if (null == from)
             {
@@ -129,9 +131,9 @@ namespace System.ServiceModel.Configuration
 #pragma warning suppress 56506 //Microsoft; from.ElementInformation.Properties[ConfigurationStrings.LocalIssuerChannelBehaviors] can never be null (underlying configuration system guarantees)
             if (
                 PropertyValueOrigin.Default
-                != from.ElementInformation.Properties[
-                    ConfigurationStrings.LocalIssuerChannelBehaviors
-                ].ValueOrigin
+                != from.ElementInformation
+                    .Properties[ConfigurationStrings.LocalIssuerChannelBehaviors]
+                    .ValueOrigin
             )
             {
                 this.LocalIssuerChannelBehaviors = from.LocalIssuerChannelBehaviors;
@@ -139,9 +141,9 @@ namespace System.ServiceModel.Configuration
 #pragma warning suppress 56506 //Microsoft; from.ElementInformation.Properties[ConfigurationStrings.IssuerChannelBehaviors] can never be null (underlying configuration system guarantees)
             if (
                 PropertyValueOrigin.Default
-                != from.ElementInformation.Properties[
-                    ConfigurationStrings.IssuerChannelBehaviors
-                ].ValueOrigin
+                != from.ElementInformation
+                    .Properties[ConfigurationStrings.IssuerChannelBehaviors]
+                    .ValueOrigin
             )
             {
                 foreach (IssuedTokenClientBehaviorsElement element in from.IssuerChannelBehaviors)
@@ -188,9 +190,9 @@ namespace System.ServiceModel.Configuration
             }
             if (
                 PropertyValueOrigin.Default
-                != this.ElementInformation.Properties[
-                    ConfigurationStrings.IssuerChannelBehaviors
-                ].ValueOrigin
+                != this.ElementInformation
+                    .Properties[ConfigurationStrings.IssuerChannelBehaviors]
+                    .ValueOrigin
             )
             {
                 foreach (
@@ -206,10 +208,9 @@ namespace System.ServiceModel.Configuration
                             this.EvaluationContext,
                             issuerBehaviors
                         );
-                        issuedToken.IssuerChannelBehaviors.Add(
-                            new Uri(issuerBehaviorElement.IssuerAddress),
-                            issuerBehaviors
-                        );
+                        issuedToken
+                            .IssuerChannelBehaviors
+                            .Add(new Uri(issuerBehaviorElement.IssuerAddress), issuerBehaviors);
                     }
                 }
             }

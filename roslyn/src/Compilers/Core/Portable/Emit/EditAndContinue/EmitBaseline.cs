@@ -120,7 +120,9 @@ namespace Microsoft.CodeAnalysis.Emit
                 );
             }
 
-            var hasPortablePdb = module.Module.PEReaderOpt
+            var hasPortablePdb = module
+                .Module
+                .PEReaderOpt
                 .ReadDebugDirectory()
                 .Any(static entry => entry.IsPortableCodeView);
 

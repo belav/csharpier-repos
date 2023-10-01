@@ -36,14 +36,16 @@ namespace System.ServiceModel.Configuration
             DelegatingHandlerElement delegatingHandlerElement = element as DelegatingHandlerElement;
             if (delegatingHandlerElement == null)
             {
-                throw FxTrace.Exception.Argument(
-                    "element",
-                    SR.GetString(
-                        SR.InputMustBeDelegatingHandlerElementError,
-                        typeof(ConfigurationElement).Name,
-                        typeof(DelegatingHandlerElement).Name
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .Argument(
+                        "element",
+                        SR.GetString(
+                            SR.InputMustBeDelegatingHandlerElementError,
+                            typeof(ConfigurationElement).Name,
+                            typeof(DelegatingHandlerElement).Name
+                        )
+                    );
             }
 
             return delegatingHandlerElement.Id;

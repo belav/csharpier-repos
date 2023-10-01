@@ -1839,9 +1839,11 @@ namespace System.Management
             {
                 try
                 {
-                    return System.Runtime.InteropServices.Marshal.SecureStringToBSTR(
-                        securePassword
-                    );
+                    return System
+                        .Runtime
+                        .InteropServices
+                        .Marshal
+                        .SecureStringToBSTR(securePassword);
                 }
                 catch (OutOfMemoryException)
                 {

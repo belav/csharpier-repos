@@ -121,10 +121,9 @@ namespace System.Web.Mvc.Html
                     {
                         itemType = item.GetType();
                     }
-                    ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(
-                        () => item,
-                        itemType
-                    );
+                    ModelMetadata metadata = ModelMetadataProviders
+                        .Current
+                        .GetMetadataForType(() => item, itemType);
                     string fieldName = String.Format(
                         CultureInfo.InvariantCulture,
                         "{0}[{1}]",
@@ -226,9 +225,9 @@ namespace System.Web.Mvc.Html
             }
 
             foreach (
-                ModelMetadata propertyMetadata in modelMetadata.Properties.Where(
-                    pm => ShouldShow(pm, templateInfo)
-                )
+                ModelMetadata propertyMetadata in modelMetadata
+                    .Properties
+                    .Where(pm => ShouldShow(pm, templateInfo))
             )
             {
                 if (!propertyMetadata.HideSurroundingHtml)

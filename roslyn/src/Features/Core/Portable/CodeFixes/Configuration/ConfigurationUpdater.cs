@@ -443,9 +443,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
                 filePath: analyzerConfigPath
             );
 
-            var newSolution = project.Solution.AddAnalyzerConfigDocuments(
-                ImmutableArray.Create(documentInfo)
-            );
+            var newSolution = project
+                .Solution
+                .AddAnalyzerConfigDocuments(ImmutableArray.Create(documentInfo));
             return newSolution.GetProject(project.Id)?.GetAnalyzerConfigDocument(id);
         }
 
@@ -473,9 +473,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
                 {
                     foreach (var option in codeStyleOptions)
                     {
-                        var optionValue = option.Definition.Serializer.Serialize(
-                            option.DefaultValue
-                        );
+                        var optionValue = option
+                            .Definition
+                            .Serializer
+                            .Serialize(option.DefaultValue);
                         builder.Add(
                             (option.Definition.ConfigName, optionValue, option.IsPerLanguage)
                         );

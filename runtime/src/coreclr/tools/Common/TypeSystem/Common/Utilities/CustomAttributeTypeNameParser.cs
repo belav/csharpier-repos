@@ -25,12 +25,10 @@ namespace Internal.TypeSystem
             Func<ModuleDesc, string, MetadataType> canonResolver = null
         )
         {
-            return System.Reflection.TypeNameParser.ResolveType(
-                module,
-                name,
-                throwIfNotFound,
-                canonResolver
-            );
+            return System
+                .Reflection
+                .TypeNameParser
+                .ResolveType(module, name, throwIfNotFound, canonResolver);
         }
     }
 }
@@ -94,10 +92,12 @@ namespace System.Reflection
             ModuleDesc module =
                 (assemblyNameIfAny == null)
                     ? _module
-                    : _module.Context.ResolveAssembly(
-                        new AssemblyName(assemblyNameIfAny),
-                        throwIfNotFound: _throwIfNotFound
-                    );
+                    : _module
+                        .Context
+                        .ResolveAssembly(
+                            new AssemblyName(assemblyNameIfAny),
+                            throwIfNotFound: _throwIfNotFound
+                        );
 
             if (_canonResolver != null && nestedTypeNames.IsEmpty)
             {

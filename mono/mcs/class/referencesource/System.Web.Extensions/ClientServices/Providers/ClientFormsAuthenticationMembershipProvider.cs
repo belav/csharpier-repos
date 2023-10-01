@@ -166,12 +166,12 @@ namespace System.Web.ClientServices.Providers
             {
                 if (ConfigurationManager.ConnectionStrings[_ConnectionString] != null)
                 {
-                    _ConnectionStringProvider = ConfigurationManager.ConnectionStrings[
-                        _ConnectionString
-                    ].ProviderName;
-                    _ConnectionString = ConfigurationManager.ConnectionStrings[
-                        _ConnectionString
-                    ].ConnectionString;
+                    _ConnectionStringProvider = ConfigurationManager
+                        .ConnectionStrings[_ConnectionString]
+                        .ProviderName;
+                    _ConnectionString = ConfigurationManager
+                        .ConnectionStrings[_ConnectionString]
+                        .ConnectionString;
                 }
             }
 

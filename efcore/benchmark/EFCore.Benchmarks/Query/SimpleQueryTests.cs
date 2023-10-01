@@ -104,7 +104,8 @@ public abstract class SimpleQueryTests
     [Benchmark]
     public virtual async Task SkipTake()
     {
-        var query = _context.Products
+        var query = _context
+            .Products
             .ApplyTracking(Tracking)
             .OrderBy(p => p.ProductId)
             .Skip(500)
@@ -124,7 +125,8 @@ public abstract class SimpleQueryTests
     // [Benchmark]
     public virtual async Task GroupBy()
     {
-        var query = _context.Products
+        var query = _context
+            .Products
             .GroupBy(p => p.ActualStockLevel)
             .Select(g => new { ActualStockLevel = g.Key, Products = g });
 
@@ -156,19 +158,21 @@ public abstract class SimpleQueryTests
     [Benchmark]
     public virtual async Task Projection()
     {
-        var query = _context.Products.Select(
-            p =>
-                new
-                {
-                    p.ProductId,
-                    p.Name,
-                    p.Description,
-                    p.SKU,
-                    p.Retail,
-                    p.CurrentPrice,
-                    p.ActualStockLevel
-                }
-        );
+        var query = _context
+            .Products
+            .Select(
+                p =>
+                    new
+                    {
+                        p.ProductId,
+                        p.Name,
+                        p.Description,
+                        p.SKU,
+                        p.Retail,
+                        p.CurrentPrice,
+                        p.ActualStockLevel
+                    }
+            );
 
         if (Async)
         {
@@ -183,20 +187,22 @@ public abstract class SimpleQueryTests
     [Benchmark]
     public virtual async Task ProjectionAcrossNavigation()
     {
-        var query = _context.Orders.Select(
-            o =>
-                new
-                {
-                    CustomerTitle = o.Customer.Title,
-                    CustomerFirstName = o.Customer.FirstName,
-                    CustomerLastName = o.Customer.LastName,
-                    OrderDate = o.Date,
-                    o.OrderDiscount,
-                    OrderDiscountReason = o.DiscountReason,
-                    OrderTax = o.Tax,
-                    OrderSpecialRequests = o.SpecialRequests
-                }
-        );
+        var query = _context
+            .Orders
+            .Select(
+                o =>
+                    new
+                    {
+                        CustomerTitle = o.Customer.Title,
+                        CustomerFirstName = o.Customer.FirstName,
+                        CustomerLastName = o.Customer.LastName,
+                        OrderDate = o.Date,
+                        o.OrderDiscount,
+                        OrderDiscountReason = o.DiscountReason,
+                        OrderTax = o.Tax,
+                        OrderSpecialRequests = o.SpecialRequests
+                    }
+            );
 
         if (Async)
         {

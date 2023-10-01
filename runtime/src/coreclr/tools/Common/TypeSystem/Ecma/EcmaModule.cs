@@ -94,7 +94,8 @@ namespace Internal.TypeSystem.Ecma
                         {
                             MethodDefinitionHandle methodDefinitionHandle =
                                 (MethodDefinitionHandle)handle;
-                            TypeDefinitionHandle typeDefinitionHandle = _module._metadataReader
+                            TypeDefinitionHandle typeDefinitionHandle = _module
+                                ._metadataReader
                                 .GetMethodDefinition(methodDefinitionHandle)
                                 .GetDeclaringType();
                             EcmaType type = (EcmaType)
@@ -108,7 +109,8 @@ namespace Internal.TypeSystem.Ecma
                         {
                             FieldDefinitionHandle fieldDefinitionHandle =
                                 (FieldDefinitionHandle)handle;
-                            TypeDefinitionHandle typeDefinitionHandle = _module._metadataReader
+                            TypeDefinitionHandle typeDefinitionHandle = _module
+                                ._metadataReader
                                 .GetFieldDefinition(fieldDefinitionHandle)
                                 .GetDeclaringType();
                             EcmaType type = (EcmaType)
@@ -380,9 +382,9 @@ namespace Internal.TypeSystem.Ecma
                     if (foundHandle.Kind == HandleKind.TypeDefinition)
                         return currentModule.GetType((TypeDefinitionHandle)foundHandle);
 
-                    ExportedType exportedType = currentModule._metadataReader.GetExportedType(
-                        (ExportedTypeHandle)foundHandle
-                    );
+                    ExportedType exportedType = currentModule
+                        ._metadataReader
+                        .GetExportedType((ExportedTypeHandle)foundHandle);
                     if (exportedType.IsForwarder)
                     {
                         object implementation = currentModule.GetObject(
@@ -653,7 +655,8 @@ namespace Internal.TypeSystem.Ecma
                                 // the deriving type
                                 Instantiation newSubstitution = typeDescToInspect
                                     .GetTypeDefinition()
-                                    .BaseType.Instantiation;
+                                    .BaseType
+                                    .Instantiation;
                                 if (!substitution.IsNull)
                                 {
                                     TypeDesc[] newSubstitutionTypes = new TypeDesc[

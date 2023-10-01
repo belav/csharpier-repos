@@ -280,14 +280,16 @@ public class CSharpCompilerFeatureRequiredTests
         var onIndexedPropertyParameter = comp.GetTypeByMetadataName("OnIndexedPropertyParameter");
         Assert.False(onIndexedPropertyParameter!.HasUnsupportedMetadata);
         Assert.True(
-            onIndexedPropertyParameter.GetMember<MethodSymbol>("get_Property").Parameters[
-                0
-            ].HasUnsupportedMetadata
+            onIndexedPropertyParameter
+                .GetMember<MethodSymbol>("get_Property")
+                .Parameters[0]
+                .HasUnsupportedMetadata
         );
         Assert.True(
-            onIndexedPropertyParameter.GetMember<MethodSymbol>("set_Property").Parameters[
-                0
-            ].HasUnsupportedMetadata
+            onIndexedPropertyParameter
+                .GetMember<MethodSymbol>("set_Property")
+                .Parameters[0]
+                .HasUnsupportedMetadata
         );
 
         var onThisParameterIndexer = comp.GetTypeByMetadataName("OnThisIndexerParameter");

@@ -1371,14 +1371,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
 
             if ((UnusedValuePreference)option == UnusedValuePreference.DiscardVariable)
             {
-                test.TestState.ExpectedDiagnostics.Add(
-                    // /0/Test0.cs(5,13): info IDE0059: Unnecessary assignment of a value to 'y'
-                    VerifyCS
-                        .Diagnostic("IDE0059")
-                        .WithSeverity(DiagnosticSeverity.Info)
-                        .WithLocation(0)
-                        .WithArguments("y")
-                );
+                test.TestState
+                    .ExpectedDiagnostics
+                    .Add(
+                        // /0/Test0.cs(5,13): info IDE0059: Unnecessary assignment of a value to 'y'
+                        VerifyCS
+                            .Diagnostic("IDE0059")
+                            .WithSeverity(DiagnosticSeverity.Info)
+                            .WithLocation(0)
+                            .WithArguments("y")
+                    );
             }
 
             await test.RunAsync();
@@ -1513,14 +1515,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
 
             if ((UnusedValuePreference)option == UnusedValuePreference.DiscardVariable)
             {
-                test.TestState.ExpectedDiagnostics.Add(
-                    // /0/Test0.cs(5,13): info IDE0059: Unnecessary assignment of a value to 'y'
-                    VerifyCS
-                        .Diagnostic("IDE0059")
-                        .WithSeverity(DiagnosticSeverity.Info)
-                        .WithLocation(0)
-                        .WithArguments("y")
-                );
+                test.TestState
+                    .ExpectedDiagnostics
+                    .Add(
+                        // /0/Test0.cs(5,13): info IDE0059: Unnecessary assignment of a value to 'y'
+                        VerifyCS
+                            .Diagnostic("IDE0059")
+                            .WithSeverity(DiagnosticSeverity.Info)
+                            .WithLocation(0)
+                            .WithArguments("y")
+                    );
             }
 
             await test.RunAsync();
@@ -3423,14 +3427,16 @@ class Q
 
             if ((UnusedValuePreference)option == UnusedValuePreference.DiscardVariable)
             {
-                test.TestState.ExpectedDiagnostics.Add(
-                    // /0/Test0.cs(5,69): info IDE0059: Unnecessary assignment of a value to 'x2'
-                    VerifyCS
-                        .Diagnostic("IDE0059")
-                        .WithSeverity(DiagnosticSeverity.Info)
-                        .WithLocation(0)
-                        .WithArguments("x2")
-                );
+                test.TestState
+                    .ExpectedDiagnostics
+                    .Add(
+                        // /0/Test0.cs(5,69): info IDE0059: Unnecessary assignment of a value to 'x2'
+                        VerifyCS
+                            .Diagnostic("IDE0059")
+                            .WithSeverity(DiagnosticSeverity.Info)
+                            .WithLocation(0)
+                            .WithArguments("x2")
+                    );
             }
 
             await test.RunAsync();
@@ -8921,9 +8927,9 @@ class C : IDisposable
     }
 }",
                 options: PreferDiscard,
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                    LanguageVersion.CSharp9
-                )
+                parseOptions: CSharpParseOptions
+                    .Default
+                    .WithLanguageVersion(LanguageVersion.CSharp9)
             );
         }
 
@@ -8946,9 +8952,9 @@ class C : IDisposable
     }
 }",
                 options: PreferDiscard,
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                    LanguageVersion.CSharp9
-                )
+                parseOptions: CSharpParseOptions
+                    .Default
+                    .WithLanguageVersion(LanguageVersion.CSharp9)
             );
         }
 

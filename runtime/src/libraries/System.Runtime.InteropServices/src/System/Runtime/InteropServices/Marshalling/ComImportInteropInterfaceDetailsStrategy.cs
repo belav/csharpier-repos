@@ -69,9 +69,9 @@ namespace System.Runtime.InteropServices.Marshalling
             Type runtimeType = Type.GetTypeFromHandle(type)!;
             if (!runtimeType.IsImport)
             {
-                return DefaultIUnknownInterfaceDetailsStrategy.Instance.GetIUnknownDerivedDetails(
-                    type
-                );
+                return DefaultIUnknownInterfaceDetailsStrategy
+                    .Instance
+                    .GetIUnknownDerivedDetails(type);
             }
 
             Type implementationType = _forwarderInterfaceCache.GetValue(
@@ -122,10 +122,12 @@ namespace System.Runtime.InteropServices.Marshalling
                         );
                         foreach (MethodInfo method in iface.GetMethods())
                         {
-                            Type[] returnTypeOptionalModifiers =
-                                method.ReturnParameter.GetOptionalCustomModifiers();
-                            Type[] returnTypeRequiredModifiers =
-                                method.ReturnParameter.GetRequiredCustomModifiers();
+                            Type[] returnTypeOptionalModifiers = method
+                                .ReturnParameter
+                                .GetOptionalCustomModifiers();
+                            Type[] returnTypeRequiredModifiers = method
+                                .ReturnParameter
+                                .GetRequiredCustomModifiers();
                             ParameterInfo[] parameters = method.GetParameters();
                             var parameterTypes = new Type[parameters.Length];
                             var parameterOptionalModifiers = new Type[parameters.Length][];

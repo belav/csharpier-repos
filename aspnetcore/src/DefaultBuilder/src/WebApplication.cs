@@ -293,7 +293,8 @@ public sealed class WebApplication
                     // The web app's data sources aren't registered until the routing middleware is. That often happens when the app is run.
                     // We want endpoints to be available in the debug view before the app starts. Test if all the web app's the data sources are registered.
                     if (
-                        compositeEndpointDataSource.DataSources
+                        compositeEndpointDataSource
+                            .DataSources
                             .Intersect(_webApplication.DataSources)
                             .Count() == _webApplication.DataSources.Count
                     )
@@ -319,10 +320,10 @@ public sealed class WebApplication
             get
             {
                 if (
-                    _webApplication.Properties.TryGetValue(
-                        "__MiddlewareDescriptions",
-                        out var value
-                    ) && value is IList<string> descriptions
+                    _webApplication
+                        .Properties
+                        .TryGetValue("__MiddlewareDescriptions", out var value)
+                    && value is IList<string> descriptions
                 )
                 {
                     return descriptions;

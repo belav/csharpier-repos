@@ -3616,10 +3616,9 @@ class Program{
             editorOptions.SetOptionValue(DefaultOptions.ConvertTabsToSpacesOptionId, !useTabs);
 
             var commandHandler = workspace.GetService<FormatCommandHandler>();
-            var typedChar = textBuffer.CurrentSnapshot.GetText(
-                subjectDocument.CursorPosition.Value - 1,
-                1
-            );
+            var typedChar = textBuffer
+                .CurrentSnapshot
+                .GetText(subjectDocument.CursorPosition.Value - 1, 1);
             commandHandler.ExecuteCommand(
                 new TypeCharCommandArgs(subjectDocument.GetTextView(), textBuffer, typedChar[0]),
                 () => { },

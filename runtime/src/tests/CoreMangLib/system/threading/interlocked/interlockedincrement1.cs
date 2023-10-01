@@ -99,26 +99,30 @@ public class InterlockedIncrement1
     {
         if (exValue != nwValue)
         {
-            TestLibrary.TestFramework.LogError(
-                "003",
-                "Interlocked.Increment() returned wrong value. Expected("
-                    + exValue
-                    + ") Got("
-                    + nwValue
-                    + ")"
-            );
+            TestLibrary
+                .TestFramework
+                .LogError(
+                    "003",
+                    "Interlocked.Increment() returned wrong value. Expected("
+                        + exValue
+                        + ") Got("
+                        + nwValue
+                        + ")"
+                );
             return false;
         }
         if (exValue != value)
         {
-            TestLibrary.TestFramework.LogError(
-                "003",
-                "Interlocked.Increment() did not update value. Expected("
-                    + exValue
-                    + ") Got("
-                    + value
-                    + ")"
-            );
+            TestLibrary
+                .TestFramework
+                .LogError(
+                    "003",
+                    "Interlocked.Increment() did not update value. Expected("
+                        + exValue
+                        + ") Got("
+                        + value
+                        + ")"
+                );
             return false;
         }
 

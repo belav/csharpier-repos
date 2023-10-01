@@ -71,9 +71,9 @@ namespace ILCompiler.Metadata
             {
                 record.GenericParameters.Capacity = entity.Instantiation.Length;
                 foreach (var p in entity.Instantiation)
-                    record.GenericParameters.Add(
-                        HandleGenericParameter((Cts.GenericParameterDesc)p)
-                    );
+                    record
+                        .GenericParameters
+                        .Add(HandleGenericParameter((Cts.GenericParameterDesc)p));
             }
 
             var ecmaEntity = entity as Cts.Ecma.EcmaMethod;

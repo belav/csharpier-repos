@@ -1021,9 +1021,11 @@ namespace System.Web.Configuration
             factoryType.Attributes = MemberAttributes.Private;
             factoryType.IsClass = true;
             factoryType.Name = TypeName;
-            factoryType.BaseTypes.Add(
-                new CodeTypeReference("System.Web.Configuration.BrowserCapabilitiesFactoryBase")
-            );
+            factoryType
+                .BaseTypes
+                .Add(
+                    new CodeTypeReference("System.Web.Configuration.BrowserCapabilitiesFactoryBase")
+                );
             cnamespace.Types.Add(factoryType);
 
             //GEN: protected override object ConfigureBrowserCapabilities(NameValueCollection headers, HttpBrowserCapabilities browserCaps)
@@ -1615,9 +1617,9 @@ namespace System.Web.Configuration
             );
 
             emptyCheckStmt.Condition = emptyCheckExpr;
-            emptyCheckStmt.TrueStatements.Add(
-                new CodeMethodReturnStatement(new CodePrimitiveExpression(false))
-            );
+            emptyCheckStmt
+                .TrueStatements
+                .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(false)));
             cmm.Statements.Add(emptyCheckStmt);
         }
 
@@ -1752,9 +1754,9 @@ namespace System.Web.Configuration
                             new CodePrimitiveExpression(false)
                         );
                     }
-                    istatement.TrueStatements.Add(
-                        new CodeMethodReturnStatement(new CodePrimitiveExpression(false))
-                    );
+                    istatement
+                        .TrueStatements
+                        .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(false)));
                     cmm.Statements.Add(istatement);
                 }
             }
@@ -1840,9 +1842,9 @@ namespace System.Web.Configuration
                             new CodePrimitiveExpression(false)
                         );
                     }
-                    istatement.TrueStatements.Add(
-                        new CodeMethodReturnStatement(new CodePrimitiveExpression(false))
-                    );
+                    istatement
+                        .TrueStatements
+                        .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(false)));
                     cmm.Statements.Add(istatement);
                 }
             }

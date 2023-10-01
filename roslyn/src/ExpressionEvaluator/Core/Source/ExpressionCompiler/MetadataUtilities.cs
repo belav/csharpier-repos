@@ -67,10 +67,12 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                         // (see https://github.com/dotnet/roslyn/issues/13275).
                         if (
                             hasNoAssemblyRefs
-                            || metadata.Name.Equals(
-                                "System.Private.CoreLib.dll",
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            || metadata
+                                .Name
+                                .Equals(
+                                    "System.Private.CoreLib.dll",
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                         {
                             // If this assembly declares System.Object, assume it is the corlib.

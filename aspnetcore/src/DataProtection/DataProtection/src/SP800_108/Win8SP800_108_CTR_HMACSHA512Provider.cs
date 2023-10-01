@@ -103,10 +103,9 @@ internal sealed unsafe class Win8SP800_108_CTR_HMACSHA512Provider
                 {
                     hashHandle.HashData(pbKdk, cbKdk, pbHashedKey, SHA512_DIGEST_SIZE_IN_BYTES);
                 }
-                return CachedAlgorithmHandles.SP800_108_CTR_HMAC.GenerateSymmetricKey(
-                    pbHashedKey,
-                    SHA512_DIGEST_SIZE_IN_BYTES
-                );
+                return CachedAlgorithmHandles
+                    .SP800_108_CTR_HMAC
+                    .GenerateSymmetricKey(pbHashedKey, SHA512_DIGEST_SIZE_IN_BYTES);
             }
             finally
             {

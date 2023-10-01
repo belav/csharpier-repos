@@ -237,9 +237,9 @@ class {|caret:ABC|}
             );
 
             var testWorkspace = testLspServer.TestWorkspace;
-            var documentBefore = testWorkspace.CurrentSolution.GetDocument(
-                testWorkspace.Documents.Single().Id
-            );
+            var documentBefore = testWorkspace
+                .CurrentSolution
+                .GetDocument(testWorkspace.Documents.Single().Id);
             var documentUriBefore = documentBefore.GetUriForRenamedDocument();
 
             var actualResolvedAction = await RunGetCodeActionResolveAsync(
@@ -247,9 +247,9 @@ class {|caret:ABC|}
                 unresolvedCodeAction
             );
 
-            var documentAfter = testWorkspace.CurrentSolution.GetDocument(
-                testWorkspace.Documents.Single().Id
-            );
+            var documentAfter = testWorkspace
+                .CurrentSolution
+                .GetDocument(testWorkspace.Documents.Single().Id);
             var documentUriAfter = documentBefore.WithName("ABC.cs").GetUriForRenamedDocument();
 
             var expectedCodeAction = CodeActionsTests.CreateCodeAction(
@@ -448,7 +448,8 @@ class BCD
             var newDocumentUri = ProtocolConversions.CreateAbsoluteUri(
                 Path.Combine(Path.GetDirectoryName(project.FilePath), "ABC.cs")
             );
-            var existingDocumentUri = testWorkspace.CurrentSolution
+            var existingDocumentUri = testWorkspace
+                .CurrentSolution
                 .GetRequiredDocument(testWorkspace.Documents.Single().Id)
                 .GetURI();
             var workspaceEdit = new WorkspaceEdit()
@@ -588,9 +589,9 @@ class {|caret:BCD|}
                 unresolvedCodeAction
             );
 
-            var existingDocument = testWorkspace.CurrentSolution.GetRequiredDocument(
-                testWorkspace.Documents.Single().Id
-            );
+            var existingDocument = testWorkspace
+                .CurrentSolution
+                .GetRequiredDocument(testWorkspace.Documents.Single().Id);
             var existingDocumentUri = existingDocument.GetURI();
 
             Assert.Contains(Path.Combine("dir1", "dir2", "dir3"), existingDocument.FilePath);

@@ -86,14 +86,16 @@ namespace System.Windows.Forms
                 this.CalculateTextAndImageRectangles(out text_layout_rect, out image_layout_rect);
 
                 if (image_layout_rect != Rectangle.Empty)
-                    this.Owner.Renderer.DrawItemImage(
-                        new ToolStripItemImageRenderEventArgs(
-                            e.Graphics,
-                            this,
-                            draw_image,
-                            image_layout_rect
-                        )
-                    );
+                    this.Owner
+                        .Renderer
+                        .DrawItemImage(
+                            new ToolStripItemImageRenderEventArgs(
+                                e.Graphics,
+                                this,
+                                draw_image,
+                                image_layout_rect
+                            )
+                        );
 
                 return;
             }

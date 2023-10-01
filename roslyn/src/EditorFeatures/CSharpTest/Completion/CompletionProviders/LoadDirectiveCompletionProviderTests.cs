@@ -131,7 +131,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             var text = textWithPositionMarker.Replace("$$", "");
 
             using var workspace = new TestWorkspace(composition: FeaturesTestCompositions.Features);
-            var provider = workspace.ExportProvider
+            var provider = workspace
+                .ExportProvider
                 .GetExports<CompletionProvider, CompletionProviderMetadata>()
                 .Single(
                     p =>

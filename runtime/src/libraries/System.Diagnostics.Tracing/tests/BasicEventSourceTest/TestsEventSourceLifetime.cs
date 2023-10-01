@@ -49,7 +49,8 @@ namespace BasicEventSourceTests
             {
                 FieldInfo field = es.GetType()
                     .GetTypeInfo()
-                    .BaseType.GetField(
+                    .BaseType
+                    .GetField(
                         "m_provider",
                         BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
                     );
@@ -57,7 +58,8 @@ namespace BasicEventSourceTests
                 {
                     field = es.GetType()
                         .GetTypeInfo()
-                        .BaseType.GetField(
+                        .BaseType
+                        .GetField(
                             "m_etwProvider",
                             BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
                         );

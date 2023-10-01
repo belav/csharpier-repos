@@ -179,9 +179,9 @@ namespace System.Web.WebPages.Administration
                 password,
                 () =>
                 {
-                    VirtualFile passwordFile = HostingEnvironment.VirtualPathProvider.GetFile(
-                        AdminPasswordFile
-                    );
+                    VirtualFile passwordFile = HostingEnvironment
+                        .VirtualPathProvider
+                        .GetFile(AdminPasswordFile);
                     Debug.Assert(passwordFile != null, "password file should not be null");
                     return passwordFile.Open();
                 }

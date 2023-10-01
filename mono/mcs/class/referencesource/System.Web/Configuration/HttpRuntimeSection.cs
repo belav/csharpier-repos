@@ -521,9 +521,9 @@ namespace System.Web.Configuration
                             SR.Config_max_request_length_disk_threshold_exceeds_max_request_length
                         ),
                         ElementInformation.Properties[_propRequestLengthDiskThreshold.Name].Source,
-                        ElementInformation.Properties[
-                            _propRequestLengthDiskThreshold.Name
-                        ].LineNumber
+                        ElementInformation
+                            .Properties[_propRequestLengthDiskThreshold.Name]
+                            .LineNumber
                     );
                 }
                 base[_propRequestLengthDiskThreshold] = value;
@@ -922,12 +922,12 @@ namespace System.Web.Configuration
                 { // failed to construct invalid chars
                     throw new ConfigurationErrorsException(
                         SR.GetString(SR.Config_property_generic),
-                        ElementInformation.Properties[
-                            _propRequestPathInvalidCharacters.Name
-                        ].Source,
-                        ElementInformation.Properties[
-                            _propRequestPathInvalidCharacters.Name
-                        ].LineNumber
+                        ElementInformation
+                            .Properties[_propRequestPathInvalidCharacters.Name]
+                            .Source,
+                        ElementInformation
+                            .Properties[_propRequestPathInvalidCharacters.Name]
+                            .LineNumber
                     );
                 }
                 return _RequestPathInvalidCharactersArray;

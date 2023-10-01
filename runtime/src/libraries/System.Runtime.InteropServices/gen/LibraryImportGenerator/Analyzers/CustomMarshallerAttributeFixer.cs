@@ -45,9 +45,9 @@ namespace Microsoft.Interop.Analyzers
                 // Organize all the diagnostics by marshaller, managed type, and whether or not it's a collection marshaller
                 foreach (Diagnostic diagnostic in diagnostics)
                 {
-                    Document doc = fixAllContext.Solution.GetDocument(
-                        diagnostic.Location.SourceTree
-                    );
+                    Document doc = fixAllContext
+                        .Solution
+                        .GetDocument(diagnostic.Location.SourceTree);
                     SemanticModel model = await doc.GetSemanticModelAsync(
                             fixAllContext.CancellationToken
                         )
@@ -63,7 +63,9 @@ namespace Microsoft.Interop.Analyzers
                         entryPointTypeSymbol
                     );
 
-                    SyntaxNode root = await diagnostic.Location.SourceTree
+                    SyntaxNode root = await diagnostic
+                        .Location
+                        .SourceTree
                         .GetRootAsync(fixAllContext.CancellationToken)
                         .ConfigureAwait(false);
 
@@ -89,9 +91,9 @@ namespace Microsoft.Interop.Analyzers
                     }
 
                     membersToAdd.UnionWith(
-                        diagnostic.Properties[MissingMemberNames.Key].Split(
-                            MissingMemberNames.Delimiter
-                        )
+                        diagnostic
+                            .Properties[MissingMemberNames.Key]
+                            .Split(MissingMemberNames.Delimiter)
                     );
                 }
 
@@ -161,9 +163,10 @@ namespace Microsoft.Interop.Analyzers
                         return ImmutableArray.CreateRange(
                             (
                                 await Task.WhenAll(
-                                        context.Solution.Projects.Select(
-                                            context.GetAllDiagnosticsAsync
-                                        )
+                                        context
+                                            .Solution
+                                            .Projects
+                                            .Select(context.GetAllDiagnosticsAsync)
                                     )
                                     .ConfigureAwait(false)
                             ).SelectMany(arr => arr)
@@ -222,10 +225,9 @@ namespace Microsoft.Interop.Analyzers
                 {
                     requiredShapeDiagnostics.Add(diagnostic);
                     if (
-                        diagnostic.Properties.TryGetValue(
-                            MissingMemberNames.Key,
-                            out string missingMembers
-                        )
+                        diagnostic
+                            .Properties
+                            .TryGetValue(MissingMemberNames.Key, out string missingMembers)
                     )
                     {
                         missingMemberNames.UnionWith(
@@ -317,11 +319,12 @@ namespace Microsoft.Interop.Analyzers
                         attr =>
                             attr.ApplicationSyntaxReference.SyntaxTree
                                 == locationInAttribute.SourceTree
-                            && attr.ApplicationSyntaxReference.Span.Contains(
-                                locationInAttribute.SourceSpan
-                            )
+                            && attr.ApplicationSyntaxReference
+                                .Span
+                                .Contains(locationInAttribute.SourceSpan)
                     )
-                    .ConstructorArguments[0].Value!;
+                    .ConstructorArguments[0]
+                    .Value!;
 
         private static void AddMissingMembers(
             DocumentEditor editor,
@@ -373,13 +376,14 @@ namespace Microsoft.Interop.Analyzers
                 isLinearCollectionMarshaller,
                 editor.SemanticModel.Compilation
             );
-            INamedTypeSymbol spanOfT = editor.SemanticModel.Compilation.GetBestTypeByMetadataName(
-                TypeNames.System_Span_Metadata
-            )!;
-            INamedTypeSymbol readOnlySpanOfT =
-                editor.SemanticModel.Compilation.GetBestTypeByMetadataName(
-                    TypeNames.System_ReadOnlySpan_Metadata
-                )!;
+            INamedTypeSymbol spanOfT = editor
+                .SemanticModel
+                .Compilation
+                .GetBestTypeByMetadataName(TypeNames.System_Span_Metadata)!;
+            INamedTypeSymbol readOnlySpanOfT = editor
+                .SemanticModel
+                .Compilation
+                .GetBestTypeByMetadataName(TypeNames.System_ReadOnlySpan_Metadata)!;
             var (typeParameters, _) =
                 marshallerType.GetAllTypeArgumentsIncludingInContainingTypes();
 
@@ -438,9 +442,10 @@ namespace Microsoft.Interop.Analyzers
                         gen.PropertyDeclaration(
                             ShapeMemberNames.BufferSize,
                             gen.TypeExpression(
-                                editor.SemanticModel.Compilation.GetSpecialType(
-                                    SpecialType.System_Int32
-                                )
+                                editor
+                                    .SemanticModel
+                                    .Compilation
+                                    .GetSpecialType(SpecialType.System_Int32)
                             ),
                             Accessibility.Public,
                             DeclarationModifiers.Static
@@ -711,13 +716,14 @@ namespace Microsoft.Interop.Analyzers
                 isLinearCollectionMarshaller,
                 editor.SemanticModel.Compilation
             );
-            INamedTypeSymbol spanOfT = editor.SemanticModel.Compilation.GetBestTypeByMetadataName(
-                TypeNames.System_Span_Metadata
-            )!;
-            INamedTypeSymbol readOnlySpanOfT =
-                editor.SemanticModel.Compilation.GetBestTypeByMetadataName(
-                    TypeNames.System_ReadOnlySpan_Metadata
-                )!;
+            INamedTypeSymbol spanOfT = editor
+                .SemanticModel
+                .Compilation
+                .GetBestTypeByMetadataName(TypeNames.System_Span_Metadata)!;
+            INamedTypeSymbol readOnlySpanOfT = editor
+                .SemanticModel
+                .Compilation
+                .GetBestTypeByMetadataName(TypeNames.System_ReadOnlySpan_Metadata)!;
             var (typeParameters, _) =
                 marshallerType.GetAllTypeArgumentsIncludingInContainingTypes();
 
@@ -802,9 +808,10 @@ namespace Microsoft.Interop.Analyzers
                         gen.PropertyDeclaration(
                             ShapeMemberNames.BufferSize,
                             gen.TypeExpression(
-                                editor.SemanticModel.Compilation.GetSpecialType(
-                                    SpecialType.System_Int32
-                                )
+                                editor
+                                    .SemanticModel
+                                    .Compilation
+                                    .GetSpecialType(SpecialType.System_Int32)
                             ),
                             Accessibility.Public,
                             DeclarationModifiers.Static

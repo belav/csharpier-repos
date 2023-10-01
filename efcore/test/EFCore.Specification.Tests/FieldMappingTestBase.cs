@@ -2054,11 +2054,13 @@ public abstract class FieldMappingTestBase<TFixture> : IClassFixture<TFixture>
 
             modelBuilder
                 .Entity<PostFullExplicit>()
-                .Metadata.FindNavigation("Blog")
+                .Metadata
+                .FindNavigation("Blog")
                 .SetField("_myblog");
             modelBuilder
                 .Entity<BlogFullExplicit>()
-                .Metadata.FindNavigation("Posts")
+                .Metadata
+                .FindNavigation("Posts")
                 .SetField("_myposts");
 
             modelBuilder.Entity<LoginSession>().UsePropertyAccessMode(PropertyAccessMode.Field);
@@ -2125,11 +2127,13 @@ public abstract class FieldMappingTestBase<TFixture> : IClassFixture<TFixture>
 
                 modelBuilder
                     .Entity<PostReadOnlyExplicit>()
-                    .Metadata.FindNavigation("Blog")
+                    .Metadata
+                    .FindNavigation("Blog")
                     .SetField("_myblog");
                 modelBuilder
                     .Entity<BlogReadOnlyExplicit>()
-                    .Metadata.FindNavigation("Posts")
+                    .Metadata
+                    .FindNavigation("Posts")
                     .SetField("_myposts");
 
                 modelBuilder.Entity<PostWriteOnly>(b =>
@@ -2167,11 +2171,13 @@ public abstract class FieldMappingTestBase<TFixture> : IClassFixture<TFixture>
 
                 modelBuilder
                     .Entity<PostWriteOnlyExplicit>()
-                    .Metadata.FindNavigation("Blog")
+                    .Metadata
+                    .FindNavigation("Blog")
                     .SetField("_myblog");
                 modelBuilder
                     .Entity<BlogWriteOnlyExplicit>()
-                    .Metadata.FindNavigation("Posts")
+                    .Metadata
+                    .FindNavigation("Posts")
                     .SetField("_myposts");
 
                 modelBuilder.Entity<PostFields>(b =>

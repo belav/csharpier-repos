@@ -51,10 +51,12 @@ public class Program
             VisualStudio.Editor.PlaceCaret("Console", charsOffset: -1);
             VisualStudio.Editor.PlaceCaret("World", charsOffset: 4, extendSelection: true);
             VisualStudio.ExecuteCommand(WellKnownCommandNames.Refactor_ExtractMethod);
-            VisualStudio.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.ExtractMethod
-            );
+            VisualStudio
+                .Workspace
+                .WaitForAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.ExtractMethod
+                );
 
             var expectedMarkup =
                 @"
@@ -86,12 +88,15 @@ public class Program
             );
 
             VisualStudio.Editor.SendKeys("SayHello", VirtualKey.Enter);
-            VisualStudio.Editor.Verify.TextContains(
-                @"private static void SayHello()
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"private static void SayHello()
     {
         Console.WriteLine(""Hello World"");
     }"
-            );
+                );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/pull/61369")]
@@ -101,10 +106,12 @@ public class Program
             VisualStudio.Editor.PlaceCaret("int result", charsOffset: -8);
             VisualStudio.Editor.PlaceCaret("result;", charsOffset: 4, extendSelection: true);
             VisualStudio.ExecuteCommand(WellKnownCommandNames.Refactor_ExtractMethod);
-            VisualStudio.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.ExtractMethod
-            );
+            VisualStudio
+                .Workspace
+                .WaitForAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.ExtractMethod
+                );
 
             var expectedMarkup =
                 @"
@@ -135,12 +142,15 @@ public class Program
             );
 
             VisualStudio.Editor.SendKeys("SayHello", VirtualKey.Enter);
-            VisualStudio.Editor.Verify.TextContains(
-                @"private static int SayHello(int a, int b)
+            VisualStudio
+                .Editor
+                .Verify
+                .TextContains(
+                    @"private static int SayHello(int a, int b)
     {
         return a * b;
     }"
-            );
+                );
         }
 
         [WpfFact]
@@ -149,11 +159,10 @@ public class Program
             VisualStudio.Editor.SetText(TestSource);
             VisualStudio.Editor.PlaceCaret("a = 5", charsOffset: -1);
             VisualStudio.Editor.PlaceCaret("a * b", charsOffset: 1, extendSelection: true);
-            VisualStudio.Editor.Verify.CodeAction(
-                "Extract method",
-                applyFix: true,
-                blockUntilComplete: true
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction("Extract method", applyFix: true, blockUntilComplete: true);
 
             var expectedMarkup =
                 @"

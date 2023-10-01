@@ -1046,7 +1046,8 @@ namespace System.Diagnostics.Tests
 
             double processorTimeBeforeSpin = Process
                 .GetCurrentProcess()
-                .TotalProcessorTime.TotalSeconds;
+                .TotalProcessorTime
+                .TotalSeconds;
             double processorTimeAtHalfSpin = 0;
             // Perform loop to occupy cpu, takes less than a second.
             int i = int.MaxValue / 16;
@@ -1056,7 +1057,8 @@ namespace System.Diagnostics.Tests
                 if (i == int.MaxValue / 32)
                     processorTimeAtHalfSpin = Process
                         .GetCurrentProcess()
-                        .TotalProcessorTime.TotalSeconds;
+                        .TotalProcessorTime
+                        .TotalSeconds;
             }
 
             Assert.InRange(
@@ -3154,7 +3156,8 @@ namespace System.Diagnostics.Tests
                     return root;
                 });
 
-            IEnumerable<Process> childProcesses = rootResult.Message
+            IEnumerable<Process> childProcesses = rootResult
+                .Message
                 .Split(';')
                 .Select(x => int.Parse(x))
                 .Select(pid => Process.GetProcessById(pid));

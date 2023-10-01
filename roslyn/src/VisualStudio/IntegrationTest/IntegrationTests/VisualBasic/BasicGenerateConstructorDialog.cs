@@ -39,11 +39,10 @@ End Class"
             );
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Generate constructor...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction("Generate constructor...", applyFix: true, blockUntilComplete: false);
             VerifyDialog(isOpen: true);
             Dialog_ClickCancel();
             var actualText = VisualStudio.Editor.GetText();
@@ -75,17 +74,15 @@ End Class"
             );
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Generate constructor...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction("Generate constructor...", applyFix: true, blockUntilComplete: false);
             VerifyDialog(isOpen: true);
             Dialog_ClickOk();
-            VisualStudio.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.LightBulb
-            );
+            VisualStudio
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.LightBulb);
             var actualText = VisualStudio.Editor.GetText();
             Assert.Contains(
                 @"
@@ -119,20 +116,18 @@ End Class"
             );
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Generate constructor...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction("Generate constructor...", applyFix: true, blockUntilComplete: false);
             VerifyDialog(isOpen: true);
             VisualStudio.Editor.DialogSendKeys(DialogName, VirtualKey.Tab);
             VisualStudio.Editor.DialogSendKeys(DialogName, VirtualKey.Tab);
             VisualStudio.Editor.PressDialogButton(DialogName, "Down");
             Dialog_ClickOk();
-            VisualStudio.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.LightBulb
-            );
+            VisualStudio
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.LightBulb);
             var actualText = VisualStudio.Editor.GetText();
             Assert.Contains(
                 @"
@@ -166,20 +161,18 @@ End Class"
             );
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Generate constructor...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction("Generate constructor...", applyFix: true, blockUntilComplete: false);
             VerifyDialog(isOpen: true);
             VisualStudio.Editor.DialogSendKeys(DialogName, VirtualKey.Tab);
             VisualStudio.Editor.DialogSendKeys(DialogName, VirtualKey.Tab);
             VisualStudio.Editor.DialogSendKeys(DialogName, VirtualKey.Space);
             Dialog_ClickOk();
-            VisualStudio.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.LightBulb
-            );
+            VisualStudio
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.LightBulb);
             var actualText = VisualStudio.Editor.GetText();
             Assert.Contains(
                 @"

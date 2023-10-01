@@ -169,9 +169,9 @@ namespace Castle.DynamicProxy
         public static byte[] GetKeyPair()
         {
             using (
-                var stream = typeof(ModuleScope).Assembly.GetManifestResourceStream(
-                    "Castle.DynamicProxy.DynProxy.snk"
-                )
+                var stream = typeof(ModuleScope)
+                    .Assembly
+                    .GetManifestResourceStream("Castle.DynamicProxy.DynProxy.snk")
             )
             {
                 if (stream == null)
@@ -332,11 +332,13 @@ namespace Castle.DynamicProxy
                 AssemblyBuilder assemblyBuilder;
                 try
                 {
-                    assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                        assemblyName,
-                        AssemblyBuilderAccess.RunAndSave,
-                        signStrongName ? StrongNamedModuleDirectory : WeakNamedModuleDirectory
-                    );
+                    assemblyBuilder = AppDomain
+                        .CurrentDomain
+                        .DefineDynamicAssembly(
+                            assemblyName,
+                            AssemblyBuilderAccess.RunAndSave,
+                            signStrongName ? StrongNamedModuleDirectory : WeakNamedModuleDirectory
+                        );
                 }
                 catch (ArgumentException e)
                 {
@@ -363,10 +365,9 @@ namespace Castle.DynamicProxy
 #endif
             {
 #if FEATURE_APPDOMAIN
-                var assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    assemblyName,
-                    AssemblyBuilderAccess.Run
-                );
+                var assemblyBuilder = AppDomain
+                    .CurrentDomain
+                    .DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
 #else
                 var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
                     assemblyName,

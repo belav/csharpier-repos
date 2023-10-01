@@ -31,9 +31,9 @@ internal sealed partial class DefaultWebAssemblyJSRuntime : WebAssemblyJSRuntime
     private DefaultWebAssemblyJSRuntime()
     {
         ElementReferenceContext = new WebElementReferenceContext(this);
-        JsonSerializerOptions.Converters.Add(
-            new ElementReferenceJsonConverter(ElementReferenceContext)
-        );
+        JsonSerializerOptions
+            .Converters
+            .Add(new ElementReferenceJsonConverter(ElementReferenceContext));
     }
 
     public JsonSerializerOptions ReadJsonSerializerOptions() => JsonSerializerOptions;
@@ -187,10 +187,12 @@ internal sealed partial class DefaultWebAssemblyJSRuntime : WebAssemblyJSRuntime
                     );
                 }
                 componentType =
-                    Instance._rootComponentCache.GetRootComponent(
-                        operation.Marker!.Value.Assembly!,
-                        operation.Marker.Value.TypeName!
-                    )
+                    Instance
+                        ._rootComponentCache
+                        .GetRootComponent(
+                            operation.Marker!.Value.Assembly!,
+                            operation.Marker.Value.TypeName!
+                        )
                     ?? throw new InvalidOperationException(
                         $"Root component type '{operation.Marker.Value.TypeName}' could not be found in the assembly '{operation.Marker.Value.Assembly}'."
                     );

@@ -338,10 +338,9 @@ internal sealed class OutputCacheMiddleware
                 {
                     try
                     {
-                        await context.CachedResponse.CopyToAsync(
-                            response.BodyWriter,
-                            context.HttpContext.RequestAborted
-                        );
+                        await context
+                            .CachedResponse
+                            .CopyToAsync(response.BodyWriter, context.HttpContext.RequestAborted);
                     }
                     catch (OperationCanceledException)
                     {

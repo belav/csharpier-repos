@@ -188,9 +188,9 @@ namespace Internal.Runtime.TypeLoader
 
                     for (int i = 0; i < expectedArity; i++)
                         if (
-                            !entry._genericTypeArgumentHandles[i].Equals(
-                                _typeToLookup.Instantiation[i].RuntimeTypeHandle
-                            )
+                            !entry
+                                ._genericTypeArgumentHandles[i]
+                                .Equals(_typeToLookup.Instantiation[i].RuntimeTypeHandle)
                         )
                             return false;
                 }
@@ -204,9 +204,9 @@ namespace Internal.Runtime.TypeLoader
 
                     for (int i = 0; i < _genericTypeArgumentHandles.Length; i++)
                         if (
-                            !entry._genericTypeArgumentHandles[i].Equals(
-                                _genericTypeArgumentHandles[i]
-                            )
+                            !entry
+                                ._genericTypeArgumentHandles[i]
+                                .Equals(_genericTypeArgumentHandles[i])
                         )
                             return false;
                 }

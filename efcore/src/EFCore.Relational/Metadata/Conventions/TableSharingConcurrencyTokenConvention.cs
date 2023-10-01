@@ -128,7 +128,8 @@ public class TableSharingConcurrencyTokenConvention : IModelFinalizingConvention
                     ) in entityTypesMissingConcurrencyColumn
                 )
                 {
-                    var propertyBuilder = conventionEntityType.Builder
+                    var propertyBuilder = conventionEntityType
+                        .Builder
                         .CreateUniqueProperty(
                             exampleProperty.ClrType,
                             ConcurrencyPropertyPrefix + exampleProperty.Name,

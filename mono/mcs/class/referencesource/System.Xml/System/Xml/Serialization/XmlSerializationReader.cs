@@ -2625,18 +2625,19 @@ namespace System.Xml.Serialization
                             + ", "
                             + c
                             + ", "
-                            + outerClass.RaCodeGen.GetStringForTypeof(
-                                choiceTypeFullName,
-                                choiceUseReflection
-                            )
+                            + outerClass
+                                .RaCodeGen
+                                .GetStringForTypeof(choiceTypeFullName, choiceUseReflection)
                             + ");";
                         this.choiceArraySource =
                             init
-                            + outerClass.RaCodeGen.GetStringForArrayMember(
-                                a,
-                                c + "++",
-                                mapping.ChoiceIdentifier.Mapping.TypeDesc
-                            );
+                            + outerClass
+                                .RaCodeGen
+                                .GetStringForArrayMember(
+                                    a,
+                                    c + "++",
+                                    mapping.ChoiceIdentifier.Mapping.TypeDesc
+                                );
                     }
                     else
                     {

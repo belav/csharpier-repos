@@ -252,7 +252,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 this,
                                 tuple.paramDecl,
                                 tuple.parameterSymbol,
-                                tuple.containing
+                                tuple
+                                    .containing
                                     .GetEnclosingBinder(tuple.paramDecl.SpanStart)
                                     .CreateBinderForParameterDefaultValue(
                                         tuple.parameterSymbol,

@@ -59,10 +59,9 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryLambdaExpression
         {
             foreach (var diagnostic in diagnostics)
             {
-                var anonymousFunction = diagnostic.AdditionalLocations[0].FindNode(
-                    getInnermostNodeForTie: true,
-                    cancellationToken
-                );
+                var anonymousFunction = diagnostic
+                    .AdditionalLocations[0]
+                    .FindNode(getInnermostNodeForTie: true, cancellationToken);
 
                 editor.ReplaceNode(
                     anonymousFunction,

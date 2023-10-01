@@ -883,9 +883,10 @@ namespace ComInterfaceGenerator.Unit.Tests
                 TestBehaviors =
                     TestBehaviors.SkipGeneratedSourcesCheck | TestBehaviors.SkipGeneratedCodeCheck,
             };
-            test.TestState.AdditionalProjects["Other"].AdditionalReferences.AddRange(
-                test.TestState.AdditionalReferences
-            );
+            test.TestState
+                .AdditionalProjects["Other"]
+                .AdditionalReferences
+                .AddRange(test.TestState.AdditionalReferences);
 
             test.ExpectedDiagnostics.Add(
                 VerifyComInterfaceGenerator

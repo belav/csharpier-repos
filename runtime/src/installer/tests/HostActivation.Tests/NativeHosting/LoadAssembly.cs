@@ -44,14 +44,19 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             result
                 .Should()
                 .Pass()
-                .And.InitializeContextForApp(app.AppDll)
-                .And.ExecuteSelfContained(selfContained: false)
-                .And.ExecuteInDefaultContext(component.AssemblyName)
-                .And.ExecuteWithLocation(
+                .And
+                .InitializeContextForApp(app.AppDll)
+                .And
+                .ExecuteSelfContained(selfContained: false)
+                .And
+                .ExecuteInDefaultContext(component.AssemblyName)
+                .And
+                .ExecuteWithLocation(
                     component.AssemblyName,
                     loadAssemblyBytes ? string.Empty : component.AppDll
                 )
-                .And.ExecuteFunctionPointer(sharedState.ComponentEntryPoint1, 1, 1);
+                .And
+                .ExecuteFunctionPointer(sharedState.ComponentEntryPoint1, 1, 1);
         }
 
         [Fact]
@@ -86,13 +91,17 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             result
                 .Should()
                 .Pass()
-                .And.InitializeContextForConfig(component.RuntimeConfigJson)
-                .And.ExecuteInDefaultContext(component.AssemblyName)
-                .And.ExecuteWithLocation(
+                .And
+                .InitializeContextForConfig(component.RuntimeConfigJson)
+                .And
+                .ExecuteInDefaultContext(component.AssemblyName)
+                .And
+                .ExecuteWithLocation(
                     component.AssemblyName,
                     loadAssemblyBytes ? string.Empty : component.AppDll
                 )
-                .And.ExecuteFunctionPointer(sharedState.ComponentEntryPoint1, 1, 1);
+                .And
+                .ExecuteFunctionPointer(sharedState.ComponentEntryPoint1, 1, 1);
         }
 
         [Fact]
@@ -127,14 +136,19 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             result
                 .Should()
                 .Pass()
-                .And.InitializeContextForApp(app.AppDll)
-                .And.ExecuteSelfContained(selfContained: true)
-                .And.ExecuteInDefaultContext(component.AssemblyName)
-                .And.ExecuteWithLocation(
+                .And
+                .InitializeContextForApp(app.AppDll)
+                .And
+                .ExecuteSelfContained(selfContained: true)
+                .And
+                .ExecuteInDefaultContext(component.AssemblyName)
+                .And
+                .ExecuteWithLocation(
                     component.AssemblyName,
                     loadAssemblyBytes ? string.Empty : component.AppDll
                 )
-                .And.ExecuteFunctionPointer(sharedState.ComponentEntryPoint1, 1, 1);
+                .And
+                .ExecuteFunctionPointer(sharedState.ComponentEntryPoint1, 1, 1);
         }
 
         [Fact]

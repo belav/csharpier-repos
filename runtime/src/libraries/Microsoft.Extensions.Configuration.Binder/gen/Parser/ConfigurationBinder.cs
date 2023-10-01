@@ -46,10 +46,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 int paramCount = @params.Length;
 
                 if (
-                    !SymbolEqualityComparer.Default.Equals(
-                        _typeSymbols.IConfiguration,
-                        @params[0].Type
-                    )
+                    !SymbolEqualityComparer
+                        .Default
+                        .Equals(_typeSymbols.IConfiguration, @params[0].Type)
                 )
                 {
                     return;
@@ -68,10 +67,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                         overload = MethodsToGen.ConfigBinder_Bind_key_instance;
                     }
                     else if (
-                        SymbolEqualityComparer.Default.Equals(
-                            @params[2].Type,
-                            _typeSymbols.ActionOfBinderOptions
-                        )
+                        SymbolEqualityComparer
+                            .Default
+                            .Equals(@params[2].Type, _typeSymbols.ActionOfBinderOptions)
                     )
                     {
                         overload = MethodsToGen.ConfigBinder_Bind_instance_BinderOptions;
@@ -167,10 +165,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 int paramCount = @params.Length;
 
                 if (
-                    !SymbolEqualityComparer.Default.Equals(
-                        _typeSymbols.IConfiguration,
-                        @params[0].Type
-                    )
+                    !SymbolEqualityComparer
+                        .Default
+                        .Equals(_typeSymbols.IConfiguration, @params[0].Type)
                 )
                 {
                     return;
@@ -186,9 +183,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                         return;
                     }
 
-                    type = targetMethod.TypeArguments[0].WithNullableAnnotation(
-                        NullableAnnotation.None
-                    );
+                    type = targetMethod
+                        .TypeArguments[0]
+                        .WithNullableAnnotation(NullableAnnotation.None);
 
                     if (paramCount is 1)
                     {
@@ -196,10 +193,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     }
                     else if (
                         paramCount is 2
-                        && SymbolEqualityComparer.Default.Equals(
-                            @params[1].Type,
-                            _typeSymbols.ActionOfBinderOptions
-                        )
+                        && SymbolEqualityComparer
+                            .Default
+                            .Equals(@params[1].Type, _typeSymbols.ActionOfBinderOptions)
                     )
                     {
                         overload = MethodsToGen.ConfigBinder_Get_T_BinderOptions;
@@ -212,10 +208,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 else
                 {
                     ITypeOfOperation? typeOfOperation =
-                        GetArgumentForParameterAtIndex(
-                            operation.Arguments,
-                            1
-                        ).ChildOperations.FirstOrDefault() as ITypeOfOperation;
+                        GetArgumentForParameterAtIndex(operation.Arguments, 1)
+                            .ChildOperations
+                            .FirstOrDefault() as ITypeOfOperation;
                     type = typeOfOperation?.TypeOperand;
 
                     if (paramCount is 2)
@@ -224,10 +219,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     }
                     else if (
                         paramCount is 3
-                        && SymbolEqualityComparer.Default.Equals(
-                            @params[2].Type,
-                            _typeSymbols.ActionOfBinderOptions
-                        )
+                        && SymbolEqualityComparer
+                            .Default
+                            .Equals(@params[2].Type, _typeSymbols.ActionOfBinderOptions)
                     )
                     {
                         overload = MethodsToGen.ConfigBinder_Get_TypeOf_BinderOptions;
@@ -257,9 +251,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                         return;
                     }
 
-                    type = targetMethod.TypeArguments[0].WithNullableAnnotation(
-                        NullableAnnotation.None
-                    );
+                    type = targetMethod
+                        .TypeArguments[0]
+                        .WithNullableAnnotation(NullableAnnotation.None);
 
                     if (paramCount is 2)
                     {
@@ -285,10 +279,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     }
 
                     ITypeOfOperation? typeOfOperation =
-                        GetArgumentForParameterAtIndex(
-                            operation.Arguments,
-                            1
-                        ).ChildOperations.FirstOrDefault() as ITypeOfOperation;
+                        GetArgumentForParameterAtIndex(operation.Arguments, 1)
+                            .ChildOperations
+                            .FirstOrDefault() as ITypeOfOperation;
                     type = typeOfOperation?.TypeOperand;
 
                     if (paramCount is 3)

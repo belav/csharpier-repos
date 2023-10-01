@@ -100,9 +100,11 @@ namespace System.ServiceModel.Security.Tokens
         )
         {
             if (length != 16 && length != 24 && length != 32)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(SR.GetString(SR.Psha1KeyLengthInvalid, length * 8))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.Psha1KeyLengthInvalid, length * 8))
+                    );
 
             byte[] nonce = new byte[DefaultNonceLength];
             RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
@@ -239,9 +241,11 @@ namespace System.ServiceModel.Security.Tokens
                 if (this.securityKeys == null)
                 {
 #pragma warning suppress 56503
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.DerivedKeyNotInitialized))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.DerivedKeyNotInitialized))
+                        );
                 }
                 return this.securityKeys;
             }
@@ -276,10 +280,13 @@ namespace System.ServiceModel.Security.Tokens
             using (XmlTextWriter xmlWriter = new XmlTextWriter(writer))
             {
                 xmlWriter.Formatting = Formatting.Indented;
-                SecurityStandardsManager.DefaultInstance.SecurityTokenSerializer.WriteKeyIdentifierClause(
-                    XmlDictionaryWriter.CreateDictionaryWriter(xmlWriter),
-                    this.TokenToDeriveIdentifier
-                );
+                SecurityStandardsManager
+                    .DefaultInstance
+                    .SecurityTokenSerializer
+                    .WriteKeyIdentifierClause(
+                        XmlDictionaryWriter.CreateDictionaryWriter(xmlWriter),
+                        this.TokenToDeriveIdentifier
+                    );
             }
             return writer.ToString();
         }
@@ -333,15 +340,17 @@ namespace System.ServiceModel.Security.Tokens
             }
             if (tokenToDeriveIdentifier == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "tokentoDeriveIdentifier"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("tokentoDeriveIdentifier");
             }
             if (!SecurityUtils.IsSupportedAlgorithm(derivationAlgorithm, tokenToDerive))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(SR.GetString(SR.DerivedKeyCannotDeriveFromSecret))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.DerivedKeyCannotDeriveFromSecret))
+                    );
             }
             if (nonce == null)
             {
@@ -349,21 +358,21 @@ namespace System.ServiceModel.Security.Tokens
             }
             if (length == -1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("length")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentOutOfRangeException("length"));
             }
             if (offset == -1 && generation == -1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.DerivedKeyPosAndGenNotSpecified)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(SR.GetString(SR.DerivedKeyPosAndGenNotSpecified));
             }
             if (offset >= 0 && generation >= 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.DerivedKeyPosAndGenBothSpecified)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(SR.GetString(SR.DerivedKeyPosAndGenBothSpecified));
             }
 
             this.id = id;
@@ -390,9 +399,11 @@ namespace System.ServiceModel.Security.Tokens
             }
             if (this.length > maxKeyLength)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.DerivedKeyLengthTooLong, this.length, maxKeyLength)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(SR.DerivedKeyLengthTooLong, this.length, maxKeyLength)
+                    );
             }
 
             this.key = SecurityUtils.GenerateDerivedKey(
@@ -405,9 +416,9 @@ namespace System.ServiceModel.Security.Tokens
             );
             if ((this.key == null) || (this.key.Length == 0))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.DerivedKeyCannotDeriveFromSecret)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(SR.GetString(SR.DerivedKeyCannotDeriveFromSecret));
             }
             List<SecurityKey> temp = new List<SecurityKey>(1);
             temp.Add(new InMemorySymmetricSecurityKey(this.key, false));
@@ -431,11 +442,13 @@ namespace System.ServiceModel.Security.Tokens
             {
                 if (offset > maxOffset)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                        new MessageSecurityException(
-                            SR.GetString(SR.DerivedKeyTokenOffsetTooHigh, offset, maxOffset)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperWarning(
+                            new MessageSecurityException(
+                                SR.GetString(SR.DerivedKeyTokenOffsetTooHigh, offset, maxOffset)
+                            )
+                        );
                 }
             }
             else
@@ -446,16 +459,18 @@ namespace System.ServiceModel.Security.Tokens
                     || effectiveOffset > maxOffset
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                        new MessageSecurityException(
-                            SR.GetString(
-                                SR.DerivedKeyTokenGenerationAndLengthTooHigh,
-                                generation,
-                                length,
-                                maxOffset
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperWarning(
+                            new MessageSecurityException(
+                                SR.GetString(
+                                    SR.DerivedKeyTokenGenerationAndLengthTooHigh,
+                                    generation,
+                                    length,
+                                    maxOffset
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
         }

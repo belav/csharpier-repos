@@ -265,9 +265,10 @@ internal partial class CSharpRecommendationService
 
             foreach (var specialType in specialTypes)
             {
-                var targetTypeSymbol = _context.SemanticModel.Compilation.GetSpecialType(
-                    specialType
-                );
+                var targetTypeSymbol = _context
+                    .SemanticModel
+                    .Compilation
+                    .GetSpecialType(specialType);
                 var conversion = CreateConversion(
                     containerWithoutNullable,
                     fromType: containerWithoutNullable,

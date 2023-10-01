@@ -152,9 +152,9 @@ namespace System.ServiceModel.Configuration
             settings.CacheCookies = this.CacheCookies;
             if (
                 PropertyValueOrigin.Default
-                != this.ElementInformation.Properties[
-                    ConfigurationStrings.DetectReplays
-                ].ValueOrigin
+                != this.ElementInformation
+                    .Properties[ConfigurationStrings.DetectReplays]
+                    .ValueOrigin
             )
                 settings.DetectReplays = this.DetectReplays;
             settings.MaxClockSkew = this.MaxClockSkew;
@@ -226,9 +226,10 @@ namespace System.ServiceModel.Configuration
             this.CacheCookies = source.CacheCookies;
             if (
                 PropertyValueOrigin.Default
-                != source.ElementInformation.Properties[
-                    ConfigurationStrings.DetectReplays
-                ].ValueOrigin
+                != source
+                    .ElementInformation
+                    .Properties[ConfigurationStrings.DetectReplays]
+                    .ValueOrigin
             )
                 this.DetectReplays = source.DetectReplays;
             this.MaxClockSkew = source.MaxClockSkew;

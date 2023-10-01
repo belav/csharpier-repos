@@ -134,9 +134,10 @@ public class CompressionTests : FixtureLoggedTest
             Timeout = TimeSpan.FromSeconds(200),
         };
         client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
-        client.DefaultRequestHeaders.AcceptEncoding.Add(
-            new StringWithQualityHeaderValue("identity", 0)
-        );
+        client
+            .DefaultRequestHeaders
+            .AcceptEncoding
+            .Add(new StringWithQualityHeaderValue("identity", 0));
         client.DefaultRequestHeaders.Add("Response-Content-Type", "text/event-stream");
         var messages = "Message1\r\nMessage2\r\n\r\n";
 

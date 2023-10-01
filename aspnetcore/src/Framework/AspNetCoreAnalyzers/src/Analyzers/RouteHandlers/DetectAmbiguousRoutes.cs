@@ -129,12 +129,14 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
         var method = invocationOperation.TargetMethod;
 
         if (
-            SymbolEqualityComparer.Default.Equals(
-                method.ContainingType,
-                wellKnownTypes.Get(
-                    WellKnownType.Microsoft_AspNetCore_Builder_RoutingEndpointConventionBuilderExtensions
+            SymbolEqualityComparer
+                .Default
+                .Equals(
+                    method.ContainingType,
+                    wellKnownTypes.Get(
+                        WellKnownType.Microsoft_AspNetCore_Builder_RoutingEndpointConventionBuilderExtensions
+                    )
                 )
-            )
         )
         {
             return method.Name switch
@@ -148,23 +150,27 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
             };
         }
         else if (
-            SymbolEqualityComparer.Default.Equals(
-                method.ContainingType,
-                wellKnownTypes.Get(
-                    WellKnownType.Microsoft_AspNetCore_Builder_AuthorizationEndpointConventionBuilderExtensions
+            SymbolEqualityComparer
+                .Default
+                .Equals(
+                    method.ContainingType,
+                    wellKnownTypes.Get(
+                        WellKnownType.Microsoft_AspNetCore_Builder_AuthorizationEndpointConventionBuilderExtensions
+                    )
                 )
-            )
         )
         {
             return method.Name is "RequireAuthorization" or "AllowAnonymous";
         }
         else if (
-            SymbolEqualityComparer.Default.Equals(
-                method.ContainingType,
-                wellKnownTypes.Get(
-                    WellKnownType.Microsoft_AspNetCore_Http_OpenApiRouteHandlerBuilderExtensions
+            SymbolEqualityComparer
+                .Default
+                .Equals(
+                    method.ContainingType,
+                    wellKnownTypes.Get(
+                        WellKnownType.Microsoft_AspNetCore_Http_OpenApiRouteHandlerBuilderExtensions
+                    )
                 )
-            )
         )
         {
             return method.Name switch
@@ -181,34 +187,40 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
             };
         }
         else if (
-            SymbolEqualityComparer.Default.Equals(
-                method.ContainingType,
-                wellKnownTypes.Get(
-                    WellKnownType.Microsoft_AspNetCore_Builder_CorsEndpointConventionBuilderExtensions
+            SymbolEqualityComparer
+                .Default
+                .Equals(
+                    method.ContainingType,
+                    wellKnownTypes.Get(
+                        WellKnownType.Microsoft_AspNetCore_Builder_CorsEndpointConventionBuilderExtensions
+                    )
                 )
-            )
         )
         {
             return method.Name == "RequireCors";
         }
         else if (
-            SymbolEqualityComparer.Default.Equals(
-                method.ContainingType,
-                wellKnownTypes.Get(
-                    WellKnownType.Microsoft_Extensions_DependencyInjection_OutputCacheConventionBuilderExtensions
+            SymbolEqualityComparer
+                .Default
+                .Equals(
+                    method.ContainingType,
+                    wellKnownTypes.Get(
+                        WellKnownType.Microsoft_Extensions_DependencyInjection_OutputCacheConventionBuilderExtensions
+                    )
                 )
-            )
         )
         {
             return method.Name == "CacheOutput";
         }
         else if (
-            SymbolEqualityComparer.Default.Equals(
-                method.ContainingType,
-                wellKnownTypes.Get(
-                    WellKnownType.Microsoft_AspNetCore_Builder_RateLimiterEndpointConventionBuilderExtensions
+            SymbolEqualityComparer
+                .Default
+                .Equals(
+                    method.ContainingType,
+                    wellKnownTypes.Get(
+                        WellKnownType.Microsoft_AspNetCore_Builder_RateLimiterEndpointConventionBuilderExtensions
+                    )
                 )
-            )
         )
         {
             return method.Name is "RequireRateLimiting" or "DisableRateLimiting";
@@ -253,10 +265,12 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
             return ParentOperation != null
                 && Equals(ParentOperation, other.ParentOperation)
                 && Builder != null
-                && SymbolEqualityComparer.Default.Equals(
-                    (Builder as ILocalReferenceOperation)?.Local,
-                    (other.Builder as ILocalReferenceOperation)?.Local
-                )
+                && SymbolEqualityComparer
+                    .Default
+                    .Equals(
+                        (Builder as ILocalReferenceOperation)?.Local,
+                        (other.Builder as ILocalReferenceOperation)?.Local
+                    )
                 && AmbiguousRoutePatternComparer.Instance.Equals(RoutePattern, other.RoutePattern)
                 && HasMatchingHttpMethods(HttpMethods, other.HttpMethods);
         }

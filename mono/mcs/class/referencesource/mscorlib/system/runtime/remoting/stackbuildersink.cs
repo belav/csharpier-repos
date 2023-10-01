@@ -68,7 +68,8 @@ namespace System.Runtime.Remoting.Messaging
             IMessage retMessage;
             LogicalCallContext oldCallCtx = null;
 
-            LogicalCallContext lcc = Thread.CurrentThread
+            LogicalCallContext lcc = Thread
+                .CurrentThread
                 .GetMutableExecutionContext()
                 .LogicalCallContext;
             object xADCall = lcc.GetData(CrossAppDomainSink.LCC_DATA_KEY);
@@ -124,7 +125,8 @@ namespace System.Runtime.Remoting.Messaging
                     ((StackBasedReturnMessage)retMessage).InitFields((Message)mcMsg);
 
                     // call context could be different then the one from before the call.
-                    LogicalCallContext latestCallContext = Thread.CurrentThread
+                    LogicalCallContext latestCallContext = Thread
+                        .CurrentThread
                         .GetMutableExecutionContext()
                         .LogicalCallContext;
                     // retrieve outgoing response headers
@@ -150,7 +152,8 @@ namespace System.Runtime.Remoting.Messaging
                     CopyNonByrefOutArgsFromOriginalArgs(methodCache, args, ref outArgs);
 
                     // call context could be different then the one from before the call.
-                    LogicalCallContext latestCallContext = Thread.CurrentThread
+                    LogicalCallContext latestCallContext = Thread
+                        .CurrentThread
                         .GetMutableExecutionContext()
                         .LogicalCallContext;
 
@@ -248,7 +251,8 @@ namespace System.Runtime.Remoting.Messaging
                     if (replySink != null)
                     {
                         // call context could be different then the one from before the call.
-                        LogicalCallContext latestCallContext = Thread.CurrentThread
+                        LogicalCallContext latestCallContext = Thread
+                            .CurrentThread
                             .GetMutableExecutionContext()
                             .LogicalCallContext;
 

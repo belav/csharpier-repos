@@ -1876,10 +1876,12 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             IEnumerable<SyntaxToken>? oldTokens,
             IEnumerable<SyntaxToken>? newTokens
         ) =>
-            LcsTokens.Instance.ComputeDistance(
-                CreateArrayForDistanceCalculation(oldTokens),
-                CreateArrayForDistanceCalculation(newTokens)
-            );
+            LcsTokens
+                .Instance
+                .ComputeDistance(
+                    CreateArrayForDistanceCalculation(oldTokens),
+                    CreateArrayForDistanceCalculation(newTokens)
+                );
 
         /// <summary>
         /// Calculates the distance between two sequences of syntax nodes, disregarding trivia.
@@ -1891,10 +1893,12 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             IEnumerable<SyntaxNode>? oldNodes,
             IEnumerable<SyntaxNode>? newNodes
         ) =>
-            LcsNodes.Instance.ComputeDistance(
-                CreateArrayForDistanceCalculation(oldNodes),
-                CreateArrayForDistanceCalculation(newNodes)
-            );
+            LcsNodes
+                .Instance
+                .ComputeDistance(
+                    CreateArrayForDistanceCalculation(oldNodes),
+                    CreateArrayForDistanceCalculation(newNodes)
+                );
 
         /// <summary>
         /// Calculates the edits that transform one sequence of syntax nodes to another, disregarding trivia.
@@ -1903,10 +1907,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             IEnumerable<SyntaxNode>? oldNodes,
             IEnumerable<SyntaxNode>? newNodes
         ) =>
-            LcsNodes.Instance.GetEdits(
-                oldNodes.AsImmutableOrEmpty(),
-                newNodes.AsImmutableOrEmpty()
-            );
+            LcsNodes
+                .Instance
+                .GetEdits(oldNodes.AsImmutableOrEmpty(), newNodes.AsImmutableOrEmpty());
 
         /// <summary>
         /// Calculates the edits that transform one sequence of syntax nodes to another, disregarding trivia.
@@ -1923,10 +1926,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             IEnumerable<SyntaxToken>? oldTokens,
             IEnumerable<SyntaxToken>? newTokens
         ) =>
-            LcsTokens.Instance.GetEdits(
-                oldTokens.AsImmutableOrEmpty(),
-                newTokens.AsImmutableOrEmpty()
-            );
+            LcsTokens
+                .Instance
+                .GetEdits(oldTokens.AsImmutableOrEmpty(), newTokens.AsImmutableOrEmpty());
 
         /// <summary>
         /// Calculates the edits that transform one sequence of syntax tokens to another, disregarding trivia.

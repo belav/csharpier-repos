@@ -543,7 +543,9 @@ public abstract class RuntimeTypeBase : AnnotatableBase, IRuntimeTypeBase
                 yield return complexProperty;
 
                 foreach (
-                    var nestedComplexProperty in complexProperty.ComplexType.GetFlattenedComplexProperties()
+                    var nestedComplexProperty in complexProperty
+                        .ComplexType
+                        .GetFlattenedComplexProperties()
                 )
                 {
                     yield return nestedComplexProperty;

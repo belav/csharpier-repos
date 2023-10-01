@@ -42,9 +42,9 @@ namespace System.ServiceModel
             {
                 if (!BasicHttpSecurityModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.mode = value;
             }

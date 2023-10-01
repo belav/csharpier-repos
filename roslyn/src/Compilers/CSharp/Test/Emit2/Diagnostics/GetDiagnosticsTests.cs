@@ -610,16 +610,14 @@ class C
 
             // Verify CS0168 reported by CSharpCompilerDiagnosticAnalyzer is not affected by "dotnet_analyzer_diagnostic = none"
             var analyzerConfigOptions = new DictionaryAnalyzerConfigOptions(
-                ImmutableDictionary<string, string>.Empty.Add(
-                    "dotnet_analyzer_diagnostic.severity",
-                    "none"
-                )
+                ImmutableDictionary<string, string>
+                    .Empty
+                    .Add("dotnet_analyzer_diagnostic.severity", "none")
             );
             var analyzerConfigOptionsProvider = new CompilerAnalyzerConfigOptionsProvider(
-                ImmutableDictionary<object, AnalyzerConfigOptions>.Empty.Add(
-                    compilation.SyntaxTrees.Single(),
-                    analyzerConfigOptions
-                ),
+                ImmutableDictionary<object, AnalyzerConfigOptions>
+                    .Empty
+                    .Add(compilation.SyntaxTrees.Single(), analyzerConfigOptions),
                 DictionaryAnalyzerConfigOptions.Empty
             );
             var analyzerOptions = new AnalyzerOptions(
@@ -688,16 +686,14 @@ class C
                 if (options.HasValue)
                 {
                     var analyzerConfigOptions = new DictionaryAnalyzerConfigOptions(
-                        ImmutableDictionary<string, string>.Empty.Add(
-                            options.Value.key,
-                            options.Value.value
-                        )
+                        ImmutableDictionary<string, string>
+                            .Empty
+                            .Add(options.Value.key, options.Value.value)
                     );
                     var analyzerConfigOptionsProvider = new CompilerAnalyzerConfigOptionsProvider(
-                        ImmutableDictionary<object, AnalyzerConfigOptions>.Empty.Add(
-                            compilation.SyntaxTrees.Single(),
-                            analyzerConfigOptions
-                        ),
+                        ImmutableDictionary<object, AnalyzerConfigOptions>
+                            .Empty
+                            .Add(compilation.SyntaxTrees.Single(), analyzerConfigOptions),
                         DictionaryAnalyzerConfigOptions.Empty
                     );
                     analyzerOptions = new AnalyzerOptions(
@@ -1092,22 +1088,24 @@ class D
                 );
             }
 
-            result.CompilationDiagnostics[analyzer].Verify(
-                Diagnostic("ID0001", "P1").WithArguments("get_P1").WithLocation(9, 9),
-                Diagnostic("ID0001", "P2").WithArguments("get_P2").WithLocation(10, 9),
-                Diagnostic("ID0001", "P2").WithArguments("set_P2").WithLocation(10, 9),
-                Diagnostic("ID0001", "this").WithArguments("get_Item").WithLocation(11, 9),
-                Diagnostic("ID0001", "this").WithArguments("get_Item").WithLocation(12, 9),
-                Diagnostic("ID0001", "this").WithArguments("set_Item").WithLocation(12, 9),
-                Diagnostic("ID0001", "E1").WithArguments("add_E1").WithLocation(13, 24),
-                Diagnostic("ID0001", "E1").WithArguments("remove_E1").WithLocation(13, 24),
-                Diagnostic("ID0001", "P3").WithArguments("get_P3").WithLocation(25, 9),
-                Diagnostic("ID0001", "P3").WithArguments("set_P3").WithLocation(25, 9),
-                Diagnostic("ID0001", "this").WithArguments("get_Item").WithLocation(26, 9),
-                Diagnostic("ID0001", "this").WithArguments("set_Item").WithLocation(26, 9),
-                Diagnostic("ID0001", "E2").WithArguments("remove_E2").WithLocation(27, 24),
-                Diagnostic("ID0001", "E2").WithArguments("add_E2").WithLocation(27, 24)
-            );
+            result
+                .CompilationDiagnostics[analyzer]
+                .Verify(
+                    Diagnostic("ID0001", "P1").WithArguments("get_P1").WithLocation(9, 9),
+                    Diagnostic("ID0001", "P2").WithArguments("get_P2").WithLocation(10, 9),
+                    Diagnostic("ID0001", "P2").WithArguments("set_P2").WithLocation(10, 9),
+                    Diagnostic("ID0001", "this").WithArguments("get_Item").WithLocation(11, 9),
+                    Diagnostic("ID0001", "this").WithArguments("get_Item").WithLocation(12, 9),
+                    Diagnostic("ID0001", "this").WithArguments("set_Item").WithLocation(12, 9),
+                    Diagnostic("ID0001", "E1").WithArguments("add_E1").WithLocation(13, 24),
+                    Diagnostic("ID0001", "E1").WithArguments("remove_E1").WithLocation(13, 24),
+                    Diagnostic("ID0001", "P3").WithArguments("get_P3").WithLocation(25, 9),
+                    Diagnostic("ID0001", "P3").WithArguments("set_P3").WithLocation(25, 9),
+                    Diagnostic("ID0001", "this").WithArguments("get_Item").WithLocation(26, 9),
+                    Diagnostic("ID0001", "this").WithArguments("set_Item").WithLocation(26, 9),
+                    Diagnostic("ID0001", "E2").WithArguments("remove_E2").WithLocation(27, 24),
+                    Diagnostic("ID0001", "E2").WithArguments("add_E2").WithLocation(27, 24)
+                );
 
             Assert.Empty(result.SyntaxDiagnostics);
         }
@@ -1166,10 +1164,12 @@ class D
                             context.RegisterCodeBlockEndAction(blockEndContext =>
                             {
                                 blockEndContext.ReportDiagnostic(
-                                    CodeAnalysis.Diagnostic.Create(
-                                        DescriptorForBlockEnd,
-                                        blockEndContext.CodeBlock.GetLocation()
-                                    )
+                                    CodeAnalysis
+                                        .Diagnostic
+                                        .Create(
+                                            DescriptorForBlockEnd,
+                                            blockEndContext.CodeBlock.GetLocation()
+                                        )
                                 );
 
                                 if (blockEndContext.CodeBlock is BasePropertyDeclarationSyntax)
@@ -1198,10 +1198,12 @@ class D
                                 foreach (var operationBlock in blockEndContext.OperationBlocks)
                                 {
                                     blockEndContext.ReportDiagnostic(
-                                        CodeAnalysis.Diagnostic.Create(
-                                            DescriptorForBlockEnd,
-                                            operationBlock.Syntax.GetLocation()
-                                        )
+                                        CodeAnalysis
+                                            .Diagnostic
+                                            .Create(
+                                                DescriptorForBlockEnd,
+                                                operationBlock.Syntax.GetLocation()
+                                            )
                                     );
 
                                     if (
@@ -1412,43 +1414,49 @@ class E
             // Verify syntax diagnostics.
             if (actionKind == LocalNonLocalDiagnosticsAnalyzer.ActionKind.SyntaxTreeAction)
             {
-                result.SyntaxDiagnostics[tree1][analyzer].Verify(
-                    Diagnostic("ID0001", "int x1a = 0;")
-                        .WithArguments("RegisterSyntaxTreeAction(File1)")
-                        .WithLocation(6, 9),
-                    Diagnostic("ID0001", "int x1b = 0;")
-                        .WithArguments("RegisterSyntaxTreeAction(File1)")
-                        .WithLocation(7, 9),
-                    Diagnostic("ID0001", "int x2 = 0;")
-                        .WithArguments("RegisterSyntaxTreeAction(File1)")
-                        .WithLocation(12, 9),
-                    Diagnostic("ID0001", "int x3 = 0;")
-                        .WithArguments("RegisterSyntaxTreeAction(File1)")
-                        .WithLocation(20, 9)
-                );
-                result.SyntaxDiagnostics[tree2][analyzer].Verify(
-                    Diagnostic("ID0001", "int x4 = 0;")
-                        .WithArguments("RegisterSyntaxTreeAction(File2)")
-                        .WithLocation(6, 9)
-                );
+                result
+                    .SyntaxDiagnostics[tree1][analyzer]
+                    .Verify(
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterSyntaxTreeAction(File1)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterSyntaxTreeAction(File1)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterSyntaxTreeAction(File1)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterSyntaxTreeAction(File1)")
+                            .WithLocation(20, 9)
+                    );
+                result
+                    .SyntaxDiagnostics[tree2][analyzer]
+                    .Verify(
+                        Diagnostic("ID0001", "int x4 = 0;")
+                            .WithArguments("RegisterSyntaxTreeAction(File2)")
+                            .WithLocation(6, 9)
+                    );
 
-                result.CompilationDiagnostics[analyzer].Verify(
-                    Diagnostic("ID0001", "int x4 = 0;")
-                        .WithArguments("RegisterSyntaxTreeAction(File1)")
-                        .WithLocation(6, 9),
-                    Diagnostic("ID0001", "int x1a = 0;")
-                        .WithArguments("RegisterSyntaxTreeAction(File2)")
-                        .WithLocation(6, 9),
-                    Diagnostic("ID0001", "int x1b = 0;")
-                        .WithArguments("RegisterSyntaxTreeAction(File2)")
-                        .WithLocation(7, 9),
-                    Diagnostic("ID0001", "int x2 = 0;")
-                        .WithArguments("RegisterSyntaxTreeAction(File2)")
-                        .WithLocation(12, 9),
-                    Diagnostic("ID0001", "int x3 = 0;")
-                        .WithArguments("RegisterSyntaxTreeAction(File2)")
-                        .WithLocation(20, 9)
-                );
+                result
+                    .CompilationDiagnostics[analyzer]
+                    .Verify(
+                        Diagnostic("ID0001", "int x4 = 0;")
+                            .WithArguments("RegisterSyntaxTreeAction(File1)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterSyntaxTreeAction(File2)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterSyntaxTreeAction(File2)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterSyntaxTreeAction(File2)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterSyntaxTreeAction(File2)")
+                            .WithLocation(20, 9)
+                    );
 
                 Assert.Empty(result.SemanticDiagnostics);
 
@@ -2585,7 +2593,8 @@ partial class C
             );
             AssertEx.SetEqual(
                 expectedOperationInsideBlockCallbacks,
-                analyzer.AnalyzedOperationsInsideOperationBlock
+                analyzer
+                    .AnalyzedOperationsInsideOperationBlock
                     .Select(op => op.Syntax.ToString())
                     .ToHashSet()
             );
@@ -2704,10 +2713,12 @@ public enum E2
                         {
                             if (!field.IsImplicitlyDeclared)
                             {
-                                var diag = CodeAnalysis.Diagnostic.Create(
-                                    Descriptor,
-                                    field.DeclaringSyntaxReferences[0].GetLocation()
-                                );
+                                var diag = CodeAnalysis
+                                    .Diagnostic
+                                    .Create(
+                                        Descriptor,
+                                        field.DeclaringSyntaxReferences[0].GetLocation()
+                                    );
                                 symbolContext.ReportDiagnostic(diag);
                             }
                         }

@@ -53,14 +53,16 @@ internal sealed class RazorProjectPageRouteModelProvider : IPageRouteModelProvid
         {
             var relativePath = item.CombinedPath;
             if (
-                context.RouteModels.Any(
-                    m =>
-                        string.Equals(
-                            relativePath,
-                            m.RelativePath,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                )
+                context
+                    .RouteModels
+                    .Any(
+                        m =>
+                            string.Equals(
+                                relativePath,
+                                m.RelativePath,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                    )
             )
             {
                 // A route for this file was already registered either by the CompiledPageRouteModel or as an area route.
@@ -91,14 +93,16 @@ internal sealed class RazorProjectPageRouteModelProvider : IPageRouteModelProvid
         {
             var relativePath = item.CombinedPath;
             if (
-                context.RouteModels.Any(
-                    m =>
-                        string.Equals(
-                            relativePath,
-                            m.RelativePath,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                )
+                context
+                    .RouteModels
+                    .Any(
+                        m =>
+                            string.Equals(
+                                relativePath,
+                                m.RelativePath,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                    )
             )
             {
                 // A route for this file was already registered either by the CompiledPageRouteModel.

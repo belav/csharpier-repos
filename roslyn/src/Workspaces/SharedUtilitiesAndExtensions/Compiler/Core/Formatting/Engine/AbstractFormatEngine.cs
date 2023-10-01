@@ -111,9 +111,9 @@ namespace Microsoft.CodeAnalysis.Formatting
 
                 // start anchor task that will be used later
                 cancellationToken.ThrowIfCancellationRequested();
-                var anchorContext = nodeOperations.AnchorIndentationOperations.Do(
-                    context.AddAnchorIndentationOperation
-                );
+                var anchorContext = nodeOperations
+                    .AnchorIndentationOperations
+                    .Do(context.AddAnchorIndentationOperation);
 
                 BuildContext(context, nodeOperations, cancellationToken);
 
@@ -279,7 +279,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             }
 
             // remove all leading indentation
-            var triviaInfo = context.TokenStream
+            var triviaInfo = context
+                .TokenStream
                 .GetTriviaDataAtBeginningOfTree()
                 .WithIndentation(0, context, _formattingRules, cancellationToken);
 
@@ -318,7 +319,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             }
 
             // remove all trailing indentation
-            var triviaInfo = context.TokenStream
+            var triviaInfo = context
+                .TokenStream
                 .GetTriviaDataAtEndOfTree()
                 .WithIndentation(0, context, _formattingRules, cancellationToken);
 

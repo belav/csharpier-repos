@@ -277,9 +277,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     {
                         AddSuppressWrappingIfOnSingleLineOperation(
                             list,
-                            switchSection.Labels[switchSection.Labels.Count - 1].GetFirstToken(
-                                includeZeroWidth: true
-                            ),
+                            switchSection
+                                .Labels[switchSection.Labels.Count - 1]
+                                .GetFirstToken(includeZeroWidth: true),
                             switchSection.GetLastToken(includeZeroWidth: true)
                         );
                     }
@@ -488,9 +488,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             }
 
             if (
-                !pragmaWarningDirectiveTrivia.DisableOrRestoreKeyword.IsKind(
-                    disableOrRestoreKeyword
-                )
+                !pragmaWarningDirectiveTrivia
+                    .DisableOrRestoreKeyword
+                    .IsKind(disableOrRestoreKeyword)
             )
             {
                 return false;
@@ -504,12 +504,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 }
 
                 if (
-                    identifierName.Identifier.ValueText.Equals(
-                        FormattingDiagnosticIds.FormatDocumentControlDiagnosticId
-                    )
-                    || identifierName.Identifier.ValueText.Equals(
-                        FormattingDiagnosticIds.FormattingDiagnosticId
-                    )
+                    identifierName
+                        .Identifier
+                        .ValueText
+                        .Equals(FormattingDiagnosticIds.FormatDocumentControlDiagnosticId)
+                    || identifierName
+                        .Identifier
+                        .ValueText
+                        .Equals(FormattingDiagnosticIds.FormattingDiagnosticId)
                 )
                 {
                     return true;
@@ -530,9 +532,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 var arrayOrCollectionInitializer = (InitializerExpressionSyntax)node;
                 AddSuppressAllOperationIfOnMultipleLine(
                     list,
-                    arrayOrCollectionInitializer.OpenBraceToken.GetPreviousToken(
-                        includeZeroWidth: true
-                    ),
+                    arrayOrCollectionInitializer
+                        .OpenBraceToken
+                        .GetPreviousToken(includeZeroWidth: true),
                     arrayOrCollectionInitializer.CloseBraceToken
                 );
                 return;

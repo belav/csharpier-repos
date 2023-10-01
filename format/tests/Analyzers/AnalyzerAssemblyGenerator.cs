@@ -142,7 +142,8 @@ public class {typeName} : DiagnosticAnalyzer
             var result = compilation.Emit(ms);
             if (!result.Success)
             {
-                var failures = result.Diagnostics
+                var failures = result
+                    .Diagnostics
                     .Where(
                         diagnostic =>
                             diagnostic.IsWarningAsError

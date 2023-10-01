@@ -45,9 +45,9 @@ namespace System.CommandLine.Completions
         /// <returns>A string containing the user-entered text to be matched for completions.</returns>
         protected static string GetWordToComplete(ParseResult parseResult, int? position = null)
         {
-            CliToken? lastToken = parseResult.Tokens.LastOrDefault(
-                t => t.Type != CliTokenType.Directive
-            );
+            CliToken? lastToken = parseResult
+                .Tokens
+                .LastOrDefault(t => t.Type != CliTokenType.Directive);
 
             string? textToMatch = null;
             string? rawInput = parseResult.CommandLineText;

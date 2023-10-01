@@ -121,9 +121,13 @@ public class UriTests : AbstractLanguageServerProtocolTests
             mutatingLspWorkspace
         );
 
-        var workspaceDocument = testLspServer.TestWorkspace.CurrentSolution.Projects
+        var workspaceDocument = testLspServer
+            .TestWorkspace
+            .CurrentSolution
+            .Projects
             .Single()
-            .Documents.Single();
+            .Documents
+            .Single();
         var expectedDocumentUri = ProtocolConversions.CreateAbsoluteUri(documentFilePath);
 
         await testLspServer.OpenDocumentAsync(expectedDocumentUri).ConfigureAwait(false);
@@ -154,9 +158,13 @@ public class UriTests : AbstractLanguageServerProtocolTests
             }
         );
 
-        var fileDocumentUri = testLspServer.TestWorkspace.CurrentSolution.Projects
+        var fileDocumentUri = testLspServer
+            .TestWorkspace
+            .CurrentSolution
+            .Projects
             .Single()
-            .Documents.Single()
+            .Documents
+            .Single()
             .GetURI();
         var fileDocumentText = "FileText";
         await testLspServer.OpenDocumentAsync(fileDocumentUri, fileDocumentText);

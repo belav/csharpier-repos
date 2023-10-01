@@ -140,7 +140,8 @@ namespace System.Web.Handlers
                     // check the <httpHandlers> section
                     HttpHandlerAction httpHandler = RuntimeConfig
                         .GetConfig(VirtualPath.Create(webResourcePath))
-                        .HttpHandlers.FindMapping("GET", VirtualPath.Create(_webResourceUrl));
+                        .HttpHandlers
+                        .FindMapping("GET", VirtualPath.Create(_webResourceUrl));
                     _handlerExists =
                         (httpHandler != null)
                         && (httpHandler.TypeInternal == typeof(AssemblyResourceLoader));
@@ -480,10 +481,9 @@ namespace System.Web.Handlers
                 IScriptResourceDefinition definition = null;
                 if (ClientScriptManager._scriptResourceMapping != null)
                 {
-                    definition = ClientScriptManager._scriptResourceMapping.GetDefinition(
-                        resourceName,
-                        assembly
-                    );
+                    definition = ClientScriptManager
+                        ._scriptResourceMapping
+                        .GetDefinition(resourceName, assembly);
                     if (definition != null)
                     {
                         if (!String.IsNullOrEmpty(definition.ResourceName))

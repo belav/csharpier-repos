@@ -80,10 +80,9 @@ namespace System.Threading
                     newCounts.AddUpToMaxCountOfWaitersSignaledToWake((uint)countOfWaitersToWake);
                 }
 
-                Counts countsBeforeUpdate = _separated._counts.InterlockedCompareExchange(
-                    newCounts,
-                    counts
-                );
+                Counts countsBeforeUpdate = _separated
+                    ._counts
+                    .InterlockedCompareExchange(newCounts, counts);
                 if (countsBeforeUpdate == counts)
                 {
                     Debug.Assert(releaseCount <= _maximumSignalCount - counts.SignalCount);

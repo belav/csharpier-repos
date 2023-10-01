@@ -64,9 +64,9 @@ namespace Internal.Runtime.TypeLoader
 
                 for (int i = 0; i < _genericMethodArgumentHandles.Length; i++)
                     if (
-                        !other._genericMethodArgumentHandles[i].Equals(
-                            _genericMethodArgumentHandles[i]
-                        )
+                        !other
+                            ._genericMethodArgumentHandles[i]
+                            .Equals(_genericMethodArgumentHandles[i])
                     )
                         return false;
 
@@ -191,8 +191,9 @@ namespace Internal.Runtime.TypeLoader
                     );
 
                 // Hash table names / sigs are indirected through to the native layout info
-                MethodNameAndSignature nameAndSignature =
-                    TypeLoaderEnvironment.Instance.GetMethodNameAndSignatureFromNativeLayoutOffset(
+                MethodNameAndSignature nameAndSignature = TypeLoaderEnvironment
+                    .Instance
+                    .GetMethodNameAndSignatureFromNativeLayoutOffset(
                         moduleHandle,
                         entryParser.GetUnsigned()
                     );
@@ -285,11 +286,9 @@ namespace Internal.Runtime.TypeLoader
                 )
                     return false;
 
-                nameAndSignature =
-                    TypeLoaderEnvironment.Instance.GetMethodNameAndSignatureFromNativeLayoutOffset(
-                        typeManager,
-                        nameAndSigOffset
-                    );
+                nameAndSignature = TypeLoaderEnvironment
+                    .Instance
+                    .GetMethodNameAndSignatureFromNativeLayoutOffset(typeManager, nameAndSigOffset);
             }
 
             return true;

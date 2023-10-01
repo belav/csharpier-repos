@@ -72,10 +72,9 @@ namespace Microsoft.CodeAnalysis.Recommendations
             CancellationToken cancellationToken
         )
         {
-            var enclosingSymbol = context.SemanticModel.GetEnclosingSymbol(
-                context.LeftToken.SpanStart,
-                cancellationToken
-            );
+            var enclosingSymbol = context
+                .SemanticModel
+                .GetEnclosingSymbol(context.LeftToken.SpanStart, cancellationToken);
             if (enclosingSymbol != null)
             {
                 var containingType = enclosingSymbol.GetContainingTypeOrThis();
@@ -146,10 +145,12 @@ namespace Microsoft.CodeAnalysis.Recommendations
                 if (_context.IsAttributeNameContext)
                 {
                     return symbol.IsOrContainsAccessibleAttribute(
-                        _context.SemanticModel.GetEnclosingNamedType(
-                            _context.LeftToken.SpanStart,
-                            _cancellationToken
-                        ),
+                        _context
+                            .SemanticModel
+                            .GetEnclosingNamedType(
+                                _context.LeftToken.SpanStart,
+                                _cancellationToken
+                            ),
                         _context.SemanticModel.Compilation.Assembly,
                         _cancellationToken
                     );
@@ -201,10 +202,9 @@ namespace Microsoft.CodeAnalysis.Recommendations
             {
                 if (_lazyEnclosingTypeBases.IsDefault)
                 {
-                    var enclosingType = _context.SemanticModel.GetEnclosingNamedType(
-                        _context.LeftToken.SpanStart,
-                        _cancellationToken
-                    );
+                    var enclosingType = _context
+                        .SemanticModel
+                        .GetEnclosingNamedType(_context.LeftToken.SpanStart, _cancellationToken);
                     _lazyEnclosingTypeBases =
                         enclosingType == null
                             ? ImmutableArray<INamedTypeSymbol>.Empty

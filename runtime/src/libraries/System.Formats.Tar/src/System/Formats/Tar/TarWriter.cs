@@ -325,11 +325,13 @@ namespace System.Formats.Tar
                 case TarEntryFormat.Pax:
                     if (entry._header._typeFlag is TarEntryType.GlobalExtendedAttributes)
                     {
-                        entry._header.WriteAsPaxGlobalExtendedAttributes(
-                            _archiveStream,
-                            buffer,
-                            _nextGlobalExtendedAttributesEntryNumber++
-                        );
+                        entry
+                            ._header
+                            .WriteAsPaxGlobalExtendedAttributes(
+                                _archiveStream,
+                                buffer,
+                                _nextGlobalExtendedAttributesEntryNumber++
+                            );
                     }
                     else
                     {
@@ -369,12 +371,14 @@ namespace System.Formats.Tar
                     => entry._header.WriteAsUstarAsync(_archiveStream, buffer, cancellationToken),
                 TarEntryFormat.Pax
                     when entry._header._typeFlag is TarEntryType.GlobalExtendedAttributes
-                    => entry._header.WriteAsPaxGlobalExtendedAttributesAsync(
-                        _archiveStream,
-                        buffer,
-                        _nextGlobalExtendedAttributesEntryNumber++,
-                        cancellationToken
-                    ),
+                    => entry
+                        ._header
+                        .WriteAsPaxGlobalExtendedAttributesAsync(
+                            _archiveStream,
+                            buffer,
+                            _nextGlobalExtendedAttributesEntryNumber++,
+                            cancellationToken
+                        ),
                 TarEntryFormat.Pax
                     => entry._header.WriteAsPaxAsync(_archiveStream, buffer, cancellationToken),
                 TarEntryFormat.Gnu

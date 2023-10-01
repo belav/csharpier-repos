@@ -197,18 +197,19 @@ namespace System.Data.SqlClient
                     )
                 )
                 {
-                    exception.Data.Add(
-                        OriginalClientConnectionIdKey,
-                        internalConnection.OriginalClientConnectionId
-                    );
+                    exception
+                        .Data
+                        .Add(
+                            OriginalClientConnectionIdKey,
+                            internalConnection.OriginalClientConnectionId
+                        );
                 }
 
                 if (!string.IsNullOrEmpty(internalConnection.RoutingDestination))
                 {
-                    exception.Data.Add(
-                        RoutingDestinationKey,
-                        internalConnection.RoutingDestination
-                    );
+                    exception
+                        .Data
+                        .Add(RoutingDestinationKey, internalConnection.RoutingDestination);
                 }
             }
 
@@ -261,10 +262,12 @@ namespace System.Data.SqlClient
                 exception.Data.Add("HelpLink.ProdVer", serverVersion);
             }
             exception.Data.Add("HelpLink.EvtSrc", "MSSQLServer");
-            exception.Data.Add(
-                "HelpLink.EvtID",
-                errorCollection[0].Number.ToString(CultureInfo.InvariantCulture)
-            );
+            exception
+                .Data
+                .Add(
+                    "HelpLink.EvtID",
+                    errorCollection[0].Number.ToString(CultureInfo.InvariantCulture)
+                );
             exception.Data.Add("HelpLink.BaseHelpUrl", "http://go.microsoft.com/fwlink");
             exception.Data.Add("HelpLink.LinkId", "20476");
 

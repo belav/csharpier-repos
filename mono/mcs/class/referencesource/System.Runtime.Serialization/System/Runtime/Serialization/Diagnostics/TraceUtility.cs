@@ -70,23 +70,25 @@ namespace System.Runtime.Serialization.Diagnostics
                 )
             );
 #if !MONO
-            string msdnTraceCode =
-                System.ServiceModel.Diagnostics.LegacyDiagnosticTrace.GenerateMsdnTraceCode(
-                    "System.Runtime.Serialization",
-                    traceCodes[traceCode]
-                );
+            string msdnTraceCode = System
+                .ServiceModel
+                .Diagnostics
+                .LegacyDiagnosticTrace
+                .GenerateMsdnTraceCode("System.Runtime.Serialization", traceCodes[traceCode]);
 #else
             string msdnTraceCode = "";
 #endif
-            DiagnosticUtility.DiagnosticTrace.TraceEvent(
-                severity,
-                traceCode,
-                msdnTraceCode,
-                traceDescription,
-                record,
-                exception,
-                null
-            );
+            DiagnosticUtility
+                .DiagnosticTrace
+                .TraceEvent(
+                    severity,
+                    traceCode,
+                    msdnTraceCode,
+                    traceDescription,
+                    record,
+                    exception,
+                    null
+                );
         }
     }
 }

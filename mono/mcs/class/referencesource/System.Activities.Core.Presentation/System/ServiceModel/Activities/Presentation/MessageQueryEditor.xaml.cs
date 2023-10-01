@@ -181,13 +181,17 @@ namespace System.ServiceModel.Activities.Presentation
                         if (isReply)
                         {
                             operationName = (string)
-                                this.Activity.Properties["Request"].Value.Properties[
-                                    "OperationName"
-                                ].ComputedValue;
+                                this.Activity
+                                    .Properties["Request"]
+                                    .Value
+                                    .Properties["OperationName"]
+                                    .ComputedValue;
                             serviceContractName = (XName)
-                                this.Activity.Properties["Request"].Value.Properties[
-                                    "ServiceContractName"
-                                ].ComputedValue;
+                                this.Activity
+                                    .Properties["Request"]
+                                    .Value
+                                    .Properties["ServiceContractName"]
+                                    .ComputedValue;
 
                             if (string.IsNullOrEmpty(operationName) || null == serviceContractName)
                             {
@@ -197,15 +201,17 @@ namespace System.ServiceModel.Activities.Presentation
                                     "Request",
                                     "DisplayName"
                                 );
-                                throw FxTrace.Exception.AsError(
-                                    new InvalidOperationException(
-                                        string.Format(
-                                            CultureInfo.CurrentUICulture,
-                                            (string)this.FindResource("parametersRequiredText"),
-                                            requestDisplayName.GetCurrentValue()
+                                throw FxTrace
+                                    .Exception
+                                    .AsError(
+                                        new InvalidOperationException(
+                                            string.Format(
+                                                CultureInfo.CurrentUICulture,
+                                                (string)this.FindResource("parametersRequiredText"),
+                                                requestDisplayName.GetCurrentValue()
+                                            )
                                         )
-                                    )
-                                );
+                                    );
                             }
                         }
                         else
@@ -217,15 +223,19 @@ namespace System.ServiceModel.Activities.Presentation
 
                             if (string.IsNullOrEmpty(operationName) || null == serviceContractName)
                             {
-                                throw FxTrace.Exception.AsError(
-                                    new InvalidOperationException(
-                                        string.Format(
-                                            CultureInfo.CurrentUICulture,
-                                            (string)this.FindResource("parametersRequiredText"),
-                                            this.Activity.Properties["DisplayName"].ComputedValue
+                                throw FxTrace
+                                    .Exception
+                                    .AsError(
+                                        new InvalidOperationException(
+                                            string.Format(
+                                                CultureInfo.CurrentUICulture,
+                                                (string)this.FindResource("parametersRequiredText"),
+                                                this.Activity
+                                                    .Properties["DisplayName"]
+                                                    .ComputedValue
+                                            )
                                         )
-                                    )
-                                );
+                                    );
                             }
                         }
                         xpathQuery = ParameterXPathQueryGenerator.CreateFromDataContractSerializer(

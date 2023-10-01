@@ -58,10 +58,9 @@ namespace System.Threading
                     }
                 }
 
-                Counts countsBeforeUpdate = _separated._counts.InterlockedCompareExchange(
-                    newCounts,
-                    counts
-                );
+                Counts countsBeforeUpdate = _separated
+                    ._counts
+                    .InterlockedCompareExchange(newCounts, counts);
                 if (countsBeforeUpdate == counts)
                 {
                     if (counts.SignalCount != 0)
@@ -101,10 +100,9 @@ namespace System.Threading
                     newCounts.DecrementSignalCount();
                     newCounts.DecrementSpinnerCount();
 
-                    Counts countsBeforeUpdate = _separated._counts.InterlockedCompareExchange(
-                        newCounts,
-                        counts
-                    );
+                    Counts countsBeforeUpdate = _separated
+                        ._counts
+                        .InterlockedCompareExchange(newCounts, counts);
                     if (countsBeforeUpdate == counts)
                     {
                         return true;
@@ -129,10 +127,9 @@ namespace System.Threading
                     newCounts.IncrementWaiterCount();
                 }
 
-                Counts countsBeforeUpdate = _separated._counts.InterlockedCompareExchange(
-                    newCounts,
-                    counts
-                );
+                Counts countsBeforeUpdate = _separated
+                    ._counts
+                    .InterlockedCompareExchange(newCounts, counts);
                 if (countsBeforeUpdate == counts)
                 {
                     return counts.SignalCount != 0 || WaitForSignal(timeoutMs);
@@ -178,10 +175,9 @@ namespace System.Threading
                         newCounts.DecrementCountOfWaitersSignaledToWake();
                     }
 
-                    Counts countsBeforeUpdate = _separated._counts.InterlockedCompareExchange(
-                        newCounts,
-                        counts
-                    );
+                    Counts countsBeforeUpdate = _separated
+                        ._counts
+                        .InterlockedCompareExchange(newCounts, counts);
                     if (countsBeforeUpdate == counts)
                     {
                         if (counts.SignalCount != 0)

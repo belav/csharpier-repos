@@ -67,20 +67,22 @@ public class SequenceUniquificationConventionTest
         var dependencies = CreateDependencies()
             .With(new CurrentDbContext(new DbContext(new DbContextOptions<DbContext>())));
         var relationalDependencies = CreateRelationalDependencies();
-        conventionSet.ModelFinalizingConventions.Add(
-            new SequenceUniquificationConvention(dependencies, relationalDependencies)
-        );
+        conventionSet
+            .ModelFinalizingConventions
+            .Add(new SequenceUniquificationConvention(dependencies, relationalDependencies));
 
         return new ModelBuilder(conventionSet);
     }
 
     private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-        FakeRelationalTestHelpers.Instance
+        FakeRelationalTestHelpers
+            .Instance
             .CreateContextServices()
             .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
     private RelationalConventionSetBuilderDependencies CreateRelationalDependencies() =>
-        FakeRelationalTestHelpers.Instance
+        FakeRelationalTestHelpers
+            .Instance
             .CreateContextServices()
             .GetRequiredService<RelationalConventionSetBuilderDependencies>();
 }

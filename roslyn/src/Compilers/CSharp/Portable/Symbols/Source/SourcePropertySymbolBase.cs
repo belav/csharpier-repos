@@ -1493,18 +1493,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             )
             {
                 bool hasAnyDiagnostics;
-                (attributeData, boundAttribute) = arguments.Binder.GetAttribute(
-                    arguments.AttributeSyntax,
-                    arguments.AttributeType,
-                    beforeAttributePartBound: null,
-                    afterAttributePartBound: null,
-                    out hasAnyDiagnostics
-                );
+                (attributeData, boundAttribute) = arguments
+                    .Binder
+                    .GetAttribute(
+                        arguments.AttributeSyntax,
+                        arguments.AttributeType,
+                        beforeAttributePartBound: null,
+                        afterAttributePartBound: null,
+                        out hasAnyDiagnostics
+                    );
                 if (!attributeData.HasErrors)
                 {
-                    string? indexerName = attributeData.CommonConstructorArguments[
-                        0
-                    ].DecodeValue<string>(SpecialType.System_String);
+                    string? indexerName = attributeData
+                        .CommonConstructorArguments[0]
+                        .DecodeValue<string>(SpecialType.System_String);
                     if (indexerName != null)
                     {
                         arguments
@@ -1647,10 +1649,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (attribute.IsTargetAttribute(this, AttributeDescription.MemberNotNullAttribute))
             {
-                MessageID.IDS_FeatureMemberNotNull.CheckFeatureAvailability(
-                    diagnostics,
-                    arguments.AttributeSyntaxOpt
-                );
+                MessageID
+                    .IDS_FeatureMemberNotNull
+                    .CheckFeatureAvailability(diagnostics, arguments.AttributeSyntaxOpt);
                 CSharpAttributeData.DecodeMemberNotNullAttribute<PropertyWellKnownAttributeData>(
                     ContainingType,
                     ref arguments
@@ -1660,10 +1661,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 attribute.IsTargetAttribute(this, AttributeDescription.MemberNotNullWhenAttribute)
             )
             {
-                MessageID.IDS_FeatureMemberNotNull.CheckFeatureAvailability(
-                    diagnostics,
-                    arguments.AttributeSyntaxOpt
-                );
+                MessageID
+                    .IDS_FeatureMemberNotNull
+                    .CheckFeatureAvailability(diagnostics, arguments.AttributeSyntaxOpt);
                 CSharpAttributeData.DecodeMemberNotNullWhenAttribute<PropertyWellKnownAttributeData>(
                     ContainingType,
                     ref arguments
@@ -1809,9 +1809,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else
             {
-                string indexerName = attribute.CommonConstructorArguments[0].DecodeValue<string>(
-                    SpecialType.System_String
-                );
+                string indexerName = attribute
+                    .CommonConstructorArguments[0]
+                    .DecodeValue<string>(SpecialType.System_String);
                 if (indexerName == null || !SyntaxFacts.IsValidIdentifier(indexerName))
                 {
                     diagnostics.Add(
@@ -1876,12 +1876,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     foreach (var parameter in this.Parameters)
                                     {
                                         parameter.ForceComplete(locationOpt, cancellationToken);
-                                        parameter.Type.CheckAllConstraints(
-                                            DeclaringCompilation,
-                                            conversions,
-                                            parameter.GetFirstLocation(),
-                                            diagnostics
-                                        );
+                                        parameter
+                                            .Type
+                                            .CheckAllConstraints(
+                                                DeclaringCompilation,
+                                                conversions,
+                                                parameter.GetFirstLocation(),
+                                                diagnostics
+                                            );
                                     }
 
                                     this.AddDeclarationDiagnostics(diagnostics);

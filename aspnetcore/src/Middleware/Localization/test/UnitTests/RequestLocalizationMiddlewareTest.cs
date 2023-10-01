@@ -71,13 +71,15 @@ public class RequestLocalizationMiddlewareTest
         {
             var client = server.CreateClient();
 
-            client.DefaultRequestHeaders.Add(
-                "Cookie",
-                new CookieHeaderValue(
-                    "Preferences",
-                    $"c={requestedCulture}|uic={requestedCulture}"
-                ).ToString()
-            );
+            client
+                .DefaultRequestHeaders
+                .Add(
+                    "Cookie",
+                    new CookieHeaderValue(
+                        "Preferences",
+                        $"c={requestedCulture}|uic={requestedCulture}"
+                    ).ToString()
+                );
 
             var response = await client.GetAsync(string.Empty);
 

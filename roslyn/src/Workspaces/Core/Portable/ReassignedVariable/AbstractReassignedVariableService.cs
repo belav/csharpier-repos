@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.ReassignedVariable
             var semanticFacts = document.GetRequiredLanguageService<ISemanticFactsService>();
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
-            var compilation = await document.Project
+            var compilation = await document
+                .Project
                 .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var root = await document
@@ -221,9 +222,9 @@ namespace Microsoft.CodeAnalysis.ReassignedVariable
                     // created in.
                     var containingType = methodOrProperty.ContainingType;
                     foreach (
-                        var group in containingType.DeclaringSyntaxReferences.GroupBy(
-                            r => r.SyntaxTree
-                        )
+                        var group in containingType
+                            .DeclaringSyntaxReferences
+                            .GroupBy(r => r.SyntaxTree)
                     )
                     {
                         var otherSemanticModel = GetSemanticModel(group.Key);
@@ -255,7 +256,8 @@ namespace Microsoft.CodeAnalysis.ReassignedVariable
                     // Be resilient to cases where the parameter might have multiple locations.  This
                     // should not normally happen, but we want to be resilient in case it occurs in
                     // error scenarios.
-                    var methodOrPropertyDeclaration = methodOrProperty.DeclaringSyntaxReferences
+                    var methodOrPropertyDeclaration = methodOrProperty
+                        .DeclaringSyntaxReferences
                         .First()
                         .GetSyntax(cancellationToken);
                     if (methodOrPropertyDeclaration.SyntaxTree != semanticModel.SyntaxTree)
@@ -310,7 +312,8 @@ namespace Microsoft.CodeAnalysis.ReassignedVariable
                 if (local.DeclaringSyntaxReferences.Length == 0)
                     return false;
 
-                var localDeclaration = local.DeclaringSyntaxReferences
+                var localDeclaration = local
+                    .DeclaringSyntaxReferences
                     .Select(r => r.GetSyntax(cancellationToken))
                     .Where(s => s.SyntaxTree == semanticModel.SyntaxTree)
                     .FirstOrDefault();

@@ -268,10 +268,9 @@ namespace System.Runtime.InteropServices.JavaScript
             if (pdbBytes == null)
                 AssemblyLoadContext.Default.LoadFromStream(new MemoryStream(dllBytes));
             else
-                AssemblyLoadContext.Default.LoadFromStream(
-                    new MemoryStream(dllBytes),
-                    new MemoryStream(pdbBytes)
-                );
+                AssemblyLoadContext
+                    .Default
+                    .LoadFromStream(new MemoryStream(dllBytes), new MemoryStream(pdbBytes));
         }
 
         [Diagnostics.CodeAnalysis.UnconditionalSuppressMessage(

@@ -75,7 +75,8 @@ namespace System.Collections.Immutable.Tests
             ImmutableSortedSet<int>.Builder builder = ImmutableSortedSet<int>.Empty.ToBuilder();
             Assert.Equal(~0, builder.IndexOf(5));
 
-            builder = ImmutableSortedSet<int>.Empty
+            builder = ImmutableSortedSet<int>
+                .Empty
                 .Union(Enumerable.Range(1, 10).Select(n => n * 10))
                 .ToBuilder();
             Assert.Equal(0, builder.IndexOf(10));
@@ -91,8 +92,9 @@ namespace System.Collections.Immutable.Tests
             Assert.Equal(~9, builder.IndexOf(95));
             Assert.Equal(~10, builder.IndexOf(105));
 
-            ImmutableSortedSet<int?>.Builder nullableSet =
-                ImmutableSortedSet<int?>.Empty.ToBuilder();
+            ImmutableSortedSet<int?>.Builder nullableSet = ImmutableSortedSet<int?>
+                .Empty
+                .ToBuilder();
             Assert.Equal(~0, nullableSet.IndexOf(null));
             nullableSet.Add(null);
             nullableSet.Add(0);
@@ -102,7 +104,8 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void EnumerateBuilderWhileMutating()
         {
-            ImmutableSortedSet<int>.Builder builder = ImmutableSortedSet<int>.Empty
+            ImmutableSortedSet<int>.Builder builder = ImmutableSortedSet<int>
+                .Empty
                 .Union(Enumerable.Range(1, 10))
                 .ToBuilder();
             Assert.Equal(Enumerable.Range(1, 10), builder);
@@ -412,8 +415,9 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void NullHandling()
         {
-            ImmutableSortedSet<string>.Builder builder =
-                ImmutableSortedSet<string>.Empty.ToBuilder();
+            ImmutableSortedSet<string>.Builder builder = ImmutableSortedSet<string>
+                .Empty
+                .ToBuilder();
             Assert.True(builder.Add(null));
             Assert.False(builder.Add(null));
             Assert.True(builder.Contains(null));

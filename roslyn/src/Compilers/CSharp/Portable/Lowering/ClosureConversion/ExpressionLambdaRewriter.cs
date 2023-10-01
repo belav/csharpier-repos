@@ -727,7 +727,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Diagnostics,
                 _bound.Compilation.Assembly
             );
-            var kind = _bound.Compilation.Conversions
+            var kind = _bound
+                .Compilation
+                .Conversions
                 .ClassifyConversionFromType(oldType, newType, isChecked: false, ref useSiteInfo)
                 .Kind;
             Debug.Assert(useSiteInfo.Diagnostics.IsNullOrEmpty());
@@ -892,8 +894,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         // the native compiler performs this conversion in two steps, so we follow suit
                         var nullable = (NamedTypeSymbol)node.Type;
-                        var intermediate =
-                            nullable.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0].Type;
+                        var intermediate = nullable
+                            .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0]
+                            .Type;
                         var e1 = Convert(
                             Visit(node.Operand),
                             node.Operand.Type,

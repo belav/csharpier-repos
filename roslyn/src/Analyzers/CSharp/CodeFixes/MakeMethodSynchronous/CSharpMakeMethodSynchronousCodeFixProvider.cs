@@ -107,7 +107,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeMethodSynchronous
             else if (returnType.OriginalDefinition.Equals(knownTypes.TaskOfTType))
             {
                 // If the return type is Task<T>, then make the new return type "T".
-                newReturnType = returnType.GetTypeArguments()[0]
+                newReturnType = returnType
+                    .GetTypeArguments()[0]
                     .GenerateTypeSyntax()
                     .WithTriviaFrom(returnTypeSyntax);
             }
@@ -117,7 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeMethodSynchronous
             )
             {
                 // If the return type is IAsyncEnumerable<T>, then make the new return type IEnumerable<T>.
-                newReturnType = knownTypes.IEnumerableOfTType
+                newReturnType = knownTypes
+                    .IEnumerableOfTType
                     .Construct(methodSymbol.ReturnType.GetTypeArguments()[0])
                     .GenerateTypeSyntax();
             }
@@ -127,7 +129,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeMethodSynchronous
             )
             {
                 // If the return type is IAsyncEnumerator<T>, then make the new return type IEnumerator<T>.
-                newReturnType = knownTypes.IEnumeratorOfTType
+                newReturnType = knownTypes
+                    .IEnumeratorOfTType
                     .Construct(methodSymbol.ReturnType.GetTypeArguments()[0])
                     .GenerateTypeSyntax();
             }

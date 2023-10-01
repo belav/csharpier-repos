@@ -3646,9 +3646,9 @@ namespace System.Text.Json.Tests
 
             byte[] base64StringUtf8 = new byte[Base64.GetMaxEncodedToUtf8Length(value.Length)];
             Base64.EncodeToUtf8(value, base64StringUtf8, out _, out int bytesWritten);
-            string expectedValue = Encoding.UTF8.GetString(
-                base64StringUtf8.AsSpan(0, bytesWritten).ToArray()
-            );
+            string expectedValue = Encoding
+                .UTF8
+                .GetString(base64StringUtf8.AsSpan(0, bytesWritten).ToArray());
 
             string expectedJson = formatted
                 ? $"{{{Environment.NewLine}  \"foo\": \"{expectedValue}\"{Environment.NewLine}}}"

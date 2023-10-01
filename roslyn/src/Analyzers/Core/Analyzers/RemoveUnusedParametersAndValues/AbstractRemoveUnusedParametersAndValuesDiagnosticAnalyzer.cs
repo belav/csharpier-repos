@@ -142,7 +142,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
             Option2<CodeStyleOption2<UnusedValuePreference>> unusedValueAssignmentOption
         )
             : base(
-                ImmutableDictionary<DiagnosticDescriptor, IOption2>.Empty
+                ImmutableDictionary<DiagnosticDescriptor, IOption2>
+                    .Empty
                     .Add(s_expressionValueIsUnusedRule, unusedValueExpressionStatementOption)
                     .Add(s_valueAssignedIsUnusedRule, unusedValueAssignmentOption)
                     .Add(s_unusedParameterRule, CodeStyleOptions2.UnusedParameters),
@@ -396,10 +397,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
         {
             if (
                 diagnostic.Properties != null
-                && diagnostic.Properties.TryGetValue(
-                    UnusedValuePreferenceKey,
-                    out var preferenceString
-                )
+                && diagnostic
+                    .Properties
+                    .TryGetValue(UnusedValuePreferenceKey, out var preferenceString)
             )
             {
                 switch (preferenceString)

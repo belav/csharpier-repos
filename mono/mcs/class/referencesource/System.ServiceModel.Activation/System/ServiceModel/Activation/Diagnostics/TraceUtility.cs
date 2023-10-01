@@ -63,20 +63,22 @@ namespace System.ServiceModel.Activation.Diagnostics
                     typeof(TraceUtility)
                 )
             );
-            string msdnTraceCode =
-                System.ServiceModel.Diagnostics.LegacyDiagnosticTrace.GenerateMsdnTraceCode(
-                    "System.ServiceModel.Activation",
-                    traceCodes[traceCode]
+            string msdnTraceCode = System
+                .ServiceModel
+                .Diagnostics
+                .LegacyDiagnosticTrace
+                .GenerateMsdnTraceCode("System.ServiceModel.Activation", traceCodes[traceCode]);
+            DiagnosticUtility
+                .DiagnosticTrace
+                .TraceEvent(
+                    severity,
+                    traceCode,
+                    msdnTraceCode,
+                    traceDescription,
+                    record,
+                    exception,
+                    source
                 );
-            DiagnosticUtility.DiagnosticTrace.TraceEvent(
-                severity,
-                traceCode,
-                msdnTraceCode,
-                traceDescription,
-                record,
-                exception,
-                source
-            );
         }
 
         internal static string CreateSourceString(object source)

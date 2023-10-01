@@ -324,11 +324,16 @@ namespace System.Data.Linq
                     typeof(Enumerable),
                     "FirstOrDefault",
                     new Type[] { association.ThisMember.DeclaringType.Type },
-                    System.Data.Linq.SqlClient.Translator.WhereClauseFromSourceAndKeys(
-                        thisSource,
-                        association.ThisKey.ToArray(),
-                        keyValues
-                    )
+                    System
+                        .Data
+                        .Linq
+                        .SqlClient
+                        .Translator
+                        .WhereClauseFromSourceAndKeys(
+                            thisSource,
+                            association.ThisKey.ToArray(),
+                            keyValues
+                        )
                 );
                 Expression otherSource = Expression.Constant(
                     context.GetTable(association.OtherType.InheritanceRoot.Type)
@@ -342,13 +347,18 @@ namespace System.Data.Linq
                         otherSource
                     );
                 }
-                Expression expr = System.Data.Linq.SqlClient.Translator.TranslateAssociation(
-                    this.context,
-                    association,
-                    otherSource,
-                    keyValues,
-                    thisInstance
-                );
+                Expression expr = System
+                    .Data
+                    .Linq
+                    .SqlClient
+                    .Translator
+                    .TranslateAssociation(
+                        this.context,
+                        association,
+                        otherSource,
+                        keyValues,
+                        thisInstance
+                    );
                 return expr;
             }
             else
@@ -481,10 +491,9 @@ namespace System.Data.Linq
                 {
                     try
                     {
-                        object result = this.member.LoadMethod.Invoke(
-                            this.services.Context,
-                            new object[] { instance }
-                        );
+                        object result = this.member
+                            .LoadMethod
+                            .Invoke(this.services.Context, new object[] { instance });
                         if (typeof(T).IsAssignableFrom(this.member.LoadMethod.ReturnType))
                         {
                             return ((IEnumerable<T>)new T[] { (T)result }).GetEnumerator();
@@ -804,7 +813,8 @@ namespace System.Data.Linq
                 // no cached value, so query for it
                 target = (
                     (IEnumerable)
-                        this.context.Provider
+                        this.context
+                            .Provider
                             .Execute(this.GetObjectQuery(type, keyValues))
                             .ReturnValue
                 )

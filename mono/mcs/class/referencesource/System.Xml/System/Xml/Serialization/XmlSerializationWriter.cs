@@ -4588,9 +4588,10 @@ namespace System.Xml.Serialization
                     if (xmlName == "##any:")
                     {
                         if (useReflection)
-                            enumValue = choiceMapping.Constants[i].Value.ToString(
-                                CultureInfo.InvariantCulture
-                            );
+                            enumValue = choiceMapping
+                                .Constants[i]
+                                .Value
+                                .ToString(CultureInfo.InvariantCulture);
                         else
                             enumValue = choiceMapping.Constants[i].Name;
                         break;
@@ -4612,9 +4613,10 @@ namespace System.Xml.Serialization
                     )
                     {
                         if (useReflection)
-                            enumValue = choiceMapping.Constants[i].Value.ToString(
-                                CultureInfo.InvariantCulture
-                            );
+                            enumValue = choiceMapping
+                                .Constants[i]
+                                .Value
+                                .ToString(CultureInfo.InvariantCulture);
                         else
                             enumValue = choiceMapping.Constants[i].Name;
                         break;

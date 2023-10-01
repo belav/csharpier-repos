@@ -138,7 +138,8 @@ namespace Microsoft.Interop
         private MethodDeclarationSyntax CreateUnreachableExceptionStub()
         {
             // DeclarationCopiedFromBaseDeclaration(<Arguments>) => throw new UnreachableException();
-            return MethodInfo.Syntax
+            return MethodInfo
+                .Syntax
                 .WithReturnType(GenerationContext.SignatureContext.StubReturnType)
                 .WithModifiers(TokenList())
                 .WithAttributeLists(List<AttributeListSyntax>())
@@ -176,9 +177,10 @@ namespace Microsoft.Interop
                 .WithModifiers(TokenList(Token(SyntaxKind.NewKeyword)))
                 .WithAttributeLists(
                     List(
-                        GenerationContext.SignatureContext.AdditionalAttributes.Concat(
-                            MethodInfo.Attributes.Select(a => a.GenerateAttributeList())
-                        )
+                        GenerationContext
+                            .SignatureContext
+                            .AdditionalAttributes
+                            .Concat(MethodInfo.Attributes.Select(a => a.GenerateAttributeList()))
                     )
                 )
                 .WithParameterList(
@@ -199,9 +201,16 @@ namespace Microsoft.Interop
                             ),
                             ArgumentList(
                                 SeparatedList(
-                                    GenerationContext.SignatureContext.ManagedParameters.Select(
-                                        p => forwarder.AsArgument(p, new ManagedStubCodeContext())
-                                    )
+                                    GenerationContext
+                                        .SignatureContext
+                                        .ManagedParameters
+                                        .Select(
+                                            p =>
+                                                forwarder.AsArgument(
+                                                    p,
+                                                    new ManagedStubCodeContext()
+                                                )
+                                        )
                                 )
                             )
                         )

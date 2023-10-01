@@ -841,9 +841,9 @@ namespace System.DirectoryServices.ActiveDirectory
                 {
                     if (_cachedDirectoryServers != null)
                     {
-                        _crossRefEntry!.Properties[PropertyManager.MsDSNCReplicaLocations].AddRange(
-                            _cachedDirectoryServers.GetMultiValuedProperty()
-                        );
+                        _crossRefEntry!
+                            .Properties[PropertyManager.MsDSNCReplicaLocations]
+                            .AddRange(_cachedDirectoryServers.GetMultiValuedProperty());
                     }
                     if (_securityRefDomainModified)
                     {
@@ -965,9 +965,9 @@ namespace System.DirectoryServices.ActiveDirectory
                         )
                         {
                             return (string?)
-                                _crossRefEntry.Properties[
-                                    PropertyManager.MsDSSDReferenceDomain
-                                ].Value;
+                                _crossRefEntry
+                                    .Properties[PropertyManager.MsDSSDReferenceDomain]
+                                    .Value;
                         }
                         else
                         {
@@ -1001,14 +1001,14 @@ namespace System.DirectoryServices.ActiveDirectory
                     if (value == null)
                     {
                         if (
-                            _crossRefEntry.Properties.Contains(
-                                PropertyManager.MsDSSDReferenceDomain
-                            )
+                            _crossRefEntry
+                                .Properties
+                                .Contains(PropertyManager.MsDSSDReferenceDomain)
                         )
                         {
-                            _crossRefEntry.Properties[
-                                PropertyManager.MsDSSDReferenceDomain
-                            ].Clear();
+                            _crossRefEntry
+                                .Properties[PropertyManager.MsDSSDReferenceDomain]
+                                .Clear();
                             _securityRefDomainModified = true;
                         }
                     }
@@ -1168,10 +1168,9 @@ namespace System.DirectoryServices.ActiveDirectory
                         authType
                     );
                     parent = tempEntry.Parent;
-                    _domainDNSEntry = parent.Children.Add(
-                        Utils.GetRdnFromDN(distinguishedName),
-                        PropertyManager.DomainDNS
-                    );
+                    _domainDNSEntry = parent
+                        .Children
+                        .Add(Utils.GetRdnFromDN(distinguishedName), PropertyManager.DomainDNS);
                     // set the instance type to 5
                     _domainDNSEntry.Properties[PropertyManager.InstanceType].Value =
                         NCFlags.InstanceTypeIsNCHead | NCFlags.InstanceTypeIsWriteable;
@@ -1219,10 +1218,9 @@ namespace System.DirectoryServices.ActiveDirectory
                             authType
                         );
                         parent = tempEntry.Parent;
-                        _domainDNSEntry = parent.Children.Add(
-                            Utils.GetRdnFromDN(distinguishedName),
-                            objectClass
-                        );
+                        _domainDNSEntry = parent
+                            .Children
+                            .Add(Utils.GetRdnFromDN(distinguishedName), objectClass);
 
                         // set the instance type to 5
                         _domainDNSEntry.Properties[PropertyManager.InstanceType].Value =

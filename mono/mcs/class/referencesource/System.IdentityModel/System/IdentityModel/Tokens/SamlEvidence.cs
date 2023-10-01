@@ -32,21 +32,23 @@ namespace System.IdentityModel.Tokens
         )
         {
             if (assertionIdReferences == null && assertions == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.SAMLEvidenceShouldHaveOneAssertion)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(SR.GetString(SR.SAMLEvidenceShouldHaveOneAssertion));
 
             if (assertionIdReferences != null)
             {
                 foreach (string idReference in assertionIdReferences)
                 {
                     if (string.IsNullOrEmpty(idReference))
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                            SR.GetString(
-                                SR.SAMLEntityCannotBeNullOrEmpty,
-                                XD.SamlDictionary.AssertionIdReference.Value
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperArgument(
+                                SR.GetString(
+                                    SR.SAMLEntityCannotBeNullOrEmpty,
+                                    XD.SamlDictionary.AssertionIdReference.Value
+                                )
+                            );
 
                     this.assertionIdReferences.Add(idReference);
                 }
@@ -57,12 +59,14 @@ namespace System.IdentityModel.Tokens
                 foreach (SamlAssertion assertion in assertions)
                 {
                     if (assertion == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                            SR.GetString(
-                                SR.SAMLEntityCannotBeNullOrEmpty,
-                                XD.SamlDictionary.Assertion.Value
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperArgument(
+                                SR.GetString(
+                                    SR.SAMLEntityCannotBeNullOrEmpty,
+                                    XD.SamlDictionary.Assertion.Value
+                                )
+                            );
 
                     this.assertions.Add(assertion);
                 }
@@ -105,9 +109,13 @@ namespace System.IdentityModel.Tokens
         void CheckObjectValidity()
         {
             if ((this.assertions.Count == 0) && (this.assertionIdReferences.Count == 0))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(SR.GetString(SR.SAMLEvidenceShouldHaveOneAssertion))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.SAMLEvidenceShouldHaveOneAssertion)
+                        )
+                    );
         }
 
         public virtual void ReadXml(
@@ -118,14 +126,14 @@ namespace System.IdentityModel.Tokens
         )
         {
             if (reader == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("reader")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("reader"));
 
             if (samlSerializer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("samlSerializer")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("samlSerializer"));
 
 #pragma warning suppress 56506 // samlSerializer.DictionaryManager is never null.
             SamlDictionary dictionary = samlSerializer.DictionaryManager.SamlDictionary;
@@ -152,19 +160,23 @@ namespace System.IdentityModel.Tokens
                     this.assertions.Add(assertion);
                 }
                 else
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityTokenException(
-                            SR.GetString(SR.SAMLBadSchema, dictionary.Evidence.Value)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityTokenException(
+                                SR.GetString(SR.SAMLBadSchema, dictionary.Evidence.Value)
+                            )
+                        );
             }
 
             if ((this.assertionIdReferences.Count == 0) && (this.assertions.Count == 0))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(SR.SAMLEvidenceShouldHaveOneAssertionOnRead)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.SAMLEvidenceShouldHaveOneAssertionOnRead)
+                        )
+                    );
 
             reader.MoveToContent();
             reader.ReadEndElement();
@@ -179,14 +191,14 @@ namespace System.IdentityModel.Tokens
             CheckObjectValidity();
 
             if (writer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("writer")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("writer"));
 
             if (samlSerializer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("samlSerializer")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("samlSerializer"));
 
 #pragma warning suppress 56506 // samlSerializer.DictionaryManager is never null.
             SamlDictionary dictionary = samlSerializer.DictionaryManager.SamlDictionary;

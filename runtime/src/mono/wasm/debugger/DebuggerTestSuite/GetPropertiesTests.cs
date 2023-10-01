@@ -651,9 +651,9 @@ namespace DebuggerTests
             );
             var pause_location = await insp.WaitFor(Inspector.PAUSE);
 
-            var id = pause_location["callFrames"][0]["scopeChain"][0]["object"][
-                "objectId"
-            ].Value<string>();
+            var id = pause_location["callFrames"]
+                [0]["scopeChain"][0]["object"]["objectId"]
+                .Value<string>();
 
             var frame_locals = await GetProperties(id);
             var obj = GetAndAssertObjectWithName(frame_locals, "obj");

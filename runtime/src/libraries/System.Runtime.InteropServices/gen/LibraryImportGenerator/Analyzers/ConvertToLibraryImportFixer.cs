@@ -67,10 +67,12 @@ namespace Microsoft.Interop.Analyzers
             var optionsBuilder = ImmutableDictionary.CreateBuilder<string, Option>();
             // Only add the "May require additional work" option if it is true. This simplifies our equivalence key and makes testing easier.
             if (
-                diagnostic.Properties.TryGetValue(
-                    ConvertToLibraryImportAnalyzer.MayRequireAdditionalWork,
-                    out string? mayRequireAdditionalWork
-                ) && bool.Parse(mayRequireAdditionalWork)
+                diagnostic
+                    .Properties
+                    .TryGetValue(
+                        ConvertToLibraryImportAnalyzer.MayRequireAdditionalWork,
+                        out string? mayRequireAdditionalWork
+                    ) && bool.Parse(mayRequireAdditionalWork)
             )
             {
                 optionsBuilder.Add(Option.MayRequireAdditionalWork, new Option.Bool(true));
@@ -206,9 +208,9 @@ namespace Microsoft.Interop.Analyzers
                 .ConfigureAwait(false);
 
             if (
-                !methodSymbol.MethodImplementationFlags.HasFlag(
-                    System.Reflection.MethodImplAttributes.PreserveSig
-                )
+                !methodSymbol
+                    .MethodImplementationFlags
+                    .HasFlag(System.Reflection.MethodImplAttributes.PreserveSig)
             )
             {
                 bool shouldWarn = await TransformCallersOfNoPreserveSigMethod(
@@ -243,25 +245,26 @@ namespace Microsoft.Interop.Analyzers
             CancellationToken cancellationToken
         )
         {
-            INamedTypeSymbol? dllImportAttrType =
-                editor.SemanticModel.Compilation.GetBestTypeByMetadataName(
-                    TypeNames.DllImportAttribute
-                );
+            INamedTypeSymbol? dllImportAttrType = editor
+                .SemanticModel
+                .Compilation
+                .GetBestTypeByMetadataName(TypeNames.DllImportAttribute);
             if (dllImportAttrType == null)
                 return methodSyntax;
 
             // We wouldn't have offered this code fix if the LibraryImport type isn't available, so we can be sure it isn't null here.
-            INamedTypeSymbol libraryImportAttrType =
-                editor.SemanticModel.Compilation.GetBestTypeByMetadataName(
-                    TypeNames.LibraryImportAttribute
-                )!;
+            INamedTypeSymbol libraryImportAttrType = editor
+                .SemanticModel
+                .Compilation
+                .GetBestTypeByMetadataName(TypeNames.LibraryImportAttribute)!;
 
             // Make sure the method has the DllImportAttribute
             if (!TryGetAttribute(methodSymbol, dllImportAttrType, out AttributeData? dllImportAttr))
                 return methodSyntax;
 
             var dllImportSyntax = (AttributeSyntax)
-                await dllImportAttr!.ApplicationSyntaxReference!
+                await dllImportAttr!
+                    .ApplicationSyntaxReference!
                     .GetSyntaxAsync(cancellationToken)
                     .ConfigureAwait(false);
 
@@ -291,32 +294,43 @@ namespace Microsoft.Interop.Analyzers
                 libraryImportSyntax
             );
             if (
-                !methodSymbol.MethodImplementationFlags.HasFlag(
-                    System.Reflection.MethodImplAttributes.PreserveSig
-                )
+                !methodSymbol
+                    .MethodImplementationFlags
+                    .HasFlag(System.Reflection.MethodImplAttributes.PreserveSig)
             )
             {
                 if (!methodSymbol.ReturnsVoid)
                 {
-                    generatedDeclaration = editor.Generator.AddParameters(
-                        generatedDeclaration,
-                        new[]
-                        {
-                            editor.Generator.ParameterDeclaration(
-                                "@return",
-                                editor.Generator.GetType(generatedDeclaration),
-                                refKind: RefKind.Out
-                            )
-                        }
-                    );
+                    generatedDeclaration = editor
+                        .Generator
+                        .AddParameters(
+                            generatedDeclaration,
+                            new[]
+                            {
+                                editor
+                                    .Generator
+                                    .ParameterDeclaration(
+                                        "@return",
+                                        editor.Generator.GetType(generatedDeclaration),
+                                        refKind: RefKind.Out
+                                    )
+                            }
+                        );
                 }
 
-                generatedDeclaration = editor.Generator.WithType(
-                    generatedDeclaration,
-                    editor.Generator.TypeExpression(
-                        editor.SemanticModel.Compilation.GetSpecialType(SpecialType.System_Int32)
-                    )
-                );
+                generatedDeclaration = editor
+                    .Generator
+                    .WithType(
+                        generatedDeclaration,
+                        editor
+                            .Generator
+                            .TypeExpression(
+                                editor
+                                    .SemanticModel
+                                    .Compilation
+                                    .GetSpecialType(SpecialType.System_Int32)
+                            )
+                    );
             }
 
             if (unmanagedCallConvAttributeMaybe is not null)
@@ -473,9 +487,11 @@ namespace Microsoft.Interop.Analyzers
                                                     SyntaxFactory.DeclarationExpression(
                                                         declaration.Declaration.Type,
                                                         SyntaxFactory.SingleVariableDesignation(
-                                                            declaration.Declaration.Variables[
-                                                                0
-                                                            ].Identifier.WithoutTrivia()
+                                                            declaration
+                                                                .Declaration
+                                                                .Variables[0]
+                                                                .Identifier
+                                                                .WithoutTrivia()
                                                         )
                                                     )
                                                 )
@@ -530,9 +546,12 @@ namespace Microsoft.Interop.Analyzers
                 return generator.InvocationExpression(
                     generator.MemberAccessExpression(
                         generator.NameExpression(
-                            editor.SemanticModel.Compilation.GetBestTypeByMetadataName(
-                                TypeNames.System_Runtime_InteropServices_Marshal
-                            )
+                            editor
+                                .SemanticModel
+                                .Compilation
+                                .GetBestTypeByMetadataName(
+                                    TypeNames.System_Runtime_InteropServices_Marshal
+                                )
                         ),
                         "ThrowExceptionForHR"
                     ),
@@ -597,10 +616,10 @@ namespace Microsoft.Interop.Analyzers
                             )
                         )
                         {
-                            ITypeSymbol stringMarshallingType =
-                                editor.SemanticModel.Compilation.GetBestTypeByMetadataName(
-                                    TypeNames.StringMarshalling
-                                )!;
+                            ITypeSymbol stringMarshallingType = editor
+                                .SemanticModel
+                                .Compilation
+                                .GetBestTypeByMetadataName(TypeNames.StringMarshalling)!;
                             argumentsToAdd.Add(
                                 generator.AttributeArgument(
                                     nameof(StringMarshalling),
@@ -619,10 +638,10 @@ namespace Microsoft.Interop.Analyzers
                             )
                         )
                         {
-                            ITypeSymbol stringMarshallingType =
-                                editor.SemanticModel.Compilation.GetBestTypeByMetadataName(
-                                    TypeNames.StringMarshalling
-                                )!;
+                            ITypeSymbol stringMarshallingType = editor
+                                .SemanticModel
+                                .Compilation
+                                .GetBestTypeByMetadataName(TypeNames.StringMarshalling)!;
                             argumentsToAdd.Add(
                                 generator.AttributeArgument(
                                     nameof(StringMarshalling),
@@ -637,9 +656,12 @@ namespace Microsoft.Interop.Analyzers
                                     "StringMarshallingCustomType",
                                     generator.TypeOfExpression(
                                         generator.TypeExpression(
-                                            editor.SemanticModel.Compilation.GetBestTypeByMetadataName(
-                                                TypeNames.AnsiStringMarshaller
-                                            )
+                                            editor
+                                                .SemanticModel
+                                                .Compilation
+                                                .GetBestTypeByMetadataName(
+                                                    TypeNames.AnsiStringMarshaller
+                                                )
                                         )
                                     )
                                 )
@@ -758,21 +780,28 @@ namespace Microsoft.Interop.Analyzers
             SyntaxGenerator generator
         )
         {
-            AttributeArgumentListSyntax updatedArgList = attribute.ArgumentList.WithArguments(
-                SyntaxFactory.SeparatedList(
-                    attribute.ArgumentList.Arguments.OrderBy(arg =>
-                    {
-                        // Unnamed arguments first
-                        if (arg.NameEquals == null)
-                            return -1;
+            AttributeArgumentListSyntax updatedArgList = attribute
+                .ArgumentList
+                .WithArguments(
+                    SyntaxFactory.SeparatedList(
+                        attribute
+                            .ArgumentList
+                            .Arguments
+                            .OrderBy(arg =>
+                            {
+                                // Unnamed arguments first
+                                if (arg.NameEquals == null)
+                                    return -1;
 
-                        // Named arguments in specified order, followed by any named arguments with no preferred order
-                        string name = arg.NameEquals.Name.Identifier.Text;
-                        int index = System.Array.IndexOf(s_preferredAttributeArgumentOrder, name);
-                        return index == -1 ? int.MaxValue : index;
-                    })
-                )
-            );
+                                // Named arguments in specified order, followed by any named arguments with no preferred order
+                                string name = arg.NameEquals.Name.Identifier.Text;
+                                int index = System
+                                    .Array
+                                    .IndexOf(s_preferredAttributeArgumentOrder, name);
+                                return index == -1 ? int.MaxValue : index;
+                            })
+                    )
+                );
             return generator.ReplaceNode(attribute, attribute.ArgumentList, updatedArgList);
         }
 
@@ -784,9 +813,10 @@ namespace Microsoft.Interop.Analyzers
         )
         {
             if (
-                editor.SemanticModel.Compilation.GetBestTypeByMetadataName(
-                    TypeNames.UnmanagedCallConvAttribute
-                )
+                editor
+                    .SemanticModel
+                    .Compilation
+                    .GetBestTypeByMetadataName(TypeNames.UnmanagedCallConvAttribute)
                 is null
             )
             {
@@ -805,21 +835,33 @@ namespace Microsoft.Interop.Analyzers
             ITypeSymbol? callingConventionType = callingConvention switch
             {
                 CallingConvention.Cdecl
-                    => editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.GetTypeByMetadataName(
-                        $"System.Runtime.CompilerServices.CallConvCdecl"
-                    ),
+                    => editor
+                        .SemanticModel
+                        .Compilation
+                        .ObjectType
+                        .ContainingAssembly
+                        .GetTypeByMetadataName($"System.Runtime.CompilerServices.CallConvCdecl"),
                 CallingConvention.StdCall
-                    => editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.GetTypeByMetadataName(
-                        $"System.Runtime.CompilerServices.CallConvStdcall"
-                    ),
+                    => editor
+                        .SemanticModel
+                        .Compilation
+                        .ObjectType
+                        .ContainingAssembly
+                        .GetTypeByMetadataName($"System.Runtime.CompilerServices.CallConvStdcall"),
                 CallingConvention.ThisCall
-                    => editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.GetTypeByMetadataName(
-                        $"System.Runtime.CompilerServices.CallConvThiscall"
-                    ),
+                    => editor
+                        .SemanticModel
+                        .Compilation
+                        .ObjectType
+                        .ContainingAssembly
+                        .GetTypeByMetadataName($"System.Runtime.CompilerServices.CallConvThiscall"),
                 CallingConvention.FastCall
-                    => editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.GetTypeByMetadataName(
-                        $"System.Runtime.CompilerServices.CallConvFastcall"
-                    ),
+                    => editor
+                        .SemanticModel
+                        .Compilation
+                        .ObjectType
+                        .ContainingAssembly
+                        .GetTypeByMetadataName($"System.Runtime.CompilerServices.CallConvFastcall"),
                 _ => null
             };
 
@@ -838,9 +880,10 @@ namespace Microsoft.Interop.Analyzers
                     "CallConvs",
                     generator.ArrayCreationExpression(
                         generator.TypeExpression(
-                            editor.SemanticModel.Compilation.GetBestTypeByMetadataName(
-                                TypeNames.System_Type
-                            )
+                            editor
+                                .SemanticModel
+                                .Compilation
+                                .GetBestTypeByMetadataName(TypeNames.System_Type)
                         ),
                         new[]
                         {

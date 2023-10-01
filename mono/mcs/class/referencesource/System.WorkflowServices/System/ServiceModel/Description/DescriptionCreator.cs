@@ -15,9 +15,9 @@ namespace System.ServiceModel.Description
         {
             if (workflowDefinitionContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "workflowDefinitionContext"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("workflowDefinitionContext");
             }
             this.workflowDefinitionContext = workflowDefinitionContext;
         }
@@ -51,9 +51,9 @@ namespace System.ServiceModel.Description
 
             if (context.Contracts == null || context.Contracts.Count == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR2.GetString(SR2.NoContract))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.NoContract)));
             }
 
             implementedContracts = context.Contracts;

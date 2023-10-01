@@ -221,8 +221,9 @@ public class PartialTagHelper : TagHelper
 
         if (For?.Name != null)
         {
-            newViewData.TemplateInfo.HtmlFieldPrefix =
-                newViewData.TemplateInfo.GetFullHtmlFieldName(For.Name);
+            newViewData.TemplateInfo.HtmlFieldPrefix = newViewData
+                .TemplateInfo
+                .GetFullHtmlFieldName(For.Name);
         }
 
         using (view as IDisposable)

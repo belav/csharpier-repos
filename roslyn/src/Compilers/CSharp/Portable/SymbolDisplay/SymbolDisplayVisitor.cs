@@ -27,9 +27,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
             : base(builder, format, true, semanticModelOpt, positionOpt)
         {
-            _escapeKeywordIdentifiers = format.MiscellaneousOptions.IncludesOption(
-                SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
-            );
+            _escapeKeywordIdentifiers = format
+                .MiscellaneousOptions
+                .IncludesOption(SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers);
         }
 
         private SymbolDisplayVisitor(
@@ -147,9 +147,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (
                 isFirstSymbolVisited
-                && format.KindOptions.IncludesOption(
-                    SymbolDisplayKindOptions.IncludeNamespaceKeyword
-                )
+                && format
+                    .KindOptions
+                    .IncludesOption(SymbolDisplayKindOptions.IncludeNamespaceKeyword)
             )
             {
                 AddKeyword(SyntaxKind.NamespaceKeyword);
@@ -458,9 +458,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (
                 namedType.IsScriptClass
-                && !format.CompilerInternalOptions.IncludesOption(
-                    SymbolDisplayCompilerInternalOptions.IncludeScriptType
-                )
+                && !format
+                    .CompilerInternalOptions
+                    .IncludesOption(SymbolDisplayCompilerInternalOptions.IncludeScriptType)
             )
             {
                 return false;

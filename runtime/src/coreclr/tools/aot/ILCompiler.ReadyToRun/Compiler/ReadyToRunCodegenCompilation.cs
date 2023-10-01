@@ -103,8 +103,9 @@ namespace ILCompiler
             // disallow inlining because getFunctionEntryPoint will do the right thing.
             if (callee.IsVirtual)
             {
-                MethodDesc calleeMethodImpl =
-                    callee.OwningType.FindVirtualFunctionTargetMethodOnObjectType(callee);
+                MethodDesc calleeMethodImpl = callee
+                    .OwningType
+                    .FindVirtualFunctionTargetMethodOnObjectType(callee);
                 if (calleeMethodImpl != callee)
                 {
                     return false;
@@ -586,11 +587,13 @@ namespace ILCompiler
                 componentGraph.AddRoot(componentFactory.Win32ResourcesNode, "Win32 resources");
             }
             componentGraph.ComputeMarkedNodes();
-            componentFactory.Header.Add(
-                Internal.Runtime.ReadyToRunSectionType.OwnerCompositeExecutable,
-                ownerExecutableNode,
-                ownerExecutableNode
-            );
+            componentFactory
+                .Header
+                .Add(
+                    Internal.Runtime.ReadyToRunSectionType.OwnerCompositeExecutable,
+                    ownerExecutableNode,
+                    ownerExecutableNode
+                );
             ReadyToRunObjectWriter.EmitObject(
                 outputFile,
                 componentModule: inputModule,
@@ -798,7 +801,8 @@ namespace ILCompiler
                                 if (type is EcmaType ecmaType)
                                 {
                                     if (
-                                        !_nodeFactory.Resolver
+                                        !_nodeFactory
+                                            .Resolver
                                             .GetModuleTokenForType(
                                                 ecmaType,
                                                 allowDynamicallyCreatedReference: false,
@@ -810,9 +814,9 @@ namespace ILCompiler
                                     try
                                     {
                                         Debug.Assert(
-                                            _nodeFactory.CompilationModuleGroup.CrossModuleInlineableModule(
-                                                ecmaType.Module
-                                            )
+                                            _nodeFactory
+                                                .CompilationModuleGroup
+                                                .CrossModuleInlineableModule(ecmaType.Module)
                                         );
                                         _nodeFactory
                                             .ManifestMetadataTable
@@ -820,7 +824,9 @@ namespace ILCompiler
                                             .ModuleThatIsCurrentlyTheSourceOfNewReferences =
                                             ecmaType.Module;
                                         if (
-                                            !_nodeFactory.ManifestMetadataTable._mutableModule
+                                            !_nodeFactory
+                                                .ManifestMetadataTable
+                                                ._mutableModule
                                                 .TryGetEntityHandle(ecmaType)
                                                 .HasValue
                                         )
@@ -875,9 +881,9 @@ namespace ILCompiler
                     );
 
                     if (Logger.IsVerbose)
-                        Logger.Writer.WriteLine(
-                            $"Processing {methodsToRecompile.Length} recompiles"
-                        );
+                        Logger
+                            .Writer
+                            .WriteLine($"Processing {methodsToRecompile.Length} recompiles");
 
                     CompileMethodList(methodsToRecompile);
                 }
@@ -1006,9 +1012,11 @@ namespace ILCompiler
                     if (dependency is DeferredTillPhaseNode deferredPhaseNode)
                     {
                         if (Logger.IsVerbose)
-                            _logger.Writer.WriteLine(
-                                $"Moved to phase {_nodeFactory.CompilationCurrentPhase}"
-                            );
+                            _logger
+                                .Writer
+                                .WriteLine(
+                                    $"Moved to phase {_nodeFactory.CompilationCurrentPhase}"
+                                );
                         deferredPhaseNode.NotifyCurrentPhase(_nodeFactory.CompilationCurrentPhase);
                         return;
                     }
@@ -1032,9 +1040,9 @@ namespace ILCompiler
 
                 if (_nodeFactory.OptimizationFlags.PrintReproArgs)
                 {
-                    Logger.Writer.WriteLine(
-                        $"Single method repro args:{GetReproInstructions(method)}"
-                    );
+                    Logger
+                        .Writer
+                        .WriteLine($"Single method repro args:{GetReproInstructions(method)}");
                 }
 
                 try
@@ -1081,23 +1089,29 @@ namespace ILCompiler
                 {
                     // If compilation fails, don't emit code for this method. It will be Jitted at runtime
                     if (Logger.IsVerbose)
-                        Logger.Writer.WriteLine(
-                            $"Warning: Method `{method}` was not compiled because: {ex.Message}"
-                        );
+                        Logger
+                            .Writer
+                            .WriteLine(
+                                $"Warning: Method `{method}` was not compiled because: {ex.Message}"
+                            );
                 }
                 catch (RequiresRuntimeJitException ex)
                 {
                     if (Logger.IsVerbose)
-                        Logger.Writer.WriteLine(
-                            $"Info: Method `{method}` was not compiled because `{ex.Message}` requires runtime JIT"
-                        );
+                        Logger
+                            .Writer
+                            .WriteLine(
+                                $"Info: Method `{method}` was not compiled because `{ex.Message}` requires runtime JIT"
+                            );
                 }
                 catch (CodeGenerationFailedException ex) when (_resilient)
                 {
                     if (Logger.IsVerbose)
-                        Logger.Writer.WriteLine(
-                            $"Warning: Method `{method}` was not compiled because `{ex.Message}` requires runtime JIT"
-                        );
+                        Logger
+                            .Writer
+                            .WriteLine(
+                                $"Warning: Method `{method}` was not compiled because `{ex.Message}` requires runtime JIT"
+                            );
                 }
             }
         }

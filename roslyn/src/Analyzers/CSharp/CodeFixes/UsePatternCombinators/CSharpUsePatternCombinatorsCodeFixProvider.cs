@@ -106,10 +106,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
             foreach (var diagnostic in diagnostics)
             {
                 var location = diagnostic.Location;
-                var expression = editor.OriginalRoot.FindNode(
-                    location.SourceSpan,
-                    getInnermostNodeForTie: true
-                );
+                var expression = editor
+                    .OriginalRoot
+                    .FindNode(location.SourceSpan, getInnermostNodeForTie: true);
                 var operation = semanticModel.GetOperation(expression, cancellationToken);
                 RoslynDebug.AssertNotNull(operation);
                 var pattern = CSharpUsePatternCombinatorsAnalyzer.Analyze(operation);
@@ -171,7 +170,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                 // `x is (long?)0` is not legal, only `x is (long)0` is.
                 var governingType = semanticModel
                     .GetTypeInfo(p.Target.Syntax)
-                    .Type.RemoveNullableIfPresent();
+                    .Type
+                    .RemoveNullableIfPresent();
                 if (governingType != null && !governingType.Equals(type))
                     return CastExpression(governingType.GenerateTypeSyntax(), expr.Parenthesize())
                         .WithAdditionalAnnotations(Simplifier.Annotation);

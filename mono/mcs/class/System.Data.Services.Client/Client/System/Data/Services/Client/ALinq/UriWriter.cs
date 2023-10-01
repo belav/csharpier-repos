@@ -419,7 +419,8 @@ namespace System.Data.Services.Client
                 this.uriBuilder.Append(values[ii].Value);
 
                 if (
-                    keys[ii].Value
+                    keys[ii]
+                        .Value
                         .ToString()
                         .Equals(
                             UriHelper.DOLLARSIGN + UriHelper.OPTIONCOUNT,

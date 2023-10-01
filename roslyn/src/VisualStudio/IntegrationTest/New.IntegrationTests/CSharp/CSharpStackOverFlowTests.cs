@@ -25,16 +25,16 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         {
             var sampleCode = await GetSampleCodeAsync();
             var project = ProjectName;
-            await TestServices.SolutionExplorer.AddFileAsync(
-                project,
-                "Test.cs",
-                cancellationToken: HangMitigatingCancellationToken
-            );
-            await TestServices.SolutionExplorer.OpenFileAsync(
-                project,
-                "Test.cs",
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .SolutionExplorer
+                .AddFileAsync(
+                    project,
+                    "Test.cs",
+                    cancellationToken: HangMitigatingCancellationToken
+                );
+            await TestServices
+                .SolutionExplorer
+                .OpenFileAsync(project, "Test.cs", HangMitigatingCancellationToken);
             await SetUpEditorAsync(sampleCode, HangMitigatingCancellationToken);
 
             // Try to compute the light bulb. The content of the light bulb is not important because here we want to make sure
@@ -47,26 +47,28 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         {
             var sampleCode = await GetSampleCodeAsync();
             var project = ProjectName;
-            await TestServices.SolutionExplorer.AddFileAsync(
-                project,
-                "Test.cs",
-                cancellationToken: HangMitigatingCancellationToken
-            );
-            await TestServices.SolutionExplorer.OpenFileAsync(
-                project,
-                "Test.cs",
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .SolutionExplorer
+                .AddFileAsync(
+                    project,
+                    "Test.cs",
+                    cancellationToken: HangMitigatingCancellationToken
+                );
+            await TestServices
+                .SolutionExplorer
+                .OpenFileAsync(project, "Test.cs", HangMitigatingCancellationToken);
             await SetUpEditorAsync(sampleCode, HangMitigatingCancellationToken);
 
             // Call FAR to create syntax index. The goal is to verify we don't hit StackOverFlow during the creation.
-            await TestServices.Input.SendAsync(
-                (VirtualKeyCode.F12, VirtualKeyCode.SHIFT),
-                HangMitigatingCancellationToken
-            );
-            var contents = await TestServices.FindReferencesWindow.GetContentsAsync(
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendAsync(
+                    (VirtualKeyCode.F12, VirtualKeyCode.SHIFT),
+                    HangMitigatingCancellationToken
+                );
+            var contents = await TestServices
+                .FindReferencesWindow
+                .GetContentsAsync(HangMitigatingCancellationToken);
             Assert.Equal(18, contents.Length);
 
             // Make sure all the references are found.
@@ -81,7 +83,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         {
             var resourceStream = typeof(CSharpStackOverFlowTests)
                 .GetTypeInfo()
-                .Assembly.GetManifestResourceStream(
+                .Assembly
+                .GetManifestResourceStream(
                     "Roslyn.VisualStudio.NewIntegrationTests.Resources.LongClass.txt"
                 );
             using var reader = new StreamReader(resourceStream);

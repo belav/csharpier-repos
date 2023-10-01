@@ -114,11 +114,9 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             Expression<Func<ServiceProviderEngineScope, object>> expression = BuildExpression(
                 callSite
             );
-            DependencyInjectionEventSource.Log.ExpressionTreeGenerated(
-                _rootScope.RootProvider,
-                callSite.ServiceType,
-                expression
-            );
+            DependencyInjectionEventSource
+                .Log
+                .ExpressionTreeGenerated(_rootScope.RootProvider, callSite.ServiceType, expression);
             return expression.Compile();
         }
 
@@ -225,9 +223,9 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 
             return NewArrayInit(
                 callSite.ItemType,
-                callSite.ServiceCallSites.Select(
-                    cs => Convert(VisitCallSite(cs, context), callSite.ItemType)
-                )
+                callSite
+                    .ServiceCallSites
+                    .Select(cs => Convert(VisitCallSite(cs, context), callSite.ItemType))
             );
         }
 

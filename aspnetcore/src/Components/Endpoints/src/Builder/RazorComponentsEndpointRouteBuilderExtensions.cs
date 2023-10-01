@@ -80,7 +80,8 @@ public static class RazorComponentsEndpointRouteBuilderExtensions
         [DynamicallyAccessedMembers(Component)] TRootComponent
     >(IEndpointRouteBuilder endpoints)
     {
-        var dataSource = endpoints.DataSources
+        var dataSource = endpoints
+            .DataSources
             .OfType<RazorComponentEndpointDataSource<TRootComponent>>()
             .FirstOrDefault();
         if (dataSource == null)
@@ -88,8 +89,9 @@ public static class RazorComponentsEndpointRouteBuilderExtensions
             // Very likely this needs to become a factory and we might need to have multiple endpoint data
             // sources, once we figure out the exact scenarios for
             // https://github.com/dotnet/aspnetcore/issues/46992
-            var factory =
-                endpoints.ServiceProvider.GetRequiredService<RazorComponentEndpointDataSourceFactory>();
+            var factory = endpoints
+                .ServiceProvider
+                .GetRequiredService<RazorComponentEndpointDataSourceFactory>();
             dataSource = factory.CreateDataSource<TRootComponent>(endpoints);
             endpoints.DataSources.Add(dataSource);
         }

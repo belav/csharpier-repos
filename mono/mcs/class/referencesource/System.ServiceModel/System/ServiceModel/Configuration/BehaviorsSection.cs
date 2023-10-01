@@ -102,13 +102,18 @@ namespace System.ServiceModel.Configuration
                     );
                 if (!behaviors.EndpointBehaviors.ContainsKey(behaviorConfiguration))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(SR.ConfigInvalidEndpointBehavior, behaviorConfiguration),
-                            configurationElement.ElementInformation.Source,
-                            configurationElement.ElementInformation.LineNumber
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.ConfigInvalidEndpointBehavior,
+                                    behaviorConfiguration
+                                ),
+                                configurationElement.ElementInformation.Source,
+                                configurationElement.ElementInformation.LineNumber
+                            )
+                        );
                 }
             }
         }
@@ -147,13 +152,18 @@ namespace System.ServiceModel.Configuration
                     );
                 if (!behaviors.ServiceBehaviors.ContainsKey(behaviorConfiguration))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(SR.ConfigInvalidServiceBehavior, behaviorConfiguration),
-                            configurationElement.ElementInformation.Source,
-                            configurationElement.ElementInformation.LineNumber
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.ConfigInvalidServiceBehavior,
+                                    behaviorConfiguration
+                                ),
+                                configurationElement.ElementInformation.Source,
+                                configurationElement.ElementInformation.LineNumber
+                            )
+                        );
                 }
             }
         }

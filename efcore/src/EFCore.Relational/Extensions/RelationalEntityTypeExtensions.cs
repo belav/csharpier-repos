@@ -89,10 +89,9 @@ public static class RelationalEntityTypeExtensions
             && ownership != null
 #pragma warning disable EF1001 // Internal EF Core API usage.
             && entityType.Name
-                == ownership.PrincipalEntityType.GetOwnedName(
-                    name,
-                    ownership.PrincipalToDependent!.Name
-                )
+                == ownership
+                    .PrincipalEntityType
+                    .GetOwnedName(name, ownership.PrincipalToDependent!.Name)
         )
 #pragma warning restore EF1001 // Internal EF Core API usage.
         {
@@ -189,7 +188,8 @@ public static class RelationalEntityTypeExtensions
             .GetForeignKeys()
             .SelectMany(fk => fk.GetReferencingSkipNavigations())
             .FirstOrDefault(n => !n.IsOnDependent)
-            ?.DeclaringEntityType.GetSchema();
+            ?.DeclaringEntityType
+            .GetSchema();
         if (
             skipNavigationSchema != null
             && entityType

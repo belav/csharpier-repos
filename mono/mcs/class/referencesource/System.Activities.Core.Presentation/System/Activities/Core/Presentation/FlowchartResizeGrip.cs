@@ -123,12 +123,12 @@ namespace System.Activities.Core.Presentation
                     ModelEditingScope scope = flowchartModelItem.BeginEdit(SR.FCResizeUndoUnitName)
                 )
                 {
-                    TypeDescriptor.GetProperties(flowchartModelItem)[
-                        FlowchartSizeFeature.WidthPropertyName
-                    ].SetValue(flowchartModelItem, flowchartDesigner.FlowchartWidth);
-                    TypeDescriptor.GetProperties(flowchartModelItem)[
-                        FlowchartSizeFeature.HeightPropertyName
-                    ].SetValue(flowchartModelItem, flowchartDesigner.FlowchartHeight);
+                    TypeDescriptor
+                        .GetProperties(flowchartModelItem)[FlowchartSizeFeature.WidthPropertyName]
+                        .SetValue(flowchartModelItem, flowchartDesigner.FlowchartWidth);
+                    TypeDescriptor
+                        .GetProperties(flowchartModelItem)[FlowchartSizeFeature.HeightPropertyName]
+                        .SetValue(flowchartModelItem, flowchartDesigner.FlowchartHeight);
                     scope.Complete();
                 }
                 Mouse.OverrideCursor = null;

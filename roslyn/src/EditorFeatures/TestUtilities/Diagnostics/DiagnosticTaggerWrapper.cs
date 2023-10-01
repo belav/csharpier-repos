@@ -52,16 +52,20 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
 
             // Change the background analysis scope to OpenFiles instead of ActiveFile (default),
             // so that every diagnostic tagger test does not need to mark test files as "active" file.
-            workspace.GlobalOptions.SetGlobalOption(
-                SolutionCrawlerOptionsStorage.BackgroundAnalysisScopeOption,
-                LanguageNames.CSharp,
-                BackgroundAnalysisScope.OpenFiles
-            );
-            workspace.GlobalOptions.SetGlobalOption(
-                SolutionCrawlerOptionsStorage.BackgroundAnalysisScopeOption,
-                LanguageNames.VisualBasic,
-                BackgroundAnalysisScope.OpenFiles
-            );
+            workspace
+                .GlobalOptions
+                .SetGlobalOption(
+                    SolutionCrawlerOptionsStorage.BackgroundAnalysisScopeOption,
+                    LanguageNames.CSharp,
+                    BackgroundAnalysisScope.OpenFiles
+                );
+            workspace
+                .GlobalOptions
+                .SetGlobalOption(
+                    SolutionCrawlerOptionsStorage.BackgroundAnalysisScopeOption,
+                    LanguageNames.VisualBasic,
+                    BackgroundAnalysisScope.OpenFiles
+                );
 
             _workspace = workspace;
 
@@ -79,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             AnalyzerService = (DiagnosticAnalyzerService?)
                 _registrationService
                     .GetTestAccessor()
-                    .AnalyzerProviders.SelectMany(pair => pair.Value)
+                    .AnalyzerProviders
+                    .SelectMany(pair => pair.Value)
                     .SingleOrDefault(
                         lazyProvider =>
                             lazyProvider.Metadata.Name
@@ -118,7 +123,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                         || typeof(TProvider) == typeof(InlineDiagnosticsTaggerProvider)
                     )
                     {
-                        _taggerProvider = _workspace.ExportProvider
+                        _taggerProvider = _workspace
+                            .ExportProvider
                             .GetExportedValues<ITaggerProvider>()
                             .OfType<TProvider>()
                             .Single();

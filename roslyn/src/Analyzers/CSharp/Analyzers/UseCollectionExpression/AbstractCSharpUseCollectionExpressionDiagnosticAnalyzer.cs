@@ -26,7 +26,8 @@ internal abstract class AbstractCSharpUseCollectionExpressionDiagnosticAnalyzer
         EnforceOnBuild enforceOnBuild
     )
         : base(
-            ImmutableDictionary<DiagnosticDescriptor, IOption2>.Empty
+            ImmutableDictionary<DiagnosticDescriptor, IOption2>
+                .Empty
                 // Ugly hack.  We need to create a descriptor to pass to our base *and* assign to one of our fields.
                 // The conditional pattern form lets us do that.
                 .Add(

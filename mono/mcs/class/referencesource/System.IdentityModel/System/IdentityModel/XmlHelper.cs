@@ -44,9 +44,13 @@ namespace System.IdentityModel
 
         internal static void OnRequiredAttributeMissing(string attrName, string elementName)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new XmlException(SR.GetString(SR.RequiredAttributeMissing, attrName, elementName))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(SR.RequiredAttributeMissing, attrName, elementName)
+                    )
+                );
         }
 
         internal static string ReadEmptyElementAndRequiredAttribute(
@@ -88,29 +92,35 @@ namespace System.IdentityModel
 
         internal static void OnRequiredElementMissing(string elementName, string elementNamespace)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new XmlException(
-                    SR.GetString(SR.ExpectedElementMissing, elementName, elementNamespace)
-                )
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(SR.ExpectedElementMissing, elementName, elementNamespace)
+                    )
+                );
         }
 
         internal static void OnUnexpectedChildNodeError(string parentName, XmlReader r)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new XmlException(
-                    SR.GetString(SR.UnexpectedXmlChildNode, r.Name, r.NodeType, parentName)
-                )
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(SR.UnexpectedXmlChildNode, r.Name, r.NodeType, parentName)
+                    )
+                );
         }
 
         internal static void OnUnexpectedChildNodeError(XmlElement parent, XmlNode n)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new XmlException(
-                    SR.GetString(SR.UnexpectedXmlChildNode, n.Name, n.NodeType, parent.Name)
-                )
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(SR.UnexpectedXmlChildNode, n.Name, n.NodeType, parent.Name)
+                    )
+                );
         }
 
         internal static System.Xml.UniqueId GetAttributeAsUniqueId(

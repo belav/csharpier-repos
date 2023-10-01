@@ -64,9 +64,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             CancellationToken cancellationToken
         )
         {
-            return _threadingContext.JoinableTaskFactory.Run(
-                () => StartInlineSessionAsync(document, textSpan, cancellationToken)
-            );
+            return _threadingContext
+                .JoinableTaskFactory
+                .Run(() => StartInlineSessionAsync(document, textSpan, cancellationToken));
         }
 
         public async Task<InlineRenameSessionInfo> StartInlineSessionAsync(
@@ -167,15 +167,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 )
                 {
                     var workspace = document.Project.Solution.Workspace;
-                    var navigationService =
-                        workspace.Services.GetRequiredService<IDocumentNavigationService>();
-                    using var _ = PooledObjects.ArrayBuilder<(
-                        ITextBuffer,
-                        SnapshotSpan
-                    )>.GetInstance(out var buffersAndSpans);
+                    var navigationService = workspace
+                        .Services
+                        .GetRequiredService<IDocumentNavigationService>();
+                    using var _ = PooledObjects
+                        .ArrayBuilder<(ITextBuffer, SnapshotSpan)>
+                        .GetInstance(out var buffersAndSpans);
                     foreach (var documentSpan in inlineRenameInfo.DefinitionLocations)
                     {
-                        var sourceText = await documentSpan.Document
+                        var sourceText = await documentSpan
+                            .Document
                             .GetValueTextAsync(cancellationToken)
                             .ConfigureAwait(false);
                         var textSnapshot = sourceText.FindCorrespondingEditorTextSnapshot();
@@ -183,7 +184,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                         if (textSnapshot != null)
                         {
                             var buffer = textSnapshot.TextBuffer;
-                            var originalSpan = documentSpan.SourceSpan
+                            var originalSpan = documentSpan
+                                .SourceSpan
                                 .ToSnapshotSpan(textSnapshot)
                                 .TranslateTo(
                                     buffer.CurrentSnapshot,
@@ -208,9 +210,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                         }
                     }
 
-                    await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                        cancellationToken
-                    );
+                    await threadingContext
+                        .JoinableTaskFactory
+                        .SwitchToMainThreadAsync(cancellationToken);
                     foreach (var (buffer, originalSpan) in buffersAndSpans)
                     {
                         if (buffer.IsReadOnly(originalSpan))

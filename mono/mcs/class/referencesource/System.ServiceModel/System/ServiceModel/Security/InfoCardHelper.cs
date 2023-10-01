@@ -60,13 +60,13 @@ namespace System.ServiceModel.Security
         )
         {
             if (tokenRequirement == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "tokenRequirement"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("tokenRequirement");
             if (clientCredentialsTokenManager == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "clientCredentialsTokenManager"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("clientCredentialsTokenManager");
 
             provider = null;
 
@@ -436,9 +436,11 @@ namespace System.ServiceModel.Security
                         || chain[k].Issuer.IsAnonymous
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(SR.GetString(SR.InfoCardInvalidChain))
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(SR.GetString(SR.InfoCardInvalidChain))
+                            );
                     }
                 }
             }
@@ -485,14 +487,16 @@ namespace System.ServiceModel.Security
                         true
                     );
                 federationTokenProvider.IssuerChannelBehaviors.Remove<SecurityCredentialsManager>();
-                federationTokenProvider.IssuerChannelBehaviors.Add(
-                    new InternalClientCredentials(
-                        clientCredentialsTokenManager.ClientCredentials,
-                        target,
-                        relyingPartyIssuer,
-                        infocardChannelParameter
-                    )
-                );
+                federationTokenProvider
+                    .IssuerChannelBehaviors
+                    .Add(
+                        new InternalClientCredentials(
+                            clientCredentialsTokenManager.ClientCredentials,
+                            target,
+                            relyingPartyIssuer,
+                            infocardChannelParameter
+                        )
+                    );
                 return federationTokenProvider;
             }
         }
@@ -685,8 +689,9 @@ namespace System.ServiceModel.Security
                 }
                 else if ((issuedTokenParam != null) && (issuedTokenParam.IssuerBinding != null))
                 {
-                    BindingElementCollection bindingElements =
-                        issuedTokenParam.IssuerBinding.CreateBindingElements();
+                    BindingElementCollection bindingElements = issuedTokenParam
+                        .IssuerBinding
+                        .CreateBindingElements();
                     SecurityBindingElement innerSecurityBindingElement =
                         bindingElements.Find<SecurityBindingElement>();
                     IssuedSecurityTokenParameters istp = TryGetNextStsIssuedTokenParameters(
@@ -754,11 +759,13 @@ namespace System.ServiceModel.Security
                 {
                     if (m_infocardChannelParameter.Token.ValidTo < DateTime.UtcNow)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ExpiredSecurityTokenException(
-                                (SR.GetString(SR.ExpiredTokenInChannelParameters))
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ExpiredSecurityTokenException(
+                                    (SR.GetString(SR.ExpiredTokenInChannelParameters))
+                                )
+                            );
                     }
                     else
                     {
@@ -767,9 +774,13 @@ namespace System.ServiceModel.Security
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new MessageSecurityException((SR.GetString(SR.NoTokenInChannelParameters)))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new MessageSecurityException(
+                                (SR.GetString(SR.NoTokenInChannelParameters))
+                            )
+                        );
                 }
             }
 
@@ -1066,9 +1077,9 @@ namespace System.ServiceModel.Security
 
             System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotImplementedException()
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new NotImplementedException());
             }
         }
     }

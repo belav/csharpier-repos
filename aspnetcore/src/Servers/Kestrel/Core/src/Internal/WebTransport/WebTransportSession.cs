@@ -60,14 +60,17 @@ internal sealed class WebTransportSession : IWebTransportSession
         _pendingStreams = Channel.CreateUnbounded<WebTransportStream>();
 
         // listener to abort if this connection is closed
-        _connectionClosedRegistration = connection._multiplexedContext.ConnectionClosed.Register(
-            static state =>
-            {
-                var session = (WebTransportSession)state!;
-                session.OnClientConnectionClosed();
-            },
-            this
-        );
+        _connectionClosedRegistration = connection
+            ._multiplexedContext
+            .ConnectionClosed
+            .Register(
+                static state =>
+                {
+                    var session = (WebTransportSession)state!;
+                    session.OnClientConnectionClosed();
+                },
+                this
+            );
     }
 
     void IWebTransportSession.Abort(int errorCode)
@@ -117,9 +120,14 @@ internal sealed class WebTransportSession : IWebTransportSession
             {
                 if (exception.InnerException is not null)
                 {
-                    stream.Value.Abort(
-                        new ConnectionAbortedException(exception.Message, exception.InnerException)
-                    );
+                    stream
+                        .Value
+                        .Abort(
+                            new ConnectionAbortedException(
+                                exception.Message,
+                                exception.InnerException
+                            )
+                        );
                 }
                 else
                 {
@@ -143,10 +151,9 @@ internal sealed class WebTransportSession : IWebTransportSession
         // create the stream
         var features = new FeatureCollection();
         features.Set(_outputStreamDirectionFeature);
-        var connectionContext = await _connection._multiplexedContext.ConnectAsync(
-            features,
-            cancellationToken
-        );
+        var connectionContext = await _connection
+            ._multiplexedContext
+            .ConnectAsync(features, cancellationToken);
         var streamContext = _connection.CreateHttpStreamContext(connectionContext);
         var stream = new WebTransportStream(streamContext, WebTransportStreamType.Output);
 

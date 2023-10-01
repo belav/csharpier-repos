@@ -112,9 +112,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             {
                 var compilationOptions = (CSharpCompilationOptions)base.CreateCompilationOptions();
                 return compilationOptions.WithSpecificDiagnosticOptions(
-                    compilationOptions.SpecificDiagnosticOptions.SetItems(
-                        CSharpVerifierHelper.NullableWarnings
-                    )
+                    compilationOptions
+                        .SpecificDiagnosticOptions
+                        .SetItems(CSharpVerifierHelper.NullableWarnings)
                 );
             }
 

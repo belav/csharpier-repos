@@ -57,16 +57,18 @@ namespace ILLink.RoslynAnalyzer.Tests
                 ReferenceAssemblies = TestCaseUtils.Net6PreviewAssemblies
             };
             test.ExpectedDiagnostics.AddRange(baselineExpected);
-            test.TestState.AnalyzerConfigFiles.Add(
-                (
-                    "/.editorconfig",
-                    SourceText.From(
-                        @$"
+            test.TestState
+                .AnalyzerConfigFiles
+                .Add(
+                    (
+                        "/.editorconfig",
+                        SourceText.From(
+                            @$"
 is_global = true
 build_property.{MSBuildPropertyOptionNames.EnableTrimAnalyzer} = true"
+                        )
                     )
-                )
-            );
+                );
             if (numberOfIterations != null)
             {
                 test.NumberOfIncrementalIterations = numberOfIterations;

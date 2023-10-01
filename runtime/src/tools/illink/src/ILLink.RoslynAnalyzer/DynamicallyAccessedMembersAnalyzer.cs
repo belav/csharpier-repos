@@ -155,10 +155,12 @@ namespace ILLink.RoslynAnalyzer
             context.RegisterCompilationStartAction(context =>
             {
                 if (
-                    !context.Options.IsMSBuildPropertyValueTrue(
-                        MSBuildPropertyOptionNames.EnableTrimAnalyzer,
-                        context.Compilation
-                    )
+                    !context
+                        .Options
+                        .IsMSBuildPropertyValueTrue(
+                            MSBuildPropertyOptionNames.EnableTrimAnalyzer,
+                            context.Compilation
+                        )
                 )
                     return;
 
@@ -172,7 +174,9 @@ namespace ILLink.RoslynAnalyzer
                         TrimDataFlowAnalysis trimDataFlowAnalysis = new(context, operationBlock);
                         trimDataFlowAnalysis.InterproceduralAnalyze();
                         foreach (
-                            var diagnostic in trimDataFlowAnalysis.TrimAnalysisPatterns.CollectDiagnostics()
+                            var diagnostic in trimDataFlowAnalysis
+                                .TrimAnalysisPatterns
+                                .CollectDiagnostics()
                         )
                             context.ReportDiagnostic(diagnostic);
                     }
@@ -260,9 +264,9 @@ namespace ILLink.RoslynAnalyzer
                     context =>
                     {
                         if (
-                            context.ContainingSymbol.IsInRequiresUnreferencedCodeAttributeScope(
-                                out _
-                            )
+                            context
+                                .ContainingSymbol
+                                .IsInRequiresUnreferencedCodeAttributeScope(out _)
                         )
                             return;
 
@@ -283,9 +287,9 @@ namespace ILLink.RoslynAnalyzer
                     context =>
                     {
                         if (
-                            context.ContainingSymbol.IsInRequiresUnreferencedCodeAttributeScope(
-                                out _
-                            )
+                            context
+                                .ContainingSymbol
+                                .IsInRequiresUnreferencedCodeAttributeScope(out _)
                         )
                             return;
 
@@ -312,9 +316,9 @@ namespace ILLink.RoslynAnalyzer
                     context =>
                     {
                         if (
-                            context.ContainingSymbol.IsInRequiresUnreferencedCodeAttributeScope(
-                                out _
-                            )
+                            context
+                                .ContainingSymbol
+                                .IsInRequiresUnreferencedCodeAttributeScope(out _)
                         )
                             return;
 
@@ -655,14 +659,18 @@ namespace ILLink.RoslynAnalyzer
                         (
                             !attributableSymbolLocation.IsInSource
                             || (
-                                overrideParam.ParameterSymbol!.TryGetAttribute(
-                                    DynamicallyAccessedMembersAnalyzer.DynamicallyAccessedMembersAttribute,
-                                    out var _
-                                )
-                                && baseParam.ParameterSymbol!.TryGetAttribute(
-                                    DynamicallyAccessedMembersAnalyzer.DynamicallyAccessedMembersAttribute,
-                                    out var _
-                                )
+                                overrideParam
+                                    .ParameterSymbol!
+                                    .TryGetAttribute(
+                                        DynamicallyAccessedMembersAnalyzer.DynamicallyAccessedMembersAttribute,
+                                        out var _
+                                    )
+                                && baseParam
+                                    .ParameterSymbol!
+                                    .TryGetAttribute(
+                                        DynamicallyAccessedMembersAnalyzer.DynamicallyAccessedMembersAttribute,
+                                        out var _
+                                    )
                             )
                         )
                             ? (null, null)
@@ -687,12 +695,12 @@ namespace ILLink.RoslynAnalyzer
 
             for (int i = 0; i < overrideMethod.TypeParameters.Length; i++)
             {
-                var methodTypeParameterAnnotation = overrideMethod.TypeParameters[
-                    i
-                ].GetDynamicallyAccessedMemberTypes();
-                var overriddenMethodTypeParameterAnnotation = baseMethod.TypeParameters[
-                    i
-                ].GetDynamicallyAccessedMemberTypes();
+                var methodTypeParameterAnnotation = overrideMethod
+                    .TypeParameters[i]
+                    .GetDynamicallyAccessedMemberTypes();
+                var overriddenMethodTypeParameterAnnotation = baseMethod
+                    .TypeParameters[i]
+                    .GetDynamicallyAccessedMemberTypes();
                 if (methodTypeParameterAnnotation != overriddenMethodTypeParameterAnnotation)
                 {
                     (
@@ -715,14 +723,18 @@ namespace ILLink.RoslynAnalyzer
                         (
                             !attributableSymbolLocation.IsInSource
                             || (
-                                overrideMethod.TypeParameters[i].TryGetAttribute(
-                                    DynamicallyAccessedMembersAnalyzer.DynamicallyAccessedMembersAttribute,
-                                    out var _
-                                )
-                                && baseMethod.TypeParameters[i].TryGetAttribute(
-                                    DynamicallyAccessedMembersAnalyzer.DynamicallyAccessedMembersAttribute,
-                                    out var _
-                                )
+                                overrideMethod
+                                    .TypeParameters[i]
+                                    .TryGetAttribute(
+                                        DynamicallyAccessedMembersAnalyzer.DynamicallyAccessedMembersAttribute,
+                                        out var _
+                                    )
+                                && baseMethod
+                                    .TypeParameters[i]
+                                    .TryGetAttribute(
+                                        DynamicallyAccessedMembersAnalyzer.DynamicallyAccessedMembersAttribute,
+                                        out var _
+                                    )
                             )
                         )
                             ? (null, null)
@@ -806,9 +818,9 @@ namespace ILLink.RoslynAnalyzer
                         != DynamicallyAccessedMemberTypes.None
                 // None on parameter of 'set' matches unannotated
                 || methodSymbol.MethodKind == MethodKind.PropertySet
-                    && methodSymbol.Parameters[
-                        methodSymbol.Parameters.Length - 1
-                    ].GetDynamicallyAccessedMemberTypes() != DynamicallyAccessedMemberTypes.None
+                    && methodSymbol
+                        .Parameters[methodSymbol.Parameters.Length - 1]
+                        .GetDynamicallyAccessedMemberTypes() != DynamicallyAccessedMemberTypes.None
             )
             {
                 var associatedSymbol = methodSymbol.AssociatedSymbol!;

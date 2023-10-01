@@ -170,17 +170,21 @@ namespace ILCompiler.DependencyAnalysis
                     case 3
                         when fixedArgs[1].Value is string typeStringFromAttribute
                             && fixedArgs[2].Value is string assemblyStringFromAttribute:
-                        ModuleDesc asm = factory.TypeSystemContext.ResolveAssembly(
-                            new System.Reflection.AssemblyName(assemblyStringFromAttribute),
-                            throwIfNotFound: false
-                        );
+                        ModuleDesc asm = factory
+                            .TypeSystemContext
+                            .ResolveAssembly(
+                                new System.Reflection.AssemblyName(assemblyStringFromAttribute),
+                                throwIfNotFound: false
+                            );
                         if (asm == null)
                         {
-                            metadataManager.Logger.LogWarning(
-                                new MessageOrigin(entity),
-                                DiagnosticId.UnresolvedAssemblyInDynamicDependencyAttribute,
-                                assemblyStringFromAttribute
-                            );
+                            metadataManager
+                                .Logger
+                                .LogWarning(
+                                    new MessageOrigin(entity),
+                                    DiagnosticId.UnresolvedAssemblyInDynamicDependencyAttribute,
+                                    assemblyStringFromAttribute
+                                );
                             return;
                         }
 
@@ -190,11 +194,13 @@ namespace ILCompiler.DependencyAnalysis
                         );
                         if (targetType == null)
                         {
-                            metadataManager.Logger.LogWarning(
-                                new MessageOrigin(entity),
-                                DiagnosticId.UnresolvedTypeInDynamicDependencyAttribute,
-                                typeStringFromAttribute
-                            );
+                            metadataManager
+                                .Logger
+                                .LogWarning(
+                                    new MessageOrigin(entity),
+                                    DiagnosticId.UnresolvedTypeInDynamicDependencyAttribute,
+                                    typeStringFromAttribute
+                                );
                             return;
                         }
                         break;
@@ -212,12 +218,14 @@ namespace ILCompiler.DependencyAnalysis
 
                 if (!members.Any())
                 {
-                    metadataManager.Logger.LogWarning(
-                        new MessageOrigin(entity),
-                        DiagnosticId.NoMembersResolvedForMemberSignatureOrType,
-                        sigFromAttribute,
-                        targetType.GetDisplayName()
-                    );
+                    metadataManager
+                        .Logger
+                        .LogWarning(
+                            new MessageOrigin(entity),
+                            DiagnosticId.NoMembersResolvedForMemberSignatureOrType,
+                            sigFromAttribute,
+                            targetType.GetDisplayName()
+                        );
                     return;
                 }
             }
@@ -235,17 +243,21 @@ namespace ILCompiler.DependencyAnalysis
                 )
                 {
                     // DynamicDependencyAttribute(DynamicallyAccessedMemberTypes, String, String)
-                    ModuleDesc asm = factory.TypeSystemContext.ResolveAssembly(
-                        new System.Reflection.AssemblyName(assemblyStringFromAttribute),
-                        throwIfNotFound: false
-                    );
+                    ModuleDesc asm = factory
+                        .TypeSystemContext
+                        .ResolveAssembly(
+                            new System.Reflection.AssemblyName(assemblyStringFromAttribute),
+                            throwIfNotFound: false
+                        );
                     if (asm == null)
                     {
-                        metadataManager.Logger.LogWarning(
-                            new MessageOrigin(entity),
-                            DiagnosticId.UnresolvedAssemblyInDynamicDependencyAttribute,
-                            assemblyStringFromAttribute
-                        );
+                        metadataManager
+                            .Logger
+                            .LogWarning(
+                                new MessageOrigin(entity),
+                                DiagnosticId.UnresolvedAssemblyInDynamicDependencyAttribute,
+                                assemblyStringFromAttribute
+                            );
                         return;
                     }
 
@@ -255,11 +267,13 @@ namespace ILCompiler.DependencyAnalysis
                     );
                     if (targetType == null)
                     {
-                        metadataManager.Logger.LogWarning(
-                            new MessageOrigin(entity),
-                            DiagnosticId.UnresolvedTypeInDynamicDependencyAttribute,
-                            typeStringFromAttribute
-                        );
+                        metadataManager
+                            .Logger
+                            .LogWarning(
+                                new MessageOrigin(entity),
+                                DiagnosticId.UnresolvedTypeInDynamicDependencyAttribute,
+                                typeStringFromAttribute
+                            );
                         return;
                     }
                 }
@@ -276,12 +290,14 @@ namespace ILCompiler.DependencyAnalysis
 
                 if (!members.Any())
                 {
-                    metadataManager.Logger.LogWarning(
-                        new MessageOrigin(entity),
-                        DiagnosticId.NoMembersResolvedForMemberSignatureOrType,
-                        memberTypesFromAttribute.ToString(),
-                        targetType.GetDisplayName()
-                    );
+                    metadataManager
+                        .Logger
+                        .LogWarning(
+                            new MessageOrigin(entity),
+                            DiagnosticId.NoMembersResolvedForMemberSignatureOrType,
+                            memberTypesFromAttribute.ToString(),
+                            targetType.GetDisplayName()
+                        );
                     return;
                 }
             }

@@ -45,9 +45,12 @@ namespace System.Runtime.Serialization
         internal DataContractSet(DataContractSet dataContractSet)
         {
             if (dataContractSet == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("dataContractSet")
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("dataContractSet"));
 
             this.dataContractSurrogate = dataContractSet.dataContractSurrogate;
             this.referencedTypes = dataContractSet.referencedTypes;
@@ -119,11 +122,16 @@ namespace System.Runtime.Serialization
         internal static void EnsureTypeNotGeneric(Type type)
         {
             if (type.ContainsGenericParameters)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidDataContractException(
-                        SR.GetString(SR.GenericTypeNotExportable, type)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidDataContractException(
+                            SR.GetString(SR.GenericTypeNotExportable, type)
+                        )
+                    );
         }
 
         void Add(DataContract dataContract)
@@ -149,44 +157,56 @@ namespace System.Runtime.Serialization
                         dataContract.UnderlyingType == null
                         || dataContractInSet.UnderlyingType == null
                     )
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.DupContractInDataContractSet,
-                                    dataContract.StableName.Name,
-                                    dataContract.StableName.Namespace
+                        throw System
+                            .Runtime
+                            .Serialization
+                            .DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.DupContractInDataContractSet,
+                                        dataContract.StableName.Name,
+                                        dataContract.StableName.Namespace
+                                    )
                                 )
-                            )
-                        );
+                            );
                     else
                     {
                         bool typeNamesEqual = (
                             DataContract.GetClrTypeFullName(dataContract.UnderlyingType)
                             == DataContract.GetClrTypeFullName(dataContractInSet.UnderlyingType)
                         );
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.DupTypeContractInDataContractSet,
-                                    (
-                                        typeNamesEqual
-                                            ? dataContract.UnderlyingType.AssemblyQualifiedName
-                                            : DataContract.GetClrTypeFullName(
-                                                dataContract.UnderlyingType
-                                            )
-                                    ),
-                                    (
-                                        typeNamesEqual
-                                            ? dataContractInSet.UnderlyingType.AssemblyQualifiedName
-                                            : DataContract.GetClrTypeFullName(
-                                                dataContractInSet.UnderlyingType
-                                            )
-                                    ),
-                                    dataContract.StableName.Name,
-                                    dataContract.StableName.Namespace
+                        throw System
+                            .Runtime
+                            .Serialization
+                            .DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.DupTypeContractInDataContractSet,
+                                        (
+                                            typeNamesEqual
+                                                ? dataContract.UnderlyingType.AssemblyQualifiedName
+                                                : DataContract.GetClrTypeFullName(
+                                                    dataContract.UnderlyingType
+                                                )
+                                        ),
+                                        (
+                                            typeNamesEqual
+                                                ? dataContractInSet
+                                                    .UnderlyingType
+                                                    .AssemblyQualifiedName
+                                                : DataContract.GetClrTypeFullName(
+                                                    dataContractInSet.UnderlyingType
+                                                )
+                                        ),
+                                        dataContract.StableName.Name,
+                                        dataContract.StableName.Namespace
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
             }
@@ -331,18 +351,23 @@ namespace System.Runtime.Serialization
                         );
                         if (dcType != dataMemberType)
                         {
-                            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidDataContractException(
-                                    SR.GetString(
-                                        SR.SurrogatesWithGetOnlyCollectionsNotSupported,
-                                        DataContract.GetClrTypeFullName(dataMemberType),
-                                        DataContract.GetClrTypeFullName(
-                                            dataMember.MemberInfo.DeclaringType
-                                        ),
-                                        dataMember.MemberInfo.Name
+                            throw System
+                                .Runtime
+                                .Serialization
+                                .DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidDataContractException(
+                                        SR.GetString(
+                                            SR.SurrogatesWithGetOnlyCollectionsNotSupported,
+                                            DataContract.GetClrTypeFullName(dataMemberType),
+                                            DataContract.GetClrTypeFullName(
+                                                dataMember.MemberInfo.DeclaringType
+                                            ),
+                                            dataMember.MemberInfo.Name
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                     }
                     return DataContract.GetGetOnlyCollectionDataContract(
@@ -451,11 +476,16 @@ namespace System.Runtime.Serialization
                     foreach (Type type in this.referencedTypes)
                     {
                         if (type == null)
-                            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR.GetString(SR.ReferencedTypesCannotContainNull)
-                                )
-                            );
+                            throw System
+                                .Runtime
+                                .Serialization
+                                .DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.GetString(SR.ReferencedTypesCannotContainNull)
+                                    )
+                                );
 
                         AddReferencedType(referencedTypesDictionary, type);
                     }
@@ -474,11 +504,16 @@ namespace System.Runtime.Serialization
                     foreach (Type type in this.referencedCollectionTypes)
                     {
                         if (type == null)
-                            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR.GetString(SR.ReferencedCollectionTypesCannotContainNull)
-                                )
-                            );
+                            throw System
+                                .Runtime
+                                .Serialization
+                                .DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.GetString(SR.ReferencedCollectionTypesCannotContainNull)
+                                    )
+                                );
                         AddReferencedType(referencedCollectionTypesDictionary, type);
                     }
                 }
@@ -622,35 +657,45 @@ namespace System.Runtime.Serialization
                     }
                     if (containsGenericType)
                     {
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    (
-                                        useReferencedCollectionTypes
-                                            ? SR.AmbiguousReferencedCollectionTypes1
-                                            : SR.AmbiguousReferencedTypes1
-                                    ),
-                                    errorMessage.ToString()
+                        throw System
+                            .Runtime
+                            .Serialization
+                            .DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        (
+                                            useReferencedCollectionTypes
+                                                ? SR.AmbiguousReferencedCollectionTypes1
+                                                : SR.AmbiguousReferencedTypes1
+                                        ),
+                                        errorMessage.ToString()
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                     else
                     {
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    (
-                                        useReferencedCollectionTypes
-                                            ? SR.AmbiguousReferencedCollectionTypes3
-                                            : SR.AmbiguousReferencedTypes3
-                                    ),
-                                    XmlConvert.DecodeName(stableName.Name),
-                                    stableName.Namespace,
-                                    errorMessage.ToString()
+                        throw System
+                            .Runtime
+                            .Serialization
+                            .DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        (
+                                            useReferencedCollectionTypes
+                                                ? SR.AmbiguousReferencedCollectionTypes3
+                                                : SR.AmbiguousReferencedTypes3
+                                        ),
+                                        XmlConvert.DecodeName(stableName.Name),
+                                        stableName.Namespace,
+                                        errorMessage.ToString()
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
             }

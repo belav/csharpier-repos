@@ -80,15 +80,12 @@ namespace System.Globalization
                 "[CultureData.GetLocaleInfoNative(LocaleGroupingData)] Expected _sWindowsName to be populated already"
             );
 
-            int primaryGroupingSize = Interop.Globalization.GetLocaleInfoPrimaryGroupingSizeNative(
-                _sWindowsName,
-                (uint)type
-            );
-            int secondaryGroupingSize =
-                Interop.Globalization.GetLocaleInfoSecondaryGroupingSizeNative(
-                    _sWindowsName,
-                    (uint)type
-                );
+            int primaryGroupingSize = Interop
+                .Globalization
+                .GetLocaleInfoPrimaryGroupingSizeNative(_sWindowsName, (uint)type);
+            int secondaryGroupingSize = Interop
+                .Globalization
+                .GetLocaleInfoSecondaryGroupingSizeNative(_sWindowsName, (uint)type);
 
             if (secondaryGroupingSize == 0)
             {
@@ -107,10 +104,9 @@ namespace System.Globalization
                 "[CultureData.GetTimeFormatStringNative(bool shortFormat)] Expected _sWindowsName to be populated already"
             );
 
-            string result = Interop.Globalization.GetLocaleTimeFormatNative(
-                _sWindowsName,
-                shortFormat
-            );
+            string result = Interop
+                .Globalization
+                .GetLocaleTimeFormatNative(_sWindowsName, shortFormat);
 
             return ConvertNativeTimeFormatString(result);
         }

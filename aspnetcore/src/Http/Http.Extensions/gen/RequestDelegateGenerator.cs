@@ -21,7 +21,8 @@ public sealed class RequestDelegateGenerator : IIncrementalGenerator
 {
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        var endpointsWithDiagnostics = context.SyntaxProvider
+        var endpointsWithDiagnostics = context
+            .SyntaxProvider
             .CreateSyntaxProvider(
                 predicate: static (node, _) =>
                     node.TryGetMapMethodName(out var method)

@@ -300,9 +300,13 @@ namespace System.ServiceModel.Security
                 || (token != null && tokenParameters == null)
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(SR.GetString(SR.TokenMustBeNullWhenTokenParametersAre))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(SR.TokenMustBeNullWhenTokenParametersAre)
+                        )
+                    );
             }
             this.elementContainer.SourceSigningToken = token;
             this.signingTokenParameters = tokenParameters;
@@ -316,9 +320,13 @@ namespace System.ServiceModel.Security
                 || (token != null && tokenParameters == null)
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(SR.GetString(SR.TokenMustBeNullWhenTokenParametersAre))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(SR.TokenMustBeNullWhenTokenParametersAre)
+                        )
+                    );
             }
             this.elementContainer.SourceEncryptionToken = token;
             this.encryptingTokenParameters = tokenParameters;
@@ -448,9 +456,13 @@ namespace System.ServiceModel.Security
             SignatureConfirmations signatureConfirmations
         )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(SR.GetString(SR.SignatureConfirmationNotSupported))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SignatureConfirmationNotSupported)
+                    )
+                );
         }
 
         void StartEncryption()
@@ -556,11 +568,13 @@ namespace System.ServiceModel.Security
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(SR.UnsupportedCryptoAlgorithm, derivationAlgorithm)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(SR.UnsupportedCryptoAlgorithm, derivationAlgorithm)
+                            )
+                        );
                 }
             }
             else
@@ -727,11 +741,16 @@ namespace System.ServiceModel.Security
                 case SecurityTokenInclusionMode.Never:
                     return false;
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(SR.UnsupportedTokenInclusionMode, parameters.InclusionMode)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(
+                                    SR.UnsupportedTokenInclusionMode,
+                                    parameters.InclusionMode
+                                )
+                            )
+                        );
             }
         }
 
@@ -760,26 +779,23 @@ namespace System.ServiceModel.Security
                 && this.Layout != SecurityHeaderLayout.LaxTimestampLast
             )
             {
-                this.StandardsManager.WSUtilitySpecificationVersion.WriteTimestamp(
-                    writer,
-                    this.elementContainer.Timestamp
-                );
+                this.StandardsManager
+                    .WSUtilitySpecificationVersion
+                    .WriteTimestamp(writer, this.elementContainer.Timestamp);
             }
             if (elementContainer.PrerequisiteToken != null)
             {
-                this.StandardsManager.SecurityTokenSerializer.WriteToken(
-                    writer,
-                    elementContainer.PrerequisiteToken
-                );
+                this.StandardsManager
+                    .SecurityTokenSerializer
+                    .WriteToken(writer, elementContainer.PrerequisiteToken);
             }
             if (elementContainer.SourceSigningToken != null)
             {
                 if (ShouldSerializeToken(this.signingTokenParameters, this.MessageDirection))
                 {
-                    this.StandardsManager.SecurityTokenSerializer.WriteToken(
-                        writer,
-                        elementContainer.SourceSigningToken
-                    );
+                    this.StandardsManager
+                        .SecurityTokenSerializer
+                        .WriteToken(writer, elementContainer.SourceSigningToken);
 
                     // Implement Protect token
                     // NOTE: The spec says sign the primary token if it is not included in the message. But we currently are not supporting it
@@ -800,10 +816,9 @@ namespace System.ServiceModel.Security
             }
             if (elementContainer.DerivedSigningToken != null)
             {
-                this.StandardsManager.SecurityTokenSerializer.WriteToken(
-                    writer,
-                    elementContainer.DerivedSigningToken
-                );
+                this.StandardsManager
+                    .SecurityTokenSerializer
+                    .WriteToken(writer, elementContainer.DerivedSigningToken);
             }
             if (
                 elementContainer.SourceEncryptionToken != null
@@ -811,33 +826,29 @@ namespace System.ServiceModel.Security
                 && ShouldSerializeToken(encryptingTokenParameters, this.MessageDirection)
             )
             {
-                this.StandardsManager.SecurityTokenSerializer.WriteToken(
-                    writer,
-                    elementContainer.SourceEncryptionToken
-                );
+                this.StandardsManager
+                    .SecurityTokenSerializer
+                    .WriteToken(writer, elementContainer.SourceEncryptionToken);
             }
             if (elementContainer.WrappedEncryptionToken != null)
             {
-                this.StandardsManager.SecurityTokenSerializer.WriteToken(
-                    writer,
-                    elementContainer.WrappedEncryptionToken
-                );
+                this.StandardsManager
+                    .SecurityTokenSerializer
+                    .WriteToken(writer, elementContainer.WrappedEncryptionToken);
             }
             if (elementContainer.DerivedEncryptionToken != null)
             {
-                this.StandardsManager.SecurityTokenSerializer.WriteToken(
-                    writer,
-                    elementContainer.DerivedEncryptionToken
-                );
+                this.StandardsManager
+                    .SecurityTokenSerializer
+                    .WriteToken(writer, elementContainer.DerivedEncryptionToken);
             }
             if (this.SignThenEncrypt)
             {
                 if (elementContainer.ReferenceList != null)
                 {
-                    elementContainer.ReferenceList.WriteTo(
-                        writer,
-                        ServiceModelDictionaryManager.Instance
-                    );
+                    elementContainer
+                        .ReferenceList
+                        .WriteTo(writer, ServiceModelDictionaryManager.Instance);
                 }
             }
 
@@ -846,10 +857,9 @@ namespace System.ServiceModel.Security
             {
                 for (int i = 0; i < signedTokens.Length; ++i)
                 {
-                    this.StandardsManager.SecurityTokenSerializer.WriteToken(
-                        writer,
-                        signedTokens[i]
-                    );
+                    this.StandardsManager
+                        .SecurityTokenSerializer
+                        .WriteToken(writer, signedTokens[i]);
                     this.WriteSecurityTokenReferencyEntry(
                         writer,
                         signedTokens[i],
@@ -881,10 +891,9 @@ namespace System.ServiceModel.Security
                 {
                     if (ShouldSerializeToken(endorsingTokenParameters[i], this.MessageDirection))
                     {
-                        this.StandardsManager.SecurityTokenSerializer.WriteToken(
-                            writer,
-                            endorsingTokens[i]
-                        );
+                        this.StandardsManager
+                            .SecurityTokenSerializer
+                            .WriteToken(writer, endorsingTokens[i]);
                     }
                 }
             }
@@ -894,10 +903,9 @@ namespace System.ServiceModel.Security
             {
                 for (int i = 0; i < endorsingDerivedTokens.Length; ++i)
                 {
-                    this.StandardsManager.SecurityTokenSerializer.WriteToken(
-                        writer,
-                        endorsingDerivedTokens[i]
-                    );
+                    this.StandardsManager
+                        .SecurityTokenSerializer
+                        .WriteToken(writer, endorsingDerivedTokens[i]);
                 }
             }
             SecurityToken[] signedEndorsingTokens =
@@ -906,10 +914,9 @@ namespace System.ServiceModel.Security
             {
                 for (int i = 0; i < signedEndorsingTokens.Length; ++i)
                 {
-                    this.StandardsManager.SecurityTokenSerializer.WriteToken(
-                        writer,
-                        signedEndorsingTokens[i]
-                    );
+                    this.StandardsManager
+                        .SecurityTokenSerializer
+                        .WriteToken(writer, signedEndorsingTokens[i]);
                     this.WriteSecurityTokenReferencyEntry(
                         writer,
                         signedEndorsingTokens[i],
@@ -923,10 +930,9 @@ namespace System.ServiceModel.Security
             {
                 for (int i = 0; i < signedEndorsingDerivedTokens.Length; ++i)
                 {
-                    this.StandardsManager.SecurityTokenSerializer.WriteToken(
-                        writer,
-                        signedEndorsingDerivedTokens[i]
-                    );
+                    this.StandardsManager
+                        .SecurityTokenSerializer
+                        .WriteToken(writer, signedEndorsingDerivedTokens[i]);
                 }
             }
             SendSecurityHeaderElement[] signatureConfirmations =
@@ -935,10 +941,9 @@ namespace System.ServiceModel.Security
             {
                 for (int i = 0; i < signatureConfirmations.Length; ++i)
                 {
-                    signatureConfirmations[i].Item.WriteTo(
-                        writer,
-                        ServiceModelDictionaryManager.Instance
-                    );
+                    signatureConfirmations[i]
+                        .Item
+                        .WriteTo(writer, ServiceModelDictionaryManager.Instance);
                 }
             }
             if (
@@ -946,10 +951,10 @@ namespace System.ServiceModel.Security
                 && elementContainer.PrimarySignature.Item != null
             )
             {
-                elementContainer.PrimarySignature.Item.WriteTo(
-                    writer,
-                    ServiceModelDictionaryManager.Instance
-                );
+                elementContainer
+                    .PrimarySignature
+                    .Item
+                    .WriteTo(writer, ServiceModelDictionaryManager.Instance);
             }
             SendSecurityHeaderElement[] endorsingSignatures =
                 elementContainer.GetEndorsingSignatures();
@@ -957,20 +962,18 @@ namespace System.ServiceModel.Security
             {
                 for (int i = 0; i < endorsingSignatures.Length; ++i)
                 {
-                    endorsingSignatures[i].Item.WriteTo(
-                        writer,
-                        ServiceModelDictionaryManager.Instance
-                    );
+                    endorsingSignatures[i]
+                        .Item
+                        .WriteTo(writer, ServiceModelDictionaryManager.Instance);
                 }
             }
             if (!this.SignThenEncrypt)
             {
                 if (elementContainer.ReferenceList != null)
                 {
-                    elementContainer.ReferenceList.WriteTo(
-                        writer,
-                        ServiceModelDictionaryManager.Instance
-                    );
+                    elementContainer
+                        .ReferenceList
+                        .WriteTo(writer, ServiceModelDictionaryManager.Instance);
                 }
             }
             if (
@@ -978,10 +981,9 @@ namespace System.ServiceModel.Security
                 && this.Layout == SecurityHeaderLayout.LaxTimestampLast
             )
             {
-                this.StandardsManager.WSUtilitySpecificationVersion.WriteTimestamp(
-                    writer,
-                    this.elementContainer.Timestamp
-                );
+                this.StandardsManager
+                    .WSUtilitySpecificationVersion
+                    .WriteTimestamp(writer, this.elementContainer.Timestamp);
             }
         }
 
@@ -1107,11 +1109,13 @@ namespace System.ServiceModel.Security
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(SR.UnsupportedCryptoAlgorithm, derivationAlgorithm)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(SR.UnsupportedCryptoAlgorithm, derivationAlgorithm)
+                            )
+                        );
                 }
             }
             else

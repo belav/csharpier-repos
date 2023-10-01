@@ -117,11 +117,12 @@ namespace System.Security.Cryptography.Asn1
             if (tag.HasSameClassAndValue(Asn1Tag.Sequence))
             {
                 System.Security.Cryptography.Asn1.SpecifiedECDomain tmpSpecified;
-                System.Security.Cryptography.Asn1.SpecifiedECDomain.Decode(
-                    ref reader,
-                    rebind,
-                    out tmpSpecified
-                );
+                System
+                    .Security
+                    .Cryptography
+                    .Asn1
+                    .SpecifiedECDomain
+                    .Decode(ref reader, rebind, out tmpSpecified);
                 decoded.Specified = tmpSpecified;
             }
             else if (tag.HasSameClassAndValue(Asn1Tag.ObjectIdentifier))

@@ -109,10 +109,9 @@ namespace Internal.Reflection.Execution
                     goto notFound;
                 }
 
-                MethodBase methodBase =
-                    RuntimeAugments.Callbacks.GetMethodBaseFromStartAddressIfAvailable(
-                        classRtMethodHandle
-                    );
+                MethodBase methodBase = RuntimeAugments
+                    .Callbacks
+                    .GetMethodBaseFromStartAddressIfAvailable(classRtMethodHandle);
                 if (methodBase == null)
                 {
                     goto notFound;
@@ -166,8 +165,9 @@ namespace Internal.Reflection.Execution
                 typeDefHandle = RuntimeAugments.GetGenericDefinition(typeHandle);
             }
 
-            QTypeDefinition qTypeDefinition =
-                ReflectionExecution.ExecutionEnvironment.GetMetadataForNamedType(typeDefHandle);
+            QTypeDefinition qTypeDefinition = ReflectionExecution
+                .ExecutionEnvironment
+                .GetMetadataForNamedType(typeDefHandle);
 
             if (qTypeDefinition.IsNativeFormatMetadataBased)
             {

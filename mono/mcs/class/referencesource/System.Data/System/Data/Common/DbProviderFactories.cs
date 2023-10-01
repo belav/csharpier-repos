@@ -156,7 +156,8 @@ namespace System.Data.Common
             //  <add name="OracleClient Data Provider" invariant="System.Data.OracleClient" description=".Net Framework Data Provider for Oracle" type="System.Data.OracleClient.OracleClientFactory, System.Data.OracleClient, Version=%ASSEMBLY_VERSION%, Culture=neutral, PublicKeyToken=%ECMA_PUBLICKEY%"/>
             //  <add name="SqlClient Data Provider" invariant="System.Data.SqlClient" description=".Net Framework Data Provider for SqlServer" type="System.Data.SqlClient.SqlClientFactory, System.Data, Version=%ASSEMBLY_VERSION%, Culture=neutral, PublicKeyToken=%ECMA_PUBLICKEY%"/>
             Type sysDataType = typeof(System.Data.SqlClient.SqlClientFactory);
-            string asmQualName = sysDataType.AssemblyQualifiedName
+            string asmQualName = sysDataType
+                .AssemblyQualifiedName
                 .ToString()
                 .Replace(
                     DbProviderFactoriesConfigurationHandler.sqlclientPartialAssemblyQualifiedName,
@@ -213,9 +214,9 @@ namespace System.Data.Common
                             if (
                                 (null != providerInstance)
                                 && (
-                                    providerInstance.FieldType.IsSubclassOf(
-                                        typeof(DbProviderFactory)
-                                    )
+                                    providerInstance
+                                        .FieldType
+                                        .IsSubclassOf(typeof(DbProviderFactory))
                                 )
                             )
                             {
@@ -259,11 +260,13 @@ namespace System.Data.Common
 
                     // OracleClient Provider: Include only if it installed
                     if (
-                        configDataTable.Rows[i][AssemblyQualifiedName]
+                        configDataTable
+                            .Rows[i][AssemblyQualifiedName]
                             .ToString()
                             .ToLowerInvariant()
                             .Contains(
-                                DbProviderFactoriesConfigurationHandler.oracleclientProviderNamespace
+                                DbProviderFactoriesConfigurationHandler
+                                    .oracleclientProviderNamespace
                                     .ToString()
                                     .ToLowerInvariant()
                             )
@@ -284,9 +287,9 @@ namespace System.Data.Common
                             if (
                                 (null != providerInstance)
                                 && (
-                                    providerInstance.FieldType.IsSubclassOf(
-                                        typeof(DbProviderFactory)
-                                    )
+                                    providerInstance
+                                        .FieldType
+                                        .IsSubclassOf(typeof(DbProviderFactory))
                                 )
                             )
                             {

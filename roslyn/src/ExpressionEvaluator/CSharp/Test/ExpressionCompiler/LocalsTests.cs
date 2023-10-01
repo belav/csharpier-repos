@@ -5850,13 +5850,15 @@ class C
     {
     }
 }";
-            var references = TargetFrameworkUtil.Mscorlib461ExtendedReferences.Concat(
-                new[]
-                {
-                    Net461.SystemThreadingTasks,
-                    TestMetadata.SystemThreadingTasksExtensions.PortableLib
-                }
-            );
+            var references = TargetFrameworkUtil
+                .Mscorlib461ExtendedReferences
+                .Concat(
+                    new[]
+                    {
+                        Net461.SystemThreadingTasks,
+                        TestMetadata.SystemThreadingTasksExtensions.PortableLib
+                    }
+                );
             var comp = CreateEmptyCompilation(
                 new[] { source, AsyncStreamsTypes },
                 references: references

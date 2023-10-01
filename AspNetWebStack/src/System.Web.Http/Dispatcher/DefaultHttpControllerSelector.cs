@@ -124,11 +124,9 @@ namespace System.Web.Http.Dispatcher
 
         public virtual IDictionary<string, HttpControllerDescriptor> GetControllerMapping()
         {
-            return _controllerInfoCache.Value.ToDictionary(
-                c => c.Key,
-                c => c.Value,
-                StringComparer.OrdinalIgnoreCase
-            );
+            return _controllerInfoCache
+                .Value
+                .ToDictionary(c => c.Key, c => c.Value, StringComparer.OrdinalIgnoreCase);
         }
 
         public virtual string GetControllerName(HttpRequestMessage request)

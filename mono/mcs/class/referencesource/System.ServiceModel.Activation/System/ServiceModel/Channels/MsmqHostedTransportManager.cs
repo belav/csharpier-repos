@@ -213,9 +213,9 @@ namespace System.ServiceModel.Channels
                             ServiceHostingEnvironment.IsConfigurationBasedService(serviceFile)
                             || HostingEnvironmentWrapper.ServiceFileExists(serviceFile)
                         )
-                        && AspNetEnvironment.Current.IsWithinApp(
-                            VirtualPathUtility.ToAbsolute(serviceFile)
-                        )
+                        && AspNetEnvironment
+                            .Current
+                            .IsWithinApp(VirtualPathUtility.ToAbsolute(serviceFile))
                     );
                 }
                 catch (ArgumentException ex)

@@ -145,13 +145,9 @@ namespace MonoTests.System.Reflection
         [ExpectedException(typeof(TargetException))]
         public void InvokeWithWrongTarget()
         {
-            typeof(Foo).GetConstructors()[0].Invoke(
-                new object(),
-                BindingFlags.Default,
-                null,
-                null,
-                null
-            );
+            typeof(Foo)
+                .GetConstructors()[0]
+                .Invoke(new object(), BindingFlags.Default, null, null, null);
         }
 
         [Test]

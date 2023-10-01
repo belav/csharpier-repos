@@ -512,10 +512,9 @@ namespace System.ServiceModel.Channels.Security
                                     EncryptedXml.XmlEncElementUrl
                                 );
                                 EncryptedXml.ReplaceElement(elem, edata, false);
-                                header.Contents.Insert(
-                                    header.Contents.IndexOf(confs[count]),
-                                    edata
-                                );
+                                header
+                                    .Contents
+                                    .Insert(header.Contents.IndexOf(confs[count]), edata);
                                 header.Contents.Remove(confs[count++]);
                             }
                         }
@@ -538,10 +537,9 @@ namespace System.ServiceModel.Channels.Security
                                 EncryptedXml.XmlEncElementUrl
                             );
                             EncryptedXml.ReplaceElement(el, tinfo.Encrypted, false);
-                            header.Contents.Insert(
-                                header.Contents.IndexOf(tinfo.Token),
-                                tinfo.Encrypted
-                            );
+                            header
+                                .Contents
+                                .Insert(header.Contents.IndexOf(tinfo.Token), tinfo.Encrypted);
                             header.Contents.Remove(tinfo.Token);
                         }
                     }
@@ -757,9 +755,9 @@ namespace System.ServiceModel.Channels.Security
                             );
                             ssxml.ComputeSignature();
                         }
-                        ssxml.KeyInfo.AddClause(
-                            new SecurityTokenReferenceKeyInfo(tclause, serializer, doc)
-                        );
+                        ssxml
+                            .KeyInfo
+                            .AddClause(new SecurityTokenReferenceKeyInfo(tclause, serializer, doc));
                         if (!signatureProtection)
                             header.AddContent(ssxml.Signature);
                         endorsedSignatures.Add(ssxml);
@@ -815,9 +813,9 @@ namespace System.ServiceModel.Channels.Security
             timestamp.Id = id;
             timestamp.Created = DateTime.Now;
             // FIXME: on service side, use element.LocalServiceSettings.TimestampValidityDuration
-            timestamp.Expires = timestamp.Created.Add(
-                security.Element.LocalClientSettings.TimestampValidityDuration
-            );
+            timestamp.Expires = timestamp
+                .Created
+                .Add(security.Element.LocalClientSettings.TimestampValidityDuration);
             header.AddContent(timestamp);
         }
 
@@ -897,9 +895,9 @@ namespace System.ServiceModel.Channels.Security
             else
             {
                 edata.KeyInfo = new KeyInfo();
-                edata.KeyInfo.AddClause(
-                    new SecurityTokenReferenceKeyInfo(encClause, serializer, doc)
-                );
+                edata
+                    .KeyInfo
+                    .AddClause(new SecurityTokenReferenceKeyInfo(encClause, serializer, doc));
             }
 
             return edata;

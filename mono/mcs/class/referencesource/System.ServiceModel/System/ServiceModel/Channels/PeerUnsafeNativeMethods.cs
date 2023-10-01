@@ -118,9 +118,9 @@ namespace System.ServiceModel.Channels
                     {
                         // Get the Win32 error code before doing anything else
                         error = Marshal.GetLastWin32Error();
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SocketException(error)
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(new SocketException(error));
                     }
 
                     // Marshal the sorted SOCKET_ADDRESS_LIST into IPAddresses
@@ -282,9 +282,9 @@ namespace System.ServiceModel.Channels
                 if (i == SocketAddressList.maxAddresses)
                     break; // due to Marshalling fixed sized array of SocketAddresses.
                 socketHandles[i] = CriticalAllocHandleSocketAddress.FromIPAddress(address);
-                socketAddressList.Addresses[i].InitializeFromCriticalAllocHandleSocketAddress(
-                    socketHandles[i]
-                );
+                socketAddressList
+                    .Addresses[i]
+                    .InitializeFromCriticalAllocHandleSocketAddress(socketHandles[i]);
                 ++i;
             }
 

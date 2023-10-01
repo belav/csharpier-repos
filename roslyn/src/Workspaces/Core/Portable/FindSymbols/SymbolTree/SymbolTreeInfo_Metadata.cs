@@ -71,10 +71,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
             unsafe
             {
-                return MetadataStringDecoder.DefaultUTF8.GetString(
-                    blobReader.CurrentPointer,
-                    backtickIndex
-                );
+                return MetadataStringDecoder
+                    .DefaultUTF8
+                    .GetString(blobReader.CurrentPointer, backtickIndex);
             }
         }
 
@@ -811,20 +810,18 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                         if (dotIndex == -1)
                         {
                             simpleNames.Add(
-                                MetadataStringDecoder.DefaultUTF8.GetString(
-                                    blobReader.CurrentPointer,
-                                    blobReader.RemainingBytes
-                                )
+                                MetadataStringDecoder
+                                    .DefaultUTF8
+                                    .GetString(blobReader.CurrentPointer, blobReader.RemainingBytes)
                             );
                             return;
                         }
                         else
                         {
                             simpleNames.Add(
-                                MetadataStringDecoder.DefaultUTF8.GetString(
-                                    blobReader.CurrentPointer,
-                                    dotIndex
-                                )
+                                MetadataStringDecoder
+                                    .DefaultUTF8
+                                    .GetString(blobReader.CurrentPointer, dotIndex)
                             );
                             blobReader.Offset += dotIndex + 1;
                         }
@@ -872,10 +869,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     case HandleKind.TypeReference:
                         return baseTypeOrInterfaceHandle;
                     case HandleKind.TypeSpecification:
-                        return FirstEntityHandleProvider.Instance.GetTypeFromSpecification(
-                            metadataReader,
-                            (TypeSpecificationHandle)baseTypeOrInterfaceHandle
-                        );
+                        return FirstEntityHandleProvider
+                            .Instance
+                            .GetTypeFromSpecification(
+                                metadataReader,
+                                (TypeSpecificationHandle)baseTypeOrInterfaceHandle
+                            );
                     default:
                         return default;
                 }

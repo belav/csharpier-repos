@@ -1183,12 +1183,12 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Body = stream;
 
         httpContext.Request.Headers["Content-Type"] = "application/json";
-        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
-            CultureInfo.InvariantCulture
-        );
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext.Request.Headers["Content-Length"] = stream
+            .Length
+            .ToString(CultureInfo.InvariantCulture);
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         var jsonOptions = new JsonOptions();
         jsonOptions.SerializerOptions.Converters.Add(new TodoJsonConverter());
@@ -1225,9 +1225,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var httpContext = CreateHttpContext();
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "0";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(false)
-        );
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(false));
 
         var factoryResult = RequestDelegateFactory.Create(action);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -1613,10 +1613,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         // IEnumerable<T> always resolves from DI but is empty and throws from test method
         if (
-            action.Method.Name.Contains(
-                "TestExplicitFromIEnumerableService",
-                StringComparison.Ordinal
-            )
+            action
+                .Method
+                .Name
+                .Contains("TestExplicitFromIEnumerableService", StringComparison.Ordinal)
         )
         {
             return;
@@ -2701,9 +2701,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Headers["Content-Type"] = "application/x-www-form-urlencoded";
         httpContext.Request.Headers["Content-Length"] = "1";
         httpContext.Request.Body = new ExceptionThrowingRequestBodyStream(exception);
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         var factoryResult = RequestDelegateFactory.Create(TestAction);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -2739,9 +2739,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "1000";
         httpContext.Request.Body = new ExceptionThrowingRequestBodyStream(exception);
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         var factoryResult = RequestDelegateFactory.Create(TestAction);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -3511,12 +3511,12 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Body = stream;
 
         httpContext.Request.Headers["Content-Type"] = "application/json";
-        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
-            CultureInfo.InvariantCulture
-        );
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext.Request.Headers["Content-Length"] = stream
+            .Length
+            .ToString(CultureInfo.InvariantCulture);
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         // Act
         var result = RequestDelegateFactory.Create(@delegate, options, metadataResult);
@@ -3897,10 +3897,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     public void RequestDelegateFactory_WhenJsonIsReflectionEnabledByDefaultFalse()
     {
         var options = new RemoteInvokeOptions();
-        options.RuntimeConfigurationOptions.Add(
-            "System.Text.Json.JsonSerializer.IsReflectionEnabledByDefault",
-            false.ToString()
-        );
+        options
+            .RuntimeConfigurationOptions
+            .Add("System.Text.Json.JsonSerializer.IsReflectionEnabledByDefault", false.ToString());
 
         using var remoteHandle = RemoteExecutor.Invoke(
             static () =>
@@ -3928,10 +3927,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     public void RequestDelegateFactory_WhenJsonIsReflectionEnabledByDefaultTrue()
     {
         var options = new RemoteInvokeOptions();
-        options.RuntimeConfigurationOptions.Add(
-            "System.Text.Json.JsonSerializer.IsReflectionEnabledByDefault",
-            true.ToString()
-        );
+        options
+            .RuntimeConfigurationOptions
+            .Add("System.Text.Json.JsonSerializer.IsReflectionEnabledByDefault", true.ToString());
 
         using var remoteHandle = RemoteExecutor.Invoke(
             static () =>
@@ -4204,12 +4202,14 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 return;
             }
 
-            builder.Metadata.Add(
-                new RoutePatternMetadata
-                {
-                    RoutePattern = reb.RoutePattern?.RawText ?? string.Empty
-                }
-            );
+            builder
+                .Metadata
+                .Add(
+                    new RoutePatternMetadata
+                    {
+                        RoutePattern = reb.RoutePattern?.RawText ?? string.Empty
+                    }
+                );
         }
     }
 

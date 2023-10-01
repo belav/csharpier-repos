@@ -226,14 +226,16 @@ namespace Roslyn.Test.Performance.Utilities
         /// </summary>
         public static void LogProcessResult(ProcessResult result)
         {
-            RuntimeSettings.Logger.Log(
-                String.Format(
-                    "The process \"{0}\" {1} with code {2}",
-                    $"{result.ExecutablePath} {result.Args}",
-                    result.Failed ? "failed" : "succeeded",
-                    result.Code
-                )
-            );
+            RuntimeSettings
+                .Logger
+                .Log(
+                    String.Format(
+                        "The process \"{0}\" {1} with code {2}",
+                        $"{result.ExecutablePath} {result.Args}",
+                        result.Failed ? "failed" : "succeeded",
+                        result.Code
+                    )
+                );
             RuntimeSettings.Logger.Log($"Standard Out:\n{result.StdOut}");
             RuntimeSettings.Logger.Log($"\nStandard Error:\n{result.StdErr}");
         }

@@ -254,9 +254,9 @@ namespace System.Runtime
                                     && otherGroupRemainingTime > maxTimeToWaitForMoreTimers
                                 )
                                 {
-                                    timerGroup.WaitableTimer.Set(
-                                        Ticks.Add(now, maxTimeToWaitForMoreTimers)
-                                    );
+                                    timerGroup
+                                        .WaitableTimer
+                                        .Set(Ticks.Add(now, maxTimeToWaitForMoreTimers));
                                 }
                             }
                         }

@@ -22,7 +22,9 @@ public class When_an_extension_methods_contraints_fail : NonValidatingSpecBase
     public void It_should_fail_validation() =>
         new Action(AssertConfigurationIsValid)
             .ShouldThrow<AutoMapperConfigurationException>()
-            .Errors[0].UnmappedPropertyNames[0].ShouldBe(nameof(Destination.Count));
+            .Errors[0]
+            .UnmappedPropertyNames[0]
+            .ShouldBe(nameof(Destination.Count));
 }
 
 public class When_an_extension_method_is_for_a_base_interface : AutoMapperSpecBase
@@ -291,7 +293,9 @@ public class When_disabling_method_maping : NonValidatingSpecBase
     {
         new Action(AssertConfigurationIsValid)
             .ShouldThrow<AutoMapperConfigurationException>()
-            .Errors[0].UnmappedPropertyNames.ShouldBe(new[] { "ValuesCount", "OtherValue" });
+            .Errors[0]
+            .UnmappedPropertyNames
+            .ShouldBe(new[] { "ValuesCount", "OtherValue" });
         Mapper.Map<Destination>(new Source { StringValue = "42" }).StringValue.ShouldBeNull();
     }
 }

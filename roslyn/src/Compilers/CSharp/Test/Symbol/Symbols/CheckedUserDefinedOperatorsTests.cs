@@ -749,14 +749,16 @@ class C
 ";
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics();
 
             var crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            var expectedSymbol = compilation.SourceModule.GlobalNamespace
+            var expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -767,9 +769,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular10.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular10
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(
                 // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked ++'
@@ -793,7 +795,9 @@ class C
             );
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace
+            expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -804,14 +808,16 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular11.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular11
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics();
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace
+            expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -855,9 +861,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation
                 .GetDiagnostics()
@@ -902,9 +908,9 @@ class C
             };
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
@@ -943,9 +949,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation
                 .GetDiagnostics()
@@ -958,9 +964,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular10.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular10
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation
                 .GetDiagnostics()
@@ -992,9 +998,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular11.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular11
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation
                 .GetDiagnostics()
@@ -1031,9 +1037,9 @@ class C
 ";
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation
                 .GetDiagnostics()
@@ -1041,7 +1047,9 @@ class C
                 .Verify();
 
             var crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            var expectedSymbol = compilation.SourceModule.GlobalNamespace
+            var expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -1052,9 +1060,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular10.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular10
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation
                 .GetDiagnostics()
@@ -1081,7 +1089,9 @@ class C
                 );
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace
+            expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -1092,9 +1102,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular11.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular11
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation
                 .GetDiagnostics()
@@ -1102,7 +1112,9 @@ class C
                 .Verify();
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace
+            expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -1146,9 +1158,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation
                 .GetDiagnostics()
@@ -1194,9 +1206,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
@@ -1237,14 +1249,16 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
             var crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            var expectedSymbol = compilation.SourceModule.GlobalNamespace
+            var expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -1255,14 +1269,16 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular10.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular10
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace
+            expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -1273,14 +1289,16 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular11.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular11
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace
+            expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -1322,14 +1340,16 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
             var crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            var expectedSymbol = compilation.SourceModule.GlobalNamespace
+            var expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -1340,14 +1360,16 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular10.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular10
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace
+            expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -1358,14 +1380,16 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular11.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular11
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace
+            expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -1623,9 +1647,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
@@ -1635,9 +1659,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular10.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular10
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(
                 // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked +'
@@ -1661,9 +1685,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular11.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular11
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
@@ -1701,9 +1725,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
@@ -1713,9 +1737,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular10.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular10
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(
                 // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked false'
@@ -1739,9 +1763,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular11.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular11
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
@@ -1784,9 +1808,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
@@ -1796,9 +1820,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular10.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular10
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(
                 // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked +(C)'
@@ -1822,9 +1846,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular11.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular11
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
@@ -1862,9 +1886,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
@@ -1874,9 +1898,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular10.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular10
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics( // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked true(C)'
                 // /// See <see cref="operator checked true(C)"/>.
@@ -1899,9 +1923,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular11.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular11
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
@@ -2598,14 +2622,16 @@ class C
 ";
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics();
 
             var crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            var expectedSymbol = compilation.SourceModule.GlobalNamespace
+            var expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -2616,9 +2642,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular10.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular10
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
 
             compilation.VerifyDiagnostics(
@@ -2643,7 +2669,9 @@ class C
             );
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace
+            expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -2654,14 +2682,16 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular11.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular11
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics();
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace
+            expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -2706,9 +2736,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation
                 .GetDiagnostics()
@@ -2754,9 +2784,9 @@ class C
             };
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation
                 .GetDiagnostics()
@@ -2786,9 +2816,9 @@ class C
 ";
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation
                 .GetDiagnostics()
@@ -2807,7 +2837,9 @@ class C
                 );
 
             var crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            var expectedSymbol = compilation.SourceModule.GlobalNamespace
+            var expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -2818,9 +2850,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular10.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular10
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation
                 .GetDiagnostics()
@@ -2844,7 +2876,9 @@ class C
                 );
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace
+            expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -2855,9 +2889,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular11.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular11
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation
                 .GetDiagnostics()
@@ -2876,7 +2910,9 @@ class C
                 );
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace
+            expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -2918,14 +2954,16 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
             var crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            var expectedSymbol = compilation.SourceModule.GlobalNamespace
+            var expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -2936,14 +2974,16 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular10.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular10
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace
+            expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -2954,14 +2994,16 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular11.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular11
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace
+            expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -2997,9 +3039,9 @@ class C
 ";
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation
                 .GetDiagnostics()
@@ -3007,7 +3049,9 @@ class C
                 .Verify();
 
             var crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            var expectedSymbol = compilation.SourceModule.GlobalNamespace
+            var expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -3018,9 +3062,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular10.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular10
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation
                 .GetDiagnostics()
@@ -3047,7 +3091,9 @@ class C
                 );
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace
+            expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -3058,9 +3104,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular11.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular11
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation
                 .GetDiagnostics()
@@ -3068,7 +3114,9 @@ class C
                 .Verify();
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace
+            expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -3113,9 +3161,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation
                 .GetDiagnostics()
@@ -3162,9 +3210,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
@@ -3205,9 +3253,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation
                 .GetDiagnostics()
@@ -3215,7 +3263,9 @@ class C
                 .Verify(expected);
 
             var crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            var expectedSymbol = compilation.SourceModule.GlobalNamespace
+            var expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -3226,9 +3276,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular10.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular10
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation
                 .GetDiagnostics()
@@ -3252,7 +3302,9 @@ class C
                 );
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace
+            expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -3263,9 +3315,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular11.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular11
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation
                 .GetDiagnostics()
@@ -3273,7 +3325,9 @@ class C
                 .Verify(expected);
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace
+            expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -3315,14 +3369,16 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
             var crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            var expectedSymbol = compilation.SourceModule.GlobalNamespace
+            var expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -3333,14 +3389,16 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular10.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular10
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace
+            expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -3351,14 +3409,16 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular11.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular11
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace
+            expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -3585,9 +3645,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation
                 .GetDiagnostics()
@@ -3608,9 +3668,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular10.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular10
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
 
             if (op != ">>>")
@@ -3680,9 +3740,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular11.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular11
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation
                 .GetDiagnostics()
@@ -3764,9 +3824,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation
                 .GetDiagnostics()
@@ -3787,9 +3847,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular10.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular10
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
 
             if (op != ">>>")
@@ -3862,9 +3922,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular11.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular11
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation
                 .GetDiagnostics()
@@ -4491,14 +4551,16 @@ class C
 ";
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics();
 
             var crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            var expectedSymbol = compilation.SourceModule.GlobalNamespace
+            var expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -4509,9 +4571,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular10.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular10
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(
                 // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'explicit operator checked int'
@@ -4535,7 +4597,9 @@ class C
             );
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace
+            expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -4546,14 +4610,16 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular11.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular11
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics();
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace
+            expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -4590,9 +4656,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation
                 .GetDiagnostics()
@@ -4631,9 +4697,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
@@ -4669,9 +4735,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation
                 .GetDiagnostics()
@@ -4710,9 +4776,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
@@ -4739,9 +4805,9 @@ class C
 ";
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation
                 .GetDiagnostics()
@@ -4749,7 +4815,9 @@ class C
                 .Verify();
 
             var crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            var expectedSymbol = compilation.SourceModule.GlobalNamespace
+            var expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -4760,9 +4828,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular10.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular10
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation
                 .GetDiagnostics()
@@ -4789,7 +4857,9 @@ class C
                 );
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace
+            expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -4800,9 +4870,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular11.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular11
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation
                 .GetDiagnostics()
@@ -4810,7 +4880,9 @@ class C
                 .Verify();
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace
+            expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -4847,9 +4919,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation
                 .GetDiagnostics()
@@ -4888,9 +4960,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
@@ -4926,9 +4998,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation
                 .GetDiagnostics()
@@ -4967,9 +5039,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
@@ -5093,9 +5165,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
@@ -5105,9 +5177,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular10.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular10
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(
                 // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'implicit operator checked int'
@@ -5131,9 +5203,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular11.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular11
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
@@ -5169,9 +5241,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
@@ -5181,9 +5253,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular10.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular10
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(
                 // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'implicit operator checked int(C)'
@@ -5207,9 +5279,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular11.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular11
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
@@ -9981,52 +10053,60 @@ checked C0
                 "System.Int64 C0.op_CheckedExplicit(C0 x)",
                 model
                     .ClassifyConversion(xNode.SpanStart, xNode, int64, isExplicitInSource: false)
-                    .Method.ToTestDisplayString()
+                    .Method
+                    .ToTestDisplayString()
             );
             Assert.Equal(
                 "System.Int64 C0.op_CheckedExplicit(C0 x)",
                 model
                     .ClassifyConversion(xNode.SpanStart, xNode, int64, isExplicitInSource: true)
-                    .Method.ToTestDisplayString()
+                    .Method
+                    .ToTestDisplayString()
             );
 
             Assert.Equal(
                 "System.Int64 C0.op_CheckedExplicit(C0 x)",
                 model
                     .ClassifyConversion(yNode.SpanStart, yNode, int64, isExplicitInSource: false)
-                    .Method.ToTestDisplayString()
+                    .Method
+                    .ToTestDisplayString()
             );
             Assert.Equal(
                 "System.Int64 C0.op_CheckedExplicit(C0 x)",
                 model
                     .ClassifyConversion(yNode.SpanStart, yNode, int64, isExplicitInSource: true)
-                    .Method.ToTestDisplayString()
+                    .Method
+                    .ToTestDisplayString()
             );
 
             Assert.Equal(
                 "System.Int64 C0.op_CheckedExplicit(C0 x)",
                 model
                     .ClassifyConversion(xNode, int64, isExplicitInSource: false)
-                    .Method.ToTestDisplayString()
+                    .Method
+                    .ToTestDisplayString()
             );
             Assert.Equal(
                 "System.Int64 C0.op_CheckedExplicit(C0 x)",
                 model
                     .ClassifyConversion(xNode, int64, isExplicitInSource: true)
-                    .Method.ToTestDisplayString()
+                    .Method
+                    .ToTestDisplayString()
             );
 
             Assert.Equal(
                 "System.Int64 C0.op_CheckedExplicit(C0 x)",
                 model
                     .ClassifyConversion(yNode, int64, isExplicitInSource: false)
-                    .Method.ToTestDisplayString()
+                    .Method
+                    .ToTestDisplayString()
             );
             Assert.Equal(
                 "System.Int64 C0.op_CheckedExplicit(C0 x)",
                 model
                     .ClassifyConversion(yNode, int64, isExplicitInSource: true)
-                    .Method.ToTestDisplayString()
+                    .Method
+                    .ToTestDisplayString()
             );
         }
 
@@ -10115,50 +10195,58 @@ regular C0
                 "System.Int64 C0.op_Explicit(C0 x)",
                 model
                     .ClassifyConversion(xNode.SpanStart, xNode, int64, isExplicitInSource: false)
-                    .Method.ToTestDisplayString()
+                    .Method
+                    .ToTestDisplayString()
             );
             Assert.Equal(
                 "System.Int64 C0.op_Explicit(C0 x)",
                 model
                     .ClassifyConversion(xNode.SpanStart, xNode, int64, isExplicitInSource: true)
-                    .Method.ToTestDisplayString()
+                    .Method
+                    .ToTestDisplayString()
             );
             Assert.Equal(
                 "System.Int64 C0.op_Explicit(C0 x)",
                 model
                     .ClassifyConversion(yNode.SpanStart, yNode, int64, isExplicitInSource: false)
-                    .Method.ToTestDisplayString()
+                    .Method
+                    .ToTestDisplayString()
             );
             Assert.Equal(
                 "System.Int64 C0.op_Explicit(C0 x)",
                 model
                     .ClassifyConversion(yNode.SpanStart, yNode, int64, isExplicitInSource: true)
-                    .Method.ToTestDisplayString()
+                    .Method
+                    .ToTestDisplayString()
             );
 
             Assert.Equal(
                 "System.Int64 C0.op_Explicit(C0 x)",
                 model
                     .ClassifyConversion(xNode, int64, isExplicitInSource: false)
-                    .Method.ToTestDisplayString()
+                    .Method
+                    .ToTestDisplayString()
             );
             Assert.Equal(
                 "System.Int64 C0.op_Explicit(C0 x)",
                 model
                     .ClassifyConversion(xNode, int64, isExplicitInSource: true)
-                    .Method.ToTestDisplayString()
+                    .Method
+                    .ToTestDisplayString()
             );
             Assert.Equal(
                 "System.Int64 C0.op_Explicit(C0 x)",
                 model
                     .ClassifyConversion(yNode, int64, isExplicitInSource: false)
-                    .Method.ToTestDisplayString()
+                    .Method
+                    .ToTestDisplayString()
             );
             Assert.Equal(
                 "System.Int64 C0.op_Explicit(C0 x)",
                 model
                     .ClassifyConversion(yNode, int64, isExplicitInSource: true)
-                    .Method.ToTestDisplayString()
+                    .Method
+                    .ToTestDisplayString()
             );
         }
 
@@ -10248,52 +10336,60 @@ regular C0
                 "System.Int64 C0.op_Explicit(C0 x)",
                 model
                     .ClassifyConversion(xNode.SpanStart, xNode, int64, isExplicitInSource: false)
-                    .Method.ToTestDisplayString()
+                    .Method
+                    .ToTestDisplayString()
             );
             Assert.Equal(
                 "System.Int64 C0.op_Explicit(C0 x)",
                 model
                     .ClassifyConversion(xNode.SpanStart, xNode, int64, isExplicitInSource: true)
-                    .Method.ToTestDisplayString()
+                    .Method
+                    .ToTestDisplayString()
             );
 
             Assert.Equal(
                 "System.Int64 C0.op_Explicit(C0 x)",
                 model
                     .ClassifyConversion(yNode.SpanStart, yNode, int64, isExplicitInSource: false)
-                    .Method.ToTestDisplayString()
+                    .Method
+                    .ToTestDisplayString()
             );
             Assert.Equal(
                 "System.Int64 C0.op_Explicit(C0 x)",
                 model
                     .ClassifyConversion(yNode.SpanStart, yNode, int64, isExplicitInSource: true)
-                    .Method.ToTestDisplayString()
+                    .Method
+                    .ToTestDisplayString()
             );
 
             Assert.Equal(
                 "System.Int64 C0.op_Explicit(C0 x)",
                 model
                     .ClassifyConversion(xNode, int64, isExplicitInSource: false)
-                    .Method.ToTestDisplayString()
+                    .Method
+                    .ToTestDisplayString()
             );
             Assert.Equal(
                 "System.Int64 C0.op_Explicit(C0 x)",
                 model
                     .ClassifyConversion(xNode, int64, isExplicitInSource: true)
-                    .Method.ToTestDisplayString()
+                    .Method
+                    .ToTestDisplayString()
             );
 
             Assert.Equal(
                 "System.Int64 C0.op_Explicit(C0 x)",
                 model
                     .ClassifyConversion(yNode, int64, isExplicitInSource: false)
-                    .Method.ToTestDisplayString()
+                    .Method
+                    .ToTestDisplayString()
             );
             Assert.Equal(
                 "System.Int64 C0.op_Explicit(C0 x)",
                 model
                     .ClassifyConversion(yNode, int64, isExplicitInSource: true)
-                    .Method.ToTestDisplayString()
+                    .Method
+                    .ToTestDisplayString()
             );
         }
 
@@ -10387,7 +10483,8 @@ checked C0
                         xNodeToSpeculate,
                         SpeculativeBindingOption.BindAsExpression
                     )
-                    .Symbol.ToTestDisplayString()
+                    .Symbol
+                    .ToTestDisplayString()
             );
             Assert.Equal(
                 "C0 C0.op_CheckedUnaryNegation(C0 a)",
@@ -10397,7 +10494,8 @@ checked C0
                         yNodeToSpeculate,
                         SpeculativeBindingOption.BindAsExpression
                     )
-                    .Symbol.ToTestDisplayString()
+                    .Symbol
+                    .ToTestDisplayString()
             );
         }
 
@@ -10491,7 +10589,8 @@ regular C0
                         xNodeToSpeculate,
                         SpeculativeBindingOption.BindAsExpression
                     )
-                    .Symbol.ToTestDisplayString()
+                    .Symbol
+                    .ToTestDisplayString()
             );
             Assert.Equal(
                 "C0 C0.op_UnaryNegation(C0 a)",
@@ -10501,7 +10600,8 @@ regular C0
                         yNodeToSpeculate,
                         SpeculativeBindingOption.BindAsExpression
                     )
-                    .Symbol.ToTestDisplayString()
+                    .Symbol
+                    .ToTestDisplayString()
             );
         }
     }

@@ -79,9 +79,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
             if (
                 variableDeclarator.Initializer == null
                 || variableDeclarator.Initializer.Value.IsMissing
-                || variableDeclarator.Initializer.Value.IsKind(
-                    SyntaxKind.StackAllocArrayCreationExpression
-                )
+                || variableDeclarator
+                    .Initializer
+                    .Value
+                    .IsKind(SyntaxKind.StackAllocArrayCreationExpression)
             )
             {
                 return;

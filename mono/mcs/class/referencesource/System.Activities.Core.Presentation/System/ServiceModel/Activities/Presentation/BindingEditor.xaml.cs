@@ -58,7 +58,9 @@ namespace System.ServiceModel.Activities.Presentation
                 if (null != section && null != section.Bindings)
                 {
                     this.bindingElements.AddRange(
-                        section.Bindings.BindingCollections
+                        section
+                            .Bindings
+                            .BindingCollections
                             .OrderBy(p => p.BindingName)
                             .Select<BindingCollectionElement, BindingDescriptor>(
                                 p =>
@@ -142,7 +144,8 @@ namespace System.ServiceModel.Activities.Presentation
                 null != p.Value && p.Value.BindingType == bindingType;
             if (editor.bindingElements.Count(where) > 1)
             {
-                toSelect = editor.bindingElements
+                toSelect = editor
+                    .bindingElements
                     .Where(where)
                     .Where(p => string.Equals(p.BindingName, bindingName))
                     .FirstOrDefault();

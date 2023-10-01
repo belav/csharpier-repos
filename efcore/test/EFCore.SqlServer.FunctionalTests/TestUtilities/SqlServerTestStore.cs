@@ -17,7 +17,8 @@ public class SqlServerTestStore : RelationalTestStore
 
     public static SqlServerTestStore GetNorthwindStore() =>
         (SqlServerTestStore)
-            SqlServerNorthwindTestStoreFactory.Instance
+            SqlServerNorthwindTestStoreFactory
+                .Instance
                 .GetOrCreate(SqlServerNorthwindTestStoreFactory.Name)
                 .Initialize(null, (Func<DbContext>)null);
 

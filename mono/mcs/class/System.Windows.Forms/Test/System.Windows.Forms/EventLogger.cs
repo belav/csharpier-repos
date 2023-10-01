@@ -132,10 +132,9 @@ namespace MonoTests.System.Windows.Forms
             Type itemType = item.GetType();
             AssemblyName name = new AssemblyName();
             name.Name = "EventLoggerAssembly";
-            AssemblyBuilder assembly = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                name,
-                AssemblyBuilderAccess.RunAndSave
-            );
+            AssemblyBuilder assembly = AppDomain
+                .CurrentDomain
+                .DefineDynamicAssembly(name, AssemblyBuilderAccess.RunAndSave);
             ModuleBuilder module = assembly.DefineDynamicModule(
                 "EventLoggerAssembly",
                 "EventLoggerAssembly.dll"
@@ -192,9 +191,9 @@ namespace MonoTests.System.Windows.Forms
                 logIL.Emit(OpCodes.Ldvirtftn, method);
                 logIL.Emit(
                     OpCodes.Newobj,
-                    Event.EventHandlerType.GetConstructor(
-                        new Type[] { typeof(object), typeof(IntPtr) }
-                    )
+                    Event
+                        .EventHandlerType
+                        .GetConstructor(new Type[] { typeof(object), typeof(IntPtr) })
                 );
                 logIL.Emit(OpCodes.Call, Event.GetAddMethod());
             }

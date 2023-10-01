@@ -112,13 +112,17 @@ Class VBTest
 End Class"
             );
             var csharpProject = new ProjectUtils.Project("CSharpProject");
-            VisualStudio.SolutionExplorer.AddProject(
-                csharpProject,
-                WellKnownProjectTemplates.ClassLibrary,
-                LanguageNames.CSharp
-            );
-            VisualStudio.Editor.SetText(
-                @"
+            VisualStudio
+                .SolutionExplorer
+                .AddProject(
+                    csharpProject,
+                    WellKnownProjectTemplates.ClassLibrary,
+                    LanguageNames.CSharp
+                );
+            VisualStudio
+                .Editor
+                .SetText(
+                    @"
 public class CSharpClass
 {
     /// <summary>
@@ -133,17 +137,16 @@ public class CSharpClass
         return 1;
     }
 }"
-            );
+                );
             VisualStudio.SolutionExplorer.SaveAll();
             var project = new ProjectUtils.Project(ProjectName);
             var csharpProjectReference = new ProjectUtils.ProjectReference("CSharpProject");
             VisualStudio.SolutionExplorer.AddProjectReference(project, csharpProjectReference);
             VisualStudio.SolutionExplorer.OpenFile(project, "Class1.vb");
 
-            VisualStudio.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            VisualStudio
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
 
             ChangeSignatureDialog.Invoke();
             ChangeSignatureDialog.VerifyOpen();
@@ -302,13 +305,17 @@ Class VBTest
 End Class"
             );
             var csharpProject = new ProjectUtils.Project("CSharpProject");
-            VisualStudio.SolutionExplorer.AddProject(
-                csharpProject,
-                WellKnownProjectTemplates.ClassLibrary,
-                LanguageNames.CSharp
-            );
-            VisualStudio.Editor.SetText(
-                @"
+            VisualStudio
+                .SolutionExplorer
+                .AddProject(
+                    csharpProject,
+                    WellKnownProjectTemplates.ClassLibrary,
+                    LanguageNames.CSharp
+                );
+            VisualStudio
+                .Editor
+                .SetText(
+                    @"
 public class CSharpClass
 {
     public int Method(int a, string b, double c)
@@ -316,17 +323,16 @@ public class CSharpClass
         return 1;
     }
 }"
-            );
+                );
             VisualStudio.SolutionExplorer.SaveAll();
             var project = new ProjectUtils.Project(ProjectName);
             var csharpProjectReference = new ProjectUtils.ProjectReference("CSharpProject");
             VisualStudio.SolutionExplorer.AddProjectReference(project, csharpProjectReference);
             VisualStudio.SolutionExplorer.OpenFile(project, "Class1.vb");
 
-            VisualStudio.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            VisualStudio
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
 
             ChangeSignatureDialog.Invoke();
             ChangeSignatureDialog.VerifyOpen();

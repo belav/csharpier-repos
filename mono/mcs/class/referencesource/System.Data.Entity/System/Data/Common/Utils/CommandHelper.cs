@@ -151,9 +151,9 @@ namespace System.Data.Common.Utils
                 {
                     // if the entity command also defines the parameter, propagate store parameter value
                     // to entity parameter
-                    int parameterOrdinal = entityCommand.Parameters.IndexOf(
-                        storeParameter.ParameterName
-                    );
+                    int parameterOrdinal = entityCommand
+                        .Parameters
+                        .IndexOf(storeParameter.ParameterName);
                     if (0 <= parameterOrdinal)
                     {
                         EntityParameter entityParameter = entityCommand.Parameters[
@@ -219,9 +219,11 @@ namespace System.Data.Common.Utils
             )
             {
                 throw EntityUtil.InvalidOperation(
-                    System.Data.Entity.Strings.EntityClient_UnableToFindFunctionImportContainer(
-                        containerName
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .EntityClient_UnableToFindFunctionImportContainer(containerName)
                 );
             }
 
@@ -238,18 +240,23 @@ namespace System.Data.Common.Utils
             if (null == functionImport)
             {
                 throw EntityUtil.InvalidOperation(
-                    System.Data.Entity.Strings.EntityClient_UnableToFindFunctionImport(
-                        containerName,
-                        functionImportName
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .EntityClient_UnableToFindFunctionImport(containerName, functionImportName)
                 );
             }
             if (functionImport.IsComposableAttribute)
             {
                 throw EntityUtil.InvalidOperation(
-                    System.Data.Entity.Strings.EntityClient_FunctionImportMustBeNonComposable(
-                        containerName + "." + functionImportName
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .EntityClient_FunctionImportMustBeNonComposable(
+                            containerName + "." + functionImportName
+                        )
                 );
             }
             return functionImport;

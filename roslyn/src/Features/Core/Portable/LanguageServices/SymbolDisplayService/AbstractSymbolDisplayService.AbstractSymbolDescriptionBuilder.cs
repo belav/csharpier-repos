@@ -317,7 +317,8 @@ namespace Microsoft.CodeAnalysis.LanguageService
                 }
 
                 var analysis = semanticModel.AnalyzeDataFlow(syntax);
-                var captures = analysis.CapturedInside
+                var captures = analysis
+                    .CapturedInside
                     .Except(analysis.VariablesDeclared)
                     .ToImmutableArray();
                 if (!captures.IsEmpty)
@@ -342,10 +343,10 @@ namespace Microsoft.CodeAnalysis.LanguageService
                 }
             }
 
-            private static readonly SymbolDisplayFormat s_formatForCaptures =
-                SymbolDisplayFormat.MinimallyQualifiedFormat
-                    .RemoveLocalOptions(SymbolDisplayLocalOptions.IncludeType)
-                    .RemoveParameterOptions(SymbolDisplayParameterOptions.IncludeType);
+            private static readonly SymbolDisplayFormat s_formatForCaptures = SymbolDisplayFormat
+                .MinimallyQualifiedFormat
+                .RemoveLocalOptions(SymbolDisplayLocalOptions.IncludeType)
+                .RemoveParameterOptions(SymbolDisplayParameterOptions.IncludeType);
 
             public async Task<ImmutableArray<SymbolDisplayPart>> BuildDescriptionAsync(
                 ImmutableArray<ISymbol> symbolGroup,
@@ -568,11 +569,13 @@ namespace Microsoft.CodeAnalysis.LanguageService
                 )
                 {
                     AddEnumUnderlyingTypeSeparator();
-                    var underlyingTypeDisplayParts = symbol.EnumUnderlyingType.ToDisplayParts(
-                        s_descriptionStyle.WithMiscellaneousOptions(
-                            SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-                        )
-                    );
+                    var underlyingTypeDisplayParts = symbol
+                        .EnumUnderlyingType
+                        .ToDisplayParts(
+                            s_descriptionStyle.WithMiscellaneousOptions(
+                                SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                            )
+                        );
                     AddToGroup(SymbolDescriptionGroups.MainDescription, underlyingTypeDisplayParts);
                 }
             }

@@ -62,7 +62,8 @@ public static class RelationalForeignKeyExtensions
         if (
             foreignKey.PrincipalEntityType.GetMappingStrategy()
                 == RelationalAnnotationNames.TpcMappingStrategy
-            && foreignKey.PrincipalEntityType
+            && foreignKey
+                .PrincipalEntityType
                 .GetDerivedTypes()
                 .Any(et => StoreObjectIdentifier.Create(et, StoreObjectType.Table) != null)
         )
@@ -192,7 +193,8 @@ public static class RelationalForeignKeyExtensions
         {
             IReadOnlyForeignKey? linkedForeignKey = null;
             foreach (
-                var otherForeignKey in rootForeignKey.DeclaringEntityType
+                var otherForeignKey in rootForeignKey
+                    .DeclaringEntityType
                     .FindRowInternalForeignKeys(storeObject)
                     .SelectMany(fk => fk.PrincipalEntityType.GetForeignKeys())
             )
@@ -266,7 +268,8 @@ public static class RelationalForeignKeyExtensions
                     foreignKey.DeclaringEntityType,
                     storeObject.StoreObjectType
                 ) == storeObject
-                || foreignKey.DeclaringEntityType
+                || foreignKey
+                    .DeclaringEntityType
                     .GetMappingFragments(storeObject.StoreObjectType)
                     .Any(f => f.StoreObject == storeObject)
             )
@@ -275,7 +278,8 @@ public static class RelationalForeignKeyExtensions
                     foreignKey.PrincipalEntityType,
                     storeObject.StoreObjectType
                 ) == storeObject
-                || foreignKey.PrincipalEntityType
+                || foreignKey
+                    .PrincipalEntityType
                     .GetMappingFragments(storeObject.StoreObjectType)
                     .Any(f => f.StoreObject == storeObject)
             );

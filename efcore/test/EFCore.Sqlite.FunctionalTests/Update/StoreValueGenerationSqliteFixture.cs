@@ -23,7 +23,8 @@ public class StoreValueGenerationSqliteFixture : StoreValueGenerationFixtureBase
         var builder = new StringBuilder();
 
         foreach (
-            var table in context.Model
+            var table in context
+                .Model
                 .GetEntityTypes()
                 .SelectMany(e => e.GetTableMappings().Select(m => m.Table.Name))
         )

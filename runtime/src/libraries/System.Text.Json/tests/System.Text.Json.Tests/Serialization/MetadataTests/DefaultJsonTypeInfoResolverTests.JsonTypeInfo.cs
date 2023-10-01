@@ -771,9 +771,9 @@ namespace System.Text.Json.Serialization.Tests
 
                     Assert.Throws<InvalidOperationException>(
                         () =>
-                            typeInfo1.Properties.Add(
-                                typeInfo2.CreateJsonPropertyInfo(typeof(int), "test")
-                            )
+                            typeInfo1
+                                .Properties
+                                .Add(typeInfo2.CreateJsonPropertyInfo(typeof(int), "test"))
                     );
                 }
             }
@@ -1027,19 +1027,21 @@ namespace System.Text.Json.Serialization.Tests
         public static void JsonConstructorAttributeIsOverriddenWhenCreateObjectIsSet()
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver.Modifiers.Add(ti =>
-            {
-                if (ti.Type == typeof(ClassWithParameterizedConstructorAndReadOnlyProperties))
+            resolver
+                .Modifiers
+                .Add(ti =>
                 {
-                    Assert.Null(ti.CreateObject);
-                    ti.CreateObject = () =>
-                        new ClassWithParameterizedConstructorAndReadOnlyProperties(
-                            1,
-                            "test",
-                            dummyParam: true
-                        );
-                }
-            });
+                    if (ti.Type == typeof(ClassWithParameterizedConstructorAndReadOnlyProperties))
+                    {
+                        Assert.Null(ti.CreateObject);
+                        ti.CreateObject = () =>
+                            new ClassWithParameterizedConstructorAndReadOnlyProperties(
+                                1,
+                                "test",
+                                dummyParam: true
+                            );
+                    }
+                });
 
             JsonSerializerOptions o = new() { TypeInfoResolver = resolver };
             string json = """{"A":2,"B":"foo"}""";
@@ -1080,15 +1082,17 @@ namespace System.Text.Json.Serialization.Tests
         public static void JsonConstructorAttributeIsOverriddenAndPropertiesAreSetWhenCreateObjectIsSet()
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver.Modifiers.Add(ti =>
-            {
-                if (ti.Type == typeof(ClassWithParameterizedConstructorAndWritableProperties))
+            resolver
+                .Modifiers
+                .Add(ti =>
                 {
-                    Assert.Null(ti.CreateObject);
-                    ti.CreateObject = () =>
-                        new ClassWithParameterizedConstructorAndWritableProperties();
-                }
-            });
+                    if (ti.Type == typeof(ClassWithParameterizedConstructorAndWritableProperties))
+                    {
+                        Assert.Null(ti.CreateObject);
+                        ti.CreateObject = () =>
+                            new ClassWithParameterizedConstructorAndWritableProperties();
+                    }
+                });
 
             JsonSerializerOptions o = new() { TypeInfoResolver = resolver };
 
@@ -1191,14 +1195,16 @@ namespace System.Text.Json.Serialization.Tests
         public static void JsonConstructorAttributeIsOverriddenAndPropertiesAreSetWhenCreateObjectIsSet_LargeConstructor()
         {
             DefaultJsonTypeInfoResolver resolver = new();
-            resolver.Modifiers.Add(ti =>
-            {
-                if (ti.Type == typeof(ClassWithLargeParameterizedConstructor))
+            resolver
+                .Modifiers
+                .Add(ti =>
                 {
-                    Assert.Null(ti.CreateObject);
-                    ti.CreateObject = () => new ClassWithLargeParameterizedConstructor();
-                }
-            });
+                    if (ti.Type == typeof(ClassWithLargeParameterizedConstructor))
+                    {
+                        Assert.Null(ti.CreateObject);
+                        ti.CreateObject = () => new ClassWithLargeParameterizedConstructor();
+                    }
+                });
 
             JsonSerializerOptions o = new() { TypeInfoResolver = resolver };
 
@@ -1518,10 +1524,9 @@ namespace System.Text.Json.Serialization.Tests
         public static void DefaultJsonTypeInfoResolver_ClassWithConverterAttribute_ShouldResolveConverterAttribute()
         {
             var options = JsonSerializerOptions.Default;
-            JsonTypeInfo jsonTypeInfo = options.TypeInfoResolver.GetTypeInfo(
-                typeof(ClassWithConverterAttribute),
-                options
-            );
+            JsonTypeInfo jsonTypeInfo = options
+                .TypeInfoResolver
+                .GetTypeInfo(typeof(ClassWithConverterAttribute), options);
             Assert.Equal(typeof(ClassWithConverterAttribute), jsonTypeInfo.Type);
             Assert.IsType<ClassWithConverterAttribute.CustomConverter>(jsonTypeInfo.Converter);
         }

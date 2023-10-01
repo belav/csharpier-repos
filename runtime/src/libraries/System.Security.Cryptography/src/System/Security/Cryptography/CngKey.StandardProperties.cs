@@ -102,14 +102,16 @@ namespace System.Security.Cryptography
                 {
                     byte propertyValue;
                     int cbResult;
-                    ErrorCode errorCode = Interop.NCrypt.NCryptGetProperty(
-                        _keyHandle,
-                        KeyPropertyName.ClrIsEphemeral,
-                        &propertyValue,
-                        sizeof(byte),
-                        out cbResult,
-                        CngPropertyOptions.CustomProperty
-                    );
+                    ErrorCode errorCode = Interop
+                        .NCrypt
+                        .NCryptGetProperty(
+                            _keyHandle,
+                            KeyPropertyName.ClrIsEphemeral,
+                            &propertyValue,
+                            sizeof(byte),
+                            out cbResult,
+                            CngPropertyOptions.CustomProperty
+                        );
                     if (errorCode != ErrorCode.ERROR_SUCCESS)
                     {
                         // Third party Key providers, and Windows PCP KSP won't recognize this property;
@@ -132,13 +134,15 @@ namespace System.Security.Cryptography
                 unsafe
                 {
                     byte isEphemeral = value ? (byte)1 : (byte)0;
-                    ErrorCode errorCode = Interop.NCrypt.NCryptSetProperty(
-                        _keyHandle,
-                        KeyPropertyName.ClrIsEphemeral,
-                        &isEphemeral,
-                        sizeof(byte),
-                        CngPropertyOptions.CustomProperty
-                    );
+                    ErrorCode errorCode = Interop
+                        .NCrypt
+                        .NCryptSetProperty(
+                            _keyHandle,
+                            KeyPropertyName.ClrIsEphemeral,
+                            &isEphemeral,
+                            sizeof(byte),
+                            CngPropertyOptions.CustomProperty
+                        );
                     if (errorCode != ErrorCode.ERROR_SUCCESS)
                         throw errorCode.ToCryptographicException();
                 }
@@ -203,20 +207,20 @@ namespace System.Security.Cryptography
                     int keySize = 0;
 
                     // Attempt to use PublicKeyLength first as it returns the correct value for ECC keys
-                    ErrorCode errorCode = Interop.NCrypt.NCryptGetIntProperty(
-                        _keyHandle,
-                        KeyPropertyName.PublicKeyLength,
-                        ref keySize
-                    );
+                    ErrorCode errorCode = Interop
+                        .NCrypt
+                        .NCryptGetIntProperty(
+                            _keyHandle,
+                            KeyPropertyName.PublicKeyLength,
+                            ref keySize
+                        );
 
                     if (errorCode != ErrorCode.ERROR_SUCCESS)
                     {
                         // Fall back to Length (< Windows 10)
-                        errorCode = Interop.NCrypt.NCryptGetIntProperty(
-                            _keyHandle,
-                            KeyPropertyName.Length,
-                            ref keySize
-                        );
+                        errorCode = Interop
+                            .NCrypt
+                            .NCryptGetIntProperty(_keyHandle, KeyPropertyName.Length, ref keySize);
                     }
 
                     if (errorCode != ErrorCode.ERROR_SUCCESS)
@@ -298,13 +302,15 @@ namespace System.Security.Cryptography
             {
                 unsafe
                 {
-                    Interop.NCrypt.NCryptSetProperty(
-                        _keyHandle,
-                        KeyPropertyName.ParentWindowHandle,
-                        &value,
-                        IntPtr.Size,
-                        CngPropertyOptions.None
-                    );
+                    Interop
+                        .NCrypt
+                        .NCryptSetProperty(
+                            _keyHandle,
+                            KeyPropertyName.ParentWindowHandle,
+                            &value,
+                            IntPtr.Size,
+                            CngPropertyOptions.None
+                        );
                 }
             }
         }
@@ -348,14 +354,16 @@ namespace System.Security.Cryptography
                 unsafe
                 {
                     int numBytesNeeded;
-                    ErrorCode errorCode = Interop.NCrypt.NCryptGetProperty(
-                        _keyHandle,
-                        KeyPropertyName.UIPolicy,
-                        null,
-                        0,
-                        out numBytesNeeded,
-                        CngPropertyOptions.None
-                    );
+                    ErrorCode errorCode = Interop
+                        .NCrypt
+                        .NCryptGetProperty(
+                            _keyHandle,
+                            KeyPropertyName.UIPolicy,
+                            null,
+                            0,
+                            out numBytesNeeded,
+                            CngPropertyOptions.None
+                        );
                     if (
                         errorCode != ErrorCode.ERROR_SUCCESS
                         && errorCode != ErrorCode.NTE_NOT_FOUND
@@ -383,14 +391,16 @@ namespace System.Security.Cryptography
                         byte[] ncryptUiPolicyAndStrings = new byte[numBytesNeeded];
                         fixed (byte* pNcryptUiPolicyAndStrings = &ncryptUiPolicyAndStrings[0])
                         {
-                            errorCode = Interop.NCrypt.NCryptGetProperty(
-                                _keyHandle,
-                                KeyPropertyName.UIPolicy,
-                                pNcryptUiPolicyAndStrings,
-                                ncryptUiPolicyAndStrings.Length,
-                                out numBytesNeeded,
-                                CngPropertyOptions.None
-                            );
+                            errorCode = Interop
+                                .NCrypt
+                                .NCryptGetProperty(
+                                    _keyHandle,
+                                    KeyPropertyName.UIPolicy,
+                                    pNcryptUiPolicyAndStrings,
+                                    ncryptUiPolicyAndStrings.Length,
+                                    out numBytesNeeded,
+                                    CngPropertyOptions.None
+                                );
                             if (errorCode != ErrorCode.ERROR_SUCCESS)
                                 throw errorCode.ToCryptographicException();
 

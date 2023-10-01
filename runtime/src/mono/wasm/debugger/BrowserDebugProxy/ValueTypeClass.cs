@@ -95,14 +95,16 @@ namespace BrowserDebugProxy
             );
             foreach (var field in writableFields)
             {
-                lastWritableFieldValue = await sdbAgent.ValueCreator.ReadAsVariableValue(
-                    cmdReader,
-                    field.Name,
-                    token,
-                    isOwn: true,
-                    field.TypeId,
-                    forDebuggerDisplayAttribute: false
-                );
+                lastWritableFieldValue = await sdbAgent
+                    .ValueCreator
+                    .ReadAsVariableValue(
+                        cmdReader,
+                        field.Name,
+                        token,
+                        isOwn: true,
+                        field.TypeId,
+                        forDebuggerDisplayAttribute: false
+                    );
                 fields.Add(GetFieldWithMetadata(field, lastWritableFieldValue, isStatic: false));
             }
             if (inlineArraySize > 0)
@@ -113,14 +115,16 @@ namespace BrowserDebugProxy
                 for (int i = 1; i < inlineArraySize; i++)
                 {
                     //the valuetype has a single instance field in inline-arrays
-                    var inlineArrayItem = await sdbAgent.ValueCreator.ReadAsVariableValue(
-                        cmdReader,
-                        $"{i}",
-                        token,
-                        isOwn: true,
-                        firstFieldtypeId,
-                        forDebuggerDisplayAttribute: false
-                    );
+                    var inlineArrayItem = await sdbAgent
+                        .ValueCreator
+                        .ReadAsVariableValue(
+                            cmdReader,
+                            $"{i}",
+                            token,
+                            isOwn: true,
+                            firstFieldtypeId,
+                            forDebuggerDisplayAttribute: false
+                        );
                     inlineArray.Add(inlineArrayItem);
                 }
             }
@@ -178,9 +182,9 @@ namespace BrowserDebugProxy
                     token
                 );
                 if (toString == null)
-                    sdbAgent.logger.LogDebug(
-                        $"Error while evaluating ToString method on typeId = {TypeId}"
-                    );
+                    sdbAgent
+                        .logger
+                        .LogDebug($"Error while evaluating ToString method on typeId = {TypeId}");
                 else
                     description = toString;
                 if (className.Equals("System.Guid"))

@@ -213,9 +213,9 @@ public class ModelBinder
 
     private ConstructorAndArgs? GetBestConstructorAndArgs(BindingContext bindingContext)
     {
-        var constructorDescriptors = ModelDescriptor.ConstructorDescriptors.OrderByDescending(
-            d => d.ParameterDescriptors.Count
-        );
+        var constructorDescriptors = ModelDescriptor
+            .ConstructorDescriptors
+            .OrderByDescending(d => d.ParameterDescriptors.Count);
 
         ConstructorAndArgs? bestNonMatching = null;
 
@@ -399,11 +399,13 @@ public class ModelBinder
         string propertyName
     )
     {
-        return ModelDescriptor.PropertyDescriptors.FirstOrDefault(
-            desc =>
-                desc.ValueType == propertyType
-                && string.Equals(desc.ValueName, propertyName, StringComparison.Ordinal)
-        );
+        return ModelDescriptor
+            .PropertyDescriptors
+            .FirstOrDefault(
+                desc =>
+                    desc.ValueType == propertyType
+                    && string.Equals(desc.ValueName, propertyName, StringComparison.Ordinal)
+            );
     }
 
     internal class AnonymousValueDescriptor : IValueDescriptor

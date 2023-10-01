@@ -895,10 +895,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                 """;
 
             var analyzer = new ConvertSwitchStatementToExpressionDiagnosticAnalyzer();
-            var descriptor = analyzer.SupportedDiagnostics.First(
-                descriptor =>
-                    descriptor.Id == IDEDiagnosticIds.ConvertSwitchStatementToExpressionDiagnosticId
-            );
+            var descriptor = analyzer
+                .SupportedDiagnostics
+                .First(
+                    descriptor =>
+                        descriptor.Id
+                        == IDEDiagnosticIds.ConvertSwitchStatementToExpressionDiagnosticId
+                );
             await new VerifyCS.Test
             {
                 TestCode = source,

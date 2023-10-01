@@ -554,7 +554,9 @@ namespace System.Numerics
                 if (utf16DestinationArray != null)
                 {
                     // Return rented buffers if necessary
-                    ArrayPool<char>.Shared.Return(utf16DestinationArray);
+                    ArrayPool<char>
+                        .Shared
+                        .Return(utf16DestinationArray);
                 }
 
                 bytesWritten = 0;
@@ -575,7 +577,9 @@ namespace System.Numerics
             if (utf16DestinationArray != null)
             {
                 // Return rented buffers if necessary
-                ArrayPool<char>.Shared.Return(utf16DestinationArray);
+                ArrayPool<char>
+                    .Shared
+                    .Return(utf16DestinationArray);
             }
 
             if (utf8DestinationStatus == OperationStatus.Done)

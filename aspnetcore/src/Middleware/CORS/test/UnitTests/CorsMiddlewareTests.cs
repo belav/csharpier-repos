@@ -114,7 +114,8 @@ public class CorsMiddlewareTests
             );
             Assert.Equal(
                 "AllowedHeader",
-                response.Headers
+                response
+                    .Headers
                     .GetValues(CorsConstants.AccessControlExposeHeaders)
                     .FirstOrDefault()
             );

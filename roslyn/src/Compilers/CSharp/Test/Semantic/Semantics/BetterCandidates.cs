@@ -1349,7 +1349,8 @@ class D {}
                         .WithLocation(14, 17)
                 );
             var model = compilation.GetSemanticModel(compilation.SyntaxTrees[0]);
-            var invocations = compilation.SyntaxTrees[0]
+            var invocations = compilation
+                .SyntaxTrees[0]
                 .GetRoot()
                 .DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
@@ -1499,7 +1500,8 @@ class Constraint {}
                         .WithLocation(5, 9)
                 );
             var model = compilation.GetSemanticModel(compilation.SyntaxTrees[0]);
-            var invocations = compilation.SyntaxTrees[0]
+            var invocations = compilation
+                .SyntaxTrees[0]
                 .GetRoot()
                 .DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
@@ -1572,7 +1574,8 @@ public static class Extensions
                         .WithLocation(5, 11)
                 );
             var model = compilation.GetSemanticModel(compilation.SyntaxTrees[0]);
-            var invocations = compilation.SyntaxTrees[0]
+            var invocations = compilation
+                .SyntaxTrees[0]
                 .GetRoot()
                 .DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
@@ -1650,7 +1653,8 @@ interface IZ: IQ, IW, IX, IY {}
                         .WithLocation(5, 17)
                 );
             var model = compilation.GetSemanticModel(compilation.SyntaxTrees[0]);
-            var invocations = compilation.SyntaxTrees[0]
+            var invocations = compilation
+                .SyntaxTrees[0]
                 .GetRoot()
                 .DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()

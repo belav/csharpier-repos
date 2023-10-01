@@ -65,10 +65,11 @@ internal sealed class AnyConverter<TMessage> : SettingsConverterBase<TMessage>
 
         var message = new TMessage();
         message.Descriptor.Fields[Any.TypeUrlFieldNumber].Accessor.SetValue(message, typeUrl);
-        message.Descriptor.Fields[Any.ValueFieldNumber].Accessor.SetValue(
-            message,
-            data.ToByteString()
-        );
+        message
+            .Descriptor
+            .Fields[Any.ValueFieldNumber]
+            .Accessor
+            .SetValue(message, data.ToByteString());
 
         return message;
     }
@@ -101,9 +102,11 @@ internal sealed class AnyConverter<TMessage> : SettingsConverterBase<TMessage>
             writer.WritePropertyName(AnyWellKnownTypeValueField);
             if (ServiceDescriptorHelpers.IsWrapperType(descriptor))
             {
-                var wrappedValue = valueMessage.Descriptor.Fields[
-                    JsonConverterHelper.WrapperValueFieldNumber
-                ].Accessor.GetValue(valueMessage);
+                var wrappedValue = valueMessage
+                    .Descriptor
+                    .Fields[JsonConverterHelper.WrapperValueFieldNumber]
+                    .Accessor
+                    .GetValue(valueMessage);
                 JsonSerializer.Serialize(writer, wrappedValue, wrappedValue.GetType(), options);
             }
             else

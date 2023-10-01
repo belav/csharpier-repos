@@ -43,8 +43,10 @@ class B
 
                 var originalDocument = testLspServer
                     .GetCurrentSolution()
-                    .Projects.Single()
-                    .Documents.Single();
+                    .Projects
+                    .Single()
+                    .Documents
+                    .Single();
 
                 var findResults =
                     await FindAllReferencesHandlerTests.RunFindAllReferencesAsync<VSInternalReferenceItem>(

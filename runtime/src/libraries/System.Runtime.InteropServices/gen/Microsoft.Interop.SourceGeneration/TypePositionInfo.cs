@@ -159,18 +159,18 @@ namespace Microsoft.Interop
                 if (SymbolEqualityComparer.Default.Equals(attr.AttributeClass, outAttributeType))
                 {
                     marshalKind |= ByValueContentsMarshalKind.Out;
-                    outAttributeLocation = attr.ApplicationSyntaxReference.SyntaxTree.GetLocation(
-                        attr.ApplicationSyntaxReference.Span
-                    );
+                    outAttributeLocation = attr.ApplicationSyntaxReference
+                        .SyntaxTree
+                        .GetLocation(attr.ApplicationSyntaxReference.Span);
                 }
                 else if (
                     SymbolEqualityComparer.Default.Equals(attr.AttributeClass, inAttributeType)
                 )
                 {
                     marshalKind |= ByValueContentsMarshalKind.In;
-                    inAttributeLocation = attr.ApplicationSyntaxReference.SyntaxTree.GetLocation(
-                        attr.ApplicationSyntaxReference.Span
-                    );
+                    inAttributeLocation = attr.ApplicationSyntaxReference
+                        .SyntaxTree
+                        .GetLocation(attr.ApplicationSyntaxReference.Span);
                 }
             }
 

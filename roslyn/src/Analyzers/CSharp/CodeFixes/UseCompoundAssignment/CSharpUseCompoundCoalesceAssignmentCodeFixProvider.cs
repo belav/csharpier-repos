@@ -69,10 +69,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCompoundAssignment
 
             foreach (var diagnostic in diagnostics)
             {
-                var coalesceOrIfStatement = diagnostic.AdditionalLocations[0].FindNode(
-                    getInnermostNodeForTie: true,
-                    cancellationToken
-                );
+                var coalesceOrIfStatement = diagnostic
+                    .AdditionalLocations[0]
+                    .FindNode(getInnermostNodeForTie: true, cancellationToken);
 
                 if (coalesceOrIfStatement is IfStatementSyntax ifStatement)
                 {

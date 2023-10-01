@@ -131,9 +131,9 @@ namespace System.ServiceModel.Discovery.VersionApril2005
             }
             else
             {
-                throw FxTrace.Exception.AsError(
-                    new ArgumentException(SR.DiscoveryIncorrectMode(discoveryMode))
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new ArgumentException(SR.DiscoveryIncorrectMode(discoveryMode)));
             }
         }
 
@@ -175,11 +175,13 @@ namespace System.ServiceModel.Discovery.VersionApril2005
             }
             else
             {
-                throw FxTrace.Exception.AsError(
-                    new ArgumentException(
-                        SR.DiscoveryIncorrectMode(discoveryEndpoint.DiscoveryMode)
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new ArgumentException(
+                            SR.DiscoveryIncorrectMode(discoveryEndpoint.DiscoveryMode)
+                        )
+                    );
             }
         }
 

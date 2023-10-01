@@ -35,10 +35,9 @@ namespace System.Runtime.InteropServices.JavaScript
         )
         {
             if (
-                JSHostImplementation.ThreadCsOwnedObjects.TryGetValue(
-                    (int)jsHandle,
-                    out WeakReference<JSObject>? reference
-                )
+                JSHostImplementation
+                    .ThreadCsOwnedObjects
+                    .TryGetValue((int)jsHandle, out WeakReference<JSObject>? reference)
             )
             {
                 reference.TryGetTarget(out JSObject? jsObject);
@@ -90,10 +89,9 @@ namespace System.Runtime.InteropServices.JavaScript
             JSObject? res = null;
 
             if (
-                !JSHostImplementation.ThreadCsOwnedObjects.TryGetValue(
-                    (int)jsHandle,
-                    out WeakReference<JSObject>? reference
-                )
+                !JSHostImplementation
+                    .ThreadCsOwnedObjects
+                    .TryGetValue((int)jsHandle, out WeakReference<JSObject>? reference)
                 || !reference.TryGetTarget(out res)
                 || res.IsDisposed
             )

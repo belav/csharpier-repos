@@ -44,7 +44,8 @@ public class IISExpressAncmSchema
             return;
         }
 
-        SupportsInProcessHosting = ancmConfig.Root
+        SupportsInProcessHosting = ancmConfig
+            .Root
             .Descendants("attribute")
             .Any(n => "hostingModel".Equals(n.Attribute("name")?.Value, StringComparison.Ordinal));
 

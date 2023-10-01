@@ -216,14 +216,12 @@ namespace System.Net.Http.Functional.Tests
                 {
                     using (HttpClient client = CreateHttpClient())
                     {
-                        client.DefaultRequestHeaders.TryAddWithoutValidation(
-                            "Accept-Language",
-                            "en-US,en;q=0.5"
-                        ); // validation would add spaces
-                        client.DefaultRequestHeaders.TryAddWithoutValidation(
-                            "From",
-                            "invalidemail"
-                        ); // would fail to parse if validated
+                        client
+                            .DefaultRequestHeaders
+                            .TryAddWithoutValidation("Accept-Language", "en-US,en;q=0.5"); // validation would add spaces
+                        client
+                            .DefaultRequestHeaders
+                            .TryAddWithoutValidation("From", "invalidemail"); // would fail to parse if validated
 
                         var m = new HttpRequestMessage(HttpMethod.Get, uri)
                         {
@@ -596,9 +594,9 @@ namespace System.Net.Http.Functional.Tests
                         ValidateResponseHeaders(response1, totalSize, mode);
 
                         // Read part but not all of response
-                        Stream responseStream = await response1.Content.ReadAsStreamAsync(
-                            TestAsync
-                        );
+                        Stream responseStream = await response1
+                            .Content
+                            .ReadAsStreamAsync(TestAsync);
                         await ReadToByteCount(responseStream, readSize);
 
                         response1.Dispose();
@@ -909,11 +907,13 @@ namespace System.Net.Http.Functional.Tests
                         {
                             // client will send CONNECT and if that succeeds it will negotiate TLS
 
-                            var sslConnection = await LoopbackServer.Connection.CreateAsync(
-                                null,
-                                connection.Stream,
-                                new LoopbackServer.Options { UseSsl = true }
-                            );
+                            var sslConnection = await LoopbackServer
+                                .Connection
+                                .CreateAsync(
+                                    null,
+                                    connection.Stream,
+                                    new LoopbackServer.Options { UseSsl = true }
+                                );
                             await sslConnection.ReadRequestHeaderAndSendResponseAsync();
                         }
                     }),
@@ -1219,10 +1219,9 @@ namespace System.Net.Http.Functional.Tests
                             response.TrailingHeaders.GetValues("MyCoolTrailerHeader")
                         );
                         Assert.False(
-                            response.TrailingHeaders.TryGetValues(
-                                name,
-                                out IEnumerable<string> values
-                            )
+                            response
+                                .TrailingHeaders
+                                .TryGetValues(name, out IEnumerable<string> values)
                         );
                         Assert.Contains("Loopback", response.TrailingHeaders.GetValues("Server"));
                     }
@@ -1984,11 +1983,13 @@ namespace System.Net.Http.Functional.Tests
             bool lineFolds
         )
         {
-            Memory<byte> responsePrefix = Encoding.ASCII.GetBytes(
-                trailingHeaders
-                    ? "HTTP/1.1 200 OK\r\nTransfer-Encoding: chunked\r\n\r\n0\r\nLong-Header: "
-                    : "HTTP/1.1 200 OK\r\nContent-Length: 0\r\nLong-Header: "
-            );
+            Memory<byte> responsePrefix = Encoding
+                .ASCII
+                .GetBytes(
+                    trailingHeaders
+                        ? "HTTP/1.1 200 OK\r\nTransfer-Encoding: chunked\r\n\r\n0\r\nLong-Header: "
+                        : "HTTP/1.1 200 OK\r\nContent-Length: 0\r\nLong-Header: "
+                );
 
             bool streamDisposed = false;
             bool responseComplete = false;
@@ -2153,9 +2154,9 @@ namespace System.Net.Http.Functional.Tests
                                 );
 
                                 using (
-                                    Stream clientStream = await (
-                                        await getResponseTask
-                                    ).Content.ReadAsStreamAsync(TestAsync)
+                                    Stream clientStream = await (await getResponseTask)
+                                        .Content
+                                        .ReadAsStreamAsync(TestAsync)
                                 )
                                 {
                                     // Boolean properties returning correct values
@@ -2293,9 +2294,9 @@ namespace System.Net.Http.Functional.Tests
                                     await clientStream.FlushAsync();
 
                                     // Validate reading APIs on clientStream
-                                    await connection.Stream.WriteAsync(
-                                        "abcdefghijklmnopqrstuvwxyz"u8.ToArray()
-                                    );
+                                    await connection
+                                        .Stream
+                                        .WriteAsync("abcdefghijklmnopqrstuvwxyz"u8.ToArray());
                                     var buffer = new byte[1];
 
                                     Assert.Equal('a', clientStream.ReadByte());
@@ -3325,16 +3326,18 @@ namespace System.Net.Http.Functional.Tests
     [SkipOnPlatform(TestPlatforms.Browser, "Headers.Location are not supported on Browser")]
     public sealed class SocketsHttpHandlerTest_LocationHeader
     {
-        private static readonly byte[] s_redirectResponseBefore = Encoding.ASCII.GetBytes(
-            "HTTP/1.1 301 Moved Permanently\r\n"
-                + "Connection: close\r\n"
-                + "Transfer-Encoding: chunked\r\n"
-                + "Location: "
-        );
+        private static readonly byte[] s_redirectResponseBefore = Encoding
+            .ASCII
+            .GetBytes(
+                "HTTP/1.1 301 Moved Permanently\r\n"
+                    + "Connection: close\r\n"
+                    + "Transfer-Encoding: chunked\r\n"
+                    + "Location: "
+            );
 
-        private static readonly byte[] s_redirectResponseAfter = Encoding.ASCII.GetBytes(
-            "\r\n" + "Server: Loopback\r\n" + "\r\n" + "0\r\n\r\n"
-        );
+        private static readonly byte[] s_redirectResponseAfter = Encoding
+            .ASCII
+            .GetBytes("\r\n" + "Server: Loopback\r\n" + "\r\n" + "0\r\n\r\n");
 
         [Theory]
         // US-ASCII only
@@ -4783,10 +4786,9 @@ namespace System.Net.Http.Functional.Tests
                 {
                     try
                     {
-                        await IO.Pipelines.StreamPipeExtensions.CopyToAsync(
-                            innerStream,
-                            _pipe.Writer
-                        );
+                        await IO.Pipelines
+                            .StreamPipeExtensions
+                            .CopyToAsync(innerStream, _pipe.Writer);
                     }
                     catch (Exception ex)
                     {
@@ -5024,8 +5026,13 @@ namespace System.Net.Http.Functional.Tests
                     );
 
                     using (
-                        X509Certificate2 cert =
-                            System.Net.Test.Common.Configuration.Certificates.GetServerCertificate()
+                        X509Certificate2 cert = System
+                            .Net
+                            .Test
+                            .Common
+                            .Configuration
+                            .Certificates
+                            .GetServerCertificate()
                     )
                     {
                         SslServerAuthenticationOptions options =
@@ -5356,10 +5363,10 @@ namespace System.Net.Http.Functional.Tests
                     using HttpResponseMessage response = await client.GetAsync(uri);
 
                     Assert.True(
-                        response.Headers.NonValidated.TryGetValues(
-                            "foo",
-                            out HeaderStringValues values
-                        )
+                        response
+                            .Headers
+                            .NonValidated
+                            .TryGetValues("foo", out HeaderStringValues values)
                     );
                     Assert.Equal("bar", Assert.Single(values));
                 },
@@ -5662,9 +5669,9 @@ namespace System.Net.Http.Functional.Tests
         public async Task SslOptions_CustomTrust_Ok()
         {
             X509Certificate2Collection caCerts = new X509Certificate2Collection();
-            X509Certificate2 certificate = Configuration.Certificates.GetDynamicServerCerttificate(
-                caCerts
-            );
+            X509Certificate2 certificate = Configuration
+                .Certificates
+                .GetDynamicServerCerttificate(caCerts);
 
             GenericLoopbackOptions options = new GenericLoopbackOptions()
             {
@@ -5720,8 +5727,9 @@ namespace System.Net.Http.Functional.Tests
         public async Task SslOptions_InvalidName_Throws()
         {
             X509Certificate2Collection caCerts = new X509Certificate2Collection();
-            using X509Certificate2 certificate =
-                Configuration.Certificates.GetDynamicServerCerttificate(caCerts);
+            using X509Certificate2 certificate = Configuration
+                .Certificates
+                .GetDynamicServerCerttificate(caCerts);
 
             GenericLoopbackOptions options = new GenericLoopbackOptions()
             {
@@ -5768,9 +5776,9 @@ namespace System.Net.Http.Functional.Tests
         public async Task SslOptions_CustomPolicy_IgnoresNameMismatch()
         {
             X509Certificate2Collection caCerts = new X509Certificate2Collection();
-            X509Certificate2 certificate = Configuration.Certificates.GetDynamicServerCerttificate(
-                caCerts
-            );
+            X509Certificate2 certificate = Configuration
+                .Certificates
+                .GetDynamicServerCerttificate(caCerts);
 
             GenericLoopbackOptions options = new GenericLoopbackOptions()
             {
@@ -6025,32 +6033,34 @@ namespace System.Net.Http.Functional.Tests
         [Fact]
         public async Task VersionNegitioationError()
         {
-            await Http11LoopbackServerFactory.Singleton.CreateClientAndServerAsync(
-                async uri =>
-                {
-                    using HttpClient client = CreateHttpClient();
-                    using HttpRequestMessage message =
-                        new(HttpMethod.Get, uri)
-                        {
-                            Version = UseVersion,
-                            VersionPolicy = HttpVersionPolicy.RequestVersionExact
-                        };
-
-                    HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(
-                        () => client.SendAsync(message)
-                    );
-                    Assert.Equal(HttpRequestError.VersionNegotiationError, ex.HttpRequestError);
-                },
-                async server =>
-                {
-                    try
+            await Http11LoopbackServerFactory
+                .Singleton
+                .CreateClientAndServerAsync(
+                    async uri =>
                     {
-                        await server.AcceptConnectionAsync(_ => Task.CompletedTask);
-                    }
-                    catch { }
-                },
-                options: new GenericLoopbackOptions() { UseSsl = true }
-            );
+                        using HttpClient client = CreateHttpClient();
+                        using HttpRequestMessage message =
+                            new(HttpMethod.Get, uri)
+                            {
+                                Version = UseVersion,
+                                VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                            };
+
+                        HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(
+                            () => client.SendAsync(message)
+                        );
+                        Assert.Equal(HttpRequestError.VersionNegotiationError, ex.HttpRequestError);
+                    },
+                    async server =>
+                    {
+                        try
+                        {
+                            await server.AcceptConnectionAsync(_ => Task.CompletedTask);
+                        }
+                        catch { }
+                    },
+                    options: new GenericLoopbackOptions() { UseSsl = true }
+                );
         }
     }
 

@@ -48,9 +48,9 @@ namespace System.ServiceModel
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
             }
         }
@@ -114,14 +114,16 @@ namespace System.ServiceModel
                     );
                 if (caps == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SinceTheBindingForDoesnTSupportIBindingCapabilities2_1,
-                                name
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SinceTheBindingForDoesnTSupportIBindingCapabilities2_1,
+                                    name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 else
                 {
@@ -131,28 +133,32 @@ namespace System.ServiceModel
                         && !queuedTransport
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.BindingRequirementsAttributeRequiresQueuedDelivery1,
-                                    name
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.BindingRequirementsAttributeRequiresQueuedDelivery1,
+                                        name
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                     else if (
                         QueuedDeliveryRequirements == QueuedDeliveryRequirementsMode.NotAllowed
                         && queuedTransport
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.BindingRequirementsAttributeDisallowsQueuedDelivery1,
-                                    name
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.BindingRequirementsAttributeDisallowsQueuedDelivery1,
+                                        name
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
             }
@@ -168,24 +174,31 @@ namespace System.ServiceModel
                     );
                 if (caps == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SinceTheBindingForDoesnTSupportIBindingCapabilities1_1,
-                                name
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SinceTheBindingForDoesnTSupportIBindingCapabilities1_1,
+                                    name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 else
                 {
                     if (!caps.AssuresOrderedDelivery)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.TheBindingForDoesnTSupportOrderedDelivery1, name)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.TheBindingForDoesnTSupportOrderedDelivery1,
+                                        name
+                                    )
+                                )
+                            );
                     }
                 }
             }

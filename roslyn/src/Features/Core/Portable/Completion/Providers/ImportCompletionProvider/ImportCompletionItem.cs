@@ -75,11 +75,13 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             // but from different namespace all show up in the list, it also makes sure item with shorter name shows first,
             // e.g. 'SomeType` before 'SomeTypeWithLongerName'.
             var sortTextBuilder = PooledStringBuilder.GetInstance();
-            sortTextBuilder.Builder.AppendFormat(
-                GetSortTextFormatString(containingNamespace),
-                name,
-                containingNamespace
-            );
+            sortTextBuilder
+                .Builder
+                .AppendFormat(
+                    GetSortTextFormatString(containingNamespace),
+                    name,
+                    containingNamespace
+                );
 
             var item = CompletionItem.Create(
                 displayText: name,
@@ -111,17 +113,18 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             Debug.Assert(!attributeItem.Properties.ContainsKey(AttributeFullName));
 
             // Remember the full type name so we can get the symbol when description is displayed.
-            var newProperties = attributeItem.Properties.Add(
-                AttributeFullName,
-                attributeItem.DisplayText
-            );
+            var newProperties = attributeItem
+                .Properties
+                .Add(AttributeFullName, attributeItem.DisplayText);
 
             var sortTextBuilder = PooledStringBuilder.GetInstance();
-            sortTextBuilder.Builder.AppendFormat(
-                GetSortTextFormatString(attributeItem.InlineDescription),
-                attributeNameWithoutSuffix,
-                attributeItem.InlineDescription
-            );
+            sortTextBuilder
+                .Builder
+                .AppendFormat(
+                    GetSortTextFormatString(attributeItem.InlineDescription),
+                    attributeNameWithoutSuffix,
+                    attributeItem.InlineDescription
+                );
 
             var item = CompletionItem.Create(
                 displayText: attributeNameWithoutSuffix,
@@ -161,7 +164,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             CancellationToken cancellationToken
         )
         {
-            var compilation = await document.Project
+            var compilation = await document
+                .Project
                 .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var (symbol, overloadCount) = GetSymbolAndOverloadCount(item, compilation);

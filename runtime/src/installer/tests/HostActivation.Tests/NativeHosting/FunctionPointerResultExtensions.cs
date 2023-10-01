@@ -16,7 +16,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
         {
             return assertion
                 .ExecuteFunctionPointer(methodName, callCount)
-                .And.HaveStdOutContaining(
+                .And
+                .HaveStdOutContaining(
                     $"{methodName} delegate result: 0x{returnValue.ToString("x")}"
                 );
         }
@@ -30,16 +31,20 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             var constraint = assertion.ExecuteFunctionPointer(methodName, callCount);
             if (OperatingSystem.IsWindows())
             {
-                return constraint.And.HaveStdOutContaining(
-                    $"{methodName} delegate threw exception: 0x{Constants.ErrorCode.COMPlusException.ToString("x")}"
-                );
+                return constraint
+                    .And
+                    .HaveStdOutContaining(
+                        $"{methodName} delegate threw exception: 0x{Constants.ErrorCode.COMPlusException.ToString("x")}"
+                    );
             }
             else
             {
                 // Exception is unhandled by native host on non-Windows systems
-                return constraint.And
+                return constraint
+                    .And
                     .ExitWith(Constants.ErrorCode.SIGABRT)
-                    .And.HaveStdErrContaining(
+                    .And
+                    .HaveStdErrContaining(
                         $"Unhandled exception. System.InvalidOperationException: {methodName}"
                     );
             }

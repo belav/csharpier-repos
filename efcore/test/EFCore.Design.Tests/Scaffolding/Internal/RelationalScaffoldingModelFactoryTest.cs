@@ -491,7 +491,8 @@ public class RelationalScaffoldingModelFactoryTest
 
         info.Tables
             .First()
-            .Columns.Add(
+            .Columns
+            .Add(
                 new DatabaseColumn
                 {
                     Table = info.Tables.First(),
@@ -723,59 +724,71 @@ public class RelationalScaffoldingModelFactoryTest
                 Columns = { c1 }
             }
         };
-        table.Indexes.Add(
-            new DatabaseIndex
-            {
-                Table = Table,
-                Name = "IDX_C1",
-                Columns = { table.Columns.ElementAt(0) },
-                IsUnique = false
-            }
-        );
-        table.Indexes.Add(
-            new DatabaseIndex
-            {
-                Table = Table,
-                Name = "IDX_C2",
-                Columns = { table.Columns.ElementAt(1) },
-                IsUnique = true
-            }
-        );
-        table.Indexes.Add(
-            new DatabaseIndex
-            {
-                Table = Table,
-                Name = "",
-                Columns = { table.Columns.ElementAt(2) },
-                IsUnique = true
-            }
-        );
-        table.Indexes.Add(
-            new DatabaseIndex
-            {
-                Table = Table,
-                Name = "IDX_C2_C1",
-                Columns = { table.Columns.ElementAt(1), table.Columns.ElementAt(0) },
-                IsUnique = false
-            }
-        );
-        table.Indexes.Add(
-            new DatabaseIndex
-            {
-                Table = Table,
-                Columns = { table.Columns.ElementAt(1), table.Columns.ElementAt(2) },
-                IsUnique = false
-            }
-        );
-        table.Indexes.Add(
-            new DatabaseIndex
-            {
-                Table = Table,
-                Name = "UNQ_C3_C1",
-                Columns = { table.Columns.ElementAt(2), table.Columns.ElementAt(0) },
-                IsUnique = true
-            }
-        );
+        table
+            .Indexes
+            .Add(
+                new DatabaseIndex
+                {
+                    Table = Table,
+                    Name = "IDX_C1",
+                    Columns = { table.Columns.ElementAt(0) },
+                    IsUnique = false
+                }
+            );
+        table
+            .Indexes
+            .Add(
+                new DatabaseIndex
+                {
+                    Table = Table,
+                    Name = "IDX_C2",
+                    Columns = { table.Columns.ElementAt(1) },
+                    IsUnique = true
+                }
+            );
+        table
+            .Indexes
+            .Add(
+                new DatabaseIndex
+                {
+                    Table = Table,
+                    Name = "",
+                    Columns = { table.Columns.ElementAt(2) },
+                    IsUnique = true
+                }
+            );
+        table
+            .Indexes
+            .Add(
+                new DatabaseIndex
+                {
+                    Table = Table,
+                    Name = "IDX_C2_C1",
+                    Columns = { table.Columns.ElementAt(1), table.Columns.ElementAt(0) },
+                    IsUnique = false
+                }
+            );
+        table
+            .Indexes
+            .Add(
+                new DatabaseIndex
+                {
+                    Table = Table,
+                    Columns = { table.Columns.ElementAt(1), table.Columns.ElementAt(2) },
+                    IsUnique = false
+                }
+            );
+        table
+            .Indexes
+            .Add(
+                new DatabaseIndex
+                {
+                    Table = Table,
+                    Name = "UNQ_C3_C1",
+                    Columns = { table.Columns.ElementAt(2), table.Columns.ElementAt(0) },
+                    IsUnique = true
+                }
+            );
 
         var info = new DatabaseModel { Tables = { table } };
 
@@ -861,17 +874,19 @@ public class RelationalScaffoldingModelFactoryTest
             },
             PrimaryKey = IdPrimaryKey
         };
-        childrenTable.ForeignKeys.Add(
-            new DatabaseForeignKey
-            {
-                Table = childrenTable,
-                Name = "FK_Foo",
-                Columns = { childrenTable.Columns.ElementAt(1) },
-                PrincipalTable = parentTable,
-                PrincipalColumns = { parentTable.Columns.ElementAt(0) },
-                OnDelete = ReferentialAction.Cascade
-            }
-        );
+        childrenTable
+            .ForeignKeys
+            .Add(
+                new DatabaseForeignKey
+                {
+                    Table = childrenTable,
+                    Name = "FK_Foo",
+                    Columns = { childrenTable.Columns.ElementAt(1) },
+                    PrincipalTable = parentTable,
+                    PrincipalColumns = { parentTable.Columns.ElementAt(0) },
+                    OnDelete = ReferentialAction.Cascade
+                }
+            );
 
         var model = _factory.Create(
             new DatabaseModel { Tables = { parentTable, childrenTable } },
@@ -920,16 +935,18 @@ public class RelationalScaffoldingModelFactoryTest
             StoreType = "int"
         };
         detailTable.Columns.Add(masterIdColumn);
-        detailTable.ForeignKeys.Add(
-            new DatabaseForeignKey
-            {
-                Table = detailTable,
-                Name = null,
-                Columns = { masterIdColumn },
-                PrincipalTable = masterTable,
-                PrincipalColumns = { idColumn }
-            }
-        );
+        detailTable
+            .ForeignKeys
+            .Add(
+                new DatabaseForeignKey
+                {
+                    Table = detailTable,
+                    Name = null,
+                    Columns = { masterIdColumn },
+                    PrincipalTable = masterTable,
+                    PrincipalColumns = { idColumn }
+                }
+            );
         databaseModel.Tables.Add(detailTable);
 
         var model = _factory.Create(databaseModel, new ModelReverseEngineerOptions());
@@ -959,14 +976,16 @@ public class RelationalScaffoldingModelFactoryTest
             PrimaryKey = IdPrimaryKey
         };
 
-        parentTable.UniqueConstraints.Add(
-            new DatabaseUniqueConstraint
-            {
-                Table = parentTable,
-                Name = "AK_Foo",
-                Columns = { keyColumn }
-            }
-        );
+        parentTable
+            .UniqueConstraints
+            .Add(
+                new DatabaseUniqueConstraint
+                {
+                    Table = parentTable,
+                    Name = "AK_Foo",
+                    Columns = { keyColumn }
+                }
+            );
 
         var childrenTable = new DatabaseTable
         {
@@ -976,17 +995,19 @@ public class RelationalScaffoldingModelFactoryTest
             PrimaryKey = IdPrimaryKey
         };
 
-        childrenTable.ForeignKeys.Add(
-            new DatabaseForeignKey
-            {
-                Table = childrenTable,
-                Name = "FK_Foo",
-                Columns = { childrenTable.Columns.ElementAt(0) },
-                PrincipalTable = parentTable,
-                PrincipalColumns = { parentTable.Columns.ElementAt(1) },
-                OnDelete = ReferentialAction.Cascade,
-            }
-        );
+        childrenTable
+            .ForeignKeys
+            .Add(
+                new DatabaseForeignKey
+                {
+                    Table = childrenTable,
+                    Name = "FK_Foo",
+                    Columns = { childrenTable.Columns.ElementAt(0) },
+                    PrincipalTable = parentTable,
+                    PrincipalColumns = { parentTable.Columns.ElementAt(1) },
+                    OnDelete = ReferentialAction.Cascade,
+                }
+            );
 
         var model = _factory.Create(
             new DatabaseModel { Tables = { parentTable, childrenTable } },
@@ -1025,17 +1046,19 @@ public class RelationalScaffoldingModelFactoryTest
             Columns = { IdColumn },
             PrimaryKey = IdPrimaryKey
         };
-        childrenTable.ForeignKeys.Add(
-            new DatabaseForeignKey
-            {
-                Table = childrenTable,
-                Name = "FK_Foo",
-                Columns = { childrenTable.Columns.ElementAt(0) },
-                PrincipalTable = parentTable,
-                PrincipalColumns = { parentTable.Columns.ElementAt(0) },
-                OnDelete = ReferentialAction.NoAction
-            }
-        );
+        childrenTable
+            .ForeignKeys
+            .Add(
+                new DatabaseForeignKey
+                {
+                    Table = childrenTable,
+                    Name = "FK_Foo",
+                    Columns = { childrenTable.Columns.ElementAt(0) },
+                    PrincipalTable = parentTable,
+                    PrincipalColumns = { parentTable.Columns.ElementAt(0) },
+                    OnDelete = ReferentialAction.NoAction
+                }
+            );
 
         var model = _factory.Create(
             new DatabaseModel { Tables = { parentTable, childrenTable } },
@@ -1098,25 +1121,27 @@ public class RelationalScaffoldingModelFactoryTest
             },
             PrimaryKey = IdPrimaryKey
         };
-        childrenTable.ForeignKeys.Add(
-            new DatabaseForeignKey
-            {
-                Table = childrenTable,
-                Name = "FK_Foo",
-                Columns =
+        childrenTable
+            .ForeignKeys
+            .Add(
+                new DatabaseForeignKey
                 {
-                    childrenTable.Columns.ElementAt(1),
-                    childrenTable.Columns.ElementAt(2)
-                },
-                PrincipalTable = parentTable,
-                PrincipalColumns =
-                {
-                    parentTable.Columns.ElementAt(0),
-                    parentTable.Columns.ElementAt(1)
-                },
-                OnDelete = ReferentialAction.SetNull
-            }
-        );
+                    Table = childrenTable,
+                    Name = "FK_Foo",
+                    Columns =
+                    {
+                        childrenTable.Columns.ElementAt(1),
+                        childrenTable.Columns.ElementAt(2)
+                    },
+                    PrincipalTable = parentTable,
+                    PrincipalColumns =
+                    {
+                        parentTable.Columns.ElementAt(0),
+                        parentTable.Columns.ElementAt(1)
+                    },
+                    OnDelete = ReferentialAction.SetNull
+                }
+            );
 
         var model = _factory.Create(
             new DatabaseModel { Tables = { parentTable, childrenTable } },
@@ -1160,16 +1185,18 @@ public class RelationalScaffoldingModelFactoryTest
             },
             PrimaryKey = IdPrimaryKey
         };
-        table.ForeignKeys.Add(
-            new DatabaseForeignKey
-            {
-                Table = table,
-                Name = "FK_Foo",
-                Columns = { table.Columns.ElementAt(1) },
-                PrincipalTable = table,
-                PrincipalColumns = { table.Columns.ElementAt(0) }
-            }
-        );
+        table
+            .ForeignKeys
+            .Add(
+                new DatabaseForeignKey
+                {
+                    Table = table,
+                    Name = "FK_Foo",
+                    Columns = { table.Columns.ElementAt(1) },
+                    PrincipalTable = table,
+                    PrincipalColumns = { table.Columns.ElementAt(0) }
+                }
+            );
 
         var model = _factory.Create(
             new DatabaseModel { Tables = { table } },
@@ -1222,16 +1249,18 @@ public class RelationalScaffoldingModelFactoryTest
             },
             PrimaryKey = IdPrimaryKey
         };
-        childrenTable.ForeignKeys.Add(
-            new DatabaseForeignKey
-            {
-                Table = childrenTable,
-                Name = "FK_Foo",
-                Columns = { childrenTable.Columns.ElementAt(1) },
-                PrincipalTable = parentTable,
-                PrincipalColumns = { parentTable.Columns.ElementAt(1) }
-            }
-        );
+        childrenTable
+            .ForeignKeys
+            .Add(
+                new DatabaseForeignKey
+                {
+                    Table = childrenTable,
+                    Name = "FK_Foo",
+                    Columns = { childrenTable.Columns.ElementAt(1) },
+                    PrincipalTable = parentTable,
+                    PrincipalColumns = { parentTable.Columns.ElementAt(1) }
+                }
+            );
 
         _factory.Create(
             new DatabaseModel { Tables = { parentTable, childrenTable } },
@@ -1276,26 +1305,30 @@ public class RelationalScaffoldingModelFactoryTest
             },
             PrimaryKey = IdPrimaryKey
         };
-        childrenTable.ForeignKeys.Add(
-            new DatabaseForeignKey
-            {
-                Table = childrenTable,
-                Name = "FK_Foo",
-                Columns = { childrenTable.Columns.ElementAt(1) },
-                PrincipalTable = parentTable,
-                PrincipalColumns = { parentTable.Columns.ElementAt(0) }
-            }
-        );
-        childrenTable.ForeignKeys.Add(
-            new DatabaseForeignKey
-            {
-                Table = childrenTable,
-                Name = "FK_Another_Foo",
-                Columns = { childrenTable.Columns.ElementAt(1) },
-                PrincipalTable = parentTable,
-                PrincipalColumns = { parentTable.Columns.ElementAt(0) }
-            }
-        );
+        childrenTable
+            .ForeignKeys
+            .Add(
+                new DatabaseForeignKey
+                {
+                    Table = childrenTable,
+                    Name = "FK_Foo",
+                    Columns = { childrenTable.Columns.ElementAt(1) },
+                    PrincipalTable = parentTable,
+                    PrincipalColumns = { parentTable.Columns.ElementAt(0) }
+                }
+            );
+        childrenTable
+            .ForeignKeys
+            .Add(
+                new DatabaseForeignKey
+                {
+                    Table = childrenTable,
+                    Name = "FK_Another_Foo",
+                    Columns = { childrenTable.Columns.ElementAt(1) },
+                    PrincipalTable = parentTable,
+                    PrincipalColumns = { parentTable.Columns.ElementAt(0) }
+                }
+            );
 
         _factory.Create(
             new DatabaseModel { Tables = { parentTable, childrenTable } },
@@ -1333,25 +1366,29 @@ public class RelationalScaffoldingModelFactoryTest
             },
             PrimaryKey = IdPrimaryKey
         };
-        table.Indexes.Add(
-            new DatabaseIndex
-            {
-                Table = Table,
-                Name = "IX_Foo",
-                IsUnique = true,
-                Columns = { table.Columns.ElementAt(1) }
-            }
-        );
-        table.ForeignKeys.Add(
-            new DatabaseForeignKey
-            {
-                Table = table,
-                Name = "FK_Foo",
-                Columns = { table.Columns.ElementAt(1) },
-                PrincipalTable = table,
-                PrincipalColumns = { table.Columns.ElementAt(0) }
-            }
-        );
+        table
+            .Indexes
+            .Add(
+                new DatabaseIndex
+                {
+                    Table = Table,
+                    Name = "IX_Foo",
+                    IsUnique = true,
+                    Columns = { table.Columns.ElementAt(1) }
+                }
+            );
+        table
+            .ForeignKeys
+            .Add(
+                new DatabaseForeignKey
+                {
+                    Table = table,
+                    Name = "FK_Foo",
+                    Columns = { table.Columns.ElementAt(1) },
+                    PrincipalTable = table,
+                    PrincipalColumns = { table.Columns.ElementAt(0) }
+                }
+            );
 
         var model = _factory
             .Create(
@@ -1391,25 +1428,29 @@ public class RelationalScaffoldingModelFactoryTest
             },
             PrimaryKey = IdPrimaryKey
         };
-        table.Indexes.Add(
-            new DatabaseIndex
-            {
-                Table = Table,
-                Name = "FriendsNameUniqueIndex",
-                Columns = { table.Columns.ElementAt(1) },
-                IsUnique = true
-            }
-        );
-        table.ForeignKeys.Add(
-            new DatabaseForeignKey
-            {
-                Table = table,
-                Name = "FK_Foo",
-                Columns = { table.Columns.ElementAt(1) },
-                PrincipalTable = table,
-                PrincipalColumns = { table.Columns.ElementAt(1) }
-            }
-        );
+        table
+            .Indexes
+            .Add(
+                new DatabaseIndex
+                {
+                    Table = Table,
+                    Name = "FriendsNameUniqueIndex",
+                    Columns = { table.Columns.ElementAt(1) },
+                    IsUnique = true
+                }
+            );
+        table
+            .ForeignKeys
+            .Add(
+                new DatabaseForeignKey
+                {
+                    Table = table,
+                    Name = "FK_Foo",
+                    Columns = { table.Columns.ElementAt(1) },
+                    PrincipalTable = table,
+                    PrincipalColumns = { table.Columns.ElementAt(1) }
+                }
+            );
 
         var model = _factory
             .Create(
@@ -1489,33 +1530,41 @@ public class RelationalScaffoldingModelFactoryTest
             },
             PrimaryKey = IdPrimaryKey
         };
-        childrenTable.Indexes.Add(
-            new DatabaseIndex
-            {
-                Table = Table,
-                Name = "IX_Foo",
-                IsUnique = true,
-                Columns = { childrenTable.Columns.ElementAt(1), childrenTable.Columns.ElementAt(2) }
-            }
-        );
-        childrenTable.ForeignKeys.Add(
-            new DatabaseForeignKey
-            {
-                Table = childrenTable,
-                Name = "FK_Foo",
-                Columns =
+        childrenTable
+            .Indexes
+            .Add(
+                new DatabaseIndex
                 {
-                    childrenTable.Columns.ElementAt(1),
-                    childrenTable.Columns.ElementAt(2)
-                },
-                PrincipalTable = parentTable,
-                PrincipalColumns =
-                {
-                    parentTable.Columns.ElementAt(0),
-                    parentTable.Columns.ElementAt(1)
+                    Table = Table,
+                    Name = "IX_Foo",
+                    IsUnique = true,
+                    Columns =
+                    {
+                        childrenTable.Columns.ElementAt(1),
+                        childrenTable.Columns.ElementAt(2)
+                    }
                 }
-            }
-        );
+            );
+        childrenTable
+            .ForeignKeys
+            .Add(
+                new DatabaseForeignKey
+                {
+                    Table = childrenTable,
+                    Name = "FK_Foo",
+                    Columns =
+                    {
+                        childrenTable.Columns.ElementAt(1),
+                        childrenTable.Columns.ElementAt(2)
+                    },
+                    PrincipalTable = parentTable,
+                    PrincipalColumns =
+                    {
+                        parentTable.Columns.ElementAt(0),
+                        parentTable.Columns.ElementAt(1)
+                    }
+                }
+            );
 
         var model = _factory.Create(
             new DatabaseModel { Tables = { parentTable, childrenTable } },
@@ -1560,44 +1609,52 @@ public class RelationalScaffoldingModelFactoryTest
             }
         };
 
-        table.Indexes.Add(
-            new DatabaseIndex
-            {
-                Table = Table,
-                Name = "IX_unspecified",
-                Columns = { table.Columns[0], table.Columns[1], table.Columns[2] }
-            }
-        );
+        table
+            .Indexes
+            .Add(
+                new DatabaseIndex
+                {
+                    Table = Table,
+                    Name = "IX_unspecified",
+                    Columns = { table.Columns[0], table.Columns[1], table.Columns[2] }
+                }
+            );
 
-        table.Indexes.Add(
-            new DatabaseIndex
-            {
-                Table = Table,
-                Name = "IX_all_ascending",
-                Columns = { table.Columns[0], table.Columns[1], table.Columns[2] },
-                IsDescending = { false, false, false }
-            }
-        );
+        table
+            .Indexes
+            .Add(
+                new DatabaseIndex
+                {
+                    Table = Table,
+                    Name = "IX_all_ascending",
+                    Columns = { table.Columns[0], table.Columns[1], table.Columns[2] },
+                    IsDescending = { false, false, false }
+                }
+            );
 
-        table.Indexes.Add(
-            new DatabaseIndex
-            {
-                Table = Table,
-                Name = "IX_all_descending",
-                Columns = { table.Columns[0], table.Columns[1], table.Columns[2] },
-                IsDescending = { true, true, true }
-            }
-        );
+        table
+            .Indexes
+            .Add(
+                new DatabaseIndex
+                {
+                    Table = Table,
+                    Name = "IX_all_descending",
+                    Columns = { table.Columns[0], table.Columns[1], table.Columns[2] },
+                    IsDescending = { true, true, true }
+                }
+            );
 
-        table.Indexes.Add(
-            new DatabaseIndex
-            {
-                Table = Table,
-                Name = "IX_mixed",
-                Columns = { table.Columns[0], table.Columns[1], table.Columns[2] },
-                IsDescending = { false, true, false }
-            }
-        );
+        table
+            .Indexes
+            .Add(
+                new DatabaseIndex
+                {
+                    Table = Table,
+                    Name = "IX_mixed",
+                    Columns = { table.Columns[0], table.Columns[1], table.Columns[2] },
+                    IsDescending = { false, true, false }
+                }
+            );
 
         var model = _factory.Create(
             new DatabaseModel { Tables = { table } },
@@ -1890,17 +1947,19 @@ public class RelationalScaffoldingModelFactoryTest
             PrimaryKey = IdPrimaryKey
         };
 
-        postTable.ForeignKeys.Add(
-            new DatabaseForeignKey
-            {
-                Table = postTable,
-                Name = "FK_Foo",
-                Columns = { postTable.Columns.ElementAt(1) },
-                PrincipalTable = blogTable,
-                PrincipalColumns = { blogTable.Columns.ElementAt(0) },
-                OnDelete = ReferentialAction.Cascade
-            }
-        );
+        postTable
+            .ForeignKeys
+            .Add(
+                new DatabaseForeignKey
+                {
+                    Table = postTable,
+                    Name = "FK_Foo",
+                    Columns = { postTable.Columns.ElementAt(1) },
+                    PrincipalTable = blogTable,
+                    PrincipalColumns = { blogTable.Columns.ElementAt(0) },
+                    OnDelete = ReferentialAction.Cascade
+                }
+            );
 
         var info = new DatabaseModel { Tables = { blogTable, postTable } };
 
@@ -1949,17 +2008,19 @@ public class RelationalScaffoldingModelFactoryTest
             PrimaryKey = IdPrimaryKey
         };
 
-        postTable.ForeignKeys.Add(
-            new DatabaseForeignKey
-            {
-                Table = postTable,
-                Name = "FK_Foo",
-                Columns = { postTable.Columns.ElementAt(1) },
-                PrincipalTable = blogTable,
-                PrincipalColumns = { blogTable.Columns.ElementAt(0) },
-                OnDelete = ReferentialAction.Cascade
-            }
-        );
+        postTable
+            .ForeignKeys
+            .Add(
+                new DatabaseForeignKey
+                {
+                    Table = postTable,
+                    Name = "FK_Foo",
+                    Columns = { postTable.Columns.ElementAt(1) },
+                    PrincipalTable = blogTable,
+                    PrincipalColumns = { blogTable.Columns.ElementAt(0) },
+                    OnDelete = ReferentialAction.Cascade
+                }
+            );
 
         var info = new DatabaseModel { Tables = { blogTable, postTable } };
 
@@ -2977,17 +3038,19 @@ public class RelationalScaffoldingModelFactoryTest
             PrimaryKey = IdPrimaryKey
         };
 
-        postTable.ForeignKeys.Add(
-            new DatabaseForeignKey
-            {
-                Table = postTable,
-                Name = "FK_Foo",
-                Columns = { postTable.Columns.ElementAt(1) },
-                PrincipalTable = blogTable,
-                PrincipalColumns = { blogTable.Columns.ElementAt(0) },
-                OnDelete = ReferentialAction.Cascade
-            }
-        );
+        postTable
+            .ForeignKeys
+            .Add(
+                new DatabaseForeignKey
+                {
+                    Table = postTable,
+                    Name = "FK_Foo",
+                    Columns = { postTable.Columns.ElementAt(1) },
+                    PrincipalTable = blogTable,
+                    PrincipalColumns = { blogTable.Columns.ElementAt(0) },
+                    OnDelete = ReferentialAction.Cascade
+                }
+            );
 
         var info = new DatabaseModel { Tables = { blogTable, postTable } };
 
@@ -3060,30 +3123,34 @@ public class RelationalScaffoldingModelFactoryTest
             PrimaryKey = IdPrimaryKey
         };
 
-        blogTable.UniqueConstraints.Add(
-            new DatabaseUniqueConstraint
-            {
-                Table = blogTable,
-                Name = "AK_Foo",
-                Columns = { blogTable.Columns.ElementAt(1), blogTable.Columns.ElementAt(2) }
-            }
-        );
-
-        postTable.ForeignKeys.Add(
-            new DatabaseForeignKey
-            {
-                Table = postTable,
-                Name = "FK_Foo",
-                Columns = { postTable.Columns.ElementAt(1), postTable.Columns.ElementAt(2) },
-                PrincipalTable = blogTable,
-                PrincipalColumns =
+        blogTable
+            .UniqueConstraints
+            .Add(
+                new DatabaseUniqueConstraint
                 {
-                    blogTable.Columns.ElementAt(1),
-                    blogTable.Columns.ElementAt(2)
-                },
-                OnDelete = ReferentialAction.Cascade
-            }
-        );
+                    Table = blogTable,
+                    Name = "AK_Foo",
+                    Columns = { blogTable.Columns.ElementAt(1), blogTable.Columns.ElementAt(2) }
+                }
+            );
+
+        postTable
+            .ForeignKeys
+            .Add(
+                new DatabaseForeignKey
+                {
+                    Table = postTable,
+                    Name = "FK_Foo",
+                    Columns = { postTable.Columns.ElementAt(1), postTable.Columns.ElementAt(2) },
+                    PrincipalTable = blogTable,
+                    PrincipalColumns =
+                    {
+                        blogTable.Columns.ElementAt(1),
+                        blogTable.Columns.ElementAt(2)
+                    },
+                    OnDelete = ReferentialAction.Cascade
+                }
+            );
 
         var info = new DatabaseModel { Tables = { blogTable, postTable } };
 
@@ -3109,32 +3176,38 @@ public class RelationalScaffoldingModelFactoryTest
     {
         var bookDetailsTable = new DatabaseTable { Database = Database, Name = "Book_Details" };
 
-        bookDetailsTable.Columns.Add(
-            new DatabaseColumn
-            {
-                Table = bookDetailsTable,
-                Name = "ID",
-                StoreType = "int"
-            }
-        );
+        bookDetailsTable
+            .Columns
+            .Add(
+                new DatabaseColumn
+                {
+                    Table = bookDetailsTable,
+                    Name = "ID",
+                    StoreType = "int"
+                }
+            );
 
-        bookDetailsTable.Columns.Add(
-            new DatabaseColumn
-            {
-                Table = bookDetailsTable,
-                Name = "Book_Name",
-                StoreType = "nvarchar(50)"
-            }
-        );
+        bookDetailsTable
+            .Columns
+            .Add(
+                new DatabaseColumn
+                {
+                    Table = bookDetailsTable,
+                    Name = "Book_Name",
+                    StoreType = "nvarchar(50)"
+                }
+            );
 
-        bookDetailsTable.Columns.Add(
-            new DatabaseColumn
-            {
-                Table = bookDetailsTable,
-                Name = "Student_Id",
-                StoreType = "int"
-            }
-        );
+        bookDetailsTable
+            .Columns
+            .Add(
+                new DatabaseColumn
+                {
+                    Table = bookDetailsTable,
+                    Name = "Student_Id",
+                    StoreType = "int"
+                }
+            );
 
         bookDetailsTable.PrimaryKey = new DatabasePrimaryKey
         {
@@ -3149,23 +3222,27 @@ public class RelationalScaffoldingModelFactoryTest
             Name = "Student_Details"
         };
 
-        studentDetailsTable.Columns.Add(
-            new DatabaseColumn
-            {
-                Table = studentDetailsTable,
-                Name = "ID",
-                StoreType = "int"
-            }
-        );
+        studentDetailsTable
+            .Columns
+            .Add(
+                new DatabaseColumn
+                {
+                    Table = studentDetailsTable,
+                    Name = "ID",
+                    StoreType = "int"
+                }
+            );
 
-        studentDetailsTable.Columns.Add(
-            new DatabaseColumn
-            {
-                Table = studentDetailsTable,
-                Name = "Student_Name",
-                StoreType = "nvarchar(256)"
-            }
-        );
+        studentDetailsTable
+            .Columns
+            .Add(
+                new DatabaseColumn
+                {
+                    Table = studentDetailsTable,
+                    Name = "Student_Name",
+                    StoreType = "nvarchar(256)"
+                }
+            );
 
         studentDetailsTable.PrimaryKey = new DatabasePrimaryKey
         {
@@ -3174,17 +3251,19 @@ public class RelationalScaffoldingModelFactoryTest
             Columns = { studentDetailsTable.Columns.Single(c => c.Name == "ID") }
         };
 
-        bookDetailsTable.ForeignKeys.Add(
-            new DatabaseForeignKey
-            {
-                Table = bookDetailsTable,
-                Name = "FK_Foo",
-                Columns = { bookDetailsTable.Columns.Single(c => c.Name == "Student_Id") },
-                PrincipalTable = studentDetailsTable,
-                PrincipalColumns = { studentDetailsTable.Columns.Single(c => c.Name == "ID") },
-                OnDelete = ReferentialAction.Cascade
-            }
-        );
+        bookDetailsTable
+            .ForeignKeys
+            .Add(
+                new DatabaseForeignKey
+                {
+                    Table = bookDetailsTable,
+                    Name = "FK_Foo",
+                    Columns = { bookDetailsTable.Columns.Single(c => c.Name == "Student_Id") },
+                    PrincipalTable = studentDetailsTable,
+                    PrincipalColumns = { studentDetailsTable.Columns.Single(c => c.Name == "ID") },
+                    OnDelete = ReferentialAction.Cascade
+                }
+            );
 
         var info = new DatabaseModel { Tables = { bookDetailsTable, studentDetailsTable } };
 
@@ -3226,32 +3305,38 @@ public class RelationalScaffoldingModelFactoryTest
     {
         var seasonTable = new DatabaseTable { Database = Database, Name = "TmTvSeason" };
 
-        seasonTable.Columns.Add(
-            new DatabaseColumn
-            {
-                Table = seasonTable,
-                Name = "Id",
-                StoreType = "int"
-            }
-        );
+        seasonTable
+            .Columns
+            .Add(
+                new DatabaseColumn
+                {
+                    Table = seasonTable,
+                    Name = "Id",
+                    StoreType = "int"
+                }
+            );
 
-        seasonTable.Columns.Add(
-            new DatabaseColumn
-            {
-                Table = seasonTable,
-                Name = "ShowId",
-                StoreType = "int"
-            }
-        );
+        seasonTable
+            .Columns
+            .Add(
+                new DatabaseColumn
+                {
+                    Table = seasonTable,
+                    Name = "ShowId",
+                    StoreType = "int"
+                }
+            );
 
-        seasonTable.Columns.Add(
-            new DatabaseColumn
-            {
-                Table = seasonTable,
-                Name = "Name",
-                StoreType = "nvarchar(300)"
-            }
-        );
+        seasonTable
+            .Columns
+            .Add(
+                new DatabaseColumn
+                {
+                    Table = seasonTable,
+                    Name = "Name",
+                    StoreType = "nvarchar(300)"
+                }
+            );
 
         seasonTable.PrimaryKey = new DatabasePrimaryKey
         {
@@ -3266,41 +3351,49 @@ public class RelationalScaffoldingModelFactoryTest
 
         var episodeTable = new DatabaseTable { Database = Database, Name = "TmTvEpisode" };
 
-        episodeTable.Columns.Add(
-            new DatabaseColumn
-            {
-                Table = episodeTable,
-                Name = "Id",
-                StoreType = "int"
-            }
-        );
+        episodeTable
+            .Columns
+            .Add(
+                new DatabaseColumn
+                {
+                    Table = episodeTable,
+                    Name = "Id",
+                    StoreType = "int"
+                }
+            );
 
-        episodeTable.Columns.Add(
-            new DatabaseColumn
-            {
-                Table = episodeTable,
-                Name = "SeasonId",
-                StoreType = "int"
-            }
-        );
+        episodeTable
+            .Columns
+            .Add(
+                new DatabaseColumn
+                {
+                    Table = episodeTable,
+                    Name = "SeasonId",
+                    StoreType = "int"
+                }
+            );
 
-        episodeTable.Columns.Add(
-            new DatabaseColumn
-            {
-                Table = episodeTable,
-                Name = "ShowId",
-                StoreType = "int"
-            }
-        );
+        episodeTable
+            .Columns
+            .Add(
+                new DatabaseColumn
+                {
+                    Table = episodeTable,
+                    Name = "ShowId",
+                    StoreType = "int"
+                }
+            );
 
-        episodeTable.Columns.Add(
-            new DatabaseColumn
-            {
-                Table = episodeTable,
-                Name = "Name",
-                StoreType = "nvarchar(300)"
-            }
-        );
+        episodeTable
+            .Columns
+            .Add(
+                new DatabaseColumn
+                {
+                    Table = episodeTable,
+                    Name = "Name",
+                    StoreType = "nvarchar(300)"
+                }
+            );
 
         episodeTable.PrimaryKey = new DatabasePrimaryKey
         {
@@ -3314,25 +3407,27 @@ public class RelationalScaffoldingModelFactoryTest
             }
         };
 
-        episodeTable.ForeignKeys.Add(
-            new DatabaseForeignKey
-            {
-                Table = episodeTable,
-                Name = "FK_TmTvEpisode_TmTvSeason",
-                Columns =
+        episodeTable
+            .ForeignKeys
+            .Add(
+                new DatabaseForeignKey
                 {
-                    episodeTable.Columns.Single(c => c.Name == "ShowId"),
-                    episodeTable.Columns.Single(c => c.Name == "SeasonId")
-                },
-                PrincipalTable = seasonTable,
-                PrincipalColumns =
-                {
-                    seasonTable.Columns.Single(c => c.Name == "ShowId"),
-                    seasonTable.Columns.Single(c => c.Name == "Id")
-                },
-                OnDelete = ReferentialAction.Cascade
-            }
-        );
+                    Table = episodeTable,
+                    Name = "FK_TmTvEpisode_TmTvSeason",
+                    Columns =
+                    {
+                        episodeTable.Columns.Single(c => c.Name == "ShowId"),
+                        episodeTable.Columns.Single(c => c.Name == "SeasonId")
+                    },
+                    PrincipalTable = seasonTable,
+                    PrincipalColumns =
+                    {
+                        seasonTable.Columns.Single(c => c.Name == "ShowId"),
+                        seasonTable.Columns.Single(c => c.Name == "Id")
+                    },
+                    OnDelete = ReferentialAction.Cascade
+                }
+            );
 
         var info = new DatabaseModel { Tables = { seasonTable, episodeTable } };
 

@@ -245,9 +245,11 @@ namespace Mono.Unmanaged.Check
             }
             catch (FileNotFoundException e)
             {
-                report.Errors.Add(
-                    new MessageInfo(null, null, "Could not load `" + file + "': " + e.Message)
-                );
+                report
+                    .Errors
+                    .Add(
+                        new MessageInfo(null, null, "Could not load `" + file + "': " + e.Message)
+                    );
             }
         }
 
@@ -269,13 +271,15 @@ namespace Mono.Unmanaged.Check
 
             if (a == null)
             {
-                report.Errors.Add(
-                    new MessageInfo(
-                        null,
-                        null,
-                        "Could not load assembly reference `" + partial + "'."
-                    )
-                );
+                report
+                    .Errors
+                    .Add(
+                        new MessageInfo(
+                            null,
+                            null,
+                            "Could not load assembly reference `" + partial + "'."
+                        )
+                    );
                 return;
             }
 
@@ -418,26 +422,30 @@ namespace Mono.Unmanaged.Check
 
             if (found == null)
             {
-                report.Errors.Add(
-                    new MessageInfo(
-                        type,
-                        mname,
-                        "Could not load library `" + library + "': " + error
-                    )
-                );
+                report
+                    .Errors
+                    .Add(
+                        new MessageInfo(
+                            type,
+                            mname,
+                            "Could not load library `" + library + "': " + error
+                        )
+                    );
                 return;
             }
 
             // UnixFileInfo f = new UnixFileInfo (soname);
             if (found.EndsWith(".so"))
             {
-                report.Warnings.Add(
-                    new MessageInfo(
-                        type,
-                        mname,
-                        string.Format("Library `{0}' might be a development library", found)
-                    )
-                );
+                report
+                    .Warnings
+                    .Add(
+                        new MessageInfo(
+                            type,
+                            mname,
+                            string.Format("Library `{0}' might be a development library", found)
+                        )
+                    );
             }
         }
 
@@ -538,17 +546,19 @@ namespace Mono.Unmanaged.Check
                     Trace.WriteLine("Able to load library " + library + "; soname=" + soname);
                     IntPtr ignore;
                     if (g_module_symbol(h, symbol, out ignore) == 0)
-                        report.Errors.Add(
-                            new MessageInfo(
-                                type,
-                                member,
-                                string.Format(
-                                    "library `{0}' is missing symbol `{1}'",
-                                    library,
-                                    symbol
+                        report
+                            .Errors
+                            .Add(
+                                new MessageInfo(
+                                    type,
+                                    member,
+                                    string.Format(
+                                        "library `{0}' is missing symbol `{1}'",
+                                        library,
+                                        symbol
+                                    )
                                 )
-                            )
-                        );
+                            );
                     return true;
                 }
                 error = Marshal.PtrToStringAnsi(g_module_error());

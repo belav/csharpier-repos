@@ -135,9 +135,9 @@ namespace System.Data.Objects.DataClasses
                             // There could still be an Added or Unchanged relationship with a stub entry
                             EntityKey ownerKey = WrappedOwner.EntityKey;
                             foreach (
-                                RelationshipEntry relationshipEntry in this.ObjectContext.ObjectStateManager.FindRelationshipsByKey(
-                                    ownerKey
-                                )
+                                RelationshipEntry relationshipEntry in this.ObjectContext
+                                    .ObjectStateManager
+                                    .FindRelationshipsByKey(ownerKey)
                             )
                             {
                                 // We only care about the relationships that match the AssociationSet and source role for the owner of this EntityReference
@@ -154,10 +154,9 @@ namespace System.Data.Objects.DataClasses
                                         attachedKey == null,
                                         "Found more than one non-Deleted relationship for the same AssociationSet and source role"
                                     );
-                                    attachedKey =
-                                        relationshipEntry.RelationshipWrapper.GetOtherEntityKey(
-                                            ownerKey
-                                        );
+                                    attachedKey = relationshipEntry
+                                        .RelationshipWrapper
+                                        .GetOtherEntityKey(ownerKey);
                                     // key should never be temporary or special since it came from a key entry
                                 }
                             }
@@ -417,10 +416,9 @@ namespace System.Data.Objects.DataClasses
                 && _cachedForeignKey != newForeignKey
             ) // is the FK different from the one that we already have?
             {
-                this.ObjectContext.ObjectStateManager.RemoveEntryFromForeignKeyIndex(
-                    _cachedForeignKey,
-                    source
-                );
+                this.ObjectContext
+                    .ObjectStateManager
+                    .RemoveEntryFromForeignKeyIndex(_cachedForeignKey, source);
             }
             _cachedForeignKey = newForeignKey;
         }
@@ -572,18 +570,18 @@ namespace System.Data.Objects.DataClasses
             stateManager.TransactionManager.BeginForeignKeyUpdate(this);
             try
             {
-                EntitySet principalEntitySet = ((AssociationSet)RelationshipSet).AssociationSetEnds[
-                    ToEndMember.Name
-                ].EntitySet;
+                EntitySet principalEntitySet = ((AssociationSet)RelationshipSet)
+                    .AssociationSetEnds[ToEndMember.Name]
+                    .EntitySet;
                 StateManagerTypeMetadata principalTypeMetadata =
                     stateManager.GetOrAddStateManagerTypeMetadata(
                         principalEntity.IdentityType,
                         principalEntitySet
                     );
 
-                EntitySet dependentEntitySet = ((AssociationSet)RelationshipSet).AssociationSetEnds[
-                    FromEndProperty.Name
-                ].EntitySet;
+                EntitySet dependentEntitySet = ((AssociationSet)RelationshipSet)
+                    .AssociationSetEnds[FromEndProperty.Name]
+                    .EntitySet;
                 StateManagerTypeMetadata dependentTypeMetadata =
                     stateManager.GetOrAddStateManagerTypeMetadata(
                         dependentEntity.IdentityType,
@@ -610,12 +608,14 @@ namespace System.Data.Objects.DataClasses
                     int dependentOrdinal = dependentTypeMetadata.GetOrdinalforOLayerMemberName(
                         constraint.ToProperties[i].Name
                     );
-                    bool valueChanging = !ByValueEqualityComparer.Default.Equals(
-                        dependentTypeMetadata
-                            .Member(dependentOrdinal)
-                            .GetValue(dependentEntity.Entity),
-                        value
-                    );
+                    bool valueChanging = !ByValueEqualityComparer
+                        .Default
+                        .Equals(
+                            dependentTypeMetadata
+                                .Member(dependentOrdinal)
+                                .GetValue(dependentEntity.Entity),
+                            value
+                        );
                     if (forceChange || valueChanging)
                     {
                         if (isUnchangedDependent)
@@ -635,10 +635,9 @@ namespace System.Data.Objects.DataClasses
                             if (changedFKs.TryGetValue(dependentOrdinal, out previouslySetValue))
                             {
                                 if (
-                                    !ByValueEqualityComparer.Default.Equals(
-                                        previouslySetValue,
-                                        value
-                                    )
+                                    !ByValueEqualityComparer
+                                        .Default
+                                        .Equals(previouslySetValue, value)
                                 )
                                 {
                                     throw new InvalidOperationException(
@@ -729,9 +728,9 @@ namespace System.Data.Objects.DataClasses
             stateManager.TransactionManager.BeginForeignKeyUpdate(this);
             try
             {
-                EntitySet dependentEntitySet = ((AssociationSet)RelationshipSet).AssociationSetEnds[
-                    FromEndProperty.Name
-                ].EntitySet;
+                EntitySet dependentEntitySet = ((AssociationSet)RelationshipSet)
+                    .AssociationSetEnds[FromEndProperty.Name]
+                    .EntitySet;
                 StateManagerTypeMetadata dependentTypeMetadata =
                     stateManager.GetOrAddStateManagerTypeMetadata(
                         dependentEntity.IdentityType,
@@ -807,9 +806,9 @@ namespace System.Data.Objects.DataClasses
                 && !transManager.IsRelatedEndAdd
             )
             {
-                ReferentialConstraint constraint = (
-                    (AssociationType)RelationMetadata
-                ).ReferentialConstraints.Single();
+                ReferentialConstraint constraint = ((AssociationType)RelationMetadata)
+                    .ReferentialConstraints
+                    .Single();
                 if (TargetRoleName == constraint.FromRole.Name) // Only do this on the dependent end
                 {
                     if (transManager.IsDetaching)
@@ -843,9 +842,9 @@ namespace System.Data.Objects.DataClasses
                                     entry.State == EntityState.Modified
                                     || entry.State == EntityState.Unchanged
                                 );
-                            EntitySet dependentEntitySet = (
-                                (AssociationSet)RelationshipSet
-                            ).AssociationSetEnds[FromEndProperty.Name].EntitySet;
+                            EntitySet dependentEntitySet = ((AssociationSet)RelationshipSet)
+                                .AssociationSetEnds[FromEndProperty.Name]
+                                .EntitySet;
                             StateManagerTypeMetadata dependentTypeMetadata =
                                 stateManager.GetOrAddStateManagerTypeMetadata(
                                     WrappedOwner.IdentityType,
@@ -892,9 +891,10 @@ namespace System.Data.Objects.DataClasses
                                         // RelatedEnd operations the user is not required to call DetectChanges.
                                         if (
                                             canSetModifiedProps
-                                            && WrappedOwner.ObjectStateEntry.OriginalValues.GetValue(
-                                                dependentOrdinal
-                                            ) != null
+                                            && WrappedOwner
+                                                .ObjectStateEntry
+                                                .OriginalValues
+                                                .GetValue(dependentOrdinal) != null
                                         )
                                         {
                                             entry.SetModifiedProperty(propertyName);

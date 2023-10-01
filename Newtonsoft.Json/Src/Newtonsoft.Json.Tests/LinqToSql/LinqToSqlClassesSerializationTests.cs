@@ -51,13 +51,15 @@ namespace Newtonsoft.Json.Tests.LinqToSql
             person.FirstName = "FirstName!";
             person.LastName = "LastName!";
             person.PersonId = new Guid("7AA027AA-C995-4986-908D-999D8063599F");
-            person.PersonRoles.Add(
-                new PersonRole
-                {
-                    PersonRoleId = new Guid("B012DD41-71DF-4839-B8D5-D1333FB886BC"),
-                    Role = role
-                }
-            );
+            person
+                .PersonRoles
+                .Add(
+                    new PersonRole
+                    {
+                        PersonRoleId = new Guid("B012DD41-71DF-4839-B8D5-D1333FB886BC"),
+                        Role = role
+                    }
+                );
 
             person.Department = new Department
             {

@@ -44,18 +44,27 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 from l4 in ss.Set<Level1>()
                     .SelectMany(
                         l1 =>
-                            l1.OneToOne_Required_FK1.OneToOne_Optional_FK2.OneToMany_Required3.DefaultIfEmpty()
+                            l1.OneToOne_Required_FK1
+                                .OneToOne_Optional_FK2
+                                .OneToMany_Required3
+                                .DefaultIfEmpty()
                     )
                 join l2 in ss.Set<Level4>()
                     .SelectMany(
                         l4 =>
-                            l4.OneToOne_Required_FK_Inverse4.OneToOne_Optional_FK_Inverse3.OneToMany_Required_Self2.DefaultIfEmpty()
+                            l4.OneToOne_Required_FK_Inverse4
+                                .OneToOne_Optional_FK_Inverse3
+                                .OneToMany_Required_Self2
+                                .DefaultIfEmpty()
                     )
                     on l4.Id equals l2.Id
                 join l3 in ss.Set<Level4>()
                     .SelectMany(
                         l4 =>
-                            l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3.OneToMany_Required2.DefaultIfEmpty()
+                            l4.OneToOne_Required_FK_Inverse4
+                                .OneToOne_Required_FK_Inverse3
+                                .OneToMany_Required2
+                                .DefaultIfEmpty()
                     )
                     on l2.Id equals l3.Id
                     into grouping
@@ -72,18 +81,27 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 from l4 in ss.Set<Level1>()
                     .SelectMany(
                         l1 =>
-                            l1.OneToOne_Required_FK1.OneToOne_Optional_FK2.OneToMany_Required3.DefaultIfEmpty()
+                            l1.OneToOne_Required_FK1
+                                .OneToOne_Optional_FK2
+                                .OneToMany_Required3
+                                .DefaultIfEmpty()
                     )
                 join l2 in ss.Set<Level4>()
                     .SelectMany(
                         l4 =>
-                            l4.OneToOne_Required_FK_Inverse4.OneToOne_Optional_FK_Inverse3.OneToMany_Required_Self2.DefaultIfEmpty()
+                            l4.OneToOne_Required_FK_Inverse4
+                                .OneToOne_Optional_FK_Inverse3
+                                .OneToMany_Required_Self2
+                                .DefaultIfEmpty()
                     )
                     on l4.Id equals l2.Id
                 join l3 in ss.Set<Level4>()
                     .SelectMany(
                         l4 =>
-                            l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3.OneToMany_Required2.DefaultIfEmpty()
+                            l4.OneToOne_Required_FK_Inverse4
+                                .OneToOne_Required_FK_Inverse3
+                                .OneToMany_Required2
+                                .DefaultIfEmpty()
                     )
                     on l2.Id equals l3.Id
                     into grouping
@@ -622,18 +640,27 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 from l4 in ss.Set<Level1>()
                     .SelectMany(
                         l1 =>
-                            l1.OneToOne_Required_FK1.OneToOne_Optional_FK2.OneToMany_Required3.DefaultIfEmpty()
+                            l1.OneToOne_Required_FK1
+                                .OneToOne_Optional_FK2
+                                .OneToMany_Required3
+                                .DefaultIfEmpty()
                     )
                 join l2 in ss.Set<Level4>()
                     .SelectMany(
                         l4 =>
-                            l4.OneToOne_Required_FK_Inverse4.OneToOne_Optional_FK_Inverse3.OneToMany_Required_Self2.DefaultIfEmpty()
+                            l4.OneToOne_Required_FK_Inverse4
+                                .OneToOne_Optional_FK_Inverse3
+                                .OneToMany_Required_Self2
+                                .DefaultIfEmpty()
                     )
                     on l4.Id equals l2.Id
                 join l3 in ss.Set<Level4>()
                     .SelectMany(
                         l4 =>
-                            l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3.OneToMany_Required2.DefaultIfEmpty()
+                            l4.OneToOne_Required_FK_Inverse4
+                                .OneToOne_Required_FK_Inverse3
+                                .OneToMany_Required2
+                                .DefaultIfEmpty()
                     )
                     on l2.Id equals l3.Id
                     into grouping
@@ -650,18 +677,27 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 from l4 in ss.Set<Level1>()
                     .SelectMany(
                         l1 =>
-                            l1.OneToOne_Required_FK1.OneToOne_Optional_FK2.OneToMany_Required3.DefaultIfEmpty()
+                            l1.OneToOne_Required_FK1
+                                .OneToOne_Optional_FK2
+                                .OneToMany_Required3
+                                .DefaultIfEmpty()
                     )
                 join l2 in ss.Set<Level4>()
                     .SelectMany(
                         l4 =>
-                            l4.OneToOne_Required_FK_Inverse4.OneToOne_Optional_FK_Inverse3.OneToMany_Required_Self2.DefaultIfEmpty()
+                            l4.OneToOne_Required_FK_Inverse4
+                                .OneToOne_Optional_FK_Inverse3
+                                .OneToMany_Required_Self2
+                                .DefaultIfEmpty()
                     )
                     on l4.Id equals l2.Id
                 join l3 in ss.Set<Level4>()
                     .SelectMany(
                         l4 =>
-                            l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3.OneToMany_Required2.DefaultIfEmpty()
+                            l4.OneToOne_Required_FK_Inverse4
+                                .OneToOne_Required_FK_Inverse3
+                                .OneToMany_Required2
+                                .DefaultIfEmpty()
                     )
                     on l2.Id equals l3.Id
                     into grouping
@@ -2454,7 +2490,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 ss.Set<Level1>()
                     .Include(
                         l1 =>
-                            l1.OneToOne_Optional_FK1.OneToMany_Optional2
+                            l1.OneToOne_Optional_FK1
+                                .OneToMany_Optional2
                                 .Where(x => x.Name != "Foo")
                                 .OrderBy(x => x.Name)
                                 .Skip(1)
@@ -2593,7 +2630,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                                     )
                         )
                 )
-            ).Message
+            )
+                .Message
                 .Replace("\r", "")
                 .Replace("\n", "")
         );
@@ -2628,7 +2666,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                                     .ThenInclude(l2 => l2.OneToOne_Required_FK2)
                         )
                 )
-            ).Message
+            )
+                .Message
                 .Replace("\r", "")
                 .Replace("\n", "")
         );
@@ -3500,9 +3539,9 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                             .SelectMany(
                                 l2 =>
                                     l2.Id == 1
-                                        ? l2.OneToMany_Required_Inverse2.OneToMany_Optional1.Select(
-                                            e => e.Id
-                                        )
+                                        ? l2.OneToMany_Required_Inverse2
+                                            .OneToMany_Optional1
+                                            .Select(e => e.Id)
                                         : null
                             )
                 )
@@ -3520,9 +3559,9 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                             .SelectMany(
                                 l2 =>
                                     l2.Id == 1
-                                        ? l2.OneToMany_Required_Inverse2.OneToMany_Optional1.Select(
-                                            e => e.Id
-                                        )
+                                        ? l2.OneToMany_Required_Inverse2
+                                            .OneToMany_Optional1
+                                            .Select(e => e.Id)
                                         : Enumerable.Empty<int>()
                             )
                 )
@@ -3731,14 +3770,16 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                             new
                             {
                                 l1.Id,
-                                Collection = l1.OneToOne_Optional_FK1.OneToMany_Optional2.Select(
-                                    l3 =>
-                                        new
-                                        {
-                                            ChildId = l3.Id,
-                                            ParentName = l1.OneToOne_Optional_FK1.Name
-                                        }
-                                )
+                                Collection = l1.OneToOne_Optional_FK1
+                                    .OneToMany_Optional2
+                                    .Select(
+                                        l3 =>
+                                            new
+                                            {
+                                                ChildId = l3.Id,
+                                                ParentName = l1.OneToOne_Optional_FK1.Name
+                                            }
+                                    )
                             }
                     ),
             ss =>
@@ -3794,7 +3835,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                             {
                                 l1.Id,
                                 Entity = l1.OneToOne_Optional_FK1.OneToOne_Optional_FK2,
-                                Collection = l1.OneToOne_Optional_FK1.OneToMany_Optional2
+                                Collection = l1.OneToOne_Optional_FK1
+                                    .OneToMany_Optional2
                                     .GroupBy(x => x.Name)
                                     .Select(g => new { g.Key, Count = g.Count() })
                             }

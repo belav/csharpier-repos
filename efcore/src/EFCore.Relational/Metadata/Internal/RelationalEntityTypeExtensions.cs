@@ -62,7 +62,8 @@ public static class RelationalEntityTypeExtensions
                     foreignKey.DeclaringEntityType,
                     storeObject.StoreObjectType
                 ) == storeObject
-                || foreignKey.DeclaringEntityType
+                || foreignKey
+                    .DeclaringEntityType
                     .GetMappingFragments(storeObject.StoreObjectType)
                     .Any(f => f.StoreObject == storeObject)
             )
@@ -71,7 +72,8 @@ public static class RelationalEntityTypeExtensions
                     foreignKey.PrincipalEntityType,
                     storeObject.StoreObjectType
                 ) == storeObject
-                || foreignKey.PrincipalEntityType
+                || foreignKey
+                    .PrincipalEntityType
                     .GetMappingFragments(storeObject.StoreObjectType)
                     .Any(f => f.StoreObject == storeObject)
             );

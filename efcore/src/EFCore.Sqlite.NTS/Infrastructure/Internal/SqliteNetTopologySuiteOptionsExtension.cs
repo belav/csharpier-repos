@@ -47,9 +47,9 @@ public class SqliteNetTopologySuiteOptionsExtension : IDbContextOptionsExtension
         if (internalServiceProvider != null)
         {
             using var scope = internalServiceProvider.CreateScope();
-            var plugins = scope.ServiceProvider.GetService<
-                IEnumerable<IRelationalTypeMappingSourcePlugin>
-            >();
+            var plugins = scope
+                .ServiceProvider
+                .GetService<IEnumerable<IRelationalTypeMappingSourcePlugin>>();
             if (plugins?.Any(s => s is SqliteNetTopologySuiteTypeMappingSourcePlugin) != true)
             {
                 throw new InvalidOperationException(SqliteNTSStrings.NTSServicesMissing);

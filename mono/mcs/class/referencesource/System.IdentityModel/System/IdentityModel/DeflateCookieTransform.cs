@@ -48,10 +48,9 @@ namespace System.IdentityModel
 
             if (0 == encoded.Length)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "encoded",
-                    SR.GetString(SR.ID6045)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument("encoded", SR.GetString(SR.ID6045));
             }
 
             MemoryStream compressedStream = new MemoryStream(encoded);
@@ -76,11 +75,13 @@ namespace System.IdentityModel
                         // check length against configured maximum to prevevent decompression bomb attacks
                         if (decompressedStream.Length > MaxDecompressedSize)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new SecurityTokenException(
-                                    SR.GetString(SR.ID1068, MaxDecompressedSize)
-                                )
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new SecurityTokenException(
+                                        SR.GetString(SR.ID1068, MaxDecompressedSize)
+                                    )
+                                );
                         }
                     } while (bytesRead > 0);
 
@@ -105,10 +106,9 @@ namespace System.IdentityModel
 
             if (0 == value.Length)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "value",
-                    SR.GetString(SR.ID6044)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument("value", SR.GetString(SR.ID6044));
             }
 
             using (MemoryStream compressedStream = new MemoryStream())

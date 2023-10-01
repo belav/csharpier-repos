@@ -1468,10 +1468,13 @@ namespace System.Web.Mvc.Test
 
             // Act
             mockController.Object.TempData.Add("Key", "Value");
-            mockController.Object.TempData.Save(
-                mockController.Object.ControllerContext,
-                mockController.Object.TempDataProvider
-            );
+            mockController
+                .Object
+                .TempData
+                .Save(
+                    mockController.Object.ControllerContext,
+                    mockController.Object.TempDataProvider
+                );
 
             // Assert
             Assert.True(mockController.Object.TempData.ContainsKey("Key"));
@@ -1486,10 +1489,13 @@ namespace System.Web.Mvc.Test
                 new RouteData(),
                 mockDestinationController.Object
             );
-            mockDestinationController.Object.TempData.Load(
-                mockDestinationController.Object.ControllerContext,
-                mockDestinationController.Object.TempDataProvider
-            );
+            mockDestinationController
+                .Object
+                .TempData
+                .Load(
+                    mockDestinationController.Object.ControllerContext,
+                    mockDestinationController.Object.TempDataProvider
+                );
 
             // Assert
             Assert.True(mockDestinationController.Object.TempData.ContainsKey("Key"));
@@ -1497,10 +1503,13 @@ namespace System.Web.Mvc.Test
             // Act
             mockDestinationController.Object.TempData["NewKey"] = "NewValue";
             Assert.True(mockDestinationController.Object.TempData.ContainsKey("NewKey"));
-            mockDestinationController.Object.TempData.Save(
-                mockDestinationController.Object.ControllerContext,
-                mockDestinationController.Object.TempDataProvider
-            );
+            mockDestinationController
+                .Object
+                .TempData
+                .Save(
+                    mockDestinationController.Object.ControllerContext,
+                    mockDestinationController.Object.TempDataProvider
+                );
 
             // Instantiate "second destination" controller with the same session state and see that it gets the temp data
             Mock<Controller> mockSecondDestinationController = new Mock<Controller>()
@@ -1514,10 +1523,13 @@ namespace System.Web.Mvc.Test
                 new RouteData(),
                 mockSecondDestinationController.Object
             );
-            mockSecondDestinationController.Object.TempData.Load(
-                mockSecondDestinationController.Object.ControllerContext,
-                mockSecondDestinationController.Object.TempDataProvider
-            );
+            mockSecondDestinationController
+                .Object
+                .TempData
+                .Load(
+                    mockSecondDestinationController.Object.ControllerContext,
+                    mockSecondDestinationController.Object.TempDataProvider
+                );
 
             // Assert
             Assert.True(mockSecondDestinationController.Object.TempData.ContainsKey("Key"));
@@ -1540,10 +1552,13 @@ namespace System.Web.Mvc.Test
 
             // Act
             mockController.Object.TempData.Add("Key", "Value");
-            mockController.Object.TempData.Save(
-                mockController.Object.ControllerContext,
-                mockController.Object.TempDataProvider
-            );
+            mockController
+                .Object
+                .TempData
+                .Save(
+                    mockController.Object.ControllerContext,
+                    mockController.Object.TempDataProvider
+                );
 
             // Assert
             Assert.True(mockController.Object.TempData.ContainsKey("Key"));
@@ -1558,20 +1573,26 @@ namespace System.Web.Mvc.Test
                 new RouteData(),
                 mockDestinationController.Object
             );
-            mockDestinationController.Object.TempData.Load(
-                mockDestinationController.Object.ControllerContext,
-                mockDestinationController.Object.TempDataProvider
-            );
+            mockDestinationController
+                .Object
+                .TempData
+                .Load(
+                    mockDestinationController.Object.ControllerContext,
+                    mockDestinationController.Object.TempDataProvider
+                );
 
             // Assert
             Assert.True(mockDestinationController.Object.TempData.ContainsKey("Key"));
 
             // Act
             object value = mockDestinationController.Object.TempData["Key"];
-            mockDestinationController.Object.TempData.Save(
-                mockDestinationController.Object.ControllerContext,
-                mockDestinationController.Object.TempDataProvider
-            );
+            mockDestinationController
+                .Object
+                .TempData
+                .Save(
+                    mockDestinationController.Object.ControllerContext,
+                    mockDestinationController.Object.TempDataProvider
+                );
 
             // Instantiate "second destination" controller with the same session state and see that it gets the temp data
             Mock<Controller> mockSecondDestinationController = new Mock<Controller>()
@@ -1585,10 +1606,13 @@ namespace System.Web.Mvc.Test
                 new RouteData(),
                 mockSecondDestinationController.Object
             );
-            mockSecondDestinationController.Object.TempData.Load(
-                mockSecondDestinationController.Object.ControllerContext,
-                mockSecondDestinationController.Object.TempDataProvider
-            );
+            mockSecondDestinationController
+                .Object
+                .TempData
+                .Load(
+                    mockSecondDestinationController.Object.ControllerContext,
+                    mockSecondDestinationController.Object.TempDataProvider
+                );
 
             // Assert
             Assert.False(mockSecondDestinationController.Object.TempData.ContainsKey("Key"));

@@ -148,10 +148,9 @@ namespace System.Security.Cryptography.X509Certificates
 
                     if (OpenSslX509ChainEventSource.Log.IsEnabled())
                     {
-                        OpenSslX509ChainEventSource.Log.FindChainViaAiaFinished(
-                            status,
-                            tmp?.Count ?? 0
-                        );
+                        OpenSslX509ChainEventSource
+                            .Log
+                            .FindChainViaAiaFinished(status, tmp?.Count ?? 0);
                     }
 
                     if (tmp != null)

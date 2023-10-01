@@ -269,7 +269,8 @@ public class PropertyAttributeConventionTest
     public void KeyAttribute_throws_when_setting_key_in_derived_type()
     {
         var derivedEntityTypeBuilder = CreateInternalEntityTypeBuilder<DerivedEntity>();
-        var baseEntityType = derivedEntityTypeBuilder.ModelBuilder
+        var baseEntityType = derivedEntityTypeBuilder
+            .ModelBuilder
             .Entity(typeof(BaseEntity), ConfigurationSource.Explicit)
             .Metadata;
         derivedEntityTypeBuilder.HasBaseType(baseEntityType, ConfigurationSource.Explicit);
@@ -296,7 +297,8 @@ public class PropertyAttributeConventionTest
     public void KeyAttribute_does_not_throw_when_setting_key_in_derived_type_when_base_has_PrimaryKeyAttribute()
     {
         var derivedEntityTypeBuilder = CreateInternalEntityTypeBuilder<DerivedEntity2>();
-        var baseEntityType = derivedEntityTypeBuilder.ModelBuilder
+        var baseEntityType = derivedEntityTypeBuilder
+            .ModelBuilder
             .Entity(typeof(BaseEntity2), ConfigurationSource.Explicit)
             .Metadata;
         derivedEntityTypeBuilder.HasBaseType(baseEntityType, ConfigurationSource.Explicit);
@@ -310,10 +312,9 @@ public class PropertyAttributeConventionTest
     public void KeyAttribute_allows_composite_key_with_inheritance()
     {
         var derivedEntityTypeBuilder = CreateInternalEntityTypeBuilder<CompositeKeyDerivedEntity>();
-        var baseEntityTypeBuilder = derivedEntityTypeBuilder.ModelBuilder.Entity(
-            typeof(BaseEntity),
-            ConfigurationSource.Explicit
-        );
+        var baseEntityTypeBuilder = derivedEntityTypeBuilder
+            .ModelBuilder
+            .Entity(typeof(BaseEntity), ConfigurationSource.Explicit);
         derivedEntityTypeBuilder.HasBaseType(
             baseEntityTypeBuilder.Metadata,
             ConfigurationSource.Explicit
@@ -624,7 +625,8 @@ public class PropertyAttributeConventionTest
             20,
             entityTypeBuilder
                 .Property<string>(nameof(F.StringLengthProperty))
-                .Metadata.GetMaxLength()
+                .Metadata
+                .GetMaxLength()
         );
     }
 
@@ -904,9 +906,9 @@ public class PropertyAttributeConventionTest
     private InternalEntityTypeBuilder CreateInternalEntityTypeBuilder<T>()
     {
         var conventionSet = new ConventionSet();
-        conventionSet.EntityTypeAddedConventions.Add(
-            new PropertyDiscoveryConvention(CreateDependencies())
-        );
+        conventionSet
+            .EntityTypeAddedConventions
+            .Add(new PropertyDiscoveryConvention(CreateDependencies()));
 
         var modelBuilder = new Model(conventionSet).Builder;
 
@@ -992,7 +994,8 @@ public class PropertyAttributeConventionTest
     }
 
     private static ProviderConventionSetBuilderDependencies CreateDependencies() =>
-        InMemoryTestHelpers.Instance
+        InMemoryTestHelpers
+            .Instance
             .CreateContextServices()
             .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 

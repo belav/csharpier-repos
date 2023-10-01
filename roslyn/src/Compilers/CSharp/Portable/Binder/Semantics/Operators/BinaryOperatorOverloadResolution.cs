@@ -534,9 +534,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     case BinaryOperatorKind.Equal:
                     case BinaryOperatorKind.NotEqual:
-                        TypeSymbol systemDelegateType = _binder.Compilation.GetSpecialType(
-                            SpecialType.System_Delegate
-                        );
+                        TypeSymbol systemDelegateType = _binder
+                            .Compilation
+                            .GetSpecialType(SpecialType.System_Delegate);
                         systemDelegateType.AddUseSiteInfo(ref useSiteInfo);
 
                         if (
@@ -1187,12 +1187,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                this.Compilation.builtInOperators.GetSimpleBuiltInOperators(
-                    kind,
-                    operators,
-                    skipNativeIntegerOperators: !left.Type.IsNativeIntegerOrNullableThereof()
-                        && !right.Type.IsNativeIntegerOrNullableThereof()
-                );
+                this.Compilation
+                    .builtInOperators
+                    .GetSimpleBuiltInOperators(
+                        kind,
+                        operators,
+                        skipNativeIntegerOperators: !left.Type.IsNativeIntegerOrNullableThereof()
+                            && !right.Type.IsNativeIntegerOrNullableThereof()
+                    );
 
                 // SPEC 7.3.4: For predefined enum and delegate operators, the only operators
                 // considered are those defined by an enum or delegate type that is the binding
@@ -1209,10 +1211,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && isUtf8ByteRepresentation(right)
                 )
                 {
-                    this.Compilation.builtInOperators.GetUtf8ConcatenationBuiltInOperator(
-                        left.Type,
-                        operators
-                    );
+                    this.Compilation
+                        .builtInOperators
+                        .GetUtf8ConcatenationBuiltInOperator(left.Type, operators);
                 }
             }
 

@@ -382,9 +382,11 @@ namespace System.ServiceModel.Channels
         {
             IPeerNeighbor neighbor = GetNeighbor();
             if (neighbor == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ObjectDisposedException(typeof(IPeerNeighbor).ToString())
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ObjectDisposedException(typeof(IPeerNeighbor).ToString())
+                    );
             Message reply = this.config.SecurityManager.ProcessRequest(neighbor, message);
             if (reply == null)
             {
@@ -399,9 +401,11 @@ namespace System.ServiceModel.Channels
         {
             IPeerNeighbor neighbor = GetNeighbor();
             if (neighbor == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ObjectDisposedException(typeof(IPeerNeighbor).ToString())
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ObjectDisposedException(typeof(IPeerNeighbor).ToString())
+                    );
             neighbor.Abort(PeerCloseReason.Faulted, PeerCloseInitiator.RemoteNode);
         }
 

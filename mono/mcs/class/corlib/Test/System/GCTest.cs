@@ -164,7 +164,8 @@ namespace MonoTests.System
 
             for (int i = 0; i < 10000000; i++)
             {
-                expectedSize += objectAllocators[r.Next(0, objectAllocators.Length)]()
+                expectedSize += objectAllocators[r.Next(0, objectAllocators.Length)]
+                    ()
                     .ExpectedSize();
             }
 

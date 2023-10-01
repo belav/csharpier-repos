@@ -333,9 +333,9 @@ namespace ILCompiler.Metadata
             {
                 record.GenericParameters.Capacity = entity.Instantiation.Length;
                 foreach (var p in entity.Instantiation)
-                    record.GenericParameters.Add(
-                        HandleGenericParameter((Cts.GenericParameterDesc)p)
-                    );
+                    record
+                        .GenericParameters
+                        .Add(HandleGenericParameter((Cts.GenericParameterDesc)p));
             }
 
             foreach (var field in entity.GetFields())
@@ -357,9 +357,9 @@ namespace ILCompiler.Metadata
             var ecmaEntity = entity as Cts.Ecma.EcmaType;
             if (ecmaEntity != null)
             {
-                Ecma.TypeDefinition ecmaRecord = ecmaEntity.MetadataReader.GetTypeDefinition(
-                    ecmaEntity.Handle
-                );
+                Ecma.TypeDefinition ecmaRecord = ecmaEntity
+                    .MetadataReader
+                    .GetTypeDefinition(ecmaEntity.Handle);
 
                 foreach (var e in ecmaRecord.GetEvents())
                 {
@@ -560,9 +560,9 @@ namespace ILCompiler.Metadata
             var ecmaType = type as Cts.Ecma.EcmaType;
             if (ecmaType != null)
             {
-                Ecma.TypeDefinition ecmaRecord = ecmaType.MetadataReader.GetTypeDefinition(
-                    ecmaType.Handle
-                );
+                Ecma.TypeDefinition ecmaRecord = ecmaType
+                    .MetadataReader
+                    .GetTypeDefinition(ecmaType.Handle);
                 result = ecmaRecord.Attributes;
             }
             else

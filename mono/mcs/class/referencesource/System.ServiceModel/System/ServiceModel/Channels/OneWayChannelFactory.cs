@@ -18,10 +18,9 @@ namespace System.ServiceModel.Channels
 
         public static void AddHeadersTo(Message message, MessageHeader header)
         {
-            int index = message.Headers.FindHeader(
-                DotNetOneWayStrings.HeaderName,
-                DotNetOneWayStrings.Namespace
-            );
+            int index = message
+                .Headers
+                .FindHeader(DotNetOneWayStrings.HeaderName, DotNetOneWayStrings.Namespace);
             if (index == -1)
             {
                 if (header == null)
@@ -45,10 +44,9 @@ namespace System.ServiceModel.Channels
 
         public static bool TryValidateMessage(Message message)
         {
-            int index = message.Headers.FindHeader(
-                DotNetOneWayStrings.HeaderName,
-                DotNetOneWayStrings.Namespace
-            );
+            int index = message
+                .Headers
+                .FindHeader(DotNetOneWayStrings.HeaderName, DotNetOneWayStrings.Namespace);
 
             return (index != -1);
         }

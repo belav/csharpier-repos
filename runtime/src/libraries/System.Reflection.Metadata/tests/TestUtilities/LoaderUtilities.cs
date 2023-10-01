@@ -22,11 +22,9 @@ namespace System.Reflection.Metadata.Tests
                 File.WriteAllBytes(tempFile.Path, peImage);
 
                 using (
-                    SafeLibraryHandle libHandle = global::Interop.Kernel32.LoadLibraryExW(
-                        tempFile.Path,
-                        IntPtr.Zero,
-                        0
-                    )
+                    SafeLibraryHandle libHandle = global::Interop
+                        .Kernel32
+                        .LoadLibraryExW(tempFile.Path, IntPtr.Zero, 0)
                 )
                 {
                     byte* peImagePtr = (byte*)

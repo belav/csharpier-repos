@@ -58,11 +58,13 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void Indent_RoundTrips()
         {
-            Assert.Reflection.BooleanProperty(
-                new XmlSerializerMediaTypeFormatter(),
-                c => c.Indent,
-                expectedDefaultValue: false
-            );
+            Assert
+                .Reflection
+                .BooleanProperty(
+                    new XmlSerializerMediaTypeFormatter(),
+                    c => c.Indent,
+                    expectedDefaultValue: false
+                );
         }
 
         [Fact]
@@ -90,11 +92,13 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void UseXmlSerializer_RoundTrips()
         {
-            Assert.Reflection.BooleanProperty(
-                new XmlSerializerMediaTypeFormatter(),
-                c => c.UseXmlSerializer,
-                expectedDefaultValue: true
-            );
+            Assert
+                .Reflection
+                .BooleanProperty(
+                    new XmlSerializerMediaTypeFormatter(),
+                    c => c.UseXmlSerializer,
+                    expectedDefaultValue: true
+                );
         }
 
         [Theory]
@@ -105,15 +109,17 @@ namespace System.Net.Http.Formatting
             XmlMediaTypeFormatter xmlFormatter = new XmlSerializerMediaTypeFormatter();
             MemoryStream memoryStream = new MemoryStream();
             HttpContent content = new StringContent(String.Empty);
-            await Assert.Task.SucceedsAsync(
-                xmlFormatter.WriteToStreamAsync(
-                    type,
-                    null,
-                    memoryStream,
-                    content,
-                    transportContext: null
-                )
-            );
+            await Assert
+                .Task
+                .SucceedsAsync(
+                    xmlFormatter.WriteToStreamAsync(
+                        type,
+                        null,
+                        memoryStream,
+                        content,
+                        transportContext: null
+                    )
+                );
             memoryStream.Position = 0;
             string serializedString = new StreamReader(memoryStream).ReadToEnd();
             Assert.True(
@@ -132,15 +138,17 @@ namespace System.Net.Http.Formatting
             XmlSerializerMediaTypeFormatter xmlFormatter = new XmlSerializerMediaTypeFormatter();
             MemoryStream memoryStream = new MemoryStream();
             HttpContent content = new StringContent(String.Empty);
-            await Assert.Task.SucceedsAsync(
-                xmlFormatter.WriteToStreamAsync(
-                    typeof(SampleType),
-                    new SampleType(),
-                    memoryStream,
-                    content,
-                    transportContext: null
-                )
-            );
+            await Assert
+                .Task
+                .SucceedsAsync(
+                    xmlFormatter.WriteToStreamAsync(
+                        typeof(SampleType),
+                        new SampleType(),
+                        memoryStream,
+                        content,
+                        transportContext: null
+                    )
+                );
             memoryStream.Position = 0;
             string serializedString = new StreamReader(memoryStream).ReadToEnd();
             Assert.False(
@@ -166,15 +174,17 @@ namespace System.Net.Http.Formatting
             };
             MemoryStream memoryStream = new MemoryStream();
             HttpContent content = new StringContent(String.Empty);
-            await Assert.Task.SucceedsAsync(
-                xmlFormatter.WriteToStreamAsync(
-                    typeof(SampleType),
-                    new SampleType(),
-                    memoryStream,
-                    content,
-                    transportContext: null
-                )
-            );
+            await Assert
+                .Task
+                .SucceedsAsync(
+                    xmlFormatter.WriteToStreamAsync(
+                        typeof(SampleType),
+                        new SampleType(),
+                        memoryStream,
+                        content,
+                        transportContext: null
+                    )
+                );
             memoryStream.Position = 0;
             string serializedString = new StreamReader(memoryStream).ReadToEnd();
             Assert.True(

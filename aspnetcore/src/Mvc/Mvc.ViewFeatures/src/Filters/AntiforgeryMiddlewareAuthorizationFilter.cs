@@ -21,8 +21,10 @@ internal sealed partial class AntiforgeryMiddlewareAuthorizationFilter(
 
         if (context.HttpContext.Items.ContainsKey(AntiforgeryMiddlewareWithEndpointInvokedKey))
         {
-            var antiforgeryValidationFeature =
-                context.HttpContext.Features.Get<IAntiforgeryValidationFeature>();
+            var antiforgeryValidationFeature = context
+                .HttpContext
+                .Features
+                .Get<IAntiforgeryValidationFeature>();
             if (antiforgeryValidationFeature is { IsValid: false })
             {
                 Log.AntiforgeryTokenInvalid(

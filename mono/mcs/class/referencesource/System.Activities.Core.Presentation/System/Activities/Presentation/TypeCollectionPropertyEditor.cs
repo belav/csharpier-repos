@@ -27,10 +27,9 @@ namespace System.Activities.Presentation
 
         public TypeCollectionPropertyEditor()
         {
-            this.InlineEditorTemplate =
-                EditorCategoryTemplateDictionary.Instance.GetCategoryTemplate(
-                    "TypeCollection_InlineTemplate"
-                );
+            this.InlineEditorTemplate = EditorCategoryTemplateDictionary
+                .Instance
+                .GetCategoryTemplate("TypeCollection_InlineTemplate");
         }
 
         internal static T GetOptionValueOrUseDefault<T>(
@@ -72,9 +71,9 @@ namespace System.Activities.Presentation
 
             EditingContext context = ((IModelTreeItem)activityModelItem).ModelTreeManager.Context;
 
-            ModelItemCollection inputData = parentModelItem.Properties[
-                propertyValue.ParentProperty.PropertyName
-            ].Collection;
+            ModelItemCollection inputData = parentModelItem
+                .Properties[propertyValue.ParentProperty.PropertyName]
+                .Collection;
             IEnumerable<Type> rawInputData = inputData.GetCurrentValue() as IEnumerable<Type>;
             Fx.Assert(rawInputData != null, "rawInputData is null or is not IEnumerable<Type>.");
 

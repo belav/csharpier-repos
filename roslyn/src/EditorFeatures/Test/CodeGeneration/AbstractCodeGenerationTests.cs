@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
         {
             var projectId = ProjectId.CreateNewId();
 
-            var project = workspace.CurrentSolution
+            var project = workspace
+                .CurrentSolution
                 .AddProject(projectId, languageName, $"{languageName}.dll", languageName)
                 .GetRequiredProject(projectId);
 
@@ -43,7 +44,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                 root.WithAdditionalAnnotations(Simplifier.Annotation)
             );
 
-            var options = document.Project.Services
+            var options = document
+                .Project
+                .Services
                 .GetRequiredService<ISimplificationService>()
                 .DefaultOptions;
             var simplifiedDocument = Simplifier
@@ -96,7 +99,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
 
             if (cs != null || csSimple != null)
             {
-                var codeDefFactory = workspace.Services
+                var codeDefFactory = workspace
+                    .Services
                     .GetLanguageServices(LanguageNames.CSharp)
                     .GetRequiredService<SyntaxGenerator>();
 
@@ -131,7 +135,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
 
             if (vb != null || vbSimple != null)
             {
-                var codeDefFactory = workspace.Services
+                var codeDefFactory = workspace
+                    .Services
                     .GetLanguageServices(LanguageNames.VisualBasic)
                     .GetRequiredService<SyntaxGenerator>();
 

@@ -79,9 +79,15 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 ExtensionMethodImportCompletionCacheEntry,
                 object
             > GetCacheService(Project project) =>
-                project.Solution.Services.GetRequiredService<
-                    IImportCompletionCacheService<ExtensionMethodImportCompletionCacheEntry, object>
-                >();
+                project
+                    .Solution
+                    .Services
+                    .GetRequiredService<
+                        IImportCompletionCacheService<
+                            ExtensionMethodImportCompletionCacheEntry,
+                            object
+                        >
+                    >();
 
             private static string? GetPEReferenceCacheKey(
                 PortableExecutableReference peReference
@@ -202,9 +208,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 {
                     // If we are not force creating/updating the cache, an update task needs to be queued in background.
                     if (!forceCacheCreation)
-                        GetCacheService(_originatingDocument.Project).WorkQueue.AddWork(
-                            _originatingDocument.Project
-                        );
+                        GetCacheService(_originatingDocument.Project)
+                            .WorkQueue
+                            .AddWork(_originatingDocument.Project);
                 }
             }
 
@@ -330,10 +336,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 }
 
                 var filter = CreateAggregatedFilter(symbolInfo);
-                var internalsVisible =
-                    _originatingSemanticModel.Compilation.Assembly.IsSameAssemblyOrHasFriendAccessTo(
-                        assembly
-                    );
+                var internalsVisible = _originatingSemanticModel
+                    .Compilation
+                    .Assembly
+                    .IsSameAssemblyOrHasFriendAccessTo(assembly);
 
                 var matchingMethodSymbols = GetPotentialMatchingSymbolsFromAssembly(
                     assembly,

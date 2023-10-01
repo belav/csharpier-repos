@@ -29,35 +29,35 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
     var x = "Hello"
 }
 """;
-            await TestServices.SolutionExplorer.OpenFileAsync(
-                ProjectName,
-                @"Pages\\Index.razor",
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .SolutionExplorer
+                .OpenFileAsync(ProjectName, @"Pages\\Index.razor", HangMitigatingCancellationToken);
             await TestServices.Editor.SetTextAsync(source, HangMitigatingCancellationToken);
             await TestServices.SolutionExplorer.SaveAllAsync(HangMitigatingCancellationToken);
             await TestServices.SolutionExplorer.CloseActiveWindow(HangMitigatingCancellationToken);
 
-            await TestServices.SolutionExplorer.BuildSolutionAndWaitAsync(
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
-                new[]
-                {
-                    FeatureAttribute.Workspace,
-                    FeatureAttribute.SolutionCrawlerLegacy,
-                    FeatureAttribute.DiagnosticService,
-                    FeatureAttribute.ErrorSquiggles,
-                    FeatureAttribute.ErrorList
-                },
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .SolutionExplorer
+                .BuildSolutionAndWaitAsync(HangMitigatingCancellationToken);
+            await TestServices
+                .Workspace
+                .WaitForAllAsyncOperationsAsync(
+                    new[]
+                    {
+                        FeatureAttribute.Workspace,
+                        FeatureAttribute.SolutionCrawlerLegacy,
+                        FeatureAttribute.DiagnosticService,
+                        FeatureAttribute.ErrorSquiggles,
+                        FeatureAttribute.ErrorList
+                    },
+                    HangMitigatingCancellationToken
+                );
 
             await TestServices.ErrorList.ShowErrorListAsync(HangMitigatingCancellationToken);
 
-            var actualContents = await TestServices.ErrorList.GetErrorsAsync(
-                HangMitigatingCancellationToken
-            );
+            var actualContents = await TestServices
+                .ErrorList
+                .GetErrorsAsync(HangMitigatingCancellationToken);
 
             string[] expectedContents =
             {

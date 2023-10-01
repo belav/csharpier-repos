@@ -1120,10 +1120,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // If one incoming edge does not have a set of possible values for the temp,
                         // that means the temp can take on any value of its type.
                         if (
-                            existingState.RemainingValues.TryGetValue(
-                                dagTemp,
-                                out var existingValuesForTemp
-                            )
+                            existingState
+                                .RemainingValues
+                                .TryGetValue(dagTemp, out var existingValuesForTemp)
                         )
                         {
                             var newExistingValuesForTemp = existingValuesForTemp.Union(
@@ -1135,11 +1134,13 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (
                         existingState.RemainingValues.Count != newRemainingValues.Count
-                        || !existingState.RemainingValues.All(
-                            kv =>
-                                newRemainingValues.TryGetValue(kv.Key, out IValueSet? values)
-                                && kv.Value.Equals(values)
-                        )
+                        || !existingState
+                            .RemainingValues
+                            .All(
+                                kv =>
+                                    newRemainingValues.TryGetValue(kv.Key, out IValueSet? values)
+                                    && kv.Value.Equals(values)
+                            )
                     )
                     {
                         existingState.UpdateRemainingValues(newRemainingValues.ToImmutable());
@@ -1218,19 +1219,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                     switch (state.SelectedTest = state.ComputeSelectedTest())
                     {
                         case BoundDagAssignmentEvaluation e
-                            when state.RemainingValues.TryGetValue(
-                                e.Input,
-                                out IValueSet? currentValues
-                            ):
+                            when state
+                                .RemainingValues
+                                .TryGetValue(e.Input, out IValueSet? currentValues):
                             Debug.Assert(e.Input.IsEquivalentTo(e.Target));
                             // Update the target temp entry with current values. Note that even though we have determined that the two are the same,
                             // we don't need to update values for the current input. We will emit another assignment node with this temp as the target
                             // if apropos, which has the effect of flowing the remaining values from the other test in the analysis of subsequent states.
                             if (
-                                state.RemainingValues.TryGetValue(
-                                    e.Target,
-                                    out IValueSet? targetValues
-                                )
+                                state
+                                    .RemainingValues
+                                    .TryGetValue(e.Target, out IValueSet? targetValues)
                             )
                             {
                                 // Take the intersection of entries as we have ruled out any impossible
@@ -1432,16 +1431,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref bool foundExplicitNullTest
         )
         {
-            stateForCase.RemainingTests.Filter(
-                this,
-                test,
-                state,
-                whenTrueValues,
-                whenFalseValues,
-                out Tests whenTrueTests,
-                out Tests whenFalseTests,
-                ref foundExplicitNullTest
-            );
+            stateForCase
+                .RemainingTests
+                .Filter(
+                    this,
+                    test,
+                    state,
+                    whenTrueValues,
+                    whenFalseValues,
+                    out Tests whenTrueTests,
+                    out Tests whenFalseTests,
+                    ref foundExplicitNullTest
+                );
             whenTrue = stateForCase.WithRemainingTests(whenTrueTests);
             whenFalse = stateForCase.WithRemainingTests(whenFalseTests);
         }
@@ -2161,9 +2162,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                             + stateIdentifierMap[state]
                             + (isFail ? " FAIL" : "")
                     );
-                    var remainingValues = state.RemainingValues.Select(
-                        kvp => $"{tempName(kvp.Key)}:{kvp.Value}"
-                    );
+                    var remainingValues = state
+                        .RemainingValues
+                        .Select(kvp => $"{tempName(kvp.Key)}:{kvp.Value}");
                     result.AppendLine(
                         $"{(remainingValues.Any() ? " REMAINING " + string.Join(" ", remainingValues) : "")}"
                     );

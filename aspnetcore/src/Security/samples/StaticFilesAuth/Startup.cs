@@ -70,10 +70,12 @@ public class Startup
                                             userPath,
                                             StringComparison.OrdinalIgnoreCase
                                         )
-                                        || directory.FullName.StartsWith(
-                                            userPath + Path.DirectorySeparatorChar,
-                                            StringComparison.OrdinalIgnoreCase
-                                        );
+                                        || directory
+                                            .FullName
+                                            .StartsWith(
+                                                userPath + Path.DirectorySeparatorChar,
+                                                StringComparison.OrdinalIgnoreCase
+                                            );
                                 }
 
                                 throw new InvalidOperationException(

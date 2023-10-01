@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
         protected override ImmutableArray<PreviousPullResult>? GetPreviousResults(
             VSInternalWorkspaceDiagnosticsParams diagnosticsParams
         ) =>
-            diagnosticsParams.PreviousResults
+            diagnosticsParams
+                .PreviousResults
                 ?.Where(d => d.PreviousResultId != null)
                 .Select(d => new PreviousPullResult(d.PreviousResultId!, d.TextDocument!))
                 .ToImmutableArray();
@@ -131,8 +132,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
 
             static IEnumerable<Project?> GetProjectsInPriorityOrderWorker(Solution solution)
             {
-                var documentTrackingService =
-                    solution.Services.GetRequiredService<IDocumentTrackingService>();
+                var documentTrackingService = solution
+                    .Services
+                    .GetRequiredService<IDocumentTrackingService>();
 
                 // Collect all the documents from the solution in the order we'd like to get diagnostics for.  This will
                 // prioritize the files from currently active projects, but then also include all other docs in all projects
@@ -211,7 +213,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
 
             var solution = context.Solution;
             var enableDiagnosticsInSourceGeneratedFiles =
-                solution.Services
+                solution
+                    .Services
                     .GetService<ISolutionCrawlerOptionsService>()
                     ?.EnableDiagnosticsInSourceGeneratedFiles == true;
 
@@ -232,7 +235,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
                 if (!fullSolutionAnalysisEnabled)
                     return;
 
-                var documents = ImmutableArray<TextDocument>.Empty
+                var documents = ImmutableArray<TextDocument>
+                    .Empty
                     .AddRange(project.Documents)
                     .AddRange(project.AdditionalDocuments);
 

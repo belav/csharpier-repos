@@ -69,10 +69,12 @@ namespace System.Data.Services.Client
             {
                 if (null != this.Error)
                 {
-                    throw System.Data.Services.Client.Error.InvalidOperation(
-                        Strings.Context_BatchExecuteError,
-                        this.Error
-                    );
+                    throw System
+                        .Data
+                        .Services
+                        .Client
+                        .Error
+                        .InvalidOperation(Strings.Context_BatchExecuteError, this.Error);
                 }
 
                 return this.results;

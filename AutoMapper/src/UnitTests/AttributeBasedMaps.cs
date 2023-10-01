@@ -861,12 +861,14 @@ namespace AutoMapper.UnitTests
                 {
                     var childModels = _childModels.Where(x => x.Parent.Id == source).ToList();
                     return (List<ChildDto>)
-                        resolutionContext.Mapper.Map(
-                            childModels,
-                            destination,
-                            typeof(List<Child>),
-                            typeof(List<ChildDto>)
-                        );
+                        resolutionContext
+                            .Mapper
+                            .Map(
+                                childModels,
+                                destination,
+                                typeof(List<Child>),
+                                typeof(List<ChildDto>)
+                            );
                 }
             }
 
@@ -1062,7 +1064,8 @@ namespace AutoMapper.UnitTests
                 var source = new Source { Value = 15 };
                 Should
                     .Throw<AutoMapperMappingException>(() => Mapper.Map<IDest>(source))
-                    .Message.ShouldStartWith("Cannot create interface " + typeof(IDest).FullName);
+                    .Message
+                    .ShouldStartWith("Cannot create interface " + typeof(IDest).FullName);
             }
         }
     }

@@ -166,10 +166,9 @@ namespace ILLink.Shared.DataFlow
                     return otherEnumerableValues.Equals((TValue)_values);
                 }
 
-                return EqualityComparer<TValue>.Default.Equals(
-                    (TValue)_values,
-                    (TValue)other._values
-                );
+                return EqualityComparer<TValue>
+                    .Default
+                    .Equals((TValue)_values, (TValue)other._values);
             }
         }
 

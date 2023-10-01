@@ -193,12 +193,12 @@ namespace System.Web.ClientServices.Providers
             {
                 if (ConfigurationManager.ConnectionStrings[temp] != null)
                 {
-                    _ConnectionStringProvider = ConfigurationManager.ConnectionStrings[
-                        temp
-                    ].ProviderName;
-                    _ConnectionString = ConfigurationManager.ConnectionStrings[
-                        temp
-                    ].ConnectionString;
+                    _ConnectionStringProvider = ConfigurationManager
+                        .ConnectionStrings[temp]
+                        .ProviderName;
+                    _ConnectionString = ConfigurationManager
+                        .ConnectionStrings[temp]
+                        .ConnectionString;
                 }
                 else
                 {
@@ -233,12 +233,12 @@ namespace System.Web.ClientServices.Providers
                 {
                     if (ConfigurationManager.ConnectionStrings[temp] != null)
                     {
-                        _ConnectionStringProvider = ConfigurationManager.ConnectionStrings[
-                            temp
-                        ].ProviderName;
-                        _ConnectionString = ConfigurationManager.ConnectionStrings[
-                            temp
-                        ].ConnectionString;
+                        _ConnectionStringProvider = ConfigurationManager
+                            .ConnectionStrings[temp]
+                            .ProviderName;
+                        _ConnectionString = ConfigurationManager
+                            .ConnectionStrings[temp]
+                            .ConnectionString;
                     }
                     else
                     {

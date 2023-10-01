@@ -314,7 +314,8 @@ namespace System.ServiceModel.Discovery.Udp
                         nic =>
                             nic.SupportsMulticast
                             && nic.GetIPProperties()
-                                .MulticastAddresses.Any(mca => mca.Address.Equals(ip))
+                                .MulticastAddresses
+                                .Any(mca => mca.Address.Equals(ip))
                     );
                 int port = LocalAddress.Uri.Port;
                 if (isMulticast)
@@ -332,11 +333,13 @@ namespace System.ServiceModel.Discovery.Udp
             // FIXME: apply UdpTransportSetting here.
             var settings = binding_element.TransportSettings;
             if (settings.MulticastInterfaceId != null)
-                client.Client.SetSocketOption(
-                    SocketOptionLevel.Udp,
-                    SocketOptionName.MulticastInterface,
-                    settings.MulticastInterfaceId
-                );
+                client
+                    .Client
+                    .SetSocketOption(
+                        SocketOptionLevel.Udp,
+                        SocketOptionName.MulticastInterface,
+                        settings.MulticastInterfaceId
+                    );
         }
 
         Func<TimeSpan, Message> receive_delegate;

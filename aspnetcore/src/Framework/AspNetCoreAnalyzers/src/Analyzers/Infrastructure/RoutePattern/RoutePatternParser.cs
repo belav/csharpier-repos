@@ -242,9 +242,10 @@ internal partial struct RoutePatternParser
                             // e.g. {filename}.{ext?}
                             if (
                                 previousNode.Kind != RoutePatternKind.Literal
-                                || (
-                                    (RoutePatternLiteralNode)previousNode
-                                ).LiteralToken.Value!.ToString() != "."
+                                || ((RoutePatternLiteralNode)previousNode)
+                                    .LiteralToken
+                                    .Value!
+                                    .ToString() != "."
                             )
                             {
                                 var message =
@@ -311,8 +312,10 @@ internal partial struct RoutePatternParser
                                             parameterPart.Node;
                                         if (!parameterNameNode.ParameterNameToken.IsMissing)
                                         {
-                                            name =
-                                                parameterNameNode.ParameterNameToken.Value!.ToString();
+                                            name = parameterNameNode
+                                                .ParameterNameToken
+                                                .Value!
+                                                .ToString();
                                         }
                                         break;
                                     case RoutePatternKind.Optional:
@@ -324,8 +327,10 @@ internal partial struct RoutePatternParser
                                                 parameterPart.Node;
                                         if (!defaultValueNode.DefaultValueToken.IsMissing)
                                         {
-                                            defaultValue =
-                                                defaultValueNode.DefaultValueToken.Value!.ToString();
+                                            defaultValue = defaultValueNode
+                                                .DefaultValueToken
+                                                .Value!
+                                                .ToString();
                                         }
                                         break;
                                     case RoutePatternKind.CatchAll:
@@ -585,12 +590,14 @@ internal partial struct RoutePatternParser
             {
                 ConsumeCurrentToken();
 
-                replacementToken = replacementToken.Value.AddDiagnosticIfNone(
-                    new EmbeddedDiagnostic(
-                        Resources.AttributeRoute_TokenReplacement_EmptyTokenNotAllowed,
-                        _currentToken.GetFullSpan()!.Value
-                    )
-                );
+                replacementToken = replacementToken
+                    .Value
+                    .AddDiagnosticIfNone(
+                        new EmbeddedDiagnostic(
+                            Resources.AttributeRoute_TokenReplacement_EmptyTokenNotAllowed,
+                            _currentToken.GetFullSpan()!.Value
+                        )
+                    );
             }
         }
 

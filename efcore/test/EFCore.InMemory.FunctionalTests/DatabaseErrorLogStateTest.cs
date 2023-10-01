@@ -28,9 +28,9 @@ public class DatabaseErrorLogStateTest
             .BuildServiceProvider(validateScopes: true);
 
         using var context = new BloggingContext(serviceProvider);
-        context.Blogs.Add(
-            new BloggingContext.Blog(jimSaysThrow: false) { Url = "http://sample.com" }
-        );
+        context
+            .Blogs
+            .Add(new BloggingContext.Blog(jimSaysThrow: false) { Url = "http://sample.com" });
         context.SaveChanges();
         context.ChangeTracker.Entries().Single().State = EntityState.Added;
 
@@ -51,10 +51,9 @@ public class DatabaseErrorLogStateTest
         );
         Assert.EndsWith(
             ex.ToString(),
-            loggerFactory.Logger.LastDatabaseErrorFormatter(
-                loggerFactory.Logger.LastDatabaseErrorState,
-                ex
-            )
+            loggerFactory
+                .Logger
+                .LastDatabaseErrorFormatter(loggerFactory.Logger.LastDatabaseErrorState, ex)
         );
     }
 
@@ -121,10 +120,9 @@ public class DatabaseErrorLogStateTest
         );
         Assert.EndsWith(
             ex.ToString(),
-            loggerFactory.Logger.LastDatabaseErrorFormatter(
-                loggerFactory.Logger.LastDatabaseErrorState,
-                ex
-            )
+            loggerFactory
+                .Logger
+                .LastDatabaseErrorFormatter(loggerFactory.Logger.LastDatabaseErrorState, ex)
         );
     }
 

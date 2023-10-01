@@ -57,15 +57,17 @@ namespace System
             );
             if (firstLiteral.IndexOf(UriTemplate.WildcardPath, StringComparison.Ordinal) != -1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new FormatException(
-                        SR.GetString(
-                            SR.UTInvalidWildcardInVariableOrLiteral,
-                            template.originalTemplate,
-                            UriTemplate.WildcardPath
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new FormatException(
+                            SR.GetString(
+                                SR.UTInvalidWildcardInVariableOrLiteral,
+                                template.originalTemplate,
+                                UriTemplate.WildcardPath
+                            )
                         )
-                    )
-                );
+                    );
             }
             UriTemplateCompoundPathSegment result = new UriTemplateCompoundPathSegment(
                 origSegment,
@@ -81,11 +83,13 @@ namespace System
                 int nextVarEnd = segment.IndexOf("}", nextVarStart + 1, StringComparison.Ordinal);
                 if (nextVarEnd < nextVarStart + 2)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new FormatException(
-                            SR.GetString(SR.UTInvalidFormatSegmentOrQueryPart, segment)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new FormatException(
+                                SR.GetString(SR.UTInvalidFormatSegmentOrQueryPart, segment)
+                            )
+                        );
                 }
                 bool hasDefault;
                 string varName = template.AddPathVariable(
@@ -95,16 +99,18 @@ namespace System
                 );
                 if (hasDefault)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.UTDefaultValueToCompoundSegmentVar,
-                                template,
-                                origSegment,
-                                varName
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.UTDefaultValueToCompoundSegmentVar,
+                                    template,
+                                    origSegment,
+                                    varName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 nextVarStart = segment.IndexOf("{", nextVarEnd + 1, StringComparison.Ordinal);
                 string literal;
@@ -112,14 +118,16 @@ namespace System
                 {
                     if (nextVarStart == nextVarEnd + 1)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                            "template",
-                            SR.GetString(
-                                SR.UTDoesNotSupportAdjacentVarsInCompoundSegment,
-                                template,
-                                segment
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperArgument(
+                                "template",
+                                SR.GetString(
+                                    SR.UTDoesNotSupportAdjacentVarsInCompoundSegment,
+                                    template,
+                                    segment
+                                )
+                            );
                     }
                     literal = segment.Substring(nextVarEnd + 1, nextVarStart - nextVarEnd - 1);
                 }
@@ -133,30 +141,40 @@ namespace System
                 }
                 if (literal.IndexOf(UriTemplate.WildcardPath, StringComparison.Ordinal) != -1)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new FormatException(
-                            SR.GetString(
-                                SR.UTInvalidWildcardInVariableOrLiteral,
-                                template.originalTemplate,
-                                UriTemplate.WildcardPath
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new FormatException(
+                                SR.GetString(
+                                    SR.UTInvalidWildcardInVariableOrLiteral,
+                                    template.originalTemplate,
+                                    UriTemplate.WildcardPath
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 if (literal.IndexOf('}') != -1)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new FormatException(
-                            SR.GetString(SR.UTInvalidFormatSegmentOrQueryPart, segment)
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new FormatException(
+                                SR.GetString(SR.UTInvalidFormatSegmentOrQueryPart, segment)
+                            )
+                        );
+                }
+                result
+                    .varLitPairs
+                    .Add(
+                        new VarAndLitPair(
+                            varName,
+                            (
+                                (literal == string.Empty)
+                                    ? string.Empty
+                                    : Uri.UnescapeDataString(literal)
+                            )
                         )
                     );
-                }
-                result.varLitPairs.Add(
-                    new VarAndLitPair(
-                        varName,
-                        ((literal == string.Empty) ? string.Empty : Uri.UnescapeDataString(literal))
-                    )
-                );
             } while (nextVarStart > 0);
 
             if (string.IsNullOrEmpty(result.firstLiteral))
@@ -226,10 +244,9 @@ namespace System
                 return false;
             }
             if (
-                StringComparer.OrdinalIgnoreCase.Compare(
-                    this.firstLiteral,
-                    otherAsCompound.firstLiteral
-                ) != 0
+                StringComparer
+                    .OrdinalIgnoreCase
+                    .Compare(this.firstLiteral, otherAsCompound.firstLiteral) != 0
             )
             {
                 return false;
@@ -237,10 +254,12 @@ namespace System
             for (int pairIndex = 0; pairIndex < this.varLitPairs.Count; pairIndex++)
             {
                 if (
-                    StringComparer.OrdinalIgnoreCase.Compare(
-                        this.varLitPairs[pairIndex].Literal,
-                        otherAsCompound.varLitPairs[pairIndex].Literal
-                    ) != 0
+                    StringComparer
+                        .OrdinalIgnoreCase
+                        .Compare(
+                            this.varLitPairs[pairIndex].Literal,
+                            otherAsCompound.varLitPairs[pairIndex].Literal
+                        ) != 0
                 )
                 {
                     return false;
@@ -267,9 +286,11 @@ namespace System
             if (!TryLookup(segment, boundParameters))
             {
                 Fx.Assert("How can that be? Lookup is expected to be called after IsMatch");
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.UTCSRLookupBeforeMatch))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.UTCSRLookupBeforeMatch))
+                    );
             }
         }
 

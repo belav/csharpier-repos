@@ -110,7 +110,8 @@ namespace System.Text.Encodings.Web.Tests
             string[] allLines = new StreamReader(
                 typeof(UnicodeHelpersTests)
                     .GetTypeInfo()
-                    .Assembly.GetManifestResourceStream(UnicodeDataFileName)
+                    .Assembly
+                    .GetManifestResourceStream(UnicodeDataFileName)
             ).ReadAllLines();
 
             uint startSpanCodepoint = 0;

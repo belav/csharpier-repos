@@ -28,7 +28,8 @@ namespace AppHost.Bundle.Tests
             RunTheApp(path, selfContained ? null : RepoDirectoriesProvider.Default.BuiltDotnet)
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Wow! We now say hello to the big world and you.");
+                .And
+                .HaveStdOutContaining("Wow! We now say hello to the big world and you.");
         }
 
         private CommandResult RunTheApp(string path, string dotnetRoot)
@@ -82,11 +83,14 @@ namespace AppHost.Bundle.Tests
                 RunTheApp(singleFile, dotnet.BinPath)
                     .Should()
                     .Fail()
-                    .And.HaveStdErrContaining(
+                    .And
+                    .HaveStdErrContaining(
                         "You must install or update .NET to run this application."
                     )
-                    .And.HaveStdErrContaining("App host version:")
-                    .And.HaveStdErrContaining("apphost_version=");
+                    .And
+                    .HaveStdErrContaining("App host version:")
+                    .And
+                    .HaveStdErrContaining("apphost_version=");
             }
         }
 
@@ -105,9 +109,10 @@ namespace AppHost.Bundle.Tests
             using (new TestArtifact(dotnetWithMockHostFxr))
             {
                 Directory.CreateDirectory(dotnetWithMockHostFxr);
-                string expectedErrorCode = Constants.ErrorCode.BundleExtractionFailure.ToString(
-                    "x"
-                );
+                string expectedErrorCode = Constants
+                    .ErrorCode
+                    .BundleExtractionFailure
+                    .ToString("x");
 
                 var dotnetBuilder = new DotNetBuilder(
                     dotnetWithMockHostFxr,
@@ -132,11 +137,14 @@ namespace AppHost.Bundle.Tests
                     .WaitForExit(true)
                     .Should()
                     .Fail()
-                    .And.HaveStdErrContaining("Bundle header version compatibility check failed.")
-                    .And.HaveStdErrContaining(
+                    .And
+                    .HaveStdErrContaining("Bundle header version compatibility check failed.")
+                    .And
+                    .HaveStdErrContaining(
                         $"Showing error dialog for application: '{Path.GetFileName(singleFile)}' - error code: 0x{expectedErrorCode}"
                     )
-                    .And.HaveStdErrContaining("apphost_version=");
+                    .And
+                    .HaveStdErrContaining("apphost_version=");
             }
         }
 
@@ -180,10 +188,9 @@ namespace AppHost.Bundle.Tests
         [Theory]
         public void FrameworkDependent_Targeting50(BundleOptions options)
         {
-            var singleFile = sharedTestState.FrameworkDependentApp.Bundle(
-                options,
-                new Version(5, 0)
-            );
+            var singleFile = sharedTestState
+                .FrameworkDependentApp
+                .Bundle(options, new Version(5, 0));
 
             // Run the bundled app
             RunTheApp(singleFile, selfContained: false);

@@ -99,7 +99,8 @@ namespace Newtonsoft.Json.Tests.Schema
             Assert.AreEqual(3, node.Properties["secondproperty"].Schemas.Count);
             Assert.AreEqual(
                 3,
-                node.Properties["secondproperty"].Properties["secondproperty_firstproperty"]
+                node.Properties["secondproperty"]
+                    .Properties["secondproperty_firstproperty"]
                     .Schemas
                     .Count
             );

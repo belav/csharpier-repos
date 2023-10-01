@@ -441,7 +441,8 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
                 n => semanticModel.LookupSymbols(position, name: n).IsEmpty
             );
 
-            var capturedTypeParameters = tupleType.TupleElements
+            var capturedTypeParameters = tupleType
+                .TupleElements
                 .Select(p => p.Type)
                 .SelectMany(t => t.GetReferencedTypeParameters())
                 .Distinct()
@@ -733,9 +734,9 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
                 .ToSet();
 
             using var _ = ArrayBuilder<DocumentToUpdate>.GetInstance(out var result);
-            var tupleFieldNames = tupleType.TupleElements.SelectAsArray<IFieldSymbol, string>(
-                f => f.Name
-            );
+            var tupleFieldNames = tupleType
+                .TupleElements
+                .SelectAsArray<IFieldSymbol, string>(f => f.Name);
 
             foreach (var project in allProjects)
             {
@@ -760,9 +761,9 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
         )
         {
             using var _ = ArrayBuilder<DocumentToUpdate>.GetInstance(out var result);
-            var tupleFieldNames = tupleType.TupleElements.SelectAsArray<IFieldSymbol, string>(
-                f => f.Name
-            );
+            var tupleFieldNames = tupleType
+                .TupleElements
+                .SelectAsArray<IFieldSymbol, string>(f => f.Name);
 
             await AddDocumentsToUpdateForProjectAsync(
                     project,
@@ -1397,7 +1398,8 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
             IMethodSymbol constructor
         )
         {
-            var assignments = tupleType.TupleElements
+            var assignments = tupleType
+                .TupleElements
                 .Select(
                     (field, index) =>
                         generator.ExpressionStatement(
@@ -1421,14 +1423,16 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
                 explicitInterfaceImplementations: default,
                 WellKnownMemberNames.DeconstructMethodName,
                 typeParameters: default,
-                constructor.Parameters.SelectAsArray(
-                    p =>
-                        CodeGenerationSymbolFactory.CreateParameterSymbol(
-                            RefKind.Out,
-                            p.Type,
-                            p.Name
-                        )
-                ),
+                constructor
+                    .Parameters
+                    .SelectAsArray(
+                        p =>
+                            CodeGenerationSymbolFactory.CreateParameterSymbol(
+                                RefKind.Out,
+                                p.Type,
+                                p.Name
+                            )
+                    ),
                 assignments
             );
         }
@@ -1443,9 +1447,12 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
             const string ValueName = "value";
 
             var valueNode = generator.IdentifierName(ValueName);
-            var arguments = tupleType.TupleElements.SelectAsArray<IFieldSymbol, SyntaxNode>(
-                field => generator.Argument(generator.MemberAccessExpression(valueNode, field.Name))
-            );
+            var arguments = tupleType
+                .TupleElements
+                .SelectAsArray<IFieldSymbol, SyntaxNode>(
+                    field =>
+                        generator.Argument(generator.MemberAccessExpression(valueNode, field.Name))
+                );
 
             var convertToTupleStatement = generator.ReturnStatement(
                 generator.TupleExpression(arguments)

@@ -131,9 +131,9 @@ namespace System.ServiceModel.Security
         {
             if (securityTokenHandlerCollection == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "securityTokenHandlerCollection"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("securityTokenHandlerCollection");
             }
 
             _scVersion = secureConversationVersion;
@@ -251,13 +251,15 @@ namespace System.ServiceModel.Security
                                 != _scVersion.Namespace.Value
                             )
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperInvalidOperation(
-                                    SR.GetString(
-                                        SR.ID4053,
-                                        sessionToken.SecureConversationVersion,
-                                        _scVersion
-                                    )
-                                );
+                                throw DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperInvalidOperation(
+                                        SR.GetString(
+                                            SR.ID4053,
+                                            sessionToken.SecureConversationVersion,
+                                            _scVersion
+                                        )
+                                    );
                             }
 
                             return SecurityContextSecurityTokenHelper.ConvertSessionTokenToSecurityContextSecurityToken(
@@ -412,10 +414,9 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperXml(
-                    reader,
-                    SR.GetString(SR.ID4192)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperXml(reader, SR.GetString(SR.ID4192));
             }
         }
 
@@ -457,9 +458,9 @@ namespace System.ServiceModel.Security
         {
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "keyIdentifierClause"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("keyIdentifierClause");
             }
 
             foreach (SecurityTokenHandler securityTokenHandler in _securityTokenHandlers)
@@ -535,9 +536,9 @@ namespace System.ServiceModel.Security
 
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "keyIdentifierClause"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("keyIdentifierClause");
             }
 
             try

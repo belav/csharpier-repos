@@ -26,10 +26,9 @@
                 };
 
                 // bind and propagate the values
-                IModelBinder propertyBinder = bindingContext.ModelBinderProviders.GetBinder(
-                    modelBindingExecutionContext,
-                    propertyBindingContext
-                );
+                IModelBinder propertyBinder = bindingContext
+                    .ModelBinderProviders
+                    .GetBinder(modelBindingExecutionContext, propertyBindingContext);
                 if (propertyBinder != null)
                 {
                     if (

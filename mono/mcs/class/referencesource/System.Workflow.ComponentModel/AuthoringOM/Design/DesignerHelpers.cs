@@ -2782,12 +2782,22 @@ namespace System.Workflow.ComponentModel.Design
                             {
                                 string rulesText =
                                     (expression != null)
-                                        ? expressionPropertyDescriptor.Converter.ConvertTo(
-                                            new TypeDescriptorContext(activity.Site, null, value),
-                                            System.Threading.Thread.CurrentThread.CurrentUICulture,
-                                            expression,
-                                            typeof(string)
-                                        ) as string
+                                        ? expressionPropertyDescriptor
+                                            .Converter
+                                            .ConvertTo(
+                                                new TypeDescriptorContext(
+                                                    activity.Site,
+                                                    null,
+                                                    value
+                                                ),
+                                                System
+                                                    .Threading
+                                                    .Thread
+                                                    .CurrentThread
+                                                    .CurrentUICulture,
+                                                expression,
+                                                typeof(string)
+                                            ) as string
                                         : null;
                                 if (rulesText == null)
                                     rulesText = string.Empty;

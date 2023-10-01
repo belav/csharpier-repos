@@ -500,9 +500,9 @@ namespace System.Workflow.Activities
                                 prop = new ParameterInfoBasedPropertyDescriptor(
                                     typeof(InvokeWebServiceActivity),
                                     paramInfo,
-                                    InvokeWebServiceActivity.ReservedParameterNames.Contains(
-                                        paramInfo.Name
-                                    ),
+                                    InvokeWebServiceActivity
+                                        .ReservedParameterNames
+                                        .Contains(paramInfo.Name),
                                     DesignOnlyAttribute.Yes
                                 );
 
@@ -590,17 +590,17 @@ namespace System.Workflow.Activities
                             if (invokeWebService.ParameterBindings.Contains(paramName))
                             {
                                 if (
-                                    invokeWebService.ParameterBindings[paramName].IsBindingSet(
-                                        WorkflowParameterBinding.ValueProperty
-                                    )
+                                    invokeWebService
+                                        .ParameterBindings[paramName]
+                                        .IsBindingSet(WorkflowParameterBinding.ValueProperty)
                                 )
-                                    paramValue = invokeWebService.ParameterBindings[
-                                        paramName
-                                    ].GetBinding(WorkflowParameterBinding.ValueProperty);
+                                    paramValue = invokeWebService
+                                        .ParameterBindings[paramName]
+                                        .GetBinding(WorkflowParameterBinding.ValueProperty);
                                 else
-                                    paramValue = invokeWebService.ParameterBindings[
-                                        paramName
-                                    ].GetValue(WorkflowParameterBinding.ValueProperty);
+                                    paramValue = invokeWebService
+                                        .ParameterBindings[paramName]
+                                        .GetValue(WorkflowParameterBinding.ValueProperty);
                             }
                             if (
                                 !invokeWebService.ParameterBindings.Contains(paramName)
@@ -610,9 +610,9 @@ namespace System.Workflow.Activities
                                 ValidationError validationError =
                                     ValidationError.GetNotSetValidationError(paramName);
                                 if (
-                                    InvokeWebServiceActivity.ReservedParameterNames.Contains(
-                                        paramName
-                                    )
+                                    InvokeWebServiceActivity
+                                        .ReservedParameterNames
+                                        .Contains(paramName)
                                 )
                                     validationError.PropertyName =
                                         ParameterInfoBasedPropertyDescriptor.GetParameterPropertyName(
@@ -648,9 +648,9 @@ namespace System.Workflow.Activities
                                         )
                                     );
                                 if (
-                                    InvokeWebServiceActivity.ReservedParameterNames.Contains(
-                                        paramName
-                                    )
+                                    InvokeWebServiceActivity
+                                        .ReservedParameterNames
+                                        .Contains(paramName)
                                 )
                                 {
                                     foreach (ValidationError validationError in variableErrors)

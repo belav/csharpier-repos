@@ -28,14 +28,16 @@ public class ByteArrayColumns : IntegrationTest<ByteArrayColumns.DatabaseInitial
     {
         protected override void Seed(Context context)
         {
-            context.Customers.Add(
-                new Customer
-                {
-                    FirstName = "Bob",
-                    LastName = "Smith",
-                    RowVersion = new byte[] { 1, 2, 3 }
-                }
-            );
+            context
+                .Customers
+                .Add(
+                    new Customer
+                    {
+                        FirstName = "Bob",
+                        LastName = "Smith",
+                        RowVersion = new byte[] { 1, 2, 3 }
+                    }
+                );
 
             base.Seed(context);
         }

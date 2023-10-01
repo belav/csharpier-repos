@@ -7705,9 +7705,9 @@ static class Program
                 new[] { source, s_collectionExtensions },
                 symbolValidator: module =>
                 {
-                    var synthesizedType = module.GlobalNamespace.GetTypeMember(
-                        "<>z__ReadOnlyArray"
-                    );
+                    var synthesizedType = module
+                        .GlobalNamespace
+                        .GetTypeMember("<>z__ReadOnlyArray");
                     Assert.Equal("<>z__ReadOnlyArray<T>", synthesizedType.ToTestDisplayString());
                     Assert.Equal("<>z__ReadOnlyArray`1", synthesizedType.MetadataName);
                 },
@@ -8310,14 +8310,15 @@ static class Program
             var sourceType = ((CSharpCompilation)verifier.Compilation).GetMember<NamedTypeSymbol>(
                 "ReadOnlyArray"
             );
-            verifier.TestData.TryGetMethodData(
-                "<>z__ReadOnlyArray<T>..ctor(T[])",
-                out var arrayMemberData
-            );
-            verifier.TestData.TryGetMethodData(
-                "<>z__ReadOnlyList<T>..ctor(System.Collections.Generic.List<T>)",
-                out var listMemberData
-            );
+            verifier
+                .TestData
+                .TryGetMethodData("<>z__ReadOnlyArray<T>..ctor(T[])", out var arrayMemberData);
+            verifier
+                .TestData
+                .TryGetMethodData(
+                    "<>z__ReadOnlyList<T>..ctor(System.Collections.Generic.List<T>)",
+                    out var listMemberData
+                );
 
             compareTypes(sourceType, ((MethodSymbol)arrayMemberData.Method).ContainingType);
             compareTypes(sourceType, ((MethodSymbol)listMemberData.Method).ContainingType);
@@ -10238,7 +10239,8 @@ partial class Program
                 comp,
                 symbolValidator: module =>
                 {
-                    var type = module.GlobalNamespace
+                    var type = module
+                        .GlobalNamespace
                         .GetTypeMembers("<>y__InlineArray3")
                         .SingleOrDefault();
                     if (targetFramework == TargetFramework.Net80)
@@ -10378,7 +10380,8 @@ partial class Program
                 comp,
                 symbolValidator: module =>
                 {
-                    var type = module.GlobalNamespace
+                    var type = module
+                        .GlobalNamespace
                         .GetTypeMembers("<>y__InlineArray3")
                         .SingleOrDefault();
                     Assert.Null(type);
@@ -10535,7 +10538,8 @@ partial class Program
 
             static ImmutableArray<string> getInlineArrayTypeNames(ModuleSymbol module)
             {
-                return module.GlobalNamespace
+                return module
+                    .GlobalNamespace
                     .GetTypeMembers()
                     .WhereAsArray(t => t.Name.StartsWith("<>y__InlineArray"))
                     .SelectAsArray(t => t.Name);
@@ -16258,9 +16262,9 @@ partial class Program
                 {
                     if (targetFramework == TargetFramework.Net80)
                     {
-                        var synthesizedType = module.GlobalNamespace.GetTypeMember(
-                            "<>y__InlineArray1"
-                        );
+                        var synthesizedType = module
+                            .GlobalNamespace
+                            .GetTypeMember("<>y__InlineArray1");
                         Assert.Equal("<>y__InlineArray1<T>", synthesizedType.ToTestDisplayString());
                         Assert.Equal("<>y__InlineArray1`1", synthesizedType.MetadataName);
                     }

@@ -110,22 +110,30 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             if (tag.HasSameClassAndValue(Asn1Tag.Sequence))
             {
                 System.Security.Cryptography.Pkcs.Asn1.KeyTransRecipientInfoAsn tmpKtri;
-                System.Security.Cryptography.Pkcs.Asn1.KeyTransRecipientInfoAsn.Decode(
-                    ref reader,
-                    rebind,
-                    out tmpKtri
-                );
+                System
+                    .Security
+                    .Cryptography
+                    .Pkcs
+                    .Asn1
+                    .KeyTransRecipientInfoAsn
+                    .Decode(ref reader, rebind, out tmpKtri);
                 decoded.Ktri = tmpKtri;
             }
             else if (tag.HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 1)))
             {
                 System.Security.Cryptography.Pkcs.Asn1.KeyAgreeRecipientInfoAsn tmpKari;
-                System.Security.Cryptography.Pkcs.Asn1.KeyAgreeRecipientInfoAsn.Decode(
-                    ref reader,
-                    new Asn1Tag(TagClass.ContextSpecific, 1),
-                    rebind,
-                    out tmpKari
-                );
+                System
+                    .Security
+                    .Cryptography
+                    .Pkcs
+                    .Asn1
+                    .KeyAgreeRecipientInfoAsn
+                    .Decode(
+                        ref reader,
+                        new Asn1Tag(TagClass.ContextSpecific, 1),
+                        rebind,
+                        out tmpKari
+                    );
                 decoded.Kari = tmpKari;
             }
             else

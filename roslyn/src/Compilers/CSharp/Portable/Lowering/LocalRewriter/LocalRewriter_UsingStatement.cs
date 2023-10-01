@@ -642,12 +642,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 Debug.Assert(expression == null);
                 Debug.Assert(
-                    method.Parameters.AsSpan()[1..].All(
-                        assertParametersAreOptional,
-                        (p, assertOptional) =>
-                            (p.IsOptional || p.IsParams || !assertOptional)
-                            && p.RefKind == RefKind.None
-                    )
+                    method
+                        .Parameters
+                        .AsSpan()[1..]
+                        .All(
+                            assertParametersAreOptional,
+                            (p, assertOptional) =>
+                                (p.IsOptional || p.IsParams || !assertOptional)
+                                && p.RefKind == RefKind.None
+                        )
                 );
                 Debug.Assert(
                     method.ParameterRefKinds.IsDefaultOrEmpty
@@ -667,14 +670,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             Debug.Assert(
-                methodArgumentInfo.Arguments.All(
-                    arg =>
-                        arg
-                            is not BoundConversion
-                            {
-                                ConversionKind: ConversionKind.InterpolatedStringHandler
-                            }
-                )
+                methodArgumentInfo
+                    .Arguments
+                    .All(
+                        arg =>
+                            arg
+                                is not BoundConversion
+                                {
+                                    ConversionKind: ConversionKind.InterpolatedStringHandler
+                                }
+                    )
             );
 #endif
 

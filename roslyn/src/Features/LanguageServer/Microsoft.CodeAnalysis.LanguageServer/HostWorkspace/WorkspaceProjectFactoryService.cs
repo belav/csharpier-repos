@@ -58,8 +58,9 @@ internal class WorkspaceProjectFactoryService
             _workspaceFactory.ProjectSystemProjectFactory.SolutionPath = solutionPath;
         }
 
-        var project =
-            await _workspaceFactory.ProjectSystemProjectFactory.CreateAndAddToWorkspaceAsync(
+        var project = await _workspaceFactory
+            .ProjectSystemProjectFactory
+            .CreateAndAddToWorkspaceAsync(
                 creationInfo.DisplayName,
                 creationInfo.Language,
                 new Workspaces.ProjectSystem.ProjectSystemProjectCreationInfo

@@ -53,9 +53,9 @@ namespace Mono.Linker.Tests.TestCasesRunner
         )
         {
             builder.AddOutputDirectory(
-                sandbox.OutputDirectory.Combine(
-                    compilationResult.InputAssemblyPath.FileNameWithoutExtension + ".obj"
-                )
+                sandbox
+                    .OutputDirectory
+                    .Combine(compilationResult.InputAssemblyPath.FileNameWithoutExtension + ".obj")
             );
         }
 

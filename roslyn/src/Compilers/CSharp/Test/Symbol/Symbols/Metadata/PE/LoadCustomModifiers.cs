@@ -91,9 +91,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 
             Assert.Equal(
                 "System.Int32 modopt(System.Int32) modopt(System.Runtime.CompilerServices.IsConst) modopt(System.Runtime.CompilerServices.IsConst) p",
-                modifiers.GetMembers("F3").OfType<MethodSymbol>().Single().Parameters[
-                    0
-                ].ToTestDisplayString()
+                modifiers
+                    .GetMembers("F3")
+                    .OfType<MethodSymbol>()
+                    .Single()
+                    .Parameters[0]
+                    .ToTestDisplayString()
             );
 
             Assert.Equal(
@@ -177,10 +180,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                     {
                         //use a comparer that checks both return type and custom modifiers
                         Assert.False(
-                            MemberSignatureComparer.RuntimeImplicitImplementationComparer.Equals(
-                                method1,
-                                method2
-                            )
+                            MemberSignatureComparer
+                                .RuntimeImplicitImplementationComparer
+                                .Equals(method1, method2)
                         );
                     }
                 }
@@ -212,8 +214,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(TypeKind.Array, propertyType.TypeKind);
 
             var arrayPropertyType = (ArrayTypeSymbol)propertyType;
-            var arrayPropertyTypeCustomModifiers =
-                arrayPropertyType.ElementTypeWithAnnotations.CustomModifiers.Single();
+            var arrayPropertyTypeCustomModifiers = arrayPropertyType
+                .ElementTypeWithAnnotations
+                .CustomModifiers
+                .Single();
             Assert.Equal(
                 "System.Runtime.CompilerServices.IsConst",
                 arrayPropertyTypeCustomModifiers.Modifier.ToTestDisplayString()

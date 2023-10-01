@@ -827,10 +827,12 @@ namespace System.Workflow.ComponentModel.Design
                         if (
                             activityDesigner == null
                             || activityDesigner.ParentDesigner == null
-                            || !activityDesigner.ParentDesigner.CanMoveActivities(
-                                moveLocation,
-                                new List<Activity>(new Activity[] { activity }).AsReadOnly()
-                            )
+                            || !activityDesigner
+                                .ParentDesigner
+                                .CanMoveActivities(
+                                    moveLocation,
+                                    new List<Activity>(new Activity[] { activity }).AsReadOnly()
+                                )
                         )
                         {
                             dropIndex = -1;

@@ -56,9 +56,10 @@ namespace System.Data.Odbc
         private long _sequentialBytesRead;
 
         private static int _objectTypeCount; // Bid counter
-        internal readonly int ObjectID = System.Threading.Interlocked.Increment(
-            ref _objectTypeCount
-        );
+        internal readonly int ObjectID = System
+            .Threading
+            .Interlocked
+            .Increment(ref _objectTypeCount);
 
         // the statement handle here is just a copy of the statement handle owned by the command
         // the DataReader must not free the statement handle. this is done by the command

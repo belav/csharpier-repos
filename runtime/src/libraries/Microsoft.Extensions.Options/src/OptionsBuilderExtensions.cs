@@ -34,7 +34,8 @@ namespace Microsoft.Extensions.DependencyInjection
             ThrowHelper.ThrowIfNull(optionsBuilder);
 
             optionsBuilder.Services.AddTransient<IStartupValidator, StartupValidator>();
-            optionsBuilder.Services
+            optionsBuilder
+                .Services
                 .AddOptions<StartupValidatorOptions>()
                 .Configure<IOptionsMonitor<TOptions>>(
                     (vo, options) =>

@@ -434,7 +434,8 @@ public class Http2StreamTests : Http2TestBase
         {
             context.Response.Headers["path"] = context.Request.Path.Value;
             context.Response.Headers["query"] = context.Request.QueryString.Value;
-            context.Response.Headers["rawtarget"] = context.Features
+            context.Response.Headers["rawtarget"] = context
+                .Features
                 .Get<IHttpRequestFeature>()
                 .RawTarget;
             return Task.CompletedTask;
@@ -1196,10 +1197,10 @@ public class Http2StreamTests : Http2TestBase
             var readResult = await context.Request.BodyReader.ReadAsync();
             while (!readResult.IsCompleted)
             {
-                context.Request.BodyReader.AdvanceTo(
-                    readResult.Buffer.Start,
-                    readResult.Buffer.End
-                );
+                context
+                    .Request
+                    .BodyReader
+                    .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                 readResult = await context.Request.BodyReader.ReadAsync();
             }
 
@@ -1530,10 +1531,10 @@ public class Http2StreamTests : Http2TestBase
             var readResult = await context.Request.BodyReader.ReadAsync();
             while (!readResult.IsCompleted)
             {
-                context.Request.BodyReader.AdvanceTo(
-                    readResult.Buffer.Start,
-                    readResult.Buffer.End
-                );
+                context
+                    .Request
+                    .BodyReader
+                    .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                 readResult = await context.Request.BodyReader.ReadAsync();
             }
 
@@ -1610,9 +1611,11 @@ public class Http2StreamTests : Http2TestBase
         Assert.Contains(
             LogMessages,
             m =>
-                m.Exception?.Message.Contains(
-                    "Response Content-Length mismatch: too many bytes written (12 of 11)."
-                ) ?? false
+                m.Exception
+                    ?.Message
+                    .Contains(
+                        "Response Content-Length mismatch: too many bytes written (12 of 11)."
+                    ) ?? false
         );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
@@ -3079,10 +3082,12 @@ public class Http2StreamTests : Http2TestBase
         await InitializeConnectionAsync(async context =>
         {
             await context.Response.WriteAsync("Hello World");
-            context.Response.AppendTrailer(
-                "too_long",
-                new string('a', (int)Http2PeerSettings.DefaultMaxFrameSize)
-            );
+            context
+                .Response
+                .AppendTrailer(
+                    "too_long",
+                    new string('a', (int)Http2PeerSettings.DefaultMaxFrameSize)
+                );
         });
 
         await StartStreamAsync(1, _browserRequestHeaders, endStream: true);
@@ -3366,15 +3371,17 @@ public class Http2StreamTests : Http2TestBase
             var streamIdFeature = context.Features.Get<IHttp2StreamIdFeature>();
             var sem = new SemaphoreSlim(0);
 
-            context.RequestAborted.Register(() =>
-            {
-                lock (_abortedStreamIdsLock)
+            context
+                .RequestAborted
+                .Register(() =>
                 {
-                    _abortedStreamIds.Add(streamIdFeature.StreamId);
-                }
+                    lock (_abortedStreamIdsLock)
+                    {
+                        _abortedStreamIds.Add(streamIdFeature.StreamId);
+                    }
 
-                sem.Release();
-            });
+                    sem.Release();
+                });
 
             await sem.WaitAsync().DefaultTimeout();
 
@@ -3399,15 +3406,17 @@ public class Http2StreamTests : Http2TestBase
             var streamIdFeature = context.Features.Get<IHttp2StreamIdFeature>();
             var sem = new SemaphoreSlim(0);
 
-            context.RequestAborted.Register(() =>
-            {
-                lock (_abortedStreamIdsLock)
+            context
+                .RequestAborted
+                .Register(() =>
                 {
-                    _abortedStreamIds.Add(streamIdFeature.StreamId);
-                }
+                    lock (_abortedStreamIdsLock)
+                    {
+                        _abortedStreamIds.Add(streamIdFeature.StreamId);
+                    }
 
-                sem.Release();
-            });
+                    sem.Release();
+                });
 
             await sem.WaitAsync().DefaultTimeout();
 
@@ -3436,7 +3445,9 @@ public class Http2StreamTests : Http2TestBase
 
             try
             {
-                var readTask = context.Request.Body
+                var readTask = context
+                    .Request
+                    .Body
                     .ReadAsync(new byte[100], 0, 100)
                     .DefaultTimeout();
                 sem.Release();
@@ -3482,10 +3493,14 @@ public class Http2StreamTests : Http2TestBase
 
             try
             {
-                var read = await context.Request.Body
+                var read = await context
+                    .Request
+                    .Body
                     .ReadAsync(new byte[100], 0, 100)
                     .DefaultTimeout();
-                var readTask = context.Request.Body
+                var readTask = context
+                    .Request
+                    .Body
                     .ReadAsync(new byte[100], 0, 100)
                     .DefaultTimeout();
                 sem.Release();
@@ -3531,15 +3546,17 @@ public class Http2StreamTests : Http2TestBase
 
             try
             {
-                context.RequestAborted.Register(() =>
-                {
-                    lock (_abortedStreamIdsLock)
+                context
+                    .RequestAborted
+                    .Register(() =>
                     {
-                        _abortedStreamIds.Add(streamIdFeature.StreamId);
-                    }
+                        lock (_abortedStreamIdsLock)
+                        {
+                            _abortedStreamIds.Add(streamIdFeature.StreamId);
+                        }
 
-                    _runningStreams[streamIdFeature.StreamId].TrySetResult();
-                });
+                        _runningStreams[streamIdFeature.StreamId].TrySetResult();
+                    });
 
                 context.Abort();
 
@@ -3575,15 +3592,17 @@ public class Http2StreamTests : Http2TestBase
 
             try
             {
-                context.RequestAborted.Register(() =>
-                {
-                    lock (_abortedStreamIdsLock)
+                context
+                    .RequestAborted
+                    .Register(() =>
                     {
-                        _abortedStreamIds.Add(streamIdFeature.StreamId);
-                    }
+                        lock (_abortedStreamIdsLock)
+                        {
+                            _abortedStreamIds.Add(streamIdFeature.StreamId);
+                        }
 
-                    _runningStreams[streamIdFeature.StreamId].TrySetResult();
-                });
+                        _runningStreams[streamIdFeature.StreamId].TrySetResult();
+                    });
 
                 await context.Response.Body.WriteAsync(new byte[10], 0, 10);
 
@@ -4874,11 +4893,13 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context.Response.OnStarting(() =>
-                {
-                    startingTcs.SetResult();
-                    return Task.CompletedTask;
-                });
+                context
+                    .Response
+                    .OnStarting(() =>
+                    {
+                        startingTcs.SetResult();
+                        return Task.CompletedTask;
+                    });
                 await context.Response.CompleteAsync().DefaultTimeout();
 
                 Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -4941,11 +4962,13 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context.Response.OnStarting(() =>
-                {
-                    startingTcs.SetResult();
-                    return Task.CompletedTask;
-                });
+                context
+                    .Response
+                    .OnStarting(() =>
+                    {
+                        startingTcs.SetResult();
+                        return Task.CompletedTask;
+                    });
                 context.Response.AppendTrailer("CustomName", "Custom Value");
 
                 await context.Response.CompleteAsync().DefaultTimeout();
@@ -5021,11 +5044,13 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context.Response.OnStarting(() =>
-                {
-                    startingTcs.SetResult();
-                    return Task.CompletedTask;
-                });
+                context
+                    .Response
+                    .OnStarting(() =>
+                    {
+                        startingTcs.SetResult();
+                        return Task.CompletedTask;
+                    });
 
                 context.Response.ContentLength = 25;
                 context.Response.AppendTrailer("CustomName", "Custom Value");
@@ -5092,11 +5117,13 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context.Response.OnStarting(() =>
-                {
-                    startingTcs.SetResult();
-                    return Task.CompletedTask;
-                });
+                context
+                    .Response
+                    .OnStarting(() =>
+                    {
+                        startingTcs.SetResult();
+                        return Task.CompletedTask;
+                    });
 
                 await context.Response.WriteAsync("Hello World");
                 Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -5174,11 +5201,13 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context.Response.OnStarting(() =>
-                {
-                    startingTcs.SetResult();
-                    return Task.CompletedTask;
-                });
+                context
+                    .Response
+                    .OnStarting(() =>
+                    {
+                        startingTcs.SetResult();
+                        return Task.CompletedTask;
+                    });
                 await context.Response.CompleteAsync().DefaultTimeout();
 
                 Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -5246,11 +5275,13 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context.Response.OnStarting(() =>
-                {
-                    startingTcs.SetResult();
-                    return Task.CompletedTask;
-                });
+                context
+                    .Response
+                    .OnStarting(() =>
+                    {
+                        startingTcs.SetResult();
+                        return Task.CompletedTask;
+                    });
 
                 await context.Response.WriteAsync("Hello World").DefaultTimeout();
                 Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -5382,11 +5413,13 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context.Response.OnStarting(() =>
-                {
-                    startingTcs.SetResult();
-                    return Task.CompletedTask;
-                });
+                context
+                    .Response
+                    .OnStarting(() =>
+                    {
+                        startingTcs.SetResult();
+                        return Task.CompletedTask;
+                    });
 
                 var buffer = context.Response.BodyWriter.GetMemory();
                 var length = Encoding.UTF8.GetBytes("Hello World", buffer.Span);
@@ -5479,11 +5512,13 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context.Response.OnStarting(() =>
-                {
-                    startingTcs.SetResult();
-                    return Task.CompletedTask;
-                });
+                context
+                    .Response
+                    .OnStarting(() =>
+                    {
+                        startingTcs.SetResult();
+                        return Task.CompletedTask;
+                    });
 
                 await context.Response.WriteAsync("Hello World");
                 Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -5571,11 +5606,13 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context.Response.OnStarting(() =>
-                {
-                    startingTcs.SetResult();
-                    return Task.CompletedTask;
-                });
+                context
+                    .Response
+                    .OnStarting(() =>
+                    {
+                        startingTcs.SetResult();
+                        return Task.CompletedTask;
+                    });
 
                 context.Response.ContentLength = 25;
                 await context.Response.WriteAsync("Hello World");
@@ -5661,11 +5698,13 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context.Response.OnStarting(() =>
-                {
-                    startingTcs.SetResult();
-                    return Task.CompletedTask;
-                });
+                context
+                    .Response
+                    .OnStarting(() =>
+                    {
+                        startingTcs.SetResult();
+                        return Task.CompletedTask;
+                    });
 
                 context.Response.ContentLength = 25;
                 await context.Response.WriteAsync("Hello World");
@@ -5750,11 +5789,13 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context.Response.OnStarting(() =>
-                {
-                    startingTcs.SetResult();
-                    return Task.CompletedTask;
-                });
+                context
+                    .Response
+                    .OnStarting(() =>
+                    {
+                        startingTcs.SetResult();
+                        return Task.CompletedTask;
+                    });
 
                 await context.Response.WriteAsync("Hello World");
                 Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -5858,11 +5899,13 @@ public class Http2StreamTests : Http2TestBase
             {
                 var requestBodyTask = context.Request.BodyReader.ReadAsync();
 
-                context.Response.OnStarting(() =>
-                {
-                    startingTcs.SetResult();
-                    return Task.CompletedTask;
-                });
+                context
+                    .Response
+                    .OnStarting(() =>
+                    {
+                        startingTcs.SetResult();
+                        return Task.CompletedTask;
+                    });
 
                 await context.Response.WriteAsync("Hello World");
                 Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -5960,11 +6003,13 @@ public class Http2StreamTests : Http2TestBase
         {
             try
             {
-                context.Response.OnStarting(() =>
-                {
-                    startingTcs.SetResult();
-                    return Task.CompletedTask;
-                });
+                context
+                    .Response
+                    .OnStarting(() =>
+                    {
+                        startingTcs.SetResult();
+                        return Task.CompletedTask;
+                    });
 
                 await context.Response.WriteAsync("Hello World");
                 Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -6065,11 +6110,13 @@ public class Http2StreamTests : Http2TestBase
             {
                 var requestBodyTask = context.Request.BodyReader.ReadAsync();
 
-                context.Response.OnStarting(() =>
-                {
-                    startingTcs.SetResult();
-                    return Task.CompletedTask;
-                });
+                context
+                    .Response
+                    .OnStarting(() =>
+                    {
+                        startingTcs.SetResult();
+                        return Task.CompletedTask;
+                    });
 
                 await context.Response.WriteAsync("Hello World");
                 Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.

@@ -1758,19 +1758,21 @@ namespace System.ServiceModel.Channels
         void ThrowInvalidAddException()
         {
             if (this.State == CommunicationState.Opened)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SendCannotBeCalledAfterCloseOutputSession)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SendCannotBeCalledAfterCloseOutputSession)
+                        )
+                    );
             else if (this.State == CommunicationState.Faulted)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    this.GetTerminalException()
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(this.GetTerminalException());
             else
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    this.CreateClosedException()
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(this.CreateClosedException());
         }
 
         void UnblockClose()
@@ -2009,9 +2011,9 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    channel.clientSession.ResumePolling(
-                        channel.OutputConnection.Strategy.QuotaRemaining == 0
-                    );
+                    channel
+                        .clientSession
+                        .ResumePolling(channel.OutputConnection.Strategy.QuotaRemaining == 0);
                 }
             }
         }

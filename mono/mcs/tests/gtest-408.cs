@@ -5,9 +5,10 @@ public class Test
 {
     public static int Main()
     {
-        object[] o = typeof(IFoo).GetMethod("get_Item").GetParameters()[0].GetCustomAttributes(
-            false
-        );
+        object[] o = typeof(IFoo)
+            .GetMethod("get_Item")
+            .GetParameters()[0]
+            .GetCustomAttributes(false);
         if (o.Length != 1)
             return 1;
 

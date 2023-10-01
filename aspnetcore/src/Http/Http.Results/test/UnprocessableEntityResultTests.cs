@@ -58,7 +58,8 @@ public class UnprocessableEntityResultTests
         PopulateMetadata<UnprocessableEntity>(((Delegate)MyApi).GetMethodInfo(), builder);
 
         // Assert
-        var producesResponseTypeMetadata = builder.Metadata
+        var producesResponseTypeMetadata = builder
+            .Metadata
             .OfType<ProducesResponseTypeMetadata>()
             .Last();
         Assert.Equal(

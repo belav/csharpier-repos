@@ -525,17 +525,19 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
         internal override void OnLoad()
         {
             var cancellationToken = _threadingContext.DisposalToken;
-            var (isSupportedTheme, isThemeCustomized) = _threadingContext.JoinableTaskFactory.Run(
-                async () =>
-                    (
-                        await _colorSchemeApplier
-                            .IsSupportedThemeAsync(cancellationToken)
-                            .ConfigureAwait(false),
-                        await _colorSchemeApplier
-                            .IsThemeCustomizedAsync(cancellationToken)
-                            .ConfigureAwait(false)
-                    )
-            );
+            var (isSupportedTheme, isThemeCustomized) = _threadingContext
+                .JoinableTaskFactory
+                .Run(
+                    async () =>
+                        (
+                            await _colorSchemeApplier
+                                .IsSupportedThemeAsync(cancellationToken)
+                                .ConfigureAwait(false),
+                            await _colorSchemeApplier
+                                .IsThemeCustomizedAsync(cancellationToken)
+                                .ConfigureAwait(false)
+                        )
+                );
 
             Editor_color_scheme.Visibility = isSupportedTheme
                 ? Visibility.Visible

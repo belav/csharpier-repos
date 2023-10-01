@@ -37,14 +37,16 @@ public sealed class TableReferenceExpression : Expression
     {
         get
         {
-            var table = _selectExpression.Tables.SingleOrDefault(
-                e =>
-                    string.Equals(
-                        (e as JoinExpressionBase)?.Table.Alias ?? e.Alias,
-                        Alias,
-                        StringComparison.OrdinalIgnoreCase
-                    )
-            );
+            var table = _selectExpression
+                .Tables
+                .SingleOrDefault(
+                    e =>
+                        string.Equals(
+                            (e as JoinExpressionBase)?.Table.Alias ?? e.Alias,
+                            Alias,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                );
             Check.DebugAssert(
                 table is not null,
                 $"Mismatched {nameof(TableReferenceExpression)}: couldn't find table alias '{Alias}' in referenced select expression's tables: "

@@ -49,14 +49,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             )
             {
                 if (
-                    !MemberAccessExpressionSimplifier.Instance.ShouldSimplifyThisMemberAccessExpression(
-                        memberAccessExpression,
-                        semanticModel,
-                        options,
-                        out _,
-                        out _,
-                        cancellationToken
-                    )
+                    !MemberAccessExpressionSimplifier
+                        .Instance
+                        .ShouldSimplifyThisMemberAccessExpression(
+                            memberAccessExpression,
+                            semanticModel,
+                            options,
+                            out _,
+                            out _,
+                            cancellationToken
+                        )
                 )
                 {
                     return false;
@@ -120,14 +122,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 );
 
             if (expression is NameSyntax name)
-                return NameSimplifier.Instance.TrySimplify(
-                    name,
-                    semanticModel,
-                    options,
-                    out replacementNode,
-                    out issueSpan,
-                    cancellationToken
-                );
+                return NameSimplifier
+                    .Instance
+                    .TrySimplify(
+                        name,
+                        semanticModel,
+                        options,
+                        out replacementNode,
+                        out issueSpan,
+                        cancellationToken
+                    );
 
             return false;
         }
@@ -221,15 +225,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     }
 
                     replacementNode = SyntaxFactory.IdentifierName(
-                        memberAccess.Name.Identifier.CopyAnnotationsTo(
-                            SyntaxFactory.Identifier(
-                                memberAccess.GetLeadingTrivia(),
-                                SyntaxKind.IdentifierToken,
-                                text,
-                                aliasReplacement.Name,
-                                memberAccess.GetTrailingTrivia()
+                        memberAccess
+                            .Name
+                            .Identifier
+                            .CopyAnnotationsTo(
+                                SyntaxFactory.Identifier(
+                                    memberAccess.GetLeadingTrivia(),
+                                    SyntaxKind.IdentifierToken,
+                                    text,
+                                    aliasReplacement.Name,
+                                    memberAccess.GetTrailingTrivia()
+                                )
                             )
-                        )
                     );
 
                     replacementNode = memberAccess.CopyAnnotationsTo(replacementNode);

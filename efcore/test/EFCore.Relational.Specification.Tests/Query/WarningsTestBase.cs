@@ -50,7 +50,8 @@ public abstract class WarningsTestBase<TFixture> : IClassFixture<TFixture>
     public virtual void FirstOrDefault_without_orderby_and_filter_issues_warning_subquery()
     {
         using var context = CreateContext();
-        var query = context.Customers
+        var query = context
+            .Customers
             .Where(c => c.CustomerID == "ALFKI" && c.Orders.FirstOrDefault().OrderID > 1000)
             .ToList();
         Assert.Single(query);
@@ -79,7 +80,8 @@ public abstract class WarningsTestBase<TFixture> : IClassFixture<TFixture>
     public virtual void LastOrDefault_with_order_by_does_not_issue_client_eval_warning()
     {
         using var context = CreateContext();
-        var query1 = context.Customers
+        var query1 = context
+            .Customers
             .Where(
                 c =>
                     c.CustomerID == "ALFKI"

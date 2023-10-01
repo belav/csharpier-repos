@@ -15,7 +15,9 @@ public class SqlServerDbContextOptionsExtensionsTest
         var optionsBuilder = new DbContextOptionsBuilder();
         optionsBuilder.UseSqlServer("Database=Crunchie", b => b.MaxBatchSize(123));
 
-        var extension = optionsBuilder.Options.Extensions
+        var extension = optionsBuilder
+            .Options
+            .Extensions
             .OfType<SqlServerOptionsExtension>()
             .Single();
 
@@ -28,7 +30,9 @@ public class SqlServerDbContextOptionsExtensionsTest
         var optionsBuilder = new DbContextOptionsBuilder();
         optionsBuilder.UseSqlServer("Database=Crunchie", b => b.CommandTimeout(30));
 
-        var extension = optionsBuilder.Options.Extensions
+        var extension = optionsBuilder
+            .Options
+            .Extensions
             .OfType<SqlServerOptionsExtension>()
             .Single();
 
@@ -41,7 +45,9 @@ public class SqlServerDbContextOptionsExtensionsTest
         var optionsBuilder = new DbContextOptionsBuilder();
         optionsBuilder.UseSqlServer("Database=Crunchie");
 
-        var extension = optionsBuilder.Options.Extensions
+        var extension = optionsBuilder
+            .Options
+            .Extensions
             .OfType<SqlServerOptionsExtension>()
             .Single();
 
@@ -59,7 +65,9 @@ public class SqlServerDbContextOptionsExtensionsTest
         var optionsBuilder = new DbContextOptionsBuilder<DbContext>();
         optionsBuilder.UseSqlServer(nullConnectionString ? null : "Database=Whisper");
 
-        var extension = optionsBuilder.Options.Extensions
+        var extension = optionsBuilder
+            .Options
+            .Extensions
             .OfType<SqlServerOptionsExtension>()
             .Single();
 
@@ -75,7 +83,9 @@ public class SqlServerDbContextOptionsExtensionsTest
 
         optionsBuilder.UseSqlServer(connection);
 
-        var extension = optionsBuilder.Options.Extensions
+        var extension = optionsBuilder
+            .Options
+            .Extensions
             .OfType<SqlServerOptionsExtension>()
             .Single();
 
@@ -92,7 +102,9 @@ public class SqlServerDbContextOptionsExtensionsTest
 
         optionsBuilder.UseSqlServer(connection, contextOwnsConnection: true);
 
-        var extension = optionsBuilder.Options.Extensions
+        var extension = optionsBuilder
+            .Options
+            .Extensions
             .OfType<SqlServerOptionsExtension>()
             .Single();
 
@@ -109,7 +121,9 @@ public class SqlServerDbContextOptionsExtensionsTest
 
         optionsBuilder.UseSqlServer(connection);
 
-        var extension = optionsBuilder.Options.Extensions
+        var extension = optionsBuilder
+            .Options
+            .Extensions
             .OfType<SqlServerOptionsExtension>()
             .Single();
 
@@ -126,7 +140,9 @@ public class SqlServerDbContextOptionsExtensionsTest
 
         optionsBuilder.UseSqlServer(connection, contextOwnsConnection: true);
 
-        var extension = optionsBuilder.Options.Extensions
+        var extension = optionsBuilder
+            .Options
+            .Extensions
             .OfType<SqlServerOptionsExtension>()
             .Single();
 
@@ -160,13 +176,15 @@ public class SqlServerDbContextOptionsExtensionsTest
 
         using (var serviceScope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
         {
-            var coreOptions = serviceScope.ServiceProvider
+            var coreOptions = serviceScope
+                .ServiceProvider
                 .GetRequiredService<DbContextOptions<ApplicationDbContext>>()
                 .GetExtension<CoreOptionsExtension>();
 
             Assert.True(coreOptions.DetailedErrorsEnabled);
 
-            var sqlServerOptions = serviceScope.ServiceProvider
+            var sqlServerOptions = serviceScope
+                .ServiceProvider
                 .GetRequiredService<DbContextOptions<ApplicationDbContext>>()
                 .GetExtension<SqlServerOptionsExtension>();
 

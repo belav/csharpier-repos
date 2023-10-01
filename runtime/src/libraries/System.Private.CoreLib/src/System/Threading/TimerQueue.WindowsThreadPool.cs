@@ -36,11 +36,13 @@ namespace System.Threading
         {
             if (_nativeTimer == IntPtr.Zero)
             {
-                _nativeTimer = Interop.Kernel32.CreateThreadpoolTimer(
-                    &TimerCallbackWindowsThreadPool,
-                    (IntPtr)_id,
-                    IntPtr.Zero
-                );
+                _nativeTimer = Interop
+                    .Kernel32
+                    .CreateThreadpoolTimer(
+                        &TimerCallbackWindowsThreadPool,
+                        (IntPtr)_id,
+                        IntPtr.Zero
+                    );
                 if (_nativeTimer == IntPtr.Zero)
                     throw new OutOfMemoryException();
             }

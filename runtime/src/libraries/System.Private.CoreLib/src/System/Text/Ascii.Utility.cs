@@ -1329,7 +1329,8 @@ namespace System.Text
                 Vector128<byte> compareResult = AdvSimd
                     .CompareGreaterThan(firstVector, largestAsciiValue)
                     .AsByte();
-                ulong asciiCompareMask = AdvSimd.Arm64
+                ulong asciiCompareMask = AdvSimd
+                    .Arm64
                     .UnzipOdd(compareResult, compareResult)
                     .AsUInt64()
                     .ToScalar();
@@ -1879,7 +1880,8 @@ namespace System.Text
                     ? Sse41.TestZ(vector.AsByte(), Vector128.Create((byte)0x80))
                     : AdvSimd.Arm64.IsSupported
                         ? AllBytesInUInt64AreAscii(
-                            AdvSimd.Arm64
+                            AdvSimd
+                                .Arm64
                                 .MaxPairwise(vector.AsByte(), vector.AsByte())
                                 .AsUInt64()
                                 .ToScalar()
@@ -1892,7 +1894,8 @@ namespace System.Text
                     ? Sse41.TestZ(vector.AsUInt16(), Vector128.Create((ushort)0xFF80))
                     : AdvSimd.Arm64.IsSupported
                         ? AllCharsInUInt64AreAscii(
-                            AdvSimd.Arm64
+                            AdvSimd
+                                .Arm64
                                 .MaxPairwise(vector.AsUInt16(), vector.AsUInt16())
                                 .AsUInt64()
                                 .ToScalar()
@@ -2610,7 +2613,8 @@ namespace System.Text
             if (AdvSimd.Arm64.IsSupported)
             {
                 Vector128<byte> vecNarrow = AdvSimd.DuplicateToVector128(value).AsByte();
-                Vector128<ulong> vecWide = AdvSimd.Arm64
+                Vector128<ulong> vecWide = AdvSimd
+                    .Arm64
                     .ZipLow(vecNarrow, Vector128<byte>.Zero)
                     .AsUInt64();
                 Unsafe.WriteUnaligned(

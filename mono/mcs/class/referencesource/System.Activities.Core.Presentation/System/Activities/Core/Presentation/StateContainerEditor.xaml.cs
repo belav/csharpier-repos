@@ -294,8 +294,9 @@ namespace System.Activities.Core.Presentation
         {
             get
             {
-                ViewStateService viewStateService =
-                    this.Context.Services.GetService<ViewStateService>();
+                ViewStateService viewStateService = this.Context
+                    .Services
+                    .GetService<ViewStateService>();
                 return viewStateService;
             }
         }
@@ -398,7 +399,8 @@ namespace System.Activities.Core.Presentation
             {
                 // Only StateMachine supports "States" collection
                 IsStateMachineContainer = true;
-                this.ModelItem.Properties[StateMachineDesigner.StatesPropertyName]
+                this.ModelItem
+                    .Properties[StateMachineDesigner.StatesPropertyName]
                     .Collection
                     .CollectionChanged += new NotifyCollectionChangedEventHandler(
                     OnStateCollectionChanged
@@ -406,23 +408,24 @@ namespace System.Activities.Core.Presentation
                 this.ModelItem.PropertyChanged += new PropertyChangedEventHandler(
                     this.OnModelPropertyChanged
                 );
-                ModelTreeManager modelTreeManager =
-                    this.Context.Services.GetService<ModelTreeManager>();
+                ModelTreeManager modelTreeManager = this.Context
+                    .Services
+                    .GetService<ModelTreeManager>();
                 modelTreeManager.EditingScopeCompleted += new EventHandler<EditingScopeEventArgs>(
                     this.OnEditingScopeCompleted
                 );
 
                 foreach (
-                    ModelItem modelItem in this.ModelItem.Properties[
-                        StateMachineDesigner.StatesPropertyName
-                    ].Collection
+                    ModelItem modelItem in this.ModelItem
+                        .Properties[StateMachineDesigner.StatesPropertyName]
+                        .Collection
                 )
                 {
                     if (modelItem.ItemType == typeof(State))
                     {
-                        ModelItemCollection transitions = modelItem.Properties[
-                            StateDesigner.TransitionsPropertyName
-                        ].Collection;
+                        ModelItemCollection transitions = modelItem
+                            .Properties[StateDesigner.TransitionsPropertyName]
+                            .Collection;
                         if (!this.listenedTransitionCollections.Contains(transitions))
                         {
                             transitions.CollectionChanged +=
@@ -496,7 +499,8 @@ namespace System.Activities.Core.Presentation
             if (this.ModelItem.ItemType == typeof(StateMachine))
             {
                 // Only StateMachine supports "States" collection
-                this.ModelItem.Properties[StateMachineDesigner.StatesPropertyName]
+                this.ModelItem
+                    .Properties[StateMachineDesigner.StatesPropertyName]
                     .Collection
                     .CollectionChanged -= new NotifyCollectionChangedEventHandler(
                     OnStateCollectionChanged
@@ -504,23 +508,24 @@ namespace System.Activities.Core.Presentation
                 this.ModelItem.PropertyChanged -= new PropertyChangedEventHandler(
                     this.OnModelPropertyChanged
                 );
-                ModelTreeManager modelTreeManager =
-                    this.Context.Services.GetService<ModelTreeManager>();
+                ModelTreeManager modelTreeManager = this.Context
+                    .Services
+                    .GetService<ModelTreeManager>();
                 modelTreeManager.EditingScopeCompleted -= new EventHandler<EditingScopeEventArgs>(
                     this.OnEditingScopeCompleted
                 );
 
                 foreach (
-                    ModelItem modelItem in this.ModelItem.Properties[
-                        StateMachineDesigner.StatesPropertyName
-                    ].Collection
+                    ModelItem modelItem in this.ModelItem
+                        .Properties[StateMachineDesigner.StatesPropertyName]
+                        .Collection
                 )
                 {
                     if (modelItem.ItemType == typeof(State))
                     {
-                        ModelItemCollection transitions = modelItem.Properties[
-                            StateDesigner.TransitionsPropertyName
-                        ].Collection;
+                        ModelItemCollection transitions = modelItem
+                            .Properties[StateDesigner.TransitionsPropertyName]
+                            .Collection;
                         if (this.listenedTransitionCollections.Contains(transitions))
                         {
                             transitions.CollectionChanged -=
@@ -657,7 +662,8 @@ namespace System.Activities.Core.Presentation
             UIElement element;
             if (!this.modelItemToUIElement.TryGetValue(model, out element))
             {
-                element = this.Context.Services
+                element = this.Context
+                    .Services
                     .GetService<VirtualizedContainerService>()
                     .GetContainer(model, this);
                 if (element is VirtualizedContainerService.VirtualizingContainer)
@@ -757,9 +763,9 @@ namespace System.Activities.Core.Presentation
                                     StateContainerEditor.GetStateMachineModelItem(stateModelItem);
                             }
                             if (
-                                stateMachineModelItem.Properties[
-                                    StateMachineDesigner.InitialStatePropertyName
-                                ].Value == stateModelItem
+                                stateMachineModelItem
+                                    .Properties[StateMachineDesigner.InitialStatePropertyName]
+                                    .Value == stateModelItem
                             )
                             {
                                 this.AddInitialNodeConnector(view);
@@ -847,9 +853,9 @@ namespace System.Activities.Core.Presentation
             ModelItem sourceState = StateContainerEditor.GetParentStateModelItemForTransition(
                 transitionModelItem
             );
-            ModelItem destinationState = transitionModelItem.Properties[
-                TransitionDesigner.ToPropertyName
-            ].Value;
+            ModelItem destinationState = transitionModelItem
+                .Properties[TransitionDesigner.ToPropertyName]
+                .Value;
             UIElement sourceDesigner = this.modelItemToUIElement[sourceState];
             UIElement destinationDesigner = this.modelItemToUIElement[destinationState];
             if (sourceDesigner.IsDescendantOf(this) && destinationDesigner.IsDescendantOf(this))
@@ -1865,9 +1871,9 @@ namespace System.Activities.Core.Presentation
                 if (connectorModelItem.ItemType == typeof(Transition))
                 {
                     // Populate the source and destination States's View if it is still in Virtualized mode.
-                    ModelItem destinationState = connectorModelItem.Properties[
-                        TransitionDesigner.ToPropertyName
-                    ].Value;
+                    ModelItem destinationState = connectorModelItem
+                        .Properties[TransitionDesigner.ToPropertyName]
+                        .Value;
                     PopulateVirtualizingContainer(destinationState);
                     ModelItem sourceState =
                         StateContainerEditor.GetParentStateModelItemForTransition(
@@ -2615,7 +2621,8 @@ namespace System.Activities.Core.Presentation
                                 if (view == null)
                                 {
                                     view =
-                                        this.Context.Services
+                                        this.Context
+                                            .Services
                                             .GetService<ViewService>()
                                             .GetView(droppedModelItem) as WorkflowViewElement;
                                     ViewUtilities.MeasureView(view as WorkflowViewElement, true);
@@ -2675,9 +2682,9 @@ namespace System.Activities.Core.Presentation
                                     );
                                 Fx.Assert(container != null, "container should not be null");
                                 Point oldLocation = (Point)viewState;
-                                oldLocation = srcContainer.panel.GetLocationRelativeToOutmostPanel(
-                                    oldLocation
-                                );
+                                oldLocation = srcContainer
+                                    .panel
+                                    .GetLocationRelativeToOutmostPanel(oldLocation);
                                 Point newLocation = this.panel.GetLocationRelativeToOutmostPanel(
                                     shapeLocation
                                 );
@@ -2828,7 +2835,8 @@ namespace System.Activities.Core.Presentation
             using (EditingScope es = (EditingScope)this.ModelItem.BeginEdit(SR.ItemMove))
             {
                 foreach (
-                    ModelItem selectedModelItem in this.Context.Items
+                    ModelItem selectedModelItem in this.Context
+                        .Items
                         .GetValue<Selection>()
                         .SelectedObjects
                 )
@@ -2892,12 +2900,14 @@ namespace System.Activities.Core.Presentation
             }
             else if (
                 (new List<Key> { Key.Left, Key.Right, Key.Up, Key.Down }).Contains(e.Key)
-                && currentSelection.SelectedObjects.All<ModelItem>(
-                    (p) =>
-                    {
-                        return this.modelItemToUIElement.ContainsKey(p);
-                    }
-                )
+                && currentSelection
+                    .SelectedObjects
+                    .All<ModelItem>(
+                        (p) =>
+                        {
+                            return this.modelItemToUIElement.ContainsKey(p);
+                        }
+                    )
             )
             {
                 this.KeyboardMove(e.Key);
@@ -2918,9 +2928,9 @@ namespace System.Activities.Core.Presentation
         {
             HashSet<String> existingStateNames = new HashSet<string>();
             foreach (
-                ModelItem stateModelItem in this.ModelItem.Properties[
-                    StateMachineDesigner.StatesPropertyName
-                ].Collection
+                ModelItem stateModelItem in this.ModelItem
+                    .Properties[StateMachineDesigner.StatesPropertyName]
+                    .Collection
             )
             {
                 existingStateNames.Add(((State)stateModelItem.GetCurrentValue()).DisplayName);
@@ -3234,15 +3244,17 @@ namespace System.Activities.Core.Presentation
                     ModelItem trasitionModelItem = null;
                     if (insertIndex >= 0)
                     {
-                        trasitionModelItem = sourceModelItem.Properties[
-                            StateDesigner.TransitionsPropertyName
-                        ].Collection.Insert(insertIndex, transition);
+                        trasitionModelItem = sourceModelItem
+                            .Properties[StateDesigner.TransitionsPropertyName]
+                            .Collection
+                            .Insert(insertIndex, transition);
                     }
                     else
                     {
-                        trasitionModelItem = sourceModelItem.Properties[
-                            StateDesigner.TransitionsPropertyName
-                        ].Collection.Add(transition);
+                        trasitionModelItem = sourceModelItem
+                            .Properties[StateDesigner.TransitionsPropertyName]
+                            .Collection
+                            .Add(transition);
                     }
                     Fx.Assert(trasitionModelItem != null, "trasitionModelItem");
                     return trasitionModelItem;
@@ -3250,9 +3262,9 @@ namespace System.Activities.Core.Presentation
                 // auto-connect from the initial node
                 else if (sourceModelItem.ItemType == typeof(StartNode))
                 {
-                    this.ModelItem.Properties[
-                        StateMachineDesigner.InitialStatePropertyName
-                    ].SetValue(droppedModelItem);
+                    this.ModelItem
+                        .Properties[StateMachineDesigner.InitialStatePropertyName]
+                        .SetValue(droppedModelItem);
                     return this.ModelItem;
                 }
             }
@@ -3438,10 +3450,12 @@ namespace System.Activities.Core.Presentation
                         ref srcConnectionPoint,
                         ref desConnectionPoint
                     );
-                    this.OldViewState = editor.ViewStateService.RetrieveViewState(
-                        this.ViewStateOwnerModelItem,
-                        ConnectorLocationViewStateKey
-                    );
+                    this.OldViewState = editor
+                        .ViewStateService
+                        .RetrieveViewState(
+                            this.ViewStateOwnerModelItem,
+                            ConnectorLocationViewStateKey
+                        );
                     this.NewViewState = points;
 
                     // compare old and new values, if they're the same, return false
@@ -3462,11 +3476,13 @@ namespace System.Activities.Core.Presentation
                     this.ShouldCreateConnector = false;
                 }
 
-                editor.ViewStateService.StoreViewState(
-                    this.ViewStateOwnerModelItem,
-                    ConnectorLocationViewStateKey,
-                    this.NewViewState
-                );
+                editor
+                    .ViewStateService
+                    .StoreViewState(
+                        this.ViewStateOwnerModelItem,
+                        ConnectorLocationViewStateKey,
+                        this.NewViewState
+                    );
                 return true;
             }
 
@@ -3566,17 +3582,18 @@ namespace System.Activities.Core.Presentation
                         ModelItem stateMachineModelItem = GetStateMachineModelItem(
                             destinationModelItem
                         );
-                        droppedModelItem.Properties[
-                            StateDesigner.TransitionsPropertyName
-                        ].Collection.Add(
-                            new Transition()
-                            {
-                                DisplayName = StateContainerEditor.GenerateTransitionName(
-                                    stateMachineModelItem
-                                ),
-                                To = destinationModelItem.GetCurrentValue() as State
-                            }
-                        );
+                        droppedModelItem
+                            .Properties[StateDesigner.TransitionsPropertyName]
+                            .Collection
+                            .Add(
+                                new Transition()
+                                {
+                                    DisplayName = StateContainerEditor.GenerateTransitionName(
+                                        stateMachineModelItem
+                                    ),
+                                    To = destinationModelItem.GetCurrentValue() as State
+                                }
+                            );
                         autoSplit = true;
                     }
                 }
@@ -3588,7 +3605,8 @@ namespace System.Activities.Core.Presentation
                     // of the new transition from the dropped state. So the visual of the transition will be created twice. To solve that problem,
                     // we need to suppress adding connector when adding state visual (in the UI reaction for step 1).
                     // And to support redo, we must place the suppression in the undo stack.
-                    this.Context.Services
+                    this.Context
+                        .Services
                         .GetService<ModelTreeManager>()
                         .AddToCurrentEditingScope(
                             new SuppressAddingConnectorWhenAddingStateVisual()

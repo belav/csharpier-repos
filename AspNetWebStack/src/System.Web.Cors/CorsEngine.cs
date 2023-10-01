@@ -112,13 +112,15 @@ namespace System.Web.Cors
             }
             else
             {
-                result.ErrorMessages.Add(
-                    String.Format(
-                        CultureInfo.CurrentCulture,
-                        SRResources.MethodNotAllowed,
-                        requestContext.AccessControlRequestMethod
-                    )
-                );
+                result
+                    .ErrorMessages
+                    .Add(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            SRResources.MethodNotAllowed,
+                            requestContext.AccessControlRequestMethod
+                        )
+                    );
             }
 
             return result.IsValid;
@@ -166,13 +168,15 @@ namespace System.Web.Cors
             }
             else
             {
-                result.ErrorMessages.Add(
-                    String.Format(
-                        CultureInfo.CurrentCulture,
-                        SRResources.HeadersNotAllowed,
-                        String.Join(",", requestContext.AccessControlRequestHeaders)
-                    )
-                );
+                result
+                    .ErrorMessages
+                    .Add(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            SRResources.HeadersNotAllowed,
+                            String.Join(",", requestContext.AccessControlRequestHeaders)
+                        )
+                    );
             }
 
             return result.IsValid;
@@ -230,13 +234,15 @@ namespace System.Web.Cors
                 }
                 else
                 {
-                    result.ErrorMessages.Add(
-                        String.Format(
-                            CultureInfo.CurrentCulture,
-                            SRResources.OriginNotAllowed,
-                            requestContext.Origin
-                        )
-                    );
+                    result
+                        .ErrorMessages
+                        .Add(
+                            String.Format(
+                                CultureInfo.CurrentCulture,
+                                SRResources.OriginNotAllowed,
+                                requestContext.Origin
+                            )
+                        );
                 }
             }
             else

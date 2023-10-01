@@ -48,7 +48,8 @@ internal sealed class RunConfiguration
 
         // read only if it wasn't overridden by command line option
         string desiredConfig = hostArg ?? HostProperties.DefaultConfig;
-        HostConfig? foundConfig = HostProperties.HostConfigs
+        HostConfig? foundConfig = HostProperties
+            .HostConfigs
             .Where(
                 hc =>
                     string.Equals(

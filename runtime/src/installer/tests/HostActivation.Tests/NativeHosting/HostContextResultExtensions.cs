@@ -25,10 +25,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
         {
             var constraint = assertion
                 .HaveStdOutContaining("mock coreclr_initialize() called")
-                .And.HaveStdOutContaining("mock coreclr_execute_assembly() called")
-                .And.HaveStdOutContaining($"mock managedAssemblyPath:{appPath}")
-                .And.HaveStdOutContaining($"mock argc:{appArgs.Length}")
-                .And.HaveStdOutContaining("mock coreclr_shutdown_2() called");
+                .And
+                .HaveStdOutContaining("mock coreclr_execute_assembly() called")
+                .And
+                .HaveStdOutContaining($"mock managedAssemblyPath:{appPath}")
+                .And
+                .HaveStdOutContaining($"mock argc:{appArgs.Length}")
+                .And
+                .HaveStdOutContaining("mock coreclr_shutdown_2() called");
 
             for (int i = 0; i < appArgs.Length; ++i)
             {
@@ -44,7 +48,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
         {
             return assertion
                 .HaveStdOutContaining("mock coreclr_initialize() called")
-                .And.HaveStdOutContaining("mock coreclr_create_delegate() called");
+                .And
+                .HaveStdOutContaining("mock coreclr_create_delegate() called");
         }
 
         public static AndConstraint<CommandResultAssertions> CreateDelegateMock_COM(
@@ -53,13 +58,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
         {
             return assertion
                 .CreateDelegateMock()
-                .And.HaveStdOutContaining("mock entryPointAssemblyName:System.Private.CoreLib")
-                .And.HaveStdOutContaining(
+                .And
+                .HaveStdOutContaining("mock entryPointAssemblyName:System.Private.CoreLib")
+                .And
+                .HaveStdOutContaining(
                     "mock entryPointTypeName:Internal.Runtime.InteropServices.ComActivator"
                 )
-                .And.HaveStdOutContaining(
-                    "mock entryPointMethodName:GetClassFactoryForTypeInternal"
-                );
+                .And
+                .HaveStdOutContaining("mock entryPointMethodName:GetClassFactoryForTypeInternal");
         }
 
         public static AndConstraint<CommandResultAssertions> CreateDelegateMock_InMemoryAssembly(
@@ -68,11 +74,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
         {
             return assertion
                 .CreateDelegateMock()
-                .And.HaveStdOutContaining("mock entryPointAssemblyName:System.Private.CoreLib")
-                .And.HaveStdOutContaining(
+                .And
+                .HaveStdOutContaining("mock entryPointAssemblyName:System.Private.CoreLib")
+                .And
+                .HaveStdOutContaining(
                     "mock entryPointTypeName:Internal.Runtime.InteropServices.InMemoryAssemblyLoader"
                 )
-                .And.HaveStdOutContaining("mock entryPointMethodName:LoadInMemoryAssembly");
+                .And
+                .HaveStdOutContaining("mock entryPointMethodName:LoadInMemoryAssembly");
         }
 
         public static AndConstraint<CommandResultAssertions> HavePropertyMock(
@@ -116,7 +125,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
         {
             return assertion
                 .HaveStdErrContaining($"Initialized secondary context for config: {path}")
-                .And.HaveStdOutContaining(
+                .And
+                .HaveStdOutContaining(
                     $"hostfxr_initialize_for_runtime_config succeeded: 0x{statusCode.ToString("x")}"
                 );
         }
@@ -187,9 +197,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
         {
             return assertion
                 .HaveStdOutContaining($"{prefix}hostfxr_get_runtime_properties succeeded")
-                .And.HaveStdOutContaining(
-                    $"{prefix}hostfxr_get_runtime_properties: {name}={value}"
-                );
+                .And
+                .HaveStdOutContaining($"{prefix}hostfxr_get_runtime_properties: {name}={value}");
         }
 
         public static AndConstraint<CommandResultAssertions> GetRuntimePropertiesExcludes(
@@ -200,7 +209,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
         {
             return assertion
                 .HaveStdOutContaining($"{prefix}hostfxr_get_runtime_properties succeeded")
-                .And.NotHaveStdOutContaining($"{prefix}hostfxr_get_runtime_properties: {name}");
+                .And
+                .NotHaveStdOutContaining($"{prefix}hostfxr_get_runtime_properties: {name}");
         }
 
         public static AndConstraint<CommandResultAssertions> FailToGetRuntimeProperties(

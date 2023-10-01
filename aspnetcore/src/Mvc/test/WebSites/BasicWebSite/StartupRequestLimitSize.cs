@@ -21,9 +21,9 @@ public class StartupRequestLimitSize
             (httpContext, next) =>
             {
                 var testHttpMaxRequestBodySizeFeature = new TestHttpMaxRequestBodySizeFeature();
-                httpContext.Features.Set<IHttpMaxRequestBodySizeFeature>(
-                    testHttpMaxRequestBodySizeFeature
-                );
+                httpContext
+                    .Features
+                    .Set<IHttpMaxRequestBodySizeFeature>(testHttpMaxRequestBodySizeFeature);
 
                 httpContext.Request.Body = new RequestBodySizeCheckingStream(
                     httpContext.Request.Body,

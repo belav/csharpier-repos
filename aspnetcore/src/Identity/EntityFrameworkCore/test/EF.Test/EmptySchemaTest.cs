@@ -35,7 +35,8 @@ public class EmptySchemaTest : IClassFixture<ScratchDatabaseFixture>
             .AddEntityFrameworkStores<EmptyDbContext>();
 
         _builder = new ApplicationBuilder(services.BuildServiceProvider());
-        using var scope = _builder.ApplicationServices
+        using var scope = _builder
+            .ApplicationServices
             .GetRequiredService<IServiceScopeFactory>()
             .CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<EmptyDbContext>();
@@ -45,7 +46,8 @@ public class EmptySchemaTest : IClassFixture<ScratchDatabaseFixture>
     [Fact]
     public void CanIgnoreEverything()
     {
-        using var scope = _builder.ApplicationServices
+        using var scope = _builder
+            .ApplicationServices
             .GetRequiredService<IServiceScopeFactory>()
             .CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<EmptyDbContext>();

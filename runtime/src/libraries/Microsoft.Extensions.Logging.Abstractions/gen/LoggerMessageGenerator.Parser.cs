@@ -168,10 +168,12 @@ namespace Microsoft.Extensions.Logging.Generators
                                     foreach (AttributeData attributeData in boundAttributes)
                                     {
                                         if (
-                                            !SymbolEqualityComparer.Default.Equals(
-                                                attributeData.AttributeClass,
-                                                loggerMessageAttribute
-                                            )
+                                            !SymbolEqualityComparer
+                                                .Default
+                                                .Equals(
+                                                    attributeData.AttributeClass,
+                                                    loggerMessageAttribute
+                                                )
                                         )
                                         {
                                             continue;
@@ -478,9 +480,10 @@ namespace Microsoft.Extensions.Logging.Generators
                                         if (paramSymbol.DeclaringSyntaxReferences.Length > 0)
                                         {
                                             ParameterSyntax paramSyntax =
-                                                paramSymbol.DeclaringSyntaxReferences[0].GetSyntax(
-                                                    _cancellationToken
-                                                ) as ParameterSyntax;
+                                                paramSymbol
+                                                    .DeclaringSyntaxReferences[0]
+                                                    .GetSyntax(_cancellationToken)
+                                                as ParameterSyntax;
                                             if (
                                                 paramSyntax != null
                                                 && !string.IsNullOrEmpty(
@@ -527,9 +530,11 @@ namespace Microsoft.Extensions.Logging.Generators
                                         }
 
                                         string typeName = paramTypeSymbol.ToDisplayString(
-                                            SymbolDisplayFormat.FullyQualifiedFormat.WithMiscellaneousOptions(
-                                                SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
-                                            )
+                                            SymbolDisplayFormat
+                                                .FullyQualifiedFormat
+                                                .WithMiscellaneousOptions(
+                                                    SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
+                                                )
                                         );
 
                                         var lp = new LoggerParameter

@@ -900,7 +900,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 var typeForwardDllFilePath = Path.Combine(path, "typeforward.dll");
                 assemblyName = "typeforward";
 
-                implProject = workspace.CurrentSolution.Projects
+                implProject = workspace
+                    .CurrentSolution
+                    .Projects
                     .First()
                     .AddMetadataReference(MetadataReference.CreateFromFile(dllFilePath));
                 var typeForwardSourceText = SourceText.From(typeForwardSource, Encoding.UTF8);
@@ -938,7 +940,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 // Now compile a new implementation.dll that typeforwards to realimplementation.dll
                 assemblyName = "implementation";
 
-                implProject = workspace.CurrentSolution.Projects
+                implProject = workspace
+                    .CurrentSolution
+                    .Projects
                     .First()
                     .AddMetadataReference(
                         MetadataReference.CreateFromFile(realImplementationDllFilePath)

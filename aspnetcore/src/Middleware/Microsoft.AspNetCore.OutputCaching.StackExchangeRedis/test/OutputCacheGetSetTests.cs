@@ -74,14 +74,16 @@ public class OutputCacheGetSetTests : IClassFixture<RedisConnectionFixture>
         RedisKey underlyingKey = "TestPrefix__MSOCV_" + key;
 
         // pre-check
-        await _fixture.Database.KeyDeleteAsync(
-            new RedisKey[]
-            {
-                "TestPrefix__MSOCT",
-                "TestPrefix__MSOCT_tagA",
-                "TestPrefix__MSOCT_tagB"
-            }
-        );
+        await _fixture
+            .Database
+            .KeyDeleteAsync(
+                new RedisKey[]
+                {
+                    "TestPrefix__MSOCT",
+                    "TestPrefix__MSOCT_tagA",
+                    "TestPrefix__MSOCT_tagB"
+                }
+            );
         var timeout = await _fixture.Database.KeyTimeToLiveAsync(underlyingKey);
         Assert.Null(timeout); // means doesn't exist
         Assert.False(await _fixture.Database.KeyExistsAsync("TestPrefix__MSOCT"));
@@ -231,10 +233,9 @@ public class OutputCacheGetSetTests : IClassFixture<RedisConnectionFixture>
             TimeSpan.FromSeconds(30),
             CancellationToken.None
         );
-        var originalScore = await _fixture.Database.SortedSetScoreAsync(
-            "TestPrefix__MSOCT",
-            "gtonly"
-        );
+        var originalScore = await _fixture
+            .Database
+            .SortedSetScoreAsync("TestPrefix__MSOCT", "gtonly");
         Assert.NotNull(originalScore);
 
         // now store something with a shorter ttl; the score should not change
@@ -452,11 +453,9 @@ public class OutputCacheGetSetTests : IClassFixture<RedisConnectionFixture>
     {
         var cache = await Cache().ConfigureAwait(false);
         var impl = Assert.IsAssignableFrom<RedisOutputCacheStore>(cache);
-        await _fixture.Database.StringSetAsync(
-            "TestPrefix__MSOCTGC",
-            "dummy",
-            TimeSpan.FromMinutes(1)
-        );
+        await _fixture
+            .Database
+            .StringSetAsync("TestPrefix__MSOCTGC", "dummy", TimeSpan.FromMinutes(1));
         try
         {
             Assert.Null(await impl.ExecuteGarbageCollectionAsync(42));
@@ -478,16 +477,18 @@ public class OutputCacheGetSetTests : IClassFixture<RedisConnectionFixture>
         var impl = Assert.IsAssignableFrom<RedisOutputCacheStore>(cache);
 
         // start vanilla
-        await _fixture.Database.KeyDeleteAsync(
-            new RedisKey[]
-            {
-                "TestPrefix__MSOCT",
-                "TestPrefix__MSOCT_a",
-                "TestPrefix__MSOCT_b",
-                "TestPrefix__MSOCT_c",
-                "TestPrefix__MSOCT_d"
-            }
-        );
+        await _fixture
+            .Database
+            .KeyDeleteAsync(
+                new RedisKey[]
+                {
+                    "TestPrefix__MSOCT",
+                    "TestPrefix__MSOCT_a",
+                    "TestPrefix__MSOCT_b",
+                    "TestPrefix__MSOCT_c",
+                    "TestPrefix__MSOCT_d"
+                }
+            );
 
         await cache.SetAsync(
             Guid.NewGuid().ToString(),

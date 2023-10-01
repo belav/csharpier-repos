@@ -1145,10 +1145,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
                     if (!isFound)
                     {
                         // A field on the type isnt found. See if the field has OptionallySerializable and the type has the deserialization constructor
-                        Object[] attrs = cache.memberInfos[i].GetCustomAttributes(
-                            typeof(OptionalFieldAttribute),
-                            false
-                        );
+                        Object[] attrs = cache
+                            .memberInfos[i]
+                            .GetCustomAttributes(typeof(OptionalFieldAttribute), false);
                         if ((attrs == null || attrs.Length == 0) && !bSimpleAssembly)
                         {
                             // the member isnt optionally serializable

@@ -47,17 +47,19 @@ public static class RateLimiterEndpointConventionBuilderExtensions
 
         builder.Add(endpointBuilder =>
         {
-            endpointBuilder.Metadata.Add(
-                new EnableRateLimitingAttribute(
-                    new DefaultRateLimiterPolicy(
-                        RateLimiterOptions.ConvertPartitioner<TPartitionKey>(
-                            null,
-                            policy.GetPartition
-                        ),
-                        policy.OnRejected
+            endpointBuilder
+                .Metadata
+                .Add(
+                    new EnableRateLimitingAttribute(
+                        new DefaultRateLimiterPolicy(
+                            RateLimiterOptions.ConvertPartitioner<TPartitionKey>(
+                                null,
+                                policy.GetPartition
+                            ),
+                            policy.OnRejected
+                        )
                     )
-                )
-            );
+                );
         });
         return builder;
     }

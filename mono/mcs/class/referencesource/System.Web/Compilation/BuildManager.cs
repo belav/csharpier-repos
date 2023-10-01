@@ -476,9 +476,9 @@ namespace System.Web.Compilation
                 this.ResolveAssembly
             );
 
-            _globalAsaxVirtualPath = HttpRuntime.AppDomainAppVirtualPathObject.SimpleCombine(
-                HttpApplicationFactory.applicationFileName
-            );
+            _globalAsaxVirtualPath = HttpRuntime
+                .AppDomainAppVirtualPathObject
+                .SimpleCombine(HttpApplicationFactory.applicationFileName);
 
             _webHashFilePath = Path.Combine(HttpRuntime.CodegenDirInternal, "hash\\hash.web");
 
@@ -822,10 +822,12 @@ namespace System.Web.Compilation
                 // VSWhidbey 537929 : Setup a filechange monitor for the web.hash file. If this file is modified,
                 // we will need to shutdown the appdomain so we don't use the obsolete assemblies. The new appdomain
                 // will use the up-to-date assemblies.
-                HttpRuntime.FileChangesMonitor.StartMonitoringFile(
-                    _webHashFilePath,
-                    new FileChangeEventHandler(this.OnWebHashFileChange)
-                );
+                HttpRuntime
+                    .FileChangesMonitor
+                    .StartMonitoringFile(
+                        _webHashFilePath,
+                        new FileChangeEventHandler(this.OnWebHashFileChange)
+                    );
                 Debug.Assert(File.Exists(_webHashFilePath), _webHashFilePath);
             }
             finally
@@ -943,8 +945,9 @@ namespace System.Web.Compilation
                 HttpRuntime.CodegenDirInternal,
                 "preStartInitList.web"
             );
-            Tuple<long, long> specialFilesCombinedHash =
-                _theBuildManager._codeGenCache.GetPreservedSpecialFilesCombinedHash();
+            Tuple<long, long> specialFilesCombinedHash = _theBuildManager
+                ._codeGenCache
+                .GetPreservedSpecialFilesCombinedHash();
             // Check top level files have changed
             long topLevelFilesHash = _theBuildManager.CheckTopLevelFilesUpToDate(
                 specialFilesCombinedHash.Item1
@@ -1693,12 +1696,14 @@ namespace System.Web.Compilation
             // First, always try System.Web.dll
             try
             {
-                type = typeof(BuildManager).Assembly.GetType(
-                    typeName,
-                    false /*throwOnError*/
-                    ,
-                    ignoreCase
-                );
+                type = typeof(BuildManager)
+                    .Assembly
+                    .GetType(
+                        typeName,
+                        false /*throwOnError*/
+                        ,
+                        ignoreCase
+                    );
             }
             catch (ArgumentException e)
             {

@@ -39,8 +39,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         public TextChangeMerger(Document document)
         {
             _oldDocument = document;
-            _differenceService =
-                document.Project.Solution.Services.GetRequiredService<IDocumentTextDifferencingService>();
+            _differenceService = document
+                .Project
+                .Solution
+                .Services
+                .GetRequiredService<IDocumentTextDifferencingService>();
         }
 
         /// <summary>

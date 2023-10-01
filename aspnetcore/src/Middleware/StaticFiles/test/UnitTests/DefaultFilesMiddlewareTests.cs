@@ -124,9 +124,9 @@ public class DefaultFilesMiddlewareTests
                                     new Endpoint(
                                         (c) =>
                                         {
-                                            return context.Response.WriteAsync(
-                                                context.Request.Path.Value
-                                            );
+                                            return context
+                                                .Response
+                                                .WriteAsync(context.Request.Path.Value);
                                         },
                                         new EndpointMetadataCollection(),
                                         "test"

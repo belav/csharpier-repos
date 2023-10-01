@@ -146,15 +146,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                 _renameAnnotations = parameters.RenameAnnotations;
 
                 _aliasSymbol = _renamedSymbol as IAliasSymbol;
-                _renamableDeclarationLocation = _renamedSymbol.Locations.FirstOrDefault(
-                    loc => loc.IsInSource && loc.SourceTree == _semanticModel.SyntaxTree
-                );
+                _renamableDeclarationLocation = _renamedSymbol
+                    .Locations
+                    .FirstOrDefault(
+                        loc => loc.IsInSource && loc.SourceTree == _semanticModel.SyntaxTree
+                    );
                 _isVerbatim = _replacementText.StartsWith("@", StringComparison.Ordinal);
 
-                _simplificationService =
-                    parameters.Document.Project.Services.GetRequiredService<ISimplificationService>();
-                _semanticFactsService =
-                    parameters.Document.Project.Services.GetRequiredService<ISemanticFactsService>();
+                _simplificationService = parameters
+                    .Document
+                    .Project
+                    .Services
+                    .GetRequiredService<ISimplificationService>();
+                _semanticFactsService = parameters
+                    .Document
+                    .Project
+                    .Services
+                    .GetRequiredService<ISemanticFactsService>();
             }
 
             public override SyntaxNode? Visit(SyntaxNode? node)
@@ -311,7 +319,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
 
                 var annotation = new SyntaxAnnotation();
                 newNode = newNode.WithAdditionalAnnotations(annotation);
-                var speculativeTree = originalNode.SyntaxTree
+                var speculativeTree = originalNode
+                    .SyntaxTree
                     .GetRoot(_cancellationToken)
                     .ReplaceNode(originalNode, newNode);
                 newNode = speculativeTree.GetAnnotatedNodes<SyntaxNode>(annotation).First();
@@ -341,7 +350,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                     expandParameter: expandParameter,
                     cancellationToken: _cancellationToken
                 );
-                speculativeTree = originalNode.SyntaxTree
+                speculativeTree = originalNode
+                    .SyntaxTree
                     .GetRoot(_cancellationToken)
                     .ReplaceNode(originalNode, newNode);
                 newNode = speculativeTree.GetAnnotatedNodes<SyntaxNode>(annotation).First();
@@ -1110,9 +1120,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
 
                     visitor.Visit(memberDeclaration);
                     conflicts.AddRange(
-                        visitor.ConflictingTokens.Select(
-                            t => reverseMappedLocations[t.GetLocation()]
-                        )
+                        visitor
+                            .ConflictingTokens
+                            .Select(t => reverseMappedLocations[t.GetLocation()])
                     );
 
                     // If this is a parameter symbol for a partial method definition, be sure we visited
@@ -1127,16 +1137,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                             .PartialImplementationPart
                             .Parameters[renamedParameterSymbol.Ordinal];
 
-                        token = matchingParameterSymbol.Locations
+                        token = matchingParameterSymbol
+                            .Locations
                             .Single()
                             .FindToken(cancellationToken);
                         memberDeclaration = token.GetAncestor<MemberDeclarationSyntax>();
                         visitor = new LocalConflictVisitor(token);
                         visitor.Visit(memberDeclaration);
                         conflicts.AddRange(
-                            visitor.ConflictingTokens.Select(
-                                t => reverseMappedLocations[t.GetLocation()]
-                            )
+                            visitor
+                                .ConflictingTokens
+                                .Select(t => reverseMappedLocations[t.GetLocation()])
                         );
                     }
                 }
@@ -1148,9 +1159,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
 
                     visitor.Visit(memberDeclaration);
                     conflicts.AddRange(
-                        visitor.ConflictingTokens.Select(
-                            t => reverseMappedLocations[t.GetLocation()]
-                        )
+                        visitor
+                            .ConflictingTokens
+                            .Select(t => reverseMappedLocations[t.GetLocation()])
                     );
                 }
                 else if (renamedSymbol.Kind == SymbolKind.Method)
@@ -1203,7 +1214,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                         .ConfigureAwait(false);
                     var currentUsing = (UsingDirectiveSyntax)token.Parent!.Parent!.Parent!;
 
-                    var namespaceDecl = token.Parent
+                    var namespaceDecl = token
+                        .Parent
                         .Ancestors()
                         .OfType<BaseNamespaceDeclarationSyntax>()
                         .FirstOrDefault();
@@ -1237,7 +1249,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                 {
                     foreach (var location in renamedSymbol.Locations)
                     {
-                        var token = await location.SourceTree!
+                        var token = await location
+                            .SourceTree!
                             .GetTouchingTokenAsync(
                                 location.SourceSpan.Start,
                                 cancellationToken,
@@ -1266,12 +1279,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                 // if the renamed symbol is a type member, it's name should not conflict with a type parameter
                 if (
                     renamedSymbol.ContainingType != null
-                    && renamedSymbol.ContainingType
+                    && renamedSymbol
+                        .ContainingType
                         .GetMembers(renamedSymbol.Name)
                         .Contains(renamedSymbol)
                 )
                 {
-                    var conflictingLocations = renamedSymbol.ContainingType.TypeParameters
+                    var conflictingLocations = renamedSymbol
+                        .ContainingType
+                        .TypeParameters
                         .Where(t => t.Name == renamedSymbol.Name)
                         .SelectMany(t => t.Locations);
 
@@ -1409,7 +1425,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                 {
                     foreach (var implicitReferenceLocation in implicitReferenceLocations)
                     {
-                        var token = await implicitReferenceLocation.Location.SourceTree!
+                        var token = await implicitReferenceLocation
+                            .Location
+                            .SourceTree!
                             .GetTouchingTokenAsync(
                                 implicitReferenceLocation.Location.SourceSpan.Start,
                                 cancellationToken,
@@ -1421,9 +1439,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                         {
                             case SyntaxKind.ForEachKeyword:
                                 return ImmutableArray.Create(
-                                    (
-                                        (CommonForEachStatementSyntax)token.Parent!
-                                    ).Expression.GetLocation()
+                                    ((CommonForEachStatementSyntax)token.Parent!)
+                                        .Expression
+                                        .GetLocation()
                                 );
                             case SyntaxKind.AwaitKeyword:
                                 return ImmutableArray.Create(token.GetLocation());

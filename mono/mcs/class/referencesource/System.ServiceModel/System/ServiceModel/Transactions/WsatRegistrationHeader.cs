@@ -132,9 +132,9 @@ namespace System.ServiceModel.Transactions
                 catch (XmlException e)
                 {
                     DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidEnlistmentHeaderException(e.Message, e)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new InvalidEnlistmentHeaderException(e.Message, e));
                 }
             }
 
@@ -163,9 +163,11 @@ namespace System.ServiceModel.Transactions
             Guid transactionId = reader.ReadElementContentAsGuid();
             if (transactionId == Guid.Empty)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(SR.GetString(SR.InvalidRegistrationHeaderTransactionId))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(SR.GetString(SR.InvalidRegistrationHeaderTransactionId))
+                    );
             }
 
             // ContextId
@@ -185,9 +187,11 @@ namespace System.ServiceModel.Transactions
                     || !Uri.TryCreate(contextId, UriKind.Absolute, out uri)
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(SR.GetString(SR.InvalidRegistrationHeaderIdentifier))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new XmlException(SR.GetString(SR.InvalidRegistrationHeaderIdentifier))
+                        );
                 }
             }
             else
@@ -207,9 +211,11 @@ namespace System.ServiceModel.Transactions
                 tokenId = reader.ReadElementContentAsString().Trim();
                 if (tokenId.Length == 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(SR.GetString(SR.InvalidRegistrationHeaderTokenId))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new XmlException(SR.GetString(SR.InvalidRegistrationHeaderTokenId))
+                        );
                 }
             }
             else

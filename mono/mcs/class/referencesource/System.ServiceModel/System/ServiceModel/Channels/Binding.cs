@@ -30,10 +30,12 @@ namespace System.ServiceModel.Channels
         {
             if (string.IsNullOrEmpty(name))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "name",
-                    SR.GetString(SR.SFXBindingNameCannotBeNullOrEmpty)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "name",
+                        SR.GetString(SR.SFXBindingNameCannotBeNullOrEmpty)
+                    );
             }
             if (ns == null)
             {
@@ -57,23 +59,27 @@ namespace System.ServiceModel.Channels
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.SFxTimeoutOutOfRange0)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.SFxTimeoutOutOfRange0)
+                            )
+                        );
                 }
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                            )
+                        );
                 }
 
                 this.closeTimeout = value;
@@ -92,10 +98,12 @@ namespace System.ServiceModel.Channels
             set
             {
                 if (string.IsNullOrEmpty(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "value",
-                        SR.GetString(SR.SFXBindingNameCannotBeNullOrEmpty)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(
+                            "value",
+                            SR.GetString(SR.SFXBindingNameCannotBeNullOrEmpty)
+                        );
 
                 this.name = value;
             }
@@ -127,23 +135,27 @@ namespace System.ServiceModel.Channels
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.SFxTimeoutOutOfRange0)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.SFxTimeoutOutOfRange0)
+                            )
+                        );
                 }
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                            )
+                        );
                 }
 
                 this.openTimeout = value;
@@ -158,23 +170,27 @@ namespace System.ServiceModel.Channels
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.SFxTimeoutOutOfRange0)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.SFxTimeoutOutOfRange0)
+                            )
+                        );
                 }
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                            )
+                        );
                 }
 
                 this.receiveTimeout = value;
@@ -196,23 +212,27 @@ namespace System.ServiceModel.Channels
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.SFxTimeoutOutOfRange0)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.SFxTimeoutOutOfRange0)
+                            )
+                        );
                 }
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                            )
+                        );
                 }
 
                 this.sendTimeout = value;
@@ -255,11 +275,13 @@ namespace System.ServiceModel.Channels
                 )
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SecurityCapabilitiesMismatched, this)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SecurityCapabilitiesMismatched, this)
+                        )
+                    );
             }
         }
 
@@ -442,49 +464,59 @@ namespace System.ServiceModel.Channels
             {
                 if (contractName == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.CustomBindingRequiresTransport, this.Name)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.CustomBindingRequiresTransport, this.Name)
+                            )
+                        );
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SFxCustomBindingNeedsTransport1, contractName)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SFxCustomBindingNeedsTransport1, contractName)
+                            )
+                        );
                 }
             }
             if (index != elements.Count - 1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.TransportBindingElementMustBeLast,
-                            this.Name,
-                            transport.GetType().Name
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.TransportBindingElementMustBeLast,
+                                this.Name,
+                                transport.GetType().Name
+                            )
                         )
-                    )
-                );
+                    );
             }
             if (string.IsNullOrEmpty(transport.Scheme))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.InvalidBindingScheme, transport.GetType().Name)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.InvalidBindingScheme, transport.GetType().Name)
+                        )
+                    );
             }
 
             if (this.MessageVersion == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.MessageVersionMissingFromBinding, this.Name)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.MessageVersionMissingFromBinding, this.Name)
+                        )
+                    );
             }
         }
 

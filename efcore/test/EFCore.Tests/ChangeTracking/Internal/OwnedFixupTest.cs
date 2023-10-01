@@ -615,25 +615,27 @@ public class OwnedFixupTest
         }
         else if (useTrackGraph == true)
         {
-            context.ChangeTracker.TrackGraph(
-                principal,
-                e =>
-                {
-                    if (entityState != EntityState.Added)
+            context
+                .ChangeTracker
+                .TrackGraph(
+                    principal,
+                    e =>
                     {
-                        if (ReferenceEquals(e.Entry.Entity, dependent))
+                        if (entityState != EntityState.Added)
                         {
-                            e.Entry.Property("Id").CurrentValue = 10;
+                            if (ReferenceEquals(e.Entry.Entity, dependent))
+                            {
+                                e.Entry.Property("Id").CurrentValue = 10;
+                            }
+                            else if (ReferenceEquals(e.Entry.Entity, subDependent))
+                            {
+                                e.Entry.Property("Id").CurrentValue = 100;
+                            }
                         }
-                        else if (ReferenceEquals(e.Entry.Entity, subDependent))
-                        {
-                            e.Entry.Property("Id").CurrentValue = 100;
-                        }
-                    }
 
-                    e.Entry.State = entityState;
-                }
-            );
+                        e.Entry.State = entityState;
+                    }
+                );
         }
         else
         {
@@ -787,25 +789,27 @@ public class OwnedFixupTest
         }
         else if (useTrackGraph == true)
         {
-            context.ChangeTracker.TrackGraph(
-                principal,
-                e =>
-                {
-                    if (entityState != EntityState.Added)
+            context
+                .ChangeTracker
+                .TrackGraph(
+                    principal,
+                    e =>
                     {
-                        if (ReferenceEquals(e.Entry.Entity, dependent))
+                        if (entityState != EntityState.Added)
                         {
-                            e.Entry.Property("Id").CurrentValue = 10;
+                            if (ReferenceEquals(e.Entry.Entity, dependent))
+                            {
+                                e.Entry.Property("Id").CurrentValue = 10;
+                            }
+                            else if (ReferenceEquals(e.Entry.Entity, subDependent))
+                            {
+                                e.Entry.Property("Id").CurrentValue = 100;
+                            }
                         }
-                        else if (ReferenceEquals(e.Entry.Entity, subDependent))
-                        {
-                            e.Entry.Property("Id").CurrentValue = 100;
-                        }
-                    }
 
-                    e.Entry.State = entityState;
-                }
-            );
+                        e.Entry.State = entityState;
+                    }
+                );
         }
         else
         {
@@ -954,25 +958,27 @@ public class OwnedFixupTest
         }
         else if (useTrackGraph == true)
         {
-            context.ChangeTracker.TrackGraph(
-                principal,
-                e =>
-                {
-                    if (entityState != EntityState.Added)
+            context
+                .ChangeTracker
+                .TrackGraph(
+                    principal,
+                    e =>
                     {
-                        if (ReferenceEquals(e.Entry.Entity, dependent))
+                        if (entityState != EntityState.Added)
                         {
-                            e.Entry.Property("Id").CurrentValue = 10;
+                            if (ReferenceEquals(e.Entry.Entity, dependent))
+                            {
+                                e.Entry.Property("Id").CurrentValue = 10;
+                            }
+                            else if (ReferenceEquals(e.Entry.Entity, subDependent))
+                            {
+                                e.Entry.Property("Id").CurrentValue = 100;
+                            }
                         }
-                        else if (ReferenceEquals(e.Entry.Entity, subDependent))
-                        {
-                            e.Entry.Property("Id").CurrentValue = 100;
-                        }
-                    }
 
-                    e.Entry.State = entityState;
-                }
-            );
+                        e.Entry.State = entityState;
+                    }
+                );
         }
         else
         {
@@ -5840,7 +5846,8 @@ public class OwnedFixupTest
     {
         EntityState GetEntryState<TEntity>(EquatableEntitiesContext context, string role = null)
             where TEntity : class =>
-            context.ChangeTracker
+            context
+                .ChangeTracker
                 .Entries<TEntity>()
                 .Single(e => role == null || e.Property("Value").CurrentValue.Equals(role))
                 .State;

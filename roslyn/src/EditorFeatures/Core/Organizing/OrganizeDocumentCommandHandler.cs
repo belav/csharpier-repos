@@ -85,7 +85,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Organizing
         {
             if (IsCommandSupported(args, needsSemantics, out var workspace))
             {
-                var organizeImportsService = workspace.Services.SolutionServices
+                var organizeImportsService = workspace
+                    .Services
+                    .SolutionServices
                     .GetProjectServices(args.SubjectBuffer)!
                     .GetRequiredService<IOrganizeImportsService>();
                 return new CommandState(
@@ -163,8 +165,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Organizing
 
             var snapshotSpan = textView.GetTextElementSpan(caretPoint.Value);
 
-            var indicatorFactory =
-                workspace.Services.GetRequiredService<IBackgroundWorkIndicatorFactory>();
+            var indicatorFactory = workspace
+                .Services
+                .GetRequiredService<IBackgroundWorkIndicatorFactory>();
             using var backgroundWorkContext = indicatorFactory.Create(
                 commandArgs.TextView,
                 snapshotSpan,

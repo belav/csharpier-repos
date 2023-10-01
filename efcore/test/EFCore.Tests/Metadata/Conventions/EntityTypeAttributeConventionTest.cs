@@ -61,10 +61,12 @@ public class EntityTypeAttributeConventionTest
 
         Assert.Equal(2, modelBuilder.Model.GetEntityTypes().Count());
         Assert.True(
-            modelBuilder.Model
+            modelBuilder
+                .Model
                 .FindEntityType(typeof(Customer))
                 .FindNavigation(nameof(Customer.Address))
-                .ForeignKey.IsOwnership
+                .ForeignKey
+                .IsOwnership
         );
     }
 
@@ -162,7 +164,8 @@ public class EntityTypeAttributeConventionTest
     }
 
     private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-        InMemoryTestHelpers.Instance
+        InMemoryTestHelpers
+            .Instance
             .CreateContextServices()
             .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 

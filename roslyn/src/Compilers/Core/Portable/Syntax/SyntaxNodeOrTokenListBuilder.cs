@@ -142,7 +142,8 @@ namespace Microsoft.CodeAnalysis.Syntax
                         );
                     case 3:
                         return new SyntaxNodeOrTokenList(
-                            InternalSyntax.SyntaxList
+                            InternalSyntax
+                                .SyntaxList
                                 .List(_nodes[0]!, _nodes[1]!, _nodes[2]!)
                                 .CreateRed(),
                             index: 0

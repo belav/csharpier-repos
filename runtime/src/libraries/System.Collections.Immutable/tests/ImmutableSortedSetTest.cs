@@ -100,7 +100,8 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void ChangeSortComparer()
         {
-            ImmutableSortedSet<string> ordinalSet = ImmutableSortedSet<string>.Empty
+            ImmutableSortedSet<string> ordinalSet = ImmutableSortedSet<string>
+                .Empty
                 .WithComparer(StringComparer.Ordinal)
                 .Add("apple")
                 .Add("APPLE");
@@ -117,7 +118,8 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void ToUnorderedTest()
         {
-            ImmutableHashSet<int> result = ImmutableSortedSet<int>.Empty
+            ImmutableHashSet<int> result = ImmutableSortedSet<int>
+                .Empty
                 .Add(3)
                 .ToImmutableHashSet();
             Assert.True(result.Contains(3));
@@ -198,9 +200,9 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void IndexGetTest()
         {
-            ImmutableSortedSet<int> set = ImmutableSortedSet<int>.Empty.Union(
-                Enumerable.Range(1, 10).Select(n => n * 10)
-            ); // 10, 20, 30, ... 100
+            ImmutableSortedSet<int> set = ImmutableSortedSet<int>
+                .Empty
+                .Union(Enumerable.Range(1, 10).Select(n => n * 10)); // 10, 20, 30, ... 100
 
             int i = 0;
             foreach (int item in set)

@@ -31,9 +31,12 @@ namespace System.Runtime.Serialization.Configuration
                 {
                     if (value == null)
                     {
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                            "value"
-                        );
+                        throw System
+                            .Runtime
+                            .Serialization
+                            .DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperArgumentNull("value");
                     }
                     if (BaseGet(index) != null)
                     {
@@ -52,9 +55,12 @@ namespace System.Runtime.Serialization.Configuration
             {
                 if (element == null)
                 {
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "element"
-                    );
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("element");
                 }
             }
             BaseAdd(element);
@@ -85,9 +91,12 @@ namespace System.Runtime.Serialization.Configuration
         {
             if (element == null)
             {
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "element"
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("element");
             }
             return ((TypeElement)element).Key;
         }
@@ -96,9 +105,12 @@ namespace System.Runtime.Serialization.Configuration
         {
             if (element == null)
             {
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "element"
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("element");
             }
             return BaseIndexOf(element);
         }
@@ -111,9 +123,12 @@ namespace System.Runtime.Serialization.Configuration
             {
                 if (element == null)
                 {
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "element"
-                    );
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("element");
                 }
             }
             BaseRemove(this.GetElementKey(element));

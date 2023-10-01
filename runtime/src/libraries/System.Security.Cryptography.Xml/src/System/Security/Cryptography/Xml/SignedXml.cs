@@ -1245,7 +1245,8 @@ namespace System.Security.Cryptography.Xml
                 m_signature.SignatureValue
             );
 
-            return m_signature.SignatureValue
+            return m_signature
+                .SignatureValue
                 .AsSpan()
                 .SequenceEqual(hashValue.AsSpan(0, m_signature.SignatureValue.Length));
         }

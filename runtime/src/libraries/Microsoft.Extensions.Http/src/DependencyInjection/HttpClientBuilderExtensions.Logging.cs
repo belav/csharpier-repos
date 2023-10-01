@@ -52,28 +52,34 @@ namespace Microsoft.Extensions.DependencyInjection
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(httpClientLoggerFactory);
 
-            builder.Services.Configure<HttpClientFactoryOptions>(
-                builder.Name,
-                options =>
-                {
-                    options.LoggingBuilderActions.Add(b =>
+            builder
+                .Services
+                .Configure<HttpClientFactoryOptions>(
+                    builder.Name,
+                    options =>
                     {
-                        IHttpClientLogger httpClientLogger = httpClientLoggerFactory(b.Services);
-                        HttpClientLoggerHandler handler = new HttpClientLoggerHandler(
-                            httpClientLogger
-                        );
+                        options
+                            .LoggingBuilderActions
+                            .Add(b =>
+                            {
+                                IHttpClientLogger httpClientLogger = httpClientLoggerFactory(
+                                    b.Services
+                                );
+                                HttpClientLoggerHandler handler = new HttpClientLoggerHandler(
+                                    httpClientLogger
+                                );
 
-                        if (wrapHandlersPipeline)
-                        {
-                            b.AdditionalHandlers.Insert(0, handler);
-                        }
-                        else
-                        {
-                            b.AdditionalHandlers.Add(handler);
-                        }
-                    });
-                }
-            );
+                                if (wrapHandlersPipeline)
+                                {
+                                    b.AdditionalHandlers.Insert(0, handler);
+                                }
+                                else
+                                {
+                                    b.AdditionalHandlers.Add(handler);
+                                }
+                            });
+                    }
+                );
 
             return builder;
         }
@@ -138,14 +144,16 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             ThrowHelper.ThrowIfNull(builder);
 
-            builder.Services.Configure<HttpClientFactoryOptions>(
-                builder.Name,
-                options =>
-                {
-                    options.LoggingBuilderActions.Clear();
-                    options.SuppressDefaultLogging = true;
-                }
-            );
+            builder
+                .Services
+                .Configure<HttpClientFactoryOptions>(
+                    builder.Name,
+                    options =>
+                    {
+                        options.LoggingBuilderActions.Clear();
+                        options.SuppressDefaultLogging = true;
+                    }
+                );
 
             return builder;
         }
@@ -159,10 +167,12 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             ThrowHelper.ThrowIfNull(builder);
 
-            builder.Services.Configure<HttpClientFactoryOptions>(
-                builder.Name,
-                options => options.SuppressDefaultLogging = false
-            );
+            builder
+                .Services
+                .Configure<HttpClientFactoryOptions>(
+                    builder.Name,
+                    options => options.SuppressDefaultLogging = false
+                );
             return builder;
         }
     }

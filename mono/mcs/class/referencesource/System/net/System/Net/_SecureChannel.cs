@@ -524,11 +524,9 @@ namespace System.Net.Security
                 X509Store store = EnsureStoreOpened(m_ServerMode);
                 if (store != null)
                 {
-                    collectionEx = store.Certificates.Find(
-                        X509FindType.FindByThumbprint,
-                        certHash,
-                        false
-                    );
+                    collectionEx = store
+                        .Certificates
+                        .Find(X509FindType.FindByThumbprint, certHash, false);
                     if (collectionEx.Count > 0 && collectionEx[0].HasPrivateKey)
                     {
                         if (Logging.On)
@@ -547,11 +545,9 @@ namespace System.Net.Security
                 store = EnsureStoreOpened(!m_ServerMode);
                 if (store != null)
                 {
-                    collectionEx = store.Certificates.Find(
-                        X509FindType.FindByThumbprint,
-                        certHash,
-                        false
-                    );
+                    collectionEx = store
+                        .Certificates
+                        .Find(X509FindType.FindByThumbprint, certHash, false);
                     if (collectionEx.Count > 0 && collectionEx[0].HasPrivateKey)
                     {
                         if (Logging.On)

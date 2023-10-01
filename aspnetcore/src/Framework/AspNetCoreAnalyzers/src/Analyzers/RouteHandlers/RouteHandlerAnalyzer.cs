@@ -163,15 +163,16 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
                     var foundMethodReferenceBody = false;
                     if (!methodReference.Method.DeclaringSyntaxReferences.IsEmpty)
                     {
-                        var syntaxReference =
-                            methodReference.Method.DeclaringSyntaxReferences.Single();
+                        var syntaxReference = methodReference
+                            .Method
+                            .DeclaringSyntaxReferences
+                            .Single();
                         var syntaxNode = syntaxReference.GetSyntax(context.CancellationToken);
                         var methodOperation =
                             syntaxNode.SyntaxTree == invocation.SemanticModel!.SyntaxTree
-                                ? invocation.SemanticModel.GetOperation(
-                                    syntaxNode,
-                                    context.CancellationToken
-                                )
+                                ? invocation
+                                    .SemanticModel
+                                    .GetOperation(syntaxNode, context.CancellationToken)
                                 : null;
                         if (
                             methodOperation is ILocalFunctionOperation
@@ -254,12 +255,14 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
     )
     {
         return targetMethod.Name.StartsWith("Map", StringComparison.Ordinal)
-            && SymbolEqualityComparer.Default.Equals(
-                wellKnownTypes.Get(
-                    WellKnownType.Microsoft_AspNetCore_Builder_EndpointRouteBuilderExtensions
-                ),
-                targetMethod.ContainingType
-            )
+            && SymbolEqualityComparer
+                .Default
+                .Equals(
+                    wellKnownTypes.Get(
+                        WellKnownType.Microsoft_AspNetCore_Builder_EndpointRouteBuilderExtensions
+                    ),
+                    targetMethod.ContainingType
+                )
             && invocation.Arguments.Length == 3
             && targetMethod.Parameters.Length == 3
             && IsCompatibleDelegateType(wellKnownTypes, targetMethod);
@@ -271,19 +274,20 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
         {
             var parmeterType = targetMethod.Parameters[DelegateParameterOrdinal].Type;
             if (
-                SymbolEqualityComparer.Default.Equals(
-                    wellKnownTypes.Get(WellKnownType.System_Delegate),
-                    parmeterType
-                )
+                SymbolEqualityComparer
+                    .Default
+                    .Equals(wellKnownTypes.Get(WellKnownType.System_Delegate), parmeterType)
             )
             {
                 return true;
             }
             if (
-                SymbolEqualityComparer.Default.Equals(
-                    wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_RequestDelegate),
-                    parmeterType
-                )
+                SymbolEqualityComparer
+                    .Default
+                    .Equals(
+                        wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_RequestDelegate),
+                        parmeterType
+                    )
             )
             {
                 return true;
@@ -305,9 +309,9 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
         {
             IOperation? builder = null;
 
-            var builderArgument = operation.Arguments.SingleOrDefault(
-                a => a.Parameter?.Ordinal == 0
-            );
+            var builderArgument = operation
+                .Arguments
+                .SingleOrDefault(a => a.Parameter?.Ordinal == 0);
             if (builderArgument != null)
             {
                 builder = WalkDownConversion(builderArgument.Value);

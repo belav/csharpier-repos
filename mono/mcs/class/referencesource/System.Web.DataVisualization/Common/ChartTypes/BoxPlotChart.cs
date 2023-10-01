@@ -379,9 +379,11 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Back Paint event
                 if (!selection)
                 {
-                    common.Chart.CallOnPrePaint(
-                        new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
-                    );
+                    common
+                        .Chart
+                        .CallOnPrePaint(
+                            new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
+                        );
                 }
 
                 //************************************************************
@@ -849,9 +851,11 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Paint event
                 if (!selection)
                 {
-                    common.Chart.CallOnPostPaint(
-                        new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
-                    );
+                    common
+                        .Chart
+                        .CallOnPostPaint(
+                            new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
+                        );
                 }
 
                 // Data series index
@@ -1348,9 +1352,11 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Back Paint event
                 if (!selection)
                 {
-                    common.Chart.CallOnPrePaint(
-                        new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
-                    );
+                    common
+                        .Chart
+                        .CallOnPrePaint(
+                            new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
+                        );
                 }
 
                 //************************************************************
@@ -1867,9 +1873,11 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Paint event
                 if (!selection)
                 {
-                    common.Chart.CallOnPrePaint(
-                        new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
-                    );
+                    common
+                        .Chart
+                        .CallOnPrePaint(
+                            new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
+                        );
                 }
             }
         }

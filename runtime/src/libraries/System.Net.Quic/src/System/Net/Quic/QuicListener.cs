@@ -132,12 +132,14 @@ public sealed partial class QuicListener : IAsyncDisposable
         {
             QUIC_HANDLE* handle;
             ThrowHelper.ThrowIfMsQuicError(
-                MsQuicApi.Api.ListenerOpen(
-                    MsQuicApi.Api.Registration,
-                    &NativeCallback,
-                    (void*)GCHandle.ToIntPtr(context),
-                    &handle
-                ),
+                MsQuicApi
+                    .Api
+                    .ListenerOpen(
+                        MsQuicApi.Api.Registration,
+                        &NativeCallback,
+                        (void*)GCHandle.ToIntPtr(context),
+                        &handle
+                    ),
                 "ListenerOpen failed"
             );
             _handle = new MsQuicContextSafeHandle(handle, context, SafeHandleType.Listener);
@@ -168,12 +170,9 @@ public sealed partial class QuicListener : IAsyncDisposable
             address.Family = QUIC_ADDRESS_FAMILY_UNSPEC;
         }
         ThrowHelper.ThrowIfMsQuicError(
-            MsQuicApi.Api.ListenerStart(
-                _handle,
-                alpnBuffers.Buffers,
-                (uint)alpnBuffers.Count,
-                &address
-            ),
+            MsQuicApi
+                .Api
+                .ListenerStart(_handle, alpnBuffers.Buffers, (uint)alpnBuffers.Count, &address),
             "ListenerStart failed"
         );
 
@@ -203,7 +202,8 @@ public sealed partial class QuicListener : IAsyncDisposable
         GCHandle keepObject = GCHandle.Alloc(this);
         try
         {
-            object item = await _acceptQueue.Reader
+            object item = await _acceptQueue
+                .Reader
                 .ReadAsync(cancellationToken)
                 .ConfigureAwait(false);
             Interlocked.Increment(ref _pendingConnectionsCapacity);
@@ -324,18 +324,20 @@ public sealed partial class QuicListener : IAsyncDisposable
 
             await connection.DisposeAsync().ConfigureAwait(false);
             if (
-                !_acceptQueue.Writer.TryWrite(
-                    wrapException
-                        ? ExceptionDispatchInfo.SetCurrentStackTrace(
-                            new QuicException(
-                                QuicError.CallbackError,
-                                null,
-                                SR.net_quic_callback_error,
-                                ex
+                !_acceptQueue
+                    .Writer
+                    .TryWrite(
+                        wrapException
+                            ? ExceptionDispatchInfo.SetCurrentStackTrace(
+                                new QuicException(
+                                    QuicError.CallbackError,
+                                    null,
+                                    SR.net_quic_callback_error,
+                                    ex
+                                )
                             )
-                        )
-                        : ex
-                )
+                            : ex
+                    )
             )
             {
                 // Channel has been closed, connection is already disposed, do nothing.
@@ -467,11 +469,13 @@ public sealed partial class QuicListener : IAsyncDisposable
 
         // Flush the queue and dispose all remaining connections.
         await _disposeCts.CancelAsync().ConfigureAwait(false);
-        _acceptQueue.Writer.TryComplete(
-            ExceptionDispatchInfo.SetCurrentStackTrace(
-                new ObjectDisposedException(GetType().FullName)
-            )
-        );
+        _acceptQueue
+            .Writer
+            .TryComplete(
+                ExceptionDispatchInfo.SetCurrentStackTrace(
+                    new ObjectDisposedException(GetType().FullName)
+                )
+            );
         while (_acceptQueue.Reader.TryRead(out object? item))
         {
             if (item is QuicConnection connection)

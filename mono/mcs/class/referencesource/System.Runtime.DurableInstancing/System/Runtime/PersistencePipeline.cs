@@ -479,7 +479,8 @@ namespace System.Runtime
             {
                 this.pipeline = pipeline;
                 this.isLoad = isLoad;
-                this.pendingModules = this.pipeline.modules
+                this.pendingModules = this.pipeline
+                    .modules
                     .Where(value => value.IsIOParticipant)
                     .ToArray();
                 this.remainingModules = this.pendingModules.Length;

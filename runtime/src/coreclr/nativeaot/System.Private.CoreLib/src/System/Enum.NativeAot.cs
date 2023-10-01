@@ -54,19 +54,21 @@ namespace System
             );
 
             return (EnumInfo<TStorage>)
-                ReflectionAugments.ReflectionCoreCallbacks.GetEnumInfo(
-                    enumType,
-                    static (underlyingType, names, valuesAsObject, isFlags) =>
-                    {
-                        // Only after we've sorted, create the underlying array.
-                        var values = new TStorage[valuesAsObject.Length];
-                        for (int i = 0; i < valuesAsObject.Length; i++)
+                ReflectionAugments
+                    .ReflectionCoreCallbacks
+                    .GetEnumInfo(
+                        enumType,
+                        static (underlyingType, names, valuesAsObject, isFlags) =>
                         {
-                            values[i] = (TStorage)valuesAsObject[i];
+                            // Only after we've sorted, create the underlying array.
+                            var values = new TStorage[valuesAsObject.Length];
+                            for (int i = 0; i < valuesAsObject.Length; i++)
+                            {
+                                values[i] = (TStorage)valuesAsObject[i];
+                            }
+                            return new EnumInfo<TStorage>(underlyingType, values, names, isFlags);
                         }
-                        return new EnumInfo<TStorage>(underlyingType, values, names, isFlags);
-                    }
-                );
+                    );
         }
 #pragma warning restore
 

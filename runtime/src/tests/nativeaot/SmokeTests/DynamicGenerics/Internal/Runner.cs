@@ -138,7 +138,8 @@ namespace CoreFXTestLibrary.Internal
                     else
                     {
                         if (
-                            !t.ExpectsException.ExceptionType
+                            !t.ExpectsException
+                                .ExceptionType
                                 .GetTypeInfo()
                                 .IsAssignableFrom(ex.GetType().GetTypeInfo())
                         )

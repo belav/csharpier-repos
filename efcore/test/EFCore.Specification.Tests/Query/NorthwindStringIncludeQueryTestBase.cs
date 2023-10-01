@@ -218,9 +218,10 @@ public abstract class NorthwindStringIncludeQueryTestBase<TFixture>
                 .Single(
                     mi =>
                         mi.GetGenericArguments().Count() == 3
-                        && mi.GetParameters()[0].ParameterType.GenericTypeArguments[
-                            1
-                        ].IsGenericParameter
+                        && mi.GetParameters()[0]
+                            .ParameterType
+                            .GenericTypeArguments[1]
+                            .IsGenericParameter
                 );
 
         private static readonly MethodInfo _thenIncludeAfterEnumerableMethodInfo =
@@ -243,8 +244,9 @@ public abstract class NorthwindStringIncludeQueryTestBase<TFixture>
                 && methodCallExpression.Method.IsGenericMethod
             )
             {
-                var genericMethodDefinition =
-                    methodCallExpression.Method.GetGenericMethodDefinition();
+                var genericMethodDefinition = methodCallExpression
+                    .Method
+                    .GetGenericMethodDefinition();
                 if (genericMethodDefinition == _includeMethodInfo)
                 {
                     var source = Visit(methodCallExpression.Arguments[0]);

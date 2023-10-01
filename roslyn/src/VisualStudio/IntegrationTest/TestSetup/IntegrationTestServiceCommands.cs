@@ -112,7 +112,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup
             object sender,
             ResolveEventArgs args
         ) =>
-            AppDomain.CurrentDomain
+            AppDomain
+                .CurrentDomain
                 .GetAssemblies()
                 .SingleOrDefault(assembly => assembly.FullName == args.Name);
 
@@ -151,7 +152,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup
                 _ = Task.Run(async () =>
                 {
                     var componentModel = (IComponentModel?)
-                        await AsyncServiceProvider.GlobalProvider
+                        await AsyncServiceProvider
+                            .GlobalProvider
                             .GetServiceAsync(typeof(SComponentModel))
                             .ConfigureAwait(false);
                     Assumes.Present(componentModel);
@@ -284,15 +286,17 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup
                 if (saveTask is not null)
                 {
 #pragma warning disable RS0030 // Do not used banned APIs
-                    _ = ThreadHelper.JoinableTaskFactory.RunAsync(async () =>
+                    _ = ThreadHelper
+                        .JoinableTaskFactory
+                        .RunAsync(async () =>
 #pragma warning restore RS0030 // Do not used banned APIs
-                    {
-                        // Track asynchronous save operations via Roslyn's Workspace events
-                        using var _ = _asynchronousOperationListener.BeginAsyncOperation(
-                            "OnBeforeSaveAsync"
-                        );
-                        await saveTask;
-                    });
+                        {
+                            // Track asynchronous save operations via Roslyn's Workspace events
+                            using var _ = _asynchronousOperationListener.BeginAsyncOperation(
+                                "OnBeforeSaveAsync"
+                            );
+                            await saveTask;
+                        });
                 }
 
                 // No additional work for the caller to handle

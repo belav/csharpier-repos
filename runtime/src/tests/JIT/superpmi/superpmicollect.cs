@@ -271,7 +271,8 @@ namespace SuperPMICollection
             using (
                 var resourceStream = typeof(SuperPMICollectionClass)
                     .GetTypeInfo()
-                    .Assembly.GetManifestResourceStream("SpmiTestNames")
+                    .Assembly
+                    .GetManifestResourceStream("SpmiTestNames")
             )
             using (var streamReader = new StreamReader(resourceStream))
             {
@@ -589,9 +590,9 @@ namespace SuperPMICollection
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine(
-                    "ERROR: unknown exception running collection: " + ex.Message
-                );
+                Console
+                    .Error
+                    .WriteLine("ERROR: unknown exception running collection: " + ex.Message);
                 result = 101;
             }
             finally
@@ -752,10 +753,9 @@ namespace SuperPMICollection
                             runProgramPath = Path.GetFullPath(args[i]);
                             if (!File.Exists(runProgramPath))
                             {
-                                Console.Error.WriteLine(
-                                    "Error: couldn't find program {0}",
-                                    runProgramPath
-                                );
+                                Console
+                                    .Error
+                                    .WriteLine("Error: couldn't find program {0}", runProgramPath);
                                 return 101;
                             }
                             // The rest of the arguments, if any, are passed as arguments to the run program.
@@ -829,9 +829,9 @@ namespace SuperPMICollection
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine(
-                    "ERROR: unknown exception running collection: " + ex.Message
-                );
+                Console
+                    .Error
+                    .WriteLine("ERROR: unknown exception running collection: " + ex.Message);
                 result = 101;
             }
 

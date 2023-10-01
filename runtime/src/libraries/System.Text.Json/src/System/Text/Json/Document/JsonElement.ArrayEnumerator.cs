@@ -26,10 +26,9 @@ namespace System.Text.Json
 
                 Debug.Assert(target.TokenType == JsonTokenType.StartArray);
 
-                _endIdxOrVersion = target._parent.GetEndIndex(
-                    _target._idx,
-                    includeEndElement: false
-                );
+                _endIdxOrVersion = target
+                    ._parent
+                    .GetEndIndex(_target._idx, includeEndElement: false);
             }
 
             /// <inheritdoc />

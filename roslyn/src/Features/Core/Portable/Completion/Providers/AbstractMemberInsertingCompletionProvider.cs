@@ -52,8 +52,11 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         )
         {
             // TODO: pass fallback options: https://github.com/dotnet/roslyn/issues/60786
-            var globalOptions =
-                document.Project.Solution.Services.GetService<ILegacyGlobalCleanCodeGenerationOptionsWorkspaceService>();
+            var globalOptions = document
+                .Project
+                .Solution
+                .Services
+                .GetService<ILegacyGlobalCleanCodeGenerationOptionsWorkspaceService>();
             var fallbackOptions = globalOptions?.Provider ?? CodeActionOptions.DefaultProvider;
 
             var newDocument = await DetermineNewDocumentAsync(
@@ -215,9 +218,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             var context = new CodeGenerationSolutionContext(
                 document.Project.Solution,
                 new CodeGenerationContext(
-                    contextLocation: semanticModel.SyntaxTree.GetLocation(
-                        TextSpan.FromBounds(line.Start, line.Start)
-                    )
+                    contextLocation: semanticModel
+                        .SyntaxTree
+                        .GetLocation(TextSpan.FromBounds(line.Start, line.Start))
                 ),
                 fallbackOptions
             );

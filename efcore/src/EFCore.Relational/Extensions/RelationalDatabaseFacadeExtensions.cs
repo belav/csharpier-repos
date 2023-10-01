@@ -318,16 +318,18 @@ public static class RelationalDatabaseFacadeExtensions
         {
             var rawSqlCommand = facadeDependencies.RawSqlCommandBuilder.Build(sql, parameters);
 
-            return rawSqlCommand.RelationalCommand.ExecuteNonQuery(
-                new RelationalCommandParameterObject(
-                    facadeDependencies.RelationalConnection,
-                    rawSqlCommand.ParameterValues,
-                    null,
-                    ((IDatabaseFacadeDependenciesAccessor)databaseFacade).Context,
-                    logger,
-                    CommandSource.ExecuteSqlRaw
-                )
-            );
+            return rawSqlCommand
+                .RelationalCommand
+                .ExecuteNonQuery(
+                    new RelationalCommandParameterObject(
+                        facadeDependencies.RelationalConnection,
+                        rawSqlCommand.ParameterValues,
+                        null,
+                        ((IDatabaseFacadeDependenciesAccessor)databaseFacade).Context,
+                        logger,
+                        CommandSource.ExecuteSqlRaw
+                    )
+                );
         }
         finally
         {
@@ -646,7 +648,8 @@ public static class RelationalDatabaseFacadeExtensions
         {
             var rawSqlCommand = facadeDependencies.RawSqlCommandBuilder.Build(sql, parameters);
 
-            return await rawSqlCommand.RelationalCommand
+            return await rawSqlCommand
+                .RelationalCommand
                 .ExecuteNonQueryAsync(
                     new RelationalCommandParameterObject(
                         facadeDependencies.RelationalConnection,
@@ -708,10 +711,9 @@ public static class RelationalDatabaseFacadeExtensions
         DbConnection? connection,
         bool contextOwnsConnection = false
     ) =>
-        GetFacadeDependencies(databaseFacade).RelationalConnection.SetDbConnection(
-            connection,
-            contextOwnsConnection
-        );
+        GetFacadeDependencies(databaseFacade)
+            .RelationalConnection
+            .SetDbConnection(connection, contextOwnsConnection);
 
     /// <summary>
     ///     Gets the underlying connection string configured for this <see cref="DbContext" />.
@@ -752,13 +754,14 @@ public static class RelationalDatabaseFacadeExtensions
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
     public static void OpenConnection(this DatabaseFacade databaseFacade) =>
-        (
-            (IDatabaseFacadeDependenciesAccessor)databaseFacade
-        ).Dependencies.ExecutionStrategy.Execute(
-            databaseFacade,
-            database => GetFacadeDependencies(database).RelationalConnection.Open(),
-            null
-        );
+        ((IDatabaseFacadeDependenciesAccessor)databaseFacade)
+            .Dependencies
+            .ExecutionStrategy
+            .Execute(
+                databaseFacade,
+                database => GetFacadeDependencies(database).RelationalConnection.Open(),
+                null
+            );
 
     /// <summary>
     ///     Opens the underlying <see cref="DbConnection" />.
@@ -774,14 +777,16 @@ public static class RelationalDatabaseFacadeExtensions
         this DatabaseFacade databaseFacade,
         CancellationToken cancellationToken = default
     ) =>
-        (
-            (IDatabaseFacadeDependenciesAccessor)databaseFacade
-        ).Dependencies.ExecutionStrategy.ExecuteAsync(
-            databaseFacade,
-            (database, ct) => GetFacadeDependencies(database).RelationalConnection.OpenAsync(ct),
-            null,
-            cancellationToken
-        );
+        ((IDatabaseFacadeDependenciesAccessor)databaseFacade)
+            .Dependencies
+            .ExecutionStrategy
+            .ExecuteAsync(
+                databaseFacade,
+                (database, ct) =>
+                    GetFacadeDependencies(database).RelationalConnection.OpenAsync(ct),
+                null,
+                cancellationToken
+            );
 
     /// <summary>
     ///     Closes the underlying <see cref="DbConnection" />.
@@ -817,21 +822,23 @@ public static class RelationalDatabaseFacadeExtensions
         this DatabaseFacade databaseFacade,
         IsolationLevel isolationLevel
     ) =>
-        (
-            (IDatabaseFacadeDependenciesAccessor)databaseFacade
-        ).Dependencies.ExecutionStrategy.Execute(
-            databaseFacade,
-            database =>
-            {
-                var transactionManager = database.GetTransactionManager();
+        ((IDatabaseFacadeDependenciesAccessor)databaseFacade)
+            .Dependencies
+            .ExecutionStrategy
+            .Execute(
+                databaseFacade,
+                database =>
+                {
+                    var transactionManager = database.GetTransactionManager();
 
-                return
-                    transactionManager is IRelationalTransactionManager relationalTransactionManager
-                    ? relationalTransactionManager.BeginTransaction(isolationLevel)
-                    : transactionManager.BeginTransaction();
-            },
-            null
-        );
+                    return
+                        transactionManager
+                            is IRelationalTransactionManager relationalTransactionManager
+                        ? relationalTransactionManager.BeginTransaction(isolationLevel)
+                        : transactionManager.BeginTransaction();
+                },
+                null
+            );
 
     /// <summary>
     ///     Asynchronously starts a new transaction with a given <see cref="IsolationLevel" />.
@@ -852,22 +859,24 @@ public static class RelationalDatabaseFacadeExtensions
         IsolationLevel isolationLevel,
         CancellationToken cancellationToken = default
     ) =>
-        (
-            (IDatabaseFacadeDependenciesAccessor)databaseFacade
-        ).Dependencies.ExecutionStrategy.ExecuteAsync(
-            databaseFacade,
-            (database, ct) =>
-            {
-                var transactionManager = database.GetTransactionManager();
+        ((IDatabaseFacadeDependenciesAccessor)databaseFacade)
+            .Dependencies
+            .ExecutionStrategy
+            .ExecuteAsync(
+                databaseFacade,
+                (database, ct) =>
+                {
+                    var transactionManager = database.GetTransactionManager();
 
-                return
-                    transactionManager is IRelationalTransactionManager relationalTransactionManager
-                    ? relationalTransactionManager.BeginTransactionAsync(isolationLevel, ct)
-                    : transactionManager.BeginTransactionAsync(ct);
-            },
-            null,
-            cancellationToken
-        );
+                    return
+                        transactionManager
+                            is IRelationalTransactionManager relationalTransactionManager
+                        ? relationalTransactionManager.BeginTransactionAsync(isolationLevel, ct)
+                        : transactionManager.BeginTransactionAsync(ct);
+                },
+                null,
+                cancellationToken
+            );
 
     /// <summary>
     ///     Sets the <see cref="DbTransaction" /> to be used by database operations on the <see cref="DbContext" />.
@@ -1052,9 +1061,11 @@ public static class RelationalDatabaseFacadeExtensions
     ///     <see langword="false" /> otherwise.
     /// </returns>
     public static bool IsRelational(this DatabaseFacade databaseFacade) =>
-        ((IDatabaseFacadeDependenciesAccessor)databaseFacade).Context
+        ((IDatabaseFacadeDependenciesAccessor)databaseFacade)
+            .Context
             .GetService<IDbContextOptions>()
-            .Extensions.OfType<RelationalOptionsExtension>()
+            .Extensions
+            .OfType<RelationalOptionsExtension>()
             .Any();
 
     /// <summary>

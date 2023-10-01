@@ -189,10 +189,10 @@ namespace System.Web.Security
 
         public virtual string GetPassword(string passwordAnswer)
         {
-            return SystemWebProxy.Membership.Providers[ProviderName].GetPassword(
-                UserName,
-                passwordAnswer
-            );
+            return SystemWebProxy
+                .Membership
+                .Providers[ProviderName]
+                .GetPassword(UserName, passwordAnswer);
         }
 
         internal string GetPassword(bool throwOnError)
@@ -261,11 +261,10 @@ namespace System.Web.Security
             SecurityServices.CheckPasswordParameter(newPassword, "newPassword");
 
             if (
-                !SystemWebProxy.Membership.Providers[ProviderName].ChangePassword(
-                    UserName,
-                    oldPassword,
-                    newPassword
-                )
+                !SystemWebProxy
+                    .Membership
+                    .Providers[ProviderName]
+                    .ChangePassword(UserName, oldPassword, newPassword)
             )
                 return false;
             UpdateSelf();
@@ -330,12 +329,15 @@ namespace System.Web.Security
             );
 
             if (
-                !SystemWebProxy.Membership.Providers[ProviderName].ChangePasswordQuestionAndAnswer(
-                    UserName,
-                    password,
-                    newPasswordQuestion,
-                    newPasswordAnswer
-                )
+                !SystemWebProxy
+                    .Membership
+                    .Providers[ProviderName]
+                    .ChangePasswordQuestionAndAnswer(
+                        UserName,
+                        password,
+                        newPasswordQuestion,
+                        newPasswordAnswer
+                    )
             )
                 return false;
             UpdateSelf();
@@ -344,10 +346,10 @@ namespace System.Web.Security
 
         public virtual string ResetPassword(string passwordAnswer)
         {
-            string pass = SystemWebProxy.Membership.Providers[ProviderName].ResetPassword(
-                UserName,
-                passwordAnswer
-            );
+            string pass = SystemWebProxy
+                .Membership
+                .Providers[ProviderName]
+                .ResetPassword(UserName, passwordAnswer);
             if (!String.IsNullOrEmpty(pass))
             {
                 UpdateSelf();
@@ -437,10 +439,10 @@ namespace System.Web.Security
 
         private void UpdateSelf()
         {
-            MembershipUser mu = SystemWebProxy.Membership.Providers[ProviderName].GetUser(
-                UserName,
-                false
-            );
+            MembershipUser mu = SystemWebProxy
+                .Membership
+                .Providers[ProviderName]
+                .GetUser(UserName, false);
             if (mu != null)
             {
                 try

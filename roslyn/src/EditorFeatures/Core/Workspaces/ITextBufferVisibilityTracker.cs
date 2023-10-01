@@ -89,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Workspaces
                     return;
 
 #pragma warning disable VSTHRD004 // Await SwitchToMainThreadAsync
-                await threadingContext.JoinableTaskFactory
+                await threadingContext
+                    .JoinableTaskFactory
                     .SwitchToMainThreadAsync(cancellationToken)
                     .NoThrowAwaitable();
 #pragma warning restore VSTHRD004 // Await SwitchToMainThreadAsync

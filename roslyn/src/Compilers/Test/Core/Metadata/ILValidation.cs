@@ -350,13 +350,15 @@ namespace Roslyn.Test.Utilities
                     }
                     else
                     {
-                        ILVisualizer.Default.DumpMethod(
-                            result,
-                            methodIL.MaxStack,
-                            methodIL.GetILContent(),
-                            ImmutableArray.Create<ILVisualizer.LocalInfo>(),
-                            ImmutableArray.Create<ILVisualizer.HandlerSpan>()
-                        );
+                        ILVisualizer
+                            .Default
+                            .DumpMethod(
+                                result,
+                                methodIL.MaxStack,
+                                methodIL.GetILContent(),
+                                ImmutableArray.Create<ILVisualizer.LocalInfo>(),
+                                ImmutableArray.Create<ILVisualizer.HandlerSpan>()
+                            );
 
                         offset += methodIL.Size;
                     }

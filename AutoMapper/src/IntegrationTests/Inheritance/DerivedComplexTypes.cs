@@ -43,14 +43,16 @@ public class DerivedComplexTypes : IntegrationTest<DerivedComplexTypes.DatabaseI
     {
         protected override void Seed(Context context)
         {
-            context.Customers.Add(
-                new Customer
-                {
-                    FirstName = "Bob",
-                    LastName = "Smith",
-                    Address = new DerivedLocalizedString { Value = "home" }
-                }
-            );
+            context
+                .Customers
+                .Add(
+                    new Customer
+                    {
+                        FirstName = "Bob",
+                        LastName = "Smith",
+                        Address = new DerivedLocalizedString { Value = "home" }
+                    }
+                );
 
             base.Seed(context);
         }

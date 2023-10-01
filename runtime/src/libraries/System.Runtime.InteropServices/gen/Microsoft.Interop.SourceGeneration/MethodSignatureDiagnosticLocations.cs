@@ -57,7 +57,9 @@ namespace Microsoft.Interop
         public MethodSignatureDiagnosticLocations(MethodDeclarationSyntax syntax)
             : this(
                 syntax.Identifier.Text,
-                syntax.ParameterList.Parameters
+                syntax
+                    .ParameterList
+                    .Parameters
                     .Select(p => p.Identifier.GetLocation())
                     .ToImmutableArray(),
                 syntax.Identifier.GetLocation()

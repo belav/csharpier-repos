@@ -77,9 +77,9 @@ namespace System.Workflow.Activities.Rules.Design
             if (editorService != null)
             {
                 CodeExpression experssion =
-                    typeDescriptorContext.PropertyDescriptor.GetValue(
-                        typeDescriptorContext.Instance
-                    ) as CodeExpression;
+                    typeDescriptorContext
+                        .PropertyDescriptor
+                        .GetValue(typeDescriptorContext.Instance) as CodeExpression;
                 try
                 {
                     using (
@@ -142,9 +142,9 @@ namespace System.Workflow.Activities.Rules.Design
                     baseActivity = rs.GetComponent(typeDescriptorContext.Instance) as Activity;
 
                 string conditionName =
-                    typeDescriptorContext.PropertyDescriptor.GetValue(
-                        typeDescriptorContext.Instance
-                    ) as string;
+                    typeDescriptorContext
+                        .PropertyDescriptor
+                        .GetValue(typeDescriptorContext.Instance) as string;
                 ConditionBrowserDialog dlg = new ConditionBrowserDialog(
                     baseActivity,
                     conditionName
@@ -199,20 +199,23 @@ namespace System.Workflow.Activities.Rules.Design
 
                 string ruleSetName = null;
                 RuleSetReference ruleSetReference =
-                    typeDescriptorContext.PropertyDescriptor.GetValue(
-                        typeDescriptorContext.Instance
-                    ) as RuleSetReference;
+                    typeDescriptorContext
+                        .PropertyDescriptor
+                        .GetValue(typeDescriptorContext.Instance) as RuleSetReference;
                 if (ruleSetReference != null)
                     ruleSetName = ruleSetReference.RuleSetName;
 
                 RuleSetBrowserDialog dlg = new RuleSetBrowserDialog(baseActivity, ruleSetName);
 
                 if (DialogResult.OK == editorService.ShowDialog(dlg))
-                    returnVal = typeDescriptorContext.PropertyDescriptor.Converter.ConvertFrom(
-                        typeDescriptorContext,
-                        CultureInfo.CurrentUICulture,
-                        dlg.SelectedName
-                    );
+                    returnVal = typeDescriptorContext
+                        .PropertyDescriptor
+                        .Converter
+                        .ConvertFrom(
+                            typeDescriptorContext,
+                            CultureInfo.CurrentUICulture,
+                            dlg.SelectedName
+                        );
             }
 
             return returnVal;

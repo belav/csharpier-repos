@@ -25,9 +25,9 @@ namespace System.ServiceModel.Dispatcher
                 if (this.instanceContextProvider.InstanceLifeTimeManager != null)
                 {
                     workflowDurableInstance = (WorkflowDurableInstance)instance;
-                    this.instanceContextProvider.InstanceLifeTimeManager.CleanUp(
-                        workflowDurableInstance.InstanceId
-                    );
+                    this.instanceContextProvider
+                        .InstanceLifeTimeManager
+                        .CleanUp(workflowDurableInstance.InstanceId);
                 }
             }
             base.ReleaseInstance(instanceContext, instance);

@@ -119,9 +119,10 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
                 workspace.CurrentSolution
             );
 
-            var solutionChecksum = await workspace.CurrentSolution.State.GetChecksumAsync(
-                CancellationToken.None
-            );
+            var solutionChecksum = await workspace
+                .CurrentSolution
+                .State
+                .GetChecksumAsync(CancellationToken.None);
             var solution = await remoteWorkspace
                 .GetTestAccessor()
                 .GetSolutionAsync(
@@ -175,9 +176,10 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
                 workspace.CurrentSolution
             );
 
-            var solutionChecksum = await workspace.CurrentSolution.State.GetChecksumAsync(
-                CancellationToken.None
-            );
+            var solutionChecksum = await workspace
+                .CurrentSolution
+                .State
+                .GetChecksumAsync(CancellationToken.None);
             var solution = await remoteWorkspace
                 .GetTestAccessor()
                 .GetSolutionAsync(
@@ -506,7 +508,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             using var remoteWorkspace = CreateRemoteWorkspace();
 
             // Start solution crawler in the remote workspace:
-            remoteWorkspace.Services
+            remoteWorkspace
+                .Services
                 .GetRequiredService<ISolutionCrawlerRegistrationService>()
                 .Register(remoteWorkspace);
 
@@ -685,9 +688,9 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             )
             {
                 // set up initial solution
-                var solutionChecksum = await solution.State.GetChecksumAsync(
-                    CancellationToken.None
-                );
+                var solutionChecksum = await solution
+                    .State
+                    .GetChecksumAsync(CancellationToken.None);
                 await remoteWorkspace.UpdatePrimaryBranchSolutionAsync(
                     assetProvider,
                     solutionChecksum,
@@ -778,7 +781,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
                 ? FormattingOptions2.NewLine.DefaultValue
                 : FormattingOptions2.NewLine.DefaultValue + FormattingOptions2.NewLine.DefaultValue;
             solution = solution.WithOptions(
-                solution.Options
+                solution
+                    .Options
                     .WithChangedOption(
                         FormattingOptions.NewLine,
                         LanguageNames.CSharp,
@@ -814,7 +818,9 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             using var workspace = TestWorkspace.CreateCSharp(@"");
             using var remoteWorkspace = CreateRemoteWorkspace();
 
-            var solution = workspace.CurrentSolution.Projects
+            var solution = workspace
+                .CurrentSolution
+                .Projects
                 .Single()
                 .AddAnalyzerReference(
                     new AnalyzerFileReference(
@@ -852,7 +858,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             var frozenText1 = SourceText.From("// Hello, World!");
             var frozenSolution1 = solution
                 .WithFrozenSourceGeneratedDocument(documentIdentity, frozenText1)
-                .Project.Solution;
+                .Project
+                .Solution;
 
             assetProvider = await GetAssetProviderAsync(
                 workspace,
@@ -878,7 +885,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             var frozenText2 = SourceText.From("// Hello, World! A second time!");
             var frozenSolution2 = solution
                 .WithFrozenSourceGeneratedDocument(documentIdentity, frozenText2)
-                .Project.Solution;
+                .Project
+                .Solution;
 
             assetProvider = await GetAssetProviderAsync(
                 workspace,
@@ -936,10 +944,9 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             Assert.Equal(2, syncedFullSolution.Projects.Count());
 
             // Syncing project1 should do nothing as syncing the solution already synced it over.
-            var project1Checksum = await solution.State.GetChecksumAsync(
-                project1.Id,
-                CancellationToken.None
-            );
+            var project1Checksum = await solution
+                .State
+                .GetChecksumAsync(project1.Id, CancellationToken.None);
             var project1SyncedSolution = await remoteWorkspace
                 .GetTestAccessor()
                 .GetSolutionAsync(
@@ -952,10 +959,9 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             Assert.Equal(2, project1SyncedSolution.Projects.Count());
 
             // Syncing project2 should do nothing as syncing the solution already synced it over.
-            var project2Checksum = await solution.State.GetChecksumAsync(
-                project2.Id,
-                CancellationToken.None
-            );
+            var project2Checksum = await solution
+                .State
+                .GetChecksumAsync(project2.Id, CancellationToken.None);
             var project2SyncedSolution = await remoteWorkspace
                 .GetTestAccessor()
                 .GetSolutionAsync(
@@ -993,10 +999,9 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
 
             // Syncing project 1 should just since it over.
             await solution.AppendAssetMapAsync(map, project1.Id, CancellationToken.None);
-            var project1Checksum = await solution.State.GetChecksumAsync(
-                project1.Id,
-                CancellationToken.None
-            );
+            var project1Checksum = await solution
+                .State
+                .GetChecksumAsync(project1.Id, CancellationToken.None);
             var project1SyncedSolution = await remoteWorkspace
                 .GetTestAccessor()
                 .GetSolutionAsync(
@@ -1011,10 +1016,9 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
 
             // Syncing project 2 should end up with p1 and p2 synced over.
             await solution.AppendAssetMapAsync(map, project2.Id, CancellationToken.None);
-            var project2Checksum = await solution.State.GetChecksumAsync(
-                project2.Id,
-                CancellationToken.None
-            );
+            var project2Checksum = await solution
+                .State
+                .GetChecksumAsync(project2.Id, CancellationToken.None);
             var project2SyncedSolution = await remoteWorkspace
                 .GetTestAccessor()
                 .GetSolutionAsync(
@@ -1060,10 +1064,12 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             var project2 = solution.AddProject("P2", "P2", LanguageNames.CSharp);
             var project3 = project2.Solution.AddProject("P3", "P3", LanguageNames.CSharp);
 
-            solution = project3.Solution.AddProjectReference(
-                project3.Id,
-                new(project3.Solution.Projects.Single(p => p.Name == "P2").Id)
-            );
+            solution = project3
+                .Solution
+                .AddProjectReference(
+                    project3.Id,
+                    new(project3.Solution.Projects.Single(p => p.Name == "P2").Id)
+                );
 
             var map = new Dictionary<Checksum, object>();
             var assetProvider = new AssetProvider(
@@ -1074,10 +1080,9 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             );
 
             await solution.AppendAssetMapAsync(map, project2.Id, CancellationToken.None);
-            var project2Checksum = await solution.State.GetChecksumAsync(
-                project2.Id,
-                CancellationToken.None
-            );
+            var project2Checksum = await solution
+                .State
+                .GetChecksumAsync(project2.Id, CancellationToken.None);
             var project2SyncedSolution = await remoteWorkspace
                 .GetTestAccessor()
                 .GetSolutionAsync(
@@ -1092,10 +1097,9 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
 
             // syncing project 3 should sync project 2 as well because of the p2p ref
             await solution.AppendAssetMapAsync(map, project3.Id, CancellationToken.None);
-            var project3Checksum = await solution.State.GetChecksumAsync(
-                project3.Id,
-                CancellationToken.None
-            );
+            var project3Checksum = await solution
+                .State
+                .GetChecksumAsync(project3.Id, CancellationToken.None);
             var project3SyncedSolution = await remoteWorkspace
                 .GetTestAccessor()
                 .GetSolutionAsync(
@@ -1122,10 +1126,12 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             var project2 = solution.AddProject("P2", "P2", LanguageNames.CSharp);
             var project3 = project2.Solution.AddProject("P3", "P3", LanguageNames.CSharp);
 
-            solution = project3.Solution.AddProjectReference(
-                project3.Id,
-                new(project3.Solution.Projects.Single(p => p.Name == "P2").Id)
-            );
+            solution = project3
+                .Solution
+                .AddProjectReference(
+                    project3.Id,
+                    new(project3.Solution.Projects.Single(p => p.Name == "P2").Id)
+                );
 
             var map = new Dictionary<Checksum, object>();
             var assetProvider = new AssetProvider(
@@ -1137,10 +1143,9 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
 
             // syncing P3 should since project P2 as well because of the p2p ref
             await solution.AppendAssetMapAsync(map, project3.Id, CancellationToken.None);
-            var project3Checksum = await solution.State.GetChecksumAsync(
-                project3.Id,
-                CancellationToken.None
-            );
+            var project3Checksum = await solution
+                .State
+                .GetChecksumAsync(project3.Id, CancellationToken.None);
             var project3SyncedSolution = await remoteWorkspace
                 .GetTestAccessor()
                 .GetSolutionAsync(
@@ -1154,10 +1159,9 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
 
             // if we then sync just P2, we should still have P2 and P3 from the prior sync
             await solution.AppendAssetMapAsync(map, project2.Id, CancellationToken.None);
-            var project2Checksum = await solution.State.GetChecksumAsync(
-                project2.Id,
-                CancellationToken.None
-            );
+            var project2Checksum = await solution
+                .State
+                .GetChecksumAsync(project2.Id, CancellationToken.None);
             var project2SyncedSolution = await remoteWorkspace
                 .GetTestAccessor()
                 .GetSolutionAsync(
@@ -1175,10 +1179,9 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
 
             // if we then sync just P1, we should have 3 projects synved over now.
             await solution.AppendAssetMapAsync(map, project1.Id, CancellationToken.None);
-            var project1Checksum = await solution.State.GetChecksumAsync(
-                project1.Id,
-                CancellationToken.None
-            );
+            var project1Checksum = await solution
+                .State
+                .GetChecksumAsync(project1.Id, CancellationToken.None);
             var project1SyncedSolution = await remoteWorkspace
                 .GetTestAccessor()
                 .GetSolutionAsync(
@@ -1209,7 +1212,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             var project2 = solution.AddProject("P2", "P2", LanguageNames.CSharp);
             var project3 = project2.Solution.AddProject("P3", "P3", LanguageNames.CSharp);
 
-            solution = project3.Solution
+            solution = project3
+                .Solution
                 .AddProjectReference(project3.Id, new(project2.Id))
                 .AddProjectReference(project2.Id, new(project1.Id));
 
@@ -1223,10 +1227,9 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
 
             // syncing project3 should since project2 and project1 as well because of the p2p ref
             await solution.AppendAssetMapAsync(map, project3.Id, CancellationToken.None);
-            var project3Checksum = await solution.State.GetChecksumAsync(
-                project3.Id,
-                CancellationToken.None
-            );
+            var project3Checksum = await solution
+                .State
+                .GetChecksumAsync(project3.Id, CancellationToken.None);
             var project3SyncedSolution = await remoteWorkspace
                 .GetTestAccessor()
                 .GetSolutionAsync(
@@ -1239,10 +1242,9 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             Assert.Equal(3, project3SyncedSolution.Projects.Count());
 
             // syncing project2 should do nothing as everything is already synced
-            var project2Checksum = await solution.State.GetChecksumAsync(
-                project2.Id,
-                CancellationToken.None
-            );
+            var project2Checksum = await solution
+                .State
+                .GetChecksumAsync(project2.Id, CancellationToken.None);
             var project2SyncedSolution = await remoteWorkspace
                 .GetTestAccessor()
                 .GetSolutionAsync(
@@ -1255,10 +1257,9 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             Assert.Equal(3, project2SyncedSolution.Projects.Count());
 
             // syncing project1 should do nothing as everything is already synced
-            var project1Checksum = await solution.State.GetChecksumAsync(
-                project1.Id,
-                CancellationToken.None
-            );
+            var project1Checksum = await solution
+                .State
+                .GetChecksumAsync(project1.Id, CancellationToken.None);
             var project1SyncedSolution = await remoteWorkspace
                 .GetTestAccessor()
                 .GetSolutionAsync(
@@ -1285,7 +1286,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             var project2 = solution.AddProject("P2", "P2", LanguageNames.CSharp);
             var project3 = project2.Solution.AddProject("P3", "P3", LanguageNames.CSharp);
 
-            solution = project3.Solution
+            solution = project3
+                .Solution
                 .AddProjectReference(project3.Id, new(project2.Id))
                 .AddProjectReference(project3.Id, new(project1.Id));
 
@@ -1299,10 +1301,9 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
 
             // syncing project3 should since project2 and project1 as well because of the p2p ref
             await solution.AppendAssetMapAsync(map, project3.Id, CancellationToken.None);
-            var project3Checksum = await solution.State.GetChecksumAsync(
-                project3.Id,
-                CancellationToken.None
-            );
+            var project3Checksum = await solution
+                .State
+                .GetChecksumAsync(project3.Id, CancellationToken.None);
             var project3SyncedSolution = await remoteWorkspace
                 .GetTestAccessor()
                 .GetSolutionAsync(
@@ -1315,10 +1316,9 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             Assert.Equal(3, project3SyncedSolution.Projects.Count());
 
             // Syncing project2 should do nothing as it's already synced
-            var project2Checksum = await solution.State.GetChecksumAsync(
-                project2.Id,
-                CancellationToken.None
-            );
+            var project2Checksum = await solution
+                .State
+                .GetChecksumAsync(project2.Id, CancellationToken.None);
             var project2SyncedSolution = await remoteWorkspace
                 .GetTestAccessor()
                 .GetSolutionAsync(
@@ -1331,10 +1331,9 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             Assert.Equal(3, project2SyncedSolution.Projects.Count());
 
             // Syncing project1 should do nothing as it's already synced
-            var project1Checksum = await solution.State.GetChecksumAsync(
-                project1.Id,
-                CancellationToken.None
-            );
+            var project1Checksum = await solution
+                .State
+                .GetChecksumAsync(project1.Id, CancellationToken.None);
             var project1SyncedSolution = await remoteWorkspace
                 .GetTestAccessor()
                 .GetSolutionAsync(
@@ -1372,10 +1371,9 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
 
             // Syncing over project1 should give us 1 set of options on the OOP side.
             await solution.AppendAssetMapAsync(map, project1.Id, CancellationToken.None);
-            var project1Checksum = await solution.State.GetChecksumAsync(
-                project1.Id,
-                CancellationToken.None
-            );
+            var project1Checksum = await solution
+                .State
+                .GetChecksumAsync(project1.Id, CancellationToken.None);
             var project1SyncedSolution = await remoteWorkspace
                 .GetTestAccessor()
                 .GetSolutionAsync(
@@ -1390,10 +1388,9 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
 
             // Syncing over project2 should now give two sets of options.
             await solution.AppendAssetMapAsync(map, project2.Id, CancellationToken.None);
-            var project2Checksum = await solution.State.GetChecksumAsync(
-                project2.Id,
-                CancellationToken.None
-            );
+            var project2Checksum = await solution
+                .State
+                .GetChecksumAsync(project2.Id, CancellationToken.None);
             var project2SyncedSolution = await remoteWorkspace
                 .GetTestAccessor()
                 .GetSolutionAsync(
@@ -1426,10 +1423,9 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
 
             var assetProvider = await GetAssetProviderAsync(workspace, remoteWorkspace, solution);
 
-            var project1Checksum = await solution.State.GetChecksumAsync(
-                project1.Id,
-                CancellationToken.None
-            );
+            var project1Checksum = await solution
+                .State
+                .GetChecksumAsync(project1.Id, CancellationToken.None);
         }
 
         private static async Task VerifySolutionUpdate(
@@ -1488,9 +1484,9 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
 
             // get new solution
             var newSolution = newSolutionGetter(solution);
-            var newSolutionChecksum = await newSolution.State.GetChecksumAsync(
-                CancellationToken.None
-            );
+            var newSolutionChecksum = await newSolution
+                .State
+                .GetChecksumAsync(CancellationToken.None);
             await newSolution.AppendAssetMapAsync(map, CancellationToken.None);
 
             // get solution without updating primary workspace

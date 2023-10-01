@@ -3543,22 +3543,28 @@ public class C : B
 
             var properties = new[]
             {
-                comp1.GlobalNamespace
+                comp1
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp2.GlobalNamespace
+                comp2
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp2.GlobalNamespace
+                comp2
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("B")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace
+                comp3
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace
+                comp3
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("B")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace
+                comp3
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("C")
                     .GetMember<PropertySymbol>("P"),
             };
@@ -3612,22 +3618,28 @@ public class C : B
 
             var properties = new[]
             {
-                comp1.GlobalNamespace
+                comp1
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp2.GlobalNamespace
+                comp2
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp2.GlobalNamespace
+                comp2
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("B")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace
+                comp3
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace
+                comp3
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("B")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace
+                comp3
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("C")
                     .GetMember<PropertySymbol>("P"),
             };
@@ -3681,22 +3693,28 @@ public class C : B
 
             var properties = new[]
             {
-                comp1.GlobalNamespace
+                comp1
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp2.GlobalNamespace
+                comp2
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp2.GlobalNamespace
+                comp2
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("B")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace
+                comp3
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace
+                comp3
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("B")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace
+                comp3
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("C")
                     .GetMember<PropertySymbol>("P"),
             };
@@ -3741,22 +3759,28 @@ public class C : B
 
             var properties = new[]
             {
-                comp1.GlobalNamespace
+                comp1
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp2.GlobalNamespace
+                comp2
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp2.GlobalNamespace
+                comp2
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("B")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace
+                comp3
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace
+                comp3
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("B")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace
+                comp3
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("C")
                     .GetMember<PropertySymbol>("P"),
             };
@@ -3801,22 +3825,28 @@ public class C : B
 
             var properties = new[]
             {
-                comp1.GlobalNamespace
+                comp1
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp2.GlobalNamespace
+                comp2
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp2.GlobalNamespace
+                comp2
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("B")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace
+                comp3
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace
+                comp3
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("B")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace
+                comp3
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("C")
                     .GetMember<PropertySymbol>("P"),
             };
@@ -3861,22 +3891,28 @@ public class C : B
 
             var properties = new[]
             {
-                comp1.GlobalNamespace
+                comp1
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp2.GlobalNamespace
+                comp2
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp2.GlobalNamespace
+                comp2
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("B")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace
+                comp3
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace
+                comp3
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("B")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace
+                comp3
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("C")
                     .GetMember<PropertySymbol>("P"),
             };
@@ -3948,22 +3984,28 @@ public class B : A
 
             var properties = new[]
             {
-                comp1.GlobalNamespace
+                comp1
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp2.GlobalNamespace
+                comp2
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp2.GlobalNamespace
+                comp2
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("B")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace
+                comp3
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("A")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace
+                comp3
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("B")
                     .GetMember<PropertySymbol>("P"),
-                comp3.GlobalNamespace
+                comp3
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("C")
                     .GetMember<PropertySymbol>("P"),
             };

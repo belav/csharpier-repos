@@ -1017,7 +1017,8 @@ namespace System.Web.DynamicData
         {
             RouteValueDictionary routeValues = DynamicDataRouteHandler
                 .GetRequestContext(context)
-                .RouteData.Values;
+                .RouteData
+                .Values;
             Dictionary<string, object> columnValues = new Dictionary<string, object>();
             foreach (var column in Columns)
             {
@@ -1138,10 +1139,12 @@ namespace System.Web.DynamicData
                 throw new ArgumentNullException("entityType");
             }
 
-            return System.Web.DynamicData.MetaModel.MetaModelManager.TryGetTable(
-                entityType,
-                out table
-            );
+            return System
+                .Web
+                .DynamicData
+                .MetaModel
+                .MetaModelManager
+                .TryGetTable(entityType, out table);
         }
 
         #region IMetaTable Members

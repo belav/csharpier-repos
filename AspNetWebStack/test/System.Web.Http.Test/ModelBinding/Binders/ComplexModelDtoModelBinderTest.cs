@@ -27,24 +27,28 @@ namespace System.Web.Http.ModelBinding.Binders
             Mock<IModelBinder> mockIntBinder = new Mock<IModelBinder>();
             Mock<IModelBinder> mockDateTimeBinder = new Mock<IModelBinder>();
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context.ControllerContext.Configuration.Services.ReplaceRange(
-                typeof(ModelBinderProvider),
-                new ModelBinderProvider[]
-                {
-                    new SimpleModelBinderProvider(typeof(string), mockStringBinder.Object)
+            context
+                .ControllerContext
+                .Configuration
+                .Services
+                .ReplaceRange(
+                    typeof(ModelBinderProvider),
+                    new ModelBinderProvider[]
                     {
-                        SuppressPrefixCheck = true
-                    },
-                    new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object)
-                    {
-                        SuppressPrefixCheck = true
-                    },
-                    new SimpleModelBinderProvider(typeof(DateTime), mockDateTimeBinder.Object)
-                    {
-                        SuppressPrefixCheck = true
+                        new SimpleModelBinderProvider(typeof(string), mockStringBinder.Object)
+                        {
+                            SuppressPrefixCheck = true
+                        },
+                        new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object)
+                        {
+                            SuppressPrefixCheck = true
+                        },
+                        new SimpleModelBinderProvider(typeof(DateTime), mockDateTimeBinder.Object)
+                        {
+                            SuppressPrefixCheck = true
+                        }
                     }
-                }
-            );
+                );
 
             mockStringBinder
                 .Setup(b => b.BindModel(context, It.IsAny<ModelBindingContext>()))

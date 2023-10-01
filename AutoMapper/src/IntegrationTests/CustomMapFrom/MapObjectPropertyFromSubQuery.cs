@@ -154,19 +154,21 @@ public class MemberWithSubQueryProjections
     {
         protected override void Seed(Context context)
         {
-            context.Customers.Add(
-                new Customer
-                {
-                    FirstName = "Bob",
-                    LastName = "Smith",
-                    Items = new[]
+            context
+                .Customers
+                .Add(
+                    new Customer
                     {
-                        new Item { Code = 1 },
-                        new Item { Code = 3 },
-                        new Item { Code = 5 }
+                        FirstName = "Bob",
+                        LastName = "Smith",
+                        Items = new[]
+                        {
+                            new Item { Code = 1 },
+                            new Item { Code = 3 },
+                            new Item { Code = 5 }
+                        }
                     }
-                }
-            );
+                );
             base.Seed(context);
         }
     }
@@ -241,19 +243,21 @@ public class MemberWithSubQueryProjectionsNoMap
     {
         protected override void Seed(Context context)
         {
-            context.Customers.Add(
-                new Customer
-                {
-                    FirstName = "Bob",
-                    LastName = "Smith",
-                    Items = new[]
+            context
+                .Customers
+                .Add(
+                    new Customer
                     {
-                        new Item { Code = 1 },
-                        new Item { Code = 3 },
-                        new Item { Code = 5 }
+                        FirstName = "Bob",
+                        LastName = "Smith",
+                        Items = new[]
+                        {
+                            new Item { Code = 1 },
+                            new Item { Code = 3 },
+                            new Item { Code = 5 }
+                        }
                     }
-                }
-            );
+                );
             base.Seed(context);
         }
     }
@@ -299,7 +303,8 @@ public class MapObjectPropertyFromSubQueryTypeNameMax
                     o =>
                         o.MapFrom(
                             source =>
-                                source.Articles
+                                source
+                                    .Articles
                                     .Where(
                                         x =>
                                             x.IsDefault
@@ -404,21 +409,23 @@ public class MapObjectPropertyFromSubQueryTypeNameMax
     {
         protected override void Seed(ClientContext context)
         {
-            context.Products.Add(
-                new Product
-                {
-                    ECommercePublished = true,
-                    Articles = new[]
+            context
+                .Products
+                .Add(
+                    new Product
                     {
-                        new Article
+                        ECommercePublished = true,
+                        Articles = new[]
                         {
-                            IsDefault = true,
-                            NationId = 1,
-                            ProductId = 1
+                            new Article
+                            {
+                                IsDefault = true,
+                                NationId = 1,
+                                ProductId = 1
+                            }
                         }
                     }
-                }
-            );
+                );
         }
     }
 
@@ -441,7 +448,8 @@ public class MapObjectPropertyFromSubQueryExplicitExpansion
                     {
                         o.MapFrom(
                             source =>
-                                source.Articles
+                                source
+                                    .Articles
                                     .Where(
                                         x =>
                                             x.IsDefault
@@ -521,21 +529,23 @@ public class MapObjectPropertyFromSubQueryExplicitExpansion
     {
         protected override void Seed(ClientContext context)
         {
-            context.Products.Add(
-                new Product
-                {
-                    ECommercePublished = true,
-                    Articles = new[]
+            context
+                .Products
+                .Add(
+                    new Product
                     {
-                        new Article
+                        ECommercePublished = true,
+                        Articles = new[]
                         {
-                            IsDefault = true,
-                            NationId = 1,
-                            ProductId = 1
+                            new Article
+                            {
+                                IsDefault = true,
+                                NationId = 1,
+                                ProductId = 1
+                            }
                         }
                     }
-                }
-            );
+                );
         }
     }
 
@@ -558,7 +568,8 @@ public class MapObjectPropertyFromSubQuery
                     o =>
                         o.MapFrom(
                             source =>
-                                source.Articles
+                                source
+                                    .Articles
                                     .Where(
                                         x =>
                                             x.IsDefault
@@ -641,21 +652,23 @@ public class MapObjectPropertyFromSubQuery
     {
         protected override void Seed(ClientContext context)
         {
-            context.Products.Add(
-                new Product
-                {
-                    ECommercePublished = true,
-                    Articles = new[]
+            context
+                .Products
+                .Add(
+                    new Product
                     {
-                        new Article
+                        ECommercePublished = true,
+                        Articles = new[]
                         {
-                            IsDefault = true,
-                            NationId = 1,
-                            ProductId = 1
+                            new Article
+                            {
+                                IsDefault = true,
+                                NationId = 1,
+                                ProductId = 1
+                            }
                         }
                     }
-                }
-            );
+                );
         }
     }
 
@@ -678,7 +691,8 @@ public class MapObjectPropertyFromSubQueryWithInnerObject
                     o =>
                         o.MapFrom(
                             source =>
-                                source.Articles
+                                source
+                                    .Articles
                                     .Where(
                                         x =>
                                             x.IsDefault
@@ -763,39 +777,45 @@ public class MapObjectPropertyFromSubQueryWithInnerObject
     {
         protected override void Seed(ClientContext context)
         {
-            var product1 = context.Products.Add(
-                new Product
-                {
-                    ECommercePublished = true,
-                    Articles = new[]
+            var product1 = context
+                .Products
+                .Add(
+                    new Product
                     {
-                        new Article
+                        ECommercePublished = true,
+                        Articles = new[]
                         {
-                            IsDefault = true,
-                            NationId = 1,
-                            ProductId = 1
+                            new Article
+                            {
+                                IsDefault = true,
+                                NationId = 1,
+                                ProductId = 1
+                            }
                         }
                     }
-                }
-            );
-            var product2 = context.Products.Add(
-                new Product
-                {
-                    ECommercePublished = true,
-                    Articles = new[]
+                );
+            var product2 = context
+                .Products
+                .Add(
+                    new Product
                     {
-                        new Article
+                        ECommercePublished = true,
+                        Articles = new[]
                         {
-                            IsDefault = true,
-                            NationId = 1,
-                            ProductId = 2
+                            new Article
+                            {
+                                IsDefault = true,
+                                NationId = 1,
+                                ProductId = 2
+                            }
                         }
                     }
-                }
-            );
-            context.ProductArticles.Add(
-                new ProductArticle { Product = product1.Entity, OtherProduct = product2.Entity }
-            );
+                );
+            context
+                .ProductArticles
+                .Add(
+                    new ProductArticle { Product = product1.Entity, OtherProduct = product2.Entity }
+                );
         }
     }
 
@@ -819,7 +839,8 @@ public class MapObjectPropertyFromSubQueryWithCollection
                     o =>
                         o.MapFrom(
                             source =>
-                                source.Articles
+                                source
+                                    .Articles
                                     .Where(
                                         x =>
                                             x.IsDefault
@@ -910,21 +931,23 @@ public class MapObjectPropertyFromSubQueryWithCollection
     {
         protected override void Seed(ClientContext context)
         {
-            var product = context.Products.Add(
-                new Product
-                {
-                    ECommercePublished = true,
-                    Articles = new[]
+            var product = context
+                .Products
+                .Add(
+                    new Product
                     {
-                        new Article
+                        ECommercePublished = true,
+                        Articles = new[]
                         {
-                            IsDefault = true,
-                            NationId = 1,
-                            ProductId = 1
+                            new Article
+                            {
+                                IsDefault = true,
+                                NationId = 1,
+                                ProductId = 1
+                            }
                         }
                     }
-                }
-            );
+                );
             context.ProductArticles.Add(new ProductArticle { Products = new[] { product.Entity } });
         }
     }
@@ -951,7 +974,8 @@ public class MapObjectPropertyFromSubQueryWithCollectionSameName
                     o =>
                         o.MapFrom(
                             source =>
-                                source.Articles
+                                source
+                                    .Articles
                                     .Where(
                                         x =>
                                             x.IsDefault
@@ -1058,21 +1082,23 @@ public class MapObjectPropertyFromSubQueryWithCollectionSameName
     {
         protected override void Seed(ClientContext context)
         {
-            var product = context.Products.Add(
-                new Product
-                {
-                    ECommercePublished = true,
-                    Articles = new[]
+            var product = context
+                .Products
+                .Add(
+                    new Product
                     {
-                        new Article
+                        ECommercePublished = true,
+                        Articles = new[]
                         {
-                            IsDefault = true,
-                            NationId = 1,
-                            ProductId = 1
+                            new Article
+                            {
+                                IsDefault = true,
+                                NationId = 1,
+                                ProductId = 1
+                            }
                         }
                     }
-                }
-            );
+                );
             context.ProductArticles.Add(new ProductArticle { Products = new[] { product.Entity } });
         }
     }
@@ -1283,21 +1309,25 @@ public class MapObjectPropertyFromSubQueryCustomSource
     {
         protected override void Seed(ClientContext context)
         {
-            context.ProductReviews.Add(
-                new ProductReview
-                {
-                    Product = new Product
+            context
+                .ProductReviews
+                .Add(
+                    new ProductReview
                     {
-                        Brand = new Brand { Owners = { new Owner { Name = "Owner" } } }
+                        Product = new Product
+                        {
+                            Brand = new Brand { Owners = { new Owner { Name = "Owner" } } }
+                        }
                     }
-                }
-            );
-            context.ProductReviews.Add(
-                new ProductReview
-                {
-                    Product = new Product { Brand = new Brand { Owners = { new Owner() } } }
-                }
-            );
+                );
+            context
+                .ProductReviews
+                .Add(
+                    new ProductReview
+                    {
+                        Product = new Product { Brand = new Brand { Owners = { new Owner() } } }
+                    }
+                );
             context.ProductReviews.Add(new ProductReview { Product = new Product() });
         }
     }
@@ -1387,24 +1417,26 @@ public class MemberWithSubQueryIdentity
     {
         protected override void Seed(ClientContext context)
         {
-            context.AEntities.Add(
-                new AEntity
-                {
-                    CEntityId = 6,
-                    BEntity = new BEntity
+            context
+                .AEntities
+                .Add(
+                    new AEntity
                     {
-                        CEntities = new List<CEntity>
+                        CEntityId = 6,
+                        BEntity = new BEntity
                         {
-                            new CEntity
+                            CEntities = new List<CEntity>
                             {
-                                Id = 6,
-                                BEntityId = 1,
-                                SubString = "Test"
+                                new CEntity
+                                {
+                                    Id = 6,
+                                    BEntityId = 1,
+                                    SubString = "Test"
+                                }
                             }
-                        }
-                    },
-                }
-            );
+                        },
+                    }
+                );
         }
     }
 

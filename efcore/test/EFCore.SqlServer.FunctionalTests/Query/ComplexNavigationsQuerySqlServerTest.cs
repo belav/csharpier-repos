@@ -1426,7 +1426,8 @@ INNER JOIN (
     public void Multiple_complex_includes_from_sql()
     {
         using var context = CreateContext();
-        var query = context.LevelOne
+        var query = context
+            .LevelOne
             .FromSqlRaw("SELECT * FROM [LevelOne]")
             .Include(e => e.OneToOne_Optional_FK1)
             .ThenInclude(e => e.OneToMany_Optional2)

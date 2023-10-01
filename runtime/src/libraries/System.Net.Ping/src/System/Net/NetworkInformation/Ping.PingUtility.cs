@@ -112,7 +112,8 @@ namespace System.Net.NetworkInformation
                     .WaitForExitAsync(timeoutOrCancellationToken)
                     .ConfigureAwait(false);
 
-                string stdout = await pingProcess.StandardOutput
+                string stdout = await pingProcess
+                    .StandardOutput
                     .ReadToEndAsync(timeoutOrCancellationToken)
                     .ConfigureAwait(false);
 

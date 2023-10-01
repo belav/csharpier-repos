@@ -376,13 +376,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     )
                 )
                 {
-                    var (attributeData, boundAttribute) = arguments.Binder.GetAttribute(
-                        arguments.AttributeSyntax,
-                        arguments.AttributeType,
-                        beforeAttributePartBound: null,
-                        afterAttributePartBound: null,
-                        out hasAnyDiagnostics
-                    );
+                    var (attributeData, boundAttribute) = arguments
+                        .Binder
+                        .GetAttribute(
+                            arguments.AttributeSyntax,
+                            arguments.AttributeType,
+                            beforeAttributePartBound: null,
+                            afterAttributePartBound: null,
+                            out hasAnyDiagnostics
+                        );
                     if (!attributeData.HasErrors)
                     {
                         string? name = attributeData.GetConstructorArgument<string>(
@@ -730,10 +732,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (attribute.IsTargetAttribute(this, AttributeDescription.MemberNotNullAttribute))
             {
-                MessageID.IDS_FeatureMemberNotNull.CheckFeatureAvailability(
-                    diagnostics,
-                    arguments.AttributeSyntaxOpt
-                );
+                MessageID
+                    .IDS_FeatureMemberNotNull
+                    .CheckFeatureAvailability(diagnostics, arguments.AttributeSyntaxOpt);
                 CSharpAttributeData.DecodeMemberNotNullAttribute<MethodWellKnownAttributeData>(
                     ContainingType,
                     ref arguments
@@ -743,10 +744,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 attribute.IsTargetAttribute(this, AttributeDescription.MemberNotNullWhenAttribute)
             )
             {
-                MessageID.IDS_FeatureMemberNotNull.CheckFeatureAvailability(
-                    diagnostics,
-                    arguments.AttributeSyntaxOpt
-                );
+                MessageID
+                    .IDS_FeatureMemberNotNull
+                    .CheckFeatureAvailability(diagnostics, arguments.AttributeSyntaxOpt);
                 CSharpAttributeData.DecodeMemberNotNullWhenAttribute<MethodWellKnownAttributeData>(
                     ContainingType,
                     ref arguments
@@ -756,10 +756,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 attribute.IsTargetAttribute(this, AttributeDescription.ModuleInitializerAttribute)
             )
             {
-                MessageID.IDS_FeatureModuleInitializers.CheckFeatureAvailability(
-                    diagnostics,
-                    arguments.AttributeSyntaxOpt
-                );
+                MessageID
+                    .IDS_FeatureModuleInitializers
+                    .CheckFeatureAvailability(diagnostics, arguments.AttributeSyntaxOpt);
                 DecodeModuleInitializerAttribute(arguments);
             }
             else if (
@@ -851,8 +850,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     if (this is SourceEventAccessorSymbol)
                     {
                         // CS1667: Attribute '{0}' is not valid on event accessors. It is only valid on '{1}' declarations.
-                        AttributeUsageInfo attributeUsage =
-                            arguments.Attribute.AttributeClass.GetAttributeUsageInfo();
+                        AttributeUsageInfo attributeUsage = arguments
+                            .Attribute
+                            .AttributeClass
+                            .GetAttributeUsageInfo();
                         diagnostics.Add(
                             ErrorCode.ERR_AttributeNotOnEventAccessor,
                             arguments.AttributeSyntaxOpt.Name.Location,
@@ -862,10 +863,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     }
                     else
                     {
-                        MessageID.IDS_FeatureObsoleteOnPropertyAccessor.CheckFeatureAvailability(
-                            diagnostics,
-                            arguments.AttributeSyntaxOpt
-                        );
+                        MessageID
+                            .IDS_FeatureObsoleteOnPropertyAccessor
+                            .CheckFeatureAvailability(diagnostics, arguments.AttributeSyntaxOpt);
                     }
                 }
 
@@ -886,8 +886,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (this.IsAccessor())
             {
                 // CS1667: Attribute '{0}' is not valid on property or event accessors. It is only valid on '{1}' declarations.
-                AttributeUsageInfo attributeUsage =
-                    attribute.AttributeClass.GetAttributeUsageInfo();
+                AttributeUsageInfo attributeUsage = attribute
+                    .AttributeClass
+                    .GetAttributeUsageInfo();
                 diagnostics.Add(
                     ErrorCode.ERR_AttributeNotOnAccessor,
                     node.Name.Location,
@@ -1117,9 +1118,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             // Dev10 reports CS0647: "Error emitting attribute ..."
                             diagnostics.Add(
                                 ErrorCode.ERR_InvalidNamedArgument,
-                                arguments.AttributeSyntaxOpt.ArgumentList.Arguments[
-                                    position
-                                ].Location,
+                                arguments
+                                    .AttributeSyntaxOpt
+                                    .ArgumentList
+                                    .Arguments[position]
+                                    .Location,
                                 namedArg.Key
                             );
                             hasErrors = true;
@@ -1140,9 +1143,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                     case "ExactSpelling":
                         // invalid values will be ignored
-                        exactSpelling = namedArg.Value.DecodeValue<bool>(
-                            SpecialType.System_Boolean
-                        );
+                        exactSpelling = namedArg
+                            .Value
+                            .DecodeValue<bool>(SpecialType.System_Boolean);
                         break;
 
                     case "PreserveSig":
@@ -1151,21 +1154,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                     case "CallingConvention":
                         // invalid values will be ignored
-                        callingConvention = namedArg.Value.DecodeValue<CallingConvention>(
-                            SpecialType.System_Enum
-                        );
+                        callingConvention = namedArg
+                            .Value
+                            .DecodeValue<CallingConvention>(SpecialType.System_Enum);
                         break;
 
                     case "BestFitMapping":
-                        bestFitMapping = namedArg.Value.DecodeValue<bool>(
-                            SpecialType.System_Boolean
-                        );
+                        bestFitMapping = namedArg
+                            .Value
+                            .DecodeValue<bool>(SpecialType.System_Boolean);
                         break;
 
                     case "ThrowOnUnmappableChar":
-                        throwOnUnmappable = namedArg.Value.DecodeValue<bool>(
-                            SpecialType.System_Boolean
-                        );
+                        throwOnUnmappable = namedArg
+                            .Value
+                            .DecodeValue<bool>(SpecialType.System_Boolean);
                         break;
                 }
 
@@ -1740,16 +1743,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     null;
                 if (attribute.CommonNamedArguments is { IsDefaultOrEmpty: false } namedArgs)
                 {
-                    var systemType = @this.DeclaringCompilation.GetWellKnownType(
-                        WellKnownType.System_Type
-                    );
+                    var systemType = @this
+                        .DeclaringCompilation
+                        .GetWellKnownType(WellKnownType.System_Type);
 
                     foreach (var (key, value) in attribute.CommonNamedArguments)
                     {
                         // Technically, CIL can define a field and a property with the same name. However, such a
                         // member results in an Ambiguous Member error, and we never get to this piece of code at all.
                         // See UnmanagedCallersOnly_PropertyAndFieldNamedCallConvs for an example
-                        bool isField = attribute.AttributeClass
+                        bool isField = attribute
+                            .AttributeClass
                             .GetMembers(key)
                             .Any(
                                 static (m, systemType) =>
@@ -1917,11 +1921,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 if (this.HasAsyncMethodBuilderAttribute(out _))
                 {
-                    MessageID.IDS_AsyncMethodBuilderOverride.CheckFeatureAvailability(
-                        diagnostics,
-                        this.DeclaringCompilation,
-                        errorLocation
-                    );
+                    MessageID
+                        .IDS_AsyncMethodBuilderOverride
+                        .CheckFeatureAvailability(
+                            diagnostics,
+                            this.DeclaringCompilation,
+                            errorLocation
+                        );
                 }
 
                 // Avoid checking attributes on containing types to avoid a potential cycle when a lambda

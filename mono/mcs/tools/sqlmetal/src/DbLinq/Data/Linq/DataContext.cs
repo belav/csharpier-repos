@@ -532,7 +532,8 @@ namespace DbLinq.Data.Linq
                 values.Add(value);
                 IEnumerable<MetaAssociation> associationList = Mapping
                     .GetMetaType(value.GetType())
-                    .Associations.Where(a => !a.IsForeignKey);
+                    .Associations
+                    .Where(a => !a.IsForeignKey);
                 if (associationList.Any())
                 {
                     foreach (MetaAssociation association in associationList)
@@ -600,7 +601,9 @@ namespace DbLinq.Data.Linq
                 var oks = memberData.Association.OtherKey.Select(m => m.StorageMember).ToList();
                 if (oks.Count == 0)
                     continue;
-                var pks = memberData.Association.ThisKey
+                var pks = memberData
+                    .Association
+                    .ThisKey
                     .Select(m => m.StorageMember.GetMemberValue(root))
                     .ToList();
                 if (pks.Count != oks.Count)
@@ -749,7 +752,8 @@ namespace DbLinq.Data.Linq
             Type thisType = entity.GetType();
             IEnumerable<MetaAssociation> associationList = Mapping
                 .GetMetaType(entity.GetType())
-                .Associations.Where(a => a.IsForeignKey);
+                .Associations
+                .Where(a => a.IsForeignKey);
             foreach (MetaAssociation association in associationList)
             {
                 //example of entityRef:Order.Employee
@@ -786,9 +790,9 @@ namespace DbLinq.Data.Linq
                         }
                         else
                         {
-                            var ValueProperty = thisForeignKeyProperty.PropertyType.GetProperty(
-                                "Value"
-                            );
+                            var ValueProperty = thisForeignKeyProperty
+                                .PropertyType
+                                .GetProperty("Value");
                             keyPredicate = Expression.Equal(
                                 Expression.MakeMemberAccess(p, otherPKEnumerator.Current.Member),
                                 Expression.Constant(
@@ -857,7 +861,8 @@ namespace DbLinq.Data.Linq
 
             IEnumerable<MetaAssociation> associationList = Mapping
                 .GetMetaType(entity.GetType())
-                .Associations.Where(a => !a.IsForeignKey);
+                .Associations
+                .Where(a => !a.IsForeignKey);
 
             if (associationList.Any())
             {
@@ -947,11 +952,14 @@ namespace DbLinq.Data.Linq
         )
         {
             if (_WhereMethod == null)
-                System.Threading.Interlocked.CompareExchange(
-                    ref _WhereMethod,
-                    typeof(Queryable).GetMethods().First(m => m.Name == "Where"),
-                    null
-                );
+                System
+                    .Threading
+                    .Interlocked
+                    .CompareExchange(
+                        ref _WhereMethod,
+                        typeof(Queryable).GetMethods().First(m => m.Name == "Where"),
+                        null
+                    );
 
             //predicate: other.EmployeeID== "WARTH"
             Expression lambdaPredicate = Expression.Lambda(predicate, parameter);

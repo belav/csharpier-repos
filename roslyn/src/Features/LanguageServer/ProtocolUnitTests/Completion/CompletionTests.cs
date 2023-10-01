@@ -413,15 +413,21 @@ static class Extensions
             var solution = testLspServer.TestWorkspace.CurrentSolution;
 
             // Make sure the unimported types option is on
-            testLspServer.TestWorkspace.GlobalOptions.SetGlobalOption(
-                CompletionOptionsStorage.ShowItemsFromUnimportedNamespaces,
-                LanguageNames.CSharp,
-                true
-            );
-            testLspServer.TestWorkspace.GlobalOptions.SetGlobalOption(
-                CompletionOptionsStorage.ForceExpandedCompletionIndexCreation,
-                true
-            );
+            testLspServer
+                .TestWorkspace
+                .GlobalOptions
+                .SetGlobalOption(
+                    CompletionOptionsStorage.ShowItemsFromUnimportedNamespaces,
+                    LanguageNames.CSharp,
+                    true
+                );
+            testLspServer
+                .TestWorkspace
+                .GlobalOptions
+                .SetGlobalOption(
+                    CompletionOptionsStorage.ForceExpandedCompletionIndexCreation,
+                    true
+                );
 
             var completionParams = CreateCompletionParams(
                 testLspServer.GetLocations("caret").Single(),
@@ -449,11 +455,14 @@ static class Extensions
                 s_vsCompletionCapabilities
             );
 
-            testLspServer.TestWorkspace.GlobalOptions.SetGlobalOption(
-                CompletionOptionsStorage.SnippetsBehavior,
-                LanguageNames.CSharp,
-                SnippetsRule.NeverInclude
-            );
+            testLspServer
+                .TestWorkspace
+                .GlobalOptions
+                .SetGlobalOption(
+                    CompletionOptionsStorage.SnippetsBehavior,
+                    LanguageNames.CSharp,
+                    SnippetsRule.NeverInclude
+                );
 
             var completionParams = CreateCompletionParams(
                 testLspServer.GetLocations("caret").Single(),
@@ -1868,11 +1877,14 @@ pub{|caret:|}class";
                 s_vsCompletionCapabilities
             );
             var caret = testLspServer.GetLocations("caret").Single();
-            testLspServer.TestWorkspace.GlobalOptions.SetGlobalOption(
-                CompletionOptionsStorage.SnippetsBehavior,
-                LanguageNames.CSharp,
-                SnippetsRule.NeverInclude
-            );
+            testLspServer
+                .TestWorkspace
+                .GlobalOptions
+                .SetGlobalOption(
+                    CompletionOptionsStorage.SnippetsBehavior,
+                    LanguageNames.CSharp,
+                    SnippetsRule.NeverInclude
+                );
 
             var completionParams = CreateCompletionParams(
                 caret,

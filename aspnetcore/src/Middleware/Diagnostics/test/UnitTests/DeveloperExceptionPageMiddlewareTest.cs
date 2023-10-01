@@ -36,10 +36,10 @@ public class DeveloperExceptionPageMiddlewareTest : LoggedTest
                     {
                         if (context.Exception is not null)
                         {
-                            context.ProblemDetails.Extensions.Add(
-                                "OriginalExceptionMessage",
-                                context.Exception.Message
-                            );
+                            context
+                                .ProblemDetails
+                                .Extensions
+                                .Add("OriginalExceptionMessage", context.Exception.Message);
                         }
                     };
                 });
@@ -89,18 +89,18 @@ public class DeveloperExceptionPageMiddlewareTest : LoggedTest
                     configure.CustomizeProblemDetails = (context) =>
                     {
                         var feature = context.HttpContext.Features.Get<IExceptionHandlerFeature>();
-                        context.ProblemDetails.Extensions.Add(
-                            "OriginalExceptionMessage",
-                            feature?.Error.Message
-                        );
-                        context.ProblemDetails.Extensions.Add(
-                            "EndpointDisplayName",
-                            feature?.Endpoint?.DisplayName
-                        );
-                        context.ProblemDetails.Extensions.Add(
-                            "RouteValue",
-                            feature?.RouteValues?["id"]
-                        );
+                        context
+                            .ProblemDetails
+                            .Extensions
+                            .Add("OriginalExceptionMessage", feature?.Error.Message);
+                        context
+                            .ProblemDetails
+                            .Extensions
+                            .Add("EndpointDisplayName", feature?.Endpoint?.DisplayName);
+                        context
+                            .ProblemDetails
+                            .Extensions
+                            .Add("RouteValue", feature?.RouteValues?["id"]);
                         context.ProblemDetails.Extensions.Add("Path", feature?.Path);
                     };
                 });
@@ -162,20 +162,22 @@ public class DeveloperExceptionPageMiddlewareTest : LoggedTest
                 {
                     configure.CustomizeProblemDetails = (context) =>
                     {
-                        var feature =
-                            context.HttpContext.Features.Get<IExceptionHandlerPathFeature>();
-                        context.ProblemDetails.Extensions.Add(
-                            "OriginalExceptionMessage",
-                            feature?.Error.Message
-                        );
-                        context.ProblemDetails.Extensions.Add(
-                            "EndpointDisplayName",
-                            feature?.Endpoint?.DisplayName
-                        );
-                        context.ProblemDetails.Extensions.Add(
-                            "RouteValue",
-                            feature?.RouteValues?["id"]
-                        );
+                        var feature = context
+                            .HttpContext
+                            .Features
+                            .Get<IExceptionHandlerPathFeature>();
+                        context
+                            .ProblemDetails
+                            .Extensions
+                            .Add("OriginalExceptionMessage", feature?.Error.Message);
+                        context
+                            .ProblemDetails
+                            .Extensions
+                            .Add("EndpointDisplayName", feature?.Endpoint?.DisplayName);
+                        context
+                            .ProblemDetails
+                            .Extensions
+                            .Add("RouteValue", feature?.RouteValues?["id"]);
                         context.ProblemDetails.Extensions.Add("Path", feature?.Path);
                     };
                 });

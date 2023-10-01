@@ -115,7 +115,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
                 }
             }
 
-            var parseOptions = VisualBasicParseOptions.Default
+            var parseOptions = VisualBasicParseOptions
+                .Default
                 .WithLanguageVersion(langVersion)
                 .WithPreprocessorSymbols(preprocessorSymbols.ToImmutableArrayOrEmpty());
 

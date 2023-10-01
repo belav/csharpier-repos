@@ -432,9 +432,11 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.TopLevelParameterNameAnalyzerTestFi
     {
         var compilation = TestCompilation.Create(source);
 
-        var modelType = compilation.Assembly.GetTypeByMetadataName(
-            "Microsoft.AspNetCore.Mvc.Analyzers.TopLevelParameterNameAnalyzerTestFiles.TestController"
-        );
+        var modelType = compilation
+            .Assembly
+            .GetTypeByMetadataName(
+                "Microsoft.AspNetCore.Mvc.Analyzers.TopLevelParameterNameAnalyzerTestFiles.TestController"
+            );
         var method = (IMethodSymbol)modelType.GetMembers("ActionMethod").First();
         var parameter = method.Parameters[0];
 

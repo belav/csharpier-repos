@@ -255,9 +255,9 @@ namespace System.Web.WebPages
             _partRegistry = new ApplicationPartRegistry(virtualPathFactory);
 
             // Register the resource route
-            RouteTable.Routes.Add(
-                new Route(ResourceRoute, new ResourceRouteHandler(_partRegistry))
-            );
+            RouteTable
+                .Routes
+                .Add(new Route(ResourceRoute, new ResourceRouteHandler(_partRegistry)));
         }
     }
 }

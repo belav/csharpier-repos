@@ -604,11 +604,13 @@ namespace Mono.CSharp
                 // too late in the pipeline and standart assign cannot be used either due to
                 // recursive nature of GetStoreyInstanceExpression
                 //
-                var field = ec.CurrentAnonymousMethod.Storey.AddCompilerGeneratedField(
-                    LocalVariable.GetCompilerGeneratedName(block),
-                    storey_type_expr,
-                    true
-                );
+                var field = ec.CurrentAnonymousMethod
+                    .Storey
+                    .AddCompilerGeneratedField(
+                        LocalVariable.GetCompilerGeneratedName(block),
+                        storey_type_expr,
+                        true
+                    );
 
                 field.Define();
                 field.Emit();
@@ -1926,10 +1928,11 @@ namespace Mono.CSharp
                     ReturnType =
                         ReturnType.Kind == MemberKind.Void
                             ? ec.Module.PredefinedTypes.Task.TypeSpec
-                            : ec.Module.PredefinedTypes.TaskGeneric.TypeSpec.MakeGenericType(
-                                ec,
-                                new[] { ReturnType }
-                            );
+                            : ec.Module
+                                .PredefinedTypes
+                                .TaskGeneric
+                                .TypeSpec
+                                .MakeGenericType(ec, new[] { ReturnType });
                 }
             }
 
@@ -2491,12 +2494,15 @@ namespace Mono.CSharp
                     {
                         if (parameters[ii].Name == p.Name)
                         {
-                            parent.Compiler.Report.Error(
-                                833,
-                                parameters[ii].Location,
-                                "`{0}': An anonymous type cannot have multiple properties with the same name",
-                                p.Name
-                            );
+                            parent
+                                .Compiler
+                                .Report
+                                .Error(
+                                    833,
+                                    parameters[ii].Location,
+                                    "`{0}': An anonymous type cannot have multiple properties with the same name",
+                                    p.Name
+                                );
 
                             p = new AnonymousTypeParameter(null, "$" + i.ToString(), p.Location);
                             parameters[i] = p;

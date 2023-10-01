@@ -84,11 +84,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             )
             {
                 // Complain about unembeddable types from linked assemblies.
-                Emit.NoPia.EmbeddedTypesManager.IsValidEmbeddableType(
-                    underlyingType,
-                    syntax,
-                    diagnostics.DiagnosticBag
-                );
+                Emit.NoPia
+                    .EmbeddedTypesManager
+                    .IsValidEmbeddableType(underlyingType, syntax, diagnostics.DiagnosticBag);
             }
 
             var locations = locationOpt is null
@@ -223,9 +221,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     underlyingType = (
                         (NamedTypeSymbol)
-                            underlyingType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
-                                NamedTypeSymbol.ValueTupleRestIndex
-                            ].Type
+                            underlyingType
+                                .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
+                                    NamedTypeSymbol.ValueTupleRestIndex
+                                ]
+                                .Type
                     );
                 } while (underlyingType.Arity >= NamedTypeSymbol.ValueTupleRestPosition);
 
@@ -315,9 +315,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (currentType.Arity == NamedTypeSymbol.ValueTupleRestPosition)
                 {
                     currentType = (NamedTypeSymbol)
-                        currentType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
-                            NamedTypeSymbol.ValueTupleRestPosition - 1
-                        ].Type;
+                        currentType
+                            .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
+                                NamedTypeSymbol.ValueTupleRestPosition - 1
+                            ]
+                            .Type;
                 }
                 else
                 {
@@ -952,9 +954,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 var oldUnderlying = currentValueTuple;
                 currentValueTuple = (NamedTypeSymbol)
-                    oldUnderlying.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
-                        ValueTupleRestIndex
-                    ].Type;
+                    oldUnderlying
+                        .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[ValueTupleRestIndex]
+                        .Type;
                 currentNestingLevel++;
 
                 if (currentValueTuple.Arity != ValueTupleRestPosition)
@@ -1057,9 +1059,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 for (int i = 0; i < depth; i++)
                 {
                     found = (NamedTypeSymbol)
-                        found.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
-                            ValueTupleRestPosition - 1
-                        ].Type;
+                        found
+                            .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
+                                ValueTupleRestPosition - 1
+                            ]
+                            .Type;
                 }
 
                 return found;
@@ -1302,12 +1306,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     if (tuple.Arity == ValueTupleRestPosition)
                     {
                         // Ensure all Rest extensions are tuples
-                        var extensionTupleElementTypes =
-                            tuple.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
+                        var extensionTupleElementTypes = tuple
+                            .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
                                 ValueTupleRestPosition - 1
                             ]
-                                .Type
-                                .TupleElementTypesWithAnnotations;
+                            .Type
+                            .TupleElementTypesWithAnnotations;
                         var typesBuilder = ArrayBuilder<TypeWithAnnotations>.GetInstance(
                             ValueTupleRestPosition - 1 + extensionTupleElementTypes.Length
                         );

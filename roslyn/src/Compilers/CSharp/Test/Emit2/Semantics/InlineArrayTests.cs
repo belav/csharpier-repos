@@ -20384,9 +20384,11 @@ public struct A
 ";
             var compilation = CreateCompilation(source, targetFramework: TargetFramework.Net80);
 
-            var a = compilation.GlobalNamespace
+            var a = compilation
+                .GlobalNamespace
                 .GetTypeMember("A")
-                .InstanceConstructors.Where(c => !c.IsDefaultValueTypeConstructor())
+                .InstanceConstructors
+                .Where(c => !c.IsDefaultValueTypeConstructor())
                 .Single();
 
             // The following was causing a reentrancy into DefaultSyntaxValue on the same thread,
@@ -20430,9 +20432,11 @@ public struct A
 ";
             var compilation = CreateCompilation(source, targetFramework: TargetFramework.Net80);
 
-            var a = compilation.GlobalNamespace
+            var a = compilation
+                .GlobalNamespace
                 .GetTypeMember("A")
-                .InstanceConstructors.Where(c => !c.IsDefaultValueTypeConstructor())
+                .InstanceConstructors
+                .Where(c => !c.IsDefaultValueTypeConstructor())
                 .Single();
 
             // The following was causing a reentrancy into DefaultSyntaxValue on the same thread,

@@ -595,9 +595,9 @@ namespace Internal.TypeSystem.Ecma
                 )
             );
 
-            var value = attr.DecodeValue(new CustomAttributeTypeProvider(_module)).FixedArguments[
-                0
-            ].Value;
+            var value = attr.DecodeValue(new CustomAttributeTypeProvider(_module))
+                .FixedArguments[0]
+                .Value;
 
             return value is int intValue ? intValue : 0;
         }

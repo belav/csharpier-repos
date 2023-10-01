@@ -194,9 +194,11 @@ namespace Mono.Debugger.Soft
                         for (int j = 0; j < fbas.Length; ++j)
                         {
                             if (
-                                fbas[j].Constructor.DeclaringType.FullName.Equals(
-                                    "System.Runtime.CompilerServices.FixedBufferAttribute"
-                                )
+                                fbas[j]
+                                    .Constructor
+                                    .DeclaringType
+                                    .FullName
+                                    .Equals("System.Runtime.CompilerServices.FixedBufferAttribute")
                             )
                             {
                                 len_fixed_size_array = (int)fbas[j].ConstructorArguments[1].Value;

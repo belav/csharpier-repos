@@ -63,11 +63,13 @@ namespace ILCompiler.DependencyAnalysis
                 result.Add(factory.VirtualMethodUse(_targetMethod), "Interface method use");
             }
 
-            factory.MetadataManager.GetDependenciesDueToVirtualMethodReflectability(
-                ref result,
-                factory,
-                _targetMethod
-            );
+            factory
+                .MetadataManager
+                .GetDependenciesDueToVirtualMethodReflectability(
+                    ref result,
+                    factory,
+                    _targetMethod
+                );
 
             TargetArchitecture targetArchitecture = factory.Target.Architecture;
             if (targetArchitecture == TargetArchitecture.ARM)

@@ -720,7 +720,8 @@ public abstract partial class ModelBuilderTest
             var categoryFk = productsNavigation.ForeignKey;
             Assert.Equal("CategoriesID", categoryFk.Properties.Single().Name);
 
-            var categoryNavigation = productsNavigation.TargetEntityType
+            var categoryNavigation = productsNavigation
+                .TargetEntityType
                 .GetSkipNavigations()
                 .Single();
             var productFk = categoryNavigation.ForeignKey;
@@ -758,7 +759,8 @@ public abstract partial class ModelBuilderTest
             var categoryFk = productsNavigation.ForeignKey;
             Assert.Equal("CategoryWithAttributeId", categoryFk.Properties.Single().Name);
 
-            var categoryNavigation = productsNavigation.TargetEntityType
+            var categoryNavigation = productsNavigation
+                .TargetEntityType
                 .GetSkipNavigations()
                 .Single();
             var productFk = categoryNavigation.ForeignKey;

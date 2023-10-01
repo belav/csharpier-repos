@@ -345,9 +345,10 @@ namespace System.Net.Http
             string? cookiesFromContainer = null;
             if (_pool.Settings._useCookies)
             {
-                cookiesFromContainer = _pool.Settings._cookieContainer!.GetCookieHeader(
-                    request.RequestUri
-                );
+                cookiesFromContainer = _pool
+                    .Settings
+                    ._cookieContainer!
+                    .GetCookieHeader(request.RequestUri);
                 if (cookiesFromContainer == "")
                 {
                     cookiesFromContainer = null;
@@ -1080,7 +1081,8 @@ namespace System.Net.Http
             // Copy all of the data to the server.
             if (async)
             {
-                await request.Content!
+                await request
+                    .Content!
                     .CopyToAsync(stream, _transportContext, cancellationToken)
                     .ConfigureAwait(false);
             }
@@ -1255,9 +1257,9 @@ namespace System.Net.Http
                 {
                     try
                     {
-                        response.ReasonPhrase = HttpRuleParser.DefaultHttpEncoding.GetString(
-                            reasonBytes
-                        );
+                        response.ReasonPhrase = HttpRuleParser
+                            .DefaultHttpEncoding
+                            .GetString(reasonBytes);
                     }
                     catch (FormatException formatEx)
                     {
@@ -1459,10 +1461,10 @@ namespace System.Net.Http
                 ThrowForInvalidHeaderName(name);
             }
 
-            Encoding? valueEncoding = _pool.Settings._responseHeaderEncodingSelector?.Invoke(
-                descriptor.Name,
-                _currentRequest!
-            );
+            Encoding? valueEncoding = _pool
+                .Settings
+                ._responseHeaderEncodingSelector
+                ?.Invoke(descriptor.Name, _currentRequest!);
 
             HttpHeaderType headerType = descriptor.HeaderType;
 
@@ -2251,9 +2253,9 @@ namespace System.Net.Http
                             if (desiredBufferSize > currentCapacity)
                             {
                                 origReadBuffer = _readBuffer.DangerousGetUnderlyingBuffer();
-                                byte[] pooledBuffer = ArrayPool<byte>.Shared.Rent(
-                                    desiredBufferSize
-                                );
+                                byte[] pooledBuffer = ArrayPool<byte>
+                                    .Shared
+                                    .Rent(desiredBufferSize);
                                 _readBuffer = new ArrayBuffer(pooledBuffer);
                             }
                         }
@@ -2446,12 +2448,14 @@ namespace System.Net.Http
             string message,
             [CallerMemberName] string? memberName = null
         ) =>
-            NetEventSource.Log.HandlerMessage(
-                _pool?.GetHashCode() ?? 0, // pool ID
-                GetHashCode(), // connection ID
-                _currentRequest?.GetHashCode() ?? 0, // request ID
-                memberName, // method name
-                message
-            ); // message
+            NetEventSource
+                .Log
+                .HandlerMessage(
+                    _pool?.GetHashCode() ?? 0, // pool ID
+                    GetHashCode(), // connection ID
+                    _currentRequest?.GetHashCode() ?? 0, // request ID
+                    memberName, // method name
+                    message
+                ); // message
     }
 }

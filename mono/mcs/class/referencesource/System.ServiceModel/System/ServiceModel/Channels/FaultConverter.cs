@@ -218,7 +218,8 @@ namespace System.ServiceModel.Channels
                             )
                             {
                                 exception = new MessageHeaderException(
-                                    fault.Reason
+                                    fault
+                                        .Reason
                                         .GetMatchingTranslation(CultureInfo.CurrentCulture)
                                         .Text,
                                     true
@@ -237,7 +238,8 @@ namespace System.ServiceModel.Channels
                             )
                             {
                                 exception = new MessageHeaderException(
-                                    fault.Reason
+                                    fault
+                                        .Reason
                                         .GetMatchingTranslation(CultureInfo.CurrentCulture)
                                         .Text
                                 );
@@ -252,7 +254,8 @@ namespace System.ServiceModel.Channels
                             )
                             {
                                 exception = new ProtocolException(
-                                    fault.Reason
+                                    fault
+                                        .Reason
                                         .GetMatchingTranslation(CultureInfo.CurrentCulture)
                                         .Text
                                 );
@@ -270,7 +273,8 @@ namespace System.ServiceModel.Channels
                             )
                             {
                                 exception = new ProtocolException(
-                                    fault.Reason
+                                    fault
+                                        .Reason
                                         .GetMatchingTranslation(CultureInfo.CurrentCulture)
                                         .Text
                                 );
@@ -285,7 +289,8 @@ namespace System.ServiceModel.Channels
                             )
                             {
                                 exception = new ProtocolException(
-                                    fault.Reason
+                                    fault
+                                        .Reason
                                         .GetMatchingTranslation(CultureInfo.CurrentCulture)
                                         .Text
                                 );

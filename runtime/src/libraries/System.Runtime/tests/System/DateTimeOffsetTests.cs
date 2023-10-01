@@ -2296,7 +2296,8 @@ namespace System.Tests
         }
 
         public static bool IsMinValueNegativeLocalOffset() =>
-            TimeZoneInfo.Local
+            TimeZoneInfo
+                .Local
                 .GetUtcOffset(DateTime.SpecifyKind(DateTime.MinValue, DateTimeKind.Utc))
                 .Ticks < 0;
 
@@ -2314,7 +2315,8 @@ namespace System.Tests
         }
 
         public static bool IsMaxValuePositiveLocalOffset() =>
-            TimeZoneInfo.Local
+            TimeZoneInfo
+                .Local
                 .GetUtcOffset(DateTime.SpecifyKind(DateTime.MaxValue, DateTimeKind.Utc))
                 .Ticks > 0;
 

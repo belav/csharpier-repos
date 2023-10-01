@@ -141,11 +141,13 @@ public class EntityGraphAttacher : IEntityGraphAttacher
         var (isGenerated, isSet) = internalEntityEntry.IsKeySet;
 
         if (
-            internalEntityEntry.StateManager.ResolveToExistingEntry(
-                internalEntityEntry,
-                node.InboundNavigation,
-                node.SourceEntry?.GetInfrastructure()
-            )
+            internalEntityEntry
+                .StateManager
+                .ResolveToExistingEntry(
+                    internalEntityEntry,
+                    node.InboundNavigation,
+                    node.SourceEntry?.GetInfrastructure()
+                )
         )
         {
             (_visited ??= new HashSet<object>(ReferenceEqualityComparer.Instance)).Add(
@@ -190,11 +192,13 @@ public class EntityGraphAttacher : IEntityGraphAttacher
         var (isGenerated, isSet) = internalEntityEntry.IsKeySet;
 
         if (
-            internalEntityEntry.StateManager.ResolveToExistingEntry(
-                internalEntityEntry,
-                node.InboundNavigation,
-                node.SourceEntry?.GetInfrastructure()
-            )
+            internalEntityEntry
+                .StateManager
+                .ResolveToExistingEntry(
+                    internalEntityEntry,
+                    node.InboundNavigation,
+                    node.SourceEntry?.GetInfrastructure()
+                )
         )
         {
             (_visited ??= new HashSet<object>()).Add(internalEntityEntry.Entity);

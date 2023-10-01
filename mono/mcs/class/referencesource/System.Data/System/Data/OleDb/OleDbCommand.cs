@@ -41,9 +41,10 @@ namespace System.Data.OleDb
         private OleDbTransaction _transaction;
 
         private static int _objectTypeCount; // Bid counter
-        internal readonly int ObjectID = System.Threading.Interlocked.Increment(
-            ref _objectTypeCount
-        );
+        internal readonly int ObjectID = System
+            .Threading
+            .Interlocked
+            .Increment(ref _objectTypeCount);
 
         private OleDbParameterCollection _parameters;
 
@@ -1217,15 +1218,17 @@ namespace System.Data.OleDb
                                 try
                                 {
                                     propSet.DangerousAddRef(ref mustRelease);
-                                    hr = iopenRowset.Value.OpenRowset(
-                                        ADP.PtrZero,
-                                        tableID,
-                                        ADP.PtrZero,
-                                        ref ODB.IID_IRowset,
-                                        propSet.PropertySetCount,
-                                        propSet.DangerousGetHandle(),
-                                        out executeResult
-                                    );
+                                    hr = iopenRowset
+                                        .Value
+                                        .OpenRowset(
+                                            ADP.PtrZero,
+                                            tableID,
+                                            ADP.PtrZero,
+                                            ref ODB.IID_IRowset,
+                                            propSet.PropertySetCount,
+                                            propSet.DangerousGetHandle(),
+                                            out executeResult
+                                        );
                                 }
                                 finally
                                 {
@@ -1246,15 +1249,17 @@ namespace System.Data.OleDb
                                         "<oledb.IOpenRowset.OpenRowset|API|OLEDB> %d#, IID_IRowset\n",
                                         ObjectID
                                     );
-                                    hr = iopenRowset.Value.OpenRowset(
-                                        ADP.PtrZero,
-                                        tableID,
-                                        ADP.PtrZero,
-                                        ref ODB.IID_IRowset,
-                                        0,
-                                        IntPtr.Zero,
-                                        out executeResult
-                                    );
+                                    hr = iopenRowset
+                                        .Value
+                                        .OpenRowset(
+                                            ADP.PtrZero,
+                                            tableID,
+                                            ADP.PtrZero,
+                                            ref ODB.IID_IRowset,
+                                            0,
+                                            IntPtr.Zero,
+                                            out executeResult
+                                        );
                                     Bid.Trace(
                                         "<oledb.IOpenRowset.OpenRowset|API|OLEDB|RET> %08X{HRESULT}",
                                         hr
@@ -1267,15 +1272,17 @@ namespace System.Data.OleDb
                                     "<oledb.IOpenRowset.OpenRowset|API|OLEDB> %d#, IID_IRowset\n",
                                     ObjectID
                                 );
-                                hr = iopenRowset.Value.OpenRowset(
-                                    ADP.PtrZero,
-                                    tableID,
-                                    ADP.PtrZero,
-                                    ref ODB.IID_IRowset,
-                                    0,
-                                    IntPtr.Zero,
-                                    out executeResult
-                                );
+                                hr = iopenRowset
+                                    .Value
+                                    .OpenRowset(
+                                        ADP.PtrZero,
+                                        tableID,
+                                        ADP.PtrZero,
+                                        ref ODB.IID_IRowset,
+                                        0,
+                                        IntPtr.Zero,
+                                        out executeResult
+                                    );
                                 Bid.Trace(
                                     "<oledb.IOpenRowset.OpenRowset|API|OLEDB|RET> %08X{HRESULT}",
                                     hr

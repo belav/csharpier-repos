@@ -48,8 +48,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World")
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdOutContaining("Hello World")
+                .And
+                .HaveStdErrContaining(
                     $"--- Invoked apphost [version: {RepoDirectoriesProvider.Default.MicrosoftNETCoreAppVersion}"
                 );
 
@@ -64,8 +66,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World")
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdOutContaining("Hello World")
+                .And
+                .HaveStdErrContaining(
                     $"--- Invoked apphost [version: {RepoDirectoriesProvider.Default.MicrosoftNETCoreAppVersion}"
                 );
         }
@@ -100,8 +104,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World")
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdOutContaining("Hello World")
+                .And
+                .HaveStdErrContaining(
                     $"--- Invoked apphost [version: {previousVersionFixture.RepoDirProvider.MicrosoftNETCoreAppVersion}"
                 );
 
@@ -123,8 +129,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                     .Execute()
                     .Should()
                     .Pass()
-                    .And.HaveStdOutContaining("Hello World")
-                    .And.HaveStdErrContaining(
+                    .And
+                    .HaveStdOutContaining("Hello World")
+                    .And
+                    .HaveStdErrContaining(
                         $"--- Invoked apphost [version: {previousVersionFixture.RepoDirProvider.MicrosoftNETCoreAppVersion}"
                     );
             }

@@ -58,9 +58,11 @@ namespace System.ServiceModel.Transactions
             Guid signature = SerializationUtils.ReadGuid(mem);
             if (signature != GuidWhereaboutsInfo)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SerializationException(SR.GetString(SR.WhereaboutsSignatureMissing))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SerializationException(SR.GetString(SR.WhereaboutsSignatureMissing))
+                    );
             }
 
             // cTmToTmProtocols
@@ -69,9 +71,13 @@ namespace System.ServiceModel.Transactions
             // Make sure that cTmToTmProtocols is at least plausible
             if (cTmToTmProtocols * STmToTmProtocolSize > mem.Length - mem.Position)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SerializationException(SR.GetString(SR.WhereaboutsImplausibleProtocolCount))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SerializationException(
+                            SR.GetString(SR.WhereaboutsImplausibleProtocolCount)
+                        )
+                    );
             }
 
             // Loop through each protocol
@@ -83,9 +89,11 @@ namespace System.ServiceModel.Transactions
             // Require a host name
             if (string.IsNullOrEmpty(this.hostName))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SerializationException(SR.GetString(SR.WhereaboutsNoHostName))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SerializationException(SR.GetString(SR.WhereaboutsNoHostName))
+                    );
             }
         }
 
@@ -140,11 +148,13 @@ namespace System.ServiceModel.Transactions
             // Reject host names of disproportionate size
             if (cbTmProtocolData > (MaxComputerName + 1) * 2)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SerializationException(
-                        SR.GetString(SR.WhereaboutsImplausibleHostNameByteCount)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SerializationException(
+                            SR.GetString(SR.WhereaboutsImplausibleHostNameByteCount)
+                        )
+                    );
             }
 
             byte[] chars = SerializationUtils.ReadBytes(mem, (int)cbTmProtocolData);
@@ -161,9 +171,11 @@ namespace System.ServiceModel.Transactions
 
             if (cbString == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SerializationException(SR.GetString(SR.WhereaboutsInvalidHostName))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SerializationException(SR.GetString(SR.WhereaboutsInvalidHostName))
+                    );
             }
 
             try
@@ -172,9 +184,11 @@ namespace System.ServiceModel.Transactions
             }
             catch (ArgumentException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SerializationException(SR.GetString(SR.WhereaboutsInvalidHostName), e)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SerializationException(SR.GetString(SR.WhereaboutsInvalidHostName), e)
+                    );
             }
         }
 

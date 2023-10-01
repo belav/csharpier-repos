@@ -55,7 +55,8 @@ namespace Acme
         {
             Assert.Equal(
                 "T:Color",
-                _compilation.GlobalNamespace
+                _compilation
+                    .GlobalNamespace
                     .GetTypeMembers("Color")
                     .Single()
                     .GetDocumentationCommentId()

@@ -40,45 +40,53 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         {
             await base.InitializeAsync();
 
-            await TestServices.SolutionExplorer.AddAnalyzerReferenceAsync(
-                ProjectName,
-                typeof(HelloWorldGenerator).Assembly.Location,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
-                new[] { FeatureAttribute.Workspace, FeatureAttribute.NavigateTo },
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .SolutionExplorer
+                .AddAnalyzerReferenceAsync(
+                    ProjectName,
+                    typeof(HelloWorldGenerator).Assembly.Location,
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .Workspace
+                .WaitForAllAsyncOperationsAsync(
+                    new[] { FeatureAttribute.Workspace, FeatureAttribute.NavigateTo },
+                    HangMitigatingCancellationToken
+                );
         }
 
         [IdeFact]
         public async Task GoToDefinitionOpensGeneratedFile()
         {
-            await TestServices.Editor.SetTextAsync(
-                @"using System;
+            await TestServices
+                .Editor
+                .SetTextAsync(
+                    @"using System;
 internal static class Program
 {
     public static void Main()
     {
         Console.WriteLine("
-                    + HelloWorldGenerator.GeneratedEnglishClassName
-                    + @".GetMessage());
+                        + HelloWorldGenerator.GeneratedEnglishClassName
+                        + @".GetMessage());
     }
 }",
-                HangMitigatingCancellationToken
-            );
+                    HangMitigatingCancellationToken
+                );
 
-            await TestServices.Editor.PlaceCaretAsync(
-                HelloWorldGenerator.GeneratedEnglishClassName,
-                charsOffset: 0,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Editor
+                .PlaceCaretAsync(
+                    HelloWorldGenerator.GeneratedEnglishClassName,
+                    charsOffset: 0,
+                    HangMitigatingCancellationToken
+                );
             await TestServices.Editor.GoToDefinitionAsync(HangMitigatingCancellationToken);
             Assert.Equal(
                 $"{HelloWorldGenerator.GeneratedEnglishClassName}.cs {ServicesVSResources.generated_suffix}",
-                await TestServices.Shell.GetActiveWindowCaptionAsync(
-                    HangMitigatingCancellationToken
-                )
+                await TestServices
+                    .Shell
+                    .GetActiveWindowCaptionAsync(HangMitigatingCancellationToken)
             );
             Assert.Equal(
                 HelloWorldGenerator.GeneratedEnglishClassName,
@@ -89,27 +97,31 @@ internal static class Program
         [IdeFact]
         public async Task GoToDefinitionOpensGeneratedFile_InFolder()
         {
-            await TestServices.Editor.SetTextAsync(
-                $$"""
+            await TestServices
+                .Editor
+                .SetTextAsync(
+                    $$"""
                 class C
                 {
                     void M({{HelloWorldGenerator.GeneratedFolderClassName}} x) { }
                 }
                 """,
-                HangMitigatingCancellationToken
-            );
+                    HangMitigatingCancellationToken
+                );
 
-            await TestServices.Editor.PlaceCaretAsync(
-                HelloWorldGenerator.GeneratedFolderClassName,
-                charsOffset: 0,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Editor
+                .PlaceCaretAsync(
+                    HelloWorldGenerator.GeneratedFolderClassName,
+                    charsOffset: 0,
+                    HangMitigatingCancellationToken
+                );
             await TestServices.Editor.GoToDefinitionAsync(HangMitigatingCancellationToken);
             Assert.Equal(
                 $"{HelloWorldGenerator.GeneratedFolderName}/{HelloWorldGenerator.GeneratedFolderClassName}.cs {ServicesVSResources.generated_suffix}",
-                await TestServices.Shell.GetActiveWindowCaptionAsync(
-                    HangMitigatingCancellationToken
-                )
+                await TestServices
+                    .Shell
+                    .GetActiveWindowCaptionAsync(HangMitigatingCancellationToken)
             );
             Assert.Equal(
                 HelloWorldGenerator.GeneratedFolderClassName,
@@ -123,30 +135,35 @@ internal static class Program
             bool invokeFromSourceGeneratedFile
         )
         {
-            await TestServices.Editor.SetTextAsync(
-                @"using System;
+            await TestServices
+                .Editor
+                .SetTextAsync(
+                    @"using System;
 internal static class Program
 {
     public static void Main()
     {
         Console.WriteLine("
-                    + HelloWorldGenerator.GeneratedEnglishClassName
-                    + @".GetMessage());
+                        + HelloWorldGenerator.GeneratedEnglishClassName
+                        + @".GetMessage());
     }
 }",
-                HangMitigatingCancellationToken
-            );
+                    HangMitigatingCancellationToken
+                );
 
-            await TestServices.Editor.PlaceCaretAsync(
-                HelloWorldGenerator.GeneratedEnglishClassName,
-                charsOffset: 0,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Editor
+                .PlaceCaretAsync(
+                    HelloWorldGenerator.GeneratedEnglishClassName,
+                    charsOffset: 0,
+                    HangMitigatingCancellationToken
+                );
 
             if (invokeFromSourceGeneratedFile)
             {
-                var workspace =
-                    await TestServices.Shell.GetComponentModelServiceAsync<VisualStudioWorkspace>(
+                var workspace = await TestServices
+                    .Shell
+                    .GetComponentModelServiceAsync<VisualStudioWorkspace>(
                         HangMitigatingCancellationToken
                     );
 
@@ -155,8 +172,9 @@ internal static class Program
                     workspace.Services.GetRequiredService<IWorkspaceConfigurationService>();
                 configurationService.Clear();
 
-                var globalOptions =
-                    await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+                var globalOptions = await TestServices
+                    .Shell
+                    .GetComponentModelServiceAsync<IGlobalOptionService>(
                         HangMitigatingCancellationToken
                     );
                 globalOptions.SetGlobalOption(
@@ -167,21 +185,23 @@ internal static class Program
                 await TestServices.Editor.GoToDefinitionAsync(HangMitigatingCancellationToken);
                 Assert.Equal(
                     $"{HelloWorldGenerator.GeneratedEnglishClassName}.cs {ServicesVSResources.generated_suffix}",
-                    await TestServices.Shell.GetActiveWindowCaptionAsync(
-                        HangMitigatingCancellationToken
-                    )
+                    await TestServices
+                        .Shell
+                        .GetActiveWindowCaptionAsync(HangMitigatingCancellationToken)
                 );
             }
 
-            await TestServices.Input.SendAsync(
-                (VirtualKeyCode.F12, VirtualKeyCode.SHIFT),
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendAsync(
+                    (VirtualKeyCode.F12, VirtualKeyCode.SHIFT),
+                    HangMitigatingCancellationToken
+                );
 
             var results = (
-                await TestServices.FindReferencesWindow.GetContentsAsync(
-                    HangMitigatingCancellationToken
-                )
+                await TestServices
+                    .FindReferencesWindow
+                    .GetContentsAsync(HangMitigatingCancellationToken)
             )
                 .OrderBy(r => r.GetLine())
                 .ToArray();
@@ -226,55 +246,63 @@ internal static class Program
         [IdeTheory, CombinatorialData]
         public async Task FindReferencesAndNavigateToReferenceInGeneratedFile(bool isPreview)
         {
-            await TestServices.Editor.SetTextAsync(
-                @"using System;
+            await TestServices
+                .Editor
+                .SetTextAsync(
+                    @"using System;
 internal static class Program
 {
     public static void Main()
     {
         Console.WriteLine("
-                    + HelloWorldGenerator.GeneratedEnglishClassName
-                    + @".GetMessage());
+                        + HelloWorldGenerator.GeneratedEnglishClassName
+                        + @".GetMessage());
     }
 }",
-                HangMitigatingCancellationToken
-            );
+                    HangMitigatingCancellationToken
+                );
 
-            await TestServices.Editor.PlaceCaretAsync(
-                HelloWorldGenerator.GeneratedEnglishClassName,
-                charsOffset: 0,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Input.SendAsync(
-                (VirtualKeyCode.F12, VirtualKeyCode.SHIFT),
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Editor
+                .PlaceCaretAsync(
+                    HelloWorldGenerator.GeneratedEnglishClassName,
+                    charsOffset: 0,
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .Input
+                .SendAsync(
+                    (VirtualKeyCode.F12, VirtualKeyCode.SHIFT),
+                    HangMitigatingCancellationToken
+                );
 
-            var results = await TestServices.FindReferencesWindow.GetContentsAsync(
-                HangMitigatingCancellationToken
-            );
+            var results = await TestServices
+                .FindReferencesWindow
+                .GetContentsAsync(HangMitigatingCancellationToken);
             var referenceInGeneratedFile = results.Single(
                 r => r.GetText()?.Contains("<summary>") ?? false
             );
-            await TestServices.FindReferencesWindow.NavigateToAsync(
-                referenceInGeneratedFile,
-                isPreview: isPreview,
-                shouldActivate: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .FindReferencesWindow
+                .NavigateToAsync(
+                    referenceInGeneratedFile,
+                    isPreview: isPreview,
+                    shouldActivate: true,
+                    HangMitigatingCancellationToken
+                );
 
             // Assert we are in the right file now
             Assert.Equal(
                 $"{HelloWorldGenerator.GeneratedEnglishClassName}.cs {ServicesVSResources.generated_suffix}",
-                await TestServices.Shell.GetActiveWindowCaptionAsync(
-                    HangMitigatingCancellationToken
-                )
+                await TestServices
+                    .Shell
+                    .GetActiveWindowCaptionAsync(HangMitigatingCancellationToken)
             );
             Assert.Equal(
                 isPreview,
-                await TestServices.Shell.IsActiveTabProvisionalAsync(
-                    HangMitigatingCancellationToken
-                )
+                await TestServices
+                    .Shell
+                    .IsActiveTabProvisionalAsync(HangMitigatingCancellationToken)
             );
         }
 
@@ -283,21 +311,23 @@ internal static class Program
         {
             await TestServices.Shell.ShowNavigateToDialogAsync(HangMitigatingCancellationToken);
 
-            await TestServices.Input.SendToNavigateToAsync(
-                new InputKey[]
-                {
-                    HelloWorldGenerator.GeneratedEnglishClassName,
-                    VirtualKeyCode.RETURN
-                },
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendToNavigateToAsync(
+                    new InputKey[]
+                    {
+                        HelloWorldGenerator.GeneratedEnglishClassName,
+                        VirtualKeyCode.RETURN
+                    },
+                    HangMitigatingCancellationToken
+                );
             await TestServices.Workarounds.WaitForNavigationAsync(HangMitigatingCancellationToken);
 
             Assert.Equal(
                 $"{HelloWorldGenerator.GeneratedEnglishClassName}.cs [generated]",
-                await TestServices.Shell.GetActiveWindowCaptionAsync(
-                    HangMitigatingCancellationToken
-                )
+                await TestServices
+                    .Shell
+                    .GetActiveWindowCaptionAsync(HangMitigatingCancellationToken)
             );
             Assert.Equal(
                 HelloWorldGenerator.GeneratedEnglishClassName,
@@ -310,21 +340,23 @@ internal static class Program
         {
             await TestServices.Shell.ShowNavigateToDialogAsync(HangMitigatingCancellationToken);
 
-            await TestServices.Input.SendToNavigateToAsync(
-                new InputKey[]
-                {
-                    HelloWorldGenerator.GeneratedFolderClassName,
-                    VirtualKeyCode.RETURN
-                },
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendToNavigateToAsync(
+                    new InputKey[]
+                    {
+                        HelloWorldGenerator.GeneratedFolderClassName,
+                        VirtualKeyCode.RETURN
+                    },
+                    HangMitigatingCancellationToken
+                );
             await TestServices.Workarounds.WaitForNavigationAsync(HangMitigatingCancellationToken);
 
             Assert.Equal(
                 $"{HelloWorldGenerator.GeneratedFolderName}/{HelloWorldGenerator.GeneratedFolderClassName}.cs [generated]",
-                await TestServices.Shell.GetActiveWindowCaptionAsync(
-                    HangMitigatingCancellationToken
-                )
+                await TestServices
+                    .Shell
+                    .GetActiveWindowCaptionAsync(HangMitigatingCancellationToken)
             );
             Assert.Equal(
                 HelloWorldGenerator.GeneratedFolderClassName,

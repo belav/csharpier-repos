@@ -21,11 +21,9 @@ namespace Roslyn.VisualStudio.IntegrationTests
             // Save the project file.
             await TestServices.SolutionExplorer.SaveAllAsync(cancellationToken);
 
-            var projectFileContent = await TestServices.SolutionExplorer.GetFileContentsAsync(
-                projectName,
-                $"{ProjectName}.csproj",
-                cancellationToken
-            );
+            var projectFileContent = await TestServices
+                .SolutionExplorer
+                .GetFileContentsAsync(projectName, $"{ProjectName}.csproj", cancellationToken);
             return XElement.Parse(projectFileContent);
         }
 

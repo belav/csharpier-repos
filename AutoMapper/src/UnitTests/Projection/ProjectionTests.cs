@@ -31,7 +31,8 @@ public class InMemoryMapObjectPropertyFromSubQuery : AutoMapperSpecBase
                     o =>
                         o.MapFrom(
                             source =>
-                                source.Articles
+                                source
+                                    .Articles
                                     .Where(
                                         x =>
                                             x.IsDefault

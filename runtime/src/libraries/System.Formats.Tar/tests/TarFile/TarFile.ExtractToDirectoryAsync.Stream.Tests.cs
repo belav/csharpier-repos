@@ -509,11 +509,9 @@ namespace System.Formats.Tar.Tests
                     Array.Clear(dataStreamContent);
 
                     await fileData.ReadExactlyAsync(fileContent, 0, (int)entry.Length);
-                    await entry.DataStream.ReadExactlyAsync(
-                        dataStreamContent,
-                        0,
-                        (int)entry.Length
-                    );
+                    await entry
+                        .DataStream
+                        .ReadExactlyAsync(dataStreamContent, 0, (int)entry.Length);
 
                     AssertExtensions.SequenceEqual(fileContent, dataStreamContent);
                 }

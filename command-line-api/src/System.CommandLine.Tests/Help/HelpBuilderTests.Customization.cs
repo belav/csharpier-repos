@@ -84,9 +84,9 @@ public partial class HelpBuilderTests
                 firstColumnText: ctx =>
                     ctx.Command.Equals(commandA) ? optionAFirstColumnText : optionBFirstColumnText
             );
-            command.Options.Add(
-                new HelpOption() { Action = new HelpAction() { Builder = helpBuilder } }
-            );
+            command
+                .Options
+                .Add(new HelpOption() { Action = new HelpAction() { Builder = helpBuilder } });
 
             var console = new StringWriter();
             var config = new CliConfiguration(command) { Output = console };
@@ -115,9 +115,9 @@ public partial class HelpBuilderTests
                 secondColumnText: ctx =>
                     ctx.Command.Equals(commandA) ? optionADescription : optionBDescription
             );
-            command.Options.Add(
-                new HelpOption { Action = new HelpAction { Builder = helpBuilder } }
-            );
+            command
+                .Options
+                .Add(new HelpOption { Action = new HelpAction { Builder = helpBuilder } });
 
             var config = new CliConfiguration(command) { Output = new StringWriter() };
 
@@ -232,9 +232,9 @@ public partial class HelpBuilderTests
                     conditionB ? "custom 2nd" : option.Description ?? string.Empty
             );
 
-            command.Options.Add(
-                new HelpOption { Action = new HelpAction { Builder = helpBuilder } }
-            );
+            command
+                .Options
+                .Add(new HelpOption { Action = new HelpAction { Builder = helpBuilder } });
 
             CliConfiguration config = new(command);
             var console = new StringWriter();
@@ -285,9 +285,9 @@ public partial class HelpBuilderTests
 
             CliConfiguration config = new(command);
 
-            command.Options.Add(
-                new HelpOption { Action = new HelpAction { Builder = helpBuilder } }
-            );
+            command
+                .Options
+                .Add(new HelpOption { Action = new HelpAction { Builder = helpBuilder } });
 
             config.Output = new StringWriter();
             command.Parse("test -h", config).Invoke();
@@ -315,23 +315,24 @@ public partial class HelpBuilderTests
 
             if (parseResult.Action is HelpAction helpAction)
             {
-                helpAction.Builder.CustomizeSymbol(
-                    subcommand,
-                    secondColumnText: "The custom command description"
-                );
-                helpAction.Builder.CustomizeSymbol(
-                    option,
-                    secondColumnText: "The custom option description"
-                );
-                helpAction.Builder.CustomizeSymbol(
-                    argument,
-                    secondColumnText: "The custom argument description"
-                );
+                helpAction
+                    .Builder
+                    .CustomizeSymbol(
+                        subcommand,
+                        secondColumnText: "The custom command description"
+                    );
+                helpAction
+                    .Builder
+                    .CustomizeSymbol(option, secondColumnText: "The custom option description");
+                helpAction
+                    .Builder
+                    .CustomizeSymbol(argument, secondColumnText: "The custom argument description");
             }
 
             parseResult.Invoke();
 
-            config.Output
+            config
+                .Output
                 .ToString()
                 .Should()
                 .ContainAll(
@@ -355,7 +356,8 @@ public partial class HelpBuilderTests
 
             parseResult.Invoke();
 
-            config.Output
+            config
+                .Output
                 .ToString()
                 .Should()
                 .Be($"one{NewLine}{NewLine}two{NewLine}{NewLine}three{NewLine}{NewLine}");

@@ -300,9 +300,9 @@ namespace Mono.Unix.Native
             kind: DateTimeKind.Utc
         );
         public static readonly DateTime LocalUnixEpoch = new DateTime(1970, 1, 1);
-        public static readonly TimeSpan LocalUtcOffset = TimeZone.CurrentTimeZone.GetUtcOffset(
-            DateTime.UtcNow
-        );
+        public static readonly TimeSpan LocalUtcOffset = TimeZone
+            .CurrentTimeZone
+            .GetUtcOffset(DateTime.UtcNow);
 
         public static DateTime ToDateTime(long time)
         {

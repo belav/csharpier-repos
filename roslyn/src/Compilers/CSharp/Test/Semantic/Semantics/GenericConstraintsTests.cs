@@ -568,9 +568,11 @@ public class Test2
 
             Action<ModuleSymbol> validator = module =>
             {
-                var typeParameter = module.GlobalNamespace
+                var typeParameter = module
+                    .GlobalNamespace
                     .GetTypeMember("Test")
-                    .TypeParameters.Single();
+                    .TypeParameters
+                    .Single();
                 Assert.False(typeParameter.IsValueType);
                 Assert.False(typeParameter.IsReferenceType);
                 Assert.False(typeParameter.HasValueTypeConstraint);
@@ -591,9 +593,11 @@ public class Test2
 
             Action<ModuleSymbol> validator = module =>
             {
-                var typeParameter = module.GlobalNamespace
+                var typeParameter = module
+                    .GlobalNamespace
                     .GetTypeMember("Test")
-                    .TypeParameters.Single();
+                    .TypeParameters
+                    .Single();
                 Assert.True(typeParameter.IsValueType);
                 Assert.False(typeParameter.IsReferenceType);
                 Assert.True(typeParameter.HasValueTypeConstraint);
@@ -615,9 +619,11 @@ public class Test2
 
             Action<ModuleSymbol> validator = module =>
             {
-                var typeParameter = module.GlobalNamespace
+                var typeParameter = module
+                    .GlobalNamespace
                     .GetTypeMember("Test")
-                    .TypeParameters.Single();
+                    .TypeParameters
+                    .Single();
                 Assert.False(typeParameter.IsValueType);
                 Assert.True(typeParameter.IsReferenceType);
                 Assert.False(typeParameter.HasValueTypeConstraint);
@@ -639,9 +645,11 @@ public class Test2
 
             Action<ModuleSymbol> validator = module =>
             {
-                var typeParameter = module.GlobalNamespace
+                var typeParameter = module
+                    .GlobalNamespace
                     .GetTypeMember("Test")
-                    .TypeParameters.Single();
+                    .TypeParameters
+                    .Single();
                 Assert.False(typeParameter.IsValueType);
                 Assert.False(typeParameter.IsReferenceType);
                 Assert.False(typeParameter.HasValueTypeConstraint);
@@ -797,7 +805,8 @@ public class B : A<MyEnum>
             Action<ModuleSymbol> validator = module =>
             {
                 var method = module.GlobalNamespace.GetTypeMember("B").GetMethod("F");
-                var constraintTypeNames = method.TypeParameters
+                var constraintTypeNames = method
+                    .TypeParameters
                     .Single()
                     .ConstraintTypes()
                     .Select(type => type.ToTestDisplayString());
@@ -1268,9 +1277,11 @@ public class Test2
 
             Action<ModuleSymbol> validator = module =>
             {
-                var typeParameter = module.GlobalNamespace
+                var typeParameter = module
+                    .GlobalNamespace
                     .GetTypeMember("Test")
-                    .TypeParameters.Single();
+                    .TypeParameters
+                    .Single();
                 Assert.False(typeParameter.HasValueTypeConstraint);
                 Assert.False(typeParameter.HasReferenceTypeConstraint);
                 Assert.Equal(
@@ -1296,9 +1307,11 @@ public class Test2
                         .WithLocation(1, 40)
                 );
 
-            var typeParameter = compilation.GlobalNamespace
+            var typeParameter = compilation
+                .GlobalNamespace
                 .GetTypeMember("Test")
-                .TypeParameters.Single();
+                .TypeParameters
+                .Single();
 
             Assert.True(typeParameter.HasValueTypeConstraint);
             Assert.False(typeParameter.HasReferenceTypeConstraint);
@@ -1313,9 +1326,11 @@ public class Test2
 
             Action<ModuleSymbol> validator = module =>
             {
-                var typeParameter = module.GlobalNamespace
+                var typeParameter = module
+                    .GlobalNamespace
                     .GetTypeMember("Test")
-                    .TypeParameters.Single();
+                    .TypeParameters
+                    .Single();
                 Assert.False(typeParameter.HasValueTypeConstraint);
                 Assert.True(typeParameter.HasReferenceTypeConstraint);
                 Assert.False(typeParameter.HasConstructorConstraint);
@@ -1335,9 +1350,11 @@ public class Test2
 
             Action<ModuleSymbol> validator = module =>
             {
-                var typeParameter = module.GlobalNamespace
+                var typeParameter = module
+                    .GlobalNamespace
                     .GetTypeMember("Test")
-                    .TypeParameters.Single();
+                    .TypeParameters
+                    .Single();
                 Assert.False(typeParameter.HasValueTypeConstraint);
                 Assert.False(typeParameter.HasReferenceTypeConstraint);
                 Assert.True(typeParameter.HasConstructorConstraint);
@@ -1485,7 +1502,8 @@ public class B : A<D1>
             Action<ModuleSymbol> validator = module =>
             {
                 var method = module.GlobalNamespace.GetTypeMember("B").GetMethod("F");
-                var constraintTypeNames = method.TypeParameters
+                var constraintTypeNames = method
+                    .TypeParameters
                     .Single()
                     .ConstraintTypes()
                     .Select(type => type.ToTestDisplayString());
@@ -1934,9 +1952,11 @@ public class Test2
 
             Action<ModuleSymbol> validator = module =>
             {
-                var typeParameter = module.GlobalNamespace
+                var typeParameter = module
+                    .GlobalNamespace
                     .GetTypeMember("Test")
-                    .TypeParameters.Single();
+                    .TypeParameters
+                    .Single();
                 Assert.False(typeParameter.HasValueTypeConstraint);
                 Assert.False(typeParameter.HasReferenceTypeConstraint);
                 Assert.Equal(
@@ -1962,9 +1982,11 @@ public class Test2
                         .WithLocation(1, 40)
                 );
 
-            var typeParameter = compilation.GlobalNamespace
+            var typeParameter = compilation
+                .GlobalNamespace
                 .GetTypeMember("Test")
-                .TypeParameters.Single();
+                .TypeParameters
+                .Single();
 
             Assert.True(typeParameter.HasValueTypeConstraint);
             Assert.False(typeParameter.HasReferenceTypeConstraint);
@@ -1979,9 +2001,11 @@ public class Test2
 
             Action<ModuleSymbol> validator = module =>
             {
-                var typeParameter = module.GlobalNamespace
+                var typeParameter = module
+                    .GlobalNamespace
                     .GetTypeMember("Test")
-                    .TypeParameters.Single();
+                    .TypeParameters
+                    .Single();
                 Assert.False(typeParameter.HasValueTypeConstraint);
                 Assert.True(typeParameter.HasReferenceTypeConstraint);
                 Assert.False(typeParameter.HasConstructorConstraint);
@@ -2001,9 +2025,11 @@ public class Test2
 
             Action<ModuleSymbol> validator = module =>
             {
-                var typeParameter = module.GlobalNamespace
+                var typeParameter = module
+                    .GlobalNamespace
                     .GetTypeMember("Test")
-                    .TypeParameters.Single();
+                    .TypeParameters
+                    .Single();
                 Assert.False(typeParameter.HasValueTypeConstraint);
                 Assert.False(typeParameter.HasReferenceTypeConstraint);
                 Assert.True(typeParameter.HasConstructorConstraint);
@@ -2151,7 +2177,8 @@ public class B : A<D1>
             Action<ModuleSymbol> validator = module =>
             {
                 var method = module.GlobalNamespace.GetTypeMember("B").GetMethod("F");
-                var constraintTypeNames = method.TypeParameters
+                var constraintTypeNames = method
+                    .TypeParameters
                     .Single()
                     .ConstraintTypes()
                     .Select(type => type.ToTestDisplayString());
@@ -2501,9 +2528,11 @@ public class Test2
         {
             Action<ModuleSymbol> validator = module =>
             {
-                var typeParameter = module.GlobalNamespace
+                var typeParameter = module
+                    .GlobalNamespace
                     .GetTypeMember("Test")
-                    .TypeParameters.Single();
+                    .TypeParameters
+                    .Single();
 
                 Assert.True(typeParameter.HasUnmanagedTypeConstraint);
                 AssertEx.Equal(
@@ -2786,9 +2815,11 @@ class Legacy
 
             Action<ModuleSymbol> validator = module =>
             {
-                var typeParameter = module.GlobalNamespace
+                var typeParameter = module
+                    .GlobalNamespace
                     .GetTypeMember("Test")
-                    .TypeParameters.Single();
+                    .TypeParameters
+                    .Single();
 
                 Assert.True(typeParameter.IsValueType);
                 Assert.False(typeParameter.IsReferenceType);
@@ -2814,10 +2845,12 @@ public class Test
 
             Action<ModuleSymbol> validator = module =>
             {
-                var typeParameter = module.GlobalNamespace
+                var typeParameter = module
+                    .GlobalNamespace
                     .GetTypeMember("Test")
                     .GetMethod("M")
-                    .TypeParameters.Single();
+                    .TypeParameters
+                    .Single();
 
                 Assert.True(typeParameter.IsValueType);
                 Assert.False(typeParameter.IsReferenceType);
@@ -2838,9 +2871,11 @@ public class Test
 
             Action<ModuleSymbol> validator = module =>
             {
-                var typeParameter = module.GlobalNamespace
+                var typeParameter = module
+                    .GlobalNamespace
                     .GetTypeMember("D")
-                    .TypeParameters.Single();
+                    .TypeParameters
+                    .Single();
 
                 Assert.True(typeParameter.IsValueType);
                 Assert.False(typeParameter.IsReferenceType);
@@ -2871,15 +2906,17 @@ public class Test
 
             CompileAndVerify(
                 code,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var typeParameter = module.ContainingAssembly
+                    var typeParameter = module
+                        .ContainingAssembly
                         .GetTypeByMetadataName("Test")
                         .GetMethod("<M>g__N|0_0")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
 
                     Assert.True(typeParameter.IsValueType);
                     Assert.False(typeParameter.IsReferenceType);
@@ -3802,9 +3839,11 @@ public unsafe class C<U> where U : unmanaged
         {
             Action<ModuleSymbol> validator = module =>
             {
-                var typeParameter = module.GlobalNamespace
+                var typeParameter = module
+                    .GlobalNamespace
                     .GetTypeMember("Test")
-                    .TypeParameters.Single();
+                    .TypeParameters
+                    .Single();
 
                 Assert.True(typeParameter.HasUnmanagedTypeConstraint);
                 Assert.True(typeParameter.HasValueTypeConstraint);
@@ -3962,28 +4001,34 @@ public class Program
                 expectedOutput: @"
 1
 2",
-                options: TestOptions.ReleaseExe.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions
+                    .ReleaseExe
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
                     Assert.True(
-                        module.ContainingAssembly
+                        module
+                            .ContainingAssembly
                             .GetTypeByMetadataName("D`1")
-                            .TypeParameters.Single()
+                            .TypeParameters
+                            .Single()
                             .HasUnmanagedTypeConstraint
                     );
                     Assert.True(
-                        module.ContainingAssembly
+                        module
+                            .ContainingAssembly
                             .GetTypeByMetadataName("Test`1")
-                            .TypeParameters.Single()
+                            .TypeParameters
+                            .Single()
                             .HasUnmanagedTypeConstraint
                     );
                     Assert.True(
-                        module.ContainingAssembly
+                        module
+                            .ContainingAssembly
                             .GetTypeByMetadataName("Test`1")
                             .GetTypeMember("<>c__DisplayClass2_0")
-                            .TypeParameters.Single()
+                            .TypeParameters
+                            .Single()
                             .HasUnmanagedTypeConstraint
                     );
                 }

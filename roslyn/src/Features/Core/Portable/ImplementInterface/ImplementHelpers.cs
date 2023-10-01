@@ -57,11 +57,13 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
             {
                 using var _2 = ArrayBuilder<IParameterSymbol>.GetInstance(out var result);
 
-                var primaryConstructor = namedType.InstanceConstructors.FirstOrDefault(
-                    c =>
-                        c.Parameters.Length > 0
-                        && c.Parameters[0].IsPrimaryConstructor(cancellationToken)
-                );
+                var primaryConstructor = namedType
+                    .InstanceConstructors
+                    .FirstOrDefault(
+                        c =>
+                            c.Parameters.Length > 0
+                            && c.Parameters[0].IsPrimaryConstructor(cancellationToken)
+                    );
                 if (primaryConstructor != null)
                 {
                     foreach (var parameter in primaryConstructor.Parameters)

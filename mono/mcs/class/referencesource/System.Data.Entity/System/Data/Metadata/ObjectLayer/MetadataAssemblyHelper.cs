@@ -16,14 +16,18 @@ namespace System.Data.Metadata.Edm
 {
     internal static class MetadataAssemblyHelper
     {
-        static byte[] EcmaPublicKeyToken =
-            System.Data.EntityModel.SchemaObjectModel.ScalarType.ConvertToByteArray(
-                AssemblyRef.EcmaPublicKey
-            );
-        static byte[] MsPublicKeyToken =
-            System.Data.EntityModel.SchemaObjectModel.ScalarType.ConvertToByteArray(
-                AssemblyRef.MicrosoftPublicKey
-            );
+        static byte[] EcmaPublicKeyToken = System
+            .Data
+            .EntityModel
+            .SchemaObjectModel
+            .ScalarType
+            .ConvertToByteArray(AssemblyRef.EcmaPublicKey);
+        static byte[] MsPublicKeyToken = System
+            .Data
+            .EntityModel
+            .SchemaObjectModel
+            .ScalarType
+            .ConvertToByteArray(AssemblyRef.MicrosoftPublicKey);
         private static Memoizer<Assembly, bool> _filterAssemblyCacheByAssembly = new Memoizer<
             Assembly,
             bool

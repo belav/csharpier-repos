@@ -233,7 +233,8 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
         /// Get all saved DiagnosticAsyncToken to investigate tests failure easier
         /// </summary>
         public List<AsynchronousOperationListener.DiagnosticAsyncToken> GetTokens() =>
-            _singletonListeners.Values
+            _singletonListeners
+                .Values
                 .Where(l => l.TrackActiveTokens)
                 .SelectMany(l => l.ActiveDiagnosticTokens)
                 .ToList();

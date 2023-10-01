@@ -148,12 +148,14 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                         controlFlowGraph
                     );
                     Debug.Assert(
-                        LValueFlowCapturesInGraph.Values.All(
-                            kind =>
-                                kind
-                                    is FlowCaptureKind.LValueCapture
-                                        or FlowCaptureKind.LValueAndRValueCapture
-                        )
+                        LValueFlowCapturesInGraph
+                            .Values
+                            .All(
+                                kind =>
+                                    kind
+                                        is FlowCaptureKind.LValueCapture
+                                            or FlowCaptureKind.LValueAndRValueCapture
+                            )
                     );
 
                     _symbolWritesInsideBlockRangeMap = PooledDictionary<
@@ -292,9 +294,9 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                                 or OperationKind.AnonymousFunction
                         )
                         {
-                            var dataFlow = operation.SemanticModel.AnalyzeDataFlow(
-                                operation.Syntax
-                            );
+                            var dataFlow = operation
+                                .SemanticModel
+                                .AnalyzeDataFlow(operation.Syntax);
                             builder.AddRange(dataFlow.Captured.OfType<ILocalSymbol>());
                         }
                     }
@@ -785,10 +787,9 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                             }
 
                             if (
-                                !arg.self._reachingDelegateCreationTargets.TryGetValue(
-                                    symbolWrite,
-                                    out var targetsBuilderForSymbolWrite
-                                )
+                                !arg.self
+                                    ._reachingDelegateCreationTargets
+                                    .TryGetValue(symbolWrite, out var targetsBuilderForSymbolWrite)
                             )
                             {
                                 // Unable to find delegate creation targets for this symbol write.

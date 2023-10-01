@@ -74,7 +74,8 @@ public class LspMiscellaneousFilesWorkspaceTests : AbstractLanguageServerProtoco
         );
 
         var miscWorkspace = testLspServer.GetRequiredLspService<LspMiscellaneousFilesWorkspace>();
-        testLspServer.TestWorkspace
+        testLspServer
+            .TestWorkspace
             .GetService<LspWorkspaceRegistrationService>()
             .Register(miscWorkspace);
 
@@ -349,8 +350,11 @@ public class LspMiscellaneousFilesWorkspaceTests : AbstractLanguageServerProtoco
         return testLspServer
             .GetManagerAccessor()
             .GetLspMiscellaneousFilesWorkspace()!
-            .CurrentSolution.Projects.SingleOrDefault()
-            ?.Documents.Single();
+            .CurrentSolution
+            .Projects
+            .SingleOrDefault()
+            ?.Documents
+            .Single();
     }
 
     private static async Task<LSP.Hover> RunGetHoverAsync(

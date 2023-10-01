@@ -49,10 +49,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 treeOptions != null
                 && analyzerOptions != null
                 && (
-                    !compilationOptions.SpecificDiagnosticOptions.TryGetValue(
-                        descriptor.Id,
-                        out var reportDiagnostic
-                    )
+                    !compilationOptions
+                        .SpecificDiagnosticOptions
+                        .TryGetValue(descriptor.Id, out var reportDiagnostic)
                     || reportDiagnostic == ReportDiagnostic.Default
                 )
             )
@@ -92,16 +91,16 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             // Apply analyzer config options, unless configured with a non-default value in compilation options.
             // Note that compilation options (/nowarn, /warnaserror) override analyzer config options.
             if (
-                !compilationOptions.SpecificDiagnosticOptions.TryGetValue(
-                    descriptor.Id,
-                    out var reportDiagnostic
-                )
+                !compilationOptions
+                    .SpecificDiagnosticOptions
+                    .TryGetValue(descriptor.Id, out var reportDiagnostic)
                 || reportDiagnostic == ReportDiagnostic.Default
             )
             {
                 // First check for tree-level analyzer config options.
-                var analyzerConfigOptions =
-                    analyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(tree);
+                var analyzerConfigOptions = analyzerOptions
+                    .AnalyzerConfigOptionsProvider
+                    .GetOptions(tree);
                 var providerAndTree =
                     compilationOptions.SyntaxTreeOptionsProvider != null
                         ? (compilationOptions.SyntaxTreeOptionsProvider, tree)

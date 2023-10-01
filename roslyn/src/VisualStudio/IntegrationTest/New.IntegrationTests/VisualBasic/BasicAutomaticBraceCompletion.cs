@@ -28,8 +28,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
         [IdeTheory, CombinatorialData]
         public async Task Braces_InsertionAndTabCompleting(bool argumentCompletion)
         {
-            var globalOptions =
-                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+            var globalOptions = await TestServices
+                .Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
             globalOptions.SetGlobalOption(
@@ -52,60 +53,71 @@ End Class",
                 HangMitigatingCancellationToken
             );
 
-            await TestServices.Input.SendWithoutActivateAsync(
-                "Dim x = {",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "        Dim x = {$$}",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendWithoutActivateAsync("Dim x = {", HangMitigatingCancellationToken);
+            await TestServices
+                .EditorVerifier
+                .CurrentLineTextAsync(
+                    "        Dim x = {$$}",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
 
-            await TestServices.Input.SendWithoutActivateAsync(
-                new InputKey[] { "New Object", VirtualKeyCode.ESCAPE, VirtualKeyCode.TAB, },
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendWithoutActivateAsync(
+                    new InputKey[] { "New Object", VirtualKeyCode.ESCAPE, VirtualKeyCode.TAB, },
+                    HangMitigatingCancellationToken
+                );
 
             if (argumentCompletion)
             {
-                await TestServices.EditorVerifier.CurrentLineTextAsync(
-                    "        Dim x = {New Object($$)}",
-                    assertCaretPosition: true,
-                    HangMitigatingCancellationToken
-                );
-                await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
-                    new[] { FeatureAttribute.SignatureHelp },
-                    HangMitigatingCancellationToken
-                );
+                await TestServices
+                    .EditorVerifier
+                    .CurrentLineTextAsync(
+                        "        Dim x = {New Object($$)}",
+                        assertCaretPosition: true,
+                        HangMitigatingCancellationToken
+                    );
+                await TestServices
+                    .Workspace
+                    .WaitForAllAsyncOperationsAsync(
+                        new[] { FeatureAttribute.SignatureHelp },
+                        HangMitigatingCancellationToken
+                    );
 
-                await TestServices.Input.SendWithoutActivateAsync(
-                    VirtualKeyCode.TAB,
-                    HangMitigatingCancellationToken
-                );
-                await TestServices.EditorVerifier.CurrentLineTextAsync(
-                    "        Dim x = {New Object()$$}",
-                    assertCaretPosition: true,
-                    HangMitigatingCancellationToken
-                );
+                await TestServices
+                    .Input
+                    .SendWithoutActivateAsync(VirtualKeyCode.TAB, HangMitigatingCancellationToken);
+                await TestServices
+                    .EditorVerifier
+                    .CurrentLineTextAsync(
+                        "        Dim x = {New Object()$$}",
+                        assertCaretPosition: true,
+                        HangMitigatingCancellationToken
+                    );
 
-                await TestServices.Input.SendWithoutActivateAsync(
-                    VirtualKeyCode.TAB,
-                    HangMitigatingCancellationToken
-                );
-                await TestServices.EditorVerifier.CurrentLineTextAsync(
-                    "        Dim x = {New Object()}$$",
-                    assertCaretPosition: true,
-                    HangMitigatingCancellationToken
-                );
+                await TestServices
+                    .Input
+                    .SendWithoutActivateAsync(VirtualKeyCode.TAB, HangMitigatingCancellationToken);
+                await TestServices
+                    .EditorVerifier
+                    .CurrentLineTextAsync(
+                        "        Dim x = {New Object()}$$",
+                        assertCaretPosition: true,
+                        HangMitigatingCancellationToken
+                    );
             }
             else
             {
-                await TestServices.EditorVerifier.CurrentLineTextAsync(
-                    "        Dim x = {New Object}$$",
-                    assertCaretPosition: true,
-                    HangMitigatingCancellationToken
-                );
+                await TestServices
+                    .EditorVerifier
+                    .CurrentLineTextAsync(
+                        "        Dim x = {New Object}$$",
+                        assertCaretPosition: true,
+                        HangMitigatingCancellationToken
+                    );
             }
         }
 
@@ -122,16 +134,17 @@ End Class",
                 HangMitigatingCancellationToken
             );
 
-            await TestServices.Input.SendWithoutActivateAsync(
-                "Dim x = {",
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendWithoutActivateAsync("Dim x = {", HangMitigatingCancellationToken);
             await TestServices.Input.SendWithoutActivateAsync('}', HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "        Dim x = {}$$",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .EditorVerifier
+                .CurrentLineTextAsync(
+                    "        Dim x = {}$$",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
         }
 
         [IdeFact]
@@ -147,36 +160,43 @@ End Class",
                 HangMitigatingCancellationToken
             );
 
-            await TestServices.Input.SendWithoutActivateAsync(
-                "Console.Write(",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "        Console.Write($$)",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendWithoutActivateAsync("Console.Write(", HangMitigatingCancellationToken);
+            await TestServices
+                .EditorVerifier
+                .CurrentLineTextAsync(
+                    "        Console.Write($$)",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
 
             await TestServices.Input.SendWithoutActivateAsync('"', HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "        Console.Write(\"$$\")",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .EditorVerifier
+                .CurrentLineTextAsync(
+                    "        Console.Write(\"$$\")",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
 
             await TestServices.Input.SendWithoutActivateAsync('"', HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "        Console.Write(\"\"$$)",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .EditorVerifier
+                .CurrentLineTextAsync(
+                    "        Console.Write(\"\"$$)",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
 
             await TestServices.Input.SendWithoutActivateAsync(')', HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "        Console.Write(\"\")$$",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .EditorVerifier
+                .CurrentLineTextAsync(
+                    "        Console.Write(\"\")$$",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
         }
 
         [IdeFact]
@@ -192,30 +212,32 @@ End Class",
                 HangMitigatingCancellationToken
             );
 
-            await TestServices.Input.SendWithoutActivateAsync(
-                "Dim x = {",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Input.SendWithoutActivateAsync(
-                VirtualKeyCode.RETURN,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "            $$}",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.TextContainsAsync(
-                @"
+            await TestServices
+                .Input
+                .SendWithoutActivateAsync("Dim x = {", HangMitigatingCancellationToken);
+            await TestServices
+                .Input
+                .SendWithoutActivateAsync(VirtualKeyCode.RETURN, HangMitigatingCancellationToken);
+            await TestServices
+                .EditorVerifier
+                .CurrentLineTextAsync(
+                    "            $$}",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .EditorVerifier
+                .TextContainsAsync(
+                    @"
 Class C
     Sub Goo()
         Dim x = {
             $$}
     End Sub
 End Class",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
         }
 
         [IdeFact]
@@ -229,33 +251,33 @@ End Class",
                 HangMitigatingCancellationToken
             );
 
-            await TestServices.Input.SendWithoutActivateAsync(
-                "Sub Goo(",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "    Sub Goo($$)",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendWithoutActivateAsync("Sub Goo(", HangMitigatingCancellationToken);
+            await TestServices
+                .EditorVerifier
+                .CurrentLineTextAsync(
+                    "    Sub Goo($$)",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
 
-            await TestServices.Input.SendWithoutActivateAsync(
-                "x As Long",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Input.SendWithoutActivateAsync(
-                VirtualKeyCode.ESCAPE,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Input.SendWithoutActivateAsync(
-                VirtualKeyCode.TAB,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "    Sub Goo(x As Long)$$",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendWithoutActivateAsync("x As Long", HangMitigatingCancellationToken);
+            await TestServices
+                .Input
+                .SendWithoutActivateAsync(VirtualKeyCode.ESCAPE, HangMitigatingCancellationToken);
+            await TestServices
+                .Input
+                .SendWithoutActivateAsync(VirtualKeyCode.TAB, HangMitigatingCancellationToken);
+            await TestServices
+                .EditorVerifier
+                .CurrentLineTextAsync(
+                    "    Sub Goo(x As Long)$$",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
         }
 
         [IdeFact]
@@ -269,26 +291,28 @@ End Class",
                 HangMitigatingCancellationToken
             );
 
-            await TestServices.Input.SendWithoutActivateAsync(
-                "Sub Goo(",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "    Sub Goo($$)",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendWithoutActivateAsync("Sub Goo(", HangMitigatingCancellationToken);
+            await TestServices
+                .EditorVerifier
+                .CurrentLineTextAsync(
+                    "    Sub Goo($$)",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
 
-            await TestServices.Input.SendWithoutActivateAsync(
-                VirtualKeyCode.ESCAPE,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendWithoutActivateAsync(VirtualKeyCode.ESCAPE, HangMitigatingCancellationToken);
             await TestServices.Input.SendWithoutActivateAsync(')', HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "    Sub Goo()$$",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .EditorVerifier
+                .CurrentLineTextAsync(
+                    "    Sub Goo()$$",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
         }
 
         [IdeFact]
@@ -304,15 +328,16 @@ End Class",
                 HangMitigatingCancellationToken
             );
 
-            await TestServices.Input.SendWithoutActivateAsync(
-                "Dim [Dim",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "        Dim [Dim$$]",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendWithoutActivateAsync("Dim [Dim", HangMitigatingCancellationToken);
+            await TestServices
+                .EditorVerifier
+                .CurrentLineTextAsync(
+                    "        Dim [Dim$$]",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
         }
 
         [IdeFact]
@@ -328,25 +353,27 @@ End Class",
                 HangMitigatingCancellationToken
             );
 
-            await TestServices.Input.SendWithoutActivateAsync(
-                "Dim [Dim",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "        Dim [Dim$$]",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendWithoutActivateAsync("Dim [Dim", HangMitigatingCancellationToken);
+            await TestServices
+                .EditorVerifier
+                .CurrentLineTextAsync(
+                    "        Dim [Dim$$]",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
 
-            await TestServices.Input.SendWithoutActivateAsync(
-                "] As Long",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "        Dim [Dim] As Long$$",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendWithoutActivateAsync("] As Long", HangMitigatingCancellationToken);
+            await TestServices
+                .EditorVerifier
+                .CurrentLineTextAsync(
+                    "        Dim [Dim] As Long$$",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
         }
 
         [IdeFact]
@@ -354,8 +381,9 @@ End Class",
         {
             // Disable new rename UI for now, it's causing these tests to fail.
             // https://github.com/dotnet/roslyn/issues/63576
-            var globalOptions =
-                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+            var globalOptions = await TestServices
+                .Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
             globalOptions.SetGlobalOption(InlineRenameUIOptionsStorage.UseInlineAdornment, false);
@@ -370,25 +398,27 @@ End Class",
                 HangMitigatingCancellationToken
             );
 
-            await TestServices.Input.SendWithoutActivateAsync(
-                "Dim str = \"",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "        Dim str = \"$$\"",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendWithoutActivateAsync("Dim str = \"", HangMitigatingCancellationToken);
+            await TestServices
+                .EditorVerifier
+                .CurrentLineTextAsync(
+                    "        Dim str = \"$$\"",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
 
-            await TestServices.Input.SendWithoutActivateAsync(
-                VirtualKeyCode.TAB,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "        Dim str = \"\"$$",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendWithoutActivateAsync(VirtualKeyCode.TAB, HangMitigatingCancellationToken);
+            await TestServices
+                .EditorVerifier
+                .CurrentLineTextAsync(
+                    "        Dim str = \"\"$$",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
         }
 
         [IdeFact]
@@ -407,19 +437,21 @@ End Class",
                 HangMitigatingCancellationToken
             );
 
-            await TestServices.Input.SendWithoutActivateAsync(
-                new InputKey[]
-                {
-                    "Dim y = {New C([dim",
-                    VirtualKeyCode.ESCAPE,
-                    "]:=\"hello({[\")}",
-                    VirtualKeyCode.RETURN,
-                },
-                HangMitigatingCancellationToken
-            );
-            var actualText = await TestServices.Editor.GetTextAsync(
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendWithoutActivateAsync(
+                    new InputKey[]
+                    {
+                        "Dim y = {New C([dim",
+                        VirtualKeyCode.ESCAPE,
+                        "]:=\"hello({[\")}",
+                        VirtualKeyCode.RETURN,
+                    },
+                    HangMitigatingCancellationToken
+                );
+            var actualText = await TestServices
+                .Editor
+                .GetTextAsync(HangMitigatingCancellationToken);
             Assert.Contains("Dim y = {New C([dim]:=\"hello({[\")}", actualText);
         }
 
@@ -439,23 +471,25 @@ End Class",
                 HangMitigatingCancellationToken
             );
 
-            await TestServices.Input.SendWithoutActivateAsync(
-                new InputKey[]
-                {
-                    "Dim y = {New C([dim",
-                    VirtualKeyCode.ESCAPE,
-                    VirtualKeyCode.TAB,
-                    ":=\"hello({[",
-                    VirtualKeyCode.TAB,
-                    VirtualKeyCode.TAB,
-                    VirtualKeyCode.TAB,
-                    VirtualKeyCode.RETURN,
-                },
-                HangMitigatingCancellationToken
-            );
-            var actualText = await TestServices.Editor.GetTextAsync(
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendWithoutActivateAsync(
+                    new InputKey[]
+                    {
+                        "Dim y = {New C([dim",
+                        VirtualKeyCode.ESCAPE,
+                        VirtualKeyCode.TAB,
+                        ":=\"hello({[",
+                        VirtualKeyCode.TAB,
+                        VirtualKeyCode.TAB,
+                        VirtualKeyCode.TAB,
+                        VirtualKeyCode.RETURN,
+                    },
+                    HangMitigatingCancellationToken
+                );
+            var actualText = await TestServices
+                .Editor
+                .GetTextAsync(HangMitigatingCancellationToken);
             Assert.Contains("Dim y = {New C([dim]:=\"hello({[\")}", actualText);
         }
 
@@ -472,15 +506,16 @@ End Class",
                 HangMitigatingCancellationToken
             );
 
-            await TestServices.Input.SendWithoutActivateAsync(
-                "{([\"",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "        ' {([\"$$",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendWithoutActivateAsync("{([\"", HangMitigatingCancellationToken);
+            await TestServices
+                .EditorVerifier
+                .CurrentLineTextAsync(
+                    "        ' {([\"$$",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
         }
 
         [IdeFact]
@@ -496,15 +531,16 @@ End Class",
                 HangMitigatingCancellationToken
             );
 
-            await TestServices.Input.SendWithoutActivateAsync(
-                "Dim s = \"{([",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "        Dim s = \"{([$$\"",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendWithoutActivateAsync("Dim s = \"{([", HangMitigatingCancellationToken);
+            await TestServices
+                .EditorVerifier
+                .CurrentLineTextAsync(
+                    "        Dim s = \"{([$$\"",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
         }
 
         [IdeFact]
@@ -518,19 +554,20 @@ End Class",
                 HangMitigatingCancellationToken
             );
 
-            await TestServices.Input.SendWithoutActivateAsync(
-                "'''",
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendWithoutActivateAsync("'''", HangMitigatingCancellationToken);
             await TestServices.Input.SendWithoutActivateAsync('{', HangMitigatingCancellationToken);
             await TestServices.Input.SendWithoutActivateAsync('(', HangMitigatingCancellationToken);
             await TestServices.Input.SendWithoutActivateAsync('[', HangMitigatingCancellationToken);
             await TestServices.Input.SendWithoutActivateAsync('"', HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "''' {([\"$$",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .EditorVerifier
+                .CurrentLineTextAsync(
+                    "''' {([\"$$",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
         }
 
         [IdeFact]
@@ -549,11 +586,13 @@ End Class",
             );
 
             await TestServices.Input.SendWithoutActivateAsync("(", HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "    ''' <see></see>($$",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .EditorVerifier
+                .CurrentLineTextAsync(
+                    "    ''' <see></see>($$",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
         }
 
         [WorkItem(652015, "DevDiv")]
@@ -570,15 +609,16 @@ End Class",
                 HangMitigatingCancellationToken
             );
 
-            await TestServices.Input.SendWithoutActivateAsync(
-                "Dim x=\"\" '",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "        Dim x=\"\" '$$",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendWithoutActivateAsync("Dim x=\"\" '", HangMitigatingCancellationToken);
+            await TestServices
+                .EditorVerifier
+                .CurrentLineTextAsync(
+                    "        Dim x=\"\" '$$",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
         }
 
         [WorkItem(653399, "DevDiv")]
@@ -594,21 +634,21 @@ End Class",
                 HangMitigatingCancellationToken
             );
 
-            await TestServices.Input.SendWithoutActivateAsync(
-                VirtualKeyCode.RETURN,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendWithoutActivateAsync(VirtualKeyCode.RETURN, HangMitigatingCancellationToken);
             await TestServices.Input.SendWithoutActivateAsync('(', HangMitigatingCancellationToken);
-            await TestServices.Input.SendWithoutActivateAsync(
-                VirtualKeyCode.BACK,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendWithoutActivateAsync(VirtualKeyCode.BACK, HangMitigatingCancellationToken);
 
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "        $$",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .EditorVerifier
+                .CurrentLineTextAsync(
+                    "        $$",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
         }
 
         [WorkItem(659684, "DevDiv")]
@@ -627,15 +667,16 @@ End Class",
                 HangMitigatingCancellationToken
             );
 
-            await TestServices.Input.SendWithoutActivateAsync(
-                "Goo(",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "        Goo($$)",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendWithoutActivateAsync("Goo(", HangMitigatingCancellationToken);
+            await TestServices
+                .EditorVerifier
+                .CurrentLineTextAsync(
+                    "        Goo($$)",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
         }
 
         [WorkItem(657451, "DevDiv")]
@@ -649,15 +690,16 @@ Class C
                 HangMitigatingCancellationToken
             );
 
-            await TestServices.Input.SendWithoutActivateAsync(
-                "Sub Goo(",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "    Sub Goo($$)",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendWithoutActivateAsync("Sub Goo(", HangMitigatingCancellationToken);
+            await TestServices
+                .EditorVerifier
+                .CurrentLineTextAsync(
+                    "    Sub Goo($$)",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
         }
     }
 }

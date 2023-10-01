@@ -32,9 +32,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         private static EmitOptions GetEmitOptions(params InstrumentationKind[] kinds)
         {
-            var options = EmitOptions.Default.WithInstrumentationKinds(
-                ImmutableArray.CreateRange(kinds)
-            );
+            var options = EmitOptions
+                .Default
+                .WithInstrumentationKinds(ImmutableArray.CreateRange(kinds));
             options.TestOnly_AllowLocalStateTracing();
             return options;
         }

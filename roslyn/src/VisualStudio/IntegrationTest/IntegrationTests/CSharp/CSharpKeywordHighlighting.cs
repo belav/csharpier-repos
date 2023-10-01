@@ -69,11 +69,13 @@ class PurchaseTransaction
         CommitHelper();
     }
 }";
-            Test.Utilities.MarkupTestFile.GetSpans(
-                input,
-                out var text,
-                out IDictionary<string, ImmutableArray<TextSpan>> spans
-            );
+            Test.Utilities
+                .MarkupTestFile
+                .GetSpans(
+                    input,
+                    out var text,
+                    out IDictionary<string, ImmutableArray<TextSpan>> spans
+                );
 
             VisualStudio.Editor.SetText(text);
 
@@ -107,14 +109,16 @@ class C
         private void Verify(string marker, ImmutableArray<TextSpan> expectedCount)
         {
             VisualStudio.Editor.PlaceCaret(marker, charsOffset: -1);
-            VisualStudio.Workspace.WaitForAllAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace,
-                FeatureAttribute.SolutionCrawlerLegacy,
-                FeatureAttribute.DiagnosticService,
-                FeatureAttribute.Classification,
-                FeatureAttribute.KeywordHighlighting
-            );
+            VisualStudio
+                .Workspace
+                .WaitForAllAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.Workspace,
+                    FeatureAttribute.SolutionCrawlerLegacy,
+                    FeatureAttribute.DiagnosticService,
+                    FeatureAttribute.Classification,
+                    FeatureAttribute.KeywordHighlighting
+                );
 
             Assert.Equal(expectedCount, VisualStudio.Editor.GetKeywordHighlightTags());
         }

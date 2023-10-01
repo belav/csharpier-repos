@@ -57,14 +57,13 @@ namespace System.ServiceModel.Administration
                     string host = uri.Host;
 
                     if (
-                        !AdministrationStrings.Localhost.Equals(
-                            host,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                        && !AppDomainInfo.Current.MachineName.Equals(
-                            host,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        !AdministrationStrings
+                            .Localhost
+                            .Equals(host, StringComparison.OrdinalIgnoreCase)
+                        && !AppDomainInfo
+                            .Current
+                            .MachineName
+                            .Equals(host, StringComparison.OrdinalIgnoreCase)
                     )
                     {
                         string machineAddress = String.Format(
@@ -1107,9 +1106,11 @@ namespace System.ServiceModel.Administration
                     string operationName = argument as string;
                     if (String.IsNullOrEmpty(operationName))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new WbemInvalidParameterException(AdministrationStrings.Operation)
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new WbemInvalidParameterException(AdministrationStrings.Operation)
+                            );
                     }
                     string result = GetOperationCounterInstanceName(operationName, method.Instance);
                     method.ReturnParameter = result;

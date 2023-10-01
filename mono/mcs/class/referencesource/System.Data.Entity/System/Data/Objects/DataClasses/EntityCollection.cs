@@ -197,9 +197,9 @@ namespace System.Data.Objects.DataClasses
                 // if the collection is attached, we can use metadata information; otherwise, it is unavailable
                 if (null != this.RelationshipSet)
                 {
-                    singleEntitySet = ((AssociationSet)this.RelationshipSet).AssociationSetEnds[
-                        this.ToEndMember.Name
-                    ].EntitySet;
+                    singleEntitySet = ((AssociationSet)this.RelationshipSet)
+                        .AssociationSetEnds[this.ToEndMember.Name]
+                        .EntitySet;
                     EntityType associationEndType = (EntityType)
                         (
                             (RefType)((AssociationEndMember)this.ToEndMember).TypeUsage.EdmType
@@ -844,10 +844,14 @@ namespace System.Data.Objects.DataClasses
                 if (!(value is IEnumerable))
                 {
                     throw new EntityException(
-                        System.Data.Entity.Strings.ObjectStateEntry_UnableToEnumerateCollection(
-                            this.TargetAccessor.PropertyName,
-                            this.WrappedOwner.Entity.GetType().FullName
-                        )
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .ObjectStateEntry_UnableToEnumerateCollection(
+                                this.TargetAccessor.PropertyName,
+                                this.WrappedOwner.Entity.GetType().FullName
+                            )
                     );
                 }
 

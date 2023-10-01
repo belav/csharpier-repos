@@ -26,14 +26,12 @@ internal static class ComponentFacts
             .GetAttributes()
             .Any(a =>
             {
-                return SymbolEqualityComparer.Default.Equals(
-                        a.AttributeClass,
-                        symbols.ParameterAttribute
-                    )
-                    || SymbolEqualityComparer.Default.Equals(
-                        a.AttributeClass,
-                        symbols.CascadingParameterAttribute
-                    );
+                return SymbolEqualityComparer
+                        .Default
+                        .Equals(a.AttributeClass, symbols.ParameterAttribute)
+                    || SymbolEqualityComparer
+                        .Default
+                        .Equals(a.AttributeClass, symbols.CascadingParameterAttribute);
             });
     }
 
@@ -53,10 +51,9 @@ internal static class ComponentFacts
             .GetAttributes()
             .Any(
                 a =>
-                    SymbolEqualityComparer.Default.Equals(
-                        a.AttributeClass,
-                        symbols.ParameterAttribute
-                    )
+                    SymbolEqualityComparer
+                        .Default
+                        .Equals(a.AttributeClass, symbols.ParameterAttribute)
             );
     }
 
@@ -79,10 +76,9 @@ internal static class ComponentFacts
             .GetAttributes()
             .FirstOrDefault(
                 a =>
-                    SymbolEqualityComparer.Default.Equals(
-                        a.AttributeClass,
-                        symbols.ParameterAttribute
-                    )
+                    SymbolEqualityComparer
+                        .Default
+                        .Equals(a.AttributeClass, symbols.ParameterAttribute)
             );
         if (attribute == null)
         {
@@ -122,10 +118,9 @@ internal static class ComponentFacts
             .GetAttributes()
             .Any(
                 a =>
-                    SymbolEqualityComparer.Default.Equals(
-                        a.AttributeClass,
-                        symbols.CascadingParameterAttribute
-                    )
+                    SymbolEqualityComparer
+                        .Default
+                        .Equals(a.AttributeClass, symbols.CascadingParameterAttribute)
             );
     }
 

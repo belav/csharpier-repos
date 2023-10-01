@@ -344,7 +344,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             {
                 var obj = project
                     .GetRequiredCompilationAsync(CancellationToken.None)
-                    .Result.GetSpecialType(SpecialType.System_Object);
+                    .Result
+                    .GetSpecialType(SpecialType.System_Object);
                 return (EnvDTE.CodeElement)ExternalCodeClass.Create(state, projectId, obj);
             }
 
@@ -642,15 +643,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             // RenameSymbolAsync may be implemented using OOP, which has known cases for requiring the UI thread to do work. Use JTF
             // to keep the rename action from deadlocking.
-            var newSolution = _threadingContext.JoinableTaskFactory.Run(
-                () =>
-                    Renamer.RenameSymbolAsync(
-                        oldSolution,
-                        symbol,
-                        new SymbolRenameOptions(),
-                        newName
-                    )
-            );
+            var newSolution = _threadingContext
+                .JoinableTaskFactory
+                .Run(
+                    () =>
+                        Renamer.RenameSymbolAsync(
+                            oldSolution,
+                            symbol,
+                            new SymbolRenameOptions(),
+                            newName
+                        )
+                );
             var changedDocuments = newSolution.GetChangedDocuments(oldSolution);
 
             // Notify third parties of the coming rename operation and let exceptions propagate out
@@ -1411,25 +1414,27 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 formattingRules = additionalRules.Concat(formattingRules).ToImmutableArray();
             }
 
-            return _threadingContext.JoinableTaskFactory.Run(async () =>
-            {
-                var options = await document
-                    .GetSyntaxFormattingOptionsAsync(
-                        _editorOptionsService.GlobalOptions,
-                        cancellationToken
-                    )
-                    .ConfigureAwait(false);
+            return _threadingContext
+                .JoinableTaskFactory
+                .Run(async () =>
+                {
+                    var options = await document
+                        .GetSyntaxFormattingOptionsAsync(
+                            _editorOptionsService.GlobalOptions,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
-                return await Formatter
-                    .FormatAsync(
-                        document,
-                        new TextSpan[] { formattingSpan },
-                        options,
-                        formattingRules,
-                        cancellationToken
-                    )
-                    .ConfigureAwait(false);
-            });
+                    return await Formatter
+                        .FormatAsync(
+                            document,
+                            new TextSpan[] { formattingSpan },
+                            options,
+                            formattingRules,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
+                });
         }
 
         private SyntaxNode InsertNode(
@@ -1469,18 +1474,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             if (!batchMode)
             {
-                document = _threadingContext.JoinableTaskFactory.Run(async () =>
-                {
-                    var simplifierOptions = await document
-                        .GetSimplifierOptionsAsync(
-                            _editorOptionsService.GlobalOptions,
-                            cancellationToken
-                        )
-                        .ConfigureAwait(false);
-                    return await Simplifier
-                        .ReduceAsync(document, annotation, simplifierOptions, cancellationToken)
-                        .ConfigureAwait(false);
-                });
+                document = _threadingContext
+                    .JoinableTaskFactory
+                    .Run(async () =>
+                    {
+                        var simplifierOptions = await document
+                            .GetSimplifierOptionsAsync(
+                                _editorOptionsService.GlobalOptions,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
+                        return await Simplifier
+                            .ReduceAsync(document, annotation, simplifierOptions, cancellationToken)
+                            .ConfigureAwait(false);
+                    });
             }
 
             document = FormatAnnotatedNode(

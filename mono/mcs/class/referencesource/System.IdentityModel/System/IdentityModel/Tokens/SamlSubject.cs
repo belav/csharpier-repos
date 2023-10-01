@@ -57,31 +57,37 @@ namespace System.IdentityModel.Tokens
                 foreach (string method in confirmations)
                 {
                     if (string.IsNullOrEmpty(method))
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                            SR.GetString(
-                                SR.SAMLEntityCannotBeNullOrEmpty,
-                                XD.SamlDictionary.SubjectConfirmationMethod.Value
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperArgument(
+                                SR.GetString(
+                                    SR.SAMLEntityCannotBeNullOrEmpty,
+                                    XD.SamlDictionary.SubjectConfirmationMethod.Value
+                                )
+                            );
 
                     this.confirmationMethods.Add(method);
                 }
             }
 
             if ((this.confirmationMethods.Count == 0) && (string.IsNullOrEmpty(name)))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.SAMLSubjectRequiresNameIdentifierOrConfirmationMethod)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(SR.SAMLSubjectRequiresNameIdentifierOrConfirmationMethod)
+                    );
 
             if (
                 (this.confirmationMethods.Count == 0)
                 && ((confirmationData != null) || (securityKeyIdentifier != null))
             )
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(
-                        SR.SAMLSubjectRequiresConfirmationMethodWhenConfirmationDataOrKeyInfoIsSpecified
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(
+                            SR.SAMLSubjectRequiresConfirmationMethodWhenConfirmationDataOrKeyInfoIsSpecified
+                        )
+                    );
 
             this.name = name;
             this.nameFormat = nameFormat;
@@ -96,14 +102,18 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
 
                 if (string.IsNullOrEmpty(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR.GetString(SR.SAMLSubjectNameIdentifierRequiresNameValue)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(
+                            SR.GetString(SR.SAMLSubjectNameIdentifierRequiresNameValue)
+                        );
 
                 this.name = value;
             }
@@ -115,9 +125,11 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
 
                 this.nameFormat = value;
             }
@@ -129,9 +141,11 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
 
                 this.nameQualifier = value;
             }
@@ -170,9 +184,11 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
 
                 if (value == null)
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("value");
@@ -187,9 +203,11 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
 
                 if (value == null)
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("value");
@@ -219,23 +237,27 @@ namespace System.IdentityModel.Tokens
         void CheckObjectValidity()
         {
             if ((this.confirmationMethods.Count == 0) && (string.IsNullOrEmpty(name)))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(SR.SAMLSubjectRequiresNameIdentifierOrConfirmationMethod)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.SAMLSubjectRequiresNameIdentifierOrConfirmationMethod)
+                        )
+                    );
 
             if (
                 (this.confirmationMethods.Count == 0)
                 && ((this.confirmationData != null) || (this.securityKeyIdentifier != null))
             )
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(
-                            SR.SAMLSubjectRequiresConfirmationMethodWhenConfirmationDataOrKeyInfoIsSpecified
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(
+                                SR.SAMLSubjectRequiresConfirmationMethodWhenConfirmationDataOrKeyInfoIsSpecified
+                            )
                         )
-                    )
-                );
+                    );
         }
 
         public virtual ReadOnlyCollection<Claim> ExtractClaims()
@@ -280,9 +302,9 @@ namespace System.IdentityModel.Tokens
             if ((this.subjectKeyClaimset == null) && (this.securityKeyIdentifier != null))
             {
                 if (samlAuthenticator == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "samlAuthenticator"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("samlAuthenticator");
 
                 if (this.subjectToken != null)
                 {
@@ -331,9 +353,9 @@ namespace System.IdentityModel.Tokens
         )
         {
             if (reader == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("reader")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("reader"));
 
             if (samlSerializer == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("samlSerializer");
@@ -355,11 +377,13 @@ namespace System.IdentityModel.Tokens
                 this.name = reader.ReadString();
 
                 if (this.name == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityTokenException(
-                            SR.GetString(SR.SAMLNameIdentifierMissingIdentifierValueOnRead)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityTokenException(
+                                SR.GetString(SR.SAMLNameIdentifierMissingIdentifierValueOnRead)
+                            )
+                        );
 
                 reader.MoveToContent();
                 reader.ReadEndElement();
@@ -379,14 +403,16 @@ namespace System.IdentityModel.Tokens
                 {
                     string method = reader.ReadString();
                     if (string.IsNullOrEmpty(method))
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SecurityTokenException(
-                                SR.GetString(
-                                    SR.SAMLBadSchema,
-                                    dictionary.SubjectConfirmationMethod.Value
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new SecurityTokenException(
+                                    SR.GetString(
+                                        SR.SAMLBadSchema,
+                                        dictionary.SubjectConfirmationMethod.Value
+                                    )
                                 )
-                            )
-                        );
+                            );
 
                     this.confirmationMethods.Add(method);
                     reader.MoveToContent();
@@ -397,13 +423,15 @@ namespace System.IdentityModel.Tokens
                 {
                     // A SubjectConfirmaton clause should specify at least one
                     // ConfirmationMethod.
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityTokenException(
-                            SR.GetString(
-                                SR.SAMLSubjectConfirmationClauseMissingConfirmationMethodOnRead
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityTokenException(
+                                SR.GetString(
+                                    SR.SAMLSubjectConfirmationClauseMissingConfirmationMethodOnRead
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 if (reader.IsStartElement(dictionary.SubjectConfirmationData, dictionary.Namespace))
@@ -436,11 +464,13 @@ namespace System.IdentityModel.Tokens
                     );
                     if (this.crypto == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SecurityTokenException(
-                                SR.GetString(SR.SamlUnableToExtractSubjectKey)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new SecurityTokenException(
+                                    SR.GetString(SR.SamlUnableToExtractSubjectKey)
+                                )
+                            );
                     }
                     this.subjectToken = SamlSerializer.ResolveSecurityToken(
                         this.securityKeyIdentifier,
@@ -449,13 +479,15 @@ namespace System.IdentityModel.Tokens
                 }
 
                 if ((this.confirmationMethods.Count == 0) && (string.IsNullOrEmpty(name)))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityTokenException(
-                            SR.GetString(
-                                SR.SAMLSubjectRequiresNameIdentifierOrConfirmationMethodOnRead
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityTokenException(
+                                SR.GetString(
+                                    SR.SAMLSubjectRequiresNameIdentifierOrConfirmationMethodOnRead
+                                )
                             )
-                        )
-                    );
+                        );
 
                 reader.MoveToContent();
                 reader.ReadEndElement();
@@ -474,14 +506,14 @@ namespace System.IdentityModel.Tokens
             CheckObjectValidity();
 
             if (writer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("writer")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("writer"));
 
             if (samlSerializer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("samlSerializer")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("samlSerializer"));
 
 #pragma warning suppress 56506 // samlSerializer.DictionaryManager is never null.
             SamlDictionary dictionary = samlSerializer.DictionaryManager.SamlDictionary;

@@ -273,7 +273,8 @@ public class LocalView<
         foreach (
             var entity in _context
                 .GetDependencies()
-                .StateManager.GetNonDeletedEntities<TEntity>()
+                .StateManager
+                .GetNonDeletedEntities<TEntity>()
                 .ToList()
         )
         {

@@ -35,10 +35,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting.Indentation
     [UseExportProvider]
     public class CSharpFormatterTestsBase : CSharpFormattingEngineTestBase
     {
-        private static readonly TestComposition s_composition =
-            EditorTestCompositions.EditorFeatures.AddParts(
-                typeof(TestFormattingRuleFactoryServiceFactory)
-            );
+        private static readonly TestComposition s_composition = EditorTestCompositions
+            .EditorFeatures
+            .AddParts(typeof(TestFormattingRuleFactoryServiceFactory));
 
         public CSharpFormatterTestsBase(ITestOutputHelper output)
             : base(output) { }
@@ -62,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting.Indentation
         {
             await TokenFormatWorkerAsync(workspace, buffer, indentationLine, ch, useTabs);
 
-            return buffer.CurrentSnapshot
+            return buffer
+                .CurrentSnapshot
                 .GetLineFromLineNumber(indentationLine)
                 .GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(TestEditorOptions.Instance);
         }
@@ -100,8 +100,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting.Indentation
             var position = line.Start + index;
             var token = documentSyntax.Root.FindToken(position);
 
-            var formattingRuleProvider =
-                workspace.Services.GetService<IHostDependentFormattingRuleFactoryService>();
+            var formattingRuleProvider = workspace
+                .Services
+                .GetService<IHostDependentFormattingRuleFactoryService>();
 
             var rules = ImmutableArray
                 .Create(formattingRuleProvider.CreateRule(documentSyntax, position))

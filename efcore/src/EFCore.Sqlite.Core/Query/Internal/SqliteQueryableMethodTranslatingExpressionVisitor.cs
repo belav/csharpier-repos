@@ -346,9 +346,9 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor
         // TODO: Refactor this out
         // Calculate the table alias for the json_each expression based on the last named path segment
         // (or the JSON column name if there are none)
-        var lastNamedPathSegment = jsonQueryExpression.Path.LastOrDefault(
-            ps => ps.PropertyName is not null
-        );
+        var lastNamedPathSegment = jsonQueryExpression
+            .Path
+            .LastOrDefault(ps => ps.PropertyName is not null);
         var tableAlias = char.ToLowerInvariant(
                 (lastNamedPathSegment.PropertyName ?? jsonQueryExpression.JsonColumn.Name)[0]
             )

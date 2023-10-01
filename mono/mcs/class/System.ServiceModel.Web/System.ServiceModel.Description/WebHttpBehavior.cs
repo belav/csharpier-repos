@@ -400,7 +400,8 @@ namespace System.ServiceModel.Description
                     "Only MessageVersion.None is allowed for WebHttpBehavior"
                 );
             if (
-                !endpoint.Binding
+                !endpoint
+                    .Binding
                     .CreateBindingElements()
                     .Find<TransportBindingElement>()
                     .ManualAddressing

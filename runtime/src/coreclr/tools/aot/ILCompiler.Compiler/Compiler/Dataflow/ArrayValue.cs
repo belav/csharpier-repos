@@ -103,10 +103,15 @@ namespace ILLink.Shared.TrimAnalysis
                     System.Diagnostics.Debug.Assert(v is not ArrayValue);
                 }
 #endif
-                newValue.IndexValues.Add(
-                    kvp.Key,
-                    new ValueBasicBlockPair(kvp.Value.Value.DeepCopy(), kvp.Value.BasicBlockIndex)
-                );
+                newValue
+                    .IndexValues
+                    .Add(
+                        kvp.Key,
+                        new ValueBasicBlockPair(
+                            kvp.Value.Value.DeepCopy(),
+                            kvp.Value.BasicBlockIndex
+                        )
+                    );
             }
 
             return newValue;

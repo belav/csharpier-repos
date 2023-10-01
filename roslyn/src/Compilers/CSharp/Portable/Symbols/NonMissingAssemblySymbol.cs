@@ -252,9 +252,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             NamedTypeSymbol result1;
             result1 = _emittedNameToTypeMap.GetOrAdd(emittedName.ToKey(), result);
-            System.Diagnostics.Debug.Assert(
-                TypeSymbol.Equals(result1, result, TypeCompareKind.ConsiderEverything2)
-            ); // object identity may differ in error cases
+            System
+                .Diagnostics
+                .Debug
+                .Assert(TypeSymbol.Equals(result1, result, TypeCompareKind.ConsiderEverything2)); // object identity may differ in error cases
             return result1;
         }
     }

@@ -191,9 +191,9 @@ namespace System.Workflow.Activities
                 webservicereceive.QualifiedName
             );
 
-            MethodInfo mInfo = webservicereceive.InterfaceType.GetMethod(
-                webservicereceive.MethodName
-            );
+            MethodInfo mInfo = webservicereceive
+                .InterfaceType
+                .GetMethod(webservicereceive.MethodName);
             if (!queueService.Exists(queueId))
             {
                 // determine if no response is required,
@@ -617,29 +617,27 @@ namespace System.Workflow.Activities
 
                                             object paramValue = null;
                                             if (
-                                                webServiceResponse.ParameterBindings.Contains(
-                                                    paramName
-                                                )
+                                                webServiceResponse
+                                                    .ParameterBindings
+                                                    .Contains(paramName)
                                             )
                                             {
                                                 if (
-                                                    webServiceResponse.ParameterBindings[
-                                                        paramName
-                                                    ].IsBindingSet(
-                                                        WorkflowParameterBinding.ValueProperty
-                                                    )
+                                                    webServiceResponse
+                                                        .ParameterBindings[paramName]
+                                                        .IsBindingSet(
+                                                            WorkflowParameterBinding.ValueProperty
+                                                        )
                                                 )
-                                                    paramValue =
-                                                        webServiceResponse.ParameterBindings[
-                                                            paramName
-                                                        ].GetBinding(
+                                                    paramValue = webServiceResponse
+                                                        .ParameterBindings[paramName]
+                                                        .GetBinding(
                                                             WorkflowParameterBinding.ValueProperty
                                                         );
                                                 else
-                                                    paramValue =
-                                                        webServiceResponse.ParameterBindings[
-                                                            paramName
-                                                        ].GetValue(
+                                                    paramValue = webServiceResponse
+                                                        .ParameterBindings[paramName]
+                                                        .GetValue(
                                                             WorkflowParameterBinding.ValueProperty
                                                         );
                                             }
@@ -671,9 +669,9 @@ namespace System.Workflow.Activities
                                                 validationErrors.Add(validationError);
                                             }
                                             else if (
-                                                !webServiceResponse.ParameterBindings.Contains(
-                                                    paramName
-                                                )
+                                                !webServiceResponse
+                                                    .ParameterBindings
+                                                    .Contains(paramName)
                                                 || paramValue == null
                                             )
                                             {
@@ -720,7 +718,9 @@ namespace System.Workflow.Activities
                                                         ),
                                                         new BindValidationContext(
                                                             paramInfo.ParameterType.IsByRef
-                                                                ? paramInfo.ParameterType.GetElementType()
+                                                                ? paramInfo
+                                                                    .ParameterType
+                                                                    .GetElementType()
                                                                 : paramInfo.ParameterType,
                                                             access
                                                         )

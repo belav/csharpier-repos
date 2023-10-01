@@ -62,9 +62,8 @@ public class DbContextPool<TContext> : IDbContextPool<TContext>, IDisposable, IA
     {
         var constructors = typeof(TContext)
             .GetTypeInfo()
-            .DeclaredConstructors.Where(
-                c => c is { IsStatic: false, IsPublic: true } && c.GetParameters().Length > 0
-            )
+            .DeclaredConstructors
+            .Where(c => c is { IsStatic: false, IsPublic: true } && c.GetParameters().Length > 0)
             .ToArray();
 
         if (

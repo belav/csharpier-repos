@@ -83,10 +83,9 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
 
             foreach (var diagnostic in diagnostics)
             {
-                var assignment = diagnostic.AdditionalLocations[0].FindNode(
-                    getInnermostNodeForTie: true,
-                    cancellationToken
-                );
+                var assignment = diagnostic
+                    .AdditionalLocations[0]
+                    .FindNode(getInnermostNodeForTie: true, cancellationToken);
 
                 editor.ReplaceNode(
                     assignment,
@@ -113,9 +112,9 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
                         );
 
                         if (
-                            diagnostic.Properties.ContainsKey(
-                                UseCompoundAssignmentUtilities.Increment
-                            )
+                            diagnostic
+                                .Properties
+                                .ContainsKey(UseCompoundAssignmentUtilities.Increment)
                         )
                             return Increment(
                                     (TExpressionSyntax)leftOfAssign,
@@ -124,9 +123,9 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
                                 .WithTriviaFrom(currentAssignment);
 
                         if (
-                            diagnostic.Properties.ContainsKey(
-                                UseCompoundAssignmentUtilities.Decrement
-                            )
+                            diagnostic
+                                .Properties
+                                .ContainsKey(UseCompoundAssignmentUtilities.Decrement)
                         )
                             return Decrement(
                                     (TExpressionSyntax)leftOfAssign,

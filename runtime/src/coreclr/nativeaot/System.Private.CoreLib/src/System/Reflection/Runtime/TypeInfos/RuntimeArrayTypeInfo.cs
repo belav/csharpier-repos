@@ -89,11 +89,9 @@ namespace System.Reflection.Runtime.TypeInfos
                             {
                                 lengths[i] = (int)(args[i]);
                             }
-                            return ReflectionCoreExecution.ExecutionEnvironment.NewMultiDimArray(
-                                arrayType.TypeHandle,
-                                lengths,
-                                null
-                            );
+                            return ReflectionCoreExecution
+                                .ExecutionEnvironment
+                                .NewMultiDimArray(arrayType.TypeHandle, lengths, null);
                         }
                     );
                 }
@@ -169,11 +167,9 @@ namespace System.Reflection.Runtime.TypeInfos
                                 lowerBounds[i] = (int)(args[i * 2]);
                                 lengths[i] = (int)(args[i * 2 + 1]);
                             }
-                            return ReflectionCoreExecution.ExecutionEnvironment.NewMultiDimArray(
-                                arrayType.TypeHandle,
-                                lengths,
-                                lowerBounds
-                            );
+                            return ReflectionCoreExecution
+                                .ExecutionEnvironment
+                                .NewMultiDimArray(arrayType.TypeHandle, lengths, lowerBounds);
                         }
                     );
                 }
@@ -330,10 +326,9 @@ namespace System.Reflection.Runtime.TypeInfos
         private static Array CreateJaggedArray(RuntimeTypeInfo arrayType, int[] lengths, int index)
         {
             int length = lengths[index];
-            Array jaggedArray = ReflectionCoreExecution.ExecutionEnvironment.NewArray(
-                arrayType.TypeHandle,
-                length
-            );
+            Array jaggedArray = ReflectionCoreExecution
+                .ExecutionEnvironment
+                .NewArray(arrayType.TypeHandle, length);
             if (index != lengths.Length - 1)
             {
                 for (int i = 0; i < length; i++)

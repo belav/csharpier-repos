@@ -69,12 +69,14 @@ public class C
                     default(CancellationToken)
                 );
 
-                diags.DiagnosticBag.Verify(
-                    // error CS1569: Error writing to XML documentation file: I/O error occurred.
-                    Diagnostic(ErrorCode.ERR_DocFileGen)
-                        .WithArguments("I/O error occurred.")
-                        .WithLocation(1, 1)
-                );
+                diags
+                    .DiagnosticBag
+                    .Verify(
+                        // error CS1569: Error writing to XML documentation file: I/O error occurred.
+                        Diagnostic(ErrorCode.ERR_DocFileGen)
+                            .WithArguments("I/O error occurred.")
+                            .WithLocation(1, 1)
+                    );
                 diags.Free();
             }
         }
@@ -1900,9 +1902,9 @@ x
             // we grab the void keyword
             Assert.Equal(
                 typeof(MethodDeclarationSyntax),
-                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[
-                    0
-                ].GetType()
+                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                    .Members[0]
+                    .GetType()
             );
 
             var keyword = (
@@ -1950,9 +1952,9 @@ x
             // we grab the void keyword
             Assert.Equal(
                 typeof(MethodDeclarationSyntax),
-                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[
-                    0
-                ].GetType()
+                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                    .Members[0]
+                    .GetType()
             );
 
             var keyword = (
@@ -2000,9 +2002,9 @@ x
             // we grab the void keyword
             Assert.Equal(
                 typeof(PropertyDeclarationSyntax),
-                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[
-                    0
-                ].GetType()
+                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                    .Members[0]
+                    .GetType()
             );
 
             var keyword = (
@@ -2050,9 +2052,9 @@ x
             // we grab the void keyword
             Assert.Equal(
                 typeof(IndexerDeclarationSyntax),
-                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[
-                    0
-                ].GetType()
+                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                    .Members[0]
+                    .GetType()
             );
 
             var keyword = (
@@ -2100,9 +2102,9 @@ x
             // do we parsed a method?
             Assert.Equal(
                 typeof(MethodDeclarationSyntax),
-                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[
-                    0
-                ].GetType()
+                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                    .Members[0]
+                    .GetType()
             );
 
             // we grab the open bracket for the Goo method decl
@@ -2154,9 +2156,10 @@ x
             );
 
             // we grab the open bracket for the Goo method decl
-            var typeParameter = (
-                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
-            ).TypeParameterList.Parameters.Single();
+            var typeParameter = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                .TypeParameterList
+                .Parameters
+                .Single();
 
             var trivias = typeParameter.GetLeadingTrivia();
 
@@ -2200,9 +2203,9 @@ x
             // we grab the void keyword
             Assert.Equal(
                 typeof(MethodDeclarationSyntax),
-                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[
-                    0
-                ].GetType()
+                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                    .Members[0]
+                    .GetType()
             );
 
             var keyword = (

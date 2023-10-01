@@ -333,9 +333,12 @@ namespace System.Runtime.CompilerServices
                 {
                     if (
                         target
-                        == System.Linq.Expressions.Compiler.DelegateHelpers.GetActionType(
-                            args.AddFirst(typeof(CallSite))
-                        )
+                        == System
+                            .Linq
+                            .Expressions
+                            .Compiler
+                            .DelegateHelpers
+                            .GetActionType(args.AddFirst(typeof(CallSite)))
                     )
                     {
                         method = typeof(UpdateDelegates).GetMethod(
@@ -352,9 +355,12 @@ namespace System.Runtime.CompilerServices
                 {
                     if (
                         target
-                        == System.Linq.Expressions.Compiler.DelegateHelpers.GetFuncType(
-                            args.AddFirst(typeof(CallSite))
-                        )
+                        == System
+                            .Linq
+                            .Expressions
+                            .Compiler
+                            .DelegateHelpers
+                            .GetFuncType(args.AddFirst(typeof(CallSite)))
                     )
                     {
                         method = typeof(UpdateDelegates).GetMethod(

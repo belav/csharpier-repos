@@ -175,10 +175,9 @@ namespace System.Web.UI
                             let simplePropertyEntry = propertyEntry as SimplePropertyEntry
                             where
                                 simplePropertyEntry != null
-                                && simplePropertyEntry.Name.Equals(
-                                    ItemTypeProperty,
-                                    StringComparison.OrdinalIgnoreCase
-                                )
+                                && simplePropertyEntry
+                                    .Name
+                                    .Equals(ItemTypeProperty, StringComparison.OrdinalIgnoreCase)
                             select (string)simplePropertyEntry.Value
                         ).FirstOrDefault();
                     }
@@ -2473,16 +2472,18 @@ namespace System.Web.UI
 #endif
             if (parser != null && parser.ControlBuilderInterceptor != null)
             {
-                parser.ControlBuilderInterceptor.PreControlBuilderInit(
-                    this,
-                    parser,
-                    parentBuilder,
-                    type,
-                    tagName,
-                    id,
-                    attribs,
-                    AdditionalState
-                );
+                parser
+                    .ControlBuilderInterceptor
+                    .PreControlBuilderInit(
+                        this,
+                        parser,
+                        parentBuilder,
+                        type,
+                        tagName,
+                        id,
+                        attribs,
+                        AdditionalState
+                    );
             }
             ParseTimeData.Parser = parser;
             ParseTimeData.ParentBuilder = parentBuilder;
@@ -3025,16 +3026,18 @@ namespace System.Web.UI
                     {
                         string expression =
                             entry.Expression == null ? String.Empty : entry.Expression.Trim();
-                        ((IExpressionsAccessor)obj).Expressions.Add(
-                            new ExpressionBinding(
-                                entry.Name,
-                                entry.Type,
-                                expressionPrefix,
-                                expression,
-                                entry.Generated,
-                                entry.ParsedExpressionData
-                            )
-                        );
+                        ((IExpressionsAccessor)obj)
+                            .Expressions
+                            .Add(
+                                new ExpressionBinding(
+                                    entry.Name,
+                                    entry.Type,
+                                    expressionPrefix,
+                                    expression,
+                                    entry.Generated,
+                                    entry.ParsedExpressionData
+                                )
+                            );
                     }
                 }
             }
@@ -3198,10 +3201,9 @@ namespace System.Web.UI
                     }
                 }
 
-                evalValue = containerControl.TemplateControl.Eval(
-                    entry.FieldName,
-                    entry.FormatString
-                );
+                evalValue = containerControl
+                    .TemplateControl
+                    .Eval(entry.FieldName, entry.FormatString);
 
                 string objectModelName;
                 MemberInfo memberInfo = PropertyMapper.GetMemberInfo(
@@ -3814,9 +3816,11 @@ namespace System.Web.UI
 
             // Restrict resource keys the same way as we restrict ID's (VSWhidbey 256438)
             if (
-                !System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier(
-                    keyPrefix
-                )
+                !System
+                    .CodeDom
+                    .Compiler
+                    .CodeGenerator
+                    .IsValidLanguageIndependentIdentifier(keyPrefix)
             )
             {
                 throw new HttpException(SR.GetString(SR.Invalid_resourcekey, keyPrefix));
@@ -4151,9 +4155,9 @@ namespace System.Web.UI
                     else if (
                         !usingSetAttribute
                         && !mainDirectiveMode
-                        && propDesc.Attributes.Contains(
-                            DesignerSerializationVisibilityAttribute.Hidden
-                        )
+                        && propDesc
+                            .Attributes
+                            .Contains(DesignerSerializationVisibilityAttribute.Hidden)
                     )
                     {
                         throw new HttpException(

@@ -57,7 +57,8 @@ public class WebHostBuilderKestrelExtensionsTests
 
         var transportFactories = hostBuilder
             .Build()
-            .Services.GetServices<IConnectionListenerFactory>();
+            .Services
+            .GetServices<IConnectionListenerFactory>();
 
         if (OperatingSystem.IsWindows())
         {
@@ -88,7 +89,8 @@ public class WebHostBuilderKestrelExtensionsTests
 
         var factoriesReversed = hostBuilderReversed
             .Build()
-            .Services.GetServices<IConnectionListenerFactory>();
+            .Services
+            .GetServices<IConnectionListenerFactory>();
         AssertContainsType<SocketTransportFactory, IConnectionListenerFactory>(factoriesReversed);
 
         static void AssertContainsType<TExpected, TCollection>(IEnumerable<TCollection> enumerable)

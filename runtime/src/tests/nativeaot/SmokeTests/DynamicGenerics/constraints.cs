@@ -114,85 +114,73 @@ public class ConstraintsTests
         // These should satisfy constraint validation
         TypeOf.CT_TypeWithSelfReferenceConstraint.MakeGenericType(typeof(Derived), typeof(Base));
         TypeOf.CT_TypeWithSelfReferenceConstraint.MakeGenericType(typeof(Derived), typeof(Derived));
-        TypeOf.CT_TypeWithSelfReferenceConstraint.MakeGenericType(
-            typeof(GenericDerived<int>),
-            typeof(GenericBase<int>)
-        );
+        TypeOf
+            .CT_TypeWithSelfReferenceConstraint
+            .MakeGenericType(typeof(GenericDerived<int>), typeof(GenericBase<int>));
         TypeOf.CT_TypeRequiringIFoo.MakeGenericType(typeof(Base));
         TypeOf.CT_TypeRequiringIFoo.MakeGenericType(typeof(Derived));
         TypeOf.CT_TypeRequiringIFoo.MakeGenericType(typeof(IFooer));
         TypeOf.CT_TypeRequiringIFoo.MakeGenericType(typeof(OtherBase));
         TypeOf.CT_TypeWithVariance.MakeGenericType(typeof(IBar<Base>), typeof(Derived));
-        TypeOf.CT_TypeWithVariance.MakeGenericType(
-            typeof(TypeImplementingIBarBase),
-            typeof(Derived)
-        );
+        TypeOf
+            .CT_TypeWithVariance
+            .MakeGenericType(typeof(TypeImplementingIBarBase), typeof(Derived));
         TypeOf.CT_TypeWithVariance.MakeGenericType(typeof(TypeImplementingIBarBase), typeof(Base));
-        TypeOf.CT_TypeWithVariance.MakeGenericType(
-            typeof(TypeImplementingIBar<Base>),
-            typeof(Derived)
-        );
-        TypeOf.CT_TypeWithRecursiveConstraints.MakeGenericType(
-            typeof(TypeWithNoConstraint<Base>),
-            typeof(Base)
-        );
-        TypeOf.CT_TypeWithSelfReferenceIEnumerableConstraint.MakeGenericType(
-            typeof(UInt32[]),
-            typeof(Int32)
-        );
-        TypeOf.CT_TypeWithSelfReferenceIEnumerableConstraint.MakeGenericType(
-            typeof(String[]),
-            typeof(Object)
-        );
+        TypeOf
+            .CT_TypeWithVariance
+            .MakeGenericType(typeof(TypeImplementingIBar<Base>), typeof(Derived));
+        TypeOf
+            .CT_TypeWithRecursiveConstraints
+            .MakeGenericType(typeof(TypeWithNoConstraint<Base>), typeof(Base));
+        TypeOf
+            .CT_TypeWithSelfReferenceIEnumerableConstraint
+            .MakeGenericType(typeof(UInt32[]), typeof(Int32));
+        TypeOf
+            .CT_TypeWithSelfReferenceIEnumerableConstraint
+            .MakeGenericType(typeof(String[]), typeof(Object));
 
         // These should throw
         Assert.Throws<ArgumentException>(
             () =>
-                TypeOf.CT_TypeWithSelfReferenceConstraint.MakeGenericType(
-                    typeof(Base),
-                    typeof(Derived)
-                )
+                TypeOf
+                    .CT_TypeWithSelfReferenceConstraint
+                    .MakeGenericType(typeof(Base), typeof(Derived))
         );
         Assert.Throws<ArgumentException>(
             () => TypeOf.CT_TypeWithVariance.MakeGenericType(typeof(IBar<Derived>), typeof(Base))
         );
         Assert.Throws<ArgumentException>(
             () =>
-                TypeOf.CT_TypeWithVariance.MakeGenericType(
-                    typeof(TypeImplementingIBar<Derived>),
-                    typeof(Base)
-                )
+                TypeOf
+                    .CT_TypeWithVariance
+                    .MakeGenericType(typeof(TypeImplementingIBar<Derived>), typeof(Base))
         );
         Assert.Throws<ArgumentException>(
             () =>
-                TypeOf.CT_TypeWithVariance.MakeGenericType(
-                    typeof(TypeImplementingIBarDerived),
-                    typeof(Base)
-                )
+                TypeOf
+                    .CT_TypeWithVariance
+                    .MakeGenericType(typeof(TypeImplementingIBarDerived), typeof(Base))
         );
         Assert.Throws<ArgumentException>(
             () =>
-                TypeOf.CT_TypeWithRecursiveConstraints.MakeGenericType(
-                    typeof(TypeWithNoConstraint<Derived>),
-                    typeof(Base)
-                )
+                TypeOf
+                    .CT_TypeWithRecursiveConstraints
+                    .MakeGenericType(typeof(TypeWithNoConstraint<Derived>), typeof(Base))
         );
         Assert.Throws<ArgumentException>(
             () =>
-                TypeOf.CT_TypeWithRecursiveConstraints.MakeGenericType(
-                    typeof(TypeWithNoConstraint<Base>),
-                    typeof(Derived)
-                )
+                TypeOf
+                    .CT_TypeWithRecursiveConstraints
+                    .MakeGenericType(typeof(TypeWithNoConstraint<Base>), typeof(Derived))
         );
         Assert.Throws<ArgumentException>(
             () => TypeOf.CT_TypeWithRecursiveConstraints.MakeGenericType(typeof(Base), typeof(Base))
         );
         Assert.Throws<ArgumentException>(
             () =>
-                TypeOf.CT_TypeWithSelfReferenceIEnumerableConstraint.MakeGenericType(
-                    typeof(UInt32[]),
-                    typeof(Int16)
-                )
+                TypeOf
+                    .CT_TypeWithSelfReferenceIEnumerableConstraint
+                    .MakeGenericType(typeof(UInt32[]), typeof(Int16))
         );
     }
 }

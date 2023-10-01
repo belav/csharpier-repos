@@ -5241,9 +5241,9 @@ partial class A
                         encoding: Encoding.UTF8
                     )
                 },
-                options: TestOptions.ReleaseExe.WithSourceReferenceResolver(
-                    SourceFileResolver.Default
-                )
+                options: TestOptions
+                    .ReleaseExe
+                    .WithSourceReferenceResolver(SourceFileResolver.Default)
             );
 
             CompileAndVerify(
@@ -5328,9 +5328,14 @@ partial class A { static void Main5() { Log(); } }
                     ),
                 },
                 new[] { SystemRef },
-                TestOptions.ReleaseExe.WithSourceReferenceResolver(
-                    new SourceFileResolver(ImmutableArray<string>.Empty, baseDirectory: @"C:\A\B")
-                )
+                TestOptions
+                    .ReleaseExe
+                    .WithSourceReferenceResolver(
+                        new SourceFileResolver(
+                            ImmutableArray<string>.Empty,
+                            baseDirectory: @"C:\A\B"
+                        )
+                    )
             );
 
             // On CoreClr the '*' is a legal path character

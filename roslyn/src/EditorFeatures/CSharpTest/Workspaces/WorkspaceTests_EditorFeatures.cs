@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
 
         private static async Task WaitForWorkspaceOperationsToComplete(TestWorkspace workspace)
         {
-            var workspaceWaiter = workspace.ExportProvider
+            var workspaceWaiter = workspace
+                .ExportProvider
                 .GetExportedValue<AsynchronousOperationListenerProvider>()
                 .GetWaiter(FeatureAttribute.Workspace);
 
@@ -244,16 +245,20 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
             workspace.TryApplyChanges(workspace.CurrentSolution);
 
             // Check that a parse tree for a submission has an empty file path.
-            var tree1 = await workspace.CurrentSolution
+            var tree1 = await workspace
+                .CurrentSolution
                 .GetProjectState(project1.Id)
-                .DocumentStates.GetState(document1.Id)
+                .DocumentStates
+                .GetState(document1.Id)
                 .GetSyntaxTreeAsync(CancellationToken.None);
             Assert.Equal("", tree1.FilePath);
 
             // Check that a parse tree for a script does not have an empty file path.
-            var tree2 = await workspace.CurrentSolution
+            var tree2 = await workspace
+                .CurrentSolution
                 .GetProjectState(project2.Id)
-                .DocumentStates.GetState(document2.Id)
+                .DocumentStates
+                .GetState(document2.Id)
                 .GetSyntaxTreeAsync(CancellationToken.None);
             Assert.Equal("a.csx", tree2.FilePath);
         }
@@ -273,9 +278,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
             Solution currentSnapshot
         )
         {
-            var tree = await currentSnapshot.Projects
+            var tree = await currentSnapshot
+                .Projects
                 .First()
-                .Documents.First()
+                .Documents
+                .First()
                 .GetSyntaxTreeAsync();
             var root = (CompilationUnitSyntax)tree.GetRoot();
             var type = (TypeDeclarationSyntax)root.Members[0];
@@ -659,9 +666,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
         [WpfFact]
         public async Task TestGetCompilationOnCrossLanguageDependentProjectChangedInProgress()
         {
-            var composition = EditorTestCompositions.EditorFeatures.AddParts(
-                typeof(TestDocumentTrackingService)
-            );
+            var composition = EditorTestCompositions
+                .EditorFeatures
+                .AddParts(typeof(TestDocumentTrackingService));
 
             using var workspace = CreateWorkspace(
                 disablePartialSolutions: false,
@@ -730,7 +737,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
                     var doc2Z = cs.GetDocument(document2.Id);
                     var partialDoc2Z = doc2Z.WithFrozenPartialSemantics(CancellationToken.None);
                     var compilation2Z = await partialDoc2Z.Project.GetCompilationAsync();
-                    var classDz = compilation2Z.SourceModule.GlobalNamespace
+                    var classDz = compilation2Z
+                        .SourceModule
+                        .GlobalNamespace
                         .GetTypeMembers("D")
                         .Single();
                     var classCz = classDz.BaseType;
@@ -753,7 +762,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
                 {
                     var doc2Z = cs.GetDocument(document2.Id);
                     var compilation2Z = await doc2Z.Project.GetCompilationAsync();
-                    var classDz = compilation2Z.SourceModule.GlobalNamespace
+                    var classDz = compilation2Z
+                        .SourceModule
+                        .GlobalNamespace
                         .GetTypeMembers("D")
                         .Single();
                     var classCz = classDz.BaseType;
@@ -1568,9 +1579,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
             );
             Assert.Equal(
                 "original.config",
-                workspace.CurrentSolution
+                workspace
+                    .CurrentSolution
                     .GetProject(project1.Id)
-                    .AnalyzerConfigDocuments.Single()
+                    .AnalyzerConfigDocuments
+                    .Single()
                     .Name
             );
         }
@@ -1657,9 +1670,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
             );
             Assert.Equal(
                 "original.config",
-                workspace.CurrentSolution
+                workspace
+                    .CurrentSolution
                     .GetProject(project1.Id)
-                    .AnalyzerConfigDocuments.Single()
+                    .AnalyzerConfigDocuments
+                    .Single()
                     .Name
             );
         }
@@ -1685,15 +1700,15 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
             );
             workspace.AddTestProject(project1);
 
-            var documentIdsWithFilePath = workspace.CurrentSolution.GetDocumentIdsWithFilePath(
-                docFilePath
-            );
+            var documentIdsWithFilePath = workspace
+                .CurrentSolution
+                .GetDocumentIdsWithFilePath(docFilePath);
             Assert.Single(documentIdsWithFilePath);
             Assert.Equal(document.Id, documentIdsWithFilePath.Single());
 
-            documentIdsWithFilePath = workspace.CurrentSolution.GetDocumentIdsWithFilePath(
-                additionalDocFilePath
-            );
+            documentIdsWithFilePath = workspace
+                .CurrentSolution
+                .GetDocumentIdsWithFilePath(additionalDocFilePath);
             Assert.Single(documentIdsWithFilePath);
             Assert.Equal(additionalDoc.Id, documentIdsWithFilePath.Single());
         }
@@ -1720,15 +1735,15 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
             );
             workspace.AddTestProject(project1);
 
-            var documentIdsWithFilePath = workspace.CurrentSolution.GetDocumentIdsWithFilePath(
-                docFilePath
-            );
+            var documentIdsWithFilePath = workspace
+                .CurrentSolution
+                .GetDocumentIdsWithFilePath(docFilePath);
             Assert.Single(documentIdsWithFilePath);
             Assert.Equal(document.Id, documentIdsWithFilePath.Single());
 
-            documentIdsWithFilePath = workspace.CurrentSolution.GetDocumentIdsWithFilePath(
-                analyzerConfigDocFilePath
-            );
+            documentIdsWithFilePath = workspace
+                .CurrentSolution
+                .GetDocumentIdsWithFilePath(analyzerConfigDocFilePath);
             Assert.Single(documentIdsWithFilePath);
             Assert.Equal(analyzerConfigDoc.Id, documentIdsWithFilePath.Single());
         }
@@ -1787,7 +1802,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
             Assert.Equal(
                 originalText,
                 (
-                    await eventArgs[0].OldSolution
+                    await eventArgs[0]
+                        .OldSolution
                         .GetDocument(originalDocumentId)
                         .GetTextAsync()
                         .ConfigureAwait(false)
@@ -1796,7 +1812,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
             Assert.Equal(
                 originalText,
                 (
-                    await eventArgs[1].OldSolution
+                    await eventArgs[1]
+                        .OldSolution
                         .GetDocument(originalDocumentId)
                         .GetTextAsync()
                         .ConfigureAwait(false)
@@ -1806,7 +1823,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
             Assert.Equal(
                 updatedText,
                 (
-                    await eventArgs[0].NewSolution
+                    await eventArgs[0]
+                        .NewSolution
                         .GetDocument(originalDocumentId)
                         .GetTextAsync()
                         .ConfigureAwait(false)
@@ -1815,7 +1833,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
             Assert.Equal(
                 updatedText,
                 (
-                    await eventArgs[1].NewSolution
+                    await eventArgs[1]
+                        .NewSolution
                         .GetDocument(originalDocumentId)
                         .GetTextAsync()
                         .ConfigureAwait(false)
@@ -1900,16 +1919,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
             );
 
             // Hook up the option changed event handler.
-            primaryWorkspace.GlobalOptions.AddOptionChangedHandler(
-                this,
-                OptionService_OptionChanged
-            );
+            primaryWorkspace
+                .GlobalOptions
+                .AddOptionChangedHandler(this, OptionService_OptionChanged);
 
             // Change workspace options through primary workspace
-            primaryWorkspace.Options = primaryWorkspace.Options.WithChangedOption(
-                optionKey,
-                FormattingOptions2.IndentStyle.Block
-            );
+            primaryWorkspace.Options = primaryWorkspace
+                .Options
+                .WithChangedOption(optionKey, FormattingOptions2.IndentStyle.Block);
 
             // Verify current solution and option change for both workspaces.
             Assert.NotEqual(beforeSolutionForPrimaryWorkspace, primaryWorkspace.CurrentSolution);
@@ -1927,10 +1944,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
                 secondaryWorkspace.Options.GetOption(optionKey)
             );
 
-            primaryWorkspace.GlobalOptions.RemoveOptionChangedHandler(
-                this,
-                OptionService_OptionChanged
-            );
+            primaryWorkspace
+                .GlobalOptions
+                .RemoveOptionChangedHandler(this, OptionService_OptionChanged);
             return;
 
             void OptionService_OptionChanged(object sender, OptionChangedEventArgs e)

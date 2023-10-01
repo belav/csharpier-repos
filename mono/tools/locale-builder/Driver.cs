@@ -830,10 +830,10 @@ namespace Mono.Tools.LocaleBuilder
                         throw new NotImplementedException();
                 }
 
-                var territories = entry.Attributes["territories"].Value.Split(
-                    new[] { ' ', '\t' },
-                    StringSplitOptions.RemoveEmptyEntries
-                );
+                var territories = entry
+                    .Attributes["territories"]
+                    .Value
+                    .Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
                 foreach (var t in territories)
                 {
                     var tr = t.Trim();

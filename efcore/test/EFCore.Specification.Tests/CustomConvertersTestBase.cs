@@ -709,7 +709,8 @@ public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestB
                 .Throws<InvalidOperationException>(
                     () => context.Set<CollectionScalar>().Where(e => e.Tags.Any()).ToList()
                 )
-                .Message.Replace("\r", "")
+                .Message
+                .Replace("\r", "")
                 .Replace("\n", "")
         );
     }
@@ -726,7 +727,8 @@ public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestB
                 .Throws<InvalidOperationException>(
                     () => context.Set<CollectionScalar>().Where(e => e.Tags.Count == 2).ToList()
                 )
-                .Message.Replace("\r", "")
+                .Message
+                .Replace("\r", "")
                 .Replace("\n", "")
         );
     }
@@ -752,7 +754,8 @@ public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestB
                             .Where(e => e.Roles.Contains(sameRole))
                             .ToList()
                 )
-                .Message.Replace("\r", "")
+                .Message
+                .Replace("\r", "")
                 .Replace("\n", "")
         );
     }
@@ -860,7 +863,8 @@ public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestB
                             )
                             .ToList()
                 )
-                .Message.Replace("\r", "")
+                .Message
+                .Replace("\r", "")
                 .Replace("\n", "")
         );
     }

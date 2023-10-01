@@ -102,7 +102,8 @@ namespace System.Reflection.Runtime.Assemblies.NativeFormat
                             ns
                             + typeDefinitionHandle
                                 .GetTypeDefinition(reader)
-                                .Name.GetString(reader)
+                                .Name
+                                .GetString(reader)
                                 .ToLowerInvariant();
                         if (!dict.TryGetValue(fullName, out _))
                         {
@@ -118,7 +119,8 @@ namespace System.Reflection.Runtime.Assemblies.NativeFormat
                             ns
                             + typeForwarderHandle
                                 .GetTypeForwarder(reader)
-                                .Name.GetString(reader)
+                                .Name
+                                .GetString(reader)
                                 .ToLowerInvariant();
                         if (!dict.TryGetValue(fullName, out _))
                         {

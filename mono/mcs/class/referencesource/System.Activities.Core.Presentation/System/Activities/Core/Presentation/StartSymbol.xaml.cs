@@ -32,12 +32,9 @@ namespace System.Activities.Core.Presentation
             StartSymbol start = new StartSymbol();
             FakeRoot fakeRoot = new FakeRoot { StartNode = new StartNode() };
             ModelTreeManager manager = context.Services.GetService<ModelTreeManager>();
-            start.ModelItem = new FakeModelItemImpl(
-                manager,
-                typeof(FakeRoot),
-                fakeRoot,
-                null
-            ).Properties["StartNode"].Value;
+            start.ModelItem = new FakeModelItemImpl(manager, typeof(FakeRoot), fakeRoot, null)
+                .Properties["StartNode"]
+                .Value;
             start.Name = "StartSymbol";
             start.Focusable = true;
             start.Context = context;

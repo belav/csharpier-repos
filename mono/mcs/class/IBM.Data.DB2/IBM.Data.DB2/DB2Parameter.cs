@@ -689,11 +689,15 @@ namespace IBM.Data.DB2
                         db2CType = DB2Constants.SQL_C_DOUBLE;
                         break;
                     case DB2Constants.SQL_DECIMAL:
-                        byte[] tmpDecimalData = System.Text.Encoding.UTF8.GetBytes(
-                            Convert
-                                .ToDecimal(Value)
-                                .ToString(System.Globalization.CultureInfo.InvariantCulture)
-                        );
+                        byte[] tmpDecimalData = System
+                            .Text
+                            .Encoding
+                            .UTF8
+                            .GetBytes(
+                                Convert
+                                    .ToDecimal(Value)
+                                    .ToString(System.Globalization.CultureInfo.InvariantCulture)
+                            );
                         inLength = Math.Min(tmpDecimalData.Length, requiredMemory);
                         Marshal.Copy(tmpDecimalData, 0, internalBuffer, inLength);
                         db2LastUsedDataType = DB2Constants.SQL_VARCHAR;

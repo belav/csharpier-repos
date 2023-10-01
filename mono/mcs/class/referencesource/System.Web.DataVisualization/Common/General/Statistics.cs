@@ -157,9 +157,11 @@ namespace System.Web.UI.DataVisualization.Charting
                     _tempOutputSeriesName
                 );
 
-                DataPointCollection points = _formulaData.Common.DataManager.Series[
-                    _tempOutputSeriesName
-                ].Points;
+                DataPointCollection points = _formulaData
+                    .Common
+                    .DataManager
+                    .Series[_tempOutputSeriesName]
+                    .Points;
 
                 // Fill Output class
                 zTestResult.firstSeriesMean = points[0].YValues[0];
@@ -175,9 +177,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result class
@@ -236,9 +240,11 @@ namespace System.Web.UI.DataVisualization.Charting
                     _tempOutputSeriesName
                 );
 
-                DataPointCollection points = _formulaData.Common.DataManager.Series[
-                    _tempOutputSeriesName
-                ].Points;
+                DataPointCollection points = _formulaData
+                    .Common
+                    .DataManager
+                    .Series[_tempOutputSeriesName]
+                    .Points;
 
                 // Fill Output class
                 tTestResult.firstSeriesMean = points[0].YValues[0];
@@ -255,9 +261,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result class
@@ -314,9 +322,11 @@ namespace System.Web.UI.DataVisualization.Charting
                     _tempOutputSeriesName
                 );
 
-                DataPointCollection points = _formulaData.Common.DataManager.Series[
-                    _tempOutputSeriesName
-                ].Points;
+                DataPointCollection points = _formulaData
+                    .Common
+                    .DataManager
+                    .Series[_tempOutputSeriesName]
+                    .Points;
 
                 // Fill Output class
                 tTestResult.firstSeriesMean = points[0].YValues[0];
@@ -333,9 +343,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result class
@@ -393,9 +405,11 @@ namespace System.Web.UI.DataVisualization.Charting
                     _tempOutputSeriesName
                 );
 
-                DataPointCollection points = _formulaData.Common.DataManager.Series[
-                    _tempOutputSeriesName
-                ].Points;
+                DataPointCollection points = _formulaData
+                    .Common
+                    .DataManager
+                    .Series[_tempOutputSeriesName]
+                    .Points;
 
                 // Fill Output class
                 tTestResult.firstSeriesMean = points[0].YValues[0];
@@ -412,9 +426,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result class
@@ -487,9 +503,11 @@ namespace System.Web.UI.DataVisualization.Charting
                     _tempOutputSeriesName
                 );
 
-                DataPointCollection points = _formulaData.Common.DataManager.Series[
-                    _tempOutputSeriesName
-                ].Points;
+                DataPointCollection points = _formulaData
+                    .Common
+                    .DataManager
+                    .Series[_tempOutputSeriesName]
+                    .Points;
 
                 // Fill Output class
                 fTestResult.firstSeriesMean = points[0].YValues[0];
@@ -503,9 +521,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result class
@@ -541,9 +561,11 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 _formulaData.Formula("Anova", parameter, inputSeriesNames, _tempOutputSeriesName);
 
-                DataPointCollection points = _formulaData.Common.DataManager.Series[
-                    _tempOutputSeriesName
-                ].Points;
+                DataPointCollection points = _formulaData
+                    .Common
+                    .DataManager
+                    .Series[_tempOutputSeriesName]
+                    .Points;
 
                 // Fill Output class
                 anovaResult.sumOfSquaresBetweenGroups = points[0].YValues[0];
@@ -560,9 +582,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result class
@@ -602,9 +626,11 @@ namespace System.Web.UI.DataVisualization.Charting
                     _tempOutputSeriesName
                 );
 
-                DataPointCollection points = _formulaData.Common.DataManager.Series[
-                    _tempOutputSeriesName
-                ].Points;
+                DataPointCollection points = _formulaData
+                    .Common
+                    .DataManager
+                    .Series[_tempOutputSeriesName]
+                    .Points;
 
                 // Fill Output class
                 result = points[0].YValues[0];
@@ -612,9 +638,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result class
@@ -647,9 +675,11 @@ namespace System.Web.UI.DataVisualization.Charting
                     _tempOutputSeriesName
                 );
 
-                DataPointCollection points = _formulaData.Common.DataManager.Series[
-                    _tempOutputSeriesName
-                ].Points;
+                DataPointCollection points = _formulaData
+                    .Common
+                    .DataManager
+                    .Series[_tempOutputSeriesName]
+                    .Points;
 
                 // Fill Output class
                 result = points[0].YValues[0];
@@ -657,9 +687,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result class
@@ -702,9 +734,11 @@ namespace System.Web.UI.DataVisualization.Charting
                     _tempOutputSeriesName
                 );
 
-                DataPointCollection points = _formulaData.Common.DataManager.Series[
-                    _tempOutputSeriesName
-                ].Points;
+                DataPointCollection points = _formulaData
+                    .Common
+                    .DataManager
+                    .Series[_tempOutputSeriesName]
+                    .Points;
 
                 // Fill Output class
                 result = points[0].YValues[0];
@@ -712,9 +746,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result class
@@ -759,9 +795,11 @@ namespace System.Web.UI.DataVisualization.Charting
                     _tempOutputSeriesName
                 );
 
-                DataPointCollection points = _formulaData.Common.DataManager.Series[
-                    _tempOutputSeriesName
-                ].Points;
+                DataPointCollection points = _formulaData
+                    .Common
+                    .DataManager
+                    .Series[_tempOutputSeriesName]
+                    .Points;
 
                 // Fill Output class
                 result = points[0].YValues[0];
@@ -769,9 +807,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result class
@@ -814,9 +854,11 @@ namespace System.Web.UI.DataVisualization.Charting
                     _tempOutputSeriesName
                 );
 
-                DataPointCollection points = _formulaData.Common.DataManager.Series[
-                    _tempOutputSeriesName
-                ].Points;
+                DataPointCollection points = _formulaData
+                    .Common
+                    .DataManager
+                    .Series[_tempOutputSeriesName]
+                    .Points;
 
                 // Fill Output class
                 result = points[0].YValues[0];
@@ -824,9 +866,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result class
@@ -862,9 +906,11 @@ namespace System.Web.UI.DataVisualization.Charting
                     _tempOutputSeriesName
                 );
 
-                DataPointCollection points = _formulaData.Common.DataManager.Series[
-                    _tempOutputSeriesName
-                ].Points;
+                DataPointCollection points = _formulaData
+                    .Common
+                    .DataManager
+                    .Series[_tempOutputSeriesName]
+                    .Points;
 
                 // Fill Output class
                 result = points[0].YValues[0];
@@ -872,9 +918,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result class
@@ -914,9 +962,11 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 _formulaData.Formula("Covariance", "", inputSeriesParameter, _tempOutputSeriesName);
 
-                DataPointCollection points = _formulaData.Common.DataManager.Series[
-                    _tempOutputSeriesName
-                ].Points;
+                DataPointCollection points = _formulaData
+                    .Common
+                    .DataManager
+                    .Series[_tempOutputSeriesName]
+                    .Points;
 
                 // Fill Output value
                 result = points[0].YValues[0];
@@ -924,9 +974,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result
@@ -964,9 +1016,11 @@ namespace System.Web.UI.DataVisualization.Charting
                     _tempOutputSeriesName
                 );
 
-                DataPointCollection points = _formulaData.Common.DataManager.Series[
-                    _tempOutputSeriesName
-                ].Points;
+                DataPointCollection points = _formulaData
+                    .Common
+                    .DataManager
+                    .Series[_tempOutputSeriesName]
+                    .Points;
 
                 // Fill Output value
                 result = points[0].YValues[0];
@@ -974,9 +1028,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result
@@ -1006,9 +1062,11 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 _formulaData.Formula("Mean", "", inputSeriesParameter, _tempOutputSeriesName);
 
-                DataPointCollection points = _formulaData.Common.DataManager.Series[
-                    _tempOutputSeriesName
-                ].Points;
+                DataPointCollection points = _formulaData
+                    .Common
+                    .DataManager
+                    .Series[_tempOutputSeriesName]
+                    .Points;
 
                 // Fill Output value
                 result = points[0].YValues[0];
@@ -1016,9 +1074,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result
@@ -1048,9 +1108,11 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 _formulaData.Formula("Median", "", inputSeriesParameter, _tempOutputSeriesName);
 
-                DataPointCollection points = _formulaData.Common.DataManager.Series[
-                    _tempOutputSeriesName
-                ].Points;
+                DataPointCollection points = _formulaData
+                    .Common
+                    .DataManager
+                    .Series[_tempOutputSeriesName]
+                    .Points;
 
                 // Fill Output value
                 result = points[0].YValues[0];
@@ -1058,9 +1120,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result
@@ -1101,9 +1165,11 @@ namespace System.Web.UI.DataVisualization.Charting
                     _tempOutputSeriesName
                 );
 
-                DataPointCollection points = _formulaData.Common.DataManager.Series[
-                    _tempOutputSeriesName
-                ].Points;
+                DataPointCollection points = _formulaData
+                    .Common
+                    .DataManager
+                    .Series[_tempOutputSeriesName]
+                    .Points;
 
                 // Fill Output value
                 result = points[0].YValues[0];
@@ -1111,9 +1177,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result
@@ -1155,9 +1223,11 @@ namespace System.Web.UI.DataVisualization.Charting
                     _tempOutputSeriesName
                 );
 
-                DataPointCollection points = _formulaData.Common.DataManager.Series[
-                    _tempOutputSeriesName
-                ].Points;
+                DataPointCollection points = _formulaData
+                    .Common
+                    .DataManager
+                    .Series[_tempOutputSeriesName]
+                    .Points;
 
                 // Fill Output value
                 result = points[0].YValues[0];
@@ -1165,9 +1235,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result
@@ -1198,9 +1270,11 @@ namespace System.Web.UI.DataVisualization.Charting
                     _tempOutputSeriesName
                 );
 
-                DataPointCollection points = _formulaData.Common.DataManager.Series[
-                    _tempOutputSeriesName
-                ].Points;
+                DataPointCollection points = _formulaData
+                    .Common
+                    .DataManager
+                    .Series[_tempOutputSeriesName]
+                    .Points;
 
                 // Fill Output value
                 result = points[0].YValues[0];
@@ -1208,9 +1282,11 @@ namespace System.Web.UI.DataVisualization.Charting
             finally
             {
                 // Remove Temporary output series
-                _formulaData.Common.DataManager.Series.Remove(
-                    _formulaData.Common.DataManager.Series[_tempOutputSeriesName]
-                );
+                _formulaData
+                    .Common
+                    .DataManager
+                    .Series
+                    .Remove(_formulaData.Common.DataManager.Series[_tempOutputSeriesName]);
             }
 
             // Return result

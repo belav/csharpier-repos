@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
                     || (
                         obj?.SymbolKey != null
                         && SymbolKey != null
-                        && CodeAnalysis.SymbolKey
+                        && CodeAnalysis
+                            .SymbolKey
                             .GetComparer(ignoreCase: false, ignoreAssemblyKeys: false)
                             .Equals(SymbolKey.Value, obj.SymbolKey.Value)
                     );
@@ -54,10 +55,9 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
                     return 0;
                 }
 
-                var comparer = CodeAnalysis.SymbolKey.GetComparer(
-                    ignoreCase: false,
-                    ignoreAssemblyKeys: false
-                );
+                var comparer = CodeAnalysis
+                    .SymbolKey
+                    .GetComparer(ignoreCase: false, ignoreAssemblyKeys: false);
                 return comparer.GetHashCode(SymbolKey.Value);
             }
         }

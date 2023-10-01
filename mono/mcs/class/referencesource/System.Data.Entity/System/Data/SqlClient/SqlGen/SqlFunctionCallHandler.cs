@@ -1591,10 +1591,14 @@ namespace System.Data.SqlClient.SqlGen
             if (null == constExpr)
             {
                 throw EntityUtil.InvalidOperation(
-                    System.Data.Entity.Strings.SqlGen_InvalidDatePartArgumentExpression(
-                        e.Function.NamespaceName,
-                        e.Function.Name
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .SqlGen_InvalidDatePartArgumentExpression(
+                            e.Function.NamespaceName,
+                            e.Function.Name
+                        )
                 );
             }
 
@@ -1602,10 +1606,14 @@ namespace System.Data.SqlClient.SqlGen
             if (null == datepart)
             {
                 throw EntityUtil.InvalidOperation(
-                    System.Data.Entity.Strings.SqlGen_InvalidDatePartArgumentExpression(
-                        e.Function.NamespaceName,
-                        e.Function.Name
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .SqlGen_InvalidDatePartArgumentExpression(
+                            e.Function.NamespaceName,
+                            e.Function.Name
+                        )
                 );
             }
 
@@ -1617,11 +1625,15 @@ namespace System.Data.SqlClient.SqlGen
             if (!_datepartKeywords.Contains(datepart))
             {
                 throw EntityUtil.InvalidOperation(
-                    System.Data.Entity.Strings.SqlGen_InvalidDatePartArgumentValue(
-                        datepart,
-                        e.Function.NamespaceName,
-                        e.Function.Name
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .SqlGen_InvalidDatePartArgumentValue(
+                            datepart,
+                            e.Function.NamespaceName,
+                            e.Function.Name
+                        )
                 );
             }
 
@@ -2663,9 +2675,10 @@ namespace System.Data.SqlClient.SqlGen
 
             for (int i = 0; i < e.Arguments.Count; i++)
             {
-                TypeUsage storeType = sqlgen.StoreItemCollection.StoreProviderManifest.GetStoreType(
-                    e.Arguments[i].ResultType
-                );
+                TypeUsage storeType = sqlgen
+                    .StoreItemCollection
+                    .StoreProviderManifest
+                    .GetStoreType(e.Arguments[i].ResultType);
                 if (_maxTypeNames.Contains(storeType.EdmType.Name))
                 {
                     return true;

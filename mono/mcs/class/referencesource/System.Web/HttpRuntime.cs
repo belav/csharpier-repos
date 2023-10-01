@@ -368,11 +368,13 @@ namespace System.Web
         {
             // Set the DataDirectory (see VSWhidbey 226834) with permission (DevDiv 29614)
             string dataDirectory = Path.Combine(_appDomainAppPath, DataDirectoryName);
-            AppDomain.CurrentDomain.SetData(
-                "DataDirectory",
-                dataDirectory,
-                new FileIOPermission(FileIOPermissionAccess.PathDiscovery, dataDirectory)
-            );
+            AppDomain
+                .CurrentDomain
+                .SetData(
+                    "DataDirectory",
+                    dataDirectory,
+                    new FileIOPermission(FileIOPermissionAccess.PathDiscovery, dataDirectory)
+                );
         }
 
         private void DisposeAppDomainShutdownTimer()
@@ -1006,8 +1008,11 @@ namespace System.Web
             string codegenBase;
 
             // devdiv 1038337. Passing the corresponding IsDevelopmentEnvironment flag to ConstructSimpleAppName
-            string simpleAppName =
-                System.Web.Hosting.AppManagerAppDomainFactory.ConstructSimpleAppName(
+            string simpleAppName = System
+                .Web
+                .Hosting
+                .AppManagerAppDomainFactory
+                .ConstructSimpleAppName(
                     AppDomainAppVirtualPath,
                     HostingEnvironment.IsDevelopmentEnvironment
                 );
@@ -1261,24 +1266,27 @@ namespace System.Web
                     )
                     {
                         if (
-                            processConfig.ElementInformation.Properties[
-                                "maxWorkerThreads"
-                            ].LineNumber != 0
+                            processConfig
+                                .ElementInformation
+                                .Properties["maxWorkerThreads"]
+                                .LineNumber != 0
                         )
                         {
                             throw new ConfigurationErrorsException(
                                 SR.GetString(
                                     SR.Thread_pool_limit_must_be_greater_than_minFreeThreads,
-                                    runtimeConfig.MinFreeThreads.ToString(
-                                        CultureInfo.InvariantCulture
-                                    )
+                                    runtimeConfig
+                                        .MinFreeThreads
+                                        .ToString(CultureInfo.InvariantCulture)
                                 ),
-                                processConfig.ElementInformation.Properties[
-                                    "maxWorkerThreads"
-                                ].Source,
-                                processConfig.ElementInformation.Properties[
-                                    "maxWorkerThreads"
-                                ].LineNumber
+                                processConfig
+                                    .ElementInformation
+                                    .Properties["maxWorkerThreads"]
+                                    .Source,
+                                processConfig
+                                    .ElementInformation
+                                    .Properties["maxWorkerThreads"]
+                                    .LineNumber
                             );
                         }
                         else
@@ -1286,14 +1294,15 @@ namespace System.Web
                             throw new ConfigurationErrorsException(
                                 SR.GetString(
                                     SR.Thread_pool_limit_must_be_greater_than_minFreeThreads,
-                                    runtimeConfig.MinFreeThreads.ToString(
-                                        CultureInfo.InvariantCulture
-                                    )
+                                    runtimeConfig
+                                        .MinFreeThreads
+                                        .ToString(CultureInfo.InvariantCulture)
                                 ),
                                 processConfig.ElementInformation.Properties["maxIoThreads"].Source,
-                                processConfig.ElementInformation.Properties[
-                                    "maxIoThreads"
-                                ].LineNumber
+                                processConfig
+                                    .ElementInformation
+                                    .Properties["maxIoThreads"]
+                                    .LineNumber
                             );
                         }
                     }
@@ -1313,9 +1322,10 @@ namespace System.Web
                 if (runtimeConfig.MinLocalRequestFreeThreads > runtimeConfig.MinFreeThreads)
                 {
                     if (
-                        runtimeConfig.ElementInformation.Properties[
-                            "minLocalRequestFreeThreads"
-                        ].LineNumber == 0
+                        runtimeConfig
+                            .ElementInformation
+                            .Properties["minLocalRequestFreeThreads"]
+                            .LineNumber == 0
                     )
                     {
                         throw new ConfigurationErrorsException(
@@ -1328,12 +1338,14 @@ namespace System.Web
                     {
                         throw new ConfigurationErrorsException(
                             SR.GetString(SR.Local_free_threads_cannot_exceed_free_threads),
-                            runtimeConfig.ElementInformation.Properties[
-                                "minLocalRequestFreeThreads"
-                            ].Source,
-                            runtimeConfig.ElementInformation.Properties[
-                                "minLocalRequestFreeThreads"
-                            ].LineNumber
+                            runtimeConfig
+                                .ElementInformation
+                                .Properties["minLocalRequestFreeThreads"]
+                                .Source,
+                            runtimeConfig
+                                .ElementInformation
+                                .Properties["minLocalRequestFreeThreads"]
+                                .LineNumber
                         );
                     }
                 }
@@ -1575,10 +1587,12 @@ namespace System.Web
             bool appOfflineFileFound = false;
 
             // monitor even if doesn't exist
-            _theRuntime._fcm.StartMonitoringFile(
-                appOfflineFile,
-                new FileChangeEventHandler(_theRuntime.OnAppOfflineFileChange)
-            );
+            _theRuntime
+                ._fcm
+                .StartMonitoringFile(
+                    appOfflineFile,
+                    new FileChangeEventHandler(_theRuntime.OnAppOfflineFileChange)
+                );
 
             // read the file into memory
             try
@@ -1912,10 +1926,12 @@ namespace System.Web
                 if (context.ApplicationInstance != null)
                 {
                     // process request
-                    IAsyncResult ar = context.ApplicationInstance.BeginProcessRequestNotification(
-                        context,
-                        _requestNotificationCompletionCallback
-                    );
+                    IAsyncResult ar = context
+                        .ApplicationInstance
+                        .BeginProcessRequestNotification(
+                            context,
+                            _requestNotificationCompletionCallback
+                        );
 
                     if (ar.CompletedSynchronously)
                     {
@@ -2096,9 +2112,9 @@ namespace System.Web
                         HttpWorkerRequest.HeaderContentType,
                         "text/html; charset=utf-8"
                     );
-                    byte[] body = Encoding.ASCII.GetBytes(
-                        "<html><body>Server Too Busy</body></html>"
-                    );
+                    byte[] body = Encoding
+                        .ASCII
+                        .GetBytes("<html><body>Server Too Busy</body></html>");
                     wr.SendResponseFromMemory(body, body.Length);
                     // this will flush synchronously because of HttpRuntime.ShutdownInProgress
                     wr.FlushResponse(true);
@@ -3678,10 +3694,10 @@ namespace System.Web
             {
                 if (_theRuntime._clientScriptPhysicalPath == null)
                 {
-                    string clientScriptPhysicalPath = System.IO.Path.Combine(
-                        AspInstallDirectoryInternal,
-                        AspNetClientFilesSubDirectory
-                    );
+                    string clientScriptPhysicalPath = System
+                        .IO
+                        .Path
+                        .Combine(AspInstallDirectoryInternal, AspNetClientFilesSubDirectory);
 
                     _theRuntime._clientScriptPhysicalPath = clientScriptPhysicalPath;
                 }

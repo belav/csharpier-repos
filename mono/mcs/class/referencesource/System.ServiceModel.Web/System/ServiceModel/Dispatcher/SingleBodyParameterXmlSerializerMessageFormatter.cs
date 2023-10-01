@@ -48,9 +48,9 @@ namespace System.ServiceModel.Dispatcher
             }
             if (serializerManager == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "serializerManager"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("serializerManager");
             }
             this.serializerManager = serializerManager;
             this.parameterType = parameterType;

@@ -1553,7 +1553,8 @@ namespace System.Web.UI.WebControls
             if (props == null)
             {
                 object fitem = null;
-                PropertyInfo prop_item = source.DataSource
+                PropertyInfo prop_item = source
+                    .DataSource
                     .GetType()
                     .GetProperty(
                         "Item",

@@ -596,7 +596,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         is XAttribute typeParamName
                     )
                     {
-                        var index = symbol.OriginalDefinition
+                        var index = symbol
+                            .OriginalDefinition
                             .GetAllTypeParameters()
                             .IndexOf(p => p.Name == typeParamName.Value);
                         if (index >= 0)
@@ -652,7 +653,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     {
                         var baseType = memberSymbol.ContainingType.BaseType;
 #nullable disable // Can 'baseType' be null here? https://github.com/dotnet/roslyn/issues/39166
-                        return baseType.Constructors
+                        return baseType
+                            .Constructors
                             .Where(c => IsSameSignature(methodSymbol, c))
                             .FirstOrDefault();
 #nullable enable

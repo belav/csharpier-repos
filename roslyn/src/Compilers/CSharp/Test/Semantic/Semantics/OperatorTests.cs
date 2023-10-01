@@ -7994,9 +7994,9 @@ public class RubyTime
             var diagnostics = DiagnosticBag.GetInstance();
             var block = binder.BindEmbeddedBlock(methodBody, diagnostics);
             diagnostics.Free();
-            var exprs = block.Statements.SelectAsArray(
-                stmt => ((BoundExpressionStatement)stmt).Expression
-            );
+            var exprs = block
+                .Statements
+                .SelectAsArray(stmt => ((BoundExpressionStatement)stmt).Expression);
             Assert.Equal(32, exprs.Length);
 
             var operators = new[]
@@ -8369,9 +8369,11 @@ public class RubyTime
                 case UnaryOperatorKind.UnaryMinus:
                     expectChecked = (
                         type.IsDynamic()
-                        || symbol1.ContainingType
+                        || symbol1
+                            .ContainingType
                             .EnumUnderlyingTypeOrSelf()
-                            .SpecialType.IsIntegralType()
+                            .SpecialType
+                            .IsIntegralType()
                     );
                     break;
 
@@ -8382,9 +8384,11 @@ public class RubyTime
                     expectChecked = (
                         type.IsDynamic()
                         || type.IsPointerType()
-                        || symbol1.ContainingType
+                        || symbol1
+                            .ContainingType
                             .EnumUnderlyingTypeOrSelf()
-                            .SpecialType.IsIntegralType()
+                            .SpecialType
+                            .IsIntegralType()
                         || symbol1.ContainingType.SpecialType == SpecialType.System_Char
                     );
                     break;
@@ -8962,11 +8966,9 @@ class Module1
                     return;
             }
 
-            BinaryOperatorKind result = OverloadResolution.BinopEasyOut.OpKind(
-                op,
-                leftType,
-                rightType
-            );
+            BinaryOperatorKind result = OverloadResolution
+                .BinopEasyOut
+                .OpKind(op, leftType, rightType);
             BinaryOperatorSignature signature;
 
             if (result == BinaryOperatorKind.Error)
@@ -9003,7 +9005,8 @@ class Module1
                     && rightType.IsReferenceType
                     && (
                         TypeSymbol.Equals(leftType, rightType, TypeCompareKind.ConsiderEverything2)
-                        || compilation.Conversions
+                        || compilation
+                            .Conversions
                             .ClassifyConversionFromType(leftType, rightType, ref useSiteDiagnostics)
                             .IsReference
                     )
@@ -9140,11 +9143,9 @@ class Module1
                     && leftType.IsEnumType()
                     && (rightType.IsIntegralType() || rightType.IsCharType())
                     && (
-                        result = OverloadResolution.BinopEasyOut.OpKind(
-                            op,
-                            leftType.EnumUnderlyingTypeOrSelf(),
-                            rightType
-                        )
+                        result = OverloadResolution
+                            .BinopEasyOut
+                            .OpKind(op, leftType.EnumUnderlyingTypeOrSelf(), rightType)
                     ) != BinaryOperatorKind.Error
                     && TypeSymbol.Equals(
                         (signature = compilation.builtInOperators.GetSignature(result)).RightType,
@@ -9165,11 +9166,9 @@ class Module1
                     && rightType.IsEnumType()
                     && (leftType.IsIntegralType() || leftType.IsCharType())
                     && (
-                        result = OverloadResolution.BinopEasyOut.OpKind(
-                            op,
-                            leftType,
-                            rightType.EnumUnderlyingTypeOrSelf()
-                        )
+                        result = OverloadResolution
+                            .BinopEasyOut
+                            .OpKind(op, leftType, rightType.EnumUnderlyingTypeOrSelf())
                     ) != BinaryOperatorKind.Error
                     && TypeSymbol.Equals(
                         (signature = compilation.builtInOperators.GetSignature(result)).LeftType,
@@ -9353,7 +9352,8 @@ class Module1
                 && (
                     !leftType.IsReferenceType
                     || !rightType.IsReferenceType
-                    || !compilation.Conversions
+                    || !compilation
+                        .Conversions
                         .ClassifyConversionFromType(leftType, rightType, ref useSiteDiagnostics)
                         .IsReference
                 )
@@ -9430,9 +9430,11 @@ class Module1
                     isChecked =
                         isDynamic
                         || symbol1.ContainingSymbol.Kind == SymbolKind.PointerType
-                        || symbol1.ContainingType
+                        || symbol1
+                            .ContainingType
                             .EnumUnderlyingTypeOrSelf()
-                            .SpecialType.IsIntegralType();
+                            .SpecialType
+                            .IsIntegralType();
                     break;
             }
 
@@ -9458,42 +9460,37 @@ class Module1
             Assert.Equal(symbol1.Name, symbol1.MetadataName);
 
             Assert.True(
-                SymbolEqualityComparer.ConsiderEverything.Equals(
-                    symbol1.ContainingSymbol,
-                    symbol1.Parameters[0].Type
-                )
-                    || SymbolEqualityComparer.ConsiderEverything.Equals(
-                        symbol1.ContainingSymbol,
-                        symbol1.Parameters[1].Type
-                    )
+                SymbolEqualityComparer
+                    .ConsiderEverything
+                    .Equals(symbol1.ContainingSymbol, symbol1.Parameters[0].Type)
+                    || SymbolEqualityComparer
+                        .ConsiderEverything
+                        .Equals(symbol1.ContainingSymbol, symbol1.Parameters[1].Type)
             );
 
             int match = 0;
             if (
-                SymbolEqualityComparer.ConsiderEverything.Equals(
-                    symbol1.ContainingSymbol,
-                    symbol1.ReturnType
-                )
+                SymbolEqualityComparer
+                    .ConsiderEverything
+                    .Equals(symbol1.ContainingSymbol, symbol1.ReturnType)
             )
             {
                 match++;
             }
 
             if (
-                SymbolEqualityComparer.ConsiderEverything.Equals(
-                    symbol1.ContainingSymbol,
-                    symbol1.Parameters[0].Type
-                )
+                SymbolEqualityComparer
+                    .ConsiderEverything
+                    .Equals(symbol1.ContainingSymbol, symbol1.Parameters[0].Type)
             )
             {
                 match++;
             }
 
             if (
-                SymbolEqualityComparer.ConsiderEverything.Equals(
-                    symbol1.ContainingSymbol,
-                    symbol1.Parameters[1].Type
-                )
+                SymbolEqualityComparer
+                    .ConsiderEverything
+                    .Equals(symbol1.ContainingSymbol, symbol1.Parameters[1].Type)
             )
             {
                 match++;

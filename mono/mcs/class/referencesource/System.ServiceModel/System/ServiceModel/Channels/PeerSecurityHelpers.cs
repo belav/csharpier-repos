@@ -60,9 +60,9 @@ namespace System.ServiceModel.Channels
                     using (SHA256Managed sha = new SHA256Managed())
                     {
                         pwdHash = sha.ComputeHash(pwdBytes);
-                        tempBuffer = DiagnosticUtility.Utility.AllocateByteArray(
-                            checked(message.Length + pwdHash.Length)
-                        );
+                        tempBuffer = DiagnosticUtility
+                            .Utility
+                            .AllocateByteArray(checked(message.Length + pwdHash.Length));
                         Array.Copy(pwdHash, tempBuffer, pwdHash.Length);
                         Array.Copy(message, 0, tempBuffer, pwdHash.Length, message.Length);
 
@@ -157,10 +157,9 @@ namespace System.ServiceModel.Channels
         {
             try
             {
-                int i = request.Headers.FindHeader(
-                    SecurityJan2004Strings.Security,
-                    SecurityJan2004Strings.Namespace
-                );
+                int i = request
+                    .Headers
+                    .FindHeader(SecurityJan2004Strings.Security, SecurityJan2004Strings.Namespace);
                 if (i >= 0)
                 {
                     request.Headers.AddUnderstood(i);
@@ -320,9 +319,9 @@ namespace System.ServiceModel.Channels
                 out SecurityTokenResolver outOfBandTokenResolver
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException()
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new NotSupportedException());
             }
 
             public override SecurityTokenProvider CreateSecurityTokenProvider(
@@ -345,9 +344,9 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException()
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new NotSupportedException());
                 }
             }
         }
@@ -852,8 +851,9 @@ namespace System.ServiceModel.Channels
         public static void OnNeighborClosed(IPeerNeighbor neighbor)
         {
             Fx.Assert(neighbor != null, "Neighbor must have a value");
-            PeerChannelAuthenticatorExtension ext =
-                neighbor.Extensions.Find<PeerChannelAuthenticatorExtension>();
+            PeerChannelAuthenticatorExtension ext = neighbor
+                .Extensions
+                .Find<PeerChannelAuthenticatorExtension>();
             if (ext != null)
                 neighbor.Extensions.Remove(ext);
         }

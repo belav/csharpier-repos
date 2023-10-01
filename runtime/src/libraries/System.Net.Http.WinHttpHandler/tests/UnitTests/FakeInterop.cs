@@ -365,9 +365,9 @@ internal static partial class Interop
 
             if (infoLevel == Interop.WinHttp.WINHTTP_QUERY_CONTENT_ENCODING)
             {
-                string compression = TestServer.ResponseHeaders.Contains(
-                    "Content-Encoding: deflate"
-                )
+                string compression = TestServer
+                    .ResponseHeaders
+                    .Contains("Content-Encoding: deflate")
                     ? "deflate"
                     : TestServer.ResponseHeaders.Contains("Content-Encoding: gzip")
                         ? "gzip"

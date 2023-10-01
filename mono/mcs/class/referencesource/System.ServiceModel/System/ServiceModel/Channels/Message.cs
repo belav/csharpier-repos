@@ -204,13 +204,13 @@ namespace System.ServiceModel.Channels
         )
         {
             if (version == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("version")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("version"));
             if (serializer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("serializer")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("serializer"));
             return new BodyWriterMessage(
                 version,
                 action,
@@ -240,13 +240,13 @@ namespace System.ServiceModel.Channels
         public static Message CreateMessage(MessageVersion version, string action, BodyWriter body)
         {
             if (version == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("version")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("version"));
             if (body == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("body")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("body"));
             return new BodyWriterMessage(version, action, body);
         }
 
@@ -257,31 +257,31 @@ namespace System.ServiceModel.Channels
         )
         {
             if (version == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("version")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("version"));
             if (body == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("body")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("body"));
             return new BodyWriterMessage(version, actionHeader, body);
         }
 
         public static Message CreateMessage(MessageVersion version, string action)
         {
             if (version == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("version")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("version"));
             return new BodyWriterMessage(version, action, EmptyBodyWriter.Value);
         }
 
         internal static Message CreateMessage(MessageVersion version, ActionHeader actionHeader)
         {
             if (version == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("version")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("version"));
             return new BodyWriterMessage(version, actionHeader, EmptyBodyWriter.Value);
         }
 
@@ -305,13 +305,13 @@ namespace System.ServiceModel.Channels
         )
         {
             if (envelopeReader == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("envelopeReader")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("envelopeReader"));
             if (version == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("version")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("version"));
             Message message = new StreamedMessage(envelopeReader, maxSizeOfHeaders, version);
             return message;
         }
@@ -324,17 +324,17 @@ namespace System.ServiceModel.Channels
         )
         {
             if (version == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("version")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("version"));
             if (faultCode == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("faultCode")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("faultCode"));
             if (reason == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("reason")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("reason"));
 
             return CreateMessage(version, MessageFault.CreateFault(faultCode, reason), action);
         }
@@ -348,17 +348,17 @@ namespace System.ServiceModel.Channels
         )
         {
             if (version == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("version")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("version"));
             if (faultCode == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("faultCode")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("faultCode"));
             if (reason == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("reason")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("reason"));
 
             return CreateMessage(
                 version,
@@ -374,13 +374,13 @@ namespace System.ServiceModel.Channels
         )
         {
             if (fault == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("fault")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("fault"));
             if (version == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("version")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("version"));
             return new BodyWriterMessage(
                 version,
                 action,
@@ -418,9 +418,9 @@ namespace System.ServiceModel.Channels
         public T GetBody<T>(XmlObjectSerializer serializer)
         {
             if (serializer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("serializer")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("serializer"));
             return this.GetBodyCore<T>(GetReaderAtBodyContents(), serializer);
         }
 
@@ -1199,12 +1199,14 @@ namespace System.ServiceModel.Channels
         {
             this.reader = reader;
             if (reader.MoveToContent() != XmlNodeType.Element)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(
-                        SR.GetString(SR.InvalidReaderPositionOnCreateMessage),
-                        "reader"
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(SR.InvalidReaderPositionOnCreateMessage),
+                            "reader"
+                        )
+                    );
 
             this.isFault = Message.IsFaultStartElement(reader, version);
         }
@@ -1227,12 +1229,14 @@ namespace System.ServiceModel.Channels
                 while (!reader.EOF && type != XmlNodeType.EndElement)
                 {
                     if (type != XmlNodeType.Element)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ArgumentException(
-                                SR.GetString(SR.InvalidReaderPositionOnCreateMessage),
-                                "reader"
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ArgumentException(
+                                    SR.GetString(SR.InvalidReaderPositionOnCreateMessage),
+                                    "reader"
+                                )
+                            );
                     writer.WriteNode(reader, false);
 
                     type = reader.MoveToContent();
@@ -1548,14 +1552,16 @@ namespace System.ServiceModel.Channels
                         bodyReader.ReadState == ReadState.Error
                         || bodyReader.ReadState == ReadState.Closed
                     )
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.MessageBodyReaderInvalidReadState,
-                                    bodyReader.ReadState.ToString()
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.MessageBodyReaderInvalidReadState,
+                                        bodyReader.ReadState.ToString()
+                                    )
                                 )
-                            )
-                        );
+                            );
 
                     while (bodyReader.NodeType != XmlNodeType.EndElement && !bodyReader.EOF)
                     {
@@ -1596,13 +1602,17 @@ namespace System.ServiceModel.Channels
             )
                 envelopeVersion = EnvelopeVersion.Soap11;
             else
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new CommunicationException(SR.GetString(SR.MessageVersionUnknown))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new CommunicationException(SR.GetString(SR.MessageVersionUnknown))
+                    );
             if (reader.IsEmptyElement)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new CommunicationException(SR.GetString(SR.MessageBodyMissing))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new CommunicationException(SR.GetString(SR.MessageBodyMissing))
+                    );
             reader.Read();
             return envelopeVersion;
         }
@@ -1610,9 +1620,11 @@ namespace System.ServiceModel.Channels
         protected static void VerifyStartBody(XmlDictionaryReader reader, EnvelopeVersion version)
         {
             if (!reader.IsStartElement(XD.MessageDictionary.Body, version.DictionaryNamespace))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new CommunicationException(SR.GetString(SR.MessageBodyMissing))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new CommunicationException(SR.GetString(SR.MessageBodyMissing))
+                    );
         }
     }
 
@@ -2318,9 +2330,9 @@ namespace System.ServiceModel.Channels
             {
                 string message = SR.GetString(SR.XmlBufferQuotaExceeded);
                 Exception inner = new QuotaExceededException(message);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new CommunicationException(message, inner)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new CommunicationException(message, inner));
             }
             maxSizeOfHeaders -= byteCount;
         }

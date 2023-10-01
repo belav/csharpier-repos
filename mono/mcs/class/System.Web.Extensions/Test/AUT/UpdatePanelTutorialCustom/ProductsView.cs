@@ -68,9 +68,10 @@ namespace UpdatePanelTutorialCustom.CS
 
             if (e.CommandName == "AddToCart")
             {
-                productID = ((GridView)sender).DataKeys[
-                    Convert.ToInt32(e.CommandArgument)
-                ].Value.ToString();
+                productID = ((GridView)sender)
+                    .DataKeys[Convert.ToInt32(e.CommandArgument)]
+                    .Value
+                    .ToString();
                 if (_cart == null)
                 {
                     GetCart();
@@ -82,9 +83,10 @@ namespace UpdatePanelTutorialCustom.CS
 
             if (e.CommandName == "RemoveFromCart")
             {
-                productID = ((GridView)sender).DataKeys[
-                    Convert.ToInt32(e.CommandArgument)
-                ].Value.ToString();
+                productID = ((GridView)sender)
+                    .DataKeys[Convert.ToInt32(e.CommandArgument)]
+                    .Value
+                    .ToString();
                 if (_cart == null)
                 {
                     GetCart();
@@ -123,9 +125,9 @@ namespace UpdatePanelTutorialCustom.CS
         {
             SqlDataSource ds = new SqlDataSource();
             ds.ID = "ProductsSqlDataSource";
-            ds.ConnectionString = ConfigurationManager.ConnectionStrings[
-                "AdventureWorksConnectionString"
-            ].ConnectionString;
+            ds.ConnectionString = ConfigurationManager
+                .ConnectionStrings["AdventureWorksConnectionString"]
+                .ConnectionString;
             ds.SelectCommand =
                 "SELECT Production.ProductDescription.Description, Production.Product.Name, Production.ProductPhoto.ThumbnailPhotoFileName, "
                 + "Production.Product.ProductID "

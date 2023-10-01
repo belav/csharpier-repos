@@ -366,7 +366,9 @@ public partial class ModelBindingCommandHandlerTests
                 fsi =>
                     fsi.Should()
                         .BeOfType<DirectoryInfo>()
-                        .Which.FullName.Should()
+                        .Which
+                        .FullName
+                        .Should()
                         .Be(ExistingDirectory())
             ),
             BindingTestCase.Create<DirectoryInfo[]>(
@@ -374,7 +376,8 @@ public partial class ModelBindingCommandHandlerTests
                 fsi =>
                     fsi.Should()
                         .BeAssignableTo<IEnumerable<DirectoryInfo>>()
-                        .Which.Select(d => d.FullName)
+                        .Which
+                        .Select(d => d.FullName)
                         .Should()
                         .BeEquivalentTo(new[] { ExistingDirectory(), ExistingDirectory() })
             ),
@@ -388,7 +391,9 @@ public partial class ModelBindingCommandHandlerTests
                 fsi =>
                     fsi.Should()
                         .BeOfType<DirectoryInfo>()
-                        .Which.FullName.Should()
+                        .Which
+                        .FullName
+                        .Should()
                         .Be(ExistingDirectory()),
                 variationName: nameof(ExistingDirectory)
             ),
@@ -397,7 +402,9 @@ public partial class ModelBindingCommandHandlerTests
                 fsi =>
                     fsi.Should()
                         .BeOfType<DirectoryInfo>()
-                        .Which.FullName.Should()
+                        .Which
+                        .FullName
+                        .Should()
                         .Be(NonexistentPathWithTrailingSlash()),
                 variationName: nameof(NonexistentPathWithTrailingSlash)
             ),
@@ -406,7 +413,9 @@ public partial class ModelBindingCommandHandlerTests
                 fsi =>
                     fsi.Should()
                         .BeOfType<DirectoryInfo>()
-                        .Which.FullName.Should()
+                        .Which
+                        .FullName
+                        .Should()
                         .Be(
                             NonexistentPathWithTrailingSlash(),
                             "DirectoryInfo replaces Path.AltDirectorySeparatorChar with Path.DirectorySeparatorChar on Windows"
@@ -418,7 +427,9 @@ public partial class ModelBindingCommandHandlerTests
                 fsi =>
                     fsi.Should()
                         .BeOfType<FileInfo>()
-                        .Which.FullName.Should()
+                        .Which
+                        .FullName
+                        .Should()
                         .Be(NonexistentPathWithoutTrailingSlash()),
                 variationName: nameof(NonexistentPathWithoutTrailingSlash)
             ),

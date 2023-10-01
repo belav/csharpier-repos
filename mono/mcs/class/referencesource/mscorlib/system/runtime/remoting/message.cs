@@ -920,7 +920,8 @@ namespace System.Runtime.Remoting.Messaging
         [System.Security.SecurityCritical] // auto-generated
         internal static void PropagateCallContextFromThreadToMessage(IMessage msg)
         {
-            LogicalCallContext callCtx = Thread.CurrentThread
+            LogicalCallContext callCtx = Thread
+                .CurrentThread
                 .GetMutableExecutionContext()
                 .LogicalCallContext;
 
@@ -5201,11 +5202,13 @@ namespace System.Runtime.Remoting.Messaging
                 Identity.ProcessGuid
             );
             String unUsed;
-            IMessageSink channelSink = CrossAppDomainChannel.AppDomainChannel.CreateMessageSink(
-                null, //uri
-                data, //channelData
-                out unUsed
-            ); //out objURI
+            IMessageSink channelSink = CrossAppDomainChannel
+                .AppDomainChannel
+                .CreateMessageSink(
+                    null, //uri
+                    data, //channelData
+                    out unUsed
+                ); //out objURI
 
             Contract.Assert(channelSink != null, "X-domain transition failure");
             _ID.RaceSetChannelSink(channelSink);

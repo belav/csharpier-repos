@@ -198,9 +198,9 @@ namespace System.IdentityModel.Tokens
         {
             if (!this.CanWriteSourceData)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ID4140))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4140)));
             }
 
             // This call will properly just reuse the existing writer if it already qualifies

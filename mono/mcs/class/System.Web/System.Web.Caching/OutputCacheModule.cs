@@ -308,15 +308,17 @@ namespace System.Web.Caching
                     }
 
                     provider.Set(key, c, utcExpiry);
-                    HttpRuntime.InternalCache.Insert(
-                        key,
-                        c,
-                        new CacheDependency(null, keys),
-                        absoluteExpiration,
-                        slidingExpiration,
-                        CacheItemPriority.Normal,
-                        response_removed
-                    );
+                    HttpRuntime
+                        .InternalCache
+                        .Insert(
+                            key,
+                            c,
+                            new CacheDependency(null, keys),
+                            absoluteExpiration,
+                            slidingExpiration,
+                            CacheItemPriority.Normal,
+                            response_removed
+                        );
                     cacheValue = key;
                 }
             }

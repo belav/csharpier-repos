@@ -114,7 +114,8 @@ internal static class AspNetCoreAddPackageCodeAction
         var root = await document
             .GetRequiredSyntaxRootAsync(cancellationToken)
             .ConfigureAwait(false);
-        var compilation = await document.Project
+        var compilation = await document
+            .Project
             .GetRequiredCompilationAsync(cancellationToken)
             .ConfigureAwait(false);
 

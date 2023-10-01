@@ -1458,7 +1458,8 @@ namespace System.Threading.Channels.Tests
             ValueTaskAwaiter<int> readVt = CreateChannel().Reader.ReadAsync().GetAwaiter();
             Assert.Throws<InvalidOperationException>(() => readVt.GetResult());
 
-            ValueTaskAwaiter<bool> waitReadVt = CreateChannel().Reader
+            ValueTaskAwaiter<bool> waitReadVt = CreateChannel()
+                .Reader
                 .WaitToReadAsync()
                 .GetAwaiter();
             Assert.Throws<InvalidOperationException>(() => waitReadVt.GetResult());
@@ -1468,7 +1469,8 @@ namespace System.Threading.Channels.Tests
                 ValueTaskAwaiter writeVt = CreateFullChannel().Writer.WriteAsync(42).GetAwaiter();
                 Assert.Throws<InvalidOperationException>(() => writeVt.GetResult());
 
-                ValueTaskAwaiter<bool> waitWriteVt = CreateFullChannel().Writer
+                ValueTaskAwaiter<bool> waitWriteVt = CreateFullChannel()
+                    .Writer
                     .WaitToWriteAsync()
                     .GetAwaiter();
                 Assert.Throws<InvalidOperationException>(() => waitWriteVt.GetResult());
@@ -1482,7 +1484,8 @@ namespace System.Threading.Channels.Tests
             readVt.OnCompleted(() => { });
             Assert.Throws<InvalidOperationException>(() => readVt.OnCompleted(() => { }));
 
-            ValueTaskAwaiter<bool> waitReadVt = CreateChannel().Reader
+            ValueTaskAwaiter<bool> waitReadVt = CreateChannel()
+                .Reader
                 .WaitToReadAsync()
                 .GetAwaiter();
             waitReadVt.OnCompleted(() => { });
@@ -1494,7 +1497,8 @@ namespace System.Threading.Channels.Tests
                 writeVt.OnCompleted(() => { });
                 Assert.Throws<InvalidOperationException>(() => writeVt.OnCompleted(() => { }));
 
-                ValueTaskAwaiter<bool> waitWriteVt = CreateFullChannel().Writer
+                ValueTaskAwaiter<bool> waitWriteVt = CreateFullChannel()
+                    .Writer
                     .WaitToWriteAsync()
                     .GetAwaiter();
                 waitWriteVt.OnCompleted(() => { });

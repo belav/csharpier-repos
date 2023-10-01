@@ -143,9 +143,10 @@ public class RedirectToRouteResult : ActionResult, IKeepTempDataResult
     {
         ArgumentNullException.ThrowIfNull(context);
 
-        var executor = context.HttpContext.RequestServices.GetRequiredService<
-            IActionResultExecutor<RedirectToRouteResult>
-        >();
+        var executor = context
+            .HttpContext
+            .RequestServices
+            .GetRequiredService<IActionResultExecutor<RedirectToRouteResult>>();
         return executor.ExecuteAsync(context, this);
     }
 }

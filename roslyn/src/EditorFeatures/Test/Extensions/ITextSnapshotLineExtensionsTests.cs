@@ -186,8 +186,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
 
         private static ITextSnapshotLine GetLine(string codeLine)
         {
-            var exportProvider =
-                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+            var exportProvider = EditorTestCompositions
+                .EditorFeatures
+                .ExportProviderFactory
+                .CreateExportProvider();
             var snapshot = EditorFactory.CreateBuffer(exportProvider, codeLine).CurrentSnapshot;
             return snapshot.GetLineFromLineNumber(0);
         }

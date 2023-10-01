@@ -277,14 +277,14 @@ namespace System.DirectoryServices.ActiveDirectory
                     try
                     {
                         if (
-                            _crossRefEntry.Properties.Contains(
-                                PropertyManager.MsDSNCReplicaLocations
-                            )
+                            _crossRefEntry
+                                .Properties
+                                .Contains(PropertyManager.MsDSNCReplicaLocations)
                         )
                         {
-                            _crossRefEntry.Properties[
-                                PropertyManager.MsDSNCReplicaLocations
-                            ].Clear();
+                            _crossRefEntry
+                                .Properties[PropertyManager.MsDSNCReplicaLocations]
+                                .Clear();
                         }
                     }
                     catch (COMException e)
@@ -317,9 +317,9 @@ namespace System.DirectoryServices.ActiveDirectory
                             (server is DomainController)
                                 ? ((DomainController)server).NtdsaObjectName
                                 : ((AdamInstance)server).NtdsaObjectName;
-                        _crossRefEntry.Properties[PropertyManager.MsDSNCReplicaLocations].Add(
-                            ntdsaName
-                        );
+                        _crossRefEntry
+                            .Properties[PropertyManager.MsDSNCReplicaLocations]
+                            .Add(ntdsaName);
                     }
                     catch (COMException e)
                     {
@@ -340,9 +340,9 @@ namespace System.DirectoryServices.ActiveDirectory
                 {
                     if (changeList!.Contains(name))
                     {
-                        ((DirectoryEntry)changeList[name]!).Properties[
-                            "bridgeheadTransportList"
-                        ].Value = this.transportDN;
+                        ((DirectoryEntry)changeList[name]!)
+                            .Properties["bridgeheadTransportList"]
+                            .Value = this.transportDN;
                     }
                     else
                     {
@@ -376,9 +376,9 @@ namespace System.DirectoryServices.ActiveDirectory
                             (value is DomainController)
                                 ? ((DomainController)value).NtdsaObjectName
                                 : ((AdamInstance)value).NtdsaObjectName;
-                        _crossRefEntry.Properties[PropertyManager.MsDSNCReplicaLocations].Remove(
-                            ntdsaName
-                        );
+                        _crossRefEntry
+                            .Properties[PropertyManager.MsDSNCReplicaLocations]
+                            .Remove(ntdsaName);
                     }
                 }
                 catch (COMException e)
@@ -399,9 +399,9 @@ namespace System.DirectoryServices.ActiveDirectory
                 {
                     if (changeList!.Contains(name))
                     {
-                        ((DirectoryEntry)changeList[name]!).Properties[
-                            "bridgeheadTransportList"
-                        ].Clear();
+                        ((DirectoryEntry)changeList[name]!)
+                            .Properties["bridgeheadTransportList"]
+                            .Clear();
                     }
                     else
                     {

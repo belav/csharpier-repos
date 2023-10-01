@@ -107,7 +107,8 @@ public class MapProjection : AutoMapperSpecBase
     public void ShouldNotMap() =>
         new Action(() => Map<CustomerDto>(new Customer()))
             .ShouldThrow<AutoMapperConfigurationException>()
-            .Message.ShouldBe("CreateProjection works with ProjectTo, not with Map.");
+            .Message
+            .ShouldBe("CreateProjection works with ProjectTo, not with Map.");
 
     public class Customer
     {

@@ -209,9 +209,9 @@ namespace System.Web.UI.DataVisualization.Charting
                     new ArgumentException(
                         SR.ExceptionDataPointConverterUnavailableSorting(
                             sortBy,
-                            series.YValuesPerPoint.ToString(
-                                System.Globalization.CultureInfo.InvariantCulture
-                            )
+                            series
+                                .YValuesPerPoint
+                                .ToString(System.Globalization.CultureInfo.InvariantCulture)
                         ),
                         "sortBy"
                     )
@@ -476,9 +476,9 @@ namespace System.Web.UI.DataVisualization.Charting
                     new ArgumentOutOfRangeException(
                         "yFields",
                         SR.ExceptionDataPointYValuesCountMismatch(
-                            series.YValuesPerPoint.ToString(
-                                System.Globalization.CultureInfo.InvariantCulture
-                            )
+                            series
+                                .YValuesPerPoint
+                                .ToString(System.Globalization.CultureInfo.InvariantCulture)
                         )
                     )
                 );
@@ -695,9 +695,9 @@ namespace System.Web.UI.DataVisualization.Charting
                     new ArgumentOutOfRangeException(
                         "yValues",
                         SR.ExceptionDataPointYValuesBindingCountMismatch(
-                            series.YValuesPerPoint.ToString(
-                                System.Globalization.CultureInfo.InvariantCulture
-                            )
+                            series
+                                .YValuesPerPoint
+                                .ToString(System.Globalization.CultureInfo.InvariantCulture)
                         )
                     )
                 );
@@ -891,9 +891,9 @@ namespace System.Web.UI.DataVisualization.Charting
                 throw new ArgumentOutOfRangeException(
                     "yFields",
                     SR.ExceptionDataPointYValuesCountMismatch(
-                        series.YValuesPerPoint.ToString(
-                            System.Globalization.CultureInfo.InvariantCulture
-                        )
+                        series
+                            .YValuesPerPoint
+                            .ToString(System.Globalization.CultureInfo.InvariantCulture)
                     )
                 );
 
@@ -908,9 +908,9 @@ namespace System.Web.UI.DataVisualization.Charting
                 throw new ArgumentOutOfRangeException(
                     "yFields",
                     SR.ExceptionDataPointYValuesCountMismatch(
-                        series.YValuesPerPoint.ToString(
-                            System.Globalization.CultureInfo.InvariantCulture
-                        )
+                        series
+                            .YValuesPerPoint
+                            .ToString(System.Globalization.CultureInfo.InvariantCulture)
                     )
                 );
 
@@ -1552,9 +1552,10 @@ namespace System.Web.UI.DataVisualization.Charting
                     bool failed = true;
                     if (((DataRow)enumerator.Current).Table.Columns.Contains(field))
                     {
-                        columnDataType = ((DataRow)enumerator.Current).Table.Columns[
-                            field
-                        ].DataType;
+                        columnDataType = ((DataRow)enumerator.Current)
+                            .Table
+                            .Columns[field]
+                            .DataType;
                         failed = false;
                     }
 
@@ -1571,9 +1572,10 @@ namespace System.Web.UI.DataVisualization.Charting
 
                         if (parseSucceed)
                         {
-                            columnDataType = ((DataRow)enumerator.Current).Table.Columns[
-                                columnIndex
-                            ].DataType;
+                            columnDataType = ((DataRow)enumerator.Current)
+                                .Table
+                                .Columns[columnIndex]
+                                .DataType;
                             failed = false;
                         }
                         else
@@ -1601,9 +1603,11 @@ namespace System.Web.UI.DataVisualization.Charting
                     bool failed = true;
                     if (((DataRowView)enumerator.Current).DataView.Table.Columns.Contains(field))
                     {
-                        columnDataType = ((DataRowView)enumerator.Current).DataView.Table.Columns[
-                            field
-                        ].DataType;
+                        columnDataType = ((DataRowView)enumerator.Current)
+                            .DataView
+                            .Table
+                            .Columns[field]
+                            .DataType;
                         failed = false;
                     }
 
@@ -1622,7 +1626,8 @@ namespace System.Web.UI.DataVisualization.Charting
                             columnDataType = ((DataRowView)enumerator.Current)
                                 .DataView
                                 .Table
-                                .Columns[columnIndex].DataType;
+                                .Columns[columnIndex]
+                                .DataType;
                             failed = false;
                         }
                         else
@@ -1638,9 +1643,11 @@ namespace System.Web.UI.DataVisualization.Charting
                 }
                 else if (((DataRowView)enumerator.Current).DataView.Table.Columns.Count > 0)
                 {
-                    columnDataType = ((DataRowView)enumerator.Current).DataView.Table.Columns[
-                        0
-                    ].DataType;
+                    columnDataType = ((DataRowView)enumerator.Current)
+                        .DataView
+                        .Table
+                        .Columns[0]
+                        .DataType;
                 }
             }
             // If original object is DbDataRecord
@@ -2462,9 +2469,9 @@ namespace System.Web.UI.DataVisualization.Charting
                     new ArgumentOutOfRangeException(
                         "yValue",
                         SR.ExceptionDataPointYValuesSettingCountMismatch(
-                            base.series.YValuesPerPoint.ToString(
-                                System.Globalization.CultureInfo.InvariantCulture
-                            )
+                            base.series
+                                .YValuesPerPoint
+                                .ToString(System.Globalization.CultureInfo.InvariantCulture)
                         )
                     )
                 );
@@ -2769,7 +2776,8 @@ namespace System.Web.UI.DataVisualization.Charting
                 // #INDEX - point index
                 result = result.Replace(
                     KeywordName.Index,
-                    this.series.Points
+                    this.series
+                        .Points
                         .IndexOf(this)
                         .ToString(System.Globalization.CultureInfo.InvariantCulture)
                 );
@@ -2960,9 +2968,9 @@ namespace System.Web.UI.DataVisualization.Charting
                             {
                                 if (dataPoint.series.IsCustomPropertySet(attributeName))
                                 {
-                                    attributeValue = dataPoint.series.GetCustomProperty(
-                                        attributeName
-                                    );
+                                    attributeValue = dataPoint
+                                        .series
+                                        .GetCustomProperty(attributeName);
                                 }
                             }
                         }
@@ -3617,9 +3625,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (string)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.Label
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.Label);
                         }
 
                         return series.label;
@@ -3681,9 +3689,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (string)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.AxisLabel
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.AxisLabel);
                         }
 
                         return series.axisLabel;
@@ -3750,9 +3758,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (string)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.LabelFormat
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.LabelFormat);
                         }
 
                         return series.labelFormat;
@@ -3812,9 +3820,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (bool)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.IsValueShownAsLabel
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.IsValueShownAsLabel);
                         }
 
                         return series.showLabelAsValue;
@@ -3867,9 +3875,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (Color)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.Color
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.Color);
                         }
 
                         return series.color;
@@ -3935,9 +3943,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (Color)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.BorderColor
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.BorderColor);
                         }
 
                         return series.borderColor;
@@ -3993,9 +4001,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (ChartDashStyle)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.BorderDashStyle
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.BorderDashStyle);
                         }
 
                         return series.borderDashStyle;
@@ -4049,9 +4057,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (int)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.BorderWidth
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.BorderWidth);
                         }
 
                         return series.borderWidth;
@@ -4115,9 +4123,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (string)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.BackImage
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.BackImage);
                         }
 
                         return series.backImage;
@@ -4182,9 +4190,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (ChartImageWrapMode)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.BackImageWrapMode
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.BackImageWrapMode);
                         }
 
                         return series.backImageWrapMode;
@@ -4246,9 +4254,11 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (Color)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.BackImageTransparentColor
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(
+                                        CommonCustomProperties.BackImageTransparentColor
+                                    );
                         }
 
                         return series.backImageTransparentColor;
@@ -4305,9 +4315,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (ChartImageAlignmentStyle)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.BackImageAlignment
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.BackImageAlignment);
                         }
 
                         return series.backImageAlignment;
@@ -4364,9 +4374,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (GradientStyle)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.BackGradientStyle
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.BackGradientStyle);
                         }
 
                         return series.backGradientStyle;
@@ -4422,9 +4432,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (Color)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.BackSecondaryColor
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.BackSecondaryColor);
                         }
 
                         return series.backSecondaryColor;
@@ -4481,9 +4491,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (ChartHatchStyle)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.BackHatchStyle
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.BackHatchStyle);
                         }
 
                         return series.backHatchStyle;
@@ -4593,9 +4603,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (Color)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.LabelForeColor
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.LabelForeColor);
                         }
 
                         return series.fontColor;
@@ -4649,9 +4659,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (int)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.LabelAngle
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.LabelAngle);
                         }
 
                         return series.fontAngle;
@@ -4711,9 +4721,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (MarkerStyle)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.MarkerStyle
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.MarkerStyle);
                         }
 
                         return series.markerStyle;
@@ -4774,9 +4784,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (int)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.MarkerSize
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.MarkerSize);
                         }
 
                         return series.markerSize;
@@ -4832,9 +4842,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (string)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.MarkerImage
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.MarkerImage);
                         }
 
                         return series.markerImage;
@@ -4899,9 +4909,11 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (Color)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.MarkerImageTransparentColor
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(
+                                        CommonCustomProperties.MarkerImageTransparentColor
+                                    );
                         }
 
                         return series.markerImageTransparentColor;
@@ -4958,9 +4970,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (Color)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.MarkerColor
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.MarkerColor);
                         }
 
                         return series.markerColor;
@@ -5017,9 +5029,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (Color)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.MarkerBorderColor
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.MarkerBorderColor);
                         }
 
                         return series.markerBorderColor;
@@ -5073,9 +5085,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (int)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.MarkerBorderWidth
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.MarkerBorderWidth);
                         }
 
                         return series.markerBorderWidth;
@@ -5325,9 +5337,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (string)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.ToolTip
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.ToolTip);
                         }
 
                         return series.toolTip;
@@ -5381,9 +5393,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (string)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.Url
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.Url);
                         }
 
                         return series.url;
@@ -5436,9 +5448,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (string)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.MapAreaAttributes
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.MapAreaAttributes);
                         }
 
                         return series.mapAreaAttributes;
@@ -5481,9 +5493,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (string)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.PostBackValue
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.PostBackValue);
                         }
 
                         return series.postbackValue;
@@ -5552,9 +5564,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (bool)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.IsVisibleInLegend
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.IsVisibleInLegend);
                         }
 
                         return series.showInLegend;
@@ -5618,9 +5630,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (string)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.LegendText
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.LegendText);
                         }
 
                         return series.legendText;
@@ -5682,9 +5694,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (string)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.LegendToolTip
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.LegendToolTip);
                         }
 
                         return series.legendToolTip;
@@ -5733,9 +5745,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (Color)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.LabelBackColor
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.LabelBackColor);
                         }
 
                         return series.labelBackColor;
@@ -5792,9 +5804,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (Color)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.LabelBorderColor
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.LabelBorderColor);
                         }
 
                         return series.labelBorderColor;
@@ -5851,9 +5863,11 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (ChartDashStyle)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.LabelBorderDashStyle
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(
+                                        CommonCustomProperties.LabelBorderDashStyle
+                                    );
                         }
 
                         return series.labelBorderDashStyle;
@@ -5908,9 +5922,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (int)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.LabelBorderWidth
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.LabelBorderWidth);
                         }
 
                         return series.labelBorderWidth;
@@ -5989,9 +6003,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (string)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.LabelToolTip
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.LabelToolTip);
                         }
 
                         return series.labelToolTip;
@@ -6047,9 +6061,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (string)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.LegendUrl
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.LegendUrl);
                         }
 
                         return series.legendUrl;
@@ -6108,9 +6122,11 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (string)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.LegendMapAreaAttributes
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(
+                                        CommonCustomProperties.LegendMapAreaAttributes
+                                    );
                         }
 
                         return series.legendMapAreaAttributes;
@@ -6155,9 +6171,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (string)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.LegendPostBackValue
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.LegendPostBackValue);
                         }
 
                         return series.legendPostbackValue;
@@ -6222,9 +6238,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (string)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.LabelUrl
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.LabelUrl);
                         }
 
                         return series.labelUrl;
@@ -6282,9 +6298,11 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (string)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.LabelMapAreaAttributes
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(
+                                        CommonCustomProperties.LabelMapAreaAttributes
+                                    );
                         }
 
                         return series.labelMapAreaAttributes;
@@ -6329,9 +6347,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (this.isEmptyPoint)
                         {
                             return (string)
-                                series.EmptyPointStyle.GetAttributeObject(
-                                    CommonCustomProperties.LabelPostBackValue
-                                );
+                                series
+                                    .EmptyPointStyle
+                                    .GetAttributeObject(CommonCustomProperties.LabelPostBackValue);
                         }
 
                         return series.labelPostbackValue;
@@ -7540,9 +7558,10 @@ namespace System.Web.UI.DataVisualization.Charting
 
             // Get custom attribute registry
             CustomPropertyRegistry registry = (CustomPropertyRegistry)
-                this.DataPointCustomProperties.Common.container.GetService(
-                    typeof(CustomPropertyRegistry)
-                );
+                this.DataPointCustomProperties
+                    .Common
+                    .container
+                    .GetService(typeof(CustomPropertyRegistry));
 
             // Replace commas in value string
             customAttribute = customAttribute.Replace("\\,", "\\x45");

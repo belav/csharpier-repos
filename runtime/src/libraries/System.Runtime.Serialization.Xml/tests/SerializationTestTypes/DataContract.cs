@@ -1296,9 +1296,9 @@ namespace SerializationTestTypes
                     Name == dataMember.Name
                     && IsNullable == dataMember.IsNullable
                     && IsRequired == dataMember.IsRequired
-                    && MemberTypeContract.StableName.Equals(
-                        dataMember.MemberTypeContract.StableName
-                    )
+                    && MemberTypeContract
+                        .StableName
+                        .Equals(dataMember.MemberTypeContract.StableName)
                 );
             }
             return false;
@@ -1330,9 +1330,9 @@ namespace SerializationTestTypes
                 return (
                     Name == dataMember.Name
                     && Order == dataMember.Order
-                    && MemberTypeContract.StableName.Equals(
-                        dataMember.MemberTypeContract.StableName
-                    )
+                    && MemberTypeContract
+                        .StableName
+                        .Equals(dataMember.MemberTypeContract.StableName)
                 );
             }
             return false;
@@ -1975,7 +1975,8 @@ namespace SerializationTestTypes
                             {
                                 itemType = Globals.TypeOfKeyValue.MakeGenericType(genericArgs);
                                 addMethod = type.GetMethod(Globals.AddMethodName);
-                                getEnumeratorMethod = Globals.TypeOfIEnumerableGeneric
+                                getEnumeratorMethod = Globals
+                                    .TypeOfIEnumerableGeneric
                                     .MakeGenericType(
                                         Globals.TypeOfKeyValuePair.MakeGenericType(genericArgs)
                                     )
@@ -1984,7 +1985,8 @@ namespace SerializationTestTypes
                             else
                             {
                                 itemType = genericArgs[0];
-                                getEnumeratorMethod = Globals.TypeOfIEnumerableGeneric
+                                getEnumeratorMethod = Globals
+                                    .TypeOfIEnumerableGeneric
                                     .MakeGenericType(itemType)
                                     .GetMethod(Globals.GetEnumeratorMethodName);
                             }
@@ -2000,9 +2002,9 @@ namespace SerializationTestTypes
                             {
                                 itemType = Globals.TypeOfObject;
                             }
-                            getEnumeratorMethod = Globals.TypeOfIEnumerable.GetMethod(
-                                Globals.GetEnumeratorMethodName
-                            );
+                            getEnumeratorMethod = Globals
+                                .TypeOfIEnumerable
+                                .GetMethod(Globals.GetEnumeratorMethodName);
                         }
                         if (tryCreate)
                             dataContract = new CollectionDataContract(

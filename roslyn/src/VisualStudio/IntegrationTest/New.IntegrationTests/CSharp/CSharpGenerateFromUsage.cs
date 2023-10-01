@@ -34,13 +34,17 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 }",
                 HangMitigatingCancellationToken
             );
-            await TestServices.EditorVerifier.CodeActionAsync(
-                "Generate local 'xyz'",
-                applyFix: true,
-                cancellationToken: HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.TextContainsAsync(
-                @"class Program
+            await TestServices
+                .EditorVerifier
+                .CodeActionAsync(
+                    "Generate local 'xyz'",
+                    applyFix: true,
+                    cancellationToken: HangMitigatingCancellationToken
+                );
+            await TestServices
+                .EditorVerifier
+                .TextContainsAsync(
+                    @"class Program
 {
     static void Main(string[] args)
     {
@@ -48,8 +52,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         string s = xyz;
     }
 }",
-                cancellationToken: HangMitigatingCancellationToken
-            );
+                    cancellationToken: HangMitigatingCancellationToken
+                );
         }
     }
 }

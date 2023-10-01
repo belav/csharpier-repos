@@ -1136,10 +1136,9 @@ namespace System.DirectoryServices.ActiveDirectory
                     PDS_NAME_RESULT* ppSites
                     );*/
                 var dsListSites = (delegate* unmanaged<IntPtr, IntPtr*, int>)
-                    global::Interop.Kernel32.GetProcAddress(
-                        DirectoryContext.ADHandle,
-                        "DsListSitesW"
-                    );
+                    global::Interop
+                        .Kernel32
+                        .GetProcAddress(DirectoryContext.ADHandle, "DsListSitesW");
                 if (dsListSites == null)
                 {
                     throw ExceptionHelper.GetExceptionFromErrorCode(Marshal.GetLastPInvokeError());
@@ -1161,9 +1160,9 @@ namespace System.DirectoryServices.ActiveDirectory
                             Marshal.PtrToStructure(currentItem, dsNameResultItem);
                             if (dsNameResultItem.status == NativeMethods.DsNameNoError)
                             {
-                                string siteName = Utils.GetDNComponents(dsNameResultItem.name!)[
-                                    0
-                                ].Value!;
+                                string siteName = Utils
+                                    .GetDNComponents(dsNameResultItem.name!)[0]
+                                    .Value!;
                                 // an existing site
                                 sites.Add(new ActiveDirectorySite(_context, siteName, true));
                             }
@@ -1178,10 +1177,9 @@ namespace System.DirectoryServices.ActiveDirectory
                         {
                             // call DsFreeNameResultW
                             var dsFreeNameResultW = (delegate* unmanaged<IntPtr, void>)
-                                global::Interop.Kernel32.GetProcAddress(
-                                    DirectoryContext.ADHandle,
-                                    "DsFreeNameResultW"
-                                );
+                                global::Interop
+                                    .Kernel32
+                                    .GetProcAddress(DirectoryContext.ADHandle, "DsFreeNameResultW");
                             if (dsFreeNameResultW == null)
                             {
                                 throw ExceptionHelper.GetExceptionFromErrorCode(

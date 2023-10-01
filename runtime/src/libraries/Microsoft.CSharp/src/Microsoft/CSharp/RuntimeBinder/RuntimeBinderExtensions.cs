@@ -60,11 +60,9 @@ namespace Microsoft.CSharp.RuntimeBinder
                     && method1.CallingConvention == method2.CallingConvention
                     && method1.Name == method2.Name
                     && method1.DeclaringType.IsGenericallyEqual(method2.DeclaringType)
-                    && method1.ReturnType.IsGenericallyEquivalentTo(
-                        method2.ReturnType,
-                        method1,
-                        method2
-                    )
+                    && method1
+                        .ReturnType
+                        .IsGenericallyEquivalentTo(method2.ReturnType, method1, method2)
                     && method1.AreParametersEquivalent(method2);
             }
 
@@ -281,9 +279,10 @@ namespace Microsoft.CSharp.RuntimeBinder
             }
             else
             {
-                return member.DeclaringType.GetGenericArguments()[
-                    typeParam.GenericParameterPosition
-                ].Equals(typeInst);
+                return member
+                    .DeclaringType
+                    .GetGenericArguments()[typeParam.GenericParameterPosition]
+                    .Equals(typeInst);
             }
         }
 

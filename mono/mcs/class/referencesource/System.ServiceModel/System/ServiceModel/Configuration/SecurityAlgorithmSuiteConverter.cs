@@ -94,16 +94,18 @@ namespace System.ServiceModel.Configuration
                         retval = SecurityAlgorithmSuite.TripleDesSha256Rsa15;
                         break;
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ArgumentOutOfRangeException(
-                                "value",
-                                SR.GetString(
-                                    SR.ConfigInvalidClassFactoryValue,
-                                    securityAlgorithm,
-                                    typeof(SecurityAlgorithmSuite).FullName
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ArgumentOutOfRangeException(
+                                    "value",
+                                    SR.GetString(
+                                        SR.ConfigInvalidClassFactoryValue,
+                                        securityAlgorithm,
+                                        typeof(SecurityAlgorithmSuite).FullName
+                                    )
                                 )
-                            )
-                        );
+                            );
                 }
                 return retval;
             }
@@ -157,15 +159,17 @@ namespace System.ServiceModel.Configuration
                 else if (securityAlgorithm == SecurityAlgorithmSuite.TripleDesSha256Rsa15)
                     retval = ConfigurationStrings.TripleDesSha256Rsa15;
                 else
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            SR.GetString(
-                                SR.ConfigInvalidClassInstanceValue,
-                                typeof(SecurityAlgorithmSuite).FullName
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                SR.GetString(
+                                    SR.ConfigInvalidClassInstanceValue,
+                                    typeof(SecurityAlgorithmSuite).FullName
+                                )
                             )
-                        )
-                    );
+                        );
 
                 return retval;
             }

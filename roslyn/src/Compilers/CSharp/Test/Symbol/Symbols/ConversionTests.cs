@@ -2165,7 +2165,8 @@ class C
             var interfaceI3 = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("I3");
             var typeIntArrayWithCustomModifiers = interfaceI3
                 .GetMember<MethodSymbol>("M1")
-                .Parameters.Single()
+                .Parameters
+                .Single()
                 .Type;
 
             Assert.True(
@@ -2236,7 +2237,8 @@ public class Program
             var tuple = GetBindingNodeAndModel<ExpressionSyntax>(comp);
             Assert.Equal(
                 ConversionKind.Identity,
-                tuple.Item2
+                tuple
+                    .Item2
                     .ClassifyConversion(
                         tuple.Item1,
                         comp.GetSpecialType(SpecialType.System_Boolean)

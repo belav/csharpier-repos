@@ -218,12 +218,12 @@ public class StaticsTests
     {
         // Test that different instantiations of the same type get their own static data
         {
-            Type stringInstType = TypeOf.ST_GenericTypeWithStaticFieldOfTypeT.MakeGenericType(
-                typeof(MyCustomType)
-            );
-            Type sillyStringInstType = TypeOf.ST_GenericTypeWithStaticFieldOfTypeT.MakeGenericType(
-                typeof(SillyString)
-            );
+            Type stringInstType = TypeOf
+                .ST_GenericTypeWithStaticFieldOfTypeT
+                .MakeGenericType(typeof(MyCustomType));
+            Type sillyStringInstType = TypeOf
+                .ST_GenericTypeWithStaticFieldOfTypeT
+                .MakeGenericType(typeof(SillyString));
 
             var sillyStringInst = Activator.CreateInstance(
                 sillyStringInstType,
@@ -241,15 +241,15 @@ public class StaticsTests
 
         // Test that different instantiations of the same type get their own static data
         {
-            Type stringInstType = TypeOf.ST_GenericTypeWithNonGcStaticField.MakeGenericType(
-                TypeOf.CommonType1
-            );
-            Type objectInstType = TypeOf.ST_GenericTypeWithNonGcStaticField.MakeGenericType(
-                TypeOf.CommonType2
-            );
-            Type boolInstType = TypeOf.ST_GenericTypeWithNonGcStaticField.MakeGenericType(
-                typeof(StaticsTests)
-            );
+            Type stringInstType = TypeOf
+                .ST_GenericTypeWithNonGcStaticField
+                .MakeGenericType(TypeOf.CommonType1);
+            Type objectInstType = TypeOf
+                .ST_GenericTypeWithNonGcStaticField
+                .MakeGenericType(TypeOf.CommonType2);
+            Type boolInstType = TypeOf
+                .ST_GenericTypeWithNonGcStaticField
+                .MakeGenericType(typeof(StaticsTests));
 
             var objectInst = Activator.CreateInstance(objectInstType, new object[] { 123 });
             var stringInst = Activator.CreateInstance(stringInstType, new object[] { 666 });
@@ -263,17 +263,15 @@ public class StaticsTests
 
         // Validate that multiple static non-GC fields on the generic type work correctly over several instantiations
         {
-            Type stringInstType =
-                TypeOf.ST_GenericTypeWithMultipleNonGcStaticFields.MakeGenericType(
-                    TypeOf.CommonType1
-                );
-            Type objectInstType =
-                TypeOf.ST_GenericTypeWithMultipleNonGcStaticFields.MakeGenericType(
-                    TypeOf.CommonType2
-                );
-            Type boolInstType = TypeOf.ST_GenericTypeWithMultipleNonGcStaticFields.MakeGenericType(
-                typeof(StaticsTests)
-            );
+            Type stringInstType = TypeOf
+                .ST_GenericTypeWithMultipleNonGcStaticFields
+                .MakeGenericType(TypeOf.CommonType1);
+            Type objectInstType = TypeOf
+                .ST_GenericTypeWithMultipleNonGcStaticFields
+                .MakeGenericType(TypeOf.CommonType2);
+            Type boolInstType = TypeOf
+                .ST_GenericTypeWithMultipleNonGcStaticFields
+                .MakeGenericType(typeof(StaticsTests));
 
             var objectInst = Activator.CreateInstance(
                 objectInstType,
@@ -311,12 +309,12 @@ public class StaticsTests
         }
 
         {
-            Type objectInstType = TypeOf.ST_GenericTypeWithStaticTimeSpanField.MakeGenericType(
-                TypeOf.CommonType2
-            );
-            Type stringInstType = TypeOf.ST_GenericTypeWithStaticTimeSpanField.MakeGenericType(
-                TypeOf.CommonType1
-            );
+            Type objectInstType = TypeOf
+                .ST_GenericTypeWithStaticTimeSpanField
+                .MakeGenericType(TypeOf.CommonType2);
+            Type stringInstType = TypeOf
+                .ST_GenericTypeWithStaticTimeSpanField
+                .MakeGenericType(TypeOf.CommonType1);
 
             var objectInst = Activator.CreateInstance(objectInstType, new object[] { 123.0 });
             var stringInst = Activator.CreateInstance(stringInstType, new object[] { 456.0 });
@@ -328,12 +326,12 @@ public class StaticsTests
 
         // GC statics tests
         {
-            Type stringInstType = TypeOf.ST_GenericTypeWithGcStaticField.MakeGenericType(
-                TypeOf.CommonType1
-            );
-            Type objectInstType = TypeOf.ST_GenericTypeWithGcStaticField.MakeGenericType(
-                TypeOf.CommonType2
-            );
+            Type stringInstType = TypeOf
+                .ST_GenericTypeWithGcStaticField
+                .MakeGenericType(TypeOf.CommonType1);
+            Type objectInstType = TypeOf
+                .ST_GenericTypeWithGcStaticField
+                .MakeGenericType(TypeOf.CommonType2);
 
             var objectInst = Activator.CreateInstance(objectInstType, new object[] { "Hello" });
             var stringInst0 = Activator.CreateInstance(stringInstType, new object[] { "And" });
@@ -347,9 +345,9 @@ public class StaticsTests
 
         // Statics keep things alive
         {
-            Type stringInstType = TypeOf.ST_GenericTypeWithGcStaticField.MakeGenericType(
-                TypeOf.CommonType1
-            );
+            Type stringInstType = TypeOf
+                .ST_GenericTypeWithGcStaticField
+                .MakeGenericType(TypeOf.CommonType1);
 
             var stringInst = Activator.CreateInstance(stringInstType, new object[] { "Bye" });
             var setMyStringMethodInfo = stringInstType
@@ -372,12 +370,12 @@ public class StaticsTests
         }
 
         {
-            Type stringInstType = TypeOf.ST_ClassWithStaticConstructor.MakeGenericType(
-                TypeOf.CommonType1
-            );
-            Type objectInstType = TypeOf.ST_ClassWithStaticConstructor.MakeGenericType(
-                TypeOf.CommonType2
-            );
+            Type stringInstType = TypeOf
+                .ST_ClassWithStaticConstructor
+                .MakeGenericType(TypeOf.CommonType1);
+            Type objectInstType = TypeOf
+                .ST_ClassWithStaticConstructor
+                .MakeGenericType(TypeOf.CommonType2);
 
             var objectInst = Activator.CreateInstance(objectInstType);
             var stringInst = Activator.CreateInstance(stringInstType);
@@ -387,15 +385,15 @@ public class StaticsTests
         }
 
         {
-            Type stringInstType = TypeOf.ST_AnotherClassWithStaticConstructor.MakeGenericType(
-                TypeOf.CommonType1
-            );
-            Type objectInstType = TypeOf.ST_AnotherClassWithStaticConstructor.MakeGenericType(
-                TypeOf.CommonType2
-            );
-            Type sbInstType = TypeOf.ST_AnotherClassWithStaticConstructor.MakeGenericType(
-                typeof(StringBuilder)
-            );
+            Type stringInstType = TypeOf
+                .ST_AnotherClassWithStaticConstructor
+                .MakeGenericType(TypeOf.CommonType1);
+            Type objectInstType = TypeOf
+                .ST_AnotherClassWithStaticConstructor
+                .MakeGenericType(TypeOf.CommonType2);
+            Type sbInstType = TypeOf
+                .ST_AnotherClassWithStaticConstructor
+                .MakeGenericType(typeof(StringBuilder));
 
             var objectInst = Activator.CreateInstance(objectInstType);
             var stringInst = Activator.CreateInstance(stringInstType);

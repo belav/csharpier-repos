@@ -132,7 +132,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 result
                     .Should()
                     .Fail()
-                    .And.HaveStdErrContaining(
+                    .And
+                    .HaveStdErrContaining(
                         $"It's invalid to use both `{Constants.RollForwardSetting.RuntimeConfigPropertyName}` and one of "
                             + $"`{Constants.RollForwardOnNoCandidateFxSetting.RuntimeConfigPropertyName}` or "
                             + $"`{Constants.ApplyPatchesSetting.RuntimeConfigPropertyName}` in the same runtime config."
@@ -161,7 +162,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 )
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     $"It's invalid to use both '{Constants.RollForwardSetting.CommandLineArgument}' and "
                         + $"'{Constants.RollForwardOnNoCandidateFxSetting.CommandLineArgument}' command line options."
                 );

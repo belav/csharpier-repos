@@ -1593,11 +1593,11 @@ namespace Microsoft.WebAssembly.Diagnostics
 
             if (sourceLinkDebugInfo != null)
             {
-                var sourceLinkContent = System.Text.Encoding.UTF8.GetString(
-                    sourceLinkDebugInfo,
-                    0,
-                    sourceLinkDebugInfo.Length
-                );
+                var sourceLinkContent = System
+                    .Text
+                    .Encoding
+                    .UTF8
+                    .GetString(sourceLinkDebugInfo, 0, sourceLinkDebugInfo.Length);
 
                 if (sourceLinkContent != null)
                 {
@@ -1676,10 +1676,9 @@ namespace Microsoft.WebAssembly.Diagnostics
                     PdbGuid.ToString("N").ToUpperInvariant()
                     + (IsPortableCodeView ? "FFFFFFFF" : PdbAge);
                 var key = $"{pdbName}/{pdbGuid}/{pdbName}";
-                SymbolStoreFile file = await debugStore.symbolStore.GetFile(
-                    new SymbolStoreKey(key, PdbName, false, PdbChecksums),
-                    token
-                );
+                SymbolStoreFile file = await debugStore
+                    .symbolStore
+                    .GetFile(new SymbolStoreKey(key, PdbName, false, PdbChecksums), token);
                 TriedToLoadSymbolsOnDemand = true;
                 if (file == null)
                     return;
@@ -2131,11 +2130,13 @@ namespace Microsoft.WebAssembly.Diagnostics
                             new DebugItem
                             {
                                 Url = file_name,
-                                DataTask = context.SdbAgent.GetDataFromAssemblyAndPdbAsync(
-                                    Path.GetFileName(unescapedFileName),
-                                    false,
-                                    token
-                                )
+                                DataTask = context
+                                    .SdbAgent
+                                    .GetDataFromAssemblyAndPdbAsync(
+                                        Path.GetFileName(unescapedFileName),
+                                        false,
+                                        token
+                                    )
                             }
                         );
                     }

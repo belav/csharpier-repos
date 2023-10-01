@@ -72,12 +72,14 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
                         : CodeActionPriority.Default;
 
                 context.RegisterCodeFix(
-                    CodeAction.SolutionChangeAction.Create(
-                        AnalyzersResources.Use_auto_property,
-                        c => ProcessResultAsync(context, diagnostic, c),
-                        equivalenceKey: nameof(AnalyzersResources.Use_auto_property),
-                        priority
-                    ),
+                    CodeAction
+                        .SolutionChangeAction
+                        .Create(
+                            AnalyzersResources.Use_auto_property,
+                            c => ProcessResultAsync(context, diagnostic, c),
+                            equivalenceKey: nameof(AnalyzersResources.Use_auto_property),
+                            priority
+                        ),
                     diagnostic
                 );
             }
@@ -210,7 +212,8 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             propertyDocument = solution.GetRequiredDocument(propertyDocument.Id);
             Debug.Assert(fieldDocument.Project == propertyDocument.Project);
 
-            compilation = await fieldDocument.Project
+            compilation = await fieldDocument
+                .Project
                 .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -227,11 +230,13 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             Contract.ThrowIfTrue(fieldSymbol == null || propertySymbol == null);
 
             declarator = (TVariableDeclarator)
-                await fieldSymbol.DeclaringSyntaxReferences[0]
+                await fieldSymbol
+                    .DeclaringSyntaxReferences[0]
                     .GetSyntaxAsync(cancellationToken)
                     .ConfigureAwait(false);
             property = GetPropertyDeclaration(
-                await propertySymbol.DeclaringSyntaxReferences[0]
+                await propertySymbol
+                    .DeclaringSyntaxReferences[0]
                     .GetSyntaxAsync(cancellationToken)
                     .ConfigureAwait(false)
             );
@@ -436,7 +441,8 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             CancellationToken cancellationToken
         )
         {
-            var constructorSpans = field.ContainingType
+            var constructorSpans = field
+                .ContainingType
                 .GetMembers()
                 .Where(m => m.IsConstructor())
                 .SelectMany(c => c.DeclaringSyntaxReferences)
@@ -445,16 +451,18 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
                 .WhereNotNull()
                 .Select(d => (d.SyntaxTree.FilePath, d.Span))
                 .ToSet();
-            return renameLocations.Locations.Any(
-                loc =>
-                    IsWrittenToOutsideOfConstructorOrProperty(
-                        renameLocations.Solution,
-                        loc,
-                        propertyDeclaration,
-                        constructorSpans,
-                        cancellationToken
-                    )
-            );
+            return renameLocations
+                .Locations
+                .Any(
+                    loc =>
+                        IsWrittenToOutsideOfConstructorOrProperty(
+                            renameLocations.Solution,
+                            loc,
+                            propertyDeclaration,
+                            constructorSpans,
+                            cancellationToken
+                        )
+                );
         }
 
         private static bool IsWrittenToOutsideOfConstructorOrProperty(

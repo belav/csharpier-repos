@@ -95,12 +95,14 @@ public static class Certificates
 
             if (eku != null)
             {
-                request.CertificateExtensions.Add(
-                    new X509EnhancedKeyUsageExtension(
-                        new OidCollection { new Oid(eku, null) },
-                        false
-                    )
-                );
+                request
+                    .CertificateExtensions
+                    .Add(
+                        new X509EnhancedKeyUsageExtension(
+                            new OidCollection { new Oid(eku, null) },
+                            false
+                        )
+                    );
             }
 
             return request.CreateSelfSigned(notBefore, notAfter);

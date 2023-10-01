@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MoveType
 
         // TODO: Requires WPF due to IInlineRenameService dependency (https://github.com/dotnet/roslyn/issues/46153)
         protected override TestComposition GetComposition() =>
-            EditorTestCompositions.EditorFeaturesWpf
+            EditorTestCompositions
+                .EditorFeaturesWpf
                 .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
                 .AddParts(typeof(MockDiagnosticUpdateSourceRegistrationService));
 
@@ -119,9 +120,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MoveType
                     );
 
                     var oldDocumentId = workspace.Documents[0].Id;
-                    var expectedText = workspace.Documents[0]
+                    var expectedText = workspace
+                        .Documents[0]
                         .GetTextBuffer()
-                        .CurrentSnapshot.GetText();
+                        .CurrentSnapshot
+                        .GetText();
                     var spans = workspace.Documents[0].SelectedSpans;
 
                     var codeActionTitle = string.Format(

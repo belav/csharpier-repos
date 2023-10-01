@@ -36,7 +36,10 @@ public class JsonViewColumn : ViewColumn, IViewColumn
     /// </summary>
     protected override RelationalTypeMapping GetDefaultStoreTypeMapping() =>
         (RelationalTypeMapping)
-            Table.Model.Model
+            Table
+                .Model
+                .Model
                 .GetModelDependencies()
-                .TypeMappingSource.FindMapping(typeof(JsonElement))!;
+                .TypeMappingSource
+                .FindMapping(typeof(JsonElement))!;
 }

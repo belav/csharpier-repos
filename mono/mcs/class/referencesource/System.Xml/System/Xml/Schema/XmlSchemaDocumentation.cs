@@ -46,11 +46,9 @@ namespace System.Xml.Schema
             set
             {
                 language = (string)
-                    languageType.Datatype.ParseValue(
-                        value,
-                        (XmlNameTable)null,
-                        (IXmlNamespaceResolver)null
-                    );
+                    languageType
+                        .Datatype
+                        .ParseValue(value, (XmlNameTable)null, (IXmlNamespaceResolver)null);
             }
         }
 

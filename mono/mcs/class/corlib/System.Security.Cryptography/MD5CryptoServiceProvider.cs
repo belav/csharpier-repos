@@ -82,26 +82,18 @@ namespace System.Security.Cryptography
             {
                 if (cbSize < (BLOCK_SIZE_BYTES - _ProcessingBufferCount))
                 {
-                    System.Buffer.BlockCopy(
-                        rgb,
-                        ibStart,
-                        _ProcessingBuffer,
-                        _ProcessingBufferCount,
-                        cbSize
-                    );
+                    System
+                        .Buffer
+                        .BlockCopy(rgb, ibStart, _ProcessingBuffer, _ProcessingBufferCount, cbSize);
                     _ProcessingBufferCount += cbSize;
                     return;
                 }
                 else
                 {
                     i = (BLOCK_SIZE_BYTES - _ProcessingBufferCount);
-                    System.Buffer.BlockCopy(
-                        rgb,
-                        ibStart,
-                        _ProcessingBuffer,
-                        _ProcessingBufferCount,
-                        i
-                    );
+                    System
+                        .Buffer
+                        .BlockCopy(rgb, ibStart, _ProcessingBuffer, _ProcessingBufferCount, i);
                     ProcessBlock(_ProcessingBuffer, 0);
                     _ProcessingBufferCount = 0;
                     ibStart += i;
@@ -116,13 +108,15 @@ namespace System.Security.Cryptography
 
             if (cbSize % BLOCK_SIZE_BYTES != 0)
             {
-                System.Buffer.BlockCopy(
-                    rgb,
-                    cbSize - cbSize % BLOCK_SIZE_BYTES + ibStart,
-                    _ProcessingBuffer,
-                    0,
-                    cbSize % BLOCK_SIZE_BYTES
-                );
+                System
+                    .Buffer
+                    .BlockCopy(
+                        rgb,
+                        cbSize - cbSize % BLOCK_SIZE_BYTES + ibStart,
+                        _ProcessingBuffer,
+                        0,
+                        cbSize % BLOCK_SIZE_BYTES
+                    );
                 _ProcessingBufferCount = cbSize % BLOCK_SIZE_BYTES;
             }
         }

@@ -38,17 +38,18 @@ namespace Internal.TypeSystem.Ecma
 
                 string moduleRefString;
                 if (
-                    !_mutableModule._moduleToModuleRefString.TryGetValue(
-                        module,
-                        out moduleRefString
-                    )
+                    !_mutableModule
+                        ._moduleToModuleRefString
+                        .TryGetValue(module, out moduleRefString)
                 )
                 {
                     Debug.Assert(
                         _mutableModule.ModuleThatIsCurrentlyTheSourceOfNewReferences != null
-                            && _mutableModule._compilationGroup.CrossModuleInlineableModule(
-                                _mutableModule.ModuleThatIsCurrentlyTheSourceOfNewReferences
-                            )
+                            && _mutableModule
+                                ._compilationGroup
+                                .CrossModuleInlineableModule(
+                                    _mutableModule.ModuleThatIsCurrentlyTheSourceOfNewReferences
+                                )
                     );
 
                     if (module == _typeSystemContext.SystemModule)
@@ -276,10 +277,14 @@ namespace Internal.TypeSystem.Ecma
                             metadataArrayTemp.Length,
                             pinned: true
                         );
-                        System.Runtime.InteropServices.GCHandle.Alloc(
-                            metadataArray,
-                            System.Runtime.InteropServices.GCHandleType.Pinned
-                        );
+                        System
+                            .Runtime
+                            .InteropServices
+                            .GCHandle
+                            .Alloc(
+                                metadataArray,
+                                System.Runtime.InteropServices.GCHandleType.Pinned
+                            );
                         Array.Copy(metadataArrayTemp, metadataArray, metadataArray.Length);
                         _readers.Add(metadataArray);
                         unsafe
@@ -328,10 +333,10 @@ namespace Internal.TypeSystem.Ecma
                         {
                             int result;
                             if (
-                                _mutableModule._cache.ExistingEntities.TryGetValue(
-                                    value,
-                                    out result
-                                )
+                                _mutableModule
+                                    ._cache
+                                    .ExistingEntities
+                                    .TryGetValue(value, out result)
                             )
                             {
                                 return result;

@@ -3480,10 +3480,8 @@ namespace System.Workflow.ComponentModel.Design
                     Form.ActiveForm != null
                     && Form.ActiveForm
                         .GetType()
-                        .FullName.Equals(
-                            typeof(ItemPalette).FullName + "+Palette",
-                            StringComparison.Ordinal
-                        )
+                        .FullName
+                        .Equals(typeof(ItemPalette).FullName + "+Palette", StringComparison.Ordinal)
                 )
                     formShown = (
                         Form.ActiveForm.Location
@@ -3503,7 +3501,8 @@ namespace System.Workflow.ComponentModel.Design
                         Form.ActiveForm != null
                         && Form.ActiveForm
                             .GetType()
-                            .FullName.Equals(
+                            .FullName
+                            .Equals(
                                 typeof(ItemPalette).FullName + "+Palette",
                                 StringComparison.Ordinal
                             )

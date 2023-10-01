@@ -881,9 +881,9 @@ namespace System.Xml.Schema
             { // inline xdr schema
                 if (builder._XdrName != null)
                 {
-                    builder._TargetNamespace = builder._NameTable.Add(
-                        "x-schema:#" + builder._XdrName
-                    );
+                    builder._TargetNamespace = builder
+                        ._NameTable
+                        .Add("x-schema:#" + builder._XdrName);
                 }
                 else
                 {
@@ -1267,8 +1267,9 @@ namespace System.Xml.Schema
 
             if (builder._contentValidator != null)
             {
-                builder._ElementDef._ElementDecl.ContentValidator =
-                    builder._contentValidator.Finish(true);
+                builder._ElementDef._ElementDecl.ContentValidator = builder
+                    ._contentValidator
+                    .Finish(true);
                 builder._contentValidator = null;
             }
 
@@ -1857,9 +1858,9 @@ namespace System.Xml.Schema
                 for (int i = 0; i < _CurState._NextStates.Length; i++)
                 {
                     if (
-                        _SchemaNames.TokenToQName[
-                            (int)S_SchemaEntries[_CurState._NextStates[i]]._Name
-                        ].Equals(qname)
+                        _SchemaNames
+                            .TokenToQName[(int)S_SchemaEntries[_CurState._NextStates[i]]._Name]
+                            .Equals(qname)
                     )
                     {
                         _NextState = S_SchemaEntries[_CurState._NextStates[i]];

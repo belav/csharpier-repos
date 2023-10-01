@@ -37,9 +37,9 @@ public sealed class BasicTestMethod : ITestInfo
     )
     {
         var args = arguments.IsDefaultOrEmpty ? "" : string.Join(", ", arguments);
-        ContainingType = method.ContainingType.ToDisplayString(
-            XUnitWrapperGenerator.FullyQualifiedWithoutGlobalNamespace
-        );
+        ContainingType = method
+            .ContainingType
+            .ToDisplayString(XUnitWrapperGenerator.FullyQualifiedWithoutGlobalNamespace);
         Method = method.Name;
         DisplayNameForFiltering = $"{ContainingType}.{Method}({args})";
         TestNameExpression =
@@ -93,9 +93,9 @@ public sealed class LegacyStandaloneEntryPointTestMethod : ITestInfo
 {
     public LegacyStandaloneEntryPointTestMethod(IMethodSymbol method, string externAlias)
     {
-        ContainingType = method.ContainingType.ToDisplayString(
-            XUnitWrapperGenerator.FullyQualifiedWithoutGlobalNamespace
-        );
+        ContainingType = method
+            .ContainingType
+            .ToDisplayString(XUnitWrapperGenerator.FullyQualifiedWithoutGlobalNamespace);
         Method = method.Name;
         TestNameExpression = $"\"{externAlias}::{ContainingType}.{Method}()\"";
         DisplayNameForFiltering = $"{ContainingType}.{Method}()";
@@ -280,9 +280,9 @@ public sealed class MemberDataTest : ITestInfo
         _innerTest = innerTest;
         _loopVarIdentifier = argumentLoopVarIdentifier;
 
-        string containingType = referencedMember.ContainingType.ToDisplayString(
-            XUnitWrapperGenerator.FullyQualifiedWithoutGlobalNamespace
-        );
+        string containingType = referencedMember
+            .ContainingType
+            .ToDisplayString(XUnitWrapperGenerator.FullyQualifiedWithoutGlobalNamespace);
         _memberInvocation = referencedMember switch
         {
             IPropertySymbol { IsStatic: true }

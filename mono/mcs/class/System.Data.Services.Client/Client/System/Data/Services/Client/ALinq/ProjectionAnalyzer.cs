@@ -363,10 +363,9 @@ namespace System.Data.Services.Client
 
             internal override Expression VisitConditional(ConditionalExpression c)
             {
-                var nullCheck = ResourceBinder.PatternRules.MatchNullCheck(
-                    this.box.ParamExpressionInScope,
-                    c
-                );
+                var nullCheck = ResourceBinder
+                    .PatternRules
+                    .MatchNullCheck(this.box.ParamExpressionInScope, c);
                 if (nullCheck.Match)
                 {
                     this.Visit(nullCheck.AssignExpression);
@@ -638,10 +637,9 @@ namespace System.Data.Services.Client
 
             internal override Expression VisitConditional(ConditionalExpression c)
             {
-                var nullCheck = ResourceBinder.PatternRules.MatchNullCheck(
-                    this.box.ParamExpressionInScope,
-                    c
-                );
+                var nullCheck = ResourceBinder
+                    .PatternRules
+                    .MatchNullCheck(this.box.ParamExpressionInScope, c);
                 if (nullCheck.Match)
                 {
                     this.Visit(nullCheck.AssignExpression);

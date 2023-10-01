@@ -43,10 +43,9 @@ namespace ILCompiler.DependencyAnalysis
             signatureBuilder.Flags = MethodSignatureFlags.Static;
             signatureBuilder.ReturnType = constructorMethod.OwningType;
 
-            _allocationMethod = constructorMethod.OwningType.GetKnownMethod(
-                "Ctor",
-                signatureBuilder.ToSignature()
-            );
+            _allocationMethod = constructorMethod
+                .OwningType
+                .GetKnownMethod("Ctor", signatureBuilder.ToSignature());
             _constructorMethod = constructorMethod;
         }
 
@@ -62,12 +61,14 @@ namespace ILCompiler.DependencyAnalysis
             );
             result.Add(factory.MethodEntrypoint(_allocationMethod), "String constructor call");
 
-            factory.MetadataManager.GetDependenciesDueToMethodCodePresence(
-                ref result,
-                factory,
-                _constructorMethod,
-                methodIL: null
-            );
+            factory
+                .MetadataManager
+                .GetDependenciesDueToMethodCodePresence(
+                    ref result,
+                    factory,
+                    _constructorMethod,
+                    methodIL: null
+                );
 
             return result;
         }

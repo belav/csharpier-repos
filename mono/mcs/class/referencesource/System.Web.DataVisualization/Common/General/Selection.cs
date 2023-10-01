@@ -543,16 +543,19 @@ namespace System.Web.UI.DataVisualization.Charting
                     )
                     {
                         int prevMapAreaCount = _common.ChartPicture.MapAreas.Count;
-                        _common.ChartPicture.MapAreas.InsertPath(
-                            0,
-                            point.ReplaceKeywords(point.ToolTip),
-                            point.ReplaceKeywords(point.Url),
-                            point.ReplaceKeywords(point.MapAreaAttributes),
-                            point.ReplaceKeywords(point.PostBackValue),
-                            path,
-                            !relativePath,
-                            graph
-                        );
+                        _common
+                            .ChartPicture
+                            .MapAreas
+                            .InsertPath(
+                                0,
+                                point.ReplaceKeywords(point.ToolTip),
+                                point.ReplaceKeywords(point.Url),
+                                point.ReplaceKeywords(point.MapAreaAttributes),
+                                point.ReplaceKeywords(point.PostBackValue),
+                                path,
+                                !relativePath,
+                                graph
+                            );
 
                         // Set map area type
                         for (
@@ -638,16 +641,19 @@ namespace System.Web.UI.DataVisualization.Charting
                     {
                         int prevMapAreaCount = _common.ChartPicture.MapAreas.Count;
 
-                        _common.ChartPicture.MapAreas.InsertPath(
-                            insertIndex,
-                            point.ReplaceKeywords(point.ToolTip),
-                            point.ReplaceKeywords(point.Url),
-                            point.ReplaceKeywords(point.MapAreaAttributes),
-                            point.ReplaceKeywords(point.PostBackValue),
-                            path,
-                            !relativePath,
-                            graph
-                        );
+                        _common
+                            .ChartPicture
+                            .MapAreas
+                            .InsertPath(
+                                insertIndex,
+                                point.ReplaceKeywords(point.ToolTip),
+                                point.ReplaceKeywords(point.Url),
+                                point.ReplaceKeywords(point.MapAreaAttributes),
+                                point.ReplaceKeywords(point.PostBackValue),
+                                path,
+                                !relativePath,
+                                graph
+                            );
 
                         // Set map area type
                         for (
@@ -1099,16 +1105,19 @@ namespace System.Web.UI.DataVisualization.Charting
                         || postBackValue.Length > 0
                     )
                     {
-                        _common.ChartPicture.MapAreas.InsertPath(
-                            0,
-                            toolTip,
-                            hRef,
-                            mapAreaAttributes,
-                            postBackValue,
-                            path,
-                            !relativePath,
-                            graph
-                        );
+                        _common
+                            .ChartPicture
+                            .MapAreas
+                            .InsertPath(
+                                0,
+                                toolTip,
+                                hRef,
+                                mapAreaAttributes,
+                                postBackValue,
+                                path,
+                                !relativePath,
+                                graph
+                            );
                     }
                 }
             }
@@ -1814,11 +1823,12 @@ namespace System.Web.UI.DataVisualization.Charting
                 )
                 {
                     // Take tool tip from data point
-                    toolTipText = _chartControl.Series[seriesName].Points[
-                        dataPointIndex
-                    ].ReplaceKeywords(
-                        _chartControl.Series[seriesName].Points[dataPointIndex].ToolTip
-                    );
+                    toolTipText = _chartControl
+                        .Series[seriesName]
+                        .Points[dataPointIndex]
+                        .ReplaceKeywords(
+                            _chartControl.Series[seriesName].Points[dataPointIndex].ToolTip
+                        );
                 }
                 else
                 {
@@ -1841,11 +1851,12 @@ namespace System.Web.UI.DataVisualization.Charting
                 )
                 {
                     // Take tool tip from data point
-                    toolTipText = _chartControl.Series[seriesName].Points[
-                        dataPointIndex
-                    ].ReplaceKeywords(
-                        _chartControl.Series[seriesName].Points[dataPointIndex].LabelToolTip
-                    );
+                    toolTipText = _chartControl
+                        .Series[seriesName]
+                        .Points[dataPointIndex]
+                        .ReplaceKeywords(
+                            _chartControl.Series[seriesName].Points[dataPointIndex].LabelToolTip
+                        );
                 }
             }
 
@@ -1904,9 +1915,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (seriesName.Length > 0)
                         {
                             // Take tool tip from series
-                            toolTipText = _chartControl.Series[seriesName].ReplaceKeywords(
-                                _chartControl.Series[seriesName].LegendToolTip
-                            );
+                            toolTipText = _chartControl
+                                .Series[seriesName]
+                                .ReplaceKeywords(_chartControl.Series[seriesName].LegendToolTip);
                         }
                     }
                     else
@@ -1917,13 +1928,15 @@ namespace System.Web.UI.DataVisualization.Charting
                         )
                         {
                             // Take tool tip from data point
-                            toolTipText = _chartControl.Series[seriesName].Points[
-                                dataPointIndex
-                            ].ReplaceKeywords(
-                                _chartControl.Series[seriesName].Points[
-                                    dataPointIndex
-                                ].LegendToolTip
-                            );
+                            toolTipText = _chartControl
+                                .Series[seriesName]
+                                .Points[dataPointIndex]
+                                .ReplaceKeywords(
+                                    _chartControl
+                                        .Series[seriesName]
+                                        .Points[dataPointIndex]
+                                        .LegendToolTip
+                                );
                         }
                     }
                 }
@@ -3042,9 +3055,9 @@ namespace System.Web.UI.DataVisualization.Charting
         {
             foreach (object o in area.ChartTypes)
             {
-                ChartTypes.IChartType chartType = area.Common.ChartTypeRegistry.GetChartType(
-                    o.ToString()
-                );
+                ChartTypes.IChartType chartType = area.Common
+                    .ChartTypeRegistry
+                    .GetChartType(o.ToString());
                 if (chartType != null && (chartType.CircularChartArea || !chartType.RequireAxes))
                 {
                     return true;

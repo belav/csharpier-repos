@@ -118,8 +118,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                 return SpecializedCollections.EmptyList<TextChange>();
             }
 
-            var formatter =
-                document.LanguageServices.GetRequiredService<ISyntaxFormattingService>();
+            var formatter = document
+                .LanguageServices
+                .GetRequiredService<ISyntaxFormattingService>();
             return formatter
                 .GetFormattingResult(
                     root,
@@ -700,7 +701,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                     .GetAnnotatedNodes(s_replacementNodeAnnotation)
                     .Single()
                     .GetLastToken()
-                    .Span.End;
+                    .Span
+                    .End;
                 return (newRoot, nextCaretPosition);
             }
         }

@@ -297,9 +297,10 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
 
             var completedSolution = await GetFormattedSolutionAsync(
                     completedUnformattedSolution,
-                    symbolMapping.DocumentIdsToSymbolMap.Keys.Concat(
-                        unformattedInterfaceDocument.Id
-                    ),
+                    symbolMapping
+                        .DocumentIdsToSymbolMap
+                        .Keys
+                        .Concat(unformattedInterfaceDocument.Id),
                     extractInterfaceOptions.FallbackOptions,
                     cancellationToken
                 )
@@ -330,9 +331,9 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
                 )
                 .ConfigureAwait(false);
 
-            var document = symbolMapping.AnnotatedSolution.GetDocument(
-                refactoringResult.DocumentToExtractFrom.Id
-            );
+            var document = symbolMapping
+                .AnnotatedSolution
+                .GetDocument(refactoringResult.DocumentToExtractFrom.Id);
 
             var (documentWithInterface, _) = await ExtractTypeHelpers
                 .AddTypeToExistingFileAsync(
@@ -361,9 +362,10 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
 
             var completedSolution = await GetFormattedSolutionAsync(
                     unformattedSolutionWithUpdatedType,
-                    symbolMapping.DocumentIdsToSymbolMap.Keys.Concat(
-                        refactoringResult.DocumentToExtractFrom.Id
-                    ),
+                    symbolMapping
+                        .DocumentIdsToSymbolMap
+                        .Keys
+                        .Concat(refactoringResult.DocumentToExtractFrom.Id),
                     extractInterfaceOptions.FallbackOptions,
                     cancellationToken
                 )
@@ -395,8 +397,11 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
                 name => !conflictingTypeNames.Contains(name)
             );
             var syntaxFactsService = document.GetLanguageService<ISyntaxFactsService>();
-            var notificationService =
-                document.Project.Solution.Services.GetService<INotificationService>();
+            var notificationService = document
+                .Project
+                .Solution
+                .Services
+                .GetService<INotificationService>();
             var formattingOptions = await document
                 .GetSyntaxFormattingOptionsAsync(fallbackOptions, cancellationToken)
                 .ConfigureAwait(false);
@@ -408,8 +413,11 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
                 cancellationToken
             );
 
-            var service =
-                document.Project.Solution.Services.GetService<IExtractInterfaceOptionsService>();
+            var service = document
+                .Project
+                .Solution
+                .Services
+                .GetService<IExtractInterfaceOptionsService>();
             return await service
                 .GetExtractInterfaceOptionsAsync(
                     syntaxFactsService,
@@ -516,7 +524,8 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
 
                 unformattedSolution = document
                     .WithSyntaxRoot(editor.GetChangedRoot())
-                    .Project.Solution;
+                    .Project
+                    .Solution;
 
                 // Only update the first instance of the typedeclaration,
                 // since it's not needed in all declarations

@@ -753,7 +753,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     MethodProfileData prof1 = profile1.GetMethodProfileData(method);
                     MethodProfileData prof2 = profile2.GetMethodProfileData(method);
 
-                    List<int> typeHandleHistogramCallSites = prof1.SchemaData
+                    List<int> typeHandleHistogramCallSites = prof1
+                        .SchemaData
                         .Concat(prof2.SchemaData)
                         .Where(
                             e =>
@@ -881,10 +882,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                         string dot = fg.Dump(title);
 
                         string fileName =
-                            DebugNameFormatter.Instance.FormatName(
-                                method.OwningType,
-                                DebugNameFormatter.FormatOptions.NamespaceQualify
-                            )
+                            DebugNameFormatter
+                                .Instance
+                                .FormatName(
+                                    method.OwningType,
+                                    DebugNameFormatter.FormatOptions.NamespaceQualify
+                                )
                             + "."
                             + method.DiagnosticName;
                         foreach (char c in Path.GetInvalidFileNameChars())
@@ -1307,9 +1310,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                         "Either a pid or process name from the following list must be specified"
                     );
                     foreach (
-                        TraceProcess proc in traceLog.Processes.OrderByDescending(
-                            proc => proc.CPUMSec
-                        )
+                        TraceProcess proc in traceLog
+                            .Processes
+                            .OrderByDescending(proc => proc.CPUMSec)
                     )
                     {
                         PrintOutput(
@@ -1618,14 +1621,16 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     bool mismatch = false;
                     bool mismatchHandled = false;
                     foreach (
-                        DebugDirectoryEntry debugEntry in ecmaModule.PEReader.SafeReadDebugDirectory()
+                        DebugDirectoryEntry debugEntry in ecmaModule
+                            .PEReader
+                            .SafeReadDebugDirectory()
                     )
                     {
                         if (debugEntry.Type == DebugDirectoryEntryType.CodeView)
                         {
-                            var codeViewData = ecmaModule.PEReader.ReadCodeViewDebugDirectoryData(
-                                debugEntry
-                            );
+                            var codeViewData = ecmaModule
+                                .PEReader
+                                .ReadCodeViewDebugDirectoryData(debugEntry);
                             if (codeViewData.Path.EndsWith("ni.pdb"))
                                 continue;
                             if (codeViewData.Guid != e.ManagedPdbSignature)
@@ -2325,7 +2330,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                                 if (includeFullGraphs)
                                 {
                                     var writtenBlocks = new HashSet<int>(
-                                        methodData.InstrumentationData
+                                        methodData
+                                            .InstrumentationData
                                             .Where(
                                                 elem =>
                                                     elem.InstrumentationKind
@@ -2337,7 +2343,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                                     );
 
                                     var writtenEdges = new HashSet<(int, int)>(
-                                        methodData.InstrumentationData
+                                        methodData
+                                            .InstrumentationData
                                             .Where(
                                                 elem =>
                                                     elem.InstrumentationKind
@@ -2355,12 +2362,14 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                                     );
                                     Debug.Assert(
                                         writtenEdges.SetEquals(
-                                            sp.FlowGraph.BasicBlocks.SelectMany(
-                                                bb =>
-                                                    bb.Targets.Select(
-                                                        bbTar => (bb.Start, bbTar.Start)
-                                                    )
-                                            )
+                                            sp.FlowGraph
+                                                .BasicBlocks
+                                                .SelectMany(
+                                                    bb =>
+                                                        bb.Targets.Select(
+                                                            bbTar => (bb.Start, bbTar.Start)
+                                                        )
+                                                )
                                         )
                                     );
                                 }

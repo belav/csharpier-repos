@@ -137,9 +137,11 @@ namespace MonoTests.Microsoft.Build.Utilities
         {
             // If we instantiate with the *escaped* metadata, it's unescaped automatically
             var metadata = "foo@2x.png";
-            var escapedMetadata = global::Microsoft.Build.BuildEngine.Utilities.Escape(
-                "foo@2x.png"
-            );
+            var escapedMetadata = global::Microsoft
+                .Build
+                .BuildEngine
+                .Utilities
+                .Escape("foo@2x.png");
             var item = new TaskItem(escapedMetadata);
             item.SetMetadata("mine", escapedMetadata);
 

@@ -1550,14 +1550,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && source.TryGetInlineArrayElementField()
                     is { TypeWithAnnotations: var elementType }
                 && (
-                    destination.OriginalDefinition.Equals(
-                        Compilation.GetWellKnownType(WellKnownType.System_Span_T),
-                        TypeCompareKind.AllIgnoreOptions
-                    )
-                    || destination.OriginalDefinition.Equals(
-                        Compilation.GetWellKnownType(WellKnownType.System_ReadOnlySpan_T),
-                        TypeCompareKind.AllIgnoreOptions
-                    )
+                    destination
+                        .OriginalDefinition
+                        .Equals(
+                            Compilation.GetWellKnownType(WellKnownType.System_Span_T),
+                            TypeCompareKind.AllIgnoreOptions
+                        )
+                    || destination
+                        .OriginalDefinition
+                        .Equals(
+                            Compilation.GetWellKnownType(WellKnownType.System_ReadOnlySpan_T),
+                            TypeCompareKind.AllIgnoreOptions
+                        )
                 )
                 && HasIdentityConversionInternal(
                     ((NamedTypeSymbol)destination.OriginalDefinition).Construct(
@@ -2029,10 +2033,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (
                     invokeMethod.RefKind != refKind
-                    || !invokeMethod.ReturnType.Equals(
-                        returnType.Type,
-                        TypeCompareKind.AllIgnoreOptions
-                    )
+                    || !invokeMethod
+                        .ReturnType
+                        .Equals(returnType.Type, TypeCompareKind.AllIgnoreOptions)
                 )
                 {
                     return LambdaConversionResult.MismatchedReturnType;
@@ -2066,10 +2069,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 anonymousFunction.RefKind(p),
                                 compilation
                             )
-                            || !delegateParameters[p].Type.Equals(
-                                anonymousFunction.ParameterType(p),
-                                TypeCompareKind.AllIgnoreOptions
-                            )
+                            || !delegateParameters[p]
+                                .Type
+                                .Equals(
+                                    anonymousFunction.ParameterType(p),
+                                    TypeCompareKind.AllIgnoreOptions
+                                )
                         )
                         {
                             return LambdaConversionResult.MismatchedParameterType;
@@ -2314,9 +2319,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     )
                 )
                 {
-                    elementType = namedType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
-                        0
-                    ].Type;
+                    elementType = namedType
+                        .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0]
+                        .Type;
                     return true;
                 }
                 elementType = null;

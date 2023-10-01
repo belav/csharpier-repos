@@ -60,7 +60,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
                 {
                     ImmutableInterlocked.InterlockedCompareExchange(
                         ref _lazyTypeArguments,
-                        UnderlyingNamedTypeSymbol.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.GetPublicSymbols(),
+                        UnderlyingNamedTypeSymbol
+                            .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+                            .GetPublicSymbols(),
                         default
                     );
                 }
@@ -73,15 +75,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
         {
             get
             {
-                return UnderlyingNamedTypeSymbol.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.ToPublicAnnotations();
+                return UnderlyingNamedTypeSymbol
+                    .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+                    .ToPublicAnnotations();
             }
         }
 
         ImmutableArray<CustomModifier> INamedTypeSymbol.GetTypeArgumentCustomModifiers(int ordinal)
         {
-            return UnderlyingNamedTypeSymbol.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
-                ordinal
-            ].CustomModifiers;
+            return UnderlyingNamedTypeSymbol
+                .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[ordinal]
+                .CustomModifiers;
         }
 
         INamedTypeSymbol INamedTypeSymbol.OriginalDefinition

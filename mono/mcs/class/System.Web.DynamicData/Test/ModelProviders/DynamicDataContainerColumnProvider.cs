@@ -76,14 +76,17 @@ namespace MonoTests.ModelProviders
             TableProvider tableProvider = null;
             try
             {
-                tableProvider = Table.DataModel.Tables.First<TableProvider>(
-                    (TableProvider tp) =>
-                    {
-                        if (tp.Name == tableName)
-                            return true;
-                        return false;
-                    }
-                );
+                tableProvider = Table
+                    .DataModel
+                    .Tables
+                    .First<TableProvider>(
+                        (TableProvider tp) =>
+                        {
+                            if (tp.Name == tableName)
+                                return true;
+                            return false;
+                        }
+                    );
             }
             catch
             {
@@ -97,14 +100,16 @@ namespace MonoTests.ModelProviders
 
             try
             {
-                toColumn = tableProvider.Columns.First<ColumnProvider>(
-                    (ColumnProvider cp) =>
-                    {
-                        if (cp.Name == columnName)
-                            return true;
-                        return false;
-                    }
-                );
+                toColumn = tableProvider
+                    .Columns
+                    .First<ColumnProvider>(
+                        (ColumnProvider cp) =>
+                        {
+                            if (cp.Name == columnName)
+                                return true;
+                            return false;
+                        }
+                    );
             }
             catch
             {

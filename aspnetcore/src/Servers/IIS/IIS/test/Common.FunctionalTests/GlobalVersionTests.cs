@@ -255,8 +255,8 @@ public class GlobalVersionTests : IISFunctionalTestBase
                             element.Name == "add"
                             && element
                                 .Attribute("name")
-                                ?.Value.StartsWith("AspNetCoreModule", StringComparison.Ordinal)
-                                == true
+                                ?.Value
+                                .StartsWith("AspNetCoreModule", StringComparison.Ordinal) == true
                             && element.Attribute("image") != null
                     );
 
@@ -270,10 +270,9 @@ public class GlobalVersionTests : IISFunctionalTestBase
                 foreach (var element in moduleNodes)
                 {
                     var imageAttribute = element.Attribute("image");
-                    imageAttribute.Value = imageAttribute.Value.Replace(
-                        sourceDirectory.FullName,
-                        destinationDirectory.FullName
-                    );
+                    imageAttribute.Value = imageAttribute
+                        .Value
+                        .Replace(sourceDirectory.FullName, destinationDirectory.FullName);
                 }
                 CopyFiles(sourceDirectory, destinationDirectory);
             }

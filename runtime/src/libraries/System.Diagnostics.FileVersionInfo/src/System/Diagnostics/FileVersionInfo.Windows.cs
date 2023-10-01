@@ -12,25 +12,29 @@ namespace System.Diagnostics
         {
             _fileName = fileName;
 
-            uint infoSize = Interop.Version.GetFileVersionInfoSizeEx(
-                Interop.Version.FileVersionInfoType.FILE_VER_GET_LOCALISED,
-                _fileName,
-                out _
-            );
+            uint infoSize = Interop
+                .Version
+                .GetFileVersionInfoSizeEx(
+                    Interop.Version.FileVersionInfoType.FILE_VER_GET_LOCALISED,
+                    _fileName,
+                    out _
+                );
             if (infoSize != 0)
             {
                 void* memPtr = NativeMemory.Alloc(infoSize);
                 try
                 {
                     if (
-                        Interop.Version.GetFileVersionInfoEx(
-                            Interop.Version.FileVersionInfoType.FILE_VER_GET_LOCALISED
-                                | Interop.Version.FileVersionInfoType.FILE_VER_GET_NEUTRAL,
-                            _fileName,
-                            0U,
-                            infoSize,
-                            memPtr
-                        )
+                        Interop
+                            .Version
+                            .GetFileVersionInfoEx(
+                                Interop.Version.FileVersionInfoType.FILE_VER_GET_LOCALISED
+                                    | Interop.Version.FileVersionInfoType.FILE_VER_GET_NEUTRAL,
+                                _fileName,
+                                0U,
+                                infoSize,
+                                memPtr
+                            )
                     )
                     {
                         // Some dlls might not contain correct codepage information, in which case the lookup will fail. Explorer will take
@@ -88,12 +92,9 @@ namespace System.Diagnostics
         private static unsafe uint GetLanguageAndCodePage(void* memPtr)
         {
             if (
-                Interop.Version.VerQueryValue(
-                    memPtr,
-                    "\\VarFileInfo\\Translation",
-                    out void* memRef,
-                    out _
-                )
+                Interop
+                    .Version
+                    .VerQueryValue(memPtr, "\\VarFileInfo\\Translation", out void* memRef, out _)
             )
             {
                 return (uint)((*(ushort*)memRef << 16) + *((ushort*)memRef + 1));

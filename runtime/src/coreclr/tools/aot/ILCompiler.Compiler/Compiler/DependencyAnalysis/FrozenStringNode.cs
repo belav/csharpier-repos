@@ -43,9 +43,9 @@ namespace ILCompiler.DependencyAnalysis
 
         private static IEETypeNode GetEETypeNode(NodeFactory factory)
         {
-            DefType systemStringType = factory.TypeSystemContext.GetWellKnownType(
-                WellKnownType.String
-            );
+            DefType systemStringType = factory
+                .TypeSystemContext
+                .GetWellKnownType(WellKnownType.String);
 
             IEETypeNode stringSymbol = factory.ConstructedTypeSymbol(systemStringType);
 

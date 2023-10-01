@@ -106,12 +106,14 @@ namespace System.DirectoryServices.AccountManagement
                 //
                 Interop.OBJECT_ATTRIBUTES oa = default;
 
-                uint err = Interop.Advapi32.LsaOpenPolicy(
-                    target,
-                    ref oa,
-                    (int)Interop.Advapi32.PolicyRights.POLICY_LOOKUP_NAMES,
-                    out policyHandle
-                );
+                uint err = Interop
+                    .Advapi32
+                    .LsaOpenPolicy(
+                        target,
+                        ref oa,
+                        (int)Interop.Advapi32.PolicyRights.POLICY_LOOKUP_NAMES,
+                        out policyHandle
+                    );
                 if (err != 0)
                 {
                     policyHandle.Dispose();
@@ -137,13 +139,15 @@ namespace System.DirectoryServices.AccountManagement
                 // Translate the SIDs
                 //
 
-                err = Interop.Advapi32.LsaLookupSids(
-                    policyHandle,
-                    sidCount,
-                    pSids,
-                    out domainsHandle,
-                    out namesHandle
-                );
+                err = Interop
+                    .Advapi32
+                    .LsaLookupSids(
+                        policyHandle,
+                        sidCount,
+                        pSids,
+                        out domainsHandle,
+                        out namesHandle
+                    );
 
                 // Ignore error STATUS_SOME_NOT_MAPPED and STATUS_NONE_MAPPED
                 if (

@@ -91,9 +91,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
                 }
 
                 var modifiers = SyntaxFactory.TokenList(
-                    updatedProperty.Modifiers.Where(
-                        token => !token.IsKind(SyntaxKind.ReadOnlyKeyword)
-                    )
+                    updatedProperty
+                        .Modifiers
+                        .Where(token => !token.IsKind(SyntaxKind.ReadOnlyKeyword))
                 );
 
                 updatedProperty = updatedProperty
@@ -200,7 +200,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
         )
         {
             var variableDeclarator = (VariableDeclaratorSyntax)
-                await fieldSymbol.DeclaringSyntaxReferences[0]
+                await fieldSymbol
+                    .DeclaringSyntaxReferences[0]
                     .GetSyntaxAsync(cancellationToken)
                     .ConfigureAwait(false);
             return variableDeclarator.Initializer?.Value;

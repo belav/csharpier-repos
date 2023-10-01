@@ -578,7 +578,8 @@ namespace System.Net
             // Offload to a different thread to avoid blocking the caller during request submission.
             await Task.CompletedTask.ConfigureAwait(ConfigureAwaitOptions.ForceYielding);
 
-            return await Task<Stream>.Factory
+            return await Task<Stream>
+                .Factory
                 .FromAsync(
                     (callback, state) =>
                         ((WebRequest)state!).BeginGetRequestStream(callback, state),
@@ -593,7 +594,8 @@ namespace System.Net
             // Offload to a different thread to avoid blocking the caller during request submission.
             await Task.CompletedTask.ConfigureAwait(ConfigureAwaitOptions.ForceYielding);
 
-            return await Task<WebResponse>.Factory
+            return await Task<WebResponse>
+                .Factory
                 .FromAsync(
                     (callback, state) => ((WebRequest)state!).BeginGetResponse(callback, state),
                     iar => ((WebRequest)iar.AsyncState!).EndGetResponse(iar),

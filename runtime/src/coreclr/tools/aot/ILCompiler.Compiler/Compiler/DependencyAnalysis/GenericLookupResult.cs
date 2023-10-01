@@ -84,10 +84,12 @@ namespace ILCompiler.DependencyAnalysis
                 {
                     TypeDesc owningType = owningMethodDefinition.OwningType;
                     Debug.Assert(owningType.Instantiation.Length == TypeInstantiation.Length);
-                    concreteMethod = owningType.Context.GetMethodForInstantiatedType(
-                        owningMethodDefinition,
-                        ((MetadataType)owningType).MakeInstantiatedType(TypeInstantiation)
-                    );
+                    concreteMethod = owningType
+                        .Context
+                        .GetMethodForInstantiatedType(
+                            owningMethodDefinition,
+                            ((MetadataType)owningType).MakeInstantiatedType(TypeInstantiation)
+                        );
                 }
                 else
                 {
@@ -595,11 +597,13 @@ namespace ILCompiler.DependencyAnalysis
             bool getUnboxingStubNode =
                 _isUnboxingThunk && !canonMethod.IsCanonicalMethod(CanonicalFormKind.Universal);
 
-            return factory.NativeLayout.MethodEntrypointDictionarySlot(
-                _method,
-                _isUnboxingThunk,
-                factory.MethodEntrypoint(canonMethod, getUnboxingStubNode)
-            );
+            return factory
+                .NativeLayout
+                .MethodEntrypointDictionarySlot(
+                    _method,
+                    _isUnboxingThunk,
+                    factory.MethodEntrypoint(canonMethod, getUnboxingStubNode)
+                );
         }
 
         protected override int CompareToImpl(GenericLookupResult other, TypeSystemComparer comparer)
@@ -1148,11 +1152,9 @@ namespace ILCompiler.DependencyAnalysis
 
         public override NativeLayoutVertexNode TemplateDictionaryNode(NodeFactory factory)
         {
-            return factory.NativeLayout.ConstrainedMethodUse(
-                _constrainedMethod,
-                _constraintType,
-                _directCall
-            );
+            return factory
+                .NativeLayout
+                .ConstrainedMethodUse(_constrainedMethod, _constraintType, _directCall);
         }
 
         protected override int CompareToImpl(GenericLookupResult other, TypeSystemComparer comparer)
