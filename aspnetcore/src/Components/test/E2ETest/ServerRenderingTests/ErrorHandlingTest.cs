@@ -16,10 +16,17 @@ using OpenQA.Selenium;
 
 namespace Microsoft.AspNetCore.Components.E2ETests.ServerRenderingTests;
 
-public class ErrorHandlingTest(BrowserFixture browserFixture, BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>> serverFixture, ITestOutputHelper output)
-    : ServerTestBase<BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>>>(browserFixture, serverFixture, output)
+public class ErrorHandlingTest(
+    BrowserFixture browserFixture,
+    BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>> serverFixture,
+    ITestOutputHelper output
+)
+    : ServerTestBase<BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>>>(
+        browserFixture,
+        serverFixture,
+        output
+    )
 {
-
     [Fact]
     public async Task RendersExceptionFromComponent()
     {
@@ -30,7 +37,8 @@ public class ErrorHandlingTest(BrowserFixture browserFixture, BasicTestAppServer
         Assert.Collection(
             Browser.FindElements(By.CssSelector(".text-danger")),
             item => Assert.Equal("Error.", item.Text),
-            item => Assert.Equal("An error occurred while processing your request.", item.Text));
+            item => Assert.Equal("An error occurred while processing your request.", item.Text)
+        );
         Browser.Equal("False", () => Browser.FindElement(By.Id("is-interactive-server")).Text);
         Browser.Click(By.Id("call-blazor-start"));
         await Task.Delay(3000);

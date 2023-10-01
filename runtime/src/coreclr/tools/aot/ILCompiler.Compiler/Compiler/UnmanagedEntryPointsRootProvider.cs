@@ -33,19 +33,29 @@ namespace ILCompiler
                     if (ca.Parent.Kind != HandleKind.MethodDefinition)
                         continue;
 
-                    if (!reader.GetAttributeNamespaceAndName(caHandle, out StringHandle nsHandle, out StringHandle nameHandle))
+                    if (
+                        !reader.GetAttributeNamespaceAndName(
+                            caHandle,
+                            out StringHandle nsHandle,
+                            out StringHandle nameHandle
+                        )
+                    )
                         continue;
 
-                    if (comparer.Equals(nameHandle, "RuntimeExportAttribute")
-                        && comparer.Equals(nsHandle, "System.Runtime"))
+                    if (
+                        comparer.Equals(nameHandle, "RuntimeExportAttribute")
+                        && comparer.Equals(nsHandle, "System.Runtime")
+                    )
                     {
                         var method = (EcmaMethod)_module.GetMethod(ca.Parent);
                         if (method.GetRuntimeExportName() != null)
                             yield return method;
                     }
 
-                    if (comparer.Equals(nameHandle, "UnmanagedCallersOnlyAttribute")
-                        && comparer.Equals(nsHandle, "System.Runtime.InteropServices"))
+                    if (
+                        comparer.Equals(nameHandle, "UnmanagedCallersOnlyAttribute")
+                        && comparer.Equals(nsHandle, "System.Runtime.InteropServices")
+                    )
                     {
                         var method = (EcmaMethod)_module.GetMethod(ca.Parent);
                         if (method.GetUnmanagedCallersOnlyExportName() != null)
@@ -61,13 +71,22 @@ namespace ILCompiler
             {
                 if (ecmaMethod.IsUnmanagedCallersOnly)
                 {
-                    string unmanagedCallersOnlyExportName = ecmaMethod.GetUnmanagedCallersOnlyExportName();
-                    rootProvider.AddCompilationRoot((MethodDesc)ecmaMethod, "Native callable", unmanagedCallersOnlyExportName);
+                    string unmanagedCallersOnlyExportName =
+                        ecmaMethod.GetUnmanagedCallersOnlyExportName();
+                    rootProvider.AddCompilationRoot(
+                        (MethodDesc)ecmaMethod,
+                        "Native callable",
+                        unmanagedCallersOnlyExportName
+                    );
                 }
                 else
                 {
                     string runtimeExportName = ecmaMethod.GetRuntimeExportName();
-                    rootProvider.AddCompilationRoot((MethodDesc)ecmaMethod, "Runtime export", runtimeExportName);
+                    rootProvider.AddCompilationRoot(
+                        (MethodDesc)ecmaMethod,
+                        "Runtime export",
+                        runtimeExportName
+                    );
                 }
             }
         }

@@ -33,12 +33,12 @@ public class RequestHeadersTimeoutTests : LoggedTest
             {
                 await connection.TransportConnection.WaitForReadTask;
 
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    headers);
+                await connection.Send("GET / HTTP/1.1", headers);
 
                 // Min amount of time between requests that triggers a request headers timeout.
-                testContext.MockTimeProvider.Advance(RequestHeadersTimeout + Heartbeat.Interval + TimeSpan.FromTicks(1));
+                testContext.MockTimeProvider.Advance(
+                    RequestHeadersTimeout + Heartbeat.Interval + TimeSpan.FromTicks(1)
+                );
                 testContext.ConnectionManager.OnHeartbeat();
 
                 await ReceiveTimeoutResponse(connection, testContext);
@@ -57,19 +57,15 @@ public class RequestHeadersTimeoutTests : LoggedTest
             {
                 await connection.TransportConnection.WaitForReadTask;
 
-                await connection.Send(
-                    "POST / HTTP/1.1",
-                    "Host:",
-                    "Content-Length: 1",
-                    "",
-                    "");
+                await connection.Send("POST / HTTP/1.1", "Host:", "Content-Length: 1", "", "");
 
                 // Min amount of time between requests that triggers a request headers timeout.
-                testContext.MockTimeProvider.Advance(RequestHeadersTimeout + Heartbeat.Interval + TimeSpan.FromTicks(1));
+                testContext.MockTimeProvider.Advance(
+                    RequestHeadersTimeout + Heartbeat.Interval + TimeSpan.FromTicks(1)
+                );
                 testContext.ConnectionManager.OnHeartbeat();
 
-                await connection.Send(
-                    "a");
+                await connection.Send("a");
 
                 await ReceiveResponse(connection, testContext);
             }
@@ -92,7 +88,9 @@ public class RequestHeadersTimeoutTests : LoggedTest
                 await connection.Send(requestLine);
 
                 // Min amount of time between requests that triggers a request headers timeout.
-                testContext.MockTimeProvider.Advance(RequestHeadersTimeout + Heartbeat.Interval + TimeSpan.FromTicks(1));
+                testContext.MockTimeProvider.Advance(
+                    RequestHeadersTimeout + Heartbeat.Interval + TimeSpan.FromTicks(1)
+                );
                 testContext.ConnectionManager.OnHeartbeat();
 
                 await ReceiveTimeoutResponse(connection, testContext);
@@ -136,14 +134,20 @@ public class RequestHeadersTimeoutTests : LoggedTest
         context.ServerOptions.Limits.RequestHeadersTimeout = RequestHeadersTimeout;
         context.ServerOptions.Limits.MinRequestBodyDataRate = null;
 
-        return new TestServer(async httpContext =>
-        {
-            await httpContext.Request.Body.ReadAsync(new byte[1], 0, 1);
-            await httpContext.Response.WriteAsync("hello, world");
-        }, context);
+        return new TestServer(
+            async httpContext =>
+            {
+                await httpContext.Request.Body.ReadAsync(new byte[1], 0, 1);
+                await httpContext.Response.WriteAsync("hello, world");
+            },
+            context
+        );
     }
 
-    private async Task ReceiveResponse(InMemoryConnection connection, TestServiceContext testContext)
+    private async Task ReceiveResponse(
+        InMemoryConnection connection,
+        TestServiceContext testContext
+    )
     {
         await connection.Receive(
             "HTTP/1.1 200 OK",
@@ -154,10 +158,14 @@ public class RequestHeadersTimeoutTests : LoggedTest
             "hello, world",
             "0",
             "",
-            "");
+            ""
+        );
     }
 
-    private async Task ReceiveTimeoutResponse(InMemoryConnection connection, TestServiceContext testContext)
+    private async Task ReceiveTimeoutResponse(
+        InMemoryConnection connection,
+        TestServiceContext testContext
+    )
     {
         await connection.Receive(
             "HTTP/1.1 408 Request Timeout",
@@ -165,6 +173,7 @@ public class RequestHeadersTimeoutTests : LoggedTest
             "Connection: close",
             $"Date: {testContext.DateHeaderValue}",
             "",
-            "");
+            ""
+        );
     }
 }

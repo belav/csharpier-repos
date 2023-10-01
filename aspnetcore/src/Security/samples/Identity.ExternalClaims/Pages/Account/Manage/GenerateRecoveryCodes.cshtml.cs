@@ -20,7 +20,8 @@ public class GenerateRecoveryCodesModel : PageModel
 
     public GenerateRecoveryCodesModel(
         UserManager<ApplicationUser> userManager,
-        ILogger<GenerateRecoveryCodesModel> logger)
+        ILogger<GenerateRecoveryCodesModel> logger
+    )
     {
         _userManager = userManager;
         _logger = logger;
@@ -33,18 +34,25 @@ public class GenerateRecoveryCodesModel : PageModel
         var user = await _userManager.GetUserAsync(User);
         if (user == null)
         {
-            throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            throw new ApplicationException(
+                $"Unable to load user with ID '{_userManager.GetUserId(User)}'."
+            );
         }
 
         if (!user.TwoFactorEnabled)
         {
-            throw new ApplicationException($"Cannot generate recovery codes for user with ID '{user.Id}' as they do not have 2FA enabled.");
+            throw new ApplicationException(
+                $"Cannot generate recovery codes for user with ID '{user.Id}' as they do not have 2FA enabled."
+            );
         }
 
         var recoveryCodes = await _userManager.GenerateNewTwoFactorRecoveryCodesAsync(user, 10);
         RecoveryCodes = recoveryCodes.ToArray();
 
-        _logger.LogInformation("User with ID '{UserId}' has generated new 2FA recovery codes.", user.Id);
+        _logger.LogInformation(
+            "User with ID '{UserId}' has generated new 2FA recovery codes.",
+            user.Id
+        );
 
         return Page();
     }

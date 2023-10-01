@@ -6,7 +6,6 @@ namespace System.ServiceModel.Configuration
 {
     using System.ServiceModel.Description;
 
-    public class WebScriptEndpointCollectionElement : StandardEndpointCollectionElement<WebScriptEndpoint, WebScriptEndpointElement>
-    {
-    }
+    public class WebScriptEndpointCollectionElement
+        : StandardEndpointCollectionElement<WebScriptEndpoint, WebScriptEndpointElement> { }
 }

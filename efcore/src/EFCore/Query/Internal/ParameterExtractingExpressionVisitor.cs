@@ -23,7 +23,8 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
     private readonly EvaluatableExpressionFindingExpressionVisitor _evaluatableExpressionFindingExpressionVisitor;
     private readonly ContextParameterReplacingExpressionVisitor _contextParameterReplacingExpressionVisitor;
 
-    private readonly Dictionary<Expression, EvaluatedValues> _evaluatedValues = new(ExpressionEqualityComparer.Instance);
+    private readonly Dictionary<Expression, EvaluatedValues> _evaluatedValues =
+        new(ExpressionEqualityComparer.Instance);
 
     private IDictionary<Expression, bool> _evaluatableExpressions;
     private IQueryProvider? _currentQueryProvider;
@@ -41,10 +42,15 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
         IModel model,
         IDiagnosticsLogger<DbLoggerCategory.Query> logger,
         bool parameterize,
-        bool generateContextAccessors)
+        bool generateContextAccessors
+    )
     {
-        _evaluatableExpressionFindingExpressionVisitor
-            = new EvaluatableExpressionFindingExpressionVisitor(evaluatableExpressionFilter, model, parameterize);
+        _evaluatableExpressionFindingExpressionVisitor =
+            new EvaluatableExpressionFindingExpressionVisitor(
+                evaluatableExpressionFilter,
+                model,
+                parameterize
+            );
         _parameterValues = parameterValues;
         _logger = logger;
         _parameterize = parameterize;
@@ -62,8 +68,8 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual Expression ExtractParameters(Expression expression)
-        => ExtractParameters(expression, clearEvaluatedValues: true);
+    public virtual Expression ExtractParameters(Expression expression) =>
+        ExtractParameters(expression, clearEvaluatedValues: true);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -104,9 +110,11 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
             return null;
         }
 
-        if (_evaluatableExpressions.TryGetValue(expression, out var generateParameter)
+        if (
+            _evaluatableExpressions.TryGetValue(expression, out var generateParameter)
             && !PreserveInitializationConstant(expression, generateParameter)
-            && !PreserveConvertNode(expression))
+            && !PreserveConvertNode(expression)
+        )
         {
             return Evaluate(expression, _parameterize && generateParameter);
         }
@@ -114,29 +122,41 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
         return base.Visit(expression);
     }
 
-    private static bool PreserveInitializationConstant(Expression expression, bool generateParameter)
-        => !generateParameter && expression is NewExpression or MemberInitExpression;
+    private static bool PreserveInitializationConstant(
+        Expression expression,
+        bool generateParameter
+    ) => !generateParameter && expression is NewExpression or MemberInitExpression;
 
     private bool PreserveConvertNode(Expression expression)
     {
-        if (expression is UnaryExpression unaryExpression
-            && (unaryExpression.NodeType == ExpressionType.Convert
-                || unaryExpression.NodeType == ExpressionType.ConvertChecked))
+        if (
+            expression is UnaryExpression unaryExpression
+            && (
+                unaryExpression.NodeType == ExpressionType.Convert
+                || unaryExpression.NodeType == ExpressionType.ConvertChecked
+            )
+        )
         {
-            if (unaryExpression.Type == typeof(object)
+            if (
+                unaryExpression.Type == typeof(object)
                 || unaryExpression.Type == typeof(Enum)
-                || unaryExpression.Operand.Type.UnwrapNullableType().IsEnum)
+                || unaryExpression.Operand.Type.UnwrapNullableType().IsEnum
+            )
             {
                 return true;
             }
 
             var innerType = unaryExpression.Operand.Type.UnwrapNullableType();
-            if (unaryExpression.Type.UnwrapNullableType() == typeof(int)
-                && (innerType == typeof(byte)
+            if (
+                unaryExpression.Type.UnwrapNullableType() == typeof(int)
+                && (
+                    innerType == typeof(byte)
                     || innerType == typeof(sbyte)
                     || innerType == typeof(char)
                     || innerType == typeof(short)
-                    || innerType == typeof(ushort)))
+                    || innerType == typeof(ushort)
+                )
+            )
             {
                 return true;
             }
@@ -155,7 +175,8 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
     /// </summary>
     protected override Expression VisitConditional(ConditionalExpression conditionalExpression)
     {
-        var newTestExpression = TryGetConstantValue(conditionalExpression.Test) ?? Visit(conditionalExpression.Test);
+        var newTestExpression =
+            TryGetConstantValue(conditionalExpression.Test) ?? Visit(conditionalExpression.Test);
 
         if (newTestExpression is ConstantExpression { Value: bool constantTestValue })
         {
@@ -167,7 +188,8 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
         return conditionalExpression.Update(
             newTestExpression,
             Visit(conditionalExpression.IfTrue),
-            Visit(conditionalExpression.IfFalse));
+            Visit(conditionalExpression.IfFalse)
+        );
     }
 
     /// <summary>
@@ -182,7 +204,8 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
         {
             case ExpressionType.Coalesce:
             {
-                var newLeftExpression = TryGetConstantValue(binaryExpression.Left) ?? Visit(binaryExpression.Left);
+                var newLeftExpression =
+                    TryGetConstantValue(binaryExpression.Left) ?? Visit(binaryExpression.Left);
                 if (newLeftExpression is ConstantExpression constantLeftExpression)
                 {
                     return constantLeftExpression.Value == null
@@ -193,22 +216,29 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
                 return binaryExpression.Update(
                     newLeftExpression,
                     binaryExpression.Conversion,
-                    Visit(binaryExpression.Right));
+                    Visit(binaryExpression.Right)
+                );
             }
 
             case ExpressionType.AndAlso:
             case ExpressionType.OrElse:
             {
-                var newLeftExpression = TryGetConstantValue(binaryExpression.Left) ?? Visit(binaryExpression.Left);
+                var newLeftExpression =
+                    TryGetConstantValue(binaryExpression.Left) ?? Visit(binaryExpression.Left);
                 if (ShortCircuitLogicalExpression(newLeftExpression, binaryExpression.NodeType))
                 {
                     return newLeftExpression;
                 }
 
-                var newRightExpression = TryGetConstantValue(binaryExpression.Right) ?? Visit(binaryExpression.Right);
+                var newRightExpression =
+                    TryGetConstantValue(binaryExpression.Right) ?? Visit(binaryExpression.Right);
                 return ShortCircuitLogicalExpression(newRightExpression, binaryExpression.NodeType)
                     ? newRightExpression
-                    : binaryExpression.Update(newLeftExpression, binaryExpression.Conversion, newRightExpression);
+                    : binaryExpression.Update(
+                        newLeftExpression,
+                        binaryExpression.Conversion,
+                        newRightExpression
+                    );
             }
 
             default:
@@ -231,10 +261,15 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
         return null;
     }
 
-    private static bool ShortCircuitLogicalExpression(Expression expression, ExpressionType nodeType)
-        => expression is ConstantExpression { Value: bool constantValue }
-            && ((constantValue && nodeType == ExpressionType.OrElse)
-                || (!constantValue && nodeType == ExpressionType.AndAlso));
+    private static bool ShortCircuitLogicalExpression(
+        Expression expression,
+        ExpressionType nodeType
+    ) =>
+        expression is ConstantExpression { Value: bool constantValue }
+        && (
+            (constantValue && nodeType == ExpressionType.OrElse)
+            || (!constantValue && nodeType == ExpressionType.AndAlso)
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -281,9 +316,10 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
             // The _generateContextAccessors condition allows us to reuse parameter expressions evaluated in query filters.
             // In principle, _generateContextAccessors is orthogonal to query filters, but in practice it is only used in the
             // nav expansion query filters (and defining query). If this changes in future, they would need to be decoupled.
-            var existingExpression = generateParameter || _generateContextAccessors
-                ? cachedValue.Parameter
-                : cachedValue.Constant;
+            var existingExpression =
+                generateParameter || _generateContextAccessors
+                    ? cachedValue.Parameter
+                    : cachedValue.Constant;
 
             if (existingExpression != null)
             {
@@ -296,7 +332,11 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
         else
         {
             parameterValue = GetValue(expression, out parameterName);
-            cachedValue = new EvaluatedValues { CandidateParameterName = parameterName, Value = parameterValue };
+            cachedValue = new EvaluatedValues
+            {
+                CandidateParameterName = parameterName,
+                Value = parameterValue
+            };
             _evaluatedValues[expression] = cachedValue;
         }
 
@@ -329,16 +369,15 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
             parameterName = QueryFilterPrefix + "__p";
         }
 
-        var compilerPrefixIndex
-            = parameterName.LastIndexOf(">", StringComparison.Ordinal);
+        var compilerPrefixIndex = parameterName.LastIndexOf(">", StringComparison.Ordinal);
 
         if (compilerPrefixIndex != -1)
         {
             parameterName = parameterName[(compilerPrefixIndex + 1)..];
         }
 
-        parameterName
-            = QueryCompilationContext.QueryParameterPrefix
+        parameterName =
+            QueryCompilationContext.QueryParameterPrefix
             + parameterName
             + "_"
             + _parameterValues.ParameterValues.Count;
@@ -365,17 +404,19 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
         public ParameterExpression ContextParameterExpression { get; }
 
         [return: NotNullIfNotNull("expression")]
-        public override Expression? Visit(Expression? expression)
-            => expression?.Type != typeof(object)
-                && expression?.Type.IsAssignableFrom(_contextType) == true
-                    ? ContextParameterExpression
-                    : base.Visit(expression);
+        public override Expression? Visit(Expression? expression) =>
+            expression?.Type != typeof(object)
+            && expression?.Type.IsAssignableFrom(_contextType) == true
+                ? ContextParameterExpression
+                : base.Visit(expression);
     }
 
     private static Expression RemoveConvert(Expression expression)
     {
-        if (expression is UnaryExpression unaryExpression
-            && expression.NodeType is ExpressionType.Convert or ExpressionType.ConvertChecked)
+        if (
+            expression is UnaryExpression unaryExpression
+            && expression.NodeType is ExpressionType.Convert or ExpressionType.ConvertChecked
+        )
         {
             return RemoveConvert(unaryExpression.Operand);
         }
@@ -403,14 +444,18 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
                     return newExpression;
                 }
 
-                parameterName = QueryFilterPrefix
-                    + (RemoveConvert(expression) is MemberExpression memberExpression
-                        ? ("__" + memberExpression.Member.Name)
-                        : "");
+                parameterName =
+                    QueryFilterPrefix
+                    + (
+                        RemoveConvert(expression) is MemberExpression memberExpression
+                            ? ("__" + memberExpression.Member.Name)
+                            : ""
+                    );
 
                 return Expression.Lambda(
                     newExpression,
-                    _contextParameterReplacingExpressionVisitor.ContextParameterExpression);
+                    _contextParameterReplacingExpressionVisitor.ContextParameterExpression
+                );
             }
         }
 
@@ -423,11 +468,14 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
                     switch (memberExpression.Member)
                     {
                         case FieldInfo fieldInfo:
-                            parameterName = (parameterName != null ? parameterName + "_" : "") + fieldInfo.Name;
+                            parameterName =
+                                (parameterName != null ? parameterName + "_" : "") + fieldInfo.Name;
                             return fieldInfo.GetValue(instanceValue);
 
                         case PropertyInfo propertyInfo:
-                            parameterName = (parameterName != null ? parameterName + "_" : "") + propertyInfo.Name;
+                            parameterName =
+                                (parameterName != null ? parameterName + "_" : "")
+                                + propertyInfo.Name;
                             return propertyInfo.GetValue(instanceValue);
                     }
                 }
@@ -445,15 +493,18 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
                 parameterName = methodCallExpression.Method.Name;
                 break;
 
-            case UnaryExpression { NodeType: ExpressionType.Convert or ExpressionType.ConvertChecked } unaryExpression
+            case UnaryExpression
+            {
+                NodeType: ExpressionType.Convert or ExpressionType.ConvertChecked
+            } unaryExpression
                 when (unaryExpression.Type.UnwrapNullableType() == unaryExpression.Operand.Type):
                 return GetValue(unaryExpression.Operand, out parameterName);
         }
 
         try
         {
-            return Expression.Lambda<Func<object>>(
-                    Expression.Convert(expression, typeof(object)))
+            return Expression
+                .Lambda<Func<object>>(Expression.Convert(expression, typeof(object)))
                 .Compile(preferInterpretation: true)
                 .Invoke();
         }
@@ -463,14 +514,16 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
                 _logger.ShouldLogSensitiveData()
                     ? CoreStrings.ExpressionParameterizationExceptionSensitive(expression)
                     : CoreStrings.ExpressionParameterizationException,
-                exception);
+                exception
+            );
         }
     }
 
     private sealed class EvaluatableExpressionFindingExpressionVisitor : ExpressionVisitor
     {
         private readonly IEvaluatableExpressionFilter _evaluatableExpressionFilter;
-        private readonly ISet<ParameterExpression> _allowedParameters = new HashSet<ParameterExpression>();
+        private readonly ISet<ParameterExpression> _allowedParameters =
+            new HashSet<ParameterExpression>();
         private readonly IModel _model;
         private readonly bool _parameterize;
 
@@ -482,7 +535,8 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
         public EvaluatableExpressionFindingExpressionVisitor(
             IEvaluatableExpressionFilter evaluatableExpressionFilter,
             IModel model,
-            bool parameterize)
+            bool parameterize
+        )
         {
             _evaluatableExpressionFilter = evaluatableExpressionFilter;
             _model = model;
@@ -515,7 +569,8 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
             var parentEvaluatable = _evaluatable;
             var parentContainsClosure = _containsClosure;
 
-            _evaluatable = IsEvaluatableNodeType(expression, out var preferNoEvaluation)
+            _evaluatable =
+                IsEvaluatableNodeType(expression, out var preferNoEvaluation)
                 // Extension point to disable funcletization
                 && _evaluatableExpressionFilter.IsEvaluatableExpression(expression, _model)
                 // Don't evaluate QueryableMethods if in compiled query
@@ -589,11 +644,13 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
             var parameterInfos = methodCallExpression.Method.GetParameters();
             for (var i = 0; i < methodCallExpression.Arguments.Count; i++)
             {
-                if (i == 1
+                if (
+                    i == 1
                     && _evaluatableExpressions.ContainsKey(methodCallExpression.Arguments[0])
                     && methodCallExpression.Method.DeclaringType == typeof(Enumerable)
                     && methodCallExpression.Method.Name == nameof(Enumerable.Select)
-                    && methodCallExpression.Arguments[1] is LambdaExpression lambdaExpression)
+                    && methodCallExpression.Arguments[1] is LambdaExpression lambdaExpression
+                )
                 {
                     // Allow evaluation Enumerable.Select operation
                     foreach (var parameter in lambdaExpression.Parameters)
@@ -604,9 +661,13 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
 
                 Visit(methodCallExpression.Arguments[i]);
 
-                if (_evaluatableExpressions.ContainsKey(methodCallExpression.Arguments[i])
-                    && (parameterInfos[i].GetCustomAttribute<NotParameterizedAttribute>() != null
-                        || _model.IsIndexerMethod(methodCallExpression.Method)))
+                if (
+                    _evaluatableExpressions.ContainsKey(methodCallExpression.Arguments[i])
+                    && (
+                        parameterInfos[i].GetCustomAttribute<NotParameterizedAttribute>() != null
+                        || _model.IsIndexerMethod(methodCallExpression.Method)
+                    )
+                )
                 {
                     _evaluatableExpressions[methodCallExpression.Arguments[i]] = false;
                 }
@@ -617,7 +678,8 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
 
         protected override Expression VisitMember(MemberExpression memberExpression)
         {
-            _containsClosure = memberExpression.Expression != null
+            _containsClosure =
+                memberExpression.Expression != null
                 || !(memberExpression.Member is FieldInfo { IsInitOnly: true });
             return base.VisitMember(memberExpression);
         }
@@ -634,16 +696,25 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
             _evaluatable = !(constantExpression.Value is IQueryable);
 
 #pragma warning disable RCS1096 // Use bitwise operation instead of calling 'HasFlag'.
-            _containsClosure
-                = (constantExpression.Type.Attributes.HasFlag(TypeAttributes.NestedPrivate)
-                    && Attribute.IsDefined(constantExpression.Type, typeof(CompilerGeneratedAttribute), inherit: true)) // Closure
+            _containsClosure =
+                (
+                    constantExpression.Type.Attributes.HasFlag(TypeAttributes.NestedPrivate)
+                    && Attribute.IsDefined(
+                        constantExpression.Type,
+                        typeof(CompilerGeneratedAttribute),
+                        inherit: true
+                    )
+                ) // Closure
                 || constantExpression.Type == typeof(ValueBuffer); // Find method
 #pragma warning restore RCS1096 // Use bitwise operation instead of calling 'HasFlag'.
 
             return base.VisitConstant(constantExpression);
         }
 
-        private static bool IsEvaluatableNodeType(Expression expression, out bool preferNoEvaluation)
+        private static bool IsEvaluatableNodeType(
+            Expression expression,
+            out bool preferNoEvaluation
+        )
         {
             switch (expression.NodeType)
             {
@@ -653,7 +724,11 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
 
                 case ExpressionType.Extension:
                     preferNoEvaluation = false;
-                    return expression.CanReduce && IsEvaluatableNodeType(expression.ReduceAndCheck(), out preferNoEvaluation);
+                    return expression.CanReduce
+                        && IsEvaluatableNodeType(
+                            expression.ReduceAndCheck(),
+                            out preferNoEvaluation
+                        );
 
                 default:
                     preferNoEvaluation = false;
@@ -661,9 +736,9 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
             }
         }
 
-        private static bool IsQueryableMethod(Expression expression)
-            => expression is MethodCallExpression methodCallExpression
-                && methodCallExpression.Method.DeclaringType == typeof(Queryable);
+        private static bool IsQueryableMethod(Expression expression) =>
+            expression is MethodCallExpression methodCallExpression
+            && methodCallExpression.Method.DeclaringType == typeof(Queryable);
     }
 
     private sealed class EvaluatedValues

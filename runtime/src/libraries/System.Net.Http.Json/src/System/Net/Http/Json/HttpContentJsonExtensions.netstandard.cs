@@ -10,7 +10,10 @@ namespace System.Net.Http.Json
 {
     public static partial class HttpContentJsonExtensions
     {
-        private static Task<Stream> ReadHttpContentStreamAsync(HttpContent content, CancellationToken cancellationToken)
+        private static Task<Stream> ReadHttpContentStreamAsync(
+            HttpContent content,
+            CancellationToken cancellationToken
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
@@ -21,7 +24,10 @@ namespace System.Net.Http.Json
             return content.ReadAsStreamAsync();
         }
 
-        private static TranscodingReadStream GetTranscodingStream(Stream contentStream, Encoding sourceEncoding)
+        private static TranscodingReadStream GetTranscodingStream(
+            Stream contentStream,
+            Encoding sourceEncoding
+        )
         {
             return new TranscodingReadStream(contentStream, sourceEncoding);
         }

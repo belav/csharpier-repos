@@ -19,13 +19,13 @@ namespace System.CommandLine.Parsing
         /// </summary>
         /// <see cref="CliCommand"/>
         Command,
-        
+
         /// <summary>
         /// An option token.
         /// </summary>
         /// <see cref="CliOption"/>
         Option,
-        
+
         /// <summary>
         /// A double dash (<c>--</c>) token, which changes the meaning of subsequent tokens.
         /// </summary>

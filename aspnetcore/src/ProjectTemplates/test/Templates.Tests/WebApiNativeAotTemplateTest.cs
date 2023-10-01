@@ -31,17 +31,26 @@ public class WebApiNativeAotTemplateTest : LoggedTest
     }
 
     [ConditionalFact]
-    [SkipOnHelix("https://github.com/dotnet/aspnetcore/issues/47478", Queues = HelixConstants.NativeAotNotSupportedHelixQueues)]
+    [SkipOnHelix(
+        "https://github.com/dotnet/aspnetcore/issues/47478",
+        Queues = HelixConstants.NativeAotNotSupportedHelixQueues
+    )]
     public async Task WebApiNativeAotTemplateCSharp()
     {
         await WebApiNativeAotTemplateCore(languageOverride: null);
     }
 
     [ConditionalFact]
-    [SkipOnHelix("https://github.com/dotnet/aspnetcore/issues/47478", Queues = HelixConstants.NativeAotNotSupportedHelixQueues)]
+    [SkipOnHelix(
+        "https://github.com/dotnet/aspnetcore/issues/47478",
+        Queues = HelixConstants.NativeAotNotSupportedHelixQueues
+    )]
     public async Task WebApiNativeAotTemplateProgramMainCSharp()
     {
-        await WebApiNativeAotTemplateCore(languageOverride: null, args: new[] { ArgConstants.UseProgramMain });
+        await WebApiNativeAotTemplateCore(
+            languageOverride: null,
+            args: new[] { ArgConstants.UseProgramMain }
+        );
     }
 
     private async Task WebApiNativeAotTemplateCore(string languageOverride, string[] args = null)
@@ -75,16 +84,31 @@ public class WebApiNativeAotTemplateTest : LoggedTest
         using (var aspNetProcess = project.StartBuiltProjectAsync(noHttps: true))
         {
             Assert.False(
-               aspNetProcess.Process.HasExited,
-               ErrorMessages.GetFailedProcessMessageOrEmpty("Run built project", project, aspNetProcess.Process));
+                aspNetProcess.Process.HasExited,
+                ErrorMessages.GetFailedProcessMessageOrEmpty(
+                    "Run built project",
+                    project,
+                    aspNetProcess.Process
+                )
+            );
             await AssertEndpoints(aspNetProcess);
         }
 
-        using (var aspNetProcess = project.StartPublishedProjectAsync(noHttps: true, usePublishedAppHost: true))
+        using (
+            var aspNetProcess = project.StartPublishedProjectAsync(
+                noHttps: true,
+                usePublishedAppHost: true
+            )
+        )
         {
             Assert.False(
                 aspNetProcess.Process.HasExited,
-                ErrorMessages.GetFailedProcessMessageOrEmpty("Run published project", project, aspNetProcess.Process));
+                ErrorMessages.GetFailedProcessMessageOrEmpty(
+                    "Run published project",
+                    project,
+                    aspNetProcess.Process
+                )
+            );
 
             await AssertEndpoints(aspNetProcess);
         }

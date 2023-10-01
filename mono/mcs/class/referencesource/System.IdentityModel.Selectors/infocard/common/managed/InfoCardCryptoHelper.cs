@@ -8,12 +8,11 @@ namespace Microsoft.InfoCards
     using System.Security.Cryptography;
     using System.Security.Cryptography.Xml;
 
-    // copied from IdentityModel\CryptoHelper.cs and they need to be kept in sync.  After V1, we need to rethink how we can have 
+    // copied from IdentityModel\CryptoHelper.cs and they need to be kept in sync.  After V1, we need to rethink how we can have
     // a single place to ask this question.  Perhaps even add it as an extensibility
 
     internal static class InfoCardCryptoHelper
     {
-
         internal static bool IsAsymmetricAlgorithm(string algorithm)
         {
             switch (algorithm)
@@ -50,6 +49,5 @@ namespace Microsoft.InfoCards
                     return false;
             }
         }
-
     }
 }

@@ -5,9 +5,6 @@ namespace Microsoft.Extensions.DependencyInjection.Tests.Fakes
 {
     public class SelfCircularDependencyWithInterface : ISelfCircularDependencyWithInterface
     {
-        public SelfCircularDependencyWithInterface(ISelfCircularDependencyWithInterface self)
-        {
-
-        }
+        public SelfCircularDependencyWithInterface(ISelfCircularDependencyWithInterface self) { }
     }
 }

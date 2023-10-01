@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
 {
     using VerifyCS = CSharpCodeFixVerifier<
         EmptyDiagnosticAnalyzer,
-        CSharpMakeMemberRequiredCodeFixProvider>;
+        CSharpMakeMemberRequiredCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsMakeMemberRequired)]
     public sealed class MakeMemberRequiredTests
@@ -124,8 +125,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
         [WorkItem("https://github.com/dotnet/roslyn/issues/68478")]
         public async Task SimpleSetPropertyMissingRequiredAttribute()
         {
-            var code =
-                """
+            var code = """
                 #nullable enable
                 class MyClass
                 {
@@ -213,7 +213,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
 
         [Theory]
         [MemberData(nameof(MemberAccessibilityModifierCombinationsWhereShouldProvideFix))]
-        public async Task TestEffectivePropertyAccessibilityWhereShouldProvideFix(string outerClassAccessibility, string containingTypeAccessibility, string propertyAccessibility)
+        public async Task TestEffectivePropertyAccessibilityWhereShouldProvideFix(
+            string outerClassAccessibility,
+            string containingTypeAccessibility,
+            string propertyAccessibility
+        )
         {
             await new VerifyCS.Test
             {
@@ -246,7 +250,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
 
         [Theory]
         [MemberData(nameof(MemberAccessibilityModifierCombinationsWhereShouldNotProvideFix))]
-        public async Task TestEffectivePropertyAccessibilityWhereShouldNotProvideFix(string outerClassAccessibility, string containingTypeAccessibility, string propertyAccessibility)
+        public async Task TestEffectivePropertyAccessibilityWhereShouldNotProvideFix(
+            string outerClassAccessibility,
+            string containingTypeAccessibility,
+            string propertyAccessibility
+        )
         {
             await new VerifyCS.Test
             {
@@ -268,7 +276,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
 
         [Theory]
         [MemberData(nameof(AccessorAccessibilityModifierCombinationsWhereShouldProvideFix))]
-        public async Task TestSetAccessorAccessibilityWhereShouldProvideFix(string containingTypeAccessibility, string setAccessorAccessibility)
+        public async Task TestSetAccessorAccessibilityWhereShouldProvideFix(
+            string containingTypeAccessibility,
+            string setAccessorAccessibility
+        )
         {
             await new VerifyCS.Test
             {
@@ -295,7 +306,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
 
         [Theory]
         [MemberData(nameof(AccessorAccessibilityModifierCombinationsWhereShouldNotProvideFix))]
-        public async Task TestSetAccessorAccessibilityWhereShouldNotProvideFix(string containingTypeAccessibility, string setAccessorAccessibility)
+        public async Task TestSetAccessorAccessibilityWhereShouldNotProvideFix(
+            string containingTypeAccessibility,
+            string setAccessorAccessibility
+        )
         {
             await new VerifyCS.Test
             {
@@ -314,7 +328,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
 
         [Theory]
         [MemberData(nameof(AccessorAccessibilityModifierCombinationsWhereShouldProvideFix))]
-        public async Task TestInitAccessorAccessibilityWhereShouldProvideFix(string containingTypeAccessibility, string setAccessorAccessibility)
+        public async Task TestInitAccessorAccessibilityWhereShouldProvideFix(
+            string containingTypeAccessibility,
+            string setAccessorAccessibility
+        )
         {
             await new VerifyCS.Test
             {
@@ -341,7 +358,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
 
         [Theory]
         [MemberData(nameof(AccessorAccessibilityModifierCombinationsWhereShouldNotProvideFix))]
-        public async Task TestInitAccessorAccessibilityWhereShouldNotProvideFix(string containingTypeAccessibility, string setAccessorAccessibility)
+        public async Task TestInitAccessorAccessibilityWhereShouldNotProvideFix(
+            string containingTypeAccessibility,
+            string setAccessorAccessibility
+        )
         {
             await new VerifyCS.Test
             {
@@ -386,7 +406,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
 
         [Theory]
         [MemberData(nameof(MemberAccessibilityModifierCombinationsWhereShouldProvideFix))]
-        public async Task TestEffectiveFieldAccessibilityWhereShouldProvideFix(string outerClassAccessibility, string containingTypeAccessibility, string fieldAccessibility)
+        public async Task TestEffectiveFieldAccessibilityWhereShouldProvideFix(
+            string outerClassAccessibility,
+            string containingTypeAccessibility,
+            string fieldAccessibility
+        )
         {
             await new VerifyCS.Test
             {
@@ -419,7 +443,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
 
         [Theory]
         [MemberData(nameof(MemberAccessibilityModifierCombinationsWhereShouldNotProvideFix))]
-        public async Task TestEffectiveFieldAccessibilityWhereShouldNotProvideFix(string outerClassAccessibility, string containingTypeAccessibility, string fieldAccessibility)
+        public async Task TestEffectiveFieldAccessibilityWhereShouldNotProvideFix(
+            string outerClassAccessibility,
+            string containingTypeAccessibility,
+            string fieldAccessibility
+        )
         {
             await new VerifyCS.Test
             {

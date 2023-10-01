@@ -9,22 +9,34 @@ namespace Microsoft.AspNetCore.Hosting;
 internal static class HostingEnvironmentExtensions
 {
 #pragma warning disable CS0618 // Type or member is obsolete
-    internal static void Initialize(this IHostingEnvironment hostingEnvironment, string contentRootPath, WebHostOptions options)
+    internal static void Initialize(
+        this IHostingEnvironment hostingEnvironment,
+        string contentRootPath,
+        WebHostOptions options
+    )
 #pragma warning restore CS0618 // Type or member is obsolete
     {
         ArgumentNullException.ThrowIfNull(options);
         if (string.IsNullOrEmpty(contentRootPath))
         {
-            throw new ArgumentException("A valid non-empty content root must be provided.", nameof(contentRootPath));
+            throw new ArgumentException(
+                "A valid non-empty content root must be provided.",
+                nameof(contentRootPath)
+            );
         }
         if (!Directory.Exists(contentRootPath))
         {
-            throw new ArgumentException($"The content root '{contentRootPath}' does not exist.", nameof(contentRootPath));
+            throw new ArgumentException(
+                $"The content root '{contentRootPath}' does not exist.",
+                nameof(contentRootPath)
+            );
         }
 
         hostingEnvironment.ApplicationName = options.ApplicationName;
         hostingEnvironment.ContentRootPath = contentRootPath;
-        hostingEnvironment.ContentRootFileProvider = new PhysicalFileProvider(hostingEnvironment.ContentRootPath);
+        hostingEnvironment.ContentRootFileProvider = new PhysicalFileProvider(
+            hostingEnvironment.ContentRootPath
+        );
 
         var webRoot = options.WebRoot;
         if (webRoot == null)
@@ -38,7 +50,10 @@ internal static class HostingEnvironmentExtensions
         }
         else
         {
-            hostingEnvironment.WebRootPath = Path.Combine(hostingEnvironment.ContentRootPath, webRoot);
+            hostingEnvironment.WebRootPath = Path.Combine(
+                hostingEnvironment.ContentRootPath,
+                webRoot
+            );
         }
 
         if (!string.IsNullOrEmpty(hostingEnvironment.WebRootPath))
@@ -48,7 +63,9 @@ internal static class HostingEnvironmentExtensions
             {
                 Directory.CreateDirectory(hostingEnvironment.WebRootPath);
             }
-            hostingEnvironment.WebRootFileProvider = new PhysicalFileProvider(hostingEnvironment.WebRootPath);
+            hostingEnvironment.WebRootFileProvider = new PhysicalFileProvider(
+                hostingEnvironment.WebRootPath
+            );
         }
         else
         {
@@ -56,29 +73,38 @@ internal static class HostingEnvironmentExtensions
         }
 
         hostingEnvironment.EnvironmentName =
-            options.Environment ??
-            hostingEnvironment.EnvironmentName;
+            options.Environment ?? hostingEnvironment.EnvironmentName;
     }
 
     internal static void Initialize(
         this IWebHostEnvironment hostingEnvironment,
         string contentRootPath,
         WebHostOptions options,
-        IHostEnvironment? baseEnvironment = null)
+        IHostEnvironment? baseEnvironment = null
+    )
     {
         ArgumentNullException.ThrowIfNull(options);
         if (string.IsNullOrEmpty(contentRootPath))
         {
-            throw new ArgumentException("A valid non-empty content root must be provided.", nameof(contentRootPath));
+            throw new ArgumentException(
+                "A valid non-empty content root must be provided.",
+                nameof(contentRootPath)
+            );
         }
         if (!Directory.Exists(contentRootPath))
         {
-            throw new ArgumentException($"The content root '{contentRootPath}' does not exist.", nameof(contentRootPath));
+            throw new ArgumentException(
+                $"The content root '{contentRootPath}' does not exist.",
+                nameof(contentRootPath)
+            );
         }
 
-        hostingEnvironment.ApplicationName = baseEnvironment?.ApplicationName ?? options.ApplicationName;
+        hostingEnvironment.ApplicationName =
+            baseEnvironment?.ApplicationName ?? options.ApplicationName;
         hostingEnvironment.ContentRootPath = contentRootPath;
-        hostingEnvironment.ContentRootFileProvider = baseEnvironment?.ContentRootFileProvider ?? new PhysicalFileProvider(hostingEnvironment.ContentRootPath);
+        hostingEnvironment.ContentRootFileProvider =
+            baseEnvironment?.ContentRootFileProvider
+            ?? new PhysicalFileProvider(hostingEnvironment.ContentRootPath);
 
         var webRoot = options.WebRoot;
         if (webRoot == null)
@@ -92,7 +118,10 @@ internal static class HostingEnvironmentExtensions
         }
         else
         {
-            hostingEnvironment.WebRootPath = Path.Combine(hostingEnvironment.ContentRootPath, webRoot);
+            hostingEnvironment.WebRootPath = Path.Combine(
+                hostingEnvironment.ContentRootPath,
+                webRoot
+            );
         }
 
         if (!string.IsNullOrEmpty(hostingEnvironment.WebRootPath))
@@ -102,7 +131,9 @@ internal static class HostingEnvironmentExtensions
             {
                 Directory.CreateDirectory(hostingEnvironment.WebRootPath);
             }
-            hostingEnvironment.WebRootFileProvider = new PhysicalFileProvider(hostingEnvironment.WebRootPath);
+            hostingEnvironment.WebRootFileProvider = new PhysicalFileProvider(
+                hostingEnvironment.WebRootPath
+            );
         }
         else
         {
@@ -110,8 +141,8 @@ internal static class HostingEnvironmentExtensions
         }
 
         hostingEnvironment.EnvironmentName =
-            baseEnvironment?.EnvironmentName ??
-            options.Environment ??
-            hostingEnvironment.EnvironmentName;
+            baseEnvironment?.EnvironmentName
+            ?? options.Environment
+            ?? hostingEnvironment.EnvironmentName;
     }
 }

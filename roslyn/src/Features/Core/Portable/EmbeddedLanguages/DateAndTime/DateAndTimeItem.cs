@@ -8,8 +8,7 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
 {
     internal partial class DateAndTimeEmbeddedCompletionProvider
     {
-        private readonly struct DateAndTimeItem(
-            string displayText, string inlineDescription, string fullDescription, CompletionChange change, bool isDefault)
+        private readonly struct DateAndTimeItem
         {
             public readonly string DisplayText = displayText;
             public readonly string InlineDescription = inlineDescription;

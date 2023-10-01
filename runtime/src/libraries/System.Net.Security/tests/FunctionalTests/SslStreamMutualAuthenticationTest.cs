@@ -52,7 +52,6 @@ namespace System.Net.Security.Tests
             return data;
         }
 
-
         public static TheoryData<bool, ClientCertSource> BoolAndCertSourceData()
         {
             TheoryData<bool, ClientCertSource> data = new();
@@ -68,7 +67,10 @@ namespace System.Net.Security.Tests
 
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindows7))]
         [MemberData(nameof(BoolAndCertSourceData))]
-        public async Task SslStream_RequireClientCert_IsMutuallyAuthenticated_ReturnsTrue(bool clientCertificateRequired, ClientCertSource certSource)
+        public async Task SslStream_RequireClientCert_IsMutuallyAuthenticated_ReturnsTrue(
+            bool clientCertificateRequired,
+            ClientCertSource certSource
+        )
         {
             (Stream stream1, Stream stream2) = TestHelper.GetConnectedStreams();
             using (var client = new SslStream(stream1, false, AllowAnyCertificate))
@@ -82,22 +84,31 @@ namespace System.Net.Security.Tests
                 switch (certSource)
                 {
                     case ClientCertSource.ClientCertificate:
-                        clientOptions.ClientCertificates = new X509CertificateCollection() { _clientCertificate };
+                        clientOptions.ClientCertificates = new X509CertificateCollection()
+                        {
+                            _clientCertificate
+                        };
                         break;
                     case ClientCertSource.SelectionCallback:
-                        clientOptions.LocalCertificateSelectionCallback = ClientCertSelectionCallback;
+                        clientOptions.LocalCertificateSelectionCallback =
+                            ClientCertSelectionCallback;
                         break;
                     case ClientCertSource.CertificateContext:
-                        clientOptions.ClientCertificateContext = SslStreamCertificateContext.Create(_clientCertificate, new());
+                        clientOptions.ClientCertificateContext = SslStreamCertificateContext.Create(
+                            _clientCertificate,
+                            new()
+                        );
                         break;
                 }
 
                 Task t2 = client.AuthenticateAsClientAsync(clientOptions);
-                Task t1 = server.AuthenticateAsServerAsync(new SslServerAuthenticationOptions
-                {
-                    ServerCertificate = _serverCertificate,
-                    ClientCertificateRequired = clientCertificateRequired
-                });
+                Task t1 = server.AuthenticateAsServerAsync(
+                    new SslServerAuthenticationOptions
+                    {
+                        ServerCertificate = _serverCertificate,
+                        ClientCertificateRequired = clientCertificateRequired
+                    }
+                );
 
                 await TestConfiguration.WhenAllOrAnyFailedWithTimeout(t1, t2);
 
@@ -119,13 +130,17 @@ namespace System.Net.Security.Tests
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindows7))]
         [ClassData(typeof(SslProtocolSupport.SupportedSslProtocolsTestData))]
         public async Task SslStream_CachedCredentials_IsMutuallyAuthenticatedCorrect(
-           SslProtocols protocol)
+            SslProtocols protocol
+        )
         {
             var clientOptions = new SslClientAuthenticationOptions
             {
                 ClientCertificates = new X509CertificateCollection() { _clientCertificate },
                 EnabledSslProtocols = protocol,
-                RemoteCertificateValidationCallback = delegate { return true; },
+                RemoteCertificateValidationCallback = delegate
+                {
+                    return true;
+                },
                 TargetHost = Guid.NewGuid().ToString("N")
             };
 
@@ -140,28 +155,43 @@ namespace System.Net.Security.Tests
                     var serverOptions = new SslServerAuthenticationOptions
                     {
                         ClientCertificateRequired = expectMutualAuthentication,
-                        ServerCertificate = expectMutualAuthentication ? _serverCertificate : _selfSignedCertificate,
-                        RemoteCertificateValidationCallback = delegate { return true; },
+                        ServerCertificate = expectMutualAuthentication
+                            ? _serverCertificate
+                            : _selfSignedCertificate,
+                        RemoteCertificateValidationCallback = delegate
+                        {
+                            return true;
+                        },
                         EnabledSslProtocols = protocol
                     };
 
                     await TestConfiguration.WhenAllOrAnyFailedWithTimeout(
                         client.AuthenticateAsClientAsync(clientOptions),
-                        server.AuthenticateAsServerAsync(serverOptions));
+                        server.AuthenticateAsServerAsync(serverOptions)
+                    );
 
                     // mutual authentication should only be set if server required client cert
                     Assert.Equal(expectMutualAuthentication, server.IsMutuallyAuthenticated);
                     Assert.Equal(expectMutualAuthentication, client.IsMutuallyAuthenticated);
-                };
+                }
+                ;
             }
         }
 
-        [ConditionalTheory(typeof(TestConfiguration), nameof(TestConfiguration.SupportsRenegotiation))]
+        [ConditionalTheory(
+            typeof(TestConfiguration),
+            nameof(TestConfiguration.SupportsRenegotiation)
+        )]
         [MemberData(nameof(CertSourceData))]
         [PlatformSpecific(TestPlatforms.Windows | TestPlatforms.Linux)]
-        public async Task SslStream_NegotiateClientCertificate_IsMutuallyAuthenticatedCorrect(ClientCertSource certSource)
+        public async Task SslStream_NegotiateClientCertificate_IsMutuallyAuthenticatedCorrect(
+            ClientCertSource certSource
+        )
         {
-            SslStreamCertificateContext context = SslStreamCertificateContext.Create(_serverCertificate, null);
+            SslStreamCertificateContext context = SslStreamCertificateContext.Create(
+                _serverCertificate,
+                null
+            );
             var clientOptions = new SslClientAuthenticationOptions
             {
                 TargetHost = Guid.NewGuid().ToString("N")
@@ -173,36 +203,47 @@ namespace System.Net.Security.Tests
                 using (var client = new SslStream(stream1, false, AllowAnyCertificate))
                 using (var server = new SslStream(stream2, false, AllowAnyCertificate))
                 {
-
                     switch (certSource)
                     {
                         case ClientCertSource.ClientCertificate:
-                            clientOptions.ClientCertificates = new X509CertificateCollection() { _clientCertificate };
+                            clientOptions.ClientCertificates = new X509CertificateCollection()
+                            {
+                                _clientCertificate
+                            };
                             break;
                         case ClientCertSource.SelectionCallback:
-                            clientOptions.LocalCertificateSelectionCallback = ClientCertSelectionCallback;
+                            clientOptions.LocalCertificateSelectionCallback =
+                                ClientCertSelectionCallback;
                             break;
                         case ClientCertSource.CertificateContext:
-                            clientOptions.ClientCertificateContext = SslStreamCertificateContext.Create(_clientCertificate, new());
+                            clientOptions.ClientCertificateContext =
+                                SslStreamCertificateContext.Create(_clientCertificate, new());
                             break;
                     }
 
                     Task t2 = client.AuthenticateAsClientAsync(clientOptions);
-                    Task t1 = server.AuthenticateAsServerAsync(new SslServerAuthenticationOptions
-                    {
-                        ServerCertificateContext = context,
-                        ClientCertificateRequired = false,
-                        EnabledSslProtocols = SslProtocols.Tls12,
-
-                    });
+                    Task t1 = server.AuthenticateAsServerAsync(
+                        new SslServerAuthenticationOptions
+                        {
+                            ServerCertificateContext = context,
+                            ClientCertificateRequired = false,
+                            EnabledSslProtocols = SslProtocols.Tls12,
+                        }
+                    );
 
                     await TestConfiguration.WhenAllOrAnyFailedWithTimeout(t1, t2);
 
                     if (round >= 0 && server.RemoteCertificate != null)
                     {
                         // TLS resumed
-                        Assert.True(client.IsMutuallyAuthenticated, "client.IsMutuallyAuthenticated");
-                        Assert.True(server.IsMutuallyAuthenticated, "server.IsMutuallyAuthenticated");
+                        Assert.True(
+                            client.IsMutuallyAuthenticated,
+                            "client.IsMutuallyAuthenticated"
+                        );
+                        Assert.True(
+                            server.IsMutuallyAuthenticated,
+                            "server.IsMutuallyAuthenticated"
+                        );
                         continue;
                     }
 
@@ -225,12 +266,16 @@ namespace System.Net.Security.Tests
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindows7))]
         [ClassData(typeof(SslProtocolSupport.SupportedSslProtocolsTestData))]
         public async Task SslStream_ResumedSessionsClientCollection_IsMutuallyAuthenticatedCorrect(
-           SslProtocols protocol)
+            SslProtocols protocol
+        )
         {
             var clientOptions = new SslClientAuthenticationOptions
             {
                 EnabledSslProtocols = protocol,
-                RemoteCertificateValidationCallback = delegate { return true; },
+                RemoteCertificateValidationCallback = delegate
+                {
+                    return true;
+                },
                 TargetHost = Guid.NewGuid().ToString("N")
             };
 
@@ -238,8 +283,14 @@ namespace System.Net.Security.Tests
             var serverOptions = new SslServerAuthenticationOptions
             {
                 ClientCertificateRequired = true,
-                ServerCertificateContext = SslStreamCertificateContext.Create(_serverCertificate, null),
-                RemoteCertificateValidationCallback = delegate { return true; },
+                ServerCertificateContext = SslStreamCertificateContext.Create(
+                    _serverCertificate,
+                    null
+                ),
+                RemoteCertificateValidationCallback = delegate
+                {
+                    return true;
+                },
                 EnabledSslProtocols = protocol
             };
 
@@ -251,10 +302,13 @@ namespace System.Net.Security.Tests
                 {
                     bool expectMutualAuthentication = (i % 2) == 0;
 
-                    clientOptions.ClientCertificates = expectMutualAuthentication ? new X509CertificateCollection() { _clientCertificate } : null;
+                    clientOptions.ClientCertificates = expectMutualAuthentication
+                        ? new X509CertificateCollection() { _clientCertificate }
+                        : null;
                     await TestConfiguration.WhenAllOrAnyFailedWithTimeout(
                         client.AuthenticateAsClientAsync(clientOptions),
-                        server.AuthenticateAsServerAsync(serverOptions));
+                        server.AuthenticateAsServerAsync(serverOptions)
+                    );
 
                     // mutual authentication should only be set if client set certificate
                     Assert.Equal(expectMutualAuthentication, server.IsMutuallyAuthenticated);
@@ -266,21 +320,26 @@ namespace System.Net.Security.Tests
                     }
                     else
                     {
-                       Assert.Null(server.RemoteCertificate);
+                        Assert.Null(server.RemoteCertificate);
                     }
-                };
+                }
+                ;
             }
         }
 
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindows7))]
         [ClassData(typeof(SslProtocolSupport.SupportedSslProtocolsTestData))]
         public async Task SslStream_ResumedSessionsCallbackSet_IsMutuallyAuthenticatedCorrect(
-           SslProtocols protocol)
+            SslProtocols protocol
+        )
         {
             var clientOptions = new SslClientAuthenticationOptions
             {
                 EnabledSslProtocols = protocol,
-                RemoteCertificateValidationCallback = delegate { return true; },
+                RemoteCertificateValidationCallback = delegate
+                {
+                    return true;
+                },
                 TargetHost = Guid.NewGuid().ToString("N")
             };
 
@@ -288,8 +347,14 @@ namespace System.Net.Security.Tests
             var serverOptions = new SslServerAuthenticationOptions
             {
                 ClientCertificateRequired = true,
-                ServerCertificateContext = SslStreamCertificateContext.Create(_serverCertificate, null),
-                RemoteCertificateValidationCallback = delegate { return true; },
+                ServerCertificateContext = SslStreamCertificateContext.Create(
+                    _serverCertificate,
+                    null
+                ),
+                RemoteCertificateValidationCallback = delegate
+                {
+                    return true;
+                },
                 EnabledSslProtocols = protocol
             };
 
@@ -308,7 +373,8 @@ namespace System.Net.Security.Tests
 
                     await TestConfiguration.WhenAllOrAnyFailedWithTimeout(
                         client.AuthenticateAsClientAsync(clientOptions),
-                        server.AuthenticateAsServerAsync(serverOptions));
+                        server.AuthenticateAsServerAsync(serverOptions)
+                    );
 
                     // mutual authentication should only be set if client set certificate
                     Assert.Equal(expectMutualAuthentication, server.IsMutuallyAuthenticated);
@@ -320,21 +386,26 @@ namespace System.Net.Security.Tests
                     }
                     else
                     {
-                       Assert.Null(server.RemoteCertificate);
+                        Assert.Null(server.RemoteCertificate);
                     }
-                };
+                }
+                ;
             }
         }
 
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindows7))]
         [ClassData(typeof(SslProtocolSupport.SupportedSslProtocolsTestData))]
         public async Task SslStream_ResumedSessionsCallbackMaybeSet_IsMutuallyAuthenticatedCorrect(
-           SslProtocols protocol)
+            SslProtocols protocol
+        )
         {
             var clientOptions = new SslClientAuthenticationOptions
             {
                 EnabledSslProtocols = protocol,
-                RemoteCertificateValidationCallback = delegate { return true; },
+                RemoteCertificateValidationCallback = delegate
+                {
+                    return true;
+                },
                 TargetHost = Guid.NewGuid().ToString("N")
             };
 
@@ -342,8 +413,14 @@ namespace System.Net.Security.Tests
             var serverOptions = new SslServerAuthenticationOptions
             {
                 ClientCertificateRequired = true,
-                ServerCertificateContext = SslStreamCertificateContext.Create(_serverCertificate, null),
-                RemoteCertificateValidationCallback = delegate { return true; },
+                ServerCertificateContext = SslStreamCertificateContext.Create(
+                    _serverCertificate,
+                    null
+                ),
+                RemoteCertificateValidationCallback = delegate
+                {
+                    return true;
+                },
                 EnabledSslProtocols = protocol
             };
 
@@ -357,7 +434,8 @@ namespace System.Net.Security.Tests
 
                     if (expectMutualAuthentication)
                     {
-                      clientOptions.LocalCertificateSelectionCallback = (s, t, l, r, a) => _clientCertificate;
+                        clientOptions.LocalCertificateSelectionCallback = (s, t, l, r, a) =>
+                            _clientCertificate;
                     }
                     else
                     {
@@ -366,7 +444,8 @@ namespace System.Net.Security.Tests
 
                     await TestConfiguration.WhenAllOrAnyFailedWithTimeout(
                         client.AuthenticateAsClientAsync(clientOptions),
-                        server.AuthenticateAsServerAsync(serverOptions));
+                        server.AuthenticateAsServerAsync(serverOptions)
+                    );
 
                     // mutual authentication should only be set if client set certificate
                     Assert.Equal(expectMutualAuthentication, server.IsMutuallyAuthenticated);
@@ -378,9 +457,10 @@ namespace System.Net.Security.Tests
                     }
                     else
                     {
-                       Assert.Null(server.RemoteCertificate);
+                        Assert.Null(server.RemoteCertificate);
                     }
-                };
+                }
+                ;
             }
         }
 
@@ -388,7 +468,8 @@ namespace System.Net.Security.Tests
             object sender,
             X509Certificate certificate,
             X509Chain chain,
-            SslPolicyErrors sslPolicyErrors)
+            SslPolicyErrors sslPolicyErrors
+        )
         {
             return true;
         }
@@ -398,7 +479,8 @@ namespace System.Net.Security.Tests
             string targetHost,
             X509CertificateCollection localCertificates,
             X509Certificate remoteCertificate,
-            string[] acceptableIssuers)
+            string[] acceptableIssuers
+        )
         {
             return _clientCertificate;
         }

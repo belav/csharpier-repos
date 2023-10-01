@@ -9,15 +9,21 @@ using System.Composition;
 
 namespace Microsoft.CodeAnalysis.Host
 {
-    [ExportWorkspaceService(typeof(IWorkspaceAsynchronousOperationListenerProvider), ServiceLayer.Default)]
+    [ExportWorkspaceService(
+        typeof(IWorkspaceAsynchronousOperationListenerProvider),
+        ServiceLayer.Default
+    )]
     [Shared]
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    internal sealed class WorkspaceAsynchronousOperationListenerProvider(IAsynchronousOperationListenerProvider listenerProvider) : IWorkspaceAsynchronousOperationListenerProvider
+    internal sealed class WorkspaceAsynchronousOperationListenerProvider(
+        IAsynchronousOperationListenerProvider listenerProvider
+    ) : IWorkspaceAsynchronousOperationListenerProvider
     {
-        private readonly IAsynchronousOperationListener _listener = listenerProvider.GetListener(FeatureAttribute.Workspace);
+        private readonly IAsynchronousOperationListener _listener = listenerProvider.GetListener(
+            FeatureAttribute.Workspace
+        );
 
-        public IAsynchronousOperationListener GetListener()
-            => _listener;
+        public IAsynchronousOperationListener GetListener() => _listener;
     }
 }

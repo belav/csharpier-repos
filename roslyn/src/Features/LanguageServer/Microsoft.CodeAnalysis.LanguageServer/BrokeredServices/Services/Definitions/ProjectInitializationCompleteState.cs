@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using System.Xml.Linq;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.BrokeredServices.Services.Definitions;
+
 /// <summary>
 /// Copied from https://devdiv.visualstudio.com/DevDiv/_git/CPS?path=/src/Microsoft.VisualStudio.ProjectSystem.Server/ProjectInitializationCompletionState.cs
 /// </summary>

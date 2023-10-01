@@ -12,7 +12,8 @@ public partial class DetectAmbiguousMappedRoutesTest
     public async Task DuplicateRoutes_SameHttpMethod_HasDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 var app = WebApplication.Create();
 app.MapGet({|#0:""/""|}, () => Hello());
@@ -20,9 +21,14 @@ app.MapGet({|#1:""/""|}, () => Hello());
 void Hello() { }
 ";
 
-        var expectedDiagnostics = new[] {
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousRouteHandlerRoute).WithArguments("/").WithLocation(0),
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousRouteHandlerRoute).WithArguments("/").WithLocation(1)
+        var expectedDiagnostics = new[]
+        {
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousRouteHandlerRoute)
+                .WithArguments("/")
+                .WithLocation(0),
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousRouteHandlerRoute)
+                .WithArguments("/")
+                .WithLocation(1)
         };
 
         // Act & Assert
@@ -33,7 +39,8 @@ void Hello() { }
     public async Task DuplicateRoutes_SameHttpMethod_HasRequestDelegate_HasDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -43,9 +50,14 @@ app.MapGet({|#1:""/""|}, (HttpContext context) => Task.CompletedTask);
 void Hello() { }
 ";
 
-        var expectedDiagnostics = new[] {
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousRouteHandlerRoute).WithArguments("/").WithLocation(0),
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousRouteHandlerRoute).WithArguments("/").WithLocation(1)
+        var expectedDiagnostics = new[]
+        {
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousRouteHandlerRoute)
+                .WithArguments("/")
+                .WithLocation(0),
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousRouteHandlerRoute)
+                .WithArguments("/")
+                .WithLocation(1)
         };
 
         // Act & Assert
@@ -56,7 +68,8 @@ void Hello() { }
     public async Task DuplicateRoutes_SameHttpMethod_InMethod_HasDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 var app = WebApplication.Create();
@@ -71,9 +84,14 @@ RegisterEndpoints(app);
 void Hello() { }
 ";
 
-        var expectedDiagnostics = new[] {
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousRouteHandlerRoute).WithArguments("/").WithLocation(0),
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousRouteHandlerRoute).WithArguments("/").WithLocation(1)
+        var expectedDiagnostics = new[]
+        {
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousRouteHandlerRoute)
+                .WithArguments("/")
+                .WithLocation(0),
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousRouteHandlerRoute)
+                .WithArguments("/")
+                .WithLocation(1)
         };
 
         // Act & Assert
@@ -84,7 +102,8 @@ void Hello() { }
     public async Task DuplicateRoutes_TernaryStatement_NoDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 var app = WebApplication.Create();
 _ = (true)
@@ -101,7 +120,8 @@ void Hello() { }
     public async Task DuplicateRoutes_NullCoalescing_NoDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 var app = WebApplication.Create();
 _ = app.MapGet(""/"", () => Hello()) ?? app.MapGet(""/"", () => Hello());
@@ -116,7 +136,8 @@ void Hello() { }
     public async Task DuplicateRoutes_NullCoalescingAssignment_NoDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 var app = WebApplication.Create();
 var ep = app.MapPost(""/"", () => Hello());
@@ -132,7 +153,8 @@ void Hello() { }
     public async Task DuplicateRoutes_DifferentMethods_HasDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 var app = WebApplication.Create();
 app.MapGet(""/"", () => Hello());
@@ -148,7 +170,8 @@ void Hello() { }
     public async Task DuplicateMapGetRoutes_InsideConditional_NoDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 var app = WebApplication.Create();
 if (true)
@@ -170,7 +193,8 @@ void Hello() { }
     public async Task DuplicateRoutes_UnknownUsageOfEndConventionBuilderExtension_NoDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 var app = WebApplication.Create();
 app.MapGet(""/"", () => Hello()).DoSomething();
@@ -194,7 +218,8 @@ internal static class Extensions
     public async Task DuplicateRoutes_UnknownUsageOfEndConventionBuilder_NoDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 var app = WebApplication.Create();
 Extensions.DoSomething(app.MapGet(""/"", () => Hello()));
@@ -218,7 +243,8 @@ internal static class Extensions
     public async Task DuplicateRoutes_AddMethod_NoDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 var app = WebApplication.Create();
 app.MapGet(""/"", () => Hello()).Add(b => {});
@@ -234,7 +260,8 @@ void Hello() { }
     public async Task DuplicateRoutes_AssignedToVariable_NoDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 var app = WebApplication.Create();
 _ = app.MapGet(""/"", () => Hello());
@@ -250,7 +277,8 @@ void Hello() { }
     public async Task DuplicateRoutes_MultipleGroups_NoDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 var app = WebApplication.Create();
 var group1 = app.MapGroup(""/group1"");
@@ -268,7 +296,8 @@ void Hello() { }
     public async Task DuplicateRoutes_EndpointsOnGroup_HasDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 var app = WebApplication.Create();
 var group1 = app.MapGroup(""/group1"");
@@ -280,9 +309,14 @@ void Hello() { }
 ";
 
         // Act & Assert
-        var expectedDiagnostics = new[] {
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousRouteHandlerRoute).WithArguments("/").WithLocation(0),
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousRouteHandlerRoute).WithArguments("/").WithLocation(1)
+        var expectedDiagnostics = new[]
+        {
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousRouteHandlerRoute)
+                .WithArguments("/")
+                .WithLocation(0),
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousRouteHandlerRoute)
+                .WithArguments("/")
+                .WithLocation(1)
         };
 
         await VerifyCS.VerifyAnalyzerAsync(source, expectedDiagnostics);
@@ -301,20 +335,28 @@ void Hello() { }
     public async Task DuplicateRoutes_AllowedBuilderExtensionMethods_HasDiagnostics(string method)
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 var app = WebApplication.Create();
-app.MapGet({|#0:""/""|}, () => Hello())." + method + @";
+app.MapGet({|#0:""/""|}, () => Hello())."
+            + method
+            + @";
 app.MapGet({|#1:""/""|}, () => Hello());
 void Hello() { }
 ";
 
-        var expectedDiagnostics = new[] {
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousRouteHandlerRoute).WithArguments("/").WithLocation(0),
-            new DiagnosticResult(DiagnosticDescriptors.AmbiguousRouteHandlerRoute).WithArguments("/").WithLocation(1)
+        var expectedDiagnostics = new[]
+        {
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousRouteHandlerRoute)
+                .WithArguments("/")
+                .WithLocation(0),
+            new DiagnosticResult(DiagnosticDescriptors.AmbiguousRouteHandlerRoute)
+                .WithArguments("/")
+                .WithLocation(1)
         };
 
         // Act & Assert
@@ -328,13 +370,16 @@ void Hello() { }
     public async Task DuplicateRoutes_UnknownBuilderExtensionMethods_NoDiagnostics(string method)
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 var app = WebApplication.Create();
-app.MapGet({|#0:""/""|}, () => Hello())." + method + @";
+app.MapGet({|#0:""/""|}, () => Hello())."
+            + method
+            + @";
 app.MapGet({|#1:""/""|}, () => Hello());
 void Hello() { }
 ";
@@ -343,4 +388,3 @@ void Hello() { }
         await VerifyCS.VerifyAnalyzerAsync(source);
     }
 }
-

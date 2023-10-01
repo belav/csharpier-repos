@@ -3,12 +3,12 @@
 
 // <Area> Nullable - Box-Unbox </Area>
 // <Title> Nullable type with unbox box expr  </Title>
-// <Description>  
+// <Description>
 // checking type of NotEmptyStruct using is operator
-// </Description> 
-// <RelatedBugs> </RelatedBugs>  
+// </Description>
+// <RelatedBugs> </RelatedBugs>
 //<Expects Status=success></Expects>
-// <Code> 
+// <Code>
 
 
 using System.Runtime.InteropServices;
@@ -38,5 +38,3 @@ public class NullableTest
             return ExitCode.Failed;
     }
 }
-
-

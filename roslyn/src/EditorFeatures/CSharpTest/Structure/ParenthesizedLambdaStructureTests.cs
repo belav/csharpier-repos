@@ -12,9 +12,11 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure;
 
 [Trait(Traits.Feature, Traits.Features.Outlining)]
-public class ParenthesizedLambdaStructureTests : AbstractCSharpSyntaxNodeStructureTests<ParenthesizedLambdaExpressionSyntax>
+public class ParenthesizedLambdaStructureTests
+    : AbstractCSharpSyntaxNodeStructureTests<ParenthesizedLambdaExpressionSyntax>
 {
-    internal override AbstractSyntaxStructureProvider CreateProvider() => new ParenthesizedLambdaExpressionStructureProvider();
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new ParenthesizedLambdaExpressionStructureProvider();
 
     [Fact]
     public async Task TestLambda()
@@ -31,8 +33,10 @@ public class ParenthesizedLambdaStructureTests : AbstractCSharpSyntaxNodeStructu
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -66,8 +70,10 @@ public class ParenthesizedLambdaStructureTests : AbstractCSharpSyntaxNodeStructu
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -85,7 +91,9 @@ public class ParenthesizedLambdaStructureTests : AbstractCSharpSyntaxNodeStructu
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 }

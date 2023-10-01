@@ -3,8 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components.Routing;
 
-internal readonly struct PathString(string? value)
+internal readonly struct PathString
 {
     public string? Value { get; } = value;
-
 }

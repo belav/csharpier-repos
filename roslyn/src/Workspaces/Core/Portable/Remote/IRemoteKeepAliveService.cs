@@ -38,16 +38,22 @@ namespace Microsoft.CodeAnalysis.Remote
 
             async Task CreateClientAndKeepAliveAsync()
             {
-                var client = await RemoteHostClient.TryGetClientAsync(solution.Services, cancellationToken).ConfigureAwait(false);
+                var client = await RemoteHostClient
+                    .TryGetClientAsync(solution.Services, cancellationToken)
+                    .ConfigureAwait(false);
                 if (client is null)
                     return;
 
                 // Now kick off the keep-alive work.  We don't wait on this as this will stick on the OOP side until
                 // the cancellation token triggers.
-                var unused = client.TryInvokeAsync<IRemoteKeepAliveService>(
-                    solution,
-                    (service, solutionInfo, cancellationToken) => service.KeepAliveAsync(solutionInfo, cancellationToken),
-                    cancellationToken).AsTask();
+                var unused = client
+                    .TryInvokeAsync<IRemoteKeepAliveService>(
+                        solution,
+                        (service, solutionInfo, cancellationToken) =>
+                            service.KeepAliveAsync(solutionInfo, cancellationToken),
+                        cancellationToken
+                    )
+                    .AsTask();
             }
         }
 
@@ -74,7 +80,8 @@ namespace Microsoft.CodeAnalysis.Remote
         /// </summary>
         public static RemoteKeepAliveSession Create(
             Solution solution,
-            IAsynchronousOperationListener listener)
+            IAsynchronousOperationListener listener
+        )
         {
             return new RemoteKeepAliveSession(solution, listener);
         }

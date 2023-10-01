@@ -23,12 +23,14 @@ namespace Microsoft.NET.HostModel.Tests
 
         private void RunTheApp(string path, bool selfContained)
         {
-            Command.Create(path)
+            Command
+                .Create(path)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .DotNetRoot(selfContained ? null : RepoDirectoriesProvider.Default.BuiltDotnet)
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World!");
         }
 
@@ -40,7 +42,8 @@ namespace Microsoft.NET.HostModel.Tests
             // We will create a universal binary with just one arch slice and run it.
             // It is enough for testing purposes. The code that finds the releavant slice
             // would work the same regardless if there is 1, 2, 3 or more slices.
-            Command.Create("lipo", $"-create -arch {arch} {path} -output {fatApp}")
+            Command
+                .Create("lipo", $"-create -arch {arch} {path} -output {fatApp}")
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()

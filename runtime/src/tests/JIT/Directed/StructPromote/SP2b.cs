@@ -8,7 +8,6 @@ using Xunit;
 
 public class SP2b
 {
-
     // Struct in reg (int, long)
     struct S
     {

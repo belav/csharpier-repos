@@ -9,9 +9,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Classification
 {
-    internal readonly struct ClassifiedSpansAndHighlightSpan(
-        ImmutableArray<ClassifiedSpan> classifiedSpans,
-        TextSpan highlightSpan)
+    internal readonly struct ClassifiedSpansAndHighlightSpan
     {
         public const string Key = nameof(ClassifiedSpansAndHighlightSpan);
 

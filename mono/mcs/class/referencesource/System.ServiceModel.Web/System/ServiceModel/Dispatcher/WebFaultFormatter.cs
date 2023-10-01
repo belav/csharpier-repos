@@ -35,14 +35,8 @@ namespace System.ServiceModel.Dispatcher
 
         public IDispatchFaultFormatter InnerFaultFormatter
         {
-            get
-            {
-                return this.faultFormatter;
-            }
-            set
-            {
-                this.faultFormatter = value;
-            }
+            get { return this.faultFormatter; }
+            set { this.faultFormatter = value; }
         }
     }
 }

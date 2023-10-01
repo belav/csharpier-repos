@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,34 +54,35 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed class TransactedBatchingElement
-		 : BehaviorExtensionElement
-	{
-		// Properties
+    public sealed class TransactedBatchingElement : BehaviorExtensionElement
+    {
+        // Properties
 
-		public override Type BehaviorType {
-			get { return typeof (TransactedBatchingBehavior); }
-		}
+        public override Type BehaviorType
+        {
+            get { return typeof(TransactedBatchingBehavior); }
+        }
 
-		[IntegerValidator (MinValue = 0,
-			MaxValue = int.MaxValue,
-			ExcludeRange = false)]
-		[ConfigurationProperty ("maxBatchSize",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "0")]
-		public int MaxBatchSize {
-			get { return (int) base ["maxBatchSize"]; }
-			set { base ["maxBatchSize"] = value; }
-		}
+        [IntegerValidator(MinValue = 0, MaxValue = int.MaxValue, ExcludeRange = false)]
+        [ConfigurationProperty(
+            "maxBatchSize",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "0"
+        )]
+        public int MaxBatchSize
+        {
+            get { return (int)base["maxBatchSize"]; }
+            set { base["maxBatchSize"] = value; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return base.Properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return base.Properties; }
+        }
 
-		protected internal override object CreateBehavior () {
-			return new TransactedBatchingBehavior (MaxBatchSize);
-		}
-
-	}
-
+        protected internal override object CreateBehavior()
+        {
+            return new TransactedBatchingBehavior(MaxBatchSize);
+        }
+    }
 }

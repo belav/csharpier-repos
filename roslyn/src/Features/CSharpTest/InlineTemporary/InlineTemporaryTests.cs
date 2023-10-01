@@ -17,11 +17,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
     [Trait(Traits.Feature, Traits.Features.CodeActionsInlineTemporary)]
     public class InlineTemporaryTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpInlineTemporaryCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpInlineTemporaryCodeRefactoringProvider();
 
-        private async Task TestFixOneAsync(string initial, string expected)
-            => await TestInRegularAndScript1Async(GetTreeText(initial), GetTreeText(expected));
+        private async Task TestFixOneAsync(string initial, string expected) =>
+            await TestInRegularAndScript1Async(GetTreeText(initial), GetTreeText(expected));
 
         private static string GetTreeText(string initial)
         {
@@ -29,28 +31,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 class C
                 {
                     void F()
-                """ + initial + """
+                """
+                + initial
+                + """
                 }
                 """;
         }
 
-        private static SyntaxNode GetNodeToFix(dynamic initialRoot, int declaratorIndex)
-            => initialRoot.Members[0].Members[0].Body.Statements[0].Declaration.Variables[declaratorIndex];
+        private static SyntaxNode GetNodeToFix(dynamic initialRoot, int declaratorIndex) =>
+            initialRoot.Members[0].Members[0].Body.Statements[0].Declaration.Variables[
+                declaratorIndex
+            ];
 
-        private static SyntaxNode GetFixedNode(dynamic fixedRoot)
-            => fixedRoot.Members[0].Members[0].BodyOpt;
-
-        [Fact]
-        public async Task NotWithNoInitializer1()
-            => await TestMissingInRegularAndScriptAsync(GetTreeText(@"{ int [||]x; System.Console.WriteLine(x); }"));
+        private static SyntaxNode GetFixedNode(dynamic fixedRoot) =>
+            fixedRoot.Members[0].Members[0].BodyOpt;
 
         [Fact]
-        public async Task NotWithNoInitializer2()
-            => await TestMissingInRegularAndScriptAsync(GetTreeText(@"{ int [||]x = ; System.Console.WriteLine(x); }"));
+        public async Task NotWithNoInitializer1() =>
+            await TestMissingInRegularAndScriptAsync(
+                GetTreeText(@"{ int [||]x; System.Console.WriteLine(x); }")
+            );
 
         [Fact]
-        public async Task NotOnSecondWithNoInitializer()
-            => await TestMissingInRegularAndScriptAsync(GetTreeText(@"{ int x = 42, [||]y; System.Console.WriteLine(y); }"));
+        public async Task NotWithNoInitializer2() =>
+            await TestMissingInRegularAndScriptAsync(
+                GetTreeText(@"{ int [||]x = ; System.Console.WriteLine(x); }")
+            );
+
+        [Fact]
+        public async Task NotOnSecondWithNoInitializer() =>
+            await TestMissingInRegularAndScriptAsync(
+                GetTreeText(@"{ int x = 42, [||]y; System.Console.WriteLine(y); }")
+            );
 
         [Fact]
         public async Task NotOnField()
@@ -66,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         System.Console.WriteLine(x);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -83,24 +96,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         return ref x;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
-        public async Task SingleStatement()
-            => await TestMissingInRegularAndScriptAsync(GetTreeText(@"{ int [||]x = 27; }"));
+        public async Task SingleStatement() =>
+            await TestMissingInRegularAndScriptAsync(GetTreeText(@"{ int [||]x = 27; }"));
 
         [Fact]
-        public async Task MultipleDeclarators_First()
-            => await TestMissingInRegularAndScriptAsync(GetTreeText(@"{ int [||]x = 0, y = 1, z = 2; }"));
+        public async Task MultipleDeclarators_First() =>
+            await TestMissingInRegularAndScriptAsync(
+                GetTreeText(@"{ int [||]x = 0, y = 1, z = 2; }")
+            );
 
         [Fact]
-        public async Task MultipleDeclarators_Second()
-            => await TestMissingInRegularAndScriptAsync(GetTreeText(@"{ int x = 0, [||]y = 1, z = 2; }"));
+        public async Task MultipleDeclarators_Second() =>
+            await TestMissingInRegularAndScriptAsync(
+                GetTreeText(@"{ int x = 0, [||]y = 1, z = 2; }")
+            );
 
         [Fact]
-        public async Task MultipleDeclarators_Last()
-            => await TestMissingInRegularAndScriptAsync(GetTreeText(@"{ int x = 0, y = 1, [||]z = 2; }"));
+        public async Task MultipleDeclarators_Last() =>
+            await TestMissingInRegularAndScriptAsync(
+                GetTreeText(@"{ int x = 0, y = 1, [||]z = 2; }")
+            );
 
         [Fact]
         public async Task Escaping1()
@@ -114,7 +134,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 """
                 {
                         Console.WriteLine(0); }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -129,7 +150,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 """
                 {
                         Console.WriteLine(0); }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -144,7 +166,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 """
                 {
                         Console.WriteLine(0); }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -159,7 +182,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 """
                 {
                         Console.WriteLine(0); }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -258,10 +282,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
 
                 x.ToString(); }
                 """,
-                       """
+                """
                        { 
                        3.ToString(); }
-                       """);
+                       """
+            );
         }
 
         [Fact]
@@ -279,7 +304,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     }
                 }
                 """,
-
                 """
                 using System;
                 class C
@@ -289,7 +313,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         Console.WriteLine((double)3);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -314,7 +339,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     }
                 }
                 """,
-
                 """
                 class Base 
                 {
@@ -331,7 +355,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         ((Base)new Derived()).M("hi");
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -356,7 +381,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     }
                 }
                 """,
-
                 """
                 class Base 
                 {
@@ -373,13 +397,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         new Derived().M(3);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Theory]
         [InlineData(LanguageVersion.CSharp8)]
         [InlineData(LanguageVersion.CSharp9)]
-        public async Task Conversion_NonTargetTypedConditionalExpression(LanguageVersion languageVersion)
+        public async Task Conversion_NonTargetTypedConditionalExpression(
+            LanguageVersion languageVersion
+        )
         {
             await TestInRegularAndScriptAsync(
                 """
@@ -392,7 +419,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     }
                 }
                 """,
-
                 """
                 class C
                 {
@@ -401,13 +427,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         var y = true ? (int?)42 : null;
                     }
                 }
-                """, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(languageVersion));
+                """,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(languageVersion)
+            );
         }
 
         [Theory]
         [InlineData(LanguageVersion.CSharp8, " (int?)42")]
         [InlineData(LanguageVersion.CSharp9, " 42")] // In C# 9, target-typed conditionals makes this work
-        public async Task Conversion_TargetTypedConditionalExpression(LanguageVersion languageVersion, string expectedSubstitution)
+        public async Task Conversion_TargetTypedConditionalExpression(
+            LanguageVersion languageVersion,
+            string expectedSubstitution
+        )
         {
             await TestInRegularAndScriptAsync(
                 """
@@ -420,18 +451,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     }
                 }
                 """,
-
                 """
                 class C
                 {
                     void F()
                     {
                         int? y = true ?
-                """ + expectedSubstitution + """
+                """
+                    + expectedSubstitution
+                    + """
                  : null;
                     }
                 }
-                """, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(languageVersion));
+                """,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(languageVersion)
+            );
         }
 
         [Fact]
@@ -446,7 +480,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 """
                 {
                         Console.WriteLine(0); }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -474,7 +509,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 { int [||]x = 42;
                 var a = new { x }; }
                 """,
-                       @"{ var a = new { x = 42 }; }");
+                @"{ var a = new { x = 42 }; }"
+            );
         }
 
         [Fact]
@@ -485,7 +521,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 { int [||]x = 1 + 1;
                 int y = x * 2; }
                 """,
-                       @"{ int y = (1 + 1) * 2; }");
+                @"{ int y = (1 + 1) * 2; }"
+            );
         }
 
         [Fact]
@@ -603,10 +640,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     }
                     int f = 0;
                 }
-                """);
+                """
+            );
         }
 
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538094"), WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541462")]
+        [
+            Fact,
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538094"),
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541462")
+        ]
         public async Task ParseAmbiguity2()
         {
             await TestInRegularAndScriptAsync(
@@ -632,7 +674,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     }
                     int f = 0;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538094")]
@@ -661,7 +704,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     }
                     int f = 0;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544924")]
@@ -696,7 +740,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544613")]
@@ -723,7 +768,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         var z = new[] { x < x, x > 1 + 2 };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538131")]
@@ -745,7 +791,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         4,
                         5
                     }, 3); }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545657")]
@@ -813,8 +860,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact]
         public async Task TestConflict_RefParameter1()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 class Program
                 {
@@ -835,8 +881,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class Program
                 {
@@ -863,8 +908,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact]
         public async Task TestConflict_RefParameter2()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 class Program
                 {
@@ -880,8 +924,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class Program
                 {
@@ -903,8 +946,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact]
         public async Task TestConflict_AssignExpression()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 class Program
                 {
@@ -917,8 +959,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class Program
                 {
@@ -937,8 +978,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact]
         public async Task TestConflict_AddAssignExpression1()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 class Program
                 {
@@ -951,8 +991,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class Program
                 {
@@ -971,8 +1010,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact]
         public async Task TestConflict_AddAssignExpression2()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 class C
                 {
@@ -992,8 +1030,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact]
         public async Task TestConflict_SubtractAssignExpression()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 class Program
                 {
@@ -1006,8 +1043,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class Program
                 {
@@ -1026,8 +1062,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact]
         public async Task TestConflict_MultiplyAssignExpression()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 class Program
                 {
@@ -1040,8 +1075,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class Program
                 {
@@ -1060,8 +1094,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact]
         public async Task TestConflict_DivideAssignExpression()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 class Program
                 {
@@ -1074,8 +1107,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class Program
                 {
@@ -1094,8 +1126,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact]
         public async Task TestConflict_ModuloAssignExpression()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 class Program
                 {
@@ -1108,8 +1139,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class Program
                 {
@@ -1128,8 +1158,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact]
         public async Task TestConflict_AndAssignExpression()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 class Program
                 {
@@ -1142,8 +1171,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class Program
                 {
@@ -1162,8 +1190,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact]
         public async Task TestConflict_OrAssignExpression()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 class Program
                 {
@@ -1176,8 +1203,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class Program
                 {
@@ -1196,8 +1222,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact]
         public async Task TestConflict_ExclusiveOrAssignExpression()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 class Program
                 {
@@ -1210,8 +1235,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class Program
                 {
@@ -1230,8 +1254,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact]
         public async Task TestConflict_LeftShiftAssignExpression()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 class Program
                 {
@@ -1244,8 +1267,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class Program
                 {
@@ -1264,8 +1286,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact]
         public async Task TestConflict_RightShiftAssignExpression()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 class Program
                 {
@@ -1278,8 +1299,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class Program
                 {
@@ -1298,8 +1318,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact]
         public async Task TestConflict_PostIncrementExpression()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 class Program
                 {
@@ -1312,8 +1331,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class Program
                 {
@@ -1332,8 +1350,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact]
         public async Task TestConflict_PreIncrementExpression()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 class Program
                 {
@@ -1346,8 +1363,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class Program
                 {
@@ -1366,8 +1382,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact]
         public async Task TestConflict_PostDecrementExpression()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 class Program
                 {
@@ -1380,8 +1395,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class Program
                 {
@@ -1400,8 +1414,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact]
         public async Task TestConflict_PreDecrementExpression()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 class Program
                 {
@@ -1414,8 +1427,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class Program
                 {
@@ -1464,8 +1476,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545342")]
         public async Task TestConflict_UsedBeforeDeclaration()
         {
-            var initial =
-                """
+            var initial = """
                 class Program
                 {
                     static void Main(string[] args)
@@ -1476,8 +1487,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     static void Main(string[] args)
@@ -1494,7 +1504,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact]
         public async Task Preprocessor1()
         {
-            await TestFixOneAsync("""
+            await TestFixOneAsync(
+                """
                 {
                     int [||]x = 1,
                 #if true
@@ -1515,13 +1526,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
 
                         int a = 1;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task Preprocessor2()
         {
-            await TestFixOneAsync("""
+            await TestFixOneAsync(
+                """
                 {
                     int y,
                 #if true
@@ -1542,13 +1555,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
 
                         int a = 1;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task Preprocessor3()
         {
-            await TestFixOneAsync("""
+            await TestFixOneAsync(
+                """
                 {
                     int y,
                 #if true
@@ -1569,14 +1584,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
 
                         int a = 1;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540164")]
         public async Task TriviaOnArrayInitializer()
         {
-            var initial =
-                """
+            var initial = """
                 class C
                 {
                     void M()
@@ -1587,8 +1602,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -1604,8 +1618,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540156")]
         public async Task ProperlyFormatWhenRemovingDeclarator1()
         {
-            var initial =
-                """
+            var initial = """
                 class C
                 {
                     void M()
@@ -1616,8 +1629,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -1634,8 +1646,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540156")]
         public async Task ProperlyFormatWhenRemovingDeclarator2()
         {
-            var initial =
-                """
+            var initial = """
                 class C
                 {
                     void M()
@@ -1646,8 +1657,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -1664,8 +1674,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540156")]
         public async Task ProperlyFormatWhenRemovingDeclarator3()
         {
-            var initial =
-                """
+            var initial = """
                 class C
                 {
                     void M()
@@ -1676,8 +1685,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -1694,8 +1702,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540186")]
         public async Task ProperlyFormatAnonymousTypeMember()
         {
-            var initial =
-                """
+            var initial = """
                 class C
                 {
                     void M()
@@ -1706,8 +1713,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -1723,8 +1729,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact, WorkItem(6356, "DevDiv_Projects/Roslyn")]
         public async Task InlineToAnonymousTypeProperty()
         {
-            var initial =
-                """
+            var initial = """
                 class C
                 {
                     void M()
@@ -1735,8 +1740,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -1752,8 +1756,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/528075")]
         public async Task InlineIntoDelegateInvocation()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 class Program
                 {
@@ -1765,8 +1768,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class Program
                 {
@@ -1783,8 +1785,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541341")]
         public async Task InlineAnonymousMethodIntoNullCoalescingExpression()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
 
                 class Program
@@ -1797,8 +1798,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
 
                 class Program
@@ -1816,8 +1816,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541341")]
         public async Task InlineLambdaIntoNullCoalescingExpression()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
 
                 class Program
@@ -1830,8 +1829,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
 
                 class Program
@@ -1849,8 +1847,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538079")]
         public async Task InsertCastForBoxingOperation1()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 class A
                 {
@@ -1863,8 +1860,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class A
                 {
@@ -1882,8 +1878,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538079")]
         public async Task InsertCastForBoxingOperation2()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 class A
                 {
@@ -1897,8 +1892,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class A
                 {
@@ -1917,8 +1911,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538079")]
         public async Task InsertCastForBoxingOperation3()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 class A
                 {
@@ -1931,8 +1924,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class A
                 {
@@ -1950,8 +1942,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538079")]
         public async Task InsertCastForBoxingOperation4()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 class A
                 {
@@ -1964,8 +1955,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class A
                 {
@@ -1983,8 +1973,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538079")]
         public async Task InsertCastForBoxingOperation5()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 class A
                 {
@@ -1997,8 +1986,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 class A
                 {
@@ -2039,7 +2027,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         Console.Write(10);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540278")]
@@ -2069,7 +2058,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         Console.Write(10);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540278")]
@@ -2097,7 +2087,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         Console.Write(10);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540278")]
@@ -2128,7 +2119,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 #endif
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540277")]
@@ -2154,7 +2146,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         Console.Write(5 + j);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541694")]
@@ -2191,7 +2184,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542647")]
@@ -2210,7 +2204,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     }
                 }
                 """,
-
                 """
                 using System;
                 class C
@@ -2221,7 +2214,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         X();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545619")]
@@ -2240,7 +2234,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     }
                 }
                 """,
-
                 """
                 using System;
                 class Program
@@ -2251,14 +2244,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         x();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542656")]
         public async Task ParenthesizeIfNecessary1()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
             using System.Collections;
             using System.Linq;
@@ -2274,7 +2268,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-            """
+                """
             using System;
             using System.Collections;
             using System.Linq;
@@ -2288,14 +2282,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     }
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544626")]
         public async Task ParenthesizeIfNecessary2()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
             class C
             {
@@ -2309,7 +2304,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 static void Goo<T>(T y) { }
             }
             """,
-            """
+                """
             using System;
             class C
             {
@@ -2321,14 +2316,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
 
                 static void Goo<T>(T y) { }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544415")]
         public async Task ParenthesizeAddressOf1()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
             unsafe class C
             {
@@ -2340,7 +2336,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-            """
+                """
             using System;
             unsafe class C
             {
@@ -2350,14 +2346,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     var i = (Int32)(&x);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544922")]
         public async Task ParenthesizeAddressOf2()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
             unsafe class C
             {
@@ -2369,7 +2366,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-            """
+                """
             using System;
             unsafe class C
             {
@@ -2379,14 +2376,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     var i = (&x)->ToString();
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544921")]
         public async Task ParenthesizePointerIndirection1()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
             unsafe class C
             {
@@ -2398,7 +2396,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-            """
+                """
             using System;
             unsafe class C
             {
@@ -2408,14 +2406,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     var i = (Int64)(*x);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544614")]
         public async Task ParenthesizePointerIndirection2()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
             unsafe class C
             {
@@ -2427,7 +2426,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-            """
+                """
             using System;
             unsafe class C
             {
@@ -2437,7 +2436,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     var i = (*x)[1].ToString();
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544563")]
@@ -2457,14 +2457,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         int* q = &values[15];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543744")]
         public async Task InlineTempLambdaExpressionCastingError()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
             class Program
             {
@@ -2475,8 +2476,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-
-            """
+                """
             using System;
             class Program
             {
@@ -2485,14 +2485,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     Console.WriteLine((int? s) => { return s; });
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task InsertCastForNull()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
             class C
             {
@@ -2503,8 +2504,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-
-            """
+                """
             using System;
             class C
             {
@@ -2513,14 +2513,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     Console.WriteLine((string)null);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task InsertCastIfNeeded1()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class C
             {
                 void M()
@@ -2530,7 +2531,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-            """
+                """
             class C
             {
                 void M()
@@ -2538,14 +2539,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     System.IComparable<long> y = (long)1;
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545161")]
         public async Task InsertCastIfNeeded2()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
 
             class C
@@ -2559,7 +2561,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 static void Goo(Action<string[]> x) { }
             }
             """,
-            """
+                """
             using System;
 
             class C
@@ -2572,14 +2574,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 static void Goo(Action<int[]> x) { }
                 static void Goo(Action<string[]> x) { }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544612")]
         public async Task InlineIntoBracketedList()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class C
             {
                 void M()
@@ -2592,8 +2595,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 int this[object x] { set { } }
             }
             """,
-
-            """
+                """
             class C
             {
                 void M()
@@ -2604,14 +2606,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
 
                 int this[object x] { set { } }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542648")]
         public async Task ParenthesizeAfterCastIfNeeded()
         {
             await TestAsync(
-            """
+                """
             using System;
 
             enum E { }
@@ -2625,8 +2628,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-
-            """
+                """
             using System;
 
             enum E { }
@@ -2639,14 +2641,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-            parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544635")]
         public async Task InsertCastForEnumZeroIfBoxed()
         {
             await TestAsync(
-            """
+                """
             using System;
             class Program
             {
@@ -2658,8 +2661,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-
-            """
+                """
             using System;
             class Program
             {
@@ -2670,7 +2672,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-            parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/554010")]
@@ -2678,7 +2681,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         public async Task InsertCastForMethodGroupIfNeeded1()
         {
             await TestAsync(
-            """
+                """
             using System;
             class Program
             {
@@ -2689,8 +2692,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-
-            """
+                """
             using System;
             class Program
             {
@@ -2700,7 +2702,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-            parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/554010")]
@@ -2708,7 +2711,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         public async Task InsertCastForMethodGroupIfNeeded2()
         {
             await TestAsync(
-            """
+                """
             using System;
             class Program
             {
@@ -2719,8 +2722,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-
-            """
+                """
             using System;
             class Program
             {
@@ -2730,14 +2732,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-            parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545103")]
         public async Task DoNotInsertCastForTypeThatNoLongerBindsToTheSameType()
         {
             await TestAsync(
-            """
+                """
             class A<T>
             {
                 static T x;
@@ -2751,8 +2754,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-
-            """
+                """
             class A<T>
             {
                 static T x;
@@ -2765,7 +2767,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-            parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/56938")]
@@ -2773,7 +2776,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         public async Task InsertCorrectCastForDelegateCreationExpression()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
 
             class Program
@@ -2785,8 +2788,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-
-            """
+                """
             using System;
 
             class Program
@@ -2796,14 +2798,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     var z = new Func<string, bool>(y => true);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545523")]
         public async Task DoNotInsertCastForObjectCreationIfUnneeded()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
             class Program
             {
@@ -2814,8 +2817,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-
-            """
+                """
             using System;
             class Program
             {
@@ -2824,14 +2826,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     Type b = new ArgumentException().GetType();
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task DoNotInsertCastInForeachIfUnneeded01()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
             using System.Collections.Generic;
 
@@ -2845,8 +2848,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-
-            """
+                """
             using System;
             using System.Collections.Generic;
 
@@ -2858,14 +2860,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         Console.WriteLine(x);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task InsertCastInForeachIfNeeded01()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
             using System.Collections;
 
@@ -2879,8 +2882,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-
-            """
+                """
             using System;
             using System.Collections;
 
@@ -2892,14 +2894,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         Console.WriteLine(x);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
         public async Task InsertCastInForeachIfNeeded02()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
             using System.Collections;
 
@@ -2913,8 +2916,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-
-            """
+                """
             using System;
             using System.Collections;
 
@@ -2926,14 +2928,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         Console.WriteLine(x);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545601")]
         public async Task InsertCastToKeepGenericMethodInference()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
             class C
             {
@@ -2946,8 +2949,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-
-            """
+                """
             using System;
             class C
             {
@@ -2958,14 +2960,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     IComparable<long> c = Goo(1, (long)1);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545601")]
         public async Task InsertCastForKeepImplicitArrayInference()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class C
             {
                 static void M()
@@ -2978,8 +2981,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 static void Goo(object[] o) { }
             }
             """,
-
-            """
+                """
             class C
             {
                 static void M()
@@ -2990,14 +2992,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
 
                 static void Goo(object[] o) { }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545601")]
         public async Task InsertASingleCastToNotBreakOverloadResolution()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class C
             {
                 static void M()
@@ -3010,8 +3013,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 static void Goo(long x, long y) { }
             }
             """,
-
-            """
+                """
             class C
             {
                 static void M()
@@ -3022,14 +3024,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 static void Goo(int x, int y) { }
                 static void Goo(long x, long y) { }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545601")]
         public async Task InsertASingleCastToNotBreakOverloadResolutionInLambdas()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
             class C
             {
@@ -3043,8 +3046,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 static void Goo(Func<long> x, Func<long> y) { }
             }
             """,
-
-            """
+                """
             using System;
             class C
             {
@@ -3056,14 +3058,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 static void Goo(Func<int> x, Func<int> y) { }
                 static void Goo(Func<long> x, Func<long> y) { }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545601")]
         public async Task InsertASingleCastToNotBreakResolutionOfOperatorOverloads()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
             class C
             {
@@ -3093,8 +3096,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-
-            """
+                """
             using System;
             class C
             {
@@ -3122,14 +3124,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     new C().M();
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545561")]
         public async Task InsertCastToNotBreakOverloadResolutionInUncheckedContext()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
 
             class X
@@ -3148,8 +3151,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-
-            """
+                """
             using System;
 
             class X
@@ -3166,14 +3168,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     }
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545564")]
         public async Task InsertCastToNotBreakOverloadResolutionInUnsafeContext()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
 
             static class C
@@ -3194,8 +3197,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-
-            """
+                """
             using System;
 
             static class C
@@ -3214,14 +3216,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     }
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545783")]
         public async Task InsertCastToNotBreakOverloadResolutionInNestedLambdas()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
 
             class C
@@ -3239,8 +3242,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-
-            """
+                """
             using System;
 
             class C
@@ -3256,7 +3258,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     });
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546069")]
@@ -3275,7 +3278,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         System.Console.WriteLine(a);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3294,7 +3298,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 #line default
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3313,7 +3318,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 #line default
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3348,7 +3354,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         #line default
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3385,7 +3392,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         Goo(0);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3405,14 +3413,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         Goo(x);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530743")]
         public async Task InlineFromLabeledStatement()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
 
             class Program
@@ -3426,8 +3435,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-
-            """
+                """
             using System;
 
             class Program
@@ -3439,14 +3447,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     int y = 1;        
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529698")]
         public async Task InlineCompoundAssignmentIntoInitializer()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System.Collections.Generic;
 
             class Program
@@ -3459,8 +3468,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-
-            """
+                """
             using System.Collections.Generic;
 
             class Program
@@ -3471,14 +3479,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     var z = new List<int> { (x += 1) };
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/609497")]
         public async Task Bugfix_609497()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System.Collections.Generic;
 
             class Program
@@ -3490,8 +3499,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-
-            """
+                """
             using System.Collections.Generic;
 
             class Program
@@ -3501,14 +3509,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     IList<object> y = new List<object>();
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/636319")]
         public async Task Bugfix_636319()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System.Collections.Generic;
 
             class Program
@@ -3520,8 +3529,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-
-            """
+                """
             using System.Collections.Generic;
 
             class Program
@@ -3531,14 +3539,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     IList<dynamic> y = new List<dynamic>();
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/609492")]
         public async Task Bugfix_609492()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
 
             class Program
@@ -3550,8 +3559,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-
-            """
+                """
             using System;
 
             class Program
@@ -3561,14 +3569,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     object y = 1;
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529950")]
         public async Task InlineTempDoesNotInsertUnnecessaryExplicitTypeInLambdaParameter()
         {
             await TestInRegularAndScript1Async(
-            """
+                """
             using System;
 
             static class C
@@ -3586,8 +3595,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-
-            """
+                """
             using System;
 
             static class C
@@ -3604,14 +3612,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     Outer(y => Inner(x => { Action a = () => ((string)x).GetType(); }, y), null);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/619425")]
         public async Task Bugfix_619425_RestrictedSimpleNameExpansion()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class A<B>
             {
                 class C : A<C>
@@ -3627,8 +3636,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-
-            """
+                """
             class A<B>
             {
                 class C : A<C>
@@ -3642,14 +3650,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     }
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529840")]
         public async Task Bugfix_529840_DetectSemanticChangesAtInlineSite()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
 
             class A
@@ -3676,8 +3685,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
             }
             """,
-
-            """
+                """
             using System;
 
             class A
@@ -3703,7 +3711,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     return 2;
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1091946")]
@@ -3728,7 +3737,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         return args[0]?.Length == 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3753,7 +3763,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         var y = args.Length.ToString()?.ToString();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3778,7 +3789,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         var y = (args[0]?.Length ?? 10) == 10 ? 10 : 4;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/2593")]
@@ -3837,7 +3849,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         return null;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/2593")]
@@ -3906,7 +3919,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         return null;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3931,7 +3945,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         var s = $"{(global::System.Guid.Empty)}";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3956,7 +3971,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         var s = $"{(b ? 19 : 23)}";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3981,7 +3997,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         var s = $"{(b ? 19 : 23):x}";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -4006,7 +4023,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         var y = $"{s.ToUpper()}";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/4583")]
@@ -4031,7 +4049,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         var s2 = string.Replace($"hello", "world");
                     }
                 }
-                """, parseOptions: TestOptions.Regular7);
+                """,
+                parseOptions: TestOptions.Regular7
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33108")]
@@ -4057,7 +4077,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         var s2 = string.Replace($"hello", "world");
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33108")]
@@ -4087,7 +4108,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
 
                     void Replace(string s1, string s2) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/4583")]
@@ -4112,7 +4134,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         var s2 = string.Replace($"hello {x}", "world");
                     }
                 }
-                """, parseOptions: TestOptions.Regular7);
+                """,
+                parseOptions: TestOptions.Regular7
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/33108")]
@@ -4138,7 +4162,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         var s2 = string.Replace($"hello {x}", "world");
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/15530")]
@@ -4169,15 +4194,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         (await Task.FromResult("")).Any();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/4583")]
         public async Task InlineFormattableStringIntoCallSiteRequiringFormattableString()
         {
-            const string initial = """
+            const string initial =
+                """
                 using System;
-                """ + CodeSnippets.FormattableStringType + """
+                """
+                + CodeSnippets.FormattableStringType
+                + """
                 class C
                 {
                     static void M(FormattableString s)
@@ -4192,9 +4221,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            const string expected = """
+            const string expected =
+                """
                 using System;
-                """ + CodeSnippets.FormattableStringType + """
+                """
+                + CodeSnippets.FormattableStringType
+                + """
                 class C
                 {
                     static void M(FormattableString s)
@@ -4214,9 +4246,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/4624")]
         public async Task InlineFormattableStringIntoCallSiteWithFormattableStringOverload()
         {
-            const string initial = """
+            const string initial =
+                """
                 using System;
-                """ + CodeSnippets.FormattableStringType + """
+                """
+                + CodeSnippets.FormattableStringType
+                + """
                 class C
                 {
                     static void M(string s) { }
@@ -4230,9 +4265,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            const string expected = """
+            const string expected =
+                """
                 using System;
-                """ + CodeSnippets.FormattableStringType + """
+                """
+                + CodeSnippets.FormattableStringType
+                + """
                 class C
                 {
                     static void M(string s) { }
@@ -4319,7 +4357,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
             await TestInRegularAndScript1Async(
                 code,
                 expected,
-                new TestParameters(parseOptions: TestOptions.Regular.WithLanguageVersion(version)));
+                new TestParameters(parseOptions: TestOptions.Regular.WithLanguageVersion(version))
+            );
         }
 
         [Fact]
@@ -4884,7 +4923,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     }
                 }
                 """,
-
                 """
                 using System;
                 class C
@@ -4899,7 +4937,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/11712")]
@@ -4916,7 +4955,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     }
                 }
                 """,
-
                 """
                 class C
                 {
@@ -4925,7 +4963,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         return {|Warning:M(ref x) || M(ref x)|};
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/11712")]
@@ -4942,7 +4981,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     }
                 }
                 """,
-
                 """
                 class C
                 {
@@ -4951,7 +4989,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         return {|Warning:M(out x) || M(out x)|};
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/24791")]
@@ -4978,7 +5017,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         throw null;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/16819")]
@@ -5007,7 +5047,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         Console.Write((Exception)null == new Exception());
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30903")]
@@ -5036,7 +5077,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         var x2 = (X)(0, 0);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30903")]
@@ -5065,7 +5107,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         var x2 = (X)(0, (0, 0));
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35645")]
@@ -5084,86 +5127,96 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            await TestMissingInRegularAndScriptAsync(code, new TestParameters(parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp8)));
+            await TestMissingInRegularAndScriptAsync(
+                code,
+                new TestParameters(
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp8)
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
         public async Task Selections1()
         {
             await TestFixOneAsync(
-    """
+                """
     { [|int x = 0;|]
 
     Console.WriteLine(x); }
     """,
-    """
+                """
     {
             Console.WriteLine(0); }
-    """);
+    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
         public async Task Selections2()
         {
             await TestFixOneAsync(
-    """
+                """
     { int [|x = 0|], y = 1;
 
     Console.WriteLine(x); }
     """,
-    """
+                """
     {
             int y = 1;
 
             Console.WriteLine(0); }
-    """);
+    """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
         public async Task Selections3()
         {
             await TestFixOneAsync(
-    """
+                """
     { int x = 0, [|y = 1|], z = 2;
 
     Console.WriteLine(y); }
     """,
-    """
+                """
     {
             int x = 0, z = 2;
 
             Console.WriteLine(1); }
-    """);
+    """
+            );
         }
 
         [Fact]
         public async Task WarnOnInlineIntoConditional1()
         {
             await TestFixOneAsync(
-    """
+                """
     { var [|x = true|];
 
     System.Diagnostics.Debug.Assert(x); }
     """,
-    """
+                """
     {
             {|Warning:System.Diagnostics.Debug.Assert(true)|}; }
-    """);
+    """
+            );
         }
 
         [Fact]
         public async Task WarnOnInlineIntoConditional2()
         {
             await TestFixOneAsync(
-    """
+                """
     { var [|x = true|];
 
     System.Diagnostics.Debug.Assert(x == true); }
     """,
-    """
+                """
     {
             {|Warning:System.Diagnostics.Debug.Assert(true == true)|}; }
-    """);
+    """
+            );
         }
 
         [Fact]
@@ -5190,7 +5243,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         {|Warning:System.Diagnostics.Debug.Assert(true)|};
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -5221,7 +5275,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         Console.Writeline(true);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40201")]
@@ -5254,7 +5309,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
 
                     object Helper(CancellationToken ct) { return null; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/18322")]
@@ -5283,13 +5339,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
 
                 public static class Class1Extensions { public static void DoStuff(this Class1 c, int x) { } }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8716")]
         public async Task DoNotQualifyInlinedLocalFunction()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 using System;
                 class C
                 {
@@ -5317,13 +5375,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         new Action(LocalFunc)();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/22540")]
         public async Task DoNotQualifyWhenInliningIntoPattern_01()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 using Syntax;
 
                 namespace Syntax
@@ -5363,13 +5423,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                             return;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/45661")]
         public async Task DoNotQualifyWhenInliningIntoPattern_02()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 using Syntax;
 
                 namespace Syntax
@@ -5409,13 +5471,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                             return;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42835")]
         public async Task WarnWhenPossibleChangeInSemanticMeaning()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 class C
                 {
                     int P { get; set; }
@@ -5439,13 +5503,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         var c2 = new C();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42835")]
         public async Task WarnWhenPossibleChangeInSemanticMeaning_IgnoreParentheses()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 class C
                 {
                     int P { get; set; }
@@ -5469,13 +5535,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         var c2 = new C();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42835")]
         public async Task WarnWhenPossibleChangeInSemanticMeaning_MethodInvocation()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 class C
                 {
                     int P { get; set; }
@@ -5509,13 +5577,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         return new C();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42835")]
         public async Task WarnWhenPossibleChangeInSemanticMeaning_MethodInvocation2()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 class C
                 {
                     int P { get; set; }
@@ -5549,13 +5619,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         P = 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42835")]
         public async Task WarnWhenPossibleChangeInSemanticMeaning_NestedObjectInitialization()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 class C
                 {
                     int P { get; set; }
@@ -5579,13 +5651,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         var c2 = new C[1] { new C() };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42835")]
         public async Task WarnWhenPossibleChangeInSemanticMeaning_NestedMethodCall()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 class C
                 {
                     int P { get; set; }
@@ -5621,13 +5695,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         return new C();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task InlineIntoWithExpression()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 record Person(string Name)
                 {
                     void M(Person p)
@@ -5659,7 +5735,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     {
                     }
                 }
-                """, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp9));
+                """,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp9
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44263")]
@@ -5681,7 +5761,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
             // Global statements in regular code are local variables, so Inline Temporary works. Script code is not
             // tested because global statements in script code are field declarations, which are not considered
             // temporary.
-            await TestAsync(code, expected, TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9));
+            await TestAsync(
+                code,
+                expected,
+                TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44263")]
@@ -5701,13 +5785,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
             // Global statements in regular code are local variables, so Inline Temporary works. Script code is not
             // tested because global statements in script code are field declarations, which are not considered
             // temporary.
-            await TestAsync(code, expected, TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9));
+            await TestAsync(
+                code,
+                expected,
+                TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44263")]
         public async Task TopLevelStatement_InScope()
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 {
                     int val = 0;
                     int [||]val2 = val + 1;
@@ -5720,7 +5809,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                     System.Console.WriteLine(val + 1);
                 }
                 """,
-                TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9));
+                TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9)
+            );
         }
 
         [Fact]
@@ -5773,7 +5863,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                         <Document IsLinkFile='true' LinkProjectName='CSProj.1' LinkFilePath='C.cs'/>
                     </Project>
                 </Workspace>
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/50207")]
@@ -5800,7 +5891,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Inline
                 }
                 """;
 
-            await TestInRegularAndScriptAsync(code, expected, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp9));
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp9
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/34143")]

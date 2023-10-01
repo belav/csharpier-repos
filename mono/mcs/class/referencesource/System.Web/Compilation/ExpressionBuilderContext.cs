@@ -4,40 +4,46 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Compilation {
+namespace System.Web.Compilation
+{
     using System;
     using System.Security.Permissions;
     using System.Web.UI;
 
-    public sealed class ExpressionBuilderContext {
-
-        // 
+    public sealed class ExpressionBuilderContext
+    {
+        //
 
 
         private TemplateControl _templateControl;
         private VirtualPath _virtualPath;
 
-        internal ExpressionBuilderContext(VirtualPath virtualPath) {
+        internal ExpressionBuilderContext(VirtualPath virtualPath)
+        {
             _virtualPath = virtualPath;
         }
 
-        public ExpressionBuilderContext(string virtualPath) {
+        public ExpressionBuilderContext(string virtualPath)
+        {
             _virtualPath = System.Web.VirtualPath.Create(virtualPath);
         }
 
-        public ExpressionBuilderContext(TemplateControl templateControl) {
+        public ExpressionBuilderContext(TemplateControl templateControl)
+        {
             _templateControl = templateControl;
         }
 
-        public TemplateControl TemplateControl {
-            get {
-                return _templateControl;
-            }
+        public TemplateControl TemplateControl
+        {
+            get { return _templateControl; }
         }
 
-        public string VirtualPath {
-            get {
-                if (_virtualPath == null && _templateControl != null) {
+        public string VirtualPath
+        {
+            get
+            {
+                if (_virtualPath == null && _templateControl != null)
+                {
                     return _templateControl.AppRelativeVirtualPath;
                 }
 
@@ -45,15 +51,15 @@ namespace System.Web.Compilation {
             }
         }
 
-        internal VirtualPath VirtualPathObject {
-            get {
+        internal VirtualPath VirtualPathObject
+        {
+            get
+            {
                 if (_virtualPath == null && _templateControl != null)
                     return _templateControl.VirtualPath;
 
                 return _virtualPath;
             }
         }
-
     }
-
 }

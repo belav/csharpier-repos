@@ -22,14 +22,16 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
     internal static class FaultReporter
     {
         private static readonly object _guard = new();
-        private static ImmutableArray<TelemetrySession> s_telemetrySessions = ImmutableArray<TelemetrySession>.Empty;
+        private static ImmutableArray<TelemetrySession> s_telemetrySessions =
+            ImmutableArray<TelemetrySession>.Empty;
         private static ImmutableArray<TraceSource> s_loggers = ImmutableArray<TraceSource>.Empty;
 
         private static int s_dumpsSubmitted;
 
         public static void InitializeFatalErrorHandlers()
         {
-            FatalError.Handler = static (exception, severity, forceDump) => ReportFault(exception, ConvertSeverity(severity), forceDump);
+            FatalError.Handler = static (exception, severity, forceDump) =>
+                ReportFault(exception, ConvertSeverity(severity), forceDump);
             FatalError.CopyHandlerTo(typeof(Compilation).Assembly);
         }
 
@@ -87,7 +89,8 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         /// </summary>
         private const int P5MethodNameDefaultIndex = 5;
 
-        private static readonly ImmutableArray<string> UnblameableMethodPrefixes = ImmutableArray.Create("Roslyn.Utilities.Contract.");
+        private static readonly ImmutableArray<string> UnblameableMethodPrefixes =
+            ImmutableArray.Create("Roslyn.Utilities.Contract.");
 
         /// <summary>
         /// Report Non-Fatal Watson for a given unhandled exception.
@@ -99,7 +102,12 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         {
             try
             {
-                if (exception is OperationCanceledException { InnerException: { } oceInnerException })
+                if (
+                    exception is OperationCanceledException
+                    {
+                        InnerException: { } oceInnerException
+                    }
+                )
                 {
                     ReportFault(oceInnerException, severity, forceDump);
                     return;
@@ -117,7 +125,8 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
                 var currentProcess = Process.GetCurrentProcess();
 
                 // write the exception to a log file:
-                var logMessage = $"[{currentProcess.ProcessName}:{currentProcess.Id}] Unexpected exception: {exception}";
+                var logMessage =
+                    $"[{currentProcess.ProcessName}:{currentProcess.Id}] Unexpected exception: {exception}";
                 foreach (var logger in s_loggers)
                 {
                     logger.TraceEvent(TraceEventType.Error, 1, logMessage);
@@ -153,12 +162,13 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
                             }
                         }
 
-                        // Returning "0" signals that, if sampled, we should send data to Watson. 
-                        // Any other value will cancel the Watson report. We never want to trigger a process dump manually, 
+                        // Returning "0" signals that, if sampled, we should send data to Watson.
+                        // Any other value will cancel the Watson report. We never want to trigger a process dump manually,
                         // we'll let TargetedNotifications determine if a dump should be collected.
                         // See https://aka.ms/roslynnfwdocs for more details
                         return 0;
-                    });
+                    }
+                );
 
                 foreach (var session in s_telemetrySessions)
                 {
@@ -198,7 +208,10 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
                         var methodName = method.DeclaringType.FullName + "." + method.Name;
                         if (!UnblameableMethodPrefixes.Any(p => methodName.StartsWith(p)))
                         {
-                            faultUtility.SetBucketParameter(P4ModuleNameDefaultIndex, method.DeclaringType.Assembly.GetName().Name);
+                            faultUtility.SetBucketParameter(
+                                P4ModuleNameDefaultIndex,
+                                method.DeclaringType.Assembly.GetName().Name
+                            );
                             faultUtility.SetBucketParameter(P5MethodNameDefaultIndex, methodName);
                             return;
                         }
@@ -241,9 +254,7 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
                     }
                 }
             }
-            catch
-            {
-            }
+            catch { }
 
             // If we couldn't get a stack, do this
             return exception.Message;
@@ -254,7 +265,12 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
             try
             {
                 var logPath = Path.Combine(Path.GetTempPath(), "VSLogs");
-                var logs = CollectFilePaths(logPath, "*.svclog", shouldExcludeLogFile: (name) => !name.Contains("Roslyn") && !name.Contains("LSPClient"));
+                var logs = CollectFilePaths(
+                    logPath,
+                    "*.svclog",
+                    shouldExcludeLogFile: (name) =>
+                        !name.Contains("Roslyn") && !name.Contains("LSPClient")
+                );
                 return logs;
             }
             catch (Exception)
@@ -271,12 +287,17 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
             {
                 var logPath = Path.Combine(Path.GetTempPath(), "servicehub", "logs");
 
-                // TODO: https://github.com/dotnet/roslyn/issues/42582 
+                // TODO: https://github.com/dotnet/roslyn/issues/42582
                 // name our services more consistently to simplify filtering
-                var logs = CollectFilePaths(logPath, "*.log", shouldExcludeLogFile: (name) => !name.Contains("-" + ServiceDescriptor.ServiceNameTopLevelPrefix) &&
-                        !name.Contains("-CodeLens") &&
-                        !name.Contains("-ManagedLanguage.IDE.RemoteHostClient") &&
-                        !name.Contains("-hub"));
+                var logs = CollectFilePaths(
+                    logPath,
+                    "*.log",
+                    shouldExcludeLogFile: (name) =>
+                        !name.Contains("-" + ServiceDescriptor.ServiceNameTopLevelPrefix)
+                        && !name.Contains("-CodeLens")
+                        && !name.Contains("-ManagedLanguage.IDE.RemoteHostClient")
+                        && !name.Contains("-hub")
+                );
                 return logs;
             }
             catch (Exception)
@@ -287,7 +308,11 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
             return SpecializedCollections.EmptyList<string>();
         }
 
-        private static List<string> CollectFilePaths(string logDirectoryPath, string logFileExtension, Func<string, bool> shouldExcludeLogFile)
+        private static List<string> CollectFilePaths(
+            string logDirectoryPath,
+            string logFileExtension,
+            Func<string, bool> shouldExcludeLogFile
+        )
         {
             var paths = new List<string>();
 

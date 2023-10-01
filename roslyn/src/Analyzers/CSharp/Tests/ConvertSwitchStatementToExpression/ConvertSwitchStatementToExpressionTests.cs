@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
 {
     using VerifyCS = CSharpCodeFixVerifier<
         ConvertSwitchStatementToExpressionDiagnosticAnalyzer,
-        ConvertSwitchStatementToExpressionCodeFixProvider>;
+        ConvertSwitchStatementToExpressionCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsConvertSwitchStatementToExpression)]
     public class ConvertSwitchStatementToExpressionTests
@@ -27,8 +28,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         private static readonly LanguageVersion CSharp9 = LanguageVersion.CSharp9;
 
         [Theory, CombinatorialData]
-        public void TestStandardProperty(AnalyzerProperty property)
-            => VerifyCS.VerifyStandardProperty(property);
+        public void TestStandardProperty(AnalyzerProperty property) =>
+            VerifyCS.VerifyStandardProperty(property);
 
         [Fact]
         public async Task TestReturn()
@@ -67,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -107,7 +109,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -155,7 +158,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -359,7 +363,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -402,7 +407,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -501,7 +507,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -547,7 +554,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -779,7 +787,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/37873")]
@@ -823,7 +832,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52258")]
@@ -857,14 +867,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36086")]
         public async Task TestSeverity()
         {
-            var source =
-                """
+            var source = """
                 class Program
                 {
                     int M(int i)
@@ -885,18 +895,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                 """;
 
             var analyzer = new ConvertSwitchStatementToExpressionDiagnosticAnalyzer();
-            var descriptor = analyzer.SupportedDiagnostics.First(descriptor => descriptor.Id == IDEDiagnosticIds.ConvertSwitchStatementToExpressionDiagnosticId);
+            var descriptor = analyzer.SupportedDiagnostics.First(
+                descriptor =>
+                    descriptor.Id == IDEDiagnosticIds.ConvertSwitchStatementToExpressionDiagnosticId
+            );
             await new VerifyCS.Test
             {
                 TestCode = source,
                 ExpectedDiagnostics =
                 {
                     // Test0.cs(5,9): warning IDE0066: Use 'switch' expression
-                    new DiagnosticResult(descriptor).WithSeverity(DiagnosticSeverity.Warning).WithSpan(5, 9, 5, 15).WithSpan(5, 9, 15, 10),
+                    new DiagnosticResult(descriptor)
+                        .WithSeverity(DiagnosticSeverity.Warning)
+                        .WithSpan(5, 9, 5, 15)
+                        .WithSpan(5, 9, 15, 10),
                 },
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferSwitchExpression, true, NotificationOption2.Warning },
+                    {
+                        CSharpCodeStyleOptions.PreferSwitchExpression,
+                        true,
+                        NotificationOption2.Warning
+                    },
                 },
             }.RunAsync();
         }
@@ -938,7 +958,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/37947")]
@@ -977,7 +998,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/37949")]
@@ -1087,7 +1109,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/37872")]
@@ -1192,11 +1215,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
             await new VerifyCS.Test
             {
                 TestCode = code,
-                FixedState =
-                {
-                    Sources = { fixedCode },
-                    MarkupHandling = MarkupMode.Allow,
-                },
+                FixedState = { Sources = { fixedCode }, MarkupHandling = MarkupMode.Allow, },
             }.RunAsync();
         }
 
@@ -1231,7 +1250,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/37950")]
@@ -1266,14 +1286,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38771")]
         public async Task TestExplicitDeclaration_Interfaces()
         {
-            var input =
-                """
+            var input = """
                 using System;
 
                 class Program
@@ -1303,8 +1323,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 using System;
 
                 class Program
@@ -1343,8 +1362,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38771")]
         public async Task TestExplicitDeclaration_Interfaces2()
         {
-            var input =
-                """
+            var input = """
                 using System;
 
                 class Program
@@ -1374,8 +1392,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 using System;
 
                 class Program
@@ -1414,8 +1431,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38771")]
         public async Task TestExplicitDeclaration_Interfaces3()
         {
-            var input =
-                """
+            var input = """
                 using System;
 
                 class Program
@@ -1445,8 +1461,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 using System;
 
                 class Program
@@ -1485,8 +1500,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38771")]
         public async Task TestExplicitDeclaration_ClassInheritance()
         {
-            var input =
-                """
+            var input = """
                 using System;
 
                 class Program
@@ -1520,8 +1534,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 using System;
 
                 class Program
@@ -1564,8 +1577,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38771")]
         public async Task TestExplicitDeclaration_ClassInheritance2()
         {
-            var input =
-                """
+            var input = """
                 using System;
 
                 class Program
@@ -1595,8 +1607,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 using System;
 
                 class Program
@@ -1635,8 +1646,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38771")]
         public async Task TestImplicitDeclaration_ClassInheritance()
         {
-            var input =
-                """
+            var input = """
                 using System;
 
                 class Program
@@ -1666,8 +1676,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 using System;
 
                 class Program
@@ -1706,8 +1715,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38771")]
         public async Task TestImplicitDeclaration_ClassInheritance2()
         {
-            var input =
-                """
+            var input = """
                 using System;
 
                 class Program
@@ -1737,8 +1745,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 using System;
 
                 class Program
@@ -1777,8 +1784,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38771")]
         public async Task TestExplicitDeclaration_AllCasesDefaultLiteral()
         {
-            var input =
-                """
+            var input = """
                 class Program
                 {
                     public static void Test()
@@ -1797,8 +1803,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     public static void Test()
@@ -1827,8 +1832,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         [Fact]
         public async Task TestExplicitDeclaration_MixedDefaultLiteralDefaultParameter()
         {
-            var input =
-                """
+            var input = """
                 class Program
                 {
                     public static void Test()
@@ -1876,8 +1880,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         [Fact]
         public async Task TestImplicitDeclaration_AllCasesDefaultParameter()
         {
-            var input =
-                """
+            var input = """
                 class Program
                 {
                     public static void Test()
@@ -1896,8 +1899,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     public static void Test()
@@ -1926,8 +1928,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         [Fact]
         public async Task TestExplicitDeclaration_AllCasesDefaultParameter()
         {
-            var input =
-                """
+            var input = """
                 class Program
                 {
                     public static void Test()
@@ -1946,8 +1947,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     public static void Test()
@@ -1968,7 +1968,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                 FixedCode = expected,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.VarForBuiltInTypes, false, NotificationOption2.Silent },
+                    {
+                        CSharpCodeStyleOptions.VarForBuiltInTypes,
+                        false,
+                        NotificationOption2.Silent
+                    },
                 },
             }.RunAsync();
         }
@@ -1976,8 +1980,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         [Fact]
         public async Task TestExplicitDeclaration_DeclarationTypeDifferentFromAllCaseTypes()
         {
-            var input =
-                """
+            var input = """
                 class Program
                 {
                     public static void Test()
@@ -1996,8 +1999,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class Program
                 {
                     public static void Test()
@@ -2126,7 +2128,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2155,11 +2158,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
 
             var test = new VerifyCS.Test
             {
-                TestState =
-                {
-                    OutputKind = OutputKind.ConsoleApplication,
-                    Sources = { source },
-                },
+                TestState = { OutputKind = OutputKind.ConsoleApplication, Sources = { source }, },
                 FixedCode = fixedSource,
                 LanguageVersion = LanguageVersion.CSharp9,
             };
@@ -2200,10 +2199,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
 
             var test = new VerifyCS.Test
             {
-                TestState = {
-                    Sources = { source },
-                    OutputKind = OutputKind.ConsoleApplication,
-                },
+                TestState = { Sources = { source }, OutputKind = OutputKind.ConsoleApplication, },
                 FixedCode = fixedSource,
                 LanguageVersion = LanguageVersion.CSharp9,
             };
@@ -2280,7 +2276,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/49788")]
@@ -2310,7 +2307,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/58636")]
@@ -2351,7 +2349,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/58636")]
@@ -2396,7 +2395,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/58636")]
@@ -2433,7 +2433,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/58636")]
@@ -2473,7 +2474,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/61278")]
@@ -2481,8 +2483,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 using System;
 
                 class C
@@ -2505,8 +2506,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 using System;
 
                 class C
@@ -2537,8 +2537,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         {
             await new VerifyCS.Test
             {
-                TestCode =
-                """
+                TestCode = """
                 using System;
 
                 class C
@@ -2561,8 +2560,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                     }
                 }
                 """,
-                FixedCode =
-                """
+                FixedCode = """
                 using System;
 
                 class C

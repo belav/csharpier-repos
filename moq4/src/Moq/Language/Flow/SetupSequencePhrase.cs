@@ -13,7 +13,6 @@ namespace Moq.Language.Flow
     // work that having a generic fluent API counterpart `SequenceMethodCall<TResult>`.
     [EditorBrowsable(EditorBrowsableState.Never)]
     sealed class SetupSequencePhrase : ISetupSequentialAction
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private SequenceSetup setup;
@@ -49,8 +48,7 @@ namespace Moq.Language.Flow
         }
 
         public ISetupSequentialAction Throws<TException>()
-            where TException : Exception, new()
-            => this.Throws(new TException());
+            where TException : Exception, new() => this.Throws(new TException());
 
         public ISetupSequentialAction Throws(Exception exception)
         {
@@ -58,7 +56,8 @@ namespace Moq.Language.Flow
             return this;
         }
 
-        public ISetupSequentialAction Throws<TException>(Func<TException> exceptionFunction) where TException : Exception
+        public ISetupSequentialAction Throws<TException>(Func<TException> exceptionFunction)
+            where TException : Exception
         {
             Guard.NotNull(exceptionFunction, nameof(exceptionFunction));
 
@@ -94,7 +93,6 @@ namespace Moq.Language.Flow
     }
 
     sealed class SetupSequencePhrase<TResult> : ISetupSequentialResult<TResult>
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private SequenceSetup setup;
@@ -159,10 +157,12 @@ namespace Moq.Language.Flow
         }
 
         public ISetupSequentialResult<TResult> Throws<TException>()
-            where TException : Exception, new()
-            => this.Throws(new TException());
+            where TException : Exception, new() => this.Throws(new TException());
 
-        public ISetupSequentialResult<TResult> Throws<TException>(Func<TException> exceptionFunction) where TException : Exception
+        public ISetupSequentialResult<TResult> Throws<TException>(
+            Func<TException> exceptionFunction
+        )
+            where TException : Exception
         {
             Guard.NotNull(exceptionFunction, nameof(exceptionFunction));
 

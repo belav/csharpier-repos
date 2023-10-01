@@ -22,7 +22,8 @@ public class ContextInitializedEventData : EventData
         EventDefinitionBase eventDefinition,
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         DbContext context,
-        DbContextOptions contextOptions)
+        DbContextOptions contextOptions
+    )
         : base(eventDefinition, messageGenerator)
     {
         Context = context;

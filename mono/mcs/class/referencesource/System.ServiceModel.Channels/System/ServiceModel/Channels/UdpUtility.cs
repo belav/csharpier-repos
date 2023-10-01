@@ -34,7 +34,8 @@ namespace System.ServiceModel.Channels
 
         public static MessageEncoderFactory GetEncoder(BindingContext context)
         {
-            MessageEncodingBindingElement messageEncoderBindingElement = context.BindingParameters.Remove<MessageEncodingBindingElement>();
+            MessageEncodingBindingElement messageEncoderBindingElement =
+                context.BindingParameters.Remove<MessageEncodingBindingElement>();
             MessageEncoderFactory factory = null;
             if (messageEncoderBindingElement != null)
             {
@@ -49,7 +50,7 @@ namespace System.ServiceModel.Channels
         }
 
         //there are some errors on the server side that we should just ignore because the server will not need
-        //to change its behavior if it sees the exception.  These errors are not ignored on the client 
+        //to change its behavior if it sees the exception.  These errors are not ignored on the client
         //because it may need to adjust settings (e.g. TTL, send smaller messages, double check server address for correctness)
         internal static bool CanIgnoreServerException(Exception ex)
         {
@@ -67,7 +68,6 @@ namespace System.ServiceModel.Channels
             return false;
         }
 
-
         public static void CheckSocketSupport(out bool ipV4Supported, out bool ipV6Supported)
         {
             ipV4Supported = Socket.OSSupportsIPv4;
@@ -76,10 +76,17 @@ namespace System.ServiceModel.Channels
             ThrowIfNoSocketSupport(ipV4Supported, ipV6Supported);
         }
 
-        public static bool TryGetLoopbackInterfaceIndex(NetworkInterface adapter, bool ipv4, out int interfaceIndex)
+        public static bool TryGetLoopbackInterfaceIndex(
+            NetworkInterface adapter,
+            bool ipv4,
+            out int interfaceIndex
+        )
         {
             Fx.Assert(adapter != null, "adapter can't be null");
-            Fx.Assert(adapter.NetworkInterfaceType == NetworkInterfaceType.Loopback, "adapter type must be loopback adapter");
+            Fx.Assert(
+                adapter.NetworkInterfaceType == NetworkInterfaceType.Loopback,
+                "adapter type must be loopback adapter"
+            );
 
             interfaceIndex = -1;
             bool result = false;
@@ -99,13 +106,33 @@ namespace System.ServiceModel.Channels
             return result;
         }
 
-        public static UdpSocket CreateUnicastListenSocket(IPAddress ipAddress, ref int port, int receiveBufferSize, int timeToLive)
+        public static UdpSocket CreateUnicastListenSocket(
+            IPAddress ipAddress,
+            ref int port,
+            int receiveBufferSize,
+            int timeToLive
+        )
         {
-            return CreateListenSocket(ipAddress, ref port, receiveBufferSize, timeToLive, UdpConstants.Defaults.InterfaceIndex, false, false);
+            return CreateListenSocket(
+                ipAddress,
+                ref port,
+                receiveBufferSize,
+                timeToLive,
+                UdpConstants.Defaults.InterfaceIndex,
+                false,
+                false
+            );
         }
 
-        public static UdpSocket CreateListenSocket(IPAddress ipAddress, ref int port, int receiveBufferSize, int timeToLive,
-            int interfaceIndex, bool allowMulticastLoopback, bool isLoopbackAdapter)
+        public static UdpSocket CreateListenSocket(
+            IPAddress ipAddress,
+            ref int port,
+            int receiveBufferSize,
+            int timeToLive,
+            int interfaceIndex,
+            bool allowMulticastLoopback,
+            bool isLoopbackAdapter
+        )
         {
             bool isIPv6 = (ipAddress.AddressFamily == AddressFamily.InterNetworkV6);
             Socket socket = null;
@@ -126,7 +153,15 @@ namespace System.ServiceModel.Channels
 
             socket = new Socket(localEndpoint.AddressFamily, SocketType.Dgram, ProtocolType.Udp);
 
-            SetPreBindSocketOptions(socket, listenMulticast, receiveBufferSize, (short)timeToLive, interfaceIndex, allowMulticastLoopback, isLoopbackAdapter);
+            SetPreBindSocketOptions(
+                socket,
+                listenMulticast,
+                receiveBufferSize,
+                (short)timeToLive,
+                interfaceIndex,
+                allowMulticastLoopback,
+                isLoopbackAdapter
+            );
 
             BindSocket(socket, localEndpoint);
 
@@ -138,19 +173,25 @@ namespace System.ServiceModel.Channels
                 port = ((IPEndPoint)socket.LocalEndPoint).Port;
             }
 
-
             return new UdpSocket(socket, interfaceIndex);
         }
 
         //returns the port number used...
-        public static int CreateListenSocketsOnUniquePort(IPAddress ipv4Address, IPAddress ipv6Address, int receiveBufferSize, int timeToLive, out UdpSocket ipv4Socket, out UdpSocket ipv6Socket)
+        public static int CreateListenSocketsOnUniquePort(
+            IPAddress ipv4Address,
+            IPAddress ipv6Address,
+            int receiveBufferSize,
+            int timeToLive,
+            out UdpSocket ipv4Socket,
+            out UdpSocket ipv6Socket
+        )
         {
-            // We need both IPv4 and IPv6 on the same port. We can't atomicly bind for IPv4 and IPv6, 
+            // We need both IPv4 and IPv6 on the same port. We can't atomicly bind for IPv4 and IPv6,
             // so we try 10 times, which even with a 50% failure rate will statistically succeed 99.9% of the time.
             //
             // We look in the range of 49152-65534 for Vista default behavior parity.
             // http://www.iana.org/assignments/port-numbers
-            // 
+            //
             // We also grab the 10 random numbers in a row to reduce collisions between multiple people somehow
             // colliding on the same seed.
             const int retries = 10;
@@ -162,13 +203,14 @@ namespace System.ServiceModel.Channels
 
             int[] portNumbers = new int[retries];
 
-            Random randomNumberGenerator = new Random(AppDomain.CurrentDomain.GetHashCode() | Environment.TickCount);
+            Random randomNumberGenerator = new Random(
+                AppDomain.CurrentDomain.GetHashCode() | Environment.TickCount
+            );
 
             for (int i = 0; i < retries; i++)
             {
                 portNumbers[i] = randomNumberGenerator.Next(lowWatermark, highWatermark);
             }
-
 
             int port = -1;
             for (int i = 0; i < retries; i++)
@@ -176,8 +218,18 @@ namespace System.ServiceModel.Channels
                 port = portNumbers[i];
                 try
                 {
-                    ipv4Socket = UdpUtility.CreateUnicastListenSocket(ipv4Address, ref port, receiveBufferSize, timeToLive);
-                    ipv6Socket = UdpUtility.CreateUnicastListenSocket(ipv6Address, ref port, receiveBufferSize, timeToLive);
+                    ipv4Socket = UdpUtility.CreateUnicastListenSocket(
+                        ipv4Address,
+                        ref port,
+                        receiveBufferSize,
+                        timeToLive
+                    );
+                    ipv6Socket = UdpUtility.CreateUnicastListenSocket(
+                        ipv6Address,
+                        ref port,
+                        receiveBufferSize,
+                        timeToLive
+                    );
                     break;
                 }
                 catch (AddressAlreadyInUseException)
@@ -202,32 +254,63 @@ namespace System.ServiceModel.Channels
 
             if (ipv4Socket == null)
             {
-                throw FxTrace.Exception.AsError(new AddressAlreadyInUseException(SR.UniquePortNotAvailable));
+                throw FxTrace.Exception.AsError(
+                    new AddressAlreadyInUseException(SR.UniquePortNotAvailable)
+                );
             }
 
-            Fx.Assert(ipv4Socket != null, "An exception should have been thrown if the ipv4Socket socket is null");
-            Fx.Assert(ipv6Socket != null, "An exception should have been thrown if the ipv6Socket socket is null");
-            Fx.Assert(port > 0, "The port number should have been greater than 0. Actual value was " + port);
+            Fx.Assert(
+                ipv4Socket != null,
+                "An exception should have been thrown if the ipv4Socket socket is null"
+            );
+            Fx.Assert(
+                ipv6Socket != null,
+                "An exception should have been thrown if the ipv6Socket socket is null"
+            );
+            Fx.Assert(
+                port > 0,
+                "The port number should have been greater than 0. Actual value was " + port
+            );
 
             return port;
         }
 
-        public static void ValidateDuplicateDetectionAndRetransmittionSupport(MessageEncoderFactory messageEncoderFactory, bool retransmissionEnabled, bool duplicateDetectionEnabled)
+        public static void ValidateDuplicateDetectionAndRetransmittionSupport(
+            MessageEncoderFactory messageEncoderFactory,
+            bool retransmissionEnabled,
+            bool duplicateDetectionEnabled
+        )
         {
             Fx.Assert(messageEncoderFactory != null, "messageEncoderFactory shouldn't be null");
-            
+
             MessageVersion encoderMessageVersion = messageEncoderFactory.MessageVersion;
 
             if (encoderMessageVersion.Addressing == AddressingVersion.None)
             {
                 if (retransmissionEnabled)
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.TransportRequiresAddressingOnEncoderForRetransmission(encoderMessageVersion, "RetransmissionSettings", typeof(UdpTransportBindingElement).Name)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.TransportRequiresAddressingOnEncoderForRetransmission(
+                                encoderMessageVersion,
+                                "RetransmissionSettings",
+                                typeof(UdpTransportBindingElement).Name
+                            )
+                        )
+                    );
                 }
 
                 if (duplicateDetectionEnabled)
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.TransportRequiresAddressingOnEncoderForDuplicateDetection(encoderMessageVersion, "DuplicateMessageHistoryLength", typeof(UdpTransportBindingElement).Name)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.TransportRequiresAddressingOnEncoderForDuplicateDetection(
+                                encoderMessageVersion,
+                                "DuplicateMessageHistoryLength",
+                                typeof(UdpTransportBindingElement).Name
+                            )
+                        )
+                    );
                 }
             }
         }
@@ -239,11 +322,19 @@ namespace System.ServiceModel.Channels
 
         public static void ThrowOnUnsupportedHostNameType(Uri uri)
         {
-            bool ipV4, ipV6;
+            bool ipV4,
+                ipV6;
             CheckSocketSupport(out ipV4, out ipV6);
-            if (!ipV4 && uri.HostNameType == UriHostNameType.IPv4 || !ipV6 && uri.HostNameType == UriHostNameType.IPv6)
+            if (
+                !ipV4 && uri.HostNameType == UriHostNameType.IPv4
+                || !ipV6 && uri.HostNameType == UriHostNameType.IPv6
+            )
             {
-                throw FxTrace.Exception.AsError(new ArgumentException(SR.UriHostNameTypeNotSupportedByOS(uri.Host, uri.HostNameType.ToString())));
+                throw FxTrace.Exception.AsError(
+                    new ArgumentException(
+                        SR.UriHostNameTypeNotSupportedByOS(uri.Host, uri.HostNameType.ToString())
+                    )
+                );
             }
         }
 
@@ -258,8 +349,11 @@ namespace System.ServiceModel.Channels
         public static NetworkInterface[] GetMulticastInterfaces(string multicastInterfaceIdentifier)
         {
             NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
-            
-            Fx.Assert(adapters != null, "NetworkInterface.GetAllNetworkInterfaces() should never return null");
+
+            Fx.Assert(
+                adapters != null,
+                "NetworkInterface.GetAllNetworkInterfaces() should never return null"
+            );
 
             NetworkInterface[] results = null;
 
@@ -281,20 +375,33 @@ namespace System.ServiceModel.Channels
                 //with better context information that what we have here...
                 results = supportedAdapters.ToArray();
             }
-            else  //Only looking for one interface...
+            else //Only looking for one interface...
             {
                 for (int i = 0; i < adapters.Length; i++)
                 {
                     NetworkInterface adapter = adapters[i];
 
-                    if (string.Equals(adapter.Id, multicastInterfaceIdentifier, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        string.Equals(
+                            adapter.Id,
+                            multicastInterfaceIdentifier,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         if (IsSuitableForMulticast(adapter))
                         {
                             OperationalStatus status = adapter.OperationalStatus;
                             if (status != OperationalStatus.Up)
                             {
-                                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.UdpAdapterSpecifiedNotConnected(multicastInterfaceIdentifier, status)));
+                                throw FxTrace.Exception.AsError(
+                                    new InvalidOperationException(
+                                        SR.UdpAdapterSpecifiedNotConnected(
+                                            multicastInterfaceIdentifier,
+                                            status
+                                        )
+                                    )
+                                );
                             }
 
                             results = new NetworkInterface[] { adapter };
@@ -302,18 +409,31 @@ namespace System.ServiceModel.Channels
                         }
                         else
                         {
-                            throw FxTrace.Exception.AsError(new InvalidOperationException(SR.UdpAdapterSpecifiedNotSuitableForMulticast(multicastInterfaceIdentifier)));
+                            throw FxTrace.Exception.AsError(
+                                new InvalidOperationException(
+                                    SR.UdpAdapterSpecifiedNotSuitableForMulticast(
+                                        multicastInterfaceIdentifier
+                                    )
+                                )
+                            );
                         }
                     }
                 }
 
                 if (results == null || results.Length == 0)
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.UdpInterfaceIndexMatchNotFound(multicastInterfaceIdentifier)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.UdpInterfaceIndexMatchNotFound(multicastInterfaceIdentifier)
+                        )
+                    );
                 }
             }
 
-            Fx.Assert(results != null, "A null list of network adapters should never be returned.  It should either be an empty list or an exception should have been thrown.");
+            Fx.Assert(
+                results != null,
+                "A null list of network adapters should never be returned.  It should either be an empty list or an exception should have been thrown."
+            );
             return results;
         }
 
@@ -323,7 +443,7 @@ namespace System.ServiceModel.Channels
             {
                 // 224.0.0.0 through 239.255.255.255
                 int firstAddressByte = (int)address.GetAddressBytes()[0];
-                return (firstAddressByte >= 224 && firstAddressByte <= 239); 
+                return (firstAddressByte >= 224 && firstAddressByte <= 239);
             }
             else
             {
@@ -335,10 +455,12 @@ namespace System.ServiceModel.Channels
         {
             bool result = false;
 
-            if (networkInterface.SupportsMulticast &&
-                !networkInterface.IsReceiveOnly &&
-                networkInterface.NetworkInterfaceType != NetworkInterfaceType.Tunnel &&
-                networkInterface.NetworkInterfaceType != NetworkInterfaceType.Unknown)
+            if (
+                networkInterface.SupportsMulticast
+                && !networkInterface.IsReceiveOnly
+                && networkInterface.NetworkInterfaceType != NetworkInterfaceType.Tunnel
+                && networkInterface.NetworkInterfaceType != NetworkInterfaceType.Unknown
+            )
             {
                 result = true;
             }
@@ -348,9 +470,9 @@ namespace System.ServiceModel.Channels
 
         public static bool IsSupportedHostNameType(UriHostNameType hostNameType)
         {
-            return hostNameType == UriHostNameType.Dns ||
-                hostNameType == UriHostNameType.IPv4 ||
-                hostNameType == UriHostNameType.IPv6;
+            return hostNameType == UriHostNameType.Dns
+                || hostNameType == UriHostNameType.IPv4
+                || hostNameType == UriHostNameType.IPv6;
         }
 
         public static void ValidateBufferBounds(byte[] buffer, int offset, int size)
@@ -367,12 +489,20 @@ namespace System.ServiceModel.Channels
         {
             if (offset < 0)
             {
-                throw FxTrace.Exception.ArgumentOutOfRange("offset", offset, SR.ValueMustBeNonNegative(offset));
+                throw FxTrace.Exception.ArgumentOutOfRange(
+                    "offset",
+                    offset,
+                    SR.ValueMustBeNonNegative(offset)
+                );
             }
 
             if (offset > bufferSize)
             {
-                throw FxTrace.Exception.ArgumentOutOfRange("offset", offset, SR.OffsetExceedsBufferSize(bufferSize));
+                throw FxTrace.Exception.ArgumentOutOfRange(
+                    "offset",
+                    offset,
+                    SR.OffsetExceedsBufferSize(bufferSize)
+                );
             }
 
             if (size <= 0)
@@ -383,7 +513,11 @@ namespace System.ServiceModel.Channels
             int remainingBufferSpace = bufferSize - offset;
             if (size > remainingBufferSpace)
             {
-                throw FxTrace.Exception.ArgumentOutOfRange("size", size, SR.SizeExceedsRemainingBufferSpace(remainingBufferSpace));
+                throw FxTrace.Exception.ArgumentOutOfRange(
+                    "size",
+                    size,
+                    SR.SizeExceedsRemainingBufferSpace(remainingBufferSpace)
+                );
             }
         }
 
@@ -429,11 +563,21 @@ namespace System.ServiceModel.Channels
             {
                 if (ex.SocketErrorCode == SocketError.AddressAlreadyInUse)
                 {
-                    throw FxTrace.Exception.AsError(new AddressAlreadyInUseException(SR.SocketAddressInUse(localEndpoint.ToString()), ex));
+                    throw FxTrace.Exception.AsError(
+                        new AddressAlreadyInUseException(
+                            SR.SocketAddressInUse(localEndpoint.ToString()),
+                            ex
+                        )
+                    );
                 }
                 else if (ex.SocketErrorCode == SocketError.AccessDenied)
                 {
-                    throw FxTrace.Exception.AsError(new AddressAccessDeniedException(SR.SocketAddressAccessDenied(localEndpoint.ToString()), ex));
+                    throw FxTrace.Exception.AsError(
+                        new AddressAccessDeniedException(
+                            SR.SocketAddressAccessDenied(localEndpoint.ToString()),
+                            ex
+                        )
+                    );
                 }
                 else
                 {
@@ -442,11 +586,22 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        static void SetPreBindSocketOptions(Socket socket, bool listenMulticast, int receiveBufferSize, short timeToLive, int interfaceIndex, 
-            bool allowMulticastLoopback, bool isLoopbackAdapter)
+        static void SetPreBindSocketOptions(
+            Socket socket,
+            bool listenMulticast,
+            int receiveBufferSize,
+            short timeToLive,
+            int interfaceIndex,
+            bool allowMulticastLoopback,
+            bool isLoopbackAdapter
+        )
         {
             bool isIPv4 = socket.AddressFamily == AddressFamily.InterNetwork;
-            SocketOptionLevel ipOptionLevel = (isIPv4 ? ipOptionLevel = SocketOptionLevel.IP : ipOptionLevel = SocketOptionLevel.IPv6);
+            SocketOptionLevel ipOptionLevel = (
+                isIPv4
+                    ? ipOptionLevel = SocketOptionLevel.IP
+                    : ipOptionLevel = SocketOptionLevel.IPv6
+            );
 
             //sets only the unicast TTL
             socket.Ttl = timeToLive;
@@ -457,7 +612,9 @@ namespace System.ServiceModel.Channels
 
             if (interfaceIndex != UdpConstants.Defaults.InterfaceIndex)
             {
-                int index = (isIPv4 ? IPAddress.HostToNetworkOrder(interfaceIndex) : interfaceIndex);
+                int index = (
+                    isIPv4 ? IPAddress.HostToNetworkOrder(interfaceIndex) : interfaceIndex
+                );
 
                 //sets the outbound interface index
                 socket.SetSocketOption(ipOptionLevel, SocketOptionName.MulticastInterface, index);
@@ -465,11 +622,15 @@ namespace System.ServiceModel.Channels
 
             if (listenMulticast)
             {
-                //don't set this socket option if the socket is bound to the 
+                //don't set this socket option if the socket is bound to the
                 //loopback adapter because it will throw an argument exception.
                 if (!isLoopbackAdapter)
                 {
-                    socket.SetSocketOption(ipOptionLevel, SocketOptionName.MulticastLoopback, allowMulticastLoopback);
+                    socket.SetSocketOption(
+                        ipOptionLevel,
+                        SocketOptionName.MulticastLoopback,
+                        allowMulticastLoopback
+                    );
                 }
 
                 socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, 1);
@@ -485,30 +646,45 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        static void SetPostBindSocketOptions(Socket socket, bool listenMulticast, IPAddress ipAddress, int interfaceIndex)
+        static void SetPostBindSocketOptions(
+            Socket socket,
+            bool listenMulticast,
+            IPAddress ipAddress,
+            int interfaceIndex
+        )
         {
             bool isIPv6 = socket.AddressFamily == AddressFamily.InterNetworkV6;
-                        
+
             if (listenMulticast)
             {
                 //Win2k3 requires that the joining of the multicast group be after the socket is bound (not true on Vista).
                 if (isIPv6)
                 {
-                    IPv6MulticastOption multicastGroup = (interfaceIndex == UdpConstants.Defaults.InterfaceIndex ?
-                        new IPv6MulticastOption(ipAddress)
-                        : new IPv6MulticastOption(ipAddress, interfaceIndex));
+                    IPv6MulticastOption multicastGroup = (
+                        interfaceIndex == UdpConstants.Defaults.InterfaceIndex
+                            ? new IPv6MulticastOption(ipAddress)
+                            : new IPv6MulticastOption(ipAddress, interfaceIndex)
+                    );
 
-                    socket.SetSocketOption(SocketOptionLevel.IPv6, SocketOptionName.AddMembership,
-                        multicastGroup);
+                    socket.SetSocketOption(
+                        SocketOptionLevel.IPv6,
+                        SocketOptionName.AddMembership,
+                        multicastGroup
+                    );
                 }
                 else
                 {
-                    MulticastOption multicastGroup = (interfaceIndex == UdpConstants.Defaults.InterfaceIndex ?
-                        new MulticastOption(ipAddress)
-                        : new MulticastOption(ipAddress, interfaceIndex));
+                    MulticastOption multicastGroup = (
+                        interfaceIndex == UdpConstants.Defaults.InterfaceIndex
+                            ? new MulticastOption(ipAddress)
+                            : new MulticastOption(ipAddress, interfaceIndex)
+                    );
 
-                    socket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.AddMembership,
-                        multicastGroup);
+                    socket.SetSocketOption(
+                        SocketOptionLevel.IP,
+                        SocketOptionName.AddMembership,
+                        multicastGroup
+                    );
                 }
             }
         }
@@ -532,18 +708,27 @@ namespace System.ServiceModel.Channels
             return false;
         }
 
-        public static Message DecodeMessage(DuplicateMessageDetector duplicateDetector, MessageEncoder encoder, BufferManager bufferManager, ArraySegment<byte> data, IPEndPoint remoteEndPoint, int interfaceIndex, bool ignoreSerializationException, out string messageHash)
+        public static Message DecodeMessage(
+            DuplicateMessageDetector duplicateDetector,
+            MessageEncoder encoder,
+            BufferManager bufferManager,
+            ArraySegment<byte> data,
+            IPEndPoint remoteEndPoint,
+            int interfaceIndex,
+            bool ignoreSerializationException,
+            out string messageHash
+        )
         {
             Fx.Assert(data != null, "data can't be null");
             Fx.Assert(remoteEndPoint != null, "remoteEndPoint can't be null");
             Fx.Assert(encoder != null, "encoder can't be null");
             Fx.Assert(bufferManager != null, "bufferManager can't be null");
-            
+
             Message message = null;
 
             messageHash = null;
 
-            if (duplicateDetector == null  || !duplicateDetector.IsDuplicate(data, out messageHash))
+            if (duplicateDetector == null || !duplicateDetector.IsDuplicate(data, out messageHash))
             {
                 try
                 {
@@ -562,10 +747,16 @@ namespace System.ServiceModel.Channels
 
                 if (message != null)
                 {
-                    message.Properties.Add(RemoteEndpointMessageProperty.Name,
-                        new RemoteEndpointMessageProperty(remoteEndPoint.Address.ToString(), remoteEndPoint.Port));
+                    message.Properties.Add(
+                        RemoteEndpointMessageProperty.Name,
+                        new RemoteEndpointMessageProperty(
+                            remoteEndPoint.Address.ToString(),
+                            remoteEndPoint.Port
+                        )
+                    );
 
-                    NetworkInterfaceMessageProperty networkInterfaceMessageProperty = new NetworkInterfaceMessageProperty(interfaceIndex);
+                    NetworkInterfaceMessageProperty networkInterfaceMessageProperty =
+                        new NetworkInterfaceMessageProperty(interfaceIndex);
                     networkInterfaceMessageProperty.AddTo(message);
                 }
             }

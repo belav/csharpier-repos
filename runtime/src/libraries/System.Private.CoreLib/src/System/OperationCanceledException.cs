@@ -12,7 +12,9 @@ namespace System
     /// The exception that is thrown in a thread upon cancellation of an operation that the thread was executing.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class OperationCanceledException : SystemException
     {
         [NonSerialized]
@@ -42,7 +44,6 @@ namespace System
             HResult = HResults.COR_E_OPERATIONCANCELED;
         }
 
-
         public OperationCanceledException(CancellationToken token)
             : this()
         {
@@ -55,16 +56,23 @@ namespace System
             CancellationToken = token;
         }
 
-        public OperationCanceledException(string? message, Exception? innerException, CancellationToken token)
+        public OperationCanceledException(
+            string? message,
+            Exception? innerException,
+            CancellationToken token
+        )
             : this(message, innerException)
         {
             CancellationToken = token;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected OperationCanceledException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected OperationCanceledException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

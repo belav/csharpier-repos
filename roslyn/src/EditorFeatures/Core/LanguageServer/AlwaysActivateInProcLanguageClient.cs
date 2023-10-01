@@ -42,20 +42,38 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
         ILspServiceLoggerFactory lspLoggerFactory,
         IThreadingContext threadingContext,
         ExportProvider exportProvider,
-        [ImportMany] IEnumerable<Lazy<ILspBuildOnlyDiagnostics, ILspBuildOnlyDiagnosticsMetadata>> buildOnlyDiagnostics) : AbstractInProcLanguageClient(lspServiceProvider, globalOptions, lspLoggerFactory, threadingContext, exportProvider)
+        [ImportMany]
+            IEnumerable<
+            Lazy<ILspBuildOnlyDiagnostics, ILspBuildOnlyDiagnosticsMetadata>
+        > buildOnlyDiagnostics
+    )
+        : AbstractInProcLanguageClient(
+            lspServiceProvider,
+            globalOptions,
+            lspLoggerFactory,
+            threadingContext,
+            exportProvider
+        )
     {
-        private readonly ExperimentalCapabilitiesProvider _experimentalCapabilitiesProvider = defaultCapabilitiesProvider;
-        private readonly IEnumerable<Lazy<ILspBuildOnlyDiagnostics, ILspBuildOnlyDiagnosticsMetadata>> _buildOnlyDiagnostics = buildOnlyDiagnostics;
+        private readonly ExperimentalCapabilitiesProvider _experimentalCapabilitiesProvider =
+            defaultCapabilitiesProvider;
+        private readonly IEnumerable<
+            Lazy<ILspBuildOnlyDiagnostics, ILspBuildOnlyDiagnosticsMetadata>
+        > _buildOnlyDiagnostics = buildOnlyDiagnostics;
 
-        protected override ImmutableArray<string> SupportedLanguages => ProtocolConstants.RoslynLspLanguages;
+        protected override ImmutableArray<string> SupportedLanguages =>
+            ProtocolConstants.RoslynLspLanguages;
 
         public override ServerCapabilities GetCapabilities(ClientCapabilities clientCapabilities)
         {
             // If the LSP editor feature flag is enabled advertise support for LSP features here so they are available locally and remote.
-            var isLspEditorEnabled = GlobalOptions.GetOption(LspOptionsStorage.LspEditorFeatureFlag);
+            var isLspEditorEnabled = GlobalOptions.GetOption(
+                LspOptionsStorage.LspEditorFeatureFlag
+            );
 
             var serverCapabilities = isLspEditorEnabled
-                ? (VSInternalServerCapabilities)_experimentalCapabilitiesProvider.GetCapabilities(clientCapabilities)
+                ? (VSInternalServerCapabilities)
+                    _experimentalCapabilitiesProvider.GetCapabilities(clientCapabilities)
                 : new VSInternalServerCapabilities()
                 {
                     // Even if the flag is off, we want to include text sync capabilities.
@@ -73,26 +91,31 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             if (isPullDiagnostics)
             {
                 serverCapabilities.SupportsDiagnosticRequests = true;
-                serverCapabilities.MultipleContextSupportProvider = new VSInternalMultipleContextFeatures { SupportsMultipleContextsDiagnostics = true };
+                serverCapabilities.MultipleContextSupportProvider =
+                    new VSInternalMultipleContextFeatures
+                    {
+                        SupportsMultipleContextsDiagnostics = true
+                    };
                 serverCapabilities.DiagnosticProvider ??= new();
-                serverCapabilities.DiagnosticProvider.DiagnosticKinds = new VSInternalDiagnosticKind[]
-                {
-                    // Support a specialized requests dedicated to task-list items.  This way the client can ask just
-                    // for these, independently of other diagnostics.  They can also throttle themselves to not ask if
-                    // the task list would not be visible.
-                    new(PullDiagnosticCategories.Task),
-                    // Dedicated request for workspace-diagnostics only.  We will only respond to these if FSA is on.
-                    new(PullDiagnosticCategories.WorkspaceDocumentsAndProject),
-                    // Fine-grained diagnostics requests.  Importantly, this separates out syntactic vs semantic
-                    // requests, allowing the former to quickly reach the user without blocking on the latter.  In a
-                    // similar vein, compiler diagnostics are explicitly distinct from analyzer-diagnostics, allowing
-                    // the former to appear as soon as possible as they are much more critical for the user and should
-                    // not be delayed by a slow analyzer.
-                    new(PullDiagnosticCategories.DocumentCompilerSyntax),
-                    new(PullDiagnosticCategories.DocumentCompilerSemantic),
-                    new(PullDiagnosticCategories.DocumentAnalyzerSyntax),
-                    new(PullDiagnosticCategories.DocumentAnalyzerSemantic),
-                };
+                serverCapabilities.DiagnosticProvider.DiagnosticKinds =
+                    new VSInternalDiagnosticKind[]
+                    {
+                        // Support a specialized requests dedicated to task-list items.  This way the client can ask just
+                        // for these, independently of other diagnostics.  They can also throttle themselves to not ask if
+                        // the task list would not be visible.
+                        new(PullDiagnosticCategories.Task),
+                        // Dedicated request for workspace-diagnostics only.  We will only respond to these if FSA is on.
+                        new(PullDiagnosticCategories.WorkspaceDocumentsAndProject),
+                        // Fine-grained diagnostics requests.  Importantly, this separates out syntactic vs semantic
+                        // requests, allowing the former to quickly reach the user without blocking on the latter.  In a
+                        // similar vein, compiler diagnostics are explicitly distinct from analyzer-diagnostics, allowing
+                        // the former to appear as soon as possible as they are much more critical for the user and should
+                        // not be delayed by a slow analyzer.
+                        new(PullDiagnosticCategories.DocumentCompilerSyntax),
+                        new(PullDiagnosticCategories.DocumentCompilerSemantic),
+                        new(PullDiagnosticCategories.DocumentAnalyzerSyntax),
+                        new(PullDiagnosticCategories.DocumentAnalyzerSemantic),
+                    };
                 serverCapabilities.DiagnosticProvider.BuildOnlyDiagnosticIds = _buildOnlyDiagnostics
                     .SelectMany(lazy => lazy.Metadata.BuildOnlyDiagnostics)
                     .Distinct()
@@ -107,7 +130,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             // However, when the experimental LSP editor is enabled we want LSP to power NavigateTo, so we set DisableGoToWorkspaceSymbols=false.
             serverCapabilities.DisableGoToWorkspaceSymbols = !isLspEditorEnabled;
 
-            var isLspSemanticTokensEnabled = GlobalOptions.GetOption(LspOptionsStorage.LspSemanticTokensFeatureFlag);
+            var isLspSemanticTokensEnabled = GlobalOptions.GetOption(
+                LspOptionsStorage.LspSemanticTokensFeatureFlag
+            );
             if (isLspSemanticTokensEnabled)
             {
                 // Using only range handling has shown to be more performant than using a combination of full/edits/range handling,
@@ -120,7 +145,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
                     Range = true,
                     Legend = new SemanticTokensLegend
                     {
-                        TokenTypes = SemanticTokensSchema.GetSchema(clientCapabilities.HasVisualStudioLspCapability()).AllTokenTypes.ToArray(),
+                        TokenTypes = SemanticTokensSchema
+                            .GetSchema(clientCapabilities.HasVisualStudioLspCapability())
+                            .AllTokenTypes.ToArray(),
                         TokenModifiers = SemanticTokensSchema.TokenModifiers
                     }
                 };
@@ -136,8 +163,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
         /// they will get no diagnostics.  When not enabled we don't show the failure box (failure will still be recorded in the task status center)
         /// as the failure is not catastrophic.
         /// </summary>
-        public override bool ShowNotificationOnInitializeFailed => GlobalOptions.IsLspPullDiagnostics();
+        public override bool ShowNotificationOnInitializeFailed =>
+            GlobalOptions.IsLspPullDiagnostics();
 
-        public override WellKnownLspServerKinds ServerKind => WellKnownLspServerKinds.AlwaysActiveVSLspServer;
+        public override WellKnownLspServerKinds ServerKind =>
+            WellKnownLspServerKinds.AlwaysActiveVSLspServer;
     }
 }

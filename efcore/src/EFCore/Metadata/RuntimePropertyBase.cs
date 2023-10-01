@@ -40,7 +40,8 @@ public abstract class RuntimePropertyBase : AnnotatableBase, IRuntimePropertyBas
         string name,
         PropertyInfo? propertyInfo,
         FieldInfo? fieldInfo,
-        PropertyAccessMode propertyAccessMode)
+        PropertyAccessMode propertyAccessMode
+    )
     {
         Name = name;
         _propertyInfo = propertyInfo;
@@ -51,7 +52,11 @@ public abstract class RuntimePropertyBase : AnnotatableBase, IRuntimePropertyBas
     /// <summary>
     ///     Gets the name of this property-like object.
     /// </summary>
-    public virtual string Name { [DebuggerStepThrough] get; }
+    public virtual string Name
+    {
+        [DebuggerStepThrough]
+        get;
+    }
 
     /// <summary>
     ///     Gets the type that this property-like object belongs to.
@@ -80,8 +85,7 @@ public abstract class RuntimePropertyBase : AnnotatableBase, IRuntimePropertyBas
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    PropertyAccessMode IReadOnlyPropertyBase.GetPropertyAccessMode()
-        => _propertyAccessMode;
+    PropertyAccessMode IReadOnlyPropertyBase.GetPropertyAccessMode() => _propertyAccessMode;
 
     /// <inheritdoc />
     public abstract object? Sentinel { get; }
@@ -94,30 +98,42 @@ public abstract class RuntimePropertyBase : AnnotatableBase, IRuntimePropertyBas
     }
 
     /// <inheritdoc />
-    IClrPropertySetter IRuntimePropertyBase.MaterializationSetter
-        => NonCapturingLazyInitializer.EnsureInitialized(
-            ref _materializationSetter, this, static property =>
+    IClrPropertySetter IRuntimePropertyBase.MaterializationSetter =>
+        NonCapturingLazyInitializer.EnsureInitialized(
+            ref _materializationSetter,
+            this,
+            static property =>
                 RuntimeFeature.IsDynamicCodeSupported
                     ? new ClrPropertyMaterializationSetterFactory().Create(property)
-                    : throw new InvalidOperationException(CoreStrings.NativeAotNoCompiledModel));
+                    : throw new InvalidOperationException(CoreStrings.NativeAotNoCompiledModel)
+        );
 
     /// <inheritdoc />
-    PropertyAccessors IRuntimePropertyBase.Accessors
-        => NonCapturingLazyInitializer.EnsureInitialized(
-            ref _accessors, this, static property =>
+    PropertyAccessors IRuntimePropertyBase.Accessors =>
+        NonCapturingLazyInitializer.EnsureInitialized(
+            ref _accessors,
+            this,
+            static property =>
                 RuntimeFeature.IsDynamicCodeSupported
                     ? new PropertyAccessorsFactory().Create(property)
-                    : throw new InvalidOperationException(CoreStrings.NativeAotNoCompiledModel));
+                    : throw new InvalidOperationException(CoreStrings.NativeAotNoCompiledModel)
+        );
 
     /// <inheritdoc />
     PropertyIndexes IRuntimePropertyBase.PropertyIndexes
     {
-        get => NonCapturingLazyInitializer.EnsureInitialized(
-            ref _indexes, this,
-            static property =>
-            {
-                _ = ((IRuntimeEntityType)((IRuntimeTypeBase)property.DeclaringType).ContainingEntityType).Counts;
-            });
+        get =>
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _indexes,
+                this,
+                static property =>
+                {
+                    _ = (
+                        (IRuntimeEntityType)
+                            ((IRuntimeTypeBase)property.DeclaringType).ContainingEntityType
+                    ).Counts;
+                }
+            );
         set => NonCapturingLazyInitializer.EnsureInitialized(ref _indexes, value);
     }
 
@@ -136,8 +152,7 @@ public abstract class RuntimePropertyBase : AnnotatableBase, IRuntimePropertyBas
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public virtual void SetAccessors(PropertyAccessors accessors)
-        => _accessors = accessors;
+    public virtual void SetAccessors(PropertyAccessors accessors) => _accessors = accessors;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -147,8 +162,7 @@ public abstract class RuntimePropertyBase : AnnotatableBase, IRuntimePropertyBas
     /// </summary>
     [EntityFrameworkInternal]
     public virtual void SetSetter<TEntity, TValue>(Action<TEntity, TValue> setter)
-        where TEntity : class
-        => _setter = new ClrPropertySetter<TEntity, TValue>(setter);
+        where TEntity : class => _setter = new ClrPropertySetter<TEntity, TValue>(setter);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -161,26 +175,39 @@ public abstract class RuntimePropertyBase : AnnotatableBase, IRuntimePropertyBas
         Func<TEntity, TValue> getter,
         Func<TEntity, bool> hasDefaultValue,
         Func<TStructuralType, TValue> structuralTypeGetter,
-        Func<TStructuralType, bool> hasStructuralTypeSentinelValue)
-        where TEntity : class
-        => _getter = new ClrPropertyGetter<TEntity, TStructuralType, TValue>(
-            getter, hasDefaultValue, structuralTypeGetter, hasStructuralTypeSentinelValue);
+        Func<TStructuralType, bool> hasStructuralTypeSentinelValue
+    )
+        where TEntity : class =>
+        _getter = new ClrPropertyGetter<TEntity, TStructuralType, TValue>(
+            getter,
+            hasDefaultValue,
+            structuralTypeGetter,
+            hasStructuralTypeSentinelValue
+        );
 
     /// <inheritdoc />
-    IClrPropertySetter IRuntimePropertyBase.GetSetter()
-        => NonCapturingLazyInitializer.EnsureInitialized(
-            ref _setter, this, static property => new ClrPropertySetterFactory().Create(property));
+    IClrPropertySetter IRuntimePropertyBase.GetSetter() =>
+        NonCapturingLazyInitializer.EnsureInitialized(
+            ref _setter,
+            this,
+            static property => new ClrPropertySetterFactory().Create(property)
+        );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IClrPropertyGetter IPropertyBase.GetGetter()
-        => NonCapturingLazyInitializer.EnsureInitialized(
-            ref _getter, this, static property => new ClrPropertyGetterFactory().Create(property));
+    IClrPropertyGetter IPropertyBase.GetGetter() =>
+        NonCapturingLazyInitializer.EnsureInitialized(
+            ref _getter,
+            this,
+            static property => new ClrPropertyGetterFactory().Create(property)
+        );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IComparer<IUpdateEntry> IPropertyBase.GetCurrentValueComparer()
-        => NonCapturingLazyInitializer.EnsureInitialized(
-            ref _currentValueComparer, this, static property =>
-                new CurrentValueComparerFactory().Create(property));
+    IComparer<IUpdateEntry> IPropertyBase.GetCurrentValueComparer() =>
+        NonCapturingLazyInitializer.EnsureInitialized(
+            ref _currentValueComparer,
+            this,
+            static property => new CurrentValueComparerFactory().Create(property)
+        );
 }

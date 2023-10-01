@@ -20,36 +20,28 @@ class TestConfig
     [EnvVar("DOTNET_gcServer", "1")]
     static int Verify_ServerGC_Env_Enable(string[] _)
     {
-        return GCSettings.IsServerGC
-            ? Success
-            : Fail;
+        return GCSettings.IsServerGC ? Success : Fail;
     }
 
     [Fact]
     [EnvVar("DOTNET_gcServer", "0")]
     static int Verify_ServerGC_Env_Disable(string[] _)
     {
-        return GCSettings.IsServerGC
-            ? Fail
-            : Success;
+        return GCSettings.IsServerGC ? Fail : Success;
     }
 
     [Fact]
     [ConfigProperty("System.GC.Server", "true")]
     static int Verify_ServerGC_Prop_Enable(string[] _)
     {
-        return GCSettings.IsServerGC
-            ? Success
-            : Fail;
+        return GCSettings.IsServerGC ? Success : Fail;
     }
 
     [Fact]
     [ConfigProperty("System.GC.Server", "false")]
     static int Verify_ServerGC_Prop_Disable(string[] _)
     {
-        return GCSettings.IsServerGC
-            ? Fail
-            : Success;
+        return GCSettings.IsServerGC ? Fail : Success;
     }
 
     [Fact]
@@ -57,9 +49,7 @@ class TestConfig
     [ConfigProperty("System.GC.Server", "true")]
     static int Verify_ServerGC_Env_Override_Prop(string[] _)
     {
-        return GCSettings.IsServerGC
-            ? Fail
-            : Success;
+        return GCSettings.IsServerGC ? Fail : Success;
     }
 
     static int Main(string[] args)
@@ -69,7 +59,10 @@ class TestConfig
             return RunTests();
         }
 
-        MethodInfo infos = typeof(TestConfig).GetMethod(args[0], BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
+        MethodInfo infos = typeof(TestConfig).GetMethod(
+            args[0],
+            BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public
+        );
         if (infos is null)
         {
             return Fail;
@@ -80,7 +73,12 @@ class TestConfig
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = false)]
     class EnvVarAttribute : Attribute
     {
-        public EnvVarAttribute(string name, string value) { Name = name; Value = value; }
+        public EnvVarAttribute(string name, string value)
+        {
+            Name = name;
+            Value = value;
+        }
+
         public string Name { get; init; }
         public string Value { get; init; }
     }
@@ -88,7 +86,12 @@ class TestConfig
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = false)]
     class ConfigPropertyAttribute : Attribute
     {
-        public ConfigPropertyAttribute(string name, string value) { Name = name; Value = value; }
+        public ConfigPropertyAttribute(string name, string value)
+        {
+            Name = name;
+            Value = value;
+        }
+
         public string Name { get; init; }
         public string Value { get; init; }
     }
@@ -99,7 +102,9 @@ class TestConfig
         Environment.SetEnvironmentVariable("DOTNET_gcServer", null);
 
         string corerunPath = GetCorerunPath();
-        MethodInfo[] infos = typeof(TestConfig).GetMethods(BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
+        MethodInfo[] infos = typeof(TestConfig).GetMethods(
+            BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public
+        );
         foreach (var mi in infos)
         {
             var factMaybe = mi.GetCustomAttributes(typeof(FactAttribute));
@@ -119,7 +124,9 @@ class TestConfig
                 arguments.Append($"-p {configProp.Name}={configProp.Value} ");
             }
 
-            arguments.Append($"\"{System.Reflection.Assembly.GetExecutingAssembly().Location}\" {mi.Name}");
+            arguments.Append(
+                $"\"{System.Reflection.Assembly.GetExecutingAssembly().Location}\" {mi.Name}"
+            );
 
             process.StartInfo.FileName = corerunPath;
             process.StartInfo.Arguments = arguments.ToString();
@@ -127,7 +134,9 @@ class TestConfig
             var envVariables = mi.GetCustomAttributes(typeof(EnvVarAttribute));
             foreach (string key in Environment.GetEnvironmentVariables().Keys)
             {
-                process.StartInfo.EnvironmentVariables[key] = Environment.GetEnvironmentVariable(key);
+                process.StartInfo.EnvironmentVariables[key] = Environment.GetEnvironmentVariable(
+                    key
+                );
             }
 
             Console.WriteLine($"Running: {process.StartInfo.Arguments}");

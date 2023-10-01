@@ -34,7 +34,6 @@ using Ingres.Client;
 
 namespace DbLinq.Ingres.Example
 {
-
     class Program
     {
         static void Main(string[] args)
@@ -47,10 +46,11 @@ namespace DbLinq.Ingres.Example
             icsb.Database = "northwind";
             nwind.Northwind db = new nwind.Northwind(new IngresConnection(icsb.ConnectionString));
 
-            var result = from customer in db.Customers
-                         where customer.City == "London"
-                         orderby customer.City
-                         select customer;
+            var result =
+                from customer in db.Customers
+                where customer.City == "London"
+                orderby customer.City
+                select customer;
 
             foreach (var r in result)
             {

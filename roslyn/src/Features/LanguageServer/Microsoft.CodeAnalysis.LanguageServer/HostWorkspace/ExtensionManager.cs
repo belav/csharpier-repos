@@ -30,7 +30,11 @@ internal class ExtensionManager : IExtensionManager
 
     public void HandleException(object provider, Exception exception)
     {
-        _logger.Log(LogLevel.Error, exception, $"{provider.GetType().ToString()} threw an exception.");
+        _logger.Log(
+            LogLevel.Error,
+            exception,
+            $"{provider.GetType().ToString()} threw an exception."
+        );
     }
 
     public bool IsDisabled(object provider)

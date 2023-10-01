@@ -12,15 +12,15 @@ using Microsoft.AspNetCore.Components.Sections;
 
 namespace Microsoft.AspNetCore.Components.E2ETests.Tests;
 
-public class SectionsWithErrorBoundaryTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
+public class SectionsWithErrorBoundaryTest
+    : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
 {
-    public SectionsWithErrorBoundaryTest
-        (BrowserFixture browserFixture,
+    public SectionsWithErrorBoundaryTest(
+        BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     protected override void InitializeAsyncCore()
     {

@@ -27,7 +27,5 @@ namespace SelfValidation
     }
 
     [OptionsValidator]
-    public partial struct FirstValidator : IValidateOptions<FirstModel>
-    {
-    }
+    public partial struct FirstValidator : IValidateOptions<FirstModel> { }
 }

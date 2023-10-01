@@ -22,7 +22,13 @@ public class WebcilConverter
     private readonly NET.WebAssembly.Webcil.WebcilConverter _converter;
 
     private TaskLoggingHelper Log { get; }
-    private WebcilConverter(NET.WebAssembly.Webcil.WebcilConverter converter, string inputPath, string outputPath, TaskLoggingHelper logger)
+
+    private WebcilConverter(
+        NET.WebAssembly.Webcil.WebcilConverter converter,
+        string inputPath,
+        string outputPath,
+        TaskLoggingHelper logger
+    )
     {
         _converter = converter;
         _inputPath = inputPath;
@@ -30,16 +36,25 @@ public class WebcilConverter
         Log = logger;
     }
 
-    public static WebcilConverter FromPortableExecutable(string inputPath, string outputPath, TaskLoggingHelper logger)
+    public static WebcilConverter FromPortableExecutable(
+        string inputPath,
+        string outputPath,
+        TaskLoggingHelper logger
+    )
     {
-        var converter = NET.WebAssembly.Webcil.WebcilConverter.FromPortableExecutable(inputPath, outputPath);
+        var converter = NET.WebAssembly.Webcil.WebcilConverter.FromPortableExecutable(
+            inputPath,
+            outputPath
+        );
         return new WebcilConverter(converter, inputPath, outputPath, logger);
     }
 
     public void ConvertToWebcil()
     {
-        Log.LogMessage(MessageImportance.Low, $"Converting to Webcil: input {_inputPath} output: {_outputPath}");
+        Log.LogMessage(
+            MessageImportance.Low,
+            $"Converting to Webcil: input {_inputPath} output: {_outputPath}"
+        );
         _converter.ConvertToWebcil();
     }
-
 }

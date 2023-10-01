@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
 {
-    internal readonly struct VSTypeScriptInlineRenameLocationWrapper(InlineRenameLocation underlyingObject)
+    internal readonly struct VSTypeScriptInlineRenameLocationWrapper
     {
         private readonly InlineRenameLocation _underlyingObject = underlyingObject;
 

@@ -11,10 +11,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
 /// </remarks>
-public class PropertyDiscoveryConvention :
-    IEntityTypeAddedConvention,
-    IEntityTypeBaseTypeChangedConvention,
-    IComplexPropertyAddedConvention
+public class PropertyDiscoveryConvention
+    : IEntityTypeAddedConvention,
+        IEntityTypeBaseTypeChangedConvention,
+        IComplexPropertyAddedConvention
 {
     /// <summary>
     ///     Creates a new instance of <see cref="PropertyDiscoveryConvention" />.
@@ -33,19 +33,26 @@ public class PropertyDiscoveryConvention :
     /// <inheritdoc />
     public virtual void ProcessEntityTypeAdded(
         IConventionEntityTypeBuilder entityTypeBuilder,
-        IConventionContext<IConventionEntityTypeBuilder> context)
-        => Process(entityTypeBuilder);
+        IConventionContext<IConventionEntityTypeBuilder> context
+    ) => Process(entityTypeBuilder);
 
     /// <inheritdoc />
     public void ProcessComplexPropertyAdded(
         IConventionComplexPropertyBuilder propertyBuilder,
-        IConventionContext<IConventionComplexPropertyBuilder> context)
+        IConventionContext<IConventionComplexPropertyBuilder> context
+    )
     {
         var complexType = propertyBuilder.Metadata.ComplexType;
         var model = complexType.Model;
         foreach (var propertyInfo in complexType.GetRuntimeProperties().Values)
         {
-            if (!Dependencies.MemberClassifier.IsCandidatePrimitiveProperty(propertyInfo, model, out _))
+            if (
+                !Dependencies.MemberClassifier.IsCandidatePrimitiveProperty(
+                    propertyInfo,
+                    model,
+                    out _
+                )
+            )
             {
                 continue;
             }
@@ -55,7 +62,9 @@ public class PropertyDiscoveryConvention :
 
         foreach (var fieldInfo in complexType.GetRuntimeFields().Values)
         {
-            if (!Dependencies.MemberClassifier.IsCandidatePrimitiveProperty(fieldInfo, model, out _))
+            if (
+                !Dependencies.MemberClassifier.IsCandidatePrimitiveProperty(fieldInfo, model, out _)
+            )
             {
                 continue;
             }
@@ -69,11 +78,13 @@ public class PropertyDiscoveryConvention :
         IConventionEntityTypeBuilder entityTypeBuilder,
         IConventionEntityType? newBaseType,
         IConventionEntityType? oldBaseType,
-        IConventionContext<IConventionEntityType> context)
+        IConventionContext<IConventionEntityType> context
+    )
     {
-        if ((newBaseType == null
-                || oldBaseType != null)
-            && entityTypeBuilder.Metadata.BaseType == newBaseType)
+        if (
+            (newBaseType == null || oldBaseType != null)
+            && entityTypeBuilder.Metadata.BaseType == newBaseType
+        )
         {
             Process(entityTypeBuilder);
         }
@@ -85,8 +96,16 @@ public class PropertyDiscoveryConvention :
         var model = entityType.Model;
         foreach (var propertyInfo in entityType.GetRuntimeProperties().Values)
         {
-            if (!Dependencies.MemberClassifier.IsCandidatePrimitiveProperty(propertyInfo, model, out var mapping)
-                || ((Model)model).FindIsComplexConfigurationSource(propertyInfo.GetMemberType().UnwrapNullableType()) != null)
+            if (
+                !Dependencies.MemberClassifier.IsCandidatePrimitiveProperty(
+                    propertyInfo,
+                    model,
+                    out var mapping
+                )
+                || ((Model)model).FindIsComplexConfigurationSource(
+                    propertyInfo.GetMemberType().UnwrapNullableType()
+                ) != null
+            )
             {
                 continue;
             }
@@ -94,7 +113,9 @@ public class PropertyDiscoveryConvention :
             var propertyBuilder = entityTypeBuilder.Property(propertyInfo);
             if (mapping?.ElementTypeMapping != null)
             {
-                var elementType = propertyInfo.PropertyType.TryGetElementType(typeof(IEnumerable<>));
+                var elementType = propertyInfo.PropertyType.TryGetElementType(
+                    typeof(IEnumerable<>)
+                );
                 if (elementType != null)
                 {
                     propertyBuilder?.SetElementType(elementType);

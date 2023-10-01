@@ -8,12 +8,15 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.Globalization;
 
-    public partial class WS2007HttpBindingCollectionElement : StandardBindingCollectionElement<WS2007HttpBinding, WS2007HttpBindingElement>
+    public partial class WS2007HttpBindingCollectionElement
+        : StandardBindingCollectionElement<WS2007HttpBinding, WS2007HttpBindingElement>
     {
         internal static WS2007HttpBindingCollectionElement GetBindingCollectionElement()
         {
-            return (WS2007HttpBindingCollectionElement)ConfigurationHelpers.GetBindingCollectionElement(ConfigurationStrings.WS2007HttpBindingCollectionElementName);
+            return (WS2007HttpBindingCollectionElement)
+                ConfigurationHelpers.GetBindingCollectionElement(
+                    ConfigurationStrings.WS2007HttpBindingCollectionElementName
+                );
         }
-
     }
 }

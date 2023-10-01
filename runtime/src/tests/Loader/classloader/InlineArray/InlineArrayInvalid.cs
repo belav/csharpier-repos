@@ -14,7 +14,10 @@ public unsafe class Validate
     public static void Explicit_Fails()
     {
         Console.WriteLine($"{nameof(Explicit_Fails)}...");
-        Assert.Throws<TypeLoadException>(() => { var t = typeof(Explicit); });
+        Assert.Throws<TypeLoadException>(() =>
+        {
+            var t = typeof(Explicit);
+        });
 
         Assert.Throws<TypeLoadException>(() =>
         {
@@ -26,14 +29,14 @@ public unsafe class Validate
     public static void ZeroLength_Fails()
     {
         Console.WriteLine($"{nameof(ZeroLength_Fails)}...");
-        Assert.Throws<TypeLoadException>(() => { var t = typeof(ZeroLength); });
+        Assert.Throws<TypeLoadException>(() =>
+        {
+            var t = typeof(ZeroLength);
+        });
 
         Assert.Throws<TypeLoadException>(() =>
         {
-            var t = new ZeroLength()
-            {
-                field = 1
-            };
+            var t = new ZeroLength() { field = 1 };
             return t;
         });
     }
@@ -48,14 +51,14 @@ public unsafe class Validate
     public static void TooLarge_Fails()
     {
         Console.WriteLine($"{nameof(TooLarge_Fails)}...");
-        Assert.Throws<TypeLoadException>(() => { var t = typeof(TooLarge); });
+        Assert.Throws<TypeLoadException>(() =>
+        {
+            var t = typeof(TooLarge);
+        });
 
         Assert.Throws<TypeLoadException>(() =>
         {
-            var t = new TooLarge()
-            {
-                field = 1
-            };
+            var t = new TooLarge() { field = 1 };
             return t;
         });
     }
@@ -64,14 +67,14 @@ public unsafe class Validate
     public static void NegativeLength_Fails()
     {
         Console.WriteLine($"{nameof(NegativeLength_Fails)}...");
-        Assert.Throws<TypeLoadException>(() => { var t = typeof(NegativeLength); });
+        Assert.Throws<TypeLoadException>(() =>
+        {
+            var t = typeof(NegativeLength);
+        });
 
         Assert.Throws<TypeLoadException>(() =>
         {
-            var t = new NegativeLength()
-            {
-                field = 1
-            };
+            var t = new NegativeLength() { field = 1 };
             return t;
         });
     }
@@ -80,7 +83,10 @@ public unsafe class Validate
     public static void NoFields_Fails()
     {
         Console.WriteLine($"{nameof(NoFields_Fails)}...");
-        Assert.Throws<TypeLoadException>(() => { var t = typeof(NoFields); });
+        Assert.Throws<TypeLoadException>(() =>
+        {
+            var t = typeof(NoFields);
+        });
 
         Assert.Throws<TypeLoadException>(() =>
         {
@@ -92,7 +98,10 @@ public unsafe class Validate
     public static void TwoFields_Fails()
     {
         Console.WriteLine($"{nameof(TwoFields_Fails)}...");
-        Assert.Throws<TypeLoadException>(() => { var t = typeof(TwoFields); });
+        Assert.Throws<TypeLoadException>(() =>
+        {
+            var t = typeof(TwoFields);
+        });
 
         Assert.Throws<TypeLoadException>(() =>
         {

@@ -30,26 +30,46 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
     public abstract class EditAndContinueTestBase : EmitMetadataTestBase
     {
         // PDB reader can only be accessed from a single thread, so avoid concurrent compilation:
-        internal static readonly CSharpCompilationOptions ComSafeDebugDll = TestOptions.DebugDll.WithConcurrentBuild(false);
+        internal static readonly CSharpCompilationOptions ComSafeDebugDll =
+            TestOptions.DebugDll.WithConcurrentBuild(false);
 
-        internal static readonly Func<MethodDefinitionHandle, EditAndContinueMethodDebugInformation> EmptyLocalsProvider = handle => default(EditAndContinueMethodDebugInformation);
+        internal static readonly Func<
+            MethodDefinitionHandle,
+            EditAndContinueMethodDebugInformation
+        > EmptyLocalsProvider = handle => default(EditAndContinueMethodDebugInformation);
 
         internal static string Visualize(ModuleMetadata baseline, params PinnedMetadata[] deltas)
         {
             var result = new StringWriter();
-            new MetadataVisualizer(new[] { baseline.MetadataReader }.Concat(deltas.Select(d => d.Reader)).ToArray(), result).VisualizeAllGenerations();
+            new MetadataVisualizer(
+                new[] { baseline.MetadataReader }.Concat(deltas.Select(d => d.Reader)).ToArray(),
+                result
+            ).VisualizeAllGenerations();
             return result.ToString();
         }
 
-        internal static SourceWithMarkedNodes MarkedSource(string markedSource, string fileName = "", CSharpParseOptions options = null, bool removeTags = false)
-            => new SourceWithMarkedNodes(
+        internal static SourceWithMarkedNodes MarkedSource(
+            string markedSource,
+            string fileName = "",
+            CSharpParseOptions options = null,
+            bool removeTags = false
+        ) =>
+            new SourceWithMarkedNodes(
                 WithWindowsLineBreaks(markedSource),
-                parser: s => Parse(s, fileName, options ?? TestOptions.Regular.WithNoRefSafetyRulesAttribute()),
+                parser: s =>
+                    Parse(
+                        s,
+                        fileName,
+                        options ?? TestOptions.Regular.WithNoRefSafetyRulesAttribute()
+                    ),
                 getSyntaxKind: s => (int)(SyntaxKind)typeof(SyntaxKind).GetField(s).GetValue(null),
-                removeTags);
+                removeTags
+            );
 
-        internal static Func<SyntaxNode, SyntaxNode> GetSyntaxMapFromMarkers(SourceWithMarkedNodes source0, SourceWithMarkedNodes source1)
-            => SourceWithMarkedNodes.GetSyntaxMap(source0, source1);
+        internal static Func<SyntaxNode, SyntaxNode> GetSyntaxMapFromMarkers(
+            SourceWithMarkedNodes source0,
+            SourceWithMarkedNodes source1
+        ) => SourceWithMarkedNodes.GetSyntaxMap(source0, source1);
 
         internal static ImmutableArray<SyntaxNode> GetAllLocals(MethodSymbol method)
         {
@@ -62,7 +82,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             return LocalVariableDeclaratorsCollector.GetDeclarators(sourceMethod);
         }
 
-        internal static Func<SyntaxNode, SyntaxNode> GetSyntaxMapByKind(MethodSymbol method0, params SyntaxKind[] kinds)
+        internal static Func<SyntaxNode, SyntaxNode> GetSyntaxMapByKind(
+            MethodSymbol method0,
+            params SyntaxKind[] kinds
+        )
         {
             return newNode =>
             {
@@ -70,7 +93,11 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
                 {
                     if (newNode.IsKind(kind))
                     {
-                        return method0.DeclaringSyntaxReferences.Single().SyntaxTree.GetRoot().DescendantNodes().Single(n => n.IsKind(kind));
+                        return method0.DeclaringSyntaxReferences
+                            .Single()
+                            .SyntaxTree.GetRoot()
+                            .DescendantNodes()
+                            .Single(n => n.IsKind(kind));
                     }
                 }
 
@@ -78,7 +105,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             };
         }
 
-        internal static Func<SyntaxNode, SyntaxNode> GetEquivalentNodesMap(MethodSymbol method1, MethodSymbol method0)
+        internal static Func<SyntaxNode, SyntaxNode> GetEquivalentNodesMap(
+            MethodSymbol method1,
+            MethodSymbol method0
+        )
         {
             var tree1 = method1.Locations[0].SourceTree;
             var tree0 = method0.Locations[0].SourceTree;
@@ -136,10 +166,14 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             SemanticEditKind kind,
             Func<Compilation, ISymbol> symbolProvider,
             Func<Compilation, ISymbol> newSymbolProvider = null,
-            bool preserveLocalVariables = false)
-            => new(kind, symbolProvider, newSymbolProvider, preserveLocalVariables);
+            bool preserveLocalVariables = false
+        ) => new(kind, symbolProvider, newSymbolProvider, preserveLocalVariables);
 
-        internal static EditAndContinueLogEntry Row(int rowNumber, TableIndex table, EditAndContinueOperation operation)
+        internal static EditAndContinueLogEntry Row(
+            int rowNumber,
+            TableIndex table,
+            EditAndContinueOperation operation
+        )
         {
             return new EditAndContinueLogEntry(MetadataTokens.Handle(table, rowNumber), operation);
         }
@@ -153,22 +187,32 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
         /// Checks that the EncLog contains specified rows.
         /// Any default values in the expected <paramref name="rows"/> are ignored to facilitate conditional code.
         /// </summary>
-        internal static void CheckEncLog(MetadataReader reader, params EditAndContinueLogEntry[] rows)
+        internal static void CheckEncLog(
+            MetadataReader reader,
+            params EditAndContinueLogEntry[] rows
+        )
         {
             AssertEx.Equal(
                 rows.Where(r => r.Handle != default),
-                reader.GetEditAndContinueLogEntries(), itemInspector: EncLogRowToString);
+                reader.GetEditAndContinueLogEntries(),
+                itemInspector: EncLogRowToString
+            );
         }
 
         /// <summary>
         /// Checks that the EncLog contains specified definition rows. References are ignored as they are usually not interesting to validate. They are emitted as needed.
         /// Any default values in the expected <paramref name="rows"/> are ignored to facilitate conditional code.
         /// </summary>
-        internal static void CheckEncLogDefinitions(MetadataReader reader, params EditAndContinueLogEntry[] rows)
+        internal static void CheckEncLogDefinitions(
+            MetadataReader reader,
+            params EditAndContinueLogEntry[] rows
+        )
         {
             AssertEx.Equal(
                 rows.Where(r => r.Handle != default),
-                reader.GetEditAndContinueLogEntries().Where(e => IsDefinition(e.Handle.Kind)), itemInspector: EncLogRowToString);
+                reader.GetEditAndContinueLogEntries().Where(e => IsDefinition(e.Handle.Kind)),
+                itemInspector: EncLogRowToString
+            );
         }
 
         /// <summary>
@@ -179,122 +223,224 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
         {
             AssertEx.Equal(
                 handles.Where(h => h != default),
-                reader.GetEditAndContinueMapEntries(), itemInspector: EncMapRowToString);
+                reader.GetEditAndContinueMapEntries(),
+                itemInspector: EncMapRowToString
+            );
         }
 
         /// <summary>
         /// Checks that the EncMap contains specified definition handles. References are ignored as they are usually not interesting to validate. They are emitted as needed.
         /// Any default values in the expected <paramref name="handles"/> are ignored to facilitate conditional code.
         /// </summary>
-        internal static void CheckEncMapDefinitions(MetadataReader reader, params EntityHandle[] handles)
+        internal static void CheckEncMapDefinitions(
+            MetadataReader reader,
+            params EntityHandle[] handles
+        )
         {
             AssertEx.Equal(
                 handles.Where(h => h != default),
-                reader.GetEditAndContinueMapEntries().Where(e => IsDefinition(e.Kind)), itemInspector: EncMapRowToString);
+                reader.GetEditAndContinueMapEntries().Where(e => IsDefinition(e.Kind)),
+                itemInspector: EncMapRowToString
+            );
         }
 
-        internal static void CheckAttributes(MetadataReader reader, params CustomAttributeRow[] rows)
+        internal static void CheckAttributes(
+            MetadataReader reader,
+            params CustomAttributeRow[] rows
+        )
         {
-            AssertEx.Equal(rows, reader.GetCustomAttributeRows(), itemInspector: AttributeRowToString);
+            AssertEx.Equal(
+                rows,
+                reader.GetCustomAttributeRows(),
+                itemInspector: AttributeRowToString
+            );
         }
 
-        internal static void CheckNames(MetadataReader reader, IEnumerable<StringHandle> handles, params string[] expectedNames)
+        internal static void CheckNames(
+            MetadataReader reader,
+            IEnumerable<StringHandle> handles,
+            params string[] expectedNames
+        )
         {
             CheckNames(new[] { reader }, handles, expectedNames);
         }
 
-        internal static void CheckNames(IEnumerable<MetadataReader> readers, IEnumerable<StringHandle> handles, params string[] expectedNames)
+        internal static void CheckNames(
+            IEnumerable<MetadataReader> readers,
+            IEnumerable<StringHandle> handles,
+            params string[] expectedNames
+        )
         {
             var actualNames = readers.GetStrings(handles);
             AssertEx.Equal(expectedNames, actualNames);
         }
 
-        internal static void CheckNames(IList<MetadataReader> readers, IEnumerable<(StringHandle Namespace, StringHandle Name)> handles, params string[] expectedNames)
+        internal static void CheckNames(
+            IList<MetadataReader> readers,
+            IEnumerable<(StringHandle Namespace, StringHandle Name)> handles,
+            params string[] expectedNames
+        )
         {
-            var actualNames = handles.Select(handlePair => string.Join(".", readers.GetString(handlePair.Namespace), readers.GetString(handlePair.Name))).ToArray();
+            var actualNames = handles
+                .Select(
+                    handlePair =>
+                        string.Join(
+                            ".",
+                            readers.GetString(handlePair.Namespace),
+                            readers.GetString(handlePair.Name)
+                        )
+                )
+                .ToArray();
             AssertEx.Equal(expectedNames, actualNames);
         }
 
-        public static void CheckNames(IList<MetadataReader> readers, ImmutableArray<TypeDefinitionHandle> typeHandles, params string[] expectedNames)
-            => CheckNames(readers, typeHandles, (reader, handle) => reader.GetTypeDefinition((TypeDefinitionHandle)handle).Name, handle => handle, expectedNames);
+        public static void CheckNames(
+            IList<MetadataReader> readers,
+            ImmutableArray<TypeDefinitionHandle> typeHandles,
+            params string[] expectedNames
+        ) =>
+            CheckNames(
+                readers,
+                typeHandles,
+                (reader, handle) => reader.GetTypeDefinition((TypeDefinitionHandle)handle).Name,
+                handle => handle,
+                expectedNames
+            );
 
-        public static void CheckNames(IList<MetadataReader> readers, ImmutableArray<MethodDefinitionHandle> methodHandles, params string[] expectedNames)
-            => CheckNames(readers, methodHandles, (reader, handle) => reader.GetMethodDefinition((MethodDefinitionHandle)handle).Name, handle => handle, expectedNames);
+        public static void CheckNames(
+            IList<MetadataReader> readers,
+            ImmutableArray<MethodDefinitionHandle> methodHandles,
+            params string[] expectedNames
+        ) =>
+            CheckNames(
+                readers,
+                methodHandles,
+                (reader, handle) => reader.GetMethodDefinition((MethodDefinitionHandle)handle).Name,
+                handle => handle,
+                expectedNames
+            );
 
         private static void CheckNames<THandle>(
             IList<MetadataReader> readers,
             ImmutableArray<THandle> entityHandles,
             Func<MetadataReader, Handle, StringHandle> getName,
             Func<THandle, Handle> toHandle,
-            string[] expectedNames)
+            string[] expectedNames
+        )
         {
             var aggregator = GetAggregator(readers);
 
-            AssertEx.Equal(expectedNames, entityHandles.Select(handle =>
-            {
-                var genEntityHandle = aggregator.GetGenerationHandle(toHandle(handle), out int typeGeneration);
-                var nameHandle = getName(readers[typeGeneration], genEntityHandle);
+            AssertEx.Equal(
+                expectedNames,
+                entityHandles.Select(handle =>
+                {
+                    var genEntityHandle = aggregator.GetGenerationHandle(
+                        toHandle(handle),
+                        out int typeGeneration
+                    );
+                    var nameHandle = getName(readers[typeGeneration], genEntityHandle);
 
-                var genNameHandle = (StringHandle)aggregator.GetGenerationHandle(nameHandle, out int nameGeneration);
-                return readers[nameGeneration].GetString(genNameHandle);
-            }));
+                    var genNameHandle = (StringHandle)
+                        aggregator.GetGenerationHandle(nameHandle, out int nameGeneration);
+                    return readers[nameGeneration].GetString(genNameHandle);
+                })
+            );
         }
 
-        public static void CheckBlobValue(IList<MetadataReader> readers, BlobHandle valueHandle, byte[] expectedValue)
+        public static void CheckBlobValue(
+            IList<MetadataReader> readers,
+            BlobHandle valueHandle,
+            byte[] expectedValue
+        )
         {
             var aggregator = GetAggregator(readers);
 
-            var genHandle = (BlobHandle)aggregator.GetGenerationHandle(valueHandle, out int blobGeneration);
+            var genHandle = (BlobHandle)
+                aggregator.GetGenerationHandle(valueHandle, out int blobGeneration);
             var attributeData = readers[blobGeneration].GetBlobBytes(genHandle);
             AssertEx.Equal(expectedValue, attributeData);
         }
 
-        public static void CheckStringValue(IList<MetadataReader> readers, StringHandle valueHandle, string expectedValue)
+        public static void CheckStringValue(
+            IList<MetadataReader> readers,
+            StringHandle valueHandle,
+            string expectedValue
+        )
         {
             var aggregator = GetAggregator(readers);
 
-            var genHandle = (StringHandle)aggregator.GetGenerationHandle(valueHandle, out int blobGeneration);
+            var genHandle = (StringHandle)
+                aggregator.GetGenerationHandle(valueHandle, out int blobGeneration);
             var attributeData = readers[blobGeneration].GetString(genHandle);
             AssertEx.Equal(expectedValue, attributeData);
         }
 
-        public static MetadataAggregator GetAggregator(IList<MetadataReader> readers)
-            => new MetadataAggregator(readers[0], readers.Skip(1).ToArray());
+        public static MetadataAggregator GetAggregator(IList<MetadataReader> readers) =>
+            new MetadataAggregator(readers[0], readers.Skip(1).ToArray());
 
-        internal static void SaveImages(string outputDirectory, CompilationVerifier baseline, params CompilationDifference[] diffs)
+        internal static void SaveImages(
+            string outputDirectory,
+            CompilationVerifier baseline,
+            params CompilationDifference[] diffs
+        )
         {
-            bool IsPortablePdb(ImmutableArray<byte> image) => image[0] == 'B' && image[1] == 'S' && image[2] == 'J' && image[3] == 'B';
+            bool IsPortablePdb(ImmutableArray<byte> image) =>
+                image[0] == 'B' && image[1] == 'S' && image[2] == 'J' && image[3] == 'B';
 
             string baseName = baseline.Compilation.AssemblyName;
             string extSuffix = IsPortablePdb(baseline.EmittedAssemblyPdb) ? "x" : "";
 
             Directory.CreateDirectory(outputDirectory);
 
-            File.WriteAllBytes(Path.Combine(outputDirectory, baseName + ".dll" + extSuffix), baseline.EmittedAssemblyData.ToArray());
-            File.WriteAllBytes(Path.Combine(outputDirectory, baseName + ".pdb" + extSuffix), baseline.EmittedAssemblyPdb.ToArray());
+            File.WriteAllBytes(
+                Path.Combine(outputDirectory, baseName + ".dll" + extSuffix),
+                baseline.EmittedAssemblyData.ToArray()
+            );
+            File.WriteAllBytes(
+                Path.Combine(outputDirectory, baseName + ".pdb" + extSuffix),
+                baseline.EmittedAssemblyPdb.ToArray()
+            );
 
             for (int i = 0; i < diffs.Length; i++)
             {
-                File.WriteAllBytes(Path.Combine(outputDirectory, $"{baseName}.{i + 1}.metadata{extSuffix}"), diffs[i].MetadataDelta.ToArray());
-                File.WriteAllBytes(Path.Combine(outputDirectory, $"{baseName}.{i + 1}.pdb{extSuffix}"), diffs[i].PdbDelta.ToArray());
+                File.WriteAllBytes(
+                    Path.Combine(outputDirectory, $"{baseName}.{i + 1}.metadata{extSuffix}"),
+                    diffs[i].MetadataDelta.ToArray()
+                );
+                File.WriteAllBytes(
+                    Path.Combine(outputDirectory, $"{baseName}.{i + 1}.pdb{extSuffix}"),
+                    diffs[i].PdbDelta.ToArray()
+                );
             }
         }
     }
 
     public static class EditAndContinueTestExtensions
     {
-        internal static CSharpCompilation WithSource(this CSharpCompilation compilation, CSharpTestSource newSource)
+        internal static CSharpCompilation WithSource(
+            this CSharpCompilation compilation,
+            CSharpTestSource newSource
+        )
         {
-            var previousParseOptions = (CSharpParseOptions)compilation.SyntaxTrees.FirstOrDefault()?.Options;
-            return compilation.RemoveAllSyntaxTrees().AddSyntaxTrees(newSource.GetSyntaxTrees(previousParseOptions));
+            var previousParseOptions = (CSharpParseOptions)
+                compilation.SyntaxTrees.FirstOrDefault()?.Options;
+            return compilation
+                .RemoveAllSyntaxTrees()
+                .AddSyntaxTrees(newSource.GetSyntaxTrees(previousParseOptions));
         }
 
-        internal static CSharpCompilation WithSource(this CSharpCompilation compilation, SyntaxTree newTree)
+        internal static CSharpCompilation WithSource(
+            this CSharpCompilation compilation,
+            SyntaxTree newTree
+        )
         {
             return compilation.RemoveAllSyntaxTrees().AddSyntaxTrees(newTree);
         }
 
-        internal static CSharpCompilation WithSource(this CSharpCompilation compilation, SyntaxTree[] newTrees)
+        internal static CSharpCompilation WithSource(
+            this CSharpCompilation compilation,
+            SyntaxTree[] newTrees
+        )
         {
             return compilation.RemoveAllSyntaxTrees().AddSyntaxTrees(newTrees);
         }

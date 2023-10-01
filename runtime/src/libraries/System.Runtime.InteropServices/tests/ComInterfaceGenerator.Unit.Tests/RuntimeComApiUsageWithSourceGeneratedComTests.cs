@@ -5,8 +5,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
-using VerifyCS = Microsoft.Interop.UnitTests.Verifiers.CSharpAnalyzerVerifier<
-       Microsoft.Interop.Analyzers.RuntimeComApiUsageWithSourceGeneratedComAnalyzer>;
+using VerifyCS = Microsoft.Interop.UnitTests.Verifiers.CSharpAnalyzerVerifier<Microsoft.Interop.Analyzers.RuntimeComApiUsageWithSourceGeneratedComAnalyzer>;
 
 namespace ComInterfaceGenerator.Unit.Tests
 {
@@ -606,7 +605,7 @@ namespace ComInterfaceGenerator.Unit.Tests
               }
               """;
 
-              await VerifyAnalyzerAsync(source);
+            await VerifyAnalyzerAsync(source);
         }
 
         private Task VerifyAnalyzerAsync(string source)
@@ -627,16 +626,16 @@ namespace ComInterfaceGenerator.Unit.Tests
                 MarkupOptions = Microsoft.CodeAnalysis.Testing.MarkupOptions.UseFirstDescriptor,
                 TestState =
                 {
-                    Sources =
-                    {
-                        source,
-                    },
+                    Sources = { source, },
                     AnalyzerConfigFiles =
                     {
-                        ("/.editorconfig", """
+                        (
+                            "/.editorconfig",
+                            """
                         is_global = true
                         build_property.EnableGeneratedComInterfaceComImportInterop = true
-                        """)
+                        """
+                        )
                     }
                 }
             };

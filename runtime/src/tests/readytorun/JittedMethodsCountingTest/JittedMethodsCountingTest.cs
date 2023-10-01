@@ -17,15 +17,18 @@ public class JittedMethodsCountingTest
         // If DOTNET_ReadyToRun is disabled, then this test ought to be skipped.
         if (!IsReadyToRunEnvSet())
         {
-            Console.WriteLine("\nThis test is only supported in ReadyToRun scenarios."
-                              + " Skipping...\n");
+            Console.WriteLine(
+                "\nThis test is only supported in ReadyToRun scenarios." + " Skipping...\n"
+            );
             return 100;
         }
 
         if (IsRunCrossgen2Set() && IsRunningOnARM64())
         {
-            Console.WriteLine("\nThis test is currently unsupported on ARM64 when"
-                              + " RunCrossGen2 is enabled. Skipping...\n");
+            Console.WriteLine(
+                "\nThis test is currently unsupported on ARM64 when"
+                    + " RunCrossGen2 is enabled. Skipping...\n"
+            );
             return 100;
         }
 
@@ -52,8 +55,8 @@ public class JittedMethodsCountingTest
     private static bool IsRunningOnARM64()
     {
         InteropServices.Architecture thisMachineArch = InteropServices
-                                                      .RuntimeInformation
-                                                      .OSArchitecture;
+            .RuntimeInformation
+            .OSArchitecture;
 
         return (thisMachineArch == InteropServices.Architecture.Arm64);
     }

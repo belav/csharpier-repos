@@ -7,7 +7,7 @@ namespace System.Globalization
 {
     internal sealed partial class CultureData
     {
-        private const int LOC_FULLNAME_CAPACITY = 157;           // max size of locale name
+        private const int LOC_FULLNAME_CAPACITY = 157; // max size of locale name
 
         /// <summary>
         /// This method uses the sRealName field (which is initialized by the constructor before this is called) to
@@ -31,7 +31,10 @@ namespace System.Globalization
         private string GetLocaleInfoNative(LocaleStringData type)
         {
             Debug.Assert(!GlobalizationMode.Invariant);
-            Debug.Assert(_sWindowsName != null, "[CultureData.GetLocaleInfoNative] Expected _sWindowsName to be populated already");
+            Debug.Assert(
+                _sWindowsName != null,
+                "[CultureData.GetLocaleInfoNative] Expected _sWindowsName to be populated already"
+            );
 
             return GetLocaleInfoNative(_sWindowsName, type);
         }
@@ -40,14 +43,20 @@ namespace System.Globalization
         // "windows" name, which can be specific for downlevel (< windows 7) os's.
         private static string GetLocaleInfoNative(string localeName, LocaleStringData type)
         {
-            Debug.Assert(localeName != null, "[CultureData.GetLocaleInfoNative] Expected localeName to be not be null");
+            Debug.Assert(
+                localeName != null,
+                "[CultureData.GetLocaleInfoNative] Expected localeName to be not be null"
+            );
 
             return Interop.Globalization.GetLocaleInfoStringNative(localeName, (uint)type);
         }
 
         private int GetLocaleInfoNative(LocaleNumberData type)
         {
-            Debug.Assert(_sWindowsName != null, "[CultureData.GetLocaleInfoNative(LocaleNumberData)] Expected _sWindowsName to be populated already");
+            Debug.Assert(
+                _sWindowsName != null,
+                "[CultureData.GetLocaleInfoNative(LocaleNumberData)] Expected _sWindowsName to be populated already"
+            );
 
             // returning 0 will cause the first supported calendar to be returned, which is the preferred calendar
             if (type == LocaleNumberData.CalendarType)
@@ -66,10 +75,20 @@ namespace System.Globalization
 
         private int[] GetLocaleInfoNative(LocaleGroupingData type)
         {
-            Debug.Assert(_sWindowsName != null, "[CultureData.GetLocaleInfoNative(LocaleGroupingData)] Expected _sWindowsName to be populated already");
+            Debug.Assert(
+                _sWindowsName != null,
+                "[CultureData.GetLocaleInfoNative(LocaleGroupingData)] Expected _sWindowsName to be populated already"
+            );
 
-            int primaryGroupingSize = Interop.Globalization.GetLocaleInfoPrimaryGroupingSizeNative(_sWindowsName, (uint)type);
-            int secondaryGroupingSize = Interop.Globalization.GetLocaleInfoSecondaryGroupingSizeNative(_sWindowsName, (uint)type);
+            int primaryGroupingSize = Interop.Globalization.GetLocaleInfoPrimaryGroupingSizeNative(
+                _sWindowsName,
+                (uint)type
+            );
+            int secondaryGroupingSize =
+                Interop.Globalization.GetLocaleInfoSecondaryGroupingSizeNative(
+                    _sWindowsName,
+                    (uint)type
+                );
 
             if (secondaryGroupingSize == 0)
             {
@@ -83,9 +102,15 @@ namespace System.Globalization
 
         private string GetTimeFormatStringNative(bool shortFormat)
         {
-            Debug.Assert(_sWindowsName != null, "[CultureData.GetTimeFormatStringNative(bool shortFormat)] Expected _sWindowsName to be populated already");
+            Debug.Assert(
+                _sWindowsName != null,
+                "[CultureData.GetTimeFormatStringNative(bool shortFormat)] Expected _sWindowsName to be populated already"
+            );
 
-            string result = Interop.Globalization.GetLocaleTimeFormatNative(_sWindowsName, shortFormat);
+            string result = Interop.Globalization.GetLocaleTimeFormatNative(
+                _sWindowsName,
+                shortFormat
+            );
 
             return ConvertNativeTimeFormatString(result);
         }
@@ -138,7 +163,6 @@ namespace System.Globalization
                             result[resultPos++] = 't';
                         }
                         break;
-
                 }
             }
 

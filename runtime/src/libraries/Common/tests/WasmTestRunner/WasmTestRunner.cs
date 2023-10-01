@@ -13,7 +13,7 @@ public class SimpleWasmTestRunner : WasmApplicationEntryPoint
     {
         if (args.Length == 0)
         {
-            Console.WriteLine ($"No args given");
+            Console.WriteLine($"No args given");
             return -1;
         }
 
@@ -30,23 +30,23 @@ public class SimpleWasmTestRunner : WasmApplicationEntryPoint
             switch (option)
             {
                 case "-notrait":
-                    excludedTraits.Add (args[i + 1]);
+                    excludedTraits.Add(args[i + 1]);
                     i++;
                     break;
                 case "-trait":
-                    includedTraits.Add (args[i + 1]);
+                    includedTraits.Add(args[i + 1]);
                     i++;
                     break;
                 case "-namespace":
-                    includedNamespaces.Add (args[i + 1]);
+                    includedNamespaces.Add(args[i + 1]);
                     i++;
                     break;
                 case "-class":
-                    includedClasses.Add (args[i + 1]);
+                    includedClasses.Add(args[i + 1]);
                     i++;
                     break;
                 case "-method":
-                    includedMethods.Add (args[i + 1]);
+                    includedMethods.Add(args[i + 1]);
                     i++;
                     break;
                 default:

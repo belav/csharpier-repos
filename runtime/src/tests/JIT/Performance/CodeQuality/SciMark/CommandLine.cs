@@ -55,8 +55,7 @@ namespace SciMark2
             // look for runtime options
             if (args.Length > 0)
             {
-                if (args[0].ToUpper().Equals("-h") ||
-                    args[0].ToUpper().Equals("-help"))
+                if (args[0].ToUpper().Equals("-h") || args[0].ToUpper().Equals("-help"))
                 {
                     Console.WriteLine("Usage: [-large] [iterations]");
                     return -1;
@@ -77,9 +76,15 @@ namespace SciMark2
                 if (args.Length > current_arg)
                     min_time = Double.Parse(args[current_arg]);
             }
-            Console.WriteLine("**                                                               **");
-            Console.WriteLine("** SciMark2a Numeric Benchmark, see http://math.nist.gov/scimark **");
-            Console.WriteLine("**                                                               **");
+            Console.WriteLine(
+                "**                                                               **"
+            );
+            Console.WriteLine(
+                "** SciMark2a Numeric Benchmark, see http://math.nist.gov/scimark **"
+            );
+            Console.WriteLine(
+                "**                                                               **"
+            );
 
             // run the benchmark
             double[] res = new double[6];
@@ -102,11 +107,24 @@ namespace SciMark2
             // print out results
             Console.WriteLine();
             Console.WriteLine("Composite Score: {0:F2} MFlops", res[0]);
-            Console.WriteLine("FFT            : {0} - ({1})", res[1] == 0.0 ? "ERROR, INVALID NUMERICAL RESULT!" : res[1].ToString("F2"), FFT_size);
+            Console.WriteLine(
+                "FFT            : {0} - ({1})",
+                res[1] == 0.0 ? "ERROR, INVALID NUMERICAL RESULT!" : res[1].ToString("F2"),
+                FFT_size
+            );
             Console.WriteLine("SOR            : {1:F2} - ({0}x{0})", SOR_size, res[2]);
             Console.WriteLine("Monte Carlo    :  {0:F2}", res[3]);
-            Console.WriteLine("Sparse MatMult : {2:F2} - (N={0}, nz={1})", Sparse_size_M, Sparse_size_nz, res[4]);
-            Console.WriteLine("LU             : {1} - ({0}x{0})", LU_size, res[1] == 0.0 ? "ERROR, INVALID NUMERICAL RESULT!" : res[5].ToString("F2"));
+            Console.WriteLine(
+                "Sparse MatMult : {2:F2} - (N={0}, nz={1})",
+                Sparse_size_M,
+                Sparse_size_nz,
+                res[4]
+            );
+            Console.WriteLine(
+                "LU             : {1} - ({0}x{0})",
+                LU_size,
+                res[1] == 0.0 ? "ERROR, INVALID NUMERICAL RESULT!" : res[5].ToString("F2")
+            );
 
             return 100;
         }

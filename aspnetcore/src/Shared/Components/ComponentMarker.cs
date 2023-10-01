@@ -75,7 +75,12 @@ internal struct ComponentMarker
         Descriptor = descriptor;
     }
 
-    public void WriteWebAssemblyData(string assembly, string typeName, string parameterDefinitions, string parameterValues)
+    public void WriteWebAssemblyData(
+        string assembly,
+        string typeName,
+        string parameterDefinitions,
+        string parameterValues
+    )
     {
         Assembly = assembly;
         TypeName = typeName;
@@ -83,11 +88,10 @@ internal struct ComponentMarker
         ParameterValues = parameterValues;
     }
 
-    public ComponentEndMarker? ToEndMarker()
-        => PrerenderId is null ? default : new() { PrerenderId = PrerenderId };
+    public ComponentEndMarker? ToEndMarker() =>
+        PrerenderId is null ? default : new() { PrerenderId = PrerenderId };
 
-    private static string GeneratePrerenderId()
-        => Guid.NewGuid().ToString("N");
+    private static string GeneratePrerenderId() => Guid.NewGuid().ToString("N");
 }
 
 internal struct ComponentEndMarker

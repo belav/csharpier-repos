@@ -26,7 +26,9 @@ internal sealed class CommonConfiguration
     public string? RuntimeConfigPath { get; private set; }
 
     private string? hostArg;
-    private static readonly JsonSerializerOptions s_jsonOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web)
+    private static readonly JsonSerializerOptions s_jsonOptions = new JsonSerializerOptions(
+        JsonSerializerDefaults.Web
+    )
     {
         AllowTrailingCommas = true,
         ReadCommentHandling = JsonCommentHandling.Skip,
@@ -34,7 +36,9 @@ internal sealed class CommonConfiguration
     };
 
     public static JsonSerializerOptions JsonOptions => s_jsonOptions;
-    public static CommonConfiguration FromCommandLineArguments(string[] args) => new CommonConfiguration(args);
+
+    public static CommonConfiguration FromCommandLineArguments(string[] args) =>
+        new CommonConfiguration(args);
 
     private CommonConfiguration(string[] args)
     {
@@ -43,21 +47,35 @@ internal sealed class CommonConfiguration
         {
             { "debug|d", "Start debug server", _ => Debugging = true },
             { "host|h=", "Host config name", v => hostArg = v },
-            { "runtime-config|r=", "runtimeconfig.json path for the app", v => RuntimeConfigPath = v },
+            {
+                "runtime-config|r=",
+                "runtimeconfig.json path for the app",
+                v => RuntimeConfigPath = v
+            },
             { "extra-host-arg=", "Extra argument to be passed to the host", hostArgsList.Add },
             { "no-silent", "Verbose output from WasmAppHost", _ => Silent = false },
-            { "use-staticwebassets", "Use static web assets, needed for projects targeting WebAssembly SDK", _ => UseStaticWebAssets = true }
+            {
+                "use-staticwebassets",
+                "Use static web assets, needed for projects targeting WebAssembly SDK",
+                _ => UseStaticWebAssets = true
+            }
         };
 
         RemainingArgs = options.Parse(args);
         if (string.IsNullOrEmpty(RuntimeConfigPath))
         {
-            string[] configs = Directory.EnumerateFiles(Environment.CurrentDirectory, "*.runtimeconfig.json").ToArray();
+            string[] configs = Directory
+                .EnumerateFiles(Environment.CurrentDirectory, "*.runtimeconfig.json")
+                .ToArray();
             if (configs.Length == 0)
-                throw new CommandLineException($"Could not find any runtimeconfig.json in {Environment.CurrentDirectory}. Use --runtime-config= to specify the path");
+                throw new CommandLineException(
+                    $"Could not find any runtimeconfig.json in {Environment.CurrentDirectory}. Use --runtime-config= to specify the path"
+                );
 
             if (configs.Length > 1)
-                throw new CommandLineException($"Found multiple runtimeconfig.json files: {string.Join(", ", configs)}. Use --runtime-config= to specify one");
+                throw new CommandLineException(
+                    $"Found multiple runtimeconfig.json files: {string.Join(", ", configs)}. Use --runtime-config= to specify one"
+                );
 
             RuntimeConfigPath = Path.GetFullPath(configs[0]);
         }
@@ -68,17 +86,22 @@ internal sealed class CommonConfiguration
             throw new CommandLineException($"Cannot find runtime config at {RuntimeConfigPath}");
 
         RuntimeConfig? rconfig = JsonSerializer.Deserialize<RuntimeConfig>(
-                                                File.ReadAllText(RuntimeConfigPath),
-                                                JsonOptions);
+            File.ReadAllText(RuntimeConfigPath),
+            JsonOptions
+        );
         if (rconfig == null)
             throw new CommandLineException($"Failed to deserialize {RuntimeConfigPath}");
 
         if (rconfig.RuntimeOptions == null)
-            throw new CommandLineException($"Failed to deserialize {RuntimeConfigPath} - rconfig.RuntimeOptions");
+            throw new CommandLineException(
+                $"Failed to deserialize {RuntimeConfigPath} - rconfig.RuntimeOptions"
+            );
 
         HostProperties = rconfig.RuntimeOptions.WasmHostProperties;
         if (HostProperties == null)
-            throw new CommandLineException($"Could not find any {nameof(RuntimeOptions.WasmHostProperties)} in {RuntimeConfigPath}");
+            throw new CommandLineException(
+                $"Could not find any {nameof(RuntimeOptions.WasmHostProperties)} in {RuntimeConfigPath}"
+            );
 
         if (HostProperties.HostConfigs is null || HostProperties.HostConfigs.Count == 0)
             throw new CommandLineException($"no perHostConfigs found");
@@ -86,12 +109,21 @@ internal sealed class CommonConfiguration
         // read only if it wasn't overridden by command line option
         string desiredConfig = hostArg ?? HostProperties.DefaultConfig;
         HostConfig? foundConfig = HostProperties.HostConfigs
-                                    .Where(hc => string.Equals(hc.Name, desiredConfig, StringComparison.InvariantCultureIgnoreCase))
-                                    .FirstOrDefault();
+            .Where(
+                hc =>
+                    string.Equals(
+                        hc.Name,
+                        desiredConfig,
+                        StringComparison.InvariantCultureIgnoreCase
+                    )
+            )
+            .FirstOrDefault();
         if (foundConfig is null && !string.IsNullOrEmpty(hostArg))
         {
             string validHosts = string.Join(", ", HostProperties.HostConfigs.Select(hc => hc.Name));
-            throw new CommandLineException($"Unknown host '{hostArg}'. Valid options: {validHosts}");
+            throw new CommandLineException(
+                $"Unknown host '{hostArg}'. Valid options: {validHosts}"
+            );
         }
 
         HostConfig = foundConfig ?? HostProperties.HostConfigs.First();
@@ -100,7 +132,9 @@ internal sealed class CommonConfiguration
 
         // FIXME: validate hostconfig
         if (!Enum.TryParse(HostConfig.HostString, ignoreCase: true, out WasmHost wasmHost))
-            throw new CommandLineException($"Unknown host {HostConfig.HostString} in config named {HostConfig.Name}");
+            throw new CommandLineException(
+                $"Unknown host {HostConfig.HostString} in config named {HostConfig.Name}"
+            );
         Host = wasmHost;
 
         hostArgsList.AddRange(HostConfig.HostArguments);
@@ -136,7 +170,9 @@ internal sealed class CommonConfiguration
         {
             string fullPath = Path.Combine(appPath, path);
             if (!File.Exists(fullPath))
-                throw new ArgumentException($"Cannot find {argName} {path} in app directory {appPath}");
+                throw new ArgumentException(
+                    $"Cannot find {argName} {path} in app directory {appPath}"
+                );
         }
     }
 }

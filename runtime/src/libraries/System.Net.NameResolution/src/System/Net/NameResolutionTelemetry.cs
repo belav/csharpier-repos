@@ -30,13 +30,21 @@ namespace System.Net
             if (command.Command == EventCommand.Enable)
             {
                 // The cumulative number of name resolution requests started since events were enabled
-                _lookupsRequestedCounter ??= new PollingCounter("dns-lookups-requested", this, () => Interlocked.Read(ref _lookupsRequested))
+                _lookupsRequestedCounter ??= new PollingCounter(
+                    "dns-lookups-requested",
+                    this,
+                    () => Interlocked.Read(ref _lookupsRequested)
+                )
                 {
                     DisplayName = "DNS Lookups Requested"
                 };
 
                 // Current number of DNS requests pending
-                _currentLookupsCounter ??= new PollingCounter("current-dns-lookups", this, () => Interlocked.Read(ref _currentLookups))
+                _currentLookupsCounter ??= new PollingCounter(
+                    "current-dns-lookups",
+                    this,
+                    () => Interlocked.Read(ref _currentLookups)
+                )
                 {
                     DisplayName = "Current DNS Lookups"
                 };
@@ -50,14 +58,14 @@ namespace System.Net
         }
 
         [Event(ResolutionStartEventId, Level = EventLevel.Informational)]
-        private void ResolutionStart(string hostNameOrAddress) => WriteEvent(ResolutionStartEventId, hostNameOrAddress);
+        private void ResolutionStart(string hostNameOrAddress) =>
+            WriteEvent(ResolutionStartEventId, hostNameOrAddress);
 
         [Event(ResolutionStopEventId, Level = EventLevel.Informational)]
         private void ResolutionStop() => WriteEvent(ResolutionStopEventId);
 
         [Event(ResolutionFailedEventId, Level = EventLevel.Informational)]
         private void ResolutionFailed() => WriteEvent(ResolutionFailedEventId);
-
 
         [NonEvent]
         public long BeforeResolution(object hostNameOrAddress)
@@ -81,7 +89,11 @@ namespace System.Net
         }
 
         [NonEvent]
-        public void AfterResolution(object hostNameOrAddress, long? startingTimestamp, bool successful)
+        public void AfterResolution(
+            object hostNameOrAddress,
+            long? startingTimestamp,
+            bool successful
+        )
         {
             Debug.Assert(startingTimestamp.HasValue);
             if (startingTimestamp == 0)
@@ -110,7 +122,10 @@ namespace System.Net
 
             if (NameResolutionMetrics.IsEnabled())
             {
-                NameResolutionMetrics.AfterResolution(duration, GetHostnameFromStateObject(hostNameOrAddress));
+                NameResolutionMetrics.AfterResolution(
+                    duration,
+                    GetHostnameFromStateObject(hostNameOrAddress)
+                );
             }
         }
 
@@ -127,7 +142,10 @@ namespace System.Net
                 _ => null!
             };
 
-            Debug.Assert(host is not null, $"Unknown hostNameOrAddress type: {hostNameOrAddress.GetType().Name}");
+            Debug.Assert(
+                host is not null,
+                $"Unknown hostNameOrAddress type: {hostNameOrAddress.GetType().Name}"
+            );
 
             return host;
         }

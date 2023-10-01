@@ -19,7 +19,8 @@ internal abstract class TypedCollectionConverterFactory : IFormDataConverterFact
     public abstract FormDataConverter CreateConverter(Type type, FormDataMapperOptions options);
 }
 
-internal sealed class TypedCollectionConverterFactory<TCollection, TElement> : TypedCollectionConverterFactory
+internal sealed class TypedCollectionConverterFactory<TCollection, TElement>
+    : TypedCollectionConverterFactory
 {
     [RequiresDynamicCode(FormMappingHelpers.RequiresDynamicCodeMessage)]
     [RequiresUnreferencedCode(FormMappingHelpers.RequiresUnreferencedCodeMessage)]
@@ -62,7 +63,10 @@ internal sealed class TypedCollectionConverterFactory<TCollection, TElement> : T
 
                 // Some of the types above implement ICollection<T>, but do so in a very inneficient way, so we want to
                 // use special converters for them.
-                var _ when type.IsAssignableTo(typeof(ICollection<TElement>)) && type.GetConstructor(Type.EmptyTypes) != null => true,
+                var _
+                    when type.IsAssignableTo(typeof(ICollection<TElement>))
+                        && type.GetConstructor(Type.EmptyTypes) != null
+                    => true,
                 _ => false
             };
         }
@@ -90,9 +94,11 @@ internal sealed class TypedCollectionConverterFactory<TCollection, TElement> : T
                 // Leave IEnumerable to last, since it's the least specific.
                 var _ when type == (typeof(IEnumerable<TElement>)) => true,
 
-                _ => throw new InvalidOperationException($"Unable to create converter for '{type.FullName}'."),
+                _
+                    => throw new InvalidOperationException(
+                        $"Unable to create converter for '{type.FullName}'."
+                    ),
             };
-
         }
         return false;
     }
@@ -111,8 +117,11 @@ internal sealed class TypedCollectionConverterFactory<TCollection, TElement> : T
     public override FormDataConverter CreateConverter(Type _, FormDataMapperOptions options)
     {
         // Resolve the element type converter
-        var elementTypeConverter = options.ResolveConverter<TElement>() ??
-            throw new InvalidOperationException($"Unable to create converter for '{typeof(TCollection).FullName}'.");
+        var elementTypeConverter =
+            options.ResolveConverter<TElement>()
+            ?? throw new InvalidOperationException(
+                $"Unable to create converter for '{typeof(TCollection).FullName}'."
+            );
 
         // Arrays
         var type = typeof(TCollection);
@@ -121,8 +130,13 @@ internal sealed class TypedCollectionConverterFactory<TCollection, TElement> : T
             return new CollectionConverter<
                 TElement[],
                 ArrayPoolBufferAdapter<TElement[], ArrayCollectionFactory<TElement>, TElement>,
-                ArrayPoolBufferAdapter<TElement[], ArrayCollectionFactory<TElement>, TElement>.PooledBuffer,
-                TElement>(elementTypeConverter);
+                ArrayPoolBufferAdapter<
+                    TElement[],
+                    ArrayCollectionFactory<TElement>,
+                    TElement
+                >.PooledBuffer,
+                TElement
+            >(elementTypeConverter);
         }
 
         if (!type.IsInterface && !type.IsAbstract && !type.IsGenericTypeDefinition)
@@ -130,40 +144,106 @@ internal sealed class TypedCollectionConverterFactory<TCollection, TElement> : T
             return type switch
             {
                 // Special collections
-                var _ when type.IsAssignableTo(typeof(Queue<TElement>)) =>
-                    new CollectionConverter<Queue<TElement>, QueueBufferAdapter<TElement>, Queue<TElement>, TElement>(elementTypeConverter),
-                var _ when type.IsAssignableTo(typeof(Stack<TElement>)) =>
-                    new CollectionConverter<Stack<TElement>, StackBufferAdapter<TElement>, Stack<TElement>, TElement>(elementTypeConverter),
-                var _ when type.IsAssignableTo(typeof(ReadOnlyCollection<TElement>)) =>
-                    new CollectionConverter<ReadOnlyCollection<TElement>, ReadOnlyCollectionBufferAdapter<TElement>, IList<TElement>, TElement>(elementTypeConverter),
+                var _ when type.IsAssignableTo(typeof(Queue<TElement>))
+                    => new CollectionConverter<
+                        Queue<TElement>,
+                        QueueBufferAdapter<TElement>,
+                        Queue<TElement>,
+                        TElement
+                    >(elementTypeConverter),
+                var _ when type.IsAssignableTo(typeof(Stack<TElement>))
+                    => new CollectionConverter<
+                        Stack<TElement>,
+                        StackBufferAdapter<TElement>,
+                        Stack<TElement>,
+                        TElement
+                    >(elementTypeConverter),
+                var _ when type.IsAssignableTo(typeof(ReadOnlyCollection<TElement>))
+                    => new CollectionConverter<
+                        ReadOnlyCollection<TElement>,
+                        ReadOnlyCollectionBufferAdapter<TElement>,
+                        IList<TElement>,
+                        TElement
+                    >(elementTypeConverter),
 
                 // Concurrent collections
-                var _ when type.IsAssignableTo(typeof(ConcurrentBag<TElement>)) =>
-                    new CollectionConverter<ConcurrentBag<TElement>, ConcurrentBagBufferAdapter<TElement>, ConcurrentBag<TElement>, TElement>(elementTypeConverter),
-                var _ when type.IsAssignableTo(typeof(ConcurrentStack<TElement>)) =>
-                    new CollectionConverter<ConcurrentStack<TElement>, ConcurrentStackBufferAdapter<TElement>, ConcurrentStack<TElement>, TElement>(elementTypeConverter),
-                var _ when type.IsAssignableTo(typeof(ConcurrentQueue<TElement>)) =>
-                    new CollectionConverter<ConcurrentQueue<TElement>, ConcurrentQueueBufferAdapter<TElement>, ConcurrentQueue<TElement>, TElement>(elementTypeConverter),
+                var _ when type.IsAssignableTo(typeof(ConcurrentBag<TElement>))
+                    => new CollectionConverter<
+                        ConcurrentBag<TElement>,
+                        ConcurrentBagBufferAdapter<TElement>,
+                        ConcurrentBag<TElement>,
+                        TElement
+                    >(elementTypeConverter),
+                var _ when type.IsAssignableTo(typeof(ConcurrentStack<TElement>))
+                    => new CollectionConverter<
+                        ConcurrentStack<TElement>,
+                        ConcurrentStackBufferAdapter<TElement>,
+                        ConcurrentStack<TElement>,
+                        TElement
+                    >(elementTypeConverter),
+                var _ when type.IsAssignableTo(typeof(ConcurrentQueue<TElement>))
+                    => new CollectionConverter<
+                        ConcurrentQueue<TElement>,
+                        ConcurrentQueueBufferAdapter<TElement>,
+                        ConcurrentQueue<TElement>,
+                        TElement
+                    >(elementTypeConverter),
 
                 // Immutable collections
-                var _ when type.IsAssignableTo(typeof(ImmutableArray<TElement>)) =>
-                    new CollectionConverter<ImmutableArray<TElement>, ImmutableArrayBufferAdapter<TElement>, ImmutableArray<TElement>.Builder, TElement>(elementTypeConverter),
-                var _ when type.IsAssignableTo(typeof(ImmutableList<TElement>)) =>
-                    new CollectionConverter<ImmutableList<TElement>, ImmutableListBufferAdapter<TElement>, ImmutableList<TElement>.Builder, TElement>(elementTypeConverter),
-                var _ when type.IsAssignableTo(typeof(ImmutableHashSet<TElement>)) =>
-                    new CollectionConverter<ImmutableHashSet<TElement>, ImmutableHashSetBufferAdapter<TElement>, ImmutableHashSet<TElement>.Builder, TElement>(elementTypeConverter),
-                var _ when type.IsAssignableTo(typeof(ImmutableSortedSet<TElement>)) =>
-                    new CollectionConverter<ImmutableSortedSet<TElement>, ImmutableSortedSetBufferAdapter<TElement>, ImmutableSortedSet<TElement>.Builder, TElement>(elementTypeConverter),
-                var _ when type.IsAssignableTo(typeof(ImmutableQueue<TElement>)) =>
-                    new CollectionConverter<ImmutableQueue<TElement>, ImmutableQueueBufferAdapter<TElement>, ImmutableQueueBufferAdapter<TElement>.PooledBuffer, TElement>(elementTypeConverter),
-                var _ when type.IsAssignableTo(typeof(ImmutableStack<TElement>)) =>
-                    new CollectionConverter<ImmutableStack<TElement>, ImmutableStackBufferAdapter<TElement>, ImmutableStackBufferAdapter<TElement>.PooledBuffer, TElement>(elementTypeConverter),
+                var _ when type.IsAssignableTo(typeof(ImmutableArray<TElement>))
+                    => new CollectionConverter<
+                        ImmutableArray<TElement>,
+                        ImmutableArrayBufferAdapter<TElement>,
+                        ImmutableArray<TElement>.Builder,
+                        TElement
+                    >(elementTypeConverter),
+                var _ when type.IsAssignableTo(typeof(ImmutableList<TElement>))
+                    => new CollectionConverter<
+                        ImmutableList<TElement>,
+                        ImmutableListBufferAdapter<TElement>,
+                        ImmutableList<TElement>.Builder,
+                        TElement
+                    >(elementTypeConverter),
+                var _ when type.IsAssignableTo(typeof(ImmutableHashSet<TElement>))
+                    => new CollectionConverter<
+                        ImmutableHashSet<TElement>,
+                        ImmutableHashSetBufferAdapter<TElement>,
+                        ImmutableHashSet<TElement>.Builder,
+                        TElement
+                    >(elementTypeConverter),
+                var _ when type.IsAssignableTo(typeof(ImmutableSortedSet<TElement>))
+                    => new CollectionConverter<
+                        ImmutableSortedSet<TElement>,
+                        ImmutableSortedSetBufferAdapter<TElement>,
+                        ImmutableSortedSet<TElement>.Builder,
+                        TElement
+                    >(elementTypeConverter),
+                var _ when type.IsAssignableTo(typeof(ImmutableQueue<TElement>))
+                    => new CollectionConverter<
+                        ImmutableQueue<TElement>,
+                        ImmutableQueueBufferAdapter<TElement>,
+                        ImmutableQueueBufferAdapter<TElement>.PooledBuffer,
+                        TElement
+                    >(elementTypeConverter),
+                var _ when type.IsAssignableTo(typeof(ImmutableStack<TElement>))
+                    => new CollectionConverter<
+                        ImmutableStack<TElement>,
+                        ImmutableStackBufferAdapter<TElement>,
+                        ImmutableStackBufferAdapter<TElement>.PooledBuffer,
+                        TElement
+                    >(elementTypeConverter),
 
                 // Some of the types above implement ICollection<T>, but do so in a very inneficient way, so we want to
                 // use special converters for them.
                 var _ when type.IsAssignableTo(typeof(ICollection<TElement>))
-                    => ConcreteTypeCollectionConverterFactory<TCollection, TElement>.Instance.CreateConverter(typeof(TCollection), options),
-                _ => throw new InvalidOperationException($"Unable to create converter for '{typeof(TCollection).FullName}'.")
+                    => ConcreteTypeCollectionConverterFactory<
+                        TCollection,
+                        TElement
+                    >.Instance.CreateConverter(typeof(TCollection), options),
+                _
+                    => throw new InvalidOperationException(
+                        $"Unable to create converter for '{typeof(TCollection).FullName}'."
+                    )
             };
         }
 
@@ -174,40 +254,59 @@ internal sealed class TypedCollectionConverterFactory<TCollection, TElement> : T
             return type switch
             {
                 // System.Collections.Immutable
-                var _ when type.IsAssignableTo(typeof(IImmutableSet<TElement>)) =>
-                    ImmutableHashSetBufferAdapter<TElement>.CreateInterfaceConverter(elementTypeConverter),
-                var _ when type.IsAssignableTo(typeof(IImmutableList<TElement>)) =>
-                    ImmutableListBufferAdapter<TElement>.CreateInterfaceConverter(elementTypeConverter),
-                var _ when type.IsAssignableTo(typeof(IImmutableQueue<TElement>)) =>
-                    ImmutableQueueBufferAdapter<TElement>.CreateInterfaceConverter(elementTypeConverter),
-                var _ when type.IsAssignableTo(typeof(IImmutableStack<TElement>)) =>
-                    ImmutableStackBufferAdapter<TElement>.CreateInterfaceConverter(elementTypeConverter),
+                var _ when type.IsAssignableTo(typeof(IImmutableSet<TElement>))
+                    => ImmutableHashSetBufferAdapter<TElement>.CreateInterfaceConverter(
+                        elementTypeConverter
+                    ),
+                var _ when type.IsAssignableTo(typeof(IImmutableList<TElement>))
+                    => ImmutableListBufferAdapter<TElement>.CreateInterfaceConverter(
+                        elementTypeConverter
+                    ),
+                var _ when type.IsAssignableTo(typeof(IImmutableQueue<TElement>))
+                    => ImmutableQueueBufferAdapter<TElement>.CreateInterfaceConverter(
+                        elementTypeConverter
+                    ),
+                var _ when type.IsAssignableTo(typeof(IImmutableStack<TElement>))
+                    => ImmutableStackBufferAdapter<TElement>.CreateInterfaceConverter(
+                        elementTypeConverter
+                    ),
 
                 // System.Collections.Generics
-                var _ when type.IsAssignableTo(typeof(IReadOnlySet<TElement>)) =>
-                    CreateConverter<IReadOnlySet<TElement>, HashSet<TElement>>(elementTypeConverter),
-                var _ when type.IsAssignableTo(typeof(IReadOnlyList<TElement>)) =>
-                    CreateConverter<IReadOnlyList<TElement>, List<TElement>>(elementTypeConverter),
-                var _ when type.IsAssignableTo(typeof(IReadOnlyCollection<TElement>)) =>
-                    CreateConverter<IReadOnlyCollection<TElement>, List<TElement>>(elementTypeConverter),
-                var _ when type.IsAssignableTo(typeof(ISet<TElement>)) =>
-                    CreateConverter<ISet<TElement>, HashSet<TElement>>(elementTypeConverter),
-                var _ when type.IsAssignableTo(typeof(IList<TElement>)) =>
-                    CreateConverter<IList<TElement>, List<TElement>>(elementTypeConverter),
-                var _ when type.IsAssignableTo(typeof(ICollection<TElement>)) =>
-                    CreateConverter<ICollection<TElement>, List<TElement>>(elementTypeConverter),
+                var _ when type.IsAssignableTo(typeof(IReadOnlySet<TElement>))
+                    => CreateConverter<IReadOnlySet<TElement>, HashSet<TElement>>(
+                        elementTypeConverter
+                    ),
+                var _ when type.IsAssignableTo(typeof(IReadOnlyList<TElement>))
+                    => CreateConverter<IReadOnlyList<TElement>, List<TElement>>(
+                        elementTypeConverter
+                    ),
+                var _ when type.IsAssignableTo(typeof(IReadOnlyCollection<TElement>))
+                    => CreateConverter<IReadOnlyCollection<TElement>, List<TElement>>(
+                        elementTypeConverter
+                    ),
+                var _ when type.IsAssignableTo(typeof(ISet<TElement>))
+                    => CreateConverter<ISet<TElement>, HashSet<TElement>>(elementTypeConverter),
+                var _ when type.IsAssignableTo(typeof(IList<TElement>))
+                    => CreateConverter<IList<TElement>, List<TElement>>(elementTypeConverter),
+                var _ when type.IsAssignableTo(typeof(ICollection<TElement>))
+                    => CreateConverter<ICollection<TElement>, List<TElement>>(elementTypeConverter),
 
                 // Leave IEnumerable to last, since it's the least specific.
-                var _ when type.IsAssignableTo(typeof(IEnumerable<TElement>)) =>
-                    CreateConverter<IEnumerable<TElement>, List<TElement>>(elementTypeConverter),
+                var _ when type.IsAssignableTo(typeof(IEnumerable<TElement>))
+                    => CreateConverter<IEnumerable<TElement>, List<TElement>>(elementTypeConverter),
 
-                _ => throw new InvalidOperationException($"Unable to create converter for '{type.FullName}'."),
+                _
+                    => throw new InvalidOperationException(
+                        $"Unable to create converter for '{type.FullName}'."
+                    ),
             };
         }
 
         throw new InvalidOperationException($"Unable to create converter for '{type.FullName}'.");
 
-        static FormDataConverter CreateConverter<TInterface, TImplementation>(FormDataConverter<TElement> elementTypeConverter)
+        static FormDataConverter CreateConverter<TInterface, TImplementation>(
+            FormDataConverter<TElement> elementTypeConverter
+        )
             where TInterface : IEnumerable<TElement>
             where TImplementation : TInterface, ICollection<TElement>, new()
         {
@@ -215,7 +314,8 @@ internal sealed class TypedCollectionConverterFactory<TCollection, TElement> : T
                 TInterface,
                 ImplementingCollectionBufferAdapter<TInterface, TImplementation, TElement>,
                 TImplementation,
-                TElement>(elementTypeConverter);
+                TElement
+            >(elementTypeConverter);
         }
     }
 }

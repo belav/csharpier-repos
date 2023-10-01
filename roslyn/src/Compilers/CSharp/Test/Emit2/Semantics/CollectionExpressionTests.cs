@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class CollectionExpressionTests : CSharpTestBase
     {
-        private static string IncludeExpectedOutput(string expectedOutput) => ExecutionConditionUtil.IsMonoOrCoreClr ? expectedOutput : null;
+        private static string IncludeExpectedOutput(string expectedOutput) =>
+            ExecutionConditionUtil.IsMonoOrCoreClr ? expectedOutput : null;
 
         private const string s_collectionExtensions = """
             using System;
@@ -95,8 +96,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
             }
             """;
-        private const string s_collectionExtensionsWithSpan = s_collectionExtensions +
-            """
+        private const string s_collectionExtensionsWithSpan =
+            s_collectionExtensions
+            + """
             static partial class CollectionExtensions
             {
                 internal static void Report<T>(this in Span<T> s)
@@ -137,22 +139,34 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                 }
                 """;
-            var comp = CreateCompilation(source, parseOptions: TestOptions.Regular.WithLanguageVersion(languageVersion));
+            var comp = CreateCompilation(
+                source,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(languageVersion)
+            );
             if (languageVersion == LanguageVersion.CSharp11)
             {
                 comp.VerifyEmitDiagnostics(
                     // (6,22): error CS9058: Feature 'collection expressions' is not available in C# 11.0. Please use language version 12.0 or greater.
                     //         object[] x = [];
-                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "[").WithArguments("collection expressions", "12.0").WithLocation(6, 22),
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "[")
+                        .WithArguments("collection expressions", "12.0")
+                        .WithLocation(6, 22),
                     // (7,26): error CS9058: Feature 'collection expressions' is not available in C# 11.0. Please use language version 12.0 or greater.
                     //         List<object> y = [1, 2, 3];
-                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "[").WithArguments("collection expressions", "12.0").WithLocation(7, 26),
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "[")
+                        .WithArguments("collection expressions", "12.0")
+                        .WithLocation(7, 26),
                     // (8,28): error CS9058: Feature 'collection expressions' is not available in C# 11.0. Please use language version 12.0 or greater.
                     //         List<object[]> z = [[]];
-                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "[").WithArguments("collection expressions", "12.0").WithLocation(8, 28),
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "[")
+                        .WithArguments("collection expressions", "12.0")
+                        .WithLocation(8, 28),
                     // (8,29): error CS9058: Feature 'collection expressions' is not available in C# 11.0. Please use language version 12.0 or greater.
                     //         List<object[]> z = [[]];
-                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "[").WithArguments("collection expressions", "12.0").WithLocation(8, 29));
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "[")
+                        .WithArguments("collection expressions", "12.0")
+                        .WithLocation(8, 29)
+                );
             }
             else
             {
@@ -178,21 +192,48 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (5,20): error CS9174: Cannot initialize type 'object' with a collection expression because the type is not constructible.
                 //         object x = [];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]").WithArguments("object").WithLocation(5, 20),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]")
+                    .WithArguments("object")
+                    .WithLocation(5, 20),
                 // (6,21): error CS9174: Cannot initialize type 'dynamic' with a collection expression because the type is not constructible.
                 //         dynamic y = [];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]").WithArguments("dynamic").WithLocation(6, 21),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]")
+                    .WithArguments("dynamic")
+                    .WithLocation(6, 21),
                 // (7,17): error CS9176: There is no target type for the collection expression.
                 //         var z = [];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]").WithLocation(7, 17));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]")
+                    .WithLocation(7, 17)
+            );
 
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
-            var collections = tree.GetRoot().DescendantNodes().OfType<CollectionExpressionSyntax>().ToArray();
+            var collections = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<CollectionExpressionSyntax>()
+                .ToArray();
             Assert.Equal(3, collections.Length);
-            VerifyTypes(model, collections[0], expectedType: null, expectedConvertedType: "System.Object", ConversionKind.NoConversion);
-            VerifyTypes(model, collections[1], expectedType: null, expectedConvertedType: "dynamic", ConversionKind.NoConversion);
-            VerifyTypes(model, collections[2], expectedType: null, expectedConvertedType: null, ConversionKind.Identity);
+            VerifyTypes(
+                model,
+                collections[0],
+                expectedType: null,
+                expectedConvertedType: "System.Object",
+                ConversionKind.NoConversion
+            );
+            VerifyTypes(
+                model,
+                collections[1],
+                expectedType: null,
+                expectedConvertedType: "dynamic",
+                ConversionKind.NoConversion
+            );
+            VerifyTypes(
+                model,
+                collections[2],
+                expectedType: null,
+                expectedConvertedType: null,
+                ConversionKind.Identity
+            );
         }
 
         [Fact]
@@ -213,21 +254,48 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (5,20): error CS9174: Cannot initialize type 'object' with a collection expression because the type is not constructible.
                 //         object x = [1];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[1]").WithArguments("object").WithLocation(5, 20),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[1]")
+                    .WithArguments("object")
+                    .WithLocation(5, 20),
                 // (6,21): error CS9174: Cannot initialize type 'dynamic' with a collection expression because the type is not constructible.
                 //         dynamic y = [2];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[2]").WithArguments("dynamic").WithLocation(6, 21),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[2]")
+                    .WithArguments("dynamic")
+                    .WithLocation(6, 21),
                 // (7,17): error CS9176: There is no target type for the collection expression.
                 //         var z = [3];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[3]").WithLocation(7, 17));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[3]")
+                    .WithLocation(7, 17)
+            );
 
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
-            var collections = tree.GetRoot().DescendantNodes().OfType<CollectionExpressionSyntax>().ToArray();
+            var collections = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<CollectionExpressionSyntax>()
+                .ToArray();
             Assert.Equal(3, collections.Length);
-            VerifyTypes(model, collections[0], expectedType: null, expectedConvertedType: "System.Object", ConversionKind.NoConversion);
-            VerifyTypes(model, collections[1], expectedType: null, expectedConvertedType: "dynamic", ConversionKind.NoConversion);
-            VerifyTypes(model, collections[2], expectedType: null, expectedConvertedType: null, ConversionKind.Identity);
+            VerifyTypes(
+                model,
+                collections[0],
+                expectedType: null,
+                expectedConvertedType: "System.Object",
+                ConversionKind.NoConversion
+            );
+            VerifyTypes(
+                model,
+                collections[1],
+                expectedType: null,
+                expectedConvertedType: "dynamic",
+                ConversionKind.NoConversion
+            );
+            VerifyTypes(
+                model,
+                collections[2],
+                expectedType: null,
+                expectedConvertedType: null,
+                ConversionKind.Identity
+            );
         }
 
         [Fact]
@@ -248,13 +316,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (5,20): error CS9174: Cannot initialize type 'object' with a collection expression because the type is not constructible.
                 //         object x = [1, ""];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, @"[1, """"]").WithArguments("object").WithLocation(5, 20),
+                Diagnostic(
+                        ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible,
+                        @"[1, """"]"
+                    )
+                    .WithArguments("object")
+                    .WithLocation(5, 20),
                 // (6,21): error CS9174: Cannot initialize type 'dynamic' with a collection expression because the type is not constructible.
                 //         dynamic y = [2, ""];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, @"[2, """"]").WithArguments("dynamic").WithLocation(6, 21),
+                Diagnostic(
+                        ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible,
+                        @"[2, """"]"
+                    )
+                    .WithArguments("dynamic")
+                    .WithLocation(6, 21),
                 // (7,17): error CS9176: There is no target type for the collection expression.
                 //         var z = [3, ""];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, @"[3, """"]").WithLocation(7, 17));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, @"[3, """"]")
+                    .WithLocation(7, 17)
+            );
         }
 
         [Fact]
@@ -276,13 +356,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (5,20): error CS9174: Cannot initialize type 'object' with a collection expression because the type is not constructible.
                 //         object x = [null];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[null]").WithArguments("object").WithLocation(5, 20),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[null]")
+                    .WithArguments("object")
+                    .WithLocation(5, 20),
                 // (6,21): error CS9174: Cannot initialize type 'dynamic' with a collection expression because the type is not constructible.
                 //         dynamic y = [null];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[null]").WithArguments("dynamic").WithLocation(6, 21),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[null]")
+                    .WithArguments("dynamic")
+                    .WithLocation(6, 21),
                 // (7,17): error CS9176: There is no target type for the collection expression.
                 //         var z = [null];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[null]").WithLocation(7, 17));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[null]")
+                    .WithLocation(7, 17)
+            );
         }
 
         [Fact]
@@ -304,13 +390,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (5,17): error CS9176: There is no target type for the collection expression.
                 //         var x = [1, 2, null];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[1, 2, null]").WithLocation(5, 17),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[1, 2, null]")
+                    .WithLocation(5, 17),
                 // (6,20): error CS9174: Cannot initialize type 'object' with a collection expression because the type is not constructible.
                 //         object y = [1, 2, null];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[1, 2, null]").WithArguments("object").WithLocation(6, 20),
+                Diagnostic(
+                        ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible,
+                        "[1, 2, null]"
+                    )
+                    .WithArguments("object")
+                    .WithLocation(6, 20),
                 // (7,21): error CS9174: Cannot initialize type 'dynamic' with a collection expression because the type is not constructible.
                 //         dynamic z = [1, 2, null];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[1, 2, null]").WithArguments("dynamic").WithLocation(7, 21));
+                Diagnostic(
+                        ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible,
+                        "[1, 2, null]"
+                    )
+                    .WithArguments("dynamic")
+                    .WithLocation(7, 21)
+            );
         }
 
         [Fact]
@@ -329,7 +427,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (5,23): error CS9174: Cannot initialize type 'object' with a collection expression because the type is not constructible.
                 //         object[] x = [[]];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]").WithArguments("object").WithLocation(5, 23));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]")
+                    .WithArguments("object")
+                    .WithLocation(5, 23)
+            );
         }
 
         [Fact]
@@ -348,7 +449,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (5,23): error CS9174: Cannot initialize type 'object' with a collection expression because the type is not constructible.
                 //         object[] y = [[2]];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[2]").WithArguments("object").WithLocation(5, 23));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[2]")
+                    .WithArguments("object")
+                    .WithLocation(5, 23)
+            );
         }
 
         [Fact]
@@ -367,7 +471,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (5,17): error CS9176: There is no target type for the collection expression.
                 //         var z = [[3]];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[[3]]").WithLocation(5, 17));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[[3]]")
+                    .WithLocation(5, 17)
+            );
         }
 
         [Fact]
@@ -388,10 +494,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (5,9): error CS0411: The type arguments for method 'Program.F<T>(T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         F([]);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F").WithArguments("Program.F<T>(T)").WithLocation(5, 9),
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F")
+                    .WithArguments("Program.F<T>(T)")
+                    .WithLocation(5, 9),
                 // (6,9): error CS0411: The type arguments for method 'Program.F<T>(T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         F([[]]);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F").WithArguments("Program.F<T>(T)").WithLocation(6, 9));
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F")
+                    .WithArguments("Program.F<T>(T)")
+                    .WithLocation(6, 9)
+            );
         }
 
         [Fact]
@@ -412,10 +523,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // 0.cs(5,9): error CS0411: The type arguments for method 'Program.F<T>(T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         F([1, 2]).Report();
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F").WithArguments("Program.F<T>(T)").WithLocation(5, 9),
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F")
+                    .WithArguments("Program.F<T>(T)")
+                    .WithLocation(5, 9),
                 // 0.cs(6,9): error CS0411: The type arguments for method 'Program.F<T>(T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         F([[3, 4]]).Report();
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F").WithArguments("Program.F<T>(T)").WithLocation(6, 9));
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F")
+                    .WithArguments("Program.F<T>(T)")
+                    .WithLocation(6, 9)
+            );
         }
 
         [Fact]
@@ -436,7 +552,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (6,18): error CS8917: The delegate type could not be inferred.
                 //         var d1 = () => [];
-                Diagnostic(ErrorCode.ERR_CannotInferDelegateType, "() => []").WithLocation(6, 18));
+                Diagnostic(ErrorCode.ERR_CannotInferDelegateType, "() => []").WithLocation(6, 18)
+            );
         }
 
         [Fact]
@@ -461,13 +578,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // 0.cs(6,25): error CS9174: Cannot initialize type 'IEnumerable' with a collection expression because the type is not constructible.
                 //         IEnumerable a = [1];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[1]").WithArguments("System.Collections.IEnumerable").WithLocation(6, 25),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[1]")
+                    .WithArguments("System.Collections.IEnumerable")
+                    .WithLocation(6, 25),
                 // 0.cs(7,25): error CS9174: Cannot initialize type 'ICollection' with a collection expression because the type is not constructible.
                 //         ICollection b = [2];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[2]").WithArguments("System.Collections.ICollection").WithLocation(7, 25),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[2]")
+                    .WithArguments("System.Collections.ICollection")
+                    .WithLocation(7, 25),
                 // 0.cs(8,19): error CS9174: Cannot initialize type 'IList' with a collection expression because the type is not constructible.
                 //         IList c = [3];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[3]").WithArguments("System.Collections.IList").WithLocation(8, 19));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[3]")
+                    .WithArguments("System.Collections.IList")
+                    .WithLocation(8, 19)
+            );
         }
 
         [Fact]
@@ -494,7 +618,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 """;
             CompileAndVerify(
                 new[] { source, s_collectionExtensions },
-                expectedOutput: "(System.Int32[]) [], (System.Collections.Generic.List<System.Int32>) [], (System.Collections.Generic.List<System.Int32>) [], (System.Int32[]) [], (System.Int32[]) [], ");
+                expectedOutput: "(System.Int32[]) [], (System.Collections.Generic.List<System.Int32>) [], (System.Collections.Generic.List<System.Int32>) [], (System.Int32[]) [], (System.Int32[]) [], "
+            );
         }
 
         [Fact]
@@ -521,7 +646,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 """;
             CompileAndVerify(
                 new[] { source, s_collectionExtensions },
-                expectedOutput: "(<>z__ReadOnlyArray<System.Int32>) [1], (System.Collections.Generic.List<System.Int32>) [2], (System.Collections.Generic.List<System.Int32>) [3], (<>z__ReadOnlyArray<System.Int32>) [4], (<>z__ReadOnlyArray<System.Int32>) [5], ");
+                expectedOutput: "(<>z__ReadOnlyArray<System.Int32>) [1], (System.Collections.Generic.List<System.Int32>) [2], (System.Collections.Generic.List<System.Int32>) [3], (<>z__ReadOnlyArray<System.Int32>) [4], (<>z__ReadOnlyArray<System.Int32>) [5], "
+            );
         }
 
         [Fact]
@@ -542,10 +668,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (5,17): error CS9176: There is no target type for the collection expression.
                 //         var x = [null, 1];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[null, 1]").WithLocation(5, 17),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[null, 1]")
+                    .WithLocation(5, 17),
                 // (6,20): error CS9174: Cannot initialize type 'object' with a collection expression because the type is not constructible.
                 //         object y = [null, 2];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[null, 2]").WithArguments("object").WithLocation(6, 20));
+                Diagnostic(
+                        ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible,
+                        "[null, 2]"
+                    )
+                    .WithArguments("object")
+                    .WithLocation(6, 20)
+            );
         }
 
         [Fact]
@@ -575,21 +708,35 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (12,18): error CS9176: There is no target type for the collection expression.
                 //         var x2 = [(null, default)];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[(null, default)]").WithLocation(12, 18),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[(null, default)]")
+                    .WithLocation(12, 18),
                 // (13,18): error CS9176: There is no target type for the collection expression.
                 //         var y2 = [i switch { _ => default }];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[i switch { _ => default }]").WithLocation(13, 18),
+                Diagnostic(
+                        ErrorCode.ERR_CollectionExpressionNoTargetType,
+                        "[i switch { _ => default }]"
+                    )
+                    .WithLocation(13, 18),
                 // (13,21): error CS8506: No best type was found for the switch expression.
                 //         var y2 = [i switch { _ => default }];
-                Diagnostic(ErrorCode.ERR_SwitchExpressionNoBestType, "switch").WithLocation(13, 21),
+                Diagnostic(ErrorCode.ERR_SwitchExpressionNoBestType, "switch")
+                    .WithLocation(13, 21),
                 // (14,18): error CS9176: There is no target type for the collection expression.
                 //         var z2 = [i == 0 ? null : default];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[i == 0 ? null : default]").WithLocation(14, 18),
+                Diagnostic(
+                        ErrorCode.ERR_CollectionExpressionNoTargetType,
+                        "[i == 0 ? null : default]"
+                    )
+                    .WithLocation(14, 18),
                 // (14,19): error CS0173: Type of conditional expression cannot be determined because there is no implicit conversion between '<null>' and 'default'
                 //         var z2 = [i == 0 ? null : default];
-                Diagnostic(ErrorCode.ERR_InvalidQM, "i == 0 ? null : default").WithArguments("<null>", "default").WithLocation(14, 19));
+                Diagnostic(ErrorCode.ERR_InvalidQM, "i == 0 ? null : default")
+                    .WithArguments("<null>", "default")
+                    .WithLocation(14, 19)
+            );
 
-            VerifyOperationTreeForTest<BlockSyntax>(comp,
+            VerifyOperationTreeForTest<BlockSyntax>(
+                comp,
                 """
                 IBlockOperation (3 statements, 3 locals) (OperationKind.Block, Type: null, IsInvalid) (Syntax: '{ ... }')
                   Locals: Local_1: ? x2
@@ -659,7 +806,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                                               IDefaultValueOperation (OperationKind.DefaultValue, Type: ?, IsInvalid) (Syntax: 'default')
                       Initializer:
                         null
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -726,7 +874,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "(System.Int32[]) [], (System.Int32[]) [1, 2], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "(System.Int32[]) [], (System.Int32[]) [1, 2], "
+            );
         }
 
         // Overload resolution should choose collection initializer type over interface.
@@ -750,7 +901,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "(System.Collections.Generic.List<System.Int32>) [], (System.Collections.Generic.List<System.Int32>) [1, 2], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "(System.Collections.Generic.List<System.Int32>) [], (System.Collections.Generic.List<System.Int32>) [1, 2], "
+            );
         }
 
         [Fact]
@@ -772,7 +926,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (8,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.F(List<int>)' and 'Program.F(int[])'
                 //         var x = F([]);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "F").WithArguments("Program.F(System.Collections.Generic.List<int>)", "Program.F(int[])").WithLocation(8, 17));
+                Diagnostic(ErrorCode.ERR_AmbigCall, "F")
+                    .WithArguments(
+                        "Program.F(System.Collections.Generic.List<int>)",
+                        "Program.F(int[])"
+                    )
+                    .WithLocation(8, 17)
+            );
         }
 
         [Fact]
@@ -797,10 +957,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (10,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.F1(List<int>)' and 'Program.F1(int[])'
                 //         var x = F1([1]);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "F1").WithArguments("Program.F1(System.Collections.Generic.List<int>)", "Program.F1(int[])").WithLocation(10, 17),
+                Diagnostic(ErrorCode.ERR_AmbigCall, "F1")
+                    .WithArguments(
+                        "Program.F1(System.Collections.Generic.List<int>)",
+                        "Program.F1(int[])"
+                    )
+                    .WithLocation(10, 17),
                 // (11,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.F2(int[])' and 'Program.F2(List<int>)'
                 //         var y = F2([2]);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "F2").WithArguments("Program.F2(int[])", "Program.F2(System.Collections.Generic.List<int>)").WithLocation(11, 17));
+                Diagnostic(ErrorCode.ERR_AmbigCall, "F2")
+                    .WithArguments(
+                        "Program.F2(int[])",
+                        "Program.F2(System.Collections.Generic.List<int>)"
+                    )
+                    .WithLocation(11, 17)
+            );
         }
 
         [Fact]
@@ -825,10 +996,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (10,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.F1(List<int>)' and 'Program.F1(List<long?>)'
                 //         var x = F1([1]);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "F1").WithArguments("Program.F1(System.Collections.Generic.List<int>)", "Program.F1(System.Collections.Generic.List<long?>)").WithLocation(10, 17),
+                Diagnostic(ErrorCode.ERR_AmbigCall, "F1")
+                    .WithArguments(
+                        "Program.F1(System.Collections.Generic.List<int>)",
+                        "Program.F1(System.Collections.Generic.List<long?>)"
+                    )
+                    .WithLocation(10, 17),
                 // (11,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.F2(List<long?>)' and 'Program.F2(List<int>)'
                 //         var y = F2([2]);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "F2").WithArguments("Program.F2(System.Collections.Generic.List<long?>)", "Program.F2(System.Collections.Generic.List<int>)").WithLocation(11, 17));
+                Diagnostic(ErrorCode.ERR_AmbigCall, "F2")
+                    .WithArguments(
+                        "Program.F2(System.Collections.Generic.List<long?>)",
+                        "Program.F2(System.Collections.Generic.List<int>)"
+                    )
+                    .WithLocation(11, 17)
+            );
         }
 
         [Fact]
@@ -853,10 +1035,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // 0.cs(10,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.F1(List<int?>)' and 'Program.F1(List<long>)'
                 //         var x = F1([1]);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "F1").WithArguments("Program.F1(System.Collections.Generic.List<int?>)", "Program.F1(System.Collections.Generic.List<long>)").WithLocation(10, 17),
+                Diagnostic(ErrorCode.ERR_AmbigCall, "F1")
+                    .WithArguments(
+                        "Program.F1(System.Collections.Generic.List<int?>)",
+                        "Program.F1(System.Collections.Generic.List<long>)"
+                    )
+                    .WithLocation(10, 17),
                 // 0.cs(11,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.F2(List<long>)' and 'Program.F2(List<int?>)'
                 //         var y = F2([2]);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "F2").WithArguments("Program.F2(System.Collections.Generic.List<long>)", "Program.F2(System.Collections.Generic.List<int?>)").WithLocation(11, 17));
+                Diagnostic(ErrorCode.ERR_AmbigCall, "F2")
+                    .WithArguments(
+                        "Program.F2(System.Collections.Generic.List<long>)",
+                        "Program.F2(System.Collections.Generic.List<int?>)"
+                    )
+                    .WithLocation(11, 17)
+            );
         }
 
         [Fact]
@@ -887,10 +1080,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (16,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.F1(S)' and 'Program.F1(List<int>)'
                 //         var x = F1([1]);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "F1").WithArguments("Program.F1(S)", "Program.F1(System.Collections.Generic.List<int>)").WithLocation(16, 17),
+                Diagnostic(ErrorCode.ERR_AmbigCall, "F1")
+                    .WithArguments(
+                        "Program.F1(S)",
+                        "Program.F1(System.Collections.Generic.List<int>)"
+                    )
+                    .WithLocation(16, 17),
                 // (17,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.F2(List<int>)' and 'Program.F2(S)'
                 //         var y = F2([2]);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "F2").WithArguments("Program.F2(System.Collections.Generic.List<int>)", "Program.F2(S)").WithLocation(17, 17));
+                Diagnostic(ErrorCode.ERR_AmbigCall, "F2")
+                    .WithArguments(
+                        "Program.F2(System.Collections.Generic.List<int>)",
+                        "Program.F2(S)"
+                    )
+                    .WithLocation(17, 17)
+            );
         }
 
         [Fact]
@@ -913,7 +1117,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "(System.Int32[]) [1], (System.Int32[]) [2], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "(System.Int32[]) [1], (System.Int32[]) [2], "
+            );
         }
 
         [Fact]
@@ -941,13 +1148,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (12,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.F1(int[])' and 'Program.F1(string[])'
                 //         F1([]);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "F1").WithArguments("Program.F1(int[])", "Program.F1(string[])").WithLocation(12, 9),
+                Diagnostic(ErrorCode.ERR_AmbigCall, "F1")
+                    .WithArguments("Program.F1(int[])", "Program.F1(string[])")
+                    .WithLocation(12, 9),
                 // (13,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.F2(List<int>)' and 'Program.F2(List<string>)'
                 //         F2([]);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "F2").WithArguments("Program.F2(System.Collections.Generic.List<int>)", "Program.F2(System.Collections.Generic.List<string>)").WithLocation(13, 9),
+                Diagnostic(ErrorCode.ERR_AmbigCall, "F2")
+                    .WithArguments(
+                        "Program.F2(System.Collections.Generic.List<int>)",
+                        "Program.F2(System.Collections.Generic.List<string>)"
+                    )
+                    .WithLocation(13, 9),
                 // (14,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.F3(string[])' and 'Program.F3(List<int?>)'
                 //         F3([null]);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "F3").WithArguments("Program.F3(string[])", "Program.F3(System.Collections.Generic.List<int?>)").WithLocation(14, 9));
+                Diagnostic(ErrorCode.ERR_AmbigCall, "F3")
+                    .WithArguments(
+                        "Program.F3(string[])",
+                        "Program.F3(System.Collections.Generic.List<int?>)"
+                    )
+                    .WithLocation(14, 9)
+            );
         }
 
         [Fact]
@@ -967,7 +1187,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 """;
             CompileAndVerify(
                 new[] { source, s_collectionExtensions },
-                expectedOutput: "(System.Nullable<System.Int32>[]) [null, 2, 3], ");
+                expectedOutput: "(System.Nullable<System.Int32>[]) [null, 2, 3], "
+            );
         }
 
         [Fact]
@@ -988,7 +1209,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 """;
             CompileAndVerify(
                 new[] { source, s_collectionExtensions },
-                expectedOutput: "(System.Nullable<System.Int32>[]) [null, 2, 3], ");
+                expectedOutput: "(System.Nullable<System.Int32>[]) [null, 2, 3], "
+            );
         }
 
         [Fact]
@@ -1019,7 +1241,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 """;
             CompileAndVerify(
                 new[] { source, s_collectionExtensions },
-                expectedOutput: "(System.Nullable<System.Int32>[]) [1, null], (System.Nullable<System.Int32>[]) [null, 2], ");
+                expectedOutput: "(System.Nullable<System.Int32>[]) [1, null], (System.Nullable<System.Int32>[]) [null, 2], "
+            );
         }
 
         [Fact]
@@ -1050,7 +1273,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 """;
             CompileAndVerify(
                 new[] { source, s_collectionExtensions },
-                expectedOutput: "(MyCollection) [1, null], (MyCollection) [null, 2], ");
+                expectedOutput: "(MyCollection) [1, null], (MyCollection) [null, 2], "
+            );
         }
 
         [Fact]
@@ -1088,7 +1312,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 """;
             CompileAndVerify(
                 new[] { source, s_collectionExtensions },
-                expectedOutput: "(MyCollection2) [1, null], (MyCollection1) [null, 2], ");
+                expectedOutput: "(MyCollection2) [1, null], (MyCollection1) [null, 2], "
+            );
         }
 
         [Fact]
@@ -1137,10 +1362,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
                 """;
             CompileAndVerify(
-                new[] { sourceA, sourceB, s_collectionExtensions, CollectionBuilderAttributeDefinition },
+                new[]
+                {
+                    sourceA,
+                    sourceB,
+                    s_collectionExtensions,
+                    CollectionBuilderAttributeDefinition
+                },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Fails,
-                expectedOutput: IncludeExpectedOutput("(MyCollection1) [null, 2, 3], (MyCollection2) [null], "));
+                expectedOutput: IncludeExpectedOutput(
+                    "(MyCollection1) [null, 2, 3], (MyCollection2) [null], "
+                )
+            );
         }
 
         [Fact]
@@ -1164,7 +1398,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 """;
             CompileAndVerify(
                 new[] { source, s_collectionExtensions },
-                expectedOutput: "(System.Collections.Generic.List<System.Nullable<System.Int32>>) [null, 2, 3], (System.Collections.Generic.List<System.String>) [null], ");
+                expectedOutput: "(System.Collections.Generic.List<System.Nullable<System.Int32>>) [null, 2, 3], (System.Collections.Generic.List<System.String>) [null], "
+            );
         }
 
         [Fact]
@@ -1184,10 +1419,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (6,10): error CS0103: The name 'Unknown2' does not exist in the current context
                 //         [Unknown2].Zip([Unknown1]);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "Unknown2").WithArguments("Unknown2").WithLocation(6, 10),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "Unknown2")
+                    .WithArguments("Unknown2")
+                    .WithLocation(6, 10),
                 // (6,25): error CS0103: The name 'Unknown1' does not exist in the current context
                 //         [Unknown2].Zip([Unknown1]);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "Unknown1").WithArguments("Unknown1").WithLocation(6, 25));
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "Unknown1")
+                    .WithArguments("Unknown1")
+                    .WithLocation(6, 25)
+            );
         }
 
         private const string example_RefStructCollection = """
@@ -1237,20 +1477,79 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         [Theory]
         [InlineData("System.Span<T>", "T[]", "System.Span<System.Int32>")]
-        [InlineData("System.Span<T>", "System.Collections.Generic.IEnumerable<T>", "System.Span<System.Int32>")]
-        [InlineData("System.Span<T>", "System.Collections.Generic.IReadOnlyCollection<T>", "System.Span<System.Int32>")]
-        [InlineData("System.Span<T>", "System.Collections.Generic.IReadOnlyList<T>", "System.Span<System.Int32>")]
-        [InlineData("System.Span<T>", "System.Collections.Generic.ICollection<T>", "System.Span<System.Int32>")]
-        [InlineData("System.Span<T>", "System.Collections.Generic.IList<T>", "System.Span<System.Int32>")]
-        [InlineData("System.Span<T>", "System.Collections.Generic.HashSet<T>", "System.Span<System.Int32>")]
+        [InlineData(
+            "System.Span<T>",
+            "System.Collections.Generic.IEnumerable<T>",
+            "System.Span<System.Int32>"
+        )]
+        [InlineData(
+            "System.Span<T>",
+            "System.Collections.Generic.IReadOnlyCollection<T>",
+            "System.Span<System.Int32>"
+        )]
+        [InlineData(
+            "System.Span<T>",
+            "System.Collections.Generic.IReadOnlyList<T>",
+            "System.Span<System.Int32>"
+        )]
+        [InlineData(
+            "System.Span<T>",
+            "System.Collections.Generic.ICollection<T>",
+            "System.Span<System.Int32>"
+        )]
+        [InlineData(
+            "System.Span<T>",
+            "System.Collections.Generic.IList<T>",
+            "System.Span<System.Int32>"
+        )]
+        [InlineData(
+            "System.Span<T>",
+            "System.Collections.Generic.HashSet<T>",
+            "System.Span<System.Int32>"
+        )]
         [InlineData("System.Span<T>", "System.ReadOnlySpan<object>", null)] // rule requires ref struct and non- ref struct
-        [InlineData("RefStructCollection<T>", "T[]", "RefStructCollection<System.Int32>", new[] { example_RefStructCollection })]
-        [InlineData("RefStructCollection<T>", "RefStructCollection<object>", null, new[] { example_RefStructCollection })] // rule requires ref struct and non- ref struct
-        [InlineData("RefStructCollection<int>", "GenericClassCollection<object>", "RefStructCollection<System.Int32>", new[] { example_RefStructCollection, example_GenericClassCollection })]
-        [InlineData("RefStructCollection<object>", "GenericClassCollection<int>", null, new[] { example_RefStructCollection, example_GenericClassCollection })] // cannot convert object to int
-        [InlineData("RefStructCollection<int>", "NonGenericClassCollection", "RefStructCollection<System.Int32>", new[] { example_RefStructCollection, example_NonGenericClassCollection })]
-        [InlineData("GenericClassCollection<T>", "T[]", null, new[] { example_GenericClassCollection })] // rule requires ref struct
-        [InlineData("NonGenericClassCollection", "object[]", null, new[] { example_NonGenericClassCollection })] // rule requires ref struct
+        [InlineData(
+            "RefStructCollection<T>",
+            "T[]",
+            "RefStructCollection<System.Int32>",
+            new[] { example_RefStructCollection }
+        )]
+        [InlineData(
+            "RefStructCollection<T>",
+            "RefStructCollection<object>",
+            null,
+            new[] { example_RefStructCollection }
+        )] // rule requires ref struct and non- ref struct
+        [InlineData(
+            "RefStructCollection<int>",
+            "GenericClassCollection<object>",
+            "RefStructCollection<System.Int32>",
+            new[] { example_RefStructCollection, example_GenericClassCollection }
+        )]
+        [InlineData(
+            "RefStructCollection<object>",
+            "GenericClassCollection<int>",
+            null,
+            new[] { example_RefStructCollection, example_GenericClassCollection }
+        )] // cannot convert object to int
+        [InlineData(
+            "RefStructCollection<int>",
+            "NonGenericClassCollection",
+            "RefStructCollection<System.Int32>",
+            new[] { example_RefStructCollection, example_NonGenericClassCollection }
+        )]
+        [InlineData(
+            "GenericClassCollection<T>",
+            "T[]",
+            null,
+            new[] { example_GenericClassCollection }
+        )] // rule requires ref struct
+        [InlineData(
+            "NonGenericClassCollection",
+            "object[]",
+            null,
+            new[] { example_NonGenericClassCollection }
+        )] // rule requires ref struct
         [InlineData("System.ReadOnlySpan<T>", "object[]", "System.ReadOnlySpan<System.Int32>")]
         [InlineData("System.ReadOnlySpan<T>", "long[]", "System.ReadOnlySpan<System.Int32>")]
         [InlineData("System.ReadOnlySpan<T>", "short[]", null)] // cannot convert int to short
@@ -1263,13 +1562,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [InlineData("System.ReadOnlySpan<T>", "System.ReadOnlySpan<object>", null)] // cannot convert between ReadOnlySpan<int> and ReadOnlySpan<object>
         [InlineData("System.ReadOnlySpan<T>", "System.ReadOnlySpan<long>", null)] // cannot convert between ReadOnlySpan<int> and ReadOnlySpan<long>
         [InlineData("System.ReadOnlySpan<object>", "System.ReadOnlySpan<long>", null)] // cannot convert between ReadOnlySpan<object> and ReadOnlySpan<long>
-        [InlineData("System.ReadOnlySpan<int>", "System.ReadOnlySpan<string>", "System.ReadOnlySpan<System.Int32>")]
+        [InlineData(
+            "System.ReadOnlySpan<int>",
+            "System.ReadOnlySpan<string>",
+            "System.ReadOnlySpan<System.Int32>"
+        )]
         [InlineData("System.Span<int>", "int?[]", "System.Span<System.Int32>")]
         [InlineData("System.Span<int?>", "int[]", null)] // cannot convert int? to int
-        [InlineData("System.Collections.Generic.List<int>", "System.Collections.Generic.IEnumerable<int>", "System.Collections.Generic.List<System.Int32>")]
+        [InlineData(
+            "System.Collections.Generic.List<int>",
+            "System.Collections.Generic.IEnumerable<int>",
+            "System.Collections.Generic.List<System.Int32>"
+        )]
         [InlineData("int[]", "object[]", null)] // rule requires ref struct
         [InlineData("int[]", "System.Collections.Generic.IReadOnlyList<object>", null)] // rule requires ref struct
-        public void BetterConversionFromExpression_01(string type1, string type2, string expectedType, string[] additionalSources = null)
+        public void BetterConversionFromExpression_01(
+            string type1,
+            string type2,
+            string expectedType,
+            string[] additionalSources = null
+        )
         {
             string source = $$"""
                 using System;
@@ -1291,23 +1603,41 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var comp = CreateCompilation(
                 getSources(source, additionalSources),
                 targetFramework: TargetFramework.Net80,
-                options: TestOptions.ReleaseExe);
+                options: TestOptions.ReleaseExe
+            );
             if (expectedType is { })
             {
-                CompileAndVerify(comp, verify: Verification.Skipped, expectedOutput: IncludeExpectedOutput($"""
+                CompileAndVerify(
+                    comp,
+                    verify: Verification.Skipped,
+                    expectedOutput: IncludeExpectedOutput(
+                        $"""
                     {expectedType}
                     {expectedType}
-                    """));
+                    """
+                    )
+                );
             }
             else
             {
                 comp.VerifyEmitDiagnostics(
                     // 0.cs(10,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.F1(ReadOnlySpan<long>)' and 'Program.F1(ReadOnlySpan<object>)'
                     //         var x = F1([1, 2, 3]);
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "F1").WithArguments(generateMethodSignature("F1", type1), generateMethodSignature("F1", type2)).WithLocation(10, 17),
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "F1")
+                        .WithArguments(
+                            generateMethodSignature("F1", type1),
+                            generateMethodSignature("F1", type2)
+                        )
+                        .WithLocation(10, 17),
                     // 0.cs(12,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.F2(ReadOnlySpan<object>)' and 'Program.F2(ReadOnlySpan<long>)'
                     //         var y = F2([4, 5]);
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "F2").WithArguments(generateMethodSignature("F2", type2), generateMethodSignature("F2", type1)).WithLocation(12, 17));
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "F2")
+                        .WithArguments(
+                            generateMethodSignature("F2", type2),
+                            generateMethodSignature("F2", type1)
+                        )
+                        .WithLocation(12, 17)
+                );
             }
 
             static string getTypeParameters(string type) =>
@@ -1324,7 +1654,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 var builder = ArrayBuilder<string>.GetInstance();
                 builder.Add(source);
                 builder.Add(s_collectionExtensions);
-                if (additionalSources is { }) builder.AddRange(additionalSources);
+                if (additionalSources is { })
+                    builder.AddRange(additionalSources);
                 return builder.ToArrayAndFree();
             }
         }
@@ -1370,15 +1701,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var comp = CreateCompilation(
                 new[] { sourceA, sourceB1 },
                 targetFramework: TargetFramework.Net80,
-                options: TestOptions.ReleaseExe);
-            CompileAndVerify(comp, verify: Verification.Skipped, expectedOutput: IncludeExpectedOutput("""
+                options: TestOptions.ReleaseExe
+            );
+            CompileAndVerify(
+                comp,
+                verify: Verification.Skipped,
+                expectedOutput: IncludeExpectedOutput(
+                    """
                 T[]
                 string[]
                 string[]
                 Span<T>
                 Span<string>
                 Span<string>
-                """));
+                """
+                )
+            );
 
             string sourceB2 = """
                 partial class Program
@@ -1392,14 +1730,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 """;
             comp = CreateCompilation(
                 new[] { sourceA, sourceB2 },
-                targetFramework: TargetFramework.Net80);
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // 1.cs(5,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.SpanDerived(Span<string>)' and 'Program.SpanDerived(object[])'
                 //         SpanDerived(new[] { string.Empty }); // ambiguous
-                Diagnostic(ErrorCode.ERR_AmbigCall, "SpanDerived").WithArguments("Program.SpanDerived(System.Span<string>)", "Program.SpanDerived(object[])").WithLocation(5, 9),
+                Diagnostic(ErrorCode.ERR_AmbigCall, "SpanDerived")
+                    .WithArguments(
+                        "Program.SpanDerived(System.Span<string>)",
+                        "Program.SpanDerived(object[])"
+                    )
+                    .WithLocation(5, 9),
                 // 1.cs(6,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.ArrayDerived(Span<object>)' and 'Program.ArrayDerived(string[])'
                 //         ArrayDerived([string.Empty]); // ambiguous
-                Diagnostic(ErrorCode.ERR_AmbigCall, "ArrayDerived").WithArguments("Program.ArrayDerived(System.Span<object>)", "Program.ArrayDerived(string[])").WithLocation(6, 9));
+                Diagnostic(ErrorCode.ERR_AmbigCall, "ArrayDerived")
+                    .WithArguments(
+                        "Program.ArrayDerived(System.Span<object>)",
+                        "Program.ArrayDerived(string[])"
+                    )
+                    .WithLocation(6, 9)
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/69634")]
@@ -1433,13 +1783,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var comp = CreateCompilation(
                 new[] { sourceA, sourceB1 },
                 targetFramework: TargetFramework.Net80,
-                options: TestOptions.ReleaseExe);
-            CompileAndVerify(comp, verify: Verification.Skipped, expectedOutput: IncludeExpectedOutput("""
+                options: TestOptions.ReleaseExe
+            );
+            CompileAndVerify(
+                comp,
+                verify: Verification.Skipped,
+                expectedOutput: IncludeExpectedOutput(
+                    """
                 Span<int>
                 string[]
                 Span<int>
                 string[]
-                """));
+                """
+                )
+            );
 
             string sourceB2 = """
                 partial class Program
@@ -1453,17 +1810,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 """;
             comp = CreateCompilation(
                 new[] { sourceA, sourceB2 },
-                targetFramework: TargetFramework.Net80);
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // 1.cs(5,19): error CS0826: No best type found for implicitly-typed array
                 //         Unrelated(new[] { default }); // error
-                Diagnostic(ErrorCode.ERR_ImplicitlyTypedArrayNoBestType, "new[] { default }").WithLocation(5, 19),
+                Diagnostic(ErrorCode.ERR_ImplicitlyTypedArrayNoBestType, "new[] { default }")
+                    .WithLocation(5, 19),
                 // 1.cs(5,19): error CS1503: Argument 1: cannot convert from '?[]' to 'System.Span<int>'
                 //         Unrelated(new[] { default }); // error
-                Diagnostic(ErrorCode.ERR_BadArgType, "new[] { default }").WithArguments("1", "?[]", "System.Span<int>").WithLocation(5, 19),
+                Diagnostic(ErrorCode.ERR_BadArgType, "new[] { default }")
+                    .WithArguments("1", "?[]", "System.Span<int>")
+                    .WithLocation(5, 19),
                 // 1.cs(6,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Unrelated(Span<int>)' and 'Program.Unrelated(string[])'
                 //         Unrelated([default]); // ambiguous
-                Diagnostic(ErrorCode.ERR_AmbigCall, "Unrelated").WithArguments("Program.Unrelated(System.Span<int>)", "Program.Unrelated(string[])").WithLocation(6, 9));
+                Diagnostic(ErrorCode.ERR_AmbigCall, "Unrelated")
+                    .WithArguments(
+                        "Program.Unrelated(System.Span<int>)",
+                        "Program.Unrelated(string[])"
+                    )
+                    .WithLocation(6, 9)
+            );
         }
 
         [Fact]
@@ -1488,7 +1855,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 new[] { source, s_collectionExtensionsWithSpan },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[1], [2], [4], "));
+                expectedOutput: IncludeExpectedOutput("[1], [2], [4], ")
+            );
         }
 
         [Fact]
@@ -1513,10 +1881,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (10,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.F1(Span<int>, int[])' and 'Program.F1(int[], ReadOnlySpan<int>)'
                 //         F1([1], [2]);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "F1").WithArguments("Program.F1(System.Span<int>, int[])", "Program.F1(int[], System.ReadOnlySpan<int>)").WithLocation(10, 9),
+                Diagnostic(ErrorCode.ERR_AmbigCall, "F1")
+                    .WithArguments(
+                        "Program.F1(System.Span<int>, int[])",
+                        "Program.F1(int[], System.ReadOnlySpan<int>)"
+                    )
+                    .WithLocation(10, 9),
                 // (11,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.F2(string, string[])' and 'Program.F2(object, Span<string>)'
                 //         F2("3", ["4"]);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "F2").WithArguments("Program.F2(string, string[])", "Program.F2(object, System.Span<string>)").WithLocation(11, 9));
+                Diagnostic(ErrorCode.ERR_AmbigCall, "F2")
+                    .WithArguments(
+                        "Program.F2(string, string[])",
+                        "Program.F2(object, System.Span<string>)"
+                    )
+                    .WithLocation(11, 9)
+            );
         }
 
         // Two ref struct collection types, with an implicit conversion from one to the other.
@@ -1573,13 +1952,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 new[] { source, CollectionBuilderAttributeDefinition },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("""
+                expectedOutput: IncludeExpectedOutput(
+                    """
                     MyCollection1<T>
                     MyCollection1<object>
                     MyCollection1<T>
                     MyCollection2<T>
                     MyCollection2<object>
-                    """));
+                    """
+                )
+            );
         }
 
         [Fact]
@@ -1597,7 +1979,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "(System.Int32[][]) [[], [1, 2, 3]], (System.Int32[][][]) [[[]], [[1, 2, 3]]], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "(System.Int32[][]) [[], [1, 2, 3]], (System.Int32[][][]) [[[]], [[1, 2, 3]]], "
+            );
         }
 
         [Fact]
@@ -1615,7 +2000,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "(System.Byte[][]) [[], [1, 2, 3]], (System.Byte[][][]) [[[]], [[1, 2, 3]]], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "(System.Byte[][]) [[], [1, 2, 3]], (System.Byte[][][]) [[[]], [[1, 2, 3]]], "
+            );
         }
 
         [Fact]
@@ -1635,7 +2023,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (6,17): error CS0826: No best type found for implicitly-typed array
                 //         var y = new[] { [[""]], [new object[0]] };
-                Diagnostic(ErrorCode.ERR_ImplicitlyTypedArrayNoBestType, @"new[] { [[""""]], [new object[0]] }").WithLocation(6, 17));
+                Diagnostic(
+                        ErrorCode.ERR_ImplicitlyTypedArrayNoBestType,
+                        @"new[] { [[""""]], [new object[0]] }"
+                    )
+                    .WithLocation(6, 17)
+            );
         }
 
         [Fact]
@@ -1653,7 +2046,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "(System.Int32[]) [1, 2, 3], (System.Byte[][]) [[4, 5]], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "(System.Int32[]) [1, 2, 3], (System.Byte[][]) [[4, 5]], "
+            );
         }
 
         [Fact]
@@ -1673,7 +2069,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (6,17): error CS0173: Type of conditional expression cannot be determined because there is no implicit conversion between 'collection expressions' and 'collection expressions'
                 //         var y = b ? [new int[0]] : [[1, 2, 3]];
-                Diagnostic(ErrorCode.ERR_InvalidQM, "b ? [new int[0]] : [[1, 2, 3]]").WithArguments("collection expressions", "collection expressions").WithLocation(6, 17));
+                Diagnostic(ErrorCode.ERR_InvalidQM, "b ? [new int[0]] : [[1, 2, 3]]")
+                    .WithArguments("collection expressions", "collection expressions")
+                    .WithLocation(6, 17)
+            );
         }
 
         [Fact]
@@ -1697,10 +2096,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (9,17): error CS7036: There is no argument given that corresponds to the required parameter 'b' of 'Program.F<T>(T, T)'
                 //         var x = F(["str"]);
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "F").WithArguments("b", "Program.F<T>(T, T)").WithLocation(9, 17),
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "F")
+                    .WithArguments("b", "Program.F<T>(T, T)")
+                    .WithLocation(9, 17),
                 // (10,17): error CS7036: There is no argument given that corresponds to the required parameter 'b' of 'Program.F<T>(T, T)'
                 //         var y = F([[], [1, 2]]);
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "F").WithArguments("b", "Program.F<T>(T, T)").WithLocation(10, 17));
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "F")
+                    .WithArguments("b", "Program.F<T>(T, T)")
+                    .WithLocation(10, 17)
+            );
         }
 
         [Fact]
@@ -1723,7 +2127,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (9,29): error CS0826: No best type found for implicitly-typed array
                 //         _ = F([new int[0]], new[] { [1, 2, 3] });
-                Diagnostic(ErrorCode.ERR_ImplicitlyTypedArrayNoBestType, "new[] { [1, 2, 3] }").WithLocation(9, 29));
+                Diagnostic(ErrorCode.ERR_ImplicitlyTypedArrayNoBestType, "new[] { [1, 2, 3] }")
+                    .WithLocation(9, 29)
+            );
         }
 
         [Fact]
@@ -1743,7 +2149,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "[1, 2, 3], [4, null], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "[1, 2, 3], [4, null], "
+            );
         }
 
         [Fact]
@@ -1767,10 +2176,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (9,9): error CS0411: The type arguments for method 'Program.AsArray<T>(T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         AsArray([]);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "AsArray").WithArguments("Program.AsArray<T>(T[])").WithLocation(9, 9),
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "AsArray")
+                    .WithArguments("Program.AsArray<T>(T[])")
+                    .WithLocation(9, 9),
                 // (10,17): error CS1503: Argument 1: cannot convert from 'collection expressions' to 'int[]'
                 //         AsArray([1, null]);
-                Diagnostic(ErrorCode.ERR_BadArgType, "[1, null]").WithArguments("1", "collection expressions", "int[]").WithLocation(10, 17));
+                Diagnostic(ErrorCode.ERR_BadArgType, "[1, null]")
+                    .WithArguments("1", "collection expressions", "int[]")
+                    .WithLocation(10, 17)
+            );
         }
 
         [Fact]
@@ -1798,7 +2212,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // 0.cs(9,29): error CS0173: Type of conditional expression cannot be determined because there is no implicit conversion between 'collection expressions' and 'collection expressions'
                 //         var a = AsArray([.. b ? [x] : [y]]);
-                Diagnostic(ErrorCode.ERR_InvalidQM, "b ? [x] : [y]").WithArguments("collection expressions", "collection expressions").WithLocation(9, 29));
+                Diagnostic(ErrorCode.ERR_InvalidQM, "b ? [x] : [y]")
+                    .WithArguments("collection expressions", "collection expressions")
+                    .WithLocation(9, 29)
+            );
         }
 
         [Fact]
@@ -1822,7 +2239,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // 0.cs(9,17): error CS9176: There is no target type for the collection expression.
                 //         var a = [1, 2, 3].AsArray();
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[1, 2, 3]").WithLocation(9, 17));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[1, 2, 3]")
+                    .WithLocation(9, 17)
+            );
         }
 
         [Fact]
@@ -1863,7 +2282,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (27,17): error CS9176: There is no target type for the collection expression.
                 //         var b = [4].AsCollection();
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[4]").WithLocation(27, 17));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[4]")
+                    .WithLocation(27, 17)
+            );
         }
 
         [Fact]
@@ -1893,10 +2314,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (15,13): error CS0411: The type arguments for method 'Program.AsCollection<T>(S<T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         _ = AsCollection([1, 2, 3]);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "AsCollection").WithArguments("Program.AsCollection<T>(S<T>)").WithLocation(15, 13),
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "AsCollection")
+                    .WithArguments("Program.AsCollection<T>(S<T>)")
+                    .WithLocation(15, 13),
                 // (16,13): error CS9176: There is no target type for the collection expression.
                 //         _ = [4].AsCollection();
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[4]").WithLocation(16, 13));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[4]")
+                    .WithLocation(16, 13)
+            );
         }
 
         [Fact]
@@ -1918,7 +2343,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (8,13): error CS0121: The call is ambiguous between the following methods or properties: 'Program.F<T>(T[])' and 'Program.F<T>(List<T>)'
                 //         _ = F([1, 2, 3]);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "F").WithArguments("Program.F<T>(T[])", "Program.F<T>(System.Collections.Generic.List<T>)").WithLocation(8, 13));
+                Diagnostic(ErrorCode.ERR_AmbigCall, "F")
+                    .WithArguments(
+                        "Program.F<T>(T[])",
+                        "Program.F<T>(System.Collections.Generic.List<T>)"
+                    )
+                    .WithLocation(8, 13)
+            );
         }
 
         [Fact]
@@ -1942,7 +2373,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "(System.Int32[]) [1, 2, 3], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "(System.Int32[]) [1, 2, 3], "
+            );
         }
 
         [Fact]
@@ -1961,7 +2395,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "(System.Object[]) [1], (System.Object[]) [3], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "(System.Object[]) [1], (System.Object[]) [3], "
+            );
         }
 
         [Fact]
@@ -1980,7 +2417,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "(System.Int64[]) [1], (System.Int64[]) [3], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "(System.Int64[]) [1], (System.Int64[]) [3], "
+            );
         }
 
         [Fact]
@@ -2000,7 +2440,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "(System.Collections.Generic.HashSet<System.Int64>) [1], (System.Collections.Generic.HashSet<System.Int64>) [3], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "(System.Collections.Generic.HashSet<System.Int64>) [1], (System.Collections.Generic.HashSet<System.Int64>) [3], "
+            );
         }
 
         [Fact]
@@ -2017,7 +2460,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "(System.Int32[]) [1, 2, 3], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "(System.Int32[]) [1, 2, 3], "
+            );
         }
 
         [Fact]
@@ -2041,13 +2487,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (8,17): error CS0411: The type arguments for method 'Program.F0<T>(T[], T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         var x = F0(new byte[0], 1);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F0").WithArguments("Program.F0<T>(T[], T)").WithLocation(8, 17),
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F0")
+                    .WithArguments("Program.F0<T>(T[], T)")
+                    .WithLocation(8, 17),
                 // (9,17): error CS0411: The type arguments for method 'Program.F1<T>(T[], T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         var y = F1(new byte[0], [1, 2]);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1").WithArguments("Program.F1<T>(T[], T[])").WithLocation(9, 17),
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1")
+                    .WithArguments("Program.F1<T>(T[], T[])")
+                    .WithLocation(9, 17),
                 // (10,17): error CS0411: The type arguments for method 'Program.F2<T>(T[][], T[][])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         var z = F2(new[] { new byte[0] }, [[3, 4]]);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F2").WithArguments("Program.F2<T>(T[][], T[][])").WithLocation(10, 17));
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F2")
+                    .WithArguments("Program.F2<T>(T[][], T[][])")
+                    .WithLocation(10, 17)
+            );
         }
 
         [Fact]
@@ -2067,7 +2520,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "(System.Int32[]) [2], (System.Int32[]) [4], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "(System.Int32[]) [2], (System.Int32[]) [4], "
+            );
         }
 
         [Fact]
@@ -2089,10 +2545,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (7,17): error CS0411: The type arguments for method 'Program.F1<T>(T[], T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         var x = F1([(long)1], [(int?)2]);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1").WithArguments("Program.F1<T>(T[], T[])").WithLocation(7, 17),
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1")
+                    .WithArguments("Program.F1<T>(T[], T[])")
+                    .WithLocation(7, 17),
                 // (8,17): error CS0411: The type arguments for method 'Program.F2<T>(T[][], T[][])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         var y = F2([[(int?)3]], [[(long)4]]);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F2").WithArguments("Program.F2<T>(T[][], T[][])").WithLocation(8, 17));
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F2")
+                    .WithArguments("Program.F2<T>(T[][], T[][])")
+                    .WithLocation(8, 17)
+            );
         }
 
         [Fact]
@@ -2110,7 +2571,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "(System.Collections.Generic.List<System.Int32[]>) [[4, 5], []], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "(System.Collections.Generic.List<System.Int32[]>) [[4, 5], []], "
+            );
         }
 
         [Fact]
@@ -2130,7 +2594,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (6,17): error CS0411: The type arguments for method 'Program.F<T>(T[][])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         var y = F([new byte[0], [1, 2, 3]]);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F").WithArguments("Program.F<T>(T[][])").WithLocation(6, 17));
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F")
+                    .WithArguments("Program.F<T>(T[][])")
+                    .WithLocation(6, 17)
+            );
         }
 
         [Fact]
@@ -2149,7 +2616,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "(System.Int32[]) [1], (System.Object[]) [3], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "(System.Int32[]) [1], (System.Object[]) [3], "
+            );
         }
 
         [Fact]
@@ -2169,7 +2639,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (6,22): error CS8156: An expression cannot be used in this context because it may not be passed or returned by reference
                 //         var y = F(in [3], [(object)4]);
-                Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "[3]").WithLocation(6, 22));
+                Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "[3]").WithLocation(6, 22)
+            );
         }
 
         [Fact]
@@ -2189,7 +2660,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "(System.Int32[]) [0, 2], (System.Nullable<System.Int32>[]) [null, 4], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "(System.Int32[]) [0, 2], (System.Nullable<System.Int32>[]) [null, 4], "
+            );
         }
 
         [Fact]
@@ -2211,10 +2685,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (7,17): error CS0411: The type arguments for method 'Program.F1<T>(T[], T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         var x = F1([], [default]);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1").WithArguments("Program.F1<T>(T[], T[])").WithLocation(7, 17),
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1")
+                    .WithArguments("Program.F1<T>(T[], T[])")
+                    .WithLocation(7, 17),
                 // (8,17): error CS0411: The type arguments for method 'Program.F2<T>(T[][], T[][])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         var y = F2([[null]], [[default]]);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F2").WithArguments("Program.F2<T>(T[][], T[][])").WithLocation(8, 17));
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F2")
+                    .WithArguments("Program.F2<T>(T[][], T[][])")
+                    .WithLocation(8, 17)
+            );
         }
 
         [Fact]
@@ -2240,7 +2719,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 new[] { source, s_collectionExtensionsWithSpan },
                 targetFramework: TargetFramework.Net70,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[0, 2], [null, 4], "));
+                expectedOutput: IncludeExpectedOutput("[0, 2], [null, 4], ")
+            );
         }
 
         [Fact]
@@ -2264,10 +2744,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (9,17): error CS0411: The type arguments for method 'Program.F1<T>(Span<T>, ReadOnlySpan<T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         var x = F1([], [default]);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1").WithArguments("Program.F1<T>(System.Span<T>, System.ReadOnlySpan<T>)").WithLocation(9, 17),
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1")
+                    .WithArguments("Program.F1<T>(System.Span<T>, System.ReadOnlySpan<T>)")
+                    .WithLocation(9, 17),
                 // (10,17): error CS0411: The type arguments for method 'Program.F2<T>(Span<T[]>, ReadOnlySpan<List<T>>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         var y = F2([[null]], [[default]]);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F2").WithArguments("Program.F2<T>(System.Span<T[]>, System.ReadOnlySpan<System.Collections.Generic.List<T>>)").WithLocation(10, 17));
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F2")
+                    .WithArguments(
+                        "Program.F2<T>(System.Span<T[]>, System.ReadOnlySpan<System.Collections.Generic.List<T>>)"
+                    )
+                    .WithLocation(10, 17)
+            );
         }
 
         [Fact]
@@ -2288,10 +2775,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (6,9): error CS0411: The type arguments for method 'Program.F<T>(T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         F([]);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F").WithArguments("Program.F<T>(T)").WithLocation(6, 9),
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F")
+                    .WithArguments("Program.F<T>(T)")
+                    .WithLocation(6, 9),
                 // (7,9): error CS0411: The type arguments for method 'Program.F<T>(T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         F([null, default, 0]);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F").WithArguments("Program.F<T>(T)").WithLocation(7, 9));
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F")
+                    .WithArguments("Program.F<T>(T)")
+                    .WithLocation(7, 9)
+            );
         }
 
         [Fact]
@@ -2312,10 +2804,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (6,9): error CS0411: The type arguments for method 'Program.F<T>(T[*,*])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         F([]);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F").WithArguments("Program.F<T>(T[*,*])").WithLocation(6, 9),
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F")
+                    .WithArguments("Program.F<T>(T[*,*])")
+                    .WithLocation(6, 9),
                 // (7,11): error CS1503: Argument 1: cannot convert from 'collection expressions' to 'int[*,*]'
                 //         F([null, default, 0]);
-                Diagnostic(ErrorCode.ERR_BadArgType, "[null, default, 0]").WithArguments("1", "collection expressions", "int[*,*]").WithLocation(7, 11));
+                Diagnostic(ErrorCode.ERR_BadArgType, "[null, default, 0]")
+                    .WithArguments("1", "collection expressions", "int[*,*]")
+                    .WithLocation(7, 11)
+            );
         }
 
         [Fact]
@@ -2337,13 +2834,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (6,11): error CS1729: 'string' does not contain a constructor that takes 0 arguments
                 //         F([], ['B']);
-                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "[]").WithArguments("string", "0").WithLocation(6, 11),
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "[]")
+                    .WithArguments("string", "0")
+                    .WithLocation(6, 11),
                 // (7,11): error CS1503: Argument 1: cannot convert from 'collection expressions' to 'string'
                 //         F([default], ['B']);
-                Diagnostic(ErrorCode.ERR_BadArgType, "[default]").WithArguments("1", "collection expressions", "string").WithLocation(7, 11),
+                Diagnostic(ErrorCode.ERR_BadArgType, "[default]")
+                    .WithArguments("1", "collection expressions", "string")
+                    .WithLocation(7, 11),
                 // (8,11): error CS1503: Argument 1: cannot convert from 'collection expressions' to 'string'
                 //         F(['A'], ['B']);
-                Diagnostic(ErrorCode.ERR_BadArgType, "['A']").WithArguments("1", "collection expressions", "string").WithLocation(8, 11));
+                Diagnostic(ErrorCode.ERR_BadArgType, "['A']")
+                    .WithArguments("1", "collection expressions", "string")
+                    .WithLocation(8, 11)
+            );
         }
 
         [Fact]
@@ -2369,13 +2873,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (10,12): error CS1503: Argument 1: cannot convert from 'collection expressions' to 'dynamic'
                 //         F1([1], [2]);
-                Diagnostic(ErrorCode.ERR_BadArgType, "[1]").WithArguments("1", "collection expressions", "dynamic").WithLocation(10, 12),
+                Diagnostic(ErrorCode.ERR_BadArgType, "[1]")
+                    .WithArguments("1", "collection expressions", "dynamic")
+                    .WithLocation(10, 12),
                 // (11,12): error CS1503: Argument 1: cannot convert from 'collection expressions' to 'D'
                 //         F2([3], [4]);
-                Diagnostic(ErrorCode.ERR_BadArgType, "[3]").WithArguments("1", "collection expressions", "D").WithLocation(11, 12),
+                Diagnostic(ErrorCode.ERR_BadArgType, "[3]")
+                    .WithArguments("1", "collection expressions", "D")
+                    .WithLocation(11, 12),
                 // (12,12): error CS1503: Argument 1: cannot convert from 'collection expressions' to 'E'
                 //         F3([5], [6]);
-                Diagnostic(ErrorCode.ERR_BadArgType, "[5]").WithArguments("1", "collection expressions", "E").WithLocation(12, 12));
+                Diagnostic(ErrorCode.ERR_BadArgType, "[5]")
+                    .WithArguments("1", "collection expressions", "E")
+                    .WithLocation(12, 12)
+            );
         }
 
         [Fact]
@@ -2420,13 +2931,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (6,9): error CS0411: The type arguments for method 'Program.F<T>(T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         F([null]);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F").WithArguments("Program.F<T>(T[])").WithLocation(6, 9),
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F")
+                    .WithArguments("Program.F<T>(T[])")
+                    .WithLocation(6, 9),
                 // (7,12): error CS0103: The name 'Unknown' does not exist in the current context
                 //         F([Unknown]);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "Unknown").WithArguments("Unknown").WithLocation(7, 12),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "Unknown")
+                    .WithArguments("Unknown")
+                    .WithLocation(7, 12),
                 // (8,9): error CS0411: The type arguments for method 'Program.F<T>(T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         F([Main()]);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F").WithArguments("Program.F<T>(T[])").WithLocation(8, 9));
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F")
+                    .WithArguments("Program.F<T>(T[])")
+                    .WithLocation(8, 9)
+            );
         }
 
         [Fact]
@@ -2446,7 +2964,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "(System.Action[]) [null, System.Action], (D[]) [D, D], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "(System.Action[]) [null, System.Action], (D[]) [D, D], "
+            );
         }
 
         [Fact]
@@ -2466,7 +2987,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "(System.Func<System.Int32>[]) [null, System.Func`1[System.Int32]], (D[]) [D, D], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "(System.Func<System.Int32>[]) [null, System.Func`1[System.Int32]], (D[]) [D, D], "
+            );
         }
 
         [Fact]
@@ -2492,7 +3016,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 """;
             CompileAndVerify(
                 new[] { source, s_collectionExtensions },
-                expectedOutput: "[System.Func`1[System.String]], [null, System.Func`1[System.Int32]], [System.Func`1[System.String], System.Func`1[System.String]], ");
+                expectedOutput: "[System.Func`1[System.String]], [null, System.Func`1[System.Int32]], [System.Func`1[System.String], System.Func`1[System.String]], "
+            );
         }
 
         [Fact]
@@ -2516,7 +3041,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 """;
             CompileAndVerify(
                 new[] { source, s_collectionExtensions },
-                expectedOutput: "[System.Action`1[System.String], System.Action`1[System.String]], [null, System.Action`1[System.Int32]], ");
+                expectedOutput: "[System.Action`1[System.String], System.Action`1[System.String]], [null, System.Action`1[System.Int32]], "
+            );
         }
 
         [Fact]
@@ -2540,10 +3066,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (9,17): error CS0411: The type arguments for method 'Program.F1<T>(List<Func<T>>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         var x = F1([() => default]);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1").WithArguments("Program.F1<T>(System.Collections.Generic.List<System.Func<T>>)").WithLocation(9, 17),
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1")
+                    .WithArguments("Program.F1<T>(System.Collections.Generic.List<System.Func<T>>)")
+                    .WithLocation(9, 17),
                 // (10,17): error CS0411: The type arguments for method 'Program.F1<T>(List<Func<T>>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         var y = F1([null, () => 1]);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1").WithArguments("Program.F1<T>(System.Collections.Generic.List<System.Func<T>>)").WithLocation(10, 17));
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1")
+                    .WithArguments("Program.F1<T>(System.Collections.Generic.List<System.Func<T>>)")
+                    .WithLocation(10, 17)
+            );
         }
 
         [Fact]
@@ -2564,7 +3095,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 """;
             CompileAndVerify(
                 new[] { source, s_collectionExtensions },
-                expectedOutput: "(System.ValueTuple<System.Int32, System.String>[]) [(1, 2)], (System.ValueTuple<System.Int32, System.Byte>[]) [(0, 0), (3, 4)], ");
+                expectedOutput: "(System.ValueTuple<System.Int32, System.String>[]) [(1, 2)], (System.ValueTuple<System.Int32, System.Byte>[]) [(0, 0), (3, 4)], "
+            );
         }
 
         [Fact]
@@ -2593,7 +3125,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "(System.Object[]) [1], (System.Object[]) [2], (System.Object[]) [3], (System.Object[]) [3], (System.Object[]) [4], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "(System.Object[]) [1], (System.Object[]) [2], (System.Object[]) [3], (System.Object[]) [3], (System.Object[]) [4], "
+            );
         }
 
         [Fact]
@@ -2614,7 +3149,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "(System.Int32[]) [1], (System.Int32[]) [3], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "(System.Int32[]) [1], (System.Int32[]) [3], "
+            );
         }
 
         [Fact]
@@ -2639,13 +3177,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // (9,18): error CS0411: The type arguments for method 'Program.F2<T>(T[], ref T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         var x2 = F2([2], ref y);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F2").WithArguments("Program.F2<T>(T[], ref T)").WithLocation(9, 18),
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F2")
+                    .WithArguments("Program.F2<T>(T[], ref T)")
+                    .WithLocation(9, 18),
                 // (10,19): error CS0411: The type arguments for method 'Program.F3<T>(T[], in T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         var x3B = F3([3], in y);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F3").WithArguments("Program.F3<T>(T[], in T)").WithLocation(10, 19),
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F3")
+                    .WithArguments("Program.F3<T>(T[], in T)")
+                    .WithLocation(10, 19),
                 // (11,18): error CS0411: The type arguments for method 'Program.F4<T>(T[], out T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         var x4 = F4([4], out y);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F4").WithArguments("Program.F4<T>(T[], out T)").WithLocation(11, 18));
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F4")
+                    .WithArguments("Program.F4<T>(T[], out T)")
+                    .WithLocation(11, 18)
+            );
         }
 
         [Fact]
@@ -2669,10 +3214,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // 0.cs(7,17): error CS0411: The type arguments for method 'Program.F<T>(Func<T[]>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         var x = F(() => [1, 2, 3]);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F").WithArguments("Program.F<T>(System.Func<T[]>)").WithLocation(7, 17),
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F")
+                    .WithArguments("Program.F<T>(System.Func<T[]>)")
+                    .WithLocation(7, 17),
                 // 0.cs(9,17): error CS0411: The type arguments for method 'Program.F<T>(Func<T[]>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         var y = F(() => { if (args.Length == 0) return []; return [1, 2, 3]; });
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F").WithArguments("Program.F<T>(System.Func<T[]>)").WithLocation(9, 17));
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F")
+                    .WithArguments("Program.F<T>(System.Func<T[]>)")
+                    .WithLocation(9, 17)
+            );
         }
 
         [Fact]
@@ -2692,7 +3242,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "(System.Int32[]) [1, 2], (System.Object[]) [1, 2, 3], (System.Object[]) [3, 1, 2], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "(System.Int32[]) [1, 2], (System.Object[]) [1, 2, 3], (System.Object[]) [3, 1, 2], "
+            );
         }
 
         [Fact]
@@ -2710,7 +3263,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "(System.Object[]) [1, 2, 3], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "(System.Object[]) [1, 2, 3], "
+            );
         }
 
         [Fact]
@@ -2728,7 +3284,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "(System.Object[]) [1, 2, 3], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "(System.Object[]) [1, 2, 3], "
+            );
         }
 
         // If we allow inference from a spread element _expression_ rather than simply
@@ -2755,7 +3314,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // 0.cs(7,29): error CS9176: There is no target type for the collection expression.
                 //         var x = F([null, .. [() => 1]]);
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[() => 1]").WithLocation(7, 29));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[() => 1]")
+                    .WithLocation(7, 29)
+            );
         }
 
         [Fact]
@@ -2777,10 +3338,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyEmitDiagnostics(
                 // 0.cs(7,22): error CS1579: foreach statement cannot operate on variables of type 'object' because 'object' does not contain a public instance or extension definition for 'GetEnumerator'
                 //         var y = F([..x]);
-                Diagnostic(ErrorCode.ERR_ForEachMissingMember, "x").WithArguments("object", "GetEnumerator").WithLocation(7, 22),
+                Diagnostic(ErrorCode.ERR_ForEachMissingMember, "x")
+                    .WithArguments("object", "GetEnumerator")
+                    .WithLocation(7, 22),
                 // 0.cs(8,25): error CS1579: foreach statement cannot operate on variables of type 'object' because 'object' does not contain a public instance or extension definition for 'GetEnumerator'
                 //         var z = F([1, ..x]);
-                Diagnostic(ErrorCode.ERR_ForEachMissingMember, "x").WithArguments("object", "GetEnumerator").WithLocation(8, 25));
+                Diagnostic(ErrorCode.ERR_ForEachMissingMember, "x")
+                    .WithArguments("object", "GetEnumerator")
+                    .WithLocation(8, 25)
+            );
         }
 
         [Fact]
@@ -2803,7 +3369,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             CompileAndVerify(
                 new[] { source, s_collectionExtensions },
                 references: new[] { CSharpRef },
-                expectedOutput: "(System.Object[]) [2, 3], (System.Object[]) [1, 2, 3], ");
+                expectedOutput: "(System.Object[]) [2, 3], (System.Object[]) [1, 2, 3], "
+            );
         }
 
         [Fact]
@@ -2870,7 +3437,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             CompileAndVerify(
                 new[] { source, s_collectionExtensions },
                 references: new[] { CSharpRef },
-                expectedOutput: "(System.String[]) [one, null], ");
+                expectedOutput: "(System.String[]) [one, null], "
+            );
         }
 
         [Fact]
@@ -2896,7 +3464,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             CompileAndVerify(
                 new[] { source, s_collectionExtensions },
                 references: new[] { CSharpRef },
-                expectedOutput: "(System.Object[]) [one, null], 3, (System.Object[]) [one, null, three], 5, ");
+                expectedOutput: "(System.Object[]) [one, null], 3, (System.Object[]) [one, null, three], 5, "
+            );
         }
 
         [CombinatorialData]
@@ -2956,7 +3525,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 references: new[] { refA },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.FailsPEVerify,
-                expectedOutput: IncludeExpectedOutput("1, 2, 3, 4, "));
+                expectedOutput: IncludeExpectedOutput("1, 2, 3, 4, ")
+            );
 
             string sourceB2 = """
                 using System;
@@ -2980,7 +3550,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 references: new[] { refA },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.FailsPEVerify,
-                expectedOutput: IncludeExpectedOutput("1, 2, 3, 1, 2, 3, "));
+                expectedOutput: IncludeExpectedOutput("1, 2, 3, 1, 2, 3, ")
+            );
         }
 
         [Fact]
@@ -3018,12 +3589,17 @@ static partial class Program
             CompileAndVerify(comp, expectedOutput: "[1, 2, 3],");
 
             var tree = comp.SyntaxTrees.First();
-            var invocation = tree.GetRoot().DescendantNodes().OfType<InvocationExpressionSyntax>().First();
+            var invocation = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .First();
             Assert.Equal("Program.AsCollection([1, 2, 3])", invocation.ToFullString());
 
             var model = comp.GetSemanticModel(tree);
-            Assert.Equal("S<System.Int32>? Program.AsCollection<System.Int32>(S<System.Int32>? args)",
-                model.GetSymbolInfo(invocation).Symbol.ToTestDisplayString());
+            Assert.Equal(
+                "S<System.Int32>? Program.AsCollection<System.Int32>(S<System.Int32>? args)",
+                model.GetSymbolInfo(invocation).Symbol.ToTestDisplayString()
+            );
         }
 
         [Fact]
@@ -3064,8 +3640,9 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (27,17): error CS9176: There is no target type for the collection expression.
                 //         var b = [4].AsCollection();
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[4]").WithLocation(27, 17)
-                );
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[4]")
+                    .WithLocation(27, 17)
+            );
         }
 
         [Fact]
@@ -3086,13 +3663,17 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (5,9): error CS9176: There is no target type for the collection expression.
                 //         [].GetHashCode();
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]").WithLocation(5, 9),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]")
+                    .WithLocation(5, 9),
                 // (6,9): error CS9176: There is no target type for the collection expression.
                 //         []?.GetHashCode();
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]").WithLocation(6, 9),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]")
+                    .WithLocation(6, 9),
                 // (7,9): error CS9176: There is no target type for the collection expression.
                 //         [][0].GetHashCode();
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]").WithLocation(7, 9));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]")
+                    .WithLocation(7, 9)
+            );
         }
 
         [Fact]
@@ -3113,13 +3694,17 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (5,9): error CS9176: There is no target type for the collection expression.
                 //         [1].GetHashCode();
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[1]").WithLocation(5, 9),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[1]")
+                    .WithLocation(5, 9),
                 // (6,9): error CS9176: There is no target type for the collection expression.
                 //         [2]?.GetHashCode();
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[2]").WithLocation(6, 9),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[2]")
+                    .WithLocation(6, 9),
                 // (7,9): error CS9176: There is no target type for the collection expression.
                 //         [3][0].GetHashCode();
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[3]").WithLocation(7, 9));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[3]")
+                    .WithLocation(7, 9)
+            );
         }
 
         [Fact]
@@ -3140,13 +3725,17 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (5,13): error CS9176: There is no target type for the collection expression.
                 //         _ = [].GetHashCode();
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]").WithLocation(5, 13),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]")
+                    .WithLocation(5, 13),
                 // (6,13): error CS9176: There is no target type for the collection expression.
                 //         _ = []?.GetHashCode();
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]").WithLocation(6, 13),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]")
+                    .WithLocation(6, 13),
                 // (7,13): error CS9176: There is no target type for the collection expression.
                 //         _ = [][0].GetHashCode();
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]").WithLocation(7, 13));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]")
+                    .WithLocation(7, 13)
+            );
         }
 
         [Fact]
@@ -3167,13 +3756,17 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (5,13): error CS9176: There is no target type for the collection expression.
                 //         _ = [1].GetHashCode();
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[1]").WithLocation(5, 13),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[1]")
+                    .WithLocation(5, 13),
                 // (6,13): error CS9176: There is no target type for the collection expression.
                 //         _ = [2]?.GetHashCode();
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[2]").WithLocation(6, 13),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[2]")
+                    .WithLocation(6, 13),
                 // (7,13): error CS9176: There is no target type for the collection expression.
                 //         _ = [3][0].GetHashCode();
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[3]").WithLocation(7, 13));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[3]")
+                    .WithLocation(7, 13)
+            );
         }
 
         [Fact]
@@ -3219,22 +3812,34 @@ static class Program
                     }
                 }
                 """;
-            var comp = CreateEmptyCompilation(new[] { sourceA, sourceB }, parseOptions: TestOptions.RegularPreview.WithNoRefSafetyRulesAttribute());
+            var comp = CreateEmptyCompilation(
+                new[] { sourceA, sourceB },
+                parseOptions: TestOptions.RegularPreview.WithNoRefSafetyRulesAttribute()
+            );
             comp.VerifyEmitDiagnostics(
                 // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
                 Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
                 // 1.cs(7,28): error CS1950: The best overloaded Add method 'ListBase<int>.Add(string)' for the collection initializer has some invalid arguments
                 //         ListBase<int> y = [1, 2];
-                Diagnostic(ErrorCode.ERR_BadArgTypesForCollectionAdd, "1").WithArguments("System.Collections.Generic.ListBase<int>.Add(string)").WithLocation(7, 28),
+                Diagnostic(ErrorCode.ERR_BadArgTypesForCollectionAdd, "1")
+                    .WithArguments("System.Collections.Generic.ListBase<int>.Add(string)")
+                    .WithLocation(7, 28),
                 // 1.cs(7,28): error CS1503: Argument 1: cannot convert from 'int' to 'string'
                 //         ListBase<int> y = [1, 2];
-                Diagnostic(ErrorCode.ERR_BadArgType, "1").WithArguments("1", "int", "string").WithLocation(7, 28),
+                Diagnostic(ErrorCode.ERR_BadArgType, "1")
+                    .WithArguments("1", "int", "string")
+                    .WithLocation(7, 28),
                 // 1.cs(7,31): error CS1950: The best overloaded Add method 'ListBase<int>.Add(string)' for the collection initializer has some invalid arguments
                 //         ListBase<int> y = [1, 2];
-                Diagnostic(ErrorCode.ERR_BadArgTypesForCollectionAdd, "2").WithArguments("System.Collections.Generic.ListBase<int>.Add(string)").WithLocation(7, 31),
+                Diagnostic(ErrorCode.ERR_BadArgTypesForCollectionAdd, "2")
+                    .WithArguments("System.Collections.Generic.ListBase<int>.Add(string)")
+                    .WithLocation(7, 31),
                 // 1.cs(7,31): error CS1503: Argument 1: cannot convert from 'int' to 'string'
                 //         ListBase<int> y = [1, 2];
-                Diagnostic(ErrorCode.ERR_BadArgType, "2").WithArguments("1", "int", "string").WithLocation(7, 31));
+                Diagnostic(ErrorCode.ERR_BadArgType, "2")
+                    .WithArguments("1", "int", "string")
+                    .WithLocation(7, 31)
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/69839")]
@@ -3282,22 +3887,34 @@ static class Program
                     }
                 }
                 """;
-            var comp = CreateEmptyCompilation(new[] { sourceA, sourceB }, parseOptions: TestOptions.RegularPreview.WithNoRefSafetyRulesAttribute());
+            var comp = CreateEmptyCompilation(
+                new[] { sourceA, sourceB },
+                parseOptions: TestOptions.RegularPreview.WithNoRefSafetyRulesAttribute()
+            );
             comp.VerifyEmitDiagnostics(
                 // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
                 Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
                 // 1.cs(7,16): error CS9174: Cannot initialize type 'IA' with a collection expression because the type is not constructible.
                 //         IA a = [2];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[2]").WithArguments("System.Collections.Generic.IA").WithLocation(7, 16),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[2]")
+                    .WithArguments("System.Collections.Generic.IA")
+                    .WithLocation(7, 16),
                 // 1.cs(8,24): error CS9174: Cannot initialize type 'IB<object>' with a collection expression because the type is not constructible.
                 //         IB<object> b = [3];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[3]").WithArguments("System.Collections.Generic.IB<object>").WithLocation(8, 24),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[3]")
+                    .WithArguments("System.Collections.Generic.IB<object>")
+                    .WithLocation(8, 24),
                 // 1.cs(9,24): error CS9174: Cannot initialize type 'IC<object>' with a collection expression because the type is not constructible.
                 //         IC<object> c = [4];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[4]").WithArguments("System.Collections.Generic.IC<object>").WithLocation(9, 24),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[4]")
+                    .WithArguments("System.Collections.Generic.IC<object>")
+                    .WithLocation(9, 24),
                 // 1.cs(10,32): error CS9174: Cannot initialize type 'ID<object, object>' with a collection expression because the type is not constructible.
                 //         ID<object, object> d = [5];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[5]").WithArguments("System.Collections.Generic.ID<object, object>").WithLocation(10, 32));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[5]")
+                    .WithArguments("System.Collections.Generic.ID<object, object>")
+                    .WithLocation(10, 32)
+            );
         }
 
         [Fact]
@@ -3343,13 +3960,19 @@ static class Program
                     }
                 }
                 """;
-            var comp = CreateEmptyCompilation(new[] { sourceA, sourceB }, parseOptions: TestOptions.RegularPreview.WithNoRefSafetyRulesAttribute());
+            var comp = CreateEmptyCompilation(
+                new[] { sourceA, sourceB },
+                parseOptions: TestOptions.RegularPreview.WithNoRefSafetyRulesAttribute()
+            );
             comp.VerifyEmitDiagnostics(
                 // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
                 Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
                 // 1.cs(8,29): error CS9174: Cannot initialize type 'IEquatable<int>' with a collection expression because the type is not constructible.
                 //         IEquatable<int> e = [2];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[2]").WithArguments("System.IEquatable<int>").WithLocation(8, 29));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[2]")
+                    .WithArguments("System.IEquatable<int>")
+                    .WithLocation(8, 29)
+            );
         }
 
         [Fact]
@@ -3387,13 +4010,19 @@ static class Program
                     }
                 }
                 """;
-            var comp = CreateEmptyCompilation(new[] { sourceA, sourceB }, parseOptions: TestOptions.RegularPreview.WithNoRefSafetyRulesAttribute());
+            var comp = CreateEmptyCompilation(
+                new[] { sourceA, sourceB },
+                parseOptions: TestOptions.RegularPreview.WithNoRefSafetyRulesAttribute()
+            );
             comp.VerifyEmitDiagnostics(
                 // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
                 Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
                 // 1.cs(7,23): error CS9174: Cannot initialize type 'List<int>' with a collection expression because the type is not constructible.
                 //         List<int> l = [1];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[1]").WithArguments("System.Collections.Generic.List<int>").WithLocation(7, 23));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[1]")
+                    .WithArguments("System.Collections.Generic.List<int>")
+                    .WithLocation(7, 23)
+            );
         }
 
         [Fact]
@@ -3418,10 +4047,15 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (7,30): error CS0518: Predefined type 'System.Collections.Generic.List`1' is not defined or imported
                 //         ICollection<int> b = [2];
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "[2]").WithArguments("System.Collections.Generic.List`1").WithLocation(7, 30),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "[2]")
+                    .WithArguments("System.Collections.Generic.List`1")
+                    .WithLocation(7, 30),
                 // (8,24): error CS0518: Predefined type 'System.Collections.Generic.List`1' is not defined or imported
                 //         IList<int> c = [];
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "[]").WithArguments("System.Collections.Generic.List`1").WithLocation(8, 24));
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "[]")
+                    .WithArguments("System.Collections.Generic.List`1")
+                    .WithLocation(8, 24)
+            );
         }
 
         [Fact]
@@ -3443,16 +4077,24 @@ static class Program
                     }
                 }
                 """;
-            var verifier = CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "[], [1, 2], [3, 4, 5], [null, 7], ");
-            verifier.VerifyIL("Program.Create1", """
+            var verifier = CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "[], [1, 2], [3, 4, 5], [null, 7], "
+            );
+            verifier.VerifyIL(
+                "Program.Create1",
+                """
                 {
                   // Code size        6 (0x6)
                   .maxstack  1
                   IL_0000:  call       "int[] System.Array.Empty<int>()"
                   IL_0005:  ret
                 }
-                """);
-            verifier.VerifyIL("Program.Create2", """
+                """
+            );
+            verifier.VerifyIL(
+                "Program.Create2",
+                """
                 {
                   // Code size       25 (0x19)
                   .maxstack  4
@@ -3470,8 +4112,11 @@ static class Program
                   IL_0017:  stelem.ref
                   IL_0018:  ret
                 }
-                """);
-            verifier.VerifyIL("Program.Create3", """
+                """
+            );
+            verifier.VerifyIL(
+                "Program.Create3",
+                """
                 {
                   // Code size       18 (0x12)
                   .maxstack  3
@@ -3482,8 +4127,11 @@ static class Program
                   IL_000c:  call       "void System.Runtime.CompilerServices.RuntimeHelpers.InitializeArray(System.Array, System.RuntimeFieldHandle)"
                   IL_0011:  ret
                 }
-                """);
-            verifier.VerifyIL("Program.Create4", """
+                """
+            );
+            verifier.VerifyIL(
+                "Program.Create4",
+                """
                 {
                   // Code size       21 (0x15)
                   .maxstack  4
@@ -3497,7 +4145,8 @@ static class Program
                   IL_000f:  stelem     "long?"
                   IL_0014:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3529,20 +4178,28 @@ static class Program
                     }
                 }
                 """;
-            var verifier = CompileAndVerify(source, expectedOutput: """
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: """
                 Length=0, 
                 Length=1, Length=0, 
                 Length=2, Length=1, 1, Length=2, 2, 3, 
-                """);
-            verifier.VerifyIL("Program.Create1", """
+                """
+            );
+            verifier.VerifyIL(
+                "Program.Create1",
+                """
                 {
                   // Code size        6 (0x6)
                   .maxstack  1
                   IL_0000:  call       "int[][] System.Array.Empty<int[]>()"
                   IL_0005:  ret
                 }
-                """);
-            verifier.VerifyIL("Program.Create2", """
+                """
+            );
+            verifier.VerifyIL(
+                "Program.Create2",
+                """
                 {
                   // Code size       15 (0xf)
                   .maxstack  4
@@ -3554,8 +4211,11 @@ static class Program
                   IL_000d:  stelem.ref
                   IL_000e:  ret
                 }
-                """);
-            verifier.VerifyIL("Program.Create3", """
+                """
+            );
+            verifier.VerifyIL(
+                "Program.Create3",
+                """
                 {
                   // Code size       52 (0x34)
                   .maxstack  7
@@ -3588,7 +4248,8 @@ static class Program
                   IL_0032:  stelem.ref
                   IL_0033:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3607,7 +4268,10 @@ static class Program
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "[], [null, 2], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "[], [null, 2], "
+            );
         }
 
         [Fact]
@@ -3627,10 +4291,18 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (5,23): error CS9174: Cannot initialize type 'object[*,*]' with a collection expression because the type is not constructible.
                 //         object[,] x = [];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]").WithArguments("object[*,*]").WithLocation(5, 23),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]")
+                    .WithArguments("object[*,*]")
+                    .WithLocation(5, 23),
                 // (6,20): error CS9174: Cannot initialize type 'int[*,*]' with a collection expression because the type is not constructible.
                 //         int[,] y = [null, 2];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[null, 2]").WithArguments("int[*,*]").WithLocation(6, 20));
+                Diagnostic(
+                        ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible,
+                        "[null, 2]"
+                    )
+                    .WithArguments("int[*,*]")
+                    .WithLocation(6, 20)
+            );
         }
 
         [Fact]
@@ -3649,7 +4321,13 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (5,20): error CS9174: Cannot initialize type 'int[*,*]' with a collection expression because the type is not constructible.
                 //         int[,] z = [[1, 2], [3, 4]];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[[1, 2], [3, 4]]").WithArguments("int[*,*]").WithLocation(5, 20));
+                Diagnostic(
+                        ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible,
+                        "[[1, 2], [3, 4]]"
+                    )
+                    .WithArguments("int[*,*]")
+                    .WithLocation(5, 20)
+            );
         }
 
         [Theory]
@@ -3678,8 +4356,11 @@ static class Program
                 new[] { source, s_collectionExtensionsWithSpan },
                 targetFramework: TargetFramework.Net70,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[], [1, 2], [3, 4, 5], [null, 7], "));
-            verifier.VerifyIL("Program.Create1", $$"""
+                expectedOutput: IncludeExpectedOutput("[], [1, 2], [3, 4, 5], [null, 7], ")
+            );
+            verifier.VerifyIL(
+                "Program.Create1",
+                $$"""
                 {
                   // Code size       20 (0x14)
                   .maxstack  2
@@ -3691,8 +4372,11 @@ static class Program
                   IL_000e:  call       "void CollectionExtensions.Report<int>(in System.{{spanType}}<int>)"
                   IL_0013:  ret
                 }
-                """);
-            verifier.VerifyIL("Program.Create2", $$"""
+                """
+            );
+            verifier.VerifyIL(
+                "Program.Create2",
+                $$"""
                 {
                   // Code size       39 (0x27)
                   .maxstack  5
@@ -3715,10 +4399,13 @@ static class Program
                   IL_0021:  call       "void CollectionExtensions.Report<object>(in System.{{spanType}}<object>)"
                   IL_0026:  ret
                 }
-                """);
+                """
+            );
             if (useReadOnlySpan)
             {
-                verifier.VerifyIL("Program.Create3", """
+                verifier.VerifyIL(
+                    "Program.Create3",
+                    """
                     {
                       // Code size       19 (0x13)
                       .maxstack  1
@@ -3730,11 +4417,14 @@ static class Program
                       IL_000d:  call       "void CollectionExtensions.Report<int>(in System.ReadOnlySpan<int>)"
                       IL_0012:  ret
                     }
-                    """);
+                    """
+                );
             }
             else
             {
-                verifier.VerifyIL("Program.Create3", """
+                verifier.VerifyIL(
+                    "Program.Create3",
+                    """
                     {
                       // Code size       32 (0x20)
                       .maxstack  4
@@ -3750,9 +4440,12 @@ static class Program
                       IL_001a:  call       "void CollectionExtensions.Report<int>(in System.Span<int>)"
                       IL_001f:  ret
                     }
-                    """);
+                    """
+                );
             }
-            verifier.VerifyIL("Program.Create4", $$"""
+            verifier.VerifyIL(
+                "Program.Create4",
+                $$"""
                 {
                   // Code size       35 (0x23)
                   .maxstack  5
@@ -3771,7 +4464,8 @@ static class Program
                   IL_001d:  call       "void CollectionExtensions.Report<long?>(in System.{{spanType}}<long?>)"
                   IL_0022:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Theory]
@@ -3796,7 +4490,8 @@ static class Program
                 new[] { source, s_collectionExtensionsWithSpan },
                 targetFramework: TargetFramework.Net70,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[], [1, 2, 3], "));
+                expectedOutput: IncludeExpectedOutput("[], [1, 2, 3], ")
+            );
         }
 
         [Theory]
@@ -3821,7 +4516,8 @@ static class Program
                 new[] { source, s_collectionExtensionsWithSpan },
                 targetFramework: TargetFramework.Net70,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[], [1, 2, 3], "));
+                expectedOutput: IncludeExpectedOutput("[], [1, 2, 3], ")
+            );
         }
 
         [Theory]
@@ -3847,10 +4543,13 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (6,20): error CS8347: Cannot use a result of 'Program.F2<int>(in Span<int>)' in this context because it may expose variables referenced by parameter 's' outside of their declaration scope
                 //         return ref F2<int>([]);
-                Diagnostic(ErrorCode.ERR_EscapeCall, "F2<int>([])").WithArguments($"Program.F2<int>(in System.{spanType}<int>)", "s").WithLocation(6, 20),
+                Diagnostic(ErrorCode.ERR_EscapeCall, "F2<int>([])")
+                    .WithArguments($"Program.F2<int>(in System.{spanType}<int>)", "s")
+                    .WithLocation(6, 20),
                 // (6,28): error CS8156: An expression cannot be used in this context because it may not be passed or returned by reference
                 //         return ref F2<int>([]);
-                Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "[]").WithLocation(6, 28));
+                Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "[]").WithLocation(6, 28)
+            );
         }
 
         [Theory]
@@ -3896,14 +4595,20 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (6,26): error CS0656: Missing compiler required member 'System.Span`1..ctor'
                 //         Span<string> x = [];
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "[]").WithArguments("System.Span`1", ".ctor").WithLocation(6, 26));
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "[]")
+                    .WithArguments("System.Span`1", ".ctor")
+                    .WithLocation(6, 26)
+            );
 
             comp = CreateCompilation(source, targetFramework: TargetFramework.Net70);
             comp.MakeMemberMissing(WellKnownMember.System_ReadOnlySpan_T__ctor_Array);
             comp.VerifyEmitDiagnostics(
                 // (7,31): error CS0656: Missing compiler required member 'System.ReadOnlySpan`1..ctor'
                 //         ReadOnlySpan<int> y = [1, 2, 3];
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "[1, 2, 3]").WithArguments("System.ReadOnlySpan`1", ".ctor").WithLocation(7, 31));
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "[1, 2, 3]")
+                    .WithArguments("System.ReadOnlySpan`1", ".ctor")
+                    .WithLocation(7, 31)
+            );
         }
 
         [Fact]
@@ -3944,10 +4649,15 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (26,13): error CS9174: Cannot initialize type 'I' with a collection expression because the type is not constructible.
                 //         i = [];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]").WithArguments("I").WithLocation(26, 13),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]")
+                    .WithArguments("I")
+                    .WithLocation(26, 13),
                 // (27,13): error CS9174: Cannot initialize type 'I' with a collection expression because the type is not constructible.
                 //         i = [3, 4];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[3, 4]").WithArguments("I").WithLocation(27, 13));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[3, 4]")
+                    .WithArguments("I")
+                    .WithLocation(27, 13)
+            );
         }
 
         [Fact]
@@ -3969,10 +4679,15 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (7,13): error CS9174: Cannot initialize type 'E' with a collection expression because the type is not constructible.
                 //         e = [];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]").WithArguments("E").WithLocation(7, 13),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]")
+                    .WithArguments("E")
+                    .WithLocation(7, 13),
                 // (8,13): error CS9174: Cannot initialize type 'E' with a collection expression because the type is not constructible.
                 //         e = [1, 2];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[1, 2]").WithArguments("E").WithLocation(8, 13));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[1, 2]")
+                    .WithArguments("E")
+                    .WithLocation(8, 13)
+            );
         }
 
         [Fact]
@@ -4012,7 +4727,10 @@ static class Program
                     }
                 }
                 """;
-            var comp = CreateEmptyCompilation(new[] { sourceA, sourceB }, parseOptions: TestOptions.RegularPreview.WithNoRefSafetyRulesAttribute());
+            var comp = CreateEmptyCompilation(
+                new[] { sourceA, sourceB },
+                parseOptions: TestOptions.RegularPreview.WithNoRefSafetyRulesAttribute()
+            );
             // ConversionsBase.GetConstructibleCollectionType() ignores whether the enum
             // implements IEnumerable, so the type is not considered constructible.
             comp.VerifyEmitDiagnostics(
@@ -4020,10 +4738,15 @@ static class Program
                 Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
                 // 1.cs(7,13): error CS9174: Cannot initialize type 'E' with a collection expression because the type is not constructible.
                 //         e = [];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]").WithArguments("E").WithLocation(7, 13),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]")
+                    .WithArguments("E")
+                    .WithLocation(7, 13),
                 // 1.cs(8,13): error CS9174: Cannot initialize type 'E' with a collection expression because the type is not constructible.
                 //         e = [1, 2];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[1, 2]").WithArguments("E").WithLocation(8, 13));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[1, 2]")
+                    .WithArguments("E")
+                    .WithLocation(8, 13)
+            );
         }
 
         [Fact]
@@ -4045,10 +4768,15 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (7,13): error CS9174: Cannot initialize type 'D' with a collection expression because the type is not constructible.
                 //         d = [];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]").WithArguments("D").WithLocation(7, 13),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]")
+                    .WithArguments("D")
+                    .WithLocation(7, 13),
                 // (8,13): error CS9174: Cannot initialize type 'D' with a collection expression because the type is not constructible.
                 //         d = [1, 2];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[1, 2]").WithArguments("D").WithLocation(8, 13));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[1, 2]")
+                    .WithArguments("D")
+                    .WithLocation(8, 13)
+            );
         }
 
         [Fact]
@@ -4090,7 +4818,10 @@ static class Program
                     }
                 }
                 """;
-            var comp = CreateEmptyCompilation(new[] { sourceA, sourceB }, parseOptions: TestOptions.RegularPreview.WithNoRefSafetyRulesAttribute());
+            var comp = CreateEmptyCompilation(
+                new[] { sourceA, sourceB },
+                parseOptions: TestOptions.RegularPreview.WithNoRefSafetyRulesAttribute()
+            );
             // ConversionsBase.GetConstructibleCollectionType() ignores whether the delegate
             // implements IEnumerable, so the type is not considered constructible.
             comp.VerifyEmitDiagnostics(
@@ -4098,10 +4829,15 @@ static class Program
                 Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
                 // 1.cs(7,13): error CS9174: Cannot initialize type 'D' with a collection expression because the type is not constructible.
                 //         d = [];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]").WithArguments("D").WithLocation(7, 13),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]")
+                    .WithArguments("D")
+                    .WithLocation(7, 13),
                 // 1.cs(8,13): error CS9174: Cannot initialize type 'D' with a collection expression because the type is not constructible.
                 //         d = [1, 2];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[1, 2]").WithArguments("D").WithLocation(8, 13));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[1, 2]")
+                    .WithArguments("D")
+                    .WithLocation(8, 13)
+            );
         }
 
         [Fact]
@@ -4122,13 +4858,23 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (5,18): error CS9174: Cannot initialize type 'int*' with a collection expression because the type is not constructible.
                 //         int* x = [];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]").WithArguments("int*").WithLocation(5, 18),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]")
+                    .WithArguments("int*")
+                    .WithLocation(5, 18),
                 // (6,18): error CS9174: Cannot initialize type 'int*' with a collection expression because the type is not constructible.
                 //         int* y = [1, 2];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[1, 2]").WithArguments("int*").WithLocation(6, 18),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[1, 2]")
+                    .WithArguments("int*")
+                    .WithLocation(6, 18),
                 // (7,17): error CS9174: Cannot initialize type 'int*' with a collection expression because the type is not constructible.
                 //         var z = (int*)[3];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "(int*)[3]").WithArguments("int*").WithLocation(7, 17));
+                Diagnostic(
+                        ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible,
+                        "(int*)[3]"
+                    )
+                    .WithArguments("int*")
+                    .WithLocation(7, 17)
+            );
         }
 
         [Fact]
@@ -4149,13 +4895,23 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (5,29): error CS9174: Cannot initialize type 'delegate*<void>' with a collection expression because the type is not constructible.
                 //         delegate*<void> x = [];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]").WithArguments("delegate*<void>").WithLocation(5, 29),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]")
+                    .WithArguments("delegate*<void>")
+                    .WithLocation(5, 29),
                 // (6,29): error CS9174: Cannot initialize type 'delegate*<void>' with a collection expression because the type is not constructible.
                 //         delegate*<void> y = [1, 2];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[1, 2]").WithArguments("delegate*<void>").WithLocation(6, 29),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[1, 2]")
+                    .WithArguments("delegate*<void>")
+                    .WithLocation(6, 29),
                 // (7,17): error CS9174: Cannot initialize type 'delegate*<void>' with a collection expression because the type is not constructible.
                 //         var z = (delegate*<void>)[3];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "(delegate*<void>)[3]").WithArguments("delegate*<void>").WithLocation(7, 17));
+                Diagnostic(
+                        ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible,
+                        "(delegate*<void>)[3]"
+                    )
+                    .WithArguments("delegate*<void>")
+                    .WithLocation(7, 17)
+            );
         }
 
         [Fact]
@@ -4177,10 +4933,13 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (7,17): error CS9176: There is no target type for the collection expression.
                 //         var x = [p];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[p]").WithLocation(7, 17),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[p]")
+                    .WithLocation(7, 17),
                 // (8,17): error CS9176: There is no target type for the collection expression.
                 //         var y = [d];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[d]").WithLocation(8, 17));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[d]")
+                    .WithLocation(8, 17)
+            );
         }
 
         [Fact]
@@ -4198,7 +4957,12 @@ static class Program
                     }
                 }
                 """;
-            CompileAndVerify(source, options: TestOptions.UnsafeReleaseExe, verify: Verification.Skipped, expectedOutput: "0, 2, ");
+            CompileAndVerify(
+                source,
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Skipped,
+                expectedOutput: "0, 2, "
+            );
         }
 
         [Fact]
@@ -4223,7 +4987,12 @@ static class Program
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, options: TestOptions.UnsafeReleaseExe, verify: Verification.Skipped, expectedOutput: "[0, 2], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Skipped,
+                expectedOutput: "[0, 2], "
+            );
         }
 
         [Fact]
@@ -4246,16 +5015,24 @@ static class Program
                     }
                 }
                 """;
-            var verifier = CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "[], [1, 2], [3, 4, 5], [null, 7], ");
-            verifier.VerifyIL("Program.Create1", """
+            var verifier = CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "[], [1, 2], [3, 4, 5], [null, 7], "
+            );
+            verifier.VerifyIL(
+                "Program.Create1",
+                """
                 {
                   // Code size        6 (0x6)
                   .maxstack  1
                   IL_0000:  newobj     "System.Collections.Generic.List<int>..ctor()"
                   IL_0005:  ret
                 }
-                """);
-            verifier.VerifyIL("Program.Create2", """
+                """
+            );
+            verifier.VerifyIL(
+                "Program.Create2",
+                """
                 {
                   // Code size       30 (0x1e)
                   .maxstack  3
@@ -4270,8 +5047,11 @@ static class Program
                   IL_0018:  callvirt   "void System.Collections.Generic.List<object>.Add(object)"
                   IL_001d:  ret
                 }
-                """);
-            verifier.VerifyIL("Program.Create3", """
+                """
+            );
+            verifier.VerifyIL(
+                "Program.Create3",
+                """
                 {
                   // Code size       27 (0x1b)
                   .maxstack  3
@@ -4287,8 +5067,11 @@ static class Program
                   IL_0015:  callvirt   "void System.Collections.Generic.List<int>.Add(int)"
                   IL_001a:  ret
                 }
-                """);
-            verifier.VerifyIL("Program.Create4", """
+                """
+            );
+            verifier.VerifyIL(
+                "Program.Create4",
+                """
                 {
                   // Code size       34 (0x22)
                   .maxstack  3
@@ -4306,7 +5089,8 @@ static class Program
                   IL_001c:  callvirt   "void System.Collections.Generic.List<long?>.Add(long?)"
                   IL_0021:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -4324,16 +5108,28 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (2,5): error CS9174: Cannot initialize type 'S' with a collection expression because the type is not constructible.
                 // s = [];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]").WithArguments("S").WithLocation(2, 5),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]")
+                    .WithArguments("S")
+                    .WithLocation(2, 5),
                 // (3,5): error CS9174: Cannot initialize type 'S' with a collection expression because the type is not constructible.
                 // s = [1, 2];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[1, 2]").WithArguments("S").WithLocation(3, 5),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[1, 2]")
+                    .WithArguments("S")
+                    .WithLocation(3, 5),
                 // (4,5): error CS9174: Cannot initialize type 'S' with a collection expression because the type is not constructible.
                 // s = [default];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[default]").WithArguments("S").WithLocation(4, 5),
+                Diagnostic(
+                        ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible,
+                        "[default]"
+                    )
+                    .WithArguments("S")
+                    .WithLocation(4, 5),
                 // (5,6): error CS0103: The name 'Unknown' does not exist in the current context
                 // s = [Unknown];
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "Unknown").WithArguments("Unknown").WithLocation(5, 6));
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "Unknown")
+                    .WithArguments("Unknown")
+                    .WithLocation(5, 6)
+            );
         }
 
         [Fact]
@@ -4363,10 +5159,15 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (3,6): error CS1061: 'S' does not contain a definition for 'Add' and no accessible extension method 'Add' accepting a first argument of type 'S' could be found (are you missing a using directive or an assembly reference?)
                 // s = [1, 2];
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "1").WithArguments("S", "Add").WithLocation(3, 6),
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "1")
+                    .WithArguments("S", "Add")
+                    .WithLocation(3, 6),
                 // (3,9): error CS1061: 'S' does not contain a definition for 'Add' and no accessible extension method 'Add' accepting a first argument of type 'S' could be found (are you missing a using directive or an assembly reference?)
                 // s = [1, 2];
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "2").WithArguments("S", "Add").WithLocation(3, 9));
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "2")
+                    .WithArguments("S", "Add")
+                    .WithLocation(3, 9)
+            );
         }
 
         [Fact]
@@ -4388,10 +5189,15 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (3,5): error CS1729: 'C' does not contain a constructor that takes 0 arguments
                 // c = [];
-                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "[]").WithArguments("C", "0").WithLocation(3, 5),
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "[]")
+                    .WithArguments("C", "0")
+                    .WithLocation(3, 5),
                 // (4,5): error CS1729: 'C' does not contain a constructor that takes 0 arguments
                 // c = [1, 2];
-                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "[1, 2]").WithArguments("C", "0").WithLocation(4, 5));
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "[1, 2]")
+                    .WithArguments("C", "0")
+                    .WithLocation(4, 5)
+            );
         }
 
         [Fact]
@@ -4417,7 +5223,10 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (13,27): error CS0122: 'A.A()' is inaccessible due to its protection level
                 //     static A Create2() => [1, 2];
-                Diagnostic(ErrorCode.ERR_BadAccess, "[1, 2]").WithArguments("A.A()").WithLocation(13, 27));
+                Diagnostic(ErrorCode.ERR_BadAccess, "[1, 2]")
+                    .WithArguments("A.A()")
+                    .WithLocation(13, 27)
+            );
         }
 
         [Fact]
@@ -4449,7 +5258,10 @@ static class Program
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "[], [], [1, 2], [3, 4], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "[], [], [1, 2], [3, 4], "
+            );
         }
 
         [Fact]
@@ -4483,7 +5295,10 @@ static class Program
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "[], [], [1, 2], [3, 4], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "[], [], [1, 2], [3, 4], "
+            );
         }
 
         [Fact]
@@ -4517,7 +5332,10 @@ static class Program
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "[], [], [1, 2], [3, 4], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "[], [], [1, 2], [3, 4], "
+            );
         }
 
         [Fact]
@@ -4546,7 +5364,10 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (14,15): error CS0144: Cannot create an instance of the abstract type or interface 'A'
                 //         A a = [];
-                Diagnostic(ErrorCode.ERR_NoNewAbstract, "[]").WithArguments("A").WithLocation(14, 15));
+                Diagnostic(ErrorCode.ERR_NoNewAbstract, "[]")
+                    .WithArguments("A")
+                    .WithLocation(14, 15)
+            );
         }
 
         [Fact]
@@ -4594,7 +5415,9 @@ static class Program
                 }
                 """;
             var verifier = CompileAndVerify(source);
-            verifier.VerifyIL("Program.M0", """
+            verifier.VerifyIL(
+                "Program.M0",
+                """
                 {
                   // Code size       35 (0x23)
                   .maxstack  2
@@ -4613,8 +5436,11 @@ static class Program
                   IL_001d:  call       "void S0<int>.Add(int)"
                   IL_0022:  ret
                 }
-                """);
-            verifier.VerifyIL("Program.M1", """
+                """
+            );
+            verifier.VerifyIL(
+                "Program.M1",
+                """
                 {
                   // Code size       35 (0x23)
                   .maxstack  2
@@ -4633,8 +5459,11 @@ static class Program
                   IL_001d:  call       "void S1<int>.Add(int)"
                   IL_0022:  ret
                 }
-                """);
-            verifier.VerifyIL("Program.M2", """
+                """
+            );
+            verifier.VerifyIL(
+                "Program.M2",
+                """
                 {
                   // Code size       30 (0x1e)
                   .maxstack  2
@@ -4651,7 +5480,8 @@ static class Program
                   IL_0018:  call       "void S2<int>.Add(int)"
                   IL_001d:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -4674,10 +5504,15 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (7,9): error CS0246: The type or namespace name 'UnknownType' could not be found (are you missing a using directive or an assembly reference?)
                 //         UnknownType u;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnknownType").WithArguments("UnknownType").WithLocation(7, 9),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnknownType")
+                    .WithArguments("UnknownType")
+                    .WithLocation(7, 9),
                 // (9,20): error CS0103: The name 'B' does not exist in the current context
                 //         u = [null, B];
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "B").WithArguments("B").WithLocation(9, 20));
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "B")
+                    .WithArguments("B")
+                    .WithLocation(9, 20)
+            );
         }
 
         [Fact]
@@ -4706,10 +5541,15 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (13,11): error CS0246: The type or namespace name 'UnknownType' could not be found (are you missing a using directive or an assembly reference?)
                 //         S<UnknownType> s;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnknownType").WithArguments("UnknownType").WithLocation(13, 11),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnknownType")
+                    .WithArguments("UnknownType")
+                    .WithLocation(13, 11),
                 // (15,20): error CS0103: The name 'B' does not exist in the current context
                 //         s = [null, B];
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "B").WithArguments("B").WithLocation(15, 20));
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "B")
+                    .WithArguments("B")
+                    .WithLocation(15, 20)
+            );
         }
 
         [Fact]
@@ -4746,7 +5586,8 @@ static class Program
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "}").WithLocation(8, 23),
                 // (8,24): error CS1513: } expected
                 //         l = [[], {2, 3}];
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "]").WithLocation(8, 24));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "]").WithLocation(8, 24)
+            );
         }
 
         [Fact]
@@ -4773,7 +5614,10 @@ static class Program
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "[], [i=1, o=2], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "[], [i=1, o=2], "
+            );
         }
 
         [Fact]
@@ -4802,7 +5646,10 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (15,36): error CS0121: The call is ambiguous between the following methods or properties: 'C.Add(IA)' and 'C.Add(IB)'
                 //         C c = [(IA)null, (IB)null, new AB()];
-                Diagnostic(ErrorCode.ERR_AmbigCall, "new AB()").WithArguments("C.Add(IA)", "C.Add(IB)").WithLocation(15, 36));
+                Diagnostic(ErrorCode.ERR_AmbigCall, "new AB()")
+                    .WithArguments("C.Add(IA)", "C.Add(IB)")
+                    .WithLocation(15, 36)
+            );
         }
 
         [Fact]
@@ -4829,10 +5676,15 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (13,14): error CS7036: There is no argument given that corresponds to the required parameter 'y' of 'S<int>.Add(int, int)'
                 //         s = [1, 2];
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "1").WithArguments("y", "S<int>.Add(int, int)").WithLocation(13, 14),
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "1")
+                    .WithArguments("y", "S<int>.Add(int, int)")
+                    .WithLocation(13, 14),
                 // (13,17): error CS7036: There is no argument given that corresponds to the required parameter 'y' of 'S<int>.Add(int, int)'
                 //         s = [1, 2];
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "2").WithArguments("y", "S<int>.Add(int, int)").WithLocation(13, 17));
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "2")
+                    .WithArguments("y", "S<int>.Add(int, int)")
+                    .WithLocation(13, 17)
+            );
         }
 
         [Fact]
@@ -4904,8 +5756,13 @@ static class Program
                     }
                 }
                 """;
-            var verifier = CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "[1, 2, 3], ");
-            verifier.VerifyIL("Program.Main", """
+            var verifier = CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "[1, 2, 3], "
+            );
+            verifier.VerifyIL(
+                "Program.Main",
+                """
                 {
                   // Code size       61 (0x3d)
                   .maxstack  5
@@ -4940,7 +5797,8 @@ static class Program
                   IL_0037:  call       "void CollectionExtensions.Report(object, bool)"
                   IL_003c:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -4964,10 +5822,15 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (11,50): error CS1950: The best overloaded Add method 'S<T, U>.Add(T)' for the collection initializer has some invalid arguments
                 //     static S<T, U> Create<T, U>(T x, U y) => [x, y];
-                Diagnostic(ErrorCode.ERR_BadArgTypesForCollectionAdd, "y").WithArguments("S<T, U>.Add(T)").WithLocation(11, 50),
+                Diagnostic(ErrorCode.ERR_BadArgTypesForCollectionAdd, "y")
+                    .WithArguments("S<T, U>.Add(T)")
+                    .WithLocation(11, 50),
                 // (11,50): error CS1503: Argument 1: cannot convert from 'U' to 'T'
                 //     static S<T, U> Create<T, U>(T x, U y) => [x, y];
-                Diagnostic(ErrorCode.ERR_BadArgType, "y").WithArguments("1", "U", "T").WithLocation(11, 50));
+                Diagnostic(ErrorCode.ERR_BadArgType, "y")
+                    .WithArguments("1", "U", "T")
+                    .WithLocation(11, 50)
+            );
         }
 
         [Fact]
@@ -4988,10 +5851,15 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (6,13): error CS1729: 'string' does not contain a constructor that takes 0 arguments
                 //         s = [];
-                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "[]").WithArguments("string", "0").WithLocation(6, 13),
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "[]")
+                    .WithArguments("string", "0")
+                    .WithLocation(6, 13),
                 // (7,14): error CS1061: 'string' does not contain a definition for 'Add' and no accessible extension method 'Add' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
                 //         s = ['a'];
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "'a'").WithArguments("string", "Add").WithLocation(7, 14));
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "'a'")
+                    .WithArguments("string", "Add")
+                    .WithLocation(7, 14)
+            );
         }
 
         [Theory]
@@ -5037,16 +5905,24 @@ static class Program
                     }
                 }
                 """;
-            var verifier = CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "[], [null, 2], ");
-            verifier.VerifyIL("Program.CreateEmpty<T, U>", """
+            var verifier = CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "[], [null, 2], "
+            );
+            verifier.VerifyIL(
+                "Program.CreateEmpty<T, U>",
+                """
                 {
                   // Code size        6 (0x6)
                   .maxstack  1
                   IL_0000:  call       "T System.Activator.CreateInstance<T>()"
                   IL_0005:  ret
                 }
-                """);
-            verifier.VerifyIL("Program.Create<T, U>", """
+                """
+            );
+            verifier.VerifyIL(
+                "Program.Create<T, U>",
+                """
                 {
                   // Code size       36 (0x24)
                   .maxstack  2
@@ -5064,7 +5940,8 @@ static class Program
                   IL_0022:  ldloc.0
                   IL_0023:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -5101,20 +5978,28 @@ static class Program
                     static T? Create4<T, U>(U x, U y) where T : struct, I<U> => [x, y];
                 }
                 """;
-            var comp = CreateCompilation(new[] { source, s_collectionExtensions }, options: TestOptions.ReleaseExe);
+            var comp = CreateCompilation(
+                new[] { source, s_collectionExtensions },
+                options: TestOptions.ReleaseExe
+            );
             comp.VerifyEmitDiagnostics();
             var verifier = CompileAndVerify(comp, expectedOutput: "[], [], [42, 43], [44, 45],");
 
-            verifier.VerifyIL("Program.Create1<T, U>", """
+            verifier.VerifyIL(
+                "Program.Create1<T, U>",
+                """
                 {
                   // Code size        6 (0x6)
                   .maxstack  1
                   IL_0000:  call       "T System.Activator.CreateInstance<T>()"
                   IL_0005:  ret
                 }
-                """);
+                """
+            );
 
-            verifier.VerifyIL("Program.Create2<T, U>", """
+            verifier.VerifyIL(
+                "Program.Create2<T, U>",
+                """
                 {
                   // Code size       11 (0xb)
                   .maxstack  1
@@ -5122,8 +6007,11 @@ static class Program
                   IL_0005:  newobj     "T?..ctor(T)"
                   IL_000a:  ret
                 }
-                """);
-            verifier.VerifyIL("Program.Create3<T, U>", """
+                """
+            );
+            verifier.VerifyIL(
+                "Program.Create3<T, U>",
+                """
                 {
                   // Code size       36 (0x24)
                   .maxstack  2
@@ -5141,8 +6029,11 @@ static class Program
                   IL_0022:  ldloc.0
                   IL_0023:  ret
                 }
-                """);
-            verifier.VerifyIL("Program.Create4<T, U>", """
+                """
+            );
+            verifier.VerifyIL(
+                "Program.Create4<T, U>",
+                """
                 {
                   // Code size       41 (0x29)
                   .maxstack  2
@@ -5161,7 +6052,8 @@ static class Program
                   IL_0023:  newobj     "T?..ctor(T)"
                   IL_0028:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -5184,7 +6076,8 @@ static class Program
                 Diagnostic(ErrorCode.ERR_NoNewTyvar, "[]").WithArguments("T").WithLocation(4, 55),
                 // (5,62): error CS0304: Cannot create an instance of the variable type 'T' because it does not have the new() constraint
                 //     static T Create2<T, U>() where T : class, IEnumerable => []; // 2
-                Diagnostic(ErrorCode.ERR_NoNewTyvar, "[]").WithArguments("T").WithLocation(5, 62));
+                Diagnostic(ErrorCode.ERR_NoNewTyvar, "[]").WithArguments("T").WithLocation(5, 62)
+            );
         }
 
         [Fact]
@@ -5208,10 +6101,13 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (8,45): error CS0304: Cannot create an instance of the variable type 'T' because it does not have the new() constraint
                 //     static T Create1<T>() where T : IAdd => [1]; // 1
-                Diagnostic(ErrorCode.ERR_NoNewTyvar, "[1]").WithArguments("T").WithLocation(8, 45),
+                Diagnostic(ErrorCode.ERR_NoNewTyvar, "[1]")
+                    .WithArguments("T")
+                    .WithLocation(8, 45),
                 // (9,52): error CS0304: Cannot create an instance of the variable type 'T' because it does not have the new() constraint
                 //     static T Create2<T>() where T : class, IAdd => [2]; // 2
-                Diagnostic(ErrorCode.ERR_NoNewTyvar, "[2]").WithArguments("T").WithLocation(9, 52));
+                Diagnostic(ErrorCode.ERR_NoNewTyvar, "[2]").WithArguments("T").WithLocation(9, 52)
+            );
         }
 
         [Fact]
@@ -5235,10 +6131,18 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (8,15): error CS9174: Cannot initialize type 'S' with a collection expression because the type is not constructible.
                 //         S s = [];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]").WithArguments("S").WithLocation(8, 15),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]")
+                    .WithArguments("S")
+                    .WithLocation(8, 15),
                 // (9,20): error CS9174: Cannot initialize type 'S' with a collection expression because the type is not constructible.
                 //         object o = (S)([1, 2]);
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "(S)([1, 2])").WithArguments("S").WithLocation(9, 20));
+                Diagnostic(
+                        ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible,
+                        "(S)([1, 2])"
+                    )
+                    .WithArguments("S")
+                    .WithLocation(9, 20)
+            );
         }
 
         [Fact]
@@ -5290,22 +6194,50 @@ static class Program
                     }
                 }
                 """;
-            CompileAndVerify(new[] { sourceC, s_collectionExtensions }, references: new[] { refA, refB }, expectedOutput: "[], [1, 2], [], [3, 4], ");
+            CompileAndVerify(
+                new[] { sourceC, s_collectionExtensions },
+                references: new[] { refA, refB },
+                expectedOutput: "[], [1, 2], [], [3, 4], "
+            );
 
-            comp = CreateCompilation(new[] { sourceC, s_collectionExtensions }, references: new[] { refB });
+            comp = CreateCompilation(
+                new[] { sourceC, s_collectionExtensions },
+                references: new[] { refB }
+            );
             comp.VerifyEmitDiagnostics(
                 // 0.cs(6,13): error CS0012: The type 'A1' is defined in an assembly that is not referenced. You must add a reference to assembly 'a897d975-a839-4fff-828b-deccf9495adc, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         x = [];
-                Diagnostic(ErrorCode.ERR_NoTypeDef, "[]").WithArguments("A1", $"{assemblyA}, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null").WithLocation(6, 13),
+                Diagnostic(ErrorCode.ERR_NoTypeDef, "[]")
+                    .WithArguments(
+                        "A1",
+                        $"{assemblyA}, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                    )
+                    .WithLocation(6, 13),
                 // 0.cs(8,13): error CS0012: The type 'A1' is defined in an assembly that is not referenced. You must add a reference to assembly 'a897d975-a839-4fff-828b-deccf9495adc, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         x = [1, 2];
-                Diagnostic(ErrorCode.ERR_NoTypeDef, "[1, 2]").WithArguments("A1", $"{assemblyA}, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null").WithLocation(8, 13),
+                Diagnostic(ErrorCode.ERR_NoTypeDef, "[1, 2]")
+                    .WithArguments(
+                        "A1",
+                        $"{assemblyA}, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                    )
+                    .WithLocation(8, 13),
                 // 0.cs(13,14): error CS0012: The type 'A2' is defined in an assembly that is not referenced. You must add a reference to assembly 'a897d975-a839-4fff-828b-deccf9495adc, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         y = [3, 4];
-                Diagnostic(ErrorCode.ERR_NoTypeDef, "3").WithArguments("A2", $"{assemblyA}, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null").WithLocation(13, 14),
+                Diagnostic(ErrorCode.ERR_NoTypeDef, "3")
+                    .WithArguments(
+                        "A2",
+                        $"{assemblyA}, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                    )
+                    .WithLocation(13, 14),
                 // 0.cs(13,17): error CS0012: The type 'A2' is defined in an assembly that is not referenced. You must add a reference to assembly 'a897d975-a839-4fff-828b-deccf9495adc, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         y = [3, 4];
-                Diagnostic(ErrorCode.ERR_NoTypeDef, "4").WithArguments("A2", $"{assemblyA}, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null").WithLocation(13, 17));
+                Diagnostic(ErrorCode.ERR_NoTypeDef, "4")
+                    .WithArguments(
+                        "A2",
+                        $"{assemblyA}, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                    )
+                    .WithLocation(13, 17)
+            );
         }
 
         [Fact]
@@ -5332,8 +6264,16 @@ static class Program
                 }
                 """;
             var parseOptions = TestOptions.RegularPreview;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, parseOptions: parseOptions.WithPreprocessorSymbols("DEBUG"), expectedOutput: "[1, 2, 3], ");
-            CompileAndVerify(new[] { source, s_collectionExtensions }, parseOptions: parseOptions, expectedOutput: "[2], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                parseOptions: parseOptions.WithPreprocessorSymbols("DEBUG"),
+                expectedOutput: "[1, 2, 3], "
+            );
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                parseOptions: parseOptions,
+                expectedOutput: "[2], "
+            );
         }
 
         [Fact]
@@ -5356,20 +6296,44 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (8,14): error CS7036: There is no argument given that corresponds to the required parameter 'value' of 'Dictionary<int, int>.Add(int, int)'
                 //         d = [new KeyValuePair<int, int>(1, 2)];
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "new KeyValuePair<int, int>(1, 2)").WithArguments("value", "System.Collections.Generic.Dictionary<int, int>.Add(int, int)").WithLocation(8, 14),
+                Diagnostic(
+                        ErrorCode.ERR_NoCorrespondingArgument,
+                        "new KeyValuePair<int, int>(1, 2)"
+                    )
+                    .WithArguments(
+                        "value",
+                        "System.Collections.Generic.Dictionary<int, int>.Add(int, int)"
+                    )
+                    .WithLocation(8, 14),
                 // (9,15): error CS1003: Syntax error, ',' expected
                 //         d = [3:4];
                 Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(9, 15),
                 // (9,16): error CS1003: Syntax error, ',' expected
                 //         d = [3:4];
-                Diagnostic(ErrorCode.ERR_SyntaxError, "4").WithArguments(",").WithLocation(9, 16));
+                Diagnostic(ErrorCode.ERR_SyntaxError, "4").WithArguments(",").WithLocation(9, 16)
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public void SpreadElement_01(
-            [CombinatorialValues("IEnumerable<int>", "int[]", "List<int>", "Span<int>", "ReadOnlySpan<int>")] string spreadType,
-            [CombinatorialValues("IEnumerable<int>", "int[]", "List<int>", "Span<int>", "ReadOnlySpan<int>")] string collectionType)
+            [CombinatorialValues(
+                "IEnumerable<int>",
+                "int[]",
+                "List<int>",
+                "Span<int>",
+                "ReadOnlySpan<int>"
+            )]
+                string spreadType,
+            [CombinatorialValues(
+                "IEnumerable<int>",
+                "int[]",
+                "List<int>",
+                "Span<int>",
+                "ReadOnlySpan<int>"
+            )]
+                string collectionType
+        )
         {
             string source = $$"""
                 using System;
@@ -5394,13 +6358,14 @@ static class Program
                 options: TestOptions.ReleaseExe,
                 targetFramework: TargetFramework.Net70,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[1, 2, 3], "));
+                expectedOutput: IncludeExpectedOutput("[1, 2, 3], ")
+            );
 
             // Verify some of the cases.
             string expectedIL = (spreadType, collectionType) switch
             {
-                ("IEnumerable<int>", "IEnumerable<int>") =>
-                    """
+                ("IEnumerable<int>", "IEnumerable<int>")
+                    => """
                     {
                       // Code size       62 (0x3e)
                       .maxstack  2
@@ -5441,8 +6406,8 @@ static class Program
                       IL_003d:  ret
                     }
                     """,
-                ("IEnumerable<int>", "int[]") =>
-                    """
+                ("IEnumerable<int>", "int[]")
+                    => """
                     {
                       // Code size       62 (0x3e)
                       .maxstack  2
@@ -5483,7 +6448,8 @@ static class Program
                       IL_003d:  ret
                     }
                     """,
-                ("int[]", "int[]") =>
+                ("int[]", "int[]")
+                    =>
                     // https://github.com/dotnet/roslyn/issues/68785: Avoid intermediate List<T> if all spread elements have Length property.
                     """
                     {
@@ -5523,7 +6489,8 @@ static class Program
                       IL_002d:  ret
                     }
                     """,
-                ("ReadOnlySpan<int>", "ReadOnlySpan<int>") =>
+                ("ReadOnlySpan<int>", "ReadOnlySpan<int>")
+                    =>
                     // https://github.com/dotnet/roslyn/issues/68785: Avoid intermediate List<T> if all spread elements have Length property.
                     """
                     {
@@ -5595,11 +6562,13 @@ static class Program
                 options: TestOptions.ReleaseExe,
                 targetFramework: TargetFramework.Net70,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[1, 2], "));
+                expectedOutput: IncludeExpectedOutput("[1, 2], ")
+            );
 
             if (collectionType == "System.ReadOnlySpan<int>")
             {
-                verifier.VerifyIL("Program.Append",
+                verifier.VerifyIL(
+                    "Program.Append",
                     """
                     {
                       // Code size      112 (0x70)
@@ -5650,7 +6619,8 @@ static class Program
                       IL_006a:  call       "void CollectionExtensions.Report<int>(in System.ReadOnlySpan<int>)"
                       IL_006f:  ret
                     }
-                    """);
+                    """
+                );
             }
         }
 
@@ -5698,9 +6668,11 @@ static class Program
             var verifier = CompileAndVerify(
                 new[] { source, s_collectionExtensions },
                 options: TestOptions.ReleaseExe,
-                expectedOutput: "[1, 2], ");
+                expectedOutput: "[1, 2], "
+            );
 
-            verifier.VerifyIL("Program.Append",
+            verifier.VerifyIL(
+                "Program.Append",
                 """
                 {
                   // Code size      126 (0x7e)
@@ -5774,7 +6746,8 @@ static class Program
                   IL_007c:  ldloc.1
                   IL_007d:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -5793,7 +6766,9 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (5,26): error CS9176: There is no target type for the collection expression.
                 //         var a = [1, 2, ..[]];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]").WithLocation(5, 26));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]")
+                    .WithLocation(5, 26)
+            );
         }
 
         [Fact]
@@ -5814,10 +6789,13 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (6,21): error CS9176: There is no target type for the collection expression.
                 //         a = [..a, ..[]];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]").WithLocation(6, 21),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]")
+                    .WithLocation(6, 21),
                 // (7,16): error CS9176: There is no target type for the collection expression.
                 //         a = [..[default]];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[default]").WithLocation(7, 16));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[default]")
+                    .WithLocation(7, 16)
+            );
         }
 
         [Fact]
@@ -5836,7 +6814,10 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (5,26): error CS0173: Type of conditional expression cannot be determined because there is no implicit conversion between 'collection expressions' and 'collection expressions'
                 //         return [a, b, .. c ? [null] : []];
-                Diagnostic(ErrorCode.ERR_InvalidQM, "c ? [null] : []").WithArguments("collection expressions", "collection expressions").WithLocation(5, 26));
+                Diagnostic(ErrorCode.ERR_InvalidQM, "c ? [null] : []")
+                    .WithArguments("collection expressions", "collection expressions")
+                    .WithLocation(5, 26)
+            );
         }
 
         [Fact]
@@ -5855,8 +6836,12 @@ static class Program
                     static int[] F(int[,] a) => [..a];
                 }
                 """;
-            var verifier = CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "[1, 2, 3, 4], ");
-            verifier.VerifyIL("Program.F",
+            var verifier = CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "[1, 2, 3, 4], "
+            );
+            verifier.VerifyIL(
+                "Program.F",
                 """
                 {
                   // Code size       95 (0x5f)
@@ -5916,7 +6901,8 @@ static class Program
                   IL_0059:  callvirt   "int[] System.Collections.Generic.List<int>.ToArray()"
                   IL_005e:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -5940,8 +6926,12 @@ static class Program
                     static U[] F3<T, U>(T[] a) where T : U => [..a];
                 }
                 """;
-            var verifier = CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "[1, 2, 3], [1, 2, 3], [1, 2, 3], ");
-            verifier.VerifyIL("Program.F1",
+            var verifier = CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "[1, 2, 3], [1, 2, 3], [1, 2, 3], "
+            );
+            verifier.VerifyIL(
+                "Program.F1",
                 """
                 {
                   // Code size       45 (0x2d)
@@ -5978,8 +6968,10 @@ static class Program
                   IL_0027:  callvirt   "object[] System.Collections.Generic.List<object>.ToArray()"
                   IL_002c:  ret
                 }
-                """);
-            verifier.VerifyIL("Program.F2",
+                """
+            );
+            verifier.VerifyIL(
+                "Program.F2",
                 """
                 {
                   // Code size       46 (0x2e)
@@ -6017,8 +7009,10 @@ static class Program
                   IL_0028:  callvirt   "long?[] System.Collections.Generic.List<long?>.ToArray()"
                   IL_002d:  ret
                 }
-                """);
-            verifier.VerifyIL("Program.F3<T, U>",
+                """
+            );
+            verifier.VerifyIL(
+                "Program.F3<T, U>",
                 """
                 {
                   // Code size       54 (0x36)
@@ -6056,7 +7050,8 @@ static class Program
                   IL_0030:  callvirt   "U[] System.Collections.Generic.List<U>.ToArray()"
                   IL_0035:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Theory]
@@ -6092,7 +7087,8 @@ static class Program
                 new[] { source, s_collectionExtensionsWithSpan },
                 targetFramework: TargetFramework.Net70,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[1, 2, 3], [1, 2, 3], "));
+                expectedOutput: IncludeExpectedOutput("[1, 2, 3], [1, 2, 3], ")
+            );
         }
 
         [Fact]
@@ -6110,7 +7106,10 @@ static class Program
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "[1, 2, 3, 4], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "[1, 2, 3, 4], "
+            );
         }
 
         [Fact]
@@ -6131,10 +7130,15 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (6,11): error CS1503: Argument 1: cannot convert from 'collection expressions' to 'System.Collections.IEnumerable'
                 //         F([1, 2, 3]);
-                Diagnostic(ErrorCode.ERR_BadArgType, "[1, 2, 3]").WithArguments("1", "collection expressions", "System.Collections.IEnumerable").WithLocation(6, 11),
+                Diagnostic(ErrorCode.ERR_BadArgType, "[1, 2, 3]")
+                    .WithArguments("1", "collection expressions", "System.Collections.IEnumerable")
+                    .WithLocation(6, 11),
                 // (8,41): error CS0029: Cannot implicitly convert type 'object' to 'int'
                 //     static int[] F(IEnumerable s) => [..s];
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "s").WithArguments("object", "int").WithLocation(8, 41));
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "s")
+                    .WithArguments("object", "int")
+                    .WithLocation(8, 41)
+            );
         }
 
         [Theory]
@@ -6159,10 +7163,16 @@ static class Program
                     }
                 }
                 """;
-            var verifier = CompileAndVerify(new[] { source, s_collectionExtensions }, references: new[] { CSharpRef }, options: TestOptions.ReleaseExe, expectedOutput: "[1, 2, 3], ");
+            var verifier = CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                references: new[] { CSharpRef },
+                options: TestOptions.ReleaseExe,
+                expectedOutput: "[1, 2, 3], "
+            );
             if (resultType == "List<object>")
             {
-                verifier.VerifyIL("Program.F",
+                verifier.VerifyIL(
+                    "Program.F",
                     """
                     {
                       // Code size      141 (0x8d)
@@ -6226,7 +7236,8 @@ static class Program
                       IL_008b:  ldloc.0
                       IL_008c:  ret
                     }
-                    """);
+                    """
+                );
             }
         }
 
@@ -6247,7 +7258,10 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (6,25): error CS1579: foreach statement cannot operate on variables of type 'object' because 'object' does not contain a public instance or extension definition for 'GetEnumerator'
                 //         int[] y = [1, ..x];
-                Diagnostic(ErrorCode.ERR_ForEachMissingMember, "x").WithArguments("object", "GetEnumerator").WithLocation(6, 25));
+                Diagnostic(ErrorCode.ERR_ForEachMissingMember, "x")
+                    .WithArguments("object", "GetEnumerator")
+                    .WithLocation(6, 25)
+            );
         }
 
         [Fact]
@@ -6264,7 +7278,11 @@ static class Program
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, references: new[] { CSharpRef }, expectedOutput: "[1, 2, 3], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                references: new[] { CSharpRef },
+                expectedOutput: "[1, 2, 3], "
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/69704")]
@@ -6282,12 +7300,18 @@ static class Program
                     }
                 }
                 """;
-            var comp = CreateCompilation(new[] { source, s_collectionExtensions }, references: new[] { CSharpRef });
+            var comp = CreateCompilation(
+                new[] { source, s_collectionExtensions },
+                references: new[] { CSharpRef }
+            );
             // https://github.com/dotnet/roslyn/issues/69704: Should compile and run with expectedOutput: "[1, 2, 3], "
             comp.VerifyEmitDiagnostics(
                 // 0.cs(6,25): error CS0029: Cannot implicitly convert type 'object' to 'int'
                 //         int[] y = [1, ..x];
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "x").WithArguments("object", "int").WithLocation(6, 25));
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "x")
+                    .WithArguments("object", "int")
+                    .WithLocation(6, 25)
+            );
         }
 
         [Fact]
@@ -6314,16 +7338,25 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (9,13): error CS0656: Missing compiler required member 'System.Collections.Generic.List`1.ToArray'
                 //         b = [..a];
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "[..a]").WithArguments("System.Collections.Generic.List`1", "ToArray").WithLocation(9, 13),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "[..a]")
+                    .WithArguments("System.Collections.Generic.List`1", "ToArray")
+                    .WithLocation(9, 13),
                 // (9,13): error CS0518: Predefined type 'System.Collections.Generic.List`1' is not defined or imported
                 //         b = [..a];
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "[..a]").WithArguments("System.Collections.Generic.List`1").WithLocation(9, 13),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "[..a]")
+                    .WithArguments("System.Collections.Generic.List`1")
+                    .WithLocation(9, 13),
                 // (10,13): error CS0656: Missing compiler required member 'System.Collections.Generic.List`1.ToArray'
                 //         b = [..e];
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "[..e]").WithArguments("System.Collections.Generic.List`1", "ToArray").WithLocation(10, 13),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "[..e]")
+                    .WithArguments("System.Collections.Generic.List`1", "ToArray")
+                    .WithLocation(10, 13),
                 // (10,13): error CS0518: Predefined type 'System.Collections.Generic.List`1' is not defined or imported
                 //         b = [..e];
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "[..e]").WithArguments("System.Collections.Generic.List`1").WithLocation(10, 13));
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "[..e]")
+                    .WithArguments("System.Collections.Generic.List`1")
+                    .WithLocation(10, 13)
+            );
 
             comp = CreateCompilation(source);
             comp.MakeMemberMissing(WellKnownMember.System_Collections_Generic_List_T__ToArray);
@@ -6331,17 +7364,26 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (9,13): error CS0656: Missing compiler required member 'System.Collections.Generic.List`1.ToArray'
                 //         b = [..a];
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "[..a]").WithArguments("System.Collections.Generic.List`1", "ToArray").WithLocation(9, 13),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "[..a]")
+                    .WithArguments("System.Collections.Generic.List`1", "ToArray")
+                    .WithLocation(9, 13),
                 // (10,13): error CS0656: Missing compiler required member 'System.Collections.Generic.List`1.ToArray'
                 //         b = [..e];
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "[..e]").WithArguments("System.Collections.Generic.List`1", "ToArray").WithLocation(10, 13));
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "[..e]")
+                    .WithArguments("System.Collections.Generic.List`1", "ToArray")
+                    .WithLocation(10, 13)
+            );
         }
 
         [CombinatorialData]
         [Theory]
-        public void ArrayEmpty_01([CombinatorialValues(TargetFramework.Mscorlib45Extended, TargetFramework.Net80)] TargetFramework targetFramework)
+        public void ArrayEmpty_01(
+            [CombinatorialValues(TargetFramework.Mscorlib45Extended, TargetFramework.Net80)]
+                TargetFramework targetFramework
+        )
         {
-            if (!ExecutionConditionUtil.IsCoreClr && targetFramework == TargetFramework.Net80) return;
+            if (!ExecutionConditionUtil.IsCoreClr && targetFramework == TargetFramework.Net80)
+                return;
 
             string source = """
                 using System.Collections.Generic;
@@ -6367,10 +7409,12 @@ static class Program
             var verifier = CompileAndVerify(
                 new[] { source, s_collectionExtensions },
                 targetFramework: targetFramework,
-                expectedOutput: "[], [], [], [], [], [], ");
+                expectedOutput: "[], [], [], [], [], [], "
+            );
 
-            string expectedIL = (targetFramework == TargetFramework.Mscorlib45Extended) ?
-                """
+            string expectedIL =
+                (targetFramework == TargetFramework.Mscorlib45Extended)
+                    ? """
                 {
                   // Code size        7 (0x7)
                   .maxstack  1
@@ -6378,8 +7422,8 @@ static class Program
                   IL_0001:  newarr     "T"
                   IL_0006:  ret
                 }
-                """ :
                 """
+                    : """
                 {
                   // Code size        6 (0x6)
                   .maxstack  1
@@ -6392,8 +7436,7 @@ static class Program
             verifier.VerifyIL("Program.EmptyIReadOnlyCollection<T>", expectedIL);
             verifier.VerifyIL("Program.EmptyIReadOnlyList<T>", expectedIL);
 
-            expectedIL =
-                """
+            expectedIL = """
                 {
                   // Code size        6 (0x6)
                   .maxstack  1
@@ -6407,9 +7450,13 @@ static class Program
 
         [CombinatorialData]
         [Theory]
-        public void ArrayEmpty_02([CombinatorialValues(TargetFramework.Mscorlib45Extended, TargetFramework.Net80)] TargetFramework targetFramework)
+        public void ArrayEmpty_02(
+            [CombinatorialValues(TargetFramework.Mscorlib45Extended, TargetFramework.Net80)]
+                TargetFramework targetFramework
+        )
         {
-            if (!ExecutionConditionUtil.IsCoreClr && targetFramework == TargetFramework.Net80) return;
+            if (!ExecutionConditionUtil.IsCoreClr && targetFramework == TargetFramework.Net80)
+                return;
 
             string source = """
                 using System.Collections.Generic;
@@ -6435,10 +7482,12 @@ static class Program
             var verifier = CompileAndVerify(
                 new[] { source, s_collectionExtensions },
                 targetFramework: targetFramework,
-                expectedOutput: "[], [], [], [], [], [], ");
+                expectedOutput: "[], [], [], [], [], [], "
+            );
 
-            string expectedIL = (targetFramework == TargetFramework.Mscorlib45Extended) ?
-                """
+            string expectedIL =
+                (targetFramework == TargetFramework.Mscorlib45Extended)
+                    ? """
                 {
                   // Code size        7 (0x7)
                   .maxstack  1
@@ -6446,8 +7495,8 @@ static class Program
                   IL_0001:  newarr     "string"
                   IL_0006:  ret
                 }
-                """ :
                 """
+                    : """
                 {
                   // Code size        6 (0x6)
                   .maxstack  1
@@ -6460,8 +7509,7 @@ static class Program
             verifier.VerifyIL("Program.EmptyIReadOnlyCollection", expectedIL);
             verifier.VerifyIL("Program.EmptyIReadOnlyList", expectedIL);
 
-            expectedIL =
-                """
+            expectedIL = """
                 {
                   // Code size        6 (0x6)
                   .maxstack  1
@@ -6492,8 +7540,10 @@ static class Program
                 new[] { source, s_collectionExtensions },
                 options: TestOptions.UnsafeReleaseExe,
                 verify: Verification.FailsPEVerify,
-                expectedOutput: "[], [], ");
-            verifier.VerifyIL("Program.EmptyArray",
+                expectedOutput: "[], [], "
+            );
+            verifier.VerifyIL(
+                "Program.EmptyArray",
                 """
                 {
                   // Code size        7 (0x7)
@@ -6502,8 +7552,10 @@ static class Program
                   IL_0001:  newarr     "void*"
                   IL_0006:  ret
                 }
-                """);
-            verifier.VerifyIL("Program.EmptyNestedArray",
+                """
+            );
+            verifier.VerifyIL(
+                "Program.EmptyNestedArray",
                 """
                 {
                   // Code size        6 (0x6)
@@ -6511,7 +7563,8 @@ static class Program
                   IL_0000:  call       "void*[][] System.Array.Empty<void*[]>()"
                   IL_0005:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -6531,9 +7584,13 @@ static class Program
                 }
                 """;
 
-            var comp = CreateCompilation(new[] { source, s_collectionExtensions }, options: TestOptions.ReleaseExe);
+            var comp = CreateCompilation(
+                new[] { source, s_collectionExtensions },
+                options: TestOptions.ReleaseExe
+            );
             var verifier = CompileAndVerify(comp, expectedOutput: "[], [], ");
-            verifier.VerifyIL("Program.Main",
+            verifier.VerifyIL(
+                "Program.Main",
                 """
                 {
                   // Code size       25 (0x19)
@@ -6549,12 +7606,17 @@ static class Program
                   IL_0013:  call       "void CollectionExtensions.Report(object, bool)"
                   IL_0018:  ret
                 }
-                """);
+                """
+            );
 
-            comp = CreateCompilation(new[] { source, s_collectionExtensions }, options: TestOptions.ReleaseExe);
+            comp = CreateCompilation(
+                new[] { source, s_collectionExtensions },
+                options: TestOptions.ReleaseExe
+            );
             comp.MakeMemberMissing(WellKnownMember.System_Array__Empty);
             verifier = CompileAndVerify(comp, expectedOutput: "[], [], ");
-            verifier.VerifyIL("Program.Main",
+            verifier.VerifyIL(
+                "Program.Main",
                 """
                 {
                   // Code size       27 (0x1b)
@@ -6572,12 +7634,20 @@ static class Program
                   IL_0015:  call       "void CollectionExtensions.Report(object, bool)"
                   IL_001a:  ret
                 }
-                """);
+                """
+            );
         }
 
         [CombinatorialData]
         [Theory]
-        public void SynthesizedReadOnlyArray([CombinatorialValues("IEnumerable<object>", "IReadOnlyCollection<object>", "IReadOnlyList<object>")] string targetType)
+        public void SynthesizedReadOnlyArray(
+            [CombinatorialValues(
+                "IEnumerable<object>",
+                "IReadOnlyCollection<object>",
+                "IReadOnlyList<object>"
+            )]
+                string targetType
+        )
         {
             string source = $$"""
                 using System;
@@ -6635,7 +7705,9 @@ static class Program
                 new[] { source, s_collectionExtensions },
                 symbolValidator: module =>
                 {
-                    var synthesizedType = module.GlobalNamespace.GetTypeMember("<>z__ReadOnlyArray");
+                    var synthesizedType = module.GlobalNamespace.GetTypeMember(
+                        "<>z__ReadOnlyArray"
+                    );
                     Assert.Equal("<>z__ReadOnlyArray<T>", synthesizedType.ToTestDisplayString());
                     Assert.Equal("<>z__ReadOnlyArray`1", synthesizedType.MetadataName);
                 },
@@ -6656,7 +7728,8 @@ static class Program
                     IList<object>.IndexOf(2): 1
                     IList<object>.Insert(1, -1): System.NotSupportedException
                     IList<object>.RemoveAt(1): System.NotSupportedException
-                    """);
+                    """
+            );
 
             string expectedNotSupportedIL = """
                 {
@@ -6667,7 +7740,9 @@ static class Program
                 }
                 """;
 
-            verifier.VerifyIL("<>z__ReadOnlyArray<T>..ctor(T[])", """
+            verifier.VerifyIL(
+                "<>z__ReadOnlyArray<T>..ctor(T[])",
+                """
                 {
                   // Code size       14 (0xe)
                   .maxstack  2
@@ -6678,8 +7753,11 @@ static class Program
                   IL_0008:  stfld      "T[] <>z__ReadOnlyArray<T>._items"
                   IL_000d:  ret
                 }
-                """);
-            verifier.VerifyIL("<>z__ReadOnlyArray<T>.System.Collections.IEnumerable.GetEnumerator()", """
+                """
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyArray<T>.System.Collections.IEnumerable.GetEnumerator()",
+                """
                 {
                   // Code size       12 (0xc)
                   .maxstack  1
@@ -6688,8 +7766,11 @@ static class Program
                   IL_0006:  callvirt   "System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()"
                   IL_000b:  ret
                 }
-                """);
-            verifier.VerifyIL("<>z__ReadOnlyArray<T>.System.Collections.Generic.IEnumerable<T>.GetEnumerator()", """
+                """
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyArray<T>.System.Collections.Generic.IEnumerable<T>.GetEnumerator()",
+                """
                 {
                   // Code size       12 (0xc)
                   .maxstack  1
@@ -6698,8 +7779,11 @@ static class Program
                   IL_0006:  callvirt   "System.Collections.Generic.IEnumerator<T> System.Collections.Generic.IEnumerable<T>.GetEnumerator()"
                   IL_000b:  ret
                 }
-                """);
-            verifier.VerifyIL("<>z__ReadOnlyArray<T>.System.Collections.Generic.IReadOnlyCollection<T>.get_Count()", """
+                """
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyArray<T>.System.Collections.Generic.IReadOnlyCollection<T>.get_Count()",
+                """
                 {
                   // Code size        9 (0x9)
                   .maxstack  1
@@ -6709,8 +7793,11 @@ static class Program
                   IL_0007:  conv.i4
                   IL_0008:  ret
                 }
-                """);
-            verifier.VerifyIL("<>z__ReadOnlyArray<T>.System.Collections.Generic.IReadOnlyList<T>.get_Item(int)", """
+                """
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyArray<T>.System.Collections.Generic.IReadOnlyList<T>.get_Item(int)",
+                """
                 {
                   // Code size       13 (0xd)
                   .maxstack  2
@@ -6720,16 +7807,22 @@ static class Program
                   IL_0007:  ldelem     "T"
                   IL_000c:  ret
                 }
-                """);
-            verifier.VerifyIL("<>z__ReadOnlyArray<T>.System.Collections.Generic.ICollection<T>.get_IsReadOnly()", """
+                """
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyArray<T>.System.Collections.Generic.ICollection<T>.get_IsReadOnly()",
+                """
                 {
                   // Code size        2 (0x2)
                   .maxstack  1
                   IL_0000:  ldc.i4.1
                   IL_0001:  ret
                 }
-                """);
-            verifier.VerifyIL("<>z__ReadOnlyArray<T>.System.Collections.Generic.ICollection<T>.get_Count()", """
+                """
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyArray<T>.System.Collections.Generic.ICollection<T>.get_Count()",
+                """
                 {
                   // Code size        9 (0x9)
                   .maxstack  1
@@ -6739,10 +7832,19 @@ static class Program
                   IL_0007:  conv.i4
                   IL_0008:  ret
                 }
-                """);
-            verifier.VerifyIL("<>z__ReadOnlyArray<T>.System.Collections.Generic.ICollection<T>.Add(T)", expectedNotSupportedIL);
-            verifier.VerifyIL("<>z__ReadOnlyArray<T>.System.Collections.Generic.ICollection<T>.Clear()", expectedNotSupportedIL);
-            verifier.VerifyIL("<>z__ReadOnlyArray<T>.System.Collections.Generic.ICollection<T>.Contains(T)", """
+                """
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyArray<T>.System.Collections.Generic.ICollection<T>.Add(T)",
+                expectedNotSupportedIL
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyArray<T>.System.Collections.Generic.ICollection<T>.Clear()",
+                expectedNotSupportedIL
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyArray<T>.System.Collections.Generic.ICollection<T>.Contains(T)",
+                """
                 {
                   // Code size       13 (0xd)
                   .maxstack  2
@@ -6752,8 +7854,11 @@ static class Program
                   IL_0007:  callvirt   "bool System.Collections.Generic.ICollection<T>.Contains(T)"
                   IL_000c:  ret
                 }
-                """);
-            verifier.VerifyIL("<>z__ReadOnlyArray<T>.System.Collections.Generic.ICollection<T>.CopyTo(T[], int)", """
+                """
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyArray<T>.System.Collections.Generic.ICollection<T>.CopyTo(T[], int)",
+                """
                 {
                   // Code size       14 (0xe)
                   .maxstack  3
@@ -6764,9 +7869,15 @@ static class Program
                   IL_0008:  callvirt   "void System.Collections.Generic.ICollection<T>.CopyTo(T[], int)"
                   IL_000d:  ret
                 }
-                """);
-            verifier.VerifyIL("<>z__ReadOnlyArray<T>.System.Collections.Generic.ICollection<T>.Remove(T)", expectedNotSupportedIL);
-            verifier.VerifyIL("<>z__ReadOnlyArray<T>.System.Collections.Generic.IList<T>.get_Item(int)", """
+                """
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyArray<T>.System.Collections.Generic.ICollection<T>.Remove(T)",
+                expectedNotSupportedIL
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyArray<T>.System.Collections.Generic.IList<T>.get_Item(int)",
+                """
                 {
                   // Code size       13 (0xd)
                   .maxstack  2
@@ -6776,9 +7887,15 @@ static class Program
                   IL_0007:  ldelem     "T"
                   IL_000c:  ret
                 }
-                """);
-            verifier.VerifyIL("<>z__ReadOnlyArray<T>.System.Collections.Generic.IList<T>.set_Item(int, T)", expectedNotSupportedIL);
-            verifier.VerifyIL("<>z__ReadOnlyArray<T>.System.Collections.Generic.IList<T>.IndexOf(T)", """
+                """
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyArray<T>.System.Collections.Generic.IList<T>.set_Item(int, T)",
+                expectedNotSupportedIL
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyArray<T>.System.Collections.Generic.IList<T>.IndexOf(T)",
+                """
                 {
                   // Code size       13 (0xd)
                   .maxstack  2
@@ -6788,14 +7905,24 @@ static class Program
                   IL_0007:  callvirt   "int System.Collections.Generic.IList<T>.IndexOf(T)"
                   IL_000c:  ret
                 }
-                """);
-            verifier.VerifyIL("<>z__ReadOnlyArray<T>.System.Collections.Generic.IList<T>.Insert(int, T)", expectedNotSupportedIL);
-            verifier.VerifyIL("<>z__ReadOnlyArray<T>.System.Collections.Generic.IList<T>.RemoveAt(int)", expectedNotSupportedIL);
+                """
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyArray<T>.System.Collections.Generic.IList<T>.Insert(int, T)",
+                expectedNotSupportedIL
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyArray<T>.System.Collections.Generic.IList<T>.RemoveAt(int)",
+                expectedNotSupportedIL
+            );
         }
 
         [CombinatorialData]
         [Theory]
-        public void SynthesizedReadOnlyList_01([CombinatorialValues("IEnumerable<T>", "IReadOnlyCollection<T>", "IReadOnlyList<T>")] string targetType)
+        public void SynthesizedReadOnlyList_01(
+            [CombinatorialValues("IEnumerable<T>", "IReadOnlyCollection<T>", "IReadOnlyList<T>")]
+                string targetType
+        )
         {
             string source = $$"""
                 using System;
@@ -6884,7 +8011,8 @@ static class Program
                     IList<T>.IndexOf(default): 2
                     IList<T>.Insert(0, default): System.NotSupportedException
                     IList<T>.RemoveAt(1): System.NotSupportedException
-                    """);
+                    """
+            );
 
             string expectedNotSupportedIL = """
                 {
@@ -6895,7 +8023,9 @@ static class Program
                 }
                 """;
 
-            verifier.VerifyIL("<>z__ReadOnlyList<T>..ctor(System.Collections.Generic.List<T>)", """
+            verifier.VerifyIL(
+                "<>z__ReadOnlyList<T>..ctor(System.Collections.Generic.List<T>)",
+                """
                 {
                   // Code size       14 (0xe)
                   .maxstack  2
@@ -6906,8 +8036,11 @@ static class Program
                   IL_0008:  stfld      "System.Collections.Generic.List<T> <>z__ReadOnlyList<T>._items"
                   IL_000d:  ret
                 }
-                """);
-            verifier.VerifyIL("<>z__ReadOnlyList<T>.System.Collections.IEnumerable.GetEnumerator()", """
+                """
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyList<T>.System.Collections.IEnumerable.GetEnumerator()",
+                """
                 {
                   // Code size       12 (0xc)
                   .maxstack  1
@@ -6916,8 +8049,11 @@ static class Program
                   IL_0006:  callvirt   "System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()"
                   IL_000b:  ret
                 }
-                """);
-            verifier.VerifyIL("<>z__ReadOnlyList<T>.System.Collections.Generic.IEnumerable<T>.GetEnumerator()", """
+                """
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyList<T>.System.Collections.Generic.IEnumerable<T>.GetEnumerator()",
+                """
                 {
                   // Code size       12 (0xc)
                   .maxstack  1
@@ -6926,8 +8062,11 @@ static class Program
                   IL_0006:  callvirt   "System.Collections.Generic.IEnumerator<T> System.Collections.Generic.IEnumerable<T>.GetEnumerator()"
                   IL_000b:  ret
                 }
-                """);
-            verifier.VerifyIL("<>z__ReadOnlyList<T>.System.Collections.Generic.IReadOnlyCollection<T>.get_Count()", """
+                """
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyList<T>.System.Collections.Generic.IReadOnlyCollection<T>.get_Count()",
+                """
                 {
                   // Code size       12 (0xc)
                   .maxstack  1
@@ -6936,8 +8075,11 @@ static class Program
                   IL_0006:  callvirt   "int System.Collections.Generic.List<T>.Count.get"
                   IL_000b:  ret
                 }
-                """);
-            verifier.VerifyIL("<>z__ReadOnlyList<T>.System.Collections.Generic.IReadOnlyList<T>.get_Item(int)", """
+                """
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyList<T>.System.Collections.Generic.IReadOnlyList<T>.get_Item(int)",
+                """
                 {
                   // Code size       13 (0xd)
                   .maxstack  2
@@ -6947,16 +8089,22 @@ static class Program
                   IL_0007:  callvirt   "T System.Collections.Generic.List<T>.this[int].get"
                   IL_000c:  ret
                 }
-                """);
-            verifier.VerifyIL("<>z__ReadOnlyList<T>.System.Collections.Generic.ICollection<T>.get_IsReadOnly()", """
+                """
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyList<T>.System.Collections.Generic.ICollection<T>.get_IsReadOnly()",
+                """
                 {
                   // Code size        2 (0x2)
                   .maxstack  1
                   IL_0000:  ldc.i4.1
                   IL_0001:  ret
                 }
-                """);
-            verifier.VerifyIL("<>z__ReadOnlyList<T>.System.Collections.Generic.ICollection<T>.get_Count()", """
+                """
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyList<T>.System.Collections.Generic.ICollection<T>.get_Count()",
+                """
                 {
                   // Code size       12 (0xc)
                   .maxstack  1
@@ -6965,10 +8113,19 @@ static class Program
                   IL_0006:  callvirt   "int System.Collections.Generic.List<T>.Count.get"
                   IL_000b:  ret
                 }
-                """);
-            verifier.VerifyIL("<>z__ReadOnlyList<T>.System.Collections.Generic.ICollection<T>.Add(T)", expectedNotSupportedIL);
-            verifier.VerifyIL("<>z__ReadOnlyList<T>.System.Collections.Generic.ICollection<T>.Clear()", expectedNotSupportedIL);
-            verifier.VerifyIL("<>z__ReadOnlyList<T>.System.Collections.Generic.ICollection<T>.Contains(T)", """
+                """
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyList<T>.System.Collections.Generic.ICollection<T>.Add(T)",
+                expectedNotSupportedIL
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyList<T>.System.Collections.Generic.ICollection<T>.Clear()",
+                expectedNotSupportedIL
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyList<T>.System.Collections.Generic.ICollection<T>.Contains(T)",
+                """
                 {
                   // Code size       13 (0xd)
                   .maxstack  2
@@ -6978,8 +8135,11 @@ static class Program
                   IL_0007:  callvirt   "bool System.Collections.Generic.List<T>.Contains(T)"
                   IL_000c:  ret
                 }
-                """);
-            verifier.VerifyIL("<>z__ReadOnlyList<T>.System.Collections.Generic.ICollection<T>.CopyTo(T[], int)", """
+                """
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyList<T>.System.Collections.Generic.ICollection<T>.CopyTo(T[], int)",
+                """
                 {
                   // Code size       14 (0xe)
                   .maxstack  3
@@ -6990,9 +8150,15 @@ static class Program
                   IL_0008:  callvirt   "void System.Collections.Generic.List<T>.CopyTo(T[], int)"
                   IL_000d:  ret
                 }
-                """);
-            verifier.VerifyIL("<>z__ReadOnlyList<T>.System.Collections.Generic.ICollection<T>.Remove(T)", expectedNotSupportedIL);
-            verifier.VerifyIL("<>z__ReadOnlyList<T>.System.Collections.Generic.IList<T>.get_Item(int)", """
+                """
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyList<T>.System.Collections.Generic.ICollection<T>.Remove(T)",
+                expectedNotSupportedIL
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyList<T>.System.Collections.Generic.IList<T>.get_Item(int)",
+                """
                 {
                   // Code size       13 (0xd)
                   .maxstack  2
@@ -7002,9 +8168,15 @@ static class Program
                   IL_0007:  callvirt   "T System.Collections.Generic.List<T>.this[int].get"
                   IL_000c:  ret
                 }
-                """);
-            verifier.VerifyIL("<>z__ReadOnlyList<T>.System.Collections.Generic.IList<T>.set_Item(int, T)", expectedNotSupportedIL);
-            verifier.VerifyIL("<>z__ReadOnlyList<T>.System.Collections.Generic.IList<T>.IndexOf(T)", """
+                """
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyList<T>.System.Collections.Generic.IList<T>.set_Item(int, T)",
+                expectedNotSupportedIL
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyList<T>.System.Collections.Generic.IList<T>.IndexOf(T)",
+                """
                 {
                   // Code size       13 (0xd)
                   .maxstack  2
@@ -7014,9 +8186,16 @@ static class Program
                   IL_0007:  callvirt   "int System.Collections.Generic.List<T>.IndexOf(T)"
                   IL_000c:  ret
                 }
-                """);
-            verifier.VerifyIL("<>z__ReadOnlyList<T>.System.Collections.Generic.IList<T>.Insert(int, T)", expectedNotSupportedIL);
-            verifier.VerifyIL("<>z__ReadOnlyList<T>.System.Collections.Generic.IList<T>.RemoveAt(int)", expectedNotSupportedIL);
+                """
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyList<T>.System.Collections.Generic.IList<T>.Insert(int, T)",
+                expectedNotSupportedIL
+            );
+            verifier.VerifyIL(
+                "<>z__ReadOnlyList<T>.System.Collections.Generic.IList<T>.RemoveAt(int)",
+                expectedNotSupportedIL
+            );
         }
 
         [Fact]
@@ -7041,7 +8220,8 @@ static class Program
                 source,
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.FailsPEVerify,
-                expectedOutput: IncludeExpectedOutput("1, 2, "));
+                expectedOutput: IncludeExpectedOutput("1, 2, ")
+            );
         }
 
         [Fact]
@@ -7066,7 +8246,8 @@ static class Program
                 source,
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.FailsPEVerify,
-                expectedOutput: IncludeExpectedOutput("1, 2, 3, "));
+                expectedOutput: IncludeExpectedOutput("1, 2, 3, ")
+            );
         }
 
         // Compare members of synthesized types to a similar type from source.
@@ -7123,26 +8304,63 @@ static class Program
             var verifier = CompileAndVerify(
                 new[] { sourceA, sourceB },
                 targetFramework: TargetFramework.Net80,
-                verify: Verification.FailsPEVerify);
+                verify: Verification.FailsPEVerify
+            );
 
-            var sourceType = ((CSharpCompilation)verifier.Compilation).GetMember<NamedTypeSymbol>("ReadOnlyArray");
-            verifier.TestData.TryGetMethodData("<>z__ReadOnlyArray<T>..ctor(T[])", out var arrayMemberData);
-            verifier.TestData.TryGetMethodData("<>z__ReadOnlyList<T>..ctor(System.Collections.Generic.List<T>)", out var listMemberData);
+            var sourceType = ((CSharpCompilation)verifier.Compilation).GetMember<NamedTypeSymbol>(
+                "ReadOnlyArray"
+            );
+            verifier.TestData.TryGetMethodData(
+                "<>z__ReadOnlyArray<T>..ctor(T[])",
+                out var arrayMemberData
+            );
+            verifier.TestData.TryGetMethodData(
+                "<>z__ReadOnlyList<T>..ctor(System.Collections.Generic.List<T>)",
+                out var listMemberData
+            );
 
             compareTypes(sourceType, ((MethodSymbol)arrayMemberData.Method).ContainingType);
             compareTypes(sourceType, ((MethodSymbol)listMemberData.Method).ContainingType);
 
             static void compareTypes(NamedTypeSymbol sourceType, NamedTypeSymbol synthesizedType)
             {
-                compareMembers(sourceType, synthesizedType, "System.Collections.Generic.ICollection<T>.IsReadOnly");
-                compareMembers(sourceType, synthesizedType, "System.Collections.Generic.ICollection<T>.get_IsReadOnly");
-                compareMembers(sourceType, synthesizedType, "System.Collections.Generic.ICollection<T>.Contains");
-                compareMembers(sourceType, synthesizedType, "System.Collections.Generic.IList<T>.this[]");
-                compareMembers(sourceType, synthesizedType, "System.Collections.Generic.IList<T>.get_Item");
-                compareMembers(sourceType, synthesizedType, "System.Collections.Generic.IList<T>.set_Item");
+                compareMembers(
+                    sourceType,
+                    synthesizedType,
+                    "System.Collections.Generic.ICollection<T>.IsReadOnly"
+                );
+                compareMembers(
+                    sourceType,
+                    synthesizedType,
+                    "System.Collections.Generic.ICollection<T>.get_IsReadOnly"
+                );
+                compareMembers(
+                    sourceType,
+                    synthesizedType,
+                    "System.Collections.Generic.ICollection<T>.Contains"
+                );
+                compareMembers(
+                    sourceType,
+                    synthesizedType,
+                    "System.Collections.Generic.IList<T>.this[]"
+                );
+                compareMembers(
+                    sourceType,
+                    synthesizedType,
+                    "System.Collections.Generic.IList<T>.get_Item"
+                );
+                compareMembers(
+                    sourceType,
+                    synthesizedType,
+                    "System.Collections.Generic.IList<T>.set_Item"
+                );
             }
 
-            static void compareMembers(NamedTypeSymbol sourceType, NamedTypeSymbol synthesizedType, string memberName)
+            static void compareMembers(
+                NamedTypeSymbol sourceType,
+                NamedTypeSymbol synthesizedType,
+                string memberName
+            )
             {
                 var sourceMember = sourceType.GetMembers(memberName).Single();
                 var synthesizedMember = synthesizedType.GetMembers(memberName).Single();
@@ -7154,12 +8372,30 @@ static class Program
 
         [Theory]
         [InlineData(SpecialType.System_Collections_IEnumerable, "System.Collections.IEnumerable")]
-        [InlineData(SpecialType.System_Collections_Generic_IEnumerable_T, "System.Collections.Generic.IEnumerable`1")]
-        [InlineData(SpecialType.System_Collections_Generic_IReadOnlyCollection_T, "System.Collections.Generic.IReadOnlyCollection`1")]
-        [InlineData(SpecialType.System_Collections_Generic_IReadOnlyList_T, "System.Collections.Generic.IReadOnlyList`1")]
-        [InlineData(SpecialType.System_Collections_Generic_ICollection_T, "System.Collections.Generic.ICollection`1")]
-        [InlineData(SpecialType.System_Collections_Generic_IList_T, "System.Collections.Generic.IList`1")]
-        public void SynthesizedReadOnlyList_MissingSpecialTypes(SpecialType missingType, string missingTypeName)
+        [InlineData(
+            SpecialType.System_Collections_Generic_IEnumerable_T,
+            "System.Collections.Generic.IEnumerable`1"
+        )]
+        [InlineData(
+            SpecialType.System_Collections_Generic_IReadOnlyCollection_T,
+            "System.Collections.Generic.IReadOnlyCollection`1"
+        )]
+        [InlineData(
+            SpecialType.System_Collections_Generic_IReadOnlyList_T,
+            "System.Collections.Generic.IReadOnlyList`1"
+        )]
+        [InlineData(
+            SpecialType.System_Collections_Generic_ICollection_T,
+            "System.Collections.Generic.ICollection`1"
+        )]
+        [InlineData(
+            SpecialType.System_Collections_Generic_IList_T,
+            "System.Collections.Generic.IList`1"
+        )]
+        public void SynthesizedReadOnlyList_MissingSpecialTypes(
+            SpecialType missingType,
+            string missingTypeName
+        )
         {
             string source = """
                 using System.Collections.Generic;
@@ -7177,16 +8413,33 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (6,30): error CS0518: Predefined type 'System.Collections.IEnumerable' is not defined or imported
                 //         IEnumerable<int> x = [0];
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "[0]").WithArguments(missingTypeName).WithLocation(6, 30),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "[0]")
+                    .WithArguments(missingTypeName)
+                    .WithLocation(6, 30),
                 // (7,30): error CS0518: Predefined type 'System.Collections.IEnumerable' is not defined or imported
                 //         IEnumerable<int> y = [..x];
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "[..x]").WithArguments(missingTypeName).WithLocation(7, 30));
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "[..x]")
+                    .WithArguments(missingTypeName)
+                    .WithLocation(7, 30)
+            );
         }
 
         [Theory]
-        [InlineData((int)SpecialMember.System_Collections_IEnumerable__GetEnumerator, "System.Collections.IEnumerable", "GetEnumerator")]
-        [InlineData((int)SpecialMember.System_Collections_Generic_IEnumerable_T__GetEnumerator, "System.Collections.Generic.IEnumerable`1", "GetEnumerator")]
-        public void SynthesizedReadOnlyList_MissingSpecialMembers(int missingMember, string missingMemberTypeName, string missingMemberName)
+        [InlineData(
+            (int)SpecialMember.System_Collections_IEnumerable__GetEnumerator,
+            "System.Collections.IEnumerable",
+            "GetEnumerator"
+        )]
+        [InlineData(
+            (int)SpecialMember.System_Collections_Generic_IEnumerable_T__GetEnumerator,
+            "System.Collections.Generic.IEnumerable`1",
+            "GetEnumerator"
+        )]
+        public void SynthesizedReadOnlyList_MissingSpecialMembers(
+            int missingMember,
+            string missingMemberTypeName,
+            string missingMemberName
+        )
         {
             string source = """
                 using System.Collections.Generic;
@@ -7204,10 +8457,15 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (6,30): error CS0656: Missing compiler required member 'System.Collections.IEnumerable.GetEnumerator'
                 //         IEnumerable<int> x = [0];
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "[0]").WithArguments(missingMemberTypeName, missingMemberName).WithLocation(6, 30),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "[0]")
+                    .WithArguments(missingMemberTypeName, missingMemberName)
+                    .WithLocation(6, 30),
                 // (7,30): error CS0656: Missing compiler required member 'System.Collections.IEnumerable.GetEnumerator'
                 //         IEnumerable<int> y = [..x];
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "[..x]").WithArguments(missingMemberTypeName, missingMemberName).WithLocation(7, 30));
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "[..x]")
+                    .WithArguments(missingMemberTypeName, missingMemberName)
+                    .WithLocation(7, 30)
+            );
         }
 
         [Fact]
@@ -7229,25 +8487,88 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (7,30): error CS0518: Predefined type 'System.Collections.Generic.List`1' is not defined or imported
                 //         IEnumerable<int> y = [..x];
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "[..x]").WithArguments("System.Collections.Generic.List`1").WithLocation(7, 30));
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "[..x]")
+                    .WithArguments("System.Collections.Generic.List`1")
+                    .WithLocation(7, 30)
+            );
         }
 
         [Theory]
-        [InlineData((int)WellKnownMember.System_Collections_Generic_IReadOnlyCollection_T__Count, "System.Collections.Generic.IReadOnlyCollection`1", "Count")]
-        [InlineData((int)WellKnownMember.System_Collections_Generic_IReadOnlyList_T__get_Item, "System.Collections.Generic.IReadOnlyList`1", "get_Item")]
-        [InlineData((int)WellKnownMember.System_Collections_Generic_ICollection_T__Count, "System.Collections.Generic.ICollection`1", "Count")]
-        [InlineData((int)WellKnownMember.System_Collections_Generic_ICollection_T__IsReadOnly, "System.Collections.Generic.ICollection`1", "IsReadOnly")]
-        [InlineData((int)WellKnownMember.System_Collections_Generic_ICollection_T__Add, "System.Collections.Generic.ICollection`1", "Add")]
-        [InlineData((int)WellKnownMember.System_Collections_Generic_ICollection_T__Clear, "System.Collections.Generic.ICollection`1", "Clear")]
-        [InlineData((int)WellKnownMember.System_Collections_Generic_ICollection_T__Contains, "System.Collections.Generic.ICollection`1", "Contains")]
-        [InlineData((int)WellKnownMember.System_Collections_Generic_ICollection_T__CopyTo, "System.Collections.Generic.ICollection`1", "CopyTo")]
-        [InlineData((int)WellKnownMember.System_Collections_Generic_ICollection_T__Remove, "System.Collections.Generic.ICollection`1", "Remove")]
-        [InlineData((int)WellKnownMember.System_Collections_Generic_IList_T__get_Item, "System.Collections.Generic.IList`1", "get_Item")]
-        [InlineData((int)WellKnownMember.System_Collections_Generic_IList_T__IndexOf, "System.Collections.Generic.IList`1", "IndexOf")]
-        [InlineData((int)WellKnownMember.System_Collections_Generic_IList_T__Insert, "System.Collections.Generic.IList`1", "Insert")]
-        [InlineData((int)WellKnownMember.System_Collections_Generic_IList_T__RemoveAt, "System.Collections.Generic.IList`1", "RemoveAt")]
-        [InlineData((int)WellKnownMember.System_NotSupportedException__ctor, "System.NotSupportedException", ".ctor")]
-        public void SynthesizedReadOnlyList_MissingWellKnownMembers(int missingMember, string missingMemberTypeName, string missingMemberName)
+        [InlineData(
+            (int)WellKnownMember.System_Collections_Generic_IReadOnlyCollection_T__Count,
+            "System.Collections.Generic.IReadOnlyCollection`1",
+            "Count"
+        )]
+        [InlineData(
+            (int)WellKnownMember.System_Collections_Generic_IReadOnlyList_T__get_Item,
+            "System.Collections.Generic.IReadOnlyList`1",
+            "get_Item"
+        )]
+        [InlineData(
+            (int)WellKnownMember.System_Collections_Generic_ICollection_T__Count,
+            "System.Collections.Generic.ICollection`1",
+            "Count"
+        )]
+        [InlineData(
+            (int)WellKnownMember.System_Collections_Generic_ICollection_T__IsReadOnly,
+            "System.Collections.Generic.ICollection`1",
+            "IsReadOnly"
+        )]
+        [InlineData(
+            (int)WellKnownMember.System_Collections_Generic_ICollection_T__Add,
+            "System.Collections.Generic.ICollection`1",
+            "Add"
+        )]
+        [InlineData(
+            (int)WellKnownMember.System_Collections_Generic_ICollection_T__Clear,
+            "System.Collections.Generic.ICollection`1",
+            "Clear"
+        )]
+        [InlineData(
+            (int)WellKnownMember.System_Collections_Generic_ICollection_T__Contains,
+            "System.Collections.Generic.ICollection`1",
+            "Contains"
+        )]
+        [InlineData(
+            (int)WellKnownMember.System_Collections_Generic_ICollection_T__CopyTo,
+            "System.Collections.Generic.ICollection`1",
+            "CopyTo"
+        )]
+        [InlineData(
+            (int)WellKnownMember.System_Collections_Generic_ICollection_T__Remove,
+            "System.Collections.Generic.ICollection`1",
+            "Remove"
+        )]
+        [InlineData(
+            (int)WellKnownMember.System_Collections_Generic_IList_T__get_Item,
+            "System.Collections.Generic.IList`1",
+            "get_Item"
+        )]
+        [InlineData(
+            (int)WellKnownMember.System_Collections_Generic_IList_T__IndexOf,
+            "System.Collections.Generic.IList`1",
+            "IndexOf"
+        )]
+        [InlineData(
+            (int)WellKnownMember.System_Collections_Generic_IList_T__Insert,
+            "System.Collections.Generic.IList`1",
+            "Insert"
+        )]
+        [InlineData(
+            (int)WellKnownMember.System_Collections_Generic_IList_T__RemoveAt,
+            "System.Collections.Generic.IList`1",
+            "RemoveAt"
+        )]
+        [InlineData(
+            (int)WellKnownMember.System_NotSupportedException__ctor,
+            "System.NotSupportedException",
+            ".ctor"
+        )]
+        public void SynthesizedReadOnlyList_MissingWellKnownMembers(
+            int missingMember,
+            string missingMemberTypeName,
+            string missingMemberName
+        )
         {
             string source = """
                 using System.Collections.Generic;
@@ -7265,18 +8586,43 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (6,30): error CS0656: Missing compiler required member 'System.Collections.Generic.IReadOnlyCollection`1.Count'
                 //         IEnumerable<int> x = [0];
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "[0]").WithArguments(missingMemberTypeName, missingMemberName).WithLocation(6, 30),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "[0]")
+                    .WithArguments(missingMemberTypeName, missingMemberName)
+                    .WithLocation(6, 30),
                 // (7,30): error CS0656: Missing compiler required member 'System.Collections.Generic.IReadOnlyCollection`1.Count'
                 //         IEnumerable<int> y = [..x];
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "[..x]").WithArguments(missingMemberTypeName, missingMemberName).WithLocation(7, 30));
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "[..x]")
+                    .WithArguments(missingMemberTypeName, missingMemberName)
+                    .WithLocation(7, 30)
+            );
         }
 
         [Theory]
-        [InlineData((int)WellKnownMember.System_Collections_Generic_List_T__Contains, "System.Collections.Generic.List`1", "Contains")]
-        [InlineData((int)WellKnownMember.System_Collections_Generic_List_T__CopyTo, "System.Collections.Generic.List`1", "CopyTo")]
-        [InlineData((int)WellKnownMember.System_Collections_Generic_List_T__get_Item, "System.Collections.Generic.List`1", "get_Item")]
-        [InlineData((int)WellKnownMember.System_Collections_Generic_List_T__IndexOf, "System.Collections.Generic.List`1", "IndexOf")]
-        public void SynthesizedReadOnlyList_MissingWellKnownMembers_UnknownLength(int missingMember, string missingMemberTypeName, string missingMemberName)
+        [InlineData(
+            (int)WellKnownMember.System_Collections_Generic_List_T__Contains,
+            "System.Collections.Generic.List`1",
+            "Contains"
+        )]
+        [InlineData(
+            (int)WellKnownMember.System_Collections_Generic_List_T__CopyTo,
+            "System.Collections.Generic.List`1",
+            "CopyTo"
+        )]
+        [InlineData(
+            (int)WellKnownMember.System_Collections_Generic_List_T__get_Item,
+            "System.Collections.Generic.List`1",
+            "get_Item"
+        )]
+        [InlineData(
+            (int)WellKnownMember.System_Collections_Generic_List_T__IndexOf,
+            "System.Collections.Generic.List`1",
+            "IndexOf"
+        )]
+        public void SynthesizedReadOnlyList_MissingWellKnownMembers_UnknownLength(
+            int missingMember,
+            string missingMemberTypeName,
+            string missingMemberName
+        )
         {
             string source = """
                 using System.Collections.Generic;
@@ -7294,7 +8640,10 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (7,30): error CS0656: Missing compiler required member 'System.Collections.Generic.IReadOnlyCollection`1.Count'
                 //         IEnumerable<int> y = [..x];
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "[..x]").WithArguments(missingMemberTypeName, missingMemberName).WithLocation(7, 30));
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "[..x]")
+                    .WithArguments(missingMemberTypeName, missingMemberName)
+                    .WithLocation(7, 30)
+            );
         }
 
         [Fact]
@@ -7317,7 +8666,8 @@ static class Program
             CompileAndVerify(
                 new[] { source, s_collectionExtensions },
                 references: new[] { CSharpRef },
-                expectedOutput: "(<>z__ReadOnlyArray<System.Int32>) [1, 2, 0], (<>z__ReadOnlyArray<System.Object>) [1, 2, null], ");
+                expectedOutput: "(<>z__ReadOnlyArray<System.Int32>) [1, 2, 0], (<>z__ReadOnlyArray<System.Object>) [1, 2, null], "
+            );
         }
 
         [Fact]
@@ -7347,7 +8697,8 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (7,9): warning CS8602: Dereference of a possibly null reference.
                 //         x[0].ToString(); // 1
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "x[0]").WithLocation(7, 9));
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "x[0]").WithLocation(7, 9)
+            );
         }
 
         [Fact]
@@ -7383,7 +8734,8 @@ static class Program
                 Diagnostic(ErrorCode.WRN_NullAsNonNullable, "null").WithLocation(9, 27),
                 // (11,17): warning CS8625: Cannot convert null literal to non-nullable reference type.
                 //         y = [2, null]; // 3
-                Diagnostic(ErrorCode.WRN_NullAsNonNullable, "null").WithLocation(11, 17));
+                Diagnostic(ErrorCode.WRN_NullAsNonNullable, "null").WithLocation(11, 17)
+            );
         }
 
         [Fact]
@@ -7421,7 +8773,8 @@ static class Program
                 Diagnostic(ErrorCode.WRN_NullAsNonNullable, "null").WithLocation(15, 24),
                 // (17,17): warning CS8625: Cannot convert null literal to non-nullable reference type.
                 //         y = [2, null]; // 3
-                Diagnostic(ErrorCode.WRN_NullAsNonNullable, "null").WithLocation(17, 17));
+                Diagnostic(ErrorCode.WRN_NullAsNonNullable, "null").WithLocation(17, 17)
+            );
         }
 
         [Fact]
@@ -7485,11 +8838,20 @@ partial class Program
     }
 }
 """;
-            var comp = CreateCompilation(new[] { src, s_collectionExtensions }, targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(
+                new[] { src, s_collectionExtensions },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyDiagnostics();
 
-            var verifier = CompileAndVerify(comp, expectedOutput: IncludeExpectedOutput("[1, 2, 3],"), verify: Verification.FailsPEVerify);
-            verifier.VerifyIL("Program.M", """
+            var verifier = CompileAndVerify(
+                comp,
+                expectedOutput: IncludeExpectedOutput("[1, 2, 3],"),
+                verify: Verification.FailsPEVerify
+            );
+            verifier.VerifyIL(
+                "Program.M",
+                """
 {
   // Code size       21 (0x15)
   .maxstack  1
@@ -7499,10 +8861,15 @@ partial class Program
   IL_000f:  newobj     "MyCollection<int>?..ctor(MyCollection<int>)"
   IL_0014:  ret
 }
-""");
+"""
+            );
             var tree = comp.SyntaxTrees.First();
             var model = comp.GetSemanticModel(tree);
-            var returnValue = tree.GetRoot().DescendantNodes().OfType<ReturnStatementSyntax>().Last().Expression;
+            var returnValue = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<ReturnStatementSyntax>()
+                .Last()
+                .Expression;
             var conversion = model.GetConversion(returnValue);
             Assert.True(conversion.IsValid);
             Assert.True(conversion.IsNullable);
@@ -7516,7 +8883,10 @@ partial class Program
 
             var typeInfo = model.GetTypeInfo(returnValue);
             Assert.Null(typeInfo.Type);
-            Assert.Equal("MyCollection<System.Int32>?", typeInfo.ConvertedType.ToTestDisplayString());
+            Assert.Equal(
+                "MyCollection<System.Int32>?",
+                typeInfo.ConvertedType.ToTestDisplayString()
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/69447")]
@@ -7555,16 +8925,25 @@ partial class Program
     }
 }
 """;
-            var comp = CreateCompilation(new[] { src, s_collectionExtensions }, targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(
+                new[] { src, s_collectionExtensions },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyDiagnostics();
 
-            var verifier = CompileAndVerify(comp, expectedOutput: IncludeExpectedOutput("[1, 2, 3],"), verify: Verification.Fails);
+            var verifier = CompileAndVerify(
+                comp,
+                expectedOutput: IncludeExpectedOutput("[1, 2, 3],"),
+                verify: Verification.Fails
+            );
 
             // ILVerify:
             // [M]: Cannot change initonly field outside its .ctor. { Offset = 0x0 }
             // [M]: Field is not visible. { Offset = 0x0 }
             // [M]: Unexpected type on the stack. { Offset = 0x6, Found = address of '[78cb4f30-abc1-41ca-b5d2-939830104c72]<PrivateImplementationDetails>+__StaticArrayInitTypeSize=3', Expected = Native Int }
-            verifier.VerifyIL("Program.M", """
+            verifier.VerifyIL(
+                "Program.M",
+                """
 {
   // Code size       22 (0x16)
   .maxstack  2
@@ -7575,10 +8954,15 @@ partial class Program
   IL_0010:  newobj     "MyCollection<byte>?..ctor(MyCollection<byte>)"
   IL_0015:  ret
 }
-""");
+"""
+            );
             var tree = comp.SyntaxTrees.First();
             var model = comp.GetSemanticModel(tree);
-            var returnValue = tree.GetRoot().DescendantNodes().OfType<ReturnStatementSyntax>().Last().Expression;
+            var returnValue = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<ReturnStatementSyntax>()
+                .Last()
+                .Expression;
             var conversion = model.GetConversion(returnValue);
             Assert.True(conversion.IsValid);
             Assert.True(conversion.IsNullable);
@@ -7592,7 +8976,10 @@ partial class Program
 
             var typeInfo = model.GetTypeInfo(returnValue);
             Assert.Null(typeInfo.Type);
-            Assert.Equal("MyCollection<System.Byte>?", typeInfo.ConvertedType.ToTestDisplayString());
+            Assert.Equal(
+                "MyCollection<System.Byte>?",
+                typeInfo.ConvertedType.ToTestDisplayString()
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/69447")]
@@ -7628,12 +9015,15 @@ public class MyCollectionBuilder
     }
 }
 """;
-            var comp = CreateCompilation(new[] { src, s_collectionExtensions }, targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(
+                new[] { src, s_collectionExtensions },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyDiagnostics(
                 // 0.cs(11,1): warning CS8629: Nullable value type may be null.
                 // x.Value.ToString(); // 1
                 Diagnostic(ErrorCode.WRN_NullableValueTypeMayBeNull, "x").WithLocation(11, 1)
-                );
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/69447")]
@@ -7642,16 +9032,27 @@ public class MyCollectionBuilder
             string src = """
 int? x = [1, 2, 3];
 """;
-            var comp = CreateCompilation(new[] { src, s_collectionExtensions }, targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(
+                new[] { src, s_collectionExtensions },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyDiagnostics(
                 // 0.cs(1,10): error CS9174: Cannot initialize type 'int?' with a collection expression because the type is not constructible.
                 // int? x = [1, 2, 3];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[1, 2, 3]").WithArguments("int?").WithLocation(1, 10)
-                );
+                Diagnostic(
+                        ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible,
+                        "[1, 2, 3]"
+                    )
+                    .WithArguments("int?")
+                    .WithLocation(1, 10)
+            );
 
             var tree = comp.SyntaxTrees.First();
             var model = comp.GetSemanticModel(tree);
-            var collection = tree.GetRoot().DescendantNodes().OfType<CollectionExpressionSyntax>().Single();
+            var collection = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<CollectionExpressionSyntax>()
+                .Single();
             var conversion = model.GetConversion(collection);
             Assert.False(conversion.IsValid);
 
@@ -7696,11 +9097,20 @@ partial class Program
     }
 }
 """;
-            var comp = CreateCompilation(new[] { src, s_collectionExtensions }, targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(
+                new[] { src, s_collectionExtensions },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyDiagnostics();
 
-            var verifier = CompileAndVerify(comp, expectedOutput: IncludeExpectedOutput("[1, 2, 3],"), verify: Verification.FailsPEVerify);
-            verifier.VerifyIL("Program.M", """
+            var verifier = CompileAndVerify(
+                comp,
+                expectedOutput: IncludeExpectedOutput("[1, 2, 3],"),
+                verify: Verification.FailsPEVerify
+            );
+            verifier.VerifyIL(
+                "Program.M",
+                """
 {
   // Code size       21 (0x15)
   .maxstack  1
@@ -7710,16 +9120,25 @@ partial class Program
   IL_000f:  newobj     "MyCollection<int>?..ctor(MyCollection<int>)"
   IL_0014:  ret
 }
-""");
+"""
+            );
             var tree = comp.SyntaxTrees.First();
             var model = comp.GetSemanticModel(tree);
 
-            var cast = tree.GetRoot().DescendantNodes().OfType<ReturnStatementSyntax>().Last().Expression;
+            var cast = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<ReturnStatementSyntax>()
+                .Last()
+                .Expression;
             Assert.Equal("(MyCollection<int>?)[1, 2, 3]", cast.ToFullString());
             var castConversion = model.GetConversion(cast);
             Assert.True(castConversion.IsIdentity);
 
-            var value = tree.GetRoot().DescendantNodes().OfType<CastExpressionSyntax>().Last().Expression;
+            var value = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<CastExpressionSyntax>()
+                .Last()
+                .Expression;
             Assert.Equal("[1, 2, 3]", value.ToFullString());
             var conversion = model.GetConversion(value);
             Assert.True(conversion.IsIdentity);
@@ -7765,13 +9184,18 @@ partial class Program
     }
 }
 """;
-            var comp = CreateCompilation(new[] { src, s_collectionExtensions }, targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(
+                new[] { src, s_collectionExtensions },
+                targetFramework: TargetFramework.Net80
+            );
             comp.MakeMemberMissing(SpecialMember.System_Nullable_T__ctor);
             comp.VerifyDiagnostics(
                 // 0.cs(29,36): error CS0656: Missing compiler required member 'System.Nullable`1..ctor'
                 //         return (MyCollection<int>?)[1, 2, 3];
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "[1, 2, 3]").WithArguments("System.Nullable`1", ".ctor").WithLocation(29, 36)
-                );
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "[1, 2, 3]")
+                    .WithArguments("System.Nullable`1", ".ctor")
+                    .WithLocation(29, 36)
+            );
         }
 
         [Fact]
@@ -7810,11 +9234,20 @@ partial class Program
     }
 }
 """;
-            var comp = CreateCompilation(new[] { src, s_collectionExtensions }, targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(
+                new[] { src, s_collectionExtensions },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyDiagnostics();
 
-            var verifier = CompileAndVerify(comp, expectedOutput: IncludeExpectedOutput("[1, 2, 3],"), verify: Verification.FailsPEVerify);
-            verifier.VerifyIL("Program.M", """
+            var verifier = CompileAndVerify(
+                comp,
+                expectedOutput: IncludeExpectedOutput("[1, 2, 3],"),
+                verify: Verification.FailsPEVerify
+            );
+            verifier.VerifyIL(
+                "Program.M",
+                """
 {
   // Code size       16 (0x10)
   .maxstack  1
@@ -7823,27 +9256,38 @@ partial class Program
   IL_000a:  call       "MyCollection<int> MyCollectionBuilder.Create<int>(System.ReadOnlySpan<int>)"
   IL_000f:  ret
 }
-""");
+"""
+            );
             // We should extend IOperation conversions to represent IsCollectionExpression
             // Tracked by https://github.com/dotnet/roslyn/issues/68826
-            VerifyOperationTreeForTest<CollectionExpressionSyntax>(comp,
+            VerifyOperationTreeForTest<CollectionExpressionSyntax>(
+                comp,
                 """
                 IOperation:  (OperationKind.None, Type: MyCollection<System.Int32>) (Syntax: '[1, 2, 3]')
                 Children(3):
                     ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
                     ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 2) (Syntax: '2')
                     ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 3) (Syntax: '3')
-                """);
+                """
+            );
 
             var tree = comp.SyntaxTrees.First();
             var model = comp.GetSemanticModel(tree);
 
-            var cast = tree.GetRoot().DescendantNodes().OfType<ReturnStatementSyntax>().Last().Expression;
+            var cast = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<ReturnStatementSyntax>()
+                .Last()
+                .Expression;
             Assert.Equal("(MyCollection<int>)/*<bind>*/[1, 2, 3]/*</bind>*/", cast.ToFullString());
             var castConversion = model.GetConversion(cast);
             Assert.True(castConversion.IsIdentity);
 
-            var value = tree.GetRoot().DescendantNodes().OfType<CastExpressionSyntax>().Last().Expression;
+            var value = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<CastExpressionSyntax>()
+                .Last()
+                .Expression;
             Assert.Equal("[1, 2, 3]/*</bind>*/", value.ToFullString());
             var conversion = model.GetConversion(value);
             Assert.True(conversion.IsValid);
@@ -7868,11 +9312,20 @@ partial class Program
     }
 }
 """;
-            var comp = CreateCompilation(new[] { src, s_collectionExtensions }, targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(
+                new[] { src, s_collectionExtensions },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyDiagnostics();
 
-            var verifier = CompileAndVerify(comp, expectedOutput: IncludeExpectedOutput("[[1], [2]],"), verify: Verification.FailsPEVerify);
-            verifier.VerifyIL("Program.M", """
+            var verifier = CompileAndVerify(
+                comp,
+                expectedOutput: IncludeExpectedOutput("[[1], [2]],"),
+                verify: Verification.FailsPEVerify
+            );
+            verifier.VerifyIL(
+                "Program.M",
+                """
 {
   // Code size       33 (0x21)
   .maxstack  7
@@ -7898,10 +9351,12 @@ partial class Program
   IL_001f:  stelem.ref
   IL_0020:  ret
 }
-""");
+"""
+            );
             // We should extend IOperation conversions to represent IsCollectionExpression
             // Tracked by https://github.com/dotnet/roslyn/issues/68826
-            VerifyOperationTreeForTest<CollectionExpressionSyntax>(comp,
+            VerifyOperationTreeForTest<CollectionExpressionSyntax>(
+                comp,
                 """
                 IOperation:  (OperationKind.None, Type: System.Int32[][]) (Syntax: '[[1], [2]]')
                 Children(2):
@@ -7917,11 +9372,15 @@ partial class Program
                         IOperation:  (OperationKind.None, Type: System.Int32[]) (Syntax: '[2]')
                           Children(1):
                               ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 2) (Syntax: '2')
-                """);
+                """
+            );
             var tree = comp.SyntaxTrees.First();
             var model = comp.GetSemanticModel(tree);
 
-            var nestedCollection = tree.GetRoot().DescendantNodes().OfType<CollectionExpressionSyntax>().Last();
+            var nestedCollection = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<CollectionExpressionSyntax>()
+                .Last();
             Assert.Equal("[2]", nestedCollection.ToFullString());
 
             var conversion = model.GetConversion(nestedCollection);
@@ -7970,13 +9429,22 @@ partial class Program
     }
 }
 """;
-            var comp = CreateCompilation(new[] { src, s_collectionExtensions }, targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(
+                new[] { src, s_collectionExtensions },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyDiagnostics();
 
             // ILVerify failure:
             //[InlineArrayAsReadOnlySpan]: Return type is ByRef, TypedReference, ArgHandle, or ArgIterator. { Offset = 0x11 }
-            var verifier = CompileAndVerify(comp, expectedOutput: IncludeExpectedOutput("[[1], [2]],"), verify: Verification.Fails);
-            verifier.VerifyIL("Program.M", """
+            var verifier = CompileAndVerify(
+                comp,
+                expectedOutput: IncludeExpectedOutput("[[1], [2]],"),
+                verify: Verification.Fails
+            );
+            verifier.VerifyIL(
+                "Program.M",
+                """
 {
   // Code size       88 (0x58)
   .maxstack  2
@@ -8005,12 +9473,16 @@ partial class Program
   IL_0052:  call       "MyCollection<MyCollection<int>?> MyCollectionBuilder.Create<MyCollection<int>?>(System.ReadOnlySpan<MyCollection<int>?>)"
   IL_0057:  ret
 }
-""");
+"""
+            );
 
             var tree = comp.SyntaxTrees.First();
             var model = comp.GetSemanticModel(tree);
 
-            var nestedCollection = tree.GetRoot().DescendantNodes().OfType<CollectionExpressionSyntax>().Last();
+            var nestedCollection = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<CollectionExpressionSyntax>()
+                .Last();
             Assert.Equal("[2]", nestedCollection.ToFullString());
 
             var conversion = model.GetConversion(nestedCollection);
@@ -8026,7 +9498,10 @@ partial class Program
 
             var typeInfo = model.GetTypeInfo(nestedCollection);
             Assert.Null(typeInfo.Type);
-            Assert.Equal("MyCollection<System.Int32>?", typeInfo.ConvertedType.ToTestDisplayString());
+            Assert.Equal(
+                "MyCollection<System.Int32>?",
+                typeInfo.ConvertedType.ToTestDisplayString()
+            );
         }
 
         [Fact]
@@ -8060,7 +9535,9 @@ partial class Program
                     }
                 }
                 """;
-            CompileAndVerify(source, expectedOutput: """
+            CompileAndVerify(
+                source,
+                expectedOutput: """
                 Get 1
                 Add 1
                 Get 2
@@ -8073,7 +9550,8 @@ partial class Program
                 Get 5
                 Add 5
                 Add C`1[System.Int32]
-                """);
+                """
+            );
         }
 
         // Ensure collection expression conversions are not standard implicit conversions
@@ -8100,13 +9578,23 @@ partial class Program
             comp.VerifyEmitDiagnostics(
                 // (9,15): error CS9174: Cannot initialize type 'S' with a collection expression because the type is not constructible.
                 //         S s = [];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]").WithArguments("S").WithLocation(9, 15),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]")
+                    .WithArguments("S")
+                    .WithLocation(9, 15),
                 // (10,13): error CS9174: Cannot initialize type 'S' with a collection expression because the type is not constructible.
                 //         s = [1, 2];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[1, 2]").WithArguments("S").WithLocation(10, 13),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[1, 2]")
+                    .WithArguments("S")
+                    .WithLocation(10, 13),
                 // (11,13): error CS9174: Cannot initialize type 'S' with a collection expression because the type is not constructible.
                 //         s = (S)([3, 4]);
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "(S)([3, 4])").WithArguments("S").WithLocation(11, 13));
+                Diagnostic(
+                        ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible,
+                        "(S)([3, 4])"
+                    )
+                    .WithArguments("S")
+                    .WithLocation(11, 13)
+            );
         }
 
         [Fact]
@@ -8131,13 +9619,23 @@ partial class Program
             comp.VerifyEmitDiagnostics(
                 // (9,15): error CS9174: Cannot initialize type 'S' with a collection expression because the type is not constructible.
                 //         S s = [];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]").WithArguments("S").WithLocation(9, 15),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]")
+                    .WithArguments("S")
+                    .WithLocation(9, 15),
                 // (10,13): error CS9174: Cannot initialize type 'S' with a collection expression because the type is not constructible.
                 //         s = [1, 2];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[1, 2]").WithArguments("S").WithLocation(10, 13),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[1, 2]")
+                    .WithArguments("S")
+                    .WithLocation(10, 13),
                 // (11,13): error CS9174: Cannot initialize type 'S' with a collection expression because the type is not constructible.
                 //         s = (S)([3, 4]);
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "(S)([3, 4])").WithArguments("S").WithLocation(11, 13));
+                Diagnostic(
+                        ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible,
+                        "(S)([3, 4])"
+                    )
+                    .WithArguments("S")
+                    .WithLocation(11, 13)
+            );
         }
 
         [Fact]
@@ -8157,14 +9655,21 @@ partial class Program
                 }
                 """;
 
-            var comp = CreateCompilation(new[] { source, s_collectionExtensions }, options: TestOptions.ReleaseExe);
+            var comp = CreateCompilation(
+                new[] { source, s_collectionExtensions },
+                options: TestOptions.ReleaseExe
+            );
             comp.VerifyEmitDiagnostics(
                 // 0.cs(1,28): warning CS9113: Parameter 'z' is unread.
                 // struct S(int x, int y, int z)
-                Diagnostic(ErrorCode.WRN_UnreadPrimaryConstructorParameter, "z").WithArguments("z").WithLocation(1, 28));
+                Diagnostic(ErrorCode.WRN_UnreadPrimaryConstructorParameter, "z")
+                    .WithArguments("z")
+                    .WithLocation(1, 28)
+            );
 
             var verifier = CompileAndVerify(comp, expectedOutput: "[1, 2], [2], ");
-            verifier.VerifyIL("S..ctor(int, int, int)",
+            verifier.VerifyIL(
+                "S..ctor(int, int, int)",
                 """
                 {
                   // Code size       33 (0x21)
@@ -8187,7 +9692,8 @@ partial class Program
                   IL_001b:  stfld      "int[] S.F"
                   IL_0020:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -8208,14 +9714,25 @@ partial class Program
                 }
                 """;
 
-            var comp = CreateCompilation(new[] { source, s_collectionExtensions }, options: TestOptions.ReleaseExe);
+            var comp = CreateCompilation(
+                new[] { source, s_collectionExtensions },
+                options: TestOptions.ReleaseExe
+            );
             comp.VerifyEmitDiagnostics(
                 // 0.cs(2,27): warning CS9113: Parameter 'z' is unread.
                 // class C(int x, int y, int z)
-                Diagnostic(ErrorCode.WRN_UnreadPrimaryConstructorParameter, "z").WithArguments("z").WithLocation(2, 27));
+                Diagnostic(ErrorCode.WRN_UnreadPrimaryConstructorParameter, "z")
+                    .WithArguments("z")
+                    .WithLocation(2, 27)
+            );
 
-            var verifier = CompileAndVerify(comp, verify: Verification.Fails, expectedOutput: "[1, 2], [2], ");
-            verifier.VerifyIL("C..ctor(int, int, int)",
+            var verifier = CompileAndVerify(
+                comp,
+                verify: Verification.Fails,
+                expectedOutput: "[1, 2], [2], "
+            );
+            verifier.VerifyIL(
+                "C..ctor(int, int, int)",
                 """
                 {
                   // Code size       52 (0x34)
@@ -8241,7 +9758,8 @@ partial class Program
                   IL_002e:  call       "object..ctor()"
                   IL_0033:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -8268,14 +9786,21 @@ partial class Program
                 }
                 """;
 
-            var comp = CreateCompilation(new[] { source, s_collectionExtensions }, options: TestOptions.ReleaseExe);
+            var comp = CreateCompilation(
+                new[] { source, s_collectionExtensions },
+                options: TestOptions.ReleaseExe
+            );
             comp.VerifyEmitDiagnostics(
                 // 0.cs(7,13): warning CS9113: Parameter 'x' is unread.
                 // class B(int x, int y, int z) : A([y, z], [z])
-                Diagnostic(ErrorCode.WRN_UnreadPrimaryConstructorParameter, "x").WithArguments("x").WithLocation(7, 13));
+                Diagnostic(ErrorCode.WRN_UnreadPrimaryConstructorParameter, "x")
+                    .WithArguments("x")
+                    .WithLocation(7, 13)
+            );
 
             var verifier = CompileAndVerify(comp, expectedOutput: "[2, 3], [3], ");
-            verifier.VerifyIL("B..ctor(int, int, int)",
+            verifier.VerifyIL(
+                "B..ctor(int, int, int)",
                 """
                 {
                   // Code size       33 (0x21)
@@ -8298,7 +9823,8 @@ partial class Program
                   IL_001b:  call       "A..ctor(int[], System.Collections.Generic.List<int>)"
                   IL_0020:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -8338,30 +9864,116 @@ partial class Program
             comp.VerifyEmitDiagnostics(
                 // (20,17): error CS9174: Cannot initialize type 'S2' with a collection expression because the type is not constructible.
                 //         S2 v6 = [];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]").WithArguments("S2").WithLocation(20, 17),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]")
+                    .WithArguments("S2")
+                    .WithLocation(20, 17),
                 // (26,19): error CS9174: Cannot initialize type 'S2' with a collection expression because the type is not constructible.
                 //         var v12 = (S2)([]);
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "(S2)([])").WithArguments("S2").WithLocation(26, 19));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "(S2)([])")
+                    .WithArguments("S2")
+                    .WithLocation(26, 19)
+            );
 
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
-            var collections = tree.GetRoot().DescendantNodes().OfType<CollectionExpressionSyntax>().ToArray();
+            var collections = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<CollectionExpressionSyntax>()
+                .ToArray();
             Assert.Equal(12, collections.Length);
-            VerifyTypes(model, collections[0], expectedType: null, expectedConvertedType: "System.Int32[]", ConversionKind.CollectionExpression);
-            VerifyTypes(model, collections[1], expectedType: null, expectedConvertedType: "System.Collections.Generic.List<System.Object>", ConversionKind.CollectionExpression);
-            VerifyTypes(model, collections[2], expectedType: null, expectedConvertedType: "System.Span<System.Int32>", ConversionKind.CollectionExpression);
-            VerifyTypes(model, collections[3], expectedType: null, expectedConvertedType: "System.ReadOnlySpan<System.Object>", ConversionKind.CollectionExpression);
-            VerifyTypes(model, collections[4], expectedType: null, expectedConvertedType: "S1", ConversionKind.CollectionExpression);
-            VerifyTypes(model, collections[5], expectedType: null, expectedConvertedType: "S2", ConversionKind.NoConversion);
-            VerifyTypes(model, collections[6], expectedType: null, expectedConvertedType: null, ConversionKind.Identity);
-            VerifyTypes(model, collections[7], expectedType: null, expectedConvertedType: null, ConversionKind.Identity);
-            VerifyTypes(model, collections[8], expectedType: null, expectedConvertedType: null, ConversionKind.Identity);
-            VerifyTypes(model, collections[9], expectedType: null, expectedConvertedType: null, ConversionKind.Identity);
-            VerifyTypes(model, collections[10], expectedType: null, expectedConvertedType: null, ConversionKind.Identity);
-            VerifyTypes(model, collections[11], expectedType: null, expectedConvertedType: null, ConversionKind.Identity);
+            VerifyTypes(
+                model,
+                collections[0],
+                expectedType: null,
+                expectedConvertedType: "System.Int32[]",
+                ConversionKind.CollectionExpression
+            );
+            VerifyTypes(
+                model,
+                collections[1],
+                expectedType: null,
+                expectedConvertedType: "System.Collections.Generic.List<System.Object>",
+                ConversionKind.CollectionExpression
+            );
+            VerifyTypes(
+                model,
+                collections[2],
+                expectedType: null,
+                expectedConvertedType: "System.Span<System.Int32>",
+                ConversionKind.CollectionExpression
+            );
+            VerifyTypes(
+                model,
+                collections[3],
+                expectedType: null,
+                expectedConvertedType: "System.ReadOnlySpan<System.Object>",
+                ConversionKind.CollectionExpression
+            );
+            VerifyTypes(
+                model,
+                collections[4],
+                expectedType: null,
+                expectedConvertedType: "S1",
+                ConversionKind.CollectionExpression
+            );
+            VerifyTypes(
+                model,
+                collections[5],
+                expectedType: null,
+                expectedConvertedType: "S2",
+                ConversionKind.NoConversion
+            );
+            VerifyTypes(
+                model,
+                collections[6],
+                expectedType: null,
+                expectedConvertedType: null,
+                ConversionKind.Identity
+            );
+            VerifyTypes(
+                model,
+                collections[7],
+                expectedType: null,
+                expectedConvertedType: null,
+                ConversionKind.Identity
+            );
+            VerifyTypes(
+                model,
+                collections[8],
+                expectedType: null,
+                expectedConvertedType: null,
+                ConversionKind.Identity
+            );
+            VerifyTypes(
+                model,
+                collections[9],
+                expectedType: null,
+                expectedConvertedType: null,
+                ConversionKind.Identity
+            );
+            VerifyTypes(
+                model,
+                collections[10],
+                expectedType: null,
+                expectedConvertedType: null,
+                ConversionKind.Identity
+            );
+            VerifyTypes(
+                model,
+                collections[11],
+                expectedType: null,
+                expectedConvertedType: null,
+                ConversionKind.Identity
+            );
         }
 
-        private static void VerifyTypes(SemanticModel model, ExpressionSyntax expr, string expectedType, string expectedConvertedType, ConversionKind expectedConversionKind)
+        private static void VerifyTypes(
+            SemanticModel model,
+            ExpressionSyntax expr,
+            string expectedType,
+            string expectedConvertedType,
+            ConversionKind expectedConversionKind
+        )
         {
             var typeInfo = model.GetTypeInfo(expr);
             var conversion = model.GetConversion(expr);
@@ -8430,8 +10042,10 @@ partial class Program
                 references: new[] { refA },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Fails,
-                expectedOutput: IncludeExpectedOutput("[], [0, 1, 2], [3, 4, null], "));
-            verifier.VerifyIL("Program.F0",
+                expectedOutput: IncludeExpectedOutput("[], [0, 1, 2], [3, 4, null], ")
+            );
+            verifier.VerifyIL(
+                "Program.F0",
                 """
                 {
                   // Code size       16 (0x10)
@@ -8441,8 +10055,10 @@ partial class Program
                   IL_000a:  call       "MyCollection<string> MyCollectionBuilder.Create<string>(System.ReadOnlySpan<string>)"
                   IL_000f:  ret
                 }
-                """);
-            verifier.VerifyIL("Program.F1",
+                """
+            );
+            verifier.VerifyIL(
+                "Program.F1",
                 """
                 {
                   // Code size       16 (0x10)
@@ -8452,8 +10068,10 @@ partial class Program
                   IL_000a:  call       "MyCollection<int> MyCollectionBuilder.Create<int>(System.ReadOnlySpan<int>)"
                   IL_000f:  ret
                 }
-                """);
-            verifier.VerifyIL("Program.F2",
+                """
+            );
+            verifier.VerifyIL(
+                "Program.F2",
                 """
                 {
                   // Code size       57 (0x39)
@@ -8483,7 +10101,8 @@ partial class Program
                   IL_0033:  call       "MyCollection<object> MyCollectionBuilder.Create<object>(System.ReadOnlySpan<object>)"
                   IL_0038:  ret
                 }
-                """);
+                """
+            );
 
             string sourceB2 = """
                 class Program
@@ -8505,8 +10124,10 @@ partial class Program
                 references: new[] { refA },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Fails,
-                expectedOutput: IncludeExpectedOutput("[1, 2, 3], "));
-            verifier.VerifyIL("Program.F2",
+                expectedOutput: IncludeExpectedOutput("[1, 2, 3], ")
+            );
+            verifier.VerifyIL(
+                "Program.F2",
                 """
                 {
                   // Code size       79 (0x4f)
@@ -8551,14 +10172,17 @@ partial class Program
                   IL_0049:  call       "MyCollection<object> MyCollectionBuilder.Create<object>(System.ReadOnlySpan<object>)"
                   IL_004e:  ret
                 }
-                """);
+                """
+            );
         }
 
         [CombinatorialData]
         [Theory]
         public void CollectionBuilder_02A(
-            [CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)] TargetFramework targetFramework,
-            bool useCompilationReference)
+            [CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)]
+                TargetFramework targetFramework,
+            bool useCompilationReference
+        )
         {
             string sourceA = """
                 using System;
@@ -8581,9 +10205,10 @@ partial class Program
                     }
                 }
                 """;
-            var sources = targetFramework == TargetFramework.Net70
-                ? new[] { sourceA, CollectionBuilderAttributeDefinition }
-                : new[] { sourceA };
+            var sources =
+                targetFramework == TargetFramework.Net70
+                    ? new[] { sourceA, CollectionBuilderAttributeDefinition }
+                    : new[] { sourceA };
             var comp = CreateCompilation(sources, targetFramework: targetFramework);
             var refA = AsReference(comp, useCompilationReference);
 
@@ -8601,14 +10226,21 @@ partial class Program
                     }
                 }
                 """;
-            comp = CreateCompilation(new[] { sourceB, s_collectionExtensions }, references: new[] { refA }, targetFramework: targetFramework, options: TestOptions.ReleaseExe);
+            comp = CreateCompilation(
+                new[] { sourceB, s_collectionExtensions },
+                references: new[] { refA },
+                targetFramework: targetFramework,
+                options: TestOptions.ReleaseExe
+            );
             comp.VerifyEmitDiagnostics();
 
             var verifier = CompileAndVerify(
                 comp,
                 symbolValidator: module =>
                 {
-                    var type = module.GlobalNamespace.GetTypeMembers("<>y__InlineArray3").SingleOrDefault();
+                    var type = module.GlobalNamespace
+                        .GetTypeMembers("<>y__InlineArray3")
+                        .SingleOrDefault();
                     if (targetFramework == TargetFramework.Net80)
                     {
                         Assert.NotNull(type);
@@ -8618,11 +10250,15 @@ partial class Program
                         Assert.Null(type);
                     }
                 },
-                verify: targetFramework == TargetFramework.Net80 ? Verification.Fails : Verification.FailsPEVerify,
-                expectedOutput: IncludeExpectedOutput("[1, 2, null], "));
+                verify: targetFramework == TargetFramework.Net80
+                    ? Verification.Fails
+                    : Verification.FailsPEVerify,
+                expectedOutput: IncludeExpectedOutput("[1, 2, null], ")
+            );
             if (targetFramework == TargetFramework.Net80)
             {
-                verifier.VerifyIL("Program.F",
+                verifier.VerifyIL(
+                    "Program.F",
                     """
                     {
                       // Code size       74 (0x4a)
@@ -8652,11 +10288,13 @@ partial class Program
                       IL_0044:  call       "MyCollection<int?> MyCollectionBuilder.Create<int?>(System.ReadOnlySpan<int?>)"
                       IL_0049:  ret
                     }
-                    """);
+                    """
+                );
             }
             else
             {
-                verifier.VerifyIL("Program.F",
+                verifier.VerifyIL(
+                    "Program.F",
                     """
                     {
                       // Code size       43 (0x2b)
@@ -8677,7 +10315,8 @@ partial class Program
                       IL_0025:  call       "MyCollection<int?> MyCollectionBuilder.Create<int?>(System.ReadOnlySpan<int?>)"
                       IL_002a:  ret
                     }
-                    """);
+                    """
+                );
             }
         }
 
@@ -8723,20 +10362,31 @@ partial class Program
                 }
                 """;
             var comp = CreateCompilationWithSpanAndMemoryExtensions(
-                new[] { sourceA, sourceB, s_collectionExtensions, CollectionBuilderAttributeDefinition },
+                new[]
+                {
+                    sourceA,
+                    sourceB,
+                    s_collectionExtensions,
+                    CollectionBuilderAttributeDefinition
+                },
                 targetFramework: TargetFramework.NetFramework,
-                options: TestOptions.ReleaseExe);
+                options: TestOptions.ReleaseExe
+            );
             comp.VerifyEmitDiagnostics();
 
             var verifier = CompileAndVerify(
                 comp,
                 symbolValidator: module =>
                 {
-                    var type = module.GlobalNamespace.GetTypeMembers("<>y__InlineArray3").SingleOrDefault();
+                    var type = module.GlobalNamespace
+                        .GetTypeMembers("<>y__InlineArray3")
+                        .SingleOrDefault();
                     Assert.Null(type);
                 },
-                expectedOutput: "[1, 2, null], ");
-            verifier.VerifyIL("Program.F",
+                expectedOutput: "[1, 2, null], "
+            );
+            verifier.VerifyIL(
+                "Program.F",
                 """
                 {
                   // Code size       43 (0x2b)
@@ -8757,7 +10407,8 @@ partial class Program
                   IL_0025:  call       "MyCollection<int?> MyCollectionBuilder.Create<int?>(System.ReadOnlySpan<int?>)"
                   IL_002a:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -8799,9 +10450,13 @@ partial class Program
                 comp,
                 symbolValidator: module =>
                 {
-                    AssertEx.Equal(new[] { "<>y__InlineArray2", "<>y__InlineArray3" }, getInlineArrayTypeNames(module));
+                    AssertEx.Equal(
+                        new[] { "<>y__InlineArray2", "<>y__InlineArray3" },
+                        getInlineArrayTypeNames(module)
+                    );
                 },
-                verify: Verification.Skipped);
+                verify: Verification.Skipped
+            );
             var refA = comp.EmitToImageReference();
 
             string sourceB = """
@@ -8822,20 +10477,29 @@ partial class Program
                     }
                 }
                 """;
-            comp = CreateCompilation(sourceB, references: new[] { refA }, targetFramework: TargetFramework.Net80);
+            comp = CreateCompilation(
+                sourceB,
+                references: new[] { refA },
+                targetFramework: TargetFramework.Net80
+            );
             CompileAndVerify(
                 comp,
                 symbolValidator: module =>
                 {
-                    AssertEx.Equal(new[] { "<>y__InlineArray1", "<>y__InlineArray3" }, getInlineArrayTypeNames(module));
+                    AssertEx.Equal(
+                        new[] { "<>y__InlineArray1", "<>y__InlineArray3" },
+                        getInlineArrayTypeNames(module)
+                    );
                 },
-                verify: Verification.Skipped);
+                verify: Verification.Skipped
+            );
 
             const int n = 1025;
             var builder = new System.Text.StringBuilder();
             for (int i = 0; i < n; i++)
             {
-                if (i > 0) builder.Append(", ");
+                if (i > 0)
+                    builder.Append(", ");
                 builder.Append(i);
             }
             string sourceC = $$"""
@@ -8850,25 +10514,40 @@ partial class Program
                     }
                 }
                 """;
-            comp = CreateCompilation(sourceC, references: new[] { refA }, targetFramework: TargetFramework.Net80, options: TestOptions.ReleaseExe);
+            comp = CreateCompilation(
+                sourceC,
+                references: new[] { refA },
+                targetFramework: TargetFramework.Net80,
+                options: TestOptions.ReleaseExe
+            );
             CompileAndVerify(
                 comp,
                 symbolValidator: module =>
                 {
-                    AssertEx.Equal(new[] { $"<>y__InlineArray{n}" }, getInlineArrayTypeNames(module));
+                    AssertEx.Equal(
+                        new[] { $"<>y__InlineArray{n}" },
+                        getInlineArrayTypeNames(module)
+                    );
                 },
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput($"{n}"));
+                expectedOutput: IncludeExpectedOutput($"{n}")
+            );
 
             static ImmutableArray<string> getInlineArrayTypeNames(ModuleSymbol module)
             {
-                return module.GlobalNamespace.GetTypeMembers().WhereAsArray(t => t.Name.StartsWith("<>y__InlineArray")).SelectAsArray(t => t.Name);
+                return module.GlobalNamespace
+                    .GetTypeMembers()
+                    .WhereAsArray(t => t.Name.StartsWith("<>y__InlineArray"))
+                    .SelectAsArray(t => t.Name);
             }
         }
 
         [CombinatorialData]
         [Theory]
-        public void CollectionBuilder_RefStructCollection(bool useCompilationReference, bool useScoped)
+        public void CollectionBuilder_RefStructCollection(
+            bool useCompilationReference,
+            bool useScoped
+        )
         {
             string qualifier = useScoped ? "scoped " : "";
             string sourceA = $$"""
@@ -8917,8 +10596,10 @@ partial class Program
                 references: new[] { refA },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[1, 2, 3], "));
-            verifier.VerifyIL("Program.F",
+                expectedOutput: IncludeExpectedOutput("[1, 2, 3], ")
+            );
+            verifier.VerifyIL(
+                "Program.F",
                 $$"""
                 {
                     // Code size       75 (0x4b)
@@ -8954,7 +10635,8 @@ partial class Program
                     IL_0045:  call       "object[] MyCollection<object>.ToArray()"
                     IL_004a:  ret
                 }
-                """);
+                """
+            );
         }
 
         [CombinatorialData]
@@ -9000,12 +10682,15 @@ partial class Program
                 references: new[] { refA },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Fails,
-                expectedOutput: IncludeExpectedOutput("[], [1, 2, 3], "));
+                expectedOutput: IncludeExpectedOutput("[], [1, 2, 3], ")
+            );
         }
 
         [CombinatorialData]
         [Theory]
-        public void CollectionBuilder_InterfaceCollection_ReturnInterface(bool useCompilationReference)
+        public void CollectionBuilder_InterfaceCollection_ReturnInterface(
+            bool useCompilationReference
+        )
         {
             string sourceA = """
                 using System;
@@ -9049,12 +10734,17 @@ partial class Program
                 references: new[] { refA },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.FailsPEVerify,
-                expectedOutput: IncludeExpectedOutput("(MyCollectionBuilder.MyCollection<System.String>) [], (MyCollectionBuilder.MyCollection<System.Int32>) [1, 2, 3], "));
+                expectedOutput: IncludeExpectedOutput(
+                    "(MyCollectionBuilder.MyCollection<System.String>) [], (MyCollectionBuilder.MyCollection<System.Int32>) [1, 2, 3], "
+                )
+            );
         }
 
         [CombinatorialData]
         [Theory]
-        public void CollectionBuilder_InterfaceCollection_ReturnImplementation(bool useCompilationReference)
+        public void CollectionBuilder_InterfaceCollection_ReturnImplementation(
+            bool useCompilationReference
+        )
         {
             string sourceA = """
                 using System;
@@ -9098,7 +10788,10 @@ partial class Program
                 references: new[] { refA },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.FailsPEVerify,
-                expectedOutput: IncludeExpectedOutput("(MyCollectionBuilder.MyCollection<System.String>) [], (MyCollectionBuilder.MyCollection<System.Int32>) [1, 2, 3], "));
+                expectedOutput: IncludeExpectedOutput(
+                    "(MyCollectionBuilder.MyCollection<System.String>) [], (MyCollectionBuilder.MyCollection<System.Int32>) [1, 2, 3], "
+                )
+            );
         }
 
         [CombinatorialData]
@@ -9147,7 +10840,10 @@ partial class Program
                 references: new[] { refA },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Fails,
-                expectedOutput: IncludeExpectedOutput("(Container.MyCollection<System.String>) [], (Container.MyCollection<System.Object>) [1, 2, 3], "));
+                expectedOutput: IncludeExpectedOutput(
+                    "(Container.MyCollection<System.String>) [], (Container.MyCollection<System.Object>) [1, 2, 3], "
+                )
+            );
         }
 
         [CombinatorialData]
@@ -9182,14 +10878,23 @@ partial class Program
                     }
                 }
                 """;
-            comp = CreateCompilation(sourceB, references: new[] { refA }, targetFramework: TargetFramework.Net80);
+            comp = CreateCompilation(
+                sourceB,
+                references: new[] { refA },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // (6,34): error CS9188: 'MyCollection<object>' has a CollectionBuilderAttribute but no element type.
                 //         MyCollection<object> x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderNoElementType, "[]").WithArguments("MyCollection<object>").WithLocation(6, 34),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderNoElementType, "[]")
+                    .WithArguments("MyCollection<object>")
+                    .WithLocation(6, 34),
                 // (7,31): error CS9188: 'MyCollection<int>' has a CollectionBuilderAttribute but no element type.
                 //         MyCollection<int> y = [1, 2, 3];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderNoElementType, "[1, 2, 3]").WithArguments("MyCollection<int>").WithLocation(7, 31));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderNoElementType, "[1, 2, 3]")
+                    .WithArguments("MyCollection<int>")
+                    .WithLocation(7, 31)
+            );
         }
 
         [CombinatorialData]
@@ -9254,7 +10959,8 @@ partial class Program
                 references: new[] { refA },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.FailsPEVerify,
-                expectedOutput: IncludeExpectedOutput("[], [1, 2, 3], "));
+                expectedOutput: IncludeExpectedOutput("[], [1, 2, 3], ")
+            );
         }
 
         [CombinatorialData]
@@ -9319,7 +11025,8 @@ partial class Program
                 references: new[] { refA },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Fails,
-                expectedOutput: IncludeExpectedOutput("[], [1, 2, 3], "));
+                expectedOutput: IncludeExpectedOutput("[], [1, 2, 3], ")
+            );
         }
 
         [CombinatorialData]
@@ -9363,7 +11070,8 @@ partial class Program
                 references: new[] { refA },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Fails,
-                expectedOutput: IncludeExpectedOutput("[], [1, 2, 3], "));
+                expectedOutput: IncludeExpectedOutput("[], [1, 2, 3], ")
+            );
         }
 
         [CombinatorialData]
@@ -9400,14 +11108,23 @@ partial class Program
                     }
                 }
                 """;
-            comp = CreateCompilation(sourceB, references: new[] { refA }, targetFramework: TargetFramework.Net80);
+            comp = CreateCompilation(
+                sourceB,
+                references: new[] { refA },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // (6,34): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<object>' and return type 'MyCollection<T>'.
                 //         MyCollection<object> x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("Create", "object", "MyCollection<T>").WithLocation(6, 34),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("Create", "object", "MyCollection<T>")
+                    .WithLocation(6, 34),
                 // (7,31): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<object>' and return type 'MyCollection<T>'.
                 //         MyCollection<int> y = [1, 2, 3];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, 3]").WithArguments("Create", "object", "MyCollection<T>").WithLocation(7, 31));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, 3]")
+                    .WithArguments("Create", "object", "MyCollection<T>")
+                    .WithLocation(7, 31)
+            );
         }
 
         [CombinatorialData]
@@ -9459,7 +11176,10 @@ partial class Program
                 references: new[] { refA },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Fails,
-                expectedOutput: IncludeExpectedOutput("(C<System.String>) [null], (C<System.Int32>) [E(1), null], "));
+                expectedOutput: IncludeExpectedOutput(
+                    "(C<System.String>) [null], (C<System.Int32>) [E(1), null], "
+                )
+            );
         }
 
         [Fact]
@@ -9493,7 +11213,10 @@ partial class Program
             comp.VerifyEmitDiagnostics(
                 // (20,26): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<object>' and return type 'MyCollection'.
                 //         MyCollection c = [null];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]").WithArguments("Create", "object", "MyCollection").WithLocation(20, 26));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]")
+                    .WithArguments("Create", "object", "MyCollection")
+                    .WithLocation(20, 26)
+            );
         }
 
         [Fact]
@@ -9528,7 +11251,10 @@ partial class Program
             comp.VerifyEmitDiagnostics(
                 // (21,26): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<object>' and return type 'MyCollection'.
                 //         MyCollection c = [null];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]").WithArguments("Create", "object", "MyCollection").WithLocation(21, 26));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]")
+                    .WithArguments("Create", "object", "MyCollection")
+                    .WithLocation(21, 26)
+            );
         }
 
         [CombinatorialData]
@@ -9579,7 +11305,8 @@ partial class Program
                 references: new[] { refA },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Fails,
-                expectedOutput: IncludeExpectedOutput("[], [[one, 1], [two, 2]], "));
+                expectedOutput: IncludeExpectedOutput("[], [[one, 1], [two, 2]], ")
+            );
         }
 
         [Fact]
@@ -9604,7 +11331,11 @@ partial class Program
                     IEnumerator IEnumerable.GetEnumerator() => default;
                 }
                 """;
-            comp = CreateCompilation(sourceB, references: new[] { refA }, targetFramework: TargetFramework.Net80);
+            comp = CreateCompilation(
+                sourceB,
+                references: new[] { refA },
+                targetFramework: TargetFramework.Net80
+            );
             var refB = comp.EmitToImageReference();
 
             string sourceC = """
@@ -9619,14 +11350,23 @@ partial class Program
                     }
                 }
                 """;
-            comp = CreateCompilation(sourceC, references: new[] { refB }, targetFramework: TargetFramework.Net80);
+            comp = CreateCompilation(
+                sourceC,
+                references: new[] { refB },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // (6,31): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<int> x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(6, 31),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(6, 31),
                 // (7,34): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<string> y = [null];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(7, 34));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(7, 34)
+            );
         }
 
         [CombinatorialData]
@@ -9662,14 +11402,23 @@ partial class Program
                     }
                 }
                 """;
-            comp = CreateCompilation(sourceB, references: new[] { refA }, targetFramework: TargetFramework.Net80);
+            comp = CreateCompilation(
+                sourceB,
+                references: new[] { refA },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // (6,31): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<int> x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(6, 31),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(6, 31),
                 // (7,34): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<string> y = [null];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(7, 34));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(7, 34)
+            );
         }
 
         [Fact]
@@ -9698,17 +11447,26 @@ partial class Program
                     }
                 }
                 """;
-            var comp = CreateCompilation(new[] { sourceA, sourceB }, targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(
+                new[] { sourceA, sourceB },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // 0.cs(4,2): error CS9185: The CollectionBuilderAttribute builder type must be a non-generic class or struct.
                 // [CollectionBuilder(null, "Create")]
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeInvalidType, "CollectionBuilder").WithLocation(4, 2),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeInvalidType, "CollectionBuilder")
+                    .WithLocation(4, 2),
                 // 1.cs(6,31): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<int> x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(6, 31),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(6, 31),
                 // 1.cs(7,34): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<string> y = [null];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(7, 34));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(7, 34)
+            );
         }
 
         [Fact]
@@ -9745,10 +11503,15 @@ partial class Program
             comp.VerifyEmitDiagnostics(
                 // (6,31): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<int> x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(6, 31),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(6, 31),
                 // (7,34): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<string> y = [null];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(7, 34));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(7, 34)
+            );
         }
 
         [Fact]
@@ -9782,17 +11545,26 @@ partial class Program
                     }
                 }
                 """;
-            var comp = CreateCompilation(new[] { sourceA, sourceB }, targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(
+                new[] { sourceA, sourceB },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // 0.cs(5,2): error CS9185: The CollectionBuilderAttribute builder type must be a non-generic class or struct.
                 // [CollectionBuilder(typeof(MyCollectionBuilder), "Create")]
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeInvalidType, "CollectionBuilder").WithLocation(5, 2),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeInvalidType, "CollectionBuilder")
+                    .WithLocation(5, 2),
                 // 1.cs(6,31): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<int> x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(6, 31),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(6, 31),
                 // 1.cs(7,34): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<string> y = [null];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(7, 34));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(7, 34)
+            );
         }
 
         [Fact]
@@ -9838,16 +11610,26 @@ partial class Program
             comp.VerifyEmitDiagnostics(
                 // (6,31): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<int> x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(6, 31),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(6, 31),
                 // (7,34): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<string> y = [null];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(7, 34));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(7, 34)
+            );
         }
 
         [CombinatorialData]
         [Theory]
         public void CollectionBuilder_InvalidBuilderType_03(
-            [CombinatorialValues("public delegate void MyCollectionBuilder();", "public enum MyCollectionBuilder { }")] string builderTypeDefinition)
+            [CombinatorialValues(
+                "public delegate void MyCollectionBuilder();",
+                "public enum MyCollectionBuilder { }"
+            )]
+                string builderTypeDefinition
+        )
         {
             string sourceA = $$"""
                 using System;
@@ -9874,23 +11656,33 @@ partial class Program
                     }
                 }
                 """;
-            var comp = CreateCompilation(new[] { sourceA, sourceB }, targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(
+                new[] { sourceA, sourceB },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // 0.cs(5,2): error CS9185: The CollectionBuilderAttribute builder type must be a non-generic class or struct.
                 // [CollectionBuilder(typeof(MyCollectionBuilder), "ToString")]
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeInvalidType, "CollectionBuilder").WithLocation(5, 2),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeInvalidType, "CollectionBuilder")
+                    .WithLocation(5, 2),
                 // 1.cs(6,31): error CS9187: Could not find an accessible 'ToString' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<int> x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("ToString", "T", "MyCollection<T>").WithLocation(6, 31),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("ToString", "T", "MyCollection<T>")
+                    .WithLocation(6, 31),
                 // 1.cs(7,34): error CS9187: Could not find an accessible 'ToString' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<string> y = [null];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]").WithArguments("ToString", "T", "MyCollection<T>").WithLocation(7, 34));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]")
+                    .WithArguments("ToString", "T", "MyCollection<T>")
+                    .WithLocation(7, 34)
+            );
         }
 
         [CombinatorialData]
         [Theory]
         public void CollectionBuilder_InvalidBuilderType_04(
-            [CombinatorialValues("int[]", "int*", "(object, object)")] string builderTypeName)
+            [CombinatorialValues("int[]", "int*", "(object, object)")] string builderTypeName
+        )
         {
             string sourceA = $$"""
                 using System.Collections;
@@ -9915,17 +11707,26 @@ partial class Program
                     }
                 }
                 """;
-            var comp = CreateCompilation(new[] { sourceA, sourceB }, targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(
+                new[] { sourceA, sourceB },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // 0.cs(4,2): error CS9185: The CollectionBuilderAttribute builder type must be a non-generic class or struct.
                 // [CollectionBuilder(typeof(int*), "ToString")]
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeInvalidType, "CollectionBuilder").WithLocation(4, 2),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeInvalidType, "CollectionBuilder")
+                    .WithLocation(4, 2),
                 // 1.cs(6,31): error CS9187: Could not find an accessible 'ToString' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<int> x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("ToString", "T", "MyCollection<T>").WithLocation(6, 31),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("ToString", "T", "MyCollection<T>")
+                    .WithLocation(6, 31),
                 // 1.cs(7,34): error CS9187: Could not find an accessible 'ToString' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<string> y = [null];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]").WithArguments("ToString", "T", "MyCollection<T>").WithLocation(7, 34));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]")
+                    .WithArguments("ToString", "T", "MyCollection<T>")
+                    .WithLocation(7, 34)
+            );
         }
 
         [Fact]
@@ -9959,15 +11760,22 @@ partial class Program
             comp.VerifyEmitDiagnostics(
                 // 0.cs(6,24): error CS0416: 'T': an attribute argument cannot use type parameters
                 //     [CollectionBuilder(typeof(T), "ToString")]
-                Diagnostic(ErrorCode.ERR_AttrArgWithTypeVars, "typeof(T)").WithArguments("T").WithLocation(6, 24),
+                Diagnostic(ErrorCode.ERR_AttrArgWithTypeVars, "typeof(T)")
+                    .WithArguments("T")
+                    .WithLocation(6, 24),
                 // 0.cs(19,45): error CS1061: 'Container<string>.MyCollection' does not contain a definition for 'Add' and no accessible extension method 'Add' accepting a first argument of type 'Container<string>.MyCollection' could be found (are you missing a using directive or an assembly reference?)
                 //         Container<string>.MyCollection y = [null];
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "null").WithArguments("Container<string>.MyCollection", "Add").WithLocation(19, 45));
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "null")
+                    .WithArguments("Container<string>.MyCollection", "Add")
+                    .WithLocation(19, 45)
+            );
         }
 
         [CombinatorialData]
         [Theory]
-        public void CollectionBuilder_NullOrEmptyMethodName([CombinatorialValues("null", "\"\"")] string methodName)
+        public void CollectionBuilder_NullOrEmptyMethodName(
+            [CombinatorialValues("null", "\"\"")] string methodName
+        )
         {
             string sourceA = $$"""
                 using System.Collections;
@@ -9995,22 +11803,36 @@ partial class Program
                     }
                 }
                 """;
-            var comp = CreateCompilation(new[] { sourceA, sourceB }, targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(
+                new[] { sourceA, sourceB },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // 0.cs(4,2): error CS9186: The CollectionBuilderAttribute method name is invalid.
                 // [CollectionBuilder(typeof(MyCollectionBuilder), "")]
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeInvalidMethodName, "CollectionBuilder").WithLocation(4, 2),
+                Diagnostic(
+                        ErrorCode.ERR_CollectionBuilderAttributeInvalidMethodName,
+                        "CollectionBuilder"
+                    )
+                    .WithLocation(4, 2),
                 // 1.cs(6,31): error CS9187: Could not find an accessible '' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<int> x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("", "T", "MyCollection<T>").WithLocation(6, 31),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("", "T", "MyCollection<T>")
+                    .WithLocation(6, 31),
                 // 1.cs(7,34): error CS9187: Could not find an accessible '' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<string> y = [null];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]").WithArguments("", "T", "MyCollection<T>").WithLocation(7, 34));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]")
+                    .WithArguments("", "T", "MyCollection<T>")
+                    .WithLocation(7, 34)
+            );
         }
 
         [CombinatorialData]
         [Theory]
-        public void CollectionBuilder_NullOrEmptyMethodName_FromMetadata([CombinatorialValues("nullref", "''")] string methodName)
+        public void CollectionBuilder_NullOrEmptyMethodName_FromMetadata(
+            [CombinatorialValues("nullref", "''")] string methodName
+        )
         {
             // [CollectionBuilder(typeof(MyCollectionBuilder), "")]
             string sourceA = $$"""
@@ -10051,10 +11873,15 @@ partial class Program
             comp.VerifyEmitDiagnostics(
                 // (6,31): error CS9187: Could not find an accessible '' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<int> x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("", "T", "MyCollection<T>").WithLocation(6, 31),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("", "T", "MyCollection<T>")
+                    .WithLocation(6, 31),
                 // (7,34): error CS9187: Could not find an accessible '' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<string> y = [null];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]").WithArguments("", "T", "MyCollection<T>").WithLocation(7, 34));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]")
+                    .WithArguments("", "T", "MyCollection<T>")
+                    .WithLocation(7, 34)
+            );
         }
 
         [CombinatorialData]
@@ -10092,14 +11919,23 @@ partial class Program
                     }
                 }
                 """;
-            comp = CreateCompilation(sourceB, references: new[] { refA }, targetFramework: TargetFramework.Net80);
+            comp = CreateCompilation(
+                sourceB,
+                references: new[] { refA },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // (6,31): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<int> x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(6, 31),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(6, 31),
                 // (7,34): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<string> y = [null];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(7, 34));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(7, 34)
+            );
         }
 
         [CombinatorialData]
@@ -10108,9 +11944,11 @@ partial class Program
             [CombinatorialValues(
                 "public MyCollection Create = null;",
                 "public MyCollection Create => null;",
-                "public class Create { }")]
-            string createMember,
-            bool useCompilationReference)
+                "public class Create { }"
+            )]
+                string createMember,
+            bool useCompilationReference
+        )
         {
             string sourceA = $$"""
                 using System;
@@ -10141,21 +11979,36 @@ partial class Program
                     }
                 }
                 """;
-            comp = CreateCompilation(sourceB, references: new[] { refA }, targetFramework: TargetFramework.Net80);
+            comp = CreateCompilation(
+                sourceB,
+                references: new[] { refA },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // (6,26): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<object>' and return type 'MyCollection'.
                 //         MyCollection x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("Create", "object", "MyCollection").WithLocation(6, 26),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("Create", "object", "MyCollection")
+                    .WithLocation(6, 26),
                 // (7,26): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<object>' and return type 'MyCollection'.
                 //         MyCollection y = [null];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]").WithArguments("Create", "object", "MyCollection").WithLocation(7, 26));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]")
+                    .WithArguments("Create", "object", "MyCollection")
+                    .WithLocation(7, 26)
+            );
         }
 
         [CombinatorialData]
         [Theory]
         public void CollectionBuilder_TypeDifferences_Dynamic_01(bool useCompilationReference)
         {
-            CollectionBuilder_TypeDifferences("object", "dynamic", "1, 2, 3", "[1, 2, 3]", useCompilationReference);
+            CollectionBuilder_TypeDifferences(
+                "object",
+                "dynamic",
+                "1, 2, 3",
+                "[1, 2, 3]",
+                useCompilationReference
+            );
         }
 
         [CombinatorialData]
@@ -10206,26 +12059,59 @@ partial class Program
                 references: new[] { refA },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Fails,
-                expectedOutput: IncludeExpectedOutput($"[], [1, 2, 3], "));
+                expectedOutput: IncludeExpectedOutput($"[], [1, 2, 3], ")
+            );
         }
 
         [CombinatorialData]
         [Theory]
-        public void CollectionBuilder_TypeDifferences_TupleElementNames(bool useCompilationReference)
+        public void CollectionBuilder_TypeDifferences_TupleElementNames(
+            bool useCompilationReference
+        )
         {
-            CollectionBuilder_TypeDifferences("(int, int)", "(int A, int B)", "(1, 2), default", "[(1, 2), (0, 0)]", useCompilationReference);
-            CollectionBuilder_TypeDifferences("(int A, int B)", "(int, int)", "(1, 2), default", "[(1, 2), (0, 0)]", useCompilationReference);
+            CollectionBuilder_TypeDifferences(
+                "(int, int)",
+                "(int A, int B)",
+                "(1, 2), default",
+                "[(1, 2), (0, 0)]",
+                useCompilationReference
+            );
+            CollectionBuilder_TypeDifferences(
+                "(int A, int B)",
+                "(int, int)",
+                "(1, 2), default",
+                "[(1, 2), (0, 0)]",
+                useCompilationReference
+            );
         }
 
         [CombinatorialData]
         [Theory]
         public void CollectionBuilder_TypeDifferences_Nullability(bool useCompilationReference)
         {
-            CollectionBuilder_TypeDifferences("object", "object?", "1, 2, 3", "[1, 2, 3]", useCompilationReference);
-            CollectionBuilder_TypeDifferences("object?", "object", "1, null, 3", "[1, null, 3]", useCompilationReference);
+            CollectionBuilder_TypeDifferences(
+                "object",
+                "object?",
+                "1, 2, 3",
+                "[1, 2, 3]",
+                useCompilationReference
+            );
+            CollectionBuilder_TypeDifferences(
+                "object?",
+                "object",
+                "1, null, 3",
+                "[1, null, 3]",
+                useCompilationReference
+            );
         }
 
-        private void CollectionBuilder_TypeDifferences(string collectionElementType, string builderElementType, string values, string expectedOutput, bool useCompilationReference)
+        private void CollectionBuilder_TypeDifferences(
+            string collectionElementType,
+            string builderElementType,
+            string values,
+            string expectedOutput,
+            bool useCompilationReference
+        )
         {
             string sourceA = $$"""
                 #nullable enable
@@ -10269,7 +12155,8 @@ partial class Program
                 references: new[] { refA },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Fails,
-                expectedOutput: IncludeExpectedOutput($"[], {expectedOutput}, "));
+                expectedOutput: IncludeExpectedOutput($"[], {expectedOutput}, ")
+            );
         }
 
         // If there are multiple attributes, the first is used.
@@ -10312,7 +12199,10 @@ partial class Program
                         => throw null;
                 }
                 """;
-            var comp = CreateCompilation(new[] { sourceAttribute, sourceA }, targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(
+                new[] { sourceAttribute, sourceA },
+                targetFramework: TargetFramework.Net80
+            );
             var refA = AsReference(comp, useCompilationReference);
 
             string sourceB = """
@@ -10330,14 +12220,18 @@ partial class Program
                 references: new[] { refA },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.FailsPEVerify,
-                expectedOutput: IncludeExpectedOutput("[1, 2, 3], "));
+                expectedOutput: IncludeExpectedOutput("[1, 2, 3], ")
+            );
             comp = (CSharpCompilation)verifier.Compilation;
 
-            var collectionType = (NamedTypeSymbol)comp.GetMember<MethodSymbol>("Program.F").ReturnType;
+            var collectionType = (NamedTypeSymbol)
+                comp.GetMember<MethodSymbol>("Program.F").ReturnType;
             Assert.Equal("MyCollection<System.Int32>", collectionType.ToTestDisplayString());
             TypeSymbol builderType;
             string methodName;
-            Assert.True(collectionType.HasCollectionBuilderAttribute(out builderType, out methodName));
+            Assert.True(
+                collectionType.HasCollectionBuilderAttribute(out builderType, out methodName)
+            );
             Assert.Equal("MyCollectionBuilder1", builderType.ToTestDisplayString());
             Assert.Equal("Create1", methodName);
         }
@@ -10373,17 +12267,26 @@ partial class Program
                     }
                 }
                 """;
-            var comp = CreateCompilation(new[] { sourceA, sourceB }, targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(
+                new[] { sourceA, sourceB },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // 0.cs(5,2): error CS9185: The CollectionBuilderAttribute builder type must be a non-generic class or struct.
                 // [CollectionBuilder(typeof(MyCollectionBuilder<>), "Create")]
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeInvalidType, "CollectionBuilder").WithLocation(5, 2),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeInvalidType, "CollectionBuilder")
+                    .WithLocation(5, 2),
                 // 1.cs(6,31): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<int> x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(6, 31),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(6, 31),
                 // 1.cs(7,34): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<string> y = [null];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(7, 34));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(7, 34)
+            );
         }
 
         [Fact]
@@ -10417,17 +12320,26 @@ partial class Program
                     }
                 }
                 """;
-            var comp = CreateCompilation(new[] { sourceA, sourceB }, targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(
+                new[] { sourceA, sourceB },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // 0.cs(5,2): error CS9185: The CollectionBuilderAttribute builder type must be a non-generic class or struct.
                 // [CollectionBuilder(typeof(MyCollectionBuilder<int>), "Create")]
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeInvalidType, "CollectionBuilder").WithLocation(5, 2),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeInvalidType, "CollectionBuilder")
+                    .WithLocation(5, 2),
                 // 1.cs(6,31): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<int> x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(6, 31),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(6, 31),
                 // 1.cs(7,34): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<string> y = [null];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(7, 34));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(7, 34)
+            );
         }
 
         [Fact]
@@ -10469,15 +12381,22 @@ partial class Program
             comp.VerifyEmitDiagnostics(
                 // 0.cs(7,24): error CS0416: 'Container<T>.MyCollectionBuilder': an attribute argument cannot use type parameters
                 //     [CollectionBuilder(typeof(MyCollectionBuilder), "Create")]
-                Diagnostic(ErrorCode.ERR_AttrArgWithTypeVars, "typeof(MyCollectionBuilder)").WithArguments("Container<T>.MyCollectionBuilder").WithLocation(7, 24),
+                Diagnostic(ErrorCode.ERR_AttrArgWithTypeVars, "typeof(MyCollectionBuilder)")
+                    .WithArguments("Container<T>.MyCollectionBuilder")
+                    .WithLocation(7, 24),
                 // 0.cs(27,42): error CS1061: 'Container<int>.MyCollection' does not contain a definition for 'Add' and no accessible extension method 'Add' accepting a first argument of type 'Container<int>.MyCollection' could be found (are you missing a using directive or an assembly reference?)
                 //         Container<int>.MyCollection y = [default];
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "default").WithArguments("Container<int>.MyCollection", "Add").WithLocation(27, 42));
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "default")
+                    .WithArguments("Container<int>.MyCollection", "Add")
+                    .WithLocation(27, 42)
+            );
         }
 
         [CombinatorialData]
         [Theory]
-        public void CollectionBuilder_GenericCollectionContainerType_01(bool useCompilationReference)
+        public void CollectionBuilder_GenericCollectionContainerType_01(
+            bool useCompilationReference
+        )
         {
             string sourceA = """
                 using System;
@@ -10521,12 +12440,17 @@ partial class Program
                 references: new[] { refA },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.FailsPEVerify,
-                expectedOutput: IncludeExpectedOutput("(Container<T>.MyCollection<System.String>) [], (Container<T>.MyCollection<System.Int32>) [1, 2, 3], "));
+                expectedOutput: IncludeExpectedOutput(
+                    "(Container<T>.MyCollection<System.String>) [], (Container<T>.MyCollection<System.Int32>) [1, 2, 3], "
+                )
+            );
         }
 
         [CombinatorialData]
         [Theory]
-        public void CollectionBuilder_GenericCollectionContainerType_02(bool useCompilationReference)
+        public void CollectionBuilder_GenericCollectionContainerType_02(
+            bool useCompilationReference
+        )
         {
             string sourceA = """
                 using System;
@@ -10570,12 +12494,17 @@ partial class Program
                 references: new[] { refA },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.FailsPEVerify,
-                expectedOutput: IncludeExpectedOutput("(Container<T>.MyCollection<System.Int32>) [], (Container<T>.MyCollection<System.String>) [1, 2, 3], "));
+                expectedOutput: IncludeExpectedOutput(
+                    "(Container<T>.MyCollection<System.Int32>) [], (Container<T>.MyCollection<System.String>) [1, 2, 3], "
+                )
+            );
         }
 
         [CombinatorialData]
         [Theory]
-        public void CollectionBuilder_GenericCollectionContainerType_03(bool useCompilationReference)
+        public void CollectionBuilder_GenericCollectionContainerType_03(
+            bool useCompilationReference
+        )
         {
             string sourceA = """
                 using System;
@@ -10619,12 +12548,17 @@ partial class Program
                 references: new[] { refA },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.FailsPEVerify,
-                expectedOutput: IncludeExpectedOutput("(Container<T>.MyCollection<System.Int32, System.String>) [], (Container<T>.MyCollection<System.String, System.Int32>) [1, 2, 3], "));
+                expectedOutput: IncludeExpectedOutput(
+                    "(Container<T>.MyCollection<System.Int32, System.String>) [], (Container<T>.MyCollection<System.String, System.Int32>) [1, 2, 3], "
+                )
+            );
         }
 
         [CombinatorialData]
         [Theory]
-        public void CollectionBuilder_GenericType_ElementTypeFirstOfTwo(bool useCompilationReference)
+        public void CollectionBuilder_GenericType_ElementTypeFirstOfTwo(
+            bool useCompilationReference
+        )
         {
             string sourceA = """
                 using System;
@@ -10665,12 +12599,17 @@ partial class Program
                 references: new[] { refA },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.FailsPEVerify,
-                expectedOutput: IncludeExpectedOutput("(MyCollection<System.String, System.Int32>) [], (MyCollection<System.Int32, System.String>) [1, 2, 3], "));
+                expectedOutput: IncludeExpectedOutput(
+                    "(MyCollection<System.String, System.Int32>) [], (MyCollection<System.Int32, System.String>) [1, 2, 3], "
+                )
+            );
         }
 
         [CombinatorialData]
         [Theory]
-        public void CollectionBuilder_GenericType_ElementTypeSecondOfTwo(bool useCompilationReference)
+        public void CollectionBuilder_GenericType_ElementTypeSecondOfTwo(
+            bool useCompilationReference
+        )
         {
             string sourceA = """
                 using System;
@@ -10711,7 +12650,10 @@ partial class Program
                 references: new[] { refA },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.FailsPEVerify,
-                expectedOutput: IncludeExpectedOutput("(MyCollection<System.Int32, System.String>) [], (MyCollection<System.String, System.Int32>) [1, 2, 3], "));
+                expectedOutput: IncludeExpectedOutput(
+                    "(MyCollection<System.Int32, System.String>) [], (MyCollection<System.String, System.Int32>) [1, 2, 3], "
+                )
+            );
         }
 
         [CombinatorialData]
@@ -10749,14 +12691,23 @@ partial class Program
                     }
                 }
                 """;
-            comp = CreateCompilation(sourceB, references: new[] { refA }, targetFramework: TargetFramework.Net80);
+            comp = CreateCompilation(
+                sourceB,
+                references: new[] { refA },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // (6,31): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<int> x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(6, 31),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(6, 31),
                 // (7,34): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<string> y = [null];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(7, 34));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(7, 34)
+            );
         }
 
         [CombinatorialData]
@@ -10803,7 +12754,8 @@ partial class Program
                 references: new[] { refA },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.FailsPEVerify,
-                expectedOutput: IncludeExpectedOutput("[], [1, 2, 3], "));
+                expectedOutput: IncludeExpectedOutput("[], [1, 2, 3], ")
+            );
         }
 
         [CombinatorialData]
@@ -10842,14 +12794,23 @@ partial class Program
                     }
                 }
                 """;
-            comp = CreateCompilation(sourceB, references: new[] { refA }, targetFramework: TargetFramework.Net80);
+            comp = CreateCompilation(
+                sourceB,
+                references: new[] { refA },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // (6,26): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<int>' and return type 'MyCollection'.
                 //         MyCollection x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("Create", "int", "MyCollection").WithLocation(6, 26),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("Create", "int", "MyCollection")
+                    .WithLocation(6, 26),
                 // (7,26): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<int>' and return type 'MyCollection'.
                 //         MyCollection y = [1, 2, 3];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, 3]").WithArguments("Create", "int", "MyCollection").WithLocation(7, 26));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, 3]")
+                    .WithArguments("Create", "int", "MyCollection")
+                    .WithLocation(7, 26)
+            );
         }
 
         [CombinatorialData]
@@ -10888,14 +12849,23 @@ partial class Program
                     }
                 }
                 """;
-            comp = CreateCompilation(sourceB, references: new[] { refA }, targetFramework: TargetFramework.Net80);
+            comp = CreateCompilation(
+                sourceB,
+                references: new[] { refA },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // (6,31): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<int> x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(6, 31),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(6, 31),
                 // (7,34): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<string> y = [null];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(7, 34));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[null]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(7, 34)
+            );
         }
 
         [CombinatorialData]
@@ -10955,7 +12925,8 @@ partial class Program
                 references: new[] { refA },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.FailsPEVerify,
-                expectedOutput: IncludeExpectedOutput("[], [1, 2, 3], "));
+                expectedOutput: IncludeExpectedOutput("[], [1, 2, 3], ")
+            );
         }
 
         [CombinatorialData]
@@ -11007,7 +12978,8 @@ partial class Program
                 references: new[] { refA },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.FailsPEVerify,
-                expectedOutput: IncludeExpectedOutput("[], [1, 2, 3], "));
+                expectedOutput: IncludeExpectedOutput("[], [1, 2, 3], ")
+            );
         }
 
         [CombinatorialData]
@@ -11027,9 +12999,11 @@ partial class Program
                 "public static MyCollection<T> Create<T>(T[] items) => default;", // T[]
                 "public static MyCollection<T> Create<T>(in ReadOnlySpan<T> items) => default;", // in parameter
                 "public static MyCollection<T> Create<T>(ref ReadOnlySpan<T> items) => default;", // ref parameter
-                "public static MyCollection<T> Create<T>(out ReadOnlySpan<T> items) { items = default; return default; }")] // out parameter
+                "public static MyCollection<T> Create<T>(out ReadOnlySpan<T> items) { items = default; return default; }"
+            )] // out parameter
             string methodDeclaration,
-            bool useCompilationReference)
+            bool useCompilationReference
+        )
         {
             string sourceA = $$"""
                 using System;
@@ -11062,19 +13036,30 @@ partial class Program
                     }
                 }
                 """;
-            comp = CreateCompilation(sourceB, references: new[] { refA }, targetFramework: TargetFramework.Net80);
+            comp = CreateCompilation(
+                sourceB,
+                references: new[] { refA },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // (6,34): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<string> x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(6, 34),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(6, 34),
                 // (7,31): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<int> y = [1, 2, 3];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, 3]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(7, 31));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, 3]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(7, 31)
+            );
         }
 
         [CombinatorialData]
         [Theory]
-        public void CollectionBuilder_UnexpectedSignature_MoreTypeParameters(bool useCompilationReference)
+        public void CollectionBuilder_UnexpectedSignature_MoreTypeParameters(
+            bool useCompilationReference
+        )
         {
             string sourceA = """
                 using System;
@@ -11107,19 +13092,30 @@ partial class Program
                     }
                 }
                 """;
-            comp = CreateCompilation(sourceB, references: new[] { refA }, targetFramework: TargetFramework.Net80);
+            comp = CreateCompilation(
+                sourceB,
+                references: new[] { refA },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // (6,26): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<object>' and return type 'MyCollection'.
                 //         MyCollection x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("Create", "object", "MyCollection").WithLocation(6, 26),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("Create", "object", "MyCollection")
+                    .WithLocation(6, 26),
                 // (7,26): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<object>' and return type 'MyCollection'.
                 //         MyCollection y = [1, 2, 3];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, 3]").WithArguments("Create", "object", "MyCollection").WithLocation(7, 26));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, 3]")
+                    .WithArguments("Create", "object", "MyCollection")
+                    .WithLocation(7, 26)
+            );
         }
 
         [CombinatorialData]
         [Theory]
-        public void CollectionBuilder_UnexpectedSignature_FewerTypeParameters(bool useCompilationReference)
+        public void CollectionBuilder_UnexpectedSignature_FewerTypeParameters(
+            bool useCompilationReference
+        )
         {
             string sourceA = """
                 using System;
@@ -11152,19 +13148,30 @@ partial class Program
                     }
                 }
                 """;
-            comp = CreateCompilation(sourceB, references: new[] { refA }, targetFramework: TargetFramework.Net80);
+            comp = CreateCompilation(
+                sourceB,
+                references: new[] { refA },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // (6,39): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T, U>'.
                 //         MyCollection<string, int> x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("Create", "T", "MyCollection<T, U>").WithLocation(6, 39),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("Create", "T", "MyCollection<T, U>")
+                    .WithLocation(6, 39),
                 // (7,39): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T, U>'.
                 //         MyCollection<int, string> y = [1, 2, 3];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, 3]").WithArguments("Create", "T", "MyCollection<T, U>").WithLocation(7, 39));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, 3]")
+                    .WithArguments("Create", "T", "MyCollection<T, U>")
+                    .WithLocation(7, 39)
+            );
         }
 
         [CombinatorialData]
         [Theory]
-        public void CollectionBuilder_InheritedAttributeOnBaseCollection(bool useCompilationReference)
+        public void CollectionBuilder_InheritedAttributeOnBaseCollection(
+            bool useCompilationReference
+        )
         {
             string sourceAttribute = """
                 namespace System.Runtime.CompilerServices
@@ -11195,7 +13202,10 @@ partial class Program
                     public static MyCollectionBase Create(ReadOnlySpan<int> items) => new MyCollection();
                 }
                 """;
-            var comp = CreateCompilation(new[] { sourceA, sourceAttribute }, targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(
+                new[] { sourceA, sourceAttribute },
+                targetFramework: TargetFramework.Net80
+            );
             var refA = AsReference(comp, useCompilationReference);
 
             string sourceB = """
@@ -11209,11 +13219,18 @@ partial class Program
                     }
                 }
                 """;
-            comp = CreateCompilation(sourceB, references: new[] { refA }, targetFramework: TargetFramework.Net80);
+            comp = CreateCompilation(
+                sourceB,
+                references: new[] { refA },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // (6,27): error CS1061: 'MyCollection' does not contain a definition for 'Add' and no accessible extension method 'Add' accepting a first argument of type 'MyCollection' could be found (are you missing a using directive or an assembly reference?)
                 //         MyCollection y = [2];
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "2").WithArguments("MyCollection", "Add").WithLocation(6, 27));
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "2")
+                    .WithArguments("MyCollection", "Add")
+                    .WithLocation(6, 27)
+            );
         }
 
         [CombinatorialData]
@@ -11253,14 +13270,23 @@ partial class Program
                     }
                 }
                 """;
-            comp = CreateCompilation(sourceB, references: new[] { refA }, targetFramework: TargetFramework.Net80);
+            comp = CreateCompilation(
+                sourceB,
+                references: new[] { refA },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // (5,26): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<int>' and return type 'MyCollection'.
                 //         MyCollection x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("Create", "int", "MyCollection").WithLocation(5, 26),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("Create", "int", "MyCollection")
+                    .WithLocation(5, 26),
                 // (6,26): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<int>' and return type 'MyCollection'.
                 //         MyCollection y = [1, 2, 3];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, 3]").WithArguments("Create", "int", "MyCollection").WithLocation(6, 26));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, 3]")
+                    .WithArguments("Create", "int", "MyCollection")
+                    .WithLocation(6, 26)
+            );
         }
 
         [Fact]
@@ -11307,7 +13333,8 @@ partial class Program
                 new[] { sourceA, sourceB1, s_collectionExtensions },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.FailsPEVerify,
-                expectedOutput: IncludeExpectedOutput("[], [1, 2, 3], "));
+                expectedOutput: IncludeExpectedOutput("[], [1, 2, 3], ")
+            );
 
             string sourceB2 = """
                 class Program
@@ -11321,20 +13348,33 @@ partial class Program
                 """;
             var comp = CreateCompilation(
                 new[] { sourceA, sourceB2 },
-                targetFramework: TargetFramework.Net80);
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // 1.cs(5,26): error CS7036: There is no argument given that corresponds to the required parameter 'list' of 'MyCollection.MyCollection(List<int>)'
                 //         MyCollection x = [];
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "[]").WithArguments("list", "MyCollection.MyCollection(System.Collections.Generic.List<int>)").WithLocation(5, 26),
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "[]")
+                    .WithArguments(
+                        "list",
+                        "MyCollection.MyCollection(System.Collections.Generic.List<int>)"
+                    )
+                    .WithLocation(5, 26),
                 // 1.cs(6,27): error CS1061: 'MyCollection' does not contain a definition for 'Add' and no accessible extension method 'Add' accepting a first argument of type 'MyCollection' could be found (are you missing a using directive or an assembly reference?)
                 //         MyCollection y = [1, 2, 3];
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "1").WithArguments("MyCollection", "Add").WithLocation(6, 27),
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "1")
+                    .WithArguments("MyCollection", "Add")
+                    .WithLocation(6, 27),
                 // 1.cs(6,30): error CS1061: 'MyCollection' does not contain a definition for 'Add' and no accessible extension method 'Add' accepting a first argument of type 'MyCollection' could be found (are you missing a using directive or an assembly reference?)
                 //         MyCollection y = [1, 2, 3];
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "2").WithArguments("MyCollection", "Add").WithLocation(6, 30),
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "2")
+                    .WithArguments("MyCollection", "Add")
+                    .WithLocation(6, 30),
                 // 1.cs(6,33): error CS1061: 'MyCollection' does not contain a definition for 'Add' and no accessible extension method 'Add' accepting a first argument of type 'MyCollection' could be found (are you missing a using directive or an assembly reference?)
                 //         MyCollection y = [1, 2, 3];
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "3").WithArguments("MyCollection", "Add").WithLocation(6, 33));
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "3")
+                    .WithArguments("MyCollection", "Add")
+                    .WithLocation(6, 33)
+            );
         }
 
         [Fact]
@@ -11381,7 +13421,8 @@ partial class Program
                 new[] { sourceA, sourceB1, s_collectionExtensions },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Fails,
-                expectedOutput: IncludeExpectedOutput("[], [1, 2, null], "));
+                expectedOutput: IncludeExpectedOutput("[], [1, 2, null], ")
+            );
 
             string sourceB2 = """
                 class Program
@@ -11395,20 +13436,33 @@ partial class Program
                 """;
             var comp = CreateCompilation(
                 new[] { sourceA, sourceB2 },
-                targetFramework: TargetFramework.Net80);
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // 1.cs(5,34): error CS7036: There is no argument given that corresponds to the required parameter 'list' of 'MyCollection<string>.MyCollection(List<string>)'
                 //         MyCollection<string> x = [];
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "[]").WithArguments("list", "MyCollection<string>.MyCollection(System.Collections.Generic.List<string>)").WithLocation(5, 34),
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "[]")
+                    .WithArguments(
+                        "list",
+                        "MyCollection<string>.MyCollection(System.Collections.Generic.List<string>)"
+                    )
+                    .WithLocation(5, 34),
                 // 1.cs(6,35): error CS1061: 'MyCollection<object>' does not contain a definition for 'Add' and no accessible extension method 'Add' accepting a first argument of type 'MyCollection<object>' could be found (are you missing a using directive or an assembly reference?)
                 //         MyCollection<object> y = [1, 2, null];
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "1").WithArguments("MyCollection<object>", "Add").WithLocation(6, 35),
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "1")
+                    .WithArguments("MyCollection<object>", "Add")
+                    .WithLocation(6, 35),
                 // 1.cs(6,38): error CS1061: 'MyCollection<object>' does not contain a definition for 'Add' and no accessible extension method 'Add' accepting a first argument of type 'MyCollection<object>' could be found (are you missing a using directive or an assembly reference?)
                 //         MyCollection<object> y = [1, 2, null];
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "2").WithArguments("MyCollection<object>", "Add").WithLocation(6, 38),
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "2")
+                    .WithArguments("MyCollection<object>", "Add")
+                    .WithLocation(6, 38),
                 // 1.cs(6,41): error CS1061: 'MyCollection<object>' does not contain a definition for 'Add' and no accessible extension method 'Add' accepting a first argument of type 'MyCollection<object>' could be found (are you missing a using directive or an assembly reference?)
                 //         MyCollection<object> y = [1, 2, null];
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "null").WithArguments("MyCollection<object>", "Add").WithLocation(6, 41));
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "null")
+                    .WithArguments("MyCollection<object>", "Add")
+                    .WithLocation(6, 41)
+            );
         }
 
         [Fact]
@@ -11447,16 +13501,19 @@ partial class Program
                     }
                 }
                 """;
-            var comp = CreateCompilation(
-                source,
-                targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(source, targetFramework: TargetFramework.Net80);
             comp.VerifyEmitDiagnostics(
                 // (28,26): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<int>' and return type 'MyCollection'.
                 //         MyCollection x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("Create", "int", "MyCollection").WithLocation(28, 26),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("Create", "int", "MyCollection")
+                    .WithLocation(28, 26),
                 // (29,26): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<int>' and return type 'MyCollection'.
                 //         MyCollection y = [1, 2, 3];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, 3]").WithArguments("Create", "int", "MyCollection").WithLocation(29, 26));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, 3]")
+                    .WithArguments("Create", "int", "MyCollection")
+                    .WithLocation(29, 26)
+            );
         }
 
         [Fact]
@@ -11495,16 +13552,19 @@ partial class Program
                     }
                 }
                 """;
-            var comp = CreateCompilation(
-                source,
-                targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(source, targetFramework: TargetFramework.Net80);
             comp.VerifyEmitDiagnostics(
                 // (28,34): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<string> x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(28, 34),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(28, 34),
                 // (29,34): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<object> y = [1, 2, null];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, null]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(29, 34));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, null]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(29, 34)
+            );
         }
 
         [Fact]
@@ -11548,7 +13608,8 @@ partial class Program
                 new[] { source, s_collectionExtensions },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Fails,
-                expectedOutput: IncludeExpectedOutput("[], [1, 2, null], "));
+                expectedOutput: IncludeExpectedOutput("[], [1, 2, null], ")
+            );
         }
 
         [Fact]
@@ -11592,7 +13653,8 @@ partial class Program
                 new[] { source, s_collectionExtensions },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Fails,
-                expectedOutput: IncludeExpectedOutput("[], [1, 2, null], "));
+                expectedOutput: IncludeExpectedOutput("[], [1, 2, null], ")
+            );
         }
 
         [Fact]
@@ -11630,16 +13692,19 @@ partial class Program
                     }
                 }
                 """;
-            var comp = CreateCompilation(
-                source,
-                targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(source, targetFramework: TargetFramework.Net80);
             comp.VerifyEmitDiagnostics(
                 // (27,26): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<object>' and return type 'MyCollection'.
                 //         MyCollection x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("Create", "object", "MyCollection").WithLocation(27, 26),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("Create", "object", "MyCollection")
+                    .WithLocation(27, 26),
                 // (28,26): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<object>' and return type 'MyCollection'.
                 //         MyCollection y = [1, 2, null];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, null]").WithArguments("Create", "object", "MyCollection").WithLocation(28, 26));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, null]")
+                    .WithArguments("Create", "object", "MyCollection")
+                    .WithLocation(28, 26)
+            );
         }
 
         [Fact]
@@ -11677,16 +13742,19 @@ partial class Program
                     }
                 }
                 """;
-            var comp = CreateCompilation(
-                source,
-                targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(source, targetFramework: TargetFramework.Net80);
             comp.VerifyEmitDiagnostics(
                 // (27,34): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<string> x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(27, 34),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(27, 34),
                 // (28,34): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<object> y = [1, 2, null];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, null]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(28, 34));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, null]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(28, 34)
+            );
         }
 
         [Fact]
@@ -11725,16 +13793,19 @@ partial class Program
                     }
                 }
                 """;
-            var comp = CreateCompilation(
-                source,
-                targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(source, targetFramework: TargetFramework.Net80);
             comp.VerifyEmitDiagnostics(
                 // (28,26): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<object>' and return type 'MyCollection'.
                 //         MyCollection x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("Create", "object", "MyCollection").WithLocation(28, 26),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("Create", "object", "MyCollection")
+                    .WithLocation(28, 26),
                 // (29,26): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<object>' and return type 'MyCollection'.
                 //         MyCollection y = [1, 2, null];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, null]").WithArguments("Create", "object", "MyCollection").WithLocation(29, 26));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, null]")
+                    .WithArguments("Create", "object", "MyCollection")
+                    .WithLocation(29, 26)
+            );
         }
 
         [Fact]
@@ -11773,16 +13844,19 @@ partial class Program
                     }
                 }
                 """;
-            var comp = CreateCompilation(
-                source,
-                targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(source, targetFramework: TargetFramework.Net80);
             comp.VerifyEmitDiagnostics(
                 // (28,34): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<string> x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(28, 34),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(28, 34),
                 // (29,34): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<object> y = [1, 2, null];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, null]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(29, 34));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, null]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(29, 34)
+            );
         }
 
         [Fact]
@@ -11816,16 +13890,19 @@ partial class Program
                     }
                 }
                 """;
-            var comp = CreateCompilation(
-                source,
-                targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(source, targetFramework: TargetFramework.Net80);
             comp.VerifyEmitDiagnostics(
                 // (23,26): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<object>' and return type 'MyCollection'.
                 //         MyCollection x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("Create", "object", "MyCollection").WithLocation(23, 26),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("Create", "object", "MyCollection")
+                    .WithLocation(23, 26),
                 // (24,26): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<object>' and return type 'MyCollection'.
                 //         MyCollection y = [1, 2, null];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, null]").WithArguments("Create", "object", "MyCollection").WithLocation(24, 26));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, null]")
+                    .WithArguments("Create", "object", "MyCollection")
+                    .WithLocation(24, 26)
+            );
         }
 
         [Fact]
@@ -11859,16 +13936,19 @@ partial class Program
                     }
                 }
                 """;
-            var comp = CreateCompilation(
-                source,
-                targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(source, targetFramework: TargetFramework.Net80);
             comp.VerifyEmitDiagnostics(
                 // (23,34): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<string> x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(23, 34),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(23, 34),
                 // (24,34): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<object> y = [1, 2, null];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, null]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(24, 34));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, null]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(24, 34)
+            );
         }
 
         [Fact]
@@ -11902,16 +13982,19 @@ partial class Program
                     }
                 }
                 """;
-            var comp = CreateCompilation(
-                source,
-                targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(source, targetFramework: TargetFramework.Net80);
             comp.VerifyEmitDiagnostics(
                 // (23,26): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<object>' and return type 'MyCollection'.
                 //         MyCollection x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("Create", "object", "MyCollection").WithLocation(23, 26),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("Create", "object", "MyCollection")
+                    .WithLocation(23, 26),
                 // (24,26): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<object>' and return type 'MyCollection'.
                 //         MyCollection y = [1, 2, null];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, null]").WithArguments("Create", "object", "MyCollection").WithLocation(24, 26));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, null]")
+                    .WithArguments("Create", "object", "MyCollection")
+                    .WithLocation(24, 26)
+            );
         }
 
         [Fact]
@@ -11945,16 +14028,19 @@ partial class Program
                     }
                 }
                 """;
-            var comp = CreateCompilation(
-                source,
-                targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(source, targetFramework: TargetFramework.Net80);
             comp.VerifyEmitDiagnostics(
                 // (23,34): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<string> x = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(23, 34),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(23, 34),
                 // (24,34): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         MyCollection<object> y = [1, 2, null];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, null]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(24, 34));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[1, 2, null]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(24, 34)
+            );
         }
 
         [CombinatorialData]
@@ -11993,14 +14079,23 @@ partial class Program
                     }
                 }
                 """;
-            comp = CreateCompilation(sourceB, references: new[] { refA }, targetFramework: TargetFramework.Net80);
+            comp = CreateCompilation(
+                sourceB,
+                references: new[] { refA },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // (6,34): warning CS0612: 'MyCollectionBuilder' is obsolete
                 //         MyCollection<string> x = [];
-                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "[]").WithArguments("MyCollectionBuilder").WithLocation(6, 34),
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "[]")
+                    .WithArguments("MyCollectionBuilder")
+                    .WithLocation(6, 34),
                 // (7,31): warning CS0612: 'MyCollectionBuilder' is obsolete
                 //         MyCollection<int> y = [1, 2, 3];
-                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "[1, 2, 3]").WithArguments("MyCollectionBuilder").WithLocation(7, 31));
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "[1, 2, 3]")
+                    .WithArguments("MyCollectionBuilder")
+                    .WithLocation(7, 31)
+            );
         }
 
         [Fact]
@@ -12035,17 +14130,27 @@ partial class Program
                     }
                 }
                 """;
-            var comp = CreateCompilation(new[] { sourceA, sourceB }, targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(
+                new[] { sourceA, sourceB },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // 0.cs(5,27): error CS0619: 'MyCollectionBuilder' is obsolete: 'message 2'
                 // [CollectionBuilder(typeof(MyCollectionBuilder), "Create")]
-                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "MyCollectionBuilder").WithArguments("MyCollectionBuilder", "message 2").WithLocation(5, 27),
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "MyCollectionBuilder")
+                    .WithArguments("MyCollectionBuilder", "message 2")
+                    .WithLocation(5, 27),
                 // 1.cs(6,34): error CS0619: 'MyCollectionBuilder' is obsolete: 'message 2'
                 //         MyCollection<string> x = [];
-                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "[]").WithArguments("MyCollectionBuilder", "message 2").WithLocation(6, 34),
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "[]")
+                    .WithArguments("MyCollectionBuilder", "message 2")
+                    .WithLocation(6, 34),
                 // 1.cs(7,31): error CS0619: 'MyCollectionBuilder' is obsolete: 'message 2'
                 //         MyCollection<int> y = [1, 2, 3];
-                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "[1, 2, 3]").WithArguments("MyCollectionBuilder", "message 2").WithLocation(7, 31));
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "[1, 2, 3]")
+                    .WithArguments("MyCollectionBuilder", "message 2")
+                    .WithLocation(7, 31)
+            );
         }
 
         [CombinatorialData]
@@ -12084,14 +14189,23 @@ partial class Program
                     }
                 }
                 """;
-            comp = CreateCompilation(sourceB, references: new[] { refA }, targetFramework: TargetFramework.Net80);
+            comp = CreateCompilation(
+                sourceB,
+                references: new[] { refA },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // (6,34): warning CS0612: 'MyCollectionBuilder.Create<T>(ReadOnlySpan<T>)' is obsolete
                 //         MyCollection<string> x = [];
-                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "[]").WithArguments("MyCollectionBuilder.Create<T>(System.ReadOnlySpan<T>)").WithLocation(6, 34),
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "[]")
+                    .WithArguments("MyCollectionBuilder.Create<T>(System.ReadOnlySpan<T>)")
+                    .WithLocation(6, 34),
                 // (7,31): warning CS0612: 'MyCollectionBuilder.Create<T>(ReadOnlySpan<T>)' is obsolete
                 //         MyCollection<int> y = [1, 2, 3];
-                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "[1, 2, 3]").WithArguments("MyCollectionBuilder.Create<T>(System.ReadOnlySpan<T>)").WithLocation(7, 31));
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "[1, 2, 3]")
+                    .WithArguments("MyCollectionBuilder.Create<T>(System.ReadOnlySpan<T>)")
+                    .WithLocation(7, 31)
+            );
         }
 
         [CombinatorialData]
@@ -12130,14 +14244,29 @@ partial class Program
                     }
                 }
                 """;
-            comp = CreateCompilation(sourceB, references: new[] { refA }, targetFramework: TargetFramework.Net80);
+            comp = CreateCompilation(
+                sourceB,
+                references: new[] { refA },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // (6,34): error CS0619: 'MyCollectionBuilder.Create<T>(ReadOnlySpan<T>)' is obsolete: 'message 4'
                 //         MyCollection<string> x = [];
-                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "[]").WithArguments("MyCollectionBuilder.Create<T>(System.ReadOnlySpan<T>)", "message 4").WithLocation(6, 34),
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "[]")
+                    .WithArguments(
+                        "MyCollectionBuilder.Create<T>(System.ReadOnlySpan<T>)",
+                        "message 4"
+                    )
+                    .WithLocation(6, 34),
                 // (7,31): error CS0619: 'MyCollectionBuilder.Create<T>(ReadOnlySpan<T>)' is obsolete: 'message 4'
                 //         MyCollection<int> y = [1, 2, 3];
-                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "[1, 2, 3]").WithArguments("MyCollectionBuilder.Create<T>(System.ReadOnlySpan<T>)", "message 4").WithLocation(7, 31));
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "[1, 2, 3]")
+                    .WithArguments(
+                        "MyCollectionBuilder.Create<T>(System.ReadOnlySpan<T>)",
+                        "message 4"
+                    )
+                    .WithLocation(7, 31)
+            );
         }
 
         [Fact]
@@ -12173,20 +14302,42 @@ partial class Program
                     }
                 }
                 """;
-            var comp = CreateCompilation(new[] { sourceA, sourceB }, targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(
+                new[] { sourceA, sourceB },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // 1.cs(6,34): error CS8901: 'MyCollectionBuilder.Create<string>(ReadOnlySpan<string>)' is attributed with 'UnmanagedCallersOnly' and cannot be called directly. Obtain a function pointer to this method.
                 //         MyCollection<string> x = [];
-                Diagnostic(ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly, "[]").WithArguments("MyCollectionBuilder.Create<string>(System.ReadOnlySpan<string>)").WithLocation(6, 34),
+                Diagnostic(ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly, "[]")
+                    .WithArguments(
+                        "MyCollectionBuilder.Create<string>(System.ReadOnlySpan<string>)"
+                    )
+                    .WithLocation(6, 34),
                 // 1.cs(7,31): error CS8901: 'MyCollectionBuilder.Create<int>(ReadOnlySpan<int>)' is attributed with 'UnmanagedCallersOnly' and cannot be called directly. Obtain a function pointer to this method.
                 //         MyCollection<int> y = [1, 2, 3];
-                Diagnostic(ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly, "[1, 2, 3]").WithArguments("MyCollectionBuilder.Create<int>(System.ReadOnlySpan<int>)").WithLocation(7, 31),
+                Diagnostic(
+                        ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
+                        "[1, 2, 3]"
+                    )
+                    .WithArguments("MyCollectionBuilder.Create<int>(System.ReadOnlySpan<int>)")
+                    .WithLocation(7, 31),
                 // 0.cs(14,6): error CS8895: Methods attributed with 'UnmanagedCallersOnly' cannot have generic type parameters and cannot be declared in a generic type.
                 //     [UnmanagedCallersOnly]
-                Diagnostic(ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric, "UnmanagedCallersOnly").WithLocation(14, 6),
+                Diagnostic(
+                        ErrorCode.ERR_UnmanagedCallersOnlyMethodOrTypeCannotBeGeneric,
+                        "UnmanagedCallersOnly"
+                    )
+                    .WithLocation(14, 6),
                 // 0.cs(15,45): error CS8894: Cannot use 'ReadOnlySpan<T>' as a parameter type on a method attributed with 'UnmanagedCallersOnly'.
                 //     public static MyCollection<T> Create<T>(ReadOnlySpan<T> items) => default;
-                Diagnostic(ErrorCode.ERR_CannotUseManagedTypeInUnmanagedCallersOnly, "ReadOnlySpan<T> items").WithArguments("System.ReadOnlySpan<T>", "parameter").WithLocation(15, 45));
+                Diagnostic(
+                        ErrorCode.ERR_CannotUseManagedTypeInUnmanagedCallersOnly,
+                        "ReadOnlySpan<T> items"
+                    )
+                    .WithArguments("System.ReadOnlySpan<T>", "parameter")
+                    .WithLocation(15, 45)
+            );
         }
 
         [CombinatorialData]
@@ -12232,7 +14383,8 @@ partial class Program
                 references: new[] { refA },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.FailsPEVerify,
-                expectedOutput: IncludeExpectedOutput("[], [1, 2, 3], "));
+                expectedOutput: IncludeExpectedOutput("[], [1, 2, 3], ")
+            );
 
             string sourceB2 = """
                 #pragma warning disable 219
@@ -12245,11 +14397,22 @@ partial class Program
                     }
                 }
                 """;
-            comp = CreateCompilation(sourceB2, references: new[] { refA }, targetFramework: TargetFramework.Net80);
+            comp = CreateCompilation(
+                sourceB2,
+                references: new[] { refA },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // (6,32): error CS0453: The type 'int?' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'MyCollectionBuilder.Create<T>(ReadOnlySpan<T>)'
                 //         MyCollection<int?> x = [4, null];
-                Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "[4, null]").WithArguments("MyCollectionBuilder.Create<T>(System.ReadOnlySpan<T>)", "T", "int?").WithLocation(6, 32));
+                Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "[4, null]")
+                    .WithArguments(
+                        "MyCollectionBuilder.Create<T>(System.ReadOnlySpan<T>)",
+                        "T",
+                        "int?"
+                    )
+                    .WithLocation(6, 32)
+            );
         }
 
         [CombinatorialData]
@@ -12295,7 +14458,8 @@ partial class Program
                 references: new[] { refA },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.FailsPEVerify,
-                expectedOutput: IncludeExpectedOutput("[], [1, 2, 3], "));
+                expectedOutput: IncludeExpectedOutput("[], [1, 2, 3], ")
+            );
 
             string sourceB2 = """
                 #pragma warning disable 219
@@ -12308,11 +14472,22 @@ partial class Program
                     }
                 }
                 """;
-            comp = CreateCompilation(sourceB2, references: new[] { refA }, targetFramework: TargetFramework.Net80);
+            comp = CreateCompilation(
+                sourceB2,
+                references: new[] { refA },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // (6,32): error CS0453: The type 'int?' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'MyCollectionBuilder.Create<T>(ReadOnlySpan<T>)'
                 //         MyCollection<int?> x = [4, null];
-                Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "[4, null]").WithArguments("MyCollectionBuilder.Create<T>(System.ReadOnlySpan<T>)", "T", "int?").WithLocation(6, 32));
+                Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "[4, null]")
+                    .WithArguments(
+                        "MyCollectionBuilder.Create<T>(System.ReadOnlySpan<T>)",
+                        "T",
+                        "int?"
+                    )
+                    .WithLocation(6, 32)
+            );
         }
 
         [Fact]
@@ -12349,14 +14524,22 @@ partial class Program
                     }
                 }
                 """;
-            var comp = CreateCompilation(new[] { sourceA, sourceB }, targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(
+                new[] { sourceA, sourceB },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // 1.cs(7,22): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'MyCollection<T>'
                 //         MyCollection<int> y = [1, 2, 3];
-                Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "int").WithArguments("MyCollection<T>", "T", "int").WithLocation(7, 22),
+                Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "int")
+                    .WithArguments("MyCollection<T>", "T", "int")
+                    .WithLocation(7, 22),
                 // 0.cs(15,35): error CS0452: The type 'T' must be a reference type in order to use it as parameter 'T' in the generic type or method 'MyCollection<T>'
                 //     public static MyCollection<T> Create<T>(ReadOnlySpan<T> items)
-                Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "Create").WithArguments("MyCollection<T>", "T", "T").WithLocation(15, 35));
+                Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "Create")
+                    .WithArguments("MyCollection<T>", "T", "T")
+                    .WithLocation(15, 35)
+            );
         }
 
         [CombinatorialData]
@@ -12396,20 +14579,29 @@ partial class Program
                     }
                 }
                 """;
-            comp = CreateCompilation(sourceB, references: new[] { refA }, targetFramework: TargetFramework.Net80);
+            comp = CreateCompilation(
+                sourceB,
+                references: new[] { refA },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics();
 
-            var collectionType = (NamedTypeSymbol)comp.GetMember<MethodSymbol>("Program.F").Parameters[0].Type;
+            var collectionType = (NamedTypeSymbol)
+                comp.GetMember<MethodSymbol>("Program.F").Parameters[0].Type;
             Assert.Equal("MyCollection<System.Int32>", collectionType.ToTestDisplayString());
             TypeSymbol builderType;
             string methodName;
-            Assert.True(collectionType.HasCollectionBuilderAttribute(out builderType, out methodName));
+            Assert.True(
+                collectionType.HasCollectionBuilderAttribute(out builderType, out methodName)
+            );
             Assert.Equal("MyCollectionBuilder", builderType.ToTestDisplayString());
             Assert.Equal("Create", methodName);
 
             var originalType = collectionType.OriginalDefinition;
             Assert.Equal("MyCollection<T>", originalType.ToTestDisplayString());
-            Assert.True(originalType.HasCollectionBuilderAttribute(out builderType, out methodName));
+            Assert.True(
+                originalType.HasCollectionBuilderAttribute(out builderType, out methodName)
+            );
             Assert.Equal("MyCollectionBuilder", builderType.ToTestDisplayString());
             Assert.Equal("Create", methodName);
         }
@@ -12450,27 +14642,45 @@ partial class Program
                     }
                 }
                 """;
-            var comp = CreateCompilation(new[] { sourceA, sourceB }, targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(
+                new[] { sourceA, sourceB },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // 0.cs(5,2): error CS9185: The CollectionBuilderAttribute builder type must be a non-generic class or struct.
                 // [CollectionBuilder(typeof(Container<string>.MyCollectionBuilder), "Create")]
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeInvalidType, "CollectionBuilder").WithLocation(5, 2),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeInvalidType, "CollectionBuilder")
+                    .WithLocation(5, 2),
                 // 1.cs(6,11): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         F([]);
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(6, 11));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(6, 11)
+            );
 
-            var collectionType = (NamedTypeSymbol)comp.GetMember<MethodSymbol>("Program.F").Parameters[0].Type;
+            var collectionType = (NamedTypeSymbol)
+                comp.GetMember<MethodSymbol>("Program.F").Parameters[0].Type;
             Assert.Equal("MyCollection<System.Int32>", collectionType.ToTestDisplayString());
             TypeSymbol builderType;
             string methodName;
-            Assert.True(collectionType.HasCollectionBuilderAttribute(out builderType, out methodName));
-            Assert.Equal("Container<System.String>.MyCollectionBuilder", builderType.ToTestDisplayString());
+            Assert.True(
+                collectionType.HasCollectionBuilderAttribute(out builderType, out methodName)
+            );
+            Assert.Equal(
+                "Container<System.String>.MyCollectionBuilder",
+                builderType.ToTestDisplayString()
+            );
             Assert.Equal("Create", methodName);
 
             var originalType = collectionType.OriginalDefinition;
             Assert.Equal("MyCollection<T>", originalType.ToTestDisplayString());
-            Assert.True(originalType.HasCollectionBuilderAttribute(out builderType, out methodName));
-            Assert.Equal("Container<System.String>.MyCollectionBuilder", builderType.ToTestDisplayString());
+            Assert.True(
+                originalType.HasCollectionBuilderAttribute(out builderType, out methodName)
+            );
+            Assert.Equal(
+                "Container<System.String>.MyCollectionBuilder",
+                builderType.ToTestDisplayString()
+            );
             Assert.Equal("Create", methodName);
         }
 
@@ -12512,10 +14722,17 @@ partial class Program
             comp.VerifyEmitDiagnostics(
                 // 0.cs(7,24): error CS0416: 'Container<T>.MyCollectionBuilder': an attribute argument cannot use type parameters
                 //     [CollectionBuilder(typeof(MyCollectionBuilder), "Create")]
-                Diagnostic(ErrorCode.ERR_AttrArgWithTypeVars, "typeof(MyCollectionBuilder)").WithArguments("Container<T>.MyCollectionBuilder").WithLocation(7, 24));
+                Diagnostic(ErrorCode.ERR_AttrArgWithTypeVars, "typeof(MyCollectionBuilder)")
+                    .WithArguments("Container<T>.MyCollectionBuilder")
+                    .WithLocation(7, 24)
+            );
 
-            var collectionType = (NamedTypeSymbol)comp.GetMember<MethodSymbol>("Program.F").Parameters[0].Type;
-            Assert.Equal("Container<System.String>.MyCollection", collectionType.ToTestDisplayString());
+            var collectionType = (NamedTypeSymbol)
+                comp.GetMember<MethodSymbol>("Program.F").Parameters[0].Type;
+            Assert.Equal(
+                "Container<System.String>.MyCollection",
+                collectionType.ToTestDisplayString()
+            );
             Assert.False(collectionType.HasCollectionBuilderAttribute(out _, out _));
 
             var originalType = collectionType.OriginalDefinition;
@@ -12541,7 +14758,10 @@ partial class Program
                     public static void Create(int[] items) { }
                 }
                 """;
-            var comp = CreateCompilation(new[] { sourceA, CollectionBuilderAttributeDefinition }, targetFramework: TargetFramework.Mscorlib40);
+            var comp = CreateCompilation(
+                new[] { sourceA, CollectionBuilderAttributeDefinition },
+                targetFramework: TargetFramework.Mscorlib40
+            );
             comp.VerifyEmitDiagnostics();
             var refA = comp.ToMetadataReference();
 
@@ -12559,23 +14779,35 @@ partial class Program
                     }
                 }
                 """;
-            comp = CreateCompilation(sourceB, references: new[] { refA }, targetFramework: TargetFramework.Mscorlib45);
+            comp = CreateCompilation(
+                sourceB,
+                references: new[] { refA },
+                targetFramework: TargetFramework.Mscorlib45
+            );
             comp.VerifyEmitDiagnostics(
                 // (6,11): error CS9187: Could not find an accessible 'Create' method with the expected signature: a static method with a single parameter of type 'ReadOnlySpan<T>' and return type 'MyCollection<T>'.
                 //         F([]);
-                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]").WithArguments("Create", "T", "MyCollection<T>").WithLocation(6, 11));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderAttributeMethodNotFound, "[]")
+                    .WithArguments("Create", "T", "MyCollection<T>")
+                    .WithLocation(6, 11)
+            );
 
-            var collectionType = (NamedTypeSymbol)comp.GetMember<MethodSymbol>("Program.F").Parameters[0].Type;
+            var collectionType = (NamedTypeSymbol)
+                comp.GetMember<MethodSymbol>("Program.F").Parameters[0].Type;
             Assert.Equal("MyCollection<System.Int32>", collectionType.ToTestDisplayString());
             TypeSymbol builderType;
             string methodName;
-            Assert.True(collectionType.HasCollectionBuilderAttribute(out builderType, out methodName));
+            Assert.True(
+                collectionType.HasCollectionBuilderAttribute(out builderType, out methodName)
+            );
             Assert.Equal("MyCollectionBuilder", builderType.ToTestDisplayString());
             Assert.Equal("Create", methodName);
 
             var retargetingType = (RetargetingNamedTypeSymbol)collectionType.OriginalDefinition;
             Assert.Equal("MyCollection<T>", retargetingType.ToTestDisplayString());
-            Assert.True(retargetingType.HasCollectionBuilderAttribute(out builderType, out methodName));
+            Assert.True(
+                retargetingType.HasCollectionBuilderAttribute(out builderType, out methodName)
+            );
             Assert.IsType<RetargetingNamedTypeSymbol>(builderType);
             Assert.Equal("MyCollectionBuilder", builderType.ToTestDisplayString());
             Assert.Equal("Create", methodName);
@@ -12616,7 +14848,10 @@ partial class Program
             comp.VerifyEmitDiagnostics(
                 // (24,31): error CS9188: 'MyCollection<int>' has a CollectionBuilderAttribute but no element type.
                 //         MyCollection<int> c = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderNoElementType, "[]").WithArguments("MyCollection<int>").WithLocation(24, 31));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderNoElementType, "[]")
+                    .WithArguments("MyCollection<int>")
+                    .WithLocation(24, 31)
+            );
         }
 
         [Fact]
@@ -12654,11 +14889,18 @@ partial class Program
                     }
                 }
                 """;
-            comp = CreateCompilation(sourceB, references: new[] { refA }, targetFramework: TargetFramework.Net80);
+            comp = CreateCompilation(
+                sourceB,
+                references: new[] { refA },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // (6,31): error CS9188: 'MyCollection<int>' has a CollectionBuilderAttribute but no element type.
                 //         MyCollection<int> c = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderNoElementType, "[]").WithArguments("MyCollection<int>").WithLocation(6, 31));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderNoElementType, "[]")
+                    .WithArguments("MyCollection<int>")
+                    .WithLocation(6, 31)
+            );
         }
 
         [Fact]
@@ -12690,10 +14932,15 @@ partial class Program
             comp.VerifyEmitDiagnostics(
                 // (8,42): error CS9188: 'MyCollection<T>' has a CollectionBuilderAttribute but no element type.
                 //     public static MyCollection<T> F() => [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderNoElementType, "[]").WithArguments("MyCollection<T>").WithLocation(8, 42),
+                Diagnostic(ErrorCode.ERR_CollectionBuilderNoElementType, "[]")
+                    .WithArguments("MyCollection<T>")
+                    .WithLocation(8, 42),
                 // (18,31): error CS9188: 'MyCollection<int>' has a CollectionBuilderAttribute but no element type.
                 //         MyCollection<int> c = [];
-                Diagnostic(ErrorCode.ERR_CollectionBuilderNoElementType, "[]").WithArguments("MyCollection<int>").WithLocation(18, 31));
+                Diagnostic(ErrorCode.ERR_CollectionBuilderNoElementType, "[]")
+                    .WithArguments("MyCollection<int>")
+                    .WithLocation(18, 31)
+            );
         }
 
         [InlineData("", "", false)]
@@ -12703,7 +14950,11 @@ partial class Program
         [InlineData("scoped", "scoped", false)]
         [InlineData("scoped", "scoped", true)]
         [Theory]
-        public void CollectionBuilder_Scoped(string constructorParameterModifier, string builderParameterModifier, bool useCompilationReference)
+        public void CollectionBuilder_Scoped(
+            string constructorParameterModifier,
+            string builderParameterModifier,
+            bool useCompilationReference
+        )
         {
             string sourceA = $$"""
                 using System;
@@ -12752,7 +15003,8 @@ partial class Program
                 references: new[] { refA },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[], [1, 2, 3], "));
+                expectedOutput: IncludeExpectedOutput("[], [1, 2, 3], ")
+            );
         }
 
         [Fact]
@@ -12789,14 +15041,22 @@ partial class Program
                     }
                 }
                 """;
-            var comp = CreateCompilation(new[] { sourceA, sourceB }, targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(
+                new[] { sourceA, sourceB },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // 0.cs(16,78): error CS8347: Cannot use a result of 'MyCollection<T>.MyCollection(ReadOnlySpan<T>)' in this context because it may expose variables referenced by parameter 'items' outside of their declaration scope
                 //     public static MyCollection<T> Create<T>(scoped ReadOnlySpan<T> items) => new(items);
-                Diagnostic(ErrorCode.ERR_EscapeCall, "new(items)").WithArguments("MyCollection<T>.MyCollection(System.ReadOnlySpan<T>)", "items").WithLocation(16, 78),
+                Diagnostic(ErrorCode.ERR_EscapeCall, "new(items)")
+                    .WithArguments("MyCollection<T>.MyCollection(System.ReadOnlySpan<T>)", "items")
+                    .WithLocation(16, 78),
                 // 0.cs(16,82): error CS8352: Cannot use variable 'scoped ReadOnlySpan<T> items' in this context because it may expose referenced variables outside of their declaration scope
                 //     public static MyCollection<T> Create<T>(scoped ReadOnlySpan<T> items) => new(items);
-                Diagnostic(ErrorCode.ERR_EscapeVariable, "items").WithArguments("scoped System.ReadOnlySpan<T> items").WithLocation(16, 82));
+                Diagnostic(ErrorCode.ERR_EscapeVariable, "items")
+                    .WithArguments("scoped System.ReadOnlySpan<T> items")
+                    .WithLocation(16, 82)
+            );
         }
 
         [CombinatorialData]
@@ -12832,18 +15092,29 @@ partial class Program
                     }
                 }
                 """;
-            comp = CreateCompilation(sourceB, references: new[] { refA }, targetFramework: TargetFramework.Net80);
+            comp = CreateCompilation(
+                sourceB,
+                references: new[] { refA },
+                targetFramework: TargetFramework.Net80
+            );
             comp.MakeTypeMissing(SpecialType.System_Int32);
             comp.VerifyEmitDiagnostics(
                 // (7,34): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //         MyCollection<string> y = ["2"];
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, @"[""2""]").WithArguments("System.Int32").WithLocation(7, 34),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, @"[""2""]")
+                    .WithArguments("System.Int32")
+                    .WithLocation(7, 34),
                 // (7,34): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //         MyCollection<string> y = ["2"];
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, @"[""2""]").WithArguments("System.Int32").WithLocation(7, 34),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, @"[""2""]")
+                    .WithArguments("System.Int32")
+                    .WithLocation(7, 34),
                 // (7,34): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //         MyCollection<string> y = ["2"];
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, @"[""2""]").WithArguments("System.Int32").WithLocation(7, 34));
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, @"[""2""]")
+                    .WithArguments("System.Int32")
+                    .WithLocation(7, 34)
+            );
         }
 
         [Fact]
@@ -12890,17 +15161,37 @@ partial class Program
                     }
                 }
                 """;
-            var comp = CreateCompilation(sourceB, references: new[] { refA }, targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(
+                sourceB,
+                references: new[] { refA },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // (6,31): error CS9041: 'MyCollectionBuilder.Create<T>(ReadOnlySpan<T>)' requires compiler feature 'MyFeature', which is not supported by this version of the C# compiler.
                 //         MyCollection<int> x = [];
-                Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "[]").WithArguments("MyCollectionBuilder.Create<T>(System.ReadOnlySpan<T>)", "MyFeature").WithLocation(6, 31),
+                Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "[]")
+                    .WithArguments(
+                        "MyCollectionBuilder.Create<T>(System.ReadOnlySpan<T>)",
+                        "MyFeature"
+                    )
+                    .WithLocation(6, 31),
                 // (7,34): error CS9041: 'MyCollectionBuilder.Create<T>(ReadOnlySpan<T>)' requires compiler feature 'MyFeature', which is not supported by this version of the C# compiler.
                 //         MyCollection<string> y = [null];
-                Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "[null]").WithArguments("MyCollectionBuilder.Create<T>(System.ReadOnlySpan<T>)", "MyFeature").WithLocation(7, 34),
+                Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "[null]")
+                    .WithArguments(
+                        "MyCollectionBuilder.Create<T>(System.ReadOnlySpan<T>)",
+                        "MyFeature"
+                    )
+                    .WithLocation(7, 34),
                 // (8,54): error CS9041: 'MyCollectionBuilder.Create<T>(ReadOnlySpan<T>)' requires compiler feature 'MyFeature', which is not supported by this version of the C# compiler.
                 //         MyCollection<object> z = MyCollectionBuilder.Create<object>(default);
-                Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Create<object>").WithArguments("MyCollectionBuilder.Create<T>(System.ReadOnlySpan<T>)", "MyFeature").WithLocation(8, 54));
+                Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Create<object>")
+                    .WithArguments(
+                        "MyCollectionBuilder.Create<T>(System.ReadOnlySpan<T>)",
+                        "MyFeature"
+                    )
+                    .WithLocation(8, 54)
+            );
         }
 
         [Fact]
@@ -12947,20 +15238,33 @@ partial class Program
                     }
                 }
                 """;
-            var comp = CreateCompilation(sourceB, references: new[] { refA }, targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(
+                sourceB,
+                references: new[] { refA },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // (6,31): error CS9041: 'MyCollectionBuilder' requires compiler feature 'MyFeature', which is not supported by this version of the C# compiler.
                 //         MyCollection<int> x = [];
-                Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "[]").WithArguments("MyCollectionBuilder", "MyFeature").WithLocation(6, 31),
+                Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "[]")
+                    .WithArguments("MyCollectionBuilder", "MyFeature")
+                    .WithLocation(6, 31),
                 // (7,34): error CS9041: 'MyCollectionBuilder' requires compiler feature 'MyFeature', which is not supported by this version of the C# compiler.
                 //         MyCollection<string> y = [null];
-                Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "[null]").WithArguments("MyCollectionBuilder", "MyFeature").WithLocation(7, 34),
+                Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "[null]")
+                    .WithArguments("MyCollectionBuilder", "MyFeature")
+                    .WithLocation(7, 34),
                 // (8,34): error CS9041: 'MyCollectionBuilder' requires compiler feature 'MyFeature', which is not supported by this version of the C# compiler.
                 //         MyCollection<object> z = MyCollectionBuilder.Create<object>(default);
-                Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "MyCollectionBuilder").WithArguments("MyCollectionBuilder", "MyFeature").WithLocation(8, 34),
+                Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "MyCollectionBuilder")
+                    .WithArguments("MyCollectionBuilder", "MyFeature")
+                    .WithLocation(8, 34),
                 // (8,54): error CS9041: 'MyCollectionBuilder' requires compiler feature 'MyFeature', which is not supported by this version of the C# compiler.
                 //         MyCollection<object> z = MyCollectionBuilder.Create<object>(default);
-                Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Create<object>").WithArguments("MyCollectionBuilder", "MyFeature").WithLocation(8, 54));
+                Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Create<object>")
+                    .WithArguments("MyCollectionBuilder", "MyFeature")
+                    .WithLocation(8, 54)
+            );
         }
 
         [Fact]
@@ -13011,8 +15315,10 @@ partial class Program
                 new[] { sourceA, sourceB, s_collectionExtensions },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Fails,
-                expectedOutput: IncludeExpectedOutput("[1, 2, 3], "));
-            verifier.VerifyIL("Program.<CreateCollection>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
+                expectedOutput: IncludeExpectedOutput("[1, 2, 3], ")
+            );
+            verifier.VerifyIL(
+                "Program.<CreateCollection>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
                 """
                 {
                   // Code size      324 (0x144)
@@ -13153,7 +15459,8 @@ partial class Program
                   IL_013e:  call       "void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<MyCollection<int>>.SetResult(MyCollection<int>)"
                   IL_0143:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -13183,7 +15490,12 @@ partial class Program
             comp.VerifyEmitDiagnostics(
                 // 0.cs(6,49): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
                 // [CollectionBuilder(typeof(MyCollectionBuilder), MyCollectionBuilder.GetName([1, 2, 3]))]
-                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "MyCollectionBuilder.GetName([1, 2, 3])").WithLocation(6, 49));
+                Diagnostic(
+                        ErrorCode.ERR_BadAttributeArgument,
+                        "MyCollectionBuilder.GetName([1, 2, 3])"
+                    )
+                    .WithLocation(6, 49)
+            );
         }
 
         [Fact]
@@ -13213,7 +15525,10 @@ partial class Program
             comp.VerifyEmitDiagnostics(
                 // (6,49): error CS1503: Argument 2: cannot convert from 'collection expressions' to 'string'
                 // [CollectionBuilder(typeof(MyCollectionBuilder), ['h', 'i'])]
-                Diagnostic(ErrorCode.ERR_BadArgType, "['h', 'i']").WithArguments("2", "collection expressions", "string").WithLocation(6, 49));
+                Diagnostic(ErrorCode.ERR_BadArgType, "['h', 'i']")
+                    .WithArguments("2", "collection expressions", "string")
+                    .WithLocation(6, 49)
+            );
         }
 
         [Fact]
@@ -13244,7 +15559,10 @@ partial class Program
             comp.VerifyEmitDiagnostics(
                 // (7,2): error CS0181: Attribute constructor parameter 'mc' has type 'MyCollection<int>', which is not a valid attribute parameter type
                 // [MyCollection<int>([1, 2, 3])]
-                Diagnostic(ErrorCode.ERR_BadAttributeParamType, "MyCollection<int>").WithArguments("mc", "MyCollection<int>").WithLocation(7, 2));
+                Diagnostic(ErrorCode.ERR_BadAttributeParamType, "MyCollection<int>")
+                    .WithArguments("mc", "MyCollection<int>")
+                    .WithLocation(7, 2)
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/69980")]
@@ -13276,14 +15594,22 @@ partial class Program
                     }
                 }
                 """;
-            var comp = CreateCompilation(new[] { sourceA, sourceB }, targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(
+                new[] { sourceA, sourceB },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // 1.cs(5,32): error CS0029: Cannot implicitly convert type 'string' to 'int'
                 //         MyCollection<int> c = [string.Empty, 2, null];
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "string.Empty").WithArguments("string", "int").WithLocation(5, 32),
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "string.Empty")
+                    .WithArguments("string", "int")
+                    .WithLocation(5, 32),
                 // 1.cs(5,49): error CS0037: Cannot convert null to 'int' because it is a non-nullable value type
                 //         MyCollection<int> c = [string.Empty, 2, null];
-                Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null").WithArguments("int").WithLocation(5, 49));
+                Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
+                    .WithArguments("int")
+                    .WithLocation(5, 49)
+            );
         }
 
         [Fact]
@@ -13313,16 +15639,25 @@ partial class Program
             comp.VerifyEmitDiagnostics(
                 // 1.cs(5,32): error CS1950: The best overloaded Add method 'MyCollection<int>.Add(int)' for the collection initializer has some invalid arguments
                 //         MyCollection<int> c = [string.Empty, 2, null];
-                Diagnostic(ErrorCode.ERR_BadArgTypesForCollectionAdd, "string.Empty").WithArguments("MyCollection<int>.Add(int)").WithLocation(5, 32),
+                Diagnostic(ErrorCode.ERR_BadArgTypesForCollectionAdd, "string.Empty")
+                    .WithArguments("MyCollection<int>.Add(int)")
+                    .WithLocation(5, 32),
                 // 1.cs(5,32): error CS1503: Argument 1: cannot convert from 'string' to 'int'
                 //         MyCollection<int> c = [string.Empty, 2, null];
-                Diagnostic(ErrorCode.ERR_BadArgType, "string.Empty").WithArguments("1", "string", "int").WithLocation(5, 32),
+                Diagnostic(ErrorCode.ERR_BadArgType, "string.Empty")
+                    .WithArguments("1", "string", "int")
+                    .WithLocation(5, 32),
                 // 1.cs(5,49): error CS1950: The best overloaded Add method 'MyCollection<int>.Add(int)' for the collection initializer has some invalid arguments
                 //         MyCollection<int> c = [string.Empty, 2, null];
-                Diagnostic(ErrorCode.ERR_BadArgTypesForCollectionAdd, "null").WithArguments("MyCollection<int>.Add(int)").WithLocation(5, 49),
+                Diagnostic(ErrorCode.ERR_BadArgTypesForCollectionAdd, "null")
+                    .WithArguments("MyCollection<int>.Add(int)")
+                    .WithLocation(5, 49),
                 // 1.cs(5,49): error CS1503: Argument 1: cannot convert from '<null>' to 'int'
                 //         MyCollection<int> c = [string.Empty, 2, null];
-                Diagnostic(ErrorCode.ERR_BadArgType, "null").WithArguments("1", "<null>", "int").WithLocation(5, 49));
+                Diagnostic(ErrorCode.ERR_BadArgType, "null")
+                    .WithArguments("1", "<null>", "int")
+                    .WithLocation(5, 49)
+            );
         }
 
         [InlineData("int[]")]
@@ -13346,10 +15681,15 @@ partial class Program
             comp.VerifyEmitDiagnostics(
                 // (6,14): error CS0029: Cannot implicitly convert type 'string' to 'int'
                 //         c = [string.Empty, 2, null];
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "string.Empty").WithArguments("string", "int").WithLocation(6, 14),
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "string.Empty")
+                    .WithArguments("string", "int")
+                    .WithLocation(6, 14),
                 // (6,31): error CS0037: Cannot convert null to 'int' because it is a non-nullable value type
                 //         c = [string.Empty, 2, null];
-                Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null").WithArguments("int").WithLocation(6, 31));
+                Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
+                    .WithArguments("int")
+                    .WithLocation(6, 31)
+            );
         }
 
         [ConditionalFact(typeof(DesktopOnly))]
@@ -13371,13 +15711,23 @@ partial class Program
             comp.VerifyEmitDiagnostics(
                 // (6,17): error CS9176: There is no target type for the collection expression.
                 //         var x = [default(TypedReference)];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[default(TypedReference)]").WithLocation(6, 17),
+                Diagnostic(
+                        ErrorCode.ERR_CollectionExpressionNoTargetType,
+                        "[default(TypedReference)]"
+                    )
+                    .WithLocation(6, 17),
                 // (7,17): error CS9176: There is no target type for the collection expression.
                 //         var y = [default(ArgIterator)];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[default(ArgIterator)]").WithLocation(7, 17),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[default(ArgIterator)]")
+                    .WithLocation(7, 17),
                 // (8,17): error CS9176: There is no target type for the collection expression.
                 //         var z = [default(RuntimeArgumentHandle)];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[default(RuntimeArgumentHandle)]").WithLocation(8, 17));
+                Diagnostic(
+                        ErrorCode.ERR_CollectionExpressionNoTargetType,
+                        "[default(RuntimeArgumentHandle)]"
+                    )
+                    .WithLocation(8, 17)
+            );
         }
 
         [Fact]
@@ -13402,10 +15752,13 @@ partial class Program
             comp.VerifyEmitDiagnostics(
                 // (10,17): error CS9176: There is no target type for the collection expression.
                 //         var x = [default(R)];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[default(R)]").WithLocation(10, 17),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[default(R)]")
+                    .WithLocation(10, 17),
                 // (11,17): error CS9176: There is no target type for the collection expression.
                 //         var y = [new R(ref i)];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[new R(ref i)]").WithLocation(11, 17));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[new R(ref i)]")
+                    .WithLocation(11, 17)
+            );
         }
 
         [Fact]
@@ -13464,7 +15817,10 @@ partial class Program
 
         [CombinatorialData]
         [Theory]
-        public void RefSafety_Return_01([CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)] TargetFramework targetFramework)
+        public void RefSafety_Return_01(
+            [CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)]
+                TargetFramework targetFramework
+        )
         {
             string source = """
                 using System;
@@ -13483,8 +15839,11 @@ partial class Program
                 new[] { source, s_collectionExtensionsWithSpan },
                 targetFramework: targetFramework,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[], [], "));
-            verifier.VerifyIL("Program.F1<T>", """
+                expectedOutput: IncludeExpectedOutput("[], [], ")
+            );
+            verifier.VerifyIL(
+                "Program.F1<T>",
+                """
                 {
                   // Code size       11 (0xb)
                   .maxstack  1
@@ -13492,8 +15851,11 @@ partial class Program
                   IL_0005:  newobj     "System.Span<T>..ctor(T[])"
                   IL_000a:  ret
                 }
-                """);
-            verifier.VerifyIL("Program.F2<T>", """
+                """
+            );
+            verifier.VerifyIL(
+                "Program.F2<T>",
+                """
                 {
                   // Code size       11 (0xb)
                   .maxstack  1
@@ -13501,12 +15863,16 @@ partial class Program
                   IL_0005:  newobj     "System.ReadOnlySpan<T>..ctor(T[])"
                   IL_000a:  ret
                 }
-                """);
+                """
+            );
         }
 
         [CombinatorialData]
         [Theory]
-        public void RefSafety_Return_02([CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)] TargetFramework targetFramework)
+        public void RefSafety_Return_02(
+            [CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)]
+                TargetFramework targetFramework
+        )
         {
             string source = """
                 using System;
@@ -13522,18 +15888,28 @@ partial class Program
             comp.VerifyEmitDiagnostics(
                 // (5,39): error CS9203: A collection expression of type 'Span<T>' cannot be used in this context because it may be exposed outside of the current scope.
                 //     static Span<T> F1<T>(T x, T y) => [x, y];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[x, y]").WithArguments("System.Span<T>").WithLocation(5, 39),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[x, y]")
+                    .WithArguments("System.Span<T>")
+                    .WithLocation(5, 39),
                 // (6,47): error CS9203: A collection expression of type 'ReadOnlySpan<T>' cannot be used in this context because it may be exposed outside of the current scope.
                 //     static ReadOnlySpan<T> F2<T>(T x, T y) => [x, y];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[x, y]").WithArguments("System.ReadOnlySpan<T>").WithLocation(6, 47),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[x, y]")
+                    .WithArguments("System.ReadOnlySpan<T>")
+                    .WithLocation(6, 47),
                 // (7,55): error CS9203: A collection expression of type 'ReadOnlySpan<T>' cannot be used in this context because it may be exposed outside of the current scope.
                 //     static ReadOnlySpan<T> F3<T>(IEnumerable<T> e) => [..e];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[..e]").WithArguments("System.ReadOnlySpan<T>").WithLocation(7, 55));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[..e]")
+                    .WithArguments("System.ReadOnlySpan<T>")
+                    .WithLocation(7, 55)
+            );
         }
 
         [CombinatorialData]
         [Theory]
-        public void RefSafety_Return_03([CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)] TargetFramework targetFramework)
+        public void RefSafety_Return_03(
+            [CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)]
+                TargetFramework targetFramework
+        )
         {
             string source = """
                 using System;
@@ -13552,8 +15928,11 @@ partial class Program
                 new[] { source, s_collectionExtensionsWithSpan },
                 targetFramework: targetFramework,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[1, 2], [3, null], "));
-            verifier.VerifyIL("Program.F1<T>", """
+                expectedOutput: IncludeExpectedOutput("[1, 2], [3, null], ")
+            );
+            verifier.VerifyIL(
+                "Program.F1<T>",
+                """
                 {
                     // Code size       28 (0x1c)
                     .maxstack  4
@@ -13570,8 +15949,11 @@ partial class Program
                     IL_0016:  call       "System.Span<T> System.Span<T>.op_Implicit(T[])"
                     IL_001b:  ret
                 }
-                """);
-            verifier.VerifyIL("Program.F2<T>", """
+                """
+            );
+            verifier.VerifyIL(
+                "Program.F2<T>",
+                """
                 {
                   // Code size       28 (0x1c)
                   .maxstack  4
@@ -13588,7 +15970,8 @@ partial class Program
                   IL_0016:  call       "System.ReadOnlySpan<T> System.ReadOnlySpan<T>.op_Implicit(T[])"
                   IL_001b:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -13610,15 +15993,20 @@ partial class Program
             comp.VerifyEmitDiagnostics(
                 // (7,26): error CS9203: A collection expression of type 'Span<int>' cannot be used in this context because it may be exposed outside of the current scope.
                 //         D<int> d = () => [1, 2, 3];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[1, 2, 3]").WithArguments("System.Span<int>").WithLocation(7, 26));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[1, 2, 3]")
+                    .WithArguments("System.Span<int>")
+                    .WithLocation(7, 26)
+            );
         }
 
         [CombinatorialData]
         [Theory]
         public void RefSafety_RefStruct(
-            [CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)] TargetFramework targetFramework,
+            [CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)]
+                TargetFramework targetFramework,
             bool useScoped,
-            bool useUnsafe)
+            bool useUnsafe
+        )
         {
             string sourceA = $$"""
                 using System;
@@ -13638,8 +16026,11 @@ partial class Program
                 }
                 """;
             var comp = CreateCompilation(
-                targetFramework == TargetFramework.Net80 ? new[] { sourceA } : new[] { sourceA, CollectionBuilderAttributeDefinition },
-                targetFramework: targetFramework);
+                targetFramework == TargetFramework.Net80
+                    ? new[] { sourceA }
+                    : new[] { sourceA, CollectionBuilderAttributeDefinition },
+                targetFramework: targetFramework
+            );
             comp.VerifyEmitDiagnostics();
             var refA = comp.EmitToImageReference();
 
@@ -13668,20 +16059,28 @@ partial class Program
                 new[] { sourceB, s_collectionExtensions },
                 references: new[] { refA },
                 targetFramework: targetFramework,
-                options: useUnsafe ? TestOptions.UnsafeReleaseExe : TestOptions.ReleaseExe);
+                options: useUnsafe ? TestOptions.UnsafeReleaseExe : TestOptions.ReleaseExe
+            );
             if (!useScoped)
             {
                 comp.VerifyEmitDiagnostics(
                     // 0.cs(12,60): error CS9203: A collection expression of type 'MyCollection<T>' cannot be used in this context because it may be exposed outside of the current scope.
                     //     static MyCollection<T> ThreeItems<T>(T x, T y, T z) => [x, y, z];
-                    Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[x, y, z]").WithArguments("MyCollection<T>").WithLocation(12, 60));
+                    Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[x, y, z]")
+                        .WithArguments("MyCollection<T>")
+                        .WithLocation(12, 60)
+                );
             }
             else
             {
-                var verifier = CompileAndVerify(comp,
+                var verifier = CompileAndVerify(
+                    comp,
                     verify: Verification.Skipped,
-                    expectedOutput: IncludeExpectedOutput("[], [1, 2, 3], "));
-                verifier.VerifyIL("Program.Empty<T>", """
+                    expectedOutput: IncludeExpectedOutput("[], [1, 2, 3], ")
+                );
+                verifier.VerifyIL(
+                    "Program.Empty<T>",
+                    """
                     {
                       // Code size       16 (0x10)
                       .maxstack  1
@@ -13690,10 +16089,13 @@ partial class Program
                       IL_000a:  call       "MyCollection<T> MyCollectionBuilder.Create<T>(scoped System.ReadOnlySpan<T>)"
                       IL_000f:  ret
                     }
-                    """);
+                    """
+                );
                 if (targetFramework == TargetFramework.Net80)
                 {
-                    verifier.VerifyIL("Program.ThreeItems<T>", """
+                    verifier.VerifyIL(
+                        "Program.ThreeItems<T>",
+                        """
                         {
                           // Code size       64 (0x40)
                           .maxstack  2
@@ -13721,11 +16123,14 @@ partial class Program
                           IL_003a:  call       "MyCollection<T> MyCollectionBuilder.Create<T>(scoped System.ReadOnlySpan<T>)"
                           IL_003f:  ret
                         }
-                        """);
+                        """
+                    );
                 }
                 else
                 {
-                    verifier.VerifyIL("Program.ThreeItems<T>", """
+                    verifier.VerifyIL(
+                        "Program.ThreeItems<T>",
+                        """
                         {
                           // Code size       41 (0x29)
                           .maxstack  4
@@ -13747,7 +16152,8 @@ partial class Program
                           IL_0023:  call       "MyCollection<T> MyCollectionBuilder.Create<T>(scoped System.ReadOnlySpan<T>)"
                           IL_0028:  ret
                         }
-                        """);
+                        """
+                    );
                 }
             }
         }
@@ -13774,7 +16180,11 @@ partial class Program
                         => new MyCollection<T>(new List<T>(items.ToArray()));
                 }
                 """;
-            var comp = CreateCompilation(new[] { sourceA, CollectionBuilderAttributeDefinition }, parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp10), targetFramework: TargetFramework.Net60);
+            var comp = CreateCompilation(
+                new[] { sourceA, CollectionBuilderAttributeDefinition },
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp10),
+                targetFramework: TargetFramework.Net60
+            );
             comp.VerifyEmitDiagnostics();
             Assert.False(comp.SourceModule.UseUpdatedEscapeRules);
 
@@ -13801,16 +16211,27 @@ partial class Program
                     }
                 }
                 """;
-            comp = CreateCompilation(new[] { sourceB, s_collectionExtensions }, references: new[] { refA }, targetFramework: TargetFramework.Net60, options: TestOptions.ReleaseExe);
+            comp = CreateCompilation(
+                new[] { sourceB, s_collectionExtensions },
+                references: new[] { refA },
+                targetFramework: TargetFramework.Net60,
+                options: TestOptions.ReleaseExe
+            );
             comp.VerifyEmitDiagnostics(
                 // 0.cs(12,60): error CS9203: A collection expression of type 'MyCollection<T>' cannot be used in this context because it may be exposed outside of the current scope.
                 //     static MyCollection<T> ThreeItems<T>(T x, T y, T z) => [x, y, z];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[x, y, z]").WithArguments("MyCollection<T>").WithLocation(12, 60));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[x, y, z]")
+                    .WithArguments("MyCollection<T>")
+                    .WithLocation(12, 60)
+            );
         }
 
         [CombinatorialData]
         [Theory]
-        public void SpanArgument_01([CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)] TargetFramework targetFramework)
+        public void SpanArgument_01(
+            [CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)]
+                TargetFramework targetFramework
+        )
         {
             string source = """
                 using System;
@@ -13837,15 +16258,20 @@ partial class Program
                 {
                     if (targetFramework == TargetFramework.Net80)
                     {
-                        var synthesizedType = module.GlobalNamespace.GetTypeMember("<>y__InlineArray1");
+                        var synthesizedType = module.GlobalNamespace.GetTypeMember(
+                            "<>y__InlineArray1"
+                        );
                         Assert.Equal("<>y__InlineArray1<T>", synthesizedType.ToTestDisplayString());
                         Assert.Equal("<>y__InlineArray1`1", synthesizedType.MetadataName);
                     }
                 },
-                expectedOutput: IncludeExpectedOutput("[1], [2], [3], [4], "));
+                expectedOutput: IncludeExpectedOutput("[1], [2], [3], [4], ")
+            );
             if (targetFramework == TargetFramework.Net80)
             {
-                verifier.VerifyIL("Program.Main", """
+                verifier.VerifyIL(
+                    "Program.Main",
+                    """
                     {
                       // Code size      161 (0xa1)
                       .maxstack  2
@@ -13909,11 +16335,14 @@ partial class Program
                       IL_009b:  call       "void Program.F4<object>(in System.ReadOnlySpan<object>)"
                       IL_00a0:  ret
                     }
-                    """);
+                    """
+                );
             }
             else
             {
-                verifier.VerifyIL("Program.Main", """
+                verifier.VerifyIL(
+                    "Program.Main",
+                    """
                     {
                       // Code size      115 (0x73)
                       .maxstack  4
@@ -13961,7 +16390,8 @@ partial class Program
                       IL_006d:  call       "void Program.F4<object>(in System.ReadOnlySpan<object>)"
                       IL_0072:  ret
                     }
-                    """);
+                    """
+                );
             }
         }
 
@@ -13992,8 +16422,11 @@ partial class Program
                 new[] { source, s_collectionExtensionsWithSpan },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[1], [2], [3], [4], "));
-            verifier.VerifyIL("Program.Main", """
+                expectedOutput: IncludeExpectedOutput("[1], [2], [3], [4], ")
+            );
+            verifier.VerifyIL(
+                "Program.Main",
+                """
                 {
                     // Code size      149 (0x95)
                     .maxstack  2
@@ -14055,7 +16488,8 @@ partial class Program
                     IL_0093:  pop
                     IL_0094:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -14083,8 +16517,11 @@ partial class Program
                 new[] { source, s_collectionExtensionsWithSpan },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[2], [3], [4], "));
-            verifier.VerifyIL("Program.Main", """
+                expectedOutput: IncludeExpectedOutput("[2], [3], [4], ")
+            );
+            verifier.VerifyIL(
+                "Program.Main",
+                """
                 {
                     // Code size      112 (0x70)
                     .maxstack  2
@@ -14132,7 +16569,8 @@ partial class Program
                     IL_006e:  pop
                     IL_006f:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -14156,20 +16594,32 @@ partial class Program
                     }
                 }
                 """;
-            var comp = CreateCompilation(new[] { source, s_collectionExtensionsWithSpan }, targetFramework: TargetFramework.Net80);
+            var comp = CreateCompilation(
+                new[] { source, s_collectionExtensionsWithSpan },
+                targetFramework: TargetFramework.Net80
+            );
             comp.VerifyEmitDiagnostics(
                 // 0.cs(12,9): error CS8350: This combination of arguments to 'R1.M(ReadOnlySpan<int?>)' is disallowed because it may expose variables referenced by parameter 's' outside of their declaration scope
                 //         r1.M([3]);
-                Diagnostic(ErrorCode.ERR_CallArgMixing, "r1.M([3])").WithArguments("R1.M(System.ReadOnlySpan<int?>)", "s").WithLocation(12, 9),
+                Diagnostic(ErrorCode.ERR_CallArgMixing, "r1.M([3])")
+                    .WithArguments("R1.M(System.ReadOnlySpan<int?>)", "s")
+                    .WithLocation(12, 9),
                 // 0.cs(12,14): error CS9203: A collection expression of type 'ReadOnlySpan<int?>' cannot be used in this context because it may be exposed outside of the current scope.
                 //         r1.M([3]);
-                Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[3]").WithArguments("System.ReadOnlySpan<int?>").WithLocation(12, 14),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[3]")
+                    .WithArguments("System.ReadOnlySpan<int?>")
+                    .WithLocation(12, 14),
                 // 0.cs(13,9): error CS8350: This combination of arguments to 'R1.this[ReadOnlySpan<int?>]' is disallowed because it may expose variables referenced by parameter 's' outside of their declaration scope
                 //         r1[[4]] = null;
-                Diagnostic(ErrorCode.ERR_CallArgMixing, "r1[[4]]").WithArguments("R1.this[System.ReadOnlySpan<int?>]", "s").WithLocation(13, 9),
+                Diagnostic(ErrorCode.ERR_CallArgMixing, "r1[[4]]")
+                    .WithArguments("R1.this[System.ReadOnlySpan<int?>]", "s")
+                    .WithLocation(13, 9),
                 // 0.cs(13,12): error CS9203: A collection expression of type 'ReadOnlySpan<int?>' cannot be used in this context because it may be exposed outside of the current scope.
                 //         r1[[4]] = null;
-                Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[4]").WithArguments("System.ReadOnlySpan<int?>").WithLocation(13, 12));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[4]")
+                    .WithArguments("System.ReadOnlySpan<int?>")
+                    .WithLocation(13, 12)
+            );
         }
 
         [Fact]
@@ -14212,8 +16662,11 @@ partial class Program
                 new[] { source, s_collectionExtensionsWithSpan },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[1], [2], [3], [4], [5], [6], "));
-            verifier.VerifyIL("Program.Main", """
+                expectedOutput: IncludeExpectedOutput("[1], [2], [3], [4], [5], [6], ")
+            );
+            verifier.VerifyIL(
+                "Program.Main",
+                """
                 {
                   // Code size      280 (0x118)
                   .maxstack  3
@@ -14315,7 +16768,8 @@ partial class Program
                   IL_0112:  call       "void R2.this[scoped System.ReadOnlySpan<int?>].set"
                   IL_0117:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -14350,8 +16804,11 @@ partial class Program
                 new[] { source, s_collectionExtensionsWithSpan },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[3], [4], [5], [6], "));
-            verifier.VerifyIL("Program.Main", """
+                expectedOutput: IncludeExpectedOutput("[3], [4], [5], [6], ")
+            );
+            verifier.VerifyIL(
+                "Program.Main",
+                """
                 {
                   // Code size      187 (0xbb)
                   .maxstack  3
@@ -14421,7 +16878,8 @@ partial class Program
                   IL_00b9:  pop
                   IL_00ba:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -14444,8 +16902,11 @@ partial class Program
                 new[] { source, s_collectionExtensionsWithSpan },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[1], [3], [2], [4], "));
-            verifier.VerifyIL("Program.Main", """
+                expectedOutput: IncludeExpectedOutput("[1], [3], [2], [4], ")
+            );
+            verifier.VerifyIL(
+                "Program.Main",
+                """
                 {
                   // Code size      113 (0x71)
                   .maxstack  3
@@ -14494,7 +16955,8 @@ partial class Program
                   IL_006f:  pop
                   IL_0070:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -14527,8 +16989,11 @@ partial class Program
                 new[] { source, s_collectionExtensionsWithSpan },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[2], [1], [4], [3], "));
-            verifier.VerifyIL("Program.Main", """
+                expectedOutput: IncludeExpectedOutput("[2], [1], [4], [3], ")
+            );
+            verifier.VerifyIL(
+                "Program.Main",
+                """
                 {
                   // Code size      145 (0x91)
                   .maxstack  2
@@ -14592,14 +17057,17 @@ partial class Program
                   IL_008f:  pop
                   IL_0090:  ret
                 }
-                """);
+                """
+            );
         }
 
         [CombinatorialData]
         [Theory]
         public void SpanArgument_Constructor_01(
-            [CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)] TargetFramework targetFramework,
-            bool useScoped)
+            [CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)]
+                TargetFramework targetFramework,
+            bool useScoped
+        )
         {
             string source = $$"""
                 using System;
@@ -14631,30 +17099,43 @@ partial class Program
             var comp = CreateCompilation(
                 new[] { source, s_collectionExtensions },
                 targetFramework: targetFramework,
-                options: TestOptions.ReleaseExe);
+                options: TestOptions.ReleaseExe
+            );
             if (!useScoped)
             {
                 comp.VerifyEmitDiagnostics(
                     // 0.cs(4,29): error CS8350: This combination of arguments to 'R<T>.R(Span<T>)' is disallowed because it may expose variables referenced by parameter 's' outside of their declaration scope
                     //     public R(T x, T y, T z) : this([x, y, z])
-                    Diagnostic(ErrorCode.ERR_CallArgMixing, ": this([x, y, z])").WithArguments("R<T>.R(System.Span<T>)", "s").WithLocation(4, 29),
+                    Diagnostic(ErrorCode.ERR_CallArgMixing, ": this([x, y, z])")
+                        .WithArguments("R<T>.R(System.Span<T>)", "s")
+                        .WithLocation(4, 29),
                     // 0.cs(4,36): error CS9203: A collection expression of type 'Span<T>' cannot be used in this context because it may be exposed outside of the current scope.
                     //     public R(T x, T y, T z) : this([x, y, z])
-                    Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[x, y, z]").WithArguments("System.Span<T>").WithLocation(4, 36),
+                    Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[x, y, z]")
+                        .WithArguments("System.Span<T>")
+                        .WithLocation(4, 36),
                     // 0.cs(7,28): error CS8350: This combination of arguments to 'R<T>.R(Span<T>)' is disallowed because it may expose variables referenced by parameter 's' outside of their declaration scope
                     //     public R(int x, T[] y) : this([..y])
-                    Diagnostic(ErrorCode.ERR_CallArgMixing, ": this([..y])").WithArguments("R<T>.R(System.Span<T>)", "s").WithLocation(7, 28),
+                    Diagnostic(ErrorCode.ERR_CallArgMixing, ": this([..y])")
+                        .WithArguments("R<T>.R(System.Span<T>)", "s")
+                        .WithLocation(7, 28),
                     // 0.cs(7,35): error CS9203: A collection expression of type 'Span<T>' cannot be used in this context because it may be exposed outside of the current scope.
                     //     public R(int x, T[] y) : this([..y])
-                    Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[..y]").WithArguments("System.Span<T>").WithLocation(7, 35));
+                    Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[..y]")
+                        .WithArguments("System.Span<T>")
+                        .WithLocation(7, 35)
+                );
             }
             else if (targetFramework == TargetFramework.Net80)
             {
                 var verifier = CompileAndVerify(
                     comp,
                     verify: Verification.Skipped,
-                    expectedOutput: IncludeExpectedOutput("[1, 2, 3], [4, 5], "));
-                verifier.VerifyIL("R<T>..ctor(T, T, T)", """
+                    expectedOutput: IncludeExpectedOutput("[1, 2, 3], [4, 5], ")
+                );
+                verifier.VerifyIL(
+                    "R<T>..ctor(T, T, T)",
+                    """
                     {
                       // Code size       65 (0x41)
                       .maxstack  3
@@ -14683,8 +17164,11 @@ partial class Program
                       IL_003b:  call       "R<T>..ctor(scoped System.Span<T>)"
                       IL_0040:  ret
                     }
-                    """);
-                verifier.VerifyIL("R<T>..ctor(int, T[])", """
+                    """
+                );
+                verifier.VerifyIL(
+                    "R<T>..ctor(int, T[])",
+                    """
                     {
                       // Code size       55 (0x37)
                       .maxstack  2
@@ -14722,7 +17206,8 @@ partial class Program
                       IL_0031:  call       "R<T>..ctor(scoped System.Span<T>)"
                       IL_0036:  ret
                     }
-                    """);
+                    """
+                );
             }
         }
 
@@ -14754,8 +17239,11 @@ partial class Program
                 new[] { source, s_collectionExtensions },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[1, 2, 3], "));
-            verifier.VerifyIL("B<T>..ctor(T, T, T)", """
+                expectedOutput: IncludeExpectedOutput("[1, 2, 3], ")
+            );
+            verifier.VerifyIL(
+                "B<T>..ctor(T, T, T)",
+                """
                 {
                   // Code size       91 (0x5b)
                   .maxstack  3
@@ -14794,14 +17282,17 @@ partial class Program
                   IL_0055:  call       "A<T>..ctor(T[])"
                   IL_005a:  ret
                 }
-                """);
+                """
+            );
         }
 
         [CombinatorialData]
         [Theory]
         public void SpanAssignment_01(
-            [CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)] TargetFramework targetFramework,
-            [CombinatorialValues("Span<object>", "ReadOnlySpan<object>")] string spanType)
+            [CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)]
+                TargetFramework targetFramework,
+            [CombinatorialValues("Span<object>", "ReadOnlySpan<object>")] string spanType
+        )
         {
             string source = $$"""
                 using System;
@@ -14829,10 +17320,15 @@ partial class Program
             comp.VerifyEmitDiagnostics(
                 // (12,16): error CS8352: Cannot use variable 's2' in this context because it may expose referenced variables outside of their declaration scope
                 //         return s2;
-                Diagnostic(ErrorCode.ERR_EscapeVariable, "s2").WithArguments("s2").WithLocation(12, 16),
+                Diagnostic(ErrorCode.ERR_EscapeVariable, "s2")
+                    .WithArguments("s2")
+                    .WithLocation(12, 16),
                 // (17,14): error CS9203: A collection expression of type 'Span<object>' cannot be used in this context because it may be exposed outside of the current scope.
                 //         s3 = [3];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[3]").WithArguments($"System.{spanType}").WithLocation(17, 14));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[3]")
+                    .WithArguments($"System.{spanType}")
+                    .WithLocation(17, 14)
+            );
         }
 
         [Fact]
@@ -14863,8 +17359,11 @@ partial class Program
                 new[] { source, s_collectionExtensionsWithSpan },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[1], [2], "));
-            verifier.VerifyIL("Program.F1", """
+                expectedOutput: IncludeExpectedOutput("[1], [2], ")
+            );
+            verifier.VerifyIL(
+                "Program.F1",
+                """
                 {
                     // Code size       40 (0x28)
                     .maxstack  2
@@ -14886,8 +17385,11 @@ partial class Program
                     IL_0022:  call       "object[] System.Span<object>.ToArray()"
                     IL_0027:  ret
                 }
-                """);
-            verifier.VerifyIL("Program.F2", """
+                """
+            );
+            verifier.VerifyIL(
+                "Program.F2",
+                """
                 {
                     // Code size       40 (0x28)
                     .maxstack  2
@@ -14909,12 +17411,16 @@ partial class Program
                     IL_0022:  call       "object[] System.ReadOnlySpan<object>.ToArray()"
                     IL_0027:  ret
                 }
-                """);
+                """
+            );
         }
 
         [CombinatorialData]
         [Theory]
-        public void SpanAssignment_03([CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)] TargetFramework targetFramework)
+        public void SpanAssignment_03(
+            [CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)]
+                TargetFramework targetFramework
+        )
         {
             string source = """
                 using System;
@@ -14935,10 +17441,13 @@ partial class Program
                 new[] { source, s_collectionExtensionsWithSpan },
                 targetFramework: targetFramework,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[1], [2], "));
+                expectedOutput: IncludeExpectedOutput("[1], [2], ")
+            );
             if (targetFramework == TargetFramework.Net80)
             {
-                verifier.VerifyIL("Program.Main", """
+                verifier.VerifyIL(
+                    "Program.Main",
+                    """
                     {
                       // Code size       79 (0x4f)
                       .maxstack  2
@@ -14976,11 +17485,14 @@ partial class Program
                       IL_0049:  call       "void CollectionExtensions.Report<object>(in System.ReadOnlySpan<object>)"
                       IL_004e:  ret
                     }
-                    """);
+                    """
+                );
             }
             else
             {
-                verifier.VerifyIL("Program.Main", """
+                verifier.VerifyIL(
+                    "Program.Main",
+                    """
                     {
                       // Code size       59 (0x3b)
                       .maxstack  5
@@ -15010,7 +17522,8 @@ partial class Program
                       IL_0035:  call       "void CollectionExtensions.Report<object>(in System.ReadOnlySpan<object>)"
                       IL_003a:  ret
                     }
-                    """);
+                    """
+                );
             }
         }
 
@@ -15036,7 +17549,10 @@ partial class Program
             comp.VerifyEmitDiagnostics(
                 // (11,15): error CS9203: A collection expression of type 'ReadOnlySpan<object>' cannot be used in this context because it may be exposed outside of the current scope.
                 //         r.F = [1];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[1]").WithArguments("System.ReadOnlySpan<object>").WithLocation(11, 15));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[1]")
+                    .WithArguments("System.ReadOnlySpan<object>")
+                    .WithLocation(11, 15)
+            );
         }
 
         [Fact]
@@ -15065,8 +17581,11 @@ partial class Program
                 new[] { source, s_collectionExtensionsWithSpan },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[1], [2], "));
-            verifier.VerifyIL("Program.Main", """
+                expectedOutput: IncludeExpectedOutput("[1], [2], ")
+            );
+            verifier.VerifyIL(
+                "Program.Main",
+                """
                 {
                   // Code size      117 (0x75)
                   .maxstack  3
@@ -15112,7 +17631,8 @@ partial class Program
                   IL_006f:  call       "void CollectionExtensions.Report<object>(in System.ReadOnlySpan<object>)"
                   IL_0074:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -15130,7 +17650,10 @@ partial class Program
             comp.VerifyEmitDiagnostics(
                 // (4,37): error CS9203: A collection expression of type 'ReadOnlySpan<object>' cannot be used in this context because it may be exposed outside of the current scope.
                 //     public ReadOnlySpan<object> F = [1, 2, 3];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[1, 2, 3]").WithArguments("System.ReadOnlySpan<object>").WithLocation(4, 37));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[1, 2, 3]")
+                    .WithArguments("System.ReadOnlySpan<object>")
+                    .WithLocation(4, 37)
+            );
         }
 
         [Fact]
@@ -15152,8 +17675,11 @@ partial class Program
                 new[] { source, s_collectionExtensionsWithSpan },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[1, 2, 3], "));
-            verifier.VerifyIL("Program..cctor", """
+                expectedOutput: IncludeExpectedOutput("[1, 2, 3], ")
+            );
+            verifier.VerifyIL(
+                "Program..cctor",
+                """
                 {
                   // Code size       57 (0x39)
                   .maxstack  2
@@ -15182,7 +17708,8 @@ partial class Program
                   IL_0033:  stsfld     "int[] Program.F"
                   IL_0038:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -15207,8 +17734,11 @@ partial class Program
                 new[] { source, s_collectionExtensionsWithSpan },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[1, 2, 3], "));
-            verifier.VerifyIL("C..ctor", """
+                expectedOutput: IncludeExpectedOutput("[1, 2, 3], ")
+            );
+            verifier.VerifyIL(
+                "C..ctor",
+                """
                 {
                   // Code size       79 (0x4f)
                   .maxstack  3
@@ -15243,7 +17773,8 @@ partial class Program
                   IL_0049:  call       "object..ctor()"
                   IL_004e:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -15269,8 +17800,11 @@ partial class Program
                 new[] { source, s_collectionExtensionsWithSpan },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[1, 2, 3], "));
-            verifier.VerifyIL("S..ctor", """
+                expectedOutput: IncludeExpectedOutput("[1, 2, 3], ")
+            );
+            verifier.VerifyIL(
+                "S..ctor",
+                """
                 {
                   // Code size       73 (0x49)
                   .maxstack  3
@@ -15303,12 +17837,16 @@ partial class Program
                   IL_0043:  stfld      "object[] S.F"
                   IL_0048:  ret
                 }
-                """);
+                """
+            );
         }
 
         [CombinatorialData]
         [Theory]
-        public void SpanAssignment_RefLocal([CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)] TargetFramework targetFramework)
+        public void SpanAssignment_RefLocal(
+            [CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)]
+                TargetFramework targetFramework
+        )
         {
             string source = """
                 using System;
@@ -15328,12 +17866,18 @@ partial class Program
             comp.VerifyEmitDiagnostics(
                 // (9,13): error CS9203: A collection expression of type 'Span<object>' cannot be used in this context because it may be exposed outside of the current scope.
                 //         r = [1];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[1]").WithArguments("System.Span<object>").WithLocation(9, 13));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[1]")
+                    .WithArguments("System.Span<object>")
+                    .WithLocation(9, 13)
+            );
         }
 
         [CombinatorialData]
         [Theory]
-        public void SpanAssignment_NestedScope_01([CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)] TargetFramework targetFramework)
+        public void SpanAssignment_NestedScope_01(
+            [CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)]
+                TargetFramework targetFramework
+        )
         {
             string source = """
                 using System;
@@ -15365,10 +17909,13 @@ partial class Program
                 source,
                 targetFramework: targetFramework,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput(""));
+                expectedOutput: IncludeExpectedOutput("")
+            );
             if (targetFramework == TargetFramework.Net80)
             {
-                verifier.VerifyIL("Program.F", """
+                verifier.VerifyIL(
+                    "Program.F",
+                    """
                     {
                       // Code size      134 (0x86)
                       .maxstack  2
@@ -15429,7 +17976,8 @@ partial class Program
                       IL_0084:  pop
                       IL_0085:  ret
                     }
-                    """);
+                    """
+                );
             }
         }
 
@@ -15463,8 +18011,11 @@ partial class Program
                 new[] { source, s_collectionExtensionsWithSpan },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[3, 4], "));
-            verifier.VerifyIL("Program.M<T>", """
+                expectedOutput: IncludeExpectedOutput("[3, 4], ")
+            );
+            verifier.VerifyIL(
+                "Program.M<T>",
+                """
                 {
                   // Code size      127 (0x7f)
                   .maxstack  2
@@ -15518,7 +18069,8 @@ partial class Program
                   IL_0079:  call       "void CollectionExtensions.Report<T>(in System.Span<T>)"
                   IL_007e:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -15547,8 +18099,11 @@ partial class Program
                 new[] { source, s_collectionExtensionsWithSpan },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[1, null, 3], "));
-            verifier.VerifyIL("Program.M<T>", """
+                expectedOutput: IncludeExpectedOutput("[1, null, 3], ")
+            );
+            verifier.VerifyIL(
+                "Program.M<T>",
+                """
                 {
                   // Code size       71 (0x47)
                   .maxstack  2
@@ -15592,7 +18147,8 @@ partial class Program
                   IL_0041:  call       "void CollectionExtensions.Report<T>(in System.Span<T>)"
                   IL_0046:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -15625,8 +18181,11 @@ partial class Program
                 new[] { source, s_collectionExtensionsWithSpan },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[1, null, 3], "));
-            verifier.VerifyIL("Program.<>c__1<T>.<F>b__1_0(bool, T, T, T)", """
+                expectedOutput: IncludeExpectedOutput("[1, null, 3], ")
+            );
+            verifier.VerifyIL(
+                "Program.<>c__1<T>.<F>b__1_0(bool, T, T, T)",
+                """
                 {
                   // Code size       79 (0x4f)
                   .maxstack  2
@@ -15661,7 +18220,8 @@ partial class Program
                   IL_0049:  call       "void CollectionExtensions.Report<T>(in System.Span<T>)"
                   IL_004e:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -15705,8 +18265,11 @@ partial class Program
                 new[] { source, s_collectionExtensionsWithSpan },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[1], [2], [3], [4], [1], "));
-            verifier.VerifyIL("Program.<>c__DisplayClass1_0<T>.<M>g__A2|1()", """
+                expectedOutput: IncludeExpectedOutput("[1], [2], [3], [4], [1], ")
+            );
+            verifier.VerifyIL(
+                "Program.<>c__DisplayClass1_0<T>.<M>g__A2|1()",
+                """
                 {
                   // Code size       44 (0x2c)
                   .maxstack  2
@@ -15728,7 +18291,8 @@ partial class Program
                   IL_0026:  call       "void CollectionExtensions.Report<T>(in System.Span<T>)"
                   IL_002b:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -15765,8 +18329,11 @@ partial class Program
                 new[] { source, s_collectionExtensionsWithSpan },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[b], [a], "));
-            verifier.VerifyIL("C<T>.<>c.<.ctor>b__1_0(T, T)", """
+                expectedOutput: IncludeExpectedOutput("[b], [a], ")
+            );
+            verifier.VerifyIL(
+                "C<T>.<>c.<.ctor>b__1_0(T, T)",
+                """
                 {
                   // Code size       76 (0x4c)
                   .maxstack  2
@@ -15798,7 +18365,8 @@ partial class Program
                   IL_0046:  call       "void CollectionExtensions.Report<T>(in System.ReadOnlySpan<T>)"
                   IL_004b:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -15826,8 +18394,11 @@ partial class Program
                 new[] { source, s_collectionExtensionsWithSpan },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Fails,
-                expectedOutput: IncludeExpectedOutput("[1], [2], Disposed, "));
-            verifier.VerifyIL("Program.Main", """
+                expectedOutput: IncludeExpectedOutput("[1], [2], Disposed, ")
+            );
+            verifier.VerifyIL(
+                "Program.Main",
+                """
                 {
                   // Code size       97 (0x61)
                   .maxstack  2
@@ -15880,7 +18451,8 @@ partial class Program
                   }
                   IL_0060:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -15905,8 +18477,11 @@ partial class Program
                 new[] { source, s_collectionExtensionsWithSpan },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[null, 2], [3, 5], "));
-            verifier.VerifyIL("Program.Main", """
+                expectedOutput: IncludeExpectedOutput("[null, 2], [3, 5], ")
+            );
+            verifier.VerifyIL(
+                "Program.Main",
+                """
                 {
                     // Code size      119 (0x77)
                     .maxstack  2
@@ -15964,7 +18539,8 @@ partial class Program
                     IL_0071:  call       "void CollectionExtensions.Report<int>(in System.Span<int>)"
                     IL_0076:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -15981,8 +18557,11 @@ partial class Program
                 new[] { source, s_collectionExtensionsWithSpan },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("[1, null, 3], "));
-            verifier.VerifyIL("<top-level-statements-entry-point>", """
+                expectedOutput: IncludeExpectedOutput("[1, null, 3], ")
+            );
+            verifier.VerifyIL(
+                "<top-level-statements-entry-point>",
+                """
                 {
                   // Code size      143 (0x8f)
                   .maxstack  2
@@ -16039,7 +18618,8 @@ partial class Program
                   IL_0089:  call       "int System.ReadOnlySpan<object>.Length.get"
                   IL_008e:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -16060,10 +18640,15 @@ partial class Program
             comp.VerifyEmitDiagnostics(
                 // (3,7): error CS9203: A collection expression of type 'ReadOnlySpan<object>' cannot be used in this context because it may be exposed outside of the current scope.
                 // S.F = [..S.GetSpan(), 3];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[..S.GetSpan(), 3]").WithArguments("System.ReadOnlySpan<object>").WithLocation(3, 7),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[..S.GetSpan(), 3]")
+                    .WithArguments("System.ReadOnlySpan<object>")
+                    .WithLocation(3, 7),
                 // (8,19): error CS8345: Field or auto-implemented property cannot be of type 'ReadOnlySpan<object>' unless it is an instance member of a ref struct.
                 //     public static ReadOnlySpan<object> F;
-                Diagnostic(ErrorCode.ERR_FieldAutoPropCantBeByRefLike, "ReadOnlySpan<object>").WithArguments("System.ReadOnlySpan<object>").WithLocation(8, 19));
+                Diagnostic(ErrorCode.ERR_FieldAutoPropCantBeByRefLike, "ReadOnlySpan<object>")
+                    .WithArguments("System.ReadOnlySpan<object>")
+                    .WithLocation(8, 19)
+            );
         }
 
         [Fact]
@@ -16099,7 +18684,8 @@ partial class Program
                 new[] { source, s_collectionExtensions },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Fails,
-                expectedOutput: IncludeExpectedOutput("""
+                expectedOutput: IncludeExpectedOutput(
+                    """
                     (System.Boolean[]) [True], 
                     (System.SByte[]) [1], 
                     (System.Byte[]) [2], 
@@ -16112,9 +18698,13 @@ partial class Program
                     (System.UInt64[]) [9], 
                     (System.Single[]) [10], 
                     (System.Double[]) [11], 
-                    """));
+                    """
+                )
+            );
 
-            verifier.VerifyIL("Program.Main", """
+            verifier.VerifyIL(
+                "Program.Main",
+                """
                 {
                   // Code size      184 (0xb8)
                   .maxstack  2
@@ -16159,7 +18749,8 @@ partial class Program
                   IL_00b2:  call       "void Program.Report<double>(System.ReadOnlySpan<double>)"
                   IL_00b7:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -16187,13 +18778,18 @@ partial class Program
                 new[] { source, s_collectionExtensions },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Skipped,
-                expectedOutput: IncludeExpectedOutput("""
+                expectedOutput: IncludeExpectedOutput(
+                    """
                     (System.Object[]) [1], 
                     (System.String[]) [2], 
                     (System.IntPtr[]) [3], 
                     (System.UIntPtr[]) [4], 
-                    """));
-            verifier.VerifyIL("Program.Main", """
+                    """
+                )
+            );
+            verifier.VerifyIL(
+                "Program.Main",
+                """
                 {
                     // Code size      135 (0x87)
                     .maxstack  2
@@ -16249,7 +18845,8 @@ partial class Program
                     IL_0081:  call       "void Program.Report<nuint>(System.ReadOnlySpan<nuint>)"
                     IL_0086:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -16289,7 +18886,8 @@ partial class Program
                 new[] { source, s_collectionExtensions },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Fails,
-                expectedOutput: IncludeExpectedOutput("""
+                expectedOutput: IncludeExpectedOutput(
+                    """
                     (E_sbyte[]) [A], 
                     (E_byte[]) [B], 
                     (E_short[]) [C], 
@@ -16298,9 +18896,13 @@ partial class Program
                     (E_uint[]) [F], 
                     (E_long[]) [G], 
                     (E_ulong[]) [H], 
-                    """));
+                    """
+                )
+            );
 
-            verifier.VerifyIL("Program.Main", """
+            verifier.VerifyIL(
+                "Program.Main",
+                """
                 {
                   // Code size      123 (0x7b)
                   .maxstack  2
@@ -16332,12 +18934,16 @@ partial class Program
                   IL_0075:  call       "void Program.Report<E_ulong>(System.ReadOnlySpan<E_ulong>)"
                   IL_007a:  ret
                 }
-                """);
+                """
+            );
         }
 
         [CombinatorialData]
         [Theory]
-        public void RuntimeHelpers_CreateSpan([CombinatorialValues(TargetFramework.Net60, TargetFramework.Net80)] TargetFramework targetFramework)
+        public void RuntimeHelpers_CreateSpan(
+            [CombinatorialValues(TargetFramework.Net60, TargetFramework.Net80)]
+                TargetFramework targetFramework
+        )
         {
             string source = """
                 using System;
@@ -16356,10 +18962,12 @@ partial class Program
                 new[] { source, s_collectionExtensionsWithSpan },
                 targetFramework: targetFramework,
                 verify: Verification.Fails,
-                expectedOutput: IncludeExpectedOutput("[1, 2, 3], [1, 2, 3], "));
+                expectedOutput: IncludeExpectedOutput("[1, 2, 3], [1, 2, 3], ")
+            );
 
-            string expectedIL = targetFramework == TargetFramework.Net60 ?
-                """
+            string expectedIL =
+                targetFramework == TargetFramework.Net60
+                    ? """
                 {
                   // Code size       38 (0x26)
                   .maxstack  3
@@ -16377,8 +18985,8 @@ partial class Program
                   IL_0020:  newobj     "System.ReadOnlySpan<int>..ctor(int[])"
                   IL_0025:  ret
                 }
-                """ :
                 """
+                    : """
                 {
                   // Code size       11 (0xb)
                   .maxstack  1
@@ -16393,7 +19001,10 @@ partial class Program
 
         [CombinatorialData]
         [Theory]
-        public void RuntimeHelpers_CreateSpan_Byte([CombinatorialValues(TargetFramework.Net60, TargetFramework.Net80)] TargetFramework targetFramework)
+        public void RuntimeHelpers_CreateSpan_Byte(
+            [CombinatorialValues(TargetFramework.Net60, TargetFramework.Net80)]
+                TargetFramework targetFramework
+        )
         {
             string source = """
                 using System;
@@ -16420,10 +19031,10 @@ partial class Program
                 new[] { source, s_collectionExtensionsWithSpan },
                 targetFramework: targetFramework,
                 verify: Verification.Fails,
-                expectedOutput: IncludeExpectedOutput("[1, 2, 3], [1, 2, 3], "));
+                expectedOutput: IncludeExpectedOutput("[1, 2, 3], [1, 2, 3], ")
+            );
 
-            string expectedIL =
-                """
+            string expectedIL = """
                 {
                   // Code size       12 (0xc)
                   .maxstack  2
@@ -16439,7 +19050,10 @@ partial class Program
 
         [CombinatorialData]
         [Theory]
-        public void RuntimeHelpers_CreateSpan_NotApplicable_01([CombinatorialValues(TargetFramework.Net60, TargetFramework.Net80)] TargetFramework targetFramework)
+        public void RuntimeHelpers_CreateSpan_NotApplicable_01(
+            [CombinatorialValues(TargetFramework.Net60, TargetFramework.Net80)]
+                TargetFramework targetFramework
+        )
         {
             string source = """
                 using System;
@@ -16453,10 +19067,15 @@ partial class Program
             comp.VerifyEmitDiagnostics(
                 // (4,43): error CS9203: A collection expression of type 'Span<int>' cannot be used in this context because it may be exposed outside of the current scope.
                 //     static Span<int> NotReadOnlySpan() => [1, 2, 3];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[1, 2, 3]").WithArguments("System.Span<int>").WithLocation(4, 43),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[1, 2, 3]")
+                    .WithArguments("System.Span<int>")
+                    .WithLocation(4, 43),
                 // (5,53): error CS9203: A collection expression of type 'ReadOnlySpan<int>' cannot be used in this context because it may be exposed outside of the current scope.
                 //     static ReadOnlySpan<int> NotConstants(int c) => [1, 2, c];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[1, 2, c]").WithArguments("System.ReadOnlySpan<int>").WithLocation(5, 53));
+                Diagnostic(ErrorCode.ERR_CollectionExpressionEscape, "[1, 2, c]")
+                    .WithArguments("System.ReadOnlySpan<int>")
+                    .WithLocation(5, 53)
+            );
         }
 
         [Fact]
@@ -16487,8 +19106,11 @@ partial class Program
                 new[] { source, s_collectionExtensionsWithSpan },
                 targetFramework: TargetFramework.Net80,
                 verify: Verification.Fails,
-                expectedOutput: IncludeExpectedOutput("[1, 2, 3], [1, 2, 3], "));
-            verifier.VerifyIL("Program.NotReadOnlySpan", """
+                expectedOutput: IncludeExpectedOutput("[1, 2, 3], [1, 2, 3], ")
+            );
+            verifier.VerifyIL(
+                "Program.NotReadOnlySpan",
+                """
                 {
                   // Code size       55 (0x37)
                   .maxstack  2
@@ -16519,8 +19141,11 @@ partial class Program
                   IL_0031:  call       "void CollectionExtensions.Report<int>(in System.Span<int>)"
                   IL_0036:  ret
                 }
-                """);
-            verifier.VerifyIL("Program.NotConstants", """
+                """
+            );
+            verifier.VerifyIL(
+                "Program.NotConstants",
+                """
                 {
                   // Code size       55 (0x37)
                   .maxstack  2
@@ -16551,12 +19176,16 @@ partial class Program
                   IL_0031:  call       "void CollectionExtensions.Report<int>(in System.ReadOnlySpan<int>)"
                   IL_0036:  ret
                 }
-                """);
+                """
+            );
         }
 
         [CombinatorialData]
         [Theory]
-        public void RuntimeHelpers_CreateSpan_RefStruct([CombinatorialValues(TargetFramework.Net60, TargetFramework.Net80)] TargetFramework targetFramework)
+        public void RuntimeHelpers_CreateSpan_RefStruct(
+            [CombinatorialValues(TargetFramework.Net60, TargetFramework.Net80)]
+                TargetFramework targetFramework
+        )
         {
             string sourceA = $$"""
                 using System;
@@ -16576,8 +19205,11 @@ partial class Program
                 }
                 """;
             var comp = CreateCompilation(
-                targetFramework == TargetFramework.Net80 ? new[] { sourceA } : new[] { sourceA, CollectionBuilderAttributeDefinition },
-                targetFramework: targetFramework);
+                targetFramework == TargetFramework.Net80
+                    ? new[] { sourceA }
+                    : new[] { sourceA, CollectionBuilderAttributeDefinition },
+                targetFramework: targetFramework
+            );
             comp.VerifyEmitDiagnostics();
             var refA = comp.EmitToImageReference();
 
@@ -16612,9 +19244,12 @@ partial class Program
                 references: new[] { refA },
                 targetFramework: targetFramework,
                 verify: Verification.Fails,
-                expectedOutput: IncludeExpectedOutput("[1, 2, 3], [1, 2, 3], [A, B, C], "));
+                expectedOutput: IncludeExpectedOutput("[1, 2, 3], [1, 2, 3], [A, B, C], ")
+            );
 
-            verifier.VerifyIL("Program.F1", """
+            verifier.VerifyIL(
+                "Program.F1",
+                """
                 {
                   // Code size       17 (0x11)
                   .maxstack  2
@@ -16624,10 +19259,13 @@ partial class Program
                   IL_000b:  call       "MyCollection<byte> MyCollectionBuilder.Create<byte>(System.ReadOnlySpan<byte>)"
                   IL_0010:  ret
                 }
-                """);
+                """
+            );
             if (targetFramework == TargetFramework.Net60)
             {
-                verifier.VerifyIL("Program.F2", """
+                verifier.VerifyIL(
+                    "Program.F2",
+                    """
                     {
                       // Code size       43 (0x2b)
                       .maxstack  3
@@ -16646,11 +19284,14 @@ partial class Program
                       IL_0025:  call       "MyCollection<int> MyCollectionBuilder.Create<int>(System.ReadOnlySpan<int>)"
                       IL_002a:  ret
                     }
-                    """);
+                    """
+                );
             }
             else
             {
-                verifier.VerifyIL("Program.F2", """
+                verifier.VerifyIL(
+                    "Program.F2",
+                    """
                     {
                       // Code size       16 (0x10)
                       .maxstack  1
@@ -16659,9 +19300,12 @@ partial class Program
                       IL_000a:  call       "MyCollection<int> MyCollectionBuilder.Create<int>(System.ReadOnlySpan<int>)"
                       IL_000f:  ret
                     }
-                    """);
+                    """
+                );
             }
-            verifier.VerifyIL("Program.F3", """
+            verifier.VerifyIL(
+                "Program.F3",
+                """
                 {
                     // Code size       17 (0x11)
                     .maxstack  2
@@ -16671,7 +19315,8 @@ partial class Program
                     IL_000b:  call       "MyCollection<E> MyCollectionBuilder.Create<E>(System.ReadOnlySpan<E>)"
                     IL_0010:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -16688,11 +19333,23 @@ partial class Program
                     }
                 }
                 """;
-            var comp = CreateCompilation(new[] { source, s_collectionExtensionsWithSpan }, targetFramework: TargetFramework.Net80, options: TestOptions.ReleaseExe);
-            comp.MakeMemberMissing(WellKnownMember.System_Runtime_CompilerServices_RuntimeHelpers__CreateSpanRuntimeFieldHandle);
+            var comp = CreateCompilation(
+                new[] { source, s_collectionExtensionsWithSpan },
+                targetFramework: TargetFramework.Net80,
+                options: TestOptions.ReleaseExe
+            );
+            comp.MakeMemberMissing(
+                WellKnownMember.System_Runtime_CompilerServices_RuntimeHelpers__CreateSpanRuntimeFieldHandle
+            );
 
-            var verifier = CompileAndVerify(comp, verify: Verification.Fails, expectedOutput: IncludeExpectedOutput("[1, 2, 3], "));
-            verifier.VerifyIL("Program.Main", """
+            var verifier = CompileAndVerify(
+                comp,
+                verify: Verification.Fails,
+                expectedOutput: IncludeExpectedOutput("[1, 2, 3], ")
+            );
+            verifier.VerifyIL(
+                "Program.Main",
+                """
                 {
                   // Code size       46 (0x2e)
                   .maxstack  3
@@ -16714,7 +19371,8 @@ partial class Program
                   IL_0028:  call       "void CollectionExtensions.Report<int>(in System.ReadOnlySpan<int>)"
                   IL_002d:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -16735,7 +19393,10 @@ partial class Program
             comp.VerifyEmitDiagnostics(
                 // (6,31): error CS0656: Missing compiler required member 'System.ReadOnlySpan`1..ctor'
                 //         ReadOnlySpan<int> s = [1, 2, 3];
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "[1, 2, 3]").WithArguments("System.ReadOnlySpan`1", ".ctor").WithLocation(6, 31));
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "[1, 2, 3]")
+                    .WithArguments("System.ReadOnlySpan`1", ".ctor")
+                    .WithLocation(6, 31)
+            );
         }
 
         [Fact]
@@ -16770,13 +19431,17 @@ partial class Program
             comp.VerifyEmitDiagnostics(
                 // (13,22): error CS9175: An expression tree may not contain a collection expression.
                 //         return () => [];
-                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsCollectionExpression, "[]").WithLocation(13, 22),
+                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsCollectionExpression, "[]")
+                    .WithLocation(13, 22),
                 // (17,22): error CS9175: An expression tree may not contain a collection expression.
                 //         return () => [1, 2];
-                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsCollectionExpression, "[1, 2]").WithLocation(17, 22),
+                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsCollectionExpression, "[1, 2]")
+                    .WithLocation(17, 22),
                 // (21,22): error CS9175: An expression tree may not contain a collection expression.
                 //         return () => [a, b];
-                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsCollectionExpression, "[a, b]").WithLocation(21, 22));
+                Diagnostic(ErrorCode.ERR_ExpressionTreeContainsCollectionExpression, "[a, b]")
+                    .WithLocation(21, 22)
+            );
         }
 
         [Fact]
@@ -16795,17 +19460,24 @@ partial class Program
             var comp = CreateCompilation(source);
             comp.VerifyEmitDiagnostics();
 
-            VerifyOperationTreeForTest<CollectionExpressionSyntax>(comp,
+            VerifyOperationTreeForTest<CollectionExpressionSyntax>(
+                comp,
                 """
                 IOperation:  (OperationKind.None, Type: T[]) (Syntax: '[a, b]')
                 Children(2):
                     IParameterReferenceOperation: a (OperationKind.ParameterReference, Type: T) (Syntax: 'a')
                     IParameterReferenceOperation: b (OperationKind.ParameterReference, Type: T) (Syntax: 'b')
-                """);
+                """
+            );
 
             var tree = comp.SyntaxTrees[0];
-            var method = tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single(m => m.Identifier.Text == "Create");
-            VerifyFlowGraph(comp, method,
+            var method = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .Single(m => m.Identifier.Text == "Create");
+            VerifyFlowGraph(
+                comp,
+                method,
                 """
                 Block[B0] - Entry
                     Statements (0)
@@ -16825,7 +19497,8 @@ partial class Program
                 Block[B2] - Exit
                     Predecessors: [B1]
                     Statements (0)
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -16845,17 +19518,24 @@ partial class Program
             var comp = CreateCompilation(source, targetFramework: TargetFramework.Net70);
             comp.VerifyEmitDiagnostics();
 
-            VerifyOperationTreeForTest<CollectionExpressionSyntax>(comp,
+            VerifyOperationTreeForTest<CollectionExpressionSyntax>(
+                comp,
                 """
                 IOperation:  (OperationKind.None, Type: System.Span<T>) (Syntax: '[a, b]')
                 Children(2):
                     IParameterReferenceOperation: a (OperationKind.ParameterReference, Type: T) (Syntax: 'a')
                     IParameterReferenceOperation: b (OperationKind.ParameterReference, Type: T) (Syntax: 'b')
-                """);
+                """
+            );
 
             var tree = comp.SyntaxTrees[0];
-            var method = tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single(m => m.Identifier.Text == "Create");
-            VerifyFlowGraph(comp, method,
+            var method = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .Single(m => m.Identifier.Text == "Create");
+            VerifyFlowGraph(
+                comp,
+                method,
                 """
                 Block[B0] - Entry
                     Statements (0)
@@ -16885,7 +19565,8 @@ partial class Program
                 Block[B2] - Exit
                     Predecessors: [B1]
                     Statements (0)
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -16916,17 +19597,24 @@ partial class Program
             var comp = CreateCompilation(source);
             comp.VerifyEmitDiagnostics();
 
-            VerifyOperationTreeForTest<CollectionExpressionSyntax>(comp,
+            VerifyOperationTreeForTest<CollectionExpressionSyntax>(
+                comp,
                 """
                 IOperation:  (OperationKind.None, Type: S<T>) (Syntax: '[a, b]')
                   Children(2):
                       IParameterReferenceOperation: a (OperationKind.ParameterReference, Type: T) (Syntax: 'a')
                       IParameterReferenceOperation: b (OperationKind.ParameterReference, Type: T) (Syntax: 'b')
-                """);
+                """
+            );
 
             var tree = comp.SyntaxTrees[0];
-            var method = tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single(m => m.Identifier.Text == "Create");
-            VerifyFlowGraph(comp, method,
+            var method = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .Single(m => m.Identifier.Text == "Create");
+            VerifyFlowGraph(
+                comp,
+                method,
                 """
                 Block[B0] - Entry
                     Statements (0)
@@ -16946,7 +19634,8 @@ partial class Program
                 Block[B2] - Exit
                     Predecessors: [B1]
                     Statements (0)
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -16977,17 +19666,24 @@ partial class Program
             var comp = CreateCompilation(source);
             comp.VerifyEmitDiagnostics();
 
-            VerifyOperationTreeForTest<CollectionExpressionSyntax>(comp,
+            VerifyOperationTreeForTest<CollectionExpressionSyntax>(
+                comp,
                 """
                 IOperation:  (OperationKind.None, Type: T) (Syntax: '[a, b]')
                   Children(2):
                       IParameterReferenceOperation: a (OperationKind.ParameterReference, Type: U) (Syntax: 'a')
                       IParameterReferenceOperation: b (OperationKind.ParameterReference, Type: U) (Syntax: 'b')
-                """);
+                """
+            );
 
             var tree = comp.SyntaxTrees[0];
-            var method = tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single(m => m.Identifier.Text == "Create");
-            VerifyFlowGraph(comp, method,
+            var method = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .Single(m => m.Identifier.Text == "Create");
+            VerifyFlowGraph(
+                comp,
+                method,
                 """
                 Block[B0] - Entry
                     Statements (0)
@@ -17007,7 +19703,8 @@ partial class Program
                 Block[B2] - Exit
                     Predecessors: [B1]
                     Statements (0)
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -17028,7 +19725,8 @@ partial class Program
             var comp = CreateCompilation(source);
             comp.VerifyEmitDiagnostics();
 
-            VerifyOperationTreeForTest<CollectionExpressionSyntax>(comp,
+            VerifyOperationTreeForTest<CollectionExpressionSyntax>(
+                comp,
                 """
                 IOperation:  (OperationKind.None, Type: System.Collections.Generic.List<System.Collections.Generic.List<System.Int32>>) (Syntax: '[[Get(1)]]')
                   Children(1):
@@ -17045,11 +19743,17 @@ partial class Program
                                         ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
                                         InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
                                         OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
-                """);
+                """
+            );
 
             var tree = comp.SyntaxTrees[0];
-            var method = tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single(m => m.Identifier.Text == "Main");
-            VerifyFlowGraph(comp, method,
+            var method = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .Single(m => m.Identifier.Text == "Main");
+            VerifyFlowGraph(
+                comp,
+                method,
                 """
                 Block[B0] - Entry
                     Statements (0)
@@ -17091,7 +19795,8 @@ partial class Program
                 Block[B2] - Exit
                     Predecessors: [B1]
                     Statements (0)
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -17110,7 +19815,8 @@ partial class Program
             var comp = CreateCompilation(source);
             comp.VerifyEmitDiagnostics();
 
-            VerifyOperationTreeForTest<CollectionExpressionSyntax>(comp,
+            VerifyOperationTreeForTest<CollectionExpressionSyntax>(
+                comp,
                 """
                 IOperation:  (OperationKind.None, Type: System.Int32[]) (Syntax: '[..a]')
                   Children(1):
@@ -17120,11 +19826,17 @@ partial class Program
                               Conversion: CommonConversion (Exists: True, IsIdentity: False, IsNumeric: False, IsReference: True, IsUserDefined: False) (MethodSymbol: null)
                               Operand:
                                 IParameterReferenceOperation: a (OperationKind.ParameterReference, Type: System.Int32[]) (Syntax: 'a')
-                """);
+                """
+            );
 
             var tree = comp.SyntaxTrees[0];
-            var method = tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single(m => m.Identifier.Text == "Append");
-            VerifyFlowGraph(comp, method,
+            var method = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .Single(m => m.Identifier.Text == "Append");
+            VerifyFlowGraph(
+                comp,
+                method,
                 """
                 Block[B0] - Entry
                     Statements (0)
@@ -17149,7 +19861,8 @@ partial class Program
                 Block[B2] - Exit
                     Predecessors: [B1]
                     Statements (0)
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -17169,7 +19882,8 @@ partial class Program
             var comp = CreateCompilation(source);
             comp.VerifyEmitDiagnostics();
 
-            VerifyOperationTreeForTest<CollectionExpressionSyntax>(comp,
+            VerifyOperationTreeForTest<CollectionExpressionSyntax>(
+                comp,
                 """
                 IOperation:  (OperationKind.None, Type: System.Collections.Generic.List<System.Int32>) (Syntax: '[..a]')
                   Children(1):
@@ -17179,11 +19893,17 @@ partial class Program
                               Conversion: CommonConversion (Exists: True, IsIdentity: False, IsNumeric: False, IsReference: True, IsUserDefined: False) (MethodSymbol: null)
                               Operand:
                                 IParameterReferenceOperation: a (OperationKind.ParameterReference, Type: System.Int32[]) (Syntax: 'a')
-                """);
+                """
+            );
 
             var tree = comp.SyntaxTrees[0];
-            var method = tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single(m => m.Identifier.Text == "Append");
-            VerifyFlowGraph(comp, method,
+            var method = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .Single(m => m.Identifier.Text == "Append");
+            VerifyFlowGraph(
+                comp,
+                method,
                 """
                 Block[B0] - Entry
                     Statements (0)
@@ -17208,7 +19928,8 @@ partial class Program
                 Block[B2] - Exit
                     Predecessors: [B1]
                     Statements (0)
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -17239,7 +19960,10 @@ partial class Program
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "[1, 2], [3, 4], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "[1, 2], [3, 4], "
+            );
         }
 
         [Fact]
@@ -17269,7 +19993,10 @@ partial class Program
                     }
                 }
                 """;
-            CompileAndVerify(new[] { source, s_collectionExtensions }, expectedOutput: "[3, 1, 2, 4], ");
+            CompileAndVerify(
+                new[] { source, s_collectionExtensions },
+                expectedOutput: "[3, 1, 2, 4], "
+            );
         }
 
         [Fact]
@@ -17287,13 +20014,15 @@ partial class Program
                     }
                 }
                 """;
-            CreateCompilation(source).VerifyEmitDiagnostics(
-                // (7,9): error CS1059: The operand of an increment or decrement operator must be a variable, property or indexer
-                //         []++;
-                Diagnostic(ErrorCode.ERR_IncrementLvalueExpected, "[]").WithLocation(7, 9),
-                // (8,9): error CS1059: The operand of an increment or decrement operator must be a variable, property or indexer
-                //         []--;
-                Diagnostic(ErrorCode.ERR_IncrementLvalueExpected, "[]").WithLocation(8, 9));
+            CreateCompilation(source)
+                .VerifyEmitDiagnostics(
+                    // (7,9): error CS1059: The operand of an increment or decrement operator must be a variable, property or indexer
+                    //         []++;
+                    Diagnostic(ErrorCode.ERR_IncrementLvalueExpected, "[]").WithLocation(7, 9),
+                    // (8,9): error CS1059: The operand of an increment or decrement operator must be a variable, property or indexer
+                    //         []--;
+                    Diagnostic(ErrorCode.ERR_IncrementLvalueExpected, "[]").WithLocation(8, 9)
+                );
         }
 
         [Fact]
@@ -17310,10 +20039,13 @@ partial class Program
                     }
                 }
                 """;
-            CreateCompilation(source).VerifyEmitDiagnostics(
-                // (7,17): error CS9503: There is no target type for the collection expression.
-                //         var v = []->Count;
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]").WithLocation(7, 17));
+            CreateCompilation(source)
+                .VerifyEmitDiagnostics(
+                    // (7,17): error CS9503: There is no target type for the collection expression.
+                    //         var v = []->Count;
+                    Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]")
+                        .WithLocation(7, 17)
+                );
         }
 
         [Fact]
@@ -17330,10 +20062,12 @@ partial class Program
                     }
                 }
                 """;
-            CreateCompilation(source).VerifyEmitDiagnostics(
-                // (7,9): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
-                //         [] = null;
-                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "[]").WithLocation(7, 9));
+            CreateCompilation(source)
+                .VerifyEmitDiagnostics(
+                    // (7,9): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
+                    //         [] = null;
+                    Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "[]").WithLocation(7, 9)
+                );
         }
 
         [Fact]
@@ -17350,13 +20084,17 @@ partial class Program
                     }
                 }
                 """;
-            CreateCompilation(source).VerifyEmitDiagnostics(
-                // (7,9): error CS1729: 'string' does not contain a constructor that takes 0 arguments
-                //         [] + list;
-                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "[]").WithArguments("string", "0").WithLocation(7, 9),
-                // (7,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
-                //         [] + list;
-                Diagnostic(ErrorCode.ERR_IllegalStatement, "[] + list").WithLocation(7, 9));
+            CreateCompilation(source)
+                .VerifyEmitDiagnostics(
+                    // (7,9): error CS1729: 'string' does not contain a constructor that takes 0 arguments
+                    //         [] + list;
+                    Diagnostic(ErrorCode.ERR_BadCtorArgCount, "[]")
+                        .WithArguments("string", "0")
+                        .WithLocation(7, 9),
+                    // (7,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                    //         [] + list;
+                    Diagnostic(ErrorCode.ERR_IllegalStatement, "[] + list").WithLocation(7, 9)
+                );
         }
 
         [Fact]
@@ -17373,13 +20111,17 @@ partial class Program
                     }
                 }
                 """;
-            CreateCompilationWithIndexAndRangeAndSpan(source).VerifyEmitDiagnostics(
-                // (7,9): error CS9500: Cannot initialize type 'Index' with a collection expression because the type is not constructible.
-                //         []..;
-                Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]").WithArguments("System.Index").WithLocation(7, 9),
-                // (7,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
-                //         []..;
-                Diagnostic(ErrorCode.ERR_IllegalStatement, "[]..").WithLocation(7, 9));
+            CreateCompilationWithIndexAndRangeAndSpan(source)
+                .VerifyEmitDiagnostics(
+                    // (7,9): error CS9500: Cannot initialize type 'Index' with a collection expression because the type is not constructible.
+                    //         []..;
+                    Diagnostic(ErrorCode.ERR_CollectionExpressionTargetTypeNotConstructible, "[]")
+                        .WithArguments("System.Index")
+                        .WithLocation(7, 9),
+                    // (7,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                    //         []..;
+                    Diagnostic(ErrorCode.ERR_IllegalStatement, "[]..").WithLocation(7, 9)
+                );
         }
 
         [Fact]
@@ -17396,13 +20138,17 @@ partial class Program
                     }
                 }
                 """;
-            CreateCompilation(source).VerifyEmitDiagnostics(
-                // (7,9): error CS9503: There is no target type for the collection expression.
-                //         [] switch
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]").WithLocation(7, 9),
-                // (7,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
-                //         [] switch
-                Diagnostic(ErrorCode.ERR_IllegalStatement, "[] switch { null => 0 }").WithLocation(7, 9));
+            CreateCompilation(source)
+                .VerifyEmitDiagnostics(
+                    // (7,9): error CS9503: There is no target type for the collection expression.
+                    //         [] switch
+                    Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]")
+                        .WithLocation(7, 9),
+                    // (7,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                    //         [] switch
+                    Diagnostic(ErrorCode.ERR_IllegalStatement, "[] switch { null => 0 }")
+                        .WithLocation(7, 9)
+                );
         }
 
         [Fact]
@@ -17419,13 +20165,17 @@ partial class Program
                     }
                 }
                 """;
-            CreateCompilation(source).VerifyEmitDiagnostics(
-                // (7,9): error CS9503: There is no target type for the collection expression.
-                //         [] with { Count = 1, };
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]").WithLocation(7, 9),
-                // (7,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
-                //         [] with { Count = 1, };
-                Diagnostic(ErrorCode.ERR_IllegalStatement, "[] with { Count = 1, }").WithLocation(7, 9));
+            CreateCompilation(source)
+                .VerifyEmitDiagnostics(
+                    // (7,9): error CS9503: There is no target type for the collection expression.
+                    //         [] with { Count = 1, };
+                    Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]")
+                        .WithLocation(7, 9),
+                    // (7,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                    //         [] with { Count = 1, };
+                    Diagnostic(ErrorCode.ERR_IllegalStatement, "[] with { Count = 1, }")
+                        .WithLocation(7, 9)
+                );
         }
 
         [Fact]
@@ -17442,13 +20192,16 @@ partial class Program
                     }
                 }
                 """;
-            CreateCompilation(source).VerifyEmitDiagnostics(
-                // (7,9): error CS9503: There is no target type for the collection expression.
-                //         [] is object;
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]").WithLocation(7, 9),
-                // (7,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
-                //         [] is object;
-                Diagnostic(ErrorCode.ERR_IllegalStatement, "[] is object").WithLocation(7, 9));
+            CreateCompilation(source)
+                .VerifyEmitDiagnostics(
+                    // (7,9): error CS9503: There is no target type for the collection expression.
+                    //         [] is object;
+                    Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]")
+                        .WithLocation(7, 9),
+                    // (7,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                    //         [] is object;
+                    Diagnostic(ErrorCode.ERR_IllegalStatement, "[] is object").WithLocation(7, 9)
+                );
         }
 
         [Fact]
@@ -17465,13 +20218,17 @@ partial class Program
                     }
                 }
                 """;
-            CreateCompilation(source).VerifyEmitDiagnostics(
-                // (7,9): error CS9503: There is no target type for the collection expression.
-                //         [] as List<int>;
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]").WithLocation(7, 9),
-                // (7,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
-                //         [] as List<int>;
-                Diagnostic(ErrorCode.ERR_IllegalStatement, "[] as List<int>").WithLocation(7, 9));
+            CreateCompilation(source)
+                .VerifyEmitDiagnostics(
+                    // (7,9): error CS9503: There is no target type for the collection expression.
+                    //         [] as List<int>;
+                    Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]")
+                        .WithLocation(7, 9),
+                    // (7,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                    //         [] as List<int>;
+                    Diagnostic(ErrorCode.ERR_IllegalStatement, "[] as List<int>")
+                        .WithLocation(7, 9)
+                );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/69133")]
@@ -17493,7 +20250,8 @@ partial class Program
                 }
                 """;
 
-            var comp = CreateCompilation(new[] { source, s_collectionExtensions }).VerifyEmitDiagnostics();
+            var comp = CreateCompilation(new[] { source, s_collectionExtensions })
+                .VerifyEmitDiagnostics();
             CompileAndVerify(comp, expectedOutput: "[42, 43, 44],");
 
             var program = comp.GetMember<NamedTypeSymbol>("C");
@@ -17523,7 +20281,8 @@ partial class Program
                 }
                 """;
 
-            var comp = CreateCompilation(new[] { source, s_collectionExtensions }).VerifyEmitDiagnostics();
+            var comp = CreateCompilation(new[] { source, s_collectionExtensions })
+                .VerifyEmitDiagnostics();
             CompileAndVerify(comp, expectedOutput: "[42, 43, 44],");
         }
 
@@ -17546,7 +20305,8 @@ partial class Program
                 }
                 """;
 
-            var comp = CreateCompilation(new[] { source, s_collectionExtensions }).VerifyEmitDiagnostics();
+            var comp = CreateCompilation(new[] { source, s_collectionExtensions })
+                .VerifyEmitDiagnostics();
             CompileAndVerify(comp, expectedOutput: "[42, 43, 44],");
         }
 
@@ -17569,7 +20329,8 @@ partial class Program
                 }
                 """;
 
-            var comp = CreateCompilation(new[] { source, s_collectionExtensions }).VerifyEmitDiagnostics();
+            var comp = CreateCompilation(new[] { source, s_collectionExtensions })
+                .VerifyEmitDiagnostics();
             CompileAndVerify(comp, expectedOutput: "[hi, null],");
         }
 
@@ -17588,10 +20349,13 @@ partial class Program
                 }
                 """;
 
-            CreateCompilation(source).VerifyEmitDiagnostics(
-                // (1,2): error CS0181: Attribute constructor parameter 'values' has type 'int[][]', which is not a valid attribute parameter type
-                // [X([[1], [2]])]
-                Diagnostic(ErrorCode.ERR_BadAttributeParamType, "X").WithArguments("values", "int[][]").WithLocation(1, 2)
+            CreateCompilation(source)
+                .VerifyEmitDiagnostics(
+                    // (1,2): error CS0181: Attribute constructor parameter 'values' has type 'int[][]', which is not a valid attribute parameter type
+                    // [X([[1], [2]])]
+                    Diagnostic(ErrorCode.ERR_BadAttributeParamType, "X")
+                        .WithArguments("values", "int[][]")
+                        .WithLocation(1, 2)
                 );
         }
 
@@ -17615,7 +20379,8 @@ partial class Program
                 }
                 """;
 
-            var comp = CreateCompilation(new[] { source, s_collectionExtensions }).VerifyEmitDiagnostics();
+            var comp = CreateCompilation(new[] { source, s_collectionExtensions })
+                .VerifyEmitDiagnostics();
             CompileAndVerify(comp, expectedOutput: "[1],");
         }
 
@@ -17639,7 +20404,8 @@ partial class Program
                 }
                 """;
 
-            var comp = CreateCompilation(new[] { source, s_collectionExtensions }).VerifyEmitDiagnostics();
+            var comp = CreateCompilation(new[] { source, s_collectionExtensions })
+                .VerifyEmitDiagnostics();
             CompileAndVerify(comp, expectedOutput: "[1, 2, 3],");
         }
 
@@ -17662,7 +20428,8 @@ partial class Program
                 }
                 """;
 
-            var comp = CreateCompilation(new[] { source, s_collectionExtensions }).VerifyEmitDiagnostics();
+            var comp = CreateCompilation(new[] { source, s_collectionExtensions })
+                .VerifyEmitDiagnostics();
             CompileAndVerify(comp, expectedOutput: "[],");
         }
 
@@ -17682,10 +20449,11 @@ partial class Program
                 }
                 """;
 
-            var comp = CreateCompilation(source).VerifyEmitDiagnostics(
-                // (1,11): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
-                // [X([1, 2, C.M()])]
-                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "C.M()").WithLocation(1, 11)
+            var comp = CreateCompilation(source)
+                .VerifyEmitDiagnostics(
+                    // (1,11): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                    // [X([1, 2, C.M()])]
+                    Diagnostic(ErrorCode.ERR_BadAttributeArgument, "C.M()").WithLocation(1, 11)
                 );
         }
 
@@ -17704,10 +20472,12 @@ partial class Program
                 }
                 """;
 
-            CreateCompilation(source).VerifyEmitDiagnostics(
-                // (1,14): error CS9176: There is no target type for the collection expression.
-                // [X([1, 2, .. [3]])]
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[3]").WithLocation(1, 14)
+            CreateCompilation(source)
+                .VerifyEmitDiagnostics(
+                    // (1,14): error CS9176: There is no target type for the collection expression.
+                    // [X([1, 2, .. [3]])]
+                    Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[3]")
+                        .WithLocation(1, 14)
                 );
         }
 
@@ -17728,10 +20498,12 @@ partial class Program
                 }
                 """;
 
-            CreateCompilation(source).VerifyEmitDiagnostics(
-                // (3,5): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
-                // [X([.. new List<int>()])]
-                Diagnostic(ErrorCode.ERR_BadAttributeArgument, ".. new List<int>()").WithLocation(3, 5)
+            CreateCompilation(source)
+                .VerifyEmitDiagnostics(
+                    // (3,5): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                    // [X([.. new List<int>()])]
+                    Diagnostic(ErrorCode.ERR_BadAttributeArgument, ".. new List<int>()")
+                        .WithLocation(3, 5)
                 );
         }
 
@@ -17750,13 +20522,18 @@ partial class Program
                 }
                 """;
 
-            CreateCompilation(source).VerifyEmitDiagnostics(
-                // (1,4): error CS1503: Argument 1: cannot convert from 'collection expressions' to 'ERROR[]'
-                // [X([1])]
-                Diagnostic(ErrorCode.ERR_BadArgType, "[1]").WithArguments("1", "collection expressions", "ERROR[]").WithLocation(1, 4),
-                // (8,23): error CS0246: The type or namespace name 'ERROR' could not be found (are you missing a using directive or an assembly reference?)
-                //     public XAttribute(ERROR[] values) { }
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "ERROR").WithArguments("ERROR").WithLocation(8, 23)
+            CreateCompilation(source)
+                .VerifyEmitDiagnostics(
+                    // (1,4): error CS1503: Argument 1: cannot convert from 'collection expressions' to 'ERROR[]'
+                    // [X([1])]
+                    Diagnostic(ErrorCode.ERR_BadArgType, "[1]")
+                        .WithArguments("1", "collection expressions", "ERROR[]")
+                        .WithLocation(1, 4),
+                    // (8,23): error CS0246: The type or namespace name 'ERROR' could not be found (are you missing a using directive or an assembly reference?)
+                    //     public XAttribute(ERROR[] values) { }
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "ERROR")
+                        .WithArguments("ERROR")
+                        .WithLocation(8, 23)
                 );
         }
 
@@ -17775,10 +20552,13 @@ partial class Program
                 }
                 """;
 
-            CreateCompilation(source).VerifyEmitDiagnostics(
-                // (1,4): error CS1503: Argument 1: cannot convert from 'collection expressions' to 'int'
-                // [X([1])]
-                Diagnostic(ErrorCode.ERR_BadArgType, "[1]").WithArguments("1", "collection expressions", "int").WithLocation(1, 4)
+            CreateCompilation(source)
+                .VerifyEmitDiagnostics(
+                    // (1,4): error CS1503: Argument 1: cannot convert from 'collection expressions' to 'int'
+                    // [X([1])]
+                    Diagnostic(ErrorCode.ERR_BadArgType, "[1]")
+                        .WithArguments("1", "collection expressions", "int")
+                        .WithLocation(1, 4)
                 );
         }
 
@@ -17797,10 +20577,13 @@ partial class Program
                 }
                 """;
 
-            CreateCompilation(source, targetFramework: TargetFramework.Net70).VerifyEmitDiagnostics(
-                // (1,2): error CS0181: Attribute constructor parameter 's' has type 'Span<int>', which is not a valid attribute parameter type
-                // [X([1])]
-                Diagnostic(ErrorCode.ERR_BadAttributeParamType, "X").WithArguments("s", "System.Span<int>").WithLocation(1, 2)
+            CreateCompilation(source, targetFramework: TargetFramework.Net70)
+                .VerifyEmitDiagnostics(
+                    // (1,2): error CS0181: Attribute constructor parameter 's' has type 'Span<int>', which is not a valid attribute parameter type
+                    // [X([1])]
+                    Diagnostic(ErrorCode.ERR_BadAttributeParamType, "X")
+                        .WithArguments("s", "System.Span<int>")
+                        .WithLocation(1, 2)
                 );
         }
 
@@ -17819,10 +20602,13 @@ partial class Program
                 }
                 """;
 
-            CreateCompilation(source, targetFramework: TargetFramework.Net70).VerifyEmitDiagnostics(
-                // (1,2): error CS0181: Attribute constructor parameter 's' has type 'ReadOnlySpan<int>', which is not a valid attribute parameter type
-                // [X([1])]
-                Diagnostic(ErrorCode.ERR_BadAttributeParamType, "X").WithArguments("s", "System.ReadOnlySpan<int>").WithLocation(1, 2)
+            CreateCompilation(source, targetFramework: TargetFramework.Net70)
+                .VerifyEmitDiagnostics(
+                    // (1,2): error CS0181: Attribute constructor parameter 's' has type 'ReadOnlySpan<int>', which is not a valid attribute parameter type
+                    // [X([1])]
+                    Diagnostic(ErrorCode.ERR_BadAttributeParamType, "X")
+                        .WithArguments("s", "System.ReadOnlySpan<int>")
+                        .WithLocation(1, 2)
                 );
         }
 
@@ -17866,8 +20652,10 @@ partial class Program
             comp.VerifyDiagnostics(
                 // (22,2): error CS0181: Attribute constructor parameter 's' has type 'MyCollection<int>', which is not a valid attribute parameter type
                 // [X([1])]
-                Diagnostic(ErrorCode.ERR_BadAttributeParamType, "X").WithArguments("s", "MyCollection<int>").WithLocation(22, 2)
-                );
+                Diagnostic(ErrorCode.ERR_BadAttributeParamType, "X")
+                    .WithArguments("s", "MyCollection<int>")
+                    .WithLocation(22, 2)
+            );
         }
 
         [Fact]
@@ -17900,8 +20688,10 @@ partial class Program
             comp.VerifyDiagnostics(
                 // (12,2): error CS0181: Attribute constructor parameter 'a' has type 'A', which is not a valid attribute parameter type
                 // [X([1])]
-                Diagnostic(ErrorCode.ERR_BadAttributeParamType, "X").WithArguments("a", "A").WithLocation(12, 2)
-                );
+                Diagnostic(ErrorCode.ERR_BadAttributeParamType, "X")
+                    .WithArguments("a", "A")
+                    .WithLocation(12, 2)
+            );
         }
     }
 }

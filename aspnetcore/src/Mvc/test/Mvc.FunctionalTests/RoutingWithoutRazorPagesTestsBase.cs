@@ -8,11 +8,15 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public abstract class RoutingWithoutRazorPagesTestsBase<TStartup> : IClassFixture<MvcTestFixture<TStartup>> where TStartup : class
+public abstract class RoutingWithoutRazorPagesTestsBase<TStartup>
+    : IClassFixture<MvcTestFixture<TStartup>>
+    where TStartup : class
 {
     protected RoutingWithoutRazorPagesTestsBase(MvcTestFixture<TStartup> fixture)
     {
-        var factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+        var factory =
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         Client = factory.CreateDefaultClient();
     }
 
@@ -37,16 +41,16 @@ public abstract class RoutingWithoutRazorPagesTestsBase<TStartup> : IClassFixtur
         Assert.Equal("PageRoute", result.Controller);
         Assert.Equal("AttributeRoute", result.Action);
 
-        Assert.Contains(
-           new KeyValuePair<string, object>("page", "pagevalue"),
-           result.RouteValues);
+        Assert.Contains(new KeyValuePair<string, object>("page", "pagevalue"), result.RouteValues);
     }
 
     [Fact]
     public async Task ConventionalRoutedAction_RouteContainsPage_RouteNotMatched()
     {
         // Arrange & Act
-        var response = await Client.GetAsync("http://localhost/PageRoute/ConventionalRoute/pagevalue");
+        var response = await Client.GetAsync(
+            "http://localhost/PageRoute/ConventionalRoute/pagevalue"
+        );
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);

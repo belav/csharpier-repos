@@ -12,7 +12,8 @@ namespace VectorMathTests
         public const int DefaultSeed = 20010415;
         public static int Seed = Environment.GetEnvironmentVariable("CORECLR_SEED") switch
         {
-            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) => new Random().Next(),
+            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase)
+                => new Random().Next(),
             string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
             _ => DefaultSeed
         };
@@ -28,8 +29,20 @@ namespace VectorMathTests
         public static int TestDouble()
         {
             Random random = new Random(Seed);
-            double[] arr1 = new double[] { NextFloat(random), NextFloat(random), NextFloat(random), NextFloat(random) };
-            double[] arr2 = new double[] { NextFloat(random), NextFloat(random), NextFloat(random), NextFloat(random) };
+            double[] arr1 = new double[]
+            {
+                NextFloat(random),
+                NextFloat(random),
+                NextFloat(random),
+                NextFloat(random)
+            };
+            double[] arr2 = new double[]
+            {
+                NextFloat(random),
+                NextFloat(random),
+                NextFloat(random),
+                NextFloat(random)
+            };
             var a = new System.Numerics.Vector<double>(arr1);
             var b = new System.Numerics.Vector<double>(arr2);
             var xorR = a ^ b;

@@ -26,9 +26,10 @@ namespace Microsoft.Interop.UnitTests
         static TargetFrameworkConfigOptions()
         {
             Version liveVersion = Version.Parse(
-                typeof(TargetFrameworkConfigOptions)
-                    .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()!
-                    .InformationalVersion.Split('-')[0]);
+                typeof(TargetFrameworkConfigOptions).Assembly
+                    .GetCustomAttribute<AssemblyInformationalVersionAttribute>()!
+                    .InformationalVersion.Split('-')[0]
+            );
             _liveTargetFrameworkVersion = $"v{liveVersion.ToString(2)}";
         }
 
@@ -69,5 +70,4 @@ namespace Microsoft.Interop.UnitTests
             }
         }
     }
-
 }

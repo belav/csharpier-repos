@@ -18,7 +18,8 @@ namespace System.Data
 
         private readonly Scope m_instanceScope;
 
-        private const string AppDomainDataSetDefaultAllowedTypesKey = "System.Data.DataSetDefaultAllowedTypes";
+        private const string AppDomainDataSetDefaultAllowedTypesKey =
+            "System.Data.DataSetDefaultAllowedTypes";
 
         private TypeLimiter(Scope scope)
         {
@@ -26,8 +27,8 @@ namespace System.Data
             m_instanceScope = scope;
         }
 
-        private static bool IsTypeLimitingDisabled
-            => LocalAppContextSwitches.AllowArbitraryTypeInstantiation;
+        private static bool IsTypeLimitingDisabled =>
+            LocalAppContextSwitches.AllowArbitraryTypeInstantiation;
 
         /// <summary>
         /// Captures the current <see cref="TypeLimiter"/> instance so that future
@@ -163,13 +164,11 @@ namespace System.Data
                 typeof(SqlMoney),
                 typeof(SqlSingle),
                 typeof(SqlString),
-
                 /* non-primitives, but common */
                 typeof(object),
                 typeof(Type),
                 typeof(BigInteger),
                 typeof(Uri),
-
                 /* frequently used System.Drawing types */
                 typeof(Color),
                 typeof(Point),
@@ -232,7 +231,11 @@ namespace System.Data
                 // The incoming type is allowed if the current scope or any nested inner
                 // scope allowed it.
 
-                for (Scope? currentScope = this; currentScope != null; currentScope = currentScope.m_previousScope)
+                for (
+                    Scope? currentScope = this;
+                    currentScope != null;
+                    currentScope = currentScope.m_previousScope
+                )
                 {
                     if (currentScope.m_allowedTypes.Contains(type))
                     {
@@ -242,7 +245,8 @@ namespace System.Data
 
                 // Did the application programmatically allow this type to be deserialized?
 
-                Type[]? appDomainAllowedTypes = (Type[]?)AppDomain.CurrentDomain.GetData(AppDomainDataSetDefaultAllowedTypesKey);
+                Type[]? appDomainAllowedTypes = (Type[]?)
+                    AppDomain.CurrentDomain.GetData(AppDomainDataSetDefaultAllowedTypesKey);
                 if (appDomainAllowedTypes != null)
                 {
                     for (int i = 0; i < appDomainAllowedTypes.Length; i++)
@@ -261,7 +265,7 @@ namespace System.Data
 
             private static bool IsTypeUnconditionallyAllowed(Type type)
             {
-            TryAgain:
+                TryAgain:
                 Debug.Assert(type != null);
 
                 // Check the list of unconditionally allowed types.
@@ -289,7 +293,11 @@ namespace System.Data
 
                 // Allow generic lists of any unconditionally allowed type.
 
-                if (type.IsGenericType && !type.IsGenericTypeDefinition && type.GetGenericTypeDefinition() == typeof(List<>))
+                if (
+                    type.IsGenericType
+                    && !type.IsGenericTypeDefinition
+                    && type.GetGenericTypeDefinition() == typeof(List<>)
+                )
                 {
                     type = type.GetGenericArguments()[0];
                     goto TryAgain;

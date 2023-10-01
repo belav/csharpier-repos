@@ -13,7 +13,11 @@ namespace System.Xml.XmlDocumentTests
         [InlineData("bar", null, "<?bar ?>")]
         [InlineData("foo.bar", null, "<?foo.bar ?>")]
         [InlineData("foo:bar", null, "<?foo:bar ?>")]
-        public static void ProcessingInstructionCanBeCreatedAndSerialized(string target, string? data, string expectedOutput)
+        public static void ProcessingInstructionCanBeCreatedAndSerialized(
+            string target,
+            string? data,
+            string expectedOutput
+        )
         {
             var xmlDocument = new XmlDocument();
             var newNode = xmlDocument.CreateProcessingInstruction(target, data);
@@ -26,14 +30,18 @@ namespace System.Xml.XmlDocumentTests
         public static void NullTargetThrows()
         {
             var xmlDocument = new XmlDocument();
-            Assert.Throws<ArgumentNullException>(() => xmlDocument.CreateProcessingInstruction(null, "anyData"));
+            Assert.Throws<ArgumentNullException>(
+                () => xmlDocument.CreateProcessingInstruction(null, "anyData")
+            );
         }
 
         [Fact]
         public static void EmptyTargetThrows()
         {
             var xmlDocument = new XmlDocument();
-            Assert.Throws<ArgumentException>(() => xmlDocument.CreateProcessingInstruction("", "anyData"));
+            Assert.Throws<ArgumentException>(
+                () => xmlDocument.CreateProcessingInstruction("", "anyData")
+            );
         }
     }
 }

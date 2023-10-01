@@ -12,12 +12,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
     /// Content from a string literal or interpolated string that has been copied.
     /// </summary>
     [method: JsonConstructor]
-    internal readonly struct StringCopyPasteContent(
-        StringCopyPasteContentKind kind,
-        string? textValue,
-        string? interpolationExpression,
-        string? interpolationAlignmentClause,
-        string? interpolationFormatClause)
+    internal readonly struct StringCopyPasteContent
     {
         public StringCopyPasteContentKind Kind { get; } = kind;
 
@@ -56,10 +51,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
         [MemberNotNullWhen(true, nameof(InterpolationExpression))]
         public bool IsInterpolation => Kind == StringCopyPasteContentKind.Interpolation;
 
-        public static StringCopyPasteContent ForText(string text)
-            => new(StringCopyPasteContentKind.Text, text, null, null, null);
+        public static StringCopyPasteContent ForText(string text) =>
+            new(StringCopyPasteContentKind.Text, text, null, null, null);
 
-        public static StringCopyPasteContent ForInterpolation(string expression, string? alignmentClause, string? formatClause)
-            => new(StringCopyPasteContentKind.Interpolation, null, expression, alignmentClause, formatClause);
+        public static StringCopyPasteContent ForInterpolation(
+            string expression,
+            string? alignmentClause,
+            string? formatClause
+        ) =>
+            new(
+                StringCopyPasteContentKind.Interpolation,
+                null,
+                expression,
+                alignmentClause,
+                formatClause
+            );
     }
 }

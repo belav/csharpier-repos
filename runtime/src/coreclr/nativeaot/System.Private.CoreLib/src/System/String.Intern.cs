@@ -27,10 +27,16 @@ namespace System
 
         private sealed class StringInternTable : LockFreeReaderHashtable<string, string>
         {
-            protected sealed override bool CompareKeyToValue(string key, string value) => key == value;
-            protected sealed override bool CompareValueToValue(string value1, string value2) => value1 == value2;
+            protected sealed override bool CompareKeyToValue(string key, string value) =>
+                key == value;
+
+            protected sealed override bool CompareValueToValue(string value1, string value2) =>
+                value1 == value2;
+
             protected sealed override string CreateValueFromKey(string key) => key;
+
             protected sealed override int GetKeyHashCode(string key) => key.GetHashCode();
+
             protected sealed override int GetValueHashCode(string value) => value.GetHashCode();
         }
 
@@ -42,7 +48,11 @@ namespace System
                 {
                     StringInternTable internTable = new StringInternTable();
                     internTable.AddOrGetExisting(string.Empty);
-                    Interlocked.CompareExchange<StringInternTable?>(ref s_lazyInternTable, internTable, null);
+                    Interlocked.CompareExchange<StringInternTable?>(
+                        ref s_lazyInternTable,
+                        internTable,
+                        null
+                    );
                 }
                 return s_lazyInternTable;
             }

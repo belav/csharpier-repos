@@ -9,14 +9,14 @@ namespace System.IdentityModel.Protocols.WSTrust
     using System.IdentityModel.Tokens;
 
     /// <summary>
-    /// This class are used in defining Entropy and RequestProofToken element inside the 
+    /// This class are used in defining Entropy and RequestProofToken element inside the
     /// RequestSecurityToken and RequestSecurityTokenResponse.
     /// </summary>
     public class ProtectedKey
     {
         byte[] _secret;
         EncryptingCredentials _wrappingCredentials;
-        
+
         /// <summary>
         /// Use this constructor if we want to send the key material in clear text.
         /// </summary>
@@ -50,11 +50,7 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// </summary>
         public EncryptingCredentials WrappingCredentials
         {
-            get 
-            { 
-                return _wrappingCredentials; 
-            }
+            get { return _wrappingCredentials; }
         }
     }
 }
-

@@ -57,7 +57,8 @@ internal sealed class OutputCacheEntry : IDisposable
 
     // this is intentionally not an internal setter to make it clear that this should not be
     // used from most scenarios; this should consider buffer reuse - you *probably* want CopyFrom
-    internal void SetHeaders(ReadOnlyMemory<(string Name, StringValues Value)> value) => Headers = value;
+    internal void SetHeaders(ReadOnlyMemory<(string Name, StringValues Value)> value) =>
+        Headers = value;
 
     /// <summary>
     /// Gets the body of the cache entry.
@@ -85,7 +86,9 @@ internal sealed class OutputCacheEntry : IDisposable
 
     private static void Recycle<T>(ReadOnlyMemory<T> value)
     {
-        if (MemoryMarshal.TryGetArray<T>(value, out var segment) && segment.Array is { Length: > 0 })
+        if (
+            MemoryMarshal.TryGetArray<T>(value, out var segment) && segment.Array is { Length: > 0 }
+        )
         {
             ArrayPool<T>.Shared.Return(segment.Array);
         }
@@ -140,6 +143,6 @@ internal sealed class OutputCacheEntry : IDisposable
         }
     }
 
-    public ValueTask CopyToAsync(PipeWriter destination, CancellationToken cancellationToken)
-        => RecyclableReadOnlySequenceSegment.CopyToAsync(Body, destination, cancellationToken);
+    public ValueTask CopyToAsync(PipeWriter destination, CancellationToken cancellationToken) =>
+        RecyclableReadOnlySequenceSegment.CopyToAsync(Body, destination, cancellationToken);
 }

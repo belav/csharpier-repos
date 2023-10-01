@@ -35,14 +35,15 @@ namespace System.CommandLine.Tests.Help
                     DefaultValueFactory = (_) => FileAccess.Read,
                     Description = "the-root-arg-enum-default-description"
                 },
-                new CliOption<bool>("--the-root-option-no-arg", "-trna") 
+                new CliOption<bool>("--the-root-option-no-arg", "-trna")
                 {
                     Description = "the-root-option-no-arg-description",
                     Required = true
                 },
                 new CliOption<string>("--the-root-option-no-description-default-arg", "-trondda")
                 {
-                    DefaultValueFactory = (_) => "the-root-option--no-description-default-arg-value",
+                    DefaultValueFactory = (_) =>
+                        "the-root-option--no-description-default-arg-value",
                 },
                 new CliOption<string>("--the-root-option-no-default-arg", "-tronda")
                 {

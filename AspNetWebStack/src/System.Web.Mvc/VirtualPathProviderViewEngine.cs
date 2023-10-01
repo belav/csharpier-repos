@@ -25,22 +25,46 @@ namespace System.Web.Mvc
         internal Func<string, string> GetExtensionThunk = VirtualPathUtility.GetExtension;
         private IViewLocationCache _viewLocationCache;
 
-        [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays", Justification = "This is a shipped API")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1819:PropertiesShouldNotReturnArrays",
+            Justification = "This is a shipped API"
+        )]
         public string[] AreaMasterLocationFormats { get; set; }
 
-        [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays", Justification = "This is a shipped API")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1819:PropertiesShouldNotReturnArrays",
+            Justification = "This is a shipped API"
+        )]
         public string[] AreaPartialViewLocationFormats { get; set; }
 
-        [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays", Justification = "This is a shipped API")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1819:PropertiesShouldNotReturnArrays",
+            Justification = "This is a shipped API"
+        )]
         public string[] AreaViewLocationFormats { get; set; }
 
-        [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays", Justification = "This is a shipped API")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1819:PropertiesShouldNotReturnArrays",
+            Justification = "This is a shipped API"
+        )]
         public string[] FileExtensions { get; set; }
 
-        [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays", Justification = "This is a shipped API")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1819:PropertiesShouldNotReturnArrays",
+            Justification = "This is a shipped API"
+        )]
         public string[] MasterLocationFormats { get; set; }
 
-        [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays", Justification = "This is a shipped API")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1819:PropertiesShouldNotReturnArrays",
+            Justification = "This is a shipped API"
+        )]
         public string[] PartialViewLocationFormats { get; set; }
 
         // Neither DefaultViewLocationCache.Null nor a DefaultViewLocationCache instance maintain internal state. Fine
@@ -74,7 +98,11 @@ namespace System.Web.Mvc
             }
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays", Justification = "This is a shipped API")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1819:PropertiesShouldNotReturnArrays",
+            Justification = "This is a shipped API"
+        )]
         public string[] ViewLocationFormats { get; set; }
 
         // Likely exists for testing only
@@ -113,10 +141,22 @@ namespace System.Web.Mvc
             set { _displayModeProvider = value; }
         }
 
-        internal virtual string CreateCacheKey(string prefix, string name, string controllerName, string areaName)
+        internal virtual string CreateCacheKey(
+            string prefix,
+            string name,
+            string controllerName,
+            string areaName
+        )
         {
-            return String.Format(CultureInfo.InvariantCulture, CacheKeyFormat,
-                                 GetType().AssemblyQualifiedName, prefix, name, controllerName, areaName);
+            return String.Format(
+                CultureInfo.InvariantCulture,
+                CacheKeyFormat,
+                GetType().AssemblyQualifiedName,
+                prefix,
+                name,
+                controllerName,
+                areaName
+            );
         }
 
         internal static string AppendDisplayModeToCacheKey(string cacheKey, string displayMode)
@@ -126,16 +166,27 @@ namespace System.Web.Mvc
             return cacheKey + displayMode + ":";
         }
 
-        protected abstract IView CreatePartialView(ControllerContext controllerContext, string partialPath);
+        protected abstract IView CreatePartialView(
+            ControllerContext controllerContext,
+            string partialPath
+        );
 
-        protected abstract IView CreateView(ControllerContext controllerContext, string viewPath, string masterPath);
+        protected abstract IView CreateView(
+            ControllerContext controllerContext,
+            string viewPath,
+            string masterPath
+        );
 
         protected virtual bool FileExists(ControllerContext controllerContext, string virtualPath)
         {
             return VirtualPathProvider.FileExists(virtualPath);
         }
 
-        public virtual ViewEngineResult FindPartialView(ControllerContext controllerContext, string partialViewName, bool useCache)
+        public virtual ViewEngineResult FindPartialView(
+            ControllerContext controllerContext,
+            string partialViewName,
+            bool useCache
+        )
         {
             if (controllerContext == null)
             {
@@ -148,7 +199,17 @@ namespace System.Web.Mvc
 
             string[] searched;
             string controllerName = controllerContext.RouteData.GetRequiredString("controller");
-            string partialPath = GetPath(controllerContext, PartialViewLocationFormats, AreaPartialViewLocationFormats, "PartialViewLocationFormats", partialViewName, controllerName, CacheKeyPrefixPartial, useCache, out searched);
+            string partialPath = GetPath(
+                controllerContext,
+                PartialViewLocationFormats,
+                AreaPartialViewLocationFormats,
+                "PartialViewLocationFormats",
+                partialViewName,
+                controllerName,
+                CacheKeyPrefixPartial,
+                useCache,
+                out searched
+            );
 
             if (String.IsNullOrEmpty(partialPath))
             {
@@ -158,7 +219,12 @@ namespace System.Web.Mvc
             return new ViewEngineResult(CreatePartialView(controllerContext, partialPath), this);
         }
 
-        public virtual ViewEngineResult FindView(ControllerContext controllerContext, string viewName, string masterName, bool useCache)
+        public virtual ViewEngineResult FindView(
+            ControllerContext controllerContext,
+            string viewName,
+            string masterName,
+            bool useCache
+        )
         {
             if (controllerContext == null)
             {
@@ -173,10 +239,33 @@ namespace System.Web.Mvc
             string[] masterLocationsSearched;
 
             string controllerName = controllerContext.RouteData.GetRequiredString("controller");
-            string viewPath = GetPath(controllerContext, ViewLocationFormats, AreaViewLocationFormats, "ViewLocationFormats", viewName, controllerName, CacheKeyPrefixView, useCache, out viewLocationsSearched);
-            string masterPath = GetPath(controllerContext, MasterLocationFormats, AreaMasterLocationFormats, "MasterLocationFormats", masterName, controllerName, CacheKeyPrefixMaster, useCache, out masterLocationsSearched);
+            string viewPath = GetPath(
+                controllerContext,
+                ViewLocationFormats,
+                AreaViewLocationFormats,
+                "ViewLocationFormats",
+                viewName,
+                controllerName,
+                CacheKeyPrefixView,
+                useCache,
+                out viewLocationsSearched
+            );
+            string masterPath = GetPath(
+                controllerContext,
+                MasterLocationFormats,
+                AreaMasterLocationFormats,
+                "MasterLocationFormats",
+                masterName,
+                controllerName,
+                CacheKeyPrefixMaster,
+                useCache,
+                out masterLocationsSearched
+            );
 
-            if (String.IsNullOrEmpty(viewPath) || (String.IsNullOrEmpty(masterPath) && !String.IsNullOrEmpty(masterName)))
+            if (
+                String.IsNullOrEmpty(viewPath)
+                || (String.IsNullOrEmpty(masterPath) && !String.IsNullOrEmpty(masterName))
+            )
             {
                 return new ViewEngineResult(viewLocationsSearched.Union(masterLocationsSearched));
             }
@@ -184,7 +273,17 @@ namespace System.Web.Mvc
             return new ViewEngineResult(CreateView(controllerContext, viewPath, masterPath), this);
         }
 
-        private string GetPath(ControllerContext controllerContext, string[] locations, string[] areaLocations, string locationsPropertyName, string name, string controllerName, string cacheKeyPrefix, bool useCache, out string[] searchedLocations)
+        private string GetPath(
+            ControllerContext controllerContext,
+            string[] locations,
+            string[] areaLocations,
+            string locationsPropertyName,
+            string name,
+            string controllerName,
+            string cacheKeyPrefix,
+            bool useCache,
+            out string[] searchedLocations
+        )
         {
             searchedLocations = _emptyLocations;
 
@@ -195,24 +294,44 @@ namespace System.Web.Mvc
 
             string areaName = AreaHelpers.GetAreaName(controllerContext.RouteData);
             bool usingAreas = !String.IsNullOrEmpty(areaName);
-            List<ViewLocation> viewLocations = GetViewLocations(locations, (usingAreas) ? areaLocations : null);
+            List<ViewLocation> viewLocations = GetViewLocations(
+                locations,
+                (usingAreas) ? areaLocations : null
+            );
 
             if (viewLocations.Count == 0)
             {
-                throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture,
-                                                                  MvcResources.Common_PropertyCannotBeNullOrEmpty, locationsPropertyName));
+                throw new InvalidOperationException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        MvcResources.Common_PropertyCannotBeNullOrEmpty,
+                        locationsPropertyName
+                    )
+                );
             }
 
             bool nameRepresentsPath = IsSpecificPath(name);
-            string cacheKey = CreateCacheKey(cacheKeyPrefix, name, (nameRepresentsPath) ? String.Empty : controllerName, areaName);
+            string cacheKey = CreateCacheKey(
+                cacheKeyPrefix,
+                name,
+                (nameRepresentsPath) ? String.Empty : controllerName,
+                areaName
+            );
 
             if (useCache)
             {
                 // Only look at cached display modes that can handle the context.
-                IEnumerable<IDisplayMode> possibleDisplayModes = DisplayModeProvider.GetAvailableDisplayModesForContext(controllerContext.HttpContext, controllerContext.DisplayMode);
+                IEnumerable<IDisplayMode> possibleDisplayModes =
+                    DisplayModeProvider.GetAvailableDisplayModesForContext(
+                        controllerContext.HttpContext,
+                        controllerContext.DisplayMode
+                    );
                 foreach (IDisplayMode displayMode in possibleDisplayModes)
                 {
-                    string cachedLocation = ViewLocationCache.GetViewLocation(controllerContext.HttpContext, AppendDisplayModeToCacheKey(cacheKey, displayMode.DisplayModeId));
+                    string cachedLocation = ViewLocationCache.GetViewLocation(
+                        controllerContext.HttpContext,
+                        AppendDisplayModeToCacheKey(cacheKey, displayMode.DisplayModeId)
+                    );
 
                     if (cachedLocation == null)
                     {
@@ -239,12 +358,33 @@ namespace System.Web.Mvc
             else
             {
                 return nameRepresentsPath
-                    ? GetPathFromSpecificName(controllerContext, name, cacheKey, ref searchedLocations)
-                    : GetPathFromGeneralName(controllerContext, viewLocations, name, controllerName, areaName, cacheKey, ref searchedLocations);
+                    ? GetPathFromSpecificName(
+                        controllerContext,
+                        name,
+                        cacheKey,
+                        ref searchedLocations
+                    )
+                    : GetPathFromGeneralName(
+                        controllerContext,
+                        viewLocations,
+                        name,
+                        controllerName,
+                        areaName,
+                        cacheKey,
+                        ref searchedLocations
+                    );
             }
         }
 
-        private string GetPathFromGeneralName(ControllerContext controllerContext, List<ViewLocation> locations, string name, string controllerName, string areaName, string cacheKey, ref string[] searchedLocations)
+        private string GetPathFromGeneralName(
+            ControllerContext controllerContext,
+            List<ViewLocation> locations,
+            string name,
+            string controllerName,
+            string areaName,
+            string cacheKey,
+            ref string[] searchedLocations
+        )
         {
             string result = String.Empty;
             searchedLocations = new string[locations.Count];
@@ -253,7 +393,13 @@ namespace System.Web.Mvc
             {
                 ViewLocation location = locations[i];
                 string virtualPath = location.Format(name, controllerName, areaName);
-                DisplayInfo virtualPathDisplayInfo = DisplayModeProvider.GetDisplayInfoForVirtualPath(virtualPath, controllerContext.HttpContext, path => FileExists(controllerContext, path), controllerContext.DisplayMode);
+                DisplayInfo virtualPathDisplayInfo =
+                    DisplayModeProvider.GetDisplayInfoForVirtualPath(
+                        virtualPath,
+                        controllerContext.HttpContext,
+                        path => FileExists(controllerContext, path),
+                        controllerContext.DisplayMode
+                    );
 
                 if (virtualPathDisplayInfo != null)
                 {
@@ -261,7 +407,14 @@ namespace System.Web.Mvc
 
                     searchedLocations = _emptyLocations;
                     result = resolvedVirtualPath;
-                    ViewLocationCache.InsertViewLocation(controllerContext.HttpContext, AppendDisplayModeToCacheKey(cacheKey, virtualPathDisplayInfo.DisplayMode.DisplayModeId), result);
+                    ViewLocationCache.InsertViewLocation(
+                        controllerContext.HttpContext,
+                        AppendDisplayModeToCacheKey(
+                            cacheKey,
+                            virtualPathDisplayInfo.DisplayMode.DisplayModeId
+                        ),
+                        result
+                    );
 
                     if (controllerContext.DisplayMode == null)
                     {
@@ -273,16 +426,27 @@ namespace System.Web.Mvc
                     IEnumerable<IDisplayMode> allDisplayModes = DisplayModeProvider.Modes;
                     foreach (IDisplayMode displayMode in allDisplayModes)
                     {
-                        if (displayMode.DisplayModeId != virtualPathDisplayInfo.DisplayMode.DisplayModeId)
+                        if (
+                            displayMode.DisplayModeId
+                            != virtualPathDisplayInfo.DisplayMode.DisplayModeId
+                        )
                         {
-                            DisplayInfo displayInfoToCache = displayMode.GetDisplayInfo(controllerContext.HttpContext, virtualPath, virtualPathExists: path => FileExists(controllerContext, path));
+                            DisplayInfo displayInfoToCache = displayMode.GetDisplayInfo(
+                                controllerContext.HttpContext,
+                                virtualPath,
+                                virtualPathExists: path => FileExists(controllerContext, path)
+                            );
 
                             string cacheValue = String.Empty;
                             if (displayInfoToCache != null && displayInfoToCache.FilePath != null)
                             {
                                 cacheValue = displayInfoToCache.FilePath;
                             }
-                            ViewLocationCache.InsertViewLocation(controllerContext.HttpContext, AppendDisplayModeToCacheKey(cacheKey, displayMode.DisplayModeId), cacheValue);
+                            ViewLocationCache.InsertViewLocation(
+                                controllerContext.HttpContext,
+                                AppendDisplayModeToCacheKey(cacheKey, displayMode.DisplayModeId),
+                                cacheValue
+                            );
                         }
                     }
                     break;
@@ -294,7 +458,12 @@ namespace System.Web.Mvc
             return result;
         }
 
-        private string GetPathFromSpecificName(ControllerContext controllerContext, string name, string cacheKey, ref string[] searchedLocations)
+        private string GetPathFromSpecificName(
+            ControllerContext controllerContext,
+            string name,
+            string cacheKey,
+            ref string[] searchedLocations
+        )
         {
             string result = name;
 
@@ -323,7 +492,10 @@ namespace System.Web.Mvc
             }
         }
 
-        private static List<ViewLocation> GetViewLocations(string[] viewLocationFormats, string[] areaViewLocationFormats)
+        private static List<ViewLocation> GetViewLocations(
+            string[] viewLocationFormats,
+            string[] areaViewLocationFormats
+        )
         {
             List<ViewLocation> allLocations = new List<ViewLocation>();
 
@@ -364,13 +536,17 @@ namespace System.Web.Mvc
         private class AreaAwareViewLocation : ViewLocation
         {
             public AreaAwareViewLocation(string virtualPathFormatString)
-                : base(virtualPathFormatString)
-            {
-            }
+                : base(virtualPathFormatString) { }
 
             public override string Format(string viewName, string controllerName, string areaName)
             {
-                return String.Format(CultureInfo.InvariantCulture, _virtualPathFormatString, viewName, controllerName, areaName);
+                return String.Format(
+                    CultureInfo.InvariantCulture,
+                    _virtualPathFormatString,
+                    viewName,
+                    controllerName,
+                    areaName
+                );
             }
         }
 
@@ -385,7 +561,12 @@ namespace System.Web.Mvc
 
             public virtual string Format(string viewName, string controllerName, string areaName)
             {
-                return String.Format(CultureInfo.InvariantCulture, _virtualPathFormatString, viewName, controllerName);
+                return String.Format(
+                    CultureInfo.InvariantCulture,
+                    _virtualPathFormatString,
+                    viewName,
+                    controllerName
+                );
             }
         }
     }

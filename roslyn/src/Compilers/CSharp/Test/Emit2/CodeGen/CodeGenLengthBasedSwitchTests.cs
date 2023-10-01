@@ -77,8 +77,13 @@ public class C
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics();
         var verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyMemberInIL(PrivateImplementationDetails.SynthesizedStringHashFunctionName + "(string)", expected: false);
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyMemberInIL(
+            PrivateImplementationDetails.SynthesizedStringHashFunctionName + "(string)",
+            expected: false
+        );
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size      584 (0x248)
   .maxstack  2
@@ -263,12 +268,21 @@ public class C
   IL_0246:  ldloc.0
   IL_0247:  ret
 }
-""");
-        comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch());
+"""
+        );
+        comp = CreateCompilation(
+            source,
+            parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch()
+        );
         comp.VerifyDiagnostics();
         verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyMemberInIL(PrivateImplementationDetails.SynthesizedStringHashFunctionName + "(string)", expected: true);
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyMemberInIL(
+            PrivateImplementationDetails.SynthesizedStringHashFunctionName + "(string)",
+            expected: true
+        );
+        verifier.VerifyIL(
+            "C.M",
+            """
  {
   // Code size      786 (0x312)
   .maxstack  2
@@ -499,7 +513,8 @@ public class C
   IL_0310:  ldloc.0
   IL_0311:  ret
 }
-""");
+"""
+        );
     }
 
     [InlineData(true)]
@@ -571,9 +586,16 @@ public class C
         var comp = CreateCompilationWithSpanAndMemoryExtensions(source);
         comp.VerifyDiagnostics();
         var verifier = CompileAndVerify(comp, expectedOutput: "RAN", verify: Verification.Skipped);
-        var indexer = useReadonly ? $$"""ref readonly char {{keyType}}.this[int].get""" : $$"""ref char {{keyType}}.this[int].get""";
-        verifier.VerifyMemberInIL(PrivateImplementationDetails.SynthesizedStringHashFunctionName + "(string)", expected: false);
-        verifier.VerifyIL("C.M", $$"""
+        var indexer = useReadonly
+            ? $$"""ref readonly char {{keyType}}.this[int].get"""
+            : $$"""ref char {{keyType}}.this[int].get""";
+        verifier.VerifyMemberInIL(
+            PrivateImplementationDetails.SynthesizedStringHashFunctionName + "(string)",
+            expected: false
+        );
+        verifier.VerifyIL(
+            "C.M",
+            $$"""
 {
   // Code size      648 (0x288)
   .maxstack  2
@@ -771,14 +793,22 @@ public class C
   IL_0286:  ldloc.0
   IL_0287:  ret
 }
-""");
+"""
+        );
 
-        comp = CreateCompilationWithSpanAndMemoryExtensions(source, parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch());
+        comp = CreateCompilationWithSpanAndMemoryExtensions(
+            source,
+            parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch()
+        );
         comp.VerifyDiagnostics();
         verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        var helper = useReadonly ? "ComputeReadOnlySpanHash(System.ReadOnlySpan<char>)" : "ComputeSpanHash(System.Span<char>)";
+        var helper = useReadonly
+            ? "ComputeReadOnlySpanHash(System.ReadOnlySpan<char>)"
+            : "ComputeSpanHash(System.Span<char>)";
         verifier.VerifyMemberInIL(helper, expected: true);
-        verifier.VerifyIL("C.M", $$"""
+        verifier.VerifyIL(
+            "C.M",
+            $$"""
 {
   // Code size      861 (0x35d)
   .maxstack  2
@@ -1023,7 +1053,8 @@ public class C
   IL_035b:  ldloc.0
   IL_035c:  ret
 }
-""");
+"""
+        );
     }
 
     [Fact, WorkItem(56374, "https://github.com/dotnet/roslyn/issues/56374")]
@@ -1058,7 +1089,7 @@ public class C
             // (8,13): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of the switch expression or it is impossible to match.
             //             null => "null2",
             Diagnostic(ErrorCode.ERR_SwitchArmSubsumed, "null").WithLocation(8, 13)
-            );
+        );
     }
 
     [Fact, WorkItem(56374, "https://github.com/dotnet/roslyn/issues/56374")]
@@ -1108,8 +1139,13 @@ public class C
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics();
         var verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyMemberInIL(PrivateImplementationDetails.SynthesizedStringHashFunctionName + "(string)", expected: false);
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyMemberInIL(
+            PrivateImplementationDetails.SynthesizedStringHashFunctionName + "(string)",
+            expected: false
+        );
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size      272 (0x110)
   .maxstack  2
@@ -1209,13 +1245,22 @@ public class C
   IL_010e:  ldloc.0
   IL_010f:  ret
 }
-""");
+"""
+        );
 
-        comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch());
+        comp = CreateCompilation(
+            source,
+            parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch()
+        );
         comp.VerifyDiagnostics();
         verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyMemberInIL(PrivateImplementationDetails.SynthesizedStringHashFunctionName + "(string)", expected: true);
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyMemberInIL(
+            PrivateImplementationDetails.SynthesizedStringHashFunctionName + "(string)",
+            expected: true
+        );
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size      335 (0x14f)
   .maxstack  2
@@ -1336,7 +1381,8 @@ public class C
   IL_014d:  ldloc.0
   IL_014e:  ret
 }
-""");
+"""
+        );
     }
 
     [Fact, WorkItem(56374, "https://github.com/dotnet/roslyn/issues/56374")]
@@ -1389,8 +1435,13 @@ public class C
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics();
         var verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyMemberInIL(PrivateImplementationDetails.SynthesizedStringHashFunctionName + "(string)", expected: false);
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyMemberInIL(
+            PrivateImplementationDetails.SynthesizedStringHashFunctionName + "(string)",
+            expected: false
+        );
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size      310 (0x136)
   .maxstack  2
@@ -1500,7 +1551,8 @@ public class C
   IL_0134:  ldloc.0
   IL_0135:  ret
 }
-""");
+"""
+        );
     }
 
     [Fact, WorkItem(56374, "https://github.com/dotnet/roslyn/issues/56374")]
@@ -1531,16 +1583,23 @@ public class C
         comp.VerifyEmitDiagnostics(
             // error CS0656: Missing compiler required member 'System.String.get_Length'
             //
-            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "").WithArguments("System.String", "get_Length").WithLocation(1, 1)
-            );
+            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "")
+                .WithArguments("System.String", "get_Length")
+                .WithLocation(1, 1)
+        );
 
-        comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch());
+        comp = CreateCompilation(
+            source,
+            parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch()
+        );
         comp.MakeMemberMissing(SpecialMember.System_String__Length);
         comp.VerifyEmitDiagnostics(
             // error CS0656: Missing compiler required member 'System.String.get_Length'
             //
-            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "").WithArguments("System.String", "get_Length").WithLocation(1, 1)
-            );
+            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "")
+                .WithArguments("System.String", "get_Length")
+                .WithLocation(1, 1)
+        );
     }
 
     [Fact, WorkItem(56374, "https://github.com/dotnet/roslyn/issues/56374")]
@@ -1571,8 +1630,13 @@ public class C
         comp.VerifyEmitDiagnostics();
 
         var verifier = CompileAndVerify(comp);
-        verifier.VerifyMemberInIL(PrivateImplementationDetails.SynthesizedStringHashFunctionName + "(string)", expected: false);
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyMemberInIL(
+            PrivateImplementationDetails.SynthesizedStringHashFunctionName + "(string)",
+            expected: false
+        );
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size      178 (0xb2)
   .maxstack  2
@@ -1639,7 +1703,8 @@ public class C
   IL_00b0:  ldloc.0
   IL_00b1:  ret
 }
-""");
+"""
+        );
     }
 
     [Fact, WorkItem(56374, "https://github.com/dotnet/roslyn/issues/56374")]
@@ -1670,29 +1735,45 @@ public class C
         comp.VerifyEmitDiagnostics(
             // (7,13): error CS0656: Missing compiler required member 'System.Span`1.get_Length'
             //             "a" => "a",
-            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""a""").WithArguments("System.Span`1", "get_Length").WithLocation(7, 13),
+            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""a""")
+                .WithArguments("System.Span`1", "get_Length")
+                .WithLocation(7, 13),
             // (8,13): error CS0656: Missing compiler required member 'System.Span`1.get_Length'
             //             "ab" => "ab",
-            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""ab""").WithArguments("System.Span`1", "get_Length").WithLocation(8, 13),
+            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""ab""")
+                .WithArguments("System.Span`1", "get_Length")
+                .WithLocation(8, 13),
             // (9,13): error CS0656: Missing compiler required member 'System.Span`1.get_Length'
             //             "abc" => "abc",
-            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abc""").WithArguments("System.Span`1", "get_Length").WithLocation(9, 13),
+            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abc""")
+                .WithArguments("System.Span`1", "get_Length")
+                .WithLocation(9, 13),
             // (10,13): error CS0656: Missing compiler required member 'System.Span`1.get_Length'
             //             "abcd" => "abcd",
-            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abcd""").WithArguments("System.Span`1", "get_Length").WithLocation(10, 13),
+            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abcd""")
+                .WithArguments("System.Span`1", "get_Length")
+                .WithLocation(10, 13),
             // (11,13): error CS0656: Missing compiler required member 'System.Span`1.get_Length'
             //             "abcde" => "abcde",
-            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abcde""").WithArguments("System.Span`1", "get_Length").WithLocation(11, 13),
+            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abcde""")
+                .WithArguments("System.Span`1", "get_Length")
+                .WithLocation(11, 13),
             // (12,13): error CS0656: Missing compiler required member 'System.Span`1.get_Length'
             //             "abcdef" => "abcdef",
-            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abcdef""").WithArguments("System.Span`1", "get_Length").WithLocation(12, 13),
+            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abcdef""")
+                .WithArguments("System.Span`1", "get_Length")
+                .WithLocation(12, 13),
             // (13,13): error CS0656: Missing compiler required member 'System.Span`1.get_Length'
             //             "abcdefg" => "abcdefg",
-            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abcdefg""").WithArguments("System.Span`1", "get_Length").WithLocation(13, 13),
+            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abcdefg""")
+                .WithArguments("System.Span`1", "get_Length")
+                .WithLocation(13, 13),
             // (14,13): error CS0656: Missing compiler required member 'System.Span`1.get_Length'
             //             "abcdefgh" => "abcdefgh",
-            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abcdefgh""").WithArguments("System.Span`1", "get_Length").WithLocation(14, 13)
-            );
+            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abcdefgh""")
+                .WithArguments("System.Span`1", "get_Length")
+                .WithLocation(14, 13)
+        );
     }
 
     [Fact, WorkItem(56374, "https://github.com/dotnet/roslyn/issues/56374")]
@@ -1723,7 +1804,9 @@ public class C
         comp.VerifyEmitDiagnostics();
 
         var verifier = CompileAndVerify(comp, verify: Verification.Skipped);
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size      221 (0xdd)
   .maxstack  2
@@ -1798,7 +1881,8 @@ public class C
   IL_00db:  ldloc.0
   IL_00dc:  ret
 }
-""");
+"""
+        );
     }
 
     [Fact, WorkItem(56374, "https://github.com/dotnet/roslyn/issues/56374")]
@@ -1829,7 +1913,9 @@ public class C
         comp.VerifyEmitDiagnostics();
 
         var verifier = CompileAndVerify(comp, verify: Verification.Skipped);
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size      221 (0xdd)
   .maxstack  2
@@ -1904,7 +1990,8 @@ public class C
   IL_00db:  ldloc.0
   IL_00dc:  ret
 }
-""");
+"""
+        );
     }
 
     [Fact, WorkItem(56374, "https://github.com/dotnet/roslyn/issues/56374")]
@@ -1935,29 +2022,45 @@ public class C
         comp.VerifyEmitDiagnostics(
             // (7,13): error CS0656: Missing compiler required member 'System.MemoryExtensions.AsSpan'
             //             "a" => "a",
-            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""a""").WithArguments("System.MemoryExtensions", "AsSpan").WithLocation(7, 13),
+            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""a""")
+                .WithArguments("System.MemoryExtensions", "AsSpan")
+                .WithLocation(7, 13),
             // (8,13): error CS0656: Missing compiler required member 'System.MemoryExtensions.AsSpan'
             //             "ab" => "ab",
-            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""ab""").WithArguments("System.MemoryExtensions", "AsSpan").WithLocation(8, 13),
+            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""ab""")
+                .WithArguments("System.MemoryExtensions", "AsSpan")
+                .WithLocation(8, 13),
             // (9,13): error CS0656: Missing compiler required member 'System.MemoryExtensions.AsSpan'
             //             "abc" => "abc",
-            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abc""").WithArguments("System.MemoryExtensions", "AsSpan").WithLocation(9, 13),
+            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abc""")
+                .WithArguments("System.MemoryExtensions", "AsSpan")
+                .WithLocation(9, 13),
             // (10,13): error CS0656: Missing compiler required member 'System.MemoryExtensions.AsSpan'
             //             "abcd" => "abcd",
-            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abcd""").WithArguments("System.MemoryExtensions", "AsSpan").WithLocation(10, 13),
+            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abcd""")
+                .WithArguments("System.MemoryExtensions", "AsSpan")
+                .WithLocation(10, 13),
             // (11,13): error CS0656: Missing compiler required member 'System.MemoryExtensions.AsSpan'
             //             "abcde" => "abcde",
-            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abcde""").WithArguments("System.MemoryExtensions", "AsSpan").WithLocation(11, 13),
+            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abcde""")
+                .WithArguments("System.MemoryExtensions", "AsSpan")
+                .WithLocation(11, 13),
             // (12,13): error CS0656: Missing compiler required member 'System.MemoryExtensions.AsSpan'
             //             "abcdef" => "abcdef",
-            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abcdef""").WithArguments("System.MemoryExtensions", "AsSpan").WithLocation(12, 13),
+            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abcdef""")
+                .WithArguments("System.MemoryExtensions", "AsSpan")
+                .WithLocation(12, 13),
             // (13,13): error CS0656: Missing compiler required member 'System.MemoryExtensions.AsSpan'
             //             "abcdefg" => "abcdefg",
-            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abcdefg""").WithArguments("System.MemoryExtensions", "AsSpan").WithLocation(13, 13),
+            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abcdefg""")
+                .WithArguments("System.MemoryExtensions", "AsSpan")
+                .WithLocation(13, 13),
             // (14,13): error CS0656: Missing compiler required member 'System.MemoryExtensions.AsSpan'
             //             "abcdefgh" => "abcdefgh",
-            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abcdefgh""").WithArguments("System.MemoryExtensions", "AsSpan").WithLocation(14, 13)
-            );
+            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abcdefgh""")
+                .WithArguments("System.MemoryExtensions", "AsSpan")
+                .WithLocation(14, 13)
+        );
     }
 
     [Fact, WorkItem(56374, "https://github.com/dotnet/roslyn/issues/56374")]
@@ -1988,29 +2091,45 @@ public class C
         comp.VerifyEmitDiagnostics(
             // (7,13): error CS0656: Missing compiler required member 'System.MemoryExtensions.SequenceEqual'
             //             "a" => "a",
-            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""a""").WithArguments("System.MemoryExtensions", "SequenceEqual").WithLocation(7, 13),
+            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""a""")
+                .WithArguments("System.MemoryExtensions", "SequenceEqual")
+                .WithLocation(7, 13),
             // (8,13): error CS0656: Missing compiler required member 'System.MemoryExtensions.SequenceEqual'
             //             "ab" => "ab",
-            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""ab""").WithArguments("System.MemoryExtensions", "SequenceEqual").WithLocation(8, 13),
+            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""ab""")
+                .WithArguments("System.MemoryExtensions", "SequenceEqual")
+                .WithLocation(8, 13),
             // (9,13): error CS0656: Missing compiler required member 'System.MemoryExtensions.SequenceEqual'
             //             "abc" => "abc",
-            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abc""").WithArguments("System.MemoryExtensions", "SequenceEqual").WithLocation(9, 13),
+            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abc""")
+                .WithArguments("System.MemoryExtensions", "SequenceEqual")
+                .WithLocation(9, 13),
             // (10,13): error CS0656: Missing compiler required member 'System.MemoryExtensions.SequenceEqual'
             //             "abcd" => "abcd",
-            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abcd""").WithArguments("System.MemoryExtensions", "SequenceEqual").WithLocation(10, 13),
+            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abcd""")
+                .WithArguments("System.MemoryExtensions", "SequenceEqual")
+                .WithLocation(10, 13),
             // (11,13): error CS0656: Missing compiler required member 'System.MemoryExtensions.SequenceEqual'
             //             "abcde" => "abcde",
-            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abcde""").WithArguments("System.MemoryExtensions", "SequenceEqual").WithLocation(11, 13),
+            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abcde""")
+                .WithArguments("System.MemoryExtensions", "SequenceEqual")
+                .WithLocation(11, 13),
             // (12,13): error CS0656: Missing compiler required member 'System.MemoryExtensions.SequenceEqual'
             //             "abcdef" => "abcdef",
-            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abcdef""").WithArguments("System.MemoryExtensions", "SequenceEqual").WithLocation(12, 13),
+            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abcdef""")
+                .WithArguments("System.MemoryExtensions", "SequenceEqual")
+                .WithLocation(12, 13),
             // (13,13): error CS0656: Missing compiler required member 'System.MemoryExtensions.SequenceEqual'
             //             "abcdefg" => "abcdefg",
-            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abcdefg""").WithArguments("System.MemoryExtensions", "SequenceEqual").WithLocation(13, 13),
+            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abcdefg""")
+                .WithArguments("System.MemoryExtensions", "SequenceEqual")
+                .WithLocation(13, 13),
             // (14,13): error CS0656: Missing compiler required member 'System.MemoryExtensions.SequenceEqual'
             //             "abcdefgh" => "abcdefgh",
-            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abcdefgh""").WithArguments("System.MemoryExtensions", "SequenceEqual").WithLocation(14, 13)
-            );
+            Diagnostic(ErrorCode.ERR_MissingPredefinedMember, @"""abcdefgh""")
+                .WithArguments("System.MemoryExtensions", "SequenceEqual")
+                .WithLocation(14, 13)
+        );
     }
 
     [Fact, WorkItem(56374, "https://github.com/dotnet/roslyn/issues/56374")]
@@ -2060,8 +2179,13 @@ public class C
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics();
         var verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyMemberInIL(PrivateImplementationDetails.SynthesizedStringHashFunctionName + "(string)", expected: false);
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyMemberInIL(
+            PrivateImplementationDetails.SynthesizedStringHashFunctionName + "(string)",
+            expected: false
+        );
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size      288 (0x120)
   .maxstack  2
@@ -2167,13 +2291,22 @@ public class C
   IL_011e:  ldloc.0
   IL_011f:  ret
 }
-""");
+"""
+        );
 
-        comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch());
+        comp = CreateCompilation(
+            source,
+            parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch()
+        );
         comp.VerifyDiagnostics();
         verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyMemberInIL(PrivateImplementationDetails.SynthesizedStringHashFunctionName + "(string)", expected: true);
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyMemberInIL(
+            PrivateImplementationDetails.SynthesizedStringHashFunctionName + "(string)",
+            expected: true
+        );
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size      357 (0x165)
   .maxstack  2
@@ -2300,7 +2433,8 @@ public class C
   IL_0163:  ldloc.0
   IL_0164:  ret
 }
-""");
+"""
+        );
     }
 
     [Fact, WorkItem(56374, "https://github.com/dotnet/roslyn/issues/56374")]
@@ -2376,7 +2510,9 @@ public class C
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics();
         var verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size      693 (0x2b5)
   .maxstack  2
@@ -2601,12 +2737,18 @@ public class C
   IL_02b3:  ldc.i4.0
   IL_02b4:  ret
 }
-""");
+"""
+        );
 
-        comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch());
+        comp = CreateCompilation(
+            source,
+            parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch()
+        );
         comp.VerifyDiagnostics();
         verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size      694 (0x2b6)
   .maxstack  2
@@ -2807,7 +2949,8 @@ public class C
   IL_02b4:  ldc.i4.0
   IL_02b5:  ret
 }
-""");
+"""
+        );
     }
 
     [Fact, WorkItem(56374, "https://github.com/dotnet/roslyn/issues/56374")]
@@ -2910,7 +3053,9 @@ public class C
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics();
         var verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size     2632 (0xa48)
   .maxstack  2
@@ -3618,7 +3763,8 @@ public class C
   IL_0a46:  ldloc.0
   IL_0a47:  ret
 }
-""");
+"""
+        );
     }
 
     [Fact, WorkItem(56374, "https://github.com/dotnet/roslyn/issues/56374")]
@@ -4126,7 +4272,9 @@ public class C
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics();
         var verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size     8586 (0x218a)
   .maxstack  2
@@ -6356,7 +6504,8 @@ public class C
   IL_2184:  ldstr      "default"
   IL_2189:  ret
 }
-""");
+"""
+        );
     }
 
     [Fact, WorkItem(56374, "https://github.com/dotnet/roslyn/issues/56374")]
@@ -6492,7 +6641,9 @@ public class C
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics();
         var verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size     3704 (0xe78)
   .maxstack  2
@@ -7498,12 +7649,18 @@ public class C
   IL_0e76:  ldloc.0
   IL_0e77:  ret
 }
-""");
+"""
+        );
 
-        comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch());
+        comp = CreateCompilation(
+            source,
+            parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch()
+        );
         comp.VerifyDiagnostics();
         verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size     4692 (0x1254)
   .maxstack  2
@@ -8743,7 +8900,8 @@ public class C
   IL_1252:  ldloc.0
   IL_1253:  ret
 }
-""");
+"""
+        );
     }
 
     [Fact, WorkItem(56374, "https://github.com/dotnet/roslyn/issues/56374")]
@@ -8796,7 +8954,9 @@ public class C
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics();
         var verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size      317 (0x13d)
   .maxstack  2
@@ -8921,12 +9081,18 @@ public class C
   IL_013b:  ldloc.0
   IL_013c:  ret
 }
-""");
+"""
+        );
 
-        comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch());
+        comp = CreateCompilation(
+            source,
+            parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch()
+        );
         comp.VerifyDiagnostics();
         verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size      322 (0x142)
   .maxstack  2
@@ -9041,7 +9207,8 @@ public class C
   IL_0140:  ldloc.0
   IL_0141:  ret
 }
-""");
+"""
+        );
     }
 
     [Fact, WorkItem(56374, "https://github.com/dotnet/roslyn/issues/56374")]
@@ -9108,7 +9275,9 @@ public class C
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics();
         var verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size      663 (0x297)
   .maxstack  2
@@ -9318,12 +9487,18 @@ public class C
   IL_0295:  ldloc.0
   IL_0296:  ret
 }
-""");
+"""
+        );
 
-        comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch());
+        comp = CreateCompilation(
+            source,
+            parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch()
+        );
         comp.VerifyDiagnostics();
         verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size      684 (0x2ac)
   .maxstack  2
@@ -9526,7 +9701,8 @@ public class C
   IL_02aa:  ldloc.0
   IL_02ab:  ret
 }
-""");
+"""
+        );
     }
 
     [Fact, WorkItem(56374, "https://github.com/dotnet/roslyn/issues/56374")]
@@ -9567,7 +9743,9 @@ public class C
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics();
         var verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size      115 (0x73)
   .maxstack  2
@@ -9613,7 +9791,8 @@ public class C
   IL_0071:  ldloc.0
   IL_0072:  ret
 }
-""");
+"""
+        );
     }
 
     [Fact, WorkItem(56374, "https://github.com/dotnet/roslyn/issues/56374")]
@@ -9704,7 +9883,9 @@ public class C
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics();
         var verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size     1231 (0x4cf)
   .maxstack  2
@@ -10079,12 +10260,18 @@ public class C
   IL_04cd:  ldloc.0
   IL_04ce:  ret
 }
-""");
+"""
+        );
 
-        comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch());
+        comp = CreateCompilation(
+            source,
+            parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch()
+        );
         comp.VerifyDiagnostics();
         verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size     1266 (0x4f2)
   .maxstack  2
@@ -10436,7 +10623,8 @@ public class C
   IL_04f0:  ldloc.0
   IL_04f1:  ret
 }
-""");
+"""
+        );
     }
 
     [Fact, WorkItem(56374, "https://github.com/dotnet/roslyn/issues/56374")]
@@ -10545,7 +10733,9 @@ public class C
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics();
         var verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size      757 (0x2f5)
   .maxstack  2
@@ -10776,7 +10966,8 @@ public class C
   IL_02f3:  ldloc.0
   IL_02f4:  ret
 }
-""");
+"""
+        );
     }
 
     [Fact, WorkItem(56374, "https://github.com/dotnet/roslyn/issues/56374")]
@@ -10876,7 +11067,9 @@ public class C
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics();
         var verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size      223 (0xdf)
   .maxstack  2
@@ -10965,7 +11158,8 @@ public class C
   IL_00dd:  ldloc.0
   IL_00de:  ret
 }
-""");
+"""
+        );
     }
 
     [Fact, WorkItem(56374, "https://github.com/dotnet/roslyn/issues/56374")]
@@ -11075,7 +11269,9 @@ public class C
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics();
         var verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size     1022 (0x3fe)
   .maxstack  2
@@ -11380,12 +11576,18 @@ public class C
   IL_03f8:  ldstr      "default"
   IL_03fd:  ret
 }
-""");
+"""
+        );
 
-        comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch());
+        comp = CreateCompilation(
+            source,
+            parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch()
+        );
         comp.VerifyDiagnostics();
         verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size     1018 (0x3fa)
   .maxstack  2
@@ -11665,7 +11867,8 @@ public class C
   IL_03f4:  ldstr      "default"
   IL_03f9:  ret
 }
-""");
+"""
+        );
     }
 
     [Fact, WorkItem(56374, "https://github.com/dotnet/roslyn/issues/56374")]
@@ -11732,7 +11935,9 @@ public class C
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics();
         var verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size      852 (0x354)
   .maxstack  2
@@ -11995,7 +12200,8 @@ public class C
   IL_034e:  ldstr      "default"
   IL_0353:  ret
 }
-""");
+"""
+        );
     }
 
     [Fact, WorkItem(56374, "https://github.com/dotnet/roslyn/issues/56374")]
@@ -12076,7 +12282,9 @@ public class C
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics();
         var verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size     1003 (0x3eb)
   .maxstack  2
@@ -12384,12 +12592,18 @@ public class C
   IL_03e9:  ldloc.0
   IL_03ea:  ret
 }
-""");
+"""
+        );
 
-        comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch());
+        comp = CreateCompilation(
+            source,
+            parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch()
+        );
         comp.VerifyDiagnostics();
         verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size     1003 (0x3eb)
   .maxstack  2
@@ -12674,7 +12888,8 @@ public class C
   IL_03e9:  ldloc.0
   IL_03ea:  ret
 }
-""");
+"""
+        );
     }
 
     [Fact, WorkItem(56374, "https://github.com/dotnet/roslyn/issues/56374")]
@@ -12727,7 +12942,9 @@ public class C
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics();
         var verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size      312 (0x138)
   .maxstack  2
@@ -12845,12 +13062,18 @@ public class C
   IL_0136:  ldloc.0
   IL_0137:  ret
 }
-""");
+"""
+        );
 
-        comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch());
+        comp = CreateCompilation(
+            source,
+            parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch()
+        );
         comp.VerifyDiagnostics();
         verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size      325 (0x145)
   .maxstack  2
@@ -12965,7 +13188,8 @@ public class C
   IL_0143:  ldloc.0
   IL_0144:  ret
 }
-""");
+"""
+        );
     }
 
     [Fact, WorkItem(56374, "https://github.com/dotnet/roslyn/issues/56374")]
@@ -13044,7 +13268,9 @@ public class C
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics();
         var verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size      910 (0x38e)
   .maxstack  2
@@ -13322,12 +13548,18 @@ public class C
   IL_038c:  ldloc.0
   IL_038d:  ret
 }
-""");
+"""
+        );
 
-        comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch());
+        comp = CreateCompilation(
+            source,
+            parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch()
+        );
         comp.VerifyDiagnostics();
         verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size      969 (0x3c9)
   .maxstack  2
@@ -13601,7 +13833,8 @@ public class C
   IL_03c7:  ldloc.0
   IL_03c8:  ret
 }
-""");
+"""
+        );
     }
 
     [Fact, WorkItem(56374, "https://github.com/dotnet/roslyn/issues/56374")]
@@ -13652,7 +13885,9 @@ public class C
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics();
         var verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size      268 (0x10c)
   .maxstack  2
@@ -13757,12 +13992,18 @@ public class C
   IL_010a:  ldloc.0
   IL_010b:  ret
 }
-""");
+"""
+        );
 
-        comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch());
+        comp = CreateCompilation(
+            source,
+            parseOptions: TestOptions.RegularPreview.WithDisableLengthBasedSwitch()
+        );
         comp.VerifyDiagnostics();
         verifier = CompileAndVerify(comp, expectedOutput: "RAN");
-        verifier.VerifyIL("C.M", """
+        verifier.VerifyIL(
+            "C.M",
+            """
 {
   // Code size      272 (0x110)
   .maxstack  2
@@ -13862,6 +14103,7 @@ public class C
   IL_010e:  ldloc.0
   IL_010f:  ret
 }
-""");
+"""
+        );
     }
 }

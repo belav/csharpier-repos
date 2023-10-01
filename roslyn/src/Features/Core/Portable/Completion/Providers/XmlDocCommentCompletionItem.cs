@@ -11,7 +11,12 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         private const string BeforeCaretText = nameof(BeforeCaretText);
         private const string AfterCaretText = nameof(AfterCaretText);
 
-        public static CompletionItem Create(string displayText, string beforeCaretText, string afterCaretText, CompletionItemRules rules)
+        public static CompletionItem Create(
+            string displayText,
+            string beforeCaretText,
+            string afterCaretText,
+            CompletionItemRules rules
+        )
         {
             var props = ImmutableDictionary<string, string>.Empty
                 .Add(BeforeCaretText, beforeCaretText)
@@ -28,13 +33,14 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 glyph: Glyph.Keyword,
                 properties: props,
                 rules: rules,
-                isComplexTextEdit: true);
+                isComplexTextEdit: true
+            );
         }
 
-        public static string GetBeforeCaretText(CompletionItem item)
-            => item.Properties[BeforeCaretText];
+        public static string GetBeforeCaretText(CompletionItem item) =>
+            item.Properties[BeforeCaretText];
 
-        public static string? GetAfterCaretText(CompletionItem item)
-            => item.Properties[AfterCaretText];
+        public static string? GetAfterCaretText(CompletionItem item) =>
+            item.Properties[AfterCaretText];
     }
 }

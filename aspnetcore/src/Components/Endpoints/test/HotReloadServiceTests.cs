@@ -47,15 +47,18 @@ public class HotReloadServiceTests
         Assert.Equal("/server", endpoint.RoutePattern.RawText);
 
         // Act - 2
-        endpointDataSource.Builder.Pages.AddFromLibraryInfo("TestAssembly2", new[]
-        {
-            new PageComponentBuilder
+        endpointDataSource.Builder.Pages.AddFromLibraryInfo(
+            "TestAssembly2",
+            new[]
             {
-                AssemblyName = "TestAssembly2",
-                PageType = typeof(StaticComponent),
-                RouteTemplates = new List<string> { "/app/test" }
+                new PageComponentBuilder
+                {
+                    AssemblyName = "TestAssembly2",
+                    PageType = typeof(StaticComponent),
+                    RouteTemplates = new List<string> { "/app/test" }
+                }
             }
-        });
+        );
         HotReloadService.UpdateApplication(null);
 
         // Assert - 2
@@ -63,7 +66,8 @@ public class HotReloadServiceTests
         Assert.Collection(
             endpointDataSource.Endpoints,
             (ep) => Assert.Equal("/app/test", ((RouteEndpoint)ep).RoutePattern.RawText),
-            (ep) => Assert.Equal("/server", ((RouteEndpoint)ep).RoutePattern.RawText));
+            (ep) => Assert.Equal("/server", ((RouteEndpoint)ep).RoutePattern.RawText)
+        );
     }
 
     [Fact]
@@ -101,12 +105,13 @@ public class HotReloadServiceTests
         Assert.DoesNotContain(endpoint.Metadata, (element) => element is TestMetadata);
 
         // Act - 2
-        endpointDataSource.Conventions.Add(builder =>
-            builder.Metadata.Add(new TestMetadata()));
+        endpointDataSource.Conventions.Add(builder => builder.Metadata.Add(new TestMetadata()));
         HotReloadService.UpdateApplication(null);
 
         // Assert - 2
-        var updatedEndpoint = Assert.IsType<RouteEndpoint>(Assert.Single(endpointDataSource.Endpoints));
+        var updatedEndpoint = Assert.IsType<RouteEndpoint>(
+            Assert.Single(endpointDataSource.Endpoints)
+        );
         Assert.Equal("/server", updatedEndpoint.RoutePattern.RawText);
         Assert.Contains(updatedEndpoint.Metadata, (element) => element is TestMetadata);
     }
@@ -119,12 +124,15 @@ public class HotReloadServiceTests
         var services = CreateServices(typeof(MockEndpointProvider));
         var endpointDataSource = CreateDataSource<App>(builder, services);
         var compositeEndpointDataSource = new CompositeEndpointDataSource(
-            new[] { endpointDataSource });
+            new[] { endpointDataSource }
+        );
 
         // Assert - 1
         var endpoint = Assert.IsType<RouteEndpoint>(Assert.Single(endpointDataSource.Endpoints));
         Assert.Equal("/server", endpoint.RoutePattern.RawText);
-        var compositeEndpoint = Assert.IsType<RouteEndpoint>(Assert.Single(compositeEndpointDataSource.Endpoints));
+        var compositeEndpoint = Assert.IsType<RouteEndpoint>(
+            Assert.Single(compositeEndpointDataSource.Endpoints)
+        );
         Assert.Equal("/server", compositeEndpoint.RoutePattern.RawText);
 
         // Act - 2
@@ -142,15 +150,23 @@ public class HotReloadServiceTests
     private ComponentApplicationBuilder CreateBuilder(params Type[] types)
     {
         var builder = new ComponentApplicationBuilder();
-        builder.AddLibrary(new AssemblyComponentLibraryDescriptor(
-            "TestAssembly",
-            Array.Empty<PageComponentBuilder>(),
-            types.Select(t => new ComponentBuilder
-            {
-                AssemblyName = "TestAssembly",
-                ComponentType = t,
-                RenderMode = t.GetCustomAttribute<RenderModeAttribute>()
-            }).ToArray()));
+        builder.AddLibrary(
+            new AssemblyComponentLibraryDescriptor(
+                "TestAssembly",
+                Array.Empty<PageComponentBuilder>(),
+                types
+                    .Select(
+                        t =>
+                            new ComponentBuilder
+                            {
+                                AssemblyName = "TestAssembly",
+                                ComponentType = t,
+                                RenderMode = t.GetCustomAttribute<RenderModeAttribute>()
+                            }
+                    )
+                    .ToArray()
+            )
+        );
 
         return builder;
     }
@@ -160,7 +176,9 @@ public class HotReloadServiceTests
         var services = new ServiceCollection();
         foreach (var type in types)
         {
-            services.TryAddEnumerable(ServiceDescriptor.Singleton(typeof(RenderModeEndpointProvider), type));
+            services.TryAddEnumerable(
+                ServiceDescriptor.Singleton(typeof(RenderModeEndpointProvider), type)
+            );
         }
 
         return services.BuildServiceProvider();
@@ -169,14 +187,16 @@ public class HotReloadServiceTests
     private static RazorComponentEndpointDataSource<TComponent> CreateDataSource<TComponent>(
         ComponentApplicationBuilder builder,
         IServiceProvider services,
-        IComponentRenderMode[] renderModes = null)
+        IComponentRenderMode[] renderModes = null
+    )
     {
         var result = new RazorComponentEndpointDataSource<TComponent>(
             builder,
             new[] { new MockEndpointProvider() },
             new ApplicationBuilder(services),
             new RazorComponentEndpointFactory(),
-            new HotReloadService() { MetadataUpdateSupported = true });
+            new HotReloadService() { MetadataUpdateSupported = true }
+        );
 
         if (renderModes != null)
         {
@@ -200,12 +220,16 @@ public class HotReloadServiceTests
 
     private class MockEndpointProvider : RenderModeEndpointProvider
     {
-        public override IEnumerable<RouteEndpointBuilder> GetEndpointBuilders(IComponentRenderMode renderMode, IApplicationBuilder applicationBuilder)
+        public override IEnumerable<RouteEndpointBuilder> GetEndpointBuilders(
+            IComponentRenderMode renderMode,
+            IApplicationBuilder applicationBuilder
+        )
         {
             yield return new RouteEndpointBuilder(
                 (context) => Task.CompletedTask,
                 RoutePatternFactory.Parse("/server"),
-                0);
+                0
+            );
         }
 
         public override bool Supports(IComponentRenderMode renderMode) => true;

@@ -21,13 +21,17 @@ internal abstract class AbstractUseCollectionInitializerAnalyzer<
     TExpressionStatementSyntax,
     TLocalDeclarationStatementSyntax,
     TVariableDeclaratorSyntax,
-    TAnalyzer> : AbstractObjectCreationExpressionAnalyzer<
+    TAnalyzer
+>
+    : AbstractObjectCreationExpressionAnalyzer<
         TExpressionSyntax,
         TStatementSyntax,
         TObjectCreationExpressionSyntax,
         TLocalDeclarationStatementSyntax,
         TVariableDeclaratorSyntax,
-        Match<TStatementSyntax>, TAnalyzer>
+        Match<TStatementSyntax>,
+        TAnalyzer
+    >
     where TExpressionSyntax : SyntaxNode
     where TStatementSyntax : SyntaxNode
     where TObjectCreationExpressionSyntax : TExpressionSyntax
@@ -37,29 +41,43 @@ internal abstract class AbstractUseCollectionInitializerAnalyzer<
     where TLocalDeclarationStatementSyntax : TStatementSyntax
     where TVariableDeclaratorSyntax : SyntaxNode
     where TAnalyzer : AbstractUseCollectionInitializerAnalyzer<
-        TExpressionSyntax,
-        TStatementSyntax,
-        TObjectCreationExpressionSyntax,
-        TMemberAccessExpressionSyntax,
-        TInvocationExpressionSyntax,
-        TExpressionStatementSyntax,
-        TLocalDeclarationStatementSyntax,
-        TVariableDeclaratorSyntax,
-        TAnalyzer>, new()
+            TExpressionSyntax,
+            TStatementSyntax,
+            TObjectCreationExpressionSyntax,
+            TMemberAccessExpressionSyntax,
+            TInvocationExpressionSyntax,
+            TExpressionStatementSyntax,
+            TLocalDeclarationStatementSyntax,
+            TVariableDeclaratorSyntax,
+            TAnalyzer
+        >,
+        new()
 {
     protected abstract bool IsComplexElementInitializer(SyntaxNode expression);
-    protected abstract bool HasExistingInvalidInitializerForCollection(TObjectCreationExpressionSyntax objectCreation);
+    protected abstract bool HasExistingInvalidInitializerForCollection(
+        TObjectCreationExpressionSyntax objectCreation
+    );
 
-    protected abstract IUpdateExpressionSyntaxHelper<TExpressionSyntax, TStatementSyntax> SyntaxHelper { get; }
+    protected abstract IUpdateExpressionSyntaxHelper<
+        TExpressionSyntax,
+        TStatementSyntax
+    > SyntaxHelper { get; }
 
     public ImmutableArray<Match<TStatementSyntax>> Analyze(
         SemanticModel semanticModel,
         ISyntaxFacts syntaxFacts,
         TObjectCreationExpressionSyntax objectCreationExpression,
         bool analyzeForCollectionExpression,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
-        var state = TryInitializeState(semanticModel, syntaxFacts, objectCreationExpression, analyzeForCollectionExpression, cancellationToken);
+        var state = TryInitializeState(
+            semanticModel,
+            syntaxFacts,
+            objectCreationExpression,
+            analyzeForCollectionExpression,
+            cancellationToken
+        );
         if (state is null)
             return default;
 
@@ -86,15 +104,20 @@ internal abstract class AbstractUseCollectionInitializerAnalyzer<
     }
 
     protected sealed override bool TryAddMatches(
-        ArrayBuilder<Match<TStatementSyntax>> matches, CancellationToken cancellationToken)
+        ArrayBuilder<Match<TStatementSyntax>> matches,
+        CancellationToken cancellationToken
+    )
     {
         var seenInvocation = false;
         var seenIndexAssignment = false;
 
-        var initializer = this.SyntaxFacts.GetInitializerOfBaseObjectCreationExpression(_objectCreationExpression);
+        var initializer = this.SyntaxFacts.GetInitializerOfBaseObjectCreationExpression(
+            _objectCreationExpression
+        );
         if (initializer != null)
         {
-            var initializerExpressions = this.SyntaxFacts.GetExpressionsOfObjectCollectionInitializer(initializer);
+            var initializerExpressions =
+                this.SyntaxFacts.GetExpressionsOfObjectCollectionInitializer(initializer);
             if (initializerExpressions is [var firstInit, ..])
             {
                 // if we have an object creation, and it *already* has an initializer in it (like `new T { { x, y } }`)
@@ -116,7 +139,12 @@ internal abstract class AbstractUseCollectionInitializerAnalyzer<
             foreach (var statement in this.State.GetSubsequentStatements())
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                var match = TryAnalyzeStatement(statement, ref seenInvocation, ref seenIndexAssignment, cancellationToken);
+                var match = TryAnalyzeStatement(
+                    statement,
+                    ref seenInvocation,
+                    ref seenIndexAssignment,
+                    cancellationToken
+                );
                 if (match is null)
                     break;
 
@@ -128,15 +156,32 @@ internal abstract class AbstractUseCollectionInitializerAnalyzer<
     }
 
     private Match<TStatementSyntax>? TryAnalyzeStatement(
-        TStatementSyntax statement, ref bool seenInvocation, ref bool seenIndexAssignment, CancellationToken cancellationToken)
+        TStatementSyntax statement,
+        ref bool seenInvocation,
+        ref bool seenIndexAssignment,
+        CancellationToken cancellationToken
+    )
     {
         return _analyzeForCollectionExpression
-            ? State.TryAnalyzeStatementForCollectionExpression(this.SyntaxHelper, statement, cancellationToken)
-            : TryAnalyzeStatementForCollectionInitializer(statement, ref seenInvocation, ref seenIndexAssignment, cancellationToken);
+            ? State.TryAnalyzeStatementForCollectionExpression(
+                this.SyntaxHelper,
+                statement,
+                cancellationToken
+            )
+            : TryAnalyzeStatementForCollectionInitializer(
+                statement,
+                ref seenInvocation,
+                ref seenIndexAssignment,
+                cancellationToken
+            );
     }
 
     private Match<TStatementSyntax>? TryAnalyzeStatementForCollectionInitializer(
-        TStatementSyntax statement, ref bool seenInvocation, ref bool seenIndexAssignment, CancellationToken cancellationToken)
+        TStatementSyntax statement,
+        ref bool seenInvocation,
+        ref bool seenIndexAssignment,
+        CancellationToken cancellationToken
+    )
     {
         // At least one of these has to be false.
         Contract.ThrowIfTrue(seenInvocation && seenIndexAssignment);
@@ -148,13 +193,16 @@ internal abstract class AbstractUseCollectionInitializerAnalyzer<
         if (!seenIndexAssignment)
         {
             // Look for a call to Add or AddRange
-            if (this.State.TryAnalyzeAddInvocation(
-                    (TExpressionSyntax)this.SyntaxFacts.GetExpressionOfExpressionStatement(expressionStatement),
+            if (
+                this.State.TryAnalyzeAddInvocation(
+                    (TExpressionSyntax)
+                        this.SyntaxFacts.GetExpressionOfExpressionStatement(expressionStatement),
                     requiredArgumentName: null,
                     forCollectionExpression: false,
                     cancellationToken,
-                    out var instance) &&
-                this.State.ValuePatternMatches(instance))
+                    out var instance
+                ) && this.State.ValuePatternMatches(instance)
+            )
             {
                 seenInvocation = true;
                 return new Match<TStatementSyntax>(expressionStatement, UseSpread: false);
@@ -163,8 +211,10 @@ internal abstract class AbstractUseCollectionInitializerAnalyzer<
 
         if (!seenInvocation)
         {
-            if (TryAnalyzeIndexAssignment(expressionStatement, cancellationToken, out var instance) &&
-                this.State.ValuePatternMatches(instance))
+            if (
+                TryAnalyzeIndexAssignment(expressionStatement, cancellationToken, out var instance)
+                && this.State.ValuePatternMatches(instance)
+            )
             {
                 seenIndexAssignment = true;
                 return new Match<TStatementSyntax>(expressionStatement, UseSpread: false);
@@ -182,7 +232,9 @@ internal abstract class AbstractUseCollectionInitializerAnalyzer<
         // Can't use a collection expression if the original object creation has arguments.
         if (_analyzeForCollectionExpression)
         {
-            var argumentList = this.SyntaxFacts.GetArgumentListOfBaseObjectCreationExpression(_objectCreationExpression);
+            var argumentList = this.SyntaxFacts.GetArgumentListOfBaseObjectCreationExpression(
+                _objectCreationExpression
+            );
             if (argumentList != null)
             {
                 var arguments = this.SyntaxFacts.GetArgumentsOfArgumentList(argumentList);
@@ -190,7 +242,9 @@ internal abstract class AbstractUseCollectionInitializerAnalyzer<
                     return false;
             }
         }
-        var type = this.SemanticModel.GetTypeInfo(_objectCreationExpression, cancellationToken).Type;
+        var type = this.SemanticModel
+            .GetTypeInfo(_objectCreationExpression, cancellationToken)
+            .Type;
         if (type == null)
             return false;
 
@@ -198,15 +252,19 @@ internal abstract class AbstractUseCollectionInitializerAnalyzer<
             _objectCreationExpression.SpanStart,
             container: type,
             name: WellKnownMemberNames.CollectionInitializerAddMethodName,
-            includeReducedExtensionMethods: true);
+            includeReducedExtensionMethods: true
+        );
 
-        return addMethods.Any(static m => m is IMethodSymbol methodSymbol && methodSymbol.Parameters.Any());
+        return addMethods.Any(
+            static m => m is IMethodSymbol methodSymbol && methodSymbol.Parameters.Any()
+        );
     }
 
     private bool TryAnalyzeIndexAssignment(
         TExpressionStatementSyntax statement,
         CancellationToken cancellationToken,
-        [NotNullWhen(true)] out TExpressionSyntax? instance)
+        [NotNullWhen(true)] out TExpressionSyntax? instance
+    )
     {
         instance = null;
         if (!this.SyntaxFacts.SupportsIndexingInitializer(statement.SyntaxTree.Options))
@@ -220,18 +278,32 @@ internal abstract class AbstractUseCollectionInitializerAnalyzer<
         if (!this.SyntaxFacts.IsElementAccessExpression(left))
             return false;
 
-        // If we're initializing a variable, then we can't reference that variable on the right 
+        // If we're initializing a variable, then we can't reference that variable on the right
         // side of the initialization.  Rewriting this into a collection initializer would lead
         // to a definite-assignment error.
-        if (this.State.NodeContainsValuePatternOrReferencesInitializedSymbol(right, cancellationToken))
+        if (
+            this.State.NodeContainsValuePatternOrReferencesInitializedSymbol(
+                right,
+                cancellationToken
+            )
+        )
             return false;
 
         // Can't reference the variable being initialized in the arguments of the indexing expression.
-        this.SyntaxFacts.GetPartsOfElementAccessExpression(left, out var elementInstance, out var argumentList);
+        this.SyntaxFacts.GetPartsOfElementAccessExpression(
+            left,
+            out var elementInstance,
+            out var argumentList
+        );
         var elementAccessArguments = this.SyntaxFacts.GetArgumentsOfArgumentList(argumentList);
         foreach (var argument in elementAccessArguments)
         {
-            if (this.State.NodeContainsValuePatternOrReferencesInitializedSymbol(argument, cancellationToken))
+            if (
+                this.State.NodeContainsValuePatternOrReferencesInitializedSymbol(
+                    argument,
+                    cancellationToken
+                )
+            )
                 return false;
 
             // An index/range expression implicitly references the value being initialized.  So it cannot be used in the
@@ -239,7 +311,10 @@ internal abstract class AbstractUseCollectionInitializerAnalyzer<
             var argExpression = this.SyntaxFacts.GetExpressionOfArgument(argument);
             argExpression = this.SyntaxFacts.WalkDownParentheses(argExpression);
 
-            if (this.SyntaxFacts.IsIndexExpression(argExpression) || this.SyntaxFacts.IsRangeExpression(argExpression))
+            if (
+                this.SyntaxFacts.IsIndexExpression(argExpression)
+                || this.SyntaxFacts.IsRangeExpression(argExpression)
+            )
                 return false;
         }
 

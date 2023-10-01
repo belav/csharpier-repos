@@ -14,6 +14,8 @@ public class OrdersSqlServerFixture : OrdersFixtureBase
         _connectionString = SqlServerBenchmarkEnvironment.CreateConnectionString(databaseName);
     }
 
-    public override OrdersContextBase CreateContext(IServiceProvider serviceProvider = null, bool disableBatching = false)
-        => new OrdersSqlServerContext(_connectionString, serviceProvider, disableBatching);
+    public override OrdersContextBase CreateContext(
+        IServiceProvider serviceProvider = null,
+        bool disableBatching = false
+    ) => new OrdersSqlServerContext(_connectionString, serviceProvider, disableBatching);
 }

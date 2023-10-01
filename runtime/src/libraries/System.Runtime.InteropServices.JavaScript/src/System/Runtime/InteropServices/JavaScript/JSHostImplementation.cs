@@ -41,7 +41,9 @@ namespace System.Runtime.InteropServices.JavaScript
         {
             get
             {
-                s_jsOwnedObjects ??= new Dictionary<object, IntPtr>(ReferenceEqualityComparer.Instance);
+                s_jsOwnedObjects ??= new Dictionary<object, IntPtr>(
+                    ReferenceEqualityComparer.Instance
+                );
                 return s_jsOwnedObjects;
             }
         }
@@ -76,7 +78,10 @@ namespace System.Runtime.InteropServices.JavaScript
         //  strong references, allowing the managed object to be collected.
         // This ensures that things like delegates and promises will never 'go away' while JS
         //  is expecting to be able to invoke or await them.
-        public static IntPtr GetJSOwnedObjectGCHandle(object obj, GCHandleType handleType = GCHandleType.Normal)
+        public static IntPtr GetJSOwnedObjectGCHandle(
+            object obj,
+            GCHandleType handleType = GCHandleType.Normal
+        )
         {
             if (obj == null)
             {
@@ -112,8 +117,11 @@ namespace System.Runtime.InteropServices.JavaScript
         /// The reason for this restriction is to make this use of Reflection trim-compatible,
         /// ensuring that trimming doesn't change the application's behavior.
         /// </remarks>
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-            Justification = "Task<T>.Result is preserved by the ILLinker because s_taskGetResultMethodInfo was initialized with it.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2070:UnrecognizedReflectionPattern",
+            Justification = "Task<T>.Result is preserved by the ILLinker because s_taskGetResultMethodInfo was initialized with it."
+        )]
         public static MethodInfo GetTaskResultMethodInfo(Type taskType)
         {
             if (taskType != null)
@@ -123,7 +131,10 @@ namespace System.Runtime.InteropServices.JavaScript
                     s_taskGetResultMethodInfo = typeof(Task<>).GetMethod(TaskGetResultName);
                 }
                 MethodInfo? getter = taskType.GetMethod(TaskGetResultName);
-                if (getter != null && getter.HasSameMetadataDefinitionAs(s_taskGetResultMethodInfo!))
+                if (
+                    getter != null
+                    && getter.HasSameMetadataDefinitionAs(s_taskGetResultMethodInfo!)
+                )
                 {
                     return getter;
                 }
@@ -144,42 +155,63 @@ namespace System.Runtime.InteropServices.JavaScript
             throw new InvalidOperationException();
         }
 
-        public static async Task<JSObject> ImportAsync(string moduleName, string moduleUrl, CancellationToken cancellationToken)
+        public static async Task<JSObject> ImportAsync(
+            string moduleName,
+            string moduleUrl,
+            CancellationToken cancellationToken
+        )
         {
             Task<JSObject> modulePromise = JavaScriptImports.DynamicImport(moduleName, moduleUrl);
             var wrappedTask = CancelationHelper(modulePromise, cancellationToken);
             return await wrappedTask.ConfigureAwait(
-                ConfigureAwaitOptions.ContinueOnCapturedContext |
-                ConfigureAwaitOptions.ForceYielding); // this helps to finish the import before we bind the module in [JSImport]
+                ConfigureAwaitOptions.ContinueOnCapturedContext
+                    | ConfigureAwaitOptions.ForceYielding
+            ); // this helps to finish the import before we bind the module in [JSImport]
         }
 
-        public static async Task<JSObject> CancelationHelper(Task<JSObject> jsTask, CancellationToken cancellationToken)
+        public static async Task<JSObject> CancelationHelper(
+            Task<JSObject> jsTask,
+            CancellationToken cancellationToken
+        )
         {
             if (jsTask.IsCompletedSuccessfully)
             {
                 return jsTask.Result;
             }
-            using (var receiveRegistration = cancellationToken.Register(static s =>
-            {
-                CancelablePromise.CancelPromise((Task<JSObject>)s!);
-            }, jsTask))
+            using (
+                var receiveRegistration = cancellationToken.Register(
+                    static s =>
+                    {
+                        CancelablePromise.CancelPromise((Task<JSObject>)s!);
+                    },
+                    jsTask
+                )
+            )
             {
                 return await jsTask.ConfigureAwait(true);
             }
         }
 
         // res type is first argument
-        public static unsafe JSFunctionBinding GetMethodSignature(ReadOnlySpan<JSMarshalerType> types)
+        public static unsafe JSFunctionBinding GetMethodSignature(
+            ReadOnlySpan<JSMarshalerType> types
+        )
         {
             int argsCount = types.Length - 1;
-            int size = JSFunctionBinding.JSBindingHeader.JSMarshalerSignatureHeaderSize + ((argsCount + 2) * sizeof(JSFunctionBinding.JSBindingType));
+            int size =
+                JSFunctionBinding.JSBindingHeader.JSMarshalerSignatureHeaderSize
+                + ((argsCount + 2) * sizeof(JSFunctionBinding.JSBindingType));
             // this is never unallocated
             IntPtr buffer = Marshal.AllocHGlobal(size);
 
             var signature = new JSFunctionBinding
             {
                 Header = (JSFunctionBinding.JSBindingHeader*)buffer,
-                Sigs = (JSFunctionBinding.JSBindingType*)(buffer + JSFunctionBinding.JSBindingHeader.JSMarshalerSignatureHeaderSize + (2 * sizeof(JSFunctionBinding.JSBindingType))),
+                Sigs = (JSFunctionBinding.JSBindingType*)(
+                    buffer
+                    + JSFunctionBinding.JSBindingHeader.JSMarshalerSignatureHeaderSize
+                    + (2 * sizeof(JSFunctionBinding.JSBindingType))
+                ),
             };
 
             signature.Version = 1;
@@ -208,33 +240,55 @@ namespace System.Runtime.InteropServices.JavaScript
 #endif
             JSObject? res;
 
-            if (!ThreadCsOwnedObjects.TryGetValue((int)jsHandle, out WeakReference<JSObject>? reference) ||
-                !reference.TryGetTarget(out res) ||
-                res.IsDisposed)
+            if (
+                !ThreadCsOwnedObjects.TryGetValue(
+                    (int)jsHandle,
+                    out WeakReference<JSObject>? reference
+                )
+                || !reference.TryGetTarget(out res)
+                || res.IsDisposed
+            )
             {
                 res = new JSObject(jsHandle);
-                ThreadCsOwnedObjects[(int)jsHandle] = new WeakReference<JSObject>(res, trackResurrection: true);
+                ThreadCsOwnedObjects[(int)jsHandle] = new WeakReference<JSObject>(
+                    res,
+                    trackResurrection: true
+                );
             }
             return res;
         }
 
-        [Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "It's always part of the single compilation (and trimming) unit.")]
+        [Diagnostics.CodeAnalysis.UnconditionalSuppressMessage(
+            "Trimming",
+            "IL2026",
+            Justification = "It's always part of the single compilation (and trimming) unit."
+        )]
         public static void LoadLazyAssembly(byte[] dllBytes, byte[]? pdbBytes)
         {
             if (pdbBytes == null)
                 AssemblyLoadContext.Default.LoadFromStream(new MemoryStream(dllBytes));
             else
-                AssemblyLoadContext.Default.LoadFromStream(new MemoryStream(dllBytes), new MemoryStream(pdbBytes));
+                AssemblyLoadContext.Default.LoadFromStream(
+                    new MemoryStream(dllBytes),
+                    new MemoryStream(pdbBytes)
+                );
         }
 
-        [Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "It's always part of the single compilation (and trimming) unit.")]
+        [Diagnostics.CodeAnalysis.UnconditionalSuppressMessage(
+            "Trimming",
+            "IL2026",
+            Justification = "It's always part of the single compilation (and trimming) unit."
+        )]
         public static void LoadSatelliteAssembly(byte[] dllBytes)
         {
             AssemblyLoadContext.Default.LoadFromStream(new MemoryStream(dllBytes));
         }
 
 #if FEATURE_WASM_THREADS
-        public static void InstallWebWorkerInterop(bool installJSSynchronizationContext, bool isMainThread)
+        public static void InstallWebWorkerInterop(
+            bool installJSSynchronizationContext,
+            bool isMainThread
+        )
         {
             Interop.Runtime.InstallWebWorkerInterop(installJSSynchronizationContext);
             if (installJSSynchronizationContext)
@@ -254,7 +308,9 @@ namespace System.Runtime.InteropServices.JavaScript
                 }
                 else if (ctx.TargetThreadId != currentThreadId)
                 {
-                    Environment.FailFast($"JSSynchronizationContext.Install failed has wrong native thread id {ctx.TargetThreadId} != {currentThreadId}");
+                    Environment.FailFast(
+                        $"JSSynchronizationContext.Install failed has wrong native thread id {ctx.TargetThreadId} != {currentThreadId}"
+                    );
                 }
                 ctx.AwaitNewData();
             }
@@ -275,24 +331,33 @@ namespace System.Runtime.InteropServices.JavaScript
                             jso.Dispose();
                         }
                     }
-                    SynchronizationContext.SetSynchronizationContext(ctx!.previousSynchronizationContext);
+                    SynchronizationContext.SetSynchronizationContext(
+                        ctx!.previousSynchronizationContext
+                    );
                     JSSynchronizationContext.CurrentJSSynchronizationContext = null;
                     ctx.isDisposed = true;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    Environment.FailFast($"Unexpected error in UninstallWebWorkerInterop, ManagedThreadId: {Thread.CurrentThread.ManagedThreadId}. " + ex);
+                    Environment.FailFast(
+                        $"Unexpected error in UninstallWebWorkerInterop, ManagedThreadId: {Thread.CurrentThread.ManagedThreadId}. "
+                            + ex
+                    );
                 }
             }
             else
             {
                 if (ThreadCsOwnedObjects.Count > 0)
                 {
-                    Environment.FailFast($"There should be no JSObjects proxies on this thread, ManagedThreadId: {Thread.CurrentThread.ManagedThreadId}");
+                    Environment.FailFast(
+                        $"There should be no JSObjects proxies on this thread, ManagedThreadId: {Thread.CurrentThread.ManagedThreadId}"
+                    );
                 }
                 if (ThreadJsOwnedObjects.Count > 0)
                 {
-                    Environment.FailFast($"There should be no JS proxies of managed objects on this thread, ManagedThreadId: {Thread.CurrentThread.ManagedThreadId}");
+                    Environment.FailFast(
+                        $"There should be no JS proxies of managed objects on this thread, ManagedThreadId: {Thread.CurrentThread.ManagedThreadId}"
+                    );
                 }
             }
 
@@ -317,9 +382,12 @@ namespace System.Runtime.InteropServices.JavaScript
                         gcHandle.Free();
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    Environment.FailFast($"Unexpected error in UninstallWebWorkerInterop, ManagedThreadId: {Thread.CurrentThread.ManagedThreadId}. " + ex);
+                    Environment.FailFast(
+                        $"Unexpected error in UninstallWebWorkerInterop, ManagedThreadId: {Thread.CurrentThread.ManagedThreadId}. "
+                            + ex
+                    );
                 }
             }
 
@@ -344,6 +412,5 @@ namespace System.Runtime.InteropServices.JavaScript
         }
 
 #endif
-
     }
 }

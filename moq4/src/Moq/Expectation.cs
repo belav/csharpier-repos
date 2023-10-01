@@ -8,7 +8,6 @@ using Moq.Async;
 
 namespace Moq
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal abstract class Expectation : IEquatable<Expectation>
@@ -54,9 +53,7 @@ namespace Moq
 
         public abstract bool IsMatch(Invocation invocation);
 
-        public virtual void SetupEvaluatedSuccessfully(Invocation invocation)
-        {
-        }
+        public virtual void SetupEvaluatedSuccessfully(Invocation invocation) { }
 
         public override string ToString()
         {

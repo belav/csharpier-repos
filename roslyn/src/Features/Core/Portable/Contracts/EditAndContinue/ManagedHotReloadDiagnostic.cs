@@ -18,14 +18,8 @@ namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
     /// <param name="filePath">File path for the target edit.</param>
     /// <param name="span">Source span of the edit.</param>
     [DataContract]
-    internal readonly struct ManagedHotReloadDiagnostic(
-        string id,
-        string message,
-        ManagedHotReloadDiagnosticSeverity severity,
-        string filePath,
-        SourceSpan span)
+    internal readonly struct ManagedHotReloadDiagnostic
     {
-
         /// <summary>
         /// Diagnostic information identifier.
         /// </summary>

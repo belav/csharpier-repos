@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+
 namespace Microsoft.AspNetCore.Http.Generators.Tests;
 
 public partial class RuntimeCreationTests : RequestDelegateCreationTests
@@ -23,7 +24,12 @@ app.MapGet("/", ({{bindAsyncType}} myNotBindAsyncParam) => { });
 """;
         var (result, compilation) = await RunGeneratorAsync(source);
 
-        var ex = Assert.Throws<InvalidOperationException>(() => GetEndpointFromCompilation(compilation));
-        Assert.StartsWith($"BindAsync method found on {bindAsyncType} with incorrect format.", ex.Message);
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => GetEndpointFromCompilation(compilation)
+        );
+        Assert.StartsWith(
+            $"BindAsync method found on {bindAsyncType} with incorrect format.",
+            ex.Message
+        );
     }
 }

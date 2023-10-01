@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
-
+namespace System.Web.Configuration
+{
     using System.Configuration;
     using System.Collections;
     using System.Globalization;
@@ -17,9 +17,8 @@ namespace System.Web.Configuration {
 
     internal class MapPathCacheInfo
     {
-        internal string     MapPathResult;
-        internal bool       Evaluated;
-        internal Exception  CachedException;
+        internal string MapPathResult;
+        internal bool Evaluated;
+        internal Exception CachedException;
     }
 }
-

@@ -5,7 +5,9 @@ using Internal.TypeSystem;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {
-    public class ImportSectionsTableNode : ArrayOfEmbeddedDataNode<ImportSectionNode>, ISignatureEmitter
+    public class ImportSectionsTableNode
+        : ArrayOfEmbeddedDataNode<ImportSectionNode>,
+            ISignatureEmitter
     {
         private readonly NodeFactory _r2rFactory;
 
@@ -30,7 +32,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             }
         }
 
-        protected override void GetElementDataForNodes(ref ObjectDataBuilder builder, NodeFactory factory, bool relocsOnly)
+        protected override void GetElementDataForNodes(
+            ref ObjectDataBuilder builder,
+            NodeFactory factory,
+            bool relocsOnly
+        )
         {
             builder.RequireInitialPointerAlignment();
             int index = 0;

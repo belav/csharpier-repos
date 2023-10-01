@@ -28,11 +28,15 @@ namespace ILCompiler.PEWriter
     {
         public class Comparer : IComparer<OutputItem>
         {
-            public readonly static Comparer Instance = new Comparer();
+            public static readonly Comparer Instance = new Comparer();
 
             public int Compare([AllowNull] OutputItem x, [AllowNull] OutputItem y)
             {
-                return (x.SectionIndex != y.SectionIndex ? x.SectionIndex.CompareTo(y.SectionIndex) : x.Offset.CompareTo(y.Offset));
+                return (
+                    x.SectionIndex != y.SectionIndex
+                        ? x.SectionIndex.CompareTo(y.SectionIndex)
+                        : x.Offset.CompareTo(y.Offset)
+                );
             }
         }
 
@@ -96,9 +100,7 @@ namespace ILCompiler.PEWriter
     public class OutputSymbol : OutputItem
     {
         public OutputSymbol(int sectionIndex, int offset, string name)
-            : base(sectionIndex, offset, name)
-        {
-        }
+            : base(sectionIndex, offset, name) { }
     }
 
     /// <summary>
@@ -170,8 +172,15 @@ namespace ILCompiler.PEWriter
 
         public bool FindSymbol(OutputItem item, out int index)
         {
-            index = _symbols.BinarySearch(new OutputSymbol(item.SectionIndex, item.Offset, name: null), OutputItem.Comparer.Instance);
-            bool result = (index >= 0 && index < _symbols.Count && OutputItem.Comparer.Instance.Compare(_symbols[index], item) == 0);
+            index = _symbols.BinarySearch(
+                new OutputSymbol(item.SectionIndex, item.Offset, name: null),
+                OutputItem.Comparer.Instance
+            );
+            bool result = (
+                index >= 0
+                && index < _symbols.Count
+                && OutputItem.Comparer.Instance.Compare(_symbols[index], item) == 0
+            );
             if (!result)
             {
                 index = -1;
@@ -183,15 +192,26 @@ namespace ILCompiler.PEWriter
         {
             DebugNameFormatter nameFormatter = new DebugNameFormatter();
             TypeNameFormatter typeNameFormatter = TypeString.Instance;
-            foreach (KeyValuePair<ISymbolDefinitionNode, MethodWithGCInfo> symbolMethodPair in _methodSymbolMap)
+            foreach (
+                KeyValuePair<
+                    ISymbolDefinitionNode,
+                    MethodWithGCInfo
+                > symbolMethodPair in _methodSymbolMap
+            )
             {
                 MethodInfo methodInfo = new MethodInfo();
-                if (symbolMethodPair.Value.Method.GetTypicalMethodDefinition() is EcmaMethod ecmaMethod)
+                if (
+                    symbolMethodPair.Value.Method.GetTypicalMethodDefinition()
+                    is EcmaMethod ecmaMethod
+                )
                 {
                     methodInfo.MethodToken = (uint)MetadataTokens.GetToken(ecmaMethod.Handle);
                     methodInfo.AssemblyName = ecmaMethod.Module.Assembly.GetName().Name;
                 }
-                methodInfo.Name = FormatMethodName(symbolMethodPair.Value.Method, typeNameFormatter);
+                methodInfo.Name = FormatMethodName(
+                    symbolMethodPair.Value.Method,
+                    typeNameFormatter
+                );
                 OutputNode node = _nodeSymbolMap[symbolMethodPair.Key];
                 Section section = _sections[node.SectionIndex];
                 methodInfo.HotRVA = (uint)(section.RVAWhenPlaced + node.Offset);
@@ -208,7 +228,10 @@ namespace ILCompiler.PEWriter
             {
                 yield return new AssemblyInfo(
                     inputModule.Assembly.GetName().Name,
-                    inputModule.MetadataReader.GetGuid(inputModule.MetadataReader.GetModuleDefinition().Mvid));
+                    inputModule.MetadataReader.GetGuid(
+                        inputModule.MetadataReader.GetModuleDefinition().Mvid
+                    )
+                );
             }
         }
 
@@ -240,8 +263,10 @@ namespace ILCompiler.PEWriter
         public IReadOnlyList<Section> Sections => _sections;
         public IReadOnlyList<OutputSymbol> Symbols => _symbols;
 
-        public IReadOnlyDictionary<ISymbolDefinitionNode, OutputNode> NodeSymbolMap => _nodeSymbolMap;
-        public IReadOnlyDictionary<ISymbolDefinitionNode, MethodWithGCInfo> MethodSymbolMap => _methodSymbolMap;
+        public IReadOnlyDictionary<ISymbolDefinitionNode, OutputNode> NodeSymbolMap =>
+            _nodeSymbolMap;
+        public IReadOnlyDictionary<ISymbolDefinitionNode, MethodWithGCInfo> MethodSymbolMap =>
+            _methodSymbolMap;
 
         public IReadOnlyDictionary<RelocType, int> RelocCounts => _relocCounts;
     }

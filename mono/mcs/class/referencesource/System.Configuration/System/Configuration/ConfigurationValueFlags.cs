@@ -18,10 +18,11 @@ using System.ComponentModel;
 using System.Security;
 using System.Text;
 
-namespace System.Configuration {
-
+namespace System.Configuration
+{
     [Flags]
-    internal enum ConfigurationValueFlags {
+    internal enum ConfigurationValueFlags
+    {
         Default = 0,
         Inherited = 1,
         Modified = 2,

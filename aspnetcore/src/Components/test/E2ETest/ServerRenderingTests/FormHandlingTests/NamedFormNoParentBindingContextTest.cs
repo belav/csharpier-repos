@@ -11,18 +11,23 @@ using Components.TestServer.RazorComponents;
 
 namespace Microsoft.AspNetCore.Components.E2ETests.ServerRenderingTests.FormHandlingTests;
 
-public class NamedFormNoParentBindingContextTest : ServerTestBase<BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<NamedFormContextNoFormContextApp>>>
+public class NamedFormNoParentBindingContextTest
+    : ServerTestBase<
+        BasicTestAppServerSiteFixture<
+            RazorComponentEndpointsStartup<NamedFormContextNoFormContextApp>
+        >
+    >
 {
     public NamedFormNoParentBindingContextTest(
         BrowserFixture browserFixture,
-        BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<NamedFormContextNoFormContextApp>> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        BasicTestAppServerSiteFixture<
+            RazorComponentEndpointsStartup<NamedFormContextNoFormContextApp>
+        > serverFixture,
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
-    public override Task InitializeAsync()
-        => InitializeAsync(BrowserFixture.StreamingContext);
+    public override Task InitializeAsync() => InitializeAsync(BrowserFixture.StreamingContext);
 
     [Fact]
     public void CanDispatchToNamedFormNoParentBindingContext()
@@ -32,7 +37,10 @@ public class NamedFormNoParentBindingContextTest : ServerTestBase<BasicTestAppSe
         Browser.Exists(By.Id("ready"));
 
         var form = Browser.Exists(By.CssSelector("form"));
-        Browser.Equal("named-form-handler", () => form.FindElement(By.CssSelector("input[name=_handler]")).GetAttribute("value"));
+        Browser.Equal(
+            "named-form-handler",
+            () => form.FindElement(By.CssSelector("input[name=_handler]")).GetAttribute("value")
+        );
 
         Browser.Click(By.Id("send"));
         Browser.Exists(By.Id("pass"));

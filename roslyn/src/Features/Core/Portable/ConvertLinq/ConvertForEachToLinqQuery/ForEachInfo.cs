@@ -8,20 +8,14 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.ConvertLinq.ConvertForEachToLinqQuery
 {
-    internal readonly struct ForEachInfo<TForEachStatement, TStatement>(
-        TForEachStatement forEachStatement,
-        SemanticModel semanticModel,
-        ImmutableArray<ExtendedSyntaxNode> convertingExtendedNodes,
-        ImmutableArray<SyntaxToken> identifiers,
-        ImmutableArray<TStatement> statements,
-        ImmutableArray<SyntaxToken> leadingTokens,
-        ImmutableArray<SyntaxToken> trailingTokens)
+    internal readonly struct ForEachInfo<TForEachStatement, TStatement>
     {
         public TForEachStatement ForEachStatement { get; } = forEachStatement;
 
         public SemanticModel SemanticModel { get; } = semanticModel;
 
-        public ImmutableArray<ExtendedSyntaxNode> ConvertingExtendedNodes { get; } = convertingExtendedNodes;
+        public ImmutableArray<ExtendedSyntaxNode> ConvertingExtendedNodes { get; } =
+            convertingExtendedNodes;
 
         public ImmutableArray<SyntaxToken> Identifiers { get; } = identifiers;
 

@@ -3,12 +3,12 @@
 
 // <Area> Nullable - CastClass </Area>
 // <Title> Nullable type with castclass expr  </Title>
-// <Description>  
+// <Description>
 // checking type of ImplementOneInterface using cast expr
-// </Description> 
-// <RelatedBugs> </RelatedBugs>  
+// </Description>
+// <RelatedBugs> </RelatedBugs>
 //<Expects Status=success></Expects>
-// <Code> 
+// <Code>
 
 
 using System.Runtime.InteropServices;
@@ -19,12 +19,18 @@ public class NullableTest
 {
     private static bool BoxUnboxToNQ<T>(T o)
     {
-        return Helper.Compare((ImplementOneInterface)(ValueType)(object)o, Helper.Create(default(ImplementOneInterface)));
+        return Helper.Compare(
+            (ImplementOneInterface)(ValueType)(object)o,
+            Helper.Create(default(ImplementOneInterface))
+        );
     }
 
     private static bool BoxUnboxToQ<T>(T o)
     {
-        return Helper.Compare((ImplementOneInterface?)(ValueType)(object)o, Helper.Create(default(ImplementOneInterface)));
+        return Helper.Compare(
+            (ImplementOneInterface?)(ValueType)(object)o,
+            Helper.Create(default(ImplementOneInterface))
+        );
     }
 
     [Fact]
@@ -38,5 +44,3 @@ public class NullableTest
             return ExitCode.Failed;
     }
 }
-
-

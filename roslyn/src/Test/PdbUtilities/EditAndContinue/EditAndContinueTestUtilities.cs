@@ -19,7 +19,8 @@ internal class EditAndContinueTestUtilities
             "Row({0}, TableIndex.{1}, EditAndContinueOperation.{2})",
             MetadataTokens.GetRowNumber(row.Handle),
             tableIndex,
-            row.Operation);
+            row.Operation
+        );
     }
 
     internal static string EncMapRowToString(EntityHandle handle)
@@ -30,12 +31,14 @@ internal class EditAndContinueTestUtilities
         return string.Format(
             "Handle({0}, TableIndex.{1})",
             MetadataTokens.GetRowNumber(handle),
-            tableIndex);
+            tableIndex
+        );
     }
 
     internal static string AttributeRowToString(CustomAttributeRow row)
     {
-        TableIndex parentTableIndex, constructorTableIndex;
+        TableIndex parentTableIndex,
+            constructorTableIndex;
         MetadataTokens.TryGetTableIndex(row.ParentToken.Kind, out parentTableIndex);
         MetadataTokens.TryGetTableIndex(row.ConstructorToken.Kind, out constructorTableIndex);
 
@@ -44,9 +47,18 @@ internal class EditAndContinueTestUtilities
             MetadataTokens.GetRowNumber(row.ParentToken),
             parentTableIndex,
             MetadataTokens.GetRowNumber(row.ConstructorToken),
-            constructorTableIndex);
+            constructorTableIndex
+        );
     }
 
-    internal static bool IsDefinition(HandleKind kind)
-        => kind is not (HandleKind.AssemblyReference or HandleKind.ModuleReference or HandleKind.TypeReference or HandleKind.MemberReference or HandleKind.TypeSpecification or HandleKind.MethodSpecification);
+    internal static bool IsDefinition(HandleKind kind) =>
+        kind
+            is not (
+                HandleKind.AssemblyReference
+                or HandleKind.ModuleReference
+                or HandleKind.TypeReference
+                or HandleKind.MemberReference
+                or HandleKind.TypeSpecification
+                or HandleKind.MethodSpecification
+            );
 }

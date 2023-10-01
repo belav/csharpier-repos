@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.Editor
     /// <remarks>
     /// Creates a new <see cref="DocumentSnapshotSpan"/>.
     /// </remarks>
-    internal readonly struct DocumentSnapshotSpan(Document? document, SnapshotSpan snapshotSpan)
+    internal readonly struct DocumentSnapshotSpan
     {
         /// <summary>
         /// The <see cref="CodeAnalysis.Document"/> the span was produced from.

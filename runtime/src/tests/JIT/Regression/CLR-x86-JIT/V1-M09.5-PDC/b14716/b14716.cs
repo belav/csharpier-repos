@@ -8,7 +8,6 @@ using System.Collections;
 using System.Globalization;
 using Xunit;
 
-
 public class Bug
 {
     [Fact]

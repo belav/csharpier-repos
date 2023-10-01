@@ -21,13 +21,24 @@ namespace Microsoft.CodeAnalysis.Classification
     [TagType(typeof(IClassificationTag))]
     [ContentType(ContentTypeNames.RoslynContentType)]
     [method: ImportingConstructor]
-    [method: SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
+    [method: SuppressMessage(
+        "RoslynDiagnosticsReliability",
+        "RS0033:Importing constructor should be [Obsolete]",
+        Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+    )]
     internal partial class EmbeddedLanguageClassificationViewTaggerProvider(
         IThreadingContext threadingContext,
         ClassificationTypeMap typeMap,
         IGlobalOptionService globalOptions,
         [Import(AllowDefault = true)] ITextBufferVisibilityTracker? visibilityTracker,
-        IAsynchronousOperationListenerProvider listenerProvider) : AbstractSemanticOrEmbeddedClassificationViewTaggerProvider(threadingContext, typeMap, globalOptions, visibilityTracker, listenerProvider, ClassificationType.EmbeddedLanguage)
-    {
-    }
+        IAsynchronousOperationListenerProvider listenerProvider
+    )
+        : AbstractSemanticOrEmbeddedClassificationViewTaggerProvider(
+            threadingContext,
+            typeMap,
+            globalOptions,
+            visibilityTracker,
+            listenerProvider,
+            ClassificationType.EmbeddedLanguage
+        ) { }
 }

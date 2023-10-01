@@ -28,7 +28,7 @@ namespace Microsoft.SourceLink.Tools
             _entries = mappings;
         }
 
-        public readonly struct Entry(FilePathPattern filePath, UriPattern uri)
+        public readonly struct Entry
         {
             public readonly FilePathPattern FilePath = filePath;
             public readonly UriPattern Uri = uri;
@@ -40,13 +40,13 @@ namespace Microsoft.SourceLink.Tools
             }
         }
 
-        public readonly struct FilePathPattern(string path, bool isPrefix)
+        public readonly struct FilePathPattern
         {
             public readonly string Path = path;
             public readonly bool IsPrefix = isPrefix;
         }
 
-        public readonly struct UriPattern(string prefix, string suffix)
+        public readonly struct UriPattern
         {
             public readonly string Prefix = prefix;
             public readonly string Suffix = suffix;
@@ -69,7 +69,9 @@ namespace Microsoft.SourceLink.Tools
 
             var list = new List<Entry>();
 
-            var root = JsonDocument.Parse(json, new JsonDocumentOptions() { AllowTrailingCommas = true }).RootElement;
+            var root = JsonDocument
+                .Parse(json, new JsonDocumentOptions() { AllowTrailingCommas = true })
+                .RootElement;
             if (root.ValueKind != JsonValueKind.Object)
             {
                 throw new InvalidDataException();
@@ -90,8 +92,14 @@ namespace Microsoft.SourceLink.Tools
 
                 foreach (var documentsEntry in rootEntry.Value.EnumerateObject())
                 {
-                    if (documentsEntry.Value.ValueKind != JsonValueKind.String ||
-                        !TryParseEntry(documentsEntry.Name, documentsEntry.Value.GetString()!, out var entry))
+                    if (
+                        documentsEntry.Value.ValueKind != JsonValueKind.String
+                        || !TryParseEntry(
+                            documentsEntry.Name,
+                            documentsEntry.Value.GetString()!,
+                            out var entry
+                        )
+                    )
                     {
                         throw new InvalidDataException();
                     }
@@ -102,7 +110,9 @@ namespace Microsoft.SourceLink.Tools
 
             // Sort the map by decreasing file path length. This ensures that the most specific paths will checked before the least specific
             // and that absolute paths will be checked before a wildcard path with a matching base
-            list.Sort((left, right) => -left.FilePath.Path.Length.CompareTo(right.FilePath.Path.Length));
+            list.Sort(
+                (left, right) => -left.FilePath.Path.Length.CompareTo(right.FilePath.Path.Length)
+            );
 
             return new SourceLinkMap(new ReadOnlyCollection<Entry>(list));
         }
@@ -131,7 +141,8 @@ namespace Microsoft.SourceLink.Tools
                 return false;
             }
 
-            string uriPrefix, uriSuffix;
+            string uriPrefix,
+                uriSuffix;
             var uriStar = value.IndexOf('*');
             if (uriStar >= 0)
             {
@@ -156,7 +167,8 @@ namespace Microsoft.SourceLink.Tools
 
             entry = new Entry(
                 new FilePathPattern(key, isPrefix: filePathStar >= 0),
-                new UriPattern(uriPrefix, uriSuffix));
+                new UriPattern(uriPrefix, uriSuffix)
+            );
 
             return true;
         }
@@ -165,8 +177,7 @@ namespace Microsoft.SourceLink.Tools
         /// Maps specified <paramref name="path"/> to the corresponding URL.
         /// </summary>
         /// <exception cref="ArgumentNullException"><paramref name="path"/> is null.</exception>
-        public bool TryGetUri(
-            string path,
+        public bool TryGetUri(string path,
 #if NETCOREAPP
             [NotNullWhen(true)]
 #endif
@@ -191,7 +202,12 @@ namespace Microsoft.SourceLink.Tools
                 {
                     if (path.StartsWith(file.Path, StringComparison.OrdinalIgnoreCase))
                     {
-                        var escapedPath = string.Join("/", path[file.Path.Length..].Split(new[] { '/', '\\' }).Select(Uri.EscapeDataString));
+                        var escapedPath = string.Join(
+                            "/",
+                            path[file.Path.Length..]
+                                .Split(new[] { '/', '\\' })
+                                .Select(Uri.EscapeDataString)
+                        );
                         uri = mappedUri.Prefix + escapedPath + mappedUri.Suffix;
                         return true;
                     }

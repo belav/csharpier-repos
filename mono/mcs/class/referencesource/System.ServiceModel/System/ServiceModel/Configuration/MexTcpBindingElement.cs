@@ -15,13 +15,9 @@ namespace System.ServiceModel.Configuration
     public partial class MexTcpBindingElement : MexBindingElement<CustomBinding>
     {
         public MexTcpBindingElement(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         public MexTcpBindingElement()
-            : this(null)
-        {
-        }
+            : this(null) { }
     }
 }

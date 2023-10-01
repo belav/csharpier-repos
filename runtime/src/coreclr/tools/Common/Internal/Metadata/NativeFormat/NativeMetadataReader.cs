@@ -111,18 +111,12 @@ namespace Internal.Metadata.NativeFormat
 
         public HandleType HandleType
         {
-            get
-            {
-                return (HandleType)(_value >> 24);
-            }
+            get { return (HandleType)(_value >> 24); }
         }
 
         internal int Offset
         {
-            get
-            {
-                return (this._value & 0x00FFFFFF);
-            }
+            get { return (this._value & 0x00FFFFFF); }
         }
 
         public bool IsNull(MetadataReader reader)
@@ -145,7 +139,11 @@ namespace Internal.Metadata.NativeFormat
 #if DEBUG
         public override string ToString()
         {
-            return string.Format("{1} : {0,8:X8}", _value, Enum.GetName(typeof(HandleType), this.HandleType));
+            return string.Format(
+                "{1} : {0,8:X8}",
+                _value,
+                Enum.GetName(typeof(HandleType), this.HandleType)
+            );
         }
 #endif
     }
@@ -169,7 +167,9 @@ namespace Internal.Metadata.NativeFormat
     {
         /// Always returns null value.
         public object Value
-        { get { return null; } }
+        {
+            get { return null; }
+        }
     } // ConstantReferenceValue
 
     public partial struct ConstantStringValueHandle
@@ -201,10 +201,7 @@ namespace Internal.Metadata.NativeFormat
         /// </summary>
         public ScopeDefinitionHandleCollection ScopeDefinitions
         {
-            get
-            {
-                return _header.ScopeDefinitions;
-            }
+            get { return _header.ScopeDefinitions; }
         }
 
         /// <summary>
@@ -213,10 +210,7 @@ namespace Internal.Metadata.NativeFormat
         /// </summary>
         public Handle NullHandle
         {
-            get
-            {
-                return new Handle() { _value = ((int)HandleType.Null) << 24 };
-            }
+            get { return new Handle() { _value = ((int)HandleType.Null) << 24 }; }
         }
 
         /// <summary>

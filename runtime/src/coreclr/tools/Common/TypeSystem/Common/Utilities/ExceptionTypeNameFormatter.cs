@@ -11,7 +11,8 @@ namespace Internal.TypeSystem
     /// </summary>
     public partial class ExceptionTypeNameFormatter : TypeNameFormatter
     {
-        public static ExceptionTypeNameFormatter Instance { get; } = new ExceptionTypeNameFormatter();
+        public static ExceptionTypeNameFormatter Instance { get; } =
+            new ExceptionTypeNameFormatter();
 
         public override void AppendName(StringBuilder sb, PointerType type)
         {
@@ -107,7 +108,11 @@ namespace Internal.TypeSystem
             }
         }
 
-        protected override void AppendNameForNestedType(StringBuilder sb, DefType nestedType, DefType containingType)
+        protected override void AppendNameForNestedType(
+            StringBuilder sb,
+            DefType nestedType,
+            DefType containingType
+        )
         {
             // NOTE: We're ignoring the containing type for compatibility with SigFormat.cpp
             sb.Append(GetTypeName(nestedType));

@@ -4,7 +4,9 @@
 namespace Microsoft.AspNetCore.Server.IIS;
 
 ///<inheritdoc/>
-[Obsolete("Moved to Microsoft.AspNetCore.Http.BadHttpRequestException. See https://aka.ms/badhttprequestexception for details.")] // Never remove.
+[Obsolete(
+    "Moved to Microsoft.AspNetCore.Http.BadHttpRequestException. See https://aka.ms/badhttprequestexception for details."
+)] // Never remove.
 public sealed class BadHttpRequestException : Microsoft.AspNetCore.Http.BadHttpRequestException
 {
     internal BadHttpRequestException(string message, int statusCode, RequestRejectionReason reason)
@@ -14,7 +16,10 @@ public sealed class BadHttpRequestException : Microsoft.AspNetCore.Http.BadHttpR
     }
 
     ///<inheritdoc/>
-    public new int StatusCode { get => base.StatusCode; }
+    public new int StatusCode
+    {
+        get => base.StatusCode;
+    }
 
     internal RequestRejectionReason Reason { get; }
 }

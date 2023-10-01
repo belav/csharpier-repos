@@ -11,11 +11,13 @@ var cert = new X509Certificate2(Convert.FromBase64String(Constants.Key), Constan
 
 var encryptor = new CertificateXmlEncryptor(cert, NullLoggerFactory.Instance);
 
-var e = XElement.Parse("""
+var e = XElement.Parse(
+    """
     <root>
       <child Value="hi" />
     </root>
-    """);
+    """
+);
 
 var result = encryptor.Encrypt(e);
 

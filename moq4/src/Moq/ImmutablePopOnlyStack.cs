@@ -7,7 +7,6 @@ using System.Linq;
 
 namespace Moq
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal readonly struct ImmutablePopOnlyStack<T>
@@ -29,7 +28,6 @@ namespace Moq
         readonly struct ImmutablePopOnlyStack<T>
     */
     readonly struct ImmutablePopOnlyStack<T>
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private readonly T[] items;

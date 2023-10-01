@@ -35,10 +35,15 @@ namespace System.Security.Cryptography
 #pragma warning disable CA1822 // Member does not access instance data
 #pragma warning disable IDE0060 // Remove unused parameter
         public int HashSizeInBytes => throw new UnreachableException();
+
         public void Append(ReadOnlySpan<byte> data) => throw new UnreachableException();
+
         public int Finalize(Span<byte> destination) => throw new UnreachableException();
+
         public void Current(Span<byte> destination) => throw new UnreachableException();
+
         public int Reset() => throw new UnreachableException();
+
         public void Dispose() => throw new UnreachableException();
 #pragma warning restore IDE0060
 #pragma warning restore CA1822
@@ -64,7 +69,9 @@ namespace System.Security.Cryptography
                 throw new PlatformNotSupportedException(
                     SR.Format(
                         SR.Cryptography_UnknownHashAlgorithm,
-                        Enum.GetName(typeof(PAL_HashAlgorithm), algorithm)));
+                        Enum.GetName(typeof(PAL_HashAlgorithm), algorithm)
+                    )
+                );
             }
 
             if (_ctx.IsInvalid)
@@ -87,7 +94,10 @@ namespace System.Security.Cryptography
 
             if (ret != Success)
             {
-                Debug.Assert(ret == 0, $"{nameof(Interop.AppleCrypto.DigestUpdate)} return value {ret} was not 0 or 1");
+                Debug.Assert(
+                    ret == 0,
+                    $"{nameof(Interop.AppleCrypto.DigestUpdate)} return value {ret} was not 0 or 1"
+                );
                 throw new CryptographicException();
             }
         }
@@ -100,7 +110,10 @@ namespace System.Security.Cryptography
 
             if (ret != Success)
             {
-                Debug.Assert(ret == 0, $"{nameof(Interop.AppleCrypto.DigestCurrent)} return value {ret} was not 0 or 1");
+                Debug.Assert(
+                    ret == 0,
+                    $"{nameof(Interop.AppleCrypto.DigestCurrent)} return value {ret} was not 0 or 1"
+                );
                 throw new CryptographicException();
             }
 
@@ -115,7 +128,10 @@ namespace System.Security.Cryptography
 
             if (ret != Success)
             {
-                Debug.Assert(ret == 0, $"{nameof(Interop.AppleCrypto.DigestFinal)} return value {ret} was not 0 or 1");
+                Debug.Assert(
+                    ret == 0,
+                    $"{nameof(Interop.AppleCrypto.DigestFinal)} return value {ret} was not 0 or 1"
+                );
                 throw new CryptographicException();
             }
 
@@ -159,7 +175,9 @@ namespace System.Security.Cryptography
                 throw new PlatformNotSupportedException(
                     SR.Format(
                         SR.Cryptography_UnknownHashAlgorithm,
-                        Enum.GetName(typeof(Interop.AppleCrypto.PAL_HashAlgorithm), algorithm)));
+                        Enum.GetName(typeof(Interop.AppleCrypto.PAL_HashAlgorithm), algorithm)
+                    )
+                );
             }
 
             if (_ctx.IsInvalid)

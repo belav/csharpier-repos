@@ -38,7 +38,10 @@ namespace Internal.TypeSystem
 #endif
             };
         }
-        private static EffectiveVisibility ToEffectiveVisibility(this MethodAttributes typeAttributes)
+
+        private static EffectiveVisibility ToEffectiveVisibility(
+            this MethodAttributes typeAttributes
+        )
         {
             return (typeAttributes & MethodAttributes.MemberAccessMask) switch
             {
@@ -46,7 +49,8 @@ namespace Internal.TypeSystem
                 // is only accessible through a MemberDef, not a MemberRef.
                 // As a result, it's only accessible within the current assembly, which is effectively the same rules as
                 // Family for our case.
-                MethodAttributes.PrivateScope => EffectiveVisibility.Assembly,
+                MethodAttributes.PrivateScope
+                    => EffectiveVisibility.Assembly,
                 MethodAttributes.Public => EffectiveVisibility.Public,
                 MethodAttributes.Private => EffectiveVisibility.Private,
                 MethodAttributes.Assembly => EffectiveVisibility.Assembly,
@@ -61,7 +65,9 @@ namespace Internal.TypeSystem
             };
         }
 
-        private static EffectiveVisibility ToEffectiveVisibility(this FieldAttributes typeAttributes)
+        private static EffectiveVisibility ToEffectiveVisibility(
+            this FieldAttributes typeAttributes
+        )
         {
             return (typeAttributes & FieldAttributes.FieldAccessMask) switch
             {
@@ -69,7 +75,8 @@ namespace Internal.TypeSystem
                 // is only accessible through a MemberDef, not a MemberRef.
                 // As a result, it's only accessible within the current assembly, which is effectively the same rules as
                 // Family for our case.
-                FieldAttributes.PrivateScope => EffectiveVisibility.Assembly,
+                FieldAttributes.PrivateScope
+                    => EffectiveVisibility.Assembly,
                 FieldAttributes.Public => EffectiveVisibility.Public,
                 FieldAttributes.Private => EffectiveVisibility.Private,
                 FieldAttributes.Assembly => EffectiveVisibility.Assembly,
@@ -84,7 +91,10 @@ namespace Internal.TypeSystem
             };
         }
 
-        private static EffectiveVisibility ConstrainToVisibility(this EffectiveVisibility visibility, EffectiveVisibility enclosingVisibility)
+        private static EffectiveVisibility ConstrainToVisibility(
+            this EffectiveVisibility visibility,
+            EffectiveVisibility enclosingVisibility
+        )
         {
             return (visibility, enclosingVisibility) switch
             {
@@ -95,12 +105,18 @@ namespace Internal.TypeSystem
                 (_, EffectiveVisibility.Public) => visibility,
                 (EffectiveVisibility.FamilyOrAssembly, _) => enclosingVisibility,
                 (_, EffectiveVisibility.FamilyOrAssembly) => visibility,
-                (EffectiveVisibility.Family, EffectiveVisibility.Assembly) => EffectiveVisibility.FamilyAndAssembly,
-                (EffectiveVisibility.Family, EffectiveVisibility.FamilyAndAssembly) => EffectiveVisibility.FamilyAndAssembly,
-                (EffectiveVisibility.Assembly, EffectiveVisibility.Family) => EffectiveVisibility.FamilyAndAssembly,
-                (EffectiveVisibility.Assembly, EffectiveVisibility.FamilyAndAssembly) => EffectiveVisibility.FamilyAndAssembly,
-                (EffectiveVisibility.FamilyAndAssembly, EffectiveVisibility.Family) => EffectiveVisibility.FamilyAndAssembly,
-                (EffectiveVisibility.FamilyAndAssembly, EffectiveVisibility.Assembly) => EffectiveVisibility.FamilyAndAssembly,
+                (EffectiveVisibility.Family, EffectiveVisibility.Assembly)
+                    => EffectiveVisibility.FamilyAndAssembly,
+                (EffectiveVisibility.Family, EffectiveVisibility.FamilyAndAssembly)
+                    => EffectiveVisibility.FamilyAndAssembly,
+                (EffectiveVisibility.Assembly, EffectiveVisibility.Family)
+                    => EffectiveVisibility.FamilyAndAssembly,
+                (EffectiveVisibility.Assembly, EffectiveVisibility.FamilyAndAssembly)
+                    => EffectiveVisibility.FamilyAndAssembly,
+                (EffectiveVisibility.FamilyAndAssembly, EffectiveVisibility.Family)
+                    => EffectiveVisibility.FamilyAndAssembly,
+                (EffectiveVisibility.FamilyAndAssembly, EffectiveVisibility.Assembly)
+                    => EffectiveVisibility.FamilyAndAssembly,
 #if NETSTANDARD2_0
                 _ => throw new Exception(),
 #else
@@ -109,19 +125,33 @@ namespace Internal.TypeSystem
             };
         }
 
-        public static bool IsExposedOutsideOfThisAssembly(this EffectiveVisibility visibility, bool anyInternalsVisibleTo)
+        public static bool IsExposedOutsideOfThisAssembly(
+            this EffectiveVisibility visibility,
+            bool anyInternalsVisibleTo
+        )
         {
             return visibility is EffectiveVisibility.Public or EffectiveVisibility.Family
-                || (anyInternalsVisibleTo && visibility is EffectiveVisibility.Assembly or EffectiveVisibility.FamilyOrAssembly);
+                || (
+                    anyInternalsVisibleTo
+                    && visibility
+                        is EffectiveVisibility.Assembly
+                            or EffectiveVisibility.FamilyOrAssembly
+                );
         }
 
         public static EffectiveVisibility GetEffectiveVisibility(this EcmaMethod method)
         {
             EffectiveVisibility visibility = method.Attributes.ToEffectiveVisibility();
 
-            for (EcmaType type = (EcmaType)method.OwningType; type is not null; type = (EcmaType)type.ContainingType)
+            for (
+                EcmaType type = (EcmaType)method.OwningType;
+                type is not null;
+                type = (EcmaType)type.ContainingType
+            )
             {
-                visibility = visibility.ConstrainToVisibility(type.Attributes.ToEffectiveVisibility());
+                visibility = visibility.ConstrainToVisibility(
+                    type.Attributes.ToEffectiveVisibility()
+                );
             }
             return visibility;
         }
@@ -132,7 +162,9 @@ namespace Internal.TypeSystem
             type = (EcmaType)type.ContainingType;
             for (; type is not null; type = (EcmaType)type.ContainingType)
             {
-                visibility = visibility.ConstrainToVisibility(type.Attributes.ToEffectiveVisibility());
+                visibility = visibility.ConstrainToVisibility(
+                    type.Attributes.ToEffectiveVisibility()
+                );
             }
             return visibility;
         }
@@ -159,9 +191,15 @@ namespace Internal.TypeSystem
             // Treat all non-Ecma fields as always having public visibility
             EffectiveVisibility visibility = field.Attributes.ToEffectiveVisibility();
 
-            for (EcmaType type = (EcmaType)field.OwningType; type is not null; type = (EcmaType)type.ContainingType)
+            for (
+                EcmaType type = (EcmaType)field.OwningType;
+                type is not null;
+                type = (EcmaType)type.ContainingType
+            )
             {
-                visibility = visibility.ConstrainToVisibility(type.Attributes.ToEffectiveVisibility());
+                visibility = visibility.ConstrainToVisibility(
+                    type.Attributes.ToEffectiveVisibility()
+                );
             }
             return visibility;
         }

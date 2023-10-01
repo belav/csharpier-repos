@@ -18,9 +18,7 @@ namespace Roslyn.Test.Utilities.TestGenerators
     {
         private readonly List<(string content, string hintName)> _sources = new();
 
-        public SingleFileTestGenerator()
-        {
-        }
+        public SingleFileTestGenerator() { }
 
         public SingleFileTestGenerator(string content, string? hintName = null)
         {
@@ -39,9 +37,7 @@ namespace Roslyn.Test.Utilities.TestGenerators
                 context.AddSource(hintName, SourceText.From(content, Encoding.UTF8));
         }
 
-        public void Initialize(GeneratorInitializationContext context)
-        {
-        }
+        public void Initialize(GeneratorInitializationContext context) { }
     }
 
     /// <summary>
@@ -49,19 +45,25 @@ namespace Roslyn.Test.Utilities.TestGenerators
     /// </summary>
     internal class DiagnosticProducingGenerator : ISourceGenerator
     {
-        public static readonly DiagnosticDescriptor Descriptor =
-            new DiagnosticDescriptor(nameof(DiagnosticProducingGenerator), "Diagnostic Title", "Diagnostic Format", "Test", DiagnosticSeverity.Error, isEnabledByDefault: true);
+        public static readonly DiagnosticDescriptor Descriptor = new DiagnosticDescriptor(
+            nameof(DiagnosticProducingGenerator),
+            "Diagnostic Title",
+            "Diagnostic Format",
+            "Test",
+            DiagnosticSeverity.Error,
+            isEnabledByDefault: true
+        );
 
         private readonly Func<GeneratorExecutionContext, Location> _produceLocation;
 
-        public DiagnosticProducingGenerator(Func<GeneratorExecutionContext, Location> produceLocation)
+        public DiagnosticProducingGenerator(
+            Func<GeneratorExecutionContext, Location> produceLocation
+        )
         {
             _produceLocation = produceLocation;
         }
 
-        public void Initialize(GeneratorInitializationContext context)
-        {
-        }
+        public void Initialize(GeneratorInitializationContext context) { }
 
         public void Execute(GeneratorExecutionContext context)
         {
@@ -71,9 +73,8 @@ namespace Roslyn.Test.Utilities.TestGenerators
 
     internal class SingleFileTestGenerator2 : SingleFileTestGenerator
     {
-        public SingleFileTestGenerator2(string content, string hintName = "generatedFile") : base(content, hintName)
-        {
-        }
+        public SingleFileTestGenerator2(string content, string hintName = "generatedFile")
+            : base(content, hintName) { }
     }
 
     internal class CallbackGenerator : ISourceGenerator
@@ -82,7 +83,11 @@ namespace Roslyn.Test.Utilities.TestGenerators
         private readonly Action<GeneratorExecutionContext> _onExecute;
         private readonly string? _source;
 
-        public CallbackGenerator(Action<GeneratorInitializationContext> onInit, Action<GeneratorExecutionContext> onExecute, string? source = "")
+        public CallbackGenerator(
+            Action<GeneratorInitializationContext> onInit,
+            Action<GeneratorExecutionContext> onExecute,
+            string? source = ""
+        )
         {
             _onInit = onInit;
             _onExecute = onExecute;
@@ -97,14 +102,18 @@ namespace Roslyn.Test.Utilities.TestGenerators
                 context.AddSource("source", SourceText.From(_source, Encoding.UTF8));
             }
         }
+
         public void Initialize(GeneratorInitializationContext context) => _onInit(context);
     }
 
     internal class CallbackGenerator2 : CallbackGenerator
     {
-        public CallbackGenerator2(Action<GeneratorInitializationContext> onInit, Action<GeneratorExecutionContext> onExecute, string? source = "") : base(onInit, onExecute, source)
-        {
-        }
+        public CallbackGenerator2(
+            Action<GeneratorInitializationContext> onInit,
+            Action<GeneratorExecutionContext> onExecute,
+            string? source = ""
+        )
+            : base(onInit, onExecute, source) { }
     }
 
     [DebuggerDisplay("{GetDebuggerDisplay(), nq}")]
@@ -120,13 +129,16 @@ namespace Roslyn.Test.Utilities.TestGenerators
 
         public override string Path { get; }
 
-        public override SourceText GetText(CancellationToken cancellationToken = default) => _content;
+        public override SourceText GetText(CancellationToken cancellationToken = default) =>
+            _content;
 
         internal class BinaryText : InMemoryAdditionalText
         {
-            public BinaryText(string path) : base(path, string.Empty) { }
+            public BinaryText(string path)
+                : base(path, string.Empty) { }
 
-            public override SourceText GetText(CancellationToken cancellationToken = default) => throw new InvalidDataException("Binary content not supported");
+            public override SourceText GetText(CancellationToken cancellationToken = default) =>
+                throw new InvalidDataException("Binary content not supported");
         }
 
         internal string GetDebuggerDisplay()
@@ -139,36 +151,49 @@ namespace Roslyn.Test.Utilities.TestGenerators
     {
         private readonly Action<IncrementalGeneratorInitializationContext> _registerPipelineCallback;
 
-        public PipelineCallbackGenerator(Action<IncrementalGeneratorInitializationContext> registerPipelineCallback)
+        public PipelineCallbackGenerator(
+            Action<IncrementalGeneratorInitializationContext> registerPipelineCallback
+        )
         {
             _registerPipelineCallback = registerPipelineCallback;
         }
 
-        public void Initialize(IncrementalGeneratorInitializationContext context) => _registerPipelineCallback(context);
+        public void Initialize(IncrementalGeneratorInitializationContext context) =>
+            _registerPipelineCallback(context);
     }
 
     internal sealed class PipelineCallbackGenerator2 : IIncrementalGenerator
     {
         private readonly Action<IncrementalGeneratorInitializationContext> _registerPipelineCallback;
 
-        public PipelineCallbackGenerator2(Action<IncrementalGeneratorInitializationContext> registerPipelineCallback)
+        public PipelineCallbackGenerator2(
+            Action<IncrementalGeneratorInitializationContext> registerPipelineCallback
+        )
         {
             _registerPipelineCallback = registerPipelineCallback;
         }
 
-        public void Initialize(IncrementalGeneratorInitializationContext context) => _registerPipelineCallback(context);
+        public void Initialize(IncrementalGeneratorInitializationContext context) =>
+            _registerPipelineCallback(context);
     }
 
-    internal sealed class IncrementalAndSourceCallbackGenerator : CallbackGenerator, IIncrementalGenerator
+    internal sealed class IncrementalAndSourceCallbackGenerator
+        : CallbackGenerator,
+            IIncrementalGenerator
     {
         private readonly Action<IncrementalGeneratorInitializationContext> _onInit;
 
-        public IncrementalAndSourceCallbackGenerator(Action<GeneratorInitializationContext> onInit, Action<GeneratorExecutionContext> onExecute, Action<IncrementalGeneratorInitializationContext> onIncrementalInit)
+        public IncrementalAndSourceCallbackGenerator(
+            Action<GeneratorInitializationContext> onInit,
+            Action<GeneratorExecutionContext> onExecute,
+            Action<IncrementalGeneratorInitializationContext> onIncrementalInit
+        )
             : base(onInit, onExecute)
         {
             _onInit = onIncrementalInit;
         }
 
-        public void Initialize(IncrementalGeneratorInitializationContext context) => _onInit(context);
+        public void Initialize(IncrementalGeneratorInitializationContext context) =>
+            _onInit(context);
     }
 }

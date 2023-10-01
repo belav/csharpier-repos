@@ -50,13 +50,20 @@ internal sealed class BuildHost : IBuildHost
             // MSBuild features. Since we don't have something like a global.json we can't really know what the minimum version is.
 
             // TODO: we should also check that the managed tools are actually installed
-            instance = MSBuildLocator.QueryVisualStudioInstances().OrderByDescending(vs => vs.Version).FirstOrDefault();
+            instance = MSBuildLocator
+                .QueryVisualStudioInstances()
+                .OrderByDescending(vs => vs.Version)
+                .FirstOrDefault();
 
 #else
 
             // Locate the right SDK for this particular project; MSBuildLocator ensures in this case the first one is the preferred one.
             // TODO: we should pick the appropriate instance back in the main process and just use the one chosen here.
-            var options = new VisualStudioInstanceQueryOptions { DiscoveryTypes = DiscoveryType.DotNetSdk, WorkingDirectory = Path.GetDirectoryName(projectFilePath) };
+            var options = new VisualStudioInstanceQueryOptions
+            {
+                DiscoveryTypes = DiscoveryType.DotNetSdk,
+                WorkingDirectory = Path.GetDirectoryName(projectFilePath)
+            };
             instance = MSBuildLocator.QueryVisualStudioInstances(options).FirstOrDefault();
 
 #endif
@@ -92,12 +99,18 @@ internal sealed class BuildHost : IBuildHost
                 _logger.LogInformation($"Logging builds to {_binaryLogPath}");
             }
 
-            _buildManager = new ProjectBuildManager(ImmutableDictionary<string, string>.Empty, logger);
+            _buildManager = new ProjectBuildManager(
+                ImmutableDictionary<string, string>.Empty,
+                logger
+            );
             _buildManager.StartBatchBuild();
         }
     }
 
-    public Task<bool> IsProjectFileSupportedAsync(string projectFilePath, CancellationToken cancellationToken)
+    public Task<bool> IsProjectFileSupportedAsync(
+        string projectFilePath,
+        CancellationToken cancellationToken
+    )
     {
         if (!TryEnsureMSBuildLoaded(projectFilePath))
             return Task.FromResult(false);
@@ -107,15 +120,28 @@ internal sealed class BuildHost : IBuildHost
         return Task.FromResult(TryGetLoaderForPath(projectFilePath) is not null);
     }
 
-    public async Task<IRemoteProjectFile> LoadProjectFileAsync(string projectFilePath, CancellationToken cancellationToken)
+    public async Task<IRemoteProjectFile> LoadProjectFileAsync(
+        string projectFilePath,
+        CancellationToken cancellationToken
+    )
     {
-        Contract.ThrowIfFalse(TryEnsureMSBuildLoaded(projectFilePath), $"We don't have an MSBuild to use; {nameof(IsProjectFileSupportedAsync)} should have been called first.");
+        Contract.ThrowIfFalse(
+            TryEnsureMSBuildLoaded(projectFilePath),
+            $"We don't have an MSBuild to use; {nameof(IsProjectFileSupportedAsync)} should have been called first."
+        );
         CreateBuildManager();
 
         var projectLoader = TryGetLoaderForPath(projectFilePath);
-        Contract.ThrowIfNull(projectLoader, $"We don't support this project path; we should have called {nameof(IsProjectFileSupportedAsync)} first.");
+        Contract.ThrowIfNull(
+            projectLoader,
+            $"We don't support this project path; we should have called {nameof(IsProjectFileSupportedAsync)} first."
+        );
         _logger.LogInformation($"Loading {projectFilePath}");
-        return new RemoteProjectFile(await projectLoader.LoadProjectFileAsync(projectFilePath, _buildManager, cancellationToken).ConfigureAwait(false));
+        return new RemoteProjectFile(
+            await projectLoader
+                .LoadProjectFileAsync(projectFilePath, _buildManager, cancellationToken)
+                .ConfigureAwait(false)
+        );
     }
 
     private static IProjectFileLoader? TryGetLoaderForPath(string projectFilePath)

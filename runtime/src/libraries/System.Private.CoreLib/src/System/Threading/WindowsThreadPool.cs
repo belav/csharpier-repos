@@ -30,6 +30,7 @@ namespace System.Threading
         private sealed class ThreadCountHolder
         {
             internal ThreadCountHolder() => Interlocked.Increment(ref s_threadCount);
+
             ~ThreadCountHolder() => Interlocked.Decrement(ref s_threadCount);
         }
 
@@ -50,15 +51,18 @@ namespace System.Threading
         // The number of threads executing work items in the Dispatch method
         private static WorkingThreadCounter s_workingThreadCounter;
 
-        private static readonly ThreadInt64PersistentCounter s_completedWorkItemCounter = new ThreadInt64PersistentCounter();
+        private static readonly ThreadInt64PersistentCounter s_completedWorkItemCounter =
+            new ThreadInt64PersistentCounter();
 
         [ThreadStatic]
         private static object? t_completionCountObject;
 
-        internal static void InitializeForThreadPoolThread() => t_threadCountHolder = new ThreadCountHolder();
+        internal static void InitializeForThreadPoolThread() =>
+            t_threadCountHolder = new ThreadCountHolder();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static void IncrementCompletedWorkItemCount() => ThreadInt64PersistentCounter.Increment(GetOrCreateThreadLocalCompletionCountObject());
+        internal static void IncrementCompletedWorkItemCount() =>
+            ThreadInt64PersistentCounter.Increment(GetOrCreateThreadLocalCompletionCountObject());
 
         internal static object GetOrCreateThreadLocalCompletionCountObject() =>
             t_completionCountObject ?? CreateThreadLocalCompletionCountObject();
@@ -68,7 +72,8 @@ namespace System.Threading
         {
             Debug.Assert(t_completionCountObject == null);
 
-            object threadLocalCompletionCountObject = s_completedWorkItemCounter.CreateThreadLocalCountObject();
+            object threadLocalCompletionCountObject =
+                s_completedWorkItemCounter.CreateThreadLocalCountObject();
             t_completionCountObject = threadLocalCompletionCountObject;
             return threadLocalCompletionCountObject;
         }
@@ -132,13 +137,20 @@ namespace System.Threading
         internal static void NotifyWorkItemProgress() => IncrementCompletedWorkItemCount();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool NotifyWorkItemComplete(object threadLocalCompletionCountObject, int _ /*currentTimeMs*/)
+        internal static bool NotifyWorkItemComplete(
+            object threadLocalCompletionCountObject,
+            int _ /*currentTimeMs*/
+        )
         {
             ThreadInt64PersistentCounter.Increment(threadLocalCompletionCountObject);
             return true;
         }
 
-        internal static bool NotifyThreadBlocked() { return false; }
+        internal static bool NotifyThreadBlocked()
+        {
+            return false;
+        }
+
         internal static void NotifyThreadUnblocked() { }
 
         [UnmanagedCallersOnly]
@@ -159,7 +171,11 @@ namespace System.Threading
         {
             if (s_work == IntPtr.Zero)
             {
-                IntPtr work = Interop.Kernel32.CreateThreadpoolWork(&DispatchCallback, IntPtr.Zero, IntPtr.Zero);
+                IntPtr work = Interop.Kernel32.CreateThreadpoolWork(
+                    &DispatchCallback,
+                    IntPtr.Zero,
+                    IntPtr.Zero
+                );
                 if (work == IntPtr.Zero)
                     throw new OutOfMemoryException();
 
@@ -171,18 +187,28 @@ namespace System.Threading
         }
 
         internal static RegisteredWaitHandle RegisterWaitForSingleObject(
-             WaitHandle waitObject,
-             WaitOrTimerCallback callBack,
-             object? state,
-             uint millisecondsTimeOutInterval,
-             bool executeOnlyOnce,
-             bool flowExecutionContext)
+            WaitHandle waitObject,
+            WaitOrTimerCallback callBack,
+            object? state,
+            uint millisecondsTimeOutInterval,
+            bool executeOnlyOnce,
+            bool flowExecutionContext
+        )
         {
             ArgumentNullException.ThrowIfNull(waitObject);
             ArgumentNullException.ThrowIfNull(callBack);
 
-            var callbackHelper = new _ThreadPoolWaitOrTimerCallback(callBack, state, flowExecutionContext);
-            var registeredWaitHandle = new RegisteredWaitHandle(waitObject.SafeWaitHandle, callbackHelper, millisecondsTimeOutInterval, !executeOnlyOnce);
+            var callbackHelper = new _ThreadPoolWaitOrTimerCallback(
+                callBack,
+                state,
+                flowExecutionContext
+            );
+            var registeredWaitHandle = new RegisteredWaitHandle(
+                waitObject.SafeWaitHandle,
+                callbackHelper,
+                millisecondsTimeOutInterval,
+                !executeOnlyOnce
+            );
 
             registeredWaitHandle.RestartWait();
             return registeredWaitHandle;
@@ -193,7 +219,11 @@ namespace System.Threading
             if (NativeRuntimeEventSource.Log.IsEnabled())
                 NativeRuntimeEventSource.Log.ThreadPoolIODequeue((NativeOverlapped*)overlappedPtr);
 
-            IOCompletionCallbackHelper.PerformSingleIOCompletionCallback(0, 0, (NativeOverlapped*)overlappedPtr);
+            IOCompletionCallbackHelper.PerformSingleIOCompletionCallback(
+                0,
+                0,
+                (NativeOverlapped*)overlappedPtr
+            );
         }
 
         [SupportedOSPlatform("windows")]
@@ -211,10 +241,16 @@ namespace System.Threading
                 NativeRuntimeEventSource.Log.ThreadPoolIOEnqueue(overlapped);
 
             // Both types of callbacks are executed on the same thread pool
-            return ThreadPool.UnsafeQueueUserWorkItem(NativeOverlappedCallback, (nint)overlapped, preferLocal: false);
+            return ThreadPool.UnsafeQueueUserWorkItem(
+                NativeOverlappedCallback,
+                (nint)overlapped,
+                preferLocal: false
+            );
         }
 
-        [Obsolete("ThreadPool.BindHandle(IntPtr) has been deprecated. Use ThreadPool.BindHandle(SafeHandle) instead.")]
+        [Obsolete(
+            "ThreadPool.BindHandle(IntPtr) has been deprecated. Use ThreadPool.BindHandle(SafeHandle) instead."
+        )]
         [SupportedOSPlatform("windows")]
         public static bool BindHandle(IntPtr osHandle)
         {

@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCollectionExpress
 
 using VerifyCS = CSharpCodeFixVerifier<
     CSharpUseCollectionExpressionForEmptyDiagnosticAnalyzer,
-    CSharpUseCollectionExpressionForEmptyCodeFixProvider>;
+    CSharpUseCollectionExpressionForEmptyCodeFixProvider
+>;
 
 [Trait(Traits.Feature, Traits.Features.CodeActionsUseCollectionExpression)]
 public class UseCollectionExpressionForEmptyTests
@@ -490,7 +491,8 @@ public class UseCollectionExpressionForEmptyTests
         await new VerifyCS.Test
         {
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
-            TestCode = """
+            TestCode =
+                """
             using System;
             using System.Collections;
             using System.Collections.Generic;
@@ -519,7 +521,8 @@ public class UseCollectionExpressionForEmptyTests
                 public static MyList<T> Create<T>(ReadOnlySpan<T> values) => default;
             }
             """ + CollectionBuilderAttributeDefinition,
-            FixedCode = """
+            FixedCode =
+                """
             using System;
             using System.Collections;
             using System.Collections.Generic;
@@ -558,7 +561,8 @@ public class UseCollectionExpressionForEmptyTests
         await new VerifyCS.Test
         {
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
-            TestCode = """
+            TestCode =
+                """
             using System;
             using System.Collections;
             using System.Collections.Generic;
@@ -587,7 +591,8 @@ public class UseCollectionExpressionForEmptyTests
                 public static MyList<T> Create<T>(ReadOnlySpan<T> values, int x) => default;
             }
             """ + CollectionBuilderAttributeDefinition,
-            FixedCode = """
+            FixedCode =
+                """
             using System;
             using System.Collections;
             using System.Collections.Generic;
@@ -852,7 +857,8 @@ public class UseCollectionExpressionForEmptyTests
 
         await new VerifyCS.Test
         {
-            TestCode = """
+            TestCode =
+                """
                 using System;
                 using System.Collections;
                 using System.Collections.Generic;
@@ -865,7 +871,8 @@ public class UseCollectionExpressionForEmptyTests
                     }
                 }
                 """ + collectionDefinition,
-            FixedCode = """
+            FixedCode =
+                """
                 using System;
                 using System.Collections;
                 using System.Collections.Generic;
@@ -903,7 +910,8 @@ public class UseCollectionExpressionForEmptyTests
 
         await new VerifyCS.Test
         {
-            TestCode = """
+            TestCode =
+                """
                 using System;
                 using System.Collections;
                 using System.Collections.Generic;
@@ -942,7 +950,8 @@ public class UseCollectionExpressionForEmptyTests
 
         await new VerifyCS.Test
         {
-            TestCode = """
+            TestCode =
+                """
                 using System;
                 using System.Collections;
                 using System.Collections.Generic;
@@ -955,7 +964,8 @@ public class UseCollectionExpressionForEmptyTests
                     }
                 }
                 """ + collectionDefinition,
-            FixedCode = """
+            FixedCode =
+                """
                 using System;
                 using System.Collections;
                 using System.Collections.Generic;
@@ -995,7 +1005,8 @@ public class UseCollectionExpressionForEmptyTests
 
         await new VerifyCS.Test
         {
-            TestCode = """
+            TestCode =
+                """
                 using System;
                 using System.Collections;
                 using System.Collections.Generic;
@@ -1008,7 +1019,8 @@ public class UseCollectionExpressionForEmptyTests
                     }
                 }
                 """ + collectionDefinition,
-            FixedCode = """
+            FixedCode =
+                """
                 using System;
                 using System.Collections;
                 using System.Collections.Generic;
@@ -1050,7 +1062,8 @@ public class UseCollectionExpressionForEmptyTests
 
         await new VerifyCS.Test
         {
-            TestCode = """
+            TestCode =
+                """
                 using System;
                 using System.Collections;
                 using System.Collections.Generic;
@@ -1063,7 +1076,8 @@ public class UseCollectionExpressionForEmptyTests
                     }
                 }
                 """ + collectionDefinition,
-            FixedCode = """
+            FixedCode =
+                """
                 using System;
                 using System.Collections;
                 using System.Collections.Generic;
@@ -1101,7 +1115,8 @@ public class UseCollectionExpressionForEmptyTests
 
         await new VerifyCS.Test
         {
-            TestCode = """
+            TestCode =
+                """
                 using System;
                 using System.Collections;
                 using System.Collections.Generic;
@@ -1145,7 +1160,8 @@ public class UseCollectionExpressionForEmptyTests
 
         await new VerifyCS.Test
         {
-            TestCode = """
+            TestCode =
+                """
                 using System;
                 using System.Collections;
                 using System.Collections.Generic;
@@ -1158,7 +1174,8 @@ public class UseCollectionExpressionForEmptyTests
                     }
                 }
                 """ + collectionDefinition,
-            FixedCode = """
+            FixedCode =
+                """
                 using System;
                 using System.Collections;
                 using System.Collections.Generic;
@@ -1216,10 +1233,7 @@ public class UseCollectionExpressionForEmptyTests
             int[] v = [];
             """,
             LanguageVersion = LanguageVersion.CSharp12,
-            TestState =
-            {
-                OutputKind = OutputKind.ConsoleApplication,
-            },
+            TestState = { OutputKind = OutputKind.ConsoleApplication, },
         }.RunAsync();
     }
 
@@ -1243,10 +1257,7 @@ public class UseCollectionExpressionForEmptyTests
 
                 """.ReplaceLineEndings(endOfLine),
             LanguageVersion = LanguageVersion.CSharp12,
-            TestState =
-            {
-                OutputKind = OutputKind.ConsoleApplication,
-            },
+            TestState = { OutputKind = OutputKind.ConsoleApplication, },
         }.RunAsync();
     }
 }

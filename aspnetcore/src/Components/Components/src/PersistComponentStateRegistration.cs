@@ -3,9 +3,7 @@
 
 namespace Microsoft.AspNetCore.Components;
 
-internal readonly struct PersistComponentStateRegistration(
-    Func<Task> callback,
-    IComponentRenderMode? renderMode)
+internal readonly struct PersistComponentStateRegistration
 {
     public Func<Task> Callback { get; } = callback;
 

@@ -10,18 +10,26 @@ public class NullableTest
 {
     private static bool BoxUnboxToNQ(ValueType o)
     {
-        return Helper.Compare((NotEmptyStructConstrainedGen<int>)o, Helper.Create(default(NotEmptyStructConstrainedGen<int>)));
+        return Helper.Compare(
+            (NotEmptyStructConstrainedGen<int>)o,
+            Helper.Create(default(NotEmptyStructConstrainedGen<int>))
+        );
     }
 
     private static bool BoxUnboxToQ(ValueType o)
     {
-        return Helper.Compare((NotEmptyStructConstrainedGen<int>?)o, Helper.Create(default(NotEmptyStructConstrainedGen<int>)));
+        return Helper.Compare(
+            (NotEmptyStructConstrainedGen<int>?)o,
+            Helper.Create(default(NotEmptyStructConstrainedGen<int>))
+        );
     }
 
     [Fact]
     public static int TestEntryPoint()
     {
-        NotEmptyStructConstrainedGen<int>? s = Helper.Create(default(NotEmptyStructConstrainedGen<int>));
+        NotEmptyStructConstrainedGen<int>? s = Helper.Create(
+            default(NotEmptyStructConstrainedGen<int>)
+        );
 
         if (BoxUnboxToNQ(s) && BoxUnboxToQ(s))
             return ExitCode.Passed;
@@ -29,5 +37,3 @@ public class NullableTest
             return ExitCode.Failed;
     }
 }
-
-

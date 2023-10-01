@@ -9,11 +9,11 @@ namespace System.ServiceModel.Dispatcher
     /// <summary>
     /// This structure contains the criteria used to select a set of nodes from a context node
     ///
-    /// Selectors select nodes with particular a relationship to a context node. Candidate nodes are first identified by 
-    /// traversing away from the context node along an axis of traversal. The attribute axis, for example, identifies all 
-    /// attributes of a given context node as candidates for selection. 
+    /// Selectors select nodes with particular a relationship to a context node. Candidate nodes are first identified by
+    /// traversing away from the context node along an axis of traversal. The attribute axis, for example, identifies all
+    /// attributes of a given context node as candidates for selection.
     ///
-    /// The candidate nodeset identified by axis traversal is then refined by applying node tests. 
+    /// The candidate nodeset identified by axis traversal is then refined by applying node tests.
     /// A nodeType test constructs a new nodeset by selecting only those nodes of a given type from source candidate set
     /// A qname test further refines this nodeset by selecting only those that match a given qname
     /// </summary>
@@ -34,10 +34,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal QueryAxis Axis
         {
-            get
-            {
-                return this.axis;
-            }
+            get { return this.axis; }
         }
 
         internal bool IsCompressable
@@ -45,43 +42,49 @@ namespace System.ServiceModel.Dispatcher
             get
             {
                 // PERF, Microsoft, weaken guard?
-                return QueryAxisType.Self == this.axis.Type || QueryAxisType.Child == this.axis.Type;
+                return QueryAxisType.Self == this.axis.Type
+                    || QueryAxisType.Child == this.axis.Type;
                 //return ((QueryAxisType.Self == this.axis.Type) || ((this.axis.Type != QueryAxisType.DescendantOrSelf || this.axis.Type != QueryAxisType.Descendant)&& 0 != ((QueryNodeType.Element | QueryNodeType.Root) & this.type)));
             }
         }
 
         internal NodeQName QName
         {
-            get
-            {
-                return this.qname;
-            }
+            get { return this.qname; }
         }
 
         internal QueryNodeType Type
         {
-            get
-            {
-                return this.type;
-            }
+            get { return this.type; }
         }
 
-#if NO                        
-        internal static NodeSelectCriteria Create(QueryAxisType axis, NodeQName qname, QueryNodeType nodeType)
+#if NO
+        internal static NodeSelectCriteria Create(
+            QueryAxisType axis,
+            NodeQName qname,
+            QueryNodeType nodeType
+        )
         {
             return new NodeSelectCriteria(axis, qname, nodeType);
         }
 #endif
+
         public bool Equals(NodeSelectCriteria criteria)
         {
-            return (this.axis.Type == criteria.axis.Type && this.type == criteria.type && this.qname.Equals(criteria.qname));
+            return (
+                this.axis.Type == criteria.axis.Type
+                && this.type == criteria.type
+                && this.qname.Equals(criteria.qname)
+            );
         }
+
 #if NO
         internal bool Match(SeekableXPathNavigator node)
         {
             return (this.MatchType(node) && this.MatchQName(node));
         }
 #endif
+
         internal bool MatchType(SeekableXPathNavigator node)
         {
             QueryNodeType nodeType;
@@ -197,10 +200,8 @@ namespace System.ServiceModel.Dispatcher
                                 {
                                     destSequence.Add(contextNode);
                                 }
-                            }
-                            while (contextNode.MoveToNext());
+                            } while (contextNode.MoveToNext());
                         }
-
                     }
                     else if (QueryAxisType.Attribute == this.axis.Type)
                     {
@@ -220,14 +221,14 @@ namespace System.ServiceModel.Dispatcher
                                         break;
                                     }
                                 }
-                            }
-                            while (contextNode.MoveToNextAttribute());
+                            } while (contextNode.MoveToNextAttribute());
                         }
-
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new QueryProcessingException(QueryProcessingError.Unexpected));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                            new QueryProcessingException(QueryProcessingError.Unexpected)
+                        );
                     }
                     break;
 
@@ -248,8 +249,7 @@ namespace System.ServiceModel.Dispatcher
                                     break;
                                 }
                             }
-                        }
-                        while (contextNode.MoveToNextAttribute());
+                        } while (contextNode.MoveToNextAttribute());
                     }
                     break;
 
@@ -271,8 +271,7 @@ namespace System.ServiceModel.Dispatcher
                                 {
                                     destSequence.Add(contextNode);
                                 }
-                            }
-                            while (contextNode.MoveToNext());
+                            } while (contextNode.MoveToNext());
                         }
                     }
                     break;
@@ -294,12 +293,14 @@ namespace System.ServiceModel.Dispatcher
                         {
                             // Children could have non element nodes in line
                             // Select the node if it is an element and the qname matches
-                            if (XPathNodeType.Element == contextNode.NodeType && this.MatchQName(contextNode))
+                            if (
+                                XPathNodeType.Element == contextNode.NodeType
+                                && this.MatchQName(contextNode)
+                            )
                             {
                                 destSequence.Add(contextNode);
                             }
-                        }
-                        while (contextNode.MoveToNext());
+                        } while (contextNode.MoveToNext());
                     }
                     break;
 
@@ -321,14 +322,17 @@ namespace System.ServiceModel.Dispatcher
                             {
                                 destSequence.Add(contextNode);
                             }
-                        }
-                        while (contextNode.MoveToNext());
+                        } while (contextNode.MoveToNext());
                     }
                     break;
             }
         }
 
-        internal Opcode Select(SeekableXPathNavigator contextNode, NodeSequence destSequence, SelectOpcode next)
+        internal Opcode Select(
+            SeekableXPathNavigator contextNode,
+            NodeSequence destSequence,
+            SelectOpcode next
+        )
         {
             Opcode returnOpcode = next.Next;
 
@@ -346,7 +350,9 @@ namespace System.ServiceModel.Dispatcher
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new QueryProcessingException(QueryProcessingError.Unexpected));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                            new QueryProcessingException(QueryProcessingError.Unexpected)
+                        );
                     }
 
                     break;
@@ -362,8 +368,7 @@ namespace System.ServiceModel.Dispatcher
                             {
                                 destSequence.Add(contextNode);
                             }
-                        }
-                        while (contextNode.MoveToNext());
+                        } while (contextNode.MoveToNext());
                     }
                     break;
 
@@ -375,7 +380,10 @@ namespace System.ServiceModel.Dispatcher
                         {
                             // Children could have non element nodes in line
                             // Select the node if it is an element and the qname matches
-                            if (XPathNodeType.Element == contextNode.NodeType && this.MatchQName(contextNode))
+                            if (
+                                XPathNodeType.Element == contextNode.NodeType
+                                && this.MatchQName(contextNode)
+                            )
                             {
                                 long position = contextNode.CurrentPosition;
                                 returnOpcode = next.Eval(destSequence, contextNode);
@@ -414,10 +422,7 @@ namespace System.ServiceModel.Dispatcher
                 {
                     ++level;
                 }
-                else if (contextNode.MoveToNext())
-                {
-
-                }
+                else if (contextNode.MoveToNext()) { }
                 else
                 {
                     while (level > 0)
@@ -440,7 +445,6 @@ namespace System.ServiceModel.Dispatcher
             return string.Format("{0}, {1}:{2}", this.type, this.qname.ns, this.qname.name);
         }
 #endif
-
     }
 
     // General purpose selector
@@ -450,14 +454,10 @@ namespace System.ServiceModel.Dispatcher
         protected NodeSelectCriteria criteria;
 
         internal SelectOpcode(NodeSelectCriteria criteria)
-            : this(OpcodeID.Select, criteria)
-        {
-        }
+            : this(OpcodeID.Select, criteria) { }
 
         internal SelectOpcode(OpcodeID id, NodeSelectCriteria criteria)
-            : this(id, criteria, OpcodeFlags.None)
-        {
-        }
+            : this(id, criteria, OpcodeFlags.None) { }
 
         internal SelectOpcode(OpcodeID id, NodeSelectCriteria criteria, OpcodeFlags flags)
             : base(id)
@@ -472,10 +472,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal NodeSelectCriteria Criteria
         {
-            get
-            {
-                return this.criteria;
-            }
+            get { return this.criteria; }
         }
 
         internal override bool Equals(Opcode op)
@@ -533,7 +530,10 @@ namespace System.ServiceModel.Dispatcher
                             this.criteria.Select(node, newSeq);
                             newSeq.StopNodeset();
                         }
-                        context.ReplaceSequenceAt(i, (null != newSeq) ? newSeq : NodeSequence.Empty);
+                        context.ReplaceSequenceAt(
+                            i,
+                            (null != newSeq) ? newSeq : NodeSequence.Empty
+                        );
                         context.ReleaseSequence(sourceSeq);
                     }
                 }
@@ -567,9 +567,7 @@ namespace System.ServiceModel.Dispatcher
     internal class InitialSelectOpcode : SelectOpcode
     {
         internal InitialSelectOpcode(NodeSelectCriteria criteria)
-            : base(OpcodeID.InitialSelect, criteria, OpcodeFlags.InitialSelect)
-        {
-        }
+            : base(OpcodeID.InitialSelect, criteria, OpcodeFlags.InitialSelect) { }
 
         internal override Opcode Eval(ProcessingContext context)
         {
@@ -584,9 +582,9 @@ namespace System.ServiceModel.Dispatcher
                 int count = sourceSeq.Count;
                 if (count == 0)
                 {
-                    // Empty sequence. 
-                    // Since there are no nodes in the sequence, we will track this sequence also 
-                    // using an empty sequence 
+                    // Empty sequence.
+                    // Since there are no nodes in the sequence, we will track this sequence also
+                    // using an empty sequence
                     if (!wasInUse)
                         context.PushSequence(NodeSequence.Empty);
                 }
@@ -616,9 +614,7 @@ namespace System.ServiceModel.Dispatcher
     internal class SelectRootOpcode : Opcode
     {
         internal SelectRootOpcode()
-            : base(OpcodeID.SelectRoot)
-        {
-        }
+            : base(OpcodeID.SelectRoot) { }
 
         internal override Opcode Eval(ProcessingContext context)
         {
@@ -634,7 +630,10 @@ namespace System.ServiceModel.Dispatcher
                 SeekableXPathNavigator node = context.Processor.ContextNode;
                 node.MoveToRoot();
                 returnOpcode = this.next.Eval(seq, node);
-                while (returnOpcode != null && 0 != (returnOpcode.Flags & OpcodeFlags.CompressableSelect))
+                while (
+                    returnOpcode != null
+                    && 0 != (returnOpcode.Flags & OpcodeFlags.CompressableSelect)
+                )
                 {
                     returnOpcode = returnOpcode.Next;
                 }

@@ -9,7 +9,8 @@ namespace System.Security.Cryptography
 
         public DSASignatureDeformatter() { }
 
-        public DSASignatureDeformatter(AsymmetricAlgorithm key) : this()
+        public DSASignatureDeformatter(AsymmetricAlgorithm key)
+            : this()
         {
             ArgumentNullException.ThrowIfNull(key);
 
@@ -25,10 +26,17 @@ namespace System.Security.Cryptography
 
         public override void SetHashAlgorithm(string strName)
         {
-            if (!strName.Equals(HashAlgorithmNames.SHA1, StringComparison.InvariantCultureIgnoreCase))
+            if (
+                !strName.Equals(
+                    HashAlgorithmNames.SHA1,
+                    StringComparison.InvariantCultureIgnoreCase
+                )
+            )
             {
                 // To match desktop, throw here
-                throw new CryptographicUnexpectedOperationException(SR.Cryptography_InvalidOperation);
+                throw new CryptographicUnexpectedOperationException(
+                    SR.Cryptography_InvalidOperation
+                );
             }
         }
 
@@ -38,7 +46,9 @@ namespace System.Security.Cryptography
             ArgumentNullException.ThrowIfNull(rgbSignature);
 
             if (_dsaKey == null)
-                throw new CryptographicUnexpectedOperationException(SR.Cryptography_FormatterMissingKey);
+                throw new CryptographicUnexpectedOperationException(
+                    SR.Cryptography_FormatterMissingKey
+                );
 
             return _dsaKey.VerifySignature(rgbHash, rgbSignature);
         }

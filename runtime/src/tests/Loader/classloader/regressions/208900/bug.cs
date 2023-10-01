@@ -11,15 +11,22 @@ using Xunit;
 
 struct MyStruct
 {
-    public MyStruct(object _f1, int _f2) { f1 = _f1; f2 = _f2; }
+    public MyStruct(object _f1, int _f2)
+    {
+        f1 = _f1;
+        f2 = _f2;
+    }
+
     object f1;
     int f2;
 }
 
-
 class M
 {
-   public virtual U GenericMethod<U>(U x1) {  return x1; }
+    public virtual U GenericMethod<U>(U x1)
+    {
+        return x1;
+    }
 }
 
 public class Test_bug

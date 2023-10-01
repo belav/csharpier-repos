@@ -17,32 +17,41 @@ using System.Security;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace System.Configuration {
-
-    public sealed class CallbackValidator : ConfigurationValidatorBase {
+namespace System.Configuration
+{
+    public sealed class CallbackValidator : ConfigurationValidatorBase
+    {
         Type _type;
         ValidatorCallback _callback;
 
-        public CallbackValidator(Type type, ValidatorCallback callback) : this(callback) {
-            if (type == null) {
+        public CallbackValidator(Type type, ValidatorCallback callback)
+            : this(callback)
+        {
+            if (type == null)
+            {
                 throw new ArgumentNullException("type");
             }
             _type = type;
         }
 
         // Do not check for null type here to handle the callback attribute case
-        internal CallbackValidator(ValidatorCallback callback) {
-            if (callback == null) {
+        internal CallbackValidator(ValidatorCallback callback)
+        {
+            if (callback == null)
+            {
                 throw new ArgumentNullException("callback");
             }
             _type = null;
             _callback = callback;
         }
 
-        public override bool CanValidate(Type type) {
+        public override bool CanValidate(Type type)
+        {
             return (type == _type || _type == null);
         }
-        public override void Validate(object value) {
+
+        public override void Validate(object value)
+        {
             _callback(value);
         }
     }

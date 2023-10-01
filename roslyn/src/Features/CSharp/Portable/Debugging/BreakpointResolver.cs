@@ -17,20 +17,30 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Debugging
 {
-    internal class BreakpointResolver(Solution solution, string text) : AbstractBreakpointResolver(solution, text, LanguageNames.CSharp, EqualityComparer<string>.Default)
+    internal class BreakpointResolver(Solution solution, string text)
+        : AbstractBreakpointResolver(
+            solution,
+            text,
+            LanguageNames.CSharp,
+            EqualityComparer<string>.Default
+        )
     {
         protected override IEnumerable<ISymbol> GetMembers(INamedTypeSymbol type, string name)
         {
             var members = type.GetMembers()
-                              .Where(m => m.Name == name ||
-                                          m.ExplicitInterfaceImplementations()
-                                           .Where(i => i.Name == name)
-                                           .Any());
+                .Where(
+                    m =>
+                        m.Name == name
+                        || m.ExplicitInterfaceImplementations().Where(i => i.Name == name).Any()
+                );
 
             return (type.Name == name) ? members.Concat(type.Constructors) : members;
         }
 
-        protected override bool HasMethodBody(IMethodSymbol method, CancellationToken cancellationToken)
+        protected override bool HasMethodBody(
+            IMethodSymbol method,
+            CancellationToken cancellationToken
+        )
         {
             var location = method.Locations.First(loc => loc.IsInSource);
             var tree = location.SourceTree;
@@ -41,7 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
 
         protected override void ParseText(
             out IList<NameAndArity> nameParts,
-            out int? parameterCount)
+            out int? parameterCount
+        )
         {
             var text = Text;
 
@@ -49,13 +60,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
 
             var name = SyntaxFactory.ParseName(text, consumeFullText: false);
             var lengthOfParsedText = name.FullSpan.End;
-            var parameterList = SyntaxFactory.ParseParameterList(text, lengthOfParsedText, consumeFullText: false);
+            var parameterList = SyntaxFactory.ParseParameterList(
+                text,
+                lengthOfParsedText,
+                consumeFullText: false
+            );
             var foundIncompleteParameterList = false;
 
             parameterCount = null;
             if (!parameterList.IsMissing)
             {
-                if (parameterList.OpenParenToken.IsMissing || parameterList.CloseParenToken.IsMissing)
+                if (
+                    parameterList.OpenParenToken.IsMissing
+                    || parameterList.CloseParenToken.IsMissing
+                )
                 {
                     foundIncompleteParameterList = true;
                 }
@@ -85,10 +103,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             // and aliases don't seem meaningful for the purposes of resolving symbols from source.  Since we don't
             // have precedent or a clear user scenario, we won't resolve any alias qualified names (alias qualified
             // parameters are accepted, but we still only validate parameter count, similar to the old implementation).
-            if (!foundIncompleteParameterList && (lengthOfParsedText == text.Length) &&
-                !parts.Any(p => p.IsKind(SyntaxKind.AliasQualifiedName)))
+            if (
+                !foundIncompleteParameterList
+                && (lengthOfParsedText == text.Length)
+                && !parts.Any(p => p.IsKind(SyntaxKind.AliasQualifiedName))
+            )
             {
-                nameParts = parts.Cast<SimpleNameSyntax>().Select(p => new NameAndArity(p.Identifier.ValueText, p.Arity)).ToList();
+                nameParts = parts
+                    .Cast<SimpleNameSyntax>()
+                    .Select(p => new NameAndArity(p.Identifier.ValueText, p.Arity))
+                    .ToList();
             }
             else
             {

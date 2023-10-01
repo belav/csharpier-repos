@@ -32,7 +32,8 @@ namespace Moq.Tests
         {
             var foo = new Mock<IFoo>();
 
-            foo.SetupGet(x => x.Indexed[It.IsAny<int>(), "foo", It.IsAny<DateTime>()].Value).Returns("bar");
+            foo.SetupGet(x => x.Indexed[It.IsAny<int>(), "foo", It.IsAny<DateTime>()].Value)
+                .Returns("bar");
 
             var result = foo.Object.Indexed[1, "foo", DateTime.Now].Value;
 
@@ -136,7 +137,7 @@ namespace Moq.Tests
             var b = mock.Object.B;
 
             Assert.NotEqual("mocked B", b); // it simply shouldn't be possible for Moq to intercept a sealed property;
-            Assert.NotNull(exception);      // and Moq should tell us by throwing an exception.
+            Assert.NotNull(exception); // and Moq should tell us by throwing an exception.
         }
 
         [Fact]
@@ -156,7 +157,7 @@ namespace Moq.Tests
             var d = mock.Object.D;
 
             Assert.NotEqual("mocked D", d); // it simply shouldn't be possible for Moq to intercept a sealed property;
-            Assert.NotNull(exception);      // and Moq should tell us by throwing an exception.
+            Assert.NotNull(exception); // and Moq should tell us by throwing an exception.
         }
 
         [Fact]

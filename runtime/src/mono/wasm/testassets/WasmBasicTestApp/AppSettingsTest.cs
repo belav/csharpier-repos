@@ -18,5 +18,6 @@ public partial class AppSettingsTest
     }
 
     // Synchronize with AppSettingsTests
-    private static void PrintFileExistence(string path) => TestOutput.WriteLine($"'{path}' exists '{File.Exists(path)}'");
+    private static void PrintFileExistence(string path) =>
+        TestOutput.WriteLine($"'{path}' exists '{File.Exists(path)}'");
 }

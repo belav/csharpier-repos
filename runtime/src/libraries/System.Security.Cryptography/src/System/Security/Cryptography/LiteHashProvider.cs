@@ -10,13 +10,21 @@ namespace System.Security.Cryptography
 {
     internal static partial class LiteHashProvider
     {
-        internal static int HashStream(string hashAlgorithmId, Stream source, Span<byte> destination)
+        internal static int HashStream(
+            string hashAlgorithmId,
+            Stream source,
+            Span<byte> destination
+        )
         {
             LiteHash hash = CreateHash(hashAlgorithmId);
             return ProcessStream(hash, source, destination);
         }
 
-        internal static byte[] HashStream(string hashAlgorithmId, int hashSizeInBytes, Stream source)
+        internal static byte[] HashStream(
+            string hashAlgorithmId,
+            int hashSizeInBytes,
+            Stream source
+        )
         {
             byte[] result = new byte[hashSizeInBytes];
             LiteHash hash = CreateHash(hashAlgorithmId);
@@ -29,7 +37,8 @@ namespace System.Security.Cryptography
             string hashAlgorithmId,
             Stream source,
             Memory<byte> destination,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
@@ -43,7 +52,8 @@ namespace System.Security.Cryptography
         internal static ValueTask<byte[]> HashStreamAsync(
             string hashAlgorithmId,
             Stream source,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
@@ -58,7 +68,8 @@ namespace System.Security.Cryptography
             string hashAlgorithmId,
             ReadOnlySpan<byte> key,
             Stream source,
-            Span<byte> destination)
+            Span<byte> destination
+        )
         {
             LiteHmac hash = CreateHmac(hashAlgorithmId, key);
             return ProcessStream(hash, source, destination);
@@ -68,7 +79,8 @@ namespace System.Security.Cryptography
             string hashAlgorithmId,
             int hashSizeInBytes,
             ReadOnlySpan<byte> key,
-            Stream source)
+            Stream source
+        )
         {
             byte[] result = new byte[hashSizeInBytes];
             LiteHmac hash = CreateHmac(hashAlgorithmId, key);
@@ -82,7 +94,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> key,
             Stream source,
             Memory<byte> destination,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
@@ -97,7 +110,8 @@ namespace System.Security.Cryptography
             string hashAlgorithmId,
             ReadOnlySpan<byte> key,
             Stream source,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
@@ -109,7 +123,8 @@ namespace System.Security.Cryptography
         }
 
         /// This takes ownership of the hash parameter and disposes of it when done.
-        private static int ProcessStream<T>(T hash, Stream source, Span<byte> destination) where T : ILiteHash
+        private static int ProcessStream<T>(T hash, Stream source, Span<byte> destination)
+            where T : ILiteHash
         {
             using (hash)
             {
@@ -140,7 +155,9 @@ namespace System.Security.Cryptography
             T hash,
             Stream source,
             Memory<byte> destination,
-            CancellationToken cancellationToken) where T : ILiteHash
+            CancellationToken cancellationToken
+        )
+            where T : ILiteHash
         {
             using (hash)
             {
@@ -151,7 +168,13 @@ namespace System.Security.Cryptography
 
                 try
                 {
-                    while ((read = await source.ReadAsync(rented, cancellationToken).ConfigureAwait(false)) > 0)
+                    while (
+                        (
+                            read = await source
+                                .ReadAsync(rented, cancellationToken)
+                                .ConfigureAwait(false)
+                        ) > 0
+                    )
                     {
                         maxRead = Math.Max(maxRead, read);
                         hash.Append(rented.AsSpan(0, read));
@@ -171,10 +194,13 @@ namespace System.Security.Cryptography
             T hash,
             int outputLength,
             Stream source,
-            CancellationToken cancellationToken) where T : ILiteHash
+            CancellationToken cancellationToken
+        )
+            where T : ILiteHash
         {
             byte[] result = new byte[outputLength];
-            int written = await ProcessStreamAsync(hash, source, result, cancellationToken).ConfigureAwait(false);
+            int written = await ProcessStreamAsync(hash, source, result, cancellationToken)
+                .ConfigureAwait(false);
 
             Debug.Assert(written == result.Length);
             return result;

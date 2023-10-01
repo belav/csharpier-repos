@@ -24,14 +24,14 @@ namespace AppHost.Bundle.Tests
 
             var appExe = UseSingleFileSelfContainedHost(fixture);
 
-            Command.Create(appExe)
+            Command
+                .Create(appExe)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Hello World");
+                .And.HaveStdOutContaining("Hello World");
         }
 
         [Fact]
@@ -41,19 +41,22 @@ namespace AppHost.Bundle.Tests
 
             string singleFile = BundleSelfContainedApp(fixture);
 
-            Command.Create(singleFile)
+            Command
+                .Create(singleFile)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Hello World");
+                .And.HaveStdOutContaining("Hello World");
 
             if (OperatingSystem.IsWindows())
             {
                 // StandaloneApp sets FileVersion to NETCoreApp version. On Windows, this should be copied to singlefilehost resources.
-                Assert.Equal(System.Diagnostics.FileVersionInfo.GetVersionInfo(singleFile).FileVersion, sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion);
+                Assert.Equal(
+                    System.Diagnostics.FileVersionInfo.GetVersionInfo(singleFile).FileVersion,
+                    sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion
+                );
             }
         }
 

@@ -17,8 +17,16 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
             [Fact]
             public async Task CompilingTheSameSourceResultsInEqualModels()
             {
-                SourceGenerationSpec spec1 = (await new ConfigBindingGenTestDriver().RunGeneratorAndUpdateCompilation(BindCallSampleCode)).GenerationSpec;
-                SourceGenerationSpec spec2 = (await new ConfigBindingGenTestDriver().RunGeneratorAndUpdateCompilation(BindCallSampleCode)).GenerationSpec;
+                SourceGenerationSpec spec1 = (
+                    await new ConfigBindingGenTestDriver().RunGeneratorAndUpdateCompilation(
+                        BindCallSampleCode
+                    )
+                ).GenerationSpec;
+                SourceGenerationSpec spec2 = (
+                    await new ConfigBindingGenTestDriver().RunGeneratorAndUpdateCompilation(
+                        BindCallSampleCode
+                    )
+                ).GenerationSpec;
 
                 Assert.NotSame(spec1, spec2);
                 GeneratorTestHelpers.AssertStructurallyEqual(spec1, spec2);
@@ -32,11 +40,19 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
             {
                 ConfigBindingGenTestDriver driver = new ConfigBindingGenTestDriver();
 
-                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCode);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.New, IncrementalStepRunReason.New);
+                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(
+                    BindCallSampleCode
+                );
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.New,
+                    IncrementalStepRunReason.New
+                );
 
                 result = await driver.RunGeneratorAndUpdateCompilation();
-                result.ValidateIncrementalResult(IncrementalStepRunReason.Modified, IncrementalStepRunReason.Unchanged);
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.Modified,
+                    IncrementalStepRunReason.Unchanged
+                );
             }
 
             [Fact]
@@ -44,16 +60,31 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
             {
                 ConfigBindingGenTestDriver driver = new ConfigBindingGenTestDriver();
 
-                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCode);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.New, IncrementalStepRunReason.New);
+                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(
+                    BindCallSampleCode
+                );
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.New,
+                    IncrementalStepRunReason.New
+                );
 
                 // We expect different spec because diag locations are different.
-                result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCodeVariant_ReorderedInvocations);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.Modified, IncrementalStepRunReason.Modified);
+                result = await driver.RunGeneratorAndUpdateCompilation(
+                    BindCallSampleCodeVariant_ReorderedInvocations
+                );
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.Modified,
+                    IncrementalStepRunReason.Modified
+                );
 
                 // We expect different spec because members are reordered.
-                result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCodeVariant_ReorderedConfigTypeMembers);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.Modified, IncrementalStepRunReason.Modified);
+                result = await driver.RunGeneratorAndUpdateCompilation(
+                    BindCallSampleCodeVariant_ReorderedConfigTypeMembers
+                );
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.Modified,
+                    IncrementalStepRunReason.Modified
+                );
             }
 
             [Fact]
@@ -61,11 +92,21 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
             {
                 ConfigBindingGenTestDriver driver = new ConfigBindingGenTestDriver();
 
-                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCode);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.New, IncrementalStepRunReason.New);
+                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(
+                    BindCallSampleCode
+                );
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.New,
+                    IncrementalStepRunReason.New
+                );
 
-                result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCodeVariant_WithDifferentConfigTypeName);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.Modified, IncrementalStepRunReason.Modified);
+                result = await driver.RunGeneratorAndUpdateCompilation(
+                    BindCallSampleCodeVariant_WithDifferentConfigTypeName
+                );
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.Modified,
+                    IncrementalStepRunReason.Modified
+                );
             }
 
             [Fact]
@@ -73,11 +114,21 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
             {
                 ConfigBindingGenTestDriver driver = new ConfigBindingGenTestDriver();
 
-                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCode);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.New, IncrementalStepRunReason.New);
+                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(
+                    BindCallSampleCode
+                );
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.New,
+                    IncrementalStepRunReason.New
+                );
 
-                result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCodeVariant_WithUnsupportedMember);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.Modified, IncrementalStepRunReason.Modified);
+                result = await driver.RunGeneratorAndUpdateCompilation(
+                    BindCallSampleCodeVariant_WithUnsupportedMember
+                );
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.Modified,
+                    IncrementalStepRunReason.Modified
+                );
             }
 
             [Fact]
@@ -85,11 +136,19 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
             {
                 ConfigBindingGenTestDriver driver = new ConfigBindingGenTestDriver();
 
-                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCodeVariant_WithUnsupportedMember);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.New, IncrementalStepRunReason.New);
+                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(
+                    BindCallSampleCodeVariant_WithUnsupportedMember
+                );
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.New,
+                    IncrementalStepRunReason.New
+                );
 
                 result = await driver.RunGeneratorAndUpdateCompilation();
-                result.ValidateIncrementalResult(IncrementalStepRunReason.Modified, IncrementalStepRunReason.Unchanged);
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.Modified,
+                    IncrementalStepRunReason.Unchanged
+                );
             }
 
             [Fact]
@@ -97,16 +156,31 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
             {
                 ConfigBindingGenTestDriver driver = new ConfigBindingGenTestDriver();
 
-                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCodeVariant_WithUnsupportedMember);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.New, IncrementalStepRunReason.New);
+                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(
+                    BindCallSampleCodeVariant_WithUnsupportedMember
+                );
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.New,
+                    IncrementalStepRunReason.New
+                );
 
                 // We expect different spec because diag locations are different.
-                result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCodeVariant_WithUnsupportedMember_ReorderedInvocations);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.Modified, IncrementalStepRunReason.Modified);
+                result = await driver.RunGeneratorAndUpdateCompilation(
+                    BindCallSampleCodeVariant_WithUnsupportedMember_ReorderedInvocations
+                );
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.Modified,
+                    IncrementalStepRunReason.Modified
+                );
 
                 // We expect different spec because members are reordered.
-                result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCodeVariant_WithUnsupportedMember_ReorderedConfigTypeMembers);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.Modified, IncrementalStepRunReason.Modified);
+                result = await driver.RunGeneratorAndUpdateCompilation(
+                    BindCallSampleCodeVariant_WithUnsupportedMember_ReorderedConfigTypeMembers
+                );
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.Modified,
+                    IncrementalStepRunReason.Modified
+                );
             }
 
             [Fact]
@@ -114,11 +188,19 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
             {
                 ConfigBindingGenTestDriver driver = new ConfigBindingGenTestDriver();
 
-                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCodeVariant_WithUnsupportedMember);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.New, IncrementalStepRunReason.New);
+                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(
+                    BindCallSampleCodeVariant_WithUnsupportedMember
+                );
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.New,
+                    IncrementalStepRunReason.New
+                );
 
                 result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCode);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.Modified, IncrementalStepRunReason.Modified);
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.Modified,
+                    IncrementalStepRunReason.Modified
+                );
             }
 
             [Fact]
@@ -126,11 +208,21 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
             {
                 ConfigBindingGenTestDriver driver = new ConfigBindingGenTestDriver();
 
-                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCodeVariant_WithUnsupportedMember);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.New, IncrementalStepRunReason.New);
+                ConfigBindingGenRunResult result = await driver.RunGeneratorAndUpdateCompilation(
+                    BindCallSampleCodeVariant_WithUnsupportedMember
+                );
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.New,
+                    IncrementalStepRunReason.New
+                );
 
-                result = await driver.RunGeneratorAndUpdateCompilation(BindCallSampleCodeVariant_WithUnsupportedMember_WithDiffMemberName);
-                result.ValidateIncrementalResult(IncrementalStepRunReason.Modified, IncrementalStepRunReason.Modified);
+                result = await driver.RunGeneratorAndUpdateCompilation(
+                    BindCallSampleCodeVariant_WithUnsupportedMember_WithDiffMemberName
+                );
+                result.ValidateIncrementalResult(
+                    IncrementalStepRunReason.Modified,
+                    IncrementalStepRunReason.Modified
+                );
             }
         }
 

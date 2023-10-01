@@ -13,45 +13,57 @@ using System.Linq;
 
 namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
-    internal sealed class StringKeywordRecommender : AbstractSpecialTypePreselectingKeywordRecommender
+    internal sealed class StringKeywordRecommender
+        : AbstractSpecialTypePreselectingKeywordRecommender
     {
         public StringKeywordRecommender()
-            : base(SyntaxKind.StringKeyword)
-        {
-        }
+            : base(SyntaxKind.StringKeyword) { }
 
         protected override SpecialType SpecialType => SpecialType.System_String;
 
-        protected override bool IsValidContextWorker(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContextWorker(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxTree = context.SyntaxTree;
-            return
-                context.IsAnyExpressionContext ||
-                context.IsDefiniteCastTypeContext ||
-                context.IsStatementContext ||
-                context.IsGlobalStatementContext ||
-                context.IsObjectCreationTypeContext ||
-                (context.IsGenericTypeArgumentContext && !context.TargetToken.GetRequiredParent().HasAncestor<XmlCrefAttributeSyntax>()) ||
-                context.IsFunctionPointerTypeArgumentContext ||
-                context.IsIsOrAsTypeContext ||
-                context.IsLocalVariableDeclarationContext ||
-                context.IsParameterTypeContext ||
-                context.IsPossibleLambdaOrAnonymousMethodParameterTypeContext ||
-                context.IsLocalFunctionDeclarationContext ||
-                context.IsImplicitOrExplicitOperatorTypeContext ||
-                context.IsTypeOfExpressionContext ||
-                context.IsCrefContext ||
-                context.IsUsingAliasTypeContext ||
-                syntaxTree.IsDefaultExpressionContext(position, context.LeftToken) ||
-                syntaxTree.IsAfterKeyword(position, SyntaxKind.ConstKeyword, cancellationToken) ||
-                context.IsDelegateReturnTypeContext ||
-                syntaxTree.IsGlobalMemberDeclarationContext(position, SyntaxKindSet.AllGlobalMemberModifiers, cancellationToken) ||
-                context.IsPossibleTupleContext ||
-                context.IsMemberDeclarationContext(
+            return context.IsAnyExpressionContext
+                || context.IsDefiniteCastTypeContext
+                || context.IsStatementContext
+                || context.IsGlobalStatementContext
+                || context.IsObjectCreationTypeContext
+                || (
+                    context.IsGenericTypeArgumentContext
+                    && !context.TargetToken
+                        .GetRequiredParent()
+                        .HasAncestor<XmlCrefAttributeSyntax>()
+                )
+                || context.IsFunctionPointerTypeArgumentContext
+                || context.IsIsOrAsTypeContext
+                || context.IsLocalVariableDeclarationContext
+                || context.IsParameterTypeContext
+                || context.IsPossibleLambdaOrAnonymousMethodParameterTypeContext
+                || context.IsLocalFunctionDeclarationContext
+                || context.IsImplicitOrExplicitOperatorTypeContext
+                || context.IsTypeOfExpressionContext
+                || context.IsCrefContext
+                || context.IsUsingAliasTypeContext
+                || syntaxTree.IsDefaultExpressionContext(position, context.LeftToken)
+                || syntaxTree.IsAfterKeyword(position, SyntaxKind.ConstKeyword, cancellationToken)
+                || context.IsDelegateReturnTypeContext
+                || syntaxTree.IsGlobalMemberDeclarationContext(
+                    position,
+                    SyntaxKindSet.AllGlobalMemberModifiers,
+                    cancellationToken
+                )
+                || context.IsPossibleTupleContext
+                || context.IsMemberDeclarationContext(
                     validModifiers: SyntaxKindSet.AllMemberModifiers,
                     validTypeDeclarations: SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,
                     canBePartial: false,
-                    cancellationToken);
+                    cancellationToken
+                );
         }
     }
 }

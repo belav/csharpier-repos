@@ -6,8 +6,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
 {
-    internal readonly struct VSTypeScriptBlockSpan(
-        string? type, bool isCollapsible, TextSpan textSpan, TextSpan hintSpan, string bannerText = VSTypeScriptBlockSpan.Ellipses, bool autoCollapse = false, bool isDefaultCollapsed = false)
+    internal readonly struct VSTypeScriptBlockSpan
     {
         private const string Ellipses = "...";
 

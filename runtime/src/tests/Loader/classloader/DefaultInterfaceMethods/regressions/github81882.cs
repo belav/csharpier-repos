@@ -17,12 +17,12 @@ namespace LeaveAbstractMethodsNulInVTable
 
     abstract class ClassA : IDefault
     {
-        virtual public string Method1() => "ClassA Method1";
+        public virtual string Method1() => "ClassA Method1";
     }
 
     class ClassB : ClassA
     {
-        virtual public string Method2() => "ClassB Method2";
+        public virtual string Method2() => "ClassB Method2";
     }
 
     public class Program
@@ -39,5 +39,4 @@ namespace LeaveAbstractMethodsNulInVTable
             Assert.Equal("ClassB Method2", s2);
         }
     }
-
 }

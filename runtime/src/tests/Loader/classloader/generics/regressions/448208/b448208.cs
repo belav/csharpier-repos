@@ -16,7 +16,6 @@ public class GenType1<T>
     {
         return s_i == 0;
     }
-    
 }
 
 public class Test_b448208

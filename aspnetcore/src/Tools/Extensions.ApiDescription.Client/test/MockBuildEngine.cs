@@ -37,14 +37,16 @@ internal sealed class MockBuildEngine : IBuildEngine3
         string projectFileName,
         string[] targetNames,
         IDictionary globalProperties,
-        IDictionary targetOutputs) => false;
+        IDictionary targetOutputs
+    ) => false;
 
     public bool BuildProjectFile(
         string projectFileName,
         string[] targetNames,
         IDictionary globalProperties,
         IDictionary targetOutputs,
-        string toolsVersion) => false;
+        string toolsVersion
+    ) => false;
 
     public bool BuildProjectFilesInParallel(
         string[] projectFileNames,
@@ -53,7 +55,8 @@ internal sealed class MockBuildEngine : IBuildEngine3
         IDictionary[] targetOutputsPerProject,
         string[] toolsVersion,
         bool useResultsCache,
-        bool unloadProjectsOnCompletion) => false;
+        bool unloadProjectsOnCompletion
+    ) => false;
 
     public BuildEngineResult BuildProjectFilesInParallel(
         string[] projectFileNames,
@@ -61,7 +64,8 @@ internal sealed class MockBuildEngine : IBuildEngine3
         IDictionary[] globalProperties,
         IList<string>[] undefineProperties,
         string[] toolsVersion,
-        bool includeTargetOutputs) => new BuildEngineResult(false, null);
+        bool includeTargetOutputs
+    ) => new BuildEngineResult(false, null);
 
     public void LogErrorEvent(BuildErrorEventArgs eventArgs)
     {
@@ -91,11 +95,7 @@ internal sealed class MockBuildEngine : IBuildEngine3
         }
     }
 
-    public void Reacquire()
-    {
-    }
+    public void Reacquire() { }
 
-    public void Yield()
-    {
-    }
+    public void Yield() { }
 }

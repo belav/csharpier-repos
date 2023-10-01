@@ -55,7 +55,11 @@ public class RequestHeaderBenchmarks
         var nativeMemory = new Span<byte>(nativeContext.NativeRequest, (int)nativeContext.Size + 8);
 
         var requestStructure = new HttpApiTypes.HTTP_REQUEST();
-        var remainingMemory = SetUnknownHeaders(nativeMemory, ref requestStructure, GenerateUnknownHeaders(unknowHeaderCount));
+        var remainingMemory = SetUnknownHeaders(
+            nativeMemory,
+            ref requestStructure,
+            GenerateUnknownHeaders(unknowHeaderCount)
+        );
         SetHostHeader(remainingMemory, ref requestStructure);
         MemoryMarshal.Write(nativeMemory, in requestStructure);
 
@@ -64,7 +68,10 @@ public class RequestHeaderBenchmarks
         return requestHeaders;
     }
 
-    private unsafe Span<byte> SetHostHeader(Span<byte> nativeMemory, ref HttpApiTypes.HTTP_REQUEST requestStructure)
+    private unsafe Span<byte> SetHostHeader(
+        Span<byte> nativeMemory,
+        ref HttpApiTypes.HTTP_REQUEST requestStructure
+    )
     {
         // Writing localhost to Host header
         var dataDestination = nativeMemory.Slice(Marshal.SizeOf<HttpApiTypes.HTTP_REQUEST>());
@@ -80,9 +87,15 @@ public class RequestHeaderBenchmarks
     /// <summary>
     /// Writes an array HTTP_UNKNOWN_HEADER and an array of header key-value pairs to nativeMemory. Pointers in the HTTP_UNKNOWN_HEADER structure points to the corresponding key-value pair.
     /// </summary>
-    private unsafe Span<byte> SetUnknownHeaders(Span<byte> nativeMemory, ref HttpApiTypes.HTTP_REQUEST requestStructure, IReadOnlyCollection<(string Key, string Value)> headerNames)
+    private unsafe Span<byte> SetUnknownHeaders(
+        Span<byte> nativeMemory,
+        ref HttpApiTypes.HTTP_REQUEST requestStructure,
+        IReadOnlyCollection<(string Key, string Value)> headerNames
+    )
     {
-        var unknownHeaderStructureDestination = nativeMemory.Slice(Marshal.SizeOf<HttpApiTypes.HTTP_REQUEST>());
+        var unknownHeaderStructureDestination = nativeMemory.Slice(
+            Marshal.SizeOf<HttpApiTypes.HTTP_REQUEST>()
+        );
         fixed (byte* address = &MemoryMarshal.GetReference(unknownHeaderStructureDestination))
         {
             requestStructure.Headers.pUnknownHeaders = (HttpApiTypes.HTTP_UNKNOWN_HEADER*)address;
@@ -90,7 +103,9 @@ public class RequestHeaderBenchmarks
         requestStructure.Headers.UnknownHeaderCount += (ushort)headerNames.Count;
 
         var unknownHeadersSize = Marshal.SizeOf<HttpApiTypes.HTTP_UNKNOWN_HEADER>();
-        var dataDestination = unknownHeaderStructureDestination.Slice(unknownHeadersSize * headerNames.Count);
+        var dataDestination = unknownHeaderStructureDestination.Slice(
+            unknownHeadersSize * headerNames.Count
+        );
         foreach (var headerName in headerNames)
         {
             var unknownHeaderStructure = new HttpApiTypes.HTTP_UNKNOWN_HEADER();
@@ -113,7 +128,9 @@ public class RequestHeaderBenchmarks
                 dataDestination = dataDestination.Slice(nameLength);
             }
             MemoryMarshal.Write(unknownHeaderStructureDestination, in unknownHeaderStructure);
-            unknownHeaderStructureDestination = unknownHeaderStructureDestination.Slice(unknownHeadersSize);
+            unknownHeaderStructureDestination = unknownHeaderStructureDestination.Slice(
+                unknownHeadersSize
+            );
         }
         return dataDestination;
     }

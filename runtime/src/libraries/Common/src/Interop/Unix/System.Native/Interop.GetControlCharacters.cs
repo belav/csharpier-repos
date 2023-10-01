@@ -9,8 +9,11 @@ internal static partial class Interop
     {
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetControlCharacters")]
         internal static unsafe partial void GetControlCharacters(
-            ControlCharacterNames* controlCharacterNames, byte* controlCharacterValues, int controlCharacterLength,
-            out byte posixDisableValue);
+            ControlCharacterNames* controlCharacterNames,
+            byte* controlCharacterValues,
+            int controlCharacterLength,
+            out byte posixDisableValue
+        );
 
         internal enum ControlCharacterNames : int
         {

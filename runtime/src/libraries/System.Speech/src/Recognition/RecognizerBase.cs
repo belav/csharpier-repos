@@ -18,8 +18,7 @@ using System.Threading;
 
 namespace System.Speech.Recognition
 {
-    internal class RecognizerBase : IRecognizerInternal, IDisposable,
-ISpGrammarResourceLoader
+    internal class RecognizerBase : IRecognizerInternal, IDisposable, ISpGrammarResourceLoader
     {
         #region Constructors
 
@@ -61,7 +60,13 @@ ISpGrammarResourceLoader
                 // Load the data into SAPI:
                 try
                 {
-                    LoadSapiGrammar(grammar, sapiGrammar, grammar.Enabled, grammar.Weight, grammar.Priority);
+                    LoadSapiGrammar(
+                        grammar,
+                        sapiGrammar,
+                        grammar.Enabled,
+                        grammar.Weight,
+                        grammar.Priority
+                    );
                 }
                 catch
                 {
@@ -77,7 +82,13 @@ ISpGrammarResourceLoader
                 }
 
                 // Create the InternalGrammarData object:
-                grammar.InternalData = new InternalGrammarData(grammarId, sapiGrammar, grammar.Enabled, grammar.Weight, grammar.Priority);
+                grammar.InternalData = new InternalGrammarData(
+                    grammarId,
+                    sapiGrammar,
+                    grammar.Enabled,
+                    grammar.Weight,
+                    grammar.Priority
+                );
 
                 // Add to collection:
                 lock (SapiRecognizer) // Lock to prevent anyone enumerating _grammars from failing
@@ -114,7 +125,13 @@ ISpGrammarResourceLoader
             SapiGrammar sapiGrammar = CreateNewSapiGrammar(out grammarId);
 
             // Make the container for the sapiGrammar and cached property values.
-            grammar.InternalData = new InternalGrammarData(grammarId, sapiGrammar, grammar.Enabled, grammar.Weight, grammar.Priority);
+            grammar.InternalData = new InternalGrammarData(
+                grammarId,
+                sapiGrammar,
+                grammar.Enabled,
+                grammar.Weight,
+                grammar.Priority
+            );
 
             // Add to collection:
             lock (SapiRecognizer) // Lock to prevent anyone enumerating _grammars from failing
@@ -160,6 +177,7 @@ ISpGrammarResourceLoader
             grammar.State = GrammarState.Unloaded;
             grammar.InternalData = null;
         }
+
         internal void UnloadAllGrammars()
         {
             // Use a new collection as otherwise can't delete from current enumeration.
@@ -203,7 +221,9 @@ ISpGrammarResourceLoader
                 // If the grammar is actually loaded then update its state in sapi.
                 if (grammar.Loaded)
                 {
-                    grammarData._sapiGrammar.SetGrammarState(enabled ? SPGRAMMARSTATE.SPGS_ENABLED : SPGRAMMARSTATE.SPGS_DISABLED);
+                    grammarData._sapiGrammar.SetGrammarState(
+                        enabled ? SPGRAMMARSTATE.SPGS_ENABLED : SPGRAMMARSTATE.SPGS_DISABLED
+                    );
                 }
 
                 // Otherwise just update the local copy so it gets set correctly when Loaded.
@@ -220,7 +240,9 @@ ISpGrammarResourceLoader
 
             if (!_supportsSapi53)
             {
-                throw new NotSupportedException(SR.Get(SRID.NotSupportedWithThisVersionOfSAPI2, "Weight"));
+                throw new NotSupportedException(
+                    SR.Get(SRID.NotSupportedWithThisVersionOfSAPI2, "Weight")
+                );
             }
 
             InternalGrammarData grammarData = grammar.InternalData;
@@ -250,7 +272,9 @@ ISpGrammarResourceLoader
 
             if (!_supportsSapi53)
             {
-                throw new NotSupportedException(SR.Get(SRID.NotSupportedWithThisVersionOfSAPI2, "Priority"));
+                throw new NotSupportedException(
+                    SR.Get(SRID.NotSupportedWithThisVersionOfSAPI2, "Priority")
+                );
             }
 
             InternalGrammarData grammarData = grammar.InternalData;
@@ -285,7 +309,9 @@ ISpGrammarResourceLoader
                     InternalGrammarData grammarData = grammar.InternalData;
                     if (grammarData._grammarId == id)
                     {
-                        Debug.Assert(grammar.State == GrammarState.Loaded && grammar.Recognizer == this);
+                        Debug.Assert(
+                            grammar.State == GrammarState.Loaded && grammar.Recognizer == this
+                        );
                         return grammar;
                     }
                 }
@@ -294,7 +320,11 @@ ISpGrammarResourceLoader
             return null; // The grammar has already been unloaded
         }
 
-        void IRecognizerInternal.SetDictationContext(Grammar grammar, string precedingText, string subsequentText)
+        void IRecognizerInternal.SetDictationContext(
+            Grammar grammar,
+            string precedingText,
+            string subsequentText
+        )
         {
             precedingText ??= string.Empty;
             subsequentText ??= string.Empty;
@@ -311,19 +341,33 @@ ISpGrammarResourceLoader
         {
             Helpers.ThrowIfEmptyOrNull(inputText, nameof(inputText));
 
-            return InternalEmulateRecognize(inputText, SpeechEmulationCompareFlags.SECFDefault, false, null);
+            return InternalEmulateRecognize(
+                inputText,
+                SpeechEmulationCompareFlags.SECFDefault,
+                false,
+                null
+            );
         }
+
         internal void EmulateRecognizeAsync(string inputText)
         {
             Helpers.ThrowIfEmptyOrNull(inputText, nameof(inputText));
 
-            InternalEmulateRecognizeAsync(inputText, SpeechEmulationCompareFlags.SECFDefault, false, null);
+            InternalEmulateRecognizeAsync(
+                inputText,
+                SpeechEmulationCompareFlags.SECFDefault,
+                false,
+                null
+            );
         }
+
         internal RecognitionResult EmulateRecognize(string inputText, CompareOptions compareOptions)
         {
             Helpers.ThrowIfEmptyOrNull(inputText, nameof(inputText));
 
-            bool defaultCasing = compareOptions == CompareOptions.IgnoreCase || compareOptions == CompareOptions.OrdinalIgnoreCase;
+            bool defaultCasing =
+                compareOptions == CompareOptions.IgnoreCase
+                || compareOptions == CompareOptions.OrdinalIgnoreCase;
 
             // In Sapi 5.1 the only option is case-sensitive search with extendedWordFormat checking.
             // We still let you use the default EmulateRecognize although the behavior is slightly different.
@@ -332,16 +376,26 @@ ISpGrammarResourceLoader
             {
                 // Disable async grammar loading on SAPI 5.1 because of threading model issues.
                 // Note that even if there are no threading issues, baseUri is not supported with SAPI 5.1.
-                throw new NotSupportedException(SR.Get(SRID.NotSupportedWithThisVersionOfSAPICompareOption));
+                throw new NotSupportedException(
+                    SR.Get(SRID.NotSupportedWithThisVersionOfSAPICompareOption)
+                );
             }
 
-            return InternalEmulateRecognize(inputText, ConvertCompareOptions(compareOptions), !defaultCasing, null);
+            return InternalEmulateRecognize(
+                inputText,
+                ConvertCompareOptions(compareOptions),
+                !defaultCasing,
+                null
+            );
         }
+
         internal void EmulateRecognizeAsync(string inputText, CompareOptions compareOptions)
         {
             Helpers.ThrowIfEmptyOrNull(inputText, nameof(inputText));
 
-            bool defaultCasing = compareOptions == CompareOptions.IgnoreCase || compareOptions == CompareOptions.OrdinalIgnoreCase;
+            bool defaultCasing =
+                compareOptions == CompareOptions.IgnoreCase
+                || compareOptions == CompareOptions.OrdinalIgnoreCase;
 
             // In Sapi 5.1 the only option is case-sensitive search with extendedWordFormat checking.
             // We still let you use the default EmulateRecognize although the behavior is slightly different.
@@ -350,12 +404,23 @@ ISpGrammarResourceLoader
             {
                 // Disable async grammar loading on SAPI 5.1 because of threading model issues.
                 // Note that even if there are no threading issues, baseUri is not supported with SAPI 5.1.
-                throw new NotSupportedException(SR.Get(SRID.NotSupportedWithThisVersionOfSAPICompareOption));
+                throw new NotSupportedException(
+                    SR.Get(SRID.NotSupportedWithThisVersionOfSAPICompareOption)
+                );
             }
 
-            InternalEmulateRecognizeAsync(inputText, ConvertCompareOptions(compareOptions), !defaultCasing, null);
+            InternalEmulateRecognizeAsync(
+                inputText,
+                ConvertCompareOptions(compareOptions),
+                !defaultCasing,
+                null
+            );
         }
-        internal RecognitionResult EmulateRecognize(RecognizedWordUnit[] wordUnits, CompareOptions compareOptions)
+
+        internal RecognitionResult EmulateRecognize(
+            RecognizedWordUnit[] wordUnits,
+            CompareOptions compareOptions
+        )
         {
             // In Sapi 5.1 the only option is case-sensitive search with extendedWordFormat checking.
             // We still let you use the default EmulateRecognize although the behavior is slightly different.
@@ -376,9 +441,18 @@ ISpGrammarResourceLoader
                 }
             }
 
-            return InternalEmulateRecognize(null, ConvertCompareOptions(compareOptions), true, wordUnits);
+            return InternalEmulateRecognize(
+                null,
+                ConvertCompareOptions(compareOptions),
+                true,
+                wordUnits
+            );
         }
-        internal void EmulateRecognizeAsync(RecognizedWordUnit[] wordUnits, CompareOptions compareOptions)
+
+        internal void EmulateRecognizeAsync(
+            RecognizedWordUnit[] wordUnits,
+            CompareOptions compareOptions
+        )
         {
             // In Sapi 5.1 the only option is case-sensitive search with extendedWordFormat checking.
             // We still let you use the default EmulateRecognize although the behavior is slightly different.
@@ -399,7 +473,12 @@ ISpGrammarResourceLoader
                 }
             }
 
-            InternalEmulateRecognizeAsync(null, ConvertCompareOptions(compareOptions), true, wordUnits);
+            InternalEmulateRecognizeAsync(
+                null,
+                ConvertCompareOptions(compareOptions),
+                true,
+                wordUnits
+            );
         }
 
         // Methods to pause the recognizer to do atomic updates:
@@ -407,6 +486,7 @@ ISpGrammarResourceLoader
         {
             RequestRecognizerUpdate(null);
         }
+
         internal void RequestRecognizerUpdate(object userToken)
         {
             uint bookmarkId = AddBookmarkItem(userToken);
@@ -414,7 +494,11 @@ ISpGrammarResourceLoader
             // This fires the bookmark as soon as possible so we set the time as zero and don't set the SPBO_AHEAD flag.
             SapiContext.Bookmark(SPBOOKMARKOPTIONS.SPBO_PAUSE, 0, new IntPtr(bookmarkId));
         }
-        internal void RequestRecognizerUpdate(object userToken, TimeSpan audioPositionAheadToRaiseUpdate)
+
+        internal void RequestRecognizerUpdate(
+            object userToken,
+            TimeSpan audioPositionAheadToRaiseUpdate
+        )
         {
             if (audioPositionAheadToRaiseUpdate < TimeSpan.Zero)
             {
@@ -429,8 +513,13 @@ ISpGrammarResourceLoader
 
             // This always fires the bookmark ahead of the current position.
             // So calling this with zero will wait until the recognizer catches up with the current audio position before firing.
-            SapiContext.Bookmark(SPBOOKMARKOPTIONS.SPBO_PAUSE | SPBOOKMARKOPTIONS.SPBO_AHEAD | SPBOOKMARKOPTIONS.SPBO_TIME_UNITS,
-                (ulong)audioPositionAheadToRaiseUpdate.Ticks, new IntPtr(bookmarkId));
+            SapiContext.Bookmark(
+                SPBOOKMARKOPTIONS.SPBO_PAUSE
+                    | SPBOOKMARKOPTIONS.SPBO_AHEAD
+                    | SPBOOKMARKOPTIONS.SPBO_TIME_UNITS,
+                (ulong)audioPositionAheadToRaiseUpdate.Ticks,
+                new IntPtr(bookmarkId)
+            );
         }
 
         internal void Initialize(SapiRecognizer recognizer, bool inproc)
@@ -448,7 +537,10 @@ ISpGrammarResourceLoader
             catch (COMException e)
             {
                 // SAPI 5.1 can throw this error when no recognizer
-                if (!_supportsSapi53 && (SAPIErrorCodes)e.ErrorCode == SAPIErrorCodes.SPERR_NOT_FOUND)
+                if (
+                    !_supportsSapi53
+                    && (SAPIErrorCodes)e.ErrorCode == SAPIErrorCodes.SPERR_NOT_FOUND
+                )
                 {
                     throw new PlatformNotSupportedException(SR.Get(SRID.RecognitionNotSupported));
                 }
@@ -465,7 +557,8 @@ ISpGrammarResourceLoader
 
             try
             {
-                ISpPhoneticAlphabetSelection alphabetSelection = _sapiContext as ISpPhoneticAlphabetSelection;
+                ISpPhoneticAlphabetSelection alphabetSelection =
+                    _sapiContext as ISpPhoneticAlphabetSelection;
                 if (alphabetSelection != null)
                 {
                     alphabetSelection.SetAlphabetToUPS(true);
@@ -480,7 +573,11 @@ ISpGrammarResourceLoader
                 Trace.TraceError("Cannot force SAPI to set the alphabet to UPS");
             }
 
-            _sapiContext.SetAudioOptions(SPAUDIOOPTIONS.SPAO_RETAIN_AUDIO, IntPtr.Zero, IntPtr.Zero);
+            _sapiContext.SetAudioOptions(
+                SPAUDIOOPTIONS.SPAO_RETAIN_AUDIO,
+                IntPtr.Zero,
+                IntPtr.Zero
+            );
 
             // Enable alternates with default max.
             MaxAlternates = 10;
@@ -490,15 +587,16 @@ ISpGrammarResourceLoader
             // Set basic SR event interests that are routed to the end user.
             // Hypothesis and AudioLevelChange events are raised frequently and are less commonly used.
             // So their interests will be registered individually.
-            _eventInterest = (1ul << (int)SPEVENTENUM.SPEI_RESERVED1) |
-                (1ul << (int)SPEVENTENUM.SPEI_RESERVED2) |
-                (1ul << (int)SPEVENTENUM.SPEI_START_SR_STREAM) |
-                (1ul << (int)SPEVENTENUM.SPEI_PHRASE_START) |
-                (1ul << (int)SPEVENTENUM.SPEI_FALSE_RECOGNITION) |
-                (1ul << (int)SPEVENTENUM.SPEI_RECOGNITION) |
-                (1ul << (int)SPEVENTENUM.SPEI_RECO_OTHER_CONTEXT) |
-                (1ul << (int)SPEVENTENUM.SPEI_END_SR_STREAM) |
-                (1ul << (int)SPEVENTENUM.SPEI_SR_BOOKMARK);
+            _eventInterest =
+                (1ul << (int)SPEVENTENUM.SPEI_RESERVED1)
+                | (1ul << (int)SPEVENTENUM.SPEI_RESERVED2)
+                | (1ul << (int)SPEVENTENUM.SPEI_START_SR_STREAM)
+                | (1ul << (int)SPEVENTENUM.SPEI_PHRASE_START)
+                | (1ul << (int)SPEVENTENUM.SPEI_FALSE_RECOGNITION)
+                | (1ul << (int)SPEVENTENUM.SPEI_RECOGNITION)
+                | (1ul << (int)SPEVENTENUM.SPEI_RECO_OTHER_CONTEXT)
+                | (1ul << (int)SPEVENTENUM.SPEI_END_SR_STREAM)
+                | (1ul << (int)SPEVENTENUM.SPEI_SR_BOOKMARK);
             _sapiContext.SetInterest(_eventInterest, _eventInterest);
 
             _asyncWorker = new AsyncSerializedWorker(new WaitCallback(DispatchEvents), null);
@@ -544,7 +642,11 @@ ISpGrammarResourceLoader
             if (_supportsSapi53)
             {
                 // On another thread - wait for grammar loading to complete and start the recognizer.
-                if (!ThreadPool.QueueUserWorkItem(new WaitCallback(RecognizeAsyncWaitForGrammarsToLoad)))
+                if (
+                    !ThreadPool.QueueUserWorkItem(
+                        new WaitCallback(RecognizeAsyncWaitForGrammarsToLoad)
+                    )
+                )
                 {
                     throw new OperationCanceledException(SR.Get(SRID.OperationAborted));
                 }
@@ -580,7 +682,10 @@ ISpGrammarResourceLoader
             bool hasPendingTask = false;
             bool canceled = false;
 
-            EventHandler<RecognizeCompletedEventArgs> eventHandler = delegate (object sender, RecognizeCompletedEventArgs eventArgs)
+            EventHandler<RecognizeCompletedEventArgs> eventHandler = delegate(
+                object sender,
+                RecognizeCompletedEventArgs eventArgs
+            )
             {
                 result = eventArgs.Result;
                 completed = true;
@@ -593,7 +698,9 @@ ISpGrammarResourceLoader
 
             // InitialSilenceTimeout bookmark should keep this function from waiting forever, but also have a timeout
             // here in case something's wrong with the audio and the bookmark never gets hit.
-            TimeSpan eventTimeout = TimeSpan.FromTicks(Math.Max(initialSilenceTimeout.Ticks, _defaultTimeout.Ticks));
+            TimeSpan eventTimeout = TimeSpan.FromTicks(
+                Math.Max(initialSilenceTimeout.Ticks, _defaultTimeout.Ticks)
+            );
 
             try
             {
@@ -724,7 +831,12 @@ ISpGrammarResourceLoader
         /// </summary>
         internal void SetInput(string path)
         {
-            Stream inputStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+            Stream inputStream = new FileStream(
+                path,
+                FileMode.Open,
+                FileAccess.Read,
+                FileShare.Read
+            );
             SetInput(inputStream, null);
 
             // Keep track of the local stream
@@ -753,7 +865,10 @@ ISpGrammarResourceLoader
                     }
                     else
                     {
-                        SapiRecognizer.SetInput(new SpAudioStreamWrapper(stream, audioFormat), false);
+                        SapiRecognizer.SetInput(
+                            new SpAudioStreamWrapper(stream, audioFormat),
+                            false
+                        );
                         _haveInputSource = true;
                     }
                 }
@@ -779,7 +894,8 @@ ISpGrammarResourceLoader
                     throw new InvalidOperationException(SR.Get(SRID.RecognizerAlreadyRecognizing));
                 }
 
-                ISpObjectTokenCategory category = (ISpObjectTokenCategory)new SpObjectTokenCategory();
+                ISpObjectTokenCategory category = (ISpObjectTokenCategory)
+                    new SpObjectTokenCategory();
                 try
                 {
                     category.SetId(SAPICategories.AudioIn, false);
@@ -835,7 +951,11 @@ ISpGrammarResourceLoader
             }
             catch (Exception e)
             {
-                if (e is COMException || e is InvalidOperationException || e is KeyNotFoundException)
+                if (
+                    e is COMException
+                    || e is InvalidOperationException
+                    || e is KeyNotFoundException
+                )
                 {
                     return SapiRecognizer.GetPropertyString(settingName);
                 }
@@ -869,19 +989,27 @@ ISpGrammarResourceLoader
             {
                 case SAPIErrorCodes.CLASS_E_CLASSNOTAVAILABLE:
                 case SAPIErrorCodes.REGDB_E_CLASSNOTREG:
+                {
+                    OperatingSystem OS = Environment.OSVersion;
+                    if (
+                        IntPtr.Size == 8
+                        && // 64-bit system
+                        OS.Platform == PlatformID.Win32NT
+                        && // On Windows NT or above
+                        OS.Version.Major == 5
+                    ) // Windows 2000 / XP / Server 2003
                     {
-                        OperatingSystem OS = Environment.OSVersion;
-                        if (IntPtr.Size == 8 && // 64-bit system
-                            OS.Platform == PlatformID.Win32NT && // On Windows NT or above
-                            OS.Version.Major == 5) // Windows 2000 / XP / Server 2003
-                        {
-                            return new NotSupportedException(SR.Get(SRID.RecognitionNotSupportedOn64bit));
-                        }
-                        else
-                        {
-                            return new PlatformNotSupportedException(SR.Get(SRID.RecognitionNotSupported));
-                        }
+                        return new NotSupportedException(
+                            SR.Get(SRID.RecognitionNotSupportedOn64bit)
+                        );
                     }
+                    else
+                    {
+                        return new PlatformNotSupportedException(
+                            SR.Get(SRID.RecognitionNotSupported)
+                        );
+                    }
+                }
 
                 case SAPIErrorCodes.SPERR_SHARED_ENGINE_DISABLED:
                 case SAPIErrorCodes.SPERR_RECOGNIZER_NOT_FOUND:
@@ -933,19 +1061,30 @@ ISpGrammarResourceLoader
         internal TimeSpan InitialSilenceTimeout
         {
             // lock to protect _initialSilenceTimeout and _isRecognizing
-            get { lock (SapiRecognizer) { return _initialSilenceTimeout; } }
+            get
+            {
+                lock (SapiRecognizer)
+                {
+                    return _initialSilenceTimeout;
+                }
+            }
             set
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.Get(SRID.NegativeTimesNotSupported));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.Get(SRID.NegativeTimesNotSupported)
+                    );
                 }
 
                 lock (SapiRecognizer)
                 {
                     if (_isRecognizing)
                     {
-                        throw new InvalidOperationException(SR.Get(SRID.RecognizerAlreadyRecognizing));
+                        throw new InvalidOperationException(
+                            SR.Get(SRID.RecognizerAlreadyRecognizing)
+                        );
                     }
                     _initialSilenceTimeout = value;
                 }
@@ -955,19 +1094,30 @@ ISpGrammarResourceLoader
         internal TimeSpan BabbleTimeout
         {
             // lock to protect _babbleTimeout and _isRecognizing
-            get { lock (SapiRecognizer) { return _babbleTimeout; } }
+            get
+            {
+                lock (SapiRecognizer)
+                {
+                    return _babbleTimeout;
+                }
+            }
             set
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.Get(SRID.NegativeTimesNotSupported));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.Get(SRID.NegativeTimesNotSupported)
+                    );
                 }
 
                 lock (SapiRecognizer)
                 {
                     if (_isRecognizing)
                     {
-                        throw new InvalidOperationException(SR.Get(SRID.RecognizerAlreadyRecognizing));
+                        throw new InvalidOperationException(
+                            SR.Get(SRID.RecognizerAlreadyRecognizing)
+                        );
                     }
                     _babbleTimeout = value;
                 }
@@ -982,7 +1132,10 @@ ISpGrammarResourceLoader
                 {
                     SPRECOSTATE sapiState;
                     sapiState = SapiRecognizer.GetRecoState(); // This does not wait for engine sync point so should be fast.
-                    if (sapiState == SPRECOSTATE.SPRST_ACTIVE || sapiState == SPRECOSTATE.SPRST_ACTIVE_ALWAYS)
+                    if (
+                        sapiState == SPRECOSTATE.SPRST_ACTIVE
+                        || sapiState == SPRECOSTATE.SPRST_ACTIVE_ALWAYS
+                    )
                     {
                         return RecognizerState.Listening;
                     }
@@ -1015,7 +1168,9 @@ ISpGrammarResourceLoader
                     {
                         try
                         {
-                            SapiContext.SetContextState(value ? SPCONTEXTSTATE.SPCS_ENABLED : SPCONTEXTSTATE.SPCS_DISABLED);
+                            SapiContext.SetContextState(
+                                value ? SPCONTEXTSTATE.SPCS_ENABLED : SPCONTEXTSTATE.SPCS_DISABLED
+                            );
                             _enabled = value;
                         }
                         catch (COMException e)
@@ -1066,10 +1221,7 @@ ISpGrammarResourceLoader
                 }
                 return _audioState;
             }
-            set
-            {
-                _audioState = value;
-            }
+            set { _audioState = value; }
         }
 
         internal int AudioLevel
@@ -1129,7 +1281,14 @@ ISpGrammarResourceLoader
                     lock (SapiRecognizer) // Lock to protect _audioStatus.
                     {
                         SpeechAudioFormatInfo audioFormat = AudioFormat;
-                        return audioFormat.AverageBytesPerSecond > 0 ? new TimeSpan((long)((recoStatus.AudioStatus.CurDevicePos * TimeSpan.TicksPerSecond) / (ulong)audioFormat.AverageBytesPerSecond)) : TimeSpan.Zero;
+                        return audioFormat.AverageBytesPerSecond > 0
+                            ? new TimeSpan(
+                                (long)(
+                                    (recoStatus.AudioStatus.CurDevicePos * TimeSpan.TicksPerSecond)
+                                    / (ulong)audioFormat.AverageBytesPerSecond
+                                )
+                            )
+                            : TimeSpan.Zero;
                     }
                 }
                 catch (COMException e)
@@ -1192,7 +1351,10 @@ ISpGrammarResourceLoader
             {
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.Get(SRID.MaxAlternatesInvalid));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.Get(SRID.MaxAlternatesInvalid)
+                    );
                 }
                 if (value != _maxAlternates)
                 {
@@ -1238,7 +1400,6 @@ ISpGrammarResourceLoader
                 }
                 _speechHypothesizedDelegate += value;
             }
-
             [MethodImplAttribute(MethodImplOptions.Synchronized)]
             remove
             {
@@ -1260,7 +1421,6 @@ ISpGrammarResourceLoader
                 }
                 _audioSignalProblemOccurredDelegate += value;
             }
-
             [MethodImplAttribute(MethodImplOptions.Synchronized)]
             remove
             {
@@ -1282,7 +1442,6 @@ ISpGrammarResourceLoader
                 }
                 _audioLevelUpdatedDelegate += value;
             }
-
             [MethodImplAttribute(MethodImplOptions.Synchronized)]
             remove
             {
@@ -1296,16 +1455,9 @@ ISpGrammarResourceLoader
         internal event EventHandler<AudioStateChangedEventArgs> AudioStateChanged
         {
             [MethodImplAttribute(MethodImplOptions.Synchronized)]
-            add
-            {
-                _audioStateChangedDelegate += value;
-            }
-
+            add { _audioStateChangedDelegate += value; }
             [MethodImplAttribute(MethodImplOptions.Synchronized)]
-            remove
-            {
-                _audioStateChangedDelegate -= value;
-            }
+            remove { _audioStateChangedDelegate -= value; }
         }
 
 #pragma warning restore 6504
@@ -1379,14 +1531,28 @@ ISpGrammarResourceLoader
         {
             // Also this method is not public.
 #pragma warning disable 6503
-            get { if (_disposed) { throw new ObjectDisposedException("RecognizerBase"); } return _sapiContext; }
+            get
+            {
+                if (_disposed)
+                {
+                    throw new ObjectDisposedException("RecognizerBase");
+                }
+                return _sapiContext;
+            }
 #pragma warning restore 6503
         }
 
         private SapiRecognizer SapiRecognizer
         {
 #pragma warning disable 6503
-            get { if (_disposed) { throw new ObjectDisposedException("RecognizerBase"); } return _sapiRecognizer; }
+            get
+            {
+                if (_disposed)
+                {
+                    throw new ObjectDisposedException("RecognizerBase");
+                }
+                return _sapiRecognizer;
+            }
 #pragma warning restore 6503
         }
 
@@ -1396,7 +1562,13 @@ ISpGrammarResourceLoader
 
         // Method called from LoadGrammar and LoadGrammarAsync to load the data from a Grammar into sapiGrammar.
         // Grammar is unchanged by this method.
-        private void LoadSapiGrammar(Grammar grammar, SapiGrammar sapiGrammar, bool enabled, float weight, int priority)
+        private void LoadSapiGrammar(
+            Grammar grammar,
+            SapiGrammar sapiGrammar,
+            bool enabled,
+            float weight,
+            int priority
+        )
         {
             Uri baseUri = grammar.BaseUri;
 
@@ -1417,7 +1589,14 @@ ISpGrammarResourceLoader
             if (grammar.IsDictation(grammar.Uri))
             {
                 // If uri load
-                LoadSapiDictationGrammar(sapiGrammar, grammar.Uri, grammar.RuleName, enabled, weight, priority);
+                LoadSapiDictationGrammar(
+                    sapiGrammar,
+                    grammar.Uri,
+                    grammar.RuleName,
+                    enabled,
+                    weight,
+                    priority
+                );
                 return;
             }
             LoadSapiGrammarFromCfg(sapiGrammar, grammar, baseUri, enabled, weight, priority);
@@ -1425,7 +1604,14 @@ ISpGrammarResourceLoader
 
         // Actually load the uri into the sapiGrammar. This does not touch the Grammar object or InternalGrammarData.
         // This must be called on a new SapiGrammar that does not already have a grammar loaded {for SetSapiGrammarProperties}.
-        private void LoadSapiDictationGrammar(SapiGrammar sapiGrammar, Uri uri, string ruleName, bool enabled, float weight, int priority)
+        private void LoadSapiDictationGrammar(
+            SapiGrammar sapiGrammar,
+            Uri uri,
+            string ruleName,
+            bool enabled,
+            float weight,
+            int priority
+        )
         {
             try
             {
@@ -1437,7 +1623,9 @@ ISpGrammarResourceLoader
                     //  - Modify SAPI so LoadCmdFromFile works with dictation Uris.
                     //  - Modify the engine and use a regular grammar with a special ruleref to dictation.
                     //  - Call back to the Grammar and let it manage the loading activation.
-                    string topicName = string.IsNullOrEmpty(uri.Fragment) ? null : uri.Fragment.Substring(1);
+                    string topicName = string.IsNullOrEmpty(uri.Fragment)
+                        ? null
+                        : uri.Fragment.Substring(1);
                     sapiGrammar.LoadDictation(topicName, SPLOADOPTIONS.SPLO_STATIC);
                 }
                 else
@@ -1450,15 +1638,15 @@ ISpGrammarResourceLoader
                 switch ((SAPIErrorCodes)e.ErrorCode)
                 {
                     case SAPIErrorCodes.SPERR_NOT_FOUND:
-                        {
-                            throw new ArgumentException(SR.Get(SRID.DictationTopicNotFound, uri), e);
-                        }
+                    {
+                        throw new ArgumentException(SR.Get(SRID.DictationTopicNotFound, uri), e);
+                    }
 
                     default:
-                        {
-                            ThrowIfSapiErrorCode((SAPIErrorCodes)e.ErrorCode);
-                            throw;
-                        }
+                    {
+                        ThrowIfSapiErrorCode((SAPIErrorCodes)e.ErrorCode);
+                        throw;
+                    }
                 }
             }
 
@@ -1472,7 +1660,14 @@ ISpGrammarResourceLoader
         ///
         /// Returns the CFG data for a given file and builds a tree of rule ref dependencies.
         /// </summary>
-        int ISpGrammarResourceLoader.LoadResource(string bstrResourceUri, bool fAlwaysReload, out IStream pStream, ref string pbstrMIMEType, ref short pfModified, ref string pbstrRedirectUrl)
+        int ISpGrammarResourceLoader.LoadResource(
+            string bstrResourceUri,
+            bool fAlwaysReload,
+            out IStream pStream,
+            ref string pbstrMIMEType,
+            ref short pfModified,
+            ref string pbstrRedirectUrl
+        )
         {
             try
             {
@@ -1497,7 +1692,12 @@ ISpGrammarResourceLoader
 
                 // Create the grammar for that resources.
                 Uri redirectedUri;
-                Grammar grammar = Grammar.Create(bstrResourceUri, ruleName, onInitParameters, out redirectedUri);
+                Grammar grammar = Grammar.Create(
+                    bstrResourceUri,
+                    ruleName,
+                    onInitParameters,
+                    out redirectedUri
+                );
 
                 // If http:// then set the redirect Uri
                 if (redirectedUri != null)
@@ -1508,7 +1708,9 @@ ISpGrammarResourceLoader
                 // Could fail for SRGS
                 if (grammar == null)
                 {
-                    throw new FormatException(SR.Get(SRID.SapiErrorRuleNotFound2, ruleName, bstrResourceUri));
+                    throw new FormatException(
+                        SR.Get(SRID.SapiErrorRuleNotFound2, ruleName, bstrResourceUri)
+                    );
                 }
 
                 // Save the SAPI grammar id for that grammar
@@ -1546,7 +1748,11 @@ ISpGrammarResourceLoader
         /// <summary>
         /// Unused
         /// </summary>
-        string ISpGrammarResourceLoader.GetLocalCopy(Uri resourcePath, out string mimeType, out Uri redirectUrl)
+        string ISpGrammarResourceLoader.GetLocalCopy(
+            Uri resourcePath,
+            out string mimeType,
+            out Uri redirectUrl
+        )
         {
             redirectUrl = null;
             mimeType = null;
@@ -1556,15 +1762,20 @@ ISpGrammarResourceLoader
         /// <summary>
         /// Unused
         /// </summary>
-        void ISpGrammarResourceLoader.ReleaseLocalCopy(string path)
-        {
-        }
+        void ISpGrammarResourceLoader.ReleaseLocalCopy(string path) { }
 
         #endregion
 
         // Actually load the stream into the sapiGrammar. This does not touch the Grammar object or InternalGrammarData.
         // This must be called on a new SapiGrammar that does not already have a grammar loaded {for SetSapiGrammarProperties}.
-        private void LoadSapiGrammarFromCfg(SapiGrammar sapiGrammar, Grammar grammar, Uri baseUri, bool enabled, float weight, int priority)
+        private void LoadSapiGrammarFromCfg(
+            SapiGrammar sapiGrammar,
+            Grammar grammar,
+            Uri baseUri,
+            bool enabled,
+            float weight,
+            int priority
+        )
         {
             byte[] data = grammar.CfgData;
 
@@ -1587,7 +1798,12 @@ ISpGrammarResourceLoader
 
                         sapiGrammar.SetGrammarLoader(_recoThunk);
                     }
-                    sapiGrammar.LoadCmdFromMemory2(dataPtr, SPLOADOPTIONS.SPLO_STATIC, null, baseUri?.ToString());
+                    sapiGrammar.LoadCmdFromMemory2(
+                        dataPtr,
+                        SPLOADOPTIONS.SPLO_STATIC,
+                        null,
+                        baseUri?.ToString()
+                    );
                 }
                 else
                 {
@@ -1599,21 +1815,21 @@ ISpGrammarResourceLoader
                 switch ((SAPIErrorCodes)e.ErrorCode)
                 {
                     case SAPIErrorCodes.SPERR_UNSUPPORTED_FORMAT:
-                        {
-                            throw new FormatException(SR.Get(SRID.RecognizerInvalidBinaryGrammar), e);
-                        }
+                    {
+                        throw new FormatException(SR.Get(SRID.RecognizerInvalidBinaryGrammar), e);
+                    }
                     case SAPIErrorCodes.SPERR_INVALID_IMPORT:
-                        {
-                            throw new FormatException(SR.Get(SRID.SapiErrorInvalidImport), e);
-                        }
+                    {
+                        throw new FormatException(SR.Get(SRID.SapiErrorInvalidImport), e);
+                    }
                     case SAPIErrorCodes.SPERR_TOO_MANY_GRAMMARS:
-                        {
-                            throw new NotSupportedException(SR.Get(SRID.SapiErrorTooManyGrammars), e);
-                        }
+                    {
+                        throw new NotSupportedException(SR.Get(SRID.SapiErrorTooManyGrammars), e);
+                    }
                     case SAPIErrorCodes.SPERR_NOT_FOUND:
-                        {
-                            throw new FileNotFoundException(SR.Get(SRID.ReferencedGrammarNotFound), e);
-                        }
+                    {
+                        throw new FileNotFoundException(SR.Get(SRID.ReferencedGrammarNotFound), e);
+                    }
 
                     case ((SAPIErrorCodes)(-1)):
                         if (_loadException != null)
@@ -1638,13 +1854,27 @@ ISpGrammarResourceLoader
                 gcHandle.Free();
             }
 
-            SetSapiGrammarProperties(sapiGrammar, null, grammar.RuleName, enabled, weight, priority);
+            SetSapiGrammarProperties(
+                sapiGrammar,
+                null,
+                grammar.RuleName,
+                enabled,
+                weight,
+                priority
+            );
         }
 
         // Update a new SAPI grammar with relevant enabled, weight and priority and activate the desired rule.
         // SetRuleState on the rule is always set to active - theSetGrammarState API is used to enable or disable the grammar.
         // This needs to be a new grammar only because it only bothers to update the values of they are different to the default.
-        private void SetSapiGrammarProperties(SapiGrammar sapiGrammar, Uri uri, string ruleName, bool enabled, float weight, int priority)
+        private void SetSapiGrammarProperties(
+            SapiGrammar sapiGrammar,
+            Uri uri,
+            string ruleName,
+            bool enabled,
+            float weight,
+            int priority
+        )
         {
             if (!enabled)
             {
@@ -1718,8 +1948,13 @@ ISpGrammarResourceLoader
                 lock (_grammarDataLock)
                 {
                     // The sapi grammar has already been created, so load the grammar data into SAPI:
-                    LoadSapiGrammar(grammar, grammarData._sapiGrammar,
-                        grammarData._grammarEnabled, grammarData._grammarWeight, grammarData._grammarPriority);
+                    LoadSapiGrammar(
+                        grammar,
+                        grammarData._sapiGrammar,
+                        grammarData._grammarEnabled,
+                        grammarData._grammarWeight,
+                        grammarData._grammarPriority
+                    );
 
                     // Successful load - set the state:
                     grammar.State = GrammarState.Loaded;
@@ -1747,7 +1982,10 @@ ISpGrammarResourceLoader
                 _waitForGrammarsToLoad.FinishOperation();
 
                 // Always fire completed event
-                _asyncWorkerUI.PostOperation(new WaitCallback(LoadGrammarAsyncCompletedCallback), grammarObject);
+                _asyncWorkerUI.PostOperation(
+                    new WaitCallback(LoadGrammarAsyncCompletedCallback),
+                    grammarObject
+                );
             }
         }
 
@@ -1759,7 +1997,10 @@ ISpGrammarResourceLoader
             Debug.WriteLine("Raising LoadGrammarCompleted event.");
 
             Grammar grammar = (Grammar)grammarObject;
-            LoadGrammarCompleted?.Invoke(this, new LoadGrammarCompletedEventArgs(grammar, grammar.LoadException, false, null));
+            LoadGrammarCompleted?.Invoke(
+                this,
+                new LoadGrammarCompletedEventArgs(grammar, grammar.LoadException, false, null)
+            );
         }
 
         // Create a new sapi grammarId and SapiGrammar object.
@@ -1793,8 +2034,7 @@ ISpGrammarResourceLoader
                     grammarId = _currentGrammarId;
                     return sapiGrammar;
                 }
-            }
-            while (_currentGrammarId != initialGrammarIdValue);
+            } while (_currentGrammarId != initialGrammarIdValue);
 
             // This is not a realistic scenario because you'd need to have 2^64 grammars loaded to hit this, but it removes at least
             // a theoretical infinite loop.
@@ -1836,11 +2076,19 @@ ISpGrammarResourceLoader
             }
         }
 
-        private RecognitionResult InternalEmulateRecognize(string phrase, SpeechEmulationCompareFlags flag, bool useReco2, RecognizedWordUnit[] wordUnits)
+        private RecognitionResult InternalEmulateRecognize(
+            string phrase,
+            SpeechEmulationCompareFlags flag,
+            bool useReco2,
+            RecognizedWordUnit[] wordUnits
+        )
         {
             RecognitionResult result = null;
             bool completed = false;
-            EventHandler<EmulateRecognizeCompletedEventArgs> eventHandler = delegate (object sender, EmulateRecognizeCompletedEventArgs eventArgs)
+            EventHandler<EmulateRecognizeCompletedEventArgs> eventHandler = delegate(
+                object sender,
+                EmulateRecognizeCompletedEventArgs eventArgs
+            )
             {
                 result = eventArgs.Result;
                 completed = true;
@@ -1868,7 +2116,12 @@ ISpGrammarResourceLoader
         }
 
         // Pass the Emulation information to SAPI
-        private void InternalEmulateRecognizeAsync(string phrase, SpeechEmulationCompareFlags flag, bool useReco2, RecognizedWordUnit[] wordUnits)
+        private void InternalEmulateRecognizeAsync(
+            string phrase,
+            SpeechEmulationCompareFlags flag,
+            bool useReco2,
+            RecognizedWordUnit[] wordUnits
+        )
         {
             lock (SapiRecognizer) // Lock to protect _isRecognizing and _haveInputSource
             {
@@ -1890,11 +2143,21 @@ ISpGrammarResourceLoader
 
                 if (wordUnits == null)
                 {
-                    iSpPhrase = SPPHRASE.CreatePhraseFromText(phrase.Trim(), RecognizerInfo.Culture, out memHandles, out data);
+                    iSpPhrase = SPPHRASE.CreatePhraseFromText(
+                        phrase.Trim(),
+                        RecognizerInfo.Culture,
+                        out memHandles,
+                        out data
+                    );
                 }
                 else
                 {
-                    iSpPhrase = SPPHRASE.CreatePhraseFromWordUnits(wordUnits, RecognizerInfo.Culture, out memHandles, out data);
+                    iSpPhrase = SPPHRASE.CreatePhraseFromWordUnits(
+                        wordUnits,
+                        RecognizerInfo.Culture,
+                        out memHandles,
+                        out data
+                    );
                 }
 
                 try
@@ -1949,7 +2212,9 @@ ISpGrammarResourceLoader
         // This method is used when a grammar is first loaded, and if the PauseRecognizerOnRecognition property is changed.
         private void ActivateRule(SapiGrammar sapiGrammar, Uri uri, string ruleName)
         {
-            SPRULESTATE ruleState = _pauseRecognizerOnRecognition ? SPRULESTATE.SPRS_ACTIVE_WITH_AUTO_PAUSE : SPRULESTATE.SPRS_ACTIVE;
+            SPRULESTATE ruleState = _pauseRecognizerOnRecognition
+                ? SPRULESTATE.SPRS_ACTIVE_WITH_AUTO_PAUSE
+                : SPRULESTATE.SPRS_ACTIVE;
 
             SAPIErrorCodes errorCode;
             if (Grammar.IsDictationGrammar(uri))
@@ -1961,7 +2226,10 @@ ISpGrammarResourceLoader
                 errorCode = sapiGrammar.SetRuleState(ruleName, ruleState);
             }
 
-            if (errorCode == SAPIErrorCodes.SPERR_NOT_TOPLEVEL_RULE || errorCode == SAPIErrorCodes.SP_NO_RULES_TO_ACTIVATE)
+            if (
+                errorCode == SAPIErrorCodes.SPERR_NOT_TOPLEVEL_RULE
+                || errorCode == SAPIErrorCodes.SP_NO_RULES_TO_ACTIVATE
+            )
             {
                 if (uri == null)
                 {
@@ -1971,22 +2239,29 @@ ISpGrammarResourceLoader
                     }
                     else
                     {
-                        throw new ArgumentException(SR.Get(SRID.RecognizerRuleNotFoundStream, ruleName), nameof(ruleName));
+                        throw new ArgumentException(
+                            SR.Get(SRID.RecognizerRuleNotFoundStream, ruleName),
+                            nameof(ruleName)
+                        );
                     }
                 }
                 else
                 {
                     if (string.IsNullOrEmpty(ruleName))
                     {
-                        throw new FormatException(SR.Get(SRID.RecognizerNoRootRuleToActivate1, uri));
+                        throw new FormatException(
+                            SR.Get(SRID.RecognizerNoRootRuleToActivate1, uri)
+                        );
                     }
                     else
                     {
-                        throw new ArgumentException(SR.Get(SRID.RecognizerRuleNotFound, ruleName, uri), nameof(ruleName));
+                        throw new ArgumentException(
+                            SR.Get(SRID.RecognizerRuleNotFound, ruleName, uri),
+                            nameof(ruleName)
+                        );
                     }
                 }
             }
-
             // We can proceed if the audio is not found as this call could be for emulation.
             else if (errorCode != SAPIErrorCodes.SPERR_AUDIO_NOT_FOUND && errorCode < 0)
             {
@@ -2049,7 +2324,9 @@ ISpGrammarResourceLoader
                 catch (COMException comException)
                 {
                     Debug.WriteLine("Problem starting recognition - sapi exception.");
-                    exception = ExceptionFromSapiStreamError((SAPIErrorCodes)comException.ErrorCode);
+                    exception = ExceptionFromSapiStreamError(
+                        (SAPIErrorCodes)comException.ErrorCode
+                    );
                 }
                 catch (Exception fatalException)
                 {
@@ -2062,8 +2339,12 @@ ISpGrammarResourceLoader
             // Otherwise it will be thrown later when SAPI sends the EndStream event.
             if (exception != null || cancelled)
             {
-                RecognizeCompletedEventArgs eventArgs = new(null, false, false, false, TimeSpan.Zero, exception, cancelled, null);
-                _asyncWorkerUI.PostOperation(new WaitCallback(RecognizeAsyncWaitForGrammarsToLoadFailed), eventArgs);
+                RecognizeCompletedEventArgs eventArgs =
+                    new(null, false, false, false, TimeSpan.Zero, exception, cancelled, null);
+                _asyncWorkerUI.PostOperation(
+                    new WaitCallback(RecognizeAsyncWaitForGrammarsToLoadFailed),
+                    eventArgs
+                );
             }
         }
 #pragma warning restore 56500
@@ -2071,7 +2352,9 @@ ISpGrammarResourceLoader
         // Method called on app thread model used to fire the RecognizeCompelted event args if recognition stopped prematurely
         private void RecognizeAsyncWaitForGrammarsToLoadFailed(object eventArgs)
         {
-            Debug.WriteLine("Firing RecognizeCompleted because recognition didn't start as expected.");
+            Debug.WriteLine(
+                "Firing RecognizeCompleted because recognition didn't start as expected."
+            );
             Debug.Assert(eventArgs != null);
 
             lock (SapiRecognizer) // Lock to protect _isRecognizing and _isRecognizeCancelled
@@ -2167,13 +2450,19 @@ ISpGrammarResourceLoader
             {
                 if (_supportsSapi53)
                 {
-                    SapiContext.Bookmark(SPBOOKMARKOPTIONS.SPBO_TIME_UNITS | SPBOOKMARKOPTIONS.SPBO_PAUSE,
-                        (ulong)initialSilenceTimeout.Ticks, new IntPtr((int)_initialSilenceBookmarkId));
+                    SapiContext.Bookmark(
+                        SPBOOKMARKOPTIONS.SPBO_TIME_UNITS | SPBOOKMARKOPTIONS.SPBO_PAUSE,
+                        (ulong)initialSilenceTimeout.Ticks,
+                        new IntPtr((int)_initialSilenceBookmarkId)
+                    );
                 }
                 else
                 {
-                    SapiContext.Bookmark(SPBOOKMARKOPTIONS.SPBO_PAUSE,
-                        TimeSpanToStreamPosition(initialSilenceTimeout), new IntPtr((int)_initialSilenceBookmarkId));
+                    SapiContext.Bookmark(
+                        SPBOOKMARKOPTIONS.SPBO_PAUSE,
+                        TimeSpanToStreamPosition(initialSilenceTimeout),
+                        new IntPtr((int)_initialSilenceBookmarkId)
+                    );
                 }
                 _detectingInitialSilenceTimeout = true;
             }
@@ -2203,13 +2492,19 @@ ISpGrammarResourceLoader
                 // Don't make this a pausing bookmark or it will have to wait for the engine to reach a sync point ...
                 if (_supportsSapi53)
                 {
-                    SapiContext.Bookmark(SPBOOKMARKOPTIONS.SPBO_TIME_UNITS,
-                        (ulong)((babbleTimeout + speechEvent.AudioPosition).Ticks), new IntPtr((int)_babbleBookmarkId));
+                    SapiContext.Bookmark(
+                        SPBOOKMARKOPTIONS.SPBO_TIME_UNITS,
+                        (ulong)((babbleTimeout + speechEvent.AudioPosition).Ticks),
+                        new IntPtr((int)_babbleBookmarkId)
+                    );
                 }
                 else
                 {
-                    SapiContext.Bookmark(SPBOOKMARKOPTIONS.SPBO_NONE,
-                        TimeSpanToStreamPosition(babbleTimeout) + speechEvent.AudioStreamOffset, new IntPtr((int)_babbleBookmarkId));
+                    SapiContext.Bookmark(
+                        SPBOOKMARKOPTIONS.SPBO_NONE,
+                        TimeSpanToStreamPosition(babbleTimeout) + speechEvent.AudioStreamOffset,
+                        new IntPtr((int)_babbleBookmarkId)
+                    );
                 }
                 _detectingBabbleTimeout = true;
             }
@@ -2252,7 +2547,10 @@ ISpGrammarResourceLoader
                 {
                     object userToken = GetBookmarkItemAndRemove(bookmarkId);
 
-                    RecognizerUpdateReached?.Invoke(this, new RecognizerUpdateReachedEventArgs(userToken, speechEvent.AudioPosition));
+                    RecognizerUpdateReached?.Invoke(
+                        this,
+                        new RecognizerUpdateReachedEventArgs(userToken, speechEvent.AudioPosition)
+                    );
                 }
             }
             catch (COMException e)
@@ -2323,9 +2621,15 @@ ISpGrammarResourceLoader
                 // Note: this doesn't absolutely guarantee an event won't be fired after the grammar is unloaded
                 // - there's a small window after this check is done and before the event fires where the grammar could get
                 // unloaded. To fix this would require more strict locking here.
-                if (((result.Grammar != null && result.Grammar.Enabled) ||
-                    (speechEvent.EventId == SPEVENTENUM.SPEI_FALSE_RECOGNITION && result.GrammarId == 0)) &&
-                    enabled)
+                if (
+                    (
+                        (result.Grammar != null && result.Grammar.Enabled)
+                        || (
+                            speechEvent.EventId == SPEVENTENUM.SPEI_FALSE_RECOGNITION
+                            && result.GrammarId == 0
+                        )
+                    ) && enabled
+                )
                 {
                     if (speechEvent.EventId == SPEVENTENUM.SPEI_RECOGNITION)
                     {
@@ -2349,7 +2653,10 @@ ISpGrammarResourceLoader
                         // SPEVENTENUM.SPEI_FALSE_RECOGNITION
                         // Fire the event but if SAPI will fire an empty false recognition after each timeout
                         // or when the recognition has been shut off. Don't report these events since then don't contain useful info.
-                        if (result.GrammarId != 0 || !(_babbleTimeoutReached || isRecognizeCancelled))
+                        if (
+                            result.GrammarId != 0
+                            || !(_babbleTimeoutReached || isRecognizeCancelled)
+                        )
                         {
                             // Fire the rejected recognition on the recognizer.
                             FireSpeechRecognitionRejectedEvent(result);
@@ -2357,7 +2664,6 @@ ISpGrammarResourceLoader
                     }
                 }
                 // else Grammar has already been unloaded or disabled - so don't fire result
-
             }
             finally // Even if event handler throws we should call this
             {
@@ -2396,7 +2702,11 @@ ISpGrammarResourceLoader
             if (isEmulate && !_inproc)
             {
                 // Fire the EmulateRecognizeCompleted event
-                FireEmulateRecognizeCompletedEvent(_lastResult, _lastException, isRecognizeCancelled);
+                FireEmulateRecognizeCompletedEvent(
+                    _lastResult,
+                    _lastException,
+                    isRecognizeCancelled
+                );
             }
         }
 
@@ -2454,7 +2764,12 @@ ISpGrammarResourceLoader
             {
                 _audioState = AudioState.Stopped;
 
-                if (((SPENDSRSTREAMFLAGS)speechEvent.WParam & SPENDSRSTREAMFLAGS.SPESF_STREAM_RELEASED) == SPENDSRSTREAMFLAGS.SPESF_STREAM_RELEASED)
+                if (
+                    (
+                        (SPENDSRSTREAMFLAGS)speechEvent.WParam
+                        & SPENDSRSTREAMFLAGS.SPESF_STREAM_RELEASED
+                    ) == SPENDSRSTREAMFLAGS.SPESF_STREAM_RELEASED
+                )
                 {
                     isStreamReleased = true;
                     _haveInputSource = false;
@@ -2472,7 +2787,17 @@ ISpGrammarResourceLoader
             // Fire the RecognizeCompleted event. (Except in the emulation case)
             if (!_isEmulateRecognition)
             {
-                FireRecognizeCompletedEvent(lastResult, initialSilenceTimeoutReached, babbleTimeoutReached, isStreamReleased, speechEvent.AudioPosition, (speechEvent.LParam == 0) ? null : ExceptionFromSapiStreamError((SAPIErrorCodes)speechEvent.LParam), isRecognizeCancelled);
+                FireRecognizeCompletedEvent(
+                    lastResult,
+                    initialSilenceTimeoutReached,
+                    babbleTimeoutReached,
+                    isStreamReleased,
+                    speechEvent.AudioPosition,
+                    (speechEvent.LParam == 0)
+                        ? null
+                        : ExceptionFromSapiStreamError((SAPIErrorCodes)speechEvent.LParam),
+                    isRecognizeCancelled
+                );
             }
             else
             {
@@ -2486,7 +2811,13 @@ ISpGrammarResourceLoader
                 // Don't reset with EmulatedResults - because you can Emulate during a recognition {in SpeechRecognizer},
                 // this means multiple EndStreamEvents can be fired together which confuses the BookmarkTable clean-up.
 
-                FireEmulateRecognizeCompletedEvent(lastResult, (speechEvent.LParam == 0) ? lastException : ExceptionFromSapiStreamError((SAPIErrorCodes)speechEvent.LParam), isRecognizeCancelled);
+                FireEmulateRecognizeCompletedEvent(
+                    lastResult,
+                    (speechEvent.LParam == 0)
+                        ? lastException
+                        : ExceptionFromSapiStreamError((SAPIErrorCodes)speechEvent.LParam),
+                    isRecognizeCancelled
+                );
             }
 
             // Fire state changed event
@@ -2521,7 +2852,8 @@ ISpGrammarResourceLoader
         private RecognitionResult CreateRecognitionResult(SpeechEvent speechEvent)
         {
             // Get the sapi result
-            ISpRecoResult sapiResult = (ISpRecoResult)Marshal.GetObjectForIUnknown((IntPtr)speechEvent.LParam);
+            ISpRecoResult sapiResult = (ISpRecoResult)
+                Marshal.GetObjectForIUnknown((IntPtr)speechEvent.LParam);
             RecognitionResult recoResult = null;
 
             // Get the serialized unmanaged blob and then delete the sapi result
@@ -2582,20 +2914,28 @@ ISpGrammarResourceLoader
                     waveFormatPtr = SapiRecognizer.GetFormat(SPSTREAMFORMATTYPE.SPWF_SRENGINE);
                     if (waveFormatPtr != IntPtr.Zero)
                     {
-                        if ((formatInfo = AudioFormatConverter.ToSpeechAudioFormatInfo(waveFormatPtr)) != null)
+                        if (
+                            (
+                                formatInfo = AudioFormatConverter.ToSpeechAudioFormatInfo(
+                                    waveFormatPtr
+                                )
+                            ) != null
+                        )
                         {
                             hasWaveFormat = true;
                         }
                     }
                 }
-                catch (COMException)
-                {
-                }
+                catch (COMException) { }
 
                 // If for some reason the GetFormat fails OR we can't get a wave format, assume 16 Kb, 16 bits, Audio.
                 if (!hasWaveFormat)
                 {
-                    formatInfo = new SpeechAudioFormatInfo(16000, AudioBitsPerSample.Sixteen, AudioChannel.Mono);
+                    formatInfo = new SpeechAudioFormatInfo(
+                        16000,
+                        AudioBitsPerSample.Sixteen,
+                        AudioChannel.Mono
+                    );
                 }
             }
             finally
@@ -2612,7 +2952,8 @@ ISpGrammarResourceLoader
         // current audio format. This should only needed if not using SAPI 5.3.
         private ulong TimeSpanToStreamPosition(TimeSpan time)
         {
-            return (ulong)(time.Ticks * AudioFormat.AverageBytesPerSecond) / TimeSpan.TicksPerSecond;
+            return (ulong)(time.Ticks * AudioFormat.AverageBytesPerSecond)
+                / TimeSpan.TicksPerSecond;
         }
 
         // Converts COM errors returned by SPEI_END_SR_STREAM or SetRecoState to an appropriate .NET exception.
@@ -2640,11 +2981,21 @@ ISpGrammarResourceLoader
         }
 
         // Convert the .NET CompareOptions into the SAPI SpeechEmulationCompareFlags.
-        private static SpeechEmulationCompareFlags ConvertCompareOptions(CompareOptions compareOptions)
+        private static SpeechEmulationCompareFlags ConvertCompareOptions(
+            CompareOptions compareOptions
+        )
         {
-            CompareOptions handledOptions = CompareOptions.IgnoreCase | CompareOptions.OrdinalIgnoreCase | CompareOptions.IgnoreKanaType | CompareOptions.IgnoreWidth | CompareOptions.Ordinal;
+            CompareOptions handledOptions =
+                CompareOptions.IgnoreCase
+                | CompareOptions.OrdinalIgnoreCase
+                | CompareOptions.IgnoreKanaType
+                | CompareOptions.IgnoreWidth
+                | CompareOptions.Ordinal;
             SpeechEmulationCompareFlags flags = 0;
-            if ((compareOptions & CompareOptions.IgnoreCase) != 0 || (compareOptions & CompareOptions.OrdinalIgnoreCase) != 0)
+            if (
+                (compareOptions & CompareOptions.IgnoreCase) != 0
+                || (compareOptions & CompareOptions.OrdinalIgnoreCase) != 0
+            )
             {
                 flags |= SpeechEmulationCompareFlags.SECFIgnoreCase;
             }
@@ -2658,7 +3009,9 @@ ISpGrammarResourceLoader
             }
             if ((compareOptions & ~handledOptions) != 0)
             {
-                throw new NotSupportedException(SR.Get(SRID.NotSupportedWithThisVersionOfSAPICompareOption));
+                throw new NotSupportedException(
+                    SR.Get(SRID.NotSupportedWithThisVersionOfSAPICompareOption)
+                );
             }
             return flags;
         }
@@ -2705,7 +3058,9 @@ ISpGrammarResourceLoader
                         // As long as there are not 2^32 outstanding bookmarks this will work fine.
                         // There's also a case where the bookmark table doesn't completely reset
                         // during ResetBookmarkTable but this would require 2^32 bookmarks also.
-                        throw new InvalidOperationException(SR.Get(SRID.RecognizerUpdateTableTooLarge));
+                        throw new InvalidOperationException(
+                            SR.Get(SRID.RecognizerUpdateTableTooLarge)
+                        );
                     }
 
                     _bookmarkTable[unchecked((int)bookmarkId)] = userToken;
@@ -2785,10 +3140,15 @@ ISpGrammarResourceLoader
         /// </summary>
         private void FireAudioStateChangedEvent(AudioState audioState)
         {
-            EventHandler<AudioStateChangedEventArgs> audioStateChangedHandler = _audioStateChangedDelegate;
+            EventHandler<AudioStateChangedEventArgs> audioStateChangedHandler =
+                _audioStateChangedDelegate;
             if (audioStateChangedHandler != null)
             {
-                _asyncWorkerUI.PostOperation(audioStateChangedHandler, this, new AudioStateChangedEventArgs(audioState));
+                _asyncWorkerUI.PostOperation(
+                    audioStateChangedHandler,
+                    this,
+                    new AudioStateChangedEventArgs(audioState)
+                );
             }
         }
 
@@ -2797,7 +3157,8 @@ ISpGrammarResourceLoader
         /// </summary>
         private void FireSignalProblemOccurredEvent(AudioSignalProblem audioSignalProblem)
         {
-            EventHandler<AudioSignalProblemOccurredEventArgs> audioSignalProblemOccurredHandler = _audioSignalProblemOccurredDelegate;
+            EventHandler<AudioSignalProblemOccurredEventArgs> audioSignalProblemOccurredHandler =
+                _audioSignalProblemOccurredDelegate;
             if (audioSignalProblemOccurredHandler != null)
             {
                 TimeSpan recognizerPosition = TimeSpan.Zero;
@@ -2812,8 +3173,20 @@ ISpGrammarResourceLoader
                     lock (SapiRecognizer) // Lock to protect _audioStatus.
                     {
                         SpeechAudioFormatInfo audioFormat = AudioFormat;
-                        audioPosition = audioFormat.AverageBytesPerSecond > 0 ? new TimeSpan((long)((recoStatus.AudioStatus.CurDevicePos * TimeSpan.TicksPerSecond) / (ulong)audioFormat.AverageBytesPerSecond)) : TimeSpan.Zero;
-                        recognizerPosition = new TimeSpan((long)recoStatus.ullRecognitionStreamTime);
+                        audioPosition =
+                            audioFormat.AverageBytesPerSecond > 0
+                                ? new TimeSpan(
+                                    (long)(
+                                        (
+                                            recoStatus.AudioStatus.CurDevicePos
+                                            * TimeSpan.TicksPerSecond
+                                        ) / (ulong)audioFormat.AverageBytesPerSecond
+                                    )
+                                )
+                                : TimeSpan.Zero;
+                        recognizerPosition = new TimeSpan(
+                            (long)recoStatus.ullRecognitionStreamTime
+                        );
                     }
                 }
                 catch (COMException e)
@@ -2821,7 +3194,16 @@ ISpGrammarResourceLoader
                     throw ExceptionFromSapiCreateRecognizerError(e);
                 }
 
-                _asyncWorkerUI.PostOperation(audioSignalProblemOccurredHandler, this, new AudioSignalProblemOccurredEventArgs(audioSignalProblem, AudioLevel, audioPosition, recognizerPosition));
+                _asyncWorkerUI.PostOperation(
+                    audioSignalProblemOccurredHandler,
+                    this,
+                    new AudioSignalProblemOccurredEventArgs(
+                        audioSignalProblem,
+                        AudioLevel,
+                        audioPosition,
+                        recognizerPosition
+                    )
+                );
             }
         }
 
@@ -2830,10 +3212,15 @@ ISpGrammarResourceLoader
         /// </summary>
         private void FireAudioLevelUpdatedEvent(int audioLevel)
         {
-            EventHandler<AudioLevelUpdatedEventArgs> audioLevelUpdatedHandler = _audioLevelUpdatedDelegate;
+            EventHandler<AudioLevelUpdatedEventArgs> audioLevelUpdatedHandler =
+                _audioLevelUpdatedDelegate;
             if (audioLevelUpdatedHandler != null)
             {
-                _asyncWorkerUI.PostOperation(audioLevelUpdatedHandler, this, new AudioLevelUpdatedEventArgs(audioLevel));
+                _asyncWorkerUI.PostOperation(
+                    audioLevelUpdatedHandler,
+                    this,
+                    new AudioLevelUpdatedEventArgs(audioLevel)
+                );
             }
         }
 
@@ -2843,9 +3230,14 @@ ISpGrammarResourceLoader
             EventHandler<StateChangedEventArgs> stateChangedHandler = StateChanged;
             if (stateChangedHandler != null)
             {
-                _asyncWorkerUI.PostOperation(stateChangedHandler, this, new StateChangedEventArgs(recognizerState));
+                _asyncWorkerUI.PostOperation(
+                    stateChangedHandler,
+                    this,
+                    new StateChangedEventArgs(recognizerState)
+                );
             }
         }
+
         /// <summary>
         /// Fire the SpeechDetected event.
         /// </summary>
@@ -2854,7 +3246,11 @@ ISpGrammarResourceLoader
             EventHandler<SpeechDetectedEventArgs> speechDetectedHandler = SpeechDetected;
             if (speechDetectedHandler != null)
             {
-                _asyncWorkerUI.PostOperation(speechDetectedHandler, this, new SpeechDetectedEventArgs(audioPosition));
+                _asyncWorkerUI.PostOperation(
+                    speechDetectedHandler,
+                    this,
+                    new SpeechDetectedEventArgs(audioPosition)
+                );
             }
         }
 
@@ -2863,10 +3259,15 @@ ISpGrammarResourceLoader
         /// </summary>
         private void FireSpeechHypothesizedEvent(RecognitionResult result)
         {
-            EventHandler<SpeechHypothesizedEventArgs> speechHypothesizedHandler = _speechHypothesizedDelegate;
+            EventHandler<SpeechHypothesizedEventArgs> speechHypothesizedHandler =
+                _speechHypothesizedDelegate;
             if (speechHypothesizedHandler != null)
             {
-                _asyncWorkerUI.PostOperation(speechHypothesizedHandler, this, new SpeechHypothesizedEventArgs(result));
+                _asyncWorkerUI.PostOperation(
+                    speechHypothesizedHandler,
+                    this,
+                    new SpeechHypothesizedEventArgs(result)
+                );
             }
         }
 
@@ -2875,7 +3276,8 @@ ISpGrammarResourceLoader
         /// </summary>
         private void FireSpeechRecognitionRejectedEvent(RecognitionResult result)
         {
-            EventHandler<SpeechRecognitionRejectedEventArgs> recognitionHandler = SpeechRecognitionRejected;
+            EventHandler<SpeechRecognitionRejectedEventArgs> recognitionHandler =
+                SpeechRecognitionRejected;
             SpeechRecognitionRejectedEventArgs recognitionEventArgs = new(result);
             if (recognitionHandler != null)
             {
@@ -2898,25 +3300,50 @@ ISpGrammarResourceLoader
         /// <summary>
         /// Fire the recognition completed event.
         /// </summary>
-        private void FireRecognizeCompletedEvent(RecognitionResult result, bool initialSilenceTimeoutReached, bool babbleTimeoutReached, bool isStreamReleased, TimeSpan audioPosition, Exception exception, bool isRecognizeCancelled)
+        private void FireRecognizeCompletedEvent(
+            RecognitionResult result,
+            bool initialSilenceTimeoutReached,
+            bool babbleTimeoutReached,
+            bool isStreamReleased,
+            TimeSpan audioPosition,
+            Exception exception,
+            bool isRecognizeCancelled
+        )
         {
             // In the synchronous case, fire the private event
-            EventHandler<RecognizeCompletedEventArgs> recognizeCompletedHandler = RecognizeCompletedSync;
+            EventHandler<RecognizeCompletedEventArgs> recognizeCompletedHandler =
+                RecognizeCompletedSync;
             // If not in sync mode, fire the public event.
             recognizeCompletedHandler ??= RecognizeCompleted;
 
             // Fire the completed event
             if (recognizeCompletedHandler != null)
             {
-                _asyncWorkerUI.PostOperation(recognizeCompletedHandler, this, new RecognizeCompletedEventArgs(result, initialSilenceTimeoutReached, babbleTimeoutReached,
-                    isStreamReleased, audioPosition, exception, isRecognizeCancelled, null));
+                _asyncWorkerUI.PostOperation(
+                    recognizeCompletedHandler,
+                    this,
+                    new RecognizeCompletedEventArgs(
+                        result,
+                        initialSilenceTimeoutReached,
+                        babbleTimeoutReached,
+                        isStreamReleased,
+                        audioPosition,
+                        exception,
+                        isRecognizeCancelled,
+                        null
+                    )
+                );
             }
         }
 
         /// <summary>
         /// Fire the emulate completed event.
         /// </summary>
-        private void FireEmulateRecognizeCompletedEvent(RecognitionResult result, Exception exception, bool isRecognizeCancelled)
+        private void FireEmulateRecognizeCompletedEvent(
+            RecognitionResult result,
+            Exception exception,
+            bool isRecognizeCancelled
+        )
         {
             EventHandler<EmulateRecognizeCompletedEventArgs> emulateRecognizeCompletedHandler;
             lock (SapiRecognizer)
@@ -2935,7 +3362,16 @@ ISpGrammarResourceLoader
 
             if (emulateRecognizeCompletedHandler != null)
             {
-                _asyncWorkerUI.PostOperation(emulateRecognizeCompletedHandler, this, new EmulateRecognizeCompletedEventArgs(result, exception, isRecognizeCancelled, null));
+                _asyncWorkerUI.PostOperation(
+                    emulateRecognizeCompletedHandler,
+                    this,
+                    new EmulateRecognizeCompletedEventArgs(
+                        result,
+                        exception,
+                        isRecognizeCancelled,
+                        null
+                    )
+                );
             }
         }
 
@@ -3009,7 +3445,7 @@ ISpGrammarResourceLoader
         private TimeSpan _babbleTimeout;
 
         internal bool _haveInputSource; // Tracks if there's an input stream set or not - only used on SpeechRecognitionEngine.
-        private Stream _inputStream;    // track the input stream open if it has been opened by this object
+        private Stream _inputStream; // track the input stream open if it has been opened by this object
 
         // Dictionary used to map between sapi bookmark ids and RequestRecognizerUpdate userToken values.
         private Dictionary<int, object> _bookmarkTable = new();
@@ -3018,6 +3454,7 @@ ISpGrammarResourceLoader
 
         // Lock used to wait for all pending async grammar loads to complete before starting recognition.
         private OperationLock _waitForGrammarsToLoad = new();
+
         // Lock used to protect properties on the Grammar {Enabled, Weight etc.} from being changed while an async grammar load is in progress.
         private object _grammarDataLock = new();
 
@@ -3027,7 +3464,8 @@ ISpGrammarResourceLoader
         private const uint _babbleBookmarkId = _initialSilenceBookmarkId + 1; // 2
         private const uint _firstUnusedBookmarkId = _babbleBookmarkId + 1; // 3
 
-        private AsyncSerializedWorker _asyncWorker, _asyncWorkerUI;
+        private AsyncSerializedWorker _asyncWorker,
+            _asyncWorkerUI;
         private AutoResetEvent _handlerWaitHandle = new(false);
 
         private object _thisObjectLock = new();
@@ -3056,10 +3494,7 @@ ISpGrammarResourceLoader
 
             internal RecognizerBase Recognizer
             {
-                get
-                {
-                    return (RecognizerBase)_recognizerRef.Target;
-                }
+                get { return (RecognizerBase)_recognizerRef.Target; }
             }
 
             /// <summary>
@@ -3067,17 +3502,39 @@ ISpGrammarResourceLoader
             ///
             /// Returns the CFG data for a given file and builds a tree of rule ref dependencies.
             /// </summary>
-            int ISpGrammarResourceLoader.LoadResource(string bstrResourceUri, bool fAlwaysReload, out IStream pStream, ref string pbstrMIMEType, ref short pfModified, ref string pbstrRedirectUrl)
+            int ISpGrammarResourceLoader.LoadResource(
+                string bstrResourceUri,
+                bool fAlwaysReload,
+                out IStream pStream,
+                ref string pbstrMIMEType,
+                ref short pfModified,
+                ref string pbstrRedirectUrl
+            )
             {
-                return ((ISpGrammarResourceLoader)Recognizer).LoadResource(bstrResourceUri, fAlwaysReload, out pStream, ref pbstrMIMEType, ref pfModified, ref pbstrRedirectUrl);
+                return ((ISpGrammarResourceLoader)Recognizer).LoadResource(
+                    bstrResourceUri,
+                    fAlwaysReload,
+                    out pStream,
+                    ref pbstrMIMEType,
+                    ref pfModified,
+                    ref pbstrRedirectUrl
+                );
             }
 
             /// <summary>
             /// Unused
             /// </summary>
-            string ISpGrammarResourceLoader.GetLocalCopy(Uri resourcePath, out string mimeType, out Uri redirectUrl)
+            string ISpGrammarResourceLoader.GetLocalCopy(
+                Uri resourcePath,
+                out string mimeType,
+                out Uri redirectUrl
+            )
             {
-                return ((ISpGrammarResourceLoader)Recognizer).GetLocalCopy(resourcePath, out mimeType, out redirectUrl);
+                return ((ISpGrammarResourceLoader)Recognizer).GetLocalCopy(
+                    resourcePath,
+                    out mimeType,
+                    out redirectUrl
+                );
             }
 
             /// <summary>
@@ -3102,7 +3559,13 @@ ISpGrammarResourceLoader
         // to initially call SetSapiGrammarProperties and an app setting a property on the Grammar at the same time.
         // Thus these copied values are taken under a lock and used to update sapi.
         // This is to avoid having a lock which spans both the Grammar and Recognizer which would be awkward.
-        internal InternalGrammarData(ulong grammarId, SapiGrammar sapiGrammar, bool enabled, float weight, int priority)
+        internal InternalGrammarData(
+            ulong grammarId,
+            SapiGrammar sapiGrammar,
+            bool enabled,
+            float weight,
+            int priority
+        )
         {
             _grammarId = grammarId;
             _sapiGrammar = sapiGrammar;
@@ -3175,45 +3638,88 @@ ISpGrammarResourceLoader
 
     #region Interface
 
-    [ComImport, Guid("2D3D3845-39AF-4850-BBF9-40B49780011D"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [
+        ComImport,
+        Guid("2D3D3845-39AF-4850-BBF9-40B49780011D"),
+        InterfaceType(ComInterfaceType.InterfaceIsIUnknown)
+    ]
     internal interface ISpObjectTokenCategory : ISpDataKey
     {
         // ISpDataKey Methods
         [PreserveSig]
-        new int SetData([MarshalAs(UnmanagedType.LPWStr)] string valueName, uint cbData, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] byte[] data);
+        new int SetData(
+            [MarshalAs(UnmanagedType.LPWStr)] string valueName,
+            uint cbData,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] byte[] data
+        );
+
         [PreserveSig]
-        new int GetData([MarshalAs(UnmanagedType.LPWStr)] string valueName, ref uint pcbData, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1), Out] byte[] data);
+        new int GetData(
+            [MarshalAs(UnmanagedType.LPWStr)] string valueName,
+            ref uint pcbData,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1), Out] byte[] data
+        );
+
         [PreserveSig]
-        new int SetStringValue([MarshalAs(UnmanagedType.LPWStr)] string valueName, [MarshalAs(UnmanagedType.LPWStr)] string value);
+        new int SetStringValue(
+            [MarshalAs(UnmanagedType.LPWStr)] string valueName,
+            [MarshalAs(UnmanagedType.LPWStr)] string value
+        );
+
         [PreserveSig]
-        new void GetStringValue([MarshalAs(UnmanagedType.LPWStr)] string pszValueName, [MarshalAs(UnmanagedType.LPWStr)] out string ppszValue);
+        new void GetStringValue(
+            [MarshalAs(UnmanagedType.LPWStr)] string pszValueName,
+            [MarshalAs(UnmanagedType.LPWStr)] out string ppszValue
+        );
+
         [PreserveSig]
         new int SetDWORD([MarshalAs(UnmanagedType.LPWStr)] string valueName, uint dwValue);
+
         [PreserveSig]
         new int GetDWORD([MarshalAs(UnmanagedType.LPWStr)] string pszValueName, ref uint pdwValue);
+
         [PreserveSig]
-        new int OpenKey([MarshalAs(UnmanagedType.LPWStr)] string pszSubKeyName, out ISpDataKey ppSubKey);
+        new int OpenKey(
+            [MarshalAs(UnmanagedType.LPWStr)] string pszSubKeyName,
+            out ISpDataKey ppSubKey
+        );
+
         [PreserveSig]
         new int CreateKey([MarshalAs(UnmanagedType.LPWStr)] string subKey, out ISpDataKey ppSubKey);
+
         [PreserveSig]
         new int DeleteKey([MarshalAs(UnmanagedType.LPWStr)] string subKey);
+
         [PreserveSig]
         new int DeleteValue([MarshalAs(UnmanagedType.LPWStr)] string valueName);
+
         [PreserveSig]
         new int EnumKeys(uint index, [MarshalAs(UnmanagedType.LPWStr)] out string ppszSubKeyName);
+
         [PreserveSig]
         new int EnumValues(uint Index, [MarshalAs(UnmanagedType.LPWStr)] out string ppszValueName);
 
         // ISpObjectTokenCategory Methods
-        void SetId([MarshalAs(UnmanagedType.LPWStr)] string pszCategoryId, [MarshalAs(UnmanagedType.Bool)] bool fCreateIfNotExist);
+        void SetId(
+            [MarshalAs(UnmanagedType.LPWStr)] string pszCategoryId,
+            [MarshalAs(UnmanagedType.Bool)] bool fCreateIfNotExist
+        );
         void GetId([MarshalAs(UnmanagedType.LPWStr)] out string ppszCoMemCategoryId);
         void Slot14(); // void GetDataKey(System.Speech.Internal.SPDATAKEYLOCATION spdkl, out ISpDataKey ppDataKey);
-        void EnumTokens([MarshalAs(UnmanagedType.LPWStr)] string pzsReqAttribs, [MarshalAs(UnmanagedType.LPWStr)] string pszOptAttribs, out IEnumSpObjectTokens ppEnum);
+        void EnumTokens(
+            [MarshalAs(UnmanagedType.LPWStr)] string pzsReqAttribs,
+            [MarshalAs(UnmanagedType.LPWStr)] string pszOptAttribs,
+            out IEnumSpObjectTokens ppEnum
+        );
         void Slot16(); // void SetDefaultTokenId([MarshalAs(UnmanagedType.LPWStr)] string pszTokenId);
         void GetDefaultTokenId([MarshalAs(UnmanagedType.LPWStr)] out string ppszCoMemTokenId);
     }
 
-    [ComImport, Guid("06B64F9E-7FDA-11D2-B4F2-00C04F797396"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [
+        ComImport,
+        Guid("06B64F9E-7FDA-11D2-B4F2-00C04F797396"),
+        InterfaceType(ComInterfaceType.InterfaceIsIUnknown)
+    ]
     internal interface IEnumSpObjectTokens
     {
         void Slot1(); // void Next(UInt32 celt, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0), Out] ISpObjectToken[] pelt, out UInt32 pceltFetched);

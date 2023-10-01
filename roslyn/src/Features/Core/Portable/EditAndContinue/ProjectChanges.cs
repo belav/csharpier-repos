@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             ImmutableArray<SequencePointUpdates> lineChanges,
             ImmutableHashSet<ISymbol> addedSymbols,
             ImmutableArray<DocumentActiveStatementChanges> activeStatementChanges,
-            EditAndContinueCapabilities requiredCapabilities)
+            EditAndContinueCapabilities requiredCapabilities
+        )
         {
             Debug.Assert(!semanticEdits.IsDefault);
             Debug.Assert(!lineChanges.IsDefault);

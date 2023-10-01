@@ -5,25 +5,23 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
 {
-    protected override string StoreName
-        => "JsonQueryAdHocTest";
+    protected override string StoreName => "JsonQueryAdHocTest";
 
     #region 29219
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual async Task Optional_json_properties_materialized_as_null_when_the_element_in_json_is_not_present(bool async)
+    public virtual async Task Optional_json_properties_materialized_as_null_when_the_element_in_json_is_not_present(
+        bool async
+    )
     {
-        var contextFactory = await InitializeAsync<MyContext29219>(
-            seed: Seed29219);
+        var contextFactory = await InitializeAsync<MyContext29219>(seed: Seed29219);
 
         using (var context = contextFactory.CreateContext())
         {
             var query = context.Entities.Where(x => x.Id == 3);
 
-            var result = async
-                ? await query.SingleAsync()
-                : query.Single();
+            var result = async ? await query.SingleAsync() : query.Single();
 
             Assert.Equal(3, result.Id);
             Assert.Equal(null, result.Reference.NullableScalar);
@@ -33,18 +31,17 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual async Task Can_project_nullable_json_property_when_the_element_in_json_is_not_present(bool async)
+    public virtual async Task Can_project_nullable_json_property_when_the_element_in_json_is_not_present(
+        bool async
+    )
     {
-        var contextFactory = await InitializeAsync<MyContext29219>(
-            seed: Seed29219);
+        var contextFactory = await InitializeAsync<MyContext29219>(seed: Seed29219);
 
         using (var context = contextFactory.CreateContext())
         {
             var query = context.Entities.OrderBy(x => x.Id).Select(x => x.Reference.NullableScalar);
 
-            var result = async
-                ? await query.ToListAsync()
-                : query.ToList();
+            var result = async ? await query.ToListAsync() : query.ToList();
 
             Assert.Equal(3, result.Count);
             Assert.Equal(11, result[0]);
@@ -58,9 +55,7 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
     protected class MyContext29219 : DbContext
     {
         public MyContext29219(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         public DbSet<MyEntity29219> Entities { get; set; }
 
@@ -94,27 +89,26 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
     protected class MyContext30028 : DbContext
     {
         public MyContext30028(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         public DbSet<MyEntity30028> Entities { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<MyEntity30028>(
-                b =>
-                {
-                    b.Property(x => x.Id).ValueGeneratedNever();
-                    b.OwnsOne(
-                        x => x.Json, nb =>
-                        {
-                            nb.ToJson();
-                            nb.OwnsMany(x => x.Collection, nnb => nnb.OwnsOne(x => x.Nested));
-                            nb.OwnsOne(x => x.OptionalReference, nnb => nnb.OwnsOne(x => x.Nested));
-                            nb.OwnsOne(x => x.RequiredReference, nnb => nnb.OwnsOne(x => x.Nested));
-                            nb.Navigation(x => x.RequiredReference).IsRequired();
-                        });
-                });
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<MyEntity30028>(b =>
+            {
+                b.Property(x => x.Id).ValueGeneratedNever();
+                b.OwnsOne(
+                    x => x.Json,
+                    nb =>
+                    {
+                        nb.ToJson();
+                        nb.OwnsMany(x => x.Collection, nnb => nnb.OwnsOne(x => x.Nested));
+                        nb.OwnsOne(x => x.OptionalReference, nnb => nnb.OwnsOne(x => x.Nested));
+                        nb.OwnsOne(x => x.RequiredReference, nnb => nnb.OwnsOne(x => x.Nested));
+                        nb.Navigation(x => x.RequiredReference).IsRequired();
+                    }
+                );
+            });
     }
 
     public class MyEntity30028
@@ -176,17 +170,23 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
         var contextFactory = await InitializeAsync<MyContext30028>(seed: Seed30028);
         using (var context = contextFactory.CreateContext())
         {
-            var result = context.Entities.OrderBy(x => x.Id).Select(
-                x => new
-                {
-                    x,
-                    x.Json,
-                    x.Json.OptionalReference,
-                    x.Json.RequiredReference,
-                    NestedOptional = x.Json.OptionalReference.Nested,
-                    NestedRequired = x.Json.RequiredReference.Nested,
-                    x.Json.Collection,
-                }).AsNoTracking().ToList();
+            var result = context.Entities
+                .OrderBy(x => x.Id)
+                .Select(
+                    x =>
+                        new
+                        {
+                            x,
+                            x.Json,
+                            x.Json.OptionalReference,
+                            x.Json.RequiredReference,
+                            NestedOptional = x.Json.OptionalReference.Nested,
+                            NestedRequired = x.Json.RequiredReference.Nested,
+                            x.Json.Collection,
+                        }
+                )
+                .AsNoTracking()
+                .ToList();
 
             Assert.Equal(4, result.Count);
             Assert.NotNull(result[0].OptionalReference);
@@ -224,15 +224,16 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
     public virtual async Task Project_json_array_of_primitives_on_reference(bool async)
     {
         var contextFactory = await InitializeAsync<MyContextArrayOfPrimitives>(
-            seed: SeedArrayOfPrimitives);
+            seed: SeedArrayOfPrimitives
+        );
 
         using (var context = contextFactory.CreateContext())
         {
-            var query = context.Entities.OrderBy(x => x.Id).Select(x => new { x.Reference.IntArray, x.Reference.ListOfString });
+            var query = context.Entities
+                .OrderBy(x => x.Id)
+                .Select(x => new { x.Reference.IntArray, x.Reference.ListOfString });
 
-            var result = async
-                ? await query.ToListAsync()
-                : query.ToList();
+            var result = async ? await query.ToListAsync() : query.ToList();
 
             Assert.Equal(2, result.Count);
             Assert.Equal(3, result[0].IntArray.Length);
@@ -247,15 +248,16 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
     public virtual async Task Project_json_array_of_primitives_on_collection(bool async)
     {
         var contextFactory = await InitializeAsync<MyContextArrayOfPrimitives>(
-            seed: SeedArrayOfPrimitives);
+            seed: SeedArrayOfPrimitives
+        );
 
         using (var context = contextFactory.CreateContext())
         {
-            var query = context.Entities.OrderBy(x => x.Id).Select(x => new { x.Collection[0].IntArray, x.Collection[1].ListOfString });
+            var query = context.Entities
+                .OrderBy(x => x.Id)
+                .Select(x => new { x.Collection[0].IntArray, x.Collection[1].ListOfString });
 
-            var result = async
-                ? await query.ToListAsync()
-                : query.ToList();
+            var result = async ? await query.ToListAsync() : query.ToList();
 
             Assert.Equal(2, result.Count);
             Assert.Equal(3, result[0].IntArray.Length);
@@ -270,16 +272,23 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
     public virtual async Task Project_element_of_json_array_of_primitives(bool async)
     {
         var contextFactory = await InitializeAsync<MyContextArrayOfPrimitives>(
-            seed: SeedArrayOfPrimitives);
+            seed: SeedArrayOfPrimitives
+        );
 
         using (var context = contextFactory.CreateContext())
         {
-            var query = context.Entities.OrderBy(x => x.Id).Select(
-                x => new { ArrayElement = x.Reference.IntArray[0], ListElement = x.Reference.ListOfString[1] });
+            var query = context.Entities
+                .OrderBy(x => x.Id)
+                .Select(
+                    x =>
+                        new
+                        {
+                            ArrayElement = x.Reference.IntArray[0],
+                            ListElement = x.Reference.ListOfString[1]
+                        }
+                );
 
-            var result = async
-                ? await query.ToListAsync()
-                : query.ToList();
+            var result = async ? await query.ToListAsync() : query.ToList();
         }
     }
 
@@ -288,15 +297,14 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
     public virtual async Task Predicate_based_on_element_of_json_array_of_primitives1(bool async)
     {
         var contextFactory = await InitializeAsync<MyContextArrayOfPrimitives>(
-            seed: SeedArrayOfPrimitives);
+            seed: SeedArrayOfPrimitives
+        );
 
         using (var context = contextFactory.CreateContext())
         {
             var query = context.Entities.Where(x => x.Reference.IntArray[0] == 1);
 
-            var result = async
-                ? await query.ToListAsync()
-                : query.ToList();
+            var result = async ? await query.ToListAsync() : query.ToList();
 
             Assert.Equal(1, result.Count);
             Assert.Equal(1, result[0].Reference.IntArray[0]);
@@ -308,15 +316,14 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
     public virtual async Task Predicate_based_on_element_of_json_array_of_primitives2(bool async)
     {
         var contextFactory = await InitializeAsync<MyContextArrayOfPrimitives>(
-            seed: SeedArrayOfPrimitives);
+            seed: SeedArrayOfPrimitives
+        );
 
         using (var context = contextFactory.CreateContext())
         {
             var query = context.Entities.Where(x => x.Reference.ListOfString[1] == "Bar");
 
-            var result = async
-                ? await query.ToListAsync()
-                : query.ToList();
+            var result = async ? await query.ToListAsync() : query.ToList();
 
             Assert.Equal(1, result.Count);
             Assert.Equal("Bar", result[0].Reference.ListOfString[1]);
@@ -328,18 +335,20 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
     public virtual async Task Predicate_based_on_element_of_json_array_of_primitives3(bool async)
     {
         var contextFactory = await InitializeAsync<MyContextArrayOfPrimitives>(
-            seed: SeedArrayOfPrimitives);
+            seed: SeedArrayOfPrimitives
+        );
 
         using (var context = contextFactory.CreateContext())
         {
-            var query = context.Entities.Where(
-                    x => x.Reference.IntArray.AsQueryable().ElementAt(0) == 1
-                        || x.Reference.ListOfString.AsQueryable().ElementAt(1) == "Bar")
+            var query = context.Entities
+                .Where(
+                    x =>
+                        x.Reference.IntArray.AsQueryable().ElementAt(0) == 1
+                        || x.Reference.ListOfString.AsQueryable().ElementAt(1) == "Bar"
+                )
                 .OrderBy(e => e.Id);
 
-            var result = async
-                ? await query.ToListAsync()
-                : query.ToList();
+            var result = async ? await query.ToListAsync() : query.ToList();
 
             Assert.Equal(1, result.Count);
             Assert.Equal(1, result[0].Reference.IntArray[0]);
@@ -352,43 +361,66 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
     protected class MyContextArrayOfPrimitives : DbContext
     {
         public MyContextArrayOfPrimitives(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         public DbSet<MyEntityArrayOfPrimitives> Entities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<MyEntityArrayOfPrimitives>().Property(x => x.Id).ValueGeneratedNever();
-            modelBuilder.Entity<MyEntityArrayOfPrimitives>().OwnsOne(
-                x => x.Reference, b =>
-                {
-                    b.ToJson();
-                    b.Property(x => x.IntArray).HasConversion(
-                        x => string.Join(" ", x),
-                        x => x.Split(" ", StringSplitOptions.None).Select(v => int.Parse(v)).ToArray(),
-                        new ValueComparer<int[]>(true));
+            modelBuilder
+                .Entity<MyEntityArrayOfPrimitives>()
+                .Property(x => x.Id)
+                .ValueGeneratedNever();
+            modelBuilder
+                .Entity<MyEntityArrayOfPrimitives>()
+                .OwnsOne(
+                    x => x.Reference,
+                    b =>
+                    {
+                        b.ToJson();
+                        b.Property(x => x.IntArray)
+                            .HasConversion(
+                                x => string.Join(" ", x),
+                                x =>
+                                    x.Split(" ", StringSplitOptions.None)
+                                        .Select(v => int.Parse(v))
+                                        .ToArray(),
+                                new ValueComparer<int[]>(true)
+                            );
 
-                    b.Property(x => x.ListOfString).HasConversion(
-                        x => string.Join(" ", x),
-                        x => x.Split(" ", StringSplitOptions.None).ToList(),
-                        new ValueComparer<List<string>>(true));
-                });
+                        b.Property(x => x.ListOfString)
+                            .HasConversion(
+                                x => string.Join(" ", x),
+                                x => x.Split(" ", StringSplitOptions.None).ToList(),
+                                new ValueComparer<List<string>>(true)
+                            );
+                    }
+                );
 
-            modelBuilder.Entity<MyEntityArrayOfPrimitives>().OwnsMany(
-                x => x.Collection, b =>
-                {
-                    b.ToJson();
-                    b.Property(x => x.IntArray).HasConversion(
-                        x => string.Join(" ", x),
-                        x => x.Split(" ", StringSplitOptions.None).Select(v => int.Parse(v)).ToArray(),
-                        new ValueComparer<int[]>(true));
-                    b.Property(x => x.ListOfString).HasConversion(
-                        x => string.Join(" ", x),
-                        x => x.Split(" ", StringSplitOptions.None).ToList(),
-                        new ValueComparer<List<string>>(true));
-                });
+            modelBuilder
+                .Entity<MyEntityArrayOfPrimitives>()
+                .OwnsMany(
+                    x => x.Collection,
+                    b =>
+                    {
+                        b.ToJson();
+                        b.Property(x => x.IntArray)
+                            .HasConversion(
+                                x => string.Join(" ", x),
+                                x =>
+                                    x.Split(" ", StringSplitOptions.None)
+                                        .Select(v => int.Parse(v))
+                                        .ToArray(),
+                                new ValueComparer<int[]>(true)
+                            );
+                        b.Property(x => x.ListOfString)
+                            .HasConversion(
+                                x => string.Join(" ", x),
+                                x => x.Split(" ", StringSplitOptions.None).ToList(),
+                                new ValueComparer<List<string>>(true)
+                            );
+                    }
+                );
         }
     }
 
@@ -413,16 +445,13 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Junk_in_json_basic_tracking(bool async)
     {
-        var contextFactory = await InitializeAsync<MyContextJunkInJson>(
-            seed: SeedJunkInJson);
+        var contextFactory = await InitializeAsync<MyContextJunkInJson>(seed: SeedJunkInJson);
 
         using (var context = contextFactory.CreateContext())
         {
             var query = context.Entities;
 
-            var result = async
-                ? await query.ToListAsync()
-                : query.ToList();
+            var result = async ? await query.ToListAsync() : query.ToList();
 
             Assert.Equal(1, result.Count);
             Assert.Equal(2, result[0].Collection.Count);
@@ -438,16 +467,13 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Junk_in_json_basic_no_tracking(bool async)
     {
-        var contextFactory = await InitializeAsync<MyContextJunkInJson>(
-            seed: SeedJunkInJson);
+        var contextFactory = await InitializeAsync<MyContextJunkInJson>(seed: SeedJunkInJson);
 
         using (var context = contextFactory.CreateContext())
         {
             var query = context.Entities.AsNoTracking();
 
-            var result = async
-                ? await query.ToListAsync()
-                : query.ToList();
+            var result = async ? await query.ToListAsync() : query.ToList();
 
             Assert.Equal(1, result.Count);
             Assert.Equal(2, result[0].Collection.Count);
@@ -464,43 +490,57 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
     protected class MyContextJunkInJson : DbContext
     {
         public MyContextJunkInJson(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         public DbSet<MyEntityJunkInJson> Entities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<MyEntityJunkInJson>().Property(x => x.Id).ValueGeneratedNever();
-            modelBuilder.Entity<MyEntityJunkInJson>().OwnsOne(
-                x => x.Reference, b =>
-                {
-                    b.ToJson();
-                    b.OwnsOne(x => x.NestedReference);
-                    b.OwnsMany(x => x.NestedCollection);
-                });
-            modelBuilder.Entity<MyEntityJunkInJson>().OwnsOne(
-                x => x.ReferenceWithCtor, b =>
-                {
-                    b.ToJson();
-                    b.OwnsOne(x => x.NestedReference);
-                    b.OwnsMany(x => x.NestedCollection);
-                });
-            modelBuilder.Entity<MyEntityJunkInJson>().OwnsMany(
-                x => x.Collection, b =>
-                {
-                    b.ToJson();
-                    b.OwnsOne(x => x.NestedReference);
-                    b.OwnsMany(x => x.NestedCollection);
-                });
-            modelBuilder.Entity<MyEntityJunkInJson>().OwnsMany(
-                x => x.CollectionWithCtor, b =>
-                {
-                    b.ToJson();
-                    b.OwnsOne(x => x.NestedReference);
-                    b.OwnsMany(x => x.NestedCollection);
-                });
+            modelBuilder
+                .Entity<MyEntityJunkInJson>()
+                .OwnsOne(
+                    x => x.Reference,
+                    b =>
+                    {
+                        b.ToJson();
+                        b.OwnsOne(x => x.NestedReference);
+                        b.OwnsMany(x => x.NestedCollection);
+                    }
+                );
+            modelBuilder
+                .Entity<MyEntityJunkInJson>()
+                .OwnsOne(
+                    x => x.ReferenceWithCtor,
+                    b =>
+                    {
+                        b.ToJson();
+                        b.OwnsOne(x => x.NestedReference);
+                        b.OwnsMany(x => x.NestedCollection);
+                    }
+                );
+            modelBuilder
+                .Entity<MyEntityJunkInJson>()
+                .OwnsMany(
+                    x => x.Collection,
+                    b =>
+                    {
+                        b.ToJson();
+                        b.OwnsOne(x => x.NestedReference);
+                        b.OwnsMany(x => x.NestedCollection);
+                    }
+                );
+            modelBuilder
+                .Entity<MyEntityJunkInJson>()
+                .OwnsMany(
+                    x => x.CollectionWithCtor,
+                    b =>
+                    {
+                        b.ToJson();
+                        b.OwnsOne(x => x.NestedReference);
+                        b.OwnsMany(x => x.NestedCollection);
+                    }
+                );
         }
     }
 
@@ -561,15 +601,14 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
     public virtual async Task Shadow_properties_basic_tracking(bool async)
     {
         var contextFactory = await InitializeAsync<MyContextShadowProperties>(
-            seed: SeedShadowProperties);
+            seed: SeedShadowProperties
+        );
 
         using (var context = contextFactory.CreateContext())
         {
             var query = context.Entities;
 
-            var result = async
-                ? await query.ToListAsync()
-                : query.ToList();
+            var result = async ? await query.ToListAsync() : query.ToList();
 
             Assert.Equal(1, result.Count);
             Assert.Equal(2, result[0].Collection.Count);
@@ -577,19 +616,31 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
             Assert.NotNull(result[0].Reference);
             Assert.NotNull(result[0].ReferenceWithCtor);
 
-            var referenceEntry = context.ChangeTracker.Entries().Single(x => x.Entity == result[0].Reference);
+            var referenceEntry = context.ChangeTracker
+                .Entries()
+                .Single(x => x.Entity == result[0].Reference);
             Assert.Equal("Foo", referenceEntry.Property("ShadowString").CurrentValue);
 
-            var referenceCtorEntry = context.ChangeTracker.Entries().Single(x => x.Entity == result[0].ReferenceWithCtor);
+            var referenceCtorEntry = context.ChangeTracker
+                .Entries()
+                .Single(x => x.Entity == result[0].ReferenceWithCtor);
             Assert.Equal(143, referenceCtorEntry.Property("Shadow_Int").CurrentValue);
 
-            var collectionEntry1 = context.ChangeTracker.Entries().Single(x => x.Entity == result[0].Collection[0]);
-            var collectionEntry2 = context.ChangeTracker.Entries().Single(x => x.Entity == result[0].Collection[1]);
+            var collectionEntry1 = context.ChangeTracker
+                .Entries()
+                .Single(x => x.Entity == result[0].Collection[0]);
+            var collectionEntry2 = context.ChangeTracker
+                .Entries()
+                .Single(x => x.Entity == result[0].Collection[1]);
             Assert.Equal(5.5, collectionEntry1.Property("ShadowDouble").CurrentValue);
             Assert.Equal(20.5, collectionEntry2.Property("ShadowDouble").CurrentValue);
 
-            var collectionCtorEntry1 = context.ChangeTracker.Entries().Single(x => x.Entity == result[0].CollectionWithCtor[0]);
-            var collectionCtorEntry2 = context.ChangeTracker.Entries().Single(x => x.Entity == result[0].CollectionWithCtor[1]);
+            var collectionCtorEntry1 = context.ChangeTracker
+                .Entries()
+                .Single(x => x.Entity == result[0].CollectionWithCtor[0]);
+            var collectionCtorEntry2 = context.ChangeTracker
+                .Entries()
+                .Single(x => x.Entity == result[0].CollectionWithCtor[1]);
             Assert.Equal((byte)6, collectionCtorEntry1.Property("ShadowNullableByte").CurrentValue);
             Assert.Null(collectionCtorEntry2.Property("ShadowNullableByte").CurrentValue);
         }
@@ -600,15 +651,14 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
     public virtual async Task Shadow_properties_basic_no_tracking(bool async)
     {
         var contextFactory = await InitializeAsync<MyContextShadowProperties>(
-            seed: SeedShadowProperties);
+            seed: SeedShadowProperties
+        );
 
         using (var context = contextFactory.CreateContext())
         {
             var query = context.Entities.AsNoTracking();
 
-            var result = async
-                ? await query.ToListAsync()
-                : query.ToList();
+            var result = async ? await query.ToListAsync() : query.ToList();
 
             Assert.Equal(1, result.Count);
             Assert.Equal(2, result[0].Collection.Count);
@@ -623,20 +673,21 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
     public virtual async Task Project_shadow_properties_from_json_entity(bool async)
     {
         var contextFactory = await InitializeAsync<MyContextShadowProperties>(
-            seed: SeedShadowProperties);
+            seed: SeedShadowProperties
+        );
 
         using (var context = contextFactory.CreateContext())
         {
             var query = context.Entities.Select(
-                x => new
-                {
-                    ShadowString = EF.Property<string>(x.Reference, "ShadowString"),
-                    ShadowInt = EF.Property<int>(x.ReferenceWithCtor, "Shadow_Int"),
-                });
+                x =>
+                    new
+                    {
+                        ShadowString = EF.Property<string>(x.Reference, "ShadowString"),
+                        ShadowInt = EF.Property<int>(x.ReferenceWithCtor, "Shadow_Int"),
+                    }
+            );
 
-            var result = async
-                ? await query.ToListAsync()
-                : query.ToList();
+            var result = async ? await query.ToListAsync() : query.ToList();
 
             Assert.Equal(1, result.Count);
             Assert.Equal("Foo", result[0].ShadowString);
@@ -649,39 +700,56 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
     protected class MyContextShadowProperties : DbContext
     {
         public MyContextShadowProperties(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         public DbSet<MyEntityShadowProperties> Entities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<MyEntityShadowProperties>().Property(x => x.Id).ValueGeneratedNever();
-            modelBuilder.Entity<MyEntityShadowProperties>().OwnsOne(
-                x => x.Reference, b =>
-                {
-                    b.ToJson();
-                    b.Property<string>("ShadowString");
-                });
-            modelBuilder.Entity<MyEntityShadowProperties>().OwnsOne(
-                x => x.ReferenceWithCtor, b =>
-                {
-                    b.ToJson();
-                    b.Property<int>("Shadow_Int").HasJsonPropertyName("ShadowInt");
-                });
-            modelBuilder.Entity<MyEntityShadowProperties>().OwnsMany(
-                x => x.Collection, b =>
-                {
-                    b.ToJson();
-                    b.Property<double>("ShadowDouble");
-                });
-            modelBuilder.Entity<MyEntityShadowProperties>().OwnsMany(
-                x => x.CollectionWithCtor, b =>
-                {
-                    b.ToJson();
-                    b.Property<byte?>("ShadowNullableByte");
-                });
+            modelBuilder
+                .Entity<MyEntityShadowProperties>()
+                .Property(x => x.Id)
+                .ValueGeneratedNever();
+            modelBuilder
+                .Entity<MyEntityShadowProperties>()
+                .OwnsOne(
+                    x => x.Reference,
+                    b =>
+                    {
+                        b.ToJson();
+                        b.Property<string>("ShadowString");
+                    }
+                );
+            modelBuilder
+                .Entity<MyEntityShadowProperties>()
+                .OwnsOne(
+                    x => x.ReferenceWithCtor,
+                    b =>
+                    {
+                        b.ToJson();
+                        b.Property<int>("Shadow_Int").HasJsonPropertyName("ShadowInt");
+                    }
+                );
+            modelBuilder
+                .Entity<MyEntityShadowProperties>()
+                .OwnsMany(
+                    x => x.Collection,
+                    b =>
+                    {
+                        b.ToJson();
+                        b.Property<double>("ShadowDouble");
+                    }
+                );
+            modelBuilder
+                .Entity<MyEntityShadowProperties>()
+                .OwnsMany(
+                    x => x.CollectionWithCtor,
+                    b =>
+                    {
+                        b.ToJson();
+                        b.Property<byte?>("ShadowNullableByte");
+                    }
+                );
         }
     }
 
@@ -722,25 +790,24 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
         var contextFactory = await InitializeAsync<MyContextLazyLoadingProxies>(
             seed: SeedLazyLoadingProxies,
             onConfiguring: OnConfiguringLazyLoadingProxies,
-            addServices: AddServicesLazyLoadingProxies);
+            addServices: AddServicesLazyLoadingProxies
+        );
 
         using (var context = contextFactory.CreateContext())
         {
             var query = context.Entities;
 
-            var result = async
-                ? await query.ToListAsync()
-                : query.ToList();
+            var result = async ? await query.ToListAsync() : query.ToList();
 
             Assert.Equal(2, result.Count);
         }
     }
 
-    protected void OnConfiguringLazyLoadingProxies(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseLazyLoadingProxies();
+    protected void OnConfiguringLazyLoadingProxies(DbContextOptionsBuilder optionsBuilder) =>
+        optionsBuilder.UseLazyLoadingProxies();
 
-    protected void AddServicesLazyLoadingProxies(IServiceCollection addServices)
-        => addServices.AddEntityFrameworkProxies();
+    protected void AddServicesLazyLoadingProxies(IServiceCollection addServices) =>
+        addServices.AddEntityFrameworkProxies();
 
     private void SeedLazyLoadingProxies(MyContextLazyLoadingProxies ctx)
     {
@@ -758,12 +825,7 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
             Id = 1,
             Name = "e1",
             Reference = r1,
-            Collection = new List<MyJsonEntityLazyLoadingProxies>
-            {
-                c11,
-                c12,
-                c13
-            }
+            Collection = new List<MyJsonEntityLazyLoadingProxies> { c11, c12, c13 }
         };
 
         var e2 = new MyEntityLazyLoadingProxies
@@ -781,17 +843,22 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
     protected class MyContextLazyLoadingProxies : DbContext
     {
         public MyContextLazyLoadingProxies(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         public DbSet<MyEntityLazyLoadingProxies> Entities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<MyEntityLazyLoadingProxies>().Property(x => x.Id).ValueGeneratedNever();
-            modelBuilder.Entity<MyEntityLazyLoadingProxies>().OwnsOne(x => x.Reference, b => b.ToJson());
-            modelBuilder.Entity<MyEntityLazyLoadingProxies>().OwnsMany(x => x.Collection, b => b.ToJson());
+            modelBuilder
+                .Entity<MyEntityLazyLoadingProxies>()
+                .Property(x => x.Id)
+                .ValueGeneratedNever();
+            modelBuilder
+                .Entity<MyEntityLazyLoadingProxies>()
+                .OwnsOne(x => x.Reference, b => b.ToJson());
+            modelBuilder
+                .Entity<MyEntityLazyLoadingProxies>()
+                .OwnsMany(x => x.Collection, b => b.ToJson());
         }
     }
 
@@ -831,15 +898,14 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
     public virtual async Task Not_ICollection_basic_projection(bool async)
     {
         var contextFactory = await InitializeAsync<MyContextNotICollection>(
-            seed: SeedNotICollection);
+            seed: SeedNotICollection
+        );
 
         using (var context = contextFactory.CreateContext())
         {
             var query = context.Entities;
 
-            var result = async
-                ? await query.ToListAsync()
-                : query.ToList();
+            var result = async ? await query.ToListAsync() : query.ToList();
 
             Assert.Equal(2, result.Count);
         }
@@ -870,25 +936,27 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
     public class MyContextNotICollection : DbContext
     {
         public MyContextNotICollection(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         public DbSet<MyEntityNotICollection> Entities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<MyEntityNotICollection>().Property(x => x.Id).ValueGeneratedNever();
-            modelBuilder.Entity<MyEntityNotICollection>().OwnsOne(cr => cr.Json, nb =>
-            {
-                nb.ToJson();
-                nb.OwnsMany(x => x.Collection);
-            });
+            modelBuilder
+                .Entity<MyEntityNotICollection>()
+                .OwnsOne(
+                    cr => cr.Json,
+                    nb =>
+                    {
+                        nb.ToJson();
+                        nb.OwnsMany(x => x.Collection);
+                    }
+                );
         }
     }
 
     #endregion
 
-    protected TestSqlLoggerFactory TestSqlLoggerFactory
-        => (TestSqlLoggerFactory)ListLoggerFactory;
+    protected TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 }

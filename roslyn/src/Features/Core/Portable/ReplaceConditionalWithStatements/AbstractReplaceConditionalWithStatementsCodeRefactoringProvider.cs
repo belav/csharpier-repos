@@ -27,8 +27,8 @@ internal abstract class AbstractReplaceConditionalWithStatementsCodeRefactoringP
     TArgumentListSyntax,
     TVariableSyntax,
     TVariableDeclaratorSyntax,
-    TEqualsValueClauseSyntax>
-    : CodeRefactoringProvider
+    TEqualsValueClauseSyntax
+> : CodeRefactoringProvider
     where TExpressionSyntax : SyntaxNode
     where TConditionalExpressionSyntax : TExpressionSyntax
     where TStatementSyntax : SyntaxNode
@@ -39,24 +39,38 @@ internal abstract class AbstractReplaceConditionalWithStatementsCodeRefactoringP
     where TVariableDeclaratorSyntax : SyntaxNode
     where TEqualsValueClauseSyntax : SyntaxNode
 {
-    protected abstract bool HasSingleVariable(TLocalDeclarationStatementSyntax localDeclarationStatement, [NotNullWhen(true)] out TVariableSyntax? variable);
-    protected abstract bool CanRewriteLocalDeclarationStatement(TLocalDeclarationStatementSyntax localDeclarationStatement);
+    protected abstract bool HasSingleVariable(
+        TLocalDeclarationStatementSyntax localDeclarationStatement,
+        [NotNullWhen(true)] out TVariableSyntax? variable
+    );
+    protected abstract bool CanRewriteLocalDeclarationStatement(
+        TLocalDeclarationStatementSyntax localDeclarationStatement
+    );
 
-    protected abstract TLocalDeclarationStatementSyntax GetUpdatedLocalDeclarationStatement(SyntaxGenerator generator, TLocalDeclarationStatementSyntax localDeclarationStatement, ILocalSymbol symbol);
+    protected abstract TLocalDeclarationStatementSyntax GetUpdatedLocalDeclarationStatement(
+        SyntaxGenerator generator,
+        TLocalDeclarationStatementSyntax localDeclarationStatement,
+        ILocalSymbol symbol
+    );
 
-    private static bool IsSupportedSimpleStatement(ISyntaxFacts syntaxFacts, [NotNullWhen(true)] TStatementSyntax? statement)
-        => syntaxFacts.IsAnyAssignmentStatement(statement) ||
-           syntaxFacts.IsExpressionStatement(statement) ||
-           syntaxFacts.IsReturnStatement(statement) ||
-           syntaxFacts.IsThrowStatement(statement) ||
-           syntaxFacts.IsYieldReturnStatement(statement);
+    private static bool IsSupportedSimpleStatement(
+        ISyntaxFacts syntaxFacts,
+        [NotNullWhen(true)] TStatementSyntax? statement
+    ) =>
+        syntaxFacts.IsAnyAssignmentStatement(statement)
+        || syntaxFacts.IsExpressionStatement(statement)
+        || syntaxFacts.IsReturnStatement(statement)
+        || syntaxFacts.IsThrowStatement(statement)
+        || syntaxFacts.IsYieldReturnStatement(statement);
 
     public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
     {
         var (document, _, cancellationToken) = context;
 
         // First, see if we're inside a conditional.  If so, attempt to use that to offer fixes on.
-        var conditionalExpression = await context.TryGetRelevantNodeAsync<TConditionalExpressionSyntax>().ConfigureAwait(false);
+        var conditionalExpression = await context
+            .TryGetRelevantNodeAsync<TConditionalExpressionSyntax>()
+            .ConfigureAwait(false);
         if (conditionalExpression is not null)
         {
             TryHandleConditionalExpression(context, conditionalExpression);
@@ -66,26 +80,41 @@ internal abstract class AbstractReplaceConditionalWithStatementsCodeRefactoringP
         // If not, see if we're on an supported statement.  If so, see if it has an applicable conditional within it
         // that we could support this on.
         var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-        var statement = await context.TryGetRelevantNodeAsync<TStatementSyntax>().ConfigureAwait(false);
+        var statement = await context
+            .TryGetRelevantNodeAsync<TStatementSyntax>()
+            .ConfigureAwait(false);
         if (IsSupportedSimpleStatement(syntaxFacts, statement))
         {
-            TryHandleConditionalExpression(context, TryFindConditional(statement, cancellationToken));
+            TryHandleConditionalExpression(
+                context,
+                TryFindConditional(statement, cancellationToken)
+            );
             return;
         }
 
         if (statement is TLocalDeclarationStatementSyntax localDeclarationStatement)
         {
-            var variables = syntaxFacts.GetVariablesOfLocalDeclarationStatement(localDeclarationStatement);
+            var variables = syntaxFacts.GetVariablesOfLocalDeclarationStatement(
+                localDeclarationStatement
+            );
             if (variables.Count == 1)
             {
                 TryHandleConditionalExpression(
-                    context, TryFindConditional(syntaxFacts.GetInitializerOfVariableDeclarator(variables[0]), cancellationToken));
+                    context,
+                    TryFindConditional(
+                        syntaxFacts.GetInitializerOfVariableDeclarator(variables[0]),
+                        cancellationToken
+                    )
+                );
                 return;
             }
         }
     }
 
-    private static TConditionalExpressionSyntax? TryFindConditional(SyntaxNode? top, CancellationToken cancellationToken)
+    private static TConditionalExpressionSyntax? TryFindConditional(
+        SyntaxNode? top,
+        CancellationToken cancellationToken
+    )
     {
         return Recurse(top);
 
@@ -122,7 +151,8 @@ internal abstract class AbstractReplaceConditionalWithStatementsCodeRefactoringP
 
     private void TryHandleConditionalExpression(
         CodeRefactoringContext context,
-        TConditionalExpressionSyntax? conditionalExpression)
+        TConditionalExpressionSyntax? conditionalExpression
+    )
     {
         if (conditionalExpression is null)
             return;
@@ -149,10 +179,19 @@ internal abstract class AbstractReplaceConditionalWithStatementsCodeRefactoringP
         var parentStatement = topExpression.Parent as TStatementSyntax;
         if (IsSupportedSimpleStatement(syntaxFacts, parentStatement))
         {
-            context.RegisterRefactoring(CodeAction.Create(
-                FeaturesResources.Replace_conditional_expression_with_statements,
-                c => ReplaceConditionalExpressionInSingleStatementAsync(document, conditionalExpression, parentStatement, c)),
-                conditionalExpression.Span);
+            context.RegisterRefactoring(
+                CodeAction.Create(
+                    FeaturesResources.Replace_conditional_expression_with_statements,
+                    c =>
+                        ReplaceConditionalExpressionInSingleStatementAsync(
+                            document,
+                            conditionalExpression,
+                            parentStatement,
+                            c
+                        )
+                ),
+                conditionalExpression.Span
+            );
             return;
         }
 
@@ -168,26 +207,45 @@ internal abstract class AbstractReplaceConditionalWithStatementsCodeRefactoringP
         //      else
         //          v = c;
 
-        if (topExpression.Parent is TEqualsValueClauseSyntax equalsValue &&
-            equalsValue.Parent is TVariableDeclaratorSyntax variableDeclarator)
+        if (
+            topExpression.Parent is TEqualsValueClauseSyntax equalsValue
+            && equalsValue.Parent is TVariableDeclaratorSyntax variableDeclarator
+        )
         {
-            var localDeclarationStatement = conditionalExpression.GetAncestor<TLocalDeclarationStatementSyntax>();
-            if (localDeclarationStatement != null &&
-                HasSingleVariable(localDeclarationStatement, out var variable) &&
-                syntaxFacts.IsDeclaratorOfLocalDeclarationStatement(variableDeclarator, localDeclarationStatement) &&
-                CanRewriteLocalDeclarationStatement(localDeclarationStatement))
+            var localDeclarationStatement =
+                conditionalExpression.GetAncestor<TLocalDeclarationStatementSyntax>();
+            if (
+                localDeclarationStatement != null
+                && HasSingleVariable(localDeclarationStatement, out var variable)
+                && syntaxFacts.IsDeclaratorOfLocalDeclarationStatement(
+                    variableDeclarator,
+                    localDeclarationStatement
+                )
+                && CanRewriteLocalDeclarationStatement(localDeclarationStatement)
+            )
             {
-                context.RegisterRefactoring(CodeAction.Create(
-                    FeaturesResources.Replace_conditional_expression_with_statements,
-                    c => ReplaceConditionalExpressionInLocalDeclarationStatementAsync(
-                        document, conditionalExpression, variable, localDeclarationStatement, c)),
-                    conditionalExpression.Span);
+                context.RegisterRefactoring(
+                    CodeAction.Create(
+                        FeaturesResources.Replace_conditional_expression_with_statements,
+                        c =>
+                            ReplaceConditionalExpressionInLocalDeclarationStatementAsync(
+                                document,
+                                conditionalExpression,
+                                variable,
+                                localDeclarationStatement,
+                                c
+                            )
+                    ),
+                    conditionalExpression.Span
+                );
                 return;
             }
         }
     }
 
-    private static TExpressionSyntax GetTopExpression(TConditionalExpressionSyntax conditionalExpression)
+    private static TExpressionSyntax GetTopExpression(
+        TConditionalExpressionSyntax conditionalExpression
+    )
     {
         TExpressionSyntax current = conditionalExpression;
 
@@ -199,7 +257,12 @@ internal abstract class AbstractReplaceConditionalWithStatementsCodeRefactoringP
                 continue;
             }
 
-            if (current.Parent is TArgumentSyntax { Parent: TArgumentListSyntax { Parent: TExpressionSyntax argumentParent } })
+            if (
+                current.Parent is TArgumentSyntax
+                {
+                    Parent: TArgumentListSyntax { Parent: TExpressionSyntax argumentParent }
+                }
+            )
             {
                 current = argumentParent;
                 continue;
@@ -213,21 +276,28 @@ internal abstract class AbstractReplaceConditionalWithStatementsCodeRefactoringP
         Document document,
         TConditionalExpressionSyntax conditionalExpression,
         TStatementSyntax statement,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
-        var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-        var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+        var semanticModel = await document
+            .GetRequiredSemanticModelAsync(cancellationToken)
+            .ConfigureAwait(false);
+        var root = await document
+            .GetRequiredSyntaxRootAsync(cancellationToken)
+            .ConfigureAwait(false);
 
         var generator = SyntaxGenerator.GetGenerator(document);
         var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
         var ifStatement = ConvertToIfStatement(
-            semanticModel,
-            generator,
-            container: statement,
-            conditionalExpression,
-            convertedSyntax => convertedSyntax,
-            cancellationToken).WithTriviaFrom(statement);
+                semanticModel,
+                generator,
+                container: statement,
+                conditionalExpression,
+                convertedSyntax => convertedSyntax,
+                cancellationToken
+            )
+            .WithTriviaFrom(statement);
 
         var newRoot = root.ReplaceNode(statement, ifStatement);
         return document.WithSyntaxRoot(newRoot);
@@ -238,45 +308,57 @@ internal abstract class AbstractReplaceConditionalWithStatementsCodeRefactoringP
         TConditionalExpressionSyntax conditionalExpression,
         TVariableSyntax variable,
         TLocalDeclarationStatementSyntax localDeclarationStatement,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
-        var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-        var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+        var semanticModel = await document
+            .GetRequiredSemanticModelAsync(cancellationToken)
+            .ConfigureAwait(false);
+        var root = await document
+            .GetRequiredSyntaxRootAsync(cancellationToken)
+            .ConfigureAwait(false);
 
         var generator = SyntaxGenerator.GetGenerator(document);
         var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
-        var declarator = syntaxFacts.GetVariablesOfLocalDeclarationStatement(localDeclarationStatement).Single();
+        var declarator = syntaxFacts
+            .GetVariablesOfLocalDeclarationStatement(localDeclarationStatement)
+            .Single();
         var initializer = syntaxFacts.GetInitializerOfVariableDeclarator(declarator);
         Contract.ThrowIfNull(initializer);
         var value = syntaxFacts.GetValueOfEqualsValueClause(initializer);
 
-        var symbol = (ILocalSymbol)semanticModel.GetRequiredDeclaredSymbol(variable, cancellationToken);
+        var symbol = (ILocalSymbol)
+            semanticModel.GetRequiredDeclaredSymbol(variable, cancellationToken);
 
         var identifier = generator.IdentifierName(symbol.Name);
 
         var isGlobalStatement = syntaxFacts.IsGlobalStatement(localDeclarationStatement.Parent);
-        var updatedLocalDeclarationStatement = GetUpdatedLocalDeclarationStatement(generator, localDeclarationStatement, symbol);
+        var updatedLocalDeclarationStatement = GetUpdatedLocalDeclarationStatement(
+            generator,
+            localDeclarationStatement,
+            symbol
+        );
         var ifStatement = ConvertToIfStatement(
             semanticModel,
             generator,
             container: value,
             conditionalExpression,
             convertedSyntax => generator.AssignmentStatement(identifier, convertedSyntax),
-            cancellationToken);
+            cancellationToken
+        );
 
         var newRoot = root.ReplaceNode(
-            isGlobalStatement ? localDeclarationStatement.GetRequiredParent() : localDeclarationStatement,
-            new[]
-            {
-                WrapGlobal(updatedLocalDeclarationStatement),
-                WrapGlobal(ifStatement),
-            });
+            isGlobalStatement
+                ? localDeclarationStatement.GetRequiredParent()
+                : localDeclarationStatement,
+            new[] { WrapGlobal(updatedLocalDeclarationStatement), WrapGlobal(ifStatement), }
+        );
 
         return document.WithSyntaxRoot(newRoot);
 
-        SyntaxNode WrapGlobal(TStatementSyntax statement)
-            => isGlobalStatement ? generator.GlobalStatement(statement) : statement;
+        SyntaxNode WrapGlobal(TStatementSyntax statement) =>
+            isGlobalStatement ? generator.GlobalStatement(statement) : statement;
     }
 
     private static TStatementSyntax ConvertToIfStatement(
@@ -285,7 +367,8 @@ internal abstract class AbstractReplaceConditionalWithStatementsCodeRefactoringP
         SyntaxNode container,
         TConditionalExpressionSyntax conditionalExpression,
         Func<SyntaxNode, SyntaxNode> wrapConvertedSyntax,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         // When we have `object v = x ? y : z`, then the type of 'y' and 'z' can influence each other.
         // If we convert this into:
@@ -300,22 +383,36 @@ internal abstract class AbstractReplaceConditionalWithStatementsCodeRefactoringP
         // transformation.
         //
         // Similarly, if we have 'var v', we need to give it a strong type at the declaration point.
-        var conditionalType = semanticModel.GetTypeInfo(conditionalExpression, cancellationToken).Type;
+        var conditionalType = semanticModel
+            .GetTypeInfo(conditionalExpression, cancellationToken)
+            .Type;
 
         var syntaxFacts = generator.SyntaxFacts;
-        syntaxFacts.GetPartsOfConditionalExpression(conditionalExpression, out var condition, out var whenTrue, out var whenFalse);
+        syntaxFacts.GetPartsOfConditionalExpression(
+            conditionalExpression,
+            out var condition,
+            out var whenTrue,
+            out var whenFalse
+        );
 
-        return (TStatementSyntax)generator.IfStatement(
-            condition.WithoutTrivia(),
-            new[] { Rewrite((TExpressionSyntax)whenTrue) },
-            new[] { Rewrite((TExpressionSyntax)whenFalse) });
+        return (TStatementSyntax)
+            generator.IfStatement(
+                condition.WithoutTrivia(),
+                new[] { Rewrite((TExpressionSyntax)whenTrue) },
+                new[] { Rewrite((TExpressionSyntax)whenFalse) }
+            );
 
         SyntaxNode Rewrite(TExpressionSyntax expression)
         {
             if (syntaxFacts.IsThrowExpression(expression))
-                return generator.ThrowStatement(syntaxFacts.GetExpressionOfThrowExpression(expression));
+                return generator.ThrowStatement(
+                    syntaxFacts.GetExpressionOfThrowExpression(expression)
+                );
 
-            var containerWithConditionalReplaced = container.ReplaceNode(conditionalExpression, TryConvert(expression, conditionalType).WithTriviaFrom(conditionalExpression));
+            var containerWithConditionalReplaced = container.ReplaceNode(
+                conditionalExpression,
+                TryConvert(expression, conditionalType).WithTriviaFrom(conditionalExpression)
+            );
             Contract.ThrowIfNull(containerWithConditionalReplaced);
             return wrapConvertedSyntax(containerWithConditionalReplaced);
         }

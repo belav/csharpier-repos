@@ -43,19 +43,28 @@ public class Program
         string httpProtocolFeatureCollectionPath,
         string httpUtilitiesPath,
         string transportMultiplexedConnectionFeatureCollectionPath,
-        string transportConnectionFeatureCollectionPath)
+        string transportConnectionFeatureCollectionPath
+    )
     {
         var knownHeadersContent = KnownHeaders.GeneratedFile();
         var httpProtocolFeatureCollectionContent = HttpProtocolFeatureCollection.GenerateFile();
         var httpUtilitiesContent = HttpUtilities.HttpUtilities.GeneratedFile();
-        var transportMultiplexedConnectionFeatureCollectionContent = TransportMultiplexedConnectionFeatureCollection.GenerateFile();
-        var transportConnectionFeatureCollectionContent = TransportConnectionFeatureCollection.GenerateFile();
+        var transportMultiplexedConnectionFeatureCollectionContent =
+            TransportMultiplexedConnectionFeatureCollection.GenerateFile();
+        var transportConnectionFeatureCollectionContent =
+            TransportConnectionFeatureCollection.GenerateFile();
 
         UpdateFile(knownHeadersPath, knownHeadersContent);
         UpdateFile(httpProtocolFeatureCollectionPath, httpProtocolFeatureCollectionContent);
         UpdateFile(httpUtilitiesPath, httpUtilitiesContent);
-        UpdateFile(transportMultiplexedConnectionFeatureCollectionPath, transportMultiplexedConnectionFeatureCollectionContent);
-        UpdateFile(transportConnectionFeatureCollectionPath, transportConnectionFeatureCollectionContent);
+        UpdateFile(
+            transportMultiplexedConnectionFeatureCollectionPath,
+            transportMultiplexedConnectionFeatureCollectionContent
+        );
+        UpdateFile(
+            transportConnectionFeatureCollectionPath,
+            transportConnectionFeatureCollectionContent
+        );
     }
 
     public static void UpdateFile(string path, string content)

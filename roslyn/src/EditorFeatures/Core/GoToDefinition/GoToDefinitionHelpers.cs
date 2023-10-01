@@ -21,12 +21,25 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
             IThreadingContext threadingContext,
             IStreamingFindUsagesPresenter streamingPresenter,
             CancellationToken cancellationToken,
-            bool thirdPartyNavigationAllowed = true)
+            bool thirdPartyNavigationAllowed = true
+        )
         {
             var location = await GetDefinitionLocationAsync(
-                symbol, solution, threadingContext, streamingPresenter, cancellationToken, thirdPartyNavigationAllowed).ConfigureAwait(false);
-            return await location.TryNavigateToAsync(
-                threadingContext, new NavigationOptions(PreferProvisionalTab: true, ActivateTab: true), cancellationToken).ConfigureAwait(false);
+                    symbol,
+                    solution,
+                    threadingContext,
+                    streamingPresenter,
+                    cancellationToken,
+                    thirdPartyNavigationAllowed
+                )
+                .ConfigureAwait(false);
+            return await location
+                .TryNavigateToAsync(
+                    threadingContext,
+                    new NavigationOptions(PreferProvisionalTab: true, ActivateTab: true),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         public static async Task<INavigableLocation?> GetDefinitionLocationAsync(
@@ -35,31 +48,56 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
             IThreadingContext threadingContext,
             IStreamingFindUsagesPresenter streamingPresenter,
             CancellationToken cancellationToken,
-            bool thirdPartyNavigationAllowed = true)
+            bool thirdPartyNavigationAllowed = true
+        )
         {
-            var title = string.Format(EditorFeaturesResources._0_declarations,
-                FindUsagesHelpers.GetDisplayName(symbol));
+            var title = string.Format(
+                EditorFeaturesResources._0_declarations,
+                FindUsagesHelpers.GetDisplayName(symbol)
+            );
 
-            var definitions = await GoToDefinitionFeatureHelpers.GetDefinitionsAsync(
-                symbol, solution, thirdPartyNavigationAllowed, cancellationToken).ConfigureAwait(false);
+            var definitions = await GoToDefinitionFeatureHelpers
+                .GetDefinitionsAsync(
+                    symbol,
+                    solution,
+                    thirdPartyNavigationAllowed,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-            return await streamingPresenter.GetStreamingLocationAsync(
-                threadingContext, solution.Workspace, title, definitions, cancellationToken).ConfigureAwait(false);
+            return await streamingPresenter
+                .GetStreamingLocationAsync(
+                    threadingContext,
+                    solution.Workspace,
+                    title,
+                    definitions,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
-        public static async Task<IEnumerable<INavigableItem>?> GetDefinitionsAsync(Document document, int position, CancellationToken cancellationToken)
+        public static async Task<IEnumerable<INavigableItem>?> GetDefinitionsAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             // Try IFindDefinitionService first. Until partners implement this, it could fail to find a service, so fall back if it's null.
             var findDefinitionService = document.GetLanguageService<IFindDefinitionService>();
             if (findDefinitionService != null)
             {
-                return await findDefinitionService.FindDefinitionsAsync(document, position, cancellationToken).ConfigureAwait(false);
+                return await findDefinitionService
+                    .FindDefinitionsAsync(document, position, cancellationToken)
+                    .ConfigureAwait(false);
             }
 
             // Removal of this codepath is tracked by https://github.com/dotnet/roslyn/issues/50391. Once it is removed, this GetDefinitions method should
             // be inlined into call sites.
-            var goToDefinitionsService = document.GetRequiredLanguageService<IGoToDefinitionService>();
-            return await goToDefinitionsService.FindDefinitionsAsync(document, position, cancellationToken).ConfigureAwait(false);
+            var goToDefinitionsService =
+                document.GetRequiredLanguageService<IGoToDefinitionService>();
+            return await goToDefinitionsService
+                .FindDefinitionsAsync(document, position, cancellationToken)
+                .ConfigureAwait(false);
         }
     }
 }

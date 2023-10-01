@@ -35,6 +35,7 @@ namespace SourceGenerators
             }
         }
 
-        public static string GetFullyQualifiedName(this ITypeSymbol type) => type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
+        public static string GetFullyQualifiedName(this ITypeSymbol type) =>
+            type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
     }
 }

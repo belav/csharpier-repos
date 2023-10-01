@@ -12,7 +12,12 @@ namespace System.Workflow.ComponentModel.Serialization
     internal sealed class PropertySegmentSerializationProvider : WorkflowMarkupSerializationProvider
     {
         #region IDesignerSerializationProvider Members
-        public override object GetSerializer(IDesignerSerializationManager manager, object currentSerializer, Type objectType, Type serializerType)
+        public override object GetSerializer(
+            IDesignerSerializationManager manager,
+            object currentSerializer,
+            Type objectType,
+            Type serializerType
+        )
         {
             if (serializerType.IsAssignableFrom(typeof(WorkflowMarkupSerializer)))
             {
@@ -21,7 +26,9 @@ namespace System.Workflow.ComponentModel.Serialization
                 else if (objectType == typeof(PropertySegment))
                     return new PropertySegmentSerializer(null);
                 else if (currentSerializer is WorkflowMarkupSerializer)
-                    return new PropertySegmentSerializer(currentSerializer as WorkflowMarkupSerializer);
+                    return new PropertySegmentSerializer(
+                        currentSerializer as WorkflowMarkupSerializer
+                    );
                 else
                     return null;
             }
@@ -33,5 +40,4 @@ namespace System.Workflow.ComponentModel.Serialization
         #endregion
     }
     #endregion
-
 }

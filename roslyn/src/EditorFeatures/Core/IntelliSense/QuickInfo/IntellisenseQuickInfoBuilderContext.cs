@@ -22,14 +22,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
         IThreadingContext? threadingContext,
         IUIThreadOperationExecutor? operationExecutor,
         IAsynchronousOperationListener? asynchronousOperationListener,
-        Lazy<IStreamingFindUsagesPresenter>? streamingPresenter)
+        Lazy<IStreamingFindUsagesPresenter>? streamingPresenter
+    )
     {
         public Document Document { get; } = document;
         public ClassificationOptions ClassificationOptions { get; } = classificationOptions;
         public LineFormattingOptions LineFormattingOptions { get; } = lineFormattingOptions;
         public IThreadingContext? ThreadingContext { get; } = threadingContext;
         public IUIThreadOperationExecutor? OperationExecutor { get; } = operationExecutor;
-        public IAsynchronousOperationListener? AsynchronousOperationListener { get; } = asynchronousOperationListener;
-        public Lazy<IStreamingFindUsagesPresenter>? StreamingPresenter { get; } = streamingPresenter;
+        public IAsynchronousOperationListener? AsynchronousOperationListener { get; } =
+            asynchronousOperationListener;
+        public Lazy<IStreamingFindUsagesPresenter>? StreamingPresenter { get; } =
+            streamingPresenter;
     }
 }

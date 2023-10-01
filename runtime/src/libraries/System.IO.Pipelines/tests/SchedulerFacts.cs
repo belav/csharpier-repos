@@ -177,18 +177,24 @@ namespace System.IO.Pipelines.Tests
             {
                 SynchronizationContext.SetSynchronizationContext(previous);
             }
-
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/91538", typeof(PlatformDetection), nameof(PlatformDetection.IsWasmThreadingSupported))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/91538",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWasmThreadingSupported)
+        )]
         public async Task DefaultReaderSchedulerRunsOnThreadPool()
         {
             var pipe = new Pipe(new PipeOptions(useSynchronizationContext: false));
 
             Func<Task> doRead = async () =>
             {
-                Assert.False(Thread.CurrentThread.IsThreadPoolThread, "We started on the thread pool");
+                Assert.False(
+                    Thread.CurrentThread.IsThreadPoolThread,
+                    "We started on the thread pool"
+                );
 
                 ReadResult result = await pipe.Reader.ReadAsync();
 
@@ -211,7 +217,11 @@ namespace System.IO.Pipelines.Tests
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/91538", typeof(PlatformDetection), nameof(PlatformDetection.IsWasmThreadingSupported))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/91538",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWasmThreadingSupported)
+        )]
         public async Task DefaultWriterSchedulerRunsOnThreadPool()
         {
             using (var pool = new TestMemoryPool())
@@ -222,11 +232,15 @@ namespace System.IO.Pipelines.Tests
                         resumeWriterThreshold: 32,
                         pauseWriterThreshold: 64,
                         useSynchronizationContext: false
-                    ));
+                    )
+                );
 
                 Func<Task> doWrite = async () =>
                 {
-                    Assert.False(Thread.CurrentThread.IsThreadPoolThread, "We started on the thread pool");
+                    Assert.False(
+                        Thread.CurrentThread.IsThreadPoolThread,
+                        "We started on the thread pool"
+                    );
 
                     PipeWriter writableBuffer = pipe.Writer.WriteEmpty(64);
                     ValueTask<FlushResult> flushAsync = writableBuffer.FlushAsync();
@@ -269,7 +283,8 @@ namespace System.IO.Pipelines.Tests
                             resumeWriterThreshold: 32,
                             pauseWriterThreshold: 64,
                             useSynchronizationContext: false
-                        ));
+                        )
+                    );
 
                     Func<Task> doWrite = async () =>
                     {
@@ -317,11 +332,8 @@ namespace System.IO.Pipelines.Tests
                 using (var pool = new TestMemoryPool())
                 {
                     var pipe = new Pipe(
-                        new PipeOptions(
-                            pool,
-                            resumeWriterThreshold: 32,
-                            pauseWriterThreshold: 64
-                        ));
+                        new PipeOptions(pool, resumeWriterThreshold: 32, pauseWriterThreshold: 64)
+                    );
 
                     Func<Task> doWrite = async () =>
                     {
@@ -371,11 +383,8 @@ namespace System.IO.Pipelines.Tests
                 using (var pool = new TestMemoryPool())
                 {
                     var pipe = new Pipe(
-                        new PipeOptions(
-                            pool,
-                            resumeWriterThreshold: 32,
-                            pauseWriterThreshold: 64
-                        ));
+                        new PipeOptions(pool, resumeWriterThreshold: 32, pauseWriterThreshold: 64)
+                    );
 
                     PipeWriter writableBuffer = pipe.Writer.WriteEmpty(64);
                     ValueTask<FlushResult> flushAsync = writableBuffer.FlushAsync();
@@ -413,7 +422,11 @@ namespace System.IO.Pipelines.Tests
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/91538", typeof(PlatformDetection), nameof(PlatformDetection.IsWasmThreadingSupported))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/91538",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWasmThreadingSupported)
+        )]
         public async Task FlushCallbackRunsOnWriterScheduler()
         {
             using (var pool = new TestMemoryPool())
@@ -427,7 +440,9 @@ namespace System.IO.Pipelines.Tests
                             pauseWriterThreshold: 64,
                             readerScheduler: PipeScheduler.Inline,
                             writerScheduler: scheduler,
-                            useSynchronizationContext: false));
+                            useSynchronizationContext: false
+                        )
+                    );
 
                     PipeWriter writableBuffer = pipe.Writer.WriteEmpty(64);
                     ValueTask<FlushResult> flushAsync = writableBuffer.FlushAsync();
@@ -436,13 +451,19 @@ namespace System.IO.Pipelines.Tests
 
                     Func<Task> doWrite = async () =>
                     {
-                        Assert.False(Thread.CurrentThread.IsThreadPoolThread, "We started on the thread pool");
+                        Assert.False(
+                            Thread.CurrentThread.IsThreadPoolThread,
+                            "We started on the thread pool"
+                        );
 
                         await flushAsync;
 
                         pipe.Writer.Complete();
 
-                        Assert.Equal(Environment.CurrentManagedThreadId, scheduler.Thread.ManagedThreadId);
+                        Assert.Equal(
+                            Environment.CurrentManagedThreadId,
+                            scheduler.Thread.ManagedThreadId
+                        );
                     };
 
                     Task writing = ExecuteOnNonThreadPoolThread(doWrite);
@@ -459,22 +480,39 @@ namespace System.IO.Pipelines.Tests
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/91538", typeof(PlatformDetection), nameof(PlatformDetection.IsWasmThreadingSupported))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/91538",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWasmThreadingSupported)
+        )]
         public async Task ReadAsyncCallbackRunsOnReaderScheduler()
         {
             using (var pool = new TestMemoryPool())
             {
                 using (var scheduler = new ThreadScheduler())
                 {
-                    var pipe = new Pipe(new PipeOptions(pool, scheduler, writerScheduler: PipeScheduler.Inline, useSynchronizationContext: false));
+                    var pipe = new Pipe(
+                        new PipeOptions(
+                            pool,
+                            scheduler,
+                            writerScheduler: PipeScheduler.Inline,
+                            useSynchronizationContext: false
+                        )
+                    );
 
                     Func<Task> doRead = async () =>
                     {
-                        Assert.False(Thread.CurrentThread.IsThreadPoolThread, "We started on the thread pool");
+                        Assert.False(
+                            Thread.CurrentThread.IsThreadPoolThread,
+                            "We started on the thread pool"
+                        );
 
                         ReadResult result = await pipe.Reader.ReadAsync();
 
-                        Assert.Equal(Environment.CurrentManagedThreadId, scheduler.Thread.ManagedThreadId);
+                        Assert.Equal(
+                            Environment.CurrentManagedThreadId,
+                            scheduler.Thread.ManagedThreadId
+                        );
 
                         pipe.Reader.AdvanceTo(result.Buffer.End, result.Buffer.End);
 
@@ -493,15 +531,28 @@ namespace System.IO.Pipelines.Tests
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/91538", typeof(PlatformDetection), nameof(PlatformDetection.IsWasmThreadingSupported))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/91538",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWasmThreadingSupported)
+        )]
         public async Task ThreadPoolScheduler_SchedulesOnThreadPool()
         {
-            var pipe = new Pipe(new PipeOptions(readerScheduler: PipeScheduler.ThreadPool, writerScheduler: PipeScheduler.Inline, useSynchronizationContext: false));
+            var pipe = new Pipe(
+                new PipeOptions(
+                    readerScheduler: PipeScheduler.ThreadPool,
+                    writerScheduler: PipeScheduler.Inline,
+                    useSynchronizationContext: false
+                )
+            );
 
             async Task DoRead()
             {
                 // Make sure we aren't on a thread pool thread
-                Assert.False(Thread.CurrentThread.IsThreadPoolThread, "We started on the thread pool");
+                Assert.False(
+                    Thread.CurrentThread.IsThreadPoolThread,
+                    "We started on the thread pool"
+                );
 
                 ValueTask<ReadResult> task = pipe.Reader.ReadAsync();
 
@@ -522,12 +573,14 @@ namespace System.IO.Pipelines.Tests
 
             PipeWriter buffer = pipe.Writer;
 #pragma warning disable CS0618 // Type or member is obsolete
-            pipe.Writer.OnReaderCompleted((state, exception) =>
-            {
-                callbackRan = true;
-                Assert.True(Thread.CurrentThread.IsThreadPoolThread);
-            },
-            null);
+            pipe.Writer.OnReaderCompleted(
+                (state, exception) =>
+                {
+                    callbackRan = true;
+                    Assert.True(Thread.CurrentThread.IsThreadPoolThread);
+                },
+                null
+            );
 #pragma warning restore CS0618 // Type or member is obsolete
 
             buffer.Write("Hello World"u8.ToArray());
@@ -553,7 +606,8 @@ namespace System.IO.Pipelines.Tests
 
         private sealed class CustomSynchronizationContext : SynchronizationContext
         {
-            public List<Tuple<SendOrPostCallback, object>> Callbacks = new List<Tuple<SendOrPostCallback, object>>();
+            public List<Tuple<SendOrPostCallback, object>> Callbacks =
+                new List<Tuple<SendOrPostCallback, object>>();
 
             public override void Post(SendOrPostCallback d, object state)
             {

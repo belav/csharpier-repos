@@ -9,14 +9,10 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Formatting.Rules
 {
     [NonDefaultable]
-    internal readonly struct NextAnchorIndentationOperationAction(
-        ImmutableArray<AbstractFormattingRule> formattingRules,
-        int index,
-        SyntaxNode node,
-        List<AnchorIndentationOperation> list)
+    internal readonly struct NextAnchorIndentationOperationAction
     {
-        private NextAnchorIndentationOperationAction NextAction
-            => new(formattingRules, index + 1, node, list);
+        private NextAnchorIndentationOperationAction NextAction =>
+            new(formattingRules, index + 1, node, list);
 
         public void Invoke()
         {

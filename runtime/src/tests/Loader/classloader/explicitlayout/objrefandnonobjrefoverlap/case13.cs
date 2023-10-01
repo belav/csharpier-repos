@@ -27,7 +27,9 @@ public class Test
     [StructLayout(LayoutKind.Explicit)]
     public ref struct Explicit1
     {
-        [FieldOffset(0)] public Inner1 Field1;
+        [FieldOffset(0)]
+        public Inner1 Field1;
+
         public ref struct Inner1
         {
             public WithORefs Field2;
@@ -37,7 +39,9 @@ public class Test
     [StructLayout(LayoutKind.Explicit)]
     public ref struct Explicit2
     {
-        [FieldOffset(0)] public Inner2 Field1;
+        [FieldOffset(0)]
+        public Inner2 Field1;
+
         public ref struct Inner2
         {
             public WithNoORefs Field2;
@@ -47,7 +51,9 @@ public class Test
     [StructLayout(LayoutKind.Explicit)]
     public ref struct Explicit3
     {
-        [FieldOffset(0)] public Inner3 Field1;
+        [FieldOffset(0)]
+        public Inner3 Field1;
+
         public ref struct Inner3
         {
             public WithByRefs Field2;

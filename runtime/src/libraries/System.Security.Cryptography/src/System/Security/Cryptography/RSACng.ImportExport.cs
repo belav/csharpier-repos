@@ -6,14 +6,17 @@ namespace System.Security.Cryptography
     public sealed partial class RSACng : RSA
     {
         // CngKeyBlob formats for RSA key blobs
-        private static readonly CngKeyBlobFormat s_rsaFullPrivateBlob =
-            new CngKeyBlobFormat(Interop.BCrypt.KeyBlobType.BCRYPT_RSAFULLPRIVATE_BLOB);
+        private static readonly CngKeyBlobFormat s_rsaFullPrivateBlob = new CngKeyBlobFormat(
+            Interop.BCrypt.KeyBlobType.BCRYPT_RSAFULLPRIVATE_BLOB
+        );
 
-        private static readonly CngKeyBlobFormat s_rsaPrivateBlob =
-            new CngKeyBlobFormat(Interop.BCrypt.KeyBlobType.BCRYPT_RSAPRIVATE_BLOB);
+        private static readonly CngKeyBlobFormat s_rsaPrivateBlob = new CngKeyBlobFormat(
+            Interop.BCrypt.KeyBlobType.BCRYPT_RSAPRIVATE_BLOB
+        );
 
-        private static readonly CngKeyBlobFormat s_rsaPublicBlob =
-            new CngKeyBlobFormat(Interop.BCrypt.KeyBlobType.BCRYPT_RSAPUBLIC_KEY_BLOB);
+        private static readonly CngKeyBlobFormat s_rsaPublicBlob = new CngKeyBlobFormat(
+            Interop.BCrypt.KeyBlobType.BCRYPT_RSAPUBLIC_KEY_BLOB
+        );
 
         private void ImportKeyBlob(ReadOnlySpan<byte> rsaBlob, bool includePrivate)
         {
@@ -55,7 +58,8 @@ namespace System.Security.Cryptography
             return Key.TryExportKeyBlob(
                 Interop.NCrypt.NCRYPT_PKCS8_PRIVATE_KEY_BLOB,
                 destination,
-                out bytesWritten);
+                out bytesWritten
+            );
         }
 
         private byte[] ExportEncryptedPkcs8(ReadOnlySpan<char> pkcs8Password, int kdfCount)
@@ -67,13 +71,15 @@ namespace System.Security.Cryptography
             ReadOnlySpan<char> pkcs8Password,
             int kdfCount,
             Span<byte> destination,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             return Key.TryExportPkcs8KeyBlob(
                 pkcs8Password,
                 kdfCount,
                 destination,
-                out bytesWritten);
+                out bytesWritten
+            );
         }
     }
 }

@@ -11,14 +11,13 @@ using Microsoft.CodeAnalysis.Host.Mef;
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions;
 
 [ExportWorkspaceServiceFactory(typeof(IFixAllGetFixesService), ServiceLayer.Host), Shared]
-internal sealed class FeaturesFixAllGetFixesService : AbstractFixAllGetFixesService, IWorkspaceServiceFactory
+internal sealed class FeaturesFixAllGetFixesService
+    : AbstractFixAllGetFixesService,
+        IWorkspaceServiceFactory
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public FeaturesFixAllGetFixesService()
-    {
-    }
+    public FeaturesFixAllGetFixesService() { }
 
-    public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-        => this;
+    public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) => this;
 }

@@ -21,7 +21,11 @@ namespace AppHost.Bundle.Tests
         public void SelfContained_SingleFile_APITests()
         {
             string singleFile = BundleHelper.GetHostPath(sharedTestState.PublishedSingleFile);
-            Command.Create(singleFile, "fullyqualifiedname codebase appcontext cmdlineargs executing_assembly_location basedirectory")
+            Command
+                .Create(
+                    singleFile,
+                    "fullyqualifiedname codebase appcontext cmdlineargs executing_assembly_location basedirectory"
+                )
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
@@ -35,7 +39,9 @@ namespace AppHost.Bundle.Tests
                 // For single-file, Environment.GetCommandLineArgs[0] should return the file path of the host.
                 .And.HaveStdOutContaining("Command line args: " + singleFile)
                 .And.HaveStdOutContaining("ExecutingAssembly.Location: " + Environment.NewLine)
-                .And.HaveStdOutContaining("AppContext.BaseDirectory: " + Path.GetDirectoryName(singleFile));
+                .And.HaveStdOutContaining(
+                    "AppContext.BaseDirectory: " + Path.GetDirectoryName(singleFile)
+                );
         }
 
         [Fact]
@@ -45,14 +51,23 @@ namespace AppHost.Bundle.Tests
             var singleFile = BundleSelfContainedApp(fixture, BundleOptions.BundleAllContent);
             var extractionBaseDir = BundleHelper.GetExtractionRootDir(fixture);
 
-            Command.Create(singleFile, "fullyqualifiedname codebase appcontext cmdlineargs executing_assembly_location basedirectory")
+            Command
+                .Create(
+                    singleFile,
+                    "fullyqualifiedname codebase appcontext cmdlineargs executing_assembly_location basedirectory"
+                )
                 .CaptureStdErr()
                 .CaptureStdOut()
-                .EnvironmentVariable(Constants.BundleExtractBase.EnvironmentVariable, extractionBaseDir.FullName)
+                .EnvironmentVariable(
+                    Constants.BundleExtractBase.EnvironmentVariable,
+                    extractionBaseDir.FullName
+                )
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining(Path.DirectorySeparatorChar + "System.Private.CoreLib.dll") // In extraction directory
+                .And.HaveStdOutContaining(
+                    Path.DirectorySeparatorChar + "System.Private.CoreLib.dll"
+                ) // In extraction directory
                 .And.HaveStdOutContaining("System.Private.CoreLib.dll") // In extraction directory
                 .And.NotHaveStdOutContaining("CodeBase NotSupported") // CodeBase should point to extraction directory
                 .And.HaveStdOutContaining("SingleFileApiTests.dll")
@@ -60,8 +75,12 @@ namespace AppHost.Bundle.Tests
                 .And.NotHaveStdOutContaining("Microsoft.NETCore.App.deps.json") // No framework - it's self-contained
                 // For single-file, Environment.GetCommandLineArgs[0] should return the file path of the host.
                 .And.HaveStdOutContaining("Command line args: " + singleFile)
-                .And.HaveStdOutContaining("ExecutingAssembly.Location: " + extractionBaseDir.FullName) // Should point to the app's dll
-                .And.HaveStdOutContaining("AppContext.BaseDirectory: " + extractionBaseDir.FullName); // Should point to the extraction directory
+                .And.HaveStdOutContaining(
+                    "ExecutingAssembly.Location: " + extractionBaseDir.FullName
+                ) // Should point to the app's dll
+                .And.HaveStdOutContaining(
+                    "AppContext.BaseDirectory: " + extractionBaseDir.FullName
+                ); // Should point to the extraction directory
         }
 
         [Fact]
@@ -73,30 +92,34 @@ namespace AppHost.Bundle.Tests
 
             // For non single-file apps, Environment.GetCommandLineArgs[0]
             // should return the file path of the managed entrypoint.
-            dotnet.Exec(appPath, "cmdlineargs")
+            dotnet
+                .Exec(appPath, "cmdlineargs")
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining(appPath);
+                .And.HaveStdOutContaining(appPath);
         }
 
         [Fact]
         public void AppContext_Native_Search_Dirs_Contains_Bundle_Dir()
         {
             string singleFile = BundleHelper.GetHostPath(sharedTestState.PublishedSingleFile);
-            string extractionRoot = BundleHelper.GetExtractionRootPath(sharedTestState.PublishedSingleFile);
+            string extractionRoot = BundleHelper.GetExtractionRootPath(
+                sharedTestState.PublishedSingleFile
+            );
             string bundleDir = BundleHelper.GetPublishPath(sharedTestState.PublishedSingleFile);
 
             // If we don't extract anything to disk, the extraction dir shouldn't
             // appear in the native search dirs.
-            Command.Create(singleFile, "native_search_dirs")
+            Command
+                .Create(singleFile, "native_search_dirs")
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining(bundleDir)
                 .And.NotHaveStdOutContaining(extractionRoot);
         }
@@ -105,15 +128,21 @@ namespace AppHost.Bundle.Tests
         public void AppContext_Native_Search_Dirs_Contains_Bundle_And_Extraction_Dirs()
         {
             var fixture = sharedTestState.TestFixture.Copy();
-            Bundler bundler = BundleSelfContainedApp(fixture, out string singleFile, BundleOptions.BundleNativeBinaries);
+            Bundler bundler = BundleSelfContainedApp(
+                fixture,
+                out string singleFile,
+                BundleOptions.BundleNativeBinaries
+            );
             string extractionDir = BundleHelper.GetExtractionDir(fixture, bundler).Name;
             string bundleDir = BundleHelper.GetBundleDir(fixture).FullName;
 
-            Command.Create(singleFile, "native_search_dirs")
+            Command
+                .Create(singleFile, "native_search_dirs")
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining(extractionDir)
                 .And.HaveStdOutContaining(bundleDir);
         }

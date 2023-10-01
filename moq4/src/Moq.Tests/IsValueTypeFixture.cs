@@ -20,7 +20,10 @@ namespace Moq.Tests
             mock.Object.Unconstrained(new Exception());
             mock.Object.Unconstrained(3.141f); // should match
 
-            mock.Verify(m => m.Unconstrained<It.IsValueType>(It.IsAny<It.IsValueType>()), Times.Exactly(3));
+            mock.Verify(
+                m => m.Unconstrained<It.IsValueType>(It.IsAny<It.IsValueType>()),
+                Times.Exactly(3)
+            );
         }
 
         [Fact]
@@ -30,17 +33,21 @@ namespace Moq.Tests
 
             mock.Object.Constrained(1); // should match
             mock.Object.Constrained(true); // should match
-                                           //mock.Object.Constrained("");
-                                           //mock.Object.Constrained(new Exception());
+            //mock.Object.Constrained("");
+            //mock.Object.Constrained(new Exception());
             mock.Object.Constrained(3.141f); // should match
 
-            mock.Verify(m => m.Constrained<It.IsValueType>(It.IsAny<It.IsValueType>()), Times.Exactly(3));
+            mock.Verify(
+                m => m.Constrained<It.IsValueType>(It.IsAny<It.IsValueType>()),
+                Times.Exactly(3)
+            );
         }
 
         public interface IX
         {
             void Unconstrained<T>(T arg);
-            void Constrained<T>(T arg) where T : struct;
+            void Constrained<T>(T arg)
+                where T : struct;
         }
     }
 }

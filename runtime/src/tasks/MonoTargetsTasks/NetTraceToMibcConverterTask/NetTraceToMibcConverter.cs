@@ -64,14 +64,19 @@ public class NetTraceToMibcConverter : ToolTask
 
         if (string.IsNullOrEmpty(ToolExe))
         {
-            ToolExe = (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) ? "dotnet-pgo.exe" : "dotnet-pgo";
+            ToolExe =
+                (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    ? "dotnet-pgo.exe"
+                    : "dotnet-pgo";
         }
 
         string mibcConverterBinaryPath = Path.Combine(ToolPath, ToolExe);
 
         if (!File.Exists(mibcConverterBinaryPath))
         {
-            Log.LogError($"{nameof(mibcConverterBinaryPath)}='{mibcConverterBinaryPath}' doesn't exist.");
+            Log.LogError(
+                $"{nameof(mibcConverterBinaryPath)}='{mibcConverterBinaryPath}' doesn't exist."
+            );
             return false;
         }
 
@@ -99,7 +104,10 @@ public class NetTraceToMibcConverter : ToolTask
 
     protected override string GenerateCommandLineCommands()
     {
-        MibcFilePath = Path.Combine(OutputDir, Path.ChangeExtension(Path.GetFileName(NetTraceFilePath), ".mibc"));
+        MibcFilePath = Path.Combine(
+            OutputDir,
+            Path.ChangeExtension(Path.GetFileName(NetTraceFilePath), ".mibc")
+        );
 
         StringBuilder mibcConverterArgsStr = new StringBuilder("create-mibc");
         mibcConverterArgsStr.Append($" --trace \"{NetTraceFilePath}\" ");

@@ -10,9 +10,10 @@ namespace Microsoft.CodeAnalysis;
 /// <summary>
 /// Aggregate analyzer config options for a specific path.
 /// </summary>
-internal readonly struct AnalyzerConfigData(AnalyzerConfigOptionsResult result)
+internal readonly struct AnalyzerConfigData
 {
-    public readonly StructuredAnalyzerConfigOptions ConfigOptions = StructuredAnalyzerConfigOptions.Create(result.AnalyzerOptions);
+    public readonly StructuredAnalyzerConfigOptions ConfigOptions =
+        StructuredAnalyzerConfigOptions.Create(result.AnalyzerOptions);
     public readonly ImmutableDictionary<string, string> AnalyzerOptions = result.AnalyzerOptions;
     public readonly ImmutableDictionary<string, ReportDiagnostic> TreeOptions = result.TreeOptions;
 }

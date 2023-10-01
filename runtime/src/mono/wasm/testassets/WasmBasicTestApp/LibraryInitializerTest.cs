@@ -12,6 +12,8 @@ public partial class LibraryInitializerTest
     [JSExport]
     public static void Run()
     {
-        TestOutput.WriteLine($"LIBRARY_INITIALIZER_TEST = {Environment.GetEnvironmentVariable("LIBRARY_INITIALIZER_TEST")}");
+        TestOutput.WriteLine(
+            $"LIBRARY_INITIALIZER_TEST = {Environment.GetEnvironmentVariable("LIBRARY_INITIALIZER_TEST")}"
+        );
     }
 }

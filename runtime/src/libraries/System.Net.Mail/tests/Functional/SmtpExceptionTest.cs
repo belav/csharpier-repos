@@ -85,7 +85,12 @@ namespace System.Net.Mail.Tests
             // \p{Pi} any kind of opening quote https://www.compart.com/en/unicode/category/Pi
             // \p{Pf} any kind of closing quote https://www.compart.com/en/unicode/category/Pf
             // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector https://www.compart.com/en/unicode/category/Po
-            Assert.Matches(@"[\p{Pi}\p{Po}]" + Regex.Escape(typeof(SmtpException).FullName) + @"[\p{Pf}\p{Po}]", se.Message);
+            Assert.Matches(
+                @"[\p{Pi}\p{Po}]"
+                    + Regex.Escape(typeof(SmtpException).FullName)
+                    + @"[\p{Pf}\p{Po}]",
+                se.Message
+            );
 
             Assert.Equal(SmtpStatusCode.GeneralFailure, se.StatusCode);
         }
@@ -122,7 +127,12 @@ namespace System.Net.Mail.Tests
             // \p{Pi} any kind of opening quote https://www.compart.com/en/unicode/category/Pi
             // \p{Pf} any kind of closing quote https://www.compart.com/en/unicode/category/Pf
             // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector https://www.compart.com/en/unicode/category/Po
-            Assert.Matches(@"[\p{Pi}\p{Po}]" + Regex.Escape(typeof(SmtpException).FullName) + @"[\p{Pf}\p{Po}]", se.Message);
+            Assert.Matches(
+                @"[\p{Pi}\p{Po}]"
+                    + Regex.Escape(typeof(SmtpException).FullName)
+                    + @"[\p{Pf}\p{Po}]",
+                se.Message
+            );
 
             Assert.Equal((SmtpStatusCode)666, se.StatusCode);
         }

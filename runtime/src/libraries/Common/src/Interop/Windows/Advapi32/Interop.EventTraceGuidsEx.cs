@@ -52,6 +52,7 @@ internal static partial class Interop
             int InBufferSize,
             void* OutBuffer,
             int OutBufferSize,
-            out int ReturnLength);
+            out int ReturnLength
+        );
     }
 }

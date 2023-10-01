@@ -12,7 +12,9 @@ namespace System.Reflection.Runtime.TypeInfos
     //
     // The runtime's implementation of TypeInfo for function pointer types.
     //
-    internal sealed partial class RuntimeFunctionPointerTypeInfo : RuntimeTypeInfo, IRuntimeMemberInfoWithNoMetadataDefinition
+    internal sealed partial class RuntimeFunctionPointerTypeInfo
+        : RuntimeTypeInfo,
+            IRuntimeMemberInfoWithNoMetadataDefinition
     {
         private RuntimeFunctionPointerTypeInfo(UnificationKey key)
         {
@@ -21,12 +23,18 @@ namespace System.Reflection.Runtime.TypeInfos
 
         public override bool IsTypeDefinition => false;
         public override bool IsGenericTypeDefinition => false;
+
         protected override bool HasElementTypeImpl() => false;
+
         protected override bool IsArrayImpl() => false;
+
         public override bool IsSZArray => false;
         public override bool IsVariableBoundArray => false;
+
         protected override bool IsByRefImpl() => false;
+
         protected override bool IsPointerImpl() => false;
+
         public override bool IsConstructedGenericType => false;
         public override bool IsGenericParameter => false;
         public override bool IsGenericTypeParameter => false;
@@ -42,9 +50,7 @@ namespace System.Reflection.Runtime.TypeInfos
         //
         // PrepareKey() must be idempodent and thread-safe. It may be invoked multiple times and concurrently.
         //
-        public void PrepareKey()
-        {
-        }
+        public void PrepareKey() { }
 
         //
         // Implements IKeyedItem.Key.
@@ -55,14 +61,13 @@ namespace System.Reflection.Runtime.TypeInfos
         //
         public UnificationKey Key
         {
-            get
-            {
-                return _key;
-            }
+            get { return _key; }
         }
 
         public override Assembly Assembly => typeof(object).Assembly;
-        public override IEnumerable<CustomAttributeData> CustomAttributes => Array.Empty<CustomAttributeData>();
+        public override IEnumerable<CustomAttributeData> CustomAttributes =>
+            Array.Empty<CustomAttributeData>();
+
         public override Type[] GetFunctionPointerCallingConventions() => Type.EmptyTypes;
 
         public override bool ContainsGenericParameters
@@ -80,6 +85,7 @@ namespace System.Reflection.Runtime.TypeInfos
             }
         }
         public override string FullName => null!;
+
         public override bool HasSameMetadataDefinitionAs(MemberInfo other)
         {
             ArgumentNullException.ThrowIfNull(other);
@@ -93,7 +99,6 @@ namespace System.Reflection.Runtime.TypeInfos
 
         public override Type[] GetFunctionPointerParameterTypes()
         {
-
             if (_key.ParameterTypes.Length == 0)
                 return EmptyTypes;
 
@@ -107,6 +112,7 @@ namespace System.Reflection.Runtime.TypeInfos
         public override string Namespace => null!;
 
         public override StructLayoutAttribute StructLayoutAttribute => null;
+
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -132,7 +138,9 @@ namespace System.Reflection.Runtime.TypeInfos
         }
 
         protected override TypeAttributes GetAttributeFlagsImpl() => TypeAttributes.Public;
-        protected override int InternalGetHashCode() =>_key.GetHashCode();
+
+        protected override int InternalGetHashCode() => _key.GetHashCode();
+
         internal override Type InternalDeclaringType => null;
         public override string Name => string.Empty;
         internal override string InternalFullNameOfAssembly => string.Empty;

@@ -18,15 +18,19 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryCast)]
-    public partial class RemoveUnnecessaryCastTests_AsTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class RemoveUnnecessaryCastTests_AsTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public RemoveUnnecessaryCastTests_AsTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpRemoveUnnecessaryCastDiagnosticAnalyzer(), new CSharpRemoveUnnecessaryCastCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpRemoveUnnecessaryCastDiagnosticAnalyzer(),
+                new CSharpRemoveUnnecessaryCastCodeFixProvider()
+            );
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545979")]
         public async Task DoNotRemoveCastToErrorType()
@@ -43,14 +47,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545146")]
         public async Task ParenthesizeToKeepParseTheSame2()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
 
             class C
@@ -62,8 +67,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 }
             }
             """,
-
-            """
+                """
             using System;
 
             class C
@@ -74,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     a();
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545138")]
@@ -89,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     int x = (int)([|obj as object|]);
                 }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545139")]
@@ -108,7 +114,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     Console.WriteLine([|a as object|] is int[]);
                 }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545142")]
@@ -131,7 +138,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         A x = [|null as string|];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545143")]
@@ -146,7 +154,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         var x = (int)([|null as int*|]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545144")]
@@ -168,7 +177,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         Console.WriteLine(a == ([|b as object|]));
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545145")]
@@ -188,7 +198,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         as Action;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545157")]
@@ -213,7 +224,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545158")]
@@ -239,7 +251,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545158")]
@@ -266,7 +279,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545747")]
@@ -281,7 +295,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         var x = [|"" as object|];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545159")]
@@ -307,14 +322,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         Console.WriteLine(y.Count);
                     }
                 }
-                """);
+                """
+            );
         }
 
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545287"), WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/880752")]
+        [
+            Fact,
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545287"),
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/880752")
+        ]
         public async Task RemoveUnneededCastInParameterDefaultValue()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 static void M1(string i1 = [|null as string|])
@@ -322,22 +342,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 }
             }
             """,
-
-            """
+                """
             class Program
             {
                 static void M1(string i1 = null)
                 {
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545289")]
         public async Task RemoveUnneededCastInReturnStatement()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 static string M2()
@@ -346,8 +366,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 }
             }
             """,
-
-            """
+                """
             class Program
             {
                 static string M2()
@@ -355,14 +374,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     return "";
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545288")]
         public async Task RemoveUnneededCastInLambda1()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
             class Program
             {
@@ -372,8 +392,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 }
             }
             """,
-
-            """
+                """
             using System;
             class Program
             {
@@ -382,14 +401,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     Func<string> f1 = () => "";
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545288")]
         public async Task RemoveUnneededCastInLambda2()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
             class Program
             {
@@ -399,8 +419,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 }
             }
             """,
-
-            """
+                """
             using System;
             class Program
             {
@@ -409,14 +428,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     Func<string> f1 = () => { return ""; };
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545288")]
         public async Task RemoveUnneededCastInLambda3()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
             class Program
             {
@@ -426,8 +446,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 }
             }
             """,
-
-            """
+                """
             using System;
             class Program
             {
@@ -436,14 +455,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     Func<string> f1 = _ => { return ""; };
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545288")]
         public async Task RemoveUnneededCastInLambda4()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
             class Program
             {
@@ -453,8 +473,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 }
             }
             """,
-
-            """
+                """
             using System;
             class Program
             {
@@ -463,14 +482,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     Func<string> f1 = _ => "";
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545291")]
         public async Task RemoveUnneededCastInConditionalExpression1()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Test
             {
                 public static void Main()
@@ -481,8 +501,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 }
             }
             """,
-
-            """
+                """
             class Test
             {
                 public static void Main()
@@ -492,14 +511,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     string f1 = (b == 5) ? "a" : "b" as string;
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545291")]
         public async Task RemoveUnneededCastInConditionalExpression2()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Test
             {
                 public static void Main()
@@ -510,8 +530,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 }
             }
             """,
-
-            """
+                """
             class Test
             {
                 public static void Main()
@@ -521,7 +540,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     string f1 = (b == 5) ? "a" as string : "b";
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545291")]
@@ -537,14 +557,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         var f1 = (b == 5) ? "" : [|"" as object|];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545459")]
         public async Task DoNotRemoveIllegalAsCastInsideADelegateConstructor()
         {
             await TestMissingAsync(
-            """
+                """
             using System;
             class Test
             {
@@ -557,14 +578,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 public static void M1(int i) { }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545422")]
         public async Task RemoveUnneededCastInsideCaseLabel()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Test
             {
                 static void Main()
@@ -577,8 +599,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 }
             }
             """,
-
-            """
+                """
             class Test
             {
                 static void Main()
@@ -590,7 +611,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     }
                 }
             }
-            """);
+            """
+            );
         }
 
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545595")]
@@ -598,7 +620,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         public async Task RemoveUnneededCastInCollectionInitializer()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System.Collections.Generic;
 
             class Program
@@ -609,8 +631,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 }
             }
             """,
-
-            """
+                """
             using System.Collections.Generic;
 
             class Program
@@ -620,7 +641,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     var z = new List<string> { "" };
                 }
             }
-            """);
+            """
+            );
         }
 
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529787")]
@@ -649,7 +671,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         var z = new X { [|"" as object|] };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529787")]
@@ -678,14 +701,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         X z = new X { [|"" as object|] };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545607")]
         public async Task RemoveUnneededCastInArrayInitializer()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class X
             {
                 static void Goo()
@@ -695,8 +719,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 }
             }
             """,
-
-            """
+                """
             class X
             {
                 static void Goo()
@@ -705,7 +728,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     var s = new object[] { x };
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545608")]
@@ -726,7 +750,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         return ";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545941")]
@@ -752,7 +777,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         throw [|new E() as Exception|];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545981")]
@@ -774,14 +800,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         throw [|ex as Exception|];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545941")]
         public async Task RemoveUnnecessaryCastInThrow()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
 
             class E
@@ -792,8 +819,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 }
             }
             """,
-
-            """
+                """
             using System;
 
             class E
@@ -803,7 +829,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     throw new Exception();
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545945")]
@@ -818,7 +845,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         var x = [|y as string|];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545606")]
@@ -833,7 +861,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         S y = [|null as T|];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545744")]
@@ -850,14 +879,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         s[0] = 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545750")]
         public async Task RemoveUnnecessaryCastToBaseType()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class X
             {
                 static void Main()
@@ -871,8 +901,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 }
             }
             """,
-
-            """
+                """
             class X
             {
                 static void Main()
@@ -885,14 +914,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     return ";
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545855")]
         public async Task DoRemoveIllegalAsCastOnLambda()
         {
             await TestMissingInRegularAndScriptAsync(
-            """
+                """
             using System;
             using System.Collections.Generic;
             using System.Reflection;
@@ -915,14 +945,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     return true;
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529816")]
         public async Task RemoveUnnecessaryCastInQueryExpression()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
 
             class A
@@ -935,8 +966,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 }
             }
             """,
-
-            """
+                """
             using System;
 
             class A
@@ -948,7 +978,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     Console.WriteLine(from y in new A() select "");
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529816")]
@@ -976,7 +1007,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                                           select [|"" as object|]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529831")]
@@ -1031,14 +1063,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         Console.WriteLine(y.Value);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529831")]
         public async Task RemoveUnnecessaryCastFromTypeParameterToInterface()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
 
             interface IIncrementable
@@ -1078,7 +1111,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 }
             }
             """,
- """
+                """
  using System;
 
  interface IIncrementable
@@ -1117,7 +1150,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
          Console.WriteLine(y.Value);
      }
  }
- """);
+ """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545877")]
@@ -1155,14 +1189,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529791")]
         public async Task RemoveUnnecessaryCastToNullable1()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class X
             {
                 static void Goo()
@@ -1172,8 +1207,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 }
             }
             """,
-
-            """
+                """
             class X
             {
                 static void Goo()
@@ -1182,14 +1216,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     object y = null;
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545850")]
         public async Task RemoveSurroundingParentheses()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class Program
             {
                 static void Main()
@@ -1199,8 +1234,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 }
             }
             """,
-
-            """
+                """
             class Program
             {
                 static void Main()
@@ -1209,7 +1243,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     x.ToString();
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529846")]
@@ -1226,7 +1261,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545858")]
@@ -1245,7 +1281,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         Console.WriteLine(([|x as MulticastDelegate|]) == y);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529842")]
@@ -1269,10 +1306,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         Console.WriteLine(b ? [|null as string|] : x);
                     }
                 }
-                """);
+                """
+            );
         }
 
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545882"), WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/880752")]
+        [
+            Fact,
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545882"),
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/880752")
+        ]
         public async Task RemoveCastInConstructorInitializer1()
         {
             await TestInRegularAndScriptAsync(
@@ -1283,17 +1325,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     C() : this([|"" as string|]) { }
                 }
                 """,
-
                 """
                 class C
                 {
                     C(string x) { }
                     C() : this("") { }
                 }
-                """);
+                """
+            );
         }
 
-        [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545958"), WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/880752")]
+        [
+            Fact,
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545958"),
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/880752")
+        ]
         public async Task RemoveCastInConstructorInitializer2()
         {
             await TestInRegularAndScriptAsync(
@@ -1307,7 +1353,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     C() : this([|"" as IEnumerable|]) { }
                 }
                 """,
-
                 """
                 using System.Collections;
 
@@ -1317,7 +1362,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     C(object x) { }
                     C() : this("") { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545957")]
@@ -1335,7 +1381,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545842")]
@@ -1353,7 +1400,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     }
                 }
                 """,
-
                 """
                 static class C
                 {
@@ -1364,7 +1410,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         long? z = x + y;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545942")]
@@ -1382,7 +1429,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         Console.WriteLine(x == ([|"" as object|]));
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545962")]
@@ -1401,7 +1449,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         ([|x as IDisposable|]).Dispose();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545944")]
@@ -1416,7 +1465,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 {
                     int x = *([|null as int*|]);
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545978")]
@@ -1435,7 +1485,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         int x = *([|p as int*|]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26640")]
@@ -1450,7 +1501,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         return [|b ? (1 as byte?) : (0 as byte?)|];
                     }
                 }
-                """, new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8)));
+                """,
+                new TestParameters(
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                        LanguageVersion.CSharp8
+                    )
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26640")]
@@ -1465,7 +1522,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         return [|b ? (1 as byte?) : (0 as byte?)|];
                     }
                 }
-                """, new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp9)));
+                """,
+                new TestParameters(
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                        LanguageVersion.CSharp9
+                    )
+                )
+            );
         }
 
         #region Interface Casts
@@ -1500,7 +1563,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         Console.WriteLine("Y.Dispose");
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545890")]
@@ -1548,7 +1612,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         new C().Goo();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545890")]
@@ -1602,7 +1667,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         Console.WriteLine(new C().Goo);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545890")]
@@ -1634,7 +1700,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         Console.WriteLine(([|Instance as I|]).Goo);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545890")]
@@ -1664,7 +1731,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         ([|new C() as I|]).Goo();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545890")]
@@ -1712,7 +1780,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         new C().Goo(2);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545888")]
@@ -1743,7 +1812,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         ([|new C() as I|]).Goo(x: 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545888")]
@@ -1773,7 +1843,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         Console.WriteLine(([|new C() as I|])[x: 1]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545888")]
@@ -1807,7 +1878,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         Console.WriteLine(([|new C() as I|])[x: 1]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545883")]
@@ -1835,7 +1907,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         Console.WriteLine("new Dispose()");
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545887")]
@@ -1871,7 +1944,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         Console.WriteLine(s.Value);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545834")]
@@ -1881,7 +1955,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             // a fresh copy of the struct from the GetEnumerator() method.
 
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
             using System.Collections.Generic;
 
@@ -1899,8 +1973,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 }
             }
             """,
-
-            """
+                """
             using System;
             using System.Collections.Generic;
 
@@ -1917,7 +1990,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     return x.GetEnumerator();
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544655")]
@@ -1927,7 +2001,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             // sealed.
 
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
 
             class C
@@ -1939,8 +2013,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 }
             }
             """,
-
-            """
+                """
             using System;
 
             class C
@@ -1951,7 +2024,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     var c = a.Clone();
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545926")]
@@ -1961,7 +2035,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             // sealed.
 
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
 
             class C
@@ -1973,8 +2047,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 }
             }
             """,
-
-            """
+                """
             using System;
 
             class C
@@ -1985,7 +2058,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     var c = a.Clone(); 
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529897")]
@@ -1995,7 +2069,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
             // sealed.
 
             await TestInRegularAndScriptAsync(
-            """
+                """
             using System;
 
             class Program
@@ -2007,8 +2081,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 }
             }
             """,
-
-            """
+                """
             using System;
 
             class Program
@@ -2019,7 +2092,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     var y = e.GetTypeCode();
                 }
             }
-            """);
+            """
+            );
         }
 
         #endregion
@@ -2045,7 +2119,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         Console.WriteLine(x.Length);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529911")]
@@ -2067,7 +2142,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         Console.WriteLine(x.Length);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529911")]
@@ -2089,14 +2165,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         Console.WriteLine(x.Length);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529911")]
         public async Task RemoveCastToObjectArrayInParamArrayArg1()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class C
             {
                 static void Goo(params object[] x) { }
@@ -2107,8 +2184,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 }
             }
             """,
-
-            """
+                """
             class C
             {
                 static void Goo(params object[] x) { }
@@ -2118,14 +2194,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     Goo(null);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529911")]
         public async Task RemoveCastToStringArrayInParamArrayArg2()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class C
             {
                 static void Goo(params object[] x) { }
@@ -2136,8 +2213,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 }
             }
             """,
-
-            """
+                """
             class C
             {
                 static void Goo(params object[] x) { }
@@ -2147,14 +2223,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     Goo(null);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529911")]
         public async Task RemoveCastToIntArrayInParamArrayArg3()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class C
             {
                 static void Goo(params int[] x) { }
@@ -2165,8 +2242,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 }
             }
             """,
-
-            """
+                """
             class C
             {
                 static void Goo(params int[] x) { }
@@ -2176,14 +2252,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     Goo(null);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529911")]
         public async Task RemoveCastToObjectArrayInParamArrayArg4()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class C
             {
                 static void Goo(params object[] x) { }
@@ -2194,8 +2271,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 }
             }
             """,
-
-            """
+                """
             class C
             {
                 static void Goo(params object[] x) { }
@@ -2205,14 +2281,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     Goo(null, null);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529911")]
         public async Task RemoveCastToObjectInParamArrayArg5()
         {
             await TestInRegularAndScriptAsync(
-            """
+                """
             class C
             {
                 static void Goo(params object[] x) { }
@@ -2223,8 +2300,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 }
             }
             """,
-
-            """
+                """
             class C
             {
                 static void Goo(params object[] x) { }
@@ -2234,7 +2310,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     Goo(null, null);
                 }
             }
-            """);
+            """
+            );
         }
 
         [Fact]
@@ -2262,7 +2339,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                     static void Goo(params object[] x) { }
                 }
-                """);
+                """
+            );
         }
 
         #endregion
@@ -2289,7 +2367,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545961")]
@@ -2312,7 +2391,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545961")]
@@ -2349,7 +2429,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545961")]
@@ -2392,7 +2473,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545961")]
@@ -2419,7 +2501,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         #endregion
@@ -2451,7 +2534,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         Console.WriteLine(x);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545925")]
@@ -2482,7 +2566,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     }
                 }
                 """,
-
                 """
                 using System;
 
@@ -2503,7 +2586,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         Console.WriteLine(x);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529916")]
@@ -2526,7 +2610,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     static void Goo(this string x) { }
                 }
                 """,
-
                 """
                 using System;
 
@@ -2539,7 +2622,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                     static void Goo(this string x) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/609497")]
@@ -2563,7 +2647,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         Console.WriteLine(await ([|task as dynamic|]));
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/624252")]
@@ -2590,7 +2675,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/627107")]
@@ -2624,7 +2710,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         return true;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/627107")]
@@ -2663,7 +2750,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         var y = this[x: xx, s: "", d: [|"" as object|]];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/627107")]
@@ -2679,7 +2767,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         return true;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/627107")]
@@ -2695,7 +2784,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         return true;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/627107")]
@@ -2711,7 +2801,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         return true;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/627107")]
@@ -2727,7 +2818,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         return true;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/627107")]
@@ -2761,7 +2853,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         return true;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529846")]
@@ -2778,7 +2871,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/640136")]
@@ -2797,7 +2891,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     }
                 }
                 """,
-
                 """
                 using System;
                 using System.Threading.Tasks;
@@ -2809,7 +2902,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         (x.Result)();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/626026")]
@@ -2837,7 +2931,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 public struct B
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/770187")]
@@ -2868,7 +2963,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         C
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/2761")]
@@ -2894,7 +2990,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 class D : C
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/3254")]
@@ -2914,7 +3011,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/3254")]
@@ -2934,7 +3032,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8111")]
@@ -2949,7 +3048,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         object thing = new { shouldBeAString = [|o as string|] };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8111")]
@@ -2965,7 +3065,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                     }
                 }
                 """,
-
                 """
                 class Program
                 {
@@ -2974,7 +3073,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         object thing = new { shouldBeAString = o };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/18978")]
@@ -2995,7 +3095,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         Console.WriteLine(goo.Length);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3029,7 +3130,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         Console.WriteLine(wrongDefined.Length);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3049,7 +3151,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         Console.WriteLine(wrongDefined.Length);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/18978")]
@@ -3085,7 +3188,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         System.Console.WriteLine(goo.Length);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20630")]
@@ -3112,7 +3216,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                   {
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29264")]
@@ -3150,7 +3255,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20630")]
@@ -3171,7 +3277,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 static class Program
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20630")]
@@ -3192,7 +3299,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 static class Program
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20630")]
@@ -3213,7 +3321,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 static class Program
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20630")]
@@ -3249,7 +3358,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 static class Program
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20630")]
@@ -3274,7 +3384,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 static class Program
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20630")]
@@ -3310,7 +3421,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 static class Program
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/25456#issuecomment-373549735")]
@@ -3329,7 +3441,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         }
                     }
                 }
-                """, parameters: new TestParameters(new CSharpParseOptions(LanguageVersion.CSharp7_1)));
+                """,
+                parameters: new TestParameters(new CSharpParseOptions(LanguageVersion.CSharp7_1))
+            );
         }
 
         [Fact]
@@ -3348,7 +3462,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         }
                     }
                 }
-                """, parameters: new TestParameters(new CSharpParseOptions(LanguageVersion.CSharp7_1)));
+                """,
+                parameters: new TestParameters(new CSharpParseOptions(LanguageVersion.CSharp7_1))
+            );
         }
 
         [Fact]
@@ -3367,7 +3483,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         }
                     }
                 }
-                """, parameters: new TestParameters(new CSharpParseOptions(LanguageVersion.CSharp7_1)));
+                """,
+                parameters: new TestParameters(new CSharpParseOptions(LanguageVersion.CSharp7_1))
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27239")]
@@ -3385,13 +3503,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         TypedReference r2 = [|o as TypedReference|];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28412")]
         public async Task DoNotOfferToRemoveCastWhenAccessingHiddenProperty()
         {
-            await TestMissingInRegularAndScriptAsync("""
+            await TestMissingInRegularAndScriptAsync(
+                """
                 using System.Collections.Generic;
                 class Fruit
                 {
@@ -3409,7 +3529,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                         ([|a as Fruit|]).Properties["Color"] = "Red";
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

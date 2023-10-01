@@ -5,12 +5,20 @@ namespace System.Text.Json.Serialization.Converters
 {
     internal sealed class MemoryByteConverter : JsonConverter<Memory<byte>>
     {
-        public override Memory<byte> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override Memory<byte> Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             return reader.GetBytesFromBase64();
         }
 
-        public override void Write(Utf8JsonWriter writer, Memory<byte> value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            Memory<byte> value,
+            JsonSerializerOptions options
+        )
         {
             writer.WriteBase64StringValue(value.Span);
         }

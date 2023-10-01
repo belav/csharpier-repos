@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
 {
     [DataContract]
-    internal readonly struct ComplexifiedSpan(TextSpan originalSpan, TextSpan newSpan, ImmutableArray<(TextSpan oldSpan, TextSpan newSpan)> modifiedSubSpans)
+    internal readonly struct ComplexifiedSpan
     {
         [DataMember(Order = 0)]
         public readonly TextSpan OriginalSpan = originalSpan;
@@ -18,6 +18,7 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
         public readonly TextSpan NewSpan = newSpan;
 
         [DataMember(Order = 2)]
-        public readonly ImmutableArray<(TextSpan oldSpan, TextSpan newSpan)> ModifiedSubSpans = modifiedSubSpans;
+        public readonly ImmutableArray<(TextSpan oldSpan, TextSpan newSpan)> ModifiedSubSpans =
+            modifiedSubSpans;
     }
 }

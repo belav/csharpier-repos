@@ -10,6 +10,7 @@ namespace VectorMathTests
     public class Program
     {
         static Point a;
+
         [Fact]
         public static int TestEntryPoint()
         {

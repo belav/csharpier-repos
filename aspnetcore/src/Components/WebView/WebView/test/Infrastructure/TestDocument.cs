@@ -17,7 +17,9 @@ public class TestDocument
     {
         if (_componentsById.ContainsKey(componentId))
         {
-            throw new InvalidOperationException($"Component with Id '{componentId}' already exists.");
+            throw new InvalidOperationException(
+                $"Component with Id '{componentId}' already exists."
+            );
         }
 
         _componentsById.Add(componentId, new RootComponentNode(componentId, selector));
@@ -44,7 +46,11 @@ public class TestDocument
         }
     }
 
-    private void UpdateComponent(RenderBatch batch, int componentId, ArrayBuilderSegment<RenderTreeEdit> edits)
+    private void UpdateComponent(
+        RenderBatch batch,
+        int componentId,
+        ArrayBuilderSegment<RenderTreeEdit> edits
+    )
     {
         if (!_componentsById.TryGetValue(componentId, out var component))
         {
@@ -55,17 +61,16 @@ public class TestDocument
         ApplyEdits(batch, component, 0, edits);
     }
 
-    private void DisposeComponent(int componentId)
-    {
+    private void DisposeComponent(int componentId) { }
 
-    }
+    private void DisposeEventHandler(ulong eventHandlerId) { }
 
-    private void DisposeEventHandler(ulong eventHandlerId)
-    {
-
-    }
-
-    private void ApplyEdits(RenderBatch batch, ContainerNode parent, int childIndex, ArrayBuilderSegment<RenderTreeEdit> edits)
+    private void ApplyEdits(
+        RenderBatch batch,
+        ContainerNode parent,
+        int childIndex,
+        ArrayBuilderSegment<RenderTreeEdit> edits
+    )
     {
         var currentDepth = 0;
         var childIndexAtCurrentDepth = childIndex;
@@ -77,174 +82,206 @@ public class TestDocument
             switch (edit.Type)
             {
                 case RenderTreeEditType.PrependFrame:
-                    {
-                        var frame = batch.ReferenceFrames.Array[edit.ReferenceFrameIndex];
-                        var siblingIndex = edit.SiblingIndex;
-                        InsertFrame(batch, parent, childIndexAtCurrentDepth + siblingIndex, batch.ReferenceFrames.Array, frame, edit.ReferenceFrameIndex);
-                        break;
-                    }
+                {
+                    var frame = batch.ReferenceFrames.Array[edit.ReferenceFrameIndex];
+                    var siblingIndex = edit.SiblingIndex;
+                    InsertFrame(
+                        batch,
+                        parent,
+                        childIndexAtCurrentDepth + siblingIndex,
+                        batch.ReferenceFrames.Array,
+                        frame,
+                        edit.ReferenceFrameIndex
+                    );
+                    break;
+                }
 
                 case RenderTreeEditType.RemoveFrame:
-                    {
-                        var siblingIndex = edit.SiblingIndex;
-                        parent.RemoveLogicalChild(childIndexAtCurrentDepth + siblingIndex);
-                        break;
-                    }
+                {
+                    var siblingIndex = edit.SiblingIndex;
+                    parent.RemoveLogicalChild(childIndexAtCurrentDepth + siblingIndex);
+                    break;
+                }
 
                 case RenderTreeEditType.SetAttribute:
+                {
+                    var frame = batch.ReferenceFrames.Array[edit.ReferenceFrameIndex];
+                    var siblingIndex = edit.SiblingIndex;
+                    var node = parent.Children[childIndexAtCurrentDepth + siblingIndex];
+                    if (node is ElementNode element)
                     {
-                        var frame = batch.ReferenceFrames.Array[edit.ReferenceFrameIndex];
-                        var siblingIndex = edit.SiblingIndex;
-                        var node = parent.Children[childIndexAtCurrentDepth + siblingIndex];
-                        if (node is ElementNode element)
-                        {
-                            ApplyAttribute(batch, element, frame);
-                        }
-                        else
-                        {
-                            throw new Exception("Cannot set attribute on non-element child");
-                        }
-                        break;
+                        ApplyAttribute(batch, element, frame);
                     }
+                    else
+                    {
+                        throw new Exception("Cannot set attribute on non-element child");
+                    }
+                    break;
+                }
 
                 case RenderTreeEditType.RemoveAttribute:
+                {
+                    // Note that we don't have to dispose the info we track about event handlers here, because the
+                    // disposed event handler IDs are delivered separately (in the 'disposedEventHandlerIds' array)
+                    var siblingIndex = edit.SiblingIndex;
+                    var node = parent.Children[childIndexAtCurrentDepth + siblingIndex];
+                    if (node is ElementNode element)
                     {
-                        // Note that we don't have to dispose the info we track about event handlers here, because the
-                        // disposed event handler IDs are delivered separately (in the 'disposedEventHandlerIds' array)
-                        var siblingIndex = edit.SiblingIndex;
-                        var node = parent.Children[childIndexAtCurrentDepth + siblingIndex];
-                        if (node is ElementNode element)
-                        {
-                            var attributeName = edit.RemovedAttributeName;
+                        var attributeName = edit.RemovedAttributeName;
 
-                            // First try to remove any special property we use for this attribute
-                            if (!TryApplySpecialProperty(batch, element, attributeName, default))
-                            {
-                                // If that's not applicable, it's a regular DOM attribute so remove that
-                                element.RemoveAttribute(attributeName);
-                            }
-                        }
-                        else
+                        // First try to remove any special property we use for this attribute
+                        if (!TryApplySpecialProperty(batch, element, attributeName, default))
                         {
-                            throw new Exception("Cannot remove attribute from non-element child");
+                            // If that's not applicable, it's a regular DOM attribute so remove that
+                            element.RemoveAttribute(attributeName);
                         }
-                        break;
                     }
+                    else
+                    {
+                        throw new Exception("Cannot remove attribute from non-element child");
+                    }
+                    break;
+                }
 
                 case RenderTreeEditType.UpdateText:
+                {
+                    var frame = batch.ReferenceFrames.Array[edit.ReferenceFrameIndex];
+                    var siblingIndex = edit.SiblingIndex;
+                    var node = parent.Children[childIndexAtCurrentDepth + siblingIndex];
+                    if (node is TextNode textNode)
                     {
-                        var frame = batch.ReferenceFrames.Array[edit.ReferenceFrameIndex];
-                        var siblingIndex = edit.SiblingIndex;
-                        var node = parent.Children[childIndexAtCurrentDepth + siblingIndex];
-                        if (node is TextNode textNode)
-                        {
-                            textNode.Text = frame.TextContent;
-                        }
-                        else
-                        {
-                            throw new Exception("Cannot set text content on non-text child");
-                        }
-                        break;
+                        textNode.Text = frame.TextContent;
                     }
+                    else
+                    {
+                        throw new Exception("Cannot set text content on non-text child");
+                    }
+                    break;
+                }
 
                 case RenderTreeEditType.UpdateMarkup:
-                    {
-                        var frame = batch.ReferenceFrames.Array[edit.ReferenceFrameIndex];
-                        var siblingIndex = edit.SiblingIndex;
-                        parent.RemoveLogicalChild(childIndexAtCurrentDepth + siblingIndex);
-                        InsertMarkup(parent, childIndexAtCurrentDepth + siblingIndex, frame);
-                        break;
-                    }
+                {
+                    var frame = batch.ReferenceFrames.Array[edit.ReferenceFrameIndex];
+                    var siblingIndex = edit.SiblingIndex;
+                    parent.RemoveLogicalChild(childIndexAtCurrentDepth + siblingIndex);
+                    InsertMarkup(parent, childIndexAtCurrentDepth + siblingIndex, frame);
+                    break;
+                }
 
                 case RenderTreeEditType.StepIn:
-                    {
-                        var siblingIndex = edit.SiblingIndex;
-                        parent = (ContainerNode)parent.Children[childIndexAtCurrentDepth + siblingIndex];
-                        currentDepth++;
-                        childIndexAtCurrentDepth = 0;
-                        break;
-                    }
+                {
+                    var siblingIndex = edit.SiblingIndex;
+                    parent = (ContainerNode)
+                        parent.Children[childIndexAtCurrentDepth + siblingIndex];
+                    currentDepth++;
+                    childIndexAtCurrentDepth = 0;
+                    break;
+                }
 
                 case RenderTreeEditType.StepOut:
-                    {
-                        parent = parent.Parent ?? throw new InvalidOperationException($"Cannot step out of {parent}");
-                        currentDepth--;
-                        childIndexAtCurrentDepth = currentDepth == 0 ? childIndex : 0; // The childIndex is only ever nonzero at zero depth
-                        break;
-                    }
+                {
+                    parent =
+                        parent.Parent
+                        ?? throw new InvalidOperationException($"Cannot step out of {parent}");
+                    currentDepth--;
+                    childIndexAtCurrentDepth = currentDepth == 0 ? childIndex : 0; // The childIndex is only ever nonzero at zero depth
+                    break;
+                }
 
                 case RenderTreeEditType.PermutationListEntry:
-                    {
-                        permutations.Add(new PermutationListEntry(childIndexAtCurrentDepth + edit.SiblingIndex, childIndexAtCurrentDepth + edit.MoveToSiblingIndex));
-                        break;
-                    }
+                {
+                    permutations.Add(
+                        new PermutationListEntry(
+                            childIndexAtCurrentDepth + edit.SiblingIndex,
+                            childIndexAtCurrentDepth + edit.MoveToSiblingIndex
+                        )
+                    );
+                    break;
+                }
 
                 case RenderTreeEditType.PermutationListEnd:
-                    {
-                        throw new NotSupportedException();
-                        //permuteLogicalChildren(parent, permutations!);
-                        //permutations.Clear();
-                        //break;
-                    }
+                {
+                    throw new NotSupportedException();
+                    //permuteLogicalChildren(parent, permutations!);
+                    //permutations.Clear();
+                    //break;
+                }
 
                 default:
-                    {
-                        throw new Exception($"Unknown edit type: '{edit.Type}'");
-                    }
+                {
+                    throw new Exception($"Unknown edit type: '{edit.Type}'");
+                }
             }
         }
     }
 
-    private int InsertFrame(RenderBatch batch, ContainerNode parent, int childIndex, ArraySegment<RenderTreeFrame> frames, RenderTreeFrame frame, int frameIndex)
+    private int InsertFrame(
+        RenderBatch batch,
+        ContainerNode parent,
+        int childIndex,
+        ArraySegment<RenderTreeFrame> frames,
+        RenderTreeFrame frame,
+        int frameIndex
+    )
     {
         switch (frame.FrameType)
         {
             case RenderTreeFrameType.Element:
-                {
-                    InsertElement(batch, parent, childIndex, frames, frame, frameIndex);
-                    return 1;
-                }
+            {
+                InsertElement(batch, parent, childIndex, frames, frame, frameIndex);
+                return 1;
+            }
 
             case RenderTreeFrameType.Text:
-                {
-                    InsertText(parent, childIndex, frame);
-                    return 1;
-                }
+            {
+                InsertText(parent, childIndex, frame);
+                return 1;
+            }
 
             case RenderTreeFrameType.Attribute:
-                {
-                    throw new Exception("Attribute frames should only be present as leading children of element frames.");
-                }
+            {
+                throw new Exception(
+                    "Attribute frames should only be present as leading children of element frames."
+                );
+            }
 
             case RenderTreeFrameType.Component:
-                {
-                    InsertComponent(parent, childIndex, frame);
-                    return 1;
-                }
+            {
+                InsertComponent(parent, childIndex, frame);
+                return 1;
+            }
 
             case RenderTreeFrameType.Region:
-                {
-                    return InsertFrameRange(batch, parent, childIndex, frames, frameIndex + 1, frameIndex + frame.RegionSubtreeLength);
-                }
+            {
+                return InsertFrameRange(
+                    batch,
+                    parent,
+                    childIndex,
+                    frames,
+                    frameIndex + 1,
+                    frameIndex + frame.RegionSubtreeLength
+                );
+            }
 
             case RenderTreeFrameType.ElementReferenceCapture:
+            {
+                if (parent is ElementNode)
                 {
-                    if (parent is ElementNode)
-                    {
-                        return 0; // A "capture" is a child in the diff, but has no node in the DOM
-                    }
-                    else
-                    {
-                        throw new Exception("Reference capture frames can only be children of element frames.");
-                    }
+                    return 0; // A "capture" is a child in the diff, but has no node in the DOM
                 }
+                else
+                {
+                    throw new Exception(
+                        "Reference capture frames can only be children of element frames."
+                    );
+                }
+            }
 
             case RenderTreeFrameType.Markup:
-                {
-                    InsertMarkup(parent, childIndex, frame);
-                    return 1;
-                }
-
+            {
+                InsertMarkup(parent, childIndex, frame);
+                return 1;
+            }
         }
 
         throw new Exception($"Unknown frame type: {frame.FrameType}");
@@ -267,7 +304,14 @@ public class TestDocument
         _componentsById[childComponentId] = containerElement;
     }
 
-    private int InsertFrameRange(RenderBatch batch, ContainerNode parent, int childIndex, ArraySegment<RenderTreeFrame> frames, int startIndex, int endIndexExcl)
+    private int InsertFrameRange(
+        RenderBatch batch,
+        ContainerNode parent,
+        int childIndex,
+        ArraySegment<RenderTreeFrame> frames,
+        int startIndex,
+        int endIndexExcl
+    )
     {
         var origChildIndex = childIndex;
         for (var index = startIndex; index < endIndexExcl; index++)
@@ -283,7 +327,14 @@ public class TestDocument
         return childIndex - origChildIndex; // Total number of children inserted
     }
 
-    private void InsertElement(RenderBatch batch, ContainerNode parent, int childIndex, ArraySegment<RenderTreeFrame> frames, RenderTreeFrame frame, int frameIndex)
+    private void InsertElement(
+        RenderBatch batch,
+        ContainerNode parent,
+        int childIndex,
+        ArraySegment<RenderTreeFrame> frames,
+        RenderTreeFrame frame,
+        int frameIndex
+    )
     {
         // Note: we don't handle SVG here
         var newElement = new ElementNode(frame.ElementName);
@@ -305,7 +356,14 @@ public class TestDocument
 
                 // As soon as we see a non-attribute child, all the subsequent child frames are
                 // not attributes, so bail out and insert the remnants recursively
-                InsertFrameRange(batch, newElement, 0, frames, i, frameIndex + frame.ElementSubtreeLength);
+                InsertFrameRange(
+                    batch,
+                    newElement,
+                    0,
+                    frames,
+                    i,
+                    frameIndex + frame.ElementSubtreeLength
+                );
                 break;
             }
         }
@@ -317,7 +375,11 @@ public class TestDocument
         }
     }
 
-    private void ApplyAttribute(RenderBatch batch, ElementNode elementNode, RenderTreeFrame attributeFrame)
+    private void ApplyAttribute(
+        RenderBatch batch,
+        ElementNode elementNode,
+        RenderTreeFrame attributeFrame
+    )
     {
         var attributeName = attributeFrame.AttributeName;
         var eventHandlerId = attributeFrame.AttributeEventHandlerId;
@@ -328,7 +390,9 @@ public class TestDocument
             var eventName = attributeName.Substring(2);
             if (firstTwoChars != "on" || string.IsNullOrEmpty(eventName))
             {
-                throw new InvalidOperationException($"Attribute has nonzero event handler ID, but attribute name '${attributeName}' does not start with 'on'.");
+                throw new InvalidOperationException(
+                    $"Attribute has nonzero event handler ID, but attribute name '${attributeName}' does not start with 'on'."
+                );
             }
             var descriptor = new ElementNode.ElementEventDescriptor(eventName, eventHandlerId);
             elementNode.SetEvent(eventName, descriptor);
@@ -340,13 +404,16 @@ public class TestDocument
         if (!TryApplySpecialProperty(batch, elementNode, attributeName, attributeFrame))
         {
             // If not, treat it as a regular string-valued attribute
-            elementNode.SetAttribute(
-              attributeName,
-              attributeFrame.AttributeValue);
+            elementNode.SetAttribute(attributeName, attributeFrame.AttributeValue);
         }
     }
 
-    private bool TryApplySpecialProperty(RenderBatch batch, ElementNode element, string attributeName, RenderTreeFrame attributeFrame)
+    private bool TryApplySpecialProperty(
+        RenderBatch batch,
+        ElementNode element,
+        string attributeName,
+        RenderTreeFrame attributeFrame
+    )
     {
         switch (attributeName)
         {
@@ -367,33 +434,33 @@ public class TestDocument
             case "INPUT":
             case "SELECT":
             case "TEXTAREA":
-                {
-                    var value = attributeFrame.AttributeValue;
-                    element.SetProperty("value", value);
+            {
+                var value = attributeFrame.AttributeValue;
+                element.SetProperty("value", value);
 
-                    if (element.TagName == "SELECT")
-                    {
-                        // <select> is special, in that anything we write to .value will be lost if there
-                        // isn't yet a matching <option>. To maintain the expected behavior no matter the
-                        // element insertion/update order, preserve the desired value separately so
-                        // we can recover it when inserting any matching <option>.
-                        element.SetProperty(SelectValuePropname, value);
-                    }
-                    return true;
-                }
-            case "OPTION":
+                if (element.TagName == "SELECT")
                 {
-                    var value = attributeFrame.AttributeValue;
-                    if (value != null)
-                    {
-                        element.SetAttribute("value", value);
-                    }
-                    else
-                    {
-                        element.RemoveAttribute("value");
-                    }
-                    return true;
+                    // <select> is special, in that anything we write to .value will be lost if there
+                    // isn't yet a matching <option>. To maintain the expected behavior no matter the
+                    // element insertion/update order, preserve the desired value separately so
+                    // we can recover it when inserting any matching <option>.
+                    element.SetProperty(SelectValuePropname, value);
                 }
+                return true;
+            }
+            case "OPTION":
+            {
+                var value = attributeFrame.AttributeValue;
+                if (value != null)
+                {
+                    element.SetAttribute("value", value);
+                }
+                else
+                {
+                    element.RemoveAttribute("value");
+                }
+                return true;
+            }
             default:
                 return false;
         }

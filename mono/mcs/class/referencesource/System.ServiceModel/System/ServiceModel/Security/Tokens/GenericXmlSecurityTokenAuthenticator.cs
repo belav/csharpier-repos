@@ -14,15 +14,16 @@ namespace System.ServiceModel.Security.Tokens
     class GenericXmlSecurityTokenAuthenticator : SecurityTokenAuthenticator
     {
         public GenericXmlSecurityTokenAuthenticator()
-            : base()
-        { }
+            : base() { }
 
         protected override bool CanValidateTokenCore(SecurityToken token)
         {
             return (token is GenericXmlSecurityToken);
         }
 
-        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(SecurityToken token)
+        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(
+            SecurityToken token
+        )
         {
             GenericXmlSecurityToken gxt = (GenericXmlSecurityToken)token;
             return gxt.AuthorizationPolicies;

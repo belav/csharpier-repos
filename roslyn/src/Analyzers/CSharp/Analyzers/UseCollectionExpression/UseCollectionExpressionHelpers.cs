@@ -22,13 +22,15 @@ using static SyntaxFactory;
 
 internal static class UseCollectionExpressionHelpers
 {
-    private static readonly CollectionExpressionSyntax s_emptyCollectionExpression = CollectionExpression();
+    private static readonly CollectionExpressionSyntax s_emptyCollectionExpression =
+        CollectionExpression();
 
     public static bool CanReplaceWithCollectionExpression(
         SemanticModel semanticModel,
         ExpressionSyntax expression,
         bool skipVerificationForReplacedNode,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         var compilation = semanticModel.Compilation;
 
@@ -61,13 +63,18 @@ internal static class UseCollectionExpressionHelpers
         // but it's possible we'll end up with different types at runtime that may cause problems.
         //
         // Note: we can relax this on a case by case basis if we feel like it's acceptable.
-        if (originalTypeInfo.Type != null && !originalTypeInfo.Type.Equals(originalTypeInfo.ConvertedType))
+        if (
+            originalTypeInfo.Type != null
+            && !originalTypeInfo.Type.Equals(originalTypeInfo.ConvertedType)
+        )
         {
             var isOk =
-                originalTypeInfo.Type.Name == nameof(Span<int>) &&
-                originalTypeInfo.ConvertedType.Name == nameof(ReadOnlySpan<int>) &&
-                originalTypeInfo.Type.OriginalDefinition.Equals(compilation.SpanOfTType()) &&
-                originalTypeInfo.ConvertedType.OriginalDefinition.Equals(compilation.ReadOnlySpanOfTType());
+                originalTypeInfo.Type.Name == nameof(Span<int>)
+                && originalTypeInfo.ConvertedType.Name == nameof(ReadOnlySpan<int>)
+                && originalTypeInfo.Type.OriginalDefinition.Equals(compilation.SpanOfTType())
+                && originalTypeInfo.ConvertedType.OriginalDefinition.Equals(
+                    compilation.ReadOnlySpanOfTType()
+                );
             if (!isOk)
                 return false;
         }
@@ -89,7 +96,8 @@ internal static class UseCollectionExpressionHelpers
                 semanticModel,
                 cancellationToken,
                 skipVerificationForReplacedNode,
-                failOnOverloadResolutionFailuresInOriginalCode: true);
+                failOnOverloadResolutionFailuresInOriginalCode: true
+            );
 
             if (speculationAnalyzer.ReplacementChangesSemantics())
                 return false;
@@ -99,7 +107,10 @@ internal static class UseCollectionExpressionHelpers
             // collection type).
             //
             // Note: an identity conversion is always legal without needing any more checks.
-            var conversion = speculationAnalyzer.SpeculativeSemanticModel.GetConversion(speculationAnalyzer.ReplacedExpression, cancellationToken);
+            var conversion = speculationAnalyzer.SpeculativeSemanticModel.GetConversion(
+                speculationAnalyzer.ReplacedExpression,
+                cancellationToken
+            );
             if (conversion.IsIdentity)
                 return true;
 
@@ -108,15 +119,21 @@ internal static class UseCollectionExpressionHelpers
 
             // The new expression's converted type has to equal the old expressions as well.  Otherwise, we're now
             // converting this to some different collection type unintentionally.
-            var replacedTypeInfo = speculationAnalyzer.SpeculativeSemanticModel.GetTypeInfo(speculationAnalyzer.ReplacedExpression, cancellationToken);
+            var replacedTypeInfo = speculationAnalyzer.SpeculativeSemanticModel.GetTypeInfo(
+                speculationAnalyzer.ReplacedExpression,
+                cancellationToken
+            );
             if (!originalTypeInfo.ConvertedType.Equals(replacedTypeInfo.ConvertedType))
                 return false;
         }
 
         return true;
 
-        bool IsAlwaysSafeCastReplacement()
-            => parent is CastExpressionSyntax && IsConstructibleCollectionType(semanticModel.GetTypeInfo(parent, cancellationToken).Type);
+        bool IsAlwaysSafeCastReplacement() =>
+            parent is CastExpressionSyntax
+            && IsConstructibleCollectionType(
+                semanticModel.GetTypeInfo(parent, cancellationToken).Type
+            );
 
         bool IsConstructibleCollectionType(ITypeSymbol? type)
         {
@@ -128,11 +145,18 @@ internal static class UseCollectionExpressionHelpers
             if (type is INamedTypeSymbol namedType)
             {
                 // Span<T> and ReadOnlySpan<T> are always valid collection expression types.
-                if (namedType.Equals(compilation.SpanOfTType()) || namedType.Equals(compilation.ReadOnlySpanOfTType()))
+                if (
+                    namedType.Equals(compilation.SpanOfTType())
+                    || namedType.Equals(compilation.ReadOnlySpanOfTType())
+                )
                     return true;
 
                 // If it has a [CollectionBuilder] attribute on it, it is a valid collection expression type.
-                if (namedType.GetAttributes().Any(a => a.AttributeClass.IsCollectionBuilderAttribute()))
+                if (
+                    namedType
+                        .GetAttributes()
+                        .Any(a => a.AttributeClass.IsCollectionBuilderAttribute())
+                )
                     return true;
 
                 // At this point, all that is left are collection-initializer types.  These need to derive from
@@ -146,13 +170,23 @@ internal static class UseCollectionExpressionHelpers
                 {
                     // If they have an accessible `public C(int capacity)` constructor, the lang prefers calling that.
                     var constructors = namedType.Constructors;
-                    var capacityConstructor = GetAccessibleInstanceConstructor(constructors, c => c.Parameters is [{ Name: "capacity", Type.SpecialType: SpecialType.System_Int32 }]);
+                    var capacityConstructor = GetAccessibleInstanceConstructor(
+                        constructors,
+                        c =>
+                            c.Parameters
+                                is [
+                                    { Name: "capacity", Type.SpecialType: SpecialType.System_Int32 }
+                                ]
+                    );
                     if (capacityConstructor != null)
                         return true;
 
                     var noArgConstructor =
-                        GetAccessibleInstanceConstructor(constructors, c => c.Parameters.IsEmpty) ??
-                        GetAccessibleInstanceConstructor(constructors, c => c.Parameters.All(p => p.IsOptional || p.IsParams));
+                        GetAccessibleInstanceConstructor(constructors, c => c.Parameters.IsEmpty)
+                        ?? GetAccessibleInstanceConstructor(
+                            constructors,
+                            c => c.Parameters.All(p => p.IsOptional || p.IsParams)
+                        );
                     if (noArgConstructor != null)
                     {
                         // If we have a struct, and the constructor we find is implicitly declared, don't consider this
@@ -160,7 +194,12 @@ internal static class UseCollectionExpressionHelpers
                         // collection (like with ImmutableArray<T>) which would then not actually work.  If the struct
                         // does have an explicit constructor though, that's a good sign it can actually be constructed
                         // safely with the no-arg `new S()` call.
-                        if (!(namedType.TypeKind == TypeKind.Struct && noArgConstructor.IsImplicitlyDeclared))
+                        if (
+                            !(
+                                namedType.TypeKind == TypeKind.Struct
+                                && noArgConstructor.IsImplicitlyDeclared
+                            )
+                        )
                             return true;
                     }
                 }
@@ -170,14 +209,23 @@ internal static class UseCollectionExpressionHelpers
             return false;
         }
 
-        IMethodSymbol? GetAccessibleInstanceConstructor(ImmutableArray<IMethodSymbol> constructors, Func<IMethodSymbol, bool> predicate)
+        IMethodSymbol? GetAccessibleInstanceConstructor(
+            ImmutableArray<IMethodSymbol> constructors,
+            Func<IMethodSymbol, bool> predicate
+        )
         {
             var constructor = constructors.FirstOrDefault(c => !c.IsStatic && predicate(c));
-            return constructor is not null && constructor.IsAccessibleWithin(compilation.Assembly) ? constructor : null;
+            return constructor is not null && constructor.IsAccessibleWithin(compilation.Assembly)
+                ? constructor
+                : null;
         }
     }
 
-    private static bool IsInTargetTypedLocation(SemanticModel semanticModel, ExpressionSyntax expression, CancellationToken cancellationToken)
+    private static bool IsInTargetTypedLocation(
+        SemanticModel semanticModel,
+        ExpressionSyntax expression,
+        CancellationToken cancellationToken
+    )
     {
         var topExpression = expression.WalkUpParentheses();
         var parent = topExpression.Parent;
@@ -187,35 +235,62 @@ internal static class UseCollectionExpressionHelpers
             CastExpressionSyntax castExpression => IsInTargetTypedCastExpression(castExpression),
             // a ? [1, 2, 3] : ...  is target typed if either the other side is *not* a collection,
             // or the entire ternary is target typed itself.
-            ConditionalExpressionSyntax conditionalExpression => IsInTargetTypedConditionalExpression(conditionalExpression, topExpression),
+            ConditionalExpressionSyntax conditionalExpression
+                => IsInTargetTypedConditionalExpression(conditionalExpression, topExpression),
             // Similar rules for switches.
-            SwitchExpressionArmSyntax switchExpressionArm => IsInTargetTypedSwitchExpressionArm(switchExpressionArm),
-            InitializerExpressionSyntax initializerExpression => IsInTargetTypedInitializerExpression(initializerExpression, topExpression),
-            CollectionElementSyntax collectionElement => IsInTargetTypedCollectionElement(collectionElement),
-            AssignmentExpressionSyntax assignmentExpression => IsInTargetTypedAssignmentExpression(assignmentExpression, topExpression),
-            BinaryExpressionSyntax binaryExpression => IsInTargetTypedBinaryExpression(binaryExpression, topExpression),
+            SwitchExpressionArmSyntax switchExpressionArm
+                => IsInTargetTypedSwitchExpressionArm(switchExpressionArm),
+            InitializerExpressionSyntax initializerExpression
+                => IsInTargetTypedInitializerExpression(initializerExpression, topExpression),
+            CollectionElementSyntax collectionElement
+                => IsInTargetTypedCollectionElement(collectionElement),
+            AssignmentExpressionSyntax assignmentExpression
+                => IsInTargetTypedAssignmentExpression(assignmentExpression, topExpression),
+            BinaryExpressionSyntax binaryExpression
+                => IsInTargetTypedBinaryExpression(binaryExpression, topExpression),
             ArgumentSyntax or AttributeArgumentSyntax => true,
             ReturnStatementSyntax => true,
             _ => false,
         };
 
-        bool HasType(ExpressionSyntax expression)
-            => semanticModel.GetTypeInfo(expression, cancellationToken).Type is not null and not IErrorTypeSymbol;
+        bool HasType(ExpressionSyntax expression) =>
+            semanticModel.GetTypeInfo(expression, cancellationToken).Type
+                is not null
+                    and not IErrorTypeSymbol;
 
         static bool IsInTargetTypedEqualsValueClause(EqualsValueClauseSyntax equalsValue)
             // If we're after an `x = ...` and it's not `var x`, this is target typed.
-            => equalsValue.Parent is not VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Type.IsVar: true } };
+            =>
+            equalsValue.Parent
+                is not VariableDeclaratorSyntax
+                {
+                    Parent: VariableDeclarationSyntax { Type.IsVar: true }
+                };
 
         static bool IsInTargetTypedCastExpression(CastExpressionSyntax castExpression)
             // (X[])[1, 2, 3] is target typed.  `(X)[1, 2, 3]` is currently not (because it looks like indexing into an expr).
-            => castExpression.Type is not IdentifierNameSyntax;
+            =>
+            castExpression.Type is not IdentifierNameSyntax;
 
-        bool IsInTargetTypedConditionalExpression(ConditionalExpressionSyntax conditionalExpression, ExpressionSyntax expression)
+        bool IsInTargetTypedConditionalExpression(
+            ConditionalExpressionSyntax conditionalExpression,
+            ExpressionSyntax expression
+        )
         {
             if (conditionalExpression.WhenTrue == expression)
-                return HasType(conditionalExpression.WhenFalse) || IsInTargetTypedLocation(semanticModel, conditionalExpression, cancellationToken);
+                return HasType(conditionalExpression.WhenFalse)
+                    || IsInTargetTypedLocation(
+                        semanticModel,
+                        conditionalExpression,
+                        cancellationToken
+                    );
             else if (conditionalExpression.WhenFalse == expression)
-                return HasType(conditionalExpression.WhenTrue) || IsInTargetTypedLocation(semanticModel, conditionalExpression, cancellationToken);
+                return HasType(conditionalExpression.WhenTrue)
+                    || IsInTargetTypedLocation(
+                        semanticModel,
+                        conditionalExpression,
+                        cancellationToken
+                    );
             else
                 return false;
         }
@@ -242,11 +317,15 @@ internal static class UseCollectionExpressionHelpers
                 return false;
 
             // The element it target typed if the parent collection is itself target typed.
-            var collectionExpression = (CollectionExpressionSyntax)collectionElement.GetRequiredParent();
+            var collectionExpression = (CollectionExpressionSyntax)
+                collectionElement.GetRequiredParent();
             return IsInTargetTypedLocation(semanticModel, collectionExpression, cancellationToken);
         }
 
-        bool IsInTargetTypedInitializerExpression(InitializerExpressionSyntax initializerExpression, ExpressionSyntax expression)
+        bool IsInTargetTypedInitializerExpression(
+            InitializerExpressionSyntax initializerExpression,
+            ExpressionSyntax expression
+        )
         {
             // new X[] { [1, 2, 3] }.  Elements are target typed by array type.
             if (initializerExpression.Parent is ArrayCreationExpressionSyntax)
@@ -263,7 +342,11 @@ internal static class UseCollectionExpressionHelpers
             }
 
             // TODO: Handle these.
-            if (initializerExpression.Parent is StackAllocArrayCreationExpressionSyntax or ImplicitStackAllocArrayCreationExpressionSyntax)
+            if (
+                initializerExpression.Parent
+                is StackAllocArrayCreationExpressionSyntax
+                    or ImplicitStackAllocArrayCreationExpressionSyntax
+            )
                 return false;
 
             // T[] x = [1, 2, 3];
@@ -273,25 +356,38 @@ internal static class UseCollectionExpressionHelpers
             return false;
         }
 
-        bool IsInTargetTypedAssignmentExpression(AssignmentExpressionSyntax assignmentExpression, ExpressionSyntax expression)
+        bool IsInTargetTypedAssignmentExpression(
+            AssignmentExpressionSyntax assignmentExpression,
+            ExpressionSyntax expression
+        )
         {
             return expression == assignmentExpression.Right && HasType(assignmentExpression.Left);
         }
 
-        bool IsInTargetTypedBinaryExpression(BinaryExpressionSyntax binaryExpression, ExpressionSyntax expression)
+        bool IsInTargetTypedBinaryExpression(
+            BinaryExpressionSyntax binaryExpression,
+            ExpressionSyntax expression
+        )
         {
-            return binaryExpression.Kind() == SyntaxKind.CoalesceExpression && binaryExpression.Right == expression && HasType(binaryExpression.Left);
+            return binaryExpression.Kind() == SyntaxKind.CoalesceExpression
+                && binaryExpression.Right == expression
+                && HasType(binaryExpression.Left);
         }
     }
 
     public static CollectionExpressionSyntax ConvertInitializerToCollectionExpression(
-        InitializerExpressionSyntax initializer, bool wasOnSingleLine)
+        InitializerExpressionSyntax initializer,
+        bool wasOnSingleLine
+    )
     {
         // if the initializer is already on multiple lines, keep it that way.  otherwise, squash from `{ 1, 2, 3 }` to `[1, 2, 3]`
-        var openBracket = Token(SyntaxKind.OpenBracketToken).WithTriviaFrom(initializer.OpenBraceToken);
-        var elements = initializer.Expressions.GetWithSeparators().SelectAsArray(
-            i => i.IsToken ? i : ExpressionElement((ExpressionSyntax)i.AsNode()!));
-        var closeBracket = Token(SyntaxKind.CloseBracketToken).WithTriviaFrom(initializer.CloseBraceToken);
+        var openBracket = Token(SyntaxKind.OpenBracketToken)
+            .WithTriviaFrom(initializer.OpenBraceToken);
+        var elements = initializer.Expressions
+            .GetWithSeparators()
+            .SelectAsArray(i => i.IsToken ? i : ExpressionElement((ExpressionSyntax)i.AsNode()!));
+        var closeBracket = Token(SyntaxKind.CloseBracketToken)
+            .WithTriviaFrom(initializer.CloseBraceToken);
 
         // If it was on a single line to begin with, then remove the inner spaces on the `{ ... }` to create `[...]`. If
         // it was multiline, leave alone as we want the brackets to just replace the existing braces exactly as they are.
@@ -301,43 +397,69 @@ internal static class UseCollectionExpressionHelpers
             if (openBracket.TrailingTrivia is [(kind: SyntaxKind.WhitespaceTrivia), ..])
                 openBracket = openBracket.WithTrailingTrivia(openBracket.TrailingTrivia.Skip(1));
 
-            if (elements is [.., var lastNodeOrToken] && lastNodeOrToken.GetTrailingTrivia() is [.., (kind: SyntaxKind.WhitespaceTrivia)] trailingTrivia)
-                elements = elements.Replace(lastNodeOrToken, lastNodeOrToken.WithTrailingTrivia(trailingTrivia.Take(trailingTrivia.Count - 1)));
+            if (
+                elements is [.., var lastNodeOrToken]
+                && lastNodeOrToken.GetTrailingTrivia()
+                    is [.., (kind: SyntaxKind.WhitespaceTrivia)] trailingTrivia
+            )
+                elements = elements.Replace(
+                    lastNodeOrToken,
+                    lastNodeOrToken.WithTrailingTrivia(
+                        trailingTrivia.Take(trailingTrivia.Count - 1)
+                    )
+                );
         }
 
-        return CollectionExpression(openBracket, SeparatedList<CollectionElementSyntax>(elements), closeBracket);
+        return CollectionExpression(
+            openBracket,
+            SeparatedList<CollectionElementSyntax>(elements),
+            closeBracket
+        );
     }
 
     public static CollectionExpressionSyntax ReplaceWithCollectionExpression(
         SourceText sourceText,
         InitializerExpressionSyntax originalInitializer,
         CollectionExpressionSyntax newCollectionExpression,
-        bool newCollectionIsSingleLine)
+        bool newCollectionIsSingleLine
+    )
     {
-        Contract.ThrowIfFalse(originalInitializer.Parent
-            is ArrayCreationExpressionSyntax
-            or ImplicitArrayCreationExpressionSyntax
-            or StackAllocArrayCreationExpressionSyntax
-            or ImplicitStackAllocArrayCreationExpressionSyntax
-            or BaseObjectCreationExpressionSyntax);
+        Contract.ThrowIfFalse(
+            originalInitializer.Parent
+                is ArrayCreationExpressionSyntax
+                    or ImplicitArrayCreationExpressionSyntax
+                    or StackAllocArrayCreationExpressionSyntax
+                    or ImplicitStackAllocArrayCreationExpressionSyntax
+                    or BaseObjectCreationExpressionSyntax
+        );
 
         var initializerParent = originalInitializer.GetRequiredParent();
 
-        return ShouldReplaceExistingExpressionEntirely(sourceText, originalInitializer, newCollectionIsSingleLine)
+        return ShouldReplaceExistingExpressionEntirely(
+            sourceText,
+            originalInitializer,
+            newCollectionIsSingleLine
+        )
             ? newCollectionExpression.WithTriviaFrom(initializerParent)
             : newCollectionExpression
-                .WithPrependedLeadingTrivia(originalInitializer.OpenBraceToken.GetPreviousToken().TrailingTrivia)
+                .WithPrependedLeadingTrivia(
+                    originalInitializer.OpenBraceToken.GetPreviousToken().TrailingTrivia
+                )
                 .WithPrependedLeadingTrivia(ElasticMarker);
     }
 
     private static bool ShouldReplaceExistingExpressionEntirely(
         SourceText sourceText,
         InitializerExpressionSyntax initializer,
-        bool newCollectionIsSingleLine)
+        bool newCollectionIsSingleLine
+    )
     {
         // Any time we have `{ x, y, z }` in any form, then always just replace the whole original expression
         // with `[x, y, z]`.
-        if (newCollectionIsSingleLine && sourceText.AreOnSameLine(initializer.OpenBraceToken, initializer.CloseBraceToken))
+        if (
+            newCollectionIsSingleLine
+            && sourceText.AreOnSameLine(initializer.OpenBraceToken, initializer.CloseBraceToken)
+        )
             return true;
 
         // initializer was on multiple lines, but started on the same line as the 'new' keyword.  e.g.:
@@ -353,8 +475,10 @@ internal static class UseCollectionExpressionHelpers
         //      ];
         var parent = initializer.GetRequiredParent();
         var newKeyword = parent.GetFirstToken();
-        if (sourceText.AreOnSameLine(newKeyword, initializer.OpenBraceToken) &&
-            !sourceText.AreOnSameLine(initializer.OpenBraceToken, initializer.CloseBraceToken))
+        if (
+            sourceText.AreOnSameLine(newKeyword, initializer.OpenBraceToken)
+            && !sourceText.AreOnSameLine(initializer.OpenBraceToken, initializer.CloseBraceToken)
+        )
         {
             return true;
         }
@@ -386,21 +510,31 @@ internal static class UseCollectionExpressionHelpers
         return false;
     }
 
-    public static ImmutableArray<CollectionExpressionMatch<StatementSyntax>> TryGetMatches<TArrayCreationExpressionSyntax>(
+    public static ImmutableArray<
+        CollectionExpressionMatch<StatementSyntax>
+    > TryGetMatches<TArrayCreationExpressionSyntax>(
         SemanticModel semanticModel,
         TArrayCreationExpressionSyntax expression,
         Func<TArrayCreationExpressionSyntax, TypeSyntax> getType,
         Func<TArrayCreationExpressionSyntax, InitializerExpressionSyntax?> getInitializer,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
         where TArrayCreationExpressionSyntax : ExpressionSyntax
     {
-        Contract.ThrowIfFalse(expression is ArrayCreationExpressionSyntax or StackAllocArrayCreationExpressionSyntax);
+        Contract.ThrowIfFalse(
+            expression is ArrayCreationExpressionSyntax or StackAllocArrayCreationExpressionSyntax
+        );
 
         // has to either be `stackalloc X[]` or `stackalloc X[const]`.
-        if (getType(expression) is not ArrayTypeSyntax { RankSpecifiers: [{ Sizes: [var size] }, ..] })
+        if (
+            getType(expression)
+            is not ArrayTypeSyntax { RankSpecifiers: [{ Sizes: [var size] }, ..] }
+        )
             return default;
 
-        using var _ = ArrayBuilder<CollectionExpressionMatch<StatementSyntax>>.GetInstance(out var matches);
+        using var _ = ArrayBuilder<CollectionExpressionMatch<StatementSyntax>>.GetInstance(
+            out var matches
+        );
 
         var initializer = getInitializer(expression);
         if (size is OmittedArraySizeExpressionSyntax)
@@ -427,14 +561,17 @@ internal static class UseCollectionExpressionHelpers
                 // number of elements.
 
                 // This needs to be local variable like `ReadOnlySpan<T> x = stackalloc ...
-                if (expression.WalkUpParentheses().Parent is not EqualsValueClauseSyntax
+                if (
+                    expression.WalkUpParentheses().Parent
+                    is not EqualsValueClauseSyntax
                     {
                         Parent: VariableDeclaratorSyntax
                         {
                             Identifier.ValueText: var variableName,
                             Parent.Parent: LocalDeclarationStatementSyntax localDeclarationStatement
                         },
-                    })
+                    }
+                )
                 {
                     return default;
                 }
@@ -445,17 +582,23 @@ internal static class UseCollectionExpressionHelpers
                     // Each following statement needs to of the form:
                     //
                     //   x[...] =
-                    if (currentStatement is not ExpressionStatementSyntax
+                    if (
+                        currentStatement
+                        is not ExpressionStatementSyntax
                         {
                             Expression: AssignmentExpressionSyntax
                             {
                                 Left: ElementAccessExpressionSyntax
                                 {
-                                    Expression: IdentifierNameSyntax { Identifier.ValueText: var elementName },
+                                    Expression: IdentifierNameSyntax
+                                    {
+                                        Identifier.ValueText: var elementName
+                                    },
                                     ArgumentList.Arguments: [var elementArgument],
                                 } elementAccess,
                             }
-                        } expressionStatement)
+                        } expressionStatement
+                    )
                     {
                         return default;
                     }
@@ -465,8 +608,13 @@ internal static class UseCollectionExpressionHelpers
                         return default;
 
                     // The indexing value has to equal the corresponding location in the result.
-                    if (semanticModel.GetConstantValue(elementArgument.Expression, cancellationToken).Value is not int indexValue ||
-                        indexValue != currentIndex)
+                    if (
+                        semanticModel
+                            .GetConstantValue(elementArgument.Expression, cancellationToken)
+                            .Value
+                            is not int indexValue
+                        || indexValue != currentIndex
+                    )
                     {
                         return default;
                     }
@@ -479,8 +627,14 @@ internal static class UseCollectionExpressionHelpers
             }
         }
 
-        if (!CanReplaceWithCollectionExpression(
-                semanticModel, expression, skipVerificationForReplacedNode: true, cancellationToken))
+        if (
+            !CanReplaceWithCollectionExpression(
+                semanticModel,
+                expression,
+                skipVerificationForReplacedNode: true,
+                cancellationToken
+            )
+        )
         {
             return default;
         }
@@ -493,7 +647,8 @@ internal static class UseCollectionExpressionHelpers
         InvocationExpressionSyntax invocationExpression,
         [NotNullWhen(true)] out MemberAccessExpressionSyntax? memberAccess,
         out bool unwrapArgument,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         const string CreateName = nameof(ImmutableArray.Create);
         const string CreateRangeName = nameof(ImmutableArray.CreateRange);
@@ -502,20 +657,29 @@ internal static class UseCollectionExpressionHelpers
         memberAccess = null;
 
         // Looking for `XXX.Create(...)`
-        if (invocationExpression.Expression is not MemberAccessExpressionSyntax
+        if (
+            invocationExpression.Expression
+            is not MemberAccessExpressionSyntax
             {
                 RawKind: (int)SyntaxKind.SimpleMemberAccessExpression,
                 Name.Identifier.Value: CreateName or CreateRangeName,
-            } memberAccessExpression)
+            } memberAccessExpression
+        )
         {
             return false;
         }
 
         memberAccess = memberAccessExpression;
-        if (semanticModel.GetSymbolInfo(memberAccessExpression, cancellationToken).Symbol is not IMethodSymbol { IsStatic: true } createMethod)
+        if (
+            semanticModel.GetSymbolInfo(memberAccessExpression, cancellationToken).Symbol
+            is not IMethodSymbol { IsStatic: true } createMethod
+        )
             return false;
 
-        if (semanticModel.GetSymbolInfo(memberAccessExpression.Expression, cancellationToken).Symbol is not INamedTypeSymbol factoryType)
+        if (
+            semanticModel.GetSymbolInfo(memberAccessExpression.Expression, cancellationToken).Symbol
+            is not INamedTypeSymbol factoryType
+        )
             return false;
 
         var compilation = semanticModel.Compilation;
@@ -526,7 +690,10 @@ internal static class UseCollectionExpressionHelpers
         var collectionBuilderAttributeData = createMethod.ReturnType.OriginalDefinition
             .GetAttributes()
             .FirstOrDefault(a => a.AttributeClass.IsCollectionBuilderAttribute());
-        if (collectionBuilderAttributeData?.ConstructorArguments is not [{ Value: ITypeSymbol collectionBuilderType }, { Value: CreateName }])
+        if (
+            collectionBuilderAttributeData?.ConstructorArguments
+            is not [{ Value: ITypeSymbol collectionBuilderType }, { Value: CreateName }]
+        )
             return false;
 
         if (!factoryType.OriginalDefinition.Equals(collectionBuilderType.OriginalDefinition))
@@ -547,7 +714,8 @@ internal static class UseCollectionExpressionHelpers
 
         bool IsCompatibleSignatureAndArguments(
             IMethodSymbol originalCreateMethod,
-            out bool unwrapArgument)
+            out bool unwrapArgument
+        )
         {
             unwrapArgument = false;
 
@@ -561,19 +729,31 @@ internal static class UseCollectionExpressionHelpers
             if (originalCreateMethod.Name is CreateRangeName)
             {
                 // If we have `CreateRange<T>(IEnumerable<T> values)` this is legal if we have an array, or no-arg object creation.
-                if (originalCreateMethod.Parameters is [
-                    {
-                        Type: INamedTypeSymbol
-                        {
-                            Name: nameof(IEnumerable<int>),
-                            TypeArguments: [ITypeParameterSymbol { TypeParameterKind: TypeParameterKind.Method }]
-                        } enumerableType
-                    }] && enumerableType.OriginalDefinition.Equals(compilation.IEnumerableOfTType()))
+                if (
+                    originalCreateMethod.Parameters
+                        is [
+                            {
+                                Type: INamedTypeSymbol
+                                {
+                                    Name: nameof(IEnumerable<int>),
+                                    TypeArguments: [
+                                        ITypeParameterSymbol
+                                        {
+                                            TypeParameterKind: TypeParameterKind.Method
+                                        }
+                                    ]
+                                } enumerableType
+                            }
+                        ]
+                    && enumerableType.OriginalDefinition.Equals(compilation.IEnumerableOfTType())
+                )
                 {
                     var argExpression = arguments[0].Expression;
-                    if (argExpression
-                            is ArrayCreationExpressionSyntax { Initializer: not null }
-                            or ImplicitArrayCreationExpressionSyntax)
+                    if (
+                        argExpression
+                        is ArrayCreationExpressionSyntax { Initializer: not null }
+                            or ImplicitArrayCreationExpressionSyntax
+                    )
                     {
                         unwrapArgument = true;
                         return true;
@@ -582,11 +762,17 @@ internal static class UseCollectionExpressionHelpers
                     if (argExpression is ObjectCreationExpressionSyntax objectCreation)
                     {
                         // Can't have any arguments, as we cannot preserve them once we grab out all the elements.
-                        if (objectCreation.ArgumentList != null && objectCreation.ArgumentList.Arguments.Count > 0)
+                        if (
+                            objectCreation.ArgumentList != null
+                            && objectCreation.ArgumentList.Arguments.Count > 0
+                        )
                             return false;
 
                         // If it's got an initializer, it has to be a collection initializer (or an empty object initializer);
-                        if (objectCreation.Initializer.IsKind(SyntaxKind.ObjectCreationExpression) && objectCreation.Initializer.Expressions.Count > 0)
+                        if (
+                            objectCreation.Initializer.IsKind(SyntaxKind.ObjectCreationExpression)
+                            && objectCreation.Initializer.Expressions.Count > 0
+                        )
                             return false;
 
                         unwrapArgument = true;
@@ -601,17 +787,48 @@ internal static class UseCollectionExpressionHelpers
                     return arguments.Count == 0;
 
                 // If we have `Create<T>(T)`, `Create<T>(T, T)` etc., then this is convertible.
-                if (originalCreateMethod.Parameters.All(static p => p.Type is ITypeParameterSymbol { TypeParameterKind: TypeParameterKind.Method }))
+                if (
+                    originalCreateMethod.Parameters.All(
+                        static p =>
+                            p.Type
+                                is ITypeParameterSymbol
+                                {
+                                    TypeParameterKind: TypeParameterKind.Method
+                                }
+                    )
+                )
                     return arguments.Count == originalCreateMethod.Parameters.Length;
 
                 // If we have `Create<T>(params T[])` this is legal if there are multiple arguments.  Or a single argument that
                 // is an array literal.
-                if (originalCreateMethod.Parameters is [{ IsParams: true, Type: IArrayTypeSymbol { ElementType: ITypeParameterSymbol { TypeParameterKind: TypeParameterKind.Method } } }])
+                if (
+                    originalCreateMethod.Parameters
+                    is [
+                        {
+                            IsParams: true,
+                            Type: IArrayTypeSymbol
+                            {
+                                ElementType: ITypeParameterSymbol
+                                {
+                                    TypeParameterKind: TypeParameterKind.Method
+                                }
+                            }
+                        }
+                    ]
+                )
                 {
                     if (arguments.Count >= 2)
                         return true;
 
-                    if (arguments is [{ Expression: ArrayCreationExpressionSyntax { Initializer: not null } or ImplicitArrayCreationExpressionSyntax }])
+                    if (
+                        arguments
+                        is [
+                            {
+                                Expression: ArrayCreationExpressionSyntax { Initializer: not null }
+                                    or ImplicitArrayCreationExpressionSyntax
+                            }
+                        ]
+                    )
                     {
                         unwrapArgument = true;
                         return true;
@@ -625,23 +842,36 @@ internal static class UseCollectionExpressionHelpers
                 // Runtime needs to support inline arrays in order for this to be ok.  Otherwise compiler will change the
                 // stack alloc to a heap alloc, which could be very bad for user perf.
 
-                if (arguments.Count == 1 &&
-                    compilation.SupportsRuntimeCapability(RuntimeCapability.InlineArrayTypes) &&
-                    originalCreateMethod.Parameters is [
-                        {
-                            Type: INamedTypeSymbol
+                if (
+                    arguments.Count == 1
+                    && compilation.SupportsRuntimeCapability(RuntimeCapability.InlineArrayTypes)
+                    && originalCreateMethod.Parameters
+                        is [
                             {
-                                Name: nameof(Span<int>) or nameof(ReadOnlySpan<int>),
-                                TypeArguments: [ITypeParameterSymbol { TypeParameterKind: TypeParameterKind.Method }]
-                            } spanType
-                        }])
+                                Type: INamedTypeSymbol
+                                {
+                                    Name: nameof(Span<int>) or nameof(ReadOnlySpan<int>),
+                                    TypeArguments: [
+                                        ITypeParameterSymbol
+                                        {
+                                            TypeParameterKind: TypeParameterKind.Method
+                                        }
+                                    ]
+                                } spanType
+                            }
+                        ]
+                )
                 {
-                    if (spanType.OriginalDefinition.Equals(compilation.SpanOfTType()) ||
-                        spanType.OriginalDefinition.Equals(compilation.ReadOnlySpanOfTType()))
+                    if (
+                        spanType.OriginalDefinition.Equals(compilation.SpanOfTType())
+                        || spanType.OriginalDefinition.Equals(compilation.ReadOnlySpanOfTType())
+                    )
                     {
-                        if (arguments[0].Expression
-                                is StackAllocArrayCreationExpressionSyntax { Initializer: not null }
-                                or ImplicitStackAllocArrayCreationExpressionSyntax)
+                        if (
+                            arguments[0].Expression
+                            is StackAllocArrayCreationExpressionSyntax { Initializer: not null }
+                                or ImplicitStackAllocArrayCreationExpressionSyntax
+                        )
                         {
                             unwrapArgument = true;
                             return true;
@@ -657,7 +887,8 @@ internal static class UseCollectionExpressionHelpers
     public static bool IsCollectionEmptyAccess(
         SemanticModel semanticModel,
         ExpressionSyntax expression,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         const string EmptyName = nameof(Array.Empty);
 
@@ -666,7 +897,12 @@ internal static class UseCollectionExpressionHelpers
             // X<T>.Empty
             return IsEmptyProperty(memberAccess);
         }
-        else if (expression is InvocationExpressionSyntax { Expression: MemberAccessExpressionSyntax innerMemberAccess } invocation)
+        else if (
+            expression is InvocationExpressionSyntax
+            {
+                Expression: MemberAccessExpressionSyntax innerMemberAccess
+            } invocation
+        )
         {
             // X.Empty<T>()
             return IsEmptyMethodCall(invocation, innerMemberAccess);
@@ -685,7 +921,9 @@ internal static class UseCollectionExpressionHelpers
             if (memberAccess.Name is not IdentifierNameSyntax { Identifier.ValueText: EmptyName })
                 return false;
 
-            var expressionSymbol = semanticModel.GetSymbolInfo(memberAccess.Expression, cancellationToken).Symbol;
+            var expressionSymbol = semanticModel
+                .GetSymbolInfo(memberAccess.Expression, cancellationToken)
+                .Symbol;
             if (expressionSymbol is not INamedTypeSymbol)
                 return false;
 
@@ -700,16 +938,22 @@ internal static class UseCollectionExpressionHelpers
         }
 
         // X.Empty<T>()
-        bool IsEmptyMethodCall(InvocationExpressionSyntax invocation, MemberAccessExpressionSyntax memberAccess)
+        bool IsEmptyMethodCall(
+            InvocationExpressionSyntax invocation,
+            MemberAccessExpressionSyntax memberAccess
+        )
         {
             if (invocation.ArgumentList.Arguments.Count != 0)
                 return false;
 
-            if (memberAccess.Name is not GenericNameSyntax
+            if (
+                memberAccess.Name
+                is not GenericNameSyntax
                 {
                     TypeArgumentList.Arguments.Count: 1,
                     Identifier.ValueText: EmptyName,
-                })
+                }
+            )
             {
                 return false;
             }
@@ -717,7 +961,9 @@ internal static class UseCollectionExpressionHelpers
             if (!IsPossiblyDottedName(memberAccess.Expression))
                 return false;
 
-            var expressionSymbol = semanticModel.GetSymbolInfo(memberAccess.Expression, cancellationToken).Symbol;
+            var expressionSymbol = semanticModel
+                .GetSymbolInfo(memberAccess.Expression, cancellationToken)
+                .Symbol;
             if (expressionSymbol is not INamedTypeSymbol)
                 return false;
 
@@ -736,8 +982,15 @@ internal static class UseCollectionExpressionHelpers
             if (expression is GenericNameSyntax)
                 return true;
 
-            if (expression is MemberAccessExpressionSyntax { Expression: ExpressionSyntax childName, Name: GenericNameSyntax } &&
-                IsPossiblyDottedName(childName))
+            if (
+                expression
+                    is MemberAccessExpressionSyntax
+                    {
+                        Expression: ExpressionSyntax childName,
+                        Name: GenericNameSyntax
+                    }
+                && IsPossiblyDottedName(childName)
+            )
             {
                 return true;
             }
@@ -750,8 +1003,15 @@ internal static class UseCollectionExpressionHelpers
             if (name is IdentifierNameSyntax)
                 return true;
 
-            if (name is MemberAccessExpressionSyntax { Expression: ExpressionSyntax childName, Name: IdentifierNameSyntax } &&
-                IsPossiblyDottedName(childName))
+            if (
+                name
+                    is MemberAccessExpressionSyntax
+                    {
+                        Expression: ExpressionSyntax childName,
+                        Name: IdentifierNameSyntax
+                    }
+                && IsPossiblyDottedName(childName)
+            )
             {
                 return true;
             }
@@ -760,7 +1020,10 @@ internal static class UseCollectionExpressionHelpers
         }
     }
 
-    public static SeparatedSyntaxList<ArgumentSyntax> GetArguments(InvocationExpressionSyntax invocationExpression, bool unwrapArgument)
+    public static SeparatedSyntaxList<ArgumentSyntax> GetArguments(
+        InvocationExpressionSyntax invocationExpression,
+        bool unwrapArgument
+    )
     {
         var arguments = invocationExpression.ArgumentList.Arguments;
 
@@ -775,17 +1038,28 @@ internal static class UseCollectionExpressionHelpers
         var initializer = expression switch
         {
             ImplicitArrayCreationExpressionSyntax implicitArray => implicitArray.Initializer,
-            ImplicitStackAllocArrayCreationExpressionSyntax implicitStackAlloc => implicitStackAlloc.Initializer,
+            ImplicitStackAllocArrayCreationExpressionSyntax implicitStackAlloc
+                => implicitStackAlloc.Initializer,
             ArrayCreationExpressionSyntax arrayCreation => arrayCreation.Initializer,
-            StackAllocArrayCreationExpressionSyntax stackAllocCreation => stackAllocCreation.Initializer,
-            ImplicitObjectCreationExpressionSyntax implicitObjectCreation => implicitObjectCreation.Initializer,
+            StackAllocArrayCreationExpressionSyntax stackAllocCreation
+                => stackAllocCreation.Initializer,
+            ImplicitObjectCreationExpressionSyntax implicitObjectCreation
+                => implicitObjectCreation.Initializer,
             ObjectCreationExpressionSyntax objectCreation => objectCreation.Initializer,
             _ => throw ExceptionUtilities.Unreachable(),
         };
 
         return initializer is null
             ? default
-            : SeparatedList<ArgumentSyntax>(initializer.Expressions.GetWithSeparators().Select(
-                nodeOrToken => nodeOrToken.IsToken ? nodeOrToken : Argument((ExpressionSyntax)nodeOrToken.AsNode()!)));
+            : SeparatedList<ArgumentSyntax>(
+                initializer.Expressions
+                    .GetWithSeparators()
+                    .Select(
+                        nodeOrToken =>
+                            nodeOrToken.IsToken
+                                ? nodeOrToken
+                                : Argument((ExpressionSyntax)nodeOrToken.AsNode()!)
+                    )
+            );
     }
 }

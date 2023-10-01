@@ -55,14 +55,12 @@ public class ValueGeneratorCache : IValueGeneratorCache
 
         public ITypeBase TypeBase { get; }
 
-        public bool Equals(CacheKey other)
-            => Property.Equals(other.Property) && TypeBase.Equals(other.TypeBase);
+        public bool Equals(CacheKey other) =>
+            Property.Equals(other.Property) && TypeBase.Equals(other.TypeBase);
 
-        public override bool Equals(object? obj)
-            => obj is CacheKey cacheKey && Equals(cacheKey);
+        public override bool Equals(object? obj) => obj is CacheKey cacheKey && Equals(cacheKey);
 
-        public override int GetHashCode()
-            => HashCode.Combine(Property, TypeBase);
+        public override int GetHashCode() => HashCode.Combine(Property, TypeBase);
     }
 
     /// <summary>
@@ -79,6 +77,11 @@ public class ValueGeneratorCache : IValueGeneratorCache
     public virtual ValueGenerator GetOrAdd(
         IProperty property,
         ITypeBase typeBase,
-        Func<IProperty, ITypeBase, ValueGenerator> factory)
-        => _cache.GetOrAdd(new CacheKey(property, typeBase), static (ck, f) => f(ck.Property, ck.TypeBase), factory);
+        Func<IProperty, ITypeBase, ValueGenerator> factory
+    ) =>
+        _cache.GetOrAdd(
+            new CacheKey(property, typeBase),
+            static (ck, f) => f(ck.Property, ck.TypeBase),
+            factory
+        );
 }

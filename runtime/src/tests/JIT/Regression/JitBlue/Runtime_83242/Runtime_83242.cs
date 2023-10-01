@@ -10,7 +10,8 @@ public class Runtime_83242
     [MethodImpl(MethodImplOptions.NoInlining)]
     static int Map(int i)
     {
-        if (i == 5) return -1;
+        if (i == 5)
+            return -1;
         return i;
     }
 
@@ -34,14 +35,14 @@ public class Runtime_83242
         int[][] a = new int[11][];
         int sum = 0;
         Setup(a);
-        
+
         for (int i = 0; i < a.Length; i++)
         {
             int ii = Map(i);
 
             // Need to ensure ii >= 0 is in the cloning
             // conditions for the following loop
-            
+
             for (int j = 0; j < 5; j++)
             {
                 if (ii >= 0)

@@ -56,7 +56,5 @@ public class Runtime_75442
     private static int UpperBound() => 2;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Use(int val)
-    {
-    }
+    private static void Use(int val) { }
 }

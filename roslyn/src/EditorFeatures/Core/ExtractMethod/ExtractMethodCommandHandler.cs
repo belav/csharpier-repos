@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             ITextBufferUndoManagerProvider undoManager,
             IInlineRenameService renameService,
             IGlobalOptionService globalOptions,
-            IAsynchronousOperationListenerProvider asyncListenerProvider)
+            IAsynchronousOperationListenerProvider asyncListenerProvider
+        )
         {
             Contract.ThrowIfNull(threadingContext);
             Contract.ThrowIfNull(undoManager);
@@ -79,9 +80,11 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 return CommandState.Unspecified;
             }
 
-            if (!args.SubjectBuffer.TryGetWorkspace(out var workspace) ||
-                !workspace.CanApplyChange(ApplyChangesKind.ChangeDocument) ||
-                !args.SubjectBuffer.SupportsRefactorings())
+            if (
+                !args.SubjectBuffer.TryGetWorkspace(out var workspace)
+                || !workspace.CanApplyChange(ApplyChangesKind.ChangeDocument)
+                || !args.SubjectBuffer.SupportsRefactorings()
+            )
             {
                 return CommandState.Unspecified;
             }
@@ -95,7 +98,13 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             // wait indicator for Extract Method
             if (_renameService.ActiveSession != null)
             {
-                _threadingContext.JoinableTaskFactory.Run(() => _renameService.ActiveSession.CommitAsync(previewChanges: false, CancellationToken.None));
+                _threadingContext.JoinableTaskFactory.Run(
+                    () =>
+                        _renameService.ActiveSession.CommitAsync(
+                            previewChanges: false,
+                            CancellationToken.None
+                        )
+                );
             }
 
             if (!args.SubjectBuffer.SupportsRefactorings())
@@ -103,13 +112,17 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
             var view = args.TextView;
             var textBuffer = args.SubjectBuffer;
-            var spans = view.Selection.GetSnapshotSpansOnBuffer(textBuffer).Where(s => s.Length > 0).ToList();
+            var spans = view.Selection
+                .GetSnapshotSpansOnBuffer(textBuffer)
+                .Where(s => s.Length > 0)
+                .ToList();
             if (spans.Count != 1)
                 return false;
 
             var span = spans[0];
 
-            var document = args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document =
+                args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document is null)
                 return false;
 
@@ -121,57 +134,93 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             ITextView view,
             ITextBuffer textBuffer,
             Document document,
-            SnapshotSpan span)
+            SnapshotSpan span
+        )
         {
             _threadingContext.ThrowIfNotOnUIThread();
-            var indicatorFactory = document.Project.Solution.Services.GetRequiredService<IBackgroundWorkIndicatorFactory>();
+            var indicatorFactory =
+                document.Project.Solution.Services.GetRequiredService<IBackgroundWorkIndicatorFactory>();
             using var indicatorContext = indicatorFactory.Create(
-                view, span, EditorFeaturesResources.Applying_Extract_Method_refactoring, cancelOnEdit: true, cancelOnFocusLost: true);
+                view,
+                span,
+                EditorFeaturesResources.Applying_Extract_Method_refactoring,
+                cancelOnEdit: true,
+                cancelOnFocusLost: true
+            );
 
             using var asyncToken = _asyncListener.BeginAsyncOperation(nameof(ExecuteCommand));
-            await ExecuteWorkerAsync(view, textBuffer, span.Span.ToTextSpan(), indicatorContext).ConfigureAwait(false);
+            await ExecuteWorkerAsync(view, textBuffer, span.Span.ToTextSpan(), indicatorContext)
+                .ConfigureAwait(false);
         }
 
         private async Task ExecuteWorkerAsync(
             ITextView view,
             ITextBuffer textBuffer,
             TextSpan span,
-            IBackgroundWorkIndicatorContext waitContext)
+            IBackgroundWorkIndicatorContext waitContext
+        )
         {
             _threadingContext.ThrowIfNotOnUIThread();
 
             var cancellationToken = waitContext.UserCancellationToken;
 
-            var document = await textBuffer.CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChangesAsync(waitContext).ConfigureAwait(false);
+            var document = await textBuffer.CurrentSnapshot
+                .GetFullyLoadedOpenDocumentInCurrentContextWithChangesAsync(waitContext)
+                .ConfigureAwait(false);
             if (document is null)
                 return;
 
-            var options = await document.GetExtractMethodGenerationOptionsAsync(_globalOptions, cancellationToken).ConfigureAwait(false);
-            var result = await ExtractMethodService.ExtractMethodAsync(
-                document, span, localFunction: false, options, cancellationToken).ConfigureAwait(false);
+            var options = await document
+                .GetExtractMethodGenerationOptionsAsync(_globalOptions, cancellationToken)
+                .ConfigureAwait(false);
+            var result = await ExtractMethodService
+                .ExtractMethodAsync(
+                    document,
+                    span,
+                    localFunction: false,
+                    options,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             Contract.ThrowIfNull(result);
 
             if (!result.Succeeded && !result.SucceededWithSuggestion)
             {
                 // if it failed due to out/ref parameter in async method, try it with different option
                 var newResult = await TryWithoutMakingValueTypesRefAsync(
-                    document, span, result, options, cancellationToken).ConfigureAwait(false);
+                        document,
+                        span,
+                        result,
+                        options,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (newResult != null)
                 {
-                    var notificationService = document.Project.Solution.Services.GetService<INotificationService>();
+                    var notificationService =
+                        document.Project.Solution.Services.GetService<INotificationService>();
                     if (notificationService != null)
                     {
                         // We are about to show a modal UI dialog so we should take over the command execution
-                        // wait context. That means the command system won't attempt to show its own wait dialog 
+                        // wait context. That means the command system won't attempt to show its own wait dialog
                         // and also will take it into consideration when measuring command handling duration.
-                        await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+                        await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                            cancellationToken
+                        );
 
-                        if (!notificationService.ConfirmMessageBox(
-                                EditorFeaturesResources.Extract_method_encountered_the_following_issues + Environment.NewLine + Environment.NewLine +
-                                string.Join(Environment.NewLine, result.Reasons) + Environment.NewLine + Environment.NewLine +
-                                EditorFeaturesResources.We_can_fix_the_error_by_not_making_struct_out_ref_parameter_s_Do_you_want_to_proceed,
+                        if (
+                            !notificationService.ConfirmMessageBox(
+                                EditorFeaturesResources.Extract_method_encountered_the_following_issues
+                                    + Environment.NewLine
+                                    + Environment.NewLine
+                                    + string.Join(Environment.NewLine, result.Reasons)
+                                    + Environment.NewLine
+                                    + Environment.NewLine
+                                    + EditorFeaturesResources.We_can_fix_the_error_by_not_making_struct_out_ref_parameter_s_Do_you_want_to_proceed,
                                 title: EditorFeaturesResources.Extract_Method,
-                                severity: NotificationSeverity.Error))
+                                severity: NotificationSeverity.Error
+                            )
+                        )
                         {
                             // We handled the command, displayed a notification and did not produce code.
                             return;
@@ -183,16 +232,25 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     // reset result
                     result = newResult;
                 }
-                else if (await TryNotifyFailureToUserAsync(document, result, cancellationToken).ConfigureAwait(false))
+                else if (
+                    await TryNotifyFailureToUserAsync(document, result, cancellationToken)
+                        .ConfigureAwait(false)
+                )
                 {
                     // We handled the command, displayed a notification and did not produce code.
                     return;
                 }
             }
 
-            var cleanupOptions = await document.GetCodeCleanupOptionsAsync(_globalOptions, cancellationToken).ConfigureAwait(false);
-            var (formattedDocument, methodNameAtInvocation) = await result.GetFormattedDocumentAsync(cleanupOptions, cancellationToken).ConfigureAwait(false);
-            var changes = await formattedDocument.GetTextChangesAsync(document, cancellationToken).ConfigureAwait(false);
+            var cleanupOptions = await document
+                .GetCodeCleanupOptionsAsync(_globalOptions, cancellationToken)
+                .ConfigureAwait(false);
+            var (formattedDocument, methodNameAtInvocation) = await result
+                .GetFormattedDocumentAsync(cleanupOptions, cancellationToken)
+                .ConfigureAwait(false);
+            var changes = await formattedDocument
+                .GetTextChangesAsync(document, cancellationToken)
+                .ConfigureAwait(false);
 
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -202,19 +260,30 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             var textSnapshot = textBuffer.CurrentSnapshot;
             document = textSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document != null)
-                _renameService.StartInlineSession(document, methodNameAtInvocation.Span, cancellationToken);
+                _renameService.StartInlineSession(
+                    document,
+                    methodNameAtInvocation.Span,
+                    cancellationToken
+                );
 
             // select invocation span
-            view.TryMoveCaretToAndEnsureVisible(new SnapshotPoint(textSnapshot, methodNameAtInvocation.Span.End));
+            view.TryMoveCaretToAndEnsureVisible(
+                new SnapshotPoint(textSnapshot, methodNameAtInvocation.Span.End)
+            );
             view.SetSelection(methodNameAtInvocation.Span.ToSnapshotSpan(textSnapshot));
         }
 
         private void ApplyChange_OnUIThread(
-            ITextBuffer textBuffer, IEnumerable<TextChange> changes, IBackgroundWorkIndicatorContext waitContext)
+            ITextBuffer textBuffer,
+            IEnumerable<TextChange> changes,
+            IBackgroundWorkIndicatorContext waitContext
+        )
         {
             _threadingContext.ThrowIfNotOnUIThread();
 
-            using var undoTransaction = _undoManager.GetTextBufferUndoManager(textBuffer).TextBufferUndoHistory.CreateTransaction("Extract Method");
+            using var undoTransaction = _undoManager
+                .GetTextBufferUndoManager(textBuffer)
+                .TextBufferUndoHistory.CreateTransaction("Extract Method");
 
             // We're about to make an edit ourselves.  so disable the cancellation that happens on editing.
             waitContext.CancelOnEdit = false;
@@ -225,33 +294,48 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
         }
 
         /// <returns>
-        /// True: if a failure notification was displayed or the user did not want to proceed in a best effort scenario. 
+        /// True: if a failure notification was displayed or the user did not want to proceed in a best effort scenario.
         ///       Extract Method does not proceed further and is done.
         /// False: the user proceeded to a best effort scenario.
         /// </returns>
         private async Task<bool> TryNotifyFailureToUserAsync(
-            Document document, ExtractMethodResult result, CancellationToken cancellationToken)
+            Document document,
+            ExtractMethodResult result,
+            CancellationToken cancellationToken
+        )
         {
             // We are about to show a modal UI dialog so we should take over the command execution
-            // wait context. That means the command system won't attempt to show its own wait dialog 
+            // wait context. That means the command system won't attempt to show its own wait dialog
             // and also will take it into consideration when measuring command handling duration.
             var project = document.Project;
             var solution = project.Solution;
             var notificationService = solution.Services.GetService<INotificationService>();
 
             // see whether we will allow best effort extraction and if it is possible.
-            if (!_globalOptions.GetOption(ExtractMethodPresentationOptionsStorage.AllowBestEffort, document.Project.Language) ||
-                !result.Status.HasBestEffort() ||
-                result.DocumentWithoutFinalFormatting == null)
+            if (
+                !_globalOptions.GetOption(
+                    ExtractMethodPresentationOptionsStorage.AllowBestEffort,
+                    document.Project.Language
+                )
+                || !result.Status.HasBestEffort()
+                || result.DocumentWithoutFinalFormatting == null
+            )
             {
                 if (notificationService != null)
                 {
-                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                        cancellationToken
+                    );
                     notificationService.SendNotification(
-                        EditorFeaturesResources.Extract_method_encountered_the_following_issues + Environment.NewLine +
-                        string.Join("", result.Reasons.Select(r => Environment.NewLine + "  " + r)),
+                        EditorFeaturesResources.Extract_method_encountered_the_following_issues
+                            + Environment.NewLine
+                            + string.Join(
+                                "",
+                                result.Reasons.Select(r => Environment.NewLine + "  " + r)
+                            ),
                         title: EditorFeaturesResources.Extract_Method,
-                        severity: NotificationSeverity.Error);
+                        severity: NotificationSeverity.Error
+                    );
                 }
 
                 return true;
@@ -260,13 +344,24 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             // okay, best effort is turned on, let user know it is an best effort
             if (notificationService != null)
             {
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-                if (!notificationService.ConfirmMessageBox(
-                        EditorFeaturesResources.Extract_method_encountered_the_following_issues + Environment.NewLine +
-                        string.Join("", result.Reasons.Select(r => Environment.NewLine + "  " + r)) + Environment.NewLine + Environment.NewLine +
-                        EditorFeaturesResources.Do_you_still_want_to_proceed_This_may_produce_broken_code,
+                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
+                if (
+                    !notificationService.ConfirmMessageBox(
+                        EditorFeaturesResources.Extract_method_encountered_the_following_issues
+                            + Environment.NewLine
+                            + string.Join(
+                                "",
+                                result.Reasons.Select(r => Environment.NewLine + "  " + r)
+                            )
+                            + Environment.NewLine
+                            + Environment.NewLine
+                            + EditorFeaturesResources.Do_you_still_want_to_proceed_This_may_produce_broken_code,
                         title: EditorFeaturesResources.Extract_Method,
-                        severity: NotificationSeverity.Warning))
+                        severity: NotificationSeverity.Warning
+                    )
+                )
                 {
                     return true;
                 }
@@ -276,21 +371,49 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
         }
 
         private static async Task<ExtractMethodResult?> TryWithoutMakingValueTypesRefAsync(
-            Document document, TextSpan span, ExtractMethodResult result, ExtractMethodGenerationOptions options, CancellationToken cancellationToken)
+            Document document,
+            TextSpan span,
+            ExtractMethodResult result,
+            ExtractMethodGenerationOptions options,
+            CancellationToken cancellationToken
+        )
         {
             if (options.ExtractOptions.DoNotPutOutOrRefOnStruct || !result.Reasons.IsSingle())
                 return null;
 
             var reason = result.Reasons.FirstOrDefault();
-            var length = FeaturesResources.Asynchronous_method_cannot_have_ref_out_parameters_colon_bracket_0_bracket.IndexOf(':');
-            if (reason != null && length > 0 && reason.IndexOf(FeaturesResources.Asynchronous_method_cannot_have_ref_out_parameters_colon_bracket_0_bracket[..length], 0, length, StringComparison.Ordinal) >= 0)
+            var length =
+                FeaturesResources.Asynchronous_method_cannot_have_ref_out_parameters_colon_bracket_0_bracket.IndexOf(
+                    ':'
+                );
+            if (
+                reason != null
+                && length > 0
+                && reason.IndexOf(
+                    FeaturesResources.Asynchronous_method_cannot_have_ref_out_parameters_colon_bracket_0_bracket[
+                        ..length
+                    ],
+                    0,
+                    length,
+                    StringComparison.Ordinal
+                ) >= 0
+            )
             {
-                var newResult = await ExtractMethodService.ExtractMethodAsync(
-                    document,
-                    span,
-                    localFunction: false,
-                    options with { ExtractOptions = options.ExtractOptions with { DoNotPutOutOrRefOnStruct = true } },
-                    cancellationToken).ConfigureAwait(false);
+                var newResult = await ExtractMethodService
+                    .ExtractMethodAsync(
+                        document,
+                        span,
+                        localFunction: false,
+                        options with
+                        {
+                            ExtractOptions = options.ExtractOptions with
+                            {
+                                DoNotPutOutOrRefOnStruct = true
+                            }
+                        },
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 // retry succeeded, return new result
                 if (newResult.Succeeded || newResult.SucceededWithSuggestion)
