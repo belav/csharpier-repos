@@ -248,3 +248,5 @@
 /mono/mcs/class/System/System.Security.Cryptography.X509Certificates/X509Helper2.cs
 /mono/mcs/class/System/System.Security.Cryptography.X509Certificates/X509Certificate2ImplMono.cs
 /mono/mcs/class/System/System.Net.Mail/SmtpClient.cs
+/runtime/src/libraries/Common/src/Interop/Windows/BCrypt/Interop.BCryptAlgPseudoHandle.cs
+/runtime/src/libraries/System.Private.CoreLib/src/System/Runtime/CompilerServices/Unsafe.cs
