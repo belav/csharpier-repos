@@ -12,10 +12,11 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure;
 
 [Trait(Traits.Feature, Traits.Features.Outlining)]
-public class ArrowExpressionClauseStructureTests : AbstractCSharpSyntaxNodeStructureTests<ArrowExpressionClauseSyntax>
+public class ArrowExpressionClauseStructureTests
+    : AbstractCSharpSyntaxNodeStructureTests<ArrowExpressionClauseSyntax>
 {
-    internal override AbstractSyntaxStructureProvider CreateProvider()
-        => new ArrowExpressionClauseStructureProvider();
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new ArrowExpressionClauseStructureProvider();
 
     [Fact]
     public async Task TestArrowExpressionClause_Method1()
@@ -29,7 +30,8 @@ public class ArrowExpressionClauseStructureTests : AbstractCSharpSyntaxNodeStruc
                         : falseCase;|}|};
                 }
                 """,
-            Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+            Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -45,7 +47,8 @@ public class ArrowExpressionClauseStructureTests : AbstractCSharpSyntaxNodeStruc
                     void N() => 0;
                 }
                 """,
-            Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+            Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -62,7 +65,8 @@ public class ArrowExpressionClauseStructureTests : AbstractCSharpSyntaxNodeStruc
                     void N() => 0;
                 }
                 """,
-            Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+            Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -78,7 +82,8 @@ public class ArrowExpressionClauseStructureTests : AbstractCSharpSyntaxNodeStruc
                     int N => 0;
                 }
                 """,
-            Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+            Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -95,7 +100,8 @@ public class ArrowExpressionClauseStructureTests : AbstractCSharpSyntaxNodeStruc
                     int N => 0;
                 }
                 """,
-            Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+            Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -110,7 +116,8 @@ public class ArrowExpressionClauseStructureTests : AbstractCSharpSyntaxNodeStruc
                         : falseCase;|}|};
                 }
                 """,
-            Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+            Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -126,7 +133,8 @@ public class ArrowExpressionClauseStructureTests : AbstractCSharpSyntaxNodeStruc
                     int N => 0;
                 }
                 """,
-            Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+            Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -143,7 +151,8 @@ public class ArrowExpressionClauseStructureTests : AbstractCSharpSyntaxNodeStruc
                     int N => 0;
                 }
                 """,
-            Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+            Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -159,7 +168,8 @@ public class ArrowExpressionClauseStructureTests : AbstractCSharpSyntaxNodeStruc
                     int N() => 0;
                 }
                 """,
-            Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+            Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -176,7 +186,8 @@ public class ArrowExpressionClauseStructureTests : AbstractCSharpSyntaxNodeStruc
                     int N() => 0;
                 }
                 """,
-            Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+            Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -194,6 +205,7 @@ public class ArrowExpressionClauseStructureTests : AbstractCSharpSyntaxNodeStruc
                     }
                 }
                 """,
-            Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 }

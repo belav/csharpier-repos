@@ -45,7 +45,8 @@ namespace System.Diagnostics.Tracing
             EventLevel level,
             EventOpcode opcode,
             EventKeywords keywords,
-            EventTags tags)
+            EventTags tags
+        )
         {
             if (dataType == null)
             {
@@ -145,7 +146,8 @@ namespace System.Diagnostics.Tracing
         public abstract void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format);
+            EventFieldFormat format
+        );
 
         /// <summary>
         /// Refer to TraceLoggingTypeInfo.WriteObjectData for information about this
@@ -159,12 +161,10 @@ namespace System.Diagnostics.Tracing
         /// Refer to TraceLoggingTypeInfo.WriteObjectData for information about this
         /// method.
         /// </param>
-        public abstract void WriteObjectData(
-            TraceLoggingDataCollector collector,
-            object value);
+        public abstract void WriteObjectData(TraceLoggingDataCollector collector, object value);
 
         /// <summary>
-        /// Fetches the event parameter data for internal serialization. 
+        /// Fetches the event parameter data for internal serialization.
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>

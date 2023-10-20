@@ -16,17 +16,30 @@ internal class W3CLoggerProcessor : FileLoggerProcessor
     private readonly W3CLoggingFields _loggingFields;
     private readonly ISet<string>? _additionalRequestHeaders;
 
-    public W3CLoggerProcessor(IOptionsMonitor<W3CLoggerOptions> options, IHostEnvironment environment, ILoggerFactory factory) : base(options, environment, factory)
+    public W3CLoggerProcessor(
+        IOptionsMonitor<W3CLoggerOptions> options,
+        IHostEnvironment environment,
+        ILoggerFactory factory
+    )
+        : base(options, environment, factory)
     {
         _loggingFields = options.CurrentValue.LoggingFields;
         _additionalRequestHeaders = W3CLoggerOptions.FilterRequestHeaders(options.CurrentValue);
     }
 
-    public override async Task OnFirstWrite(StreamWriter streamWriter, CancellationToken cancellationToken)
+    public override async Task OnFirstWrite(
+        StreamWriter streamWriter,
+        CancellationToken cancellationToken
+    )
     {
         await WriteMessageAsync("#Version: 1.0", streamWriter, cancellationToken);
 
-        await WriteMessageAsync("#Start-Date: " + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture), streamWriter, cancellationToken);
+        await WriteMessageAsync(
+            "#Start-Date: "
+                + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture),
+            streamWriter,
+            cancellationToken
+        );
 
         await WriteMessageAsync(GetFieldsDirective(), streamWriter, cancellationToken);
     }
@@ -117,7 +130,11 @@ internal class W3CLoggerProcessor : FileLoggerProcessor
     }
 
     // For testing
-    internal override Task WriteMessageAsync(string message, StreamWriter streamWriter, CancellationToken cancellationToken)
+    internal override Task WriteMessageAsync(
+        string message,
+        StreamWriter streamWriter,
+        CancellationToken cancellationToken
+    )
     {
         OnWrite(message);
         return base.WriteMessageAsync(message, streamWriter, cancellationToken);

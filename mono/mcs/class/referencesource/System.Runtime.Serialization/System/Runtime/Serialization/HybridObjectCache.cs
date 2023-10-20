@@ -13,9 +13,7 @@ namespace System.Runtime.Serialization
         Dictionary<string, object> objectDictionary;
         Dictionary<string, object> referencedObjectDictionary;
 
-        internal HybridObjectCache()
-        {
-        }
+        internal HybridObjectCache() { }
 
         internal void Add(string id, object obj)
         {
@@ -24,7 +22,16 @@ namespace System.Runtime.Serialization
 
             object existingObject;
             if (objectDictionary.TryGetValue(id, out existingObject))
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.GetString(SR.MultipleIdDefinition, id)));
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.GetString(SR.MultipleIdDefinition, id)
+                        )
+                    );
             objectDictionary.Add(id, obj);
         }
 
@@ -64,6 +71,5 @@ namespace System.Runtime.Serialization
             }
             return false;
         }
-
     }
 }

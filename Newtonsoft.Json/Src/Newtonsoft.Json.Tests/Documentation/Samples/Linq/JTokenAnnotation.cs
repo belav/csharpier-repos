@@ -46,15 +46,18 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
         public void Example()
         {
             #region Usage
-            JObject o = JObject.Parse(@"{
+            JObject o = JObject.Parse(
+                @"{
               'name': 'Bill G',
               'age': 58,
               'country': 'United States',
               'employer': 'Microsoft'
-            }");
+            }"
+            );
 
             o.AddAnnotation(new HashSet<string>());
-            o.PropertyChanged += (sender, args) => o.Annotation<HashSet<string>>().Add(args.PropertyName);
+            o.PropertyChanged += (sender, args) =>
+                o.Annotation<HashSet<string>>().Add(args.PropertyName);
 
             o["age"] = 59;
             o["employer"] = "Bill & Melinda Gates Foundation";

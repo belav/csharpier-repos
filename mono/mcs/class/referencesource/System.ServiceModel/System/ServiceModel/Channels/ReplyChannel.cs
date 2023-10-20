@@ -39,7 +39,11 @@ namespace System.ServiceModel.Channels
             return default(T);
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CompletedAsyncResult(callback, state);
         }
@@ -49,9 +53,7 @@ namespace System.ServiceModel.Channels
             CompletedAsyncResult.End(result);
         }
 
-        protected override void OnOpen(TimeSpan timeout)
-        {
-        }
+        protected override void OnOpen(TimeSpan timeout) { }
 
         #region static Helpers to convert TryReceiveRequest to ReceiveRequest
         internal static RequestContext HelpReceiveRequest(IReplyChannel channel, TimeSpan timeout)
@@ -63,12 +65,20 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    ReplyChannel.CreateReceiveRequestTimedOutException(channel, timeout));
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        ReplyChannel.CreateReceiveRequestTimedOutException(channel, timeout)
+                    );
             }
         }
 
-        internal static IAsyncResult HelpBeginReceiveRequest(IReplyChannel channel, TimeSpan timeout, AsyncCallback callback, object state)
+        internal static IAsyncResult HelpBeginReceiveRequest(
+            IReplyChannel channel,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new HelpReceiveRequestAsyncResult(channel, timeout, callback, state);
         }
@@ -82,15 +92,26 @@ namespace System.ServiceModel.Channels
         {
             IReplyChannel channel;
             TimeSpan timeout;
-            static AsyncCallback onReceiveRequest = Fx.ThunkCallback(new AsyncCallback(OnReceiveRequest));
+            static AsyncCallback onReceiveRequest = Fx.ThunkCallback(
+                new AsyncCallback(OnReceiveRequest)
+            );
             RequestContext requestContext;
 
-            public HelpReceiveRequestAsyncResult(IReplyChannel channel, TimeSpan timeout, AsyncCallback callback, object state)
+            public HelpReceiveRequestAsyncResult(
+                IReplyChannel channel,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.channel = channel;
                 this.timeout = timeout;
-                IAsyncResult result = channel.BeginTryReceiveRequest(timeout, onReceiveRequest, this);
+                IAsyncResult result = channel.BeginTryReceiveRequest(
+                    timeout,
+                    onReceiveRequest,
+                    this
+                );
 
                 if (!result.CompletedSynchronously)
                 {
@@ -103,7 +124,8 @@ namespace System.ServiceModel.Channels
 
             public static RequestContext End(IAsyncResult result)
             {
-                HelpReceiveRequestAsyncResult thisPtr = AsyncResult.End<HelpReceiveRequestAsyncResult>(result);
+                HelpReceiveRequestAsyncResult thisPtr =
+                    AsyncResult.End<HelpReceiveRequestAsyncResult>(result);
                 return thisPtr.requestContext;
             }
 
@@ -111,8 +133,14 @@ namespace System.ServiceModel.Channels
             {
                 if (!this.channel.EndTryReceiveRequest(result, out this.requestContext))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        ReplyChannel.CreateReceiveRequestTimedOutException(this.channel, this.timeout));
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            ReplyChannel.CreateReceiveRequestTimedOutException(
+                                this.channel,
+                                this.timeout
+                            )
+                        );
                 }
             }
 
@@ -123,7 +151,8 @@ namespace System.ServiceModel.Channels
                     return;
                 }
 
-                HelpReceiveRequestAsyncResult thisPtr = (HelpReceiveRequestAsyncResult)result.AsyncState;
+                HelpReceiveRequestAsyncResult thisPtr = (HelpReceiveRequestAsyncResult)
+                    result.AsyncState;
                 Exception completionException = null;
                 try
                 {
@@ -144,15 +173,26 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        static Exception CreateReceiveRequestTimedOutException(IReplyChannel channel, TimeSpan timeout)
+        static Exception CreateReceiveRequestTimedOutException(
+            IReplyChannel channel,
+            TimeSpan timeout
+        )
         {
             if (channel.LocalAddress != null)
             {
-                return new TimeoutException(SR.GetString(SR.ReceiveRequestTimedOut, channel.LocalAddress.Uri.AbsoluteUri, timeout));
+                return new TimeoutException(
+                    SR.GetString(
+                        SR.ReceiveRequestTimedOut,
+                        channel.LocalAddress.Uri.AbsoluteUri,
+                        timeout
+                    )
+                );
             }
             else
             {
-                return new TimeoutException(SR.GetString(SR.ReceiveRequestTimedOutNoLocalAddress, timeout));
+                return new TimeoutException(
+                    SR.GetString(SR.ReceiveRequestTimedOutNoLocalAddress, timeout)
+                );
             }
         }
         #endregion
@@ -166,8 +206,15 @@ namespace System.ServiceModel.Channels
         public RequestContext ReceiveRequest(TimeSpan timeout)
         {
             if (timeout < TimeSpan.Zero)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("timeout", timeout, SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "timeout",
+                            timeout,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
 
             this.ThrowPending();
             return ReplyChannel.HelpReceiveRequest(this, timeout);
@@ -178,12 +225,23 @@ namespace System.ServiceModel.Channels
             return this.BeginReceiveRequest(this.DefaultReceiveTimeout, callback, state);
         }
 
-        public IAsyncResult BeginReceiveRequest(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginReceiveRequest(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("timeout", timeout, SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "timeout",
+                            timeout,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
             }
 
             this.ThrowPending();
@@ -198,18 +256,36 @@ namespace System.ServiceModel.Channels
         public bool TryReceiveRequest(TimeSpan timeout, out RequestContext context)
         {
             if (timeout < TimeSpan.Zero)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("timeout", timeout, SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "timeout",
+                            timeout,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
 
             this.ThrowPending();
             return base.Dequeue(timeout, out context);
         }
 
-        public IAsyncResult BeginTryReceiveRequest(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginTryReceiveRequest(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (timeout < TimeSpan.Zero)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("timeout", timeout, SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "timeout",
+                            timeout,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
 
             this.ThrowPending();
             return base.BeginDequeue(timeout, callback, state);
@@ -223,18 +299,36 @@ namespace System.ServiceModel.Channels
         public bool WaitForRequest(TimeSpan timeout)
         {
             if (timeout < TimeSpan.Zero)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("timeout", timeout, SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "timeout",
+                            timeout,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
 
             this.ThrowPending();
             return base.WaitForItem(timeout);
         }
 
-        public IAsyncResult BeginWaitForRequest(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginWaitForRequest(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (timeout < TimeSpan.Zero)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("timeout", timeout, SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "timeout",
+                            timeout,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
 
             this.ThrowPending();
             return base.BeginWaitForItem(timeout, callback, state);

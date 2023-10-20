@@ -24,27 +24,37 @@ internal static class NamedPipeTestHelpers
     public static NamedPipeTransportFactory CreateTransportFactory(
         ILoggerFactory loggerFactory = null,
         NamedPipeTransportOptions options = null,
-        ObjectPoolProvider objectPoolProvider = null)
+        ObjectPoolProvider objectPoolProvider = null
+    )
     {
         options ??= new NamedPipeTransportOptions();
-        return new NamedPipeTransportFactory(loggerFactory ?? NullLoggerFactory.Instance, Options.Create(options), objectPoolProvider ?? new DefaultObjectPoolProvider());
+        return new NamedPipeTransportFactory(
+            loggerFactory ?? NullLoggerFactory.Instance,
+            Options.Create(options),
+            objectPoolProvider ?? new DefaultObjectPoolProvider()
+        );
     }
 
     public static async Task<NamedPipeConnectionListener> CreateConnectionListenerFactory(
         ILoggerFactory loggerFactory = null,
         string pipeName = null,
         NamedPipeTransportOptions options = null,
-        ObjectPoolProvider objectPoolProvider = null)
+        ObjectPoolProvider objectPoolProvider = null
+    )
     {
         var transportFactory = CreateTransportFactory(loggerFactory, options, objectPoolProvider);
 
         var endpoint = new NamedPipeEndPoint(pipeName ?? GetUniquePipeName());
 
-        var listener = (NamedPipeConnectionListener)await transportFactory.BindAsync(endpoint, cancellationToken: CancellationToken.None);
+        var listener = (NamedPipeConnectionListener)
+            await transportFactory.BindAsync(endpoint, cancellationToken: CancellationToken.None);
         return listener;
     }
 
-    public static NamedPipeClientStream CreateClientStream(EndPoint remoteEndPoint, TokenImpersonationLevel? impersonationLevel = null)
+    public static NamedPipeClientStream CreateClientStream(
+        EndPoint remoteEndPoint,
+        TokenImpersonationLevel? impersonationLevel = null
+    )
     {
         var namedPipeEndPoint = (NamedPipeEndPoint)remoteEndPoint;
         var clientStream = new NamedPipeClientStream(
@@ -52,11 +62,16 @@ internal static class NamedPipeTestHelpers
             pipeName: namedPipeEndPoint.PipeName,
             direction: PipeDirection.InOut,
             options: PipeOptions.WriteThrough | PipeOptions.Asynchronous,
-            impersonationLevel: impersonationLevel ?? TokenImpersonationLevel.Anonymous);
+            impersonationLevel: impersonationLevel ?? TokenImpersonationLevel.Anonymous
+        );
         return clientStream;
     }
 
-    public static async Task<NamedPipeConnection> CreateAndCompleteBidirectionalStreamGracefully(NamedPipeClientStream clientConnection, NamedPipeConnectionListener connectionListener, ILogger logger)
+    public static async Task<NamedPipeConnection> CreateAndCompleteBidirectionalStreamGracefully(
+        NamedPipeClientStream clientConnection,
+        NamedPipeConnectionListener connectionListener,
+        ILogger logger
+    )
     {
         logger.LogInformation("Client connecting.");
         await clientConnection.ConnectAsync().DefaultTimeout();
@@ -71,7 +86,11 @@ internal static class NamedPipeTestHelpers
         await writeTask.DefaultTimeout();
 
         logger.LogInformation("Server reading data.");
-        var readResult = await serverConnection.Transport.Input.ReadAtLeastAsync(TestData.Length).DefaultTimeout();
+        var readResult = await serverConnection
+            .Transport
+            .Input
+            .ReadAtLeastAsync(TestData.Length)
+            .DefaultTimeout();
         serverConnection.Transport.Input.AdvanceTo(readResult.Buffer.End);
 
         clientConnection.Close();

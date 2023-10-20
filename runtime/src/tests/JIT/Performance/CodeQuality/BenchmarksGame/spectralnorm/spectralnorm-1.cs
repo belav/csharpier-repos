@@ -9,7 +9,7 @@
 /* The Computer Language Benchmarks Game
    http://benchmarksgame.alioth.debian.org/
  
-   contributed by Isaac Gouy 
+   contributed by Isaac Gouy
 */
 
 using System;
@@ -44,11 +44,13 @@ namespace BenchmarksGame
         {
             // create unit vector
             double[] u = new double[n];
-            for (int i = 0; i < n; i++) u[i] = 1;
+            for (int i = 0; i < n; i++)
+                u[i] = 1;
 
             // 20 steps of the power method
             double[] v = new double[n];
-            for (int i = 0; i < n; i++) v[i] = 0;
+            for (int i = 0; i < n; i++)
+                v[i] = 0;
 
             for (int i = 0; i < 10; i++)
             {
@@ -57,8 +59,9 @@ namespace BenchmarksGame
             }
 
             // B=AtA         A multiplied by A transposed
-            // v.Bv /(v.v)   eigenvalue of v 
-            double vBv = 0, vv = 0;
+            // v.Bv /(v.v)   eigenvalue of v
+            double vBv = 0,
+                vv = 0;
             for (int i = 0; i < n; i++)
             {
                 vBv += u[i] * v[i];
@@ -67,7 +70,6 @@ namespace BenchmarksGame
 
             return Math.Sqrt(vBv / vv);
         }
-
 
         /* return element i,j of infinite matrix A */
         double A(int i, int j)
@@ -81,7 +83,8 @@ namespace BenchmarksGame
             for (int i = 0; i < n; i++)
             {
                 Av[i] = 0;
-                for (int j = 0; j < n; j++) Av[i] += A(i, j) * v[j];
+                for (int j = 0; j < n; j++)
+                    Av[i] += A(i, j) * v[j];
             }
         }
 
@@ -91,7 +94,8 @@ namespace BenchmarksGame
             for (int i = 0; i < n; i++)
             {
                 Atv[i] = 0;
-                for (int j = 0; j < n; j++) Atv[i] += A(j, i) * v[j];
+                for (int j = 0; j < n; j++)
+                    Atv[i] += A(j, i) * v[j];
             }
         }
 

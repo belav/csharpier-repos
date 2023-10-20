@@ -12,7 +12,9 @@ using Xunit;
 
 namespace AppHost.Bundle.Tests
 {
-    public class BundledAppWithSubDirs : BundleTestBase, IClassFixture<BundledAppWithSubDirs.SharedTestState>
+    public class BundledAppWithSubDirs
+        : BundleTestBase,
+            IClassFixture<BundledAppWithSubDirs.SharedTestState>
     {
         private SharedTestState sharedTestState;
 
@@ -24,13 +26,16 @@ namespace AppHost.Bundle.Tests
         private void RunTheApp(string path, bool selfContained)
         {
             RunTheApp(path, selfContained ? null : RepoDirectoriesProvider.Default.BuiltDotnet)
-                .Should().Pass()
-                .And.HaveStdOutContaining("Wow! We now say hello to the big world and you.");
+                .Should()
+                .Pass()
+                .And
+                .HaveStdOutContaining("Wow! We now say hello to the big world and you.");
         }
 
         private CommandResult RunTheApp(string path, string dotnetRoot)
         {
-            return Command.Create(path)
+            return Command
+                .Create(path)
                 .EnableTracingAndCaptureOutputs()
                 .DotNetRoot(dotnetRoot)
                 .MultilevelLookup(false)
@@ -59,11 +64,17 @@ namespace AppHost.Bundle.Tests
         {
             var singleFile = sharedTestState.FrameworkDependentApp.Bundle(BundleOptions.None);
 
-            string dotnetWithMockHostFxr = SharedFramework.CalculateUniqueTestDirectory(Path.Combine(TestArtifact.TestArtifactsPath, "guiErrors"));
+            string dotnetWithMockHostFxr = SharedFramework.CalculateUniqueTestDirectory(
+                Path.Combine(TestArtifact.TestArtifactsPath, "guiErrors")
+            );
             using (new TestArtifact(dotnetWithMockHostFxr))
             {
                 Directory.CreateDirectory(dotnetWithMockHostFxr);
-                var dotnetBuilder = new DotNetBuilder(dotnetWithMockHostFxr, sharedTestState.RepoDirectories.BuiltDotnet, "mockhostfxrFrameworkMissingFailure")
+                var dotnetBuilder = new DotNetBuilder(
+                    dotnetWithMockHostFxr,
+                    sharedTestState.RepoDirectories.BuiltDotnet,
+                    "mockhostfxrFrameworkMissingFailure"
+                )
                     .RemoveHostFxr()
                     .AddMockHostFxr(new Version(2, 2, 0));
                 var dotnet = dotnetBuilder.Build();
@@ -72,9 +83,14 @@ namespace AppHost.Bundle.Tests
                 RunTheApp(singleFile, dotnet.BinPath)
                     .Should()
                     .Fail()
-                    .And.HaveStdErrContaining("You must install or update .NET to run this application.")
-                    .And.HaveStdErrContaining("App host version:")
-                    .And.HaveStdErrContaining("apphost_version=");
+                    .And
+                    .HaveStdErrContaining(
+                        "You must install or update .NET to run this application."
+                    )
+                    .And
+                    .HaveStdErrContaining("App host version:")
+                    .And
+                    .HaveStdErrContaining("apphost_version=");
             }
         }
 
@@ -87,18 +103,28 @@ namespace AppHost.Bundle.Tests
             var singleFile = sharedTestState.FrameworkDependentApp.Bundle(options);
             PEUtils.SetWindowsGraphicalUserInterfaceBit(singleFile);
 
-            string dotnetWithMockHostFxr = SharedFramework.CalculateUniqueTestDirectory(Path.Combine(TestArtifact.TestArtifactsPath, "bundleErrors"));
+            string dotnetWithMockHostFxr = SharedFramework.CalculateUniqueTestDirectory(
+                Path.Combine(TestArtifact.TestArtifactsPath, "bundleErrors")
+            );
             using (new TestArtifact(dotnetWithMockHostFxr))
             {
                 Directory.CreateDirectory(dotnetWithMockHostFxr);
-                string expectedErrorCode = Constants.ErrorCode.BundleExtractionFailure.ToString("x");
+                string expectedErrorCode = Constants
+                    .ErrorCode
+                    .BundleExtractionFailure
+                    .ToString("x");
 
-                var dotnetBuilder = new DotNetBuilder(dotnetWithMockHostFxr, sharedTestState.RepoDirectories.BuiltDotnet, "mockhostfxrBundleVersionFailure")
+                var dotnetBuilder = new DotNetBuilder(
+                    dotnetWithMockHostFxr,
+                    sharedTestState.RepoDirectories.BuiltDotnet,
+                    "mockhostfxrBundleVersionFailure"
+                )
                     .RemoveHostFxr()
                     .AddMockHostFxr(new Version(5, 0, 0));
                 var dotnet = dotnetBuilder.Build();
 
-                Command command = Command.Create(singleFile)
+                Command command = Command
+                    .Create(singleFile)
                     .EnableTracingAndCaptureOutputs()
                     .DotNetRoot(dotnet.BinPath, sharedTestState.RepoDirectories.BuildArchitecture)
                     .MultilevelLookup(false)
@@ -109,10 +135,16 @@ namespace AppHost.Bundle.Tests
 
                 command
                     .WaitForExit(true)
-                    .Should().Fail()
-                    .And.HaveStdErrContaining("Bundle header version compatibility check failed.")
-                    .And.HaveStdErrContaining($"Showing error dialog for application: '{Path.GetFileName(singleFile)}' - error code: 0x{expectedErrorCode}")
-                    .And.HaveStdErrContaining("apphost_version=");
+                    .Should()
+                    .Fail()
+                    .And
+                    .HaveStdErrContaining("Bundle header version compatibility check failed.")
+                    .And
+                    .HaveStdErrContaining(
+                        $"Showing error dialog for application: '{Path.GetFileName(singleFile)}' - error code: 0x{expectedErrorCode}"
+                    )
+                    .And
+                    .HaveStdErrContaining("apphost_version=");
             }
         }
 
@@ -156,7 +188,9 @@ namespace AppHost.Bundle.Tests
         [Theory]
         public void FrameworkDependent_Targeting50(BundleOptions options)
         {
-            var singleFile = sharedTestState.FrameworkDependentApp.Bundle(options, new Version(5, 0));
+            var singleFile = sharedTestState
+                .FrameworkDependentApp
+                .Bundle(options, new Version(5, 0));
 
             // Run the bundled app
             RunTheApp(singleFile, selfContained: false);
@@ -187,16 +221,24 @@ namespace AppHost.Bundle.Tests
 
             public SharedTestState()
             {
-                FrameworkDependentApp = SingleFileTestApp.CreateFrameworkDependent("AppWithSubDirs");
-                BundleHelper.AddLongNameContentToAppWithSubDirs(FrameworkDependentApp.NonBundledLocation);
+                FrameworkDependentApp = SingleFileTestApp.CreateFrameworkDependent(
+                    "AppWithSubDirs"
+                );
+                BundleHelper.AddLongNameContentToAppWithSubDirs(
+                    FrameworkDependentApp.NonBundledLocation
+                );
 
                 SelfContainedApp = SingleFileTestApp.CreateSelfContained("AppWithSubDirs");
-                BundleHelper.AddLongNameContentToAppWithSubDirs(SelfContainedApp.NonBundledLocation);
+                BundleHelper.AddLongNameContentToAppWithSubDirs(
+                    SelfContainedApp.NonBundledLocation
+                );
 
                 // ACTIVE ISSUE: https://github.com/dotnet/runtime/issues/54234
                 //               This should be an app built with the equivalent of PublishReadyToRun=true and PublishReadyToRunComposite=true
                 SelfContainedCompositeApp = SingleFileTestApp.CreateSelfContained("AppWithSubDirs");
-                BundleHelper.AddLongNameContentToAppWithSubDirs(SelfContainedCompositeApp.NonBundledLocation);
+                BundleHelper.AddLongNameContentToAppWithSubDirs(
+                    SelfContainedCompositeApp.NonBundledLocation
+                );
             }
 
             public void Dispose()

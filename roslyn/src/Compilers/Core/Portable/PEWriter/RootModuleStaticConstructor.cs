@@ -17,7 +17,10 @@ namespace Microsoft.Cci
 {
     internal sealed partial class RootModuleStaticConstructor : IMethodDefinition, IMethodBody
     {
-        public RootModuleStaticConstructor(ITypeDefinition containingTypeDefinition, ImmutableArray<byte> il)
+        public RootModuleStaticConstructor(
+            ITypeDefinition containingTypeDefinition,
+            ImmutableArray<byte> il
+        )
         {
             ContainingTypeDefinition = containingTypeDefinition;
             IL = il;
@@ -31,7 +34,8 @@ namespace Microsoft.Cci
 
         public IMethodBody GetBody(EmitContext context) => this;
 
-        public IEnumerable<IGenericMethodParameter> GenericParameters => SpecializedCollections.EmptyEnumerable<IGenericMethodParameter>();
+        public IEnumerable<IGenericMethodParameter> GenericParameters =>
+            SpecializedCollections.EmptyEnumerable<IGenericMethodParameter>();
 
         public bool IsImplicitlyDeclared => true;
 
@@ -61,7 +65,8 @@ namespace Microsoft.Cci
 
         public bool IsVirtual => false;
 
-        public ImmutableArray<IParameterDefinition> Parameters => ImmutableArray<IParameterDefinition>.Empty;
+        public ImmutableArray<IParameterDefinition> Parameters =>
+            ImmutableArray<IParameterDefinition>.Empty;
 
         public IPlatformInvokeInformation PlatformInvokeData => null;
 
@@ -85,7 +90,8 @@ namespace Microsoft.Cci
 
         public bool IsGeneric => false;
 
-        public ImmutableArray<IParameterTypeInformation> ExtraParameters => ImmutableArray<IParameterTypeInformation>.Empty;
+        public ImmutableArray<IParameterTypeInformation> ExtraParameters =>
+            ImmutableArray<IParameterTypeInformation>.Empty;
 
         public IGenericMethodInstanceReference AsGenericMethodInstanceReference => null;
 
@@ -95,9 +101,11 @@ namespace Microsoft.Cci
 
         public ushort ParameterCount => 0;
 
-        public ImmutableArray<ICustomModifier> ReturnValueCustomModifiers => ImmutableArray<ICustomModifier>.Empty;
+        public ImmutableArray<ICustomModifier> ReturnValueCustomModifiers =>
+            ImmutableArray<ICustomModifier>.Empty;
 
-        public ImmutableArray<ICustomModifier> RefCustomModifiers => ImmutableArray<ICustomModifier>.Empty;
+        public ImmutableArray<ICustomModifier> RefCustomModifiers =>
+            ImmutableArray<ICustomModifier>.Empty;
 
         public bool ReturnValueIsByRef => false;
 
@@ -107,19 +115,23 @@ namespace Microsoft.Cci
 
         public void Dispatch(MetadataVisitor visitor) => visitor.Visit((IMethodDefinition)this);
 
-        public IEnumerable<ICustomAttribute> GetAttributes(EmitContext context) => SpecializedCollections.EmptyEnumerable<ICustomAttribute>();
+        public IEnumerable<ICustomAttribute> GetAttributes(EmitContext context) =>
+            SpecializedCollections.EmptyEnumerable<ICustomAttribute>();
 
         public ITypeReference GetContainingType(EmitContext context) => ContainingTypeDefinition;
 
         public MethodImplAttributes GetImplementationAttributes(EmitContext context) => default;
 
-        public ImmutableArray<IParameterTypeInformation> GetParameters(EmitContext context) => ImmutableArray<IParameterTypeInformation>.Empty;
+        public ImmutableArray<IParameterTypeInformation> GetParameters(EmitContext context) =>
+            ImmutableArray<IParameterTypeInformation>.Empty;
 
         public IMethodDefinition GetResolvedMethod(EmitContext context) => this;
 
-        public IEnumerable<ICustomAttribute> GetReturnValueAttributes(EmitContext context) => SpecializedCollections.EmptyEnumerable<ICustomAttribute>();
+        public IEnumerable<ICustomAttribute> GetReturnValueAttributes(EmitContext context) =>
+            SpecializedCollections.EmptyEnumerable<ICustomAttribute>();
 
-        public ITypeReference GetType(EmitContext context) => context.Module.GetPlatformType(PlatformType.SystemVoid, context);
+        public ITypeReference GetType(EmitContext context) =>
+            context.Module.GetPlatformType(PlatformType.SystemVoid, context);
 
         // IMethodBody implementation
 
@@ -129,13 +141,15 @@ namespace Microsoft.Cci
 
         public IMethodDefinition MethodDefinition => this;
 
-        public ImmutableArray<ExceptionHandlerRegion> ExceptionRegions => ImmutableArray<ExceptionHandlerRegion>.Empty;
+        public ImmutableArray<ExceptionHandlerRegion> ExceptionRegions =>
+            ImmutableArray<ExceptionHandlerRegion>.Empty;
 
         public bool AreLocalsZeroed => false;
 
         public bool HasStackalloc => false;
 
-        public ImmutableArray<ILocalDefinition> LocalVariables => ImmutableArray<ILocalDefinition>.Empty;
+        public ImmutableArray<ILocalDefinition> LocalVariables =>
+            ImmutableArray<ILocalDefinition>.Empty;
 
         public StateMachineMoveNextBodyDebugInfo MoveNextBodyInfo => null;
 
@@ -149,17 +163,22 @@ namespace Microsoft.Cci
 
         public DebugId MethodId => default;
 
-        public ImmutableArray<StateMachineHoistedLocalScope> StateMachineHoistedLocalScopes => ImmutableArray<StateMachineHoistedLocalScope>.Empty;
+        public ImmutableArray<StateMachineHoistedLocalScope> StateMachineHoistedLocalScopes =>
+            ImmutableArray<StateMachineHoistedLocalScope>.Empty;
 
         public string StateMachineTypeName => null;
 
-        public ImmutableArray<EncHoistedLocalInfo> StateMachineHoistedLocalSlots => ImmutableArray<EncHoistedLocalInfo>.Empty;
+        public ImmutableArray<EncHoistedLocalInfo> StateMachineHoistedLocalSlots =>
+            ImmutableArray<EncHoistedLocalInfo>.Empty;
 
-        public ImmutableArray<ITypeReference> StateMachineAwaiterSlots => ImmutableArray<ITypeReference>.Empty;
+        public ImmutableArray<ITypeReference> StateMachineAwaiterSlots =>
+            ImmutableArray<ITypeReference>.Empty;
 
-        public ImmutableArray<ClosureDebugInfo> ClosureDebugInfo => ImmutableArray<ClosureDebugInfo>.Empty;
+        public ImmutableArray<ClosureDebugInfo> ClosureDebugInfo =>
+            ImmutableArray<ClosureDebugInfo>.Empty;
 
-        public ImmutableArray<LambdaDebugInfo> LambdaDebugInfo => ImmutableArray<LambdaDebugInfo>.Empty;
+        public ImmutableArray<LambdaDebugInfo> LambdaDebugInfo =>
+            ImmutableArray<LambdaDebugInfo>.Empty;
 
         public StateMachineStatesDebugInfo StateMachineStatesDebugInfo => default;
 

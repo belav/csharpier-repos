@@ -28,7 +28,13 @@ namespace System.IdentityModel.Selectors
             SecurityToken token = this.GetTokenCore(timeout);
             if (token == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.TokenProviderUnableToGetToken, this)));
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.TokenProviderUnableToGetToken, this)
+                        )
+                    );
             }
             return token;
         }
@@ -47,7 +53,13 @@ namespace System.IdentityModel.Selectors
             SecurityToken token = this.EndGetTokenCore(result);
             if (token == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.TokenProviderUnableToGetToken, this)));
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.TokenProviderUnableToGetToken, this)
+                        )
+                    );
             }
             return token;
         }
@@ -56,21 +68,36 @@ namespace System.IdentityModel.Selectors
         {
             if (tokenToBeRenewed == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("tokenToBeRenewed");
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("tokenToBeRenewed");
             }
             SecurityToken token = this.RenewTokenCore(timeout, tokenToBeRenewed);
             if (token == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.TokenProviderUnableToRenewToken, this)));
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.TokenProviderUnableToRenewToken, this)
+                        )
+                    );
             }
             return token;
         }
 
-        public IAsyncResult BeginRenewToken(TimeSpan timeout, SecurityToken tokenToBeRenewed, AsyncCallback callback, object state)
+        public IAsyncResult BeginRenewToken(
+            TimeSpan timeout,
+            SecurityToken tokenToBeRenewed,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (tokenToBeRenewed == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("tokenToBeRenewed");
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("tokenToBeRenewed");
             }
             return this.BeginRenewTokenCore(timeout, tokenToBeRenewed, callback, state);
         }
@@ -84,7 +111,13 @@ namespace System.IdentityModel.Selectors
             SecurityToken token = this.EndRenewTokenCore(result);
             if (token == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.TokenProviderUnableToRenewToken, this)));
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.TokenProviderUnableToRenewToken, this)
+                        )
+                    );
             }
             return token;
         }
@@ -98,7 +131,12 @@ namespace System.IdentityModel.Selectors
             this.CancelTokenCore(timeout, token);
         }
 
-        public IAsyncResult BeginCancelToken(TimeSpan timeout, SecurityToken token, AsyncCallback callback, object state)
+        public IAsyncResult BeginCancelToken(
+            TimeSpan timeout,
+            SecurityToken token,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (token == null)
             {
@@ -119,17 +157,32 @@ namespace System.IdentityModel.Selectors
         // protected methods
         protected abstract SecurityToken GetTokenCore(TimeSpan timeout);
 
-        protected virtual SecurityToken RenewTokenCore(TimeSpan timeout, SecurityToken tokenToBeRenewed)
+        protected virtual SecurityToken RenewTokenCore(
+            TimeSpan timeout,
+            SecurityToken tokenToBeRenewed
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.TokenRenewalNotSupported, this)));
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new NotSupportedException(SR.GetString(SR.TokenRenewalNotSupported, this))
+                );
         }
 
         protected virtual void CancelTokenCore(TimeSpan timeout, SecurityToken token)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.TokenCancellationNotSupported, this)));
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new NotSupportedException(SR.GetString(SR.TokenCancellationNotSupported, this))
+                );
         }
 
-        protected virtual IAsyncResult BeginGetTokenCore(TimeSpan timeout, AsyncCallback callback, object state)
+        protected virtual IAsyncResult BeginGetTokenCore(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             SecurityToken token = this.GetToken(timeout);
             return new SecurityTokenAsyncResult(token, callback, state);
@@ -140,7 +193,12 @@ namespace System.IdentityModel.Selectors
             return SecurityTokenAsyncResult.End(result);
         }
 
-        protected virtual IAsyncResult BeginRenewTokenCore(TimeSpan timeout, SecurityToken tokenToBeRenewed, AsyncCallback callback, object state)
+        protected virtual IAsyncResult BeginRenewTokenCore(
+            TimeSpan timeout,
+            SecurityToken tokenToBeRenewed,
+            AsyncCallback callback,
+            object state
+        )
         {
             SecurityToken token = this.RenewTokenCore(timeout, tokenToBeRenewed);
             return new SecurityTokenAsyncResult(token, callback, state);
@@ -151,7 +209,12 @@ namespace System.IdentityModel.Selectors
             return SecurityTokenAsyncResult.End(result);
         }
 
-        protected virtual IAsyncResult BeginCancelTokenCore(TimeSpan timeout, SecurityToken token, AsyncCallback callback, object state)
+        protected virtual IAsyncResult BeginCancelTokenCore(
+            TimeSpan timeout,
+            SecurityToken token,
+            AsyncCallback callback,
+            object state
+        )
         {
             this.CancelToken(timeout, token);
             return new SecurityTokenAsyncResult(null, callback, state);
@@ -162,14 +225,18 @@ namespace System.IdentityModel.Selectors
             SecurityTokenAsyncResult.End(result);
         }
 
-        internal protected class SecurityTokenAsyncResult : IAsyncResult
+        protected internal class SecurityTokenAsyncResult : IAsyncResult
         {
             SecurityToken token;
             object state;
             ManualResetEvent manualResetEvent;
             object thisLock = new object();
 
-            public SecurityTokenAsyncResult(SecurityToken token, AsyncCallback callback, object state)
+            public SecurityTokenAsyncResult(
+                SecurityToken token,
+                AsyncCallback callback,
+                object state
+            )
             {
                 this.token = token;
                 this.state = state;
@@ -186,7 +253,9 @@ namespace System.IdentityModel.Selectors
                         if (Fx.IsFatal(e))
                             throw;
 
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperCallback(SR.GetString(SR.AsyncCallbackException), e);
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperCallback(SR.GetString(SR.AsyncCallbackException), e);
                     }
                 }
             }
@@ -198,7 +267,7 @@ namespace System.IdentityModel.Selectors
 
             public WaitHandle AsyncWaitHandle
             {
-                get 
+                get
                 {
                     if (this.manualResetEvent != null)
                     {
@@ -212,7 +281,7 @@ namespace System.IdentityModel.Selectors
                             this.manualResetEvent = new ManualResetEvent(true);
                         }
                     }
-                    return this.manualResetEvent; 
+                    return this.manualResetEvent;
                 }
             }
 
@@ -236,7 +305,11 @@ namespace System.IdentityModel.Selectors
                 SecurityTokenAsyncResult completedResult = result as SecurityTokenAsyncResult;
                 if (completedResult == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.InvalidAsyncResult), "result"));
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentException(SR.GetString(SR.InvalidAsyncResult), "result")
+                        );
                 }
 
                 return completedResult.token;

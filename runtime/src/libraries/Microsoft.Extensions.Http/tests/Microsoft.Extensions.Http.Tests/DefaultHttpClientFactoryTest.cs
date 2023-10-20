@@ -34,17 +34,21 @@ namespace Microsoft.Extensions.Http
 
         public IOptionsMonitor<HttpClientFactoryOptions> Options { get; }
 
-        public IEnumerable<IHttpMessageHandlerBuilderFilter> EmptyFilters = Array.Empty<IHttpMessageHandlerBuilderFilter>();
+        public IEnumerable<IHttpMessageHandlerBuilderFilter> EmptyFilters =
+            Array.Empty<IHttpMessageHandlerBuilderFilter>();
 
         [Fact]
         public void Factory_MultipleCalls_DoesNotCacheHttpClient()
         {
             // Arrange
             var count = 0;
-            Options.CurrentValue.HttpClientActions.Add(c =>
-            {
-                count++;
-            });
+            Options
+                .CurrentValue
+                .HttpClientActions
+                .Add(c =>
+                {
+                    count++;
+                });
 
             var factory = new TestHttpClientFactory(Services, ScopeFactory, Options, EmptyFilters);
 
@@ -64,10 +68,13 @@ namespace Microsoft.Extensions.Http
         {
             // Arrange
             var count = 0;
-            Options.CurrentValue.HttpMessageHandlerBuilderActions.Add(b =>
-            {
-                count++;
-            });
+            Options
+                .CurrentValue
+                .HttpMessageHandlerBuilderActions
+                .Add(b =>
+                {
+                    count++;
+                });
 
             var factory = new TestHttpClientFactory(Services, ScopeFactory, Options, EmptyFilters);
 
@@ -83,53 +90,61 @@ namespace Microsoft.Extensions.Http
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void Factory_DisposeClient_DoesNotDisposeHandler()
         {
             // Arrange
-            Options.CurrentValue.HttpMessageHandlerBuilderActions.Add(b =>
-            {
-                var mockHandler = new Mock<HttpMessageHandler>();
-                mockHandler
-                    .Protected()
-                    .Setup("Dispose", ItExpr.IsAny<bool>())
-                    .Throws(new Exception("Dispose should not be called"));
+            Options
+                .CurrentValue
+                .HttpMessageHandlerBuilderActions
+                .Add(b =>
+                {
+                    var mockHandler = new Mock<HttpMessageHandler>();
+                    mockHandler
+                        .Protected()
+                        .Setup("Dispose", ItExpr.IsAny<bool>())
+                        .Throws(new Exception("Dispose should not be called"));
 
-                b.PrimaryHandler = mockHandler.Object;
-            });
+                    b.PrimaryHandler = mockHandler.Object;
+                });
 
             var factory = new TestHttpClientFactory(Services, ScopeFactory, Options, EmptyFilters);
 
             // Act
-            using (factory.CreateClient())
-            {
-            }
+            using (factory.CreateClient()) { }
 
             // Assert (does not throw)
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void Factory_DisposeHandler_DoesNotDisposeInnerHandler()
         {
             // Arrange
-            Options.CurrentValue.HttpMessageHandlerBuilderActions.Add(b =>
-            {
-                var mockHandler = new Mock<HttpMessageHandler>();
-                mockHandler
-                    .Protected()
-                    .Setup("Dispose", ItExpr.IsAny<bool>())
-                    .Throws(new Exception("Dispose should not be called"));
+            Options
+                .CurrentValue
+                .HttpMessageHandlerBuilderActions
+                .Add(b =>
+                {
+                    var mockHandler = new Mock<HttpMessageHandler>();
+                    mockHandler
+                        .Protected()
+                        .Setup("Dispose", ItExpr.IsAny<bool>())
+                        .Throws(new Exception("Dispose should not be called"));
 
-                b.PrimaryHandler = mockHandler.Object;
-            });
+                    b.PrimaryHandler = mockHandler.Object;
+                });
 
             var factory = new TestHttpClientFactory(Services, ScopeFactory, Options, EmptyFilters);
 
             // Act
-            using (factory.CreateHandler())
-            {
-            }
+            using (factory.CreateHandler()) { }
 
             // Assert (does not throw)
         }
@@ -139,10 +154,13 @@ namespace Microsoft.Extensions.Http
         {
             // Arrange
             var count = 0;
-            Options.CurrentValue.HttpClientActions.Add(b =>
-            {
-                count++;
-            });
+            Options
+                .CurrentValue
+                .HttpClientActions
+                .Add(b =>
+                {
+                    count++;
+                });
 
             var factory = new TestHttpClientFactory(Services, ScopeFactory, Options, EmptyFilters);
 
@@ -158,10 +176,13 @@ namespace Microsoft.Extensions.Http
         {
             // Arrange
             var count = 0;
-            Options.Get("github").HttpClientActions.Add(b =>
-            {
-                count++;
-            });
+            Options
+                .Get("github")
+                .HttpClientActions
+                .Add(b =>
+                {
+                    count++;
+                });
 
             var factory = new TestHttpClientFactory(Services, ScopeFactory, Options, EmptyFilters);
 
@@ -173,7 +194,10 @@ namespace Microsoft.Extensions.Http
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void Factory_CreateClient_FiltersCanDecorateBuilder()
         {
             // Arrange
@@ -186,53 +210,64 @@ namespace Microsoft.Extensions.Http
                 Mock.Of<DelegatingHandler>(), // Added by filter3
                 Mock.Of<DelegatingHandler>(), // Added by filter2
                 Mock.Of<DelegatingHandler>(), // Added by filter1
-
                 Mock.Of<HttpMessageHandler>(), // Set as primary handler by options
             };
 
-            Options.Get("github").HttpMessageHandlerBuilderActions.Add(b =>
-            {
-                b.PrimaryHandler = expected[7];
+            Options
+                .Get("github")
+                .HttpMessageHandlerBuilderActions
+                .Add(b =>
+                {
+                    b.PrimaryHandler = expected[7];
 
-                b.AdditionalHandlers.Add((DelegatingHandler)expected[3]);
-            });
+                    b.AdditionalHandlers.Add((DelegatingHandler)expected[3]);
+                });
 
             var filter1 = new Mock<IHttpMessageHandlerBuilderFilter>();
             filter1
                 .Setup(f => f.Configure(It.IsAny<Action<HttpMessageHandlerBuilder>>()))
-                .Returns<Action<HttpMessageHandlerBuilder>>(next => (b) =>
-                {
-                    next(b); // Calls filter2
-                    b.AdditionalHandlers.Insert(0, (DelegatingHandler)expected[0]);
-                    b.AdditionalHandlers.Add((DelegatingHandler)expected[6]);
-                });
+                .Returns<Action<HttpMessageHandlerBuilder>>(
+                    next =>
+                        (b) =>
+                        {
+                            next(b); // Calls filter2
+                            b.AdditionalHandlers.Insert(0, (DelegatingHandler)expected[0]);
+                            b.AdditionalHandlers.Add((DelegatingHandler)expected[6]);
+                        }
+                );
 
             var filter2 = new Mock<IHttpMessageHandlerBuilderFilter>();
             filter2
                 .Setup(f => f.Configure(It.IsAny<Action<HttpMessageHandlerBuilder>>()))
-                .Returns<Action<HttpMessageHandlerBuilder>>(next => (b) =>
-                {
-                    next(b); // Calls filter3
-                    b.AdditionalHandlers.Insert(0, (DelegatingHandler)expected[1]);
-                    b.AdditionalHandlers.Add((DelegatingHandler)expected[5]);
-                });
+                .Returns<Action<HttpMessageHandlerBuilder>>(
+                    next =>
+                        (b) =>
+                        {
+                            next(b); // Calls filter3
+                            b.AdditionalHandlers.Insert(0, (DelegatingHandler)expected[1]);
+                            b.AdditionalHandlers.Add((DelegatingHandler)expected[5]);
+                        }
+                );
 
             var filter3 = new Mock<IHttpMessageHandlerBuilderFilter>();
             filter3
                 .Setup(f => f.Configure(It.IsAny<Action<HttpMessageHandlerBuilder>>()))
-                .Returns<Action<HttpMessageHandlerBuilder>>(next => (b) =>
-                {
-                    b.AdditionalHandlers.Add((DelegatingHandler)expected[2]);
-                    next(b); // Calls options
-                    b.AdditionalHandlers.Add((DelegatingHandler)expected[4]);
-                });
+                .Returns<Action<HttpMessageHandlerBuilder>>(
+                    next =>
+                        (b) =>
+                        {
+                            b.AdditionalHandlers.Add((DelegatingHandler)expected[2]);
+                            next(b); // Calls options
+                            b.AdditionalHandlers.Add((DelegatingHandler)expected[4]);
+                        }
+                );
 
-            var factory = new TestHttpClientFactory(Services, ScopeFactory, Options, new[]
-            {
-                filter1.Object,
-                filter2.Object,
-                filter3.Object,
-            });
+            var factory = new TestHttpClientFactory(
+                Services,
+                ScopeFactory,
+                Options,
+                new[] { filter1.Object, filter2.Object, filter3.Object, }
+            );
 
             // Act
             var handler = (HttpMessageHandler)factory.CreateHandlerEntry("github").Handler;
@@ -344,15 +379,22 @@ namespace Microsoft.Extensions.Http
             Assert.NotSame(activeEntry1.Handler, activeEntry2.Handler);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported), nameof(PlatformDetection.IsPreciseGcSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported),
+            nameof(PlatformDetection.IsPreciseGcSupported)
+        )]
         public async Task Factory_CleanupCycle_DisposesEligibleHandler()
         {
             // Arrange
             var disposeHandler = new DisposeTrackingHandler();
-            Options.Get("github").HttpMessageHandlerBuilderActions.Add(b =>
-            {
-                b.AdditionalHandlers.Add(disposeHandler);
-            });
+            Options
+                .Get("github")
+                .HttpMessageHandlerBuilderActions
+                .Add(b =>
+                {
+                    b.AdditionalHandlers.Add(disposeHandler);
+                });
 
             var factory = new TestHttpClientFactory(Services, ScopeFactory, Options, EmptyFilters)
             {
@@ -360,7 +402,9 @@ namespace Microsoft.Extensions.Http
                 EnableCleanupTimer = true,
             };
 
-            var cleanupEntry = await SimulateClientUse_Factory_CleanupCycle_DisposesEligibleHandler(factory);
+            var cleanupEntry = await SimulateClientUse_Factory_CleanupCycle_DisposesEligibleHandler(
+                factory
+            );
 
             // Being pretty conservative here because we want this test to be reliable,
             // and it depends on the GC and timing.
@@ -392,7 +436,9 @@ namespace Microsoft.Extensions.Http
         // Separate to avoid the HttpClient getting its lifetime extended by
         // the state machine of the test.
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private async Task<ExpiredHandlerTrackingEntry> SimulateClientUse_Factory_CleanupCycle_DisposesEligibleHandler(TestHttpClientFactory factory)
+        private async Task<ExpiredHandlerTrackingEntry> SimulateClientUse_Factory_CleanupCycle_DisposesEligibleHandler(
+            TestHttpClientFactory factory
+        )
         {
             // Create a handler and move it to the expired state
             var client1 = factory.CreateClient("github");
@@ -419,10 +465,13 @@ namespace Microsoft.Extensions.Http
         {
             // Arrange
             var disposeHandler = new DisposeTrackingHandler();
-            Options.Get("github").HttpMessageHandlerBuilderActions.Add(b =>
-            {
-                b.AdditionalHandlers.Add(disposeHandler);
-            });
+            Options
+                .Get("github")
+                .HttpMessageHandlerBuilderActions
+                .Add(b =>
+                {
+                    b.AdditionalHandlers.Add(disposeHandler);
+                });
 
             var factory = new TestHttpClientFactory(Services, ScopeFactory, Options, EmptyFilters)
             {
@@ -430,7 +479,10 @@ namespace Microsoft.Extensions.Http
                 EnableCleanupTimer = true,
             };
 
-            var cleanupEntry = await SimulateClientUse_Factory_CleanupCycle_DisposesLiveHandler(factory, disposeHandler);
+            var cleanupEntry = await SimulateClientUse_Factory_CleanupCycle_DisposesLiveHandler(
+                factory,
+                disposeHandler
+            );
 
             // Being pretty conservative here because we want this test to be reliable,
             // and it depends on the GC and timing.
@@ -464,7 +516,8 @@ namespace Microsoft.Extensions.Http
         [MethodImpl(MethodImplOptions.NoInlining)]
         private async Task<ExpiredHandlerTrackingEntry> SimulateClientUse_Factory_CleanupCycle_DisposesLiveHandler(
             TestHttpClientFactory factory,
-            DisposeTrackingHandler disposeHandler)
+            DisposeTrackingHandler disposeHandler
+        )
         {
             // Create a handler and move it to the expired state
             var client1 = factory.CreateClient("github");
@@ -517,20 +570,26 @@ namespace Microsoft.Extensions.Http
 
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddLogging();
-            serviceCollection.AddSingleton<ILoggerFactory>(new TestLoggerFactory(sink, enabled: true));
+            serviceCollection.AddSingleton<ILoggerFactory>(
+                new TestLoggerFactory(sink, enabled: true)
+            );
             serviceCollection.AddHttpClient("test");
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
-            var httpClientFactory = (DefaultHttpClientFactory)serviceProvider.GetRequiredService<IHttpClientFactory>();
-            _ =  httpClientFactory.CreateClient("test");
+            var httpClientFactory = (DefaultHttpClientFactory)
+                serviceProvider.GetRequiredService<IHttpClientFactory>();
+            _ = httpClientFactory.CreateClient("test");
 
             serviceProvider.Dispose();
 
             httpClientFactory.StartCleanupTimer(); // we need to create a timer instance before triggering cleanup; normally it happens after the first expiry
             httpClientFactory.CleanupTimer_Tick(); // trigger cleanup to (try to) write debug logs
             // but no log is added, because ILogger couldn't be created
-            Assert.Equal(0, sink.Writes.Count(w => w.LoggerName == typeof(DefaultHttpClientFactory).FullName));
+            Assert.Equal(
+                0,
+                sink.Writes.Count(w => w.LoggerName == typeof(DefaultHttpClientFactory).FullName)
+            );
         }
 
         private class TestHttpClientFactory : DefaultHttpClientFactory
@@ -539,10 +598,15 @@ namespace Microsoft.Extensions.Http
                 IServiceProvider services,
                 IServiceScopeFactory scopeFactory,
                 IOptionsMonitor<HttpClientFactoryOptions> optionsMonitor,
-                IEnumerable<IHttpMessageHandlerBuilderFilter> filters)
+                IEnumerable<IHttpMessageHandlerBuilderFilter> filters
+            )
                 : base(services, scopeFactory, optionsMonitor, filters)
             {
-                ActiveEntryState = new Dictionary<ActiveHandlerTrackingEntry, (TaskCompletionSource<ActiveHandlerTrackingEntry>, Task)>();
+                ActiveEntryState =
+                    new Dictionary<
+                        ActiveHandlerTrackingEntry,
+                        (TaskCompletionSource<ActiveHandlerTrackingEntry>, Task)
+                    >();
                 CleanupTimerStarted = new ManualResetEventSlim(initialState: false);
             }
 
@@ -552,7 +616,10 @@ namespace Microsoft.Extensions.Http
 
             public ManualResetEventSlim CleanupTimerStarted { get; }
 
-            public Dictionary<ActiveHandlerTrackingEntry, (TaskCompletionSource<ActiveHandlerTrackingEntry>, Task)> ActiveEntryState { get; }
+            public Dictionary<
+                ActiveHandlerTrackingEntry,
+                (TaskCompletionSource<ActiveHandlerTrackingEntry>, Task)
+            > ActiveEntryState { get; }
 
             internal override void StartHandlerEntryTimer(ActiveHandlerTrackingEntry entry)
             {
@@ -567,17 +634,20 @@ namespace Microsoft.Extensions.Http
                         }
 
                         // Rather than using the actual timer on the actual entry, let's fake it with async.
-                        var completionSource = new TaskCompletionSource<ActiveHandlerTrackingEntry>();
-                        var expiryTask = completionSource.Task.ContinueWith(t =>
-                        {
-                            var e = t.Result;
-                            ExpiryTimer_Tick(e);
-
-                            lock (ActiveEntryState)
+                        var completionSource =
+                            new TaskCompletionSource<ActiveHandlerTrackingEntry>();
+                        var expiryTask = completionSource
+                            .Task
+                            .ContinueWith(t =>
                             {
-                                ActiveEntryState.Remove(e);
-                            }
-                        });
+                                var e = t.Result;
+                                ExpiryTimer_Tick(e);
+
+                                lock (ActiveEntryState)
+                                {
+                                    ActiveEntryState.Remove(e);
+                                }
+                            });
 
                         ActiveEntryState.Add(entry, (completionSource, expiryTask));
                     }

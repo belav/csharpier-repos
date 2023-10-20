@@ -22,19 +22,11 @@ namespace System.Activities.Expressions
 
         [RequiredArgument]
         [DefaultValue(null)]
-        public InArgument<TLeft> Left
-        {
-            get;
-            set;
-        }
+        public InArgument<TLeft> Left { get; set; }
 
         [RequiredArgument]
         [DefaultValue(null)]
-        public InArgument<TRight> Right
-        {
-            get;
-            set;
-        }
+        public InArgument<TRight> Right { get; set; }
 
         [DefaultValue(true)]
         public bool Checked
@@ -49,25 +41,38 @@ namespace System.Activities.Expressions
 
             if (this.checkedOperation)
             {
-                EnsureOperationFunction(metadata, ref checkedOperationFunction, ExpressionType.SubtractChecked);
+                EnsureOperationFunction(
+                    metadata,
+                    ref checkedOperationFunction,
+                    ExpressionType.SubtractChecked
+                );
             }
             else
             {
-                EnsureOperationFunction(metadata, ref uncheckedOperationFunction, ExpressionType.Subtract);
+                EnsureOperationFunction(
+                    metadata,
+                    ref uncheckedOperationFunction,
+                    ExpressionType.Subtract
+                );
             }
         }
 
-        void EnsureOperationFunction(CodeActivityMetadata metadata,
+        void EnsureOperationFunction(
+            CodeActivityMetadata metadata,
             ref Func<TLeft, TRight, TResult> operationFunction,
-            ExpressionType operatorType)
+            ExpressionType operatorType
+        )
         {
             if (operationFunction == null)
             {
                 ValidationError validationError;
-                if (!BinaryExpressionHelper.TryGenerateLinqDelegate(
-                            operatorType,
-                            out operationFunction,
-                            out validationError))
+                if (
+                    !BinaryExpressionHelper.TryGenerateLinqDelegate(
+                        operatorType,
+                        out operationFunction,
+                        out validationError
+                    )
+                )
                 {
                     metadata.AddValidationError(validationError);
                 }
@@ -79,7 +84,7 @@ namespace System.Activities.Expressions
             TLeft leftValue = this.Left.Get(context);
             TRight rightValue = this.Right.Get(context);
 
-            //if user changed Checked flag between Open and Execution, 
+            //if user changed Checked flag between Open and Execution,
             //a NRE may be thrown and that's by design
             if (this.checkedOperation)
             {

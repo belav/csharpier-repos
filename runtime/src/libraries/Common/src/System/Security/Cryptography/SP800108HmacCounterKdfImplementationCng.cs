@@ -10,14 +10,16 @@ using NTSTATUS = Interop.BCrypt.NTSTATUS;
 
 namespace System.Security.Cryptography
 {
-    internal sealed partial class SP800108HmacCounterKdfImplementationCng : SP800108HmacCounterKdfImplementationBase
+    internal sealed partial class SP800108HmacCounterKdfImplementationCng
+        : SP800108HmacCounterKdfImplementationBase
     {
         private const string BCRYPT_SP800108_CTR_HMAC_ALGORITHM = "SP800_108_CTR_HMAC";
         private const nuint BCRYPT_SP800108_CTR_HMAC_ALG_HANDLE = 0x00000341;
         private const int CharToBytesStackBufferSize = 256;
 
         // A cached algorithm handle. On Windows 10 this is null if we are using a psuedo handle.
-        private static readonly SafeBCryptAlgorithmHandle? s_sp800108CtrHmacAlgorithmHandle = OpenAlgorithmHandle();
+        private static readonly SafeBCryptAlgorithmHandle? s_sp800108CtrHmacAlgorithmHandle =
+            OpenAlgorithmHandle();
 
         private readonly SafeBCryptKeyHandle _keyHandle;
         private readonly HashAlgorithmName _hashAlgorithm;
@@ -29,10 +31,18 @@ namespace System.Security.Cryptography
 
         internal override void DeriveBytes(byte[] label, byte[] context, Span<byte> destination)
         {
-            DeriveBytes(new ReadOnlySpan<byte>(label), new ReadOnlySpan<byte>(context), destination);
+            DeriveBytes(
+                new ReadOnlySpan<byte>(label),
+                new ReadOnlySpan<byte>(context),
+                destination
+            );
         }
 
-        internal override unsafe void DeriveBytes(ReadOnlySpan<byte> label, ReadOnlySpan<byte> context, Span<byte> destination)
+        internal override unsafe void DeriveBytes(
+            ReadOnlySpan<byte> label,
+            ReadOnlySpan<byte> context,
+            Span<byte> destination
+        )
         {
             if (destination.Length == 0)
             {
@@ -65,13 +75,16 @@ namespace System.Security.Cryptography
                 bufferDesc.cBuffers = BCryptBufferLength;
                 bufferDesc.pBuffers = (IntPtr)buffers;
 
-                NTSTATUS deriveStatus = Interop.BCrypt.BCryptKeyDerivation(
-                    _keyHandle,
-                    &bufferDesc,
-                    pDestination,
-                    destination.Length,
-                    out uint resultLength,
-                    dwFlags: 0);
+                NTSTATUS deriveStatus = Interop
+                    .BCrypt
+                    .BCryptKeyDerivation(
+                        _keyHandle,
+                        &bufferDesc,
+                        pDestination,
+                        destination.Length,
+                        out uint resultLength,
+                        dwFlags: 0
+                    );
 
                 if (deriveStatus != NTSTATUS.STATUS_SUCCESS)
                 {
@@ -86,10 +99,24 @@ namespace System.Security.Cryptography
             }
         }
 
-        internal override void DeriveBytes(ReadOnlySpan<char> label, ReadOnlySpan<char> context, Span<byte> destination)
+        internal override void DeriveBytes(
+            ReadOnlySpan<char> label,
+            ReadOnlySpan<char> context,
+            Span<byte> destination
+        )
         {
-            using (Utf8DataEncoding labelData = new Utf8DataEncoding(label, stackalloc byte[CharToBytesStackBufferSize]))
-            using (Utf8DataEncoding contextData = new Utf8DataEncoding(context, stackalloc byte[CharToBytesStackBufferSize]))
+            using (
+                Utf8DataEncoding labelData = new Utf8DataEncoding(
+                    label,
+                    stackalloc byte[CharToBytesStackBufferSize]
+                )
+            )
+            using (
+                Utf8DataEncoding contextData = new Utf8DataEncoding(
+                    context,
+                    stackalloc byte[CharToBytesStackBufferSize]
+                )
+            )
             {
                 DeriveBytes(labelData.Utf8Bytes, contextData.Utf8Bytes, destination);
             }
@@ -100,11 +127,15 @@ namespace System.Security.Cryptography
             HashAlgorithmName hashAlgorithm,
             ReadOnlySpan<byte> label,
             ReadOnlySpan<byte> context,
-            Span<byte> destination)
+            Span<byte> destination
+        )
         {
             Debug.Assert(destination.Length <= 0x1FFFFFFF);
 
-            using (SP800108HmacCounterKdfImplementationCng kdf = new SP800108HmacCounterKdfImplementationCng(key, hashAlgorithm))
+            using (
+                SP800108HmacCounterKdfImplementationCng kdf =
+                    new SP800108HmacCounterKdfImplementationCng(key, hashAlgorithm)
+            )
             {
                 kdf.DeriveBytes(label, context, destination);
             }
@@ -115,46 +146,72 @@ namespace System.Security.Cryptography
             HashAlgorithmName hashAlgorithm,
             ReadOnlySpan<char> label,
             ReadOnlySpan<char> context,
-            Span<byte> destination)
+            Span<byte> destination
+        )
         {
             if (destination.Length == 0)
             {
                 return;
             }
 
-            using (Utf8DataEncoding labelData = new Utf8DataEncoding(label, stackalloc byte[CharToBytesStackBufferSize]))
-            using (Utf8DataEncoding contextData = new Utf8DataEncoding(context, stackalloc byte[CharToBytesStackBufferSize]))
+            using (
+                Utf8DataEncoding labelData = new Utf8DataEncoding(
+                    label,
+                    stackalloc byte[CharToBytesStackBufferSize]
+                )
+            )
+            using (
+                Utf8DataEncoding contextData = new Utf8DataEncoding(
+                    context,
+                    stackalloc byte[CharToBytesStackBufferSize]
+                )
+            )
             {
-                DeriveBytesOneShot(key, hashAlgorithm, labelData.Utf8Bytes, contextData.Utf8Bytes, destination);
+                DeriveBytesOneShot(
+                    key,
+                    hashAlgorithm,
+                    labelData.Utf8Bytes,
+                    contextData.Utf8Bytes,
+                    destination
+                );
             }
         }
 
-        private static unsafe SafeBCryptKeyHandle CreateSymmetricKey(byte* symmetricKey, int symmetricKeyLength)
+        private static unsafe SafeBCryptKeyHandle CreateSymmetricKey(
+            byte* symmetricKey,
+            int symmetricKeyLength
+        )
         {
             NTSTATUS generateKeyStatus;
             SafeBCryptKeyHandle keyHandle;
 
             if (s_sp800108CtrHmacAlgorithmHandle is not null)
             {
-                generateKeyStatus = Interop.BCrypt.BCryptGenerateSymmetricKey(
-                    s_sp800108CtrHmacAlgorithmHandle,
-                    out keyHandle,
-                    pbKeyObject: IntPtr.Zero,
-                    cbKeyObject: 0,
-                    symmetricKey,
-                    symmetricKeyLength,
-                    dwFlags: 0);
+                generateKeyStatus = Interop
+                    .BCrypt
+                    .BCryptGenerateSymmetricKey(
+                        s_sp800108CtrHmacAlgorithmHandle,
+                        out keyHandle,
+                        pbKeyObject: IntPtr.Zero,
+                        cbKeyObject: 0,
+                        symmetricKey,
+                        symmetricKeyLength,
+                        dwFlags: 0
+                    );
             }
             else
             {
-                generateKeyStatus = Interop.BCrypt.BCryptGenerateSymmetricKey(
-                    BCRYPT_SP800108_CTR_HMAC_ALG_HANDLE,
-                    out keyHandle,
-                    pbKeyObject: IntPtr.Zero,
-                    cbKeyObject: 0,
-                    symmetricKey,
-                    symmetricKeyLength,
-                    dwFlags: 0);
+                generateKeyStatus = Interop
+                    .BCrypt
+                    .BCryptGenerateSymmetricKey(
+                        BCRYPT_SP800108_CTR_HMAC_ALG_HANDLE,
+                        out keyHandle,
+                        pbKeyObject: IntPtr.Zero,
+                        cbKeyObject: 0,
+                        symmetricKey,
+                        symmetricKeyLength,
+                        dwFlags: 0
+                    );
             }
 
             if (generateKeyStatus != NTSTATUS.STATUS_SUCCESS)
@@ -173,11 +230,14 @@ namespace System.Security.Cryptography
         {
             if (!Interop.BCrypt.PseudoHandlesSupported)
             {
-                NTSTATUS openStatus = Interop.BCrypt.BCryptOpenAlgorithmProvider(
-                    out SafeBCryptAlgorithmHandle sp800108CtrHmacAlgorithmHandle,
-                    BCRYPT_SP800108_CTR_HMAC_ALGORITHM,
-                    null,
-                    Interop.BCrypt.BCryptOpenAlgorithmProviderFlags.None);
+                NTSTATUS openStatus = Interop
+                    .BCrypt
+                    .BCryptOpenAlgorithmProvider(
+                        out SafeBCryptAlgorithmHandle sp800108CtrHmacAlgorithmHandle,
+                        BCRYPT_SP800108_CTR_HMAC_ALGORITHM,
+                        null,
+                        Interop.BCrypt.BCryptOpenAlgorithmProviderFlags.None
+                    );
 
                 if (openStatus != NTSTATUS.STATUS_SUCCESS)
                 {

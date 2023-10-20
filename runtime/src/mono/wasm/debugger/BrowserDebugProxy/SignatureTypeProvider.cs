@@ -14,8 +14,8 @@ namespace Microsoft.WebAssembly.Diagnostics;
 
 internal sealed class SignatureTypeProvider : ISignatureTypeProvider<ElementType, object>
 {
-    public ElementType GetPrimitiveType(PrimitiveTypeCode typeCode)
-        => typeCode switch
+    public ElementType GetPrimitiveType(PrimitiveTypeCode typeCode) =>
+        typeCode switch
         {
             PrimitiveTypeCode.Boolean => ElementType.Boolean,
             PrimitiveTypeCode.Byte => ElementType.U1,
@@ -38,17 +38,65 @@ internal sealed class SignatureTypeProvider : ISignatureTypeProvider<ElementType
             _ => ElementType.End,
         };
 
-    ElementType ISignatureTypeProvider<ElementType, object>.GetFunctionPointerType(MethodSignature<ElementType> signature) => ElementType.FnPtr;
-    ElementType ISignatureTypeProvider<ElementType, object>.GetModifiedType(ElementType modifier, ElementType unmodifiedType, bool isRequired) => ElementType.Object;
-    ElementType ISignatureTypeProvider<ElementType, object>.GetPinnedType(ElementType elementType) => ElementType.Object;
-    ElementType IConstructedTypeProvider<ElementType>.GetArrayType(ElementType elementType, ArrayShape shape) => ElementType.Array;
-    ElementType IConstructedTypeProvider<ElementType>.GetByReferenceType(ElementType elementType) => ElementType.Object;
-    ElementType IConstructedTypeProvider<ElementType>.GetGenericInstantiation(ElementType genericType, ImmutableArray<ElementType> typeArguments) => ElementType.Object;
-    ElementType IConstructedTypeProvider<ElementType>.GetPointerType(ElementType elementType) => ElementType.Ptr;
-    ElementType ISZArrayTypeProvider<ElementType>.GetSZArrayType(ElementType elementType) => ElementType.SzArray;
-    ElementType ISignatureTypeProvider<ElementType, object>.GetGenericMethodParameter(object genericContext, int index) => ElementType.Object;
-    ElementType ISignatureTypeProvider<ElementType, object>.GetGenericTypeParameter(object genericContext, int index) => ElementType.Object;
-    ElementType ISignatureTypeProvider<ElementType, object>.GetTypeFromSpecification(MetadataReader reader, object genericContext, TypeSpecificationHandle handle, byte rawTypeKind) => ElementType.Object;
-    ElementType ISimpleTypeProvider<ElementType>.GetTypeFromDefinition(MetadataReader reader, TypeDefinitionHandle handle, byte rawTypeKind) => ElementType.Object;
-    ElementType ISimpleTypeProvider<ElementType>.GetTypeFromReference(MetadataReader reader, TypeReferenceHandle handle, byte rawTypeKind) => ElementType.Object;
+    ElementType ISignatureTypeProvider<ElementType, object>.GetFunctionPointerType(
+        MethodSignature<ElementType> signature
+    ) => ElementType.FnPtr;
+
+    ElementType ISignatureTypeProvider<ElementType, object>.GetModifiedType(
+        ElementType modifier,
+        ElementType unmodifiedType,
+        bool isRequired
+    ) => ElementType.Object;
+
+    ElementType ISignatureTypeProvider<ElementType, object>.GetPinnedType(
+        ElementType elementType
+    ) => ElementType.Object;
+
+    ElementType IConstructedTypeProvider<ElementType>.GetArrayType(
+        ElementType elementType,
+        ArrayShape shape
+    ) => ElementType.Array;
+
+    ElementType IConstructedTypeProvider<ElementType>.GetByReferenceType(ElementType elementType) =>
+        ElementType.Object;
+
+    ElementType IConstructedTypeProvider<ElementType>.GetGenericInstantiation(
+        ElementType genericType,
+        ImmutableArray<ElementType> typeArguments
+    ) => ElementType.Object;
+
+    ElementType IConstructedTypeProvider<ElementType>.GetPointerType(ElementType elementType) =>
+        ElementType.Ptr;
+
+    ElementType ISZArrayTypeProvider<ElementType>.GetSZArrayType(ElementType elementType) =>
+        ElementType.SzArray;
+
+    ElementType ISignatureTypeProvider<ElementType, object>.GetGenericMethodParameter(
+        object genericContext,
+        int index
+    ) => ElementType.Object;
+
+    ElementType ISignatureTypeProvider<ElementType, object>.GetGenericTypeParameter(
+        object genericContext,
+        int index
+    ) => ElementType.Object;
+
+    ElementType ISignatureTypeProvider<ElementType, object>.GetTypeFromSpecification(
+        MetadataReader reader,
+        object genericContext,
+        TypeSpecificationHandle handle,
+        byte rawTypeKind
+    ) => ElementType.Object;
+
+    ElementType ISimpleTypeProvider<ElementType>.GetTypeFromDefinition(
+        MetadataReader reader,
+        TypeDefinitionHandle handle,
+        byte rawTypeKind
+    ) => ElementType.Object;
+
+    ElementType ISimpleTypeProvider<ElementType>.GetTypeFromReference(
+        MetadataReader reader,
+        TypeReferenceHandle handle,
+        byte rawTypeKind
+    ) => ElementType.Object;
 }

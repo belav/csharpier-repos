@@ -57,11 +57,11 @@ internal static partial class Interop
             IntPtr pszPolicyOID,
             SafeX509ChainHandle pChainContext,
             ref CERT_CHAIN_POLICY_PARA pPolicyPara,
-            ref CERT_CHAIN_POLICY_STATUS pPolicyStatus)
+            ref CERT_CHAIN_POLICY_STATUS pPolicyStatus
+        )
         {
             return true;
         }
-
     }
 
     internal static partial class Kernel32
@@ -85,7 +85,8 @@ internal static partial class Interop
             uint accessType,
             string proxyName,
             string proxyBypass,
-            uint flags)
+            uint flags
+        )
         {
             if (TestControl.WinHttpOpen.ErrorWithApiCall)
             {
@@ -93,8 +94,10 @@ internal static partial class Interop
                 return new FakeSafeWinHttpHandle(false);
             }
 
-            if (accessType == Interop.WinHttp.WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY &&
-                !TestControl.WinHttpAutomaticProxySupport)
+            if (
+                accessType == Interop.WinHttp.WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY
+                && !TestControl.WinHttpAutomaticProxySupport
+            )
             {
                 TestControl.LastWin32Error = (int)Interop.WinHttp.ERROR_INVALID_PARAMETER;
                 return new FakeSafeWinHttpHandle(false);
@@ -120,7 +123,8 @@ internal static partial class Interop
             SafeWinHttpHandle sessionHandle,
             string serverName,
             ushort serverPort,
-            uint reserved)
+            uint reserved
+        )
         {
             return new FakeSafeWinHttpHandle(true);
         }
@@ -129,7 +133,8 @@ internal static partial class Interop
             SafeWinHttpHandle requestHandle,
             StringBuilder headers,
             uint headersLength,
-            uint modifiers)
+            uint modifiers
+        )
         {
             return true;
         }
@@ -138,7 +143,8 @@ internal static partial class Interop
             SafeWinHttpHandle requestHandle,
             string headers,
             uint headersLength,
-            uint modifiers)
+            uint modifiers
+        )
         {
             return true;
         }
@@ -150,7 +156,8 @@ internal static partial class Interop
             string version,
             string referrer,
             string acceptTypes,
-            uint flags)
+            uint flags
+        )
         {
             return new FakeSafeWinHttpHandle(true);
         }
@@ -162,12 +169,18 @@ internal static partial class Interop
             IntPtr optional,
             uint optionalLength,
             uint totalLength,
-            IntPtr context)
+            IntPtr context
+        )
         {
-            Task.Run(() => {
+            Task.Run(() =>
+            {
                 var fakeHandle = (FakeSafeWinHttpHandle)requestHandle;
                 fakeHandle.Context = context;
-                fakeHandle.InvokeCallback(Interop.WinHttp.WINHTTP_CALLBACK_STATUS_SENDREQUEST_COMPLETE, IntPtr.Zero, 0);
+                fakeHandle.InvokeCallback(
+                    Interop.WinHttp.WINHTTP_CALLBACK_STATUS_SENDREQUEST_COMPLETE,
+                    IntPtr.Zero,
+                    0
+                );
             });
 
             return true;
@@ -175,7 +188,8 @@ internal static partial class Interop
 
         public static bool WinHttpReceiveResponse(SafeWinHttpHandle requestHandle, IntPtr reserved)
         {
-            Task.Run(() => {
+            Task.Run(() =>
+            {
                 var fakeHandle = (FakeSafeWinHttpHandle)requestHandle;
                 bool aborted = !fakeHandle.DelayOperation(TestControl.WinHttpReceiveResponse.Delay);
 
@@ -183,16 +197,24 @@ internal static partial class Interop
                 {
                     Interop.WinHttp.WINHTTP_ASYNC_RESULT asyncResult;
                     asyncResult.dwResult = new IntPtr((int)Interop.WinHttp.API_RECEIVE_RESPONSE);
-                    asyncResult.dwError = aborted ? Interop.WinHttp.ERROR_WINHTTP_OPERATION_CANCELLED :
-                        Interop.WinHttp.ERROR_WINHTTP_CONNECTION_ERROR;
+                    asyncResult.dwError = aborted
+                        ? Interop.WinHttp.ERROR_WINHTTP_OPERATION_CANCELLED
+                        : Interop.WinHttp.ERROR_WINHTTP_CONNECTION_ERROR;
 
                     TestControl.WinHttpReadData.Wait();
-                    fakeHandle.InvokeCallback(Interop.WinHttp.WINHTTP_CALLBACK_STATUS_REQUEST_ERROR, asyncResult);
+                    fakeHandle.InvokeCallback(
+                        Interop.WinHttp.WINHTTP_CALLBACK_STATUS_REQUEST_ERROR,
+                        asyncResult
+                    );
                 }
                 else
                 {
                     TestControl.WinHttpReceiveResponse.Wait();
-                    fakeHandle.InvokeCallback(Interop.WinHttp.WINHTTP_CALLBACK_STATUS_HEADERS_AVAILABLE, IntPtr.Zero, 0);
+                    fakeHandle.InvokeCallback(
+                        Interop.WinHttp.WINHTTP_CALLBACK_STATUS_HEADERS_AVAILABLE,
+                        IntPtr.Zero,
+                        0
+                    );
                 }
             });
 
@@ -201,7 +223,8 @@ internal static partial class Interop
 
         public static bool WinHttpQueryDataAvailable(
             SafeWinHttpHandle requestHandle,
-            IntPtr bytesAvailableShouldBeNullForAsync)
+            IntPtr bytesAvailableShouldBeNullForAsync
+        )
         {
             if (bytesAvailableShouldBeNullForAsync != IntPtr.Zero)
             {
@@ -213,26 +236,37 @@ internal static partial class Interop
                 return false;
             }
 
-            Task.Run(() => {
+            Task.Run(() =>
+            {
                 var fakeHandle = (FakeSafeWinHttpHandle)requestHandle;
                 bool aborted = !fakeHandle.DelayOperation(TestControl.WinHttpReadData.Delay);
 
                 if (aborted || TestControl.WinHttpQueryDataAvailable.ErrorOnCompletion)
                 {
                     Interop.WinHttp.WINHTTP_ASYNC_RESULT asyncResult;
-                    asyncResult.dwResult = new IntPtr((int)Interop.WinHttp.API_QUERY_DATA_AVAILABLE);
-                    asyncResult.dwError = aborted ? Interop.WinHttp.ERROR_WINHTTP_OPERATION_CANCELLED :
-                        Interop.WinHttp.ERROR_WINHTTP_CONNECTION_ERROR;
+                    asyncResult.dwResult = new IntPtr(
+                        (int)Interop.WinHttp.API_QUERY_DATA_AVAILABLE
+                    );
+                    asyncResult.dwError = aborted
+                        ? Interop.WinHttp.ERROR_WINHTTP_OPERATION_CANCELLED
+                        : Interop.WinHttp.ERROR_WINHTTP_CONNECTION_ERROR;
 
                     TestControl.WinHttpQueryDataAvailable.Wait();
-                    fakeHandle.InvokeCallback(Interop.WinHttp.WINHTTP_CALLBACK_STATUS_REQUEST_ERROR, asyncResult);
+                    fakeHandle.InvokeCallback(
+                        Interop.WinHttp.WINHTTP_CALLBACK_STATUS_REQUEST_ERROR,
+                        asyncResult
+                    );
                 }
                 else
                 {
                     int bufferSize = sizeof(int);
                     IntPtr buffer = Marshal.AllocHGlobal(bufferSize);
                     Marshal.WriteInt32(buffer, TestServer.DataAvailable);
-                    fakeHandle.InvokeCallback(Interop.WinHttp.WINHTTP_CALLBACK_STATUS_DATA_AVAILABLE, buffer, (uint)bufferSize);
+                    fakeHandle.InvokeCallback(
+                        Interop.WinHttp.WINHTTP_CALLBACK_STATUS_DATA_AVAILABLE,
+                        buffer,
+                        (uint)bufferSize
+                    );
                     Marshal.FreeHGlobal(buffer);
                 }
             });
@@ -244,7 +278,8 @@ internal static partial class Interop
             SafeWinHttpHandle requestHandle,
             IntPtr buffer,
             uint bufferSize,
-            IntPtr bytesReadShouldBeNullForAsync)
+            IntPtr bytesReadShouldBeNullForAsync
+        )
         {
             if (bytesReadShouldBeNullForAsync != IntPtr.Zero)
             {
@@ -259,7 +294,8 @@ internal static partial class Interop
             uint bytesRead;
             TestServer.ReadFromResponseBody(buffer, bufferSize, out bytesRead);
 
-            Task.Run(() => {
+            Task.Run(() =>
+            {
                 var fakeHandle = (FakeSafeWinHttpHandle)requestHandle;
                 bool aborted = !fakeHandle.DelayOperation(TestControl.WinHttpReadData.Delay);
 
@@ -267,16 +303,24 @@ internal static partial class Interop
                 {
                     Interop.WinHttp.WINHTTP_ASYNC_RESULT asyncResult;
                     asyncResult.dwResult = new IntPtr((int)Interop.WinHttp.API_READ_DATA);
-                    asyncResult.dwError = aborted ? Interop.WinHttp.ERROR_WINHTTP_OPERATION_CANCELLED :
-                        Interop.WinHttp.ERROR_WINHTTP_CONNECTION_ERROR;
+                    asyncResult.dwError = aborted
+                        ? Interop.WinHttp.ERROR_WINHTTP_OPERATION_CANCELLED
+                        : Interop.WinHttp.ERROR_WINHTTP_CONNECTION_ERROR;
 
                     TestControl.WinHttpReadData.Wait();
-                    fakeHandle.InvokeCallback(Interop.WinHttp.WINHTTP_CALLBACK_STATUS_REQUEST_ERROR, asyncResult);
+                    fakeHandle.InvokeCallback(
+                        Interop.WinHttp.WINHTTP_CALLBACK_STATUS_REQUEST_ERROR,
+                        asyncResult
+                    );
                 }
                 else
                 {
                     TestControl.WinHttpReadData.Wait();
-                    fakeHandle.InvokeCallback(Interop.WinHttp.WINHTTP_CALLBACK_STATUS_READ_COMPLETE, buffer, bytesRead);
+                    fakeHandle.InvokeCallback(
+                        Interop.WinHttp.WINHTTP_CALLBACK_STATUS_READ_COMPLETE,
+                        buffer,
+                        bytesRead
+                    );
                 }
             });
 
@@ -285,10 +329,12 @@ internal static partial class Interop
 
         public static bool WinHttpQueryHeaders(
             SafeWinHttpHandle requestHandle,
-            uint infoLevel, string name,
+            uint infoLevel,
+            string name,
             IntPtr buffer,
             ref uint bufferLength,
-            ref uint index)
+            ref uint index
+        )
         {
             string httpVersion = "HTTP/1.1";
             string statusText = "OK";
@@ -301,39 +347,63 @@ internal static partial class Interop
 
             if (infoLevel == Interop.WinHttp.WINHTTP_QUERY_VERSION)
             {
-                return CopyToBufferOrFailIfInsufficientBufferLength(httpVersion, buffer, ref bufferLength);
+                return CopyToBufferOrFailIfInsufficientBufferLength(
+                    httpVersion,
+                    buffer,
+                    ref bufferLength
+                );
             }
 
             if (infoLevel == Interop.WinHttp.WINHTTP_QUERY_STATUS_TEXT)
             {
-                return CopyToBufferOrFailIfInsufficientBufferLength(statusText, buffer, ref bufferLength);
+                return CopyToBufferOrFailIfInsufficientBufferLength(
+                    statusText,
+                    buffer,
+                    ref bufferLength
+                );
             }
 
             if (infoLevel == Interop.WinHttp.WINHTTP_QUERY_CONTENT_ENCODING)
             {
-                string compression =
-                    TestServer.ResponseHeaders.Contains("Content-Encoding: deflate") ? "deflate" :
-                    TestServer.ResponseHeaders.Contains("Content-Encoding: gzip") ? "gzip" :
-                    null;
+                string compression = TestServer
+                    .ResponseHeaders
+                    .Contains("Content-Encoding: deflate")
+                    ? "deflate"
+                    : TestServer.ResponseHeaders.Contains("Content-Encoding: gzip")
+                        ? "gzip"
+                        : null;
 
                 if (compression == null)
                 {
-                    TestControl.LastWin32Error = (int)Interop.WinHttp.ERROR_WINHTTP_HEADER_NOT_FOUND;
+                    TestControl.LastWin32Error = (int)
+                        Interop.WinHttp.ERROR_WINHTTP_HEADER_NOT_FOUND;
                     return false;
                 }
 
-                return CopyToBufferOrFailIfInsufficientBufferLength(compression, buffer, ref bufferLength);
+                return CopyToBufferOrFailIfInsufficientBufferLength(
+                    compression,
+                    buffer,
+                    ref bufferLength
+                );
             }
 
             if (infoLevel == Interop.WinHttp.WINHTTP_QUERY_RAW_HEADERS_CRLF)
             {
-                return CopyToBufferOrFailIfInsufficientBufferLength(TestServer.ResponseHeaders, buffer, ref bufferLength);
+                return CopyToBufferOrFailIfInsufficientBufferLength(
+                    TestServer.ResponseHeaders,
+                    buffer,
+                    ref bufferLength
+                );
             }
 
             return false;
         }
 
-        private static bool CopyToBufferOrFailIfInsufficientBufferLength(string value, IntPtr buffer, ref uint bufferLength)
+        private static bool CopyToBufferOrFailIfInsufficientBufferLength(
+            string value,
+            IntPtr buffer,
+            ref uint bufferLength
+        )
         {
             // The length of the string (plus terminating null char) in bytes.
             uint bufferLengthNeeded = ((uint)value.Length + 1) * sizeof(char);
@@ -361,7 +431,8 @@ internal static partial class Interop
             string name,
             ref uint number,
             ref uint bufferLength,
-            IntPtr index)
+            IntPtr index
+        )
         {
             infoLevel &= ~Interop.WinHttp.WINHTTP_QUERY_FLAG_NUMBER;
 
@@ -378,7 +449,8 @@ internal static partial class Interop
             SafeWinHttpHandle handle,
             uint option,
             StringBuilder buffer,
-            ref uint bufferSize)
+            ref uint bufferSize
+        )
         {
             string uri = "http://www.contoso.com/";
 
@@ -402,7 +474,8 @@ internal static partial class Interop
             SafeWinHttpHandle handle,
             uint option,
             ref IntPtr buffer,
-            ref uint bufferSize)
+            ref uint bufferSize
+        )
         {
             return true;
         }
@@ -411,7 +484,8 @@ internal static partial class Interop
             SafeWinHttpHandle handle,
             uint option,
             IntPtr buffer,
-            ref uint bufferSize)
+            ref uint bufferSize
+        )
         {
             return true;
         }
@@ -420,7 +494,8 @@ internal static partial class Interop
             SafeWinHttpHandle handle,
             uint option,
             ref uint buffer,
-            ref uint bufferSize)
+            ref uint bufferSize
+        )
         {
             if (option == WINHTTP_OPTION_STREAM_ERROR_CODE)
             {
@@ -435,7 +510,8 @@ internal static partial class Interop
             SafeWinHttpHandle requestHandle,
             IntPtr buffer,
             uint bufferSize,
-            IntPtr bytesWrittenShouldBeNullForAsync)
+            IntPtr bytesWrittenShouldBeNullForAsync
+        )
         {
             if (bytesWrittenShouldBeNullForAsync != IntPtr.Zero)
             {
@@ -451,7 +527,8 @@ internal static partial class Interop
             TestServer.WriteToRequestBody(buffer, bufferSize);
             bytesWritten = bufferSize;
 
-            Task.Run(() => {
+            Task.Run(() =>
+            {
                 var fakeHandle = (FakeSafeWinHttpHandle)requestHandle;
                 bool aborted = !fakeHandle.DelayOperation(TestControl.WinHttpWriteData.Delay);
 
@@ -462,13 +539,21 @@ internal static partial class Interop
                     asyncResult.dwError = Interop.WinHttp.ERROR_WINHTTP_CONNECTION_ERROR;
 
                     TestControl.WinHttpWriteData.Wait();
-                    fakeHandle.InvokeCallback(aborted ? Interop.WinHttp.ERROR_WINHTTP_OPERATION_CANCELLED :
-                        Interop.WinHttp.WINHTTP_CALLBACK_STATUS_REQUEST_ERROR, asyncResult);
+                    fakeHandle.InvokeCallback(
+                        aborted
+                            ? Interop.WinHttp.ERROR_WINHTTP_OPERATION_CANCELLED
+                            : Interop.WinHttp.WINHTTP_CALLBACK_STATUS_REQUEST_ERROR,
+                        asyncResult
+                    );
                 }
                 else
                 {
                     TestControl.WinHttpWriteData.Wait();
-                    fakeHandle.InvokeCallback(Interop.WinHttp.WINHTTP_CALLBACK_STATUS_WRITE_COMPLETE, IntPtr.Zero, 0);
+                    fakeHandle.InvokeCallback(
+                        Interop.WinHttp.WINHTTP_CALLBACK_STATUS_WRITE_COMPLETE,
+                        IntPtr.Zero,
+                        0
+                    );
                 }
             });
 
@@ -479,21 +564,29 @@ internal static partial class Interop
             SafeWinHttpHandle handle,
             uint option,
             ref uint optionData,
-            uint optionLength = sizeof(uint))
+            uint optionLength = sizeof(uint)
+        )
         {
-            if (option == Interop.WinHttp.WINHTTP_OPTION_DECOMPRESSION & !TestControl.WinHttpDecompressionSupport)
+            if (
+                option == Interop.WinHttp.WINHTTP_OPTION_DECOMPRESSION
+                & !TestControl.WinHttpDecompressionSupport
+            )
             {
                 TestControl.LastWin32Error = (int)Interop.WinHttp.ERROR_WINHTTP_INVALID_OPTION;
                 return false;
             }
 
-            if (option == Interop.WinHttp.WINHTTP_OPTION_DISABLE_FEATURE &&
-                optionData == Interop.WinHttp.WINHTTP_DISABLE_COOKIES)
+            if (
+                option == Interop.WinHttp.WINHTTP_OPTION_DISABLE_FEATURE
+                && optionData == Interop.WinHttp.WINHTTP_DISABLE_COOKIES
+            )
             {
                 APICallHistory.WinHttpOptionDisableCookies = true;
             }
-            else if (option == Interop.WinHttp.WINHTTP_OPTION_ENABLE_FEATURE &&
-                     optionData == Interop.WinHttp.WINHTTP_ENABLE_SSL_REVOCATION)
+            else if (
+                option == Interop.WinHttp.WINHTTP_OPTION_ENABLE_FEATURE
+                && optionData == Interop.WinHttp.WINHTTP_ENABLE_SSL_REVOCATION
+            )
             {
                 APICallHistory.WinHttpOptionEnableSslRevocation = true;
             }
@@ -525,7 +618,8 @@ internal static partial class Interop
             SafeWinHttpHandle handle,
             uint option,
             string optionData,
-            uint optionLength)
+            uint optionLength
+        )
         {
             if (option == Interop.WinHttp.WINHTTP_OPTION_PROXY_USERNAME)
             {
@@ -547,15 +641,18 @@ internal static partial class Interop
             return true;
         }
 
-        public unsafe static bool WinHttpSetOption(
+        public static unsafe bool WinHttpSetOption(
             SafeWinHttpHandle handle,
             uint option,
             IntPtr optionData,
-            uint optionLength)
+            uint optionLength
+        )
         {
             if (option == Interop.WinHttp.WINHTTP_OPTION_PROXY)
             {
-                var proxyInfo = Marshal.PtrToStructure<Interop.WinHttp.WINHTTP_PROXY_INFO>(optionData);
+                var proxyInfo = Marshal.PtrToStructure<Interop.WinHttp.WINHTTP_PROXY_INFO>(
+                    optionData
+                );
                 var proxyInfoHistory = new APICallHistory.ProxyInfo();
                 proxyInfoHistory.AccessType = proxyInfo.AccessType;
                 proxyInfoHistory.Proxy = Marshal.PtrToStringUni(proxyInfo.Proxy);
@@ -569,7 +666,11 @@ internal static partial class Interop
             else if (option == Interop.WinHttp.WINHTTP_OPTION_TCP_KEEPALIVE)
             {
                 Interop.WinHttp.tcp_keepalive* ptr = (Interop.WinHttp.tcp_keepalive*)optionData;
-                APICallHistory.WinHttpOptionTcpKeepAlive = (ptr->onoff, ptr->keepalivetime, ptr->keepaliveinterval);
+                APICallHistory.WinHttpOptionTcpKeepAlive = (
+                    ptr->onoff,
+                    ptr->keepalivetime,
+                    ptr->keepaliveinterval
+                );
             }
 
             return true;
@@ -581,7 +682,8 @@ internal static partial class Interop
             uint authScheme,
             string userName,
             string password,
-            IntPtr reserved)
+            IntPtr reserved
+        )
         {
             return true;
         }
@@ -590,7 +692,8 @@ internal static partial class Interop
             SafeWinHttpHandle requestHandle,
             out uint supportedSchemes,
             out uint firstScheme,
-            out uint authTarget)
+            out uint authTarget
+        )
         {
             supportedSchemes = 0;
             firstScheme = 0;
@@ -604,13 +707,15 @@ internal static partial class Interop
             int resolveTimeout,
             int connectTimeout,
             int sendTimeout,
-            int receiveTimeout)
+            int receiveTimeout
+        )
         {
             return true;
         }
 
         public static bool WinHttpGetIEProxyConfigForCurrentUser(
-            out Interop.WinHttp.WINHTTP_CURRENT_USER_IE_PROXY_CONFIG proxyConfig)
+            out Interop.WinHttp.WINHTTP_CURRENT_USER_IE_PROXY_CONFIG proxyConfig
+        )
         {
             if (FakeRegistry.WinInetProxySettings.RegistryKeyMissing)
             {
@@ -624,9 +729,13 @@ internal static partial class Interop
             }
 
             proxyConfig.AutoDetect = FakeRegistry.WinInetProxySettings.AutoDetect ? 1 : 0;
-            proxyConfig.AutoConfigUrl = Marshal.StringToHGlobalUni(FakeRegistry.WinInetProxySettings.AutoConfigUrl);
+            proxyConfig.AutoConfigUrl = Marshal.StringToHGlobalUni(
+                FakeRegistry.WinInetProxySettings.AutoConfigUrl
+            );
             proxyConfig.Proxy = Marshal.StringToHGlobalUni(FakeRegistry.WinInetProxySettings.Proxy);
-            proxyConfig.ProxyBypass = Marshal.StringToHGlobalUni(FakeRegistry.WinInetProxySettings.ProxyBypass);
+            proxyConfig.ProxyBypass = Marshal.StringToHGlobalUni(
+                FakeRegistry.WinInetProxySettings.ProxyBypass
+            );
 
             return true;
         }
@@ -635,7 +744,8 @@ internal static partial class Interop
             SafeWinHttpHandle sessionHandle,
             string url,
             ref Interop.WinHttp.WINHTTP_AUTOPROXY_OPTIONS autoProxyOptions,
-            out Interop.WinHttp.WINHTTP_PROXY_INFO proxyInfo)
+            out Interop.WinHttp.WINHTTP_PROXY_INFO proxyInfo
+        )
         {
             if (TestControl.PACFileNotDetectedOnNetwork)
             {
@@ -643,7 +753,8 @@ internal static partial class Interop
                 proxyInfo.Proxy = IntPtr.Zero;
                 proxyInfo.ProxyBypass = IntPtr.Zero;
 
-                TestControl.LastWin32Error = (int)Interop.WinHttp.ERROR_WINHTTP_AUTODETECTION_FAILED;
+                TestControl.LastWin32Error = (int)
+                    Interop.WinHttp.ERROR_WINHTTP_AUTODETECTION_FAILED;
                 return false;
             }
 
@@ -658,7 +769,8 @@ internal static partial class Interop
             SafeWinHttpHandle handle,
             Interop.WinHttp.WINHTTP_STATUS_CALLBACK callback,
             uint notificationFlags,
-            IntPtr reserved)
+            IntPtr reserved
+        )
         {
             if (handle == null)
             {

@@ -17,7 +17,7 @@ namespace System.Activities
     public class ExclusiveHandle : Handle
     {
         ReadOnlyCollection<BookmarkScopeHandle> readOnlyBookmarkScopeCollection;
-                
+
         List<BookmarkScopeHandle> bookmarkScopes;
 
         ActivityInstance owningInstance;
@@ -41,12 +41,15 @@ namespace System.Activities
             {
                 if (this.bookmarkScopes == null)
                 {
-                    return new ReadOnlyCollection<BookmarkScopeHandle>(new List<BookmarkScopeHandle>());
+                    return new ReadOnlyCollection<BookmarkScopeHandle>(
+                        new List<BookmarkScopeHandle>()
+                    );
                 }
 
                 if (this.readOnlyBookmarkScopeCollection == null)
                 {
-                    this.readOnlyBookmarkScopeCollection = new ReadOnlyCollection<BookmarkScopeHandle>(this.bookmarkScopes);
+                    this.readOnlyBookmarkScopeCollection =
+                        new ReadOnlyCollection<BookmarkScopeHandle>(this.bookmarkScopes);
                 }
                 return this.readOnlyBookmarkScopeCollection;
             }
@@ -94,10 +97,15 @@ namespace System.Activities
             set { this.bookmarkScopesListIsDefault = value; }
         }
 
-
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
-            Justification = "We are restricting the activities that can call this API.")]
-        public void RegisterBookmarkScope(NativeActivityContext context, BookmarkScopeHandle bookmarkScopeHandle)
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
+            Justification = "We are restricting the activities that can call this API."
+        )]
+        public void RegisterBookmarkScope(
+            NativeActivityContext context,
+            BookmarkScopeHandle bookmarkScopeHandle
+        )
         {
             if (context == null)
             {
@@ -111,9 +119,16 @@ namespace System.Activities
                 throw FxTrace.Exception.ArgumentNull("bookmarkScopeHandle");
             }
 
-            if ((this.ImportantBookmarks != null && this.ImportantBookmarks.Count != 0) || (this.UnimportantBookmarks != null && this.UnimportantBookmarks.Count != 0))
+            if (
+                (this.ImportantBookmarks != null && this.ImportantBookmarks.Count != 0)
+                || (this.UnimportantBookmarks != null && this.UnimportantBookmarks.Count != 0)
+            )
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.ExclusiveHandleRegisterBookmarkScopeFailed));
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(SR.ExclusiveHandleRegisterBookmarkScopeFailed)
+                    );
             }
 
             if (this.bookmarkScopesListIsDefault)
@@ -126,8 +141,11 @@ namespace System.Activities
             this.readOnlyBookmarkScopeCollection = null;
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
-            Justification = "We are restricting the activities that can call this API.")]
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
+            Justification = "We are restricting the activities that can call this API."
+        )]
         public void Reinitialize(NativeActivityContext context)
         {
             if (context == null)
@@ -137,9 +155,14 @@ namespace System.Activities
 
             context.ThrowIfDisposed();
 
-            if ((this.ImportantBookmarks != null && this.ImportantBookmarks.Count != 0) || (this.UnimportantBookmarks != null && this.UnimportantBookmarks.Count != 0))
+            if (
+                (this.ImportantBookmarks != null && this.ImportantBookmarks.Count != 0)
+                || (this.UnimportantBookmarks != null && this.UnimportantBookmarks.Count != 0)
+            )
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.ExclusiveHandleReinitializeFailed));
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.ExclusiveHandleReinitializeFailed));
             }
             this.bookmarkScopes.Clear();
             this.readOnlyBookmarkScopeCollection = null;
@@ -155,26 +178,14 @@ namespace System.Activities
 
         internal ExclusiveHandleBookmarkList ImportantBookmarks
         {
-            get
-            {
-                return this.importantBookmarks;
-            }
-            set
-            {
-                this.importantBookmarks = value;
-            }
+            get { return this.importantBookmarks; }
+            set { this.importantBookmarks = value; }
         }
 
         internal ExclusiveHandleBookmarkList UnimportantBookmarks
         {
-            get
-            {
-                return this.unimportantBookmarks;
-            }
-            set
-            {
-                this.unimportantBookmarks = value;
-            }
+            get { return this.unimportantBookmarks; }
+            set { this.unimportantBookmarks = value; }
         }
 
         internal void AddToImportantBookmarks(Bookmark bookmark)
@@ -184,7 +195,10 @@ namespace System.Activities
                 this.ImportantBookmarks = new ExclusiveHandleBookmarkList();
             }
 
-            Fx.Assert(!this.ImportantBookmarks.Contains(bookmark), "We shouldnt be here. We attempted to add the same bookmark");
+            Fx.Assert(
+                !this.ImportantBookmarks.Contains(bookmark),
+                "We shouldnt be here. We attempted to add the same bookmark"
+            );
             this.ImportantBookmarks.Add(bookmark);
 
             if (bookmark.ExclusiveHandles == null)
@@ -192,7 +206,10 @@ namespace System.Activities
                 bookmark.ExclusiveHandles = new ExclusiveHandleList();
             }
 
-            Fx.Assert(!bookmark.ExclusiveHandles.Contains(this), "We shouldnt be here. We attempted to add the bookmark to this exclusive handle already");
+            Fx.Assert(
+                !bookmark.ExclusiveHandles.Contains(this),
+                "We shouldnt be here. We attempted to add the bookmark to this exclusive handle already"
+            );
             bookmark.ExclusiveHandles.Add(this);
         }
 
@@ -203,7 +220,10 @@ namespace System.Activities
                 this.UnimportantBookmarks = new ExclusiveHandleBookmarkList();
             }
 
-            Fx.Assert(!this.UnimportantBookmarks.Contains(bookmark), "We shouldnt be here. We attempted to add the same bookmark");
+            Fx.Assert(
+                !this.UnimportantBookmarks.Contains(bookmark),
+                "We shouldnt be here. We attempted to add the same bookmark"
+            );
             this.UnimportantBookmarks.Add(bookmark);
 
             if (bookmark.ExclusiveHandles == null)
@@ -211,14 +231,23 @@ namespace System.Activities
                 bookmark.ExclusiveHandles = new ExclusiveHandleList();
             }
 
-            Fx.Assert(!bookmark.ExclusiveHandles.Contains(this), "We shouldnt be here. We attempted to add the bookmark to this exclusive handle already");
+            Fx.Assert(
+                !bookmark.ExclusiveHandles.Contains(this),
+                "We shouldnt be here. We attempted to add the bookmark to this exclusive handle already"
+            );
             bookmark.ExclusiveHandles.Add(this);
         }
 
         internal void RemoveBookmark(Bookmark bookmark)
         {
-            Fx.Assert((this.ImportantBookmarks != null && this.ImportantBookmarks.Contains(bookmark)) ||
-                       (this.UnimportantBookmarks != null && this.UnimportantBookmarks.Contains(bookmark)), "Internal error");
+            Fx.Assert(
+                (this.ImportantBookmarks != null && this.ImportantBookmarks.Contains(bookmark))
+                    || (
+                        this.UnimportantBookmarks != null
+                        && this.UnimportantBookmarks.Contains(bookmark)
+                    ),
+                "Internal error"
+            );
 
             if (this.ImportantBookmarks != null)
             {

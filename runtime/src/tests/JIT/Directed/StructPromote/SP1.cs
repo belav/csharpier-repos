@@ -8,7 +8,6 @@ using Xunit;
 
 public class SP1
 {
-
     // Struct in reg (2 ints)
     struct S
     {
@@ -28,7 +27,7 @@ public class SP1
         S s;
         s.i0 = i1;
         s.i1 = i0;
-        return Foo(s);  // r0 <= r1, r1 <= r0
+        return Foo(s); // r0 <= r1, r1 <= r0
     }
 
     [Fact]

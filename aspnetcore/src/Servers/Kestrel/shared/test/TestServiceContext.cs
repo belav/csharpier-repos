@@ -17,11 +17,15 @@ namespace Microsoft.AspNetCore.Testing;
 
 internal class TestServiceContext : ServiceContext
 {
-    public TestServiceContext() : this(disableHttp1LineFeedTerminators: true)
-    {
-    }
+    public TestServiceContext()
+        : this(disableHttp1LineFeedTerminators: true) { }
 
-    public TestServiceContext(ILoggerFactory loggerFactory = null, KestrelTrace kestrelTrace = null, bool disableHttp1LineFeedTerminators = true, KestrelMetrics metrics = null)
+    public TestServiceContext(
+        ILoggerFactory loggerFactory = null,
+        KestrelTrace kestrelTrace = null,
+        bool disableHttp1LineFeedTerminators = true,
+        KestrelMetrics metrics = null
+    )
     {
         loggerFactory ??= NullLoggerFactory.Instance;
         kestrelTrace ??= CreateLoggingTrace(loggerFactory);
@@ -43,13 +47,19 @@ internal class TestServiceContext : ServiceContext
             TimeProvider.System,
             DebuggerWrapper.Singleton,
             Log,
-            Heartbeat.Interval);
+            Heartbeat.Interval
+        );
 
         MockTimeProvider = null;
         TimeProvider = TimeProvider.System;
     }
 
-    private void Initialize(ILoggerFactory loggerFactory, KestrelTrace kestrelTrace, bool disableHttp1LineFeedTerminators, KestrelMetrics metrics)
+    private void Initialize(
+        ILoggerFactory loggerFactory,
+        KestrelTrace kestrelTrace,
+        bool disableHttp1LineFeedTerminators,
+        KestrelMetrics metrics
+    )
     {
         LoggerFactory = loggerFactory;
         Log = kestrelTrace;
@@ -58,11 +68,11 @@ internal class TestServiceContext : ServiceContext
         TimeProvider = MockTimeProvider;
         DateHeaderValueManager = new DateHeaderValueManager(MockTimeProvider);
         ConnectionManager = new ConnectionManager(Log, ResourceCounter.Unlimited);
-        HttpParser = new HttpParser<Http1ParsingHandler>(Log.IsEnabled(LogLevel.Information), disableHttp1LineFeedTerminators);
-        ServerOptions = new KestrelServerOptions
-        {
-            AddServerHeader = false
-        };
+        HttpParser = new HttpParser<Http1ParsingHandler>(
+            Log.IsEnabled(LogLevel.Information),
+            disableHttp1LineFeedTerminators
+        );
+        ServerOptions = new KestrelServerOptions { AddServerHeader = false };
 
         DateHeaderValueManager.OnHeartbeat();
         Metrics = metrics;
@@ -72,7 +82,8 @@ internal class TestServiceContext : ServiceContext
 
     public MockTimeProvider MockTimeProvider { get; set; }
 
-    public Func<MemoryPool<byte>> MemoryPoolFactory { get; set; } = System.Buffers.PinnedBlockMemoryPoolFactory.Create;
+    public Func<MemoryPool<byte>> MemoryPoolFactory { get; set; } =
+        System.Buffers.PinnedBlockMemoryPoolFactory.Create;
 
     public string DateHeaderValue => DateHeaderValueManager.GetDateHeaderValues().String;
 }

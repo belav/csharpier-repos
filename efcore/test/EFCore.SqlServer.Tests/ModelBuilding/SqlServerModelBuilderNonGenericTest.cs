@@ -12,63 +12,63 @@ public class SqlServerModelBuilderNonGenericTest : SqlServerModelBuilderTestBase
     {
         protected override TestModelBuilder CreateTestModelBuilder(
             TestHelpers testHelpers,
-            Action<ModelConfigurationBuilder>? configure)
-            => new ModelBuilderNonGenericTest.NonGenericTestModelBuilder(testHelpers, configure);
+            Action<ModelConfigurationBuilder>? configure
+        ) => new ModelBuilderNonGenericTest.NonGenericTestModelBuilder(testHelpers, configure);
     }
 
     public class SqlServerNonGenericComplexType : SqlServerComplexType
     {
         protected override TestModelBuilder CreateTestModelBuilder(
             TestHelpers testHelpers,
-            Action<ModelConfigurationBuilder>? configure)
-            => new ModelBuilderNonGenericTest.NonGenericTestModelBuilder(testHelpers, configure);
+            Action<ModelConfigurationBuilder>? configure
+        ) => new ModelBuilderNonGenericTest.NonGenericTestModelBuilder(testHelpers, configure);
     }
 
     public class SqlServerNonGenericInheritance : SqlServerInheritance
     {
         protected override TestModelBuilder CreateTestModelBuilder(
             TestHelpers testHelpers,
-            Action<ModelConfigurationBuilder>? configure)
-            => new ModelBuilderNonGenericTest.NonGenericTestModelBuilder(testHelpers, configure);
+            Action<ModelConfigurationBuilder>? configure
+        ) => new ModelBuilderNonGenericTest.NonGenericTestModelBuilder(testHelpers, configure);
     }
 
     public class SqlServerNonGenericOneToMany : SqlServerOneToMany
     {
         protected override TestModelBuilder CreateTestModelBuilder(
             TestHelpers testHelpers,
-            Action<ModelConfigurationBuilder>? configure)
-            => new ModelBuilderNonGenericTest.NonGenericTestModelBuilder(testHelpers, configure);
+            Action<ModelConfigurationBuilder>? configure
+        ) => new ModelBuilderNonGenericTest.NonGenericTestModelBuilder(testHelpers, configure);
     }
 
     public class SqlServerNonGenericManyToOne : SqlServerManyToOne
     {
         protected override TestModelBuilder CreateTestModelBuilder(
             TestHelpers testHelpers,
-            Action<ModelConfigurationBuilder>? configure)
-            => new ModelBuilderNonGenericTest.NonGenericTestModelBuilder(testHelpers, configure);
+            Action<ModelConfigurationBuilder>? configure
+        ) => new ModelBuilderNonGenericTest.NonGenericTestModelBuilder(testHelpers, configure);
     }
 
     public class SqlServerNonGenericOneToOne : SqlServerOneToOne
     {
         protected override TestModelBuilder CreateTestModelBuilder(
             TestHelpers testHelpers,
-            Action<ModelConfigurationBuilder>? configure)
-            => new ModelBuilderNonGenericTest.NonGenericTestModelBuilder(testHelpers, configure);
+            Action<ModelConfigurationBuilder>? configure
+        ) => new ModelBuilderNonGenericTest.NonGenericTestModelBuilder(testHelpers, configure);
     }
 
     public class SqlServerNonGenericManyToMany : SqlServerManyToMany
     {
         protected override TestModelBuilder CreateTestModelBuilder(
             TestHelpers testHelpers,
-            Action<ModelConfigurationBuilder>? configure)
-            => new ModelBuilderNonGenericTest.NonGenericTestModelBuilder(testHelpers, configure);
+            Action<ModelConfigurationBuilder>? configure
+        ) => new ModelBuilderNonGenericTest.NonGenericTestModelBuilder(testHelpers, configure);
     }
 
     public class SqlServerNonGenericOwnedTypes : SqlServerOwnedTypes
     {
         protected override TestModelBuilder CreateTestModelBuilder(
             TestHelpers testHelpers,
-            Action<ModelConfigurationBuilder>? configure)
-            => new ModelBuilderNonGenericTest.NonGenericTestModelBuilder(testHelpers, configure);
+            Action<ModelConfigurationBuilder>? configure
+        ) => new ModelBuilderNonGenericTest.NonGenericTestModelBuilder(testHelpers, configure);
     }
 }

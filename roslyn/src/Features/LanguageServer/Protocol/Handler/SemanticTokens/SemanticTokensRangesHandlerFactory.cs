@@ -17,15 +17,18 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SemanticTokensRangesHandlerFactory(
-            IGlobalOptionService globalOptions)
+        public SemanticTokensRangesHandlerFactory(IGlobalOptionService globalOptions)
         {
             _globalOptions = globalOptions;
         }
 
-        public ILspService CreateILspService(LspServices lspServices, WellKnownLspServerKinds serverKind)
+        public ILspService CreateILspService(
+            LspServices lspServices,
+            WellKnownLspServerKinds serverKind
+        )
         {
-            var semanticTokensRefreshQueue = lspServices.GetRequiredService<SemanticTokensRefreshQueue>();
+            var semanticTokensRefreshQueue =
+                lspServices.GetRequiredService<SemanticTokensRefreshQueue>();
             return new SemanticTokensRangesHandler(_globalOptions, semanticTokensRefreshQueue);
         }
     }

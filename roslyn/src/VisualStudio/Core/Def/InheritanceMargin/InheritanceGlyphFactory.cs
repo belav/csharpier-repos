@@ -44,7 +44,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             IUIThreadOperationExecutor operationExecutor,
             IWpfTextView textView,
             IGlobalOptionService globalOptions,
-            IAsynchronousOperationListener listener)
+            IAsynchronousOperationListener listener
+        )
         {
             _workspace = workspace;
             _threadingContext = threadingContext;
@@ -69,7 +70,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             // we need
             // 1. Generate tags when this option changes.
             // 2. Always return null here to force the editor to remove the glyphs.
-            if (!_globalOptions.GetOption(InheritanceMarginOptionsStorage.InheritanceMarginCombinedWithIndicatorMargin))
+            if (
+                !_globalOptions.GetOption(
+                    InheritanceMarginOptionsStorage.InheritanceMarginCombinedWithIndicatorMargin
+                )
+            )
             {
                 return null;
             }
@@ -90,7 +95,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
                 _operationExecutor,
                 inheritanceMarginTag,
                 _textView,
-                _listener);
+                _listener
+            );
         }
     }
 }

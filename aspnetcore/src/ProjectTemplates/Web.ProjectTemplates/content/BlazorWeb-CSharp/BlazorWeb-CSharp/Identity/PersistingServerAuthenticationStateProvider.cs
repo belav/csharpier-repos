@@ -9,7 +9,9 @@ using BlazorWeb_CSharp.Client;
 
 namespace BlazorWeb_CSharp.Identity;
 
-public class PersistingServerAuthenticationStateProvider : ServerAuthenticationStateProvider, IDisposable
+public class PersistingServerAuthenticationStateProvider
+    : ServerAuthenticationStateProvider,
+        IDisposable
 {
     private readonly PersistentComponentState _state;
     private readonly IdentityOptions _options;
@@ -18,13 +20,19 @@ public class PersistingServerAuthenticationStateProvider : ServerAuthenticationS
 
     private Task<AuthenticationState>? _authenticationStateTask;
 
-    public PersistingServerAuthenticationStateProvider(PersistentComponentState state, IOptions<IdentityOptions> options)
+    public PersistingServerAuthenticationStateProvider(
+        PersistentComponentState state,
+        IOptions<IdentityOptions> options
+    )
     {
         _state = state;
         _options = options.Value;
 
         AuthenticationStateChanged += OnAuthenticationStateChanged;
-        _subscription = state.RegisterOnPersisting(OnPersistingAsync, RenderMode.InteractiveWebAssembly);
+        _subscription = state.RegisterOnPersisting(
+            OnPersistingAsync,
+            RenderMode.InteractiveWebAssembly
+        );
     }
 
     private void OnAuthenticationStateChanged(Task<AuthenticationState> authenticationStateTask)
@@ -36,7 +44,9 @@ public class PersistingServerAuthenticationStateProvider : ServerAuthenticationS
     {
         if (_authenticationStateTask is null)
         {
-            throw new UnreachableException($"Authentication state not set in {nameof(RevalidatingServerAuthenticationStateProvider)}.{nameof(OnPersistingAsync)}().");
+            throw new UnreachableException(
+                $"Authentication state not set in {nameof(RevalidatingServerAuthenticationStateProvider)}.{nameof(OnPersistingAsync)}()."
+            );
         }
 
         var authenticationState = await _authenticationStateTask;
@@ -49,11 +59,10 @@ public class PersistingServerAuthenticationStateProvider : ServerAuthenticationS
 
             if (userId != null && email != null)
             {
-                _state.PersistAsJson(nameof(UserInfo), new UserInfo
-                {
-                    UserId = userId,
-                    Email = email,
-                });
+                _state.PersistAsJson(
+                    nameof(UserInfo),
+                    new UserInfo { UserId = userId, Email = email, }
+                );
             }
         }
     }

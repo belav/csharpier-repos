@@ -12,9 +12,11 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure;
 
 [Trait(Traits.Feature, Traits.Features.Outlining)]
-public class EnumDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTests<EnumDeclarationSyntax>
+public class EnumDeclarationStructureTests
+    : AbstractCSharpSyntaxNodeStructureTests<EnumDeclarationSyntax>
 {
-    internal override AbstractSyntaxStructureProvider CreateProvider() => new EnumDeclarationStructureProvider();
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new EnumDeclarationStructureProvider();
 
     [Fact]
     public async Task TestEnum1()
@@ -25,8 +27,10 @@ public class EnumDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
                 }|}|}
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Theory]
@@ -36,7 +40,8 @@ public class EnumDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
     [InlineData("interface")]
     public async Task TestEnum2(string typeKind)
     {
-        var code = $@"
+        var code =
+            $@"
 {{|hint:$$enum E{{|textspan:
 {{
 }}|}}|}}
@@ -44,8 +49,10 @@ public class EnumDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
 {{
 }}";
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Theory]
@@ -55,7 +62,8 @@ public class EnumDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
     [InlineData("interface")]
     public async Task TestEnum3(string typeKind)
     {
-        var code = $@"
+        var code =
+            $@"
 {{|hint:$$enum E{{|textspan:
 {{
 }}|}}|}}
@@ -64,8 +72,10 @@ public class EnumDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
 {{
 }}";
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -79,9 +89,11 @@ public class EnumDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
                 }|}|}
                 """;
 
-        await VerifyBlockSpansAsync(code,
+        await VerifyBlockSpansAsync(
+            code,
             Region("span1", "// Goo ...", autoCollapse: true),
-            Region("textspan2", "hint2", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            Region("textspan2", "hint2", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -95,8 +107,10 @@ public class EnumDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
                 }|}|}
                 """;
 
-        await VerifyBlockSpansAsync(code,
+        await VerifyBlockSpansAsync(
+            code,
             Region("textspan1", "hint1", CSharpStructureHelpers.Ellipsis, autoCollapse: false),
-            Region("span2", "// Goo ...", autoCollapse: true));
+            Region("span2", "// Goo ...", autoCollapse: true)
+        );
     }
 }

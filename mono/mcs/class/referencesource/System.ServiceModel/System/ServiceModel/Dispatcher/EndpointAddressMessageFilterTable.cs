@@ -34,9 +34,7 @@ namespace System.ServiceModel.Dispatcher
         {
             EndpointAddressProcessor processor;
 
-            internal ProcessorPool()
-            {
-            }
+            internal ProcessorPool() { }
 
             internal EndpointAddressProcessor Pop()
             {
@@ -72,16 +70,17 @@ namespace System.ServiceModel.Dispatcher
 
         protected virtual void InitializeLookupTables()
         {
-            this.toHostLookup = new Dictionary<Uri, CandidateSet>(EndpointAddressMessageFilter.HostUriComparer.Value);
-            this.toNoHostLookup = new Dictionary<Uri, CandidateSet>(EndpointAddressMessageFilter.NoHostUriComparer.Value);
+            this.toHostLookup = new Dictionary<Uri, CandidateSet>(
+                EndpointAddressMessageFilter.HostUriComparer.Value
+            );
+            this.toNoHostLookup = new Dictionary<Uri, CandidateSet>(
+                EndpointAddressMessageFilter.NoHostUriComparer.Value
+            );
         }
 
         public TFilterData this[MessageFilter filter]
         {
-            get
-            {
-                return this.filters[filter];
-            }
+            get { return this.filters[filter]; }
             set
             {
                 if (this.filters.ContainsKey(filter))
@@ -98,34 +97,22 @@ namespace System.ServiceModel.Dispatcher
 
         public int Count
         {
-            get
-            {
-                return this.filters.Count;
-            }
+            get { return this.filters.Count; }
         }
 
         public bool IsReadOnly
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public ICollection<MessageFilter> Keys
         {
-            get
-            {
-                return this.filters.Keys;
-            }
+            get { return this.filters.Keys; }
         }
 
         public ICollection<TFilterData> Values
         {
-            get
-            {
-                return this.filters.Values;
-            }
+            get { return this.filters.Values; }
         }
 
         public virtual void Add(MessageFilter filter, TFilterData data)
@@ -274,7 +261,9 @@ namespace System.ServiceModel.Dispatcher
 
         public bool Contains(KeyValuePair<MessageFilter, TFilterData> item)
         {
-            return ((ICollection<KeyValuePair<MessageFilter, TFilterData>>)this.filters).Contains(item);
+            return ((ICollection<KeyValuePair<MessageFilter, TFilterData>>)this.filters).Contains(
+                item
+            );
         }
 
         public bool ContainsKey(MessageFilter filter)
@@ -288,7 +277,10 @@ namespace System.ServiceModel.Dispatcher
 
         public void CopyTo(KeyValuePair<MessageFilter, TFilterData>[] array, int arrayIndex)
         {
-            ((ICollection<KeyValuePair<MessageFilter, TFilterData>>)this.filters).CopyTo(array, arrayIndex);
+            ((ICollection<KeyValuePair<MessageFilter, TFilterData>>)this.filters).CopyTo(
+                array,
+                arrayIndex
+            );
         }
 
         EndpointAddressProcessor CreateProcessor(int length)
@@ -322,7 +314,11 @@ namespace System.ServiceModel.Dispatcher
             return this.filters.GetEnumerator();
         }
 
-        internal virtual bool TryMatchCandidateSet(Uri to, bool includeHostNameInComparison, out CandidateSet cset)
+        internal virtual bool TryMatchCandidateSet(
+            Uri to,
+            bool includeHostNameInComparison,
+            out CandidateSet cset
+        )
         {
             if (includeHostNameInComparison)
             {
@@ -344,11 +340,25 @@ namespace System.ServiceModel.Dispatcher
 
             CandidateSet cset = null;
             Candidate can = null;
-            if (TryMatchCandidateSet(to, true/*includeHostNameInComparison*/, out cset))
+            if (
+                TryMatchCandidateSet(
+                    to,
+                    true /*includeHostNameInComparison*/
+                    ,
+                    out cset
+                )
+            )
             {
                 can = GetSingleMatch(cset, message);
             }
-            if (TryMatchCandidateSet(to, false/*includeHostNameInComparison*/, out cset))
+            if (
+                TryMatchCandidateSet(
+                    to,
+                    false /*includeHostNameInComparison*/
+                    ,
+                    out cset
+                )
+            )
             {
                 Candidate c = GetSingleMatch(cset, message);
                 if (c != null)
@@ -358,7 +368,15 @@ namespace System.ServiceModel.Dispatcher
                         Collection<MessageFilter> matches = new Collection<MessageFilter>();
                         matches.Add(can.filter);
                         matches.Add(c.filter);
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MultipleFilterMatchesException(SR.GetString(SR.FilterMultipleMatches), null, matches));
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new MultipleFilterMatchesException(
+                                    SR.GetString(SR.FilterMultipleMatches),
+                                    null,
+                                    matches
+                                )
+                            );
                     }
                     can = c;
                 }
@@ -388,7 +406,14 @@ namespace System.ServiceModel.Dispatcher
                     {
                         matches.Add(cset.candidates[i].filter);
                     }
-                    throw TraceUtility.ThrowHelperError(new MultipleFilterMatchesException(SR.GetString(SR.FilterMultipleMatches), null, matches), message);
+                    throw TraceUtility.ThrowHelperError(
+                        new MultipleFilterMatchesException(
+                            SR.GetString(SR.FilterMultipleMatches),
+                            null,
+                            matches
+                        ),
+                        message
+                    );
                 }
             }
 
@@ -406,7 +431,14 @@ namespace System.ServiceModel.Dispatcher
                         Collection<MessageFilter> matches = new Collection<MessageFilter>();
                         matches.Add(can.filter);
                         matches.Add(candis[i].filter);
-                        throw TraceUtility.ThrowHelperError(new MultipleFilterMatchesException(SR.GetString(SR.FilterMultipleMatches), null, matches), message);
+                        throw TraceUtility.ThrowHelperError(
+                            new MultipleFilterMatchesException(
+                                SR.GetString(SR.FilterMultipleMatches),
+                                null,
+                                matches
+                            ),
+                            message
+                        );
                     }
                     can = candis[i];
                 }
@@ -423,11 +455,25 @@ namespace System.ServiceModel.Dispatcher
             if (to != null)
             {
                 CandidateSet cset;
-                if (TryMatchCandidateSet(to, true /*includeHostNameInComparison*/, out cset))
+                if (
+                    TryMatchCandidateSet(
+                        to,
+                        true /*includeHostNameInComparison*/
+                        ,
+                        out cset
+                    )
+                )
                 {
                     InnerMatchData(message, results, cset);
                 }
-                if (TryMatchCandidateSet(to, false /*includeHostNameInComparison*/, out cset))
+                if (
+                    TryMatchCandidateSet(
+                        to,
+                        false /*includeHostNameInComparison*/
+                        ,
+                        out cset
+                    )
+                )
                 {
                     InnerMatchData(message, results, cset);
                 }
@@ -457,18 +503,36 @@ namespace System.ServiceModel.Dispatcher
             if (to != null)
             {
                 CandidateSet cset;
-                if (TryMatchCandidateSet(to, true/*includeHostNameInComparison*/, out cset))
+                if (
+                    TryMatchCandidateSet(
+                        to,
+                        true /*includeHostNameInComparison*/
+                        ,
+                        out cset
+                    )
+                )
                 {
                     InnerMatchFilters(message, results, cset);
                 }
-                if (TryMatchCandidateSet(to, false/*includeHostNameInComparison*/, out cset))
+                if (
+                    TryMatchCandidateSet(
+                        to,
+                        false /*includeHostNameInComparison*/
+                        ,
+                        out cset
+                    )
+                )
                 {
                     InnerMatchFilters(message, results, cset);
                 }
             }
         }
 
-        void InnerMatchFilters(Message message, ICollection<MessageFilter> results, CandidateSet cset)
+        void InnerMatchFilters(
+            Message message,
+            ICollection<MessageFilter> results,
+            CandidateSet cset
+        )
         {
             EndpointAddressProcessor context = CreateProcessor(this.size);
             context.ProcessHeaders(message, cset.qnames, this.headerLookup);
@@ -636,7 +700,10 @@ namespace System.ServiceModel.Dispatcher
             return count != results.Count;
         }
 
-        public bool GetMatchingFilters(MessageBuffer messageBuffer, ICollection<MessageFilter> results)
+        public bool GetMatchingFilters(
+            MessageBuffer messageBuffer,
+            ICollection<MessageFilter> results
+        )
         {
             if (messageBuffer == null)
             {
@@ -781,7 +848,9 @@ namespace System.ServiceModel.Dispatcher
 
         public bool Remove(KeyValuePair<MessageFilter, TFilterData> item)
         {
-            if (((ICollection<KeyValuePair<MessageFilter, TFilterData>>)this.filters).Contains(item))
+            if (
+                ((ICollection<KeyValuePair<MessageFilter, TFilterData>>)this.filters).Contains(item)
+            )
             {
                 return Remove(item.Key);
             }
@@ -795,7 +864,12 @@ namespace System.ServiceModel.Dispatcher
             internal byte[] mask;
             internal Dictionary<string, HeaderBit[]> headerLookup;
 
-            internal Candidate(MessageFilter filter, TFilterData data, byte[] mask, Dictionary<string, HeaderBit[]> headerLookup)
+            internal Candidate(
+                MessageFilter filter,
+                TFilterData data,
+                byte[] mask,
+                Dictionary<string, HeaderBit[]> headerLookup
+            )
             {
                 this.filter = filter;
                 this.data = data;

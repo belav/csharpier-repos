@@ -11,7 +11,9 @@ using Xunit;
 
 namespace AppHost.Bundle.Tests
 {
-    public class BundleLocalizedApp : BundleTestBase, IClassFixture<BundleLocalizedApp.SharedTestState>
+    public class BundleLocalizedApp
+        : BundleTestBase,
+            IClassFixture<BundleLocalizedApp.SharedTestState>
     {
         private SharedTestState sharedTestState;
 
@@ -26,12 +28,15 @@ namespace AppHost.Bundle.Tests
             var fixture = sharedTestState.TestFixture.Copy();
             var singleFile = BundleSelfContainedApp(fixture);
 
-            Command.Create(singleFile)
+            Command
+                .Create(singleFile)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdOutContaining("[kn-IN]! [ta-IN]! [default]!");
+                .Should()
+                .Pass()
+                .And
+                .HaveStdOutContaining("[kn-IN]! [ta-IN]! [default]!");
         }
 
         public class SharedTestState : SharedTestStateBase, IDisposable

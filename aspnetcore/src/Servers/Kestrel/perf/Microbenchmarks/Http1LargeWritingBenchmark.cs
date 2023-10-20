@@ -56,10 +56,14 @@ public class Http1LargeWritingBenchmark
         for (int i = 0; i < 9; i++)
         {
             // Ignore the first nine tasks.
-            _ = _http1Connection.ResponseBody.WriteAsync(_writeData, i * segmentSize, segmentSize, default);
+            _ = _http1Connection
+                .ResponseBody
+                .WriteAsync(_writeData, i * segmentSize, segmentSize, default);
         }
 
-        return _http1Connection.ResponseBody.WriteAsync(_writeData, 9 * segmentSize, segmentSize, default);
+        return _http1Connection
+            .ResponseBody
+            .WriteAsync(_writeData, 9 * segmentSize, segmentSize, default);
     }
 
     private TestHttp1Connection MakeHttp1Connection()
@@ -71,7 +75,8 @@ public class Http1LargeWritingBenchmark
         var serviceContext = TestContextFactory.CreateServiceContext(
             serverOptions: new KestrelServerOptions(),
             httpParser: new HttpParser<Http1ParsingHandler>(),
-            dateHeaderValueManager: new DateHeaderValueManager(TimeProvider.System));
+            dateHeaderValueManager: new DateHeaderValueManager(TimeProvider.System)
+        );
 
         var connectionContext = TestContextFactory.CreateHttpConnectionContext(
             serviceContext: serviceContext,
@@ -79,7 +84,8 @@ public class Http1LargeWritingBenchmark
             transport: pair.Transport,
             timeoutControl: new TimeoutControl(timeoutHandler: null, TimeProvider.System),
             memoryPool: _memoryPool,
-            connectionFeatures: new FeatureCollection());
+            connectionFeatures: new FeatureCollection()
+        );
 
         var http1Connection = new TestHttp1Connection(connectionContext);
 

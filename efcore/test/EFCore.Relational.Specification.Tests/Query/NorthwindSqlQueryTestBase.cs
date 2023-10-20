@@ -20,18 +20,24 @@ public abstract class NorthwindSqlQueryTestBase<TFixture> : IClassFixture<TFixtu
 
     protected TFixture Fixture { get; }
 
-    public static IEnumerable<object[]> IsAsyncData = new[] { new object[] { false }, new object[] { true } };
+    public static IEnumerable<object[]> IsAsyncData = new[]
+    {
+        new object[] { false },
+        new object[] { true }
+    };
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task SqlQueryRaw_over_int(bool async)
     {
         using var context = CreateContext();
-        var query = context.Database.SqlQueryRaw<int>(NormalizeDelimitersInRawString(@"SELECT [ProductID] FROM [Products]"));
+        var query = context
+            .Database
+            .SqlQueryRaw<int>(
+                NormalizeDelimitersInRawString(@"SELECT [ProductID] FROM [Products]")
+            );
 
-        var result = async
-            ? await query.ToListAsync()
-            : query.ToList();
+        var result = async ? await query.ToListAsync() : query.ToList();
 
         Assert.Equal(77, result.Count);
     }
@@ -41,15 +47,21 @@ public abstract class NorthwindSqlQueryTestBase<TFixture> : IClassFixture<TFixtu
     public virtual async Task SqlQuery_composed_Contains(bool async)
     {
         using var context = CreateContext();
-        var query = context.Set<Order>()
+        var query = context
+            .Set<Order>()
             .Where(
-                e => context.Database
-                    .SqlQuery<int>(NormalizeDelimitersInInterpolatedString(@$"SELECT [ProductID] AS [Value] FROM [Products]"))
-                    .Contains(e.OrderID));
+                e =>
+                    context
+                        .Database
+                        .SqlQuery<int>(
+                            NormalizeDelimitersInInterpolatedString(
+                                @$"SELECT [ProductID] AS [Value] FROM [Products]"
+                            )
+                        )
+                        .Contains(e.OrderID)
+            );
 
-        var result = async
-            ? await query.ToListAsync()
-            : query.ToList();
+        var result = async ? await query.ToListAsync() : query.ToList();
 
         Assert.Equal(0, result.Count);
     }
@@ -59,15 +71,19 @@ public abstract class NorthwindSqlQueryTestBase<TFixture> : IClassFixture<TFixtu
     public virtual async Task SqlQuery_composed_Join(bool async)
     {
         using var context = CreateContext();
-        var query = from o in context.Set<Order>()
-                    join p in context.Database.SqlQuery<int>(
-                            NormalizeDelimitersInInterpolatedString(@$"SELECT [ProductID] AS [Value] FROM [Products]"))
-                        on o.OrderID equals p
-                    select new { o, p };
+        var query =
+            from o in context.Set<Order>()
+            join p in context
+                .Database
+                .SqlQuery<int>(
+                    NormalizeDelimitersInInterpolatedString(
+                        @$"SELECT [ProductID] AS [Value] FROM [Products]"
+                    )
+                )
+                on o.OrderID equals p
+            select new { o, p };
 
-        var result = async
-            ? await query.ToListAsync()
-            : query.ToList();
+        var result = async ? await query.ToListAsync() : query.ToList();
 
         Assert.Equal(0, result.Count);
     }
@@ -78,24 +94,26 @@ public abstract class NorthwindSqlQueryTestBase<TFixture> : IClassFixture<TFixtu
     {
         using var context = CreateContext();
         var value = 10;
-        var query = context.Database.SqlQuery<int>(
-            NormalizeDelimitersInInterpolatedString(@$"SELECT [ProductID] FROM [Products] WHERE [ProductID] = {value}"));
+        var query = context
+            .Database
+            .SqlQuery<int>(
+                NormalizeDelimitersInInterpolatedString(
+                    @$"SELECT [ProductID] FROM [Products] WHERE [ProductID] = {value}"
+                )
+            );
 
-        var result = async
-            ? await query.ToListAsync()
-            : query.ToList();
+        var result = async ? await query.ToListAsync() : query.ToList();
 
         Assert.Equal(10, result.Single());
     }
 
-    protected string NormalizeDelimitersInRawString(string sql)
-        => Fixture.TestStore.NormalizeDelimitersInRawString(sql);
+    protected string NormalizeDelimitersInRawString(string sql) =>
+        Fixture.TestStore.NormalizeDelimitersInRawString(sql);
 
-    protected FormattableString NormalizeDelimitersInInterpolatedString(FormattableString sql)
-        => Fixture.TestStore.NormalizeDelimitersInInterpolatedString(sql);
+    protected FormattableString NormalizeDelimitersInInterpolatedString(FormattableString sql) =>
+        Fixture.TestStore.NormalizeDelimitersInInterpolatedString(sql);
 
     protected abstract DbParameter CreateDbParameter(string name, object value);
 
-    protected NorthwindContext CreateContext()
-        => Fixture.CreateContext();
+    protected NorthwindContext CreateContext() => Fixture.CreateContext();
 }

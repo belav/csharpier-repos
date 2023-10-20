@@ -30,12 +30,14 @@ namespace System.Data.Common.CommandTrees
     /// where Id = 2
     /// </code>
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "Db")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1709:IdentifiersShouldBeCasedCorrectly",
+        MessageId = "Db"
+    )]
     public abstract class DbModificationClause
     {
-        internal DbModificationClause()
-        {
-        }
+        internal DbModificationClause() { }
 
         // Effects: describes the contents of this clause using the given dumper
         internal abstract void DumpStructure(ExpressionDumper dumper);

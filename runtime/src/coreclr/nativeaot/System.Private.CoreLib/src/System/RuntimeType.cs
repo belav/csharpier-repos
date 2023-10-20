@@ -69,7 +69,13 @@ namespace System
                 if (!Enum.TryGetUnboxedValueOfEnumOrInteger(value, out rawValue))
                 {
                     if (Type.IsIntegerType(value.GetType()))
-                        throw new ArgumentException(SR.Format(SR.Arg_EnumUnderlyingTypeAndObjectMustBeSameType, value.GetType(), Enum.InternalGetUnderlyingType(this)));
+                        throw new ArgumentException(
+                            SR.Format(
+                                SR.Arg_EnumUnderlyingTypeAndObjectMustBeSameType,
+                                value.GetType(),
+                                Enum.InternalGetUnderlyingType(this)
+                            )
+                        );
                     else
                         throw new InvalidOperationException(SR.InvalidOperation_UnknownEnumType);
                 }
@@ -77,20 +83,30 @@ namespace System
                 if (value is Enum)
                 {
                     if (!Enum.ValueTypeMatchesEnumType(this, value))
-                        throw new ArgumentException(SR.Format(SR.Arg_EnumAndObjectMustBeSameType, value.GetType(), this));
+                        throw new ArgumentException(
+                            SR.Format(SR.Arg_EnumAndObjectMustBeSameType, value.GetType(), this)
+                        );
                 }
                 else
                 {
                     Type underlyingType = Enum.InternalGetUnderlyingType(this);
                     if (!(underlyingType.TypeHandle.ToEETypePtr() == value.GetEETypePtr()))
-                        throw new ArgumentException(SR.Format(SR.Arg_EnumUnderlyingTypeAndObjectMustBeSameType, value.GetType(), underlyingType));
+                        throw new ArgumentException(
+                            SR.Format(
+                                SR.Arg_EnumUnderlyingTypeAndObjectMustBeSameType,
+                                value.GetType(),
+                                underlyingType
+                            )
+                        );
                 }
 
                 return Enum.GetName(this, rawValue) != null;
             }
         }
 
-        [RequiresDynamicCode("It might not be possible to create an array of the enum type at runtime. Use the GetValues<TEnum> overload instead.")]
+        [RequiresDynamicCode(
+            "It might not be possible to create an array of the enum type at runtime. Use the GetValues<TEnum> overload instead."
+        )]
         public sealed override Array GetEnumValues()
         {
             if (!IsActualEnum)
@@ -102,9 +118,11 @@ namespace System
             // Without universal shared generics, chances are slim that we'll have the appropriate
             // array type available. Offer an escape hatch that avoids a missing metadata exception
             // at the cost of a small appcompat risk.
-            Array result = AppContext.TryGetSwitch("Switch.System.Enum.RelaxedGetValues", out bool isRelaxed) && isRelaxed ?
-                Array.CreateInstance(Enum.InternalGetUnderlyingType(this), count) :
-                Array.CreateInstance(this, count);
+            Array result =
+                AppContext.TryGetSwitch("Switch.System.Enum.RelaxedGetValues", out bool isRelaxed)
+                && isRelaxed
+                    ? Array.CreateInstance(Enum.InternalGetUnderlyingType(this), count)
+                    : Array.CreateInstance(this, count);
 
             Array.Copy(values, result, values.Length);
             return result;
@@ -118,7 +136,6 @@ namespace System
             return Enum.GetValuesAsUnderlyingType(this);
         }
 
-        internal bool IsActualEnum
-            => TryGetEEType(out EETypePtr eeType) && eeType.IsEnum;
+        internal bool IsActualEnum => TryGetEEType(out EETypePtr eeType) && eeType.IsEnum;
     }
 }

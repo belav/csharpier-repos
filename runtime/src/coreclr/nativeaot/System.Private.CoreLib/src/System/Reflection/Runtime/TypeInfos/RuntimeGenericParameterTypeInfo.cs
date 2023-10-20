@@ -24,12 +24,18 @@ namespace System.Reflection.Runtime.TypeInfos
 
         public sealed override bool IsTypeDefinition => false;
         public sealed override bool IsGenericTypeDefinition => false;
+
         protected sealed override bool HasElementTypeImpl() => false;
+
         protected sealed override bool IsArrayImpl() => false;
+
         public sealed override bool IsSZArray => false;
         public sealed override bool IsVariableBoundArray => false;
+
         protected sealed override bool IsByRefImpl() => false;
+
         protected sealed override bool IsPointerImpl() => false;
+
         public sealed override bool IsConstructedGenericType => false;
         public sealed override bool IsGenericParameter => true;
         public abstract override bool IsGenericTypeParameter { get; }
@@ -38,23 +44,15 @@ namespace System.Reflection.Runtime.TypeInfos
 
         public sealed override Assembly Assembly
         {
-            get
-            {
-                return DeclaringType.Assembly;
-            }
+            get { return DeclaringType.Assembly; }
         }
 
         public sealed override bool ContainsGenericParameters
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public abstract override MethodBase DeclaringMethod { get; }
-
-
 
         public sealed override Type[] GetGenericParameterConstraints()
         {
@@ -65,7 +63,7 @@ namespace System.Reflection.Runtime.TypeInfos
         {
             get
             {
-                return null;  // We return null as generic parameter types are not roundtrippable through Type.GetType().
+                return null; // We return null as generic parameter types are not roundtrippable through Type.GetType().
             }
         }
 
@@ -83,26 +81,17 @@ namespace System.Reflection.Runtime.TypeInfos
 
         public sealed override int GenericParameterPosition
         {
-            get
-            {
-                return _position;
-            }
+            get { return _position; }
         }
 
         public sealed override string Namespace
         {
-            get
-            {
-                return DeclaringType.Namespace;
-            }
+            get { return DeclaringType.Namespace; }
         }
 
         public sealed override StructLayoutAttribute StructLayoutAttribute
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         public sealed override string ToString()
@@ -119,17 +108,16 @@ namespace System.Reflection.Runtime.TypeInfos
         {
             get
             {
-                Debug.Fail("Since this class always returns null for FullName, this helper should be unreachable.");
+                Debug.Fail(
+                    "Since this class always returns null for FullName, this helper should be unreachable."
+                );
                 return null;
             }
         }
 
         internal sealed override RuntimeTypeHandle InternalTypeHandleIfAvailable
         {
-            get
-            {
-                return default(RuntimeTypeHandle);
-            }
+            get { return default(RuntimeTypeHandle); }
         }
 
         //

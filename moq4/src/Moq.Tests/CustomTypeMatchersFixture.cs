@@ -49,7 +49,10 @@ namespace Moq.Tests
             Action setup = () => mock.Setup(x => x.Method<Picky>());
 
             var ex = Assert.Throws<ArgumentException>(setup);
-            Assert.Contains("Picky does not have a default (public parameterless) constructor", ex.Message);
+            Assert.Contains(
+                "Picky does not have a default (public parameterless) constructor",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -60,7 +63,10 @@ namespace Moq.Tests
             Action setup = () => mock.Setup(x => x.Method<Picky[]>());
 
             var ex = Assert.Throws<ArgumentException>(setup);
-            Assert.Contains("Picky does not have a default (public parameterless) constructor", ex.Message);
+            Assert.Contains(
+                "Picky does not have a default (public parameterless) constructor",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -71,7 +77,10 @@ namespace Moq.Tests
             Action verify = () => mock.Verify(x => x.Method<Picky>(), Times.Never);
 
             var ex = Assert.Throws<ArgumentException>(verify);
-            Assert.Contains("Picky does not have a default (public parameterless) constructor", ex.Message);
+            Assert.Contains(
+                "Picky does not have a default (public parameterless) constructor",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -82,7 +91,10 @@ namespace Moq.Tests
             Action verify = () => mock.Verify(x => x.Method<Picky[]>(), Times.Never);
 
             var ex = Assert.Throws<ArgumentException>(verify);
-            Assert.Contains("Picky does not have a default (public parameterless) constructor", ex.Message);
+            Assert.Contains(
+                "Picky does not have a default (public parameterless) constructor",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -136,7 +148,8 @@ namespace Moq.Tests
         {
             var invocationCount = 0;
             var mock = new Mock<IX>();
-            mock.Setup(m => m.Method(It.IsAny<IntOrString>())).Callback((object arg) => invocationCount++);
+            mock.Setup(m => m.Method(It.IsAny<IntOrString>()))
+                .Callback((object arg) => invocationCount++);
 
             mock.Object.Method(true);
             mock.Object.Method(42);
@@ -152,7 +165,8 @@ namespace Moq.Tests
         {
             var invocationCount = 0;
             var mock = new Mock<IX>();
-            mock.Setup(m => m.Method(It.IsNotNull<IntOrString>())).Callback((object arg) => invocationCount++);
+            mock.Setup(m => m.Method(It.IsNotNull<IntOrString>()))
+                .Callback((object arg) => invocationCount++);
 
             mock.Object.Method(true);
             mock.Object.Method(42);
@@ -190,7 +204,9 @@ namespace Moq.Tests
 
             var invocationCount = 0;
             var mock = new Mock<IX>();
-            mock.Setup(m => m.Method(It.Is<string>(acceptableArg, StringComparer.OrdinalIgnoreCase)))
+            mock.Setup(
+                    m => m.Method(It.Is<string>(acceptableArg, StringComparer.OrdinalIgnoreCase))
+                )
                 .Callback((object arg) => invocationCount++);
 
             mock.Object.Method("foo");
@@ -210,7 +226,15 @@ namespace Moq.Tests
 
             var invocationCount = 0;
             var mock = new Mock<IX>();
-            mock.Setup(m => m.Method(It.Is<object>(acceptableArg, new ObjectStringOrdinalIgnoreCaseComparer())))
+            mock.Setup(
+                    m =>
+                        m.Method(
+                            It.Is<object>(
+                                acceptableArg,
+                                new ObjectStringOrdinalIgnoreCaseComparer()
+                            )
+                        )
+                )
                 .Callback((object arg) => invocationCount++);
 
             mock.Object.Method("foo");
@@ -231,13 +255,16 @@ namespace Moq.Tests
 
         public interface IY
         {
-            void Method<TException>() where TException : Exception;
+            void Method<TException>()
+                where TException : Exception;
         }
 
         public interface IZ
         {
-            void DelegateMethod<TDelegate>() where TDelegate : Delegate;
-            void EnumMethod<TEnum>() where TEnum : Enum;
+            void DelegateMethod<TDelegate>()
+                where TDelegate : Delegate;
+            void EnumMethod<TEnum>()
+                where TEnum : Enum;
         }
 
         [TypeMatcher]
@@ -251,14 +278,12 @@ namespace Moq.Tests
 
         public sealed class PickyIntOrString : Picky
         {
-            public PickyIntOrString() : base(typeof(int), typeof(string))
-            {
-            }
+            public PickyIntOrString()
+                : base(typeof(int), typeof(string)) { }
         }
 
         [TypeMatcher]
         public class Picky : ITypeMatcher
-
         /* Unmerged change from project 'Moq.Tests(net6.0)'
         Before:
                     private readonly Type[] types;
@@ -301,7 +326,6 @@ namespace Moq.Tests
         }
 
         public class ObjectStringOrdinalIgnoreCaseComparer : IEqualityComparer<object>
-
         /* Unmerged change from project 'Moq.Tests(net6.0)'
         Before:
                     private static IEqualityComparer<string> InternalComparer => StringComparer.OrdinalIgnoreCase;

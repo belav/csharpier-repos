@@ -19,14 +19,13 @@ internal class RemoteProjectFile : IRemoteProjectFile
         _projectFile = projectFile;
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 
-    public Task<ImmutableArray<ProjectFileInfo>> GetProjectFileInfosAsync(CancellationToken cancellationToken)
-        => _projectFile.GetProjectFileInfosAsync(cancellationToken);
+    public Task<ImmutableArray<ProjectFileInfo>> GetProjectFileInfosAsync(
+        CancellationToken cancellationToken
+    ) => _projectFile.GetProjectFileInfosAsync(cancellationToken);
 
-    public Task<ImmutableArray<DiagnosticLogItem>> GetDiagnosticLogItemsAsync(CancellationToken cancellationToken)
-        => Task.FromResult(_projectFile.Log.ToImmutableArray());
-
+    public Task<ImmutableArray<DiagnosticLogItem>> GetDiagnosticLogItemsAsync(
+        CancellationToken cancellationToken
+    ) => Task.FromResult(_projectFile.Log.ToImmutableArray());
 }

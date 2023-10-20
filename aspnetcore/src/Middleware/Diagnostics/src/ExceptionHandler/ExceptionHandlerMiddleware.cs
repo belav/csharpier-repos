@@ -28,7 +28,8 @@ public class ExceptionHandlerMiddleware
         RequestDelegate next,
         ILoggerFactory loggerFactory,
         IOptions<ExceptionHandlerOptions> options,
-        DiagnosticListener diagnosticListener)
+        DiagnosticListener diagnosticListener
+    )
     {
         _innerMiddlewareImpl = new(
             next,
@@ -37,13 +38,13 @@ public class ExceptionHandlerMiddleware
             diagnosticListener,
             Enumerable.Empty<IExceptionHandler>(),
             new DummyMeterFactory(),
-            problemDetailsService: null);
+            problemDetailsService: null
+        );
     }
 
     /// <summary>
     /// Executes the middleware.
     /// </summary>
     /// <param name="context">The <see cref="HttpContext"/> for the current request.</param>
-    public Task Invoke(HttpContext context)
-        => _innerMiddlewareImpl.Invoke(context);
+    public Task Invoke(HttpContext context) => _innerMiddlewareImpl.Invoke(context);
 }

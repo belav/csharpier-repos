@@ -13,22 +13,27 @@ namespace System.ServiceModel.Channels
         string prefix;
 
         public UriGenerator()
-            : this("uuid")
-        {
-        }
+            : this("uuid") { }
 
         public UriGenerator(string scheme)
-            : this(scheme, ";")
-        {
-        }
+            : this(scheme, ";") { }
 
         public UriGenerator(string scheme, string delimiter)
         {
             if (scheme == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("scheme"));
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("scheme"));
 
             if (scheme.Length == 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.UriGeneratorSchemeMustNotBeEmpty), "scheme"));
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(SR.UriGeneratorSchemeMustNotBeEmpty),
+                            "scheme"
+                        )
+                    );
 
             prefix = string.Concat(scheme, ":", Guid.NewGuid().ToString(), delimiter, "id=");
         }

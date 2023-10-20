@@ -19,7 +19,10 @@ internal static partial class Interop
             internal int Copy(byte[] destination, int offset)
             {
                 Debug.Assert(destination != null, "target destination cannot be null");
-                Debug.Assert((offset >= 0 && offset < destination.Length) || destination.Length == 0, $"invalid offset {offset}");
+                Debug.Assert(
+                    (offset >= 0 && offset < destination.Length) || destination.Length == 0,
+                    $"invalid offset {offset}"
+                );
 
                 if (_data == IntPtr.Zero || _length == 0)
                 {
@@ -28,10 +31,16 @@ internal static partial class Interop
 
                 // Using Convert.ToInt32 to throw an exception in the unlikely event of too large value of _length
                 int sourceLength = Convert.ToInt32(_length);
-                int destinationAvailable = destination.Length - offset;  // amount of space in the given buffer
+                int destinationAvailable = destination.Length - offset; // amount of space in the given buffer
                 if (sourceLength > destinationAvailable)
                 {
-                    throw new NetSecurityNative.GssApiException(SR.Format(SR.net_context_buffer_too_small, sourceLength, destinationAvailable));
+                    throw new NetSecurityNative.GssApiException(
+                        SR.Format(
+                            SR.net_context_buffer_too_small,
+                            sourceLength,
+                            destinationAvailable
+                        )
+                    );
                 }
 
                 Span.CopyTo(destination.AsSpan(offset, sourceLength));
@@ -51,9 +60,10 @@ internal static partial class Interop
                 return destination;
             }
 
-            internal unsafe ReadOnlySpan<byte> Span => (_data != IntPtr.Zero && _length != 0) ?
-                new ReadOnlySpan<byte>(_data.ToPointer(), checked((int)_length)) :
-                default;
+            internal unsafe ReadOnlySpan<byte> Span =>
+                (_data != IntPtr.Zero && _length != 0)
+                    ? new ReadOnlySpan<byte>(_data.ToPointer(), checked((int)_length))
+                    : default;
 
             public void Dispose()
             {

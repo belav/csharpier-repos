@@ -16,7 +16,8 @@ namespace Internal.IL.Stubs
 #if READYTORUN
             ILCompiler.CompilationModuleGroup compilationModuleGroup,
 #endif // READYTORUN
-            MethodDesc method)
+            MethodDesc method
+        )
         {
             Debug.Assert(((MetadataType)method.OwningType).Name == "Interlocked");
 
@@ -31,12 +32,22 @@ namespace Internal.IL.Stubs
 #endif // READYTORUN
                 {
                     TypeDesc objectType = method.Context.GetWellKnownType(WellKnownType.Object);
-                    MethodDesc compareExchangeObject = method.OwningType.GetKnownMethod("CompareExchange",
-                        new MethodSignature(
-                            MethodSignatureFlags.Static,
-                            genericParameterCount: 0,
-                            returnType: objectType,
-                            parameters: new TypeDesc[] { objectType.MakeByRefType(), objectType, objectType }));
+                    MethodDesc compareExchangeObject = method
+                        .OwningType
+                        .GetKnownMethod(
+                            "CompareExchange",
+                            new MethodSignature(
+                                MethodSignatureFlags.Static,
+                                genericParameterCount: 0,
+                                returnType: objectType,
+                                parameters: new TypeDesc[]
+                                {
+                                    objectType.MakeByRefType(),
+                                    objectType,
+                                    objectType
+                                }
+                            )
+                        );
 
                     ILEmitter emit = new ILEmitter();
                     ILCodeStream codeStream = emit.NewCodeStream();

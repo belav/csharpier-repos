@@ -16,13 +16,22 @@ namespace System.Web.Http
         [Fact]
         public void IsCorrectType()
         {
-            Assert.Type.HasProperties(typeof(HttpRouteCollectionExtensions), TypeAssert.TypeProperties.IsStatic | TypeAssert.TypeProperties.IsPublicVisibleClass);
+            Assert
+                .Type
+                .HasProperties(
+                    typeof(HttpRouteCollectionExtensions),
+                    TypeAssert.TypeProperties.IsStatic
+                        | TypeAssert.TypeProperties.IsPublicVisibleClass
+                );
         }
 
         [Fact]
         public void MapHttpRoute1ThrowsOnNullRouteCollection()
         {
-            Assert.ThrowsArgumentNull(() => HttpRouteCollectionExtensions.MapHttpRoute(null, "", "", null), "routes");
+            Assert.ThrowsArgumentNull(
+                () => HttpRouteCollectionExtensions.MapHttpRoute(null, "", "", null),
+                "routes"
+            );
         }
 
         [Fact]
@@ -64,7 +73,10 @@ namespace System.Web.Http
         [Fact]
         public void MapHttpRoute2ThrowsOnNullRouteCollection()
         {
-            Assert.ThrowsArgumentNull(() => HttpRouteCollectionExtensions.MapHttpRoute(null, "", "", null, null), "routes");
+            Assert.ThrowsArgumentNull(
+                () => HttpRouteCollectionExtensions.MapHttpRoute(null, "", "", null, null),
+                "routes"
+            );
         }
 
         [Fact]
@@ -126,8 +138,12 @@ namespace System.Web.Http
         public void IgnoreRouteWithNullRouteCollectionThrows()
         {
             Assert.ThrowsArgumentNull(
-                delegate { HttpRouteCollectionExtensions.IgnoreRoute(null, "bar", "foo"); },
-                "routes");
+                delegate
+                {
+                    HttpRouteCollectionExtensions.IgnoreRoute(null, "bar", "foo");
+                },
+                "routes"
+            );
         }
 
         [Fact]
@@ -138,8 +154,12 @@ namespace System.Web.Http
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { routes.IgnoreRoute(null, "foo"); },
-                "routeName");
+                delegate
+                {
+                    routes.IgnoreRoute(null, "foo");
+                },
+                "routeName"
+            );
         }
 
         [Fact]
@@ -150,8 +170,12 @@ namespace System.Web.Http
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { routes.IgnoreRoute("foo", null); },
-                "routeTemplate");
+                delegate
+                {
+                    routes.IgnoreRoute("foo", null);
+                },
+                "routeTemplate"
+            );
         }
 
         [Fact]
@@ -200,7 +224,10 @@ namespace System.Web.Http
             IHttpRoute route = routes.IgnoreRoute("Foo", "SomeRouteTemplate");
 
             // Act
-            IHttpVirtualPathData vpd = route.GetVirtualPath(new HttpRequestMessage(HttpMethod.Get, "SomeRouteTemplate"), null);
+            IHttpVirtualPathData vpd = route.GetVirtualPath(
+                new HttpRequestMessage(HttpMethod.Get, "SomeRouteTemplate"),
+                null
+            );
 
             // Assert
             Assert.Null(vpd);

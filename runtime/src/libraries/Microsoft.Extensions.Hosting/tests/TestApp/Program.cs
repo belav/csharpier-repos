@@ -17,33 +17,42 @@ namespace ServerComparison.TestSites
             var builder = new HostBuilder()
                 .ConfigureHostConfiguration(configBuilder =>
                 {
-                    configBuilder.AddCommandLine(args)
-                        .AddEnvironmentVariables(prefix: "DOTNET_");
+                    configBuilder.AddCommandLine(args).AddEnvironmentVariables(prefix: "DOTNET_");
                 })
-                .ConfigureLogging((_, factory) =>
-                {
-                    factory.AddConsole();
-                    factory.AddFilter<ConsoleLoggerProvider>(level => level >= LogLevel.Warning);
-                });
+                .ConfigureLogging(
+                    (_, factory) =>
+                    {
+                        factory.AddConsole();
+                        factory.AddFilter<ConsoleLoggerProvider>(
+                            level => level >= LogLevel.Warning
+                        );
+                    }
+                );
             using (var host = builder.Build())
             {
                 var config = host.Services.GetRequiredService<IConfiguration>();
                 var lifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
 
-                lifetime.ApplicationStarted.Register(() =>
-                {
-                    Console.WriteLine("Started");
-                });
-                lifetime.ApplicationStopping.Register(() =>
-                {
-                    Console.WriteLine("Stopping firing");
-                    Console.WriteLine("Stopping end");
-                });
-                lifetime.ApplicationStopped.Register(() =>
-                {
-                    Console.WriteLine("Stopped firing");
-                    Console.WriteLine("Stopped end");
-                });
+                lifetime
+                    .ApplicationStarted
+                    .Register(() =>
+                    {
+                        Console.WriteLine("Started");
+                    });
+                lifetime
+                    .ApplicationStopping
+                    .Register(() =>
+                    {
+                        Console.WriteLine("Stopping firing");
+                        Console.WriteLine("Stopping end");
+                    });
+                lifetime
+                    .ApplicationStopped
+                    .Register(() =>
+                    {
+                        Console.WriteLine("Stopped firing");
+                        Console.WriteLine("Stopped end");
+                    });
 
                 if (config["STARTMECHANIC"] == "Run")
                 {
@@ -62,4 +71,3 @@ namespace ServerComparison.TestSites
         }
     }
 }
-

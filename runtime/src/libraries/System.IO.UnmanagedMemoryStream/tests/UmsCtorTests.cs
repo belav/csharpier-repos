@@ -11,22 +11,45 @@ namespace System.IO.Tests
         [Fact]
         public static unsafe void CtorsThatFail()
         {
-            Assert.Throws<ArgumentNullException>(() => { var ums = new UnmanagedMemoryStream(null, 0); });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                var ums = new UnmanagedMemoryStream(null, 0);
+            });
 
             TestSafeBuffer nullBuffer = null;
             FakeSafeBuffer fakeBuffer = new FakeSafeBuffer(99);
             Assert.Throws<ArgumentNullException>(() => new UnmanagedMemoryStream(nullBuffer, 0, 1));
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => new UnmanagedMemoryStream(fakeBuffer, 2, -1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new UnmanagedMemoryStream(fakeBuffer, -1, 1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new UnmanagedMemoryStream(fakeBuffer, 1, 2, (FileAccess)(-1)));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new UnmanagedMemoryStream(fakeBuffer, 1, 2, (FileAccess)42));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new UnmanagedMemoryStream(fakeBuffer, 2, -1)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new UnmanagedMemoryStream(fakeBuffer, -1, 1)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new UnmanagedMemoryStream(fakeBuffer, 1, 2, (FileAccess)(-1))
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new UnmanagedMemoryStream(fakeBuffer, 1, 2, (FileAccess)42)
+            );
 
-            AssertExtensions.Throws<ArgumentException>(null, () => new UnmanagedMemoryStream(fakeBuffer, 2, 999));
-            AssertExtensions.Throws<ArgumentException>(null, () => new UnmanagedMemoryStream(fakeBuffer, 999, 9));
-            AssertExtensions.Throws<ArgumentException>(null, () => new UnmanagedMemoryStream(fakeBuffer, 1, 100));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new UnmanagedMemoryStream(fakeBuffer, 2, 999)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new UnmanagedMemoryStream(fakeBuffer, 999, 9)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new UnmanagedMemoryStream(fakeBuffer, 1, 100)
+            );
 
-            AssertExtensions.Throws<ArgumentException>(null, () => new UnmanagedMemoryStream(fakeBuffer, int.MaxValue, 1));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new UnmanagedMemoryStream(fakeBuffer, int.MaxValue, 1)
+            );
         }
 
         [Fact]
@@ -62,12 +85,22 @@ namespace System.IO.Tests
                 Assert.False(stream.CanWrite);
                 Assert.False(stream.CanTimeout);
 
-                Assert.Throws<ArgumentOutOfRangeException>(() => stream.Initialize(pByte, -1, 4, FileAccess.Read));
-                Assert.Throws<ArgumentOutOfRangeException>(() => stream.Initialize(pByte, 1, -4, FileAccess.Read));
-                Assert.Throws<ArgumentOutOfRangeException>(() => stream.Initialize(pByte, 5, 4, FileAccess.Read));
-                Assert.Throws<ArgumentOutOfRangeException>(() => stream.Initialize(pByte, 1, 4, (FileAccess)12345));
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => stream.Initialize(pByte, -1, 4, FileAccess.Read)
+                );
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => stream.Initialize(pByte, 1, -4, FileAccess.Read)
+                );
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => stream.Initialize(pByte, 5, 4, FileAccess.Read)
+                );
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => stream.Initialize(pByte, 1, 4, (FileAccess)12345)
+                );
                 stream.Initialize(pByte, 1, 4, FileAccess.ReadWrite);
-                Assert.Throws<InvalidOperationException>(() => stream.Initialize(pByte, 1, 4, FileAccess.ReadWrite));
+                Assert.Throws<InvalidOperationException>(
+                    () => stream.Initialize(pByte, 1, 4, FileAccess.ReadWrite)
+                );
 
                 Assert.True(stream.CanRead);
                 Assert.True(stream.CanSeek);
@@ -110,7 +143,9 @@ namespace System.IO.Tests
                 Assert.False(stream.CanWrite);
 
                 stream.Initialize(buffer, 0, length, FileAccess.Write);
-                Assert.Throws<InvalidOperationException>(() => stream.Initialize(buffer, 0, length, FileAccess.Write));
+                Assert.Throws<InvalidOperationException>(
+                    () => stream.Initialize(buffer, 0, length, FileAccess.Write)
+                );
 
                 Assert.False(stream.CanRead);
                 Assert.True(stream.CanSeek);
@@ -130,14 +165,29 @@ namespace System.IO.Tests
     {
         internal DerivedUnmanagedMemoryStream() { }
 
-        internal DerivedUnmanagedMemoryStream(SafeBuffer buffer, long length, FileAccess access) : base(buffer, 0, length, access) { }
+        internal DerivedUnmanagedMemoryStream(SafeBuffer buffer, long length, FileAccess access)
+            : base(buffer, 0, length, access) { }
 
-        internal DerivedUnmanagedMemoryStream(byte* pointer, long length, long capacity, FileAccess access) : base(pointer, length, capacity, access) { }
+        internal DerivedUnmanagedMemoryStream(
+            byte* pointer,
+            long length,
+            long capacity,
+            FileAccess access
+        )
+            : base(pointer, length, capacity, access) { }
 
-        internal new void Initialize(byte* pointer, long length, long capacity, FileAccess access) =>
-            base.Initialize(pointer, length, capacity, access);
+        internal new void Initialize(
+            byte* pointer,
+            long length,
+            long capacity,
+            FileAccess access
+        ) => base.Initialize(pointer, length, capacity, access);
 
-        internal void Initialize(FakeSafeBuffer buffer, long offset, long capacity, FileAccess access) =>
-            base.Initialize(buffer, offset, capacity, access);
+        internal void Initialize(
+            FakeSafeBuffer buffer,
+            long offset,
+            long capacity,
+            FileAccess access
+        ) => base.Initialize(buffer, offset, capacity, access);
     }
 }

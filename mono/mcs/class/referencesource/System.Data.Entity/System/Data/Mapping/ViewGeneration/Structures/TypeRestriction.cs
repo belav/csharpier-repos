@@ -19,7 +19,10 @@ using System.Linq;
 
 namespace System.Data.Mapping.ViewGeneration.Structures
 {
-    using DomainBoolExpr    = System.Data.Common.Utils.Boolean.BoolExpr<System.Data.Common.Utils.Boolean.DomainConstraint<BoolLiteral, Constant>>;
+    using DomainBoolExpr = System.Data.Common.Utils.Boolean.BoolExpr<System.Data.Common.Utils.Boolean.DomainConstraint<
+        BoolLiteral,
+        Constant
+    >>;
 
     /// <summary>
     /// A class that denotes the boolean expression: "varType in values".
@@ -32,8 +35,7 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// Creates an incomplete type restriction of the form "<paramref name="member"/> in <paramref name="values"/>".
         /// </summary>
         internal TypeRestriction(MemberPath member, IEnumerable<EdmType> values)
-            : base(new MemberProjectedSlot(member), CreateTypeConstants(values))
-        { }
+            : base(new MemberProjectedSlot(member), CreateTypeConstants(values)) { }
 
         /// <summary>
         /// Creates an incomplete type restriction of the form "<paramref name="member"/> = <paramref name="value"/>".
@@ -48,35 +50,55 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// Creates a complete type restriction of the form "<paramref name="slot"/> in <paramref name="domain"/>".
         /// </summary>
         internal TypeRestriction(MemberProjectedSlot slot, Domain domain)
-            : base(slot, domain)
-        { }
+            : base(slot, domain) { }
         #endregion
 
         #region Methods
         /// <summary>
         /// Requires: <see cref="MemberRestriction.IsComplete"/> is true.
         /// </summary>
-        internal override DomainBoolExpr FixRange(Set<Constant> range, MemberDomainMap memberDomainMap)
+        internal override DomainBoolExpr FixRange(
+            Set<Constant> range,
+            MemberDomainMap memberDomainMap
+        )
         {
             Debug.Assert(IsComplete, "Ranges are fixed only for complete type restrictions.");
-            IEnumerable<Constant> possibleValues = memberDomainMap.GetDomain(RestrictedMemberSlot.MemberPath);
-            BoolLiteral newLiteral = new TypeRestriction(RestrictedMemberSlot, new Domain(range, possibleValues));
+            IEnumerable<Constant> possibleValues = memberDomainMap.GetDomain(
+                RestrictedMemberSlot.MemberPath
+            );
+            BoolLiteral newLiteral = new TypeRestriction(
+                RestrictedMemberSlot,
+                new Domain(range, possibleValues)
+            );
             return newLiteral.GetDomainBoolExpression(memberDomainMap);
         }
 
         internal override BoolLiteral RemapBool(Dictionary<MemberPath, MemberPath> remap)
         {
-            MemberProjectedSlot newVar = (MemberProjectedSlot)this.RestrictedMemberSlot.RemapSlot(remap);
+            MemberProjectedSlot newVar = (MemberProjectedSlot)
+                this.RestrictedMemberSlot.RemapSlot(remap);
             return new TypeRestriction(newVar, this.Domain);
         }
 
-        internal override MemberRestriction CreateCompleteMemberRestriction(IEnumerable<Constant> possibleValues)
+        internal override MemberRestriction CreateCompleteMemberRestriction(
+            IEnumerable<Constant> possibleValues
+        )
         {
-            Debug.Assert(!this.IsComplete, "CreateCompleteMemberRestriction must be called only for incomplete restrictions.");
-            return new TypeRestriction(this.RestrictedMemberSlot, new Domain(this.Domain.Values, possibleValues));
+            Debug.Assert(
+                !this.IsComplete,
+                "CreateCompleteMemberRestriction must be called only for incomplete restrictions."
+            );
+            return new TypeRestriction(
+                this.RestrictedMemberSlot,
+                new Domain(this.Domain.Values, possibleValues)
+            );
         }
 
-        internal override StringBuilder AsEsql(StringBuilder builder, string blockAlias, bool skipIsNotNull)
+        internal override StringBuilder AsEsql(
+            StringBuilder builder,
+            string blockAlias,
+            bool skipIsNotNull
+        )
         {
             // Add Cql of the form "(T.A IS OF (ONLY Person) OR .....)"
 
@@ -90,7 +112,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             foreach (Constant constant in this.Domain.Values)
             {
                 TypeConstant typeConstant = constant as TypeConstant;
-                Debug.Assert(typeConstant != null || constant.IsNull(), "Constants for type checks must be type constants or NULLs");
+                Debug.Assert(
+                    typeConstant != null || constant.IsNull(),
+                    "Constants for type checks must be type constants or NULLs"
+                );
 
                 if (isFirst == false)
                 {
@@ -141,19 +166,30 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             if (this.Domain.Count == 1)
             {
                 // Single value
-                cqt = cqt.IsOfOnly(TypeUsage.Create(((TypeConstant)this.Domain.Values.Single()).EdmType));
+                cqt = cqt.IsOfOnly(
+                    TypeUsage.Create(((TypeConstant)this.Domain.Values.Single()).EdmType)
+                );
             }
             else
             {
                 // Multiple values: build list of var IsOnOnly(t1), var = IsOnOnly(t1), ..., then OR them all.
-                List<DbExpression> operands = this.Domain.Values.Select(t => (DbExpression)cqt.IsOfOnly(TypeUsage.Create(((TypeConstant)t).EdmType))).ToList();
+                List<DbExpression> operands = this.Domain
+                    .Values
+                    .Select(
+                        t => (DbExpression)cqt.IsOfOnly(TypeUsage.Create(((TypeConstant)t).EdmType))
+                    )
+                    .ToList();
                 cqt = Helpers.BuildBalancedTreeInPlace(operands, (prev, next) => prev.Or(next));
             }
 
             return cqt;
         }
 
-        internal override StringBuilder AsUserString(StringBuilder builder, string blockAlias, bool skipIsNotNull)
+        internal override StringBuilder AsUserString(
+            StringBuilder builder,
+            string blockAlias,
+            bool skipIsNotNull
+        )
         {
             // Add user readable string of the form "T.A IS a (Person OR .....)"
 
@@ -182,7 +218,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             foreach (Constant constant in Domain.Values)
             {
                 TypeConstant typeConstant = constant as TypeConstant;
-                Debug.Assert(typeConstant != null || constant.IsNull(), "Constants for type checks must be type constants or NULLs");
+                Debug.Assert(
+                    typeConstant != null || constant.IsNull(),
+                    "Constants for type checks must be type constants or NULLs"
+                );
 
                 if (isFirst == false)
                 {

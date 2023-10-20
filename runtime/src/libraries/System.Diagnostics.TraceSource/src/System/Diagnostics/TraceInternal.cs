@@ -14,7 +14,10 @@ namespace System.Diagnostics
         private sealed class TraceProvider : DebugProvider
         {
 #pragma warning disable CS8770 // Method lacks `[DoesNotReturn]` annotation to match overridden member.
-            public override void Fail(string? message, string? detailMessage) { TraceInternal.Fail(message, detailMessage); }
+            public override void Fail(string? message, string? detailMessage)
+            {
+                TraceInternal.Fail(message, detailMessage);
+            }
 #pragma warning restore CS8770
             public override void OnIndentLevelChanged(int indentLevel)
             {
@@ -37,8 +40,16 @@ namespace System.Diagnostics
                     }
                 }
             }
-            public override void Write(string? message) { TraceInternal.Write(message); }
-            public override void WriteLine(string? message) { TraceInternal.WriteLine(message); }
+
+            public override void Write(string? message)
+            {
+                TraceInternal.Write(message);
+            }
+
+            public override void WriteLine(string? message)
+            {
+                TraceInternal.WriteLine(message);
+            }
         }
 
         private static volatile string? s_appName;
@@ -47,7 +58,6 @@ namespace System.Diagnostics
         private static volatile bool s_useGlobalLock;
         private static volatile bool s_settingsInitialized;
         private static volatile bool s_settingsInitializing;
-
 
         // this is internal so TraceSource can use it.  We want to lock on the same object because both TraceInternal and
         // TraceSource could be writing to the same listeners at the same time.
@@ -81,7 +91,8 @@ namespace System.Diagnostics
             }
         }
 
-        internal static string AppName => s_appName ??= Assembly.GetEntryAssembly()?.GetName().Name ?? string.Empty;
+        internal static string AppName =>
+            s_appName ??= Assembly.GetEntryAssembly()?.GetName().Name ?? string.Empty;
 
         public static bool AutoFlush
         {
@@ -90,7 +101,6 @@ namespace System.Diagnostics
                 InitializeSettings();
                 return s_autoFlush;
             }
-
             set
             {
                 InitializeSettings();
@@ -105,7 +115,6 @@ namespace System.Diagnostics
                 InitializeSettings();
                 return s_useGlobalLock;
             }
-
             set
             {
                 InitializeSettings();
@@ -116,24 +125,13 @@ namespace System.Diagnostics
         public static int IndentLevel
         {
             get { return Debug.IndentLevel; }
-
-            set
-            {
-                Debug.IndentLevel = value;
-            }
+            set { Debug.IndentLevel = value; }
         }
 
         public static int IndentSize
         {
-            get
-            {
-                return Debug.IndentSize;
-            }
-
-            set
-            {
-                Debug.IndentSize = value;
-            }
+            get { return Debug.IndentSize; }
+            set { Debug.IndentSize = value; }
         }
 
         public static void Indent()
@@ -197,19 +195,22 @@ namespace System.Diagnostics
 
         public static void Assert(bool condition)
         {
-            if (condition) return;
+            if (condition)
+                return;
             Fail(string.Empty);
         }
 
         public static void Assert(bool condition, string? message)
         {
-            if (condition) return;
+            if (condition)
+                return;
             Fail(message);
         }
 
         public static void Assert(bool condition, string? message, string? detailMessage)
         {
-            if (condition) return;
+            if (condition)
+                return;
             Fail(message, detailMessage);
         }
 
@@ -223,7 +224,8 @@ namespace System.Diagnostics
                     foreach (TraceListener listener in Listeners)
                     {
                         listener.Fail(message);
-                        if (AutoFlush) listener.Flush();
+                        if (AutoFlush)
+                            listener.Flush();
                     }
                 }
             }
@@ -236,13 +238,15 @@ namespace System.Diagnostics
                         lock (listener)
                         {
                             listener.Fail(message);
-                            if (AutoFlush) listener.Flush();
+                            if (AutoFlush)
+                                listener.Flush();
                         }
                     }
                     else
                     {
                         listener.Fail(message);
-                        if (AutoFlush) listener.Flush();
+                        if (AutoFlush)
+                            listener.Flush();
                     }
                 }
             }
@@ -260,7 +264,8 @@ namespace System.Diagnostics
                     foreach (TraceListener listener in Listeners)
                     {
                         listener.Fail(message, detailMessage);
-                        if (AutoFlush) listener.Flush();
+                        if (AutoFlush)
+                            listener.Flush();
                     }
                 }
             }
@@ -273,13 +278,15 @@ namespace System.Diagnostics
                         lock (listener)
                         {
                             listener.Fail(message, detailMessage);
-                            if (AutoFlush) listener.Flush();
+                            if (AutoFlush)
+                                listener.Flush();
                         }
                     }
                     else
                     {
                         listener.Fail(message, detailMessage);
-                        if (AutoFlush) listener.Flush();
+                        if (AutoFlush)
+                            listener.Flush();
                     }
                 }
             }
@@ -327,7 +334,12 @@ namespace System.Diagnostics
             InitializeSettings();
         }
 
-        public static void TraceEvent(TraceEventType eventType, int id, [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string? format, params object?[]? args)
+        public static void TraceEvent(
+            TraceEventType eventType,
+            int id,
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string? format,
+            params object?[]? args
+        )
         {
             TraceEventCache EventCache = new TraceEventCache();
 
@@ -340,7 +352,8 @@ namespace System.Diagnostics
                         foreach (TraceListener listener in Listeners)
                         {
                             listener.TraceEvent(EventCache, AppName, eventType, id, format);
-                            if (AutoFlush) listener.Flush();
+                            if (AutoFlush)
+                                listener.Flush();
                         }
                     }
                     else
@@ -348,7 +361,8 @@ namespace System.Diagnostics
                         foreach (TraceListener listener in Listeners)
                         {
                             listener.TraceEvent(EventCache, AppName, eventType, id, format!, args);
-                            if (AutoFlush) listener.Flush();
+                            if (AutoFlush)
+                                listener.Flush();
                         }
                     }
                 }
@@ -364,13 +378,15 @@ namespace System.Diagnostics
                             lock (listener)
                             {
                                 listener.TraceEvent(EventCache, AppName, eventType, id, format);
-                                if (AutoFlush) listener.Flush();
+                                if (AutoFlush)
+                                    listener.Flush();
                             }
                         }
                         else
                         {
                             listener.TraceEvent(EventCache, AppName, eventType, id, format);
-                            if (AutoFlush) listener.Flush();
+                            if (AutoFlush)
+                                listener.Flush();
                         }
                     }
                 }
@@ -382,20 +398,28 @@ namespace System.Diagnostics
                         {
                             lock (listener)
                             {
-                                listener.TraceEvent(EventCache, AppName, eventType, id, format!, args);
-                                if (AutoFlush) listener.Flush();
+                                listener.TraceEvent(
+                                    EventCache,
+                                    AppName,
+                                    eventType,
+                                    id,
+                                    format!,
+                                    args
+                                );
+                                if (AutoFlush)
+                                    listener.Flush();
                             }
                         }
                         else
                         {
                             listener.TraceEvent(EventCache, AppName, eventType, id, format!, args);
-                            if (AutoFlush) listener.Flush();
+                            if (AutoFlush)
+                                listener.Flush();
                         }
                     }
                 }
             }
         }
-
 
         public static void Write(string? message)
         {
@@ -406,7 +430,8 @@ namespace System.Diagnostics
                     foreach (TraceListener listener in Listeners)
                     {
                         listener.Write(message);
-                        if (AutoFlush) listener.Flush();
+                        if (AutoFlush)
+                            listener.Flush();
                     }
                 }
             }
@@ -419,13 +444,15 @@ namespace System.Diagnostics
                         lock (listener)
                         {
                             listener.Write(message);
-                            if (AutoFlush) listener.Flush();
+                            if (AutoFlush)
+                                listener.Flush();
                         }
                     }
                     else
                     {
                         listener.Write(message);
-                        if (AutoFlush) listener.Flush();
+                        if (AutoFlush)
+                            listener.Flush();
                     }
                 }
             }
@@ -440,7 +467,8 @@ namespace System.Diagnostics
                     foreach (TraceListener listener in Listeners)
                     {
                         listener.Write(value);
-                        if (AutoFlush) listener.Flush();
+                        if (AutoFlush)
+                            listener.Flush();
                     }
                 }
             }
@@ -453,13 +481,15 @@ namespace System.Diagnostics
                         lock (listener)
                         {
                             listener.Write(value);
-                            if (AutoFlush) listener.Flush();
+                            if (AutoFlush)
+                                listener.Flush();
                         }
                     }
                     else
                     {
                         listener.Write(value);
-                        if (AutoFlush) listener.Flush();
+                        if (AutoFlush)
+                            listener.Flush();
                     }
                 }
             }
@@ -474,7 +504,8 @@ namespace System.Diagnostics
                     foreach (TraceListener listener in Listeners)
                     {
                         listener.Write(message, category);
-                        if (AutoFlush) listener.Flush();
+                        if (AutoFlush)
+                            listener.Flush();
                     }
                 }
             }
@@ -487,13 +518,15 @@ namespace System.Diagnostics
                         lock (listener)
                         {
                             listener.Write(message, category);
-                            if (AutoFlush) listener.Flush();
+                            if (AutoFlush)
+                                listener.Flush();
                         }
                     }
                     else
                     {
                         listener.Write(message, category);
-                        if (AutoFlush) listener.Flush();
+                        if (AutoFlush)
+                            listener.Flush();
                     }
                 }
             }
@@ -508,7 +541,8 @@ namespace System.Diagnostics
                     foreach (TraceListener listener in Listeners)
                     {
                         listener.Write(value, category);
-                        if (AutoFlush) listener.Flush();
+                        if (AutoFlush)
+                            listener.Flush();
                     }
                 }
             }
@@ -521,13 +555,15 @@ namespace System.Diagnostics
                         lock (listener)
                         {
                             listener.Write(value, category);
-                            if (AutoFlush) listener.Flush();
+                            if (AutoFlush)
+                                listener.Flush();
                         }
                     }
                     else
                     {
                         listener.Write(value, category);
-                        if (AutoFlush) listener.Flush();
+                        if (AutoFlush)
+                            listener.Flush();
                     }
                 }
             }
@@ -542,7 +578,8 @@ namespace System.Diagnostics
                     foreach (TraceListener listener in Listeners)
                     {
                         listener.WriteLine(message);
-                        if (AutoFlush) listener.Flush();
+                        if (AutoFlush)
+                            listener.Flush();
                     }
                 }
             }
@@ -555,13 +592,15 @@ namespace System.Diagnostics
                         lock (listener)
                         {
                             listener.WriteLine(message);
-                            if (AutoFlush) listener.Flush();
+                            if (AutoFlush)
+                                listener.Flush();
                         }
                     }
                     else
                     {
                         listener.WriteLine(message);
-                        if (AutoFlush) listener.Flush();
+                        if (AutoFlush)
+                            listener.Flush();
                     }
                 }
             }
@@ -576,7 +615,8 @@ namespace System.Diagnostics
                     foreach (TraceListener listener in Listeners)
                     {
                         listener.WriteLine(value);
-                        if (AutoFlush) listener.Flush();
+                        if (AutoFlush)
+                            listener.Flush();
                     }
                 }
             }
@@ -589,13 +629,15 @@ namespace System.Diagnostics
                         lock (listener)
                         {
                             listener.WriteLine(value);
-                            if (AutoFlush) listener.Flush();
+                            if (AutoFlush)
+                                listener.Flush();
                         }
                     }
                     else
                     {
                         listener.WriteLine(value);
-                        if (AutoFlush) listener.Flush();
+                        if (AutoFlush)
+                            listener.Flush();
                     }
                 }
             }
@@ -610,7 +652,8 @@ namespace System.Diagnostics
                     foreach (TraceListener listener in Listeners)
                     {
                         listener.WriteLine(message, category);
-                        if (AutoFlush) listener.Flush();
+                        if (AutoFlush)
+                            listener.Flush();
                     }
                 }
             }
@@ -623,13 +666,15 @@ namespace System.Diagnostics
                         lock (listener)
                         {
                             listener.WriteLine(message, category);
-                            if (AutoFlush) listener.Flush();
+                            if (AutoFlush)
+                                listener.Flush();
                         }
                     }
                     else
                     {
                         listener.WriteLine(message, category);
-                        if (AutoFlush) listener.Flush();
+                        if (AutoFlush)
+                            listener.Flush();
                     }
                 }
             }
@@ -644,7 +689,8 @@ namespace System.Diagnostics
                     foreach (TraceListener listener in Listeners)
                     {
                         listener.WriteLine(value, category);
-                        if (AutoFlush) listener.Flush();
+                        if (AutoFlush)
+                            listener.Flush();
                     }
                 }
             }
@@ -657,13 +703,15 @@ namespace System.Diagnostics
                         lock (listener)
                         {
                             listener.WriteLine(value, category);
-                            if (AutoFlush) listener.Flush();
+                            if (AutoFlush)
+                                listener.Flush();
                         }
                     }
                     else
                     {
                         listener.WriteLine(value, category);
-                        if (AutoFlush) listener.Flush();
+                        if (AutoFlush)
+                            listener.Flush();
                     }
                 }
             }

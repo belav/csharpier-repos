@@ -13,7 +13,8 @@ namespace System.Security.Cryptography.X509Certificates
         private static partial IFindPal OpenPal(
             X509Certificate2Collection findFrom,
             X509Certificate2Collection copyTo,
-            bool validOnly)
+            bool validOnly
+        )
         {
             return new OpenSslCertificateFinder(findFrom, copyTo, validOnly);
         }

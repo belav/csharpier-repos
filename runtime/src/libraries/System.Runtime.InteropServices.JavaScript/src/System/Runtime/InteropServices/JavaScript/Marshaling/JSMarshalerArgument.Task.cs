@@ -16,7 +16,9 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <typeparam name="T">Type of the marshaled value.</typeparam>
         /// <param name="arg">The low-level argument representation.</param>
         /// <param name="value">The value to be marshaled.</param>
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+        [System.ComponentModel.EditorBrowsableAttribute(
+            System.ComponentModel.EditorBrowsableState.Never
+        )]
         public delegate void ArgumentToManagedCallback<T>(ref JSMarshalerArgument arg, out T value);
 
         /// <summary>
@@ -26,7 +28,9 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <typeparam name="T">Type of the marshaled value.</typeparam>
         /// <param name="arg">The low-level argument representation.</param>
         /// <param name="value">The value to be marshaled.</param>
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+        [System.ComponentModel.EditorBrowsableAttribute(
+            System.ComponentModel.EditorBrowsableState.Never
+        )]
         public delegate void ArgumentToJSCallback<T>(ref JSMarshalerArgument arg, T value);
 
         /// <summary>
@@ -43,15 +47,23 @@ namespace System.Runtime.InteropServices.JavaScript
             }
 
             GCHandle gcHandle = (GCHandle)slot.GCHandle;
-            JSHostImplementation.TaskCallback? holder = (JSHostImplementation.TaskCallback?)gcHandle.Target;
-            if (holder == null) throw new InvalidOperationException(SR.FailedToMarshalTaskCallback);
+            JSHostImplementation.TaskCallback? holder = (JSHostImplementation.TaskCallback?)
+                gcHandle.Target;
+            if (holder == null)
+                throw new InvalidOperationException(SR.FailedToMarshalTaskCallback);
 
             TaskCompletionSource tcs = new TaskCompletionSource(holder);
-            JSHostImplementation.ToManagedCallback callback = (JSMarshalerArgument* arguments_buffer) =>
+            JSHostImplementation.ToManagedCallback callback = (
+                JSMarshalerArgument* arguments_buffer
+            ) =>
             {
                 if (arguments_buffer == null)
                 {
-                    tcs.TrySetException(new TaskCanceledException("WebWorker which is origin of the Promise is being terminated."));
+                    tcs.TrySetException(
+                        new TaskCanceledException(
+                            "WebWorker which is origin of the Promise is being terminated."
+                        )
+                    );
                     return;
                 }
                 ref JSMarshalerArgument arg_2 = ref arguments_buffer[3]; // set by caller when this is SetException call
@@ -87,15 +99,23 @@ namespace System.Runtime.InteropServices.JavaScript
             }
 
             GCHandle gcHandle = (GCHandle)slot.GCHandle;
-            JSHostImplementation.TaskCallback? holder = (JSHostImplementation.TaskCallback?)gcHandle.Target;
-            if (holder == null) throw new InvalidOperationException(SR.FailedToMarshalTaskCallback);
+            JSHostImplementation.TaskCallback? holder = (JSHostImplementation.TaskCallback?)
+                gcHandle.Target;
+            if (holder == null)
+                throw new InvalidOperationException(SR.FailedToMarshalTaskCallback);
 
             TaskCompletionSource<T> tcs = new TaskCompletionSource<T>(holder);
-            JSHostImplementation.ToManagedCallback callback = (JSMarshalerArgument* arguments_buffer) =>
+            JSHostImplementation.ToManagedCallback callback = (
+                JSMarshalerArgument* arguments_buffer
+            ) =>
             {
                 if (arguments_buffer == null)
                 {
-                    tcs.TrySetException(new TaskCanceledException("WebWorker which is origin of the Promise is being terminated."));
+                    tcs.TrySetException(
+                        new TaskCanceledException(
+                            "WebWorker which is origin of the Promise is being terminated."
+                        )
+                    );
                     return;
                 }
 
@@ -104,7 +124,8 @@ namespace System.Runtime.InteropServices.JavaScript
                 if (arg_2.slot.Type != MarshalerType.None)
                 {
                     arg_2.ToManaged(out Exception? fail);
-                    if (fail == null) throw new InvalidOperationException(SR.FailedToMarshalException);
+                    if (fail == null)
+                        throw new InvalidOperationException(SR.FailedToMarshalException);
                     tcs.SetException(fail);
                 }
                 else
@@ -144,7 +165,6 @@ namespace System.Runtime.InteropServices.JavaScript
                     return;
                 }
             }
-
 
             IntPtr jsHandle = CreatePendingPromise();
             slot.JSHandle = jsHandle;
@@ -304,7 +324,6 @@ namespace System.Runtime.InteropServices.JavaScript
                 }
             }
 
-
             IntPtr jsHandle = CreatePendingPromise();
             slot.JSHandle = jsHandle;
             JSObject promise = JSHostImplementation.CreateCSOwnedProxy(jsHandle);
@@ -456,7 +475,11 @@ namespace System.Runtime.InteropServices.JavaScript
             JavaScriptImports.MarshalPromise(args);
         }
 
-        private static void ResolvePromise<T>(JSObject promise, T value, ArgumentToJSCallback<T> marshaler)
+        private static void ResolvePromise<T>(
+            JSObject promise,
+            T value,
+            ArgumentToJSCallback<T> marshaler
+        )
         {
             ObjectDisposedException.ThrowIf(promise.IsDisposed, promise);
 

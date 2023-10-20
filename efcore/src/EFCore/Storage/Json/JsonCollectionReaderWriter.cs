@@ -12,9 +12,9 @@ namespace Microsoft.EntityFrameworkCore.Storage.Json;
 /// <typeparam name="TCollection">The collection type.</typeparam>
 /// <typeparam name="TConcreteCollection">The collection type to create an index of, if needed.</typeparam>
 /// <typeparam name="TElement">The element type.</typeparam>
-public class JsonCollectionReaderWriter<TCollection, TConcreteCollection, TElement> :
-    JsonValueReaderWriter<IEnumerable<TElement?>>,
-    ICompositeJsonValueReaderWriter
+public class JsonCollectionReaderWriter<TCollection, TConcreteCollection, TElement>
+    : JsonValueReaderWriter<IEnumerable<TElement?>>,
+        ICompositeJsonValueReaderWriter
     where TCollection : IEnumerable<TElement?>
 {
     private readonly JsonValueReaderWriter<TElement> _elementReaderWriter;
@@ -29,7 +29,10 @@ public class JsonCollectionReaderWriter<TCollection, TConcreteCollection, TEleme
     }
 
     /// <inheritdoc />
-    public override IEnumerable<TElement?> FromJsonTyped(ref Utf8JsonReaderManager manager, object? existingObject = null)
+    public override IEnumerable<TElement?> FromJsonTyped(
+        ref Utf8JsonReaderManager manager,
+        object? existingObject = null
+    )
     {
         IList<TElement?> collection;
         if (typeof(TCollection).IsArray)
@@ -86,6 +89,5 @@ public class JsonCollectionReaderWriter<TCollection, TConcreteCollection, TEleme
         writer.WriteEndArray();
     }
 
-    JsonValueReaderWriter ICompositeJsonValueReaderWriter.InnerReaderWriter
-        => _elementReaderWriter;
+    JsonValueReaderWriter ICompositeJsonValueReaderWriter.InnerReaderWriter => _elementReaderWriter;
 }

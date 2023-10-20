@@ -18,13 +18,16 @@ namespace System.Security.Cryptography.X509Certificates
 
         protected override ICertificatePalCore ReadX509Der(ReadOnlyMemory<byte> data)
         {
-            SafeSecCertificateHandle certHandle = Interop.AppleCrypto.X509ImportCertificate(
-                data.Span,
-                X509ContentType.Cert,
-                SafePasswordHandle.InvalidHandle,
-                SafeTemporaryKeychainHandle.InvalidHandle,
-                exportable: true,
-                out SafeSecIdentityHandle identityHandle);
+            SafeSecCertificateHandle certHandle = Interop
+                .AppleCrypto
+                .X509ImportCertificate(
+                    data.Span,
+                    X509ContentType.Cert,
+                    SafePasswordHandle.InvalidHandle,
+                    SafeTemporaryKeychainHandle.InvalidHandle,
+                    exportable: true,
+                    out SafeSecIdentityHandle identityHandle
+                );
 
             if (identityHandle.IsInvalid)
             {
@@ -41,7 +44,10 @@ namespace System.Security.Cryptography.X509Certificates
 
         protected override AsymmetricAlgorithm LoadKey(ReadOnlyMemory<byte> pkcs8)
         {
-            PrivateKeyInfoAsn privateKeyInfo = PrivateKeyInfoAsn.Decode(pkcs8, AsnEncodingRules.BER);
+            PrivateKeyInfoAsn privateKeyInfo = PrivateKeyInfoAsn.Decode(
+                pkcs8,
+                AsnEncodingRules.BER
+            );
             AsymmetricAlgorithm key;
 
             switch (privateKeyInfo.PrivateKeyAlgorithm.Algorithm)
@@ -59,7 +65,8 @@ namespace System.Security.Cryptography.X509Certificates
                 default:
                     throw new CryptographicException(
                         SR.Cryptography_UnknownAlgorithmIdentifier,
-                        privateKeyInfo.PrivateKeyAlgorithm.Algorithm);
+                        privateKeyInfo.PrivateKeyAlgorithm.Algorithm
+                    );
             }
 
             key.ImportPkcs8PrivateKey(pkcs8.Span, out int bytesRead);

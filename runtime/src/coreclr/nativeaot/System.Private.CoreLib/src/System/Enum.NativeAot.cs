@@ -37,29 +37,38 @@ namespace System
             };
         }
 
-        internal static EnumInfo<TStorage> GetEnumInfo<TStorage>(Type enumType, bool getNames = true)
+        internal static EnumInfo<TStorage> GetEnumInfo<TStorage>(
+            Type enumType,
+            bool getNames = true
+        )
             where TStorage : struct, INumber<TStorage>
         {
             Debug.Assert(enumType != null);
             Debug.Assert(enumType is RuntimeType);
             Debug.Assert(enumType.IsEnum);
             Debug.Assert(
-                typeof(TStorage) == typeof(byte) ||
-                typeof(TStorage) == typeof(ushort) ||
-                typeof(TStorage) == typeof(uint) ||
-                typeof(TStorage) == typeof(ulong));
+                typeof(TStorage) == typeof(byte)
+                    || typeof(TStorage) == typeof(ushort)
+                    || typeof(TStorage) == typeof(uint)
+                    || typeof(TStorage) == typeof(ulong)
+            );
 
-            return (EnumInfo<TStorage>)ReflectionAugments.ReflectionCoreCallbacks.GetEnumInfo(enumType,
-                static (underlyingType, names, valuesAsObject, isFlags) =>
-                {
-                    // Only after we've sorted, create the underlying array.
-                    var values = new TStorage[valuesAsObject.Length];
-                    for (int i = 0; i < valuesAsObject.Length; i++)
-                    {
-                        values[i] = (TStorage)valuesAsObject[i];
-                    }
-                    return new EnumInfo<TStorage>(underlyingType, values, names, isFlags);
-            });
+            return (EnumInfo<TStorage>)
+                ReflectionAugments
+                    .ReflectionCoreCallbacks
+                    .GetEnumInfo(
+                        enumType,
+                        static (underlyingType, names, valuesAsObject, isFlags) =>
+                        {
+                            // Only after we've sorted, create the underlying array.
+                            var values = new TStorage[valuesAsObject.Length];
+                            for (int i = 0; i < valuesAsObject.Length; i++)
+                            {
+                                values[i] = (TStorage)valuesAsObject[i];
+                            }
+                            return new EnumInfo<TStorage>(underlyingType, values, names, isFlags);
+                        }
+                    );
         }
 #pragma warning restore
 

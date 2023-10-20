@@ -23,13 +23,16 @@ public class TemporaryValuesFactoryFactory : SidecarValuesFactoryFactory
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] Type? entityType,
         ParameterExpression? parameter,
         Type[] types,
-        IList<IPropertyBase?> propertyBases)
+        IList<IPropertyBase?> propertyBases
+    )
     {
         var constructorExpression = Expression.Convert(
             Expression.New(
                 Snapshot.CreateSnapshotType(types).GetDeclaredConstructor(types)!,
-                types.Select(Expression.Default).ToArray()),
-            typeof(ISnapshot));
+                types.Select(Expression.Default).ToArray()
+            ),
+            typeof(ISnapshot)
+        );
 
         return constructorExpression;
     }

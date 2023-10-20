@@ -16,9 +16,7 @@ namespace System.Net.Http.Headers
         public string? Comment => _comment;
 
         public ProductInfoHeaderValue(string productName, string? productVersion)
-            : this(new ProductHeaderValue(productName, productVersion))
-        {
-        }
+            : this(new ProductHeaderValue(productName, productVersion)) { }
 
         public ProductInfoHeaderValue(ProductHeaderValue product)
         {
@@ -82,23 +80,37 @@ namespace System.Net.Http.Headers
         public static ProductInfoHeaderValue Parse(string input)
         {
             int index = 0;
-            object result = ProductInfoHeaderParser.SingleValueParser.ParseValue(
-                input, null, ref index);
+            object result = ProductInfoHeaderParser
+                .SingleValueParser
+                .ParseValue(input, null, ref index);
             if (index < input.Length)
             {
                 // There is some invalid leftover data. Normally BaseHeaderParser.TryParseValue would
                 // handle this, but ProductInfoHeaderValue does not derive from BaseHeaderParser.
-                throw new FormatException(SR.Format(System.Globalization.CultureInfo.InvariantCulture, SR.net_http_headers_invalid_value, input.Substring(index)));
+                throw new FormatException(
+                    SR.Format(
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        SR.net_http_headers_invalid_value,
+                        input.Substring(index)
+                    )
+                );
             }
             return (ProductInfoHeaderValue)result;
         }
 
-        public static bool TryParse([NotNullWhen(true)] string input, [NotNullWhen(true)] out ProductInfoHeaderValue? parsedValue)
+        public static bool TryParse(
+            [NotNullWhen(true)] string input,
+            [NotNullWhen(true)] out ProductInfoHeaderValue? parsedValue
+        )
         {
             int index = 0;
             parsedValue = null;
 
-            if (ProductInfoHeaderParser.SingleValueParser.TryParseValue(input, null, ref index, out object? output))
+            if (
+                ProductInfoHeaderParser
+                    .SingleValueParser
+                    .TryParseValue(input, null, ref index, out object? output)
+            )
             {
                 if (index < input.Length)
                 {
@@ -112,7 +124,11 @@ namespace System.Net.Http.Headers
             return false;
         }
 
-        internal static int GetProductInfoLength(string? input, int startIndex, out ProductInfoHeaderValue? parsedValue)
+        internal static int GetProductInfoLength(
+            string? input,
+            int startIndex,
+            out ProductInfoHeaderValue? parsedValue
+        )
         {
             Debug.Assert(startIndex >= 0);
 
@@ -131,7 +147,10 @@ namespace System.Net.Http.Headers
             if (input[current] == '(')
             {
                 int commentLength;
-                if (HttpRuleParser.GetCommentLength(input, current, out commentLength) != HttpParseResult.Parsed)
+                if (
+                    HttpRuleParser.GetCommentLength(input, current, out commentLength)
+                    != HttpParseResult.Parsed
+                )
                 {
                     return 0;
                 }
@@ -146,7 +165,11 @@ namespace System.Net.Http.Headers
             else
             {
                 // Trailing whitespace is removed by GetProductLength().
-                int productLength = ProductHeaderValue.GetProductLength(input, current, out product);
+                int productLength = ProductHeaderValue.GetProductLength(
+                    input,
+                    current,
+                    out product
+                );
 
                 if (productLength == 0)
                 {

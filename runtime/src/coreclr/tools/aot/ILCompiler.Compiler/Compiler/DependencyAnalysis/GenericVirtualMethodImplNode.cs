@@ -25,7 +25,9 @@ namespace ILCompiler.DependencyAnalysis
 
             // This is either a generic virtual method or a MethodImpl for a static interface method.
             // We can't test for static MethodImpl so at least sanity check it's static and noninterface.
-            Debug.Assert(method.IsVirtual || (method.Signature.IsStatic && !method.OwningType.IsInterface));
+            Debug.Assert(
+                method.IsVirtual || (method.Signature.IsStatic && !method.OwningType.IsInterface)
+            );
 
             _method = method;
         }
@@ -33,46 +35,75 @@ namespace ILCompiler.DependencyAnalysis
         public override bool HasConditionalStaticDependencies => false;
         public override bool InterestingForDynamicDependencyAnalysis => false;
         public override bool StaticDependenciesAreComputed => true;
-        protected override string GetName(NodeFactory factory) => "__GVMImplNode_" + factory.NameMangler.GetMangledMethodName(_method);
+
+        protected override string GetName(NodeFactory factory) =>
+            "__GVMImplNode_" + factory.NameMangler.GetMangledMethodName(_method);
 
         public override IEnumerable<DependencyListEntry> GetStaticDependencies(NodeFactory factory)
         {
             DependencyList dependencies = null;
 
-            factory.MetadataManager.GetDependenciesDueToVirtualMethodReflectability(ref dependencies, factory, _method);
+            factory
+                .MetadataManager
+                .GetDependenciesDueToVirtualMethodReflectability(
+                    ref dependencies,
+                    factory,
+                    _method
+                );
 
             bool validInstantiation =
-                _method.IsSharedByGenericInstantiations || (      // Non-exact methods are always valid instantiations (always pass constraints check)
-                    _method.Instantiation.CheckValidInstantiationArguments() &&
-                    _method.OwningType.Instantiation.CheckValidInstantiationArguments() &&
-                    _method.CheckConstraints());
+                _method.IsSharedByGenericInstantiations
+                || ( // Non-exact methods are always valid instantiations (always pass constraints check)
+                    _method.Instantiation.CheckValidInstantiationArguments()
+                    && _method.OwningType.Instantiation.CheckValidInstantiationArguments()
+                    && _method.CheckConstraints()
+                );
 
             if (validInstantiation)
             {
-                if (factory.TypeSystemContext.SupportsUniversalCanon && _method.IsGenericDepthGreaterThan(UniversalCanonGVMDepthHeuristic_CanonDepth))
+                if (
+                    factory.TypeSystemContext.SupportsUniversalCanon
+                    && _method.IsGenericDepthGreaterThan(UniversalCanonGVMDepthHeuristic_CanonDepth)
+                )
                 {
                     // fall back to using the universal generic variant of the generic method
                     return dependencies;
                 }
 
-                bool getUnboxingStub = _method.OwningType.IsValueType && !_method.Signature.IsStatic;
+                bool getUnboxingStub =
+                    _method.OwningType.IsValueType && !_method.Signature.IsStatic;
                 dependencies ??= new DependencyList();
-                dependencies.Add(factory.MethodEntrypoint(_method, getUnboxingStub), "GVM Dependency - Canon method");
+                dependencies.Add(
+                    factory.MethodEntrypoint(_method, getUnboxingStub),
+                    "GVM Dependency - Canon method"
+                );
 
                 if (_method.IsSharedByGenericInstantiations)
                 {
-                    dependencies.Add(factory.NativeLayout.TemplateMethodEntry(_method), "GVM Dependency - Template entry");
-                    dependencies.Add(factory.NativeLayout.TemplateMethodLayout(_method), "GVM Dependency - Template");
+                    dependencies.Add(
+                        factory.NativeLayout.TemplateMethodEntry(_method),
+                        "GVM Dependency - Template entry"
+                    );
+                    dependencies.Add(
+                        factory.NativeLayout.TemplateMethodLayout(_method),
+                        "GVM Dependency - Template"
+                    );
                 }
             }
 
             return dependencies;
         }
 
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory context) => null;
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory context
+        ) => null;
 
         public override bool HasDynamicDependencies => false;
 
-        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(List<DependencyNodeCore<NodeFactory>> markedNodes, int firstNode, NodeFactory factory) => null;
+        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
+            List<DependencyNodeCore<NodeFactory>> markedNodes,
+            int firstNode,
+            NodeFactory factory
+        ) => null;
     }
 }

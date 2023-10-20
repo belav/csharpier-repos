@@ -25,14 +25,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents();
 #else
 builder.Services.AddRazorComponents()
-    #if (UseServer && UseWebAssembly)
+#if (UseServer && UseWebAssembly)
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
-    #elif (UseServer)
-    .AddInteractiveServerComponents();
-    #elif (UseWebAssembly)
-    .AddInteractiveWebAssemblyComponents();
-    #endif
+#elif (UseServer)
+.AddInteractiveServerComponents();
+#elif (UseWebAssembly)
+.AddInteractiveWebAssemblyComponents();
+#endif
 #endif
 
 #if (IndividualLocalAuth)
@@ -40,11 +40,17 @@ builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddScoped<UserAccessor>();
 builder.Services.AddScoped<IdentityRedirectManager>();
 #if (UseServer && UseWebAssembly)
-builder.Services.AddScoped<AuthenticationStateProvider, PersistingRevalidatingAuthenticationStateProvider>();
+builder
+    .Services
+    .AddScoped<AuthenticationStateProvider, PersistingRevalidatingAuthenticationStateProvider>();
 #elif (UseServer)
-builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
+builder
+    .Services
+    .AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
 #elif (UseWebAssembly)
-builder.Services.AddScoped<AuthenticationStateProvider, PersistingServerAuthenticationStateProvider>();
+builder
+    .Services
+    .AddScoped<AuthenticationStateProvider, PersistingServerAuthenticationStateProvider>();
 #else
 builder.Services.AddScoped<AuthenticationStateProvider, ServerAuthenticationStateProvider>();
 #endif
@@ -52,25 +58,29 @@ builder.Services.AddScoped<AuthenticationStateProvider, ServerAuthenticationStat
 #if (!UseServer)
 builder.Services.AddAuthorization();
 #endif
-builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme)
-    .AddIdentityCookies();
+builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme).AddIdentityCookies();
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+var connectionString =
+    builder.Configuration.GetConnectionString("DefaultConnection")
+    ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+builder
+    .Services
+    .AddDbContext<ApplicationDbContext>(options =>
 #if (UseLocalDB)
-    options.UseSqlServer(connectionString));
+            options.UseSqlServer(connectionString));
 #else
-    options.UseSqlite(connectionString));
+        options.UseSqlite(connectionString));
 #endif
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder
+    .Services
+    .AddIdentityCore<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddSignInManager()
     .AddDefaultTokenProviders();
 
 builder.Services.AddSingleton<IEmailSender, NoOpEmailSender>();
-
 #endif
 var app = builder.Build();
 
@@ -94,7 +104,6 @@ if (!app.Environment.IsDevelopment())
 
 #if (HasHttpsProfile)
 app.UseHttpsRedirection();
-
 #endif
 app.UseStaticFiles();
 app.UseAntiforgery();
@@ -104,8 +113,7 @@ app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()
     .AddInteractiveWebAssemblyRenderMode()
 #elif (UseServer)
-app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode();
+app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
 #elif (UseWebAssembly)
 app.MapRazorComponents<App>()
     .AddInteractiveWebAssemblyRenderMode()
@@ -121,6 +129,5 @@ app.MapRazorComponents<App>();
 #if (IndividualLocalAuth)
 // Add additional endpoints required by the Identity /Account Razor components.
 app.MapAdditionalIdentityEndpoints();
-
 #endif
 app.Run();

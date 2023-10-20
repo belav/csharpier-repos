@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,31 +32,37 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-	public sealed class WebConfigurationFileMap: ConfigurationFileMap
-	{
-		VirtualDirectoryMappingCollection virtualDirectories;
-		
-		public WebConfigurationFileMap ()
-		{
-			virtualDirectories = new VirtualDirectoryMappingCollection ();
-		}
-		
-		public VirtualDirectoryMappingCollection VirtualDirectories {
-			get { return virtualDirectories; }
-		}
-		
-		public override object Clone ()
-		{
-			WebConfigurationFileMap map = new WebConfigurationFileMap ();
-			map.MachineConfigFilename = MachineConfigFilename;
-			
-			map.virtualDirectories = new VirtualDirectoryMappingCollection ();
-			foreach (VirtualDirectoryMapping vmap in virtualDirectories) {
-				VirtualDirectoryMapping nvmap = new VirtualDirectoryMapping (vmap.PhysicalDirectory, vmap.IsAppRoot, vmap.ConfigFileBaseName);
-				map.virtualDirectories.Add (vmap.VirtualDirectory, nvmap);
-			}
-			
-			return map;
-		}
-	}
+    public sealed class WebConfigurationFileMap : ConfigurationFileMap
+    {
+        VirtualDirectoryMappingCollection virtualDirectories;
+
+        public WebConfigurationFileMap()
+        {
+            virtualDirectories = new VirtualDirectoryMappingCollection();
+        }
+
+        public VirtualDirectoryMappingCollection VirtualDirectories
+        {
+            get { return virtualDirectories; }
+        }
+
+        public override object Clone()
+        {
+            WebConfigurationFileMap map = new WebConfigurationFileMap();
+            map.MachineConfigFilename = MachineConfigFilename;
+
+            map.virtualDirectories = new VirtualDirectoryMappingCollection();
+            foreach (VirtualDirectoryMapping vmap in virtualDirectories)
+            {
+                VirtualDirectoryMapping nvmap = new VirtualDirectoryMapping(
+                    vmap.PhysicalDirectory,
+                    vmap.IsAppRoot,
+                    vmap.ConfigFileBaseName
+                );
+                map.virtualDirectories.Add(vmap.VirtualDirectory, nvmap);
+            }
+
+            return map;
+        }
+    }
 }

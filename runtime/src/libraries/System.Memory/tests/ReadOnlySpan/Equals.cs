@@ -119,17 +119,35 @@ namespace System.SpanTests
 
                     // Different behavior depending on OS
                     Assert.Equal(
-                        firstSpan.ToString().Equals(secondSpan.ToString(), StringComparison.CurrentCulture),
-                        firstSpan.Equals(secondSpan, StringComparison.CurrentCulture));
+                        firstSpan
+                            .ToString()
+                            .Equals(secondSpan.ToString(), StringComparison.CurrentCulture),
+                        firstSpan.Equals(secondSpan, StringComparison.CurrentCulture)
+                    );
                     Assert.Equal(
-                        firstSpan.ToString().Equals(secondSpan.ToString(), StringComparison.CurrentCultureIgnoreCase),
-                        firstSpan.Equals(secondSpan, StringComparison.CurrentCultureIgnoreCase));
+                        firstSpan
+                            .ToString()
+                            .Equals(
+                                secondSpan.ToString(),
+                                StringComparison.CurrentCultureIgnoreCase
+                            ),
+                        firstSpan.Equals(secondSpan, StringComparison.CurrentCultureIgnoreCase)
+                    );
                     Assert.Equal(
-                        firstSpan.ToString().Equals(secondSpan.ToString(), StringComparison.InvariantCulture),
-                        firstSpan.Equals(secondSpan, StringComparison.InvariantCulture));
+                        firstSpan
+                            .ToString()
+                            .Equals(secondSpan.ToString(), StringComparison.InvariantCulture),
+                        firstSpan.Equals(secondSpan, StringComparison.InvariantCulture)
+                    );
                     Assert.Equal(
-                        firstSpan.ToString().Equals(secondSpan.ToString(), StringComparison.InvariantCultureIgnoreCase),
-                        firstSpan.Equals(secondSpan, StringComparison.InvariantCultureIgnoreCase));
+                        firstSpan
+                            .ToString()
+                            .Equals(
+                                secondSpan.ToString(),
+                                StringComparison.InvariantCultureIgnoreCase
+                            ),
+                        firstSpan.Equals(secondSpan, StringComparison.InvariantCultureIgnoreCase)
+                    );
                 }
             }
         }
@@ -162,10 +180,18 @@ namespace System.SpanTests
         {
             char[] a = { '4', '5', '6' };
             var span = new ReadOnlySpan<char>(a);
-            TestHelpers.AssertThrows<ArgumentException, char>(span, (_span) => _span.Equals(_span, StringComparison.CurrentCulture - 1));
-            TestHelpers.AssertThrows<ArgumentException, char>(span, (_span) => _span.Equals(_span, StringComparison.OrdinalIgnoreCase + 1));
-            TestHelpers.AssertThrows<ArgumentException, char>(span, (_span) => _span.Equals(_span, (StringComparison)6));
+            TestHelpers.AssertThrows<ArgumentException, char>(
+                span,
+                (_span) => _span.Equals(_span, StringComparison.CurrentCulture - 1)
+            );
+            TestHelpers.AssertThrows<ArgumentException, char>(
+                span,
+                (_span) => _span.Equals(_span, StringComparison.OrdinalIgnoreCase + 1)
+            );
+            TestHelpers.AssertThrows<ArgumentException, char>(
+                span,
+                (_span) => _span.Equals(_span, (StringComparison)6)
+            );
         }
-
     }
 }

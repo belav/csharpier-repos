@@ -28,18 +28,19 @@ namespace System.Data.Common.EntitySql.AST
         /// <summary>
         /// Initializes method ast node.
         /// </summary>
-        internal MethodExpr(Node expr,
-                            DistinctKind distinctKind,
-                            NodeList<Node> args) : this (expr, distinctKind, args, null)
-        { }
+        internal MethodExpr(Node expr, DistinctKind distinctKind, NodeList<Node> args)
+            : this(expr, distinctKind, args, null) { }
 
         /// <summary>
         /// Intializes a method ast node with relationships.
         /// </summary>
-        internal MethodExpr(Node expr,
-                            DistinctKind distinctKind,
-                            NodeList<Node> args,
-                            NodeList<RelshipNavigationExpr> relationships) : base(distinctKind)
+        internal MethodExpr(
+            Node expr,
+            DistinctKind distinctKind,
+            NodeList<Node> args,
+            NodeList<RelshipNavigationExpr> relationships
+        )
+            : base(distinctKind)
         {
             Debug.Assert(expr != null, "expr != null");
             Debug.Assert(args == null || args.Count > 0, "args must be null or a non-empty list");

@@ -18,18 +18,16 @@ using System.ComponentModel;
 using System.Security;
 using System.Text;
 
-namespace System.Configuration {
-
+namespace System.Configuration
+{
     [AttributeUsage(AttributeTargets.Property)]
-    public sealed class PositiveTimeSpanValidatorAttribute : ConfigurationValidatorAttribute {
+    public sealed class PositiveTimeSpanValidatorAttribute : ConfigurationValidatorAttribute
+    {
+        public PositiveTimeSpanValidatorAttribute() { }
 
-        public PositiveTimeSpanValidatorAttribute() {
-        }
-
-        public override ConfigurationValidatorBase ValidatorInstance {
-            get {
-                return new PositiveTimeSpanValidator();
-            }
+        public override ConfigurationValidatorBase ValidatorInstance
+        {
+            get { return new PositiveTimeSpanValidator(); }
         }
     }
 }

@@ -45,8 +45,7 @@ namespace System.CommandLine.Benchmarks.DragonFruit
                 .GetDeclaredMethod("Main");
 
             _xmlDocsStreamReader = new StreamReader(
-                new MemoryStream(File.ReadAllBytes(_testAssemblyXmlDocsFilePath)
-                )
+                new MemoryStream(File.ReadAllBytes(_testAssemblyXmlDocsFilePath))
             );
         }
 

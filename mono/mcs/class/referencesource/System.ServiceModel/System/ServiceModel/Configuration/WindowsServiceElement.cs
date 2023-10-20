@@ -14,18 +14,22 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class WindowsServiceElement : ConfigurationElement
     {
-        public WindowsServiceElement()
-        {
-        }
+        public WindowsServiceElement() { }
 
-        [ConfigurationProperty(ConfigurationStrings.IncludeWindowsGroups, DefaultValue = SspiSecurityTokenProvider.DefaultExtractWindowsGroupClaims)]
+        [ConfigurationProperty(
+            ConfigurationStrings.IncludeWindowsGroups,
+            DefaultValue = SspiSecurityTokenProvider.DefaultExtractWindowsGroupClaims
+        )]
         public bool IncludeWindowsGroups
         {
             get { return (bool)base[ConfigurationStrings.IncludeWindowsGroups]; }
             set { base[ConfigurationStrings.IncludeWindowsGroups] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.AllowAnonymousLogons, DefaultValue = SspiSecurityTokenProvider.DefaultAllowUnauthenticatedCallers)]
+        [ConfigurationProperty(
+            ConfigurationStrings.AllowAnonymousLogons,
+            DefaultValue = SspiSecurityTokenProvider.DefaultAllowUnauthenticatedCallers
+        )]
         public bool AllowAnonymousLogons
         {
             get { return (bool)base[ConfigurationStrings.AllowAnonymousLogons]; }
@@ -36,7 +40,11 @@ namespace System.ServiceModel.Configuration
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly)));
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
+                    );
             }
             if (null == from)
             {
@@ -56,9 +64,5 @@ namespace System.ServiceModel.Configuration
             windows.AllowAnonymousLogons = this.AllowAnonymousLogons;
             windows.IncludeWindowsGroups = this.IncludeWindowsGroups;
         }
-
     }
 }
-
-
-

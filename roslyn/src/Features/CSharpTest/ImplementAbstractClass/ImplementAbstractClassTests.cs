@@ -25,25 +25,43 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsImplementAbstractClass)]
-    public partial class ImplementAbstractClassTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class ImplementAbstractClassTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public ImplementAbstractClassTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpImplementAbstractClassCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpImplementAbstractClassCodeFixProvider());
 
-        private OptionsCollection AllOptionsOff
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection AllOptionsOff =>
+            new OptionsCollection(GetLanguage())
             {
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedMethods, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedConstructors, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedOperators, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedProperties, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedIndexers, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedConstructors,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedOperators,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedIndexers,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
             };
 
         internal Task TestAllOptionsOffAsync(
@@ -51,7 +69,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
             string expectedMarkup,
             int index = 0,
             OptionsCollection options = null,
-            ParseOptions parseOptions = null)
+            ParseOptions parseOptions = null
+        )
         {
             options = options ?? new OptionsCollection(GetLanguage());
             options.AddRange(AllOptionsOff);
@@ -61,7 +80,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 expectedMarkup,
                 index: index,
                 options: options,
-                parseOptions: parseOptions);
+                parseOptions: parseOptions
+            );
         }
 
         [Fact]
@@ -123,7 +143,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/16434")]
@@ -153,7 +174,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543234")]
@@ -169,7 +191,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 struct [|Program|] : Goo
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -199,7 +222,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -229,7 +253,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -259,7 +284,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -289,7 +315,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -319,7 +346,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -349,7 +377,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -379,7 +408,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -409,7 +439,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -439,7 +470,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -469,7 +501,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -499,7 +532,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -538,7 +572,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                     }
                 }
                 """,
-                parseOptions: TestOptions.Regular7);
+                parseOptions: TestOptions.Regular7
+            );
         }
 
         [Fact]
@@ -576,7 +611,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/916114")]
@@ -614,7 +650,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/916114")]
@@ -644,7 +681,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -682,7 +720,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543883")]
@@ -720,7 +759,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -751,7 +791,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 {
                     public override event Action E;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -811,7 +852,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -831,7 +873,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 #line hidden
                 }
                 #line default
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -874,7 +917,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 #line hidden
                 }
                 #line default
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545585")]
@@ -933,7 +977,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545615")]
@@ -977,7 +1022,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545636")]
@@ -1007,7 +1053,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545637")]
@@ -1041,7 +1088,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/581500")]
@@ -1077,7 +1125,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/625442")]
@@ -1109,7 +1158,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/2407")]
@@ -1198,7 +1248,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/13149")]
@@ -1240,7 +1291,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 partial class A
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/13149")]
@@ -1282,7 +1334,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 partial class A : Base
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/581500")]
@@ -1309,7 +1362,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 {
                     public override void M(int x) => throw new System.NotImplementedException();
                 }
-                """, options: Option(CSharpCodeStyleOptions.PreferExpressionBodiedMethods, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement));
+                """,
+                options: Option(
+                    CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
+                    CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/581500")]
@@ -1336,7 +1394,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 {
                     public override int M => throw new System.NotImplementedException();
                 }
-                """, options: Option(CSharpCodeStyleOptions.PreferExpressionBodiedProperties, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement));
+                """,
+                options: Option(
+                    CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
+                    CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/581500")]
@@ -1369,11 +1432,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         }
                     }
                 }
-                """, options: new OptionsCollection(GetLanguage())
-    {
-        { CSharpCodeStyleOptions.PreferExpressionBodiedProperties, ExpressionBodyPreference.WhenPossible, NotificationOption2.Silent },
-        { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, ExpressionBodyPreference.Never, NotificationOption2.Silent },
-    });
+                """,
+                options: new OptionsCollection(GetLanguage())
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
+                        ExpressionBodyPreference.WhenPossible,
+                        NotificationOption2.Silent
+                    },
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                        ExpressionBodyPreference.Never,
+                        NotificationOption2.Silent
+                    },
+                }
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/581500")]
@@ -1411,11 +1484,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         }
                     }
                 }
-                """, options: new OptionsCollection(GetLanguage())
-    {
-        { CSharpCodeStyleOptions.PreferExpressionBodiedProperties, ExpressionBodyPreference.WhenPossible, NotificationOption2.Silent },
-        { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, ExpressionBodyPreference.Never, NotificationOption2.Silent },
-    });
+                """,
+                options: new OptionsCollection(GetLanguage())
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
+                        ExpressionBodyPreference.WhenPossible,
+                        NotificationOption2.Silent
+                    },
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                        ExpressionBodyPreference.Never,
+                        NotificationOption2.Silent
+                    },
+                }
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/581500")]
@@ -1442,7 +1525,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 {
                     public override int this[int i] => throw new System.NotImplementedException();
                 }
-                """, options: Option(CSharpCodeStyleOptions.PreferExpressionBodiedIndexers, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement));
+                """,
+                options: Option(
+                    CSharpCodeStyleOptions.PreferExpressionBodiedIndexers,
+                    CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/581500")]
@@ -1475,11 +1563,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         }
                     }
                 }
-                """, options: new OptionsCollection(GetLanguage())
-    {
-        { CSharpCodeStyleOptions.PreferExpressionBodiedIndexers, ExpressionBodyPreference.WhenPossible, NotificationOption2.Silent },
-        { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, ExpressionBodyPreference.Never, NotificationOption2.Silent },
-    });
+                """,
+                options: new OptionsCollection(GetLanguage())
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedIndexers,
+                        ExpressionBodyPreference.WhenPossible,
+                        NotificationOption2.Silent
+                    },
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                        ExpressionBodyPreference.Never,
+                        NotificationOption2.Silent
+                    },
+                }
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/581500")]
@@ -1517,11 +1615,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         }
                     }
                 }
-                """, options: new OptionsCollection(GetLanguage())
-    {
-        { CSharpCodeStyleOptions.PreferExpressionBodiedIndexers, ExpressionBodyPreference.WhenPossible, NotificationOption2.Silent },
-        { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, ExpressionBodyPreference.Never, NotificationOption2.Silent },
-    });
+                """,
+                options: new OptionsCollection(GetLanguage())
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedIndexers,
+                        ExpressionBodyPreference.WhenPossible,
+                        NotificationOption2.Silent
+                    },
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                        ExpressionBodyPreference.Never,
+                        NotificationOption2.Silent
+                    },
+                }
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/581500")]
@@ -1548,11 +1656,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 {
                     public override int M { get => throw new System.NotImplementedException(); }
                 }
-                """, options: new OptionsCollection(GetLanguage())
-    {
-        { CSharpCodeStyleOptions.PreferExpressionBodiedProperties, ExpressionBodyPreference.Never, NotificationOption2.Silent },
-        { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, ExpressionBodyPreference.WhenPossible, NotificationOption2.Silent },
-    });
+                """,
+                options: new OptionsCollection(GetLanguage())
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
+                        ExpressionBodyPreference.Never,
+                        NotificationOption2.Silent
+                    },
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                        ExpressionBodyPreference.WhenPossible,
+                        NotificationOption2.Silent
+                    },
+                }
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/581500")]
@@ -1579,7 +1697,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 {
                     public override int M { set => throw new System.NotImplementedException(); }
                 }
-                """, options: Option(CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement));
+                """,
+                options: Option(
+                    CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                    CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/581500")]
@@ -1606,13 +1729,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 {
                     public override int M { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
                 }
-                """, options: Option(CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement));
+                """,
+                options: Option(
+                    CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                    CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/15387")]
         public async Task TestWithGroupingOff1()
         {
-            var options = Option(ImplementTypeOptionsStorage.InsertionBehavior, ImplementTypeInsertionBehavior.AtTheEnd);
+            var options = Option(
+                ImplementTypeOptionsStorage.InsertionBehavior,
+                ImplementTypeInsertionBehavior.AtTheEnd
+            );
 
             await TestInRegularAndScriptAsync(
                 """
@@ -1638,7 +1769,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                     public override int Prop => throw new System.NotImplementedException();
                 }
-                """, globalOptions: options);
+                """,
+                globalOptions: options
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17274")]
@@ -1683,7 +1816,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17562")]
@@ -1721,7 +1855,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                     }
                 }
                 """,
-                parseOptions: TestOptions.Regular7);
+                parseOptions: TestOptions.Regular7
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17562")]
@@ -1758,7 +1893,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """, parseOptions: new CSharpParseOptions(LanguageVersion.CSharp7));
+                """,
+                parseOptions: new CSharpParseOptions(LanguageVersion.CSharp7)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17562")]
@@ -1795,7 +1932,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/5898")]
@@ -1804,7 +1942,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
         {
             var options = new OptionsCollection(GetLanguage())
             {
-                Option(ImplementTypeOptionsStorage.PropertyGenerationBehavior, ImplementTypePropertyGenerationBehavior.PreferAutoProperties),
+                Option(
+                    ImplementTypeOptionsStorage.PropertyGenerationBehavior,
+                    ImplementTypePropertyGenerationBehavior.PreferAutoProperties
+                ),
                 Option(CompletionOptionsStorage.HideAdvancedMembers, true),
             };
 
@@ -1835,11 +1976,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                     public override int ReadWriteProp { get; set; }
                     public override int WriteOnlyProp { set => throw new System.NotImplementedException(); }
                 }
-                """, parameters: new TestParameters(globalOptions: options));
+                """,
+                parameters: new TestParameters(globalOptions: options)
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task TestRefWithMethod_Parameters([CombinatorialValues("ref", "in", "ref readonly")] string modifier)
+        public async Task TestRefWithMethod_Parameters(
+            [CombinatorialValues("ref", "in", "ref readonly")] string modifier
+        )
         {
             await TestInRegularAndScriptAsync(
                 $$"""
@@ -1863,7 +2008,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1891,7 +2037,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1916,11 +2063,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 {
                     public override ref readonly int Property => throw new System.NotImplementedException();
                 }
-                """);
+                """
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task TestRefWithIndexer_Parameters([CombinatorialValues("ref", "in", "ref readonly")] string modifier)
+        public async Task TestRefWithIndexer_Parameters(
+            [CombinatorialValues("ref", "in", "ref readonly")] string modifier
+        )
         {
             await TestInRegularAndScriptAsync(
                 $$"""
@@ -1941,7 +2091,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 {
                     public override int this[{{modifier}} int p] { set => throw new System.NotImplementedException(); }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1966,7 +2117,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 {
                     public override ref readonly int this[int p] => throw new System.NotImplementedException();
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1994,7 +2146,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2020,7 +2173,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         </Document>
                     </Project>
                 </Workspace>
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30102")]
@@ -2051,7 +2205,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44907")]
@@ -2082,7 +2237,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """, parseOptions: TestOptions.RegularPreview);
+                """,
+                parseOptions: TestOptions.RegularPreview
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44907")]
@@ -2113,7 +2270,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """, parseOptions: TestOptions.RegularPreview);
+                """,
+                parseOptions: TestOptions.RegularPreview
+            );
         }
 
         [Fact]
@@ -2144,7 +2303,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """, parseOptions: TestOptions.RegularPreview);
+                """,
+                parseOptions: TestOptions.RegularPreview
+            );
         }
 
         [Fact]
@@ -2173,7 +2334,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                     }
                 }
 
-                """, parseOptions: TestOptions.RegularPreview);
+                """,
+                parseOptions: TestOptions.RegularPreview
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/48742")]
@@ -2207,7 +2370,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/48742")]
@@ -2241,7 +2405,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/48742")]
@@ -2275,7 +2440,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/48742")]
@@ -2284,10 +2450,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
         [InlineData("", "T?")]
         [InlineData(" where T : class", "T?")]
         [InlineData(" where T : struct", "T?")]
-        public async Task TestUnconstrainedGenericNullable_NoRegression(string constraint, string passToBase)
+        public async Task TestUnconstrainedGenericNullable_NoRegression(
+            string constraint,
+            string passToBase
+        )
         {
             await TestAllOptionsOffAsync(
-$@"#nullable enable
+                $@"#nullable enable
 
 abstract class B<T>
 {{
@@ -2297,7 +2466,7 @@ abstract class B<T>
 class [|D<T>|] : B<{passToBase}>{constraint}
 {{
 }}",
-$@"#nullable enable
+                $@"#nullable enable
 
 abstract class B<T>
 {{
@@ -2310,7 +2479,8 @@ class D<T> : B<{passToBase}>{constraint}
     {{
         throw new System.NotImplementedException();
     }}
-}}");
+}}"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/53012")]
@@ -2340,7 +2510,8 @@ class D<T> : B<{passToBase}>{constraint}
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/62092")]
@@ -2381,7 +2552,8 @@ class D<T> : B<{passToBase}>{constraint}
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2417,7 +2589,8 @@ class D<T> : B<{passToBase}>{constraint}
                         }
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

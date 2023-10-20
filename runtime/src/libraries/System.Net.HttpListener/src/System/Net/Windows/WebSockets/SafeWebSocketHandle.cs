@@ -10,9 +10,7 @@ namespace System.Net.WebSockets
     internal sealed class SafeWebSocketHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
         public SafeWebSocketHandle()
-            : base(true)
-        {
-        }
+            : base(true) { }
 
         protected override bool ReleaseHandle()
         {

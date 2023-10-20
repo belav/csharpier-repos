@@ -18,16 +18,22 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Logging
     {
         private static RoslynLogger? _instance;
         private static readonly ConcurrentDictionary<FunctionId, string> s_eventMap = new();
-        private static readonly ConcurrentDictionary<(FunctionId id, string name), string> s_propertyMap = new();
+        private static readonly ConcurrentDictionary<
+            (FunctionId id, string name),
+            string
+        > s_propertyMap = new();
 
-        private readonly ConcurrentDictionary<int, object> _pendingScopes = new(concurrencyLevel: 2, capacity: 10);
+        private readonly ConcurrentDictionary<int, object> _pendingScopes =
+            new(concurrencyLevel: 2, capacity: 10);
         private static ITelemetryReporter? _telemetryReporter;
 
-        private RoslynLogger()
-        {
-        }
+        private RoslynLogger() { }
 
-        public static void Initialize(ITelemetryReporter? reporter, string? telemetryLevel, string? sessionId)
+        public static void Initialize(
+            ITelemetryReporter? reporter,
+            string? telemetryLevel,
+            string? sessionId
+        )
         {
             Contract.ThrowIfTrue(_instance is not null);
 
@@ -57,7 +63,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Logging
         {
             try
             {
-                if (exception is OperationCanceledException { InnerException: { } oceInnerException })
+                if (
+                    exception is OperationCanceledException
+                    {
+                        InnerException: { } oceInnerException
+                    }
+                )
                 {
                     ReportFault(oceInnerException, severity, forceDump);
                     return;
@@ -77,7 +88,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Logging
                     var eventName = GetEventName(FunctionId.NonFatalWatson);
                     var description = GetDescription(exception);
                     var currentProcess = Process.GetCurrentProcess();
-                    _telemetryReporter.ReportFault(eventName, description, (int)severity, forceDump, currentProcess.Id, exception);
+                    _telemetryReporter.ReportFault(
+                        eventName,
+                        description,
+                        (int)severity,
+                        forceDump,
+                        currentProcess.Id,
+                        exception
+                    );
                 }
             }
             catch (OutOfMemoryException)
@@ -90,8 +108,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Logging
             }
         }
 
-        public bool IsEnabled(FunctionId functionId)
-            => _telemetryReporter is not null;
+        public bool IsEnabled(FunctionId functionId) => _telemetryReporter is not null;
 
         public void Log(FunctionId functionId, LogMessage logMessage)
         {
@@ -107,12 +124,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Logging
             {
                 _telemetryReporter.Log(name, properties);
             }
-            catch
-            {
-            }
+            catch { }
         }
 
-        public void LogBlockStart(FunctionId functionId, LogMessage logMessage, int blockId, CancellationToken cancellationToken)
+        public void LogBlockStart(
+            FunctionId functionId,
+            LogMessage logMessage,
+            int blockId,
+            CancellationToken cancellationToken
+        )
         {
             if (IgnoreReporting(logMessage))
             {
@@ -126,12 +146,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Logging
             {
                 _telemetryReporter.LogBlockStart(eventName, (int)kind, blockId);
             }
-            catch
-            {
-            }
+            catch { }
         }
 
-        public void LogBlockEnd(FunctionId functionId, LogMessage logMessage, int blockId, int delta, CancellationToken cancellationToken)
+        public void LogBlockEnd(
+            FunctionId functionId,
+            LogMessage logMessage,
+            int blockId,
+            int delta,
+            CancellationToken cancellationToken
+        )
         {
             if (IgnoreReporting(logMessage))
             {
@@ -143,9 +167,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Logging
             {
                 _telemetryReporter.LogBlockEnd(blockId, properties, cancellationToken);
             }
-            catch
-            {
-            }
+            catch { }
         }
 
         public static void ShutdownAndReportSessionTelemetry()
@@ -163,9 +185,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Logging
         }
 
         [MemberNotNullWhen(false, nameof(_telemetryReporter))]
-        private static bool IgnoreReporting(LogMessage logMessage)
-            => _telemetryReporter is null ||
-               logMessage.LogLevel < LogLevel.Information;
+        private static bool IgnoreReporting(LogMessage logMessage) =>
+            _telemetryReporter is null || logMessage.LogLevel < LogLevel.Information;
 
         private static string GetDescription(Exception exception)
         {
@@ -200,9 +221,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Logging
                     }
                 }
             }
-            catch
-            {
-            }
+            catch { }
 
             // If we couldn't get a stack, do this
             return exception.Message;
@@ -211,25 +230,36 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Logging
         private const string EventPrefix = "vs/ide/vbcs/";
         private const string PropertyPrefix = "vs.ide.vbcs.";
 
-        private static string GetEventName(FunctionId id)
-            => s_eventMap.GetOrAdd(id, id => EventPrefix + GetTelemetryName(id, separator: '/'));
+        private static string GetEventName(FunctionId id) =>
+            s_eventMap.GetOrAdd(id, id => EventPrefix + GetTelemetryName(id, separator: '/'));
 
-        private static string GetPropertyName(FunctionId id, string name)
-            => s_propertyMap.GetOrAdd((id, name), key => PropertyPrefix + GetTelemetryName(id, separator: '.') + "." + key.name.ToLowerInvariant());
+        private static string GetPropertyName(FunctionId id, string name) =>
+            s_propertyMap.GetOrAdd(
+                (id, name),
+                key =>
+                    PropertyPrefix
+                    + GetTelemetryName(id, separator: '.')
+                    + "."
+                    + key.name.ToLowerInvariant()
+            );
 
-        private static string GetTelemetryName(FunctionId id, char separator)
-                => Enum.GetName(typeof(FunctionId), id)!.Replace('_', separator).ToLowerInvariant();
+        private static string GetTelemetryName(FunctionId id, char separator) =>
+            Enum.GetName(typeof(FunctionId), id)!.Replace('_', separator).ToLowerInvariant();
 
-        private static LogType GetKind(LogMessage logMessage)
-                => logMessage is KeyValueLogMessage kvLogMessage
-                                    ? kvLogMessage.Kind
-                                    : logMessage.LogLevel switch
-                                    {
-                                        >= LogLevel.Information => LogType.UserAction,
-                                        _ => LogType.Trace
-                                    };
+        private static LogType GetKind(LogMessage logMessage) =>
+            logMessage is KeyValueLogMessage kvLogMessage
+                ? kvLogMessage.Kind
+                : logMessage.LogLevel switch
+                {
+                    >= LogLevel.Information => LogType.UserAction,
+                    _ => LogType.Trace
+                };
 
-        private static ImmutableDictionary<string, object?> GetProperties(FunctionId id, LogMessage logMessage, int? delta)
+        private static ImmutableDictionary<string, object?> GetProperties(
+            FunctionId id,
+            LogMessage logMessage,
+            int? delta
+        )
         {
             var builder = ImmutableDictionary.CreateBuilder<string, object?>();
 

@@ -1,7 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Data.Common;       //DbDataAdapter
+using System.Data.Common; //DbDataAdapter
 
 namespace System.Data.Odbc
 {
@@ -19,18 +19,18 @@ namespace System.Data.Odbc
     /////////////////////////////////////////////////////////////////////////
     public sealed class OdbcRowUpdatingEventArgs : RowUpdatingEventArgs
     {
-        public OdbcRowUpdatingEventArgs(DataRow row, IDbCommand? command, StatementType statementType, DataTableMapping tableMapping)
-        : base(row, command, statementType, tableMapping)
-        {
-        }
+        public OdbcRowUpdatingEventArgs(
+            DataRow row,
+            IDbCommand? command,
+            StatementType statementType,
+            DataTableMapping tableMapping
+        )
+            : base(row, command, statementType, tableMapping) { }
 
         public new OdbcCommand? Command
         {
             get { return (base.Command as OdbcCommand); }
-            set
-            {
-                base.Command = value;
-            }
+            set { base.Command = value; }
         }
 
         protected override IDbCommand? BaseCommand
@@ -46,10 +46,13 @@ namespace System.Data.Odbc
     /////////////////////////////////////////////////////////////////////////
     public sealed class OdbcRowUpdatedEventArgs : RowUpdatedEventArgs
     {
-        public OdbcRowUpdatedEventArgs(DataRow row, IDbCommand? command, StatementType statementType, DataTableMapping tableMapping)
-        : base(row, command, statementType, tableMapping)
-        {
-        }
+        public OdbcRowUpdatedEventArgs(
+            DataRow row,
+            IDbCommand? command,
+            StatementType statementType,
+            DataTableMapping tableMapping
+        )
+            : base(row, command, statementType, tableMapping) { }
 
         public new OdbcCommand? Command
         {

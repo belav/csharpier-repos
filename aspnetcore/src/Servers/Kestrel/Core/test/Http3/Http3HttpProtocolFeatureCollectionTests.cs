@@ -21,8 +21,11 @@ public class Http3HttpProtocolFeatureCollectionTests
         var connectionFeatures = new TestConnectionFeatures().FeatureCollection;
 
         var streamContext = TestContextFactory.CreateHttp3StreamContext(
-            transport: DuplexPipe.CreateConnectionPair(new PipeOptions(), new PipeOptions()).Application,
-            connectionFeatures: connectionFeatures);
+            transport: DuplexPipe
+                .CreateConnectionPair(new PipeOptions(), new PipeOptions())
+                .Application,
+            connectionFeatures: connectionFeatures
+        );
 
         var http3Stream = new TestHttp3Stream();
         http3Stream.Initialize(streamContext);
@@ -52,7 +55,9 @@ public class Http3HttpProtocolFeatureCollectionTests
         Assert.NotNull(minRateFeature);
 
         Assert.Throws<NotSupportedException>(() => minRateFeature.MinDataRate);
-        Assert.Throws<NotSupportedException>(() => minRateFeature.MinDataRate = new MinDataRate(1, TimeSpan.FromSeconds(2)));
+        Assert.Throws<NotSupportedException>(
+            () => minRateFeature.MinDataRate = new MinDataRate(1, TimeSpan.FromSeconds(2))
+        );
 
         // You can set the MinDataRate to null though.
         minRateFeature.MinDataRate = null;
@@ -63,12 +68,15 @@ public class Http3HttpProtocolFeatureCollectionTests
 
     private class TestHttp3Stream : Http3Stream
     {
-        public override void Execute()
-        {
-        }
+        public override void Execute() { }
     }
 
-    private class TestConnectionFeatures : IProtocolErrorCodeFeature, IStreamIdFeature, IStreamAbortFeature, IStreamClosedFeature, IConnectionMetricsContextFeature
+    private class TestConnectionFeatures
+        : IProtocolErrorCodeFeature,
+            IStreamIdFeature,
+            IStreamAbortFeature,
+            IStreamClosedFeature,
+            IConnectionMetricsContextFeature
     {
         public TestConnectionFeatures()
         {

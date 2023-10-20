@@ -13,6 +13,7 @@ namespace System.ServiceModel.Dispatcher
     using System.Runtime.Serialization;
     using System.ServiceModel.Diagnostics;
     using System.Runtime;
+
     /// <summary>
     /// Abstract base class for different classes of message filters
     /// </summary>
@@ -25,9 +26,7 @@ namespace System.ServiceModel.Dispatcher
     [Fx.Tag.XamlVisible(true)]
     public abstract class MessageFilter
     {
-        protected MessageFilter()
-        {
-        }
+        protected MessageFilter() { }
 
         protected internal virtual IMessageFilterTable<FilterData> CreateFilterTable<FilterData>()
         {
@@ -36,14 +35,14 @@ namespace System.ServiceModel.Dispatcher
 
         /// <summary>
         /// Tests whether the filter matches the given message.
-        /// </summary>                
+        /// </summary>
         public abstract bool Match(MessageBuffer buffer);
 
         /// <summary>
         /// Tests whether the filter matches the given message without examining its body.
         /// Note: since this method never probes the message body, it should NOT close the message
         /// If the filter probes the message body, then the filter must THROW an Exception. The filter should not return false
-        /// This is deliberate - we don't want to produce false positives. 
+        /// This is deliberate - we don't want to produce false positives.
         /// </summary>
         public abstract bool Match(Message message);
     }
@@ -63,10 +62,7 @@ namespace System.ServiceModel.Dispatcher
 
         public int Count
         {
-            get
-            {
-                return this.filters.Count;
-            }
+            get { return this.filters.Count; }
         }
 
         public void Clear()
@@ -88,7 +84,14 @@ namespace System.ServiceModel.Dispatcher
                         Collection<MessageFilter> f = new Collection<MessageFilter>();
                         f.Add(filter);
                         f.Add(item.Key);
-                        throw TraceUtility.ThrowHelperError(new MultipleFilterMatchesException(SR.GetString(SR.FilterMultipleMatches), null, f), message);
+                        throw TraceUtility.ThrowHelperError(
+                            new MultipleFilterMatchesException(
+                                SR.GetString(SR.FilterMultipleMatches),
+                                null,
+                                f
+                            ),
+                            message
+                        );
                     }
 
                     filter = item.Key;
@@ -114,7 +117,15 @@ namespace System.ServiceModel.Dispatcher
                         Collection<MessageFilter> f = new Collection<MessageFilter>();
                         f.Add(filter);
                         f.Add(item.Key);
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MultipleFilterMatchesException(SR.GetString(SR.FilterMultipleMatches), null, f));
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new MultipleFilterMatchesException(
+                                    SR.GetString(SR.FilterMultipleMatches),
+                                    null,
+                                    f
+                                )
+                            );
                     }
 
                     filter = item.Key;
@@ -164,7 +175,14 @@ namespace System.ServiceModel.Dispatcher
                         Collection<MessageFilter> f = new Collection<MessageFilter>();
                         f.Add(filter);
                         f.Add(item.Key);
-                        throw TraceUtility.ThrowHelperError(new MultipleFilterMatchesException(SR.GetString(SR.FilterMultipleMatches), null, f), message);
+                        throw TraceUtility.ThrowHelperError(
+                            new MultipleFilterMatchesException(
+                                SR.GetString(SR.FilterMultipleMatches),
+                                null,
+                                f
+                            ),
+                            message
+                        );
                     }
 
                     filter = item.Key;
@@ -186,7 +204,15 @@ namespace System.ServiceModel.Dispatcher
                         Collection<MessageFilter> f = new Collection<MessageFilter>();
                         f.Add(filter);
                         f.Add(item.Key);
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MultipleFilterMatchesException(SR.GetString(SR.FilterMultipleMatches), null, f));
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new MultipleFilterMatchesException(
+                                    SR.GetString(SR.FilterMultipleMatches),
+                                    null,
+                                    f
+                                )
+                            );
                     }
 
                     filter = item.Key;
@@ -224,34 +250,22 @@ namespace System.ServiceModel.Dispatcher
 
         //
         // IDictionary<MessageFilter,FilterData> methods
-        //   
+        //
 
         public FilterData this[MessageFilter key]
         {
-            get
-            {
-                return this.filters[key];
-            }
-            set
-            {
-                this.filters[key] = value;
-            }
+            get { return this.filters[key]; }
+            set { this.filters[key] = value; }
         }
 
         public ICollection<MessageFilter> Keys
         {
-            get
-            {
-                return this.filters.Keys;
-            }
+            get { return this.filters.Keys; }
         }
 
         public ICollection<FilterData> Values
         {
-            get
-            {
-                return this.filters.Values;
-            }
+            get { return this.filters.Values; }
         }
 
         public bool ContainsKey(MessageFilter key)
@@ -275,30 +289,43 @@ namespace System.ServiceModel.Dispatcher
 
         bool ICollection<KeyValuePair<MessageFilter, FilterData>>.IsReadOnly
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
-        void ICollection<KeyValuePair<MessageFilter, FilterData>>.Add(KeyValuePair<MessageFilter, FilterData> item)
+        void ICollection<KeyValuePair<MessageFilter, FilterData>>.Add(
+            KeyValuePair<MessageFilter, FilterData> item
+        )
         {
             ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.filters).Add(item);
         }
 
-        bool ICollection<KeyValuePair<MessageFilter, FilterData>>.Contains(KeyValuePair<MessageFilter, FilterData> item)
+        bool ICollection<KeyValuePair<MessageFilter, FilterData>>.Contains(
+            KeyValuePair<MessageFilter, FilterData> item
+        )
         {
-            return ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.filters).Contains(item);
+            return ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.filters).Contains(
+                item
+            );
         }
 
-        void ICollection<KeyValuePair<MessageFilter, FilterData>>.CopyTo(KeyValuePair<MessageFilter, FilterData>[] array, int arrayIndex)
+        void ICollection<KeyValuePair<MessageFilter, FilterData>>.CopyTo(
+            KeyValuePair<MessageFilter, FilterData>[] array,
+            int arrayIndex
+        )
         {
-            ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.filters).CopyTo(array, arrayIndex);
+            ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.filters).CopyTo(
+                array,
+                arrayIndex
+            );
         }
 
-        bool ICollection<KeyValuePair<MessageFilter, FilterData>>.Remove(KeyValuePair<MessageFilter, FilterData> item)
+        bool ICollection<KeyValuePair<MessageFilter, FilterData>>.Remove(
+            KeyValuePair<MessageFilter, FilterData> item
+        )
         {
-            return ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.filters).Remove(item);
+            return ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.filters).Remove(
+                item
+            );
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -306,9 +333,13 @@ namespace System.ServiceModel.Dispatcher
             return ((IEnumerable<KeyValuePair<MessageFilter, FilterData>>)this).GetEnumerator();
         }
 
-        IEnumerator<KeyValuePair<MessageFilter, FilterData>> IEnumerable<KeyValuePair<MessageFilter, FilterData>>.GetEnumerator()
+        IEnumerator<KeyValuePair<MessageFilter, FilterData>> IEnumerable<
+            KeyValuePair<MessageFilter, FilterData>
+        >.GetEnumerator()
         {
-            return ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.filters).GetEnumerator();
+            return (
+                (ICollection<KeyValuePair<MessageFilter, FilterData>>)this.filters
+            ).GetEnumerator();
         }
 
         public bool TryGetValue(MessageFilter filter, out FilterData data)

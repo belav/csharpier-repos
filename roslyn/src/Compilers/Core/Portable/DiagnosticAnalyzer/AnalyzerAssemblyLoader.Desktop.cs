@@ -27,9 +27,7 @@ namespace Microsoft.CodeAnalysis
     {
         private bool _hookedAssemblyResolve;
 
-        internal AnalyzerAssemblyLoader()
-        {
-        }
+        internal AnalyzerAssemblyLoader() { }
 
         private partial Assembly? Load(AssemblyName assemblyName, string assemblyOriginalPath)
         {
@@ -39,9 +37,12 @@ namespace Microsoft.CodeAnalysis
         }
 
         private partial bool IsMatch(AssemblyName requestedName, AssemblyName candidateName) =>
-            candidateName.Name == requestedName.Name &&
-            candidateName.Version >= requestedName.Version &&
-            candidateName.GetPublicKeyToken().AsSpan().SequenceEqual(requestedName.GetPublicKeyToken().AsSpan());
+            candidateName.Name == requestedName.Name
+            && candidateName.Version >= requestedName.Version
+            && candidateName
+                .GetPublicKeyToken()
+                .AsSpan()
+                .SequenceEqual(requestedName.GetPublicKeyToken().AsSpan());
 
         internal bool EnsureResolvedHooked()
         {

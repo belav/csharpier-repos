@@ -3,7 +3,6 @@
 //------------------------------------------------------------
 namespace System.Workflow.Activities.Design
 {
-
     using System;
     using System.Collections.Generic;
     using System.Text;
@@ -22,22 +21,13 @@ namespace System.Workflow.Activities.Design
 
         public override String ContractName
         {
-            get
-            {
-                return this.operation.GetContractFullName(null);
-            }
+            get { return this.operation.GetContractFullName(null); }
         }
 
         public override string Name
         {
-            get
-            {
-                return operation.Name;
-            }
-            set
-            {
-                operation.Name = value;
-            }
+            get { return operation.Name; }
+            set { operation.Name = value; }
         }
 
         public TypedOperationInfo Operation

@@ -31,8 +31,11 @@ namespace Microsoft.CSharp.RuntimeBinder
         public BindingFlag BindingFlags => 0;
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        public Expr DispatchPayload(RuntimeBinder runtimeBinder, ArgumentObject[] arguments, LocalVariableSymbol[] locals)
-            => runtimeBinder.BindBinaryOperation(this, arguments, locals);
+        public Expr DispatchPayload(
+            RuntimeBinder runtimeBinder,
+            ArgumentObject[] arguments,
+            LocalVariableSymbol[] locals
+        ) => runtimeBinder.BindBinaryOperation(this, arguments, locals);
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         public void PopulateSymbolTableWithName(Type callingType, ArgumentObject[] arguments)
@@ -45,7 +48,8 @@ namespace Microsoft.CSharp.RuntimeBinder
 
         public bool IsBinderThatCanHaveRefReceiver => false;
 
-        internal bool IsLogicalOperation => (_binopFlags & CSharpBinaryOperationFlags.LogicalOperation) != 0;
+        internal bool IsLogicalOperation =>
+            (_binopFlags & CSharpBinaryOperationFlags.LogicalOperation) != 0;
 
         private readonly CSharpBinaryOperationFlags _binopFlags;
 
@@ -75,8 +79,9 @@ namespace Microsoft.CSharp.RuntimeBinder
             bool isChecked,
             CSharpBinaryOperationFlags binaryOperationFlags,
             Type callingContext,
-            IEnumerable<CSharpArgumentInfo> argumentInfo) :
-            base(operation)
+            IEnumerable<CSharpArgumentInfo> argumentInfo
+        )
+            : base(operation)
         {
             _binopFlags = binaryOperationFlags;
             _callingContext = callingContext;
@@ -107,10 +112,12 @@ namespace Microsoft.CSharp.RuntimeBinder
                 return false;
             }
 
-            if (_binopFlags != otherBinder._binopFlags ||
-                Operation != otherBinder.Operation ||
-                IsChecked != otherBinder.IsChecked ||
-                _callingContext != otherBinder._callingContext)
+            if (
+                _binopFlags != otherBinder._binopFlags
+                || Operation != otherBinder.Operation
+                || IsChecked != otherBinder.IsChecked
+                || _callingContext != otherBinder._callingContext
+            )
             {
                 return false;
             }
@@ -125,13 +132,26 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// <param name="arg">The right hand side operand of the dynamic binary operation.</param>
         /// <param name="errorSuggestion">The binding result in case the binding fails, or null.</param>
         /// <returns>The <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
-        public override DynamicMetaObject FallbackBinaryOperation(DynamicMetaObject target, DynamicMetaObject arg, DynamicMetaObject errorSuggestion)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
+        public override DynamicMetaObject FallbackBinaryOperation(
+            DynamicMetaObject target,
+            DynamicMetaObject arg,
+            DynamicMetaObject errorSuggestion
+        )
         {
             BinderHelper.ValidateBindArgument(target, nameof(target));
             BinderHelper.ValidateBindArgument(arg, nameof(arg));
-            return BinderHelper.Bind(this, _binder, new[] { target, arg }, _argumentInfo, errorSuggestion);
+            return BinderHelper.Bind(
+                this,
+                _binder,
+                new[] { target, arg },
+                _argumentInfo,
+                errorSuggestion
+            );
         }
     }
 }

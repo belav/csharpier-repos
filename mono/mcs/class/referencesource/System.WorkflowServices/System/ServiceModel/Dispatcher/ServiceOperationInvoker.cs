@@ -16,7 +16,12 @@ namespace System.ServiceModel.Dispatcher
         bool contractCausesSave;
         IOperationInvoker innerInvoker;
 
-        public ServiceOperationInvoker(IOperationInvoker innerInvoker, bool completesInstance, bool canCreateInstance, bool contractCausesSave)
+        public ServiceOperationInvoker(
+            IOperationInvoker innerInvoker,
+            bool completesInstance,
+            bool canCreateInstance,
+            bool contractCausesSave
+        )
         {
             if (innerInvoker == null)
             {
@@ -50,9 +55,16 @@ namespace System.ServiceModel.Dispatcher
 
             if (durableInstance == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                    SR2.GetString(SR2.InvokeCalledWithWrongType, typeof(DurableServiceAttribute).Name)));
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.InvokeCalledWithWrongType,
+                                typeof(DurableServiceAttribute).Name
+                            )
+                        )
+                    );
             }
 
             object serviceInstance = durableInstance.StartOperation(this.canCreateInstance);
@@ -79,12 +91,21 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (!failFast)
                 {
-                    durableInstance.FinishOperation(this.completesInstance, this.contractCausesSave, operationException);
+                    durableInstance.FinishOperation(
+                        this.completesInstance,
+                        this.contractCausesSave,
+                        operationException
+                    );
                 }
             }
         }
 
-        public IAsyncResult InvokeBegin(object instance, object[] inputs, AsyncCallback callback, object state)
+        public IAsyncResult InvokeBegin(
+            object instance,
+            object[] inputs,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (instance == null)
             {
@@ -95,12 +116,26 @@ namespace System.ServiceModel.Dispatcher
 
             if (durableInstance == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                    SR2.GetString(SR2.InvokeCalledWithWrongType, typeof(DurableServiceAttribute).Name)));
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.InvokeCalledWithWrongType,
+                                typeof(DurableServiceAttribute).Name
+                            )
+                        )
+                    );
             }
 
-            return new InvokeAsyncResult(durableInstance, inputs, this, this.canCreateInstance, callback, state);
+            return new InvokeAsyncResult(
+                durableInstance,
+                inputs,
+                this,
+                this.canCreateInstance,
+                callback,
+                state
+            );
         }
 
         public object InvokeEnd(object instance, out object[] outputs, IAsyncResult result)
@@ -110,8 +145,12 @@ namespace System.ServiceModel.Dispatcher
 
         public class InvokeAsyncResult : AsyncResult
         {
-            static AsyncCallback finishCallback = Fx.ThunkCallback(new AsyncCallback(FinishComplete));
-            static AsyncCallback invokeCallback = Fx.ThunkCallback(new AsyncCallback(InvokeComplete));
+            static AsyncCallback finishCallback = Fx.ThunkCallback(
+                new AsyncCallback(FinishComplete)
+            );
+            static AsyncCallback invokeCallback = Fx.ThunkCallback(
+                new AsyncCallback(InvokeComplete)
+            );
             static AsyncCallback startCallback = Fx.ThunkCallback(new AsyncCallback(StartComplete));
             Exception completionException;
             ServiceDurableInstance durableInstance;
@@ -123,7 +162,14 @@ namespace System.ServiceModel.Dispatcher
             object returnValue;
             object serviceInstance;
 
-            public InvokeAsyncResult(ServiceDurableInstance instance, object[] inputs, ServiceOperationInvoker invoker, bool canCreateInstance, AsyncCallback callback, object state)
+            public InvokeAsyncResult(
+                ServiceDurableInstance instance,
+                object[] inputs,
+                ServiceOperationInvoker invoker,
+                bool canCreateInstance,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.invoker = invoker;
@@ -131,7 +177,11 @@ namespace System.ServiceModel.Dispatcher
                 this.durableInstance = instance;
                 this.operationContext = OperationContext.Current;
 
-                IAsyncResult result = this.durableInstance.BeginStartOperation(canCreateInstance, startCallback, this);
+                IAsyncResult result = this.durableInstance.BeginStartOperation(
+                    canCreateInstance,
+                    startCallback,
+                    this
+                );
 
                 if (result.CompletedSynchronously)
                 {
@@ -163,7 +213,10 @@ namespace System.ServiceModel.Dispatcher
                 }
 
                 InvokeAsyncResult invokeResult = result.AsyncState as InvokeAsyncResult;
-                Fx.Assert(invokeResult != null, "Async state should have been of type InvokeAsyncResult.");
+                Fx.Assert(
+                    invokeResult != null,
+                    "Async state should have been of type InvokeAsyncResult."
+                );
 
                 try
                 {
@@ -194,12 +247,21 @@ namespace System.ServiceModel.Dispatcher
 
                 InvokeAsyncResult invokeResult = resultParameter.AsyncState as InvokeAsyncResult;
 
-                Fx.Assert(invokeResult != null,
-                    "Async state should have been of type InvokeAsyncResult.");
+                Fx.Assert(
+                    invokeResult != null,
+                    "Async state should have been of type InvokeAsyncResult."
+                );
 
                 try
                 {
-                    invokeResult.returnValue = invokeResult.invoker.innerInvoker.InvokeEnd(invokeResult.serviceInstance, out invokeResult.outputs, resultParameter);
+                    invokeResult.returnValue = invokeResult
+                        .invoker
+                        .innerInvoker
+                        .InvokeEnd(
+                            invokeResult.serviceInstance,
+                            out invokeResult.outputs,
+                            resultParameter
+                        );
                 }
                 catch (Exception e)
                 {
@@ -232,12 +294,16 @@ namespace System.ServiceModel.Dispatcher
 
                 InvokeAsyncResult invokeResult = resultParameter.AsyncState as InvokeAsyncResult;
 
-                Fx.Assert(invokeResult != null,
-                    "Async state should have been of type InvokeAsyncResult.");
+                Fx.Assert(
+                    invokeResult != null,
+                    "Async state should have been of type InvokeAsyncResult."
+                );
 
                 try
                 {
-                    invokeResult.serviceInstance = invokeResult.durableInstance.EndStartOperation(resultParameter);
+                    invokeResult.serviceInstance = invokeResult
+                        .durableInstance
+                        .EndStartOperation(resultParameter);
                 }
                 catch (Exception e)
                 {
@@ -263,7 +329,13 @@ namespace System.ServiceModel.Dispatcher
             {
                 try
                 {
-                    IAsyncResult result = this.durableInstance.BeginFinishOperation(this.invoker.completesInstance, this.invoker.contractCausesSave, this.completionException, finishCallback, this);
+                    IAsyncResult result = this.durableInstance.BeginFinishOperation(
+                        this.invoker.completesInstance,
+                        this.invoker.contractCausesSave,
+                        this.completionException,
+                        finishCallback,
+                        this
+                    );
 
                     if (result.CompletedSynchronously)
                     {
@@ -296,14 +368,22 @@ namespace System.ServiceModel.Dispatcher
                 {
                     IAsyncResult result = null;
 
-                    using (OperationContextScope operationScope = new OperationContextScope(this.operationContext))
+                    using (
+                        OperationContextScope operationScope = new OperationContextScope(
+                            this.operationContext
+                        )
+                    )
                     {
-                        result = this.invoker.innerInvoker.InvokeBegin(this.serviceInstance, this.inputs, invokeCallback, this);
+                        result = this.invoker
+                            .innerInvoker
+                            .InvokeBegin(this.serviceInstance, this.inputs, invokeCallback, this);
                     }
 
                     if (result.CompletedSynchronously)
                     {
-                        this.returnValue = this.invoker.innerInvoker.InvokeEnd(this.serviceInstance, out this.outputs, result);
+                        this.returnValue = this.invoker
+                            .innerInvoker
+                            .InvokeEnd(this.serviceInstance, out this.outputs, result);
                         finishNow = true;
                     }
                 }

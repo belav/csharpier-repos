@@ -19,7 +19,7 @@ namespace System.Runtime.InteropServices.JavaScript
     /// </summary>
     internal sealed class JSSynchronizationContext : SynchronizationContext
     {
-        private readonly Action _DataIsAvailable;// don't allocate Action on each call to UnsafeOnCompleted
+        private readonly Action _DataIsAvailable; // don't allocate Action on each call to UnsafeOnCompleted
         public readonly Thread TargetThread;
         public readonly IntPtr TargetThreadId;
         private readonly WorkItemQueueType Queue;
@@ -47,25 +47,35 @@ namespace System.Runtime.InteropServices.JavaScript
 
         internal JSSynchronizationContext(Thread targetThread, IntPtr targetThreadId)
             : this(
-                targetThread, targetThreadId,
+                targetThread,
+                targetThreadId,
                 Channel.CreateUnbounded<WorkItem>(
-                    new UnboundedChannelOptions { SingleWriter = false, SingleReader = true, AllowSynchronousContinuations = true }
+                    new UnboundedChannelOptions
+                    {
+                        SingleWriter = false,
+                        SingleReader = true,
+                        AllowSynchronousContinuations = true
+                    }
                 )
-            )
-        {
-        }
+            ) { }
 
         internal static void AssertWebWorkerContext()
         {
 #if FEATURE_WASM_THREADS
             if (CurrentJSSynchronizationContext == null)
             {
-                throw new InvalidOperationException("Please use dedicated worker for working with JavaScript interop. See https://aka.ms/dotnet-JS-interop-threads");
+                throw new InvalidOperationException(
+                    "Please use dedicated worker for working with JavaScript interop. See https://aka.ms/dotnet-JS-interop-threads"
+                );
             }
 #endif
         }
 
-        private JSSynchronizationContext(Thread targetThread, IntPtr targetThreadId, WorkItemQueueType queue)
+        private JSSynchronizationContext(
+            Thread targetThread,
+            IntPtr targetThreadId,
+            WorkItemQueueType queue
+        )
         {
             TargetThread = targetThread;
             TargetThreadId = targetThreadId;
@@ -101,7 +111,10 @@ namespace System.Runtime.InteropServices.JavaScript
         {
             // While we COULD pump here, we don't want to. We want the pump to happen on the next event loop turn.
             // Otherwise we could get a chain where a pump generates a new work item and that makes us pump again, forever.
-            TargetThreadScheduleBackgroundJob(TargetThreadId, (void*)(delegate* unmanaged[Cdecl]<void>)&BackgroundJobHandler);
+            TargetThreadScheduleBackgroundJob(
+                TargetThreadId,
+                (void*)(delegate* unmanaged[Cdecl]<void>)&BackgroundJobHandler
+            );
         }
 
         public override void Post(SendOrPostCallback d, object? state)
@@ -137,7 +150,10 @@ namespace System.Runtime.InteropServices.JavaScript
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern unsafe void TargetThreadScheduleBackgroundJob(IntPtr targetThread, void* callback);
+        internal static extern unsafe void TargetThreadScheduleBackgroundJob(
+            IntPtr targetThread,
+            void* callback
+        );
 
 #pragma warning disable CS3016 // Arrays as attribute arguments is not CLS-compliant
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) })]
@@ -179,7 +195,8 @@ namespace System.Runtime.InteropServices.JavaScript
             finally
             {
                 // If an item throws, we want to ensure that the next pump gets scheduled appropriately regardless.
-                if(!isDisposed) AwaitNewData();
+                if (!isDisposed)
+                    AwaitNewData();
             }
         }
     }

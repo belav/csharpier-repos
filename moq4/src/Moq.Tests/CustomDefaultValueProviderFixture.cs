@@ -21,7 +21,9 @@ namespace Moq.Tests
         public void Custom_DefaultValueProvider_gets_invoked()
         {
             const int expectedReturnValue = 42;
-            var constantDefaultValueProvider = new ConstantDefaultValueProvider(expectedReturnValue);
+            var constantDefaultValueProvider = new ConstantDefaultValueProvider(
+                expectedReturnValue
+            );
             var mock = new Mock<IFoo>() { DefaultValueProvider = constantDefaultValueProvider };
 
             var actualReturnValue = mock.Object.GetValue();
@@ -49,7 +51,10 @@ namespace Moq.Tests
         public void Mocks_inherit_custom_default_value_provider_from_MockRepository()
         {
             var customDefaultValueProvider = new ConstantDefaultValueProvider(null);
-            var mockRepository = new MockRepository(MockBehavior.Default) { DefaultValueProvider = customDefaultValueProvider };
+            var mockRepository = new MockRepository(MockBehavior.Default)
+            {
+                DefaultValueProvider = customDefaultValueProvider
+            };
 
             var mock = mockRepository.Create<IFoo>();
 
@@ -109,7 +114,6 @@ namespace Moq.Tests
         }
 
         sealed class ConstantDefaultValueProvider : DefaultValueProvider
-
         /* Unmerged change from project 'Moq.Tests(net6.0)'
         Before:
                     private object value;

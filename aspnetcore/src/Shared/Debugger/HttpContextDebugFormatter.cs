@@ -83,17 +83,24 @@ internal static class HttpContextDebugFormatter
 
     private static string? ResolveReasonPhrase(HttpResponse response, string? reasonPhrase)
     {
-        return response.HttpContext.Features.Get<IHttpResponseFeature>()?.ReasonPhrase ?? reasonPhrase;
+        return response.HttpContext.Features.Get<IHttpResponseFeature>()?.ReasonPhrase
+            ?? reasonPhrase;
     }
 
-    private static void GetRequestUrl(StringBuilder sb, HttpRequest request, bool includeQueryString)
+    private static void GetRequestUrl(
+        StringBuilder sb,
+        HttpRequest request,
+        bool includeQueryString
+    )
     {
         // The URL might be missing because the context was manually created in a test, e.g. new DefaultHttpContext()
-        if (string.IsNullOrEmpty(request.Scheme) &&
-            !request.Host.HasValue &&
-            !request.PathBase.HasValue &&
-            !request.Path.HasValue &&
-            !request.QueryString.HasValue)
+        if (
+            string.IsNullOrEmpty(request.Scheme)
+            && !request.Host.HasValue
+            && !request.PathBase.HasValue
+            && !request.Path.HasValue
+            && !request.QueryString.HasValue
+        )
         {
             sb.Append("(unspecified)");
             return;
@@ -111,6 +118,9 @@ internal static class HttpContextDebugFormatter
             host = "(unspecified)";
         }
 
-        sb.Append(CultureInfo.InvariantCulture, $"{scheme}://{host}{request.PathBase.Value}{request.Path.Value}{(includeQueryString ? request.QueryString.Value : string.Empty)}");
+        sb.Append(
+            CultureInfo.InvariantCulture,
+            $"{scheme}://{host}{request.PathBase.Value}{request.Path.Value}{(includeQueryString ? request.QueryString.Value : string.Empty)}"
+        );
     }
 }

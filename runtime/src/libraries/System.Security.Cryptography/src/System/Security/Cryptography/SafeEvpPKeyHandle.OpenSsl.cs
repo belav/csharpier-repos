@@ -16,10 +16,8 @@ namespace System.Security.Cryptography
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("windows")]
-        public SafeEvpPKeyHandle() :
-            base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+        public SafeEvpPKeyHandle()
+            : base(IntPtr.Zero, ownsHandle: true) { }
 
         [UnsupportedOSPlatform("android")]
         [UnsupportedOSPlatform("browser")]
@@ -27,9 +25,7 @@ namespace System.Security.Cryptography
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("windows")]
         public SafeEvpPKeyHandle(IntPtr handle, bool ownsHandle)
-            : base(handle, ownsHandle)
-        {
-        }
+            : base(handle, ownsHandle) { }
 
         protected override bool ReleaseHandle()
         {
@@ -133,7 +129,9 @@ namespace System.Security.Cryptography
 
             if (!Interop.OpenSslNoInit.OpenSslIsAvailable)
             {
-                throw new PlatformNotSupportedException(SR.PlatformNotSupported_CryptographyOpenSSL);
+                throw new PlatformNotSupportedException(
+                    SR.PlatformNotSupported_CryptographyOpenSSL
+                );
             }
 
             return Interop.Crypto.LoadPrivateKeyFromEngine(engineName, keyId);
@@ -186,7 +184,9 @@ namespace System.Security.Cryptography
 
             if (!Interop.OpenSslNoInit.OpenSslIsAvailable)
             {
-                throw new PlatformNotSupportedException(SR.PlatformNotSupported_CryptographyOpenSSL);
+                throw new PlatformNotSupportedException(
+                    SR.PlatformNotSupported_CryptographyOpenSSL
+                );
             }
 
             return Interop.Crypto.LoadPublicKeyFromEngine(engineName, keyId);

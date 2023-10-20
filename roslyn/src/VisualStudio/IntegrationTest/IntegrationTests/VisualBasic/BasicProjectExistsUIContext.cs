@@ -18,9 +18,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
     public class BasicProjectExistsUIContext : AbstractIntegrationTest
     {
         public BasicProjectExistsUIContext(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory)
-        {
-        }
+            : base(instanceFactory) { }
 
         public override async Task InitializeAsync()
         {
@@ -31,16 +29,39 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         [WpfFact]
         public void ProjectContextChanges()
         {
-            Assert.False(VisualStudio.Shell.IsUIContextActive(Guids.VisualBasicProjectExistsInWorkspaceUIContext));
+            Assert.False(
+                VisualStudio
+                    .Shell
+                    .IsUIContextActive(Guids.VisualBasicProjectExistsInWorkspaceUIContext)
+            );
 
-            VisualStudio.SolutionExplorer.AddProject(new ProjectUtils.Project("TestVisualBasicProject"), WellKnownProjectTemplates.ConsoleApplication, LanguageNames.VisualBasic);
+            VisualStudio
+                .SolutionExplorer
+                .AddProject(
+                    new ProjectUtils.Project("TestVisualBasicProject"),
+                    WellKnownProjectTemplates.ConsoleApplication,
+                    LanguageNames.VisualBasic
+                );
 
-            Assert.True(VisualStudio.Shell.IsUIContextActive(Guids.VisualBasicProjectExistsInWorkspaceUIContext));
+            Assert.True(
+                VisualStudio
+                    .Shell
+                    .IsUIContextActive(Guids.VisualBasicProjectExistsInWorkspaceUIContext)
+            );
 
             VisualStudio.SolutionExplorer.CloseSolution();
-            VisualStudio.Workspace.WaitForAllAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
+            VisualStudio
+                .Workspace
+                .WaitForAllAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.Workspace
+                );
 
-            Assert.False(VisualStudio.Shell.IsUIContextActive(Guids.VisualBasicProjectExistsInWorkspaceUIContext));
+            Assert.False(
+                VisualStudio
+                    .Shell
+                    .IsUIContextActive(Guids.VisualBasicProjectExistsInWorkspaceUIContext)
+            );
         }
     }
 }

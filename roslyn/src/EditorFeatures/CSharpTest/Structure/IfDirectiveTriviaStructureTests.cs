@@ -13,9 +13,11 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure;
 
 [Trait(Traits.Feature, Traits.Features.Outlining)]
-public sealed class IfDirectiveTriviaStructureTests : AbstractCSharpSyntaxNodeStructureTests<IfDirectiveTriviaSyntax>
+public sealed class IfDirectiveTriviaStructureTests
+    : AbstractCSharpSyntaxNodeStructureTests<IfDirectiveTriviaSyntax>
 {
-    internal override AbstractSyntaxStructureProvider CreateProvider() => new IfDirectiveTriviaStructureProvider();
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new IfDirectiveTriviaStructureProvider();
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/10426")]
     public async Task TestEnabledIfDisabledElifDisabledElse()
@@ -36,8 +38,10 @@ public sealed class IfDirectiveTriviaStructureTests : AbstractCSharpSyntaxNodeSt
                 #endif
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/10426")]
@@ -59,8 +63,10 @@ public sealed class IfDirectiveTriviaStructureTests : AbstractCSharpSyntaxNodeSt
                 #endif
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/10426")]
@@ -82,8 +88,10 @@ public sealed class IfDirectiveTriviaStructureTests : AbstractCSharpSyntaxNodeSt
                 #endif
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/10426")]
@@ -136,8 +144,10 @@ public sealed class IfDirectiveTriviaStructureTests : AbstractCSharpSyntaxNodeSt
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/10426")]

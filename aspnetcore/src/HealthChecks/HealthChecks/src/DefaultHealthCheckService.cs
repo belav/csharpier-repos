@@ -24,7 +24,8 @@ internal sealed partial class DefaultHealthCheckService : HealthCheckService
     public DefaultHealthCheckService(
         IServiceScopeFactory scopeFactory,
         IOptions<HealthCheckServiceOptions> options,
-        ILogger<DefaultHealthCheckService> logger)
+        ILogger<DefaultHealthCheckService> logger
+    )
     {
         _scopeFactory = scopeFactory ?? throw new ArgumentNullException(nameof(scopeFactory));
         _options = options ?? throw new ArgumentNullException(nameof(options));
@@ -35,9 +36,11 @@ internal sealed partial class DefaultHealthCheckService : HealthCheckService
         // actually tries to **run** health checks would be real baaaaad.
         ValidateRegistrations(_options.Value.Registrations);
     }
+
     public override async Task<HealthReport> CheckHealthAsync(
         Func<HealthCheckRegistration, bool>? predicate,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var registrations = _options.Value.Registrations;
         if (predicate != null)
@@ -53,7 +56,10 @@ internal sealed partial class DefaultHealthCheckService : HealthCheckService
 
         foreach (var registration in registrations)
         {
-            tasks[index++] = Task.Run(() => RunCheckAsync(registration, cancellationToken), cancellationToken);
+            tasks[index++] = Task.Run(
+                () => RunCheckAsync(registration, cancellationToken),
+                cancellationToken
+            );
         }
 
         await Task.WhenAll(tasks).ConfigureAwait(false);
@@ -71,7 +77,10 @@ internal sealed partial class DefaultHealthCheckService : HealthCheckService
         return report;
     }
 
-    private async Task<HealthReportEntry> RunCheckAsync(HealthCheckRegistration registration, CancellationToken cancellationToken)
+    private async Task<HealthReportEntry> RunCheckAsync(
+        HealthCheckRegistration registration,
+        CancellationToken cancellationToken
+    )
     {
         cancellationToken.ThrowIfCancellationRequested();
 
@@ -98,12 +107,15 @@ internal sealed partial class DefaultHealthCheckService : HealthCheckService
                     var checkCancellationToken = cancellationToken;
                     if (registration.Timeout > TimeSpan.Zero)
                     {
-                        timeoutCancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+                        timeoutCancellationTokenSource =
+                            CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
                         timeoutCancellationTokenSource.CancelAfter(registration.Timeout);
                         checkCancellationToken = timeoutCancellationTokenSource.Token;
                     }
 
-                    result = await healthCheck.CheckHealthAsync(context, checkCancellationToken).ConfigureAwait(false);
+                    result = await healthCheck
+                        .CheckHealthAsync(context, checkCancellationToken)
+                        .ConfigureAwait(false);
 
                     var duration = stopwatch.GetElapsedTime();
 
@@ -113,12 +125,14 @@ internal sealed partial class DefaultHealthCheckService : HealthCheckService
                         duration: duration,
                         exception: result.Exception,
                         data: result.Data,
-                        tags: registration.Tags);
+                        tags: registration.Tags
+                    );
 
                     Log.HealthCheckEnd(_logger, registration, entry, duration);
                     Log.HealthCheckData(_logger, registration, entry);
                 }
-                catch (OperationCanceledException ex) when (!cancellationToken.IsCancellationRequested)
+                catch (OperationCanceledException ex)
+                    when (!cancellationToken.IsCancellationRequested)
                 {
                     var duration = stopwatch.GetElapsedTime();
                     entry = new HealthReportEntry(
@@ -127,11 +141,11 @@ internal sealed partial class DefaultHealthCheckService : HealthCheckService
                         duration: duration,
                         exception: ex,
                         data: null,
-                        tags: registration.Tags);
+                        tags: registration.Tags
+                    );
 
                     Log.HealthCheckError(_logger, registration, ex, duration);
                 }
-
                 // Allow cancellation to propagate if it's not a timeout.
                 catch (Exception ex) when (ex as OperationCanceledException == null)
                 {
@@ -142,11 +156,11 @@ internal sealed partial class DefaultHealthCheckService : HealthCheckService
                         duration: duration,
                         exception: ex,
                         data: null,
-                        tags: registration.Tags);
+                        tags: registration.Tags
+                    );
 
                     Log.HealthCheckError(_logger, registration, ex, duration);
                 }
-
                 finally
                 {
                     timeoutCancellationTokenSource?.Dispose();
@@ -168,7 +182,9 @@ internal sealed partial class DefaultHealthCheckService : HealthCheckService
         {
             if (!distinctRegistrations.Add(registration.Name))
             {
-                builder ??= new StringBuilder("Duplicate health checks were registered with the name(s): ");
+                builder ??= new StringBuilder(
+                    "Duplicate health checks were registered with the name(s): "
+                );
 
                 builder.Append(registration.Name).Append(", ");
             }
@@ -176,7 +192,10 @@ internal sealed partial class DefaultHealthCheckService : HealthCheckService
 
         if (builder is not null)
         {
-            throw new ArgumentException(builder.ToString(0, builder.Length - 2), nameof(registrations));
+            throw new ArgumentException(
+                builder.ToString(0, builder.Length - 2),
+                nameof(registrations)
+            );
         }
     }
 
@@ -197,64 +216,168 @@ internal sealed partial class DefaultHealthCheckService : HealthCheckService
         public const string HealthCheckErrorName = "HealthCheckError";
         public const string HealthCheckDataName = "HealthCheckData";
 
-        public static readonly EventId HealthCheckData = new EventId(HealthCheckDataId, HealthCheckDataName);
+        public static readonly EventId HealthCheckData = new EventId(
+            HealthCheckDataId,
+            HealthCheckDataName
+        );
     }
 
     private static partial class Log
     {
-        [LoggerMessage(EventIds.HealthCheckProcessingBeginId, LogLevel.Debug, "Running health checks", EventName = EventIds.HealthCheckProcessingBeginName)]
+        [LoggerMessage(
+            EventIds.HealthCheckProcessingBeginId,
+            LogLevel.Debug,
+            "Running health checks",
+            EventName = EventIds.HealthCheckProcessingBeginName
+        )]
         public static partial void HealthCheckProcessingBegin(ILogger logger);
 
-        public static void HealthCheckProcessingEnd(ILogger logger, HealthStatus status, TimeSpan duration) =>
-            HealthCheckProcessingEnd(logger, status, duration.TotalMilliseconds);
+        public static void HealthCheckProcessingEnd(
+            ILogger logger,
+            HealthStatus status,
+            TimeSpan duration
+        ) => HealthCheckProcessingEnd(logger, status, duration.TotalMilliseconds);
 
-        [LoggerMessage(EventIds.HealthCheckProcessingEndId, LogLevel.Debug, "Health check processing with combined status {HealthStatus} completed after {ElapsedMilliseconds}ms", EventName = EventIds.HealthCheckProcessingEndName)]
-        private static partial void HealthCheckProcessingEnd(ILogger logger, HealthStatus HealthStatus, double ElapsedMilliseconds);
+        [LoggerMessage(
+            EventIds.HealthCheckProcessingEndId,
+            LogLevel.Debug,
+            "Health check processing with combined status {HealthStatus} completed after {ElapsedMilliseconds}ms",
+            EventName = EventIds.HealthCheckProcessingEndName
+        )]
+        private static partial void HealthCheckProcessingEnd(
+            ILogger logger,
+            HealthStatus HealthStatus,
+            double ElapsedMilliseconds
+        );
 
-        [LoggerMessage(EventIds.HealthCheckBeginId, LogLevel.Debug, "Running health check {HealthCheckName}", EventName = EventIds.HealthCheckBeginName)]
+        [LoggerMessage(
+            EventIds.HealthCheckBeginId,
+            LogLevel.Debug,
+            "Running health check {HealthCheckName}",
+            EventName = EventIds.HealthCheckBeginName
+        )]
         public static partial void HealthCheckBegin(ILogger logger, string HealthCheckName);
 
         // These are separate so they can have different log levels
-        private const string HealthCheckEndText = "Health check {HealthCheckName} with status {HealthStatus} completed after {ElapsedMilliseconds}ms with message '{HealthCheckDescription}'";
+        private const string HealthCheckEndText =
+            "Health check {HealthCheckName} with status {HealthStatus} completed after {ElapsedMilliseconds}ms with message '{HealthCheckDescription}'";
 
 #pragma warning disable SYSLIB1006
 #pragma warning disable SYSLIB1025
-        [LoggerMessage(EventIds.HealthCheckEndId, LogLevel.Debug, HealthCheckEndText, EventName = EventIds.HealthCheckEndName)]
-        private static partial void HealthCheckEndHealthy(ILogger logger, string HealthCheckName, HealthStatus HealthStatus, double ElapsedMilliseconds, string? HealthCheckDescription);
+        [LoggerMessage(
+            EventIds.HealthCheckEndId,
+            LogLevel.Debug,
+            HealthCheckEndText,
+            EventName = EventIds.HealthCheckEndName
+        )]
+        private static partial void HealthCheckEndHealthy(
+            ILogger logger,
+            string HealthCheckName,
+            HealthStatus HealthStatus,
+            double ElapsedMilliseconds,
+            string? HealthCheckDescription
+        );
 
-        [LoggerMessage(EventIds.HealthCheckEndId, LogLevel.Warning, HealthCheckEndText, EventName = EventIds.HealthCheckEndName)]
-        private static partial void HealthCheckEndDegraded(ILogger logger, string HealthCheckName, HealthStatus HealthStatus, double ElapsedMilliseconds, string? HealthCheckDescription, Exception? exception);
+        [LoggerMessage(
+            EventIds.HealthCheckEndId,
+            LogLevel.Warning,
+            HealthCheckEndText,
+            EventName = EventIds.HealthCheckEndName
+        )]
+        private static partial void HealthCheckEndDegraded(
+            ILogger logger,
+            string HealthCheckName,
+            HealthStatus HealthStatus,
+            double ElapsedMilliseconds,
+            string? HealthCheckDescription,
+            Exception? exception
+        );
 
-        [LoggerMessage(EventIds.HealthCheckEndId, LogLevel.Error, HealthCheckEndText, EventName = EventIds.HealthCheckEndName)]
-        private static partial void HealthCheckEndUnhealthy(ILogger logger, string HealthCheckName, HealthStatus HealthStatus, double ElapsedMilliseconds, string? HealthCheckDescription, Exception? exception);
+        [LoggerMessage(
+            EventIds.HealthCheckEndId,
+            LogLevel.Error,
+            HealthCheckEndText,
+            EventName = EventIds.HealthCheckEndName
+        )]
+        private static partial void HealthCheckEndUnhealthy(
+            ILogger logger,
+            string HealthCheckName,
+            HealthStatus HealthStatus,
+            double ElapsedMilliseconds,
+            string? HealthCheckDescription,
+            Exception? exception
+        );
 #pragma warning restore SYSLIB1025
 #pragma warning restore SYSLIB1006
 
-        public static void HealthCheckEnd(ILogger logger, HealthCheckRegistration registration, HealthReportEntry entry, TimeSpan duration)
+        public static void HealthCheckEnd(
+            ILogger logger,
+            HealthCheckRegistration registration,
+            HealthReportEntry entry,
+            TimeSpan duration
+        )
         {
             switch (entry.Status)
             {
                 case HealthStatus.Healthy:
-                    HealthCheckEndHealthy(logger, registration.Name, entry.Status, duration.TotalMilliseconds, entry.Description);
+                    HealthCheckEndHealthy(
+                        logger,
+                        registration.Name,
+                        entry.Status,
+                        duration.TotalMilliseconds,
+                        entry.Description
+                    );
                     break;
 
                 case HealthStatus.Degraded:
-                    HealthCheckEndDegraded(logger, registration.Name, entry.Status, duration.TotalMilliseconds, entry.Description, entry.Exception);
+                    HealthCheckEndDegraded(
+                        logger,
+                        registration.Name,
+                        entry.Status,
+                        duration.TotalMilliseconds,
+                        entry.Description,
+                        entry.Exception
+                    );
                     break;
 
                 case HealthStatus.Unhealthy:
-                    HealthCheckEndUnhealthy(logger, registration.Name, entry.Status, duration.TotalMilliseconds, entry.Description, entry.Exception);
+                    HealthCheckEndUnhealthy(
+                        logger,
+                        registration.Name,
+                        entry.Status,
+                        duration.TotalMilliseconds,
+                        entry.Description,
+                        entry.Exception
+                    );
                     break;
             }
         }
 
-        [LoggerMessage(EventIds.HealthCheckErrorId, LogLevel.Error, "Health check {HealthCheckName} threw an unhandled exception after {ElapsedMilliseconds}ms", EventName = EventIds.HealthCheckErrorName)]
-        private static partial void HealthCheckError(ILogger logger, string HealthCheckName, double ElapsedMilliseconds, Exception exception);
+        [LoggerMessage(
+            EventIds.HealthCheckErrorId,
+            LogLevel.Error,
+            "Health check {HealthCheckName} threw an unhandled exception after {ElapsedMilliseconds}ms",
+            EventName = EventIds.HealthCheckErrorName
+        )]
+        private static partial void HealthCheckError(
+            ILogger logger,
+            string HealthCheckName,
+            double ElapsedMilliseconds,
+            Exception exception
+        );
 
-        public static void HealthCheckError(ILogger logger, HealthCheckRegistration registration, Exception exception, TimeSpan duration) =>
-            HealthCheckError(logger, registration.Name, duration.TotalMilliseconds, exception);
+        public static void HealthCheckError(
+            ILogger logger,
+            HealthCheckRegistration registration,
+            Exception exception,
+            TimeSpan duration
+        ) => HealthCheckError(logger, registration.Name, duration.TotalMilliseconds, exception);
 
-        public static void HealthCheckData(ILogger logger, HealthCheckRegistration registration, HealthReportEntry entry)
+        public static void HealthCheckData(
+            ILogger logger,
+            HealthCheckRegistration registration,
+            HealthReportEntry entry
+        )
         {
             if (entry.Data.Count > 0 && logger.IsEnabled(LogLevel.Debug))
             {
@@ -263,7 +386,8 @@ internal sealed partial class DefaultHealthCheckService : HealthCheckService
                     EventIds.HealthCheckData,
                     new HealthCheckDataLogValue(registration.Name, entry.Data),
                     null,
-                    (state, ex) => state.ToString());
+                    (state, ex) => state.ToString()
+                );
             }
         }
     }

@@ -31,7 +31,10 @@ namespace Internal.Runtime.TypeLoader
             {
                 if (!_hashCode.HasValue)
                 {
-                    _hashCode = TypeHashingAlgorithms.ComputeGenericInstanceHashCode(_genericTypeDefinitionHandle.GetHashCode(), _genericTypeArgumentHandles);
+                    _hashCode = TypeHashingAlgorithms.ComputeGenericInstanceHashCode(
+                        _genericTypeDefinitionHandle.GetHashCode(),
+                        _genericTypeArgumentHandles
+                    );
                 }
                 return _hashCode.Value;
             }
@@ -55,20 +58,27 @@ namespace Internal.Runtime.TypeLoader
                     return false;
 
                 for (int i = 0; i < _genericTypeArgumentHandles.Length; i++)
-                    if (!other._genericTypeArgumentHandles[i].Equals(_genericTypeArgumentHandles[i]))
+                    if (
+                        !other._genericTypeArgumentHandles[i].Equals(_genericTypeArgumentHandles[i])
+                    )
                         return false;
 
                 return true;
             }
         }
 
-        internal class DynamicGenericTypesHashtable : LockFreeReaderHashtable<GenericTypeLookupData, GenericTypeEntry>
+        internal class DynamicGenericTypesHashtable
+            : LockFreeReaderHashtable<GenericTypeLookupData, GenericTypeEntry>
         {
             protected override int GetKeyHashCode(GenericTypeLookupData key)
             {
                 return key.LookupHashCode();
             }
-            protected override bool CompareKeyToValue(GenericTypeLookupData key, GenericTypeEntry value)
+
+            protected override bool CompareKeyToValue(
+                GenericTypeLookupData key,
+                GenericTypeEntry value
+            )
             {
                 return key.MatchGenericTypeEntry(value);
             }
@@ -78,7 +88,10 @@ namespace Internal.Runtime.TypeLoader
                 return value.GetHashCode();
             }
 
-            protected override bool CompareValueToValue(GenericTypeEntry value1, GenericTypeEntry value2)
+            protected override bool CompareValueToValue(
+                GenericTypeEntry value1,
+                GenericTypeEntry value2
+            )
             {
                 // Comparisons should *only* be done using the generic type components
                 return value1.IsEqualToEntryByComponentsComparison(value2);
@@ -105,7 +118,10 @@ namespace Internal.Runtime.TypeLoader
                 // _genericTypeArgumentHandles not initialized here to avoid allocation of new array (and it's not used if we initialize _typeToLookup).
             }
 
-            internal GenericTypeLookupData(RuntimeTypeHandle genericTypeDefinitionHandle, RuntimeTypeHandle[] genericTypeArgumentHandles)
+            internal GenericTypeLookupData(
+                RuntimeTypeHandle genericTypeDefinitionHandle,
+                RuntimeTypeHandle[] genericTypeArgumentHandles
+            )
             {
                 Debug.Assert(genericTypeArgumentHandles != null);
                 _typeToLookup = null;
@@ -115,21 +131,39 @@ namespace Internal.Runtime.TypeLoader
 
             internal int LookupHashCode()
             {
-                return _typeToLookup != null ? _typeToLookup.GetHashCode() : TypeHashingAlgorithms.ComputeGenericInstanceHashCode(_genericTypeDefinitionHandle.GetHashCode(), _genericTypeArgumentHandles);
+                return _typeToLookup != null
+                    ? _typeToLookup.GetHashCode()
+                    : TypeHashingAlgorithms.ComputeGenericInstanceHashCode(
+                        _genericTypeDefinitionHandle.GetHashCode(),
+                        _genericTypeArgumentHandles
+                    );
             }
 
             internal bool MatchParsedEntry(RuntimeTypeHandle tentativeType)
             {
-                RuntimeTypeHandle parsedTypeDefinitionHandle = RuntimeAugments.GetGenericDefinition(tentativeType);
+                RuntimeTypeHandle parsedTypeDefinitionHandle = RuntimeAugments.GetGenericDefinition(
+                    tentativeType
+                );
                 if (!parsedTypeDefinitionHandle.Equals(_genericTypeDefinitionHandle))
                     return false;
 
-                int lookupArity = (_typeToLookup != null ? _typeToLookup.Instantiation.Length : _genericTypeArgumentHandles.Length);
+                int lookupArity = (
+                    _typeToLookup != null
+                        ? _typeToLookup.Instantiation.Length
+                        : _genericTypeArgumentHandles.Length
+                );
 
                 for (int i = 0; i < lookupArity; i++)
                 {
-                    RuntimeTypeHandle parsedArg = RuntimeAugments.GetGenericArgument(tentativeType, i);
-                    RuntimeTypeHandle lookupArg = (_typeToLookup != null ? _typeToLookup.Instantiation[i].RuntimeTypeHandle : _genericTypeArgumentHandles[i]);
+                    RuntimeTypeHandle parsedArg = RuntimeAugments.GetGenericArgument(
+                        tentativeType,
+                        i
+                    );
+                    RuntimeTypeHandle lookupArg = (
+                        _typeToLookup != null
+                            ? _typeToLookup.Instantiation[i].RuntimeTypeHandle
+                            : _genericTypeArgumentHandles[i]
+                    );
                     if (!parsedArg.Equals(lookupArg))
                         return false;
                 }
@@ -153,16 +187,27 @@ namespace Internal.Runtime.TypeLoader
                         return false;
 
                     for (int i = 0; i < expectedArity; i++)
-                        if (!entry._genericTypeArgumentHandles[i].Equals(_typeToLookup.Instantiation[i].RuntimeTypeHandle))
+                        if (
+                            !entry
+                                ._genericTypeArgumentHandles[i]
+                                .Equals(_typeToLookup.Instantiation[i].RuntimeTypeHandle)
+                        )
                             return false;
                 }
                 else
                 {
-                    if (entry._genericTypeArgumentHandles.Length != _genericTypeArgumentHandles.Length)
+                    if (
+                        entry._genericTypeArgumentHandles.Length
+                        != _genericTypeArgumentHandles.Length
+                    )
                         return false;
 
                     for (int i = 0; i < _genericTypeArgumentHandles.Length; i++)
-                        if (!entry._genericTypeArgumentHandles[i].Equals(_genericTypeArgumentHandles[i]))
+                        if (
+                            !entry
+                                ._genericTypeArgumentHandles[i]
+                                .Equals(_genericTypeArgumentHandles[i])
+                        )
                             return false;
                 }
 
@@ -193,15 +238,19 @@ namespace Internal.Runtime.TypeLoader
             }
         }
 
-        private DynamicGenericTypesHashtable _dynamicGenericTypes = new DynamicGenericTypesHashtable();
-        private LowLevelDictionary<LazyDictionaryContext, IntPtr> _lazyGenericDictionaries = new LowLevelDictionary<LazyDictionaryContext, IntPtr>();
-
+        private DynamicGenericTypesHashtable _dynamicGenericTypes =
+            new DynamicGenericTypesHashtable();
+        private LowLevelDictionary<LazyDictionaryContext, IntPtr> _lazyGenericDictionaries =
+            new LowLevelDictionary<LazyDictionaryContext, IntPtr>();
 
         //
         // Return a generic type instantiation using the runtime type system. If the underlying runtime type system does not support
         // this operation, return false.
         //
-        internal bool TryLookupConstructedGenericTypeForComponents(GenericTypeLookupData lookupData, out RuntimeTypeHandle runtimeTypeHandle)
+        internal bool TryLookupConstructedGenericTypeForComponents(
+            GenericTypeLookupData lookupData,
+            out RuntimeTypeHandle runtimeTypeHandle
+        )
         {
             if (!TryGetStaticGenericTypeForComponents(lookupData, out runtimeTypeHandle))
                 if (!TryGetDynamicGenericTypeForComponents(lookupData, out runtimeTypeHandle))
@@ -210,19 +259,36 @@ namespace Internal.Runtime.TypeLoader
             return true;
         }
 
-        public bool TryLookupConstructedGenericTypeForComponents(RuntimeTypeHandle genericTypeDefinitionHandle, RuntimeTypeHandle[] genericTypeArgumentHandles, out RuntimeTypeHandle runtimeTypeHandle)
+        public bool TryLookupConstructedGenericTypeForComponents(
+            RuntimeTypeHandle genericTypeDefinitionHandle,
+            RuntimeTypeHandle[] genericTypeArgumentHandles,
+            out RuntimeTypeHandle runtimeTypeHandle
+        )
         {
-            return TryLookupConstructedGenericTypeForComponents(new GenericTypeLookupData(genericTypeDefinitionHandle, genericTypeArgumentHandles), out runtimeTypeHandle);
+            return TryLookupConstructedGenericTypeForComponents(
+                new GenericTypeLookupData(genericTypeDefinitionHandle, genericTypeArgumentHandles),
+                out runtimeTypeHandle
+            );
         }
 
-        public bool TryLookupConstructedLazyDictionaryForContext(IntPtr context, IntPtr signature, out IntPtr dictionary)
+        public bool TryLookupConstructedLazyDictionaryForContext(
+            IntPtr context,
+            IntPtr signature,
+            out IntPtr dictionary
+        )
         {
             Debug.Assert(_typeLoaderLock.IsAcquired);
-            return _lazyGenericDictionaries.TryGetValue(new LazyDictionaryContext { _context = context, _signature = signature }, out dictionary);
+            return _lazyGenericDictionaries.TryGetValue(
+                new LazyDictionaryContext { _context = context, _signature = signature },
+                out dictionary
+            );
         }
 
         #region Privates
-        private unsafe bool TryGetDynamicGenericTypeForComponents(GenericTypeLookupData lookupData, out RuntimeTypeHandle runtimeTypeHandle)
+        private unsafe bool TryGetDynamicGenericTypeForComponents(
+            GenericTypeLookupData lookupData,
+            out RuntimeTypeHandle runtimeTypeHandle
+        )
         {
             runtimeTypeHandle = default(RuntimeTypeHandle);
 
@@ -240,7 +306,10 @@ namespace Internal.Runtime.TypeLoader
             }
         }
 
-        internal static unsafe bool TryGetStaticGenericTypeForComponents(GenericTypeLookupData lookupData, out RuntimeTypeHandle runtimeTypeHandle)
+        internal static unsafe bool TryGetStaticGenericTypeForComponents(
+            GenericTypeLookupData lookupData,
+            out RuntimeTypeHandle runtimeTypeHandle
+        )
         {
             // Search the hashtable for a generic instantiation match
             // TODO multi-file: consider whether we can limit the search somehow,
@@ -253,7 +322,14 @@ namespace Internal.Runtime.TypeLoader
 
             foreach (NativeFormatModuleInfo module in ModuleList.EnumerateModules())
             {
-                if (!GetHashtableFromBlob(module, ReflectionMapBlob.GenericsHashtable, out genericsHashtable, out externalReferencesLookup))
+                if (
+                    !GetHashtableFromBlob(
+                        module,
+                        ReflectionMapBlob.GenericsHashtable,
+                        out genericsHashtable,
+                        out externalReferencesLookup
+                    )
+                )
                     continue;
 
                 int lookupHashcode = lookupData.LookupHashCode();
@@ -262,7 +338,10 @@ namespace Internal.Runtime.TypeLoader
                 NativeParser entryParser;
                 while (!(entryParser = enumerator.GetNext()).IsNull)
                 {
-                    RuntimeTypeHandle tentativeType = externalReferencesLookup.GetRuntimeTypeHandleFromIndex(entryParser.GetUnsigned());
+                    RuntimeTypeHandle tentativeType =
+                        externalReferencesLookup.GetRuntimeTypeHandleFromIndex(
+                            entryParser.GetUnsigned()
+                        );
 
                     if (!lookupData.MatchParsedEntry(tentativeType))
                         continue;

@@ -13,10 +13,10 @@ namespace System.ServiceModel.MsmqIntegration
     {
         internal static bool IsDefined(MsmqIntegrationSecurityMode value)
         {
-            return (value == MsmqIntegrationSecurityMode.Transport 
-                || value == MsmqIntegrationSecurityMode.None);
+            return (
+                value == MsmqIntegrationSecurityMode.Transport
+                || value == MsmqIntegrationSecurityMode.None
+            );
         }
     }
 }
-
-

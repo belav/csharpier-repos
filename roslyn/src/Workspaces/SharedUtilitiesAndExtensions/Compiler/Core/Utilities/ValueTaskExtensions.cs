@@ -16,7 +16,10 @@ namespace Roslyn.Utilities
         /// calling it from a synchronous method where you know it should have completed synchronously. This is an easy
         /// way to assert that while silencing any compiler complaints.
         /// </remarks>
-        public static T VerifyCompleted<T>(this ValueTask<T> task, string message = "ValueTask should have already been completed")
+        public static T VerifyCompleted<T>(
+            this ValueTask<T> task,
+            string message = "ValueTask should have already been completed"
+        )
         {
             Contract.ThrowIfFalse(task.IsCompleted, message);
 

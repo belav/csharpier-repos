@@ -6,13 +6,13 @@
 // <owner current="true" primary="false">laled</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
+namespace System.Data
+{
+    public enum ParameterDirection
+    {
+        Input = 1,
 
-    public enum ParameterDirection {
-
-        Input       = 1,
-
-        Output      = 2,
+        Output = 2,
 
         InputOutput = 3,
 

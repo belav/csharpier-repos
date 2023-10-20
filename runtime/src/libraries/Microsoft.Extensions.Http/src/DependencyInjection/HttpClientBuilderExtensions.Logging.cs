@@ -43,28 +43,43 @@ namespace Microsoft.Extensions.DependencyInjection
         /// not called before calling <see cref="AddLogger"/>, then new logger would be added in addition to the default ones.
         /// </para>
         /// </remarks>
-        public static IHttpClientBuilder AddLogger(this IHttpClientBuilder builder, Func<IServiceProvider, IHttpClientLogger> httpClientLoggerFactory, bool wrapHandlersPipeline = false)
+        public static IHttpClientBuilder AddLogger(
+            this IHttpClientBuilder builder,
+            Func<IServiceProvider, IHttpClientLogger> httpClientLoggerFactory,
+            bool wrapHandlersPipeline = false
+        )
         {
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(httpClientLoggerFactory);
 
-            builder.Services.Configure<HttpClientFactoryOptions>(builder.Name, options =>
-            {
-                options.LoggingBuilderActions.Add(b =>
-                {
-                    IHttpClientLogger httpClientLogger = httpClientLoggerFactory(b.Services);
-                    HttpClientLoggerHandler handler = new HttpClientLoggerHandler(httpClientLogger);
+            builder
+                .Services
+                .Configure<HttpClientFactoryOptions>(
+                    builder.Name,
+                    options =>
+                    {
+                        options
+                            .LoggingBuilderActions
+                            .Add(b =>
+                            {
+                                IHttpClientLogger httpClientLogger = httpClientLoggerFactory(
+                                    b.Services
+                                );
+                                HttpClientLoggerHandler handler = new HttpClientLoggerHandler(
+                                    httpClientLogger
+                                );
 
-                    if (wrapHandlersPipeline)
-                    {
-                        b.AdditionalHandlers.Insert(0, handler);
+                                if (wrapHandlersPipeline)
+                                {
+                                    b.AdditionalHandlers.Insert(0, handler);
+                                }
+                                else
+                                {
+                                    b.AdditionalHandlers.Add(handler);
+                                }
+                            });
                     }
-                    else
-                    {
-                        b.AdditionalHandlers.Add(handler);
-                    }
-                });
-            });
+                );
 
             return builder;
         }
@@ -105,12 +120,19 @@ namespace Microsoft.Extensions.DependencyInjection
         /// not called before calling <see cref="AddLogger{TLogger}"/>, then new logger would be added in addition to the default ones.
         /// </para>
         /// </remarks>
-        public static IHttpClientBuilder AddLogger<TLogger>(this IHttpClientBuilder builder, bool wrapHandlersPipeline = false)
+        public static IHttpClientBuilder AddLogger<TLogger>(
+            this IHttpClientBuilder builder,
+            bool wrapHandlersPipeline = false
+        )
             where TLogger : IHttpClientLogger
         {
             ThrowHelper.ThrowIfNull(builder);
 
-            return AddLogger(builder, services => services.GetRequiredService<TLogger>(), wrapHandlersPipeline);
+            return AddLogger(
+                builder,
+                services => services.GetRequiredService<TLogger>(),
+                wrapHandlersPipeline
+            );
         }
 
         /// <summary>
@@ -122,11 +144,16 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             ThrowHelper.ThrowIfNull(builder);
 
-            builder.Services.Configure<HttpClientFactoryOptions>(builder.Name, options =>
-            {
-                options.LoggingBuilderActions.Clear();
-                options.SuppressDefaultLogging = true;
-            });
+            builder
+                .Services
+                .Configure<HttpClientFactoryOptions>(
+                    builder.Name,
+                    options =>
+                    {
+                        options.LoggingBuilderActions.Clear();
+                        options.SuppressDefaultLogging = true;
+                    }
+                );
 
             return builder;
         }
@@ -140,7 +167,12 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             ThrowHelper.ThrowIfNull(builder);
 
-            builder.Services.Configure<HttpClientFactoryOptions>(builder.Name, options => options.SuppressDefaultLogging = false);
+            builder
+                .Services
+                .Configure<HttpClientFactoryOptions>(
+                    builder.Name,
+                    options => options.SuppressDefaultLogging = false
+                );
             return builder;
         }
     }

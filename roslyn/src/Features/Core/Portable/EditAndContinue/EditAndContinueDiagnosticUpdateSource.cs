@@ -33,14 +33,17 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public EditAndContinueDiagnosticUpdateSource(IDiagnosticUpdateSourceRegistrationService registrationService)
-            => registrationService.Register(this);
+        public EditAndContinueDiagnosticUpdateSource(
+            IDiagnosticUpdateSourceRegistrationService registrationService
+        ) => registrationService.Register(this);
 
         // for testing
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0034:Exported parts should have [ImportingConstructor]", Justification = "Used incorrectly by tests")]
-        internal EditAndContinueDiagnosticUpdateSource()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0034:Exported parts should have [ImportingConstructor]",
+            Justification = "Used incorrectly by tests"
+        )]
+        internal EditAndContinueDiagnosticUpdateSource() { }
 
         public event EventHandler<DiagnosticsUpdatedArgs>? DiagnosticsUpdated;
         public event EventHandler? DiagnosticsCleared;
@@ -50,8 +53,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// </summary>
         public bool SupportGetDiagnostics => false;
 
-        public ValueTask<ImmutableArray<DiagnosticData>> GetDiagnosticsAsync(Workspace workspace, ProjectId projectId, DocumentId documentId, object id, bool includeSuppressedDiagnostics = false, CancellationToken cancellationToken = default)
-            => new(ImmutableArray<DiagnosticData>.Empty);
+        public ValueTask<ImmutableArray<DiagnosticData>> GetDiagnosticsAsync(
+            Workspace workspace,
+            ProjectId projectId,
+            DocumentId documentId,
+            object id,
+            bool includeSuppressedDiagnostics = false,
+            CancellationToken cancellationToken = default
+        ) => new(ImmutableArray<DiagnosticData>.Empty);
 
         /// <summary>
         /// Clears all diagnostics reported thru this source.
@@ -75,9 +84,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         }
 
         /// <summary>
-        /// Reports given set of project or solution level diagnostics. 
+        /// Reports given set of project or solution level diagnostics.
         /// </summary>
-        public void ReportDiagnostics(Workspace workspace, Solution solution, ImmutableArray<DiagnosticData> diagnostics, ImmutableArray<(DocumentId, ImmutableArray<RudeEditDiagnostic> Diagnostics)> rudeEdits)
+        public void ReportDiagnostics(
+            Workspace workspace,
+            Solution solution,
+            ImmutableArray<DiagnosticData> diagnostics,
+            ImmutableArray<(DocumentId, ImmutableArray<RudeEditDiagnostic> Diagnostics)> rudeEdits
+        )
         {
             RoslynDebug.Assert(solution != null);
 
@@ -99,38 +113,58 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
 
             var documentDiagnostics = diagnostics.WhereAsArray(d => d.DocumentId != null);
-            var projectDiagnostics = diagnostics.WhereAsArray(d => d.DocumentId == null && d.ProjectId != null);
-            var solutionDiagnostics = diagnostics.WhereAsArray(d => d.DocumentId == null && d.ProjectId == null);
+            var projectDiagnostics = diagnostics.WhereAsArray(
+                d => d.DocumentId == null && d.ProjectId != null
+            );
+            var solutionDiagnostics = diagnostics.WhereAsArray(
+                d => d.DocumentId == null && d.ProjectId == null
+            );
 
             if (documentDiagnostics.Length > 0)
             {
-                foreach (var (documentId, diagnosticData) in documentDiagnostics.GroupBy(static data => data.DocumentId!))
+                foreach (
+                    var (documentId, diagnosticData) in documentDiagnostics.GroupBy(
+                        static data => data.DocumentId!
+                    )
+                )
                 {
                     var diagnosticGroupId = (this, documentId);
 
-                    updateEvent(this, DiagnosticsUpdatedArgs.DiagnosticsCreated(
-                        diagnosticGroupId,
-                        workspace,
-                        solution,
-                        documentId.ProjectId,
-                        documentId: documentId,
-                        diagnostics: diagnosticData.ToImmutableArray()));
+                    updateEvent(
+                        this,
+                        DiagnosticsUpdatedArgs.DiagnosticsCreated(
+                            diagnosticGroupId,
+                            workspace,
+                            solution,
+                            documentId.ProjectId,
+                            documentId: documentId,
+                            diagnostics: diagnosticData.ToImmutableArray()
+                        )
+                    );
                 }
             }
 
             if (projectDiagnostics.Length > 0)
             {
-                foreach (var (projectId, diagnosticData) in projectDiagnostics.GroupBy(static data => data.ProjectId!))
+                foreach (
+                    var (projectId, diagnosticData) in projectDiagnostics.GroupBy(
+                        static data => data.ProjectId!
+                    )
+                )
                 {
                     var diagnosticGroupId = (this, projectId);
 
-                    updateEvent(this, DiagnosticsUpdatedArgs.DiagnosticsCreated(
-                        diagnosticGroupId,
-                        workspace,
-                        solution,
-                        projectId,
-                        documentId: null,
-                        diagnostics: diagnosticData.ToImmutableArray()));
+                    updateEvent(
+                        this,
+                        DiagnosticsUpdatedArgs.DiagnosticsCreated(
+                            diagnosticGroupId,
+                            workspace,
+                            solution,
+                            projectId,
+                            documentId: null,
+                            diagnostics: diagnosticData.ToImmutableArray()
+                        )
+                    );
                 }
             }
 
@@ -138,13 +172,17 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             {
                 var diagnosticGroupId = this;
 
-                updateEvent(this, DiagnosticsUpdatedArgs.DiagnosticsCreated(
-                    diagnosticGroupId,
-                    workspace,
-                    solution,
-                    projectId: null,
-                    documentId: null,
-                    diagnostics: solutionDiagnostics));
+                updateEvent(
+                    this,
+                    DiagnosticsUpdatedArgs.DiagnosticsCreated(
+                        diagnosticGroupId,
+                        workspace,
+                        solution,
+                        projectId: null,
+                        documentId: null,
+                        diagnostics: solutionDiagnostics
+                    )
+                );
             }
         }
     }

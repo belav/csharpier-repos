@@ -96,7 +96,10 @@ public class PooledStreamStackTests
 
     private static Http2Stream<HttpContext> CreateStream(int streamId, long expirationTimestamp)
     {
-        var context = TestContextFactory.CreateHttp2StreamContext(connectionId: "TestConnectionId", streamId: streamId);
+        var context = TestContextFactory.CreateHttp2StreamContext(
+            connectionId: "TestConnectionId",
+            streamId: streamId
+        );
 
         return new Http2Stream<HttpContext>(new DummyApplication(), context)
         {

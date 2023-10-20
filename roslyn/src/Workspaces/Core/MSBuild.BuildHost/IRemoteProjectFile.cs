@@ -23,6 +23,10 @@ namespace Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost;
 #endif
 internal interface IRemoteProjectFile : IDisposable
 {
-    Task<ImmutableArray<ProjectFileInfo>> GetProjectFileInfosAsync(CancellationToken cancellationToken);
-    Task<ImmutableArray<DiagnosticLogItem>> GetDiagnosticLogItemsAsync(CancellationToken cancellationToken);
+    Task<ImmutableArray<ProjectFileInfo>> GetProjectFileInfosAsync(
+        CancellationToken cancellationToken
+    );
+    Task<ImmutableArray<DiagnosticLogItem>> GetDiagnosticLogItemsAsync(
+        CancellationToken cancellationToken
+    );
 }

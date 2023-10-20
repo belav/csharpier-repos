@@ -15,11 +15,16 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
     [Export(typeof(IVSTypeScriptDiagnosticAnalyzerService))]
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    internal sealed class VSTypeScriptAnalyzerService(IDiagnosticAnalyzerService service) : IVSTypeScriptDiagnosticAnalyzerService
+    internal sealed class VSTypeScriptAnalyzerService(IDiagnosticAnalyzerService service)
+        : IVSTypeScriptDiagnosticAnalyzerService
     {
         private readonly IDiagnosticAnalyzerService _service = service;
 
-        public void Reanalyze(Workspace workspace, IEnumerable<ProjectId>? projectIds = null, IEnumerable<DocumentId>? documentIds = null, bool highPriority = false)
-            => _service.Reanalyze(workspace, projectIds, documentIds, highPriority);
+        public void Reanalyze(
+            Workspace workspace,
+            IEnumerable<ProjectId>? projectIds = null,
+            IEnumerable<DocumentId>? documentIds = null,
+            bool highPriority = false
+        ) => _service.Reanalyze(workspace, projectIds, documentIds, highPriority);
     }
 }

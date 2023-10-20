@@ -98,18 +98,18 @@ namespace System.Text.Json.Serialization.Tests
         public double Two { get; set; }
     }
 
-    public struct SimpleStructWithSimpleClass: ITestClass
+    public struct SimpleStructWithSimpleClass : ITestClass
     {
         public short MyInt32 { get; set; }
         public SimpleTestClass MySimpleClass { get; set; }
         public int[] MyInt32Array { get; set; }
 
         public static readonly string s_json =
-            @"{" +
-                @"""MySimpleClass"" : {""MyString"" : ""Hello"", ""MyDouble"" : 3.14}," +
-                @"""MyInt32"" : 32," +
-                @"""MyInt32Array"" : [32]" +
-            @"}";
+            @"{"
+            + @"""MySimpleClass"" : {""MyString"" : ""Hello"", ""MyDouble"" : 3.14},"
+            + @"""MyInt32"" : 32,"
+            + @"""MyInt32Array"" : [32]"
+            + @"}";
 
         public void Initialize()
         {
@@ -130,10 +130,7 @@ namespace System.Text.Json.Serialization.Tests
     public class TestClassWithNull
     {
         public string MyString { get; set; }
-        public static readonly string s_json =
-                @"{" +
-                @"""MyString"" : null" +
-                @"}";
+        public static readonly string s_json = @"{" + @"""MyString"" : null" + @"}";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
@@ -152,49 +149,56 @@ namespace System.Text.Json.Serialization.Tests
         public List<int> MyIntList { get; set; } = new List<int> { 1 };
         public List<int?> MyNullableIntList { get; set; } = new List<int?> { 1 };
         public List<object> MyObjectList { get; set; } = new List<object> { 1 };
-        public List<List<object>> MyListList { get; set; } = new List<List<object>> { new List<object> { 1 } };
-        public List<Dictionary<string, string>> MyDictionaryList { get; set; } = new List<Dictionary<string, string>> {
-            new Dictionary<string, string> { ["key"] = "value" }
-        };
-        public Dictionary<string, string> MyStringDictionary { get; set; } = new Dictionary<string, string> { ["key"] = "value" };
-        public Dictionary<string, DateTime?> MyNullableDateTimeDictionary { get; set; } = new Dictionary<string, DateTime?> { ["key"] = new DateTime(1995, 04, 16) };
-        public Dictionary<string, object> MyObjectDictionary { get; set; } = new Dictionary<string, object> { ["key"] = "value" };
-        public Dictionary<string, Dictionary<string, string>> MyStringDictionaryDictionary { get; set; } = new Dictionary<string, Dictionary<string, string>>
-        {
-            ["key"] = new Dictionary<string, string>
+        public List<List<object>> MyListList { get; set; } =
+            new List<List<object>> { new List<object> { 1 } };
+        public List<Dictionary<string, string>> MyDictionaryList { get; set; } =
+            new List<Dictionary<string, string>>
             {
-                ["key"] = "value"
-            }
-        };
-        public Dictionary<string, List<object>> MyListDictionary { get; set; } = new Dictionary<string, List<object>> {
-            ["key"] = new List<object> { "value" }
-        };
-        public Dictionary<string, Dictionary<string, object>> MyObjectDictionaryDictionary { get; set; } = new Dictionary<string, Dictionary<string, object>>
-        {
-            ["key"] = new Dictionary<string, object>
+                new Dictionary<string, string> { ["key"] = "value" }
+            };
+        public Dictionary<string, string> MyStringDictionary { get; set; } =
+            new Dictionary<string, string> { ["key"] = "value" };
+        public Dictionary<string, DateTime?> MyNullableDateTimeDictionary { get; set; } =
+            new Dictionary<string, DateTime?> { ["key"] = new DateTime(1995, 04, 16) };
+        public Dictionary<string, object> MyObjectDictionary { get; set; } =
+            new Dictionary<string, object> { ["key"] = "value" };
+        public Dictionary<
+            string,
+            Dictionary<string, string>
+        > MyStringDictionaryDictionary { get; set; } =
+            new Dictionary<string, Dictionary<string, string>>
             {
-                ["key"] = "value"
-            }
-        };
+                ["key"] = new Dictionary<string, string> { ["key"] = "value" }
+            };
+        public Dictionary<string, List<object>> MyListDictionary { get; set; } =
+            new Dictionary<string, List<object>> { ["key"] = new List<object> { "value" } };
+        public Dictionary<
+            string,
+            Dictionary<string, object>
+        > MyObjectDictionaryDictionary { get; set; } =
+            new Dictionary<string, Dictionary<string, object>>
+            {
+                ["key"] = new Dictionary<string, object> { ["key"] = "value" }
+            };
 
         public static readonly string s_null_json =
-                @"{" +
-                    @"""MyString"" : null," +
-                    @"""MyInt"" : null," +
-                    @"""MyDateTime"" : null," +
-                    @"""MyIntArray"" : null," +
-                    @"""MyIntList"" : null," +
-                    @"""MyNullableIntList"" : null," +
-                    @"""MyObjectList"" : [null]," +
-                    @"""MyListList"" : [[null]]," +
-                    @"""MyDictionaryList"" : [{""key"" : null}]," +
-                    @"""MyStringDictionary"" : {""key"" : null}," +
-                    @"""MyNullableDateTimeDictionary"" : {""key"" : null}," +
-                    @"""MyObjectDictionary"" : {""key"" : null}," +
-                    @"""MyStringDictionaryDictionary"" : {""key"" : {""key"" : null}}," +
-                    @"""MyListDictionary"" : {""key"" : [null]}," +
-                    @"""MyObjectDictionaryDictionary"" : {""key"" : {""key"" : null}}" +
-                @"}";
+            @"{"
+            + @"""MyString"" : null,"
+            + @"""MyInt"" : null,"
+            + @"""MyDateTime"" : null,"
+            + @"""MyIntArray"" : null,"
+            + @"""MyIntList"" : null,"
+            + @"""MyNullableIntList"" : null,"
+            + @"""MyObjectList"" : [null],"
+            + @"""MyListList"" : [[null]],"
+            + @"""MyDictionaryList"" : [{""key"" : null}],"
+            + @"""MyStringDictionary"" : {""key"" : null},"
+            + @"""MyNullableDateTimeDictionary"" : {""key"" : null},"
+            + @"""MyObjectDictionary"" : {""key"" : null},"
+            + @"""MyStringDictionaryDictionary"" : {""key"" : {""key"" : null}},"
+            + @"""MyListDictionary"" : {""key"" : [null]},"
+            + @"""MyObjectDictionaryDictionary"" : {""key"" : {""key"" : null}}"
+            + @"}";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_null_json);
     }
@@ -204,9 +208,7 @@ namespace System.Text.Json.Serialization.Tests
         public SimpleTestClass MyData { get; set; }
 
         public static readonly string s_json =
-            @"{" +
-                @"""MyData"":" + SimpleTestClass.s_json +
-            @"}";
+            @"{" + @"""MyData"":" + SimpleTestClass.s_json + @"}";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
@@ -227,10 +229,9 @@ namespace System.Text.Json.Serialization.Tests
     {
         public TestClassWithNestedObjectInner MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" +
-                @"""MyData"":" + TestClassWithNestedObjectInner.s_json +
-            @"}");
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(@"{" + @"""MyData"":" + TestClassWithNestedObjectInner.s_json + @"}");
 
         public void Initialize()
         {
@@ -249,14 +250,18 @@ namespace System.Text.Json.Serialization.Tests
     {
         public List<SimpleTestClass> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" +
-                @"""MyData"":[" +
-                    SimpleTestClass.s_json + "," +
-                    "null," +
-                    SimpleTestClass.s_json +
-                @"]" +
-            @"}");
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                @"{"
+                    + @"""MyData"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + "null,"
+                    + SimpleTestClass.s_json
+                    + @"]"
+                    + @"}"
+            );
 
         public void Initialize()
         {
@@ -290,13 +295,17 @@ namespace System.Text.Json.Serialization.Tests
     {
         public SimpleTestClass[] MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" +
-                @"""MyData"":[" +
-                    SimpleTestClass.s_json + "," +
-                    SimpleTestClass.s_json +
-                @"]" +
-            @"}");
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                @"{"
+                    + @"""MyData"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"]"
+                    + @"}"
+            );
 
         public void Initialize()
         {
@@ -321,13 +330,17 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IEnumerable<SimpleTestClass> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" +
-                @"""MyData"":[" +
-                    SimpleTestClass.s_json + "," +
-                    SimpleTestClass.s_json +
-                @"]" +
-            @"}");
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                @"{"
+                    + @"""MyData"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"]"
+                    + @"}"
+            );
 
         public void Initialize()
         {
@@ -358,13 +371,17 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IList<SimpleTestClass> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" +
-                @"""MyData"":[" +
-                    SimpleTestClass.s_json + "," +
-                    SimpleTestClass.s_json +
-                @"]" +
-            @"}");
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                @"{"
+                    + @"""MyData"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"]"
+                    + @"}"
+            );
 
         public void Initialize()
         {
@@ -395,13 +412,17 @@ namespace System.Text.Json.Serialization.Tests
     {
         public ICollection<SimpleTestClass> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" +
-                @"""MyData"":[" +
-                    SimpleTestClass.s_json + "," +
-                    SimpleTestClass.s_json +
-                @"]" +
-            @"}");
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                @"{"
+                    + @"""MyData"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"]"
+                    + @"}"
+            );
 
         public void Initialize()
         {
@@ -435,13 +456,17 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IEnumerable MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" +
-                @"""MyData"":[" +
-                    SimpleTestClass.s_json + "," +
-                    SimpleTestClass.s_json +
-                @"]" +
-            @"}");
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                @"{"
+                    + @"""MyData"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"]"
+                    + @"}"
+            );
 
         public void Initialize()
         {
@@ -462,7 +487,18 @@ namespace System.Text.Json.Serialization.Tests
                 if (data is JsonElement element)
                 {
 #if BUILDING_SOURCE_GENERATOR_TESTS
-                    SimpleTestClass obj = JsonSerializer.Deserialize(element, System.Text.Json.SourceGeneration.Tests.CollectionTests_Default.CollectionTestsContext_Default.Default.SimpleTestClass);
+                    SimpleTestClass obj = JsonSerializer.Deserialize(
+                        element,
+                        System
+                            .Text
+                            .Json
+                            .SourceGeneration
+                            .Tests
+                            .CollectionTests_Default
+                            .CollectionTestsContext_Default
+                            .Default
+                            .SimpleTestClass
+                    );
 #else
                     SimpleTestClass obj = JsonSerializer.Deserialize<SimpleTestClass>(element);
 #endif
@@ -482,13 +518,17 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IList MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" +
-                @"""MyData"":[" +
-                    SimpleTestClass.s_json + "," +
-                    SimpleTestClass.s_json +
-                @"]" +
-            @"}");
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                @"{"
+                    + @"""MyData"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"]"
+                    + @"}"
+            );
 
         public void Initialize()
         {
@@ -515,7 +555,18 @@ namespace System.Text.Json.Serialization.Tests
                 if (data is JsonElement element)
                 {
 #if BUILDING_SOURCE_GENERATOR_TESTS
-                    SimpleTestClass obj = JsonSerializer.Deserialize(element, System.Text.Json.SourceGeneration.Tests.CollectionTests_Default.CollectionTestsContext_Default.Default.SimpleTestClass);
+                    SimpleTestClass obj = JsonSerializer.Deserialize(
+                        element,
+                        System
+                            .Text
+                            .Json
+                            .SourceGeneration
+                            .Tests
+                            .CollectionTests_Default
+                            .CollectionTestsContext_Default
+                            .Default
+                            .SimpleTestClass
+                    );
 #else
                     SimpleTestClass obj = JsonSerializer.Deserialize<SimpleTestClass>(element);
 #endif
@@ -535,13 +586,17 @@ namespace System.Text.Json.Serialization.Tests
     {
         public ICollection MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" +
-                @"""MyData"":[" +
-                    SimpleTestClass.s_json + "," +
-                    SimpleTestClass.s_json +
-                @"]" +
-            @"}");
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                @"{"
+                    + @"""MyData"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"]"
+                    + @"}"
+            );
 
         public void Initialize()
         {
@@ -570,7 +625,18 @@ namespace System.Text.Json.Serialization.Tests
                 if (data is JsonElement element)
                 {
 #if BUILDING_SOURCE_GENERATOR_TESTS
-                    SimpleTestClass obj = JsonSerializer.Deserialize(element, System.Text.Json.SourceGeneration.Tests.CollectionTests_Default.CollectionTestsContext_Default.Default.SimpleTestClass);
+                    SimpleTestClass obj = JsonSerializer.Deserialize(
+                        element,
+                        System
+                            .Text
+                            .Json
+                            .SourceGeneration
+                            .Tests
+                            .CollectionTests_Default
+                            .CollectionTestsContext_Default
+                            .Default
+                            .SimpleTestClass
+                    );
 #else
                     SimpleTestClass obj = JsonSerializer.Deserialize<SimpleTestClass>(element);
 #endif
@@ -590,13 +656,17 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IReadOnlyCollection<SimpleTestClass> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" +
-                @"""MyData"":[" +
-                    SimpleTestClass.s_json + "," +
-                    SimpleTestClass.s_json +
-                @"]" +
-            @"}");
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                @"{"
+                    + @"""MyData"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"]"
+                    + @"}"
+            );
 
         public void Initialize()
         {
@@ -624,13 +694,17 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IReadOnlyList<SimpleTestClass> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" +
-                @"""MyData"":[" +
-                    SimpleTestClass.s_json + "," +
-                    SimpleTestClass.s_json +
-                @"]" +
-            @"}");
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                @"{"
+                    + @"""MyData"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"]"
+                    + @"}"
+            );
 
         public void Initialize()
         {
@@ -655,13 +729,17 @@ namespace System.Text.Json.Serialization.Tests
     {
         public ISet<SimpleTestClass> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" +
-                @"""MyData"":[" +
-                    SimpleTestClass.s_json + "," +
-                    SimpleTestClass.s_json +
-                @"]" +
-            @"}");
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                @"{"
+                    + @"""MyData"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"]"
+                    + @"}"
+            );
 
         public void Initialize()
         {
@@ -700,6 +778,7 @@ namespace System.Text.Json.Serialization.Tests
         public int MyInt { get; set; }
         public Dictionary<string, string> MyDictionary { get; set; }
     }
+
     public class OuterClassHavingPropertiesDefinedAfterClassWithDictionary
     {
         public double MyDouble { get; set; }
@@ -714,13 +793,9 @@ namespace System.Text.Json.Serialization.Tests
     {
         public string[] MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" +
-                @"""MyData"":[" +
-                    @"""Hello""," +
-                    @"""World""" +
-                @"]" +
-            @"}");
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
         {
@@ -739,21 +814,13 @@ namespace System.Text.Json.Serialization.Tests
     {
         public List<string> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" +
-                @"""MyData"":[" +
-                    @"""Hello""," +
-                    @"""World""" +
-                @"]" +
-            @"}");
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
         {
-            MyData = new List<string>
-            {
-                "Hello",
-                "World"
-            };
+            MyData = new List<string> { "Hello", "World" };
             Assert.Equal(2, MyData.Count);
         }
 
@@ -769,21 +836,13 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IEnumerable MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" +
-                @"""MyData"":[" +
-                    @"""Hello""," +
-                    @"""World""" +
-                @"]" +
-            @"}");
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
         {
-            MyData = new List<string>
-            {
-                "Hello",
-                "World"
-            };
+            MyData = new List<string> { "Hello", "World" };
 
             int count = 0;
             foreach (string data in MyData)
@@ -817,21 +876,13 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IList MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" +
-                @"""MyData"":[" +
-                    @"""Hello""," +
-                    @"""World""" +
-                @"]" +
-            @"}");
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
         {
-            MyData = new List<string>
-            {
-                "Hello",
-                "World"
-            };
+            MyData = new List<string> { "Hello", "World" };
             Assert.Equal(2, MyData.Count);
         }
 
@@ -859,21 +910,13 @@ namespace System.Text.Json.Serialization.Tests
     {
         public ICollection MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" +
-                @"""MyData"":[" +
-                    @"""Hello""," +
-                    @"""World""" +
-                @"]" +
-            @"}");
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
         {
-            MyData = new List<string>
-            {
-                "Hello",
-                "World"
-            };
+            MyData = new List<string> { "Hello", "World" };
             Assert.Equal(2, MyData.Count);
         }
 
@@ -901,21 +944,13 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IEnumerable<string> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" +
-                @"""MyData"":[" +
-                    @"""Hello""," +
-                    @"""World""" +
-                @"]" +
-            @"}");
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
         {
-            MyData = new List<string>
-            {
-                "Hello",
-                "World"
-            };
+            MyData = new List<string> { "Hello", "World" };
 
             int count = 0;
             foreach (string data in MyData)
@@ -944,21 +979,13 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IList<string> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" +
-                @"""MyData"":[" +
-                    @"""Hello""," +
-                    @"""World""" +
-                @"]" +
-            @"}");
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
         {
-            MyData = new List<string>
-            {
-                "Hello",
-                "World"
-            };
+            MyData = new List<string> { "Hello", "World" };
             Assert.Equal(2, MyData.Count);
         }
 
@@ -974,21 +1001,13 @@ namespace System.Text.Json.Serialization.Tests
     {
         public ICollection<string> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" +
-                @"""MyData"":[" +
-                    @"""Hello""," +
-                    @"""World""" +
-                @"]" +
-            @"}");
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
         {
-            MyData = new List<string>
-            {
-                "Hello",
-                "World"
-            };
+            MyData = new List<string> { "Hello", "World" };
             Assert.Equal(2, MyData.Count);
         }
 
@@ -1010,21 +1029,13 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IReadOnlyCollection<string> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" +
-                @"""MyData"":[" +
-                    @"""Hello""," +
-                    @"""World""" +
-                @"]" +
-            @"}");
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
         {
-            MyData = new List<string>
-            {
-                "Hello",
-                "World"
-            };
+            MyData = new List<string> { "Hello", "World" };
             Assert.Equal(2, MyData.Count);
         }
 
@@ -1046,21 +1057,13 @@ namespace System.Text.Json.Serialization.Tests
     {
         public IReadOnlyList<string> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" +
-                @"""MyData"":[" +
-                    @"""Hello""," +
-                    @"""World""" +
-                @"]" +
-            @"}");
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
         {
-            MyData = new List<string>
-            {
-                "Hello",
-                "World"
-            };
+            MyData = new List<string> { "Hello", "World" };
             Assert.Equal(2, MyData.Count);
         }
 
@@ -1076,21 +1079,13 @@ namespace System.Text.Json.Serialization.Tests
     {
         public ISet<string> MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" +
-                @"""MyData"":[" +
-                    @"""Hello""," +
-                    @"""World""" +
-                @"]" +
-            @"}");
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(@"{" + @"""MyData"":[" + @"""Hello""," + @"""World""" + @"]" + @"}");
 
         public void Initialize()
         {
-            MyData = new HashSet<string>
-            {
-                "Hello",
-                "World"
-            };
+            MyData = new HashSet<string> { "Hello", "World" };
             Assert.Equal(2, MyData.Count);
         }
 
@@ -1135,69 +1130,72 @@ namespace System.Text.Json.Serialization.Tests
         public IReadOnlyDictionary<string, double> MyDoubleIReadOnlyDict { get; set; }
         public IReadOnlyDictionary<string, DateTime> MyDateTimeIReadOnlyDict { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" +
-                @"""MyInt32Dict"":{" +
-                    @"""key1"": 1," +
-                    @"""key2"": 2" +
-                @"}," +
-                @"""MyBooleanDict"":{" +
-                    @"""key1"": true," +
-                    @"""key2"": false" +
-                @"}," +
-                @"""MySingleDict"":{" +
-                    @"""key1"": 1.1," +
-                    @"""key2"": 2.2" +
-                @"}," +
-                @"""MyDoubleDict"":{" +
-                    @"""key1"": 3.3," +
-                    @"""key2"": 4.4" +
-                @"}," +
-                @"""MyDateTimeDict"":{" +
-                    @"""key1"": ""2019-01-30T12:01:02.0000000""," +
-                    @"""key2"": ""2019-01-30T12:01:02.0000000Z""" +
-                @"}," +
-                @"""MyInt32IDict"":{" +
-                    @"""key1"": 1," +
-                    @"""key2"": 2" +
-                @"}," +
-                @"""MyBooleanIDict"":{" +
-                    @"""key1"": true," +
-                    @"""key2"": false" +
-                @"}," +
-                @"""MySingleIDict"":{" +
-                    @"""key1"": 1.1," +
-                    @"""key2"": 2.2" +
-                @"}," +
-                @"""MyDoubleIDict"":{" +
-                    @"""key1"": 3.3," +
-                    @"""key2"": 4.4" +
-                @"}," +
-                @"""MyDateTimeIDict"":{" +
-                    @"""key1"": ""2019-01-30T12:01:02.0000000""," +
-                    @"""key2"": ""2019-01-30T12:01:02.0000000Z""" +
-                @"}," +
-                @"""MyInt32IReadOnlyDict"":{" +
-                    @"""key1"": 1," +
-                    @"""key2"": 2" +
-                @"}," +
-                @"""MyBooleanIReadOnlyDict"":{" +
-                    @"""key1"": true," +
-                    @"""key2"": false" +
-                @"}," +
-                @"""MySingleIReadOnlyDict"":{" +
-                    @"""key1"": 1.1," +
-                    @"""key2"": 2.2" +
-                @"}," +
-                @"""MyDoubleIReadOnlyDict"":{" +
-                    @"""key1"": 3.3," +
-                    @"""key2"": 4.4" +
-                @"}," +
-                @"""MyDateTimeIReadOnlyDict"":{" +
-                    @"""key1"": ""2019-01-30T12:01:02.0000000""," +
-                    @"""key2"": ""2019-01-30T12:01:02.0000000Z""" +
-                @"}" +
-            @"}");
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                @"{"
+                    + @"""MyInt32Dict"":{"
+                    + @"""key1"": 1,"
+                    + @"""key2"": 2"
+                    + @"},"
+                    + @"""MyBooleanDict"":{"
+                    + @"""key1"": true,"
+                    + @"""key2"": false"
+                    + @"},"
+                    + @"""MySingleDict"":{"
+                    + @"""key1"": 1.1,"
+                    + @"""key2"": 2.2"
+                    + @"},"
+                    + @"""MyDoubleDict"":{"
+                    + @"""key1"": 3.3,"
+                    + @"""key2"": 4.4"
+                    + @"},"
+                    + @"""MyDateTimeDict"":{"
+                    + @"""key1"": ""2019-01-30T12:01:02.0000000"","
+                    + @"""key2"": ""2019-01-30T12:01:02.0000000Z"""
+                    + @"},"
+                    + @"""MyInt32IDict"":{"
+                    + @"""key1"": 1,"
+                    + @"""key2"": 2"
+                    + @"},"
+                    + @"""MyBooleanIDict"":{"
+                    + @"""key1"": true,"
+                    + @"""key2"": false"
+                    + @"},"
+                    + @"""MySingleIDict"":{"
+                    + @"""key1"": 1.1,"
+                    + @"""key2"": 2.2"
+                    + @"},"
+                    + @"""MyDoubleIDict"":{"
+                    + @"""key1"": 3.3,"
+                    + @"""key2"": 4.4"
+                    + @"},"
+                    + @"""MyDateTimeIDict"":{"
+                    + @"""key1"": ""2019-01-30T12:01:02.0000000"","
+                    + @"""key2"": ""2019-01-30T12:01:02.0000000Z"""
+                    + @"},"
+                    + @"""MyInt32IReadOnlyDict"":{"
+                    + @"""key1"": 1,"
+                    + @"""key2"": 2"
+                    + @"},"
+                    + @"""MyBooleanIReadOnlyDict"":{"
+                    + @"""key1"": true,"
+                    + @"""key2"": false"
+                    + @"},"
+                    + @"""MySingleIReadOnlyDict"":{"
+                    + @"""key1"": 1.1,"
+                    + @"""key2"": 2.2"
+                    + @"},"
+                    + @"""MyDoubleIReadOnlyDict"":{"
+                    + @"""key1"": 3.3,"
+                    + @"""key2"": 4.4"
+                    + @"},"
+                    + @"""MyDateTimeIReadOnlyDict"":{"
+                    + @"""key1"": ""2019-01-30T12:01:02.0000000"","
+                    + @"""key2"": ""2019-01-30T12:01:02.0000000Z"""
+                    + @"}"
+                    + @"}"
+            );
 
         public void Initialize()
         {
@@ -1205,19 +1203,43 @@ namespace System.Text.Json.Serialization.Tests
             MyBooleanDict = new Dictionary<string, bool> { { "key1", true }, { "key2", false } };
             MySingleDict = new Dictionary<string, float> { { "key1", 1.1f }, { "key2", 2.2f } };
             MyDoubleDict = new Dictionary<string, double> { { "key1", 3.3d }, { "key2", 4.4d } };
-            MyDateTimeDict = new Dictionary<string, DateTime> { { "key1", new DateTime(2019, 1, 30, 12, 1, 2) }, { "key2", new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc) } };
+            MyDateTimeDict = new Dictionary<string, DateTime>
+            {
+                { "key1", new DateTime(2019, 1, 30, 12, 1, 2) },
+                { "key2", new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc) }
+            };
 
             MyInt32IDict = new Dictionary<string, int> { { "key1", 1 }, { "key2", 2 } };
             MyBooleanIDict = new Dictionary<string, bool> { { "key1", true }, { "key2", false } };
             MySingleIDict = new Dictionary<string, float> { { "key1", 1.1f }, { "key2", 2.2f } };
             MyDoubleIDict = new Dictionary<string, double> { { "key1", 3.3d }, { "key2", 4.4d } };
-            MyDateTimeIDict = new Dictionary<string, DateTime> { { "key1", new DateTime(2019, 1, 30, 12, 1, 2) }, { "key2", new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc) } };
+            MyDateTimeIDict = new Dictionary<string, DateTime>
+            {
+                { "key1", new DateTime(2019, 1, 30, 12, 1, 2) },
+                { "key2", new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc) }
+            };
 
             MyInt32IReadOnlyDict = new Dictionary<string, int> { { "key1", 1 }, { "key2", 2 } };
-            MyBooleanIReadOnlyDict = new Dictionary<string, bool> { { "key1", true }, { "key2", false } };
-            MySingleIReadOnlyDict = new Dictionary<string, float> { { "key1", 1.1f }, { "key2", 2.2f } };
-            MyDoubleIReadOnlyDict = new Dictionary<string, double> { { "key1", 3.3d }, { "key2", 4.4d } };
-            MyDateTimeIReadOnlyDict = new Dictionary<string, DateTime> { { "key1", new DateTime(2019, 1, 30, 12, 1, 2) }, { "key2", new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc) } };
+            MyBooleanIReadOnlyDict = new Dictionary<string, bool>
+            {
+                { "key1", true },
+                { "key2", false }
+            };
+            MySingleIReadOnlyDict = new Dictionary<string, float>
+            {
+                { "key1", 1.1f },
+                { "key2", 2.2f }
+            };
+            MyDoubleIReadOnlyDict = new Dictionary<string, double>
+            {
+                { "key1", 3.3d },
+                { "key2", 4.4d }
+            };
+            MyDateTimeIReadOnlyDict = new Dictionary<string, DateTime>
+            {
+                { "key1", new DateTime(2019, 1, 30, 12, 1, 2) },
+                { "key2", new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc) }
+            };
         }
 
         public void Verify()
@@ -1239,7 +1261,10 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(2, MyDoubleDict.Count);
 
             Assert.Equal(new DateTime(2019, 1, 30, 12, 1, 2), MyDateTimeDict["key1"]);
-            Assert.Equal(new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc), MyDateTimeDict["key2"]);
+            Assert.Equal(
+                new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc),
+                MyDateTimeDict["key2"]
+            );
             Assert.Equal(2, MyDateTimeDict.Count);
 
             Assert.Equal(1, MyInt32IDict["key1"]);
@@ -1259,7 +1284,10 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(2, MyDoubleIDict.Count);
 
             Assert.Equal(new DateTime(2019, 1, 30, 12, 1, 2), MyDateTimeIDict["key1"]);
-            Assert.Equal(new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc), MyDateTimeIDict["key2"]);
+            Assert.Equal(
+                new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc),
+                MyDateTimeIDict["key2"]
+            );
             Assert.Equal(2, MyDateTimeIDict.Count);
 
             Assert.Equal(1, MyInt32IReadOnlyDict["key1"]);
@@ -1279,7 +1307,10 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(2, MyDoubleIReadOnlyDict.Count);
 
             Assert.Equal(new DateTime(2019, 1, 30, 12, 1, 2), MyDateTimeIReadOnlyDict["key1"]);
-            Assert.Equal(new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc), MyDateTimeIReadOnlyDict["key2"]);
+            Assert.Equal(
+                new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc),
+                MyDateTimeIReadOnlyDict["key2"]
+            );
             Assert.Equal(2, MyDateTimeIReadOnlyDict.Count);
         }
     }
@@ -1291,25 +1322,32 @@ namespace System.Text.Json.Serialization.Tests
         public HashSet<SimpleTestClass> MyHashSet { get; set; }
         public LinkedList<SimpleTestClass> MyLinkedList { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" +
-                @"""MyStack"":[" +
-                    SimpleTestClass.s_json + "," +
-                    SimpleTestClass.s_json +
-                @"]," +
-                @"""MyQueue"":[" +
-                    SimpleTestClass.s_json + "," +
-                    SimpleTestClass.s_json +
-                @"]," +
-                @"""MyHashSet"":[" +
-                    SimpleTestClass.s_json + "," +
-                    SimpleTestClass.s_json +
-                @"]," +
-                @"""MyLinkedList"":[" +
-                    SimpleTestClass.s_json + "," +
-                    SimpleTestClass.s_json +
-                @"]" +
-            @"}");
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                @"{"
+                    + @"""MyStack"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"],"
+                    + @"""MyQueue"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"],"
+                    + @"""MyHashSet"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"],"
+                    + @"""MyLinkedList"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"]"
+                    + @"}"
+            );
 
         public void Initialize()
         {
@@ -1402,45 +1440,57 @@ namespace System.Text.Json.Serialization.Tests
         public ImmutableStack<SimpleTestClass> MyImmutableStack { get; set; }
         public ImmutableQueue<SimpleTestClass> MyImmutableQueue { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" +
-                @"""MyImmutableArray"":[" +
-                    SimpleTestClass.s_json + "," +
-                    SimpleTestClass.s_json +
-                @"]," +
-                @"""MyIImmutableList"":[" +
-                    SimpleTestClass.s_json + "," +
-                    SimpleTestClass.s_json +
-                @"]," +
-                @"""MyIImmutableStack"":[" +
-                    SimpleTestClass.s_json + "," +
-                    SimpleTestClass.s_json +
-                @"]," +
-                @"""MyIImmutableQueue"":[" +
-                    SimpleTestClass.s_json + "," +
-                    SimpleTestClass.s_json +
-                @"]," +
-                @"""MyIImmutableSet"":[" +
-                    SimpleTestClass.s_json + "," +
-                    SimpleTestClass.s_json +
-                @"]," +
-                @"""MyImmutableHashSet"":[" +
-                    SimpleTestClass.s_json + "," +
-                    SimpleTestClass.s_json +
-                @"]," +
-                @"""MyImmutableList"":[" +
-                    SimpleTestClass.s_json + "," +
-                    SimpleTestClass.s_json +
-                @"]," +
-                @"""MyImmutableStack"":[" +
-                    SimpleTestClass.s_json + "," +
-                    SimpleTestClass.s_json +
-                @"]," +
-                @"""MyImmutableQueue"":[" +
-                    SimpleTestClass.s_json + "," +
-                    SimpleTestClass.s_json +
-                @"]" +
-            @"}");
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                @"{"
+                    + @"""MyImmutableArray"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"],"
+                    + @"""MyIImmutableList"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"],"
+                    + @"""MyIImmutableStack"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"],"
+                    + @"""MyIImmutableQueue"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"],"
+                    + @"""MyIImmutableSet"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"],"
+                    + @"""MyImmutableHashSet"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"],"
+                    + @"""MyImmutableList"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"],"
+                    + @"""MyImmutableStack"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"],"
+                    + @"""MyImmutableQueue"":["
+                    + SimpleTestClass.s_json
+                    + ","
+                    + SimpleTestClass.s_json
+                    + @"]"
+                    + @"}"
+            );
 
         public void Initialize()
         {
@@ -1451,7 +1501,9 @@ namespace System.Text.Json.Serialization.Tests
                 SimpleTestClass obj2 = new SimpleTestClass();
                 obj2.Initialize();
 
-                MyImmutableArray = ImmutableArray.CreateRange(new List<SimpleTestClass> { obj1, obj2 });
+                MyImmutableArray = ImmutableArray.CreateRange(
+                    new List<SimpleTestClass> { obj1, obj2 }
+                );
             }
             {
                 SimpleTestClass obj1 = new SimpleTestClass();
@@ -1460,7 +1512,9 @@ namespace System.Text.Json.Serialization.Tests
                 SimpleTestClass obj2 = new SimpleTestClass();
                 obj2.Initialize();
 
-                MyIImmutableList = ImmutableList.CreateRange(new List<SimpleTestClass> { obj1, obj2 });
+                MyIImmutableList = ImmutableList.CreateRange(
+                    new List<SimpleTestClass> { obj1, obj2 }
+                );
             }
             {
                 SimpleTestClass obj1 = new SimpleTestClass();
@@ -1469,7 +1523,9 @@ namespace System.Text.Json.Serialization.Tests
                 SimpleTestClass obj2 = new SimpleTestClass();
                 obj2.Initialize();
 
-                MyIImmutableStack = ImmutableStack.CreateRange(new List<SimpleTestClass> { obj1, obj2 });
+                MyIImmutableStack = ImmutableStack.CreateRange(
+                    new List<SimpleTestClass> { obj1, obj2 }
+                );
             }
             {
                 SimpleTestClass obj1 = new SimpleTestClass();
@@ -1478,7 +1534,9 @@ namespace System.Text.Json.Serialization.Tests
                 SimpleTestClass obj2 = new SimpleTestClass();
                 obj2.Initialize();
 
-                MyIImmutableQueue = ImmutableQueue.CreateRange(new List<SimpleTestClass> { obj1, obj2 });
+                MyIImmutableQueue = ImmutableQueue.CreateRange(
+                    new List<SimpleTestClass> { obj1, obj2 }
+                );
             }
             {
                 SimpleTestClass obj1 = new SimpleTestClass();
@@ -1487,7 +1545,9 @@ namespace System.Text.Json.Serialization.Tests
                 SimpleTestClass obj2 = new SimpleTestClass();
                 obj2.Initialize();
 
-                MyIImmutableSet = ImmutableHashSet.CreateRange(new List<SimpleTestClass> { obj1, obj2 });
+                MyIImmutableSet = ImmutableHashSet.CreateRange(
+                    new List<SimpleTestClass> { obj1, obj2 }
+                );
             }
             {
                 SimpleTestClass obj1 = new SimpleTestClass();
@@ -1496,7 +1556,9 @@ namespace System.Text.Json.Serialization.Tests
                 SimpleTestClass obj2 = new SimpleTestClass();
                 obj2.Initialize();
 
-                MyImmutableHashSet = ImmutableHashSet.CreateRange(new List<SimpleTestClass> { obj1, obj2 });
+                MyImmutableHashSet = ImmutableHashSet.CreateRange(
+                    new List<SimpleTestClass> { obj1, obj2 }
+                );
             }
             {
                 SimpleTestClass obj1 = new SimpleTestClass();
@@ -1505,7 +1567,9 @@ namespace System.Text.Json.Serialization.Tests
                 SimpleTestClass obj2 = new SimpleTestClass();
                 obj2.Initialize();
 
-                MyImmutableList = ImmutableList.CreateRange(new List<SimpleTestClass> { obj1, obj2 });
+                MyImmutableList = ImmutableList.CreateRange(
+                    new List<SimpleTestClass> { obj1, obj2 }
+                );
             }
             {
                 SimpleTestClass obj1 = new SimpleTestClass();
@@ -1514,7 +1578,9 @@ namespace System.Text.Json.Serialization.Tests
                 SimpleTestClass obj2 = new SimpleTestClass();
                 obj2.Initialize();
 
-                MyImmutableStack = ImmutableStack.CreateRange(new List<SimpleTestClass> { obj1, obj2 });
+                MyImmutableStack = ImmutableStack.CreateRange(
+                    new List<SimpleTestClass> { obj1, obj2 }
+                );
             }
             {
                 SimpleTestClass obj1 = new SimpleTestClass();
@@ -1523,7 +1589,9 @@ namespace System.Text.Json.Serialization.Tests
                 SimpleTestClass obj2 = new SimpleTestClass();
                 obj2.Initialize();
 
-                MyImmutableQueue = ImmutableQueue.CreateRange(new List<SimpleTestClass> { obj1, obj2 });
+                MyImmutableQueue = ImmutableQueue.CreateRange(
+                    new List<SimpleTestClass> { obj1, obj2 }
+                );
             }
         }
 
@@ -1593,24 +1661,21 @@ namespace System.Text.Json.Serialization.Tests
         }
     }
 
-    public class SimpleDerivedTestClass : SimpleTestClass
-    {
-    }
+    public class SimpleDerivedTestClass : SimpleTestClass { }
 
     public class OverridePropertyNameRuntime_TestClass
     {
         public Int16 MyInt16 { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" +
-            @"""blah"" : 1" +
-            @"}"
-        );
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(@"{" + @"""blah"" : 1" + @"}");
     }
 
     public class LargeDataTestClass : ITestClass
     {
-        public List<LargeDataChildTestClass> Children { get; set; } = new List<LargeDataChildTestClass>();
+        public List<LargeDataChildTestClass> Children { get; set; } =
+            new List<LargeDataChildTestClass>();
         public const int ChildrenCount = 10;
 
         public string MyString { get; set; }
@@ -1629,7 +1694,10 @@ namespace System.Text.Json.Serialization.Tests
                 };
                 for (int j = 0; j < child.MyStringArray.Length; j++)
                 {
-                    child.MyStringArray[j] = new string('3', LargeDataChildTestClass.MyStringArrayElementStringLength);
+                    child.MyStringArray[j] = new string(
+                        '3',
+                        LargeDataChildTestClass.MyStringArrayElementStringLength
+                    );
                 }
 
                 Children.Add(child);
@@ -1650,11 +1718,19 @@ namespace System.Text.Json.Serialization.Tests
                 Assert.Equal('2', child.MyString[0]);
                 Assert.Equal('2', child.MyString[LargeDataChildTestClass.MyStringLength - 1]);
 
-                Assert.Equal(LargeDataChildTestClass.MyStringArrayArrayCount, child.MyStringArray.Length);
+                Assert.Equal(
+                    LargeDataChildTestClass.MyStringArrayArrayCount,
+                    child.MyStringArray.Length
+                );
                 for (int j = 0; j < LargeDataChildTestClass.MyStringArrayArrayCount; j++)
                 {
                     Assert.Equal('3', child.MyStringArray[j][0]);
-                    Assert.Equal('3', child.MyStringArray[j][LargeDataChildTestClass.MyStringArrayElementStringLength - 1]);
+                    Assert.Equal(
+                        '3',
+                        child.MyStringArray[j][
+                            LargeDataChildTestClass.MyStringArrayElementStringLength - 1
+                        ]
+                    );
                 }
             }
         }
@@ -1706,21 +1782,24 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(98052, address.zip);
         }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            "{" +
-                @"""age"" : 30," +
-                @"""first"" : ""John""," +
-                @"""last"" : ""Smith""," +
-                @"""phoneNumbers"" : [" +
-                    @"""425-000-0000""," +
-                    @"""425-000-0001""" +
-                @"]," +
-                @"""address"" : {" +
-                    @"""street"" : ""1 Microsoft Way""," +
-                    @"""city"" : ""Redmond""," +
-                    @"""zip"" : 98052" +
-                "}" +
-            "}");
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                "{"
+                    + @"""age"" : 30,"
+                    + @"""first"" : ""John"","
+                    + @"""last"" : ""Smith"","
+                    + @"""phoneNumbers"" : ["
+                    + @"""425-000-0000"","
+                    + @"""425-000-0001"""
+                    + @"],"
+                    + @"""address"" : {"
+                    + @"""street"" : ""1 Microsoft Way"","
+                    + @"""city"" : ""Redmond"","
+                    + @"""zip"" : 98052"
+                    + "}"
+                    + "}"
+            );
     }
 
     public class BasicJsonAddress
@@ -1736,28 +1815,43 @@ namespace System.Text.Json.Serialization.Tests
         public BasicJsonAddress mainSite { get; set; }
         public string name { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            "{\n" +
-                @"""name"" : ""Microsoft""," + "\n" +
-                @"""sites"" :[" + "\n" +
-                    "{\n" +
-                        @"""street"" : ""1 Lone Tree Rd S""," + "\n" +
-                        @"""city"" : ""Fargo""," + "\n" +
-                        @"""zip"" : 58104" + "\n" +
-                    "},\n" +
-                    "{\n" +
-                        @"""street"" : ""8055 Microsoft Way""," + "\n" +
-                        @"""city"" : ""Charlotte""," + "\n" +
-                        @"""zip"" : 28273" + "\n" +
-                    "}\n" +
-                "],\n" +
-                @"""mainSite"":" + "\n" +
-                    "{\n" +
-                        @"""street"" : ""1 Microsoft Way""," + "\n" +
-                        @"""city"" : ""Redmond""," + "\n" +
-                        @"""zip"" : 98052" + "\n" +
-                    "}\n" +
-            "}");
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                "{\n"
+                    + @"""name"" : ""Microsoft"","
+                    + "\n"
+                    + @"""sites"" :["
+                    + "\n"
+                    + "{\n"
+                    + @"""street"" : ""1 Lone Tree Rd S"","
+                    + "\n"
+                    + @"""city"" : ""Fargo"","
+                    + "\n"
+                    + @"""zip"" : 58104"
+                    + "\n"
+                    + "},\n"
+                    + "{\n"
+                    + @"""street"" : ""8055 Microsoft Way"","
+                    + "\n"
+                    + @"""city"" : ""Charlotte"","
+                    + "\n"
+                    + @"""zip"" : 28273"
+                    + "\n"
+                    + "}\n"
+                    + "],\n"
+                    + @"""mainSite"":"
+                    + "\n"
+                    + "{\n"
+                    + @"""street"" : ""1 Microsoft Way"","
+                    + "\n"
+                    + @"""city"" : ""Redmond"","
+                    + "\n"
+                    + @"""zip"" : 98052"
+                    + "\n"
+                    + "}\n"
+                    + "}"
+            );
 
         public void Initialize()
         {
@@ -1778,13 +1872,12 @@ namespace System.Text.Json.Serialization.Tests
                 }
             };
 
-            mainSite =
-                new BasicJsonAddress
-                {
-                    street = "1 Microsoft Way",
-                    city = "Redmond",
-                    zip = 98052
-                };
+            mainSite = new BasicJsonAddress
+            {
+                street = "1 Microsoft Way",
+                city = "Redmond",
+                zip = 98052
+            };
         }
 
         public void Verify()
@@ -1834,10 +1927,12 @@ namespace System.Text.Json.Serialization.Tests
         public SimpleTestClass MyData { get; set; }
 
         public static readonly string s_json =
-            @"{" +
-                @"""MyData"":" + SimpleTestClass.s_json + " // Trailing comment\n" +
-                "/* Multi\nLine Comment with } */\n" +
-            @"}";
+            @"{"
+            + @"""MyData"":"
+            + SimpleTestClass.s_json
+            + " // Trailing comment\n"
+            + "/* Multi\nLine Comment with } */\n"
+            + @"}";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
@@ -1858,12 +1953,16 @@ namespace System.Text.Json.Serialization.Tests
     {
         public TestClassWithNestedObjectCommentsInner MyData { get; set; }
 
-        public static readonly byte[] s_data = Encoding.UTF8.GetBytes(
-            @"{" +
-                " // This } will be ignored\n" +
-                @"""MyData"":" + TestClassWithNestedObjectCommentsInner.s_json +
-                " /* As will this [ */\n" +
-            @"}");
+        public static readonly byte[] s_data = Encoding
+            .UTF8
+            .GetBytes(
+                @"{"
+                    + " // This } will be ignored\n"
+                    + @"""MyData"":"
+                    + TestClassWithNestedObjectCommentsInner.s_json
+                    + " /* As will this [ */\n"
+                    + @"}"
+            );
 
         public void Initialize()
         {
@@ -1885,7 +1984,11 @@ namespace System.Text.Json.Serialization.Tests
 
     public class ConverterForInt32 : JsonConverter<int>
     {
-        public override int Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override int Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             return 25;
         }
@@ -1897,11 +2000,17 @@ namespace System.Text.Json.Serialization.Tests
 
         // In source-gen, internal converters are not used as fallbacks when custom converters don't provide an implementation.
 #if BUILDING_SOURCE_GENERATOR_TESTS
-        public override int ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            => int.Parse(reader.GetString());
+        public override int ReadAsPropertyName(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        ) => int.Parse(reader.GetString());
 
-        public override void WriteAsPropertyName(Utf8JsonWriter writer, int value, JsonSerializerOptions options)
-            => writer.WritePropertyName(value.ToString());
+        public override void WriteAsPropertyName(
+            Utf8JsonWriter writer,
+            int value,
+            JsonSerializerOptions options
+        ) => writer.WritePropertyName(value.ToString());
 #endif
     }
 
@@ -1909,7 +2018,12 @@ namespace System.Text.Json.Serialization.Tests
     {
         public override string ConvertName(string name)
         {
-            return string.Concat(name.Select((x, i) => i > 0 && char.IsUpper(x) ? "_" + x.ToString() : x.ToString())).ToLower();
+            return string.Concat(
+                    name.Select(
+                        (x, i) => i > 0 && char.IsUpper(x) ? "_" + x.ToString() : x.ToString()
+                    )
+                )
+                .ToLower();
         }
     }
 
@@ -2023,15 +2137,15 @@ namespace System.Text.Json.Serialization.Tests
         public JsonElement Null { get; set; }
 
         public static readonly string s_json =
-            @"{" +
-                @"""Number"" : 1," +
-                @"""True"" : true," +
-                @"""False"" : false," +
-                @"""String"" : ""Hello""," +
-                @"""Array"" : [2, false, true, ""Goodbye""]," +
-                @"""Object"" : {}," +
-                @"""Null"" : null" +
-            @"}";
+            @"{"
+            + @"""Number"" : 1,"
+            + @"""True"" : true,"
+            + @"""False"" : false,"
+            + @"""String"" : ""Hello"","
+            + @"""Array"" : [2, false, true, ""Goodbye""],"
+            + @"""Object"" : {},"
+            + @"""Null"" : null"
+            + @"}";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
@@ -2078,16 +2192,16 @@ namespace System.Text.Json.Serialization.Tests
         public JsonElement[] Array { get; set; }
 
         public static readonly string s_json =
-            @"{" +
-                @"""Array"" : [" +
-                    @"1, " +
-                    @"true, " +
-                    @"false, " +
-                    @"""Hello""," +
-                    @"[2, false, true, ""Goodbye""]," +
-                    @"{}" +
-                @"]" +
-            @"}";
+            @"{"
+            + @"""Array"" : ["
+            + @"1, "
+            + @"true, "
+            + @"false, "
+            + @"""Hello"","
+            + @"[2, false, true, ""Goodbye""],"
+            + @"{}"
+            + @"]"
+            + @"}";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
@@ -2121,28 +2235,19 @@ namespace System.Text.Json.Serialization.Tests
         public object Object { get; set; }
 
         public static readonly string s_array =
-            @"[" +
-                @"1," +
-                @"""Hello""," +
-                @"true," +
-                @"false," +
-                @"{}," +
-                @"[2, ""Goodbye"", false, true, {}, [3]]" +
-            @"]";
+            @"["
+            + @"1,"
+            + @"""Hello"","
+            + @"true,"
+            + @"false,"
+            + @"{},"
+            + @"[2, ""Goodbye"", false, true, {}, [3]]"
+            + @"]";
 
-        public static readonly string s_object =
-            @"{" +
-                @"""NestedArray"" : " +
-                s_array +
-            @"}";
+        public static readonly string s_object = @"{" + @"""NestedArray"" : " + s_array + @"}";
 
         public static readonly string s_json =
-            @"{" +
-                @"""Array"" : " +
-                s_array + "," +
-                @"""Object"" : " +
-                s_object +
-            @"}";
+            @"{" + @"""Array"" : " + s_array + "," + @"""Object"" : " + s_object + @"}";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
@@ -2187,15 +2292,15 @@ namespace System.Text.Json.Serialization.Tests
         public JsonDocument Document { get; set; }
 
         public static readonly string s_json =
-            @"{" +
-                @"""Number"" : 1," +
-                @"""True"" : true," +
-                @"""False"" : false," +
-                @"""String"" : ""Hello""," +
-                @"""Array"" : [2, false, true, ""Goodbye""]," +
-                @"""Object"" : {}," +
-                @"""Null"" : null" +
-            @"}";
+            @"{"
+            + @"""Number"" : 1,"
+            + @"""True"" : true,"
+            + @"""False"" : false,"
+            + @"""String"" : ""Hello"","
+            + @"""Array"" : [2, false, true, ""Goodbye""],"
+            + @"""Object"" : {},"
+            + @"""Null"" : null"
+            + @"}";
 
         public readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
@@ -2249,16 +2354,16 @@ namespace System.Text.Json.Serialization.Tests
         public JsonDocument Document { get; set; }
 
         public static readonly string s_json =
-            @"{" +
-                @"""Array"" : [" +
-                    @"1, " +
-                    @"true, " +
-                    @"false, " +
-                    @"""Hello""," +
-                    @"[2, false, true, ""Goodbye""]," +
-                    @"{}" +
-                @"]" +
-            @"}";
+            @"{"
+            + @"""Array"" : ["
+            + @"1, "
+            + @"true, "
+            + @"false, "
+            + @"""Hello"","
+            + @"[2, false, true, ""Goodbye""],"
+            + @"{}"
+            + @"]"
+            + @"}";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
@@ -2269,7 +2374,11 @@ namespace System.Text.Json.Serialization.Tests
 
         public void Verify()
         {
-            JsonElement[] array = Document.RootElement.GetProperty("Array").EnumerateArray().ToArray();
+            JsonElement[] array = Document
+                .RootElement
+                .GetProperty("Array")
+                .EnumerateArray()
+                .ToArray();
 
             Assert.Equal(JsonValueKind.Number, array[0].ValueKind);
             Assert.Equal("1", array[0].ToString());
@@ -2291,7 +2400,10 @@ namespace System.Text.Json.Serialization.Tests
     {
         public ClassWithRecursiveCollectionTypes? Nested { get; set; }
         public List<ClassWithRecursiveCollectionTypes> List { get; set; }
-        public IReadOnlyDictionary<string, ClassWithRecursiveCollectionTypes>? Dictionary { get; set; }
+        public IReadOnlyDictionary<
+            string,
+            ClassWithRecursiveCollectionTypes
+        >? Dictionary { get; set; }
     }
 
     internal class MemoryOfTClass<T>

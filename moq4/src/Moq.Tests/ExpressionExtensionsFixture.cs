@@ -156,7 +156,6 @@ namespace Moq.Tests
 
         void Do<T>(T value) { }
 
-
         /* Unmerged change from project 'Moq.Tests(net6.0)'
         Before:
                 private static void DoStatic(int value) { }
@@ -166,6 +165,7 @@ namespace Moq.Tests
                 static void DoStaticGeneric<T>(T value) { }
         */
         static void DoStatic(int value) { }
+
         static void DoStaticGeneric<T>(T value) { }
 
         public interface IFoo
@@ -182,7 +182,7 @@ namespace Moq.Tests
 
         public class Derived : Base
         {
-            public override sealed object Property => null;
+            public sealed override object Property => null;
         }
     }
 }

@@ -15,7 +15,11 @@ namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure;
 
 internal static class SymbolExtensions
 {
-    public static ITypeSymbol UnwrapTypeSymbol(this ITypeSymbol typeSymbol, bool unwrapArray = false, bool unwrapNullable = false)
+    public static ITypeSymbol UnwrapTypeSymbol(
+        this ITypeSymbol typeSymbol,
+        bool unwrapArray = false,
+        bool unwrapNullable = false
+    )
     {
         INamedTypeSymbol? unwrappedTypeSymbol = null;
 
@@ -30,7 +34,10 @@ internal static class SymbolExtensions
         }
 
         // If it is nullable, unwrap it.
-        if (unwrapNullable && unwrappedTypeSymbol?.ConstructedFrom.SpecialType == SpecialType.System_Nullable_T)
+        if (
+            unwrapNullable
+            && unwrappedTypeSymbol?.ConstructedFrom.SpecialType == SpecialType.System_Nullable_T
+        )
         {
             unwrappedTypeSymbol = unwrappedTypeSymbol.TypeArguments[0] as INamedTypeSymbol;
         }
@@ -61,12 +68,19 @@ internal static class SymbolExtensions
         return false;
     }
 
-    public static bool HasAttribute(this ImmutableArray<AttributeData> attributes, INamedTypeSymbol attributeType)
+    public static bool HasAttribute(
+        this ImmutableArray<AttributeData> attributes,
+        INamedTypeSymbol attributeType
+    )
     {
         return attributes.TryGetAttribute(attributeType, out _);
     }
 
-    public static bool TryGetAttribute(this ImmutableArray<AttributeData> attributes, INamedTypeSymbol attributeType, [NotNullWhen(true)] out AttributeData? matchedAttribute)
+    public static bool TryGetAttribute(
+        this ImmutableArray<AttributeData> attributes,
+        INamedTypeSymbol attributeType,
+        [NotNullWhen(true)] out AttributeData? matchedAttribute
+    )
     {
         foreach (var attributeData in attributes)
         {
@@ -81,16 +95,26 @@ internal static class SymbolExtensions
         return false;
     }
 
-    public static bool HasAttributeImplementingInterface(this ISymbol symbol, INamedTypeSymbol interfaceType)
+    public static bool HasAttributeImplementingInterface(
+        this ISymbol symbol,
+        INamedTypeSymbol interfaceType
+    )
     {
         return symbol.TryGetAttributeImplementingInterface(interfaceType, out var _);
     }
 
-    public static bool TryGetAttributeImplementingInterface(this ISymbol symbol, INamedTypeSymbol interfaceType, [NotNullWhen(true)] out AttributeData? matchedAttribute)
+    public static bool TryGetAttributeImplementingInterface(
+        this ISymbol symbol,
+        INamedTypeSymbol interfaceType,
+        [NotNullWhen(true)] out AttributeData? matchedAttribute
+    )
     {
         foreach (var attributeData in symbol.GetAttributes())
         {
-            if (attributeData.AttributeClass is not null && attributeData.AttributeClass.Implements(interfaceType))
+            if (
+                attributeData.AttributeClass is not null
+                && attributeData.AttributeClass.Implements(interfaceType)
+            )
             {
                 matchedAttribute = attributeData;
                 return true;
@@ -101,16 +125,26 @@ internal static class SymbolExtensions
         return false;
     }
 
-    public static bool HasAttributeImplementingInterface(this ImmutableArray<AttributeData> attributes, INamedTypeSymbol interfaceType)
+    public static bool HasAttributeImplementingInterface(
+        this ImmutableArray<AttributeData> attributes,
+        INamedTypeSymbol interfaceType
+    )
     {
         return attributes.TryGetAttributeImplementingInterface(interfaceType, out var _);
     }
 
-    public static bool TryGetAttributeImplementingInterface(this ImmutableArray<AttributeData> attributes, INamedTypeSymbol interfaceType, [NotNullWhen(true)] out AttributeData? matchedAttribute)
+    public static bool TryGetAttributeImplementingInterface(
+        this ImmutableArray<AttributeData> attributes,
+        INamedTypeSymbol interfaceType,
+        [NotNullWhen(true)] out AttributeData? matchedAttribute
+    )
     {
         foreach (var attributeData in attributes)
         {
-            if (attributeData.AttributeClass is not null && attributeData.AttributeClass.Implements(interfaceType))
+            if (
+                attributeData.AttributeClass is not null
+                && attributeData.AttributeClass.Implements(interfaceType)
+            )
             {
                 matchedAttribute = attributeData;
                 return true;
@@ -133,11 +167,17 @@ internal static class SymbolExtensions
         return false;
     }
 
-    public static bool IsType(this INamedTypeSymbol type, string typeName, SemanticModel semanticModel)
-        => SymbolEqualityComparer.Default.Equals(type, semanticModel.Compilation.GetTypeByMetadataName(typeName));
+    public static bool IsType(
+        this INamedTypeSymbol type,
+        string typeName,
+        SemanticModel semanticModel
+    ) =>
+        SymbolEqualityComparer
+            .Default
+            .Equals(type, semanticModel.Compilation.GetTypeByMetadataName(typeName));
 
-    public static bool IsType(this INamedTypeSymbol type, INamedTypeSymbol otherType)
-        => SymbolEqualityComparer.Default.Equals(type, otherType);
+    public static bool IsType(this INamedTypeSymbol type, INamedTypeSymbol otherType) =>
+        SymbolEqualityComparer.Default.Equals(type, otherType);
 
     public static ITypeSymbol GetParameterType(this ISymbol symbol)
     {
@@ -149,37 +189,41 @@ internal static class SymbolExtensions
         };
     }
 
-    public static ImmutableArray<IParameterSymbol> GetParameters(this ISymbol? symbol)
-        => symbol switch
+    public static ImmutableArray<IParameterSymbol> GetParameters(this ISymbol? symbol) =>
+        symbol switch
         {
             IMethodSymbol methodSymbol => methodSymbol.Parameters,
             IPropertySymbol parameterSymbol => parameterSymbol.Parameters,
             _ => ImmutableArray<IParameterSymbol>.Empty,
         };
 
-    public static ISymbol? GetAnySymbol(this SymbolInfo info)
-        => info.Symbol ?? info.CandidateSymbols.FirstOrDefault();
+    public static ISymbol? GetAnySymbol(this SymbolInfo info) =>
+        info.Symbol ?? info.CandidateSymbols.FirstOrDefault();
 
     public static bool IsOptional(this IParameterSymbol parameterSymbol) =>
-        parameterSymbol.Type is INamedTypeSymbol
-        {
-            NullableAnnotation: NullableAnnotation.Annotated
-        } || parameterSymbol.HasExplicitDefaultValue;
+        parameterSymbol.Type
+            is INamedTypeSymbol { NullableAnnotation: NullableAnnotation.Annotated }
+        || parameterSymbol.HasExplicitDefaultValue;
 
     public static bool IsOptional(this IPropertySymbol propertySymbol) =>
-        propertySymbol.Type is INamedTypeSymbol
-        {
-            NullableAnnotation: NullableAnnotation.Annotated
-        } && !propertySymbol.IsRequired;
+        propertySymbol.Type is INamedTypeSymbol { NullableAnnotation: NullableAnnotation.Annotated }
+        && !propertySymbol.IsRequired;
 
     public static string GetDefaultValueString(this IParameterSymbol parameterSymbol)
     {
         return !parameterSymbol.HasExplicitDefaultValue
             ? "null"
-            : SymbolDisplay.FormatLiteral((parameterSymbol.ExplicitDefaultValue ?? "null").ToString(), parameterSymbol.ExplicitDefaultValue is string);
+            : SymbolDisplay.FormatLiteral(
+                (parameterSymbol.ExplicitDefaultValue ?? "null").ToString(),
+                parameterSymbol.ExplicitDefaultValue is string
+            );
     }
 
-    public static bool TryGetNamedArgumentValue<T>(this AttributeData attribute, string argumentName, out T? argumentValue)
+    public static bool TryGetNamedArgumentValue<T>(
+        this AttributeData attribute,
+        string argumentName,
+        out T? argumentValue
+    )
     {
         argumentValue = default;
         foreach (var namedArgument in attribute.NamedArguments)
@@ -199,7 +243,9 @@ internal static class SymbolExtensions
         if (parameterSymbol is { ContainingSymbol: IMethodSymbol constructor })
         {
             var constructedType = $"typeof({parameterSymbol.ContainingType.ToDisplayString()})";
-            var parameterTypes = constructor.Parameters.Select(parameter => $"typeof({parameter.Type.ToDisplayString()})");
+            var parameterTypes = constructor
+                .Parameters
+                .Select(parameter => $"typeof({parameter.Type.ToDisplayString()})");
             var parameterTypesString = string.Join(", ", parameterTypes);
             var getConstructorParameters = $$"""new[] { {{parameterTypesString}} }""";
             return $"{constructedType}.GetConstructor({getConstructorParameters})?.GetParameters()[{parameterSymbol.Ordinal}]";

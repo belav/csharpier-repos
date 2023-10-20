@@ -129,12 +129,11 @@ namespace Moq.Tests
         [Fact]
         public void MockInvocationsIncludeException_BaseCall_Virtual()
         {
-            var mock = new Mock<Test>()
-            {
-                CallBase = true,
-            };
+            var mock = new Mock<Test>() { CallBase = true, };
 
-            var thrown = Assert.Throws<InvalidOperationException>(() => mock.Object.ThrowingVirtualMethod());
+            var thrown = Assert.Throws<InvalidOperationException>(
+                () => mock.Object.ThrowingVirtualMethod()
+            );
 
             Assert.Equal("Message", thrown.Message);
 
@@ -241,7 +240,7 @@ namespace Moq.Tests
             var mock = new Mock<IComparable>();
             mock.Setup(m => m.CompareTo(default));
             _ = mock.Object.CompareTo(default);
-            mock.VerifyAll();  // ensure setup has been matched
+            mock.VerifyAll(); // ensure setup has been matched
 
             mock.Invocations.Clear();
             var ex = Assert.Throws<MockException>(() => mock.VerifyAll());
@@ -254,7 +253,7 @@ namespace Moq.Tests
             var mock = new Mock<IComparable>();
             mock.SetupSequence(m => m.CompareTo(default));
             _ = mock.Object.CompareTo(default);
-            mock.VerifyAll();  // ensure setup has been matched
+            mock.VerifyAll(); // ensure setup has been matched
 
             mock.Invocations.Clear();
             var ex = Assert.Throws<MockException>(() => mock.VerifyAll());
@@ -267,7 +266,7 @@ namespace Moq.Tests
             var mock = new Mock<IX>();
             mock.Setup(m => m.Nested.Do());
             mock.Object.Nested.Do();
-            mock.VerifyAll();  // ensure setup has been matched
+            mock.VerifyAll(); // ensure setup has been matched
 
             mock.Invocations.Clear();
             var ex = Assert.Throws<MockException>(() => mock.VerifyAll());
@@ -283,7 +282,7 @@ namespace Moq.Tests
             _ = mock.Object.CompareTo(default);
 
             mock.Invocations.Clear();
-            _ = mock.Object.CompareTo(default);  // this second call should now count as the first
+            _ = mock.Object.CompareTo(default); // this second call should now count as the first
             var ex = Assert.Throws<MockException>(() => mock.Object.CompareTo(default));
             Assert.Equal(MockExceptionReasons.IncorrectNumberOfCalls, ex.Reasons);
         }
@@ -377,7 +376,8 @@ namespace Moq.Tests
 
         public class Test
         {
-            public virtual int ThrowingVirtualMethod() => throw new InvalidOperationException("Message");
+            public virtual int ThrowingVirtualMethod() =>
+                throw new InvalidOperationException("Message");
         }
     }
 }

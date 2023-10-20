@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="ObjectListGeneralPage.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.Design.MobileControls
@@ -34,11 +34,13 @@ namespace System.Web.UI.Design.MobileControls
     ///   The General page for the ObjectList control.
     /// </summary>
     /// <internalonly/>
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal sealed class ObjectListGeneralPage : MobileComponentEditorPage
     {
         private TextBox _txtBackCommandText;
@@ -47,12 +49,9 @@ namespace System.Web.UI.Design.MobileControls
         private TextBox _txtItemCount;
         private TextBox _txtItemsPerPage;
 
-        protected override String HelpKeyword 
+        protected override String HelpKeyword
         {
-            get 
-            {
-                return "net.Mobile.ObjectListProperties.General";
-            }
+            get { return "net.Mobile.ObjectListProperties.General"; }
         }
 
         private void InitForm()
@@ -76,7 +75,9 @@ namespace System.Web.UI.Design.MobileControls
 
             Label lblDetailsCommandText = new Label();
             lblDetailsCommandText.SetBounds(206, 24, 174, 16);
-            lblDetailsCommandText.Text = SR.GetString(SR.ObjectListGeneralPage_DetailsCommandTextCaption);
+            lblDetailsCommandText.Text = SR.GetString(
+                SR.ObjectListGeneralPage_DetailsCommandTextCaption
+            );
             lblDetailsCommandText.TabStop = false;
             lblDetailsCommandText.TabIndex = 5;
 
@@ -136,27 +137,29 @@ namespace System.Web.UI.Design.MobileControls
                 "General.ico"
             );
 
-            this.Controls.AddRange(new Control[]
-                           {
-                                grplblAppearance,
-                                lblBackCommandText,
-                                _txtBackCommandText,
-                                lblDetailsCommandText,
-                                _txtDetailsCommandText,
-                                lblMoreText,
-                                _txtMoreText,
-                                pagingGroup,
-                                itemCountLabel,
-                                _txtItemCount,
-                                itemsPerPageLabel,
-                                _txtItemsPerPage
-                           });
+            this.Controls.AddRange(
+                new Control[]
+                {
+                    grplblAppearance,
+                    lblBackCommandText,
+                    _txtBackCommandText,
+                    lblDetailsCommandText,
+                    _txtDetailsCommandText,
+                    lblMoreText,
+                    _txtMoreText,
+                    pagingGroup,
+                    itemCountLabel,
+                    _txtItemCount,
+                    itemsPerPageLabel,
+                    _txtItemsPerPage
+                }
+            );
         }
 
         /// <summary>
         ///   Loads the component into the page.
         /// </summary>
-        protected override void LoadComponent() 
+        protected override void LoadComponent()
         {
             ObjectList objectList = (ObjectList)GetBaseControl();
 
@@ -167,7 +170,7 @@ namespace System.Web.UI.Design.MobileControls
             _txtMoreText.Text = objectList.MoreText;
         }
 
-        private void OnSetPageDirty(Object source, EventArgs e) 
+        private void OnSetPageDirty(Object source, EventArgs e)
         {
             if (IsLoading())
             {
@@ -178,8 +181,7 @@ namespace System.Web.UI.Design.MobileControls
 
         private void OnKeyPressNumberTextBox(Object source, KeyPressEventArgs e)
         {
-            if (!((e.KeyChar >='0' && e.KeyChar <= '9') ||
-                e.KeyChar == 8))
+            if (!((e.KeyChar >= '0' && e.KeyChar <= '9') || e.KeyChar == 8))
             {
                 e.Handled = true;
                 SafeNativeMethods.MessageBeep(unchecked((int)0xFFFFFFFF));
@@ -189,7 +191,7 @@ namespace System.Web.UI.Design.MobileControls
         /// <summary>
         ///   Saves the component loaded into the page.
         /// </summary>
-        protected override void SaveComponent() 
+        protected override void SaveComponent()
         {
             ObjectList objectList = (ObjectList)GetBaseControl();
             ObjectListDesigner objectListDesigner = (ObjectListDesigner)GetBaseDesigner();
@@ -221,7 +223,9 @@ namespace System.Web.UI.Design.MobileControls
             }
             catch (Exception)
             {
-                _txtItemsPerPage.Text = objectList.ItemsPerPage.ToString(CultureInfo.InvariantCulture);
+                _txtItemsPerPage.Text = objectList
+                    .ItemsPerPage
+                    .ToString(CultureInfo.InvariantCulture);
             }
 
             objectList.BackCommandText = _txtBackCommandText.Text;
@@ -234,7 +238,7 @@ namespace System.Web.UI.Design.MobileControls
         /// <summary>
         ///   Sets the component that is to be edited in the page.
         /// </summary>
-        public override void SetComponent(IComponent component) 
+        public override void SetComponent(IComponent component)
         {
             base.SetComponent(component);
             InitForm();

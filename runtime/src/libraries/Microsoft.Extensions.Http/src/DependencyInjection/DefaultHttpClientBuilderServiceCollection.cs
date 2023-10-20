@@ -15,7 +15,11 @@ namespace Microsoft.Extensions.DependencyInjection
         private readonly bool _isDefault;
         private readonly DefaultHttpClientConfigurationTracker _tracker;
 
-        public DefaultHttpClientBuilderServiceCollection(IServiceCollection services, bool isDefault, DefaultHttpClientConfigurationTracker tracker)
+        public DefaultHttpClientBuilderServiceCollection(
+            IServiceCollection services,
+            bool isDefault,
+            DefaultHttpClientConfigurationTracker tracker
+        )
         {
             _services = services;
             _isDefault = isDefault;
@@ -34,8 +38,11 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 // Insert IConfigureOptions<HttpClientFactoryOptions> services into the collection before named config descriptors.
                 // This ensures they run and apply configuration first. Configuration for named clients run afterwards.
-                if (_tracker.InsertDefaultsAfterDescriptor != null &&
-                    _services.IndexOf(_tracker.InsertDefaultsAfterDescriptor) is var index && index != -1)
+                if (
+                    _tracker.InsertDefaultsAfterDescriptor != null
+                    && _services.IndexOf(_tracker.InsertDefaultsAfterDescriptor) is var index
+                    && index != -1
+                )
                 {
                     index++;
                     _services.Insert(index, item);
@@ -63,14 +70,24 @@ namespace Microsoft.Extensions.DependencyInjection
         }
         public int Count => _services.Count;
         public bool IsReadOnly => _services.IsReadOnly;
+
         public void Clear() => _services.Clear();
+
         public bool Contains(ServiceDescriptor item) => _services.Contains(item);
-        public void CopyTo(ServiceDescriptor[] array, int arrayIndex) => _services.CopyTo(array, arrayIndex);
+
+        public void CopyTo(ServiceDescriptor[] array, int arrayIndex) =>
+            _services.CopyTo(array, arrayIndex);
+
         public IEnumerator<ServiceDescriptor> GetEnumerator() => _services.GetEnumerator();
+
         public int IndexOf(ServiceDescriptor item) => _services.IndexOf(item);
+
         public void Insert(int index, ServiceDescriptor item) => _services.Insert(index, item);
+
         public bool Remove(ServiceDescriptor item) => _services.Remove(item);
+
         public void RemoveAt(int index) => _services.RemoveAt(index);
+
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

@@ -24,14 +24,20 @@ namespace System.Threading
     {
         #region Object->Lock/Condition mapping
 
-        private static readonly ConditionalWeakTable<object, Condition> s_conditionTable = new ConditionalWeakTable<object, Condition>();
-        private static readonly ConditionalWeakTable<object, Condition>.CreateValueCallback s_createCondition = (o) => new Condition(ObjectHeader.GetLockObject(o));
+        private static readonly ConditionalWeakTable<object, Condition> s_conditionTable =
+            new ConditionalWeakTable<object, Condition>();
+        private static readonly ConditionalWeakTable<
+            object,
+            Condition
+        >.CreateValueCallback s_createCondition = (o) =>
+            new Condition(ObjectHeader.GetLockObject(o));
 
         private static Condition GetCondition(object obj)
         {
             Debug.Assert(
                 !(obj is Condition || obj is Lock),
-                "Do not use Monitor.Pulse or Wait on a Lock or Condition instance; use the methods on Condition instead.");
+                "Do not use Monitor.Pulse or Wait on a Lock or Condition instance; use the methods on Condition instead."
+            );
             return s_conditionTable.GetValue(obj, s_createCondition);
         }
         #endregion
@@ -45,9 +51,10 @@ namespace System.Threading
             if (resultOrIndex < 0)
                 return;
 
-            Lock lck = resultOrIndex == 0 ?
-                ObjectHeader.GetLockObject(obj) :
-                SyncTable.GetLockObject(resultOrIndex);
+            Lock lck =
+                resultOrIndex == 0
+                    ? ObjectHeader.GetLockObject(obj)
+                    : SyncTable.GetLockObject(resultOrIndex);
 
             TryAcquireSlow(lck, obj, Timeout.Infinite);
         }
@@ -96,9 +103,10 @@ namespace System.Threading
             if (resultOrIndex < 0)
                 return true;
 
-            Lock lck = resultOrIndex == 0 ?
-                ObjectHeader.GetLockObject(obj) :
-                SyncTable.GetLockObject(resultOrIndex);
+            Lock lck =
+                resultOrIndex == 0
+                    ? ObjectHeader.GetLockObject(obj)
+                    : SyncTable.GetLockObject(resultOrIndex);
 
             if (millisecondsTimeout == 0)
                 return lck.TryAcquireNoSpin();
@@ -137,7 +145,14 @@ namespace System.Threading
         {
             Condition condition = GetCondition(obj);
 
-            using (new DebugBlockingScope(obj, DebugBlockingItemType.MonitorEvent, millisecondsTimeout, out _))
+            using (
+                new DebugBlockingScope(
+                    obj,
+                    DebugBlockingItemType.MonitorEvent,
+                    millisecondsTimeout,
+                    out _
+                )
+            )
             {
                 return condition.Wait(millisecondsTimeout);
             }
@@ -163,9 +178,20 @@ namespace System.Threading
 
         internal static bool TryAcquireSlow(Lock lck, object obj, int millisecondsTimeout)
         {
-            using (new DebugBlockingScope(obj, DebugBlockingItemType.MonitorCriticalSection, millisecondsTimeout, out _))
+            using (
+                new DebugBlockingScope(
+                    obj,
+                    DebugBlockingItemType.MonitorCriticalSection,
+                    millisecondsTimeout,
+                    out _
+                )
+            )
             {
-                return lck.TryAcquireSlow(Environment.CurrentManagedThreadId, millisecondsTimeout, trackContentions: true);
+                return lck.TryAcquireSlow(
+                    Environment.CurrentManagedThreadId,
+                    millisecondsTimeout,
+                    trackContentions: true
+                );
             }
         }
 
@@ -209,7 +235,12 @@ namespace System.Threading
 
         private unsafe struct DebugBlockingScope : IDisposable
         {
-            public DebugBlockingScope(object obj, DebugBlockingItemType blockingType, int timeout, out DebugBlockingItem blockingItem)
+            public DebugBlockingScope(
+                object obj,
+                DebugBlockingItemType blockingType,
+                int timeout,
+                out DebugBlockingItem blockingItem
+            )
             {
                 blockingItem._object = obj;
                 blockingItem._blockingType = blockingType;
@@ -221,7 +252,9 @@ namespace System.Threading
 
             public void Dispose()
             {
-                t_firstBlockingItem = Unsafe.Read<DebugBlockingItem>((void*)t_firstBlockingItem)._next;
+                t_firstBlockingItem = Unsafe
+                    .Read<DebugBlockingItem>((void*)t_firstBlockingItem)
+                    ._next;
             }
         }
 
@@ -229,7 +262,8 @@ namespace System.Threading
 
         #region Metrics
 
-        private static readonly ThreadInt64PersistentCounter s_lockContentionCounter = new ThreadInt64PersistentCounter();
+        private static readonly ThreadInt64PersistentCounter s_lockContentionCounter =
+            new ThreadInt64PersistentCounter();
 
         [ThreadStatic]
         private static object t_ContentionCountObject;
@@ -239,13 +273,17 @@ namespace System.Threading
         {
             Debug.Assert(t_ContentionCountObject == null);
 
-            object threadLocalContentionCountObject = s_lockContentionCounter.CreateThreadLocalCountObject();
+            object threadLocalContentionCountObject =
+                s_lockContentionCounter.CreateThreadLocalCountObject();
             t_ContentionCountObject = threadLocalContentionCountObject;
             return threadLocalContentionCountObject;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static void IncrementLockContentionCount() => ThreadInt64PersistentCounter.Increment(t_ContentionCountObject ?? CreateThreadLocalContentionCountObject());
+        internal static void IncrementLockContentionCount() =>
+            ThreadInt64PersistentCounter.Increment(
+                t_ContentionCountObject ?? CreateThreadLocalContentionCountObject()
+            );
 
         /// <summary>
         /// Gets the number of times there was contention upon trying to take a <see cref="Monitor"/>'s lock so far.

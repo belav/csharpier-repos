@@ -9,14 +9,23 @@ namespace ILCompiler.DependencyAnalysis
 {
     internal static class ModuleUseBasedDependencyAlgorithm
     {
-        internal static void AddDependenciesDueToModuleUse(ref DependencyList dependencyList, NodeFactory factory, ModuleDesc module)
+        internal static void AddDependenciesDueToModuleUse(
+            ref DependencyList dependencyList,
+            NodeFactory factory,
+            ModuleDesc module
+        )
         {
             dependencyList ??= new DependencyList();
             if (module.GetGlobalModuleType().GetStaticConstructor() is MethodDesc moduleCctor)
             {
-                dependencyList.Add(factory.MethodEntrypoint(moduleCctor), "Module with a static constructor");
+                dependencyList.Add(
+                    factory.MethodEntrypoint(moduleCctor),
+                    "Module with a static constructor"
+                );
             }
-            factory.MetadataManager.GetDependenciesDueToModuleUse(ref dependencyList, factory, module);
+            factory
+                .MetadataManager
+                .GetDependenciesDueToModuleUse(ref dependencyList, factory, module);
         }
     }
 }

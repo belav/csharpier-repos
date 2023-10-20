@@ -31,28 +31,40 @@ namespace NetCoreServer
         public void ConfigureServices(IServiceCollection services)
         {
 #if GENEVA_TELEMETRY
-            services.AddOpenTelemetryMetrics((builder) => builder
-                .AddAspNetCoreInstrumentation()
-                .AddGenevaMetricExporter(options =>
-                {
-                    options.PrepopulatedMetricDimensions = new Dictionary<string, object>()
-                    {
-                        ["CustomerResourceId"] = Configuration["GenevaExport:CustomerResourceId"],
-                        ["LocationId"] = Configuration["GenevaExport:LocationId"]
-                    };
+            services.AddOpenTelemetryMetrics(
+                (builder) =>
+                    builder
+                        .AddAspNetCoreInstrumentation()
+                        .AddGenevaMetricExporter(options =>
+                        {
+                            options.PrepopulatedMetricDimensions = new Dictionary<string, object>()
+                            {
+                                ["CustomerResourceId"] = Configuration[
+                                    "GenevaExport:CustomerResourceId"
+                                ],
+                                ["LocationId"] = Configuration["GenevaExport:LocationId"]
+                            };
 
-                    options.ConnectionString = Configuration["GenevaExport:ConnectionString"];
-                })
+                            options.ConnectionString = Configuration[
+                                "GenevaExport:ConnectionString"
+                            ];
+                        })
             );
 #endif
-            services.AddCors(o => o.AddPolicy("AnyCors", builder =>
-            {
-                builder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .WithExposedHeaders("*")
-                    ;
-            }));
+            services.AddCors(
+                o =>
+                    o.AddPolicy(
+                        "AnyCors",
+                        builder =>
+                        {
+                            builder
+                                .AllowAnyOrigin()
+                                .AllowAnyMethod()
+                                .AllowAnyHeader()
+                                .WithExposedHeaders("*");
+                        }
+                    )
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

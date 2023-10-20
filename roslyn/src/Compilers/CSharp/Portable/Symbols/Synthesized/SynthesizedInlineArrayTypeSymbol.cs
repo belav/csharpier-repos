@@ -27,7 +27,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private readonly MethodSymbol _inlineArrayAttributeConstructor;
         private readonly ImmutableArray<FieldSymbol> _fields;
 
-        internal SynthesizedInlineArrayTypeSymbol(SourceModuleSymbol containingModule, string name, int arrayLength, MethodSymbol inlineArrayAttributeConstructor)
+        internal SynthesizedInlineArrayTypeSymbol(
+            SourceModuleSymbol containingModule,
+            string name,
+            int arrayLength,
+            MethodSymbol inlineArrayAttributeConstructor
+        )
         {
             Debug.Assert(arrayLength > 0);
 
@@ -74,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override ImmutableArray<Location> Locations => ImmutableArray<Location>.Empty;
 
-        public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences => ImmutableArray<SyntaxReference>.Empty;
+        public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences =>
+            ImmutableArray<SyntaxReference>.Empty;
 
         public override bool IsStatic => false;
 
@@ -82,7 +88,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override bool IsSealed => true;
 
-        internal override ImmutableArray<TypeWithAnnotations> TypeArgumentsWithAnnotationsNoUseSiteDiagnostics => GetTypeParametersAsTypeArguments();
+        internal override ImmutableArray<TypeWithAnnotations> TypeArgumentsWithAnnotationsNoUseSiteDiagnostics =>
+            GetTypeParametersAsTypeArguments();
 
         internal override bool IsFileLocal => false;
 
@@ -114,7 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override NamedTypeSymbol? NativeIntegerUnderlyingType => null;
 
-        internal override NamedTypeSymbol BaseTypeNoUseSiteDiagnostics => ContainingAssembly.GetSpecialType(SpecialType.System_ValueType);
+        internal override NamedTypeSymbol BaseTypeNoUseSiteDiagnostics =>
+            ContainingAssembly.GetSpecialType(SpecialType.System_ValueType);
 
         internal override bool IsRecord => false;
 
@@ -122,39 +130,60 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override ObsoleteAttributeData? ObsoleteAttributeData => null;
 
-        public override ImmutableArray<Symbol> GetMembers() => ImmutableArray<Symbol>.CastUp(_fields);
+        public override ImmutableArray<Symbol> GetMembers() =>
+            ImmutableArray<Symbol>.CastUp(_fields);
 
-        public override ImmutableArray<Symbol> GetMembers(string name) => GetMembers().WhereAsArray(m => m.Name == name);
+        public override ImmutableArray<Symbol> GetMembers(string name) =>
+            GetMembers().WhereAsArray(m => m.Name == name);
 
-        public override ImmutableArray<NamedTypeSymbol> GetTypeMembers() => ImmutableArray<NamedTypeSymbol>.Empty;
+        public override ImmutableArray<NamedTypeSymbol> GetTypeMembers() =>
+            ImmutableArray<NamedTypeSymbol>.Empty;
 
-        public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(ReadOnlyMemory<char> name, int arity) => ImmutableArray<NamedTypeSymbol>.Empty;
+        public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(
+            ReadOnlyMemory<char> name,
+            int arity
+        ) => ImmutableArray<NamedTypeSymbol>.Empty;
 
-        public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(ReadOnlyMemory<char> name) => ImmutableArray<NamedTypeSymbol>.Empty;
+        public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(ReadOnlyMemory<char> name) =>
+            ImmutableArray<NamedTypeSymbol>.Empty;
 
-        protected override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData) => throw ExceptionUtilities.Unreachable();
+        protected override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData) =>
+            throw ExceptionUtilities.Unreachable();
 
-        internal override NamedTypeSymbol AsNativeInteger() => throw ExceptionUtilities.Unreachable();
+        internal override NamedTypeSymbol AsNativeInteger() =>
+            throw ExceptionUtilities.Unreachable();
 
-        internal override ImmutableArray<string> GetAppliedConditionalSymbols() => ImmutableArray<string>.Empty;
+        internal override ImmutableArray<string> GetAppliedConditionalSymbols() =>
+            ImmutableArray<string>.Empty;
 
         internal override AttributeUsageInfo GetAttributeUsageInfo() => default;
 
-        internal override NamedTypeSymbol GetDeclaredBaseType(ConsList<TypeSymbol> basesBeingResolved) => BaseTypeNoUseSiteDiagnostics;
+        internal override NamedTypeSymbol GetDeclaredBaseType(
+            ConsList<TypeSymbol> basesBeingResolved
+        ) => BaseTypeNoUseSiteDiagnostics;
 
-        internal override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(ConsList<TypeSymbol> basesBeingResolved) => ImmutableArray<NamedTypeSymbol>.Empty;
+        internal override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(
+            ConsList<TypeSymbol> basesBeingResolved
+        ) => ImmutableArray<NamedTypeSymbol>.Empty;
 
-        internal override ImmutableArray<Symbol> GetEarlyAttributeDecodingMembers() => throw ExceptionUtilities.Unreachable();
+        internal override ImmutableArray<Symbol> GetEarlyAttributeDecodingMembers() =>
+            throw ExceptionUtilities.Unreachable();
 
-        internal override ImmutableArray<Symbol> GetEarlyAttributeDecodingMembers(string name) => throw ExceptionUtilities.Unreachable();
+        internal override ImmutableArray<Symbol> GetEarlyAttributeDecodingMembers(string name) =>
+            throw ExceptionUtilities.Unreachable();
 
         internal override IEnumerable<FieldSymbol> GetFieldsToEmit() => _fields;
 
-        internal override ImmutableArray<NamedTypeSymbol> GetInterfacesToEmit() => ImmutableArray<NamedTypeSymbol>.Empty;
+        internal override ImmutableArray<NamedTypeSymbol> GetInterfacesToEmit() =>
+            ImmutableArray<NamedTypeSymbol>.Empty;
 
-        internal override IEnumerable<Cci.SecurityAttribute> GetSecurityInformation() => SpecializedCollections.EmptyEnumerable<Cci.SecurityAttribute>();
+        internal override IEnumerable<Cci.SecurityAttribute> GetSecurityInformation() =>
+            SpecializedCollections.EmptyEnumerable<Cci.SecurityAttribute>();
 
-        internal override bool HasCollectionBuilderAttribute(out TypeSymbol? builderType, out string? methodName)
+        internal override bool HasCollectionBuilderAttribute(
+            out TypeSymbol? builderType,
+            out string? methodName
+        )
         {
             builderType = null;
             methodName = null;
@@ -169,11 +198,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override bool HasPossibleWellKnownCloneMethod() => false;
 
-        internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(ConsList<TypeSymbol>? basesBeingResolved = null) => ImmutableArray<NamedTypeSymbol>.Empty;
+        internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
+            ConsList<TypeSymbol>? basesBeingResolved = null
+        ) => ImmutableArray<NamedTypeSymbol>.Empty;
 
-        internal override IEnumerable<(MethodSymbol Body, MethodSymbol Implemented)> SynthesizedInterfaceMethodImpls() => SpecializedCollections.EmptyEnumerable<(MethodSymbol Body, MethodSymbol Implemented)>();
+        internal override IEnumerable<(
+            MethodSymbol Body,
+            MethodSymbol Implemented
+        )> SynthesizedInterfaceMethodImpls() =>
+            SpecializedCollections.EmptyEnumerable<(MethodSymbol Body, MethodSymbol Implemented)>();
 
-        internal override void AddSynthesizedAttributes(PEModuleBuilder moduleBuilder, ref ArrayBuilder<SynthesizedAttributeData> attributes)
+        internal override void AddSynthesizedAttributes(
+            PEModuleBuilder moduleBuilder,
+            ref ArrayBuilder<SynthesizedAttributeData> attributes
+        )
         {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
@@ -184,8 +222,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 ref attributes,
                 new SynthesizedAttributeData(
                     _inlineArrayAttributeConstructor,
-                    arguments: ImmutableArray.Create(new TypedConstant(compilation.GetSpecialType(SpecialType.System_Int32), TypedConstantKind.Primitive, _arrayLength)),
-                    namedArguments: ImmutableArray<KeyValuePair<string, TypedConstant>>.Empty));
+                    arguments: ImmutableArray.Create(
+                        new TypedConstant(
+                            compilation.GetSpecialType(SpecialType.System_Int32),
+                            TypedConstantKind.Primitive,
+                            _arrayLength
+                        )
+                    ),
+                    namedArguments: ImmutableArray<KeyValuePair<string, TypedConstant>>.Empty
+                )
+            );
         }
 
         private sealed class InlineArrayTypeParameterSymbol : TypeParameterSymbol
@@ -223,23 +269,30 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             public override ImmutableArray<Location> Locations => ImmutableArray<Location>.Empty;
 
-            public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences => ImmutableArray<SyntaxReference>.Empty;
+            public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences =>
+                ImmutableArray<SyntaxReference>.Empty;
 
             internal override bool? IsNotNullable => null;
 
             internal override bool? ReferenceTypeConstraintIsNullable => null;
 
-            internal override void EnsureAllConstraintsAreResolved()
-            {
-            }
+            internal override void EnsureAllConstraintsAreResolved() { }
 
-            internal override ImmutableArray<TypeWithAnnotations> GetConstraintTypes(ConsList<TypeParameterSymbol> inProgress) => ImmutableArray<TypeWithAnnotations>.Empty;
+            internal override ImmutableArray<TypeWithAnnotations> GetConstraintTypes(
+                ConsList<TypeParameterSymbol> inProgress
+            ) => ImmutableArray<TypeWithAnnotations>.Empty;
 
-            internal override TypeSymbol GetDeducedBaseType(ConsList<TypeParameterSymbol> inProgress) => ContainingAssembly.GetSpecialType(SpecialType.System_Object);
+            internal override TypeSymbol GetDeducedBaseType(
+                ConsList<TypeParameterSymbol> inProgress
+            ) => ContainingAssembly.GetSpecialType(SpecialType.System_Object);
 
-            internal override NamedTypeSymbol GetEffectiveBaseClass(ConsList<TypeParameterSymbol> inProgress) => ContainingAssembly.GetSpecialType(SpecialType.System_Object);
+            internal override NamedTypeSymbol GetEffectiveBaseClass(
+                ConsList<TypeParameterSymbol> inProgress
+            ) => ContainingAssembly.GetSpecialType(SpecialType.System_Object);
 
-            internal override ImmutableArray<NamedTypeSymbol> GetInterfaces(ConsList<TypeParameterSymbol> inProgress) => ImmutableArray<NamedTypeSymbol>.Empty;
+            internal override ImmutableArray<NamedTypeSymbol> GetInterfaces(
+                ConsList<TypeParameterSymbol> inProgress
+            ) => ImmutableArray<NamedTypeSymbol>.Empty;
         }
     }
 }

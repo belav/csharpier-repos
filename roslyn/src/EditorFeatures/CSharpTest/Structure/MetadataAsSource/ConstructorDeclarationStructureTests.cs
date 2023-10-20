@@ -11,10 +11,13 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure.MetadataAsSource;
 
-public class ConstructorDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTests<ConstructorDeclarationSyntax>
+public class ConstructorDeclarationStructureTests
+    : AbstractCSharpSyntaxNodeStructureTests<ConstructorDeclarationSyntax>
 {
     protected override string WorkspaceKind => CodeAnalysis.WorkspaceKind.MetadataAsSource;
-    internal override AbstractSyntaxStructureProvider CreateProvider() => new ConstructorDeclarationStructureProvider();
+
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new ConstructorDeclarationStructureProvider();
 
     [Fact, Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
     public async Task NoCommentsOrAttributes()
@@ -40,8 +43,10 @@ public class ConstructorDeclarationStructureTests : AbstractCSharpSyntaxNodeStru
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact, Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
@@ -57,8 +62,10 @@ public class ConstructorDeclarationStructureTests : AbstractCSharpSyntaxNodeStru
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact, Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
@@ -74,8 +81,10 @@ public class ConstructorDeclarationStructureTests : AbstractCSharpSyntaxNodeStru
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
@@ -94,7 +103,9 @@ public class ConstructorDeclarationStructureTests : AbstractCSharpSyntaxNodeStru
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 }

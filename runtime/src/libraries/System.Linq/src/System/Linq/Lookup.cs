@@ -9,10 +9,16 @@ namespace System.Linq
 {
     public static partial class Enumerable
     {
-        public static ILookup<TKey, TSource> ToLookup<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector) =>
-            ToLookup(source, keySelector, null);
+        public static ILookup<TKey, TSource> ToLookup<TSource, TKey>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector
+        ) => ToLookup(source, keySelector, null);
 
-        public static ILookup<TKey, TSource> ToLookup<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IEqualityComparer<TKey>? comparer)
+        public static ILookup<TKey, TSource> ToLookup<TSource, TKey>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            IEqualityComparer<TKey>? comparer
+        )
         {
             if (source == null)
             {
@@ -27,10 +33,18 @@ namespace System.Linq
             return Lookup<TKey, TSource>.Create(source, keySelector, comparer);
         }
 
-        public static ILookup<TKey, TElement> ToLookup<TSource, TKey, TElement>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector) =>
-            ToLookup(source, keySelector, elementSelector, null);
+        public static ILookup<TKey, TElement> ToLookup<TSource, TKey, TElement>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            Func<TSource, TElement> elementSelector
+        ) => ToLookup(source, keySelector, elementSelector, null);
 
-        public static ILookup<TKey, TElement> ToLookup<TSource, TKey, TElement>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector, IEqualityComparer<TKey>? comparer)
+        public static ILookup<TKey, TElement> ToLookup<TSource, TKey, TElement>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            Func<TSource, TElement> elementSelector,
+            IEqualityComparer<TKey>? comparer
+        )
         {
             if (source == null)
             {
@@ -69,7 +83,12 @@ namespace System.Linq
         private Grouping<TKey, TElement>? _lastGrouping;
         private int _count;
 
-        internal static Lookup<TKey, TElement> Create<TSource>(IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector, IEqualityComparer<TKey>? comparer)
+        internal static Lookup<TKey, TElement> Create<TSource>(
+            IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            Func<TSource, TElement> elementSelector,
+            IEqualityComparer<TKey>? comparer
+        )
         {
             Debug.Assert(source != null);
             Debug.Assert(keySelector != null);
@@ -84,7 +103,11 @@ namespace System.Linq
             return lookup;
         }
 
-        internal static Lookup<TKey, TElement> Create(IEnumerable<TElement> source, Func<TElement, TKey> keySelector, IEqualityComparer<TKey>? comparer)
+        internal static Lookup<TKey, TElement> Create(
+            IEnumerable<TElement> source,
+            Func<TElement, TKey> keySelector,
+            IEqualityComparer<TKey>? comparer
+        )
         {
             Debug.Assert(source != null);
             Debug.Assert(keySelector != null);
@@ -98,7 +121,11 @@ namespace System.Linq
             return lookup;
         }
 
-        internal static Lookup<TKey, TElement> CreateForJoin(IEnumerable<TElement> source, Func<TElement, TKey> keySelector, IEqualityComparer<TKey>? comparer)
+        internal static Lookup<TKey, TElement> CreateForJoin(
+            IEnumerable<TElement> source,
+            Func<TElement, TKey> keySelector,
+            IEqualityComparer<TKey>? comparer
+        )
         {
             Lookup<TKey, TElement> lookup = new Lookup<TKey, TElement>(comparer);
             foreach (TElement item in source)
@@ -143,12 +170,13 @@ namespace System.Linq
 
                     Debug.Assert(g != null);
                     yield return g;
-                }
-                while (g != _lastGrouping);
+                } while (g != _lastGrouping);
             }
         }
 
-        internal List<TResult> ToList<TResult>(Func<TKey, IEnumerable<TElement>, TResult> resultSelector)
+        internal List<TResult> ToList<TResult>(
+            Func<TKey, IEnumerable<TElement>, TResult> resultSelector
+        )
         {
             List<TResult> list = new List<TResult>(_count);
             Grouping<TKey, TElement>? g = _lastGrouping;
@@ -161,14 +189,15 @@ namespace System.Linq
                     Debug.Assert(g != null);
                     g.Trim();
                     list.Add(resultSelector(g._key, g._elements));
-                }
-                while (g != _lastGrouping);
+                } while (g != _lastGrouping);
             }
 
             return list;
         }
 
-        public IEnumerable<TResult> ApplyResultSelector<TResult>(Func<TKey, IEnumerable<TElement>, TResult> resultSelector)
+        public IEnumerable<TResult> ApplyResultSelector<TResult>(
+            Func<TKey, IEnumerable<TElement>, TResult> resultSelector
+        )
         {
             Grouping<TKey, TElement>? g = _lastGrouping;
             if (g != null)
@@ -180,8 +209,7 @@ namespace System.Linq
                     Debug.Assert(g != null);
                     g.Trim();
                     yield return resultSelector(g._key, g._elements);
-                }
-                while (g != _lastGrouping);
+                } while (g != _lastGrouping);
             }
         }
 
@@ -196,7 +224,11 @@ namespace System.Linq
         internal Grouping<TKey, TElement>? GetGrouping(TKey key, bool create)
         {
             int hashCode = InternalGetHashCode(key);
-            for (Grouping<TKey, TElement>? g = _groupings[(uint)hashCode % _groupings.Length]; g != null; g = g._hashNext)
+            for (
+                Grouping<TKey, TElement>? g = _groupings[(uint)hashCode % _groupings.Length];
+                g != null;
+                g = g._hashNext
+            )
             {
                 if (g._hashCode == hashCode && _comparer.Equals(g._key, key))
                 {
@@ -244,8 +276,7 @@ namespace System.Linq
                 int index = g._hashCode % newSize;
                 g._hashNext = newGroupings[index];
                 newGroupings[index] = g;
-            }
-            while (g != _lastGrouping);
+            } while (g != _lastGrouping);
 
             _groupings = newGroupings;
         }

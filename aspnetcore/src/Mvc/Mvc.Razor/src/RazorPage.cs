@@ -12,7 +12,9 @@ namespace Microsoft.AspNetCore.Mvc.Razor;
 /// </summary>
 public abstract class RazorPage : RazorPageBase
 {
-    private readonly HashSet<string> _renderedSections = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+    private readonly HashSet<string> _renderedSections = new HashSet<string>(
+        StringComparer.OrdinalIgnoreCase
+    );
     private bool _renderedBody;
     private bool _ignoreBody;
     private HashSet<string>? _ignoredSections;
@@ -154,7 +156,11 @@ public abstract class RazorPage : RazorPageBase
     {
         if (_renderedSections.Contains(sectionName))
         {
-            var message = Resources.FormatSectionAlreadyRendered(nameof(RenderSectionAsync), Path, sectionName);
+            var message = Resources.FormatSectionAlreadyRendered(
+                nameof(RenderSectionAsync),
+                Path,
+                sectionName
+            );
             throw new InvalidOperationException(message);
         }
 
@@ -176,7 +182,9 @@ public abstract class RazorPage : RazorPageBase
                 Resources.FormatSectionNotDefined(
                     viewContext.ExecutingFilePath,
                     sectionName,
-                    viewContext.View.Path));
+                    viewContext.View.Path
+                )
+            );
         }
         else
         {
@@ -211,14 +219,16 @@ public abstract class RazorPage : RazorPageBase
         // b) if no sections are defined, then the body is rendered if it's available.
         if (PreviousSectionWriters != null && PreviousSectionWriters.Count > 0)
         {
-            var sectionsNotRendered = PreviousSectionWriters.Keys.Except(
-                _renderedSections,
-                StringComparer.OrdinalIgnoreCase);
+            var sectionsNotRendered = PreviousSectionWriters
+                .Keys
+                .Except(_renderedSections, StringComparer.OrdinalIgnoreCase);
 
             string[] sectionsNotIgnored;
             if (_ignoredSections != null)
             {
-                sectionsNotIgnored = sectionsNotRendered.Except(_ignoredSections, StringComparer.OrdinalIgnoreCase).ToArray();
+                sectionsNotIgnored = sectionsNotRendered
+                    .Except(_ignoredSections, StringComparer.OrdinalIgnoreCase)
+                    .ToArray();
             }
             else
             {
@@ -228,14 +238,20 @@ public abstract class RazorPage : RazorPageBase
             if (sectionsNotIgnored.Length > 0)
             {
                 var sectionNames = string.Join(", ", sectionsNotIgnored);
-                throw new InvalidOperationException(Resources.FormatSectionsNotRendered(Path, sectionNames, nameof(IgnoreSection)));
+                throw new InvalidOperationException(
+                    Resources.FormatSectionsNotRendered(Path, sectionNames, nameof(IgnoreSection))
+                );
             }
         }
         else if (BodyContent != null && !_renderedBody && !_ignoreBody)
         {
             // There are no sections defined, but RenderBody was NOT called.
             // If a body was defined and the body not ignored, then RenderBody should have been called.
-            var message = Resources.FormatRenderBodyNotCalled(nameof(RenderBody), Path, nameof(IgnoreBody));
+            var message = Resources.FormatRenderBodyNotCalled(
+                nameof(RenderBody),
+                Path,
+                nameof(IgnoreBody)
+            );
             throw new InvalidOperationException(message);
         }
     }
@@ -256,7 +272,9 @@ public abstract class RazorPage : RazorPageBase
     {
         if (PreviousSectionWriters == null)
         {
-            throw new InvalidOperationException(Resources.FormatRazorPage_MethodCannotBeCalled(methodName, Path));
+            throw new InvalidOperationException(
+                Resources.FormatRazorPage_MethodCannotBeCalled(methodName, Path)
+            );
         }
     }
 }

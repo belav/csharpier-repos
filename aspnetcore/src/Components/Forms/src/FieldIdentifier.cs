@@ -15,7 +15,10 @@ namespace Microsoft.AspNetCore.Components.Forms;
 /// </summary>
 public readonly struct FieldIdentifier : IEquatable<FieldIdentifier>
 {
-    private static readonly ConcurrentDictionary<(Type ModelType, string FieldName), Func<object, object>> _fieldAccessors = new();
+    private static readonly ConcurrentDictionary<
+        (Type ModelType, string FieldName),
+        Func<object, object>
+    > _fieldAccessors = new();
 
     static FieldIdentifier()
     {
@@ -46,7 +49,10 @@ public readonly struct FieldIdentifier : IEquatable<FieldIdentifier>
 
         if (model.GetType().IsValueType)
         {
-            throw new ArgumentException("The model must be a reference-typed object.", nameof(model));
+            throw new ArgumentException(
+                "The model must be a reference-typed object.",
+                nameof(model)
+            );
         }
 
         Model = model;
@@ -72,33 +78,34 @@ public readonly struct FieldIdentifier : IEquatable<FieldIdentifier>
         // We want to compare Model instances by reference. RuntimeHelpers.GetHashCode returns identical hashes for equal object references (ignoring any `Equals`/`GetHashCode` overrides) which is what we want.
         var modelHash = RuntimeHelpers.GetHashCode(Model);
         var fieldHash = StringComparer.Ordinal.GetHashCode(FieldName);
-        return (
-            modelHash,
-            fieldHash
-        )
-        .GetHashCode();
+        return (modelHash, fieldHash).GetHashCode();
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj is FieldIdentifier otherIdentifier
-        && Equals(otherIdentifier);
+    public override bool Equals(object? obj) =>
+        obj is FieldIdentifier otherIdentifier && Equals(otherIdentifier);
 
     /// <inheritdoc />
     public bool Equals(FieldIdentifier otherIdentifier)
     {
-        return ReferenceEquals(otherIdentifier.Model, Model) &&
-            string.Equals(otherIdentifier.FieldName, FieldName, StringComparison.Ordinal);
+        return ReferenceEquals(otherIdentifier.Model, Model)
+            && string.Equals(otherIdentifier.FieldName, FieldName, StringComparison.Ordinal);
     }
 
-    private static void ParseAccessor<T>(Expression<Func<T>> accessor, out object model, out string fieldName)
+    private static void ParseAccessor<T>(
+        Expression<Func<T>> accessor,
+        out object model,
+        out string fieldName
+    )
     {
         var accessorBody = accessor.Body;
 
         // Unwrap casts to object
-        if (accessorBody is UnaryExpression unaryExpression
+        if (
+            accessorBody is UnaryExpression unaryExpression
             && unaryExpression.NodeType == ExpressionType.Convert
-            && unaryExpression.Type == typeof(object))
+            && unaryExpression.Type == typeof(object)
+        )
         {
             accessorBody = unaryExpression.Operand;
         }
@@ -113,7 +120,9 @@ public readonly struct FieldIdentifier : IEquatable<FieldIdentifier>
                 switch (memberExpression.Expression)
                 {
                     case ConstantExpression constant when constant.Value == null:
-                        throw new ArgumentException("The provided expression must evaluate to a non-null value.");
+                        throw new ArgumentException(
+                            "The provided expression must evaluate to a non-null value."
+                        );
                     case ConstantExpression constant when constant.Value != null:
                         model = constant.Value;
                         break;
@@ -127,31 +136,43 @@ public readonly struct FieldIdentifier : IEquatable<FieldIdentifier>
                         // of type Func<object, object> so we can cheaply map from "something" to "something.Member".
                         var modelLambda = Expression.Lambda(memberExpression.Expression);
                         var modelLambdaCompiled = (Func<object?>)modelLambda.Compile();
-                        var result = modelLambdaCompiled() ??
-                            throw new ArgumentException("The provided expression must evaluate to a non-null value.");
+                        var result =
+                            modelLambdaCompiled()
+                            ?? throw new ArgumentException(
+                                "The provided expression must evaluate to a non-null value."
+                            );
 
                         model = result;
                         break;
                     default:
-                        throw new ArgumentException($"The provided expression contains a {accessorBody.GetType().Name} which is not supported. {nameof(FieldIdentifier)} only supports simple member accessors (fields, properties) of an object.");
+                        throw new ArgumentException(
+                            $"The provided expression contains a {accessorBody.GetType().Name} which is not supported. {nameof(FieldIdentifier)} only supports simple member accessors (fields, properties) of an object."
+                        );
                 }
                 break;
-            case MethodCallExpression methodCallExpression when ExpressionFormatter.IsSingleArgumentIndexer(accessorBody):
-                fieldName = ExpressionFormatter.FormatIndexArgument(methodCallExpression.Arguments[0]);
+            case MethodCallExpression methodCallExpression
+                when ExpressionFormatter.IsSingleArgumentIndexer(accessorBody):
+                fieldName = ExpressionFormatter.FormatIndexArgument(
+                    methodCallExpression.Arguments[0]
+                );
                 model = GetModelFromIndexer(methodCallExpression.Object!);
                 break;
-            case BinaryExpression binaryExpression when binaryExpression.NodeType == ExpressionType.ArrayIndex:
+            case BinaryExpression binaryExpression
+                when binaryExpression.NodeType == ExpressionType.ArrayIndex:
                 fieldName = ExpressionFormatter.FormatIndexArgument(binaryExpression.Right);
                 model = GetModelFromIndexer(binaryExpression.Left);
                 break;
             default:
-                throw new ArgumentException($"The provided expression contains a {accessorBody.GetType().Name} which is not supported. {nameof(FieldIdentifier)} only supports simple member accessors (fields, properties) of an object.");
+                throw new ArgumentException(
+                    $"The provided expression contains a {accessorBody.GetType().Name} which is not supported. {nameof(FieldIdentifier)} only supports simple member accessors (fields, properties) of an object."
+                );
         }
     }
 
     internal static object GetModelFromMemberAccess(
         MemberExpression member,
-        ConcurrentDictionary<(Type ModelType, string FieldName), Func<object, object>>? cache = null)
+        ConcurrentDictionary<(Type ModelType, string FieldName), Func<object, object>>? cache = null
+    )
     {
         cache ??= _fieldAccessors;
         Func<object, object>? accessor = null;
@@ -159,7 +180,11 @@ public readonly struct FieldIdentifier : IEquatable<FieldIdentifier>
         switch (member.Expression)
         {
             case ConstantExpression model:
-                value = model.Value ?? throw new ArgumentException("The provided expression must evaluate to a non-null value.");
+                value =
+                    model.Value
+                    ?? throw new ArgumentException(
+                        "The provided expression must evaluate to a non-null value."
+                    );
                 accessor = cache.GetOrAdd((value.GetType(), member.Member.Name), CreateAccessor);
                 break;
             default:
@@ -173,7 +198,9 @@ public readonly struct FieldIdentifier : IEquatable<FieldIdentifier>
 
         if (value == null)
         {
-            throw new ArgumentException("The provided expression must evaluate to a non-null value.");
+            throw new ArgumentException(
+                "The provided expression must evaluate to a non-null value."
+            );
         }
 
         var result = accessor(value);
@@ -182,7 +209,8 @@ public readonly struct FieldIdentifier : IEquatable<FieldIdentifier>
         [UnconditionalSuppressMessage(
             "Trimming",
             "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code",
-            Justification = "Application code does not get trimmed. We expect the members in the expression to not be trimmed.")]
+            Justification = "Application code does not get trimmed. We expect the members in the expression to not be trimmed."
+        )]
         static Func<object, object> CreateAccessor((Type model, string member) arg)
         {
             var parameter = Expression.Parameter(typeof(object), "value");
@@ -204,7 +232,9 @@ public readonly struct FieldIdentifier : IEquatable<FieldIdentifier>
         var result = methodCallObjectLambdaCompiled();
         if (result is null)
         {
-            throw new ArgumentException("The provided expression must evaluate to a non-null value.");
+            throw new ArgumentException(
+                "The provided expression must evaluate to a non-null value."
+            );
         }
         model = result;
         return model;

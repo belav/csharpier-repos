@@ -26,13 +26,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void NoReferences_01()
         {
             var source =
-@"
+                @"
 interface I1
 {
     public I1 M();
 }
 ";
-            var comp1 = CreateEmptyCompilation(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute());
+            var comp1 = CreateEmptyCompilation(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute()
+            );
             CompileAndVerify(comp1, verify: Verification.FailsILVerify);
 
             Assert.Empty(comp1.GetUsedAssemblyReferences());
@@ -47,17 +50,20 @@ interface I1
         public void NoReferences_02()
         {
             var source =
-@"
+                @"
 public interface I1
 {
     public I1 M();
 }
 ";
-            var comp1 = CreateEmptyCompilation(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute());
+            var comp1 = CreateEmptyCompilation(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute()
+            );
             CompileAndVerify(comp1, verify: Verification.FailsILVerify);
 
             var source2 =
-@"
+                @"
 public class C2
 {
     public static void Main(I1 x)
@@ -71,21 +77,42 @@ public class C2
             verify<RetargetingAssemblySymbol>(source2, comp1.ToMetadataReference());
             Assert.Empty(comp1.GetUsedAssemblyReferences());
 
-            void verify<TAssemblySymbol>(string source2, MetadataReference reference) where TAssemblySymbol : AssemblySymbol
+            void verify<TAssemblySymbol>(string source2, MetadataReference reference)
+                where TAssemblySymbol : AssemblySymbol
             {
                 Compilation comp2 = AssertUsedAssemblyReferences(source2, reference);
-                Assert.IsType<TAssemblySymbol>(((CSharpCompilation)comp2).GetAssemblyOrModuleSymbol(reference));
+                Assert.IsType<TAssemblySymbol>(
+                    ((CSharpCompilation)comp2).GetAssemblyOrModuleSymbol(reference)
+                );
             }
         }
 
-        private void AssertUsedAssemblyReferences(Compilation comp, MetadataReference[] expected, DiagnosticDescription[] before, DiagnosticDescription[] after, MetadataReference[] specificReferencesToAssert)
+        private void AssertUsedAssemblyReferences(
+            Compilation comp,
+            MetadataReference[] expected,
+            DiagnosticDescription[] before,
+            DiagnosticDescription[] after,
+            MetadataReference[] specificReferencesToAssert
+        )
         {
             foreach (var c in CloneCompilationsWithUsings(comp, before, after))
             {
-                assertUsedAssemblyReferences(c.comp, expected, c.before, c.after, specificReferencesToAssert);
+                assertUsedAssemblyReferences(
+                    c.comp,
+                    expected,
+                    c.before,
+                    c.after,
+                    specificReferencesToAssert
+                );
             }
 
-            void assertUsedAssemblyReferences(Compilation comp, MetadataReference[] expected, DiagnosticDescription[] before, DiagnosticDescription[] after, MetadataReference[] specificReferencesToAssert)
+            void assertUsedAssemblyReferences(
+                Compilation comp,
+                MetadataReference[] expected,
+                DiagnosticDescription[] before,
+                DiagnosticDescription[] after,
+                MetadataReference[] specificReferencesToAssert
+            )
             {
                 comp.VerifyDiagnostics(before);
 
@@ -94,7 +121,10 @@ public class C2
 
                 if (hasCoreLibraryRef)
                 {
-                    Assert.Same(comp.ObjectType.ContainingAssembly, comp.GetAssemblyOrModuleSymbol(used[0]));
+                    Assert.Same(
+                        comp.ObjectType.ContainingAssembly,
+                        comp.GetAssemblyOrModuleSymbol(used[0])
+                    );
                     AssertEx.Equal(expected, used.Skip(1));
                 }
                 else
@@ -104,21 +134,44 @@ public class C2
 
                 Assert.Empty(used.Where(r => r.Properties.Kind == MetadataImageKind.Module));
 
-                var comp2 = comp.RemoveAllReferences().AddReferences(used.Concat(comp.References.Where(r => r.Properties.Kind == MetadataImageKind.Module)));
+                var comp2 = comp.RemoveAllReferences()
+                    .AddReferences(
+                        used.Concat(
+                            comp.References.Where(
+                                r => r.Properties.Kind == MetadataImageKind.Module
+                            )
+                        )
+                    );
 
-                if (!after.Any(d => ErrorFacts.GetSeverity((ErrorCode)d.Code) == DiagnosticSeverity.Error))
+                if (
+                    !after.Any(
+                        d => ErrorFacts.GetSeverity((ErrorCode)d.Code) == DiagnosticSeverity.Error
+                    )
+                )
                 {
-                    CompileAndVerify(comp2, verify: Verification.Skipped).Diagnostics.Where(d => d.Code != (int)ErrorCode.WRN_NoRuntimeMetadataVersion).Verify(after);
+                    CompileAndVerify(comp2, verify: Verification.Skipped)
+                        .Diagnostics
+                        .Where(d => d.Code != (int)ErrorCode.WRN_NoRuntimeMetadataVersion)
+                        .Verify(after);
 
                     if (specificReferencesToAssert is object)
                     {
-                        var tryRemove = specificReferencesToAssert.Where(reference => reference.Properties.Kind == MetadataImageKind.Assembly && !used.Contains(reference));
+                        var tryRemove = specificReferencesToAssert.Where(
+                            reference =>
+                                reference.Properties.Kind == MetadataImageKind.Assembly
+                                && !used.Contains(reference)
+                        );
                         if (tryRemove.Count() > 1)
                         {
                             foreach (var reference in tryRemove)
                             {
                                 var comp3 = comp.RemoveReferences(reference);
-                                CompileAndVerify(comp3, verify: Verification.Skipped).Diagnostics.Where(d => d.Code != (int)ErrorCode.WRN_NoRuntimeMetadataVersion).Verify(after);
+                                CompileAndVerify(comp3, verify: Verification.Skipped)
+                                    .Diagnostics
+                                    .Where(
+                                        d => d.Code != (int)ErrorCode.WRN_NoRuntimeMetadataVersion
+                                    )
+                                    .Verify(after);
                             }
                         }
                     }
@@ -130,7 +183,15 @@ public class C2
             }
         }
 
-        private static IEnumerable<(Compilation comp, DiagnosticDescription[] before, DiagnosticDescription[] after)> CloneCompilationsWithUsings(Compilation comp, DiagnosticDescription[] before, DiagnosticDescription[] after)
+        private static IEnumerable<(
+            Compilation comp,
+            DiagnosticDescription[] before,
+            DiagnosticDescription[] after
+        )> CloneCompilationsWithUsings(
+            Compilation comp,
+            DiagnosticDescription[] before,
+            DiagnosticDescription[] after
+        )
         {
             var tree = comp.SyntaxTrees.Single();
             var unit = (CompilationUnitSyntax)tree.GetRoot();
@@ -148,29 +209,46 @@ public class C2
             // With regular usings
             var builder = new System.Text.StringBuilder();
             builder.Append(beforeUsings);
-            builder.Append(@"
+            builder.Append(
+                @"
 #line 1000
-");
+"
+            );
             foreach (var directive in unit.Usings)
             {
                 builder.Append(directive.ToFullString());
             }
 
-            builder.Append(@"
+            builder.Append(
+                @"
 #line 2000
-");
+"
+            );
             builder.Append(afterUsings);
 
-            yield return (comp.ReplaceSyntaxTree(tree, CSharpTestBase.Parse(builder.ToString(), tree.FilePath, (CSharpParseOptions)tree.Options)), before, after);
+            yield return (
+                comp.ReplaceSyntaxTree(
+                    tree,
+                    CSharpTestBase.Parse(
+                        builder.ToString(),
+                        tree.FilePath,
+                        (CSharpParseOptions)tree.Options
+                    )
+                ),
+                before,
+                after
+            );
 
             // With global usings
             before = adjustDiagnosticDescription(before);
             after = adjustDiagnosticDescription(after);
 
             builder.Clear();
-            builder.Append(@"
+            builder.Append(
+                @"
 #line 1000
-");
+"
+            );
             foreach (var directive in unit.Usings)
             {
                 builder.Append(directive.ToFullString().Replace("using", "global using"));
@@ -182,28 +260,54 @@ public class C2
             builder.Append(beforeUsings);
             builder.Append(globalUsings);
 
-            builder.Append(@"
+            builder.Append(
+                @"
 #line 2000
-");
+"
+            );
             builder.Append(afterUsings);
 
-            LanguageVersion treeLanguageVersion = ((CSharpParseOptions)tree.Options).LanguageVersion;
-            var parseOptions = ((CSharpParseOptions)tree.Options).WithLanguageVersion(treeLanguageVersion > LanguageVersion.CSharp10 ? treeLanguageVersion : LanguageVersion.CSharp10);
-            yield return (comp.ReplaceSyntaxTree(tree, CSharpTestBase.Parse(builder.ToString(), tree.FilePath, parseOptions)), before, after);
+            LanguageVersion treeLanguageVersion = (
+                (CSharpParseOptions)tree.Options
+            ).LanguageVersion;
+            var parseOptions = ((CSharpParseOptions)tree.Options).WithLanguageVersion(
+                treeLanguageVersion > LanguageVersion.CSharp10
+                    ? treeLanguageVersion
+                    : LanguageVersion.CSharp10
+            );
+            yield return (
+                comp.ReplaceSyntaxTree(
+                    tree,
+                    CSharpTestBase.Parse(builder.ToString(), tree.FilePath, parseOptions)
+                ),
+                before,
+                after
+            );
 
             // With global usings in a separate unit
             builder.Clear();
             builder.Append(beforeUsings);
 
-            builder.Append(@"
+            builder.Append(
+                @"
 #line 2000
-");
+"
+            );
             builder.Append(afterUsings);
 
-            yield return (comp.ReplaceSyntaxTree(tree, CSharpTestBase.Parse(builder.ToString(), tree.FilePath, parseOptions)).
-                AddSyntaxTrees(CSharpTestBase.Parse(globalUsings, "", parseOptions)), before, after);
+            yield return (
+                comp.ReplaceSyntaxTree(
+                        tree,
+                        CSharpTestBase.Parse(builder.ToString(), tree.FilePath, parseOptions)
+                    )
+                    .AddSyntaxTrees(CSharpTestBase.Parse(globalUsings, "", parseOptions)),
+                before,
+                after
+            );
 
-            static DiagnosticDescription[] adjustDiagnosticDescription(DiagnosticDescription[] input)
+            static DiagnosticDescription[] adjustDiagnosticDescription(
+                DiagnosticDescription[] input
+            )
             {
                 if (input is null)
                 {
@@ -218,54 +322,108 @@ public class C2
 
                     if (old.Code is (int)ErrorCode.HDN_UnusedUsingDirective)
                     {
-                        allocateOutput(input, ref output)[i] = old.WithSquiggledText("global " + old.SquiggledText);
+                        allocateOutput(input, ref output)[i] = old.WithSquiggledText(
+                            "global " + old.SquiggledText
+                        );
                     }
                     else if (old.LocationLine is > 1000 and < 2000)
                     {
-                        allocateOutput(input, ref output)[i] = old.WithLocation(old.LocationLine, old.LocationCharacter + 7);
+                        allocateOutput(input, ref output)[i] = old.WithLocation(
+                            old.LocationLine,
+                            old.LocationCharacter + 7
+                        );
                     }
                 }
 
                 return output ?? input;
             }
 
-            static DiagnosticDescription[] allocateOutput(DiagnosticDescription[] input, ref DiagnosticDescription[] output)
+            static DiagnosticDescription[] allocateOutput(
+                DiagnosticDescription[] input,
+                ref DiagnosticDescription[] output
+            )
             {
                 if (output is null)
                 {
-                    System.Array.Copy(input, output = new DiagnosticDescription[input.Length], input.Length);
+                    System
+                        .Array
+                        .Copy(
+                            input,
+                            output = new DiagnosticDescription[input.Length],
+                            input.Length
+                        );
                 }
 
                 return output;
             }
         }
 
-        private void AssertUsedAssemblyReferences(Compilation comp, params MetadataReference[] expected)
+        private void AssertUsedAssemblyReferences(
+            Compilation comp,
+            params MetadataReference[] expected
+        )
         {
-            AssertUsedAssemblyReferences(comp, expected, new DiagnosticDescription[] { }, new DiagnosticDescription[] { }, specificReferencesToAssert: null);
+            AssertUsedAssemblyReferences(
+                comp,
+                expected,
+                new DiagnosticDescription[] { },
+                new DiagnosticDescription[] { },
+                specificReferencesToAssert: null
+            );
         }
 
-        private void AssertUsedAssemblyReferences(Compilation comp, MetadataReference[] expected, MetadataReference[] specificReferencesToAssert)
+        private void AssertUsedAssemblyReferences(
+            Compilation comp,
+            MetadataReference[] expected,
+            MetadataReference[] specificReferencesToAssert
+        )
         {
-            AssertUsedAssemblyReferences(comp, expected, new DiagnosticDescription[] { }, new DiagnosticDescription[] { }, specificReferencesToAssert);
+            AssertUsedAssemblyReferences(
+                comp,
+                expected,
+                new DiagnosticDescription[] { },
+                new DiagnosticDescription[] { },
+                specificReferencesToAssert
+            );
         }
 
-        private Compilation AssertUsedAssemblyReferences(string source, MetadataReference[] references, params MetadataReference[] expected)
-            => AssertUsedAssemblyReferences(source, references, expected, parseOptions: null);
+        private Compilation AssertUsedAssemblyReferences(
+            string source,
+            MetadataReference[] references,
+            params MetadataReference[] expected
+        ) => AssertUsedAssemblyReferences(source, references, expected, parseOptions: null);
 
-        private Compilation AssertUsedAssemblyReferences(string source, MetadataReference[] references, MetadataReference[] expected, CSharpParseOptions parseOptions, CSharpCompilationOptions options = null)
+        private Compilation AssertUsedAssemblyReferences(
+            string source,
+            MetadataReference[] references,
+            MetadataReference[] expected,
+            CSharpParseOptions parseOptions,
+            CSharpCompilationOptions options = null
+        )
         {
-            Compilation comp = CreateCompilation(source, parseOptions: parseOptions, references: references, options: options);
+            Compilation comp = CreateCompilation(
+                source,
+                parseOptions: parseOptions,
+                references: references,
+                options: options
+            );
             AssertUsedAssemblyReferences(comp, expected, references);
             return comp;
         }
 
-        private Compilation AssertUsedAssemblyReferences(string source, params MetadataReference[] references)
+        private Compilation AssertUsedAssemblyReferences(
+            string source,
+            params MetadataReference[] references
+        )
         {
             return AssertUsedAssemblyReferences(source, references, references);
         }
 
-        private static void AssertUsedAssemblyReferences(string source, MetadataReference[] references, params DiagnosticDescription[] expected)
+        private static void AssertUsedAssemblyReferences(
+            string source,
+            MetadataReference[] references,
+            params DiagnosticDescription[] expected
+        )
         {
             Compilation comp = CreateCompilation(source, references: references);
 
@@ -274,40 +432,72 @@ public class C2
                 assertUsedAssemblyReferences(c.comp, c.before);
             }
 
-            static void assertUsedAssemblyReferences(Compilation comp, params DiagnosticDescription[] expected)
+            static void assertUsedAssemblyReferences(
+                Compilation comp,
+                params DiagnosticDescription[] expected
+            )
             {
                 var diagnostics = comp.GetDiagnostics();
                 diagnostics.Verify(expected);
 
                 Assert.True(diagnostics.Any(d => d.DefaultSeverity == DiagnosticSeverity.Error));
-                AssertEx.Equal(comp.References.Where(r => r.Properties.Kind == MetadataImageKind.Assembly), comp.GetUsedAssemblyReferences());
+                AssertEx.Equal(
+                    comp.References.Where(r => r.Properties.Kind == MetadataImageKind.Assembly),
+                    comp.GetUsedAssemblyReferences()
+                );
             }
         }
 
-        private ImmutableArray<MetadataReference> CompileWithUsedAssemblyReferences(string source, TargetFramework targetFramework, params MetadataReference[] references)
+        private ImmutableArray<MetadataReference> CompileWithUsedAssemblyReferences(
+            string source,
+            TargetFramework targetFramework,
+            params MetadataReference[] references
+        )
         {
-            return CompileWithUsedAssemblyReferences(source, targetFramework, options: null, references);
+            return CompileWithUsedAssemblyReferences(
+                source,
+                targetFramework,
+                options: null,
+                references
+            );
         }
 
-        private ImmutableArray<MetadataReference> CompileWithUsedAssemblyReferences(string source, TargetFramework targetFramework, CSharpCompilationOptions options, params MetadataReference[] references)
+        private ImmutableArray<MetadataReference> CompileWithUsedAssemblyReferences(
+            string source,
+            TargetFramework targetFramework,
+            CSharpCompilationOptions options,
+            params MetadataReference[] references
+        )
         {
             options ??= TestOptions.ReleaseDll;
-            options = options.WithSpecificDiagnosticOptions(options.SpecificDiagnosticOptions.Add("CS1591", ReportDiagnostic.Suppress));
+            options = options.WithSpecificDiagnosticOptions(
+                options.SpecificDiagnosticOptions.Add("CS1591", ReportDiagnostic.Suppress)
+            );
 
-            Compilation comp = CreateEmptyCompilation(source,
-                                                      references: TargetFrameworkUtil.GetReferences(targetFramework).Concat(references),
-                                                      options: options,
-                                                      parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Diagnose));
+            Compilation comp = CreateEmptyCompilation(
+                source,
+                references: TargetFrameworkUtil.GetReferences(targetFramework).Concat(references),
+                options: options,
+                parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Diagnose)
+            );
             return CompileWithUsedAssemblyReferences(comp, specificReferencesToAssert: references);
         }
 
-        private ImmutableArray<MetadataReference> CompileWithUsedAssemblyReferences(Compilation comp, string expectedOutput = null, MetadataReference[] specificReferencesToAssert = null)
+        private ImmutableArray<MetadataReference> CompileWithUsedAssemblyReferences(
+            Compilation comp,
+            string expectedOutput = null,
+            MetadataReference[] specificReferencesToAssert = null
+        )
         {
             ImmutableArray<MetadataReference> result = default;
 
             foreach (var c in CloneCompilationsWithUsings(comp, null, null))
             {
-                var currentResult = compileWithUsedAssemblyReferences(c.comp, expectedOutput, specificReferencesToAssert);
+                var currentResult = compileWithUsedAssemblyReferences(
+                    c.comp,
+                    expectedOutput,
+                    specificReferencesToAssert
+                );
 
                 if (result.IsDefault)
                 {
@@ -321,48 +511,86 @@ public class C2
 
             return result;
 
-            ImmutableArray<MetadataReference> compileWithUsedAssemblyReferences(Compilation comp, string expectedOutput = null, MetadataReference[] specificReferencesToAssert = null)
+            ImmutableArray<MetadataReference> compileWithUsedAssemblyReferences(
+                Compilation comp,
+                string expectedOutput = null,
+                MetadataReference[] specificReferencesToAssert = null
+            )
             {
                 var used = comp.GetUsedAssemblyReferences();
-                CompileAndVerify(comp, verify: Verification.Skipped, expectedOutput: expectedOutput).VerifyDiagnostics();
+                CompileAndVerify(comp, verify: Verification.Skipped, expectedOutput: expectedOutput)
+                    .VerifyDiagnostics();
 
                 Assert.Empty(used.Where(r => r.Properties.Kind == MetadataImageKind.Module));
 
                 if (specificReferencesToAssert is object)
                 {
-                    var tryRemove = specificReferencesToAssert.Where(reference => reference.Properties.Kind == MetadataImageKind.Assembly && !used.Contains(reference));
+                    var tryRemove = specificReferencesToAssert.Where(
+                        reference =>
+                            reference.Properties.Kind == MetadataImageKind.Assembly
+                            && !used.Contains(reference)
+                    );
                     if (tryRemove.Count() > 1)
                     {
                         foreach (var reference in tryRemove)
                         {
                             var comp3 = comp.RemoveReferences(reference);
-                            CompileAndVerify(comp3, verify: Verification.Skipped, expectedOutput: expectedOutput).VerifyDiagnostics();
+                            CompileAndVerify(
+                                    comp3,
+                                    verify: Verification.Skipped,
+                                    expectedOutput: expectedOutput
+                                )
+                                .VerifyDiagnostics();
                         }
                     }
                 }
 
-                var comp2 = comp.RemoveAllReferences().AddReferences(used.Concat(comp.References.Where(r => r.Properties.Kind == MetadataImageKind.Module)));
-                CompileAndVerify(comp2, verify: Verification.Skipped, expectedOutput: expectedOutput).VerifyDiagnostics();
+                var comp2 = comp.RemoveAllReferences()
+                    .AddReferences(
+                        used.Concat(
+                            comp.References.Where(
+                                r => r.Properties.Kind == MetadataImageKind.Module
+                            )
+                        )
+                    );
+                CompileAndVerify(
+                        comp2,
+                        verify: Verification.Skipped,
+                        expectedOutput: expectedOutput
+                    )
+                    .VerifyDiagnostics();
 
                 return used;
             }
         }
 
-        private ImmutableArray<MetadataReference> CompileWithUsedAssemblyReferences(string source, params MetadataReference[] references)
+        private ImmutableArray<MetadataReference> CompileWithUsedAssemblyReferences(
+            string source,
+            params MetadataReference[] references
+        )
         {
             return CompileWithUsedAssemblyReferences(source, TargetFramework.Standard, references);
         }
 
-        private void CompileWithUsedAssemblyReferences(string source, CSharpCompilationOptions options, params MetadataReference[] references)
+        private void CompileWithUsedAssemblyReferences(
+            string source,
+            CSharpCompilationOptions options,
+            params MetadataReference[] references
+        )
         {
-            CompileWithUsedAssemblyReferences(source, TargetFramework.Standard, options: options, references);
+            CompileWithUsedAssemblyReferences(
+                source,
+                TargetFramework.Standard,
+                options: options,
+                references
+            );
         }
 
         [Fact]
         public void NoReferences_03()
         {
             var source =
-@"
+                @"
 namespace System
 {
     public class Object {}
@@ -380,10 +608,10 @@ public interface I1
             comp1.VerifyEmitDiagnostics(
                 // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
                 Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1)
-                );
+            );
 
             var source2 =
-@"
+                @"
 public class C2
 {
     public static object Main(I1 x)
@@ -398,11 +626,18 @@ public class C2
             verify<SourceAssemblySymbol>(source2, comp1.ToMetadataReference());
             Assert.Empty(comp1.GetUsedAssemblyReferences());
 
-            void verify<TAssemblySymbol>(string source2, MetadataReference reference) where TAssemblySymbol : AssemblySymbol
+            void verify<TAssemblySymbol>(string source2, MetadataReference reference)
+                where TAssemblySymbol : AssemblySymbol
             {
-                Compilation comp2 = CreateEmptyCompilation(source2, references: new[] { reference, SystemCoreRef, SystemDrawingRef }, parseOptions: parseOptions);
+                Compilation comp2 = CreateEmptyCompilation(
+                    source2,
+                    references: new[] { reference, SystemCoreRef, SystemDrawingRef },
+                    parseOptions: parseOptions
+                );
                 AssertUsedAssemblyReferences(comp2);
-                Assert.IsType<TAssemblySymbol>(((CSharpCompilation)comp2).GetAssemblyOrModuleSymbol(reference));
+                Assert.IsType<TAssemblySymbol>(
+                    ((CSharpCompilation)comp2).GetAssemblyOrModuleSymbol(reference)
+                );
             }
         }
 
@@ -410,7 +645,7 @@ public class C2
         public void NoReferences_04()
         {
             var source =
-@"
+                @"
 public interface I1
 {
     public I1 M1();
@@ -421,7 +656,7 @@ public interface I1
             CompileAndVerify(comp1, verify: Verification.FailsILVerify);
 
             var source2 =
-@"
+                @"
 public interface I2
 {
     public I1 M2();
@@ -432,11 +667,18 @@ public interface I2
             verify<RetargetingAssemblySymbol>(source2, comp1.ToMetadataReference());
             Assert.Empty(comp1.GetUsedAssemblyReferences());
 
-            void verify<TAssemblySymbol>(string source2, MetadataReference reference) where TAssemblySymbol : AssemblySymbol
+            void verify<TAssemblySymbol>(string source2, MetadataReference reference)
+                where TAssemblySymbol : AssemblySymbol
             {
-                Compilation comp2 = CreateEmptyCompilation(source2, references: new[] { reference, SystemCoreRef, SystemDrawingRef }, parseOptions: parseOptions);
+                Compilation comp2 = CreateEmptyCompilation(
+                    source2,
+                    references: new[] { reference, SystemCoreRef, SystemDrawingRef },
+                    parseOptions: parseOptions
+                );
                 AssertUsedAssemblyReferences(comp2, reference);
-                Assert.IsType<TAssemblySymbol>(((CSharpCompilation)comp2).GetAssemblyOrModuleSymbol(reference));
+                Assert.IsType<TAssemblySymbol>(
+                    ((CSharpCompilation)comp2).GetAssemblyOrModuleSymbol(reference)
+                );
             }
         }
 
@@ -444,7 +686,7 @@ public interface I2
         public void FieldReference_01()
         {
             var source1 =
-@"
+                @"
 public class C1
 {
     public static int F1 = 0;
@@ -456,7 +698,7 @@ public class C1
             var comp1ImageRef = comp1.EmitToImageReference();
 
             var source2 =
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -470,7 +712,7 @@ public class C2
             verify<SourceAssemblySymbol>(source2, comp1Ref);
 
             var source3 =
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -484,10 +726,13 @@ public class C2
             verify<PEAssemblySymbol>(source3, comp1ImageRef);
             verify<SourceAssemblySymbol>(source3, comp1Ref);
 
-            void verify<TAssemblySymbol>(string source2, MetadataReference reference) where TAssemblySymbol : AssemblySymbol
+            void verify<TAssemblySymbol>(string source2, MetadataReference reference)
+                where TAssemblySymbol : AssemblySymbol
             {
                 Compilation comp2 = AssertUsedAssemblyReferences(source2, reference);
-                Assert.IsType<TAssemblySymbol>(((CSharpCompilation)comp2).GetAssemblyOrModuleSymbol(reference));
+                Assert.IsType<TAssemblySymbol>(
+                    ((CSharpCompilation)comp2).GetAssemblyOrModuleSymbol(reference)
+                );
             }
         }
 
@@ -495,7 +740,7 @@ public class C2
         public void FieldReference_02()
         {
             var source0 =
-@"
+                @"
 public class C0
 {
     public static C0 F0 = new C0();
@@ -508,7 +753,7 @@ public class C0
             var comp0ImageRef = comp0.EmitToImageReference();
 
             var source1 =
-@"
+                @"
 public class C1
 {
     public static C0 F0 = C0.F0;
@@ -522,7 +767,7 @@ public class C1
             var comp1ImageRef = comp1.EmitToImageReference();
 
             var source2 =
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -538,7 +783,7 @@ public class C2
             verify<RetargetingAssemblySymbol>(source2, comp0ImageRef, comp1Ref);
 
             var source3 =
-@"
+                @"
 using static C1;
 
 public class C2
@@ -555,10 +800,17 @@ public class C2
 
             verify<SourceAssemblySymbol>(source3, comp0Ref, comp1Ref);
 
-            void verify<TAssemblySymbol>(string source2, MetadataReference reference0, MetadataReference reference1) where TAssemblySymbol : AssemblySymbol
+            void verify<TAssemblySymbol>(
+                string source2,
+                MetadataReference reference0,
+                MetadataReference reference1
+            )
+                where TAssemblySymbol : AssemblySymbol
             {
                 Compilation comp2 = AssertUsedAssemblyReferences(source2, reference0, reference1);
-                Assert.IsType<TAssemblySymbol>(((CSharpCompilation)comp2).GetAssemblyOrModuleSymbol(reference1));
+                Assert.IsType<TAssemblySymbol>(
+                    ((CSharpCompilation)comp2).GetAssemblyOrModuleSymbol(reference1)
+                );
             }
         }
 
@@ -566,7 +818,7 @@ public class C2
         public void FieldReference_03()
         {
             var source0 =
-@"
+                @"
 public class C0
 {
 }
@@ -578,7 +830,7 @@ public class C0
             var comp0ImageRef = comp0.EmitToImageReference();
 
             var source1 =
-@"
+                @"
 class C1
 {
     static C0 F0 = new C0();
@@ -586,13 +838,17 @@ class C1
 }
 ";
 
-            var comp1 = CreateCompilation(source1, references: new[] { comp0Ref }, options: TestOptions.DebugModule);
+            var comp1 = CreateCompilation(
+                source1,
+                references: new[] { comp0Ref },
+                options: TestOptions.DebugModule
+            );
             comp1.VerifyDiagnostics();
 
             var comp1Ref = comp1.EmitToImageReference();
 
             var source2 =
-@"
+                @"
 public class C2
 {
     static C1 F1 = C1.F1;
@@ -605,7 +861,7 @@ public class C2
             var comp2ImageRef = comp2.EmitToImageReference();
 
             var source3 =
-@"
+                @"
 public class C3
 {
     public static void Main()
@@ -641,7 +897,10 @@ public class C3
             var used = comp2.GetUsedAssemblyReferences();
 
             Assert.Equal(1, used.Length);
-            Assert.Same(comp2.ObjectType.ContainingAssembly, comp2.GetAssemblyOrModuleSymbol(used[0]));
+            Assert.Same(
+                comp2.ObjectType.ContainingAssembly,
+                comp2.GetAssemblyOrModuleSymbol(used[0])
+            );
 
             comp2Ref = comp2.ToMetadataReference();
             comp2ImageRef = comp2.EmitToImageReference();
@@ -653,17 +912,31 @@ public class C3
             verify3<PEAssemblySymbol>(source3, comp2ImageRef);
             verify3<SourceAssemblySymbol>(source3, comp2Ref);
 
-            Compilation verify2<TAssemblySymbol>(string source2, MetadataReference reference0, MetadataReference reference1) where TAssemblySymbol : AssemblySymbol
+            Compilation verify2<TAssemblySymbol>(
+                string source2,
+                MetadataReference reference0,
+                MetadataReference reference1
+            )
+                where TAssemblySymbol : AssemblySymbol
             {
-                var comp2 = AssertUsedAssemblyReferences(source2, new[] { reference0, reference1 }, reference0);
-                Assert.IsType<TAssemblySymbol>(((CSharpCompilation)comp2).GetAssemblyOrModuleSymbol(reference0));
+                var comp2 = AssertUsedAssemblyReferences(
+                    source2,
+                    new[] { reference0, reference1 },
+                    reference0
+                );
+                Assert.IsType<TAssemblySymbol>(
+                    ((CSharpCompilation)comp2).GetAssemblyOrModuleSymbol(reference0)
+                );
                 return comp2;
             }
 
-            void verify3<TAssemblySymbol>(string source3, params MetadataReference[] references) where TAssemblySymbol : AssemblySymbol
+            void verify3<TAssemblySymbol>(string source3, params MetadataReference[] references)
+                where TAssemblySymbol : AssemblySymbol
             {
                 Compilation comp3 = AssertUsedAssemblyReferences(source3, references: references);
-                Assert.IsType<TAssemblySymbol>(((CSharpCompilation)comp3).GetAssemblyOrModuleSymbol(references.Last()));
+                Assert.IsType<TAssemblySymbol>(
+                    ((CSharpCompilation)comp3).GetAssemblyOrModuleSymbol(references.Last())
+                );
             }
         }
 
@@ -671,7 +944,7 @@ public class C3
         public void FieldReference_04()
         {
             var source1 =
-@"
+                @"
 namespace N1
 {
     public enum E1
@@ -683,8 +956,9 @@ namespace N1
             var comp1 = CreateCompilation(source1);
 
             var comp1Ref = comp1.ToMetadataReference();
-            verify(comp1Ref,
-@"
+            verify(
+                comp1Ref,
+                @"
 public class C2
 {
     public static void Main()
@@ -692,10 +966,12 @@ public class C2
         _ = N1.E1.F1 + 1;
     }
 }
-");
+"
+            );
 
-            verify(comp1Ref,
-@"
+            verify(
+                comp1Ref,
+                @"
 using N1;
 public class C2
 {
@@ -704,10 +980,12 @@ public class C2
         _ = E1.F1 + 1;
     }
 }
-");
+"
+            );
 
-            verify(comp1Ref,
-@"
+            verify(
+                comp1Ref,
+                @"
 using static N1.E1;
 public class C2
 {
@@ -716,10 +994,12 @@ public class C2
         _ = F1 + 1;
     }
 }
-");
+"
+            );
 
-            verify(comp1Ref,
-@"
+            verify(
+                comp1Ref,
+                @"
 using @alias = N1.E1;
 public class C2
 {
@@ -728,7 +1008,8 @@ public class C2
         _ = alias.F1 + 1;
     }
 }
-");
+"
+            );
 
             void verify(MetadataReference reference, string source)
             {
@@ -740,14 +1021,14 @@ public class C2
         public void FieldReference_05()
         {
             var source0 =
-@"
+                @"
 public class C0 {}
 ";
             var comp0 = CreateCompilation(source0);
             var comp0Ref = comp0.ToMetadataReference();
 
             var source1 =
-@"
+                @"
 public class C1<T>
 {
     public enum E1
@@ -765,8 +1046,10 @@ public class C1<T>
             comp1.VerifyDiagnostics();
             var comp1Ref = comp1.ToMetadataReference();
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 public class C2
 {
     public static void Main()
@@ -774,10 +1057,13 @@ public class C2
         _ = C1<C0>.E1.F1 + 1;
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using static C1<C0>;
 public class C2
 {
@@ -786,10 +1072,13 @@ public class C2
         _ = E1.F1 + 1;
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using static C1<C0>.E1;
 public class C2
 {
@@ -798,10 +1087,13 @@ public class C2
         _ = F1 + 1;
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using @alias = C1<C0>.E1;
 public class C2
 {
@@ -810,10 +1102,13 @@ public class C2
         _ = alias.F1 + 1;
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using @alias = C1<C0>;
 public class C2
 {
@@ -822,10 +1117,13 @@ public class C2
         _ = alias.E1.F1 + 1;
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 public class C2
 {
     public static void Main()
@@ -833,10 +1131,13 @@ public class C2
         _ = nameof(C1<C0>.E1.F1);
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using static C1<C0>;
 public class C2
 {
@@ -845,10 +1146,13 @@ public class C2
         _ = nameof(E1.F1);
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using static C1<C0>.E1;
 public class C2
 {
@@ -857,10 +1161,13 @@ public class C2
         _ = nameof(F1);
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using @alias = C1<C0>.E1;
 public class C2
 {
@@ -869,10 +1176,13 @@ public class C2
         _ = nameof(alias.F1);
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using @alias = C1<C0>;
 public class C2
 {
@@ -881,10 +1191,13 @@ public class C2
         _ = nameof(alias.E1.F1);
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 public class C2
 {
     public static void Main()
@@ -892,10 +1205,13 @@ public class C2
         _ = nameof(C1<C0>.C3.F3);
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using static C1<C0>;
 public class C2
 {
@@ -904,10 +1220,13 @@ public class C2
         _ = nameof(C3.F3);
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using @alias = C1<C0>.C3;
 public class C2
 {
@@ -916,10 +1235,13 @@ public class C2
         _ = nameof(alias.F3);
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using @alias = C1<C0>;
 public class C2
 {
@@ -928,7 +1250,8 @@ public class C2
         _ = nameof(alias.C3.F3);
     }
 }
-");
+"
+            );
 
             void verify(MetadataReference reference0, MetadataReference reference1, string source)
             {
@@ -940,14 +1263,14 @@ public class C2
         public void FieldReference_06()
         {
             var source0 =
-@"
+                @"
 public class C0 {}
 ";
             var comp0 = CreateCompilation(source0);
             var comp0Ref = comp0.ToMetadataReference();
 
             var source1 =
-@"
+                @"
 public class C1<T>
 {
     public enum E1
@@ -965,8 +1288,10 @@ public class C1<T>
             comp1.VerifyDiagnostics();
             var comp1Ref = comp1.ToMetadataReference();
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 class C2
 {
     /// <summary>
@@ -977,10 +1302,13 @@ class C2
     }
 }
 ",
-                hasTypeReferencesInUsing: false);
+                hasTypeReferencesInUsing: false
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using static C1<C0>;
 class C2
 {
@@ -991,10 +1319,13 @@ class C2
     {
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using static C1<C0>.E1;
 class C2
 {
@@ -1005,10 +1336,13 @@ class C2
     {
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using @alias = C1<C0>.E1;
 class C2
 {
@@ -1019,10 +1353,13 @@ class C2
     {
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using @alias = C1<C0>;
 class C2
 {
@@ -1033,10 +1370,13 @@ class C2
     {
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 class C2
 {
     /// <summary>
@@ -1047,10 +1387,13 @@ class C2
     }
 }
 ",
-                hasTypeReferencesInUsing: false);
+                hasTypeReferencesInUsing: false
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using static C1<C0>;
 class C2
 {
@@ -1061,10 +1404,13 @@ class C2
     {
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using @alias = C1<C0>.C3;
 class C2
 {
@@ -1075,10 +1421,13 @@ class C2
     {
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using @alias = C1<C0>;
 class C2
 {
@@ -1089,20 +1438,44 @@ class C2
     {
     }
 }
-");
+"
+            );
 
-            void verify(MetadataReference reference0, MetadataReference reference1, string source, bool hasTypeReferencesInUsing = true)
+            void verify(
+                MetadataReference reference0,
+                MetadataReference reference1,
+                string source,
+                bool hasTypeReferencesInUsing = true
+            )
             {
                 var references = new[] { reference0, reference1 };
-                Compilation comp2 = CreateCompilation(source, references: references, parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None));
-                AssertUsedAssemblyReferences(comp2, hasTypeReferencesInUsing ? references : new MetadataReference[] { }, references);
+                Compilation comp2 = CreateCompilation(
+                    source,
+                    references: references,
+                    parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)
+                );
+                AssertUsedAssemblyReferences(
+                    comp2,
+                    hasTypeReferencesInUsing ? references : new MetadataReference[] { },
+                    references
+                );
 
                 var expected = hasTypeReferencesInUsing ? references : new[] { reference1 };
 
-                Compilation comp3 = CreateCompilation(source, references: references, parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Parse));
+                Compilation comp3 = CreateCompilation(
+                    source,
+                    references: references,
+                    parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Parse)
+                );
                 AssertUsedAssemblyReferences(comp3, expected);
 
-                Compilation comp4 = CreateCompilation(source, references: references, parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Diagnose));
+                Compilation comp4 = CreateCompilation(
+                    source,
+                    references: references,
+                    parseOptions: TestOptions
+                        .Regular
+                        .WithDocumentationMode(DocumentationMode.Diagnose)
+                );
                 AssertUsedAssemblyReferences(comp4, expected);
             }
         }
@@ -1111,14 +1484,14 @@ class C2
         public void FieldReference_07()
         {
             var source0 =
-@"
+                @"
 public class C0 {}
 ";
             var comp0 = CreateCompilation(source0);
             var comp0Ref = comp0.ToMetadataReference();
 
             var source1 =
-@"
+                @"
 public class C1<T>
 {
     public enum E1
@@ -1132,7 +1505,7 @@ public class C1<T>
             var comp1Ref = comp1.ToMetadataReference();
 
             var attribute =
-@"
+                @"
 class TestAttribute : System.Attribute
 {
     public TestAttribute()
@@ -1143,8 +1516,10 @@ class TestAttribute : System.Attribute
 }
 ";
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 public class C2
 {
     [Test((int)C1<C0>.E1.F1 + 1)]
@@ -1152,10 +1527,13 @@ public class C2
     {
     }
 }
-" + attribute);
+" + attribute
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using static C1<C0>;
 public class C2
 {
@@ -1164,10 +1542,13 @@ public class C2
     {
     }
 }
-" + attribute);
+" + attribute
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using static C1<C0>.E1;
 public class C2
 {
@@ -1176,10 +1557,13 @@ public class C2
     {
     }
 }
-" + attribute);
+" + attribute
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using @alias = C1<C0>.E1;
 public class C2
 {
@@ -1188,10 +1572,13 @@ public class C2
     {
     }
 }
-" + attribute);
+" + attribute
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using @alias = C1<C0>;
 public class C2
 {
@@ -1200,10 +1587,13 @@ public class C2
     {
     }
 }
-" + attribute);
+" + attribute
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 public class C2
 {
     [Test(Value = (int)C1<C0>.E1.F1 + 1)]
@@ -1211,10 +1601,13 @@ public class C2
     {
     }
 }
-" + attribute);
+" + attribute
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using static C1<C0>;
 public class C2
 {
@@ -1223,10 +1616,13 @@ public class C2
     {
     }
 }
-" + attribute);
+" + attribute
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using static C1<C0>.E1;
 public class C2
 {
@@ -1235,10 +1631,13 @@ public class C2
     {
     }
 }
-" + attribute);
+" + attribute
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using @alias = C1<C0>.E1;
 public class C2
 {
@@ -1247,10 +1646,13 @@ public class C2
     {
     }
 }
-" + attribute);
+" + attribute
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using @alias = C1<C0>;
 public class C2
 {
@@ -1259,7 +1661,8 @@ public class C2
     {
     }
 }
-" + attribute);
+" + attribute
+            );
 
             void verify(MetadataReference reference0, MetadataReference reference1, string source)
             {
@@ -1271,14 +1674,14 @@ public class C2
         public void FieldReference_08()
         {
             var source0 =
-@"
+                @"
 public class C0 {}
 ";
             var comp0 = CreateCompilation(source0);
             var comp0Ref = comp0.ToMetadataReference();
 
             var source1 =
-@"
+                @"
 public class C1<T>
 {
     public enum E1
@@ -1291,18 +1694,23 @@ public class C1<T>
             comp1.VerifyDiagnostics();
             var comp1Ref = comp1.ToMetadataReference();
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 public class C2
 {
     public static void Main(int p = (int)C1<C0>.E1.F1 + 1)
     {
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using static C1<C0>;
 public class C2
 {
@@ -1310,10 +1718,13 @@ public class C2
     {
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using static C1<C0>.E1;
 public class C2
 {
@@ -1321,10 +1732,13 @@ public class C2
     {
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using @alias = C1<C0>.E1;
 public class C2
 {
@@ -1332,10 +1746,13 @@ public class C2
     {
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using @alias = C1<C0>;
 public class C2
 {
@@ -1343,7 +1760,8 @@ public class C2
     {
     }
 }
-");
+"
+            );
 
             void verify(MetadataReference reference0, MetadataReference reference1, string source)
             {
@@ -1355,7 +1773,7 @@ public class C2
         public void MethodReference_01()
         {
             var source1 =
-@"
+                @"
 public class C1
 {
     public static void M1(){}
@@ -1364,7 +1782,7 @@ public class C1
             var comp1 = CreateCompilation(source1);
 
             var source2 =
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -1377,10 +1795,13 @@ public class C2
             verify<PEAssemblySymbol>(source2, comp1.EmitToImageReference());
             verify<SourceAssemblySymbol>(source2, comp1.ToMetadataReference());
 
-            void verify<TAssemblySymbol>(string source2, MetadataReference reference) where TAssemblySymbol : AssemblySymbol
+            void verify<TAssemblySymbol>(string source2, MetadataReference reference)
+                where TAssemblySymbol : AssemblySymbol
             {
                 Compilation comp2 = AssertUsedAssemblyReferences(source2, reference);
-                Assert.IsType<TAssemblySymbol>(((CSharpCompilation)comp2).GetAssemblyOrModuleSymbol(reference));
+                Assert.IsType<TAssemblySymbol>(
+                    ((CSharpCompilation)comp2).GetAssemblyOrModuleSymbol(reference)
+                );
             }
         }
 
@@ -1388,7 +1809,7 @@ public class C2
         public void MethodReference_02()
         {
             var source0 =
-@"
+                @"
 public class C0
 {
 }
@@ -1397,7 +1818,7 @@ public class C0
             comp0.VerifyDiagnostics();
 
             var source1 =
-@"
+                @"
 public class C1
 {
     public static void M1<T>(){}
@@ -1416,8 +1837,10 @@ public class C3<T>
             var reference0 = comp0.ToMetadataReference();
             var reference1 = comp1.ToMetadataReference();
 
-            verify(reference0, reference1,
-@"
+            verify(
+                reference0,
+                reference1,
+                @"
 public class C5
 {
     public static void Main()
@@ -1425,10 +1848,13 @@ public class C5
         C1.M1<C0>();
     }
 }
-");
+"
+            );
 
-            verify(reference0, reference1,
-@"
+            verify(
+                reference0,
+                reference1,
+                @"
 public class C5
 {
     public static void Main()
@@ -1436,10 +1862,13 @@ public class C5
         C1.M1<C2<C0>>();
     }
 }
-");
+"
+            );
 
-            verify(reference1, reference0,
-@"
+            verify(
+                reference1,
+                reference0,
+                @"
 public class C5
 {
     public static void Main()
@@ -1447,7 +1876,8 @@ public class C5
         C1.M1<C3<C0>.C4>();
     }
 }
-");
+"
+            );
 
             void verify(MetadataReference reference0, MetadataReference reference1, string source)
             {
@@ -1459,7 +1889,7 @@ public class C5
         public void MethodReference_03()
         {
             var source0 =
-@"
+                @"
 public static class C0
 {
     public static void M1(this string x, int y) { }
@@ -1469,7 +1899,7 @@ public static class C0
             var comp0Ref = comp0.ToMetadataReference();
 
             var source1 =
-@"
+                @"
 public static class C1
 {
     public static void M1(this string x, string y) { }
@@ -1479,7 +1909,7 @@ public static class C1
             var comp1Ref = comp1.ToMetadataReference();
 
             var source2 =
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -1490,14 +1920,19 @@ public class C2
 }
 ";
 
-            AssertUsedAssemblyReferences(source2, references: new[] { comp0Ref, comp1Ref }, comp0Ref, comp1Ref);
+            AssertUsedAssemblyReferences(
+                source2,
+                references: new[] { comp0Ref, comp1Ref },
+                comp0Ref,
+                comp1Ref
+            );
         }
 
         [Fact]
         public void MethodReference_04()
         {
             var source0 =
-@"
+                @"
 public static class C0
 {
     public static void M1(this string x, string y) { }
@@ -1507,7 +1942,7 @@ public static class C0
             var comp0Ref = comp0.ToMetadataReference();
 
             var source1 =
-@"
+                @"
 public static class C1
 {
     public static void M1(this string x, string y) { }
@@ -1517,7 +1952,7 @@ public static class C1
             var comp1Ref = comp1.ToMetadataReference();
 
             var source2 =
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -1528,18 +1963,22 @@ public class C2
 }
 ";
 
-            AssertUsedAssemblyReferences(source2, references: new[] { comp0Ref, comp1Ref },
+            AssertUsedAssemblyReferences(
+                source2,
+                references: new[] { comp0Ref, comp1Ref },
                 // (7,11): error CS0121: The call is ambiguous between the following methods or properties: 'C0.M1(string, string)' and 'C1.M1(string, string)'
                 //         x.M1("b");
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M1").WithArguments("C0.M1(string, string)", "C1.M1(string, string)").WithLocation(7, 11)
-                );
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M1")
+                    .WithArguments("C0.M1(string, string)", "C1.M1(string, string)")
+                    .WithLocation(7, 11)
+            );
         }
 
         [Fact]
         public void MethodReference_05()
         {
             var source0 =
-@"
+                @"
 public class C0
 {
 }
@@ -1548,7 +1987,7 @@ public class C0
             var comp0Ref = comp0.ToMetadataReference();
 
             var source1 =
-@"
+                @"
 public static class C1
 {
     public static void M1(this string x, C0 y) { }
@@ -1560,7 +1999,7 @@ public interface I1 {}
             var comp1Ref = comp1.ToMetadataReference();
 
             var source2 =
-@"
+                @"
 public static class C2
 {
     public static void M1(this string x, string y) { }
@@ -1570,7 +2009,7 @@ public static class C2
             var comp2Ref = comp2.ToMetadataReference();
 
             var source3 =
-@"
+                @"
 public class C3
 {
     public static void Main()
@@ -1581,17 +2020,33 @@ public class C3
 }
 ";
 
-            AssertUsedAssemblyReferences(source3, references: new[] { comp0Ref, comp1Ref, comp2Ref }, comp0Ref, comp1Ref, comp2Ref);
+            AssertUsedAssemblyReferences(
+                source3,
+                references: new[] { comp0Ref, comp1Ref, comp2Ref },
+                comp0Ref,
+                comp1Ref,
+                comp2Ref
+            );
 
-            var expected1 = new DiagnosticDescription[] {
+            var expected1 = new DiagnosticDescription[]
+            {
                 // (7,9): error CS0012: The type 'C0' is defined in an assembly that is not referenced. You must add a reference to assembly 'MethodReference_05_0, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         x.M1("b");
-                Diagnostic(ErrorCode.ERR_NoTypeDef, "x.M1").WithArguments("C0", "MethodReference_05_0, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null").WithLocation(7, 9)
-                };
-            AssertUsedAssemblyReferences(source3, references: new[] { comp1Ref, comp2Ref }, expected1);
+                Diagnostic(ErrorCode.ERR_NoTypeDef, "x.M1")
+                    .WithArguments(
+                        "C0",
+                        "MethodReference_05_0, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                    )
+                    .WithLocation(7, 9)
+            };
+            AssertUsedAssemblyReferences(
+                source3,
+                references: new[] { comp1Ref, comp2Ref },
+                expected1
+            );
 
             var source4 =
-@"
+                @"
 public class C3
 {
     public static void Main()
@@ -1603,12 +2058,22 @@ public class C3
     void M1(I1 x) {}
 }
 ";
-            AssertUsedAssemblyReferences(source4, references: new[] { comp0Ref, comp1Ref, comp2Ref }, comp0Ref, comp1Ref, comp2Ref);
+            AssertUsedAssemblyReferences(
+                source4,
+                references: new[] { comp0Ref, comp1Ref, comp2Ref },
+                comp0Ref,
+                comp1Ref,
+                comp2Ref
+            );
 
-            AssertUsedAssemblyReferences(source4, references: new[] { comp1Ref, comp2Ref }, expected1);
+            AssertUsedAssemblyReferences(
+                source4,
+                references: new[] { comp1Ref, comp2Ref },
+                expected1
+            );
 
             var source5 =
-@"
+                @"
 using System;
 using System.Runtime.InteropServices;
 
@@ -1635,26 +2100,69 @@ public interface C0
             var comp7Ref = comp7.ToMetadataReference(embedInteropTypes: false);
             var comp7ImageRef = comp7.EmitToImageReference(embedInteropTypes: false);
 
-            AssertUsedAssemblyReferences(source3, references: new[] { comp7Ref, comp6Ref, comp2Ref }, comp7Ref, comp6Ref, comp2Ref);
-            AssertUsedAssemblyReferences(source3, references: new[] { comp7ImageRef, comp6ImageRef, comp2Ref }, comp7ImageRef, comp6ImageRef, comp2Ref);
+            AssertUsedAssemblyReferences(
+                source3,
+                references: new[] { comp7Ref, comp6Ref, comp2Ref },
+                comp7Ref,
+                comp6Ref,
+                comp2Ref
+            );
+            AssertUsedAssemblyReferences(
+                source3,
+                references: new[] { comp7ImageRef, comp6ImageRef, comp2Ref },
+                comp7ImageRef,
+                comp6ImageRef,
+                comp2Ref
+            );
 
-            var expected2 = new DiagnosticDescription[] {
+            var expected2 = new DiagnosticDescription[]
+            {
                 // (7,9): error CS1748: Cannot find the interop type that matches the embedded interop type 'C0'. Are you missing an assembly reference?
                 //         x.M1("b");
-                Diagnostic(ErrorCode.ERR_NoCanonicalView, "x.M1").WithArguments("C0").WithLocation(7, 9)
-                };
+                Diagnostic(ErrorCode.ERR_NoCanonicalView, "x.M1")
+                    .WithArguments("C0")
+                    .WithLocation(7, 9)
+            };
 
-            AssertUsedAssemblyReferences(source3, references: new[] { comp6Ref, comp2Ref }, expected2);
-            AssertUsedAssemblyReferences(source3, references: new[] { comp6ImageRef, comp2Ref }, expected2);
+            AssertUsedAssemblyReferences(
+                source3,
+                references: new[] { comp6Ref, comp2Ref },
+                expected2
+            );
+            AssertUsedAssemblyReferences(
+                source3,
+                references: new[] { comp6ImageRef, comp2Ref },
+                expected2
+            );
 
-            AssertUsedAssemblyReferences(source4, references: new[] { comp7Ref, comp6Ref, comp2Ref }, comp7Ref, comp6Ref, comp2Ref);
-            AssertUsedAssemblyReferences(source4, references: new[] { comp7ImageRef, comp6ImageRef, comp2Ref }, comp7ImageRef, comp6ImageRef, comp2Ref);
+            AssertUsedAssemblyReferences(
+                source4,
+                references: new[] { comp7Ref, comp6Ref, comp2Ref },
+                comp7Ref,
+                comp6Ref,
+                comp2Ref
+            );
+            AssertUsedAssemblyReferences(
+                source4,
+                references: new[] { comp7ImageRef, comp6ImageRef, comp2Ref },
+                comp7ImageRef,
+                comp6ImageRef,
+                comp2Ref
+            );
 
-            AssertUsedAssemblyReferences(source4, references: new[] { comp6Ref, comp2Ref }, expected2);
-            AssertUsedAssemblyReferences(source4, references: new[] { comp6ImageRef, comp2Ref }, expected2);
+            AssertUsedAssemblyReferences(
+                source4,
+                references: new[] { comp6Ref, comp2Ref },
+                expected2
+            );
+            AssertUsedAssemblyReferences(
+                source4,
+                references: new[] { comp6ImageRef, comp2Ref },
+                expected2
+            );
 
             var source8 =
-@"
+                @"
 public class C3
 {
     public static void Main()
@@ -1664,18 +2172,20 @@ public class C3
     }
 }
 ";
-            AssertUsedAssemblyReferences(source8, new[] { comp0Ref, comp1Ref, comp2Ref },
+            AssertUsedAssemblyReferences(
+                source8,
+                new[] { comp0Ref, comp1Ref, comp2Ref },
                 // (7,20): error CS8093: Extension method groups are not allowed as an argument to 'nameof'.
                 //         _ = nameof(x.M1);
                 Diagnostic(ErrorCode.ERR_NameofExtensionMethod, "x.M1").WithLocation(7, 20)
-                );
+            );
         }
 
         [Fact]
         public void MethodReference_06()
         {
             var source0 =
-@"
+                @"
 public class C0
 {
 }
@@ -1684,7 +2194,7 @@ public class C0
             var comp0Ref = comp0.ToMetadataReference();
 
             var source1 =
-@"
+                @"
 public class C1
 {
     public void M1(C0 y) { }
@@ -1695,7 +2205,7 @@ public class C1
             var comp1ImageRef = comp1.EmitToImageReference();
 
             var source2 =
-@"
+                @"
 public class C2 : C1
 {
     public void M1(string y) { }
@@ -1706,7 +2216,7 @@ public class C2 : C1
             var comp2ImageRef = comp2.EmitToImageReference();
 
             var source3 =
-@"
+                @"
 public class C3
 {
     public static void Main()
@@ -1717,18 +2227,44 @@ public class C3
 }
 ";
 
-            AssertUsedAssemblyReferences(source3, references: new[] { comp0Ref, comp1Ref, comp2Ref }, comp0Ref, comp1Ref, comp2Ref);
-            AssertUsedAssemblyReferences(source3, references: new[] { comp1Ref, comp2Ref }, comp1Ref, comp2Ref);
-            AssertUsedAssemblyReferences(source3, references: new[] { comp1ImageRef, comp2Ref }, comp1ImageRef, comp2Ref);
-            AssertUsedAssemblyReferences(source3, references: new[] { comp1Ref, comp2ImageRef }, comp1Ref, comp2ImageRef);
-            AssertUsedAssemblyReferences(source3, references: new[] { comp1ImageRef, comp2ImageRef }, comp1ImageRef, comp2ImageRef);
+            AssertUsedAssemblyReferences(
+                source3,
+                references: new[] { comp0Ref, comp1Ref, comp2Ref },
+                comp0Ref,
+                comp1Ref,
+                comp2Ref
+            );
+            AssertUsedAssemblyReferences(
+                source3,
+                references: new[] { comp1Ref, comp2Ref },
+                comp1Ref,
+                comp2Ref
+            );
+            AssertUsedAssemblyReferences(
+                source3,
+                references: new[] { comp1ImageRef, comp2Ref },
+                comp1ImageRef,
+                comp2Ref
+            );
+            AssertUsedAssemblyReferences(
+                source3,
+                references: new[] { comp1Ref, comp2ImageRef },
+                comp1Ref,
+                comp2ImageRef
+            );
+            AssertUsedAssemblyReferences(
+                source3,
+                references: new[] { comp1ImageRef, comp2ImageRef },
+                comp1ImageRef,
+                comp2ImageRef
+            );
         }
 
         [Fact]
         public void MethodReference_07()
         {
             var source0 =
-@"
+                @"
 public class C0
 {
 }
@@ -1737,7 +2273,7 @@ public class C0
             var comp0Ref = comp0.ToMetadataReference();
 
             var source1 =
-@"
+                @"
 public class C1
 {
     public void M1(string y) { }
@@ -1747,7 +2283,7 @@ public class C1
             var comp1Ref = comp1.ToMetadataReference();
 
             var source2 =
-@"
+                @"
 public class C2 : C1
 {
     public void M1(C0 y) { }
@@ -1757,7 +2293,7 @@ public class C2 : C1
             var comp2Ref = comp2.ToMetadataReference();
 
             var source3 =
-@"
+                @"
 public class C3
 {
     public static void Main()
@@ -1768,20 +2304,33 @@ public class C3
 }
 ";
 
-            AssertUsedAssemblyReferences(source3, references: new[] { comp0Ref, comp1Ref, comp2Ref }, comp0Ref, comp1Ref, comp2Ref);
+            AssertUsedAssemblyReferences(
+                source3,
+                references: new[] { comp0Ref, comp1Ref, comp2Ref },
+                comp0Ref,
+                comp1Ref,
+                comp2Ref
+            );
 
-            AssertUsedAssemblyReferences(source3, references: new[] { comp1Ref, comp2Ref },
+            AssertUsedAssemblyReferences(
+                source3,
+                references: new[] { comp1Ref, comp2Ref },
                 // (7,9): error CS0012: The type 'C0' is defined in an assembly that is not referenced. You must add a reference to assembly 'MethodReference_07_0, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         new C2().M1(x);
-                Diagnostic(ErrorCode.ERR_NoTypeDef, "new C2().M1").WithArguments("C0", "MethodReference_07_0, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null").WithLocation(7, 9)
-                );
+                Diagnostic(ErrorCode.ERR_NoTypeDef, "new C2().M1")
+                    .WithArguments(
+                        "C0",
+                        "MethodReference_07_0, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                    )
+                    .WithLocation(7, 9)
+            );
         }
 
         [Fact]
         public void MethodReference_08()
         {
             var source0 =
-@"
+                @"
 public class C0
 {
 }
@@ -1791,7 +2340,7 @@ public class C0
             var comp0Ref = comp0.ToMetadataReference();
 
             var source1 =
-@"
+                @"
 public class C1
 {
     public C0 M1() => null;
@@ -1804,7 +2353,7 @@ public class C1
             var comp1ImageRef = comp1.EmitToImageReference();
 
             var source3 =
-@"
+                @"
 public class C3
 {
     public static void Main()
@@ -1821,7 +2370,7 @@ public class C3
             AssertUsedAssemblyReferences(source3, comp1ImageRef);
 
             var source5 =
-@"
+                @"
 using static C1;
 
 public class C3
@@ -1833,17 +2382,22 @@ public class C3
 }
 ";
 
-            AssertUsedAssemblyReferences(source5, new[] { comp0Ref, comp1Ref },
+            AssertUsedAssemblyReferences(
+                source5,
+                new[] { comp0Ref, comp1Ref },
                 // (1001,1): hidden CS8019: Unnecessary using directive.
                 // using static C1;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using static C1;").WithLocation(1001, 1),
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using static C1;")
+                    .WithLocation(1001, 1),
                 // (2005,20): error CS0103: The name 'M1' does not exist in the current context
                 //         _ = nameof(M1);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "M1").WithArguments("M1").WithLocation(2005, 20)
-                );
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "M1")
+                    .WithArguments("M1")
+                    .WithLocation(2005, 20)
+            );
 
             var source6 =
-@"
+                @"
 public class C3
 {
     public static void Main()
@@ -1864,7 +2418,7 @@ public class C3
         public void MethodReference_09()
         {
             var source0 =
-@"
+                @"
 public class C0
 {
 }
@@ -1874,7 +2428,7 @@ public class C0
             var comp0Ref = comp0.ToMetadataReference();
 
             var source1 =
-@"
+                @"
 public class C1
 {
     public static C0 M1() => null;
@@ -1887,7 +2441,7 @@ public class C1
             var comp1ImageRef = comp1.EmitToImageReference();
 
             var source3 =
-@"
+                @"
 public class C3
 {
     public static void Main()
@@ -1903,7 +2457,7 @@ public class C3
             AssertUsedAssemblyReferences(source3, comp1ImageRef);
 
             var source4 =
-@"
+                @"
 using static C1;
 
 public class C3
@@ -1921,7 +2475,7 @@ public class C3
             AssertUsedAssemblyReferences(source4, comp1ImageRef);
 
             var source5 =
-@"
+                @"
 using System;
 using System.Runtime.InteropServices;
 
@@ -1949,16 +2503,24 @@ public interface C0
             var comp7ImageRef = comp7.EmitToImageReference(embedInteropTypes: false);
 
             AssertUsedAssemblyReferences(source3, new[] { comp7Ref, comp6Ref }, comp6Ref);
-            AssertUsedAssemblyReferences(source3, new[] { comp7ImageRef, comp6ImageRef }, comp6ImageRef);
+            AssertUsedAssemblyReferences(
+                source3,
+                new[] { comp7ImageRef, comp6ImageRef },
+                comp6ImageRef
+            );
             AssertUsedAssemblyReferences(source4, new[] { comp7Ref, comp6Ref }, comp6Ref);
-            AssertUsedAssemblyReferences(source4, new[] { comp7ImageRef, comp6ImageRef }, comp6ImageRef);
+            AssertUsedAssemblyReferences(
+                source4,
+                new[] { comp7ImageRef, comp6ImageRef },
+                comp6ImageRef
+            );
         }
 
         [Fact]
         public void MethodReference_10()
         {
             var source1 =
-@"
+                @"
 public class C1
 {
     [System.Diagnostics.Conditional(""Always"")]
@@ -1970,7 +2532,7 @@ public class C1
             var comp1ImageRef = comp1.EmitToImageReference();
 
             var source2 =
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -1984,7 +2546,7 @@ public class C2
             verify<SourceAssemblySymbol>(source2, comp1Ref);
 
             var source3 =
-@"
+                @"
 using static C1;
 
 public class C2
@@ -1999,10 +2561,13 @@ public class C2
             verify<PEAssemblySymbol>(source3, comp1ImageRef);
             verify<SourceAssemblySymbol>(source3, comp1Ref);
 
-            void verify<TAssemblySymbol>(string source2, MetadataReference reference) where TAssemblySymbol : AssemblySymbol
+            void verify<TAssemblySymbol>(string source2, MetadataReference reference)
+                where TAssemblySymbol : AssemblySymbol
             {
                 Compilation comp2 = AssertUsedAssemblyReferences(source2, reference);
-                Assert.IsType<TAssemblySymbol>(((CSharpCompilation)comp2).GetAssemblyOrModuleSymbol(reference));
+                Assert.IsType<TAssemblySymbol>(
+                    ((CSharpCompilation)comp2).GetAssemblyOrModuleSymbol(reference)
+                );
             }
         }
 
@@ -2010,7 +2575,7 @@ public class C2
         public void MethodReference_11()
         {
             var source0 =
-@"
+                @"
 public class C0 : System.Collections.IEnumerable
 {
     System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
@@ -2023,7 +2588,7 @@ public class C0 : System.Collections.IEnumerable
             var comp0Ref = comp0.ToMetadataReference();
 
             var source1 =
-@"
+                @"
 public static class C1
 {
     public static void Add(this C0 x,  int y) => throw null;
@@ -2033,7 +2598,7 @@ public static class C1
             var comp1Ref = comp1.ToMetadataReference();
 
             var source2 =
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -2050,7 +2615,7 @@ public class C2
         public void MethodReference_12()
         {
             var source0 =
-@"
+                @"
 public class C0 : System.Collections.IEnumerable
 {
     System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
@@ -2063,7 +2628,7 @@ public class C0 : System.Collections.IEnumerable
             var comp0Ref = comp0.ToMetadataReference();
 
             var source1 =
-@"
+                @"
 public static class C1
 {
     [System.Diagnostics.Conditional(""Always"")]
@@ -2074,7 +2639,7 @@ public static class C1
             var comp1Ref = comp1.ToMetadataReference();
 
             var source2 =
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -2091,7 +2656,7 @@ public class C2
         public void FieldDeclaration_01()
         {
             var source1 =
-@"
+                @"
 namespace N1
 {
     public class C1
@@ -2105,45 +2670,55 @@ namespace N1
             var comp1 = CreateCompilation(source1);
 
             var comp1Ref = comp1.ToMetadataReference();
-            verify(comp1Ref,
-@"
+            verify(
+                comp1Ref,
+                @"
 public class C2
 {
     public static N1.C1.C11 F1 = null;
 }
-");
-            verify(comp1Ref,
-@"
+"
+            );
+            verify(
+                comp1Ref,
+                @"
 using N2 = N1;
 public class C2
 {
     public static N2.C1.C11 F1 = null;
 }
-");
-            verify(comp1Ref,
-@"
+"
+            );
+            verify(
+                comp1Ref,
+                @"
 using N1;
 public class C2
 {
     public static C1.C11 F1 = null;
 }
-");
-            verify(comp1Ref,
-@"
+"
+            );
+            verify(
+                comp1Ref,
+                @"
 using static N1.C1;
 public class C2
 {
     public static C11 F1 = null;
 }
-");
-            verify(comp1Ref,
-@"
+"
+            );
+            verify(
+                comp1Ref,
+                @"
 using C111 = N1.C1.C11;
 public class C2
 {
     public static C111 F1 = null;
 }
-");
+"
+            );
 
             void verify(MetadataReference reference, string source2)
             {
@@ -2155,7 +2730,7 @@ public class C2
         public void UnusedUsings_01()
         {
             var source1 =
-@"
+                @"
 namespace N1
 {
     public static class C1
@@ -2166,8 +2741,9 @@ namespace N1
             var comp1 = CreateCompilation(source1);
             var comp1Ref = comp1.ToMetadataReference();
 
-            verify1(comp1Ref,
-@"
+            verify1(
+                comp1Ref,
+                @"
 using N1;
 
 public class C2
@@ -2177,10 +2753,11 @@ public class C2
                 // (1001,1): hidden CS8019: Unnecessary using directive.
                 // using N1;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using N1;").WithLocation(1001, 1)
-                );
+            );
 
-            verify1(comp1Ref,
-@"
+            verify1(
+                comp1Ref,
+                @"
 using static N1.C1;
 
 public class C2
@@ -2189,11 +2766,13 @@ public class C2
 ",
                 // (1001,1): hidden CS8019: Unnecessary using directive.
                 // using static N1.C1;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using static N1.C1;").WithLocation(1001, 1)
-                );
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using static N1.C1;")
+                    .WithLocation(1001, 1)
+            );
 
-            verify1(comp1Ref,
-@"
+            verify1(
+                comp1Ref,
+                @"
 using @alias = N1.C1;
 
 public class C2
@@ -2202,11 +2781,13 @@ public class C2
 ",
                 // (1001,1): hidden CS8019: Unnecessary using directive.
                 // using @alias = N1.C1;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using @alias = N1.C1;").WithLocation(1001, 1)
-                );
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using @alias = N1.C1;")
+                    .WithLocation(1001, 1)
+            );
 
-            verify1(comp1Ref,
-@"
+            verify1(
+                comp1Ref,
+                @"
 using @alias = N1;
 
 public class C2
@@ -2215,11 +2796,13 @@ public class C2
 ",
                 // (1001,1): hidden CS8019: Unnecessary using directive.
                 // using @alias = N1;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using @alias = N1;").WithLocation(1001, 1)
-                );
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using @alias = N1;")
+                    .WithLocation(1001, 1)
+            );
 
-            verify1(comp1Ref.WithAliases(new[] { "N1C1" }),
-@"
+            verify1(
+                comp1Ref.WithAliases(new[] { "N1C1" }),
+                @"
 extern alias N1C1;
 
 public class C2
@@ -2228,11 +2811,13 @@ public class C2
 ",
                 // (2,1): hidden CS8020: Unused extern alias.
                 // extern alias N1C1;
-                Diagnostic(ErrorCode.HDN_UnusedExternAlias, "extern alias N1C1;").WithLocation(2, 1)
-                );
+                Diagnostic(ErrorCode.HDN_UnusedExternAlias, "extern alias N1C1;")
+                    .WithLocation(2, 1)
+            );
 
-            verify1(comp1Ref,
-@"namespace N2 {
+            verify1(
+                comp1Ref,
+                @"namespace N2 {
 using N1;
 
 public class C2
@@ -2242,10 +2827,11 @@ public class C2
                 // (2,1): hidden CS8019: Unnecessary using directive.
                 // using N1;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using N1;").WithLocation(2, 1)
-                );
+            );
 
-            verify1(comp1Ref,
-@"namespace N2 {
+            verify1(
+                comp1Ref,
+                @"namespace N2 {
 using static N1.C1;
 
 public class C2
@@ -2254,11 +2840,13 @@ public class C2
 }",
                 // (2,1): hidden CS8019: Unnecessary using directive.
                 // using static N1.C1;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using static N1.C1;").WithLocation(2, 1)
-                );
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using static N1.C1;")
+                    .WithLocation(2, 1)
+            );
 
-            verify1(comp1Ref,
-@"namespace N2 {
+            verify1(
+                comp1Ref,
+                @"namespace N2 {
 using @alias = N1.C1;
 
 public class C2
@@ -2267,11 +2855,13 @@ public class C2
 }",
                 // (2,1): hidden CS8019: Unnecessary using directive.
                 // using @alias = N1.C1;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using @alias = N1.C1;").WithLocation(2, 1)
-                );
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using @alias = N1.C1;")
+                    .WithLocation(2, 1)
+            );
 
-            verify1(comp1Ref,
-@"namespace N2 {
+            verify1(
+                comp1Ref,
+                @"namespace N2 {
 using @alias = N1;
 
 public class C2
@@ -2280,11 +2870,13 @@ public class C2
 }",
                 // (2,1): hidden CS8019: Unnecessary using directive.
                 // using @alias = N1;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using @alias = N1;").WithLocation(2, 1)
-                );
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using @alias = N1;")
+                    .WithLocation(2, 1)
+            );
 
-            verify1(comp1Ref.WithAliases(new[] { "N1C1" }),
-@"namespace N2 {
+            verify1(
+                comp1Ref.WithAliases(new[] { "N1C1" }),
+                @"namespace N2 {
 extern alias N1C1;
 
 public class C2
@@ -2293,26 +2885,35 @@ public class C2
 }",
                 // (2,1): hidden CS8020: Unused extern alias.
                 // extern alias N1C1;
-                Diagnostic(ErrorCode.HDN_UnusedExternAlias, "extern alias N1C1;").WithLocation(2, 1)
-                );
+                Diagnostic(ErrorCode.HDN_UnusedExternAlias, "extern alias N1C1;")
+                    .WithLocation(2, 1)
+            );
 
-            verify2(comp1Ref,
-@"
+            verify2(
+                comp1Ref,
+                @"
 public class C2
 {
 }
 ",
-                "N1");
+                "N1"
+            );
 
-            verify2(comp1Ref,
-@"
+            verify2(
+                comp1Ref,
+                @"
 public class C2
 {
 }
 ",
-                "N1.C1");
+                "N1.C1"
+            );
 
-            static void verify1(MetadataReference reference, string source, params DiagnosticDescription[] expected)
+            static void verify1(
+                MetadataReference reference,
+                string source,
+                params DiagnosticDescription[] expected
+            )
             {
                 Compilation comp = CreateCompilation(source, references: new[] { reference });
 
@@ -2330,14 +2931,23 @@ public class C2
                     var used = comp.GetUsedAssemblyReferences();
 
                     Assert.Equal(1, used.Length);
-                    Assert.Same(comp.ObjectType.ContainingAssembly, comp.GetAssemblyOrModuleSymbol(used[0]));
+                    Assert.Same(
+                        comp.ObjectType.ContainingAssembly,
+                        comp.GetAssemblyOrModuleSymbol(used[0])
+                    );
                 }
             }
 
             void verify2(MetadataReference reference, string source, string @using)
             {
-                AssertUsedAssemblyReferences(CreateCompilation(Parse(source, options: TestOptions.Script), references: new[] { reference }, options: TestOptions.DebugDll.WithUsings(@using)),
-                                             reference);
+                AssertUsedAssemblyReferences(
+                    CreateCompilation(
+                        Parse(source, options: TestOptions.Script),
+                        references: new[] { reference },
+                        options: TestOptions.DebugDll.WithUsings(@using)
+                    ),
+                    reference
+                );
             }
         }
 
@@ -2345,7 +2955,7 @@ public class C2
         public void MethodDeclaration_01()
         {
             var source1 =
-@"
+                @"
 namespace N1
 {
     public class C1
@@ -2359,45 +2969,55 @@ namespace N1
             var comp1 = CreateCompilation(source1);
 
             var comp1Ref = comp1.ToMetadataReference();
-            verify(comp1Ref,
-@"
+            verify(
+                comp1Ref,
+                @"
 public class C2
 {
     public static N1.C1.C11 M1() => null;
 }
-");
-            verify(comp1Ref,
-@"
+"
+            );
+            verify(
+                comp1Ref,
+                @"
 using N2 = N1;
 public class C2
 {
     public static N2.C1.C11 M1() => null;
 }
-");
-            verify(comp1Ref,
-@"
+"
+            );
+            verify(
+                comp1Ref,
+                @"
 using N1;
 public class C2
 {
     public static C1.C11 M1() => null;
 }
-");
-            verify(comp1Ref,
-@"
+"
+            );
+            verify(
+                comp1Ref,
+                @"
 using static N1.C1;
 public class C2
 {
     public static C11 M1() => null;
 }
-");
-            verify(comp1Ref,
-@"
+"
+            );
+            verify(
+                comp1Ref,
+                @"
 using C111 = N1.C1.C11;
 public class C2
 {
     public static C111 M1() => null;
 }
-");
+"
+            );
 
             void verify(MetadataReference reference, string source2)
             {
@@ -2409,7 +3029,7 @@ public class C2
         public void NoPia_01()
         {
             var source0 =
-@"
+                @"
 using System;
 using System.Runtime.InteropServices;
 
@@ -2429,7 +3049,7 @@ public interface ITest33
             var comp0ImageRef = comp0.EmitToImageReference(embedInteropTypes: true);
 
             var source1 =
-@"
+                @"
 public class C1
 {
     public static ITest33 F0 = null;
@@ -2442,7 +3062,7 @@ public class C1
             var comp1ImageRef = comp1.EmitToImageReference();
 
             var source2 =
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -2466,10 +3086,21 @@ public class C2
             verify<RetargetingAssemblySymbol>(source2, comp3Ref, comp1Ref);
             verify<RetargetingAssemblySymbol>(source2, comp3ImageRef, comp1Ref);
 
-            void verify<TAssemblySymbol>(string source2, MetadataReference reference0, MetadataReference reference1) where TAssemblySymbol : AssemblySymbol
+            void verify<TAssemblySymbol>(
+                string source2,
+                MetadataReference reference0,
+                MetadataReference reference1
+            )
+                where TAssemblySymbol : AssemblySymbol
             {
-                Compilation comp2 = AssertUsedAssemblyReferences(source2, new[] { reference0, reference1 }, reference1);
-                Assert.IsType<TAssemblySymbol>(((CSharpCompilation)comp2).GetAssemblyOrModuleSymbol(reference1));
+                Compilation comp2 = AssertUsedAssemblyReferences(
+                    source2,
+                    new[] { reference0, reference1 },
+                    reference1
+                );
+                Assert.IsType<TAssemblySymbol>(
+                    ((CSharpCompilation)comp2).GetAssemblyOrModuleSymbol(reference1)
+                );
             }
         }
 
@@ -2477,7 +3108,7 @@ public class C2
         public void NoPia_02()
         {
             var source0 =
-@"
+                @"
 using System;
 using System.Runtime.InteropServices;
 
@@ -2497,7 +3128,7 @@ public interface ITest33
             var comp0ImageRef = comp0.EmitToImageReference(embedInteropTypes: true);
 
             var source1 =
-@"
+                @"
 public class C1
 {
     public static ITest33 F0 = null;
@@ -2513,7 +3144,7 @@ public class C1
             var comp3ImageRef = comp3.EmitToImageReference(embedInteropTypes: false);
 
             verify(
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -2521,10 +3152,11 @@ public class C2
         _ = C1.F0;
     }
 }
-");
+"
+            );
 
             verify(
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -2532,10 +3164,11 @@ public class C2
         _ = nameof(C1.F0);
     }
 }
-");
+"
+            );
 
             verify(
-@"
+                @"
 public class C2
 {
     /// <summary>
@@ -2545,7 +3178,8 @@ public class C2
     {
     }
 }
-");
+"
+            );
 
             void verify(string source2)
             {
@@ -2565,7 +3199,7 @@ public class C2
         public void NoPia_03()
         {
             var source0 =
-@"
+                @"
 using System;
 using System.Runtime.InteropServices;
 
@@ -2585,7 +3219,7 @@ public interface ITest33
             var comp0ImageRef = comp0.EmitToImageReference(embedInteropTypes: true);
 
             var source1 =
-@"
+                @"
 public class C1
 {
     public static ITest33 M0() => null;
@@ -2601,7 +3235,7 @@ public class C1
             var comp3ImageRef = comp3.EmitToImageReference(embedInteropTypes: false);
 
             verify(
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -2609,10 +3243,11 @@ public class C2
         C1.M0();
     }
 }
-");
+"
+            );
 
             verify(
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -2620,10 +3255,11 @@ public class C2
         _ = nameof(C1.M0);
     }
 }
-");
+"
+            );
 
             verify(
-@"
+                @"
 public class C2
 {
     /// <summary>
@@ -2633,7 +3269,8 @@ public class C2
     {
     }
 }
-");
+"
+            );
 
             void verify(string source2)
             {
@@ -2653,7 +3290,7 @@ public class C2
         public void NoPia_04()
         {
             var source0 =
-@"
+                @"
 using System;
 using System.Runtime.InteropServices;
 
@@ -2673,7 +3310,7 @@ public interface ITest33
             var comp0ImageRef = comp0.EmitToImageReference(embedInteropTypes: true);
 
             var source1 =
-@"
+                @"
 public class C1
 {
     public static object M0(ITest33 x) => null;
@@ -2689,7 +3326,7 @@ public class C1
             var comp3ImageRef = comp3.EmitToImageReference(embedInteropTypes: false);
 
             verify(
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -2697,10 +3334,11 @@ public class C2
         C1.M0(null);
     }
 }
-");
+"
+            );
 
             verify(
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -2708,10 +3346,11 @@ public class C2
         _ = nameof(C1.M0);
     }
 }
-");
+"
+            );
 
             verify(
-@"
+                @"
 public class C2
 {
     /// <summary>
@@ -2721,7 +3360,8 @@ public class C2
     {
     }
 }
-");
+"
+            );
 
             void verify(string source2)
             {
@@ -2741,7 +3381,7 @@ public class C2
         public void NoPia_05()
         {
             var source0 =
-@"
+                @"
 using System;
 using System.Runtime.InteropServices;
 
@@ -2757,7 +3397,7 @@ public delegate void DTest33();
             var comp0ImageRef = comp0.EmitToImageReference(embedInteropTypes: true);
 
             var source1 =
-@"
+                @"
 #pragma warning disable CS0414
 public class C1
 {
@@ -2774,7 +3414,7 @@ public class C1
             var comp3ImageRef = comp3.EmitToImageReference(embedInteropTypes: false);
 
             verify(
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -2782,10 +3422,11 @@ public class C2
         C1.E0 += Main;
     }
 }
-");
+"
+            );
 
             verify(
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -2793,10 +3434,11 @@ public class C2
         _ = nameof(C1.E0);
     }
 }
-");
+"
+            );
 
             verify(
-@"
+                @"
 public class C2
 {
     /// <summary>
@@ -2806,7 +3448,8 @@ public class C2
     {
     }
 }
-");
+"
+            );
 
             void verify(string source2)
             {
@@ -2826,7 +3469,7 @@ public class C2
         public void NoPia_06()
         {
             var source0 =
-@"
+                @"
 using System;
 using System.Runtime.InteropServices;
 
@@ -2846,7 +3489,7 @@ public interface ITest33
             var comp0ImageRef = comp0.EmitToImageReference(embedInteropTypes: true);
 
             var source1 =
-@"
+                @"
 public class C1
 {
     public static ITest33 P0 => null;
@@ -2862,7 +3505,7 @@ public class C1
             var comp3ImageRef = comp3.EmitToImageReference(embedInteropTypes: false);
 
             verify(
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -2870,10 +3513,11 @@ public class C2
         _ = C1.P0;
     }
 }
-");
+"
+            );
 
             verify(
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -2881,10 +3525,11 @@ public class C2
         _ = nameof(C1.P0);
     }
 }
-");
+"
+            );
 
             verify(
-@"
+                @"
 public class C2
 {
     /// <summary>
@@ -2894,7 +3539,8 @@ public class C2
     {
     }
 }
-");
+"
+            );
 
             void verify(string source2)
             {
@@ -2914,7 +3560,7 @@ public class C2
         public void NoPia_07()
         {
             var source0 =
-@"
+                @"
 using System;
 using System.Runtime.InteropServices;
 
@@ -2934,7 +3580,7 @@ public interface ITest33
             var comp0ImageRef = comp0.EmitToImageReference(embedInteropTypes: true);
 
             var source1 =
-@"
+                @"
 public class C1
 {
     public object this[ITest33 x] => null;
@@ -2950,7 +3596,7 @@ public class C1
             var comp3ImageRef = comp3.EmitToImageReference(embedInteropTypes: false);
 
             verify(
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -2958,7 +3604,8 @@ public class C2
         _ = new C1()[null];
     }
 }
-");
+"
+            );
 
             void verify(string source2)
             {
@@ -2978,7 +3625,7 @@ public class C2
         public void NoPia_08()
         {
             var source0 =
-@"
+                @"
 using System;
 using System.Runtime.InteropServices;
 
@@ -2998,7 +3645,7 @@ public interface ITest33
             var comp0ImageRef = comp0.EmitToImageReference(embedInteropTypes: true);
 
             var source1 =
-@"
+                @"
 public class C1 : ITest33, I1
 {
 }
@@ -3041,7 +3688,7 @@ public struct S1 : ITest33, I1
             var comp3ImageRef = comp3.EmitToImageReference(embedInteropTypes: false);
 
             verify(
-@"
+                @"
 public class C
 {
     public static void Main()
@@ -3049,10 +3696,11 @@ public class C
         _ = (I2<object>)new C2();
     }
 }
-");
+"
+            );
 
             verify(
-@"
+                @"
 public class C
 {
     public static void Main()
@@ -3060,10 +3708,11 @@ public class C
         _ = (I1)new C2();
     }
 }
-");
+"
+            );
 
             verify(
-@"
+                @"
 public class C
 {
     public static void Main()
@@ -3071,10 +3720,11 @@ public class C
         _ = (I1)new C1();
     }
 }
-");
+"
+            );
 
             verify(
-@"
+                @"
 public class C
 {
     public static void Main()
@@ -3083,10 +3733,11 @@ public class C
         _ = x;
     }
 }
-");
+"
+            );
 
             verify(
-@"
+                @"
 public class C
 {
     public static void Main()
@@ -3095,10 +3746,11 @@ public class C
         _ = x;
     }
 }
-");
+"
+            );
 
             verify(
-@"
+                @"
 public class C
 {
     public static void Main()
@@ -3107,10 +3759,11 @@ public class C
         _ = x;
     }
 }
-");
+"
+            );
 
             verify(
-@"
+                @"
 public class C
 {
     public static void Main()
@@ -3118,10 +3771,11 @@ public class C
         _ = (I2<object>)new C3();
     }
 }
-");
+"
+            );
 
             verify(
-@"
+                @"
 public class C
 {
     public static void Main()
@@ -3130,10 +3784,11 @@ public class C
         _ = x;
     }
 }
-");
+"
+            );
 
             verify(
-@"
+                @"
 public class C
 {
     public static void Main()
@@ -3143,10 +3798,11 @@ public class C
         _ = y;
     }
 }
-");
+"
+            );
 
             verify(
-@"
+                @"
 public class C
 {
     public static void Main()
@@ -3156,10 +3812,11 @@ public class C
         _ = y;
     }
 }
-");
+"
+            );
 
             verify(
-@"
+                @"
 public class C
 {
     public static void Main()
@@ -3171,10 +3828,11 @@ public class C
 }
 
 interface I<out T> {}
-");
+"
+            );
 
             verify(
-@"
+                @"
 public class C
 {
     public static void Main()
@@ -3186,10 +3844,11 @@ public class C
 }
 
 interface I<out T> {}
-");
+"
+            );
 
             verify(
-@"
+                @"
 public class C
 {
     public static void Main()
@@ -3200,10 +3859,11 @@ public class C
 }
 
 interface I<out T> {}
-");
+"
+            );
 
             verify(
-@"
+                @"
 public class C
 {
     public static void Main()
@@ -3212,10 +3872,11 @@ public class C
         _ = x;
     }
 }
-");
+"
+            );
 
             verify(
-@"
+                @"
 public class C
 {
     public static void Main()
@@ -3225,10 +3886,11 @@ public class C
         _ = y;
     }
 }
-");
+"
+            );
 
             verify(
-@"
+                @"
 public class C
 {
     public static void Main<T>() where T : C1
@@ -3238,10 +3900,11 @@ public class C
         _ = y;
     }
 }
-");
+"
+            );
 
             verify(
-@"
+                @"
 public class C
 {
     public static void Main()
@@ -3252,10 +3915,11 @@ public class C
 }
 
 class A : C1 {}
-");
+"
+            );
 
             verify(
-@"
+                @"
 public class C
 {
     public static void Main()
@@ -3267,7 +3931,8 @@ public class C
 }
 
 interface IA : I3 {}
-");
+"
+            );
 
             void verify(string source2)
             {
@@ -3287,7 +3952,7 @@ interface IA : I3 {}
         public void NoPia_09()
         {
             var source0 =
-@"
+                @"
 using System;
 using System.Runtime.InteropServices;
 
@@ -3307,7 +3972,7 @@ public interface ITest33
             var comp0ImageRef = comp0.EmitToImageReference(embedInteropTypes: true);
 
             var source1 =
-@"
+                @"
 public class C1 : ITest33, I1
 {
 }
@@ -3351,7 +4016,7 @@ public static class C4<T> where T : I1
             var comp3ImageRef = comp3.EmitToImageReference(embedInteropTypes: false);
 
             compileWithUsedAssemblyReferences(
-@"
+                @"
 public class C
 {
     static void Main()
@@ -3359,10 +4024,11 @@ public class C
         C2.M4<I3>();
     }
 }
-");
+"
+            );
 
             compileWithUsedAssemblyReferences(
-@"
+                @"
 public class C
 {
     static void Main()
@@ -3370,10 +4036,11 @@ public class C
         C2.M4<C1>();
     }
 }
-");
+"
+            );
 
             compileWithUsedAssemblyReferences(
-@"
+                @"
 public class C
 {
     static void Main()
@@ -3381,10 +4048,11 @@ public class C
         C2.M3<C1>();
     }
 }
-");
+"
+            );
 
             compileWithUsedAssemblyReferences(
-@"
+                @"
 public class C
 {
     static void Main()
@@ -3392,10 +4060,11 @@ public class C
         C2.M2<I4>();
     }
 }
-");
+"
+            );
 
             compileWithUsedAssemblyReferences(
-@"
+                @"
 public class C
 {
     static void Main()
@@ -3403,10 +4072,11 @@ public class C
         C2.M2<I3>();
     }
 }
-");
+"
+            );
 
             compileWithUsedAssemblyReferences(
-@"
+                @"
 public class C
 {
     static void Main()
@@ -3414,10 +4084,11 @@ public class C
         C2.M1<I4>();
     }
 }
-");
+"
+            );
 
             compileWithUsedAssemblyReferences(
-@"
+                @"
 public class C
 {
     static void Main()
@@ -3425,10 +4096,11 @@ public class C
         C2.M1<I3>();
     }
 }
-");
+"
+            );
 
             compileWithUsedAssemblyReferences(
-@"
+                @"
 public class C
 {
     static void Main()
@@ -3436,29 +4108,33 @@ public class C
         C2.M1<C1>();
     }
 }
-");
+"
+            );
 
             compileWithUsedAssemblyReferences(
-@"
+                @"
 public class C : I3
 {
 }
-");
+"
+            );
 
             compileWithUsedAssemblyReferences(
-@"
+                @"
 public class C : C1
 {
 }
-");
+"
+            );
 
             compileWithUsedAssemblyReferences(
-@"
+                @"
 interface IA : I3 {}
-");
+"
+            );
 
             compileWithUsedAssemblyReferences(
-@"
+                @"
 using static C4<I3>;
 
 public class C
@@ -3468,10 +4144,11 @@ public class C
         M5();
     }
 }
-");
+"
+            );
 
             verifyNotUsed(
-@"
+                @"
 using static C4<I3>;
 
 public class C
@@ -3480,10 +4157,11 @@ public class C
     {
     }
 }
-");
+"
+            );
 
             verifyNotUsed(
-@"
+                @"
 using @alias = C3<I3>;
 
 public class C
@@ -3492,10 +4170,11 @@ public class C
     {
     }
 }
-");
+"
+            );
 
             compileWithUsedAssemblyReferences(
-@"
+                @"
 using @alias = C3<I3>;
 
 public class C
@@ -3505,7 +4184,8 @@ public class C
         _ = new alias();
     }
 }
-");
+"
+            );
 
             void compileWithUsedAssemblyReferences(string source2)
             {
@@ -3550,14 +4230,14 @@ public class C
         public void ArraysAndPointers_01()
         {
             var source0 =
-@"
+                @"
 public class C0 {}
 ";
             var comp0 = CreateCompilation(source0);
             var comp0Ref = comp0.ToMetadataReference();
 
             var source1 =
-@"
+                @"
 public class C1<T>
 {
     public enum E1
@@ -3573,8 +4253,10 @@ public struct S<T>
             comp1.VerifyDiagnostics();
             var comp1Ref = comp1.ToMetadataReference();
 
-            verifyDiagnostics(comp0Ref, comp1Ref,
-@"
+            verifyDiagnostics(
+                comp0Ref,
+                comp1Ref,
+                @"
 public class C2
 {
     public static void Main()
@@ -3585,7 +4267,8 @@ public class C2
 ",
                 // (6,9): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         _ = C1<S<C0>*[]>.E1.F1 + 1;
-                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "_ = C1<S<C0>*[]>.E1.F1 + 1").WithLocation(6, 9),
+                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "_ = C1<S<C0>*[]>.E1.F1 + 1")
+                    .WithLocation(6, 9),
                 // (6,13): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         _ = C1<S<C0>*[]>.E1.F1 + 1;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "C1<S<C0>*[]>").WithLocation(6, 13),
@@ -3597,10 +4280,14 @@ public class C2
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "C1<S<C0>*[]>.E1.F1").WithLocation(6, 13),
                 // (6,13): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         _ = C1<S<C0>*[]>.E1.F1 + 1;
-                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "C1<S<C0>*[]>.E1.F1 + 1").WithLocation(6, 13));
+                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "C1<S<C0>*[]>.E1.F1 + 1")
+                    .WithLocation(6, 13)
+            );
 
-            verifyDiagnostics(comp0Ref, comp1Ref,
-@"
+            verifyDiagnostics(
+                comp0Ref,
+                comp1Ref,
+                @"
 using static C1<S<C0>*[]>;
 public class C2
 {
@@ -3618,10 +4305,13 @@ public class C2
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "E1.F1 + 1").WithLocation(7, 13),
                 // (7,9): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         _ = E1.F1 + 1;
-                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "_ = E1.F1 + 1").WithLocation(7, 9));
+                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "_ = E1.F1 + 1").WithLocation(7, 9)
+            );
 
-            verifyDiagnostics(comp0Ref, comp1Ref,
-@"
+            verifyDiagnostics(
+                comp0Ref,
+                comp1Ref,
+                @"
 using static C1<S<C0>*[]>.E1;
 public class C2
 {
@@ -3639,10 +4329,13 @@ public class C2
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "F1").WithLocation(7, 13),
                 // (7,13): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         _ = F1 + 1;
-                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "F1 + 1").WithLocation(7, 13));
+                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "F1 + 1").WithLocation(7, 13)
+            );
 
-            verifyDiagnostics(comp0Ref, comp1Ref,
-@"
+            verifyDiagnostics(
+                comp0Ref,
+                comp1Ref,
+                @"
 using @alias = C1<S<C0>*[]>.E1;
 public class C2
 {
@@ -3660,10 +4353,13 @@ public class C2
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "alias.F1").WithLocation(7, 13),
                 // (7,13): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         _ = alias.F1 + 1;
-                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "alias.F1 + 1").WithLocation(7, 13));
+                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "alias.F1 + 1").WithLocation(7, 13)
+            );
 
-            verifyDiagnostics(comp0Ref, comp1Ref,
-@"
+            verifyDiagnostics(
+                comp0Ref,
+                comp1Ref,
+                @"
 using @alias = C1<S<C0>*[]>;
 public class C2
 {
@@ -3684,12 +4380,22 @@ public class C2
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "alias.E1.F1").WithLocation(7, 13),
                 // (7,13): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         _ = alias.E1.F1 + 1;
-                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "alias.E1.F1 + 1").WithLocation(7, 13));
+                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "alias.E1.F1 + 1").WithLocation(7, 13)
+            );
 
-            void verifyDiagnostics(MetadataReference reference0, MetadataReference reference1, string source, params DiagnosticDescription[] diagnostics)
+            void verifyDiagnostics(
+                MetadataReference reference0,
+                MetadataReference reference1,
+                string source,
+                params DiagnosticDescription[] diagnostics
+            )
             {
                 var references = new[] { reference0, reference1 };
-                Compilation comp = CreateCompilation(source, parseOptions: TestOptions.Regular11, references: references);
+                Compilation comp = CreateCompilation(
+                    source,
+                    parseOptions: TestOptions.Regular11,
+                    references: references
+                );
                 comp.VerifyDiagnostics(diagnostics);
             }
         }
@@ -3698,14 +4404,14 @@ public class C2
         public void ArraysAndPointers_01_WithUnsafeContext()
         {
             var source0 =
-@"
+                @"
 public class C0 {}
 ";
             var comp0 = CreateCompilation(source0);
             var comp0Ref = comp0.ToMetadataReference();
 
             var source1 =
-@"
+                @"
 public class C1<T>
 {
     public enum E1
@@ -3721,8 +4427,10 @@ public struct S<T>
             comp1.VerifyDiagnostics();
             var comp1Ref = comp1.ToMetadataReference();
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 public class C2
 {
     public unsafe static void Main()
@@ -3730,10 +4438,13 @@ public class C2
         _ = C1<S<C0>*[]>.E1.F1 + 1;
     }
 }
-");
+"
+            );
 
-            verifyDiagnostics(comp0Ref, comp1Ref,
-@"
+            verifyDiagnostics(
+                comp0Ref,
+                comp1Ref,
+                @"
 using static C1<S<C0>*[]>;
 public class C2
 {
@@ -3754,10 +4465,13 @@ public class C2
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "E1.F1").WithLocation(7, 13),
                 // (7,13): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         _ = E1.F1 + 1;
-                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "E1.F1 + 1").WithLocation(7, 13));
+                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "E1.F1 + 1").WithLocation(7, 13)
+            );
 
-            verifyDiagnostics(comp0Ref, comp1Ref,
-@"
+            verifyDiagnostics(
+                comp0Ref,
+                comp1Ref,
+                @"
 using static unsafe C1<S<C0>*[]>;
 public class C2
 {
@@ -3766,10 +4480,13 @@ public class C2
         _ = E1.F1 + 1;
     }
 }
-");
+"
+            );
 
-            verifyDiagnostics(comp0Ref, comp1Ref,
-@"
+            verifyDiagnostics(
+                comp0Ref,
+                comp1Ref,
+                @"
 using static C1<S<C0>*[]>.E1;
 public class C2
 {
@@ -3790,10 +4507,13 @@ public class C2
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "F1").WithLocation(7, 13),
                 // (7,13): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         _ = F1 + 1;
-                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "F1 + 1").WithLocation(7, 13));
+                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "F1 + 1").WithLocation(7, 13)
+            );
 
-            verifyDiagnostics(comp0Ref, comp1Ref,
-@"
+            verifyDiagnostics(
+                comp0Ref,
+                comp1Ref,
+                @"
 using static unsafe C1<S<C0>*[]>.E1;
 public class C2
 {
@@ -3802,10 +4522,13 @@ public class C2
         _ = F1 + 1;
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using unsafe @alias = C1<S<C0>*[]>.E1;
 public class C2
 {
@@ -3814,10 +4537,13 @@ public class C2
         _ = alias.F1 + 1;
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using unsafe @alias = C1<S<C0>*[]>;
 public class C2
 {
@@ -3826,19 +4552,36 @@ public class C2
         _ = alias.E1.F1 + 1;
     }
 }
-");
+"
+            );
 
-            void verifyDiagnostics(MetadataReference reference0, MetadataReference reference1, string source, params DiagnosticDescription[] diagnostics)
+            void verifyDiagnostics(
+                MetadataReference reference0,
+                MetadataReference reference1,
+                string source,
+                params DiagnosticDescription[] diagnostics
+            )
             {
                 var references = new[] { reference0, reference1 };
-                Compilation comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview, references: references, options: TestOptions.UnsafeDebugDll);
+                Compilation comp = CreateCompilation(
+                    source,
+                    parseOptions: TestOptions.RegularPreview,
+                    references: references,
+                    options: TestOptions.UnsafeDebugDll
+                );
                 comp.VerifyDiagnostics(diagnostics);
             }
 
             void verify(MetadataReference reference0, MetadataReference reference1, string source)
             {
                 var references = new[] { reference0, reference1 };
-                AssertUsedAssemblyReferences(source, references, references, parseOptions: TestOptions.RegularPreview, options: TestOptions.UnsafeDebugDll);
+                AssertUsedAssemblyReferences(
+                    source,
+                    references,
+                    references,
+                    parseOptions: TestOptions.RegularPreview,
+                    options: TestOptions.UnsafeDebugDll
+                );
             }
         }
 
@@ -3846,14 +4589,14 @@ public class C2
         public void TypeReference_01()
         {
             var source0 =
-@"
+                @"
 public class C0 {}
 ";
             var comp0 = CreateCompilation(source0);
             var comp0Ref = comp0.ToMetadataReference();
 
             var source1 =
-@"
+                @"
 public class C1<T>
 {
     public enum E1
@@ -3865,8 +4608,10 @@ public class C1<T>
             comp1.VerifyDiagnostics();
             var comp1Ref = comp1.ToMetadataReference();
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 public class C2
 {
     public static void Main()
@@ -3874,10 +4619,13 @@ public class C2
         _ = nameof(C1<C0>.E1);
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using static C1<C0>;
 public class C2
 {
@@ -3886,10 +4634,13 @@ public class C2
         _ = nameof(E1);
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using @alias = C1<C0>.E1;
 public class C2
 {
@@ -3898,10 +4649,13 @@ public class C2
         _ = nameof(alias);
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using @alias = C1<C0>;
 public class C2
 {
@@ -3910,7 +4664,8 @@ public class C2
         _ = nameof(alias.E1);
     }
 }
-");
+"
+            );
 
             void verify(MetadataReference reference0, MetadataReference reference1, string source)
             {
@@ -3922,14 +4677,14 @@ public class C2
         public void TypeReference_02()
         {
             var source0 =
-@"
+                @"
 public class C0 {}
 ";
             var comp0 = CreateCompilation(source0);
             var comp0Ref = comp0.ToMetadataReference();
 
             var source1 =
-@"
+                @"
 public class C1<T>
 {
     public enum E1
@@ -3941,8 +4696,10 @@ public class C1<T>
             comp1.VerifyDiagnostics();
             var comp1Ref = comp1.ToMetadataReference();
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 class C2
 {
     /// <summary>
@@ -3953,10 +4710,13 @@ class C2
     }
 }
 ",
-                hasTypeReferencesInUsing: false);
+                hasTypeReferencesInUsing: false
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using static C1<C0>;
 class C2
 {
@@ -3967,10 +4727,13 @@ class C2
     {
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using @alias = C1<C0>.E1;
 class C2
 {
@@ -3981,10 +4744,13 @@ class C2
     {
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using @alias = C1<C0>;
 class C2
 {
@@ -3995,10 +4761,11 @@ class C2
     {
     }
 }
-");
+"
+            );
 
             var source2 =
-@"
+                @"
 class C2
 {
     static void Main1()
@@ -4008,27 +4775,60 @@ class C2
 ";
 
             var references = new[] { comp0Ref, comp1Ref };
-            AssertUsedAssemblyReferences(CreateCompilation(source2, references: references,
-                                                           parseOptions: TestOptions.Script.WithDocumentationMode(DocumentationMode.None),
-                                                           options: TestOptions.DebugDll.WithUsings("C0")),
-                                         comp0Ref);
-            AssertUsedAssemblyReferences(CreateCompilation(source2, references: references,
-                                                           parseOptions: TestOptions.Script.WithDocumentationMode(DocumentationMode.Parse),
-                                                           options: TestOptions.DebugDll.WithUsings("C0")),
-                                         comp0Ref);
+            AssertUsedAssemblyReferences(
+                CreateCompilation(
+                    source2,
+                    references: references,
+                    parseOptions: TestOptions.Script.WithDocumentationMode(DocumentationMode.None),
+                    options: TestOptions.DebugDll.WithUsings("C0")
+                ),
+                comp0Ref
+            );
+            AssertUsedAssemblyReferences(
+                CreateCompilation(
+                    source2,
+                    references: references,
+                    parseOptions: TestOptions.Script.WithDocumentationMode(DocumentationMode.Parse),
+                    options: TestOptions.DebugDll.WithUsings("C0")
+                ),
+                comp0Ref
+            );
 
-            void verify(MetadataReference reference0, MetadataReference reference1, string source, bool hasTypeReferencesInUsing = true)
+            void verify(
+                MetadataReference reference0,
+                MetadataReference reference1,
+                string source,
+                bool hasTypeReferencesInUsing = true
+            )
             {
                 var references = new[] { reference0, reference1 };
-                Compilation comp2 = CreateCompilation(source, references: references, parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None));
-                AssertUsedAssemblyReferences(comp2, hasTypeReferencesInUsing ? references : new MetadataReference[] { }, references);
+                Compilation comp2 = CreateCompilation(
+                    source,
+                    references: references,
+                    parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)
+                );
+                AssertUsedAssemblyReferences(
+                    comp2,
+                    hasTypeReferencesInUsing ? references : new MetadataReference[] { },
+                    references
+                );
 
                 var expected = hasTypeReferencesInUsing ? references : new[] { reference1 };
 
-                Compilation comp3 = CreateCompilation(source, references: references, parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Parse));
+                Compilation comp3 = CreateCompilation(
+                    source,
+                    references: references,
+                    parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Parse)
+                );
                 AssertUsedAssemblyReferences(comp3, expected);
 
-                Compilation comp4 = CreateCompilation(source, references: references, parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Diagnose));
+                Compilation comp4 = CreateCompilation(
+                    source,
+                    references: references,
+                    parseOptions: TestOptions
+                        .Regular
+                        .WithDocumentationMode(DocumentationMode.Diagnose)
+                );
                 AssertUsedAssemblyReferences(comp4, expected);
             }
         }
@@ -4037,14 +4837,14 @@ class C2
         public void TypeReference_03()
         {
             var source0 =
-@"
+                @"
 public class C0 {}
 ";
             var comp0 = CreateCompilation(source0);
             var comp0Ref = comp0.ToMetadataReference();
 
             var source1 =
-@"
+                @"
 public class C1<T>
 {
     public enum E1
@@ -4056,8 +4856,10 @@ public class C1<T>
             comp1.VerifyDiagnostics();
             var comp1Ref = comp1.ToMetadataReference();
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 class C2
 {
     /// <summary>
@@ -4070,10 +4872,13 @@ class C2
     void M(int x) {}
 }
 ",
-                hasTypeReferencesInUsing: false);
+                hasTypeReferencesInUsing: false
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using static C1<C0>;
 class C2
 {
@@ -4086,10 +4891,13 @@ class C2
 
     void M(int x) {}
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using @alias = C1<C0>.E1;
 class C2
 {
@@ -4102,10 +4910,13 @@ class C2
 
     void M(int x) {}
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                @"
 using @alias = C1<C0>;
 class C2
 {
@@ -4118,15 +4929,33 @@ class C2
 
     void M(int x) {}
 }
-");
+"
+            );
 
-            void verify(MetadataReference reference0, MetadataReference reference1, string source, bool hasTypeReferencesInUsing = true)
+            void verify(
+                MetadataReference reference0,
+                MetadataReference reference1,
+                string source,
+                bool hasTypeReferencesInUsing = true
+            )
             {
                 var references = new[] { reference0, reference1 };
-                Compilation comp2 = CreateCompilation(source, references: references, parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None));
-                AssertUsedAssemblyReferences(comp2, hasTypeReferencesInUsing ? references : new MetadataReference[] { }, references);
+                Compilation comp2 = CreateCompilation(
+                    source,
+                    references: references,
+                    parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)
+                );
+                AssertUsedAssemblyReferences(
+                    comp2,
+                    hasTypeReferencesInUsing ? references : new MetadataReference[] { },
+                    references
+                );
 
-                Compilation comp3 = CreateCompilation(source, references: references, parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Parse));
+                Compilation comp3 = CreateCompilation(
+                    source,
+                    references: references,
+                    parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Parse)
+                );
                 AssertUsedAssemblyReferences(comp3, references);
             }
         }
@@ -4135,7 +4964,7 @@ class C2
         public void TypeReference_04()
         {
             var source0 =
-@"
+                @"
 public class C0
 {
     public class C1
@@ -4148,7 +4977,7 @@ public class C0
             var comp0Ref = comp0.ToMetadataReference();
 
             var source1 =
-@"
+                @"
 public class C2 : C0
 {
 }
@@ -4156,7 +4985,8 @@ public class C2 : C0
             var comp1 = CreateCompilation(source1, references: new[] { comp0Ref });
             var comp1Ref = comp1.ToMetadataReference();
 
-            CompileWithUsedAssemblyReferences(@"
+            CompileWithUsedAssemblyReferences(
+                @"
 public class C3
 {
     public static void Main()
@@ -4164,29 +4994,41 @@ public class C3
         _ = new C2.C1();
     }
 }
-", comp0Ref, comp1Ref);
+",
+                comp0Ref,
+                comp1Ref
+            );
 
-            CompileWithUsedAssemblyReferences(@"
+            CompileWithUsedAssemblyReferences(
+                @"
 public class C3 : C2.C1
 {
     public static void Main()
     {
     }
 }
-", comp0Ref, comp1Ref);
+",
+                comp0Ref,
+                comp1Ref
+            );
 
-            var used = CompileWithUsedAssemblyReferences(@"
+            var used = CompileWithUsedAssemblyReferences(
+                @"
 public class C3 : C0
 {
     public static void Main()
     {
     }
 }
-", comp0Ref, comp1Ref);
+",
+                comp0Ref,
+                comp1Ref
+            );
 
             Assert.DoesNotContain(comp1Ref, used);
 
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 using static C2.C1;
 
 public class C3
@@ -4195,7 +5037,9 @@ public class C3
     {
     }
 }
-", references: new[] { comp0Ref, comp1Ref });
+",
+                references: new[] { comp0Ref, comp1Ref }
+            );
 
             foreach (var c in CloneCompilationsWithUsings(comp, null, null))
             {
@@ -4204,7 +5048,8 @@ public class C3
                 Assert.DoesNotContain(comp1Ref, used);
             }
 
-            comp = CreateCompilation(@"
+            comp = CreateCompilation(
+                @"
 using @alias = C2.C1;
 
 public class C3
@@ -4213,7 +5058,9 @@ public class C3
     {
     }
 }
-", references: new[] { comp0Ref, comp1Ref });
+",
+                references: new[] { comp0Ref, comp1Ref }
+            );
 
             foreach (var c in CloneCompilationsWithUsings(comp, null, null))
             {
@@ -4222,7 +5069,8 @@ public class C3
                 Assert.DoesNotContain(comp1Ref, used);
             }
 
-            CompileWithUsedAssemblyReferences(@"
+            CompileWithUsedAssemblyReferences(
+                @"
 using static C2.C1;
 
 public class C3
@@ -4232,9 +5080,13 @@ public class C3
         M1();
     }
 }
-", comp0Ref, comp1Ref);
+",
+                comp0Ref,
+                comp1Ref
+            );
 
-            CompileWithUsedAssemblyReferences(@"
+            CompileWithUsedAssemblyReferences(
+                @"
 using @alias = C2.C1;
 
 public class C3
@@ -4244,14 +5096,17 @@ public class C3
         _ = new alias();
     }
 }
-", comp0Ref, comp1Ref);
+",
+                comp0Ref,
+                comp1Ref
+            );
         }
 
         [Fact]
         public void NamespaceReference_01()
         {
             var source0 =
-@"
+                @"
 namespace N1.N2
 {
     public enum E0
@@ -4263,7 +5118,7 @@ namespace N1.N2
             var comp0Ref = comp0.ToMetadataReference();
 
             var source1 =
-@"
+                @"
 namespace N1.N2
 {
     public enum E1
@@ -4276,7 +5131,7 @@ namespace N1.N2
             var comp1Ref = comp1.ToMetadataReference();
 
             var source2 =
-@"
+                @"
 namespace N1
 {
     public enum E2
@@ -4288,8 +5143,11 @@ namespace N1
             comp2.VerifyDiagnostics();
             var comp2Ref = comp2.ToMetadataReference();
 
-            verify(comp0Ref, comp1Ref, comp2Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                comp2Ref,
+                @"
 public class C2
 {
     public static void Main()
@@ -4297,10 +5155,14 @@ public class C2
         _ = nameof(N1.N2);
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref, comp2Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                comp2Ref,
+                @"
 using @alias = N1.N2;
 public class C2
 {
@@ -4309,10 +5171,14 @@ public class C2
         _ = nameof(alias);
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref, comp2Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                comp2Ref,
+                @"
 using @alias = N1;
 public class C2
 {
@@ -4321,11 +5187,22 @@ public class C2
         _ = nameof(alias.N2);
     }
 }
-");
+"
+            );
 
-            void verify(MetadataReference reference0, MetadataReference reference1, MetadataReference reference2, string source)
+            void verify(
+                MetadataReference reference0,
+                MetadataReference reference1,
+                MetadataReference reference2,
+                string source
+            )
             {
-                AssertUsedAssemblyReferences(source, new[] { reference0, reference1, reference2 }, reference0, reference1);
+                AssertUsedAssemblyReferences(
+                    source,
+                    new[] { reference0, reference1, reference2 },
+                    reference0,
+                    reference1
+                );
             }
         }
 
@@ -4333,7 +5210,7 @@ public class C2
         public void NamespaceReference_02()
         {
             var source0 =
-@"
+                @"
 namespace N1.N2
 {
     public enum E0
@@ -4346,7 +5223,7 @@ namespace N1.N2
             var comp0Ref = comp0.ToMetadataReference();
 
             var source1 =
-@"
+                @"
 namespace N1.N2
 {
     public enum E1
@@ -4359,7 +5236,7 @@ namespace N1.N2
             var comp1Ref = comp1.ToMetadataReference();
 
             var source2 =
-@"
+                @"
 namespace N1
 {
     public enum E2
@@ -4371,8 +5248,11 @@ namespace N1
             comp2.VerifyDiagnostics();
             var comp2Ref = comp2.ToMetadataReference();
 
-            verify(comp0Ref, comp1Ref, comp2Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                comp2Ref,
+                @"
 public class C2
 {
     public static void Main()
@@ -4380,10 +5260,14 @@ public class C2
         _ = N1.N2.E0.F0;
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref, comp2Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                comp2Ref,
+                @"
 using @alias = N1.N2.E0;
 public class C2
 {
@@ -4392,10 +5276,14 @@ public class C2
         _ = alias.F0;
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref, comp2Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                comp2Ref,
+                @"
 using static N1.N2.E0;
 public class C2
 {
@@ -4404,10 +5292,14 @@ public class C2
         _ = F0;
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref, comp2Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                comp2Ref,
+                @"
 using @alias = N1.N2;
 public class C2
 {
@@ -4416,10 +5308,14 @@ public class C2
         _ = alias.E0.F0;
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref, comp2Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                comp2Ref,
+                @"
 using N1.N2;
 public class C2
 {
@@ -4428,10 +5324,14 @@ public class C2
         _ = E0.F0;
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref, comp2Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                comp2Ref,
+                @"
 using @alias = N1;
 public class C2
 {
@@ -4440,11 +5340,21 @@ public class C2
         _ = alias.N2.E0.F0;
     }
 }
-");
+"
+            );
 
-            void verify(MetadataReference reference0, MetadataReference reference1, MetadataReference reference2, string source)
+            void verify(
+                MetadataReference reference0,
+                MetadataReference reference1,
+                MetadataReference reference2,
+                string source
+            )
             {
-                AssertUsedAssemblyReferences(source, new[] { reference0, reference1, reference2 }, reference0);
+                AssertUsedAssemblyReferences(
+                    source,
+                    new[] { reference0, reference1, reference2 },
+                    reference0
+                );
             }
         }
 
@@ -4452,7 +5362,7 @@ public class C2
         public void NamespaceReference_03()
         {
             var source0 =
-@"
+                @"
 namespace N1.N2
 {
     public enum E0
@@ -4464,7 +5374,7 @@ namespace N1.N2
             var comp0Ref = comp0.ToMetadataReference();
 
             var source1 =
-@"
+                @"
 namespace N1.N2
 {
     public enum E1
@@ -4477,7 +5387,7 @@ namespace N1.N2
             var comp1Ref = comp1.ToMetadataReference();
 
             var source2 =
-@"
+                @"
 namespace N1
 {
     public enum E2
@@ -4489,8 +5399,11 @@ namespace N1
             comp2.VerifyDiagnostics();
             var comp2Ref = comp2.ToMetadataReference();
 
-            verify(comp0Ref, comp1Ref, comp2Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                comp2Ref,
+                @"
 class C2
 {
     /// <summary>
@@ -4500,10 +5413,14 @@ class C2
     {
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref, comp2Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                comp2Ref,
+                @"
 using @alias = N1.N2;
 class C2
 {
@@ -4516,10 +5433,13 @@ class C2
 }
 ",
                 namespaceOrdinalReferencedInUsings: 2
-                );
+            );
 
-            verify(comp0Ref, comp1Ref, comp2Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                comp2Ref,
+                @"
 using @alias = N1;
 class C2
 {
@@ -4532,10 +5452,10 @@ class C2
 }
 ",
                 namespaceOrdinalReferencedInUsings: 1
-                );
+            );
 
             var source3 =
-@"
+                @"
 using N1.N2;
 class C2
 {
@@ -4546,26 +5466,46 @@ class C2
 ";
 
             var references = new[] { comp0Ref, comp1Ref, comp2Ref };
-            AssertUsedAssemblyReferences(CreateCompilation(source3, references: references, parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)),
-                                         comp0Ref, comp1Ref);
-            AssertUsedAssemblyReferences(CreateCompilation(source3, references: references, parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Parse)),
-                                         new MetadataReference[] { },
-                                         new[] {
-                                             // (1001,1): hidden CS8019: Unnecessary using directive.
-                                             // using N1.N2;
-                                             Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using N1.N2;").WithLocation(1001, 1)
-                                         },
-                                         new[] {
-                                             // (1001,1): hidden CS8019: Unnecessary using directive.
-                                             // using N1.N2;
-                                             Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using N1.N2;").WithLocation(1001, 1),
-                                             // (1001,7): error CS0246: The type or namespace name 'N1' could not be found (are you missing a using directive or an assembly reference?)
-                                             // using N1.N2;
-                                             Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "N1").WithArguments("N1").WithLocation(1001, 7)
-                                         }, references);
+            AssertUsedAssemblyReferences(
+                CreateCompilation(
+                    source3,
+                    references: references,
+                    parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)
+                ),
+                comp0Ref,
+                comp1Ref
+            );
+            AssertUsedAssemblyReferences(
+                CreateCompilation(
+                    source3,
+                    references: references,
+                    parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Parse)
+                ),
+                new MetadataReference[] { },
+                new[]
+                {
+                    // (1001,1): hidden CS8019: Unnecessary using directive.
+                    // using N1.N2;
+                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using N1.N2;")
+                        .WithLocation(1001, 1)
+                },
+                new[]
+                {
+                    // (1001,1): hidden CS8019: Unnecessary using directive.
+                    // using N1.N2;
+                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using N1.N2;")
+                        .WithLocation(1001, 1),
+                    // (1001,7): error CS0246: The type or namespace name 'N1' could not be found (are you missing a using directive or an assembly reference?)
+                    // using N1.N2;
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "N1")
+                        .WithArguments("N1")
+                        .WithLocation(1001, 7)
+                },
+                references
+            );
 
             var source4 =
-@"
+                @"
 using N1;
 class C2
 {
@@ -4575,26 +5515,45 @@ class C2
 }
 ";
 
-            AssertUsedAssemblyReferences(CreateCompilation(source4, references: references, parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)),
-                                         references);
-            AssertUsedAssemblyReferences(CreateCompilation(source4, references: references, parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Parse)),
-                                         new MetadataReference[] { },
-                                         new[] {
-                                             // (1001,1): hidden CS8019: Unnecessary using directive.
-                                             // using N1;
-                                             Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using N1;").WithLocation(1001, 1)
-                                         },
-                                         new[] {
-                                             // (1001,1): hidden CS8019: Unnecessary using directive.
-                                             // using N1;
-                                             Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using N1;").WithLocation(1001, 1),
-                                             // (1001,7): error CS0246: The type or namespace name 'N1' could not be found (are you missing a
-                                             // using N1;
-                                             Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "N1").WithArguments("N1").WithLocation(1001, 7)
-                                         }, references);
+            AssertUsedAssemblyReferences(
+                CreateCompilation(
+                    source4,
+                    references: references,
+                    parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)
+                ),
+                references
+            );
+            AssertUsedAssemblyReferences(
+                CreateCompilation(
+                    source4,
+                    references: references,
+                    parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Parse)
+                ),
+                new MetadataReference[] { },
+                new[]
+                {
+                    // (1001,1): hidden CS8019: Unnecessary using directive.
+                    // using N1;
+                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using N1;")
+                        .WithLocation(1001, 1)
+                },
+                new[]
+                {
+                    // (1001,1): hidden CS8019: Unnecessary using directive.
+                    // using N1;
+                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using N1;")
+                        .WithLocation(1001, 1),
+                    // (1001,7): error CS0246: The type or namespace name 'N1' could not be found (are you missing a
+                    // using N1;
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "N1")
+                        .WithArguments("N1")
+                        .WithLocation(1001, 7)
+                },
+                references
+            );
 
             var source5 =
-@"
+                @"
 class C2
 {
     static void Main1()
@@ -4603,34 +5562,85 @@ class C2
 }
 ";
 
-            AssertUsedAssemblyReferences(CreateCompilation(source5, references: references,
-                                                           parseOptions: TestOptions.Script.WithDocumentationMode(DocumentationMode.None),
-                                                           options: TestOptions.DebugDll.WithUsings("N1.N2")),
-                                         comp0Ref, comp1Ref);
-            AssertUsedAssemblyReferences(CreateCompilation(source5, references: references,
-                                                           parseOptions: TestOptions.Script.WithDocumentationMode(DocumentationMode.Parse),
-                                                           options: TestOptions.DebugDll.WithUsings("N1.N2")),
-                                         comp0Ref, comp1Ref);
-            AssertUsedAssemblyReferences(CreateCompilation(source5, references: references,
-                                                           parseOptions: TestOptions.Script.WithDocumentationMode(DocumentationMode.None),
-                                                           options: TestOptions.DebugDll.WithUsings("N1")),
-                                         references);
-            AssertUsedAssemblyReferences(CreateCompilation(source5, references: references,
-                                                           parseOptions: TestOptions.Script.WithDocumentationMode(DocumentationMode.Parse),
-                                                           options: TestOptions.DebugDll.WithUsings("N1")),
-                                         references);
+            AssertUsedAssemblyReferences(
+                CreateCompilation(
+                    source5,
+                    references: references,
+                    parseOptions: TestOptions.Script.WithDocumentationMode(DocumentationMode.None),
+                    options: TestOptions.DebugDll.WithUsings("N1.N2")
+                ),
+                comp0Ref,
+                comp1Ref
+            );
+            AssertUsedAssemblyReferences(
+                CreateCompilation(
+                    source5,
+                    references: references,
+                    parseOptions: TestOptions.Script.WithDocumentationMode(DocumentationMode.Parse),
+                    options: TestOptions.DebugDll.WithUsings("N1.N2")
+                ),
+                comp0Ref,
+                comp1Ref
+            );
+            AssertUsedAssemblyReferences(
+                CreateCompilation(
+                    source5,
+                    references: references,
+                    parseOptions: TestOptions.Script.WithDocumentationMode(DocumentationMode.None),
+                    options: TestOptions.DebugDll.WithUsings("N1")
+                ),
+                references
+            );
+            AssertUsedAssemblyReferences(
+                CreateCompilation(
+                    source5,
+                    references: references,
+                    parseOptions: TestOptions.Script.WithDocumentationMode(DocumentationMode.Parse),
+                    options: TestOptions.DebugDll.WithUsings("N1")
+                ),
+                references
+            );
 
-            void verify(MetadataReference reference0, MetadataReference reference1, MetadataReference reference2, string source, int namespaceOrdinalReferencedInUsings = 0)
+            void verify(
+                MetadataReference reference0,
+                MetadataReference reference1,
+                MetadataReference reference2,
+                string source,
+                int namespaceOrdinalReferencedInUsings = 0
+            )
             {
                 var references = new[] { reference0, reference1, reference2 };
                 var expected = new[] { reference0, reference1 };
-                Compilation comp2 = CreateCompilation(source, references: references, parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None));
-                AssertUsedAssemblyReferences(comp2, namespaceOrdinalReferencedInUsings switch { 1 => references, 2 => expected, _ => new MetadataReference[] { } }, references);
+                Compilation comp2 = CreateCompilation(
+                    source,
+                    references: references,
+                    parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)
+                );
+                AssertUsedAssemblyReferences(
+                    comp2,
+                    namespaceOrdinalReferencedInUsings switch
+                    {
+                        1 => references,
+                        2 => expected,
+                        _ => new MetadataReference[] { }
+                    },
+                    references
+                );
 
-                Compilation comp3 = CreateCompilation(source, references: references, parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Parse));
+                Compilation comp3 = CreateCompilation(
+                    source,
+                    references: references,
+                    parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Parse)
+                );
                 AssertUsedAssemblyReferences(comp3, expected);
 
-                Compilation comp4 = CreateCompilation(source, references: references, parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Diagnose));
+                Compilation comp4 = CreateCompilation(
+                    source,
+                    references: references,
+                    parseOptions: TestOptions
+                        .Regular
+                        .WithDocumentationMode(DocumentationMode.Diagnose)
+                );
                 AssertUsedAssemblyReferences(comp4, expected);
             }
         }
@@ -4639,7 +5649,7 @@ class C2
         public void NamespaceReference_04()
         {
             var source0 =
-@"
+                @"
 namespace N1.N2
 {
     public enum E0
@@ -4652,7 +5662,7 @@ namespace N1.N2
             var comp0Ref = comp0.ToMetadataReference();
 
             var source1 =
-@"
+                @"
 namespace N1.N2
 {
     public enum E1
@@ -4665,7 +5675,7 @@ namespace N1.N2
             var comp1Ref = comp1.ToMetadataReference();
 
             var source2 =
-@"
+                @"
 namespace N1
 {
     public enum E2
@@ -4677,8 +5687,11 @@ namespace N1
             comp2.VerifyDiagnostics();
             var comp2Ref = comp2.ToMetadataReference();
 
-            verify(comp0Ref, comp1Ref, comp2Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                comp2Ref,
+                @"
 class C2
 {
     /// <summary>
@@ -4688,10 +5701,14 @@ class C2
     {
     }
 }
-");
+"
+            );
 
-            verify(comp0Ref, comp1Ref, comp2Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                comp2Ref,
+                @"
 using @alias = N1.N2;
 class C2
 {
@@ -4704,10 +5721,13 @@ class C2
 }
 ",
                 namespaceOrdinalReferencedInUsings: 2
-                );
+            );
 
-            verify(comp0Ref, comp1Ref, comp2Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                comp2Ref,
+                @"
 using @alias = N1.N2.E0;
 class C2
 {
@@ -4720,10 +5740,13 @@ class C2
 }
 ",
                 namespaceOrdinalReferencedInUsings: 3
-                );
+            );
 
-            verify(comp0Ref, comp1Ref, comp2Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                comp2Ref,
+                @"
 using static N1.N2.E0;
 class C2
 {
@@ -4736,10 +5759,13 @@ class C2
 }
 ",
                 namespaceOrdinalReferencedInUsings: 3
-                );
+            );
 
-            verify(comp0Ref, comp1Ref, comp2Ref,
-@"
+            verify(
+                comp0Ref,
+                comp1Ref,
+                comp2Ref,
+                @"
 using @alias = N1;
 class C2
 {
@@ -4752,10 +5778,10 @@ class C2
 }
 ",
                 namespaceOrdinalReferencedInUsings: 1
-                );
+            );
 
             var source3 =
-@"
+                @"
 using static N1.N2.E0;
 class C2
 {
@@ -4766,26 +5792,46 @@ class C2
 ";
 
             var references = new[] { comp0Ref, comp1Ref, comp2Ref };
-            AssertUsedAssemblyReferences(CreateCompilation(source3, references: references, parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)),
-                                         new[] { comp0Ref }, references);
-            AssertUsedAssemblyReferences(CreateCompilation(source3, references: references, parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Parse)),
-                                         new MetadataReference[] { },
-                                         new[] {
-                                             // (1001,1): hidden CS8019: Unnecessary using directive.
-                                             // using static N1.N2.E0;
-                                             Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using static N1.N2.E0;").WithLocation(1001, 1)
-                                         },
-                                         new[] {
-                                             // (1001,1): hidden CS8019: Unnecessary using directive.
-                                             // using static N1.N2.E0;
-                                             Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using static N1.N2.E0;").WithLocation(1001, 1),
-                                             // (1001,14): error CS0246: The type or namespace name 'N1' could not be found (are you missing a using directive or an assembly reference?)
-                                             // using static N1.N2.E0;
-                                             Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "N1").WithArguments("N1").WithLocation(1001, 14)
-                                         }, references);
+            AssertUsedAssemblyReferences(
+                CreateCompilation(
+                    source3,
+                    references: references,
+                    parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)
+                ),
+                new[] { comp0Ref },
+                references
+            );
+            AssertUsedAssemblyReferences(
+                CreateCompilation(
+                    source3,
+                    references: references,
+                    parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Parse)
+                ),
+                new MetadataReference[] { },
+                new[]
+                {
+                    // (1001,1): hidden CS8019: Unnecessary using directive.
+                    // using static N1.N2.E0;
+                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using static N1.N2.E0;")
+                        .WithLocation(1001, 1)
+                },
+                new[]
+                {
+                    // (1001,1): hidden CS8019: Unnecessary using directive.
+                    // using static N1.N2.E0;
+                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using static N1.N2.E0;")
+                        .WithLocation(1001, 1),
+                    // (1001,14): error CS0246: The type or namespace name 'N1' could not be found (are you missing a using directive or an assembly reference?)
+                    // using static N1.N2.E0;
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "N1")
+                        .WithArguments("N1")
+                        .WithLocation(1001, 14)
+                },
+                references
+            );
 
             var source5 =
-@"
+                @"
 class C2
 {
     static void Main1()
@@ -4794,25 +5840,67 @@ class C2
 }
 ";
 
-            AssertUsedAssemblyReferences(CreateCompilation(source5, references: references,
-                                                           parseOptions: TestOptions.Script.WithDocumentationMode(DocumentationMode.None),
-                                                           options: TestOptions.DebugDll.WithUsings("N1.N2.E0")),
-                                         new[] { comp0Ref }, references);
-            AssertUsedAssemblyReferences(CreateCompilation(source5, references: references,
-                                                           parseOptions: TestOptions.Script.WithDocumentationMode(DocumentationMode.Parse),
-                                                           options: TestOptions.DebugDll.WithUsings("N1.N2.E0")),
-                                         new[] { comp0Ref }, references);
+            AssertUsedAssemblyReferences(
+                CreateCompilation(
+                    source5,
+                    references: references,
+                    parseOptions: TestOptions.Script.WithDocumentationMode(DocumentationMode.None),
+                    options: TestOptions.DebugDll.WithUsings("N1.N2.E0")
+                ),
+                new[] { comp0Ref },
+                references
+            );
+            AssertUsedAssemblyReferences(
+                CreateCompilation(
+                    source5,
+                    references: references,
+                    parseOptions: TestOptions.Script.WithDocumentationMode(DocumentationMode.Parse),
+                    options: TestOptions.DebugDll.WithUsings("N1.N2.E0")
+                ),
+                new[] { comp0Ref },
+                references
+            );
 
-            void verify(MetadataReference reference0, MetadataReference reference1, MetadataReference reference2, string source, int namespaceOrdinalReferencedInUsings = 0)
+            void verify(
+                MetadataReference reference0,
+                MetadataReference reference1,
+                MetadataReference reference2,
+                string source,
+                int namespaceOrdinalReferencedInUsings = 0
+            )
             {
                 var references = new[] { reference0, reference1, reference2 };
-                Compilation comp2 = CreateCompilation(source, references: references, parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None));
-                AssertUsedAssemblyReferences(comp2, namespaceOrdinalReferencedInUsings switch { 1 => references, 2 => new[] { reference0, reference1 }, 3 => new[] { reference0 }, _ => new MetadataReference[] { } }, references);
+                Compilation comp2 = CreateCompilation(
+                    source,
+                    references: references,
+                    parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)
+                );
+                AssertUsedAssemblyReferences(
+                    comp2,
+                    namespaceOrdinalReferencedInUsings switch
+                    {
+                        1 => references,
+                        2 => new[] { reference0, reference1 },
+                        3 => new[] { reference0 },
+                        _ => new MetadataReference[] { }
+                    },
+                    references
+                );
 
-                Compilation comp3 = CreateCompilation(source, references: references, parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Parse));
+                Compilation comp3 = CreateCompilation(
+                    source,
+                    references: references,
+                    parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Parse)
+                );
                 AssertUsedAssemblyReferences(comp3, new[] { reference0 }, references);
 
-                Compilation comp4 = CreateCompilation(source, references: references, parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Diagnose));
+                Compilation comp4 = CreateCompilation(
+                    source,
+                    references: references,
+                    parseOptions: TestOptions
+                        .Regular
+                        .WithDocumentationMode(DocumentationMode.Diagnose)
+                );
                 AssertUsedAssemblyReferences(comp4, new[] { reference0 }, references);
             }
         }
@@ -4821,7 +5909,7 @@ class C2
         public void NamespaceReference_05()
         {
             var source1 =
-@"
+                @"
 using global;
 class C2
 {
@@ -4831,14 +5919,20 @@ class C2
 }
 ";
 
-            CreateCompilation(source1, parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)).VerifyDiagnostics(
-                // (2,7): error CS0246: The type or namespace name 'global' could not be found (are you missing a using directive or an assembly reference?)
-                // using global;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "global").WithArguments("global").WithLocation(2, 7)
+            CreateCompilation(
+                    source1,
+                    parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)
+                )
+                .VerifyDiagnostics(
+                    // (2,7): error CS0246: The type or namespace name 'global' could not be found (are you missing a using directive or an assembly reference?)
+                    // using global;
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "global")
+                        .WithArguments("global")
+                        .WithLocation(2, 7)
                 );
 
             var source2 =
-@"
+                @"
 using @alias = global;
 class C2
 {
@@ -4848,10 +5942,16 @@ class C2
 }
 ";
 
-            CreateCompilation(source2, parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)).VerifyDiagnostics(
-                // (2,16): error CS0246: The type or namespace name 'global' could not be found (are you missing a using directive or an assembly reference?)
-                // using @alias = global;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "global").WithArguments("global").WithLocation(2, 16)
+            CreateCompilation(
+                    source2,
+                    parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)
+                )
+                .VerifyDiagnostics(
+                    // (2,16): error CS0246: The type or namespace name 'global' could not be found (are you missing a using directive or an assembly reference?)
+                    // using @alias = global;
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "global")
+                        .WithArguments("global")
+                        .WithLocation(2, 16)
                 );
         }
 
@@ -4859,7 +5959,7 @@ class C2
         public void NamespaceReference_06()
         {
             var source1 =
-@"
+                @"
 using global::;
 class C2
 {
@@ -4869,14 +5969,18 @@ class C2
 }
 ";
 
-            CreateCompilation(source1, parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)).VerifyDiagnostics(
-                // (2,15): error CS1001: Identifier expected
-                // using global::;
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(2, 15)
+            CreateCompilation(
+                    source1,
+                    parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)
+                )
+                .VerifyDiagnostics(
+                    // (2,15): error CS1001: Identifier expected
+                    // using global::;
+                    Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(2, 15)
                 );
 
             var source2 =
-@"
+                @"
 using @alias = global::;
 class C2
 {
@@ -4886,10 +5990,14 @@ class C2
 }
 ";
 
-            CreateCompilation(source2, parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)).VerifyDiagnostics(
-                // (2,24): error CS1001: Identifier expected
-                // using @alias = global::;
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(2, 24)
+            CreateCompilation(
+                    source2,
+                    parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)
+                )
+                .VerifyDiagnostics(
+                    // (2,24): error CS1001: Identifier expected
+                    // using @alias = global::;
+                    Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(2, 24)
                 );
         }
 
@@ -4897,7 +6005,7 @@ class C2
         public void EventReference_01()
         {
             var source0 =
-@"
+                @"
 public delegate void D0();
 ";
             var comp0 = CreateCompilation(source0);
@@ -4905,7 +6013,7 @@ public delegate void D0();
             var comp0Ref = comp0.ToMetadataReference();
 
             var source1 =
-@"
+                @"
 public class C1
 {
     public static event D0 E1;
@@ -4923,7 +6031,7 @@ public class C1
             var comp1ImageRef = comp1.EmitToImageReference();
 
             var source2 =
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -4937,7 +6045,7 @@ public class C2
             AssertUsedAssemblyReferences(source2, comp0Ref, comp1ImageRef);
 
             var source3 =
-@"
+                @"
 public class C3
 {
     public static void Main()
@@ -4951,7 +6059,7 @@ public class C3
             AssertUsedAssemblyReferences(source3, comp0Ref, comp1ImageRef);
 
             var source4 =
-@"
+                @"
 using static C1;
 
 public class C2
@@ -4967,7 +6075,7 @@ public class C2
             AssertUsedAssemblyReferences(source4, comp0Ref, comp1ImageRef);
 
             var source5 =
-@"
+                @"
 using static C1;
 
 public class C3
@@ -4987,7 +6095,7 @@ public class C3
         public void EventReference_02()
         {
             var source0 =
-@"
+                @"
 public delegate void D0();
 ";
             var comp0 = CreateCompilation(source0);
@@ -4995,7 +6103,7 @@ public delegate void D0();
             var comp0Ref = comp0.ToMetadataReference();
 
             var source1 =
-@"
+                @"
 public class C1
 {
     public event D0 E1;
@@ -5013,7 +6121,7 @@ public class C1
             var comp1ImageRef = comp1.EmitToImageReference();
 
             var source2 =
-@"
+                @"
 public class C2
 {
     public static void Main(C1 x)
@@ -5027,7 +6135,7 @@ public class C2
             AssertUsedAssemblyReferences(source2, comp0Ref, comp1ImageRef);
 
             var source3 =
-@"
+                @"
 public class C3
 {
     public static void Main(C1 x)
@@ -5045,7 +6153,7 @@ public class C3
         public void PropertyReference_01()
         {
             var source0 =
-@"
+                @"
 public class C0
 {
 }
@@ -5055,7 +6163,7 @@ public class C0
             var comp0Ref = comp0.ToMetadataReference();
 
             var source1 =
-@"
+                @"
 public class C1
 {
     public static C0 P1 {get; set;}
@@ -5068,7 +6176,7 @@ public class C1
             var comp1ImageRef = comp1.EmitToImageReference();
 
             var source2 =
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -5082,7 +6190,7 @@ public class C2
             AssertUsedAssemblyReferences(source2, comp0Ref, comp1ImageRef);
 
             var source3 =
-@"
+                @"
 public class C3
 {
     public static void Main()
@@ -5096,7 +6204,7 @@ public class C3
             AssertUsedAssemblyReferences(source3, comp0Ref, comp1ImageRef);
 
             var source4 =
-@"
+                @"
 using static C1;
 
 public class C2
@@ -5112,7 +6220,7 @@ public class C2
             AssertUsedAssemblyReferences(source4, comp0Ref, comp1ImageRef);
 
             var source5 =
-@"
+                @"
 using static C1;
 
 public class C3
@@ -5132,7 +6240,7 @@ public class C3
         public void PropertyReference_02()
         {
             var source0 =
-@"
+                @"
 public class C0
 {
 }
@@ -5142,7 +6250,7 @@ public class C0
             var comp0Ref = comp0.ToMetadataReference();
 
             var source1 =
-@"
+                @"
 public class C1
 {
     public C0 P1 {get; set;}
@@ -5155,7 +6263,7 @@ public class C1
             var comp1ImageRef = comp1.EmitToImageReference();
 
             var source2 =
-@"
+                @"
 public class C2
 {
     public static void Main(C1 x)
@@ -5169,7 +6277,7 @@ public class C2
             AssertUsedAssemblyReferences(source2, comp0Ref, comp1ImageRef);
 
             var source3 =
-@"
+                @"
 public class C3
 {
     public static void Main(C1 x)
@@ -5187,7 +6295,7 @@ public class C3
         public void IndexerReference_01()
         {
             var source0 =
-@"
+                @"
 public class C0
 {
 }
@@ -5197,7 +6305,7 @@ public class C0
             var comp0ImageRef = comp0.EmitToImageReference();
 
             var source1 =
-@"
+                @"
 Public Class C1
     Public Shared Property P1(x As Integer) As C0
         Get
@@ -5224,13 +6332,19 @@ Public Class C1
     End Property
 End Class
 ";
-            var comp1 = CreateVisualBasicCompilation(source1, referencedAssemblies: TargetFrameworkUtil.GetReferences(TargetFramework.Standard, new[] { comp0ImageRef }));
+            var comp1 = CreateVisualBasicCompilation(
+                source1,
+                referencedAssemblies: TargetFrameworkUtil.GetReferences(
+                    TargetFramework.Standard,
+                    new[] { comp0ImageRef }
+                )
+            );
             comp1.VerifyDiagnostics();
 
             var comp1ImageRef = comp1.EmitToImageReference();
 
             var source2 =
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -5240,14 +6354,18 @@ public class C2
 }
 ";
             var references = new[] { comp0ImageRef, comp1ImageRef };
-            AssertUsedAssemblyReferences(source2, references,
+            AssertUsedAssemblyReferences(
+                source2,
+                references,
                 // (6,12): error CS1545: Property, indexer, or event 'C1.P1[int]' is not supported by the language; try directly calling accessor methods 'C1.get_P1(int)' or 'C1.set_P1(int, C0)'
                 //         C1.P1[0] = null;
-                Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P1").WithArguments("C1.P1[int]", "C1.get_P1(int)", "C1.set_P1(int, C0)").WithLocation(6, 12)
-                );
+                Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P1")
+                    .WithArguments("C1.P1[int]", "C1.get_P1(int)", "C1.set_P1(int, C0)")
+                    .WithLocation(6, 12)
+            );
 
             var source3 =
-@"
+                @"
 public class C3
 {
     public static void Main()
@@ -5257,14 +6375,18 @@ public class C3
 }
 ";
 
-            AssertUsedAssemblyReferences(source3, references,
+            AssertUsedAssemblyReferences(
+                source3,
+                references,
                 // (6,16): error CS1545: Property, indexer, or event 'C1.P1[int]' is not supported by the language; try directly calling accessor methods 'C1.get_P1(int)' or 'C1.set_P1(int, C0)'
                 //         _ = C1.P1[0];
-                Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P1").WithArguments("C1.P1[int]", "C1.get_P1(int)", "C1.set_P1(int, C0)").WithLocation(6, 16)
-                );
+                Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P1")
+                    .WithArguments("C1.P1[int]", "C1.get_P1(int)", "C1.set_P1(int, C0)")
+                    .WithLocation(6, 16)
+            );
 
             var source4 =
-@"
+                @"
 using static C1;
 
 public class C2
@@ -5276,17 +6398,22 @@ public class C2
 }
 ";
 
-            AssertUsedAssemblyReferences(source4, references,
+            AssertUsedAssemblyReferences(
+                source4,
+                references,
                 // (1001,1): hidden CS8019: Unnecessary using directive.
                 // using static C1;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using static C1;").WithLocation(1001, 1),
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using static C1;")
+                    .WithLocation(1001, 1),
                 // (2005,9): error CS1545: Property, indexer, or event 'C1.P1[int]' is not supported by the language; try directly calling accessor methods 'C1.get_P1(int)' or 'C1.set_P1(int, C0)'
                 //         P1[0] = null;
-                Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P1").WithArguments("C1.P1[int]", "C1.get_P1(int)", "C1.set_P1(int, C0)").WithLocation(2005, 9)
-                );
+                Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P1")
+                    .WithArguments("C1.P1[int]", "C1.get_P1(int)", "C1.set_P1(int, C0)")
+                    .WithLocation(2005, 9)
+            );
 
             var source5 =
-@"
+                @"
 using static C1;
 
 public class C3
@@ -5298,17 +6425,22 @@ public class C3
 }
 ";
 
-            AssertUsedAssemblyReferences(source5, references,
+            AssertUsedAssemblyReferences(
+                source5,
+                references,
                 // (1001,1): hidden CS8019: Unnecessary using directive.
                 // using static C1;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using static C1;").WithLocation(1001, 1),
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using static C1;")
+                    .WithLocation(1001, 1),
                 // (2005,13): error CS1545: Property, indexer, or event 'C1.P1[int]' is not supported by the language; try directly calling accessor methods 'C1.get_P1(int)' or 'C1.set_P1(int, C0)'
                 //         _ = P1[0];
-                Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P1").WithArguments("C1.P1[int]", "C1.get_P1(int)", "C1.set_P1(int, C0)").WithLocation(2005, 13)
-                );
+                Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P1")
+                    .WithArguments("C1.P1[int]", "C1.get_P1(int)", "C1.set_P1(int, C0)")
+                    .WithLocation(2005, 13)
+            );
 
             var source6 =
-@"
+                @"
 public class C3
 {
     public static void Main()
@@ -5318,14 +6450,18 @@ public class C3
 }
 ";
 
-            AssertUsedAssemblyReferences(source6, references,
+            AssertUsedAssemblyReferences(
+                source6,
+                references,
                 // (6,23): error CS1545: Property, indexer, or event 'C1.P1[int]' is not supported by the language; try directly calling accessor methods 'C1.get_P1(int)' or 'C1.set_P1(int, C0)'
                 //         _ = nameof(C1.P1);
-                Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P1").WithArguments("C1.P1[int]", "C1.get_P1(int)", "C1.set_P1(int, C0)").WithLocation(6, 23)
-                );
+                Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P1")
+                    .WithArguments("C1.P1[int]", "C1.get_P1(int)", "C1.set_P1(int, C0)")
+                    .WithLocation(6, 23)
+            );
 
             var source7 =
-@"
+                @"
 using static C1;
 
 public class C2
@@ -5337,17 +6473,22 @@ public class C2
 }
 ";
 
-            AssertUsedAssemblyReferences(source7, references,
+            AssertUsedAssemblyReferences(
+                source7,
+                references,
                 // (1001,1): hidden CS8019: Unnecessary using directive.
                 // using static C1;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using static C1;").WithLocation(1001, 1),
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using static C1;")
+                    .WithLocation(1001, 1),
                 // (2005,20): error CS1545: Property, indexer, or event 'C1.P1[int]' is not supported by the language; try directly calling accessor methods 'C1.get_P1(int)' or 'C1.set_P1(int, C0)'
                 //         _ = nameof(P1);
-                Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P1").WithArguments("C1.P1[int]", "C1.get_P1(int)", "C1.set_P1(int, C0)").WithLocation(2005, 20)
-                );
+                Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P1")
+                    .WithArguments("C1.P1[int]", "C1.get_P1(int)", "C1.set_P1(int, C0)")
+                    .WithLocation(2005, 20)
+            );
 
             var source8 =
-@"
+                @"
 public class C3
 {
     public static void Main()
@@ -5357,14 +6498,18 @@ public class C3
 }
 ";
 
-            AssertUsedAssemblyReferences(source8, references,
+            AssertUsedAssemblyReferences(
+                source8,
+                references,
                 // (6,23): error CS1545: Property, indexer, or event 'C1.P2[int]' is not supported by the language; try directly calling accessor methods 'C1.get_P2(int)' or 'C1.set_P2(int, C0)'
                 //         _ = nameof(C1.P2);
-                Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P2").WithArguments("C1.P2[int]", "C1.get_P2(int)", "C1.set_P2(int, C0)").WithLocation(6, 23)
-                );
+                Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P2")
+                    .WithArguments("C1.P2[int]", "C1.get_P2(int)", "C1.set_P2(int, C0)")
+                    .WithLocation(6, 23)
+            );
 
             var source9 =
-@"
+                @"
 using static C1;
 
 public class C2
@@ -5376,21 +6521,26 @@ public class C2
 }
 ";
 
-            AssertUsedAssemblyReferences(source9, references,
+            AssertUsedAssemblyReferences(
+                source9,
+                references,
                 // (1001,1): hidden CS8019: Unnecessary using directive.
                 // using static C1;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using static C1;").WithLocation(1001, 1),
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using static C1;")
+                    .WithLocation(1001, 1),
                 // (2005,20): error CS1545: Property, indexer, or event 'C1.P2[int]' is not supported by the language; try directly calling accessor methods 'C1.get_P2(int)' or 'C1.set_P2(int, C0)'
                 //         _ = nameof(P2);
-                Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P2").WithArguments("C1.P2[int]", "C1.get_P2(int)", "C1.set_P2(int, C0)").WithLocation(2005, 20)
-                );
+                Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P2")
+                    .WithArguments("C1.P2[int]", "C1.get_P2(int)", "C1.set_P2(int, C0)")
+                    .WithLocation(2005, 20)
+            );
         }
 
         [Fact]
         public void IndexerReference_02()
         {
             var source0 =
-@"
+                @"
 public class C0
 {
 }
@@ -5400,7 +6550,7 @@ public class C0
             var comp0Ref = comp0.ToMetadataReference();
 
             var source1 =
-@"
+                @"
 public class C1
 {
     public C0 this[int x] {get => default; set {}}
@@ -5413,7 +6563,7 @@ public class C1
             var comp1ImageRef = comp1.EmitToImageReference();
 
             var source2 =
-@"
+                @"
 public class C2
 {
     public static void Main(C1 x)
@@ -5427,7 +6577,7 @@ public class C2
             AssertUsedAssemblyReferences(source2, comp0Ref, comp1ImageRef);
 
             var source3 =
-@"
+                @"
 public class C3
 {
     public static void Main(C1 x)
@@ -5445,7 +6595,7 @@ public class C3
         public void WellKnownTypeReference_01()
         {
             var source0 =
-@"
+                @"
 namespace System
 {
     public class Object {}
@@ -5459,7 +6609,7 @@ namespace System
             var comp0Ref = comp0.ToMetadataReference();
 
             var source1 =
-@"
+                @"
 namespace System
 {
     public class Type
@@ -5470,24 +6620,32 @@ namespace System
     public struct RuntimeTypeHandle {}
 }
 ";
-            var comp1 = CreateEmptyCompilation(source1, references: new[] { comp0Ref }, parseOptions: parseOptions);
+            var comp1 = CreateEmptyCompilation(
+                source1,
+                references: new[] { comp0Ref },
+                parseOptions: parseOptions
+            );
             comp1.VerifyDiagnostics();
 
             var comp1Ref = comp1.ToMetadataReference();
 
             var source2 =
-@"
+                @"
 public class Type
 {
 }
 ";
-            var comp2 = CreateEmptyCompilation(source2, references: new[] { comp0Ref }, parseOptions: parseOptions);
+            var comp2 = CreateEmptyCompilation(
+                source2,
+                references: new[] { comp0Ref },
+                parseOptions: parseOptions
+            );
             comp2.VerifyDiagnostics();
 
             var comp2Ref = comp2.ToMetadataReference();
 
             var source3 =
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -5497,12 +6655,16 @@ public class C2
 }
 ";
             var references = new[] { comp0Ref, comp1Ref, comp2Ref };
-            var comp3 = CreateEmptyCompilation(source3, references: references, parseOptions: parseOptions);
+            var comp3 = CreateEmptyCompilation(
+                source3,
+                references: references,
+                parseOptions: parseOptions
+            );
 
             AssertUsedAssemblyReferences(comp3, new[] { comp1Ref }, references);
 
             var source4 =
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -5512,7 +6674,11 @@ public class C2
 }
 ";
 
-            var comp4 = CreateEmptyCompilation(source4, references: new[] { comp0Ref, comp1Ref, comp2Ref }, parseOptions: parseOptions);
+            var comp4 = CreateEmptyCompilation(
+                source4,
+                references: new[] { comp0Ref, comp1Ref, comp2Ref },
+                parseOptions: parseOptions
+            );
 
             AssertUsedAssemblyReferences(comp4, comp1Ref, comp2Ref);
         }
@@ -5521,7 +6687,7 @@ public class C2
         public void WellKnownTypeReference_02()
         {
             var source3 =
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -5537,14 +6703,17 @@ class C1
 }
 ";
 
-            CompileWithUsedAssemblyReferences(source3, targetFramework: TargetFramework.StandardAndCSharp);
+            CompileWithUsedAssemblyReferences(
+                source3,
+                targetFramework: TargetFramework.StandardAndCSharp
+            );
         }
 
         [Fact]
         public void WellKnownTypeReference_03()
         {
             var source3 =
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -5555,13 +6724,17 @@ public class C2
 }
 ";
 
-            CompileWithUsedAssemblyReferences(source3, targetFramework: TargetFramework.StandardAndCSharp);
+            CompileWithUsedAssemblyReferences(
+                source3,
+                targetFramework: TargetFramework.StandardAndCSharp
+            );
         }
 
         [Fact]
         public void WellKnownTypeReference_04()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -5601,7 +6774,7 @@ class D3
 ";
 
             string expected =
-@"getHolderforX
+                @"getHolderforX
 getHolderforY
 getHolderforZ
 getDeconstructReceiver
@@ -5622,7 +6795,7 @@ setZ
         public void WellKnownTypeReference_05()
         {
             var source1 =
-@"
+                @"
 namespace System.Runtime.CompilerServices
 {
     public class IsUnmanagedAttribute : System.Attribute { }
@@ -5634,7 +6807,7 @@ namespace System.Runtime.CompilerServices
             var comp1Ref = comp1.ToMetadataReference();
 
             var source2 =
-@"
+                @"
 #pragma warning disable CS8321
 
 public class Test
@@ -5654,7 +6827,7 @@ public class Test
         public void WellKnownTypeReference_06()
         {
             var source2 =
-@"
+                @"
 public static class Test
 {
     public static void M(this string x)
@@ -5662,14 +6835,17 @@ public static class Test
     }
 }
 ";
-            CompileWithUsedAssemblyReferences(source2, targetFramework: TargetFramework.Mscorlib40AndSystemCore);
+            CompileWithUsedAssemblyReferences(
+                source2,
+                targetFramework: TargetFramework.Mscorlib40AndSystemCore
+            );
         }
 
         [Fact]
         public void Deconstruction_01()
         {
             var source0 =
-@"
+                @"
 public class C0
 {
 }
@@ -5678,7 +6854,7 @@ public class C0
             var comp0Ref = comp0.ToMetadataReference();
 
             var source1 =
-@"
+                @"
 public static class C1
 {
     public static void Deconstruct(this C0 x, out int y, out int z) => throw null;
@@ -5688,7 +6864,7 @@ public static class C1
             var comp1Ref = comp1.ToMetadataReference();
 
             var source2 =
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -5707,7 +6883,7 @@ public class C2
         public void Deconstruction_02()
         {
             var source0 =
-@"
+                @"
 public class C0
 {
 }
@@ -5716,7 +6892,7 @@ public class C0
             var comp0Ref = comp0.ToMetadataReference();
 
             var source1 =
-@"
+                @"
 public static class C1
 {
     public static void Deconstruct(this C0 x, out int y, out int z) => throw null;
@@ -5726,7 +6902,7 @@ public static class C1
             var comp1Ref = comp1.ToMetadataReference();
 
             var source2 =
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -5746,7 +6922,7 @@ public class C2
         public void ExternAliases_01()
         {
             var source0 =
-@"
+                @"
 public class C0
 {
 }
@@ -5756,7 +6932,7 @@ public class C0
             var comp0RefWithAlias = comp0Ref.WithAliases(new[] { "Alias0" });
 
             var source1 =
-@"
+                @"
 public static class C1
 {
     public static C0 F1;
@@ -5767,7 +6943,7 @@ public static class C1
             var comp1RefWithAlias = comp1Ref.WithAliases(new[] { "Alias0" });
 
             var source2 =
-@"
+                @"
 extern alias Alias0;
 
 public class C2
@@ -5780,16 +6956,23 @@ public class C2
 }
 ";
 
-            var used = CompileWithUsedAssemblyReferences(source2, comp0RefWithAlias, comp1RefWithAlias);
+            var used = CompileWithUsedAssemblyReferences(
+                source2,
+                comp0RefWithAlias,
+                comp1RefWithAlias
+            );
             Assert.DoesNotContain(comp1RefWithAlias, used);
 
             used = CompileWithUsedAssemblyReferences(source2, comp0RefWithAlias, comp1Ref);
             Assert.DoesNotContain(comp1Ref, used);
 
-            CreateCompilation(source2, references: new[] { comp0Ref, comp1RefWithAlias }).VerifyDiagnostics(
-                // (8,29): error CS0234: The type or namespace name 'C0' does not exist in the namespace 'Alias0' (are you missing an assembly reference?)
-                //         var x = new Alias0::C0();
-                Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "C0").WithArguments("C0", "Alias0").WithLocation(8, 29)
+            CreateCompilation(source2, references: new[] { comp0Ref, comp1RefWithAlias })
+                .VerifyDiagnostics(
+                    // (8,29): error CS0234: The type or namespace name 'C0' does not exist in the namespace 'Alias0' (are you missing an assembly reference?)
+                    //         var x = new Alias0::C0();
+                    Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "C0")
+                        .WithArguments("C0", "Alias0")
+                        .WithLocation(8, 29)
                 );
         }
 
@@ -5797,7 +6980,7 @@ public class C2
         public void ExternAliases_02()
         {
             var source0 =
-@"
+                @"
 public class C0
 {
 }
@@ -5807,7 +6990,7 @@ public class C0
             var comp0RefWithAlias = comp0Ref.WithAliases(new[] { "Alias0" });
 
             var source2 =
-@"
+                @"
 extern alias Alias0;
 
 public class C2
@@ -5834,7 +7017,7 @@ public class C2
         public void ExternAliases_03()
         {
             var source0 =
-@"
+                @"
 public class C0
 {
 }
@@ -5844,7 +7027,7 @@ public class C0
             var comp0RefWithAlias = comp0Ref.WithAliases(new[] { "Alias0" });
 
             var source2 =
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -5869,7 +7052,7 @@ public class C2
         public void ExternAliases_04()
         {
             var source0 =
-@"
+                @"
 public class C0
 {
 }
@@ -5879,7 +7062,7 @@ public class C0
             var comp0RefWithAlias = comp0Ref.WithAliases(new[] { "Alias0" });
 
             var source2 =
-@"
+                @"
 public class C2
 {
     public static void Main()
@@ -5904,7 +7087,7 @@ public class C2
         public void ExternAliases_05()
         {
             var source1 =
-@"
+                @"
 namespace N1
 {
     public static class C1
@@ -5916,7 +7099,7 @@ namespace N1
             var comp1Ref = comp1.ToMetadataReference().WithAliases(new[] { "N1C1" });
 
             var source2 =
-@"
+                @"
 namespace N1
 {
     public static class C2
@@ -5928,7 +7111,7 @@ namespace N1
             var comp2Ref = comp2.ToMetadataReference();
 
             var source3 =
-@"
+                @"
 extern alias N1C1;
 
 public class C2
@@ -5936,47 +7119,85 @@ public class C2
 }
 ";
             var references = new[] { comp1Ref, comp2Ref };
-            AssertUsedAssemblyReferences(CreateCompilation(source3, references: references, parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)),
-                                         comp1Ref);
-            AssertUsedAssemblyReferences(CreateCompilation(source3, references: references, parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Parse)),
-                                         new MetadataReference[] { },
-                                         new[] {
-                                             // (2,1): hidden CS8020: Unused extern alias.
-                                             // extern alias N1C1;
-                                             Diagnostic(ErrorCode.HDN_UnusedExternAlias, "extern alias N1C1;").WithLocation(2, 1)
-                                         },
-                                         new[] {
-                                             // (2,1): hidden CS8020: Unused extern alias.
-                                             // extern alias N1C1;
-                                             Diagnostic(ErrorCode.HDN_UnusedExternAlias, "extern alias N1C1;").WithLocation(2, 1),
-                                             // (2,14): error CS0430: The extern alias 'N1C1' was not specified in a /reference option
-                                             // extern alias N1C1;
-                                             Diagnostic(ErrorCode.ERR_BadExternAlias, "N1C1").WithArguments("N1C1").WithLocation(2, 14)
-                                         }, references);
+            AssertUsedAssemblyReferences(
+                CreateCompilation(
+                    source3,
+                    references: references,
+                    parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)
+                ),
+                comp1Ref
+            );
+            AssertUsedAssemblyReferences(
+                CreateCompilation(
+                    source3,
+                    references: references,
+                    parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Parse)
+                ),
+                new MetadataReference[] { },
+                new[]
+                {
+                    // (2,1): hidden CS8020: Unused extern alias.
+                    // extern alias N1C1;
+                    Diagnostic(ErrorCode.HDN_UnusedExternAlias, "extern alias N1C1;")
+                        .WithLocation(2, 1)
+                },
+                new[]
+                {
+                    // (2,1): hidden CS8020: Unused extern alias.
+                    // extern alias N1C1;
+                    Diagnostic(ErrorCode.HDN_UnusedExternAlias, "extern alias N1C1;")
+                        .WithLocation(2, 1),
+                    // (2,14): error CS0430: The extern alias 'N1C1' was not specified in a /reference option
+                    // extern alias N1C1;
+                    Diagnostic(ErrorCode.ERR_BadExternAlias, "N1C1")
+                        .WithArguments("N1C1")
+                        .WithLocation(2, 14)
+                },
+                references
+            );
 
             comp2Ref = comp2.ToMetadataReference().WithAliases(new[] { "N1C1" });
             references = new[] { comp1Ref, comp2Ref };
 
-            AssertUsedAssemblyReferences(CreateCompilation(source3, references: references, parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)),
-                                         references);
-            AssertUsedAssemblyReferences(CreateCompilation(source3, references: references, parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Parse)),
-                                         new MetadataReference[] { },
-                                         new[] {
-                                             // (2,1): hidden CS8020: Unused extern alias.
-                                             // extern alias N1C1;
-                                             Diagnostic(ErrorCode.HDN_UnusedExternAlias, "extern alias N1C1;").WithLocation(2, 1)
-                                         },
-                                         new[] {
-                                             // (2,1): hidden CS8020: Unused extern alias.
-                                             // extern alias N1C1;
-                                             Diagnostic(ErrorCode.HDN_UnusedExternAlias, "extern alias N1C1;").WithLocation(2, 1),
-                                             // (2,14): error CS0430: The extern alias 'N1C1' was not specified in a /reference option
-                                             // extern alias N1C1;
-                                             Diagnostic(ErrorCode.ERR_BadExternAlias, "N1C1").WithArguments("N1C1").WithLocation(2, 14)
-                                         }, references);
+            AssertUsedAssemblyReferences(
+                CreateCompilation(
+                    source3,
+                    references: references,
+                    parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)
+                ),
+                references
+            );
+            AssertUsedAssemblyReferences(
+                CreateCompilation(
+                    source3,
+                    references: references,
+                    parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Parse)
+                ),
+                new MetadataReference[] { },
+                new[]
+                {
+                    // (2,1): hidden CS8020: Unused extern alias.
+                    // extern alias N1C1;
+                    Diagnostic(ErrorCode.HDN_UnusedExternAlias, "extern alias N1C1;")
+                        .WithLocation(2, 1)
+                },
+                new[]
+                {
+                    // (2,1): hidden CS8020: Unused extern alias.
+                    // extern alias N1C1;
+                    Diagnostic(ErrorCode.HDN_UnusedExternAlias, "extern alias N1C1;")
+                        .WithLocation(2, 1),
+                    // (2,14): error CS0430: The extern alias 'N1C1' was not specified in a /reference option
+                    // extern alias N1C1;
+                    Diagnostic(ErrorCode.ERR_BadExternAlias, "N1C1")
+                        .WithArguments("N1C1")
+                        .WithLocation(2, 14)
+                },
+                references
+            );
 
             var source4 =
-@"
+                @"
 extern alias N1C1;
 
 public class C2
@@ -5995,7 +7216,7 @@ public class C2
         public void ExternAliases_06()
         {
             var source1 =
-@"
+                @"
 namespace N1
 {
     public static class C1
@@ -6007,7 +7228,7 @@ namespace N1
             var comp1Ref = comp1.ToMetadataReference().WithAliases(new[] { "N1C1" });
 
             var source4 =
-@"
+                @"
 extern alias N1C1;
 
 public class C2

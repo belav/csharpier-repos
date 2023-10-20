@@ -30,14 +30,11 @@ namespace IdeBenchmarks.Lsp
 
         private LSP.CompletionList? _list;
 
-        public LspCompletionSerializationBenchmarks() : base(null)
-        {
-        }
+        public LspCompletionSerializationBenchmarks()
+            : base(null) { }
 
         [GlobalSetup]
-        public void GlobalSetup()
-        {
-        }
+        public void GlobalSetup() { }
 
         [IterationSetup]
         public void IterationSetup()
@@ -55,7 +52,7 @@ namespace IdeBenchmarks.Lsp
         private async Task LoadSolutionAsync()
         {
             var markup =
-@"using System;
+                @"using System;
 using System.Buffers;
 using System.Buffers.Binary;
 using System.Buffers.Text;
@@ -88,19 +85,29 @@ class A
         {|caret:|}
     }
 }";
-            await using var testServer = await CreateTestLspServerAsync(markup, mutatingLspWorkspace: false, new LSP.VSInternalClientCapabilities
-            {
-                TextDocument = new LSP.TextDocumentClientCapabilities
-                {
-                    Completion = new LSP.CompletionSetting
+            await using var testServer = await CreateTestLspServerAsync(
+                    markup,
+                    mutatingLspWorkspace: false,
+                    new LSP.VSInternalClientCapabilities
                     {
-                        CompletionListSetting = new LSP.CompletionListSetting
+                        TextDocument = new LSP.TextDocumentClientCapabilities
                         {
-                            ItemDefaults = new string[] { "editRange", "commitCharacters", "data" },
+                            Completion = new LSP.CompletionSetting
+                            {
+                                CompletionListSetting = new LSP.CompletionListSetting
+                                {
+                                    ItemDefaults = new string[]
+                                    {
+                                        "editRange",
+                                        "commitCharacters",
+                                        "data"
+                                    },
+                                }
+                            }
                         }
                     }
-                }
-            }).ConfigureAwait(false);
+                )
+                .ConfigureAwait(false);
 
             var globalOptions = testServer.TestWorkspace.GetService<IGlobalOptionService>();
             globalOptions.SetGlobalOption(LspOptionsStorage.MaxCompletionListSize, -1);
@@ -117,7 +124,10 @@ class A
             };
 
             var document = testServer.GetCurrentSolution().Projects.First().Documents.First();
-            var results = await testServer.ExecuteRequestAsync<LSP.CompletionParams, LSP.CompletionList>(LSP.Methods.TextDocumentCompletionName, completionParams, CancellationToken.None);
+            var results = await testServer.ExecuteRequestAsync<
+                LSP.CompletionParams,
+                LSP.CompletionList
+            >(LSP.Methods.TextDocumentCompletionName, completionParams, CancellationToken.None);
 
             var list = (await CompletionTests.RunGetCompletionsAsync(testServer, completionParams));
             if (list.Items.Length == 0)

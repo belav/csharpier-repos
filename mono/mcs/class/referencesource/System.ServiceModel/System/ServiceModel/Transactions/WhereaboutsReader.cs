@@ -28,16 +28,12 @@ namespace System.ServiceModel.Transactions
             TmProtocolTip = 1,
             TmProtocolMsdtcV1 = 2,
             TmProtocolMsdtcV2 = 3, // unicode host names in nameobject blobs etc
-            TmProtocolExtended = 4  // other stuff (e.g., WS-AT)
+            TmProtocolExtended = 4 // other stuff (e.g., WS-AT)
         }
 
         public WhereaboutsReader(byte[] whereabouts)
         {
-            MemoryStream mem = new MemoryStream(whereabouts,
-                                                0,
-                                                whereabouts.Length,
-                                                false,
-                                                true); // Enable calls to GetBuffer()
+            MemoryStream mem = new MemoryStream(whereabouts, 0, whereabouts.Length, false, true); // Enable calls to GetBuffer()
             DeserializeWhereabouts(mem);
         }
 
@@ -51,15 +47,22 @@ namespace System.ServiceModel.Transactions
             get { return this.protocolInfo; }
         }
 
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods, Justification = "The calls to SerializationException and SerializationUtils are safe.")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods,
+            Justification = "The calls to SerializationException and SerializationUtils are safe."
+        )]
         void DeserializeWhereabouts(MemoryStream mem)
         {
             // guidSignature
             Guid signature = SerializationUtils.ReadGuid(mem);
             if (signature != GuidWhereaboutsInfo)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SerializationException(SR.GetString(SR.WhereaboutsSignatureMissing)));
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SerializationException(SR.GetString(SR.WhereaboutsSignatureMissing))
+                    );
             }
 
             // cTmToTmProtocols
@@ -68,8 +71,13 @@ namespace System.ServiceModel.Transactions
             // Make sure that cTmToTmProtocols is at least plausible
             if (cTmToTmProtocols * STmToTmProtocolSize > mem.Length - mem.Position)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SerializationException(SR.GetString(SR.WhereaboutsImplausibleProtocolCount)));
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SerializationException(
+                            SR.GetString(SR.WhereaboutsImplausibleProtocolCount)
+                        )
+                    );
             }
 
             // Loop through each protocol
@@ -81,12 +89,19 @@ namespace System.ServiceModel.Transactions
             // Require a host name
             if (string.IsNullOrEmpty(this.hostName))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SerializationException(SR.GetString(SR.WhereaboutsNoHostName)));
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SerializationException(SR.GetString(SR.WhereaboutsNoHostName))
+                    );
             }
         }
 
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods, Justification = "The calls to SerializationUtils are safe.")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods,
+            Justification = "The calls to SerializationUtils are safe."
+        )]
         void DeserializeWhereaboutsProtocol(MemoryStream mem)
         {
             // tmprotDescribed
@@ -115,7 +130,11 @@ namespace System.ServiceModel.Transactions
             SerializationUtils.AlignPosition(mem, 4);
         }
 
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods, Justification = "The calls to SerializationException and SerializationUtils are safe.")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods,
+            Justification = "The calls to SerializationException and SerializationUtils are safe."
+        )]
         void ReadMsdtcV2Protocol(MemoryStream mem, uint cbTmProtocolData)
         {
             const int MaxComputerName = 15;
@@ -129,24 +148,34 @@ namespace System.ServiceModel.Transactions
             // Reject host names of disproportionate size
             if (cbTmProtocolData > (MaxComputerName + 1) * 2)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SerializationException(SR.GetString(SR.WhereaboutsImplausibleHostNameByteCount)));
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SerializationException(
+                            SR.GetString(SR.WhereaboutsImplausibleHostNameByteCount)
+                        )
+                    );
             }
 
             byte[] chars = SerializationUtils.ReadBytes(mem, (int)cbTmProtocolData);
 
             // Count the bytes until the first null terminating character
             int cbString = 0;
-            while (cbString < cbTmProtocolData - 1 &&
-                  (chars[cbString] != 0 || chars[cbString + 1] != 0))
+            while (
+                cbString < cbTmProtocolData - 1
+                && (chars[cbString] != 0 || chars[cbString + 1] != 0)
+            )
             {
                 cbString += 2;
             }
 
             if (cbString == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SerializationException(SR.GetString(SR.WhereaboutsInvalidHostName)));
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SerializationException(SR.GetString(SR.WhereaboutsInvalidHostName))
+                    );
             }
 
             try
@@ -155,8 +184,11 @@ namespace System.ServiceModel.Transactions
             }
             catch (ArgumentException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SerializationException(SR.GetString(SR.WhereaboutsInvalidHostName), e));
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SerializationException(SR.GetString(SR.WhereaboutsInvalidHostName), e)
+                    );
             }
         }
 
@@ -168,7 +200,10 @@ namespace System.ServiceModel.Transactions
         {
             // Read the WSAT1.0 protoocol identifier
             Guid guid = SerializationUtils.ReadGuid(mem);
-            if (guid == PluggableProtocol10.ProtocolGuid || guid == PluggableProtocol11.ProtocolGuid)
+            if (
+                guid == PluggableProtocol10.ProtocolGuid
+                || guid == PluggableProtocol11.ProtocolGuid
+            )
             {
                 // This is the WS-AT extended whereabouts blob
                 this.protocolInfo = new ProtocolInformationReader(mem);

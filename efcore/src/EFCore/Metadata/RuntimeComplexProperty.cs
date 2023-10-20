@@ -36,7 +36,8 @@ public class RuntimeComplexProperty : RuntimePropertyBase, IComplexProperty
         bool collection,
         ChangeTrackingStrategy changeTrackingStrategy,
         PropertyInfo? indexerPropertyInfo,
-        bool propertyBag)
+        bool propertyBag
+    )
         : base(name, propertyInfo, fieldInfo, propertyAccessMode)
     {
         DeclaringType = declaringType;
@@ -44,7 +45,13 @@ public class RuntimeComplexProperty : RuntimePropertyBase, IComplexProperty
         _isNullable = nullable;
         _isCollection = collection;
         ComplexType = new RuntimeComplexType(
-            targetTypeName, targetType, this, changeTrackingStrategy, indexerPropertyInfo, propertyBag);
+            targetTypeName,
+            targetType,
+            this,
+            changeTrackingStrategy,
+            indexerPropertyInfo,
+            propertyBag
+        );
     }
 
     /// <summary>
@@ -64,15 +71,16 @@ public class RuntimeComplexProperty : RuntimePropertyBase, IComplexProperty
     public virtual RuntimeComplexType ComplexType { get; }
 
     /// <inheritdoc />
-    public override object? Sentinel
-        => null;
+    public override object? Sentinel => null;
 
     /// <summary>
     ///     Returns a string that represents the current object.
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
-    public override string ToString()
-        => ((IReadOnlyComplexProperty)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((IReadOnlyComplexProperty)this).ToDebugString(
+            MetadataDebugStringOptions.SingleLineDefault
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -81,10 +89,14 @@ public class RuntimeComplexProperty : RuntimePropertyBase, IComplexProperty
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public virtual DebugView DebugView
-        => new(
+    public virtual DebugView DebugView =>
+        new(
             () => ((IReadOnlyComplexProperty)this).ToDebugString(),
-            () => ((IReadOnlyComplexProperty)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+            () =>
+                ((IReadOnlyComplexProperty)this).ToDebugString(
+                    MetadataDebugStringOptions.LongDefault
+                )
+        );
 
     /// <inheritdoc />
     IReadOnlyTypeBase IReadOnlyPropertyBase.DeclaringType

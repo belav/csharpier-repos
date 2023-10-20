@@ -22,15 +22,13 @@ namespace ILCompiler
 
         public override bool IsSingleFileCompilation
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool ContainsMethodBody(MethodDesc method, bool unboxingStub)
         {
-            return method == _method || method == _method.GetCanonMethodTarget(CanonicalFormKind.Specific);
+            return method == _method
+                || method == _method.GetCanonMethodTarget(CanonicalFormKind.Specific);
         }
 
         public sealed override bool ContainsMethodDictionary(MethodDesc method)

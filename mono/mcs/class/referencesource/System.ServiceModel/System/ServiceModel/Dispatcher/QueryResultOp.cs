@@ -14,20 +14,18 @@ namespace System.ServiceModel.Dispatcher
         {
             this.flags |= OpcodeFlags.Result;
         }
-    }    
-        
+    }
+
     internal class MatchResultOpcode : ResultOpcode
     {
-        internal MatchResultOpcode() 
-            : base(OpcodeID.MatchResult)
-        {           
-        }       
+        internal MatchResultOpcode()
+            : base(OpcodeID.MatchResult) { }
 
         internal override Opcode Eval(ProcessingContext context)
         {
             context.Processor.Result = this.IsSuccess(context);
             context.PopFrame();
-            return this.next;       
+            return this.next;
         }
 
         protected bool IsSuccess(ProcessingContext context)
@@ -49,7 +47,7 @@ namespace System.ServiceModel.Dispatcher
                     }
                 }
             }
-            
+
             return false;
         }
     }
@@ -57,9 +55,7 @@ namespace System.ServiceModel.Dispatcher
     internal class QueryResultOpcode : ResultOpcode
     {
         internal QueryResultOpcode()
-            : base(OpcodeID.QueryResult)
-        {
-        }
+            : base(OpcodeID.QueryResult) { }
 
         internal override Opcode Eval(ProcessingContext context)
         {
@@ -70,24 +66,31 @@ namespace System.ServiceModel.Dispatcher
             switch (resultType)
             {
                 case ValueDataType.Sequence:
+
                     {
-                        SafeNodeSequenceIterator value = new SafeNodeSequenceIterator(context.Values[topFrame.basePtr].GetSequence(), context);
+                        SafeNodeSequenceIterator value = new SafeNodeSequenceIterator(
+                            context.Values[topFrame.basePtr].GetSequence(),
+                            context
+                        );
                         result = new XPathResult(value);
                     }
                     break;
                 case ValueDataType.Boolean:
+
                     {
                         bool value = context.Values[topFrame.basePtr].GetBoolean();
                         result = new XPathResult(value);
                     }
                     break;
                 case ValueDataType.String:
+
                     {
                         string value = context.Values[topFrame.basePtr].GetString();
                         result = new XPathResult(value);
                     }
                     break;
                 case ValueDataType.Double:
+
                     {
                         double value = context.Values[topFrame.basePtr].GetDouble();
                         result = new XPathResult(value);
@@ -99,7 +102,7 @@ namespace System.ServiceModel.Dispatcher
 
             context.Processor.QueryResult = result;
             context.PopFrame();
-            return this.next;       
+            return this.next;
         }
     }
 
@@ -125,7 +128,7 @@ namespace System.ServiceModel.Dispatcher
             }
 
             base.Add(op);
-        }      
+        }
 
         public void AddItem(object item)
         {
@@ -135,7 +138,7 @@ namespace System.ServiceModel.Dispatcher
         internal override void CollectXPathFilters(ICollection<MessageFilter> filters)
         {
             for (int i = 0; i < this.results.Count; ++i)
-            {                
+            {
                 XPathMessageFilter filter = this.results[i] as XPathMessageFilter;
 
                 if (filter != null)
@@ -177,12 +180,19 @@ namespace System.ServiceModel.Dispatcher
 
     internal class QueryMultipleResultOpcode : MultipleResultOpcode
     {
-        internal QueryMultipleResultOpcode() : base(OpcodeID.QueryMultipleResult) { }
+        internal QueryMultipleResultOpcode()
+            : base(OpcodeID.QueryMultipleResult) { }
 
         internal override Opcode Eval(ProcessingContext context)
         {
-            Fx.Assert(this.results.Count > 0, "QueryMultipleQueryResultOpcode in the eval tree but no query present");
-            Fx.Assert(context.Processor.ResultSet != null, "QueryMultipleQueryResultOpcode should only be used in eval cases");
+            Fx.Assert(
+                this.results.Count > 0,
+                "QueryMultipleQueryResultOpcode in the eval tree but no query present"
+            );
+            Fx.Assert(
+                context.Processor.ResultSet != null,
+                "QueryMultipleQueryResultOpcode should only be used in eval cases"
+            );
 
             StackFrame topFrame = context.TopArg;
             ValueDataType resultType = context.Values[topFrame.basePtr].Type;
@@ -191,24 +201,31 @@ namespace System.ServiceModel.Dispatcher
             switch (resultType)
             {
                 case ValueDataType.Sequence:
+
                     {
-                        SafeNodeSequenceIterator value = new SafeNodeSequenceIterator(context.Values[topFrame.basePtr].GetSequence(), context);
+                        SafeNodeSequenceIterator value = new SafeNodeSequenceIterator(
+                            context.Values[topFrame.basePtr].GetSequence(),
+                            context
+                        );
                         result = new XPathResult(value);
                     }
                     break;
                 case ValueDataType.Boolean:
+
                     {
                         bool value = context.Values[topFrame.basePtr].GetBoolean();
                         result = new XPathResult(value);
                     }
                     break;
                 case ValueDataType.String:
+
                     {
                         string value = context.Values[topFrame.basePtr].GetString();
                         result = new XPathResult(value);
                     }
                     break;
                 case ValueDataType.Double:
+
                     {
                         double value = context.Values[topFrame.basePtr].GetDouble();
                         result = new XPathResult(value);
@@ -218,11 +235,27 @@ namespace System.ServiceModel.Dispatcher
                     throw Fx.AssertAndThrow("Unexpected result type.");
             }
 
-            context.Processor.ResultSet.Add(new KeyValuePair<MessageQuery, XPathResult>((MessageQuery)this.results[0], result));
+            context
+                .Processor
+                .ResultSet
+                .Add(
+                    new KeyValuePair<MessageQuery, XPathResult>(
+                        (MessageQuery)this.results[0],
+                        result
+                    )
+                );
 
             for (int i = 1; i < this.results.Count; i++)
             {
-                context.Processor.ResultSet.Add(new KeyValuePair<MessageQuery, XPathResult>((MessageQuery)this.results[i], result.Copy()));
+                context
+                    .Processor
+                    .ResultSet
+                    .Add(
+                        new KeyValuePair<MessageQuery, XPathResult>(
+                            (MessageQuery)this.results[i],
+                            result.Copy()
+                        )
+                    );
             }
 
             context.PopFrame();
@@ -232,7 +265,8 @@ namespace System.ServiceModel.Dispatcher
 
     internal class MatchMultipleResultOpcode : MultipleResultOpcode
     {
-        internal MatchMultipleResultOpcode() : base(OpcodeID.MatchMultipleResult) { }
+        internal MatchMultipleResultOpcode()
+            : base(OpcodeID.MatchMultipleResult) { }
 
         internal override Opcode Eval(ProcessingContext context)
         {
@@ -269,7 +303,5 @@ namespace System.ServiceModel.Dispatcher
             context.PopFrame();
             return this.next;
         }
-
-       
-    }        
+    }
 }

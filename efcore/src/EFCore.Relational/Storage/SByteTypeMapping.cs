@@ -34,27 +34,26 @@ public class SByteTypeMapping : RelationalTypeMapping
     /// </summary>
     /// <param name="storeType">The name of the database type.</param>
     /// <param name="dbType">The <see cref="DbType" /> to be used.</param>
-    public SByteTypeMapping(
-        string storeType,
-        DbType? dbType = System.Data.DbType.SByte)
-        : base(storeType, typeof(sbyte), dbType, jsonValueReaderWriter: JsonSByteReaderWriter.Instance)
-    {
-    }
+    public SByteTypeMapping(string storeType, DbType? dbType = System.Data.DbType.SByte)
+        : base(
+            storeType,
+            typeof(sbyte),
+            dbType,
+            jsonValueReaderWriter: JsonSByteReaderWriter.Instance
+        ) { }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="SByteTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
     protected SByteTypeMapping(RelationalTypeMappingParameters parameters)
-        : base(parameters)
-    {
-    }
+        : base(parameters) { }
 
     /// <summary>
     ///     Creates a copy of this mapping.
     /// </summary>
     /// <param name="parameters">The parameters for this mapping.</param>
     /// <returns>The newly created mapping.</returns>
-    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-        => new SByteTypeMapping(parameters);
+    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters) =>
+        new SByteTypeMapping(parameters);
 }

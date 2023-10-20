@@ -8,11 +8,11 @@ using System.Text;
 
 public unsafe partial struct GameControllerButtonBind
 {
-    public GameControllerButtonBind
-    (
+    public GameControllerButtonBind(
         GameControllerBindType? bindType = null,
         GameControllerButtonBindValue? value = null
-    ) : this()
+    )
+        : this()
     {
         if (bindType is not null)
         {

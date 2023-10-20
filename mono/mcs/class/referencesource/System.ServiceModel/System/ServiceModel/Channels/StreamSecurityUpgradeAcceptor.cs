@@ -8,9 +8,7 @@ namespace System.ServiceModel.Channels
 
     public abstract class StreamSecurityUpgradeAcceptor : StreamUpgradeAcceptor
     {
-        protected StreamSecurityUpgradeAcceptor()
-        {
-        }
+        protected StreamSecurityUpgradeAcceptor() { }
 
         public abstract SecurityMessageProperty GetRemoteSecurity(); // works after call to AcceptUpgrade
     }

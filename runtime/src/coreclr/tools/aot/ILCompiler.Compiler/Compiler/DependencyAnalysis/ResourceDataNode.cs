@@ -32,7 +32,8 @@ namespace ILCompiler.DependencyAnalysis
 
         public override bool IsShareable => false;
 
-        public override ObjectNodeSection GetSection(NodeFactory factory) => ObjectNodeSection.ReadOnlyDataSection;
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            ObjectNodeSection.ReadOnlyDataSection;
 
         public override bool StaticDependenciesAreComputed => true;
 
@@ -43,23 +44,27 @@ namespace ILCompiler.DependencyAnalysis
             sb.Append(nameMangler.CompilationUnitPrefix).Append("__embedded_resourcedata");
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
             // This node has no relocations.
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
 
             byte[] blob = GenerateResourceBlob(factory);
             return new ObjectData(
                 blob,
                 Array.Empty<Relocation>(),
                 1,
-                new ISymbolDefinitionNode[]
-                {
-                    this
-                });
+                new ISymbolDefinitionNode[] { this }
+            );
         }
 
         public IReadOnlyList<ResourceIndexData> GetOrCreateIndexData(NodeFactory factory)
@@ -72,9 +77,23 @@ namespace ILCompiler.DependencyAnalysis
             _totalLength = 0;
             _indexData = new List<ResourceIndexData>();
             // Build up index information
-            foreach (EcmaAssembly module in factory.MetadataManager.GetCompilationModulesWithMetadata().OfType<EcmaAssembly>())
+            foreach (
+                EcmaAssembly module in factory
+                    .MetadataManager
+                    .GetCompilationModulesWithMetadata()
+                    .OfType<EcmaAssembly>()
+            )
             {
-                PEMemoryBlock resourceDirectory = module.PEReader.GetSectionData(module.PEReader.PEHeaders.CorHeader.ResourcesDirectory.RelativeVirtualAddress);
+                PEMemoryBlock resourceDirectory = module
+                    .PEReader
+                    .GetSectionData(
+                        module
+                            .PEReader
+                            .PEHeaders
+                            .CorHeader
+                            .ResourcesDirectory
+                            .RelativeVirtualAddress
+                    );
 
                 try
                 {
@@ -82,7 +101,9 @@ namespace ILCompiler.DependencyAnalysis
                     {
                         foreach (var resourceHandle in module.MetadataReader.ManifestResources)
                         {
-                            ManifestResource resource = module.MetadataReader.GetManifestResource(resourceHandle);
+                            ManifestResource resource = module
+                                .MetadataReader
+                                .GetManifestResource(resourceHandle);
 
                             // Don't try to embed linked resources or resources in other assemblies
                             if (!resource.Implementation.IsNil)
@@ -93,13 +114,27 @@ namespace ILCompiler.DependencyAnalysis
                             string resourceName = module.MetadataReader.GetString(resource.Name);
 
                             // Check if emitting the manifest resource is blocked by policy.
-                            if (factory.MetadataManager.IsManifestResourceBlocked(factory, module, resourceName))
+                            if (
+                                factory
+                                    .MetadataManager
+                                    .IsManifestResourceBlocked(factory, module, resourceName)
+                            )
                                 continue;
 
                             string assemblyName = module.GetName().FullName;
-                            BlobReader reader = resourceDirectory.GetReader((int)resource.Offset, resourceDirectory.Length - (int)resource.Offset);
+                            BlobReader reader = resourceDirectory.GetReader(
+                                (int)resource.Offset,
+                                resourceDirectory.Length - (int)resource.Offset
+                            );
                             int length = (int)reader.ReadUInt32();
-                            ResourceIndexData indexData = new ResourceIndexData(assemblyName, resourceName, _totalLength, (int)resource.Offset + sizeof(int), module, length);
+                            ResourceIndexData indexData = new ResourceIndexData(
+                                assemblyName,
+                                resourceName,
+                                _totalLength,
+                                (int)resource.Offset + sizeof(int),
+                                module,
+                                length
+                            );
                             _indexData.Add(indexData);
                             _totalLength += length;
                         }
@@ -128,9 +163,21 @@ namespace ILCompiler.DependencyAnalysis
             foreach (ResourceIndexData indexData in _indexData)
             {
                 EcmaModule module = indexData.EcmaModule;
-                PEMemoryBlock resourceDirectory = module.PEReader.GetSectionData(module.PEReader.PEHeaders.CorHeader.ResourcesDirectory.RelativeVirtualAddress);
+                PEMemoryBlock resourceDirectory = module
+                    .PEReader
+                    .GetSectionData(
+                        module
+                            .PEReader
+                            .PEHeaders
+                            .CorHeader
+                            .ResourcesDirectory
+                            .RelativeVirtualAddress
+                    );
                 Debug.Assert(currentPos == indexData.NativeOffset);
-                BlobReader reader = resourceDirectory.GetReader(indexData.EcmaOffset, indexData.Length);
+                BlobReader reader = resourceDirectory.GetReader(
+                    indexData.EcmaOffset,
+                    indexData.Length
+                );
                 byte[] resourceData = reader.ReadBytes(indexData.Length);
                 Buffer.BlockCopy(resourceData, 0, resourceBlob, currentPos, resourceData.Length);
                 currentPos += resourceData.Length;
@@ -149,7 +196,14 @@ namespace ILCompiler.DependencyAnalysis
     /// </summary>
     internal sealed class ResourceIndexData
     {
-        public ResourceIndexData(string assemblyName, string resourceName, int nativeOffset, int ecmaOffset, EcmaModule ecmaModule, int length)
+        public ResourceIndexData(
+            string assemblyName,
+            string resourceName,
+            int nativeOffset,
+            int ecmaOffset,
+            EcmaModule ecmaModule,
+            int length
+        )
         {
             AssemblyName = assemblyName;
             ResourceName = resourceName;

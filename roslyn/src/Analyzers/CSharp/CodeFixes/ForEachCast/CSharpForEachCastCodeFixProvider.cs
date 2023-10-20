@@ -14,17 +14,24 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ForEachCast
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.ForEachCast), Shared]
-    internal class CSharpForEachCastCodeFixProvider : AbstractForEachCastCodeFixProvider<CommonForEachStatementSyntax>
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.ForEachCast
+        ),
+        Shared
+    ]
+    internal class CSharpForEachCastCodeFixProvider
+        : AbstractForEachCastCodeFixProvider<CommonForEachStatementSyntax>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpForEachCastCodeFixProvider()
-        {
-        }
+        public CSharpForEachCastCodeFixProvider() { }
 
         protected override ITypeSymbol GetForEachElementType(
-            SemanticModel semanticModel, CommonForEachStatementSyntax forEachStatement)
+            SemanticModel semanticModel,
+            CommonForEachStatementSyntax forEachStatement
+        )
         {
             var forEachInfo = semanticModel.GetForEachStatementInfo(forEachStatement);
             var result = forEachInfo.ElementType;

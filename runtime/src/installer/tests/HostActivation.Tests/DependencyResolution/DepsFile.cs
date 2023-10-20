@@ -24,12 +24,19 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             // Without .deps.json, all assemblies in the app's directory are added to the TPA
             // and the app's directory is added to the native library search path
             TestApp app = sharedState.FrameworkReferenceApp;
-            sharedState.DotNetWithNetCoreApp.Exec(app.AppDll)
+            sharedState
+                .DotNetWithNetCoreApp
+                .Exec(app.AppDll)
                 .EnableTracingAndCaptureOutputs()
                 .Execute()
-                .Should().Pass()
-                .And.HaveResolvedAssembly(Path.Combine(app.Location, $"{SharedTestState.DependencyName}.dll"))
-                .And.HaveResolvedNativeLibraryPath(app.Location);
+                .Should()
+                .Pass()
+                .And
+                .HaveResolvedAssembly(
+                    Path.Combine(app.Location, $"{SharedTestState.DependencyName}.dll")
+                )
+                .And
+                .HaveResolvedNativeLibraryPath(app.Location);
         }
 
         [Fact]
@@ -39,12 +46,24 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             // - The directory where the .deps.json is
             // - Any framework directory
             // Dependency should resolve relative to the .deps.json directory without checking for file existence
-            string dependencyPath = Path.Combine(Path.GetDirectoryName(sharedState.DepsJsonPath), $"{SharedTestState.DependencyName}.dll");
-            sharedState.DotNetWithNetCoreApp.Exec("exec", Constants.DepsFile.CommandLineArgument, sharedState.DepsJsonPath, sharedState.FrameworkReferenceApp.AppDll)
+            string dependencyPath = Path.Combine(
+                Path.GetDirectoryName(sharedState.DepsJsonPath),
+                $"{SharedTestState.DependencyName}.dll"
+            );
+            sharedState
+                .DotNetWithNetCoreApp
+                .Exec(
+                    "exec",
+                    Constants.DepsFile.CommandLineArgument,
+                    sharedState.DepsJsonPath,
+                    sharedState.FrameworkReferenceApp.AppDll
+                )
                 .EnableTracingAndCaptureOutputs()
                 .Execute()
-                .Should().Pass()
-                .And.HaveResolvedAssembly(dependencyPath);
+                .Should()
+                .Pass()
+                .And
+                .HaveResolvedAssembly(dependencyPath);
         }
 
         public class SharedTestState : DependencyResolutionBase.SharedTestStateBase
@@ -60,16 +79,29 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             public SharedTestState()
             {
                 DotNetWithNetCoreApp = DotNet("WithNetCoreApp")
-                    .AddMicrosoftNETCoreAppFrameworkMockCoreClr(RepoDirectoriesProvider.Default.MicrosoftNETCoreAppVersion)
+                    .AddMicrosoftNETCoreAppFrameworkMockCoreClr(
+                        RepoDirectoriesProvider.Default.MicrosoftNETCoreAppVersion
+                    )
                     .Build();
 
-                FrameworkReferenceApp = CreateFrameworkReferenceApp(MicrosoftNETCoreApp, RepoDirectoriesProvider.Default.MicrosoftNETCoreAppVersion, b => b
-                    .WithProject(DependencyName, "1.0.0", p => p
-                        .WithAssemblyGroup(null, g => g.WithAsset($"{DependencyName}.dll"))));
+                FrameworkReferenceApp = CreateFrameworkReferenceApp(
+                    MicrosoftNETCoreApp,
+                    RepoDirectoriesProvider.Default.MicrosoftNETCoreAppVersion,
+                    b =>
+                        b.WithProject(
+                            DependencyName,
+                            "1.0.0",
+                            p =>
+                                p.WithAssemblyGroup(null, g => g.WithAsset($"{DependencyName}.dll"))
+                        )
+                );
 
                 var depsDir = Path.Combine(Location, "deps");
                 Directory.CreateDirectory(depsDir);
-                DepsJsonPath = Path.Combine(depsDir, Path.GetFileName(FrameworkReferenceApp.DepsJson));
+                DepsJsonPath = Path.Combine(
+                    depsDir,
+                    Path.GetFileName(FrameworkReferenceApp.DepsJson)
+                );
                 File.Move(FrameworkReferenceApp.DepsJson, DepsJsonPath);
             }
         }

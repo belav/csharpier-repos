@@ -37,10 +37,7 @@ internal sealed class AntiforgerySerializationContext
 
             return _stream;
         }
-        private set
-        {
-            _stream = value;
-        }
+        private set { _stream = value; }
     }
 
     public BinaryReader Reader
@@ -55,10 +52,7 @@ internal sealed class AntiforgerySerializationContext
 
             return _reader;
         }
-        private set
-        {
-            _reader = value;
-        }
+        private set { _reader = value; }
     }
 
     public BinaryWriter Writer
@@ -73,10 +67,7 @@ internal sealed class AntiforgerySerializationContext
 
             return _writer;
         }
-        private set
-        {
-            _writer = value;
-        }
+        private set { _writer = value; }
     }
 
     public char[] GetChars(int count)

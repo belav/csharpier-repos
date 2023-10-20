@@ -6,8 +6,11 @@ namespace Microsoft.EntityFrameworkCore;
 public class EFTest
 {
     [ConditionalFact]
-    public void Property_throws_when_invoked_outside_of_query()
-        => Assert.Equal(
+    public void Property_throws_when_invoked_outside_of_query() =>
+        Assert.Equal(
             CoreStrings.PropertyMethodInvoked,
-            Assert.Throws<InvalidOperationException>(() => EF.Property<object>(new object(), "")).Message);
+            Assert
+                .Throws<InvalidOperationException>(() => EF.Property<object>(new object(), ""))
+                .Message
+        );
 }

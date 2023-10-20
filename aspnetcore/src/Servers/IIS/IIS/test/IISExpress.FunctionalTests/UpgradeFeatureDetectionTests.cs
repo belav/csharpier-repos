@@ -17,11 +17,11 @@ namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests;
 [SkipOnHelix("Unsupported queue", Queues = "Windows.Amd64.VS2022.Pre.Open;")]
 public class UpgradeFeatureDetectionTests : IISFunctionalTestBase
 {
-    private readonly string _isWebsocketsSupported = Environment.OSVersion.Version >= new Version(6, 2) ? "Enabled" : "Disabled";
+    private readonly string _isWebsocketsSupported =
+        Environment.OSVersion.Version >= new Version(6, 2) ? "Enabled" : "Disabled";
 
-    public UpgradeFeatureDetectionTests(PublishedSitesFixture fixture) : base(fixture)
-    {
-    }
+    public UpgradeFeatureDetectionTests(PublishedSitesFixture fixture)
+        : base(fixture) { }
 
     [ConditionalFact]
     public Task UpgradeFeatureDetectionDisabled_InProcess()
@@ -29,7 +29,9 @@ public class UpgradeFeatureDetectionTests : IISFunctionalTestBase
         // fails due to not modifying the apphost.config file.
         return UpgradeFeatureDetectionDeployer(
             disableWebSocket: true,
-            "Disabled", HostingModel.InProcess);
+            "Disabled",
+            HostingModel.InProcess
+        );
     }
 
     [ConditionalFact]
@@ -37,7 +39,9 @@ public class UpgradeFeatureDetectionTests : IISFunctionalTestBase
     {
         return UpgradeFeatureDetectionDeployer(
             disableWebSocket: false,
-            _isWebsocketsSupported, HostingModel.InProcess);
+            _isWebsocketsSupported,
+            HostingModel.InProcess
+        );
     }
 
     [ConditionalFact]
@@ -45,7 +49,9 @@ public class UpgradeFeatureDetectionTests : IISFunctionalTestBase
     {
         return UpgradeFeatureDetectionDeployer(
             disableWebSocket: true,
-            "Disabled", HostingModel.OutOfProcess);
+            "Disabled",
+            HostingModel.OutOfProcess
+        );
     }
 
     [ConditionalFact]
@@ -53,10 +59,16 @@ public class UpgradeFeatureDetectionTests : IISFunctionalTestBase
     {
         return UpgradeFeatureDetectionDeployer(
             disableWebSocket: false,
-            _isWebsocketsSupported, HostingModel.OutOfProcess);
+            _isWebsocketsSupported,
+            HostingModel.OutOfProcess
+        );
     }
 
-    private async Task UpgradeFeatureDetectionDeployer(bool disableWebSocket, string expected, HostingModel hostingModel)
+    private async Task UpgradeFeatureDetectionDeployer(
+        bool disableWebSocket,
+        string expected,
+        HostingModel hostingModel
+    )
     {
         var deploymentParameters = Fixture.GetBaseDeploymentParameters(hostingModel);
 
@@ -64,9 +76,9 @@ public class UpgradeFeatureDetectionTests : IISFunctionalTestBase
         {
             // For IIS, we need to modify the apphost.config file
             deploymentParameters.AddServerConfigAction(
-                element => element.Descendants("webSocket")
-                    .Single()
-                    .SetAttributeValue("enabled", "false"));
+                element =>
+                    element.Descendants("webSocket").Single().SetAttributeValue("enabled", "false")
+            );
         }
 
         var deploymentResult = await DeployAsync(deploymentParameters);

@@ -13,7 +13,7 @@ using Microsoft.Build.Framework;
 internal sealed class ProxyFile
 {
     public string TargetFile { get; }
-    public string TempFile   { get; }
+    public string TempFile { get; }
     private FileCache _cache;
 
     public ProxyFile(string targetFile, FileCache cache)
@@ -29,13 +29,20 @@ internal sealed class ProxyFile
             return true;
 
         if (!File.Exists(TempFile))
-            throw new LogAsErrorException($"Could not find the temporary file {TempFile} for target file {TargetFile}. Look for any errors/warnings generated earlier in the build.");
+            throw new LogAsErrorException(
+                $"Could not find the temporary file {TempFile} for target file {TargetFile}. Look for any errors/warnings generated earlier in the build."
+            );
 
         try
         {
             if (!_cache.ShouldCopy(this, out string? cause))
             {
-                _cache.Log.LogMessage(MessageImportance.Low, $"Skipping copying over {TargetFile} as the contents are unchanged");
+                _cache
+                    .Log
+                    .LogMessage(
+                        MessageImportance.Low,
+                        $"Skipping copying over {TargetFile} as the contents are unchanged"
+                    );
                 return false;
             }
 
@@ -44,7 +51,12 @@ internal sealed class ProxyFile
 
             File.Copy(TempFile, TargetFile);
 
-            _cache.Log.LogMessage(MessageImportance.Low, $"Copying {TempFile} to {TargetFile} because {cause}");
+            _cache
+                .Log
+                .LogMessage(
+                    MessageImportance.Low,
+                    $"Copying {TempFile} to {TargetFile} because {cause}"
+                );
             return true;
         }
         finally

@@ -34,8 +34,10 @@ namespace Microsoft.CodeAnalysis
         // Dedicated pools for the byte[]s we use to create checksums from two or three existing checksums. Sized to
         // exactly the space needed to splat the existing checksum data into the array and then hash it.
 
-        private static readonly ObjectPool<byte[]> s_twoChecksumByteArrayPool = new(() => new byte[HashSize * 2]);
-        private static readonly ObjectPool<byte[]> s_threeChecksumByteArrayPool = new(() => new byte[HashSize * 3]);
+        private static readonly ObjectPool<byte[]> s_twoChecksumByteArrayPool =
+            new(() => new byte[HashSize * 2]);
+        private static readonly ObjectPool<byte[]> s_threeChecksumByteArrayPool =
+            new(() => new byte[HashSize * 3]);
 #endif
 
         public static Checksum Create(IEnumerable<string> values)
@@ -106,8 +108,7 @@ namespace Microsoft.CodeAnalysis
                 {
                     pooledHash.Object.AppendData(buffer[..bytesRead]);
                 }
-            }
-            while (bytesRead > 0);
+            } while (bytesRead > 0);
 
             Span<byte> hash = stackalloc byte[SHA256HashSizeBytes];
             pooledHash.Object.GetHashAndReset(hash);
@@ -129,8 +130,7 @@ namespace Microsoft.CodeAnalysis
                 {
                     hash.TransformBlock(buffer, 0, bytesRead, null, 0);
                 }
-            }
-            while (bytesRead > 0);
+            } while (bytesRead > 0);
 
             hash.TransformFinalBlock(Array.Empty<byte>(), 0, 0);
             var bytes = hash.Hash;
@@ -139,7 +139,7 @@ namespace Microsoft.CodeAnalysis
             // will truncate it to predetermined size. for more detail,
             // see the Checksum type
             //
-            // the truncation can happen since different hash algorithm or 
+            // the truncation can happen since different hash algorithm or
             // same algorithm on different platform can have different hash size
             // which might be bigger than the Checksum HashSize.
             //
@@ -199,7 +199,11 @@ namespace Microsoft.CodeAnalysis
             return From(hash.Object.Hash);
         }
 
-        private static Checksum CreateUsingByteArrays(Checksum checksum1, Checksum checksum2, Checksum checksum3)
+        private static Checksum CreateUsingByteArrays(
+            Checksum checksum1,
+            Checksum checksum2,
+            Checksum checksum3
+        )
         {
             using var bytes = s_threeChecksumByteArrayPool.GetPooledObject();
 
@@ -216,7 +220,6 @@ namespace Microsoft.CodeAnalysis
             hash.Object.TransformFinalBlock(Array.Empty<byte>(), 0, 0);
             return From(hash.Object.Hash);
         }
-
 #else
 
         // Optimized helpers that do not need to allocate any arrays to combine hashes.
@@ -231,16 +234,20 @@ namespace Microsoft.CodeAnalysis
             return From(hashResultSpan);
         }
 
-        private static Checksum CreateUsingSpans(Checksum checksum1, Checksum checksum2, Checksum checksum3)
+        private static Checksum CreateUsingSpans(
+            Checksum checksum1,
+            Checksum checksum2,
+            Checksum checksum3
+        )
         {
-            Span<HashData> checksums = stackalloc HashData[] { checksum1.Hash, checksum2.Hash, checksum3.Hash };
+            Span<HashData> checksums =
+                stackalloc HashData[] { checksum1.Hash, checksum2.Hash, checksum3.Hash };
             Span<byte> hashResultSpan = stackalloc byte[SHA256HashSizeBytes];
 
             SHA256.HashData(MemoryMarshal.AsBytes(checksums), hashResultSpan);
 
             return From(hashResultSpan);
         }
-
 #endif
 
         public static Checksum Create(IEnumerable<Checksum> checksums)

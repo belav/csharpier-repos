@@ -40,11 +40,13 @@ namespace System.ServiceModel
         {
             this.security.Mode = securityMode;
         }
+
         public NetNamedPipeBinding(string configurationName)
             : this()
         {
             ApplyConfiguration(configurationName);
         }
+
         NetNamedPipeBinding(NetNamedPipeSecurity security)
             : this()
         {
@@ -82,10 +84,7 @@ namespace System.ServiceModel
         public long MaxBufferPoolSize
         {
             get { return namedPipe.MaxBufferPoolSize; }
-            set
-            {
-                namedPipe.MaxBufferPoolSize = value;
-            }
+            set { namedPipe.MaxBufferPoolSize = value; }
         }
 
         [DefaultValue(TransportDefaults.MaxBufferSize)]
@@ -133,7 +132,10 @@ namespace System.ServiceModel
             get { return false; }
         }
 
-        public override string Scheme { get { return namedPipe.Scheme; } }
+        public override string Scheme
+        {
+            get { return namedPipe.Scheme; }
+        }
 
         public EnvelopeVersion EnvelopeVersion
         {
@@ -163,7 +165,11 @@ namespace System.ServiceModel
             context = GetDefaultTransactionFlowBindingElement();
         }
 
-        void InitializeFrom(NamedPipeTransportBindingElement namedPipe, BinaryMessageEncodingBindingElement encoding, TransactionFlowBindingElement context)
+        void InitializeFrom(
+            NamedPipeTransportBindingElement namedPipe,
+            BinaryMessageEncodingBindingElement encoding,
+            TransactionFlowBindingElement context
+        )
         {
             Initialize();
             this.HostNameComparisonMode = namedPipe.HostNameComparisonMode;
@@ -171,7 +177,7 @@ namespace System.ServiceModel
             this.MaxBufferSize = namedPipe.MaxBufferSize;
             if (namedPipe.IsMaxPendingConnectionsSet)
             {
-                this.MaxConnections = namedPipe.MaxPendingConnections;    
+                this.MaxConnections = namedPipe.MaxPendingConnections;
             }
             this.MaxReceivedMessageSize = namedPipe.MaxReceivedMessageSize;
             this.TransferMode = namedPipe.TransferMode;
@@ -182,10 +188,14 @@ namespace System.ServiceModel
             this.TransactionProtocol = context.TransactionProtocol;
         }
 
-        // check that properties of the HttpTransportBindingElement and 
-        // MessageEncodingBindingElement not exposed as properties on BasicHttpBinding 
+        // check that properties of the HttpTransportBindingElement and
+        // MessageEncodingBindingElement not exposed as properties on BasicHttpBinding
         // match default values of the binding elements
-        bool IsBindingElementsMatch(NamedPipeTransportBindingElement namedPipe, BinaryMessageEncodingBindingElement encoding, TransactionFlowBindingElement context)
+        bool IsBindingElementsMatch(
+            NamedPipeTransportBindingElement namedPipe,
+            BinaryMessageEncodingBindingElement encoding,
+            TransactionFlowBindingElement context
+        )
         {
             if (!this.namedPipe.IsMatch(namedPipe))
                 return false;
@@ -198,14 +208,22 @@ namespace System.ServiceModel
 
         void ApplyConfiguration(string configurationName)
         {
-            NetNamedPipeBindingCollectionElement section = NetNamedPipeBindingCollectionElement.GetBindingCollectionElement();
+            NetNamedPipeBindingCollectionElement section =
+                NetNamedPipeBindingCollectionElement.GetBindingCollectionElement();
             NetNamedPipeBindingElement element = section.Bindings[configurationName];
             if (element == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(
-                    SR.GetString(SR.ConfigInvalidBindingConfigurationName,
-                                 configurationName,
-                                 ConfigurationStrings.NetNamedPipeBindingCollectionElementName)));
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(
+                                SR.ConfigInvalidBindingConfigurationName,
+                                configurationName,
+                                ConfigurationStrings.NetNamedPipeBindingCollectionElementName
+                            )
+                        )
+                    );
             }
             else
             {
@@ -214,7 +232,7 @@ namespace System.ServiceModel
         }
 
         public override BindingElementCollection CreateBindingElements()
-        {   // return collection of BindingElements
+        { // return collection of BindingElements
             BindingElementCollection bindingElements = new BindingElementCollection();
             // order of BindingElements is important
             // add context
@@ -293,9 +311,13 @@ namespace System.ServiceModel
             }
         }
 
-        static bool TryCreateSecurity(WindowsStreamSecurityBindingElement wssbe, out NetNamedPipeSecurity security)
+        static bool TryCreateSecurity(
+            WindowsStreamSecurityBindingElement wssbe,
+            out NetNamedPipeSecurity security
+        )
         {
-            NetNamedPipeSecurityMode mode = wssbe == null ? NetNamedPipeSecurityMode.None : NetNamedPipeSecurityMode.Transport;
+            NetNamedPipeSecurityMode mode =
+                wssbe == null ? NetNamedPipeSecurityMode.None : NetNamedPipeSecurityMode.Transport;
             return NetNamedPipeSecurity.TryCreate(wssbe, mode, out security);
         }
 
@@ -312,7 +334,10 @@ namespace System.ServiceModel
             {
                 return true;
             }
-            if (this.security.Transport.ProtectionLevel != NamedPipeTransportSecurity.DefaultProtectionLevel)
+            if (
+                this.security.Transport.ProtectionLevel
+                != NamedPipeTransportSecurity.DefaultProtectionLevel
+            )
             {
                 return true;
             }

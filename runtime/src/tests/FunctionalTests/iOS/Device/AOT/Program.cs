@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 public static class Program
 {
     [DllImport("__Internal")]
-    public static extern void mono_ios_set_summary (string value);
+    public static extern void mono_ios_set_summary(string value);
 
     [UnmanagedCallersOnly(EntryPoint = nameof(SayHello))]
     public static void SayHello()

@@ -12,7 +12,10 @@ using System.Web.Http.Services;
 
 namespace System.Web.Http.Tracing.Tracers
 {
-    internal class BufferedMediaTypeFormatterTracer : BufferedMediaTypeFormatter, IFormatterTracer, IDecorator<BufferedMediaTypeFormatter>
+    internal class BufferedMediaTypeFormatterTracer
+        : BufferedMediaTypeFormatter,
+            IFormatterTracer,
+            IDecorator<BufferedMediaTypeFormatter>
     {
         private const string OnReadFromStreamMethodName = "ReadFromStream";
         private const string OnWriteToStreamMethodName = "WriteToStream";
@@ -20,7 +23,11 @@ namespace System.Web.Http.Tracing.Tracers
         private readonly BufferedMediaTypeFormatter _inner;
         private MediaTypeFormatterTracer _innerTracer;
 
-        public BufferedMediaTypeFormatterTracer(BufferedMediaTypeFormatter innerFormatter, ITraceWriter traceWriter, HttpRequestMessage request)
+        public BufferedMediaTypeFormatterTracer(
+            BufferedMediaTypeFormatter innerFormatter,
+            ITraceWriter traceWriter,
+            HttpRequestMessage request
+        )
             : base(innerFormatter)
         {
             _inner = innerFormatter;
@@ -44,14 +51,8 @@ namespace System.Web.Http.Tracing.Tracers
 
         public override IRequiredMemberSelector RequiredMemberSelector
         {
-            get
-            {
-                return _innerTracer.RequiredMemberSelector;
-            }
-            set
-            {
-                _innerTracer.RequiredMemberSelector = value;
-            }
+            get { return _innerTracer.RequiredMemberSelector; }
+            set { _innerTracer.RequiredMemberSelector = value; }
         }
 
         public override bool CanReadType(Type type)
@@ -64,119 +65,188 @@ namespace System.Web.Http.Tracing.Tracers
             return _innerTracer.CanWriteType(type);
         }
 
-        public override MediaTypeFormatter GetPerRequestFormatterInstance(Type type, HttpRequestMessage request, MediaTypeHeaderValue mediaType)
+        public override MediaTypeFormatter GetPerRequestFormatterInstance(
+            Type type,
+            HttpRequestMessage request,
+            MediaTypeHeaderValue mediaType
+        )
         {
             return _innerTracer.GetPerRequestFormatterInstance(type, request, mediaType);
         }
 
-        public override void SetDefaultContentHeaders(Type type, HttpContentHeaders headers, MediaTypeHeaderValue mediaType)
+        public override void SetDefaultContentHeaders(
+            Type type,
+            HttpContentHeaders headers,
+            MediaTypeHeaderValue mediaType
+        )
         {
             _innerTracer.SetDefaultContentHeaders(type, headers, mediaType);
         }
 
-        public override object ReadFromStream(Type type, Stream readStream, HttpContent content,
-            IFormatterLogger formatterLogger)
+        public override object ReadFromStream(
+            Type type,
+            Stream readStream,
+            HttpContent content,
+            IFormatterLogger formatterLogger
+        )
         {
             return ReadFromStreamCore(type, readStream, content, formatterLogger);
         }
 
-        public override object ReadFromStream(Type type, Stream stream, HttpContent content,
-            IFormatterLogger formatterLogger, CancellationToken cancellationToken)
+        public override object ReadFromStream(
+            Type type,
+            Stream stream,
+            HttpContent content,
+            IFormatterLogger formatterLogger,
+            CancellationToken cancellationToken
+        )
         {
             return ReadFromStreamCore(type, stream, content, formatterLogger, cancellationToken);
         }
 
-        private object ReadFromStreamCore(Type type, Stream stream, HttpContent content,
-            IFormatterLogger formatterLogger, CancellationToken? cancellationToken = null)
+        private object ReadFromStreamCore(
+            Type type,
+            Stream stream,
+            HttpContent content,
+            IFormatterLogger formatterLogger,
+            CancellationToken? cancellationToken = null
+        )
         {
-            BufferedMediaTypeFormatter innerFormatter = InnerFormatter as BufferedMediaTypeFormatter;
+            BufferedMediaTypeFormatter innerFormatter =
+                InnerFormatter as BufferedMediaTypeFormatter;
             HttpContentHeaders contentHeaders = content == null ? null : content.Headers;
-            MediaTypeHeaderValue contentType = contentHeaders == null ? null : contentHeaders.ContentType;
+            MediaTypeHeaderValue contentType =
+                contentHeaders == null ? null : contentHeaders.ContentType;
             object value = null;
 
-            _innerTracer.TraceWriter.TraceBeginEnd(
-                _innerTracer.Request,
-                TraceCategories.FormattingCategory,
-                TraceLevel.Info,
-                _innerTracer.InnerFormatter.GetType().Name,
-                OnReadFromStreamMethodName,
-                beginTrace: (tr) =>
-                {
-                    tr.Message = Error.Format(
+            _innerTracer
+                .TraceWriter
+                .TraceBeginEnd(
+                    _innerTracer.Request,
+                    TraceCategories.FormattingCategory,
+                    TraceLevel.Info,
+                    _innerTracer.InnerFormatter.GetType().Name,
+                    OnReadFromStreamMethodName,
+                    beginTrace: (tr) =>
+                    {
+                        tr.Message = Error.Format(
                             SRResources.TraceReadFromStreamMessage,
                             type.Name,
-                            contentType == null ? SRResources.TraceNoneObjectMessage : contentType.ToString());
-                },
-                execute: () =>
-                {
-                    if (cancellationToken.HasValue)
+                            contentType == null
+                                ? SRResources.TraceNoneObjectMessage
+                                : contentType.ToString()
+                        );
+                    },
+                    execute: () =>
                     {
-                        value = innerFormatter.ReadFromStream(type, stream, content, formatterLogger, cancellationToken.Value);
-                    }
-                    else
+                        if (cancellationToken.HasValue)
+                        {
+                            value = innerFormatter.ReadFromStream(
+                                type,
+                                stream,
+                                content,
+                                formatterLogger,
+                                cancellationToken.Value
+                            );
+                        }
+                        else
+                        {
+                            value = innerFormatter.ReadFromStream(
+                                type,
+                                stream,
+                                content,
+                                formatterLogger
+                            );
+                        }
+                    },
+                    endTrace: (tr) =>
                     {
-                        value = innerFormatter.ReadFromStream(type, stream, content, formatterLogger);
-                    }
-                },
-                endTrace: (tr) =>
-                {
-                    tr.Message = Error.Format(
-                                SRResources.TraceReadFromStreamValueMessage,
-                                FormattingUtilities.ValueToString(value, CultureInfo.CurrentCulture));
-                },
-                errorTrace: null);
+                        tr.Message = Error.Format(
+                            SRResources.TraceReadFromStreamValueMessage,
+                            FormattingUtilities.ValueToString(value, CultureInfo.CurrentCulture)
+                        );
+                    },
+                    errorTrace: null
+                );
 
             return value;
         }
 
-        public override void WriteToStream(Type type, object value, Stream writeStream, HttpContent content)
+        public override void WriteToStream(
+            Type type,
+            object value,
+            Stream writeStream,
+            HttpContent content
+        )
         {
             WriteToStreamCore(type, value, writeStream, content);
         }
 
-        public override void WriteToStream(Type type, object value, Stream writeStream, HttpContent content,
-            CancellationToken cancellationToken)
+        public override void WriteToStream(
+            Type type,
+            object value,
+            Stream writeStream,
+            HttpContent content,
+            CancellationToken cancellationToken
+        )
         {
             WriteToStreamCore(type, value, writeStream, content, cancellationToken);
         }
 
-        private void WriteToStreamCore(Type type, object value, Stream writeStream, HttpContent content,
-            CancellationToken? cancellationToken = null)
+        private void WriteToStreamCore(
+            Type type,
+            object value,
+            Stream writeStream,
+            HttpContent content,
+            CancellationToken? cancellationToken = null
+        )
         {
-            BufferedMediaTypeFormatter innerFormatter = InnerFormatter as BufferedMediaTypeFormatter;
+            BufferedMediaTypeFormatter innerFormatter =
+                InnerFormatter as BufferedMediaTypeFormatter;
 
             HttpContentHeaders contentHeaders = content == null ? null : content.Headers;
-            MediaTypeHeaderValue contentType = contentHeaders == null
-                           ? null
-                           : contentHeaders.ContentType;
+            MediaTypeHeaderValue contentType =
+                contentHeaders == null ? null : contentHeaders.ContentType;
 
-            _innerTracer.TraceWriter.TraceBeginEnd(
-                _innerTracer.Request,
-                TraceCategories.FormattingCategory,
-                TraceLevel.Info,
-                _innerTracer.InnerFormatter.GetType().Name,
-                OnWriteToStreamMethodName,
-                beginTrace: (tr) =>
-                {
-                    tr.Message = Error.Format(
+            _innerTracer
+                .TraceWriter
+                .TraceBeginEnd(
+                    _innerTracer.Request,
+                    TraceCategories.FormattingCategory,
+                    TraceLevel.Info,
+                    _innerTracer.InnerFormatter.GetType().Name,
+                    OnWriteToStreamMethodName,
+                    beginTrace: (tr) =>
+                    {
+                        tr.Message = Error.Format(
                             SRResources.TraceWriteToStreamMessage,
                             FormattingUtilities.ValueToString(value, CultureInfo.CurrentCulture),
                             type.Name,
-                            contentType == null ? SRResources.TraceNoneObjectMessage : contentType.ToString());
-                },
-                execute: () =>
-                {
-                    if (cancellationToken.HasValue)
+                            contentType == null
+                                ? SRResources.TraceNoneObjectMessage
+                                : contentType.ToString()
+                        );
+                    },
+                    execute: () =>
                     {
-                        innerFormatter.WriteToStream(type, value, writeStream, content, cancellationToken.Value);
-                    }
-                    else
-                    {
-                        innerFormatter.WriteToStream(type, value, writeStream, content);
-                    }
-                },
-                endTrace: null,
-                errorTrace: null);
+                        if (cancellationToken.HasValue)
+                        {
+                            innerFormatter.WriteToStream(
+                                type,
+                                value,
+                                writeStream,
+                                content,
+                                cancellationToken.Value
+                            );
+                        }
+                        else
+                        {
+                            innerFormatter.WriteToStream(type, value, writeStream, content);
+                        }
+                    },
+                    endTrace: null,
+                    errorTrace: null
+                );
         }
     }
 }

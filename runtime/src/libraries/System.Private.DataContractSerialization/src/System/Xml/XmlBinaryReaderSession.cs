@@ -16,9 +16,7 @@ namespace System.Xml
         private XmlDictionaryString[]? _strings;
         private Dictionary<int, XmlDictionaryString>? _stringDict;
 
-        public XmlBinaryReaderSession()
-        {
-        }
+        public XmlBinaryReaderSession() { }
 
         public XmlDictionaryString Add(int id, string value)
         {
@@ -44,7 +42,9 @@ namespace System.Xml
                 }
                 else if (id >= _strings.Length)
                 {
-                    XmlDictionaryString[] newStrings = new XmlDictionaryString[Math.Min(Math.Max(id + 1, _strings.Length * 2), MaxArrayEntries)];
+                    XmlDictionaryString[] newStrings = new XmlDictionaryString[
+                        Math.Min(Math.Max(id + 1, _strings.Length * 2), MaxArrayEntries)
+                    ];
                     Array.Copy(_strings, newStrings, _strings.Length);
                     _strings = newStrings;
                 }
@@ -102,7 +102,10 @@ namespace System.Xml
             return false;
         }
 
-        public bool TryLookup(XmlDictionaryString value, [NotNullWhen(true)] out XmlDictionaryString? result)
+        public bool TryLookup(
+            XmlDictionaryString value,
+            [NotNullWhen(true)] out XmlDictionaryString? result
+        )
         {
             ArgumentNullException.ThrowIfNull(value);
 

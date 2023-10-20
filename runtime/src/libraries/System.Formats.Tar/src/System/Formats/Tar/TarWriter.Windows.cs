@@ -12,10 +12,21 @@ namespace System.Formats.Tar
     public sealed partial class TarWriter : IDisposable
     {
         // Windows files don't have a mode. Use a mode of 755 for directories and files.
-        private const UnixFileMode DefaultWindowsMode = UnixFileMode.UserRead | UnixFileMode.UserWrite | UnixFileMode.UserExecute | UnixFileMode.GroupRead | UnixFileMode.GroupExecute | UnixFileMode.OtherRead | UnixFileMode.OtherExecute;
+        private const UnixFileMode DefaultWindowsMode =
+            UnixFileMode.UserRead
+            | UnixFileMode.UserWrite
+            | UnixFileMode.UserExecute
+            | UnixFileMode.GroupRead
+            | UnixFileMode.GroupExecute
+            | UnixFileMode.OtherRead
+            | UnixFileMode.OtherExecute;
 
         // Windows specific implementation of the method that reads an entry from disk and writes it into the archive stream.
-        private TarEntry ConstructEntryForWriting(string fullPath, string entryName, FileOptions fileOptions)
+        private TarEntry ConstructEntryForWriting(
+            string fullPath,
+            string entryName,
+            FileOptions fileOptions
+        )
         {
             Debug.Assert(!string.IsNullOrEmpty(fullPath));
 
@@ -32,7 +43,10 @@ namespace System.Formats.Tar
             }
             else if ((attributes & (FileAttributes.Normal | FileAttributes.Archive)) != 0)
             {
-                entryType = Format is TarEntryFormat.V7 ? TarEntryType.V7RegularFile : TarEntryType.RegularFile;
+                entryType =
+                    Format is TarEntryFormat.V7
+                        ? TarEntryType.V7RegularFile
+                        : TarEntryType.RegularFile;
             }
             else
             {
@@ -48,7 +62,10 @@ namespace System.Formats.Tar
                 _ => throw new InvalidDataException(SR.Format(SR.TarInvalidFormat, Format)),
             };
 
-            FileSystemInfo info = (attributes & FileAttributes.Directory) != 0 ? new DirectoryInfo(fullPath) : new FileInfo(fullPath);
+            FileSystemInfo info =
+                (attributes & FileAttributes.Directory) != 0
+                    ? new DirectoryInfo(fullPath)
+                    : new FileInfo(fullPath);
 
             entry._header._mTime = info.LastWriteTimeUtc;
             entry._header._aTime = info.LastAccessTimeUtc;
@@ -64,7 +81,14 @@ namespace System.Formats.Tar
             if (entry.EntryType is TarEntryType.RegularFile or TarEntryType.V7RegularFile)
             {
                 Debug.Assert(entry._header._dataStream == null);
-                entry._header._dataStream = new FileStream(fullPath, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, fileOptions);
+                entry._header._dataStream = new FileStream(
+                    fullPath,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.Read,
+                    4096,
+                    fileOptions
+                );
             }
 
             return entry;

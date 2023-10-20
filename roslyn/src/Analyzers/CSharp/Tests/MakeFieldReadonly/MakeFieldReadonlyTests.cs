@@ -20,15 +20,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
     [Trait(Traits.Feature, Traits.Features.CodeActionsMakeFieldReadonly)]
     public class MakeFieldReadonlyTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        private static readonly ParseOptions s_strictFeatureFlag = CSharpParseOptions.Default.WithFeatures(new[] { new KeyValuePair<string, string>("strict", "true") });
+        private static readonly ParseOptions s_strictFeatureFlag = CSharpParseOptions
+            .Default
+            .WithFeatures(new[] { new KeyValuePair<string, string>("strict", "true") });
 
         public MakeFieldReadonlyTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpMakeFieldReadonlyDiagnosticAnalyzer(), new CSharpMakeFieldReadonlyCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpMakeFieldReadonlyDiagnosticAnalyzer(),
+                new CSharpMakeFieldReadonlyCodeFixProvider()
+            );
 
         [Theory]
         [InlineData("public")]
@@ -39,10 +44,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
         public async Task NonPrivateField(string accessibility)
         {
             await TestMissingInRegularAndScriptAsync(
-$@"class MyClass
+                $@"class MyClass
 {{
     {accessibility} int[| _goo |];
-}}");
+}}"
+            );
         }
 
         [Fact]
@@ -54,7 +60,8 @@ $@"class MyClass
                 {
                     private event System.EventHandler [|Goo|];
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -66,7 +73,8 @@ $@"class MyClass
                 {
                     private readonly int [|_goo|];
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -78,7 +86,8 @@ $@"class MyClass
                 {
                     private const int [|_goo|];
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -96,7 +105,8 @@ $@"class MyClass
                 {
                     private readonly int _goo;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -114,7 +124,8 @@ $@"class MyClass
                 {
                     private readonly int _goo;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -132,7 +143,8 @@ $@"class MyClass
                 {
                     private readonly int _goo = 0;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -151,7 +163,8 @@ $@"class MyClass
                     private readonly int _goo = 0;
                     private int _bar = 0;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -171,7 +184,8 @@ $@"class MyClass
                     private readonly int _bar = 0;
                     private int _fizz = 0;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -199,7 +213,8 @@ $@"class MyClass
                         _goo = 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -218,27 +233,31 @@ $@"class MyClass
                     private readonly int _goo;
                     private int _bar = 0;
                 }
-                """);
+                """
+            );
         }
 
         [Theory]
         [InlineData("")]
         [InlineData("\r\n")]
         [InlineData("\r\n\r\n")]
-        public async Task MultipleFieldsAssignedInline_LeadingCommentAndWhitespace(string leadingTrvia)
+        public async Task MultipleFieldsAssignedInline_LeadingCommentAndWhitespace(
+            string leadingTrvia
+        )
         {
             await TestInRegularAndScript1Async(
-$@"class MyClass
+                $@"class MyClass
 {{
     //Comment{leadingTrvia}
     private int _goo = 0, [|_bar|] = 0;
 }}",
-$@"class MyClass
+                $@"class MyClass
 {{
     //Comment{leadingTrvia}
     private int _goo = 0;
     private readonly int _bar = 0;
-}}");
+}}"
+            );
         }
 
         [Fact]
@@ -264,7 +283,8 @@ $@"class MyClass
                         _goo = 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -282,7 +302,8 @@ $@"class MyClass
 
                     public Action<int> E;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -300,7 +321,8 @@ $@"class MyClass
 
                     public event EventHandler E;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -318,7 +340,8 @@ $@"class MyClass
 
                     public event EventHandler E;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -336,7 +359,8 @@ $@"class MyClass
 
                     public Action<int> E;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -352,7 +376,8 @@ $@"class MyClass
                         void LocalFunction() => this._goo = 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -368,7 +393,8 @@ $@"class MyClass
                         void LocalFunction() { this._goo = 0; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -385,7 +411,8 @@ $@"class MyClass
                         goo._goo = 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -401,7 +428,8 @@ $@"class MyClass
                         var goo = new MyClass { _goo = 0 };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -427,7 +455,8 @@ $@"class MyClass
                         this._goo = 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -453,7 +482,8 @@ $@"class MyClass
                         get { return _goo; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29746")]
@@ -481,7 +511,8 @@ $@"class MyClass
                         return _s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29746")]
@@ -509,7 +540,8 @@ $@"class MyClass
                         return _s.ToUpper();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -526,7 +558,8 @@ $@"class MyClass
                         set { _goo = value; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -542,7 +575,8 @@ $@"class MyClass
                         _goo = 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -562,7 +596,8 @@ $@"class MyClass
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -582,7 +617,8 @@ $@"class MyClass
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -616,7 +652,8 @@ $@"class MyClass
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -642,7 +679,8 @@ $@"class MyClass
                         var i = _goo;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -658,7 +696,8 @@ $@"class MyClass
                         _goo += value;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -674,7 +713,8 @@ $@"class MyClass
                         _goo++;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -690,7 +730,8 @@ $@"class MyClass
                         --_goo;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -708,7 +749,8 @@ $@"class MyClass
                 {
                     private readonly int _goo;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -732,7 +774,8 @@ $@"class MyClass
                 partial class MyClass
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -774,7 +817,8 @@ $@"class MyClass
                         </Document>
                     </Project>
                 </Workspace>
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -791,7 +835,8 @@ $@"class MyClass
                         _goo = 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -810,7 +855,8 @@ $@"class MyClass
                         _goo = 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -835,7 +881,8 @@ $@"class MyClass
                         </Document>
                     </Project>
                 </Workspace>
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -867,7 +914,8 @@ $@"class MyClass
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -883,7 +931,8 @@ $@"class MyClass
                         int.TryParse("123", out _goo);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -902,7 +951,8 @@ $@"class MyClass
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33009")]
@@ -918,7 +968,8 @@ $@"class MyClass
                         return ref _goo;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33009")]
@@ -932,7 +983,8 @@ $@"class MyClass
                     internal ref int Goo()
                         => ref _goo;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33009")]
@@ -949,7 +1001,8 @@ $@"class MyClass
                         internal ref int Goo => ref _instance._goo;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33009")]
@@ -966,7 +1019,8 @@ $@"class MyClass
                         return ref (first ? ref _a : ref _b);
                     }
                 }
-                """);
+                """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
@@ -979,7 +1033,8 @@ $@"class MyClass
                         return ref (first ? ref _a : ref _b);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33009")]
@@ -994,7 +1049,8 @@ $@"class MyClass
                     internal ref int Goo(bool first)
                         => ref (first ? ref _a : ref _b);
                 }
-                """);
+                """
+            );
 
             await TestMissingInRegularAndScriptAsync(
                 """
@@ -1005,7 +1061,8 @@ $@"class MyClass
                     internal ref int Goo(bool first)
                         => ref (first ? ref _a : ref _b);
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33009")]
@@ -1026,7 +1083,8 @@ $@"class MyClass
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33009")]
@@ -1046,7 +1104,8 @@ $@"class MyClass
                         return d();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33009")]
@@ -1066,7 +1125,8 @@ $@"class MyClass
                         return d();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33009")]
@@ -1092,7 +1152,8 @@ $@"class MyClass
                         return ref _goo;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33009")]
@@ -1114,7 +1175,8 @@ $@"class MyClass
                     internal ref readonly int Goo()
                         => ref _goo;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33009")]
@@ -1142,7 +1204,8 @@ $@"class MyClass
                         internal ref readonly int Goo => ref _instance._goo;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33009")]
@@ -1170,7 +1233,8 @@ $@"class MyClass
                         return ref (first ? ref _a : ref _b);
                     }
                 }
-                """);
+                """
+            );
 
             await TestInRegularAndScript1Async(
                 """
@@ -1194,7 +1258,8 @@ $@"class MyClass
                         return ref (first ? ref _a : ref _b);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33009")]
@@ -1218,7 +1283,8 @@ $@"class MyClass
                     internal ref readonly int Goo(bool first)
                         => ref (first ? ref _a : ref _b);
                 }
-                """);
+                """
+            );
 
             await TestInRegularAndScript1Async(
                 """
@@ -1238,7 +1304,8 @@ $@"class MyClass
                     internal ref readonly int Goo(bool first)
                         => ref (first ? ref _a : ref _b);
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33009")]
@@ -1274,7 +1341,8 @@ $@"class MyClass
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33009")]
@@ -1308,7 +1376,8 @@ $@"class MyClass
                         return d();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33009")]
@@ -1342,7 +1411,8 @@ $@"class MyClass
                         return d();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33009")]
@@ -1370,7 +1440,8 @@ $@"class MyClass
                         return ref (_a ? ref _b : ref _b);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33009")]
@@ -1394,7 +1465,8 @@ $@"class MyClass
                     internal ref int Goo()
                         => ref (_a ? ref _b : ref _b);
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1420,7 +1492,8 @@ $@"class MyClass
                         int.TryParse("123", out _goo);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1452,7 +1525,8 @@ $@"class MyClass
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1478,7 +1552,8 @@ $@"class MyClass
                         _goo = 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1494,7 +1569,8 @@ $@"class MyClass
                         _goo = 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1510,7 +1586,8 @@ $@"class MyClass
                 {
                     private MyStruct [|_goo|];
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1540,7 +1617,8 @@ $@"class MyClass
                 {
                     private readonly MyStruct _goo;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1568,7 +1646,8 @@ $@"class MyClass
 
                     void Method() { _z = 1; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1616,7 +1695,8 @@ $@"class MyClass
                   }
 
                   partial struct MyClass { }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26262")]
@@ -1642,7 +1722,8 @@ $@"class MyClass
                         (_goo) = 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26262")]
@@ -1668,7 +1749,8 @@ $@"class MyClass
                         (this._goo) = 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26264")]
@@ -1686,7 +1768,8 @@ $@"class MyClass
                         (i, j) = (1, 2);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26264")]
@@ -1704,7 +1787,8 @@ $@"class MyClass
                         ((i, j), j) = ((1, 2), 3);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26264")]
@@ -1722,7 +1806,8 @@ $@"class MyClass
                         ((this.i, j), j) = (1, 2);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26264")]
@@ -1752,7 +1837,8 @@ $@"class MyClass
                         (j, j) = (i, i);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26264")]
@@ -1784,7 +1870,8 @@ $@"class MyClass
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26364")]
@@ -1796,7 +1883,8 @@ $@"class MyClass
                 {
                     [|private fixed byte b[8];|]
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38995")]
@@ -1814,7 +1902,8 @@ $@"class MyClass
                         value += 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1842,7 +1931,8 @@ $@"class MyClass
                         ref readonly var value = ref i;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26213")]
@@ -1880,7 +1970,8 @@ $@"class MyClass
                         faceServiceClient.DetectAsync();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42759")]
@@ -1898,7 +1989,8 @@ $@"class MyClass
                 {
                     private readonly object first; 
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42759")]
@@ -1917,7 +2009,8 @@ $@"class MyClass
                     private readonly object first;
                     private volatile object second;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42759")]
@@ -1936,7 +2029,8 @@ $@"class MyClass
                     private volatile object first;
                     private readonly object second;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46785")]
@@ -1954,7 +2048,8 @@ $@"class MyClass
                         return myVar is null;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57983")]
@@ -1975,7 +2070,8 @@ $@"class MyClass
                         d3D12FenceValue++;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42760")]
@@ -1990,7 +2086,8 @@ $@"class MyClass
                     [ThreadStatic]
                     private static object [|t_obj|];
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/50925")]
@@ -2024,7 +2121,8 @@ $@"class MyClass
                         </Document>
                     </Project>
                 </Workspace>
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40644")]
@@ -2044,7 +2142,8 @@ $@"class MyClass
                         </Document>
                     </Project>
                 </Workspace>
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40644")]
@@ -2076,7 +2175,8 @@ $@"class MyClass
                         </Document>
                     </Project>
                 </Workspace>
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40644")]
@@ -2114,7 +2214,8 @@ $@"class MyClass
                         </Document>
                     </Project>
                 </Workspace>
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40644")]
@@ -2133,7 +2234,8 @@ $@"class MyClass
                         </Document>
                     </Project>
                 </Workspace>
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/59577")]
@@ -2151,7 +2253,8 @@ $@"class MyClass
                 {
                     private readonly int _goo;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/59577")]
@@ -2168,7 +2271,8 @@ $@"class MyClass
                         this = default;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38468")]
@@ -2190,7 +2294,8 @@ $@"class MyClass
 
                     readonly int y;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem(47197, "https://github.com/dotnet/roslyn/issues/47197")]
@@ -2224,7 +2329,9 @@ $@"class MyClass
                         C<T>.s_value = null;
                     }
                 }
-                """, parseOptions: s_strictFeatureFlag);
+                """,
+                parseOptions: s_strictFeatureFlag
+            );
         }
 
         [Fact, WorkItem(47197, "https://github.com/dotnet/roslyn/issues/47197")]
@@ -2244,7 +2351,9 @@ $@"class MyClass
                         C<string>.s_value = null;
                     }
                 }
-                """, new TestParameters(parseOptions: s_strictFeatureFlag));
+                """,
+                new TestParameters(parseOptions: s_strictFeatureFlag)
+            );
         }
 
         [Fact, WorkItem(47197, "https://github.com/dotnet/roslyn/issues/47197")]
@@ -2264,7 +2373,8 @@ $@"class MyClass
                         C<string>.s_value = null;
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

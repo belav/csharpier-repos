@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration {
+namespace System.Configuration
+{
     using System.Configuration.Internal;
     using System.Collections;
     using System.Collections.Specialized;
@@ -23,9 +24,10 @@ namespace System.Configuration {
     //
     // Value to change how we handle the Exception
     //
-    internal enum ExceptionAction {
-        NonSpecific,    // Not specific to a particular section, nor a global schema error
-        Local,          // Error specific to a particular section
-        Global,         // Error in the global (file) schema 
+    internal enum ExceptionAction
+    {
+        NonSpecific, // Not specific to a particular section, nor a global schema error
+        Local, // Error specific to a particular section
+        Global, // Error in the global (file) schema
     }
 }

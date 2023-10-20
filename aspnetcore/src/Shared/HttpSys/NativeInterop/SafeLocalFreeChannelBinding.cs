@@ -20,7 +20,9 @@ internal sealed class SafeLocalFreeChannelBinding : ChannelBinding
     {
         SafeLocalFreeChannelBinding result;
 
-        result = UnsafeNclNativeMethods.SafeNetHandles.LocalAllocChannelBinding(LMEM_FIXED, (UIntPtr)cb);
+        result = UnsafeNclNativeMethods
+            .SafeNetHandles
+            .LocalAllocChannelBinding(LMEM_FIXED, (UIntPtr)cb);
         if (result.IsInvalid)
         {
             result.SetHandleAsInvalid();
@@ -40,9 +42,6 @@ internal sealed class SafeLocalFreeChannelBinding : ChannelBinding
 
     public override bool IsInvalid
     {
-        get
-        {
-            return handle == IntPtr.Zero || handle.ToInt32() == -1;
-        }
+        get { return handle == IntPtr.Zero || handle.ToInt32() == -1; }
     }
 }

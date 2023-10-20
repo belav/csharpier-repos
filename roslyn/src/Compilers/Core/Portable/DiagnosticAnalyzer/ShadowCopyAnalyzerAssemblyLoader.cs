@@ -45,11 +45,12 @@ namespace Microsoft.CodeAnalysis
 
 #if NETCOREAPP
         public ShadowCopyAnalyzerAssemblyLoader(string baseDirectory)
-            : this(null, baseDirectory)
-        {
-        }
+            : this(null, baseDirectory) { }
 
-        public ShadowCopyAnalyzerAssemblyLoader(AssemblyLoadContext? compilerLoadContext, string baseDirectory)
+        public ShadowCopyAnalyzerAssemblyLoader(
+            AssemblyLoadContext? compilerLoadContext,
+            string baseDirectory
+        )
             : base(compilerLoadContext, AnalyzerLoadOption.LoadFromDisk)
 #else
         public ShadowCopyAnalyzerAssemblyLoader(string baseDirectory)
@@ -62,7 +63,9 @@ namespace Microsoft.CodeAnalysis
 
             _baseDirectory = baseDirectory;
             _shadowCopyDirectoryAndMutex = new Lazy<(string directory, Mutex)>(
-                () => CreateUniqueDirectoryForProcess(), LazyThreadSafetyMode.ExecutionAndPublication);
+                () => CreateUniqueDirectoryForProcess(),
+                LazyThreadSafetyMode.ExecutionAndPublication
+            );
 
             DeleteLeftoverDirectoriesTask = Task.Run(DeleteLeftoverDirectories);
         }
@@ -143,7 +146,9 @@ namespace Microsoft.CodeAnalysis
             CopyFile(fullPath, shadowCopyPath);
 
             string originalDirectory = Path.GetDirectoryName(fullPath)!;
-            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileNameWithExtension);
+            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(
+                fileNameWithExtension
+            );
             string resourcesNameWithoutExtension = fileNameWithoutExtension + ".resources";
             string resourcesNameWithExtension = resourcesNameWithoutExtension + ".dll";
 
@@ -154,14 +159,27 @@ namespace Microsoft.CodeAnalysis
                 string resourcesPath = Path.Combine(directory, resourcesNameWithExtension);
                 if (File.Exists(resourcesPath))
                 {
-                    string resourcesShadowCopyPath = Path.Combine(assemblyDirectory, directoryName, resourcesNameWithExtension);
+                    string resourcesShadowCopyPath = Path.Combine(
+                        assemblyDirectory,
+                        directoryName,
+                        resourcesNameWithExtension
+                    );
                     CopyFile(resourcesPath, resourcesShadowCopyPath);
                 }
 
-                resourcesPath = Path.Combine(directory, resourcesNameWithoutExtension, resourcesNameWithExtension);
+                resourcesPath = Path.Combine(
+                    directory,
+                    resourcesNameWithoutExtension,
+                    resourcesNameWithExtension
+                );
                 if (File.Exists(resourcesPath))
                 {
-                    string resourcesShadowCopyPath = Path.Combine(assemblyDirectory, directoryName, resourcesNameWithoutExtension, resourcesNameWithExtension);
+                    string resourcesShadowCopyPath = Path.Combine(
+                        assemblyDirectory,
+                        directoryName,
+                        resourcesNameWithoutExtension,
+                        resourcesNameWithExtension
+                    );
                     CopyFile(resourcesPath, resourcesShadowCopyPath);
                 }
             }
@@ -174,7 +192,9 @@ namespace Microsoft.CodeAnalysis
             var directory = Path.GetDirectoryName(shadowCopyPath);
             if (directory is null)
             {
-                throw new ArgumentException($"Shadow copy path '{shadowCopyPath}' must not be the root directory");
+                throw new ArgumentException(
+                    $"Shadow copy path '{shadowCopyPath}' must not be the root directory"
+                );
             }
             Directory.CreateDirectory(directory);
 
@@ -187,7 +207,12 @@ namespace Microsoft.CodeAnalysis
         {
             DirectoryInfo directory = new DirectoryInfo(directoryPath);
 
-            foreach (var file in directory.EnumerateFiles(searchPattern: "*", searchOption: SearchOption.AllDirectories))
+            foreach (
+                var file in directory.EnumerateFiles(
+                    searchPattern: "*",
+                    searchOption: SearchOption.AllDirectories
+                )
+            )
             {
                 ClearReadOnlyFlagOnFile(file);
             }
@@ -212,7 +237,10 @@ namespace Microsoft.CodeAnalysis
         {
             int directoryId = Interlocked.Increment(ref _assemblyDirectoryId);
 
-            string directory = Path.Combine(_shadowCopyDirectoryAndMutex.Value.directory, directoryId.ToString());
+            string directory = Path.Combine(
+                _shadowCopyDirectoryAndMutex.Value.directory,
+                directoryId.ToString()
+            );
 
             Directory.CreateDirectory(directory);
             return directory;

@@ -15,7 +15,10 @@ namespace System.Reflection.Tests
         [Fact]
         public void ToStringFieldType()
         {
-            Assert.Equal("Int32 int_field", typeof(FieldInfoTests).GetField("int_field").ToString());
+            Assert.Equal(
+                "Int32 int_field",
+                typeof(FieldInfoTests).GetField("int_field").ToString()
+            );
         }
     }
 }

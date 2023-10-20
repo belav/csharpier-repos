@@ -24,24 +24,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EndToEnd
     public class EndToEndTests : EmitMetadataTestBase
     {
         /// <summary>
-        /// These tests are very sensitive to stack size hence we use a fresh thread to ensure there 
-        /// is a consistent stack size for them to execute in. 
+        /// These tests are very sensitive to stack size hence we use a fresh thread to ensure there
+        /// is a consistent stack size for them to execute in.
         /// </summary>
         /// <param name="action"></param>
         private static void RunInThread(Action action, TimeSpan? timeout = null)
         {
             Exception exception = null;
-            var thread = new System.Threading.Thread(() =>
-            {
-                try
+            var thread = new System.Threading.Thread(
+                () =>
                 {
-                    action();
-                }
-                catch (Exception ex)
-                {
-                    exception = ex;
-                }
-            }, 0);
+                    try
+                    {
+                        action();
+                    }
+                    catch (Exception ex)
+                    {
+                        exception = ex;
+                    }
+                },
+                0
+            );
 
             thread.Start();
             if (timeout is { } t && !Debugger.IsAttached)
@@ -110,10 +113,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EndToEnd
             }
         }
 
-        // This test is a canary attempting to make sure that we don't regress the # of fluent calls that 
-        // the compiler can handle. 
+        // This test is a canary attempting to make sure that we don't regress the # of fluent calls that
+        // the compiler can handle.
         [WorkItem(16669, "https://github.com/dotnet/roslyn/issues/16669")]
-        [ConditionalFact(typeof(WindowsOrLinuxOnly)), WorkItem(34880, "https://github.com/dotnet/roslyn/issues/34880")]
+        [
+            ConditionalFact(typeof(WindowsOrLinuxOnly)),
+            WorkItem(34880, "https://github.com/dotnet/roslyn/issues/34880")
+        ]
         public void OverflowOnFluentCall()
         {
             int numberFluentCalls = (IntPtr.Size, ExecutionConditionUtil.Configuration) switch
@@ -122,7 +128,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EndToEnd
                 (4, ExecutionConfiguration.Release) => 4000,
                 (8, ExecutionConfiguration.Debug) => 4000,
                 (8, ExecutionConfiguration.Release) => 4000,
-                _ => throw new Exception($"Unexpected configuration {IntPtr.Size * 8}-bit {ExecutionConditionUtil.Configuration}")
+                _
+                    => throw new Exception(
+                        $"Unexpected configuration {IntPtr.Size * 8}-bit {ExecutionConditionUtil.Configuration}"
+                    )
             };
 
             // <path>\xunit.console.exe "<path>\CSharpCompilerEmitTest\Roslyn.Compilers.CSharp.Emit.UnitTests.dll"  -noshadow -verbose -class "Microsoft.CodeAnalysis.CSharp.UnitTests.Emit.EndToEndTests"
@@ -140,22 +149,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EndToEnd
             {
                 var builder = new StringBuilder();
                 builder.AppendLine(
-        @"class C {
+                    @"class C {
     C M(string x) { return this; }
     void M2() {
         global::C.GetC()
-");
+"
+                );
                 for (int i = 0; i < depth; i++)
                 {
                     builder.AppendLine(@"            .M(""test"")");
                 }
                 builder.AppendLine(
-                   @"            .M(""test"");
+                    @"            .M(""test"");
     }
 
     static C GetC() => new C();
 }
-");
+"
+                );
 
                 var source = builder.ToString();
                 RunInThread(() =>
@@ -168,19 +179,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EndToEnd
             }
         }
 
-        // This test is a canary attempting to make sure that we don't regress the # of fluent calls that 
-        // the compiler can handle. 
+        // This test is a canary attempting to make sure that we don't regress the # of fluent calls that
+        // the compiler can handle.
         [Fact, WorkItem("https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1874763")]
         public void OverflowOnFluentCall_ExtensionMethods()
         {
-            int numberFluentCalls = (IntPtr.Size, ExecutionConditionUtil.Configuration, RuntimeUtilities.IsDesktopRuntime) switch
+            int numberFluentCalls = (
+                IntPtr.Size,
+                ExecutionConditionUtil.Configuration,
+                RuntimeUtilities.IsDesktopRuntime
+            ) switch
             {
                 (8, ExecutionConfiguration.Debug, false) => 750,
                 (8, ExecutionConfiguration.Release, false) => 750, // Should be ~3_400, but is flaky.
                 (4, ExecutionConfiguration.Release, true) => 1_600,
                 (8, ExecutionConfiguration.Debug, true) => 1_100,
                 (8, ExecutionConfiguration.Release, true) => 3_300,
-                _ => throw new Exception($"Unexpected configuration {IntPtr.Size * 8}-bit {ExecutionConditionUtil.Configuration}, Desktop: {RuntimeUtilities.IsDesktopRuntime}")
+                _
+                    => throw new Exception(
+                        $"Unexpected configuration {IntPtr.Size * 8}-bit {ExecutionConditionUtil.Configuration}, Desktop: {RuntimeUtilities.IsDesktopRuntime}"
+                    )
             };
 
             // Un-comment the call below to figure out the new limits.
@@ -210,7 +228,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EndToEnd
                             e = new AggregateException(e, innerException);
                         }
 
-                        throw new Exception($"Depth: {i}, Bytes: {IntPtr.Size}, Config: {ExecutionConditionUtil.Configuration}, Desktop: {RuntimeUtilities.IsDesktopRuntime}", e);
+                        throw new Exception(
+                            $"Depth: {i}, Bytes: {IntPtr.Size}, Config: {ExecutionConditionUtil.Configuration}, Desktop: {RuntimeUtilities.IsDesktopRuntime}",
+                            e
+                        );
                     }
                 }
             }
@@ -218,7 +239,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EndToEnd
             void tryCompileDeepFluentCalls(int depth)
             {
                 var builder = new StringBuilder();
-                builder.AppendLine("""
+                builder.AppendLine(
+                    """
                     static class E
                     {
                         public static C M(this C c, string x) { return c; }
@@ -229,7 +251,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EndToEnd
                         void M2()
                         {
                             GetC()
-                    """);
+                    """
+                );
                 for (int i = 0; i < depth; i++)
                 {
                     builder.AppendLine(""".M("test")""");
@@ -259,7 +282,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EndToEnd
                 (4, ExecutionConfiguration.Release) => 1290, // 1290
                 (8, ExecutionConfiguration.Debug) => 270, // 170
                 (8, ExecutionConfiguration.Release) => 730, // 730
-                _ => throw new Exception($"Unexpected configuration {IntPtr.Size * 8}-bit {ExecutionConditionUtil.Configuration}")
+                _
+                    => throw new Exception(
+                        $"Unexpected configuration {IntPtr.Size * 8}-bit {ExecutionConditionUtil.Configuration}"
+                    )
             };
 
             // Un-comment loop below and use above commands to figure out the new limits
@@ -277,7 +303,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EndToEnd
             void runDeeplyNestedGenericTest(int nestingLevel)
             {
                 var builder = new StringBuilder();
-                builder.AppendLine(@"
+                builder.AppendLine(
+                    @"
 #pragma warning disable 168 // Unused local
 using System;
 
@@ -285,7 +312,8 @@ public class Test
 {
     public static void Main(string[] args)
     {
-");
+"
+                );
 
                 for (var i = 0; i < nestingLevel; i++)
                 {
@@ -297,10 +325,12 @@ public class Test
                 }
 
                 builder.AppendLine(" local;");
-                builder.AppendLine(@"
+                builder.AppendLine(
+                    @"
         Console.WriteLine(""Pass"");
     }
-}");
+}"
+                );
 
                 for (int i = 0; i < nestingLevel; i++)
                 {
@@ -314,12 +344,19 @@ public class Test
                 var source = builder.ToString();
                 RunInThread(() =>
                 {
-                    var compilation = CreateCompilation(source, options: TestOptions.DebugExe.WithConcurrentBuild(false));
+                    var compilation = CreateCompilation(
+                        source,
+                        options: TestOptions.DebugExe.WithConcurrentBuild(false)
+                    );
                     compilation.VerifyDiagnostics();
 
-                    // PEVerify is skipped here as it doesn't scale to this level of nested generics. After 
+                    // PEVerify is skipped here as it doesn't scale to this level of nested generics. After
                     // about 600 levels of nesting it will not return in any reasonable amount of time.
-                    CompileAndVerify(compilation, expectedOutput: "Pass", verify: Verification.Skipped);
+                    CompileAndVerify(
+                        compilation,
+                        expectedOutput: "Pass",
+                        verify: Verification.Skipped
+                    );
                 });
             }
         }
@@ -350,10 +387,13 @@ public class Test
             var source = string.Join(Environment.NewLine, declarations);
             var options = TestOptions.DebugDll.WithConcurrentBuild(concurrent);
 
-            RunInThread(() =>
-            {
-                CompileAndVerify(source, options: options).VerifyDiagnostics();
-            }, timeout: TimeSpan.FromSeconds(10));
+            RunInThread(
+                () =>
+                {
+                    CompileAndVerify(source, options: options).VerifyDiagnostics();
+                },
+                timeout: TimeSpan.FromSeconds(10)
+            );
         }
 
         [Theory, CombinatorialData, WorkItem("https://github.com/dotnet/roslyn/issues/69515")]
@@ -379,7 +419,9 @@ public class Test
                 """;
             for (int i = 1; i < number; i++)
             {
-                declarations[i] = $"""
+                declarations[
+                    i
+                ] = $"""
                     Class C{i}(Of T{i})
                         Inherits C{i - 1}(Of T{i})
                     End Class
@@ -392,13 +434,18 @@ public class Test
             }
 
             var source = string.Join(Environment.NewLine, declarations);
-            var options = new VisualBasic.VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
-                .WithConcurrentBuild(concurrent);
+            var options = new VisualBasic.VisualBasicCompilationOptions(
+                OutputKind.DynamicallyLinkedLibrary
+            ).WithConcurrentBuild(concurrent);
 
-            RunInThread(() =>
-            {
-                CreateVisualBasicCompilation(source, compilationOptions: options).VerifyDiagnostics();
-            }, timeout: TimeSpan.FromSeconds(10));
+            RunInThread(
+                () =>
+                {
+                    CreateVisualBasicCompilation(source, compilationOptions: options)
+                        .VerifyDiagnostics();
+                },
+                timeout: TimeSpan.FromSeconds(10)
+            );
         }
 
         [ConditionalFact(typeof(WindowsOrLinuxOnly), typeof(NoIOperationValidation))]
@@ -410,7 +457,10 @@ public class Test
                 (4, ExecutionConfiguration.Release) => 1650,
                 (8, ExecutionConfiguration.Debug) => 200,
                 (8, ExecutionConfiguration.Release) => 780,
-                _ => throw new Exception($"Unexpected configuration {IntPtr.Size * 8}-bit {ExecutionConditionUtil.Configuration}")
+                _
+                    => throw new Exception(
+                        $"Unexpected configuration {IntPtr.Size * 8}-bit {ExecutionConditionUtil.Configuration}"
+                    )
             };
 
             RunTest(nestingLevel, runTest);
@@ -419,28 +469,34 @@ public class Test
             {
                 var builder = new StringBuilder();
                 builder.AppendLine(
-@"class Program
+                    @"class Program
 {
     static bool F(int i) => true;
     static void Main()
-    {");
+    {"
+                );
                 for (int i = 0; i < nestingLevel; i++)
                 {
                     builder.AppendLine(
-$@"        if (F({i}))
-        {{");
+                        $@"        if (F({i}))
+        {{"
+                    );
                 }
                 for (int i = 0; i < nestingLevel; i++)
                 {
                     builder.AppendLine("        }");
                 }
                 builder.AppendLine(
-@"    }
-}");
+                    @"    }
+}"
+                );
                 var source = builder.ToString();
                 RunInThread(() =>
                 {
-                    var comp = CreateCompilation(source, options: TestOptions.DebugDll.WithConcurrentBuild(false));
+                    var comp = CreateCompilation(
+                        source,
+                        options: TestOptions.DebugDll.WithConcurrentBuild(false)
+                    );
                     comp.VerifyDiagnostics();
                 });
             }
@@ -456,7 +512,10 @@ $@"        if (F({i}))
                 (4, ExecutionConfiguration.Release) => 1100,
                 (8, ExecutionConfiguration.Debug) => 180,
                 (8, ExecutionConfiguration.Release) => 400,
-                _ => throw new Exception($"Unexpected configuration {IntPtr.Size * 8}-bit {ExecutionConditionUtil.Configuration}")
+                _
+                    => throw new Exception(
+                        $"Unexpected configuration {IntPtr.Size * 8}-bit {ExecutionConditionUtil.Configuration}"
+                    )
             };
 
             RunTest(n, runTest);
@@ -473,14 +532,20 @@ $@"        if (F({i}))
                 {
                     int next = (i == n) ? 0 : i + 1;
                     sourceBuilder.AppendLine($"class C{i}<T> where T : C{next}<T> {{ }}");
-                    diagnosticsBuilder.Add(Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "T").WithArguments($"C{i}<T>", $"C{next}<T>", "T", "T"));
+                    diagnosticsBuilder.Add(
+                        Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "T")
+                            .WithArguments($"C{i}<T>", $"C{next}<T>", "T", "T")
+                    );
                 }
                 var source = sourceBuilder.ToString();
                 var diagnostics = diagnosticsBuilder.ToArrayAndFree();
 
                 RunInThread(() =>
                 {
-                    var comp = CreateCompilation(source, options: TestOptions.DebugDll.WithConcurrentBuild(false));
+                    var comp = CreateCompilation(
+                        source,
+                        options: TestOptions.DebugDll.WithConcurrentBuild(false)
+                    );
                     var type = comp.GetMember<NamedTypeSymbol>("C0");
                     var typeParameter = type.TypeParameters[0];
                     Assert.True(typeParameter.IsReferenceType);
@@ -489,14 +554,22 @@ $@"        if (F({i}))
             }
         }
 
-        [ConditionalFact(typeof(WindowsOrMacOSOnly), Reason = "https://github.com/dotnet/roslyn/issues/69210"), WorkItem("https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1819416")]
+        [
+            ConditionalFact(
+                typeof(WindowsOrMacOSOnly),
+                Reason = "https://github.com/dotnet/roslyn/issues/69210"
+            ),
+            WorkItem("https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1819416")
+        ]
         public void LongInitializerList()
         {
             var sb = new StringBuilder();
-            sb.AppendLine("""
+            sb.AppendLine(
+                """
                     _ = new System.Collections.Generic.Dictionary<string, string>
                     {
-                    """);
+                    """
+            );
 
             for (int i = 0; i < 100; i++)
             {
@@ -514,7 +587,10 @@ $@"        if (F({i}))
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
 
-            var literals = tree.GetRoot().DescendantNodes().OfType<LiteralExpressionSyntax>().ToArray();
+            var literals = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<LiteralExpressionSyntax>()
+                .ToArray();
             Assert.Equal(200, literals.Length);
             foreach (var literal in literals)
             {
@@ -547,7 +623,9 @@ $@"        if (F({i}))
 
             files.Add((builder.ToString(), "Program.cs"));
 
-            files.Add(("""
+            files.Add(
+                (
+                    """
                 class C
                 {
                     public static void M() => throw null!;
@@ -560,11 +638,16 @@ $@"        if (F({i}))
                         public InterceptsLocationAttribute(string path, int line, int column) { }
                     }
                 }
-                """, "C.cs"));
+                """,
+                    "C.cs"
+                )
+            );
 
             for (int i = 0; i < numberOfInterceptors; i++)
             {
-                files.Add(($$"""
+                files.Add(
+                    (
+                        $$"""
                     using System;
                     using System.Runtime.CompilerServices;
 
@@ -576,10 +659,19 @@ $@"        if (F({i}))
                             Console.WriteLine({{i}});
                         }
                     }
-                    """, $"C{i}.cs"));
+                    """,
+                        $"C{i}.cs"
+                    )
+                );
             }
 
-            var verifier = CompileAndVerify(files.ToArrayAndFree(), parseOptions: TestOptions.Regular.WithFeature("InterceptorsPreviewNamespaces", "global"), expectedOutput: makeExpectedOutput());
+            var verifier = CompileAndVerify(
+                files.ToArrayAndFree(),
+                parseOptions: TestOptions
+                    .Regular
+                    .WithFeature("InterceptorsPreviewNamespaces", "global"),
+                expectedOutput: makeExpectedOutput()
+            );
             verifier.VerifyDiagnostics();
 
             string makeExpectedOutput()
@@ -633,13 +725,15 @@ $@"        if (F({i}))
             }
 
             // Local functions should be similarly fast as lambdas.
-            var inner = localFunctions ? """
+            var inner = localFunctions
+                ? """
                 M2(x, L0);
                 static I0 L0(string arg) {
                     arg = arg + "0";
                     return default;
                 }
-                """ : """
+                """
+                : """
                 M2(x, static I0 (string arg) => {
                     arg = arg + "0";
                     return default;
@@ -660,14 +754,20 @@ $@"        if (F({i}))
                     }
                 }
                 """;
-            RunInThread(() =>
-            {
-                var comp = CreateCompilation(source, options: TestOptions.DebugDll.WithConcurrentBuild(false));
-                var data = new LambdaBindingData();
-                comp.TestOnlyCompilationData = data;
-                comp.VerifyDiagnostics();
-                Assert.Equal(localFunctions ? 20 : 40, data.LambdaBindingCount);
-            }, timeout: TimeSpan.FromSeconds(5));
+            RunInThread(
+                () =>
+                {
+                    var comp = CreateCompilation(
+                        source,
+                        options: TestOptions.DebugDll.WithConcurrentBuild(false)
+                    );
+                    var data = new LambdaBindingData();
+                    comp.TestOnlyCompilationData = data;
+                    comp.VerifyDiagnostics();
+                    Assert.Equal(localFunctions ? 20 : 40, data.LambdaBindingCount);
+                },
+                timeout: TimeSpan.FromSeconds(5)
+            );
         }
     }
 }

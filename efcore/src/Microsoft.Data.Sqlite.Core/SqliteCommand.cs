@@ -28,7 +28,8 @@ namespace Microsoft.Data.Sqlite
     {
         private SqliteParameterCollection? _parameters;
 
-        private readonly List<(sqlite3_stmt Statement, int ParamCount)> _preparedStatements = new(1);
+        private readonly List<(sqlite3_stmt Statement, int ParamCount)> _preparedStatements =
+            new(1);
         private SqliteConnection? _connection;
         private string _commandText = string.Empty;
         private bool _prepared;
@@ -37,16 +38,13 @@ namespace Microsoft.Data.Sqlite
         /// <summary>
         ///     Initializes a new instance of the <see cref="SqliteCommand" /> class.
         /// </summary>
-        public SqliteCommand()
-        {
-        }
+        public SqliteCommand() { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="SqliteCommand" /> class.
         /// </summary>
         /// <param name="commandText">The SQL to execute against the database.</param>
-        public SqliteCommand(string? commandText)
-            => CommandText = commandText;
+        public SqliteCommand(string? commandText) => CommandText = commandText;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="SqliteCommand" /> class.
@@ -65,9 +63,12 @@ namespace Microsoft.Data.Sqlite
         /// <param name="commandText">The SQL to execute against the database.</param>
         /// <param name="connection">The connection used by the command.</param>
         /// <param name="transaction">The transaction within which the command executes.</param>
-        public SqliteCommand(string? commandText, SqliteConnection? connection, SqliteTransaction? transaction)
-            : this(commandText, connection)
-            => Transaction = transaction;
+        public SqliteCommand(
+            string? commandText,
+            SqliteConnection? connection,
+            SqliteTransaction? transaction
+        )
+            : this(commandText, connection) => Transaction = transaction;
 
         /// <summary>
         ///     Gets or sets a value indicating how <see cref="CommandText" /> is interpreted. Only
@@ -99,7 +100,9 @@ namespace Microsoft.Data.Sqlite
             {
                 if (DataReader != null)
                 {
-                    throw new InvalidOperationException(Resources.SetRequiresNoOpenReader(nameof(CommandText)));
+                    throw new InvalidOperationException(
+                        Resources.SetRequiresNoOpenReader(nameof(CommandText))
+                    );
                 }
 
                 if (value != _commandText)
@@ -121,7 +124,9 @@ namespace Microsoft.Data.Sqlite
             {
                 if (DataReader != null)
                 {
-                    throw new InvalidOperationException(Resources.SetRequiresNoOpenReader(nameof(Connection)));
+                    throw new InvalidOperationException(
+                        Resources.SetRequiresNoOpenReader(nameof(Connection))
+                    );
                 }
 
                 if (value != _connection)
@@ -166,15 +171,14 @@ namespace Microsoft.Data.Sqlite
         /// </summary>
         /// <value>The collection of parameters used by the command.</value>
         /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/parameters">Parameters</seealso>
-        public new virtual SqliteParameterCollection Parameters
-            => _parameters ??= new SqliteParameterCollection();
+        public new virtual SqliteParameterCollection Parameters =>
+            _parameters ??= new SqliteParameterCollection();
 
         /// <summary>
         ///     Gets the collection of parameters used by the command.
         /// </summary>
         /// <value>The collection of parameters used by the command.</value>
-        protected override DbParameterCollection DbParameterCollection
-            => Parameters;
+        protected override DbParameterCollection DbParameterCollection => Parameters;
 
         /// <summary>
         ///     Gets or sets the number of seconds to wait before terminating the attempt to execute the command.
@@ -232,15 +236,13 @@ namespace Microsoft.Data.Sqlite
         ///     Creates a new parameter.
         /// </summary>
         /// <returns>The new parameter.</returns>
-        public new virtual SqliteParameter CreateParameter()
-            => new();
+        public new virtual SqliteParameter CreateParameter() => new();
 
         /// <summary>
         ///     Creates a new parameter.
         /// </summary>
         /// <returns>The new parameter.</returns>
-        protected override DbParameter CreateDbParameter()
-            => CreateParameter();
+        protected override DbParameter CreateDbParameter() => CreateParameter();
 
         /// <summary>
         ///     Creates a prepared version of the command on the database.
@@ -249,7 +251,9 @@ namespace Microsoft.Data.Sqlite
         {
             if (_connection?.State != ConnectionState.Open)
             {
-                throw new InvalidOperationException(Resources.CallRequiresOpenConnection(nameof(Prepare)));
+                throw new InvalidOperationException(
+                    Resources.CallRequiresOpenConnection(nameof(Prepare))
+                );
             }
 
             if (_prepared)
@@ -258,9 +262,7 @@ namespace Microsoft.Data.Sqlite
             }
 
             using var enumerator = PrepareAndEnumerateStatements().GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-            }
+            while (enumerator.MoveNext()) { }
         }
 
         /// <summary>
@@ -270,8 +272,8 @@ namespace Microsoft.Data.Sqlite
         /// <exception cref="SqliteException">A SQLite error occurs during execution.</exception>
         /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/database-errors">Database Errors</seealso>
         /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/batching">Batching</seealso>
-        public new virtual SqliteDataReader ExecuteReader()
-            => ExecuteReader(CommandBehavior.Default);
+        public new virtual SqliteDataReader ExecuteReader() =>
+            ExecuteReader(CommandBehavior.Default);
 
         /// <summary>
         ///     Executes the <see cref="CommandText" /> against the database and returns a data reader.
@@ -290,7 +292,9 @@ namespace Microsoft.Data.Sqlite
 
             if (_connection?.State != ConnectionState.Open)
             {
-                throw new InvalidOperationException(Resources.CallRequiresOpenConnection(nameof(ExecuteReader)));
+                throw new InvalidOperationException(
+                    Resources.CallRequiresOpenConnection(nameof(ExecuteReader))
+                );
             }
 
             if (Transaction != _connection.Transaction)
@@ -298,7 +302,8 @@ namespace Microsoft.Data.Sqlite
                 throw new InvalidOperationException(
                     Transaction == null
                         ? Resources.TransactionRequired
-                        : Resources.TransactionConnectionMismatch);
+                        : Resources.TransactionConnectionMismatch
+                );
             }
 
             if (_connection.Transaction?.ExternalRollback == true)
@@ -316,9 +321,11 @@ namespace Microsoft.Data.Sqlite
 
         private IEnumerable<sqlite3_stmt> GetStatements()
         {
-            foreach ((var stmt, var expectedParams) in !_prepared
-                ? PrepareAndEnumerateStatements()
-                : _preparedStatements)
+            foreach (
+                (var stmt, var expectedParams) in !_prepared
+                    ? PrepareAndEnumerateStatements()
+                    : _preparedStatements
+            )
             {
                 var boundParams = _parameters?.Bind(stmt) ?? 0;
 
@@ -329,8 +336,12 @@ namespace Microsoft.Data.Sqlite
                     {
                         var name = sqlite3_bind_parameter_name(stmt, i).utf8_to_string();
 
-                        if (_parameters != null
-                            && !_parameters.Cast<SqliteParameter>().Any(p => p.ParameterName == name))
+                        if (
+                            _parameters != null
+                            && !_parameters
+                                .Cast<SqliteParameter>()
+                                .Any(p => p.ParameterName == name)
+                        )
                         {
                             unboundParams.Add(name);
                         }
@@ -338,7 +349,9 @@ namespace Microsoft.Data.Sqlite
 
                     if (sqlite3_libversion_number() < 3028000 || sqlite3_stmt_isexplain(stmt) == 0)
                     {
-                        throw new InvalidOperationException(Resources.MissingParameters(string.Join(", ", unboundParams)));
+                        throw new InvalidOperationException(
+                            Resources.MissingParameters(string.Join(", ", unboundParams))
+                        );
                     }
                 }
 
@@ -351,8 +364,8 @@ namespace Microsoft.Data.Sqlite
         /// </summary>
         /// <param name="behavior">A description of query's results and its effect on the database.</param>
         /// <returns>The data reader.</returns>
-        protected override DbDataReader ExecuteDbDataReader(CommandBehavior behavior)
-            => ExecuteReader(behavior);
+        protected override DbDataReader ExecuteDbDataReader(CommandBehavior behavior) =>
+            ExecuteReader(behavior);
 
         /// <summary>
         ///     Executes the <see cref="CommandText" /> asynchronously against the database and returns a data reader.
@@ -361,8 +374,8 @@ namespace Microsoft.Data.Sqlite
         /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/async">Async Limitations</seealso>
         /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/batching">Batching</seealso>
         /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/database-errors">Database Errors</seealso>
-        public new virtual Task<SqliteDataReader> ExecuteReaderAsync()
-            => ExecuteReaderAsync(CommandBehavior.Default, CancellationToken.None);
+        public new virtual Task<SqliteDataReader> ExecuteReaderAsync() =>
+            ExecuteReaderAsync(CommandBehavior.Default, CancellationToken.None);
 
         /// <summary>
         ///     Executes the <see cref="CommandText" /> asynchronously against the database and returns a data reader.
@@ -373,8 +386,9 @@ namespace Microsoft.Data.Sqlite
         /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/batching">Batching</seealso>
         /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/database-errors">Database Errors</seealso>
         /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken"/> is canceled.</exception>
-        public new virtual Task<SqliteDataReader> ExecuteReaderAsync(CancellationToken cancellationToken)
-            => ExecuteReaderAsync(CommandBehavior.Default, cancellationToken);
+        public new virtual Task<SqliteDataReader> ExecuteReaderAsync(
+            CancellationToken cancellationToken
+        ) => ExecuteReaderAsync(CommandBehavior.Default, cancellationToken);
 
         /// <summary>
         ///     Executes the <see cref="CommandText" /> asynchronously against the database and returns a data reader.
@@ -384,8 +398,8 @@ namespace Microsoft.Data.Sqlite
         /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/async">Async Limitations</seealso>
         /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/batching">Batching</seealso>
         /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/database-errors">Database Errors</seealso>
-        public new virtual Task<SqliteDataReader> ExecuteReaderAsync(CommandBehavior behavior)
-            => ExecuteReaderAsync(behavior, CancellationToken.None);
+        public new virtual Task<SqliteDataReader> ExecuteReaderAsync(CommandBehavior behavior) =>
+            ExecuteReaderAsync(behavior, CancellationToken.None);
 
         /// <summary>
         ///     Executes the <see cref="CommandText" /> asynchronously against the database and returns a data reader.
@@ -399,7 +413,8 @@ namespace Microsoft.Data.Sqlite
         /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken"/> is canceled.</exception>
         public new virtual Task<SqliteDataReader> ExecuteReaderAsync(
             CommandBehavior behavior,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -416,8 +431,8 @@ namespace Microsoft.Data.Sqlite
         /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken"/> is canceled.</exception>
         protected override async Task<DbDataReader> ExecuteDbDataReaderAsync(
             CommandBehavior behavior,
-            CancellationToken cancellationToken)
-            => await ExecuteReaderAsync(behavior, cancellationToken).ConfigureAwait(false);
+            CancellationToken cancellationToken
+        ) => await ExecuteReaderAsync(behavior, cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         ///     Executes the <see cref="CommandText" /> against the database.
@@ -429,7 +444,9 @@ namespace Microsoft.Data.Sqlite
         {
             if (_connection?.State != ConnectionState.Open)
             {
-                throw new InvalidOperationException(Resources.CallRequiresOpenConnection(nameof(ExecuteNonQuery)));
+                throw new InvalidOperationException(
+                    Resources.CallRequiresOpenConnection(nameof(ExecuteNonQuery))
+                );
             }
 
             var reader = ExecuteReader();
@@ -448,23 +465,24 @@ namespace Microsoft.Data.Sqlite
         {
             if (_connection?.State != ConnectionState.Open)
             {
-                throw new InvalidOperationException(Resources.CallRequiresOpenConnection(nameof(ExecuteScalar)));
+                throw new InvalidOperationException(
+                    Resources.CallRequiresOpenConnection(nameof(ExecuteScalar))
+                );
             }
 
             using var reader = ExecuteReader();
-            return reader.Read()
-                ? reader.GetValue(0)
-                : null;
+            return reader.Read() ? reader.GetValue(0) : null;
         }
 
         /// <summary>
         ///     Attempts to cancel the execution of the command. Does nothing.
         /// </summary>
-        public override void Cancel()
-        {
-        }
+        public override void Cancel() { }
 
-        private IEnumerable<(sqlite3_stmt Statement, int ParamCount)> PrepareAndEnumerateStatements()
+        private IEnumerable<(
+            sqlite3_stmt Statement,
+            int ParamCount
+        )> PrepareAndEnumerateStatements()
         {
             DisposePreparedStatements(disposing: false);
 
@@ -481,10 +499,22 @@ namespace Microsoft.Data.Sqlite
                 var timer = SharedStopwatch.StartNew();
 
                 ReadOnlySpan<byte> tail;
-                while (IsBusy(rc = sqlite3_prepare_v2(_connection!.Handle, sql.AsSpan(start), out stmt, out tail)))
+                while (
+                    IsBusy(
+                        rc = sqlite3_prepare_v2(
+                            _connection!.Handle,
+                            sql.AsSpan(start),
+                            out stmt,
+                            out tail
+                        )
+                    )
+                )
                 {
-                    if (CommandTimeout != 0
-                        && (totalElapsedTime + timer.Elapsed).TotalMilliseconds >= CommandTimeout * 1000L)
+                    if (
+                        CommandTimeout != 0
+                        && (totalElapsedTime + timer.Elapsed).TotalMilliseconds
+                            >= CommandTimeout * 1000L
+                    )
                     {
                         break;
                     }
@@ -514,16 +544,14 @@ namespace Microsoft.Data.Sqlite
                 _preparedStatements.Add(statementWithParams);
 
                 yield return statementWithParams;
-            }
-            while (start < byteCount);
+            } while (start < byteCount);
 
             _prepared = true;
         }
 
         private void DisposePreparedStatements(bool disposing = true)
         {
-            if (disposing
-                && DataReader != null)
+            if (disposing && DataReader != null)
             {
                 DataReader.Dispose();
                 DataReader = null;
@@ -542,7 +570,7 @@ namespace Microsoft.Data.Sqlite
             _prepared = false;
         }
 
-        private static bool IsBusy(int rc)
-            => rc is SQLITE_LOCKED or SQLITE_BUSY or SQLITE_LOCKED_SHAREDCACHE;
+        private static bool IsBusy(int rc) =>
+            rc is SQLITE_LOCKED or SQLITE_BUSY or SQLITE_LOCKED_SHAREDCACHE;
     }
 }

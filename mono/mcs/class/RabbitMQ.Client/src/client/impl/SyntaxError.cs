@@ -69,8 +69,12 @@ namespace RabbitMQ.Client.Impl
     /// illegal values for one or more fields. </summary>
     public class SyntaxError : HardProtocolException
     {
-        public SyntaxError(string message) : base(message) { }
+        public SyntaxError(string message)
+            : base(message) { }
 
-        public override ushort ReplyCode { get { return CommonFraming.Constants.SyntaxError; } }
+        public override ushort ReplyCode
+        {
+            get { return CommonFraming.Constants.SyntaxError; }
+        }
     }
 }

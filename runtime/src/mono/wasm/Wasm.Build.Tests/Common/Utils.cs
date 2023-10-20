@@ -12,7 +12,14 @@ using Xunit.Abstractions;
 
 internal static class Utils
 {
-    public static void DirectoryCopy(string sourceDirName, string destDirName, Func<string, bool>? predicate=null, bool copySubDirs=true, bool silent=false, ITestOutputHelper? testOutput = null)
+    public static void DirectoryCopy(
+        string sourceDirName,
+        string destDirName,
+        Func<string, bool>? predicate = null,
+        bool copySubDirs = true,
+        bool silent = false,
+        ITestOutputHelper? testOutput = null
+    )
     {
         // Get the subdirectories for the specified directory.
         DirectoryInfo dir = new DirectoryInfo(sourceDirName);
@@ -20,8 +27,8 @@ internal static class Utils
         if (!dir.Exists)
         {
             throw new DirectoryNotFoundException(
-                "Source directory does not exist or could not be found: "
-                + sourceDirName);
+                "Source directory does not exist or could not be found: " + sourceDirName
+            );
         }
 
         DirectoryInfo[] dirs = dir.GetDirectories();
@@ -36,14 +43,14 @@ internal static class Utils
             string fullPath = file.ToString();
             if (predicate != null && !predicate(fullPath))
             {
-                 if (!silent)
-                     testOutput?.WriteLine($"Skipping {fullPath}");
+                if (!silent)
+                    testOutput?.WriteLine($"Skipping {fullPath}");
                 continue;
             }
 
             string tempPath = Path.Combine(destDirName, file.Name);
-             if (!silent)
-                 testOutput?.WriteLine($"Copying {fullPath} to {tempPath}");
+            if (!silent)
+                testOutput?.WriteLine($"Copying {fullPath} to {tempPath}");
             file.CopyTo(tempPath, false);
         }
 
@@ -57,5 +64,4 @@ internal static class Utils
             }
         }
     }
-
 }

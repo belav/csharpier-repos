@@ -22,11 +22,18 @@ internal sealed class LspFileChangeWatcher : IFileChangeWatcher
     private readonly IClientLanguageServerManager _clientLanguageServerManager;
     private readonly IAsynchronousOperationListener _asynchronousOperationListener;
 
-    public LspFileChangeWatcher(LanguageServerHost languageServerHost, IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider)
+    public LspFileChangeWatcher(
+        LanguageServerHost languageServerHost,
+        IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider
+    )
     {
-        _didChangeWatchedFilesHandler = languageServerHost.GetRequiredLspService<LspDidChangeWatchedFilesHandler>();
-        _clientLanguageServerManager = languageServerHost.GetRequiredLspService<IClientLanguageServerManager>();
-        _asynchronousOperationListener = asynchronousOperationListenerProvider.GetListener(FeatureAttribute.Workspace);
+        _didChangeWatchedFilesHandler =
+            languageServerHost.GetRequiredLspService<LspDidChangeWatchedFilesHandler>();
+        _clientLanguageServerManager =
+            languageServerHost.GetRequiredLspService<IClientLanguageServerManager>();
+        _asynchronousOperationListener = asynchronousOperationListenerProvider.GetListener(
+            FeatureAttribute.Workspace
+        );
 
         Contract.ThrowIfFalse(SupportsLanguageServerHost(languageServerHost));
     }
@@ -34,8 +41,13 @@ internal sealed class LspFileChangeWatcher : IFileChangeWatcher
     public static bool SupportsLanguageServerHost(LanguageServerHost languageServerHost)
     {
         // We can only use the LSP client for doing file watching if we support dynamic registration for it
-        var clientCapabilitiesProvider = languageServerHost.GetRequiredLspService<IInitializeManager>();
-        return clientCapabilitiesProvider.GetClientCapabilities().Workspace?.DidChangeWatchedFiles?.DynamicRegistration ?? false;
+        var clientCapabilitiesProvider =
+            languageServerHost.GetRequiredLspService<IInitializeManager>();
+        return clientCapabilitiesProvider
+                .GetClientCapabilities()
+                .Workspace
+                ?.DidChangeWatchedFiles
+                ?.DynamicRegistration ?? false;
     }
 
     public IFileChangeContext CreateContext(params WatchedDirectory[] watchedDirectories)
@@ -61,11 +73,16 @@ internal sealed class LspFileChangeWatcher : IFileChangeWatcher
 
         /// <summary>
         /// The list of file paths we're watching manually that were outside the directories being watched. The count in this case counts
-        /// the number of 
+        /// the number of
         /// </summary>
-        private readonly Dictionary<string, int> _watchedFiles = new Dictionary<string, int>(StringComparer.Ordinal);
+        private readonly Dictionary<string, int> _watchedFiles = new Dictionary<string, int>(
+            StringComparer.Ordinal
+        );
 
-        public FileChangeContext(ImmutableArray<WatchedDirectory> watchedDirectories, LspFileChangeWatcher lspFileChangeWatcher)
+        public FileChangeContext(
+            ImmutableArray<WatchedDirectory> watchedDirectories,
+            LspFileChangeWatcher lspFileChangeWatcher
+        )
         {
             _watchedDirectories = watchedDirectories;
             _lspFileChangeWatcher = lspFileChangeWatcher;
@@ -73,22 +90,36 @@ internal sealed class LspFileChangeWatcher : IFileChangeWatcher
             // If we have any watched directories, then watch those directories directly
             if (watchedDirectories.Any())
             {
-                var directoryWatches = watchedDirectories.Select(d => new FileSystemWatcher
-                {
-                    GlobPattern = new RelativePattern
-                    {
-                        BaseUri = ProtocolConversions.CreateAbsoluteUri(d.Path),
-                        Pattern = d.ExtensionFilter is not null ? "**/*" + d.ExtensionFilter : "**/*"
-                    }
-                }).ToArray();
+                var directoryWatches = watchedDirectories
+                    .Select(
+                        d =>
+                            new FileSystemWatcher
+                            {
+                                GlobPattern = new RelativePattern
+                                {
+                                    BaseUri = ProtocolConversions.CreateAbsoluteUri(d.Path),
+                                    Pattern = d.ExtensionFilter is not null
+                                        ? "**/*" + d.ExtensionFilter
+                                        : "**/*"
+                                }
+                            }
+                    )
+                    .ToArray();
 
-                _directoryWatchRegistration = new LspFileWatchRegistration(lspFileChangeWatcher, directoryWatches);
+                _directoryWatchRegistration = new LspFileWatchRegistration(
+                    lspFileChangeWatcher,
+                    directoryWatches
+                );
             }
 
-            _lspFileChangeWatcher._didChangeWatchedFilesHandler.NotificationRaised += WatchedFilesHandler_OnNotificationRaised;
+            _lspFileChangeWatcher._didChangeWatchedFilesHandler.NotificationRaised +=
+                WatchedFilesHandler_OnNotificationRaised;
         }
 
-        private void WatchedFilesHandler_OnNotificationRaised(object? sender, DidChangeWatchedFilesParams e)
+        private void WatchedFilesHandler_OnNotificationRaised(
+            object? sender,
+            DidChangeWatchedFilesParams e
+        )
         {
             foreach (var changedFile in e.Changes)
             {
@@ -96,7 +127,13 @@ internal sealed class LspFileChangeWatcher : IFileChangeWatcher
 
                 // Unfortunately the LSP protocol doesn't give us any hint of which of the file watches we might have sent to the client
                 // was the one that registered for this change, so we have to check paths to see if this one we should respond to.
-                if (WatchedDirectory.FilePathCoveredByWatchedDirectories(_watchedDirectories, filePath, StringComparison.Ordinal))
+                if (
+                    WatchedDirectory.FilePathCoveredByWatchedDirectories(
+                        _watchedDirectories,
+                        filePath,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     FileChanged?.Invoke(this, filePath);
                 }
@@ -118,14 +155,21 @@ internal sealed class LspFileChangeWatcher : IFileChangeWatcher
 
         public void Dispose()
         {
-            _lspFileChangeWatcher._didChangeWatchedFilesHandler.NotificationRaised -= WatchedFilesHandler_OnNotificationRaised;
+            _lspFileChangeWatcher._didChangeWatchedFilesHandler.NotificationRaised -=
+                WatchedFilesHandler_OnNotificationRaised;
             _directoryWatchRegistration?.Dispose();
         }
 
         public IWatchedFile EnqueueWatchingFile(string filePath)
         {
             // If we already have this file under our path, we may not have to do additional watching
-            if (WatchedDirectory.FilePathCoveredByWatchedDirectories(_watchedDirectories, filePath, StringComparison.OrdinalIgnoreCase))
+            if (
+                WatchedDirectory.FilePathCoveredByWatchedDirectories(
+                    _watchedDirectories,
+                    filePath,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
                 return NoOpWatchedFile.Instance;
 
             // Record that we're now watching this file
@@ -140,12 +184,18 @@ internal sealed class LspFileChangeWatcher : IFileChangeWatcher
                 // TODO: figure out how I just can do an absolute path watch
                 GlobPattern = new RelativePattern
                 {
-                    BaseUri = ProtocolConversions.CreateAbsoluteUri(Path.GetDirectoryName(filePath)!),
+                    BaseUri = ProtocolConversions.CreateAbsoluteUri(
+                        Path.GetDirectoryName(filePath)!
+                    ),
                     Pattern = Path.GetFileName(filePath)
                 }
             };
 
-            return new WatchedFile(filePath, new LspFileWatchRegistration(_lspFileChangeWatcher, fileSystemWatcher), this);
+            return new WatchedFile(
+                filePath,
+                new LspFileWatchRegistration(_lspFileChangeWatcher, fileSystemWatcher),
+                this
+            );
         }
 
         private void RemoveFileFromWatchList(string filePath)
@@ -167,7 +217,11 @@ internal sealed class LspFileChangeWatcher : IFileChangeWatcher
             private readonly LspFileWatchRegistration _fileWatchRegistration;
             private readonly FileChangeContext _fileChangeContext;
 
-            public WatchedFile(string filePath, LspFileWatchRegistration fileWatchRegistration, FileChangeContext fileChangeContext)
+            public WatchedFile(
+                string filePath,
+                LspFileWatchRegistration fileWatchRegistration,
+                FileChangeContext fileChangeContext
+            )
             {
                 _filePath = filePath;
                 _fileWatchRegistration = fileWatchRegistration;
@@ -193,7 +247,10 @@ internal sealed class LspFileChangeWatcher : IFileChangeWatcher
         private readonly CancellationTokenSource _cancellationTokenSource;
         private readonly Task _registrationTask;
 
-        public LspFileWatchRegistration(LspFileChangeWatcher changeWatcher, params FileSystemWatcher[] fileSystemWatchers)
+        public LspFileWatchRegistration(
+            LspFileChangeWatcher changeWatcher,
+            params FileSystemWatcher[] fileSystemWatchers
+        )
         {
             _changeWatcher = changeWatcher;
             _id = Guid.NewGuid().ToString();
@@ -215,9 +272,20 @@ internal sealed class LspFileChangeWatcher : IFileChangeWatcher
                 }
             };
 
-            var asyncToken = _changeWatcher._asynchronousOperationListener.BeginAsyncOperation(nameof(LspFileWatchRegistration));
-            _registrationTask = changeWatcher._clientLanguageServerManager.SendRequestAsync("client/registerCapability", registrationParams, _cancellationTokenSource.Token).AsTask();
-            _registrationTask.ReportNonFatalErrorUnlessCancelledAsync(_cancellationTokenSource.Token).CompletesAsyncOperation(asyncToken);
+            var asyncToken = _changeWatcher
+                ._asynchronousOperationListener
+                .BeginAsyncOperation(nameof(LspFileWatchRegistration));
+            _registrationTask = changeWatcher
+                ._clientLanguageServerManager
+                .SendRequestAsync(
+                    "client/registerCapability",
+                    registrationParams,
+                    _cancellationTokenSource.Token
+                )
+                .AsTask();
+            _registrationTask
+                .ReportNonFatalErrorUnlessCancelledAsync(_cancellationTokenSource.Token)
+                .CompletesAsyncOperation(asyncToken);
         }
 
         public void Dispose()
@@ -226,24 +294,41 @@ internal sealed class LspFileChangeWatcher : IFileChangeWatcher
             // means it never actually made it to the client, and fault would mean it never was actually created.
             _cancellationTokenSource.Cancel();
 
-            var asyncToken = _changeWatcher._asynchronousOperationListener.BeginAsyncOperation(nameof(LspFileWatchRegistration) + "." + nameof(Dispose));
+            var asyncToken = _changeWatcher
+                ._asynchronousOperationListener
+                .BeginAsyncOperation(nameof(LspFileWatchRegistration) + "." + nameof(Dispose));
 
-            _registrationTask.ContinueWith(async _ =>
-            {
-                var unregistrationParams = new UnregistrationParamsWithMisspelling()
-                {
-                    Unregistrations = new Unregistration[]
+            _registrationTask
+                .ContinueWith(
+                    async _ =>
                     {
-                        new Unregistration()
+                        var unregistrationParams = new UnregistrationParamsWithMisspelling()
                         {
-                            Id = _id,
-                            Method = "workspace/didChangeWatchedFiles"
-                        }
-                    }
-                };
+                            Unregistrations = new Unregistration[]
+                            {
+                                new Unregistration()
+                                {
+                                    Id = _id,
+                                    Method = "workspace/didChangeWatchedFiles"
+                                }
+                            }
+                        };
 
-                await _changeWatcher._clientLanguageServerManager.SendRequestAsync("client/unregisterCapability", unregistrationParams, CancellationToken.None);
-            }, CancellationToken.None, TaskContinuationOptions.OnlyOnRanToCompletion, TaskScheduler.Default).Unwrap().ReportNonFatalErrorAsync().CompletesAsyncOperation(asyncToken);
+                        await _changeWatcher
+                            ._clientLanguageServerManager
+                            .SendRequestAsync(
+                                "client/unregisterCapability",
+                                unregistrationParams,
+                                CancellationToken.None
+                            );
+                    },
+                    CancellationToken.None,
+                    TaskContinuationOptions.OnlyOnRanToCompletion,
+                    TaskScheduler.Default
+                )
+                .Unwrap()
+                .ReportNonFatalErrorAsync()
+                .CompletesAsyncOperation(asyncToken);
         }
     }
 }

@@ -9,19 +9,23 @@ namespace System.ServiceModel.WasHosting
     using System.ServiceModel.Channels;
     using System.ServiceModel.Activation;
 
-    [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUninstantiatedInternalClasses,
-        Justification = "Instantiated by ASP.NET")]
+    [SuppressMessage(
+        FxCop.Category.Performance,
+        FxCop.Rule.AvoidUninstantiatedInternalClasses,
+        Justification = "Instantiated by ASP.NET"
+    )]
     class MsmqIntegrationAppDomainProtocolHandler : BaseAppDomainProtocolHandler
     {
         public MsmqIntegrationAppDomainProtocolHandler()
-            : base(MsmqUri.FormatNameAddressTranslator.Scheme)
-        { }
+            : base(MsmqUri.FormatNameAddressTranslator.Scheme) { }
 
         protected override void OnStart()
         {
-            MsmqHostedTransportConfiguration configuration = HostedTransportConfigurationManager.GetConfiguration(MsmqUri.FormatNameAddressTranslator.Scheme) as MsmqHostedTransportConfiguration;
+            MsmqHostedTransportConfiguration configuration =
+                HostedTransportConfigurationManager.GetConfiguration(
+                    MsmqUri.FormatNameAddressTranslator.Scheme
+                ) as MsmqHostedTransportConfiguration;
             configuration.TransportManager.Start(OnMessageReceived);
         }
     }
 }
-

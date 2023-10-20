@@ -16,7 +16,9 @@ using Microsoft.CodeAnalysis.Editing;
 
 namespace Microsoft.CodeAnalysis.CodeGeneration
 {
-    internal abstract class CodeGenerationAbstractNamedTypeSymbol : CodeGenerationTypeSymbol, INamedTypeSymbol
+    internal abstract class CodeGenerationAbstractNamedTypeSymbol
+        : CodeGenerationTypeSymbol,
+            INamedTypeSymbol
     {
         public new INamedTypeSymbol OriginalDefinition { get; protected set; }
 
@@ -33,8 +35,18 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             string name,
             SpecialType specialType,
             NullableAnnotation nullableAnnotation,
-            ImmutableArray<CodeGenerationAbstractNamedTypeSymbol> typeMembers)
-            : base(containingAssembly, containingType, attributes, declaredAccessibility, modifiers, name, specialType, nullableAnnotation)
+            ImmutableArray<CodeGenerationAbstractNamedTypeSymbol> typeMembers
+        )
+            : base(
+                containingAssembly,
+                containingType,
+                attributes,
+                declaredAccessibility,
+                modifiers,
+                name,
+                specialType,
+                nullableAnnotation
+            )
         {
             this.TypeMembers = typeMembers;
 
@@ -46,14 +58,15 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         public override SymbolKind Kind => SymbolKind.NamedType;
 
-        public override void Accept(SymbolVisitor visitor)
-            => visitor.VisitNamedType(this);
+        public override void Accept(SymbolVisitor visitor) => visitor.VisitNamedType(this);
 
-        public override TResult Accept<TResult>(SymbolVisitor<TResult> visitor)
-            => visitor.VisitNamedType(this);
+        public override TResult Accept<TResult>(SymbolVisitor<TResult> visitor) =>
+            visitor.VisitNamedType(this);
 
-        public override TResult Accept<TArgument, TResult>(SymbolVisitor<TArgument, TResult> visitor, TArgument argument)
-            => visitor.VisitNamedType(this, argument);
+        public override TResult Accept<TArgument, TResult>(
+            SymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        ) => visitor.VisitNamedType(this, argument);
 
         public INamedTypeSymbol Construct(params ITypeSymbol[] typeArguments)
         {
@@ -63,13 +76,22 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             }
 
             return new CodeGenerationConstructedNamedTypeSymbol(
-                ConstructedFrom, typeArguments.ToImmutableArray(), this.TypeMembers);
+                ConstructedFrom,
+                typeArguments.ToImmutableArray(),
+                this.TypeMembers
+            );
         }
 
-        public INamedTypeSymbol Construct(ImmutableArray<ITypeSymbol> typeArguments, ImmutableArray<NullableAnnotation> typeArgumentNullableAnnotations)
+        public INamedTypeSymbol Construct(
+            ImmutableArray<ITypeSymbol> typeArguments,
+            ImmutableArray<NullableAnnotation> typeArgumentNullableAnnotations
+        )
         {
             return new CodeGenerationConstructedNamedTypeSymbol(
-                ConstructedFrom, typeArguments, this.TypeMembers);
+                ConstructedFrom,
+                typeArguments,
+                this.TypeMembers
+            );
         }
 
         public abstract int Arity { get; }
@@ -103,12 +125,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         public override string MetadataName
         {
-            get
-            {
-                return this.Arity > 0
-                    ? this.Name + "`" + Arity
-                    : base.MetadataName;
-            }
+            get { return this.Arity > 0 ? this.Name + "`" + Arity : base.MetadataName; }
         }
 
         public ISymbol AssociatedSymbol { get; internal set; }

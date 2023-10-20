@@ -13,9 +13,7 @@ public sealed class UseCultureAttribute : BeforeAfterTestAttribute
     private CultureInfo _originalUiCulture;
 
     public UseCultureAttribute(string culture)
-        : this(culture, culture)
-    {
-    }
+        : this(culture, culture) { }
 
     public UseCultureAttribute(string culture, string uiCulture)
     {

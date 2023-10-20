@@ -37,9 +37,11 @@ public class DictionaryModelBinderProviderTest
         var context = new TestModelBinderProviderContext(modelType);
         context.OnCreatingBinder(m =>
         {
-            if (m.ModelType == typeof(KeyValuePair<string, int>) ||
-                m.ModelType == typeof(int) ||
-                m.ModelType == typeof(string))
+            if (
+                m.ModelType == typeof(KeyValuePair<string, int>)
+                || m.ModelType == typeof(int)
+                || m.ModelType == typeof(string)
+            )
             {
                 return Mock.Of<IModelBinder>();
             }

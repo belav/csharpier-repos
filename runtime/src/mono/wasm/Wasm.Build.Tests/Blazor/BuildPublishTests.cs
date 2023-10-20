@@ -38,7 +38,6 @@ public class BuildPublishTests : BlazorWasmTestBase
         await BlazorRunForPublishWithWebServer(new BlazorRunOptions() { Config = config });
     }
 
-
     public static TheoryData<string, bool> TestDataForDefaultTemplate_WithWorkload(bool isAot)
     {
         var data = new TheoryData<string, bool>();
@@ -59,23 +58,40 @@ public class BuildPublishTests : BlazorWasmTestBase
     }
 
     [Theory]
-    [MemberData(nameof(TestDataForDefaultTemplate_WithWorkload), parameters: new object[] { false })]
+    [MemberData(
+        nameof(TestDataForDefaultTemplate_WithWorkload),
+        parameters: new object[] { false }
+    )]
     public void DefaultTemplate_NoAOT_WithWorkload(string config, bool testUnicode)
     {
-        string id = testUnicode ?
-            $"blz_no_aot_{config}_{GetRandomId()}_{s_unicodeChar}" :
-            $"blz_no_aot_{config}_{GetRandomId()}";
+        string id = testUnicode
+            ? $"blz_no_aot_{config}_{GetRandomId()}_{s_unicodeChar}"
+            : $"blz_no_aot_{config}_{GetRandomId()}";
         CreateBlazorWasmTemplateProject(id);
 
         BlazorBuild(new BlazorBuildOptions(id, config, NativeFilesType.FromRuntimePack));
         if (config == "Release")
         {
             // relinking in publish for Release config
-            BlazorPublish(new BlazorBuildOptions(id, config, NativeFilesType.Relinked, ExpectRelinkDirWhenPublishing: true));
+            BlazorPublish(
+                new BlazorBuildOptions(
+                    id,
+                    config,
+                    NativeFilesType.Relinked,
+                    ExpectRelinkDirWhenPublishing: true
+                )
+            );
         }
         else
         {
-            BlazorPublish(new BlazorBuildOptions(id, config, NativeFilesType.FromRuntimePack, ExpectRelinkDirWhenPublishing: true));
+            BlazorPublish(
+                new BlazorBuildOptions(
+                    id,
+                    config,
+                    NativeFilesType.FromRuntimePack,
+                    ExpectRelinkDirWhenPublishing: true
+                )
+            );
         }
     }
 
@@ -83,13 +99,16 @@ public class BuildPublishTests : BlazorWasmTestBase
     [MemberData(nameof(TestDataForDefaultTemplate_WithWorkload), parameters: new object[] { true })]
     public void DefaultTemplate_AOT_WithWorkload(string config, bool testUnicode)
     {
-        string id = testUnicode ?
-            $"blz_no_aot_{config}_{GetRandomId()}_{s_unicodeChar}" :
-            $"blz_no_aot_{config}_{GetRandomId()}";
+        string id = testUnicode
+            ? $"blz_no_aot_{config}_{GetRandomId()}_{s_unicodeChar}"
+            : $"blz_no_aot_{config}_{GetRandomId()}";
         CreateBlazorWasmTemplateProject(id);
 
         BlazorBuild(new BlazorBuildOptions(id, config, NativeFilesType.FromRuntimePack));
-        BlazorPublish(new BlazorBuildOptions(id, config, NativeFilesType.AOT), "-p:RunAOTCompilation=true");
+        BlazorPublish(
+            new BlazorBuildOptions(id, config, NativeFilesType.AOT),
+            "-p:RunAOTCompilation=true"
+        );
     }
 
     [Theory]
@@ -103,8 +122,16 @@ public class BuildPublishTests : BlazorWasmTestBase
 
         CreateBlazorWasmTemplateProject(id);
 
-        var options = new BlazorBuildOptions(id, config, NativeFilesType.Relinked, ExpectRelinkDirWhenPublishing: true, ExpectFingerprintOnDotnetJs: expectFingerprintOnDotnetJs);
-        var finterprintingArg = expectFingerprintOnDotnetJs ? "/p:WasmFingerprintDotnetJs=true" : string.Empty;
+        var options = new BlazorBuildOptions(
+            id,
+            config,
+            NativeFilesType.Relinked,
+            ExpectRelinkDirWhenPublishing: true,
+            ExpectFingerprintOnDotnetJs: expectFingerprintOnDotnetJs
+        );
+        var finterprintingArg = expectFingerprintOnDotnetJs
+            ? "/p:WasmFingerprintDotnetJs=true"
+            : string.Empty;
 
         BlazorBuild(options, "/p:WasmBuildNative=true", finterprintingArg);
         BlazorPublish(options, "/p:WasmBuildNative=true", finterprintingArg);
@@ -136,7 +163,7 @@ public class BuildPublishTests : BlazorWasmTestBase
     [InlineData("Release")]
     public void DefaultTemplate_WithResources_Publish(string config)
     {
-        string[] cultures = ["ja-JP", "es-ES"];
+        string[] cultures =  [ "ja-JP", "es-ES" ];
         string id = $"blz_resources_{config}_{GetRandomId()}";
         CreateBlazorWasmTemplateProject(id);
 
@@ -155,11 +182,25 @@ public class BuildPublishTests : BlazorWasmTestBase
         if (config == "Release")
         {
             // relinking in publish for Release config
-            BlazorPublish(new BlazorBuildOptions(id, config, NativeFilesType.Relinked, ExpectRelinkDirWhenPublishing: true));
+            BlazorPublish(
+                new BlazorBuildOptions(
+                    id,
+                    config,
+                    NativeFilesType.Relinked,
+                    ExpectRelinkDirWhenPublishing: true
+                )
+            );
         }
         else
         {
-            BlazorPublish(new BlazorBuildOptions(id, config, NativeFilesType.FromRuntimePack, ExpectRelinkDirWhenPublishing: true));
+            BlazorPublish(
+                new BlazorBuildOptions(
+                    id,
+                    config,
+                    NativeFilesType.FromRuntimePack,
+                    ExpectRelinkDirWhenPublishing: true
+                )
+            );
         }
 
         AssertResourcesDlls(FindBlazorBinFrameworkDir(config, true));
@@ -168,8 +209,15 @@ public class BuildPublishTests : BlazorWasmTestBase
         {
             foreach (string culture in cultures)
             {
-                string resourceAssemblyPath = Path.Combine(basePath, culture, $"{id}.resources{ProjectProviderBase.WasmAssemblyExtension}");
-                Assert.True(File.Exists(resourceAssemblyPath), $"Expects to have a resource assembly at {resourceAssemblyPath}");
+                string resourceAssemblyPath = Path.Combine(
+                    basePath,
+                    culture,
+                    $"{id}.resources{ProjectProviderBase.WasmAssemblyExtension}"
+                );
+                Assert.True(
+                    File.Exists(resourceAssemblyPath),
+                    $"Expects to have a resource assembly at {resourceAssemblyPath}"
+                );
             }
         }
     }

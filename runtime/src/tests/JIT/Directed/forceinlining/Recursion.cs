@@ -29,7 +29,8 @@ public class P
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int F1(int k)
     {
-        if (k < 3) return 1;
+        if (k < 3)
+            return 1;
         return F1(k - 1) + F1(k - 2);
     }
 

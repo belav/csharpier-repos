@@ -87,10 +87,7 @@ namespace RabbitMQ.Client.Impl
 
         public bool AutoClose
         {
-            get
-            {
-                return m_autoClose;
-            }
+            get { return m_autoClose; }
             set
             {
                 m_autoClose = value;
@@ -100,17 +97,14 @@ namespace RabbitMQ.Client.Impl
 
         public int Count
         {
-            get
-            {
-                return m_sessionMap.Count;
-            }
+            get { return m_sessionMap.Count; }
         }
 
         public ISession Lookup(int number)
         {
             lock (m_sessionMap)
             {
-                return (ISession) m_sessionMap[number];
+                return (ISession)m_sessionMap[number];
             }
         }
 
@@ -141,7 +135,7 @@ namespace RabbitMQ.Client.Impl
 
         public ISession CreateInternal(int channelNumber)
         {
-            lock(m_sessionMap)
+            lock (m_sessionMap)
             {
                 ISession session = new Session(m_connection, channelNumber);
                 session.SessionShutdown += new SessionShutdownEventHandler(HandleSessionShutdown);
@@ -157,13 +151,16 @@ namespace RabbitMQ.Client.Impl
         /// use, as if the slot is unused, you'll get a null pointer
         /// exception.
         ///</remarks>
-        public ISession Swap(int channelNumber, ISession replacement) {
+        public ISession Swap(int channelNumber, ISession replacement)
+        {
             lock (m_sessionMap)
             {
-                ISession previous = (ISession) m_sessionMap[channelNumber];
+                ISession previous = (ISession)m_sessionMap[channelNumber];
                 previous.SessionShutdown -= new SessionShutdownEventHandler(HandleSessionShutdown);
                 m_sessionMap[channelNumber] = replacement;
-                replacement.SessionShutdown += new SessionShutdownEventHandler(HandleSessionShutdown);
+                replacement.SessionShutdown += new SessionShutdownEventHandler(
+                    HandleSessionShutdown
+                );
                 return previous;
             }
         }
@@ -209,7 +206,12 @@ namespace RabbitMQ.Client.Impl
         ///when we decide to close the connection.</summary>
         public void AutoCloseConnection()
         {
-            m_connection.Abort(CommonFraming.Constants.ReplySuccess, "AutoClose", ShutdownInitiator.Library, Timeout.Infinite);
+            m_connection.Abort(
+                CommonFraming.Constants.ReplySuccess,
+                "AutoClose",
+                ShutdownInitiator.Library,
+                Timeout.Infinite
+            );
         }
     }
 }

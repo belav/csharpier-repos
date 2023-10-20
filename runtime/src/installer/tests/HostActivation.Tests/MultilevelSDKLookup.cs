@@ -35,8 +35,13 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         {
             // The dotnetMultilevelSDKLookup dir will contain some folders and files that will be
             // necessary to perform the tests
-            string baseMultilevelDir = Path.Combine(TestArtifact.TestArtifactsPath, "dotnetMultilevelSDKLookup");
-            _multilevelDir = new TestArtifact(SharedFramework.CalculateUniqueTestDirectory(baseMultilevelDir));
+            string baseMultilevelDir = Path.Combine(
+                TestArtifact.TestArtifactsPath,
+                "dotnetMultilevelSDKLookup"
+            );
+            _multilevelDir = new TestArtifact(
+                SharedFramework.CalculateUniqueTestDirectory(baseMultilevelDir)
+            );
 
             // The tested locations will be the cwd, exe dir, and registered directory. cwd is no longer supported.
             //     All dirs will be placed inside the multilevel folder
@@ -44,7 +49,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             _exeDir = Path.Combine(_multilevelDir.Location, "exe");
             _regDir = Path.Combine(_multilevelDir.Location, "reg");
 
-            DotNet = new DotNetBuilder(_multilevelDir.Location, Path.Combine(TestArtifact.TestArtifactsPath, "sharedFrameworkPublish"), "exe")
+            DotNet = new DotNetBuilder(
+                _multilevelDir.Location,
+                Path.Combine(TestArtifact.TestArtifactsPath, "sharedFrameworkPublish"),
+                "exe"
+            )
                 .AddMicrosoftNETCoreAppFrameworkMockHostPolicy("9999.0.0")
                 .Build();
 
@@ -64,7 +73,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             _exeSelectedMessage = $"Using .NET SDK dll=[{_exeSdkBaseDir}";
             _regSelectedMessage = $"Using .NET SDK dll=[{_regSdkBaseDir}";
 
-            _testOnlyProductBehaviorMarker = TestOnlyProductBehavior.Enable(DotNet.GreatestVersionHostFxrFilePath);
+            _testOnlyProductBehaviorMarker = TestOnlyProductBehavior.Enable(
+                DotNet.GreatestVersionHostFxrFilePath
+            );
         }
 
         public void Dispose()
@@ -89,8 +100,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Reg: empty
             // Expected: no compatible version
             RunTest()
-                .Should().Fail()
-                .And.NotFindCompatibleSdk(globalJsonPath, requestedVersion);
+                .Should()
+                .Fail()
+                .And
+                .NotFindCompatibleSdk(globalJsonPath, requestedVersion);
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.4.1", "9999.3.4-dummy");
@@ -101,8 +114,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Reg: empty
             // Expected: no compatible version
             RunTest()
-                .Should().Fail()
-                .And.NotFindCompatibleSdk(globalJsonPath, requestedVersion);
+                .Should()
+                .Fail()
+                .And
+                .NotFindCompatibleSdk(globalJsonPath, requestedVersion);
 
             // Add SDK versions
             AddAvailableSdkVersions(_regSdkBaseDir, "9999.3.3");
@@ -113,8 +128,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Reg: 9999.3.3
             // Expected: no compatible version
             RunTest()
-                .Should().Fail()
-                .And.NotFindCompatibleSdk(globalJsonPath, requestedVersion);
+                .Should()
+                .Fail()
+                .And
+                .NotFindCompatibleSdk(globalJsonPath, requestedVersion);
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.3.4");
@@ -125,8 +142,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Reg: 9999.3.3
             // Expected: 9999.3.4 from exe dir
             RunTest()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.3.4", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And
+                .HaveStdErrContaining(
+                    Path.Combine(_exeSelectedMessage, "9999.3.4", _dotnetSdkDllMessageTerminator)
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_regSdkBaseDir, "9999.3.5-dummy");
@@ -137,8 +158,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Reg: 9999.3.3, 9999.3.5-dummy
             // Expected: 9999.3.4 from exe dir
             RunTest()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.3.4", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And
+                .HaveStdErrContaining(
+                    Path.Combine(_exeSelectedMessage, "9999.3.4", _dotnetSdkDllMessageTerminator)
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.3.600");
@@ -149,8 +174,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Reg: 9999.3.3, 9999.3.5-dummy
             // Expected: 9999.3.4-dummy from exe dir
             RunTest()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.3.4", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And
+                .HaveStdErrContaining(
+                    Path.Combine(_exeSelectedMessage, "9999.3.4", _dotnetSdkDllMessageTerminator)
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.3.4-global-dummy");
@@ -161,17 +190,31 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Reg: 9999.3.3, 9999.3.5-dummy
             // Expected: 9999.3.4-global-dummy from exe dir
             RunTest()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.3.4-global-dummy", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And
+                .HaveStdErrContaining(
+                    Path.Combine(
+                        _exeSelectedMessage,
+                        "9999.3.4-global-dummy",
+                        _dotnetSdkDllMessageTerminator
+                    )
+                );
 
             // Verify we have the expected SDK versions
             RunTest("--list-sdks")
-                .Should().Pass()
-                .And.HaveStdOutContaining("9999.3.4-dummy")
-                .And.HaveStdOutContaining("9999.3.4-global-dummy")
-                .And.HaveStdOutContaining("9999.4.1")
-                .And.HaveStdOutContaining("9999.3.4")
-                .And.HaveStdOutContaining("9999.3.600");
+                .Should()
+                .Pass()
+                .And
+                .HaveStdOutContaining("9999.3.4-dummy")
+                .And
+                .HaveStdOutContaining("9999.3.4-global-dummy")
+                .And
+                .HaveStdOutContaining("9999.4.1")
+                .And
+                .HaveStdOutContaining("9999.3.4")
+                .And
+                .HaveStdOutContaining("9999.3.600");
         }
 
         [Fact]
@@ -190,8 +233,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Reg: empty
             // Expected: no compatible version
             RunTest()
-                .Should().Fail()
-                .And.NotFindCompatibleSdk(globalJsonPath, requestedVersion);
+                .Should()
+                .Fail()
+                .And
+                .NotFindCompatibleSdk(globalJsonPath, requestedVersion);
 
             // Add SDK versions
             AddAvailableSdkVersions(_regSdkBaseDir, "9999.3.57", "9999.3.4-dummy");
@@ -202,8 +247,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Reg: 9999.3.57, 9999.3.4-dummy
             // Expected: no compatible version
             RunTest()
-                .Should().Fail()
-                .And.NotFindCompatibleSdk(globalJsonPath, requestedVersion);
+                .Should()
+                .Fail()
+                .And
+                .NotFindCompatibleSdk(globalJsonPath, requestedVersion);
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.3.300", "9999.7.304-global-dummy");
@@ -214,8 +261,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Reg: 9999.3.57, 9999.3.4-dummy
             // Expected: no compatible version
             RunTest()
-                .Should().Fail()
-                .And.NotFindCompatibleSdk(globalJsonPath, requestedVersion);
+                .Should()
+                .Fail()
+                .And
+                .NotFindCompatibleSdk(globalJsonPath, requestedVersion);
 
             // Add SDK versions
             AddAvailableSdkVersions(_regSdkBaseDir, "9999.3.304");
@@ -226,8 +275,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Reg: 9999.3.57, 9999.3.4-dummy, 9999.3.304
             // Expected: no compatible version
             RunTest()
-                .Should().Fail()
-                .And.NotFindCompatibleSdk(globalJsonPath, requestedVersion);
+                .Should()
+                .Fail()
+                .And
+                .NotFindCompatibleSdk(globalJsonPath, requestedVersion);
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.3.399", "9999.3.399-dummy", "9999.3.400");
@@ -238,8 +289,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Reg: 9999.3.57, 9999.3.4-dummy, 9999.3.304
             // Expected: 9999.3.399 from exe dir
             RunTest()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.3.399", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And
+                .HaveStdErrContaining(
+                    Path.Combine(_exeSelectedMessage, "9999.3.399", _dotnetSdkDllMessageTerminator)
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.3.2400", "9999.3.3004");
@@ -251,8 +306,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Reg: 9999.3.57, 9999.3.4-dummy, 9999.3.304, 9999.3.2400, 9999.3.3004
             // Expected: 9999.3.399 from exe dir
             RunTest()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.3.399", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And
+                .HaveStdErrContaining(
+                    Path.Combine(_exeSelectedMessage, "9999.3.399", _dotnetSdkDllMessageTerminator)
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_regSdkBaseDir, "9999.3.304-global-dummy");
@@ -263,19 +322,31 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Reg: 9999.3.57, 9999.3.4-dummy, 9999.3.304, 9999.3.2400, 9999.3.3004, 9999.3.304-global-dummy
             // Expected: 9999.3.399 from exe dir
             RunTest()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.3.399", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And
+                .HaveStdErrContaining(
+                    Path.Combine(_exeSelectedMessage, "9999.3.399", _dotnetSdkDllMessageTerminator)
+                );
 
             // Verify we have the expected SDK versions
             RunTest("--list-sdks")
-                .Should().Pass()
-                .And.HaveStdOutContaining("9999.3.300")
-                .And.HaveStdOutContaining("9999.7.304-global-dummy")
-                .And.HaveStdOutContaining("9999.3.399")
-                .And.HaveStdOutContaining("9999.3.399-dummy")
-                .And.HaveStdOutContaining("9999.3.400")
-                .And.HaveStdOutContaining("9999.3.2400")
-                .And.HaveStdOutContaining("9999.3.3004");
+                .Should()
+                .Pass()
+                .And
+                .HaveStdOutContaining("9999.3.300")
+                .And
+                .HaveStdOutContaining("9999.7.304-global-dummy")
+                .And
+                .HaveStdOutContaining("9999.3.399")
+                .And
+                .HaveStdOutContaining("9999.3.399-dummy")
+                .And
+                .HaveStdOutContaining("9999.3.400")
+                .And
+                .HaveStdOutContaining("9999.3.2400")
+                .And
+                .HaveStdOutContaining("9999.3.3004");
         }
 
         [Fact]
@@ -292,9 +363,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Exe: empty
             // Reg: 9999.0.4
             // Expected: no SDKs found
-            RunTest()
-                .Should().Fail()
-                .And.FindAnySdk(false);
+            RunTest().Should().Fail().And.FindAnySdk(false);
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.0.4");
@@ -305,8 +374,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Reg: 9999.0.4
             // Expected: 9999.0.4 from exe dir
             RunTest()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.0.4", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And
+                .HaveStdErrContaining(
+                    Path.Combine(_exeSelectedMessage, "9999.0.4", _dotnetSdkDllMessageTerminator)
+                );
         }
 
         [Fact]
@@ -326,9 +399,15 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
             WriteEmptyGlobalJson();
 
-            using (var registeredInstallLocationOverride = new RegisteredInstallLocationOverride(DotNet.GreatestVersionHostFxrFilePath))
+            using (
+                var registeredInstallLocationOverride = new RegisteredInstallLocationOverride(
+                    DotNet.GreatestVersionHostFxrFilePath
+                )
+            )
             {
-                registeredInstallLocationOverride.SetInstallLocation(new (string, string)[] { (RepoDirectories.BuildArchitecture, _regDir) });
+                registeredInstallLocationOverride.SetInstallLocation(
+                    new (string, string)[] { (RepoDirectories.BuildArchitecture, _regDir) }
+                );
 
                 // Add SDK versions
                 AddAvailableSdkVersions(_regSdkBaseDir, "9999.0.4");
@@ -338,14 +417,17 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 // Exe: empty
                 // Reg: 9999.0.4
                 // Expected: no SDKs found
-                DotNet.Exec("help")
+                DotNet
+                    .Exec("help")
                     .WorkingDirectory(_currentWorkingDir)
                     .MultilevelLookup(true)
                     .ApplyRegisteredInstallLocationOverride(registeredInstallLocationOverride)
                     .EnableTracingAndCaptureOutputs()
                     .Execute()
-                    .Should().Fail()
-                    .And.FindAnySdk(false);
+                    .Should()
+                    .Fail()
+                    .And
+                    .FindAnySdk(false);
             }
         }
 
@@ -363,9 +445,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Exe: empty
             // Reg: 9999.0.0, 9999.0.3-dummy
             // Expected: no SDKs found
-            RunTest()
-                .Should().Fail()
-                .And.FindAnySdk(false);
+            RunTest().Should().Fail().And.FindAnySdk(false);
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.0.3");
@@ -376,8 +456,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Reg: 9999.0.0, 9999.0.3-dummy
             // Expected: 9999.0.3 from exe dir
             RunTest()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.0.3", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And
+                .HaveStdErrContaining(
+                    Path.Combine(_exeSelectedMessage, "9999.0.3", _dotnetSdkDllMessageTerminator)
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_cwdSdkBaseDir, "10000.0.0");
@@ -389,8 +473,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Reg: 9999.0.0, 9999.0.3-dummy, 9999.0.100
             // Expected: 9999.0.100 from reg dir
             RunTest()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.0.3", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And
+                .HaveStdErrContaining(
+                    Path.Combine(_exeSelectedMessage, "9999.0.3", _dotnetSdkDllMessageTerminator)
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.0.80");
@@ -401,8 +489,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Reg: 9999.0.0, 9999.0.3-dummy, 9999.0.100
             // Expected: 9999.0.100 from reg dir
             RunTest()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.0.80", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And
+                .HaveStdErrContaining(
+                    Path.Combine(_exeSelectedMessage, "9999.0.80", _dotnetSdkDllMessageTerminator)
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.0.5500000");
@@ -413,8 +505,16 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Reg: 9999.0.0, 9999.0.3-dummy, 9999.0.100
             // Expected: 9999.0.5500000 from exe dir
             RunTest()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.0.5500000", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And
+                .HaveStdErrContaining(
+                    Path.Combine(
+                        _exeSelectedMessage,
+                        "9999.0.5500000",
+                        _dotnetSdkDllMessageTerminator
+                    )
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_regSdkBaseDir, "9999.0.52000000");
@@ -425,15 +525,27 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Reg: 9999.0.0, 9999.0.3-dummy, 9999.0.100, 9999.0.52000000
             // Expected: 9999.0.52000000 from reg dir
             RunTest()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.0.5500000", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And
+                .HaveStdErrContaining(
+                    Path.Combine(
+                        _exeSelectedMessage,
+                        "9999.0.5500000",
+                        _dotnetSdkDllMessageTerminator
+                    )
+                );
 
             // Verify we have the expected SDK versions
             RunTest("--list-sdks")
-                .Should().Pass()
-                .And.HaveStdOutContaining("9999.0.3")
-                .And.HaveStdOutContaining("9999.0.80")
-                .And.HaveStdOutContaining("9999.0.5500000");
+                .Should()
+                .Pass()
+                .And
+                .HaveStdOutContaining("9999.0.3")
+                .And
+                .HaveStdOutContaining("9999.0.80")
+                .And
+                .HaveStdOutContaining("9999.0.5500000");
         }
 
         private List<(string version, string rootPath)> AddSdkVersionsAndGetExpectedList()
@@ -450,16 +562,18 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             expectedList.Add(("6.1.1", _exeSdkBaseDir));
             expectedList.Add(("7.1.2", _exeSdkBaseDir));
             // MLL is always disabled for SDK resolution, so only the "exe" SDKs are listed
-            expectedList.Sort((a, b) =>
-            {
-                if (!Version.TryParse(a.version, out var aVersion))
-                    return -1;
+            expectedList.Sort(
+                (a, b) =>
+                {
+                    if (!Version.TryParse(a.version, out var aVersion))
+                        return -1;
 
-                if (!Version.TryParse(b.version, out var bVersion))
-                    return 1;
+                    if (!Version.TryParse(b.version, out var bVersion))
+                        return 1;
 
-                return aVersion.CompareTo(bVersion);
-            });
+                    return aVersion.CompareTo(bVersion);
+                }
+            );
             return expectedList;
         }
 
@@ -474,13 +588,18 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 return;
 
             var expectedList = AddSdkVersionsAndGetExpectedList();
-            string expectedOutput = string.Join(string.Empty, expectedList.Select(t => $"{t.version} [{t.rootPath}]{Environment.NewLine}"));
+            string expectedOutput = string.Join(
+                string.Empty,
+                expectedList.Select(t => $"{t.version} [{t.rootPath}]{Environment.NewLine}")
+            );
 
             // !!IMPORTANT!!: This test verifies the exact match of the entire output of the command (not a substring!)
             // This is important as the output of --list-sdks is considered machine readable and thus must not change even in a minor way (unintentionally)
             RunTest("--list-sdks", multiLevelLookup)
-                .Should().Pass()
-                .And.HaveStdOut(expectedOutput);
+                .Should()
+                .Pass()
+                .And
+                .HaveStdOut(expectedOutput);
         }
 
         [Theory]
@@ -499,12 +618,18 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
             // When we fail to resolve SDK version, we print out all available SDKs
             var expectedList = AddSdkVersionsAndGetExpectedList();
-            string expectedOutput = string.Join(string.Empty, expectedList.Select(t => $"{t.version} [{t.rootPath}]{Environment.NewLine}"));
+            string expectedOutput = string.Join(
+                string.Empty,
+                expectedList.Select(t => $"{t.version} [{t.rootPath}]{Environment.NewLine}")
+            );
 
             RunTest("help", multiLevelLookup)
-                .Should().Fail()
-                .And.NotFindCompatibleSdk(globalJsonPath, requestedVersion)
-                .And.HaveStdOutContaining(expectedOutput);
+                .Should()
+                .Fail()
+                .And
+                .NotFindCompatibleSdk(globalJsonPath, requestedVersion)
+                .And
+                .HaveStdOutContaining(expectedOutput);
         }
 
         [Theory]
@@ -519,25 +644,35 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
             var expectedList = AddSdkVersionsAndGetExpectedList();
             string expectedOutput =
-                $".NET SDKs installed:{Environment.NewLine}" +
-                string.Join(string.Empty, expectedList.Select(t => $"  {t.version} [{t.rootPath}]{Environment.NewLine}"));
+                $".NET SDKs installed:{Environment.NewLine}"
+                + string.Join(
+                    string.Empty,
+                    expectedList.Select(t => $"  {t.version} [{t.rootPath}]{Environment.NewLine}")
+                );
 
             RunTest("--info", multiLevelLookup)
-                .Should().Pass()
-                .And.HaveStdOutContaining(expectedOutput);
+                .Should()
+                .Pass()
+                .And
+                .HaveStdOutContaining(expectedOutput);
         }
 
         private CommandResult RunTest() => RunTest("help");
 
         private CommandResult RunTest(string command, bool? multiLevelLookup = true)
         {
-            return DotNet.Exec(command)
+            return DotNet
+                .Exec(command)
                 .WorkingDirectory(_currentWorkingDir)
                 .MultilevelLookup(multiLevelLookup)
-                .EnvironmentVariable(Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath, _regDir)
+                .EnvironmentVariable(
+                    Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath,
+                    _regDir
+                )
                 .EnvironmentVariable( // Redirect the default install location to an invalid location so that a machine-wide install is not used
                     Constants.TestOnlyEnvironmentVariables.DefaultInstallPath,
-                    System.IO.Path.Combine(_currentWorkingDir, "invalid"))
+                    System.IO.Path.Combine(_currentWorkingDir, "invalid")
+                )
                 .EnableTracingAndCaptureOutputs()
                 .Execute();
         }
@@ -547,8 +682,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         // The dotnet.runtimeconfig.json created uses a dummy framework version (9999.0.0)
         private void AddAvailableSdkVersions(string sdkBaseDir, params string[] availableVersions)
         {
-            string dummyRuntimeConfig = Path.Combine(RepoDirectories.TestAssetsFolder, "TestUtils",
-                "SDKLookup", "dotnet.runtimeconfig.json");
+            string dummyRuntimeConfig = Path.Combine(
+                RepoDirectories.TestAssetsFolder,
+                "TestUtils",
+                "SDKLookup",
+                "dotnet.runtimeconfig.json"
+            );
 
             foreach (string version in availableVersions)
             {
@@ -568,8 +707,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         private string SetGlobalJsonVersion(string globalJsonFileName)
         {
             string destFile = Path.Combine(_currentWorkingDir, "global.json");
-            string srcFile = Path.Combine(RepoDirectories.TestAssetsFolder, "TestUtils",
-                "SDKLookup", globalJsonFileName);
+            string srcFile = Path.Combine(
+                RepoDirectories.TestAssetsFolder,
+                "TestUtils",
+                "SDKLookup",
+                globalJsonFileName
+            );
 
             File.Copy(srcFile, destFile, true);
             return destFile;

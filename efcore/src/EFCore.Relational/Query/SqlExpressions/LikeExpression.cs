@@ -25,7 +25,8 @@ public class LikeExpression : SqlExpression
         SqlExpression match,
         SqlExpression pattern,
         SqlExpression? escapeChar,
-        RelationalTypeMapping? typeMapping)
+        RelationalTypeMapping? typeMapping
+    )
         : base(typeof(bool), typeMapping)
     {
         Match = match;
@@ -69,8 +70,9 @@ public class LikeExpression : SqlExpression
     public virtual LikeExpression Update(
         SqlExpression match,
         SqlExpression pattern,
-        SqlExpression? escapeChar)
-        => match != Match || pattern != Pattern || escapeChar != EscapeChar
+        SqlExpression? escapeChar
+    ) =>
+        match != Match || pattern != Pattern || escapeChar != EscapeChar
             ? new LikeExpression(match, pattern, escapeChar, TypeMapping)
             : this;
 
@@ -89,21 +91,24 @@ public class LikeExpression : SqlExpression
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is LikeExpression likeExpression
-                && Equals(likeExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is LikeExpression likeExpression && Equals(likeExpression)
+        );
 
-    private bool Equals(LikeExpression likeExpression)
-        => base.Equals(likeExpression)
-            && Match.Equals(likeExpression.Match)
-            && Pattern.Equals(likeExpression.Pattern)
-            && (EscapeChar == null
+    private bool Equals(LikeExpression likeExpression) =>
+        base.Equals(likeExpression)
+        && Match.Equals(likeExpression.Match)
+        && Pattern.Equals(likeExpression.Pattern)
+        && (
+            EscapeChar == null
                 ? likeExpression.EscapeChar == null
-                : EscapeChar.Equals(likeExpression.EscapeChar));
+                : EscapeChar.Equals(likeExpression.EscapeChar)
+        );
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => HashCode.Combine(base.GetHashCode(), Match, Pattern, EscapeChar);
+    public override int GetHashCode() =>
+        HashCode.Combine(base.GetHashCode(), Match, Pattern, EscapeChar);
 }

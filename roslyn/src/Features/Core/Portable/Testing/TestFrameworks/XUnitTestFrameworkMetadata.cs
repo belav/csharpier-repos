@@ -13,9 +13,7 @@ internal class XUnitTestFrameworkMetadata : ITestFrameworkMetadata
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public XUnitTestFrameworkMetadata()
-    {
-    }
+    public XUnitTestFrameworkMetadata() { }
 
     public bool MatchesAttributeSyntacticName(string attributeSyntacticName)
     {

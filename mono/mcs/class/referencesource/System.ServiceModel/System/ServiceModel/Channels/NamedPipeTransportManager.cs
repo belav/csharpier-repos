@@ -9,7 +9,8 @@ namespace System.ServiceModel.Channels
     using System.Collections.Generic;
 
     abstract class NamedPipeTransportManager
-        : ConnectionOrientedTransportManager<NamedPipeChannelListener>, ITransportManagerRegistration
+        : ConnectionOrientedTransportManager<NamedPipeChannelListener>,
+            ITransportManagerRegistration
     {
         List<SecurityIdentifier> allowedUsers;
         HostNameComparisonMode hostNameComparisonMode;
@@ -32,19 +33,12 @@ namespace System.ServiceModel.Channels
 
         internal List<SecurityIdentifier> AllowedUsers
         {
-            get
-            {
-                return this.allowedUsers;
-            }
+            get { return this.allowedUsers; }
         }
 
         public HostNameComparisonMode HostNameComparisonMode
         {
-            get
-            {
-                return this.hostNameComparisonMode;
-            }
-
+            get { return this.hostNameComparisonMode; }
             protected set
             {
                 HostNameComparisonModeHelper.Validate(value);
@@ -58,10 +52,7 @@ namespace System.ServiceModel.Channels
 
         public Uri ListenUri
         {
-            get
-            {
-                return this.listenUri;
-            }
+            get { return this.listenUri; }
         }
 
         internal override string Scheme
@@ -71,8 +62,13 @@ namespace System.ServiceModel.Channels
 
         bool AreAllowedUsersEqual(List<SecurityIdentifier> otherAllowedUsers)
         {
-            return ((this.allowedUsers == otherAllowedUsers) ||
-                (IsSubset(this.allowedUsers, otherAllowedUsers) && IsSubset(otherAllowedUsers, this.allowedUsers)));
+            return (
+                (this.allowedUsers == otherAllowedUsers)
+                || (
+                    IsSubset(this.allowedUsers, otherAllowedUsers)
+                    && IsSubset(otherAllowedUsers, this.allowedUsers)
+                )
+            );
         }
 
         protected virtual bool IsCompatible(NamedPipeChannelListener channelListener)
@@ -86,7 +82,7 @@ namespace System.ServiceModel.Channels
                 base.IsCompatible(channelListener)
                 && this.AreAllowedUsersEqual(channelListener.AllowedUsers)
                 && (this.HostNameComparisonMode == channelListener.HostNameComparisonMode)
-                );
+            );
         }
 
         static bool IsSubset(List<SecurityIdentifier> users1, List<SecurityIdentifier> users2)
@@ -120,13 +116,16 @@ namespace System.ServiceModel.Channels
 
         void Cleanup()
         {
-            NamedPipeChannelListener.StaticTransportManagerTable.UnregisterUri(this.ListenUri, this.HostNameComparisonMode);
+            NamedPipeChannelListener
+                .StaticTransportManagerTable
+                .UnregisterUri(this.ListenUri, this.HostNameComparisonMode);
         }
 
-        protected virtual void OnSelecting(NamedPipeChannelListener channelListener)
-        { }
+        protected virtual void OnSelecting(NamedPipeChannelListener channelListener) { }
 
-        IList<TransportManager> ITransportManagerRegistration.Select(TransportChannelListener channelListener)
+        IList<TransportManager> ITransportManagerRegistration.Select(
+            TransportChannelListener channelListener
+        )
         {
             OnSelecting((NamedPipeChannelListener)channelListener);
 

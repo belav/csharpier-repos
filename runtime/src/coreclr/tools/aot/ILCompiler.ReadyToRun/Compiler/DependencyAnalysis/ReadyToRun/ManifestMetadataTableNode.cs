@@ -67,7 +67,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         /// <summary>
         /// Modules which need to exist in set of modules visible
         /// </summary>
-        private ConcurrentBag<EcmaModule> _modulesWhichMustBeIndexable = new ConcurrentBag<EcmaModule>();
+        private ConcurrentBag<EcmaModule> _modulesWhichMustBeIndexable =
+            new ConcurrentBag<EcmaModule>();
 
         /// <summary>
         /// Set to true after GetData has been called. After that, ModuleToIndex may be called no more.
@@ -95,7 +96,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             AssemblyFlags manifestAssemblyFlags = default(AssemblyFlags);
             Version manifestAssemblyVersion = new Version(0, 0, 0, 0);
 
-            if ((nodeFactory.CompositeImageSettings != null) && nodeFactory.CompilationModuleGroup.IsCompositeBuildMode)
+            if (
+                (nodeFactory.CompositeImageSettings != null)
+                && nodeFactory.CompilationModuleGroup.IsCompositeBuildMode
+            )
             {
                 if (nodeFactory.CompositeImageSettings.PublicKey != null)
                 {
@@ -110,26 +114,39 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 }
             }
 
-            _mutableModule = new MutableModule(nodeFactory.TypeSystemContext,
-                                               "ManifestMetadata",
-                                               manifestAssemblyFlags,
-                                               publicKeyBlob,
-                                               manifestAssemblyVersion,
-                                               hashAlgorithm,
-                                               ModuleToIndexSingleThreadedAndSorted,
-                                               nodeFactory.CompilationModuleGroup);
+            _mutableModule = new MutableModule(
+                nodeFactory.TypeSystemContext,
+                "ManifestMetadata",
+                manifestAssemblyFlags,
+                publicKeyBlob,
+                manifestAssemblyVersion,
+                hashAlgorithm,
+                ModuleToIndexSingleThreadedAndSorted,
+                nodeFactory.CompilationModuleGroup
+            );
 
             if (!_nodeFactory.CompilationModuleGroup.IsCompositeBuildMode)
             {
-                MetadataReader mdReader = _nodeFactory.CompilationModuleGroup.CompilationModuleSet.Single().MetadataReader;
+                MetadataReader mdReader = _nodeFactory
+                    .CompilationModuleGroup
+                    .CompilationModuleSet
+                    .Single()
+                    .MetadataReader;
                 _assemblyRefCount = mdReader.GetTableRowCount(TableIndex.AssemblyRef);
 
                 if (!_nodeFactory.CompilationModuleGroup.IsInputBubble)
                 {
-                    for (int assemblyRefIndex = 1; assemblyRefIndex < _assemblyRefCount; assemblyRefIndex++)
+                    for (
+                        int assemblyRefIndex = 1;
+                        assemblyRefIndex < _assemblyRefCount;
+                        assemblyRefIndex++
+                    )
                     {
-                        AssemblyReferenceHandle assemblyRefHandle = MetadataTokens.AssemblyReferenceHandle(assemblyRefIndex);
-                        AssemblyReference assemblyRef = mdReader.GetAssemblyReference(assemblyRefHandle);
+                        AssemblyReferenceHandle assemblyRefHandle =
+                            MetadataTokens.AssemblyReferenceHandle(assemblyRefIndex);
+                        AssemblyReference assemblyRef = mdReader.GetAssemblyReference(
+                            assemblyRefHandle
+                        );
                         string assemblyName = mdReader.GetString(assemblyRef.Name);
                         _assemblyRefToModuleIdMap[assemblyName] = assemblyRefIndex;
                     }
@@ -144,17 +161,22 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             {
                 // Fill in entries for all input modules right away to make sure they have parallel indices
                 int nextExpectedId = 2;
-                foreach (EcmaModule inputModule in _nodeFactory.CompilationModuleGroup.CompilationModuleSet)
+                foreach (
+                    EcmaModule inputModule in _nodeFactory
+                        .CompilationModuleGroup
+                        .CompilationModuleSet
+                )
                 {
                     int acquiredId = ModuleToIndexInternal(inputModule);
                     if (acquiredId != nextExpectedId)
                     {
-                        throw new InternalCompilerErrorException($"Manifest metadata consistency error - acquired ID {acquiredId}, expected {nextExpectedId}");
+                        throw new InternalCompilerErrorException(
+                            $"Manifest metadata consistency error - acquired ID {acquiredId}, expected {nextExpectedId}"
+                        );
                     }
                     nextExpectedId++;
                 }
             }
-
         }
 
         private int ModuleToIndexForInputModulesOnly(ModuleDesc module)
@@ -190,7 +212,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             {
                 // If we call this function before sorting is complete, we might have a determinism bug caused by
                 // compiling two functions in an arbitrary order and hence getting different module IDs.
-                throw new InvalidOperationException("Cannot get ModuleToIndex mapping until marking is complete.");
+                throw new InvalidOperationException(
+                    "Cannot get ModuleToIndex mapping until marking is complete."
+                );
             }
 
             return ModuleToIndexInternal(module);
@@ -206,10 +230,15 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             if (_emissionCompleted)
             {
-                throw new InvalidOperationException("Adding a new assembly after signatures have been materialized.");
+                throw new InvalidOperationException(
+                    "Adding a new assembly after signatures have been materialized."
+                );
             }
 
-            if (module is EcmaModule ecmaModule && _nodeFactory.CompilationModuleGroup.VersionsWithModule(ecmaModule))
+            if (
+                module is EcmaModule ecmaModule
+                && _nodeFactory.CompilationModuleGroup.VersionsWithModule(ecmaModule)
+            )
             {
                 _modulesWhichMustBeIndexable.Add(ecmaModule);
             }
@@ -225,7 +254,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 return _assemblyRefCount + 1;
             }
 
-            if (!_nodeFactory.CompilationModuleGroup.IsCompositeBuildMode && (_nodeFactory.CompilationModuleGroup.CompilationModuleSet.Single() == module))
+            if (
+                !_nodeFactory.CompilationModuleGroup.IsCompositeBuildMode
+                && (_nodeFactory.CompilationModuleGroup.CompilationModuleSet.Single() == module)
+            )
             {
                 // Must be a reference to the only module being compiled
                 return 0;
@@ -239,21 +271,32 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 _assemblyRefToModuleIdMap.Add(assemblyName.Name, assemblyRefIndex);
             }
 
-            if (assemblyRefIndex > _assemblyRefCount && !_moduleIdToAssemblyNameMap.ContainsKey(assemblyRefIndex))
+            if (
+                assemblyRefIndex > _assemblyRefCount
+                && !_moduleIdToAssemblyNameMap.ContainsKey(assemblyRefIndex)
+            )
             {
                 if (_emissionCompleted)
                 {
-                    throw new InvalidOperationException("Adding a new assembly after signatures have been materialized.");
+                    throw new InvalidOperationException(
+                        "Adding a new assembly after signatures have been materialized."
+                    );
                 }
 
                 _moduleIdToAssemblyNameMap.Add(assemblyRefIndex, assemblyName);
                 if (_nodeFactory.CompilationModuleGroup.VersionsWithModule(emodule))
                 {
-                    _manifestAssemblyMvids.Add(module.MetadataReader.GetGuid(module.MetadataReader.GetModuleDefinition().Mvid));
+                    _manifestAssemblyMvids.Add(
+                        module
+                            .MetadataReader
+                            .GetGuid(module.MetadataReader.GetModuleDefinition().Mvid)
+                    );
                 }
                 else
                 {
-                    Debug.Assert(_nodeFactory.CompilationModuleGroup.CrossModuleInlineableModule(emodule));
+                    Debug.Assert(
+                        _nodeFactory.CompilationModuleGroup.CrossModuleInlineableModule(emodule)
+                    );
                     _manifestAssemblyMvids.Add(default(Guid));
                 }
             }
@@ -276,8 +319,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     emitter.MaterializeSignature();
                 }
 
-                EcmaModule [] moduleArray = _modulesWhichMustBeIndexable.ToArray();
-                Array.Sort(moduleArray, (EcmaModule moduleA, EcmaModule moduleB) => moduleA.CompareTo(moduleB));
+                EcmaModule[] moduleArray = _modulesWhichMustBeIndexable.ToArray();
+                Array.Sort(
+                    moduleArray,
+                    (EcmaModule moduleA, EcmaModule moduleB) => moduleA.CompareTo(moduleB)
+                );
                 foreach (var module in moduleArray)
                 {
                     ModuleToIndex(module);
@@ -301,7 +347,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 AssemblyName assemblyName = idAndAssemblyName.Value;
                 var handle = _mutableModule.TryGetAssemblyRefHandle(assemblyName);
                 Debug.Assert(handle.HasValue);
-                Debug.Assert(((handle.Value & 0xFFFFFF) + (_assemblyRefCount)) == (idAndAssemblyName.Key - 1));
+                Debug.Assert(
+                    ((handle.Value & 0xFFFFFF) + (_assemblyRefCount)) == (idAndAssemblyName.Key - 1)
+                );
             }
 
             // After this point new tokens will not be embedded in the final image
@@ -311,7 +359,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 data: _mutableModule.MetadataBlob,
                 relocs: Array.Empty<Relocation>(),
                 alignment: 1,
-                definedSymbols: new ISymbolDefinitionNode[] { this });
+                definedSymbols: new ISymbolDefinitionNode[] { this }
+            );
         }
 
         private const int GuidByteSize = 16;
@@ -325,7 +374,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             byte[] manifestAssemblyMvidTable = new byte[ManifestAssemblyMvidTableSize];
             for (int i = 0; i < _manifestAssemblyMvids.Count; i++)
             {
-                _manifestAssemblyMvids[i].TryWriteBytes(new Span<byte>(manifestAssemblyMvidTable, GuidByteSize * i, GuidByteSize));
+                _manifestAssemblyMvids[i].TryWriteBytes(
+                    new Span<byte>(manifestAssemblyMvidTable, GuidByteSize * i, GuidByteSize)
+                );
             }
             return manifestAssemblyMvidTable;
         }

@@ -26,10 +26,16 @@ public class InvalidIdentifierStructureTests : AbstractSyntaxStructureProviderTe
     protected override string LanguageName => LanguageNames.CSharp;
     protected override string WorkspaceKind => CodeAnalysis.WorkspaceKind.MetadataAsSource;
 
-    internal override async Task<ImmutableArray<BlockSpan>> GetBlockSpansWorkerAsync(Document document, BlockStructureOptions options, int position)
+    internal override async Task<ImmutableArray<BlockSpan>> GetBlockSpansWorkerAsync(
+        Document document,
+        BlockStructureOptions options,
+        int position
+    )
     {
         var outliningService = document.GetRequiredLanguageService<BlockStructureService>();
-        return (await outliningService.GetBlockStructureAsync(document, options, CancellationToken.None)).Spans;
+        return (
+            await outliningService.GetBlockStructureAsync(document, options, CancellationToken.None)
+        ).Spans;
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1174405")]
@@ -42,8 +48,10 @@ public class InvalidIdentifierStructureTests : AbstractSyntaxStructureProviderTe
                 }|}|}
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1174405")]
@@ -56,8 +64,10 @@ public class InvalidIdentifierStructureTests : AbstractSyntaxStructureProviderTe
                 }|}|}
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1174405")]
@@ -70,9 +80,11 @@ public class InvalidIdentifierStructureTests : AbstractSyntaxStructureProviderTe
                 }|}
                 """;
 
-        await VerifyBlockSpansAsync(code,
+        await VerifyBlockSpansAsync(
+            code,
             Region("textspan1", "hint1", CSharpStructureHelpers.Ellipsis, autoCollapse: false),
             Region("textspan2", "hint2", CSharpStructureHelpers.Ellipsis, autoCollapse: false),
-            Region("textspan3", "/* now everything is commented (); ...", autoCollapse: true));
+            Region("textspan3", "/* now everything is commented (); ...", autoCollapse: true)
+        );
     }
 }

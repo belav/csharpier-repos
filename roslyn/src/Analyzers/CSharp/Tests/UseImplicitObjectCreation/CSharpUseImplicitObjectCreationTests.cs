@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseImplicitObjectCreati
 
 using VerifyCS = CSharpCodeFixVerifier<
     CSharpUseImplicitObjectCreationDiagnosticAnalyzer,
-    CSharpUseImplicitObjectCreationCodeFixProvider>;
+    CSharpUseImplicitObjectCreationCodeFixProvider
+>;
 
 [Trait(Traits.Feature, Traits.Features.CodeActionsUseImplicitObjectCreation)]
 public class UseImplicitObjectCreationTests
@@ -141,7 +142,8 @@ public class UseImplicitObjectCreationTests
     {
         await new VerifyCS.Test
         {
-            TestState = {
+            TestState =
+            {
                 Sources =
                 {
                     """
@@ -240,7 +242,10 @@ public class UseImplicitObjectCreationTests
             LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp9,
             Options =
             {
-                { CSharpCodeStyleOptions.VarWhenTypeIsApparent, CodeStyleOption2.FalseWithSuggestionEnforcement },
+                {
+                    CSharpCodeStyleOptions.VarWhenTypeIsApparent,
+                    CodeStyleOption2.FalseWithSuggestionEnforcement
+                },
             }
         }.RunAsync();
     }
@@ -262,7 +267,10 @@ public class UseImplicitObjectCreationTests
             LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp9,
             Options =
             {
-                { CSharpCodeStyleOptions.VarWhenTypeIsApparent, CodeStyleOption2.TrueWithSuggestionEnforcement },
+                {
+                    CSharpCodeStyleOptions.VarWhenTypeIsApparent,
+                    CodeStyleOption2.TrueWithSuggestionEnforcement
+                },
             }
         }.RunAsync();
     }

@@ -45,68 +45,89 @@ using System.Security.Authentication.ExtendedProtection;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 
-namespace System.Net {
-	partial class HttpListener {
+namespace System.Net
+{
+    partial class HttpListener
+    {
 #if SECURITY_DEP
-		MonoTlsProvider tlsProvider;
-		MonoTlsSettings tlsSettings;
-		X509Certificate certificate;
+        MonoTlsProvider tlsProvider;
+        MonoTlsSettings tlsSettings;
+        X509Certificate certificate;
 
-		internal HttpListener (X509Certificate certificate, MonoTlsProvider tlsProvider, MonoTlsSettings tlsSettings)
-			: this ()
-		{
-			this.certificate = certificate;
-			this.tlsProvider = tlsProvider;
-			this.tlsSettings = tlsSettings;
-		}
+        internal HttpListener(
+            X509Certificate certificate,
+            MonoTlsProvider tlsProvider,
+            MonoTlsSettings tlsSettings
+        )
+            : this()
+        {
+            this.certificate = certificate;
+            this.tlsProvider = tlsProvider;
+            this.tlsSettings = tlsSettings;
+        }
 #endif
 
-		internal X509Certificate LoadCertificateAndKey (IPAddress addr, int port)
-		{
+        internal X509Certificate LoadCertificateAndKey(IPAddress addr, int port)
+        {
 #if SECURITY_DEP
-			lock (_internalLock) {
-				if (certificate != null)
-					return certificate;
+            lock (_internalLock)
+            {
+                if (certificate != null)
+                    return certificate;
 
-				// Actually load the certificate
-				try {
-					string dirname = Environment.GetFolderPath (Environment.SpecialFolder.ApplicationData);
-					string path = Path.Combine (dirname, ".mono");
-					path = Path.Combine (path, "httplistener");
-					string cert_file = Path.Combine (path, String.Format ("{0}.cer", port));
-					if (!File.Exists (cert_file))
-						return null;
-					string pvk_file = Path.Combine (path, String.Format ("{0}.pvk", port));
-					if (!File.Exists (pvk_file))
-						return null;
-					var cert = new X509Certificate2 (cert_file);
-					var privateKey = PrivateKey.CreateFromFile (pvk_file).RSA;
-					certificate = new X509Certificate2 ((X509Certificate2Impl)cert.Impl.CopyWithPrivateKey (privateKey));
-					return certificate;
-				} catch {
-					// ignore errors
-					certificate = null;
-					return null;
-				}
-			}
+                // Actually load the certificate
+                try
+                {
+                    string dirname = Environment.GetFolderPath(
+                        Environment.SpecialFolder.ApplicationData
+                    );
+                    string path = Path.Combine(dirname, ".mono");
+                    path = Path.Combine(path, "httplistener");
+                    string cert_file = Path.Combine(path, String.Format("{0}.cer", port));
+                    if (!File.Exists(cert_file))
+                        return null;
+                    string pvk_file = Path.Combine(path, String.Format("{0}.pvk", port));
+                    if (!File.Exists(pvk_file))
+                        return null;
+                    var cert = new X509Certificate2(cert_file);
+                    var privateKey = PrivateKey.CreateFromFile(pvk_file).RSA;
+                    certificate = new X509Certificate2(
+                        (X509Certificate2Impl)cert.Impl.CopyWithPrivateKey(privateKey)
+                    );
+                    return certificate;
+                }
+                catch
+                {
+                    // ignore errors
+                    certificate = null;
+                    return null;
+                }
+            }
 #else
-			throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
 #endif
-		}
+        }
 
-		internal SslStream CreateSslStream (Stream innerStream, bool ownsStream, RemoteCertificateValidationCallback callback)
-		{
+        internal SslStream CreateSslStream(
+            Stream innerStream,
+            bool ownsStream,
+            RemoteCertificateValidationCallback callback
+        )
+        {
 #if SECURITY_DEP
-			lock (_internalLock) {
-				if (tlsProvider == null)
-					tlsProvider = MonoTlsProviderFactory.GetProvider ();
-				var settings = (tlsSettings ?? MonoTlsSettings.DefaultSettings).Clone ();
-				settings.RemoteCertificateValidationCallback = MNS.Private.CallbackHelpers.PublicToMono (callback);
-				return new SslStream (innerStream, ownsStream, tlsProvider, settings);
-			}
+            lock (_internalLock)
+            {
+                if (tlsProvider == null)
+                    tlsProvider = MonoTlsProviderFactory.GetProvider();
+                var settings = (tlsSettings ?? MonoTlsSettings.DefaultSettings).Clone();
+                settings.RemoteCertificateValidationCallback = MNS.Private
+                    .CallbackHelpers
+                    .PublicToMono(callback);
+                return new SslStream(innerStream, ownsStream, tlsProvider, settings);
+            }
 #else
-			throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
 #endif
-		}
-	}
+        }
+    }
 }

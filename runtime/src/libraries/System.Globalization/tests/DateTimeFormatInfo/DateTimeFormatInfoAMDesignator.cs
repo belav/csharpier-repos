@@ -205,9 +205,15 @@ namespace System.Globalization.Tests
             yield return new object[] { new CultureInfo("zh-TW").DateTimeFormat, "上午" };
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsHybridGlobalizationOnBrowser))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsHybridGlobalizationOnBrowser)
+        )]
         [MemberData(nameof(AMDesignator_Get_TestData_HybridGlobalization))]
-        public void AMDesignator_Get_ReturnsExpected_HybridGlobalization(DateTimeFormatInfo format, string value)
+        public void AMDesignator_Get_ReturnsExpected_HybridGlobalization(
+            DateTimeFormatInfo format,
+            string value
+        )
         {
             Assert.Equal(value, format.AMDesignator);
         }
@@ -227,13 +233,18 @@ namespace System.Globalization.Tests
         public void AMDesignator_SetNullValue_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>("value", () => format.AMDesignator = null);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => format.AMDesignator = null
+            );
         }
 
         [Fact]
         public void AMDesignator_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => DateTimeFormatInfo.InvariantInfo.AMDesignator = "AA");
+            Assert.Throws<InvalidOperationException>(
+                () => DateTimeFormatInfo.InvariantInfo.AMDesignator = "AA"
+            );
         }
     }
 }

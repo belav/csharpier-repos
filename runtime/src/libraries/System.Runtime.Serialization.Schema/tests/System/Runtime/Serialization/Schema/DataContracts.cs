@@ -1,7 +1,10 @@
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
-[assembly: ContractNamespace("http://special1.tempuri.org", ClrNamespace = "System.Runtime.Serialization.Schema.Tests.DataContracts")]
+[assembly: ContractNamespace(
+    "http://special1.tempuri.org",
+    ClrNamespace = "System.Runtime.Serialization.Schema.Tests.DataContracts"
+)]
 
 namespace System.Runtime.Serialization.Schema.Tests.DataContracts
 {
@@ -10,6 +13,7 @@ namespace System.Runtime.Serialization.Schema.Tests.DataContracts
     {
         [DataMember]
         public int X = 42;
+
         [DataMember]
         public int Y = 43;
     }
@@ -19,6 +23,7 @@ namespace System.Runtime.Serialization.Schema.Tests.DataContracts
     {
         [DataMember]
         public Point Center = new Point();
+
         [DataMember]
         public int Radius = 5;
     }
@@ -28,6 +33,7 @@ namespace System.Runtime.Serialization.Schema.Tests.DataContracts
     {
         [DataMember]
         public Point BottomLeft = new Point();
+
         [DataMember]
         public int Side = 5;
     }
@@ -43,9 +49,7 @@ namespace System.Runtime.Serialization.Schema.Tests.DataContracts
         public string firstName = "John";
         public string lastName = "Smith";
 
-        internal NonAttributedPersonClass()
-        {
-        }
+        internal NonAttributedPersonClass() { }
     }
 
     public class ExtendedSquare : Square
@@ -53,14 +57,20 @@ namespace System.Runtime.Serialization.Schema.Tests.DataContracts
         public string lineColor = "black";
     }
 
-    [DataContract(Name = "AnotherValidType", Namespace = "http://schemas.datacontract.org/2004/07/barNs")]
+    [DataContract(
+        Name = "AnotherValidType",
+        Namespace = "http://schemas.datacontract.org/2004/07/barNs"
+    )]
     public class AnotherValidType
     {
         [DataMember]
         public string member;
     }
 
-    [DataContract(Name = "AnotherValidType", Namespace = "http://schemas.datacontract.org/2004/07/barNs")]
+    [DataContract(
+        Name = "AnotherValidType",
+        Namespace = "http://schemas.datacontract.org/2004/07/barNs"
+    )]
     public class ConflictingAnotherValidType
     {
         [DataMember]
@@ -78,21 +88,15 @@ namespace System.Runtime.Serialization.Schema.Tests.DataContracts
     }
 
     [DataContract(IsReference = true)]
-    public class RefType1
-    {
-    }
+    public class RefType1 { }
 
     [DataContract]
-    public class NonRefType
-    {
-    }
+    public class NonRefType { }
 
     [Serializable]
     public class ISerializableFormatClass : ISerializable
     {
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-        }
+        public void GetObjectData(SerializationInfo info, StreamingContext context) { }
     }
 
 #pragma warning disable CS0169, IDE0051, IDE1006
@@ -101,8 +105,10 @@ namespace System.Runtime.Serialization.Schema.Tests.DataContracts
     public class XmlSerializerPerson
     {
         public XmlSerializerPerson() { }
+
         [XmlAttribute]
         public string Name;
+
         [XmlAttribute]
         public int Age;
     }
@@ -111,7 +117,12 @@ namespace System.Runtime.Serialization.Schema.Tests.DataContracts
     public class CircleContainer
     {
         [DataMember]
-        public SerializableCircle Circle { get { return null; } set { } }
+        public SerializableCircle Circle
+        {
+            get { return null; }
+            set { }
+        }
+
         [DataMember]
         SerializableCircle[] circles;
     }

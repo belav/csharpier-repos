@@ -62,7 +62,8 @@ namespace System.Net.Sockets
 
         // Overlapped object related variables.
         private PreAllocatedOverlapped _preAllocatedOverlapped;
-        private readonly StrongBox<SocketAsyncEventArgs?> _strongThisRef = new StrongBox<SocketAsyncEventArgs?>(); // state for _preAllocatedOverlapped; .Value set to this while operations in flight
+        private readonly StrongBox<SocketAsyncEventArgs?> _strongThisRef =
+            new StrongBox<SocketAsyncEventArgs?>(); // state for _preAllocatedOverlapped; .Value set to this while operations in flight
 
         /// <summary>Registration with a cancellation token for an asynchronous operation.</summary>
         /// <remarks>
@@ -74,16 +75,27 @@ namespace System.Net.Sockets
         private unsafe NativeOverlapped* _pendingOverlappedForCancellation;
 
         private PinState _pinState;
-        private enum PinState : byte { None = 0, MultipleBuffer, SendPackets }
+
+        private enum PinState : byte
+        {
+            None = 0,
+            MultipleBuffer,
+            SendPackets
+        }
 
         [MemberNotNull(nameof(_preAllocatedOverlapped))]
         private void InitializeInternals()
         {
             Debug.Assert(OperatingSystem.IsWindows());
 
-            _preAllocatedOverlapped = PreAllocatedOverlapped.UnsafeCreate(s_completionPortCallback, _strongThisRef, null);
+            _preAllocatedOverlapped = PreAllocatedOverlapped.UnsafeCreate(
+                s_completionPortCallback,
+                _strongThisRef,
+                null
+            );
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"new PreAllocatedOverlapped {_preAllocatedOverlapped}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"new PreAllocatedOverlapped {_preAllocatedOverlapped}");
         }
 
         private void FreeInternals()
@@ -95,7 +107,10 @@ namespace System.Net.Sockets
         private unsafe NativeOverlapped* AllocateNativeOverlapped()
         {
             Debug.Assert(OperatingSystem.IsWindows());
-            Debug.Assert(_operating == InProgress, $"Expected {nameof(_operating)} == {nameof(InProgress)}, got {_operating}");
+            Debug.Assert(
+                _operating == InProgress,
+                $"Expected {nameof(_operating)} == {nameof(InProgress)}, got {_operating}"
+            );
             Debug.Assert(_currentSocket != null, "_currentSocket is null");
             Debug.Assert(_currentSocket.SafeHandle != null, "_currentSocket.SafeHandle is null");
             Debug.Assert(_preAllocatedOverlapped != null, "_preAllocatedOverlapped is null");
@@ -108,10 +123,16 @@ namespace System.Net.Sockets
         {
             Debug.Assert(OperatingSystem.IsWindows());
             Debug.Assert(overlapped != null, "overlapped is null");
-            Debug.Assert(_operating == InProgress, $"Expected _operating == InProgress, got {_operating}");
+            Debug.Assert(
+                _operating == InProgress,
+                $"Expected _operating == InProgress, got {_operating}"
+            );
             Debug.Assert(_currentSocket != null, "_currentSocket is null");
             Debug.Assert(_currentSocket.SafeHandle != null, "_currentSocket.SafeHandle is null");
-            Debug.Assert(_currentSocket.SafeHandle.IOCPBoundHandle != null, "_currentSocket.SafeHandle.IOCPBoundHandle is null");
+            Debug.Assert(
+                _currentSocket.SafeHandle.IOCPBoundHandle != null,
+                "_currentSocket.SafeHandle.IOCPBoundHandle is null"
+            );
             Debug.Assert(_preAllocatedOverlapped != null, "_preAllocatedOverlapped is null");
 
             _currentSocket.SafeHandle.IOCPBoundHandle.FreeNativeOverlapped(overlapped);
@@ -175,7 +196,13 @@ namespace System.Net.Sockets
         ///     Note this buffer (if not empty) should already be pinned locally using `fixed` prior to the OS async call and until after this method returns.</param>
         /// <param name="cancellationToken">The cancellation token to use to cancel the operation.</param>
         /// <returns>The result status of the operation.</returns>
-        private unsafe SocketError ProcessIOCPResult(bool success, int bytesTransferred, ref NativeOverlapped* overlapped, Memory<byte> bufferToPin, CancellationToken cancellationToken)
+        private unsafe SocketError ProcessIOCPResult(
+            bool success,
+            int bytesTransferred,
+            ref NativeOverlapped* overlapped,
+            Memory<byte> bufferToPin,
+            CancellationToken cancellationToken
+        )
         {
             SocketError socketError = GetIOCPResult(success, ref overlapped);
             SocketFlags socketFlags = SocketFlags.None;
@@ -187,30 +214,41 @@ namespace System.Net.Sockets
                 {
                     Debug.Assert(_pendingOverlappedForCancellation == null);
                     _pendingOverlappedForCancellation = overlapped;
-                    _registrationToCancelPendingIO = cancellationToken.UnsafeRegister(static s =>
-                    {
-                        // Try to cancel the I/O.  We ignore the return value (other than for logging), as cancellation
-                        // is opportunistic and we don't want to fail the operation because we couldn't cancel it.
-                        var thisRef = (SocketAsyncEventArgs)s!;
-                        SafeSocketHandle handle = thisRef._currentSocket!.SafeHandle;
-                        if (!handle.IsClosed)
+                    _registrationToCancelPendingIO = cancellationToken.UnsafeRegister(
+                        static s =>
                         {
-                            try
+                            // Try to cancel the I/O.  We ignore the return value (other than for logging), as cancellation
+                            // is opportunistic and we don't want to fail the operation because we couldn't cancel it.
+                            var thisRef = (SocketAsyncEventArgs)s!;
+                            SafeSocketHandle handle = thisRef._currentSocket!.SafeHandle;
+                            if (!handle.IsClosed)
                             {
-                                bool canceled = Interop.Kernel32.CancelIoEx(handle, thisRef._pendingOverlappedForCancellation);
-                                if (NetEventSource.Log.IsEnabled())
+                                try
                                 {
-                                    NetEventSource.Info(thisRef, canceled ?
-                                        "Socket operation canceled." :
-                                        $"CancelIoEx failed with error '{Marshal.GetLastPInvokeError()}'.");
+                                    bool canceled = Interop
+                                        .Kernel32
+                                        .CancelIoEx(
+                                            handle,
+                                            thisRef._pendingOverlappedForCancellation
+                                        );
+                                    if (NetEventSource.Log.IsEnabled())
+                                    {
+                                        NetEventSource.Info(
+                                            thisRef,
+                                            canceled
+                                                ? "Socket operation canceled."
+                                                : $"CancelIoEx failed with error '{Marshal.GetLastPInvokeError()}'."
+                                        );
+                                    }
+                                }
+                                catch (ObjectDisposedException)
+                                {
+                                    // Ignore errors resulting from the SafeHandle being closed concurrently.
                                 }
                             }
-                            catch (ObjectDisposedException)
-                            {
-                                // Ignore errors resulting from the SafeHandle being closed concurrently.
-                            }
-                        }
-                    }, this);
+                        },
+                        this
+                    );
                 }
                 if (!bufferToPin.Equals(default))
                 {
@@ -231,12 +269,20 @@ namespace System.Net.Sockets
                 // The callback was already invoked and transferred ownership to us, so now behave as if the operation completed synchronously.
                 // Since the success/bytesTransferred arguments passed into this method are stale, we need to retrieve the actual status info
                 // from the overlapped directly.  It's also now our responsibility to clean up as GetIOCPResult would have, so free the overlapped.
-                Debug.Assert((packedResult & 0x8000000000000000) != 0, "Top bit should have been set");
+                Debug.Assert(
+                    (packedResult & 0x8000000000000000) != 0,
+                    "Top bit should have been set"
+                );
                 bytesTransferred = (int)((packedResult >> 32) & 0x7FFFFFFF);
                 socketError = (SocketError)(packedResult & 0xFFFFFFFF);
                 if (socketError != SocketError.Success)
                 {
-                    GetOverlappedResultOnError(ref socketError, ref *(uint*)&bytesTransferred, ref socketFlags, overlapped);
+                    GetOverlappedResultOnError(
+                        ref socketError,
+                        ref *(uint*)&bytesTransferred,
+                        ref socketFlags,
+                        overlapped
+                    );
                 }
                 FreeNativeOverlapped(ref overlapped);
             }
@@ -247,12 +293,22 @@ namespace System.Net.Sockets
             return socketError;
         }
 
-        internal unsafe SocketError DoOperationAccept(Socket socket, SafeSocketHandle handle, SafeSocketHandle acceptHandle, CancellationToken cancellationToken)
+        internal unsafe SocketError DoOperationAccept(
+            Socket socket,
+            SafeSocketHandle handle,
+            SafeSocketHandle acceptHandle,
+            CancellationToken cancellationToken
+        )
         {
-            Debug.Assert(_asyncCompletionOwnership == 0, $"Expected 0, got {_asyncCompletionOwnership}");
+            Debug.Assert(
+                _asyncCompletionOwnership == 0,
+                $"Expected 0, got {_asyncCompletionOwnership}"
+            );
 
             bool userBuffer = _count != 0;
-            Debug.Assert(!userBuffer || (!_buffer.Equals(default) && _count >= _acceptAddressBufferCount));
+            Debug.Assert(
+                !userBuffer || (!_buffer.Equals(default) && _count >= _acceptAddressBufferCount)
+            );
             Memory<byte> buffer = userBuffer ? _buffer : _acceptBuffer;
 
             fixed (byte* bufferPtr = &MemoryMarshal.GetReference(buffer.Span))
@@ -268,9 +324,16 @@ namespace System.Net.Sockets
                         _acceptAddressBufferCount / 2,
                         _acceptAddressBufferCount / 2,
                         out int bytesTransferred,
-                        overlapped);
+                        overlapped
+                    );
 
-                    return ProcessIOCPResult(success, bytesTransferred, ref overlapped, buffer, cancellationToken);
+                    return ProcessIOCPResult(
+                        success,
+                        bytesTransferred,
+                        ref overlapped,
+                        buffer,
+                        cancellationToken
+                    );
                 }
                 catch when (overlapped is not null)
                 {
@@ -290,7 +353,10 @@ namespace System.Net.Sockets
 
         internal unsafe SocketError DoOperationConnectEx(Socket socket, SafeSocketHandle handle)
         {
-            Debug.Assert(_asyncCompletionOwnership == 0, $"Expected 0, got {_asyncCompletionOwnership}");
+            Debug.Assert(
+                _asyncCompletionOwnership == 0,
+                $"Expected 0, got {_asyncCompletionOwnership}"
+            );
 
             // ConnectEx uses a sockaddr buffer containing the remote address to which to connect.
             // It can also optionally take a single buffer of data to send after the connection is complete.
@@ -306,9 +372,16 @@ namespace System.Net.Sockets
                         (IntPtr)(bufferPtr + _offset),
                         _count,
                         out int bytesTransferred,
-                        overlapped);
+                        overlapped
+                    );
 
-                    return ProcessIOCPResult(success, bytesTransferred, ref overlapped, _buffer, cancellationToken: default);
+                    return ProcessIOCPResult(
+                        success,
+                        bytesTransferred,
+                        ref overlapped,
+                        _buffer,
+                        cancellationToken: default
+                    );
                 }
                 catch when (overlapped is not null)
                 {
@@ -318,9 +391,16 @@ namespace System.Net.Sockets
             }
         }
 
-        internal unsafe SocketError DoOperationDisconnect(Socket socket, SafeSocketHandle handle, CancellationToken cancellationToken)
+        internal unsafe SocketError DoOperationDisconnect(
+            Socket socket,
+            SafeSocketHandle handle,
+            CancellationToken cancellationToken
+        )
         {
-            Debug.Assert(_asyncCompletionOwnership == 0, $"Expected 0, got {_asyncCompletionOwnership}");
+            Debug.Assert(
+                _asyncCompletionOwnership == 0,
+                $"Expected 0, got {_asyncCompletionOwnership}"
+            );
 
             NativeOverlapped* overlapped = AllocateNativeOverlapped();
             try
@@ -329,9 +409,16 @@ namespace System.Net.Sockets
                     handle,
                     overlapped,
                     (int)(DisconnectReuseSocket ? TransmitFileOptions.ReuseSocket : 0),
-                    0);
+                    0
+                );
 
-                return ProcessIOCPResult(success, 0, ref overlapped, bufferToPin: default, cancellationToken: cancellationToken);
+                return ProcessIOCPResult(
+                    success,
+                    0,
+                    ref overlapped,
+                    bufferToPin: default,
+                    cancellationToken: cancellationToken
+                );
             }
             catch when (overlapped is not null)
             {
@@ -340,32 +427,55 @@ namespace System.Net.Sockets
             }
         }
 
-        internal SocketError DoOperationReceive(SafeSocketHandle handle, CancellationToken cancellationToken) => _bufferList == null ?
-            DoOperationReceiveSingleBuffer(handle, cancellationToken) :
-            DoOperationReceiveMultiBuffer(handle);
+        internal SocketError DoOperationReceive(
+            SafeSocketHandle handle,
+            CancellationToken cancellationToken
+        ) =>
+            _bufferList == null
+                ? DoOperationReceiveSingleBuffer(handle, cancellationToken)
+                : DoOperationReceiveMultiBuffer(handle);
 
-        internal unsafe SocketError DoOperationReceiveSingleBuffer(SafeSocketHandle handle, CancellationToken cancellationToken)
+        internal unsafe SocketError DoOperationReceiveSingleBuffer(
+            SafeSocketHandle handle,
+            CancellationToken cancellationToken
+        )
         {
-            Debug.Assert(_asyncCompletionOwnership == 0, $"Expected 0, got {_asyncCompletionOwnership}");
+            Debug.Assert(
+                _asyncCompletionOwnership == 0,
+                $"Expected 0, got {_asyncCompletionOwnership}"
+            );
 
             fixed (byte* bufferPtr = &MemoryMarshal.GetReference(_buffer.Span))
             {
                 NativeOverlapped* overlapped = AllocateNativeOverlapped();
                 try
                 {
-                    var wsaBuffer = new WSABuffer { Length = _count, Pointer = (IntPtr)(bufferPtr + _offset) };
+                    var wsaBuffer = new WSABuffer
+                    {
+                        Length = _count,
+                        Pointer = (IntPtr)(bufferPtr + _offset)
+                    };
 
                     SocketFlags flags = _socketFlags;
-                    SocketError socketError = Interop.Winsock.WSARecv(
-                        handle,
-                        &wsaBuffer,
-                        1,
-                        out int bytesTransferred,
-                        ref flags,
-                        overlapped,
-                        IntPtr.Zero);
+                    SocketError socketError = Interop
+                        .Winsock
+                        .WSARecv(
+                            handle,
+                            &wsaBuffer,
+                            1,
+                            out int bytesTransferred,
+                            ref flags,
+                            overlapped,
+                            IntPtr.Zero
+                        );
 
-                    return ProcessIOCPResult(socketError == SocketError.Success, bytesTransferred, ref overlapped, _buffer, cancellationToken);
+                    return ProcessIOCPResult(
+                        socketError == SocketError.Success,
+                        bytesTransferred,
+                        ref overlapped,
+                        _buffer,
+                        cancellationToken
+                    );
                 }
                 catch when (overlapped is not null)
                 {
@@ -377,22 +487,34 @@ namespace System.Net.Sockets
 
         internal unsafe SocketError DoOperationReceiveMultiBuffer(SafeSocketHandle handle)
         {
-            Debug.Assert(_asyncCompletionOwnership == 0, $"Expected 0, got {_asyncCompletionOwnership}");
+            Debug.Assert(
+                _asyncCompletionOwnership == 0,
+                $"Expected 0, got {_asyncCompletionOwnership}"
+            );
 
             NativeOverlapped* overlapped = AllocateNativeOverlapped();
             try
             {
                 SocketFlags flags = _socketFlags;
-                SocketError socketError = Interop.Winsock.WSARecv(
-                    handle,
-                    _wsaBufferArrayPinned,
-                    _bufferListInternal!.Count,
-                    out int bytesTransferred,
-                    ref flags,
-                    overlapped,
-                    IntPtr.Zero);
+                SocketError socketError = Interop
+                    .Winsock
+                    .WSARecv(
+                        handle,
+                        _wsaBufferArrayPinned,
+                        _bufferListInternal!.Count,
+                        out int bytesTransferred,
+                        ref flags,
+                        overlapped,
+                        IntPtr.Zero
+                    );
 
-                return ProcessIOCPResult(socketError == SocketError.Success, bytesTransferred, ref overlapped, bufferToPin: default, cancellationToken: default);
+                return ProcessIOCPResult(
+                    socketError == SocketError.Success,
+                    bytesTransferred,
+                    ref overlapped,
+                    bufferToPin: default,
+                    cancellationToken: default
+                );
             }
             catch when (overlapped is not null)
             {
@@ -401,7 +523,10 @@ namespace System.Net.Sockets
             }
         }
 
-        internal unsafe SocketError DoOperationReceiveFrom(SafeSocketHandle handle, CancellationToken cancellationToken)
+        internal unsafe SocketError DoOperationReceiveFrom(
+            SafeSocketHandle handle,
+            CancellationToken cancellationToken
+        )
         {
             // WSARecvFrom uses a WSABuffer array describing buffers in which to
             // receive data and from which to send data respectively. Single and multiple buffers
@@ -410,35 +535,54 @@ namespace System.Net.Sockets
             // The sockaddr is allocated from NativeMemory and reused multiple time when possible.
             AllocateSocketAddressBuffer();
 
-            return _bufferList == null ?
-                DoOperationReceiveFromSingleBuffer(handle, cancellationToken) :
-                DoOperationReceiveFromMultiBuffer(handle);
+            return _bufferList == null
+                ? DoOperationReceiveFromSingleBuffer(handle, cancellationToken)
+                : DoOperationReceiveFromMultiBuffer(handle);
         }
 
-        internal unsafe SocketError DoOperationReceiveFromSingleBuffer(SafeSocketHandle handle, CancellationToken cancellationToken)
+        internal unsafe SocketError DoOperationReceiveFromSingleBuffer(
+            SafeSocketHandle handle,
+            CancellationToken cancellationToken
+        )
         {
-            Debug.Assert(_asyncCompletionOwnership == 0, $"Expected 0, got {_asyncCompletionOwnership}");
+            Debug.Assert(
+                _asyncCompletionOwnership == 0,
+                $"Expected 0, got {_asyncCompletionOwnership}"
+            );
 
             fixed (byte* bufferPtr = &MemoryMarshal.GetReference(_buffer.Span))
             {
                 NativeOverlapped* overlapped = AllocateNativeOverlapped();
                 try
                 {
-                    var wsaBuffer = new WSABuffer { Length = _count, Pointer = (IntPtr)(bufferPtr + _offset) };
+                    var wsaBuffer = new WSABuffer
+                    {
+                        Length = _count,
+                        Pointer = (IntPtr)(bufferPtr + _offset)
+                    };
 
                     SocketFlags flags = _socketFlags;
-                    SocketError socketError = Interop.Winsock.WSARecvFrom(
-                        handle,
-                        ref wsaBuffer,
-                        1,
-                        out int bytesTransferred,
-                        ref flags,
-                        PtrSocketAddressBuffer(),
-                        PtrSocketAddressSize(),
-                        overlapped,
-                        IntPtr.Zero);
+                    SocketError socketError = Interop
+                        .Winsock
+                        .WSARecvFrom(
+                            handle,
+                            ref wsaBuffer,
+                            1,
+                            out int bytesTransferred,
+                            ref flags,
+                            PtrSocketAddressBuffer(),
+                            PtrSocketAddressSize(),
+                            overlapped,
+                            IntPtr.Zero
+                        );
 
-                    return ProcessIOCPResult(socketError == SocketError.Success, bytesTransferred, ref overlapped, _buffer, cancellationToken);
+                    return ProcessIOCPResult(
+                        socketError == SocketError.Success,
+                        bytesTransferred,
+                        ref overlapped,
+                        _buffer,
+                        cancellationToken
+                    );
                 }
                 catch when (overlapped is not null)
                 {
@@ -450,24 +594,36 @@ namespace System.Net.Sockets
 
         internal unsafe SocketError DoOperationReceiveFromMultiBuffer(SafeSocketHandle handle)
         {
-            Debug.Assert(_asyncCompletionOwnership == 0, $"Expected 0, got {_asyncCompletionOwnership}");
+            Debug.Assert(
+                _asyncCompletionOwnership == 0,
+                $"Expected 0, got {_asyncCompletionOwnership}"
+            );
 
             NativeOverlapped* overlapped = AllocateNativeOverlapped();
             try
             {
                 SocketFlags flags = _socketFlags;
-                SocketError socketError = Interop.Winsock.WSARecvFrom(
-                    handle,
-                    _wsaBufferArrayPinned!,
-                    _bufferListInternal!.Count,
-                    out int bytesTransferred,
-                    ref flags,
-                    PtrSocketAddressBuffer(),
-                    PtrSocketAddressSize(),
-                    overlapped,
-                    IntPtr.Zero);
+                SocketError socketError = Interop
+                    .Winsock
+                    .WSARecvFrom(
+                        handle,
+                        _wsaBufferArrayPinned!,
+                        _bufferListInternal!.Count,
+                        out int bytesTransferred,
+                        ref flags,
+                        PtrSocketAddressBuffer(),
+                        PtrSocketAddressSize(),
+                        overlapped,
+                        IntPtr.Zero
+                    );
 
-                return ProcessIOCPResult(socketError == SocketError.Success, bytesTransferred, ref overlapped, bufferToPin: default, cancellationToken: default);
+                return ProcessIOCPResult(
+                    socketError == SocketError.Success,
+                    bytesTransferred,
+                    ref overlapped,
+                    bufferToPin: default,
+                    cancellationToken: default
+                );
             }
             catch when (overlapped is not null)
             {
@@ -476,9 +632,16 @@ namespace System.Net.Sockets
             }
         }
 
-        internal unsafe SocketError DoOperationReceiveMessageFrom(Socket socket, SafeSocketHandle handle, CancellationToken cancellationToken)
+        internal unsafe SocketError DoOperationReceiveMessageFrom(
+            Socket socket,
+            SafeSocketHandle handle,
+            CancellationToken cancellationToken
+        )
         {
-            Debug.Assert(_asyncCompletionOwnership == 0, $"Expected 0, got {_asyncCompletionOwnership}");
+            Debug.Assert(
+                _asyncCompletionOwnership == 0,
+                $"Expected 0, got {_asyncCompletionOwnership}"
+            );
 
             // WSARecvMsg uses a WSAMsg descriptor.
             // The WSAMsg buffer is a pinned array to avoid complicating the use of Overlapped.
@@ -489,20 +652,48 @@ namespace System.Net.Sockets
             AllocateSocketAddressBuffer();
 
             // Create a WSAMessageBuffer if none exists yet.
-            _wsaMessageBufferPinned ??= GC.AllocateUninitializedArray<byte>(sizeof(Interop.Winsock.WSAMsg), pinned: true);
+            _wsaMessageBufferPinned ??= GC.AllocateUninitializedArray<byte>(
+                sizeof(Interop.Winsock.WSAMsg),
+                pinned: true
+            );
 
             // Create and pin an appropriately sized control buffer if none already
-            IPAddress? ipAddress = (_socketAddress!.Family == AddressFamily.InterNetworkV6 ? _socketAddress.GetIPAddress() : null);
-            bool ipv4 = (_currentSocket!.AddressFamily == AddressFamily.InterNetwork || (ipAddress != null && ipAddress.IsIPv4MappedToIPv6)); // DualMode
+            IPAddress? ipAddress = (
+                _socketAddress!.Family == AddressFamily.InterNetworkV6
+                    ? _socketAddress.GetIPAddress()
+                    : null
+            );
+            bool ipv4 = (
+                _currentSocket!.AddressFamily == AddressFamily.InterNetwork
+                || (ipAddress != null && ipAddress.IsIPv4MappedToIPv6)
+            ); // DualMode
             bool ipv6 = _currentSocket.AddressFamily == AddressFamily.InterNetworkV6;
 
-            if (ipv6 && (_controlBufferPinned == null || _controlBufferPinned.Length != sizeof(Interop.Winsock.ControlDataIPv6)))
+            if (
+                ipv6
+                && (
+                    _controlBufferPinned == null
+                    || _controlBufferPinned.Length != sizeof(Interop.Winsock.ControlDataIPv6)
+                )
+            )
             {
-                _controlBufferPinned = GC.AllocateUninitializedArray<byte>(sizeof(Interop.Winsock.ControlDataIPv6), pinned: true);
+                _controlBufferPinned = GC.AllocateUninitializedArray<byte>(
+                    sizeof(Interop.Winsock.ControlDataIPv6),
+                    pinned: true
+                );
             }
-            else if (ipv4 && (_controlBufferPinned == null || _controlBufferPinned.Length != sizeof(Interop.Winsock.ControlData)))
+            else if (
+                ipv4
+                && (
+                    _controlBufferPinned == null
+                    || _controlBufferPinned.Length != sizeof(Interop.Winsock.ControlData)
+                )
+            )
             {
-                _controlBufferPinned = GC.AllocateUninitializedArray<byte>(sizeof(Interop.Winsock.ControlData), pinned: true);
+                _controlBufferPinned = GC.AllocateUninitializedArray<byte>(
+                    sizeof(Interop.Winsock.ControlData),
+                    pinned: true
+                );
             }
 
             // If single buffer we need a single element WSABuffer.
@@ -510,7 +701,10 @@ namespace System.Net.Sockets
             uint wsaRecvMsgWSABufferCount;
             if (_bufferList == null)
             {
-                _wsaRecvMsgWSABufferArrayPinned ??= GC.AllocateUninitializedArray<WSABuffer>(1, pinned: true);
+                _wsaRecvMsgWSABufferArrayPinned ??= GC.AllocateUninitializedArray<WSABuffer>(
+                    1,
+                    pinned: true
+                );
 
                 fixed (byte* bufferPtr = &MemoryMarshal.GetReference(_buffer.Span))
                 {
@@ -536,9 +730,11 @@ namespace System.Net.Sockets
             SocketError Core()
             {
                 // Fill in WSAMessageBuffer.
-                Interop.Winsock.WSAMsg* pMessage = (Interop.Winsock.WSAMsg*)Marshal.UnsafeAddrOfPinnedArrayElement(_wsaMessageBufferPinned, 0);
+                Interop.Winsock.WSAMsg* pMessage = (Interop.Winsock.WSAMsg*)
+                    Marshal.UnsafeAddrOfPinnedArrayElement(_wsaMessageBufferPinned, 0);
                 pMessage->socketAddress = PtrSocketAddressBuffer();
-                pMessage->addressLength = (uint)SocketAddress.GetMaximumAddressSize(_socketAddress!.Family);
+                pMessage->addressLength = (uint)
+                    SocketAddress.GetMaximumAddressSize(_socketAddress!.Family);
                 fixed (void* ptrWSARecvMsgWSABufferArray = &wsaRecvMsgWSABufferArray[0])
                 {
                     pMessage->buffers = (IntPtr)ptrWSARecvMsgWSABufferArray;
@@ -564,9 +760,16 @@ namespace System.Net.Sockets
                         Marshal.UnsafeAddrOfPinnedArrayElement(_wsaMessageBufferPinned, 0),
                         out int bytesTransferred,
                         overlapped,
-                        IntPtr.Zero);
+                        IntPtr.Zero
+                    );
 
-                    return ProcessIOCPResult(socketError == SocketError.Success, bytesTransferred, ref overlapped, _bufferList == null ? _buffer : default, cancellationToken);
+                    return ProcessIOCPResult(
+                        socketError == SocketError.Success,
+                        bytesTransferred,
+                        ref overlapped,
+                        _bufferList == null ? _buffer : default,
+                        cancellationToken
+                    );
                 }
                 catch when (overlapped is not null)
                 {
@@ -576,31 +779,54 @@ namespace System.Net.Sockets
             }
         }
 
-        internal unsafe SocketError DoOperationSend(SafeSocketHandle handle, CancellationToken cancellationToken) => _bufferList == null ?
-            DoOperationSendSingleBuffer(handle, cancellationToken) :
-            DoOperationSendMultiBuffer(handle);
+        internal unsafe SocketError DoOperationSend(
+            SafeSocketHandle handle,
+            CancellationToken cancellationToken
+        ) =>
+            _bufferList == null
+                ? DoOperationSendSingleBuffer(handle, cancellationToken)
+                : DoOperationSendMultiBuffer(handle);
 
-        internal unsafe SocketError DoOperationSendSingleBuffer(SafeSocketHandle handle, CancellationToken cancellationToken)
+        internal unsafe SocketError DoOperationSendSingleBuffer(
+            SafeSocketHandle handle,
+            CancellationToken cancellationToken
+        )
         {
-            Debug.Assert(_asyncCompletionOwnership == 0, $"Expected 0, got {_asyncCompletionOwnership}");
+            Debug.Assert(
+                _asyncCompletionOwnership == 0,
+                $"Expected 0, got {_asyncCompletionOwnership}"
+            );
 
             fixed (byte* bufferPtr = &MemoryMarshal.GetReference(_buffer.Span))
             {
                 NativeOverlapped* overlapped = AllocateNativeOverlapped();
                 try
                 {
-                    var wsaBuffer = new WSABuffer { Length = _count, Pointer = (IntPtr)(bufferPtr + _offset) };
+                    var wsaBuffer = new WSABuffer
+                    {
+                        Length = _count,
+                        Pointer = (IntPtr)(bufferPtr + _offset)
+                    };
 
-                    SocketError socketError = Interop.Winsock.WSASend(
-                        handle,
-                        &wsaBuffer,
-                        1,
-                        out int bytesTransferred,
-                        _socketFlags,
-                        overlapped,
-                        IntPtr.Zero);
+                    SocketError socketError = Interop
+                        .Winsock
+                        .WSASend(
+                            handle,
+                            &wsaBuffer,
+                            1,
+                            out int bytesTransferred,
+                            _socketFlags,
+                            overlapped,
+                            IntPtr.Zero
+                        );
 
-                    return ProcessIOCPResult(socketError == SocketError.Success, bytesTransferred, ref overlapped, _buffer, cancellationToken);
+                    return ProcessIOCPResult(
+                        socketError == SocketError.Success,
+                        bytesTransferred,
+                        ref overlapped,
+                        _buffer,
+                        cancellationToken
+                    );
                 }
                 catch when (overlapped is not null)
                 {
@@ -612,21 +838,33 @@ namespace System.Net.Sockets
 
         internal unsafe SocketError DoOperationSendMultiBuffer(SafeSocketHandle handle)
         {
-            Debug.Assert(_asyncCompletionOwnership == 0, $"Expected 0, got {_asyncCompletionOwnership}");
+            Debug.Assert(
+                _asyncCompletionOwnership == 0,
+                $"Expected 0, got {_asyncCompletionOwnership}"
+            );
 
             NativeOverlapped* overlapped = AllocateNativeOverlapped();
             try
             {
-                SocketError socketError = Interop.Winsock.WSASend(
-                    handle,
-                    _wsaBufferArrayPinned,
-                    _bufferListInternal!.Count,
-                    out int bytesTransferred,
-                    _socketFlags,
-                    overlapped,
-                    IntPtr.Zero);
+                SocketError socketError = Interop
+                    .Winsock
+                    .WSASend(
+                        handle,
+                        _wsaBufferArrayPinned,
+                        _bufferListInternal!.Count,
+                        out int bytesTransferred,
+                        _socketFlags,
+                        overlapped,
+                        IntPtr.Zero
+                    );
 
-                return ProcessIOCPResult(socketError == SocketError.Success, bytesTransferred, ref overlapped, bufferToPin: default, cancellationToken: default);
+                return ProcessIOCPResult(
+                    socketError == SocketError.Success,
+                    bytesTransferred,
+                    ref overlapped,
+                    bufferToPin: default,
+                    cancellationToken: default
+                );
             }
             catch when (overlapped is not null)
             {
@@ -635,13 +873,21 @@ namespace System.Net.Sockets
             }
         }
 
-        internal unsafe SocketError DoOperationSendPackets(Socket socket, SafeSocketHandle handle, CancellationToken cancellationToken)
+        internal unsafe SocketError DoOperationSendPackets(
+            Socket socket,
+            SafeSocketHandle handle,
+            CancellationToken cancellationToken
+        )
         {
-            Debug.Assert(_asyncCompletionOwnership == 0, $"Expected 0, got {_asyncCompletionOwnership}");
+            Debug.Assert(
+                _asyncCompletionOwnership == 0,
+                $"Expected 0, got {_asyncCompletionOwnership}"
+            );
 
             // Cache copy to avoid problems with concurrent manipulation during the async operation.
             Debug.Assert(_sendPacketsElements != null);
-            SendPacketsElement[] sendPacketsElementsCopy = (SendPacketsElement[])_sendPacketsElements.Clone();
+            SendPacketsElement[] sendPacketsElementsCopy = (SendPacketsElement[])
+                _sendPacketsElements.Clone();
 
             // TransmitPackets uses an array of TRANSMIT_PACKET_ELEMENT structs as
             // descriptors for buffers and files to be sent.  It also takes a send size
@@ -650,7 +896,9 @@ namespace System.Net.Sockets
             // native TRANSMIT_PACKET_ELEMENT array that will be passed to TransmitPackets.
 
             // Scan the elements to count files and buffers.
-            int sendPacketsElementsFileCount = 0, sendPacketsElementsFileStreamCount = 0, sendPacketsElementsBufferCount = 0;
+            int sendPacketsElementsFileCount = 0,
+                sendPacketsElementsFileStreamCount = 0,
+                sendPacketsElementsBufferCount = 0;
             foreach (SendPacketsElement spe in sendPacketsElementsCopy)
             {
                 if (spe != null)
@@ -670,7 +918,12 @@ namespace System.Net.Sockets
                 }
             }
 
-            if (sendPacketsElementsFileCount + sendPacketsElementsFileStreamCount + sendPacketsElementsBufferCount == 0)
+            if (
+                sendPacketsElementsFileCount
+                    + sendPacketsElementsFileStreamCount
+                    + sendPacketsElementsBufferCount
+                == 0
+            )
             {
                 FinishOperationSyncSuccess(0, SocketFlags.None);
                 return SocketError.Success;
@@ -689,8 +942,12 @@ namespace System.Net.Sockets
                         if (spe?.FilePath != null)
                         {
                             // Create a FileStream to open the file.
-                            _sendPacketsFileHandles[index] =
-                                File.OpenHandle(spe.FilePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+                            _sendPacketsFileHandles[index] = File.OpenHandle(
+                                spe.FilePath,
+                                FileMode.Open,
+                                FileAccess.Read,
+                                FileShare.Read
+                            );
 
                             // Get the file handle from the stream.
                             index++;
@@ -708,8 +965,12 @@ namespace System.Net.Sockets
             }
 
             Interop.Winsock.TransmitPacketsElement[] sendPacketsDescriptorPinned =
-                SetupPinHandlesSendPackets(sendPacketsElementsCopy, sendPacketsElementsFileCount,
-                    sendPacketsElementsFileStreamCount, sendPacketsElementsBufferCount);
+                SetupPinHandlesSendPackets(
+                    sendPacketsElementsCopy,
+                    sendPacketsElementsFileCount,
+                    sendPacketsElementsFileStreamCount,
+                    sendPacketsElementsBufferCount
+                );
             Debug.Assert(sendPacketsDescriptorPinned != null);
             Debug.Assert(sendPacketsDescriptorPinned.Length > 0);
 
@@ -722,9 +983,16 @@ namespace System.Net.Sockets
                     sendPacketsDescriptorPinned.Length,
                     _sendPacketsSendSize,
                     overlapped,
-                    _sendPacketsFlags);
+                    _sendPacketsFlags
+                );
 
-                return ProcessIOCPResult(result, 0, ref overlapped, bufferToPin: default, cancellationToken: cancellationToken);
+                return ProcessIOCPResult(
+                    result,
+                    0,
+                    ref overlapped,
+                    bufferToPin: default,
+                    cancellationToken: cancellationToken
+                );
             }
             catch when (overlapped is not null)
             {
@@ -733,40 +1001,62 @@ namespace System.Net.Sockets
             }
         }
 
-        internal unsafe SocketError DoOperationSendTo(SafeSocketHandle handle, CancellationToken cancellationToken)
+        internal unsafe SocketError DoOperationSendTo(
+            SafeSocketHandle handle,
+            CancellationToken cancellationToken
+        )
         {
             // WSASendTo uses a WSABuffer array describing buffers in which to
             // receive data and from which to send data respectively. Single and multiple buffers
             // are handled differently so as to optimize performance for the more common single buffer case.
             //
 
-            return _bufferList == null ?
-                DoOperationSendToSingleBuffer(handle, cancellationToken) :
-                DoOperationSendToMultiBuffer(handle);
+            return _bufferList == null
+                ? DoOperationSendToSingleBuffer(handle, cancellationToken)
+                : DoOperationSendToMultiBuffer(handle);
         }
 
-        internal unsafe SocketError DoOperationSendToSingleBuffer(SafeSocketHandle handle, CancellationToken cancellationToken)
+        internal unsafe SocketError DoOperationSendToSingleBuffer(
+            SafeSocketHandle handle,
+            CancellationToken cancellationToken
+        )
         {
-            Debug.Assert(_asyncCompletionOwnership == 0, $"Expected 0, got {_asyncCompletionOwnership}");
+            Debug.Assert(
+                _asyncCompletionOwnership == 0,
+                $"Expected 0, got {_asyncCompletionOwnership}"
+            );
 
             fixed (byte* bufferPtr = &MemoryMarshal.GetReference(_buffer.Span))
             {
                 NativeOverlapped* overlapped = AllocateNativeOverlapped();
                 try
                 {
-                    var wsaBuffer = new WSABuffer { Length = _count, Pointer = (IntPtr)(bufferPtr + _offset) };
+                    var wsaBuffer = new WSABuffer
+                    {
+                        Length = _count,
+                        Pointer = (IntPtr)(bufferPtr + _offset)
+                    };
 
-                    SocketError socketError = Interop.Winsock.WSASendTo(
-                        handle,
-                        ref wsaBuffer,
-                        1,
-                        out int bytesTransferred,
-                        _socketFlags,
-                        _socketAddress!.Buffer.Span,
-                        overlapped,
-                        IntPtr.Zero);
+                    SocketError socketError = Interop
+                        .Winsock
+                        .WSASendTo(
+                            handle,
+                            ref wsaBuffer,
+                            1,
+                            out int bytesTransferred,
+                            _socketFlags,
+                            _socketAddress!.Buffer.Span,
+                            overlapped,
+                            IntPtr.Zero
+                        );
 
-                    return ProcessIOCPResult(socketError == SocketError.Success, bytesTransferred, ref overlapped, _buffer, cancellationToken);
+                    return ProcessIOCPResult(
+                        socketError == SocketError.Success,
+                        bytesTransferred,
+                        ref overlapped,
+                        _buffer,
+                        cancellationToken
+                    );
                 }
                 catch when (overlapped is not null)
                 {
@@ -778,22 +1068,34 @@ namespace System.Net.Sockets
 
         internal unsafe SocketError DoOperationSendToMultiBuffer(SafeSocketHandle handle)
         {
-            Debug.Assert(_asyncCompletionOwnership == 0, $"Expected 0, got {_asyncCompletionOwnership}");
+            Debug.Assert(
+                _asyncCompletionOwnership == 0,
+                $"Expected 0, got {_asyncCompletionOwnership}"
+            );
 
             NativeOverlapped* overlapped = AllocateNativeOverlapped();
             try
             {
-                SocketError socketError = Interop.Winsock.WSASendTo(
-                    handle,
-                    _wsaBufferArrayPinned!,
-                    _bufferListInternal!.Count,
-                    out int bytesTransferred,
-                    _socketFlags,
-                    _socketAddress!.Buffer.Span,
-                    overlapped,
-                    IntPtr.Zero);
+                SocketError socketError = Interop
+                    .Winsock
+                    .WSASendTo(
+                        handle,
+                        _wsaBufferArrayPinned!,
+                        _bufferListInternal!.Count,
+                        out int bytesTransferred,
+                        _socketFlags,
+                        _socketAddress!.Buffer.Span,
+                        overlapped,
+                        IntPtr.Zero
+                    );
 
-                return ProcessIOCPResult(socketError == SocketError.Success, bytesTransferred, ref overlapped, bufferToPin: default, cancellationToken: default);
+                return ProcessIOCPResult(
+                    socketError == SocketError.Success,
+                    bytesTransferred,
+                    ref overlapped,
+                    bufferToPin: default,
+                    cancellationToken: default
+                );
             }
             catch when (overlapped is not null)
             {
@@ -823,7 +1125,10 @@ namespace System.Net.Sockets
 
                     // Number of things to pin is number of buffers.
                     // Ensure we have properly sized object array.
-                    if (_multipleBufferMemoryHandles == null || (_multipleBufferMemoryHandles.Length < bufferCount))
+                    if (
+                        _multipleBufferMemoryHandles == null
+                        || (_multipleBufferMemoryHandles.Length < bufferCount)
+                    )
                     {
                         _multipleBufferMemoryHandles = new MemoryHandle[bufferCount];
                     }
@@ -831,18 +1136,27 @@ namespace System.Net.Sockets
                     // Pin the buffers.
                     for (int i = 0; i < bufferCount; i++)
                     {
-                        _multipleBufferMemoryHandles[i] = _bufferListInternal[i].Array.AsMemory().Pin();
+                        _multipleBufferMemoryHandles[i] = _bufferListInternal[i]
+                            .Array
+                            .AsMemory()
+                            .Pin();
                     }
 
                     if (_wsaBufferArrayPinned == null || _wsaBufferArrayPinned.Length < bufferCount)
                     {
-                        _wsaBufferArrayPinned = GC.AllocateUninitializedArray<WSABuffer>(bufferCount, pinned: true);
+                        _wsaBufferArrayPinned = GC.AllocateUninitializedArray<WSABuffer>(
+                            bufferCount,
+                            pinned: true
+                        );
                     }
 
                     for (int i = 0; i < bufferCount; i++)
                     {
                         ArraySegment<byte> localCopy = _bufferListInternal[i];
-                        _wsaBufferArrayPinned[i].Pointer = Marshal.UnsafeAddrOfPinnedArrayElement(localCopy.Array!, localCopy.Offset);
+                        _wsaBufferArrayPinned[i].Pointer = Marshal.UnsafeAddrOfPinnedArrayElement(
+                            localCopy.Array!,
+                            localCopy.Offset
+                        );
                         _wsaBufferArrayPinned[i].Length = localCopy.Count;
                     }
 
@@ -864,7 +1178,8 @@ namespace System.Net.Sockets
 
             if (_socketAddressPtr == IntPtr.Zero)
             {
-                _socketAddressPtr = (IntPtr)NativeMemory.Alloc((uint)(_socketAddress!.Size + sizeof(IntPtr)));
+                _socketAddressPtr = (IntPtr)
+                    NativeMemory.Alloc((uint)(_socketAddress!.Size + sizeof(IntPtr)));
             }
 
             *((int*)_socketAddressPtr) = size;
@@ -919,7 +1234,11 @@ namespace System.Net.Sockets
 
         // Sets up an Overlapped object for SendPacketsAsync.
         private unsafe Interop.Winsock.TransmitPacketsElement[] SetupPinHandlesSendPackets(
-            SendPacketsElement[] sendPacketsElementsCopy, int sendPacketsElementsFileCount, int sendPacketsElementsFileStreamCount, int sendPacketsElementsBufferCount)
+            SendPacketsElement[] sendPacketsElementsCopy,
+            int sendPacketsElementsFileCount,
+            int sendPacketsElementsFileStreamCount,
+            int sendPacketsElementsBufferCount
+        )
         {
             if (_pinState != PinState.None)
             {
@@ -927,13 +1246,20 @@ namespace System.Net.Sockets
             }
 
             // Alloc native descriptor.
-            var sendPacketsDescriptorPinned = GC.AllocateUninitializedArray<Interop.Winsock.TransmitPacketsElement>(
-                sendPacketsElementsFileCount + sendPacketsElementsFileStreamCount + sendPacketsElementsBufferCount,
-                pinned: true);
+            var sendPacketsDescriptorPinned =
+                GC.AllocateUninitializedArray<Interop.Winsock.TransmitPacketsElement>(
+                    sendPacketsElementsFileCount
+                        + sendPacketsElementsFileStreamCount
+                        + sendPacketsElementsBufferCount,
+                    pinned: true
+                );
 
             // Number of things to pin is number of buffers + 1 (native descriptor).
             // Ensure we have properly sized object array.
-            if (_multipleBufferMemoryHandles == null || (_multipleBufferMemoryHandles.Length < sendPacketsElementsBufferCount))
+            if (
+                _multipleBufferMemoryHandles == null
+                || (_multipleBufferMemoryHandles.Length < sendPacketsElementsBufferCount)
+            )
             {
                 _multipleBufferMemoryHandles = new MemoryHandle[sendPacketsElementsBufferCount];
             }
@@ -960,25 +1286,33 @@ namespace System.Net.Sockets
                     if (spe.MemoryBuffer != null && spe.Count > 0)
                     {
                         // This element is a buffer.
-                        sendPacketsDescriptorPinned[descriptorIndex].buffer = (IntPtr)_multipleBufferMemoryHandles[bufferIndex].Pointer;
+                        sendPacketsDescriptorPinned[descriptorIndex].buffer = (IntPtr)
+                            _multipleBufferMemoryHandles[bufferIndex].Pointer;
                         sendPacketsDescriptorPinned[descriptorIndex].length = (uint)spe.Count;
                         sendPacketsDescriptorPinned[descriptorIndex].flags =
-                            Interop.Winsock.TransmitPacketsElementFlags.Memory | (spe.EndOfPacket
-                                ? Interop.Winsock.TransmitPacketsElementFlags.EndOfPacket
-                                : 0);
+                            Interop.Winsock.TransmitPacketsElementFlags.Memory
+                            | (
+                                spe.EndOfPacket
+                                    ? Interop.Winsock.TransmitPacketsElementFlags.EndOfPacket
+                                    : 0
+                            );
                         bufferIndex++;
                         descriptorIndex++;
                     }
                     else if (spe.FilePath != null)
                     {
                         // This element is a file.
-                        sendPacketsDescriptorPinned[descriptorIndex].fileHandle = _sendPacketsFileHandles![fileIndex].DangerousGetHandle();
+                        sendPacketsDescriptorPinned[descriptorIndex].fileHandle =
+                            _sendPacketsFileHandles![fileIndex].DangerousGetHandle();
                         sendPacketsDescriptorPinned[descriptorIndex].fileOffset = spe.OffsetLong;
                         sendPacketsDescriptorPinned[descriptorIndex].length = (uint)spe.Count;
                         sendPacketsDescriptorPinned[descriptorIndex].flags =
-                            Interop.Winsock.TransmitPacketsElementFlags.File | (spe.EndOfPacket
-                                ? Interop.Winsock.TransmitPacketsElementFlags.EndOfPacket
-                                : 0);
+                            Interop.Winsock.TransmitPacketsElementFlags.File
+                            | (
+                                spe.EndOfPacket
+                                    ? Interop.Winsock.TransmitPacketsElementFlags.EndOfPacket
+                                    : 0
+                            );
                         fileIndex++;
                         descriptorIndex++;
                     }
@@ -987,14 +1321,19 @@ namespace System.Net.Sockets
                         // This element is a file stream. SendPacketsElement throws if the FileStream is not opened asynchronously;
                         // Synchronously opened FileStream can't be used concurrently (e.g. multiple SendPacketsElements with the same
                         // FileStream).
-                        sendPacketsDescriptorPinned[descriptorIndex].fileHandle = spe.FileStream.SafeFileHandle.DangerousGetHandle();
+                        sendPacketsDescriptorPinned[descriptorIndex].fileHandle = spe.FileStream
+                            .SafeFileHandle
+                            .DangerousGetHandle();
                         sendPacketsDescriptorPinned[descriptorIndex].fileOffset = spe.OffsetLong;
 
                         sendPacketsDescriptorPinned[descriptorIndex].length = (uint)spe.Count;
                         sendPacketsDescriptorPinned[descriptorIndex].flags =
-                            Interop.Winsock.TransmitPacketsElementFlags.File | (spe.EndOfPacket
-                                ? Interop.Winsock.TransmitPacketsElementFlags.EndOfPacket
-                                : 0);
+                            Interop.Winsock.TransmitPacketsElementFlags.File
+                            | (
+                                spe.EndOfPacket
+                                    ? Interop.Winsock.TransmitPacketsElementFlags.EndOfPacket
+                                    : 0
+                            );
                         descriptorIndex++;
                     }
                 }
@@ -1016,7 +1355,13 @@ namespace System.Net.Sockets
                 for (int i = 0; i < _bufferListInternal!.Count; i++)
                 {
                     WSABuffer wsaBuffer = _wsaBufferArrayPinned![i];
-                    NetEventSource.DumpBuffer(this, new ReadOnlySpan<byte>((byte*)wsaBuffer.Pointer, Math.Min(wsaBuffer.Length, size)));
+                    NetEventSource.DumpBuffer(
+                        this,
+                        new ReadOnlySpan<byte>(
+                            (byte*)wsaBuffer.Pointer,
+                            Math.Min(wsaBuffer.Length, size)
+                        )
+                    );
                     if ((size -= wsaBuffer.Length) <= 0)
                     {
                         break;
@@ -1045,7 +1390,9 @@ namespace System.Net.Sockets
 
                 // This matches the logic in DoOperationAccept
                 bool userBuffer = _count != 0;
-                Debug.Assert(!userBuffer || (!_buffer.Equals(default) && _count >= _acceptAddressBufferCount));
+                Debug.Assert(
+                    !userBuffer || (!_buffer.Equals(default) && _count >= _acceptAddressBufferCount)
+                );
                 Memory<byte> buffer = userBuffer ? _buffer : _acceptBuffer;
 
                 fixed (byte* bufferPtr = &MemoryMarshal.GetReference(buffer.Span))
@@ -1061,16 +1408,21 @@ namespace System.Net.Sockets
                         out int size
                     );
 
-                    new ReadOnlySpan<byte>((void*)remoteAddr, size).CopyTo(remoteSocketAddress.Buffer.Span);
+                    new ReadOnlySpan<byte>((void*)remoteAddr, size).CopyTo(
+                        remoteSocketAddress.Buffer.Span
+                    );
                     remoteSocketAddress.Size = size;
                 }
 
-                socketError = Interop.Winsock.setsockopt(
-                    _acceptSocket!.SafeHandle,
-                    SocketOptionLevel.Socket,
-                    SocketOptionName.UpdateAcceptContext,
-                    ref handle,
-                    IntPtr.Size);
+                socketError = Interop
+                    .Winsock
+                    .setsockopt(
+                        _acceptSocket!.SafeHandle,
+                        SocketOptionLevel.Socket,
+                        SocketOptionName.UpdateAcceptContext,
+                        ref handle,
+                        IntPtr.Size
+                    );
 
                 if (socketError == SocketError.SocketError)
                 {
@@ -1104,15 +1456,18 @@ namespace System.Net.Sockets
                 }
 
                 // Update the socket context.
-                SocketError socketError = Interop.Winsock.setsockopt(
-                    _currentSocket!.SafeHandle,
-                    SocketOptionLevel.Socket,
-                    SocketOptionName.UpdateConnectContext,
-                    null,
-                    0);
-                return socketError == SocketError.SocketError ?
-                    SocketPal.GetLastSocketError() :
-                    socketError;
+                SocketError socketError = Interop
+                    .Winsock
+                    .setsockopt(
+                        _currentSocket!.SafeHandle,
+                        SocketOptionLevel.Socket,
+                        SocketOptionName.UpdateConnectContext,
+                        null,
+                        0
+                    );
+                return socketError == SocketError.SocketError
+                    ? SocketPal.GetLastSocketError()
+                    : socketError;
             }
             catch (ObjectDisposedException)
             {
@@ -1164,18 +1519,23 @@ namespace System.Net.Sockets
 
         private unsafe void FinishOperationReceiveMessageFrom()
         {
-            Interop.Winsock.WSAMsg* PtrMessage = (Interop.Winsock.WSAMsg*)Marshal.UnsafeAddrOfPinnedArrayElement(_wsaMessageBufferPinned!, 0);
+            Interop.Winsock.WSAMsg* PtrMessage = (Interop.Winsock.WSAMsg*)
+                Marshal.UnsafeAddrOfPinnedArrayElement(_wsaMessageBufferPinned!, 0);
             _socketFlags = PtrMessage->flags;
 
             if (_controlBufferPinned!.Length == sizeof(Interop.Winsock.ControlData))
             {
                 // IPv4.
-                _receiveMessageFromPacketInfo = SocketPal.GetIPPacketInformation((Interop.Winsock.ControlData*)PtrMessage->controlBuffer.Pointer);
+                _receiveMessageFromPacketInfo = SocketPal.GetIPPacketInformation(
+                    (Interop.Winsock.ControlData*)PtrMessage->controlBuffer.Pointer
+                );
             }
             else if (_controlBufferPinned.Length == sizeof(Interop.Winsock.ControlDataIPv6))
             {
                 // IPv6.
-                _receiveMessageFromPacketInfo = SocketPal.GetIPPacketInformation((Interop.Winsock.ControlDataIPv6*)PtrMessage->controlBuffer.Pointer);
+                _receiveMessageFromPacketInfo = SocketPal.GetIPPacketInformation(
+                    (Interop.Winsock.ControlDataIPv6*)PtrMessage->controlBuffer.Pointer
+                );
             }
             else
             {
@@ -1198,10 +1558,17 @@ namespace System.Net.Sockets
             }
         }
 
-        private static readonly unsafe IOCompletionCallback s_completionPortCallback = delegate (uint errorCode, uint numBytes, NativeOverlapped* nativeOverlapped)
+        private static readonly unsafe IOCompletionCallback s_completionPortCallback = delegate(
+            uint errorCode,
+            uint numBytes,
+            NativeOverlapped* nativeOverlapped
+        )
         {
             Debug.Assert(OperatingSystem.IsWindows());
-            var saeaBox = (StrongBox<SocketAsyncEventArgs>)(ThreadPoolBoundHandle.GetNativeOverlappedState(nativeOverlapped)!);
+            var saeaBox =
+                (StrongBox<SocketAsyncEventArgs>)(
+                    ThreadPoolBoundHandle.GetNativeOverlappedState(nativeOverlapped)!
+                );
 
             Debug.Assert(saeaBox.Value != null);
             SocketAsyncEventArgs saea = saeaBox.Value;
@@ -1217,7 +1584,10 @@ namespace System.Net.Sockets
                 // be needed, but if this callback wins the race condition and transfers ownership to the
                 // launcher to handle completion and clean up, transfering these values over prevents needing
                 // to make an additional call to WSAGetOverlappedResult.
-                Debug.Assert(numBytes <= int.MaxValue, "We rely on being able to set the top bit to ensure the whole packed result isn't 0.");
+                Debug.Assert(
+                    numBytes <= int.MaxValue,
+                    "We rely on being able to set the top bit to ensure the whole packed result isn't 0."
+                );
                 ulong packedResult = (1ul << 63) | ((ulong)numBytes << 32) | errorCode;
 
                 if (Interlocked.Exchange(ref saea._asyncCompletionOwnership, packedResult) == 0)
@@ -1238,14 +1608,24 @@ namespace System.Net.Sockets
             {
                 SocketError socketError = (SocketError)errorCode;
                 SocketFlags socketFlags = SocketFlags.None;
-                saea.GetOverlappedResultOnError(ref socketError, ref numBytes, ref socketFlags, nativeOverlapped);
+                saea.GetOverlappedResultOnError(
+                    ref socketError,
+                    ref numBytes,
+                    ref socketFlags,
+                    nativeOverlapped
+                );
 
                 saea.FreeNativeOverlapped(ref nativeOverlapped);
                 saea.FinishOperationAsyncFailure(socketError, (int)numBytes, socketFlags);
             }
         };
 
-        private unsafe void GetOverlappedResultOnError(ref SocketError socketError, ref uint numBytes, ref SocketFlags socketFlags, NativeOverlapped* nativeOverlapped)
+        private unsafe void GetOverlappedResultOnError(
+            ref SocketError socketError,
+            ref uint numBytes,
+            ref SocketFlags socketFlags,
+            NativeOverlapped* nativeOverlapped
+        )
         {
             if (socketError != SocketError.OperationAborted)
             {
@@ -1258,7 +1638,15 @@ namespace System.Net.Sockets
                     try
                     {
                         // Call WSAGetOverlappedResult() so GetLastSocketError() will return the correct error.
-                        Interop.Winsock.WSAGetOverlappedResult(_currentSocket.SafeHandle, nativeOverlapped, out numBytes, wait: false, out socketFlags);
+                        Interop
+                            .Winsock
+                            .WSAGetOverlappedResult(
+                                _currentSocket.SafeHandle,
+                                nativeOverlapped,
+                                out numBytes,
+                                wait: false,
+                                out socketFlags
+                            );
                         socketError = SocketPal.GetLastSocketError();
                     }
                     catch

@@ -8,7 +8,6 @@ using Xunit;
 
 public class SpAddr
 {
-
     // Struct in reg (2 ints)
     struct S
     {

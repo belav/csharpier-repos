@@ -14,97 +14,107 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact]
         public async Task TestAtRoot_Interactive()
         {
-            await VerifyKeywordAsync(SourceCodeKind.Script,
-@"$$");
+            await VerifyKeywordAsync(SourceCodeKind.Script, @"$$");
         }
 
         [Fact]
         public async Task TestAfterClass_Interactive()
         {
-            await VerifyKeywordAsync(SourceCodeKind.Script,
+            await VerifyKeywordAsync(
+                SourceCodeKind.Script,
                 """
                 class C { }
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestAfterGlobalStatement_Interactive()
         {
-            await VerifyKeywordAsync(SourceCodeKind.Script,
+            await VerifyKeywordAsync(
+                SourceCodeKind.Script,
                 """
                 System.Console.WriteLine();
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestAfterGlobalVariableDeclaration_Interactive()
         {
-            await VerifyKeywordAsync(SourceCodeKind.Script,
+            await VerifyKeywordAsync(
+                SourceCodeKind.Script,
                 """
                 int i = 0;
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotInUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"using Goo = $$");
+            await VerifyAbsenceAsync(@"using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInGlobalUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"global using Goo = $$");
+            await VerifyAbsenceAsync(@"global using Goo = $$");
         }
 
         [Fact]
         public async Task TestEmptyStatement()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"$$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"$$"));
         }
 
         [Fact]
         public async Task TestBeforeStatement()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-                """
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    """
                 $$
                 return true;
-                """));
+                """
+                )
+            );
         }
 
         [Fact]
         public async Task TestAfterStatement()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-                """
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    """
                 return true;
                 $$
-                """));
+                """
+                )
+            );
         }
 
         [Fact]
         public async Task TestAfterBlock()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-                """
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    """
                 if (true) {
                 }
                 $$
-                """));
+                """
+                )
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGoto()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"goto $$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"goto $$"));
         }
 
         [Fact]
@@ -116,14 +126,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 {
                   $$
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestAfterAssignment()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-                """
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    """
                 if (b != 0) {
                     count <<= 2;
                     char[] newBuffer = new char[count];
@@ -132,7 +144,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                     buffer = newBuffer;
                     $$ Restart;
                   }
-                """));
+                """
+                )
+            );
         }
     }
 }

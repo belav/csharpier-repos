@@ -62,7 +62,8 @@ public readonly record struct ContainerProperties
         string partitionKey,
         int? analyticalTtl,
         int? defaultTtl,
-        ThroughputProperties? throughput)
+        ThroughputProperties? throughput
+    )
     {
         Id = containerId;
         PartitionKey = partitionKey;
@@ -82,7 +83,8 @@ public readonly record struct ContainerProperties
         out string partitionKey,
         out int? analyticalTtl,
         out int? defaultTtl,
-        out ThroughputProperties? throughput)
+        out ThroughputProperties? throughput
+    )
     {
         containerId = Id;
         partitionKey = PartitionKey;

@@ -11,7 +11,6 @@ using Moq.Async;
 
 namespace Moq
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal abstract class Invocation : IInvocation
@@ -33,7 +32,6 @@ namespace Moq
         abstract class Invocation : IInvocation
     */
     abstract class Invocation : IInvocation
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private object[] arguments;

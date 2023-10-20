@@ -10,7 +10,6 @@ using Xunit;
 
 public class PInvokeTest
 {
-
     static String foo = "foo";
     static String bar = "bar";
 

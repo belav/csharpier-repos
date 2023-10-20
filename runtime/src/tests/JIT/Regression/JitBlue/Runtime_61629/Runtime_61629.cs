@@ -8,8 +8,7 @@ using Xunit;
 public class Runtime_61629
 {
     [Fact]
-    public static int TestEntryPoint() => 
-        Test(100, 200.0) + Test(Math.PI, Math.PI) - 72;
+    public static int TestEntryPoint() => Test(100, 200.0) + Test(Math.PI, Math.PI) - 72;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static int Test(double a, double b)

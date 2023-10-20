@@ -125,7 +125,12 @@ namespace System.Threading
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern void try_enter_with_atomic_var(object obj, int millisecondsTimeout, bool allowInterruption, ref bool lockTaken);
+        internal static extern void try_enter_with_atomic_var(
+            object obj,
+            int millisecondsTimeout,
+            bool allowInterruption,
+            ref bool lockTaken
+        );
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void ReliableEnterTimeout(object obj, int timeout, ref bool lockTaken)
@@ -137,7 +142,8 @@ namespace System.Threading
                 throw new ArgumentOutOfRangeException(nameof(timeout));
 
             // fast path
-            if (ObjectHeader.TryEnterFast(obj)) {
+            if (ObjectHeader.TryEnterFast(obj))
+            {
                 lockTaken = true;
                 return;
             }

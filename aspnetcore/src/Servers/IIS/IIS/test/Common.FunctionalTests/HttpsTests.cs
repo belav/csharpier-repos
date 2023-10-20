@@ -1,4 +1,3 @@
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -19,14 +18,18 @@ using Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
 #if IISEXPRESS_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests;
+
 #elif NEWHANDLER_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.NewHandler.FunctionalTests;
+
 #elif NEWSHIM_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.NewShim.FunctionalTests;
+
 #endif
 
 #else
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
+
 #endif
 
 [Collection(PublishedSitesCollection.Name)]
@@ -36,13 +39,18 @@ public class ClientCertificateTests : IISFunctionalTestBase
 {
     private readonly ClientCertificateFixture _certFixture;
 
-    public ClientCertificateTests(PublishedSitesFixture fixture, ClientCertificateFixture certFixture) : base(fixture)
+    public ClientCertificateTests(
+        PublishedSitesFixture fixture,
+        ClientCertificateFixture certFixture
+    )
+        : base(fixture)
     {
         _certFixture = certFixture;
     }
 
-    public static TestMatrix TestVariants
-        => TestMatrix.ForServers(DeployerSelector.ServerType)
+    public static TestMatrix TestVariants =>
+        TestMatrix
+            .ForServers(DeployerSelector.ServerType)
             .WithTfms(Tfm.Default)
             .WithApplicationTypes(ApplicationType.Portable)
             .WithAllHostingModels();

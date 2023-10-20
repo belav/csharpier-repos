@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,38 +30,41 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Channels
 {
-	public sealed class MsmqMessageProperty
-	{
-		public const string Name = "MsmqMessageProperty";
+    public sealed class MsmqMessageProperty
+    {
+        public const string Name = "MsmqMessageProperty";
 
-		[MonoTODO]
-		public static MsmqMessageProperty Get (Message message)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public static MsmqMessageProperty Get(Message message)
+        {
+            throw new NotImplementedException();
+        }
 
-		int abort_count, move_count;
-		DeliveryFailure? failure;
-		DeliveryStatus? delivery_status;
+        int abort_count,
+            move_count;
+        DeliveryFailure? failure;
+        DeliveryStatus? delivery_status;
 
-		internal MsmqMessageProperty ()
-		{
-		}
+        internal MsmqMessageProperty() { }
 
-		public int AbortCount {
-			get { return abort_count; }
-		}
+        public int AbortCount
+        {
+            get { return abort_count; }
+        }
 
-		public int MoveCount {
-			get { return move_count; }
-		}
+        public int MoveCount
+        {
+            get { return move_count; }
+        }
 
-		public DeliveryFailure? DeliveryFailure {
-			get { return failure; }
-		}
+        public DeliveryFailure? DeliveryFailure
+        {
+            get { return failure; }
+        }
 
-		public DeliveryStatus? DeliveryStatus {
-			get { return delivery_status; }
-		}
-	}
+        public DeliveryStatus? DeliveryStatus
+        {
+            get { return delivery_status; }
+        }
+    }
 }

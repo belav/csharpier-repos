@@ -11,7 +11,11 @@ namespace Microsoft.Gen.OptionsValidation.Test;
 
 internal static class Utils
 {
-    public static void VerifyValidateOptionsResult(ValidateOptionsResult vr, int expectedErrorCount, params string[] expectedErrorSubstrings)
+    public static void VerifyValidateOptionsResult(
+        ValidateOptionsResult vr,
+        int expectedErrorCount,
+        params string[] expectedErrorSubstrings
+    )
     {
         Assert.NotNull(vr);
 

@@ -20,7 +20,8 @@ namespace System.Diagnostics.Tracing
     [SecuritySafeCritical]
     internal unsafe class TraceLoggingDataCollector
     {
-        internal static readonly TraceLoggingDataCollector Instance = new TraceLoggingDataCollector();
+        internal static readonly TraceLoggingDataCollector Instance =
+            new TraceLoggingDataCollector();
 
         private TraceLoggingDataCollector()
         {
@@ -227,7 +228,9 @@ namespace System.Diagnostics.Tracing
         /// </param>
         public void AddArray(bool[] value)
         {
-            DataCollector.ThreadInstance.AddArray(value, value == null ? 0 : value.Length, sizeof(bool));
+            DataCollector
+                .ThreadInstance
+                .AddArray(value, value == null ? 0 : value.Length, sizeof(bool));
         }
 
         /// <summary>
@@ -239,7 +242,9 @@ namespace System.Diagnostics.Tracing
         //[CLSCompliant(false)]
         public void AddArray(sbyte[] value)
         {
-            DataCollector.ThreadInstance.AddArray(value, value == null ? 0 : value.Length, sizeof(sbyte));
+            DataCollector
+                .ThreadInstance
+                .AddArray(value, value == null ? 0 : value.Length, sizeof(sbyte));
         }
 
         /// <summary>
@@ -250,7 +255,9 @@ namespace System.Diagnostics.Tracing
         /// </param>
         public void AddArray(short[] value)
         {
-            DataCollector.ThreadInstance.AddArray(value, value == null ? 0 : value.Length, sizeof(short));
+            DataCollector
+                .ThreadInstance
+                .AddArray(value, value == null ? 0 : value.Length, sizeof(short));
         }
 
         /// <summary>
@@ -262,7 +269,9 @@ namespace System.Diagnostics.Tracing
         //[CLSCompliant(false)]
         public void AddArray(ushort[] value)
         {
-            DataCollector.ThreadInstance.AddArray(value, value == null ? 0 : value.Length, sizeof(ushort));
+            DataCollector
+                .ThreadInstance
+                .AddArray(value, value == null ? 0 : value.Length, sizeof(ushort));
         }
 
         /// <summary>
@@ -273,7 +282,9 @@ namespace System.Diagnostics.Tracing
         /// </param>
         public void AddArray(int[] value)
         {
-            DataCollector.ThreadInstance.AddArray(value, value == null ? 0 : value.Length, sizeof(int));
+            DataCollector
+                .ThreadInstance
+                .AddArray(value, value == null ? 0 : value.Length, sizeof(int));
         }
 
         /// <summary>
@@ -285,7 +296,9 @@ namespace System.Diagnostics.Tracing
         //[CLSCompliant(false)]
         public void AddArray(uint[] value)
         {
-            DataCollector.ThreadInstance.AddArray(value, value == null ? 0 : value.Length, sizeof(uint));
+            DataCollector
+                .ThreadInstance
+                .AddArray(value, value == null ? 0 : value.Length, sizeof(uint));
         }
 
         /// <summary>
@@ -296,7 +309,9 @@ namespace System.Diagnostics.Tracing
         /// </param>
         public void AddArray(long[] value)
         {
-            DataCollector.ThreadInstance.AddArray(value, value == null ? 0 : value.Length, sizeof(long));
+            DataCollector
+                .ThreadInstance
+                .AddArray(value, value == null ? 0 : value.Length, sizeof(long));
         }
 
         /// <summary>
@@ -308,7 +323,9 @@ namespace System.Diagnostics.Tracing
         //[CLSCompliant(false)]
         public void AddArray(ulong[] value)
         {
-            DataCollector.ThreadInstance.AddArray(value, value == null ? 0 : value.Length, sizeof(ulong));
+            DataCollector
+                .ThreadInstance
+                .AddArray(value, value == null ? 0 : value.Length, sizeof(ulong));
         }
 
         /// <summary>
@@ -319,7 +336,9 @@ namespace System.Diagnostics.Tracing
         /// </param>
         public void AddArray(IntPtr[] value)
         {
-            DataCollector.ThreadInstance.AddArray(value, value == null ? 0 : value.Length, IntPtr.Size);
+            DataCollector
+                .ThreadInstance
+                .AddArray(value, value == null ? 0 : value.Length, IntPtr.Size);
         }
 
         /// <summary>
@@ -331,7 +350,9 @@ namespace System.Diagnostics.Tracing
         //[CLSCompliant(false)]
         public void AddArray(UIntPtr[] value)
         {
-            DataCollector.ThreadInstance.AddArray(value, value == null ? 0 : value.Length, UIntPtr.Size);
+            DataCollector
+                .ThreadInstance
+                .AddArray(value, value == null ? 0 : value.Length, UIntPtr.Size);
         }
 
         /// <summary>
@@ -342,7 +363,9 @@ namespace System.Diagnostics.Tracing
         /// </param>
         public void AddArray(float[] value)
         {
-            DataCollector.ThreadInstance.AddArray(value, value == null ? 0 : value.Length, sizeof(float));
+            DataCollector
+                .ThreadInstance
+                .AddArray(value, value == null ? 0 : value.Length, sizeof(float));
         }
 
         /// <summary>
@@ -353,7 +376,9 @@ namespace System.Diagnostics.Tracing
         /// </param>
         public void AddArray(double[] value)
         {
-            DataCollector.ThreadInstance.AddArray(value, value == null ? 0 : value.Length, sizeof(double));
+            DataCollector
+                .ThreadInstance
+                .AddArray(value, value == null ? 0 : value.Length, sizeof(double));
         }
 
         /// <summary>
@@ -364,7 +389,9 @@ namespace System.Diagnostics.Tracing
         /// </param>
         public void AddArray(char[] value)
         {
-            DataCollector.ThreadInstance.AddArray(value, value == null ? 0 : value.Length, sizeof(char));
+            DataCollector
+                .ThreadInstance
+                .AddArray(value, value == null ? 0 : value.Length, sizeof(char));
         }
 
         /// <summary>
@@ -386,7 +413,9 @@ namespace System.Diagnostics.Tracing
         /// </param>
         public void AddCustom(byte[] value)
         {
-            DataCollector.ThreadInstance.AddArray(value, value == null ? 0 : value.Length, sizeof(byte));
+            DataCollector
+                .ThreadInstance
+                .AddArray(value, value == null ? 0 : value.Length, sizeof(byte));
         }
     }
 }

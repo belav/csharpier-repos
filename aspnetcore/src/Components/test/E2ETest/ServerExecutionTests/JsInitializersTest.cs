@@ -14,8 +14,7 @@ public class ServerJsInitializersTest : JsInitializersTest
     public ServerJsInitializersTest(
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture.WithServerExecution(), output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture.WithServerExecution(), output) { }
 }

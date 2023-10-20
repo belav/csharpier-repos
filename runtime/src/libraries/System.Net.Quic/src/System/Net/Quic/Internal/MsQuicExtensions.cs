@@ -7,14 +7,14 @@ namespace Microsoft.Quic;
 
 internal unsafe partial struct QUIC_NEW_CONNECTION_INFO
 {
-    public override string ToString()
-        => $"{{ {nameof(QuicVersion)} = {QuicVersion}, {nameof(LocalAddress)} = {MsQuicHelpers.QuicAddrToIPEndPoint(LocalAddress)}, {nameof(RemoteAddress)} = {MsQuicHelpers.QuicAddrToIPEndPoint(RemoteAddress)} }}";
+    public override string ToString() =>
+        $"{{ {nameof(QuicVersion)} = {QuicVersion}, {nameof(LocalAddress)} = {MsQuicHelpers.QuicAddrToIPEndPoint(LocalAddress)}, {nameof(RemoteAddress)} = {MsQuicHelpers.QuicAddrToIPEndPoint(RemoteAddress)} }}";
 }
 
 internal unsafe partial struct QUIC_LISTENER_EVENT
 {
-    public override string ToString()
-        => Type switch
+    public override string ToString() =>
+        Type switch
         {
             QUIC_LISTENER_EVENT_TYPE.NEW_CONNECTION
                 => $"{{ {nameof(NEW_CONNECTION.Info)} = {{ {nameof(QUIC_NEW_CONNECTION_INFO.QuicVersion)} = {NEW_CONNECTION.Info->QuicVersion}, {nameof(QUIC_NEW_CONNECTION_INFO.LocalAddress)} = {MsQuicHelpers.QuicAddrToIPEndPoint(NEW_CONNECTION.Info->LocalAddress)}, {nameof(QUIC_NEW_CONNECTION_INFO.RemoteAddress)} = {MsQuicHelpers.QuicAddrToIPEndPoint(NEW_CONNECTION.Info->RemoteAddress)} }} }}",
@@ -24,8 +24,8 @@ internal unsafe partial struct QUIC_LISTENER_EVENT
 
 internal unsafe partial struct QUIC_CONNECTION_EVENT
 {
-    public override string ToString()
-        => Type switch
+    public override string ToString() =>
+        Type switch
         {
             QUIC_CONNECTION_EVENT_TYPE.CONNECTED
                 => $"{{ {nameof(CONNECTED.SessionResumed)} = {CONNECTED.SessionResumed} }}",
@@ -49,8 +49,8 @@ internal unsafe partial struct QUIC_CONNECTION_EVENT
 
 internal unsafe partial struct QUIC_STREAM_EVENT
 {
-    public override string ToString()
-        => Type switch
+    public override string ToString() =>
+        Type switch
         {
             QUIC_STREAM_EVENT_TYPE.START_COMPLETE
                 => $"{{ {nameof(START_COMPLETE.Status)} = {START_COMPLETE.Status}, {nameof(START_COMPLETE.ID)} = {START_COMPLETE.ID}, {nameof(START_COMPLETE.PeerAccepted)} = {START_COMPLETE.PeerAccepted} }}",

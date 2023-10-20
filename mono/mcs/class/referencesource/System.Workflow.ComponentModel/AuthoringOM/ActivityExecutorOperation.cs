@@ -10,6 +10,7 @@ namespace System.Workflow.ComponentModel
     {
         private int contextId = -1;
         string activityId = null;
+
         protected SchedulableItem(int contextId, string activityId)
         {
             this.contextId = contextId;
@@ -18,18 +19,12 @@ namespace System.Workflow.ComponentModel
 
         public int ContextId
         {
-            get
-            {
-                return this.contextId;
-            }
+            get { return this.contextId; }
         }
 
         public string ActivityId
         {
-            get
-            {
-                return this.activityId;
-            }
+            get { return this.activityId; }
         }
 
         public abstract bool Run(IWorkflowCoreRuntime workflowCoreRuntime);
@@ -50,17 +45,28 @@ namespace System.Workflow.ComponentModel
         private ActivityOperationType operation;
         private Exception exceptionToDeliver;
 
-        public ActivityExecutorOperation(Activity activity, ActivityOperationType opt, int contextId)
+        public ActivityExecutorOperation(
+            Activity activity,
+            ActivityOperationType opt,
+            int contextId
+        )
             : base(contextId, activity.QualifiedName)
         {
             this.activityName = activity.QualifiedName;
             this.operation = opt;
         }
-        public ActivityExecutorOperation(Activity activity, ActivityOperationType opt, int contextId, Exception e)
+
+        public ActivityExecutorOperation(
+            Activity activity,
+            ActivityOperationType opt,
+            int contextId,
+            Exception e
+        )
             : this(activity, opt, contextId)
         {
             this.exceptionToDeliver = e;
         }
+
         public override bool Run(IWorkflowCoreRuntime workflowCoreRuntime)
         {
             // get state reader
@@ -69,9 +75,14 @@ namespace System.Workflow.ComponentModel
 
             using (workflowCoreRuntime.SetCurrentActivity(activity))
             {
-                using (ActivityExecutionContext activityExecutionContext = new ActivityExecutionContext(activity))
+                using (
+                    ActivityExecutionContext activityExecutionContext =
+                        new ActivityExecutionContext(activity)
+                )
                 {
-                    ActivityExecutor activityExecutor = ActivityExecutors.GetActivityExecutor(activity);
+                    ActivityExecutor activityExecutor = ActivityExecutors.GetActivityExecutor(
+                        activity
+                    );
                     switch (this.operation)
                     {
                         case ActivityOperationType.Execute:
@@ -81,15 +92,36 @@ namespace System.Workflow.ComponentModel
                                 {
                                     workflowCoreRuntime.RaiseActivityExecuting(activity);
 
-                                    ActivityExecutionStatus newStatus = activityExecutor.Execute(activity, activityExecutionContext);
+                                    ActivityExecutionStatus newStatus = activityExecutor.Execute(
+                                        activity,
+                                        activityExecutionContext
+                                    );
                                     if (newStatus == ActivityExecutionStatus.Closed)
                                         activityExecutionContext.CloseActivity();
                                     else if (newStatus != ActivityExecutionStatus.Executing)
-                                        throw new InvalidOperationException(SR.GetString(SR.InvalidExecutionStatus, activity.QualifiedName, newStatus.ToString(), ActivityExecutionStatus.Executing.ToString()));
+                                        throw new InvalidOperationException(
+                                            SR.GetString(
+                                                SR.InvalidExecutionStatus,
+                                                activity.QualifiedName,
+                                                newStatus.ToString(),
+                                                ActivityExecutionStatus.Executing.ToString()
+                                            )
+                                        );
                                 }
                                 catch (Exception e)
                                 {
-                                    System.Workflow.Runtime.WorkflowTrace.Runtime.TraceEvent(TraceEventType.Error, 1, "Execute of Activity {0} threw {1}", activity.QualifiedName, e.ToString());
+                                    System
+                                        .Workflow
+                                        .Runtime
+                                        .WorkflowTrace
+                                        .Runtime
+                                        .TraceEvent(
+                                            TraceEventType.Error,
+                                            1,
+                                            "Execute of Activity {0} threw {1}",
+                                            activity.QualifiedName,
+                                            e.ToString()
+                                        );
                                     throw;
                                 }
                             }
@@ -99,16 +131,36 @@ namespace System.Workflow.ComponentModel
                             {
                                 try
                                 {
-                                    ActivityExecutionStatus newStatus = activityExecutor.Cancel(activity, activityExecutionContext);
+                                    ActivityExecutionStatus newStatus = activityExecutor.Cancel(
+                                        activity,
+                                        activityExecutionContext
+                                    );
                                     if (newStatus == ActivityExecutionStatus.Closed)
                                         activityExecutionContext.CloseActivity();
                                     else if (newStatus != ActivityExecutionStatus.Canceling)
-                                        throw new InvalidOperationException(SR.GetString(SR.InvalidExecutionStatus, activity.QualifiedName, newStatus.ToString(), ActivityExecutionStatus.Canceling.ToString()));
-
+                                        throw new InvalidOperationException(
+                                            SR.GetString(
+                                                SR.InvalidExecutionStatus,
+                                                activity.QualifiedName,
+                                                newStatus.ToString(),
+                                                ActivityExecutionStatus.Canceling.ToString()
+                                            )
+                                        );
                                 }
                                 catch (Exception e)
                                 {
-                                    System.Workflow.Runtime.WorkflowTrace.Runtime.TraceEvent(TraceEventType.Error, 1, "Cancel of Activity {0} threw {1}", activity.QualifiedName, e.ToString());
+                                    System
+                                        .Workflow
+                                        .Runtime
+                                        .WorkflowTrace
+                                        .Runtime
+                                        .TraceEvent(
+                                            TraceEventType.Error,
+                                            1,
+                                            "Cancel of Activity {0} threw {1}",
+                                            activity.QualifiedName,
+                                            e.ToString()
+                                        );
                                     throw;
                                 }
                             }
@@ -118,15 +170,36 @@ namespace System.Workflow.ComponentModel
                             {
                                 try
                                 {
-                                    ActivityExecutionStatus newStatus = activityExecutor.Compensate(activity, activityExecutionContext);
+                                    ActivityExecutionStatus newStatus = activityExecutor.Compensate(
+                                        activity,
+                                        activityExecutionContext
+                                    );
                                     if (newStatus == ActivityExecutionStatus.Closed)
                                         activityExecutionContext.CloseActivity();
                                     else if (newStatus != ActivityExecutionStatus.Compensating)
-                                        throw new InvalidOperationException(SR.GetString(SR.InvalidExecutionStatus, activity.QualifiedName, newStatus.ToString(), ActivityExecutionStatus.Compensating.ToString()));
+                                        throw new InvalidOperationException(
+                                            SR.GetString(
+                                                SR.InvalidExecutionStatus,
+                                                activity.QualifiedName,
+                                                newStatus.ToString(),
+                                                ActivityExecutionStatus.Compensating.ToString()
+                                            )
+                                        );
                                 }
                                 catch (Exception e)
                                 {
-                                    System.Workflow.Runtime.WorkflowTrace.Runtime.TraceEvent(TraceEventType.Error, 1, "Compensate of Activity {0} threw {1}", activity.QualifiedName, e.ToString());
+                                    System
+                                        .Workflow
+                                        .Runtime
+                                        .WorkflowTrace
+                                        .Runtime
+                                        .TraceEvent(
+                                            TraceEventType.Error,
+                                            1,
+                                            "Compensate of Activity {0} threw {1}",
+                                            activity.QualifiedName,
+                                            e.ToString()
+                                        );
                                     throw;
                                 }
                             }
@@ -136,15 +209,38 @@ namespace System.Workflow.ComponentModel
                             {
                                 try
                                 {
-                                    ActivityExecutionStatus newStatus = activityExecutor.HandleFault(activity, activityExecutionContext, this.exceptionToDeliver);
+                                    ActivityExecutionStatus newStatus =
+                                        activityExecutor.HandleFault(
+                                            activity,
+                                            activityExecutionContext,
+                                            this.exceptionToDeliver
+                                        );
                                     if (newStatus == ActivityExecutionStatus.Closed)
                                         activityExecutionContext.CloseActivity();
                                     else if (newStatus != ActivityExecutionStatus.Faulting)
-                                        throw new InvalidOperationException(SR.GetString(SR.InvalidExecutionStatus, activity.QualifiedName, newStatus.ToString(), ActivityExecutionStatus.Faulting.ToString()));
+                                        throw new InvalidOperationException(
+                                            SR.GetString(
+                                                SR.InvalidExecutionStatus,
+                                                activity.QualifiedName,
+                                                newStatus.ToString(),
+                                                ActivityExecutionStatus.Faulting.ToString()
+                                            )
+                                        );
                                 }
                                 catch (Exception e)
                                 {
-                                    System.Workflow.Runtime.WorkflowTrace.Runtime.TraceEvent(TraceEventType.Error, 1, "Compensate of Activity {0} threw {1}", activity.QualifiedName, e.ToString());
+                                    System
+                                        .Workflow
+                                        .Runtime
+                                        .WorkflowTrace
+                                        .Runtime
+                                        .TraceEvent(
+                                            TraceEventType.Error,
+                                            1,
+                                            "Compensate of Activity {0} threw {1}",
+                                            activity.QualifiedName,
+                                            e.ToString()
+                                        );
                                     throw;
                                 }
                             }
@@ -154,10 +250,19 @@ namespace System.Workflow.ComponentModel
             }
             return true;
         }
+
         public override string ToString()
         {
-            return "ActivityOperation(" + "(" + this.ContextId.ToString(CultureInfo.CurrentCulture) + ")" + this.activityName + ", " + ActivityOperationToString(this.operation) + ")";
+            return "ActivityOperation("
+                + "("
+                + this.ContextId.ToString(CultureInfo.CurrentCulture)
+                + ")"
+                + this.activityName
+                + ", "
+                + ActivityOperationToString(this.operation)
+                + ")";
         }
+
         private string ActivityOperationToString(ActivityOperationType operationType)
         {
             string retVal = string.Empty;

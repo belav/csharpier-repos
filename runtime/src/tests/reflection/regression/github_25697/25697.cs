@@ -8,7 +8,6 @@ using System.Reflection;
 
 unsafe class Program
 {
-
     public static void AsTypedReference<T>(ref T value, TypedReference* output)
     {
         *output = __makeref(value);

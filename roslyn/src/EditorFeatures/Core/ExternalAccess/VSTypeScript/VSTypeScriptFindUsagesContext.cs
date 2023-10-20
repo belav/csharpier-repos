@@ -9,26 +9,32 @@ using Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
 {
-    internal sealed class VSTypeScriptFindUsagesContext(FindUsagesContext underlyingObject) : IVSTypeScriptFindUsagesContext
+    internal sealed class VSTypeScriptFindUsagesContext(FindUsagesContext underlyingObject)
+        : IVSTypeScriptFindUsagesContext
     {
         internal readonly FindUsagesContext UnderlyingObject = underlyingObject;
 
-        public IVSTypeScriptStreamingProgressTracker ProgressTracker
-            => new VSTypeScriptStreamingProgressTracker(UnderlyingObject.ProgressTracker);
+        public IVSTypeScriptStreamingProgressTracker ProgressTracker =>
+            new VSTypeScriptStreamingProgressTracker(UnderlyingObject.ProgressTracker);
 
-        public ValueTask ReportMessageAsync(string message, CancellationToken cancellationToken)
-            => UnderlyingObject.ReportMessageAsync(message, cancellationToken);
+        public ValueTask ReportMessageAsync(string message, CancellationToken cancellationToken) =>
+            UnderlyingObject.ReportMessageAsync(message, cancellationToken);
 
-        public ValueTask SetSearchTitleAsync(string title, CancellationToken cancellationToken)
-            => UnderlyingObject.SetSearchTitleAsync(title, cancellationToken);
+        public ValueTask SetSearchTitleAsync(string title, CancellationToken cancellationToken) =>
+            UnderlyingObject.SetSearchTitleAsync(title, cancellationToken);
 
-        public ValueTask OnDefinitionFoundAsync(VSTypeScriptDefinitionItem definition, CancellationToken cancellationToken)
-            => UnderlyingObject.OnDefinitionFoundAsync(definition.UnderlyingObject, cancellationToken);
+        public ValueTask OnDefinitionFoundAsync(
+            VSTypeScriptDefinitionItem definition,
+            CancellationToken cancellationToken
+        ) =>
+            UnderlyingObject.OnDefinitionFoundAsync(definition.UnderlyingObject, cancellationToken);
 
-        public ValueTask OnReferenceFoundAsync(VSTypeScriptSourceReferenceItem reference, CancellationToken cancellationToken)
-            => UnderlyingObject.OnReferenceFoundAsync(reference.UnderlyingObject, cancellationToken);
+        public ValueTask OnReferenceFoundAsync(
+            VSTypeScriptSourceReferenceItem reference,
+            CancellationToken cancellationToken
+        ) => UnderlyingObject.OnReferenceFoundAsync(reference.UnderlyingObject, cancellationToken);
 
-        public ValueTask OnCompletedAsync(CancellationToken cancellationToken)
-            => UnderlyingObject.OnCompletedAsync(cancellationToken);
+        public ValueTask OnCompletedAsync(CancellationToken cancellationToken) =>
+            UnderlyingObject.OnCompletedAsync(cancellationToken);
     }
 }

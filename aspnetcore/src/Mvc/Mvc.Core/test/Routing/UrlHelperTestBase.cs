@@ -22,7 +22,8 @@ public abstract class UrlHelperTestBase
     public void Content_ReturnsContentPath_WhenItDoesNotStartWithToken(
         string appRoot,
         string contentPath,
-        string expectedPath)
+        string expectedPath
+    )
     {
         // Arrange
         var urlHelper = CreateUrlHelper(appRoot);
@@ -45,7 +46,8 @@ public abstract class UrlHelperTestBase
     public void Content_ReturnsAppRelativePath_WhenItStartsWithToken(
         string appRoot,
         string contentPath,
-        string expectedPath)
+        string expectedPath
+    )
     {
         // Arrange
         var urlHelper = CreateUrlHelper(appRoot);
@@ -332,12 +334,14 @@ public abstract class UrlHelperTestBase
         // Act
         var url = urlHelper.RouteUrl(
             values: new RouteValueDictionary(
-            new
-            {
-                Action = "newaction",
-                Controller = "home2",
-                id = "someid"
-            }));
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid"
+                }
+            )
+        );
 
         // Assert
         Assert.Equal("/app/home2/newaction/someid", url);
@@ -353,14 +357,16 @@ public abstract class UrlHelperTestBase
         var url = urlHelper.RouteUrl(
             routeName: "namedroute",
             values: new RouteValueDictionary(
-            new
-            {
-                Action = "newaction",
-                Controller = "home2",
-                id = "someid"
-            }),
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid"
+                }
+            ),
             protocol: "http",
-            host: string.Empty);
+            host: string.Empty
+        );
 
         // Assert
         Assert.Equal("http://localhost/app/named/home2/newaction/someid", url);
@@ -376,14 +382,16 @@ public abstract class UrlHelperTestBase
         var url = urlHelper.RouteUrl(
             routeName: "namedroute",
             values: new RouteValueDictionary(
-            new
-            {
-                Action = "newaction",
-                Controller = "home2",
-                id = "someid"
-            }),
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid"
+                }
+            ),
             protocol: string.Empty,
-            host: "foo.bar.com");
+            host: "foo.bar.com"
+        );
 
         // Assert
         Assert.Equal("http://foo.bar.com/app/named/home2/newaction/someid", url);
@@ -399,14 +407,16 @@ public abstract class UrlHelperTestBase
         var url = urlHelper.RouteUrl(
             routeName: "namedroute",
             values: new RouteValueDictionary(
-            new
-            {
-                Action = "newaction",
-                Controller = "home2",
-                id = "someid"
-            }),
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid"
+                }
+            ),
             protocol: null,
-            host: "foo.bar.com");
+            host: "foo.bar.com"
+        );
 
         // Assert
         Assert.Equal("http://foo.bar.com/app/named/home2/newaction/someid", url);
@@ -422,14 +432,16 @@ public abstract class UrlHelperTestBase
         var url = urlHelper.RouteUrl(
             routeName: "namedroute",
             values: new RouteValueDictionary(
-            new
-            {
-                Action = "newaction",
-                Controller = "home2",
-                id = "someid"
-            }),
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid"
+                }
+            ),
             protocol: null,
-            host: null);
+            host: null
+        );
 
         // Assert
         Assert.Equal("/app/named/home2/newaction/someid", url);
@@ -442,7 +454,14 @@ public abstract class UrlHelperTestBase
         var urlHelper = CreateUrlHelperWithDefaultRoutes();
 
         // Act
-        var url = urlHelper.RouteUrl(new { Action = "newaction", Controller = "home2", id = "someid" });
+        var url = urlHelper.RouteUrl(
+            new
+            {
+                Action = "newaction",
+                Controller = "home2",
+                id = "someid"
+            }
+        );
 
         // Assert
         Assert.Equal("/app/home2/newaction/someid", url);
@@ -463,7 +482,8 @@ public abstract class UrlHelperTestBase
                 Controller = "home2",
                 id = "someid"
             },
-            protocol: "https");
+            protocol: "https"
+        );
 
         // Assert
         Assert.Equal("https://localhost/app/named/home2/newaction/someid", url);
@@ -485,7 +505,8 @@ public abstract class UrlHelperTestBase
                 id = "someid"
             },
             protocol: "https",
-            host: "pingüino");
+            host: "pingüino"
+        );
 
         // Assert
         Assert.Equal("https://pingüino/app/named/home2/newaction/someid", url);
@@ -498,9 +519,7 @@ public abstract class UrlHelperTestBase
         var urlHelper = CreateUrlHelperWithDefaultRoutes();
 
         // Act
-        var url = urlHelper.RouteUrl(
-            routeName: "OrdersApi",
-            values: new { id = "500" });
+        var url = urlHelper.RouteUrl(routeName: "OrdersApi", values: new { id = "500" });
 
         // Assert
         Assert.Equal("/app/api/orders/500", url);
@@ -513,9 +532,7 @@ public abstract class UrlHelperTestBase
         var urlHelper = CreateUrlHelperWithDefaultRoutes();
 
         // Act
-        var url = urlHelper.RouteUrl(
-            routeName: "OrdersApi",
-            values: new { });
+        var url = urlHelper.RouteUrl(routeName: "OrdersApi", values: new { });
 
         // Assert
         Assert.Null(url);
@@ -531,12 +548,14 @@ public abstract class UrlHelperTestBase
         var url = urlHelper.RouteUrl(
             routeName: "namedroute",
             values: new RouteValueDictionary(
-            new
-            {
-                Action = "newaction",
-                Controller = "home2",
-                id = "someid"
-            }));
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid"
+                }
+            )
+        );
 
         // Assert
         Assert.Equal("/app/named/home2/newaction/someid", url);
@@ -556,7 +575,8 @@ public abstract class UrlHelperTestBase
                 Action = "newaction",
                 Controller = "home2",
                 id = "someid"
-            });
+            }
+        );
 
         // Assert
         Assert.Equal("/app/named/home2/newaction/someid", url);
@@ -606,7 +626,8 @@ public abstract class UrlHelperTestBase
             },
             fragment: "somefragment",
             host: "remotetown",
-            protocol: "https");
+            protocol: "https"
+        );
 
         // Assert
         Assert.Equal("https://remotetown/app/named/home2/newaction/someid#somefragment", url);
@@ -627,10 +648,7 @@ public abstract class UrlHelperTestBase
         dictionary["isprint"] = isprint;
 
         // Act
-        var url = urlHelper.Action(
-            action: "contact",
-            controller: "home",
-            values: dictionary);
+        var url = urlHelper.Action(action: "contact", controller: "home", values: dictionary);
 
         // Assert
         Assert.Equal(2, dictionary.Count);
@@ -651,7 +669,8 @@ public abstract class UrlHelperTestBase
             controller: "home",
             values: null,
             protocol: "http",
-            host: "pingüino");
+            host: "pingüino"
+        );
 
         // Assert
         Assert.Equal("http://pingüino/app/home/contact", url);
@@ -721,7 +740,8 @@ public abstract class UrlHelperTestBase
             values: null,
             protocol: "https",
             host: "remotelyhost",
-            fragment: "somefragment");
+            fragment: "somefragment"
+        );
 
         // Assert
         Assert.Equal("https://remotelyhost/app/home3/contact#somefragment", url);
@@ -741,7 +761,8 @@ public abstract class UrlHelperTestBase
                 Action = "newaction",
                 Controller = "home",
                 id = "someid"
-            });
+            }
+        );
 
         // Assert
         Assert.Equal("http://localhost/app/named/home/newaction/someid", url);
@@ -761,7 +782,8 @@ public abstract class UrlHelperTestBase
                 Action = "newaction",
                 Controller = "home",
                 id = "someid"
-            });
+            }
+        );
 
         // Assert
         Assert.Equal("http://localhost/app/home/newaction/someid", url);
@@ -776,7 +798,8 @@ public abstract class UrlHelperTestBase
             host: null,
             protocol: null,
             routeName: null,
-            template: "any/url");
+            template: "any/url"
+        );
 
         // Act
         var url = urlHelper.Link(
@@ -786,7 +809,8 @@ public abstract class UrlHelperTestBase
                 Action = "newaction",
                 Controller = "home",
                 id = "someid"
-            });
+            }
+        );
 
         // Assert
         Assert.Equal("http://localhost/app/home/newaction/someid", url);
@@ -802,7 +826,8 @@ public abstract class UrlHelperTestBase
             host: null,
             protocol: null,
             routeName: "MyRouteName",
-            template: "any/url");
+            template: "any/url"
+        );
 
         // Act
         var url = urlHelper.Link(
@@ -812,7 +837,8 @@ public abstract class UrlHelperTestBase
                 Action = "newaction",
                 Controller = "home",
                 id = "someid"
-            });
+            }
+        );
 
         // Assert
         Assert.Equal("http://localhost/app/home/newaction/someid", url);
@@ -827,7 +853,8 @@ public abstract class UrlHelperTestBase
             host: null,
             protocol: null,
             routeName: "MyRouteName",
-            template: "any/url");
+            template: "any/url"
+        );
 
         // Act
         var url = urlHelper.RouteUrl("MyRouteName");
@@ -845,7 +872,8 @@ public abstract class UrlHelperTestBase
             host: null,
             protocol: null,
             routeName: "MyRouteName",
-            template: "any/url");
+            template: "any/url"
+        );
 
         // Act
         var url = urlHelper.Link("MyRouteName", null);
@@ -863,7 +891,8 @@ public abstract class UrlHelperTestBase
             "myhost",
             "https",
             routeName: "MyRouteName",
-            template: "any/url");
+            template: "any/url"
+        );
 
         // Act
         var url = urlHelper.Link(
@@ -873,7 +902,8 @@ public abstract class UrlHelperTestBase
                 Action = "newaction",
                 Controller = "home",
                 id = "someid"
-            });
+            }
+        );
 
         // Assert
         Assert.Equal("https://myhost/named/home/newaction/someid", url);
@@ -887,9 +917,9 @@ public abstract class UrlHelperTestBase
         var httpContext = new Mock<HttpContext>();
         httpContext.SetupGet(h => h.Features).Returns(new FeatureCollection());
         var mockItems = new Dictionary<object, object>
-            {
-                { typeof(IUrlHelper), expectedUrlHelper }
-            };
+        {
+            { typeof(IUrlHelper), expectedUrlHelper }
+        };
         httpContext.Setup(h => h.Items).Returns(mockItems);
 
         var actionContext = CreateActionContext(httpContext.Object);
@@ -927,10 +957,7 @@ public abstract class UrlHelperTestBase
         // Arrange
         var httpContext = new Mock<HttpContext>();
         httpContext.SetupGet(h => h.Features).Returns(new FeatureCollection());
-        var mockItems = new Dictionary<object, object>
-            {
-                { typeof(IUrlHelper), null }
-            };
+        var mockItems = new Dictionary<object, object> { { typeof(IUrlHelper), null } };
         httpContext.Setup(h => h.Items).Returns(mockItems);
 
         var actionContext = CreateActionContext(httpContext.Object);
@@ -955,20 +982,31 @@ public abstract class UrlHelperTestBase
             protocol: null,
             routeName: "default",
             template: "{first}/{controller}/{action}",
-            defaults: new { second = "default", controller = "default", action = "default" },
+            defaults: new
+            {
+                second = "default",
+                controller = "default",
+                action = "default"
+            },
             // Emulate ActionEndpointFactory.AddConventionalLinkGenerationRoute().
             // The "controller" and "action" keys are defined automatically by ControllerActionDescriptorBuilder.AddRouteValues().
-            requiredValues: new { controller = RoutePattern.RequiredValueAny, action = RoutePattern.RequiredValueAny });
+            requiredValues: new
+            {
+                controller = RoutePattern.RequiredValueAny,
+                action = RoutePattern.RequiredValueAny
+            }
+        );
 
         var routeData = urlHelper.ActionContext.RouteData;
         routeData.Values.Add("first", "a");
         routeData.Values.Add("controller", "Store");
         routeData.Values.Add("action", "Buy");
 
-        urlHelper.ActionContext.HttpContext.Features.Set<IRouteValuesFeature>(new RouteValuesFeature
-        {
-            RouteValues = routeData.Values
-        });
+        urlHelper
+            .ActionContext
+            .HttpContext
+            .Features
+            .Set<IRouteValuesFeature>(new RouteValuesFeature { RouteValues = routeData.Values });
 
         // Act
         //
@@ -993,10 +1031,20 @@ public abstract class UrlHelperTestBase
             protocol: null,
             routeName: "default",
             template: "{first}/{second}/{controller}/{action}",
-            defaults: new { second = "default", controller = "default", action = "default" },
+            defaults: new
+            {
+                second = "default",
+                controller = "default",
+                action = "default"
+            },
             // Emulate ActionEndpointFactory.AddConventionalLinkGenerationRoute().
             // The "controller" and "action" keys are defined automatically by ControllerActionDescriptorBuilder.AddRouteValues().
-            requiredValues: new { controller = RoutePattern.RequiredValueAny, action = RoutePattern.RequiredValueAny });
+            requiredValues: new
+            {
+                controller = RoutePattern.RequiredValueAny,
+                action = RoutePattern.RequiredValueAny
+            }
+        );
 
         var routeData = urlHelper.ActionContext.RouteData;
         routeData.Values.Add("first", "a");
@@ -1004,10 +1052,11 @@ public abstract class UrlHelperTestBase
         routeData.Values.Add("controller", "Store");
         routeData.Values.Add("action", "Buy");
 
-        urlHelper.ActionContext.HttpContext.Features.Set<IRouteValuesFeature>(new RouteValuesFeature
-        {
-            RouteValues = routeData.Values
-        });
+        urlHelper
+            .ActionContext
+            .HttpContext
+            .Features
+            .Set<IRouteValuesFeature>(new RouteValuesFeature { RouteValues = routeData.Values });
 
         // Act
         //
@@ -1034,20 +1083,31 @@ public abstract class UrlHelperTestBase
             protocol: null,
             routeName: "default",
             template: "{first}/{controller}/{action}",
-            defaults: new { second = "default", controller = "default", action = "default" },
+            defaults: new
+            {
+                second = "default",
+                controller = "default",
+                action = "default"
+            },
             // Emulate ActionEndpointFactory.AddConventionalLinkGenerationRoute().
             // The "controller" and "action" keys are defined automatically by ControllerActionDescriptorBuilder.AddRouteValues().
-            requiredValues: new { controller = RoutePattern.RequiredValueAny, action = RoutePattern.RequiredValueAny });
+            requiredValues: new
+            {
+                controller = RoutePattern.RequiredValueAny,
+                action = RoutePattern.RequiredValueAny
+            }
+        );
 
         var routeData = urlHelper.ActionContext.RouteData;
         routeData.Values.Add("first", "a");
         routeData.Values.Add("controller", "Store");
         routeData.Values.Add("action", "Buy");
 
-        urlHelper.ActionContext.HttpContext.Features.Set<IRouteValuesFeature>(new RouteValuesFeature
-        {
-            RouteValues = routeData.Values
-        });
+        urlHelper
+            .ActionContext
+            .HttpContext
+            .Features
+            .Set<IRouteValuesFeature>(new RouteValuesFeature { RouteValues = routeData.Values });
 
         // Act
         //
@@ -1078,17 +1138,22 @@ public abstract class UrlHelperTestBase
     public void NoRouter_ErrorsWithFriendlyErrorMessage()
     {
         // Arrange
-        var urlHelper = new UrlHelper(new ActionContext
-        {
-            RouteData = new RouteData(new RouteValueDictionary()),
-            HttpContext = new DefaultHttpContext()
-        });
+        var urlHelper = new UrlHelper(
+            new ActionContext
+            {
+                RouteData = new RouteData(new RouteValueDictionary()),
+                HttpContext = new DefaultHttpContext()
+            }
+        );
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(() => urlHelper.ActionLink("contact", "home"));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => urlHelper.ActionLink("contact", "home")
+        );
 
         // Assert
-        var expectedMessage = "Could not find an IRouter associated with the ActionContext. "
+        var expectedMessage =
+            "Could not find an IRouter associated with the ActionContext. "
             + "If your application is using endpoint routing then you can get a IUrlHelperFactory with "
             + "dependency injection and use it to create a UrlHelper, or use Microsoft.AspNetCore.Routing.LinkGenerator.";
 
@@ -1102,14 +1167,16 @@ public abstract class UrlHelperTestBase
     protected abstract IUrlHelper CreateUrlHelperWithDefaultRoutes(
         string appRoot,
         string host,
-        string protocol);
+        string protocol
+    );
 
     protected abstract IUrlHelper CreateUrlHelperWithDefaultRoutes(
         string appRoot,
         string host,
         string protocol,
         string routeName,
-        string template);
+        string template
+    );
 
     protected abstract IUrlHelper CreateUrlHelper(
         string appRoot,
@@ -1118,7 +1185,8 @@ public abstract class UrlHelperTestBase
         string routeName,
         string template,
         object defaults,
-        object requiredValues);
+        object requiredValues
+    );
 
     protected virtual IUrlHelper CreateUrlHelper(string appRoot, string host, string protocol)
     {
@@ -1132,7 +1200,10 @@ public abstract class UrlHelperTestBase
         return CreateUrlHelper(actionContext);
     }
 
-    protected virtual ActionContext CreateActionContext(HttpContext httpContext, RouteData routeData = null)
+    protected virtual ActionContext CreateActionContext(
+        HttpContext httpContext,
+        RouteData routeData = null
+    )
     {
         routeData = routeData ?? new RouteData();
         return new ActionContext(httpContext, routeData, new ActionDescriptor());
@@ -1142,7 +1213,8 @@ public abstract class UrlHelperTestBase
         IServiceProvider services,
         string appRoot,
         string host,
-        string protocol)
+        string protocol
+    )
     {
         appRoot = string.IsNullOrEmpty(appRoot) ? string.Empty : appRoot;
         host = string.IsNullOrEmpty(host) ? "localhost" : host;
@@ -1161,8 +1233,7 @@ public abstract class UrlHelperTestBase
         services.AddOptions();
         services.AddLogging();
         services.AddRouting();
-        services
-            .AddSingleton<UrlEncoder>(UrlEncoder.Default);
+        services.AddSingleton<UrlEncoder>(UrlEncoder.Default);
         return services;
     }
 

@@ -43,4 +43,3 @@ public class When_using_a_member_name_replacer : NonValidatingSpecBase
         Assert.Equal(source.SubAirlinaFlight, destination.SubAirlineFlight);
     }
 }
-

@@ -17,17 +17,30 @@ namespace System.ServiceModel.Channels
 
     public sealed class CorrelationKey : InstanceKey
     {
-        static readonly XNamespace CorrelationNamespace = XNamespace.Get("urn:microsoft-com:correlation");
-        static readonly ReadOnlyStringDictionary emptyDictionary = new ReadOnlyStringDictionary(new Dictionary<string, string>(0));
+        static readonly XNamespace CorrelationNamespace = XNamespace.Get(
+            "urn:microsoft-com:correlation"
+        );
+        static readonly ReadOnlyStringDictionary emptyDictionary = new ReadOnlyStringDictionary(
+            new Dictionary<string, string>(0)
+        );
 
         string name;
 
         CorrelationKey(string keyString, XNamespace provider)
-            : base(GenerateKey(keyString), new Dictionary<XName, InstanceValue>(2)
-            {
-                { provider.GetName("KeyString"), new InstanceValue(keyString, InstanceValueOptions.Optional) },
-                { WorkflowNamespace.KeyProvider, new InstanceValue(provider.NamespaceName, InstanceValueOptions.Optional) },
-            })
+            : base(
+                GenerateKey(keyString),
+                new Dictionary<XName, InstanceValue>(2)
+                {
+                    {
+                        provider.GetName("KeyString"),
+                        new InstanceValue(keyString, InstanceValueOptions.Optional)
+                    },
+                    {
+                        WorkflowNamespace.KeyProvider,
+                        new InstanceValue(provider.NamespaceName, InstanceValueOptions.Optional)
+                    },
+                }
+            )
         {
             KeyString = keyString;
         }
@@ -40,13 +53,23 @@ namespace System.ServiceModel.Channels
             Provider = provider;
         }
 
-        public CorrelationKey(IDictionary<string, string> keyData, XName scopeName, XNamespace provider)
-            : this(keyData == null ? CorrelationKey.emptyDictionary : MakeReadonlyCopy(keyData), scopeName != null ? scopeName.ToString() : null, provider ?? CorrelationNamespace)
+        public CorrelationKey(
+            IDictionary<string, string> keyData,
+            XName scopeName,
+            XNamespace provider
+        )
+            : this(
+                keyData == null ? CorrelationKey.emptyDictionary : MakeReadonlyCopy(keyData),
+                scopeName != null ? scopeName.ToString() : null,
+                provider ?? CorrelationNamespace
+            )
         {
             ScopeName = scopeName;
         }
 
-        private static ReadOnlyStringDictionary MakeReadonlyCopy(IDictionary<string, string> dictionary)
+        private static ReadOnlyStringDictionary MakeReadonlyCopy(
+            IDictionary<string, string> dictionary
+        )
         {
             IDictionary<string, string> copy;
             if (dictionary.IsReadOnly)
@@ -64,21 +87,21 @@ namespace System.ServiceModel.Channels
 
         public string KeyString { get; private set; }
 
-
         // This name is not an aspect of the key itself, it exists to allow keys to be locally disambiguated.
         public string Name
         {
-            get
-            {
-                return this.name;
-            }
-
+            get { return this.name; }
             set
             {
                 if (!IsValid)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.CannotSetNameOnTheInvalidKey)));
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.CannotSetNameOnTheInvalidKey)
+                            )
+                        );
                 }
                 this.name = value;
             }
@@ -92,26 +115,34 @@ namespace System.ServiceModel.Channels
             return new Guid(hashBytes);
         }
 
-
         // The checksum ends up describing the structure of the key data, so we don't need to worry about
         // key collisions between maliciously-crafted key data even though we don't do any escaping.
-        static string GenerateKeyString(ReadOnlyStringDictionary keyData, string scopeName, string provider)
+        static string GenerateKeyString(
+            ReadOnlyStringDictionary keyData,
+            string scopeName,
+            string provider
+        )
         {
             if (string.IsNullOrEmpty(scopeName))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "scopeName", SR.GetString(SR.ScopeNameMustBeSpecified));
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument("scopeName", SR.GetString(SR.ScopeNameMustBeSpecified));
             }
 
             if (provider.Length == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "provider", SR.GetString(SR.ProviderCannotBeEmptyString));
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument("provider", SR.GetString(SR.ProviderCannotBeEmptyString));
             }
 
             StringBuilder key = new StringBuilder();
             StringBuilder checksum = new StringBuilder();
-            SortedList<string, string> sortedKeyData = new SortedList<string, string>(keyData, StringComparer.Ordinal);
+            SortedList<string, string> sortedKeyData = new SortedList<string, string>(
+                keyData,
+                StringComparer.Ordinal
+            );
 
             checksum.Append(sortedKeyData.Count.ToString(NumberFormatInfo.InvariantInfo));
             checksum.Append('.');
@@ -126,9 +157,13 @@ namespace System.ServiceModel.Channels
                 key.Append('=');
                 key.Append(sortedKeyData.Values[i]);
 
-                checksum.Append(sortedKeyData.Keys[i].Length.ToString(NumberFormatInfo.InvariantInfo));
+                checksum.Append(
+                    sortedKeyData.Keys[i].Length.ToString(NumberFormatInfo.InvariantInfo)
+                );
                 checksum.Append('.');
-                checksum.Append(sortedKeyData.Values[i].Length.ToString(NumberFormatInfo.InvariantInfo));
+                checksum.Append(
+                    sortedKeyData.Values[i].Length.ToString(NumberFormatInfo.InvariantInfo)
+                );
                 checksum.Append('.');
             }
 
@@ -152,4 +187,3 @@ namespace System.ServiceModel.Channels
         }
     }
 }
-

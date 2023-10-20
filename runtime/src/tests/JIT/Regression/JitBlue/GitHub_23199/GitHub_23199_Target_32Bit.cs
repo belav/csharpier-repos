@@ -61,7 +61,7 @@ namespace GitHub_23199_32Bit
         [MethodImpl(MethodImplOptions.NoInlining)]
         static Object TestOnePointer()
         {
-            var a = GetOnePointer();  // Report one.
+            var a = GetOnePointer(); // Report one.
             Console.WriteLine(a.a);
             return a;
         }
@@ -84,7 +84,7 @@ namespace GitHub_23199_32Bit
         [MethodImpl(MethodImplOptions.NoInlining)]
         static Object TestFirstPointer()
         {
-            var a = GetFirstPointer();  // Report the first field, do not report the second.
+            var a = GetFirstPointer(); // Report the first field, do not report the second.
             Console.WriteLine(a.a);
             return a;
         }
@@ -151,7 +151,7 @@ namespace GitHub_23199_32Bit
         [MethodImpl(MethodImplOptions.NoInlining)]
         static Object TestNoPointer2()
         {
-            NoPointer2 a = GetNoPointer2();  // Do not report anything.
+            NoPointer2 a = GetNoPointer2(); // Do not report anything.
             Console.WriteLine("TestNoPointer2 Passed");
             return a;
         }
@@ -176,11 +176,10 @@ namespace GitHub_23199_32Bit
         [MethodImpl(MethodImplOptions.NoInlining)]
         static Object TestThirdPointer()
         {
-            ThirdPointer a = GetThirdPointer();  // Do not return in registers.
+            ThirdPointer a = GetThirdPointer(); // Do not return in registers.
             Console.WriteLine(a.c);
             return a;
         }
-
 
         [Fact]
         public static void TestEntryPoint()

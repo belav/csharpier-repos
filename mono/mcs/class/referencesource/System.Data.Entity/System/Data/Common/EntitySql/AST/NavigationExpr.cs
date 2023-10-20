@@ -28,7 +28,12 @@ namespace System.Data.Common.EntitySql.AST
         /// <summary>
         /// Initializes relationship navigation expression.
         /// </summary>
-        internal RelshipNavigationExpr(Node refExpr, Node relshipTypeName, Identifier toEndIdentifier, Identifier fromEndIdentifier)
+        internal RelshipNavigationExpr(
+            Node refExpr,
+            Node relshipTypeName,
+            Identifier toEndIdentifier,
+            Identifier fromEndIdentifier
+        )
         {
             _refExpr = refExpr;
             _relshipTypeName = relshipTypeName;

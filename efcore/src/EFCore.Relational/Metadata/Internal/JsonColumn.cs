@@ -24,10 +24,9 @@ public class JsonColumn : Column, IColumn
         string type,
         Table table,
         RelationalTypeMapping? storeTypeMapping = null,
-        ValueComparer? providerValueComparer = null)
-        : base(name, type, table, storeTypeMapping, providerValueComparer)
-    {
-    }
+        ValueComparer? providerValueComparer = null
+    )
+        : base(name, type, table, storeTypeMapping, providerValueComparer) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -35,8 +34,14 @@ public class JsonColumn : Column, IColumn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override RelationalTypeMapping GetDefaultStoreTypeMapping()
-        => (RelationalTypeMapping)Table.Model.Model.GetModelDependencies().TypeMappingSource.FindMapping(typeof(JsonElement))!;
+    protected override RelationalTypeMapping GetDefaultStoreTypeMapping() =>
+        (RelationalTypeMapping)
+            Table
+                .Model
+                .Model
+                .GetModelDependencies()
+                .TypeMappingSource
+                .FindMapping(typeof(JsonElement))!;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -44,8 +49,7 @@ public class JsonColumn : Column, IColumn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    int? IColumn.MaxLength
-        => null;
+    int? IColumn.MaxLength => null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -53,8 +57,7 @@ public class JsonColumn : Column, IColumn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    int? IColumn.Precision
-        => null;
+    int? IColumn.Precision => null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -62,8 +65,7 @@ public class JsonColumn : Column, IColumn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    int? IColumn.Scale
-        => null;
+    int? IColumn.Scale => null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -71,8 +73,7 @@ public class JsonColumn : Column, IColumn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    bool? IColumn.IsUnicode
-        => null;
+    bool? IColumn.IsUnicode => null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -80,8 +81,7 @@ public class JsonColumn : Column, IColumn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    bool? IColumn.IsFixedLength
-        => null;
+    bool? IColumn.IsFixedLength => null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -89,8 +89,7 @@ public class JsonColumn : Column, IColumn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    bool IColumn.IsRowVersion
-        => false;
+    bool IColumn.IsRowVersion => false;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -98,8 +97,7 @@ public class JsonColumn : Column, IColumn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    int? IColumn.Order
-        => null;
+    int? IColumn.Order => null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -107,8 +105,7 @@ public class JsonColumn : Column, IColumn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    object? IColumn.DefaultValue
-        => null;
+    object? IColumn.DefaultValue => null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -116,8 +113,7 @@ public class JsonColumn : Column, IColumn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    string? IColumn.DefaultValueSql
-        => null;
+    string? IColumn.DefaultValueSql => null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -125,8 +121,7 @@ public class JsonColumn : Column, IColumn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    string? IColumn.ComputedColumnSql
-        => null;
+    string? IColumn.ComputedColumnSql => null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -134,8 +129,7 @@ public class JsonColumn : Column, IColumn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    bool? IColumn.IsStored
-        => null;
+    bool? IColumn.IsStored => null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -143,8 +137,7 @@ public class JsonColumn : Column, IColumn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    string? IColumn.Comment
-        => null;
+    string? IColumn.Comment => null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -152,8 +145,7 @@ public class JsonColumn : Column, IColumn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    string? IColumn.Collation
-        => null;
+    string? IColumn.Collation => null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -161,6 +153,5 @@ public class JsonColumn : Column, IColumn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    IColumnMapping? IColumn.FindColumnMapping(IReadOnlyEntityType entityType)
-        => null;
+    IColumnMapping? IColumn.FindColumnMapping(IReadOnlyEntityType entityType) => null;
 }

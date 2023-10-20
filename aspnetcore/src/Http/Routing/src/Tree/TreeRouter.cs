@@ -59,13 +59,15 @@ internal partial class TreeRouter
         ObjectPool<UriBuildingContext> objectPool,
         ILogger routeLogger,
         ILogger constraintLogger,
-        int version)
+        int version
+    )
 #else
     internal TreeRouter(
         UrlMatchingTree[] trees,
         UrlEncoder urlEncoder,
         ILogger routeLogger,
-        int version)
+        int version
+    )
 #endif
     {
         ArgumentNullException.ThrowIfNull(trees);
@@ -91,7 +93,12 @@ internal partial class TreeRouter
 
         foreach (var entry in linkGenerationEntries)
         {
-            var binder = new TemplateBinder(urlEncoder, objectPool, entry.RouteTemplate, entry.Defaults);
+            var binder = new TemplateBinder(
+                urlEncoder,
+                objectPool,
+                entry.RouteTemplate,
+                entry.Defaults
+            );
             var outboundMatch = new OutboundMatch() { Entry = entry, TemplateBinder = binder };
             outboundMatches.Add(outboundMatch);
 
@@ -104,15 +111,21 @@ internal partial class TreeRouter
             // We only need to keep one OutboundMatch per route template
             // so in case two entries have the same name and the same template we only keep
             // the first entry.
-            if (_namedEntries.TryGetValue(entry.RouteName, out var namedMatch) &&
-                !string.Equals(
+            if (
+                _namedEntries.TryGetValue(entry.RouteName, out var namedMatch)
+                && !string.Equals(
                     namedMatch.Entry.RouteTemplate.TemplateText,
                     entry.RouteTemplate.TemplateText,
-                    StringComparison.OrdinalIgnoreCase))
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 throw new ArgumentException(
-                    Resources.FormatAttributeRoute_DifferentLinkGenerationEntries_SameName(entry.RouteName),
-                    nameof(linkGenerationEntries));
+                    Resources.FormatAttributeRoute_DifferentLinkGenerationEntries_SameName(
+                        entry.RouteName
+                    ),
+                    nameof(linkGenerationEntries)
+                );
             }
             else if (namedMatch == null)
             {
@@ -157,7 +170,11 @@ internal partial class TreeRouter
 
         for (var i = 0; i < matches.Count; i++)
         {
-            var path = GenerateVirtualPath(context, matches[i].Match.Entry, matches[i].Match.TemplateBinder);
+            var path = GenerateVirtualPath(
+                context,
+                matches[i].Match.Entry,
+                matches[i].Match.TemplateBinder
+            );
             if (path != null)
             {
                 return path;
@@ -183,7 +200,9 @@ internal partial class TreeRouter
 
             // Create a snapshot before processing the route. We'll restore this snapshot before running each
             // to restore the state. This is likely an "empty" snapshot, which doesn't allocate.
-            var snapshot = context.RouteData.PushState(router: null, values: null, dataTokens: null);
+            var snapshot = context
+                .RouteData
+                .PushState(router: null, values: null, dataTokens: null);
             while (treeEnumerator.MoveNext())
             {
                 var node = treeEnumerator.Current;
@@ -193,22 +212,34 @@ internal partial class TreeRouter
                     var matcher = item.TemplateMatcher;
                     try
                     {
-                        if (!matcher.TryMatch(context.HttpContext.Request.Path, context.RouteData.Values))
+                        if (
+                            !matcher.TryMatch(
+                                context.HttpContext.Request.Path,
+                                context.RouteData.Values
+                            )
+                        )
                         {
                             continue;
                         }
-                        if (!RouteConstraintMatcher.Match(
-                            entry.Constraints,
-                            context.RouteData.Values,
-                            context.HttpContext,
-                            this,
-                            RouteDirection.IncomingRequest,
-                            _constraintLogger))
+                        if (
+                            !RouteConstraintMatcher.Match(
+                                entry.Constraints,
+                                context.RouteData.Values,
+                                context.HttpContext,
+                                this,
+                                RouteDirection.IncomingRequest,
+                                _constraintLogger
+                            )
+                        )
                         {
                             continue;
                         }
 
-                        Log.RequestMatchedRoute(_logger, entry.RouteName, entry.RouteTemplate.TemplateText);
+                        Log.RequestMatchedRoute(
+                            _logger,
+                            entry.RouteName,
+                            entry.RouteTemplate.TemplateText
+                        );
                         context.RouteData.Routers.Add(entry.Handler);
                         await entry.Handler.RouteAsync(context);
                         if (context.Handler != null)
@@ -245,9 +276,7 @@ internal partial class TreeRouter
                         continue;
                     }
 
-                    if (!RouteConstraintMatcher.Match(
-                            entry.Constraints,
-                            context.RouteValues))
+                    if (!RouteConstraintMatcher.Match(entry.Constraints, context.RouteValues))
                     {
                         context.RouteValues.Clear();
                         continue;
@@ -279,7 +308,8 @@ internal partial class TreeRouter
     private VirtualPathData GenerateVirtualPath(
         VirtualPathContext context,
         OutboundRouteEntry entry,
-        TemplateBinder binder)
+        TemplateBinder binder
+    )
     {
         // In attribute the context includes the values that are used to select this entry - typically
         // these will be the standard 'action', 'controller' and maybe 'area' tokens. However, we don't
@@ -322,7 +352,8 @@ internal partial class TreeRouter
             context.HttpContext,
             this,
             RouteDirection.UrlGeneration,
-            _constraintLogger);
+            _constraintLogger
+        );
 
         if (!matched)
         {
@@ -350,9 +381,16 @@ internal partial class TreeRouter
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Debug,
+        [LoggerMessage(
+            1,
+            LogLevel.Debug,
             "Request successfully matched the route with name '{RouteName}' and template '{RouteTemplate}'",
-            EventName = "RequestMatchedRoute")]
-        public static partial void RequestMatchedRoute(ILogger logger, string routeName, string routeTemplate);
+            EventName = "RequestMatchedRoute"
+        )]
+        public static partial void RequestMatchedRoute(
+            ILogger logger,
+            string routeName,
+            string routeTemplate
+        );
     }
 }

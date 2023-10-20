@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 using System;
 using System.Collections.Generic;
@@ -52,11 +52,13 @@ namespace DbLinq.Vendor.Implementation
         /// </summary>
         /// <value></value>
         public abstract IVendor Vendor { get; set; }
+
         /// <summary>
         /// Connection used to read schema
         /// </summary>
         /// <value></value>
         public IDbConnection Connection { get; set; }
+
         /// <summary>
         /// Gets or sets the name formatter.
         /// </summary>
@@ -64,6 +66,7 @@ namespace DbLinq.Vendor.Implementation
         public INameFormatter NameFormatter { get; set; }
 
         private TextWriter log;
+
         /// <summary>
         /// Log output
         /// </summary>
@@ -83,8 +86,14 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="contextNamespace"></param>
         /// <param name="entityNamespace"></param>
         /// <returns></returns>
-        public virtual Database Load(string databaseName, INameAliases nameAliases, NameFormat nameFormat,
-            bool loadStoredProcedures, string contextNamespace, string entityNamespace)
+        public virtual Database Load(
+            string databaseName,
+            INameAliases nameAliases,
+            NameFormat nameFormat,
+            bool loadStoredProcedures,
+            string contextNamespace,
+            string entityNamespace
+        )
         {
             // check if connection is open. Note: we may use something more flexible
             if (Connection.State != ConnectionState.Open)
@@ -95,20 +104,26 @@ namespace DbLinq.Vendor.Implementation
                 databaseName = Connection.Database;
             // ... and if connection string doesn't provide a name, then throw an error
             if (string.IsNullOrEmpty(databaseName))
-                throw new ArgumentException("A database name is required. Please specify /database=<databaseName>");
+                throw new ArgumentException(
+                    "A database name is required. Please specify /database=<databaseName>"
+                );
 
             databaseName = GetDatabaseNameAliased(databaseName, nameAliases);
 
-            var schemaName = NameFormatter.GetSchemaName(databaseName, GetExtraction(databaseName), nameFormat);
+            var schemaName = NameFormatter.GetSchemaName(
+                databaseName,
+                GetExtraction(databaseName),
+                nameFormat
+            );
             var names = new Names();
             var schema = new Database
-                             {
-                                 Name = schemaName.DbName,
-                                 Class = GetRuntimeClassName(schemaName.ClassName, nameAliases),
-                                 BaseType = typeof(DataContext).FullName,
-                                 ContextNamespace = contextNamespace,
-                                 EntityNamespace = entityNamespace,
-                             };
+            {
+                Name = schemaName.DbName,
+                Class = GetRuntimeClassName(schemaName.ClassName, nameAliases),
+                BaseType = typeof(DataContext).FullName,
+                ContextNamespace = contextNamespace,
+                EntityNamespace = entityNamespace,
+            };
 
             // order is important, we must have:
             // 1. tables
@@ -142,10 +157,16 @@ namespace DbLinq.Vendor.Implementation
             return databaseName;
         }
 
-        protected virtual string GetDatabaseNameAliased(string databaseName, INameAliases nameAliases)
+        protected virtual string GetDatabaseNameAliased(
+            string databaseName,
+            INameAliases nameAliases
+        )
         {
-            string databaseNameAliased = nameAliases != null ? nameAliases.GetDatabaseNameAlias(databaseName) : null;
-            return (databaseNameAliased != null) ? databaseNameAliased : GetDatabaseName(databaseName);
+            string databaseNameAliased =
+                nameAliases != null ? nameAliases.GetDatabaseNameAlias(databaseName) : null;
+            return (databaseNameAliased != null)
+                ? databaseNameAliased
+                : GetDatabaseName(databaseName);
         }
 
         /// <summary>
@@ -155,7 +176,8 @@ namespace DbLinq.Vendor.Implementation
         /// <returns></returns>
         protected virtual string GetRuntimeClassName(string className, INameAliases nameAliases)
         {
-            string classNameAliased = nameAliases != null ? nameAliases.GetClassNameAlias(className) : null;
+            string classNameAliased =
+                nameAliases != null ? nameAliases.GetClassNameAlias(className) : null;
             return (classNameAliased != null) ? classNameAliased : className;
         }
 
@@ -184,7 +206,8 @@ namespace DbLinq.Vendor.Implementation
         /// <returns></returns>
         protected virtual WordsExtraction GetExtraction(string dbColumnName)
         {
-            bool isMixedCase = dbColumnName != dbColumnName.ToLower() && dbColumnName != dbColumnName.ToUpper();
+            bool isMixedCase =
+                dbColumnName != dbColumnName.ToLower() && dbColumnName != dbColumnName.ToUpper();
             return isMixedCase ? WordsExtraction.FromCase : WordsExtraction.FromDictionary;
         }
 
@@ -213,10 +236,17 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="nameFormat">The name format.</param>
         /// <param name="extraction">The extraction.</param>
         /// <returns></returns>
-        protected virtual TableName CreateTableName(string dbTableName, string dbSchema, INameAliases nameAliases, NameFormat nameFormat, WordsExtraction extraction)
+        protected virtual TableName CreateTableName(
+            string dbTableName,
+            string dbSchema,
+            INameAliases nameAliases,
+            NameFormat nameFormat,
+            WordsExtraction extraction
+        )
         {
             // if we have an alias, use it, and don't try to analyze it (a human probably already did the job)
-            var tableTypeAlias = nameAliases != null ? nameAliases.GetTableTypeAlias(dbTableName, dbSchema) : null;
+            var tableTypeAlias =
+                nameAliases != null ? nameAliases.GetTableTypeAlias(dbTableName, dbSchema) : null;
             if (tableTypeAlias != null)
                 extraction = WordsExtraction.None;
             else
@@ -225,7 +255,8 @@ namespace DbLinq.Vendor.Implementation
             var tableName = NameFormatter.GetTableName(tableTypeAlias, extraction, nameFormat);
 
             // alias for member
-            var tableMemberAlias = nameAliases != null ? nameAliases.GetTableMemberAlias(dbTableName, dbSchema) : null;
+            var tableMemberAlias =
+                nameAliases != null ? nameAliases.GetTableMemberAlias(dbTableName, dbSchema) : null;
             if (tableMemberAlias != null)
                 tableName.MemberName = tableMemberAlias;
 
@@ -233,9 +264,20 @@ namespace DbLinq.Vendor.Implementation
             return tableName;
         }
 
-        protected virtual TableName CreateTableName(string dbTableName, string dbSchema, INameAliases nameAliases, NameFormat nameFormat)
+        protected virtual TableName CreateTableName(
+            string dbTableName,
+            string dbSchema,
+            INameAliases nameAliases,
+            NameFormat nameFormat
+        )
         {
-            return CreateTableName(dbTableName, dbSchema, nameAliases, nameFormat, GetExtraction(dbTableName));
+            return CreateTableName(
+                dbTableName,
+                dbSchema,
+                nameAliases,
+                nameFormat,
+                GetExtraction(dbTableName)
+            );
         }
 
         Regex startsWithNumber = new Regex(@"^\d", RegexOptions.Compiled);
@@ -249,9 +291,18 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="nameAliases">The name aliases.</param>
         /// <param name="nameFormat">The name format.</param>
         /// <returns></returns>
-        protected virtual ColumnName CreateColumnName(string dbColumnName, string dbTableName, string dbSchema, INameAliases nameAliases, NameFormat nameFormat)
+        protected virtual ColumnName CreateColumnName(
+            string dbColumnName,
+            string dbTableName,
+            string dbSchema,
+            INameAliases nameAliases,
+            NameFormat nameFormat
+        )
         {
-            var columnNameAlias = nameAliases != null ? nameAliases.GetColumnMemberAlias(dbColumnName, dbTableName, dbSchema) : null;
+            var columnNameAlias =
+                nameAliases != null
+                    ? nameAliases.GetColumnMemberAlias(dbColumnName, dbTableName, dbSchema)
+                    : null;
             WordsExtraction extraction;
             if (columnNameAlias != null)
             {
@@ -283,9 +334,17 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="dbSchema">The db schema.</param>
         /// <param name="nameFormat">The name format.</param>
         /// <returns></returns>
-        protected virtual ProcedureName CreateProcedureName(string dbProcedureName, string dbSchema, NameFormat nameFormat)
+        protected virtual ProcedureName CreateProcedureName(
+            string dbProcedureName,
+            string dbSchema,
+            NameFormat nameFormat
+        )
         {
-            var procedureName = NameFormatter.GetProcedureName(dbProcedureName, GetExtraction(dbProcedureName), nameFormat);
+            var procedureName = NameFormatter.GetProcedureName(
+                dbProcedureName,
+                GetExtraction(dbProcedureName),
+                nameFormat
+            );
             procedureName.DbName = GetFullDbName(dbProcedureName, dbSchema);
             return procedureName;
         }
@@ -301,11 +360,24 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="foreignKeyName">Name of the foreign key.</param>
         /// <param name="nameFormat">The name format.</param>
         /// <returns></returns>
-        protected virtual AssociationName CreateAssociationName(string dbManyName, string dbManySchema,
-            string dbOneName, string dbOneSchema, string dbConstraintName, string foreignKeyName, NameFormat nameFormat)
+        protected virtual AssociationName CreateAssociationName(
+            string dbManyName,
+            string dbManySchema,
+            string dbOneName,
+            string dbOneSchema,
+            string dbConstraintName,
+            string foreignKeyName,
+            NameFormat nameFormat
+        )
         {
-            var associationName = NameFormatter.GetAssociationName(dbManyName, dbOneName,
-                dbConstraintName, foreignKeyName, GetExtraction(dbManyName), nameFormat);
+            var associationName = NameFormatter.GetAssociationName(
+                dbManyName,
+                dbOneName,
+                dbConstraintName,
+                foreignKeyName,
+                GetExtraction(dbManyName),
+                nameFormat
+            );
             associationName.DbName = GetFullDbName(dbManyName, dbManySchema);
             return associationName;
         }
@@ -317,27 +389,45 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="connection">The connection.</param>
         /// <param name="nameFormat">The name format.</param>
         /// <returns></returns>
-        protected virtual SchemaName CreateSchemaName(string databaseName, IDbConnection connection, NameFormat nameFormat)
+        protected virtual SchemaName CreateSchemaName(
+            string databaseName,
+            IDbConnection connection,
+            NameFormat nameFormat
+        )
         {
             if (string.IsNullOrEmpty(databaseName))
             {
                 databaseName = connection.Database;
                 if (string.IsNullOrEmpty(databaseName))
-                    throw new ArgumentException("Could not deduce database name from connection string. Please specify /database=<databaseName>");
+                    throw new ArgumentException(
+                        "Could not deduce database name from connection string. Please specify /database=<databaseName>"
+                    );
             }
-            return NameFormatter.GetSchemaName(databaseName, GetExtraction(databaseName), nameFormat);
+            return NameFormatter.GetSchemaName(
+                databaseName,
+                GetExtraction(databaseName),
+                nameFormat
+            );
         }
 
-        protected virtual ParameterName CreateParameterName(string dbParameterName, NameFormat nameFormat)
+        protected virtual ParameterName CreateParameterName(
+            string dbParameterName,
+            NameFormat nameFormat
+        )
         {
-            var parameterName = NameFormatter.GetParameterName(dbParameterName, GetExtraction(dbParameterName), nameFormat);
+            var parameterName = NameFormatter.GetParameterName(
+                dbParameterName,
+                GetExtraction(dbParameterName),
+                nameFormat
+            );
             return parameterName;
         }
 
         protected class Names
         {
             public IDictionary<string, TableName> TablesNames = new Dictionary<string, TableName>();
-            public IDictionary<string, IDictionary<string, ColumnName>> ColumnsNames = new Dictionary<string, IDictionary<string, ColumnName>>();
+            public IDictionary<string, IDictionary<string, ColumnName>> ColumnsNames =
+                new Dictionary<string, IDictionary<string, ColumnName>>();
 
             public void AddColumn(string dbTableName, ColumnName columnName)
             {
@@ -360,7 +450,14 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="nameAliases">The name aliases.</param>
         /// <param name="nameFormat">The name format.</param>
         /// <param name="names">The names.</param>
-        protected virtual void LoadTables(Database schema, SchemaName schemaName, IDbConnection conn, INameAliases nameAliases, NameFormat nameFormat, Names names)
+        protected virtual void LoadTables(
+            Database schema,
+            SchemaName schemaName,
+            IDbConnection conn,
+            INameAliases nameAliases,
+            NameFormat nameFormat,
+            Names names
+        )
         {
             var tables = ReadTables(conn, schemaName.DbName);
             foreach (var row in tables)
@@ -385,20 +482,40 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="nameAliases">The name aliases.</param>
         /// <param name="nameFormat">The name format.</param>
         /// <param name="names">The names.</param>
-        protected void LoadColumns(Database schema, SchemaName schemaName, IDbConnection conn, INameAliases nameAliases, NameFormat nameFormat, Names names)
+        protected void LoadColumns(
+            Database schema,
+            SchemaName schemaName,
+            IDbConnection conn,
+            INameAliases nameAliases,
+            NameFormat nameFormat,
+            Names names
+        )
         {
             var columnRows = ReadColumns(conn, schemaName.DbName);
             foreach (var columnRow in columnRows)
             {
-                var columnName = CreateColumnName(columnRow.ColumnName, columnRow.TableName, columnRow.TableSchema, nameAliases, nameFormat);
+                var columnName = CreateColumnName(
+                    columnRow.ColumnName,
+                    columnRow.TableName,
+                    columnRow.TableSchema,
+                    nameAliases,
+                    nameFormat
+                );
                 names.AddColumn(columnRow.TableName, columnName);
 
                 //find which table this column belongs to
                 string fullColumnDbName = GetFullDbName(columnRow.TableName, columnRow.TableSchema);
-                DbLinq.Schema.Dbml.Table tableSchema = schema.Tables.FirstOrDefault(tblSchema => fullColumnDbName == tblSchema.Name);
+                DbLinq.Schema.Dbml.Table tableSchema = schema
+                    .Tables
+                    .FirstOrDefault(tblSchema => fullColumnDbName == tblSchema.Name);
                 if (tableSchema == null)
                 {
-                    WriteErrorLine("ERROR L46: Table '" + columnRow.TableName + "' not found for column " + columnRow.ColumnName);
+                    WriteErrorLine(
+                        "ERROR L46: Table '"
+                            + columnRow.TableName
+                            + "' not found for column "
+                            + columnRow.ColumnName
+                    );
                     continue;
                 }
                 var column = new Column();
@@ -409,13 +526,27 @@ namespace DbLinq.Vendor.Implementation
                 if (columnRow.PrimaryKey.HasValue)
                     column.IsPrimaryKey = columnRow.PrimaryKey.Value;
 
-                bool? generated = (nameAliases != null) ? nameAliases.GetColumnGenerated(columnRow.ColumnName, columnRow.TableName, columnRow.TableSchema) : null;
+                bool? generated =
+                    (nameAliases != null)
+                        ? nameAliases.GetColumnGenerated(
+                            columnRow.ColumnName,
+                            columnRow.TableName,
+                            columnRow.TableSchema
+                        )
+                        : null;
                 if (!generated.HasValue)
                     generated = columnRow.Generated;
                 if (generated.HasValue)
                     column.IsDbGenerated = generated.Value;
 
-                AutoSync? autoSync = (nameAliases != null) ? nameAliases.GetColumnAutoSync(columnRow.ColumnName, columnRow.TableName, columnRow.TableSchema) : null;
+                AutoSync? autoSync =
+                    (nameAliases != null)
+                        ? nameAliases.GetColumnAutoSync(
+                            columnRow.ColumnName,
+                            columnRow.TableName,
+                            columnRow.TableSchema
+                        )
+                        : null;
                 if (autoSync.HasValue)
                     column.AutoSync = autoSync.Value;
 
@@ -428,7 +559,14 @@ namespace DbLinq.Vendor.Implementation
 
                 column.CanBeNull = columnRow.Nullable;
 
-                string columnTypeAlias = nameAliases != null ? nameAliases.GetColumnForcedType(columnRow.ColumnName, columnRow.TableName, columnRow.TableSchema) : null;
+                string columnTypeAlias =
+                    nameAliases != null
+                        ? nameAliases.GetColumnForcedType(
+                            columnRow.ColumnName,
+                            columnRow.TableName,
+                            columnRow.TableSchema
+                        )
+                        : null;
                 var columnType = MapDbType(columnName.DbName, columnRow);
 
                 var columnEnumType = columnType as EnumType;

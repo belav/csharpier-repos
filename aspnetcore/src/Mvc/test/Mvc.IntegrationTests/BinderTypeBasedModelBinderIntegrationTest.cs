@@ -19,11 +19,7 @@ public class BinderTypeBasedModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo()
-            {
-                BinderType = typeof(NullModelBinder)
-            },
-
+            BindingInfo = new BindingInfo() { BinderType = typeof(NullModelBinder) },
             ParameterType = typeof(string)
         };
 
@@ -53,11 +49,7 @@ public class BinderTypeBasedModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo()
-            {
-                BinderType = typeof(NullModelNotSetModelBinder)
-            },
-
+            BindingInfo = new BindingInfo() { BinderType = typeof(NullModelNotSetModelBinder) },
             ParameterType = typeof(string)
         };
 
@@ -76,9 +68,7 @@ public class BinderTypeBasedModelBinderIntegrationTest
         Assert.Empty(modelState);
     }
 
-    private class Person2
-    {
-    }
+    private class Person2 { }
 
     // Ensures that prefix is part of the result returned back.
     [Fact]
@@ -95,7 +85,6 @@ public class BinderTypeBasedModelBinderIntegrationTest
                 BinderType = typeof(SuccessModelBinder),
                 BinderModelName = "CustomParameter"
             },
-
             ParameterType = typeof(Person2)
         };
 
@@ -132,14 +121,7 @@ public class BinderTypeBasedModelBinderIntegrationTest
 
     public static TheoryData<BindingInfo> NullAndEmptyBindingInfo
     {
-        get
-        {
-            return new TheoryData<BindingInfo>
-                {
-                    null,
-                    new BindingInfo(),
-                };
-        }
+        get { return new TheoryData<BindingInfo> { null, new BindingInfo(), }; }
     }
 
     // Make sure the metadata is honored when a [ModelBinder] attribute is associated with an action parameter's
@@ -149,11 +131,15 @@ public class BinderTypeBasedModelBinderIntegrationTest
     // This is a regression test for aspnet/Mvc#4652 and aspnet/Mvc#7595
     [Theory]
     [MemberData(nameof(NullAndEmptyBindingInfo))]
-    public async Task BinderTypeOnParameterType_WithData_EmptyPrefix_GetsBound(BindingInfo bindingInfo)
+    public async Task BinderTypeOnParameterType_WithData_EmptyPrefix_GetsBound(
+        BindingInfo bindingInfo
+    )
     {
         // Arrange
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
-        var parameters = typeof(TestController).GetMethod(nameof(TestController.Action)).GetParameters();
+        var parameters = typeof(TestController)
+            .GetMethod(nameof(TestController.Action))
+            .GetParameters();
         var parameter = new ControllerParameterDescriptor
         {
             Name = "Parameter1",
@@ -282,10 +268,7 @@ public class BinderTypeBasedModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo()
-            {
-                BinderModelName = "CustomParameter"
-            },
+            BindingInfo = new BindingInfo() { BinderModelName = "CustomParameter" },
             ParameterType = typeof(Person)
         };
 
@@ -328,10 +311,13 @@ public class BinderTypeBasedModelBinderIntegrationTest
 
             var address = new Address() { Street = "SomeStreet" };
 
-            bindingContext.ModelState.SetModelValue(
-                ModelNames.CreatePropertyModelName(bindingContext.ModelName, "Street"),
-                new string[] { address.Street },
-                address.Street);
+            bindingContext
+                .ModelState
+                .SetModelValue(
+                    ModelNames.CreatePropertyModelName(bindingContext.ModelName, "Street"),
+                    new string[] { address.Street },
+                    address.Street
+                );
 
             bindingContext.Result = ModelBindingResult.Success(address);
             return Task.CompletedTask;
@@ -353,10 +339,13 @@ public class BinderTypeBasedModelBinderIntegrationTest
 
             var address = new Address3 { Street = "SomeStreet" };
 
-            bindingContext.ModelState.SetModelValue(
-                ModelNames.CreatePropertyModelName(bindingContext.ModelName, "Street"),
-                new string[] { address.Street },
-                address.Street);
+            bindingContext
+                .ModelState
+                .SetModelValue(
+                    ModelNames.CreatePropertyModelName(bindingContext.ModelName, "Street"),
+                    new string[] { address.Street },
+                    address.Street
+                );
 
             bindingContext.Result = ModelBindingResult.Success(address);
             return Task.CompletedTask;
@@ -371,10 +360,9 @@ public class BinderTypeBasedModelBinderIntegrationTest
             Debug.Assert(bindingContext.Result == ModelBindingResult.Failed());
 
             var model = "Success";
-            bindingContext.ModelState.SetModelValue(
-                bindingContext.ModelName,
-                new string[] { model },
-                model);
+            bindingContext
+                .ModelState
+                .SetModelValue(bindingContext.ModelName, new string[] { model }, model);
 
             bindingContext.Result = ModelBindingResult.Success(model);
             return Task.CompletedTask;
@@ -407,8 +395,6 @@ public class BinderTypeBasedModelBinderIntegrationTest
 
     private class TestController
     {
-        public void Action(Address address)
-        {
-        }
+        public void Action(Address address) { }
     }
 }

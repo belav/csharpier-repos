@@ -25,10 +25,7 @@ namespace Microsoft.NET.HostModel.Win32Resources
 
         public int CountBytes
         {
-            get
-            {
-                return _data.Count;
-            }
+            get { return _data.Count; }
         }
 
         public void EmitByte(byte emit)

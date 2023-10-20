@@ -14,14 +14,26 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
     {
         [Fact]
         public async Task Bind() =>
-            await VerifyAgainstBaselineUsingFile("Bind.generated.txt", BindCallSampleCode, extType: ExtensionClassType.ConfigurationBinder);
+            await VerifyAgainstBaselineUsingFile(
+                "Bind.generated.txt",
+                BindCallSampleCode,
+                extType: ExtensionClassType.ConfigurationBinder
+            );
 
         [Theory]
         [InlineData("ConfigurationBinder.Bind(instance: configObj, configuration: config);")]
-        [InlineData("""ConfigurationBinder.Bind(key: "", instance: configObj, configuration: config);""")]
-        [InlineData("""ConfigurationBinder.Bind(instance: configObj, key: "", configuration: config);""")]
-        [InlineData("ConfigurationBinder.Bind(configureOptions: _ => { }, configuration: config, instance: configObj);")]
-        [InlineData("ConfigurationBinder.Bind(configuration: config, configureOptions: _ => { }, instance: configObj);")]
+        [InlineData(
+            """ConfigurationBinder.Bind(key: "", instance: configObj, configuration: config);"""
+        )]
+        [InlineData(
+            """ConfigurationBinder.Bind(instance: configObj, key: "", configuration: config);"""
+        )]
+        [InlineData(
+            "ConfigurationBinder.Bind(configureOptions: _ => { }, configuration: config, instance: configObj);"
+        )]
+        [InlineData(
+            "ConfigurationBinder.Bind(configuration: config, configureOptions: _ => { }, instance: configObj);"
+        )]
         public async Task Bind_NamedParameters_OutOfOrder(string row)
         {
             string source = $$"""
@@ -53,10 +65,18 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         }
 
         [Theory]
-        [InlineData("var obj = ConfigurationBinder.Get(type: typeof(MyClass), configuration: config);")]
-        [InlineData("var obj = ConfigurationBinder.Get<MyClass>(configureOptions: _ => { }, configuration: config);")]
-        [InlineData("var obj = ConfigurationBinder.Get(configureOptions: _ => { }, type: typeof(MyClass), configuration: config);")]
-        [InlineData("var obj =  ConfigurationBinder.Get(type: typeof(MyClass), configureOptions: _ => { }, configuration: config);")]
+        [InlineData(
+            "var obj = ConfigurationBinder.Get(type: typeof(MyClass), configuration: config);"
+        )]
+        [InlineData(
+            "var obj = ConfigurationBinder.Get<MyClass>(configureOptions: _ => { }, configuration: config);"
+        )]
+        [InlineData(
+            "var obj = ConfigurationBinder.Get(configureOptions: _ => { }, type: typeof(MyClass), configuration: config);"
+        )]
+        [InlineData(
+            "var obj =  ConfigurationBinder.Get(type: typeof(MyClass), configureOptions: _ => { }, configuration: config);"
+        )]
         public async Task Get_TypeOf_NamedParametersOutOfOrder(string row)
         {
             string source = $$"""
@@ -88,12 +108,24 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         }
 
         [Theory]
-        [InlineData("""var str = ConfigurationBinder.GetValue(key: "key", configuration: config, type: typeof(string));""")]
-        [InlineData("""var str = ConfigurationBinder.GetValue<string>(key: "key", configuration: config);""")]
-        [InlineData("""var str = ConfigurationBinder.GetValue<string>(key: "key", defaultValue: "default", configuration: config);""")]
-        [InlineData("""var str = ConfigurationBinder.GetValue<string>(configuration: config, key: "key", defaultValue: "default");""")]
-        [InlineData("""var str = ConfigurationBinder.GetValue(defaultValue: "default", key: "key", configuration: config, type: typeof(string));""")]
-        [InlineData("""var str = ConfigurationBinder.GetValue(defaultValue: "default", type: typeof(string), key: "key", configuration: config);""")]
+        [InlineData(
+            """var str = ConfigurationBinder.GetValue(key: "key", configuration: config, type: typeof(string));"""
+        )]
+        [InlineData(
+            """var str = ConfigurationBinder.GetValue<string>(key: "key", configuration: config);"""
+        )]
+        [InlineData(
+            """var str = ConfigurationBinder.GetValue<string>(key: "key", defaultValue: "default", configuration: config);"""
+        )]
+        [InlineData(
+            """var str = ConfigurationBinder.GetValue<string>(configuration: config, key: "key", defaultValue: "default");"""
+        )]
+        [InlineData(
+            """var str = ConfigurationBinder.GetValue(defaultValue: "default", key: "key", configuration: config, type: typeof(string));"""
+        )]
+        [InlineData(
+            """var str = ConfigurationBinder.GetValue(defaultValue: "default", type: typeof(string), key: "key", configuration: config);"""
+        )]
         public async Task GetValue_NamedParametersOutOfOrder(string row)
         {
             string source = $$"""
@@ -153,7 +185,11 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
                         }
                     """;
 
-            await VerifyAgainstBaselineUsingFile("Bind_Instance.generated.txt", source, extType: ExtensionClassType.ConfigurationBinder);
+            await VerifyAgainstBaselineUsingFile(
+                "Bind_Instance.generated.txt",
+                source,
+                extType: ExtensionClassType.ConfigurationBinder
+            );
         }
 
         [Fact]
@@ -187,7 +223,11 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
                         }
                     """;
 
-            await VerifyAgainstBaselineUsingFile("Bind_Instance_BinderOptions.generated.txt", source, extType: ExtensionClassType.ConfigurationBinder);
+            await VerifyAgainstBaselineUsingFile(
+                "Bind_Instance_BinderOptions.generated.txt",
+                source,
+                extType: ExtensionClassType.ConfigurationBinder
+            );
         }
 
         [Fact]
@@ -221,7 +261,11 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
                         }
                     """;
 
-            await VerifyAgainstBaselineUsingFile("Bind_Key_Instance.generated.txt", source, extType: ExtensionClassType.ConfigurationBinder);
+            await VerifyAgainstBaselineUsingFile(
+                "Bind_Key_Instance.generated.txt",
+                source,
+                extType: ExtensionClassType.ConfigurationBinder
+            );
         }
 
         [Fact]
@@ -264,13 +308,18 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
                 }
                 """;
 
-            await VerifyAgainstBaselineUsingFile("Bind_ParseTypeFromMethodParam.generated.txt", source, extType: ExtensionClassType.ConfigurationBinder);
+            await VerifyAgainstBaselineUsingFile(
+                "Bind_ParseTypeFromMethodParam.generated.txt",
+                source,
+                extType: ExtensionClassType.ConfigurationBinder
+            );
         }
 
         [Fact]
         public async Task Get()
         {
-            string source = @"
+            string source =
+                @"
         using System.Collections.Generic;
         using Microsoft.Extensions.Configuration;
 
@@ -312,7 +361,11 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
             }
         }";
 
-            await VerifyAgainstBaselineUsingFile("Get.generated.txt", source, extType: ExtensionClassType.ConfigurationBinder);
+            await VerifyAgainstBaselineUsingFile(
+                "Get.generated.txt",
+                source,
+                extType: ExtensionClassType.ConfigurationBinder
+            );
         }
 
         [Fact]
@@ -336,7 +389,11 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
                 }
                 """;
 
-            await VerifyAgainstBaselineUsingFile("Get_PrimitivesOnly.generated.txt", source, extType: ExtensionClassType.ConfigurationBinder);
+            await VerifyAgainstBaselineUsingFile(
+                "Get_PrimitivesOnly.generated.txt",
+                source,
+                extType: ExtensionClassType.ConfigurationBinder
+            );
         }
 
         [Fact]
@@ -382,7 +439,11 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
                         }
                     """;
 
-            await VerifyAgainstBaselineUsingFile("Get_T.generated.txt", source, extType: ExtensionClassType.ConfigurationBinder);
+            await VerifyAgainstBaselineUsingFile(
+                "Get_T.generated.txt",
+                source,
+                extType: ExtensionClassType.ConfigurationBinder
+            );
         }
 
         [Fact]
@@ -428,7 +489,11 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
                         }
                     """;
 
-            await VerifyAgainstBaselineUsingFile("Get_T_BinderOptions.generated.txt", source, extType: ExtensionClassType.ConfigurationBinder);
+            await VerifyAgainstBaselineUsingFile(
+                "Get_T_BinderOptions.generated.txt",
+                source,
+                extType: ExtensionClassType.ConfigurationBinder
+            );
         }
 
         [Fact]
@@ -474,7 +539,11 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
                         }
                     """;
 
-            await VerifyAgainstBaselineUsingFile("Get_TypeOf.generated.txt", source, extType: ExtensionClassType.ConfigurationBinder);
+            await VerifyAgainstBaselineUsingFile(
+                "Get_TypeOf.generated.txt",
+                source,
+                extType: ExtensionClassType.ConfigurationBinder
+            );
         }
 
         [Fact]
@@ -520,13 +589,18 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
                         }
                     """;
 
-            await VerifyAgainstBaselineUsingFile("Get_TypeOf_BinderOptions.generated.txt", source, extType: ExtensionClassType.ConfigurationBinder);
+            await VerifyAgainstBaselineUsingFile(
+                "Get_TypeOf_BinderOptions.generated.txt",
+                source,
+                extType: ExtensionClassType.ConfigurationBinder
+            );
         }
 
         [Fact]
         public async Task GetValue()
         {
-            string source = @"
+            string source =
+                @"
         using System.Collections.Generic;
         using System.Globalization;
         using Microsoft.Extensions.Configuration;
@@ -555,7 +629,11 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         	}
         }";
 
-            await VerifyAgainstBaselineUsingFile("GetValue.generated.txt", source, extType: ExtensionClassType.ConfigurationBinder);
+            await VerifyAgainstBaselineUsingFile(
+                "GetValue.generated.txt",
+                source,
+                extType: ExtensionClassType.ConfigurationBinder
+            );
         }
 
         [Fact]
@@ -576,7 +654,11 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
                         }
                     """;
 
-            await VerifyAgainstBaselineUsingFile("GetValue_T_Key.generated.txt", source, extType: ExtensionClassType.ConfigurationBinder);
+            await VerifyAgainstBaselineUsingFile(
+                "GetValue_T_Key.generated.txt",
+                source,
+                extType: ExtensionClassType.ConfigurationBinder
+            );
         }
 
         [Fact]
@@ -599,7 +681,11 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
                         }
                     """;
 
-            await VerifyAgainstBaselineUsingFile("GetValue_T_Key_DefaultValue.generated.txt", source, extType: ExtensionClassType.ConfigurationBinder);
+            await VerifyAgainstBaselineUsingFile(
+                "GetValue_T_Key_DefaultValue.generated.txt",
+                source,
+                extType: ExtensionClassType.ConfigurationBinder
+            );
         }
 
         [Fact]
@@ -620,7 +706,11 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
                         }
                     """;
 
-            await VerifyAgainstBaselineUsingFile("GetValue_TypeOf_Key.generated.txt", source, extType: ExtensionClassType.ConfigurationBinder);
+            await VerifyAgainstBaselineUsingFile(
+                "GetValue_TypeOf_Key.generated.txt",
+                source,
+                extType: ExtensionClassType.ConfigurationBinder
+            );
         }
 
         [Fact]
@@ -642,13 +732,18 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
                         }
                     """;
 
-            await VerifyAgainstBaselineUsingFile("GetValue_TypeOf_Key_DefaultValue.generated.txt", source, extType: ExtensionClassType.ConfigurationBinder);
+            await VerifyAgainstBaselineUsingFile(
+                "GetValue_TypeOf_Key_DefaultValue.generated.txt",
+                source,
+                extType: ExtensionClassType.ConfigurationBinder
+            );
         }
 
         [Fact]
         public async Task None()
         {
-            string source = @"
+            string source =
+                @"
         using System.Collections.Generic;
         using Microsoft.AspNetCore.Builder;
         using Microsoft.Extensions.Configuration;
@@ -676,8 +771,7 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
             {
                 public int MyInt { get; set; }
             }
-        }"
-            ;
+        }";
 
             ConfigBindingGenRunResult result = await RunGeneratorAndUpdateCompilation(source);
             Assert.False(result.GeneratedSource.HasValue);
@@ -797,11 +891,18 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
             ConfigBindingGenRunResult result = await VerifyAgainstBaselineUsingFile(
                 "Collections.generated.txt",
                 source,
-                expectedDiags: ExpectedDiagnostics.FromGeneratorOnly);
+                expectedDiags: ExpectedDiagnostics.FromGeneratorOnly
+            );
 
             ImmutableArray<Diagnostic> diagnostics = result.Diagnostics;
-            Assert.Equal(3, diagnostics.Where(diag => diag.Id == Diagnostics.TypeNotSupported.Id).Count());
-            Assert.Equal(3, diagnostics.Where(diag => diag.Id == Diagnostics.PropertyNotSupported.Id).Count());
+            Assert.Equal(
+                3,
+                diagnostics.Where(diag => diag.Id == Diagnostics.TypeNotSupported.Id).Count()
+            );
+            Assert.Equal(
+                3,
+                diagnostics.Where(diag => diag.Id == Diagnostics.PropertyNotSupported.Id).Count()
+            );
         }
 
         [Fact]
@@ -846,9 +947,13 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
             ConfigBindingGenRunResult result = await VerifyAgainstBaselineUsingFile(
                 "EmptyConfigType.generated.txt",
                 source,
-                expectedDiags: ExpectedDiagnostics.FromGeneratorOnly);
+                expectedDiags: ExpectedDiagnostics.FromGeneratorOnly
+            );
 
-            Assert.Equal(2, result.Diagnostics.Where(diag => diag.Id == Diagnostics.TypeNotSupported.Id).Count());
+            Assert.Equal(
+                2,
+                result.Diagnostics.Where(diag => diag.Id == Diagnostics.TypeNotSupported.Id).Count()
+            );
         }
     }
 }

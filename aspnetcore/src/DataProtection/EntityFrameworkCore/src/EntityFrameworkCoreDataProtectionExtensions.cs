@@ -21,17 +21,25 @@ public static class EntityFrameworkCoreDataProtectionExtensions
     /// </summary>
     /// <param name="builder">The <see cref="IDataProtectionBuilder"/> instance to modify.</param>
     /// <returns>The value <paramref name="builder"/>.</returns>
-    public static IDataProtectionBuilder PersistKeysToDbContext<TContext>(this IDataProtectionBuilder builder)
+    public static IDataProtectionBuilder PersistKeysToDbContext<TContext>(
+        this IDataProtectionBuilder builder
+    )
         where TContext : DbContext, IDataProtectionKeyContext
     {
-        builder.Services.AddSingleton<IConfigureOptions<KeyManagementOptions>>(services =>
-        {
-            var loggerFactory = services.GetService<ILoggerFactory>() ?? NullLoggerFactory.Instance;
-            return new ConfigureOptions<KeyManagementOptions>(options =>
+        builder
+            .Services
+            .AddSingleton<IConfigureOptions<KeyManagementOptions>>(services =>
             {
-                options.XmlRepository = new EntityFrameworkCoreXmlRepository<TContext>(services, loggerFactory);
+                var loggerFactory =
+                    services.GetService<ILoggerFactory>() ?? NullLoggerFactory.Instance;
+                return new ConfigureOptions<KeyManagementOptions>(options =>
+                {
+                    options.XmlRepository = new EntityFrameworkCoreXmlRepository<TContext>(
+                        services,
+                        loggerFactory
+                    );
+                });
             });
-        });
 
         return builder;
     }

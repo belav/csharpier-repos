@@ -14,13 +14,33 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 /// </summary>
 internal sealed class TryParseModelBinder : IModelBinder
 {
-    private static readonly MethodInfo AddModelErrorMethod = typeof(TryParseModelBinder).GetMethod(nameof(AddModelError), BindingFlags.NonPublic | BindingFlags.Static)!;
-    private static readonly MethodInfo SuccessBindingResultMethod = typeof(ModelBindingResult).GetMethod(nameof(ModelBindingResult.Success), BindingFlags.Public | BindingFlags.Static)!;
-    private static readonly ParameterExpression BindingContextExpression = Expression.Parameter(typeof(ModelBindingContext), "bindingContext");
-    private static readonly ParameterExpression ValueProviderResultExpression = Expression.Parameter(typeof(ValueProviderResult), "valueProviderResult");
-    private static readonly MemberExpression BindingResultExpression = Expression.Property(BindingContextExpression, nameof(ModelBindingContext.Result));
-    private static readonly MemberExpression ValueExpression = Expression.Property(ValueProviderResultExpression, nameof(ValueProviderResult.FirstValue));
-    private static readonly MemberExpression CultureExpression = Expression.Property(ValueProviderResultExpression, nameof(ValueProviderResult.Culture));
+    private static readonly MethodInfo AddModelErrorMethod = typeof(TryParseModelBinder).GetMethod(
+        nameof(AddModelError),
+        BindingFlags.NonPublic | BindingFlags.Static
+    )!;
+    private static readonly MethodInfo SuccessBindingResultMethod =
+        typeof(ModelBindingResult).GetMethod(
+            nameof(ModelBindingResult.Success),
+            BindingFlags.Public | BindingFlags.Static
+        )!;
+    private static readonly ParameterExpression BindingContextExpression = Expression.Parameter(
+        typeof(ModelBindingContext),
+        "bindingContext"
+    );
+    private static readonly ParameterExpression ValueProviderResultExpression =
+        Expression.Parameter(typeof(ValueProviderResult), "valueProviderResult");
+    private static readonly MemberExpression BindingResultExpression = Expression.Property(
+        BindingContextExpression,
+        nameof(ModelBindingContext.Result)
+    );
+    private static readonly MemberExpression ValueExpression = Expression.Property(
+        ValueProviderResultExpression,
+        nameof(ValueProviderResult.FirstValue)
+    );
+    private static readonly MemberExpression CultureExpression = Expression.Property(
+        ValueProviderResultExpression,
+        nameof(ValueProviderResult.Culture)
+    );
 
     private readonly Func<ValueProviderResult, ModelBindingContext, object?> _tryParseOperation;
     private readonly ILogger _logger;
@@ -70,10 +90,15 @@ internal sealed class TryParseModelBinder : IModelBinder
                 // current bindingContext. If not, an error is logged.
                 if (!bindingContext.ModelMetadata.IsReferenceOrNullableType)
                 {
-                    bindingContext.ModelState.TryAddModelError(
-                        bindingContext.ModelName,
-                        bindingContext.ModelMetadata.ModelBindingMessageProvider.ValueMustNotBeNullAccessor(
-                            valueProviderResult.ToString()));
+                    bindingContext
+                        .ModelState
+                        .TryAddModelError(
+                            bindingContext.ModelName,
+                            bindingContext
+                                .ModelMetadata
+                                .ModelBindingMessageProvider
+                                .ValueMustNotBeNullAccessor(valueProviderResult.ToString())
+                        );
                 }
                 else
                 {
@@ -98,17 +123,24 @@ internal sealed class TryParseModelBinder : IModelBinder
     private static void AddModelError(ModelBindingContext bindingContext, Exception exception)
     {
         // Conversion failed.
-        bindingContext.ModelState.TryAddModelError(
-            bindingContext.ModelName,
-            exception,
-            bindingContext.ModelMetadata);
+        bindingContext
+            .ModelState
+            .TryAddModelError(bindingContext.ModelName, exception, bindingContext.ModelMetadata);
     }
 
-    private static Func<ValueProviderResult, ModelBindingContext, object?> CreateTryParseOperation(Type modelType)
+    private static Func<ValueProviderResult, ModelBindingContext, object?> CreateTryParseOperation(
+        Type modelType
+    )
     {
         modelType = Nullable.GetUnderlyingType(modelType) ?? modelType;
-        var tryParseMethodExpession = ModelMetadata.FindTryParseMethod(modelType)
-            ?? throw new InvalidOperationException(Resources.FormatTryParseModelBinder_InvalidType(modelType, nameof(TryParseModelBinder)));
+        var tryParseMethodExpession =
+            ModelMetadata.FindTryParseMethod(modelType)
+            ?? throw new InvalidOperationException(
+                Resources.FormatTryParseModelBinder_InvalidType(
+                    modelType,
+                    nameof(TryParseModelBinder)
+                )
+            );
 
         // var tempSourceString = valueProviderResult.FirstValue;
         // object model = null;
@@ -127,15 +159,39 @@ internal sealed class TryParseModelBinder : IModelBinder
         var modelValue = Expression.Variable(typeof(object), "model");
 
         var expression = Expression.Block(
-            new[] { parsedValue, modelValue, ParameterBindingMethodCache.SharedExpressions.TempSourceStringExpr },
-            Expression.Assign(ParameterBindingMethodCache.SharedExpressions.TempSourceStringExpr, ValueExpression),
-            Expression.IfThenElse(tryParseMethodExpession(parsedValue, CultureExpression),
+            new[]
+            {
+                parsedValue,
+                modelValue,
+                ParameterBindingMethodCache.SharedExpressions.TempSourceStringExpr
+            },
+            Expression.Assign(
+                ParameterBindingMethodCache.SharedExpressions.TempSourceStringExpr,
+                ValueExpression
+            ),
+            Expression.IfThenElse(
+                tryParseMethodExpession(parsedValue, CultureExpression),
                 Expression.Block(
                     Expression.Assign(modelValue, Expression.Convert(parsedValue, modelValue.Type)),
-                    Expression.Assign(BindingResultExpression, Expression.Call(SuccessBindingResultMethod, modelValue))),
-                Expression.Call(AddModelErrorMethod, BindingContextExpression, Expression.Constant(new FormatException()))),
-            modelValue);
+                    Expression.Assign(
+                        BindingResultExpression,
+                        Expression.Call(SuccessBindingResultMethod, modelValue)
+                    )
+                ),
+                Expression.Call(
+                    AddModelErrorMethod,
+                    BindingContextExpression,
+                    Expression.Constant(new FormatException())
+                )
+            ),
+            modelValue
+        );
 
-        return Expression.Lambda<Func<ValueProviderResult, ModelBindingContext, object?>>(expression, new[] { ValueProviderResultExpression, BindingContextExpression }).Compile();
+        return Expression
+            .Lambda<Func<ValueProviderResult, ModelBindingContext, object?>>(
+                expression,
+                new[] { ValueProviderResultExpression, BindingContextExpression }
+            )
+            .Compile();
     }
 }

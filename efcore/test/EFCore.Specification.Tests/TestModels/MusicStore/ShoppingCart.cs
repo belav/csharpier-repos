@@ -14,15 +14,14 @@ public class ShoppingCart
         _shoppingCartId = id;
     }
 
-    public static ShoppingCart GetCart(MusicStoreContext db, string cartId)
-        => new(db, cartId);
+    public static ShoppingCart GetCart(MusicStoreContext db, string cartId) => new(db, cartId);
 
     public async Task AddToCart(Album album)
     {
         // Get the matching cart and album instances
-        var cartItem = await _dbContext.CartItems.SingleOrDefaultAsync(
-            c => c.CartId == _shoppingCartId
-                && c.AlbumId == album.AlbumId);
+        var cartItem = await _dbContext
+            .CartItems
+            .SingleOrDefaultAsync(c => c.CartId == _shoppingCartId && c.AlbumId == album.AlbumId);
 
         if (cartItem == null)
         {
@@ -47,9 +46,9 @@ public class ShoppingCart
     public int RemoveFromCart(int id)
     {
         // Get the cart
-        var cartItem = _dbContext.CartItems.SingleOrDefault(
-            cart => cart.CartId == _shoppingCartId
-                && cart.CartItemId == id);
+        var cartItem = _dbContext
+            .CartItems
+            .SingleOrDefault(cart => cart.CartId == _shoppingCartId && cart.CartItemId == id);
 
         var itemCount = 0;
 
@@ -79,15 +78,15 @@ public class ShoppingCart
         _dbContext.CartItems.RemoveRange(cartItems);
     }
 
-    public Task<List<CartItem>> GetCartItems()
-        => _dbContext
+    public Task<List<CartItem>> GetCartItems() =>
+        _dbContext
             .CartItems
             .Where(cart => cart.CartId == _shoppingCartId)
             .Include(c => c.Album)
             .ToListAsync();
 
-    public Task<List<string>> GetCartAlbumTitles()
-        => _dbContext
+    public Task<List<string>> GetCartAlbumTitles() =>
+        _dbContext
             .CartItems
             .Where(cart => cart.CartId == _shoppingCartId)
             .Select(c => c.Album.Title)
@@ -96,7 +95,8 @@ public class ShoppingCart
 
     public Task<int> GetCount()
         // Get the count of each item in the cart and sum them up
-        => _dbContext
+        =>
+        _dbContext
             .CartItems
             .Where(c => c.CartId == _shoppingCartId)
             .Select(c => c.Count)
@@ -107,12 +107,14 @@ public class ShoppingCart
         // the current price for each of those albums in the cart
         // sum all album price totals to get the cart total
         // No way to do decimal sum on server with SQLite, but client eval is fine here
-        => (await _dbContext
+        =>
+        (
+            await _dbContext
                 .CartItems
                 .Where(c => c.CartId == _shoppingCartId)
                 .Select(c => c.Album.Price * c.Count)
-                .ToListAsync())
-            .Sum();
+                .ToListAsync()
+        ).Sum();
 
     public async Task CreateOrder(Order order)
     {
