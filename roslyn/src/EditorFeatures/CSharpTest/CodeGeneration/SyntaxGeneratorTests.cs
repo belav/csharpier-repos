@@ -27,10 +27,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeGeneration
                 """
                 class C
                 {
-                    string M()
-                    {
-                        return "a";
-                    }
+                string M()
+                {
+                return "a";
+                }
                 }
                 """
             );
@@ -63,10 +63,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeGeneration
                 """
                 class C
                 {
-                    string M()
-                    {
-                        return "a";
-                    }
+                string M()
+                {
+                return "a";
+                }
                 }
                 """
             );

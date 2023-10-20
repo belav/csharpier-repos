@@ -98,40 +98,40 @@ public class DataAnnotationSqliteTest
 
         AssertSql(
             """
-SELECT "s"."Unique_No", "s"."MaxLengthProperty", "s"."Name", "s"."RowVersion", "s"."AdditionalDetails_Name", "s"."AdditionalDetails_Value", "s"."Details_Name", "s"."Details_Value"
-FROM "Sample" AS "s"
-WHERE "s"."Unique_No" = 1
-LIMIT 1
-""",
+            SELECT "s"."Unique_No", "s"."MaxLengthProperty", "s"."Name", "s"."RowVersion", "s"."AdditionalDetails_Name", "s"."AdditionalDetails_Value", "s"."Details_Name", "s"."Details_Value"
+            FROM "Sample" AS "s"
+            WHERE "s"."Unique_No" = 1
+            LIMIT 1
+            """,
             //
             """
-SELECT "s"."Unique_No", "s"."MaxLengthProperty", "s"."Name", "s"."RowVersion", "s"."AdditionalDetails_Name", "s"."AdditionalDetails_Value", "s"."Details_Name", "s"."Details_Value"
-FROM "Sample" AS "s"
-WHERE "s"."Unique_No" = 1
-LIMIT 1
-""",
+            SELECT "s"."Unique_No", "s"."MaxLengthProperty", "s"."Name", "s"."RowVersion", "s"."AdditionalDetails_Name", "s"."AdditionalDetails_Value", "s"."Details_Name", "s"."Details_Value"
+            FROM "Sample" AS "s"
+            WHERE "s"."Unique_No" = 1
+            LIMIT 1
+            """,
             //
             """
-@p2='1'
-@p0='ModifiedData' (Nullable = false) (Size = 12)
-@p1='00000000-0000-0000-0003-000000000001'
-@p3='00000001-0000-0000-0000-000000000001'
+            @p2='1'
+            @p0='ModifiedData' (Nullable = false) (Size = 12)
+            @p1='00000000-0000-0000-0003-000000000001'
+            @p3='00000001-0000-0000-0000-000000000001'
 
-UPDATE "Sample" SET "Name" = @p0, "RowVersion" = @p1
-WHERE "Unique_No" = @p2 AND "RowVersion" = @p3
-RETURNING 1;
-""",
+            UPDATE "Sample" SET "Name" = @p0, "RowVersion" = @p1
+            WHERE "Unique_No" = @p2 AND "RowVersion" = @p3
+            RETURNING 1;
+            """,
             //
             """
-@p2='1'
-@p0='ChangedData' (Nullable = false) (Size = 11)
-@p1='00000000-0000-0000-0002-000000000001'
-@p3='00000001-0000-0000-0000-000000000001'
+            @p2='1'
+            @p0='ChangedData' (Nullable = false) (Size = 11)
+            @p1='00000000-0000-0000-0002-000000000001'
+            @p3='00000001-0000-0000-0000-000000000001'
 
-UPDATE "Sample" SET "Name" = @p0, "RowVersion" = @p1
-WHERE "Unique_No" = @p2 AND "RowVersion" = @p3
-RETURNING 1;
-"""
+            UPDATE "Sample" SET "Name" = @p0, "RowVersion" = @p1
+            WHERE "Unique_No" = @p2 AND "RowVersion" = @p3
+            RETURNING 1;
+            """
         );
     }
 
@@ -141,18 +141,18 @@ RETURNING 1;
 
         AssertSql(
             """
-@p0=NULL
-@p1='Third' (Nullable = false) (Size = 5)
-@p2='00000000-0000-0000-0000-000000000003'
-@p3='Third Additional Name' (Size = 21)
-@p4='0' (Nullable = true)
-@p5='Third Name' (Size = 10)
-@p6='0' (Nullable = true)
+            @p0=NULL
+            @p1='Third' (Nullable = false) (Size = 5)
+            @p2='00000000-0000-0000-0000-000000000003'
+            @p3='Third Additional Name' (Size = 21)
+            @p4='0' (Nullable = true)
+            @p5='Third Name' (Size = 10)
+            @p6='0' (Nullable = true)
 
-INSERT INTO "Sample" ("MaxLengthProperty", "Name", "RowVersion", "AdditionalDetails_Name", "AdditionalDetails_Value", "Details_Name", "Details_Value")
-VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6)
-RETURNING "Unique_No";
-"""
+            INSERT INTO "Sample" ("MaxLengthProperty", "Name", "RowVersion", "AdditionalDetails_Name", "AdditionalDetails_Value", "Details_Name", "Details_Value")
+            VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6)
+            RETURNING "Unique_No";
+            """
         );
     }
 

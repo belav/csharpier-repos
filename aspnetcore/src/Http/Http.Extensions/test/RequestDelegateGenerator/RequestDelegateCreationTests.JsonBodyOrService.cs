@@ -125,8 +125,8 @@ public abstract partial class RequestDelegateCreationTests : RequestDelegateCrea
     public async Task MapAction_JsonBodyOrService_HandlesBothJsonAndService()
     {
         var source = """
-app.MapPost("/", (Todo todo, TestService svc) => $"{svc.TestServiceMethod()}, {todo.Name ?? string.Empty}");
-""";
+        app.MapPost("/", (Todo todo, TestService svc) => $"{svc.TestServiceMethod()}, {todo.Name ?? string.Empty}");
+        """;
         var expectedBody = "Produced from service!, Test";
         var requestData = new Todo
         {
@@ -276,30 +276,30 @@ app.MapPost("/", handler);
         get
         {
             var testImpliedFromBody = """
-void TestAction(HttpContext httpContext, Todo todo)
-{
-    httpContext.Items.Add("body", todo);
-}
-""";
+            void TestAction(HttpContext httpContext, Todo todo)
+            {
+            httpContext.Items.Add("body", todo);
+            }
+            """;
             var testImpliedFromBodyInterface = """
-void TestAction(HttpContext httpContext, ITodo todo)
-{
-    httpContext.Items.Add("body", todo);
-}
-""";
+            void TestAction(HttpContext httpContext, ITodo todo)
+            {
+            httpContext.Items.Add("body", todo);
+            }
+            """;
             var testImpliedFromBodyStruct = """
-void TestAction(HttpContext httpContext, TodoStruct todo)
-{
-    httpContext.Items.Add("body", todo);
-}
-""";
+            void TestAction(HttpContext httpContext, TodoStruct todo)
+            {
+            httpContext.Items.Add("body", todo);
+            }
+            """;
 
             var testImpliedFromBodyStructParameterList = """
-void TestAction([AsParameters] ParametersListWithImplicitFromBody args)
-{
-    args.HttpContext.Items.Add("body", args.Todo);
-}
-""";
+            void TestAction([AsParameters] ParametersListWithImplicitFromBody args)
+            {
+            args.HttpContext.Items.Add("body", args.Todo);
+            }
+            """;
 
             return new[]
             {
@@ -351,8 +351,8 @@ app.MapPost("/", TestAction);
     public async Task SupportsResolvingImplicitServiceWithJsonSupportOn()
     {
         var source = """
-app.MapPost("/", (TestService svc) => svc.TestServiceMethod());
-""";
+        app.MapPost("/", (TestService svc) => svc.TestServiceMethod());
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(
             (serviceCollection) =>

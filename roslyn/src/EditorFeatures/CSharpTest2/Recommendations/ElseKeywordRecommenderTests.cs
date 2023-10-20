@@ -113,9 +113,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                if (true)
-                $$
-                """
+                    if (true)
+                    $$
+                    """
                 )
             );
         }
@@ -512,9 +512,9 @@ else"
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                if (true)
+                    if (true)
                     Console.WriteLine()$$; // Complete statement, but we're not at the end of it.
-                """
+                    """
                 )
             );
         }
@@ -525,10 +525,10 @@ else"
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                if (true)
+                    if (true)
                     Console.WriteLine();,
-                $$
-                """
+                    $$
+                    """
                 )
             );
         }

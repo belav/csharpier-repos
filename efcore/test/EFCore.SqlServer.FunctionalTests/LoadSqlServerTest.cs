@@ -23,12 +23,12 @@ public class LoadSqlServerTest : LoadTestBase<LoadSqlServerTest.LoadSqlServerFix
             state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
                 ? ""
                 : """
-@__p_0='707' (Nullable = true)
+                @__p_0='707' (Nullable = true)
 
-SELECT [c].[Id], [c].[ParentId]
-FROM [Child] AS [c]
-WHERE [c].[ParentId] = @__p_0
-"""
+                SELECT [c].[Id], [c].[ParentId]
+                FROM [Child] AS [c]
+                WHERE [c].[ParentId] = @__p_0
+                """
         );
     }
 
@@ -48,12 +48,12 @@ WHERE [c].[ParentId] = @__p_0
             state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
                 ? ""
                 : """
-@__p_0='707'
+                @__p_0='707'
 
-SELECT TOP(1) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+                SELECT TOP(1) [p].[Id], [p].[AlternateId]
+                FROM [Parent] AS [p]
+                WHERE [p].[Id] = @__p_0
+                """
         );
     }
 
@@ -69,12 +69,12 @@ WHERE [p].[Id] = @__p_0
             state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
                 ? ""
                 : """
-@__p_0='707'
+                @__p_0='707'
 
-SELECT TOP(1) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+                SELECT TOP(1) [p].[Id], [p].[AlternateId]
+                FROM [Parent] AS [p]
+                WHERE [p].[Id] = @__p_0
+                """
         );
     }
 
@@ -90,12 +90,12 @@ WHERE [p].[Id] = @__p_0
             state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
                 ? ""
                 : """
-@__p_0='707' (Nullable = true)
+                @__p_0='707' (Nullable = true)
 
-SELECT TOP(1) [s].[Id], [s].[ParentId]
-FROM [Single] AS [s]
-WHERE [s].[ParentId] = @__p_0
-"""
+                SELECT TOP(1) [s].[Id], [s].[ParentId]
+                FROM [Single] AS [s]
+                WHERE [s].[ParentId] = @__p_0
+                """
         );
     }
 
@@ -110,12 +110,12 @@ WHERE [s].[ParentId] = @__p_0
             state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
                 ? ""
                 : """
-@__p_0='707'
+                @__p_0='707'
 
-SELECT TOP(1) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+                SELECT TOP(1) [p].[Id], [p].[AlternateId]
+                FROM [Parent] AS [p]
+                WHERE [p].[Id] = @__p_0
+                """
         );
     }
 
@@ -130,12 +130,12 @@ WHERE [p].[Id] = @__p_0
             state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
                 ? ""
                 : """
-@__p_0='707'
+                @__p_0='707'
 
-SELECT TOP(1) [s].[Id]
-FROM [SinglePkToPk] AS [s]
-WHERE [s].[Id] = @__p_0
-"""
+                SELECT TOP(1) [s].[Id]
+                FROM [SinglePkToPk] AS [s]
+                WHERE [s].[Id] = @__p_0
+                """
         );
     }
 
@@ -181,12 +181,12 @@ WHERE [s].[Id] = @__p_0
             state == EntityState.Detached
                 ? ""
                 : """
-@__p_0='767' (Nullable = true)
+                @__p_0='767' (Nullable = true)
 
-SELECT [c].[Id], [c].[ParentId]
-FROM [Child] AS [c]
-WHERE [c].[ParentId] = @__p_0
-"""
+                SELECT [c].[Id], [c].[ParentId]
+                FROM [Child] AS [c]
+                WHERE [c].[ParentId] = @__p_0
+                """
         );
     }
 
@@ -206,12 +206,12 @@ WHERE [c].[ParentId] = @__p_0
             state == EntityState.Detached
                 ? ""
                 : """
-@__p_0='787'
+                @__p_0='787'
 
-SELECT TOP(1) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+                SELECT TOP(1) [p].[Id], [p].[AlternateId]
+                FROM [Parent] AS [p]
+                WHERE [p].[Id] = @__p_0
+                """
         );
     }
 
@@ -231,12 +231,12 @@ WHERE [p].[Id] = @__p_0
             state == EntityState.Detached
                 ? ""
                 : """
-@__p_0='787'
+                @__p_0='787'
 
-SELECT TOP(1) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+                SELECT TOP(1) [p].[Id], [p].[AlternateId]
+                FROM [Parent] AS [p]
+                WHERE [p].[Id] = @__p_0
+                """
         );
     }
 
@@ -256,12 +256,12 @@ WHERE [p].[Id] = @__p_0
             state == EntityState.Detached
                 ? ""
                 : """
-@__p_0='767' (Nullable = true)
+                @__p_0='767' (Nullable = true)
 
-SELECT TOP(1) [s].[Id], [s].[ParentId]
-FROM [Single] AS [s]
-WHERE [s].[ParentId] = @__p_0
-"""
+                SELECT TOP(1) [s].[Id], [s].[ParentId]
+                FROM [Single] AS [s]
+                WHERE [s].[ParentId] = @__p_0
+                """
         );
     }
 
@@ -369,12 +369,12 @@ WHERE [s].[ParentId] = @__p_0
             state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
                 ? ""
                 : """
-@__p_0='Root' (Size = 450)
+                @__p_0='Root' (Size = 450)
 
-SELECT TOP(1) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[AlternateId] = @__p_0
-"""
+                SELECT TOP(1) [p].[Id], [p].[AlternateId]
+                FROM [Parent] AS [p]
+                WHERE [p].[AlternateId] = @__p_0
+                """
         );
     }
 
@@ -392,12 +392,12 @@ WHERE [p].[AlternateId] = @__p_0
             state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
                 ? ""
                 : """
-@__p_0='Root' (Size = 450)
+                @__p_0='Root' (Size = 450)
 
-SELECT TOP(1) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[AlternateId] = @__p_0
-"""
+                SELECT TOP(1) [p].[Id], [p].[AlternateId]
+                FROM [Parent] AS [p]
+                WHERE [p].[AlternateId] = @__p_0
+                """
         );
     }
 
@@ -415,12 +415,12 @@ WHERE [p].[AlternateId] = @__p_0
             state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
                 ? ""
                 : """
-@__p_0='Root' (Size = 450)
+                @__p_0='Root' (Size = 450)
 
-SELECT TOP(1) [s].[Id], [s].[ParentId]
-FROM [SingleAk] AS [s]
-WHERE [s].[ParentId] = @__p_0
-"""
+                SELECT TOP(1) [s].[Id], [s].[ParentId]
+                FROM [SingleAk] AS [s]
+                WHERE [s].[ParentId] = @__p_0
+                """
         );
     }
 
@@ -461,12 +461,12 @@ WHERE [s].[ParentId] = @__p_0
             state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
                 ? ""
                 : """
-@__p_0='707' (Nullable = true)
+                @__p_0='707' (Nullable = true)
 
-SELECT [c].[Id], [c].[ParentId]
-FROM [ChildShadowFk] AS [c]
-WHERE [c].[ParentId] = @__p_0
-"""
+                SELECT [c].[Id], [c].[ParentId]
+                FROM [ChildShadowFk] AS [c]
+                WHERE [c].[ParentId] = @__p_0
+                """
         );
     }
 
@@ -481,12 +481,12 @@ WHERE [c].[ParentId] = @__p_0
             state == EntityState.Detached || queryTrackingBehavior != QueryTrackingBehavior.TrackAll
                 ? ""
                 : """
-@__p_0='707'
+                @__p_0='707'
 
-SELECT TOP(1) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+                SELECT TOP(1) [p].[Id], [p].[AlternateId]
+                FROM [Parent] AS [p]
+                WHERE [p].[Id] = @__p_0
+                """
         );
     }
 
@@ -501,12 +501,12 @@ WHERE [p].[Id] = @__p_0
             state == EntityState.Detached || queryTrackingBehavior != QueryTrackingBehavior.TrackAll
                 ? ""
                 : """
-@__p_0='707'
+                @__p_0='707'
 
-SELECT TOP(1) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+                SELECT TOP(1) [p].[Id], [p].[AlternateId]
+                FROM [Parent] AS [p]
+                WHERE [p].[Id] = @__p_0
+                """
         );
     }
 
@@ -521,12 +521,12 @@ WHERE [p].[Id] = @__p_0
             state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
                 ? ""
                 : """
-@__p_0='707' (Nullable = true)
+                @__p_0='707' (Nullable = true)
 
-SELECT TOP(1) [s].[Id], [s].[ParentId]
-FROM [SingleShadowFk] AS [s]
-WHERE [s].[ParentId] = @__p_0
-"""
+                SELECT TOP(1) [s].[Id], [s].[ParentId]
+                FROM [SingleShadowFk] AS [s]
+                WHERE [s].[ParentId] = @__p_0
+                """
         );
     }
 
@@ -567,13 +567,13 @@ WHERE [s].[ParentId] = @__p_0
             state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
                 ? ""
                 : """
-@__p_0='Root' (Size = 450)
-@__p_1='707' (Nullable = true)
+                @__p_0='Root' (Size = 450)
+                @__p_1='707' (Nullable = true)
 
-SELECT [c].[Id], [c].[ParentAlternateId], [c].[ParentId]
-FROM [ChildCompositeKey] AS [c]
-WHERE [c].[ParentAlternateId] = @__p_0 AND [c].[ParentId] = @__p_1
-"""
+                SELECT [c].[Id], [c].[ParentAlternateId], [c].[ParentId]
+                FROM [ChildCompositeKey] AS [c]
+                WHERE [c].[ParentAlternateId] = @__p_0 AND [c].[ParentId] = @__p_1
+                """
         );
     }
 
@@ -591,13 +591,13 @@ WHERE [c].[ParentAlternateId] = @__p_0 AND [c].[ParentId] = @__p_1
             state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
                 ? ""
                 : """
-@__p_0='Root' (Size = 450)
-@__p_1='707'
+                @__p_0='Root' (Size = 450)
+                @__p_1='707'
 
-SELECT TOP(1) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[AlternateId] = @__p_0 AND [p].[Id] = @__p_1
-"""
+                SELECT TOP(1) [p].[Id], [p].[AlternateId]
+                FROM [Parent] AS [p]
+                WHERE [p].[AlternateId] = @__p_0 AND [p].[Id] = @__p_1
+                """
         );
     }
 
@@ -615,13 +615,13 @@ WHERE [p].[AlternateId] = @__p_0 AND [p].[Id] = @__p_1
             state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
                 ? ""
                 : """
-@__p_0='Root' (Size = 450)
-@__p_1='707'
+                @__p_0='Root' (Size = 450)
+                @__p_1='707'
 
-SELECT TOP(1) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[AlternateId] = @__p_0 AND [p].[Id] = @__p_1
-"""
+                SELECT TOP(1) [p].[Id], [p].[AlternateId]
+                FROM [Parent] AS [p]
+                WHERE [p].[AlternateId] = @__p_0 AND [p].[Id] = @__p_1
+                """
         );
     }
 
@@ -639,13 +639,13 @@ WHERE [p].[AlternateId] = @__p_0 AND [p].[Id] = @__p_1
             state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
                 ? ""
                 : """
-@__p_0='Root' (Size = 450)
-@__p_1='707' (Nullable = true)
+                @__p_0='Root' (Size = 450)
+                @__p_1='707' (Nullable = true)
 
-SELECT TOP(1) [s].[Id], [s].[ParentAlternateId], [s].[ParentId]
-FROM [SingleCompositeKey] AS [s]
-WHERE [s].[ParentAlternateId] = @__p_0 AND [s].[ParentId] = @__p_1
-"""
+                SELECT TOP(1) [s].[Id], [s].[ParentAlternateId], [s].[ParentId]
+                FROM [SingleCompositeKey] AS [s]
+                WHERE [s].[ParentAlternateId] = @__p_0 AND [s].[ParentId] = @__p_1
+                """
         );
     }
 
@@ -685,12 +685,12 @@ WHERE [s].[ParentAlternateId] = @__p_0 AND [s].[ParentId] = @__p_1
 
         AssertSql(
             """
-@__p_0='707' (Nullable = true)
+            @__p_0='707' (Nullable = true)
 
-SELECT [c].[Id], [c].[ParentId]
-FROM [Child] AS [c]
-WHERE [c].[ParentId] = @__p_0
-"""
+            SELECT [c].[Id], [c].[ParentId]
+            FROM [Child] AS [c]
+            WHERE [c].[ParentId] = @__p_0
+            """
         );
     }
 
@@ -703,12 +703,12 @@ WHERE [c].[ParentId] = @__p_0
 
         AssertSql(
             """
-@__p_0='707'
+            @__p_0='707'
 
-SELECT TOP(1) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+            SELECT TOP(1) [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE [p].[Id] = @__p_0
+            """
         );
     }
 
@@ -718,12 +718,12 @@ WHERE [p].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='707'
+            @__p_0='707'
 
-SELECT TOP(1) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+            SELECT TOP(1) [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE [p].[Id] = @__p_0
+            """
         );
     }
 
@@ -733,12 +733,12 @@ WHERE [p].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='707' (Nullable = true)
+            @__p_0='707' (Nullable = true)
 
-SELECT TOP(1) [s].[Id], [s].[ParentId]
-FROM [Single] AS [s]
-WHERE [s].[ParentId] = @__p_0
-"""
+            SELECT TOP(1) [s].[Id], [s].[ParentId]
+            FROM [Single] AS [s]
+            WHERE [s].[ParentId] = @__p_0
+            """
         );
     }
 
@@ -751,12 +751,12 @@ WHERE [s].[ParentId] = @__p_0
 
         AssertSql(
             """
-@__p_0='707'
+            @__p_0='707'
 
-SELECT TOP(1) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+            SELECT TOP(1) [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE [p].[Id] = @__p_0
+            """
         );
     }
 
@@ -769,12 +769,12 @@ WHERE [p].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='707'
+            @__p_0='707'
 
-SELECT TOP(1) [s].[Id]
-FROM [SinglePkToPk] AS [s]
-WHERE [s].[Id] = @__p_0
-"""
+            SELECT TOP(1) [s].[Id]
+            FROM [SinglePkToPk] AS [s]
+            WHERE [s].[Id] = @__p_0
+            """
         );
     }
 
@@ -784,12 +784,12 @@ WHERE [s].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='707' (Nullable = true)
+            @__p_0='707' (Nullable = true)
 
-SELECT [c].[Id], [c].[ParentId]
-FROM [Child] AS [c]
-WHERE [c].[ParentId] = @__p_0
-"""
+            SELECT [c].[Id], [c].[ParentId]
+            FROM [Child] AS [c]
+            WHERE [c].[ParentId] = @__p_0
+            """
         );
     }
 
@@ -802,12 +802,12 @@ WHERE [c].[ParentId] = @__p_0
 
         AssertSql(
             """
-@__p_0='707'
+            @__p_0='707'
 
-SELECT TOP(2) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+            SELECT TOP(2) [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE [p].[Id] = @__p_0
+            """
         );
     }
 
@@ -820,12 +820,12 @@ WHERE [p].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='707'
+            @__p_0='707'
 
-SELECT TOP(2) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+            SELECT TOP(2) [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE [p].[Id] = @__p_0
+            """
         );
     }
 
@@ -840,12 +840,12 @@ WHERE [p].[Id] = @__p_0
             state == EntityState.Detached
                 ? ""
                 : """
-@__p_0='707' (Nullable = true)
+                @__p_0='707' (Nullable = true)
 
-SELECT TOP(2) [s].[Id], [s].[ParentId]
-FROM [Single] AS [s]
-WHERE [s].[ParentId] = @__p_0
-"""
+                SELECT TOP(2) [s].[Id], [s].[ParentId]
+                FROM [Single] AS [s]
+                WHERE [s].[ParentId] = @__p_0
+                """
         );
     }
 
@@ -858,12 +858,12 @@ WHERE [s].[ParentId] = @__p_0
 
         AssertSql(
             """
-@__p_0='707'
+            @__p_0='707'
 
-SELECT TOP(2) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+            SELECT TOP(2) [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE [p].[Id] = @__p_0
+            """
         );
     }
 
@@ -878,12 +878,12 @@ WHERE [p].[Id] = @__p_0
             state == EntityState.Detached
                 ? ""
                 : """
-@__p_0='707'
+                @__p_0='707'
 
-SELECT TOP(2) [s].[Id]
-FROM [SinglePkToPk] AS [s]
-WHERE [s].[Id] = @__p_0
-"""
+                SELECT TOP(2) [s].[Id]
+                FROM [SinglePkToPk] AS [s]
+                WHERE [s].[Id] = @__p_0
+                """
         );
     }
 
@@ -916,10 +916,10 @@ WHERE [s].[Id] = @__p_0
 
         AssertSql(
             """
-SELECT TOP(2) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE 0 = 1
-"""
+            SELECT TOP(2) [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE 0 = 1
+            """
         );
     }
 
@@ -932,10 +932,10 @@ WHERE 0 = 1
 
         AssertSql(
             """
-SELECT TOP(2) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE 0 = 1
-"""
+            SELECT TOP(2) [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE 0 = 1
+            """
         );
     }
 
@@ -945,12 +945,12 @@ WHERE 0 = 1
 
         AssertSql(
             """
-@__p_0='767' (Nullable = true)
+            @__p_0='767' (Nullable = true)
 
-SELECT [c].[Id], [c].[ParentId]
-FROM [Child] AS [c]
-WHERE [c].[ParentId] = @__p_0
-"""
+            SELECT [c].[Id], [c].[ParentId]
+            FROM [Child] AS [c]
+            WHERE [c].[ParentId] = @__p_0
+            """
         );
     }
 
@@ -963,12 +963,12 @@ WHERE [c].[ParentId] = @__p_0
 
         AssertSql(
             """
-@__p_0='787'
+            @__p_0='787'
 
-SELECT TOP(1) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+            SELECT TOP(1) [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE [p].[Id] = @__p_0
+            """
         );
     }
 
@@ -981,12 +981,12 @@ WHERE [p].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='787'
+            @__p_0='787'
 
-SELECT TOP(1) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+            SELECT TOP(1) [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE [p].[Id] = @__p_0
+            """
         );
     }
 
@@ -999,12 +999,12 @@ WHERE [p].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='767' (Nullable = true)
+            @__p_0='767' (Nullable = true)
 
-SELECT TOP(1) [s].[Id], [s].[ParentId]
-FROM [Single] AS [s]
-WHERE [s].[ParentId] = @__p_0
-"""
+            SELECT TOP(1) [s].[Id], [s].[ParentId]
+            FROM [Single] AS [s]
+            WHERE [s].[ParentId] = @__p_0
+            """
         );
     }
 
@@ -1014,12 +1014,12 @@ WHERE [s].[ParentId] = @__p_0
 
         AssertSql(
             """
-@__p_0='767' (Nullable = true)
+            @__p_0='767' (Nullable = true)
 
-SELECT [c].[Id], [c].[ParentId]
-FROM [Child] AS [c]
-WHERE [c].[ParentId] = @__p_0
-"""
+            SELECT [c].[Id], [c].[ParentId]
+            FROM [Child] AS [c]
+            WHERE [c].[ParentId] = @__p_0
+            """
         );
     }
 
@@ -1032,12 +1032,12 @@ WHERE [c].[ParentId] = @__p_0
 
         AssertSql(
             """
-@__p_0='787'
+            @__p_0='787'
 
-SELECT TOP(2) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+            SELECT TOP(2) [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE [p].[Id] = @__p_0
+            """
         );
     }
 
@@ -1050,12 +1050,12 @@ WHERE [p].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='787'
+            @__p_0='787'
 
-SELECT TOP(2) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+            SELECT TOP(2) [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE [p].[Id] = @__p_0
+            """
         );
     }
 
@@ -1068,12 +1068,12 @@ WHERE [p].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='767' (Nullable = true)
+            @__p_0='767' (Nullable = true)
 
-SELECT TOP(2) [s].[Id], [s].[ParentId]
-FROM [Single] AS [s]
-WHERE [s].[ParentId] = @__p_0
-"""
+            SELECT TOP(2) [s].[Id], [s].[ParentId]
+            FROM [Single] AS [s]
+            WHERE [s].[ParentId] = @__p_0
+            """
         );
     }
 
@@ -1158,12 +1158,12 @@ WHERE [s].[ParentId] = @__p_0
 
         AssertSql(
             """
-@__p_0='707' (Nullable = true)
+            @__p_0='707' (Nullable = true)
 
-SELECT [c].[Id], [c].[ParentId]
-FROM [Child] AS [c]
-WHERE [c].[ParentId] = @__p_0
-"""
+            SELECT [c].[Id], [c].[ParentId]
+            FROM [Child] AS [c]
+            WHERE [c].[ParentId] = @__p_0
+            """
         );
     }
 
@@ -1178,12 +1178,12 @@ WHERE [c].[ParentId] = @__p_0
             state == EntityState.Deleted
                 ? ""
                 : """
-@__p_0='707'
+                @__p_0='707'
 
-SELECT TOP(2) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+                SELECT TOP(2) [p].[Id], [p].[AlternateId]
+                FROM [Parent] AS [p]
+                WHERE [p].[Id] = @__p_0
+                """
         );
     }
 
@@ -1198,12 +1198,12 @@ WHERE [p].[Id] = @__p_0
             state == EntityState.Deleted
                 ? ""
                 : """
-@__p_0='707'
+                @__p_0='707'
 
-SELECT TOP(2) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+                SELECT TOP(2) [p].[Id], [p].[AlternateId]
+                FROM [Parent] AS [p]
+                WHERE [p].[Id] = @__p_0
+                """
         );
     }
 
@@ -1221,12 +1221,12 @@ WHERE [p].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='707' (Nullable = true)
+            @__p_0='707' (Nullable = true)
 
-SELECT TOP(2) [s].[Id], [s].[ParentId]
-FROM [Single] AS [s]
-WHERE [s].[ParentId] = @__p_0
-"""
+            SELECT TOP(2) [s].[Id], [s].[ParentId]
+            FROM [Single] AS [s]
+            WHERE [s].[ParentId] = @__p_0
+            """
         );
     }
 
@@ -1242,12 +1242,12 @@ WHERE [s].[ParentId] = @__p_0
 
         AssertSql(
             """
-@__p_0='707'
+            @__p_0='707'
 
-SELECT TOP(2) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+            SELECT TOP(2) [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE [p].[Id] = @__p_0
+            """
         );
     }
 
@@ -1263,12 +1263,12 @@ WHERE [p].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='707'
+            @__p_0='707'
 
-SELECT TOP(2) [s].[Id]
-FROM [SinglePkToPk] AS [s]
-WHERE [s].[Id] = @__p_0
-"""
+            SELECT TOP(2) [s].[Id]
+            FROM [SinglePkToPk] AS [s]
+            WHERE [s].[Id] = @__p_0
+            """
         );
     }
 
@@ -1278,12 +1278,12 @@ WHERE [s].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='707' (Nullable = true)
+            @__p_0='707' (Nullable = true)
 
-SELECT [c].[Id], [c].[ParentId]
-FROM [Child] AS [c]
-WHERE [c].[ParentId] = @__p_0
-"""
+            SELECT [c].[Id], [c].[ParentId]
+            FROM [Child] AS [c]
+            WHERE [c].[ParentId] = @__p_0
+            """
         );
     }
 
@@ -1296,12 +1296,12 @@ WHERE [c].[ParentId] = @__p_0
 
         AssertSql(
             """
-@__p_0='707'
+            @__p_0='707'
 
-SELECT TOP(1) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+            SELECT TOP(1) [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE [p].[Id] = @__p_0
+            """
         );
     }
 
@@ -1314,12 +1314,12 @@ WHERE [p].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='707'
+            @__p_0='707'
 
-SELECT TOP(1) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+            SELECT TOP(1) [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE [p].[Id] = @__p_0
+            """
         );
     }
 
@@ -1332,12 +1332,12 @@ WHERE [p].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='707' (Nullable = true)
+            @__p_0='707' (Nullable = true)
 
-SELECT TOP(1) [s].[Id], [s].[ParentId]
-FROM [Single] AS [s]
-WHERE [s].[ParentId] = @__p_0
-"""
+            SELECT TOP(1) [s].[Id], [s].[ParentId]
+            FROM [Single] AS [s]
+            WHERE [s].[ParentId] = @__p_0
+            """
         );
     }
 
@@ -1347,12 +1347,12 @@ WHERE [s].[ParentId] = @__p_0
 
         AssertSql(
             """
-@__p_0='707' (Nullable = true)
+            @__p_0='707' (Nullable = true)
 
-SELECT [c].[Id], [c].[ParentId]
-FROM [Child] AS [c]
-WHERE [c].[ParentId] = @__p_0
-"""
+            SELECT [c].[Id], [c].[ParentId]
+            FROM [Child] AS [c]
+            WHERE [c].[ParentId] = @__p_0
+            """
         );
     }
 
@@ -1365,12 +1365,12 @@ WHERE [c].[ParentId] = @__p_0
 
         AssertSql(
             """
-@__p_0='707'
+            @__p_0='707'
 
-SELECT [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+            SELECT [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE [p].[Id] = @__p_0
+            """
         );
     }
 
@@ -1383,12 +1383,12 @@ WHERE [p].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='707'
+            @__p_0='707'
 
-SELECT [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+            SELECT [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE [p].[Id] = @__p_0
+            """
         );
     }
 
@@ -1403,12 +1403,12 @@ WHERE [p].[Id] = @__p_0
             state == EntityState.Detached
                 ? ""
                 : """
-@__p_0='707' (Nullable = true)
+                @__p_0='707' (Nullable = true)
 
-SELECT [s].[Id], [s].[ParentId]
-FROM [Single] AS [s]
-WHERE [s].[ParentId] = @__p_0
-"""
+                SELECT [s].[Id], [s].[ParentId]
+                FROM [Single] AS [s]
+                WHERE [s].[ParentId] = @__p_0
+                """
         );
     }
 
@@ -1418,12 +1418,12 @@ WHERE [s].[ParentId] = @__p_0
 
         AssertSql(
             """
-@__p_0='767' (Nullable = true)
+            @__p_0='767' (Nullable = true)
 
-SELECT [c].[Id], [c].[ParentId]
-FROM [Child] AS [c]
-WHERE [c].[ParentId] = @__p_0
-"""
+            SELECT [c].[Id], [c].[ParentId]
+            FROM [Child] AS [c]
+            WHERE [c].[ParentId] = @__p_0
+            """
         );
     }
 
@@ -1436,12 +1436,12 @@ WHERE [c].[ParentId] = @__p_0
 
         AssertSql(
             """
-@__p_0='787'
+            @__p_0='787'
 
-SELECT TOP(1) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+            SELECT TOP(1) [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE [p].[Id] = @__p_0
+            """
         );
     }
 
@@ -1454,12 +1454,12 @@ WHERE [p].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='787'
+            @__p_0='787'
 
-SELECT TOP(1) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+            SELECT TOP(1) [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE [p].[Id] = @__p_0
+            """
         );
     }
 
@@ -1472,12 +1472,12 @@ WHERE [p].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='767' (Nullable = true)
+            @__p_0='767' (Nullable = true)
 
-SELECT TOP(1) [s].[Id], [s].[ParentId]
-FROM [Single] AS [s]
-WHERE [s].[ParentId] = @__p_0
-"""
+            SELECT TOP(1) [s].[Id], [s].[ParentId]
+            FROM [Single] AS [s]
+            WHERE [s].[ParentId] = @__p_0
+            """
         );
     }
 
@@ -1490,12 +1490,12 @@ WHERE [s].[ParentId] = @__p_0
 
         AssertSql(
             """
-@__p_0='767' (Nullable = true)
+            @__p_0='767' (Nullable = true)
 
-SELECT [c].[Id], [c].[ParentId]
-FROM [Child] AS [c]
-WHERE [c].[ParentId] = @__p_0
-"""
+            SELECT [c].[Id], [c].[ParentId]
+            FROM [Child] AS [c]
+            WHERE [c].[ParentId] = @__p_0
+            """
         );
     }
 
@@ -1511,12 +1511,12 @@ WHERE [c].[ParentId] = @__p_0
 
         AssertSql(
             """
-@__p_0='787'
+            @__p_0='787'
 
-SELECT [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+            SELECT [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE [p].[Id] = @__p_0
+            """
         );
     }
 
@@ -1532,12 +1532,12 @@ WHERE [p].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='787'
+            @__p_0='787'
 
-SELECT [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+            SELECT [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE [p].[Id] = @__p_0
+            """
         );
     }
 
@@ -1553,12 +1553,12 @@ WHERE [p].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='767' (Nullable = true)
+            @__p_0='767' (Nullable = true)
 
-SELECT [s].[Id], [s].[ParentId]
-FROM [Single] AS [s]
-WHERE [s].[ParentId] = @__p_0
-"""
+            SELECT [s].[Id], [s].[ParentId]
+            FROM [Single] AS [s]
+            WHERE [s].[ParentId] = @__p_0
+            """
         );
     }
 
@@ -1622,12 +1622,12 @@ WHERE [s].[ParentId] = @__p_0
 
         AssertSql(
             """
-@__p_0='707' (Nullable = true)
+            @__p_0='707' (Nullable = true)
 
-SELECT [c].[Id], [c].[ParentId]
-FROM [Child] AS [c]
-WHERE [c].[ParentId] = @__p_0
-"""
+            SELECT [c].[Id], [c].[ParentId]
+            FROM [Child] AS [c]
+            WHERE [c].[ParentId] = @__p_0
+            """
         );
     }
 
@@ -1645,12 +1645,12 @@ WHERE [c].[ParentId] = @__p_0
             state == EntityState.Deleted
                 ? ""
                 : """
-@__p_0='707'
+                @__p_0='707'
 
-SELECT [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+                SELECT [p].[Id], [p].[AlternateId]
+                FROM [Parent] AS [p]
+                WHERE [p].[Id] = @__p_0
+                """
         );
     }
 
@@ -1668,12 +1668,12 @@ WHERE [p].[Id] = @__p_0
             state == EntityState.Deleted
                 ? ""
                 : """
-@__p_0='707'
+                @__p_0='707'
 
-SELECT [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+                SELECT [p].[Id], [p].[AlternateId]
+                FROM [Parent] AS [p]
+                WHERE [p].[Id] = @__p_0
+                """
         );
     }
 
@@ -1691,12 +1691,12 @@ WHERE [p].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='707' (Nullable = true)
+            @__p_0='707' (Nullable = true)
 
-SELECT [s].[Id], [s].[ParentId]
-FROM [Single] AS [s]
-WHERE [s].[ParentId] = @__p_0
-"""
+            SELECT [s].[Id], [s].[ParentId]
+            FROM [Single] AS [s]
+            WHERE [s].[ParentId] = @__p_0
+            """
         );
     }
 
@@ -1706,12 +1706,12 @@ WHERE [s].[ParentId] = @__p_0
 
         AssertSql(
             """
-@__p_0='Root' (Size = 450)
+            @__p_0='Root' (Size = 450)
 
-SELECT [c].[Id], [c].[ParentId]
-FROM [ChildAk] AS [c]
-WHERE [c].[ParentId] = @__p_0
-"""
+            SELECT [c].[Id], [c].[ParentId]
+            FROM [ChildAk] AS [c]
+            WHERE [c].[ParentId] = @__p_0
+            """
         );
     }
 
@@ -1724,12 +1724,12 @@ WHERE [c].[ParentId] = @__p_0
 
         AssertSql(
             """
-@__p_0='Root' (Size = 450)
+            @__p_0='Root' (Size = 450)
 
-SELECT TOP(1) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[AlternateId] = @__p_0
-"""
+            SELECT TOP(1) [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE [p].[AlternateId] = @__p_0
+            """
         );
     }
 
@@ -1742,12 +1742,12 @@ WHERE [p].[AlternateId] = @__p_0
 
         AssertSql(
             """
-@__p_0='Root' (Size = 450)
+            @__p_0='Root' (Size = 450)
 
-SELECT TOP(1) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[AlternateId] = @__p_0
-"""
+            SELECT TOP(1) [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE [p].[AlternateId] = @__p_0
+            """
         );
     }
 
@@ -1760,12 +1760,12 @@ WHERE [p].[AlternateId] = @__p_0
 
         AssertSql(
             """
-@__p_0='Root' (Size = 450)
+            @__p_0='Root' (Size = 450)
 
-SELECT TOP(1) [s].[Id], [s].[ParentId]
-FROM [SingleAk] AS [s]
-WHERE [s].[ParentId] = @__p_0
-"""
+            SELECT TOP(1) [s].[Id], [s].[ParentId]
+            FROM [SingleAk] AS [s]
+            WHERE [s].[ParentId] = @__p_0
+            """
         );
     }
 
@@ -1778,12 +1778,12 @@ WHERE [s].[ParentId] = @__p_0
 
         AssertSql(
             """
-@__p_0='Root' (Size = 450)
+            @__p_0='Root' (Size = 450)
 
-SELECT [c].[Id], [c].[ParentId]
-FROM [ChildAk] AS [c]
-WHERE [c].[ParentId] = @__p_0
-"""
+            SELECT [c].[Id], [c].[ParentId]
+            FROM [ChildAk] AS [c]
+            WHERE [c].[ParentId] = @__p_0
+            """
         );
     }
 
@@ -1796,12 +1796,12 @@ WHERE [c].[ParentId] = @__p_0
 
         AssertSql(
             """
-@__p_0='Root' (Size = 450)
+            @__p_0='Root' (Size = 450)
 
-SELECT TOP(2) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[AlternateId] = @__p_0
-"""
+            SELECT TOP(2) [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE [p].[AlternateId] = @__p_0
+            """
         );
     }
 
@@ -1814,12 +1814,12 @@ WHERE [p].[AlternateId] = @__p_0
 
         AssertSql(
             """
-@__p_0='Root' (Size = 450)
+            @__p_0='Root' (Size = 450)
 
-SELECT TOP(2) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[AlternateId] = @__p_0
-"""
+            SELECT TOP(2) [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE [p].[AlternateId] = @__p_0
+            """
         );
     }
 
@@ -1834,12 +1834,12 @@ WHERE [p].[AlternateId] = @__p_0
             state == EntityState.Detached
                 ? ""
                 : """
-@__p_0='Root' (Size = 450)
+                @__p_0='Root' (Size = 450)
 
-SELECT TOP(2) [s].[Id], [s].[ParentId]
-FROM [SingleAk] AS [s]
-WHERE [s].[ParentId] = @__p_0
-"""
+                SELECT TOP(2) [s].[Id], [s].[ParentId]
+                FROM [SingleAk] AS [s]
+                WHERE [s].[ParentId] = @__p_0
+                """
         );
     }
 
@@ -1875,10 +1875,10 @@ WHERE [s].[ParentId] = @__p_0
 
         AssertSql(
             """
-SELECT TOP(2) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE 0 = 1
-"""
+            SELECT TOP(2) [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE 0 = 1
+            """
         );
     }
 
@@ -1894,10 +1894,10 @@ WHERE 0 = 1
 
         AssertSql(
             """
-SELECT TOP(2) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE 0 = 1
-"""
+            SELECT TOP(2) [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE 0 = 1
+            """
         );
     }
 
@@ -1907,12 +1907,12 @@ WHERE 0 = 1
 
         AssertSql(
             """
-@__p_0='707' (Nullable = true)
+            @__p_0='707' (Nullable = true)
 
-SELECT [c].[Id], [c].[ParentId]
-FROM [ChildShadowFk] AS [c]
-WHERE [c].[ParentId] = @__p_0
-"""
+            SELECT [c].[Id], [c].[ParentId]
+            FROM [ChildShadowFk] AS [c]
+            WHERE [c].[ParentId] = @__p_0
+            """
         );
     }
 
@@ -1927,12 +1927,12 @@ WHERE [c].[ParentId] = @__p_0
             state == EntityState.Detached
                 ? ""
                 : """
-@__p_0='707'
+                @__p_0='707'
 
-SELECT TOP(1) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+                SELECT TOP(1) [p].[Id], [p].[AlternateId]
+                FROM [Parent] AS [p]
+                WHERE [p].[Id] = @__p_0
+                """
         );
     }
 
@@ -1947,12 +1947,12 @@ WHERE [p].[Id] = @__p_0
             state == EntityState.Detached
                 ? ""
                 : """
-@__p_0='707'
+                @__p_0='707'
 
-SELECT TOP(1) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+                SELECT TOP(1) [p].[Id], [p].[AlternateId]
+                FROM [Parent] AS [p]
+                WHERE [p].[Id] = @__p_0
+                """
         );
     }
 
@@ -1965,12 +1965,12 @@ WHERE [p].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='707' (Nullable = true)
+            @__p_0='707' (Nullable = true)
 
-SELECT TOP(1) [s].[Id], [s].[ParentId]
-FROM [SingleShadowFk] AS [s]
-WHERE [s].[ParentId] = @__p_0
-"""
+            SELECT TOP(1) [s].[Id], [s].[ParentId]
+            FROM [SingleShadowFk] AS [s]
+            WHERE [s].[ParentId] = @__p_0
+            """
         );
     }
 
@@ -1980,12 +1980,12 @@ WHERE [s].[ParentId] = @__p_0
 
         AssertSql(
             """
-@__p_0='707' (Nullable = true)
+            @__p_0='707' (Nullable = true)
 
-SELECT [c].[Id], [c].[ParentId]
-FROM [ChildShadowFk] AS [c]
-WHERE [c].[ParentId] = @__p_0
-"""
+            SELECT [c].[Id], [c].[ParentId]
+            FROM [ChildShadowFk] AS [c]
+            WHERE [c].[ParentId] = @__p_0
+            """
         );
     }
 
@@ -2000,12 +2000,12 @@ WHERE [c].[ParentId] = @__p_0
             state == EntityState.Detached
                 ? ""
                 : """
-@__p_0='707'
+                @__p_0='707'
 
-SELECT TOP(2) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+                SELECT TOP(2) [p].[Id], [p].[AlternateId]
+                FROM [Parent] AS [p]
+                WHERE [p].[Id] = @__p_0
+                """
         );
     }
 
@@ -2020,12 +2020,12 @@ WHERE [p].[Id] = @__p_0
             state == EntityState.Detached
                 ? ""
                 : """
-@__p_0='707'
+                @__p_0='707'
 
-SELECT TOP(2) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[Id] = @__p_0
-"""
+                SELECT TOP(2) [p].[Id], [p].[AlternateId]
+                FROM [Parent] AS [p]
+                WHERE [p].[Id] = @__p_0
+                """
         );
     }
 
@@ -2040,12 +2040,12 @@ WHERE [p].[Id] = @__p_0
             state == EntityState.Detached
                 ? ""
                 : """
-@__p_0='707' (Nullable = true)
+                @__p_0='707' (Nullable = true)
 
-SELECT TOP(2) [s].[Id], [s].[ParentId]
-FROM [SingleShadowFk] AS [s]
-WHERE [s].[ParentId] = @__p_0
-"""
+                SELECT TOP(2) [s].[Id], [s].[ParentId]
+                FROM [SingleShadowFk] AS [s]
+                WHERE [s].[ParentId] = @__p_0
+                """
         );
     }
 
@@ -2083,10 +2083,10 @@ WHERE [s].[ParentId] = @__p_0
             state == EntityState.Detached
                 ? ""
                 : """
-SELECT TOP(2) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE 0 = 1
-"""
+                SELECT TOP(2) [p].[Id], [p].[AlternateId]
+                FROM [Parent] AS [p]
+                WHERE 0 = 1
+                """
         );
     }
 
@@ -2104,10 +2104,10 @@ WHERE 0 = 1
             state == EntityState.Detached
                 ? ""
                 : """
-SELECT TOP(2) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE 0 = 1
-"""
+                SELECT TOP(2) [p].[Id], [p].[AlternateId]
+                FROM [Parent] AS [p]
+                WHERE 0 = 1
+                """
         );
     }
 
@@ -2117,13 +2117,13 @@ WHERE 0 = 1
 
         AssertSql(
             """
-@__p_0='Root' (Size = 450)
-@__p_1='707' (Nullable = true)
+            @__p_0='Root' (Size = 450)
+            @__p_1='707' (Nullable = true)
 
-SELECT [c].[Id], [c].[ParentAlternateId], [c].[ParentId]
-FROM [ChildCompositeKey] AS [c]
-WHERE [c].[ParentAlternateId] = @__p_0 AND [c].[ParentId] = @__p_1
-"""
+            SELECT [c].[Id], [c].[ParentAlternateId], [c].[ParentId]
+            FROM [ChildCompositeKey] AS [c]
+            WHERE [c].[ParentAlternateId] = @__p_0 AND [c].[ParentId] = @__p_1
+            """
         );
     }
 
@@ -2136,13 +2136,13 @@ WHERE [c].[ParentAlternateId] = @__p_0 AND [c].[ParentId] = @__p_1
 
         AssertSql(
             """
-@__p_0='Root' (Size = 450)
-@__p_1='707'
+            @__p_0='Root' (Size = 450)
+            @__p_1='707'
 
-SELECT TOP(1) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[AlternateId] = @__p_0 AND [p].[Id] = @__p_1
-"""
+            SELECT TOP(1) [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE [p].[AlternateId] = @__p_0 AND [p].[Id] = @__p_1
+            """
         );
     }
 
@@ -2155,13 +2155,13 @@ WHERE [p].[AlternateId] = @__p_0 AND [p].[Id] = @__p_1
 
         AssertSql(
             """
-@__p_0='Root' (Size = 450)
-@__p_1='707'
+            @__p_0='Root' (Size = 450)
+            @__p_1='707'
 
-SELECT TOP(1) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[AlternateId] = @__p_0 AND [p].[Id] = @__p_1
-"""
+            SELECT TOP(1) [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE [p].[AlternateId] = @__p_0 AND [p].[Id] = @__p_1
+            """
         );
     }
 
@@ -2174,13 +2174,13 @@ WHERE [p].[AlternateId] = @__p_0 AND [p].[Id] = @__p_1
 
         AssertSql(
             """
-@__p_0='Root' (Size = 450)
-@__p_1='707' (Nullable = true)
+            @__p_0='Root' (Size = 450)
+            @__p_1='707' (Nullable = true)
 
-SELECT TOP(1) [s].[Id], [s].[ParentAlternateId], [s].[ParentId]
-FROM [SingleCompositeKey] AS [s]
-WHERE [s].[ParentAlternateId] = @__p_0 AND [s].[ParentId] = @__p_1
-"""
+            SELECT TOP(1) [s].[Id], [s].[ParentAlternateId], [s].[ParentId]
+            FROM [SingleCompositeKey] AS [s]
+            WHERE [s].[ParentAlternateId] = @__p_0 AND [s].[ParentId] = @__p_1
+            """
         );
     }
 
@@ -2193,13 +2193,13 @@ WHERE [s].[ParentAlternateId] = @__p_0 AND [s].[ParentId] = @__p_1
 
         AssertSql(
             """
-@__p_0='Root' (Size = 450)
-@__p_1='707' (Nullable = true)
+            @__p_0='Root' (Size = 450)
+            @__p_1='707' (Nullable = true)
 
-SELECT [c].[Id], [c].[ParentAlternateId], [c].[ParentId]
-FROM [ChildCompositeKey] AS [c]
-WHERE [c].[ParentAlternateId] = @__p_0 AND [c].[ParentId] = @__p_1
-"""
+            SELECT [c].[Id], [c].[ParentAlternateId], [c].[ParentId]
+            FROM [ChildCompositeKey] AS [c]
+            WHERE [c].[ParentAlternateId] = @__p_0 AND [c].[ParentId] = @__p_1
+            """
         );
     }
 
@@ -2212,13 +2212,13 @@ WHERE [c].[ParentAlternateId] = @__p_0 AND [c].[ParentId] = @__p_1
 
         AssertSql(
             """
-@__p_0='Root' (Size = 450)
-@__p_1='707'
+            @__p_0='Root' (Size = 450)
+            @__p_1='707'
 
-SELECT TOP(2) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[AlternateId] = @__p_0 AND [p].[Id] = @__p_1
-"""
+            SELECT TOP(2) [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE [p].[AlternateId] = @__p_0 AND [p].[Id] = @__p_1
+            """
         );
     }
 
@@ -2231,13 +2231,13 @@ WHERE [p].[AlternateId] = @__p_0 AND [p].[Id] = @__p_1
 
         AssertSql(
             """
-@__p_0='Root' (Size = 450)
-@__p_1='707'
+            @__p_0='Root' (Size = 450)
+            @__p_1='707'
 
-SELECT TOP(2) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE [p].[AlternateId] = @__p_0 AND [p].[Id] = @__p_1
-"""
+            SELECT TOP(2) [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE [p].[AlternateId] = @__p_0 AND [p].[Id] = @__p_1
+            """
         );
     }
 
@@ -2252,13 +2252,13 @@ WHERE [p].[AlternateId] = @__p_0 AND [p].[Id] = @__p_1
             state == EntityState.Detached
                 ? ""
                 : """
-@__p_0='Root' (Size = 450)
-@__p_1='707' (Nullable = true)
+                @__p_0='Root' (Size = 450)
+                @__p_1='707' (Nullable = true)
 
-SELECT TOP(2) [s].[Id], [s].[ParentAlternateId], [s].[ParentId]
-FROM [SingleCompositeKey] AS [s]
-WHERE [s].[ParentAlternateId] = @__p_0 AND [s].[ParentId] = @__p_1
-"""
+                SELECT TOP(2) [s].[Id], [s].[ParentAlternateId], [s].[ParentId]
+                FROM [SingleCompositeKey] AS [s]
+                WHERE [s].[ParentAlternateId] = @__p_0 AND [s].[ParentId] = @__p_1
+                """
         );
     }
 
@@ -2294,10 +2294,10 @@ WHERE [s].[ParentAlternateId] = @__p_0 AND [s].[ParentId] = @__p_1
 
         AssertSql(
             """
-SELECT TOP(2) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE 0 = 1
-"""
+            SELECT TOP(2) [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE 0 = 1
+            """
         );
     }
 
@@ -2313,10 +2313,10 @@ WHERE 0 = 1
 
         AssertSql(
             """
-SELECT TOP(2) [p].[Id], [p].[AlternateId]
-FROM [Parent] AS [p]
-WHERE 0 = 1
-"""
+            SELECT TOP(2) [p].[Id], [p].[AlternateId]
+            FROM [Parent] AS [p]
+            WHERE 0 = 1
+            """
         );
     }
 

@@ -83,9 +83,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          $$
-                """
+                    var q = from x in y
+                    $$
+                    """
                 )
             );
         }
@@ -96,10 +96,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var v = from x in y
-                          where x > y
-                          $$
-                """
+                    var v = from x in y
+                    where x > y
+                    $$
+                    """
                 )
             );
         }
@@ -110,10 +110,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var v = from x in y
-                          group x by y into g
-                          $$
-                """
+                    var v = from x in y
+                    group x by y into g
+                    $$
+                    """
                 )
             );
         }
@@ -124,10 +124,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          $$
-                          from z in w
-                """
+                    var q = from x in y
+                    $$
+                    from z in w
+                    """
                 )
             );
         }
@@ -138,9 +138,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          let $$
-                """
+                    var q = from x in y
+                    let $$
+                    """
                 )
             );
         }

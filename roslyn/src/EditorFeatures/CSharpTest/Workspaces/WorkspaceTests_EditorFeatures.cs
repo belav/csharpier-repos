@@ -512,8 +512,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
 
             var document2 = new TestHostDocument(
                 """
-                Public Class D 
-                  Inherits C
+                Public Class D
+                Inherits C
                 End Class
                 """
             );
@@ -548,8 +548,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
 
             var document2 = new TestHostDocument(
                 """
-                Public Class D 
-                  Inherits C
+                Public Class D
+                Inherits C
                 End Class
                 """
             );
@@ -605,8 +605,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
 
             var document2 = new TestHostDocument(
                 """
-                Public Class D 
-                  Inherits C
+                Public Class D
+                Inherits C
                 End Class
                 """
             );
@@ -683,8 +683,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
 
             var document2 = new TestHostDocument(
                 """
-                Public Class D 
-                  Inherits C
+                Public Class D
+                Inherits C
                 End Class
                 """
             );
@@ -1318,11 +1318,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
         {
             using var workspace = CreateWorkspace();
             var startText = """
-                <setting value = "goo"
-                """;
+            <setting value = "goo"
+            """;
             var newText = """
-                <setting value = "goo1"
-                """;
+            <setting value = "goo1"
+            """;
             var document = new TestHostDocument("public class C { }");
             var additionalDoc = new TestHostDocument(startText);
             var project1 = new TestHostProject(
@@ -1412,8 +1412,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
         {
             using var workspace = CreateWorkspace();
             var startText = """
-                <setting value = "goo"
-                """;
+            <setting value = "goo"
+            """;
             var document = new TestHostDocument("public class C { }");
             var additionalDoc = new TestHostDocument(startText);
             var project1 = new TestHostProject(
@@ -1482,8 +1482,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
         {
             using var workspace = CreateWorkspace();
             var startText = """
-                <setting value = "goo"
-                """;
+            <setting value = "goo"
+            """;
             var document = new TestHostDocument("public class C { }");
             var additionalDoc = new TestHostDocument(startText, "original.config");
             var project1 = new TestHostProject(
@@ -1593,8 +1593,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Workspaces
         {
             using var workspace = CreateWorkspace();
             var startText = """
-                <setting value = "goo"
-                """;
+            <setting value = "goo"
+            """;
             var document = new TestHostDocument("public class C { }");
             var additionalDoc = new TestHostDocument(startText, "original.config");
             var project1 = new TestHostProject(

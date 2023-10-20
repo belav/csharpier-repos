@@ -31,27 +31,27 @@ namespace Microsoft.Interop.UnitTests
             """;
 
         private static string NonStatic = """
-            [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(Marshaller))]
-            public class Marshaller
-            {
-                public struct Native { }
+        [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(Marshaller))]
+        public class Marshaller
+        {
+        public struct Native { }
 
-                public static Native ConvertToUnmanaged(S s) => default;
-            }
-            """;
+        public static Native ConvertToUnmanaged(S s) => default;
+        }
+        """;
         public string NonStaticMarshallerEntryPoint =>
             _provider.BasicParameterByValue("S") + NonBlittableUserDefinedType() + NonStatic;
 
         private static string Struct = """
-            [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(Marshaller))]
-            public struct Marshaller
-            {
-                public struct Native { }
+        [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(Marshaller))]
+        public struct Marshaller
+        {
+        public struct Native { }
 
-                public void FromManaged(S s) {}
-                public Native ToUnmanaged() => default;
-            }
-            """;
+        public void FromManaged(S s) {}
+        public Native ToUnmanaged() => default;
+        }
+        """;
         public string StructMarshallerEntryPoint =>
             _provider.BasicParameterByValue("S") + NonBlittableUserDefinedType() + Struct;
 
@@ -65,119 +65,119 @@ namespace Microsoft.Interop.UnitTests
             }
 
             private static string In = """
-                [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(Marshaller))]
-                [CustomMarshaller(typeof(S), MarshalMode.UnmanagedToManagedOut, typeof(Marshaller))]
-                public static class Marshaller
-                {
-                    public struct Native { }
+            [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(Marshaller))]
+            [CustomMarshaller(typeof(S), MarshalMode.UnmanagedToManagedOut, typeof(Marshaller))]
+            public static class Marshaller
+            {
+            public struct Native { }
 
-                    public static Native ConvertToUnmanaged(S s) => default;
-                }
-                """;
+            public static Native ConvertToUnmanaged(S s) => default;
+            }
+            """;
             private static string InBuffer = """
-                [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(Marshaller))]
-                public static class Marshaller
-                {
-                    public struct Native { }
+            [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(Marshaller))]
+            public static class Marshaller
+            {
+            public struct Native { }
 
-                    public const int BufferSize = 0x100;
-                    public static Native ConvertToUnmanaged(S s, System.Span<byte> buffer) => default;
-                }
-                """;
+            public const int BufferSize = 0x100;
+            public static Native ConvertToUnmanaged(S s, System.Span<byte> buffer) => default;
+            }
+            """;
 
             public static string InPinnable = """
-                [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(Marshaller))]
-                [CustomMarshaller(typeof(S), MarshalMode.UnmanagedToManagedOut, typeof(Marshaller))]
-                public static unsafe class Marshaller
-                {
-                    public static byte* ConvertToUnmanaged(S s) => default;
-                    public static ref byte GetPinnableReference(S s) => throw null;
-                }
-                """;
+            [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(Marshaller))]
+            [CustomMarshaller(typeof(S), MarshalMode.UnmanagedToManagedOut, typeof(Marshaller))]
+            public static unsafe class Marshaller
+            {
+            public static byte* ConvertToUnmanaged(S s) => default;
+            public static ref byte GetPinnableReference(S s) => throw null;
+            }
+            """;
             private static string Out = """
-                [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedOut, typeof(Marshaller))]
-                [CustomMarshaller(typeof(S), MarshalMode.UnmanagedToManagedIn, typeof(Marshaller))]
-                public static class Marshaller
-                {
-                    public struct Native { }
+            [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedOut, typeof(Marshaller))]
+            [CustomMarshaller(typeof(S), MarshalMode.UnmanagedToManagedIn, typeof(Marshaller))]
+            public static class Marshaller
+            {
+            public struct Native { }
 
-                    public static S ConvertToManaged(Native n) => default;
-                }
-                """;
+            public static S ConvertToManaged(Native n) => default;
+            }
+            """;
             private static string OutGuaranteed = """
-                [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedOut, typeof(Marshaller))]
-                [CustomMarshaller(typeof(S), MarshalMode.UnmanagedToManagedIn, typeof(Marshaller))]
-                public static class Marshaller
-                {
-                    public struct Native { }
+            [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedOut, typeof(Marshaller))]
+            [CustomMarshaller(typeof(S), MarshalMode.UnmanagedToManagedIn, typeof(Marshaller))]
+            public static class Marshaller
+            {
+            public struct Native { }
 
-                    public static S ConvertToManagedFinally(Native n) => default;
-                }
-                """;
+            public static S ConvertToManagedFinally(Native n) => default;
+            }
+            """;
             public static string Ref = """
-                [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedRef, typeof(Marshaller))]
-                [CustomMarshaller(typeof(S), MarshalMode.UnmanagedToManagedRef, typeof(Marshaller))]
-                public static class Marshaller
-                {
-                    public struct Native { }
+            [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedRef, typeof(Marshaller))]
+            [CustomMarshaller(typeof(S), MarshalMode.UnmanagedToManagedRef, typeof(Marshaller))]
+            public static class Marshaller
+            {
+            public struct Native { }
 
-                    public static Native ConvertToUnmanaged(S s) => default;
-                    public static S ConvertToManaged(Native n) => default;
-                }
-                """;
+            public static Native ConvertToUnmanaged(S s) => default;
+            public static S ConvertToManaged(Native n) => default;
+            }
+            """;
             public static string Default = """
-                [CustomMarshaller(typeof(S), MarshalMode.Default, typeof(Marshaller))]
-                public static class Marshaller
-                {
-                    public struct Native { }
+            [CustomMarshaller(typeof(S), MarshalMode.Default, typeof(Marshaller))]
+            public static class Marshaller
+            {
+            public struct Native { }
 
-                    public static Native ConvertToUnmanaged(S s) => default;
-                    public static S ConvertToManaged(Native n) => default;
-                }
-                """;
+            public static Native ConvertToUnmanaged(S s) => default;
+            public static S ConvertToManaged(Native n) => default;
+            }
+            """;
             public static string InOutBuffer = """
-                [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(Marshaller))]
-                [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedOut, typeof(Marshaller))]
-                [CustomMarshaller(typeof(S), MarshalMode.UnmanagedToManagedIn, typeof(Marshaller))]
-                public static class Marshaller
-                {
-                    public struct Native { }
+            [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(Marshaller))]
+            [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedOut, typeof(Marshaller))]
+            [CustomMarshaller(typeof(S), MarshalMode.UnmanagedToManagedIn, typeof(Marshaller))]
+            public static class Marshaller
+            {
+            public struct Native { }
 
-                    public const int BufferSize = 0x100;
-                    public static Native ConvertToUnmanaged(S s, System.Span<byte> buffer) => default;
-                    public static S ConvertToManaged(Native n) => default;
-                }
-                """;
+            public const int BufferSize = 0x100;
+            public static Native ConvertToUnmanaged(S s, System.Span<byte> buffer) => default;
+            public static S ConvertToManaged(Native n) => default;
+            }
+            """;
             public static string DefaultOptionalBuffer = """
-                [CustomMarshaller(typeof(S), MarshalMode.Default, typeof(Marshaller))]
-                public static class Marshaller
-                {
-                    public struct Native { }
+            [CustomMarshaller(typeof(S), MarshalMode.Default, typeof(Marshaller))]
+            public static class Marshaller
+            {
+            public struct Native { }
 
-                    public const int BufferSize = 0x100;
-                    public static Native ConvertToUnmanaged(S s) => default;
-                    public static Native ConvertToUnmanaged(S s, System.Span<byte> buffer) => default;
-                    public static S ConvertToManaged(Native n) => default;
-                }
-                """;
+            public const int BufferSize = 0x100;
+            public static Native ConvertToUnmanaged(S s) => default;
+            public static Native ConvertToUnmanaged(S s, System.Span<byte> buffer) => default;
+            public static S ConvertToManaged(Native n) => default;
+            }
+            """;
             private static string DefaultIn = """
-                [CustomMarshaller(typeof(S), MarshalMode.Default, typeof(Marshaller))]
-                public static class Marshaller
-                {
-                    public struct Native { }
+            [CustomMarshaller(typeof(S), MarshalMode.Default, typeof(Marshaller))]
+            public static class Marshaller
+            {
+            public struct Native { }
 
-                    public static Native ConvertToUnmanaged(S s) => default;
-                }
-                """;
+            public static Native ConvertToUnmanaged(S s) => default;
+            }
+            """;
             private static string DefaultOut = """
-                [CustomMarshaller(typeof(S), MarshalMode.Default, typeof(Marshaller))]
-                public static class Marshaller
-                {
-                    public struct Native { }
+            [CustomMarshaller(typeof(S), MarshalMode.Default, typeof(Marshaller))]
+            public static class Marshaller
+            {
+            public struct Native { }
 
-                    public static S ConvertToManaged(Native n) => default;
-                }
-                """;
+            public static S ConvertToManaged(Native n) => default;
+            }
+            """;
             public string ManagedToNativeOnlyOutParameter =>
                 _provider.BasicParameterWithByRefModifier("out", "S")
                 + NonBlittableUserDefinedType()
@@ -277,215 +277,215 @@ namespace Microsoft.Interop.UnitTests
             }
 
             private static string In = """
-                [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(M))]
-                [CustomMarshaller(typeof(S), MarshalMode.UnmanagedToManagedOut, typeof(M))]
-                public static class Marshaller
-                {
-                    public struct Native { }
+            [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(M))]
+            [CustomMarshaller(typeof(S), MarshalMode.UnmanagedToManagedOut, typeof(M))]
+            public static class Marshaller
+            {
+            public struct Native { }
 
-                    public struct M
-                    {
-                        public void FromManaged(S s) {}
-                        public Native ToUnmanaged() => default;
-                    }
-                }
-                """;
+            public struct M
+            {
+            public void FromManaged(S s) {}
+            public Native ToUnmanaged() => default;
+            }
+            }
+            """;
 
             public static string InStatelessPinnable = """
-                [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(M))]
-                [CustomMarshaller(typeof(S), MarshalMode.UnmanagedToManagedOut, typeof(M))]
-                public static class Marshaller
-                {
-                    public unsafe struct M
-                    {
-                        public void FromManaged(S s) {}
-                        public byte* ToUnmanaged() => default;
+            [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(M))]
+            [CustomMarshaller(typeof(S), MarshalMode.UnmanagedToManagedOut, typeof(M))]
+            public static class Marshaller
+            {
+            public unsafe struct M
+            {
+            public void FromManaged(S s) {}
+            public byte* ToUnmanaged() => default;
 
-                        public static ref byte GetPinnableReference(S s) => throw null;
-                    }
-                }
-                """;
+            public static ref byte GetPinnableReference(S s) => throw null;
+            }
+            }
+            """;
 
             public static string InPinnable = """
-                [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(M))]
-                public static class Marshaller
-                {
-                    public unsafe struct M
-                    {
-                        public void FromManaged(S s) {}
-                        public byte* ToUnmanaged() => default;
+            [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(M))]
+            public static class Marshaller
+            {
+            public unsafe struct M
+            {
+            public void FromManaged(S s) {}
+            public byte* ToUnmanaged() => default;
 
-                        public ref byte GetPinnableReference() => throw null;
-                    }
-                }
-                """;
+            public ref byte GetPinnableReference() => throw null;
+            }
+            }
+            """;
 
             private static string InBuffer = """
-                [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(M))]
-                public static class Marshaller
-                {
-                    public struct Native { }
+            [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(M))]
+            public static class Marshaller
+            {
+            public struct Native { }
 
-                    public struct M
-                    {
-                        public const int BufferSize = 0x100;
-                        public void FromManaged(S s, System.Span<byte> buffer) {}
-                        public Native ToUnmanaged() => default;
-                    }
-                }
-                """;
+            public struct M
+            {
+            public const int BufferSize = 0x100;
+            public void FromManaged(S s, System.Span<byte> buffer) {}
+            public Native ToUnmanaged() => default;
+            }
+            }
+            """;
             private static string Out = """
-                [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedOut, typeof(M))]
-                [CustomMarshaller(typeof(S), MarshalMode.UnmanagedToManagedIn, typeof(M))]
-                public static class Marshaller
-                {
-                    public struct Native { }
+            [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedOut, typeof(M))]
+            [CustomMarshaller(typeof(S), MarshalMode.UnmanagedToManagedIn, typeof(M))]
+            public static class Marshaller
+            {
+            public struct Native { }
 
-                    public struct M
-                    {
-                        public void FromUnmanaged(Native n) {}
-                        public S ToManaged() => default;
-                    }
-                }
-                """;
+            public struct M
+            {
+            public void FromUnmanaged(Native n) {}
+            public S ToManaged() => default;
+            }
+            }
+            """;
             private static string OutGuaranteed = """
-                [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedOut, typeof(M))]
-                [CustomMarshaller(typeof(S), MarshalMode.UnmanagedToManagedIn, typeof(M))]
-                public static class Marshaller
-                {
-                    public struct Native { }
+            [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedOut, typeof(M))]
+            [CustomMarshaller(typeof(S), MarshalMode.UnmanagedToManagedIn, typeof(M))]
+            public static class Marshaller
+            {
+            public struct Native { }
 
-                    public struct M
-                    {
-                        public void FromUnmanaged(Native n) {}
-                        public S ToManagedFinally() => default;
-                    }
-                }
-                """;
+            public struct M
+            {
+            public void FromUnmanaged(Native n) {}
+            public S ToManagedFinally() => default;
+            }
+            }
+            """;
             public static string Ref = """
-                [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedRef, typeof(M))]
-                [CustomMarshaller(typeof(S), MarshalMode.UnmanagedToManagedRef, typeof(M))]
-                public static class Marshaller
-                {
-                    public struct Native { }
+            [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedRef, typeof(M))]
+            [CustomMarshaller(typeof(S), MarshalMode.UnmanagedToManagedRef, typeof(M))]
+            public static class Marshaller
+            {
+            public struct Native { }
 
-                    public struct M
-                    {
-                        public void FromManaged(S s) {}
-                        public Native ToUnmanaged() => default;
-                        public void FromUnmanaged(Native n) {}
-                        public S ToManaged() => default;
-                    }
-                }
-                """;
+            public struct M
+            {
+            public void FromManaged(S s) {}
+            public Native ToUnmanaged() => default;
+            public void FromUnmanaged(Native n) {}
+            public S ToManaged() => default;
+            }
+            }
+            """;
             public static string Default = """
-                [CustomMarshaller(typeof(S), MarshalMode.Default, typeof(M))]
-                public static class Marshaller
-                {
-                    public struct Native { }
+            [CustomMarshaller(typeof(S), MarshalMode.Default, typeof(M))]
+            public static class Marshaller
+            {
+            public struct Native { }
 
-                    public struct M
-                    {
-                        public void FromManaged(S s) {}
-                        public Native ToUnmanaged() => default;
-                        public void FromUnmanaged(Native n) {}
-                        public S ToManaged() => default;
-                    }
-                }
-                """;
+            public struct M
+            {
+            public void FromManaged(S s) {}
+            public Native ToUnmanaged() => default;
+            public void FromUnmanaged(Native n) {}
+            public S ToManaged() => default;
+            }
+            }
+            """;
             public static string DefaultWithFree = """
-                [CustomMarshaller(typeof(S), MarshalMode.Default, typeof(M))]
-                public static class Marshaller
-                {
-                    public struct Native { }
+            [CustomMarshaller(typeof(S), MarshalMode.Default, typeof(M))]
+            public static class Marshaller
+            {
+            public struct Native { }
 
-                    public struct M
-                    {
-                        public void FromManaged(S s) {}
-                        public Native ToUnmanaged() => default;
-                        public void FromUnmanaged(Native n) {}
-                        public S ToManaged() => default;
-                        public void Free() {}
-                    }
-                }
-                """;
+            public struct M
+            {
+            public void FromManaged(S s) {}
+            public Native ToUnmanaged() => default;
+            public void FromUnmanaged(Native n) {}
+            public S ToManaged() => default;
+            public void Free() {}
+            }
+            }
+            """;
             public static string DefaultWithOnInvoked = """
-                [CustomMarshaller(typeof(S), MarshalMode.Default, typeof(M))]
-                public static class Marshaller
-                {
-                    public struct Native { }
+            [CustomMarshaller(typeof(S), MarshalMode.Default, typeof(M))]
+            public static class Marshaller
+            {
+            public struct Native { }
 
-                    public struct M
-                    {
-                        public void FromManaged(S s) {}
-                        public Native ToUnmanaged() => default;
-                        public void FromUnmanaged(Native n) {}
-                        public S ToManaged() => default;
-                        public void OnInvoked() {}
-                    }
-                }
-                """;
+            public struct M
+            {
+            public void FromManaged(S s) {}
+            public Native ToUnmanaged() => default;
+            public void FromUnmanaged(Native n) {}
+            public S ToManaged() => default;
+            public void OnInvoked() {}
+            }
+            }
+            """;
             public static string InOutBuffer = """
-                [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(M))]
-                [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedOut, typeof(M))]
-                [CustomMarshaller(typeof(S), MarshalMode.UnmanagedToManagedIn, typeof(M))]
-                public static class Marshaller
-                {
-                    public struct Native { }
+            [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(M))]
+            [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedOut, typeof(M))]
+            [CustomMarshaller(typeof(S), MarshalMode.UnmanagedToManagedIn, typeof(M))]
+            public static class Marshaller
+            {
+            public struct Native { }
 
-                    public struct M
-                    {
-                        public const int BufferSize = 0x100;
-                        public void FromManaged(S s, System.Span<byte> buffer) {}
-                        public Native ToUnmanaged() => default;
-                        public void FromUnmanaged(Native n) {}
-                        public S ToManaged() => default;
-                    }
-                }
-                """;
+            public struct M
+            {
+            public const int BufferSize = 0x100;
+            public void FromManaged(S s, System.Span<byte> buffer) {}
+            public Native ToUnmanaged() => default;
+            public void FromUnmanaged(Native n) {}
+            public S ToManaged() => default;
+            }
+            }
+            """;
             public static string DefaultOptionalBuffer = """
-                [CustomMarshaller(typeof(S), MarshalMode.Default, typeof(M))]
-                public static class Marshaller
-                {
-                    public struct Native { }
+            [CustomMarshaller(typeof(S), MarshalMode.Default, typeof(M))]
+            public static class Marshaller
+            {
+            public struct Native { }
 
-                    public struct M
-                    {
-                        public const int BufferSize = 0x100;
-                        public void FromManaged(S s) {}
-                        public void FromManaged(S s, System.Span<byte> buffer) {}
-                        public Native ToUnmanaged() => default;
-                        public void FromUnmanaged(Native n) {}
-                        public S ToManaged() => default;
-                    }
-                }
-                """;
+            public struct M
+            {
+            public const int BufferSize = 0x100;
+            public void FromManaged(S s) {}
+            public void FromManaged(S s, System.Span<byte> buffer) {}
+            public Native ToUnmanaged() => default;
+            public void FromUnmanaged(Native n) {}
+            public S ToManaged() => default;
+            }
+            }
+            """;
             private static string DefaultIn = """
-                [CustomMarshaller(typeof(S), MarshalMode.Default, typeof(M))]
-                public static class Marshaller
-                {
-                    public struct Native { }
+            [CustomMarshaller(typeof(S), MarshalMode.Default, typeof(M))]
+            public static class Marshaller
+            {
+            public struct Native { }
 
-                    public struct M
-                    {
-                        public void FromManaged(S s) {}
-                        public Native ToUnmanaged() => default;
-                    }
-                }
-                """;
+            public struct M
+            {
+            public void FromManaged(S s) {}
+            public Native ToUnmanaged() => default;
+            }
+            }
+            """;
             private static string DefaultOut = """
-                [CustomMarshaller(typeof(S), MarshalMode.Default, typeof(M))]
-                public static class Marshaller
-                {
-                    public struct Native { }
+            [CustomMarshaller(typeof(S), MarshalMode.Default, typeof(M))]
+            public static class Marshaller
+            {
+            public struct Native { }
 
-                    public struct M
-                    {
-                        public void FromUnmanaged(Native n) {}
-                        public S ToManaged() => default;
-                    }
-                }
-                """;
+            public struct M
+            {
+            public void FromUnmanaged(Native n) {}
+            public S ToManaged() => default;
+            }
+            }
+            """;
             public string ManagedToNativeOnlyOutParameter =>
                 _provider.BasicParameterWithByRefModifier("out", "S")
                 + NonBlittableUserDefinedType()

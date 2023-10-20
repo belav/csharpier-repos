@@ -22,10 +22,10 @@ public class EnumDeclarationStructureTests
     public async Task TestEnum1()
     {
         var code = """
-                {|hint:$$enum E{|textspan:
-                {
-                }|}|}
-                """;
+        {|hint:$$enum E{|textspan:
+        {
+        }|}|}
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -82,12 +82,12 @@ public class EnumDeclarationStructureTests
     public async Task TestEnumWithLeadingComments()
     {
         var code = """
-                {|span1:// Goo
-                // Bar|}
-                {|hint2:$$enum E{|textspan2:
-                {
-                }|}|}
-                """;
+        {|span1:// Goo
+        // Bar|}
+        {|hint2:$$enum E{|textspan2:
+        {
+        }|}|}
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -100,12 +100,12 @@ public class EnumDeclarationStructureTests
     public async Task TestEnumWithNestedComments()
     {
         var code = """
-                {|hint1:$$enum E{|textspan1:
-                {
-                    {|span2:// Goo
-                    // Bar|}
-                }|}|}
-                """;
+        {|hint1:$$enum E{|textspan1:
+        {
+        {|span2:// Goo
+        // Bar|}
+        }|}|}
+        """;
 
         await VerifyBlockSpansAsync(
             code,

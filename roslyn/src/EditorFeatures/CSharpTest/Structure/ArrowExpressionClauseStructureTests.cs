@@ -23,13 +23,13 @@ public class ArrowExpressionClauseStructureTests
     {
         await VerifyBlockSpansAsync(
             """
-                class C
-                {
-                    {|hintspan:void M(){|textspan: $$=> expression
-                        ? trueCase
-                        : falseCase;|}|};
-                }
-                """,
+            class C
+            {
+            {|hintspan:void M(){|textspan: $$=> expression
+            ? trueCase
+            : falseCase;|}|};
+            }
+            """,
             Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
         );
     }
@@ -39,14 +39,14 @@ public class ArrowExpressionClauseStructureTests
     {
         await VerifyBlockSpansAsync(
             """
-                class C
-                {
-                    {|hintspan:void M(){|textspan: $$=> expression
-                        ? trueCase
-                        : falseCase;|}|}
-                    void N() => 0;
-                }
-                """,
+            class C
+            {
+            {|hintspan:void M(){|textspan: $$=> expression
+            ? trueCase
+            : falseCase;|}|}
+            void N() => 0;
+            }
+            """,
             Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
         );
     }
@@ -56,15 +56,15 @@ public class ArrowExpressionClauseStructureTests
     {
         await VerifyBlockSpansAsync(
             """
-                class C
-                {
-                    {|hintspan:void M(){|textspan: $$=> expression
-                        ? trueCase
-                        : falseCase;|}|}
+            class C
+            {
+            {|hintspan:void M(){|textspan: $$=> expression
+            ? trueCase
+            : falseCase;|}|}
 
-                    void N() => 0;
-                }
-                """,
+            void N() => 0;
+            }
+            """,
             Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
         );
     }
@@ -74,14 +74,14 @@ public class ArrowExpressionClauseStructureTests
     {
         await VerifyBlockSpansAsync(
             """
-                class C
-                {
-                    {|hintspan:void M(){|textspan: $$=> expression
-                        ? trueCase
-                        : falseCase;|}|}
-                    int N => 0;
-                }
-                """,
+            class C
+            {
+            {|hintspan:void M(){|textspan: $$=> expression
+            ? trueCase
+            : falseCase;|}|}
+            int N => 0;
+            }
+            """,
             Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
         );
     }
@@ -91,15 +91,15 @@ public class ArrowExpressionClauseStructureTests
     {
         await VerifyBlockSpansAsync(
             """
-                class C
-                {
-                    {|hintspan:void M(){|textspan: $$=> expression
-                        ? trueCase
-                        : falseCase;|}|}
+            class C
+            {
+            {|hintspan:void M(){|textspan: $$=> expression
+            ? trueCase
+            : falseCase;|}|}
 
-                    int N => 0;
-                }
-                """,
+            int N => 0;
+            }
+            """,
             Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
         );
     }
@@ -109,13 +109,13 @@ public class ArrowExpressionClauseStructureTests
     {
         await VerifyBlockSpansAsync(
             """
-                class C
-                {
-                    {|hintspan:int M{|textspan: $$=> expression
-                        ? trueCase
-                        : falseCase;|}|};
-                }
-                """,
+            class C
+            {
+            {|hintspan:int M{|textspan: $$=> expression
+            ? trueCase
+            : falseCase;|}|};
+            }
+            """,
             Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
         );
     }
@@ -125,14 +125,14 @@ public class ArrowExpressionClauseStructureTests
     {
         await VerifyBlockSpansAsync(
             """
-                class C
-                {
-                    {|hintspan:int M{|textspan: $$=> expression
-                        ? trueCase
-                        : falseCase;|}|}
-                    int N => 0;
-                }
-                """,
+            class C
+            {
+            {|hintspan:int M{|textspan: $$=> expression
+            ? trueCase
+            : falseCase;|}|}
+            int N => 0;
+            }
+            """,
             Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
         );
     }
@@ -142,15 +142,15 @@ public class ArrowExpressionClauseStructureTests
     {
         await VerifyBlockSpansAsync(
             """
-                class C
-                {
-                    {|hintspan:int M{|textspan: $$=> expression
-                        ? trueCase
-                        : falseCase;|}|}
+            class C
+            {
+            {|hintspan:int M{|textspan: $$=> expression
+            ? trueCase
+            : falseCase;|}|}
 
-                    int N => 0;
-                }
-                """,
+            int N => 0;
+            }
+            """,
             Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
         );
     }
@@ -160,14 +160,14 @@ public class ArrowExpressionClauseStructureTests
     {
         await VerifyBlockSpansAsync(
             """
-                class C
-                {
-                    {|hintspan:int M{|textspan: $$=> expression
-                        ? trueCase
-                        : falseCase;|}|}
-                    int N() => 0;
-                }
-                """,
+            class C
+            {
+            {|hintspan:int M{|textspan: $$=> expression
+            ? trueCase
+            : falseCase;|}|}
+            int N() => 0;
+            }
+            """,
             Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
         );
     }
@@ -177,15 +177,15 @@ public class ArrowExpressionClauseStructureTests
     {
         await VerifyBlockSpansAsync(
             """
-                class C
-                {
-                    {|hintspan:int M{|textspan: $$=> expression
-                        ? trueCase
-                        : falseCase;|}|}
+            class C
+            {
+            {|hintspan:int M{|textspan: $$=> expression
+            ? trueCase
+            : falseCase;|}|}
 
-                    int N() => 0;
-                }
-                """,
+            int N() => 0;
+            }
+            """,
             Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
         );
     }
@@ -195,16 +195,16 @@ public class ArrowExpressionClauseStructureTests
     {
         await VerifyBlockSpansAsync(
             """
-                class C
-                {
-                    void M()
-                    {
-                        {|hintspan:void F(){|textspan: $$=> expression
-                            ? trueCase
-                            : falseCase;|}|};
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            {|hintspan:void F(){|textspan: $$=> expression
+            ? trueCase
+            : falseCase;|}|};
+            }
+            }
+            """,
             Region("textspan", "hintspan", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
         );
     }

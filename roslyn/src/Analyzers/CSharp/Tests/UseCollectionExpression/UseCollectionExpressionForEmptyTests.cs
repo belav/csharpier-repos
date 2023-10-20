@@ -23,15 +23,15 @@ public class UseCollectionExpressionForEmptyTests
 {
     private const string CollectionBuilderAttributeDefinition = """
 
-        namespace System.Runtime.CompilerServices
-        {
-            [AttributeUsage(AttributeTargets.All, Inherited = false, AllowMultiple = false)]
-            public sealed class CollectionBuilderAttribute : Attribute
-            {
-                public CollectionBuilderAttribute(Type builderType, string methodName) { }
-            }
-        }
-        """;
+    namespace System.Runtime.CompilerServices
+    {
+    [AttributeUsage(AttributeTargets.All, Inherited = false, AllowMultiple = false)]
+    public sealed class CollectionBuilderAttribute : Attribute
+    {
+    public CollectionBuilderAttribute(Type builderType, string methodName) { }
+    }
+    }
+    """;
 
     [Fact]
     public async Task ArrayEmpty1()
@@ -43,10 +43,10 @@ public class UseCollectionExpressionForEmptyTests
 
             class C
             {
-                void M()
-                {
-                    var v = Array.Empty<int>();
-                }
+            void M()
+            {
+            var v = Array.Empty<int>();
+            }
             }
             """,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -63,10 +63,10 @@ public class UseCollectionExpressionForEmptyTests
 
             class C
             {
-                void M()
-                {
-                    int[] v = Array.[|Empty|]<int>();
-                }
+            void M()
+            {
+            int[] v = Array.[|Empty|]<int>();
+            }
             }
             """,
             FixedCode = """
@@ -74,10 +74,10 @@ public class UseCollectionExpressionForEmptyTests
 
             class C
             {
-                void M()
-                {
-                    int[] v = [];
-                }
+            void M()
+            {
+            int[] v = [];
+            }
             }
             """,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -94,10 +94,10 @@ public class UseCollectionExpressionForEmptyTests
 
             class C
             {
-                void M()
-                {
-                    int[] v = System.Array.[|Empty|]<int>();
-                }
+            void M()
+            {
+            int[] v = System.Array.[|Empty|]<int>();
+            }
             }
             """,
             FixedCode = """
@@ -105,10 +105,10 @@ public class UseCollectionExpressionForEmptyTests
 
             class C
             {
-                void M()
-                {
-                    int[] v = [];
-                }
+            void M()
+            {
+            int[] v = [];
+            }
             }
             """,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -124,10 +124,10 @@ public class UseCollectionExpressionForEmptyTests
             using System;
             class C
             {
-                void M()
-                {
-                    object[] v = Array.Empty<string>();
-                }
+            void M()
+            {
+            object[] v = Array.Empty<string>();
+            }
             }
             """,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -145,10 +145,10 @@ public class UseCollectionExpressionForEmptyTests
 
             class C
             {
-                void M()
-                {
-                    IEnumerable<string> v = Array.Empty<string>();
-                }
+            void M()
+            {
+            IEnumerable<string> v = Array.Empty<string>();
+            }
             }
             """,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -165,10 +165,10 @@ public class UseCollectionExpressionForEmptyTests
 
             class C
             {
-                void M()
-                {
-                    string[] v = Array.[|Empty|]<string>();
-                }
+            void M()
+            {
+            string[] v = Array.[|Empty|]<string>();
+            }
             }
             """,
             FixedCode = """
@@ -176,10 +176,10 @@ public class UseCollectionExpressionForEmptyTests
 
             class C
             {
-                void M()
-                {
-                    string[] v = [];
-                }
+            void M()
+            {
+            string[] v = [];
+            }
             }
             """,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -197,10 +197,10 @@ public class UseCollectionExpressionForEmptyTests
 
             class C
             {
-                void M()
-                {
-                    string[] v = {|CS8619:Array.[|Empty|]<string?>()|};
-                }
+            void M()
+            {
+            string[] v = {|CS8619:Array.[|Empty|]<string?>()|};
+            }
             }
             """,
             FixedCode = """
@@ -209,10 +209,10 @@ public class UseCollectionExpressionForEmptyTests
 
             class C
             {
-                void M()
-                {
-                    string[] v = [];
-                }
+            void M()
+            {
+            string[] v = [];
+            }
             }
             """,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -230,10 +230,10 @@ public class UseCollectionExpressionForEmptyTests
 
             class C
             {
-                void M()
-                {
-                    string?[] v = Array.[|Empty|]<string>();
-                }
+            void M()
+            {
+            string?[] v = Array.[|Empty|]<string>();
+            }
             }
             """,
             FixedCode = """
@@ -242,10 +242,10 @@ public class UseCollectionExpressionForEmptyTests
 
             class C
             {
-                void M()
-                {
-                    string?[] v = [];
-                }
+            void M()
+            {
+            string?[] v = [];
+            }
             }
             """,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -263,10 +263,10 @@ public class UseCollectionExpressionForEmptyTests
 
             class C
             {
-                void M()
-                {
-                    string?[] v = Array.[|Empty|]<string?>();
-                }
+            void M()
+            {
+            string?[] v = Array.[|Empty|]<string?>();
+            }
             }
             """,
             FixedCode = """
@@ -275,10 +275,10 @@ public class UseCollectionExpressionForEmptyTests
 
             class C
             {
-                void M()
-                {
-                    string?[] v = [];
-                }
+            void M()
+            {
+            string?[] v = [];
+            }
             }
             """,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -296,10 +296,10 @@ public class UseCollectionExpressionForEmptyTests
 
             class C
             {
-                void M()
-                {
-                    string[]? v = Array.[|Empty|]<string>();
-                }
+            void M()
+            {
+            string[]? v = Array.[|Empty|]<string>();
+            }
             }
             """,
             FixedCode = """
@@ -308,10 +308,10 @@ public class UseCollectionExpressionForEmptyTests
 
             class C
             {
-                void M()
-                {
-                    string[]? v = [];
-                }
+            void M()
+            {
+            string[]? v = [];
+            }
             }
             """,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -328,10 +328,10 @@ public class UseCollectionExpressionForEmptyTests
 
             class C
             {
-                void M()
-                {
-                    var v = (int[])Array.[|Empty|]<int>();
-                }
+            void M()
+            {
+            var v = (int[])Array.[|Empty|]<int>();
+            }
             }
             """,
             FixedCode = """
@@ -339,10 +339,10 @@ public class UseCollectionExpressionForEmptyTests
 
             class C
             {
-                void M()
-                {
-                    var v = (int[])[];
-                }
+            void M()
+            {
+            var v = (int[])[];
+            }
             }
             """,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -360,10 +360,10 @@ public class UseCollectionExpressionForEmptyTests
 
             class C
             {
-                void M()
-                {
-                    var v = (X)Array.Empty<int>();
-                }
+            void M()
+            {
+            var v = (X)Array.Empty<int>();
+            }
             }
             """,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -381,10 +381,10 @@ public class UseCollectionExpressionForEmptyTests
 
             class C
             {
-                void M()
-                {
-                    int[] v = /*goo*/ Array.[|Empty|]<int>() /*bar*/;
-                }
+            void M()
+            {
+            int[] v = /*goo*/ Array.[|Empty|]<int>() /*bar*/;
+            }
             }
             """,
             FixedCode = """
@@ -393,10 +393,10 @@ public class UseCollectionExpressionForEmptyTests
 
             class C
             {
-                void M()
-                {
-                    int[] v = /*goo*/ [] /*bar*/;
-                }
+            void M()
+            {
+            int[] v = /*goo*/ [] /*bar*/;
+            }
             }
             """,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -413,15 +413,15 @@ public class UseCollectionExpressionForEmptyTests
 
             class C
             {
-                void M()
-                {
-                    X x = X.Empty<int>();
-                }
+            void M()
+            {
+            X x = X.Empty<int>();
+            }
             }
 
             class X
             {
-                public static X Empty<T>() => default;
+            public static X Empty<T>() => default;
             }
             """,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -440,21 +440,21 @@ public class UseCollectionExpressionForEmptyTests
 
             class C
             {
-                void M()
-                {
-                    MyList<int> x = MyList<int>.[|Empty|];
-                }
+            void M()
+            {
+            MyList<int> x = MyList<int>.[|Empty|];
+            }
             }
 
             class MyList<T> : IEnumerable<T>
             {
-                public static MyList<T> Empty { get; }
+            public static MyList<T> Empty { get; }
 
-                public void Add(T value) { }
+            public void Add(T value) { }
 
-                public IEnumerator<T> GetEnumerator() => default;
-            
-                IEnumerator IEnumerable.GetEnumerator() => default;
+            public IEnumerator<T> GetEnumerator() => default;
+
+            IEnumerator IEnumerable.GetEnumerator() => default;
             }
             """,
             FixedCode = """
@@ -464,21 +464,21 @@ public class UseCollectionExpressionForEmptyTests
 
             class C
             {
-                void M()
-                {
-                    MyList<int> x = [];
-                }
+            void M()
+            {
+            MyList<int> x = [];
+            }
             }
 
             class MyList<T> : IEnumerable<T>
             {
-                public static MyList<T> Empty { get; }
+            public static MyList<T> Empty { get; }
 
-                public void Add(T value) { }
+            public void Add(T value) { }
 
-                public IEnumerator<T> GetEnumerator() => default;
+            public IEnumerator<T> GetEnumerator() => default;
 
-                IEnumerator IEnumerable.GetEnumerator() => default;
+            IEnumerator IEnumerable.GetEnumerator() => default;
             }
             """,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -493,64 +493,64 @@ public class UseCollectionExpressionForEmptyTests
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
             TestCode =
                 """
-            using System;
-            using System.Collections;
-            using System.Collections.Generic;
-            using System.Runtime.CompilerServices;
+                using System;
+                using System.Collections;
+                using System.Collections.Generic;
+                using System.Runtime.CompilerServices;
 
-            class C
-            {
+                class C
+                {
                 void M()
                 {
-                    MyList<int> x = MyList<int>.[|Empty|];
+                MyList<int> x = MyList<int>.[|Empty|];
                 }
-            }
+                }
 
-            [CollectionBuilder(typeof(MyList), "Create")]
-            class MyList<T> : IEnumerable<T>
-            {
+                [CollectionBuilder(typeof(MyList), "Create")]
+                class MyList<T> : IEnumerable<T>
+                {
                 public static MyList<T> Empty { get; }
 
                 public IEnumerator<T> GetEnumerator() => default;
-            
-                IEnumerator IEnumerable.GetEnumerator() => default;
-            }
 
-            static class MyList
-            {
+                IEnumerator IEnumerable.GetEnumerator() => default;
+                }
+
+                static class MyList
+                {
                 public static MyList<T> Create<T>(ReadOnlySpan<T> values) => default;
-            }
-            """ + CollectionBuilderAttributeDefinition,
+                }
+                """ + CollectionBuilderAttributeDefinition,
             FixedCode =
                 """
-            using System;
-            using System.Collections;
-            using System.Collections.Generic;
-            using System.Runtime.CompilerServices;
+                using System;
+                using System.Collections;
+                using System.Collections.Generic;
+                using System.Runtime.CompilerServices;
 
-            class C
-            {
+                class C
+                {
                 void M()
                 {
-                    MyList<int> x = [];
+                MyList<int> x = [];
                 }
-            }
-            
-            [CollectionBuilder(typeof(MyList), "Create")]
-            class MyList<T> : IEnumerable<T>
-            {
+                }
+
+                [CollectionBuilder(typeof(MyList), "Create")]
+                class MyList<T> : IEnumerable<T>
+                {
                 public static MyList<T> Empty { get; }
-            
+
                 public IEnumerator<T> GetEnumerator() => default;
-            
+
                 IEnumerator IEnumerable.GetEnumerator() => default;
-            }
-            
-            static class MyList
-            {
+                }
+
+                static class MyList
+                {
                 public static MyList<T> Create<T>(ReadOnlySpan<T> values) => default;
-            }
-            """ + CollectionBuilderAttributeDefinition,
+                }
+                """ + CollectionBuilderAttributeDefinition,
             LanguageVersion = LanguageVersion.CSharp12,
         }.RunAsync();
     }
@@ -563,64 +563,64 @@ public class UseCollectionExpressionForEmptyTests
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
             TestCode =
                 """
-            using System;
-            using System.Collections;
-            using System.Collections.Generic;
-            using System.Runtime.CompilerServices;
+                using System;
+                using System.Collections;
+                using System.Collections.Generic;
+                using System.Runtime.CompilerServices;
 
-            class C
-            {
+                class C
+                {
                 void M()
                 {
-                    MyList<int> x = MyList<int>.[|Empty|];
+                MyList<int> x = MyList<int>.[|Empty|];
                 }
-            }
+                }
 
-            [CollectionBuilder(typeof(MyList), "Create")]
-            class MyList<T> : IEnumerable<T>
-            {
+                [CollectionBuilder(typeof(MyList), "Create")]
+                class MyList<T> : IEnumerable<T>
+                {
                 public static MyList<T> Empty { get; }
 
                 public IEnumerator<T> GetEnumerator() => default;
-            
-                IEnumerator IEnumerable.GetEnumerator() => default;
-            }
 
-            static class MyList
-            {
+                IEnumerator IEnumerable.GetEnumerator() => default;
+                }
+
+                static class MyList
+                {
                 public static MyList<T> Create<T>(ReadOnlySpan<T> values, int x) => default;
-            }
-            """ + CollectionBuilderAttributeDefinition,
+                }
+                """ + CollectionBuilderAttributeDefinition,
             FixedCode =
                 """
-            using System;
-            using System.Collections;
-            using System.Collections.Generic;
-            using System.Runtime.CompilerServices;
+                using System;
+                using System.Collections;
+                using System.Collections.Generic;
+                using System.Runtime.CompilerServices;
 
-            class C
-            {
+                class C
+                {
                 void M()
                 {
-                    MyList<int> x = {|CS9187:[]|};
+                MyList<int> x = {|CS9187:[]|};
                 }
-            }
-            
-            [CollectionBuilder(typeof(MyList), "Create")]
-            class MyList<T> : IEnumerable<T>
-            {
+                }
+
+                [CollectionBuilder(typeof(MyList), "Create")]
+                class MyList<T> : IEnumerable<T>
+                {
                 public static MyList<T> Empty { get; }
-            
+
                 public IEnumerator<T> GetEnumerator() => default;
-            
+
                 IEnumerator IEnumerable.GetEnumerator() => default;
-            }
-            
-            static class MyList
-            {
+                }
+
+                static class MyList
+                {
                 public static MyList<T> Create<T>(ReadOnlySpan<T> values, int x) => default;
-            }
-            """ + CollectionBuilderAttributeDefinition,
+                }
+                """ + CollectionBuilderAttributeDefinition,
             LanguageVersion = LanguageVersion.CSharp12,
         }.RunAsync();
     }
@@ -636,10 +636,10 @@ public class UseCollectionExpressionForEmptyTests
 
             class C
             {
-                void M()
-                {
-                    ReadOnlySpan<int> v = ReadOnlySpan<int>.[|Empty|];
-                }
+            void M()
+            {
+            ReadOnlySpan<int> v = ReadOnlySpan<int>.[|Empty|];
+            }
             }
             """,
             FixedCode = """
@@ -647,10 +647,10 @@ public class UseCollectionExpressionForEmptyTests
 
             class C
             {
-                void M()
-                {
-                    ReadOnlySpan<int> v = [];
-                }
+            void M()
+            {
+            ReadOnlySpan<int> v = [];
+            }
             }
             """,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -668,10 +668,10 @@ public class UseCollectionExpressionForEmptyTests
 
             class C
             {
-                void M()
-                {
-                    ImmutableArray<int> v = ImmutableArray<int>.Empty;
-                }
+            void M()
+            {
+            ImmutableArray<int> v = ImmutableArray<int>.Empty;
+            }
             }
             """,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -690,10 +690,10 @@ public class UseCollectionExpressionForEmptyTests
 
             class C
             {
-                void M()
-                {
-                    ImmutableArray<int> v = ImmutableArray<int>.[|Empty|];
-                }
+            void M()
+            {
+            ImmutableArray<int> v = ImmutableArray<int>.[|Empty|];
+            }
             }
             """,
             FixedCode = """
@@ -702,10 +702,10 @@ public class UseCollectionExpressionForEmptyTests
 
             class C
             {
-                void M()
-                {
-                    ImmutableArray<int> v = [];
-                }
+            void M()
+            {
+            ImmutableArray<int> v = [];
+            }
             }
             """,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -719,17 +719,17 @@ public class UseCollectionExpressionForEmptyTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
-                using System.Collections.Immutable;
+            using System;
+            using System.Collections.Immutable;
 
-                class C
-                {
-                    void M()
-                    {
-                        ImmutableList<int> v = ImmutableList<int>.Empty;
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            ImmutableList<int> v = ImmutableList<int>.Empty;
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -741,29 +741,29 @@ public class UseCollectionExpressionForEmptyTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
-                using System.Collections.Immutable;
+            using System;
+            using System.Collections.Immutable;
 
-                class C
-                {
-                    void M()
-                    {
-                        ImmutableList<int> v = ImmutableList<int>.[|Empty|];
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            ImmutableList<int> v = ImmutableList<int>.[|Empty|];
+            }
+            }
+            """,
             FixedCode = """
-                using System;
-                using System.Collections.Immutable;
+            using System;
+            using System.Collections.Immutable;
 
-                class C
-                {
-                    void M()
-                    {
-                        ImmutableList<int> v = [];
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            ImmutableList<int> v = [];
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -775,28 +775,28 @@ public class UseCollectionExpressionForEmptyTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
-                using System.Collections;
-                using System.Collections.Generic;
+            using System;
+            using System.Collections;
+            using System.Collections.Generic;
 
-                class C
-                {
-                    void M()
-                    {
-                        V<int> v = V<int>.Empty;
-                    }
-                }
+            class C
+            {
+            void M()
+            {
+            V<int> v = V<int>.Empty;
+            }
+            }
 
-                struct V<T> : IEnumerable<T>
-                {
-                    public static readonly V<T> Empty = default;
+            struct V<T> : IEnumerable<T>
+            {
+            public static readonly V<T> Empty = default;
 
-                    public IEnumerator<T> GetEnumerator() => default;
-                    IEnumerator IEnumerable.GetEnumerator() => default;
+            public IEnumerator<T> GetEnumerator() => default;
+            IEnumerator IEnumerable.GetEnumerator() => default;
 
-                    public void Add(T x) { }
-                }
-                """,
+            public void Add(T x) { }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -808,30 +808,30 @@ public class UseCollectionExpressionForEmptyTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
-                using System.Collections;
-                using System.Collections.Generic;
+            using System;
+            using System.Collections;
+            using System.Collections.Generic;
 
-                class C
-                {
-                    void M()
-                    {
-                        V<int> v = V<int>.Empty;
-                    }
-                }
+            class C
+            {
+            void M()
+            {
+            V<int> v = V<int>.Empty;
+            }
+            }
 
-                struct V<T> : IEnumerable<T>
-                {
-                    public static readonly V<T> Empty = default;
+            struct V<T> : IEnumerable<T>
+            {
+            public static readonly V<T> Empty = default;
 
-                    public V(int val) { }
+            public V(int val) { }
 
-                    public IEnumerator<T> GetEnumerator() => default;
-                    IEnumerator IEnumerable.GetEnumerator() => default;
+            public IEnumerator<T> GetEnumerator() => default;
+            IEnumerator IEnumerable.GetEnumerator() => default;
 
-                    public void Add(T x) { }
-                }
-                """,
+            public void Add(T x) { }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -842,18 +842,18 @@ public class UseCollectionExpressionForEmptyTests
     {
         var collectionDefinition = """
 
-            struct V<T> : IEnumerable<T>
-            {
-                public static readonly V<T> Empty = default;
-            
-                public V(int capacity) { }
-            
-                public IEnumerator<T> GetEnumerator() => default;
-                IEnumerator IEnumerable.GetEnumerator() => default;
-            
-                public void Add(T x) { }
-            }
-            """;
+        struct V<T> : IEnumerable<T>
+        {
+        public static readonly V<T> Empty = default;
+
+        public V(int capacity) { }
+
+        public IEnumerator<T> GetEnumerator() => default;
+        IEnumerator IEnumerable.GetEnumerator() => default;
+
+        public void Add(T x) { }
+        }
+        """;
 
         await new VerifyCS.Test
         {
@@ -865,10 +865,10 @@ public class UseCollectionExpressionForEmptyTests
 
                 class C
                 {
-                    void M()
-                    {
-                        V<int> v = V<int>.[|Empty|];
-                    }
+                void M()
+                {
+                V<int> v = V<int>.[|Empty|];
+                }
                 }
                 """ + collectionDefinition,
             FixedCode =
@@ -879,10 +879,10 @@ public class UseCollectionExpressionForEmptyTests
 
                 class C
                 {
-                    void M()
-                    {
-                        V<int> v = [];
-                    }
+                void M()
+                {
+                V<int> v = [];
+                }
                 }
                 """ + collectionDefinition,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -895,18 +895,18 @@ public class UseCollectionExpressionForEmptyTests
     {
         var collectionDefinition = """
 
-            struct V<T> : IEnumerable<T>
-            {
-                public static readonly V<T> Empty = default;
-            
-                public V(string capacity) { }
-            
-                public IEnumerator<T> GetEnumerator() => default;
-                IEnumerator IEnumerable.GetEnumerator() => default;
-            
-                public void Add(T x) { }
-            }
-            """;
+        struct V<T> : IEnumerable<T>
+        {
+        public static readonly V<T> Empty = default;
+
+        public V(string capacity) { }
+
+        public IEnumerator<T> GetEnumerator() => default;
+        IEnumerator IEnumerable.GetEnumerator() => default;
+
+        public void Add(T x) { }
+        }
+        """;
 
         await new VerifyCS.Test
         {
@@ -918,10 +918,10 @@ public class UseCollectionExpressionForEmptyTests
 
                 class C
                 {
-                    void M()
-                    {
-                        V<int> v = V<int>.Empty;
-                    }
+                void M()
+                {
+                V<int> v = V<int>.Empty;
+                }
                 }
                 """ + collectionDefinition,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -934,19 +934,19 @@ public class UseCollectionExpressionForEmptyTests
     {
         var collectionDefinition = """
 
-            struct V<T> : IEnumerable<T>
-            {
-                public static readonly V<T> Empty = default;
-            
-                public V(string capacity) { }
-                public V() { }
-            
-                public IEnumerator<T> GetEnumerator() => default;
-                IEnumerator IEnumerable.GetEnumerator() => default;
-            
-                public void Add(T x) { }
-            }
-            """;
+        struct V<T> : IEnumerable<T>
+        {
+        public static readonly V<T> Empty = default;
+
+        public V(string capacity) { }
+        public V() { }
+
+        public IEnumerator<T> GetEnumerator() => default;
+        IEnumerator IEnumerable.GetEnumerator() => default;
+
+        public void Add(T x) { }
+        }
+        """;
 
         await new VerifyCS.Test
         {
@@ -958,10 +958,10 @@ public class UseCollectionExpressionForEmptyTests
 
                 class C
                 {
-                    void M()
-                    {
-                        V<int> v = V<int>.[|Empty|];
-                    }
+                void M()
+                {
+                V<int> v = V<int>.[|Empty|];
+                }
                 }
                 """ + collectionDefinition,
             FixedCode =
@@ -972,10 +972,10 @@ public class UseCollectionExpressionForEmptyTests
 
                 class C
                 {
-                    void M()
-                    {
-                        V<int> v = [];
-                    }
+                void M()
+                {
+                V<int> v = [];
+                }
                 }
                 """ + collectionDefinition,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -987,21 +987,21 @@ public class UseCollectionExpressionForEmptyTests
     public async Task ForValueTypeWithNoArgConstructorAndWithoutCollectionBuilderAttribute()
     {
         var collectionDefinition = """
-            
-            struct V<T> : IEnumerable<T>
-            {
-                public static readonly V<T> Empty = default;
-            
-                public V()
-                {
-                }
-            
-                public IEnumerator<T> GetEnumerator() => default;
-                IEnumerator IEnumerable.GetEnumerator() => default;
-            
-                public void Add(T x) { }
-            }
-            """;
+
+        struct V<T> : IEnumerable<T>
+        {
+        public static readonly V<T> Empty = default;
+
+        public V()
+        {
+        }
+
+        public IEnumerator<T> GetEnumerator() => default;
+        IEnumerator IEnumerable.GetEnumerator() => default;
+
+        public void Add(T x) { }
+        }
+        """;
 
         await new VerifyCS.Test
         {
@@ -1013,10 +1013,10 @@ public class UseCollectionExpressionForEmptyTests
 
                 class C
                 {
-                    void M()
-                    {
-                        V<int> v = V<int>.[|Empty|];
-                    }
+                void M()
+                {
+                V<int> v = V<int>.[|Empty|];
+                }
                 }
                 """ + collectionDefinition,
             FixedCode =
@@ -1027,10 +1027,10 @@ public class UseCollectionExpressionForEmptyTests
 
                 class C
                 {
-                    void M()
-                    {
-                        V<int> v = [];
-                    }
+                void M()
+                {
+                V<int> v = [];
+                }
                 }
                 """ + collectionDefinition,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -1042,23 +1042,23 @@ public class UseCollectionExpressionForEmptyTests
     public async Task ForValueTypeWithoutNoArgConstructorAndWithCollectionBuilderAttribute()
     {
         var collectionDefinition = """
-            
-            [System.Runtime.CompilerServices.CollectionBuilder(typeof(V), "Create")]
-            struct V<T> : IEnumerable<T>
-            {
-                public static readonly V<T> Empty = default;
-            
-                public IEnumerator<T> GetEnumerator() => default;
-                IEnumerator IEnumerable.GetEnumerator() => default;
-            
-                public void Add(T x) { }
-            }
-            
-            static class V
-            {
-                public static V<T> Create<T>(ReadOnlySpan<T> values) => default;
-            }
-            """;
+
+        [System.Runtime.CompilerServices.CollectionBuilder(typeof(V), "Create")]
+        struct V<T> : IEnumerable<T>
+        {
+        public static readonly V<T> Empty = default;
+
+        public IEnumerator<T> GetEnumerator() => default;
+        IEnumerator IEnumerable.GetEnumerator() => default;
+
+        public void Add(T x) { }
+        }
+
+        static class V
+        {
+        public static V<T> Create<T>(ReadOnlySpan<T> values) => default;
+        }
+        """;
 
         await new VerifyCS.Test
         {
@@ -1070,10 +1070,10 @@ public class UseCollectionExpressionForEmptyTests
 
                 class C
                 {
-                    void M()
-                    {
-                        V<int> v = V<int>.[|Empty|];
-                    }
+                void M()
+                {
+                V<int> v = V<int>.[|Empty|];
+                }
                 }
                 """ + collectionDefinition,
             FixedCode =
@@ -1084,10 +1084,10 @@ public class UseCollectionExpressionForEmptyTests
 
                 class C
                 {
-                    void M()
-                    {
-                        V<int> v = [];
-                    }
+                void M()
+                {
+                V<int> v = [];
+                }
                 }
                 """ + collectionDefinition,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -1099,19 +1099,19 @@ public class UseCollectionExpressionForEmptyTests
     public async Task NotForAbstractClassWithoutCollectionBuilderAttribute()
     {
         var collectionDefinition = """
-            
-            abstract class V<T> : IEnumerable<T>
-            {
-                public static readonly V<T> Empty = null;
 
-                public V() { }
-            
-                public IEnumerator<T> GetEnumerator() => default;
-                IEnumerator IEnumerable.GetEnumerator() => default;
-            
-                public void Add(T x) { }
-            }
-            """;
+        abstract class V<T> : IEnumerable<T>
+        {
+        public static readonly V<T> Empty = null;
+
+        public V() { }
+
+        public IEnumerator<T> GetEnumerator() => default;
+        IEnumerator IEnumerable.GetEnumerator() => default;
+
+        public void Add(T x) { }
+        }
+        """;
 
         await new VerifyCS.Test
         {
@@ -1123,10 +1123,10 @@ public class UseCollectionExpressionForEmptyTests
 
                 class C
                 {
-                    void M()
-                    {
-                        V<int> v = V<int>.Empty;
-                    }
+                void M()
+                {
+                V<int> v = V<int>.Empty;
+                }
                 }
                 """ + collectionDefinition,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -1139,24 +1139,24 @@ public class UseCollectionExpressionForEmptyTests
     {
         var collectionDefinition = """
 
-            [System.Runtime.CompilerServices.CollectionBuilder(typeof(V), "Create")]
-            abstract class V<T> : IEnumerable<T>
-            {
-                public static readonly V<T> Empty = null;
+        [System.Runtime.CompilerServices.CollectionBuilder(typeof(V), "Create")]
+        abstract class V<T> : IEnumerable<T>
+        {
+        public static readonly V<T> Empty = null;
 
-                public V() { }
-            
-                public IEnumerator<T> GetEnumerator() => default;
-                IEnumerator IEnumerable.GetEnumerator() => default;
-            
-                public void Add(T x) { }
-            }
-            
-            static class V
-            {
-                public static V<T> Create<T>(ReadOnlySpan<T> values) => default;
-            }
-            """;
+        public V() { }
+
+        public IEnumerator<T> GetEnumerator() => default;
+        IEnumerator IEnumerable.GetEnumerator() => default;
+
+        public void Add(T x) { }
+        }
+
+        static class V
+        {
+        public static V<T> Create<T>(ReadOnlySpan<T> values) => default;
+        }
+        """;
 
         await new VerifyCS.Test
         {
@@ -1168,10 +1168,10 @@ public class UseCollectionExpressionForEmptyTests
 
                 class C
                 {
-                    void M()
-                    {
-                        V<int> v = V<int>.[|Empty|];
-                    }
+                void M()
+                {
+                V<int> v = V<int>.[|Empty|];
+                }
                 }
                 """ + collectionDefinition,
             FixedCode =
@@ -1182,10 +1182,10 @@ public class UseCollectionExpressionForEmptyTests
 
                 class C
                 {
-                    void M()
-                    {
-                        V<int> v = [];
-                    }
+                void M()
+                {
+                V<int> v = [];
+                }
                 }
                 """ + collectionDefinition,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -1199,19 +1199,19 @@ public class UseCollectionExpressionForEmptyTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
-                using System.Linq;
-                using System.Collections.Generic;
-                
-                class C
-                {
-                    void M()
-                    {
-                        // Handled by the fluent chain analyzer.
-                        List<int> list = Array.Empty<int>().ToList();
-                    }
-                }
-                """,
+            using System;
+            using System.Linq;
+            using System.Collections.Generic;
+
+            class C
+            {
+            void M()
+            {
+            // Handled by the fluent chain analyzer.
+            List<int> list = Array.Empty<int>().ToList();
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -1245,17 +1245,17 @@ public class UseCollectionExpressionForEmptyTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                int[] v = Array.[|Empty|]<int>();
+            int[] v = Array.[|Empty|]<int>();
 
-                """.ReplaceLineEndings(endOfLine),
+            """.ReplaceLineEndings(endOfLine),
             FixedCode = """
-                using System;
+            using System;
 
-                int[] v = [];
+            int[] v = [];
 
-                """.ReplaceLineEndings(endOfLine),
+            """.ReplaceLineEndings(endOfLine),
             LanguageVersion = LanguageVersion.CSharp12,
             TestState = { OutputKind = OutputKind.ConsoleApplication, },
         }.RunAsync();

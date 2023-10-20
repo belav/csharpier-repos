@@ -26,45 +26,45 @@ namespace System.Text.Json.Tests
             MaxEscapedTokenSize / MaxExpansionFactorWhileEscaping; // 166_666_666 bytes
 
         private const string ExpectedIndentedCommentJsonOfArray = """
-/*Comment at start of doc*/
-/*Multiple comment line*/
-[
-  /*Comment as first array item*/
-  /*Multiple comment line*/
-  []
-  /*Comment in the middle of array*/,
-  {}
-  /*Comment as the last array item*/
-]
-/*Comment at end of doc*/
-""";
+        /*Comment at start of doc*/
+        /*Multiple comment line*/
+        [
+        /*Comment as first array item*/
+        /*Multiple comment line*/
+        []
+        /*Comment in the middle of array*/,
+        {}
+        /*Comment as the last array item*/
+        ]
+        /*Comment at end of doc*/
+        """;
 
         private const string ExpectedNonIndentedCommentJsonOfArray =
             "/*Comment at start of doc*//*Multiple comment line*/[/*Comment as first array item*//*Multiple comment line*/[]/*Comment in the middle of array*/,{}/*Comment as the last array item*/]/*Comment at end of doc*/";
 
         private const string ExpectedIndentedCommentJsonOfObject = """
-/*Comment at start of doc*/
-/*Multiple comment line*/
-{
-  /*Comment before first object property*/
-  /*Multiple comment line*/
-  "property1": 
-  /*Comment of string property value*/"stringValue",
-  "property2": 
-  /*Comment of object property value*/
-  {}
-  /*Comment in the middle of object*/,
-  "property3": 
-  /*Comment of array property value*/
-  []
-  /*Comment after the last property*/
-}
-/*Comment at end of doc*/
-""";
+        /*Comment at start of doc*/
+        /*Multiple comment line*/
+        {
+        /*Comment before first object property*/
+        /*Multiple comment line*/
+        "property1":
+        /*Comment of string property value*/"stringValue",
+        "property2":
+        /*Comment of object property value*/
+        {}
+        /*Comment in the middle of object*/,
+        "property3":
+        /*Comment of array property value*/
+        []
+        /*Comment after the last property*/
+        }
+        /*Comment at end of doc*/
+        """;
 
         private const string ExpectedNonIndentedCommentJsonOfObject = """
-/*Comment at start of doc*//*Multiple comment line*/{/*Comment before first object property*//*Multiple comment line*/"property1":/*Comment of string property value*/"stringValue","property2":/*Comment of object property value*/{}/*Comment in the middle of object*/,"property3":/*Comment of array property value*/[]/*Comment after the last property*/}/*Comment at end of doc*/
-""";
+        /*Comment at start of doc*//*Multiple comment line*/{/*Comment before first object property*//*Multiple comment line*/"property1":/*Comment of string property value*/"stringValue","property2":/*Comment of object property value*/{}/*Comment in the middle of object*/,"property3":/*Comment of array property value*/[]/*Comment after the last property*/}/*Comment at end of doc*/
+        """;
 
         [Theory]
         [InlineData(true, true)]

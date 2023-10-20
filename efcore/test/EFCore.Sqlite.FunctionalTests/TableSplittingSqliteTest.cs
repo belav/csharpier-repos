@@ -16,16 +16,16 @@ public class TableSplittingSqliteTest : TableSplittingTestBase
 
         AssertSql(
             """
-UPDATE "Vehicles" AS "v"
-SET "SeatingCapacity" = 1
-""",
+            UPDATE "Vehicles" AS "v"
+            SET "SeatingCapacity" = 1
+            """,
             //
             """
-SELECT NOT EXISTS (
-    SELECT 1
-    FROM "Vehicles" AS "v"
-    WHERE "v"."SeatingCapacity" <> 1)
-"""
+            SELECT NOT EXISTS (
+            SELECT 1
+            FROM "Vehicles" AS "v"
+            WHERE "v"."SeatingCapacity" <> 1)
+            """
         );
     }
 

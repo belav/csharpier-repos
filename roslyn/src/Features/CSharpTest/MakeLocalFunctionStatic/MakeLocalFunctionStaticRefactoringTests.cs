@@ -35,15 +35,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                 """
                 class C
                 {
-                    int N(int x)
-                    {
-                        return AddLocal();
+                int N(int x)
+                {
+                return AddLocal();
 
-                        int [||]AddLocal()
-                        {
-                            return x + 1;
-                        }
-                    }  
+                int [||]AddLocal()
+                {
+                return x + 1;
+                }
+                }
                 }
                 """,
                 parameters: new TestParameters(parseOptions: CSharp72ParseOptions)
@@ -57,15 +57,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                 """
                 class C
                 {
-                    int N(int x)
-                    {
-                        return AddLocal(x);
+                int N(int x)
+                {
+                return AddLocal(x);
 
-                        int [||]AddLocal(int x)
-                        {
-                            return x + 1;
-                        }
-                    }  
+                int [||]AddLocal(int x)
+                {
+                return x + 1;
+                }
+                }
                 }
                 """,
                 parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
@@ -79,15 +79,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                 """
                 class C
                 {
-                    int N(int x)
-                    {
-                        return AddLocal(x);
+                int N(int x)
+                {
+                return AddLocal(x);
 
-                        static int [||]AddLocal(int x)
-                        {
-                            return x + 1;
-                        }
-                    }  
+                static int [||]AddLocal(int x)
+                {
+                return x + 1;
+                }
+                }
                 }
                 """,
                 parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
@@ -101,15 +101,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                 """
                 class C
                 {
-                    int N(int x)
-                    {
-                        return AddLocal();
+                int N(int x)
+                {
+                return AddLocal();
 
-                        static int [||]AddLocal()
-                        {
-                            return x + 1;
-                        }
-                    }  
+                static int [||]AddLocal()
+                {
+                return x + 1;
+                }
+                }
                 }
                 """,
                 parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
@@ -123,33 +123,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                 """
                 class C
                 {
-                    int x;
+                int x;
 
-                    int N()
-                    {
-                        return AddLocal();
+                int N()
+                {
+                return AddLocal();
 
-                        int [||]AddLocal()
-                        {
-                            return this.x + 1;
-                        }
-                    }  
+                int [||]AddLocal()
+                {
+                return this.x + 1;
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    int x;
+                int x;
 
-                    int N()
-                    {
-                        return AddLocal(this);
+                int N()
+                {
+                return AddLocal(this);
 
-                        static int AddLocal(C @this)
-                        {
-                            return @this.x + 1;
-                        }
-                    }  
+                static int AddLocal(C @this)
+                {
+                return @this.x + 1;
+                }
+                }
                 }
                 """,
                 parseOptions: CSharp8ParseOptions
@@ -163,33 +163,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                 """
                 class C
                 {
-                    int x;
+                int x;
 
-                    int N()
-                    {
-                        return AddLocal();
+                int N()
+                {
+                return AddLocal();
 
-                        int [||]AddLocal()
-                        {
-                            return x + 1;
-                        }
-                    }  
+                int [||]AddLocal()
+                {
+                return x + 1;
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    int x;
+                int x;
 
-                    int N()
-                    {
-                        return AddLocal(this);
+                int N()
+                {
+                return AddLocal(this);
 
-                        static int [||]AddLocal(C @this)
-                        {
-                            return @this.x + 1;
-                        }
-                    }  
+                static int [||]AddLocal(C @this)
+                {
+                return @this.x + 1;
+                }
+                }
                 }
                 """,
                 parseOptions: CSharp8ParseOptions
@@ -203,33 +203,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                 """
                 class C
                 {
-                    int x;
+                int x;
 
-                    int N()
-                    {
-                        return AddLocal(0);
+                int N()
+                {
+                return AddLocal(0);
 
-                        int [||]AddLocal(int y)
-                        {
-                            return x + y;
-                        }
-                    }  
+                int [||]AddLocal(int y)
+                {
+                return x + y;
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    int x;
+                int x;
 
-                    int N()
-                    {
-                        return AddLocal(this, 0);
+                int N()
+                {
+                return AddLocal(this, 0);
 
-                        static int [||]AddLocal(C @this, int y)
-                        {
-                            return @this.x + y;
-                        }
-                    }  
+                static int [||]AddLocal(C @this, int y)
+                {
+                return @this.x + y;
+                }
+                }
                 }
                 """,
                 parseOptions: CSharp8ParseOptions
@@ -243,33 +243,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                 """
                 class C
                 {
-                    int x;
+                int x;
 
-                    int N()
-                    {
-                        return AddLocal(null);
+                int N()
+                {
+                return AddLocal(null);
 
-                        int [||]AddLocal(C c)
-                        {
-                            return x + c.x;
-                        }
-                    }  
+                int [||]AddLocal(C c)
+                {
+                return x + c.x;
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    int x;
+                int x;
 
-                    int N()
-                    {
-                        return AddLocal(this, null);
+                int N()
+                {
+                return AddLocal(this, null);
 
-                        static int AddLocal(C @this, C c)
-                        {
-                            return @this.x + c.x;
-                        }
-                    }  
+                static int AddLocal(C @this, C c)
+                {
+                return @this.x + c.x;
+                }
+                }
                 }
                 """,
                 parseOptions: CSharp8ParseOptions
@@ -283,35 +283,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                 """
                 class C
                 {
-                    int x;
+                int x;
 
-                    int N()
-                    {
-                        int y;
-                        return AddLocal(this);
+                int N()
+                {
+                int y;
+                return AddLocal(this);
 
-                        int [||]AddLocal(C c)
-                        {
-                            return c.x + y;
-                        }
-                    }  
+                int [||]AddLocal(C c)
+                {
+                return c.x + y;
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    int x;
+                int x;
 
-                    int N()
-                    {
-                        int y;
-                        return AddLocal(this, y);
+                int N()
+                {
+                int y;
+                return AddLocal(this, y);
 
-                        static int [||]AddLocal(C c, int y)
-                        {
-                            return c.x + y;
-                        }
-                    }  
+                static int [||]AddLocal(C c, int y)
+                {
+                return c.x + y;
+                }
+                }
                 }
                 """,
                 parseOptions: CSharp8ParseOptions
@@ -325,29 +325,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                 """
                 class C
                 {
-                    int N(int x)
-                    {
-                        return AddLocal();
+                int N(int x)
+                {
+                return AddLocal();
 
-                        int [||]AddLocal()
-                        {
-                            return x + 1;
-                        }
-                    }  
+                int [||]AddLocal()
+                {
+                return x + 1;
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    int N(int x)
-                    {
-                        return AddLocal(x);
+                int N(int x)
+                {
+                return AddLocal(x);
 
-                        static int AddLocal(int x)
-                        {
-                            return x + 1;
-                        }
-                    }  
+                static int AddLocal(int x)
+                {
+                return x + 1;
+                }
+                }
                 }
                 """,
                 parseOptions: CSharp8ParseOptions
@@ -361,31 +361,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                 """
                 class C
                 {
-                    int N(int x)
-                    {
-                        int y = 10;
-                        return AddLocal();
+                int N(int x)
+                {
+                int y = 10;
+                return AddLocal();
 
-                        int[||] AddLocal()
-                        {
-                            return x + y;
-                        }
-                    }
+                int[||] AddLocal()
+                {
+                return x + y;
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    int N(int x)
-                    {
-                        int y = 10;
-                        return AddLocal(x, y);
+                int N(int x)
+                {
+                int y = 10;
+                return AddLocal(x, y);
 
-                        static int AddLocal(int x, int y)
-                        {
-                            return x + y;
-                        }
-                    }
+                static int AddLocal(int x, int y)
+                {
+                return x + y;
+                }
+                }
                 }
                 """,
                 parseOptions: CSharp8ParseOptions
@@ -399,31 +399,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                 """
                 class C
                 {
-                    int N(int x)
-                    {
-                        int y = 10;
-                        return AddLocal() + AddLocal();
+                int N(int x)
+                {
+                int y = 10;
+                return AddLocal() + AddLocal();
 
-                        int[||] AddLocal()
-                        {
-                            return x + y;
-                        }
-                    }
+                int[||] AddLocal()
+                {
+                return x + y;
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    int N(int x)
-                    {
-                        int y = 10;
-                        return AddLocal(x, y) + AddLocal(x, y);
+                int N(int x)
+                {
+                int y = 10;
+                return AddLocal(x, y) + AddLocal(x, y);
 
-                        static int AddLocal(int x, int y)
-                        {
-                            return x + y;
-                        }
-                    }
+                static int AddLocal(int x, int y)
+                {
+                return x + y;
+                }
+                }
                 }
                 """,
                 parseOptions: CSharp8ParseOptions
@@ -437,33 +437,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                 """
                 class C
                 {
-                    int N(int x)
-                    {
-                        int y = 10;
-                        var m = AddLocal(1, 2);
-                        return AddLocal(m, m);
+                int N(int x)
+                {
+                int y = 10;
+                var m = AddLocal(1, 2);
+                return AddLocal(m, m);
 
-                        int[||] AddLocal(int a, int b)
-                        {
-                            return a + b + x + y;
-                        }
-                    }
+                int[||] AddLocal(int a, int b)
+                {
+                return a + b + x + y;
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    int N(int x)
-                    {
-                        int y = 10;
-                        var m = AddLocal(1, 2, x, y);
-                        return AddLocal(m, m, x, y);
+                int N(int x)
+                {
+                int y = 10;
+                var m = AddLocal(1, 2, x, y);
+                return AddLocal(m, m, x, y);
 
-                        static int AddLocal(int a, int b, int x, int y)
-                        {
-                            return a + b + x + y;
-                        }
-                    }
+                static int AddLocal(int a, int b, int x, int y)
+                {
+                return a + b + x + y;
+                }
+                }
                 }
                 """,
                 parseOptions: CSharp8ParseOptions
@@ -477,33 +477,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                 """
                 class C
                 {
-                    int N(int x)
-                    {
-                        int y = 10;
-                        var m = AddLocal(1, 2);
-                        return AddLocal(m, m);
+                int N(int x)
+                {
+                int y = 10;
+                var m = AddLocal(1, 2);
+                return AddLocal(m, m);
 
-                        int[||] AddLocal(int a, int b)
-                        {
-                            return AddLocal(a, b) + x + y;
-                        }
-                    }
+                int[||] AddLocal(int a, int b)
+                {
+                return AddLocal(a, b) + x + y;
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    int N(int x)
-                    {
-                        int y = 10;
-                        var m = AddLocal(1, 2, x, y);
-                        return AddLocal(m, m, x, y);
+                int N(int x)
+                {
+                int y = 10;
+                var m = AddLocal(1, 2, x, y);
+                return AddLocal(m, m, x, y);
 
-                        static int AddLocal(int a, int b, int x, int y)
-                        {
-                            return AddLocal(a, b, x, y) + x + y;
-                        }
-                    }
+                static int AddLocal(int a, int b, int x, int y)
+                {
+                return AddLocal(a, b, x, y) + x + y;
+                }
+                }
                 }
                 """,
                 parseOptions: CSharp8ParseOptions
@@ -517,31 +517,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                 """
                 class C
                 {
-                    int N(int x)
-                    {
-                        int y = 10;
-                        return AddLocal(AddLocal(1, 2), AddLocal(3, 4));
+                int N(int x)
+                {
+                int y = 10;
+                return AddLocal(AddLocal(1, 2), AddLocal(3, 4));
 
-                        int[||] AddLocal(int a, int b)
-                        {
-                            return AddLocal(a, b) + x + y;
-                        }
-                    }
+                int[||] AddLocal(int a, int b)
+                {
+                return AddLocal(a, b) + x + y;
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    int N(int x)
-                    {
-                        int y = 10;
-                        return AddLocal(AddLocal(1, 2, x, y), AddLocal(3, 4, x, y), x, y);
+                int N(int x)
+                {
+                int y = 10;
+                return AddLocal(AddLocal(1, 2, x, y), AddLocal(3, 4, x, y), x, y);
 
-                        static int AddLocal(int a, int b, int x, int y)
-                        {
-                            return AddLocal(a, b, x, y) + x + y;
-                        }
-                    }
+                static int AddLocal(int a, int b, int x, int y)
+                {
+                return AddLocal(a, b, x, y) + x + y;
+                }
+                }
                 }
                 """,
                 parseOptions: CSharp8ParseOptions
@@ -555,33 +555,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                 """
                 class C
                 {
-                    int N(int x)
-                    {
-                        int y = 10;
-                        var m = AddLocal(1, b: 2);
-                        return AddLocal(b: m, a: m);
+                int N(int x)
+                {
+                int y = 10;
+                var m = AddLocal(1, b: 2);
+                return AddLocal(b: m, a: m);
 
-                        int[||] AddLocal(int a, int b)
-                        {
-                            return a + b + x + y;
-                        }
-                    }
+                int[||] AddLocal(int a, int b)
+                {
+                return a + b + x + y;
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    int N(int x)
-                    {
-                        int y = 10;
-                        var m = AddLocal(1, b: 2, x: x, y: y);
-                        return AddLocal(b: m, a: m, x: x, y: y);
+                int N(int x)
+                {
+                int y = 10;
+                var m = AddLocal(1, b: 2, x: x, y: y);
+                return AddLocal(b: m, a: m, x: x, y: y);
 
-                        static int AddLocal(int a, int b, int x, int y)
-                        {
-                            return a + b + x + y;
-                        }
-                    }
+                static int AddLocal(int a, int b, int x, int y)
+                {
+                return a + b + x + y;
+                }
+                }
                 }
                 """,
                 parseOptions: CSharp8ParseOptions
@@ -595,33 +595,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                 """
                 class C
                 {
-                    int N(int x)
-                    {
-                        string y = ";
-                        var m = AddLocal(1);
-                        return AddLocal(b: m);
+                int N(int x)
+                {
+                string y = ";
+                var m = AddLocal(1);
+                return AddLocal(b: m);
 
-                        int[||] AddLocal(int a = 0, int b = 0)
-                        {
-                            return a + b + x + y.Length;
-                        }
-                    }
+                int[||] AddLocal(int a = 0, int b = 0)
+                {
+                return a + b + x + y.Length;
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    int N(int x)
-                    {
-                        string y = ";
-                        var m = AddLocal(1, x: x, y: y);
-                        return AddLocal(b: m, x: x, y: y);
+                int N(int x)
+                {
+                string y = ";
+                var m = AddLocal(1, x: x, y: y);
+                return AddLocal(b: m, x: x, y: y);
 
-                        static int AddLocal(int a = 0, int b = 0, int x = 0, string y = null)
-                        {
-                            return a + b + x + y.Length;
-                        }
-                    }
+                static int AddLocal(int a = 0, int b = 0, int x = 0, string y = null)
+                {
+                return a + b + x + y.Length;
+                }
+                }
                 }
                 """,
                 parseOptions: CSharp8ParseOptions
@@ -635,29 +635,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                 """
                 class C
                 {
-                    void N(int x)
-                    {
-                        Func<int> del = AddLocal;
+                void N(int x)
+                {
+                Func<int> del = AddLocal;
 
-                        int [||]AddLocal()
-                        {
-                            return x + 1;
-                        }
-                    }  
+                int [||]AddLocal()
+                {
+                return x + 1;
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void N(int x)
-                    {
-                        Func<int> del = AddLocal;
+                void N(int x)
+                {
+                Func<int> del = AddLocal;
 
-                        {|Warning:static int AddLocal(int x)
-                        {
-                            return x + 1;
-                        }|}
-                    }  
+                {|Warning:static int AddLocal(int x)
+                {
+                return x + 1;
+                }|}
+                }
                 }
                 """,
                 parseOptions: CSharp8ParseOptions
@@ -671,31 +671,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                 """
                 class C
                 {
-                    int N(int x)
-                    {
-                        int Static = 0;
-                        return AddLocal();
+                int N(int x)
+                {
+                int Static = 0;
+                return AddLocal();
 
-                        int [||]AddLocal()
-                        {
-                            return Static + 1;
-                        }
-                    }  
+                int [||]AddLocal()
+                {
+                return Static + 1;
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    int N(int x)
-                    {
-                        int Static = 0;
-                        return AddLocal(Static);
+                int N(int x)
+                {
+                int Static = 0;
+                return AddLocal(Static);
 
-                        static int AddLocal(int @static)
-                        {
-                            return @static + 1;
-                        }
-                    }  
+                static int AddLocal(int @static)
+                {
+                return @static + 1;
+                }
+                }
                 }
                 """,
                 parseOptions: CSharp8ParseOptions
@@ -709,20 +709,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                 """
                 class C
                 {
-                    int N(int x)
-                    {
-                        return AddLocal();
+                int N(int x)
+                {
+                return AddLocal();
 
-                        int [||]AddLocal()
-                        {
-                            B();
-                            return x + 1;
-                        }
+                int [||]AddLocal()
+                {
+                B();
+                return x + 1;
+                }
 
-                        void B()
-                        {
-                        }
-                    }  
+                void B()
+                {
+                }
+                }
                 }
                 """,
                 parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
@@ -736,39 +736,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                 """
                 class C
                 {
-                    int N(int x)
-                    {
-                        return AddLocal();
+                int N(int x)
+                {
+                return AddLocal();
 
-                        int [||]AddLocal()
-                        {
-                            B();
-                            return x + 1;
-                        }
+                int [||]AddLocal()
+                {
+                B();
+                return x + 1;
+                }
 
-                        static void B()
-                        {
-                        }
-                    }  
+                static void B()
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    int N(int x)
-                    {
-                        return AddLocal(x);
+                int N(int x)
+                {
+                return AddLocal(x);
 
-                        static int [||]AddLocal(int x)
-                        {
-                            B();
-                            return x + 1;
-                        }
+                static int [||]AddLocal(int x)
+                {
+                B();
+                return x + 1;
+                }
 
-                        static void B()
-                        {
-                        }
-                    }  
+                static void B()
+                {
+                }
+                }
                 }
                 """,
                 parseOptions: CSharp8ParseOptions
@@ -785,7 +785,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
 
                 int[||] AddLocal()
                 {
-                    return y;
+                return y;
                 }
                 """,
                 """
@@ -794,7 +794,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
 
                 static int AddLocal(int y)
                 {
-                    return y;
+                return y;
                 }
                 """,
                 parseOptions: CSharp8ParseOptions

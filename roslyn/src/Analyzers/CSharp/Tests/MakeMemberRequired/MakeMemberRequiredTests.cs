@@ -126,12 +126,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
         public async Task SimpleSetPropertyMissingRequiredAttribute()
         {
             var code = """
-                #nullable enable
-                class MyClass
-                {
-                    public string {|CS8618:MyProperty|} { get; set; }
-                }
-                """;
+            #nullable enable
+            class MyClass
+            {
+            public string {|CS8618:MyProperty|} { get; set; }
+            }
+            """;
 
             await new VerifyCS.Test
             {
@@ -148,19 +148,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
             await new VerifyCS.Test
             {
                 TestCode = """
-                    #nullable enable
-                    class MyClass
-                    {
-                        public string {|CS8618:MyProperty|} { get; set; }
-                    }
-                    """,
+                #nullable enable
+                class MyClass
+                {
+                public string {|CS8618:MyProperty|} { get; set; }
+                }
+                """,
                 FixedCode = """
-                    #nullable enable
-                    class MyClass
-                    {
-                        public required string MyProperty { get; set; }
-                    }
-                    """,
+                #nullable enable
+                class MyClass
+                {
+                public required string MyProperty { get; set; }
+                }
+                """,
                 LanguageVersion = LanguageVersion.CSharp11,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net70
             }.RunAsync();
@@ -172,19 +172,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
             await new VerifyCS.Test
             {
                 TestCode = """
-                    #nullable enable
-                    class MyClass
-                    {
-                        public string {|CS8618:MyProperty|} { get; init; }
-                    }
-                    """,
+                #nullable enable
+                class MyClass
+                {
+                public string {|CS8618:MyProperty|} { get; init; }
+                }
+                """,
                 FixedCode = """
-                    #nullable enable
-                    class MyClass
-                    {
-                        public required string MyProperty { get; init; }
-                    }
-                    """,
+                #nullable enable
+                class MyClass
+                {
+                public required string MyProperty { get; init; }
+                }
+                """,
                 LanguageVersion = LanguageVersion.CSharp11,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net70
             }.RunAsync();
@@ -194,13 +194,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
         public async Task NotOnGetOnlyProperty()
         {
             var code = """
-                #nullable enable
-                
-                class MyClass
-                {
-                    public string {|CS8618:MyProperty|} { get; }
-                }
-                """;
+            #nullable enable
+
+            class MyClass
+            {
+            public string {|CS8618:MyProperty|} { get; }
+            }
+            """;
 
             await new VerifyCS.Test
             {
@@ -384,21 +384,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
             await new VerifyCS.Test
             {
                 TestCode = """
-                    #nullable enable
-                
-                    class MyClass
-                    {
-                        public string {|CS8618:_myField|};
-                    }
-                    """,
+                #nullable enable
+
+                class MyClass
+                {
+                public string {|CS8618:_myField|};
+                }
+                """,
                 FixedCode = """
-                    #nullable enable
-                
-                    class MyClass
-                    {
-                        public required string _myField;
-                    }
-                    """,
+                #nullable enable
+
+                class MyClass
+                {
+                public required string _myField;
+                }
+                """,
                 LanguageVersion = LanguageVersion.CSharp11,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net70
             }.RunAsync();
@@ -471,13 +471,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
         public async Task NotForLowerVersionOfCSharp()
         {
             var code = """
-                #nullable enable
-                
-                class MyClass
-                {
-                    public string {|CS8618:MyProperty|} { get; set; }
-                }
-                """;
+            #nullable enable
+
+            class MyClass
+            {
+            public string {|CS8618:MyProperty|} { get; set; }
+            }
+            """;
 
             await new VerifyCS.Test
             {
@@ -492,14 +492,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
         public async Task NotOnConstructorDeclaration()
         {
             var code = """
-                #nullable enable
-                
-                class MyClass
-                {
-                    public string MyProperty { get; set; }
-                    public {|CS8618:MyClass|}() { }
-                }
-                """;
+            #nullable enable
+
+            class MyClass
+            {
+            public string MyProperty { get; set; }
+            public {|CS8618:MyClass|}() { }
+            }
+            """;
 
             await new VerifyCS.Test
             {
@@ -514,13 +514,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
         public async Task NotOnEventDeclaration()
         {
             var code = """
-                #nullable enable
-                
-                class MyClass
-                {
-                    public event System.EventHandler {|CS8618:MyEvent|};
-                }
-                """;
+            #nullable enable
+
+            class MyClass
+            {
+            public event System.EventHandler {|CS8618:MyEvent|};
+            }
+            """;
 
             await new VerifyCS.Test
             {
@@ -537,21 +537,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
             await new VerifyCS.Test
             {
                 TestCode = """
-                    #nullable enable
-                    class MyClass
-                    {
-                        public string {|CS8618:MyProperty|} { get; set; }
-                        public string {|CS8618:MyProperty1|} { get; set; }
-                    }
-                    """,
+                #nullable enable
+                class MyClass
+                {
+                public string {|CS8618:MyProperty|} { get; set; }
+                public string {|CS8618:MyProperty1|} { get; set; }
+                }
+                """,
                 FixedCode = """
-                    #nullable enable
-                    class MyClass
-                    {
-                        public required string MyProperty { get; set; }
-                        public required string MyProperty1 { get; set; }
-                    }
-                    """,
+                #nullable enable
+                class MyClass
+                {
+                public required string MyProperty { get; set; }
+                public required string MyProperty1 { get; set; }
+                }
+                """,
                 LanguageVersion = LanguageVersion.CSharp11,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net70
             }.RunAsync();
@@ -563,21 +563,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
             await new VerifyCS.Test
             {
                 TestCode = """
-                    #nullable enable
-                    class MyClass
-                    {
-                        public string {|CS8618:_myField|};
-                        public string {|CS8618:_myField1|};
-                    }
-                    """,
+                #nullable enable
+                class MyClass
+                {
+                public string {|CS8618:_myField|};
+                public string {|CS8618:_myField1|};
+                }
+                """,
                 FixedCode = """
-                    #nullable enable
-                    class MyClass
-                    {
-                        public required string _myField;
-                        public required string _myField1;
-                    }
-                    """,
+                #nullable enable
+                class MyClass
+                {
+                public required string _myField;
+                public required string _myField1;
+                }
+                """,
                 LanguageVersion = LanguageVersion.CSharp11,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net70
             }.RunAsync();
@@ -589,19 +589,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
             await new VerifyCS.Test
             {
                 TestCode = """
-                    #nullable enable
-                    class MyClass
-                    {
-                        public string {|CS8618:_myField|}, {|CS8618:_myField1|};
-                    }
-                    """,
+                #nullable enable
+                class MyClass
+                {
+                public string {|CS8618:_myField|}, {|CS8618:_myField1|};
+                }
+                """,
                 FixedCode = """
-                    #nullable enable
-                    class MyClass
-                    {
-                        public required string _myField, _myField1;
-                    }
-                    """,
+                #nullable enable
+                class MyClass
+                {
+                public required string _myField, _myField1;
+                }
+                """,
                 LanguageVersion = LanguageVersion.CSharp11,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net70
             }.RunAsync();
@@ -613,19 +613,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
             await new VerifyCS.Test
             {
                 TestCode = """
-                    #nullable enable
-                    class MyClass
-                    {
-                        public string {|CS8618:_myField|}, {|CS8618:_myField1|}, {|CS8618:_myField2|};
-                    }
-                    """,
+                #nullable enable
+                class MyClass
+                {
+                public string {|CS8618:_myField|}, {|CS8618:_myField1|}, {|CS8618:_myField2|};
+                }
+                """,
                 FixedCode = """
-                    #nullable enable
-                    class MyClass
-                    {
-                        public required string _myField, _myField1, _myField2;
-                    }
-                    """,
+                #nullable enable
+                class MyClass
+                {
+                public required string _myField, _myField1, _myField2;
+                }
+                """,
                 LanguageVersion = LanguageVersion.CSharp11,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net70
             }.RunAsync();
@@ -637,21 +637,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
             await new VerifyCS.Test
             {
                 TestCode = """
-                    #nullable enable
-                    class MyClass
-                    {
-                        public string {|CS8618:_myField|}, {|CS8618:_myField1|};
-                        public string {|CS8618:_myField2|}, {|CS8618:_myField3|};
-                    }
-                    """,
+                #nullable enable
+                class MyClass
+                {
+                public string {|CS8618:_myField|}, {|CS8618:_myField1|};
+                public string {|CS8618:_myField2|}, {|CS8618:_myField3|};
+                }
+                """,
                 FixedCode = """
-                    #nullable enable
-                    class MyClass
-                    {
-                        public required string _myField, _myField1;
-                        public required string _myField2, _myField3;
-                    }
-                    """,
+                #nullable enable
+                class MyClass
+                {
+                public required string _myField, _myField1;
+                public required string _myField2, _myField3;
+                }
+                """,
                 LanguageVersion = LanguageVersion.CSharp11,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net70
             }.RunAsync();
@@ -663,19 +663,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
             await new VerifyCS.Test
             {
                 TestCode = """
-                    #nullable enable
-                    class MyClass
-                    {
-                        public string {|CS8618:_myField|}, _myField1 = "";
-                    }
-                    """,
+                #nullable enable
+                class MyClass
+                {
+                public string {|CS8618:_myField|}, _myField1 = "";
+                }
+                """,
                 FixedCode = """
-                    #nullable enable
-                    class MyClass
-                    {
-                        public required string _myField, _myField1 = "";
-                    }
-                    """,
+                #nullable enable
+                class MyClass
+                {
+                public required string _myField, _myField1 = "";
+                }
+                """,
                 LanguageVersion = LanguageVersion.CSharp11,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net70
             }.RunAsync();

@@ -102,8 +102,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                var x = "\{0}$$\{1}\{2}"
-                """
+                    var x = "\{0}$$\{1}\{2}"
+                    """
                 )
             );
         }
@@ -114,8 +114,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                var x = "\{0}\{1}$$\{2}"
-                """
+                    var x = "\{0}\{1}$$\{2}"
+                    """
                 )
             );
         }
@@ -126,8 +126,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                var x = "\{0}\{1}\{2}$$"
-                """
+                    var x = "\{0}\{1}\{2}$$"
+                    """
                 )
             );
         }
@@ -153,14 +153,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(async $$
-                    }
+                void Goo()
+                {
+                Bar(async $$
+                }
 
-                    void Bar(Func<int, string> f)
-                    {
-                    }
+                void Bar(Func<int, string> f)
+                {
+                }
                 }
                 """
             );
@@ -174,8 +174,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 using System;
 
                 class C {
-                    void M() {
-                        var v = Console.WriteLine $$
+                void M() {
+                var v = Console.WriteLine $$
                 """
             );
         }
@@ -188,8 +188,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 using System;
 
                 class C {
-                    void M() {
-                        Action a = delegate { } $$
+                void M() {
+                Action a = delegate { } $$
                 """
             );
         }
@@ -202,8 +202,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 using System;
 
                 class C {
-                    void M() {
-                        Action b = (() => 0) $$
+                void M() {
+                Action b = (() => 0) $$
                 """
             );
         }
@@ -216,8 +216,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 using System;
 
                 class C {
-                    void M() {
-                        Action b = () => {} $$
+                void M() {
+                Action b = () => {} $$
                 """
             );
         }
@@ -229,10 +229,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                    void M()
-                    {
-                        var x = 1$$
-                    }
+                void M()
+                {
+                var x = 1$$
+                }
                 }
                 """
             );
@@ -245,10 +245,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                    void M()
-                    {
-                        var x = 1.$$
-                    }
+                void M()
+                {
+                var x = 1.$$
+                }
                 }
                 """
             );
@@ -261,10 +261,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                    void M()
-                    {
-                        var x = 1. $$
-                    }
+                void M()
+                {
+                var x = 1. $$
+                }
                 }
                 """
             );
@@ -282,13 +282,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
 
                 class C
                 {
-                    void M(object o)
-                    {
-                        switch (o)
-                        {
-                            case A $$
-                        }
-                    }
+                void M(object o)
+                {
+                switch (o)
+                {
+                case A $$
+                }
+                }
                 }
                 """
             );
@@ -301,21 +301,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 namespace N
                 {
-                    class A
-                    {
+                class A
+                {
 
-                    }
+                }
                 }
 
                 class C
                 {
-                    void M(object o)
-                    {
-                        switch (o)
-                        {
-                            case N.A $$
-                        }
-                    }
+                void M(object o)
+                {
+                switch (o)
+                {
+                case N.A $$
+                }
+                }
                 }
                 """
             );

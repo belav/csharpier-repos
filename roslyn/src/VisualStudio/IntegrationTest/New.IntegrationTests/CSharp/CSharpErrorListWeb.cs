@@ -24,11 +24,11 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         public async Task ClosedRazorFile()
         {
             var source = """
-@page
-@{
-    var x = "Hello"
-}
-""";
+            @page
+            @{
+            var x = "Hello"
+            }
+            """;
             await TestServices
                 .SolutionExplorer
                 .OpenFileAsync(ProjectName, @"Pages\\Index.razor", HangMitigatingCancellationToken);

@@ -13,8 +13,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
     public class NotKeywordRecommenderTests : KeywordRecommenderTests
     {
         private const string InitializeObjectE = """
-            object e = new object();
-            """;
+        object e = new object();
+        """;
 
         [Fact]
         public async Task TestAfterIsKeyword()
@@ -79,15 +79,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 namespace N
                 {
-                    class C
-                    {
-                        const int P = 1;
+                class C
+                {
+                const int P = 1;
 
-                        void M()
-                        {
-                            if (e is $$ N.C.P or 2) { }
-                        }
-                    }
+                void M()
+                {
+                if (e is $$ N.C.P or 2) { }
+                }
+                }
                 }
                 """
             );
@@ -100,15 +100,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 namespace N
                 {
-                    class C
-                    {
-                        const int P = 1;
+                class C
+                {
+                const int P = 1;
 
-                        void M()
-                        {
-                            if (e is $$ System.Collections.Generic.List<int> or 2) { }
-                        }
-                    }
+                void M()
+                {
+                if (e is $$ System.Collections.Generic.List<int> or 2) { }
+                }
+                }
                 }
                 """
             );
@@ -137,10 +137,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 AddInsideMethod(
                     InitializeObjectE
                         + """
-                var result = e switch
-                {
-                    $$
-                """
+                        var result = e switch
+                        {
+                        $$
+                        """
                 )
             );
         }
@@ -152,10 +152,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 AddInsideMethod(
                     InitializeObjectE
                         + """
-                switch (e)
-                {
-                    case $$
-                """
+                        switch (e)
+                        {
+                        case $$
+                        """
                 )
             );
         }
@@ -167,11 +167,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 AddInsideMethod(
                     InitializeObjectE
                         + """
-                var result = e switch
-                {
-                    1 => 2,
-                    $$
-                """
+                        var result = e switch
+                        {
+                        1 => 2,
+                        $$
+                        """
                 )
             );
         }
@@ -183,11 +183,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 AddInsideMethod(
                     InitializeObjectE
                         + """
-                switch (e)
-                {
-                    case 1:
-                    case $$
-                """
+                        switch (e)
+                        {
+                        case 1:
+                        case $$
+                        """
                 )
             );
         }
@@ -199,10 +199,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 AddInsideMethod(
                     InitializeObjectE
                         + """
-                var result = e switch
-                {
-                    ($$
-                """
+                        var result = e switch
+                        {
+                        ($$
+                        """
                 )
             );
         }
@@ -214,11 +214,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 AddInsideMethod(
                     InitializeObjectE
                         + """
-                var result = e switch
-                {
-                    1 => 2,
-                    ($$
-                """
+                        var result = e switch
+                        {
+                        1 => 2,
+                        ($$
+                        """
                 )
             );
         }
@@ -230,10 +230,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 AddInsideMethod(
                     InitializeObjectE
                         + """
-                var result = e switch
-                {
-                    1 and ($$
-                """
+                        var result = e switch
+                        {
+                        1 and ($$
+                        """
                 )
             );
         }
@@ -245,10 +245,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 AddInsideMethod(
                     InitializeObjectE
                         + """
-                switch (e)
-                {
-                    case ($$
-                """
+                        switch (e)
+                        {
+                        case ($$
+                        """
                 )
             );
         }
@@ -260,10 +260,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 AddInsideMethod(
                     InitializeObjectE
                         + """
-                switch (e)
-                {
-                    case ($$ 1)
-                """
+                        switch (e)
+                        {
+                        case ($$ 1)
+                        """
                 )
             );
         }
@@ -275,11 +275,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                    public int P { get; }
+                public int P { get; }
 
-                    void M(C test)
-                    {
-                        if (test is { P: $$
+                void M(C test)
+                {
+                if (test is { P: $$
                 """
             );
         }
@@ -291,12 +291,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                    public C P { get; }
-                    public int P2 { get; }
+                public C P { get; }
+                public int P2 { get; }
 
-                    void M(C test)
-                    {
-                        if (test is { P.P2: $$
+                void M(C test)
+                {
+                if (test is { P.P2: $$
                 """
             );
         }
@@ -308,11 +308,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                    public int P { get; }
+                public int P { get; }
 
-                    void M(C test)
-                    {
-                        if (test is { P: ($$
+                void M(C test)
+                {
+                if (test is { P: ($$
                 """
             );
         }
@@ -324,11 +324,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                    public int P { get; }
+                public int P { get; }
 
-                    void M(C test)
-                    {
-                        if (test is { P: (1 or $$
+                void M(C test)
+                {
+                if (test is { P: (1 or $$
                 """
             );
         }

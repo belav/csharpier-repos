@@ -13962,40 +13962,40 @@ class A<T> : System.Attribute
         public void AvoidCascadingDiagnosticsOnMissingAttribute()
         {
             var source = """
-[assembly: /*<bind>*/Inexistent(SomeProperty = 1, F = null, G = 0 switch { _ => 1 })/*</bind>*/]
-""";
+            [assembly: /*<bind>*/Inexistent(SomeProperty = 1, F = null, G = 0 switch { _ => 1 })/*</bind>*/]
+            """;
 
             string expectedOperationTree = """
-IAttributeOperation (OperationKind.Attribute, Type: null, IsInvalid) (Syntax: 'Inexistent( ... { _ => 1 })')
-  IInvalidOperation (OperationKind.Invalid, Type: null, IsInvalid, IsImplicit) (Syntax: 'Inexistent( ... { _ => 1 })')
-    Children(3):
-        ISimpleAssignmentOperation (OperationKind.SimpleAssignment, Type: ?) (Syntax: 'SomeProperty = 1')
-          Left:
+            IAttributeOperation (OperationKind.Attribute, Type: null, IsInvalid) (Syntax: 'Inexistent( ... { _ => 1 })')
+            IInvalidOperation (OperationKind.Invalid, Type: null, IsInvalid, IsImplicit) (Syntax: 'Inexistent( ... { _ => 1 })')
+            Children(3):
+            ISimpleAssignmentOperation (OperationKind.SimpleAssignment, Type: ?) (Syntax: 'SomeProperty = 1')
+            Left:
             IInvalidOperation (OperationKind.Invalid, Type: ?) (Syntax: 'SomeProperty')
-              Children(0)
-          Right:
+            Children(0)
+            Right:
             ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
-        ISimpleAssignmentOperation (OperationKind.SimpleAssignment, Type: ?) (Syntax: 'F = null')
-          Left:
+            ISimpleAssignmentOperation (OperationKind.SimpleAssignment, Type: ?) (Syntax: 'F = null')
+            Left:
             IInvalidOperation (OperationKind.Invalid, Type: ?) (Syntax: 'F')
-              Children(0)
-          Right:
+            Children(0)
+            Right:
             ILiteralOperation (OperationKind.Literal, Type: null, Constant: null) (Syntax: 'null')
-        ISimpleAssignmentOperation (OperationKind.SimpleAssignment, Type: ?) (Syntax: 'G = 0 switch { _ => 1 }')
-          Left:
+            ISimpleAssignmentOperation (OperationKind.SimpleAssignment, Type: ?) (Syntax: 'G = 0 switch { _ => 1 }')
+            Left:
             IInvalidOperation (OperationKind.Invalid, Type: ?) (Syntax: 'G')
-              Children(0)
-          Right:
+            Children(0)
+            Right:
             ISwitchExpressionOperation (1 arms, IsExhaustive: True) (OperationKind.SwitchExpression, Type: System.Int32) (Syntax: '0 switch { _ => 1 }')
-              Value:
-                ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 0) (Syntax: '0')
-              Arms(1):
-                  ISwitchExpressionArmOperation (0 locals) (OperationKind.SwitchExpressionArm, Type: null) (Syntax: '_ => 1')
-                    Pattern:
-                      IDiscardPatternOperation (OperationKind.DiscardPattern, Type: null) (Syntax: '_') (InputType: System.Int32, NarrowedType: System.Int32)
-                    Value:
-                      ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
-""";
+            Value:
+            ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 0) (Syntax: '0')
+            Arms(1):
+            ISwitchExpressionArmOperation (0 locals) (OperationKind.SwitchExpressionArm, Type: null) (Syntax: '_ => 1')
+            Pattern:
+            IDiscardPatternOperation (OperationKind.DiscardPattern, Type: null) (Syntax: '_') (InputType: System.Int32, NarrowedType: System.Int32)
+            Value:
+            ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
+            """;
             var expectedDiagnostics = new[]
             {
                 // (1,22): error CS0246: The type or namespace name 'InexistentAttribute' could not be found (are you missing a using directive or an assembly reference?)

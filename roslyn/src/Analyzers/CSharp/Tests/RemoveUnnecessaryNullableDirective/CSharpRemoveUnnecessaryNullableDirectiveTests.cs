@@ -59,15 +59,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
                 [|#nullable disable|]
                 enum EnumName
                 {
-                    First,
-                    Second,
+                First,
+                Second,
                 }
                 """,
                 """
                 enum EnumName
                 {
-                    First,
-                    Second,
+                First,
+                Second,
                 }
                 """
             );
@@ -85,8 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
 
                 enum EnumName
                 {
-                    First,
-                    Second,
+                First,
+                Second,
                 }
                 """,
                 """
@@ -95,8 +95,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
 
                 enum EnumName
                 {
-                    First,
-                    Second,
+                First,
+                Second,
                 }
                 """
             );
@@ -114,9 +114,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
 
                 namespace X.Y
                 {
-                    class ProgramException : Exception
-                    {
-                    }
+                class ProgramException : Exception
+                {
+                }
                 }
                 """,
                 """
@@ -125,9 +125,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
 
                 namespace X.Y
                 {
-                    class ProgramException : Exception
-                    {
-                    }
+                class ProgramException : Exception
+                {
+                }
                 }
                 """
             );
@@ -143,18 +143,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
 
                 namespace X.Y
                 {
-                    class ProgramException : System.Exception
-                    {
-                    }
+                class ProgramException : System.Exception
+                {
+                }
                 }
                 """,
                 """
 
                 namespace X.Y
                 {
-                    class ProgramException : System.Exception
-                    {
-                    }
+                class ProgramException : System.Exception
+                {
+                }
                 }
                 """
             );
@@ -214,15 +214,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
         public async Task TestUnnecessaryDisableIgnoredWhenFollowedByConditionalDirective()
         {
             var code = """
-                #nullable enable
-                struct StructName
-                {
-                    string Field;
-                }
-                #nullable disable
-                #if false
-                #endif
-                """;
+            #nullable enable
+            struct StructName
+            {
+            string Field;
+            }
+            #nullable disable
+            #if false
+            #endif
+            """;
 
             await VerifyCodeFixAsync(NullableContextOptions.Disable, code, code);
         }

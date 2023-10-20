@@ -8003,18 +8003,18 @@ class C
             );
             var verifier = CompileAndVerify(source, expectedOutput: "22");
             var expectedIL = """
-{
-  // Code size       15 (0xf)
-  .maxstack  1
-  .locals init (int V_0) //t
-  IL_0000:  ldc.i4.2
-  IL_0001:  stloc.0
-  IL_0002:  ldloca.s   V_0
-  IL_0004:  call       "string int.ToString()"
-  IL_0009:  call       "void System.Console.Write(string)"
-  IL_000e:  ret
- }
-""";
+            {
+            // Code size       15 (0xf)
+            .maxstack  1
+            .locals init (int V_0) //t
+            IL_0000:  ldc.i4.2
+            IL_0001:  stloc.0
+            IL_0002:  ldloca.s   V_0
+            IL_0004:  call       "string int.ToString()"
+            IL_0009:  call       "void System.Console.Write(string)"
+            IL_000e:  ret
+            }
+            """;
             verifier.VerifyIL("C.M1", expectedIL);
             verifier.VerifyIL("C.M2", expectedIL);
         }
@@ -8065,13 +8065,13 @@ class C
             );
             var verifier = CompileAndVerify(comp, expectedOutput: "");
             var expectedIL = """
-{
-  // Code size        1 (0x1)
-  .maxstack  1
-  .locals init (int V_0) //t
-  IL_0000:  ret
-}
-""";
+            {
+            // Code size        1 (0x1)
+            .maxstack  1
+            .locals init (int V_0) //t
+            IL_0000:  ret
+            }
+            """;
             verifier.VerifyIL("C.M1", expectedIL);
             verifier.VerifyIL("C.M2", expectedIL);
         }

@@ -30,33 +30,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
                 """
                 struct [|MyStruct|]
                 {
-                    public readonly int Value;
+                public readonly int Value;
 
-                    public MyStruct(int value)
-                    {
-                        Value = value;
-                    }
+                public MyStruct(int value)
+                {
+                Value = value;
+                }
 
-                    public void Test()
-                    {
-                        this = new MyStruct(5);
-                    }
+                public void Test()
+                {
+                this = new MyStruct(5);
+                }
                 }
                 """,
                 """
                 struct MyStruct
                 {
-                    public int Value;
+                public int Value;
 
-                    public MyStruct(int value)
-                    {
-                        Value = value;
-                    }
+                public MyStruct(int value)
+                {
+                Value = value;
+                }
 
-                    public void Test()
-                    {
-                        this = new MyStruct(5);
-                    }
+                public void Test()
+                {
+                this = new MyStruct(5);
+                }
                 }
                 """
             );
@@ -69,43 +69,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
                 """
                 struct [|MyStruct|]
                 {
-                    public readonly int Value;
+                public readonly int Value;
 
-                    public MyStruct(int value)
-                    {
-                        Value = value;
-                    }
+                public MyStruct(int value)
+                {
+                Value = value;
+                }
 
-                    public void Test()
-                    {
-                        this = new MyStruct(5);
-                    }
+                public void Test()
+                {
+                this = new MyStruct(5);
+                }
 
-                    public void Test2()
-                    {
-                        this = new MyStruct(10);
-                    }
+                public void Test2()
+                {
+                this = new MyStruct(10);
+                }
                 }
                 """,
                 """
                 struct MyStruct
                 {
-                    public int Value;
+                public int Value;
 
-                    public MyStruct(int value)
-                    {
-                        Value = value;
-                    }
+                public MyStruct(int value)
+                {
+                Value = value;
+                }
 
-                    public void Test()
-                    {
-                        this = new MyStruct(5);
-                    }
+                public void Test()
+                {
+                this = new MyStruct(5);
+                }
 
-                    public void Test2()
-                    {
-                        this = new MyStruct(10);
-                    }
+                public void Test2()
+                {
+                this = new MyStruct(10);
+                }
                 }
                 """
             );
@@ -115,21 +115,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
         public async Task SingleNonReadonlyField_ThisAssignmentInMethod()
         {
             var code = """
-                struct MyStruct
-                {
-                    public int Value;
+            struct MyStruct
+            {
+            public int Value;
 
-                    public MyStruct(int value)
-                    {
-                        Value = value;
-                    }
+            public MyStruct(int value)
+            {
+            Value = value;
+            }
 
-                    public void Test()
-                    {
-                        this = new MyStruct(5);
-                    }
-                }
-                """;
+            public void Test()
+            {
+            this = new MyStruct(5);
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -141,41 +141,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
                 """
                 struct [|MyStruct|]
                 {
-                    public readonly int First;
-                    public readonly int Second;
-                    public int Third;
+                public readonly int First;
+                public readonly int Second;
+                public int Third;
 
-                    public MyStruct(int first, int second, int third)
-                    {
-                        First = first;
-                        Second = second;
-                        Third = third;
-                    }
+                public MyStruct(int first, int second, int third)
+                {
+                First = first;
+                Second = second;
+                Third = third;
+                }
 
-                    public void Test()
-                    {
-                        this = new MyStruct(5, 3, 1);
-                    }
+                public void Test()
+                {
+                this = new MyStruct(5, 3, 1);
+                }
                 }
                 """,
                 """
                 struct MyStruct
                 {
-                    public int First;
-                    public int Second;
-                    public int Third;
+                public int First;
+                public int Second;
+                public int Third;
 
-                    public MyStruct(int first, int second, int third)
-                    {
-                        First = first;
-                        Second = second;
-                        Third = third;
-                    }
+                public MyStruct(int first, int second, int third)
+                {
+                First = first;
+                Second = second;
+                Third = third;
+                }
 
-                    public void Test()
-                    {
-                        this = new MyStruct(5, 3, 1);
-                    }
+                public void Test()
+                {
+                this = new MyStruct(5, 3, 1);
+                }
                 }
                 """
             );
@@ -185,21 +185,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
         public async Task SingleReadonlyField_ThisAssignmentInCtor()
         {
             var code = """
-                struct MyStruct
-                {
-                    public readonly int Value;
+            struct MyStruct
+            {
+            public readonly int Value;
 
-                    public MyStruct(int value)
-                    {
-                        this = new MyStruct(value, 0);
-                    }
+            public MyStruct(int value)
+            {
+            this = new MyStruct(value, 0);
+            }
 
-                    public MyStruct(int first, int second)
-                    {
-                        Value = first;
-                    }
-                }
-                """;
+            public MyStruct(int first, int second)
+            {
+            Value = first;
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -208,16 +208,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
         public async Task SingleReadonlyField_NoThisAssignment()
         {
             var code = """
-                struct MyStruct
-                {
-                    public readonly int Value;
+            struct MyStruct
+            {
+            public readonly int Value;
 
-                    public MyStruct(int value)
-                    {
-                        Value = value;
-                    }
-                }
-                """;
+            public MyStruct(int value)
+            {
+            Value = value;
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -229,33 +229,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
                 """
                 struct [|MyStruct|]
                 {
-                    public readonly int Value;
+                public readonly int Value;
 
-                    public MyStruct(int value)
-                    {
-                        Value = value;
-                    }
+                public MyStruct(int value)
+                {
+                Value = value;
+                }
 
-                    public void Test()
-                    {
-                        this = new MyStruct(5);
-                    }
+                public void Test()
+                {
+                this = new MyStruct(5);
+                }
                 }
                 """,
                 """
                 struct MyStruct
                 {
-                    public int Value;
+                public int Value;
 
-                    public MyStruct(int value)
-                    {
-                        Value = value;
-                    }
+                public MyStruct(int value)
+                {
+                Value = value;
+                }
 
-                    public void Test()
-                    {
-                        this = new MyStruct(5);
-                    }
+                public void Test()
+                {
+                this = new MyStruct(5);
+                }
                 }
                 """
             );
@@ -265,22 +265,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
         public async Task SingleReadonlyField_InClass()
         {
             var code = """
-                class MyClass
-                {
-                    public readonly int Value;
+            class MyClass
+            {
+            public readonly int Value;
 
-                    public MyClass(int value)
-                    {
-                        Value = value;
-                    }
+            public MyClass(int value)
+            {
+            Value = value;
+            }
 
-                    public void Test()
-                    {
-                        // error CS1604: Cannot assign to 'this' because it is read-only
-                        {|CS1604:this|} = new MyClass(5);
-                    }
-                }
-                """;
+            public void Test()
+            {
+            // error CS1604: Cannot assign to 'this' because it is read-only
+            {|CS1604:this|} = new MyClass(5);
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -289,14 +289,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
         public async Task StructWithoutField()
         {
             var code = """
-                struct MyStruct
-                {
-                    public void Test()
-                    {
-                        this = new MyStruct();
-                    }
-                }
-                """;
+            struct MyStruct
+            {
+            public void Test()
+            {
+            this = new MyStruct();
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -305,21 +305,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
         public async Task SingleProperty_ThisAssignmentInMethod()
         {
             var code = """
-                struct MyStruct
-                {
-                    public int Value { get; set; }
+            struct MyStruct
+            {
+            public int Value { get; set; }
 
-                    public MyStruct(int value)
-                    {
-                        Value = value;
-                    }
+            public MyStruct(int value)
+            {
+            Value = value;
+            }
 
-                    public void Test()
-                    {
-                        this = new MyStruct(5);
-                    }
-                }
-                """;
+            public void Test()
+            {
+            this = new MyStruct(5);
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -328,21 +328,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
         public async Task SingleGetterProperty_ThisAssignmentInMethod()
         {
             var code = """
-                struct MyStruct
-                {
-                    public int Value { get; }
+            struct MyStruct
+            {
+            public int Value { get; }
 
-                    public MyStruct(int value)
-                    {
-                        Value = value;
-                    }
+            public MyStruct(int value)
+            {
+            Value = value;
+            }
 
-                    public void Test()
-                    {
-                        this = new MyStruct(5);
-                    }
-                }
-                """;
+            public void Test()
+            {
+            this = new MyStruct(5);
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -354,63 +354,63 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
                 """
                 struct [|MyStruct|]
                 {
-                    public readonly int Value;
+                public readonly int Value;
 
-                    public MyStruct(int value)
-                    {
-                        Value = value;
-                    }
+                public MyStruct(int value)
+                {
+                Value = value;
+                }
 
-                    public void Test()
-                    {
-                        this = new MyStruct(5);
-                    }
+                public void Test()
+                {
+                this = new MyStruct(5);
+                }
                 }
 
                 struct [|MyStruct2|]
                 {
-                    public readonly int Value;
+                public readonly int Value;
 
-                    public MyStruct2(int value)
-                    {
-                        Value = value;
-                    }
+                public MyStruct2(int value)
+                {
+                Value = value;
+                }
 
-                    public void Test()
-                    {
-                        this = new MyStruct2(5);
-                    }
+                public void Test()
+                {
+                this = new MyStruct2(5);
+                }
                 }
                 """,
                 """
                 struct MyStruct
                 {
-                    public int Value;
+                public int Value;
 
-                    public MyStruct(int value)
-                    {
-                        Value = value;
-                    }
+                public MyStruct(int value)
+                {
+                Value = value;
+                }
 
-                    public void Test()
-                    {
-                        this = new MyStruct(5);
-                    }
+                public void Test()
+                {
+                this = new MyStruct(5);
+                }
                 }
 
                 struct MyStruct2
                 {
-                    public int Value;
+                public int Value;
 
-                    public MyStruct2(int value)
-                    {
-                        Value = value;
-                    }
+                public MyStruct2(int value)
+                {
+                Value = value;
+                }
 
-                    public void Test()
-                    {
-                        this = new MyStruct2(5);
-                    }
+                public void Test()
+                {
+                this = new MyStruct2(5);
+                }
                 }
                 """
             );
@@ -423,63 +423,63 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
                 """
                 struct MyStruct
                 {
-                    public int Value;
+                public int Value;
 
-                    public MyStruct(int value)
-                    {
-                        Value = value;
-                    }
+                public MyStruct(int value)
+                {
+                Value = value;
+                }
 
-                    public void Test()
-                    {
-                        this = new MyStruct(5);
-                    }
+                public void Test()
+                {
+                this = new MyStruct(5);
+                }
                 }
 
                 struct [|MyStruct2|]
                 {
-                    public readonly int Value;
+                public readonly int Value;
 
-                    public MyStruct2(int value)
-                    {
-                        Value = value;
-                    }
+                public MyStruct2(int value)
+                {
+                Value = value;
+                }
 
-                    public void Test()
-                    {
-                        this = new MyStruct2(5);
-                    }
+                public void Test()
+                {
+                this = new MyStruct2(5);
+                }
                 }
                 """,
                 """
                 struct MyStruct
                 {
-                    public int Value;
+                public int Value;
 
-                    public MyStruct(int value)
-                    {
-                        Value = value;
-                    }
+                public MyStruct(int value)
+                {
+                Value = value;
+                }
 
-                    public void Test()
-                    {
-                        this = new MyStruct(5);
-                    }
+                public void Test()
+                {
+                this = new MyStruct(5);
+                }
                 }
 
                 struct MyStruct2
                 {
-                    public int Value;
+                public int Value;
 
-                    public MyStruct2(int value)
-                    {
-                        Value = value;
-                    }
+                public MyStruct2(int value)
+                {
+                Value = value;
+                }
 
-                    public void Test()
-                    {
-                        this = new MyStruct2(5);
-                    }
+                public void Test()
+                {
+                this = new MyStruct2(5);
+                }
                 }
                 """
             );
@@ -492,63 +492,63 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
                 """
                 struct [|MyStruct|]
                 {
-                    public readonly int Value;
+                public readonly int Value;
 
-                    public MyStruct(int value)
-                    {
-                        Value = value;
-                    }
+                public MyStruct(int value)
+                {
+                Value = value;
+                }
 
-                    public void Test()
-                    {
-                        this = new MyStruct(5);
-                    }
+                public void Test()
+                {
+                this = new MyStruct(5);
+                }
 
-                    struct [|NestedStruct|]
-                    {
-                        public readonly int NestedValue;
+                struct [|NestedStruct|]
+                {
+                public readonly int NestedValue;
 
-                        public NestedStruct(int nestedValue)
-                        {
-                            NestedValue = nestedValue;
-                        }
+                public NestedStruct(int nestedValue)
+                {
+                NestedValue = nestedValue;
+                }
 
-                        public void Test()
-                        {
-                            this = new NestedStruct(5);
-                        }
-                    }
+                public void Test()
+                {
+                this = new NestedStruct(5);
+                }
+                }
                 }
                 """,
                 """
                 struct MyStruct
                 {
-                    public int Value;
+                public int Value;
 
-                    public MyStruct(int value)
-                    {
-                        Value = value;
-                    }
+                public MyStruct(int value)
+                {
+                Value = value;
+                }
 
-                    public void Test()
-                    {
-                        this = new MyStruct(5);
-                    }
+                public void Test()
+                {
+                this = new MyStruct(5);
+                }
 
-                    struct NestedStruct
-                    {
-                        public int NestedValue;
+                struct NestedStruct
+                {
+                public int NestedValue;
 
-                        public NestedStruct(int nestedValue)
-                        {
-                            NestedValue = nestedValue;
-                        }
+                public NestedStruct(int nestedValue)
+                {
+                NestedValue = nestedValue;
+                }
 
-                        public void Test()
-                        {
-                            this = new NestedStruct(5);
-                        }
-                    }
+                public void Test()
+                {
+                this = new NestedStruct(5);
+                }
+                }
                 }
                 """
             );
@@ -561,63 +561,63 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
                 """
                 struct [|MyStruct|]
                 {
-                    public readonly int Value;
+                public readonly int Value;
 
-                    public MyStruct(int value)
-                    {
-                        Value = value;
-                    }
+                public MyStruct(int value)
+                {
+                Value = value;
+                }
 
-                    public void Test()
-                    {
-                        this = new MyStruct(5);
-                    }
+                public void Test()
+                {
+                this = new MyStruct(5);
+                }
 
-                    struct [|NestedStruct|]
-                    {
-                        public readonly int NestedValue;
+                struct [|NestedStruct|]
+                {
+                public readonly int NestedValue;
 
-                        public NestedStruct(int nestedValue)
-                        {
-                            NestedValue = nestedValue;
-                        }
+                public NestedStruct(int nestedValue)
+                {
+                NestedValue = nestedValue;
+                }
 
-                        public void Test()
-                        {
-                            this = new NestedStruct(5);
-                        }
-                    }
+                public void Test()
+                {
+                this = new NestedStruct(5);
+                }
+                }
                 }
                 """,
                 """
                 struct MyStruct
                 {
-                    public int Value;
+                public int Value;
 
-                    public MyStruct(int value)
-                    {
-                        Value = value;
-                    }
+                public MyStruct(int value)
+                {
+                Value = value;
+                }
 
-                    public void Test()
-                    {
-                        this = new MyStruct(5);
-                    }
+                public void Test()
+                {
+                this = new MyStruct(5);
+                }
 
-                    struct NestedStruct
-                    {
-                        public int NestedValue;
+                struct NestedStruct
+                {
+                public int NestedValue;
 
-                        public NestedStruct(int nestedValue)
-                        {
-                            NestedValue = nestedValue;
-                        }
+                public NestedStruct(int nestedValue)
+                {
+                NestedValue = nestedValue;
+                }
 
-                        public void Test()
-                        {
-                            this = new NestedStruct(5);
-                        }
-                    }
+                public void Test()
+                {
+                this = new NestedStruct(5);
+                }
+                }
                 }
                 """
             );
@@ -630,47 +630,47 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
                 """
                 struct [|MyStruct|]
                 {
-                    public readonly int Value;
-                    public int TestValue;
+                public readonly int Value;
+                public int TestValue;
 
-                    public MyStruct(int value)
-                    {
-                        Value = value;
-                        TestValue = 100;
-                    }
+                public MyStruct(int value)
+                {
+                Value = value;
+                TestValue = 100;
+                }
 
-                    public void Test()
-                    {
-                        this = new MyStruct(5);
-                    }
+                public void Test()
+                {
+                this = new MyStruct(5);
+                }
 
-                    public void Test2()
-                    {
-                        TestValue = 0;
-                    }
+                public void Test2()
+                {
+                TestValue = 0;
+                }
                 }
                 """,
                 """
                 struct MyStruct
                 {
-                    public int Value;
-                    public int TestValue;
+                public int Value;
+                public int TestValue;
 
-                    public MyStruct(int value)
-                    {
-                        Value = value;
-                        TestValue = 100;
-                    }
+                public MyStruct(int value)
+                {
+                Value = value;
+                TestValue = 100;
+                }
 
-                    public void Test()
-                    {
-                        this = new MyStruct(5);
-                    }
+                public void Test()
+                {
+                this = new MyStruct(5);
+                }
 
-                    public void Test2()
-                    {
-                        TestValue = 0;
-                    }
+                public void Test2()
+                {
+                TestValue = 0;
+                }
                 }
                 """
             );
@@ -683,33 +683,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
                 """
                 struct [|MyStruct|]
                 {
-                    public readonly int Value;
+                public readonly int Value;
 
-                    public void Test()
-                    {
-                        this = new MyStruct(5);
-                    }
+                public void Test()
+                {
+                this = new MyStruct(5);
+                }
 
-                    public MyStruct(int value)
-                    {
-                        Value = value;
-                    }
+                public MyStruct(int value)
+                {
+                Value = value;
+                }
                 }
                 """,
                 """
                 struct MyStruct
                 {
-                    public int Value;
+                public int Value;
 
-                    public void Test()
-                    {
-                        this = new MyStruct(5);
-                    }
+                public void Test()
+                {
+                this = new MyStruct(5);
+                }
 
-                    public MyStruct(int value)
-                    {
-                        Value = value;
-                    }
+                public MyStruct(int value)
+                {
+                Value = value;
+                }
                 }
                 """
             );
@@ -719,15 +719,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
         public async Task ReadonlyStaticField()
         {
             var test = """
-                struct Repro
-                {
-                    public static readonly Repro DefaultValue = new Repro();
+            struct Repro
+            {
+            public static readonly Repro DefaultValue = new Repro();
 
-                    public int IrrelevantValue;
+            public int IrrelevantValue;
 
-                    public void Overwrite(Repro other) => this = other;
-                }
-                """;
+            public void Overwrite(Repro other) => this = other;
+            }
+            """;
             await VerifyCS.VerifyCodeFixAsync(test, test);
         }
 
@@ -735,15 +735,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
         public async Task ConstField()
         {
             var test = """
-                struct Repro
-                {
-                    public const int X = 0;
+            struct Repro
+            {
+            public const int X = 0;
 
-                    public int IrrelevantValue;
+            public int IrrelevantValue;
 
-                    public void Overwrite(Repro other) => this = other;
-                }
-                """;
+            public void Overwrite(Repro other) => this = other;
+            }
+            """;
             await VerifyCS.VerifyCodeFixAsync(test, test);
         }
     }

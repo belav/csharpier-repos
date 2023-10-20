@@ -86,7 +86,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                    [$$
+                [$$
                 """
             );
         }
@@ -97,8 +97,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                    [Goo]
-                    [$$
+                [Goo]
+                [$$
                 """
             );
         }
@@ -109,9 +109,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                    void Goo() {
-                    }
-                    [$$
+                void Goo() {
+                }
+                [$$
                 """
             );
         }
@@ -122,10 +122,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                    int Goo {
-                        get;
-                    }
-                    [$$
+                int Goo {
+                get;
+                }
+                [$$
                 """
             );
         }
@@ -136,8 +136,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                    int Goo;
-                    [$$
+                int Goo;
+                [$$
                 """
             );
         }
@@ -148,8 +148,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                    event Action<int> Goo;
-                    [$$
+                event Action<int> Goo;
+                [$$
                 """
             );
         }
@@ -166,7 +166,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                    void Goo([$$
+                void Goo([$$
                 """
             );
         }
@@ -177,7 +177,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    int Goo { [$$
+                int Goo { [$$
                 """
             );
         }
@@ -188,7 +188,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    int Goo { get { } [$$
+                int Goo { get { } [$$
                 """
             );
         }
@@ -199,7 +199,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    event Action<int> Goo { [$$
+                event Action<int> Goo { [$$
                 """
             );
         }
@@ -210,7 +210,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    event Action<int> Goo { add { } [$$
+                event Action<int> Goo { add { } [$$
                 """
             );
         }
@@ -227,7 +227,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 interface I {
-                    [$$
+                [$$
                 """
             );
         }
@@ -238,7 +238,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 struct S {
-                    [$$
+                [$$
                 """
             );
         }
@@ -249,7 +249,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 enum E {
-                    [$$
+                [$$
                 """
             );
         }

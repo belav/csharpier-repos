@@ -18,7 +18,7 @@ class XmlUrlResolverDefaults
             """
             <?xml version="1.0" encoding="utf-8" ?>
             <root>
-              <some-element>test-value</some-element>
+            <some-element>test-value</some-element>
             </root>
             """
         );

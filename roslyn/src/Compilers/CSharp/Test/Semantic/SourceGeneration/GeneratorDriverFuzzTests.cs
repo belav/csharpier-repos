@@ -107,15 +107,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                 Source.AppendTo(builder);
                 builder.AppendLine(
                     """
-                                        .Select((additionalText, _) => (AdditionalText)new InMemoryAdditionalText(additionalText.Path, additionalText.GetText()!.ToString() switch
-                                        {
-                        """
+                    .Select((additionalText, _) => (AdditionalText)new InMemoryAdditionalText(additionalText.Path, additionalText.GetText()!.ToString() switch
+                    {
+                    """
                 );
                 if (TransformAs)
                 {
                     builder.AppendLine(
                         """
-                                            "a" => "b",
+                        "a" => "b",
                         """
                     );
                 }
@@ -123,15 +123,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                 {
                     builder.AppendLine(
                         """
-                                            "c" => "d",
+                        "c" => "d",
                         """
                     );
                 }
                 builder.AppendLine(
                     """
-                                            var other => other
-                                        }))
-                        """
+                    var other => other
+                    }))
+                    """
                 );
             }
         }
@@ -170,8 +170,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                 Source.AppendTo(builder);
                 builder.AppendLine(
                     """
-                                        .SelectMany((additionalText, _) => new (bool TransformAs, bool TransformCs)[] {
-                        """
+                    .SelectMany((additionalText, _) => new (bool TransformAs, bool TransformCs)[] {
+                    """
                 );
                 foreach (var logic in Logics)
                 {
@@ -184,13 +184,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
 
                 builder.AppendLine(
                     """
-                                        }.Select(logic => (AdditionalText)new InMemoryAdditionalText(hintNameProvider.GetNextHintName(), additionalText.GetText()!.ToString() switch
-                                        {
-                                            "a" when logic.TransformAs => "b",
-                                            "c" when logic.TransformCs => "d",
-                                            var other => other
-                                        })))
-                        """
+                    }.Select(logic => (AdditionalText)new InMemoryAdditionalText(hintNameProvider.GetNextHintName(), additionalText.GetText()!.ToString() switch
+                    {
+                    "a" when logic.TransformAs => "b",
+                    "c" when logic.TransformCs => "d",
+                    var other => other
+                    })))
+                    """
                 );
             }
         }
@@ -225,46 +225,46 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                 Source.AppendTo(builder);
                 builder.AppendLine(
                     """
-                                        .Where(additionalText => additionalText.GetText()!.ToString() is var textString &&
-                                            (false
-                        """
+                    .Where(additionalText => additionalText.GetText()!.ToString() is var textString &&
+                    (false
+                    """
                 );
                 if (IncludeAs)
                 {
                     builder.AppendLine(
                         """
-                                                || textString == "a"
-                            """
+                        || textString == "a"
+                        """
                     );
                 }
                 if (IncludeBs)
                 {
                     builder.AppendLine(
                         """
-                                                || textString == "b"
-                            """
+                        || textString == "b"
+                        """
                     );
                 }
                 if (IncludeCs)
                 {
                     builder.AppendLine(
                         """
-                                                || textString == "c"
-                            """
+                        || textString == "c"
+                        """
                     );
                 }
                 if (IncludeDs)
                 {
                     builder.AppendLine(
                         """
-                                                || textString == "d"
-                            """
+                        || textString == "d"
+                        """
                     );
                 }
                 builder.AppendLine(
                     """
-                                        ))
-                        """
+                    ))
+                    """
                 );
             }
         }
@@ -298,20 +298,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                 Source1.AppendTo(builder);
                 builder.Append(
                     """
-                                        .Combine(
-                        """
+                    .Combine(
+                    """
                 );
 
                 Source2.AppendTo(builder);
                 builder.AppendLine(
                     """
-                                        .Collect()
-                                        )
-                                        .Select((pair, _)
-                                            => (AdditionalText)new InMemoryAdditionalText(
-                                                pair.Left.Path,
-                                                string.Join("", pair.Right.Select(text => text.GetText()!.ToString()))))
-                        """
+                    .Collect()
+                    )
+                    .Select((pair, _)
+                    => (AdditionalText)new InMemoryAdditionalText(
+                    pair.Left.Path,
+                    string.Join("", pair.Right.Select(text => text.GetText()!.ToString()))))
+                    """
                 );
             }
         }
@@ -633,25 +633,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
 
                 builder.Append(
                     """
-                            var provider = 
-                """
+                    var provider =
+                    """
                 );
                 rootOperator.AppendTo(builder);
                 builder.AppendLine(
                     """
-                            ;
-                """
+                    ;
+                    """
                 );
 
                 builder.Append(
                     """
-                            context.RegisterSourceOutput(provider, (context, text) =>
-                            {
-                                context.AddSource(text.Path, text.GetText()!.ToString());
-                            });
-                        }
+                    context.RegisterSourceOutput(provider, (context, text) =>
+                    {
+                    context.AddSource(text.Path, text.GetText()!.ToString());
+                    });
                     }
-                """
+                    }
+                    """
                 );
 
                 _output.WriteLine(builder.ToString());

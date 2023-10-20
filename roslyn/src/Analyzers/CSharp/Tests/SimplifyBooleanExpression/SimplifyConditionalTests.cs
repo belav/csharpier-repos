@@ -39,13 +39,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
 
                 class C
                 {
-                    bool M()
-                    {
-                        return [|X() && Y() ? true : false|];
-                    }
+                bool M()
+                {
+                return [|X() && Y() ? true : false|];
+                }
 
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
+                private bool X() => throw new NotImplementedException();
+                private bool Y() => throw new NotImplementedException();
                 }
                 """,
                 """
@@ -53,13 +53,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
 
                 class C
                 {
-                    bool M()
-                    {
-                        return X() && Y();
-                    }
+                bool M()
+                {
+                return X() && Y();
+                }
 
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
+                private bool X() => throw new NotImplementedException();
+                private bool Y() => throw new NotImplementedException();
                 }
                 """
             );
@@ -74,13 +74,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
 
                 class C
                 {
-                    bool M()
-                    {
-                        return [|X() && Y() ? false : true|];
-                    }
+                bool M()
+                {
+                return [|X() && Y() ? false : true|];
+                }
 
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
+                private bool X() => throw new NotImplementedException();
+                private bool Y() => throw new NotImplementedException();
                 }
                 """,
                 """
@@ -88,13 +88,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
 
                 class C
                 {
-                    bool M()
-                    {
-                        return !X() || !Y();
-                    }
+                bool M()
+                {
+                return !X() || !Y();
+                }
 
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
+                private bool X() => throw new NotImplementedException();
+                private bool Y() => throw new NotImplementedException();
                 }
                 """
             );
@@ -109,13 +109,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
 
                 class C
                 {
-                    string M()
-                    {
-                        return [|X() && Y() ? "" : null|];
-                    }
+                string M()
+                {
+                return [|X() && Y() ? "" : null|];
+                }
 
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
+                private bool X() => throw new NotImplementedException();
+                private bool Y() => throw new NotImplementedException();
                 }
                 """
             );
@@ -130,13 +130,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
 
                 class C
                 {
-                    string M()
-                    {
-                        return [|X() && Y() ? null : ""|];
-                    }
+                string M()
+                {
+                return [|X() && Y() ? null : ""|];
+                }
 
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
+                private bool X() => throw new NotImplementedException();
+                private bool Y() => throw new NotImplementedException();
                 }
                 """
             );
@@ -151,13 +151,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
 
                 class C
                 {
-                    bool M()
-                    {
-                        return [|X() && Y() ? true : true|];
-                    }
+                bool M()
+                {
+                return [|X() && Y() ? true : true|];
+                }
 
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
+                private bool X() => throw new NotImplementedException();
+                private bool Y() => throw new NotImplementedException();
                 }
                 """,
                 """
@@ -165,13 +165,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
 
                 class C
                 {
-                    bool M()
-                    {
-                        return X() && Y() || true;
-                    }
+                bool M()
+                {
+                return X() && Y() || true;
+                }
 
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
+                private bool X() => throw new NotImplementedException();
+                private bool Y() => throw new NotImplementedException();
                 }
                 """
             );
@@ -186,13 +186,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
 
                 class C
                 {
-                    bool M()
-                    {
-                        return [|X() && Y() ? false : false|];
-                    }
+                bool M()
+                {
+                return [|X() && Y() ? false : false|];
+                }
 
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
+                private bool X() => throw new NotImplementedException();
+                private bool Y() => throw new NotImplementedException();
                 }
                 """,
                 """
@@ -200,13 +200,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
 
                 class C
                 {
-                    bool M()
-                    {
-                        return X() && Y() && false;
-                    }
+                bool M()
+                {
+                return X() && Y() && false;
+                }
 
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
+                private bool X() => throw new NotImplementedException();
+                private bool Y() => throw new NotImplementedException();
                 }
                 """
             );
@@ -221,13 +221,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
 
                 class C
                 {
-                    string M()
-                    {
-                        return [|X() ? true : Y()|];
-                    }
+                string M()
+                {
+                return [|X() ? true : Y()|];
+                }
 
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
+                private bool X() => throw new NotImplementedException();
+                private bool Y() => throw new NotImplementedException();
                 }
                 """,
                 """
@@ -235,13 +235,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
 
                 class C
                 {
-                    string M()
-                    {
-                        return X() || Y();
-                    }
+                string M()
+                {
+                return X() || Y();
+                }
 
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
+                private bool X() => throw new NotImplementedException();
+                private bool Y() => throw new NotImplementedException();
                 }
                 """
             );
@@ -256,13 +256,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
 
                 class C
                 {
-                    string M()
-                    {
-                        return [|X() ? false : Y()|];
-                    }
+                string M()
+                {
+                return [|X() ? false : Y()|];
+                }
 
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
+                private bool X() => throw new NotImplementedException();
+                private bool Y() => throw new NotImplementedException();
                 }
                 """,
                 """
@@ -270,13 +270,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
 
                 class C
                 {
-                    string M()
-                    {
-                        return !X() && Y();
-                    }
+                string M()
+                {
+                return !X() && Y();
+                }
 
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
+                private bool X() => throw new NotImplementedException();
+                private bool Y() => throw new NotImplementedException();
                 }
                 """
             );
@@ -291,13 +291,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
 
                 class C
                 {
-                    string M()
-                    {
-                        return [|X() ? Y() : true|];
-                    }
+                string M()
+                {
+                return [|X() ? Y() : true|];
+                }
 
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
+                private bool X() => throw new NotImplementedException();
+                private bool Y() => throw new NotImplementedException();
                 }
                 """,
                 """
@@ -305,13 +305,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
 
                 class C
                 {
-                    string M()
-                    {
-                        return !X() || Y();
-                    }
+                string M()
+                {
+                return !X() || Y();
+                }
 
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
+                private bool X() => throw new NotImplementedException();
+                private bool Y() => throw new NotImplementedException();
                 }
                 """
             );
@@ -326,13 +326,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
 
                 class C
                 {
-                    string M()
-                    {
-                        return [|X() ? Y() : false|];
-                    }
+                string M()
+                {
+                return [|X() ? Y() : false|];
+                }
 
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
+                private bool X() => throw new NotImplementedException();
+                private bool Y() => throw new NotImplementedException();
                 }
                 """,
                 """
@@ -340,13 +340,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
 
                 class C
                 {
-                    string M()
-                    {
-                        return X() && Y();
-                    }
+                string M()
+                {
+                return X() && Y();
+                }
 
-                    private bool X() => throw new NotImplementedException();
-                    private bool Y() => throw new NotImplementedException();
+                private bool X() => throw new NotImplementedException();
+                private bool Y() => throw new NotImplementedException();
                 }
                 """
             );
@@ -361,10 +361,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
 
                 class C
                 {
-                    public bool M(object x, object y, Func<object, object, bool> isEqual)
-                    {
-                        return {|FixAllInDocument:x == null ? false : y == null ? false : isEqual == null ? x.Equals(y) : isEqual(x, y)|};
-                    }
+                public bool M(object x, object y, Func<object, object, bool> isEqual)
+                {
+                return {|FixAllInDocument:x == null ? false : y == null ? false : isEqual == null ? x.Equals(y) : isEqual(x, y)|};
+                }
                 }
                 """,
                 """
@@ -372,10 +372,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
 
                 class C
                 {
-                    public bool M(object x, object y, Func<object, object, bool> isEqual)
-                    {
-                        return x != null && y != null && (isEqual == null ? x.Equals(y) : isEqual(x, y));
-                    }
+                public bool M(object x, object y, Func<object, object, bool> isEqual)
+                {
+                return x != null && y != null && (isEqual == null ? x.Equals(y) : isEqual(x, y));
+                }
                 }
                 """
             );

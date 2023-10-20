@@ -27,7 +27,7 @@ namespace Wasm.Build.Tests
             Console.WriteLine("Hello, Console!");
 
             for (int i = 0; i < args.Length; i ++)
-                Console.WriteLine ($"args[{i}] = {args[i]}");
+            Console.WriteLine ($"args[{i}] = {args[i]}");
             """;
             var path = Path.Combine(_projectDir!, "Program.cs");
             string text = File.ReadAllText(path);

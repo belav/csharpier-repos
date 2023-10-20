@@ -55,9 +55,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 """
                 class Class
                 {
-                    public static void Meth$$od()
-                    {
-                    }
+                public static void Meth$$od()
+                {
+                }
                 }
                 """,
                 "Class.Method()",
@@ -72,12 +72,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 """
                 namespace Namespace
                 {
-                    class Class
-                    {
-                        void Method()
-                        {
-                        }$$
-                    }
+                class Class
+                {
+                void Method()
+                {
+                }$$
+                }
                 }
                 """,
                 "Namespace.Class.Method()",
@@ -96,9 +96,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
 
                 class Class
                 {
-                    void Method()
-                    {
-                    }$$
+                void Method()
+                {
+                }$$
                 }
                 """,
                 "Namespace.Class.Method()",
@@ -113,12 +113,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 """
                 namespace Namespace.Another
                 {
-                    class Class
-                    {
-                        void Method()
-                        {
-                        }$$
-                    }
+                class Class
+                {
+                void Method()
+                {
+                }$$
+                }
                 }
                 """,
                 "Namespace.Another.Class.Method()",
@@ -133,15 +133,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 """
                 namespace Namespace
                 {
-                    namespace Another
-                    {
-                        class Class
-                        {
-                            void Method()
-                            {
-                            }$$
-                        }
-                    }
+                namespace Another
+                {
+                class Class
+                {
+                void Method()
+                {
+                }$$
+                }
+                }
                 }
                 """,
                 "Namespace.Another.Class.Method()",
@@ -156,12 +156,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 """
                 class Outer
                 {
-                    class Inner
-                    {
-                        void Quux()
-                        {$$
-                        }
-                    }
+                class Inner
+                {
+                void Quux()
+                {$$
+                }
+                }
                 }
                 """,
                 "Outer.Inner.Quux()",
@@ -176,13 +176,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 """
                 class Class
                 {
-                    string Property
-                    {
-                        get
-                        {
-                            return null;$$
-                        }
-                    }
+                string Property
+                {
+                get
+                {
+                return null;$$
+                }
+                }
                 }
                 """,
                 "Class.Property",
@@ -197,18 +197,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 """
                 class Class
                 {
-                    string Property
-                    {
-                        get
-                        {
-                            return null;
-                        }
+                string Property
+                {
+                get
+                {
+                return null;
+                }
 
-                        set
-                        {
-                            string s = $$value;
-                        }
-                    }
+                set
+                {
+                string s = $$value;
+                }
+                }
                 }
                 """,
                 "Class.Property",
@@ -223,7 +223,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 """
                 class Class
                 {
-                    int fi$$eld;
+                int fi$$eld;
                 }
                 """,
                 "Class.field",
@@ -238,7 +238,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 """
                 class Class
                 {
-                    Action<int> a = b => { in$$t c; };
+                Action<int> a = b => { in$$t c; };
                 }
                 """,
                 "Class.a",
@@ -253,7 +253,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 """
                 class Class
                 {
-                    int a1, a$$2;
+                int a1, a$$2;
                 }
                 """,
                 "Class.a2",
@@ -268,10 +268,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 """
                 class C1
                 {
-                    C1()
-                    {
+                C1()
+                {
 
-                    $$}
+                $$}
                 }
                 """,
                 "C1.C1()",
@@ -286,9 +286,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 """
                 class C1
                 {
-                    ~C1()
-                    {
-                    $$}
+                ~C1()
+                {
+                $$}
                 }
                 """,
                 "C1.~C1()",
@@ -303,13 +303,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 """
                 namespace N1
                 {
-                    class C1
-                    {
-                        public static int operator +(C1 x, C1 y)
-                        {
-                            $$return 42;
-                        }
-                    }
+                class C1
+                {
+                public static int operator +(C1 x, C1 y)
+                {
+                $$return 42;
+                }
+                }
                 }
                 """,
                 "N1.C1.+(C1 x, C1 y)",
@@ -324,16 +324,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 """
                 namespace N1
                 {
-                    class C1
-                    {
-                        public static explicit operator N1.C2(N1.C1 x)
-                        {
-                            $$return null;
-                        }
-                    }
-                    class C2
-                    {
-                    }
+                class C1
+                {
+                public static explicit operator N1.C2(N1.C1 x)
+                {
+                $$return null;
+                }
+                }
+                class C2
+                {
+                }
                 }
                 """,
                 "N1.C1.N1.C2(N1.C1 x)",
@@ -348,8 +348,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 """
                 class C1
                 {
-                    delegate void D1();
-                    event D1 e1$$;
+                delegate void D1();
+                event D1 e1$$;
                 }
                 """,
                 "C1.e1",
@@ -364,13 +364,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 """
                 interface I1
                 {
-                    void M1();
+                void M1();
                 }
                 class C1
                 {
-                    void I1.M1()
-                    {
-                    $$}
+                void I1.M1()
+                {
+                $$}
                 }
                 """,
                 "C1.M1()",
@@ -385,13 +385,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 """
                 class C1
                 {
-                    C1 this[int x]
-                    {
-                        get
-                        {
-                            $$return null;
-                        }
-                    }
+                C1 this[int x]
+                {
+                get
+                {
+                $$return null;
+                }
+                }
                 }
                 """,
                 "C1.this[int x]",
@@ -406,7 +406,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 """
                 class C1
                 {
-                    void M1(params int[] x) { $$ }
+                void M1(params int[] x) { $$ }
                 }
                 """,
                 "C1.M1(params int[] x)",
@@ -421,7 +421,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 """
                 class C1
                 {
-                    void M1(__arglist) { $$ }
+                void M1(__arglist) { $$ }
                 }
                 """,
                 "C1.M1(__arglist)",
@@ -436,10 +436,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 """
                 class C1
                 {
-                    void M1( ref int x, out int y )
-                    {
-                        $$y = x;
-                    }
+                void M1( ref int x, out int y )
+                {
+                $$y = x;
+                }
                 }
                 """,
                 "C1.M1( ref int x, out int y )",
@@ -454,10 +454,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 """
                 class C1
                 {
-                    void M1(int x =1)
-                    {
-                        $$y = x;
-                    }
+                void M1(int x =1)
+                {
+                $$y = x;
+                }
                 }
                 """,
                 "C1.M1(int x =1)",
@@ -472,9 +472,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 """
                 static class C1
                 {
-                    static void M1(this int x)
-                    {
-                    }$$
+                static void M1(this int x)
+                {
+                }$$
                 }
                 """,
                 "C1.M1(this int x)",
@@ -489,7 +489,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 """
                 class C1<T, U>
                 {
-                    static void M1() { $$ }
+                static void M1() { $$ }
                 }
                 """,
                 "C1.M1()",
@@ -504,7 +504,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 """
                 class C1<T, U>
                 {
-                    static void M1<V>() { $$ }
+                static void M1<V>() { $$ }
                 }
                 """,
                 "C1.M1()",
@@ -519,7 +519,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 """
                 class C1<T, U>
                 {
-                    static void M1<V>(C1<int, V> x, V y) { $$ }
+                static void M1<V>(C1<int, V> x, V y) { $$ }
                 }
                 """,
                 "C1.M1(C1<int, V> x, V y)",
@@ -533,10 +533,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
             await TestAsync(
                 """
                 {
-                    class Class
-                    {
-                        int a1, a$$2;
-                    }
+                class Class
+                {
+                int a1, a$$2;
+                }
                 }
                 """,
                 "Class.a2",
@@ -551,12 +551,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 """
                 namespace
                 {
-                    class C1
-                    {
-                        int M1()
-                        $${
-                        }
-                    }
+                class C1
+                {
+                int M1()
+                $${
+                }
+                }
                 }
                 """,
                 "?.C1.M1()",
@@ -570,12 +570,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
             await TestAsync(
                 """
                 namespace N1
-                    class 
-                    {
-                        int M1()
-                        $${
-                        }
-                    }
+                class
+                {
+                int M1()
+                $${
+                }
+                }
                 }
                 """,
                 "N1.M1()",
@@ -590,12 +590,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 """
                 namespace N1
                 {
-                    class C1
-                    {
-                        static void (ref int x)
-                        {
-                        $$}
-                    }
+                class C1
+                {
+                static void (ref int x)
+                {
+                $$}
+                }
                 }
                 """,
                 "N1.C1",
@@ -610,12 +610,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
                 """
                 namespace N1
                 {
-                    class C1
-                    {
-                        static void M1
-                        {
-                        $$}
-                    }
+                class C1
+                {
+                static void M1
+                {
+                $$}
+                }
                 }
                 """,
                 "N1.C1.M1",

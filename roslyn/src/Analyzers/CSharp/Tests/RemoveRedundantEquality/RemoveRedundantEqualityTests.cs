@@ -22,23 +22,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveRedundantEquality
         public async Task TestSimpleCaseForEqualsTrue()
         {
             var code = """
-                public class C
-                {
-                    public bool M1(bool x)
-                    {
-                        return x [|==|] true;
-                    }
-                }
-                """;
+            public class C
+            {
+            public bool M1(bool x)
+            {
+            return x [|==|] true;
+            }
+            }
+            """;
             var fixedCode = """
-                public class C
-                {
-                    public bool M1(bool x)
-                    {
-                        return x;
-                    }
-                }
-                """;
+            public class C
+            {
+            public bool M1(bool x)
+            {
+            return x;
+            }
+            }
+            """;
             await VerifyCS.VerifyCodeFixAsync(code, fixedCode);
         }
 
@@ -46,14 +46,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveRedundantEquality
         public async Task TestSimpleCaseForEqualsFalse_NoDiagnostics()
         {
             var code = """
-                public class C
-                {
-                    public bool M1(bool x)
-                    {
-                        return x == false;
-                    }
-                }
-                """;
+            public class C
+            {
+            public bool M1(bool x)
+            {
+            return x == false;
+            }
+            }
+            """;
             await VerifyCS.VerifyAnalyzerAsync(code);
         }
 
@@ -61,23 +61,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveRedundantEquality
         public async Task TestSimpleCaseForNotEqualsFalse()
         {
             var code = """
-                public class C
-                {
-                    public bool M1(bool x)
-                    {
-                        return x [|!=|] false;
-                    }
-                }
-                """;
+            public class C
+            {
+            public bool M1(bool x)
+            {
+            return x [|!=|] false;
+            }
+            }
+            """;
             var fixedCode = """
-                public class C
-                {
-                    public bool M1(bool x)
-                    {
-                        return x;
-                    }
-                }
-                """;
+            public class C
+            {
+            public bool M1(bool x)
+            {
+            return x;
+            }
+            }
+            """;
             await VerifyCS.VerifyCodeFixAsync(code, fixedCode);
         }
 
@@ -85,14 +85,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveRedundantEquality
         public async Task TestSimpleCaseForNotEqualsTrue_NoDiagnostics()
         {
             var code = """
-                public class C
-                {
-                    public bool M1(bool x)
-                    {
-                        return x != true;
-                    }
-                }
-                """;
+            public class C
+            {
+            public bool M1(bool x)
+            {
+            return x != true;
+            }
+            }
+            """;
             await VerifyCS.VerifyAnalyzerAsync(code);
         }
 
@@ -100,14 +100,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveRedundantEquality
         public async Task TestNullable_NoDiagnostics()
         {
             var code = """
-                public class C
-                {
-                    public bool M1(bool? x)
-                    {
-                        return x == true;
-                    }
-                }
-                """;
+            public class C
+            {
+            public bool M1(bool? x)
+            {
+            return x == true;
+            }
+            }
+            """;
             await VerifyCS.VerifyAnalyzerAsync(code);
         }
 
@@ -115,16 +115,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveRedundantEquality
         public async Task TestWhenConstant_NoDiagnostics()
         {
             var code = """
-                public class C
-                {
-                    public const bool MyTrueConstant = true;
+            public class C
+            {
+            public const bool MyTrueConstant = true;
 
-                    public bool M1(bool x)
-                    {
-                        return x == MyTrueConstant;
-                    }
-                }
-                """;
+            public bool M1(bool x)
+            {
+            return x == MyTrueConstant;
+            }
+            }
+            """;
             await VerifyCS.VerifyAnalyzerAsync(code);
         }
 
@@ -132,17 +132,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveRedundantEquality
         public async Task TestOverloadedOperator_NoDiagnostics()
         {
             var code = """
-                public class C
-                {
-                    public static bool operator ==(C a, bool b) => false;
-                    public static bool operator !=(C a, bool b) => true;
+            public class C
+            {
+            public static bool operator ==(C a, bool b) => false;
+            public static bool operator !=(C a, bool b) => true;
 
-                    public bool M1(C x)
-                    {
-                        return x == true;
-                    }
-                }
-                """;
+            public bool M1(C x)
+            {
+            return x == true;
+            }
+            }
+            """;
             await VerifyCS.VerifyAnalyzerAsync(code);
         }
 
@@ -150,23 +150,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveRedundantEquality
         public async Task TestOnLeftHandSide()
         {
             var code = """
-                public class C
-                {
-                    public bool M1(bool x)
-                    {
-                        return true [|==|] x;
-                    }
-                }
-                """;
+            public class C
+            {
+            public bool M1(bool x)
+            {
+            return true [|==|] x;
+            }
+            }
+            """;
             var fixedCode = """
-                public class C
-                {
-                    public bool M1(bool x)
-                    {
-                        return x;
-                    }
-                }
-                """;
+            public class C
+            {
+            public bool M1(bool x)
+            {
+            return x;
+            }
+            }
+            """;
             await VerifyCS.VerifyCodeFixAsync(code, fixedCode);
         }
 
@@ -174,23 +174,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveRedundantEquality
         public async Task TestInArgument()
         {
             var code = """
-                public class C
-                {
-                    public bool M1(bool x)
-                    {
-                        return M1(x [|==|] true);
-                    }
-                }
-                """;
+            public class C
+            {
+            public bool M1(bool x)
+            {
+            return M1(x [|==|] true);
+            }
+            }
+            """;
             var fixedCode = """
-                public class C
-                {
-                    public bool M1(bool x)
-                    {
-                        return M1(x);
-                    }
-                }
-                """;
+            public class C
+            {
+            public bool M1(bool x)
+            {
+            return M1(x);
+            }
+            }
+            """;
             await VerifyCS.VerifyCodeFixAsync(code, fixedCode);
         }
 
@@ -198,43 +198,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveRedundantEquality
         public async Task TestFixAll()
         {
             var code = """
-                public class C
-                {
-                    public bool M1(bool x)
-                    {
-                        return true [|==|] x;
-                    }
+            public class C
+            {
+            public bool M1(bool x)
+            {
+            return true [|==|] x;
+            }
 
-                    public bool M2(bool x)
-                    {
-                        return x [|!=|] false;
-                    }
+            public bool M2(bool x)
+            {
+            return x [|!=|] false;
+            }
 
-                    public bool M3(bool x)
-                    {
-                        return x [|==|] true [|==|] true;
-                    }
-                }
-                """;
+            public bool M3(bool x)
+            {
+            return x [|==|] true [|==|] true;
+            }
+            }
+            """;
             var fixedCode = """
-                public class C
-                {
-                    public bool M1(bool x)
-                    {
-                        return x;
-                    }
+            public class C
+            {
+            public bool M1(bool x)
+            {
+            return x;
+            }
 
-                    public bool M2(bool x)
-                    {
-                        return x;
-                    }
+            public bool M2(bool x)
+            {
+            return x;
+            }
 
-                    public bool M3(bool x)
-                    {
-                        return x;
-                    }
-                }
-                """;
+            public bool M3(bool x)
+            {
+            return x;
+            }
+            }
+            """;
             await VerifyCS.VerifyCodeFixAsync(code, fixedCode);
         }
 
@@ -242,14 +242,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveRedundantEquality
         public async Task TestNullableValueTypes_DoesntCrash()
         {
             var code = """
-                public class C
-                {
-                    public bool M1(int? x)
-                    {
-                        return x == null;
-                    }
-                }
-                """;
+            public class C
+            {
+            public bool M1(int? x)
+            {
+            return x == null;
+            }
+            }
+            """;
             await VerifyCS.VerifyAnalyzerAsync(code);
         }
     }

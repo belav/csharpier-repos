@@ -21,13 +21,13 @@ public class EventFieldDeclarationStructureTests
     public async Task TestEventFieldWithComments()
     {
         var code = """
-                class C
-                {
-                    {|span:// Goo
-                    // Bar|}
-                    $$event EventHandler E;
-                }
-                """;
+        class C
+        {
+        {|span:// Goo
+        // Bar|}
+        $$event EventHandler E;
+        }
+        """;
 
         await VerifyBlockSpansAsync(code, Region("span", "// Goo ...", autoCollapse: true));
     }

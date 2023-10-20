@@ -56,13 +56,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Func<int, string> f = x [|=>|]
-                        {
-                            return x.ToString();
-                        }
-                    }
+                void Goo()
+                {
+                Func<int, string> f = x [|=>|]
+                {
+                return x.ToString();
+                }
+                }
                 }
                 """,
                 parameters: new TestParameters(options: UseExpressionBody)
@@ -78,13 +78,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Func<int, string> f = x [||]=>
-                        {
-                            return x.ToString();
-                        };
-                    }
+                void Goo()
+                {
+                Func<int, string> f = x [||]=>
+                {
+                return x.ToString();
+                };
+                }
                 }
                 """,
                 """
@@ -92,10 +92,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Func<int, string> f = x => x.ToString();
-                    }
+                void Goo()
+                {
+                Func<int, string> f = x => x.ToString();
+                }
                 }
                 """,
                 parameters: new TestParameters(options: UseExpressionBodyDisabledDiagnostic)
@@ -111,13 +111,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Func<int, string> f = x [||]=>
-                        {
-                            return x.ToString();
-                        };
-                    }
+                void Goo()
+                {
+                Func<int, string> f = x [||]=>
+                {
+                return x.ToString();
+                };
+                }
                 }
                 """,
                 """
@@ -125,10 +125,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Func<int, string> f = x => x.ToString();
-                    }
+                void Goo()
+                {
+                Func<int, string> f = x => x.ToString();
+                }
                 }
                 """,
                 parameters: new TestParameters(options: UseBlockBody)
@@ -142,10 +142,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                 """
                 class C
                 {
-                    int [|Goo|]()
-                    {
-                        return 1;
-                    }
+                int [|Goo|]()
+                {
+                return 1;
+                }
                 }
                 """,
                 parameters: new TestParameters(options: UseBlockBody)
@@ -161,10 +161,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Func<int, string> f = x [||]=> x.ToString();
-                    }
+                void Goo()
+                {
+                Func<int, string> f = x [||]=> x.ToString();
+                }
                 }
                 """,
                 parameters: new TestParameters(options: UseBlockBody)
@@ -180,10 +180,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Func<int, string> f = x [||]=> x.ToString();
-                    }
+                void Goo()
+                {
+                Func<int, string> f = x [||]=> x.ToString();
+                }
                 }
                 """,
                 """
@@ -191,13 +191,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Func<int, string> f = x =>
-                        {
-                            return x.ToString();
-                        };
-                    }
+                void Goo()
+                {
+                Func<int, string> f = x =>
+                {
+                return x.ToString();
+                };
+                }
                 }
                 """,
                 parameters: new TestParameters(options: UseBlockBodyDisabledDiagnostic)
@@ -213,10 +213,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Func<int, string> f = x [||]=> x.ToString();
-                    }
+                void Goo()
+                {
+                Func<int, string> f = x [||]=> x.ToString();
+                }
                 }
                 """,
                 """
@@ -224,13 +224,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Func<int, string> f = x =>
-                        {
-                            return x.ToString();
-                        };
-                    }
+                void Goo()
+                {
+                Func<int, string> f = x =>
+                {
+                return x.ToString();
+                };
+                }
                 }
                 """,
                 parameters: new TestParameters(options: UseExpressionBody)

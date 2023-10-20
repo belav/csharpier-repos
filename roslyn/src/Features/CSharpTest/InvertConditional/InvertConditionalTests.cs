@@ -29,19 +29,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertConditional
                 """
                 class C
                 {
-                    void M(bool x, int a, int b)
-                    {
-                        var c = x [||]? a : b;
-                    }
+                void M(bool x, int a, int b)
+                {
+                var c = x [||]? a : b;
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(bool x, int a, int b)
-                    {
-                        var c = !x ? b : a;
-                    }
+                void M(bool x, int a, int b)
+                {
+                var c = !x ? b : a;
+                }
                 }
                 """
             );
@@ -54,19 +54,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertConditional
                 """
                 class C
                 {
-                    void M(bool x, int a, int b)
-                    {
-                        var c = !x [||]? a : b;
-                    }
+                void M(bool x, int a, int b)
+                {
+                var c = !x [||]? a : b;
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(bool x, int a, int b)
-                    {
-                        var c = x ? b : a;
-                    }
+                void M(bool x, int a, int b)
+                {
+                var c = x ? b : a;
+                }
                 }
                 """
             );
@@ -79,23 +79,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertConditional
                 """
                 class C
                 {
-                    void M(bool x, int a, int b)
-                    {
-                        var c = [||]x
-                            ? a
-                            : b;
-                    }
+                void M(bool x, int a, int b)
+                {
+                var c = [||]x
+                ? a
+                : b;
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(bool x, int a, int b)
-                    {
-                        var c = !x
-                            ? b
-                            : a;
-                    }
+                void M(bool x, int a, int b)
+                {
+                var c = !x
+                ? b
+                : a;
+                }
                 }
                 """
             );
@@ -108,23 +108,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertConditional
                 """
                 class C
                 {
-                    void M(bool x, int a, int b)
-                    {
-                        var c = [||]x ?
-                            a :
-                            b;
-                    }
+                void M(bool x, int a, int b)
+                {
+                var c = [||]x ?
+                a :
+                b;
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(bool x, int a, int b)
-                    {
-                        var c = !x ?
-                            b :
-                            a;
-                    }
+                void M(bool x, int a, int b)
+                {
+                var c = !x ?
+                b :
+                a;
+                }
                 }
                 """
             );
@@ -140,23 +140,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertConditional
                 """
                 class C
                 {
-                    void M(bool x, int a, int b)
-                    {
-                        var c = [||]x
-                            ? a /*trivia1*/
-                            : b /*trivia2*/;
-                    }
+                void M(bool x, int a, int b)
+                {
+                var c = [||]x
+                ? a /*trivia1*/
+                : b /*trivia2*/;
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(bool x, int a, int b)
-                    {
-                        var c = !x
-                            ? b /*trivia1*/
-                            : a /*trivia2*/;
-                    }
+                void M(bool x, int a, int b)
+                {
+                var c = !x
+                ? b /*trivia1*/
+                : a /*trivia2*/;
+                }
                 }
                 """
             );
@@ -169,19 +169,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertConditional
                 """
                 class C
                 {
-                    void M(bool x, int a, int b)
-                    {
-                        var c = [||]x ? a : b;
-                    }
+                void M(bool x, int a, int b)
+                {
+                var c = [||]x ? a : b;
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(bool x, int a, int b)
-                    {
-                        var c = !x ? b : a;
-                    }
+                void M(bool x, int a, int b)
+                {
+                var c = !x ? b : a;
+                }
                 }
                 """
             );
@@ -194,19 +194,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertConditional
                 """
                 class C
                 {
-                    void M(bool x, int a, int b)
-                    {
-                        var c = x ? a [||]: b;
-                    }
+                void M(bool x, int a, int b)
+                {
+                var c = x ? a [||]: b;
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(bool x, int a, int b)
-                    {
-                        var c = !x ? b : a;
-                    }
+                void M(bool x, int a, int b)
+                {
+                var c = !x ? b : a;
+                }
                 }
                 """
             );

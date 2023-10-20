@@ -25,9 +25,9 @@ public class InterceptorsTests : CSharpTestBase
         [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = false)]
         public sealed class InterceptsLocationAttribute : Attribute
         {
-            public InterceptsLocationAttribute(string filePath, int line, int character)
-            {
-            }
+        public InterceptsLocationAttribute(string filePath, int line, int character)
+        {
+        }
         }
         """,
         "attributes.cs"
@@ -41,22 +41,22 @@ public class InterceptorsTests : CSharpTestBase
     public void FeatureFlag()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            C.M();
+        C.M();
 
-            class C
-            {
-                public static void M() => throw null!;
-            }
+        class C
+        {
+        public static void M() => throw null!;
+        }
 
-            class D
-            {
-                [InterceptsLocation("Program.cs", 4, 3)]
-                public static void M() => Console.Write(1);
-            }
-            """;
+        class D
+        {
+        [InterceptsLocation("Program.cs", 4, 3)]
+        public static void M() => Console.Write(1);
+        }
+        """;
 
         var sadCaseDiagnostics = new[]
         {
@@ -113,25 +113,25 @@ public class InterceptorsTests : CSharpTestBase
     public void FeatureFlag_Granular_01()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            C.M();
+        C.M();
 
-            class C
-            {
-                public static void M() => throw null!;
-            }
+        class C
+        {
+        public static void M() => throw null!;
+        }
 
-            namespace NS1
-            {
-                class D
-                {
-                    [InterceptsLocation("Program.cs", 4, 3)]
-                    public static void M() => Console.Write(1);
-                }
-            }
-            """;
+        namespace NS1
+        {
+        class D
+        {
+        [InterceptsLocation("Program.cs", 4, 3)]
+        public static void M() => Console.Write(1);
+        }
+        }
+        """;
 
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
@@ -190,25 +190,25 @@ public class InterceptorsTests : CSharpTestBase
     public void FeatureFlag_Granular_02()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            C.M();
+        C.M();
 
-            class C
-            {
-                public static void M() => throw null!;
-            }
+        class C
+        {
+        public static void M() => throw null!;
+        }
 
-            namespace NS1.NS2
-            {
-                class D
-                {
-                    [InterceptsLocation("Program.cs", 4, 3)]
-                    public static void M() => Console.Write(1);
-                }
-            }
-            """;
+        namespace NS1.NS2
+        {
+        class D
+        {
+        [InterceptsLocation("Program.cs", 4, 3)]
+        public static void M() => Console.Write(1);
+        }
+        }
+        """;
 
         sadCase("NS2");
         sadCase("true");
@@ -266,22 +266,22 @@ public class InterceptorsTests : CSharpTestBase
     public void FeatureFlag_Granular_03()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            C.M();
+        C.M();
 
-            class C
-            {
-                public static void M() => throw null!;
-            }
+        class C
+        {
+        public static void M() => throw null!;
+        }
 
-            class D
-            {
-                [InterceptsLocation("Program.cs", 4, 3)]
-                public static void M() => Console.Write(1);
-            }
-            """;
+        class D
+        {
+        [InterceptsLocation("Program.cs", 4, 3)]
+        public static void M() => Console.Write(1);
+        }
+        """;
 
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
@@ -302,25 +302,25 @@ public class InterceptorsTests : CSharpTestBase
     public void FeatureFlag_Granular_04()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            C.M();
+        C.M();
 
-            class C
-            {
-                public static void M() => throw null!;
-            }
+        class C
+        {
+        public static void M() => throw null!;
+        }
 
-            namespace global
-            {
-                class D
-                {
-                    [InterceptsLocation("Program.cs", 4, 3)]
-                    public static void M() => Console.Write(1);
-                }
-            }
-            """;
+        namespace global
+        {
+        class D
+        {
+        [InterceptsLocation("Program.cs", 4, 3)]
+        public static void M() => Console.Write(1);
+        }
+        }
+        """;
 
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
@@ -345,25 +345,25 @@ public class InterceptorsTests : CSharpTestBase
     public void FeatureFlag_Granular_05()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            C.M();
+        C.M();
 
-            class C
-            {
-                public static void M() => throw null!;
-            }
+        class C
+        {
+        public static void M() => throw null!;
+        }
 
-            namespace global.B
-            {
-                class D
-                {
-                    [InterceptsLocation("Program.cs", 4, 3)]
-                    public static void M() => Console.Write(1);
-                }
-            }
-            """;
+        namespace global.B
+        {
+        class D
+        {
+        [InterceptsLocation("Program.cs", 4, 3)]
+        public static void M() => Console.Write(1);
+        }
+        }
+        """;
 
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
@@ -389,21 +389,21 @@ public class InterceptorsTests : CSharpTestBase
     public void SelfInterception()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
-                public static void Main()
-                {
-                    InterceptableMethod();
-                }
+        class C
+        {
+        public static void Main()
+        {
+        InterceptableMethod();
+        }
 
 
-                [InterceptsLocation("Program.cs", 8, 9)]
-                public static void InterceptableMethod() { Console.Write(1); }
-            }
-            """;
+        [InterceptsLocation("Program.cs", 8, 9)]
+        public static void InterceptableMethod() { Console.Write(1); }
+        }
+        """;
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -416,26 +416,26 @@ public class InterceptorsTests : CSharpTestBase
     public void StaticInterceptable_StaticInterceptor_NoParameters()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
+        class C
+        {
 
-                public static void InterceptableMethod() { Console.Write("interceptable"); }
+        public static void InterceptableMethod() { Console.Write("interceptable"); }
 
-                public static void Main()
-                {
-                    InterceptableMethod();
-                }
-            }
+        public static void Main()
+        {
+        InterceptableMethod();
+        }
+        }
 
-            class D
-            {
-                [InterceptsLocation("Program.cs", 11, 9)]
-                public static void Interceptor1() { Console.Write("interceptor 1"); }
-            }
-            """;
+        class D
+        {
+        [InterceptsLocation("Program.cs", 11, 9)]
+        public static void Interceptor1() { Console.Write("interceptor 1"); }
+        }
+        """;
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -448,26 +448,26 @@ public class InterceptorsTests : CSharpTestBase
     public void Accessibility_01()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
+        class C
+        {
 
-                public static void InterceptableMethod() { Console.Write("interceptable"); }
+        public static void InterceptableMethod() { Console.Write("interceptable"); }
 
-                public static void Main()
-                {
-                    InterceptableMethod();
-                }
-            }
+        public static void Main()
+        {
+        InterceptableMethod();
+        }
+        }
 
-            class D
-            {
-                [InterceptsLocation("Program.cs", 11, 9)]
-                private static void Interceptor1() { Console.Write("interceptor 1"); }
-            }
-            """;
+        class D
+        {
+        [InterceptsLocation("Program.cs", 11, 9)]
+        private static void Interceptor1() { Console.Write("interceptor 1"); }
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -489,30 +489,30 @@ public class InterceptorsTests : CSharpTestBase
     {
         // An interceptor declared within a file-local type can intercept a call even if the call site can't normally refer to the file-local type.
         var source1 = """
-            using System;
+        using System;
 
-            class C
-            {
+        class C
+        {
 
-                public static void InterceptableMethod() { Console.Write("interceptable"); }
+        public static void InterceptableMethod() { Console.Write("interceptable"); }
 
-                public static void Main()
-                {
-                    InterceptableMethod();
-                }
-            }
-            """;
+        public static void Main()
+        {
+        InterceptableMethod();
+        }
+        }
+        """;
 
         var source2 = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            file class D
-            {
-                [InterceptsLocation("Program.cs", 10, 9)]
-                public static void Interceptor1() { Console.Write("interceptor 1"); }
-            }
-            """;
+        file class D
+        {
+        [InterceptsLocation("Program.cs", 10, 9)]
+        public static void Interceptor1() { Console.Write("interceptor 1"); }
+        }
+        """;
 
         var verifier = CompileAndVerify(
             new[] { (source1, "Program.cs"), (source2, "Other.cs"), s_attributesSource },
@@ -527,33 +527,33 @@ public class InterceptorsTests : CSharpTestBase
     {
         // Treat a file-local declaration of InterceptsLocationAttribute as a well-known attribute within the declaring compilation.
         var source = """
-            using System;
-            using System.Runtime.CompilerServices;
+        using System;
+        using System.Runtime.CompilerServices;
 
-            C.M();
+        C.M();
 
-            class C
-            {
-                public static void M() => throw null!;
-            }
+        class C
+        {
+        public static void M() => throw null!;
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 4, 3)]
-                public static void M()
-                {
-                    Console.Write(1);
-                }
-            }
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 4, 3)]
+        public static void M()
+        {
+        Console.Write(1);
+        }
+        }
 
-            namespace System.Runtime.CompilerServices
-            {
-                file class InterceptsLocationAttribute : Attribute
-                {
-                    public InterceptsLocationAttribute(string filePath, int line, int character) { }
-                }
-            }
-            """;
+        namespace System.Runtime.CompilerServices
+        {
+        file class InterceptsLocationAttribute : Attribute
+        {
+        public InterceptsLocationAttribute(string filePath, int line, int character) { }
+        }
+        }
+        """;
 
         var verifier = CompileAndVerify(
             (source, "Program.cs"),
@@ -571,45 +571,45 @@ public class InterceptorsTests : CSharpTestBase
     public void FileLocalAttributeDefinitions_02()
     {
         var source1 = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            var c = new C();
-            c.M();
+        var c = new C();
+        c.M();
 
-            public class C
-            {
-                public void M() => Console.Write(1);
+        public class C
+        {
+        public void M() => Console.Write(1);
 
-                [InterceptsLocation("Program.cs", 5, 3)]
-                public virtual void Interceptor() => throw null!;
-            }
+        [InterceptsLocation("Program.cs", 5, 3)]
+        public virtual void Interceptor() => throw null!;
+        }
 
-            namespace System.Runtime.CompilerServices
-            {
-                [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-                file sealed class InterceptsLocationAttribute : Attribute
-                {
-                    public InterceptsLocationAttribute(string filePath, int line, int character)
-                    {
-                    }
-                }
-            }
-            """;
+        namespace System.Runtime.CompilerServices
+        {
+        [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
+        file sealed class InterceptsLocationAttribute : Attribute
+        {
+        public InterceptsLocationAttribute(string filePath, int line, int character)
+        {
+        }
+        }
+        }
+        """;
 
         // Inherited attribute on 'override void Interceptor' from other compilation doesn't cause a call in this compilation to be intercepted.
         var source2 = """
 
 
-            // leading blank lines for alignment with the call in the other compilation.
-            var d = new D();
-            d.M();
+        // leading blank lines for alignment with the call in the other compilation.
+        var d = new D();
+        d.M();
 
-            class D : C
-            {
-                public override void Interceptor() => throw null!;
-            }
-            """;
+        class D : C
+        {
+        public override void Interceptor() => throw null!;
+        }
+        """;
 
         var comp1 = CreateCompilation(
             (source1, "Program.cs"),
@@ -638,30 +638,30 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptableExtensionMethod_InterceptorExtensionMethod()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            interface I1 { }
-            class C : I1 { }
+        interface I1 { }
+        class C : I1 { }
 
-            static class Program
-            {
+        static class Program
+        {
 
-                public static I1 InterceptableMethod(this I1 i1, string param) { Console.Write("interceptable " + param); return i1; }
+        public static I1 InterceptableMethod(this I1 i1, string param) { Console.Write("interceptable " + param); return i1; }
 
-                public static void Main()
-                {
-                    var c = new C();
-                    c.InterceptableMethod("call site");
-                }
-            }
+        public static void Main()
+        {
+        var c = new C();
+        c.InterceptableMethod("call site");
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 15, 11)]
-                public static I1 Interceptor1(this I1 i1, string param) { Console.Write("interceptor " + param); return i1; }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 15, 11)]
+        public static I1 Interceptor1(this I1 i1, string param) { Console.Write("interceptor " + param); return i1; }
+        }
+        """;
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -674,30 +674,30 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptableExtensionMethod_InterceptorExtensionMethod_NormalForm()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            interface I1 { }
-            class C : I1 { }
+        interface I1 { }
+        class C : I1 { }
 
-            static class Program
-            {
+        static class Program
+        {
 
-                public static I1 InterceptableMethod(this I1 i1, string param) { Console.Write("interceptable " + param); return i1; }
+        public static I1 InterceptableMethod(this I1 i1, string param) { Console.Write("interceptable " + param); return i1; }
 
-                public static void Main()
-                {
-                    var c = new C();
-                    InterceptableMethod(c, "call site");
-                }
-            }
+        public static void Main()
+        {
+        var c = new C();
+        InterceptableMethod(c, "call site");
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 15, 9)]
-                public static I1 Interceptor1(this I1 i1, string param) { Console.Write("interceptor " + param); return i1; }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 15, 9)]
+        public static I1 Interceptor1(this I1 i1, string param) { Console.Write("interceptor " + param); return i1; }
+        }
+        """;
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -710,30 +710,30 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptableInstanceMethod_InterceptorExtensionMethod()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
+        class C
+        {
 
-                public C InterceptableMethod(string param) { Console.Write("interceptable " + param); return this; }
-            }
+        public C InterceptableMethod(string param) { Console.Write("interceptable " + param); return this; }
+        }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    var c = new C();
-                    c.InterceptableMethod("call site");
-                }
-            }
+        static class Program
+        {
+        public static void Main()
+        {
+        var c = new C();
+        c.InterceptableMethod("call site");
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 15, 11)]
-                public static C Interceptor1(this C i1, string param) { Console.Write("interceptor " + param); return i1; }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 15, 11)]
+        public static C Interceptor1(this C i1, string param) { Console.Write("interceptor " + param); return i1; }
+        }
+        """;
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -746,30 +746,30 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptableInstanceMethod_InterceptorStaticMethod()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
+        class C
+        {
 
-                public C InterceptableMethod(string param) { Console.Write("interceptable " + param); return this; }
-            }
+        public C InterceptableMethod(string param) { Console.Write("interceptable " + param); return this; }
+        }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    var c = new C();
-                    c.InterceptableMethod("call site");
-                }
-            }
+        static class Program
+        {
+        public static void Main()
+        {
+        var c = new C();
+        c.InterceptableMethod("call site");
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 15, 11)]
-                public static C Interceptor1(C i1, string param) { Console.Write("interceptor " + param); return i1; }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 15, 11)]
+        public static C Interceptor1(C i1, string param) { Console.Write("interceptor " + param); return i1; }
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -793,10 +793,10 @@ public class InterceptorsTests : CSharpTestBase
             """
             public class D0
             {
-                public static void M()
-                {
-                    C.InterceptableMethod("a");
-                }
+            public static void M()
+            {
+            C.InterceptableMethod("a");
+            }
             }
             """,
             "Program.cs"
@@ -806,10 +806,10 @@ public class InterceptorsTests : CSharpTestBase
             """
             public class D1
             {
-                public static void M()
-                {
-                    C.InterceptableMethod("a");
-                }
+            public static void M()
+            {
+            C.InterceptableMethod("a");
+            }
             }
             """,
             "Program.cs"
@@ -826,13 +826,13 @@ public class InterceptorsTests : CSharpTestBase
             public class C
             {
 
-                public static void InterceptableMethod(string param) { Console.Write("interceptable " + param); }
+            public static void InterceptableMethod(string param) { Console.Write("interceptable " + param); }
             }
 
             public static class Interceptor
             {
-                [InterceptsLocation("Program.cs", 5, 11)]
-                public static void Interceptor1(string param) { Console.Write("interceptor " + param); }
+            [InterceptsLocation("Program.cs", 5, 11)]
+            public static void Interceptor1(string param) { Console.Write("interceptor " + param); }
             }
             """,
             "Interceptor.cs"
@@ -855,25 +855,25 @@ public class InterceptorsTests : CSharpTestBase
     public void DuplicateLocation_01()
     {
         var source = """
-            using System.Runtime.CompilerServices;
+        using System.Runtime.CompilerServices;
 
-            C.M();
+        C.M();
 
-            class C
-            {
+        class C
+        {
 
-                public static void M() { }
-            }
+        public static void M() { }
+        }
 
-            class D
-            {
-                [InterceptsLocation("Program.cs", 3, 3)]
-                public static void M1() { }
+        class D
+        {
+        [InterceptsLocation("Program.cs", 3, 3)]
+        public static void M1() { }
 
-                [InterceptsLocation("Program.cs", 3, 3)]
-                public static void M2() { }
-            }
-            """;
+        [InterceptsLocation("Program.cs", 3, 3)]
+        public static void M2() { }
+        }
+        """;
 
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
@@ -901,36 +901,36 @@ public class InterceptorsTests : CSharpTestBase
     public void DuplicateLocation_02()
     {
         var source0 = """
-            using System.Runtime.CompilerServices;
+        using System.Runtime.CompilerServices;
 
-            C.M();
+        C.M();
 
-            class C
-            {
+        class C
+        {
 
-                public static void M() { }
-            }
-            """;
+        public static void M() { }
+        }
+        """;
 
         var source1 = """
-            using System.Runtime.CompilerServices;
+        using System.Runtime.CompilerServices;
 
-            class D1
-            {
-                [InterceptsLocation("Program.cs", 3, 3)]
-                public static void M1() { }
-            }
-            """;
+        class D1
+        {
+        [InterceptsLocation("Program.cs", 3, 3)]
+        public static void M1() { }
+        }
+        """;
 
         var source2 = """
-            using System.Runtime.CompilerServices;
+        using System.Runtime.CompilerServices;
 
-            class D2
-            {
-                [InterceptsLocation("Program.cs", 3, 3)]
-                public static void M1() { }
-            }
-            """;
+        class D2
+        {
+        [InterceptsLocation("Program.cs", 3, 3)]
+        public static void M1() { }
+        }
+        """;
 
         var comp = CreateCompilation(
             new[]
@@ -965,40 +965,40 @@ public class InterceptorsTests : CSharpTestBase
     {
         // InterceptsLocationAttribute is not considered to *duplicate* an interception, even if it is inherited.
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            var d = new D();
-            d.M();
+        var d = new D();
+        d.M();
 
-            class C
-            {
+        class C
+        {
 
-                public void M() => throw null!;
+        public void M() => throw null!;
 
-                [InterceptsLocation("Program.cs", 5, 3)]
-                public virtual void Interceptor() => throw null!;
-            }
+        [InterceptsLocation("Program.cs", 5, 3)]
+        public virtual void Interceptor() => throw null!;
+        }
 
-            class D : C
-            {
-                public override void Interceptor() => Console.Write(1);
-            }
+        class D : C
+        {
+        public override void Interceptor() => Console.Write(1);
+        }
 
-            namespace System.Runtime.CompilerServices
-            {
-                [AttributeUsage(AttributeTargets.Method)]
-                public sealed class InterceptableAttribute : Attribute { }
+        namespace System.Runtime.CompilerServices
+        {
+        [AttributeUsage(AttributeTargets.Method)]
+        public sealed class InterceptableAttribute : Attribute { }
 
-                [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-                public sealed class InterceptsLocationAttribute : Attribute
-                {
-                    public InterceptsLocationAttribute(string filePath, int line, int character)
-                    {
-                    }
-                }
-            }
-            """;
+        [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
+        public sealed class InterceptsLocationAttribute : Attribute
+        {
+        public InterceptsLocationAttribute(string filePath, int line, int character)
+        {
+        }
+        }
+        }
+        """;
 
         var verifier = CompileAndVerify(
             (source, "Program.cs"),
@@ -1012,23 +1012,23 @@ public class InterceptorsTests : CSharpTestBase
     public void DuplicateLocation_04()
     {
         var source = """
-            using System.Runtime.CompilerServices;
+        using System.Runtime.CompilerServices;
 
-            C.M();
+        C.M();
 
-            class C
-            {
+        class C
+        {
 
-                public static void M() { }
-            }
+        public static void M() { }
+        }
 
-            class D
-            {
-                [InterceptsLocation("Program.cs", 3, 3)]
-                [InterceptsLocation("Program.cs", 3, 3)]
-                public static void M1() { }
-            }
-            """;
+        class D
+        {
+        [InterceptsLocation("Program.cs", 3, 3)]
+        [InterceptsLocation("Program.cs", 3, 3)]
+        public static void M1() { }
+        }
+        """;
 
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
@@ -1057,44 +1057,44 @@ public class InterceptorsTests : CSharpTestBase
     {
         // Intercept a method call with a call to a virtual method on the same type.
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            C c = new C();
-            c.M();
+        C c = new C();
+        c.M();
 
-            c = new D();
-            c.M();
+        c = new D();
+        c.M();
 
-            class C
-            {
+        class C
+        {
 
-                public void M() => throw null!;
+        public void M() => throw null!;
 
-                [InterceptsLocation("Program.cs", 5, 3)]
-                [InterceptsLocation("Program.cs", 8, 3)]
-                public virtual void Interceptor() => Console.Write("C");
-            }
+        [InterceptsLocation("Program.cs", 5, 3)]
+        [InterceptsLocation("Program.cs", 8, 3)]
+        public virtual void Interceptor() => Console.Write("C");
+        }
 
-            class D : C
-            {
-                public override void Interceptor() => Console.Write("D");
-            }
+        class D : C
+        {
+        public override void Interceptor() => Console.Write("D");
+        }
 
-            namespace System.Runtime.CompilerServices
-            {
-                [AttributeUsage(AttributeTargets.Method)]
-                public sealed class InterceptableAttribute : Attribute { }
+        namespace System.Runtime.CompilerServices
+        {
+        [AttributeUsage(AttributeTargets.Method)]
+        public sealed class InterceptableAttribute : Attribute { }
 
-                [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-                public sealed class InterceptsLocationAttribute : Attribute
-                {
-                    public InterceptsLocationAttribute(string filePath, int line, int character)
-                    {
-                    }
-                }
-            }
-            """;
+        [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
+        public sealed class InterceptsLocationAttribute : Attribute
+        {
+        public InterceptsLocationAttribute(string filePath, int line, int character)
+        {
+        }
+        }
+        }
+        """;
 
         var verifier = CompileAndVerify(
             (source, "Program.cs"),
@@ -1109,40 +1109,40 @@ public class InterceptorsTests : CSharpTestBase
     {
         // Intercept a call with a virtual method call on the base type.
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            D d = new D();
-            d.M();
+        D d = new D();
+        d.M();
 
-            class C
-            {
-                [InterceptsLocation("Program.cs", 5, 3)]
-                public virtual void Interceptor() => throw null!;
-            }
+        class C
+        {
+        [InterceptsLocation("Program.cs", 5, 3)]
+        public virtual void Interceptor() => throw null!;
+        }
 
-            class D : C
-            {
+        class D : C
+        {
 
-                public void M() => throw null!;
+        public void M() => throw null!;
 
-                public override void Interceptor() => throw null!;
-            }
+        public override void Interceptor() => throw null!;
+        }
 
-            namespace System.Runtime.CompilerServices
-            {
-                [AttributeUsage(AttributeTargets.Method)]
-                public sealed class InterceptableAttribute : Attribute { }
+        namespace System.Runtime.CompilerServices
+        {
+        [AttributeUsage(AttributeTargets.Method)]
+        public sealed class InterceptableAttribute : Attribute { }
 
-                [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-                public sealed class InterceptsLocationAttribute : Attribute
-                {
-                    public InterceptsLocationAttribute(string filePath, int line, int character)
-                    {
-                    }
-                }
-            }
-            """;
+        [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
+        public sealed class InterceptsLocationAttribute : Attribute
+        {
+        public InterceptsLocationAttribute(string filePath, int line, int character)
+        {
+        }
+        }
+        }
+        """;
 
         var comp = CreateCompilation((source, "Program.cs"), parseOptions: RegularWithInterceptors);
         comp.VerifyEmitDiagnostics(
@@ -1162,40 +1162,40 @@ public class InterceptorsTests : CSharpTestBase
     {
         // Intercept a call with a call to an override method on a derived type.
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            D d = new D();
-            d.M();
+        D d = new D();
+        d.M();
 
-            class C
-            {
+        class C
+        {
 
-                public void M() => throw null!;
+        public void M() => throw null!;
 
-                public virtual void Interceptor() => throw null!;
-            }
+        public virtual void Interceptor() => throw null!;
+        }
 
-            class D : C
-            {
-                [InterceptsLocation("Program.cs", 5, 3)] // 1
-                public override void Interceptor() => throw null!;
-            }
+        class D : C
+        {
+        [InterceptsLocation("Program.cs", 5, 3)] // 1
+        public override void Interceptor() => throw null!;
+        }
 
-            namespace System.Runtime.CompilerServices
-            {
-                [AttributeUsage(AttributeTargets.Method)]
-                public sealed class InterceptableAttribute : Attribute { }
+        namespace System.Runtime.CompilerServices
+        {
+        [AttributeUsage(AttributeTargets.Method)]
+        public sealed class InterceptableAttribute : Attribute { }
 
-                [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-                public sealed class InterceptsLocationAttribute : Attribute
-                {
-                    public InterceptsLocationAttribute(string filePath, int line, int character)
-                    {
-                    }
-                }
-            }
-            """;
+        [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
+        public sealed class InterceptsLocationAttribute : Attribute
+        {
+        public InterceptsLocationAttribute(string filePath, int line, int character)
+        {
+        }
+        }
+        }
+        """;
 
         var comp = CreateCompilation((source, "Program.cs"), parseOptions: RegularWithInterceptors);
         comp.VerifyEmitDiagnostics(
@@ -1215,40 +1215,40 @@ public class InterceptorsTests : CSharpTestBase
     {
         // Intercept a call with an override method on the same type.
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            D d = new D();
-            d.M();
+        D d = new D();
+        d.M();
 
-            class C
-            {
-                public virtual void Interceptor() => throw null!;
-            }
+        class C
+        {
+        public virtual void Interceptor() => throw null!;
+        }
 
-            class D : C
-            {
+        class D : C
+        {
 
-                public void M() => throw null!;
+        public void M() => throw null!;
 
-                [InterceptsLocation("Program.cs", 5, 3)]
-                public override void Interceptor() => Console.Write(1);
-            }
+        [InterceptsLocation("Program.cs", 5, 3)]
+        public override void Interceptor() => Console.Write(1);
+        }
 
-            namespace System.Runtime.CompilerServices
-            {
-                [AttributeUsage(AttributeTargets.Method)]
-                public sealed class InterceptableAttribute : Attribute { }
+        namespace System.Runtime.CompilerServices
+        {
+        [AttributeUsage(AttributeTargets.Method)]
+        public sealed class InterceptableAttribute : Attribute { }
 
-                [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-                public sealed class InterceptsLocationAttribute : Attribute
-                {
-                    public InterceptsLocationAttribute(string filePath, int line, int character)
-                    {
-                    }
-                }
-            }
-            """;
+        [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
+        public sealed class InterceptsLocationAttribute : Attribute
+        {
+        public InterceptsLocationAttribute(string filePath, int line, int character)
+        {
+        }
+        }
+        }
+        """;
 
         var verifier = CompileAndVerify(
             (source, "Program.cs"),
@@ -1263,28 +1263,28 @@ public class InterceptorsTests : CSharpTestBase
     {
         // We can emit a ref assembly even though there are duplicate interceptions.
         var source = """
-            using System.Runtime.CompilerServices;
+        using System.Runtime.CompilerServices;
 
-            class C
-            {
-                public static void Main()
-                {
-                    C.M();
-                }
+        class C
+        {
+        public static void Main()
+        {
+        C.M();
+        }
 
 
-                public static void M() { }
-            }
+        public static void M() { }
+        }
 
-            class D
-            {
-                [InterceptsLocation("Program.cs", 7, 11)]
-                public static void M1() { }
+        class D
+        {
+        [InterceptsLocation("Program.cs", 7, 11)]
+        public static void M1() { }
 
-                [InterceptsLocation("Program.cs", 7, 11)]
-                public static void M2() { }
-            }
-            """;
+        [InterceptsLocation("Program.cs", 7, 11)]
+        public static void M2() { }
+        }
+        """;
 
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
@@ -1321,23 +1321,23 @@ public class InterceptorsTests : CSharpTestBase
         // We can't emit a ref assembly when a problem is found with an InterceptsLocationAttribute in the declaration phase.
         // Strictly, we should perhaps allow this emit anyway, but it doesn't feel urgent to do so.
         var source = """
-            using System.Runtime.CompilerServices;
+        using System.Runtime.CompilerServices;
 
-            C.M();
+        C.M();
 
-            class C
-            {
+        class C
+        {
 
-                public static void M() { }
-            }
+        public static void M() { }
+        }
 
-            class D
-            {
-                [InterceptsLocation("Program.cs", 3, 4)]
-                public static void M1() { }
+        class D
+        {
+        [InterceptsLocation("Program.cs", 3, 4)]
+        public static void M1() { }
 
-            }
-            """;
+        }
+        """;
 
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
@@ -1361,26 +1361,26 @@ public class InterceptorsTests : CSharpTestBase
     {
         // Verify that `[InterceptsLocation]` on a method from metadata does not cause a call in the current compilation to be intercepted.
         var source0 = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            public class C0
-            {
+        public class C0
+        {
 
-                public static void InterceptableMethod(string param) { Console.Write("interceptable " + param); }
+        public static void InterceptableMethod(string param) { Console.Write("interceptable " + param); }
 
-                static void M0()
-                {
-                    InterceptableMethod("1");
-                }
-            }
+        static void M0()
+        {
+        InterceptableMethod("1");
+        }
+        }
 
-            public static class D
-            {
-                [InterceptsLocation("Program.cs", 11, 9)]
-                public static void Interceptor1(string param) { Console.Write("interceptor " + param); }
-            }
-            """;
+        public static class D
+        {
+        [InterceptsLocation("Program.cs", 11, 9)]
+        public static void Interceptor1(string param) { Console.Write("interceptor " + param); }
+        }
+        """;
         var comp0 = CreateCompilation(
             new[] { (source0, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -1389,19 +1389,19 @@ public class InterceptorsTests : CSharpTestBase
 
         var source1 = """
 
-            using System;
+        using System;
 
-            class C1
-            {
+        class C1
+        {
 
-                public static void InterceptableMethod(string param) { Console.Write("interceptable " + param); }
+        public static void InterceptableMethod(string param) { Console.Write("interceptable " + param); }
 
-                static void Main()
-                {
-                    InterceptableMethod("1");
-                }
-            }
-            """;
+        static void Main()
+        {
+        InterceptableMethod("1");
+        }
+        }
+        """;
 
         var comp1 = CompileAndVerify(
             new[] { (source1, "Program.cs") },
@@ -1424,30 +1424,30 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptableDelegateConversion()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
+        class C
+        {
 
-                public C InterceptableMethod(string param) { Console.Write("interceptable " + param); return this; }
-            }
+        public C InterceptableMethod(string param) { Console.Write("interceptable " + param); return this; }
+        }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    var c = new C();
-                    var del = c.InterceptableMethod;
-                }
-            }
+        static class Program
+        {
+        public static void Main()
+        {
+        var c = new C();
+        var del = c.InterceptableMethod;
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 15, 21)]
-                public static C Interceptor1(this C i1, string param) { Console.Write("interceptor " + param); return i1; }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 15, 21)]
+        public static C Interceptor1(this C i1, string param) { Console.Write("interceptor " + param); return i1; }
+        }
+        """;
         var compilation = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -1468,22 +1468,22 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptableNameof()
     {
         var source = """
-            using System.Runtime.CompilerServices;
+        using System.Runtime.CompilerServices;
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    _ = nameof(Main);
-                }
-            }
+        static class Program
+        {
+        public static void Main()
+        {
+        _ = nameof(Main);
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 7, 13)]
-                public static void Interceptor1(object param) { }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 7, 13)]
+        public static void Interceptor1(object param) { }
+        }
+        """;
         var compilation = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -1500,32 +1500,32 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptableNameof_MethodCall()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    _ = nameof(F);
-                }
+        static class Program
+        {
+        public static void Main()
+        {
+        _ = nameof(F);
+        }
 
-                private static object F = 1;
+        private static object F = 1;
 
 
-                public static string nameof(object param) => throw null!;
-            }
+        public static string nameof(object param) => throw null!;
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 8, 13)]
-                public static string Interceptor1(object param)
-                {
-                    Console.Write(1);
-                    return param.ToString();
-                }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 8, 13)]
+        public static string Interceptor1(object param)
+        {
+        Console.Write(1);
+        return param.ToString();
+        }
+        }
+        """;
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -1538,33 +1538,33 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptableDoubleUnderscoreReservedIdentifiers()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    M1(__arglist(1, 2, 3));
+        static class Program
+        {
+        public static void Main()
+        {
+        M1(__arglist(1, 2, 3));
 
-                    int i = 0;
-                    TypedReference tr = __makeref(i);
-                    ref int ri = ref __refvalue(tr, int);
-                    Type t = __reftype(tr);
-                }
+        int i = 0;
+        TypedReference tr = __makeref(i);
+        ref int ri = ref __refvalue(tr, int);
+        Type t = __reftype(tr);
+        }
 
-                static void M1(__arglist) { }
-            }
+        static void M1(__arglist) { }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 8, 12)] // __arglist
-                [InterceptsLocation("Program.cs", 11, 29)] // __makeref
-                [InterceptsLocation("Program.cs", 12, 26)] // __refvalue
-                [InterceptsLocation("Program.cs", 13, 18)] // __reftype
-                public static void Interceptor1(int x, int y, int z) { }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 8, 12)] // __arglist
+        [InterceptsLocation("Program.cs", 11, 29)] // __makeref
+        [InterceptsLocation("Program.cs", 12, 26)] // __refvalue
+        [InterceptsLocation("Program.cs", 13, 18)] // __reftype
+        public static void Interceptor1(int x, int y, int z) { }
+        }
+        """;
         var compilation = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -1609,25 +1609,25 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptableDelegateInvocation()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            C.M(() => Console.Write(1));
+        C.M(() => Console.Write(1));
 
-            static class C
-            {
-                public static void M(Action action)
-                {
-                    action();
-                }
-            }
+        static class C
+        {
+        public static void M(Action action)
+        {
+        action();
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 10, 9)]
-                public static void Interceptor1(this Action action) { action(); Console.Write(2); }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 10, 9)]
+        public static void Interceptor1(this Action action) { action(); Console.Write(2); }
+        }
+        """;
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -1640,30 +1640,30 @@ public class InterceptorsTests : CSharpTestBase
     public void QualifiedNameAtCallSite()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
+        class C
+        {
 
-                public static C InterceptableMethod(C c, string param) { Console.Write("interceptable " + param); return c; }
-            }
+        public static C InterceptableMethod(C c, string param) { Console.Write("interceptable " + param); return c; }
+        }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    var c = new C();
-                    C.InterceptableMethod(c, "call site");
-                }
-            }
+        static class Program
+        {
+        public static void Main()
+        {
+        var c = new C();
+        C.InterceptableMethod(c, "call site");
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 15, 11)]
-                public static C Interceptor1(C c, string param) { Console.Write("interceptor " + param); return c; }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 15, 11)]
+        public static C Interceptor1(C c, string param) { Console.Write("interceptor " + param); return c; }
+        }
+        """;
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -1676,30 +1676,30 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptableStaticMethod_InterceptorExtensionMethod()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
+        class C
+        {
 
-                public static C InterceptableMethod(C c, string param) { Console.Write("interceptable " + param); return c; }
-            }
+        public static C InterceptableMethod(C c, string param) { Console.Write("interceptable " + param); return c; }
+        }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    var c = new C();
-                    C.InterceptableMethod(c, "call site");
-                }
-            }
+        static class Program
+        {
+        public static void Main()
+        {
+        var c = new C();
+        C.InterceptableMethod(c, "call site");
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 15, 11)]
-                public static C Interceptor1(this C c, string param) { Console.Write("interceptor " + param); return c; }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 15, 11)]
+        public static C Interceptor1(this C c, string param) { Console.Write("interceptor " + param); return c; }
+        }
+        """;
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -1712,23 +1712,23 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptableExtensionMethod_InterceptorStaticMethod()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            var c = new C();
-            c.InterceptableMethod();
+        var c = new C();
+        c.InterceptableMethod();
 
-            class C { }
+        class C { }
 
-            static class D
-            {
+        static class D
+        {
 
-                public static void InterceptableMethod(this C c) => throw null!;
+        public static void InterceptableMethod(this C c) => throw null!;
 
-                [InterceptsLocation("Program.cs", 5, 3)]
-                public static void Interceptor1(C c) => throw null!;
-            }
-            """;
+        [InterceptsLocation("Program.cs", 5, 3)]
+        public static void Interceptor1(C c) => throw null!;
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -1749,23 +1749,23 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptableExtensionMethod_InterceptorStaticMethod_NormalForm()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            var c = new C();
-            D.InterceptableMethod(c);
+        var c = new C();
+        D.InterceptableMethod(c);
 
-            class C { }
+        class C { }
 
-            static class D
-            {
+        static class D
+        {
 
-                public static void InterceptableMethod(this C c) => throw null!;
+        public static void InterceptableMethod(this C c) => throw null!;
 
-                [InterceptsLocation("Program.cs", 5, 3)]
-                public static void Interceptor1(C c) => Console.Write(1);
-            }
-            """;
+        [InterceptsLocation("Program.cs", 5, 3)]
+        public static void Interceptor1(C c) => Console.Write(1);
+        }
+        """;
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -1778,26 +1778,26 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptableStaticMethod_InterceptorInstanceMethod()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    C.InterceptableMethod("call site");
-                }
-            }
+        static class Program
+        {
+        public static void Main()
+        {
+        C.InterceptableMethod("call site");
+        }
+        }
 
-            class C
-            {
+        class C
+        {
 
-                public static void InterceptableMethod(string param) { Console.Write("interceptable " + param); }
+        public static void InterceptableMethod(string param) { Console.Write("interceptable " + param); }
 
-                [InterceptsLocation("Program.cs", 8, 11)]
-                public void Interceptor1(string param) { Console.Write("interceptor " + param); }
-            }
-            """;
+        [InterceptsLocation("Program.cs", 8, 11)]
+        public void Interceptor1(string param) { Console.Write("interceptor " + param); }
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -1818,30 +1818,30 @@ public class InterceptorsTests : CSharpTestBase
     public void ArgumentLabels()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
+        class C
+        {
 
-                public void InterceptableMethod(string s1, string s2) { Console.Write(s1 + s2); }
-            }
+        public void InterceptableMethod(string s1, string s2) { Console.Write(s1 + s2); }
+        }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    var c = new C();
-                    c.InterceptableMethod(s2: "World", s1: "Hello ");
-                }
-            }
+        static class Program
+        {
+        public static void Main()
+        {
+        var c = new C();
+        c.InterceptableMethod(s2: "World", s1: "Hello ");
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 15, 11)]
-                public static void Interceptor1(this C c, string s1, string s2) { Console.Write("interceptor " + s1 + s2); }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 15, 11)]
+        public static void Interceptor1(this C c, string s1, string s2) { Console.Write("interceptor " + s1 + s2); }
+        }
+        """;
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -1854,30 +1854,30 @@ public class InterceptorsTests : CSharpTestBase
     public void ParameterNameDifference()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
+        class C
+        {
 
-                public void InterceptableMethod(string s1) => throw null!;
-            }
+        public void InterceptableMethod(string s1) => throw null!;
+        }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    var c = new C();
-                    c.InterceptableMethod(s1: "1");
-                }
-            }
+        static class Program
+        {
+        public static void Main()
+        {
+        var c = new C();
+        c.InterceptableMethod(s1: "1");
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 15, 11)]
-                public static void Interceptor1(this C c, string s2) { Console.Write(s2); }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 15, 11)]
+        public static void Interceptor1(this C c, string s2) { Console.Write(s2); }
+        }
+        """;
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -1890,32 +1890,32 @@ public class InterceptorsTests : CSharpTestBase
     public void ParameterNamesInDifferentOrder()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
+        class C
+        {
 
-                public void InterceptableMethod(string s1, string s2) => throw null!;
-            }
+        public void InterceptableMethod(string s1, string s2) => throw null!;
+        }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    var c = new C();
-                    c.InterceptableMethod("1", "2");
-                    c.InterceptableMethod(s2: "4", s1: "3");
-                }
-            }
+        static class Program
+        {
+        public static void Main()
+        {
+        var c = new C();
+        c.InterceptableMethod("1", "2");
+        c.InterceptableMethod(s2: "4", s1: "3");
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 15, 11)]
-                [InterceptsLocation("Program.cs", 16, 11)]
-                public static void Interceptor1(this C c, string s2, string s1) { Console.Write(s2); Console.Write(s1); }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 15, 11)]
+        [InterceptsLocation("Program.cs", 16, 11)]
+        public static void Interceptor1(this C c, string s2, string s1) { Console.Write(s2); Console.Write(s1); }
+        }
+        """;
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -1928,30 +1928,30 @@ public class InterceptorsTests : CSharpTestBase
     public void AttributeArgumentLabels_01()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
+        class C
+        {
 
-                public void InterceptableMethod() => throw null!;
-            }
+        public void InterceptableMethod() => throw null!;
+        }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    var c = new C();
-                    c.InterceptableMethod();
-                }
-            }
+        static class Program
+        {
+        public static void Main()
+        {
+        var c = new C();
+        c.InterceptableMethod();
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", character: 11, line: 15)]
-                public static void Interceptor1(this C c) { Console.Write(1); }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", character: 11, line: 15)]
+        public static void Interceptor1(this C c) { Console.Write(1); }
+        }
+        """;
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -1964,29 +1964,29 @@ public class InterceptorsTests : CSharpTestBase
     public void AttributeArgumentLabels_02()
     {
         var source = """
-            using System.Runtime.CompilerServices;
+        using System.Runtime.CompilerServices;
 
-            class C
-            {
+        class C
+        {
 
-                public void InterceptableMethod() => throw null!;
-            }
+        public void InterceptableMethod() => throw null!;
+        }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    var c = new C();
-                    c.InterceptableMethod();
-                }
-            }
+        static class Program
+        {
+        public static void Main()
+        {
+        var c = new C();
+        c.InterceptableMethod();
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", character: 1, line: 50)] // 1
-                public static void Interceptor1(this C c) => throw null!;
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", character: 1, line: 50)] // 1
+        public static void Interceptor1(this C c) => throw null!;
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -2004,31 +2004,31 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptableExtensionMethod_InterceptorExtensionMethod_Sequence()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            interface I1 { }
-            class C : I1 { }
+        interface I1 { }
+        class C : I1 { }
 
-            static class Program
-            {
+        static class Program
+        {
 
-                public static I1 InterceptableMethod(this I1 i1, string param) { Console.Write("interceptable " + param); return i1; }
+        public static I1 InterceptableMethod(this I1 i1, string param) { Console.Write("interceptable " + param); return i1; }
 
-                public static void Main()
-                {
-                    var c = new C();
-                    c.InterceptableMethod("call site")
-                        .InterceptableMethod("call site");
-                }
-            }
+        public static void Main()
+        {
+        var c = new C();
+        c.InterceptableMethod("call site")
+        .InterceptableMethod("call site");
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 15, 11)]
-                public static I1 Interceptor1(this I1 i1, string param) { Console.Write("interceptor " + param); return i1; }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 15, 11)]
+        public static I1 Interceptor1(this I1 i1, string param) { Console.Write("interceptor " + param); return i1; }
+        }
+        """;
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -2042,34 +2042,34 @@ public class InterceptorsTests : CSharpTestBase
     {
         var source1 = """
 
-            using System;
+        using System;
 
-            public class C
-            {
+        public class C
+        {
 
-                public C InterceptableMethod(string param) { Console.Write("interceptable " + param); return this; }
-            }
-            """;
+        public C InterceptableMethod(string param) { Console.Write("interceptable " + param); return this; }
+        }
+        """;
 
         var source2 = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    var c = new C();
-                    c.InterceptableMethod("call site");
-                }
-            }
+        static class Program
+        {
+        public static void Main()
+        {
+        var c = new C();
+        c.InterceptableMethod("call site");
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 9, 11)]
-                public static C Interceptor1(this C c, string param) { Console.Write("interceptor " + param); return c; }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 9, 11)]
+        public static C Interceptor1(this C c, string param) { Console.Write("interceptor " + param); return c; }
+        }
+        """;
 
         var comp1 = CreateCompilation(
             new[] { (source1, "File1.cs"), s_attributesSource },
@@ -2090,31 +2090,31 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptsLocation_BadMethodKind()
     {
         var source = """
-            using System.Runtime.CompilerServices;
+        using System.Runtime.CompilerServices;
 
-            static class Program
-            {
+        static class Program
+        {
 
-                public static void InterceptableMethod(string param) { }
+        public static void InterceptableMethod(string param) { }
 
-                public static void Main()
-                {
-                    InterceptableMethod("");
-                    Interceptor1("");
+        public static void Main()
+        {
+        InterceptableMethod("");
+        Interceptor1("");
 
-                    var lambda = [InterceptsLocation("Program.cs", 13, 8)] (string param) => { }; // 1
+        var lambda = [InterceptsLocation("Program.cs", 13, 8)] (string param) => { }; // 1
 
-                    [InterceptsLocation("Program.cs", 13, 8)] // 2
-                    static void Interceptor1(string param) { }
-                }
+        [InterceptsLocation("Program.cs", 13, 8)] // 2
+        static void Interceptor1(string param) { }
+        }
 
-                public static string Prop
-                {
-                    [InterceptsLocation("Program.cs", 13, 8)] // 3
-                    set { }
-                }
-            }
-            """;
+        public static string Prop
+        {
+        [InterceptsLocation("Program.cs", 13, 8)] // 3
+        set { }
+        }
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -2148,31 +2148,31 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptorCannotBeGeneric_01()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            interface I1 { }
-            class C : I1
-            {
+        interface I1 { }
+        class C : I1
+        {
 
-                public I1 InterceptableMethod(string param) { Console.Write("interceptable " + param); return this; }
-            }
+        public I1 InterceptableMethod(string param) { Console.Write("interceptable " + param); return this; }
+        }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    var c = new C();
-                    c.InterceptableMethod("call site");
-                }
-            }
+        static class Program
+        {
+        public static void Main()
+        {
+        var c = new C();
+        c.InterceptableMethod("call site");
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 16, 11)]
-                public static I1 Interceptor1<T>(this I1 i1, string param) { Console.Write("interceptor " + param); return i1; }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 16, 11)]
+        public static I1 Interceptor1<T>(this I1 i1, string param) { Console.Write("interceptor " + param); return i1; }
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -2193,30 +2193,30 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptorCannotBeGeneric_02()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            interface I1 { }
-            class C : I1
-            {
+        interface I1 { }
+        class C : I1
+        {
 
-                public static void InterceptableMethod(string param) { Console.Write("interceptable " + param); }
-            }
+        public static void InterceptableMethod(string param) { Console.Write("interceptable " + param); }
+        }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    C.InterceptableMethod("call site");
-                }
-            }
+        static class Program
+        {
+        public static void Main()
+        {
+        C.InterceptableMethod("call site");
+        }
+        }
 
-            static class D<T>
-            {
-                [InterceptsLocation("Program.cs", 15, 11)]
-                public static void Interceptor1(string param) { Console.Write("interceptor " + param); }
-            }
-            """;
+        static class D<T>
+        {
+        [InterceptsLocation("Program.cs", 15, 11)]
+        public static void Interceptor1(string param) { Console.Write("interceptor " + param); }
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -2237,33 +2237,33 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptorCannotBeGeneric_03()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            interface I1 { }
-            class C : I1
-            {
+        interface I1 { }
+        class C : I1
+        {
 
-                public static void InterceptableMethod(string param) { Console.Write("interceptable " + param); }
-            }
+        public static void InterceptableMethod(string param) { Console.Write("interceptable " + param); }
+        }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    C.InterceptableMethod("call site");
-                }
-            }
+        static class Program
+        {
+        public static void Main()
+        {
+        C.InterceptableMethod("call site");
+        }
+        }
 
-            static class Outer<T>
-            {
-                static class D
-                {
-                    [InterceptsLocation("Program.cs", 15, 11)]
-                    public static void Interceptor1(string param) { Console.Write("interceptor " + param); }
-                }
-            }
-            """;
+        static class Outer<T>
+        {
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 15, 11)]
+        public static void Interceptor1(string param) { Console.Write("interceptor " + param); }
+        }
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -2284,31 +2284,31 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptableGeneric_01()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
+        class C
+        {
 
-                public static void InterceptableMethod<T>(T t) { Console.Write("0"); }
-            }
+        public static void InterceptableMethod<T>(T t) { Console.Write("0"); }
+        }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    C.InterceptableMethod<string>("1");
-                    C.InterceptableMethod("2");
-                }
-            }
+        static class Program
+        {
+        public static void Main()
+        {
+        C.InterceptableMethod<string>("1");
+        C.InterceptableMethod("2");
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 14, 11)]
-                [InterceptsLocation("Program.cs", 15, 11)]
-                public static void Interceptor1(string s) { Console.Write(s); }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 14, 11)]
+        [InterceptsLocation("Program.cs", 15, 11)]
+        public static void Interceptor1(string s) { Console.Write(s); }
+        }
+        """;
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -2321,31 +2321,31 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptableGeneric_02()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
+        class C
+        {
 
-                public static void InterceptableMethod<T>(T t) { Console.Write("0"); }
-            }
+        public static void InterceptableMethod<T>(T t) { Console.Write("0"); }
+        }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    C.InterceptableMethod<string>("1");
-                }
-            }
+        static class Program
+        {
+        public static void Main()
+        {
+        C.InterceptableMethod<string>("1");
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 14, 30)]
-                [InterceptsLocation("Program.cs", 14, 31)]
-                [InterceptsLocation("Program.cs", 14, 37)]
-                public static void Interceptor1(string s) { Console.Write(s); }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 14, 30)]
+        [InterceptsLocation("Program.cs", 14, 31)]
+        [InterceptsLocation("Program.cs", 14, 37)]
+        public static void Interceptor1(string s) { Console.Write(s); }
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -2382,29 +2382,29 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptableGeneric_03()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
+        class C
+        {
 
-                public static void InterceptableMethod<T>(T t) where T : class => throw null!;
-            }
+        public static void InterceptableMethod<T>(T t) where T : class => throw null!;
+        }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    C.InterceptableMethod<string>("1");
-                }
-            }
+        static class Program
+        {
+        public static void Main()
+        {
+        C.InterceptableMethod<string>("1");
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 14, 11)]
-                public static void Interceptor1(string s) { Console.Write(s); }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 14, 11)]
+        public static void Interceptor1(string s) { Console.Write(s); }
+        }
+        """;
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -2417,33 +2417,33 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptableGeneric_04()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
+        class C
+        {
 
-                public static void InterceptableMethod<T1>(T1 t) => throw null!;
-            }
+        public static void InterceptableMethod<T1>(T1 t) => throw null!;
+        }
 
-            static class Program
-            {
-                public static void M<T2>(T2 t)
-                {
-                    C.InterceptableMethod(t);
-                    C.InterceptableMethod<T2>(t);
-                    C.InterceptableMethod<object>(t);
-                }
-            }
+        static class Program
+        {
+        public static void M<T2>(T2 t)
+        {
+        C.InterceptableMethod(t);
+        C.InterceptableMethod<T2>(t);
+        C.InterceptableMethod<object>(t);
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 14, 11)] // 1
-                [InterceptsLocation("Program.cs", 15, 11)] // 2
-                [InterceptsLocation("Program.cs", 16, 11)]
-                public static void Interceptor1(object s) { Console.Write(s); }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 14, 11)] // 1
+        [InterceptsLocation("Program.cs", 15, 11)] // 2
+        [InterceptsLocation("Program.cs", 16, 11)]
+        public static void Interceptor1(object s) { Console.Write(s); }
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -2472,32 +2472,32 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptableGeneric_05()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            C.Usage(1);
-            C.Usage(2);
+        C.Usage(1);
+        C.Usage(2);
 
-            class C
-            {
-                public static void InterceptableMethod<T1>(T1 t) => throw null!;
+        class C
+        {
+        public static void InterceptableMethod<T1>(T1 t) => throw null!;
 
-                public static void Usage<T2>(T2 t)
-                {
-                    C.InterceptableMethod(t);
-                    C.InterceptableMethod<T2>(t);
-                    C.InterceptableMethod<object>(t);
-                }
-            }
+        public static void Usage<T2>(T2 t)
+        {
+        C.InterceptableMethod(t);
+        C.InterceptableMethod<T2>(t);
+        C.InterceptableMethod<object>(t);
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 13, 11)]
-                [InterceptsLocation("Program.cs", 14, 11)]
-                [InterceptsLocation("Program.cs", 15, 11)]
-                public static void Interceptor1<T>(T t) { Console.Write(t); }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 13, 11)]
+        [InterceptsLocation("Program.cs", 14, 11)]
+        [InterceptsLocation("Program.cs", 15, 11)]
+        public static void Interceptor1<T>(T t) { Console.Write(t); }
+        }
+        """;
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -2510,25 +2510,25 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptableGeneric_06()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
-                public static void InterceptableMethod<T1>(T1 t) => throw null!;
+        class C
+        {
+        public static void InterceptableMethod<T1>(T1 t) => throw null!;
 
-                public static void Usage()
-                {
-                    C.InterceptableMethod("abc");
-                }
-            }
+        public static void Usage()
+        {
+        C.InterceptableMethod("abc");
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 10, 11)] // 1
-                public static void Interceptor1<T>(T t) where T : struct => throw null!;
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 10, 11)] // 1
+        public static void Interceptor1<T>(T t) where T : struct => throw null!;
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -2550,30 +2550,30 @@ public class InterceptorsTests : CSharpTestBase
     {
         // original containing type is generic
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            D.Usage(1);
-            D.Usage(2);
+        D.Usage(1);
+        D.Usage(2);
 
-            class C<T1>
-            {
-                public static void InterceptableMethod(T1 t) => throw null!;
-            }
+        class C<T1>
+        {
+        public static void InterceptableMethod(T1 t) => throw null!;
+        }
 
-            static class D
-            {
-                public static void Usage<T2>(T2 t)
-                {
-                    C<T2>.InterceptableMethod(t);
-                    C<object>.InterceptableMethod(t);
-                }
+        static class D
+        {
+        public static void Usage<T2>(T2 t)
+        {
+        C<T2>.InterceptableMethod(t);
+        C<object>.InterceptableMethod(t);
+        }
 
-                [InterceptsLocation("Program.cs", 16, 15)]
-                [InterceptsLocation("Program.cs", 17, 19)]
-                public static void Interceptor1<T>(T t) { Console.Write(t); }
-            }
-            """;
+        [InterceptsLocation("Program.cs", 16, 15)]
+        [InterceptsLocation("Program.cs", 17, 19)]
+        public static void Interceptor1<T>(T t) { Console.Write(t); }
+        }
+        """;
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -2588,34 +2588,34 @@ public class InterceptorsTests : CSharpTestBase
         // original containing type and method are generic
         // interceptor has arity 2
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            D.Usage(1, "a");
-            D.Usage(2, "b");
+        D.Usage(1, "a");
+        D.Usage(2, "b");
 
-            class C<T1>
-            {
-                public static void InterceptableMethod<T2>(T1 t1, T2 t2) => throw null!;
-            }
+        class C<T1>
+        {
+        public static void InterceptableMethod<T2>(T1 t1, T2 t2) => throw null!;
+        }
 
-            static class D
-            {
-                public static void Usage<T1, T2>(T1 t1, T2 t2)
-                {
-                    C<T1>.InterceptableMethod(t1, t2);
-                    C<object>.InterceptableMethod<object>(t1, t2);
-                }
+        static class D
+        {
+        public static void Usage<T1, T2>(T1 t1, T2 t2)
+        {
+        C<T1>.InterceptableMethod(t1, t2);
+        C<object>.InterceptableMethod<object>(t1, t2);
+        }
 
-                [InterceptsLocation("Program.cs", 16, 15)]
-                [InterceptsLocation("Program.cs", 17, 19)]
-                public static void Interceptor1<T1, T2>(T1 t1, T2 t2)
-                {
-                    Console.Write(t1);
-                    Console.Write(t2);
-                }
-            }
-            """;
+        [InterceptsLocation("Program.cs", 16, 15)]
+        [InterceptsLocation("Program.cs", 17, 19)]
+        public static void Interceptor1<T1, T2>(T1 t1, T2 t2)
+        {
+        Console.Write(t1);
+        Console.Write(t2);
+        }
+        }
+        """;
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -2633,24 +2633,24 @@ public class InterceptorsTests : CSharpTestBase
         // Note: the behavior in this scenario might push us toward using a "unification" model for generic interceptors.
         // All the cases supported in our current design would also be supported by unification, so we should be able to add it later.
         var source = """
-            using System.Runtime.CompilerServices;
+        using System.Runtime.CompilerServices;
 
-            class C<T1>
-            {
-                public static void InterceptableMethod<T2>(T1 t1, T2 t2) => throw null!;
-            }
+        class C<T1>
+        {
+        public static void InterceptableMethod<T2>(T1 t1, T2 t2) => throw null!;
+        }
 
-            static class D
-            {
-                public static void Usage<T>(object obj, T t)
-                {
-                    C<object>.InterceptableMethod(obj, t);
-                }
+        static class D
+        {
+        public static void Usage<T>(object obj, T t)
+        {
+        C<object>.InterceptableMethod(obj, t);
+        }
 
-                [InterceptsLocation("Program.cs", 12, 19)] // 1
-                public static void Interceptor1<T>(object obj, T t) => throw null!;
-            }
-            """;
+        [InterceptsLocation("Program.cs", 12, 19)] // 1
+        public static void Interceptor1<T>(object obj, T t) => throw null!;
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -2677,31 +2677,31 @@ public class InterceptorsTests : CSharpTestBase
         // original containing type and method are generic
         // interceptor has arity 0
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C<T1>
-            {
-                public static void InterceptableMethod<T2>(T1 t1, T2 t2) => throw null!;
-            }
+        class C<T1>
+        {
+        public static void InterceptableMethod<T2>(T1 t1, T2 t2) => throw null!;
+        }
 
-            static class D
-            {
-                public static void Main()
-                {
-                    C<int>.InterceptableMethod(1, "a");
-                    C<int>.InterceptableMethod<string>(2, "b");
-                }
+        static class D
+        {
+        public static void Main()
+        {
+        C<int>.InterceptableMethod(1, "a");
+        C<int>.InterceptableMethod<string>(2, "b");
+        }
 
-                [InterceptsLocation("Program.cs", 13, 16)]
-                [InterceptsLocation("Program.cs", 14, 16)]
-                public static void Interceptor1(int i, string s)
-                {
-                    Console.Write(i);
-                    Console.Write(s);
-                }
-            }
-            """;
+        [InterceptsLocation("Program.cs", 13, 16)]
+        [InterceptsLocation("Program.cs", 14, 16)]
+        public static void Interceptor1(int i, string s)
+        {
+        Console.Write(i);
+        Console.Write(s);
+        }
+        }
+        """;
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -2716,37 +2716,37 @@ public class InterceptorsTests : CSharpTestBase
         // original grandparent type and method are generic
         // interceptor has arity 2
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            D.Usage(1, "a");
-            D.Usage(2, "b");
+        D.Usage(1, "a");
+        D.Usage(2, "b");
 
-            class Outer<T1>
-            {
-                public class C
-                {
-                    public static void InterceptableMethod<T2>(T1 t1, T2 t2) => throw null!;
-                }
-            }
+        class Outer<T1>
+        {
+        public class C
+        {
+        public static void InterceptableMethod<T2>(T1 t1, T2 t2) => throw null!;
+        }
+        }
 
-            static class D
-            {
-                public static void Usage<T1, T2>(T1 t1, T2 t2)
-                {
-                    Outer<T1>.C.InterceptableMethod(t1, t2);
-                    Outer<object>.C.InterceptableMethod<object>(t1, t2);
-                }
+        static class D
+        {
+        public static void Usage<T1, T2>(T1 t1, T2 t2)
+        {
+        Outer<T1>.C.InterceptableMethod(t1, t2);
+        Outer<object>.C.InterceptableMethod<object>(t1, t2);
+        }
 
-                [InterceptsLocation("Program.cs", 19, 21)]
-                [InterceptsLocation("Program.cs", 20, 25)]
-                public static void Interceptor1<T1, T2>(T1 t1, T2 t2)
-                {
-                    Console.Write(t1);
-                    Console.Write(t2);
-                }
-            }
-            """;
+        [InterceptsLocation("Program.cs", 19, 21)]
+        [InterceptsLocation("Program.cs", 20, 25)]
+        public static void Interceptor1<T1, T2>(T1 t1, T2 t2)
+        {
+        Console.Write(t1);
+        Console.Write(t2);
+        }
+        }
+        """;
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -2761,38 +2761,38 @@ public class InterceptorsTests : CSharpTestBase
         // original grandparent type, containing type, and method are generic
         // interceptor has arity 3
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            D.Usage(1, 2, 3);
-            D.Usage(4, 5, 6);
+        D.Usage(1, 2, 3);
+        D.Usage(4, 5, 6);
 
-            class Outer<T1>
-            {
-                public class C<T2>
-                {
-                    public static void InterceptableMethod<T3>(T1 t1, T2 t2, T3 t3) => throw null!;
-                }
-            }
+        class Outer<T1>
+        {
+        public class C<T2>
+        {
+        public static void InterceptableMethod<T3>(T1 t1, T2 t2, T3 t3) => throw null!;
+        }
+        }
 
-            static class D
-            {
-                public static void Usage<T1, T2, T3>(T1 t1, T2 t2, T3 t3)
-                {
-                    Outer<T1>.C<T2>.InterceptableMethod(t1, t2, t3);
-                    Outer<object>.C<object>.InterceptableMethod<object>(t1, t2, t3);
-                }
+        static class D
+        {
+        public static void Usage<T1, T2, T3>(T1 t1, T2 t2, T3 t3)
+        {
+        Outer<T1>.C<T2>.InterceptableMethod(t1, t2, t3);
+        Outer<object>.C<object>.InterceptableMethod<object>(t1, t2, t3);
+        }
 
-                [InterceptsLocation("Program.cs", 19, 25)]
-                [InterceptsLocation("Program.cs", 20, 33)]
-                public static void Interceptor1<T1, T2, T3>(T1 t1, T2 t2, T3 t3)
-                {
-                    Console.Write(t1);
-                    Console.Write(t2);
-                    Console.Write(t3);
-                }
-            }
-            """;
+        [InterceptsLocation("Program.cs", 19, 25)]
+        [InterceptsLocation("Program.cs", 20, 33)]
+        public static void Interceptor1<T1, T2, T3>(T1 t1, T2 t2, T3 t3)
+        {
+        Console.Write(t1);
+        Console.Write(t2);
+        Console.Write(t3);
+        }
+        }
+        """;
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -2807,35 +2807,35 @@ public class InterceptorsTests : CSharpTestBase
         // containing type has 2 type parameters, method is generic
         // interceptor has arity 3
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            D.Usage(1, 2, 3);
-            D.Usage(4, 5, 6);
+        D.Usage(1, 2, 3);
+        D.Usage(4, 5, 6);
 
-            class C<T1, T2>
-            {
-                public static void InterceptableMethod<T3>(T1 t1, T2 t2, T3 t3) => throw null!;
-            }
+        class C<T1, T2>
+        {
+        public static void InterceptableMethod<T3>(T1 t1, T2 t2, T3 t3) => throw null!;
+        }
 
-            static class D
-            {
-                public static void Usage<T1, T2, T3>(T1 t1, T2 t2, T3 t3)
-                {
-                    C<T1, T2>.InterceptableMethod(t1, t2, t3);
-                    C<object, object>.InterceptableMethod<object>(t1, t2, t3);
-                }
+        static class D
+        {
+        public static void Usage<T1, T2, T3>(T1 t1, T2 t2, T3 t3)
+        {
+        C<T1, T2>.InterceptableMethod(t1, t2, t3);
+        C<object, object>.InterceptableMethod<object>(t1, t2, t3);
+        }
 
-                [InterceptsLocation("Program.cs", 16, 19)]
-                [InterceptsLocation("Program.cs", 17, 27)]
-                public static void Interceptor1<T1, T2, T3>(T1 t1, T2 t2, T3 t3)
-                {
-                    Console.Write(t1);
-                    Console.Write(t2);
-                    Console.Write(t3);
-                }
-            }
-            """;
+        [InterceptsLocation("Program.cs", 16, 19)]
+        [InterceptsLocation("Program.cs", 17, 27)]
+        public static void Interceptor1<T1, T2, T3>(T1 t1, T2 t2, T3 t3)
+        {
+        Console.Write(t1);
+        Console.Write(t2);
+        Console.Write(t3);
+        }
+        }
+        """;
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -2849,22 +2849,22 @@ public class InterceptorsTests : CSharpTestBase
     {
         // original method is non-generic, interceptor is generic
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            C.Original();
+        C.Original();
 
-            class C
-            {
-                public static void Original() => throw null!;
-            }
+        class C
+        {
+        public static void Original() => throw null!;
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 4, 3)] // 1
-                public static void Interceptor1<T>() => throw null!;
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 4, 3)] // 1
+        public static void Interceptor1<T>() => throw null!;
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -2885,27 +2885,27 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptableGeneric_16()
     {
         var source = """
-            #nullable enable
+        #nullable enable
 
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
-                public static void InterceptableMethod<T1>(T1 t) => throw null!;
+        class C
+        {
+        public static void InterceptableMethod<T1>(T1 t) => throw null!;
 
-                public static void Main()
-                {
-                    C.InterceptableMethod<string?>(null);
-                }
-            }
+        public static void Main()
+        {
+        C.InterceptableMethod<string?>(null);
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 12, 11)] // 1
-                public static void Interceptor1<T>(T t) where T : notnull => Console.Write(1);
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 12, 11)] // 1
+        public static void Interceptor1<T>(T t) where T : notnull => Console.Write(1);
+        }
+        """;
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -2927,18 +2927,18 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptsLocationBadAttributeArguments_01()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 1, "10")]
-                [InterceptsLocation("Program.cs", 1, 1, 9999)]
-                [InterceptsLocation("Program.cs", ERROR, 1)]
-                [InterceptsLocation()]
-                public static void Interceptor1(string param) { Console.Write("interceptor " + param); }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 1, "10")]
+        [InterceptsLocation("Program.cs", 1, 1, 9999)]
+        [InterceptsLocation("Program.cs", ERROR, 1)]
+        [InterceptsLocation()]
+        public static void Interceptor1(string param) { Console.Write("interceptor " + param); }
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -2977,30 +2977,30 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptsLocationBadPath_01()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            interface I1 { }
-            class C : I1 { }
+        interface I1 { }
+        class C : I1 { }
 
-            static class Program
-            {
+        static class Program
+        {
 
-                public static I1 InterceptableMethod(this I1 i1, string param) { Console.Write("interceptable " + param); return i1; }
+        public static I1 InterceptableMethod(this I1 i1, string param) { Console.Write("interceptable " + param); return i1; }
 
-                public static void Main()
-                {
-                    var c = new C();
-                    c.InterceptableMethod("call site");
-                }
-            }
+        public static void Main()
+        {
+        var c = new C();
+        c.InterceptableMethod("call site");
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("BAD", 15, 11)]
-                public static I1 Interceptor1(this I1 i1, string param) { Console.Write("interceptor " + param); return i1; }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("BAD", 15, 11)]
+        public static I1 Interceptor1(this I1 i1, string param) { Console.Write("interceptor " + param); return i1; }
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -3018,30 +3018,30 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptsLocationBadPath_02()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            interface I1 { }
-            class C : I1 { }
+        interface I1 { }
+        class C : I1 { }
 
-            static class Program
-            {
+        static class Program
+        {
 
-                public static I1 InterceptableMethod(this I1 i1, string param) { Console.Write("interceptable " + param); return i1; }
+        public static I1 InterceptableMethod(this I1 i1, string param) { Console.Write("interceptable " + param); return i1; }
 
-                public static void Main()
-                {
-                    var c = new C();
-                    c.InterceptableMethod("call site");
-                }
-            }
+        public static void Main()
+        {
+        var c = new C();
+        c.InterceptableMethod("call site");
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("projects/Program.cs", 15, 11)]
-                public static I1 Interceptor1(this I1 i1, string param) { Console.Write("interceptor " + param); return i1; }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("projects/Program.cs", 15, 11)]
+        public static I1 Interceptor1(this I1 i1, string param) { Console.Write("interceptor " + param); return i1; }
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "/Users/me/projects/Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -3062,29 +3062,29 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptsLocationBadPath_03()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C { }
+        class C { }
 
-            static class Program
-            {
+        static class Program
+        {
 
-                public static C InterceptableMethod(this C c, string param) { Console.Write("interceptable " + param); return c; }
+        public static C InterceptableMethod(this C c, string param) { Console.Write("interceptable " + param); return c; }
 
-                public static void Main()
-                {
-                    var c = new C();
-                    c.InterceptableMethod("call site");
-                }
-            }
+        public static void Main()
+        {
+        var c = new C();
+        c.InterceptableMethod("call site");
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation(null, 15, 11)]
-                public static C Interceptor1(this C c, string param) { Console.Write("interceptor " + param); return c; }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation(null, 15, 11)]
+        public static C Interceptor1(this C c, string param) { Console.Write("interceptor " + param); return c; }
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -3100,29 +3100,29 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptsLocationBadPath_04()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C { }
+        class C { }
 
-            static class Program
-            {
+        static class Program
+        {
 
-                public static C InterceptableMethod(this C c, string param) { Console.Write("interceptable " + param); return c; }
+        public static C InterceptableMethod(this C c, string param) { Console.Write("interceptable " + param); return c; }
 
-                public static void Main()
-                {
-                    var c = new C();
-                    c.InterceptableMethod("call site");
-                }
-            }
+        public static void Main()
+        {
+        var c = new C();
+        c.InterceptableMethod("call site");
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("program.cs", 15, 11)]
-                public static C Interceptor1(this C c, string param) { Console.Write("interceptor " + param); return c; }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("program.cs", 15, 11)]
+        public static C Interceptor1(this C c, string param) { Console.Write("interceptor " + param); return c; }
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -3140,32 +3140,32 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptsLocationBadPosition_01()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            interface I1 { }
-            class C : I1 { }
+        interface I1 { }
+        class C : I1 { }
 
-            static class Program
-            {
+        static class Program
+        {
 
-                public static I1 InterceptableMethod(this I1 i1, string param) { Console.Write("interceptable " + param); return i1; }
+        public static I1 InterceptableMethod(this I1 i1, string param) { Console.Write("interceptable " + param); return i1; }
 
-                public static void Main()
-                {
-                    var c = new C();
-                    c.InterceptableMethod("call site");
-                }
-            }
+        public static void Main()
+        {
+        var c = new C();
+        c.InterceptableMethod("call site");
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 25, 1)]
-                [InterceptsLocation("Program.cs", 26, 1)]
-                [InterceptsLocation("Program.cs", 100, 1)]
-                public static I1 Interceptor1(this I1 i1, string param) { Console.Write("interceptor " + param); return i1; }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 25, 1)]
+        [InterceptsLocation("Program.cs", 26, 1)]
+        [InterceptsLocation("Program.cs", 100, 1)]
+        public static I1 Interceptor1(this I1 i1, string param) { Console.Write("interceptor " + param); return i1; }
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -3196,32 +3196,32 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptsLocationBadPosition_02()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            interface I1 { }
-            class C : I1 { }
+        interface I1 { }
+        class C : I1 { }
 
-            static class Program
-            {
+        static class Program
+        {
 
-                public static I1 InterceptableMethod(this I1 i1, string param) { Console.Write("interceptable " + param); return i1; }
+        public static I1 InterceptableMethod(this I1 i1, string param) { Console.Write("interceptable " + param); return i1; }
 
-                public static void Main()
-                {
-                    var c = new C();
-                    c.InterceptableMethod("call site");
-                }
-            }
+        public static void Main()
+        {
+        var c = new C();
+        c.InterceptableMethod("call site");
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 16, 5)]
-                [InterceptsLocation("Program.cs", 16, 6)]
-                [InterceptsLocation("Program.cs", 16, 1000)]
-                public static I1 Interceptor1(this I1 i1, string param) { Console.Write("interceptor " + param); return i1; }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 16, 5)]
+        [InterceptsLocation("Program.cs", 16, 6)]
+        [InterceptsLocation("Program.cs", 16, 1000)]
+        public static I1 Interceptor1(this I1 i1, string param) { Console.Write("interceptor " + param); return i1; }
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -3252,30 +3252,30 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptsLocationBadPosition_03()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            interface I1 { }
-            class C : I1 { }
+        interface I1 { }
+        class C : I1 { }
 
-            static class Program
-            {
+        static class Program
+        {
 
-                public static I1 InterceptableMethod(this I1 i1, string param) { Console.Write("interceptable " + param); return i1; }
+        public static I1 InterceptableMethod(this I1 i1, string param) { Console.Write("interceptable " + param); return i1; }
 
-                public static void Main()
-                {
-                    var c = new C();
-                    c.InterceptableMethod("call site");
-                }
-            }
+        public static void Main()
+        {
+        var c = new C();
+        c.InterceptableMethod("call site");
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 15, 9)]
-                public static I1 Interceptor1(this I1 i1, string param) { Console.Write("interceptor " + param); return i1; }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 15, 9)]
+        public static I1 Interceptor1(this I1 i1, string param) { Console.Write("interceptor " + param); return i1; }
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -3296,30 +3296,30 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptsLocationBadPosition_04()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            interface I1 { }
-            class C : I1 { }
+        interface I1 { }
+        class C : I1 { }
 
-            static class Program
-            {
+        static class Program
+        {
 
-                public static I1 InterceptableMethod(this I1 i1, string param) { Console.Write("interceptable " + param); return i1; }
+        public static I1 InterceptableMethod(this I1 i1, string param) { Console.Write("interceptable " + param); return i1; }
 
-                public static void Main()
-                {
-                    var c = new C();
-                    c.InterceptableMethod("call site");
-                }
-            }
+        public static void Main()
+        {
+        var c = new C();
+        c.InterceptableMethod("call site");
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 15, 13)]
-                public static I1 Interceptor1(this I1 i1, string param) { Console.Write("interceptor " + param); return i1; }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 15, 13)]
+        public static I1 Interceptor1(this I1 i1, string param) { Console.Write("interceptor " + param); return i1; }
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -3340,34 +3340,34 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptsLocationBadPosition_05()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C { }
+        class C { }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    var c = new C();
-                    c.
-                        InterceptableMethod("call site");
+        static class Program
+        {
+        public static void Main()
+        {
+        var c = new C();
+        c.
+        InterceptableMethod("call site");
 
-                    c.InterceptableMethod    ("call site");
-                }
+        c.InterceptableMethod    ("call site");
+        }
 
 
-                public static C InterceptableMethod(this C c, string param) { Console.Write("interceptable " + param); return c; }
+        public static C InterceptableMethod(this C c, string param) { Console.Write("interceptable " + param); return c; }
 
-                [InterceptsLocation("Program.cs", 12, 11)] // intercept spaces before 'InterceptableMethod' token
-                [InterceptsLocation("Program.cs", 14, 33)] // intercept spaces after 'InterceptableMethod' token
-                public static C Interceptor1(this C c, string param) { Console.Write("interceptor " + param); return c; }
-            }
+        [InterceptsLocation("Program.cs", 12, 11)] // intercept spaces before 'InterceptableMethod' token
+        [InterceptsLocation("Program.cs", 14, 33)] // intercept spaces after 'InterceptableMethod' token
+        public static C Interceptor1(this C c, string param) { Console.Write("interceptor " + param); return c; }
+        }
 
-            static class CExt
-            {
-            }
-            """;
+        static class CExt
+        {
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -3396,30 +3396,30 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptsLocationBadPosition_06()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C { }
+        class C { }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    var c = new C();
-                    c.InterceptableMethod/*comment*/("call site");
-                }
+        static class Program
+        {
+        public static void Main()
+        {
+        var c = new C();
+        c.InterceptableMethod/*comment*/("call site");
+        }
 
 
-                public static C InterceptableMethod(this C c, string param) { Console.Write("interceptable " + param); return c; }
+        public static C InterceptableMethod(this C c, string param) { Console.Write("interceptable " + param); return c; }
 
-                [InterceptsLocation("Program.cs", 11, 31)] // intercept comment after 'InterceptableMethod' token
-                public static C Interceptor1(this C c, string param) { Console.Write("interceptor " + param); return c; }
-            }
+        [InterceptsLocation("Program.cs", 11, 31)] // intercept comment after 'InterceptableMethod' token
+        public static C Interceptor1(this C c, string param) { Console.Write("interceptor " + param); return c; }
+        }
 
-            static class CExt
-            {
-            }
-            """;
+        static class CExt
+        {
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -3440,32 +3440,32 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptsLocationBadPosition_07()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C { }
+        class C { }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    var c = new C();
-                    c.
-                        // comment
-                        InterceptableMethod("call site");
-                }
+        static class Program
+        {
+        public static void Main()
+        {
+        var c = new C();
+        c.
+        // comment
+        InterceptableMethod("call site");
+        }
 
 
-                public static C InterceptableMethod(this C c, string param) { Console.Write("interceptable " + param); return c; }
+        public static C InterceptableMethod(this C c, string param) { Console.Write("interceptable " + param); return c; }
 
-                [InterceptsLocation("Program.cs", 12, 13)] // intercept comment above 'InterceptableMethod' token
-                public static C Interceptor1(this C c, string param) { Console.Write("interceptor " + param); return c; }
-            }
+        [InterceptsLocation("Program.cs", 12, 13)] // intercept comment above 'InterceptableMethod' token
+        public static C Interceptor1(this C c, string param) { Console.Write("interceptor " + param); return c; }
+        }
 
-            static class CExt
-            {
-            }
-            """;
+        static class CExt
+        {
+        }
+        """;
 
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
@@ -3487,31 +3487,31 @@ public class InterceptorsTests : CSharpTestBase
     public void InterceptsLocationBadPosition_08()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C { }
+        class C { }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    var c = new C();
-                    c.InterceptableMethod("call site");
-                }
+        static class Program
+        {
+        public static void Main()
+        {
+        var c = new C();
+        c.InterceptableMethod("call site");
+        }
 
 
-                public static C InterceptableMethod(this C c, string param) { Console.Write("interceptable " + param); return c; }
+        public static C InterceptableMethod(this C c, string param) { Console.Write("interceptable " + param); return c; }
 
-                [InterceptsLocation("Program.cs", -1, 1)] // 1
-                [InterceptsLocation("Program.cs", 1, -1)] // 2
-                [InterceptsLocation("Program.cs", -1, -1)] // 3
-                [InterceptsLocation("Program.cs", 0, 1)] // 4
-                [InterceptsLocation("Program.cs", 1, 0)] // 5 
-                [InterceptsLocation("Program.cs", 0, 0)] // 6
-                public static C Interceptor1(this C c, string param) { Console.Write("interceptor " + param); return c; }
-            }
-            """;
+        [InterceptsLocation("Program.cs", -1, 1)] // 1
+        [InterceptsLocation("Program.cs", 1, -1)] // 2
+        [InterceptsLocation("Program.cs", -1, -1)] // 3
+        [InterceptsLocation("Program.cs", 0, 1)] // 4
+        [InterceptsLocation("Program.cs", 1, 0)] // 5
+        [InterceptsLocation("Program.cs", 0, 0)] // 6
+        public static C Interceptor1(this C c, string param) { Console.Write("interceptor " + param); return c; }
+        }
+        """;
 
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
@@ -3549,30 +3549,30 @@ public class InterceptorsTests : CSharpTestBase
     public void SignatureMismatch_01()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            interface I1 { }
-            class C : I1 { }
+        interface I1 { }
+        class C : I1 { }
 
-            static class Program
-            {
+        static class Program
+        {
 
-                public static I1 InterceptableMethod(this I1 i1, string param) { Console.Write("interceptable " + param); return i1; }
+        public static I1 InterceptableMethod(this I1 i1, string param) { Console.Write("interceptable " + param); return i1; }
 
-                public static void Main()
-                {
-                    var c = new C();
-                    c.InterceptableMethod("call site");
-                }
-            }
+        public static void Main()
+        {
+        var c = new C();
+        c.InterceptableMethod("call site");
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 15, 11)]
-                public static I1 Interceptor1(this I1 i1, int param) { Console.Write("interceptor " + param); return i1; }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 15, 11)]
+        public static I1 Interceptor1(this I1 i1, int param) { Console.Write("interceptor " + param); return i1; }
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -3594,31 +3594,31 @@ public class InterceptorsTests : CSharpTestBase
     {
         // Instance method receiver type differs from interceptor 'this' parameter type.
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            interface I1 { }
-            class C : I1
-            {
+        interface I1 { }
+        class C : I1
+        {
 
-                public I1 InterceptableMethod(string param) { Console.Write("interceptable " + param); return this; }
-            }
+        public I1 InterceptableMethod(string param) { Console.Write("interceptable " + param); return this; }
+        }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    var c = new C();
-                    c.InterceptableMethod("call site");
-                }
-            }
+        static class Program
+        {
+        public static void Main()
+        {
+        var c = new C();
+        c.InterceptableMethod("call site");
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 16, 11)]
-                public static I1 Interceptor1(this I1 i1, string param) { Console.Write("interceptor " + param); return i1; }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 16, 11)]
+        public static I1 Interceptor1(this I1 i1, string param) { Console.Write("interceptor " + param); return i1; }
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -3640,30 +3640,30 @@ public class InterceptorsTests : CSharpTestBase
     {
         // Instance method 'this' parameter ref kind differs from interceptor 'this' parameter ref kind.
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            struct S
-            {
+        struct S
+        {
 
-                public void InterceptableMethod(string param) { Console.Write("interceptable " + param); }
-            }
+        public void InterceptableMethod(string param) { Console.Write("interceptable " + param); }
+        }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    var s = new S();
-                    s.InterceptableMethod("call site");
-                }
-            }
+        static class Program
+        {
+        public static void Main()
+        {
+        var s = new S();
+        s.InterceptableMethod("call site");
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 15, 11)]
-                public static void Interceptor1(this S s, string param) { Console.Write("interceptor " + param); }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 15, 11)]
+        public static void Interceptor1(this S s, string param) { Console.Write("interceptor " + param); }
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -3685,29 +3685,29 @@ public class InterceptorsTests : CSharpTestBase
     {
         // Safe nullability difference
         var source = """
-            using System.Runtime.CompilerServices;
+        using System.Runtime.CompilerServices;
 
-            class C
-            {
+        class C
+        {
 
-                public string? InterceptableMethod(string param) => throw null!;
-            }
+        public string? InterceptableMethod(string param) => throw null!;
+        }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    var c = new C();
-                    c.InterceptableMethod("call site");
-                }
-            }
+        static class Program
+        {
+        public static void Main()
+        {
+        var c = new C();
+        c.InterceptableMethod("call site");
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 14, 11)]
-                public static string Interceptor1(this C s, string? param) => throw null!;
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 14, 11)]
+        public static string Interceptor1(this C s, string? param) => throw null!;
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -3721,36 +3721,36 @@ public class InterceptorsTests : CSharpTestBase
     {
         // Unsafe nullability difference
         var source = """
-            using System.Runtime.CompilerServices;
+        using System.Runtime.CompilerServices;
 
-            class C
-            {
+        class C
+        {
 
-                public void Method1(string? param1) => throw null!;
+        public void Method1(string? param1) => throw null!;
 
 
-                public string Method2() => throw null!;
-            }
+        public string Method2() => throw null!;
+        }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    var c = new C();
-                    c.Method1("call site");
-                    _ = c.Method2();
-                }
-            }
+        static class Program
+        {
+        public static void Main()
+        {
+        var c = new C();
+        c.Method1("call site");
+        _ = c.Method2();
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 17, 11)] // 1
-                public static void Interceptor1(this C s, string param2) => throw null!;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 17, 11)] // 1
+        public static void Interceptor1(this C s, string param2) => throw null!;
 
-                [InterceptsLocation("Program.cs", 18, 15)] // 2
-                public static string? Interceptor2(this C s) => throw null!;
-            }
-            """;
+        [InterceptsLocation("Program.cs", 18, 15)] // 2
+        public static string? Interceptor2(this C s) => throw null!;
+        }
+        """;
 
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
@@ -3798,36 +3798,36 @@ public class InterceptorsTests : CSharpTestBase
     {
         // 'dynamic' difference
         var source = """
-            using System.Runtime.CompilerServices;
+        using System.Runtime.CompilerServices;
 
-            class C
-            {
+        class C
+        {
 
-                public void Method1(object param1) => throw null!;
+        public void Method1(object param1) => throw null!;
 
 
-                public dynamic Method2() => throw null!;
-            }
+        public dynamic Method2() => throw null!;
+        }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    var c = new C();
-                    c.Method1("call site");
-                    _ = c.Method2();
-                }
-            }
+        static class Program
+        {
+        public static void Main()
+        {
+        var c = new C();
+        c.Method1("call site");
+        _ = c.Method2();
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 17, 11)] // 1
-                public static void Interceptor1(this C s, dynamic param2) => throw null!;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 17, 11)] // 1
+        public static void Interceptor1(this C s, dynamic param2) => throw null!;
 
-                [InterceptsLocation("Program.cs", 18, 15)] // 2
-                public static object Interceptor2(this C s) => throw null!;
-            }
-            """;
+        [InterceptsLocation("Program.cs", 18, 15)] // 2
+        public static object Interceptor2(this C s) => throw null!;
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -3857,54 +3857,54 @@ public class InterceptorsTests : CSharpTestBase
     {
         // tuple element name difference
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
-                public void Method1((string a, string b) param1) => throw null!;
-                public void Method2((string x, string y) param1) => throw null!;
-                public void Method3((string, string) param1) => throw null!;
-            }
+        class C
+        {
+        public void Method1((string a, string b) param1) => throw null!;
+        public void Method2((string x, string y) param1) => throw null!;
+        public void Method3((string, string) param1) => throw null!;
+        }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    var c = new C();
+        static class Program
+        {
+        public static void Main()
+        {
+        var c = new C();
 
-                    c.Method1(default!);
-                    c.Method2(default!);
-                    c.Method3(default!);
+        c.Method1(default!);
+        c.Method2(default!);
+        c.Method3(default!);
 
-                    c.Method1(default!);
-                    c.Method2(default!);
-                    c.Method3(default!);
+        c.Method1(default!);
+        c.Method2(default!);
+        c.Method3(default!);
 
-                    c.Method1(default!);
-                    c.Method2(default!);
-                    c.Method3(default!);
-                }
-            }
+        c.Method1(default!);
+        c.Method2(default!);
+        c.Method3(default!);
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 17, 11)]
-                [InterceptsLocation("Program.cs", 18, 11)] // 1
-                [InterceptsLocation("Program.cs", 19, 11)] // 2
-                public static void Interceptor1(this C s, (string a, string b) param2) => Console.Write(1);
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 17, 11)]
+        [InterceptsLocation("Program.cs", 18, 11)] // 1
+        [InterceptsLocation("Program.cs", 19, 11)] // 2
+        public static void Interceptor1(this C s, (string a, string b) param2) => Console.Write(1);
 
-                [InterceptsLocation("Program.cs", 21, 11)] // 3
-                [InterceptsLocation("Program.cs", 22, 11)]
-                [InterceptsLocation("Program.cs", 23, 11)] // 4
-                public static void Interceptor2(this C s, (string x, string y) param2) => Console.Write(2);
+        [InterceptsLocation("Program.cs", 21, 11)] // 3
+        [InterceptsLocation("Program.cs", 22, 11)]
+        [InterceptsLocation("Program.cs", 23, 11)] // 4
+        public static void Interceptor2(this C s, (string x, string y) param2) => Console.Write(2);
 
-                [InterceptsLocation("Program.cs", 25, 11)] // 5
-                [InterceptsLocation("Program.cs", 26, 11)] // 6
-                [InterceptsLocation("Program.cs", 27, 11)]
-                public static void Interceptor3(this C s, (string, string) param2) => Console.Write(3);
-            }
-            """;
+        [InterceptsLocation("Program.cs", 25, 11)] // 5
+        [InterceptsLocation("Program.cs", 26, 11)] // 6
+        [InterceptsLocation("Program.cs", 27, 11)]
+        public static void Interceptor3(this C s, (string, string) param2) => Console.Write(3);
+        }
+        """;
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -3985,40 +3985,40 @@ public class InterceptorsTests : CSharpTestBase
     {
         // nint/IntPtr difference
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
+        class C
+        {
 
-                public void Method1(nint param1) => throw null!;
-                public void Method2(IntPtr param1) => throw null!;
-            }
+        public void Method1(nint param1) => throw null!;
+        public void Method2(IntPtr param1) => throw null!;
+        }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    var c = new C();
-                    c.Method1(default!);
-                    c.Method2(default!);
+        static class Program
+        {
+        public static void Main()
+        {
+        var c = new C();
+        c.Method1(default!);
+        c.Method2(default!);
 
-                    c.Method2(default!);
-                    c.Method1(default!);
-                }
-            }
+        c.Method2(default!);
+        c.Method1(default!);
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 16, 11)] // 1
-                [InterceptsLocation("Program.cs", 17, 11)]
-                public static void Interceptor1(this C s, IntPtr param2) => Console.Write(1);
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 16, 11)] // 1
+        [InterceptsLocation("Program.cs", 17, 11)]
+        public static void Interceptor1(this C s, IntPtr param2) => Console.Write(1);
 
-                [InterceptsLocation("Program.cs", 19, 11)] // 2
-                [InterceptsLocation("Program.cs", 20, 11)]
-                public static void Interceptor2(this C s, nint param2) => Console.Write(2);
-            }
-            """;
+        [InterceptsLocation("Program.cs", 19, 11)] // 2
+        [InterceptsLocation("Program.cs", 20, 11)]
+        public static void Interceptor2(this C s, nint param2) => Console.Write(2);
+        }
+        """;
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -4048,26 +4048,26 @@ public class InterceptorsTests : CSharpTestBase
     public void SignatureMismatch_09()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            static class Program
-            {
-                public static void InterceptableMethod(ref readonly int x) => Console.Write("interceptable " + x);
+        static class Program
+        {
+        public static void InterceptableMethod(ref readonly int x) => Console.Write("interceptable " + x);
 
-                public static void Main()
-                {
-                    int x = 5;
-                    InterceptableMethod(in x);
-                }
-            }
+        public static void Main()
+        {
+        int x = 5;
+        InterceptableMethod(in x);
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 11, 9)]
-                public static void Interceptor(in int x) => Console.Write("interceptor " + x);
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 11, 9)]
+        public static void Interceptor(in int x) => Console.Write("interceptor " + x);
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -4092,29 +4092,29 @@ public class InterceptorsTests : CSharpTestBase
     {
         // Unsafe 'scoped' difference
         var source = """
-            using System.Runtime.CompilerServices;
+        using System.Runtime.CompilerServices;
 
-            class C
-            {
+        class C
+        {
 
-                public static ref int InterceptableMethod(scoped ref int value) => throw null!;
-            }
+        public static ref int InterceptableMethod(scoped ref int value) => throw null!;
+        }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    int i = 0;
-                    C.InterceptableMethod(ref i);
-                }
-            }
+        static class Program
+        {
+        public static void Main()
+        {
+        int i = 0;
+        C.InterceptableMethod(ref i);
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 14, 11)] // 1
-                public static ref int Interceptor1(ref int value) => throw null!;
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 14, 11)] // 1
+        public static ref int Interceptor1(ref int value) => throw null!;
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -4137,36 +4137,36 @@ public class InterceptorsTests : CSharpTestBase
     {
         // safe 'scoped' difference
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
+        class C
+        {
 
-                public static ref int InterceptableMethod(ref int value) => throw null!;
-            }
+        public static ref int InterceptableMethod(ref int value) => throw null!;
+        }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    int i = 0;
-                    _ = C.InterceptableMethod(ref i);
-                }
-            }
+        static class Program
+        {
+        public static void Main()
+        {
+        int i = 0;
+        _ = C.InterceptableMethod(ref i);
+        }
+        }
 
-            static class D
-            {
-                static int i;
+        static class D
+        {
+        static int i;
 
-                [InterceptsLocation("Program.cs", 15, 15)]
-                public static ref int Interceptor1(scoped ref int value)
-                {
-                    Console.Write(1);
-                    return ref i;
-                }
-            }
-            """;
+        [InterceptsLocation("Program.cs", 15, 15)]
+        public static ref int Interceptor1(scoped ref int value)
+        {
+        Console.Write(1);
+        return ref i;
+        }
+        }
+        """;
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -4180,37 +4180,37 @@ public class InterceptorsTests : CSharpTestBase
     {
         // safe '[UnscopedRef]' difference
         var source = """
-            using System.Diagnostics.CodeAnalysis;
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Diagnostics.CodeAnalysis;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
+        class C
+        {
 
-                public static ref int InterceptableMethod([UnscopedRef] out int value) => throw null!;
-            }
+        public static ref int InterceptableMethod([UnscopedRef] out int value) => throw null!;
+        }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    _ = C.InterceptableMethod(out int i);
-                }
-            }
+        static class Program
+        {
+        public static void Main()
+        {
+        _ = C.InterceptableMethod(out int i);
+        }
+        }
 
-            static class D
-            {
-                static int i;
+        static class D
+        {
+        static int i;
 
-                [InterceptsLocation("Program.cs", 15, 15)]
-                public static ref int Interceptor1(out int value)
-                {
-                    Console.Write(1);
-                    value = 0;
-                    return ref i;
-                }
-            }
-            """;
+        [InterceptsLocation("Program.cs", 15, 15)]
+        public static ref int Interceptor1(out int value)
+        {
+        Console.Write(1);
+        value = 0;
+        return ref i;
+        }
+        }
+        """;
         var verifier = CompileAndVerify(
             new[]
             {
@@ -4229,30 +4229,30 @@ public class InterceptorsTests : CSharpTestBase
     {
         // unsafe '[UnscopedRef]' difference
         var source = """
-            using System.Diagnostics.CodeAnalysis;
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Diagnostics.CodeAnalysis;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
+        class C
+        {
 
-                public static ref int InterceptableMethod(out int value) => throw null!;
-            }
+        public static ref int InterceptableMethod(out int value) => throw null!;
+        }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    C.InterceptableMethod(out int i);
-                }
-            }
+        static class Program
+        {
+        public static void Main()
+        {
+        C.InterceptableMethod(out int i);
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 15, 11)] // 1
-                public static ref int Interceptor1([UnscopedRef] out int value) => throw null!;
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 15, 11)] // 1
+        public static ref int Interceptor1([UnscopedRef] out int value) => throw null!;
+        }
+        """;
         var comp = CreateCompilation(
             new[]
             {
@@ -4280,73 +4280,73 @@ public class InterceptorsTests : CSharpTestBase
     {
         // A call to 'object.ReferenceEquals(a, b)' is defined as being equivalent to '(object)a == b'.
         var source = """
-            using System.Runtime.CompilerServices;
+        using System.Runtime.CompilerServices;
 
-            static class D
-            {
+        static class D
+        {
 
-                public static bool Interceptable(object? obj1, object? obj2) => throw null!;
+        public static bool Interceptable(object? obj1, object? obj2) => throw null!;
 
-                public static void M0(object? obj1, object? obj2)
-                {
-                    if (obj1 == obj2)
-                       throw null!;
-                }
+        public static void M0(object? obj1, object? obj2)
+        {
+        if (obj1 == obj2)
+        throw null!;
+        }
 
-                public static void M1(object? obj1, object? obj2)
-                {
-                    if (Interceptable(obj1, obj2))
-                       throw null!;
-                }
+        public static void M1(object? obj1, object? obj2)
+        {
+        if (Interceptable(obj1, obj2))
+        throw null!;
+        }
 
-                public static void M2(object? obj1, object? obj2)
-                {
-                    if (Interceptable(obj1, obj2))
-                       throw null!;
-                }
-            }
+        public static void M2(object? obj1, object? obj2)
+        {
+        if (Interceptable(obj1, obj2))
+        throw null!;
+        }
+        }
 
-            namespace System
-            {
-                public class Object
-                {
-                    [InterceptsLocation("Program.cs", 16, 13)]
-                    public static bool ReferenceEquals(object? obj1, object? obj2) => throw null!;
+        namespace System
+        {
+        public class Object
+        {
+        [InterceptsLocation("Program.cs", 16, 13)]
+        public static bool ReferenceEquals(object? obj1, object? obj2) => throw null!;
 
-                    [InterceptsLocation("Program.cs", 22, 13)]
-                    public static bool NotReferenceEquals(object? obj1, object? obj2) => throw null!;
-                }
+        [InterceptsLocation("Program.cs", 22, 13)]
+        public static bool NotReferenceEquals(object? obj1, object? obj2) => throw null!;
+        }
 
-                public class Void { }
-                public struct Boolean { }
-                public class String { }
-                public class Attribute { }
-                public abstract class Enum { }
-                public enum AttributeTargets { }
-                public class AttributeUsageAttribute : Attribute
-                {
-                    public AttributeUsageAttribute(AttributeTargets targets) { }
-                    public bool AllowMultiple { get; set; }
-                    public bool Inherited { get; set; }
-                }
-                public class Exception { }
-                public abstract class ValueType { }
-                public struct Int32 { }
-                public struct Byte { }
-            }
+        public class Void { }
+        public struct Boolean { }
+        public class String { }
+        public class Attribute { }
+        public abstract class Enum { }
+        public enum AttributeTargets { }
+        public class AttributeUsageAttribute : Attribute
+        {
+        public AttributeUsageAttribute(AttributeTargets targets) { }
+        public bool AllowMultiple { get; set; }
+        public bool Inherited { get; set; }
+        }
+        public class Exception { }
+        public abstract class ValueType { }
+        public struct Int32 { }
+        public struct Byte { }
+        }
 
-            namespace System.Runtime.CompilerServices
-            {
-                public sealed class InterceptableAttribute : Attribute { }
+        namespace System.Runtime.CompilerServices
+        {
+        public sealed class InterceptableAttribute : Attribute { }
 
-                public sealed class InterceptsLocationAttribute : Attribute
-                {
-                    public InterceptsLocationAttribute(string filePath, int line, int column)
-                    {
-                    }
-                }
-            }
-            """;
+        public sealed class InterceptsLocationAttribute : Attribute
+        {
+        public InterceptsLocationAttribute(string filePath, int line, int column)
+        {
+        }
+        }
+        }
+        """;
         var verifier = CompileAndVerify(
             CreateEmptyCompilation(
                 (source, "Program.cs"),
@@ -4358,17 +4358,17 @@ public class InterceptorsTests : CSharpTestBase
         verifier.Diagnostics.Where(d => d.Severity == DiagnosticSeverity.Error).Verify();
 
         var referenceEqualsCallIL = """
-            {
-              // Code size        7 (0x7)
-              .maxstack  2
-              IL_0000:  ldarg.0
-              IL_0001:  ldarg.1
-              IL_0002:  bne.un.s   IL_0006
-              IL_0004:  ldnull
-              IL_0005:  throw
-              IL_0006:  ret
-            }
-            """;
+        {
+        // Code size        7 (0x7)
+        .maxstack  2
+        IL_0000:  ldarg.0
+        IL_0001:  ldarg.1
+        IL_0002:  bne.un.s   IL_0006
+        IL_0004:  ldnull
+        IL_0005:  throw
+        IL_0006:  ret
+        }
+        """;
         verifier.VerifyIL("D.M0", referenceEqualsCallIL);
         verifier.VerifyIL("D.M1", referenceEqualsCallIL);
 
@@ -4376,15 +4376,15 @@ public class InterceptorsTests : CSharpTestBase
             "D.M2",
             """
             {
-              // Code size       12 (0xc)
-              .maxstack  2
-              IL_0000:  ldarg.0
-              IL_0001:  ldarg.1
-              IL_0002:  call       "bool object.NotReferenceEquals(object, object)"
-              IL_0007:  brfalse.s  IL_000b
-              IL_0009:  ldnull
-              IL_000a:  throw
-              IL_000b:  ret
+            // Code size       12 (0xc)
+            .maxstack  2
+            IL_0000:  ldarg.0
+            IL_0001:  ldarg.1
+            IL_0002:  call       "bool object.NotReferenceEquals(object, object)"
+            IL_0007:  brfalse.s  IL_000b
+            IL_0009:  ldnull
+            IL_000a:  throw
+            IL_000b:  ret
             }
             """
         );
@@ -4395,61 +4395,61 @@ public class InterceptorsTests : CSharpTestBase
     {
         // Intercept a call to object.ReferenceEquals
         var source = """
-            using System.Runtime.CompilerServices;
+        using System.Runtime.CompilerServices;
 
-            static class D
-            {
-                public static void M0(object? obj1, object? obj2)
-                {
-                    if (object.ReferenceEquals(obj1, obj2))
-                       throw null!;
-                }
+        static class D
+        {
+        public static void M0(object? obj1, object? obj2)
+        {
+        if (object.ReferenceEquals(obj1, obj2))
+        throw null!;
+        }
 
-                [InterceptsLocation("Program.cs", 7, 20)]
-                public static bool Interceptor(object? obj1, object? obj2)
-                {
-                    return false;
-                }
-            }
+        [InterceptsLocation("Program.cs", 7, 20)]
+        public static bool Interceptor(object? obj1, object? obj2)
+        {
+        return false;
+        }
+        }
 
-            namespace System
-            {
-                public class Object
-                {
+        namespace System
+        {
+        public class Object
+        {
 
-                    public static bool ReferenceEquals(object? obj1, object? obj2) => throw null!;
-                }
+        public static bool ReferenceEquals(object? obj1, object? obj2) => throw null!;
+        }
 
-                public class Void { }
-                public struct Boolean { }
-                public class String { }
-                public class Attribute { }
-                public abstract class Enum { }
-                public enum AttributeTargets { }
-                public class AttributeUsageAttribute : Attribute
-                {
-                    public AttributeUsageAttribute(AttributeTargets targets) { }
-                    public bool AllowMultiple { get; set; }
-                    public bool Inherited { get; set; }
-                }
-                public class Exception { }
-                public abstract class ValueType { }
-                public struct Int32 { }
-                public struct Byte { }
-            }
+        public class Void { }
+        public struct Boolean { }
+        public class String { }
+        public class Attribute { }
+        public abstract class Enum { }
+        public enum AttributeTargets { }
+        public class AttributeUsageAttribute : Attribute
+        {
+        public AttributeUsageAttribute(AttributeTargets targets) { }
+        public bool AllowMultiple { get; set; }
+        public bool Inherited { get; set; }
+        }
+        public class Exception { }
+        public abstract class ValueType { }
+        public struct Int32 { }
+        public struct Byte { }
+        }
 
-            namespace System.Runtime.CompilerServices
-            {
-                public sealed class InterceptableAttribute : Attribute { }
+        namespace System.Runtime.CompilerServices
+        {
+        public sealed class InterceptableAttribute : Attribute { }
 
-                public sealed class InterceptsLocationAttribute : Attribute
-                {
-                    public InterceptsLocationAttribute(string filePath, int line, int column)
-                    {
-                    }
-                }
-            }
-            """;
+        public sealed class InterceptsLocationAttribute : Attribute
+        {
+        public InterceptsLocationAttribute(string filePath, int line, int column)
+        {
+        }
+        }
+        }
+        """;
         var verifier = CompileAndVerify(
             CreateEmptyCompilation(
                 (source, "Program.cs"),
@@ -4464,15 +4464,15 @@ public class InterceptorsTests : CSharpTestBase
             "D.M0",
             """
             {
-              // Code size       12 (0xc)
-              .maxstack  2
-              IL_0000:  ldarg.0
-              IL_0001:  ldarg.1
-              IL_0002:  call       "bool D.Interceptor(object, object)"
-              IL_0007:  brfalse.s  IL_000b
-              IL_0009:  ldnull
-              IL_000a:  throw
-              IL_000b:  ret
+            // Code size       12 (0xc)
+            .maxstack  2
+            IL_0000:  ldarg.0
+            IL_0001:  ldarg.1
+            IL_0002:  call       "bool D.Interceptor(object, object)"
+            IL_0007:  brfalse.s  IL_000b
+            IL_0009:  ldnull
+            IL_000a:  throw
+            IL_000b:  ret
             }
             """
         );
@@ -4483,41 +4483,41 @@ public class InterceptorsTests : CSharpTestBase
     {
         // Test when interceptable method has 'params' parameter.
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
+        class C
+        {
 
-                public static void InterceptableMethod(params int[] value) => throw null!;
-            }
+        public static void InterceptableMethod(params int[] value) => throw null!;
+        }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    C.InterceptableMethod(1, 2, 3);
-                    C.InterceptableMethod(4, 5, 6);
-                }
-            }
+        static class Program
+        {
+        public static void Main()
+        {
+        C.InterceptableMethod(1, 2, 3);
+        C.InterceptableMethod(4, 5, 6);
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 14, 11)]
-                public static void Interceptor1(int[] value)
-                {
-                    foreach (var i in value)
-                        Console.Write(i);
-                }
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 14, 11)]
+        public static void Interceptor1(int[] value)
+        {
+        foreach (var i in value)
+        Console.Write(i);
+        }
 
-                [InterceptsLocation("Program.cs", 15, 11)]
-                public static void Interceptor2(params int[] value)
-                {
-                    foreach (var i in value)
-                        Console.Write(i);
-                }
-            }
-            """;
+        [InterceptsLocation("Program.cs", 15, 11)]
+        public static void Interceptor2(params int[] value)
+        {
+        foreach (var i in value)
+        Console.Write(i);
+        }
+        }
+        """;
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -4531,41 +4531,41 @@ public class InterceptorsTests : CSharpTestBase
     {
         // Test when interceptable method lacks 'params' parameter, and interceptor has one, and method is called as if it has one.
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
+        class C
+        {
 
-                public static void InterceptableMethod(int[] value) => throw null!;
-            }
+        public static void InterceptableMethod(int[] value) => throw null!;
+        }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    C.InterceptableMethod(1, 2, 3 ); // 1
-                    C.InterceptableMethod(4, 5, 6); // 2
-                }
-            }
+        static class Program
+        {
+        public static void Main()
+        {
+        C.InterceptableMethod(1, 2, 3 ); // 1
+        C.InterceptableMethod(4, 5, 6); // 2
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 14, 11)]
-                public static void Interceptor1(int[] value)
-                {
-                    foreach (var i in value)
-                        Console.Write(i);
-                }
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 14, 11)]
+        public static void Interceptor1(int[] value)
+        {
+        foreach (var i in value)
+        Console.Write(i);
+        }
 
-                [InterceptsLocation("Program.cs", 15, 11)]
-                public static void Interceptor2(params int[] value)
-                {
-                    foreach (var i in value)
-                        Console.Write(i);
-                }
-            }
-            """;
+        [InterceptsLocation("Program.cs", 15, 11)]
+        public static void Interceptor2(params int[] value)
+        {
+        foreach (var i in value)
+        Console.Write(i);
+        }
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -4589,41 +4589,41 @@ public class InterceptorsTests : CSharpTestBase
     {
         // Test when interceptable method lacks 'params' parameter, and interceptor has one, and method is called in normal form.
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
+        class C
+        {
 
-                public static void InterceptableMethod(int[] value) => throw null!;
-            }
+        public static void InterceptableMethod(int[] value) => throw null!;
+        }
 
-            static class Program
-            {
-                public static void Main()
-                {
-                    C.InterceptableMethod(new[] { 1, 2, 3 });
-                    C.InterceptableMethod(new[] { 4, 5, 6 });
-                }
-            }
+        static class Program
+        {
+        public static void Main()
+        {
+        C.InterceptableMethod(new[] { 1, 2, 3 });
+        C.InterceptableMethod(new[] { 4, 5, 6 });
+        }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 14, 11)]
-                public static void Interceptor1(int[] value)
-                {
-                    foreach (var i in value)
-                        Console.Write(i);
-                }
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 14, 11)]
+        public static void Interceptor1(int[] value)
+        {
+        foreach (var i in value)
+        Console.Write(i);
+        }
 
-                [InterceptsLocation("Program.cs", 15, 11)]
-                public static void Interceptor2(params int[] value)
-                {
-                    foreach (var i in value)
-                        Console.Write(i);
-                }
-            }
-            """;
+        [InterceptsLocation("Program.cs", 15, 11)]
+        public static void Interceptor2(params int[] value)
+        {
+        foreach (var i in value)
+        Console.Write(i);
+        }
+        }
+        """;
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -4637,41 +4637,41 @@ public class InterceptorsTests : CSharpTestBase
     {
         // Verify that interpolated string-related attributes on an intercepted call use the attributes from the interceptable method.
         var code = """
-using System;
-using System.Runtime.CompilerServices;
+        using System;
+        using System.Runtime.CompilerServices;
 
-var s = new S1();
-s.M($"");
+        var s = new S1();
+        s.M($"");
 
-public struct S1
-{
-    public S1() { }
-    public int Field = 1;
+        public struct S1
+        {
+        public S1() { }
+        public int Field = 1;
 
 
-    public void M([InterpolatedStringHandlerArgument("")] CustomHandler c)
-    {
+        public void M([InterpolatedStringHandlerArgument("")] CustomHandler c)
+        {
         Console.Write(0);
-    }
-}
+        }
+        }
 
-public static class S1Ext
-{
-    [InterceptsLocation("Program.cs", 5, 3)]
-    public static void M1(ref this S1 s1, CustomHandler c)
-    {
+        public static class S1Ext
+        {
+        [InterceptsLocation("Program.cs", 5, 3)]
+        public static void M1(ref this S1 s1, CustomHandler c)
+        {
         Console.Write(2);
-    }
-}
+        }
+        }
 
-partial struct CustomHandler
-{
-    public CustomHandler(int literalLength, int formattedCount, S1 s)
-    {
+        partial struct CustomHandler
+        {
+        public CustomHandler(int literalLength, int formattedCount, S1 s)
+        {
         Console.Write(1);
-    }
-}
-""";
+        }
+        }
+        """;
         var verifier = CompileAndVerify(
             new[]
             {
@@ -4698,41 +4698,41 @@ partial struct CustomHandler
     {
         // Verify that interpolated string-related attributes are ignored on an interceptor in an intercepted call.
         var code = """
-using System;
-using System.Runtime.CompilerServices;
+        using System;
+        using System.Runtime.CompilerServices;
 
-var s = new S1();
-s.M($"");
+        var s = new S1();
+        s.M($"");
 
-public struct S1
-{
-    public S1() { }
-    public int Field = 1;
+        public struct S1
+        {
+        public S1() { }
+        public int Field = 1;
 
 
-    public void M(CustomHandler c)
-    {
+        public void M(CustomHandler c)
+        {
         Console.Write(0);
-    }
-}
+        }
+        }
 
-public static class S1Ext
-{
-    [InterceptsLocation("Program.cs", 5, 3)]
-    public static void M1(ref this S1 s1, [InterpolatedStringHandlerArgument("s1")] CustomHandler c)
-    {
+        public static class S1Ext
+        {
+        [InterceptsLocation("Program.cs", 5, 3)]
+        public static void M1(ref this S1 s1, [InterpolatedStringHandlerArgument("s1")] CustomHandler c)
+        {
         Console.Write(1);
-    }
-}
+        }
+        }
 
-partial struct CustomHandler
-{
-    public CustomHandler(int literalLength, int formattedCount, S1 s)
-    {
+        partial struct CustomHandler
+        {
+        public CustomHandler(int literalLength, int formattedCount, S1 s)
+        {
         throw null!; // we don't expect this to be called
-    }
-}
-""";
+        }
+        }
+        """;
         var verifier = CompileAndVerify(
             new[]
             {
@@ -4759,42 +4759,42 @@ partial struct CustomHandler
     {
         // Verify that interpolated string attributes on an interceptor don't cause us to somehow pick a different argument.
         var code = """
-using System;
-using System.Runtime.CompilerServices;
+        using System;
+        using System.Runtime.CompilerServices;
 
-var s1 = new S1(1);
-var s2 = new S1(2);
-S1.M(s1, s2, $"");
+        var s1 = new S1(1);
+        var s2 = new S1(2);
+        S1.M(s1, s2, $"");
 
-public struct S1
-{
-    public S1(int field) => Field = field;
-    public int Field = 1;
+        public struct S1
+        {
+        public S1(int field) => Field = field;
+        public int Field = 1;
 
 
-    public static void M(S1 s1, S1 s2, [InterpolatedStringHandlerArgument("s1")] CustomHandler c)
-    {
+        public static void M(S1 s1, S1 s2, [InterpolatedStringHandlerArgument("s1")] CustomHandler c)
+        {
         Console.Write(0);
-    }
-}
+        }
+        }
 
-public static class S1Ext
-{
-    [InterceptsLocation("Program.cs", 6, 4)]
-    public static void M1(S1 s2, S1 s3, [InterpolatedStringHandlerArgument("s2")] CustomHandler c)
-    {
+        public static class S1Ext
+        {
+        [InterceptsLocation("Program.cs", 6, 4)]
+        public static void M1(S1 s2, S1 s3, [InterpolatedStringHandlerArgument("s2")] CustomHandler c)
+        {
         Console.Write(2);
-    }
-}
+        }
+        }
 
-partial struct CustomHandler
-{
-    public CustomHandler(int literalLength, int formattedCount, S1 s)
-    {
+        partial struct CustomHandler
+        {
+        public CustomHandler(int literalLength, int formattedCount, S1 s)
+        {
         Console.Write(s.Field);
-    }
-}
-""";
+        }
+        }
+        """;
         var verifier = CompileAndVerify(
             new[]
             {
@@ -4821,27 +4821,27 @@ partial struct CustomHandler
     {
         // Verify that line directives are not considered when deciding if a particular call is being intercepted.
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
+        class C
+        {
 
-                public static void InterceptableMethod() { Console.Write("interceptable"); }
+        public static void InterceptableMethod() { Console.Write("interceptable"); }
 
-                public static void Main()
-                {
-                    #line 42 "OtherFile.cs"
-                    InterceptableMethod();
-                }
-            }
+        public static void Main()
+        {
+        #line 42 "OtherFile.cs"
+        InterceptableMethod();
+        }
+        }
 
-            class D
-            {
-                [InterceptsLocation("Program.cs", 12, 9)]
-                public static void Interceptor1() { Console.Write("interceptor 1"); }
-            }
-            """;
+        class D
+        {
+        [InterceptsLocation("Program.cs", 12, 9)]
+        public static void Interceptor1() { Console.Write("interceptor 1"); }
+        }
+        """;
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors,
@@ -4855,27 +4855,27 @@ partial struct CustomHandler
     {
         // Verify that line directives are not considered when deciding if a particular call is being intercepted.
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
+        class C
+        {
 
-                public static void InterceptableMethod() { Console.Write("interceptable"); }
+        public static void InterceptableMethod() { Console.Write("interceptable"); }
 
-                public static void Main()
-                {
-                    #line 42 "OtherFile.cs"
-                    InterceptableMethod();
-                }
-            }
+        public static void Main()
+        {
+        #line 42 "OtherFile.cs"
+        InterceptableMethod();
+        }
+        }
 
-            class D
-            {
-                [InterceptsLocation("OtherFile.cs", 42, 9)]
-                public static void Interceptor1() { Console.Write("interceptor 1"); }
-            }
-            """;
+        class D
+        {
+        [InterceptsLocation("OtherFile.cs", 42, 9)]
+        public static void Interceptor1() { Console.Write("interceptor 1"); }
+        }
+        """;
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
             parseOptions: RegularWithInterceptors
@@ -4894,24 +4894,24 @@ partial struct CustomHandler
     {
         // Expect no Obsolete diagnostics to be reported
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            C.M();
+        C.M();
 
-            class C
-            {
+        class C
+        {
 
-                public static void M() => throw null!;
-            }
+        public static void M() => throw null!;
+        }
 
-            class D
-            {
-                [Obsolete]
-                [InterceptsLocation("Program.cs", 4, 3)]
-                public static void M1() => Console.Write(1);
-            }
-            """;
+        class D
+        {
+        [Obsolete]
+        [InterceptsLocation("Program.cs", 4, 3)]
+        public static void M1() => Console.Write(1);
+        }
+        """;
 
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
@@ -4926,23 +4926,23 @@ partial struct CustomHandler
     {
         // CallerLineNumber, etc. on the interceptor doesn't affect the default arguments passed to an intercepted call.
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            C.M();
+        C.M();
 
-            class C
-            {
+        class C
+        {
 
-                public static void M(int lineNumber = 1) => throw null!;
-            }
+        public static void M(int lineNumber = 1) => throw null!;
+        }
 
-            class D
-            {
-                [InterceptsLocation("Program.cs", 4, 3)]
-                public static void M1([CallerLineNumber] int lineNumber = 0) => Console.Write(lineNumber);
-            }
-            """;
+        class D
+        {
+        [InterceptsLocation("Program.cs", 4, 3)]
+        public static void M1([CallerLineNumber] int lineNumber = 0) => Console.Write(lineNumber);
+        }
+        """;
 
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
@@ -4957,23 +4957,23 @@ partial struct CustomHandler
     {
         // Default parameter values on the interceptor doesn't affect the default arguments passed to an intercepted call.
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            C.M();
+        C.M();
 
-            class C
-            {
+        class C
+        {
 
-                public static void M(int lineNumber = 1) => throw null!;
-            }
+        public static void M(int lineNumber = 1) => throw null!;
+        }
 
-            class D
-            {
-                [InterceptsLocation("Program.cs", 4, 3)]
-                public static void M1(int lineNumber = 0) => Console.Write(lineNumber);
-            }
-            """;
+        class D
+        {
+        [InterceptsLocation("Program.cs", 4, 3)]
+        public static void M1(int lineNumber = 0) => Console.Write(lineNumber);
+        }
+        """;
 
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
@@ -4988,22 +4988,22 @@ partial struct CustomHandler
     {
         // Interceptor cannot add a default argument when original method lacks it.
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            C.M(); // 1
+        C.M(); // 1
 
-            class C
-            {
-                public static void M(int lineNumber) => throw null!;
-            }
+        class C
+        {
+        public static void M(int lineNumber) => throw null!;
+        }
 
-            class D
-            {
-                [InterceptsLocation("Program.cs", 4, 3)]
-                public static void M1(int lineNumber = 0) => Console.Write(lineNumber);
-            }
-            """;
+        class D
+        {
+        [InterceptsLocation("Program.cs", 4, 3)]
+        public static void M1(int lineNumber = 0) => Console.Write(lineNumber);
+        }
+        """;
 
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
@@ -5022,22 +5022,22 @@ partial struct CustomHandler
     public void InterceptorExtern()
     {
         var source = """
-            using System.Runtime.CompilerServices;
+        using System.Runtime.CompilerServices;
 
-            C.M();
+        C.M();
 
-            class C
-            {
+        class C
+        {
 
-                public static void M() => throw null!;
-            }
+        public static void M() => throw null!;
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 3, 3)]
-                public static extern void Interceptor();
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 3, 3)]
+        public static extern void Interceptor();
+        }
+        """;
 
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
@@ -5050,10 +5050,10 @@ partial struct CustomHandler
             "<top-level-statements-entry-point>",
             """
             {
-              // Code size        6 (0x6)
-              .maxstack  0
-              IL_0000:  call       "void D.Interceptor()"
-              IL_0005:  ret
+            // Code size        6 (0x6)
+            .maxstack  0
+            IL_0000:  call       "void D.Interceptor()"
+            IL_0005:  ret
             }
             """
         );
@@ -5063,26 +5063,26 @@ partial struct CustomHandler
     public void InterceptorAbstract()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            var d = new D();
-            d.M();
+        var d = new D();
+        d.M();
 
-            abstract class C
-            {
+        abstract class C
+        {
 
-                public void M() => throw null!;
+        public void M() => throw null!;
 
-                [InterceptsLocation("Program.cs", 5, 3)]
-                public abstract void Interceptor();
-            }
+        [InterceptsLocation("Program.cs", 5, 3)]
+        public abstract void Interceptor();
+        }
 
-            class D : C
-            {
-                public override void Interceptor() => Console.Write(1);
-            }
-            """;
+        class D : C
+        {
+        public override void Interceptor() => Console.Write(1);
+        }
+        """;
 
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
@@ -5096,27 +5096,27 @@ partial struct CustomHandler
     public void InterceptorInterface()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            I i = new C();
-            i.M();
+        I i = new C();
+        i.M();
 
-            interface I
-            {
+        interface I
+        {
 
-                public void M();
+        public void M();
 
-                [InterceptsLocation("Program.cs", 5, 3)]
-                void Interceptor();
-            }
+        [InterceptsLocation("Program.cs", 5, 3)]
+        void Interceptor();
+        }
 
-            class C : I
-            {
-                public void M() => throw null!;
-                public void Interceptor() => Console.Write(1);
-            }
-            """;
+        class C : I
+        {
+        public void M() => throw null!;
+        public void Interceptor() => Console.Write(1);
+        }
+        """;
 
         var verifier = CompileAndVerify(
             new[] { (source, "Program.cs"), s_attributesSource },
@@ -5130,25 +5130,25 @@ partial struct CustomHandler
     public void InterceptGetEnumerator()
     {
         var source = """
-            using System.Collections;
-            using System.Runtime.CompilerServices;
+        using System.Collections;
+        using System.Runtime.CompilerServices;
 
-            var myEnumerable = new MyEnumerable();
-            foreach (var item in myEnumerable)
-            {
-            }
+        var myEnumerable = new MyEnumerable();
+        foreach (var item in myEnumerable)
+        {
+        }
 
-            class MyEnumerable : IEnumerable
-            {
-                public IEnumerator GetEnumerator() => throw null!;
-            }
+        class MyEnumerable : IEnumerable
+        {
+        public IEnumerator GetEnumerator() => throw null!;
+        }
 
-            static class MyEnumerableExt
-            {
-                [InterceptsLocation("Program.cs", 5, 22)] // 1
-                public static IEnumerator GetEnumerator1(this MyEnumerable en) => throw null!;
-            }
-            """;
+        static class MyEnumerableExt
+        {
+        [InterceptsLocation("Program.cs", 5, 22)] // 1
+        public static IEnumerator GetEnumerator1(this MyEnumerable en) => throw null!;
+        }
+        """;
 
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
@@ -5170,25 +5170,25 @@ partial struct CustomHandler
     public void InterceptDispose()
     {
         var source = """
-            using System;
-            using System.Runtime.CompilerServices;
+        using System;
+        using System.Runtime.CompilerServices;
 
-            var myDisposable = new MyDisposable();
-            using (myDisposable)
-            {
-            }
+        var myDisposable = new MyDisposable();
+        using (myDisposable)
+        {
+        }
 
-            class MyDisposable : IDisposable
-            {
-                public void Dispose() => throw null!;
-            }
+        class MyDisposable : IDisposable
+        {
+        public void Dispose() => throw null!;
+        }
 
-            static class MyDisposeExt
-            {
-                [InterceptsLocation("Program.cs", 5, 8)] // 1
-                public static void Dispose1(this MyDisposable md) => throw null!;
-            }
-            """;
+        static class MyDisposeExt
+        {
+        [InterceptsLocation("Program.cs", 5, 8)] // 1
+        public static void Dispose1(this MyDisposable md) => throw null!;
+        }
+        """;
 
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
@@ -5210,23 +5210,23 @@ partial struct CustomHandler
     public void InterceptDeconstruct()
     {
         var source = """
-            using System;
-            using System.Runtime.CompilerServices;
+        using System;
+        using System.Runtime.CompilerServices;
 
-            var myDeconstructable = new MyDeconstructable();
-            var (x, y) = myDeconstructable;
+        var myDeconstructable = new MyDeconstructable();
+        var (x, y) = myDeconstructable;
 
-            class MyDeconstructable
-            {
-                public void Deconstruct(out int x, out int y) => throw null!;
-            }
+        class MyDeconstructable
+        {
+        public void Deconstruct(out int x, out int y) => throw null!;
+        }
 
-            static class MyDeconstructableExt
-            {
-                [InterceptsLocation("Program.cs", 5, 14)] // 1
-                public static void Deconstruct1(this MyDeconstructable md, out int x, out int y) => throw null!;
-            }
-            """;
+        static class MyDeconstructableExt
+        {
+        [InterceptsLocation("Program.cs", 5, 14)] // 1
+        public static void Deconstruct1(this MyDeconstructable md, out int x, out int y) => throw null!;
+        }
+        """;
 
         var comp = CreateCompilation(
             new[] { (source, "Program.cs"), s_attributesSource },
@@ -5248,20 +5248,20 @@ partial struct CustomHandler
     public void PathMapping_01()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            C c = new C();
-            c.M();
+        C c = new C();
+        c.M();
 
-            class C
-            {
-                public void M() => throw null!;
+        class C
+        {
+        public void M() => throw null!;
 
-                [InterceptsLocation("/_/Program.cs", 5, 3)]
-                public void Interceptor() => Console.Write(1);
-            }
-            """;
+        [InterceptsLocation("/_/Program.cs", 5, 3)]
+        public void Interceptor() => Console.Write(1);
+        }
+        """;
         var pathPrefix = PlatformInformation.IsWindows
             ? """C:\My\Machine\Specific\Path\"""
             : "/My/Machine/Specific/Path/";
@@ -5332,20 +5332,20 @@ partial struct CustomHandler
     public void PathMapping_03()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            C c = new C();
-            c.M();
+        C c = new C();
+        c.M();
 
-            class C
-            {
-                public void M() => throw null!;
+        class C
+        {
+        public void M() => throw null!;
 
-                [InterceptsLocation(@"\_\Program.cs", 5, 3)]
-                public void Interceptor() => Console.Write(1);
-            }
-            """;
+        [InterceptsLocation(@"\_\Program.cs", 5, 3)]
+        public void Interceptor() => Console.Write(1);
+        }
+        """;
         var pathPrefix = PlatformInformation.IsWindows
             ? """C:\My\Machine\Specific\Path\"""
             : "/My/Machine/Specific/Path/";
@@ -5378,43 +5378,43 @@ partial struct CustomHandler
     {
         // Test when unmapped file paths are distinct, but mapped paths are equal.
         var source1 = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            namespace NS1;
+        namespace NS1;
 
-            class C
-            {
-                public static void M0()
-                {
-                    C c = new C();
-                    c.M();
-                }
+        class C
+        {
+        public static void M0()
+        {
+        C c = new C();
+        c.M();
+        }
 
-                public void M() => throw null!;
+        public void M() => throw null!;
 
-                [InterceptsLocation(@"/_/Program.cs", 11, 9)]
-                public void Interceptor() => Console.Write(1);
-            }
-            """;
+        [InterceptsLocation(@"/_/Program.cs", 11, 9)]
+        public void Interceptor() => Console.Write(1);
+        }
+        """;
 
         var source2 = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            namespace NS2;
+        namespace NS2;
 
-            class C
-            {
-                public static void M0()
-                {
-                    C c = new C();
-                    c.M();
-                }
+        class C
+        {
+        public static void M0()
+        {
+        C c = new C();
+        c.M();
+        }
 
-                public void M() => throw null!;
-            }
-            """;
+        public void M() => throw null!;
+        }
+        """;
 
         var pathPrefix1 = PlatformInformation.IsWindows
             ? """C:\My\Machine\Specific\Path1\"""
@@ -5452,20 +5452,20 @@ partial struct CustomHandler
     {
         // Pathmap replacement contains backslashes, and attribute path contains backslashes.
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            C c = new C();
-            c.M();
+        C c = new C();
+        c.M();
 
-            class C
-            {
-                public void M() => throw null!;
+        class C
+        {
+        public void M() => throw null!;
 
-                [InterceptsLocation(@"\_\Program.cs", 5, 3)]
-                public void Interceptor() => Console.Write(1);
-            }
-            """;
+        [InterceptsLocation(@"\_\Program.cs", 5, 3)]
+        public void Interceptor() => Console.Write(1);
+        }
+        """;
         var pathPrefix = PlatformInformation.IsWindows
             ? """C:\My\Machine\Specific\Path\"""
             : "/My/Machine/Specific/Path/";
@@ -5490,20 +5490,20 @@ partial struct CustomHandler
     {
         // Pathmap mixes slashes and backslashes, attribute path is normalized to slashes
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            C c = new C();
-            c.M();
+        C c = new C();
+        c.M();
 
-            class C
-            {
-                public void M() => throw null!;
+        class C
+        {
+        public void M() => throw null!;
 
-                [InterceptsLocation(@"/_/Program.cs", 5, 3)]
-                public void Interceptor() => Console.Write(1);
-            }
-            """;
+        [InterceptsLocation(@"/_/Program.cs", 5, 3)]
+        public void Interceptor() => Console.Write(1);
+        }
+        """;
         var pathPrefix = PlatformInformation.IsWindows
             ? """C:\My\Machine\Specific\Path\"""
             : "/My/Machine/Specific/Path/";
@@ -5536,20 +5536,20 @@ partial struct CustomHandler
     {
         // Pathmap replacement mixes slashes and backslashes, attribute path matches it
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            C c = new C();
-            c.M();
+        C c = new C();
+        c.M();
 
-            class C
-            {
-                public void M() => throw null!;
+        class C
+        {
+        public void M() => throw null!;
 
-                [InterceptsLocation(@"\_/Program.cs", 5, 3)]
-                public void Interceptor() => Console.Write(1);
-            }
-            """;
+        [InterceptsLocation(@"\_/Program.cs", 5, 3)]
+        public void Interceptor() => Console.Write(1);
+        }
+        """;
         var pathPrefix = PlatformInformation.IsWindows
             ? """C:\My\Machine\Specific\Path\"""
             : "/My/Machine/Specific/Path/";
@@ -5574,23 +5574,23 @@ partial struct CustomHandler
     {
         // No pathmap is present and slashes in the attribute match the FilePath on the syntax tree.
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
-                public static void Main()
-                {
-                    C c = new C();
-                    c.M();
-                }
+        class C
+        {
+        public static void Main()
+        {
+        C c = new C();
+        c.M();
+        }
 
-                public void M() => throw null!;
+        public void M() => throw null!;
 
-                [InterceptsLocation("src/Program.cs", 9, 11)]
-                public void Interceptor() => Console.Write(1);
-            }
-            """;
+        [InterceptsLocation("src/Program.cs", 9, 11)]
+        public void Interceptor() => Console.Write(1);
+        }
+        """;
 
         var verifier = CompileAndVerify(
             new[] { (source, "src/Program.cs"), s_attributesSource },
@@ -5605,23 +5605,23 @@ partial struct CustomHandler
     {
         // No pathmap is present and backslashes in the attribute match the FilePath on the syntax tree.
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
-                public static void Main()
-                {
-                    C c = new C();
-                    c.M();
-                }
+        class C
+        {
+        public static void Main()
+        {
+        C c = new C();
+        c.M();
+        }
 
-                public void M() => throw null!;
+        public void M() => throw null!;
 
-                [InterceptsLocation(@"src\Program.cs", 9, 11)]
-                public void Interceptor() => Console.Write(1);
-            }
-            """;
+        [InterceptsLocation(@"src\Program.cs", 9, 11)]
+        public void Interceptor() => Console.Write(1);
+        }
+        """;
 
         var verifier = CompileAndVerify(
             new[] { (source, @"src\Program.cs"), s_attributesSource },
@@ -5636,23 +5636,23 @@ partial struct CustomHandler
     {
         // Relative paths do not have slashes normalized when pathmap is not present
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
-                public static void Main()
-                {
-                    C c = new C();
-                    c.M();
-                }
+        class C
+        {
+        public static void Main()
+        {
+        C c = new C();
+        c.M();
+        }
 
-                public void M() => throw null!;
+        public void M() => throw null!;
 
-                [InterceptsLocation(@"src/Program.cs", 9, 11)]
-                public void Interceptor() => Console.Write(1);
-            }
-            """;
+        [InterceptsLocation(@"src/Program.cs", 9, 11)]
+        public void Interceptor() => Console.Write(1);
+        }
+        """;
 
         var comp = CreateCompilation(
             new[] { (source, @"src\Program.cs"), s_attributesSource },
@@ -5676,23 +5676,23 @@ partial struct CustomHandler
         // Absolute paths do not have slashes normalized when no pathmap is present
         // Note that any such normalization step would be specific to Windows
         var source = """
-            using System.Runtime.CompilerServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System;
 
-            class C
-            {
-                public static void Main()
-                {
-                    C c = new C();
-                    c.M();
-                }
+        class C
+        {
+        public static void Main()
+        {
+        C c = new C();
+        c.M();
+        }
 
-                public void M() => throw null!;
+        public void M() => throw null!;
 
-                [InterceptsLocation("C:/src/Program.cs", 9, 11)] // 1
-                public void Interceptor() => Console.Write(1);
-            }
-            """;
+        [InterceptsLocation("C:/src/Program.cs", 9, 11)] // 1
+        public void Interceptor() => Console.Write(1);
+        }
+        """;
 
         var comp = CreateCompilation(
             new[] { (source, @"C:\src\Program.cs"), s_attributesSource },
@@ -5714,24 +5714,24 @@ partial struct CustomHandler
     public void InterceptorUnmanagedCallersOnly()
     {
         var source = """
-            using System.Runtime.CompilerServices;
-            using System.Runtime.InteropServices;
-            using System;
+        using System.Runtime.CompilerServices;
+        using System.Runtime.InteropServices;
+        using System;
 
-            C.Interceptable();
+        C.Interceptable();
 
-            class C
-            {
-                public static void Interceptable() { }
-            }
+        class C
+        {
+        public static void Interceptable() { }
+        }
 
-            static class D
-            {
-                [InterceptsLocation("Program.cs", 5, 3)]
-                [UnmanagedCallersOnly]
-                public static void Interceptor() { }
-            }
-            """;
+        static class D
+        {
+        [InterceptsLocation("Program.cs", 5, 3)]
+        [UnmanagedCallersOnly]
+        public static void Interceptor() { }
+        }
+        """;
 
         var comp = CreateCompilation(
             new[]

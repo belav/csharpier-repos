@@ -23,17 +23,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    void M()
-                    {
-                        int var1 = 5;
-                        {|Cursor:[|unsafe|]|}
-                        {
-                            int* ptr1, ptr2;
-                            ptr1 = &var1;
-                            ptr2 = ptr1;
-                            *ptr2 = 20;
-                        }
-                    }
+                void M()
+                {
+                int var1 = 5;
+                {|Cursor:[|unsafe|]|}
+                {
+                int* ptr1, ptr2;
+                ptr1 = &var1;
+                ptr2 = ptr1;
+                *ptr2 = 20;
+                }
+                }
                 }
                 """
             );

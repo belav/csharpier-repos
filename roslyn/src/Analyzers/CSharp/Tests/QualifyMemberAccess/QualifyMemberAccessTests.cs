@@ -82,23 +82,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    int i;
+                int i;
 
-                    void M()
-                    {
-                        [|i|] = 1;
-                    }
+                void M()
+                {
+                [|i|] = 1;
+                }
                 }
                 """,
                 """
                 class Class
                 {
-                    int i;
+                int i;
 
-                    void M()
-                    {
-                        this.i = 1;
-                    }
+                void M()
+                {
+                this.i = 1;
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyFieldAccess
@@ -112,23 +112,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    int i;
+                int i;
 
-                    void M()
-                    {
-                        var x = [|i|];
-                    }
+                void M()
+                {
+                var x = [|i|];
+                }
                 }
                 """,
                 """
                 class Class
                 {
-                    int i;
+                int i;
 
-                    void M()
-                    {
-                        var x = this.i;
-                    }
+                void M()
+                {
+                var x = this.i;
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyFieldAccess
@@ -142,23 +142,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    int i;
+                int i;
 
-                    void M(int ii)
-                    {
-                        M([|i|]);
-                    }
+                void M(int ii)
+                {
+                M([|i|]);
+                }
                 }
                 """,
                 """
                 class Class
                 {
-                    int i;
+                int i;
 
-                    void M(int ii)
-                    {
-                        M(this.i);
-                    }
+                void M(int ii)
+                {
+                M(this.i);
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyFieldAccess
@@ -172,23 +172,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    int i;
+                int i;
 
-                    void M()
-                    {
-                        var s = [|i|].ToString();
-                    }
+                void M()
+                {
+                var s = [|i|].ToString();
+                }
                 }
                 """,
                 """
                 class Class
                 {
-                    int i;
+                int i;
 
-                    void M()
-                    {
-                        var s = this.i.ToString();
-                    }
+                void M()
+                {
+                var s = this.i.ToString();
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyFieldAccess
@@ -202,23 +202,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    string s;
+                string s;
 
-                    void M()
-                    {
-                        var x = [|s|]?.ToString();
-                    }
+                void M()
+                {
+                var x = [|s|]?.ToString();
+                }
                 }
                 """,
                 """
                 class Class
                 {
-                    string s;
+                string s;
 
-                    void M()
-                    {
-                        var x = this.s?.ToString();
-                    }
+                void M()
+                {
+                var x = this.s?.ToString();
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyFieldAccess
@@ -232,29 +232,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Base
                 {
-                    protected int i;
+                protected int i;
                 }
 
                 class Derived : Base
                 {
-                    void M()
-                    {
-                        [|i|] = 1;
-                    }
+                void M()
+                {
+                [|i|] = 1;
+                }
                 }
                 """,
                 """
                 class Base
                 {
-                    protected int i;
+                protected int i;
                 }
 
                 class Derived : Base
                 {
-                    void M()
-                    {
-                        this.i = 1;
-                    }
+                void M()
+                {
+                this.i = 1;
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyFieldAccess
@@ -268,21 +268,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class C
                 {
-                    int i = 1;
-                    void M()
-                    {
-                        var test = new System.Collections.Generic.List<int> { [|i|] };
-                    }
+                int i = 1;
+                void M()
+                {
+                var test = new System.Collections.Generic.List<int> { [|i|] };
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    int i = 1;
-                    void M()
-                    {
-                        var test = new System.Collections.Generic.List<int> { this.i };
-                    }
+                int i = 1;
+                void M()
+                {
+                var test = new System.Collections.Generic.List<int> { this.i };
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyFieldAccess
@@ -296,21 +296,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class C
                 {
-                    int i = 1;
-                    void M()
-                    {
-                        var test = new System.Collections.Generic.List<int> { [|i|] };
-                    }
+                int i = 1;
+                void M()
+                {
+                var test = new System.Collections.Generic.List<int> { [|i|] };
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    int i = 1;
-                    void M()
-                    {
-                        var test = new System.Collections.Generic.List<int> { this.i };
-                    }
+                int i = 1;
+                void M()
+                {
+                var test = new System.Collections.Generic.List<int> { this.i };
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyFieldAccess
@@ -324,13 +324,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    int i;
+                int i;
 
-                    void M()
-                    {
-                        Class c = new Class();
-                        c.[|i|] = 1;
-                    }
+                void M()
+                {
+                Class c = new Class();
+                c.[|i|] = 1;
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyFieldAccess
@@ -344,12 +344,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class C
                 {
-                    static int i;
+                static int i;
 
-                    void M()
-                    {
-                        [|i|] = 1;
-                    }
+                void M()
+                {
+                [|i|] = 1;
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyFieldAccess
@@ -363,11 +363,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class C
                 {
-                    void M()
-                    {
-                         var foo = 1;
-                         var test = new System.Collections.Generic.List<int> { [|foo|] };
-                    }
+                void M()
+                {
+                var foo = 1;
+                var test = new System.Collections.Generic.List<int> { [|foo|] };
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyFieldAccess
@@ -381,11 +381,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class C
                 {
-                    void M()
-                    {
-                         var foo = 1;
-                         var test = new System.Collections.Generic.List<int> { [|foo|] };
-                    }
+                void M()
+                {
+                var foo = 1;
+                var test = new System.Collections.Generic.List<int> { [|foo|] };
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyFieldAccess
@@ -399,11 +399,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class C
                 {
-                    void M()
-                    {
-                         var foo = 1;
-                         var test = new System.Collections.Generic.Dictionary<int, int> { { 2, [|foo|] } };
-                    }
+                void M()
+                {
+                var foo = 1;
+                var test = new System.Collections.Generic.Dictionary<int, int> { { 2, [|foo|] } };
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyFieldAccess
@@ -417,14 +417,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    int i;
+                int i;
 
-                    void M(Class c)
-                    {
-                        if (c is { [|i|]: 1 })
-                        {
-                        }
-                    }
+                void M(Class c)
+                {
+                if (c is { [|i|]: 1 })
+                {
+                }
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyFieldAccess
@@ -438,16 +438,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    int i;
+                int i;
 
-                    void M(Class c)
-                    {
-                        switch (t)
-                        {
-                            case Class { [|i|]: 1 }:
-                                return;
-                        }
-                    }
+                void M(Class c)
+                {
+                switch (t)
+                {
+                case Class { [|i|]: 1 }:
+                return;
+                }
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyFieldAccess
@@ -461,16 +461,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    int i;
+                int i;
 
-                    void M(Class c)
-                    {
-                        var a = c switch
-                        {
-                            { [|i|]: 0 } => 1,
-                            _ => 0
-                        };
-                    }
+                void M(Class c)
+                {
+                var a = c switch
+                {
+                { [|i|]: 0 } => 1,
+                _ => 0
+                };
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyFieldAccess
@@ -484,23 +484,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    int i { get; set; }
+                int i { get; set; }
 
-                    void M()
-                    {
-                        [|i|] = 1;
-                    }
+                void M()
+                {
+                [|i|] = 1;
+                }
                 }
                 """,
                 """
                 class Class
                 {
-                    int i { get; set; }
+                int i { get; set; }
 
-                    void M()
-                    {
-                        this.i = 1;
-                    }
+                void M()
+                {
+                this.i = 1;
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess
@@ -514,23 +514,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    int i { get; set; }
+                int i { get; set; }
 
-                    void M()
-                    {
-                        var x = [|i|];
-                    }
+                void M()
+                {
+                var x = [|i|];
+                }
                 }
                 """,
                 """
                 class Class
                 {
-                    int i { get; set; }
+                int i { get; set; }
 
-                    void M()
-                    {
-                        var x = this.i;
-                    }
+                void M()
+                {
+                var x = this.i;
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess
@@ -544,14 +544,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    int i { get; set; }
+                int i { get; set; }
 
-                    void M(Class c)
-                    {
-                        if (c is { [|i|]: 1 })
-                        {
-                        }
-                    }
+                void M(Class c)
+                {
+                if (c is { [|i|]: 1 })
+                {
+                }
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess
@@ -565,16 +565,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    int i { get; set; }
+                int i { get; set; }
 
-                    void M(Class c)
-                    {
-                        switch (t)
-                        {
-                            case Class { [|i|]: 1 }:
-                                return;
-                        }
-                    }
+                void M(Class c)
+                {
+                switch (t)
+                {
+                case Class { [|i|]: 1 }:
+                return;
+                }
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess
@@ -588,16 +588,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    int i { get; set; }
+                int i { get; set; }
 
-                    void M(Class c)
-                    {
-                        var a = c switch
-                        {
-                            { [|i|]: 0 } => 1,
-                            _ => 0
-                        };
-                    }
+                void M(Class c)
+                {
+                var a = c switch
+                {
+                { [|i|]: 0 } => 1,
+                _ => 0
+                };
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess
@@ -612,31 +612,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    int i { get; set; }
+                int i { get; set; }
 
-                    void M(Class c)
-                    {
-                        var a = c switch
-                        {
-                            { i: [|i|] } => 1,
-                            _ => 0
-                        };
-                    }
+                void M(Class c)
+                {
+                var a = c switch
+                {
+                { i: [|i|] } => 1,
+                _ => 0
+                };
+                }
                 }
                 """,
                 """
                 class Class
                 {
-                    int i { get; set; }
+                int i { get; set; }
 
-                    void M(Class c)
-                    {
-                        var a = c switch
-                        {
-                            { i: this.i } => 1,
-                            _ => 0
-                        };
-                    }
+                void M(Class c)
+                {
+                var a = c switch
+                {
+                { i: this.i } => 1,
+                _ => 0
+                };
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess
@@ -650,14 +650,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    int i;
+                int i;
 
-                    void M(Class c)
-                    {
-                        if (c is { [|i|]: 1 })
-                        {
-                        }
-                    }
+                void M(Class c)
+                {
+                if (c is { [|i|]: 1 })
+                {
+                }
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyFieldAccess
@@ -671,16 +671,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    int i;
+                int i;
 
-                    void M(Class c)
-                    {
-                        switch (t)
-                        {
-                            case Class { [|i|]: 1 }:
-                                return;
-                        }
-                    }
+                void M(Class c)
+                {
+                switch (t)
+                {
+                case Class { [|i|]: 1 }:
+                return;
+                }
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyFieldAccess
@@ -694,16 +694,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    int i;
+                int i;
 
-                    void M(Class c)
-                    {
-                        var a = c switch
-                        {
-                            { [|i|]: 0 } => 1,
-                            _ => 0
-                        };
-                    }
+                void M(Class c)
+                {
+                var a = c switch
+                {
+                { [|i|]: 0 } => 1,
+                _ => 0
+                };
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyFieldAccess
@@ -718,31 +718,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    int i;
+                int i;
 
-                    void M(Class c)
-                    {
-                        var a = c switch
-                        {
-                            { i: [|i|] } => 1,
-                            _ => 0
-                        };
-                    }
+                void M(Class c)
+                {
+                var a = c switch
+                {
+                { i: [|i|] } => 1,
+                _ => 0
+                };
+                }
                 }
                 """,
                 """
                 class Class
                 {
-                    int i;
+                int i;
 
-                    void M(Class c)
-                    {
-                        var a = c switch
-                        {
-                            { i: this.i } => 1,
-                            _ => 0
-                        };
-                    }
+                void M(Class c)
+                {
+                var a = c switch
+                {
+                { i: this.i } => 1,
+                _ => 0
+                };
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyFieldAccess
@@ -756,23 +756,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    int i { get; set; }
+                int i { get; set; }
 
-                    void M(int ii)
-                    {
-                        M([|i|]);
-                    }
+                void M(int ii)
+                {
+                M([|i|]);
+                }
                 }
                 """,
                 """
                 class Class
                 {
-                    int i { get; set; }
+                int i { get; set; }
 
-                    void M(int ii)
-                    {
-                        M(this.i);
-                    }
+                void M(int ii)
+                {
+                M(this.i);
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess
@@ -786,23 +786,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    int i { get; set; }
+                int i { get; set; }
 
-                    void M()
-                    {
-                        var s = [|i|].ToString();
-                    }
+                void M()
+                {
+                var s = [|i|].ToString();
+                }
                 }
                 """,
                 """
                 class Class
                 {
-                    int i { get; set; }
+                int i { get; set; }
 
-                    void M()
-                    {
-                        var s = this.i.ToString();
-                    }
+                void M()
+                {
+                var s = this.i.ToString();
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess
@@ -816,23 +816,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    string s { get; set; }
+                string s { get; set; }
 
-                    void M()
-                    {
-                        var x = [|s|]?.ToString();
-                    }
+                void M()
+                {
+                var x = [|s|]?.ToString();
+                }
                 }
                 """,
                 """
                 class Class
                 {
-                    string s { get; set; }
+                string s { get; set; }
 
-                    void M()
-                    {
-                        var x = this.s?.ToString();
-                    }
+                void M()
+                {
+                var x = this.s?.ToString();
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess
@@ -846,29 +846,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Base
                 {
-                    protected int i { get; set; }
+                protected int i { get; set; }
                 }
 
                 class Derived : Base
                 {
-                    void M()
-                    {
-                        [|i|] = 1;
-                    }
+                void M()
+                {
+                [|i|] = 1;
+                }
                 }
                 """,
                 """
                 class Base
                 {
-                    protected int i { get; set; }
+                protected int i { get; set; }
                 }
 
                 class Derived : Base
                 {
-                    void M()
-                    {
-                        this.i = 1;
-                    }
+                void M()
+                {
+                this.i = 1;
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess
@@ -882,12 +882,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    int i { get; set; }
+                int i { get; set; }
 
-                    void M(Class c)
-                    {
-                        c.[|i|] = 1;
-                    }
+                void M(Class c)
+                {
+                c.[|i|] = 1;
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess
@@ -901,12 +901,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class C
                 {
-                    static int i { get; set; }
+                static int i { get; set; }
 
-                    void M()
-                    {
-                        [|i|] = 1;
-                    }
+                void M()
+                {
+                [|i|] = 1;
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess
@@ -920,19 +920,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    void M(int i)
-                    {
-                        [|M|](0);
-                    }
+                void M(int i)
+                {
+                [|M|](0);
+                }
                 }
                 """,
                 """
                 class Class
                 {
-                    void M(int i)
-                    {
-                        this.M(0);
-                    }
+                void M(int i)
+                {
+                this.M(0);
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyMethodAccess
@@ -946,18 +946,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    int M()
-                    {
-                        return [|M|]();
-                    }
+                int M()
+                {
+                return [|M|]();
+                }
                 """,
                 """
                 class Class
                 {
-                    int M()
-                    {
-                        return this.M();
-                    }
+                int M()
+                {
+                return this.M();
+                }
                 """,
                 CodeStyleOptions2.QualifyMethodAccess
             );
@@ -970,18 +970,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    string M()
-                    {
-                        var s = [|M|]().ToString();
-                    }
+                string M()
+                {
+                var s = [|M|]().ToString();
+                }
                 """,
                 """
                 class Class
                 {
-                    string M()
-                    {
-                        var s = this.M().ToString();
-                    }
+                string M()
+                {
+                var s = this.M().ToString();
+                }
                 """,
                 CodeStyleOptions2.QualifyMethodAccess
             );
@@ -994,18 +994,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    string M()
-                    {
-                        return [|M|]()?.ToString();
-                    }
+                string M()
+                {
+                return [|M|]()?.ToString();
+                }
                 """,
                 """
                 class Class
                 {
-                    string M()
-                    {
-                        return this.M()?.ToString();
-                    }
+                string M()
+                {
+                return this.M()?.ToString();
+                }
                 """,
                 CodeStyleOptions2.QualifyMethodAccess
             );
@@ -1020,12 +1020,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
 
                 class C
                 {
-                    event EventHandler e;
+                event EventHandler e;
 
-                    void Handler(object sender, EventArgs args)
-                    {
-                        e += [|Handler|];
-                    }
+                void Handler(object sender, EventArgs args)
+                {
+                e += [|Handler|];
+                }
                 }
                 """,
                 """
@@ -1033,12 +1033,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
 
                 class C
                 {
-                    event EventHandler e;
+                event EventHandler e;
 
-                    void Handler(object sender, EventArgs args)
-                    {
-                        e += this.Handler;
-                    }
+                void Handler(object sender, EventArgs args)
+                {
+                e += this.Handler;
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyMethodAccess
@@ -1054,12 +1054,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
 
                 class C
                 {
-                    event EventHandler e;
+                event EventHandler e;
 
-                    void Handler(object sender, EventArgs args)
-                    {
-                        e += new EventHandler([|Handler|]);
-                    }
+                void Handler(object sender, EventArgs args)
+                {
+                e += new EventHandler([|Handler|]);
+                }
                 }
                 """,
                 """
@@ -1067,12 +1067,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
 
                 class C
                 {
-                    event EventHandler e;
+                event EventHandler e;
 
-                    void Handler(object sender, EventArgs args)
-                    {
-                        e += new EventHandler(this.Handler);
-                    }
+                void Handler(object sender, EventArgs args)
+                {
+                e += new EventHandler(this.Handler);
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyMethodAccess
@@ -1086,33 +1086,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Base
                 {
-                    protected void Method()
-                    {
-                    }
+                protected void Method()
+                {
+                }
                 }
 
                 class Derived : Base
                 {
-                    void M()
-                    {
-                        [|Method|]();
-                    }
+                void M()
+                {
+                [|Method|]();
+                }
                 }
                 """,
                 """
                 class Base
                 {
-                    protected void Method()
-                    {
-                    }
+                protected void Method()
+                {
+                }
                 }
 
                 class Derived : Base
                 {
-                    void M()
-                    {
-                        this.Method();
-                    }
+                void M()
+                {
+                this.Method();
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyMethodAccess
@@ -1126,10 +1126,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    void M(Class c)
-                    {
-                        c.[|M|]();
-                    }
+                void M(Class c)
+                {
+                c.[|M|]();
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyMethodAccess
@@ -1143,14 +1143,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class C
                 {
-                    static void Method()
-                    {
-                    }
+                static void Method()
+                {
+                }
 
-                    void M()
-                    {
-                        [|Method|]();
-                    }
+                void M()
+                {
+                [|Method|]();
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyMethodAccess
@@ -1164,11 +1164,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class C
                 {
-                    void M()
-                    {
-                         var foo = 1;
-                         var test = new System.Collections.Generic.List<int> { [|foo|] };
-                    }
+                void M()
+                {
+                var foo = 1;
+                var test = new System.Collections.Generic.List<int> { [|foo|] };
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyMethodAccess
@@ -1182,11 +1182,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class C
                 {
-                    void M()
-                    {
-                        int Local() => 1;
-                        var test = new System.Collections.Generic.List<int> { [|Local()|] };
-                    }
+                void M()
+                {
+                int Local() => 1;
+                var test = new System.Collections.Generic.List<int> { [|Local()|] };
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyMethodAccess
@@ -1200,11 +1200,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class C
                 {
-                    void M()
-                    {
-                         var foo = 1;
-                         var test = new System.Collections.Generic.List<int> { [|foo|] };
-                    }
+                void M()
+                {
+                var foo = 1;
+                var test = new System.Collections.Generic.List<int> { [|foo|] };
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyMethodAccess
@@ -1218,11 +1218,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class C
                 {
-                    void M()
-                    {
-                        int Local() => 1;
-                        var test = new System.Collections.Generic.List<int> { [|Local()|] };
-                    }
+                void M()
+                {
+                int Local() => 1;
+                var test = new System.Collections.Generic.List<int> { [|Local()|] };
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyMethodAccess
@@ -1236,11 +1236,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class C
                 {
-                    void M()
-                    {
-                        int Local() => 1;
-                        [|Local|]();
-                    }
+                void M()
+                {
+                int Local() => 1;
+                [|Local|]();
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyMethodAccess
@@ -1256,15 +1256,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
 
                 class C
                 {
-                    void Method()
-                    {
-                        object LocalFunction() => new object();
-                        this.Method2([|LocalFunction|]);
-                    }
+                void Method()
+                {
+                object LocalFunction() => new object();
+                this.Method2([|LocalFunction|]);
+                }
 
-                    void Method2(Func<object> LocalFunction)
-                    {
-                    }
+                void Method2(Func<object> LocalFunction)
+                {
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyMethodAccess
@@ -1281,11 +1281,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
 
                 class C
                 {
-                    void Method()
-                    {
-                        object LocalFunction() => new object();
-                        var dict = new Dictionary<Func<object>, int>() { { [|LocalFunction|], 1 } };
-                    }
+                void Method()
+                {
+                object LocalFunction() => new object();
+                var dict = new Dictionary<Func<object>, int>() { { [|LocalFunction|], 1 } };
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyMethodAccess
@@ -1301,11 +1301,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
 
                 class C
                 {
-                    void Method()
-                    {
-                        object LocalFunction() => new object();
-                        [|LocalFunction|]();
-                    }
+                void Method()
+                {
+                object LocalFunction() => new object();
+                [|LocalFunction|]();
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyMethodAccess
@@ -1322,12 +1322,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
 
                 class C
                 {
-                    event EventHandler e;
+                event EventHandler e;
 
-                    void Handler(object sender, EventArgs args)
-                    {
-                        [|e|] += Handler;
-                    }
+                void Handler(object sender, EventArgs args)
+                {
+                [|e|] += Handler;
+                }
                 }
                 """,
                 """
@@ -1335,12 +1335,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
 
                 class C
                 {
-                    event EventHandler e;
+                event EventHandler e;
 
-                    void Handler(object sender, EventArgs args)
-                    {
-                        this.e += Handler;
-                    }
+                void Handler(object sender, EventArgs args)
+                {
+                this.e += Handler;
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyEventAccess
@@ -1357,21 +1357,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
 
                 class C
                 {
-                    event EventHandler e
-                    {
-                        add
-                        {
-                        }
+                event EventHandler e
+                {
+                add
+                {
+                }
 
-                        remove
-                        {
-                        }
-                    }
+                remove
+                {
+                }
+                }
 
-                    void Handler(object sender, EventArgs args)
-                    {
-                        [|e|] += Handler;
-                    }
+                void Handler(object sender, EventArgs args)
+                {
+                [|e|] += Handler;
+                }
                 }
                 """,
                 """
@@ -1379,21 +1379,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
 
                 class C
                 {
-                    event EventHandler e
-                    {
-                        add
-                        {
-                        }
+                event EventHandler e
+                {
+                add
+                {
+                }
 
-                        remove
-                        {
-                        }
-                    }
+                remove
+                {
+                }
+                }
 
-                    void Handler(object sender, EventArgs args)
-                    {
-                        this.e += Handler;
-                    }
+                void Handler(object sender, EventArgs args)
+                {
+                this.e += Handler;
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyEventAccess
@@ -1410,12 +1410,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
 
                 class C
                 {
-                    event EventHandler e;
+                event EventHandler e;
 
-                    void OnSomeEvent()
-                    {
-                        [|e|](this, new EventArgs());
-                    }
+                void OnSomeEvent()
+                {
+                [|e|](this, new EventArgs());
+                }
                 }
                 """,
                 """
@@ -1423,12 +1423,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
 
                 class C
                 {
-                    event EventHandler e;
+                event EventHandler e;
 
-                    void OnSomeEvent()
-                    {
-                        this.e(this, new EventArgs());
-                    }
+                void OnSomeEvent()
+                {
+                this.e(this, new EventArgs());
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyEventAccess
@@ -1445,12 +1445,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
 
                 class C
                 {
-                    event EventHandler e;
+                event EventHandler e;
 
-                    void OnSomeEvent()
-                    {
-                        [|e|].Invoke(this, new EventArgs());
-                    }
+                void OnSomeEvent()
+                {
+                [|e|].Invoke(this, new EventArgs());
+                }
                 }
                 """,
                 """
@@ -1458,12 +1458,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
 
                 class C
                 {
-                    event EventHandler e;
+                event EventHandler e;
 
-                    void OnSomeEvent()
-                    {
-                        this.e.Invoke(this, new EventArgs());
-                    }
+                void OnSomeEvent()
+                {
+                this.e.Invoke(this, new EventArgs());
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyEventAccess
@@ -1480,12 +1480,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
 
                 class C
                 {
-                    event EventHandler e;
+                event EventHandler e;
 
-                    void OnSomeEvent()
-                    {
-                        [|e|]?.Invoke(this, new EventArgs());
-                    }
+                void OnSomeEvent()
+                {
+                [|e|]?.Invoke(this, new EventArgs());
+                }
                 }
                 """,
                 """
@@ -1493,12 +1493,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
 
                 class C
                 {
-                    event EventHandler e;
+                event EventHandler e;
 
-                    void OnSomeEvent()
-                    {
-                        this.e?.Invoke(this, new EventArgs());
-                    }
+                void OnSomeEvent()
+                {
+                this.e?.Invoke(this, new EventArgs());
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyEventAccess
@@ -1515,15 +1515,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
 
                 class Base
                 {
-                    protected event EventHandler e;
+                protected event EventHandler e;
                 }
 
                 class Derived : Base
                 {
-                    void Handler(object sender, EventArgs args)
-                    {
-                        [|e|] += Handler;
-                    }
+                void Handler(object sender, EventArgs args)
+                {
+                [|e|] += Handler;
+                }
                 }
                 """,
                 """
@@ -1531,15 +1531,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
 
                 class Base
                 {
-                    protected event EventHandler e;
+                protected event EventHandler e;
                 }
 
                 class Derived : Base
                 {
-                    void Handler(object sender, EventArgs args)
-                    {
-                        this.e += Handler;
-                    }
+                void Handler(object sender, EventArgs args)
+                {
+                this.e += Handler;
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyEventAccess
@@ -1555,16 +1555,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
 
                 class Class
                 {
-                    event EventHandler e;
+                event EventHandler e;
 
-                    void M(Class c)
-                    {
-                        c.[|e|] += Handler;
-                    }
+                void M(Class c)
+                {
+                c.[|e|] += Handler;
+                }
 
-                    void Handler(object sender, EventArgs args)
-                    {
-                    }
+                void Handler(object sender, EventArgs args)
+                {
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyEventAccess
@@ -1580,12 +1580,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
 
                 class C
                 {
-                    static event EventHandler e;
+                static event EventHandler e;
                 }
 
                 void Handler(object sender, EventArgs args)
                 {
-                    [|e|] += Handler;
+                [|e|] += Handler;
                 } }
                 """,
                 CodeStyleOptions2.QualifyEventAccess
@@ -1599,23 +1599,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    int Property { get; set; };
+                int Property { get; set; };
 
-                    void M()
-                    {
-                        [|Property|] = 1;
-                    }
+                void M()
+                {
+                [|Property|] = 1;
+                }
                 }
                 """,
                 """
                 class Class
                 {
-                    int Property { get; set; };
+                int Property { get; set; };
 
-                    void M()
-                    {
-                        this.Property = 1;
-                    }
+                void M()
+                {
+                this.Property = 1;
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess,
@@ -1630,23 +1630,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    int Property { get; set; };
+                int Property { get; set; };
 
-                    void M()
-                    {
-                        [|Property|] = 1;
-                    }
+                void M()
+                {
+                [|Property|] = 1;
+                }
                 }
                 """,
                 """
                 class Class
                 {
-                    int Property { get; set; };
+                int Property { get; set; };
 
-                    void M()
-                    {
-                        this.Property = 1;
-                    }
+                void M()
+                {
+                this.Property = 1;
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess,
@@ -1661,23 +1661,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    int Property { get; set; };
+                int Property { get; set; };
 
-                    void M()
-                    {
-                        [|Property|] = 1;
-                    }
+                void M()
+                {
+                [|Property|] = 1;
+                }
                 }
                 """,
                 """
                 class Class
                 {
-                    int Property { get; set; };
+                int Property { get; set; };
 
-                    void M()
-                    {
-                        this.Property = 1;
-                    }
+                void M()
+                {
+                this.Property = 1;
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess,
@@ -1692,23 +1692,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Class
                 {
-                    int Property { get; set; };
+                int Property { get; set; };
 
-                    void M()
-                    {
-                        [|Property|] = 1;
-                    }
+                void M()
+                {
+                [|Property|] = 1;
+                }
                 }
                 """,
                 """
                 class Class
                 {
-                    int Property { get; set; };
+                int Property { get; set; };
 
-                    void M()
-                    {
-                        this.Property = 1;
-                    }
+                void M()
+                {
+                this.Property = 1;
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess,
@@ -1726,13 +1726,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
 
                 class A
                 {
-                    int Function(int x) => x + x;
+                int Function(int x) => x + x;
 
-                    void Error()
-                    { 
-                        var func = new Func<int, int>([|Function|]);
-                        func(1);
-                    }
+                void Error()
+                {
+                var func = new Func<int, int>([|Function|]);
+                func(1);
+                }
                 }
                 """,
                 """
@@ -1740,13 +1740,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
 
                 class A
                 {
-                    int Function(int x) => x + x;
+                int Function(int x) => x + x;
 
-                    void Error()
-                    { 
-                        var func = new Func<int, int>(this.Function);
-                        func(1);
-                    }
+                void Error()
+                {
+                var func = new Func<int, int>(this.Function);
+                func(1);
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyMethodAccess
@@ -1762,13 +1762,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
 
                 class A
                 {
-                    static int Function(int x) => x + x;
+                static int Function(int x) => x + x;
 
-                    void Error()
-                    { 
-                        var func = new Func<int, int>([|Function|]);
-                        func(1);
-                    }
+                void Error()
+                {
+                var func = new Func<int, int>([|Function|]);
+                func(1);
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyMethodAccess
@@ -1782,11 +1782,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Base
                 {
-                    protected int field;
+                protected int field;
                 }
                 class Derived : Base
                 {
-                    void M() { [|base.field|] = 0; }
+                void M() { [|base.field|] = 0; }
                 }
                 """,
                 CodeStyleOptions2.QualifyFieldAccess
@@ -1800,11 +1800,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Base
                 {
-                    protected virtual int Property { get; }
+                protected virtual int Property { get; }
                 }
                 class Derived : Base
                 {
-                    protected override int Property { get { return [|base.Property|]; } }
+                protected override int Property { get { return [|base.Property|]; } }
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess
@@ -1818,11 +1818,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Base
                 {
-                    protected virtual void M() { }
+                protected virtual void M() { }
                 }
                 class Derived : Base
                 {
-                    protected override void M() { [|base.M()|]; }
+                protected override void M() { [|base.M()|]; }
                 }
                 """,
                 CodeStyleOptions2.QualifyMethodAccess
@@ -1836,15 +1836,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Base
                 {
-                    protected virtual event EventHandler Event;
+                protected virtual event EventHandler Event;
                 }
                 class Derived : Base
                 {
-                    protected override event EventHandler Event 
-                    {
-                        add { [|base.Event|] += value; }
-                        remove { }
-                    }
+                protected override event EventHandler Event
+                {
+                add { [|base.Event|] += value; }
+                remove { }
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyEventAccess
@@ -1858,8 +1858,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Program
                 {
-                    public int Foo { get; set; }
-                    public static string Bar = nameof([|Foo|]);
+                public int Foo { get; set; }
+                public static string Bar = nameof([|Foo|]);
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess
@@ -1873,8 +1873,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Program
                 {
-                    public int Foo { get; set; }
-                    public string Bar = nameof([|Foo|]);
+                public int Foo { get; set; }
+                public string Bar = nameof([|Foo|]);
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess
@@ -1888,11 +1888,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Program
                 {
-                    public int Foo { get; set; }
-                    static void Main(string[] args)
-                    {
-                        System.Console.WriteLine(nameof([|Foo|]));
-                    }
+                public int Foo { get; set; }
+                static void Main(string[] args)
+                {
+                System.Console.WriteLine(nameof([|Foo|]));
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess
@@ -1906,11 +1906,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Program
                 {
-                    public int Foo;
-                    static void Main(string[] args)
-                    {
-                        System.Console.WriteLine(nameof([|Foo|]));
-                    }
+                public int Foo;
+                static void Main(string[] args)
+                {
+                System.Console.WriteLine(nameof([|Foo|]));
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyFieldAccess
@@ -1924,13 +1924,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class Program
                 {
-                    public int Foo { get; set; }
-                    static string Bar { get; set; }
+                public int Foo { get; set; }
+                static string Bar { get; set; }
 
-                    static Program()
-                    {
-                        Bar = nameof([|Foo|]);
-                    }
+                static Program()
+                {
+                Bar = nameof([|Foo|]);
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess
@@ -1944,9 +1944,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 public class Foo
                 {
-                    public event EventHandler Bar;
+                public event EventHandler Bar;
 
-                    private string Field = nameof([|Bar|]);
+                private string Field = nameof([|Bar|]);
                 }
                 """,
                 CodeStyleOptions2.QualifyEventAccess
@@ -1960,14 +1960,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 public class Base
                 {
-                    public string Foo { get; }
-                    public Base(string foo){}
+                public string Foo { get; }
+                public Base(string foo){}
                 }
                 public class Derived : Base
                 {
-                    public Derived()
-                        : base(nameof([|Foo|]))
-                    {}
+                public Derived()
+                : base(nameof([|Foo|]))
+                {}
                 }
                 """,
                 CodeStyleOptions2.QualifyFieldAccess
@@ -1981,15 +1981,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 public class C
                 {
-                    public string Foo { get; set; }
-                    public string Bar { get => [|Foo|]; }
+                public string Foo { get; set; }
+                public string Bar { get => [|Foo|]; }
                 }
                 """,
                 """
                 public class C
                 {
-                    public string Foo { get; set; }
-                    public string Bar { get => this.Foo; }
+                public string Foo { get; set; }
+                public string Bar { get => this.Foo; }
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess
@@ -2003,15 +2003,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 public class C
                 {
-                    public string Foo { get; set; }
-                    public string Bar { get { return [|Foo|]; } => Foo; }
+                public string Foo { get; set; }
+                public string Bar { get { return [|Foo|]; } => Foo; }
                 }
                 """,
                 """
                 public class C
                 {
-                    public string Foo { get; set; }
-                    public string Bar { get { return this.Foo; } => Foo; }
+                public string Foo { get; set; }
+                public string Bar { get { return this.Foo; } => Foo; }
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess
@@ -2025,15 +2025,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 public class C
                 {
-                    public string Foo { get; set; }
-                    public string Bar { get { return Foo; } => [|Foo|]; }
+                public string Foo { get; set; }
+                public string Bar { get { return Foo; } => [|Foo|]; }
                 }
                 """,
                 """
                 public class C
                 {
-                    public string Foo { get; set; }
-                    public string Bar { get { return Foo; } => this.Foo; }
+                public string Foo { get; set; }
+                public string Bar { get { return Foo; } => this.Foo; }
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess
@@ -2047,21 +2047,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class C
                 {
-                    public int Foo { get; set }
-                    void M()
-                    {
-                        var test = new System.Collections.Generic.List<int> { [|Foo|] };
-                    }
+                public int Foo { get; set }
+                void M()
+                {
+                var test = new System.Collections.Generic.List<int> { [|Foo|] };
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    public int Foo { get; set }
-                    void M()
-                    {
-                        var test = new System.Collections.Generic.List<int> { this.Foo };
-                    }
+                public int Foo { get; set }
+                void M()
+                {
+                var test = new System.Collections.Generic.List<int> { this.Foo };
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess
@@ -2075,21 +2075,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 class C
                 {
-                    public int Foo { get; set }
-                    void M()
-                    {
-                        var test = new System.Collections.Generic.List<int> { [|Foo|] };
-                    }
+                public int Foo { get; set }
+                void M()
+                {
+                var test = new System.Collections.Generic.List<int> { [|Foo|] };
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    public int Foo { get; set }
-                    void M()
-                    {
-                        var test = new System.Collections.Generic.List<int> { this.Foo };
-                    }
+                public int Foo { get; set }
+                void M()
+                {
+                var test = new System.Collections.Generic.List<int> { this.Foo };
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess
@@ -2103,14 +2103,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 public class C
                 {
-                    public string Foo { get; set; }
-                    public void Bar()
-                    {
-                        var c = new C
-                        {
-                            [|Foo|] = string.Empty
-                        };
-                    }
+                public string Foo { get; set; }
+                public void Bar()
+                {
+                var c = new C
+                {
+                [|Foo|] = string.Empty
+                };
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess
@@ -2124,14 +2124,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 public class C
                 {
-                    public string Foo;
-                    public void Bar()
-                    {
-                        var c = new C
-                        {
-                            [|Foo|] = string.Empty
-                        };
-                    }
+                public string Foo;
+                public void Bar()
+                {
+                var c = new C
+                {
+                [|Foo|] = string.Empty
+                };
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyFieldAccess
@@ -2147,27 +2147,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 public class C
                 {
-                    public string Foo;
-                    public void Bar()
-                    {
-                        var c = new C
-                        {
-                            Foo = [|Foo|]
-                        };
-                    }
+                public string Foo;
+                public void Bar()
+                {
+                var c = new C
+                {
+                Foo = [|Foo|]
+                };
+                }
                 }
                 """,
                 """
                 public class C
                 {
-                    public string Foo;
-                    public void Bar()
-                    {
-                        var c = new C
-                        {
-                            Foo = this.Foo
-                        };
-                    }
+                public string Foo;
+                public void Bar()
+                {
+                var c = new C
+                {
+                Foo = this.Foo
+                };
+                }
                 }
                 """,
                 CodeStyleOptions2.QualifyFieldAccess
@@ -2181,15 +2181,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 using System;
 
-                class MyAttribute : Attribute 
+                class MyAttribute : Attribute
                 {
-                    public MyAttribute(string name) { }
+                public MyAttribute(string name) { }
                 }
 
                 [My(nameof([|Goo|]))]
                 class Program
                 {
-                    int Goo { get; set; }
+                int Goo { get; set; }
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess
@@ -2203,15 +2203,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 using System;
 
-                class MyAttribute : Attribute 
+                class MyAttribute : Attribute
                 {
-                    public MyAttribute(string name) { }
+                public MyAttribute(string name) { }
                 }
 
                 class Program
                 {
-                    [My(nameof([|Goo|]))]
-                    int Goo { get; set; }
+                [My(nameof([|Goo|]))]
+                int Goo { get; set; }
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess
@@ -2225,16 +2225,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 using System;
 
-                class MyAttribute : Attribute 
+                class MyAttribute : Attribute
                 {
-                    public MyAttribute(string name) { }
+                public MyAttribute(string name) { }
                 }
 
                 class Program
                 {
-                    [My(nameof([|Goo|]))]
-                    public int Bar = 0 ;
-                    public int Goo { get; set; }
+                [My(nameof([|Goo|]))]
+                public int Bar = 0 ;
+                public int Goo { get; set; }
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess
@@ -2248,14 +2248,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 using System;
 
-                class MyAttribute : Attribute 
+                class MyAttribute : Attribute
                 {
-                    public MyAttribute(string name) { }
+                public MyAttribute(string name) { }
                 }
 
                 class Program
                 {
-                    int Goo { [My(nameof([|Goo|]))]get; set; }
+                int Goo { [My(nameof([|Goo|]))]get; set; }
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess
@@ -2269,15 +2269,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
                 """
                 using System;
 
-                class MyAttribute : Attribute 
+                class MyAttribute : Attribute
                 {
-                    public MyAttribute(string name) { }
+                public MyAttribute(string name) { }
                 }
 
                 class Program
                 {
-                    int Goo { get; set; }
-                    void M([My(nameof([|Goo|]))]int i) { }
+                int Goo { get; set; }
+                void M([My(nameof([|Goo|]))]int i) { }
                 }
                 """,
                 CodeStyleOptions2.QualifyPropertyAccess

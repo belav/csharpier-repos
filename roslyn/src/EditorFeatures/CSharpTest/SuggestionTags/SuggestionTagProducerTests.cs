@@ -42,13 +42,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SuggestionTags
             var (spans, selection) = await GetTagSpansAndSelectionAsync(
                 pragmaText
                     + """
-class C {
-    void M() {
-        var v = [|ne|]w X();
-        v.Y = 1;
-    }
-}
-"""
+                    class C {
+                    void M() {
+                    var v = [|ne|]w X();
+                    v.Y = 1;
+                    }
+                    }
+                    """
             );
             if (isSuppressed)
             {

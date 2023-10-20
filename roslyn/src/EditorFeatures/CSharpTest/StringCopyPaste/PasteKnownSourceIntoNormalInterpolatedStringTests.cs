@@ -16,17 +16,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             TestCopyPaste(
                 """var v = "{|Copy:goo|}";""",
                 """
-var dest =
-    $"[||]";
-""",
+                var dest =
+                $"[||]";
+                """,
                 """
-var dest =
-    $"goo[||]";
-""",
+                var dest =
+                $"goo[||]";
+                """,
                 """
-var dest =
-    $"[||]";
-"""
+                var dest =
+                $"[||]";
+                """
             );
         }
 
@@ -36,17 +36,17 @@ var dest =
             TestCopyPaste(
                 """var v = "{|Copy:{|}";""",
                 """
-var dest =
-    $"[||]";
-""",
+                var dest =
+                $"[||]";
+                """,
                 """
-var dest =
-    $"{{[||]";
-""",
+                var dest =
+                $"{{[||]";
+                """,
                 """
-var dest =
-    $"{[||]";
-"""
+                var dest =
+                $"{[||]";
+                """
             );
         }
 
@@ -56,17 +56,17 @@ var dest =
             TestCopyPaste(
                 """var v = "{|Copy:{}|}";""",
                 """
-var dest =
-    $"[||]";
-""",
+                var dest =
+                $"[||]";
+                """,
                 """
-var dest =
-    $"{{}}[||]";
-""",
+                var dest =
+                $"{{}}[||]";
+                """,
                 """
-var dest =
-    $"{}[||]";
-"""
+                var dest =
+                $"{}[||]";
+                """
             );
         }
 
@@ -76,17 +76,17 @@ var dest =
             TestCopyPaste(
                 """var v = "{|Copy:{0}|}";""",
                 """
-var dest =
-    $"[||]";
-""",
+                var dest =
+                $"[||]";
+                """,
                 """
-var dest =
-    $"{{0}}[||]";
-""",
+                var dest =
+                $"{{0}}[||]";
+                """,
                 """
-var dest =
-    $"{0}[||]";
-"""
+                var dest =
+                $"{0}[||]";
+                """
             );
         }
 
@@ -96,17 +96,17 @@ var dest =
             TestCopyPaste(
                 """var v = "g{|Copy:o|}o";""",
                 """
-var dest =
-    $"[||]";
-""",
+                var dest =
+                $"[||]";
+                """,
                 """
-var dest =
-    $"o[||]";
-""",
+                var dest =
+                $"o[||]";
+                """,
                 """
-var dest =
-    $"[||]";
-"""
+                var dest =
+                $"[||]";
+                """
             );
         }
 
@@ -116,17 +116,17 @@ var dest =
             TestCopyPaste(
                 """var v = "\{|Copy:n|}";""",
                 """
-var dest =
-    $"[||]";
-""",
+                var dest =
+                $"[||]";
+                """,
                 """
-var dest =
-    $"n[||]";
-""",
+                var dest =
+                $"n[||]";
+                """,
                 """
-var dest =
-    $"[||]";
-"""
+                var dest =
+                $"[||]";
+                """
             );
         }
 
@@ -136,17 +136,17 @@ var dest =
             TestCopyPaste(
                 """var v = "{|Copy:\n|}";""",
                 """
-var dest =
-    $"[||]";
-""",
+                var dest =
+                $"[||]";
+                """,
                 """
-var dest =
-    $"\n[||]";
-""",
+                var dest =
+                $"\n[||]";
+                """,
                 """
-var dest =
-    $"[||]";
-"""
+                var dest =
+                $"[||]";
+                """
             );
         }
 
@@ -156,17 +156,17 @@ var dest =
             TestCopyPaste(
                 """var v = "\{|Copy:"|}";""",
                 """
-var dest =
-    $"[||]";
-""",
+                var dest =
+                $"[||]";
+                """,
                 """
-var dest =
-    $"\"[||]";
-""",
+                var dest =
+                $"\"[||]";
+                """,
                 """
-var dest =
-    $""[||]";
-"""
+                var dest =
+                $""[||]";
+                """
             );
         }
 
@@ -176,17 +176,17 @@ var dest =
             TestCopyPaste(
                 """var v = "{|Copy:\"|}";""",
                 """
-var dest =
-    $"[||]";
-""",
+                var dest =
+                $"[||]";
+                """,
                 """
-var dest =
-    $"\"[||]";
-""",
+                var dest =
+                $"\"[||]";
+                """,
                 """
-var dest =
-    $"[||]";
-"""
+                var dest =
+                $"[||]";
+                """
             );
         }
 
@@ -196,17 +196,17 @@ var dest =
             TestCopyPaste(
                 """var v = @"{|Copy:goo|}";""",
                 """
-var dest =
-    $"[||]";
-""",
+                var dest =
+                $"[||]";
+                """,
                 """
-var dest =
-    $"goo[||]";
-""",
+                var dest =
+                $"goo[||]";
+                """,
                 """
-var dest =
-    $"[||]";
-"""
+                var dest =
+                $"[||]";
+                """
             );
         }
 
@@ -216,17 +216,17 @@ var dest =
             TestCopyPaste(
                 """var v = @"g{|Copy:o|}o";""",
                 """
-var dest =
-    $"[||]";
-""",
+                var dest =
+                $"[||]";
+                """,
                 """
-var dest =
-    $"o[||]";
-""",
+                var dest =
+                $"o[||]";
+                """,
                 """
-var dest =
-    $"[||]";
-"""
+                var dest =
+                $"[||]";
+                """
             );
         }
 
@@ -235,22 +235,22 @@ var dest =
         {
             TestCopyPaste(
                 """
-var v = @"{|Copy:
-|}";
-""",
+                var v = @"{|Copy:
+                |}";
+                """,
                 """
-var dest =
-    $"[||]";
-""",
+                var dest =
+                $"[||]";
+                """,
                 """
-var dest =
-    $"\r\n[||]";
-""",
+                var dest =
+                $"\r\n[||]";
+                """,
                 """
-var dest =
-    $"
-[||]";
-"""
+                var dest =
+                $"
+                [||]";
+                """
             );
         }
 
@@ -260,17 +260,17 @@ var dest =
             TestCopyPaste(
                 """var v = @"{|Copy:""|}";""",
                 """
-var dest =
-    $"[||]";
-""",
+                var dest =
+                $"[||]";
+                """,
                 """
-var dest =
-    $"\"[||]";
-""",
+                var dest =
+                $"\"[||]";
+                """,
                 """"
-var dest =
-    $"""[||]";
-""""
+                var dest =
+                $"""[||]";
+                """"
             );
         }
 
@@ -280,17 +280,17 @@ var dest =
             TestCopyPaste(
                 """"var v = """{|Copy:goo|}""";"""",
                 """
-var dest =
-    $"[||]";
-""",
+                var dest =
+                $"[||]";
+                """,
                 """
-var dest =
-    $"goo[||]";
-""",
+                var dest =
+                $"goo[||]";
+                """,
                 """
-var dest =
-    $"[||]";
-"""
+                var dest =
+                $"[||]";
+                """
             );
         }
 
@@ -300,17 +300,17 @@ var dest =
             TestCopyPaste(
                 """"var v = """{|Copy: "" |}""";"""",
                 """
-var dest =
-    $"[||]";
-""",
+                var dest =
+                $"[||]";
+                """,
                 """
-var dest =
-    $" \"\" [||]";
-""",
+                var dest =
+                $" \"\" [||]";
+                """,
                 """
-var dest =
-    $" "" [||]";
-"""
+                var dest =
+                $" "" [||]";
+                """
             );
         }
 
@@ -319,22 +319,22 @@ var dest =
         {
             TestCopyPaste(
                 """"
-var v = """
-    {|Copy:goo|}
-    """;
-"""",
+                var v = """
+                {|Copy:goo|}
+                """;
+                """",
                 """
-var dest =
-    $"[||]";
-""",
+                var dest =
+                $"[||]";
+                """,
                 """
-var dest =
-    $"goo[||]";
-""",
+                var dest =
+                $"goo[||]";
+                """,
                 """
-var dest =
-    $"[||]";
-"""
+                var dest =
+                $"[||]";
+                """
             );
         }
 
@@ -343,24 +343,24 @@ var dest =
         {
             TestCopyPaste(
                 """"
-var v = """
-    {|Copy:goo
-    bar|}
-    """;
-"""",
+                var v = """
+                {|Copy:goo
+                bar|}
+                """;
+                """",
                 """
-var dest =
-    $"[||]";
-""",
+                var dest =
+                $"[||]";
+                """,
                 """
-var dest =
-    $"goo\r\nbar[||]";
-""",
+                var dest =
+                $"goo\r\nbar[||]";
+                """,
                 """
-var dest =
-    $"goo
-    bar[||]";
-"""
+                var dest =
+                $"goo
+                bar[||]";
+                """
             );
         }
 
@@ -369,24 +369,24 @@ var dest =
         {
             TestCopyPaste(
                 """"
-var v = """
-{|Copy:    goo
-    bar|}
-    """;
-"""",
+                var v = """
+                {|Copy:    goo
+                bar|}
+                """;
+                """",
                 """
-var dest =
-    $"[||]";
-""",
+                var dest =
+                $"[||]";
+                """,
                 """
-var dest =
-    $"goo\r\nbar[||]";
-""",
+                var dest =
+                $"goo\r\nbar[||]";
+                """,
                 """
-var dest =
-    $"    goo
-    bar[||]";
-"""
+                var dest =
+                $"    goo
+                bar[||]";
+                """
             );
         }
 
@@ -396,17 +396,17 @@ var dest =
             TestCopyPaste(
                 """var v = $"{|Copy:{0:X}|}";""",
                 """
-var dest =
-    $"[||]";
-""",
+                var dest =
+                $"[||]";
+                """,
                 """
-var dest =
-    $"{0:X}[||]";
-""",
+                var dest =
+                $"{0:X}[||]";
+                """,
                 """
-var dest =
-    $"[||]";
-"""
+                var dest =
+                $"[||]";
+                """
             );
         }
 
@@ -416,17 +416,17 @@ var dest =
             TestCopyPaste(
                 """var v = $"{|Copy:{0:\"X\"}|}";""",
                 """
-var dest =
-    $"[||]";
-""",
+                var dest =
+                $"[||]";
+                """,
                 """
-var dest =
-    $"{0:\"X\"}[||]";
-""",
+                var dest =
+                $"{0:\"X\"}[||]";
+                """,
                 """
-var dest =
-    $"[||]";
-"""
+                var dest =
+                $"[||]";
+                """
             );
         }
 
@@ -436,17 +436,17 @@ var dest =
             TestCopyPaste(
                 """var v = $@"{|Copy:{0:X}|}";""",
                 """
-var dest =
-    $"[||]";
-""",
+                var dest =
+                $"[||]";
+                """,
                 """
-var dest =
-    $"{0:X}[||]";
-""",
+                var dest =
+                $"{0:X}[||]";
+                """,
                 """
-var dest =
-    $"[||]";
-"""
+                var dest =
+                $"[||]";
+                """
             );
         }
 
@@ -456,17 +456,17 @@ var dest =
             TestCopyPaste(
                 """var v = $@"{|Copy:{0:""X""}|}";""",
                 """
-var dest =
-    $"[||]";
-""",
+                var dest =
+                $"[||]";
+                """,
                 """
-var dest =
-    $"{0:\"X\"}[||]";
-""",
+                var dest =
+                $"{0:\"X\"}[||]";
+                """,
                 """
-var dest =
-    $"{0:""X""}[||]";
-"""
+                var dest =
+                $"{0:""X""}[||]";
+                """
             );
         }
     }

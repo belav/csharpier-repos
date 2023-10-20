@@ -15,12 +15,12 @@ public partial class RequestDelegateCreationTests
         const int originalRouteParam = 42;
 
         var source = """
-static void TestAction([AsParameters] ParameterListFromRoute args)
-{
-    args.HttpContext.Items["input"] = args.Value;
-}
-app.MapGet("/{Value}", TestAction);
-""";
+        static void TestAction([AsParameters] ParameterListFromRoute args)
+        {
+        args.HttpContext.Items["input"] = args.Value;
+        }
+        app.MapGet("/{Value}", TestAction);
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -48,14 +48,14 @@ app.MapGet("/{Value}", TestAction);
         const int originalAnotherCustomQueryParam = 44;
 
         var source = """
-static void TestAction([AsParameters] ParameterListFromQuery args)
-{
-    args.HttpContext.Items.Add("input", args.Value);
-    args.HttpContext.Items.Add("customInput", args.CustomValue);
-    args.HttpContext.Items.Add("anotherCustomInput", args.AnotherCustomValue);
-}
-app.MapGet("/", TestAction);
-""";
+        static void TestAction([AsParameters] ParameterListFromQuery args)
+        {
+        args.HttpContext.Items.Add("input", args.Value);
+        args.HttpContext.Items.Add("customInput", args.CustomValue);
+        args.HttpContext.Items.Add("anotherCustomInput", args.AnotherCustomValue);
+        }
+        app.MapGet("/", TestAction);
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -89,12 +89,12 @@ app.MapGet("/", TestAction);
         const int originalHeaderParam = 42;
 
         var source = """
-static void TestAction([AsParameters] ParameterListFromHeader args)
-{
-    args.HttpContext.Items.Add("input", args.Value);
-}
-app.MapGet("/", TestAction);
-""";
+        static void TestAction([AsParameters] ParameterListFromHeader args)
+        {
+        args.HttpContext.Items.Add("input", args.Value);
+        }
+        app.MapGet("/", TestAction);
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -113,67 +113,67 @@ app.MapGet("/", TestAction);
         get
         {
             var TestParameterListRecordStruct = """
-void TestAction([AsParameters] ParameterListRecordStruct args)
-{
-    args.HttpContext.Items.Add("input", args.Value);
-}
-""";
+            void TestAction([AsParameters] ParameterListRecordStruct args)
+            {
+            args.HttpContext.Items.Add("input", args.Value);
+            }
+            """;
 
             var TestParameterListRecordClass = """
-void TestAction([AsParameters] ParameterListRecordClass args)
-{
-    args.HttpContext.Items.Add("input", args.Value);
-}
-""";
+            void TestAction([AsParameters] ParameterListRecordClass args)
+            {
+            args.HttpContext.Items.Add("input", args.Value);
+            }
+            """;
 
             var TestParameterListRecordWithoutPositionalParameters = """
-void TestAction([AsParameters] ParameterListRecordWithoutPositionalParameters args)
-{
-    args.HttpContext!.Items.Add("input", args.Value);
-}
-""";
+            void TestAction([AsParameters] ParameterListRecordWithoutPositionalParameters args)
+            {
+            args.HttpContext!.Items.Add("input", args.Value);
+            }
+            """;
 
             var TestParameterListStruct = """
-void TestAction([AsParameters] ParameterListStruct args)
-{
-    args.HttpContext.Items.Add("input", args.Value);
-}
-""";
+            void TestAction([AsParameters] ParameterListStruct args)
+            {
+            args.HttpContext.Items.Add("input", args.Value);
+            }
+            """;
 
             var TestParameterListMutableStruct = """
-void TestAction([AsParameters] ParameterListMutableStruct args)
-{
-    args.HttpContext.Items.Add("input", args.Value);
-}
-""";
+            void TestAction([AsParameters] ParameterListMutableStruct args)
+            {
+            args.HttpContext.Items.Add("input", args.Value);
+            }
+            """;
 
             var TestParameterListStructWithParameterizedContructor = """
-void TestAction([AsParameters] ParameterListStructWithParameterizedContructor args)
-{
-    args.HttpContext.Items.Add("input", args.Value);
-}
-""";
+            void TestAction([AsParameters] ParameterListStructWithParameterizedContructor args)
+            {
+            args.HttpContext.Items.Add("input", args.Value);
+            }
+            """;
 
             var TestParameterListStructWithMultipleParameterizedContructor = """
-void TestAction([AsParameters] ParameterListStructWithMultipleParameterizedContructor args)
-{
-    args.HttpContext.Items.Add("input", args.Value);
-}
-""";
+            void TestAction([AsParameters] ParameterListStructWithMultipleParameterizedContructor args)
+            {
+            args.HttpContext.Items.Add("input", args.Value);
+            }
+            """;
 
             var TestParameterListClass = """
-void TestAction([AsParameters] ParameterListClass args)
-{
-    args.HttpContext!.Items.Add("input", args.Value);
-}
-""";
+            void TestAction([AsParameters] ParameterListClass args)
+            {
+            args.HttpContext!.Items.Add("input", args.Value);
+            }
+            """;
 
             var TestParameterListClassWithParameterizedContructor = """
-void TestAction([AsParameters] ParameterListClassWithParameterizedContructor args)
-{
-    args.HttpContext.Items.Add("input", args.Value);
-}
-""";
+            void TestAction([AsParameters] ParameterListClassWithParameterizedContructor args)
+            {
+            args.HttpContext.Items.Add("input", args.Value);
+            }
+            """;
 
             return new[]
             {
@@ -219,12 +219,12 @@ app.MapGet("/{value}", TestAction);
     {
         const int expectedValue = 42;
         var source = """
-void TestAction([AsParameters] ParameterListWitDefaultValue args)
-{
-    args.HttpContext.Items.Add("input", args.Value);
-}
-app.MapGet("/{value}", TestAction);
-""";
+        void TestAction([AsParameters] ParameterListWitDefaultValue args)
+        {
+        args.HttpContext.Items.Add("input", args.Value);
+        }
+        app.MapGet("/{value}", TestAction);
+        """;
         var httpContext = CreateHttpContext();
 
         var (_, compilation) = await RunGeneratorAsync(source);
@@ -240,32 +240,32 @@ app.MapGet("/{value}", TestAction);
     {
         var (_, compilation) = await RunGeneratorAsync(
             """
-void parameterListWithDefaultValue([AsParameters] ParameterListWitDefaultValue args)
-{
-    args.HttpContext.Items.Add("input", args.Value);
-}
-void parameterListRecordStruct([AsParameters] ParameterListRecordStruct args)
-{
-    args.HttpContext.Items.Add("input", args.Value);
-}
-static void parametersListWithHttpContext([AsParameters] ParametersListWithHttpContext args)
-{
-    args.HttpContext.Items.Add("input", args.HttpContext);
-    args.HttpContext.Items.Add("user", args.User);
-    args.HttpContext.Items.Add("request", args.Request);
-    args.HttpContext.Items.Add("response", args.Response);
-}
-static void parametersListWithMetadataType([AsParameters] ParametersListWithMetadataType args)
-{
-    args.HttpContext.Items.Add("value", args.Value);
-}
-app.MapGet("/parameterListWithDefaultValue/{value}", parameterListWithDefaultValue);
-app.MapPost("/parameterListRecordStruct/{value}", parameterListRecordStruct);
-app.MapPut("/parametersListWithHttpContext", parametersListWithHttpContext);
-app.MapPatch("/parametersListWithImplicitFromBody", ([AsParameters] ParametersListWithImplicitFromBody args) => args.Todo.Name ?? string.Empty);
-app.MapGet("/parametersListWithMetadataType", parametersListWithMetadataType);
-app.MapPost("/parameterRecordStructWithJsonBodyOrService", ([AsParameters] ParameterRecordStructWithJsonBodyOrService args) => args.Todo.Name ?? string.Empty);
-"""
+            void parameterListWithDefaultValue([AsParameters] ParameterListWitDefaultValue args)
+            {
+            args.HttpContext.Items.Add("input", args.Value);
+            }
+            void parameterListRecordStruct([AsParameters] ParameterListRecordStruct args)
+            {
+            args.HttpContext.Items.Add("input", args.Value);
+            }
+            static void parametersListWithHttpContext([AsParameters] ParametersListWithHttpContext args)
+            {
+            args.HttpContext.Items.Add("input", args.HttpContext);
+            args.HttpContext.Items.Add("user", args.User);
+            args.HttpContext.Items.Add("request", args.Request);
+            args.HttpContext.Items.Add("response", args.Response);
+            }
+            static void parametersListWithMetadataType([AsParameters] ParametersListWithMetadataType args)
+            {
+            args.HttpContext.Items.Add("value", args.Value);
+            }
+            app.MapGet("/parameterListWithDefaultValue/{value}", parameterListWithDefaultValue);
+            app.MapPost("/parameterListRecordStruct/{value}", parameterListRecordStruct);
+            app.MapPut("/parametersListWithHttpContext", parametersListWithHttpContext);
+            app.MapPatch("/parametersListWithImplicitFromBody", ([AsParameters] ParametersListWithImplicitFromBody args) => args.Todo.Name ?? string.Empty);
+            app.MapGet("/parametersListWithMetadataType", parametersListWithMetadataType);
+            app.MapPost("/parameterRecordStructWithJsonBodyOrService", ([AsParameters] ParameterRecordStructWithJsonBodyOrService args) => args.Todo.Name ?? string.Empty);
+            """
         );
 
         await VerifyAgainstBaselineUsingFile(compilation);
@@ -278,12 +278,12 @@ app.MapPost("/parameterRecordStructWithJsonBodyOrService", ([AsParameters] Param
         var expectedInput = new ParameterListWithReadOnlyProperties() { Value = routeParamValue };
 
         var source = """
-void TestAction(HttpContext context, [AsParameters] ParameterListWithReadOnlyProperties args)
-{
-    context.Items.Add("input", args);
-}
-app.MapGet("/{value}", TestAction);
-""";
+        void TestAction(HttpContext context, [AsParameters] ParameterListWithReadOnlyProperties args)
+        {
+        context.Items.Add("input", args);
+        }
+        app.MapGet("/{value}", TestAction);
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -315,13 +315,13 @@ app.MapGet("/{value}", TestAction);
         const int bar = 2;
 
         var source = """
-void TestAction(HttpContext context, [AsParameters] SampleParameterList args, [AsParameters] AdditionalSampleParameterList args2)
-{
-    context.Items.Add("foo", args.Foo);
-    context.Items.Add("bar", args2.Bar);
-}
-app.MapGet("/{foo}/{bar}", TestAction);
-""";
+        void TestAction(HttpContext context, [AsParameters] SampleParameterList args, [AsParameters] AdditionalSampleParameterList args2)
+        {
+        context.Items.Add("foo", args.Foo);
+        context.Items.Add("bar", args2.Bar);
+        }
+        app.MapGet("/{foo}/{bar}", TestAction);
+        """;
 
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
@@ -346,13 +346,13 @@ app.MapGet("/{foo}/{bar}", TestAction);
         const string uriValue = "https://example.org/";
 
         var source = """
-void TestAction([AsParameters] ParametersListWithBindAsyncType args)
-{
-    args.HttpContext.Items.Add("value", args.Value);
-    args.HttpContext.Items.Add("anotherValue", args.MyBindAsyncParam);
-}
-app.MapGet("/", TestAction);
-""";
+        void TestAction([AsParameters] ParametersListWithBindAsyncType args)
+        {
+        args.HttpContext.Items.Add("value", args.Value);
+        args.HttpContext.Items.Add("anotherValue", args.MyBindAsyncParam);
+        }
+        app.MapGet("/", TestAction);
+        """;
 
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
@@ -373,12 +373,12 @@ app.MapGet("/", TestAction);
     public async Task RequestDelegatePopulatesFromMetadataProviderParameterList()
     {
         var source = """
-void TestAction([AsParameters] ParametersListWithMetadataType args)
-{
-    args.HttpContext.Items.Add("value", args.Value);
-}
-app.MapPost("/", TestAction);
-""";
+        void TestAction([AsParameters] ParametersListWithMetadataType args)
+        {
+        args.HttpContext.Items.Add("value", args.Value);
+        }
+        app.MapPost("/", TestAction);
+        """;
 
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
@@ -391,9 +391,9 @@ app.MapPost("/", TestAction);
     {
         // Arrange
         var source = """
-app.MapGet("/{requiredRouteParam}", TestAction);
-static void TestAction([AsParameters] ParameterListRequiredStringFromDifferentSources args) { }
-""";
+        app.MapGet("/{requiredRouteParam}", TestAction);
+        static void TestAction([AsParameters] ParameterListRequiredStringFromDifferentSources args) { }
+        """;
 
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);

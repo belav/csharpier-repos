@@ -49,11 +49,11 @@ public class NorthwindFunctionsQuerySqliteTest
 
         AssertSql(
             """
-SELECT trunc(CAST("o"."OrderID" AS REAL)) AS "A"
-FROM "Orders" AS "o"
-WHERE "o"."OrderID" < 10250
-ORDER BY trunc(CAST("o"."OrderID" AS REAL))
-"""
+            SELECT trunc(CAST("o"."OrderID" AS REAL)) AS "A"
+            FROM "Orders" AS "o"
+            WHERE "o"."OrderID" < 10250
+            ORDER BY trunc(CAST("o"."OrderID" AS REAL))
+            """
         );
     }
 
@@ -63,11 +63,11 @@ ORDER BY trunc(CAST("o"."OrderID" AS REAL))
 
         AssertSql(
             """
-SELECT trunc(CAST("o"."OrderID" AS REAL)) AS "A"
-FROM "Orders" AS "o"
-WHERE "o"."OrderID" < 10250
-ORDER BY trunc(CAST("o"."OrderID" AS REAL)) DESC
-"""
+            SELECT trunc(CAST("o"."OrderID" AS REAL)) AS "A"
+            FROM "Orders" AS "o"
+            WHERE "o"."OrderID" < 10250
+            ORDER BY trunc(CAST("o"."OrderID" AS REAL)) DESC
+            """
         );
     }
 
@@ -77,11 +77,11 @@ ORDER BY trunc(CAST("o"."OrderID" AS REAL)) DESC
 
         AssertSql(
             """
-SELECT trunc(CAST("o"."OrderID" AS REAL)) AS "A"
-FROM "Orders" AS "o"
-WHERE "o"."OrderID" < 10250
-ORDER BY trunc(CAST("o"."OrderID" AS REAL)) DESC
-"""
+            SELECT trunc(CAST("o"."OrderID" AS REAL)) AS "A"
+            FROM "Orders" AS "o"
+            WHERE "o"."OrderID" < 10250
+            ORDER BY trunc(CAST("o"."OrderID" AS REAL)) DESC
+            """
         );
     }
 
@@ -91,10 +91,10 @@ ORDER BY trunc(CAST("o"."OrderID" AS REAL)) DESC
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE pow(CAST(length("c"."CustomerID") AS REAL), 2.0) = 25.0
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE pow(CAST(length("c"."CustomerID") AS REAL), 2.0) = 25.0
+            """
         );
     }
 
@@ -110,10 +110,10 @@ WHERE pow(CAST(length("c"."CustomerID") AS REAL), 2.0) = 25.0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND acos(CAST("o"."Discount" AS REAL)) > 1.0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND acos(CAST("o"."Discount" AS REAL)) > 1.0
+            """
         );
     }
 
@@ -132,10 +132,10 @@ WHERE "o"."OrderID" = 11077 AND acos(CAST("o"."Discount" AS REAL)) > 1.0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND acosh(CAST("o"."Discount" + 1 AS REAL)) > 0.0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND acosh(CAST("o"."Discount" + 1 AS REAL)) > 0.0
+            """
         );
     }
 
@@ -145,10 +145,10 @@ WHERE "o"."OrderID" = 11077 AND acosh(CAST("o"."Discount" + 1 AS REAL)) > 0.0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND asin(CAST("o"."Discount" AS REAL)) > 0.0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND asin(CAST("o"."Discount" AS REAL)) > 0.0
+            """
         );
     }
 
@@ -167,10 +167,10 @@ WHERE "o"."OrderID" = 11077 AND asin(CAST("o"."Discount" AS REAL)) > 0.0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND asinh(CAST("o"."Discount" AS REAL)) > 0.0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND asinh(CAST("o"."Discount" AS REAL)) > 0.0
+            """
         );
     }
 
@@ -180,10 +180,10 @@ WHERE "o"."OrderID" = 11077 AND asinh(CAST("o"."Discount" AS REAL)) > 0.0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND atan(CAST("o"."Discount" AS REAL)) > 0.0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND atan(CAST("o"."Discount" AS REAL)) > 0.0
+            """
         );
     }
 
@@ -193,10 +193,10 @@ WHERE "o"."OrderID" = 11077 AND atan(CAST("o"."Discount" AS REAL)) > 0.0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND atan2(CAST("o"."Discount" AS REAL), 1.0) > 0.0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND atan2(CAST("o"."Discount" AS REAL), 1.0) > 0.0
+            """
         );
     }
 
@@ -215,10 +215,10 @@ WHERE "o"."OrderID" = 11077 AND atan2(CAST("o"."Discount" AS REAL), 1.0) > 0.0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND atanh(CAST("o"."Discount" AS REAL)) > 0.0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND atanh(CAST("o"."Discount" AS REAL)) > 0.0
+            """
         );
     }
 
@@ -228,10 +228,10 @@ WHERE "o"."OrderID" = 11077 AND atanh(CAST("o"."Discount" AS REAL)) > 0.0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."UnitPrice" < 7.0 AND ceiling(CAST("o"."Discount" AS REAL)) > 0.0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."UnitPrice" < 7.0 AND ceiling(CAST("o"."Discount" AS REAL)) > 0.0
+            """
         );
     }
 
@@ -244,10 +244,10 @@ WHERE "o"."UnitPrice" < 7.0 AND ceiling(CAST("o"."Discount" AS REAL)) > 0.0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND cos(CAST("o"."Discount" AS REAL)) > 0.0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND cos(CAST("o"."Discount" AS REAL)) > 0.0
+            """
         );
     }
 
@@ -266,10 +266,10 @@ WHERE "o"."OrderID" = 11077 AND cos(CAST("o"."Discount" AS REAL)) > 0.0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND cosh(CAST("o"."Discount" AS REAL)) > 0.0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND cosh(CAST("o"."Discount" AS REAL)) > 0.0
+            """
         );
     }
 
@@ -279,10 +279,10 @@ WHERE "o"."OrderID" = 11077 AND cosh(CAST("o"."Discount" AS REAL)) > 0.0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND exp(CAST("o"."Discount" AS REAL)) > 1.0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND exp(CAST("o"."Discount" AS REAL)) > 1.0
+            """
         );
     }
 
@@ -295,10 +295,10 @@ WHERE "o"."OrderID" = 11077 AND exp(CAST("o"."Discount" AS REAL)) > 1.0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND "o"."Discount" > 0 AND ln(CAST("o"."Discount" AS REAL)) < 0.0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND "o"."Discount" > 0 AND ln(CAST("o"."Discount" AS REAL)) < 0.0
+            """
         );
     }
 
@@ -308,10 +308,10 @@ WHERE "o"."OrderID" = 11077 AND "o"."Discount" > 0 AND ln(CAST("o"."Discount" AS
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND "o"."Discount" > 0 AND log(7.0, CAST("o"."Discount" AS REAL)) < 0.0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND "o"."Discount" > 0 AND log(7.0, CAST("o"."Discount" AS REAL)) < 0.0
+            """
         );
     }
 
@@ -330,10 +330,10 @@ WHERE "o"."OrderID" = 11077 AND "o"."Discount" > 0 AND log(7.0, CAST("o"."Discou
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND "o"."Discount" > 0 AND log2(CAST("o"."Discount" AS REAL)) < 0.0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND "o"."Discount" > 0 AND log2(CAST("o"."Discount" AS REAL)) < 0.0
+            """
         );
     }
 
@@ -343,10 +343,10 @@ WHERE "o"."OrderID" = 11077 AND "o"."Discount" > 0 AND log2(CAST("o"."Discount" 
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND "o"."Discount" > 0 AND log10(CAST("o"."Discount" AS REAL)) < 0.0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND "o"."Discount" > 0 AND log10(CAST("o"."Discount" AS REAL)) < 0.0
+            """
         );
     }
 
@@ -356,10 +356,10 @@ WHERE "o"."OrderID" = 11077 AND "o"."Discount" > 0 AND log10(CAST("o"."Discount"
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE pow(CAST("o"."Discount" AS REAL), 3.0) > 0.004999999888241291
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE pow(CAST("o"."Discount" AS REAL), 3.0) > 0.004999999888241291
+            """
         );
     }
 
@@ -369,10 +369,10 @@ WHERE pow(CAST("o"."Discount" AS REAL), 3.0) > 0.004999999888241291
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE pow(CAST("o"."Discount" AS REAL), 2.0) > 0.05000000074505806
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE pow(CAST("o"."Discount" AS REAL), 2.0) > 0.05000000074505806
+            """
         );
     }
 
@@ -402,10 +402,10 @@ WHERE pow(CAST("o"."Discount" AS REAL), 2.0) > 0.05000000074505806
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND sign("o"."Discount") > 0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND sign("o"."Discount") > 0
+            """
         );
     }
 
@@ -415,10 +415,10 @@ WHERE "o"."OrderID" = 11077 AND sign("o"."Discount") > 0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND sin(CAST("o"."Discount" AS REAL)) > 0.0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND sin(CAST("o"."Discount" AS REAL)) > 0.0
+            """
         );
     }
 
@@ -437,10 +437,10 @@ WHERE "o"."OrderID" = 11077 AND sin(CAST("o"."Discount" AS REAL)) > 0.0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND sinh(CAST("o"."Discount" AS REAL)) > 0.0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND sinh(CAST("o"."Discount" AS REAL)) > 0.0
+            """
         );
     }
 
@@ -450,10 +450,10 @@ WHERE "o"."OrderID" = 11077 AND sinh(CAST("o"."Discount" AS REAL)) > 0.0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND sqrt(CAST("o"."Discount" AS REAL)) > 0.0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND sqrt(CAST("o"."Discount" AS REAL)) > 0.0
+            """
         );
     }
 
@@ -463,10 +463,10 @@ WHERE "o"."OrderID" = 11077 AND sqrt(CAST("o"."Discount" AS REAL)) > 0.0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND tan(CAST("o"."Discount" AS REAL)) > 0.0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND tan(CAST("o"."Discount" AS REAL)) > 0.0
+            """
         );
     }
 
@@ -485,10 +485,10 @@ WHERE "o"."OrderID" = 11077 AND tan(CAST("o"."Discount" AS REAL)) > 0.0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND tanh(CAST("o"."Discount" AS REAL)) > 0.0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND tanh(CAST("o"."Discount" AS REAL)) > 0.0
+            """
         );
     }
 
@@ -501,10 +501,10 @@ WHERE "o"."OrderID" = 11077 AND tanh(CAST("o"."Discount" AS REAL)) > 0.0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND degrees(CAST("o"."Discount" AS REAL)) > 0.0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND degrees(CAST("o"."Discount" AS REAL)) > 0.0
+            """
         );
     }
 
@@ -514,10 +514,10 @@ WHERE "o"."OrderID" = 11077 AND degrees(CAST("o"."Discount" AS REAL)) > 0.0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND radians(CAST("o"."Discount" AS REAL)) > 0.0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND radians(CAST("o"."Discount" AS REAL)) > 0.0
+            """
         );
     }
 
@@ -527,10 +527,10 @@ WHERE "o"."OrderID" = 11077 AND radians(CAST("o"."Discount" AS REAL)) > 0.0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND acos("o"."Discount") > 1
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND acos("o"."Discount") > 1
+            """
         );
     }
 
@@ -540,10 +540,10 @@ WHERE "o"."OrderID" = 11077 AND acos("o"."Discount") > 1
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND asin("o"."Discount") > 0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND asin("o"."Discount") > 0
+            """
         );
     }
 
@@ -553,10 +553,10 @@ WHERE "o"."OrderID" = 11077 AND asin("o"."Discount") > 0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND atan("o"."Discount") > 0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND atan("o"."Discount") > 0
+            """
         );
     }
 
@@ -566,10 +566,10 @@ WHERE "o"."OrderID" = 11077 AND atan("o"."Discount") > 0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND atan2("o"."Discount", 1) > 0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND atan2("o"."Discount", 1) > 0
+            """
         );
     }
 
@@ -579,10 +579,10 @@ WHERE "o"."OrderID" = 11077 AND atan2("o"."Discount", 1) > 0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."UnitPrice" < 7.0 AND ceiling("o"."Discount") > 0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."UnitPrice" < 7.0 AND ceiling("o"."Discount") > 0
+            """
         );
     }
 
@@ -592,10 +592,10 @@ WHERE "o"."UnitPrice" < 7.0 AND ceiling("o"."Discount") > 0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND cos("o"."Discount") > 0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND cos("o"."Discount") > 0
+            """
         );
     }
 
@@ -605,10 +605,10 @@ WHERE "o"."OrderID" = 11077 AND cos("o"."Discount") > 0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND exp("o"."Discount") > 1
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND exp("o"."Discount") > 1
+            """
         );
     }
 
@@ -618,10 +618,10 @@ WHERE "o"."OrderID" = 11077 AND exp("o"."Discount") > 1
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."Quantity" < 5 AND floor(CAST("o"."UnitPrice" AS REAL)) > 10
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."Quantity" < 5 AND floor(CAST("o"."UnitPrice" AS REAL)) > 10
+            """
         );
     }
 
@@ -631,10 +631,10 @@ WHERE "o"."Quantity" < 5 AND floor(CAST("o"."UnitPrice" AS REAL)) > 10
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND "o"."Discount" > 0 AND ln("o"."Discount") < 0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND "o"."Discount" > 0 AND ln("o"."Discount") < 0
+            """
         );
     }
 
@@ -644,10 +644,10 @@ WHERE "o"."OrderID" = 11077 AND "o"."Discount" > 0 AND ln("o"."Discount") < 0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND "o"."Discount" > 0 AND log(7, "o"."Discount") < 0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND "o"."Discount" > 0 AND log(7, "o"."Discount") < 0
+            """
         );
     }
 
@@ -657,10 +657,10 @@ WHERE "o"."OrderID" = 11077 AND "o"."Discount" > 0 AND log(7, "o"."Discount") < 
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND "o"."Discount" > 0 AND log10("o"."Discount") < 0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND "o"."Discount" > 0 AND log10("o"."Discount") < 0
+            """
         );
     }
 
@@ -670,10 +670,10 @@ WHERE "o"."OrderID" = 11077 AND "o"."Discount" > 0 AND log10("o"."Discount") < 0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE pow("o"."Discount", 3) > 0.005
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE pow("o"."Discount", 3) > 0.005
+            """
         );
     }
 
@@ -683,10 +683,10 @@ WHERE pow("o"."Discount", 3) > 0.005
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE pow("o"."Discount", 2) > 0.05
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE pow("o"."Discount", 2) > 0.05
+            """
         );
     }
 
@@ -696,10 +696,10 @@ WHERE pow("o"."Discount", 2) > 0.05
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND sign("o"."Discount") > 0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND sign("o"."Discount") > 0
+            """
         );
     }
 
@@ -709,10 +709,10 @@ WHERE "o"."OrderID" = 11077 AND sign("o"."Discount") > 0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND sin("o"."Discount") > 0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND sin("o"."Discount") > 0
+            """
         );
     }
 
@@ -722,10 +722,10 @@ WHERE "o"."OrderID" = 11077 AND sin("o"."Discount") > 0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND sqrt("o"."Discount") > 0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND sqrt("o"."Discount") > 0
+            """
         );
     }
 
@@ -735,10 +735,10 @@ WHERE "o"."OrderID" = 11077 AND sqrt("o"."Discount") > 0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND tan("o"."Discount") > 0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND tan("o"."Discount") > 0
+            """
         );
     }
 
@@ -748,10 +748,10 @@ WHERE "o"."OrderID" = 11077 AND tan("o"."Discount") > 0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."Quantity" < 5 AND trunc(CAST("o"."UnitPrice" AS REAL)) > 10
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."Quantity" < 5 AND trunc(CAST("o"."UnitPrice" AS REAL)) > 10
+            """
         );
     }
 
@@ -761,10 +761,10 @@ WHERE "o"."Quantity" < 5 AND trunc(CAST("o"."UnitPrice" AS REAL)) > 10
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND degrees("o"."Discount") > 0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND degrees("o"."Discount") > 0
+            """
         );
     }
 
@@ -774,10 +774,10 @@ WHERE "o"."OrderID" = 11077 AND degrees("o"."Discount") > 0
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND radians("o"."Discount") > 0
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND radians("o"."Discount") > 0
+            """
         );
     }
 
@@ -787,10 +787,10 @@ WHERE "o"."OrderID" = 11077 AND radians("o"."Discount") > 0
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE "c"."ContactName" LIKE 'M%'
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE "c"."ContactName" LIKE 'M%'
+            """
         );
     }
 
@@ -800,12 +800,12 @@ WHERE "c"."ContactName" LIKE 'M%'
 
         AssertSql(
             """
-@__pattern_0_rewritten='M%' (Size = 2)
+            @__pattern_0_rewritten='M%' (Size = 2)
 
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE "c"."ContactName" LIKE @__pattern_0_rewritten ESCAPE '\'
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE "c"."ContactName" LIKE @__pattern_0_rewritten ESCAPE '\'
+            """
         );
     }
 
@@ -815,10 +815,10 @@ WHERE "c"."ContactName" LIKE @__pattern_0_rewritten ESCAPE '\'
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE "c"."ContactName" IS NOT NULL AND (substr("c"."ContactName", 1, length("c"."ContactName")) = "c"."ContactName" OR "c"."ContactName" = '')
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE "c"."ContactName" IS NOT NULL AND (substr("c"."ContactName", 1, length("c"."ContactName")) = "c"."ContactName" OR "c"."ContactName" = '')
+            """
         );
     }
 
@@ -828,10 +828,10 @@ WHERE "c"."ContactName" IS NOT NULL AND (substr("c"."ContactName", 1, length("c"
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE "c"."ContactName" IS NOT NULL AND (substr("c"."ContactName", 1, length("c"."ContactName")) = "c"."ContactName" OR "c"."ContactName" = '')
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE "c"."ContactName" IS NOT NULL AND (substr("c"."ContactName", 1, length("c"."ContactName")) = "c"."ContactName" OR "c"."ContactName" = '')
+            """
         );
     }
 
@@ -841,10 +841,10 @@ WHERE "c"."ContactName" IS NOT NULL AND (substr("c"."ContactName", 1, length("c"
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE "c"."ContactName" LIKE 'M%'
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE "c"."ContactName" LIKE 'M%'
+            """
         );
     }
 
@@ -854,10 +854,10 @@ WHERE "c"."ContactName" LIKE 'M%'
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE "c"."ContactName" LIKE '%b'
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE "c"."ContactName" LIKE '%b'
+            """
         );
     }
 
@@ -867,12 +867,12 @@ WHERE "c"."ContactName" LIKE '%b'
 
         AssertSql(
             """
-@__pattern_0_rewritten='%b' (Size = 2)
+            @__pattern_0_rewritten='%b' (Size = 2)
 
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE "c"."ContactName" LIKE @__pattern_0_rewritten ESCAPE '\'
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE "c"."ContactName" LIKE @__pattern_0_rewritten ESCAPE '\'
+            """
         );
     }
 
@@ -882,10 +882,10 @@ WHERE "c"."ContactName" LIKE @__pattern_0_rewritten ESCAPE '\'
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE "c"."ContactName" IS NOT NULL AND (substr("c"."ContactName", -length("c"."ContactName")) = "c"."ContactName" OR "c"."ContactName" = '')
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE "c"."ContactName" IS NOT NULL AND (substr("c"."ContactName", -length("c"."ContactName")) = "c"."ContactName" OR "c"."ContactName" = '')
+            """
         );
     }
 
@@ -895,10 +895,10 @@ WHERE "c"."ContactName" IS NOT NULL AND (substr("c"."ContactName", -length("c"."
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE "c"."ContactName" IS NOT NULL AND (substr("c"."ContactName", -length("c"."ContactName")) = "c"."ContactName" OR "c"."ContactName" = '')
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE "c"."ContactName" IS NOT NULL AND (substr("c"."ContactName", -length("c"."ContactName")) = "c"."ContactName" OR "c"."ContactName" = '')
+            """
         );
     }
 
@@ -908,10 +908,10 @@ WHERE "c"."ContactName" IS NOT NULL AND (substr("c"."ContactName", -length("c"."
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE "c"."ContactName" LIKE '%m'
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE "c"."ContactName" LIKE '%m'
+            """
         );
     }
 
@@ -921,10 +921,10 @@ WHERE "c"."ContactName" LIKE '%m'
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE "c"."ContactName" IS NOT NULL AND instr("c"."ContactName", 'M') > 0
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE "c"."ContactName" IS NOT NULL AND instr("c"."ContactName", 'M') > 0
+            """
         );
     }
 
@@ -934,10 +934,10 @@ WHERE "c"."ContactName" IS NOT NULL AND instr("c"."ContactName", 'M') > 0
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE "c"."ContactName" IS NOT NULL AND instr("c"."ContactName", "c"."ContactName") > 0
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE "c"."ContactName" IS NOT NULL AND instr("c"."ContactName", "c"."ContactName") > 0
+            """
         );
     }
 
@@ -947,10 +947,10 @@ WHERE "c"."ContactName" IS NOT NULL AND instr("c"."ContactName", "c"."ContactNam
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE "c"."ContactName" IS NOT NULL AND instr("c"."ContactName", "c"."ContactName") > 0
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE "c"."ContactName" IS NOT NULL AND instr("c"."ContactName", "c"."ContactName") > 0
+            """
         );
     }
 
@@ -959,10 +959,10 @@ WHERE "c"."ContactName" IS NOT NULL AND instr("c"."ContactName", "c"."ContactNam
         await base.String_FirstOrDefault_MethodCall(async);
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE substr("c"."ContactName", 1, 1) = 'A'
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE substr("c"."ContactName", 1, 1) = 'A'
+            """
         );
     }
 
@@ -971,10 +971,10 @@ WHERE substr("c"."ContactName", 1, 1) = 'A'
         await base.String_LastOrDefault_MethodCall(async);
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE substr("c"."ContactName", length("c"."ContactName"), 1) = 's'
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE substr("c"."ContactName", length("c"."ContactName"), 1) = 's'
+            """
         );
     }
 
@@ -984,10 +984,10 @@ WHERE substr("c"."ContactName", length("c"."ContactName"), 1) = 's'
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE "c"."ContactName" IS NOT NULL AND instr("c"."ContactName", 'M') > 0
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE "c"."ContactName" IS NOT NULL AND instr("c"."ContactName", 'M') > 0
+            """
         );
     }
 
@@ -997,10 +997,10 @@ WHERE "c"."ContactName" IS NOT NULL AND instr("c"."ContactName", 'M') > 0
 
         AssertSql(
             """
-SELECT "c"."City", COALESCE(group_concat("c"."CustomerID", '|'), '') AS "Customers"
-FROM "Customers" AS "c"
-GROUP BY "c"."City"
-"""
+            SELECT "c"."City", COALESCE(group_concat("c"."CustomerID", '|'), '') AS "Customers"
+            FROM "Customers" AS "c"
+            GROUP BY "c"."City"
+            """
         );
     }
 
@@ -1010,10 +1010,10 @@ GROUP BY "c"."City"
 
         AssertSql(
             """
-SELECT "c"."City", COALESCE(group_concat(COALESCE("c"."Region", ''), '|'), '') AS "Regions"
-FROM "Customers" AS "c"
-GROUP BY "c"."City"
-"""
+            SELECT "c"."City", COALESCE(group_concat(COALESCE("c"."Region", ''), '|'), '') AS "Regions"
+            FROM "Customers" AS "c"
+            GROUP BY "c"."City"
+            """
         );
     }
 
@@ -1023,12 +1023,12 @@ GROUP BY "c"."City"
 
         AssertSql(
             """
-SELECT "c"."City", COALESCE(group_concat(CASE
-    WHEN length("c"."ContactName") > 10 THEN "c"."CustomerID"
-END, '|'), '') AS "Customers"
-FROM "Customers" AS "c"
-GROUP BY "c"."City"
-"""
+            SELECT "c"."City", COALESCE(group_concat(CASE
+            WHEN length("c"."ContactName") > 10 THEN "c"."CustomerID"
+            END, '|'), '') AS "Customers"
+            FROM "Customers" AS "c"
+            GROUP BY "c"."City"
+            """
         );
     }
 
@@ -1039,15 +1039,15 @@ GROUP BY "c"."City"
 
         AssertSql(
             """
-SELECT "t"."City", "c0"."CustomerID"
-FROM (
-    SELECT "c"."City"
-    FROM "Customers" AS "c"
-    GROUP BY "c"."City"
-) AS "t"
-LEFT JOIN "Customers" AS "c0" ON "t"."City" = "c0"."City"
-ORDER BY "t"."City", "c0"."CustomerID" DESC
-"""
+            SELECT "t"."City", "c0"."CustomerID"
+            FROM (
+            SELECT "c"."City"
+            FROM "Customers" AS "c"
+            GROUP BY "c"."City"
+            ) AS "t"
+            LEFT JOIN "Customers" AS "c0" ON "t"."City" = "c0"."City"
+            ORDER BY "t"."City", "c0"."CustomerID" DESC
+            """
         );
     }
 
@@ -1057,10 +1057,10 @@ ORDER BY "t"."City", "c0"."CustomerID" DESC
 
         AssertSql(
             """
-SELECT "c"."City", COALESCE(group_concat("c"."CustomerID", ''), '') AS "Customers"
-FROM "Customers" AS "c"
-GROUP BY "c"."City"
-"""
+            SELECT "c"."City", COALESCE(group_concat("c"."CustomerID", ''), '') AS "Customers"
+            FROM "Customers" AS "c"
+            GROUP BY "c"."City"
+            """
         );
     }
 
@@ -1070,10 +1070,10 @@ GROUP BY "c"."City"
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE "c"."Region" IS NULL OR trim("c"."Region") = ''
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE "c"."Region" IS NULL OR trim("c"."Region") = ''
+            """
         );
     }
 
@@ -1083,10 +1083,10 @@ WHERE "c"."Region" IS NULL OR trim("c"."Region") = ''
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE instr("c"."ContactName", '') - 1 = 0
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE instr("c"."ContactName", '') - 1 = 0
+            """
         );
     }
 
@@ -1096,10 +1096,10 @@ WHERE instr("c"."ContactName", '') - 1 = 0
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE instr("c"."ContactName", 'a') - 1 = 1
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE instr("c"."ContactName", 'a') - 1 = 1
+            """
         );
     }
 
@@ -1109,12 +1109,12 @@ WHERE instr("c"."ContactName", 'a') - 1 = 1
 
         AssertSql(
             """
-@__pattern_0='a' (Size = 1)
+            @__pattern_0='a' (Size = 1)
 
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE instr("c"."ContactName", @__pattern_0) - 1 = 1
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE instr("c"."ContactName", @__pattern_0) - 1 = 1
+            """
         );
     }
 
@@ -1130,10 +1130,10 @@ WHERE instr("c"."ContactName", @__pattern_0) - 1 = 1
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE replace("c"."ContactName", 'ia', '') = 'Mar Anders'
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE replace("c"."ContactName", 'ia', '') = 'Mar Anders'
+            """
         );
     }
 
@@ -1143,10 +1143,10 @@ WHERE replace("c"."ContactName", 'ia', '') = 'Mar Anders'
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE replace("c"."ContactName", "c"."ContactName", "c"."CustomerID") = "c"."CustomerID"
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE replace("c"."ContactName", "c"."ContactName", "c"."CustomerID") = "c"."CustomerID"
+            """
         );
     }
 
@@ -1156,10 +1156,10 @@ WHERE replace("c"."ContactName", "c"."ContactName", "c"."CustomerID") = "c"."Cus
 
         AssertSql(
             """
-SELECT "c"."ContactName"
-FROM "Customers" AS "c"
-WHERE substr("c"."CustomerID", 0 + 1) = 'ALFKI'
-"""
+            SELECT "c"."ContactName"
+            FROM "Customers" AS "c"
+            WHERE substr("c"."CustomerID", 0 + 1) = 'ALFKI'
+            """
         );
     }
 
@@ -1169,10 +1169,10 @@ WHERE substr("c"."CustomerID", 0 + 1) = 'ALFKI'
 
         AssertSql(
             """
-SELECT "c"."ContactName"
-FROM "Customers" AS "c"
-WHERE substr("c"."CustomerID", 1 + 1) = 'LFKI'
-"""
+            SELECT "c"."ContactName"
+            FROM "Customers" AS "c"
+            WHERE substr("c"."CustomerID", 1 + 1) = 'LFKI'
+            """
         );
     }
 
@@ -1182,12 +1182,12 @@ WHERE substr("c"."CustomerID", 1 + 1) = 'LFKI'
 
         AssertSql(
             """
-@__start_0='2'
+            @__start_0='2'
 
-SELECT "c"."ContactName"
-FROM "Customers" AS "c"
-WHERE substr("c"."CustomerID", @__start_0 + 1) = 'FKI'
-"""
+            SELECT "c"."ContactName"
+            FROM "Customers" AS "c"
+            WHERE substr("c"."CustomerID", @__start_0 + 1) = 'FKI'
+            """
         );
     }
 
@@ -1197,10 +1197,10 @@ WHERE substr("c"."CustomerID", @__start_0 + 1) = 'FKI'
 
         AssertSql(
             """
-SELECT substr("c"."ContactName", 0 + 1, 3)
-FROM "Customers" AS "c"
-WHERE "c"."CustomerID" = 'ALFKI'
-"""
+            SELECT substr("c"."ContactName", 0 + 1, 3)
+            FROM "Customers" AS "c"
+            WHERE "c"."CustomerID" = 'ALFKI'
+            """
         );
     }
 
@@ -1210,10 +1210,10 @@ WHERE "c"."CustomerID" = 'ALFKI'
 
         AssertSql(
             """
-SELECT substr("c"."ContactName", 1 + 1, 3)
-FROM "Customers" AS "c"
-WHERE "c"."CustomerID" = 'ALFKI'
-"""
+            SELECT substr("c"."ContactName", 1 + 1, 3)
+            FROM "Customers" AS "c"
+            WHERE "c"."CustomerID" = 'ALFKI'
+            """
         );
     }
 
@@ -1223,12 +1223,12 @@ WHERE "c"."CustomerID" = 'ALFKI'
 
         AssertSql(
             """
-@__start_0='2'
+            @__start_0='2'
 
-SELECT substr("c"."ContactName", @__start_0 + 1, 3)
-FROM "Customers" AS "c"
-WHERE "c"."CustomerID" = 'ALFKI'
-"""
+            SELECT substr("c"."ContactName", @__start_0 + 1, 3)
+            FROM "Customers" AS "c"
+            WHERE "c"."CustomerID" = 'ALFKI'
+            """
         );
     }
 
@@ -1238,10 +1238,10 @@ WHERE "c"."CustomerID" = 'ALFKI'
 
         AssertSql(
             """
-SELECT substr("c"."ContactName", (instr("c"."ContactName", 'a') - 1) + 1, 3)
-FROM "Customers" AS "c"
-WHERE "c"."CustomerID" = 'ALFKI'
-"""
+            SELECT substr("c"."ContactName", (instr("c"."ContactName", 'a') - 1) + 1, 3)
+            FROM "Customers" AS "c"
+            WHERE "c"."CustomerID" = 'ALFKI'
+            """
         );
     }
 
@@ -1251,10 +1251,10 @@ WHERE "c"."CustomerID" = 'ALFKI'
 
         AssertSql(
             """
-SELECT substr("c"."ContactName", 2 + 1, 0)
-FROM "Customers" AS "c"
-WHERE "c"."CustomerID" = 'ALFKI'
-"""
+            SELECT substr("c"."ContactName", 2 + 1, 0)
+            FROM "Customers" AS "c"
+            WHERE "c"."CustomerID" = 'ALFKI'
+            """
         );
     }
 
@@ -1264,10 +1264,10 @@ WHERE "c"."CustomerID" = 'ALFKI'
 
         AssertSql(
             """
-SELECT "p"."ProductID", "p"."Discontinued", "p"."ProductName", "p"."SupplierID", "p"."UnitPrice", "p"."UnitsInStock"
-FROM "Products" AS "p"
-WHERE abs("p"."ProductID") > 10
-"""
+            SELECT "p"."ProductID", "p"."Discontinued", "p"."ProductName", "p"."SupplierID", "p"."UnitPrice", "p"."UnitsInStock"
+            FROM "Products" AS "p"
+            WHERE abs("p"."ProductID") > 10
+            """
         );
     }
 
@@ -1277,10 +1277,10 @@ WHERE abs("p"."ProductID") > 10
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."UnitPrice" < 7.0 AND abs("o"."Quantity") > 10
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."UnitPrice" < 7.0 AND abs("o"."Quantity") > 10
+            """
         );
     }
 
@@ -1290,10 +1290,10 @@ WHERE "o"."UnitPrice" < 7.0 AND abs("o"."Quantity") > 10
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."UnitPrice" < 7.0 AND 10 < "o"."ProductID"
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."UnitPrice" < 7.0 AND 10 < "o"."ProductID"
+            """
         );
     }
 
@@ -1303,10 +1303,10 @@ WHERE "o"."UnitPrice" < 7.0 AND 10 < "o"."ProductID"
 
         AssertSql(
             """
-SELECT round(CAST("o"."OrderID" AS REAL)) AS "A"
-FROM "Orders" AS "o"
-WHERE "o"."OrderID" < 10250
-"""
+            SELECT round(CAST("o"."OrderID" AS REAL)) AS "A"
+            FROM "Orders" AS "o"
+            WHERE "o"."OrderID" < 10250
+            """
         );
     }
 
@@ -1316,10 +1316,10 @@ WHERE "o"."OrderID" < 10250
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND min("o"."OrderID", "o"."ProductID") = "o"."ProductID"
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND min("o"."OrderID", "o"."ProductID") = "o"."ProductID"
+            """
         );
     }
 
@@ -1329,10 +1329,10 @@ WHERE "o"."OrderID" = 11077 AND min("o"."OrderID", "o"."ProductID") = "o"."Produ
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
-FROM "Order Details" AS "o"
-WHERE "o"."OrderID" = 11077 AND max("o"."OrderID", "o"."ProductID") = "o"."OrderID"
-"""
+            SELECT "o"."OrderID", "o"."ProductID", "o"."Discount", "o"."Quantity", "o"."UnitPrice"
+            FROM "Order Details" AS "o"
+            WHERE "o"."OrderID" = 11077 AND max("o"."OrderID", "o"."ProductID") = "o"."OrderID"
+            """
         );
     }
 
@@ -1342,10 +1342,10 @@ WHERE "o"."OrderID" = 11077 AND max("o"."OrderID", "o"."ProductID") = "o"."Order
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE lower("c"."CustomerID") = 'alfki'
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE lower("c"."CustomerID") = 'alfki'
+            """
         );
     }
 
@@ -1355,10 +1355,10 @@ WHERE lower("c"."CustomerID") = 'alfki'
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE upper("c"."CustomerID") = 'ALFKI'
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE upper("c"."CustomerID") = 'ALFKI'
+            """
         );
     }
 
@@ -1368,10 +1368,10 @@ WHERE upper("c"."CustomerID") = 'ALFKI'
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE ltrim("c"."ContactTitle") = 'Owner'
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE ltrim("c"."ContactTitle") = 'Owner'
+            """
         );
     }
 
@@ -1381,10 +1381,10 @@ WHERE ltrim("c"."ContactTitle") = 'Owner'
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE ltrim("c"."ContactTitle", 'O') = 'wner'
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE ltrim("c"."ContactTitle", 'O') = 'wner'
+            """
         );
     }
 
@@ -1394,10 +1394,10 @@ WHERE ltrim("c"."ContactTitle", 'O') = 'wner'
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE ltrim("c"."ContactTitle", 'Ow') = 'ner'
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE ltrim("c"."ContactTitle", 'Ow') = 'ner'
+            """
         );
     }
 
@@ -1407,10 +1407,10 @@ WHERE ltrim("c"."ContactTitle", 'Ow') = 'ner'
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE rtrim("c"."ContactTitle") = 'Owner'
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE rtrim("c"."ContactTitle") = 'Owner'
+            """
         );
     }
 
@@ -1420,10 +1420,10 @@ WHERE rtrim("c"."ContactTitle") = 'Owner'
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE rtrim("c"."ContactTitle", 'r') = 'Owne'
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE rtrim("c"."ContactTitle", 'r') = 'Owne'
+            """
         );
     }
 
@@ -1433,10 +1433,10 @@ WHERE rtrim("c"."ContactTitle", 'r') = 'Owne'
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE rtrim("c"."ContactTitle", 'er') = 'Own'
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE rtrim("c"."ContactTitle", 'er') = 'Own'
+            """
         );
     }
 
@@ -1446,10 +1446,10 @@ WHERE rtrim("c"."ContactTitle", 'er') = 'Own'
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE trim("c"."ContactTitle") = 'Owner'
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE trim("c"."ContactTitle") = 'Owner'
+            """
         );
     }
 
@@ -1459,10 +1459,10 @@ WHERE trim("c"."ContactTitle") = 'Owner'
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE trim("c"."ContactTitle", 'O') = 'wner'
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE trim("c"."ContactTitle", 'O') = 'wner'
+            """
         );
     }
 
@@ -1472,10 +1472,10 @@ WHERE trim("c"."ContactTitle", 'O') = 'wner'
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE trim("c"."ContactTitle", 'Or') = 'wne'
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE trim("c"."ContactTitle", 'Or') = 'wne'
+            """
         );
     }
 
@@ -1485,10 +1485,10 @@ WHERE trim("c"."ContactTitle", 'Or') = 'wne'
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE "c"."CustomerID" REGEXP '^T'
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE "c"."CustomerID" REGEXP '^T'
+            """
         );
     }
 
@@ -1498,10 +1498,10 @@ WHERE "c"."CustomerID" REGEXP '^T'
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE 'ALFKI' REGEXP "c"."CustomerID"
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE 'ALFKI' REGEXP "c"."CustomerID"
+            """
         );
     }
 
@@ -1517,10 +1517,10 @@ WHERE 'ALFKI' REGEXP "c"."CustomerID"
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE "c"."CustomerID" NOT REGEXP '^[^T]'
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE "c"."CustomerID" NOT REGEXP '^[^T]'
+            """
         );
     }
 
@@ -1530,10 +1530,10 @@ WHERE "c"."CustomerID" NOT REGEXP '^[^T]'
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE "c"."Region" IS NULL OR "c"."Region" = ''
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE "c"."Region" IS NULL OR "c"."Region" = ''
+            """
         );
     }
 
@@ -1543,9 +1543,9 @@ WHERE "c"."Region" IS NULL OR "c"."Region" = ''
 
         AssertSql(
             """
-SELECT "c"."CustomerID" AS "Id", "c"."Region" IS NULL OR "c"."Region" = '' AS "Value"
-FROM "Customers" AS "c"
-"""
+            SELECT "c"."CustomerID" AS "Id", "c"."Region" IS NULL OR "c"."Region" = '' AS "Value"
+            FROM "Customers" AS "c"
+            """
         );
     }
 
@@ -1555,10 +1555,10 @@ FROM "Customers" AS "c"
 
         AssertSql(
             """
-SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-FROM "Customers" AS "c"
-WHERE "c"."Region" IS NOT NULL AND "c"."Region" <> ''
-"""
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            WHERE "c"."Region" IS NOT NULL AND "c"."Region" <> ''
+            """
         );
     }
 
@@ -1571,10 +1571,10 @@ WHERE "c"."Region" IS NOT NULL AND "c"."Region" <> ''
 
         AssertSql(
             """
-SELECT "o"."OrderID", "o"."CustomerID", "o"."EmployeeID", "o"."OrderDate"
-FROM "Orders" AS "o"
-WHERE "o"."OrderDate" IS NOT NULL AND date("o"."OrderDate") = '1996-09-16'
-"""
+            SELECT "o"."OrderID", "o"."CustomerID", "o"."EmployeeID", "o"."OrderDate"
+            FROM "Orders" AS "o"
+            WHERE "o"."OrderDate" IS NOT NULL AND date("o"."OrderDate") = '1996-09-16'
+            """
         );
     }
 

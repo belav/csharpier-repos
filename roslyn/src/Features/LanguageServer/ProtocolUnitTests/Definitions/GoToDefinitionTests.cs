@@ -200,21 +200,21 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Definitions
         public async Task TestGotoDefinitionPartialMethods(bool mutatingLspWorkspace)
         {
             var markup = """
-                using System;
+            using System;
 
-                public partial class C
-                {
-                    partial void {|caret:|}P();
-                }
+            public partial class C
+            {
+            partial void {|caret:|}P();
+            }
 
-                public partial class C
-                {
-                    partial void {|definition:P|}()
-                    {
-                        Console.WriteLine(");
-                    }
-                }
-                """;
+            public partial class C
+            {
+            partial void {|definition:P|}()
+            {
+            Console.WriteLine(");
+            }
+            }
+            """;
             await using var testLspServer = await CreateTestLspServerAsync(
                 markup,
                 mutatingLspWorkspace

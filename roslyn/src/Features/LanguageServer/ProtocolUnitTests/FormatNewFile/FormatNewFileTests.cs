@@ -21,41 +21,41 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SimplifyMethod
         public async Task TestFormatNewFileAsync(bool mutatingLspWorkspace)
         {
             var markup = """
-                // This is a file header
+            // This is a file header
 
-                using System;
-                using System.Threading.Tasks;
+            using System;
+            using System.Threading.Tasks;
 
-                namespace test;
+            namespace test;
 
-                class Goo
-                {
-                    public void M()
-                    {
-                    }
-                }
-                """;
+            class Goo
+            {
+            public void M()
+            {
+            }
+            }
+            """;
 
             var input = """
-                using System;
+            using System;
 
-                namespace test;
+            namespace test;
 
-                public partial class MyComponent
-                {
-                }
-                """;
+            public partial class MyComponent
+            {
+            }
+            """;
 
             var expected = """
-                // This is a file header
-                
-                namespace test
-                {
-                    public partial class MyComponent
-                    {
-                    }
-                }
-                """;
+            // This is a file header
+
+            namespace test
+            {
+            public partial class MyComponent
+            {
+            }
+            }
+            """;
 
             await using var testLspServer = await CreateTestLspServerAsync(
                 markup,

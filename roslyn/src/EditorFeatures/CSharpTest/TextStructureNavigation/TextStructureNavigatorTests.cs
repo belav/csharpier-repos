@@ -274,60 +274,60 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TextStructureNavigation
             AssertExtent(
                 """"
                 string s = """
-                    Hello
-                        {|Significant:$$World|}!
-                    :)
-                    """;
+                Hello
+                {|Significant:$$World|}!
+                :)
+                """;
                 """"
             );
 
             AssertExtent(
                 """"
                 string s = """
-                    Hello
-                        {|Significant:W$$orld|}!
-                    :)
-                    """;
+                Hello
+                {|Significant:W$$orld|}!
+                :)
+                """;
                 """"
             );
 
             AssertExtent(
                 """"
                 string s = """
-                    Hello
-                        {|Significant:Wo$$rld|}!
-                    :)
-                    """;
+                Hello
+                {|Significant:Wo$$rld|}!
+                :)
+                """;
                 """"
             );
 
             AssertExtent(
                 """"
                 string s = """
-                    Hello
-                        {|Significant:Wor$$ld|}!
-                    :)
-                    """;
+                Hello
+                {|Significant:Wor$$ld|}!
+                :)
+                """;
                 """"
             );
 
             AssertExtent(
                 """"
                 string s = """
-                    Hello
-                        {|Significant:Worl$$d|}!
-                    :)
-                    """;
+                Hello
+                {|Significant:Worl$$d|}!
+                :)
+                """;
                 """"
             );
 
             AssertExtent(
                 """"
                 string s = """
-                    Hello
-                        World{|Significant:$$!|}
-                    :)
-                    """;
+                Hello
+                World{|Significant:$$!|}
+                :)
+                """;
                 """"
             );
         }
@@ -338,30 +338,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TextStructureNavigation
             AssertExtent(
                 """"
                 string s = {|Significant:$$"""|}
-                    Hello
-                        World!
-                    :)
-                    """;
+                Hello
+                World!
+                :)
+                """;
                 """"
             );
 
             AssertExtent(
                 """"
                 string s = {|Significant:"$$""|}
-                    Hello
-                        World!
-                    :)
-                    """;
+                Hello
+                World!
+                :)
+                """;
                 """"
             );
 
             AssertExtent(
                 """"
                 string s = {|Significant:""$$"|}
-                    Hello
-                        World!
-                    :)
-                    """;
+                Hello
+                World!
+                :)
+                """;
                 """"
             );
         }
@@ -372,30 +372,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TextStructureNavigation
             AssertExtent(
                 """"
                 string s = """
-                    Hello
-                        World!
-                    :)
-                    {|Significant:$$"""|};
+                Hello
+                World!
+                :)
+                {|Significant:$$"""|};
                 """"
             );
 
             AssertExtent(
                 """"
                 string s = """
-                    Hello
-                        World!
-                    :)
-                    {|Significant:"$$""|};
+                Hello
+                World!
+                :)
+                {|Significant:"$$""|};
                 """"
             );
 
             AssertExtent(
                 """"
                 string s = """
-                    Hello
-                        World!
-                    :)
-                    {|Significant:""$$"|};
+                Hello
+                World!
+                :)
+                {|Significant:""$$"|};
                 """"
             );
         }
@@ -406,51 +406,51 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TextStructureNavigation
             AssertExtent(
                 """"
                 string s = """
-                    Hello
-                        World!
-                    :)
-                    {|Significant:$$"""u8|};
+                Hello
+                World!
+                :)
+                {|Significant:$$"""u8|};
                 """"
             );
 
             AssertExtent(
                 """"
                 string s = """
-                    Hello
-                        World!
-                    :)
-                    {|Significant:"$$""u8|};
+                Hello
+                World!
+                :)
+                {|Significant:"$$""u8|};
                 """"
             );
 
             AssertExtent(
                 """"
                 string s = """
-                    Hello
-                        World!
-                    :)
-                    {|Significant:""$$"u8|};
+                Hello
+                World!
+                :)
+                {|Significant:""$$"u8|};
                 """"
             );
 
             AssertExtent(
                 """"
-    string s = """
-        Hello
-            World!
-        :)
-        {|Significant:"""$$u8|};
-    """"
+                string s = """
+                Hello
+                World!
+                :)
+                {|Significant:"""$$u8|};
+                """"
             );
 
             AssertExtent(
                 """"
-    string s = """
-        Hello
-            World!
-        :)
-        {|Significant:"""u$$8|};
-    """"
+                string s = """
+                Hello
+                World!
+                :)
+                {|Significant:"""u$$8|};
+                """"
             );
         }
 

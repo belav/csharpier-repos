@@ -43,12 +43,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting.Indentation
             : base(output) { }
 
         protected const string HtmlMarkup = """
-            <html>
-                <body>
-                    <%{|S1:|}%>
-                </body>
-            </html>
-            """;
+        <html>
+        <body>
+        <%{|S1:|}%>
+        </body>
+        </html>
+        """;
         protected const int BaseIndentationOfNugget = 8;
 
         protected static async Task<int> GetSmartTokenFormatterIndentationWorkerAsync(

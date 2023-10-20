@@ -47,15 +47,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 """
                 class Program
                 {
-                    private static string s_goo;
-                    private static string Goo => s_goo [|??|] (s_goo = new string('c', 42));
+                private static string s_goo;
+                private static string Goo => s_goo [|??|] (s_goo = new string('c', 42));
                 }
                 """,
                 """
                 class Program
                 {
-                    private static string s_goo;
-                    private static string Goo => s_goo ??= new string('c', 42);
+                private static string s_goo;
+                private static string Goo => s_goo ??= new string('c', 42);
                 }
                 """
             );
@@ -68,8 +68,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 """
                 class Program
                 {
-                    private static string s_goo;
-                    private static string Goo => s_goo ?? (s_goo = new string('c', 42));
+                private static string s_goo;
+                private static string Goo => s_goo ?? (s_goo = new string('c', 42));
                 }
                 """,
                 LanguageVersion.CSharp7_3
@@ -83,8 +83,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 """
                 class Program
                 {
-                    private static string s_goo;
-                    private static string Goo => {|CS0131:s_goo ?? s_goo|} = new string('c', 42);
+                private static string s_goo;
+                private static string Goo => {|CS0131:s_goo ?? s_goo|} = new string('c', 42);
                 }
                 """
             );
@@ -97,8 +97,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 """
                 class Program
                 {
-                    private static string s_goo;
-                    private static string Goo => {|CS0019:s_goo ?? (s_goo == new string('c', 42))|};
+                private static string s_goo;
+                private static string Goo => {|CS0019:s_goo ?? (s_goo == new string('c', 42))|};
                 }
                 """
             );
@@ -111,8 +111,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 """
                 class Program
                 {
-                    private static string s_goo;
-                    private static string Goo => s_goo ?? (s_goo ??= new string('c', 42));
+                private static string s_goo;
+                private static string Goo => s_goo ?? (s_goo ??= new string('c', 42));
                 }
                 """
             );
@@ -125,9 +125,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 """
                 class Program
                 {
-                    private static string s_goo;
-                    private static string s_goo2;
-                    private static string Goo => s_goo ?? (s_goo2 = new string('c', 42));
+                private static string s_goo;
+                private static string s_goo2;
+                private static string Goo => s_goo ?? (s_goo2 = new string('c', 42));
                 }
                 """
             );
@@ -140,8 +140,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 """
                 class Program
                 {
-                    private static string s_goo;
-                    private static string Goo => s_goo.GetType() ?? ({|CS0131:s_goo.GetType()|} = new string('c', 42));
+                private static string s_goo;
+                private static string Goo => s_goo.GetType() ?? ({|CS0131:s_goo.GetType()|} = new string('c', 42));
                 }
                 """
             );
@@ -154,15 +154,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 """
                 class Program
                 {
-                    private string goo;
-                    private string Goo => this.goo [|??|] (this.goo = new string('c', 42));
+                private string goo;
+                private string Goo => this.goo [|??|] (this.goo = new string('c', 42));
                 }
                 """,
                 """
                 class Program
                 {
-                    private string goo;
-                    private string Goo => this.goo ??= new string('c', 42);
+                private string goo;
+                private string Goo => this.goo ??= new string('c', 42);
                 }
                 """
             );
@@ -175,21 +175,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 """
                 class Program
                 {
-                    void Goo()
-                    {
-                        int? a = null;
-                        var x = a [|??|] (a = 1);
-                    }
+                void Goo()
+                {
+                int? a = null;
+                var x = a [|??|] (a = 1);
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    void Goo()
-                    {
-                        int? a = null;
-                        var x = (int?)(a ??= 1);
-                    }
+                void Goo()
+                {
+                int? a = null;
+                var x = (int?)(a ??= 1);
+                }
                 }
                 """
             );
@@ -203,28 +203,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 using System;
                 class C
                 {
-                    static void M(int a) { }
-                    static void M(int? a) { }
+                static void M(int a) { }
+                static void M(int? a) { }
 
-                    static void Main()
-                    {
-                        int? a = null;
-                        M(a [|??|] (a = 1));
-                    }
+                static void Main()
+                {
+                int? a = null;
+                M(a [|??|] (a = 1));
+                }
                 }
                 """,
                 """
                 using System;
                 class C
                 {
-                    static void M(int a) { }
-                    static void M(int? a) { }
+                static void M(int a) { }
+                static void M(int? a) { }
 
-                    static void Main()
-                    {
-                        int? a = null;
-                        M((int?)(a ??= 1));
-                    }
+                static void Main()
+                {
+                int? a = null;
+                M((int?)(a ??= 1));
+                }
                 }
                 """
             );
@@ -238,26 +238,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 using System;
                 class C
                 {
-                    static void M(int? a) { }
+                static void M(int? a) { }
 
-                    static void Main()
-                    {
-                        int? a = null;
-                        M(a [|??|] (a = 1));
-                    }
+                static void Main()
+                {
+                int? a = null;
+                M(a [|??|] (a = 1));
+                }
                 }
                 """,
                 """
                 using System;
                 class C
                 {
-                    static void M(int? a) { }
+                static void M(int? a) { }
 
-                    static void Main()
-                    {
-                        int? a = null;
-                        M(a ??= 1);
-                    }
+                static void Main()
+                {
+                int? a = null;
+                M(a ??= 1);
+                }
                 }
                 """
             );
@@ -271,23 +271,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        [|if|] (o is null)
-                        {
-                            o = "";
-                        }
-                    }
+                static void Main(object o)
+                {
+                [|if|] (o is null)
+                {
+                o = "";
+                }
+                }
                 }
                 """,
                 """
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        o ??= "";
-                    }
+                static void Main(object o)
+                {
+                o ??= "";
+                }
                 }
                 """
             );
@@ -301,13 +301,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        if (o is null)
-                        {
-                            o = "";
-                        }
-                    }
+                static void Main(object o)
+                {
+                if (o is null)
+                {
+                o = "";
+                }
+                }
                 }
                 """,
                 LanguageVersion.CSharp7_3
@@ -322,17 +322,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        if (o is null)
-                        {
-                            o = "";
-                        }
-                        else
-                        {
-                            Console.WriteLine();
-                        }
-                    }
+                static void Main(object o)
+                {
+                if (o is null)
+                {
+                o = "";
+                }
+                else
+                {
+                Console.WriteLine();
+                }
+                }
                 }
                 """
             );
@@ -346,21 +346,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        [|if|] (o is null)
-                            o = "";
-                    }
+                static void Main(object o)
+                {
+                [|if|] (o is null)
+                o = "";
+                }
                 }
                 """,
                 """
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        o ??= "";
-                    }
+                static void Main(object o)
+                {
+                o ??= "";
+                }
                 }
                 """
             );
@@ -374,12 +374,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        if (o is null)
-                        {
-                        }
-                    }
+                static void Main(object o)
+                {
+                if (o is null)
+                {
+                }
+                }
                 }
                 """
             );
@@ -393,14 +393,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        if (o is null)
-                        {
-                            o = "";
-                            o = "";
-                        }
-                    }
+                static void Main(object o)
+                {
+                if (o is null)
+                {
+                o = "";
+                o = "";
+                }
+                }
                 }
                 """
             );
@@ -414,23 +414,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        [|if|] (o == null)
-                        {
-                            o = "";
-                        }
-                    }
+                static void Main(object o)
+                {
+                [|if|] (o == null)
+                {
+                o = "";
+                }
+                }
                 }
                 """,
                 """
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        o ??= "";
-                    }
+                static void Main(object o)
+                {
+                o ??= "";
+                }
                 }
                 """
             );
@@ -444,23 +444,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        [|if|] (ReferenceEquals(o, null))
-                        {
-                            o = "";
-                        }
-                    }
+                static void Main(object o)
+                {
+                [|if|] (ReferenceEquals(o, null))
+                {
+                o = "";
+                }
+                }
                 }
                 """,
                 """
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        o ??= "";
-                    }
+                static void Main(object o)
+                {
+                o ??= "";
+                }
                 }
                 """
             );
@@ -474,23 +474,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        [|if|] (ReferenceEquals(null, o))
-                        {
-                            o = "";
-                        }
-                    }
+                static void Main(object o)
+                {
+                [|if|] (ReferenceEquals(null, o))
+                {
+                o = "";
+                }
+                }
                 }
                 """,
                 """
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        o ??= "";
-                    }
+                static void Main(object o)
+                {
+                o ??= "";
+                }
                 }
                 """
             );
@@ -504,23 +504,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        [|if|] (object.ReferenceEquals(null, o))
-                        {
-                            o = "";
-                        }
-                    }
+                static void Main(object o)
+                {
+                [|if|] (object.ReferenceEquals(null, o))
+                {
+                o = "";
+                }
+                }
                 }
                 """,
                 """
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        o ??= "";
-                    }
+                static void Main(object o)
+                {
+                o ??= "";
+                }
                 }
                 """
             );
@@ -534,13 +534,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        if (!object.ReferenceEquals(null, o))
-                        {
-                            o = "";
-                        }
-                    }
+                static void Main(object o)
+                {
+                if (!object.ReferenceEquals(null, o))
+                {
+                o = "";
+                }
+                }
                 }
                 """
             );
@@ -554,13 +554,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        if (o is null)
-                        {
-                            o ??= "";
-                        }
-                    }
+                static void Main(object o)
+                {
+                if (o is null)
+                {
+                o ??= "";
+                }
+                }
                 }
                 """
             );
@@ -574,23 +574,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 using System;
                 class C
                 {
-                    static void Main(string o)
-                    {
-                        [|if|] (o == null)
-                        {
-                            o = "";
-                        }
-                    }
+                static void Main(string o)
+                {
+                [|if|] (o == null)
+                {
+                o = "";
+                }
+                }
                 }
                 """,
                 """
                 using System;
                 class C
                 {
-                    static void Main(string o)
-                    {
-                        o ??= "";
-                    }
+                static void Main(string o)
+                {
+                o ??= "";
+                }
                 }
                 """
             );
@@ -605,19 +605,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
 
                 class X
                 {
-                    public static bool operator ==(X x1, X x2) => true;
-                    public static bool operator !=(X x1, X x2) => !(x1 == x2);
+                public static bool operator ==(X x1, X x2) => true;
+                public static bool operator !=(X x1, X x2) => !(x1 == x2);
                 }
 
                 class C
                 {
-                    static void Main(X o)
-                    {
-                        if (o == null)
-                        {
-                            o = new X();
-                        }
-                    }
+                static void Main(X o)
+                {
+                if (o == null)
+                {
+                o = new X();
+                }
+                }
                 }
                 """
             );
@@ -632,13 +632,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
 
                 class C
                 {
-                    static void Main(object o1, object o2)
-                    {
-                        if (o1 is null)
-                        {
-                            o2 = "";
-                        }
-                    }
+                static void Main(object o1, object o2)
+                {
+                if (o1 is null)
+                {
+                o2 = "";
+                }
+                }
                 }
                 """
             );
@@ -653,15 +653,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
 
                 class C
                 {
-                    private object o;
+                private object o;
 
-                    static void Main()
-                    {
-                        if (new C().o is null)
-                        {
-                            new C().o = "";
-                        }
-                    }
+                static void Main()
+                {
+                if (new C().o is null)
+                {
+                new C().o = "";
+                }
+                }
                 }
                 """
             );
@@ -675,23 +675,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        [|if|] (o is null)
-                        {
-                            o = new C();
-                        }
-                    }
+                static void Main(object o)
+                {
+                [|if|] (o is null)
+                {
+                o = new C();
+                }
+                }
                 }
                 """,
                 """
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        o ??= new C();
-                    }
+                static void Main(object o)
+                {
+                o ??= new C();
+                }
                 }
                 """
             );
@@ -705,25 +705,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        // Before
-                        [|if|] (o is null)
-                        {
-                            o = new C();
-                        } // After
-                    }
+                static void Main(object o)
+                {
+                // Before
+                [|if|] (o is null)
+                {
+                o = new C();
+                } // After
+                }
                 }
                 """,
                 """
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        // Before
-                        o ??= new C(); // After
-                    }
+                static void Main(object o)
+                {
+                // Before
+                o ??= new C(); // After
+                }
                 }
                 """
             );
@@ -737,25 +737,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        [|if|] (o is null)
-                        {
-                            // Before
-                            o = new C(); // After
-                        }
-                    }
+                static void Main(object o)
+                {
+                [|if|] (o is null)
+                {
+                // Before
+                o = new C(); // After
+                }
+                }
                 }
                 """,
                 """
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        // Before
-                        o ??= new C(); // After
-                    }
+                static void Main(object o)
+                {
+                // Before
+                o ??= new C(); // After
+                }
                 }
                 """
             );
@@ -769,27 +769,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        // Before1
-                        [|if|] (o is null)
-                        {
-                            // Before2
-                            o = new C(); // After
-                        }
-                    }
+                static void Main(object o)
+                {
+                // Before1
+                [|if|] (o is null)
+                {
+                // Before2
+                o = new C(); // After
+                }
+                }
                 }
                 """,
                 """
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        // Before1
-                        // Before2
-                        o ??= new C(); // After
-                    }
+                static void Main(object o)
+                {
+                // Before1
+                // Before2
+                o ??= new C(); // After
+                }
                 }
                 """
             );
@@ -803,15 +803,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        if (o is null)
-                        {
+                static void Main(object o)
+                {
+                if (o is null)
+                {
                 #if true
-                            o = "";
+                o = "";
                 #endif
-                        }
-                    }
+                }
+                }
                 }
                 """
             );
@@ -825,16 +825,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        if (o is null)
-                        {
+                static void Main(object o)
+                {
+                if (o is null)
+                {
                 #if X
-                            Console.WriteLine("Only run if o is null");
+                Console.WriteLine("Only run if o is null");
                 #endif
-                            o = "";
-                        }
-                    }
+                o = "";
+                }
+                }
                 }
                 """
             );
@@ -848,17 +848,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        if (o is null)
-                        {
+                static void Main(object o)
+                {
+                if (o is null)
+                {
                 #if X
-                            Console.WriteLine("Only run if o is null");
+                Console.WriteLine("Only run if o is null");
                 #else
-                            o = "";
+                o = "";
                 #endif
-                        }
-                    }
+                }
+                }
                 }
                 """
             );
@@ -872,17 +872,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        if (o is null)
-                        {
+                static void Main(object o)
+                {
+                if (o is null)
+                {
                 #if X
-                            Console.WriteLine("Only run if o is null");
+                Console.WriteLine("Only run if o is null");
                 #elif true
-                            o = "";
+                o = "";
                 #endif
-                        }
-                    }
+                }
+                }
                 }
                 """
             );
@@ -896,17 +896,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        if (o is null)
-                        {
+                static void Main(object o)
+                {
+                if (o is null)
+                {
                 #if true
-                            o = "";
+                o = "";
                 #else
-                            Console.WriteLine("Only run if o is null");
+                Console.WriteLine("Only run if o is null");
                 #endif
-                        }
-                    }
+                }
+                }
                 }
                 """
             );
@@ -920,17 +920,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        if (o is null)
-                        {
+                static void Main(object o)
+                {
+                if (o is null)
+                {
                 #if true
-                            o = "";
+                o = "";
                 #elif X
-                            Console.WriteLine("Only run if o is null");
+                Console.WriteLine("Only run if o is null");
                 #endif
-                        }
-                    }
+                }
+                }
                 }
                 """
             );
@@ -944,13 +944,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        if (o is null)
+                static void Main(object o)
+                {
+                if (o is null)
                 #if true
-                            o = "";
+                o = "";
                 #endif
-                    }
+                }
                 }
                 """
             );
@@ -964,15 +964,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 using System;
                 class C
                 {
-                    static void Main(object o)
-                    {
-                        if (o is null)
+                static void Main(object o)
+                {
+                if (o is null)
                 #if true
-                            o = "";
+                o = "";
                 #else
-                            o = "";
+                o = "";
                 #endif
-                    }
+                }
                 }
                 """
             );
@@ -990,13 +990,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 """
                 unsafe class Program
                 {
-                    private static void Main()
-                    {
-                        byte* ptr = null;
-                        {|CS0019:ptr ??= Get()|};
-                    }
+                private static void Main()
+                {
+                byte* ptr = null;
+                {|CS0019:ptr ??= Get()|};
+                }
 
-                    static byte* Get() => null;
+                static byte* Get() => null;
                 }
                 """,
                 LanguageVersion.CSharp12
@@ -1010,16 +1010,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 """
                 unsafe class Program
                 {
-                    private static void Main()
-                    {
-                        byte* ptr = null;
-                        if (ptr is null)
-                        {
-                            ptr = Get();
-                        }
-                    }
+                private static void Main()
+                {
+                byte* ptr = null;
+                if (ptr is null)
+                {
+                ptr = Get();
+                }
+                }
 
-                    static byte* Get() => null;
+                static byte* Get() => null;
                 }
                 """,
                 LanguageVersion.CSharp12
@@ -1033,19 +1033,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 """
                 using System.Runtime.InteropServices;
                 public unsafe class C {
-                    [DllImport("A")]
-                    private static extern delegate* unmanaged<void> GetFunc();
+                [DllImport("A")]
+                private static extern delegate* unmanaged<void> GetFunc();
 
-                    private delegate* unmanaged<void> s_func;
+                private delegate* unmanaged<void> s_func;
 
-                    public delegate* unmanaged<void> M() {
-                        delegate* unmanaged<void> func = s_func;
-                        if (func == null)
-                        {
-                            func = s_func = GetFunc();
-                        }
-                        return func;
-                    }
+                public delegate* unmanaged<void> M() {
+                delegate* unmanaged<void> func = s_func;
+                if (func == null)
+                {
+                func = s_func = GetFunc();
+                }
+                return func;
+                }
                 }
                 """,
                 LanguageVersion.CSharp12

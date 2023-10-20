@@ -27,22 +27,22 @@ public class NullSemanticsQuerySqliteTest
 
         AssertSql(
             """
-SELECT "e"."Id"
-FROM "Entities1" AS "e"
-WHERE "e"."StringA" IN (
-    SELECT "e0"."StringA"
-    FROM "Entities2" AS "e0"
-)
-""",
+            SELECT "e"."Id"
+            FROM "Entities1" AS "e"
+            WHERE "e"."StringA" IN (
+            SELECT "e0"."StringA"
+            FROM "Entities2" AS "e0"
+            )
+            """,
             //
             """
-SELECT "e"."Id"
-FROM "Entities1" AS "e"
-WHERE "e"."StringA" NOT IN (
-    SELECT "e0"."StringA"
-    FROM "Entities2" AS "e0"
-)
-"""
+            SELECT "e"."Id"
+            FROM "Entities1" AS "e"
+            WHERE "e"."StringA" NOT IN (
+            SELECT "e0"."StringA"
+            FROM "Entities2" AS "e0"
+            )
+            """
         );
     }
 
@@ -54,22 +54,22 @@ WHERE "e"."StringA" NOT IN (
 
         AssertSql(
             """
-SELECT "e"."Id"
-FROM "Entities1" AS "e"
-WHERE "e"."NullableStringA" IN (
-    SELECT "e0"."StringA"
-    FROM "Entities2" AS "e0"
-)
-""",
+            SELECT "e"."Id"
+            FROM "Entities1" AS "e"
+            WHERE "e"."NullableStringA" IN (
+            SELECT "e0"."StringA"
+            FROM "Entities2" AS "e0"
+            )
+            """,
             //
             """
-SELECT "e"."Id"
-FROM "Entities1" AS "e"
-WHERE "e"."NullableStringA" NOT IN (
-    SELECT "e0"."StringA"
-    FROM "Entities2" AS "e0"
-) OR "e"."NullableStringA" IS NULL
-"""
+            SELECT "e"."Id"
+            FROM "Entities1" AS "e"
+            WHERE "e"."NullableStringA" NOT IN (
+            SELECT "e0"."StringA"
+            FROM "Entities2" AS "e0"
+            ) OR "e"."NullableStringA" IS NULL
+            """
         );
     }
 
@@ -81,22 +81,22 @@ WHERE "e"."NullableStringA" NOT IN (
 
         AssertSql(
             """
-SELECT "e"."Id"
-FROM "Entities1" AS "e"
-WHERE "e"."StringA" IN (
-    SELECT "e0"."NullableStringA"
-    FROM "Entities2" AS "e0"
-)
-""",
+            SELECT "e"."Id"
+            FROM "Entities1" AS "e"
+            WHERE "e"."StringA" IN (
+            SELECT "e0"."NullableStringA"
+            FROM "Entities2" AS "e0"
+            )
+            """,
             //
             """
-SELECT "e"."Id"
-FROM "Entities1" AS "e"
-WHERE NOT (COALESCE("e"."StringA" IN (
-    SELECT "e0"."NullableStringA"
-    FROM "Entities2" AS "e0"
-), 0))
-"""
+            SELECT "e"."Id"
+            FROM "Entities1" AS "e"
+            WHERE NOT (COALESCE("e"."StringA" IN (
+            SELECT "e0"."NullableStringA"
+            FROM "Entities2" AS "e0"
+            ), 0))
+            """
         );
     }
 
@@ -108,22 +108,22 @@ WHERE NOT (COALESCE("e"."StringA" IN (
 
         AssertSql(
             """
-SELECT "e"."Id"
-FROM "Entities1" AS "e"
-WHERE EXISTS (
-    SELECT 1
-    FROM "Entities2" AS "e0"
-    WHERE "e0"."NullableStringA" = "e"."NullableStringA" OR ("e0"."NullableStringA" IS NULL AND "e"."NullableStringA" IS NULL))
-""",
+            SELECT "e"."Id"
+            FROM "Entities1" AS "e"
+            WHERE EXISTS (
+            SELECT 1
+            FROM "Entities2" AS "e0"
+            WHERE "e0"."NullableStringA" = "e"."NullableStringA" OR ("e0"."NullableStringA" IS NULL AND "e"."NullableStringA" IS NULL))
+            """,
             //
             """
-SELECT "e"."Id"
-FROM "Entities1" AS "e"
-WHERE NOT EXISTS (
-    SELECT 1
-    FROM "Entities2" AS "e0"
-    WHERE "e0"."NullableStringA" = "e"."NullableStringA" OR ("e0"."NullableStringA" IS NULL AND "e"."NullableStringA" IS NULL))
-"""
+            SELECT "e"."Id"
+            FROM "Entities1" AS "e"
+            WHERE NOT EXISTS (
+            SELECT 1
+            FROM "Entities2" AS "e0"
+            WHERE "e0"."NullableStringA" = "e"."NullableStringA" OR ("e0"."NullableStringA" IS NULL AND "e"."NullableStringA" IS NULL))
+            """
         );
     }
 
@@ -133,24 +133,24 @@ WHERE NOT EXISTS (
 
         AssertSql(
             """
-SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
-FROM "Entities1" AS "e"
-WHERE "e"."NullableBoolA" IS NOT NULL
-""",
+            SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
+            FROM "Entities1" AS "e"
+            WHERE "e"."NullableBoolA" IS NOT NULL
+            """,
             //
             """
-@__prm_0='False'
+            @__prm_0='False'
 
-SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
-FROM "Entities1" AS "e"
-WHERE @__prm_0 = ("e"."NullableBoolA" IS NOT NULL)
-""",
+            SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
+            FROM "Entities1" AS "e"
+            WHERE @__prm_0 = ("e"."NullableBoolA" IS NOT NULL)
+            """,
             //
             """
-SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
-FROM "Entities1" AS "e"
-WHERE "e"."BoolB" = ("e"."NullableBoolA" IS NOT NULL)
-"""
+            SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
+            FROM "Entities1" AS "e"
+            WHERE "e"."BoolB" = ("e"."NullableBoolA" IS NOT NULL)
+            """
         );
     }
 
@@ -160,18 +160,18 @@ WHERE "e"."BoolB" = ("e"."NullableBoolA" IS NOT NULL)
 
         AssertSql(
             """
-SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
-FROM "Entities1" AS "e"
-WHERE "e"."NullableBoolA" IS NULL
-""",
+            SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
+            FROM "Entities1" AS "e"
+            WHERE "e"."NullableBoolA" IS NULL
+            """,
             //
             """
-@__prm_0='False'
+            @__prm_0='False'
 
-SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
-FROM "Entities1" AS "e"
-WHERE @__prm_0 = ("e"."NullableBoolA" IS NOT NULL)
-"""
+            SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
+            FROM "Entities1" AS "e"
+            WHERE @__prm_0 = ("e"."NullableBoolA" IS NOT NULL)
+            """
         );
     }
 
@@ -181,24 +181,24 @@ WHERE @__prm_0 = ("e"."NullableBoolA" IS NOT NULL)
 
         AssertSql(
             """
-SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
-FROM "Entities1" AS "e"
-WHERE "e"."NullableBoolA" IS NULL
-""",
+            SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
+            FROM "Entities1" AS "e"
+            WHERE "e"."NullableBoolA" IS NULL
+            """,
             //
             """
-@__prm_0='False'
+            @__prm_0='False'
 
-SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
-FROM "Entities1" AS "e"
-WHERE @__prm_0 <> ("e"."NullableBoolA" IS NOT NULL)
-""",
+            SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
+            FROM "Entities1" AS "e"
+            WHERE @__prm_0 <> ("e"."NullableBoolA" IS NOT NULL)
+            """,
             //
             """
-SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
-FROM "Entities1" AS "e"
-WHERE "e"."BoolB" <> ("e"."NullableBoolA" IS NOT NULL)
-"""
+            SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
+            FROM "Entities1" AS "e"
+            WHERE "e"."BoolB" <> ("e"."NullableBoolA" IS NOT NULL)
+            """
         );
     }
 
@@ -208,24 +208,24 @@ WHERE "e"."BoolB" <> ("e"."NullableBoolA" IS NOT NULL)
 
         AssertSql(
             """
-SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
-FROM "Entities1" AS "e"
-WHERE "e"."NullableIntA" IS NULL
-""",
+            SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
+            FROM "Entities1" AS "e"
+            WHERE "e"."NullableIntA" IS NULL
+            """,
             //
             """
-@__prm_0='False'
+            @__prm_0='False'
 
-SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
-FROM "Entities1" AS "e"
-WHERE @__prm_0 <> ("e"."NullableIntA" IS NOT NULL)
-""",
+            SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
+            FROM "Entities1" AS "e"
+            WHERE @__prm_0 <> ("e"."NullableIntA" IS NOT NULL)
+            """,
             //
             """
-SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
-FROM "Entities1" AS "e"
-WHERE "e"."BoolB" <> ("e"."NullableIntA" IS NOT NULL)
-"""
+            SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
+            FROM "Entities1" AS "e"
+            WHERE "e"."BoolB" <> ("e"."NullableIntA" IS NOT NULL)
+            """
         );
     }
 
@@ -235,18 +235,18 @@ WHERE "e"."BoolB" <> ("e"."NullableIntA" IS NOT NULL)
 
         AssertSql(
             """
-SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
-FROM "Entities1" AS "e"
-WHERE "e"."NullableBoolA" IS NOT NULL
-""",
+            SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
+            FROM "Entities1" AS "e"
+            WHERE "e"."NullableBoolA" IS NOT NULL
+            """,
             //
             """
-@__prm_0='False'
+            @__prm_0='False'
 
-SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
-FROM "Entities1" AS "e"
-WHERE @__prm_0 <> ("e"."NullableBoolA" IS NOT NULL)
-"""
+            SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
+            FROM "Entities1" AS "e"
+            WHERE @__prm_0 <> ("e"."NullableBoolA" IS NOT NULL)
+            """
         );
     }
 
@@ -256,21 +256,21 @@ WHERE @__prm_0 <> ("e"."NullableBoolA" IS NOT NULL)
 
         AssertSql(
             """
-SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
-FROM "Entities1" AS "e"
-""",
+            SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
+            FROM "Entities1" AS "e"
+            """,
             //
             """
-SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
-FROM "Entities1" AS "e"
-WHERE 0
-""",
+            SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
+            FROM "Entities1" AS "e"
+            WHERE 0
+            """,
             //
             """
-SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
-FROM "Entities1" AS "e"
-WHERE "e"."BoolB" | ("e"."NullableBoolA" IS NOT NULL)
-"""
+            SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
+            FROM "Entities1" AS "e"
+            WHERE "e"."BoolB" | ("e"."NullableBoolA" IS NOT NULL)
+            """
         );
     }
 
@@ -280,16 +280,16 @@ WHERE "e"."BoolB" | ("e"."NullableBoolA" IS NOT NULL)
 
         AssertSql(
             """
-SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
-FROM "Entities1" AS "e"
-WHERE ("e"."IntA" = "e"."IntB") <> ("e"."NullableBoolA" IS NOT NULL)
-""",
+            SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
+            FROM "Entities1" AS "e"
+            WHERE ("e"."IntA" = "e"."IntB") <> ("e"."NullableBoolA" IS NOT NULL)
+            """,
             //
             """
-SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
-FROM "Entities1" AS "e"
-WHERE ("e"."IntA" <> "e"."IntB") = ("e"."NullableBoolA" IS NOT NULL)
-"""
+            SELECT "e"."Id", "e"."BoolA", "e"."BoolB", "e"."BoolC", "e"."IntA", "e"."IntB", "e"."IntC", "e"."NullableBoolA", "e"."NullableBoolB", "e"."NullableBoolC", "e"."NullableIntA", "e"."NullableIntB", "e"."NullableIntC", "e"."NullableStringA", "e"."NullableStringB", "e"."NullableStringC", "e"."StringA", "e"."StringB", "e"."StringC"
+            FROM "Entities1" AS "e"
+            WHERE ("e"."IntA" <> "e"."IntB") = ("e"."NullableBoolA" IS NOT NULL)
+            """
         );
     }
 

@@ -78,9 +78,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          $$
-                """
+                    var q = from x in y
+                    $$
+                    """
                 )
             );
         }
@@ -91,10 +91,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var v = from x in y
-                          where x > y
-                          $$
-                """
+                    var v = from x in y
+                    where x > y
+                    $$
+                    """
                 )
             );
         }
@@ -105,10 +105,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var v = from x in y
-                          group x by y into g
-                          $$
-                """
+                    var v = from x in y
+                    group x by y into g
+                    $$
+                    """
                 )
             );
         }
@@ -125,10 +125,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          $$
-                          from z in w
-                """
+                    var q = from x in y
+                    $$
+                    from z in w
+                    """
                 )
             );
         }
@@ -139,10 +139,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          where $$
-                          from z in w
-                """
+                    var q = from x in y
+                    where $$
+                    from z in w
+                    """
                 )
             );
         }
@@ -237,7 +237,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                    void D() $$
+                void D() $$
                 """
             );
         }
@@ -248,7 +248,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    void D<T>() $$
+                void D<T>() $$
                 """
             );
         }
@@ -259,7 +259,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    void D<T>() where T : class $$
+                void D<T>() where T : class $$
                 """
             );
         }
@@ -270,7 +270,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    void D<T>() where T : struct $$
+                void D<T>() where T : struct $$
                 """
             );
         }
@@ -281,7 +281,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    void D<T>() where T : new() $$
+                void D<T>() where T : new() $$
                 """
             );
         }
@@ -292,7 +292,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    void D<T>() where T : IList<T> $$
+                void D<T>() where T : IList<T> $$
                 """
             );
         }
@@ -352,7 +352,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 public class C
                 {
-                    void M<T> where T : System.$$
+                void M<T> where T : System.$$
                 }
                 """
             );
@@ -377,7 +377,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 public class C
                 {
-                    void M<T> where T : System.Exception $$
+                void M<T> where T : System.Exception $$
                 }
                 """
             );
@@ -402,7 +402,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 public class C
                 {
-                    void M<T> where T : global::$$
+                void M<T> where T : global::$$
                 }
                 """
             );
@@ -427,7 +427,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 public class C
                 {
-                    void M<T> where T : global::System.Exception $$
+                void M<T> where T : global::System.Exception $$
                 }
                 """
             );
@@ -452,7 +452,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 public class C
                 {
-                    void M<T> where T : List<$$
+                void M<T> where T : List<$$
                 }
                 """
             );
@@ -477,7 +477,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 public class C
                 {
-                    void M<T> where T : List<int> $$
+                void M<T> where T : List<int> $$
                 }
                 """
             );
@@ -502,7 +502,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 public class C
                 {
-                    void M<T> where T : Dictionary<int, $$
+                void M<T> where T : Dictionary<int, $$
                 }
                 """
             );
@@ -527,7 +527,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 public class C
                 {
-                    void M<T> where T : Dictionary<int, string> $$
+                void M<T> where T : Dictionary<int, string> $$
                 }
                 """
             );
@@ -552,7 +552,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 public class C
                 {
-                    void M<T> where T : List<List<int>$$
+                void M<T> where T : List<List<int>$$
                 }
                 """
             );
@@ -577,7 +577,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 public class C
                 {
-                    void M<T> where T : List<List<int>> $$
+                void M<T> where T : List<List<int>> $$
                 }
                 """
             );
@@ -602,7 +602,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 public class C
                 {
-                    void M<T> where T : List<(int, $$
+                void M<T> where T : List<(int, $$
                 }
                 """
             );
@@ -627,7 +627,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 public class C
                 {
-                    void M<T> where T : List<(int, string)$$
+                void M<T> where T : List<(int, string)$$
                 }
                 """
             );
@@ -652,7 +652,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 public class C
                 {
-                    void M<T> where T : List<(int, string)> $$
+                void M<T> where T : List<(int, string)> $$
                 }
                 """
             );

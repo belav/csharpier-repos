@@ -26,24 +26,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseExp
         public async Task TestIntLocalDeclaration()
         {
             var code = """
-                class C
-                {
-                    static void Main()
-                    {
-                        int[||] i = 0;
-                    }
-                }
-                """;
+            class C
+            {
+            static void Main()
+            {
+            int[||] i = 0;
+            }
+            }
+            """;
 
             var expected = """
-                class C
-                {
-                    static void Main()
-                    {
-                        var i = 0;
-                    }
-                }
-                """;
+            class C
+            {
+            static void Main()
+            {
+            var i = 0;
+            }
+            }
+            """;
 
             await TestInRegularAndScriptWhenDiagnosticNotAppliedAsync(code, expected);
         }
@@ -52,24 +52,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseExp
         public async Task TestSelection1()
         {
             var code = """
-                class C
-                {
-                    static void Main()
-                    {
-                        [|int i = 0;|]
-                    }
-                }
-                """;
+            class C
+            {
+            static void Main()
+            {
+            [|int i = 0;|]
+            }
+            }
+            """;
 
             var expected = """
-                class C
-                {
-                    static void Main()
-                    {
-                        var i = 0;
-                    }
-                }
-                """;
+            class C
+            {
+            static void Main()
+            {
+            var i = 0;
+            }
+            }
+            """;
 
             await TestInRegularAndScriptWhenDiagnosticNotAppliedAsync(code, expected);
         }
@@ -78,24 +78,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseExp
         public async Task TestSelection2()
         {
             var code = """
-                class C
-                {
-                    static void Main()
-                    {
-                        [|int|] i = 0;
-                    }
-                }
-                """;
+            class C
+            {
+            static void Main()
+            {
+            [|int|] i = 0;
+            }
+            }
+            """;
 
             var expected = """
-                class C
-                {
-                    static void Main()
-                    {
-                        var i = 0;
-                    }
-                }
-                """;
+            class C
+            {
+            static void Main()
+            {
+            var i = 0;
+            }
+            }
+            """;
 
             await TestInRegularAndScriptWhenDiagnosticNotAppliedAsync(code, expected);
         }
@@ -105,24 +105,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseExp
         public async Task TestSelectionNotType()
         {
             var code = """
-                class C
-                {
-                    static void Main()
-                    {
-                        int [|i|] = 0;
-                    }
-                }
-                """;
+            class C
+            {
+            static void Main()
+            {
+            int [|i|] = 0;
+            }
+            }
+            """;
 
             var expected = """
-                class C
-                {
-                    static void Main()
-                    {
-                        var i = 0;
-                    }
-                }
-                """;
+            class C
+            {
+            static void Main()
+            {
+            var i = 0;
+            }
+            }
+            """;
 
             await TestInRegularAndScriptWhenDiagnosticNotAppliedAsync(code, expected);
         }
@@ -131,24 +131,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseExp
         public async Task TestForeachInsideLocalDeclaration()
         {
             var code = """
-                class C
-                {
-                    static void Main()
-                    {
-                        System.Action notThisLocal = () => { foreach (int[||] i in new int[0]) { } };
-                    }
-                }
-                """;
+            class C
+            {
+            static void Main()
+            {
+            System.Action notThisLocal = () => { foreach (int[||] i in new int[0]) { } };
+            }
+            }
+            """;
 
             var expected = """
-                class C
-                {
-                    static void Main()
-                    {
-                        System.Action notThisLocal = () => { foreach (var[||] i in new int[0]) { } };
-                    }
-                }
-                """;
+            class C
+            {
+            static void Main()
+            {
+            System.Action notThisLocal = () => { foreach (var[||] i in new int[0]) { } };
+            }
+            }
+            """;
 
             await TestInRegularAndScriptWhenDiagnosticNotAppliedAsync(code, expected);
         }
@@ -157,14 +157,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseExp
         public async Task TestInIntPattern()
         {
             var code = """
-                class C
-                {
-                    static void Main()
-                    {
-                        _ = 0 is int[||] i;
-                    }
-                }
-                """;
+            class C
+            {
+            static void Main()
+            {
+            _ = 0 is int[||] i;
+            }
+            }
+            """;
 
             await TestMissingInRegularAndScriptAsync(code);
         }
@@ -173,14 +173,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseExp
         public async Task TestIntLocalDeclaration_Multiple()
         {
             var code = """
-                class C
-                {
-                    static void Main()
-                    {
-                        int[||] i = 0, j = j;
-                    }
-                }
-                """;
+            class C
+            {
+            static void Main()
+            {
+            int[||] i = 0, j = j;
+            }
+            }
+            """;
 
             await TestMissingInRegularAndScriptAsync(code);
         }
@@ -189,14 +189,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseExp
         public async Task TestIntLocalDeclaration_NoInitializer()
         {
             var code = """
-                class C
-                {
-                    static void Main()
-                    {
-                        int[||] i;
-                    }
-                }
-                """;
+            class C
+            {
+            static void Main()
+            {
+            int[||] i;
+            }
+            }
+            """;
 
             await TestMissingInRegularAndScriptAsync(code);
         }
@@ -205,24 +205,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseExp
         public async Task TestIntForLoop()
         {
             var code = """
-                class C
-                {
-                    static void Main()
-                    {
-                        for (int[||] i = 0;;) { }
-                    }
-                }
-                """;
+            class C
+            {
+            static void Main()
+            {
+            for (int[||] i = 0;;) { }
+            }
+            }
+            """;
 
             var expected = """
-                class C
-                {
-                    static void Main()
-                    {
-                        for (var i = 0;;) { }
-                    }
-                }
-                """;
+            class C
+            {
+            static void Main()
+            {
+            for (var i = 0;;) { }
+            }
+            }
+            """;
 
             await TestInRegularAndScriptWhenDiagnosticNotAppliedAsync(code, expected);
         }
@@ -231,24 +231,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseExp
         public async Task TestInDispose()
         {
             var code = """
-                class C : System.IDisposable
-                {
-                    static void Main()
-                    {
-                        using (C[||] c = new C()) { }
-                    }
-                }
-                """;
+            class C : System.IDisposable
+            {
+            static void Main()
+            {
+            using (C[||] c = new C()) { }
+            }
+            }
+            """;
 
             var expected = """
-                class C : System.IDisposable
-                {
-                    static void Main()
-                    {
-                        using (var c = new C()) { }
-                    }
-                }
-                """;
+            class C : System.IDisposable
+            {
+            static void Main()
+            {
+            using (var c = new C()) { }
+            }
+            }
+            """;
 
             await TestInRegularAndScriptWhenDiagnosticNotAppliedAsync(code, expected);
         }
@@ -257,24 +257,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseExp
         public async Task TestIntForeachLoop()
         {
             var code = """
-                class C
-                {
-                    static void Main()
-                    {
-                        foreach (int[||] i in new[] { 0 }) { }
-                    }
-                }
-                """;
+            class C
+            {
+            static void Main()
+            {
+            foreach (int[||] i in new[] { 0 }) { }
+            }
+            }
+            """;
 
             var expected = """
-                class C
-                {
-                    static void Main()
-                    {
-                        foreach (var i in new[] { 0 }) { }
-                    }
-                }
-                """;
+            class C
+            {
+            static void Main()
+            {
+            foreach (var i in new[] { 0 }) { }
+            }
+            }
+            """;
 
             await TestInRegularAndScriptWhenDiagnosticNotAppliedAsync(code, expected);
         }
@@ -283,24 +283,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseExp
         public async Task TestIntForeachLoop2()
         {
             var code = """
-                class C
-                {
-                    static void Main()
-                    {
-                        foreach ([|int|] i in new[] { 0 }) { }
-                    }
-                }
-                """;
+            class C
+            {
+            static void Main()
+            {
+            foreach ([|int|] i in new[] { 0 }) { }
+            }
+            }
+            """;
 
             var expected = """
-                class C
-                {
-                    static void Main()
-                    {
-                        foreach (var i in new[] { 0 }) { }
-                    }
-                }
-                """;
+            class C
+            {
+            static void Main()
+            {
+            foreach (var i in new[] { 0 }) { }
+            }
+            }
+            """;
 
             await TestInRegularAndScriptWhenDiagnosticNotAppliedAsync(code, expected);
         }
@@ -309,24 +309,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseExp
         public async Task TestIntForeachLoop3()
         {
             var code = """
-                class C
-                {
-                    static void Main()
-                    {
-                        foreach (int [|i|] in new[] { 0 }) { }
-                    }
-                }
-                """;
+            class C
+            {
+            static void Main()
+            {
+            foreach (int [|i|] in new[] { 0 }) { }
+            }
+            }
+            """;
 
             var expected = """
-                class C
-                {
-                    static void Main()
-                    {
-                        foreach (var i in new[] { 0 }) { }
-                    }
-                }
-                """;
+            class C
+            {
+            static void Main()
+            {
+            foreach (var i in new[] { 0 }) { }
+            }
+            }
+            """;
 
             await TestInRegularAndScriptWhenDiagnosticNotAppliedAsync(code, expected);
         }
@@ -335,24 +335,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseExp
         public async Task TestIntForeachLoop4()
         {
             var code = """
-                class C
-                {
-                    static void Main()
-                    {
-                        foreach ([|object|] i in new[] { new object() }) { }
-                    }
-                }
-                """;
+            class C
+            {
+            static void Main()
+            {
+            foreach ([|object|] i in new[] { new object() }) { }
+            }
+            }
+            """;
 
             var expected = """
-                class C
-                {
-                    static void Main()
-                    {
-                        foreach (var i in new[] { new object() }) { }
-                    }
-                }
-                """;
+            class C
+            {
+            static void Main()
+            {
+            foreach (var i in new[] { new object() }) { }
+            }
+            }
+            """;
 
             await TestInRegularAndScriptWhenDiagnosticNotAppliedAsync(code, expected);
         }
@@ -361,24 +361,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseExp
         public async Task TestIntDeconstruction()
         {
             var code = """
-                class C
-                {
-                    static void Main()
-                    {
-                        (int[||] i, var j) = (0, 1);
-                    }
-                }
-                """;
+            class C
+            {
+            static void Main()
+            {
+            (int[||] i, var j) = (0, 1);
+            }
+            }
+            """;
 
             var expected = """
-                class C
-                {
-                    static void Main()
-                    {
-                        (var i, var j) = (0, 1);
-                    }
-                }
-                """;
+            class C
+            {
+            static void Main()
+            {
+            (var i, var j) = (0, 1);
+            }
+            }
+            """;
 
             await TestInRegularAndScriptWhenDiagnosticNotAppliedAsync(code, expected);
         }
@@ -387,24 +387,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseExp
         public async Task TestIntDeconstruction2()
         {
             var code = """
-                class C
-                {
-                    static void Main()
-                    {
-                        (int[||] i, var j) = (0, 1);
-                    }
-                }
-                """;
+            class C
+            {
+            static void Main()
+            {
+            (int[||] i, var j) = (0, 1);
+            }
+            }
+            """;
 
             var expected = """
-                class C
-                {
-                    static void Main()
-                    {
-                        (var i, var j) = (0, 1);
-                    }
-                }
-                """;
+            class C
+            {
+            static void Main()
+            {
+            (var i, var j) = (0, 1);
+            }
+            }
+            """;
 
             await TestInRegularAndScriptWhenDiagnosticNotAppliedAsync(code, expected);
         }
@@ -413,20 +413,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseExp
         public async Task NoSuggestionOnForeachCollectionExpression()
         {
             var code = """
-                using System;
-                using System.Collections.Generic;
+            using System;
+            using System.Collections.Generic;
 
-                class C
-                {
-                    static void Main(string[] args)
-                    {
-                        foreach (string arg in [|args|])
-                        {
+            class C
+            {
+            static void Main(string[] args)
+            {
+            foreach (string arg in [|args|])
+            {
 
-                        }
-                    }
-                }
-                """;
+            }
+            }
+            }
+            """;
 
             // We never want to get offered here under any circumstances.
             await TestMissingInRegularAndScriptAsync(code);
@@ -436,17 +436,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseExp
         public async Task NoSuggestionWithinAnExpression()
         {
             var code = """
-                using System;
-                using System;
+            using System;
+            using System;
 
-                class C
-                {
-                    static void Main(string[] args)
-                    {
-                        int a = 40 [||]+ 2;
-                    }
-                }
-                """;
+            class C
+            {
+            static void Main(string[] args)
+            {
+            int a = 40 [||]+ 2;
+            }
+            }
+            """;
 
             // We never want to get offered here under any circumstances.
             await TestMissingInRegularAndScriptAsync(code);
@@ -456,27 +456,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseExp
         public async Task TestRefLocal1()
         {
             var code = """
-                class C
-                {
-                    static void Main()
-                    {
-                        string str = "";
+            class C
+            {
+            static void Main()
+            {
+            string str = "";
 
-                        [||]ref string rStr1 = ref str;
-                    }
-                }
-                """;
+            [||]ref string rStr1 = ref str;
+            }
+            }
+            """;
             var expected = """
-                class C
-                {
-                    static void Main()
-                    {
-                        string str = "";
+            class C
+            {
+            static void Main()
+            {
+            string str = "";
 
-                        ref var rStr1 = ref str;
-                    }
-                }
-                """;
+            ref var rStr1 = ref str;
+            }
+            }
+            """;
 
             await TestInRegularAndScriptWhenDiagnosticNotAppliedAsync(code, expected);
         }
@@ -485,28 +485,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseExp
         public async Task TestRefLocal2()
         {
             var code = """
-                class C
-                {
-                    static void Main()
-                    {
-                        string str = "";
+            class C
+            {
+            static void Main()
+            {
+            string str = "";
 
-                        ref [||]string rStr1 = ref str;
-                    }
-                }
-                """;
+            ref [||]string rStr1 = ref str;
+            }
+            }
+            """;
 
             var expected = """
-                class C
-                {
-                    static void Main()
-                    {
-                        string str = "";
+            class C
+            {
+            static void Main()
+            {
+            string str = "";
 
-                        ref var rStr1 = ref str;
-                    }
-                }
-                """;
+            ref var rStr1 = ref str;
+            }
+            }
+            """;
 
             await TestInRegularAndScriptWhenDiagnosticNotAppliedAsync(code, expected);
         }
@@ -515,28 +515,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseExp
         public async Task TestRefLocal3()
         {
             var code = """
-                class C
-                {
-                    static void Main()
-                    {
-                        string str = "";
+            class C
+            {
+            static void Main()
+            {
+            string str = "";
 
-                        ref string [||]rStr1 = ref str;
-                    }
-                }
-                """;
+            ref string [||]rStr1 = ref str;
+            }
+            }
+            """;
 
             var expected = """
-                class C
-                {
-                    static void Main()
-                    {
-                        string str = "";
+            class C
+            {
+            static void Main()
+            {
+            string str = "";
 
-                        ref var rStr1 = ref str;
-                    }
-                }
-                """;
+            ref var rStr1 = ref str;
+            }
+            }
+            """;
 
             await TestInRegularAndScriptWhenDiagnosticNotAppliedAsync(code, expected);
         }
@@ -545,28 +545,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseExp
         public async Task TestRefReadonlyLocal1()
         {
             var code = """
-                class C
-                {
-                    static void Main()
-                    {
-                        string str = "";
+            class C
+            {
+            static void Main()
+            {
+            string str = "";
 
-                        ref readonly [||]string rStr1 = ref str;
-                    }
-                }
-                """;
+            ref readonly [||]string rStr1 = ref str;
+            }
+            }
+            """;
 
             var expected = """
-                class C
-                {
-                    static void Main()
-                    {
-                        string str = "";
+            class C
+            {
+            static void Main()
+            {
+            string str = "";
 
-                        ref readonly var rStr1 = ref str;
-                    }
-                }
-                """;
+            ref readonly var rStr1 = ref str;
+            }
+            }
+            """;
 
             await TestInRegularAndScriptWhenDiagnosticNotAppliedAsync(code, expected);
         }
@@ -575,28 +575,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseExp
         public async Task TestRefReadonlyLocal2()
         {
             var code = """
-                class C
-                {
-                    static void Main()
-                    {
-                        string str = "";
+            class C
+            {
+            static void Main()
+            {
+            string str = "";
 
-                        ref readonly string[||] rStr1 = ref str;
-                    }
-                }
-                """;
+            ref readonly string[||] rStr1 = ref str;
+            }
+            }
+            """;
 
             var expected = """
-                class C
-                {
-                    static void Main()
-                    {
-                        string str = "";
+            class C
+            {
+            static void Main()
+            {
+            string str = "";
 
-                        ref readonly var rStr1 = ref str;
-                    }
-                }
-                """;
+            ref readonly var rStr1 = ref str;
+            }
+            }
+            """;
 
             await TestInRegularAndScriptWhenDiagnosticNotAppliedAsync(code, expected);
         }

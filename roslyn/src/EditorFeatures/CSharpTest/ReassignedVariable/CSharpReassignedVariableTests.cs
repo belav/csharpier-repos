@@ -22,9 +22,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 """
                 class C
                 {
-                    void M(int p)
-                    {
-                    }
+                void M(int p)
+                {
+                }
                 }
                 """
             );
@@ -37,10 +37,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 """
                 class C
                 {
-                    void M(int [|p|])
-                    {
-                        [|p|] = 1;
-                    }
+                void M(int [|p|])
+                {
+                [|p|] = 1;
+                }
                 }
                 """
             );
@@ -54,11 +54,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M(int [|p|])
-                    {
-                        [|p|] = 1;
-                        Console.WriteLine([|p|]);
-                    }
+                void M(int [|p|])
+                {
+                [|p|] = 1;
+                Console.WriteLine([|p|]);
+                }
                 }
                 """
             );
@@ -72,11 +72,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M(int [|p|])
-                    {
-                        Console.WriteLine([|p|]);
-                        [|p|] = 1;
-                    }
+                void M(int [|p|])
+                {
+                Console.WriteLine([|p|]);
+                [|p|] = 1;
+                }
                 }
                 """
             );
@@ -90,11 +90,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M(int [|p|] = 1)
-                    {
-                        Console.WriteLine([|p|]);
-                        [|p|] = 1;
-                    }
+                void M(int [|p|] = 1)
+                {
+                Console.WriteLine([|p|]);
+                [|p|] = 1;
+                }
                 }
                 """
             );
@@ -108,7 +108,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M(int [|p|]) => Console.WriteLine([|p|]++);
+                void M(int [|p|]) => Console.WriteLine([|p|]++);
                 }
                 """
             );
@@ -122,10 +122,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M()
-                    {
-                        void Local(int [|p|])
-                            => Console.WriteLine([|p|]++);
+                void M()
+                {
+                void Local(int [|p|])
+                => Console.WriteLine([|p|]++);
                 }
                 """
             );
@@ -139,7 +139,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    int this[int [|p|]] => [|p|]++;
+                int this[int [|p|]] => [|p|]++;
                 }
                 """
             );
@@ -153,7 +153,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    int this[int [|p|]] { get => [|p|]++; }
+                int this[int [|p|]] { get => [|p|]++; }
                 }
                 """
             );
@@ -167,7 +167,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    int this[int [|p|]] { get { [|p|]++; } }
+                int this[int [|p|]] { get { [|p|]++; } }
                 }
                 """
             );
@@ -181,7 +181,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    int this[int [|p|]] { set => [|p|]++; }
+                int this[int [|p|]] { set => [|p|]++; }
                 }
                 """
             );
@@ -195,7 +195,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    int this[int [|p|]] { set { [|p|]++; } }
+                int this[int [|p|]] { set { [|p|]++; } }
                 }
                 """
             );
@@ -209,7 +209,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    int Goo { set => [|value|] = [|value|] + 1; }
+                int Goo { set => [|value|] = [|value|] + 1; }
                 }
                 """
             );
@@ -223,7 +223,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    int Goo { set { [|value|] = [|value|] + 1; } }
+                int Goo { set { [|value|] = [|value|] + 1; } }
                 }
                 """
             );
@@ -237,7 +237,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    event Action Goo { add { [|value|] = null; } remove { } }
+                event Action Goo { add { [|value|] = null; } remove { } }
                 }
                 """
             );
@@ -251,7 +251,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    event Action Goo { add { } remove { [|value|] = null; } }
+                event Action Goo { add { } remove { [|value|] = null; } }
                 }
                 """
             );
@@ -265,10 +265,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M()
-                    {
-                        Action<int> a = x => Console.WriteLine(x);
-                    }
+                void M()
+                {
+                Action<int> a = x => Console.WriteLine(x);
+                }
                 }
                 """
             );
@@ -282,10 +282,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M()
-                    {
-                        Action<int> a = [|x|] => Console.WriteLine([|x|]++);
-                    }
+                void M()
+                {
+                Action<int> a = [|x|] => Console.WriteLine([|x|]++);
+                }
                 }
                 """
             );
@@ -299,10 +299,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M()
-                    {
-                        Action<int> a = (int [|x|]) => Console.WriteLine([|x|]++);
-                    }
+                void M()
+                {
+                Action<int> a = (int [|x|]) => Console.WriteLine([|x|]++);
+                }
                 }
                 """
             );
@@ -316,16 +316,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M(bool b)
-                    {
-                        int p;
-                        if (b)
-                            p = 1;
-                        else
-                            p = 2;
+                void M(bool b)
+                {
+                int p;
+                if (b)
+                p = 1;
+                else
+                p = 2;
 
-                        Console.WriteLine(p);
-                    }
+                Console.WriteLine(p);
+                }
                 }
                 """
             );
@@ -339,17 +339,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M(bool b)
-                    {
-                        int [|p|];
-                        if (b)
-                            [|p|] = 1;
-                        else
-                            [|p|] = 2;
+                void M(bool b)
+                {
+                int [|p|];
+                if (b)
+                [|p|] = 1;
+                else
+                [|p|] = 2;
 
-                        [|p|] = 0;
-                        Console.WriteLine([|p|]);
-                    }
+                [|p|] = 0;
+                Console.WriteLine([|p|]);
+                }
                 }
                 """
             );
@@ -363,11 +363,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M()
-                    {
-                        if (0 is var [|p|]) [|p|] = 0;
-                        Console.WriteLine([|p|]);
-                    }
+                void M()
+                {
+                if (0 is var [|p|]) [|p|] = 0;
+                Console.WriteLine([|p|]);
+                }
                 }
                 """
             );
@@ -381,18 +381,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M()
-                    {
-                        if (0 is var [|p|])
-                        {
-                        }
-                        else
-                        {
-                             [|p|] = 0;
-                        }
+                void M()
+                {
+                if (0 is var [|p|])
+                {
+                }
+                else
+                {
+                [|p|] = 0;
+                }
 
-                        Console.WriteLine([|p|]);
-                    }
+                Console.WriteLine([|p|]);
+                }
                 }
                 """
             );
@@ -406,11 +406,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M()
-                    {
-                        if ((0, 1) is var ([|p|], _)) [|p|] = 0;
-                        Console.WriteLine([|p|]);
-                    }
+                void M()
+                {
+                if ((0, 1) is var ([|p|], _)) [|p|] = 0;
+                Console.WriteLine([|p|]);
+                }
                 }
                 """
             );
@@ -424,14 +424,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M()
-                    {
-                        M2(out var [|p|]);
-                        [|p|] = 0;
-                        Console.WriteLine([|p|]);
-                    }
+                void M()
+                {
+                M2(out var [|p|]);
+                [|p|] = 0;
+                Console.WriteLine([|p|]);
+                }
 
-                    void M2(out int p) => p = 0;
+                void M2(out int p) => p = 0;
                 }
                 """
             );
@@ -445,14 +445,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M()
-                    {
-                        int [|p|] = 0;
-                        M2(out [|p|]);
-                        Console.WriteLine([|p|]);
-                    }
+                void M()
+                {
+                int [|p|] = 0;
+                M2(out [|p|]);
+                Console.WriteLine([|p|]);
+                }
 
-                    void M2(out int p) => p = 0;
+                void M2(out int p) => p = 0;
                 }
                 """
             );
@@ -466,14 +466,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M()
-                    {
-                        int p;
-                        M2(out p);
-                        Console.WriteLine(p);
-                    }
+                void M()
+                {
+                int p;
+                M2(out p);
+                Console.WriteLine(p);
+                }
 
-                    void M2(out int p) => p = 0;
+                void M2(out int p) => p = 0;
                 }
                 """
             );
@@ -487,12 +487,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M(out int [|p|])
-                    {
-                        [|p|] = 0;
-                        [|p|] = 1;
-                        Console.WriteLine([|p|]);
-                    }
+                void M(out int [|p|])
+                {
+                [|p|] = 0;
+                [|p|] = 1;
+                Console.WriteLine([|p|]);
+                }
                 }
                 """
             );
@@ -506,11 +506,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M(out int p)
-                    {
-                        p = ref p;
-                        Console.WriteLine(p);
-                    }
+                void M(out int p)
+                {
+                p = ref p;
+                Console.WriteLine(p);
+                }
                 }
                 """
             );
@@ -524,12 +524,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M(ref int [|p|])
-                    {
-                        [|p|] = 0;
-                        [|p|] = 1;
-                        Console.WriteLine([|p|]);
-                    }
+                void M(ref int [|p|])
+                {
+                [|p|] = 0;
+                [|p|] = 1;
+                Console.WriteLine([|p|]);
+                }
                 }
                 """
             );
@@ -543,11 +543,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M(ref int [|p|])
-                    {
-                        [|p|] = ref [|p|];
-                        Console.WriteLine([|p|]);
-                    }
+                void M(ref int [|p|])
+                {
+                [|p|] = ref [|p|];
+                Console.WriteLine([|p|]);
+                }
                 }
                 """
             );
@@ -561,13 +561,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M(ref int [|p|])
-                    {
-                        ref var [|local|] = ref [|p|];
-                        [|local|] = 0;
-                        [|local|] = 1;
-                        Console.WriteLine([|local|]);
-                    }
+                void M(ref int [|p|])
+                {
+                ref var [|local|] = ref [|p|];
+                [|local|] = 0;
+                [|local|] = 1;
+                Console.WriteLine([|local|]);
+                }
                 }
                 """
             );
@@ -581,13 +581,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M(ref int [|p|])
-                    {
-                        scoped ref var [|local|] = ref [|p|];
-                        [|local|] = 0;
-                        [|local|] = 1;
-                        Console.WriteLine([|local|]);
-                    }
+                void M(ref int [|p|])
+                {
+                scoped ref var [|local|] = ref [|p|];
+                [|local|] = 0;
+                [|local|] = 1;
+                Console.WriteLine([|local|]);
+                }
                 }
                 """
             );
@@ -601,14 +601,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M(ref int [|p|])
-                    {
-                        // p is statically detected as overwritten (even though it is not written at runtime)
-                        // due to a limitation in alias analysis.
-                        ref var [|local|] = ref [|p|];
-                        [|local|] = ref [|p|];
-                        Console.WriteLine([|local|]);
-                    }
+                void M(ref int [|p|])
+                {
+                // p is statically detected as overwritten (even though it is not written at runtime)
+                // due to a limitation in alias analysis.
+                ref var [|local|] = ref [|p|];
+                [|local|] = ref [|p|];
+                Console.WriteLine([|local|]);
+                }
                 }
                 """
             );
@@ -622,11 +622,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    unsafe void M(int* p)
-                    {
-                        *p = 4;
-                        Console.WriteLine((IntPtr)p);
-                    }
+                unsafe void M(int* p)
+                {
+                *p = 4;
+                Console.WriteLine((IntPtr)p);
+                }
                 }
                 """
             );
@@ -640,11 +640,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    unsafe void M(int* [|p|])
-                    {
-                        [|p|] = null;
-                        Console.WriteLine((IntPtr)[|p|]);
-                    }
+                unsafe void M(int* [|p|])
+                {
+                [|p|] = null;
+                Console.WriteLine((IntPtr)[|p|]);
+                }
                 }
                 """
             );
@@ -658,14 +658,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M()
-                    {
-                        int [|p|] = 0;
-                        M2(ref [|p|]);
-                        Console.WriteLine([|p|]);
-                    }
+                void M()
+                {
+                int [|p|] = 0;
+                M2(ref [|p|]);
+                Console.WriteLine([|p|]);
+                }
 
-                    void M2(ref int p) { }
+                void M2(ref int p) { }
                 }
                 """
             );
@@ -680,14 +680,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System.Threading;
                 class C
                 {
-                    void M()
-                    {
-                        // p is statically detected as overwritten (even though it is not written at runtime)
-                        // due to a limitation in ref analysis.
-                        int [|p|] = 0;
-                        Volatile.Read(ref [|p|]);
-                        Console.WriteLine([|p|]);
-                    }
+                void M()
+                {
+                // p is statically detected as overwritten (even though it is not written at runtime)
+                // due to a limitation in ref analysis.
+                int [|p|] = 0;
+                Volatile.Read(ref [|p|]);
+                Console.WriteLine([|p|]);
+                }
                 }
                 """
             );
@@ -701,14 +701,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M()
-                    {
-                        int p;
-                        M2(ref p);
-                        Console.WriteLine(p);
-                    }
+                void M()
+                {
+                int p;
+                M2(ref p);
+                Console.WriteLine(p);
+                }
 
-                    void M2(ref int p) { }
+                void M2(ref int p) { }
                 }
                 """
             );
@@ -722,12 +722,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M()
-                    {
-                        int [|p|] = 0;
-                        ref int refP = ref [|p|];
-                        Console.WriteLine([|p|]);
-                    }
+                void M()
+                {
+                int [|p|] = 0;
+                ref int refP = ref [|p|];
+                Console.WriteLine([|p|]);
+                }
                 }
                 """
             );
@@ -741,12 +741,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M()
-                    {
-                        int p = 0;
-                        ref readonly int refP = ref p;
-                        Console.WriteLine(p);
-                    }
+                void M()
+                {
+                int p = 0;
+                ref readonly int refP = ref p;
+                Console.WriteLine(p);
+                }
                 }
                 """
             );
@@ -760,12 +760,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M()
-                    {
-                        int p = 0;
-                        scoped ref readonly int refP = ref p;
-                        Console.WriteLine(p);
-                    }
+                void M()
+                {
+                int p = 0;
+                scoped ref readonly int refP = ref p;
+                Console.WriteLine(p);
+                }
                 }
                 """
             );
@@ -779,12 +779,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M()
-                    {
-                        int p = 0;
-                        ref readonly int refP = ref p!;
-                        Console.WriteLine(p);
-                    }
+                void M()
+                {
+                int p = 0;
+                ref readonly int refP = ref p!;
+                Console.WriteLine(p);
+                }
                 }
                 """
             );
@@ -798,12 +798,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M1()
-                    {
-                        int p = 0;
-                        scoped ref readonly int refP = ref p!;
-                        Console.WriteLine(p);
-                    }
+                void M1()
+                {
+                int p = 0;
+                scoped ref readonly int refP = ref p!;
+                Console.WriteLine(p);
+                }
                 }
                 """
             );
@@ -817,12 +817,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    unsafe void M()
-                    {
-                        int [|p|] = 0;
-                        int* pointer = &[|p|];
-                        Console.WriteLine([|p|]);
-                    }
+                unsafe void M()
+                {
+                int [|p|] = 0;
+                int* pointer = &[|p|];
+                Console.WriteLine([|p|]);
+                }
                 }
                 """
             );
@@ -836,14 +836,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 static class C
                 {
-                    void M()
-                    {
-                        int [|p|] = 0;
-                        [|p|].M2();
-                        Console.WriteLine([|p|]);
-                    }
+                void M()
+                {
+                int [|p|] = 0;
+                [|p|].M2();
+                Console.WriteLine([|p|]);
+                }
 
-                    static void M2(this ref int p) { }
+                static void M2(this ref int p) { }
                 }
                 """
             );
@@ -857,15 +857,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 struct S
                 {
-                    int f;
+                int f;
 
-                    void M(S p)
-                    {
-                        p.MutatingMethod();
-                        Console.WriteLine(p);
-                    }
+                void M(S p)
+                {
+                p.MutatingMethod();
+                Console.WriteLine(p);
+                }
 
-                    void MutatingMethod() => this = default;
+                void MutatingMethod() => this = default;
                 }
                 """
             );
@@ -879,14 +879,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M()
-                    {
-                        var ([|x|], y) = Goo();
-                        [|x|] = 0;
-                        Console.WriteLine([|x|]);
-                    }
+                void M()
+                {
+                var ([|x|], y) = Goo();
+                [|x|] = 0;
+                Console.WriteLine([|x|]);
+                }
 
-                    (int x, int y) Goo() => default;
+                (int x, int y) Goo() => default;
                 }
                 """
             );
@@ -900,14 +900,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M()
-                    {
-                        var [|x|] = 0;
-                        ([|x|], _) = Goo();
-                        Console.WriteLine([|x|]);
-                    }
+                void M()
+                {
+                var [|x|] = 0;
+                ([|x|], _) = Goo();
+                Console.WriteLine([|x|]);
+                }
 
-                    (int x, int y) Goo() => default;
+                (int x, int y) Goo() => default;
                 }
                 """
             );
@@ -967,14 +967,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 """
                 class C
                 {
-                    public C(int [|x|])
-                        : this([|x|]++, true)
-                    {
-                    }
+                public C(int [|x|])
+                : this([|x|]++, true)
+                {
+                }
 
-                    public C(int x, bool b)
-                    {
-                    }
+                public C(int x, bool b)
+                {
+                }
                 }
                 """
             );
@@ -987,14 +987,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 """
                 class C
                 {
-                    public C(string s)
-                        : this(int.TryParse(s, out var [|x|]) ? [|x|]++ : 0, true)
-                    {
-                    }
+                public C(string s)
+                : this(int.TryParse(s, out var [|x|]) ? [|x|]++ : 0, true)
+                {
+                }
 
-                    public C(int x, bool b)
-                    {
-                    }
+                public C(int x, bool b)
+                {
+                }
                 }
                 """
             );
@@ -1023,7 +1023,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 """
                 record X(int [|x|])
                 {
-                    int Y = [|x|]++;
+                int Y = [|x|]++;
                 }
                 """
             );
@@ -1036,7 +1036,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 """
                 record struct X(int [|x|])
                 {
-                    int Y = [|x|]++;
+                int Y = [|x|]++;
                 }
                 """
             );
@@ -1065,7 +1065,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 """
                 class X(int [|x|])
                 {
-                    int Y = [|x|]++;
+                int Y = [|x|]++;
                 }
                 """
             );
@@ -1078,7 +1078,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 """
                 class X(int [|x|])
                 {
-                    int Y() => [|x|]++;
+                int Y() => [|x|]++;
                 }
                 """
             );
@@ -1091,7 +1091,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 """
                 struct X(int [|x|])
                 {
-                    int Y = [|x|]++;
+                int Y = [|x|]++;
                 }
                 """
             );
@@ -1104,7 +1104,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 """
                 struct X(int [|x|])
                 {
-                    int Y() => [|x|]++;
+                int Y() => [|x|]++;
                 }
                 """
             );
@@ -1120,14 +1120,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M()
-                    {
-                        try { }
-                        catch (Exception ex)
-                        {
-                            [|ex|] = null;
-                        }
-                    }
+                void M()
+                {
+                try { }
+                catch (Exception ex)
+                {
+                [|ex|] = null;
+                }
+                }
                 }
                 """
             );
@@ -1143,11 +1143,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M()
-                    {
-                        try { }
-                        catch (Exception ex) when (([|ex|] = null) == null) { }
-                    }
+                void M()
+                {
+                try { }
+                catch (Exception ex) when (([|ex|] = null) == null) { }
+                }
                 }
                 """
             );
@@ -1161,13 +1161,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M()
-                    {
-                        switch (1)
-                        {
-                            case var [|x|] when [|x|]++ == 2: break;
-                        }
-                    }
+                void M()
+                {
+                switch (1)
+                {
+                case var [|x|] when [|x|]++ == 2: break;
+                }
+                }
                 }
                 """
             );
@@ -1181,12 +1181,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M()
-                    {
-                        int a, [|b|] = 1, c;
-                        [|b|] = 2;
-                        Console.WriteLine([|b|]);
-                    }
+                void M()
+                {
+                int a, [|b|] = 1, c;
+                [|b|] = 2;
+                Console.WriteLine([|b|]);
+                }
                 }
                 """
             );
@@ -1200,11 +1200,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M()
-                    {
-                        for (int [|i|] = 0; [|i|] < 10; [|i|]++)
-                            Console.WriteLine([|i|]);
-                    }
+                void M()
+                {
+                for (int [|i|] = 0; [|i|] < 10; [|i|]++)
+                Console.WriteLine([|i|]);
+                }
                 }
                 """
             );
@@ -1218,11 +1218,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        foreach (var arg in args)
-                            Console.WriteLine(arg);
-                    }
+                void M(string[] args)
+                {
+                foreach (var arg in args)
+                Console.WriteLine(arg);
+                }
                 }
                 """
             );
@@ -1236,15 +1236,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 using System;
                 class C
                 {
-                    void M()
-                    {
-                        int p;
-                        if (p)
-                            p = 1;
+                void M()
+                {
+                int p;
+                if (p)
+                p = 1;
 
-                        p = 0;
-                        Console.WriteLine(p);
-                    }
+                p = 0;
+                Console.WriteLine(p);
+                }
                 }
                 """
             );
@@ -1257,15 +1257,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 """
                 class C
                 {
-                    void M(int [|p|])
-                    {
-                        [|p|] = 1;
-                    }
+                void M(int [|p|])
+                {
+                [|p|] = 1;
+                }
 
-                    void M(int [|p|])
-                    {
-                        [|p|] = 1;
-                    }
+                void M(int [|p|])
+                {
+                [|p|] = 1;
+                }
                 }
                 """
             );
@@ -1278,10 +1278,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 """
                 class C
                 {
-                    void M(int p, int p)
-                    {
-                        p = 1;
-                    }
+                void M(int p, int p)
+                {
+                p = 1;
+                }
                 }
                 """
             );
@@ -1299,8 +1299,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
 
                 class C
                 {
-                    public static T EnsureInitialized<T>([NotNull] ref T? [|target|]) where T : class
-                        => Volatile.Read(ref [|target|]!);
+                public static T EnsureInitialized<T>([NotNull] ref T? [|target|]) where T : class
+                => Volatile.Read(ref [|target|]!);
                 }
                 """
             );
@@ -1313,10 +1313,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 """
                 class C(int [|p|])
                 {
-                    void M()
-                    {
-                        [|p|] = 1;
-                    }
+                void M()
+                {
+                [|p|] = 1;
+                }
                 }
                 """
             );
@@ -1329,10 +1329,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 """
                 class C(int p)
                 {
-                    void M()
-                    {
-                        var v = new C(p: 1);
-                    }
+                void M()
+                {
+                var v = new C(p: 1);
+                }
                 }
                 """
             );
@@ -1349,10 +1349,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
 
                 partial class C
                 {
-                    void M()
-                    {
-                        [|p|] = 1;
-                    }
+                void M()
+                {
+                [|p|] = 1;
+                }
                 }
                 """
             );
@@ -1380,22 +1380,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
             await TestAsync(
                 """
                 <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                        <Document>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document>
                 partial class C(int [|p|])
                 {
                 }
-                        </Document>
-                        <Document>
+                </Document>
+                <Document>
                 partial class C
                 {
-                    void M()
-                    {
-                        [|p|] = 1;
-                    }
+                void M()
+                {
+                [|p|] = 1;
                 }
-                        </Document>
-                    </Project>
+                }
+                </Document>
+                </Project>
                 </Workspace>
                 """
             );

@@ -31,10 +31,10 @@ public class NorthwindDbFunctionsQuerySqliteTest
 
         AssertSql(
             """
-SELECT COUNT(*)
-FROM "Customers" AS "c"
-WHERE "c"."ContactName" GLOB '*M*'
-"""
+            SELECT COUNT(*)
+            FROM "Customers" AS "c"
+            WHERE "c"."ContactName" GLOB '*M*'
+            """
         );
     }
 
@@ -52,10 +52,10 @@ WHERE "c"."ContactName" GLOB '*M*'
 
         AssertSql(
             """
-SELECT COUNT(*)
-FROM "Customers" AS "c"
-WHERE "c"."CustomerID" NOT GLOB 'T*'
-"""
+            SELECT COUNT(*)
+            FROM "Customers" AS "c"
+            WHERE "c"."CustomerID" NOT GLOB 'T*'
+            """
         );
     }
 
@@ -75,10 +75,10 @@ WHERE "c"."CustomerID" NOT GLOB 'T*'
 
         AssertSql(
             """
-SELECT COUNT(*)
-FROM "Orders" AS "o"
-WHERE abs(random() / 9.2233720368547799E+18) <= 1.0
-"""
+            SELECT COUNT(*)
+            FROM "Orders" AS "o"
+            WHERE abs(random() / 9.2233720368547799E+18) <= 1.0
+            """
         );
     }
 
@@ -88,10 +88,10 @@ WHERE abs(random() / 9.2233720368547799E+18) <= 1.0
 
         AssertSql(
             """
-SELECT COUNT(*)
-FROM "Orders" AS "o"
-WHERE abs(random() / 9.2233720368547799E+18) >= 0.0
-"""
+            SELECT COUNT(*)
+            FROM "Orders" AS "o"
+            WHERE abs(random() / 9.2233720368547799E+18) >= 0.0
+            """
         );
     }
 

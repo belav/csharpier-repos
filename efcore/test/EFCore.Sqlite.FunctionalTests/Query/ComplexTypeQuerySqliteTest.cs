@@ -22,10 +22,10 @@ public class ComplexTypeQuerySqliteTest
 
         AssertSql(
             """
-SELECT "c"."Id", "c"."Name", "c"."BillingAddress_AddressLine1", "c"."BillingAddress_AddressLine2", "c"."BillingAddress_ZipCode", "c"."BillingAddress_Country_Code", "c"."BillingAddress_Country_FullName", "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
-FROM "Customer" AS "c"
-WHERE "c"."ShippingAddress_ZipCode" = 7728
-"""
+            SELECT "c"."Id", "c"."Name", "c"."BillingAddress_AddressLine1", "c"."BillingAddress_AddressLine2", "c"."BillingAddress_ZipCode", "c"."BillingAddress_Country_Code", "c"."BillingAddress_Country_FullName", "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
+            FROM "Customer" AS "c"
+            WHERE "c"."ShippingAddress_ZipCode" = 7728
+            """
         );
     }
 
@@ -35,10 +35,10 @@ WHERE "c"."ShippingAddress_ZipCode" = 7728
 
         AssertSql(
             """
-SELECT "c"."Id", "c"."Name", "c"."BillingAddress_AddressLine1", "c"."BillingAddress_AddressLine2", "c"."BillingAddress_ZipCode", "c"."BillingAddress_Country_Code", "c"."BillingAddress_Country_FullName", "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
-FROM "Customer" AS "c"
-WHERE "c"."ShippingAddress_Country_Code" = 'DE'
-"""
+            SELECT "c"."Id", "c"."Name", "c"."BillingAddress_AddressLine1", "c"."BillingAddress_AddressLine2", "c"."BillingAddress_ZipCode", "c"."BillingAddress_Country_Code", "c"."BillingAddress_Country_FullName", "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
+            FROM "Customer" AS "c"
+            WHERE "c"."ShippingAddress_Country_Code" = 'DE'
+            """
         );
     }
 
@@ -48,17 +48,17 @@ WHERE "c"."ShippingAddress_Country_Code" = 'DE'
 
         AssertSql(
             """
-@__p_0='1'
+            @__p_0='1'
 
-SELECT DISTINCT "t"."Id", "t"."Name", "t"."BillingAddress_AddressLine1", "t"."BillingAddress_AddressLine2", "t"."BillingAddress_ZipCode", "t"."BillingAddress_Country_Code", "t"."BillingAddress_Country_FullName", "t"."ShippingAddress_AddressLine1", "t"."ShippingAddress_AddressLine2", "t"."ShippingAddress_ZipCode", "t"."ShippingAddress_Country_Code", "t"."ShippingAddress_Country_FullName"
-FROM (
-    SELECT "c"."Id", "c"."Name", "c"."BillingAddress_AddressLine1", "c"."BillingAddress_AddressLine2", "c"."BillingAddress_ZipCode", "c"."BillingAddress_Country_Code", "c"."BillingAddress_Country_FullName", "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
-    FROM "Customer" AS "c"
-    ORDER BY "c"."Id"
-    LIMIT -1 OFFSET @__p_0
-) AS "t"
-WHERE "t"."ShippingAddress_ZipCode" = 7728
-"""
+            SELECT DISTINCT "t"."Id", "t"."Name", "t"."BillingAddress_AddressLine1", "t"."BillingAddress_AddressLine2", "t"."BillingAddress_ZipCode", "t"."BillingAddress_Country_Code", "t"."BillingAddress_Country_FullName", "t"."ShippingAddress_AddressLine1", "t"."ShippingAddress_AddressLine2", "t"."ShippingAddress_ZipCode", "t"."ShippingAddress_Country_Code", "t"."ShippingAddress_Country_FullName"
+            FROM (
+            SELECT "c"."Id", "c"."Name", "c"."BillingAddress_AddressLine1", "c"."BillingAddress_AddressLine2", "c"."BillingAddress_ZipCode", "c"."BillingAddress_Country_Code", "c"."BillingAddress_Country_FullName", "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
+            FROM "Customer" AS "c"
+            ORDER BY "c"."Id"
+            LIMIT -1 OFFSET @__p_0
+            ) AS "t"
+            WHERE "t"."ShippingAddress_ZipCode" = 7728
+            """
         );
     }
 
@@ -70,17 +70,17 @@ WHERE "t"."ShippingAddress_ZipCode" = 7728
 
         AssertSql(
             """
-@__p_0='1'
+            @__p_0='1'
 
-SELECT DISTINCT "t"."Id", "t"."Name", "t"."BillingAddress_AddressLine1", "t"."BillingAddress_AddressLine2", "t"."BillingAddress_ZipCode", "t"."BillingAddress_Country_Code", "t"."BillingAddress_Country_FullName", "t"."ShippingAddress_AddressLine1", "t"."ShippingAddress_AddressLine2", "t"."ShippingAddress_ZipCode", "t"."ShippingAddress_Country_Code", "t"."ShippingAddress_Country_FullName"
-FROM (
-    SELECT "c"."Id", "c"."Name", "c"."BillingAddress_AddressLine1", "c"."BillingAddress_AddressLine2", "c"."BillingAddress_ZipCode", "c"."BillingAddress_Country_Code", "c"."BillingAddress_Country_FullName", "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
-    FROM "Customer" AS "c"
-    ORDER BY "c"."Id"
-    LIMIT -1 OFFSET @__p_0
-) AS "t"
-WHERE "t"."ShippingAddress_Country_Code" = 'DE'
-"""
+            SELECT DISTINCT "t"."Id", "t"."Name", "t"."BillingAddress_AddressLine1", "t"."BillingAddress_AddressLine2", "t"."BillingAddress_ZipCode", "t"."BillingAddress_Country_Code", "t"."BillingAddress_Country_FullName", "t"."ShippingAddress_AddressLine1", "t"."ShippingAddress_AddressLine2", "t"."ShippingAddress_ZipCode", "t"."ShippingAddress_Country_Code", "t"."ShippingAddress_Country_FullName"
+            FROM (
+            SELECT "c"."Id", "c"."Name", "c"."BillingAddress_AddressLine1", "c"."BillingAddress_AddressLine2", "c"."BillingAddress_ZipCode", "c"."BillingAddress_Country_Code", "c"."BillingAddress_Country_FullName", "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
+            FROM "Customer" AS "c"
+            ORDER BY "c"."Id"
+            LIMIT -1 OFFSET @__p_0
+            ) AS "t"
+            WHERE "t"."ShippingAddress_Country_Code" = 'DE'
+            """
         );
     }
 
@@ -94,12 +94,12 @@ WHERE "t"."ShippingAddress_Country_Code" = 'DE'
 
         AssertSql(
             """
-SELECT "c"."Id", "c"."OptionalCustomerId", "c"."RequiredCustomerId", "c0"."Id", "c0"."Name", "c0"."BillingAddress_AddressLine1", "c0"."BillingAddress_AddressLine2", "c0"."BillingAddress_ZipCode", "c0"."BillingAddress_Country_Code", "c0"."BillingAddress_Country_FullName", "c0"."ShippingAddress_AddressLine1", "c0"."ShippingAddress_AddressLine2", "c0"."ShippingAddress_ZipCode", "c0"."ShippingAddress_Country_Code", "c0"."ShippingAddress_Country_FullName", "c1"."Id", "c1"."Name", "c1"."BillingAddress_AddressLine1", "c1"."BillingAddress_AddressLine2", "c1"."BillingAddress_ZipCode", "c1"."BillingAddress_Country_Code", "c1"."BillingAddress_Country_FullName", "c1"."ShippingAddress_AddressLine1", "c1"."ShippingAddress_AddressLine2", "c1"."ShippingAddress_ZipCode", "c1"."ShippingAddress_Country_Code", "c1"."ShippingAddress_Country_FullName"
-FROM "CustomerGroup" AS "c"
-LEFT JOIN "Customer" AS "c0" ON "c"."OptionalCustomerId" = "c0"."Id"
-INNER JOIN "Customer" AS "c1" ON "c"."RequiredCustomerId" = "c1"."Id"
-WHERE "c0"."ShippingAddress_ZipCode" <> 7728 OR "c0"."ShippingAddress_ZipCode" IS NULL
-"""
+            SELECT "c"."Id", "c"."OptionalCustomerId", "c"."RequiredCustomerId", "c0"."Id", "c0"."Name", "c0"."BillingAddress_AddressLine1", "c0"."BillingAddress_AddressLine2", "c0"."BillingAddress_ZipCode", "c0"."BillingAddress_Country_Code", "c0"."BillingAddress_Country_FullName", "c0"."ShippingAddress_AddressLine1", "c0"."ShippingAddress_AddressLine2", "c0"."ShippingAddress_ZipCode", "c0"."ShippingAddress_Country_Code", "c0"."ShippingAddress_Country_FullName", "c1"."Id", "c1"."Name", "c1"."BillingAddress_AddressLine1", "c1"."BillingAddress_AddressLine2", "c1"."BillingAddress_ZipCode", "c1"."BillingAddress_Country_Code", "c1"."BillingAddress_Country_FullName", "c1"."ShippingAddress_AddressLine1", "c1"."ShippingAddress_AddressLine2", "c1"."ShippingAddress_ZipCode", "c1"."ShippingAddress_Country_Code", "c1"."ShippingAddress_Country_FullName"
+            FROM "CustomerGroup" AS "c"
+            LEFT JOIN "Customer" AS "c0" ON "c"."OptionalCustomerId" = "c0"."Id"
+            INNER JOIN "Customer" AS "c1" ON "c"."RequiredCustomerId" = "c1"."Id"
+            WHERE "c0"."ShippingAddress_ZipCode" <> 7728 OR "c0"."ShippingAddress_ZipCode" IS NULL
+            """
         );
     }
 
@@ -113,12 +113,12 @@ WHERE "c0"."ShippingAddress_ZipCode" <> 7728 OR "c0"."ShippingAddress_ZipCode" I
 
         AssertSql(
             """
-SELECT "c"."Id", "c"."OptionalCustomerId", "c"."RequiredCustomerId", "c1"."Id", "c1"."Name", "c1"."BillingAddress_AddressLine1", "c1"."BillingAddress_AddressLine2", "c1"."BillingAddress_ZipCode", "c1"."BillingAddress_Country_Code", "c1"."BillingAddress_Country_FullName", "c1"."ShippingAddress_AddressLine1", "c1"."ShippingAddress_AddressLine2", "c1"."ShippingAddress_ZipCode", "c1"."ShippingAddress_Country_Code", "c1"."ShippingAddress_Country_FullName", "c0"."Id", "c0"."Name", "c0"."BillingAddress_AddressLine1", "c0"."BillingAddress_AddressLine2", "c0"."BillingAddress_ZipCode", "c0"."BillingAddress_Country_Code", "c0"."BillingAddress_Country_FullName", "c0"."ShippingAddress_AddressLine1", "c0"."ShippingAddress_AddressLine2", "c0"."ShippingAddress_ZipCode", "c0"."ShippingAddress_Country_Code", "c0"."ShippingAddress_Country_FullName"
-FROM "CustomerGroup" AS "c"
-INNER JOIN "Customer" AS "c0" ON "c"."RequiredCustomerId" = "c0"."Id"
-LEFT JOIN "Customer" AS "c1" ON "c"."OptionalCustomerId" = "c1"."Id"
-WHERE "c0"."ShippingAddress_ZipCode" <> 7728
-"""
+            SELECT "c"."Id", "c"."OptionalCustomerId", "c"."RequiredCustomerId", "c1"."Id", "c1"."Name", "c1"."BillingAddress_AddressLine1", "c1"."BillingAddress_AddressLine2", "c1"."BillingAddress_ZipCode", "c1"."BillingAddress_Country_Code", "c1"."BillingAddress_Country_FullName", "c1"."ShippingAddress_AddressLine1", "c1"."ShippingAddress_AddressLine2", "c1"."ShippingAddress_ZipCode", "c1"."ShippingAddress_Country_Code", "c1"."ShippingAddress_Country_FullName", "c0"."Id", "c0"."Name", "c0"."BillingAddress_AddressLine1", "c0"."BillingAddress_AddressLine2", "c0"."BillingAddress_ZipCode", "c0"."BillingAddress_Country_Code", "c0"."BillingAddress_Country_FullName", "c0"."ShippingAddress_AddressLine1", "c0"."ShippingAddress_AddressLine2", "c0"."ShippingAddress_ZipCode", "c0"."ShippingAddress_Country_Code", "c0"."ShippingAddress_Country_FullName"
+            FROM "CustomerGroup" AS "c"
+            INNER JOIN "Customer" AS "c0" ON "c"."RequiredCustomerId" = "c0"."Id"
+            LEFT JOIN "Customer" AS "c1" ON "c"."OptionalCustomerId" = "c1"."Id"
+            WHERE "c0"."ShippingAddress_ZipCode" <> 7728
+            """
         );
     }
 
@@ -143,10 +143,10 @@ WHERE "c0"."ShippingAddress_ZipCode" <> 7728
 
         AssertSql(
             """
-SELECT "c0"."ShippingAddress_AddressLine1", "c0"."ShippingAddress_AddressLine2", "c0"."ShippingAddress_ZipCode", "c0"."ShippingAddress_Country_Code", "c0"."ShippingAddress_Country_FullName"
-FROM "CustomerGroup" AS "c"
-INNER JOIN "Customer" AS "c0" ON "c"."RequiredCustomerId" = "c0"."Id"
-"""
+            SELECT "c0"."ShippingAddress_AddressLine1", "c0"."ShippingAddress_AddressLine2", "c0"."ShippingAddress_ZipCode", "c0"."ShippingAddress_Country_Code", "c0"."ShippingAddress_Country_FullName"
+            FROM "CustomerGroup" AS "c"
+            INNER JOIN "Customer" AS "c0" ON "c"."RequiredCustomerId" = "c0"."Id"
+            """
         );
     }
 
@@ -156,16 +156,16 @@ INNER JOIN "Customer" AS "c0" ON "c"."RequiredCustomerId" = "c0"."Id"
 
         AssertSql(
             """
-@__p_0='1'
+            @__p_0='1'
 
-SELECT DISTINCT "t"."Id", "t"."Name", "t"."BillingAddress_AddressLine1", "t"."BillingAddress_AddressLine2", "t"."BillingAddress_ZipCode", "t"."BillingAddress_Country_Code", "t"."BillingAddress_Country_FullName", "t"."ShippingAddress_AddressLine1", "t"."ShippingAddress_AddressLine2", "t"."ShippingAddress_ZipCode", "t"."ShippingAddress_Country_Code", "t"."ShippingAddress_Country_FullName"
-FROM (
-    SELECT "c"."Id", "c"."Name", "c"."BillingAddress_AddressLine1", "c"."BillingAddress_AddressLine2", "c"."BillingAddress_ZipCode", "c"."BillingAddress_Country_Code", "c"."BillingAddress_Country_FullName", "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
-    FROM "Customer" AS "c"
-    ORDER BY "c"."Id"
-    LIMIT -1 OFFSET @__p_0
-) AS "t"
-"""
+            SELECT DISTINCT "t"."Id", "t"."Name", "t"."BillingAddress_AddressLine1", "t"."BillingAddress_AddressLine2", "t"."BillingAddress_ZipCode", "t"."BillingAddress_Country_Code", "t"."BillingAddress_Country_FullName", "t"."ShippingAddress_AddressLine1", "t"."ShippingAddress_AddressLine2", "t"."ShippingAddress_ZipCode", "t"."ShippingAddress_Country_Code", "t"."ShippingAddress_Country_FullName"
+            FROM (
+            SELECT "c"."Id", "c"."Name", "c"."BillingAddress_AddressLine1", "c"."BillingAddress_AddressLine2", "c"."BillingAddress_ZipCode", "c"."BillingAddress_Country_Code", "c"."BillingAddress_Country_FullName", "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
+            FROM "Customer" AS "c"
+            ORDER BY "c"."Id"
+            LIMIT -1 OFFSET @__p_0
+            ) AS "t"
+            """
         );
     }
 
@@ -175,9 +175,9 @@ FROM (
 
         AssertSql(
             """
-SELECT "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
-FROM "Customer" AS "c"
-"""
+            SELECT "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
+            FROM "Customer" AS "c"
+            """
         );
     }
 
@@ -187,9 +187,9 @@ FROM "Customer" AS "c"
 
         AssertSql(
             """
-SELECT "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
-FROM "Customer" AS "c"
-"""
+            SELECT "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
+            FROM "Customer" AS "c"
+            """
         );
     }
 
@@ -199,9 +199,9 @@ FROM "Customer" AS "c"
 
         AssertSql(
             """
-SELECT "c"."ShippingAddress_Country_FullName"
-FROM "Customer" AS "c"
-"""
+            SELECT "c"."ShippingAddress_Country_FullName"
+            FROM "Customer" AS "c"
+            """
         );
     }
 
@@ -211,10 +211,10 @@ FROM "Customer" AS "c"
 
         AssertSql(
             """
-SELECT "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
-FROM "Customer" AS "c"
-WHERE "c"."ShippingAddress_ZipCode" = 7728
-"""
+            SELECT "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
+            FROM "Customer" AS "c"
+            WHERE "c"."ShippingAddress_ZipCode" = 7728
+            """
         );
     }
 
@@ -224,9 +224,9 @@ WHERE "c"."ShippingAddress_ZipCode" = 7728
 
         AssertSql(
             """
-SELECT DISTINCT "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
-FROM "Customer" AS "c"
-"""
+            SELECT DISTINCT "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
+            FROM "Customer" AS "c"
+            """
         );
     }
 
@@ -236,10 +236,10 @@ FROM "Customer" AS "c"
 
         AssertSql(
             """
-SELECT "c"."Id", "c"."Name", "c"."BillingAddress_AddressLine1", "c"."BillingAddress_AddressLine2", "c"."BillingAddress_ZipCode", "c"."BillingAddress_Country_Code", "c"."BillingAddress_Country_FullName", "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
-FROM "Customer" AS "c"
-WHERE "c"."ShippingAddress_AddressLine1" = "c"."BillingAddress_AddressLine1" AND ("c"."ShippingAddress_AddressLine2" = "c"."BillingAddress_AddressLine2" OR ("c"."ShippingAddress_AddressLine2" IS NULL AND "c"."BillingAddress_AddressLine2" IS NULL)) AND "c"."ShippingAddress_ZipCode" = "c"."BillingAddress_ZipCode"
-"""
+            SELECT "c"."Id", "c"."Name", "c"."BillingAddress_AddressLine1", "c"."BillingAddress_AddressLine2", "c"."BillingAddress_ZipCode", "c"."BillingAddress_Country_Code", "c"."BillingAddress_Country_FullName", "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
+            FROM "Customer" AS "c"
+            WHERE "c"."ShippingAddress_AddressLine1" = "c"."BillingAddress_AddressLine1" AND ("c"."ShippingAddress_AddressLine2" = "c"."BillingAddress_AddressLine2" OR ("c"."ShippingAddress_AddressLine2" IS NULL AND "c"."BillingAddress_AddressLine2" IS NULL)) AND "c"."ShippingAddress_ZipCode" = "c"."BillingAddress_ZipCode"
+            """
         );
     }
 
@@ -249,10 +249,10 @@ WHERE "c"."ShippingAddress_AddressLine1" = "c"."BillingAddress_AddressLine1" AND
 
         AssertSql(
             """
-SELECT "c"."Id", "c"."Name", "c"."BillingAddress_AddressLine1", "c"."BillingAddress_AddressLine2", "c"."BillingAddress_ZipCode", "c"."BillingAddress_Country_Code", "c"."BillingAddress_Country_FullName", "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
-FROM "Customer" AS "c"
-WHERE "c"."ShippingAddress_AddressLine1" = '804 S. Lakeshore Road' AND "c"."ShippingAddress_AddressLine2" IS NULL AND "c"."ShippingAddress_ZipCode" = 38654 AND "c"."ShippingAddress_Country_Code" = 'US' AND "c"."ShippingAddress_Country_FullName" = 'United States'
-"""
+            SELECT "c"."Id", "c"."Name", "c"."BillingAddress_AddressLine1", "c"."BillingAddress_AddressLine2", "c"."BillingAddress_ZipCode", "c"."BillingAddress_Country_Code", "c"."BillingAddress_Country_FullName", "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
+            FROM "Customer" AS "c"
+            WHERE "c"."ShippingAddress_AddressLine1" = '804 S. Lakeshore Road' AND "c"."ShippingAddress_AddressLine2" IS NULL AND "c"."ShippingAddress_ZipCode" = 38654 AND "c"."ShippingAddress_Country_Code" = 'US' AND "c"."ShippingAddress_Country_FullName" = 'United States'
+            """
         );
     }
 
@@ -262,15 +262,15 @@ WHERE "c"."ShippingAddress_AddressLine1" = '804 S. Lakeshore Road' AND "c"."Ship
 
         AssertSql(
             """
-@__entity_equality_address_0_AddressLine1='804 S. Lakeshore Road' (Size = 21)
-@__entity_equality_address_0_ZipCode='38654' (Nullable = true)
-@__entity_equality_address_0_Code='US' (Size = 2)
-@__entity_equality_address_0_FullName='United States' (Size = 13)
+            @__entity_equality_address_0_AddressLine1='804 S. Lakeshore Road' (Size = 21)
+            @__entity_equality_address_0_ZipCode='38654' (Nullable = true)
+            @__entity_equality_address_0_Code='US' (Size = 2)
+            @__entity_equality_address_0_FullName='United States' (Size = 13)
 
-SELECT "c"."Id", "c"."Name", "c"."BillingAddress_AddressLine1", "c"."BillingAddress_AddressLine2", "c"."BillingAddress_ZipCode", "c"."BillingAddress_Country_Code", "c"."BillingAddress_Country_FullName", "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
-FROM "Customer" AS "c"
-WHERE "c"."ShippingAddress_AddressLine1" = @__entity_equality_address_0_AddressLine1 AND "c"."ShippingAddress_AddressLine2" IS NULL AND "c"."ShippingAddress_ZipCode" = @__entity_equality_address_0_ZipCode AND "c"."ShippingAddress_Country_Code" = @__entity_equality_address_0_Code AND "c"."ShippingAddress_Country_FullName" = @__entity_equality_address_0_FullName
-"""
+            SELECT "c"."Id", "c"."Name", "c"."BillingAddress_AddressLine1", "c"."BillingAddress_AddressLine2", "c"."BillingAddress_ZipCode", "c"."BillingAddress_Country_Code", "c"."BillingAddress_Country_FullName", "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
+            FROM "Customer" AS "c"
+            WHERE "c"."ShippingAddress_AddressLine1" = @__entity_equality_address_0_AddressLine1 AND "c"."ShippingAddress_AddressLine2" IS NULL AND "c"."ShippingAddress_ZipCode" = @__entity_equality_address_0_ZipCode AND "c"."ShippingAddress_Country_Code" = @__entity_equality_address_0_Code AND "c"."ShippingAddress_Country_FullName" = @__entity_equality_address_0_FullName
+            """
         );
     }
 
@@ -294,18 +294,18 @@ WHERE "c"."ShippingAddress_AddressLine1" = @__entity_equality_address_0_AddressL
 
         AssertSql(
             """
-@__entity_equality_address_0_AddressLine1='804 S. Lakeshore Road' (Size = 21)
-@__entity_equality_address_0_ZipCode='38654' (Nullable = true)
-@__entity_equality_address_0_Code='US' (Size = 2)
-@__entity_equality_address_0_FullName='United States' (Size = 13)
+            @__entity_equality_address_0_AddressLine1='804 S. Lakeshore Road' (Size = 21)
+            @__entity_equality_address_0_ZipCode='38654' (Nullable = true)
+            @__entity_equality_address_0_Code='US' (Size = 2)
+            @__entity_equality_address_0_FullName='United States' (Size = 13)
 
-SELECT "c"."Id", "c"."Name", "c"."BillingAddress_AddressLine1", "c"."BillingAddress_AddressLine2", "c"."BillingAddress_ZipCode", "c"."BillingAddress_Country_Code", "c"."BillingAddress_Country_FullName", "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
-FROM "Customer" AS "c"
-WHERE EXISTS (
-    SELECT 1
-    FROM "Customer" AS "c0"
-    WHERE "c0"."ShippingAddress_AddressLine1" = @__entity_equality_address_0_AddressLine1 AND "c0"."ShippingAddress_AddressLine2" IS NULL AND "c0"."ShippingAddress_ZipCode" = @__entity_equality_address_0_ZipCode AND "c0"."ShippingAddress_Country_Code" = @__entity_equality_address_0_Code AND "c0"."ShippingAddress_Country_FullName" = @__entity_equality_address_0_FullName)
-"""
+            SELECT "c"."Id", "c"."Name", "c"."BillingAddress_AddressLine1", "c"."BillingAddress_AddressLine2", "c"."BillingAddress_ZipCode", "c"."BillingAddress_Country_Code", "c"."BillingAddress_Country_FullName", "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
+            FROM "Customer" AS "c"
+            WHERE EXISTS (
+            SELECT 1
+            FROM "Customer" AS "c0"
+            WHERE "c0"."ShippingAddress_AddressLine1" = @__entity_equality_address_0_AddressLine1 AND "c0"."ShippingAddress_AddressLine2" IS NULL AND "c0"."ShippingAddress_ZipCode" = @__entity_equality_address_0_ZipCode AND "c0"."ShippingAddress_Country_Code" = @__entity_equality_address_0_Code AND "c0"."ShippingAddress_Country_FullName" = @__entity_equality_address_0_FullName)
+            """
         );
     }
 
@@ -315,14 +315,14 @@ WHERE EXISTS (
 
         AssertSql(
             """
-SELECT "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
-FROM "Customer" AS "c"
-WHERE "c"."Id" = 1
-UNION ALL
-SELECT "c0"."ShippingAddress_AddressLine1", "c0"."ShippingAddress_AddressLine2", "c0"."ShippingAddress_ZipCode", "c0"."ShippingAddress_Country_Code", "c0"."ShippingAddress_Country_FullName"
-FROM "Customer" AS "c0"
-WHERE "c0"."Id" = 2
-"""
+            SELECT "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
+            FROM "Customer" AS "c"
+            WHERE "c"."Id" = 1
+            UNION ALL
+            SELECT "c0"."ShippingAddress_AddressLine1", "c0"."ShippingAddress_AddressLine2", "c0"."ShippingAddress_ZipCode", "c0"."ShippingAddress_Country_Code", "c0"."ShippingAddress_Country_FullName"
+            FROM "Customer" AS "c0"
+            WHERE "c0"."Id" = 2
+            """
         );
     }
 
@@ -332,14 +332,14 @@ WHERE "c0"."Id" = 2
 
         AssertSql(
             """
-SELECT "c"."Id", "c"."Name", "c"."BillingAddress_AddressLine1", "c"."BillingAddress_AddressLine2", "c"."BillingAddress_ZipCode", "c"."BillingAddress_Country_Code", "c"."BillingAddress_Country_FullName", "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
-FROM "Customer" AS "c"
-WHERE "c"."Id" = 1
-UNION ALL
-SELECT "c0"."Id", "c0"."Name", "c0"."BillingAddress_AddressLine1", "c0"."BillingAddress_AddressLine2", "c0"."BillingAddress_ZipCode", "c0"."BillingAddress_Country_Code", "c0"."BillingAddress_Country_FullName", "c0"."ShippingAddress_AddressLine1", "c0"."ShippingAddress_AddressLine2", "c0"."ShippingAddress_ZipCode", "c0"."ShippingAddress_Country_Code", "c0"."ShippingAddress_Country_FullName"
-FROM "Customer" AS "c0"
-WHERE "c0"."Id" = 2
-"""
+            SELECT "c"."Id", "c"."Name", "c"."BillingAddress_AddressLine1", "c"."BillingAddress_AddressLine2", "c"."BillingAddress_ZipCode", "c"."BillingAddress_Country_Code", "c"."BillingAddress_Country_FullName", "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
+            FROM "Customer" AS "c"
+            WHERE "c"."Id" = 1
+            UNION ALL
+            SELECT "c0"."Id", "c0"."Name", "c0"."BillingAddress_AddressLine1", "c0"."BillingAddress_AddressLine2", "c0"."BillingAddress_ZipCode", "c0"."BillingAddress_Country_Code", "c0"."BillingAddress_Country_FullName", "c0"."ShippingAddress_AddressLine1", "c0"."ShippingAddress_AddressLine2", "c0"."ShippingAddress_ZipCode", "c0"."ShippingAddress_Country_Code", "c0"."ShippingAddress_Country_FullName"
+            FROM "Customer" AS "c0"
+            WHERE "c0"."Id" = 2
+            """
         );
     }
 
@@ -349,14 +349,14 @@ WHERE "c0"."Id" = 2
 
         AssertSql(
             """
-SELECT "c"."Id", "c"."Name", "c"."BillingAddress_AddressLine1", "c"."BillingAddress_AddressLine2", "c"."BillingAddress_ZipCode", "c"."BillingAddress_Country_Code", "c"."BillingAddress_Country_FullName", "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
-FROM "Customer" AS "c"
-WHERE "c"."Id" = 1
-UNION
-SELECT "c0"."Id", "c0"."Name", "c0"."BillingAddress_AddressLine1", "c0"."BillingAddress_AddressLine2", "c0"."BillingAddress_ZipCode", "c0"."BillingAddress_Country_Code", "c0"."BillingAddress_Country_FullName", "c0"."ShippingAddress_AddressLine1", "c0"."ShippingAddress_AddressLine2", "c0"."ShippingAddress_ZipCode", "c0"."ShippingAddress_Country_Code", "c0"."ShippingAddress_Country_FullName"
-FROM "Customer" AS "c0"
-WHERE "c0"."Id" = 2
-"""
+            SELECT "c"."Id", "c"."Name", "c"."BillingAddress_AddressLine1", "c"."BillingAddress_AddressLine2", "c"."BillingAddress_ZipCode", "c"."BillingAddress_Country_Code", "c"."BillingAddress_Country_FullName", "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
+            FROM "Customer" AS "c"
+            WHERE "c"."Id" = 1
+            UNION
+            SELECT "c0"."Id", "c0"."Name", "c0"."BillingAddress_AddressLine1", "c0"."BillingAddress_AddressLine2", "c0"."BillingAddress_ZipCode", "c0"."BillingAddress_Country_Code", "c0"."BillingAddress_Country_FullName", "c0"."ShippingAddress_AddressLine1", "c0"."ShippingAddress_AddressLine2", "c0"."ShippingAddress_ZipCode", "c0"."ShippingAddress_Country_Code", "c0"."ShippingAddress_Country_FullName"
+            FROM "Customer" AS "c0"
+            WHERE "c0"."Id" = 2
+            """
         );
     }
 
@@ -366,14 +366,14 @@ WHERE "c0"."Id" = 2
 
         AssertSql(
             """
-SELECT "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
-FROM "Customer" AS "c"
-WHERE "c"."Id" = 1
-UNION
-SELECT "c0"."ShippingAddress_AddressLine1", "c0"."ShippingAddress_AddressLine2", "c0"."ShippingAddress_ZipCode", "c0"."ShippingAddress_Country_Code", "c0"."ShippingAddress_Country_FullName"
-FROM "Customer" AS "c0"
-WHERE "c0"."Id" = 2
-"""
+            SELECT "c"."ShippingAddress_AddressLine1", "c"."ShippingAddress_AddressLine2", "c"."ShippingAddress_ZipCode", "c"."ShippingAddress_Country_Code", "c"."ShippingAddress_Country_FullName"
+            FROM "Customer" AS "c"
+            WHERE "c"."Id" = 1
+            UNION
+            SELECT "c0"."ShippingAddress_AddressLine1", "c0"."ShippingAddress_AddressLine2", "c0"."ShippingAddress_ZipCode", "c0"."ShippingAddress_Country_Code", "c0"."ShippingAddress_Country_FullName"
+            FROM "Customer" AS "c0"
+            WHERE "c0"."Id" = 2
+            """
         );
     }
 
@@ -383,12 +383,12 @@ WHERE "c0"."Id" = 2
 
         AssertSql(
             """
-SELECT "c"."ShippingAddress_AddressLine1"
-FROM "Customer" AS "c"
-UNION ALL
-SELECT "c0"."BillingAddress_AddressLine1" AS "ShippingAddress_AddressLine1"
-FROM "Customer" AS "c0"
-"""
+            SELECT "c"."ShippingAddress_AddressLine1"
+            FROM "Customer" AS "c"
+            UNION ALL
+            SELECT "c0"."BillingAddress_AddressLine1" AS "ShippingAddress_AddressLine1"
+            FROM "Customer" AS "c0"
+            """
         );
     }
 
@@ -398,12 +398,12 @@ FROM "Customer" AS "c0"
 
         AssertSql(
             """
-SELECT "c"."ShippingAddress_AddressLine1"
-FROM "Customer" AS "c"
-UNION
-SELECT "c0"."BillingAddress_AddressLine1" AS "ShippingAddress_AddressLine1"
-FROM "Customer" AS "c0"
-"""
+            SELECT "c"."ShippingAddress_AddressLine1"
+            FROM "Customer" AS "c"
+            UNION
+            SELECT "c0"."BillingAddress_AddressLine1" AS "ShippingAddress_AddressLine1"
+            FROM "Customer" AS "c0"
+            """
         );
     }
 
@@ -427,10 +427,10 @@ FROM "Customer" AS "c0"
 
         AssertSql(
             """
-SELECT "v"."Id", "v"."Name", "v"."BillingAddress_AddressLine1", "v"."BillingAddress_AddressLine2", "v"."BillingAddress_ZipCode", "v"."BillingAddress_Country_Code", "v"."BillingAddress_Country_FullName", "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
-FROM "ValuedCustomer" AS "v"
-WHERE "v"."ShippingAddress_ZipCode" = 7728
-"""
+            SELECT "v"."Id", "v"."Name", "v"."BillingAddress_AddressLine1", "v"."BillingAddress_AddressLine2", "v"."BillingAddress_ZipCode", "v"."BillingAddress_Country_Code", "v"."BillingAddress_Country_FullName", "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
+            FROM "ValuedCustomer" AS "v"
+            WHERE "v"."ShippingAddress_ZipCode" = 7728
+            """
         );
     }
 
@@ -440,10 +440,10 @@ WHERE "v"."ShippingAddress_ZipCode" = 7728
 
         AssertSql(
             """
-SELECT "v"."Id", "v"."Name", "v"."BillingAddress_AddressLine1", "v"."BillingAddress_AddressLine2", "v"."BillingAddress_ZipCode", "v"."BillingAddress_Country_Code", "v"."BillingAddress_Country_FullName", "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
-FROM "ValuedCustomer" AS "v"
-WHERE "v"."ShippingAddress_Country_Code" = 'DE'
-"""
+            SELECT "v"."Id", "v"."Name", "v"."BillingAddress_AddressLine1", "v"."BillingAddress_AddressLine2", "v"."BillingAddress_ZipCode", "v"."BillingAddress_Country_Code", "v"."BillingAddress_Country_FullName", "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
+            FROM "ValuedCustomer" AS "v"
+            WHERE "v"."ShippingAddress_Country_Code" = 'DE'
+            """
         );
     }
 
@@ -455,17 +455,17 @@ WHERE "v"."ShippingAddress_Country_Code" = 'DE'
 
         AssertSql(
             """
-@__p_0='1'
+            @__p_0='1'
 
-SELECT DISTINCT "t"."Id", "t"."Name", "t"."BillingAddress_AddressLine1", "t"."BillingAddress_AddressLine2", "t"."BillingAddress_ZipCode", "t"."BillingAddress_Country_Code", "t"."BillingAddress_Country_FullName", "t"."ShippingAddress_AddressLine1", "t"."ShippingAddress_AddressLine2", "t"."ShippingAddress_ZipCode", "t"."ShippingAddress_Country_Code", "t"."ShippingAddress_Country_FullName"
-FROM (
-    SELECT "v"."Id", "v"."Name", "v"."BillingAddress_AddressLine1", "v"."BillingAddress_AddressLine2", "v"."BillingAddress_ZipCode", "v"."BillingAddress_Country_Code", "v"."BillingAddress_Country_FullName", "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
-    FROM "ValuedCustomer" AS "v"
-    ORDER BY "v"."Id"
-    LIMIT -1 OFFSET @__p_0
-) AS "t"
-WHERE "t"."ShippingAddress_ZipCode" = 7728
-"""
+            SELECT DISTINCT "t"."Id", "t"."Name", "t"."BillingAddress_AddressLine1", "t"."BillingAddress_AddressLine2", "t"."BillingAddress_ZipCode", "t"."BillingAddress_Country_Code", "t"."BillingAddress_Country_FullName", "t"."ShippingAddress_AddressLine1", "t"."ShippingAddress_AddressLine2", "t"."ShippingAddress_ZipCode", "t"."ShippingAddress_Country_Code", "t"."ShippingAddress_Country_FullName"
+            FROM (
+            SELECT "v"."Id", "v"."Name", "v"."BillingAddress_AddressLine1", "v"."BillingAddress_AddressLine2", "v"."BillingAddress_ZipCode", "v"."BillingAddress_Country_Code", "v"."BillingAddress_Country_FullName", "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
+            FROM "ValuedCustomer" AS "v"
+            ORDER BY "v"."Id"
+            LIMIT -1 OFFSET @__p_0
+            ) AS "t"
+            WHERE "t"."ShippingAddress_ZipCode" = 7728
+            """
         );
     }
 
@@ -477,17 +477,17 @@ WHERE "t"."ShippingAddress_ZipCode" = 7728
 
         AssertSql(
             """
-@__p_0='1'
+            @__p_0='1'
 
-SELECT DISTINCT "t"."Id", "t"."Name", "t"."BillingAddress_AddressLine1", "t"."BillingAddress_AddressLine2", "t"."BillingAddress_ZipCode", "t"."BillingAddress_Country_Code", "t"."BillingAddress_Country_FullName", "t"."ShippingAddress_AddressLine1", "t"."ShippingAddress_AddressLine2", "t"."ShippingAddress_ZipCode", "t"."ShippingAddress_Country_Code", "t"."ShippingAddress_Country_FullName"
-FROM (
-    SELECT "v"."Id", "v"."Name", "v"."BillingAddress_AddressLine1", "v"."BillingAddress_AddressLine2", "v"."BillingAddress_ZipCode", "v"."BillingAddress_Country_Code", "v"."BillingAddress_Country_FullName", "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
-    FROM "ValuedCustomer" AS "v"
-    ORDER BY "v"."Id"
-    LIMIT -1 OFFSET @__p_0
-) AS "t"
-WHERE "t"."ShippingAddress_Country_Code" = 'DE'
-"""
+            SELECT DISTINCT "t"."Id", "t"."Name", "t"."BillingAddress_AddressLine1", "t"."BillingAddress_AddressLine2", "t"."BillingAddress_ZipCode", "t"."BillingAddress_Country_Code", "t"."BillingAddress_Country_FullName", "t"."ShippingAddress_AddressLine1", "t"."ShippingAddress_AddressLine2", "t"."ShippingAddress_ZipCode", "t"."ShippingAddress_Country_Code", "t"."ShippingAddress_Country_FullName"
+            FROM (
+            SELECT "v"."Id", "v"."Name", "v"."BillingAddress_AddressLine1", "v"."BillingAddress_AddressLine2", "v"."BillingAddress_ZipCode", "v"."BillingAddress_Country_Code", "v"."BillingAddress_Country_FullName", "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
+            FROM "ValuedCustomer" AS "v"
+            ORDER BY "v"."Id"
+            LIMIT -1 OFFSET @__p_0
+            ) AS "t"
+            WHERE "t"."ShippingAddress_Country_Code" = 'DE'
+            """
         );
     }
 
@@ -501,12 +501,12 @@ WHERE "t"."ShippingAddress_Country_Code" = 'DE'
 
         AssertSql(
             """
-SELECT "v"."Id", "v"."OptionalCustomerId", "v"."RequiredCustomerId", "v0"."Id", "v0"."Name", "v0"."BillingAddress_AddressLine1", "v0"."BillingAddress_AddressLine2", "v0"."BillingAddress_ZipCode", "v0"."BillingAddress_Country_Code", "v0"."BillingAddress_Country_FullName", "v0"."ShippingAddress_AddressLine1", "v0"."ShippingAddress_AddressLine2", "v0"."ShippingAddress_ZipCode", "v0"."ShippingAddress_Country_Code", "v0"."ShippingAddress_Country_FullName", "v1"."Id", "v1"."Name", "v1"."BillingAddress_AddressLine1", "v1"."BillingAddress_AddressLine2", "v1"."BillingAddress_ZipCode", "v1"."BillingAddress_Country_Code", "v1"."BillingAddress_Country_FullName", "v1"."ShippingAddress_AddressLine1", "v1"."ShippingAddress_AddressLine2", "v1"."ShippingAddress_ZipCode", "v1"."ShippingAddress_Country_Code", "v1"."ShippingAddress_Country_FullName"
-FROM "ValuedCustomerGroup" AS "v"
-LEFT JOIN "ValuedCustomer" AS "v0" ON "v"."OptionalCustomerId" = "v0"."Id"
-INNER JOIN "ValuedCustomer" AS "v1" ON "v"."RequiredCustomerId" = "v1"."Id"
-WHERE "v0"."ShippingAddress_ZipCode" <> 7728 OR "v0"."ShippingAddress_ZipCode" IS NULL
-"""
+            SELECT "v"."Id", "v"."OptionalCustomerId", "v"."RequiredCustomerId", "v0"."Id", "v0"."Name", "v0"."BillingAddress_AddressLine1", "v0"."BillingAddress_AddressLine2", "v0"."BillingAddress_ZipCode", "v0"."BillingAddress_Country_Code", "v0"."BillingAddress_Country_FullName", "v0"."ShippingAddress_AddressLine1", "v0"."ShippingAddress_AddressLine2", "v0"."ShippingAddress_ZipCode", "v0"."ShippingAddress_Country_Code", "v0"."ShippingAddress_Country_FullName", "v1"."Id", "v1"."Name", "v1"."BillingAddress_AddressLine1", "v1"."BillingAddress_AddressLine2", "v1"."BillingAddress_ZipCode", "v1"."BillingAddress_Country_Code", "v1"."BillingAddress_Country_FullName", "v1"."ShippingAddress_AddressLine1", "v1"."ShippingAddress_AddressLine2", "v1"."ShippingAddress_ZipCode", "v1"."ShippingAddress_Country_Code", "v1"."ShippingAddress_Country_FullName"
+            FROM "ValuedCustomerGroup" AS "v"
+            LEFT JOIN "ValuedCustomer" AS "v0" ON "v"."OptionalCustomerId" = "v0"."Id"
+            INNER JOIN "ValuedCustomer" AS "v1" ON "v"."RequiredCustomerId" = "v1"."Id"
+            WHERE "v0"."ShippingAddress_ZipCode" <> 7728 OR "v0"."ShippingAddress_ZipCode" IS NULL
+            """
         );
     }
 
@@ -520,12 +520,12 @@ WHERE "v0"."ShippingAddress_ZipCode" <> 7728 OR "v0"."ShippingAddress_ZipCode" I
 
         AssertSql(
             """
-SELECT "v"."Id", "v"."OptionalCustomerId", "v"."RequiredCustomerId", "v1"."Id", "v1"."Name", "v1"."BillingAddress_AddressLine1", "v1"."BillingAddress_AddressLine2", "v1"."BillingAddress_ZipCode", "v1"."BillingAddress_Country_Code", "v1"."BillingAddress_Country_FullName", "v1"."ShippingAddress_AddressLine1", "v1"."ShippingAddress_AddressLine2", "v1"."ShippingAddress_ZipCode", "v1"."ShippingAddress_Country_Code", "v1"."ShippingAddress_Country_FullName", "v0"."Id", "v0"."Name", "v0"."BillingAddress_AddressLine1", "v0"."BillingAddress_AddressLine2", "v0"."BillingAddress_ZipCode", "v0"."BillingAddress_Country_Code", "v0"."BillingAddress_Country_FullName", "v0"."ShippingAddress_AddressLine1", "v0"."ShippingAddress_AddressLine2", "v0"."ShippingAddress_ZipCode", "v0"."ShippingAddress_Country_Code", "v0"."ShippingAddress_Country_FullName"
-FROM "ValuedCustomerGroup" AS "v"
-INNER JOIN "ValuedCustomer" AS "v0" ON "v"."RequiredCustomerId" = "v0"."Id"
-LEFT JOIN "ValuedCustomer" AS "v1" ON "v"."OptionalCustomerId" = "v1"."Id"
-WHERE "v0"."ShippingAddress_ZipCode" <> 7728
-"""
+            SELECT "v"."Id", "v"."OptionalCustomerId", "v"."RequiredCustomerId", "v1"."Id", "v1"."Name", "v1"."BillingAddress_AddressLine1", "v1"."BillingAddress_AddressLine2", "v1"."BillingAddress_ZipCode", "v1"."BillingAddress_Country_Code", "v1"."BillingAddress_Country_FullName", "v1"."ShippingAddress_AddressLine1", "v1"."ShippingAddress_AddressLine2", "v1"."ShippingAddress_ZipCode", "v1"."ShippingAddress_Country_Code", "v1"."ShippingAddress_Country_FullName", "v0"."Id", "v0"."Name", "v0"."BillingAddress_AddressLine1", "v0"."BillingAddress_AddressLine2", "v0"."BillingAddress_ZipCode", "v0"."BillingAddress_Country_Code", "v0"."BillingAddress_Country_FullName", "v0"."ShippingAddress_AddressLine1", "v0"."ShippingAddress_AddressLine2", "v0"."ShippingAddress_ZipCode", "v0"."ShippingAddress_Country_Code", "v0"."ShippingAddress_Country_FullName"
+            FROM "ValuedCustomerGroup" AS "v"
+            INNER JOIN "ValuedCustomer" AS "v0" ON "v"."RequiredCustomerId" = "v0"."Id"
+            LEFT JOIN "ValuedCustomer" AS "v1" ON "v"."OptionalCustomerId" = "v1"."Id"
+            WHERE "v0"."ShippingAddress_ZipCode" <> 7728
+            """
         );
     }
 
@@ -552,10 +552,10 @@ WHERE "v0"."ShippingAddress_ZipCode" <> 7728
 
         AssertSql(
             """
-SELECT "v0"."ShippingAddress_AddressLine1", "v0"."ShippingAddress_AddressLine2", "v0"."ShippingAddress_ZipCode", "v0"."ShippingAddress_Country_Code", "v0"."ShippingAddress_Country_FullName"
-FROM "ValuedCustomerGroup" AS "v"
-INNER JOIN "ValuedCustomer" AS "v0" ON "v"."RequiredCustomerId" = "v0"."Id"
-"""
+            SELECT "v0"."ShippingAddress_AddressLine1", "v0"."ShippingAddress_AddressLine2", "v0"."ShippingAddress_ZipCode", "v0"."ShippingAddress_Country_Code", "v0"."ShippingAddress_Country_FullName"
+            FROM "ValuedCustomerGroup" AS "v"
+            INNER JOIN "ValuedCustomer" AS "v0" ON "v"."RequiredCustomerId" = "v0"."Id"
+            """
         );
     }
 
@@ -565,16 +565,16 @@ INNER JOIN "ValuedCustomer" AS "v0" ON "v"."RequiredCustomerId" = "v0"."Id"
 
         AssertSql(
             """
-@__p_0='1'
+            @__p_0='1'
 
-SELECT DISTINCT "t"."Id", "t"."Name", "t"."BillingAddress_AddressLine1", "t"."BillingAddress_AddressLine2", "t"."BillingAddress_ZipCode", "t"."BillingAddress_Country_Code", "t"."BillingAddress_Country_FullName", "t"."ShippingAddress_AddressLine1", "t"."ShippingAddress_AddressLine2", "t"."ShippingAddress_ZipCode", "t"."ShippingAddress_Country_Code", "t"."ShippingAddress_Country_FullName"
-FROM (
-    SELECT "v"."Id", "v"."Name", "v"."BillingAddress_AddressLine1", "v"."BillingAddress_AddressLine2", "v"."BillingAddress_ZipCode", "v"."BillingAddress_Country_Code", "v"."BillingAddress_Country_FullName", "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
-    FROM "ValuedCustomer" AS "v"
-    ORDER BY "v"."Id"
-    LIMIT -1 OFFSET @__p_0
-) AS "t"
-"""
+            SELECT DISTINCT "t"."Id", "t"."Name", "t"."BillingAddress_AddressLine1", "t"."BillingAddress_AddressLine2", "t"."BillingAddress_ZipCode", "t"."BillingAddress_Country_Code", "t"."BillingAddress_Country_FullName", "t"."ShippingAddress_AddressLine1", "t"."ShippingAddress_AddressLine2", "t"."ShippingAddress_ZipCode", "t"."ShippingAddress_Country_Code", "t"."ShippingAddress_Country_FullName"
+            FROM (
+            SELECT "v"."Id", "v"."Name", "v"."BillingAddress_AddressLine1", "v"."BillingAddress_AddressLine2", "v"."BillingAddress_ZipCode", "v"."BillingAddress_Country_Code", "v"."BillingAddress_Country_FullName", "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
+            FROM "ValuedCustomer" AS "v"
+            ORDER BY "v"."Id"
+            LIMIT -1 OFFSET @__p_0
+            ) AS "t"
+            """
         );
     }
 
@@ -584,9 +584,9 @@ FROM (
 
         AssertSql(
             """
-SELECT "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
-FROM "ValuedCustomer" AS "v"
-"""
+            SELECT "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
+            FROM "ValuedCustomer" AS "v"
+            """
         );
     }
 
@@ -596,9 +596,9 @@ FROM "ValuedCustomer" AS "v"
 
         AssertSql(
             """
-SELECT "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
-FROM "ValuedCustomer" AS "v"
-"""
+            SELECT "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
+            FROM "ValuedCustomer" AS "v"
+            """
         );
     }
 
@@ -608,9 +608,9 @@ FROM "ValuedCustomer" AS "v"
 
         AssertSql(
             """
-SELECT "v"."ShippingAddress_Country_FullName"
-FROM "ValuedCustomer" AS "v"
-"""
+            SELECT "v"."ShippingAddress_Country_FullName"
+            FROM "ValuedCustomer" AS "v"
+            """
         );
     }
 
@@ -620,10 +620,10 @@ FROM "ValuedCustomer" AS "v"
 
         AssertSql(
             """
-SELECT "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
-FROM "ValuedCustomer" AS "v"
-WHERE "v"."ShippingAddress_ZipCode" = 7728
-"""
+            SELECT "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
+            FROM "ValuedCustomer" AS "v"
+            WHERE "v"."ShippingAddress_ZipCode" = 7728
+            """
         );
     }
 
@@ -633,9 +633,9 @@ WHERE "v"."ShippingAddress_ZipCode" = 7728
 
         AssertSql(
             """
-SELECT DISTINCT "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
-FROM "ValuedCustomer" AS "v"
-"""
+            SELECT DISTINCT "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
+            FROM "ValuedCustomer" AS "v"
+            """
         );
     }
 
@@ -645,10 +645,10 @@ FROM "ValuedCustomer" AS "v"
 
         AssertSql(
             """
-SELECT "v"."Id", "v"."Name", "v"."BillingAddress_AddressLine1", "v"."BillingAddress_AddressLine2", "v"."BillingAddress_ZipCode", "v"."BillingAddress_Country_Code", "v"."BillingAddress_Country_FullName", "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
-FROM "ValuedCustomer" AS "v"
-WHERE "v"."ShippingAddress_AddressLine1" = "v"."BillingAddress_AddressLine1" AND ("v"."ShippingAddress_AddressLine2" = "v"."BillingAddress_AddressLine2" OR ("v"."ShippingAddress_AddressLine2" IS NULL AND "v"."BillingAddress_AddressLine2" IS NULL)) AND "v"."ShippingAddress_ZipCode" = "v"."BillingAddress_ZipCode"
-"""
+            SELECT "v"."Id", "v"."Name", "v"."BillingAddress_AddressLine1", "v"."BillingAddress_AddressLine2", "v"."BillingAddress_ZipCode", "v"."BillingAddress_Country_Code", "v"."BillingAddress_Country_FullName", "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
+            FROM "ValuedCustomer" AS "v"
+            WHERE "v"."ShippingAddress_AddressLine1" = "v"."BillingAddress_AddressLine1" AND ("v"."ShippingAddress_AddressLine2" = "v"."BillingAddress_AddressLine2" OR ("v"."ShippingAddress_AddressLine2" IS NULL AND "v"."BillingAddress_AddressLine2" IS NULL)) AND "v"."ShippingAddress_ZipCode" = "v"."BillingAddress_ZipCode"
+            """
         );
     }
 
@@ -658,10 +658,10 @@ WHERE "v"."ShippingAddress_AddressLine1" = "v"."BillingAddress_AddressLine1" AND
 
         AssertSql(
             """
-SELECT "v"."Id", "v"."Name", "v"."BillingAddress_AddressLine1", "v"."BillingAddress_AddressLine2", "v"."BillingAddress_ZipCode", "v"."BillingAddress_Country_Code", "v"."BillingAddress_Country_FullName", "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
-FROM "ValuedCustomer" AS "v"
-WHERE "v"."ShippingAddress_AddressLine1" = '804 S. Lakeshore Road' AND "v"."ShippingAddress_AddressLine2" IS NULL AND "v"."ShippingAddress_ZipCode" = 38654 AND "v"."ShippingAddress_Country_Code" = 'US' AND "v"."ShippingAddress_Country_FullName" = 'United States'
-"""
+            SELECT "v"."Id", "v"."Name", "v"."BillingAddress_AddressLine1", "v"."BillingAddress_AddressLine2", "v"."BillingAddress_ZipCode", "v"."BillingAddress_Country_Code", "v"."BillingAddress_Country_FullName", "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
+            FROM "ValuedCustomer" AS "v"
+            WHERE "v"."ShippingAddress_AddressLine1" = '804 S. Lakeshore Road' AND "v"."ShippingAddress_AddressLine2" IS NULL AND "v"."ShippingAddress_ZipCode" = 38654 AND "v"."ShippingAddress_Country_Code" = 'US' AND "v"."ShippingAddress_Country_FullName" = 'United States'
+            """
         );
     }
 
@@ -671,15 +671,15 @@ WHERE "v"."ShippingAddress_AddressLine1" = '804 S. Lakeshore Road' AND "v"."Ship
 
         AssertSql(
             """
-@__entity_equality_address_0_AddressLine1='804 S. Lakeshore Road' (Size = 21)
-@__entity_equality_address_0_ZipCode='38654' (Nullable = true)
-@__entity_equality_address_0_Code='US' (Size = 2)
-@__entity_equality_address_0_FullName='United States' (Size = 13)
+            @__entity_equality_address_0_AddressLine1='804 S. Lakeshore Road' (Size = 21)
+            @__entity_equality_address_0_ZipCode='38654' (Nullable = true)
+            @__entity_equality_address_0_Code='US' (Size = 2)
+            @__entity_equality_address_0_FullName='United States' (Size = 13)
 
-SELECT "v"."Id", "v"."Name", "v"."BillingAddress_AddressLine1", "v"."BillingAddress_AddressLine2", "v"."BillingAddress_ZipCode", "v"."BillingAddress_Country_Code", "v"."BillingAddress_Country_FullName", "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
-FROM "ValuedCustomer" AS "v"
-WHERE "v"."ShippingAddress_AddressLine1" = @__entity_equality_address_0_AddressLine1 AND "v"."ShippingAddress_AddressLine2" IS NULL AND "v"."ShippingAddress_ZipCode" = @__entity_equality_address_0_ZipCode AND "v"."ShippingAddress_Country_Code" = @__entity_equality_address_0_Code AND "v"."ShippingAddress_Country_FullName" = @__entity_equality_address_0_FullName
-"""
+            SELECT "v"."Id", "v"."Name", "v"."BillingAddress_AddressLine1", "v"."BillingAddress_AddressLine2", "v"."BillingAddress_ZipCode", "v"."BillingAddress_Country_Code", "v"."BillingAddress_Country_FullName", "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
+            FROM "ValuedCustomer" AS "v"
+            WHERE "v"."ShippingAddress_AddressLine1" = @__entity_equality_address_0_AddressLine1 AND "v"."ShippingAddress_AddressLine2" IS NULL AND "v"."ShippingAddress_ZipCode" = @__entity_equality_address_0_ZipCode AND "v"."ShippingAddress_Country_Code" = @__entity_equality_address_0_Code AND "v"."ShippingAddress_Country_FullName" = @__entity_equality_address_0_FullName
+            """
         );
     }
 
@@ -696,18 +696,18 @@ WHERE "v"."ShippingAddress_AddressLine1" = @__entity_equality_address_0_AddressL
 
         AssertSql(
             """
-@__entity_equality_address_0_AddressLine1='804 S. Lakeshore Road' (Size = 21)
-@__entity_equality_address_0_ZipCode='38654' (Nullable = true)
-@__entity_equality_address_0_Code='US' (Size = 2)
-@__entity_equality_address_0_FullName='United States' (Size = 13)
+            @__entity_equality_address_0_AddressLine1='804 S. Lakeshore Road' (Size = 21)
+            @__entity_equality_address_0_ZipCode='38654' (Nullable = true)
+            @__entity_equality_address_0_Code='US' (Size = 2)
+            @__entity_equality_address_0_FullName='United States' (Size = 13)
 
-SELECT "v"."Id", "v"."Name", "v"."BillingAddress_AddressLine1", "v"."BillingAddress_AddressLine2", "v"."BillingAddress_ZipCode", "v"."BillingAddress_Country_Code", "v"."BillingAddress_Country_FullName", "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
-FROM "ValuedCustomer" AS "v"
-WHERE EXISTS (
-    SELECT 1
-    FROM "ValuedCustomer" AS "v0"
-    WHERE "v0"."ShippingAddress_AddressLine1" = @__entity_equality_address_0_AddressLine1 AND "v0"."ShippingAddress_AddressLine2" IS NULL AND "v0"."ShippingAddress_ZipCode" = @__entity_equality_address_0_ZipCode AND "v0"."ShippingAddress_Country_Code" = @__entity_equality_address_0_Code AND "v0"."ShippingAddress_Country_FullName" = @__entity_equality_address_0_FullName)
-"""
+            SELECT "v"."Id", "v"."Name", "v"."BillingAddress_AddressLine1", "v"."BillingAddress_AddressLine2", "v"."BillingAddress_ZipCode", "v"."BillingAddress_Country_Code", "v"."BillingAddress_Country_FullName", "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
+            FROM "ValuedCustomer" AS "v"
+            WHERE EXISTS (
+            SELECT 1
+            FROM "ValuedCustomer" AS "v0"
+            WHERE "v0"."ShippingAddress_AddressLine1" = @__entity_equality_address_0_AddressLine1 AND "v0"."ShippingAddress_AddressLine2" IS NULL AND "v0"."ShippingAddress_ZipCode" = @__entity_equality_address_0_ZipCode AND "v0"."ShippingAddress_Country_Code" = @__entity_equality_address_0_Code AND "v0"."ShippingAddress_Country_FullName" = @__entity_equality_address_0_FullName)
+            """
         );
     }
 
@@ -717,14 +717,14 @@ WHERE EXISTS (
 
         AssertSql(
             """
-SELECT "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
-FROM "ValuedCustomer" AS "v"
-WHERE "v"."Id" = 1
-UNION ALL
-SELECT "v0"."ShippingAddress_AddressLine1", "v0"."ShippingAddress_AddressLine2", "v0"."ShippingAddress_ZipCode", "v0"."ShippingAddress_Country_Code", "v0"."ShippingAddress_Country_FullName"
-FROM "ValuedCustomer" AS "v0"
-WHERE "v0"."Id" = 2
-"""
+            SELECT "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
+            FROM "ValuedCustomer" AS "v"
+            WHERE "v"."Id" = 1
+            UNION ALL
+            SELECT "v0"."ShippingAddress_AddressLine1", "v0"."ShippingAddress_AddressLine2", "v0"."ShippingAddress_ZipCode", "v0"."ShippingAddress_Country_Code", "v0"."ShippingAddress_Country_FullName"
+            FROM "ValuedCustomer" AS "v0"
+            WHERE "v0"."Id" = 2
+            """
         );
     }
 
@@ -734,14 +734,14 @@ WHERE "v0"."Id" = 2
 
         AssertSql(
             """
-SELECT "v"."Id", "v"."Name", "v"."BillingAddress_AddressLine1", "v"."BillingAddress_AddressLine2", "v"."BillingAddress_ZipCode", "v"."BillingAddress_Country_Code", "v"."BillingAddress_Country_FullName", "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
-FROM "ValuedCustomer" AS "v"
-WHERE "v"."Id" = 1
-UNION ALL
-SELECT "v0"."Id", "v0"."Name", "v0"."BillingAddress_AddressLine1", "v0"."BillingAddress_AddressLine2", "v0"."BillingAddress_ZipCode", "v0"."BillingAddress_Country_Code", "v0"."BillingAddress_Country_FullName", "v0"."ShippingAddress_AddressLine1", "v0"."ShippingAddress_AddressLine2", "v0"."ShippingAddress_ZipCode", "v0"."ShippingAddress_Country_Code", "v0"."ShippingAddress_Country_FullName"
-FROM "ValuedCustomer" AS "v0"
-WHERE "v0"."Id" = 2
-"""
+            SELECT "v"."Id", "v"."Name", "v"."BillingAddress_AddressLine1", "v"."BillingAddress_AddressLine2", "v"."BillingAddress_ZipCode", "v"."BillingAddress_Country_Code", "v"."BillingAddress_Country_FullName", "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
+            FROM "ValuedCustomer" AS "v"
+            WHERE "v"."Id" = 1
+            UNION ALL
+            SELECT "v0"."Id", "v0"."Name", "v0"."BillingAddress_AddressLine1", "v0"."BillingAddress_AddressLine2", "v0"."BillingAddress_ZipCode", "v0"."BillingAddress_Country_Code", "v0"."BillingAddress_Country_FullName", "v0"."ShippingAddress_AddressLine1", "v0"."ShippingAddress_AddressLine2", "v0"."ShippingAddress_ZipCode", "v0"."ShippingAddress_Country_Code", "v0"."ShippingAddress_Country_FullName"
+            FROM "ValuedCustomer" AS "v0"
+            WHERE "v0"."Id" = 2
+            """
         );
     }
 
@@ -751,14 +751,14 @@ WHERE "v0"."Id" = 2
 
         AssertSql(
             """
-SELECT "v"."Id", "v"."Name", "v"."BillingAddress_AddressLine1", "v"."BillingAddress_AddressLine2", "v"."BillingAddress_ZipCode", "v"."BillingAddress_Country_Code", "v"."BillingAddress_Country_FullName", "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
-FROM "ValuedCustomer" AS "v"
-WHERE "v"."Id" = 1
-UNION
-SELECT "v0"."Id", "v0"."Name", "v0"."BillingAddress_AddressLine1", "v0"."BillingAddress_AddressLine2", "v0"."BillingAddress_ZipCode", "v0"."BillingAddress_Country_Code", "v0"."BillingAddress_Country_FullName", "v0"."ShippingAddress_AddressLine1", "v0"."ShippingAddress_AddressLine2", "v0"."ShippingAddress_ZipCode", "v0"."ShippingAddress_Country_Code", "v0"."ShippingAddress_Country_FullName"
-FROM "ValuedCustomer" AS "v0"
-WHERE "v0"."Id" = 2
-"""
+            SELECT "v"."Id", "v"."Name", "v"."BillingAddress_AddressLine1", "v"."BillingAddress_AddressLine2", "v"."BillingAddress_ZipCode", "v"."BillingAddress_Country_Code", "v"."BillingAddress_Country_FullName", "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
+            FROM "ValuedCustomer" AS "v"
+            WHERE "v"."Id" = 1
+            UNION
+            SELECT "v0"."Id", "v0"."Name", "v0"."BillingAddress_AddressLine1", "v0"."BillingAddress_AddressLine2", "v0"."BillingAddress_ZipCode", "v0"."BillingAddress_Country_Code", "v0"."BillingAddress_Country_FullName", "v0"."ShippingAddress_AddressLine1", "v0"."ShippingAddress_AddressLine2", "v0"."ShippingAddress_ZipCode", "v0"."ShippingAddress_Country_Code", "v0"."ShippingAddress_Country_FullName"
+            FROM "ValuedCustomer" AS "v0"
+            WHERE "v0"."Id" = 2
+            """
         );
     }
 
@@ -768,14 +768,14 @@ WHERE "v0"."Id" = 2
 
         AssertSql(
             """
-SELECT "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
-FROM "ValuedCustomer" AS "v"
-WHERE "v"."Id" = 1
-UNION
-SELECT "v0"."ShippingAddress_AddressLine1", "v0"."ShippingAddress_AddressLine2", "v0"."ShippingAddress_ZipCode", "v0"."ShippingAddress_Country_Code", "v0"."ShippingAddress_Country_FullName"
-FROM "ValuedCustomer" AS "v0"
-WHERE "v0"."Id" = 2
-"""
+            SELECT "v"."ShippingAddress_AddressLine1", "v"."ShippingAddress_AddressLine2", "v"."ShippingAddress_ZipCode", "v"."ShippingAddress_Country_Code", "v"."ShippingAddress_Country_FullName"
+            FROM "ValuedCustomer" AS "v"
+            WHERE "v"."Id" = 1
+            UNION
+            SELECT "v0"."ShippingAddress_AddressLine1", "v0"."ShippingAddress_AddressLine2", "v0"."ShippingAddress_ZipCode", "v0"."ShippingAddress_Country_Code", "v0"."ShippingAddress_Country_FullName"
+            FROM "ValuedCustomer" AS "v0"
+            WHERE "v0"."Id" = 2
+            """
         );
     }
 
@@ -785,12 +785,12 @@ WHERE "v0"."Id" = 2
 
         AssertSql(
             """
-SELECT "v"."ShippingAddress_AddressLine1"
-FROM "ValuedCustomer" AS "v"
-UNION ALL
-SELECT "v0"."BillingAddress_AddressLine1" AS "ShippingAddress_AddressLine1"
-FROM "ValuedCustomer" AS "v0"
-"""
+            SELECT "v"."ShippingAddress_AddressLine1"
+            FROM "ValuedCustomer" AS "v"
+            UNION ALL
+            SELECT "v0"."BillingAddress_AddressLine1" AS "ShippingAddress_AddressLine1"
+            FROM "ValuedCustomer" AS "v0"
+            """
         );
     }
 
@@ -800,12 +800,12 @@ FROM "ValuedCustomer" AS "v0"
 
         AssertSql(
             """
-SELECT "v"."ShippingAddress_AddressLine1"
-FROM "ValuedCustomer" AS "v"
-UNION
-SELECT "v0"."BillingAddress_AddressLine1" AS "ShippingAddress_AddressLine1"
-FROM "ValuedCustomer" AS "v0"
-"""
+            SELECT "v"."ShippingAddress_AddressLine1"
+            FROM "ValuedCustomer" AS "v"
+            UNION
+            SELECT "v0"."BillingAddress_AddressLine1" AS "ShippingAddress_AddressLine1"
+            FROM "ValuedCustomer" AS "v0"
+            """
         );
     }
 

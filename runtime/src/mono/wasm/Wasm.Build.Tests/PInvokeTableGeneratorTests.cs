@@ -78,23 +78,23 @@ namespace Wasm.Build.Tests
         )
         {
             string code = """
-                using System;
-                using System.Runtime.InteropServices;
-                public class Test
-                {
-                    public static int Main()
-                    {
-                        Console.WriteLine("Main running");
-                        return 42;
-                    }
+            using System;
+            using System.Runtime.InteropServices;
+            public class Test
+            {
+            public static int Main()
+            {
+            Console.WriteLine("Main running");
+            return 42;
+            }
 
-                    [DllImport("variadic", EntryPoint="sum")]
-                    public unsafe static extern int using_sum_one(delegate* unmanaged<char*, IntPtr, void> callback);
+            [DllImport("variadic", EntryPoint="sum")]
+            public unsafe static extern int using_sum_one(delegate* unmanaged<char*, IntPtr, void> callback);
 
-                    [DllImport("variadic", EntryPoint="sum")]
-                    public static extern int sum_one(int a, int b);
-                }
-                """;
+            [DllImport("variadic", EntryPoint="sum")]
+            public static extern int sum_one(int a, int b);
+            }
+            """;
 
             (buildArgs, string output) = BuildForVariadicFunctionTests(
                 code,
@@ -227,32 +227,32 @@ namespace Wasm.Build.Tests
         {
             string code =
                 """
-            using System;
-            using System.Runtime.CompilerServices;
-            using System.Runtime.InteropServices;
-            """
+                using System;
+                using System.Runtime.CompilerServices;
+                using System.Runtime.InteropServices;
+                """
                 + (
                     withDisabledRuntimeMarshallingAttribute
                         ? "[assembly: DisableRuntimeMarshalling]"
                         : ""
                 )
                 + """
-            public class Test
-            {
+                public class Test
+                {
                 public static int Main()
                 {
-                    var x = new S { Value = 5 };
+                var x = new S { Value = 5 };
 
-                    Console.WriteLine("Main running " + x.Value);
-                    return 42;
+                Console.WriteLine("Main running " + x.Value);
+                return 42;
                 }
 
                 public struct S { public int Value; }
 
                 [UnmanagedCallersOnly]
                 public static void M(S myStruct) { }
-            }
-            """;
+                }
+                """;
 
             buildArgs = ExpandBuildArgs(
                 buildArgs with
@@ -380,27 +380,27 @@ namespace Wasm.Build.Tests
 
             code =
                 """
-            using System;
-            using System.Runtime.CompilerServices;
-            using System.Runtime.InteropServices;
-            """
+                using System;
+                using System.Runtime.CompilerServices;
+                using System.Runtime.InteropServices;
+                """
                 + (appHasAttribute ? "[assembly: DisableRuntimeMarshalling]" : "")
                 + """
 
-            public class Test
-            {
+                public class Test
+                {
                 public static int Main()
                 {
-                    var x = new S { Value = 5 };
+                var x = new S { Value = 5 };
 
-                    Console.WriteLine("Main running " + x.Value);
-                    return 42;
+                Console.WriteLine("Main running " + x.Value);
+                return 42;
                 }
 
                 [UnmanagedCallersOnly]
                 public static void M(S myStruct) { }
-            }
-            """;
+                }
+                """;
 
             buildArgs = ExpandBuildArgs(
                 buildArgs with
@@ -455,20 +455,20 @@ namespace Wasm.Build.Tests
         )
         {
             string code = """
-                using System;
-                using System.Runtime.InteropServices;
-                public class Test
-                {
-                    public static int Main()
-                    {
-                        Console.WriteLine("Main running");
-                        return 42;
-                    }
+            using System;
+            using System.Runtime.InteropServices;
+            public class Test
+            {
+            public static int Main()
+            {
+            Console.WriteLine("Main running");
+            return 42;
+            }
 
-                    [DllImport("someting")]
-                    public unsafe static extern void SomeFunction1(delegate* unmanaged<int> callback);
-                }
-                """;
+            [DllImport("someting")]
+            public unsafe static extern void SomeFunction1(delegate* unmanaged<int> callback);
+            }
+            """;
 
             (buildArgs, string output) = BuildForVariadicFunctionTests(
                 code,
@@ -501,20 +501,20 @@ namespace Wasm.Build.Tests
         )
         {
             string code = """
-                using System;
-                using System.Runtime.InteropServices;
-                public class Test
-                {
-                    public static int Main()
-                    {
-                        Console.WriteLine("Main running");
-                        return 42;
-                    }
+            using System;
+            using System.Runtime.InteropServices;
+            public class Test
+            {
+            public static int Main()
+            {
+            Console.WriteLine("Main running");
+            return 42;
+            }
 
-                    [UnmanagedCallersOnly]
-                    public unsafe static extern void SomeFunction1(delegate* unmanaged<int> callback);
-                }
-                """;
+            [UnmanagedCallersOnly]
+            public unsafe static extern void SomeFunction1(delegate* unmanaged<int> callback);
+            }
+            """;
 
             (_, string output) = BuildForVariadicFunctionTests(
                 code,
@@ -543,18 +543,18 @@ namespace Wasm.Build.Tests
 
             public static class Interop
             {
-                public enum Numbers { A, B, C, D }
+            public enum Numbers { A, B, C, D }
 
-                [MethodImplAttribute(MethodImplOptions.InternalCall)]
-                internal static extern void Square(Numbers x);
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            internal static extern void Square(Numbers x);
 
-                [MethodImplAttribute(MethodImplOptions.InternalCall)]
-                internal static extern void Square(Numbers x, Numbers y);
+            [MethodImplAttribute(MethodImplOptions.InternalCall)]
+            internal static extern void Square(Numbers x, Numbers y);
 
-                public static void Main()
-                {
-                    // Noop
-                }
+            public static void Main()
+            {
+            // Noop
+            }
             }
             """;
 
@@ -583,28 +583,28 @@ namespace Wasm.Build.Tests
 
             string projectCode = """
             <Project>
-                <UsingTask TaskName="ManagedToNativeGenerator" AssemblyFile="###WasmAppBuilder###" />
-                <Target Name="Build">
-                  <PropertyGroup>
-                    <WasmPInvokeTablePath>pinvoke-table.h</WasmPInvokeTablePath>
-                    <WasmInterpToNativeTablePath>wasm_m2n_invoke.g.h</WasmInterpToNativeTablePath>
-                    <WasmRuntimeICallTablePath>runtime-icall-table.h</WasmRuntimeICallTablePath>
-                  </PropertyGroup>
+            <UsingTask TaskName="ManagedToNativeGenerator" AssemblyFile="###WasmAppBuilder###" />
+            <Target Name="Build">
+            <PropertyGroup>
+            <WasmPInvokeTablePath>pinvoke-table.h</WasmPInvokeTablePath>
+            <WasmInterpToNativeTablePath>wasm_m2n_invoke.g.h</WasmInterpToNativeTablePath>
+            <WasmRuntimeICallTablePath>runtime-icall-table.h</WasmRuntimeICallTablePath>
+            </PropertyGroup>
 
-                  <ItemGroup>
-                    <WasmPInvokeModule Include="libSystem.Native" />
-                    ###WasmPInvokeModule###
-                  </ItemGroup>
+            <ItemGroup>
+            <WasmPInvokeModule Include="libSystem.Native" />
+            ###WasmPInvokeModule###
+            </ItemGroup>
 
-                  <ManagedToNativeGenerator
-                    Assemblies="@(WasmPInvokeAssembly)"
-                    PInvokeModules="@(WasmPInvokeModule)"
-                    PInvokeOutputPath="$(WasmPInvokeTablePath)"
-                    RuntimeIcallTableFile="$(WasmRuntimeICallTablePath)"
-                    InterpToNativeOutputPath="$(WasmInterpToNativeTablePath)">
-                    <Output TaskParameter="FileWrites" ItemName="FileWrites" />
-                  </ManagedToNativeGenerator>
-                </Target>
+            <ManagedToNativeGenerator
+            Assemblies="@(WasmPInvokeAssembly)"
+            PInvokeModules="@(WasmPInvokeModule)"
+            PInvokeOutputPath="$(WasmPInvokeTablePath)"
+            RuntimeIcallTableFile="$(WasmRuntimeICallTablePath)"
+            InterpToNativeOutputPath="$(WasmInterpToNativeTablePath)">
+            <Output TaskParameter="FileWrites" ItemName="FileWrites" />
+            </ManagedToNativeGenerator>
+            </Target>
             </Project>
             """;
 
@@ -613,8 +613,8 @@ namespace Wasm.Build.Tests
 
             string icallTable = """
             [
-             { "klass":"Interop", "icalls": [{} 	,{ "name": "Square(Numbers)", "func": "ves_abc", "handles": false }
-            	,{ "name": "Add(Numbers,Numbers)", "func": "ves_def", "handles": false }
+            { "klass":"Interop", "icalls": [{} 	,{ "name": "Square(Numbers)", "func": "ves_abc", "handles": false }
+            ,{ "name": "Add(Numbers,Numbers)", "func": "ves_def", "handles": false }
             ]}
             ]
 

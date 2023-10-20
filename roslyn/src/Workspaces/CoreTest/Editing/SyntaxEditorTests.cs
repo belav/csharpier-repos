@@ -259,27 +259,27 @@ public class C
         public void TestAddAttribute()
         {
             var code = """
-using System;
-using System.CodeAnalysis;
+            using System;
+            using System.CodeAnalysis;
 
-public class C
-{
-    Type Main(Type t)
-    {
-    }
-}
-""";
+            public class C
+            {
+            Type Main(Type t)
+            {
+            }
+            }
+            """;
             var fixedCode = """
-using System;
-using System.CodeAnalysis;
+            using System;
+            using System.CodeAnalysis;
 
-public class C
-{
-    Type Main([Example(Sample.Attribute)] Type t)
-    {
-    }
-}
-""";
+            public class C
+            {
+            Type Main([Example(Sample.Attribute)] Type t)
+            {
+            }
+            }
+            """;
 
             var cu = SyntaxFactory.ParseCompilationUnit(code);
             var cls = cu.Members[0];
@@ -310,27 +310,27 @@ public class C
         public void TestAddGenericAttribute()
         {
             var code = """
-using System;
-using System.CodeAnalysis;
+            using System;
+            using System.CodeAnalysis;
 
-public class C
-{
-    Type Main<T>()
-    {
-    }
-}
-""";
+            public class C
+            {
+            Type Main<T>()
+            {
+            }
+            }
+            """;
             var fixedCode = """
-using System;
-using System.CodeAnalysis;
+            using System;
+            using System.CodeAnalysis;
 
-public class C
-{
-    Type Main<[Example(Sample.Attribute)] T>()
-    {
-    }
-}
-""";
+            public class C
+            {
+            Type Main<[Example(Sample.Attribute)] T>()
+            {
+            }
+            }
+            """;
 
             var cu = SyntaxFactory.ParseCompilationUnit(code);
             var cls = cu.Members[0];
@@ -361,28 +361,28 @@ public class C
         public void TestAddReturnAttribute()
         {
             var code = """
-using System;
-using System.CodeAnalysis;
+            using System;
+            using System.CodeAnalysis;
 
-public class C
-{
-    Type Main(Type t)
-    {
-    }
-}
-""";
+            public class C
+            {
+            Type Main(Type t)
+            {
+            }
+            }
+            """;
             var fixedCode = """
-using System;
-using System.CodeAnalysis;
+            using System;
+            using System.CodeAnalysis;
 
-public class C
-{
-    [return: Example(Sample.Attribute)]
-    Type Main(Type t)
-    {
-    }
-}
-""";
+            public class C
+            {
+            [return: Example(Sample.Attribute)]
+            Type Main(Type t)
+            {
+            }
+            }
+            """;
 
             var cu = SyntaxFactory.ParseCompilationUnit(code);
             var cls = cu.Members[0];

@@ -30433,16 +30433,16 @@ unsafe class C<T, U, V, X, Y, Z> where T : byte*
         public void BestType_NestedError_ArrayCreation()
         {
             var source = """
-                public class C {
-                    public void M0() {
-                        M1(new[] { ERROR, 1 });
-                        M2(new[] { (ERROR, 1), (1, 2) });
-                    }
+            public class C {
+            public void M0() {
+            M1(new[] { ERROR, 1 });
+            M2(new[] { (ERROR, 1), (1, 2) });
+            }
 
-                    public void M1(int[] arr) { }
-                    public void M2((int, int)[] arr) { }
-                }
-                """;
+            public void M1(int[] arr) { }
+            public void M2((int, int)[] arr) { }
+            }
+            """;
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
                 // (3,20): error CS0103: The name 'ERROR' does not exist in the current context
@@ -30462,18 +30462,18 @@ unsafe class C<T, U, V, X, Y, Z> where T : byte*
         public void BestType_NestedError_StackallocArrayCreation()
         {
             var source = """
-                using System;
+            using System;
 
-                public class C {
-                    public void M0() {
-                        M1(stackalloc int[] { ERROR, 1 });
-                        M2(stackalloc (int, int)[] { (ERROR, 1), (1, 2) });
-                    }
+            public class C {
+            public void M0() {
+            M1(stackalloc int[] { ERROR, 1 });
+            M2(stackalloc (int, int)[] { (ERROR, 1), (1, 2) });
+            }
 
-                    public void M1(Span<int> arr) { }
-                    public void M2(Span<(int, int)> arr) { }
-                }
-                """;
+            public void M1(Span<int> arr) { }
+            public void M2(Span<(int, int)> arr) { }
+            }
+            """;
             var comp = CreateCompilationWithSpan(source);
             comp.VerifyDiagnostics(
                 // (5,31): error CS0103: The name 'ERROR' does not exist in the current context
@@ -30493,24 +30493,24 @@ unsafe class C<T, U, V, X, Y, Z> where T : byte*
         public void BestType_NestedError_SwitchExpr()
         {
             var source = """
-                public class C {
-                    public int M0() {
-                        return 1 switch
-                        {
-                            1 => ERROR,
-                            _ => 1
-                        };
-                    }
+            public class C {
+            public int M0() {
+            return 1 switch
+            {
+            1 => ERROR,
+            _ => 1
+            };
+            }
 
-                    public (int, int) M1() {
-                        return 1 switch
-                        {
-                            1 => (ERROR, 1),
-                            _ => (1, 2)
-                        };
-                    }
-                }
-                """;
+            public (int, int) M1() {
+            return 1 switch
+            {
+            1 => (ERROR, 1),
+            _ => (1, 2)
+            };
+            }
+            }
+            """;
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
                 // (5,18): error CS0103: The name 'ERROR' does not exist in the current context
@@ -30530,16 +30530,16 @@ unsafe class C<T, U, V, X, Y, Z> where T : byte*
         public void BestType_NestedError_ConditionalExpr()
         {
             var source = """
-                public class C {
-                    public int M0() {
-                        return 1 == 1 ? ERROR : 1;
-                    }
+            public class C {
+            public int M0() {
+            return 1 == 1 ? ERROR : 1;
+            }
 
-                    public (int, int) M1() {
-                        return 1 == 1 ? (ERROR, 1) : (1, 2);
-                    }
-                }
-                """;
+            public (int, int) M1() {
+            return 1 == 1 ? (ERROR, 1) : (1, 2);
+            }
+            }
+            """;
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
                 // (3,25): error CS0103: The name 'ERROR' does not exist in the current context
@@ -30559,24 +30559,24 @@ unsafe class C<T, U, V, X, Y, Z> where T : byte*
         public void BestType_NestedError_LambdaReturns()
         {
             var source = """
-                using System;
+            using System;
 
-                public class C {
-                    public void M0() {
-                        Func<bool, int> fn1 = flag =>
-                        {
-                            if (flag) return ERROR;
-                            return 1;
-                        };
+            public class C {
+            public void M0() {
+            Func<bool, int> fn1 = flag =>
+            {
+            if (flag) return ERROR;
+            return 1;
+            };
 
-                        Func<bool, (int, int)> fn2 = flag =>
-                        {
-                            if (flag) return (ERROR, 1);
-                            return (1, 2);
-                        };
-                    }
-                }
-                """;
+            Func<bool, (int, int)> fn2 = flag =>
+            {
+            if (flag) return (ERROR, 1);
+            return (1, 2);
+            };
+            }
+            }
+            """;
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
                 // (7,30): error CS0103: The name 'ERROR' does not exist in the current context
@@ -30596,22 +30596,22 @@ unsafe class C<T, U, V, X, Y, Z> where T : byte*
         public void BestType_NestedError_LambdaReturns_NoTargetType()
         {
             var source = """
-                public class C {
-                    public void M0(bool flag) {
-                        var fn1 = () =>
-                        {
-                            if (flag) return ERROR;
-                            return 1;
-                        };
+            public class C {
+            public void M0(bool flag) {
+            var fn1 = () =>
+            {
+            if (flag) return ERROR;
+            return 1;
+            };
 
-                        var fn2 = () =>
-                        {
-                            if (flag) return (ERROR, 1);
-                            return (1, 2);
-                        };
-                    }
-                }
-                """;
+            var fn2 = () =>
+            {
+            if (flag) return (ERROR, 1);
+            return (1, 2);
+            };
+            }
+            }
+            """;
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
                 // (5,30): error CS0103: The name 'ERROR' does not exist in the current context

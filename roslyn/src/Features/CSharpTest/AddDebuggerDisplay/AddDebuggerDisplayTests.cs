@@ -30,10 +30,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
                 [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
                 class C
                 {
-                    private string GetDebuggerDisplay()
-                    {
-                        return ToString();
-                    }
+                private string GetDebuggerDisplay()
+                {
+                return ToString();
+                }
                 }
                 """
             );
@@ -43,22 +43,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
         public async Task SupportsConstantInterpolatedStrings()
         {
             var code = """
-                [||]class C
-                {
-                }
-                """;
+            [||]class C
+            {
+            }
+            """;
             var fixedCode = """
-                using System.Diagnostics;
+            using System.Diagnostics;
 
-                [DebuggerDisplay($"{{{nameof(GetDebuggerDisplay)}(),nq}}")]
-                class C
-                {
-                    private string GetDebuggerDisplay()
-                    {
-                        return ToString();
-                    }
-                }
-                """;
+            [DebuggerDisplay($"{{{nameof(GetDebuggerDisplay)}(),nq}}")]
+            class C
+            {
+            private string GetDebuggerDisplay()
+            {
+            return ToString();
+            }
+            }
+            """;
 
             await new VerifyCS.Test()
             {
@@ -72,20 +72,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
         public async Task OfferedOnEmptyRecord()
         {
             var code = """
-                [||]record C;
-                """;
+            [||]record C;
+            """;
             var fixedCode = """
-                using System.Diagnostics;
+            using System.Diagnostics;
 
-                [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
-                record C
-                {
-                    private string GetDebuggerDisplay()
-                    {
-                        return ToString();
-                    }
-                }
-                """;
+            [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
+            record C
+            {
+            private string GetDebuggerDisplay()
+            {
+            return ToString();
+            }
+            }
+            """;
 
             await new VerifyCS.Test()
             {
@@ -111,10 +111,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
                 [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
                 struct Foo
                 {
-                    private string GetDebuggerDisplay()
-                    {
-                        return ToString();
-                    }
+                private string GetDebuggerDisplay()
+                {
+                return ToString();
+                }
                 }
                 """
             );
@@ -124,10 +124,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
         public async Task NotOfferedOnStaticClass()
         {
             var code = """
-                [||]static class Foo
-                {
-                }
-                """;
+            [||]static class Foo
+            {
+            }
+            """;
 
             await VerifyCS.VerifyRefactoringAsync(code, code);
         }
@@ -136,11 +136,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
         public async Task NotOfferedOnInterfaceWithToString()
         {
             var code = """
-                [||]interface IFoo
-                {
-                    string ToString();
-                }
-                """;
+            [||]interface IFoo
+            {
+            string ToString();
+            }
+            """;
 
             await VerifyCS.VerifyRefactoringAsync(code, code);
         }
@@ -149,10 +149,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
         public async Task NotOfferedOnEnum()
         {
             var code = """
-                [||]enum Foo
-                {
-                }
-                """;
+            [||]enum Foo
+            {
+            }
+            """;
 
             await VerifyCS.VerifyRefactoringAsync(code, code);
         }
@@ -161,8 +161,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
         public async Task NotOfferedOnDelegate()
         {
             var code = """
-                [||]delegate void Foo();
-                """;
+            [||]delegate void Foo();
+            """;
 
             await VerifyCS.VerifyRefactoringAsync(code, code);
         }
@@ -171,11 +171,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
         public async Task NotOfferedOnUnrelatedClassMembers()
         {
             var code = """
-                class C
-                {
-                    [||]public int Foo { get; }
-                }
-                """;
+            class C
+            {
+            [||]public int Foo { get; }
+            }
+            """;
 
             await VerifyCS.VerifyRefactoringAsync(code, code);
         }
@@ -187,7 +187,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
                 """
                 class C
                 {
-                    public override string [||]ToString() => "Foo";
+                public override string [||]ToString() => "Foo";
                 }
                 """,
                 """
@@ -196,12 +196,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
                 [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
                 class C
                 {
-                    public override string ToString() => "Foo";
+                public override string ToString() => "Foo";
 
-                    private string GetDebuggerDisplay()
-                    {
-                        return ToString();
-                    }
+                private string GetDebuggerDisplay()
+                {
+                return ToString();
+                }
                 }
                 """
             );
@@ -214,7 +214,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
                 """
                 class A
                 {
-                    public new string [||]ToString() => "Foo";
+                public new string [||]ToString() => "Foo";
                 }
                 """,
                 """
@@ -223,12 +223,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
                 [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
                 class A
                 {
-                    public new string ToString() => "Foo";
+                public new string ToString() => "Foo";
 
-                    private string GetDebuggerDisplay()
-                    {
-                        return ToString();
-                    }
+                private string GetDebuggerDisplay()
+                {
+                return ToString();
+                }
                 }
                 """
             );
@@ -238,16 +238,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
         public async Task NotOfferedOnWrongOverloadOfToString()
         {
             var code = """
-                class A
-                {
-                    public virtual string ToString(int bar = 0) => "Foo";
-                }
+            class A
+            {
+            public virtual string ToString(int bar = 0) => "Foo";
+            }
 
-                class B : A
-                {
-                    public override string [||]ToString(int bar = 0) => "Bar";
-                }
-                """;
+            class B : A
+            {
+            public override string [||]ToString(int bar = 0) => "Bar";
+            }
+            """;
 
             await VerifyCS.VerifyRefactoringAsync(code, code);
         }
@@ -259,7 +259,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
                 """
                 class C
                 {
-                    private string [||]GetDebuggerDisplay() => "Foo";
+                private string [||]GetDebuggerDisplay() => "Foo";
                 }
                 """,
                 """
@@ -268,7 +268,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
                 [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
                 class C
                 {
-                    private string GetDebuggerDisplay() => "Foo";
+                private string GetDebuggerDisplay() => "Foo";
                 }
                 """
             );
@@ -278,11 +278,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
         public async Task NotOfferedOnWrongOverloadOfDebuggerDisplayMethod()
         {
             var code = """
-                class A
-                {
-                    private string [||]GetDebuggerDisplay(int bar = 0) => "Foo";
-                }
-                """;
+            class A
+            {
+            private string [||]GetDebuggerDisplay(int bar = 0) => "Foo";
+            }
+            """;
 
             await VerifyCS.VerifyRefactoringAsync(code, code);
         }
@@ -304,10 +304,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
                 [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
                 class C
                 {
-                    private string GetDebuggerDisplay()
-                    {
-                        return ToString();
-                    }
+                private string GetDebuggerDisplay()
+                {
+                return ToString();
+                }
                 }
                 """
             );
@@ -331,10 +331,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
                 [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
                 class C
                 {
-                    private string GetDebuggerDisplay()
-                    {
-                        return ToString();
-                    }
+                private string GetDebuggerDisplay()
+                {
+                return ToString();
+                }
                 }
                 """
             );
@@ -344,11 +344,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
         public async Task NotOfferedWhenAlreadySpecified()
         {
             var code = """
-                [System.Diagnostics.DebuggerDisplay("Foo")]
-                [||]class C
-                {
-                }
-                """;
+            [System.Diagnostics.DebuggerDisplay("Foo")]
+            [||]class C
+            {
+            }
+            """;
 
             await VerifyCS.VerifyRefactoringAsync(code, code);
         }
@@ -357,11 +357,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
         public async Task NotOfferedWhenAlreadySpecifiedWithSuffix()
         {
             var code = """
-                [System.Diagnostics.DebuggerDisplayAttribute("Foo")]
-                [||]class C
-                {
-                }
-                """;
+            [System.Diagnostics.DebuggerDisplayAttribute("Foo")]
+            [||]class C
+            {
+            }
+            """;
 
             await VerifyCS.VerifyRefactoringAsync(code, code);
         }
@@ -383,10 +383,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
                 [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
                 [||]class C
                 {
-                    private string GetDebuggerDisplay()
-                    {
-                        return ToString();
-                    }
+                private string GetDebuggerDisplay()
+                {
+                return ToString();
+                }
                 }
                 """
             );
@@ -409,10 +409,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
                 [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
                 [||]class C
                 {
-                    private string GetDebuggerDisplay()
-                    {
-                        return ToString();
-                    }
+                private string GetDebuggerDisplay()
+                {
+                return ToString();
+                }
                 }
                 """
             );
@@ -422,13 +422,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
         public async Task AliasedTypeIsRecognized()
         {
             var code = """
-                using DD = System.Diagnostics.DebuggerDisplayAttribute;
+            using DD = System.Diagnostics.DebuggerDisplayAttribute;
 
-                [DD("Foo")]
-                [||]class C
-                {
-                }
-                """;
+            [DD("Foo")]
+            [||]class C
+            {
+            }
+            """;
 
             await VerifyCS.VerifyRefactoringAsync(code, code);
         }
@@ -460,10 +460,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
                 [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
                 class B : A
                 {
-                    private string GetDebuggerDisplay()
-                    {
-                        return ToString();
-                    }
+                private string GetDebuggerDisplay()
+                {
+                return ToString();
+                }
                 }
                 """
             );
@@ -476,7 +476,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
                 """
                 [||]class C
                 {
-                    public static object GetDebuggerDisplay() => "Foo";
+                public static object GetDebuggerDisplay() => "Foo";
                 }
                 """,
                 """
@@ -485,7 +485,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
                 [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
                 class C
                 {
-                    public static object GetDebuggerDisplay() => "Foo";
+                public static object GetDebuggerDisplay() => "Foo";
                 }
                 """
             );
@@ -498,7 +498,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
                 """
                 [||]class C
                 {
-                    private string GetDebuggerDisplay(int foo = 0) => foo.ToString();
+                private string GetDebuggerDisplay(int foo = 0) => foo.ToString();
                 }
                 """,
                 """
@@ -507,12 +507,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
                 [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
                 class C
                 {
-                    private string GetDebuggerDisplay(int foo = 0) => foo.ToString();
+                private string GetDebuggerDisplay(int foo = 0) => foo.ToString();
 
-                    private string GetDebuggerDisplay()
-                    {
-                        return ToString();
-                    }
+                private string GetDebuggerDisplay()
+                {
+                return ToString();
+                }
                 }
                 """
             );

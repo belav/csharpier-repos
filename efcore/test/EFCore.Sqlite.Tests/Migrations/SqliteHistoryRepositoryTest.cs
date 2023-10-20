@@ -15,12 +15,12 @@ public class SqliteHistoryRepositoryTest
 
         Assert.Equal(
             """
-CREATE TABLE "__EFMigrationsHistory" (
-    "MigrationId" TEXT NOT NULL CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY,
-    "ProductVersion" TEXT NOT NULL
-);
+            CREATE TABLE "__EFMigrationsHistory" (
+            "MigrationId" TEXT NOT NULL CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY,
+            "ProductVersion" TEXT NOT NULL
+            );
 
-""",
+            """,
             sql,
             ignoreLineEndingDifferences: true
         );
@@ -33,12 +33,12 @@ CREATE TABLE "__EFMigrationsHistory" (
 
         Assert.Equal(
             """
-CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
-    "MigrationId" TEXT NOT NULL CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY,
-    "ProductVersion" TEXT NOT NULL
-);
+            CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+            "MigrationId" TEXT NOT NULL CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY,
+            "ProductVersion" TEXT NOT NULL
+            );
 
-""",
+            """,
             sql,
             ignoreLineEndingDifferences: true
         );
@@ -51,10 +51,10 @@ CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
 
         Assert.Equal(
             """
-DELETE FROM "__EFMigrationsHistory"
-WHERE "MigrationId" = 'Migration1';
+            DELETE FROM "__EFMigrationsHistory"
+            WHERE "MigrationId" = 'Migration1';
 
-""",
+            """,
             sql,
             ignoreLineEndingDifferences: true
         );
@@ -67,10 +67,10 @@ WHERE "MigrationId" = 'Migration1';
 
         Assert.Equal(
             """
-INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
-VALUES ('Migration1', '7.0.0');
+            INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+            VALUES ('Migration1', '7.0.0');
 
-""",
+            """,
             sql,
             ignoreLineEndingDifferences: true
         );

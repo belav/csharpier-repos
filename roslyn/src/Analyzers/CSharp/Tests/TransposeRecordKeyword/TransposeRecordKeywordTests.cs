@@ -125,13 +125,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TransposeRecordKeyword
                 TestCode = """
                 class {|CS9012:record|} C
                 {
-                    struct {|CS9012:record|} D { }
+                struct {|CS9012:record|} D { }
                 }
                 """,
                 FixedCode = """
                 record class C
                 {
-                    record struct D { }
+                record struct D { }
                 }
                 """,
                 LanguageVersion = LanguageVersion.CSharp10
@@ -147,16 +147,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TransposeRecordKeyword
                 // my class
                 class {|CS9012:record|} C
                 {
-                    // my struct
-                    struct {|CS9012:record|} D { }
+                // my struct
+                struct {|CS9012:record|} D { }
                 }
                 """,
                 FixedCode = """
                 // my class
                 record class C
                 {
-                    // my struct
-                    record struct D { }
+                // my struct
+                record struct D { }
                 }
                 """,
                 LanguageVersion = LanguageVersion.CSharp10

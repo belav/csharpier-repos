@@ -77,15 +77,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 public class C
                 {
-                    public static C operator +(C a, C b) => default;
+                public static C operator +(C a, C b) => default;
                 }
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        1.$$
-                    }
+                public static void Main()
+                {
+                1.$$
+                }
                 }
                 """,
                 SourceCodeKind.Regular
@@ -99,16 +99,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 public class C
                 {
-                    public static C operator +(C a, C b) => default;
+                public static C operator +(C a, C b) => default;
                 }
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        var c = new C();
-                        c.$$;
-                    }
+                public static void Main()
+                {
+                var c = new C();
+                c.$$;
+                }
                 }
                 """,
                 "+",
@@ -165,15 +165,15 @@ public class Program
                 """
                 public class C
                 {
-                    public static C operator +(C a, C b) => default;
+                public static C operator +(C a, C b) => default;
                 }
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        C.$$
-                    }
+                public static void Main()
+                {
+                C.$$
+                }
                 }
                 """
             );
@@ -186,16 +186,16 @@ public class Program
                 """
                 public class C
                 {
-                    public static C operator +(C a, C b) => default;
+                public static C operator +(C a, C b) => default;
                 }
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        var c = new C();
-                        var name = nameof(c.$$
-                    }
+                public static void Main()
+                {
+                var c = new C();
+                var name = nameof(c.$$
+                }
                 }
                 """
             );
@@ -208,40 +208,40 @@ public class Program
                 """
                 public class C
                 {
-                    public static C operator +(C a, C b) => null;
-                    public static C operator -(C a, C b) => null;
-                    public static C operator *(C a, C b) => null;
-                    public static C operator /(C a, C b) => null;
-                    public static C operator %(C a, C b) => null;
-                    public static bool operator ==(C a, C b) => true;
-                    public static bool operator !=(C a, C b) => false;
-                    public static bool operator <(C a, C b) => true;
-                    public static bool operator >(C a, C b) => false;
-                    public static bool operator <=(C a, C b) => true;
-                    public static bool operator >=(C a, C b) => false;
-                    public static C operator +(C a) => null;
-                    public static C operator -(C a) => null;
-                    public static C operator ++(C a) => null;
-                    public static C operator --(C a) => null;
-                    public static bool operator true(C w) => true;
-                    public static bool operator false(C w) => false;
-                    public static bool operator &(C a, C b) => true;
-                    public static bool operator |(C a, C b) => true;
-                    public static C operator !(C a) => null;
-                    public static C operator ^(C a, C b) => null;
-                    public static C operator <<(C a, int b) => null;
-                    public static C operator >>(C a, int b) => null;
-                    public static C operator >>>(C a, int b) => null;
-                    public static C operator ~(C a) => null;
+                public static C operator +(C a, C b) => null;
+                public static C operator -(C a, C b) => null;
+                public static C operator *(C a, C b) => null;
+                public static C operator /(C a, C b) => null;
+                public static C operator %(C a, C b) => null;
+                public static bool operator ==(C a, C b) => true;
+                public static bool operator !=(C a, C b) => false;
+                public static bool operator <(C a, C b) => true;
+                public static bool operator >(C a, C b) => false;
+                public static bool operator <=(C a, C b) => true;
+                public static bool operator >=(C a, C b) => false;
+                public static C operator +(C a) => null;
+                public static C operator -(C a) => null;
+                public static C operator ++(C a) => null;
+                public static C operator --(C a) => null;
+                public static bool operator true(C w) => true;
+                public static bool operator false(C w) => false;
+                public static bool operator &(C a, C b) => true;
+                public static bool operator |(C a, C b) => true;
+                public static C operator !(C a) => null;
+                public static C operator ^(C a, C b) => null;
+                public static C operator <<(C a, int b) => null;
+                public static C operator >>(C a, int b) => null;
+                public static C operator >>>(C a, int b) => null;
+                public static C operator ~(C a) => null;
                 }
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        var c = new C();
-                        c.$$;
-                    }
+                public static void Main()
+                {
+                var c = new C();
+                c.$$;
+                }
                 }
                 """,
                 SourceCodeKind.Regular
@@ -347,17 +347,17 @@ public class Program
                 """
                 public class C
                 {
-                    public static bool operator true(C _) => true;
-                    public static bool operator false(C _) => true;
+                public static bool operator true(C _) => true;
+                public static bool operator false(C _) => true;
                 }
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        var c = new C();
-                        c.$$
-                    }
+                public static void Main()
+                {
+                var c = new C();
+                c.$$
+                }
                 }
                 """
             );
@@ -625,20 +625,20 @@ public class Program
         public async Task OperatorLiftingUnary(string operatorSign)
         {
             const string template = """
-                public struct S
-                {{
-                    {0} => default;
-                }}
+            public struct S
+            {{
+            {0} => default;
+            }}
 
-                public class Program
-                {{
-                    public static void Main()
-                    {{
-                        S? s = null;
-                        s.$$
-                    }}
-                }}
-                """;
+            public class Program
+            {{
+            public static void Main()
+            {{
+            S? s = null;
+            s.$$
+            }}
+            }}
+            """;
             var inlineDescription =
                 operatorSign.Length == 1 ? $"{operatorSign}x" : $"x{operatorSign}";
             await VerifyItemExistsAsync(
@@ -664,20 +664,20 @@ public class Program
         public async Task OperatorLiftingBinary(string operatorSign)
         {
             const string template = """
-                public struct S
-                {{
-                    {0} => default;
-                }}
+            public struct S
+            {{
+            {0} => default;
+            }}
 
-                public class Program
-                {{
-                    public static void Main()
-                    {{
-                        S? s = null;
-                        s.$$
-                    }}
-                }}
-                """;
+            public class Program
+            {{
+            public static void Main()
+            {{
+            S? s = null;
+            s.$$
+            }}
+            }}
+            """;
             var inlineDescription = $"x {operatorSign} y";
             await VerifyItemExistsAsync(
                 string.Format(template, $"public static S operator {operatorSign}(S a, S b)"),
@@ -705,20 +705,20 @@ public class Program
         public async Task OperatorLiftingEqualityRelational(string operatorSign)
         {
             const string template = """
-                public struct S
-                {{
-                    {0} => default;
-                }}
+            public struct S
+            {{
+            {0} => default;
+            }}
 
-                public class Program
-                {{
-                    public static void Main()
-                    {{
-                        S? s = null;
-                        s.$$
-                    }}
-                }}
-                """;
+            public class Program
+            {{
+            public static void Main()
+            {{
+            S? s = null;
+            s.$$
+            }}
+            }}
+            """;
             await VerifyItemExistsAsync(
                 string.Format(template, $"public static bool operator {operatorSign}(S a, S b)"),
                 operatorSign,
@@ -748,32 +748,32 @@ public class Program
                 """
                 public struct S
                 {
-                    public static bool operator ==(S a, S b) => default;
+                public static bool operator ==(S a, S b) => default;
                 }
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        S? s = null;
-                        s.$$
-                    }
+                public static void Main()
+                {
+                S? s = null;
+                s.$$
+                }
                 }
                 """,
                 "==",
                 """
                 public struct S
                 {
-                    public static bool operator ==(S a, S b) => default;
+                public static bool operator ==(S a, S b) => default;
                 }
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        S? s = null;
-                        s == $$
-                    }
+                public static void Main()
+                {
+                S? s = null;
+                s == $$
+                }
                 }
                 """
             );
@@ -785,7 +785,7 @@ public class Program
             await VerifyItemExistsAsync(
                 """
                 public class Base {
-                    public static int operator +(Base b, int a)=>0;
+                public static int operator +(Base b, int a)=>0;
                 }
                 public class Derived: Base
                 {
@@ -793,11 +793,11 @@ public class Program
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        var d = new Derived();
-                        d.$$
-                    }
+                public static void Main()
+                {
+                var d = new Derived();
+                d.$$
+                }
                 }
                 """,
                 "+",
@@ -817,11 +817,11 @@ public class Program
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        var r = new R();
-                        r.$$
-                    }
+                public static void Main()
+                {
+                var r = new R();
+                r.$$
+                }
                 }
                 """,
                 "==",
@@ -835,30 +835,30 @@ public class Program
         public async Task TestEditorBrowsableOnOperatorIsRespected_EditorBrowsableStateNever()
         {
             var markup = """
-                namespace N
-                {
-                    public class Program
-                    {
-                        public static void Main()
-                        {
-                            var c = new C();
-                            c.$$
-                        }
-                    }
-                }
-                """;
+            namespace N
+            {
+            public class Program
+            {
+            public static void Main()
+            {
+            var c = new C();
+            c.$$
+            }
+            }
+            }
+            """;
             var referencedCode = """
-                using System.ComponentModel;
+            using System.ComponentModel;
 
-                namespace N
-                {
-                    public class C
-                    {
-                        [EditorBrowsable(EditorBrowsableState.Never)]
-                        public static C operator -(C a, C b) => default;
-                    }
-                }
-                """;
+            namespace N
+            {
+            public class C
+            {
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            public static C operator -(C a, C b) => default;
+            }
+            }
+            """;
 
             await VerifyItemInEditorBrowsableContextsAsync(
                 markup: markup,
@@ -875,30 +875,30 @@ public class Program
         public async Task TestEditorBrowsableOnOperatorIsRespected_EditorBrowsableStateAdvanced()
         {
             var markup = """
-                namespace N
-                {
-                    public class Program
-                    {
-                        public static void Main()
-                        {
-                            var c = new C();
-                            c.$$
-                        }
-                    }
-                }
-                """;
+            namespace N
+            {
+            public class Program
+            {
+            public static void Main()
+            {
+            var c = new C();
+            c.$$
+            }
+            }
+            }
+            """;
             var referencedCode = """
-                using System.ComponentModel;
+            using System.ComponentModel;
 
-                namespace N
-                {
-                    public class C
-                    {
-                        [EditorBrowsable(EditorBrowsableState.Advanced)]
-                        public static C operator -(C a, C b) => default;
-                    }
-                }
-                """;
+            namespace N
+            {
+            public class C
+            {
+            [EditorBrowsable(EditorBrowsableState.Advanced)]
+            public static C operator -(C a, C b) => default;
+            }
+            }
+            """;
 
             HideAdvancedMembers = false;
 
@@ -934,16 +934,16 @@ public class Program
 
                 public class C
                 {
-                    public static C operator +(C a, C b) => default;
+                public static C operator +(C a, C b) => default;
                 }
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        C? c = null;
-                        var _ = c!.$$
-                    }
+                public static void Main()
+                {
+                C? c = null;
+                var _ = c!.$$
+                }
                 }
                 """,
                 "+",
@@ -952,16 +952,16 @@ public class Program
 
                 public class C
                 {
-                    public static C operator +(C a, C b) => default;
+                public static C operator +(C a, C b) => default;
                 }
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        C? c = null;
-                        var _ = c! + $$
-                    }
+                public static void Main()
+                {
+                C? c = null;
+                var _ = c! + $$
+                }
                 }
                 """
             );

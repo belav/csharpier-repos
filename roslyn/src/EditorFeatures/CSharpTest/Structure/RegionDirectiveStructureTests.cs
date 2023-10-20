@@ -23,8 +23,8 @@ public class RegionDirectiveStructureTests
     public async Task BrokenRegion()
     {
         var code = """
-                $$#region Goo
-                """;
+        $$#region Goo
+        """;
 
         await VerifyNoBlockSpansAsync(code);
     }
@@ -33,9 +33,9 @@ public class RegionDirectiveStructureTests
     public async Task SimpleRegion()
     {
         var code = """
-                {|span:$$#region Goo
-                #endregion|}
-                """;
+        {|span:$$#region Goo
+        #endregion|}
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -47,33 +47,33 @@ public class RegionDirectiveStructureTests
     public async Task RegressionFor5284()
     {
         var code = """
-                namespace BasicGenerateFromUsage
-                {
-                    class BasicGenerateFromUsage
-                    {
-                        {|span:#reg$$ion TaoRegion
+        namespace BasicGenerateFromUsage
+        {
+        class BasicGenerateFromUsage
+        {
+        {|span:#reg$$ion TaoRegion
 
-                        static void Main(string[] args)
-                        {
-                            /*Marker1*/
-                            CustomStack s = new CustomStack(); //Generate new class
+        static void Main(string[] args)
+        {
+        /*Marker1*/
+        CustomStack s = new CustomStack(); //Generate new class
 
-                            //Generate constructor
-                            Classic cc = new Classic(5, 6, 7);/*Marker2*/
+        //Generate constructor
+        Classic cc = new Classic(5, 6, 7);/*Marker2*/
 
-                            Classic cc = new Classic();
-                            //generate property
-                            cc.NewProperty = 5; /*Marker3*/
+        Classic cc = new Classic();
+        //generate property
+        cc.NewProperty = 5; /*Marker3*/
 
-                        }
-                        #endregion TaoRegion|}
-                    }
+        }
+        #endregion TaoRegion|}
+        }
 
-                    class Classic
-                    {
-                    }
-                }
-                """;
+        class Classic
+        {
+        }
+        }
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -89,15 +89,15 @@ public class RegionDirectiveStructureTests
     public async Task RegionsShouldBeCollapsedByDefault(bool collapseRegionsWhenFirstOpened)
     {
         var code = """
-                class C
-                {
-                    {|span:#region Re$$gion
-                    static void Main(string[] args)
-                    {
-                    }
-                    #endregion|}
-                }
-                """;
+        class C
+        {
+        {|span:#region Re$$gion
+        static void Main(string[] args)
+        {
+        }
+        #endregion|}
+        }
+        """;
 
         var options = GetDefaultOptions() with
         {
@@ -120,15 +120,15 @@ public class RegionDirectiveStructureTests
     public async Task SpacesBetweenPoundAndRegionShouldNotAffectBanner()
     {
         var code = """
-                class C
-                {
-                {|span:#  region R$$egion
-                    static void Main(string[] args)
-                    {
-                    }
-                #  endregion|}
-                }
-                """;
+        class C
+        {
+        {|span:#  region R$$egion
+        static void Main(string[] args)
+        {
+        }
+        #  endregion|}
+        }
+        """;
 
         await VerifyBlockSpansAsync(
             code,

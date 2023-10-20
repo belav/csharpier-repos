@@ -26,16 +26,16 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        ReadOnlySpan<int> x = stackalloc int[] { 1, 2, 3 };
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            ReadOnlySpan<int> x = stackalloc int[] { 1, 2, 3 };
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp11,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -47,16 +47,16 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        ReadOnlySpan<int> x = stackalloc[] { 1, 2, 3 };
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            ReadOnlySpan<int> x = stackalloc[] { 1, 2, 3 };
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp11,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -68,16 +68,16 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        ReadOnlySpan<int> x = stackalloc int[] { 1, 2, 3 };
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            ReadOnlySpan<int> x = stackalloc int[] { 1, 2, 3 };
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -89,16 +89,16 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        ReadOnlySpan<int> x = stackalloc[] { 1, 2, 3 };
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            ReadOnlySpan<int> x = stackalloc[] { 1, 2, 3 };
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -110,27 +110,27 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        ReadOnlySpan<int> x = [|[|stackalloc|] int[]|] { 1, 2, 3 };
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            ReadOnlySpan<int> x = [|[|stackalloc|] int[]|] { 1, 2, 3 };
+            }
+            }
+            """,
             FixedCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        ReadOnlySpan<int> x = [1, 2, 3];
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            ReadOnlySpan<int> x = [1, 2, 3];
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -142,27 +142,27 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        ReadOnlySpan<int> x = [|[|stackalloc|][]|] { 1, 2, 3 };
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            ReadOnlySpan<int> x = [|[|stackalloc|][]|] { 1, 2, 3 };
+            }
+            }
+            """,
             FixedCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        ReadOnlySpan<int> x = [1, 2, 3];
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            ReadOnlySpan<int> x = [1, 2, 3];
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -174,27 +174,27 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        Span<int> x = [|[|stackalloc|] int[]|] { 1, 2, 3 };
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            Span<int> x = [|[|stackalloc|] int[]|] { 1, 2, 3 };
+            }
+            }
+            """,
             FixedCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        Span<int> x = [1, 2, 3];
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            Span<int> x = [1, 2, 3];
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -206,27 +206,27 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        Span<int> x = [|[|stackalloc|][]|] { 1, 2, 3 };
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            Span<int> x = [|[|stackalloc|][]|] { 1, 2, 3 };
+            }
+            }
+            """,
             FixedCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        Span<int> x = [1, 2, 3];
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            Span<int> x = [1, 2, 3];
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -238,16 +238,16 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        ReadOnlySpan<int> x = stackalloc {|CS1575:int[0, 0]|};
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            ReadOnlySpan<int> x = stackalloc {|CS1575:int[0, 0]|};
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -259,16 +259,16 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        ReadOnlySpan<int> x = {|CS0847:stackalloc int[1] { }|};
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            ReadOnlySpan<int> x = {|CS0847:stackalloc int[1] { }|};
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -280,16 +280,16 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        ReadOnlySpan<int> x = {|CS0847:stackalloc int[0] { 1 }|};
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            ReadOnlySpan<int> x = {|CS0847:stackalloc int[0] { 1 }|};
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -301,16 +301,16 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int size)
-                    {
-                        ReadOnlySpan<int> x = stackalloc int[{|CS0150:size|}] { 1 };
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int size)
+            {
+            ReadOnlySpan<int> x = stackalloc int[{|CS0150:size|}] { 1 };
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -322,29 +322,29 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        const int size = 1;
-                        ReadOnlySpan<int> x = [|[|stackalloc|] int[size]|] { 2 };
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            const int size = 1;
+            ReadOnlySpan<int> x = [|[|stackalloc|] int[size]|] { 2 };
+            }
+            }
+            """,
             FixedCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        const int size = 1;
-                        ReadOnlySpan<int> x = [2];
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            const int size = 1;
+            ReadOnlySpan<int> x = [2];
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -356,16 +356,16 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    unsafe void M()
-                    {
-                        int* x = stackalloc int[] { 1, 2, 3 };
-                    }
-                }
-                """,
+            class C
+            {
+            unsafe void M()
+            {
+            int* x = stackalloc int[] { 1, 2, 3 };
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -377,16 +377,16 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    unsafe void M()
-                    {
-                        int* x = stackalloc[] { 1, 2, 3 };
-                    }
-                }
-                """,
+            class C
+            {
+            unsafe void M()
+            {
+            int* x = stackalloc[] { 1, 2, 3 };
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -398,16 +398,16 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    unsafe void M()
-                    {
-                        var x = stackalloc int[] { 1, 2, 3 };
-                    }
-                }
-                """,
+            class C
+            {
+            unsafe void M()
+            {
+            var x = stackalloc int[] { 1, 2, 3 };
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -419,16 +419,16 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    unsafe void M()
-                    {
-                        var x = stackalloc[] { 1, 2, 3 };
-                    }
-                }
-                """,
+            class C
+            {
+            unsafe void M()
+            {
+            var x = stackalloc[] { 1, 2, 3 };
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -440,31 +440,31 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        Goo([|[|stackalloc|] int[]|] { 1, 2, 3 });
-                    }
+            class C
+            {
+            void M()
+            {
+            Goo([|[|stackalloc|] int[]|] { 1, 2, 3 });
+            }
 
-                    void Goo(ReadOnlySpan<int> span) { }
-                }
-                """,
+            void Goo(ReadOnlySpan<int> span) { }
+            }
+            """,
             FixedCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        Goo([1, 2, 3]);
-                    }
+            class C
+            {
+            void M()
+            {
+            Goo([1, 2, 3]);
+            }
 
-                    void Goo(ReadOnlySpan<int> span) { }
-                }
-                """,
+            void Goo(ReadOnlySpan<int> span) { }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -476,31 +476,31 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        Goo([|[|stackalloc|][]|] { 1, 2, 3 });
-                    }
+            class C
+            {
+            void M()
+            {
+            Goo([|[|stackalloc|][]|] { 1, 2, 3 });
+            }
 
-                    void Goo(ReadOnlySpan<int> span) { }
-                }
-                """,
+            void Goo(ReadOnlySpan<int> span) { }
+            }
+            """,
             FixedCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        Goo([1, 2, 3]);
-                    }
+            class C
+            {
+            void M()
+            {
+            Goo([1, 2, 3]);
+            }
 
-                    void Goo(ReadOnlySpan<int> span) { }
-                }
-                """,
+            void Goo(ReadOnlySpan<int> span) { }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -512,27 +512,27 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        ReadOnlySpan<int> r = [|[|stackalloc|] int[]|] { };
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            ReadOnlySpan<int> r = [|[|stackalloc|] int[]|] { };
+            }
+            }
+            """,
             FixedCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        ReadOnlySpan<int> r = [];
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            ReadOnlySpan<int> r = [];
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -544,27 +544,27 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        var r = (ReadOnlySpan<int>)[|[|stackalloc|] int[]|] { };
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            var r = (ReadOnlySpan<int>)[|[|stackalloc|] int[]|] { };
+            }
+            }
+            """,
             FixedCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        var r = (ReadOnlySpan<int>)[];
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            var r = (ReadOnlySpan<int>)[];
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -576,17 +576,17 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
-                using X = System.ReadOnlySpan<int>;
+            using System;
+            using X = System.ReadOnlySpan<int>;
 
-                class C
-                {
-                    void M()
-                    {
-                        var r = (X)stackalloc int[] { };
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            var r = (X)stackalloc int[] { };
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -598,27 +598,27 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        ReadOnlySpan<int> r = [|[|stackalloc|] int[0]|] { };
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            ReadOnlySpan<int> r = [|[|stackalloc|] int[0]|] { };
+            }
+            }
+            """,
             FixedCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        ReadOnlySpan<int> r = [];
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            ReadOnlySpan<int> r = [];
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -630,16 +630,16 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        ReadOnlySpan<int> r = {|CS8346:{|CS0826:stackalloc[] { }|}|};
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            ReadOnlySpan<int> r = {|CS8346:{|CS0826:stackalloc[] { }|}|};
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -651,27 +651,27 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        ReadOnlySpan<int> r = [|[|stackalloc|] int[0]|];
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            ReadOnlySpan<int> r = [|[|stackalloc|] int[0]|];
+            }
+            }
+            """,
             FixedCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        ReadOnlySpan<int> r = [];
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            ReadOnlySpan<int> r = [];
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -683,16 +683,16 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        ReadOnlySpan<int> r = stackalloc int[1];
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            ReadOnlySpan<int> r = stackalloc int[1];
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -704,17 +704,17 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        ReadOnlySpan<int> r = stackalloc int[1];
-                        return;
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            ReadOnlySpan<int> r = stackalloc int[1];
+            return;
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -726,19 +726,19 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M()
-                    {
-                        Span<int> r = Goo(stackalloc int[1]);
-                        r[0] = 1;
-                    }
+            class C
+            {
+            void M()
+            {
+            Span<int> r = Goo(stackalloc int[1]);
+            r[0] = 1;
+            }
 
-                    Span<int> Goo(Span<int> input) => default;
-                }
-                """,
+            Span<int> Goo(Span<int> input) => default;
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -750,17 +750,17 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i)
-                    {
-                        Span<int> r = stackalloc int[1];
-                        i++;
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i)
+            {
+            Span<int> r = stackalloc int[1];
+            i++;
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -772,17 +772,17 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r = stackalloc int[1];
-                        i = j;
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r = stackalloc int[1];
+            i = j;
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -794,19 +794,19 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    static int[] array;
+            class C
+            {
+            static int[] array;
 
-                    void M(int i, int j)
-                    {
-                        Span<int> r = stackalloc int[1];
-                        C.array[0] = j;
-                    }
-                }
-                """,
+            void M(int i, int j)
+            {
+            Span<int> r = stackalloc int[1];
+            C.array[0] = j;
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -818,19 +818,19 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    static int[] array;
+            class C
+            {
+            static int[] array;
 
-                    void M(int i, int j)
-                    {
-                        Span<int> r = stackalloc int[1];
-                        array[0] = j;
-                    }
-                }
-                """,
+            void M(int i, int j)
+            {
+            Span<int> r = stackalloc int[1];
+            array[0] = j;
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -842,17 +842,17 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r = stackalloc int[1];
-                        r[i] = j;
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r = stackalloc int[1];
+            r[i] = j;
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -864,17 +864,17 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r = stackalloc int[1];
-                        r[1] = j;
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r = stackalloc int[1];
+            r[1] = j;
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -886,18 +886,18 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r = stackalloc int[2];
-                        r[0] = i;
-                        r[0] = j;
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r = stackalloc int[2];
+            r[0] = i;
+            r[0] = j;
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -909,28 +909,28 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r = [|[|stackalloc|] int[1]|];
-                        r[0] = i;
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r = [|[|stackalloc|] int[1]|];
+            r[0] = i;
+            }
+            }
+            """,
             FixedCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r = [i];
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r = [i];
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -942,30 +942,30 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r = [|[|stackalloc|] int[1]|];
-                        r[0] = i;
-                        r[0] = j;
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r = [|[|stackalloc|] int[1]|];
+            r[0] = i;
+            r[0] = j;
+            }
+            }
+            """,
             FixedCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r = [i];
-                        r[0] = j;
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r = [i];
+            r[0] = j;
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -977,29 +977,29 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r = [|[|stackalloc|] int[2]|];
-                        r[0] = i;
-                        r[1] = j;
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r = [|[|stackalloc|] int[2]|];
+            r[0] = i;
+            r[1] = j;
+            }
+            }
+            """,
             FixedCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r = [i, j];
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r = [i, j];
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -1011,31 +1011,31 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        const int v = 1;
-                        Span<int> r = [|[|stackalloc|] int[2]|];
-                        r[0] = i;
-                        r[v] = j;
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            const int v = 1;
+            Span<int> r = [|[|stackalloc|] int[2]|];
+            r[0] = i;
+            r[v] = j;
+            }
+            }
+            """,
             FixedCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        const int v = 1;
-                        Span<int> r = [i, j];
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            const int v = 1;
+            Span<int> r = [i, j];
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -1047,18 +1047,18 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r = stackalloc int[2];
-                        r[0] = i;
-                        r[0] = j;
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r = stackalloc int[2];
+            r[0] = i;
+            r[0] = j;
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -1070,19 +1070,19 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        var v = 1;
-                        Span<int> r = stackalloc int[2];
-                        r[0] = i;
-                        r[v] = j;
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            var v = 1;
+            Span<int> r = stackalloc int[2];
+            r[0] = i;
+            r[v] = j;
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -1094,21 +1094,21 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    static int[] array;
+            class C
+            {
+            static int[] array;
 
-                    void M(int i, int j)
-                    {
-                        var v = 1;
-                        Span<int> r = stackalloc int[2];
-                        r[0] = i;
-                        array[1] = j;
-                    }
-                }
-                """,
+            void M(int i, int j)
+            {
+            var v = 1;
+            Span<int> r = stackalloc int[2];
+            r[0] = i;
+            array[1] = j;
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -1120,35 +1120,35 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r = [|[|stackalloc|] int[2]|];
-                        // Leading
-                        r[0] = i;
-                        r[1] = j; // Trailing
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r = [|[|stackalloc|] int[2]|];
+            // Leading
+            r[0] = i;
+            r[1] = j; // Trailing
+            }
+            }
+            """,
             FixedCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r =
-                        [
-                            // Leading
-                            i,
-                            j, // Trailing
-                        ];
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r =
+            [
+            // Leading
+            i,
+            j, // Trailing
+            ];
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -1160,35 +1160,35 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r = [|[|stackalloc|] int[2]|];
-                        r[0] = i; // Trailing
-                        // Leading
-                        r[1] = j;
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r = [|[|stackalloc|] int[2]|];
+            r[0] = i; // Trailing
+            // Leading
+            r[1] = j;
+            }
+            }
+            """,
             FixedCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r =
-                        [
-                            i, // Trailing
-                            // Leading
-                            j,
-                        ];
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r =
+            [
+            i, // Trailing
+            // Leading
+            j,
+            ];
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -1200,33 +1200,33 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r = [|[|stackalloc|] int[]|]
-                        {
-                            1, 2
-                        };
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r = [|[|stackalloc|] int[]|]
+            {
+            1, 2
+            };
+            }
+            }
+            """,
             FixedCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r =
-                        [
-                            1, 2
-                        ];
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r =
+            [
+            1, 2
+            ];
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -1238,35 +1238,35 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r = [|[|stackalloc|] int[]|]
-                        {
-                            1,
-                            2
-                        };
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r = [|[|stackalloc|] int[]|]
+            {
+            1,
+            2
+            };
+            }
+            }
+            """,
             FixedCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r =
-                        [
-                            1,
-                            2
-                        ];
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r =
+            [
+            1,
+            2
+            ];
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -1278,31 +1278,31 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r = [|[|stackalloc|] int[]|] {
-                            1, 2
-                        };
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r = [|[|stackalloc|] int[]|] {
+            1, 2
+            };
+            }
+            }
+            """,
             FixedCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r = [
-                            1, 2
-                        ];
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r = [
+            1, 2
+            ];
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -1314,33 +1314,33 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r = [|[|stackalloc|] int[]|] {
-                            1,
-                            2
-                        };
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r = [|[|stackalloc|] int[]|] {
+            1,
+            2
+            };
+            }
+            }
+            """,
             FixedCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r = [
-                            1,
-                            2
-                        ];
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r = [
+            1,
+            2
+            ];
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -1352,33 +1352,33 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r = [|[|stackalloc|][]|]
-                        {
-                            1, 2
-                        };
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r = [|[|stackalloc|][]|]
+            {
+            1, 2
+            };
+            }
+            }
+            """,
             FixedCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r =
-                        [
-                            1, 2
-                        ];
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r =
+            [
+            1, 2
+            ];
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -1390,35 +1390,35 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r = [|[|stackalloc|][]|]
-                        {
-                            1,
-                            2
-                        };
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r = [|[|stackalloc|][]|]
+            {
+            1,
+            2
+            };
+            }
+            }
+            """,
             FixedCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r =
-                        [
-                            1,
-                            2
-                        ];
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r =
+            [
+            1,
+            2
+            ];
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -1430,31 +1430,31 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r = [|[|stackalloc|][]|] {
-                            1, 2
-                        };
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r = [|[|stackalloc|][]|] {
+            1, 2
+            };
+            }
+            }
+            """,
             FixedCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r = [
-                            1, 2
-                        ];
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r = [
+            1, 2
+            ];
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -1466,33 +1466,33 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r = [|[|stackalloc|][]|] {
-                            1,
-                            2
-                        };
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r = [|[|stackalloc|][]|] {
+            1,
+            2
+            };
+            }
+            }
+            """,
             FixedCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r = [
-                            1,
-                            2
-                        ];
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r = [
+            1,
+            2
+            ];
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -1504,33 +1504,33 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r = [|[|stackalloc|] int[1]|];
-                        r[0] = 1 +
-                            2;
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r = [|[|stackalloc|] int[1]|];
+            r[0] = 1 +
+            2;
+            }
+            }
+            """,
             FixedCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r =
-                        [
-                            1 +
-                                2,
-                        ];
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r =
+            [
+            1 +
+            2,
+            ];
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -1542,37 +1542,37 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r = [|[|stackalloc|] int[2]|];
-                        r[0] = 1 +
-                            2;
-                        r[1] = 3 +
-                            4;
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r = [|[|stackalloc|] int[2]|];
+            r[0] = 1 +
+            2;
+            r[1] = 3 +
+            4;
+            }
+            }
+            """,
             FixedCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void M(int i, int j)
-                    {
-                        Span<int> r =
-                        [
-                            1 +
-                                2,
-                            3 +
-                                4,
-                        ];
-                    }
-                }
-                """,
+            class C
+            {
+            void M(int i, int j)
+            {
+            Span<int> r =
+            [
+            1 +
+            2,
+            3 +
+            4,
+            ];
+            }
+            }
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -1584,15 +1584,15 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                ReadOnlySpan<int> x = [|[|stackalloc|] int[]|] { 1, 2, 3 };
-                """,
+            ReadOnlySpan<int> x = [|[|stackalloc|] int[]|] { 1, 2, 3 };
+            """,
             FixedCode = """
-                using System;
+            using System;
 
-                ReadOnlySpan<int> x = [1, 2, 3];
-                """,
+            ReadOnlySpan<int> x = [1, 2, 3];
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
             TestState = { OutputKind = OutputKind.ConsoleApplication, },
@@ -1605,27 +1605,27 @@ public class UseCollectionExpressionForStackAllocTests
         await new VerifyCS.Test
         {
             TestCode = """
-                using System;
+            using System;
 
-                Span<int> r = [|[|stackalloc|] int[2]|];
-                r[0] = 1 +
-                    2;
-                r[1] = 3 +
-                    4;
+            Span<int> r = [|[|stackalloc|] int[2]|];
+            r[0] = 1 +
+            2;
+            r[1] = 3 +
+            4;
 
-                """,
+            """,
             FixedCode = """
-                using System;
+            using System;
 
-                Span<int> r =
-                [
-                    1 +
-                        2,
-                    3 +
-                        4,
-                ];
+            Span<int> r =
+            [
+            1 +
+            2,
+            3 +
+            4,
+            ];
 
-                """,
+            """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
             TestState = { OutputKind = OutputKind.ConsoleApplication, },

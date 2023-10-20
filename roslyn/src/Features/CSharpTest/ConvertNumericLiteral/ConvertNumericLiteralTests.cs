@@ -99,23 +99,23 @@ public sealed class ConvertNumericLiteralTests : AbstractCSharpCodeActionTest
             """
             class Program
             {
-                void M()
-                {
-                    var numbers = new int[] {
-                        [||]0x1, 0x2
-                    };
-                }
+            void M()
+            {
+            var numbers = new int[] {
+            [||]0x1, 0x2
+            };
+            }
             }
             """,
             """
             class Program
             {
-                void M()
-                {
-                    var numbers = new int[] {
-                        0b1, 0x2
-                    };
-                }
+            void M()
+            {
+            var numbers = new int[] {
+            0b1, 0x2
+            };
+            }
             }
             """,
             index: (int)Refactoring.ChangeBase2
@@ -129,13 +129,13 @@ public sealed class ConvertNumericLiteralTests : AbstractCSharpCodeActionTest
             """
             class C
             {
-                int a = 42[||];
+            int a = 42[||];
             }
             """,
             """
             class C
             {
-                int a = 0b101010;
+            int a = 0b101010;
             }
             """,
             index: (int)Refactoring.ChangeBase1
@@ -149,13 +149,13 @@ public sealed class ConvertNumericLiteralTests : AbstractCSharpCodeActionTest
             """
             class C
             {
-                int a = [|42|];
+            int a = [|42|];
             }
             """,
             """
             class C
             {
-                int a = 0b101010;
+            int a = 0b101010;
             }
             """,
             index: (int)Refactoring.ChangeBase1
@@ -169,7 +169,7 @@ public sealed class ConvertNumericLiteralTests : AbstractCSharpCodeActionTest
             """
             class C
             {
-                int a = [|42 * 2|];
+            int a = [|42 * 2|];
             }
             """
         );

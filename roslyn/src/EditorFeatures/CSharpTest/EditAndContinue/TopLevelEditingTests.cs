@@ -1489,9 +1489,9 @@ public class A3 : System.Attribute { }
         public void Type_Update_Attribute_Insert()
         {
             var attributes = """
-                class A : System.Attribute { }
-                class B : System.Attribute { }
-                """;
+            class A : System.Attribute { }
+            class B : System.Attribute { }
+            """;
 
             var src1 = attributes + "[A]class C { }";
             var src2 = attributes + "[A, B]class C { }";
@@ -9397,15 +9397,15 @@ partial class C
         public void PartialMember_RenameInsertDelete_SameFile()
         {
             var src1 = """
-                partial class C { void F1(int a) {} void F4(int d) {} }
-                partial class C { void F3(int c) {} void F2(int b) {} }
-                partial class C { }
-                """;
+            partial class C { void F1(int a) {} void F4(int d) {} }
+            partial class C { void F3(int c) {} void F2(int b) {} }
+            partial class C { }
+            """;
             var src2 = """
-                partial class C { void F2(int b) {} void F4(int d) {} }
-                partial class C { void F1(int a) {} }
-                partial class C { void F3(int c) {} }
-                """;
+            partial class C { void F2(int b) {} void F4(int d) {} }
+            partial class C { void F1(int a) {} }
+            partial class C { void F3(int c) {} }
+            """;
 
             var edits = GetTopEdits(src1, src2);
 
@@ -10570,10 +10570,10 @@ class C
                 }
                 """;
             var src2 = """
-                class C
-                {
-                }
-                """;
+            class C
+            {
+            }
+            """;
             var edits = GetTopEdits(src1, src2);
 
             edits.VerifyEdits(
@@ -13380,8 +13380,8 @@ public class SubClass : BaseClass, IConflict
         public void Method_Partial_Update_Attribute_Definition()
         {
             var attribute = """
-                public class A : System.Attribute { public A(int x) {} }
-                """;
+            public class A : System.Attribute { public A(int x) {} }
+            """;
 
             var srcA1 = attribute + "partial class C { [A(1)]partial void F(); }";
             var srcB1 = "partial class C { partial void F() { } }";
@@ -13404,8 +13404,8 @@ public class SubClass : BaseClass, IConflict
         public void Method_Partial_Update_Attribute_Implementation()
         {
             var attribute = """
-                public class A : System.Attribute { public A(int x) {} }
-                """;
+            public class A : System.Attribute { public A(int x) {} }
+            """;
 
             var srcA1 = attribute + "partial class C { partial void F(); }";
             var srcB1 = "partial class C { [A(1)]partial void F() { } }";
@@ -13428,8 +13428,8 @@ public class SubClass : BaseClass, IConflict
         public void Method_Partial_Update_Attribute_DefinitionAndImplementation()
         {
             var attribute = """
-                public class A : System.Attribute { public A(int x) {} }
-                """;
+            public class A : System.Attribute { public A(int x) {} }
+            """;
 
             var srcA1 = attribute + "partial class C { [A(1)]partial void F(); }";
             var srcB1 = "partial class C { [A(1)]partial void F() { } }";
@@ -13453,8 +13453,8 @@ public class SubClass : BaseClass, IConflict
         public void Method_Partial_DeleteInsert_DefinitionWithAttributeChange()
         {
             var attribute = """
-                public class A : System.Attribute {}
-                """;
+            public class A : System.Attribute {}
+            """;
 
             var srcA1 = attribute + "partial class C { [A]partial void F(); }";
             var srcB1 = "partial class C { partial void F() { } }";
@@ -23545,16 +23545,16 @@ class C
         public void Property_Rename2()
         {
             var interfaces = """
-                interface I
-                {
-                    int P { get; }
-                }
-                
-                interface J
-                {
-                    int P { get; }
-                }
-                """;
+            interface I
+            {
+            int P { get; }
+            }
+
+            interface J
+            {
+            int P { get; }
+            }
+            """;
             var src1 = "class C { int I.P { get { return 1; } } } " + interfaces;
             var src2 = "class C { int J.P { get { return 1; } } } " + interfaces;
 
@@ -25918,16 +25918,16 @@ class C(int A, int B)
         public void Indexer_Rename()
         {
             var interfaces = """
-                interface I
-                {
-                    int this[int a] { get; }
-                }
-                
-                interface J
-                {
-                    int this[int a] { get; }
-                }
-                """;
+            interface I
+            {
+            int this[int a] { get; }
+            }
+
+            interface J
+            {
+            int this[int a] { get; }
+            }
+            """;
             var src1 = "class C { int I.this[int a] { get { return 1; } } } " + interfaces;
             var src2 = "class C { int J.this[int a] { get { return 1; } } } " + interfaces;
 
@@ -25946,16 +25946,16 @@ class C(int A, int B)
         public void Indexer_Rename_ExpressionBody()
         {
             var interfaces = """
-                interface I
-                {
-                    int this[int a] { get; }
-                }
-                
-                interface J
-                {
-                    int this[int a] { get; }
-                }
-                """;
+            interface I
+            {
+            int this[int a] { get; }
+            }
+
+            interface J
+            {
+            int this[int a] { get; }
+            }
+            """;
             var src1 = "class C { int I.this[int a] => 1; } " + interfaces;
             var src2 = "class C { int J.this[int a] => 1; } " + interfaces;
 
@@ -25974,16 +25974,16 @@ class C(int A, int B)
         public void Indexer_Rename_Stackalloc()
         {
             var interfaces = """
-                interface I
-                {
-                    int this[int a] { get; }
-                }
-                
-                interface J
-                {
-                    int this[int a] { get; }
-                }
-                """;
+            interface I
+            {
+            int this[int a] { get; }
+            }
+
+            interface J
+            {
+            int this[int a] { get; }
+            }
+            """;
 
             // only type is changed, no changes to the accessors (not even whitespace)
             var src1 =
@@ -26009,16 +26009,16 @@ class C(int A, int B)
         public void Indexer_Rename_Stackalloc_ExpressionBody()
         {
             var interfaces = """
-                interface I
-                {
-                    int this[int a] { get; }
-                }
-                
-                interface J
-                {
-                    int this[int a] { get; }
-                }
-                """;
+            interface I
+            {
+            int this[int a] { get; }
+            }
+
+            interface J
+            {
+            int this[int a] { get; }
+            }
+            """;
 
             // only type is changed, no changes to the body (not even whitespace)
             var src1 =
@@ -26071,8 +26071,8 @@ class C(int A, int B)
         public void Indexer_Update_Attribute()
         {
             var attribute = """
-                public class A : System.Attribute { public A(int x) {} }
-                """;
+            public class A : System.Attribute { public A(int x) {} }
+            """;
 
             var src1 = attribute + "class C { [A(1)]int this[int a] { get; set; } }";
             var src2 = attribute + "class C { [A(2)]int this[int a] { get; set; } }";
@@ -26285,8 +26285,8 @@ class C(int A, int B)
         public void Indexer_Parameter_Update_Attribute()
         {
             var attribute = """
-                public class A : System.Attribute { public A(int x) {} }
-                """;
+            public class A : System.Attribute { public A(int x) {} }
+            """;
 
             var src1 = attribute + "class C { int this[[A(1)]int a] { get => 1; set { } } }";
             var src2 = attribute + "class C { int this[[A(2)]int a] { get => 1; set { } } }";

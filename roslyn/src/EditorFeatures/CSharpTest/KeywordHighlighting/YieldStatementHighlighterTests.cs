@@ -24,18 +24,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    IEnumerable<int> Range(int min, int max)
-                    {
-                        while (true)
-                        {
-                            if (min >= max)
-                            {
-                                {|Cursor:[|yield break|];|}
-                            }
+                IEnumerable<int> Range(int min, int max)
+                {
+                while (true)
+                {
+                if (min >= max)
+                {
+                {|Cursor:[|yield break|];|}
+                }
 
-                            [|yield return|] min++;
-                        }
-                    }
+                [|yield return|] min++;
+                }
+                }
                 }
                 """
             );
@@ -48,18 +48,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    IEnumerable<int> Range(int min, int max)
-                    {
-                        while (true)
-                        {
-                            if (min >= max)
-                            {
-                                [|yield break|];
-                            }
+                IEnumerable<int> Range(int min, int max)
+                {
+                while (true)
+                {
+                if (min >= max)
+                {
+                [|yield break|];
+                }
 
-                            {|Cursor:[|yield return|]|} min++;
-                        }
-                    }
+                {|Cursor:[|yield return|]|} min++;
+                }
+                }
                 }
                 """
             );
@@ -72,18 +72,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    IEnumerable<int> Range(int min, int max)
-                    {
-                        while (true)
-                        {
-                            if (min >= max)
-                            {
-                                yield break;
-                            }
+                IEnumerable<int> Range(int min, int max)
+                {
+                while (true)
+                {
+                if (min >= max)
+                {
+                yield break;
+                }
 
-                            yield return {|Cursor:min++|};
-                        }
-                    }
+                yield return {|Cursor:min++|};
+                }
+                }
                 }
                 """
             );
@@ -96,18 +96,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    IEnumerable<int> Range(int min, int max)
-                    {
-                        while (true)
-                        {
-                            if (min >= max)
-                            {
-                                [|yield break|];
-                            }
+                IEnumerable<int> Range(int min, int max)
+                {
+                while (true)
+                {
+                if (min >= max)
+                {
+                [|yield break|];
+                }
 
-                            [|yield return|] min++;{|Cursor:|}
-                        }
-                    }
+                [|yield return|] min++;{|Cursor:|}
+                }
+                }
                 }
                 """
             );

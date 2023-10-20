@@ -857,13 +857,13 @@ class Program
                             .GetMethodData("<>x.<>m0")
                             .VerifyIL(
                                 """
-                            {
-                              // Code size        6 (0x6)
-                              .maxstack  1
-                              IL_0000:  ldsfld     "int C.X"
-                              IL_0005:  ret
-                            }
-                            """
+                                {
+                                // Code size        6 (0x6)
+                                .maxstack  1
+                                IL_0000:  ldsfld     "int C.X"
+                                IL_0005:  ret
+                                }
+                                """
                             );
                     }
                 }
@@ -936,13 +936,13 @@ class Program
                             .GetMethodData("<>x.<>m0")
                             .VerifyIL(
                                 """
-                            {
-                              // Code size        6 (0x6)
-                              .maxstack  1
-                              IL_0000:  ldsfld     "int C.X"
-                              IL_0005:  ret
-                            }
-                            """
+                                {
+                                // Code size        6 (0x6)
+                                .maxstack  1
+                                IL_0000:  ldsfld     "int C.X"
+                                IL_0005:  ret
+                                }
+                                """
                             );
                     }
                 }
@@ -1025,13 +1025,13 @@ class Program
                             .GetMethodData("<>x.<>m0")
                             .VerifyIL(
                                 """
-                            {
-                              // Code size        6 (0x6)
-                              .maxstack  1
-                              IL_0000:  ldsfld     "int Outer.Inner.X"
-                              IL_0005:  ret
-                            }
-                            """
+                                {
+                                // Code size        6 (0x6)
+                                .maxstack  1
+                                IL_0000:  ldsfld     "int Outer.Inner.X"
+                                IL_0005:  ret
+                                }
+                                """
                             );
                     }
                 }
@@ -1148,13 +1148,13 @@ class Program
                             .GetMethodData("<>x.<>m0")
                             .VerifyIL(
                                 """
-                            {
-                              // Code size        6 (0x6)
-                              .maxstack  1
-                              IL_0000:  newobj     "C..ctor()"
-                              IL_0005:  ret
-                            }
-                            """
+                                {
+                                // Code size        6 (0x6)
+                                .maxstack  1
+                                IL_0000:  newobj     "C..ctor()"
+                                IL_0005:  ret
+                                }
+                                """
                             );
                     }
                 }
@@ -1207,14 +1207,14 @@ class Program
                             .GetMethodData("<>x.<>m0")
                             .VerifyIL(
                                 """
-                            {
-                              // Code size        7 (0x7)
-                              .maxstack  1
-                              IL_0000:  ldarg.0
-                              IL_0001:  ldfld      "int C.F"
-                              IL_0006:  ret
-                            }
-                            """
+                                {
+                                // Code size        7 (0x7)
+                                .maxstack  1
+                                IL_0000:  ldarg.0
+                                IL_0001:  ldfld      "int C.F"
+                                IL_0006:  ret
+                                }
+                                """
                             );
                     }
                 }
@@ -1227,36 +1227,36 @@ class Program
         public void FileLocalType_07()
         {
             var sourceA = """
-                file class A
-                {
-                    public int F1() => 1;
-                    public int F2() => 2;
-                }
-                class Program
-                {
-                    static void M1()
-                    {
-                        A x = new A();
-                    }
-                    static void M2()
-                    {
-                #line 100 "B.cs"
-                        A y = new A();
-                #line 200 "C.cs"
-                        A z = new A();
-                    }
-                }
-                """;
+            file class A
+            {
+            public int F1() => 1;
+            public int F2() => 2;
+            }
+            class Program
+            {
+            static void M1()
+            {
+            A x = new A();
+            }
+            static void M2()
+            {
+            #line 100 "B.cs"
+            A y = new A();
+            #line 200 "C.cs"
+            A z = new A();
+            }
+            }
+            """;
             var sourceB = """
-                class B
-                {
-                }
-                """;
+            class B
+            {
+            }
+            """;
             var sourceC = """
-                class C
-                {
-                }
-                """;
+            class C
+            {
+            }
+            """;
             var comp = CreateCompilation(
                 new[]
                 {
@@ -1318,18 +1318,18 @@ class Program
                             .GetMethodData("<>x.<>m0")
                             .VerifyIL(
                                 """
-                            {
-                              // Code size       18 (0x12)
-                              .maxstack  2
-                              .locals init (A V_0) //x
-                              IL_0000:  ldloc.0
-                              IL_0001:  callvirt   "int A.F1()"
-                              IL_0006:  newobj     "A..ctor()"
-                              IL_000b:  call       "int A.F2()"
-                              IL_0010:  add
-                              IL_0011:  ret
-                            }
-                            """
+                                {
+                                // Code size       18 (0x12)
+                                .maxstack  2
+                                .locals init (A V_0) //x
+                                IL_0000:  ldloc.0
+                                IL_0001:  callvirt   "int A.F1()"
+                                IL_0006:  newobj     "A..ctor()"
+                                IL_000b:  call       "int A.F2()"
+                                IL_0010:  add
+                                IL_0011:  ret
+                                }
+                                """
                             );
                     }
 
@@ -1396,13 +1396,13 @@ class Program
                         .GetMethodData("<>x.<>m0")
                         .VerifyIL(
                             """
-                        {
-                          // Code size        6 (0x6)
-                          .maxstack  1
-                          IL_0000:  ldsfld     "int C.X"
-                          IL_0005:  ret
-                        }
-                        """
+                            {
+                            // Code size        6 (0x6)
+                            .maxstack  1
+                            IL_0000:  ldsfld     "int C.X"
+                            IL_0005:  ret
+                            }
+                            """
                         );
                 }
             );
@@ -1446,45 +1446,45 @@ class Program
             comp.VerifyPdb(
                 """
                 <symbols>
-                  <files>
-                    <file id="1" name="A.cs" language="C#" checksumAlgorithm="SHA1" checksum="09-65-32-19-5F-F8-8A-58-BF-BC-0C-D3-68-2C-2C-7B-15-33-18-E4" />
-                    <file id="2" name="B.cs" language="C#" checksumAlgorithm="SHA1" checksum="62-4B-E2-91-A3-E9-43-48-4F-A0-E6-E8-22-74-EB-90-24-C3-05-A5" />
-                  </files>
-                  <methods>
-                    <method containingType="Program" name="F">
-                      <customDebugInfo>
-                        <using>
-                          <namespace usingCount="0" />
-                        </using>
-                      </customDebugInfo>
-                      <sequencePoints>
-                        <entry offset="0x0" startLine="5" startColumn="5" endLine="5" endColumn="6" document="1" />
-                        <entry offset="0x1" startLine="6" startColumn="5" endLine="6" endColumn="6" document="1" />
-                      </sequencePoints>
-                    </method>
-                    <method containingType="Program" name=".ctor">
-                      <customDebugInfo>
-                        <forward declaringType="Program" methodName="F" />
-                        <encLocalSlotMap>
-                          <slot kind="0" offset="29" />
-                        </encLocalSlotMap>
-                      </customDebugInfo>
-                      <sequencePoints>
-                        <entry offset="0x0" startLine="3" startColumn="5" endLine="3" endColumn="23" document="1" />
-                        <entry offset="0x7" startLine="3" startColumn="5" endLine="3" endColumn="23" document="2" />
-                        <entry offset="0xe" startLine="4" startColumn="5" endLine="4" endColumn="21" document="2" />
-                        <entry offset="0x15" startLine="5" startColumn="5" endLine="5" endColumn="6" document="2" />
-                        <entry offset="0x16" startLine="6" startColumn="9" endLine="6" endColumn="13" document="2" />
-                        <entry offset="0x1d" startLine="7" startColumn="9" endLine="7" endColumn="23" document="2" />
-                        <entry offset="0x2b" startLine="8" startColumn="5" endLine="8" endColumn="6" document="2" />
-                      </sequencePoints>
-                      <scope startOffset="0x0" endOffset="0x2c">
-                        <scope startOffset="0x15" endOffset="0x2c">
-                          <local name="z" il_index="0" il_start="0x15" il_end="0x2c" attributes="0" />
-                        </scope>
-                      </scope>
-                    </method>
-                  </methods>
+                <files>
+                <file id="1" name="A.cs" language="C#" checksumAlgorithm="SHA1" checksum="09-65-32-19-5F-F8-8A-58-BF-BC-0C-D3-68-2C-2C-7B-15-33-18-E4" />
+                <file id="2" name="B.cs" language="C#" checksumAlgorithm="SHA1" checksum="62-4B-E2-91-A3-E9-43-48-4F-A0-E6-E8-22-74-EB-90-24-C3-05-A5" />
+                </files>
+                <methods>
+                <method containingType="Program" name="F">
+                <customDebugInfo>
+                <using>
+                <namespace usingCount="0" />
+                </using>
+                </customDebugInfo>
+                <sequencePoints>
+                <entry offset="0x0" startLine="5" startColumn="5" endLine="5" endColumn="6" document="1" />
+                <entry offset="0x1" startLine="6" startColumn="5" endLine="6" endColumn="6" document="1" />
+                </sequencePoints>
+                </method>
+                <method containingType="Program" name=".ctor">
+                <customDebugInfo>
+                <forward declaringType="Program" methodName="F" />
+                <encLocalSlotMap>
+                <slot kind="0" offset="29" />
+                </encLocalSlotMap>
+                </customDebugInfo>
+                <sequencePoints>
+                <entry offset="0x0" startLine="3" startColumn="5" endLine="3" endColumn="23" document="1" />
+                <entry offset="0x7" startLine="3" startColumn="5" endLine="3" endColumn="23" document="2" />
+                <entry offset="0xe" startLine="4" startColumn="5" endLine="4" endColumn="21" document="2" />
+                <entry offset="0x15" startLine="5" startColumn="5" endLine="5" endColumn="6" document="2" />
+                <entry offset="0x16" startLine="6" startColumn="9" endLine="6" endColumn="13" document="2" />
+                <entry offset="0x1d" startLine="7" startColumn="9" endLine="7" endColumn="23" document="2" />
+                <entry offset="0x2b" startLine="8" startColumn="5" endLine="8" endColumn="6" document="2" />
+                </sequencePoints>
+                <scope startOffset="0x0" endOffset="0x2c">
+                <scope startOffset="0x15" endOffset="0x2c">
+                <local name="z" il_index="0" il_start="0x15" il_end="0x2c" attributes="0" />
+                </scope>
+                </scope>
+                </method>
+                </methods>
                 </symbols>
                 """,
                 format: Microsoft.CodeAnalysis.Emit.DebugInformationFormat.Pdb
@@ -1492,39 +1492,39 @@ class Program
             comp.VerifyPdb(
                 """
                 <symbols>
-                  <files>
-                    <file id="1" name="A.cs" language="C#" checksumAlgorithm="SHA1" checksum="09-65-32-19-5F-F8-8A-58-BF-BC-0C-D3-68-2C-2C-7B-15-33-18-E4" />
-                    <file id="2" name="B.cs" language="C#" checksumAlgorithm="SHA1" checksum="62-4B-E2-91-A3-E9-43-48-4F-A0-E6-E8-22-74-EB-90-24-C3-05-A5" />
-                  </files>
-                  <methods>
-                    <method containingType="Program" name="F">
-                      <sequencePoints>
-                        <entry offset="0x0" startLine="5" startColumn="5" endLine="5" endColumn="6" document="1" />
-                        <entry offset="0x1" startLine="6" startColumn="5" endLine="6" endColumn="6" document="1" />
-                      </sequencePoints>
-                    </method>
-                    <method containingType="Program" name=".ctor">
-                      <customDebugInfo>
-                        <encLocalSlotMap>
-                          <slot kind="0" offset="29" />
-                        </encLocalSlotMap>
-                      </customDebugInfo>
-                      <sequencePoints>
-                        <entry offset="0x0" startLine="3" startColumn="5" endLine="3" endColumn="23" document="1" />
-                        <entry offset="0x7" startLine="3" startColumn="5" endLine="3" endColumn="23" document="2" />
-                        <entry offset="0xe" startLine="4" startColumn="5" endLine="4" endColumn="21" document="2" />
-                        <entry offset="0x15" startLine="5" startColumn="5" endLine="5" endColumn="6" document="2" />
-                        <entry offset="0x16" startLine="6" startColumn="9" endLine="6" endColumn="13" document="2" />
-                        <entry offset="0x1d" startLine="7" startColumn="9" endLine="7" endColumn="23" document="2" />
-                        <entry offset="0x2b" startLine="8" startColumn="5" endLine="8" endColumn="6" document="2" />
-                      </sequencePoints>
-                      <scope startOffset="0x0" endOffset="0x2c">
-                        <scope startOffset="0x15" endOffset="0x2c">
-                          <local name="z" il_index="0" il_start="0x15" il_end="0x2c" attributes="0" />
-                        </scope>
-                      </scope>
-                    </method>
-                  </methods>
+                <files>
+                <file id="1" name="A.cs" language="C#" checksumAlgorithm="SHA1" checksum="09-65-32-19-5F-F8-8A-58-BF-BC-0C-D3-68-2C-2C-7B-15-33-18-E4" />
+                <file id="2" name="B.cs" language="C#" checksumAlgorithm="SHA1" checksum="62-4B-E2-91-A3-E9-43-48-4F-A0-E6-E8-22-74-EB-90-24-C3-05-A5" />
+                </files>
+                <methods>
+                <method containingType="Program" name="F">
+                <sequencePoints>
+                <entry offset="0x0" startLine="5" startColumn="5" endLine="5" endColumn="6" document="1" />
+                <entry offset="0x1" startLine="6" startColumn="5" endLine="6" endColumn="6" document="1" />
+                </sequencePoints>
+                </method>
+                <method containingType="Program" name=".ctor">
+                <customDebugInfo>
+                <encLocalSlotMap>
+                <slot kind="0" offset="29" />
+                </encLocalSlotMap>
+                </customDebugInfo>
+                <sequencePoints>
+                <entry offset="0x0" startLine="3" startColumn="5" endLine="3" endColumn="23" document="1" />
+                <entry offset="0x7" startLine="3" startColumn="5" endLine="3" endColumn="23" document="2" />
+                <entry offset="0xe" startLine="4" startColumn="5" endLine="4" endColumn="21" document="2" />
+                <entry offset="0x15" startLine="5" startColumn="5" endLine="5" endColumn="6" document="2" />
+                <entry offset="0x16" startLine="6" startColumn="9" endLine="6" endColumn="13" document="2" />
+                <entry offset="0x1d" startLine="7" startColumn="9" endLine="7" endColumn="23" document="2" />
+                <entry offset="0x2b" startLine="8" startColumn="5" endLine="8" endColumn="6" document="2" />
+                </sequencePoints>
+                <scope startOffset="0x0" endOffset="0x2c">
+                <scope startOffset="0x15" endOffset="0x2c">
+                <local name="z" il_index="0" il_start="0x15" il_end="0x2c" attributes="0" />
+                </scope>
+                </scope>
+                </method>
+                </methods>
                 </symbols>
                 """,
                 format: Microsoft.CodeAnalysis.Emit.DebugInformationFormat.PortablePdb
@@ -1568,14 +1568,14 @@ class Program
                         .GetMethodData("<>x.<>m0")
                         .VerifyIL(
                             """
-                        {
+                            {
                             // Code size        2 (0x2)
                             .maxstack  1
                             .locals init (int V_0) //z
                             IL_0000:  ldloc.0
                             IL_0001:  ret
-                        }
-                        """
+                            }
+                            """
                         );
 
                     testData = new CompilationTestData();
@@ -1596,11 +1596,11 @@ class Program
                         "this",
                         expectedILOpt: """
                         {
-                            // Code size        2 (0x2)
-                            .maxstack  1
-                            .locals init (int V_0) //z
-                            IL_0000:  ldarg.0
-                            IL_0001:  ret
+                        // Code size        2 (0x2)
+                        .maxstack  1
+                        .locals init (int V_0) //z
+                        IL_0000:  ldarg.0
+                        IL_0001:  ret
                         }
                         """
                     );
@@ -1612,11 +1612,11 @@ class Program
                         "z",
                         expectedILOpt: """
                         {
-                            // Code size        2 (0x2)
-                            .maxstack  1
-                            .locals init (int V_0) //z
-                            IL_0000:  ldloc.0
-                            IL_0001:  ret
+                        // Code size        2 (0x2)
+                        .maxstack  1
+                        .locals init (int V_0) //z
+                        IL_0000:  ldloc.0
+                        IL_0001:  ret
                         }
                         """
                     );
@@ -1630,28 +1630,28 @@ class Program
         public void SequencePointsMultipleDocuments_02()
         {
             var sourceA = """
-                class A
-                {
-                    static void Main()
-                    {
-                        int x = 1;
-                #line 100 "B.cs"
-                        int y = 2;
-                #line 200 "C.cs"
-                        int z = 3;
-                    }
-                }
-                """;
+            class A
+            {
+            static void Main()
+            {
+            int x = 1;
+            #line 100 "B.cs"
+            int y = 2;
+            #line 200 "C.cs"
+            int z = 3;
+            }
+            }
+            """;
             var sourceB = """
-                class B
-                {
-                }
-                """;
+            class B
+            {
+            }
+            """;
             var sourceC = """
-                class C
-                {
-                }
-                """;
+            class C
+            {
+            }
+            """;
             var comp = CreateCompilation(
                 new[]
                 {
@@ -1677,37 +1677,37 @@ class Program
             comp.VerifyPdb(
                 """
                 <symbols>
-                  <files>
-                    <file id="1" name="A.cs" language="C#" checksumAlgorithm="SHA1" checksum="8E-FF-02-A2-A9-6A-80-AA-31-CC-19-BE-FA-C4-84-88-5B-C8-09-08" />
-                    <file id="2" name="B.cs" language="C#" checksumAlgorithm="SHA1" checksum="29-99-77-37-69-95-33-C4-02-3B-65-8D-5F-61-43-CF-F0-04-61-C2" />
-                    <file id="3" name="C.cs" language="C#" checksumAlgorithm="SHA1" checksum="A2-ED-D2-5C-84-2F-E1-0E-AB-C5-11-C8-51-E6-76-03-C8-5A-6D-06" />
-                  </files>
-                  <methods>
-                    <method containingType="A" name="Main">
-                      <customDebugInfo>
-                        <using>
-                          <namespace usingCount="0" />
-                        </using>
-                        <encLocalSlotMap>
-                          <slot kind="0" offset="15" />
-                          <slot kind="0" offset="53" />
-                          <slot kind="0" offset="91" />
-                        </encLocalSlotMap>
-                      </customDebugInfo>
-                      <sequencePoints>
-                        <entry offset="0x0" startLine="4" startColumn="5" endLine="4" endColumn="6" document="1" />
-                        <entry offset="0x1" startLine="5" startColumn="9" endLine="5" endColumn="19" document="1" />
-                        <entry offset="0x3" startLine="100" startColumn="9" endLine="100" endColumn="19" document="2" />
-                        <entry offset="0x5" startLine="200" startColumn="9" endLine="200" endColumn="19" document="3" />
-                        <entry offset="0x7" startLine="201" startColumn="5" endLine="201" endColumn="6" document="3" />
-                      </sequencePoints>
-                      <scope startOffset="0x0" endOffset="0x8">
-                        <local name="x" il_index="0" il_start="0x0" il_end="0x8" attributes="0" />
-                        <local name="y" il_index="1" il_start="0x0" il_end="0x8" attributes="0" />
-                        <local name="z" il_index="2" il_start="0x0" il_end="0x8" attributes="0" />
-                      </scope>
-                    </method>
-                  </methods>
+                <files>
+                <file id="1" name="A.cs" language="C#" checksumAlgorithm="SHA1" checksum="8E-FF-02-A2-A9-6A-80-AA-31-CC-19-BE-FA-C4-84-88-5B-C8-09-08" />
+                <file id="2" name="B.cs" language="C#" checksumAlgorithm="SHA1" checksum="29-99-77-37-69-95-33-C4-02-3B-65-8D-5F-61-43-CF-F0-04-61-C2" />
+                <file id="3" name="C.cs" language="C#" checksumAlgorithm="SHA1" checksum="A2-ED-D2-5C-84-2F-E1-0E-AB-C5-11-C8-51-E6-76-03-C8-5A-6D-06" />
+                </files>
+                <methods>
+                <method containingType="A" name="Main">
+                <customDebugInfo>
+                <using>
+                <namespace usingCount="0" />
+                </using>
+                <encLocalSlotMap>
+                <slot kind="0" offset="15" />
+                <slot kind="0" offset="53" />
+                <slot kind="0" offset="91" />
+                </encLocalSlotMap>
+                </customDebugInfo>
+                <sequencePoints>
+                <entry offset="0x0" startLine="4" startColumn="5" endLine="4" endColumn="6" document="1" />
+                <entry offset="0x1" startLine="5" startColumn="9" endLine="5" endColumn="19" document="1" />
+                <entry offset="0x3" startLine="100" startColumn="9" endLine="100" endColumn="19" document="2" />
+                <entry offset="0x5" startLine="200" startColumn="9" endLine="200" endColumn="19" document="3" />
+                <entry offset="0x7" startLine="201" startColumn="5" endLine="201" endColumn="6" document="3" />
+                </sequencePoints>
+                <scope startOffset="0x0" endOffset="0x8">
+                <local name="x" il_index="0" il_start="0x0" il_end="0x8" attributes="0" />
+                <local name="y" il_index="1" il_start="0x0" il_end="0x8" attributes="0" />
+                <local name="z" il_index="2" il_start="0x0" il_end="0x8" attributes="0" />
+                </scope>
+                </method>
+                </methods>
                 </symbols>
                 """,
                 format: Microsoft.CodeAnalysis.Emit.DebugInformationFormat.Pdb
@@ -1715,37 +1715,37 @@ class Program
             comp.VerifyPdb(
                 """
                 <symbols>
-                  <files>
-                    <file id="1" name="A.cs" language="C#" checksumAlgorithm="SHA1" checksum="8E-FF-02-A2-A9-6A-80-AA-31-CC-19-BE-FA-C4-84-88-5B-C8-09-08" />
-                    <file id="2" name="B.cs" language="C#" checksumAlgorithm="SHA1" checksum="29-99-77-37-69-95-33-C4-02-3B-65-8D-5F-61-43-CF-F0-04-61-C2" />
-                    <file id="3" name="C.cs" language="C#" checksumAlgorithm="SHA1" checksum="A2-ED-D2-5C-84-2F-E1-0E-AB-C5-11-C8-51-E6-76-03-C8-5A-6D-06" />
-                  </files>
-                  <methods>
-                    <method containingType="A" name="Main">
-                      <customDebugInfo>
-                        <using>
-                          <namespace usingCount="0" />
-                        </using>
-                        <encLocalSlotMap>
-                          <slot kind="0" offset="15" />
-                          <slot kind="0" offset="53" />
-                          <slot kind="0" offset="91" />
-                        </encLocalSlotMap>
-                      </customDebugInfo>
-                      <sequencePoints>
-                        <entry offset="0x0" startLine="4" startColumn="5" endLine="4" endColumn="6" document="1" />
-                        <entry offset="0x1" startLine="5" startColumn="9" endLine="5" endColumn="19" document="1" />
-                        <entry offset="0x3" startLine="100" startColumn="9" endLine="100" endColumn="19" document="2" />
-                        <entry offset="0x5" startLine="200" startColumn="9" endLine="200" endColumn="19" document="3" />
-                        <entry offset="0x7" startLine="201" startColumn="5" endLine="201" endColumn="6" document="3" />
-                      </sequencePoints>
-                      <scope startOffset="0x0" endOffset="0x8">
-                        <local name="x" il_index="0" il_start="0x0" il_end="0x8" attributes="0" />
-                        <local name="y" il_index="1" il_start="0x0" il_end="0x8" attributes="0" />
-                        <local name="z" il_index="2" il_start="0x0" il_end="0x8" attributes="0" />
-                      </scope>
-                    </method>
-                  </methods>
+                <files>
+                <file id="1" name="A.cs" language="C#" checksumAlgorithm="SHA1" checksum="8E-FF-02-A2-A9-6A-80-AA-31-CC-19-BE-FA-C4-84-88-5B-C8-09-08" />
+                <file id="2" name="B.cs" language="C#" checksumAlgorithm="SHA1" checksum="29-99-77-37-69-95-33-C4-02-3B-65-8D-5F-61-43-CF-F0-04-61-C2" />
+                <file id="3" name="C.cs" language="C#" checksumAlgorithm="SHA1" checksum="A2-ED-D2-5C-84-2F-E1-0E-AB-C5-11-C8-51-E6-76-03-C8-5A-6D-06" />
+                </files>
+                <methods>
+                <method containingType="A" name="Main">
+                <customDebugInfo>
+                <using>
+                <namespace usingCount="0" />
+                </using>
+                <encLocalSlotMap>
+                <slot kind="0" offset="15" />
+                <slot kind="0" offset="53" />
+                <slot kind="0" offset="91" />
+                </encLocalSlotMap>
+                </customDebugInfo>
+                <sequencePoints>
+                <entry offset="0x0" startLine="4" startColumn="5" endLine="4" endColumn="6" document="1" />
+                <entry offset="0x1" startLine="5" startColumn="9" endLine="5" endColumn="19" document="1" />
+                <entry offset="0x3" startLine="100" startColumn="9" endLine="100" endColumn="19" document="2" />
+                <entry offset="0x5" startLine="200" startColumn="9" endLine="200" endColumn="19" document="3" />
+                <entry offset="0x7" startLine="201" startColumn="5" endLine="201" endColumn="6" document="3" />
+                </sequencePoints>
+                <scope startOffset="0x0" endOffset="0x8">
+                <local name="x" il_index="0" il_start="0x0" il_end="0x8" attributes="0" />
+                <local name="y" il_index="1" il_start="0x0" il_end="0x8" attributes="0" />
+                <local name="z" il_index="2" il_start="0x0" il_end="0x8" attributes="0" />
+                </scope>
+                </method>
+                </methods>
                 </symbols>
                 """,
                 format: Microsoft.CodeAnalysis.Emit.DebugInformationFormat.PortablePdb
@@ -1767,20 +1767,20 @@ class Program
                         .GetMethodData("<>x.<>m0")
                         .VerifyIL(
                             """
-                        {
-                          // Code size        6 (0x6)
-                          .maxstack  2
-                          .locals init (int V_0, //x
-                                        int V_1, //y
-                                        int V_2) //z
-                          IL_0000:  ldloc.0
-                          IL_0001:  ldloc.1
-                          IL_0002:  add
-                          IL_0003:  ldloc.2
-                          IL_0004:  add
-                          IL_0005:  ret
-                        }
-                        """
+                            {
+                            // Code size        6 (0x6)
+                            .maxstack  2
+                            .locals init (int V_0, //x
+                            int V_1, //y
+                            int V_2) //z
+                            IL_0000:  ldloc.0
+                            IL_0001:  ldloc.1
+                            IL_0002:  add
+                            IL_0003:  ldloc.2
+                            IL_0004:  add
+                            IL_0005:  ret
+                            }
+                            """
                         );
 
                     testData = new CompilationTestData();
@@ -1801,13 +1801,13 @@ class Program
                         "x",
                         expectedILOpt: """
                         {
-                          // Code size        2 (0x2)
-                          .maxstack  1
-                          .locals init (int V_0, //x
-                                        int V_1, //y
-                                        int V_2) //z
-                          IL_0000:  ldloc.0
-                          IL_0001:  ret
+                        // Code size        2 (0x2)
+                        .maxstack  1
+                        .locals init (int V_0, //x
+                        int V_1, //y
+                        int V_2) //z
+                        IL_0000:  ldloc.0
+                        IL_0001:  ret
                         }
                         """
                     );
@@ -1819,13 +1819,13 @@ class Program
                         "y",
                         expectedILOpt: """
                         {
-                          // Code size        2 (0x2)
-                          .maxstack  1
-                          .locals init (int V_0, //x
-                                        int V_1, //y
-                                        int V_2) //z
-                          IL_0000:  ldloc.1
-                          IL_0001:  ret
+                        // Code size        2 (0x2)
+                        .maxstack  1
+                        .locals init (int V_0, //x
+                        int V_1, //y
+                        int V_2) //z
+                        IL_0000:  ldloc.1
+                        IL_0001:  ret
                         }
                         """
                     );
@@ -1837,13 +1837,13 @@ class Program
                         "z",
                         expectedILOpt: """
                         {
-                          // Code size        2 (0x2)
-                          .maxstack  1
-                          .locals init (int V_0, //x
-                                        int V_1, //y
-                                        int V_2) //z
-                          IL_0000:  ldloc.2
-                          IL_0001:  ret
+                        // Code size        2 (0x2)
+                        .maxstack  1
+                        .locals init (int V_0, //x
+                        int V_1, //y
+                        int V_2) //z
+                        IL_0000:  ldloc.2
+                        IL_0001:  ret
                         }
                         """
                     );

@@ -46,40 +46,40 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         public async Task ValueTypesAreInvalidAsBindInputs()
         {
             string source = """
-                using System;
-                using System.Collections.Generic;
-                using Microsoft.Extensions.Configuration;
-                
-                public class Program
-                {
-                	public static void Main()
-                	{
-                		ConfigurationBuilder configurationBuilder = new();
-                		IConfigurationRoot config = configurationBuilder.Build();
+            using System;
+            using System.Collections.Generic;
+            using Microsoft.Extensions.Configuration;
 
-                        int myInt = 1
-                		config.Bind(myInt);
-                        int? myNInt = 2;
-                        config.Bind(myNInt)
+            public class Program
+            {
+            public static void Main()
+            {
+            ConfigurationBuilder configurationBuilder = new();
+            IConfigurationRoot config = configurationBuilder.Build();
 
-                        var myStruct = new MyStruct()
-                        config.Bind(myStruct, options => { })
-                        MyStruct? myNStruct = new();
-                        config.Bind(myNStruct, options => { });
+            int myInt = 1
+            config.Bind(myInt);
+            int? myNInt = 2;
+            config.Bind(myNInt)
 
-                        var myRecordStruct = new MyRecordStruct();
-                        config.Bind("key", myRecordStruct);
-                        MyRecordStruct? myNRecordStruct = new();
-                        config.Bind("key", myNRecordStruct);
+            var myStruct = new MyStruct()
+            config.Bind(myStruct, options => { })
+            MyStruct? myNStruct = new();
+            config.Bind(myNStruct, options => { });
 
-                        Memory<int> memory = new(new int[] {1, 2, 3});
-                        config.Bind(memory);
-                	}
+            var myRecordStruct = new MyRecordStruct();
+            config.Bind("key", myRecordStruct);
+            MyRecordStruct? myNRecordStruct = new();
+            config.Bind("key", myNRecordStruct);
 
-                    public struct MyStruct { }
-                    public record struct MyRecordStruct { }
-                }
-                """;
+            Memory<int> memory = new(new int[] {1, 2, 3});
+            config.Bind(memory);
+            }
+
+            public struct MyStruct { }
+            public record struct MyRecordStruct { }
+            }
+            """;
 
             ConfigBindingGenRunResult result = await RunGeneratorAndUpdateCompilation(source);
             Assert.False(result.GeneratedSource.HasValue);
@@ -101,24 +101,24 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         public async Task InvalidRootMethodInputTypes()
         {
             string source = """
-                using System.Collections.Generic;
-                using Microsoft.Extensions.Configuration;
+            using System.Collections.Generic;
+            using Microsoft.Extensions.Configuration;
 
-                public class Program
-                {
-                    public static void Main()
-                    {
-                        ConfigurationBuilder configurationBuilder = new();
-                        IConfigurationRoot config = configurationBuilder.Build();
+            public class Program
+            {
+            public static void Main()
+            {
+            ConfigurationBuilder configurationBuilder = new();
+            IConfigurationRoot config = configurationBuilder.Build();
 
-                        config.GetValue(typeof(int*), "");
-                        config.Get<Dictionary<string, T>>();
-                    }
+            config.GetValue(typeof(int*), "");
+            config.Get<Dictionary<string, T>>();
+            }
 
-                    public struct MyStruct { }
-                    public record struct MyRecordStruct { }
-                }
-                """;
+            public struct MyStruct { }
+            public record struct MyRecordStruct { }
+            }
+            """;
 
             ConfigBindingGenRunResult result = await RunGeneratorAndUpdateCompilation(source);
             Assert.False(result.GeneratedSource.HasValue);
@@ -140,40 +140,40 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         public async Task CannotDetermineTypeInfo()
         {
             string source = """
-                using Microsoft.AspNetCore.Builder;
-                using Microsoft.Extensions.Configuration;
-                using Microsoft.Extensions.DependencyInjection;
-                
-                public class Program
-                {
-                	public static void Main()
-                	{
-                		ConfigurationBuilder configurationBuilder = new();
-                		IConfiguration config = configurationBuilder.Build();
-                
-                		PerformGenericBinderCalls<MyClass>(config);
-                	}
+            using Microsoft.AspNetCore.Builder;
+            using Microsoft.Extensions.Configuration;
+            using Microsoft.Extensions.DependencyInjection;
 
-                    public static void PerformGenericBinderCalls<T>(IConfiguration config) where T : class
-                    {
-                        config.Get<T>();
-                        config.Get<T>(binderOptions => { });
-                        config.GetValue<T>("key");
-                        config.GetValue<T>("key", default(T));
+            public class Program
+            {
+            public static void Main()
+            {
+            ConfigurationBuilder configurationBuilder = new();
+            IConfiguration config = configurationBuilder.Build();
 
-                        IConfigurationSection section = config.GetSection("MySection");
-                		ServiceCollection services = new();
-                        services.Configure<T>(section);
-                    }
+            PerformGenericBinderCalls<MyClass>(config);
+            }
 
-                    private void BindOptions(IConfiguration config, object? instance)
-                    {
-                        config.Bind(instance);
-                    }
+            public static void PerformGenericBinderCalls<T>(IConfiguration config) where T : class
+            {
+            config.Get<T>();
+            config.Get<T>(binderOptions => { });
+            config.GetValue<T>("key");
+            config.GetValue<T>("key", default(T));
 
-                    public class MyClass { }
-                }
-                """;
+            IConfigurationSection section = config.GetSection("MySection");
+            ServiceCollection services = new();
+            services.Configure<T>(section);
+            }
+
+            private void BindOptions(IConfiguration config, object? instance)
+            {
+            config.Bind(instance);
+            }
+
+            public class MyClass { }
+            }
+            """;
 
             ConfigBindingGenRunResult result = await RunGeneratorAndUpdateCompilation(source);
             Assert.False(result.GeneratedSource.HasValue);
@@ -195,21 +195,21 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         public async Task SucceedWhenGivenMinimumRequiredReferences()
         {
             string source = """
-                using System;
-                using Microsoft.Extensions.Configuration;
+            using System;
+            using Microsoft.Extensions.Configuration;
 
-                public class Program
-                {
-                    public static void Main()
-                    {
-                        ConfigurationBuilder configurationBuilder = new();
-                        IConfiguration config = configurationBuilder.Build();
-                        config.Bind(new MyClass0());
-                    }
+            public class Program
+            {
+            public static void Main()
+            {
+            ConfigurationBuilder configurationBuilder = new();
+            IConfiguration config = configurationBuilder.Build();
+            config.Bind(new MyClass0());
+            }
 
-                    public class MyClass0 { }
-                }
-                """;
+            public class MyClass0 { }
+            }
+            """;
 
             HashSet<Type> exclusions =
                 new()
@@ -251,50 +251,50 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
         public async Task IssueDiagnosticsForAllOffendingCallsites()
         {
             string source = """
-                using System.Collections.Immutable;
-                using System.Text;
-                using System.Text.Json;
-                using Microsoft.AspNetCore.Builder;
-                using Microsoft.Extensions.Configuration;
-                using Microsoft.Extensions.DependencyInjection;
-                
-                public class Program
-                {
-                	public static void Main()
-                	{
-                		ConfigurationBuilder configurationBuilder = new();
-                		IConfiguration configuration = configurationBuilder.Build();
+            using System.Collections.Immutable;
+            using System.Text;
+            using System.Text.Json;
+            using Microsoft.AspNetCore.Builder;
+            using Microsoft.Extensions.Configuration;
+            using Microsoft.Extensions.DependencyInjection;
 
-                        var obj = new TypeGraphWithUnsupportedMember();
-                        configuration.Bind(obj);
+            public class Program
+            {
+            public static void Main()
+            {
+            ConfigurationBuilder configurationBuilder = new();
+            IConfiguration configuration = configurationBuilder.Build();
 
-                        var obj2 = new AnotherGraphWithUnsupportedMembers();
-                        var obj4 = Encoding.UTF8;
+            var obj = new TypeGraphWithUnsupportedMember();
+            configuration.Bind(obj);
 
-                        // Must require separate suppression.
-                        configuration.Bind(obj2);
-                        configuration.Bind(obj2, _ => { });
-                        configuration.Bind("", obj2);
-                        configuration.Get<TypeGraphWithUnsupportedMember>();
-                        configuration.Get<AnotherGraphWithUnsupportedMembers>(_ => { });
-                        configuration.Get(typeof(TypeGraphWithUnsupportedMember));
-                        configuration.Get(typeof(AnotherGraphWithUnsupportedMembers), _ => { });
-                        configuration.Bind(obj4);
-                        configuration.Get<Encoding>();
-                	}
+            var obj2 = new AnotherGraphWithUnsupportedMembers();
+            var obj4 = Encoding.UTF8;
 
-                    public class TypeGraphWithUnsupportedMember
-                    {
-                        public JsonWriterOptions WriterOptions { get; set; }
-                    }
+            // Must require separate suppression.
+            configuration.Bind(obj2);
+            configuration.Bind(obj2, _ => { });
+            configuration.Bind("", obj2);
+            configuration.Get<TypeGraphWithUnsupportedMember>();
+            configuration.Get<AnotherGraphWithUnsupportedMembers>(_ => { });
+            configuration.Get(typeof(TypeGraphWithUnsupportedMember));
+            configuration.Get(typeof(AnotherGraphWithUnsupportedMembers), _ => { });
+            configuration.Bind(obj4);
+            configuration.Get<Encoding>();
+            }
 
-                    public class AnotherGraphWithUnsupportedMembers
-                    {
-                        public JsonWriterOptions WriterOptions { get; set; }
-                        public ImmutableArray<int> UnsupportedArray { get; set; }
-                    }
-                }
-                """;
+            public class TypeGraphWithUnsupportedMember
+            {
+            public JsonWriterOptions WriterOptions { get; set; }
+            }
+
+            public class AnotherGraphWithUnsupportedMembers
+            {
+            public JsonWriterOptions WriterOptions { get; set; }
+            public ImmutableArray<int> UnsupportedArray { get; set; }
+            }
+            }
+            """;
 
             ConfigBindingGenRunResult result = await RunGeneratorAndUpdateCompilation(
                 source,

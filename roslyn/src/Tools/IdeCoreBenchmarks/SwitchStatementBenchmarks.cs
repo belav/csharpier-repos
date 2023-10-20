@@ -26,10 +26,10 @@ public class SwitchStatementBenchmarks
             """
             class TestClass
             {
-              int TestMethod(string arg)
-              {
-                switch (arg)
-                {
+            int TestMethod(string arg)
+            {
+            switch (arg)
+            {
             """
         );
 
@@ -44,9 +44,9 @@ public class SwitchStatementBenchmarks
 
         builder.AppendLine(
             """
-                  default: return 0;
-                }
-              }
+            default: return 0;
+            }
+            }
             }
 
             """

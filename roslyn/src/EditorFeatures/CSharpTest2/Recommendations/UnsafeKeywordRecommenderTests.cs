@@ -186,8 +186,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                  void Goo() {}
-                  $$
+                void Goo() {}
+                $$
                 """
             );
         }
@@ -198,8 +198,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                  int i;
-                  $$
+                int i;
+                $$
                 """
             );
         }
@@ -210,8 +210,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                  int i { get; }
-                  $$
+                int i { get; }
+                $$
                 """
             );
         }
@@ -292,8 +292,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                  [goo]
-                  $$
+                [goo]
+                $$
                 """
             );
         }
@@ -305,7 +305,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 struct S {
-                   $$
+                $$
                 """
             );
         }
@@ -316,7 +316,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 interface I {
-                   $$
+                $$
                 """
             );
         }
@@ -327,7 +327,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   $$
+                $$
                 """
             );
         }
@@ -400,7 +400,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    abstract $$
+                abstract $$
                 """
             );
         }
@@ -411,7 +411,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    virtual $$
+                virtual $$
                 """
             );
         }
@@ -422,7 +422,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    override $$
+                override $$
                 """
             );
         }
@@ -433,7 +433,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    sealed $$
+                sealed $$
                 """
             );
         }
@@ -444,9 +444,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                $$
-                return true;
-                """
+                    $$
+                    return true;
+                    """
                 )
             );
         }
@@ -457,9 +457,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                return true;
-                $$
-                """
+                    return true;
+                    $$
+                    """
                 )
             );
         }
@@ -470,10 +470,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                if (true) {
-                }
-                $$
-                """
+                    if (true) {
+                    }
+                    $$
+                    """
                 )
             );
         }
@@ -484,10 +484,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                switch (E) {
-                  case 0:
+                    switch (E) {
+                    case 0:
                     $$
-                """
+                    """
                 )
             );
         }

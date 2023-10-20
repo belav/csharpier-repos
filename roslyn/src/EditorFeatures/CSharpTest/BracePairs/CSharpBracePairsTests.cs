@@ -25,14 +25,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BracePairs
                 """
                 public class C
                 {|a:{|}
-                    void M{|b:(|}int i{|b:)|}
-                    {|c:{|}
-                    {|c:}|}
+                void M{|b:(|}int i{|b:)|}
+                {|c:{|}
+                {|c:}|}
 
-                    {|d:[|}Attr{|d:]|}
-                    void M2{|e:(|}List{|f:<|}int{|f:>|} i{|e:)|}
-                    {|g:{|}
-                    {|g:}|}
+                {|d:[|}Attr{|d:]|}
+                void M2{|e:(|}List{|f:<|}int{|f:>|} i{|e:)|}
+                {|g:{|}
+                {|g:}|}
                 {|a:}|}
                 """
             );

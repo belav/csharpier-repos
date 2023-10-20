@@ -25,21 +25,21 @@ namespace LibraryImportGenerator.UnitTests
         {
             string source = """
 
-                using System.Collections.Generic;
-                using System.Runtime.InteropServices;
-                namespace NS
-                {
-                    class MyClass { }
-                }
-                partial class Test
-                {
-                    [LibraryImport("DoesNotExist")]
-                    public static partial void Method1(NS.MyClass {|#0:c|});
+            using System.Collections.Generic;
+            using System.Runtime.InteropServices;
+            namespace NS
+            {
+            class MyClass { }
+            }
+            partial class Test
+            {
+            [LibraryImport("DoesNotExist")]
+            public static partial void Method1(NS.MyClass {|#0:c|});
 
-                    [LibraryImport("DoesNotExist")]
-                    public static partial void Method2(int i, List<int> {|#1:list|});
-                }
-                """;
+            [LibraryImport("DoesNotExist")]
+            public static partial void Method2(int i, List<int> {|#1:list|});
+            }
+            """;
 
             await VerifyCS.VerifySourceGeneratorAsync(
                 source,
@@ -59,21 +59,21 @@ namespace LibraryImportGenerator.UnitTests
         {
             string source = """
 
-                using System.Collections.Generic;
-                using System.Runtime.InteropServices;
-                namespace NS
-                {
-                    class MyClass { }
-                }
-                partial class Test
-                {
-                    [LibraryImport("DoesNotExist")]
-                    public static partial NS.MyClass {|#0:Method1|}();
+            using System.Collections.Generic;
+            using System.Runtime.InteropServices;
+            namespace NS
+            {
+            class MyClass { }
+            }
+            partial class Test
+            {
+            [LibraryImport("DoesNotExist")]
+            public static partial NS.MyClass {|#0:Method1|}();
 
-                    [LibraryImport("DoesNotExist")]
-                    public static partial List<int> {|#1:Method2|}();
-                }
-                """;
+            [LibraryImport("DoesNotExist")]
+            public static partial List<int> {|#1:Method2|}();
+            }
+            """;
 
             await VerifyCS.VerifySourceGeneratorAsync(
                 source,
@@ -93,13 +93,13 @@ namespace LibraryImportGenerator.UnitTests
         {
             string source = """
 
-                using System.Runtime.InteropServices;
-                partial class Test
-                {
-                    [LibraryImport("DoesNotExist")]
-                    public static partial void Method(char {|#0:c|}, string {|#1:s|});
-                }
-                """;
+            using System.Runtime.InteropServices;
+            partial class Test
+            {
+            [LibraryImport("DoesNotExist")]
+            public static partial void Method(char {|#0:c|}, string {|#1:s|});
+            }
+            """;
 
             await VerifyCS.VerifySourceGeneratorAsync(
                 source,
@@ -125,16 +125,16 @@ namespace LibraryImportGenerator.UnitTests
         {
             string source = """
 
-                using System.Runtime.InteropServices;
-                partial class Test
-                {
-                    [LibraryImport("DoesNotExist")]
-                    public static partial char {|#0:Method1|}();
+            using System.Runtime.InteropServices;
+            partial class Test
+            {
+            [LibraryImport("DoesNotExist")]
+            public static partial char {|#0:Method1|}();
 
-                    [LibraryImport("DoesNotExist")]
-                    public static partial string {|#1:Method2|}();
-                }
-                """;
+            [LibraryImport("DoesNotExist")]
+            public static partial string {|#1:Method2|}();
+            }
+            """;
 
             await VerifyCS.VerifySourceGeneratorAsync(
                 source,
@@ -160,16 +160,16 @@ namespace LibraryImportGenerator.UnitTests
         {
             string source = """
 
-                using System.Runtime.InteropServices;
-                partial class Test
-                {
-                    [LibraryImport("DoesNotExist")]
-                    public static partial void Method1([MarshalAs(UnmanagedType.BStr)] int {|#0:i1|}, int i2);
+            using System.Runtime.InteropServices;
+            partial class Test
+            {
+            [LibraryImport("DoesNotExist")]
+            public static partial void Method1([MarshalAs(UnmanagedType.BStr)] int {|#0:i1|}, int i2);
 
-                    [LibraryImport("DoesNotExist")]
-                    public static partial void Method2(int i1, [MarshalAs(UnmanagedType.FunctionPtr)] bool {|#1:b2|});
-                }
-                """;
+            [LibraryImport("DoesNotExist")]
+            public static partial void Method2(int i1, [MarshalAs(UnmanagedType.FunctionPtr)] bool {|#1:b2|});
+            }
+            """;
 
             await VerifyCS.VerifySourceGeneratorAsync(
                 source,
@@ -189,18 +189,18 @@ namespace LibraryImportGenerator.UnitTests
         {
             string source = """
 
-                using System.Runtime.InteropServices;
-                partial class Test
-                {
-                    [LibraryImport("DoesNotExist")]
-                    [return: MarshalAs(UnmanagedType.BStr)]
-                    public static partial int {|#0:Method1|}(int i);
+            using System.Runtime.InteropServices;
+            partial class Test
+            {
+            [LibraryImport("DoesNotExist")]
+            [return: MarshalAs(UnmanagedType.BStr)]
+            public static partial int {|#0:Method1|}(int i);
 
-                    [LibraryImport("DoesNotExist")]
-                    [return: MarshalAs(UnmanagedType.FunctionPtr)]
-                    public static partial bool {|#1:Method2|}(int i);
-                }
-                """;
+            [LibraryImport("DoesNotExist")]
+            [return: MarshalAs(UnmanagedType.FunctionPtr)]
+            public static partial bool {|#1:Method2|}(int i);
+            }
+            """;
 
             await VerifyCS.VerifySourceGeneratorAsync(
                 source,
@@ -220,17 +220,17 @@ namespace LibraryImportGenerator.UnitTests
         {
             string source = """
 
-                using System.Runtime.InteropServices;
-                partial class Test
-                {
-                    [LibraryImport("DoesNotExist")]
-                    [return: {|#0:MarshalAs(1)|}]
-                    public static partial int {|#1:Method1|}(int i);
+            using System.Runtime.InteropServices;
+            partial class Test
+            {
+            [LibraryImport("DoesNotExist")]
+            [return: {|#0:MarshalAs(1)|}]
+            public static partial int {|#1:Method1|}(int i);
 
-                    [LibraryImport("DoesNotExist")]
-                    public static partial int Method2([{|#2:MarshalAs((short)0)|}] bool {|#3:b|});
-                }
-                """;
+            [LibraryImport("DoesNotExist")]
+            public static partial int Method2([{|#2:MarshalAs((short)0)|}] bool {|#3:b|});
+            }
+            """;
 
             await VerifyCS.VerifySourceGeneratorAsync(
                 source,
@@ -258,17 +258,17 @@ namespace LibraryImportGenerator.UnitTests
         {
             string source = """
 
-                using System.Runtime.InteropServices;
-                partial class Test
-                {
-                    [LibraryImport("DoesNotExist")]
-                    [return: {|#0:MarshalAs(UnmanagedType.I4, SafeArraySubType=VarEnum.VT_I4)|}]
-                    public static partial int Method1(int i);
+            using System.Runtime.InteropServices;
+            partial class Test
+            {
+            [LibraryImport("DoesNotExist")]
+            [return: {|#0:MarshalAs(UnmanagedType.I4, SafeArraySubType=VarEnum.VT_I4)|}]
+            public static partial int Method1(int i);
 
-                    [LibraryImport("DoesNotExist")]
-                    public static partial int Method2([{|#1:MarshalAs(UnmanagedType.I1, IidParameterIndex = 1)|}] bool b);
-                }
-                """;
+            [LibraryImport("DoesNotExist")]
+            public static partial int Method2([{|#1:MarshalAs(UnmanagedType.I1, IidParameterIndex = 1)|}] bool b);
+            }
+            """;
 
             await VerifyCS.VerifySourceGeneratorAsync(
                 source,
@@ -297,17 +297,17 @@ namespace LibraryImportGenerator.UnitTests
                 using System.Runtime.InteropServices;
                 partial class Test
                 {
-                    [LibraryImport("DoesNotExist", StringMarshalling = StringMarshalling.Utf8)]
-                    public static partial void {|#0:Method1|}(string s);
+                [LibraryImport("DoesNotExist", StringMarshalling = StringMarshalling.Utf8)]
+                public static partial void {|#0:Method1|}(string s);
 
-                    [LibraryImport("DoesNotExist", StringMarshalling = StringMarshalling.Custom, StringMarshallingCustomType = typeof(Native))]
-                    public static partial void Method2(string {|#1:s|});
+                [LibraryImport("DoesNotExist", StringMarshalling = StringMarshalling.Custom, StringMarshallingCustomType = typeof(Native))]
+                public static partial void Method2(string {|#1:s|});
 
-                    struct Native
-                    {
-                        public Native(string s) { }
-                        public string ToManaged() => default;
-                    }
+                struct Native
+                {
+                public Native(string s) { }
+                public string ToManaged() => default;
+                }
                 }
                 """ + CodeSnippets.LibraryImportAttributeDeclaration;
             DiagnosticResult[] expectedDiags = new DiagnosticResult[]
@@ -383,16 +383,16 @@ namespace LibraryImportGenerator.UnitTests
         {
             string source = """
 
-                using System.Runtime.InteropServices;
-                partial class Test
-                {
-                    [LibraryImport("DoesNotExist")]
-                    public static void {|#0:Method|}() { }
+            using System.Runtime.InteropServices;
+            partial class Test
+            {
+            [LibraryImport("DoesNotExist")]
+            public static void {|#0:Method|}() { }
 
-                    [LibraryImport("DoesNotExist")]
-                    public static extern void {|#1:ExternMethod|}();
-                }
-                """;
+            [LibraryImport("DoesNotExist")]
+            public static extern void {|#1:ExternMethod|}();
+            }
+            """;
 
             await VerifyCS.VerifySourceGeneratorAsync(
                 source,
@@ -412,13 +412,13 @@ namespace LibraryImportGenerator.UnitTests
         {
             string source = """
 
-                using System.Runtime.InteropServices;
-                partial class Test
-                {
-                    [LibraryImport("DoesNotExist")]
-                    public partial void {|#0:Method|}();
-                }
-                """;
+            using System.Runtime.InteropServices;
+            partial class Test
+            {
+            [LibraryImport("DoesNotExist")]
+            public partial void {|#0:Method|}();
+            }
+            """;
 
             await VerifyCS.VerifySourceGeneratorAsync(
                 source,
@@ -436,16 +436,16 @@ namespace LibraryImportGenerator.UnitTests
         {
             string source = """
 
-                using System.Runtime.InteropServices;
-                partial class Test
-                {
-                    [LibraryImport("DoesNotExist")]
-                    public static partial void {|#0:Method1|}<T>();
+            using System.Runtime.InteropServices;
+            partial class Test
+            {
+            [LibraryImport("DoesNotExist")]
+            public static partial void {|#0:Method1|}<T>();
 
-                    [LibraryImport("DoesNotExist")]
-                    public static partial void {|#1:Method2|}<T, U>();
-                }
-                """;
+            [LibraryImport("DoesNotExist")]
+            public static partial void {|#1:Method2|}<T, U>();
+            }
+            """;
 
             await VerifyCS.VerifySourceGeneratorAsync(
                 source,

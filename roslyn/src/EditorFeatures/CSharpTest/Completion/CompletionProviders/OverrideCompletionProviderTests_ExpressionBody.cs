@@ -46,26 +46,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task CommitProducesExpressionBodyProperties()
         {
             var markupBeforeCommit = """
-                class B
-                {
-                    public virtual int A { get; set; }
-                    class C : B
-                    {
-                        override A$$
-                    }
-                }
-                """;
+            class B
+            {
+            public virtual int A { get; set; }
+            class C : B
+            {
+            override A$$
+            }
+            }
+            """;
 
             var expectedCodeAfterCommit = """
-                class B
-                {
-                    public virtual int A { get; set; }
-                    class C : B
-                    {
-                        public override int A { get => base.A$$; set => base.A = value; }
-                    }
-                }
-                """;
+            class B
+            {
+            public virtual int A { get; set; }
+            class C : B
+            {
+            public override int A { get => base.A$$; set => base.A = value; }
+            }
+            }
+            """;
 
             await VerifyCustomCommitProviderAsync(markupBeforeCommit, "A", expectedCodeAfterCommit);
         }
@@ -75,26 +75,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task CommitProducesExpressionBodyGetterOnlyProperty()
         {
             var markupBeforeCommit = """
-                class B
-                {
-                    public virtual int A { get; }
-                    class C : B
-                    {
-                        override A$$
-                    }
-                }
-                """;
+            class B
+            {
+            public virtual int A { get; }
+            class C : B
+            {
+            override A$$
+            }
+            }
+            """;
 
             var expectedCodeAfterCommit = """
-                class B
-                {
-                    public virtual int A { get; }
-                    class C : B
-                    {
-                        public override int A => base.A;$$
-                    }
-                }
-                """;
+            class B
+            {
+            public virtual int A { get; }
+            class C : B
+            {
+            public override int A => base.A;$$
+            }
+            }
+            """;
 
             await VerifyCustomCommitProviderAsync(markupBeforeCommit, "A", expectedCodeAfterCommit);
         }
@@ -104,26 +104,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task CommitProducesExpressionBodyMethod()
         {
             var markupBeforeCommit = """
-                class B
-                {
-                    public virtual int A() => 2;
-                    class C : B
-                    {
-                        override A$$
-                    }
-                }
-                """;
+            class B
+            {
+            public virtual int A() => 2;
+            class C : B
+            {
+            override A$$
+            }
+            }
+            """;
 
             var expectedCodeAfterCommit = """
-                class B
-                {
-                    public virtual int A() => 2;
-                    class C : B
-                    {
-                        public override int A() => base.A();$$
-                    }
-                }
-                """;
+            class B
+            {
+            public virtual int A() => 2;
+            class C : B
+            {
+            public override int A() => base.A();$$
+            }
+            }
+            """;
 
             await VerifyCustomCommitProviderAsync(
                 markupBeforeCommit,

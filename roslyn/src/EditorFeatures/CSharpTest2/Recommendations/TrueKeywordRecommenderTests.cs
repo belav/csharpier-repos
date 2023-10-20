@@ -225,7 +225,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   public static bool operator $$
+                public static bool operator $$
                 """
             );
         }
@@ -236,7 +236,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                   public static implicit operator $$
+                public static implicit operator $$
                 """
             );
         }
@@ -247,7 +247,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                   public static implicit operator $$
+                public static implicit operator $$
                 """
             );
         }
@@ -258,11 +258,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C
-                  {
-                     void Init()
-                     {
+                {
+                void Init()
+                {
                 #if $$
-                         H
+                H
                 """
             );
         }
@@ -292,10 +292,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                    public int x, y;
-                    void M()
-                    {
-                        var c = new C { x = 2, y = 3, $$
+                public int x, y;
+                void M()
+                {
+                var c = new C { x = 2, y = 3, $$
                 """
             );
         }

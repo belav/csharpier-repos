@@ -18576,9 +18576,9 @@ True
                     verify: Verification.FailsILVerify with
                     {
                         ILVerifyMessage = """
-                    [GetReference]: TypedReference not supported in .NET Core
-                    [MoveNext]: TypedReference not supported in .NET Core
-                    """
+                        [GetReference]: TypedReference not supported in .NET Core
+                        [MoveNext]: TypedReference not supported in .NET Core
+                        """
                     }
                 )
                 .VerifyDiagnostics();

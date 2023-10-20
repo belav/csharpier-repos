@@ -2288,33 +2288,33 @@ _ = x is { Length.Error: > 0 };
         }
 
         private const string INumberBaseDefinition = """
-            namespace System.Numerics;
-            public interface INumberBase<T> where T : INumberBase<T> {}
-            """;
+        namespace System.Numerics;
+        public interface INumberBase<T> where T : INumberBase<T> {}
+        """;
 
         [Fact]
         public void ForbiddenOnTypeParametersConstrainedToINumberBase_01()
         {
             var source = """
-                #pragma warning disable 8321 // Unused local function
-                using System.Numerics;
+            #pragma warning disable 8321 // Unused local function
+            using System.Numerics;
 
-                void M<T>(T t) where T : INumberBase<T>
-                {
-                    int o = t switch
-                    {
-                        1 => 1, // 1
-                        > 1 => 2, // 2
-                        int => 3, // OK
-                        [] => 4, // 3
-                        (_) => 5, // OK
-                        "" => 6, // OK
-                        { } => 7, // OK
-                        var x => 8, // OK
-                        _ => 9 // Ok
-                    };
-                }
-                """;
+            void M<T>(T t) where T : INumberBase<T>
+            {
+            int o = t switch
+            {
+            1 => 1, // 1
+            > 1 => 2, // 2
+            int => 3, // OK
+            [] => 4, // 3
+            (_) => 5, // OK
+            "" => 6, // OK
+            { } => 7, // OK
+            var x => 8, // OK
+            _ => 9 // Ok
+            };
+            }
+            """;
 
             var comp = CreateCompilation(new[] { source, INumberBaseDefinition });
             comp.VerifyDiagnostics(
@@ -2348,25 +2348,25 @@ _ = x is { Length.Error: > 0 };
         public void ForbiddenOnTypeParametersConstrainedToINumberBase_02()
         {
             var source = """
-                #pragma warning disable 8321 // Unused local function
-                using System.Numerics;
+            #pragma warning disable 8321 // Unused local function
+            using System.Numerics;
 
-                void M<T>(T t) where T : struct, INumberBase<T>
-                {
-                    int o = t switch
-                    {
-                        1 => 1, // 1
-                        > 1 => 2, // 2
-                        int => 3, // OK
-                        [] => 4, // 3
-                        (_) => 5, // OK
-                        "" => 6, // 4
-                        { } => 7, // OK
-                        var x => 8, // OK
-                        _ => 9 // Ok
-                    };
-                }
-                """;
+            void M<T>(T t) where T : struct, INumberBase<T>
+            {
+            int o = t switch
+            {
+            1 => 1, // 1
+            > 1 => 2, // 2
+            int => 3, // OK
+            [] => 4, // 3
+            (_) => 5, // OK
+            "" => 6, // 4
+            { } => 7, // OK
+            var x => 8, // OK
+            _ => 9 // Ok
+            };
+            }
+            """;
 
             var comp = CreateCompilation(new[] { source, INumberBaseDefinition });
             comp.VerifyDiagnostics(
@@ -2407,25 +2407,25 @@ _ = x is { Length.Error: > 0 };
         public void ForbiddenOnTypeParametersConstrainedToINumberBase_MultipleReferences_01()
         {
             var source = """
-                #pragma warning disable 8321 // Unused local function
-                using System.Numerics;
+            #pragma warning disable 8321 // Unused local function
+            using System.Numerics;
 
-                void M<T>(T t) where T : struct, INumberBase<T>
-                {
-                    int o = t switch
-                    {
-                        1 => 1, // 1
-                        > 1 => 2, // 2
-                        int => 3, // OK
-                        [] => 4, // 3
-                        (_) => 5, // OK
-                        "" => 6, // 4
-                        { } => 7, // OK
-                        var x => 8, // OK
-                        _ => 9 // Ok
-                    };
-                }
-                """;
+            void M<T>(T t) where T : struct, INumberBase<T>
+            {
+            int o = t switch
+            {
+            1 => 1, // 1
+            > 1 => 2, // 2
+            int => 3, // OK
+            [] => 4, // 3
+            (_) => 5, // OK
+            "" => 6, // 4
+            { } => 7, // OK
+            var x => 8, // OK
+            _ => 9 // Ok
+            };
+            }
+            """;
 
             var ref1 = CreateCompilation(INumberBaseDefinition, assemblyName: "A")
                 .EmitToImageReference();
@@ -2470,25 +2470,25 @@ _ = x is { Length.Error: > 0 };
         public void ForbiddenOnTypeParametersConstrainedToINumberBase_MultipleReferences_02()
         {
             var source = """
-                extern alias A;
-                #pragma warning disable 8321 // Unused local function
+            extern alias A;
+            #pragma warning disable 8321 // Unused local function
 
-                void M<T>(T t) where T : struct, A::System.Numerics.INumberBase<T>
-                {
-                    int o = t switch
-                    {
-                        1 => 1, // 1
-                        > 1 => 2, // 2
-                        int => 3, // OK
-                        [] => 4, // 3
-                        (_) => 5, // OK
-                        "" => 6, // 4
-                        { } => 7, // OK
-                        var x => 8, // OK
-                        _ => 9 // Ok
-                    };
-                }
-                """;
+            void M<T>(T t) where T : struct, A::System.Numerics.INumberBase<T>
+            {
+            int o = t switch
+            {
+            1 => 1, // 1
+            > 1 => 2, // 2
+            int => 3, // OK
+            [] => 4, // 3
+            (_) => 5, // OK
+            "" => 6, // 4
+            { } => 7, // OK
+            var x => 8, // OK
+            _ => 9 // Ok
+            };
+            }
+            """;
 
             var ref1 = CreateCompilation(INumberBaseDefinition, assemblyName: "A")
                 .EmitToImageReference(aliases: ImmutableArray.Create("A"));
@@ -2774,32 +2774,32 @@ _ = x is { Length.Error: > 0 };
         }
 
         private const string INumberBaseBCL = """
-            namespace System
-            {
-                using System.Numerics;
+        namespace System
+        {
+        using System.Numerics;
 
-                public class Object {}
-                public class Void {}
-                public class ValueType {}
-                public class String {}
-                public class Enum {}
-                public struct Nullable<T> where T : struct {}
-                public struct Byte : INumberBase<Byte> {}
-                public struct SByte : INumberBase<SByte> {}
-                public struct Int16 : INumberBase<Int16> {}
-                public struct Char : INumberBase<Char> {}
-                public struct UInt16 : INumberBase<UInt16> {}
-                public struct Int32 : INumberBase<Int32> {}
-                public struct UInt32 : INumberBase<UInt32> {}
-                public struct Int64 : INumberBase<Int64> {}
-                public struct UInt64 : INumberBase<UInt64> {}
-                public struct Single : INumberBase<Single> {}
-                public struct Double : INumberBase<Double> {}
-                public struct Decimal : INumberBase<Decimal> { public Decimal(int value) {} }
-                public struct IntPtr : INumberBase<IntPtr> {}
-                public struct UIntPtr : INumberBase<UIntPtr> {}
-            }
-            """;
+        public class Object {}
+        public class Void {}
+        public class ValueType {}
+        public class String {}
+        public class Enum {}
+        public struct Nullable<T> where T : struct {}
+        public struct Byte : INumberBase<Byte> {}
+        public struct SByte : INumberBase<SByte> {}
+        public struct Int16 : INumberBase<Int16> {}
+        public struct Char : INumberBase<Char> {}
+        public struct UInt16 : INumberBase<UInt16> {}
+        public struct Int32 : INumberBase<Int32> {}
+        public struct UInt32 : INumberBase<UInt32> {}
+        public struct Int64 : INumberBase<Int64> {}
+        public struct UInt64 : INumberBase<UInt64> {}
+        public struct Single : INumberBase<Single> {}
+        public struct Double : INumberBase<Double> {}
+        public struct Decimal : INumberBase<Decimal> { public Decimal(int value) {} }
+        public struct IntPtr : INumberBase<IntPtr> {}
+        public struct UIntPtr : INumberBase<UIntPtr> {}
+        }
+        """;
 
         [Theory]
         [InlineData("byte")]
@@ -2869,15 +2869,15 @@ _ = x is { Length.Error: > 0 };
         public void MatchingOnConstantConversionsWithINumberBaseIsDisallowed_TypePatternToINumberBaseInt()
         {
             var source = """
-                using System.Numerics;
-                int i = 1;
-                _ = ((INumberBase<int>)i) switch
-                {
-                    1 => 1,
-                    > 1 => 2,
-                    _ => 3
-                };
-                """;
+            using System.Numerics;
+            int i = 1;
+            _ = ((INumberBase<int>)i) switch
+            {
+            1 => 1,
+            > 1 => 2,
+            _ => 3
+            };
+            """;
 
             var comp = CreateEmptyCompilation(
                 new[] { source, INumberBaseBCL, INumberBaseDefinition }
@@ -2950,26 +2950,26 @@ _ = x is { Length.Error: > 0 };
         public void MatchingOnINumberBaseIsAllowed_ClassNotInterface()
         {
             var source = """
-                #pragma warning disable 8321 // Unused local function
-                using System.Numerics;
+            #pragma warning disable 8321 // Unused local function
+            using System.Numerics;
 
-                void M<T>(T t) where T : INumberBase<T>
-                {
-                    int o = t switch
-                    {
-                        1 => 1,
-                        > 1 => 2,
-                        _ => 3
-                    };
-                }
+            void M<T>(T t) where T : INumberBase<T>
+            {
+            int o = t switch
+            {
+            1 => 1,
+            > 1 => 2,
+            _ => 3
+            };
+            }
 
-                namespace System.Numerics
-                {
-                    public class INumberBase<T> where T : INumberBase<T>
-                    {
-                    }
-                }
-                """;
+            namespace System.Numerics
+            {
+            public class INumberBase<T> where T : INumberBase<T>
+            {
+            }
+            }
+            """;
 
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics();
@@ -2979,40 +2979,40 @@ _ = x is { Length.Error: > 0 };
         public void MatchingOnINumberBaseIsAllowed_WrongArity()
         {
             var source = """
-                #pragma warning disable 8321 // Unused local function
-                using System.Numerics;
+            #pragma warning disable 8321 // Unused local function
+            using System.Numerics;
 
-                void M1<T1, T2>(T1 t) where T1 : INumberBase<T1, T2>
-                {
-                    int o = t switch
-                    {
-                        1 => 1,
-                        > 1 => 2,
-                        _ => 3
-                    };
-                }
+            void M1<T1, T2>(T1 t) where T1 : INumberBase<T1, T2>
+            {
+            int o = t switch
+            {
+            1 => 1,
+            > 1 => 2,
+            _ => 3
+            };
+            }
 
-                void M2<T>(T t) where T : INumberBase
-                {
-                    int o = t switch
-                    {
-                        1 => 1,
-                        > 1 => 2,
-                        _ => 3
-                    };
-                }
+            void M2<T>(T t) where T : INumberBase
+            {
+            int o = t switch
+            {
+            1 => 1,
+            > 1 => 2,
+            _ => 3
+            };
+            }
 
-                namespace System.Numerics
-                {
-                    public interface INumberBase<T1, T2> where T1 : INumberBase<T1, T2>
-                    {
-                    }
+            namespace System.Numerics
+            {
+            public interface INumberBase<T1, T2> where T1 : INumberBase<T1, T2>
+            {
+            }
 
-                    public interface INumberBase
-                    {
-                    }
-                }
-                """;
+            public interface INumberBase
+            {
+            }
+            }
+            """;
 
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics();
@@ -3022,26 +3022,26 @@ _ = x is { Length.Error: > 0 };
         public void MatchingOnINumberBaseIsAllowed_WrongNamespace()
         {
             var source = """
-                #pragma warning disable 8321 // Unused local function
-                using System;
+            #pragma warning disable 8321 // Unused local function
+            using System;
 
-                void M<T>(T t) where T : INumberBase<T>
-                {
-                    int o = t switch
-                    {
-                        1 => 1,
-                        > 1 => 2,
-                        _ => 3
-                    };
-                }
+            void M<T>(T t) where T : INumberBase<T>
+            {
+            int o = t switch
+            {
+            1 => 1,
+            > 1 => 2,
+            _ => 3
+            };
+            }
 
-                namespace System
-                {
-                    public interface INumberBase<T> where T : INumberBase<T>
-                    {
-                    }
-                }
-                """;
+            namespace System
+            {
+            public interface INumberBase<T> where T : INumberBase<T>
+            {
+            }
+            }
+            """;
 
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics();
@@ -3051,29 +3051,29 @@ _ = x is { Length.Error: > 0 };
         public void MatchingOnINumberBaseIsAllowed_NestedType()
         {
             var source = """
-                #pragma warning disable 8321 // Unused local function
-                using static System.Numerics.Outer;
+            #pragma warning disable 8321 // Unused local function
+            using static System.Numerics.Outer;
 
-                void M<T>(T t) where T : INumberBase<T>
-                {
-                    int o = t switch
-                    {
-                        1 => 1,
-                        > 1 => 2,
-                        _ => 3
-                    };
-                }
+            void M<T>(T t) where T : INumberBase<T>
+            {
+            int o = t switch
+            {
+            1 => 1,
+            > 1 => 2,
+            _ => 3
+            };
+            }
 
-                namespace System.Numerics
-                {
-                    public interface Outer
-                    {
-                        public interface INumberBase<T> where T : INumberBase<T>
-                        {
-                        }
-                    }
-                }
-                """;
+            namespace System.Numerics
+            {
+            public interface Outer
+            {
+            public interface INumberBase<T> where T : INumberBase<T>
+            {
+            }
+            }
+            }
+            """;
 
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics();
@@ -3083,19 +3083,19 @@ _ = x is { Length.Error: > 0 };
         public void ShortestPathToDefaultNodeYieldsNoRemainingValues()
         {
             var source = """
-public enum Enum
-{
-    Zero = 0,
-    One = 1,
-    Two = 2,
-}
+            public enum Enum
+            {
+            Zero = 0,
+            One = 1,
+            Two = 2,
+            }
 
-class N
-{
-    private static int M(Enum e1, Enum e2)
-    {
-        return (e1, e2) switch
-        {
+            class N
+            {
+            private static int M(Enum e1, Enum e2)
+            {
+            return (e1, e2) switch
+            {
             (Enum.Two, _) => 0,
             (_, Enum.Two) => 0,
             (Enum.Zero, Enum.Zero) => 0,
@@ -3103,10 +3103,10 @@ class N
             (Enum.One, Enum.Zero) => 0,
             ( < 0 or > Enum.Two, _) => 0,
             (_, < 0 or > Enum.Two) => 0,
-        };
-    }
-}
-""";
+            };
+            }
+            }
+            """;
 
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
@@ -3122,19 +3122,19 @@ class N
         public void ShortestPathToDefaultNodeYieldsNoRemainingValues_RequiringFalseWhenClause()
         {
             var source = """
-public enum Enum
-{
-    Zero = 0,
-    One = 1,
-    Two = 2,
-}
+            public enum Enum
+            {
+            Zero = 0,
+            One = 1,
+            Two = 2,
+            }
 
-class N
-{
-    private static int M(Enum e1, Enum e2, bool b)
-    {
-        return (e1, e2) switch
-        {
+            class N
+            {
+            private static int M(Enum e1, Enum e2, bool b)
+            {
+            return (e1, e2) switch
+            {
             (Enum.One, Enum.One) when b => 0,
             (Enum.Two, _) => 0,
             (_, Enum.Two) => 0,
@@ -3143,10 +3143,10 @@ class N
             (Enum.One, Enum.Zero) => 0,
             ( < 0 or > Enum.Two, _) => 0,
             (_, < 0 or > Enum.Two) => 0,
-        };
-    }
-}
-""";
+            };
+            }
+            }
+            """;
 
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
@@ -3162,19 +3162,19 @@ class N
         public void ShortestPathToDefaultNodeYieldsNoRemainingValues_NullBranch()
         {
             var source = """
-public enum Enum
-{
-    Zero = 0,
-    One = 1,
-    Two = 2,
-}
+            public enum Enum
+            {
+            Zero = 0,
+            One = 1,
+            Two = 2,
+            }
 
-class N
-{
-    private static int M(Enum e1, Enum e2, object o)
-    {
-        return (e1, e2, o) switch
-        {
+            class N
+            {
+            private static int M(Enum e1, Enum e2, object o)
+            {
+            return (e1, e2, o) switch
+            {
             (Enum.One, Enum.One, _) => 0,
             (Enum.Two, _, _) => 0,
             (_, Enum.Two, _) => 0,
@@ -3183,10 +3183,10 @@ class N
             (Enum.One, Enum.Zero, _) => 0,
             ( < 0 or > Enum.Two, _, _) => 0,
             (_, < 0 or > Enum.Two, string s) => 0,
-        };
-    }
-}
-""";
+            };
+            }
+            }
+            """;
 
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
@@ -3205,21 +3205,21 @@ class N
         public void ShortestPathToDefaultNodeYieldsNoRemainingValues_Nullability()
         {
             var source = """
-#nullable enable
+            #nullable enable
 
-public enum Enum
-{
-    Zero = 0,
-    One = 1,
-    Two = 2,
-}
+            public enum Enum
+            {
+            Zero = 0,
+            One = 1,
+            Two = 2,
+            }
 
-class N
-{
-    private static int M(Enum e1, Enum e2, string s)
-    {
-        return (e1, e2, s) switch
-        {
+            class N
+            {
+            private static int M(Enum e1, Enum e2, string s)
+            {
+            return (e1, e2, s) switch
+            {
             (Enum.Two, _, _) => 0,
             (_, Enum.Two, _) => 0,
             (Enum.Zero, Enum.Zero, _) => 0,
@@ -3228,10 +3228,10 @@ class N
             ( < 0 or > Enum.Two, _, _) => 0,
             (_, < 0 or > Enum.Two, _) => 0,
             (_, _, string) => 0,
-        };
-    }
-}
-""";
+            };
+            }
+            }
+            """;
 
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics();
@@ -3241,21 +3241,21 @@ class N
         public void ShortestPathToDefaultNodeYieldsNoRemainingValues_Nullability_NullableString()
         {
             var source = """
-#nullable enable
+            #nullable enable
 
-public enum Enum
-{
-    Zero = 0,
-    One = 1,
-    Two = 2,
-}
+            public enum Enum
+            {
+            Zero = 0,
+            One = 1,
+            Two = 2,
+            }
 
-class N
-{
-    private static int M1(Enum e1, Enum e2, string? s)
-    {
-        return (e1, e2, s) switch // 1
-        {
+            class N
+            {
+            private static int M1(Enum e1, Enum e2, string? s)
+            {
+            return (e1, e2, s) switch // 1
+            {
             (Enum.Two, _, _) => 0,
             (_, Enum.Two, _) => 0,
             (Enum.Zero, Enum.Zero, _) => 0,
@@ -3264,13 +3264,13 @@ class N
             ( < 0 or > Enum.Two, _, _) => 0,
             (_, < 0 or > Enum.Two, null) => 0,
             (_, _, null) => 1,
-        };
-    }
+            };
+            }
 
-    private static int M2(Enum e1, Enum e2, string? s)
-    {
-        return (e1, e2, s) switch // 2
-        {
+            private static int M2(Enum e1, Enum e2, string? s)
+            {
+            return (e1, e2, s) switch // 2
+            {
             (Enum.Two, _, _) => 0,
             (_, Enum.Two, _) => 0,
             (Enum.Zero, Enum.Zero, _) => 0,
@@ -3279,13 +3279,13 @@ class N
             ( < 0 or > Enum.Two, _, _) => 0,
             (_, < 0 or > Enum.Two, _) => 0,
             (_, _, "") => 1,
-        };
-    }
+            };
+            }
 
-    private static int M3(Enum e1, Enum e2, string? s)
-    {
-        return (e1, e2, s) switch // 3
-        {
+            private static int M3(Enum e1, Enum e2, string? s)
+            {
+            return (e1, e2, s) switch // 3
+            {
             (Enum.Two, _, _) => 0,
             (_, Enum.Two, _) => 0,
             (Enum.Zero, Enum.Zero, _) => 0,
@@ -3294,13 +3294,13 @@ class N
             ( < 0 or > Enum.Two, _, _) => 0,
             (_, < 0 or > Enum.Two, _) => 0,
             (_, _, string) => 1,
-        };
-    }
+            };
+            }
 
-    private static int M4(Enum e1, Enum e2, string? s)
-    {
-        return (e1, e2, s) switch // 4
-        {
+            private static int M4(Enum e1, Enum e2, string? s)
+            {
+            return (e1, e2, s) switch // 4
+            {
             (Enum.Two, _, _) => 0,
             (_, Enum.Two, _) => 0,
             (Enum.Zero, Enum.Zero, _) => 0,
@@ -3308,13 +3308,13 @@ class N
             (Enum.One, Enum.Zero, _) => 0,
             ( < 0 or > Enum.Two, _, _) => 0,
             (_, < 0 or > Enum.Two, null) => 1,
-        };
-    }
+            };
+            }
 
-    private static int M5(Enum e1, Enum e2, string? s)
-    {
-        return (e1, e2, s) switch // 5
-        {
+            private static int M5(Enum e1, Enum e2, string? s)
+            {
+            return (e1, e2, s) switch // 5
+            {
             (Enum.Two, _, _) => 0,
             (_, Enum.Two, _) => 0,
             (Enum.Zero, Enum.Zero, _) => 0,
@@ -3322,13 +3322,13 @@ class N
             (Enum.One, Enum.Zero, _) => 0,
             ( < 0 or > Enum.Two, _, _) => 0,
             (_, < 0 or > Enum.Two, "") => 1,
-        };
-    }
+            };
+            }
 
-    private static int M6(Enum e1, Enum e2, string? s)
-    {
-        return (e1, e2, s) switch // 6
-        {
+            private static int M6(Enum e1, Enum e2, string? s)
+            {
+            return (e1, e2, s) switch // 6
+            {
             (Enum.Two, _, _) => 0,
             (_, Enum.Two, _) => 0,
             (Enum.Zero, Enum.Zero, _) => 0,
@@ -3336,10 +3336,10 @@ class N
             (Enum.One, Enum.Zero, _) => 0,
             ( < 0 or > Enum.Two, _, _) => 0,
             (_, < 0 or > Enum.Two, string) => 1,
-        };
-    }
-}
-""";
+            };
+            }
+            }
+            """;
 
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
@@ -3395,19 +3395,19 @@ class N
         )
         {
             var source = """
-public enum Enum
-{
-    Zero = 0,
-    One = 1,
-    Two = 2,
-}
+            public enum Enum
+            {
+            Zero = 0,
+            One = 1,
+            Two = 2,
+            }
 
-class N
-{
-    private int M1()
-    {
-        return this switch // 1
-        {
+            class N
+            {
+            private int M1()
+            {
+            return this switch // 1
+            {
             (Enum.Two, _, _) => 0,
             (_, Enum.Two, _) => 0,
             (Enum.Zero, Enum.Zero, _) => 0,
@@ -3416,13 +3416,13 @@ class N
             ( < 0 or > Enum.Two, _, _) => 0,
             (_, < 0 or > Enum.Two, _) => 0,
             (_, _, not null) => 1,
-        };
-    }
+            };
+            }
 
-    private int M2()
-    {
-        return this switch // 2
-        {
+            private int M2()
+            {
+            return this switch // 2
+            {
             (Enum.Two, _, _) => 0,
             (_, Enum.Two, _) => 0,
             (Enum.Zero, Enum.Zero, _) => 0,
@@ -3432,13 +3432,13 @@ class N
             (_, < 0 or > Enum.Two, _) => 0,
             (_, _, true) => 1,
             (_, _, false) => 1,
-        };
-    }
+            };
+            }
 
-    private int M3()
-    {
-        return this switch // 3
-        {
+            private int M3()
+            {
+            return this switch // 3
+            {
             null => 1,
             (Enum.Two, _, _) => 0,
             (_, Enum.Two, _) => 0,
@@ -3449,13 +3449,13 @@ class N
             (_, < 0 or > Enum.Two, _) => 0,
             (_, _, true) => 1,
             (_, _, false) => 1,
-        };
-    }
+            };
+            }
 
-    private int M4()
-    {
-        return this switch // 4
-        {
+            private int M4()
+            {
+            return this switch // 4
+            {
             null => 1,
             (Enum.Two, _, _) => 0,
             (_, Enum.Two, _) => 0,
@@ -3465,13 +3465,13 @@ class N
             ( < 0 or > Enum.Two, _, _) => 0,
             (_, < 0 or > Enum.Two, _) => 0,
             (_, _, true) => 1,
-        };
-    }
+            };
+            }
 
-    private int M5()
-    {
-        return this switch // 5
-        {
+            private int M5()
+            {
+            return this switch // 5
+            {
             (Enum.Two, _, _) => 0,
             (_, Enum.Two, _) => 0,
             (Enum.Zero, Enum.Zero, _) => 0,
@@ -3479,13 +3479,13 @@ class N
             (Enum.One, Enum.Zero, _) => 0,
             ( < 0 or > Enum.Two, _, _) => 0,
             (_, < 0 or > Enum.Two, not null) => 1,
-        };
-    }
+            };
+            }
 
-    private int M6()
-    {
-        return this switch // 6
-        {
+            private int M6()
+            {
+            return this switch // 6
+            {
             (Enum.Two, _, _) => 0,
             (_, Enum.Two, _) => 0,
             (Enum.Zero, Enum.Zero, _) => 0,
@@ -3494,13 +3494,13 @@ class N
             ( < 0 or > Enum.Two, _, _) => 0,
             (_, < 0 or > Enum.Two, true) => 1,
             (_, < 0 or > Enum.Two, false) => 1,
-        };
-    }
+            };
+            }
 
-    private int M7()
-    {
-        return this switch // 7
-        {
+            private int M7()
+            {
+            return this switch // 7
+            {
             null => 1,
             (Enum.Two, _, _) => 0,
             (_, Enum.Two, _) => 0,
@@ -3510,13 +3510,13 @@ class N
             ( < 0 or > Enum.Two, _, _) => 0,
             (_, < 0 or > Enum.Two, true) => 1,
             (_, < 0 or > Enum.Two, false) => 1,
-        };
-    }
+            };
+            }
 
-    private int M8()
-    {
-        return this switch // 8
-        {
+            private int M8()
+            {
+            return this switch // 8
+            {
             null => 1,
             (Enum.Two, _, _) => 0,
             (_, Enum.Two, _) => 0,
@@ -3525,12 +3525,12 @@ class N
             (Enum.One, Enum.Zero, _) => 0,
             ( < 0 or > Enum.Two, _, _) => 0,
             (_, < 0 or > Enum.Two, true) => 1,
-        };
-    }
+            };
+            }
 
-    void Deconstruct(out Enum e1, out Enum e2, out bool? s) => throw null!;
-}
-""";
+            void Deconstruct(out Enum e1, out Enum e2, out bool? s) => throw null!;
+            }
+            """;
 
             var comp = CreateCompilation(
                 source,
@@ -3635,19 +3635,19 @@ class N
         )
         {
             var source = """
-public enum Enum
-{
-    Zero = 0,
-    One = 1,
-    Two = 2,
-}
+            public enum Enum
+            {
+            Zero = 0,
+            One = 1,
+            Two = 2,
+            }
 
-class N
-{
-    private static int M1(Enum e1, Enum e2, bool? i)
-    {
-        return (e1, e2, i) switch // 1
-        {
+            class N
+            {
+            private static int M1(Enum e1, Enum e2, bool? i)
+            {
+            return (e1, e2, i) switch // 1
+            {
             (Enum.Two, _, _) => 0,
             (_, Enum.Two, _) => 0,
             (Enum.Zero, Enum.Zero, _) => 0,
@@ -3656,13 +3656,13 @@ class N
             ( < 0 or > Enum.Two, _, _) => 0,
             (_, < 0 or > Enum.Two, _) => 0,
             (_, _, true) => 1,
-        };
-    }
+            };
+            }
 
-    private static int M2(Enum e1, Enum e2, bool? i)
-    {
-        return (e1, e2, i) switch // 2
-        {
+            private static int M2(Enum e1, Enum e2, bool? i)
+            {
+            return (e1, e2, i) switch // 2
+            {
             (Enum.Two, _, _) => 0,
             (_, Enum.Two, _) => 0,
             (Enum.Zero, Enum.Zero, _) => 0,
@@ -3672,10 +3672,10 @@ class N
             (_, < 0 or > Enum.Two, _) => 0,
             (_, _, true) => 1,
             (_, _, false) => 1,
-        };
-    }
-}
-""";
+            };
+            }
+            }
+            """;
             var comp = CreateCompilation(
                 source,
                 options: TestOptions
@@ -3717,12 +3717,12 @@ class N
         public void IsExpression_SwitchDispatch_Numeric()
         {
             var source = """
-class C
-{
-    public static void Main()
-    {
-        System.Console.Write(
-              Test(0) == false
+            class C
+            {
+            public static void Main()
+            {
+            System.Console.Write(
+            Test(0) == false
             & Test(1)
             & Test(2)
             & Test(3)
@@ -3731,36 +3731,36 @@ class C
             & Test(6)
             & Test(7)
             & Test(8)
-        );
-    }  
-    public static bool Test(int a)
-    {
-        return (a is 1 or 2 or 3 or 4 or 5 or 6 or 7 or 8);
-    }
-}
-""";
+            );
+            }
+            public static bool Test(int a)
+            {
+            return (a is 1 or 2 or 3 or 4 or 5 or 6 or 7 or 8);
+            }
+            }
+            """;
             var compilation = CompileAndVerify(source, expectedOutput: "True");
             compilation.VerifyIL(
                 "C.Test",
                 """
-{
-  // Code size       14 (0xe)
-  .maxstack  2
-  .locals init (bool V_0)
-  IL_0000:  ldarg.0
-  IL_0001:  ldc.i4.1
-  IL_0002:  sub
-  IL_0003:  ldc.i4.7
-  IL_0004:  bgt.un.s   IL_000a
-  IL_0006:  ldc.i4.1
-  IL_0007:  stloc.0
-  IL_0008:  br.s       IL_000c
-  IL_000a:  ldc.i4.0
-  IL_000b:  stloc.0
-  IL_000c:  ldloc.0
-  IL_000d:  ret
-}
-"""
+                {
+                // Code size       14 (0xe)
+                .maxstack  2
+                .locals init (bool V_0)
+                IL_0000:  ldarg.0
+                IL_0001:  ldc.i4.1
+                IL_0002:  sub
+                IL_0003:  ldc.i4.7
+                IL_0004:  bgt.un.s   IL_000a
+                IL_0006:  ldc.i4.1
+                IL_0007:  stloc.0
+                IL_0008:  br.s       IL_000c
+                IL_000a:  ldc.i4.0
+                IL_000b:  stloc.0
+                IL_000c:  ldloc.0
+                IL_000d:  ret
+                }
+                """
             );
         }
 
@@ -3768,70 +3768,70 @@ class C
         public void IsExpression_SwitchDispatch_SwitchIL()
         {
             var source = """
-class C
-{
-    public static void Main()
-    {
-        System.Console.Write(
-              Test(1, null) == false
+            class C
+            {
+            public static void Main()
+            {
+            System.Console.Write(
+            Test(1, null) == false
             & Test(1, default(int))
             & Test(2, default(bool))
             & Test(3, default(double))
             & Test(4, default(long))
             & Test(5, default(long)) == false
-        );
-    }
-    public static bool Test(int a, object b)
-    {
-        return (a, b) is 
-                (1, int) or
-                (2, bool) or
-                (3, double) or
-                (4, long);
-    }
-}
-""";
+            );
+            }
+            public static bool Test(int a, object b)
+            {
+            return (a, b) is
+            (1, int) or
+            (2, bool) or
+            (3, double) or
+            (4, long);
+            }
+            }
+            """;
             var compilation = CompileAndVerify(source, expectedOutput: "True");
             compilation.VerifyIL(
                 "C.Test",
                 """
-{
-  // Code size       72 (0x48)
-  .maxstack  2
-  .locals init (bool V_0)
-  IL_0000:  ldarg.0
-  IL_0001:  ldc.i4.1
-  IL_0002:  sub
-  IL_0003:  switch    (
-        IL_001a,
-        IL_0024,
-        IL_002e,
-        IL_0038)
-  IL_0018:  br.s       IL_0044
-  IL_001a:  ldarg.1
-  IL_001b:  isinst     "int"
-  IL_0020:  brtrue.s   IL_0040
-  IL_0022:  br.s       IL_0044
-  IL_0024:  ldarg.1
-  IL_0025:  isinst     "bool"
-  IL_002a:  brtrue.s   IL_0040
-  IL_002c:  br.s       IL_0044
-  IL_002e:  ldarg.1
-  IL_002f:  isinst     "double"
-  IL_0034:  brtrue.s   IL_0040
-  IL_0036:  br.s       IL_0044
-  IL_0038:  ldarg.1
-  IL_0039:  isinst     "long"
-  IL_003e:  brfalse.s  IL_0044
-  IL_0040:  ldc.i4.1
-  IL_0041:  stloc.0
-  IL_0042:  br.s       IL_0046
-  IL_0044:  ldc.i4.0
-  IL_0045:  stloc.0
-  IL_0046:  ldloc.0
-  IL_0047:  ret
-}
-"""
+                {
+                // Code size       72 (0x48)
+                .maxstack  2
+                .locals init (bool V_0)
+                IL_0000:  ldarg.0
+                IL_0001:  ldc.i4.1
+                IL_0002:  sub
+                IL_0003:  switch    (
+                IL_001a,
+                IL_0024,
+                IL_002e,
+                IL_0038)
+                IL_0018:  br.s       IL_0044
+                IL_001a:  ldarg.1
+                IL_001b:  isinst     "int"
+                IL_0020:  brtrue.s   IL_0040
+                IL_0022:  br.s       IL_0044
+                IL_0024:  ldarg.1
+                IL_0025:  isinst     "bool"
+                IL_002a:  brtrue.s   IL_0040
+                IL_002c:  br.s       IL_0044
+                IL_002e:  ldarg.1
+                IL_002f:  isinst     "double"
+                IL_0034:  brtrue.s   IL_0040
+                IL_0036:  br.s       IL_0044
+                IL_0038:  ldarg.1
+                IL_0039:  isinst     "long"
+                IL_003e:  brfalse.s  IL_0044
+                IL_0040:  ldc.i4.1
+                IL_0041:  stloc.0
+                IL_0042:  br.s       IL_0046
+                IL_0044:  ldc.i4.0
+                IL_0045:  stloc.0
+                IL_0046:  ldloc.0
+                IL_0047:  ret
+                }
+                """
             );
         }
 
@@ -3839,12 +3839,12 @@ class C
         public void IsExpression_SwitchDispatch_String()
         {
             var source = """
-class C
-{
-    public static void Main()
-    {
-        System.Console.Write(
-              Test("0") == false
+            class C
+            {
+            public static void Main()
+            {
+            System.Console.Write(
+            Test("0") == false
             & Test("1")
             & Test("2")
             & Test("3")
@@ -3853,58 +3853,58 @@ class C
             & Test("6")
             & Test("7")
             & Test("8")
-        );
-    }  
-    public static bool Test(string a)
-    {
-        return (a is "1" or "2" or "3" or "4" or "5" or "6" or "7" or "8");
-    }
-}
-""";
+            );
+            }
+            public static bool Test(string a)
+            {
+            return (a is "1" or "2" or "3" or "4" or "5" or "6" or "7" or "8");
+            }
+            }
+            """;
             var compilation = CompileAndVerify(source, expectedOutput: "True");
             compilation.VerifyIL(
                 "C.Test",
                 """
-{
-  // Code size       73 (0x49)
-  .maxstack  2
-  .locals init (bool V_0,
+                {
+                // Code size       73 (0x49)
+                .maxstack  2
+                .locals init (bool V_0,
                 int V_1,
                 char V_2)
-  IL_0000:  ldarg.0
-  IL_0001:  brfalse.s  IL_0045
-  IL_0003:  ldarg.0
-  IL_0004:  call       "int string.Length.get"
-  IL_0009:  stloc.1
-  IL_000a:  ldloc.1
-  IL_000b:  ldc.i4.1
-  IL_000c:  bne.un.s   IL_0045
-  IL_000e:  ldarg.0
-  IL_000f:  ldc.i4.0
-  IL_0010:  call       "char string.this[int].get"
-  IL_0015:  stloc.2
-  IL_0016:  ldloc.2
-  IL_0017:  ldc.i4.s   49
-  IL_0019:  sub
-  IL_001a:  switch    (
-        IL_0041,
-        IL_0041,
-        IL_0041,
-        IL_0041,
-        IL_0041,
-        IL_0041,
-        IL_0041,
-        IL_0041)
-  IL_003f:  br.s       IL_0045
-  IL_0041:  ldc.i4.1
-  IL_0042:  stloc.0
-  IL_0043:  br.s       IL_0047
-  IL_0045:  ldc.i4.0
-  IL_0046:  stloc.0
-  IL_0047:  ldloc.0
-  IL_0048:  ret
-}
-"""
+                IL_0000:  ldarg.0
+                IL_0001:  brfalse.s  IL_0045
+                IL_0003:  ldarg.0
+                IL_0004:  call       "int string.Length.get"
+                IL_0009:  stloc.1
+                IL_000a:  ldloc.1
+                IL_000b:  ldc.i4.1
+                IL_000c:  bne.un.s   IL_0045
+                IL_000e:  ldarg.0
+                IL_000f:  ldc.i4.0
+                IL_0010:  call       "char string.this[int].get"
+                IL_0015:  stloc.2
+                IL_0016:  ldloc.2
+                IL_0017:  ldc.i4.s   49
+                IL_0019:  sub
+                IL_001a:  switch    (
+                IL_0041,
+                IL_0041,
+                IL_0041,
+                IL_0041,
+                IL_0041,
+                IL_0041,
+                IL_0041,
+                IL_0041)
+                IL_003f:  br.s       IL_0045
+                IL_0041:  ldc.i4.1
+                IL_0042:  stloc.0
+                IL_0043:  br.s       IL_0047
+                IL_0045:  ldc.i4.0
+                IL_0046:  stloc.0
+                IL_0047:  ldloc.0
+                IL_0048:  ret
+                }
+                """
             );
         }
 

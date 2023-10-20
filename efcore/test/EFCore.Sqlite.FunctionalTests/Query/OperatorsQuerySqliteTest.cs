@@ -37,15 +37,15 @@ public class OperatorsQuerySqliteTest : OperatorsQueryTestBase
 
         AssertSql(
             """
-SELECT "o"."Id" AS "Id1", "o0"."Id" AS "Id2", "o1"."Id" AS "Id3", "o2"."Id" AS "Id4", "o3"."Id" AS "Id5"
-FROM "OperatorEntityString" AS "o"
-CROSS JOIN "OperatorEntityString" AS "o0"
-CROSS JOIN "OperatorEntityString" AS "o1"
-CROSS JOIN "OperatorEntityString" AS "o2"
-CROSS JOIN "OperatorEntityInt" AS "o3"
-WHERE ("o"."Value" = 'A' AND "o"."Value" IS NOT NULL AND "o0"."Value" = 'A' AND "o0"."Value" IS NOT NULL) | ("o1"."Value" = 'B' AND "o1"."Value" IS NOT NULL AND "o2"."Value" = 'B' AND "o2"."Value" IS NOT NULL) AND "o3"."Value" = 2
-ORDER BY "o"."Id", "o0"."Id", "o1"."Id", "o2"."Id", "o3"."Id"
-"""
+            SELECT "o"."Id" AS "Id1", "o0"."Id" AS "Id2", "o1"."Id" AS "Id3", "o2"."Id" AS "Id4", "o3"."Id" AS "Id5"
+            FROM "OperatorEntityString" AS "o"
+            CROSS JOIN "OperatorEntityString" AS "o0"
+            CROSS JOIN "OperatorEntityString" AS "o1"
+            CROSS JOIN "OperatorEntityString" AS "o2"
+            CROSS JOIN "OperatorEntityInt" AS "o3"
+            WHERE ("o"."Value" = 'A' AND "o"."Value" IS NOT NULL AND "o0"."Value" = 'A' AND "o0"."Value" IS NOT NULL) | ("o1"."Value" = 'B' AND "o1"."Value" IS NOT NULL AND "o2"."Value" = 'B' AND "o2"."Value" IS NOT NULL) AND "o3"."Value" = 2
+            ORDER BY "o"."Id", "o0"."Id", "o1"."Id", "o2"."Id", "o3"."Id"
+            """
         );
     }
 
@@ -55,12 +55,12 @@ ORDER BY "o"."Id", "o0"."Id", "o1"."Id", "o2"."Id", "o3"."Id"
 
         AssertSql(
             """
-SELECT ~(-(-("o1"."Value" + "o"."Value" + 2))) % (-("o0"."Value" + "o0"."Value") - "o"."Value")
-FROM "OperatorEntityLong" AS "o"
-CROSS JOIN "OperatorEntityLong" AS "o0"
-CROSS JOIN "OperatorEntityLong" AS "o1"
-ORDER BY "o"."Id", "o0"."Id", "o1"."Id"
-"""
+            SELECT ~(-(-("o1"."Value" + "o"."Value" + 2))) % (-("o0"."Value" + "o0"."Value") - "o"."Value")
+            FROM "OperatorEntityLong" AS "o"
+            CROSS JOIN "OperatorEntityLong" AS "o0"
+            CROSS JOIN "OperatorEntityLong" AS "o1"
+            ORDER BY "o"."Id", "o0"."Id", "o1"."Id"
+            """
         );
     }
 
@@ -70,10 +70,10 @@ ORDER BY "o"."Id", "o0"."Id", "o1"."Id"
 
         AssertSql(
             """
-SELECT "o"."Id"
-FROM "OperatorEntityInt" AS "o"
-WHERE "o"."Id" = -"o"."Value"
-"""
+            SELECT "o"."Id"
+            FROM "OperatorEntityInt" AS "o"
+            WHERE "o"."Id" = -"o"."Value"
+            """
         );
     }
 
@@ -83,10 +83,10 @@ WHERE "o"."Id" = -"o"."Value"
 
         AssertSql(
             """
-SELECT "o"."Id"
-FROM "OperatorEntityInt" AS "o"
-WHERE -(-"o"."Value") = "o"."Value"
-"""
+            SELECT "o"."Id"
+            FROM "OperatorEntityInt" AS "o"
+            WHERE -(-"o"."Value") = "o"."Value"
+            """
         );
     }
 
@@ -96,11 +96,11 @@ WHERE -(-"o"."Value") = "o"."Value"
 
         AssertSql(
             """
-SELECT "o"."Id" AS "Id1", "o0"."Id" AS "Id2"
-FROM "OperatorEntityInt" AS "o"
-CROSS JOIN "OperatorEntityInt" AS "o0"
-WHERE -"o"."Value" = -("o"."Id" + "o0"."Value")
-"""
+            SELECT "o"."Id" AS "Id1", "o0"."Id" AS "Id2"
+            FROM "OperatorEntityInt" AS "o"
+            CROSS JOIN "OperatorEntityInt" AS "o0"
+            WHERE -"o"."Value" = -("o"."Id" + "o0"."Value")
+            """
         );
     }
 
@@ -110,10 +110,10 @@ WHERE -"o"."Value" = -("o"."Id" + "o0"."Value")
 
         AssertSql(
             """
-SELECT "o"."Id"
-FROM "OperatorEntityString" AS "o"
-WHERE "o"."Value" NOT LIKE 'A%' OR "o"."Value" IS NULL
-"""
+            SELECT "o"."Id"
+            FROM "OperatorEntityString" AS "o"
+            WHERE "o"."Value" NOT LIKE 'A%' OR "o"."Value" IS NULL
+            """
         );
     }
 
@@ -123,11 +123,11 @@ WHERE "o"."Value" NOT LIKE 'A%' OR "o"."Value" IS NULL
 
         AssertSql(
             """
-SELECT "o"."Id", "o"."Owned"
-FROM "Owner" AS "o"
-WHERE 'Foo' || ("o"."Owned" ->> 'SomeProperty') = 'FooBar'
-LIMIT 2
-"""
+            SELECT "o"."Id", "o"."Owned"
+            FROM "Owner" AS "o"
+            WHERE 'Foo' || ("o"."Owned" ->> 'SomeProperty') = 'FooBar'
+            LIMIT 2
+            """
         );
     }
 }

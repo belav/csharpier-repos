@@ -203,7 +203,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                   public static bool operator $$
+                public static bool operator $$
                 """
             );
         }
@@ -214,7 +214,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                   public static implicit operator $$
+                public static implicit operator $$
                 """
             );
         }
@@ -225,7 +225,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                   public static implicit operator $$
+                public static implicit operator $$
                 """
             );
         }
@@ -236,7 +236,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   public static readonly ImmutableList<T> Empty = new ImmutableList<T>((Segment)$$
+                public static readonly ImmutableList<T> Empty = new ImmutableList<T>((Segment)$$
                 """
             );
         }
@@ -247,9 +247,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                SyntaxKind kind = caseOrDefaultKeywordOpt == $$ ? SyntaxKind.GotoStatement :
-                                caseOrDefaultKeyword.Kind == SyntaxKind.CaseKeyword ? SyntaxKind.GotoCaseStatement : SyntaxKind.GotoDefaultStatement;
-                """
+                    SyntaxKind kind = caseOrDefaultKeywordOpt == $$ ? SyntaxKind.GotoStatement :
+                    caseOrDefaultKeyword.Kind == SyntaxKind.CaseKeyword ? SyntaxKind.GotoCaseStatement : SyntaxKind.GotoDefaultStatement;
+                    """
                 )
             );
         }
@@ -284,11 +284,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                switch ("goo")
-                        {
-                            case $$
-                        }
-                """
+                    switch ("goo")
+                    {
+                    case $$
+                    }
+                    """
                 )
             );
         }
@@ -306,10 +306,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                    public int x, y;
-                    void M()
-                    {
-                        var c = new C { x = 2, y = 3, $$
+                public int x, y;
+                void M()
+                {
+                var c = new C { x = 2, y = 3, $$
                 """
             );
         }
@@ -321,11 +321,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Program
                 {
-                    /// <see cref="$$">
-                    static void Main(string[] args)
-                    {
+                /// <see cref="$$">
+                static void Main(string[] args)
+                {
 
-                    }
+                }
                 }
                 """
             );
@@ -352,9 +352,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                int x;
-                int y = x is $$ Method();
-                """
+                    int x;
+                    int y = x is $$ Method();
+                    """
                 )
             );
         }

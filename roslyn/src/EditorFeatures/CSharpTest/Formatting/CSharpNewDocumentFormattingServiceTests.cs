@@ -47,18 +47,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
                 testCode: """
                 namespace Goo
                 {
-                    internal class C
-                    {
-                    }
+                internal class C
+                {
+                }
                 }
                 """,
                 expected: """
-            namespace Goo;
+                namespace Goo;
 
-            internal class C
-            {
-            }
-            """,
+                internal class C
+                {
+                }
+                """,
                 options: new OptionsCollection(LanguageNames.CSharp)
                 {
                     {
@@ -77,14 +77,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
         public async Task TestFileScopedNamespaces_Invalid_MultipleNamespaces()
         {
             var testCode = """
-                namespace Goo
-                {
-                }
+            namespace Goo
+            {
+            }
 
-                namespace Bar
-                {
-                }
-                """;
+            namespace Bar
+            {
+            }
+            """;
 
             await TestAsync(
                 testCode: testCode,
@@ -107,13 +107,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
         public async Task TestFileScopedNamespaces_Invalid_WrongLanguageVersion()
         {
             var testCode = """
-                namespace Goo
-                {
-                    internal class C
-                    {
-                    }
-                }
-                """;
+            namespace Goo
+            {
+            internal class C
+            {
+            }
+            }
+            """;
 
             await TestAsync(
                 testCode: testCode,
@@ -167,10 +167,10 @@ namespace Goo
         public async Task TestOrganizeUsingsWithNoUsings()
         {
             var testCode = """
-                namespace Goo
-                {
-                }
-                """;
+            namespace Goo
+            {
+            }
+            """;
             await TestAsync(
                 testCode: testCode,
                 expected: testCode,
@@ -199,14 +199,14 @@ namespace Goo
                 }
                 """,
                 expected: """
-            // This is a banner.
+                // This is a banner.
 
-            using System;
+                using System;
 
-            namespace Goo
-            {
-            }
-            """,
+                namespace Goo
+                {
+                }
+                """,
                 options: new OptionsCollection(LanguageNames.CSharp)
                 {
                     { CodeStyleOptions2.FileHeaderTemplate, "This is a banner." }
@@ -223,21 +223,21 @@ namespace Goo
 
                 namespace Goo
                 {
-                    class C
-                    {
-                    }
+                class C
+                {
+                }
                 }
                 """,
                 expected: """
-            using System;
+                using System;
 
-            namespace Goo
-            {
+                namespace Goo
+                {
                 internal class C
                 {
                 }
-            }
-            """,
+                }
+                """,
                 options: new OptionsCollection(LanguageNames.CSharp)
                 {
                     {
@@ -260,19 +260,19 @@ namespace Goo
 
                 namespace Goo
                 {
-                    class C
-                    {
-                    }
+                class C
+                {
+                }
                 }
                 """,
                 expected: """
-            using System;
+                using System;
 
-            namespace Goo;
-            internal class C
-            {
-            }
-            """,
+                namespace Goo;
+                internal class C
+                {
+                }
+                """,
                 options: new OptionsCollection(LanguageNames.CSharp)
                 {
                     {
@@ -302,17 +302,17 @@ namespace Goo
 
                 namespace Goo
                 {
-                    class E
-                    {
-                    }
+                class E
+                {
+                }
 
-                    partial class C
-                    {
-                    }
+                partial class C
+                {
+                }
 
-                    class D
-                    {
-                    }
+                class D
+                {
+                }
                 }
                 """,
                 expected: """
@@ -320,17 +320,17 @@ namespace Goo
 
                 namespace Goo
                 {
-                    internal class E
-                    {
-                    }
+                internal class E
+                {
+                }
 
-                    partial class C
-                    {
-                    }
+                partial class C
+                {
+                }
 
-                    internal class D
-                    {
-                    }
+                internal class D
+                {
+                }
                 }
                 """,
                 options: new OptionsCollection(LanguageNames.CSharp)
@@ -358,11 +358,11 @@ namespace Goo
                 }
                 """,
                 expected: """
-            namespace Goo
-            {
+                namespace Goo
+                {
                 using System;
-            }
-            """,
+                }
+                """,
                 options: new OptionsCollection(LanguageNames.CSharp)
                 {
                     {
@@ -387,11 +387,11 @@ namespace Goo
                 Console.WriteLine("Hello, World!");
                 """,
                 expected: """
-            using System;
+                using System;
 
-            // See https://aka.ms/new-console-template for more information
-            Console.WriteLine("Hello, World!");
-            """,
+                // See https://aka.ms/new-console-template for more information
+                Console.WriteLine("Hello, World!");
+                """,
                 options: new OptionsCollection(LanguageNames.CSharp)
                 {
                     {
@@ -416,16 +416,16 @@ namespace Goo
                 Console.WriteLine("Hello, World!");
                 """,
                 expected: """
-            using System;
+                using System;
 
-            internal class Program
-            {
+                internal class Program
+                {
                 private static void Main(string[] args)
                 {
-                    Console.WriteLine("Hello, World!");
+                Console.WriteLine("Hello, World!");
                 }
-            }
-            """,
+                }
+                """,
                 options: new OptionsCollection(LanguageNames.CSharp)
                 {
                     {

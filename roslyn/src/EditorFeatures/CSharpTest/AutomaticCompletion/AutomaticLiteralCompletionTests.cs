@@ -66,14 +66,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         public void String_String()
         {
             var code = """
-                class C
-                {
-                    void Method()
-                    {
-                        var s = ""$$
-                    }
-                }
-                """;
+            class C
+            {
+            void Method()
+            {
+            var s = ""$$
+            }
+            }
+            """;
             using var session = CreateSessionDoubleQuote(code);
             Assert.NotNull(session);
             CheckStart(session.Session, expectValidSession: false);
@@ -83,14 +83,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         public void String_VerbatimString()
         {
             var code = """
-                class C
-                {
-                    void Method()
-                    {
-                        var s = ""@$$
-                    }
-                }
-                """;
+            class C
+            {
+            void Method()
+            {
+            var s = ""@$$
+            }
+            }
+            """;
             using var session = CreateSessionDoubleQuote(code);
             Assert.NotNull(session);
             CheckStart(session.Session);
@@ -100,14 +100,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         public void String_Char()
         {
             var code = """
-                class C
-                {
-                    void Method()
-                    {
-                        var s = @""$$
-                    }
-                }
-                """;
+            class C
+            {
+            void Method()
+            {
+            var s = @""$$
+            }
+            }
+            """;
             using var session = CreateSessionSingleQuote(code);
             Assert.NotNull(session);
             CheckStart(session.Session);
@@ -117,14 +117,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         public void Method_String()
         {
             var code = """
-                class C
-                {
-                    void Method()
-                    {
-                        var s = $$
-                    }
-                }
-                """;
+            class C
+            {
+            void Method()
+            {
+            var s = $$
+            }
+            }
+            """;
             using var session = CreateSessionDoubleQuote(code);
             Assert.NotNull(session);
             CheckStart(session.Session);
@@ -134,14 +134,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         public void Method_String_Delete()
         {
             var code = """
-                class C
-                {
-                    void Method()
-                    {
-                        var s = $$
-                    }
-                }
-                """;
+            class C
+            {
+            void Method()
+            {
+            var s = $$
+            }
+            }
+            """;
             using var session = CreateSessionDoubleQuote(code);
             Assert.NotNull(session);
             CheckStart(session.Session);
@@ -152,14 +152,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         public void Method_String_Tab()
         {
             var code = """
-                class C
-                {
-                    void Method()
-                    {
-                        var s = $$
-                    }
-                }
-                """;
+            class C
+            {
+            void Method()
+            {
+            var s = $$
+            }
+            }
+            """;
             using var session = CreateSessionDoubleQuote(code);
             Assert.NotNull(session);
             CheckStart(session.Session);
@@ -170,14 +170,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         public void Method_String_Quotation()
         {
             var code = """
-                class C
-                {
-                    void Method()
-                    {
-                        var s = $$
-                    }
-                }
-                """;
+            class C
+            {
+            void Method()
+            {
+            var s = $$
+            }
+            }
+            """;
             using var session = CreateSessionDoubleQuote(code);
             Assert.NotNull(session);
             CheckStart(session.Session);
@@ -188,14 +188,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         public void VerbatimMethod_String()
         {
             var code = """
-                class C
-                {
-                    void Method()
-                    {
-                        var s = @$$
-                    }
-                }
-                """;
+            class C
+            {
+            void Method()
+            {
+            var s = @$$
+            }
+            }
+            """;
             using var session = CreateSessionDoubleQuote(code);
             Assert.NotNull(session);
             CheckStart(session.Session);
@@ -205,14 +205,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         public void VerbatimMethod_String_Delete()
         {
             var code = """
-                class C
-                {
-                    void Method()
-                    {
-                        var s = @$$
-                    }
-                }
-                """;
+            class C
+            {
+            void Method()
+            {
+            var s = @$$
+            }
+            }
+            """;
             using var session = CreateSessionDoubleQuote(code);
             Assert.NotNull(session);
             CheckStart(session.Session);
@@ -223,14 +223,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         public void VerbatimMethod_String_Tab()
         {
             var code = """
-                class C
-                {
-                    void Method()
-                    {
-                        var s = @$$
-                    }
-                }
-                """;
+            class C
+            {
+            void Method()
+            {
+            var s = @$$
+            }
+            }
+            """;
             using var session = CreateSessionDoubleQuote(code);
             Assert.NotNull(session);
             CheckStart(session.Session);
@@ -241,14 +241,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         public void VerbatimMethod_String_Quotation()
         {
             var code = """
-                class C
-                {
-                    void Method()
-                    {
-                        var s = @$$
-                    }
-                }
-                """;
+            class C
+            {
+            void Method()
+            {
+            var s = @$$
+            }
+            }
+            """;
             using var session = CreateSessionDoubleQuote(code);
             Assert.NotNull(session);
             CheckStart(session.Session);
@@ -259,14 +259,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         public void Method_InterpolatedString()
         {
             var code = """
-                class C
-                {
-                    void Method()
-                    {
-                        var s = $[||]$$
-                    }
-                }
-                """;
+            class C
+            {
+            void Method()
+            {
+            var s = $[||]$$
+            }
+            }
+            """;
             using var session = CreateSessionDoubleQuote(code);
             Assert.NotNull(session);
             CheckStart(session.Session);
@@ -276,14 +276,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         public void Method_InterpolatedString_Delete()
         {
             var code = """
-                class C
-                {
-                    void Method()
-                    {
-                        var s = $[||]$$
-                    }
-                }
-                """;
+            class C
+            {
+            void Method()
+            {
+            var s = $[||]$$
+            }
+            }
+            """;
             using var session = CreateSessionDoubleQuote(code);
             Assert.NotNull(session);
             CheckStart(session.Session);
@@ -294,14 +294,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         public void Method_InterpolatedString_Tab()
         {
             var code = """
-                class C
-                {
-                    void Method()
-                    {
-                        var s = $[||]$$
-                    }
-                }
-                """;
+            class C
+            {
+            void Method()
+            {
+            var s = $[||]$$
+            }
+            }
+            """;
             using var session = CreateSessionDoubleQuote(code);
             Assert.NotNull(session);
             CheckStart(session.Session);
@@ -312,14 +312,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         public void Method_InterpolatedString_Quotation()
         {
             var code = """
-                class C
-                {
-                    void Method()
-                    {
-                        var s = $[||]$$
-                    }
-                }
-                """;
+            class C
+            {
+            void Method()
+            {
+            var s = $[||]$$
+            }
+            }
+            """;
             using var session = CreateSessionDoubleQuote(code);
             Assert.NotNull(session);
             CheckStart(session.Session);
@@ -330,14 +330,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         public void VerbatimMethod_InterpolatedString()
         {
             var code = """
-                class C
-                {
-                    void Method()
-                    {
-                        var s = $@$$
-                    }
-                }
-                """;
+            class C
+            {
+            void Method()
+            {
+            var s = $@$$
+            }
+            }
+            """;
             using var session = CreateSessionDoubleQuote(code);
             Assert.NotNull(session);
             CheckStart(session.Session);
@@ -347,14 +347,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         public void VerbatimMethod_InterpolatedString_Delete()
         {
             var code = """
-                class C
-                {
-                    void Method()
-                    {
-                        var s = $@$$
-                    }
-                }
-                """;
+            class C
+            {
+            void Method()
+            {
+            var s = $@$$
+            }
+            }
+            """;
             using var session = CreateSessionDoubleQuote(code);
             Assert.NotNull(session);
             CheckStart(session.Session);
@@ -365,14 +365,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         public void VerbatimMethod_InterpolatedString_Tab()
         {
             var code = """
-                class C
-                {
-                    void Method()
-                    {
-                        var s = $@$$
-                    }
-                }
-                """;
+            class C
+            {
+            void Method()
+            {
+            var s = $@$$
+            }
+            }
+            """;
             using var session = CreateSessionDoubleQuote(code);
             Assert.NotNull(session);
             CheckStart(session.Session);
@@ -383,14 +383,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         public void VerbatimMethod_InterpolatedString_Quotation()
         {
             var code = """
-                class C
-                {
-                    void Method()
-                    {
-                        var s = $@$$
-                    }
-                }
-                """;
+            class C
+            {
+            void Method()
+            {
+            var s = $@$$
+            }
+            }
+            """;
             using var session = CreateSessionDoubleQuote(code);
             Assert.NotNull(session);
             CheckStart(session.Session);
@@ -401,14 +401,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         public void Preprocessor1()
         {
             var code = """
-                class C
-                {
-                    void Method()
-                    {
-                #line $$
-                    }
-                }
-                """;
+            class C
+            {
+            void Method()
+            {
+            #line $$
+            }
+            }
+            """;
             using var session = CreateSessionDoubleQuote(code);
             Assert.NotNull(session);
             CheckStart(session.Session);
@@ -419,14 +419,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         public void Preprocessor2()
         {
             var code = """
-                class C
-                {
-                    void Method()
-                    {
-                #line $$
-                    }
-                }
-                """;
+            class C
+            {
+            void Method()
+            {
+            #line $$
+            }
+            }
+            """;
             using var session = CreateSessionDoubleQuote(code);
             Assert.NotNull(session);
             CheckStart(session.Session);
@@ -437,14 +437,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         public void Preprocessor3()
         {
             var code = """
-                class C
-                {
-                    void Method()
-                    {
-                #line $$
-                    }
-                }
-                """;
+            class C
+            {
+            void Method()
+            {
+            #line $$
+            }
+            }
+            """;
             using var session = CreateSessionDoubleQuote(code);
             Assert.NotNull(session);
             CheckStart(session.Session);
@@ -456,14 +456,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         public void VerbatimStringDoubleQuote()
         {
             var code = """
-                class C
-                {
-                    void Method()
-                    {
-                        var s = @""$$
-                    }
-                }
-                """;
+            class C
+            {
+            void Method()
+            {
+            var s = @""$$
+            }
+            }
+            """;
             using var session = CreateSessionDoubleQuote(code);
             Assert.NotNull(session);
             CheckStart(session.Session, expectValidSession: false);
@@ -473,14 +473,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         public void String_CompleteLiteral()
         {
             var code = """
-                class C
-                {
-                    void Method()
-                    {
-                        var s = "this" + $$that";
-                    }
-                }
-                """;
+            class C
+            {
+            void Method()
+            {
+            var s = "this" + $$that";
+            }
+            }
+            """;
             using var session = CreateSessionDoubleQuote(code);
             Assert.NotNull(session);
             CheckStart(session.Session, expectValidSession: false);
@@ -490,14 +490,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         public void String_BeforeOtherString1()
         {
             var code = """
-                class C
-                {
-                    void Method()
-                    {
-                        var s = $$ + " + bar";
-                    }
-                }
-                """;
+            class C
+            {
+            void Method()
+            {
+            var s = $$ + " + bar";
+            }
+            }
+            """;
             using var session = CreateSessionDoubleQuote(code);
             Assert.NotNull(session);
             CheckStart(session.Session);
@@ -507,14 +507,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         public void String_BeforeOtherString2()
         {
             var code = """
-                class C
-                {
-                    void Method()
-                    {
-                        var s = $$ + "; } ";
-                    }
-                }
-                """;
+            class C
+            {
+            void Method()
+            {
+            var s = $$ + "; } ";
+            }
+            }
+            """;
             using var session = CreateSessionDoubleQuote(code);
             Assert.NotNull(session);
             CheckStart(session.Session);
@@ -524,15 +524,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         public void String_DoNotCompleteVerbatim()
         {
             var code = """
-                class C
-                {
-                    void Method()
-                    {
-                        var s = "this" + @$$that
-                            and this";
-                    }
-                }
-                """;
+            class C
+            {
+            void Method()
+            {
+            var s = "this" + @$$that
+            and this";
+            }
+            }
+            """;
             using var session = CreateSessionDoubleQuote(code);
             Assert.NotNull(session);
             CheckStart(session.Session);
@@ -542,12 +542,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         public void String_CompleteLiteral_EndOfFile()
         {
             var code = """
-                class C
-                {
-                    void Method()
-                    {
-                        var s = "this" + $$that"
-                """;
+            class C
+            {
+            void Method()
+            {
+            var s = "this" + $$that"
+            """;
             using var session = CreateSessionDoubleQuote(code);
             Assert.NotNull(session);
             CheckStart(session.Session, expectValidSession: false);

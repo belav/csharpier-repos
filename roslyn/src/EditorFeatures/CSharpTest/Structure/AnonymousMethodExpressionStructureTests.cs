@@ -22,16 +22,16 @@ public class AnonymousMethodExpressionTests
     public async Task TestAnonymousMethod()
     {
         var code = """
-                class C
-                {
-                    void Main()
-                    {
-                        $${|hint:delegate {|textspan:{
-                            x();
-                        };|}|}
-                    }
-                }
-                """;
+        class C
+        {
+        void Main()
+        {
+        $${|hint:delegate {|textspan:{
+        x();
+        };|}|}
+        }
+        }
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -43,14 +43,14 @@ public class AnonymousMethodExpressionTests
     public async Task TestAnonymousMethodInForLoop()
     {
         var code = """
-                class C
-                {
-                    void Main()
-                    {
-                        for (Action a = $$delegate { }; true; a()) { }
-                    }
-                }
-                """;
+        class C
+        {
+        void Main()
+        {
+        for (Action a = $$delegate { }; true; a()) { }
+        }
+        }
+        """;
 
         await VerifyNoBlockSpansAsync(code);
     }
@@ -59,16 +59,16 @@ public class AnonymousMethodExpressionTests
     public async Task TestAnonymousMethodInMethodCall1()
     {
         var code = """
-                class C
-                {
-                    void Main()
-                    {
-                        someMethod(42, "test", false, {|hint:$$delegate(int x, int y, int z) {|textspan:{
-                            return x + y + z;
-                        }|}|}, "other arguments");
-                    }
-                }
-                """;
+        class C
+        {
+        void Main()
+        {
+        someMethod(42, "test", false, {|hint:$$delegate(int x, int y, int z) {|textspan:{
+        return x + y + z;
+        }|}|}, "other arguments");
+        }
+        }
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -80,16 +80,16 @@ public class AnonymousMethodExpressionTests
     public async Task TestAnonymousMethodInMethodCall2()
     {
         var code = """
-                class C
-                {
-                    void Main()
-                    {
-                        someMethod(42, "test", false, {|hint:$$delegate(int x, int y, int z) {|textspan:{
-                            return x + y + z;
-                        }|}|});
-                    }
-                }
-                """;
+        class C
+        {
+        void Main()
+        {
+        someMethod(42, "test", false, {|hint:$$delegate(int x, int y, int z) {|textspan:{
+        return x + y + z;
+        }|}|});
+        }
+        }
+        """;
 
         await VerifyBlockSpansAsync(
             code,

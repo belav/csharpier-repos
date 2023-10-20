@@ -22,16 +22,16 @@ public class ParenthesizedLambdaStructureTests
     public async Task TestLambda()
     {
         var code = """
-                class C
-                {
-                    void M()
-                    {
-                        {|hint:$$() => {|textspan:{
-                            x();
-                        };|}|}
-                    }
-                }
-                """;
+        class C
+        {
+        void M()
+        {
+        {|hint:$$() => {|textspan:{
+        x();
+        };|}|}
+        }
+        }
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -43,14 +43,14 @@ public class ParenthesizedLambdaStructureTests
     public async Task TestLambdaInForLoop()
     {
         var code = """
-                class C
-                {
-                    void M()
-                    {
-                        for (Action a = $$() => { }; true; a()) { }
-                    }
-                }
-                """;
+        class C
+        {
+        void M()
+        {
+        for (Action a = $$() => { }; true; a()) { }
+        }
+        }
+        """;
 
         await VerifyNoBlockSpansAsync(code);
     }
@@ -59,16 +59,16 @@ public class ParenthesizedLambdaStructureTests
     public async Task TestLambdaInMethodCall1()
     {
         var code = """
-                class C
-                {
-                    void M()
-                    {
-                        someMethod(42, "test", false, {|hint:$$(x, y, z) => {|textspan:{
-                            return x + y + z;
-                        }|}|}, "other arguments");
-                    }
-                }
-                """;
+        class C
+        {
+        void M()
+        {
+        someMethod(42, "test", false, {|hint:$$(x, y, z) => {|textspan:{
+        return x + y + z;
+        }|}|}, "other arguments");
+        }
+        }
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -80,16 +80,16 @@ public class ParenthesizedLambdaStructureTests
     public async Task TestLambdaInMethodCall2()
     {
         var code = """
-                class C
-                {
-                    void M()
-                    {
-                        someMethod(42, "test", false, {|hint:$$(x, y, z) => {|textspan:{
-                            return x + y + z;
-                        }|}|});
-                    }
-                }
-                """;
+        class C
+        {
+        void M()
+        {
+        someMethod(42, "test", false, {|hint:$$(x, y, z) => {|textspan:{
+        return x + y + z;
+        }|}|});
+        }
+        }
+        """;
 
         await VerifyBlockSpansAsync(
             code,

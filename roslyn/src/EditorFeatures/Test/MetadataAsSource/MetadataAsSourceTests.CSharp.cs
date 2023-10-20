@@ -784,26 +784,26 @@ public class C
             public async Task TestRequiredProperty(bool signaturesOnly)
             {
                 var metadataSource = """
-                    public class C
-                    {
-                        public required int Property { get; set; }
-                        public required int Field;
-                    }
-                    namespace System.Runtime.CompilerServices
-                    {
-                        public sealed class RequiredMemberAttribute : Attribute { }
-                        public sealed class CompilerFeatureRequiredAttribute : Attribute
-                        {
-                            public CompilerFeatureRequiredAttribute(string featureName)
-                            {
-                                FeatureName = featureName;
-                            }
-                            public string FeatureName { get; }
-                            public bool IsOptional { get; set; }
-                        }
-                    }
+                public class C
+                {
+                public required int Property { get; set; }
+                public required int Field;
+                }
+                namespace System.Runtime.CompilerServices
+                {
+                public sealed class RequiredMemberAttribute : Attribute { }
+                public sealed class CompilerFeatureRequiredAttribute : Attribute
+                {
+                public CompilerFeatureRequiredAttribute(string featureName)
+                {
+                FeatureName = featureName;
+                }
+                public string FeatureName { get; }
+                public bool IsOptional { get; set; }
+                }
+                }
 
-                    """;
+                """;
                 var symbolName = "C";
 
                 // ICSharpDecompiler does not yet support decoding required members nicely

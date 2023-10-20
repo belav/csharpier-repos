@@ -23,32 +23,32 @@ public partial class UseCollectionExpressionForBuilderTests
 {
     private const string s_arrayBuilderApi = """
 
-        internal sealed partial class ArrayBuilder<T>
-        {
-            public void Add(T item) { }
-        
-            public void AddRange(ArrayBuilder<T> items) { }
-            public void AddRange(System.Collections.Immutable.ImmutableArray<T> items) { }
-            public void AddRange(System.Collections.Generic.IEnumerable<T> items) { }
-            public void AddRange(params T[] items) { }
-            public void AddRange(T[] items, int length) { }
-            public void Clear() { }
+    internal sealed partial class ArrayBuilder<T>
+    {
+    public void Add(T item) { }
 
-            public System.Collections.Immutable.ImmutableArray<T> ToImmutable() => default;
-            public System.Collections.Immutable.ImmutableArray<T> ToImmutableAndClear() => default;
-            public System.Collections.Immutable.ImmutableArray<T> ToImmutableAndFree() => default;
-        
-            public T[] ToArray() => default;
-            public T[] ToArrayAndFree() => default;
+    public void AddRange(ArrayBuilder<T> items) { }
+    public void AddRange(System.Collections.Immutable.ImmutableArray<T> items) { }
+    public void AddRange(System.Collections.Generic.IEnumerable<T> items) { }
+    public void AddRange(params T[] items) { }
+    public void AddRange(T[] items, int length) { }
+    public void Clear() { }
 
-            public static ArrayBuilder<T> GetInstance() => default;
-            public static ArrayBuilder<T> GetInstance(int capacity) => default;
+    public System.Collections.Immutable.ImmutableArray<T> ToImmutable() => default;
+    public System.Collections.Immutable.ImmutableArray<T> ToImmutableAndClear() => default;
+    public System.Collections.Immutable.ImmutableArray<T> ToImmutableAndFree() => default;
 
-            public static System.IDisposable GetInstance(out ArrayBuilder<T> instance) { instance = default; return null; }
-            public static System.IDisposable GetInstance(int capacity, out ArrayBuilder<T> instance) { instance = default; return null; }
-            public static System.IDisposable GetInstance(int capacity, T fillWithValue, out ArrayBuilder<T> instance) { instance = default; return null; }
-        }
-        """;
+    public T[] ToArray() => default;
+    public T[] ToArrayAndFree() => default;
+
+    public static ArrayBuilder<T> GetInstance() => default;
+    public static ArrayBuilder<T> GetInstance(int capacity) => default;
+
+    public static System.IDisposable GetInstance(out ArrayBuilder<T> instance) { instance = default; return null; }
+    public static System.IDisposable GetInstance(int capacity, out ArrayBuilder<T> instance) { instance = default; return null; }
+    public static System.IDisposable GetInstance(int capacity, T fillWithValue, out ArrayBuilder<T> instance) { instance = default; return null; }
+    }
+    """;
 
     public static readonly IEnumerable<object[]> FailureCreationPatterns = new[]
     {
@@ -140,10 +140,10 @@ public partial class UseCollectionExpressionForBuilderTests
 
                 class C
                 {
-                    ImmutableArray<int> M()
-                    {
-                        return [0];
-                    }
+                ImmutableArray<int> M()
+                {
+                return [0];
+                }
                 }
                 """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -177,10 +177,10 @@ public partial class UseCollectionExpressionForBuilderTests
 
                 class C
                 {
-                    void M()
-                    {
-                        var v = (ImmutableArray<int>)[0];
-                    }
+                void M()
+                {
+                var v = (ImmutableArray<int>)[0];
+                }
                 }
                 """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -242,12 +242,12 @@ public partial class UseCollectionExpressionForBuilderTests
 
                 class C
                 {
-                    void M()
-                    {
-                        Goo([0]);
-                    }
-                
-                    void Goo(ImmutableArray<int> values) { }
+                void M()
+                {
+                Goo([0]);
+                }
+
+                void Goo(ImmutableArray<int> values) { }
                 }
                 """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -283,12 +283,12 @@ public partial class UseCollectionExpressionForBuilderTests
 
                 class C
                 {
-                    void M()
-                    {
-                        Goo([0]);
-                    }
-                
-                    void Goo(ImmutableArray<int> values) { }
+                void M()
+                {
+                Goo([0]);
+                }
+
+                void Goo(ImmutableArray<int> values) { }
                 }
                 """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -324,12 +324,12 @@ public partial class UseCollectionExpressionForBuilderTests
 
                 class C
                 {
-                    void M()
-                    {
-                        Goo([0]);
-                    }
-                
-                    void Goo(ImmutableArray<int> values) { }
+                void M()
+                {
+                Goo([0]);
+                }
+
+                void Goo(ImmutableArray<int> values) { }
                 }
                 """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -365,12 +365,12 @@ public partial class UseCollectionExpressionForBuilderTests
 
                 class C
                 {
-                    void M()
-                    {
-                        Goo([0]);
-                    }
-                
-                    void Goo(ImmutableArray<int> values) { }
+                void M()
+                {
+                Goo([0]);
+                }
+
+                void Goo(ImmutableArray<int> values) { }
                 }
                 """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -463,12 +463,12 @@ public partial class UseCollectionExpressionForBuilderTests
 
                 class C
                 {
-                    void M(int[] x)
-                    {
-                        Goo([0, .. x]);
-                    }
-                
-                    void Goo(ImmutableArray<int> values) { }
+                void M(int[] x)
+                {
+                Goo([0, .. x]);
+                }
+
+                void Goo(ImmutableArray<int> values) { }
                 }
                 """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -509,12 +509,12 @@ public partial class UseCollectionExpressionForBuilderTests
 
                 class C
                 {
-                    void M(int[] x)
-                    {
-                        Goo([0, .. x]);
-                    }
-                
-                    void Goo(ImmutableArray<int> values) { }
+                void M(int[] x)
+                {
+                Goo([0, .. x]);
+                }
+
+                void Goo(ImmutableArray<int> values) { }
                 }
                 """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -623,12 +623,12 @@ public partial class UseCollectionExpressionForBuilderTests
 
                 class C
                 {
-                    void M(int[] x, int[] y)
-                    {
-                        Goo([0, .. x, .. y]);
-                    }
-                
-                    void Goo(ImmutableArray<int> values) { }
+                void M(int[] x, int[] y)
+                {
+                Goo([0, .. x, .. y]);
+                }
+
+                void Goo(ImmutableArray<int> values) { }
                 }
                 """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -673,12 +673,12 @@ public partial class UseCollectionExpressionForBuilderTests
 
                 class C
                 {
-                    void M(int[] x, int[] y)
-                    {
-                        Goo([.. x, 0, .. y]);
-                    }
-                
-                    void Goo(ImmutableArray<int> values) { }
+                void M(int[] x, int[] y)
+                {
+                Goo([.. x, 0, .. y]);
+                }
+
+                void Goo(ImmutableArray<int> values) { }
                 }
                 """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -723,12 +723,12 @@ public partial class UseCollectionExpressionForBuilderTests
 
                 class C
                 {
-                    void M(int[] x, int[] y)
-                    {
-                        Goo([.. x, .. y, 0]);
-                    }
-                
-                    void Goo(ImmutableArray<int> values) { }
+                void M(int[] x, int[] y)
+                {
+                Goo([.. x, .. y, 0]);
+                }
+
+                void Goo(ImmutableArray<int> values) { }
                 }
                 """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -770,12 +770,12 @@ public partial class UseCollectionExpressionForBuilderTests
 
                 class C
                 {
-                    void M(int[] x, bool b)
-                    {
-                        Goo([.. {|CS0173:b ? [0] : []|}]);
-                    }
-                
-                    void Goo(ImmutableArray<int> values) { }
+                void M(int[] x, bool b)
+                {
+                Goo([.. {|CS0173:b ? [0] : []|}]);
+                }
+
+                void Goo(ImmutableArray<int> values) { }
                 }
                 """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -815,12 +815,12 @@ public partial class UseCollectionExpressionForBuilderTests
 
                 class C
                 {
-                    void M(int[] x, bool b)
-                    {
-                        Goo([b ? 0 : 1]);
-                    }
-                
-                    void Goo(ImmutableArray<int> values) { }
+                void M(int[] x, bool b)
+                {
+                Goo([b ? 0 : 1]);
+                }
+
+                void Goo(ImmutableArray<int> values) { }
                 }
                 """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -864,12 +864,12 @@ public partial class UseCollectionExpressionForBuilderTests
 
                 class C
                 {
-                    void M(int[] x, bool b)
-                    {
-                        Goo([.. {|CS0173:b ? [0] : []|}]);
-                    }
-                
-                    void Goo(ImmutableArray<int> values) { }
+                void M(int[] x, bool b)
+                {
+                Goo([.. {|CS0173:b ? [0] : []|}]);
+                }
+
+                void Goo(ImmutableArray<int> values) { }
                 }
                 """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -913,12 +913,12 @@ public partial class UseCollectionExpressionForBuilderTests
 
                 class C
                 {
-                    void M(int[] x, bool b)
-                    {
-                        Goo([b ? 0 : 1]);
-                    }
-                
-                    void Goo(ImmutableArray<int> values) { }
+                void M(int[] x, bool b)
+                {
+                Goo([b ? 0 : 1]);
+                }
+
+                void Goo(ImmutableArray<int> values) { }
                 }
                 """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -954,12 +954,12 @@ public partial class UseCollectionExpressionForBuilderTests
 
                 class C
                 {
-                    void M(int[] x)
-                    {
-                        Goo([.. x]);
-                    }
-                
-                    void Goo(ImmutableArray<int> values) { }
+                void M(int[] x)
+                {
+                Goo([.. x]);
+                }
+
+                void Goo(ImmutableArray<int> values) { }
                 }
                 """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -995,12 +995,12 @@ public partial class UseCollectionExpressionForBuilderTests
 
                 class C
                 {
-                    void M(int[] x)
-                    {
-                        Goo([1]);
-                    }
-                
-                    void Goo(ImmutableArray<int> values) { }
+                void M(int[] x)
+                {
+                Goo([1]);
+                }
+
+                void Goo(ImmutableArray<int> values) { }
                 }
                 """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -1036,12 +1036,12 @@ public partial class UseCollectionExpressionForBuilderTests
 
                 class C
                 {
-                    void M(int[] x)
-                    {
-                        Goo([1, 2, 3]);
-                    }
-                
-                    void Goo(ImmutableArray<int> values) { }
+                void M(int[] x)
+                {
+                Goo([1, 2, 3]);
+                }
+
+                void Goo(ImmutableArray<int> values) { }
                 }
                 """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -1104,12 +1104,12 @@ public partial class UseCollectionExpressionForBuilderTests
 
                 class C
                 {
-                    void M()
-                    {
-                        Goo([0]);
-                    }
-                
-                    void Goo(ImmutableArray<int> values) { }
+                void M()
+                {
+                Goo([0]);
+                }
+
+                void Goo(ImmutableArray<int> values) { }
                 }
                 """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -1145,12 +1145,12 @@ public partial class UseCollectionExpressionForBuilderTests
 
                 class C
                 {
-                    void M()
-                    {
-                        Goo([0]);
-                    }
-                
-                    void Goo(ImmutableArray<int> values) { }
+                void M()
+                {
+                Goo([0]);
+                }
+
+                void Goo(ImmutableArray<int> values) { }
                 }
                 """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -1186,12 +1186,12 @@ public partial class UseCollectionExpressionForBuilderTests
 
                 class C
                 {
-                    void M()
-                    {
-                        Goo([0]);
-                    }
-                
-                    void Goo(ImmutableArray<int> values) { }
+                void M()
+                {
+                Goo([0]);
+                }
+
+                void Goo(ImmutableArray<int> values) { }
                 }
                 """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -1227,12 +1227,12 @@ public partial class UseCollectionExpressionForBuilderTests
 
                 class C
                 {
-                    void M()
-                    {
-                        Goo([0]);
-                    }
-                
-                    void Goo(int[] values) { }
+                void M()
+                {
+                Goo([0]);
+                }
+
+                void Goo(int[] values) { }
                 }
                 """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -1324,14 +1324,14 @@ public partial class UseCollectionExpressionForBuilderTests
 
                 class C
                 {
-                    ImmutableArray<int> M()
-                    {
-                        return
-                        [
-                            // Leading
-                            0, // Trailing
-                        ];
-                    }
+                ImmutableArray<int> M()
+                {
+                return
+                [
+                // Leading
+                0, // Trailing
+                ];
+                }
                 }
                 """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -1366,14 +1366,14 @@ public partial class UseCollectionExpressionForBuilderTests
 
                 class C
                 {
-                    ImmutableArray<int> M()
-                    {
-                        return
-                        [
-                            1 +
-                                2,
-                        ];
-                    }
+                ImmutableArray<int> M()
+                {
+                return
+                [
+                1 +
+                2,
+                ];
+                }
                 }
                 """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -1410,16 +1410,16 @@ public partial class UseCollectionExpressionForBuilderTests
 
                 class C
                 {
-                    ImmutableArray<int> M()
-                    {
-                        return
-                        [
-                            1 +
-                                2,
-                            3 +
-                                4,
-                        ];
-                    }
+                ImmutableArray<int> M()
+                {
+                return
+                [
+                1 +
+                2,
+                3 +
+                4,
+                ];
+                }
                 }
                 """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -1502,11 +1502,11 @@ public partial class UseCollectionExpressionForBuilderTests
 
                 ImmutableArray<int> array =
                 [
-                    0,
-                    1 +
-                        2,
-                    3 +
-                        4,
+                0,
+                1 +
+                2,
+                3 +
+                4,
                 ];
                 """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -1543,10 +1543,10 @@ public partial class UseCollectionExpressionForBuilderTests
 
                 class C
                 {
-                    ImmutableArray<ImmutableArray<int>> M()
-                    {
-                        return [[0]];
-                    }
+                ImmutableArray<ImmutableArray<int>> M()
+                {
+                return [[0]];
+                }
                 }
                 """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
@@ -1586,10 +1586,10 @@ public partial class UseCollectionExpressionForBuilderTests
 
                 class C
                 {
-                    ImmutableArray<ImmutableArray<int>> M()
-                    {
-                        return [[0]];
-                    }
+                ImmutableArray<ImmutableArray<int>> M()
+                {
+                return [[0]];
+                }
                 }
                 """ + s_arrayBuilderApi
             ).ReplaceLineEndings(endOfLine),

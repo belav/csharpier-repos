@@ -14,7 +14,7 @@ var encryptor = new CertificateXmlEncryptor(cert, NullLoggerFactory.Instance);
 var e = XElement.Parse(
     """
     <root>
-      <child Value="hi" />
+    <child Value="hi" />
     </root>
     """
 );

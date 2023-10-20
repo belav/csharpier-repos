@@ -63,24 +63,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         public async Task TestUseExpressionBody1()
         {
             var code = """
-                class C
-                {
-                    void Bar() { }
+            class C
+            {
+            void Bar() { }
 
-                    {|IDE0021:public C()
-                    {
-                        Bar();
-                    }|}
-                }
-                """;
+            {|IDE0021:public C()
+            {
+            Bar();
+            }|}
+            }
+            """;
             var fixedCode = """
-                class C
-                {
-                    void Bar() { }
+            class C
+            {
+            void Bar() { }
 
-                    public C() => Bar();
-                }
-                """;
+            public C() => Bar();
+            }
+            """;
             await TestWithUseExpressionBody(code, fixedCode);
         }
 
@@ -88,28 +88,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         public async Task TestUseExpressionBody2()
         {
             var code = """
-                class C
-                {
-                    int a;
+            class C
+            {
+            int a;
 
-                    {|IDE0021:public C()
-                    {
-                        a = Bar();
-                    }|}
+            {|IDE0021:public C()
+            {
+            a = Bar();
+            }|}
 
-                    int Bar() { return 0; }
-                }
-                """;
+            int Bar() { return 0; }
+            }
+            """;
             var fixedCode = """
-                class C
-                {
-                    int a;
+            class C
+            {
+            int a;
 
-                    public C() => a = Bar();
+            public C() => a = Bar();
 
-                    int Bar() { return 0; }
-                }
-                """;
+            int Bar() { return 0; }
+            }
+            """;
             await TestWithUseExpressionBody(code, fixedCode);
         }
 
@@ -117,24 +117,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         public async Task TestUseExpressionBody3()
         {
             var code = """
-                using System;
+            using System;
 
-                class C
-                {
-                    {|IDE0021:public C()
-                    {
-                        throw new NotImplementedException();
-                    }|}
-                }
-                """;
+            class C
+            {
+            {|IDE0021:public C()
+            {
+            throw new NotImplementedException();
+            }|}
+            }
+            """;
             var fixedCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    public C() => throw new NotImplementedException();
-                }
-                """;
+            class C
+            {
+            public C() => throw new NotImplementedException();
+            }
+            """;
             await TestWithUseExpressionBody(code, fixedCode);
         }
 
@@ -142,24 +142,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         public async Task TestUseExpressionBody4()
         {
             var code = """
-                using System;
+            using System;
 
-                class C
-                {
-                    {|IDE0021:public C()
-                    {
-                        throw new NotImplementedException(); // comment
-                    }|}
-                }
-                """;
+            class C
+            {
+            {|IDE0021:public C()
+            {
+            throw new NotImplementedException(); // comment
+            }|}
+            }
+            """;
             var fixedCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    public C() => throw new NotImplementedException(); // comment
-                }
-                """;
+            class C
+            {
+            public C() => throw new NotImplementedException(); // comment
+            }
+            """;
             await TestWithUseExpressionBody(code, fixedCode);
         }
 
@@ -167,24 +167,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         public async Task TestUseBlockBody1()
         {
             var code = """
-                class C
-                {
-                    {|IDE0021:public C() => Bar();|}
+            class C
+            {
+            {|IDE0021:public C() => Bar();|}
 
-                    void Bar() { }
-                }
-                """;
+            void Bar() { }
+            }
+            """;
             var fixedCode = """
-                class C
-                {
-                    public C()
-                    {
-                        Bar();
-                    }
+            class C
+            {
+            public C()
+            {
+            Bar();
+            }
 
-                    void Bar() { }
-                }
-                """;
+            void Bar() { }
+            }
+            """;
             await TestWithUseBlockBody(code, fixedCode);
         }
 
@@ -192,28 +192,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         public async Task TestUseBlockBody2()
         {
             var code = """
-                class C
-                {
-                    int a;
+            class C
+            {
+            int a;
 
-                    {|IDE0021:public C() => a = Bar();|}
+            {|IDE0021:public C() => a = Bar();|}
 
-                    int Bar() { return 0; }
-                }
-                """;
+            int Bar() { return 0; }
+            }
+            """;
             var fixedCode = """
-                class C
-                {
-                    int a;
+            class C
+            {
+            int a;
 
-                    public C()
-                    {
-                        a = Bar();
-                    }
+            public C()
+            {
+            a = Bar();
+            }
 
-                    int Bar() { return 0; }
-                }
-                """;
+            int Bar() { return 0; }
+            }
+            """;
             await TestWithUseBlockBody(code, fixedCode);
         }
 
@@ -221,24 +221,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         public async Task TestUseBlockBody3()
         {
             var code = """
-                using System;
+            using System;
 
-                class C
-                {
-                    {|IDE0021:public C() => throw new NotImplementedException();|}
-                }
-                """;
+            class C
+            {
+            {|IDE0021:public C() => throw new NotImplementedException();|}
+            }
+            """;
             var fixedCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    public C()
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """;
+            class C
+            {
+            public C()
+            {
+            throw new NotImplementedException();
+            }
+            }
+            """;
             await TestWithUseBlockBody(code, fixedCode);
         }
 
@@ -246,24 +246,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         public async Task TestUseBlockBody4()
         {
             var code = """
-                using System;
+            using System;
 
-                class C
-                {
-                    {|IDE0021:public C() => throw new NotImplementedException();|} // comment
-                }
-                """;
+            class C
+            {
+            {|IDE0021:public C() => throw new NotImplementedException();|} // comment
+            }
+            """;
             var fixedCode = """
-                using System;
+            using System;
 
-                class C
-                {
-                    public C()
-                    {
-                        throw new NotImplementedException(); // comment
-                    }
-                }
-                """;
+            class C
+            {
+            public C()
+            {
+            throw new NotImplementedException(); // comment
+            }
+            }
+            """;
             await TestWithUseBlockBody(code, fixedCode);
         }
 
@@ -271,22 +271,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         public async Task TestOfferToConvertToBlockEvenIfExpressionBodyPreferredIfPriorToCSharp7()
         {
             var code = """
-                using System;
-                class C
-                {
-                    {|IDE0021:public C() {|CS8059:=>|} {|CS8059:throw|} new NotImplementedException();|}
-                }
-                """;
+            using System;
+            class C
+            {
+            {|IDE0021:public C() {|CS8059:=>|} {|CS8059:throw|} new NotImplementedException();|}
+            }
+            """;
             var fixedCode = """
-                using System;
-                class C
-                {
-                    public C()
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """;
+            using System;
+            class C
+            {
+            public C()
+            {
+            throw new NotImplementedException();
+            }
+            }
+            """;
             await TestWithUseExpressionBody(code, fixedCode, LanguageVersion.CSharp6);
         }
 
@@ -294,28 +294,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         public async Task TestOfferToConvertToBlockEvenIfExpressionBodyPreferredIfPriorToCSharp7_FixAll()
         {
             var code = """
-                using System;
-                class C
-                {
-                    {|IDE0021:public C() {|CS8059:=>|} {|CS8059:throw|} new NotImplementedException();|}
-                    {|IDE0021:public C(int i) {|CS8059:=>|} {|CS8059:throw|} new NotImplementedException();|}
-                }
-                """;
+            using System;
+            class C
+            {
+            {|IDE0021:public C() {|CS8059:=>|} {|CS8059:throw|} new NotImplementedException();|}
+            {|IDE0021:public C(int i) {|CS8059:=>|} {|CS8059:throw|} new NotImplementedException();|}
+            }
+            """;
             var fixedCode = """
-                using System;
-                class C
-                {
-                    public C()
-                    {
-                        throw new NotImplementedException();
-                    }
+            using System;
+            class C
+            {
+            public C()
+            {
+            throw new NotImplementedException();
+            }
 
-                    public C(int i)
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """;
+            public C(int i)
+            {
+            throw new NotImplementedException();
+            }
+            }
+            """;
             await TestWithUseExpressionBody(code, fixedCode, LanguageVersion.CSharp6);
         }
     }

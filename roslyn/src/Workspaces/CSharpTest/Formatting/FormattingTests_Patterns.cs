@@ -592,30 +592,30 @@ class TypeName
         public async Task FormatNestedListPattern1()
         {
             var content = """
-                class C
-                {
-                    void M(string[] ss)
-                    {
-                        if (ss is [ [  ]  ])
-                        {
+            class C
+            {
+            void M(string[] ss)
+            {
+            if (ss is [ [  ]  ])
+            {
 
-                        }
-                    }
-                }
-                """;
+            }
+            }
+            }
+            """;
 
             var expected = """
-                class C
-                {
-                    void M(string[] ss)
-                    {
-                        if (ss is [[]])
-                        {
-                
-                        }
-                    }
-                }
-                """;
+            class C
+            {
+            void M(string[] ss)
+            {
+            if (ss is [[]])
+            {
+
+            }
+            }
+            }
+            """;
 
             await AssertFormatAsync(expected, content);
         }
@@ -624,30 +624,30 @@ class TypeName
         public async Task FormatNestedListPattern2()
         {
             var content = """
-                class C
-                {
-                    void M(string[] ss)
-                    {
-                        if (ss is [ [  ],[ ]     ])
-                        {
+            class C
+            {
+            void M(string[] ss)
+            {
+            if (ss is [ [  ],[ ]     ])
+            {
 
-                        }
-                    }
-                }
-                """;
+            }
+            }
+            }
+            """;
 
             var expected = """
-                class C
-                {
-                    void M(string[] ss)
-                    {
-                        if (ss is [[], []])
-                        {
-                
-                        }
-                    }
-                }
-                """;
+            class C
+            {
+            void M(string[] ss)
+            {
+            if (ss is [[], []])
+            {
+
+            }
+            }
+            }
+            """;
 
             await AssertFormatAsync(expected, content);
         }
@@ -656,30 +656,30 @@ class TypeName
         public async Task FormatNestedListPattern3()
         {
             var content = """
-                class C
-                {
-                    void M(string[] ss)
-                    {
-                        if (ss is [    [  ],[ ]     , [   ]  ] )
-                        {
+            class C
+            {
+            void M(string[] ss)
+            {
+            if (ss is [    [  ],[ ]     , [   ]  ] )
+            {
 
-                        }
-                    }
-                }
-                """;
+            }
+            }
+            }
+            """;
 
             var expected = """
-                class C
-                {
-                    void M(string[] ss)
-                    {
-                        if (ss is [[], [], []])
-                        {
-                
-                        }
-                    }
-                }
-                """;
+            class C
+            {
+            void M(string[] ss)
+            {
+            if (ss is [[], [], []])
+            {
+
+            }
+            }
+            }
+            """;
 
             await AssertFormatAsync(expected, content);
         }
@@ -688,30 +688,30 @@ class TypeName
         public async Task FormatNestedListPattern4()
         {
             var content = """
-                class C
-                {
-                    void M(string[][] ss)
-                    {
-                        if (ss is [    [ [ ] ] ] )
-                        {
+            class C
+            {
+            void M(string[][] ss)
+            {
+            if (ss is [    [ [ ] ] ] )
+            {
 
-                        }
-                    }
-                }
-                """;
+            }
+            }
+            }
+            """;
 
             var expected = """
-                class C
-                {
-                    void M(string[][] ss)
-                    {
-                        if (ss is [[[]]])
-                        {
-                
-                        }
-                    }
-                }
-                """;
+            class C
+            {
+            void M(string[][] ss)
+            {
+            if (ss is [[[]]])
+            {
+
+            }
+            }
+            }
+            """;
 
             await AssertFormatAsync(expected, content);
         }

@@ -557,24 +557,24 @@ build_property.{MSBuildPropertyOptionNames.EnableTrimAnalyzer} = true"
 			""";
 
             var fixtest = """
-			using System.Reflection;
-			using System.Diagnostics.CodeAnalysis;
+            using System.Reflection;
+            using System.Diagnostics.CodeAnalysis;
 
-			namespace System
-			{
-				static class C 
-				{
-					static void Main([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] Type t)
-					{
-						DoSomethingWithMethods(t.GetMethods());
-					}
+            namespace System
+            {
+            static class C
+            {
+            static void Main([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] Type t)
+            {
+            DoSomethingWithMethods(t.GetMethods());
+            }
 
-					static void DoSomethingWithMethods(MethodInfo[] m)
-					{
-					}
-				}
-			}
-			""";
+            static void DoSomethingWithMethods(MethodInfo[] m)
+            {
+            }
+            }
+            }
+            """;
 
             await VerifyDynamicallyAccessedMembersCodeFix(
                 source: test,
@@ -628,28 +628,28 @@ build_property.{MSBuildPropertyOptionNames.EnableTrimAnalyzer} = true"
 			""";
 
             var fixtest = """
-			using System;
-			using System.Diagnostics.CodeAnalysis;
+            using System;
+            using System.Diagnostics.CodeAnalysis;
 
-			class C
-			{
-				public static void Main()
-				{
-					NeedsPublicMethodsOnParameter(GetC());
-				}
+            class C
+            {
+            public static void Main()
+            {
+            NeedsPublicMethodsOnParameter(GetC());
+            }
 
-				private static void NeedsPublicMethodsOnParameter(
-				[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] Type type)
-				{
-				}
+            private static void NeedsPublicMethodsOnParameter(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] Type type)
+            {
+            }
 
-			    [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-			    private static Type GetC()
-				{
-					return typeof(C);
-				}
-			}
-			""";
+            [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+            private static Type GetC()
+            {
+            return typeof(C);
+            }
+            }
+            """;
 
             await VerifyDynamicallyAccessedMembersCodeFix(
                 source: test,
@@ -703,28 +703,28 @@ build_property.{MSBuildPropertyOptionNames.EnableTrimAnalyzer} = true"
 			""";
 
             var fixtest = """
-			using System;
-			using System.Diagnostics.CodeAnalysis;
+            using System;
+            using System.Diagnostics.CodeAnalysis;
 
-			class C
-			{
-				public static void Main()
-				{
-					NeedsPublicMethodsOnParameter(GetC(typeof(C)));
-				}
+            class C
+            {
+            public static void Main()
+            {
+            NeedsPublicMethodsOnParameter(GetC(typeof(C)));
+            }
 
-				private static void NeedsPublicMethodsOnParameter(
-				[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] Type t)
-				{
-				}
+            private static void NeedsPublicMethodsOnParameter(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] Type t)
+            {
+            }
 
-			    [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-			    private static Type GetC([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] Type t)
-				{
-					return t;
-				}
-			}
-			""";
+            [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+            private static Type GetC([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] Type t)
+            {
+            return t;
+            }
+            }
+            """;
 
             await VerifyDynamicallyAccessedMembersCodeFix(
                 source: test,

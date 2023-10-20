@@ -17,17 +17,17 @@ public abstract partial class RequestDelegateCreationTests : RequestDelegateCrea
     public async Task RequestDelegateLogsStringValuesFromExplicitQueryStringSourceForUnpresentedValuesFailuresAsDebugAndSets400Response()
     {
         var source = """
-app.MapGet("/{baz}", (
-    HttpContext httpContext,
-    [FromHeader(Name = "foo")] StringValues headerValues,
-    [FromQuery(Name = "bar")] StringValues queryValues,
-    [FromForm(Name = "form")] StringValues formValues,
-    [FromRoute(Name = "baz")] string routeValues
-) =>
-{
-    httpContext.Items["invoked"] = true;
-});
-""";
+        app.MapGet("/{baz}", (
+        HttpContext httpContext,
+        [FromHeader(Name = "foo")] StringValues headerValues,
+        [FromQuery(Name = "bar")] StringValues queryValues,
+        [FromForm(Name = "form")] StringValues formValues,
+        [FromRoute(Name = "baz")] string routeValues
+        ) =>
+        {
+        httpContext.Items["invoked"] = true;
+        });
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider();
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
@@ -103,13 +103,13 @@ app.MapGet("/{baz}", (
     public async Task RequestDelegateLogsTryParsableFailuresAsDebugAndSets400Response()
     {
         var source = """
-void TestAction(HttpContext httpContext, [FromRoute] int tryParsable, [FromRoute] int tryParsable2)
-{
-    httpContext.Items["invoked"] = true;
-}
+        void TestAction(HttpContext httpContext, [FromRoute] int tryParsable, [FromRoute] int tryParsable2)
+        {
+        httpContext.Items["invoked"] = true;
+        }
 
-app.MapGet("/{tryParsable}/{tryParsable2}", TestAction);
-""";
+        app.MapGet("/{tryParsable}/{tryParsable2}", TestAction);
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider();
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
@@ -160,13 +160,13 @@ app.MapGet("/{tryParsable}/{tryParsable2}", TestAction);
     public async Task RequestDelegateThrowsForTryParsableFailuresIfThrowOnBadRequest()
     {
         var source = """
-void TestAction(HttpContext httpContext, [FromRoute] int tryParsable, [FromRoute] int tryParsable2)
-{
-    httpContext.Items["invoked"] = true;
-}
+        void TestAction(HttpContext httpContext, [FromRoute] int tryParsable, [FromRoute] int tryParsable2)
+        {
+        httpContext.Items["invoked"] = true;
+        }
 
-app.MapGet("/{tryParsable}/{tryParsable2}", TestAction);
-""";
+        app.MapGet("/{tryParsable}/{tryParsable2}", TestAction);
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {
@@ -205,12 +205,12 @@ app.MapGet("/{tryParsable}/{tryParsable2}", TestAction);
     public async Task RequestDelegateThrowsForTryParsableFailuresIfThrowOnBadRequestWithArrays()
     {
         var source = """
-void TestAction(HttpContext httpContext, [FromQuery] int[] values)
-{
-    httpContext.Items["invoked"] = true;
-}
-app.MapGet("/", TestAction);
-""";
+        void TestAction(HttpContext httpContext, [FromQuery] int[] values)
+        {
+        httpContext.Items["invoked"] = true;
+        }
+        app.MapGet("/", TestAction);
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {
@@ -248,12 +248,12 @@ app.MapGet("/", TestAction);
     public async Task RequestDelegateLogsBindAsyncFailuresAndSets400Response()
     {
         var source = """
-void TestAction(HttpContext httpContext, MyBindAsyncRecord myBindAsyncParam1, MyBindAsyncRecord myBindAsyncParam2)
-{
-    httpContext.Items["invoked"] = true;
-}
-app.MapGet("/", TestAction);
-""";
+        void TestAction(HttpContext httpContext, MyBindAsyncRecord myBindAsyncParam1, MyBindAsyncRecord myBindAsyncParam2)
+        {
+        httpContext.Items["invoked"] = true;
+        }
+        app.MapGet("/", TestAction);
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider();
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
@@ -308,12 +308,12 @@ app.MapGet("/", TestAction);
     public async Task RequestDelegateThrowsForBindAsyncFailuresIfThrowOnBadRequest()
     {
         var source = """
-void TestAction(HttpContext httpContext, MyBindAsyncRecord myBindAsyncParam1, MyBindAsyncRecord myBindAsyncParam2)
-{
-    httpContext.Items["invoked"] = true;
-}
-app.MapGet("/", TestAction);
-""";
+        void TestAction(HttpContext httpContext, MyBindAsyncRecord myBindAsyncParam1, MyBindAsyncRecord myBindAsyncParam2)
+        {
+        httpContext.Items["invoked"] = true;
+        }
+        app.MapGet("/", TestAction);
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {
@@ -351,12 +351,12 @@ app.MapGet("/", TestAction);
     public async Task RequestDelegateLogsSingleArgBindAsyncFailuresAndSets400Response()
     {
         var source = """
-void TestAction(HttpContext httpContext, MySimpleBindAsyncRecord mySimpleBindAsyncRecord1, MySimpleBindAsyncRecord mySimpleBindAsyncRecord2)
-{
-    httpContext.Items["invoked"] = true;
-}
-app.MapGet("/", TestAction);
-""";
+        void TestAction(HttpContext httpContext, MySimpleBindAsyncRecord mySimpleBindAsyncRecord1, MySimpleBindAsyncRecord mySimpleBindAsyncRecord2)
+        {
+        httpContext.Items["invoked"] = true;
+        }
+        app.MapGet("/", TestAction);
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider();
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
@@ -405,12 +405,12 @@ app.MapGet("/", TestAction);
     public async Task RequestDelegateThrowsForSingleArgBindAsyncFailuresIfThrowOnBadRequest()
     {
         var source = """
-void TestAction(HttpContext httpContext, MySimpleBindAsyncRecord mySimpleBindAsyncRecord1, MySimpleBindAsyncRecord mySimpleBindAsyncRecord2)
-{
-    httpContext.Items["invoked"] = true;
-}
-app.MapGet("/", TestAction);
-""";
+        void TestAction(HttpContext httpContext, MySimpleBindAsyncRecord mySimpleBindAsyncRecord1, MySimpleBindAsyncRecord mySimpleBindAsyncRecord2)
+        {
+        httpContext.Items["invoked"] = true;
+        }
+        app.MapGet("/", TestAction);
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {
@@ -449,12 +449,12 @@ app.MapGet("/", TestAction);
     public async Task RequestDelegateRejectsNonJsonContent(bool shouldThrow)
     {
         var source = """
-void TestAction(HttpContext httpContext, Todo todo)
-{
-    httpContext.Items["invoked"] = true;
-}
-app.MapPost("/", TestAction);
-""";
+        void TestAction(HttpContext httpContext, Todo todo)
+        {
+        httpContext.Items["invoked"] = true;
+        }
+        app.MapPost("/", TestAction);
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {
@@ -507,12 +507,12 @@ app.MapPost("/", TestAction);
     public async Task RequestDelegateWithBindAndImplicitBodyRejectsNonJsonContent(bool shouldThrow)
     {
         var source = """
-void TestAction(HttpContext httpContext, Todo todo)
-{
-    httpContext.Items["invoked"] = true;
-}
-app.MapPost("/", TestAction);
-""";
+        void TestAction(HttpContext httpContext, Todo todo)
+        {
+        httpContext.Items["invoked"] = true;
+        }
+        app.MapPost("/", TestAction);
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {
@@ -565,12 +565,12 @@ app.MapPost("/", TestAction);
     )
     {
         var source = """
-void TestAction(HttpContext httpContext, [FromBody] Todo todo)
-{
-    httpContext.Items["invoked"] = true;
-}
-app.MapPost("/", TestAction);
-""";
+        void TestAction(HttpContext httpContext, [FromBody] Todo todo)
+        {
+        httpContext.Items["invoked"] = true;
+        }
+        app.MapPost("/", TestAction);
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {
@@ -606,12 +606,12 @@ app.MapPost("/", TestAction);
     public async Task RequestDelegateLogsJsonExceptionsAsDebugAndSets400Response()
     {
         var source = """
-void TestAction(HttpContext httpContext, [FromBody] Todo todo)
-{
-    httpContext.Items["invoked"] = true;
-}
-app.MapPost("/", TestAction);
-""";
+        void TestAction(HttpContext httpContext, [FromBody] Todo todo)
+        {
+        httpContext.Items["invoked"] = true;
+        }
+        app.MapPost("/", TestAction);
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {
@@ -656,12 +656,12 @@ app.MapPost("/", TestAction);
     public async Task RequestDelegateThrowsForJsonExceptionsIfThrowOnBadRequest()
     {
         var source = """
-void TestAction(HttpContext httpContext, [FromBody] Todo todo)
-{
-    httpContext.Items["invoked"] = true;
-}
-app.MapPost("/", TestAction);
-""";
+        void TestAction(HttpContext httpContext, [FromBody] Todo todo)
+        {
+        httpContext.Items["invoked"] = true;
+        }
+        app.MapPost("/", TestAction);
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {
@@ -705,12 +705,12 @@ app.MapPost("/", TestAction);
     public async Task RequestDelegateLogsMalformedJsonAsDebugAndSets400Response()
     {
         var source = """
-void TestAction(HttpContext httpContext, [FromBody] Todo todo)
-{
-    httpContext.Items["invoked"] = true;
-}
-app.MapPost("/", TestAction);
-""";
+        void TestAction(HttpContext httpContext, [FromBody] Todo todo)
+        {
+        httpContext.Items["invoked"] = true;
+        }
+        app.MapPost("/", TestAction);
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {
@@ -754,12 +754,12 @@ app.MapPost("/", TestAction);
     public async Task RequestDelegateThrowsForMalformedJsonIfThrowOnBadRequest()
     {
         var source = """
-void TestAction(HttpContext httpContext, [FromBody] Todo todo)
-{
-    httpContext.Items["invoked"] = true;
-}
-app.MapPost("/", TestAction);
-""";
+        void TestAction(HttpContext httpContext, [FromBody] Todo todo)
+        {
+        httpContext.Items["invoked"] = true;
+        }
+        app.MapPost("/", TestAction);
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {

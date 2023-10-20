@@ -39,13 +39,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        object s = ";
-                        foreach (object x in ([|s as ErrorType|]))
-                        {
-                        }
-                    }
+                static void Main()
+                {
+                object s = ";
+                foreach (object x in ([|s as ErrorType|]))
+                {
+                }
+                }
                 }
                 """
             );
@@ -56,29 +56,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System;
+                using System;
 
-            class C
-            {
+                class C
+                {
                 static void Main()
                 {
-                    Action a = Console.WriteLine;
-                    ([|a as Action|])();
+                Action a = Console.WriteLine;
+                ([|a as Action|])();
                 }
-            }
-            """,
+                }
+                """,
                 """
-            using System;
+                using System;
 
-            class C
-            {
+                class C
+                {
                 static void Main()
                 {
-                    Action a = Console.WriteLine;
-                    a();
+                Action a = Console.WriteLine;
+                a();
                 }
-            }
-            """
+                }
+                """
             );
         }
 
@@ -89,9 +89,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class Ð¡
                 {
-                    void Goo<T>(T obj)
+                void Goo<T>(T obj)
                 {
-                    int x = (int)([|obj as object|]);
+                int x = (int)([|obj as object|]);
                 }
                 }
                 """
@@ -107,11 +107,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class Ð¡
                 {
-                    static void Main()
+                static void Main()
                 {
-                    DayOfWeek[] a = {
-                    };
-                    Console.WriteLine([|a as object|] is int[]);
+                DayOfWeek[] a = {
+                };
+                Console.WriteLine([|a as object|] is int[]);
                 }
                 }
                 """
@@ -125,18 +125,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class A
                 {
-                    public static implicit operator A(string x)
-                    {
-                        return new A();
-                    }
+                public static implicit operator A(string x)
+                {
+                return new A();
+                }
                 }
 
                 class Program
                 {
-                    static void Main()
-                    {
-                        A x = [|null as string|];
-                    }
+                static void Main()
+                {
+                A x = [|null as string|];
+                }
                 }
                 """
             );
@@ -149,10 +149,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 unsafe class C
                 {
-                    static unsafe void Main()
-                    {
-                        var x = (int)([|null as int*|]);
-                    }
+                static unsafe void Main()
+                {
+                var x = (int)([|null as int*|]);
+                }
                 }
                 """
             );
@@ -170,12 +170,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class Program
                 {
-                    static void Main()
-                    {
-                        Action a = Console.WriteLine;
-                        Action b = Console.WriteLine;
-                        Console.WriteLine(a == ([|b as object|]));
-                    }
+                static void Main()
+                {
+                Action a = Console.WriteLine;
+                Action b = Console.WriteLine;
+                Console.WriteLine(a == ([|b as object|]));
+                }
                 }
                 """
             );
@@ -190,13 +190,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class C
                 {
-                    static void Main()
-                    {
-                        var x = [|delegate {
-                        } as Action|]
+                static void Main()
+                {
+                var x = [|delegate {
+                } as Action|]
 
-                        as Action;
-                    }
+                as Action;
+                }
                 }
                 """
             );
@@ -211,18 +211,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class Program
                 {
-                    static void Main()
-                    {
-                        Goo(x => [|x as string|]);
-                    }
+                static void Main()
+                {
+                Goo(x => [|x as string|]);
+                }
 
-                    static void Goo(Func<int, object> x)
-                    {
-                    }
+                static void Goo(Func<int, object> x)
+                {
+                }
 
-                    static void Goo(Func<string, object> x)
-                    {
-                    }
+                static void Goo(Func<string, object> x)
+                {
+                }
                 }
                 """
             );
@@ -237,19 +237,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class Program
                 {
-                    static void Main()
-                    {
-                        var x = [|1 as IComparable<int>|];
-                        Goo(x);
-                    }
+                static void Main()
+                {
+                var x = [|1 as IComparable<int>|];
+                Goo(x);
+                }
 
-                    static void Goo(IComparable<int> x)
-                    {
-                    }
+                static void Goo(IComparable<int> x)
+                {
+                }
 
-                    static void Goo(int x)
-                    {
-                    }
+                static void Goo(int x)
+                {
+                }
                 }
                 """
             );
@@ -264,20 +264,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class Program
                 {
-                    static void Main()
-                    {
-                        var x = [|1 as IComparable<int>|];
-                        var y = x;
-                        Goo(y);
-                    }
+                static void Main()
+                {
+                var x = [|1 as IComparable<int>|];
+                var y = x;
+                Goo(y);
+                }
 
-                    static void Goo(IComparable<int> x)
-                    {
-                    }
+                static void Goo(IComparable<int> x)
+                {
+                }
 
-                    static void Goo(int x)
-                    {
-                    }
+                static void Goo(int x)
+                {
+                }
                 }
                 """
             );
@@ -290,10 +290,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class C
                 {
-                    static void Main()
-                    {
-                        var x = [|"" as object|];
-                    }
+                static void Main()
+                {
+                var x = [|"" as object|];
+                }
                 }
                 """
             );
@@ -309,18 +309,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class C
                 {
-                    static void Main()
-                    {
-                        Action<object>[] x = {
-                        };
-                        Goo(x);
-                    }
+                static void Main()
+                {
+                Action<object>[] x = {
+                };
+                Goo(x);
+                }
 
-                    static void Goo<T>(Action<T>[] x)
-                    {
-                        var y = (IList<Action<object>>)([|x as IList<object>|]);
-                        Console.WriteLine(y.Count);
-                    }
+                static void Goo<T>(Action<T>[] x)
+                {
+                var y = (IList<Action<object>>)([|x as IList<object>|]);
+                Console.WriteLine(y.Count);
+                }
                 }
                 """
             );
@@ -335,21 +335,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await TestInRegularAndScriptAsync(
                 """
-            class Program
-            {
+                class Program
+                {
                 static void M1(string i1 = [|null as string|])
                 {
                 }
-            }
-            """,
+                }
+                """,
                 """
-            class Program
-            {
+                class Program
+                {
                 static void M1(string i1 = null)
                 {
                 }
-            }
-            """
+                }
+                """
             );
         }
 
@@ -358,23 +358,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await TestInRegularAndScriptAsync(
                 """
-            class Program
-            {
+                class Program
+                {
                 static string M2()
                 {
-                    return [|"" as string|];
+                return [|"" as string|];
                 }
-            }
-            """,
+                }
+                """,
                 """
-            class Program
-            {
+                class Program
+                {
                 static string M2()
                 {
-                    return "";
+                return "";
                 }
-            }
-            """
+                }
+                """
             );
         }
 
@@ -383,25 +383,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System;
-            class Program
-            {
+                using System;
+                class Program
+                {
                 static void M1()
                 {
-                    Func<string> f1 = () => [|"" as string|];
+                Func<string> f1 = () => [|"" as string|];
                 }
-            }
-            """,
+                }
+                """,
                 """
-            using System;
-            class Program
-            {
+                using System;
+                class Program
+                {
                 static void M1()
                 {
-                    Func<string> f1 = () => "";
+                Func<string> f1 = () => "";
                 }
-            }
-            """
+                }
+                """
             );
         }
 
@@ -410,25 +410,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System;
-            class Program
-            {
+                using System;
+                class Program
+                {
                 static void M1()
                 {
-                    Func<string> f1 = () => { return [|"" as string|]; };
+                Func<string> f1 = () => { return [|"" as string|]; };
                 }
-            }
-            """,
+                }
+                """,
                 """
-            using System;
-            class Program
-            {
+                using System;
+                class Program
+                {
                 static void M1()
                 {
-                    Func<string> f1 = () => { return ""; };
+                Func<string> f1 = () => { return ""; };
                 }
-            }
-            """
+                }
+                """
             );
         }
 
@@ -437,25 +437,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System;
-            class Program
-            {
+                using System;
+                class Program
+                {
                 static void M1()
                 {
-                    Func<string> f1 = _ => { return [|"" as string|]; };
+                Func<string> f1 = _ => { return [|"" as string|]; };
                 }
-            }
-            """,
+                }
+                """,
                 """
-            using System;
-            class Program
-            {
+                using System;
+                class Program
+                {
                 static void M1()
                 {
-                    Func<string> f1 = _ => { return ""; };
+                Func<string> f1 = _ => { return ""; };
                 }
-            }
-            """
+                }
+                """
             );
         }
 
@@ -464,25 +464,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System;
-            class Program
-            {
+                using System;
+                class Program
+                {
                 static void M1()
                 {
-                    Func<string> f1 = _ => [|"" as string|];
+                Func<string> f1 = _ => [|"" as string|];
                 }
-            }
-            """,
+                }
+                """,
                 """
-            using System;
-            class Program
-            {
+                using System;
+                class Program
+                {
                 static void M1()
                 {
-                    Func<string> f1 = _ => "";
+                Func<string> f1 = _ => "";
                 }
-            }
-            """
+                }
+                """
             );
         }
 
@@ -491,27 +491,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await TestInRegularAndScriptAsync(
                 """
-            class Test
-            {
+                class Test
+                {
                 public static void Main()
                 {
-                    int b = 5;
+                int b = 5;
 
-                    string f1 = (b == 5) ? [|"a" as string|] : "b" as string;
+                string f1 = (b == 5) ? [|"a" as string|] : "b" as string;
                 }
-            }
-            """,
+                }
+                """,
                 """
-            class Test
-            {
+                class Test
+                {
                 public static void Main()
                 {
-                    int b = 5;
+                int b = 5;
 
-                    string f1 = (b == 5) ? "a" : "b" as string;
+                string f1 = (b == 5) ? "a" : "b" as string;
                 }
-            }
-            """
+                }
+                """
             );
         }
 
@@ -520,27 +520,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await TestInRegularAndScriptAsync(
                 """
-            class Test
-            {
+                class Test
+                {
                 public static void Main()
                 {
-                    int b = 5;
+                int b = 5;
 
-                    string f1 = (b == 5) ? "a" as string : [|"b" as string|];
+                string f1 = (b == 5) ? "a" as string : [|"b" as string|];
                 }
-            }
-            """,
+                }
+                """,
                 """
-            class Test
-            {
+                class Test
+                {
                 public static void Main()
                 {
-                    int b = 5;
+                int b = 5;
 
-                    string f1 = (b == 5) ? "a" as string : "b";
+                string f1 = (b == 5) ? "a" as string : "b";
                 }
-            }
-            """
+                }
+                """
             );
         }
 
@@ -551,11 +551,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class Test
                 {
-                    public static void Main()
-                    {
-                        int b = 5;
-                        var f1 = (b == 5) ? "" : [|"" as object|];
-                    }
+                public static void Main()
+                {
+                int b = 5;
+                var f1 = (b == 5) ? "" : [|"" as object|];
+                }
                 }
                 """
             );
@@ -566,19 +566,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await TestMissingAsync(
                 """
-            using System;
-            class Test
-            {
+                using System;
+                class Test
+                {
                 delegate void D(int x);
 
                 static void Main(string[] args)
                 {
-                    var cd1 = new D([|M1 as Action<int>|]);
+                var cd1 = new D([|M1 as Action<int>|]);
                 }
 
                 public static void M1(int i) { }
-            }
-            """
+                }
+                """
             );
         }
 
@@ -587,31 +587,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await TestInRegularAndScriptAsync(
                 """
-            class Test
-            {
+                class Test
+                {
                 static void Main()
                 {
-                    switch ("")
-                    {
-                        case [|"" as string|]:
-                            break;
-                    }
+                switch ("")
+                {
+                case [|"" as string|]:
+                break;
                 }
-            }
-            """,
+                }
+                }
+                """,
                 """
-            class Test
-            {
+                class Test
+                {
                 static void Main()
                 {
-                    switch ("")
-                    {
-                        case "":
-                            break;
-                    }
+                switch ("")
+                {
+                case "":
+                break;
                 }
-            }
-            """
+                }
+                }
+                """
             );
         }
 
@@ -621,27 +621,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class Program
-            {
+                class Program
+                {
                 static void Main()
                 {
-                    var z = new List<string> { [|"" as string|] };
+                var z = new List<string> { [|"" as string|] };
                 }
-            }
-            """,
+                }
+                """,
                 """
-            using System.Collections.Generic;
+                using System.Collections.Generic;
 
-            class Program
-            {
+                class Program
+                {
                 static void Main()
                 {
-                    var z = new List<string> { "" };
+                var z = new List<string> { "" };
                 }
-            }
-            """
+                }
+                """
             );
         }
 
@@ -656,20 +656,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class X : List<int>
                 {
-                    void Add(object x)
-                    {
-                        Console.WriteLine(1);
-                    }
+                void Add(object x)
+                {
+                Console.WriteLine(1);
+                }
 
-                    void Add(string x)
-                    {
-                        Console.WriteLine(2);
-                    }
+                void Add(string x)
+                {
+                Console.WriteLine(2);
+                }
 
-                    static void Main()
-                    {
-                        var z = new X { [|"" as object|] };
-                    }
+                static void Main()
+                {
+                var z = new X { [|"" as object|] };
+                }
                 }
                 """
             );
@@ -686,20 +686,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class X : List<int>
                 {
-                    void Add(object x)
-                    {
-                        Console.WriteLine(1);
-                    }
+                void Add(object x)
+                {
+                Console.WriteLine(1);
+                }
 
-                    void Add(string x)
-                    {
-                        Console.WriteLine(2);
-                    }
+                void Add(string x)
+                {
+                Console.WriteLine(2);
+                }
 
-                    static void Main()
-                    {
-                        X z = new X { [|"" as object|] };
-                    }
+                static void Main()
+                {
+                X z = new X { [|"" as object|] };
+                }
                 }
                 """
             );
@@ -710,25 +710,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await TestInRegularAndScriptAsync(
                 """
-            class X
-            {
+                class X
+                {
                 static void Goo()
                 {
-                    string x = ";
-                    var s = new object[] { [|x as object|] };
+                string x = ";
+                var s = new object[] { [|x as object|] };
                 }
-            }
-            """,
+                }
+                """,
                 """
-            class X
-            {
+                class X
+                {
                 static void Goo()
                 {
-                    string x = ";
-                    var s = new object[] { x };
+                string x = ";
+                var s = new object[] { x };
                 }
-            }
-            """
+                }
+                """
             );
         }
 
@@ -739,16 +739,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class X
                 {
-                    static void Goo()
-                    {
-                        X x = null;
-                        object y = [|x as string|];
-                    }
+                static void Goo()
+                {
+                X x = null;
+                object y = [|x as string|];
+                }
 
-                    public static implicit operator string(X x)
-                    {
-                        return ";
-                    }
+                public static implicit operator string(X x)
+                {
+                return ";
+                }
                 }
                 """
             );
@@ -767,15 +767,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class E
                 {
-                    public static implicit operator Exception(E e)
-                    {
-                        return new Exception();
-                    }
+                public static implicit operator Exception(E e)
+                {
+                return new Exception();
+                }
 
-                    static void Main()
-                    {
-                        throw [|new E() as Exception|];
-                    }
+                static void Main()
+                {
+                throw [|new E() as Exception|];
+                }
                 }
                 """
             );
@@ -794,11 +794,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class C
                 {
-                    static void Main()
-                    {
-                        object ex = new Exception();
-                        throw [|ex as Exception|];
-                    }
+                static void Main()
+                {
+                object ex = new Exception();
+                throw [|ex as Exception|];
+                }
                 }
                 """
             );
@@ -809,27 +809,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System;
+                using System;
 
-            class E
-            {
+                class E
+                {
                 static void Main()
                 {
-                    throw [|new Exception() as Exception|];
+                throw [|new Exception() as Exception|];
                 }
-            }
-            """,
+                }
+                """,
                 """
-            using System;
+                using System;
 
-            class E
-            {
+                class E
+                {
                 static void Main()
                 {
-                    throw new Exception();
+                throw new Exception();
                 }
-            }
-            """
+                }
+                """
             );
         }
 
@@ -840,10 +840,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class C
                 {
-                    void Goo(object y)
-                    {
-                        var x = [|y as string|];
-                    }
+                void Goo(object y)
+                {
+                var x = [|y as string|];
+                }
                 }
                 """
             );
@@ -856,10 +856,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class X
                 {
-                    static void Goo<T, S>() where T : class, S
-                    {
-                        S y = [|null as T|];
-                    }
+                static void Goo<T, S>() where T : class, S
+                {
+                S y = [|null as T|];
+                }
                 }
                 """
             );
@@ -872,12 +872,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class X
                 {
-                    static void Goo()
-                    {
-                        string x = ";
-                        var s = new[] { [|x as object|] };
-                        s[0] = 1;
-                    }
+                static void Goo()
+                {
+                string x = ";
+                var s = new[] { [|x as object|] };
+                s[0] = 1;
+                }
                 }
                 """
             );
@@ -888,33 +888,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await TestInRegularAndScriptAsync(
                 """
-            class X
-            {
+                class X
+                {
                 static void Main()
                 {
-                    var s = ([|new X() as object|]).ToString();
+                var s = ([|new X() as object|]).ToString();
                 }
 
                 public override string ToString()
                 {
-                    return ";
+                return ";
                 }
-            }
-            """,
+                }
+                """,
                 """
-            class X
-            {
+                class X
+                {
                 static void Main()
                 {
-                    var s = new X().ToString();
+                var s = new X().ToString();
                 }
 
                 public override string ToString()
                 {
-                    return ";
+                return ";
                 }
-            }
-            """
+                }
+                """
             );
         }
 
@@ -923,29 +923,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await TestMissingInRegularAndScriptAsync(
                 """
-            using System;
-            using System.Collections.Generic;
-            using System.Reflection;
+                using System;
+                using System.Collections.Generic;
+                using System.Reflection;
 
-            static class Program
-            {
+                static class Program
+                {
                 static void Main()
                 {
-                    FieldInfo[] fields = typeof(Exception).GetFields();
-                    Console.WriteLine(fields.Any([|(field => field.IsStatic) as Func<FieldInfo, bool>|]));
+                FieldInfo[] fields = typeof(Exception).GetFields();
+                Console.WriteLine(fields.Any([|(field => field.IsStatic) as Func<FieldInfo, bool>|]));
                 }
 
                 static bool Any<T>(this IEnumerable<T> s, Func<T, bool> predicate)
                 {
-                    return false;
+                return false;
                 }
 
                 static bool Any<T>(this ICollection<T> s, Func<T, bool> predicate)
                 {
-                    return true;
+                return true;
                 }
-            }
-            """
+                }
+                """
             );
         }
 
@@ -954,31 +954,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System;
+                using System;
 
-            class A
-            {
+                class A
+                {
                 int Select(Func<int, string> x) { return 1; }
 
                 static void Main()
                 {
-                    Console.WriteLine(from y in new A() select [|"" as string|]);
+                Console.WriteLine(from y in new A() select [|"" as string|]);
                 }
-            }
-            """,
+                }
+                """,
                 """
-            using System;
+                using System;
 
-            class A
-            {
+                class A
+                {
                 int Select(Func<int, string> x) { return 1; }
 
                 static void Main()
                 {
-                    Console.WriteLine(from y in new A() select "");
+                Console.WriteLine(from y in new A() select "");
                 }
-            }
-            """
+                }
+                """
             );
         }
 
@@ -991,21 +991,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class A
                 {
-                    int Select(Func<int, string> x)
-                    {
-                        return 1;
-                    }
+                int Select(Func<int, string> x)
+                {
+                return 1;
+                }
 
-                    int Select(Func<int, object> x)
-                    {
-                        return 2;
-                    }
+                int Select(Func<int, object> x)
+                {
+                return 2;
+                }
 
-                    static void Main()
-                    {
-                        Console.WriteLine(from y in new A()
-                                          select [|"" as object|]);
-                    }
+                static void Main()
+                {
+                Console.WriteLine(from y in new A()
+                select [|"" as object|]);
+                }
                 }
                 """
             );
@@ -1020,48 +1020,48 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 interface IIncrementable
                 {
-                    int Value { get; }
+                int Value { get; }
 
-                    void Increment();
+                void Increment();
                 }
 
                 struct S : IIncrementable
                 {
-                    public int Value { get; private set; }
+                public int Value { get; private set; }
 
-                    public void Increment()
-                    {
-                        Value++;
-                    }
+                public void Increment()
+                {
+                Value++;
+                }
                 }
 
                 class C : IIncrementable
                 {
-                    public int Value { get; private set; }
+                public int Value { get; private set; }
 
-                    public void Increment()
-                    {
-                        Value++;
-                    }
+                public void Increment()
+                {
+                Value++;
+                }
                 }
 
                 static class Program
                 {
-                    static void Main()
-                    {
-                        Goo(new S(), new C());
-                    }
+                static void Main()
+                {
+                Goo(new S(), new C());
+                }
 
-                    static void Goo<TAny, TClass>(TAny x, TClass y)
-                        where TAny : IIncrementable
-                        where TClass : class, IIncrementable
-                    {
-                        ([|x as IIncrementable|]).Increment(); // False Unnecessary Cast
-                        ((IIncrementable)y).Increment(); // Unnecessary Cast - OK
+                static void Goo<TAny, TClass>(TAny x, TClass y)
+                where TAny : IIncrementable
+                where TClass : class, IIncrementable
+                {
+                ([|x as IIncrementable|]).Increment(); // False Unnecessary Cast
+                ((IIncrementable)y).Increment(); // Unnecessary Cast - OK
 
-                        Console.WriteLine(x.Value);
-                        Console.WriteLine(y.Value);
-                    }
+                Console.WriteLine(x.Value);
+                Console.WriteLine(y.Value);
+                }
                 }
                 """
             );
@@ -1072,85 +1072,85 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await TestInRegularAndScriptAsync(
                 """
-            using System;
+                using System;
 
-            interface IIncrementable
-            {
+                interface IIncrementable
+                {
                 int Value { get; }
                 void Increment();
-            }
+                }
 
-            struct S : IIncrementable
-            {
+                struct S : IIncrementable
+                {
                 public int Value { get; private set; }
                 public void Increment() { Value++; }
-            }
+                }
 
-            class C: IIncrementable
-            {
+                class C: IIncrementable
+                {
                 public int Value { get; private set; }
                 public void Increment() { Value++; }
-            }
+                }
 
-            static class Program
-            {
+                static class Program
+                {
                 static void Main()
                 {
-                    Goo(new S(), new C());
+                Goo(new S(), new C());
                 }
 
-                static void Goo<TAny, TClass>(TAny x, TClass y) 
-                    where TAny : IIncrementable
-                    where TClass : class, IIncrementable
+                static void Goo<TAny, TClass>(TAny x, TClass y)
+                where TAny : IIncrementable
+                where TClass : class, IIncrementable
                 {
-                    ((IIncrementable)x).Increment(); // False Unnecessary Cast
-                    ([|y as IIncrementable|]).Increment(); // Unnecessary Cast - OK
+                ((IIncrementable)x).Increment(); // False Unnecessary Cast
+                ([|y as IIncrementable|]).Increment(); // Unnecessary Cast - OK
 
-                    Console.WriteLine(x.Value);
-                    Console.WriteLine(y.Value);
+                Console.WriteLine(x.Value);
+                Console.WriteLine(y.Value);
                 }
-            }
-            """,
+                }
+                """,
                 """
- using System;
+                using System;
 
- interface IIncrementable
- {
-     int Value { get; }
-     void Increment();
- }
+                interface IIncrementable
+                {
+                int Value { get; }
+                void Increment();
+                }
 
- struct S : IIncrementable
- {
-     public int Value { get; private set; }
-     public void Increment() { Value++; }
- }
+                struct S : IIncrementable
+                {
+                public int Value { get; private set; }
+                public void Increment() { Value++; }
+                }
 
- class C: IIncrementable
- {
-     public int Value { get; private set; }
-     public void Increment() { Value++; }
- }
+                class C: IIncrementable
+                {
+                public int Value { get; private set; }
+                public void Increment() { Value++; }
+                }
 
- static class Program
- {
-     static void Main()
-     {
-         Goo(new S(), new C());
-     }
+                static class Program
+                {
+                static void Main()
+                {
+                Goo(new S(), new C());
+                }
 
-     static void Goo<TAny, TClass>(TAny x, TClass y) 
-         where TAny : IIncrementable
-         where TClass : class, IIncrementable
-     {
-         ((IIncrementable)x).Increment(); // False Unnecessary Cast
-         y.Increment(); // Unnecessary Cast - OK
+                static void Goo<TAny, TClass>(TAny x, TClass y)
+                where TAny : IIncrementable
+                where TClass : class, IIncrementable
+                {
+                ((IIncrementable)x).Increment(); // False Unnecessary Cast
+                y.Increment(); // Unnecessary Cast - OK
 
-         Console.WriteLine(x.Value);
-         Console.WriteLine(y.Value);
-     }
- }
- """
+                Console.WriteLine(x.Value);
+                Console.WriteLine(y.Value);
+                }
+                }
+                """
             );
         }
 
@@ -1163,15 +1163,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class A
                 {
-                    static void Main()
-                    {
-                        string
-                        Goo(x => 1, [|"" as string|]);
-                    }
+                static void Main()
+                {
+                string
+                Goo(x => 1, [|"" as string|]);
+                }
 
-                    static void Goo<T, S>(T x, )
-                    {
-                    }
+                static void Goo<T, S>(T x, )
+                {
+                }
                 }
                 """,
                 """
@@ -1179,15 +1179,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class A
                 {
-                    static void Main()
-                    {
-                        string
-                        Goo(x => 1, "");
-                    }
+                static void Main()
+                {
+                string
+                Goo(x => 1, "");
+                }
 
-                    static void Goo<T, S>(T x, )
-                    {
-                    }
+                static void Goo<T, S>(T x, )
+                {
+                }
                 }
                 """
             );
@@ -1198,25 +1198,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await TestInRegularAndScriptAsync(
                 """
-            class X
-            {
+                class X
+                {
                 static void Goo()
                 {
-                    object x = (string)null;
-                    object y = [|null as int?|];
+                object x = (string)null;
+                object y = [|null as int?|];
                 }
-            }
-            """,
+                }
+                """,
                 """
-            class X
-            {
+                class X
+                {
                 static void Goo()
                 {
-                    object x = (string)null;
-                    object y = null;
+                object x = (string)null;
+                object y = null;
                 }
-            }
-            """
+                }
+                """
             );
         }
 
@@ -1225,25 +1225,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await TestInRegularAndScriptAsync(
                 """
-            class Program
-            {
+                class Program
+                {
                 static void Main()
                 {
-                    string x = "";
-                    ([|x as string|]).ToString();
+                string x = "";
+                ([|x as string|]).ToString();
                 }
-            }
-            """,
+                }
+                """,
                 """
-            class Program
-            {
+                class Program
+                {
                 static void Main()
                 {
-                    string x = "";
-                    x.ToString();
+                string x = "";
+                x.ToString();
                 }
-            }
-            """
+                }
+                """
             );
         }
 
@@ -1254,12 +1254,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class C
                 {
-                    static void Goo<T>(T x, object y)
-                    {
-                        if (([|x as object|]) == y)
-                        {
-                        }
-                    }
+                static void Goo<T>(T x, object y)
+                {
+                if (([|x as object|]) == y)
+                {
+                }
+                }
                 }
                 """
             );
@@ -1274,12 +1274,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class C
                 {
-                    static void Main()
-                    {
-                        Action x = Console.WriteLine;
-                        Action y = Console.WriteLine;
-                        Console.WriteLine(([|x as MulticastDelegate|]) == y);
-                    }
+                static void Main()
+                {
+                Action x = Console.WriteLine;
+                Action y = Console.WriteLine;
+                Console.WriteLine(([|x as MulticastDelegate|]) == y);
+                }
                 }
                 """
             );
@@ -1294,17 +1294,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class X
                 {
-                    public static implicit operator string(X x)
-                    {
-                        return x.ToString();
-                    }
+                public static implicit operator string(X x)
+                {
+                return x.ToString();
+                }
 
-                    static void Main()
-                    {
-                        bool b = true;
-                        X x = new X();
-                        Console.WriteLine(b ? [|null as string|] : x);
-                    }
+                static void Main()
+                {
+                bool b = true;
+                X x = new X();
+                Console.WriteLine(b ? [|null as string|] : x);
+                }
                 }
                 """
             );
@@ -1321,15 +1321,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class C
                 {
-                    C(string x) { }
-                    C() : this([|"" as string|]) { }
+                C(string x) { }
+                C() : this([|"" as string|]) { }
                 }
                 """,
                 """
                 class C
                 {
-                    C(string x) { }
-                    C() : this("") { }
+                C(string x) { }
+                C() : this("") { }
                 }
                 """
             );
@@ -1348,9 +1348,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class C
                 {
-                    C(int x) { }
-                    C(object x) { }
-                    C() : this([|"" as IEnumerable|]) { }
+                C(int x) { }
+                C(object x) { }
+                C() : this([|"" as IEnumerable|]) { }
                 }
                 """,
                 """
@@ -1358,9 +1358,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class C
                 {
-                    C(int x) { }
-                    C(object x) { }
-                    C() : this("") { }
+                C(int x) { }
+                C(object x) { }
+                C() : this("") { }
                 }
                 """
             );
@@ -1373,13 +1373,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class C
                 {
-                    C(string x)
-                    {
-                    }
+                C(string x)
+                {
+                }
 
-                    C() : this([|"" as object|])
-                    {
-                    }
+                C() : this([|"" as object|])
+                {
+                }
                 }
                 """
             );
@@ -1392,23 +1392,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 static class C
                 {
-                    static void Main()
-                    {
-                        int? x = 1;
-                        long y = 2;
-                        long? z = x + ([|y as long?|]);
-                    }
+                static void Main()
+                {
+                int? x = 1;
+                long y = 2;
+                long? z = x + ([|y as long?|]);
+                }
                 }
                 """,
                 """
                 static class C
                 {
-                    static void Main()
-                    {
-                        int? x = 1;
-                        long y = 2;
-                        long? z = x + y;
-                    }
+                static void Main()
+                {
+                int? x = 1;
+                long y = 2;
+                long? z = x + y;
+                }
                 }
                 """
             );
@@ -1423,11 +1423,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class Program
                 {
-                    static void Main()
-                    {
-                        object x = "";
-                        Console.WriteLine(x == ([|"" as object|]));
-                    }
+                static void Main()
+                {
+                object x = "";
+                Console.WriteLine(x == ([|"" as object|]));
+                }
                 }
                 """
             );
@@ -1444,10 +1444,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class Program
                 {
-                    static void Main()
-                    {
-                        ([|x as IDisposable|]).Dispose();
-                    }
+                static void Main()
+                {
+                ([|x as IDisposable|]).Dispose();
+                }
                 }
                 """
             );
@@ -1463,7 +1463,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 unsafe class C
                 {
-                    int x = *([|null as int*|]);
+                int x = *([|null as int*|]);
                 }
                 """
             );
@@ -1479,11 +1479,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 unsafe class C
                 {
-                    static void Main()
-                    {
-                        void* p = null;
-                        int x = *([|p as int*|]);
-                    }
+                static void Main()
+                {
+                void* p = null;
+                int x = *([|p as int*|]);
+                }
                 }
                 """
             );
@@ -1496,10 +1496,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class C
                 {
-                    object M1(bool b)
-                    {
-                        return [|b ? (1 as byte?) : (0 as byte?)|];
-                    }
+                object M1(bool b)
+                {
+                return [|b ? (1 as byte?) : (0 as byte?)|];
+                }
                 }
                 """,
                 new TestParameters(
@@ -1517,10 +1517,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class C
                 {
-                    object M1(bool b)
-                    {
-                        return [|b ? (1 as byte?) : (0 as byte?)|];
-                    }
+                object M1(bool b)
+                {
+                return [|b ? (1 as byte?) : (0 as byte?)|];
+                }
                 }
                 """,
                 new TestParameters(
@@ -1544,24 +1544,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class X : IDisposable
                 {
-                    static void Main()
-                    {
-                        X x = new Y();
-                        ([|x as IDisposable|]).Dispose();
-                    }
+                static void Main()
+                {
+                X x = new Y();
+                ([|x as IDisposable|]).Dispose();
+                }
 
-                    public void Dispose()
-                    {
-                        Console.WriteLine("X.Dispose");
-                    }
+                public void Dispose()
+                {
+                Console.WriteLine("X.Dispose");
+                }
                 }
 
                 class Y : X, IDisposable
                 {
-                    void IDisposable.Dispose()
-                    {
-                        Console.WriteLine("Y.Dispose");
-                    }
+                void IDisposable.Dispose()
+                {
+                Console.WriteLine("Y.Dispose");
+                }
                 }
                 """
             );
@@ -1576,20 +1576,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 interface I
                 {
-                    void Goo(int x = 0);
+                void Goo(int x = 0);
                 }
 
                 sealed class C : I
                 {
-                    public void Goo(int x = 0)
-                    {
-                        Console.WriteLine(x);
-                    }
+                public void Goo(int x = 0)
+                {
+                Console.WriteLine(x);
+                }
 
-                    static void Main()
-                    {
-                        ([|new C() as I|]).Goo();
-                    }
+                static void Main()
+                {
+                ([|new C() as I|]).Goo();
+                }
                 }
                 """,
                 """
@@ -1597,20 +1597,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 interface I
                 {
-                    void Goo(int x = 0);
+                void Goo(int x = 0);
                 }
 
                 sealed class C : I
                 {
-                    public void Goo(int x = 0)
-                    {
-                        Console.WriteLine(x);
-                    }
+                public void Goo(int x = 0)
+                {
+                Console.WriteLine(x);
+                }
 
-                    static void Main()
-                    {
-                        new C().Goo();
-                    }
+                static void Main()
+                {
+                new C().Goo();
+                }
                 }
                 """
             );
@@ -1625,23 +1625,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 interface I
                 {
-                    string Goo { get; }
+                string Goo { get; }
                 }
 
                 sealed class C : I
                 {
-                    public string Goo
-                    {
-                        get
-                        {
-                            return "Nikov Rules";
-                        }
-                    }
+                public string Goo
+                {
+                get
+                {
+                return "Nikov Rules";
+                }
+                }
 
-                    static void Main()
-                    {
-                        Console.WriteLine(([|new C() as I|]).Goo);
-                    }
+                static void Main()
+                {
+                Console.WriteLine(([|new C() as I|]).Goo);
+                }
                 }
                 """,
                 """
@@ -1649,23 +1649,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 interface I
                 {
-                    string Goo { get; }
+                string Goo { get; }
                 }
 
                 sealed class C : I
                 {
-                    public string Goo
-                    {
-                        get
-                        {
-                            return "Nikov Rules";
-                        }
-                    }
+                public string Goo
+                {
+                get
+                {
+                return "Nikov Rules";
+                }
+                }
 
-                    static void Main()
-                    {
-                        Console.WriteLine(new C().Goo);
-                    }
+                static void Main()
+                {
+                Console.WriteLine(new C().Goo);
+                }
                 }
                 """
             );
@@ -1680,25 +1680,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 interface I
                 {
-                    string Goo { get; }
+                string Goo { get; }
                 }
 
                 sealed class C : I
                 {
-                    public C Instance { get { return new C(); } }
+                public C Instance { get { return new C(); } }
 
-                    public string Goo
-                    {
-                        get
-                        {
-                            return "Nikov Rules";
-                        }
-                    }
+                public string Goo
+                {
+                get
+                {
+                return "Nikov Rules";
+                }
+                }
 
-                    static void Main()
-                    {
-                        Console.WriteLine(([|Instance as I|]).Goo);
-                    }
+                static void Main()
+                {
+                Console.WriteLine(([|Instance as I|]).Goo);
+                }
                 }
                 """
             );
@@ -1716,20 +1716,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 interface I
                 {
-                    void Goo(int x = 0);
+                void Goo(int x = 0);
                 }
 
                 sealed class C : I
                 {
-                    public void Goo(int x = 1)
-                    {
-                        Console.WriteLine(x);
-                    }
+                public void Goo(int x = 1)
+                {
+                Console.WriteLine(x);
+                }
 
-                    static void Main()
-                    {
-                        ([|new C() as I|]).Goo();
-                    }
+                static void Main()
+                {
+                ([|new C() as I|]).Goo();
+                }
                 }
                 """
             );
@@ -1744,20 +1744,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 interface I
                 {
-                    void Goo(int x = 0);
+                void Goo(int x = 0);
                 }
 
                 sealed class C : I
                 {
-                    public void Goo(int x = 1)
-                    {
-                        Console.WriteLine(x);
-                    }
+                public void Goo(int x = 1)
+                {
+                Console.WriteLine(x);
+                }
 
-                    static void Main()
-                    {
-                        ([|new C() as I|]).Goo(2);
-                    }
+                static void Main()
+                {
+                ([|new C() as I|]).Goo(2);
+                }
                 }
                 """,
                 """
@@ -1765,20 +1765,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 interface I
                 {
-                    void Goo(int x = 0);
+                void Goo(int x = 0);
                 }
 
                 sealed class C : I
                 {
-                    public void Goo(int x = 1)
-                    {
-                        Console.WriteLine(x);
-                    }
+                public void Goo(int x = 1)
+                {
+                Console.WriteLine(x);
+                }
 
-                    static void Main()
-                    {
-                        new C().Goo(2);
-                    }
+                static void Main()
+                {
+                new C().Goo(2);
+                }
                 }
                 """
             );
@@ -1797,20 +1797,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 interface I
                 {
-                    void Goo(int x = 0, int y = 0);
+                void Goo(int x = 0, int y = 0);
                 }
 
                 sealed class C : I
                 {
-                    public void Goo(int y = 0, int x = 0)
-                    {
-                        Console.WriteLine(x);
-                    }
+                public void Goo(int y = 0, int x = 0)
+                {
+                Console.WriteLine(x);
+                }
 
-                    static void Main()
-                    {
-                        ([|new C() as I|]).Goo(x: 1);
-                    }
+                static void Main()
+                {
+                ([|new C() as I|]).Goo(x: 1);
+                }
                 }
                 """
             );
@@ -1825,23 +1825,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 interface I
                 {
-                    int this[int x = 0, int y = 0] { get; }
+                int this[int x = 0, int y = 0] { get; }
                 }
 
                 sealed class C : I
                 {
-                    public int this[int x = 0, int y = 0]
-                    {
-                        get
-                        {
-                            return x * 2;
-                        }
-                    }
+                public int this[int x = 0, int y = 0]
+                {
+                get
+                {
+                return x * 2;
+                }
+                }
 
-                    static void Main()
-                    {
-                        Console.WriteLine(([|new C() as I|])[x: 1]);
-                    }
+                static void Main()
+                {
+                Console.WriteLine(([|new C() as I|])[x: 1]);
+                }
                 }
                 """
             );
@@ -1860,23 +1860,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 interface I
                 {
-                    int this[int x = 0, int y = 0] { get; }
+                int this[int x = 0, int y = 0] { get; }
                 }
 
                 sealed class C : I
                 {
-                    public int this(int y = 0, int x = 0)
-                    {
-                        get
-                        {
-                            return x * 2;
-                        }
-                    }
+                public int this(int y = 0, int x = 0)
+                {
+                get
+                {
+                return x * 2;
+                }
+                }
 
-                    static void Main()
-                    {
-                        Console.WriteLine(([|new C() as I|])[x: 1]);
-                    }
+                static void Main()
+                {
+                Console.WriteLine(([|new C() as I|])[x: 1]);
+                }
                 }
                 """
             );
@@ -1896,16 +1896,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 sealed class C : MemoryStream
                 {
-                    static void Main()
-                    {
-                        C s = new C();
-                        ([|s as IDisposable|]).Dispose();
-                    }
+                static void Main()
+                {
+                C s = new C();
+                ([|s as IDisposable|]).Dispose();
+                }
 
-                    new public void Dispose()
-                    {
-                        Console.WriteLine("new Dispose()");
-                    }
+                new public void Dispose()
+                {
+                Console.WriteLine("new Dispose()");
+                }
                 }
                 """
             );
@@ -1923,26 +1923,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 interface IIncrementable
                 {
-                    int Value { get; }
+                int Value { get; }
 
-                    void Increment();
+                void Increment();
                 }
 
                 struct S : IIncrementable
                 {
-                    public int Value { get; private set; }
+                public int Value { get; private set; }
 
-                    public void Increment()
-                    {
-                        Value++;
-                    }
+                public void Increment()
+                {
+                Value++;
+                }
 
-                    static void Main()
-                    {
-                        var s = new S();
-                        ([|s as IIncrementable|]).Increment();
-                        Console.WriteLine(s.Value);
-                    }
+                static void Main()
+                {
+                var s = new S();
+                ([|s as IIncrementable|]).Increment();
+                Console.WriteLine(s.Value);
+                }
                 }
                 """
             );
@@ -1956,41 +1956,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
             await TestInRegularAndScriptAsync(
                 """
-            using System;
-            using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-            class Program
-            {
+                class Program
+                {
                 static void Main()
                 {
-                    ([|GetEnumerator() as IDisposable|]).Dispose();
+                ([|GetEnumerator() as IDisposable|]).Dispose();
                 }
 
                 static List<int>.Enumerator GetEnumerator()
                 {
-                    var x = new List<int> { 1, 2, 3 };
-                    return x.GetEnumerator();
+                var x = new List<int> { 1, 2, 3 };
+                return x.GetEnumerator();
                 }
-            }
-            """,
+                }
+                """,
                 """
-            using System;
-            using System.Collections.Generic;
+                using System;
+                using System.Collections.Generic;
 
-            class Program
-            {
+                class Program
+                {
                 static void Main()
                 {
-                    GetEnumerator().Dispose();
+                GetEnumerator().Dispose();
                 }
 
                 static List<int>.Enumerator GetEnumerator()
                 {
-                    var x = new List<int> { 1, 2, 3 };
-                    return x.GetEnumerator();
+                var x = new List<int> { 1, 2, 3 };
+                return x.GetEnumerator();
                 }
-            }
-            """
+                }
+                """
             );
         }
 
@@ -2002,29 +2002,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
             await TestInRegularAndScriptAsync(
                 """
-            using System;
+                using System;
 
-            class C
-            {
+                class C
+                {
                 static void Main()
                 {
-                    Action a = () => { };
-                    var c = ([|a as ICloneable|]).Clone();
+                Action a = () => { };
+                var c = ([|a as ICloneable|]).Clone();
                 }
-            }
-            """,
+                }
+                """,
                 """
-            using System;
+                using System;
 
-            class C
-            {
+                class C
+                {
                 static void Main()
                 {
-                    Action a = () => { };
-                    var c = a.Clone();
+                Action a = () => { };
+                var c = a.Clone();
                 }
-            }
-            """
+                }
+                """
             );
         }
 
@@ -2036,29 +2036,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
             await TestInRegularAndScriptAsync(
                 """
-            using System;
+                using System;
 
-            class C
-            {
+                class C
+                {
                 static void Main()
                 {
-                    var a = new[] { 1, 2, 3 };
-                    var c = ([|a as ICloneable|]).Clone(); 
+                var a = new[] { 1, 2, 3 };
+                var c = ([|a as ICloneable|]).Clone();
                 }
-            }
-            """,
+                }
+                """,
                 """
-            using System;
+                using System;
 
-            class C
-            {
+                class C
+                {
                 static void Main()
                 {
-                    var a = new[] { 1, 2, 3 };
-                    var c = a.Clone(); 
+                var a = new[] { 1, 2, 3 };
+                var c = a.Clone();
                 }
-            }
-            """
+                }
+                """
             );
         }
 
@@ -2070,29 +2070,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
             await TestInRegularAndScriptAsync(
                 """
-            using System;
+                using System;
 
-            class Program
-            {
+                class Program
+                {
                 static void Main()
                 {
-                    Enum e = DayOfWeek.Monday;
-                    var y = ([|e as IConvertible|]).GetTypeCode();
+                Enum e = DayOfWeek.Monday;
+                var y = ([|e as IConvertible|]).GetTypeCode();
                 }
-            }
-            """,
+                }
+                """,
                 """
-            using System;
+                using System;
 
-            class Program
-            {
+                class Program
+                {
                 static void Main()
                 {
-                    Enum e = DayOfWeek.Monday;
-                    var y = e.GetTypeCode();
+                Enum e = DayOfWeek.Monday;
+                var y = e.GetTypeCode();
                 }
-            }
-            """
+                }
+                """
             );
         }
 
@@ -2109,15 +2109,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class C
                 {
-                    static void Main()
-                    {
-                        Goo([|null as object|]);
-                    }
+                static void Main()
+                {
+                Goo([|null as object|]);
+                }
 
-                    static void Goo(params object[] x)
-                    {
-                        Console.WriteLine(x.Length);
-                    }
+                static void Goo(params object[] x)
+                {
+                Console.WriteLine(x.Length);
+                }
                 }
                 """
             );
@@ -2132,15 +2132,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class C
                 {
-                    static void Main()
-                    {
-                        Goo([|null as int[]|]);
-                    }
+                static void Main()
+                {
+                Goo([|null as int[]|]);
+                }
 
-                    static void Goo(params object[] x)
-                    {
-                        Console.WriteLine(x.Length);
-                    }
+                static void Goo(params object[] x)
+                {
+                Console.WriteLine(x.Length);
+                }
                 }
                 """
             );
@@ -2155,15 +2155,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class C
                 {
-                    static void Main()
-                    {
-                        Goo([|null as object[]|]);
-                    }
+                static void Main()
+                {
+                Goo([|null as object[]|]);
+                }
 
-                    static void Goo(params object[][] x)
-                    {
-                        Console.WriteLine(x.Length);
-                    }
+                static void Goo(params object[][] x)
+                {
+                Console.WriteLine(x.Length);
+                }
                 }
                 """
             );
@@ -2174,27 +2174,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await TestInRegularAndScriptAsync(
                 """
-            class C
-            {
+                class C
+                {
                 static void Goo(params object[] x) { }
 
                 static void Main()
                 {
-                    Goo([|null as object[]|]);
+                Goo([|null as object[]|]);
                 }
-            }
-            """,
+                }
+                """,
                 """
-            class C
-            {
+                class C
+                {
                 static void Goo(params object[] x) { }
 
                 static void Main()
                 {
-                    Goo(null);
+                Goo(null);
                 }
-            }
-            """
+                }
+                """
             );
         }
 
@@ -2203,27 +2203,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await TestInRegularAndScriptAsync(
                 """
-            class C
-            {
+                class C
+                {
                 static void Goo(params object[] x) { }
 
                 static void Main()
                 {
-                    Goo([|null as string[]|]);
+                Goo([|null as string[]|]);
                 }
-            }
-            """,
+                }
+                """,
                 """
-            class C
-            {
+                class C
+                {
                 static void Goo(params object[] x) { }
 
                 static void Main()
                 {
-                    Goo(null);
+                Goo(null);
                 }
-            }
-            """
+                }
+                """
             );
         }
 
@@ -2232,27 +2232,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await TestInRegularAndScriptAsync(
                 """
-            class C
-            {
+                class C
+                {
                 static void Goo(params int[] x) { }
 
                 static void Main()
                 {
-                    Goo([|null as int[]|]);
+                Goo([|null as int[]|]);
                 }
-            }
-            """,
+                }
+                """,
                 """
-            class C
-            {
+                class C
+                {
                 static void Goo(params int[] x) { }
 
                 static void Main()
                 {
-                    Goo(null);
+                Goo(null);
                 }
-            }
-            """
+                }
+                """
             );
         }
 
@@ -2261,27 +2261,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await TestInRegularAndScriptAsync(
                 """
-            class C
-            {
+                class C
+                {
                 static void Goo(params object[] x) { }
 
                 static void Main()
                 {
-                    Goo([|null as object[]|], null);
+                Goo([|null as object[]|], null);
                 }
-            }
-            """,
+                }
+                """,
                 """
-            class C
-            {
+                class C
+                {
                 static void Goo(params object[] x) { }
 
                 static void Main()
                 {
-                    Goo(null, null);
+                Goo(null, null);
                 }
-            }
-            """
+                }
+                """
             );
         }
 
@@ -2290,27 +2290,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
         {
             await TestInRegularAndScriptAsync(
                 """
-            class C
-            {
+                class C
+                {
                 static void Goo(params object[] x) { }
 
                 static void Main()
                 {
-                    Goo([|null as object|], null);
+                Goo([|null as object|], null);
                 }
-            }
-            """,
+                }
+                """,
                 """
-            class C
-            {
+                class C
+                {
                 static void Goo(params object[] x) { }
 
                 static void Main()
                 {
-                    Goo(null, null);
+                Goo(null, null);
                 }
-            }
-            """
+                }
+                """
             );
         }
 
@@ -2321,23 +2321,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class C
                 {
-                    static void Main()
-                    {
-                        Goo(x: [|null as object[]|]);
-                    }
+                static void Main()
+                {
+                Goo(x: [|null as object[]|]);
+                }
 
-                    static void Goo(params object[] x) { }
+                static void Goo(params object[] x) { }
                 }
                 """,
                 """
                 class C
                 {
-                    static void Main()
-                    {
-                        Goo(x: null);
-                    }
+                static void Main()
+                {
+                Goo(x: null);
+                }
 
-                    static void Goo(params object[] x) { }
+                static void Goo(params object[] x) { }
                 }
                 """
             );
@@ -2359,13 +2359,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class Program
                 {
-                    static void Main()
-                    {
-                        object s = ";
-                        foreach (object x in [|s as IEnumerable|])
-                        {
-                        }
-                    }
+                static void Main()
+                {
+                object s = ";
+                foreach (object x in [|s as IEnumerable|])
+                {
+                }
+                }
                 }
                 """
             );
@@ -2383,13 +2383,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class Program
                 {
-                    static void Main()
-                    {
-                        object s = ";
-                        foreach (object x in [|s as IEnumerable<char>|])
-                        {
-                        }
-                    }
+                static void Main()
+                {
+                object s = ";
+                foreach (object x in [|s as IEnumerable<char>|])
+                {
+                }
+                }
                 }
                 """
             );
@@ -2408,26 +2408,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class D
                 {
-                    public IEnumerator GetEnumerator()
-                    {
-                        yield return 1;
-                    }
+                public IEnumerator GetEnumerator()
+                {
+                yield return 1;
+                }
                 }
 
                 class C
                 {
-                    public static implicit operator D(C c)
-                    {
-                        return new D();
-                    }
+                public static implicit operator D(C c)
+                {
+                return new D();
+                }
 
-                    static void Main()
-                    {
-                        object s = ";
-                        foreach (object x in [|new C() as D|])
-                        {
-                        }
-                    }
+                static void Main()
+                {
+                object s = ";
+                foreach (object x in [|new C() as D|])
+                {
+                }
+                }
                 }
                 """
             );
@@ -2446,32 +2446,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class D
                 {
-                    public IEnumerator GetEnumerator()
-                    {
-                        yield return 1;
-                    }
+                public IEnumerator GetEnumerator()
+                {
+                yield return 1;
+                }
                 }
 
                 class C
                 {
-                    public IEnumerator GetEnumerator()
-                    {
-                        yield return 2;
-                    }
+                public IEnumerator GetEnumerator()
+                {
+                yield return 2;
+                }
 
-                    public static implicit operator D(C c)
-                    {
-                        return new D();
-                    }
+                public static implicit operator D(C c)
+                {
+                return new D();
+                }
 
-                    static void Main()
-                    {
-                        object s = ";
-                        foreach (object x in [|new C() as D|])
-                        {
-                            Console.WriteLine(x);
-                        }
-                    }
+                static void Main()
+                {
+                object s = ";
+                foreach (object x in [|new C() as D|])
+                {
+                Console.WriteLine(x);
+                }
+                }
                 }
                 """
             );
@@ -2489,17 +2489,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class Program
                 {
-                    static void Main()
-                    {
-                        string[] s = {
-                            "A"
-                        };
-                        foreach (var x in [|s as Array|])
-                        {
-                            var y = x;
-                            y = 1;
-                        }
-                    }
+                static void Main()
+                {
+                string[] s = {
+                "A"
+                };
+                foreach (var x in [|s as Array|])
+                {
+                var y = x;
+                y = 1;
+                }
+                }
                 }
                 """
             );
@@ -2519,20 +2519,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 abstract class Y
                 {
-                    public abstract void Goo(int x = 1);
+                public abstract void Goo(int x = 1);
                 }
 
                 class X : Y
                 {
-                    static void Main()
-                    {
-                        ([|new X() as Y|]).Goo();
-                    }
+                static void Main()
+                {
+                ([|new X() as Y|]).Goo();
+                }
 
-                    public override void Goo(int x = 2)
-                    {
-                        Console.WriteLine(x);
-                    }
+                public override void Goo(int x = 2)
+                {
+                Console.WriteLine(x);
+                }
                 }
                 """
             );
@@ -2550,20 +2550,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 abstract class Y
                 {
-                    public abstract void Goo(int x = 1);
+                public abstract void Goo(int x = 1);
                 }
 
                 class X : Y
                 {
-                    static void Main()
-                    {
-                        ([|new X() as Y|]).Goo();
-                    }
+                static void Main()
+                {
+                ([|new X() as Y|]).Goo();
+                }
 
-                    public override void Goo(int x = 1)
-                    {
-                        Console.WriteLine(x);
-                    }
+                public override void Goo(int x = 1)
+                {
+                Console.WriteLine(x);
+                }
                 }
                 """,
                 """
@@ -2571,20 +2571,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 abstract class Y
                 {
-                    public abstract void Goo(int x = 1);
+                public abstract void Goo(int x = 1);
                 }
 
                 class X : Y
                 {
-                    static void Main()
-                    {
-                        new X().Goo();
-                    }
+                static void Main()
+                {
+                new X().Goo();
+                }
 
-                    public override void Goo(int x = 1)
-                    {
-                        Console.WriteLine(x);
-                    }
+                public override void Goo(int x = 1)
+                {
+                Console.WriteLine(x);
+                }
                 }
                 """
             );
@@ -2602,12 +2602,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 static class Program
                 {
-                    static void Main()
-                    {
-                        Action a = ([|"" as string|]).Goo;
-                    }
+                static void Main()
+                {
+                Action a = ([|"" as string|]).Goo;
+                }
 
-                    static void Goo(this string x) { }
+                static void Goo(this string x) { }
                 }
                 """,
                 """
@@ -2615,12 +2615,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 static class Program
                 {
-                    static void Main()
-                    {
-                        Action a = "".Goo;
-                    }
+                static void Main()
+                {
+                Action a = "".Goo;
+                }
 
-                    static void Goo(this string x) { }
+                static void Goo(this string x) { }
                 }
                 """
             );
@@ -2636,16 +2636,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class Program
                 {
-                    static void Main()
-                    {
-                        Goo().Wait();
-                    }
+                static void Main()
+                {
+                Goo().Wait();
+                }
 
-                    static async Task Goo()
-                    {
-                        Task task = Task.FromResult(0);
-                        Console.WriteLine(await ([|task as dynamic|]));
-                    }
+                static async Task Goo()
+                {
+                Task task = Task.FromResult(0);
+                Console.WriteLine(await ([|task as dynamic|]));
+                }
                 }
                 """
             );
@@ -2661,19 +2661,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                    }
+                static void Main(string[] args)
+                {
+                }
 
-                    static void v(dynamic x)
-                    {
-                        var y = default(TypedReference);
-                        dd([|x as object|], y);
-                    }
+                static void v(dynamic x)
+                {
+                var y = default(TypedReference);
+                dd([|x as object|], y);
+                }
 
-                    static void dd(object obj, TypedReference d)
-                    {
-                    }
+                static void dd(object obj, TypedReference d)
+                {
+                }
                 }
                 """
             );
@@ -2688,27 +2688,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class Program
                 {
-                    static void Main()
-                    {
-                        C<string>.InvokeGoo(0);
-                    }
+                static void Main()
+                {
+                C<string>.InvokeGoo(0);
+                }
                 }
 
                 class C<T>
                 {
-                    public static void InvokeGoo(dynamic x)
-                    {
-                        Console.WriteLine(Goo(x, [|"" as object|], ""));
-                    }
+                public static void InvokeGoo(dynamic x)
+                {
+                Console.WriteLine(Goo(x, [|"" as object|], ""));
+                }
 
-                    static void Goo(int x, string y, T z)
-                    {
-                    }
+                static void Goo(int x, string y, T z)
+                {
+                }
 
-                    static bool Goo(int x, object y, object z)
-                    {
-                        return true;
-                    }
+                static bool Goo(int x, object y, object z)
+                {
+                return true;
+                }
                 }
                 """
             );
@@ -2721,34 +2721,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class C<T>
                 {
-                    int this[int x, T s, string d = "abc"]
-                    {
-                        get
-                        {
-                            return 0;
-                        }
+                int this[int x, T s, string d = "abc"]
+                {
+                get
+                {
+                return 0;
+                }
 
-                        set
-                        {
-                        }
-                    }
+                set
+                {
+                }
+                }
 
-                    int this[int x, object s, object d]
-                    {
-                        get
-                        {
-                            return 0;
-                        }
+                int this[int x, object s, object d]
+                {
+                get
+                {
+                return 0;
+                }
 
-                        set
-                        {
-                        }
-                    }
+                set
+                {
+                }
+                }
 
-                    void Goo(dynamic xx)
-                    {
-                        var y = this[x: xx, s: "", d: [|"" as object|]];
-                    }
+                void Goo(dynamic xx)
+                {
+                var y = this[x: xx, s: "", d: [|"" as object|]];
+                }
                 }
                 """
             );
@@ -2761,11 +2761,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class C
                 {
-                    static bool Goo(dynamic d)
-                    {
-                        d([|"" as object|]);
-                        return true;
-                    }
+                static bool Goo(dynamic d)
+                {
+                d([|"" as object|]);
+                return true;
+                }
                 }
                 """
             );
@@ -2778,11 +2778,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class C
                 {
-                    static bool Goo(dynamic d)
-                    {
-                        d.goo([|"" as object|]);
-                        return true;
-                    }
+                static bool Goo(dynamic d)
+                {
+                d.goo([|"" as object|]);
+                return true;
+                }
                 }
                 """
             );
@@ -2795,11 +2795,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class C
                 {
-                    static bool Goo(dynamic d)
-                    {
-                        d.goo.bar.goo([|"" as object|]);
-                        return true;
-                    }
+                static bool Goo(dynamic d)
+                {
+                d.goo.bar.goo([|"" as object|]);
+                return true;
+                }
                 }
                 """
             );
@@ -2812,11 +2812,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class C
                 {
-                    static bool Goo(dynamic d)
-                    {
-                        d.goo().bar().goo([|"" as object|]);
-                        return true;
-                    }
+                static bool Goo(dynamic d)
+                {
+                d.goo().bar().goo([|"" as object|]);
+                return true;
+                }
                 }
                 """
             );
@@ -2831,27 +2831,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class Program
                 {
-                    static void Main()
-                    {
-                        C<string>.InvokeGoo(0);
-                    }
+                static void Main()
+                {
+                C<string>.InvokeGoo(0);
+                }
                 }
 
                 class C<T>
                 {
-                    public static void InvokeGoo(dynamic x)
-                    {
-                        Console.WriteLine(Goo([|"" as object|], x, ""));
-                    }
+                public static void InvokeGoo(dynamic x)
+                {
+                Console.WriteLine(Goo([|"" as object|], x, ""));
+                }
 
-                    static void Goo(string y, int x, T z)
-                    {
-                    }
+                static void Goo(string y, int x, T z)
+                {
+                }
 
-                    static bool Goo(object y, int x, object z)
-                    {
-                        return true;
-                    }
+                static bool Goo(object y, int x, object z)
+                {
+                return true;
+                }
                 }
                 """
             );
@@ -2864,12 +2864,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class C
                 {
-                    static void Goo<T>(T x, object y)
-                    {
-                        if (([|x as object|]) == y)
-                        {
-                        }
-                    }
+                static void Goo<T>(T x, object y)
+                {
+                if (([|x as object|]) == y)
+                {
+                }
+                }
                 }
                 """
             );
@@ -2885,10 +2885,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class C
                 {
-                    void Goo(Task<Action> x)
-                    {
-                        (([|x as Task<Action>|]).Result)();
-                    }
+                void Goo(Task<Action> x)
+                {
+                (([|x as Task<Action>|]).Result)();
+                }
                 }
                 """,
                 """
@@ -2897,10 +2897,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class C
                 {
-                    void Goo(Task<Action> x)
-                    {
-                        (x.Result)();
-                    }
+                void Goo(Task<Action> x)
+                {
+                (x.Result)();
+                }
                 }
                 """
             );
@@ -2913,19 +2913,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        B bar = new B();
-                        A a = [|bar as A|];
-                    }
+                static void Main(string[] args)
+                {
+                B bar = new B();
+                A a = [|bar as A|];
+                }
                 }
 
                 public class A
                 {
-                    public static explicit operator A(B b)
-                    {
-                        return new A();
-                    }
+                public static explicit operator A(B b)
+                {
+                return new A();
+                }
                 }
 
                 public struct B
@@ -2942,26 +2942,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 namespace ConsoleApplication23
                 {
-                    class Program
-                    {
-                        static void Main(string[] args)
-                        {
-                            int goo = 0;
-                            switch ([|goo as E?|])
-                            {
-                                case E.A:
-                                case E.B:
-                                    return;
-                            }
-                        }
-                    }
+                class Program
+                {
+                static void Main(string[] args)
+                {
+                int goo = 0;
+                switch ([|goo as E?|])
+                {
+                case E.A:
+                case E.B:
+                return;
+                }
+                }
+                }
 
-                    enum E
-                    {
-                        A,
-                        B,
-                        C
-                    }
+                enum E
+                {
+                A,
+                B,
+                C
+                }
                 }
                 """
             );
@@ -2975,12 +2975,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        C x = null;
-                        C y = null;
-                        y = [|x as D|];
-                    }
+                static void Main(string[] args)
+                {
+                C x = null;
+                C y = null;
+                y = [|x as D|];
+                }
                 }
 
                 class C
@@ -3003,13 +3003,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class Program
                 {
-                    private static void RequiresCondition<TException>(bool condition, string messageOnFalseCondition) where TException : Exception
-                    {
-                        if (!condition)
-                        {
-                            throw [|Activator.CreateInstance(typeof(TException), messageOnFalseCondition) as TException|];
-                        }
-                    }
+                private static void RequiresCondition<TException>(bool condition, string messageOnFalseCondition) where TException : Exception
+                {
+                if (!condition)
+                {
+                throw [|Activator.CreateInstance(typeof(TException), messageOnFalseCondition) as TException|];
+                }
+                }
                 }
                 """
             );
@@ -3024,13 +3024,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class Program
                 {
-                    private static void RequiresCondition<TException>(bool condition, string messageOnFalseCondition) where TException : ArgumentException
-                    {
-                        if (!condition)
-                        {
-                            throw [|Activator.CreateInstance(typeof(TException), messageOnFalseCondition) as TException|];
-                        }
-                    }
+                private static void RequiresCondition<TException>(bool condition, string messageOnFalseCondition) where TException : ArgumentException
+                {
+                if (!condition)
+                {
+                throw [|Activator.CreateInstance(typeof(TException), messageOnFalseCondition) as TException|];
+                }
+                }
                 }
                 """
             );
@@ -3043,10 +3043,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class Program
                 {
-                    static void Main(object o)
-                    {
-                        object thing = new { shouldBeAString = [|o as string|] };
-                    }
+                static void Main(object o)
+                {
+                object thing = new { shouldBeAString = [|o as string|] };
+                }
                 }
                 """
             );
@@ -3059,19 +3059,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class Program
                 {
-                    static void Main(string o)
-                    {
-                        object thing = new { shouldBeAString = [|o as string|] };
-                    }
+                static void Main(string o)
+                {
+                object thing = new { shouldBeAString = [|o as string|] };
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main(string o)
-                    {
-                        object thing = new { shouldBeAString = o };
-                    }
+                static void Main(string o)
+                {
+                object thing = new { shouldBeAString = o };
+                }
                 }
                 """
             );
@@ -3084,16 +3084,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class Program
                 {
-                    public static void Main(string[] args)
-                    {
-                        var takesArgs = new[] { "Hello", "World" };
-                        TakesParams([|takesArgs as object|]);
-                    }
+                public static void Main(string[] args)
+                {
+                var takesArgs = new[] { "Hello", "World" };
+                TakesParams([|takesArgs as object|]);
+                }
 
-                    private static void TakesParams(params object[] goo)
-                    {
-                        Console.WriteLine(goo.Length);
-                    }
+                private static void TakesParams(params object[] goo)
+                {
+                Console.WriteLine(goo.Length);
+                }
                 }
                 """
             );
@@ -3106,29 +3106,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class Program
                 {
-                    public static void Main(string[] args)
-                    {
-                        TakesParams([|null as string|]);
-                    }
+                public static void Main(string[] args)
+                {
+                TakesParams([|null as string|]);
+                }
 
-                    private static void TakesParams(params string wrongDefined)
-                    {
-                        Console.WriteLine(wrongDefined.Length);
-                    }
+                private static void TakesParams(params string wrongDefined)
+                {
+                Console.WriteLine(wrongDefined.Length);
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    public static void Main(string[] args)
-                    {
-                        TakesParams(null);
-                    }
+                public static void Main(string[] args)
+                {
+                TakesParams(null);
+                }
 
-                    private static void TakesParams(params string wrongDefined)
-                    {
-                        Console.WriteLine(wrongDefined.Length);
-                    }
+                private static void TakesParams(params string wrongDefined)
+                {
+                Console.WriteLine(wrongDefined.Length);
+                }
                 }
                 """
             );
@@ -3141,15 +3141,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class Program
                 {
-                    public static void Main(string[] args)
-                    {
-                        TakesParams([|null as string|]);
-                    }
+                public static void Main(string[] args)
+                {
+                TakesParams([|null as string|]);
+                }
 
-                    private static void TakesParams(params string[] wrongDefined)
-                    {
-                        Console.WriteLine(wrongDefined.Length);
-                    }
+                private static void TakesParams(params string[] wrongDefined)
+                {
+                Console.WriteLine(wrongDefined.Length);
+                }
                 }
                 """
             );
@@ -3162,31 +3162,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class Program
                 {
-                    public static void Main(string[] args)
-                    {
-                        var takesArgs = new[] { "Hello", "World" };
-                        TakesParams([|takesArgs as System.IComparable[]|]);
-                    }
+                public static void Main(string[] args)
+                {
+                var takesArgs = new[] { "Hello", "World" };
+                TakesParams([|takesArgs as System.IComparable[]|]);
+                }
 
-                    private static void TakesParams(params object[] goo)
-                    {
-                        System.Console.WriteLine(goo.Length);
-                    }
+                private static void TakesParams(params object[] goo)
+                {
+                System.Console.WriteLine(goo.Length);
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    public static void Main(string[] args)
-                    {
-                        var takesArgs = new[] { "Hello", "World" };
-                        TakesParams(takesArgs);
-                    }
+                public static void Main(string[] args)
+                {
+                var takesArgs = new[] { "Hello", "World" };
+                TakesParams(takesArgs);
+                }
 
-                    private static void TakesParams(params object[] goo)
-                    {
-                        System.Console.WriteLine(goo.Length);
-                    }
+                private static void TakesParams(params object[] goo)
+                {
+                System.Console.WriteLine(goo.Length);
+                }
                 }
                 """
             );
@@ -3202,19 +3202,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 sealed class MarkAttribute : Attribute
                 {
-                  public readonly string[] Arr;
+                public readonly string[] Arr;
 
-                  public MarkAttribute(params string[] arr)
-                  {
-                    Arr = arr;
-                  }
+                public MarkAttribute(params string[] arr)
+                {
+                Arr = arr;
+                }
                 }
                 [Mark([|null as string|])]   // wrong instance of: IDE0004 Cast is redundant.
                 static class Program
                 {
-                  static void Main()
-                  {
-                  }
+                static void Main()
+                {
+                }
                 }
                 """
             );
@@ -3231,13 +3231,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 static class Program
                 {
-                    static void Main()
-                    {
-                        Dictionary<string, string> Icons = new Dictionary<string, string>
-                        {
-                            [[|"" as string|]] = null,
-                        };
-                    }
+                static void Main()
+                {
+                Dictionary<string, string> Icons = new Dictionary<string, string>
+                {
+                [[|"" as string|]] = null,
+                };
+                }
                 }
                 """,
                 """
@@ -3247,13 +3247,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 static class Program
                 {
-                    static void Main()
-                    {
-                        Dictionary<string, string> Icons = new Dictionary<string, string>
-                        {
-                            [""] = null,
-                        };
-                    }
+                static void Main()
+                {
+                Dictionary<string, string> Icons = new Dictionary<string, string>
+                {
+                [""] = null,
+                };
+                }
                 }
                 """
             );
@@ -3267,13 +3267,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 using System;
                 sealed class MarkAttribute : Attribute
                 {
-                    public MarkAttribute(params string[] arr)
-                    {
-                    }
-                    public int Prop { get; set; }
+                public MarkAttribute(params string[] arr)
+                {
+                }
+                public int Prop { get; set; }
                 }
 
-                [Mark([|null as string|], Prop = 1)] 
+                [Mark([|null as string|], Prop = 1)]
                 static class Program
                 {
                 }
@@ -3289,13 +3289,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 using System;
                 sealed class MarkAttribute : Attribute
                 {
-                    public MarkAttribute(bool otherArg, params string[] arr)
-                    {
-                    }
-                    public int Prop { get; set; }
+                public MarkAttribute(bool otherArg, params string[] arr)
+                {
+                }
+                public int Prop { get; set; }
                 }
 
-                [Mark(true, [|null as string|], Prop = 1)] 
+                [Mark(true, [|null as string|], Prop = 1)]
                 static class Program
                 {
                 }
@@ -3311,10 +3311,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 using System;
                 sealed class MarkAttribute : Attribute
                 {
-                    public MarkAttribute(bool otherArg, params string[] arr)
-                    {
-                    }
-                    public int Prop { get; set; }
+                public MarkAttribute(bool otherArg, params string[] arr)
+                {
+                }
+                public int Prop { get; set; }
                 }
 
                 [Mark(arr: [|null as string|], otherArg: true, Prop = 1)]
@@ -3333,10 +3333,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 using System;
                 sealed class MarkAttribute : Attribute
                 {
-                    public MarkAttribute(bool otherArg, params string wrongDefined)
-                    {
-                    }
-                    public int Prop { get; set; }
+                public MarkAttribute(bool otherArg, params string wrongDefined)
+                {
+                }
+                public int Prop { get; set; }
                 }
 
                 [Mark(true, [|null as string|], Prop = 1)]
@@ -3348,10 +3348,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 using System;
                 sealed class MarkAttribute : Attribute
                 {
-                    public MarkAttribute(bool otherArg, params string wrongDefined)
-                    {
-                    }
-                    public int Prop { get; set; }
+                public MarkAttribute(bool otherArg, params string wrongDefined)
+                {
+                }
+                public int Prop { get; set; }
                 }
 
                 [Mark(true, null, Prop = 1)]
@@ -3372,12 +3372,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class MarkAttribute : Attribute
                 {
-                  public readonly string[] Arr;
+                public readonly string[] Arr;
 
-                  public MarkAttribute(params string[] arr)
-                  {
-                    Arr = arr;
-                  }
+                public MarkAttribute(params string[] arr)
+                {
+                Arr = arr;
+                }
                 }
 
                 [Mark([|(string)|]null)]
@@ -3396,10 +3396,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 using System;
                 sealed class MarkAttribute : Attribute
                 {
-                    public MarkAttribute(bool otherArg, params object[] arr)
-                    {
-                    }
-                    public int Prop { get; set; }
+                public MarkAttribute(bool otherArg, params object[] arr)
+                {
+                }
+                public int Prop { get; set; }
                 }
 
                 [Mark(arr: [|new[] { "Hello", "World" } as object[]|], otherArg: true, Prop = 1)]
@@ -3411,10 +3411,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 using System;
                 sealed class MarkAttribute : Attribute
                 {
-                    public MarkAttribute(bool otherArg, params object[] arr)
-                    {
-                    }
-                    public int Prop { get; set; }
+                public MarkAttribute(bool otherArg, params object[] arr)
+                {
+                }
+                public int Prop { get; set; }
                 }
 
                 [Mark(arr: new[] { "Hello", "World" }, otherArg: true, Prop = 1)]
@@ -3432,14 +3432,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class C
                 {
-                    void M()
-                    {
-                        switch ("")
-                        {
-                            case [|default as string|]:
-                                break;
-                        }
-                    }
+                void M()
+                {
+                switch ("")
+                {
+                case [|default as string|]:
+                break;
+                }
+                }
                 }
                 """,
                 parameters: new TestParameters(new CSharpParseOptions(LanguageVersion.CSharp7_1))
@@ -3453,14 +3453,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class C
                 {
-                    void M()
-                    {
-                        switch ("")
-                        {
-                            case ([|default as string|]):
-                                break;
-                        }
-                    }
+                void M()
+                {
+                switch ("")
+                {
+                case ([|default as string|]):
+                break;
+                }
+                }
                 }
                 """,
                 parameters: new TestParameters(new CSharpParseOptions(LanguageVersion.CSharp7_1))
@@ -3474,14 +3474,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 """
                 class C
                 {
-                    void M()
-                    {
-                        switch ("")
-                        {
-                            case [|(default) as string|]:
-                                break;
-                        }
-                    }
+                void M()
+                {
+                switch ("")
+                {
+                case [|(default) as string|]:
+                break;
+                }
+                }
                 }
                 """,
                 parameters: new TestParameters(new CSharpParseOptions(LanguageVersion.CSharp7_1))
@@ -3497,11 +3497,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
                 class C
                 {
-                    void M()
-                    {
-                        object o = null;
-                        TypedReference r2 = [|o as TypedReference|];
-                    }
+                void M()
+                {
+                object o = null;
+                TypedReference r2 = [|o as TypedReference|];
+                }
                 }
                 """
             );
@@ -3515,19 +3515,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
                 using System.Collections.Generic;
                 class Fruit
                 {
-                    public IDictionary<string, object> Properties { get; set; }
+                public IDictionary<string, object> Properties { get; set; }
                 }
                 class Apple : Fruit
                 {
-                    public new IDictionary<string, object> Properties { get; }
+                public new IDictionary<string, object> Properties { get; }
                 }
                 class Tester
                 {
-                    public void Test()
-                    {
-                        var a = new Apple();
-                        ([|a as Fruit|]).Properties["Color"] = "Red";
-                    }
+                public void Test()
+                {
+                var a = new Apple();
+                ([|a as Fruit|]).Properties["Color"] = "Red";
+                }
                 }
                 """
             );

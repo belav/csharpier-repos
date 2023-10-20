@@ -1916,17 +1916,17 @@ class Program
         public void InAsRValue()
         {
             var source = """
-                class C
-                {
-                    static void M(in int x, __arglist) => System.Console.Write(x);
+            class C
+            {
+            static void M(in int x, __arglist) => System.Console.Write(x);
 
-                    static void Main()
-                    {
-                        int x = 111;
-                        M(x, __arglist(x));
-                    }
-                }
-                """;
+            static void Main()
+            {
+            int x = 111;
+            M(x, __arglist(x));
+            }
+            }
+            """;
             CompileAndVerify(source, expectedOutput: "111", verify: Verification.FailsILVerify)
                 .VerifyDiagnostics();
         }

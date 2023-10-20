@@ -9552,11 +9552,11 @@ class C
         public void Parameter_Standalone()
         {
             var source = """
-                class C
-                {
-                    void M(ref int p) { }
-                }
-                """;
+            class C
+            {
+            void M(ref int p) { }
+            }
+            """;
             var comp = CreateCompilation(source);
             var methodSymbol = comp.GetMember<MethodSymbol>("C.M").GetPublicSymbol();
             var parameterSymbol = methodSymbol.Parameters.Single();
@@ -10022,14 +10022,14 @@ class Program
         public void Operator1()
         {
             var source = """
-                class Program
-                {
-                    void M()
-                    {
-                        _ = 1 == 1;
-                    }
-                }
-                """;
+            class Program
+            {
+            void M()
+            {
+            _ = 1 == 1;
+            }
+            }
+            """;
 
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics();

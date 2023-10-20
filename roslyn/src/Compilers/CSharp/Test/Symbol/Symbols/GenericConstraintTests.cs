@@ -9250,12 +9250,12 @@ System.Console.WriteLine(typeof(G).FullName);
         public void ConstraintCycle_NestedTypeFromBase_01()
         {
             var src = """
-#nullable enable
+            #nullable enable
 
-interface ISetup<T> { T Data { get; set; } }
-interface Base { public abstract class Nest { } }
-interface Base<N> : Base, ISetup<N> where N : Base<N>.Nest { }
-""";
+            interface ISetup<T> { T Data { get; set; } }
+            interface Base { public abstract class Nest { } }
+            interface Base<N> : Base, ISetup<N> where N : Base<N>.Nest { }
+            """;
 
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics();
@@ -9275,12 +9275,12 @@ interface Base<N> : Base, ISetup<N> where N : Base<N>.Nest { }
         public void ConstraintCycle_NestedTypeFromBase_02()
         {
             var src = """
-#nullable enable
+            #nullable enable
 
-interface ISetup<T> where T : new() { T Data { get; set; } }
-interface Base { public abstract class Nest { } }
-interface Base<N> : Base, ISetup<N> where N : Base<N>.Nest { }
-""";
+            interface ISetup<T> where T : new() { T Data { get; set; } }
+            interface Base { public abstract class Nest { } }
+            interface Base<N> : Base, ISetup<N> where N : Base<N>.Nest { }
+            """;
 
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics(

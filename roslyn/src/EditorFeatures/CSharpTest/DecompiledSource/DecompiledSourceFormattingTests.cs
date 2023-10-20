@@ -26,21 +26,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DecompiledSource
             await TestAsync(
                 """
                 class C {
-                  void M() {
-                    if (true) {
-                    }
-                  }
+                void M() {
+                if (true) {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        if (true)
-                        {
-                        }
-                    }
+                void M()
+                {
+                if (true)
+                {
+                }
+                }
                 }
                 """
             );
@@ -52,24 +52,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DecompiledSource
             await TestAsync(
                 """
                 class C {
-                  void M() {
-                    if (true) {
-                    }
-                    return;
-                  }
+                void M() {
+                if (true) {
+                }
+                return;
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        if (true)
-                        {
-                        }
+                void M()
+                {
+                if (true)
+                {
+                }
 
-                        return;
-                    }
+                return;
+                }
                 }
                 """
             );
@@ -81,27 +81,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DecompiledSource
             await TestAsync(
                 """
                 class C {
-                  void M() {
-                    if (true) {
-                    } else {
-                    return;
+                void M() {
+                if (true) {
+                } else {
+                return;
                 }
-                  }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        if (true)
-                        {
-                        }
-                        else
-                        {
-                            return;
-                        }
-                    }
+                void M()
+                {
+                if (true)
+                {
+                }
+                else
+                {
+                return;
+                }
+                }
                 }
                 """
             );
@@ -113,29 +113,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DecompiledSource
             await TestAsync(
                 """
                 class C {
-                  void M() {
-                    try {
-                    } catch {
-                    } finally {
-                    }
-                  }
+                void M() {
+                try {
+                } catch {
+                } finally {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        try
-                        {
-                        }
-                        catch
-                        {
-                        }
-                        finally
-                        {
-                        }
-                    }
+                void M()
+                {
+                try
+                {
+                }
+                catch
+                {
+                }
+                finally
+                {
+                }
+                }
                 }
                 """
             );
@@ -147,21 +147,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DecompiledSource
             await TestAsync(
                 """
                 class C {
-                  void M() {
-                    do {
-                    } while(true);
-                  }
+                void M() {
+                do {
+                } while(true);
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        do
-                        {
-                        } while (true);
-                    }
+                void M()
+                {
+                do
+                {
+                } while (true);
+                }
                 }
                 """
             );
@@ -173,26 +173,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DecompiledSource
             await TestAsync(
                 """
                 class C {
-                  void M() {
-                    if (true) {
-                        if (true) {
-                        }
-                    }
-                  }
+                void M() {
+                if (true) {
+                if (true) {
+                }
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        if (true)
-                        {
-                            if (true)
-                            {
-                            }
-                        }
-                    }
+                void M()
+                {
+                if (true)
+                {
+                if (true)
+                {
+                }
+                }
+                }
                 }
                 """
             );
@@ -204,55 +204,55 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DecompiledSource
             await TestAsync(
                 """
                 class C {
-                  void M() {
-                    if (true) {
-                    }
-                    while (true) {
-                    }
-                    switch (true) {
-                    }
-                    try {
-                    } finally {
-                    }
-                    using (null) {
-                    }
-                    foreach (var x in y) {
-                    }
-                  }
+                void M() {
+                if (true) {
+                }
+                while (true) {
+                }
+                switch (true) {
+                }
+                try {
+                } finally {
+                }
+                using (null) {
+                }
+                foreach (var x in y) {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        if (true)
-                        {
-                        }
+                void M()
+                {
+                if (true)
+                {
+                }
 
-                        while (true)
-                        {
-                        }
+                while (true)
+                {
+                }
 
-                        switch (true)
-                        {
-                        }
+                switch (true)
+                {
+                }
 
-                        try
-                        {
-                        }
-                        finally
-                        {
-                        }
+                try
+                {
+                }
+                finally
+                {
+                }
 
-                        using (null)
-                        {
-                        }
+                using (null)
+                {
+                }
 
-                        foreach (var x in y)
-                        {
-                        }
-                    }
+                foreach (var x in y)
+                {
+                }
+                }
                 }
                 """
             );

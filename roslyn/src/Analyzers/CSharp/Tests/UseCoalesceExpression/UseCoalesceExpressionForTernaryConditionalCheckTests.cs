@@ -39,10 +39,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 
                 class C
                 {
-                    void M(string x, string y)
-                    {
-                        var z = [||]x == null ? y : x;
-                    }
+                void M(string x, string y)
+                {
+                var z = [||]x == null ? y : x;
+                }
                 }
                 """,
                 """
@@ -50,10 +50,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 
                 class C
                 {
-                    void M(string x, string y)
-                    {
-                        var z = x ?? y;
-                    }
+                void M(string x, string y)
+                {
+                var z = x ?? y;
+                }
                 }
                 """
             );
@@ -68,10 +68,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 
                 class C
                 {
-                    void M(string x, string y)
-                    {
-                        var z = [||]x != null ? x : y;
-                    }
+                void M(string x, string y)
+                {
+                var z = [||]x != null ? x : y;
+                }
                 }
                 """,
                 """
@@ -79,10 +79,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 
                 class C
                 {
-                    void M(string x, string y)
-                    {
-                        var z = x ?? y;
-                    }
+                void M(string x, string y)
+                {
+                var z = x ?? y;
+                }
                 }
                 """
             );
@@ -97,10 +97,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 
                 class C
                 {
-                    void M(string x, string y)
-                    {
-                        var z = [||]null == x ? y : x;
-                    }
+                void M(string x, string y)
+                {
+                var z = [||]null == x ? y : x;
+                }
                 }
                 """,
                 """
@@ -108,10 +108,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 
                 class C
                 {
-                    void M(string x, string y)
-                    {
-                        var z = x ?? y;
-                    }
+                void M(string x, string y)
+                {
+                var z = x ?? y;
+                }
                 }
                 """
             );
@@ -126,10 +126,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 
                 class C
                 {
-                    void M(string x, string y)
-                    {
-                        var z = [||]null != x ? x : y;
-                    }
+                void M(string x, string y)
+                {
+                var z = [||]null != x ? x : y;
+                }
                 }
                 """,
                 """
@@ -137,10 +137,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 
                 class C
                 {
-                    void M(string x, string y)
-                    {
-                        var z = x ?? y;
-                    }
+                void M(string x, string y)
+                {
+                var z = x ?? y;
+                }
                 }
                 """
             );
@@ -155,10 +155,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 
                 class C
                 {
-                    void M(string x, string y)
-                    {
-                        var z = [||]x.ToString() == null ? y : x.ToString();
-                    }
+                void M(string x, string y)
+                {
+                var z = [||]x.ToString() == null ? y : x.ToString();
+                }
                 }
                 """,
                 """
@@ -166,10 +166,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 
                 class C
                 {
-                    void M(string x, string y)
-                    {
-                        var z = x.ToString() ?? y;
-                    }
+                void M(string x, string y)
+                {
+                var z = x.ToString() ?? y;
+                }
                 }
                 """
             );
@@ -184,10 +184,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 
                 class C
                 {
-                    void M(string x, string y)
-                    {
-                        var z = [||](x == null) ? y : x;
-                    }
+                void M(string x, string y)
+                {
+                var z = [||](x == null) ? y : x;
+                }
                 }
                 """,
                 """
@@ -195,10 +195,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 
                 class C
                 {
-                    void M(string x, string y)
-                    {
-                        var z = x ?? y;
-                    }
+                void M(string x, string y)
+                {
+                var z = x ?? y;
+                }
                 }
                 """
             );
@@ -213,10 +213,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 
                 class C
                 {
-                    void M(string x, string y)
-                    {
-                        var z = [||](x) == null ? y : x;
-                    }
+                void M(string x, string y)
+                {
+                var z = [||](x) == null ? y : x;
+                }
                 }
                 """,
                 """
@@ -224,10 +224,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 
                 class C
                 {
-                    void M(string x, string y)
-                    {
-                        var z = x ?? y;
-                    }
+                void M(string x, string y)
+                {
+                var z = x ?? y;
+                }
                 }
                 """
             );
@@ -242,10 +242,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 
                 class C
                 {
-                    void M(string x, string y)
-                    {
-                        var z = [||]x == null ? y : (x);
-                    }
+                void M(string x, string y)
+                {
+                var z = [||]x == null ? y : (x);
+                }
                 }
                 """,
                 """
@@ -253,10 +253,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 
                 class C
                 {
-                    void M(string x, string y)
-                    {
-                        var z = x ?? y;
-                    }
+                void M(string x, string y)
+                {
+                var z = x ?? y;
+                }
                 }
                 """
             );
@@ -271,10 +271,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 
                 class C
                 {
-                    void M(string x, string y)
-                    {
-                        var z = [||]x == null ? (y) : x;
-                    }
+                void M(string x, string y)
+                {
+                var z = [||]x == null ? (y) : x;
+                }
                 }
                 """,
                 """
@@ -282,10 +282,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 
                 class C
                 {
-                    void M(string x, string y)
-                    {
-                        var z = x ?? y;
-                    }
+                void M(string x, string y)
+                {
+                var z = x ?? y;
+                }
                 }
                 """
             );
@@ -300,11 +300,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 
                 class C
                 {
-                    void M(string x, string y)
-                    {
-                        var z1 = {|FixAllInDocument:x|} == null ? y : x;
-                        var z2 = x != null ? x : y;
-                    }
+                void M(string x, string y)
+                {
+                var z1 = {|FixAllInDocument:x|} == null ? y : x;
+                var z2 = x != null ? x : y;
+                }
                 }
                 """,
                 """
@@ -312,11 +312,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 
                 class C
                 {
-                    void M(string x, string y)
-                    {
-                        var z1 = x ?? y;
-                        var z2 = x ?? y;
-                    }
+                void M(string x, string y)
+                {
+                var z1 = x ?? y;
+                var z2 = x ?? y;
+                }
                 }
                 """
             );
@@ -331,10 +331,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 
                 class C
                 {
-                    void M(string x, string y, string z)
-                    {
-                        var w = {|FixAllInDocument:x|} != null ? x : y.ToString(z != null ? z : y);
-                    }
+                void M(string x, string y, string z)
+                {
+                var w = {|FixAllInDocument:x|} != null ? x : y.ToString(z != null ? z : y);
+                }
                 }
                 """,
                 """
@@ -342,10 +342,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 
                 class C
                 {
-                    void M(string x, string y, string z)
-                    {
-                        var w = x ?? y.ToString(z ?? y);
-                    }
+                void M(string x, string y, string z)
+                {
+                var w = x ?? y.ToString(z ?? y);
+                }
                 }
                 """
             );
@@ -360,10 +360,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 
                 class C
                 {
-                    void M(string x, string y, string z)
-                    {
-                        var w = {|FixAllInDocument:x|} != null ? x : y != null ? y : z;
-                    }
+                void M(string x, string y, string z)
+                {
+                var w = {|FixAllInDocument:x|} != null ? x : y != null ? y : z;
+                }
                 }
                 """,
                 """
@@ -371,10 +371,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 
                 class C
                 {
-                    void M(string x, string y, string z)
-                    {
-                        var w = x ?? y ?? z;
-                    }
+                void M(string x, string y, string z)
+                {
+                var w = x ?? y ?? z;
+                }
                 }
                 """
             );
@@ -389,12 +389,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 
                 class Program
                 {
-                    public Program()
-                    {
-                        string x = ";
+                public Program()
+                {
+                string x = ";
 
-                        string y = [|x|] == null ? string.Empty : x;
-                    }
+                string y = [|x|] == null ? string.Empty : x;
+                }
                 }
                 """,
                 """
@@ -402,12 +402,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 
                 class Program
                 {
-                    public Program()
-                    {
-                        string x = ";
+                public Program()
+                {
+                string x = ";
 
-                        string y = x ?? string.Empty;
-                    }
+                string y = x ?? string.Empty;
+                }
                 }
                 """
             );
@@ -423,10 +423,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 
                 class C
                 {
-                    void Main(string s, string y)
-                    {
-                        Expression<Func<string>> e = () => [||]s != null ? s : y;
-                    }
+                void Main(string s, string y)
+                {
+                Expression<Func<string>> e = () => [||]s != null ? s : y;
+                }
                 }
                 """,
                 """
@@ -435,10 +435,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 
                 class C
                 {
-                    void Main(string s, string y)
-                    {
-                        Expression<Func<string>> e = () => {|Warning:s ?? y|};
-                    }
+                void Main(string s, string y)
+                {
+                Expression<Func<string>> e = () => {|Warning:s ?? y|};
+                }
                 }
                 """
             );
@@ -451,10 +451,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
                 """
                 class C<T>
                 {
-                    void Main(T t)
-                    {
-                        var v = [||]t == null ? throw new Exception() : t;
-                    }
+                void Main(T t)
+                {
+                var v = [||]t == null ? throw new Exception() : t;
+                }
                 }
                 """
             );
@@ -467,10 +467,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
                 """
                 class C<T> where T : struct
                 {
-                    void Main(T t)
-                    {
-                        var v = [||]t == null ? throw new Exception() : t;
-                    }
+                void Main(T t)
+                {
+                var v = [||]t == null ? throw new Exception() : t;
+                }
                 }
                 """
             );
@@ -483,19 +483,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
                 """
                 class C<T> where T : class
                 {
-                    void Main(T t)
-                    {
-                        var v = [||]t == null ? throw new Exception() : t;
-                    }
+                void Main(T t)
+                {
+                var v = [||]t == null ? throw new Exception() : t;
+                }
                 }
                 """,
                 """
                 class C<T> where T : class
                 {
-                    void Main(T t)
-                    {
-                        var v = t ?? throw new Exception();
-                    }
+                void Main(T t)
+                {
+                var v = t ?? throw new Exception();
+                }
                 }
                 """
             );
@@ -508,10 +508,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
                 """
                 class C
                 {
-                    void Main(int? t)
-                    {
-                        var v = [||]t == null ? throw new Exception() : t;
-                    }
+                void Main(int? t)
+                {
+                var v = [||]t == null ? throw new Exception() : t;
+                }
                 }
                 """
             );
@@ -524,19 +524,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
                 """
                 class C
                 {
-                    void Main(int[] t)
-                    {
-                        var v = [||]t == null ? throw new Exception() : t;
-                    }
+                void Main(int[] t)
+                {
+                var v = [||]t == null ? throw new Exception() : t;
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void Main(int[] t)
-                    {
-                        var v = t ?? throw new Exception();
-                    }
+                void Main(int[] t)
+                {
+                var v = t ?? throw new Exception();
+                }
                 }
                 """
             );
@@ -549,19 +549,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
                 """
                 class C
                 {
-                    void Main(System.ICloneable t)
-                    {
-                        var v = [||]t == null ? throw new Exception() : t;
-                    }
+                void Main(System.ICloneable t)
+                {
+                var v = [||]t == null ? throw new Exception() : t;
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void Main(System.ICloneable t)
-                    {
-                        var v = t ?? throw new Exception();
-                    }
+                void Main(System.ICloneable t)
+                {
+                var v = t ?? throw new Exception();
+                }
                 }
                 """
             );
@@ -574,19 +574,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
                 """
                 class C
                 {
-                    void Main(dynamic t)
-                    {
-                        var v = [||]t == null ? throw new Exception() : t;
-                    }
+                void Main(dynamic t)
+                {
+                var v = [||]t == null ? throw new Exception() : t;
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void Main(dynamic t)
-                    {
-                        var v = t ?? throw new Exception();
-                    }
+                void Main(dynamic t)
+                {
+                var v = t ?? throw new Exception();
+                }
                 }
                 """
             );
@@ -599,21 +599,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
                 """
                 class C
                 {
-                    void M(string s)
-                    {
-                        _ = [||]s == null
-                            ? ""
-                            : s;
-                    }
+                void M(string s)
+                {
+                _ = [||]s == null
+                ? ""
+                : s;
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(string s)
-                    {
-                        _ = s ?? "";
-                    }
+                void M(string s)
+                {
+                _ = s ?? "";
+                }
                 }
                 """
             );
@@ -626,21 +626,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
                 """
                 class C
                 {
-                    void M(string s)
-                    {
-                        M([||]s == null
-                            ? ""
-                            : s);
-                    }
+                void M(string s)
+                {
+                M([||]s == null
+                ? ""
+                : s);
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(string s)
-                    {
-                        M(s ?? "");
-                    }
+                void M(string s)
+                {
+                M(s ?? "");
+                }
                 }
                 """
             );
@@ -653,25 +653,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
                 """
                 class C
                 {
-                    void M(string s)
-                    {
-                        _ = cond
-                            ? [||]s == null
-                            ? ""
-                            : s
-                            : "";
-                    }
+                void M(string s)
+                {
+                _ = cond
+                ? [||]s == null
+                ? ""
+                : s
+                : "";
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(string s)
-                    {
-                        _ = cond
-                            ? s ?? ""
-                            : "";
-                    }
+                void M(string s)
+                {
+                _ = cond
+                ? s ?? ""
+                : "";
+                }
                 }
                 """
             );
@@ -684,16 +684,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
                 """
                 class Program
                 {
-                    class A { }
-                    class B { }
+                class A { }
+                class B { }
 
-                    static void Main(string[] args)
-                    {
-                        var a = new A();
-                        var b = new B();
+                static void Main(string[] args)
+                {
+                var a = new A();
+                var b = new B();
 
-                        object x = [||]a != null ? a : b;
-                    }
+                object x = [||]a != null ? a : b;
+                }
                 }
                 """
             );

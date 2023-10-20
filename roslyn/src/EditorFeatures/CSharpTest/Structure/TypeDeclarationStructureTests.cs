@@ -22,10 +22,10 @@ public class TypeDeclarationStructureTests
     public async Task TestClass1()
     {
         var code = """
-                {|hint:$$class C{|textspan:
-                {
-                }|}|}
-                """;
+        {|hint:$$class C{|textspan:
+        {
+        }|}|}
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -88,12 +88,12 @@ public class TypeDeclarationStructureTests
     public async Task TestClassWithLeadingComments()
     {
         var code = """
-                {|span1:// Goo
-                // Bar|}
-                {|hint2:$$class C{|textspan2:
-                {
-                }|}|}
-                """;
+        {|span1:// Goo
+        // Bar|}
+        {|hint2:$$class C{|textspan2:
+        {
+        }|}|}
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -106,12 +106,12 @@ public class TypeDeclarationStructureTests
     public async Task TestClassWithNestedComments()
     {
         var code = """
-                {|hint1:$$class C{|textspan1:
-                {
-                    {|span2:// Goo
-                    // Bar|}
-                }|}|}
-                """;
+        {|hint1:$$class C{|textspan1:
+        {
+        {|span2:// Goo
+        // Bar|}
+        }|}|}
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -124,10 +124,10 @@ public class TypeDeclarationStructureTests
     public async Task TestInterface1()
     {
         var code = """
-                {|hint:$$interface I{|textspan:
-                {
-                }|}|}
-                """;
+        {|hint:$$interface I{|textspan:
+        {
+        }|}|}
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -190,12 +190,12 @@ public class TypeDeclarationStructureTests
     public async Task TestInterfaceWithLeadingComments()
     {
         var code = """
-                {|span1:// Goo
-                // Bar|}
-                {|hint2:$$interface I{|textspan2:
-                {
-                }|}|}
-                """;
+        {|span1:// Goo
+        // Bar|}
+        {|hint2:$$interface I{|textspan2:
+        {
+        }|}|}
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -208,12 +208,12 @@ public class TypeDeclarationStructureTests
     public async Task TestInterfaceWithNestedComments()
     {
         var code = """
-                {|hint1:$$interface I{|textspan1:
-                {
-                    {|span2:// Goo
-                    // Bar|}
-                }|}|}
-                """;
+        {|hint1:$$interface I{|textspan1:
+        {
+        {|span2:// Goo
+        // Bar|}
+        }|}|}
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -226,10 +226,10 @@ public class TypeDeclarationStructureTests
     public async Task TestStruct1()
     {
         var code = """
-                {|hint:$$struct S{|textspan:
-                {
-                }|}|}
-                """;
+        {|hint:$$struct S{|textspan:
+        {
+        }|}|}
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -292,12 +292,12 @@ public class TypeDeclarationStructureTests
     public async Task TestStructWithLeadingComments()
     {
         var code = """
-                {|span1:// Goo
-                // Bar|}
-                {|hint2:$$struct S{|textspan2:
-                {
-                }|}|}
-                """;
+        {|span1:// Goo
+        // Bar|}
+        {|hint2:$$struct S{|textspan2:
+        {
+        }|}|}
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -310,12 +310,12 @@ public class TypeDeclarationStructureTests
     public async Task TestStructWithNestedComments()
     {
         var code = """
-                {|hint1:$$struct S{|textspan1:
-                {
-                    {|span2:// Goo
-                    // Bar|}
-                }|}|}
-                """;
+        {|hint1:$$struct S{|textspan1:
+        {
+        {|span2:// Goo
+        // Bar|}
+        }|}|}
+        """;
 
         await VerifyBlockSpansAsync(
             code,

@@ -37345,12 +37345,12 @@ record R1(int x);
         public void AttributedDerivedRecord_SemanticInfoOnBaseParameter()
         {
             var source = """
-                public record Base(int X);
-                [Attr]
-                public record Derived(int X) : Base(X);
+            public record Base(int X);
+            [Attr]
+            public record Derived(int X) : Base(X);
 
-                class Attr : System.Attribute {}
-                """;
+            class Attr : System.Attribute {}
+            """;
 
             var comp = CreateCompilation(
                 source,
@@ -37379,15 +37379,15 @@ record R1(int x);
         public void AttributedDerivedRecord_BaseParameterNotVisibleInBody()
         {
             var source = """
-                public record Base(int X);
-                [Attr()]
-                public record Derived() : Base(M(out var y))
-                {
-                    static int M(out int y) => y = 1;
-                }
+            public record Base(int X);
+            [Attr()]
+            public record Derived() : Base(M(out var y))
+            {
+            static int M(out int y) => y = 1;
+            }
 
-                class Attr : System.Attribute {}
-                """;
+            class Attr : System.Attribute {}
+            """;
 
             var comp = CreateCompilation(
                 source,

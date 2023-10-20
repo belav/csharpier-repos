@@ -42,17 +42,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         private const string TrackerTypeName = "Microsoft.CodeAnalysis.Runtime.LocalStoreTracker";
 
         private static readonly string s_helpers = """
-namespace Microsoft.CodeAnalysis.Runtime
-{
-    using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Threading;
-    using static System.Console;
+        namespace Microsoft.CodeAnalysis.Runtime
+        {
+        using System;
+        using System.Linq;
+        using System.Reflection;
+        using System.Threading;
+        using static System.Console;
 
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    public unsafe readonly ref partial struct LocalStoreTracker
-    {
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        public unsafe readonly ref partial struct LocalStoreTracker
+        {
         private static int s_stateMachineId;
 
         private readonly MethodBase M;
@@ -60,67 +60,67 @@ namespace Microsoft.CodeAnalysis.Runtime
 
         private LocalStoreTracker(MethodBase m)
         {
-            M = m;
-            Parameters = m.GetParameters();
+        M = m;
+        Parameters = m.GetParameters();
         }
 
         public static LocalStoreTracker LogMethodEntry(int methodId)
-            => Entry(methodId, lambdaId: 0, stateMachineId: 0);
+        => Entry(methodId, lambdaId: 0, stateMachineId: 0);
 
         public static LocalStoreTracker LogLambdaEntry(int methodId, int lambdaId)
-            => Entry(methodId, lambdaId, stateMachineId: 0);
+        => Entry(methodId, lambdaId, stateMachineId: 0);
 
         public static LocalStoreTracker LogStateMachineMethodEntry(int methodId, ulong stateMachineId)
-            => Entry(methodId, lambdaId: 0, stateMachineId);
+        => Entry(methodId, lambdaId: 0, stateMachineId);
 
         public static LocalStoreTracker LogStateMachineLambdaEntry(int methodId, int lambdaId, ulong stateMachineId)
-            => Entry(methodId, lambdaId, stateMachineId);
+        => Entry(methodId, lambdaId, stateMachineId);
 
         public void LogReturn()
-            => WriteLine($"{M.Name}: Returned");
+        => WriteLine($"{M.Name}: Returned");
 
         public static ulong GetNewStateMachineInstanceId()
-            => unchecked((ulong)Interlocked.Increment(ref s_stateMachineId));
+        => unchecked((ulong)Interlocked.Increment(ref s_stateMachineId));
 
         private static LocalStoreTracker Entry(int methodId, int lambdaId, ulong stateMachineId)
         {
-            var module = typeof(LocalStoreTracker).Assembly.Modules.Single();
-            var method = module.ResolveMethod(methodId + 0x06000000);
-            var message = $"{method.Name}: Entered";
+        var module = typeof(LocalStoreTracker).Assembly.Modules.Single();
+        var method = module.ResolveMethod(methodId + 0x06000000);
+        var message = $"{method.Name}: Entered";
 
-            if (lambdaId > 0)
-            {
-                var lambda = module.ResolveMethod(lambdaId + 0x06000000);
-                message += $" lambda '{lambda.Name}'";
-                method = lambda;
-            }
+        if (lambdaId > 0)
+        {
+        var lambda = module.ResolveMethod(lambdaId + 0x06000000);
+        message += $" lambda '{lambda.Name}'";
+        method = lambda;
+        }
 
-            if (stateMachineId > 0)
-            {
-                message += $" state machine #{stateMachineId}";
-            }
+        if (stateMachineId > 0)
+        {
+        message += $" state machine #{stateMachineId}";
+        }
 
-            WriteLine(message);
-            return new(method);
+        WriteLine(message);
+        return new(method);
         }
 
         private void WL(object value, int index)
-            => WriteLine($"{M.Name}: {L(index)} = {value ?? "null"}");
+        => WriteLine($"{M.Name}: {L(index)} = {value ?? "null"}");
 
         private void WP(object value, int index)
-            => WriteLine($"{M.Name}: {P(index)} = {value ?? "null"}");
+        => WriteLine($"{M.Name}: {P(index)} = {value ?? "null"}");
 
         private string L(int index)
-            => (index >= 0x10000) ? $"L'{UnmangleFieldName(M.Module.ResolveField(index - 0x10000 + 0x04000000).Name)}'" : $"L{index}";
+        => (index >= 0x10000) ? $"L'{UnmangleFieldName(M.Module.ResolveField(index - 0x10000 + 0x04000000).Name)}'" : $"L{index}";
 
         private string P(int index)
-            => (index >= 0x10000) ? $"P'{M.Module.ResolveField(index - 0x10000 + 0x04000000).Name}'" : $"P'{Parameters[index].Name}'[{index}]";
+        => (index >= 0x10000) ? $"P'{M.Module.ResolveField(index - 0x10000 + 0x04000000).Name}'" : $"P'{Parameters[index].Name}'[{index}]";
 
         private static string UnmangleFieldName(string name)
-            => (name[0] == '<') ? name.Substring(1, name.IndexOf('>') - 1) : name;
+        => (name[0] == '<') ? name.Substring(1, name.IndexOf('>') - 1) : name;
 
         private static string MemoryToString(void* address, int size)
-            => "<" + BitConverter.ToString(new Span<byte>(address, size).ToArray()) + ">";
+        => "<" + BitConverter.ToString(new Span<byte>(address, size).ToArray()) + ">";
 
         public void LogLocalStore(bool value, int index) => WL(value, index);
         public void LogLocalStore(byte value, int index) => WL(value, index);
@@ -151,9 +151,9 @@ namespace Microsoft.CodeAnalysis.Runtime
         public void LogParameterStoreParameterAlias(int sourceParameterIndex, int targetParameterIndex) { WriteLine($"{M.Name}: {P(targetParameterIndex)} -> {P(sourceParameterIndex)}"); }
 
         public void LogLocalStoreLocalAlias(int sourceLocalIndex, int targetLocalIndex) { WriteLine($"{M.Name}: {L(targetLocalIndex)} -> {L(sourceLocalIndex)}"); }
-    }
-}
-""";
+        }
+        }
+        """;
 
         private static string WithHelpers(string source) => source + s_helpers;
 
@@ -263,9 +263,9 @@ class C
                         s_verification.ILVerifyMessage
                         + Environment.NewLine
                         + """
-                    [CreatePayload]: Expected numeric type on the stack. { Offset = 0xf, Found = address of '[System.Runtime]System.Guid' }
-                    [CreatePayload]: Expected numeric type on the stack. { Offset = 0xf, Found = address of '[System.Runtime]System.Guid' }
-                    """
+                        [CreatePayload]: Expected numeric type on the stack. { Offset = 0xf, Found = address of '[System.Runtime]System.Guid' }
+                        [CreatePayload]: Expected numeric type on the stack. { Offset = 0xf, Found = address of '[System.Runtime]System.Guid' }
+                        """
                 },
                 targetFramework: s_targetFramework
             );
@@ -391,9 +391,9 @@ class C
                         s_verification.ILVerifyMessage
                         + Environment.NewLine
                         + """
-                    [CreatePayload]: Expected numeric type on the stack. { Offset = 0xf, Found = address of '[System.Runtime]System.Guid' }
-                    [CreatePayload]: Expected numeric type on the stack. { Offset = 0xf, Found = address of '[System.Runtime]System.Guid' }
-                    """
+                        [CreatePayload]: Expected numeric type on the stack. { Offset = 0xf, Found = address of '[System.Runtime]System.Guid' }
+                        [CreatePayload]: Expected numeric type on the stack. { Offset = 0xf, Found = address of '[System.Runtime]System.Guid' }
+                        """
                 },
                 targetFramework: s_targetFramework
             );
@@ -1778,19 +1778,19 @@ F: Returned
         {
             var source = WithHelpers(
                 """
-S.F(new S());
+                S.F(new S());
 
-ref struct S
-{
-    ref int X;
+                ref struct S
+                {
+                ref int X;
 
-    public static void F(S p)
-    {
-        int a = 1;
-        var x = p = new S();
-    }
-}
-"""
+                public static void F(S p)
+                {
+                int a = 1;
+                var x = p = new S();
+                }
+                }
+                """
             );
             var verifier = CompileAndVerify(
                 source,
@@ -1858,20 +1858,20 @@ F: Returned
         {
             var source = WithHelpers(
                 """
-S.F(new S());
+                S.F(new S());
 
-ref struct S
-{
-    ref int X;
+                ref struct S
+                {
+                ref int X;
 
-    public static void F(S p)
-    {
-        var x = p = new S();
-    }
+                public static void F(S p)
+                {
+                var x = p = new S();
+                }
 
-    public override string ToString() => "str";
-}
-"""
+                public override string ToString() => "str";
+                }
+                """
             );
             var verifier = CompileAndVerify(
                 source,

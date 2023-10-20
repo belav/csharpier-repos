@@ -166,9 +166,9 @@ app.MapGet("/hello", (HttpContext context, [FromQuery]{{typeName}} p) =>
     public async Task MapAction_DateTime_StringReturn(string queryStringInput, string expectedBody)
     {
         var source = """
-app.MapGet("/", (HttpContext context, [FromQuery] DateTime time)
-            => $"Time: {time.ToString("O", System.Globalization.CultureInfo.InvariantCulture)}, Kind: {time.Kind}");
-""";
+        app.MapGet("/", (HttpContext context, [FromQuery] DateTime time)
+        => $"Time: {time.ToString("O", System.Globalization.CultureInfo.InvariantCulture)}, Kind: {time.Kind}");
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
         var httpContext = CreateHttpContext();
@@ -219,9 +219,9 @@ app.MapGet("/", (HttpContext context, [FromQuery] DateTime time)
     )
     {
         var source = """
-app.MapGet("/", (HttpContext context, [FromQuery] DateTimeOffset time)
-            => $"Time: {time.ToString("O", System.Globalization.CultureInfo.InvariantCulture)}, Offset: {time.Offset}");
-""";
+        app.MapGet("/", (HttpContext context, [FromQuery] DateTimeOffset time)
+        => $"Time: {time.ToString("O", System.Globalization.CultureInfo.InvariantCulture)}, Offset: {time.Offset}");
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
         var httpContext = CreateHttpContext();
@@ -269,8 +269,8 @@ app.MapGet("/hello", ([FromQuery]{{parameterType}} p) => p.MagicValue);
     {
         var (results, compilation) = await RunGeneratorAsync(
             """
-app.MapGet("/hello", ([FromQuery]TryParseTodo p) => p.Name!);
-"""
+            app.MapGet("/hello", ([FromQuery]TryParseTodo p) => p.Name!);
+            """
         );
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -298,8 +298,8 @@ app.MapGet("/hello", ([FromQuery]TryParseTodo p) => p.Name!);
     {
         var (results, compilation) = await RunGeneratorAsync(
             """
-app.MapGet("/hello", ([FromQuery]TodoWithExplicitIParsable p, HttpContext context) => context.Items["p"] = p);
-"""
+            app.MapGet("/hello", ([FromQuery]TodoWithExplicitIParsable p, HttpContext context) => context.Items["p"] = p);
+            """
         );
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -317,8 +317,8 @@ app.MapGet("/hello", ([FromQuery]TodoWithExplicitIParsable p, HttpContext contex
     {
         var (results, compilation) = await RunGeneratorAsync(
             """
-app.MapGet("/hello", ([FromQuery]TodoStatus p) => p.ToString());
-"""
+            app.MapGet("/hello", ([FromQuery]TodoStatus p) => p.ToString());
+            """
         );
         var endpoint = GetEndpointFromCompilation(compilation);
 

@@ -13897,10 +13897,10 @@ ref struct MyRefStruct { }
         public async Task AfterScopedGlobalStatement_NotFollowedByType()
         {
             var source = """
-                using System;
+            using System;
 
-                scoped $$
-                """;
+            scoped $$
+            """;
 
             await VerifyItemExistsAsync(
                 MakeMarkup(source),
@@ -13963,12 +13963,12 @@ public static class Extension
         public async Task EnumBaseList2(string underlyingType)
         {
             var source = """
-                enum E : $$
+            enum E : $$
 
-                class System
-                {
-                }
-                """;
+            class System
+            {
+            }
+            """;
 
             // class `System` shadows the namespace in regular source
             await VerifyItemIsAbsentAsync(source, "System", sourceCodeKind: SourceCodeKind.Regular);
@@ -13981,10 +13981,10 @@ public static class Extension
         public async Task EnumBaseList3(string underlyingType)
         {
             var source = """
-                using System;
+            using System;
 
-                enum E : $$
-                """;
+            enum E : $$
+            """;
 
             await VerifyItemExistsAsync(source, "System");
             await VerifyItemExistsAsync(source, underlyingType);
@@ -13999,12 +13999,12 @@ public static class Extension
         public async Task EnumBaseList4(string underlyingType)
         {
             var source = """
-                namespace MyNamespace
-                {
-                }
+            namespace MyNamespace
+            {
+            }
 
-                enum E : global::$$
-                """;
+            enum E : global::$$
+            """;
 
             await VerifyItemIsAbsentAsync(source, "E");
 
@@ -14057,21 +14057,21 @@ public static class Extension
         public async Task EnumBaseList8()
         {
             var source = """
-                namespace MyNamespace
-                {
-                    namespace System {}
-                    public struct Byte {}
-                    public struct SByte {}
-                    public struct Int16 {}
-                    public struct UInt16 {}
-                    public struct Int32 {}
-                    public struct UInt32 {}
-                    public struct Int64 {}
-                    public struct UInt64 {}
-                }
+            namespace MyNamespace
+            {
+            namespace System {}
+            public struct Byte {}
+            public struct SByte {}
+            public struct Int16 {}
+            public struct UInt16 {}
+            public struct Int32 {}
+            public struct UInt32 {}
+            public struct Int64 {}
+            public struct UInt64 {}
+            }
 
-                enum E : MyNamespace.$$
-                """;
+            enum E : MyNamespace.$$
+            """;
 
             await VerifyNoItemsExistAsync(source);
         }
@@ -14080,10 +14080,10 @@ public static class Extension
         public async Task EnumBaseList9()
         {
             var source = """
-                using MySystem = System;
+            using MySystem = System;
 
-                enum E : $$
-                """;
+            enum E : $$
+            """;
 
             await VerifyItemExistsAsync(source, "MySystem");
         }
@@ -14092,10 +14092,10 @@ public static class Extension
         public async Task EnumBaseList10()
         {
             var source = """
-                using MySystem = System;
+            using MySystem = System;
 
-                enum E : global::$$
-                """;
+            enum E : global::$$
+            """;
 
             await VerifyItemIsAbsentAsync(source, "MySystem");
         }
@@ -14104,10 +14104,10 @@ public static class Extension
         public async Task EnumBaseList11(string underlyingType)
         {
             var source = """
-                using MySystem = System;
+            using MySystem = System;
 
-                enum E : MySystem.$$
-                """;
+            enum E : MySystem.$$
+            """;
 
             await VerifyItemIsAbsentAsync(source, "System");
             await VerifyItemIsAbsentAsync(source, "MySystem");
@@ -14124,10 +14124,10 @@ public static class Extension
         public async Task EnumBaseList12()
         {
             var source = """
-                using MySystem = System;
+            using MySystem = System;
 
-                enum E : global::MySystem.$$
-                """;
+            enum E : global::MySystem.$$
+            """;
 
             await VerifyNoItemsExistAsync(source);
         }
@@ -14185,17 +14185,17 @@ public static class Extension
         public async Task InRangeExpression()
         {
             var source = """
-                class C
-                {
-                    const int Test = 1;
+            class C
+            {
+            const int Test = 1;
 
-                    void M(string s)
-                    {
-                        var endIndex = 1;
-                        var substr = s[1..$$];
-                    }
-                }
-                """;
+            void M(string s)
+            {
+            var endIndex = 1;
+            var substr = s[1..$$];
+            }
+            }
+            """;
 
             await VerifyItemExistsAsync(source, "endIndex");
             await VerifyItemExistsAsync(source, "Test");
@@ -14206,17 +14206,17 @@ public static class Extension
         public async Task InRangeExpression_WhitespaceAfterDotDotToken()
         {
             var source = """
-                class C
-                {
-                    const int Test = 1;
+            class C
+            {
+            const int Test = 1;
 
-                    void M(string s)
-                    {
-                        var endIndex = 1;
-                        var substr = s[1.. $$];
-                    }
-                }
-                """;
+            void M(string s)
+            {
+            var endIndex = 1;
+            var substr = s[1.. $$];
+            }
+            }
+            """;
 
             await VerifyItemExistsAsync(source, "endIndex");
             await VerifyItemExistsAsync(source, "Test");
@@ -14227,21 +14227,21 @@ public static class Extension
         public async Task PropertyAndGenericExtensionMethodCandidates()
         {
             var source = """
-                using System.Collections.Generic;
-                using System.Linq;
+            using System.Collections.Generic;
+            using System.Linq;
 
-                class C
-                {
-                    void M()
-                    {
-                        int foo;
-                        List<int> list;
-                        if (list.Count < $$)
-                        {
-                        }
-                    }
-                }
-                """;
+            class C
+            {
+            void M()
+            {
+            int foo;
+            List<int> list;
+            if (list.Count < $$)
+            {
+            }
+            }
+            }
+            """;
 
             await VerifyItemExistsAsync(source, "foo");
             await VerifyItemExistsAsync(source, "M");
@@ -14253,19 +14253,19 @@ public static class Extension
         public async Task GenericWithNonGenericOverload()
         {
             var source = """
-                class C
-                {
-                    void M(C other)
-                    {
-                        if (other.A < $$)
-                        {
-                        }
-                    }
+            class C
+            {
+            void M(C other)
+            {
+            if (other.A < $$)
+            {
+            }
+            }
 
-                    void A() { }
-                    void A<T>() { }
-                }
-                """;
+            void A() { }
+            void A<T>() { }
+            }
+            """;
 
             await VerifyItemExistsAsync(source, "System");
             await VerifyItemExistsAsync(source, "C");

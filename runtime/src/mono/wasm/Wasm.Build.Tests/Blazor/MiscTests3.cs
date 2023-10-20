@@ -100,7 +100,7 @@ public class MiscTests3 : BlazorWasmTestBase
             """
             var result = MyDllImports.cpp_add(10, 12);
             outputText = $"{result}";
-        """
+            """
         );
 
         if (build)

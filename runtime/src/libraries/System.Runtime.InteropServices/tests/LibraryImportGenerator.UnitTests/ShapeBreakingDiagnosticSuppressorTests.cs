@@ -30,32 +30,32 @@ namespace LibraryImportGenerator.UnitTests
 
                 struct S
                 {
-                    public bool b;
+                public bool b;
                 };
 
                 [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(ManagedToUnmanagedIn))]
                 static class Marshaller
                 {
-                    public struct ManagedToUnmanagedIn
-                    {
-                        public static int BufferSize { get; } = 1;
+                public struct ManagedToUnmanagedIn
+                {
+                public static int BufferSize { get; } = 1;
 
-                        public void {|#0:FromManaged|}(S s) {}
+                public void {|#0:FromManaged|}(S s) {}
 
-                        public void {|#1:FromManaged|}(S s, Span<byte> buffer){}
+                public void {|#1:FromManaged|}(S s, Span<byte> buffer){}
 
-                        public ManagedToUnmanagedIn {|#2:ToUnmanaged|}() => default;
+                public ManagedToUnmanagedIn {|#2:ToUnmanaged|}() => default;
 
-                        public void {|#3:FromUnmanaged|}(ManagedToUnmanagedIn unmanaged) {}
+                public void {|#3:FromUnmanaged|}(ManagedToUnmanagedIn unmanaged) {}
 
-                        public S {|#4:ToManaged|}() => default;
+                public S {|#4:ToManaged|}() => default;
 
-                        public void {|#5:Free|}() {}
+                public void {|#5:Free|}() {}
 
-                        public void {|#6:OnInvoked|}() {}
+                public void {|#6:OnInvoked|}() {}
 
-                        public ref byte {|#7:GetPinnableReference|}() => ref Unsafe.NullRef<byte>();
-                    }
+                public ref byte {|#7:GetPinnableReference|}() => ref Unsafe.NullRef<byte>();
+                }
                 }
                 """,
                 SuppressedDiagnostic(
@@ -112,33 +112,33 @@ namespace LibraryImportGenerator.UnitTests
 
                 struct S
                 {
-                    public bool b;
+                public bool b;
                 };
 
                 [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(Marshaller<>.ManagedToUnmanagedIn))]
                 [ContiguousCollectionMarshaller]
                 static class Marshaller<TNative>
                 {
-                    public struct ManagedToUnmanagedIn
-                    {
-                        public void {|#0:FromManaged|}(S s) {}
+                public struct ManagedToUnmanagedIn
+                {
+                public void {|#0:FromManaged|}(S s) {}
 
-                        public void {|#1:FromManaged|}(S s, Span<byte> buffer){}
+                public void {|#1:FromManaged|}(S s, Span<byte> buffer){}
 
-                        public ManagedToUnmanagedIn {|#2:ToUnmanaged|}() => default;
+                public ManagedToUnmanagedIn {|#2:ToUnmanaged|}() => default;
 
-                        public void {|#3:FromUnmanaged|}(ManagedToUnmanagedIn unmanaged) {}
+                public void {|#3:FromUnmanaged|}(ManagedToUnmanagedIn unmanaged) {}
 
-                        public S {|#4:ToManaged|}() => default;
+                public S {|#4:ToManaged|}() => default;
 
-                        public ReadOnlySpan<int> {|#5:GetManagedValuesSource|}() => default;
+                public ReadOnlySpan<int> {|#5:GetManagedValuesSource|}() => default;
 
-                        public Span<TNative> {|#6:GetUnmanagedValuesDestination|}() => default;
+                public Span<TNative> {|#6:GetUnmanagedValuesDestination|}() => default;
 
-                        public ReadOnlySpan<TNative> {|#7:GetUnmanagedValuesSource|}(int numElements) => default;
+                public ReadOnlySpan<TNative> {|#7:GetUnmanagedValuesSource|}(int numElements) => default;
 
-                        public Span<int> {|#8:GetManagedValuesDestination|}(int numElements) => default;
-                    }
+                public Span<int> {|#8:GetManagedValuesDestination|}(int numElements) => default;
+                }
                 }
                 """,
                 SuppressedDiagnostic(
@@ -198,16 +198,16 @@ namespace LibraryImportGenerator.UnitTests
 
                 struct S
                 {
-                    public bool b;
+                public bool b;
                 };
 
                 [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(ManagedToUnmanagedIn))]
                 static class Marshaller
                 {
-                    public struct ManagedToUnmanagedIn
-                    {
-                        public void {|#0:Free|}(int i) {}
-                    }
+                public struct ManagedToUnmanagedIn
+                {
+                public void {|#0:Free|}(int i) {}
+                }
                 }
                 """,
                 Diagnostic(
@@ -234,7 +234,7 @@ namespace LibraryImportGenerator.UnitTests
 
                 struct S
                 {
-                    public bool b;
+                public bool b;
                 };
 
                 [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(ManagedToUnmanagedIn))]
@@ -244,7 +244,7 @@ namespace LibraryImportGenerator.UnitTests
 
                 public struct ManagedToUnmanagedIn
                 {
-                    public void {|#0:Free|}() {}
+                public void {|#0:Free|}() {}
                 }
                 """,
                 Diagnostic(

@@ -31,20 +31,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             var castCompletionItem = (
                 await GetCompletionItemsAsync(
                     """
-                public class C
-                {
+                    public class C
+                    {
                     public static explicit operator float(C c) => 0;
-                }
+                    }
 
-                public class Program
-                {
+                    public class Program
+                    {
                     public static void Main()
                     {
-                        var c = new C();
-                        c.$$
+                    var c = new C();
+                    c.$$
                     }
-                }
-                """,
+                    }
+                    """,
                     SourceCodeKind.Regular
                 )
             ).Single();
@@ -86,15 +86,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 public class C
                 {
-                    public static explicit operator float(C c) => 0;
+                public static explicit operator float(C c) => 0;
                 }
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        1.$$
-                    }
+                public static void Main()
+                {
+                1.$$
+                }
                 }
                 """,
                 SourceCodeKind.Regular
@@ -108,16 +108,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 public class C
                 {
-                    public static explicit operator float(C c) => 0;
+                public static explicit operator float(C c) => 0;
                 }
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        var c = new C();
-                        c.$$
-                    }
+                public static void Main()
+                {
+                var c = new C();
+                c.$$
+                }
                 }
                 """,
                 "float",
@@ -135,17 +135,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 public class C
                 {
-                    public void fly() { }
-                    public static explicit operator float(C c) => 0;
+                public void fly() { }
+                public static explicit operator float(C c) => 0;
                 }
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        var c = new C();
-                        c.fl$$
-                    }
+                public static void Main()
+                {
+                var c = new C();
+                c.fl$$
+                }
                 }
                 """,
                 "float",
@@ -221,15 +221,15 @@ public class Program
                 """
                 public class C
                 {
-                    public static explicit operator float(C c) => 0;
+                public static explicit operator float(C c) => 0;
                 }
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        C.$$
-                    }
+                public static void Main()
+                {
+                C.$$
+                }
                 }
                 """
             );
@@ -242,16 +242,16 @@ public class Program
                 """
                 public class C
                 {
-                    public static explicit operator float(C c) => 0;
+                public static explicit operator float(C c) => 0;
                 }
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        var c = new C();
-                        var name = nameof(c.$$
-                    }
+                public static void Main()
+                {
+                var c = new C();
+                var name = nameof(c.$$
+                }
                 }
                 """
             );
@@ -320,21 +320,21 @@ namespace N1
                 """
                 public class C
                 {
-                    public static explicit operator float(C c) => 0;
-                    public static explicit operator int(C c) => 0;
+                public static explicit operator float(C c) => 0;
+                public static explicit operator int(C c) => 0;
 
-                    public static explicit operator C(float f) => new C();
-                    public static implicit operator C(string s) => new C();
-                    public static implicit operator string(C c) => ";
+                public static explicit operator C(float f) => new C();
+                public static implicit operator C(string s) => new C();
+                public static implicit operator string(C c) => ";
                 }
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        var c = new C();
-                        c.$$
-                    }
+                public static void Main()
+                {
+                var c = new C();
+                c.$$
+                }
                 }
                 """,
                 SourceCodeKind.Regular
@@ -353,16 +353,16 @@ namespace N1
                 """
                 public class C
                 {
-                    public static bool op_Explicit(C c) => false;
+                public static bool op_Explicit(C c) => false;
                 }
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        var c = new C();
-                        c.$$
-                    }
+                public static void Main()
+                {
+                var c = new C();
+                c.$$
+                }
                 }
                 """
             );
@@ -375,16 +375,16 @@ namespace N1
                 """
                 public class C
                 {
-                    public static explicit operator int() => 0;
+                public static explicit operator int() => 0;
                 }
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        var c = new C();
-                        c.$$
-                    }
+                public static void Main()
+                {
+                var c = new C();
+                c.$$
+                }
                 }
                 """
             );
@@ -397,7 +397,7 @@ namespace N1
                 """
                 public class C
                 {
-                    public static explicit operator C(D d) => null;
+                public static explicit operator C(D d) => null;
                 }
                 public class D
                 {
@@ -405,11 +405,11 @@ namespace N1
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        var d = new D();
-                        d.$$
-                    }
+                public static void Main()
+                {
+                var d = new D();
+                d.$$
+                }
                 }
                 """
             );
@@ -422,15 +422,15 @@ namespace N1
             await VerifyItemExistsAsync(
                 """
                 public struct S {
-                    public static explicit operator int(S _) => 0;
+                public static explicit operator int(S _) => 0;
                 }
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        S? s = null;
-                        s.$$
-                    }
+                public static void Main()
+                {
+                S? s = null;
+                s.$$
+                }
                 }
                 """,
                 "int?",
@@ -445,23 +445,23 @@ namespace N1
         public async Task ExplicitConversionDescriptionIsIsGiven()
         {
             const string Markup = """
-                public struct S {
-                        /// <summary>
-                        /// Explicit conversion of <see cref="S"/> to <see cref="int"/>.
-                        /// </summary>
-                        /// <param name="value">The <see cref="S"/> to convert</param>
-                        public static explicit operator int(S value) => 0;
-                }
+            public struct S {
+            /// <summary>
+            /// Explicit conversion of <see cref="S"/> to <see cref="int"/>.
+            /// </summary>
+            /// <param name="value">The <see cref="S"/> to convert</param>
+            public static explicit operator int(S value) => 0;
+            }
 
-                public class Program
-                {
-                    public static void Main()
-                    {
-                        var s = new S();
-                        s.$$
-                    }
-                }
-                """;
+            public class Program
+            {
+            public static void Main()
+            {
+            var s = new S();
+            s.$$
+            }
+            }
+            """;
             await VerifyItemExistsAsync(
                 Markup,
                 "int",
@@ -480,23 +480,23 @@ namespace N1
         public async Task ExplicitConversionDescriptionIsIsGivenLifted()
         {
             const string Markup = """
-                public struct S {
-                        /// <summary>
-                        /// Explicit conversion of <see cref="S"/> to <see cref="int"/>.
-                        /// </summary>
-                        /// <param name="value">The <see cref="S"/> to convert</param>
-                        public static explicit operator int(S value) => 0;
-                }
+            public struct S {
+            /// <summary>
+            /// Explicit conversion of <see cref="S"/> to <see cref="int"/>.
+            /// </summary>
+            /// <param name="value">The <see cref="S"/> to convert</param>
+            public static explicit operator int(S value) => 0;
+            }
 
-                public class Program
-                {
-                    public static void Main()
-                    {
-                        S? s = new S();
-                        s.$$
-                    }
-                }
-                """;
+            public class Program
+            {
+            public static void Main()
+            {
+            S? s = new S();
+            s.$$
+            }
+            }
+            """;
             await VerifyItemExistsAsync(
                 Markup,
                 "int?",
@@ -589,15 +589,15 @@ public class Program
         public async Task ExplicitBuiltInNumericConversionDescriptionIsLikeAConversionOperatorDescription()
         {
             const string Markup = """
-                public class Program
-                {
-                    public static void Main()
-                    {
-                        int i = 0;
-                        i.$$
-                    }
-                }
-                """;
+            public class Program
+            {
+            public static void Main()
+            {
+            int i = 0;
+            i.$$
+            }
+            }
+            """;
             await VerifyItemExistsAsync(
                 Markup,
                 "byte",
@@ -614,15 +614,15 @@ public class Program
         public async Task ExplicitBuiltInNumericConversionDescriptionIsLikeAConversionOperatorDescriptionLifted()
         {
             const string Markup = """
-                public class Program
-                {
-                    public static void Main()
-                    {
-                        int? i = 0;
-                        i.$$
-                    }
-                }
-                """;
+            public class Program
+            {
+            public static void Main()
+            {
+            int? i = 0;
+            i.$$
+            }
+            }
+            """;
             await VerifyItemExistsAsync(
                 Markup,
                 "byte?",
@@ -645,11 +645,11 @@ public class Program
                 public enum E { One }
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        var e = E.One;
-                        e.$$
-                    }
+                public static void Main()
+                {
+                var e = E.One;
+                e.$$
+                }
                 }
                 """,
                 SourceCodeKind.Regular
@@ -676,16 +676,16 @@ public class Program
         public async Task ExplicitBuiltInEnumConversionDescriptionIsLikeAConversionOperatorDescription()
         {
             const string Markup = """
-                public enum E { One }
-                public class Program
-                {
-                    public static void Main()
-                    {
-                        var e = E.One;
-                        e.$$
-                    }
-                }
-                """;
+            public enum E { One }
+            public class Program
+            {
+            public static void Main()
+            {
+            var e = E.One;
+            e.$$
+            }
+            }
+            """;
             await VerifyItemExistsAsync(
                 Markup,
                 "int",
@@ -702,16 +702,16 @@ public class Program
         public async Task ExplicitBuiltInEnumConversionDescriptionIsLikeAConversionOperatorDescriptionLifted()
         {
             const string Markup = """
-                public enum E { One }
-                public class Program
-                {
-                    public static void Main()
-                    {
-                        E? e = E.One;
-                        e.$$
-                    }
-                }
-                """;
+            public enum E { One }
+            public class Program
+            {
+            public static void Main()
+            {
+            E? e = E.One;
+            e.$$
+            }
+            }
+            """;
             await VerifyItemExistsAsync(
                 Markup,
                 "int?",
@@ -728,22 +728,22 @@ public class Program
         public async Task ExplicitBuiltInEnumConversionDescriptionIsLikeAConversionOperatorDescriptionUnimportedNamespaceMinimalName()
         {
             const string Markup = """
-                namespace A.B
-                {
-                    public enum E { One }
-                }
-                namespace A.C
-                {
-                    public class Program
-                    {
-                        public static void Main()
-                        {
-                            var e = B.E.One;
-                            e.$$
-                        }
-                    }
-                }
-                """;
+            namespace A.B
+            {
+            public enum E { One }
+            }
+            namespace A.C
+            {
+            public class Program
+            {
+            public static void Main()
+            {
+            var e = B.E.One;
+            e.$$
+            }
+            }
+            }
+            """;
             await VerifyItemExistsAsync(
                 Markup,
                 "int",
@@ -798,18 +798,18 @@ public class Program
             await VerifyItemExistsAsync(
                 """
                 public class Base {
-                    public static explicit operator int(Base b) => 0;
+                public static explicit operator int(Base b) => 0;
                 }
                 public class Derived: Base
                 {
                 }
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        var d = new Derived();
-                        var i = d.$$
-                    }
+                public static void Main()
+                {
+                var d = new Derived();
+                var i = d.$$
+                }
                 }
                 """,
                 "int",
@@ -849,30 +849,30 @@ public class Program
         public async Task TestEditorBrowsableOnConversionIsRespected_EditorBrowsableStateNever()
         {
             var markup = """
-                namespace N
-                {
-                    public class Program
-                    {
-                        public static void Main()
-                        {
-                            var c = new C();
-                            c.$$
-                        }
-                    }
-                }
-                """;
+            namespace N
+            {
+            public class Program
+            {
+            public static void Main()
+            {
+            var c = new C();
+            c.$$
+            }
+            }
+            }
+            """;
             var referencedCode = """
-                using System.ComponentModel;
+            using System.ComponentModel;
 
-                namespace N
-                {
-                    public class C
-                    {
-                        [EditorBrowsable(EditorBrowsableState.Never)]
-                        public static explicit operator int(C _) => 0;
-                    }
-                }
-                """;
+            namespace N
+            {
+            public class C
+            {
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            public static explicit operator int(C _) => 0;
+            }
+            }
+            """;
 
             await VerifyItemInEditorBrowsableContextsAsync(
                 markup: markup,
@@ -889,32 +889,32 @@ public class Program
         public async Task TestEditorBrowsableOnConversionIsRespected_EditorBrowsableStateNever_InheritedConversion_1()
         {
             var markup = """
-                namespace N
-                {
-                    public class Program
-                    {
-                        public static void Main()
-                        {
-                            var d = new Derived();
-                            d.$$
-                        }
-                    }
-                }
-                """;
+            namespace N
+            {
+            public class Program
+            {
+            public static void Main()
+            {
+            var d = new Derived();
+            d.$$
+            }
+            }
+            }
+            """;
             var referencedCode = """
-                using System.ComponentModel;
+            using System.ComponentModel;
 
-                namespace N
-                {
-                    public class Base {
-                        [EditorBrowsable(EditorBrowsableState.Never)]
-                        public static explicit operator int(Base b) => 0;
-                    }
-                    public class Derived: Base
-                    {
-                    }
-                }
-                """;
+            namespace N
+            {
+            public class Base {
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            public static explicit operator int(Base b) => 0;
+            }
+            public class Derived: Base
+            {
+            }
+            }
+            """;
 
             await VerifyItemInEditorBrowsableContextsAsync(
                 markup: markup,
@@ -931,32 +931,32 @@ public class Program
         public async Task TestEditorBrowsableOnConversionIsRespected_EditorBrowsableStateNever_InheritedConversion_2()
         {
             var markup = """
-                namespace N
-                {
-                    public class Derived: Base
-                    {
-                    }
-                    public class Program
-                    {
-                        public static void Main()
-                        {
-                            var d = new Derived();
-                            d.$$
-                        }
-                    }
-                }
-                """;
+            namespace N
+            {
+            public class Derived: Base
+            {
+            }
+            public class Program
+            {
+            public static void Main()
+            {
+            var d = new Derived();
+            d.$$
+            }
+            }
+            }
+            """;
             var referencedCode = """
-                using System.ComponentModel;
+            using System.ComponentModel;
 
-                namespace N
-                {
-                    public class Base {
-                        [EditorBrowsable(EditorBrowsableState.Never)]
-                        public static explicit operator int(Base b) => 0;
-                    }
-                }
-                """;
+            namespace N
+            {
+            public class Base {
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            public static explicit operator int(Base b) => 0;
+            }
+            }
+            """;
 
             await VerifyItemInEditorBrowsableContextsAsync(
                 markup: markup,
@@ -973,30 +973,30 @@ public class Program
         public async Task TestEditorBrowsableOnConversionIsRespected_EditorBrowsableStateAdvanced()
         {
             var markup = """
-                namespace N
-                {
-                    public class Program
-                    {
-                        public static void Main()
-                        {
-                            var c = new C();
-                            c.$$
-                        }
-                    }
-                }
-                """;
+            namespace N
+            {
+            public class Program
+            {
+            public static void Main()
+            {
+            var c = new C();
+            c.$$
+            }
+            }
+            }
+            """;
             var referencedCode = """
-                using System.ComponentModel;
+            using System.ComponentModel;
 
-                namespace N
-                {
-                    public class C
-                    {
-                        [EditorBrowsable(EditorBrowsableState.Advanced)]
-                        public static explicit operator int(C _) => 0;
-                    }
-                }
-                """;
+            namespace N
+            {
+            public class C
+            {
+            [EditorBrowsable(EditorBrowsableState.Advanced)]
+            public static explicit operator int(C _) => 0;
+            }
+            }
+            """;
 
             HideAdvancedMembers = false;
 
@@ -1029,18 +1029,18 @@ public class Program
             await VerifyNoItemsExistAsync(
                 """
                 public struct S {
-                    public static explicit operator int(S s) => 0;
+                public static explicit operator int(S s) => 0;
                 }
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        unsafe{
-                            var s = new S();
-                            S* p = &s;
-                            var i = p->$$;
-                        }
-                    }
+                public static void Main()
+                {
+                unsafe{
+                var s = new S();
+                S* p = &s;
+                var i = p->$$;
+                }
+                }
                 }
                 """
             );

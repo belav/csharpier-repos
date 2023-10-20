@@ -15,13 +15,13 @@ public class SqlServerHistoryRepositoryTest
 
         Assert.Equal(
             """
-CREATE TABLE [__EFMigrationsHistory] (
-    [MigrationId] nvarchar(150) NOT NULL,
-    [ProductVersion] nvarchar(32) NOT NULL,
-    CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
-);
+            CREATE TABLE [__EFMigrationsHistory] (
+            [MigrationId] nvarchar(150) NOT NULL,
+            [ProductVersion] nvarchar(32) NOT NULL,
+            CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+            );
 
-""",
+            """,
             sql,
             ignoreLineEndingDifferences: true
         );
@@ -34,14 +34,14 @@ CREATE TABLE [__EFMigrationsHistory] (
 
         Assert.Equal(
             """
-IF SCHEMA_ID(N'my') IS NULL EXEC(N'CREATE SCHEMA [my];');
-CREATE TABLE [my].[__EFMigrationsHistory] (
-    [MigrationId] nvarchar(150) NOT NULL,
-    [ProductVersion] nvarchar(32) NOT NULL,
-    CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
-);
+            IF SCHEMA_ID(N'my') IS NULL EXEC(N'CREATE SCHEMA [my];');
+            CREATE TABLE [my].[__EFMigrationsHistory] (
+            [MigrationId] nvarchar(150) NOT NULL,
+            [ProductVersion] nvarchar(32) NOT NULL,
+            CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+            );
 
-""",
+            """,
             sql,
             ignoreLineEndingDifferences: true
         );
@@ -54,16 +54,16 @@ CREATE TABLE [my].[__EFMigrationsHistory] (
 
         Assert.Equal(
             """
-IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
-BEGIN
-    CREATE TABLE [__EFMigrationsHistory] (
-        [MigrationId] nvarchar(150) NOT NULL,
-        [ProductVersion] nvarchar(32) NOT NULL,
-        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
-    );
-END;
+            IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+            BEGIN
+            CREATE TABLE [__EFMigrationsHistory] (
+            [MigrationId] nvarchar(150) NOT NULL,
+            [ProductVersion] nvarchar(32) NOT NULL,
+            CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+            );
+            END;
 
-""",
+            """,
             sql,
             ignoreLineEndingDifferences: true
         );
@@ -76,17 +76,17 @@ END;
 
         Assert.Equal(
             """
-IF OBJECT_ID(N'[my].[__EFMigrationsHistory]') IS NULL
-BEGIN
-    IF SCHEMA_ID(N'my') IS NULL EXEC(N'CREATE SCHEMA [my];');
-    CREATE TABLE [my].[__EFMigrationsHistory] (
-        [MigrationId] nvarchar(150) NOT NULL,
-        [ProductVersion] nvarchar(32) NOT NULL,
-        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
-    );
-END;
+            IF OBJECT_ID(N'[my].[__EFMigrationsHistory]') IS NULL
+            BEGIN
+            IF SCHEMA_ID(N'my') IS NULL EXEC(N'CREATE SCHEMA [my];');
+            CREATE TABLE [my].[__EFMigrationsHistory] (
+            [MigrationId] nvarchar(150) NOT NULL,
+            [ProductVersion] nvarchar(32) NOT NULL,
+            CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+            );
+            END;
 
-""",
+            """,
             sql,
             ignoreLineEndingDifferences: true
         );
@@ -99,10 +99,10 @@ END;
 
         Assert.Equal(
             """
-DELETE FROM [__EFMigrationsHistory]
-WHERE [MigrationId] = N'Migration1';
+            DELETE FROM [__EFMigrationsHistory]
+            WHERE [MigrationId] = N'Migration1';
 
-""",
+            """,
             sql,
             ignoreLineEndingDifferences: true
         );
@@ -115,10 +115,10 @@ WHERE [MigrationId] = N'Migration1';
 
         Assert.Equal(
             """
-INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'Migration1', N'7.0.0');
+            INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+            VALUES (N'Migration1', N'7.0.0');
 
-""",
+            """,
             sql,
             ignoreLineEndingDifferences: true
         );
@@ -131,12 +131,12 @@ VALUES (N'Migration1', N'7.0.0');
 
         Assert.Equal(
             """
-IF NOT EXISTS (
-    SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'Migration1'
-)
-BEGIN
-""",
+            IF NOT EXISTS (
+            SELECT * FROM [__EFMigrationsHistory]
+            WHERE [MigrationId] = N'Migration1'
+            )
+            BEGIN
+            """,
             sql,
             ignoreLineEndingDifferences: true
         );
@@ -149,12 +149,12 @@ BEGIN
 
         Assert.Equal(
             """
-IF EXISTS (
-    SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'Migration1'
-)
-BEGIN
-""",
+            IF EXISTS (
+            SELECT * FROM [__EFMigrationsHistory]
+            WHERE [MigrationId] = N'Migration1'
+            )
+            BEGIN
+            """,
             sql,
             ignoreLineEndingDifferences: true
         );
@@ -167,9 +167,9 @@ BEGIN
 
         Assert.Equal(
             """
-END;
+            END;
 
-""",
+            """,
             sql,
             ignoreLineEndingDifferences: true
         );

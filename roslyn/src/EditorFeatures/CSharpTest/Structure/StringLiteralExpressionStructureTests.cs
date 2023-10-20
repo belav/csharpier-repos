@@ -23,19 +23,19 @@ public class StringLiteralExpressionStructureTests
     {
         await VerifyBlockSpansAsync(
             """
-                class C
-                {
-                    void M()
-                    {
-                        var v =
-                {|hint:{|textspan:$$@"
-                class 
-                {
-                }
-                "|}|};
-                    }
-                }
-                """,
+            class C
+            {
+            void M()
+            {
+            var v =
+            {|hint:{|textspan:$$@"
+            class
+            {
+            }
+            "|}|};
+            }
+            }
+            """,
             Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
         );
     }
@@ -45,14 +45,14 @@ public class StringLiteralExpressionStructureTests
     {
         await VerifyNoBlockSpansAsync(
             """
-                class C
-                {
-                    void M()
-                    {
-                        var v = $$";
-                    }
-                }
-                """
+            class C
+            {
+            void M()
+            {
+            var v = $$";
+            }
+            }
+            """
         );
     }
 }

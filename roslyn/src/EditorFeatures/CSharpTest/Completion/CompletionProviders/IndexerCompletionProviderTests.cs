@@ -27,16 +27,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 public class C
                 {
-                    public int this[int i] => i;
+                public int this[int i] => i;
                 }
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        var c = new C();
-                        c.$$
-                    }
+                public static void Main()
+                {
+                var c = new C();
+                c.$$
+                }
                 }
                 """,
                 "this",
@@ -52,10 +52,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 public class Program
                 {
-                    public static void Main(string s)
-                    {
-                        s.$$
-                    }
+                public static void Main(string s)
+                {
+                s.$$
+                }
                 }
                 """,
                 "this",
@@ -71,15 +71,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 public class C
                 {
-                    public int this[int i] => i;
+                public int this[int i] => i;
                 }
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        C.$$
-                    }
+                public static void Main()
+                {
+                C.$$
+                }
                 }
                 """
             );
@@ -92,16 +92,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 public class C
                 {
-                    public int this[int i] => i;
+                public int this[int i] => i;
                 }
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        var c = new C();
-                        var name = nameof(c.$$
-                    }
+                public static void Main()
+                {
+                var c = new C();
+                var name = nameof(c.$$
+                }
                 }
                 """
             );
@@ -114,32 +114,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 public class C
                 {
-                    public int this[int i] => i;
+                public int this[int i] => i;
                 }
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        var c = new C();
-                        c.$$
-                    }
+                public static void Main()
+                {
+                var c = new C();
+                c.$$
+                }
                 }
                 """,
                 "this",
                 """
                 public class C
                 {
-                    public int this[int i] => i;
+                public int this[int i] => i;
                 }
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        var c = new C();
-                        c[$$]
-                    }
+                public static void Main()
+                {
+                var c = new C();
+                c[$$]
+                }
                 }
                 """
             );
@@ -152,32 +152,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 public class C
                 {
-                    public int this[int x, int y] => i;
+                public int this[int x, int y] => i;
                 }
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        var c = new C();
-                        c.$$
-                    }
+                public static void Main()
+                {
+                var c = new C();
+                c.$$
+                }
                 }
                 """,
                 "this",
                 """
                 public class C
                 {
-                    public int this[int x, int y] => i;
+                public int this[int x, int y] => i;
                 }
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        var c = new C();
-                        c[$$]
-                    }
+                public static void Main()
+                {
+                var c = new C();
+                c[$$]
+                }
                 }
                 """
             );
@@ -284,28 +284,28 @@ public class Program
                 """
                 public class C
                 {
-                    /// <summary>
-                    /// Returns the index <paramref name="i"/>
-                    /// </summary>
-                    /// <param name="i">The index</param>
-                    /// <returns>Returns the index <paramref name="i"/></returns>
-                    public int this[int i] => i;
+                /// <summary>
+                /// Returns the index <paramref name="i"/>
+                /// </summary>
+                /// <param name="i">The index</param>
+                /// <returns>Returns the index <paramref name="i"/></returns>
+                public int this[int i] => i;
 
-                    /// <summary>
-                    /// Returns 1
-                    /// </summary>
-                    /// <param name="i">The index</param>
-                    /// <returns>Returns 1</returns>
-                    public int this[string s] => 1;
+                /// <summary>
+                /// Returns 1
+                /// </summary>
+                /// <param name="i">The index</param>
+                /// <returns>Returns 1</returns>
+                public int this[string s] => 1;
                 }
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        var c = new C();
-                        c.$$
-                    }
+                public static void Main()
+                {
+                var c = new C();
+                c.$$
+                }
                 }
                 """,
                 "this",
@@ -322,7 +322,7 @@ Returns the index i"
                 """
                 public class Base
                 {
-                    public int this[int i] => i;
+                public int this[int i] => i;
                 }
                 public class Derived : Base
                 {
@@ -330,11 +330,11 @@ Returns the index i"
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        var d = new Derived();
-                        d.$$
-                    }
+                public static void Main()
+                {
+                var d = new Derived();
+                d.$$
+                }
                 }
                 """,
                 "this",
@@ -349,7 +349,7 @@ Returns the index i"
                 """
                 public class Base
                 {
-                    protected int this[int i] => i;
+                protected int this[int i] => i;
                 }
                 public class Derived : Base
                 {
@@ -357,11 +357,11 @@ Returns the index i"
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        var d = new Derived();
-                        d.$$
-                    }
+                public static void Main()
+                {
+                var d = new Derived();
+                d.$$
+                }
                 }
                 """
             );
@@ -374,11 +374,11 @@ Returns the index i"
                 """
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        var s = "Test";
-                        s.$$
-                    }
+                public static void Main()
+                {
+                var s = "Test";
+                s.$$
+                }
                 }
                 """,
                 "this",
@@ -390,30 +390,30 @@ Returns the index i"
         public async Task TestEditorBrowsableOnIndexerIsRespected_EditorBrowsableStateNever()
         {
             var markup = """
-                namespace N
-                {
-                    public class Program
-                    {
-                        public static void Main()
-                        {
-                            var c = new C();
-                            c.$$
-                        }
-                    }
-                }
-                """;
+            namespace N
+            {
+            public class Program
+            {
+            public static void Main()
+            {
+            var c = new C();
+            c.$$
+            }
+            }
+            }
+            """;
             var referencedCode = """
-                using System.ComponentModel;
+            using System.ComponentModel;
 
-                namespace N
-                {
-                    public class C
-                    {
-                        [EditorBrowsable(EditorBrowsableState.Never)]
-                        public int this[int i] => i;
-                    }
-                }
-                """;
+            namespace N
+            {
+            public class C
+            {
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            public int this[int i] => i;
+            }
+            }
+            """;
 
             await VerifyItemInEditorBrowsableContextsAsync(
                 markup: markup,
@@ -430,30 +430,30 @@ Returns the index i"
         public async Task TestEditorBrowsableOnIndexerIsRespected_EditorBrowsableStateAdvanced()
         {
             var markup = """
-                namespace N
-                {
-                    public class Program
-                    {
-                        public static void Main()
-                        {
-                            var c = new C();
-                            c.$$
-                        }
-                    }
-                }
-                """;
+            namespace N
+            {
+            public class Program
+            {
+            public static void Main()
+            {
+            var c = new C();
+            c.$$
+            }
+            }
+            }
+            """;
             var referencedCode = """
-                using System.ComponentModel;
+            using System.ComponentModel;
 
-                namespace N
-                {
-                    public class C
-                    {
-                        [EditorBrowsable(EditorBrowsableState.Advanced)]
-                        public int this[int i] => i;
-                    }
-                }
-                """;
+            namespace N
+            {
+            public class C
+            {
+            [EditorBrowsable(EditorBrowsableState.Advanced)]
+            public int this[int i] => i;
+            }
+            }
+            """;
             HideAdvancedMembers = true;
 
             await VerifyItemInEditorBrowsableContextsAsync(
@@ -483,34 +483,34 @@ Returns the index i"
         public async Task TestEditorBrowsableOnIndexerIsRespected_EditorBrowsableStateNever_InheritedMember()
         {
             var markup = """
-                namespace N
-                {
-                    public class Program
-                    {
-                        public static void Main()
-                        {
-                            var d = new Derived();
-                            d.$$
-                        }
-                    }
-                }
-                """;
+            namespace N
+            {
+            public class Program
+            {
+            public static void Main()
+            {
+            var d = new Derived();
+            d.$$
+            }
+            }
+            }
+            """;
             var referencedCode = """
-                using System.ComponentModel;
+            using System.ComponentModel;
 
-                namespace N
-                {
-                    public class Base
-                    {
-                        [EditorBrowsable(EditorBrowsableState.Never)]
-                        public int this[int i] => i;
-                    }
+            namespace N
+            {
+            public class Base
+            {
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            public int this[int i] => i;
+            }
 
-                    public class Derived: Base
-                    {
-                    }
-                }
-                """;
+            public class Derived: Base
+            {
+            }
+            }
+            """;
 
             await VerifyItemInEditorBrowsableContextsAsync(
                 markup: markup,
@@ -532,16 +532,16 @@ Returns the index i"
 
                 public class C
                 {
-                    public int this[int i] => i;
+                public int this[int i] => i;
                 }
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        C? c = null;
-                        var i = c!.$$
-                    }
+                public static void Main()
+                {
+                C? c = null;
+                var i = c!.$$
+                }
                 }
                 """,
                 "this",
@@ -550,16 +550,16 @@ Returns the index i"
 
                 public class C
                 {
-                    public int this[int i] => i;
+                public int this[int i] => i;
                 }
 
                 public class Program
                 {
-                    public static void Main()
-                    {
-                        C? c = null;
-                        var i = c![$$]
-                    }
+                public static void Main()
+                {
+                C? c = null;
+                var i = c![$$]
+                }
                 }
                 """
             );

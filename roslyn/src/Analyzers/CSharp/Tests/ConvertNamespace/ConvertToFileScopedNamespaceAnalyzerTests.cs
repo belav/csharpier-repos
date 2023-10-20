@@ -25,10 +25,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
         public async Task TestNoConvertToFileScopedInCSharp9()
         {
             var code = """
-                namespace N
-                {
-                }
-                """;
+            namespace N
+            {
+            }
+            """;
             await new VerifyCS.Test
             {
                 TestCode = code,
@@ -48,10 +48,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
         public async Task TestNoConvertToFileScopedInCSharp10WithBlockScopedPreference()
         {
             var code = """
-                namespace N
-                {
-                }
-                """;
+            namespace N
+            {
+            }
+            """;
             await new VerifyCS.Test
             {
                 TestCode = code,
@@ -120,14 +120,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
         public async Task TestNoConvertWithMultipleNamespaces()
         {
             var code = """
-                namespace N
-                {
-                }
+            namespace N
+            {
+            }
 
-                namespace N2
-                {
-                }
-                """;
+            namespace N2
+            {
+            }
+            """;
             await new VerifyCS.Test
             {
                 TestCode = code,
@@ -147,13 +147,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
         public async Task TestNoConvertWithNestedNamespaces1()
         {
             var code = """
-                namespace N
-                {
-                    namespace N2
-                    {
-                    }
-                }
-                """;
+            namespace N
+            {
+            namespace N2
+            {
+            }
+            }
+            """;
             await new VerifyCS.Test
             {
                 TestCode = code,
@@ -173,12 +173,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
         public async Task TestNoConvertWithTopLevelStatement1()
         {
             var code = """
-                {|CS8805:int i = 0;|}
+            {|CS8805:int i = 0;|}
 
-                namespace N
-                {
-                }
-                """;
+            namespace N
+            {
+            }
+            """;
             await new VerifyCS.Test
             {
                 TestCode = code,
@@ -198,12 +198,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
         public async Task TestNoConvertWithTopLevelStatement2()
         {
             var code = """
-                namespace N
-                {
-                }
+            namespace N
+            {
+            }
 
-                int i = 0;
-                """;
+            int i = 0;
+            """;
             await new VerifyCS.Test
             {
                 TestCode = code,
@@ -262,7 +262,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 TestCode = """
                 [|namespace N|]
                 {
-                    using System;
+                using System;
                 }
                 """,
                 FixedCode = """
@@ -289,9 +289,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 TestCode = """
                 [|namespace N|]
                 {
-                    class C
-                    {
-                    }
+                class C
+                {
+                }
                 }
                 """,
                 FixedCode = """
@@ -320,10 +320,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 TestCode = """
                 [|namespace N|]
                 {
-                    /// <summary/>
-                    class C
-                    {
-                    }
+                /// <summary/>
+                class C
+                {
+                }
                 }
                 """,
                 FixedCode = """
@@ -353,10 +353,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 TestCode = """
                 [|namespace N|]
                 {
-                    /// <summary/>
-                    class C
-                    {
-                    }{|CS1513:|}
+                /// <summary/>
+                class C
+                {
+                }{|CS1513:|}
                 """,
                 FixedCode = """
                 namespace N;
@@ -385,9 +385,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 TestCode = """
                 [|namespace N|]
                 { // comment
-                    class C
-                    {
-                    }
+                class C
+                {
+                }
                 }
                 """,
                 FixedCode = """
@@ -417,9 +417,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 // copyright
                 [|namespace N|]
                 {
-                    class C
-                    {
-                    }
+                class C
+                {
+                }
                 }
                 """,
                 FixedCode = """
@@ -449,10 +449,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 TestCode = """
                 [|namespace N|]
                 {
-                    /// <summary/>
-                    class C
-                    {
-                    }
+                /// <summary/>
+                class C
+                {
+                }
                 }
                 """,
                 FixedCode = """
@@ -483,13 +483,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 [|namespace N|]
                 {
                 #if X
-                    class C
-                    {
-                    }
+                class C
+                {
+                }
                 #else
-                    class C
-                    {
-                    }
+                class C
+                {
+                }
                 #endif
                 }
                 """,
@@ -526,20 +526,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 TestCode = """
                 [|namespace N|]
                 {
-                    /* x
-                     * x
-                     */
-                    class C
-                    {
-                    }
+                /* x
+                * x
+                */
+                class C
+                {
+                }
                 }
                 """,
                 FixedCode = """
                 namespace $$N;
 
                 /* x
-                 * x
-                 */
+                * x
+                */
                 class C
                 {
                 }
@@ -563,20 +563,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 TestCode = """
                 [|namespace N|]
                 {
-                    /* x
-                       x
-                     */
-                    class C
-                    {
-                    }
+                /* x
+                x
+                */
+                class C
+                {
+                }
                 }
                 """,
                 FixedCode = """
                 namespace $$N;
 
                 /* x
-                   x
-                 */
+                x
+                */
                 class C
                 {
                 }
@@ -600,19 +600,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 TestCode = """
                 [|namespace N|]
                 {
-                    class C
-                    {
-                        void M()
-                        {
-                            System.Console.WriteLine(@"
-                    a
-                        b
-                            c
-                                d
-                                    e
-                                        ");
-                        }
-                    }
+                class C
+                {
+                void M()
+                {
+                System.Console.WriteLine(@"
+                a
+                b
+                c
+                d
+                e
+                ");
+                }
+                }
                 }
                 """,
                 FixedCode = """
@@ -620,16 +620,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
 
                 class C
                 {
-                    void M()
-                    {
-                        System.Console.WriteLine(@"
-                    a
-                        b
-                            c
-                                d
-                                    e
-                                        ");
-                    }
+                void M()
+                {
+                System.Console.WriteLine(@"
+                a
+                b
+                c
+                d
+                e
+                ");
+                }
                 }
                 """,
                 LanguageVersion = LanguageVersion.CSharp10,
@@ -651,19 +651,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 TestCode = """
                 [|namespace N|]
                 {
-                    class C
-                    {
-                        void M()
-                        {
-                            System.Console.WriteLine($@"
-                    a
-                        b
-                            c{1 + 1}
-                                d
-                                    e
-                                        ");
-                        }
-                    }
+                class C
+                {
+                void M()
+                {
+                System.Console.WriteLine($@"
+                a
+                b
+                c{1 + 1}
+                d
+                e
+                ");
+                }
+                }
                 }
                 """,
                 FixedCode = """
@@ -671,16 +671,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
 
                 class C
                 {
-                    void M()
-                    {
-                        System.Console.WriteLine($@"
-                    a
-                        b
-                            c{1 + 1}
-                                d
-                                    e
-                                        ");
-                    }
+                void M()
+                {
+                System.Console.WriteLine($@"
+                a
+                b
+                c{1 + 1}
+                d
+                e
+                ");
+                }
                 }
                 """,
                 LanguageVersion = LanguageVersion.CSharp10,
@@ -702,20 +702,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 TestCode = """
                 [|namespace N|]
                 {
-                    class C
-                    {
-                        void M()
-                        {
-                            System.Console.WriteLine($@"
-                    a
-                        b
-                            c{
-                                1 + 1
-                             }d
-                                    e
-                                        ");
-                        }
-                    }
+                class C
+                {
+                void M()
+                {
+                System.Console.WriteLine($@"
+                a
+                b
+                c{
+                1 + 1
+                }d
+                e
+                ");
+                }
+                }
                 }
                 """,
                 FixedCode = """
@@ -723,17 +723,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
 
                 class C
                 {
-                    void M()
-                    {
-                        System.Console.WriteLine($@"
-                    a
-                        b
-                            c{
-                            1 + 1
-                         }d
-                                    e
-                                        ");
-                    }
+                void M()
+                {
+                System.Console.WriteLine($@"
+                a
+                b
+                c{
+                1 + 1
+                }d
+                e
+                ");
+                }
                 }
                 """,
                 LanguageVersion = LanguageVersion.CSharp10,
@@ -930,7 +930,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 [|namespace N|] { class C { } }
                 """,
                 FixedCode = """
-                namespace $$N; class C { } 
+                namespace $$N; class C { }
                 """,
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
@@ -954,7 +954,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 """,
                 FixedCode = """
                 namespace $$N;
-                class C { } 
+                class C { }
                 """,
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
@@ -975,9 +975,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 TestCode = """
                 [|namespace N|]
                 {
-                    class C
-                    {
-                    }
+                class C
+                {
+                }
                 }
                 """,
                 FixedCode = """
@@ -1030,9 +1030,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 TestCode = """
                 [|namespace N|]
                 {
-                    class C
-                    {
-                    }
+                class C
+                {
+                }
                 }
                 """,
                 FixedCode = """
@@ -1086,7 +1086,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 [|namespace Goo|]
                 {
                 #if true
-                    class goobar { }
+                class goobar { }
                 #endif
                 // There must be no CR, LF, or other character after the brace on the following line!
                 }
@@ -1119,7 +1119,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 [|namespace Goo|]
                 {
                 #if true
-                    class goobar { }
+                class goobar { }
                 #endif
                 // There must be no CR, LF, or other character after the brace on the following line!
                 }
@@ -1154,7 +1154,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 [|namespace Goo|]
                 {
                 #if false
-                    class goobar { }
+                class goobar { }
                 #endif
                 }
                 """,
@@ -1186,7 +1186,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 [|namespace Goo|]
                 {
                 #if false
-                    class goobar { }
+                class goobar { }
                 #endif
                 }
 

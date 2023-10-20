@@ -126,8 +126,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 namespace N
                 {
-                    using U;
-                    $$
+                using U;
+                $$
                 }
                 """
             );
@@ -190,8 +190,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 namespace N
                 {
-                    extern alias A;
-                    $$
+                extern alias A;
+                $$
                 }
                 """
             );
@@ -347,8 +347,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                    delegate void D();
-                    $$
+                delegate void D();
+                $$
                 """
             );
         }
@@ -359,8 +359,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class A {
-                    class C {}
-                    $$
+                class C {}
+                $$
                 """
             );
         }
@@ -372,7 +372,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 SourceCodeKind.Regular,
                 """
                 namespace N {
-                    $$
+                $$
                 """
             );
         }
@@ -384,7 +384,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 SourceCodeKind.Script,
                 """
                 namespace N {
-                    $$
+                $$
                 """
             );
         }
@@ -395,7 +395,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 namespace N {
-                    namespace $$
+                namespace $$
                 """
             );
         }
@@ -407,8 +407,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 SourceCodeKind.Regular,
                 """
                 namespace N {
-                   namespace N1 {}
-                   $$
+                namespace N1 {}
+                $$
                 """
             );
         }
@@ -420,8 +420,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 SourceCodeKind.Script,
                 """
                 namespace N {
-                   namespace N1 {}
-                   $$
+                namespace N1 {}
+                $$
                 """
             );
         }
@@ -432,8 +432,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 namespace N {
-                    $$
-                    using Goo;
+                $$
+                using Goo;
                 """
             );
         }
@@ -445,8 +445,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 SourceCodeKind.Regular,
                 """
                 namespace N {
-                    class C {}
-                    $$
+                class C {}
+                $$
                 """
             );
         }
@@ -458,8 +458,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 SourceCodeKind.Script,
                 """
                 namespace N {
-                    class C {}
-                    $$
+                class C {}
+                $$
                 """
             );
         }
@@ -470,9 +470,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 namespace N {
-                    class A {
-                      class C {}
-                      $$
+                class A {
+                class C {}
+                $$
                 """
             );
         }
@@ -587,8 +587,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                  [Goo]
-                  $$
+                [Goo]
+                $$
                 """
             );
         }
@@ -599,14 +599,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 SourceCodeKind.Regular,
                 """
-        #region EDM Relationship Metadata
+                #region EDM Relationship Metadata
 
-        [assembly: EdmRelationshipAttribute("PerformanceResultsModel", "FK_Runs_Machines", "Machines", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PerformanceViewerSL.Web.Machine), "Runs", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PerformanceViewerSL.Web.Run), true)]
+                [assembly: EdmRelationshipAttribute("PerformanceResultsModel", "FK_Runs_Machines", "Machines", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PerformanceViewerSL.Web.Machine), "Runs", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PerformanceViewerSL.Web.Run), true)]
 
-        #endregion
+                #endregion
 
-        $$
-        """
+                $$
+                """
             );
         }
 
@@ -616,14 +616,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 SourceCodeKind.Script,
                 """
-        #region EDM Relationship Metadata
+                #region EDM Relationship Metadata
 
-        [assembly: EdmRelationshipAttribute("PerformanceResultsModel", "FK_Runs_Machines", "Machines", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PerformanceViewerSL.Web.Machine), "Runs", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PerformanceViewerSL.Web.Run), true)]
+                [assembly: EdmRelationshipAttribute("PerformanceResultsModel", "FK_Runs_Machines", "Machines", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PerformanceViewerSL.Web.Machine), "Runs", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PerformanceViewerSL.Web.Run), true)]
 
-        #endregion
+                #endregion
 
-        $$
-        """
+                $$
+                """
             );
         }
     }

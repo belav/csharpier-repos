@@ -77,7 +77,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   event Goo Bar { $$
+                event Goo Bar { $$
                 """
             );
         }
@@ -88,7 +88,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   event Goo Bar { [Bar] $$
+                event Goo Bar { [Bar] $$
                 """
             );
         }
@@ -99,7 +99,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   event Goo Bar { add { } $$
+                event Goo Bar { add { } $$
                 """
             );
         }
@@ -110,7 +110,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   event Goo Bar { add { } [Bar] $$
+                event Goo Bar { add { } [Bar] $$
                 """
             );
         }
@@ -121,7 +121,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   event Goo Bar { add { } $$
+                event Goo Bar { add { } $$
                 """
             );
         }
@@ -132,7 +132,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                   event Goo Bar { remove $$
+                event Goo Bar { remove $$
                 """
             );
         }
@@ -143,7 +143,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                   event Goo Bar { remove { } $$
+                event Goo Bar { remove { } $$
                 """
             );
         }
@@ -154,7 +154,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                   int Goo { $$
+                int Goo { $$
                 """
             );
         }

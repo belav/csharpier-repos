@@ -161,8 +161,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                  void Goo() {}
-                  $$
+                void Goo() {}
+                $$
                 """
             );
         }
@@ -173,8 +173,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 partial class C {
-                  void Goo() {}
-                  $$
+                void Goo() {}
+                $$
                 """
             );
         }
@@ -185,8 +185,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 partial class C {
-                  int i;
-                  $$
+                int i;
+                $$
                 """
             );
         }
@@ -197,8 +197,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 partial class C {
-                  int i { get; }
-                  $$
+                int i { get; }
+                $$
                 """
             );
         }
@@ -279,8 +279,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 partial class C {
-                  [goo]
-                  $$
+                [goo]
+                $$
                 """
             );
         }
@@ -291,7 +291,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 struct S {
-                   $$
+                $$
                 """
             );
         }
@@ -303,7 +303,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 partial struct S {
-                   $$
+                $$
                 """
             );
         }
@@ -314,7 +314,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 interface I {
-                   $$
+                $$
                 """
             );
         }
@@ -325,7 +325,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 partial class C {
-                   $$
+                $$
                 """
             );
         }
@@ -457,7 +457,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    abstract $$
+                abstract $$
                 """
             );
         }
@@ -468,7 +468,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                    virtual $$
+                virtual $$
                 """
             );
         }
@@ -479,7 +479,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                    override $$
+                override $$
                 """
             );
         }
@@ -490,7 +490,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    sealed $$
+                sealed $$
                 """
             );
         }
@@ -501,7 +501,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    readonly $$
+                readonly $$
                 """
             );
         }
@@ -512,7 +512,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 partial class C {
-                    async $$
+                async $$
                 """
             );
         }

@@ -21,12 +21,12 @@ public class DisabledTextStructureTests : AbstractCSharpSyntaxTriviaStructureTes
     public async Task TestDisabledIf()
     {
         var code = """
-                #if false
-                {|span:$$Blah
-                Blah
-                Blah|}
-                #endif
-                """;
+        #if false
+        {|span:$$Blah
+        Blah
+        Blah|}
+        #endif
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -38,13 +38,13 @@ public class DisabledTextStructureTests : AbstractCSharpSyntaxTriviaStructureTes
     public async Task TestDisabledElse()
     {
         var code = """
-                #if true
-                #else
-                {|span:$$Blah
-                Blah
-                Blah|}
-                #endif
-                """;
+        #if true
+        #else
+        {|span:$$Blah
+        Blah
+        Blah|}
+        #endif
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -56,13 +56,13 @@ public class DisabledTextStructureTests : AbstractCSharpSyntaxTriviaStructureTes
     public async Task TestDisabledElIf()
     {
         var code = """
-                #if true
-                #elif false
-                {|span:$$Blah
-                Blah
-                Blah|}
-                #endif
-                """;
+        #if true
+        #elif false
+        {|span:$$Blah
+        Blah
+        Blah|}
+        #endif
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -74,17 +74,17 @@ public class DisabledTextStructureTests : AbstractCSharpSyntaxTriviaStructureTes
     public async Task DisabledCodeWithEmbeddedPreprocessorDirectivesShouldCollapseEntireDisabledRegion()
     {
         var code = """
-                class P {
-                #if false
-                {|span:    void $$M()
-                    {
-                #region "R"
-                       M();
-                #endregion
-                        }|}
-                #endif
-                    }
-                """;
+        class P {
+        #if false
+        {|span:    void $$M()
+        {
+        #region "R"
+        M();
+        #endregion
+        }|}
+        #endif
+        }
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -96,17 +96,17 @@ public class DisabledTextStructureTests : AbstractCSharpSyntaxTriviaStructureTes
     public async Task DisabledCodeShouldNotCollapseUnlessItFollowsADirective()
     {
         var code = """
-                class P {
-                #if false
-                {|span:    void M()
-                    {
-                #region "R"
-                       $$M();
-                #endregion
-                        }|}
-                #endif
-                    }
-                """;
+        class P {
+        #if false
+        {|span:    void M()
+        {
+        #region "R"
+        $$M();
+        #endregion
+        }|}
+        #endif
+        }
+        """;
 
         await VerifyNoBlockSpansAsync(code);
     }
@@ -115,17 +115,17 @@ public class DisabledTextStructureTests : AbstractCSharpSyntaxTriviaStructureTes
     public async Task NestedDisabledCodePreProcessorDirectivesShouldCollapseEntireDisabledRegion()
     {
         var code = """
-                class P {
-                #if Goo
-                {|span:    void $$M()
-                    {
-                #if Bar
-                       M();
-                #endif
-                        }|}
-                #endif
-                    }
-                """;
+        class P {
+        #if Goo
+        {|span:    void $$M()
+        {
+        #if Bar
+        M();
+        #endif
+        }|}
+        #endif
+        }
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -137,19 +137,19 @@ public class DisabledTextStructureTests : AbstractCSharpSyntaxTriviaStructureTes
     public async Task NestedDisabledCodePreProcessorDirectivesWithElseShouldCollapseEntireDisabledRegion()
     {
         var code = """
-                class P {
-                #if Goo
-                {|span:    void $$M()
-                    {
-                #if Bar
-                       M();
-                #else
+        class P {
+        #if Goo
+        {|span:    void $$M()
+        {
+        #if Bar
+        M();
+        #else
 
-                #endif
-                        }|}
-                #endif
-                    }
-                """;
+        #endif
+        }|}
+        #endif
+        }
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -161,19 +161,19 @@ public class DisabledTextStructureTests : AbstractCSharpSyntaxTriviaStructureTes
     public async Task NestedDisabledCodePreProcessorDirectivesWithElifShouldCollapseEntireDisabledRegion()
     {
         var code = """
-                class P {
-                #if Goo
-                {|span:    void $$M()
-                    {
-                #if Bar
-                       M();
-                #elif Baz
+        class P {
+        #if Goo
+        {|span:    void $$M()
+        {
+        #if Bar
+        M();
+        #elif Baz
 
-                #endif
-                        }|}
-                #endif
-                    }
-                """;
+        #endif
+        }|}
+        #endif
+        }
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -185,21 +185,21 @@ public class DisabledTextStructureTests : AbstractCSharpSyntaxTriviaStructureTes
     public async Task NestedDisabledCodePreProcessorDirectivesWithElseAndElifShouldCollapseEntireDisabledRegion()
     {
         var code = """
-                class P {
-                #if Goo
-                {|span:    void $$M()
-                    {
-                #if Bar
-                       M();
-                #else
+        class P {
+        #if Goo
+        {|span:    void $$M()
+        {
+        #if Bar
+        M();
+        #else
 
-                #elif Baz
+        #elif Baz
 
-                #endif
-                        }|}
-                #endif
-                    }
-                """;
+        #endif
+        }|}
+        #endif
+        }
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -211,18 +211,18 @@ public class DisabledTextStructureTests : AbstractCSharpSyntaxTriviaStructureTes
     public async Task NestedDisabledCodePreProcessorDirectivesShouldCollapseEntireDisabledRegion2()
     {
         var code = """
-                class P {
-                #if Goo
-                    void M()
-                    {
-                #if Bar
-                {|span:       $$M();
-                       M();|}
-                #endif
-                        }
-                #endif
-                    }
-                """;
+        class P {
+        #if Goo
+        void M()
+        {
+        #if Bar
+        {|span:       $$M();
+        M();|}
+        #endif
+        }
+        #endif
+        }
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -234,17 +234,17 @@ public class DisabledTextStructureTests : AbstractCSharpSyntaxTriviaStructureTes
     public async Task NestedDisabledCodePreProcessorDirectivesShouldCollapseEntireDisabledRegion3()
     {
         var code = """
-                class P {
-                #if Goo
-                {|span:    void $$M()
-                    {|}
-                #if Bar
-                       M();
-                       M();
-                        }
-                #endif
-                    }
-                """;
+        class P {
+        #if Goo
+        {|span:    void $$M()
+        {|}
+        #if Bar
+        M();
+        M();
+        }
+        #endif
+        }
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -256,26 +256,26 @@ public class DisabledTextStructureTests : AbstractCSharpSyntaxTriviaStructureTes
     public async Task NestedDisabledCodePreProcessorDirectivesShouldCollapseEntireDisabledRegion4()
     {
         var code = """
-                class P {
-                #if Goo
-                {|span:    void $$M()
-                    {
-                #if Bar
-                       M();
-                #line 10
-                        //some more text...
-                        //text
-                #if Car
-                        //random text
-                        //text
-                #endif
-                        // more text
-                        // text
-                #endif
-                    }|}
-                #endif
-                    }
-                """;
+        class P {
+        #if Goo
+        {|span:    void $$M()
+        {
+        #if Bar
+        M();
+        #line 10
+        //some more text...
+        //text
+        #if Car
+        //random text
+        //text
+        #endif
+        // more text
+        // text
+        #endif
+        }|}
+        #endif
+        }
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -287,26 +287,26 @@ public class DisabledTextStructureTests : AbstractCSharpSyntaxTriviaStructureTes
     public async Task PreprocessorDirectivesInTrailingTrivia()
     {
         var code = """
-                class P {
-                #if Goo
-                {|span:    void $$M()
-                    {
-                #if Bar
-                       M();
-                #line 10
-                        //some more text...
-                        //text
-                #if Car
-                        //random text
-                        //text
-                #endif
-                        // more text
-                        // text
-                #endif
-                    }|}
-                #endif
-                    }
-                """;
+        class P {
+        #if Goo
+        {|span:    void $$M()
+        {
+        #if Bar
+        M();
+        #line 10
+        //some more text...
+        //text
+        #if Car
+        //random text
+        //text
+        #endif
+        // more text
+        // text
+        #endif
+        }|}
+        #endif
+        }
+        """;
 
         await VerifyBlockSpansAsync(
             code,

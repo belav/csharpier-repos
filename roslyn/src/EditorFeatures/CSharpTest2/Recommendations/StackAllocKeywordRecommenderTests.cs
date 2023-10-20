@@ -86,8 +86,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 unsafe class C {
-                    void Goo() {
-                      var v = $$
+                void Goo() {
+                var v = $$
                 """
             );
         }
@@ -99,8 +99,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 unsafe class C {
-                    void Goo() {
-                      int v = $$
+                void Goo() {
+                int v = $$
                 """
             );
         }
@@ -111,8 +111,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 unsafe class C {
-                    void Goo() {
-                      int* v = $$
+                void Goo() {
+                int* v = $$
                 """
             );
         }
@@ -126,7 +126,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    int v = $$
+                int v = $$
                 """
             );
         }
@@ -138,9 +138,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                    unsafe static void Main(string[] args)
-                    {
-                        for (var i = $$
+                unsafe static void Main(string[] args)
+                {
+                for (var i = $$
                 """
             );
         }
@@ -152,9 +152,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                    unsafe static void Main(string[] args)
-                    {
-                        for (int* i = $$
+                unsafe static void Main(string[] args)
+                {
+                for (int* i = $$
                 """
             );
         }
@@ -166,9 +166,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                    unsafe static void Main(string[] args)
-                    {
-                        for (string i = $$
+                unsafe static void Main(string[] args)
+                {
+                for (string i = $$
                 """
             );
         }
@@ -179,8 +179,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                Span<int> s = $$
-                """
+                    Span<int> s = $$
+                    """
                 )
             );
         }
@@ -203,16 +203,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var s = (Span<char>)$$
-                """
+                    var s = (Span<char>)$$
+                    """
                 )
             );
 
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                s = (Span<char>)$$
-                """
+                    s = (Span<char>)$$
+                    """
                 )
             );
         }
@@ -223,16 +223,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var s = value ? $$
-                """
+                    var s = value ? $$
+                    """
                 )
             );
 
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                s = value ? $$
-                """
+                    s = value ? $$
+                    """
                 )
             );
         }
@@ -243,16 +243,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var s = value ? (Span<int>)$$
-                """
+                    var s = value ? (Span<int>)$$
+                    """
                 )
             );
 
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                s = value ? (Span<int>)$$
-                """
+                    s = value ? (Span<int>)$$
+                    """
                 )
             );
         }
@@ -263,16 +263,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var s = value ? stackalloc int[10] : $$
-                """
+                    var s = value ? stackalloc int[10] : $$
+                    """
                 )
             );
 
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                s = value ? stackalloc int[10] : $$
-                """
+                    s = value ? stackalloc int[10] : $$
+                    """
                 )
             );
         }
@@ -283,16 +283,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var s = value ? stackalloc int[10] : (Span<int>)$$
-                """
+                    var s = value ? stackalloc int[10] : (Span<int>)$$
+                    """
                 )
             );
 
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                s = value ? stackalloc int[10] : (Span<int>)$$
-                """
+                    s = value ? stackalloc int[10] : (Span<int>)$$
+                    """
                 )
             );
         }
@@ -303,16 +303,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var s = value1 ? value2 ? $$
-                """
+                    var s = value1 ? value2 ? $$
+                    """
                 )
             );
 
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                s = value1 ? value2 ? $$
-                """
+                    s = value1 ? value2 ? $$
+                    """
                 )
             );
         }
@@ -323,16 +323,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var s = value1 ? value2 ? (Span<int>)$$
-                """
+                    var s = value1 ? value2 ? (Span<int>)$$
+                    """
                 )
             );
 
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                s = value1 ? value2 ? (Span<int>)$$
-                """
+                    s = value1 ? value2 ? (Span<int>)$$
+                    """
                 )
             );
         }
@@ -343,16 +343,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var s = value1 ? value2 ? stackalloc int [10] : $$
-                """
+                    var s = value1 ? value2 ? stackalloc int [10] : $$
+                    """
                 )
             );
 
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                s = value1 ? value2 ? stackalloc int [10] : $$
-                """
+                    s = value1 ? value2 ? stackalloc int [10] : $$
+                    """
                 )
             );
         }
@@ -363,16 +363,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var s = value1 ? value2 ? stackalloc int [10] : (Span<int>)$$
-                """
+                    var s = value1 ? value2 ? stackalloc int [10] : (Span<int>)$$
+                    """
                 )
             );
 
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                s = value1 ? value2 ? stackalloc int [10] : (Span<int>)$$
-                """
+                    s = value1 ? value2 ? stackalloc int [10] : (Span<int>)$$
+                    """
                 )
             );
         }
@@ -383,16 +383,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                var x $$ =
-                """
+                    var x $$ =
+                    """
                 )
             );
 
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                x $$ =
-                """
+                    x $$ =
+                    """
                 )
             );
         }
@@ -404,10 +404,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Program
                 {
-                    static void Method(System.Span<byte> span)
-                    {
-                        Method($$);
-                    }
+                static void Method(System.Span<byte> span)
+                {
+                Method($$);
+                }
                 }
                 """
             );
@@ -416,10 +416,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Program
                 {
-                    static void Method(int x, System.Span<byte> span)
-                    {
-                        Method(1, $$);
-                    }
+                static void Method(int x, System.Span<byte> span)
+                {
+                Method(1, $$);
+                }
                 }
                 """
             );
@@ -432,7 +432,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Program
                 {
-                    private const int _f = $$
+                private const int _f = $$
                 }
                 """
             );

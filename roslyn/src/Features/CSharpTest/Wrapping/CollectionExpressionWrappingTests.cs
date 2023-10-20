@@ -25,9 +25,9 @@ public class CollectionExpressionWrappingTests : AbstractWrappingTests
         await TestMissingAsync(
             """
             class C {
-                void Bar() {
-                    var test = [||][1];
-                }
+            void Bar() {
+            var test = [||][1];
+            }
             }
             """
         );
@@ -39,9 +39,9 @@ public class CollectionExpressionWrappingTests : AbstractWrappingTests
         await TestMissingAsync(
             """
             class C {
-                void Bar() {
-                    var test = [||][1,];
-                }
+            void Bar() {
+            var test = [||][1,];
+            }
             }
             """
         );
@@ -53,30 +53,30 @@ public class CollectionExpressionWrappingTests : AbstractWrappingTests
         await TestAllWrappingCasesAsync(
             """
             class C {
-                void Bar() {
-                    var test = [||][1, 2];
-                }
+            void Bar() {
+            var test = [||][1, 2];
+            }
             }
             """,
             """
             class C {
-                void Bar() {
-                    var test =
-                    [
-                        1,
-                        2
-                    ];
-                }
+            void Bar() {
+            var test =
+            [
+            1,
+            2
+            ];
+            }
             }
             """,
             """
             class C {
-                void Bar() {
-                    var test =
-                    [
-                        1, 2
-                    ];
-                }
+            void Bar() {
+            var test =
+            [
+            1, 2
+            ];
+            }
             }
             """
         );
@@ -88,31 +88,31 @@ public class CollectionExpressionWrappingTests : AbstractWrappingTests
         await TestAllWrappingCasesAsync(
             """
             class C {
-                void Bar() {
-                    var test = [||][1, 2, .. c];
-                }
+            void Bar() {
+            var test = [||][1, 2, .. c];
+            }
             }
             """,
             """
             class C {
-                void Bar() {
-                    var test =
-                    [
-                        1,
-                        2,
-                        .. c
-                    ];
-                }
+            void Bar() {
+            var test =
+            [
+            1,
+            2,
+            .. c
+            ];
+            }
             }
             """,
             """
             class C {
-                void Bar() {
-                    var test =
-                    [
-                        1, 2, .. c
-                    ];
-                }
+            void Bar() {
+            var test =
+            [
+            1, 2, .. c
+            ];
+            }
             }
             """
         );
@@ -124,31 +124,31 @@ public class CollectionExpressionWrappingTests : AbstractWrappingTests
         await TestAllWrappingCasesAsync(
             """
             class C {
-                void Bar() {
-                    var test = [||][1, 2, .. c,];
-                }
+            void Bar() {
+            var test = [||][1, 2, .. c,];
+            }
             }
             """,
             """
             class C {
-                void Bar() {
-                    var test =
-                    [
-                        1,
-                        2,
-                        .. c,
-                    ];
-                }
+            void Bar() {
+            var test =
+            [
+            1,
+            2,
+            .. c,
+            ];
+            }
             }
             """,
             """
             class C {
-                void Bar() {
-                    var test =
-                    [
-                        1, 2, .. c,
-                    ];
-                }
+            void Bar() {
+            var test =
+            [
+            1, 2, .. c,
+            ];
+            }
             }
             """
         );
@@ -160,30 +160,30 @@ public class CollectionExpressionWrappingTests : AbstractWrappingTests
         await TestAllWrappingCasesAsync(
             """
             class C {
-                void Bar() {
-                    var test = [||][1, 2,];
-                }
+            void Bar() {
+            var test = [||][1, 2,];
+            }
             }
             """,
             """
             class C {
-                void Bar() {
-                    var test =
-                    [
-                        1,
-                        2,
-                    ];
-                }
+            void Bar() {
+            var test =
+            [
+            1,
+            2,
+            ];
+            }
             }
             """,
             """
             class C {
-                void Bar() {
-                    var test =
-                    [
-                        1, 2,
-                    ];
-                }
+            void Bar() {
+            var test =
+            [
+            1, 2,
+            ];
+            }
             }
             """
         );
@@ -195,37 +195,37 @@ public class CollectionExpressionWrappingTests : AbstractWrappingTests
         await TestAllWrappingCasesAsync(
             """
             class C {
-                void Bar() {
-                    var test = [||]["the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"];
-                 }
+            void Bar() {
+            var test = [||]["the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"];
+            }
             }
             """,
             """
             class C {
-                void Bar() {
-                    var test =
-                    [
-                        "the",
-                        "quick",
-                        "brown",
-                        "fox",
-                        "jumps",
-                        "over",
-                        "the",
-                        "lazy",
-                        "dog"
-                    ];
-                 }
+            void Bar() {
+            var test =
+            [
+            "the",
+            "quick",
+            "brown",
+            "fox",
+            "jumps",
+            "over",
+            "the",
+            "lazy",
+            "dog"
+            ];
+            }
             }
             """,
             """
             class C {
-                void Bar() {
-                    var test =
-                    [
-                        "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"
-                    ];
-                 }
+            void Bar() {
+            var test =
+            [
+            "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"
+            ];
+            }
             }
             """
         );
@@ -237,57 +237,57 @@ public class CollectionExpressionWrappingTests : AbstractWrappingTests
         await TestAllWrappingCasesAsync(
             """
             class C {
-                void Bar() {
-                    var test = [||]["the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog", "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"];
-                 }
+            void Bar() {
+            var test = [||]["the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog", "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"];
+            }
             }
             """,
             """
             class C {
-                void Bar() {
-                    var test =
-                    [
-                        "the",
-                        "quick",
-                        "brown",
-                        "fox",
-                        "jumps",
-                        "over",
-                        "the",
-                        "lazy",
-                        "dog",
-                        "the",
-                        "quick",
-                        "brown",
-                        "fox",
-                        "jumps",
-                        "over",
-                        "the",
-                        "lazy",
-                        "dog"
-                    ];
-                 }
+            void Bar() {
+            var test =
+            [
+            "the",
+            "quick",
+            "brown",
+            "fox",
+            "jumps",
+            "over",
+            "the",
+            "lazy",
+            "dog",
+            "the",
+            "quick",
+            "brown",
+            "fox",
+            "jumps",
+            "over",
+            "the",
+            "lazy",
+            "dog"
+            ];
+            }
             }
             """,
             """
             class C {
-                void Bar() {
-                    var test =
-                    [
-                        "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog", "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"
-                    ];
-                 }
+            void Bar() {
+            var test =
+            [
+            "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog", "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"
+            ];
+            }
             }
             """,
             """
             class C {
-                void Bar() {
-                    var test =
-                    [
-                        "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog", "the", "quick", "brown", "fox",
-                        "jumps", "over", "the", "lazy", "dog"
-                    ];
-                 }
+            void Bar() {
+            var test =
+            [
+            "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog", "the", "quick", "brown", "fox",
+            "jumps", "over", "the", "lazy", "dog"
+            ];
+            }
             }
             """
         );
@@ -299,30 +299,30 @@ public class CollectionExpressionWrappingTests : AbstractWrappingTests
         await TestAllWrappingCasesAsync(
             """
             class C {
-                void Bar() {
-                    var test =
-                    [||][
-                        1,
-                        2
-                    ];
-                }
+            void Bar() {
+            var test =
+            [||][
+            1,
+            2
+            ];
+            }
             }
             """,
             """
             class C {
-                void Bar() {
-                    var test = [1, 2];
-                }
+            void Bar() {
+            var test = [1, 2];
+            }
             }
             """,
             """
             class C {
-                void Bar() {
-                    var test =
-                    [
-                        1, 2
-                    ];
-                }
+            void Bar() {
+            var test =
+            [
+            1, 2
+            ];
+            }
             }
             """
         );
@@ -334,37 +334,37 @@ public class CollectionExpressionWrappingTests : AbstractWrappingTests
         await TestAllWrappingCasesAsync(
             """
             class C {
-                void Bar() {
-                    var test =
-                    [||][
-                        "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"
-                    ];
-                 }
+            void Bar() {
+            var test =
+            [||][
+            "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"
+            ];
+            }
             }
             """,
             """
             class C {
-                void Bar() {
-                    var test =
-                    [
-                        "the",
-                        "quick",
-                        "brown",
-                        "fox",
-                        "jumps",
-                        "over",
-                        "the",
-                        "lazy",
-                        "dog"
-                    ];
-                 }
+            void Bar() {
+            var test =
+            [
+            "the",
+            "quick",
+            "brown",
+            "fox",
+            "jumps",
+            "over",
+            "the",
+            "lazy",
+            "dog"
+            ];
+            }
             }
             """,
             """
             class C {
-                void Bar() {
-                    var test = ["the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"];
-                 }
+            void Bar() {
+            var test = ["the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"];
+            }
             }
             """
         );
@@ -376,31 +376,31 @@ public class CollectionExpressionWrappingTests : AbstractWrappingTests
         await TestAllWrappingCasesAsync(
             """
             class C {
-                void Bar() {
-                    var test = [||][new A { B = 1, C = 1 }, new A { B = 2, C = 2 }, new A { B = 3, C = 3 }];
-                 }
+            void Bar() {
+            var test = [||][new A { B = 1, C = 1 }, new A { B = 2, C = 2 }, new A { B = 3, C = 3 }];
+            }
             }
             """,
             """
             class C {
-                void Bar() {
-                    var test =
-                    [
-                        new A { B = 1, C = 1 },
-                        new A { B = 2, C = 2 },
-                        new A { B = 3, C = 3 }
-                    ];
-                 }
+            void Bar() {
+            var test =
+            [
+            new A { B = 1, C = 1 },
+            new A { B = 2, C = 2 },
+            new A { B = 3, C = 3 }
+            ];
+            }
             }
             """,
             """
             class C {
-                void Bar() {
-                    var test =
-                    [
-                        new A { B = 1, C = 1 }, new A { B = 2, C = 2 }, new A { B = 3, C = 3 }
-                    ];
-                 }
+            void Bar() {
+            var test =
+            [
+            new A { B = 1, C = 1 }, new A { B = 2, C = 2 }, new A { B = 3, C = 3 }
+            ];
+            }
             }
             """
         );
@@ -412,31 +412,31 @@ public class CollectionExpressionWrappingTests : AbstractWrappingTests
         await TestAllWrappingCasesAsync(
             """
             class C {
-                void Bar() {
-                    var test =
-                    [||][
-                        new A { B = 1, C = 1 },
-                        new A { B = 2, C = 2 },
-                        new A { B = 3, C = 3 }
-                    ];
-                 }
+            void Bar() {
+            var test =
+            [||][
+            new A { B = 1, C = 1 },
+            new A { B = 2, C = 2 },
+            new A { B = 3, C = 3 }
+            ];
+            }
             }
             """,
             """
             class C {
-                void Bar() {
-                    var test = [new A { B = 1, C = 1 }, new A { B = 2, C = 2 }, new A { B = 3, C = 3 }];
-                 }
+            void Bar() {
+            var test = [new A { B = 1, C = 1 }, new A { B = 2, C = 2 }, new A { B = 3, C = 3 }];
+            }
             }
             """,
             """
             class C {
-                void Bar() {
-                    var test =
-                    [
-                        new A { B = 1, C = 1 }, new A { B = 2, C = 2 }, new A { B = 3, C = 3 }
-                    ];
-                 }
+            void Bar() {
+            var test =
+            [
+            new A { B = 1, C = 1 }, new A { B = 2, C = 2 }, new A { B = 3, C = 3 }
+            ];
+            }
             }
             """
         );
@@ -448,38 +448,38 @@ public class CollectionExpressionWrappingTests : AbstractWrappingTests
         await TestAllWrappingCasesAsync(
             """
             class C {
-                void Bar() {
-                    return [||][0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-                 }
+            void Bar() {
+            return [||][0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+            }
             }
             """,
             """
             class C {
-                void Bar() {
-                    return
-                    [
-                        0,
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        8,
-                        9
-                    ];
-                 }
+            void Bar() {
+            return
+            [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+            ];
+            }
             }
             """,
             """
             class C {
-                void Bar() {
-                    return
-                    [
-                        0, 1, 2, 3, 4, 5, 6, 7, 8, 9
-                    ];
-                 }
+            void Bar() {
+            return
+            [
+            0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+            ];
+            }
             }
             """
         );
@@ -491,38 +491,38 @@ public class CollectionExpressionWrappingTests : AbstractWrappingTests
         await TestAllWrappingCasesAsync(
             """
             class C {
-                void Bar() {
-                    return
-                    [||][
-                        0,
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        8,
-                        9
-                    ];
-                 }
+            void Bar() {
+            return
+            [||][
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+            ];
+            }
             }
             """,
             """
             class C {
-                void Bar() {
-                    return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-                 }
+            void Bar() {
+            return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+            }
             }
             """,
             """
             class C {
-                void Bar() {
-                    return
-                    [
-                        0, 1, 2, 3, 4, 5, 6, 7, 8, 9
-                    ];
-                 }
+            void Bar() {
+            return
+            [
+            0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+            ];
+            }
             }
             """
         );
@@ -534,32 +534,32 @@ public class CollectionExpressionWrappingTests : AbstractWrappingTests
         await TestAllWrappingCasesAsync(
             """
             public class C {
-                public List<int> B => [||][0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+            public List<int> B => [||][0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
             }
             """,
             """
             public class C {
-                public List<int> B =>
-                [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8,
-                    9
-                ];
+            public List<int> B =>
+            [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+            ];
             }
             """,
             """
             public class C {
-                public List<int> B =>
-                [
-                    0, 1, 2, 3, 4, 5, 6, 7, 8, 9
-                ];
+            public List<int> B =>
+            [
+            0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+            ];
             }
             """
         );
@@ -571,32 +571,32 @@ public class CollectionExpressionWrappingTests : AbstractWrappingTests
         await TestAllWrappingCasesAsync(
             """
             public class C {
-                public List<int> B =>
-                [||][
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8,
-                    9
-                ];
+            public List<int> B =>
+            [||][
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+            ];
             }
             """,
             """
             public class C {
-                public List<int> B => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+            public List<int> B => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
             }
             """,
             """
             public class C {
-                public List<int> B =>
-                [
-                    0, 1, 2, 3, 4, 5, 6, 7, 8, 9
-                ];
+            public List<int> B =>
+            [
+            0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+            ];
             }
             """
         );
@@ -608,32 +608,32 @@ public class CollectionExpressionWrappingTests : AbstractWrappingTests
         await TestAllWrappingCasesAsync(
             """
             public void F() {
-                var result = fakefunction([||][0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var result = fakefunction([||][0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
             }
             """,
             """
             public void F() {
-                var result = fakefunction(
-                [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8,
-                    9
-                ]);
+            var result = fakefunction(
+            [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+            ]);
             }
             """,
             """
             public void F() {
-                var result = fakefunction(
-                [
-                    0, 1, 2, 3, 4, 5, 6, 7, 8, 9
-                ]);
+            var result = fakefunction(
+            [
+            0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+            ]);
             }
             """
         );
@@ -645,32 +645,32 @@ public class CollectionExpressionWrappingTests : AbstractWrappingTests
         await TestAllWrappingCasesAsync(
             """
             public void F() {
-                var result = fakefunction(
-                [||][
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8,
-                    9
-                ]);
+            var result = fakefunction(
+            [||][
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+            ]);
             }
             """,
             """
             public void F() {
-                var result = fakefunction([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            var result = fakefunction([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
             }
             """,
             """
             public void F() {
-                var result = fakefunction(
-                [
-                    0, 1, 2, 3, 4, 5, 6, 7, 8, 9
-                ]);
+            var result = fakefunction(
+            [
+            0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+            ]);
             }
             """
         );
@@ -682,9 +682,9 @@ public class CollectionExpressionWrappingTests : AbstractWrappingTests
         await TestMissingAsync(
             """
             class C {
-                void Bar() {
-                    var test = [||] 1, 2];
-                }
+            void Bar() {
+            var test = [||] 1, 2];
+            }
             }
             """
         );
@@ -696,10 +696,10 @@ public class CollectionExpressionWrappingTests : AbstractWrappingTests
         await TestMissingAsync(
             """
             class C {
-                void Bar() {
-                    var test = [||][1, 2
-                    return;
-                }
+            void Bar() {
+            var test = [||][1, 2
+            return;
+            }
             }
             """
         );
@@ -711,9 +711,9 @@ public class CollectionExpressionWrappingTests : AbstractWrappingTests
         await TestMissingAsync(
             """
             class C {
-                void Bar() {
-                    var test = [||][1, 2 ;
-                }
+            void Bar() {
+            var test = [||][1, 2 ;
+            }
             }
             """
         );

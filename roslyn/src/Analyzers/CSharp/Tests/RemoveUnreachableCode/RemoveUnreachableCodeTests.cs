@@ -27,9 +27,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """
                 class C
                 {
-                    void M()
-                    {
-                        throw new System.Exception();
+                void M()
+                {
+                throw new System.Exception();
                 [|        var v = 0;
                 |]    }
                 }
@@ -37,10 +37,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """
                 class C
                 {
-                    void M()
-                    {
-                        throw new System.Exception();
-                    }
+                void M()
+                {
+                throw new System.Exception();
+                }
                 }
                 """
             );
@@ -53,24 +53,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """
                 class C
                 {
-                    void M()
-                    {
-                        if (false)
-                        {
+                void M()
+                {
+                if (false)
+                {
                 [|            var v = 0;
                 |]        }
-                    }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        if (false)
-                        {
-                        }
-                    }
+                void M()
+                {
+                if (false)
+                {
+                }
+                }
                 }
                 """
             );
@@ -83,9 +83,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """
                 class C
                 {
-                    void M()
-                    {
-                        if (false)
+                void M()
+                {
+                if (false)
                 [|            {|CS1023:var v = 0;|}
                 |]    }
                 }
@@ -93,12 +93,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """
                 class C
                 {
-                    void M()
-                    {
-                        if (false)
-                        {
-                        }
-                    }
+                void M()
+                {
+                if (false)
+                {
+                }
+                }
                 }
                 """
             );
@@ -111,9 +111,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """
                 class C
                 {
-                    void M()
-                    {
-                        throw new System.Exception();
+                void M()
+                {
+                throw new System.Exception();
                 [|        var v = 0;
                 |][|        var y = 1;
                 |]    }
@@ -122,10 +122,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """
                 class C
                 {
-                    void M()
-                    {
-                        throw new System.Exception();
-                    }
+                void M()
+                {
+                throw new System.Exception();
+                }
                 }
                 """
             );
@@ -138,9 +138,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """
                 class C
                 {
-                    void M()
-                    {
-                        throw new System.Exception();
+                void M()
+                {
+                throw new System.Exception();
                 [|        var v = 0;
                 |][|        var y = 1;
                 |]    }
@@ -149,10 +149,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """
                 class C
                 {
-                    void M()
-                    {
-                        throw new System.Exception();
-                    }
+                void M()
+                {
+                throw new System.Exception();
+                }
                 }
                 """
             );
@@ -165,26 +165,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """
                 class C
                 {
-                    void M()
-                    {
-                        throw new System.Exception();
+                void M()
+                {
+                throw new System.Exception();
                 [|        var v = 0;
                 |]
-                        void Local() {}
+                void Local() {}
                 [|
-                        var y = 1;
+                var y = 1;
                 |]    }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        throw new System.Exception();
+                void M()
+                {
+                throw new System.Exception();
 
-                        void Local() {}
-                    }
+                void Local() {}
+                }
                 }
                 """
             );
@@ -197,28 +197,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """
                 class C
                 {
-                    void M()
-                    {
-                        throw new System.Exception();
+                void M()
+                {
+                throw new System.Exception();
                 [|        var v = 0;
                 |]
-                        void Local() {}
-                        void Local2() {}
+                void Local() {}
+                void Local2() {}
                 [|
-                        var y = 1;
+                var y = 1;
                 |]    }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        throw new System.Exception();
+                void M()
+                {
+                throw new System.Exception();
 
-                        void Local() {}
-                        void Local2() {}
-                    }
+                void Local() {}
+                void Local2() {}
+                }
                 }
                 """
             );
@@ -231,32 +231,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """
                 class C
                 {
-                    void M()
-                    {
-                        throw new System.Exception();
+                void M()
+                {
+                throw new System.Exception();
                 [|        var v = 0;
                 |]
-                        void Local() {}
+                void Local() {}
                 [|
-                        var z = 2;
+                var z = 2;
                 |]
-                        void Local2() {}
+                void Local2() {}
                 [|
-                        var y = 1;
+                var y = 1;
                 |]    }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        throw new System.Exception();
+                void M()
+                {
+                throw new System.Exception();
 
-                        void Local() {}
+                void Local() {}
 
-                        void Local2() {}
-                    }
+                void Local2() {}
+                }
                 }
                 """
             );
@@ -269,33 +269,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """
                 class C
                 {
-                    void M()
-                    {
-                        throw new System.Exception();
+                void M()
+                {
+                throw new System.Exception();
                 [|        var v = 0;
                 |]
-                        void Local() {}
+                void Local() {}
                 [|
-                        var z = 2;
-                        var z2 = 2;
+                var z = 2;
+                var z2 = 2;
                 |]
-                        void Local2() {}
+                void Local2() {}
                 [|
-                        var y = 1;
+                var y = 1;
                 |]    }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        throw new System.Exception();
+                void M()
+                {
+                throw new System.Exception();
 
-                        void Local() {}
+                void Local() {}
 
-                        void Local2() {}
-                    }
+                void Local2() {}
+                }
                 }
                 """
             );
@@ -308,25 +308,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """
                 class C
                 {
-                    void M()
-                    {
-                        throw new System.Exception();
+                void M()
+                {
+                throw new System.Exception();
                 [|        var v = 0;
                 |][|
-                        label:
-                            System.Console.WriteLine();
+                label:
+                System.Console.WriteLine();
                 |][|
-                        var y = 1;
+                var y = 1;
                 |]    }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        throw new System.Exception();
-                    }
+                void M()
+                {
+                throw new System.Exception();
+                }
                 }
                 """
             );
@@ -339,25 +339,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """
                 class C
                 {
-                    void M()
-                    {
-                        throw new System.Exception();
+                void M()
+                {
+                throw new System.Exception();
                 [|        var v = 0;
                 |][|
-                        label:
-                            System.Console.WriteLine();
+                label:
+                System.Console.WriteLine();
                 |][|
-                        var y = 1;
+                var y = 1;
                 |]    }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        throw new System.Exception();
-                    }
+                void M()
+                {
+                throw new System.Exception();
+                }
                 }
                 """
             );
@@ -367,44 +367,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
         public async Task TestMissingOnReachableLabel()
         {
             var code = """
-                class C
-                {
-                    void M(object o)
-                    {
-                        if (o != null)
-                        {
-                            goto label;
-                        }
+            class C
+            {
+            void M(object o)
+            {
+            if (o != null)
+            {
+            goto label;
+            }
 
-                        throw new System.Exception();
-                [|        var v = 0;
-                |]
-                        label:
-                            System.Console.WriteLine();
+            throw new System.Exception();
+            [|        var v = 0;
+            |]
+            label:
+            System.Console.WriteLine();
 
-                        var y = 1;
-                    }
-                }
-                """;
+            var y = 1;
+            }
+            }
+            """;
             var fixedCode = """
-                class C
-                {
-                    void M(object o)
-                    {
-                        if (o != null)
-                        {
-                            goto label;
-                        }
+            class C
+            {
+            void M(object o)
+            {
+            if (o != null)
+            {
+            goto label;
+            }
 
-                        throw new System.Exception();
+            throw new System.Exception();
 
-                        label:
-                            System.Console.WriteLine();
+            label:
+            System.Console.WriteLine();
 
-                        var y = 1;
-                    }
-                }
-                """;
+            var y = 1;
+            }
+            }
+            """;
             await VerifyCS.VerifyCodeFixAsync(code, fixedCode);
         }
 
@@ -417,15 +417,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
 
                 class C
                 {
-                    void M()
-                    {
-                        Action a = () => {
-                            if (true)
-                                return;
+                void M()
+                {
+                Action a = () => {
+                if (true)
+                return;
                 [|
-                            Console.WriteLine();
+                Console.WriteLine();
                 |]        };
-                    }
+                }
                 }
                 """,
                 """
@@ -433,13 +433,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
 
                 class C
                 {
-                    void M()
-                    {
-                        Action a = () => {
-                            if (true)
-                                return;
-                        };
-                    }
+                void M()
+                {
+                Action a = () => {
+                if (true)
+                return;
+                };
+                }
                 }
                 """
             );
@@ -454,12 +454,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
 
                 class C
                 {
-                    Action M()
-                        => () => {
-                            if (true)
-                                return;
+                Action M()
+                => () => {
+                if (true)
+                return;
                 [|
-                            Console.WriteLine();
+                Console.WriteLine();
                 |]        };
                 }
                 """,
@@ -468,11 +468,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
 
                 class C
                 {
-                    Action M()
-                        => () => {
-                            if (true)
-                                return;
-                        };
+                Action M()
+                => () => {
+                if (true)
+                return;
+                };
                 }
                 """
             );
@@ -485,31 +485,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """
                 class C
                 {
-                    void M()
-                    {
-                        throw new System.Exception();
+                void M()
+                {
+                throw new System.Exception();
                 [|        var v = 0;
                 |]
-                        void Local()
-                        {
-                            throw new System.Exception();
+                void Local()
+                {
+                throw new System.Exception();
                 [|            var x = 0;
                 |]        }
-                    }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        throw new System.Exception();
+                void M()
+                {
+                throw new System.Exception();
 
-                        void Local()
-                        {
-                            throw new System.Exception();
-                        }
-                    }
+                void Local()
+                {
+                throw new System.Exception();
+                }
+                }
                 }
                 """
             );
@@ -522,31 +522,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """
                 class C
                 {
-                    void M()
-                    {
-                        throw new System.Exception();
+                void M()
+                {
+                throw new System.Exception();
                 [|        var v = 0;
                 |]
-                        void Local()
-                        {
-                            throw new System.Exception();
+                void Local()
+                {
+                throw new System.Exception();
                 [|            var x = 0;
                 |]        }
-                    }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        throw new System.Exception();
+                void M()
+                {
+                throw new System.Exception();
 
-                        void Local()
-                        {
-                            throw new System.Exception();
-                        }
-                    }
+                void Local()
+                {
+                throw new System.Exception();
+                }
+                }
                 }
                 """
             );
@@ -559,39 +559,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """
                 class C
                 {
-                    void M(object o)
-                    {
-                        if (o == null)
-                        {
-                            goto ReachableLabel;
-                        }
+                void M(object o)
+                {
+                if (o == null)
+                {
+                goto ReachableLabel;
+                }
 
-                        throw new System.Exception();
+                throw new System.Exception();
                 [|        var v = 0;
                 |][|
-                        UnreachableLabel:
-                            System.Console.WriteLine(o);
+                UnreachableLabel:
+                System.Console.WriteLine(o);
                 |]
-                        ReachableLabel:
-                            System.Console.WriteLine(o.ToString());
-                    }
+                ReachableLabel:
+                System.Console.WriteLine(o.ToString());
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(object o)
-                    {
-                        if (o == null)
-                        {
-                            goto ReachableLabel;
-                        }
+                void M(object o)
+                {
+                if (o == null)
+                {
+                goto ReachableLabel;
+                }
 
-                        throw new System.Exception();
+                throw new System.Exception();
 
-                        ReachableLabel:
-                            System.Console.WriteLine(o.ToString());
-                    }
+                ReachableLabel:
+                System.Console.WriteLine(o.ToString());
+                }
                 }
                 """
             );
@@ -604,50 +604,50 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """
                 class C
                 {
-                    void M(object o)
-                    {
-                        if (o == null)
-                        {
-                            goto ReachableLabel2;
-                        }
+                void M(object o)
+                {
+                if (o == null)
+                {
+                goto ReachableLabel2;
+                }
 
-                        throw new System.Exception();
+                throw new System.Exception();
                 [|        var v = 0;
                 |]
-                        ReachableLabel1:
-                            System.Console.WriteLine(o);
+                ReachableLabel1:
+                System.Console.WriteLine(o);
 
-                        ReachableLabel2:
-                        {
-                            System.Console.WriteLine(o.ToString());
-                            goto ReachableLabel1;
-                        }
+                ReachableLabel2:
+                {
+                System.Console.WriteLine(o.ToString());
+                goto ReachableLabel1;
+                }
                 [|
-                        var x = 1;
+                var x = 1;
                 |]    }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(object o)
-                    {
-                        if (o == null)
-                        {
-                            goto ReachableLabel2;
-                        }
+                void M(object o)
+                {
+                if (o == null)
+                {
+                goto ReachableLabel2;
+                }
 
-                        throw new System.Exception();
+                throw new System.Exception();
 
-                        ReachableLabel1:
-                            System.Console.WriteLine(o);
+                ReachableLabel1:
+                System.Console.WriteLine(o);
 
-                        ReachableLabel2:
-                        {
-                            System.Console.WriteLine(o.ToString());
-                            goto ReachableLabel1;
-                        }
-                    }
+                ReachableLabel2:
+                {
+                System.Console.WriteLine(o.ToString());
+                goto ReachableLabel1;
+                }
+                }
                 }
                 """
             );
@@ -660,40 +660,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """
                 class C
                 {
-                    void M(object o)
-                    {
-                        for (int i = 0; i < 10; i = i + 1)
-                        {
-                            for (int j = 0; j < 10; j = j + 1)
-                            {
-                                goto stop;
+                void M(object o)
+                {
+                for (int i = 0; i < 10; i = i + 1)
+                {
+                for (int j = 0; j < 10; j = j + 1)
+                {
+                goto stop;
                 [|                goto outerLoop;
                 |]            }
-                        outerLoop:
-                            return;
-                        }
-                    stop:
-                        return;
-                    }
+                outerLoop:
+                return;
+                }
+                stop:
+                return;
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(object o)
-                    {
-                        for (int i = 0; i < 10; i = i + 1)
-                        {
-                            for (int j = 0; j < 10; j = j + 1)
-                            {
-                                goto stop;
-                            }
-                        outerLoop:
-                            return;
-                        }
-                    stop:
-                        return;
-                    }
+                void M(object o)
+                {
+                for (int i = 0; i < 10; i = i + 1)
+                {
+                for (int j = 0; j < 10; j = j + 1)
+                {
+                goto stop;
+                }
+                outerLoop:
+                return;
+                }
+                stop:
+                return;
+                }
                 }
                 """
             );
@@ -706,12 +706,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """
                 class C
                 {
-                    void M(object o)
-                    {
-                        if (false)
-                            throw new System.Exception();
+                void M(object o)
+                {
+                if (false)
+                throw new System.Exception();
 
-                        throw new System.Exception();
+                throw new System.Exception();
                 [|        return;
                 |]    }
                 }
@@ -719,13 +719,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """
                 class C
                 {
-                    void M(object o)
-                    {
-                        if (false)
-                            throw new System.Exception();
+                void M(object o)
+                {
+                if (false)
+                throw new System.Exception();
 
-                        throw new System.Exception();
-                    }
+                throw new System.Exception();
+                }
                 }
                 """
             );
@@ -738,29 +738,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """
                 class C
                 {
-                    void M(int i)
-                    {
-                        switch (i)
-                        {
-                            case 0:
-                                throw new System.Exception();
+                void M(int i)
+                {
+                switch (i)
+                {
+                case 0:
+                throw new System.Exception();
                 [|                var v = 0;
                 |][|                break;
                 |]        }
-                    }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(int i)
-                    {
-                        switch (i)
-                        {
-                            case 0:
-                                throw new System.Exception();
-                        }
-                    }
+                void M(int i)
+                {
+                switch (i)
+                {
+                case 0:
+                throw new System.Exception();
+                }
+                }
                 }
                 """
             );
@@ -773,26 +773,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """
                 class C
                 {
-                    void M()
-                    {
-                        throw new System.Exception();
+                void M()
+                {
+                throw new System.Exception();
                 [|
                 #if true
-                        var v = 0;
+                var v = 0;
                 |]#endif
-                    }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        throw new System.Exception();
+                void M()
+                {
+                throw new System.Exception();
 
                 #if true
                 #endif
-                    }
+                }
                 }
                 """
             );
@@ -805,24 +805,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """
                 class C
                 {
-                    void M()
-                    {
+                void M()
+                {
                 #if true
-                        throw new System.Exception();
+                throw new System.Exception();
                 [|        var v = 0;
                 |]#endif
-                    }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
+                void M()
+                {
                 #if true
-                        throw new System.Exception();
+                throw new System.Exception();
                 #endif
-                    }
+                }
                 }
                 """
             );
@@ -835,25 +835,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """
                 class C
                 {
-                    void M()
-                    {
+                void M()
+                {
                 #if true
-                        throw new System.Exception();
+                throw new System.Exception();
                 [|#endif
-                        var v = 0;
+                var v = 0;
                 |]    }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
+                void M()
+                {
                 #if true
-                        throw new System.Exception();
+                throw new System.Exception();
 
                 #endif
-                    }
+                }
                 }
                 """
             );
@@ -866,33 +866,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """
                 class C
                 {
-                    void M()
-                    {
-                        for (int i = 0; i < 5;)
-                        {
-                            i = 2;
-                            goto Lab2;
+                void M()
+                {
+                for (int i = 0; i < 5;)
+                {
+                i = 2;
+                goto Lab2;
                 [|            i = 1;
                 |][|            break;
                 |]        Lab2:
-                            return ;
-                        }
-                    }
+                return ;
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        for (int i = 0; i < 5;)
-                        {
-                            i = 2;
-                            goto Lab2;
-                        Lab2:
-                            return ;
-                        }
-                    }
+                void M()
+                {
+                for (int i = 0; i < 5;)
+                {
+                i = 2;
+                goto Lab2;
+                Lab2:
+                return ;
+                }
+                }
                 }
                 """
             );
@@ -905,9 +905,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """
                 class C
                 {
-                    void M()
-                    {
-                        for (;;) { }
+                void M()
+                {
+                for (;;) { }
                 [|        return;
                 |]    }
                 }
@@ -915,10 +915,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
                 """
                 class C
                 {
-                    void M()
-                    {
-                        for (;;) { }
-                    }
+                void M()
+                {
+                for (;;) { }
+                }
                 }
                 """
             );
@@ -928,14 +928,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
         public async Task TestTopLevel_EndingWithNewLine()
         {
             var code = """
-                throw new System.Exception();
-                [|System.Console.ReadLine();
-                |]
-                """;
+            throw new System.Exception();
+            [|System.Console.ReadLine();
+            |]
+            """;
             var fixedCode = """
-                throw new System.Exception();
+            throw new System.Exception();
 
-                """;
+            """;
             await new VerifyCS.Test
             {
                 TestState = { OutputKind = OutputKind.ConsoleApplication, },
@@ -949,13 +949,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
         public async Task TestTopLevel_NotEndingWithNewLine()
         {
             var code = """
-                throw new System.Exception();
-                [|System.Console.ReadLine();|]
-                """;
+            throw new System.Exception();
+            [|System.Console.ReadLine();|]
+            """;
             var fixedCode = """
-                throw new System.Exception();
+            throw new System.Exception();
 
-                """;
+            """;
             await new VerifyCS.Test
             {
                 TestState = { OutputKind = OutputKind.ConsoleApplication, },
@@ -969,15 +969,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
         public async Task TestTopLevel_MultipleUnreachableStatements()
         {
             var code = """
-                throw new System.Exception();
-                [|System.Console.ReadLine();
-                |][|System.Console.ReadLine();
-                |]
-                """;
+            throw new System.Exception();
+            [|System.Console.ReadLine();
+            |][|System.Console.ReadLine();
+            |]
+            """;
             var fixedCode = """
-                throw new System.Exception();
+            throw new System.Exception();
 
-                """;
+            """;
             await new VerifyCS.Test
             {
                 TestState = { OutputKind = OutputKind.ConsoleApplication, },
@@ -991,21 +991,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
         public async Task TestTopLevel_MultipleUnreachableStatements_HasClassDeclarationInBetween()
         {
             var code = """
-                throw new System.Exception();
-                [|System.Console.ReadLine();
-                |]
+            throw new System.Exception();
+            [|System.Console.ReadLine();
+            |]
 
-                public class C { }
-                [|
-                {|CS8803:System.Console.ReadLine();|}|]
-                """;
+            public class C { }
+            [|
+            {|CS8803:System.Console.ReadLine();|}|]
+            """;
             var fixedCode = """
-                throw new System.Exception();
+            throw new System.Exception();
 
 
-                public class C { }
+            public class C { }
 
-                """;
+            """;
             await new VerifyCS.Test
             {
                 TestState = { OutputKind = OutputKind.ConsoleApplication, },
@@ -1019,18 +1019,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
         public async Task TestTopLevel_MultipleUnreachableStatements_AfterClassDeclaration1()
         {
             var code = """
-                throw new System.Exception();
+            throw new System.Exception();
 
-                public class C { }
-                [|
-                {|CS8803:System.Console.ReadLine();|}|]
-                """;
+            public class C { }
+            [|
+            {|CS8803:System.Console.ReadLine();|}|]
+            """;
             var fixedCode = """
-                throw new System.Exception();
+            throw new System.Exception();
 
-                public class C { }
+            public class C { }
 
-                """;
+            """;
             await new VerifyCS.Test
             {
                 TestState = { OutputKind = OutputKind.ConsoleApplication, },
@@ -1044,17 +1044,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
         public async Task TestTopLevel_MultipleUnreachableStatements_AfterClassDeclaration2()
         {
             var code = """
-                public class C { }
+            public class C { }
 
-                {|CS8803:throw new System.Exception();|}
-                [|System.Console.ReadLine();|]
-                """;
+            {|CS8803:throw new System.Exception();|}
+            [|System.Console.ReadLine();|]
+            """;
             var fixedCode = """
-                public class C { }
+            public class C { }
 
-                {|CS8803:throw new System.Exception();|}
+            {|CS8803:throw new System.Exception();|}
 
-                """;
+            """;
             await new VerifyCS.Test
             {
                 TestState = { OutputKind = OutputKind.ConsoleApplication, },

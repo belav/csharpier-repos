@@ -22,23 +22,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 class Program
                 {
-                    public void Method()
-                    {
-                        $$
-                    }
+                public void Method()
+                {
+                $$
+                }
                 }
                 """,
                 ItemToCommit,
                 """
                 class Program
                 {
-                    public void Method()
-                    {
-                        for (int i = length - 1; i >= 0; i--)
-                        {
-                            $$
-                        }
-                    }
+                public void Method()
+                {
+                for (int i = length - 1; i >= 0; i--)
+                {
+                $$
+                }
+                }
                 }
                 """
             );
@@ -51,25 +51,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 class Program
                 {
-                    public void Method()
-                    {
-                        int i;
-                        $$
-                    }
+                public void Method()
+                {
+                int i;
+                $$
+                }
                 }
                 """,
                 ItemToCommit,
                 """
                 class Program
                 {
-                    public void Method()
-                    {
-                        int i;
-                        for (int j = length - 1; j >= 0; j--)
-                        {
-                            $$
-                        }
-                    }
+                public void Method()
+                {
+                int i;
+                for (int j = length - 1; j >= 0; j--)
+                {
+                $$
+                }
+                }
                 }
                 """
             );
@@ -82,25 +82,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 class Program
                 {
-                    public void Method()
-                    {
-                        int i, j, k;
-                        $$
-                    }
+                public void Method()
+                {
+                int i, j, k;
+                $$
+                }
                 }
                 """,
                 ItemToCommit,
                 """
                 class Program
                 {
-                    public void Method()
-                    {
-                        int i, j, k;
-                        for (int i1 = length - 1; i1 >= 0; i1--)
-                        {
-                            $$
-                        }
-                    }
+                public void Method()
+                {
+                int i, j, k;
+                for (int i1 = length - 1; i1 >= 0; i1--)
+                {
+                $$
+                }
+                }
                 }
                 """
             );
@@ -117,7 +117,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 for (int i = length - 1; i >= 0; i--)
                 {
-                    $$
+                $$
                 }
                 """
             );
@@ -130,23 +130,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 class Program
                 {
-                    public Program()
-                    {
-                        $$
-                    }
+                public Program()
+                {
+                $$
+                }
                 }
                 """,
                 ItemToCommit,
                 """
                 class Program
                 {
-                    public Program()
-                    {
-                        for (int i = length - 1; i >= 0; i--)
-                        {
-                            $$
-                        }
-                    }
+                public Program()
+                {
+                for (int i = length - 1; i >= 0; i--)
+                {
+                $$
+                }
+                }
                 }
                 """
             );
@@ -160,29 +160,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 class Program
                 {
-                    public void Method()
-                    {
-                        void LocalFunction()
-                        {
-                            $$
-                        }
-                    }
+                public void Method()
+                {
+                void LocalFunction()
+                {
+                $$
+                }
+                }
                 }
                 """,
                 ItemToCommit,
                 """
                 class Program
                 {
-                    public void Method()
-                    {
-                        void LocalFunction()
-                        {
-                            for (global::System.Int32 i = (length) - (1); i >= 0; i--)
-                            {
-                                $$
-                            }
-                        }
-                    }
+                public void Method()
+                {
+                void LocalFunction()
+                {
+                for (global::System.Int32 i = (length) - (1); i >= 0; i--)
+                {
+                $$
+                }
+                }
+                }
                 }
                 """
             );
@@ -196,29 +196,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 class Program
                 {
-                    public void Method()
-                    {
-                        var action = delegate()
-                        {
-                            $$
-                        };
-                    }
+                public void Method()
+                {
+                var action = delegate()
+                {
+                $$
+                };
+                }
                 }
                 """,
                 ItemToCommit,
                 """
                 class Program
                 {
-                    public void Method()
-                    {
-                        var action = delegate()
-                        {
-                            for (global::System.Int32 i = (length) - (1); i >= 0; i--)
-                            {
-                                $$
-                            }
-                        };
-                    }
+                public void Method()
+                {
+                var action = delegate()
+                {
+                for (global::System.Int32 i = (length) - (1); i >= 0; i--)
+                {
+                $$
+                }
+                };
+                }
                 }
                 """
             );
@@ -232,29 +232,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 class Program
                 {
-                    public void Method()
-                    {
-                        var action = () =>
-                        {
-                            $$
-                        };
-                    }
+                public void Method()
+                {
+                var action = () =>
+                {
+                $$
+                };
+                }
                 }
                 """,
                 ItemToCommit,
                 """
                 class Program
                 {
-                    public void Method()
-                    {
-                        var action = () =>
-                        {
-                            for (global::System.Int32 i = (length) - (1); i >= 0; i--)
-                            {
-                                $$
-                            }
-                        };
-                    }
+                public void Method()
+                {
+                var action = () =>
+                {
+                for (global::System.Int32 i = (length) - (1); i >= 0; i--)
+                {
+                $$
+                }
+                };
+                }
                 }
                 """
             );
@@ -268,13 +268,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             await VerifyCustomCommitProviderAsync(
                 """
                 <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                    <Document FilePath="/0/Test0.cs">class Program
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document FilePath="/0/Test0.cs">class Program
                 {
-                    public void Method()
-                    {
-                        $$
-                    }
+                public void Method()
+                {
+                $$
+                }
                 }</Document>
                 <AnalyzerConfigDocument FilePath="/.editorconfig">
                 root = true
@@ -282,21 +282,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 [*]
                 # IDE0008: Use explicit type
                 csharp_style_var_for_built_in_types = true
-                    </AnalyzerConfigDocument>
-                    </Project>
+                </AnalyzerConfigDocument>
+                </Project>
                 </Workspace>
                 """,
                 ItemToCommit,
                 """
                 class Program
                 {
-                    public void Method()
-                    {
-                        for (int i = length - 1; i >= 0; i--)
-                        {
-                            $$
-                        }
-                    }
+                public void Method()
+                {
+                for (int i = length - 1; i >= 0; i--)
+                {
+                $$
+                }
+                }
                 }
                 """
             );
@@ -413,13 +413,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             await VerifyCustomCommitProviderAsync(
                 """
                 <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                    <Document FilePath="/0/Test0.cs">class Program
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document FilePath="/0/Test0.cs">class Program
                 {
-                    public void Method(int l)
-                    {
-                        l.$$
-                    }
+                public void Method(int l)
+                {
+                l.$$
+                }
                 }</Document>
                 <AnalyzerConfigDocument FilePath="/.editorconfig">
                 root = true
@@ -427,21 +427,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 [*]
                 # IDE0008: Use explicit type
                 csharp_style_var_for_built_in_types = true
-                    </AnalyzerConfigDocument>
-                    </Project>
+                </AnalyzerConfigDocument>
+                </Project>
                 </Workspace>
                 """,
                 ItemToCommit,
                 """
                 class Program
                 {
-                    public void Method(int l)
-                    {
-                        for (var i = l - 1; i >= 0; i--)
-                        {
-                            $$
-                        }
-                    }
+                public void Method(int l)
+                {
+                for (var i = l - 1; i >= 0; i--)
+                {
+                $$
+                }
+                }
                 }
                 """
             );
@@ -451,14 +451,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task NoInlineForrSnippetNotDirectlyExpressionStatementTest()
         {
             var markup = """
-                class Program
-                {
-                    public void Method(int l)
-                    {
-                        System.Console.WriteLine(l.$$);
-                    }
-                }
-                """;
+            class Program
+            {
+            public void Method(int l)
+            {
+            System.Console.WriteLine(l.$$);
+            }
+            }
+            """;
 
             await VerifyItemIsAbsentAsync(markup, ItemToCommit);
         }

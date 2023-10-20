@@ -22,23 +22,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 class Program
                 {
-                    public void Method()
-                    {
-                        $$
-                    }
+                public void Method()
+                {
+                $$
+                }
                 }
                 """,
                 ItemToCommit,
                 """
                 class Program
                 {
-                    public void Method()
-                    {
-                        lock (this)
-                        {
-                            $$
-                        }
-                    }
+                public void Method()
+                {
+                lock (this)
+                {
+                $$
+                }
+                }
                 }
                 """
             );
@@ -55,7 +55,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 lock (this)
                 {
-                    $$
+                $$
                 }
                 """
             );
@@ -68,7 +68,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 namespace Namespace
                 {
-                    $$
+                $$
                 }
                 """,
                 ItemToCommit
@@ -94,23 +94,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 class Program
                 {
-                    public Program()
-                    {
-                        $$
-                    }
+                public Program()
+                {
+                $$
+                }
                 }
                 """,
                 ItemToCommit,
                 """
                 class Program
                 {
-                    public Program()
-                    {
-                        lock (this)
-                        {
-                            $$
-                        }
-                    }
+                public Program()
+                {
+                lock (this)
+                {
+                $$
+                }
+                }
                 }
                 """
             );
@@ -123,7 +123,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 class Program
                 {
-                    $$
+                $$
                 }
                 """,
                 ItemToCommit
@@ -137,29 +137,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 class Program
                 {
-                    public void Method()
-                    {
-                        void LocalFunction()
-                        {
-                            $$
-                        }
-                    }
+                public void Method()
+                {
+                void LocalFunction()
+                {
+                $$
+                }
+                }
                 }
                 """,
                 ItemToCommit,
                 """
                 class Program
                 {
-                    public void Method()
-                    {
-                        void LocalFunction()
-                        {
-                            lock (this)
-                            {
-                                $$
-                            }
-                        }
-                    }
+                public void Method()
+                {
+                void LocalFunction()
+                {
+                lock (this)
+                {
+                $$
+                }
+                }
+                }
                 }
                 """
             );
@@ -172,29 +172,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 class Program
                 {
-                    public void Method()
-                    {
-                        var action = delegate()
-                        {
-                            $$
-                        };
-                    }
+                public void Method()
+                {
+                var action = delegate()
+                {
+                $$
+                };
+                }
                 }
                 """,
                 ItemToCommit,
                 """
                 class Program
                 {
-                    public void Method()
-                    {
-                        var action = delegate()
-                        {
-                            lock (this)
-                            {
-                                $$
-                            }
-                        };
-                    }
+                public void Method()
+                {
+                var action = delegate()
+                {
+                lock (this)
+                {
+                $$
+                }
+                };
+                }
                 }
                 """
             );
@@ -207,29 +207,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 class Program
                 {
-                    public void Method()
-                    {
-                        var action = () =>
-                        {
-                            $$
-                        };
-                    }
+                public void Method()
+                {
+                var action = () =>
+                {
+                $$
+                };
+                }
                 }
                 """,
                 ItemToCommit,
                 """
                 class Program
                 {
-                    public void Method()
-                    {
-                        var action = () =>
-                        {
-                            lock (this)
-                            {
-                                $$
-                            }
-                        };
-                    }
+                public void Method()
+                {
+                var action = () =>
+                {
+                lock (this)
+                {
+                $$
+                }
+                };
+                }
                 }
                 """
             );

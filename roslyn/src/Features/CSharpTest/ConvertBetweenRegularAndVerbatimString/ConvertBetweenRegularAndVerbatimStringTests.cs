@@ -28,10 +28,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAn
                 """
                 class Test
                 {
-                    void Method()
-                    {
-                        var v = "[||]";
-                    }
+                void Method()
+                {
+                var v = "[||]";
+                }
                 }
                 """
             );
@@ -44,10 +44,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAn
                 """
                 class Test
                 {
-                    void Method()
-                    {
-                        var v = "[||];
-                    }
+                void Method()
+                {
+                var v = "[||];
+                }
                 }
                 """
             );
@@ -60,10 +60,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAn
                 """
                 class Test
                 {
-                    void Method()
-                    {
-                        var v = @"[||];
-                    }
+                void Method()
+                {
+                var v = @"[||];
+                }
                 }
                 """
             );
@@ -76,19 +76,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAn
                 """
                 class Test
                 {
-                    void Method()
-                    {
-                        var v = @"[||]";
-                    }
+                void Method()
+                {
+                var v = @"[||]";
+                }
                 }
                 """,
                 """
                 class Test
                 {
-                    void Method()
-                    {
-                        var v = "";
-                    }
+                void Method()
+                {
+                var v = "";
+                }
                 }
                 """
             );
@@ -101,23 +101,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAn
                 """
                 class Test
                 {
-                    void Method()
-                    {
-                        var v =
-                            // leading
-                            @"[||]" /* trailing */;
-                    }
+                void Method()
+                {
+                var v =
+                // leading
+                @"[||]" /* trailing */;
+                }
                 }
                 """,
                 """
                 class Test
                 {
-                    void Method()
-                    {
-                        var v =
-                            // leading
-                            "" /* trailing */;
-                    }
+                void Method()
+                {
+                var v =
+                // leading
+                "" /* trailing */;
+                }
                 }
                 """
             );
@@ -130,10 +130,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAn
                 """
                 class Test
                 {
-                    void Method()
-                    {
-                        var v = "[||]a";
-                    }
+                void Method()
+                {
+                var v = "[||]a";
+                }
                 }
                 """
             );
@@ -146,19 +146,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAn
                 """
                 class Test
                 {
-                    void Method()
-                    {
-                        var v = @"[||]a";
-                    }
+                void Method()
+                {
+                var v = @"[||]a";
+                }
                 }
                 """,
                 """
                 class Test
                 {
-                    void Method()
-                    {
-                        var v = "a";
-                    }
+                void Method()
+                {
+                var v = "a";
+                }
                 }
                 """
             );
@@ -171,10 +171,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAn
                 """
                 class Test
                 {
-                    void Method()
-                    {
-                        var v = "[||]\u0001";
-                    }
+                void Method()
+                {
+                var v = "[||]\u0001";
+                }
                 }
                 """
             );
@@ -187,20 +187,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAn
                 """
                 class Test
                 {
-                    void Method()
-                    {
-                        var v = "[||]a\r\nb";
-                    }
+                void Method()
+                {
+                var v = "[||]a\r\nb";
+                }
                 }
                 """,
                 """
                 class Test
                 {
-                    void Method()
-                    {
-                        var v = @"a
+                void Method()
+                {
+                var v = @"a
                 b";
-                    }
+                }
                 }
                 """
             );
@@ -213,20 +213,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAn
                 """
                 class Test
                 {
-                    void Method()
-                    {
-                        var v = @"[||]a
+                void Method()
+                {
+                var v = @"[||]a
                 b";
-                    }
+                }
                 }
                 """,
                 """
                 class Test
                 {
-                    void Method()
-                    {
-                        var v = "a\r\nb";
-                    }
+                void Method()
+                {
+                var v = "a\r\nb";
+                }
                 }
                 """
             );
@@ -239,10 +239,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAn
                 """
                 class Test
                 {
-                    void Method()
-                    {
-                        var v = "[||]a\0b";
-                    }
+                void Method()
+                {
+                var v = "[||]a\0b";
+                }
                 }
                 """
             );
@@ -255,19 +255,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAn
                 """
                 class Test
                 {
-                    void Method()
-                    {
-                        var v = "[||]a\"b";
-                    }
+                void Method()
+                {
+                var v = "[||]a\"b";
+                }
                 }
                 """,
                 """
                 class Test
                 {
-                    void Method()
-                    {
-                        var v = @"a""b";
-                    }
+                void Method()
+                {
+                var v = @"a""b";
+                }
                 }
                 """
             );
@@ -280,19 +280,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAn
                 """
                 class Test
                 {
-                    void Method()
-                    {
-                        var v = @"[||]a""b";
-                    }
+                void Method()
+                {
+                var v = @"[||]a""b";
+                }
                 }
                 """,
                 """
                 class Test
                 {
-                    void Method()
-                    {
-                        var v = "a\"b";
-                    }
+                void Method()
+                {
+                var v = "a\"b";
+                }
                 }
                 """
             );
@@ -305,20 +305,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAn
                 """
                 class Test
                 {
-                    void Method()
-                    {
-                        var v = "[||]a\r\n{1}";
-                    }
+                void Method()
+                {
+                var v = "[||]a\r\n{1}";
+                }
                 }
                 """,
                 """
                 class Test
                 {
-                    void Method()
-                    {
-                        var v = @"a
+                void Method()
+                {
+                var v = @"a
                 {1}";
-                    }
+                }
                 }
                 """
             );
@@ -331,20 +331,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAn
                 """
                 class Test
                 {
-                    void Method()
-                    {
-                        var v = @"[||]a
+                void Method()
+                {
+                var v = @"[||]a
                 {1}";
-                    }
+                }
                 }
                 """,
                 """
                 class Test
                 {
-                    void Method()
-                    {
-                        var v = "a\r\n{1}";
-                    }
+                void Method()
+                {
+                var v = "a\r\n{1}";
+                }
                 }
                 """
             );

@@ -111,58 +111,58 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.SimplifyTyp
         public async Task TestFixAllInDocument_QualifyWithThis()
         {
             var input = """
-                <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                        <Document>
-                class C
-                {
-                    int Sign;
-                    void F()
-                    {
-                        string x = @"namespace Namespace
-                    {
-                        class Type
-                        {
-                            void Goo()
-                            {
-                                int x = 1 " + {|FixAllInDocument:Sign|} + @" " + Sign + @"3;
-                            }
-                        }
-                    }
-                ";
-                    }
-                }
-                        </Document>
-                    </Project>
-                </Workspace>
-                """;
+            <Workspace>
+            <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+            <Document>
+            class C
+            {
+            int Sign;
+            void F()
+            {
+            string x = @"namespace Namespace
+            {
+            class Type
+            {
+            void Goo()
+            {
+            int x = 1 " + {|FixAllInDocument:Sign|} + @" " + Sign + @"3;
+            }
+            }
+            }
+            ";
+            }
+            }
+            </Document>
+            </Project>
+            </Workspace>
+            """;
 
             var expected = """
-                <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                        <Document>
-                class C
-                {
-                    int Sign;
-                    void F()
-                    {
-                        string x = @"namespace Namespace
-                    {
-                        class Type
-                        {
-                            void Goo()
-                            {
-                                int x = 1 " + this.Sign + @" " + this.Sign + @"3;
-                            }
-                        }
-                    }
-                ";
-                    }
-                }
-                        </Document>
-                    </Project>
-                </Workspace>
-                """;
+            <Workspace>
+            <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+            <Document>
+            class C
+            {
+            int Sign;
+            void F()
+            {
+            string x = @"namespace Namespace
+            {
+            class Type
+            {
+            void Goo()
+            {
+            int x = 1 " + this.Sign + @" " + this.Sign + @"3;
+            }
+            }
+            }
+            ";
+            }
+            }
+            </Document>
+            </Project>
+            </Workspace>
+            """;
 
             await TestInRegularAndScriptAsync(input, expected);
         }

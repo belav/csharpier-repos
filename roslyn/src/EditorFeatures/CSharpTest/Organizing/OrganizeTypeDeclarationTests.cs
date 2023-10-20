@@ -1168,15 +1168,15 @@ interface I
             using var workspace = TestWorkspace.Create(
                 XElement.Parse(
                     """
-                <Workspace>
+                    <Workspace>
                     <Submission Language="C#" CommonReferences="true">
-                        class C
-                        {
-                            object $$goo;
-                        }
+                    class C
+                    {
+                    object $$goo;
+                    }
                     </Submission>
-                </Workspace>
-                """
+                    </Workspace>
+                    """
                 ),
                 workspaceKind: WorkspaceKind.Interactive,
                 composition: EditorTestCompositions.EditorFeaturesWpf

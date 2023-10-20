@@ -25,10 +25,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        (int word, int zword) t = ($$
-                    }
+                static void Main(string[] args)
+                {
+                (int word, int zword) t = ($$
+                }
                 }
                 """,
                 "word",
@@ -43,10 +43,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        (int word, int zword) t = ($$)
-                    }
+                static void Main(string[] args)
+                {
+                (int word, int zword) t = ($$)
+                }
                 }
                 """,
                 "word",
@@ -61,10 +61,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        (int word, int zword) t = ($$, zword: 2
-                    }
+                static void Main(string[] args)
+                {
+                (int word, int zword) t = ($$, zword: 2
+                }
                 }
                 """,
                 "word",
@@ -79,10 +79,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        (int word, int zword) t = ($$, zword: 2
-                    }
+                static void Main(string[] args)
+                {
+                (int word, int zword) t = ($$, zword: 2
+                }
                 }
                 """,
                 "word",
@@ -97,10 +97,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        (int word, int zword) t = (1, $$
-                    }
+                static void Main(string[] args)
+                {
+                (int word, int zword) t = (1, $$
+                }
                 }
                 """,
                 "zword",
@@ -115,10 +115,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        (int word, int zword) t = (1, $$)
-                    }
+                static void Main(string[] args)
+                {
+                (int word, int zword) t = (1, $$)
+                }
                 }
                 """,
                 "zword",
@@ -133,10 +133,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
                 """
                 class Program
                 {
-                    static void Main((int word, int zword) args)
-                    {
-                         Main(($$))
-                    }
+                static void Main((int word, int zword) args)
+                {
+                Main(($$))
+                }
                 }
                 """,
                 "word",
@@ -148,14 +148,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         public async Task MultiplePossibleTuples()
         {
             var markup = """
-                class Program
-                {
-                    static void Main((int number, int znumber) args) { }
-                    static void Main((string word, int zword) args) {
-                        Main(($$
-                    }
-                }
-                """;
+            class Program
+            {
+            static void Main((int number, int znumber) args) { }
+            static void Main((string word, int zword) args) {
+            Main(($$
+            }
+            }
+            """;
             await VerifyItemExistsAsync(markup, "word", displayTextSuffix: ":");
             await VerifyItemExistsAsync(markup, "number", displayTextSuffix: ":");
         }
@@ -164,14 +164,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         public async Task MultiplePossibleTuplesAfterComma()
         {
             var markup = """
-                class Program
-                {
-                    static void Main((int number, int znumber) args) { }
-                    static void Main((string word, int zword) args) {
-                        Main((1, $$
-                    }
-                }
-                """;
+            class Program
+            {
+            static void Main((int number, int znumber) args) { }
+            static void Main((string word, int zword) args) {
+            Main((1, $$
+            }
+            }
+            """;
             await VerifyItemExistsAsync(markup, "zword", displayTextSuffix: ":");
             await VerifyItemExistsAsync(markup, "znumber", displayTextSuffix: ":");
         }
@@ -180,14 +180,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         public async Task AtIndexGreaterThanNumberOfTupleElements()
         {
             var markup = """
-                class Program
-                {
-                    static void Main(string[] args)
-                    {
-                        (int word, int zword) t = (1, 2, 3, 4, $$ 
-                    }
-                }
-                """;
+            class Program
+            {
+            static void Main(string[] args)
+            {
+            (int word, int zword) t = (1, 2, 3, 4, $$
+            }
+            }
+            """;
             await VerifyNoItemsExistAsync(markup);
         }
 
@@ -195,14 +195,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         public async Task ConvertCastToTupleExpression()
         {
             var markup = """
-                class C
-                {
-                    void goo()
-                    {
-                        (int goat, int moat) x = (g$$)1;
-                    }
-                }
-                """;
+            class C
+            {
+            void goo()
+            {
+            (int goat, int moat) x = (g$$)1;
+            }
+            }
+            """;
             await VerifyItemExistsAsync(markup, "goat", displayTextSuffix: ":");
         }
     }

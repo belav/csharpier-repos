@@ -2255,25 +2255,25 @@ IAnonymousObjectCreationOperation (OperationKind.AnonymousObjectCreation, Type: 
         public void AnonymousTypeSymbols_PointerArrayField()
         {
             var source = """
-unsafe class C
-{
-    static unsafe void Main()
-    {
-        var array = new int*[0];
-        var result = C.M(array);
-        if (array == result)
-        {
+            unsafe class C
+            {
+            static unsafe void Main()
+            {
+            var array = new int*[0];
+            var result = C.M(array);
+            if (array == result)
+            {
             System.Console.Write("RAN");
-        }
-    }
+            }
+            }
 
-    static int*[] M(int*[] a)
-    {
-        var b = new { F = a };
-        return b.F;
-    }
-}
-""";
+            static int*[] M(int*[] a)
+            {
+            var b = new { F = a };
+            return b.F;
+            }
+            }
+            """;
             var comp = CreateCompilation(source, options: TestOptions.UnsafeDebugExe);
             comp.VerifyDiagnostics();
             CompileAndVerify(comp, expectedOutput: "RAN", verify: Verification.FailsPEVerify);
@@ -2283,15 +2283,15 @@ unsafe class C
         public void AnonymousTypeSymbols_NestedPointerArrayField()
         {
             var source = """
-unsafe class C<T>
-{
-    static C<int*[]> M()
-    {
-        var a = new { F = new C<int*[]>() };
-        return a.F;
-    }
-}
-""";
+            unsafe class C<T>
+            {
+            static C<int*[]> M()
+            {
+            var a = new { F = new C<int*[]>() };
+            return a.F;
+            }
+            }
+            """;
             var comp = CreateCompilation(source, options: TestOptions.UnsafeDebugDll);
             comp.VerifyDiagnostics();
         }
@@ -2300,15 +2300,15 @@ unsafe class C<T>
         public void AnonymousTypeSymbols_PointerField()
         {
             var source = """
-unsafe class C
-{
-    static int* M(int* i)
-    {
-        var a = new { F = i };
-        return a.F;
-    }
-}
-""";
+            unsafe class C
+            {
+            static int* M(int* i)
+            {
+            var a = new { F = i };
+            return a.F;
+            }
+            }
+            """;
             var comp = CreateCompilation(source, options: TestOptions.UnsafeDebugDll);
             comp.VerifyDiagnostics(
                 // (5,23): error CS0828: Cannot assign 'int*' to anonymous type property
@@ -2323,15 +2323,15 @@ unsafe class C
         public void AnonymousTypeSymbols_FunctionPointerField()
         {
             var source = """
-unsafe class C
-{
-    static delegate*<void> M(delegate*<void> i)
-    {
-        var a = new { F = i };
-        return a.F;
-    }
-}
-""";
+            unsafe class C
+            {
+            static delegate*<void> M(delegate*<void> i)
+            {
+            var a = new { F = i };
+            return a.F;
+            }
+            }
+            """;
             var comp = CreateCompilation(source, options: TestOptions.UnsafeDebugDll);
             comp.VerifyDiagnostics(
                 // (5,23): error CS0828: Cannot assign 'delegate*<void>' to anonymous type property

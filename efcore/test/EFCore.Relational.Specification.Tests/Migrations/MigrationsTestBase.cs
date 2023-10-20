@@ -2304,8 +2304,8 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
 
         AssertSql(
             """
--- I <3 DDL
-"""
+            -- I <3 DDL
+            """
         );
     }
 

@@ -600,25 +600,25 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
 
         AssertSql(
             """
-SELECT TOP(1) [e].[Id], [e].[EngineSupplierId], [e].[Name], [e].[StorageLocation_Latitude], [e].[StorageLocation_Longitude]
-FROM [Engines] AS [e]
-ORDER BY [e].[Id]
-""",
+            SELECT TOP(1) [e].[Id], [e].[EngineSupplierId], [e].[Name], [e].[StorageLocation_Latitude], [e].[StorageLocation_Longitude]
+            FROM [Engines] AS [e]
+            ORDER BY [e].[Id]
+            """,
             //
             """
-@p1='1'
-@p2='Mercedes' (Size = 450)
-@p0='FO 108X' (Size = 4000)
-@p3='ChangedEngine' (Size = 4000)
-@p4='47.64491' (Nullable = true)
-@p5='-122.128101' (Nullable = true)
+            @p1='1'
+            @p2='Mercedes' (Size = 450)
+            @p0='FO 108X' (Size = 4000)
+            @p3='ChangedEngine' (Size = 4000)
+            @p4='47.64491' (Nullable = true)
+            @p5='-122.128101' (Nullable = true)
 
-SET IMPLICIT_TRANSACTIONS OFF;
-SET NOCOUNT ON;
-UPDATE [Engines] SET [Name] = @p0
-OUTPUT 1
-WHERE [Id] = @p1 AND [EngineSupplierId] = @p2 AND [Name] = @p3 AND [StorageLocation_Latitude] = @p4 AND [StorageLocation_Longitude] = @p5;
-"""
+            SET IMPLICIT_TRANSACTIONS OFF;
+            SET NOCOUNT ON;
+            UPDATE [Engines] SET [Name] = @p0
+            OUTPUT 1
+            WHERE [Id] = @p1 AND [EngineSupplierId] = @p2 AND [Name] = @p3 AND [StorageLocation_Latitude] = @p4 AND [StorageLocation_Longitude] = @p5;
+            """
         );
     }
 

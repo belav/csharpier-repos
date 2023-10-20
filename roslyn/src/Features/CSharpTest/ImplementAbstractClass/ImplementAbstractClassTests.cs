@@ -91,57 +91,57 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Goo
                 {
-                    protected abstract string GooMethod();
-                    public abstract void Blah();
+                protected abstract string GooMethod();
+                public abstract void Blah();
                 }
 
                 abstract class Bar : Goo
                 {
-                    public abstract bool BarMethod();
+                public abstract bool BarMethod();
 
-                    public override void Blah()
-                    {
-                    }
+                public override void Blah()
+                {
+                }
                 }
 
                 class [|Program|] : Goo
                 {
-                    static void Main(string[] args)
-                    {
-                    }
+                static void Main(string[] args)
+                {
+                }
                 }
                 """,
                 """
                 abstract class Goo
                 {
-                    protected abstract string GooMethod();
-                    public abstract void Blah();
+                protected abstract string GooMethod();
+                public abstract void Blah();
                 }
 
                 abstract class Bar : Goo
                 {
-                    public abstract bool BarMethod();
+                public abstract bool BarMethod();
 
-                    public override void Blah()
-                    {
-                    }
+                public override void Blah()
+                {
+                }
                 }
 
                 class Program : Goo
                 {
-                    static void Main(string[] args)
-                    {
-                    }
+                static void Main(string[] args)
+                {
+                }
 
-                    public override void Blah()
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void Blah()
+                {
+                throw new System.NotImplementedException();
+                }
 
-                    protected override string GooMethod()
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                protected override string GooMethod()
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """
             );
@@ -154,7 +154,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    protected abstract (int a, int b) Method((string, string d) x);
+                protected abstract (int a, int b) Method((string, string d) x);
                 }
 
                 class [|Program|] : Base
@@ -164,15 +164,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    protected abstract (int a, int b) Method((string, string d) x);
+                protected abstract (int a, int b) Method((string, string d) x);
                 }
 
                 class Program : Base
                 {
-                    protected override (int a, int b) Method((string, string d) x)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                protected override (int a, int b) Method((string, string d) x)
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """
             );
@@ -185,7 +185,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Goo
                 {
-                    public abstract void Bar();
+                public abstract void Bar();
                 }
 
                 struct [|Program|] : Goo
@@ -202,7 +202,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class d
                 {
-                    public abstract void goo(int x = 3);
+                public abstract void goo(int x = 3);
                 }
 
                 class [|b|] : d
@@ -212,15 +212,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class d
                 {
-                    public abstract void goo(int x = 3);
+                public abstract void goo(int x = 3);
                 }
 
                 class b : d
                 {
-                    public override void goo(int x = 3)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void goo(int x = 3)
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """
             );
@@ -233,7 +233,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class d
                 {
-                    public abstract void goo(char x = 'a');
+                public abstract void goo(char x = 'a');
                 }
 
                 class [|b|] : d
@@ -243,15 +243,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class d
                 {
-                    public abstract void goo(char x = 'a');
+                public abstract void goo(char x = 'a');
                 }
 
                 class b : d
                 {
-                    public override void goo(char x = 'a')
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void goo(char x = 'a')
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """
             );
@@ -264,7 +264,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class d
                 {
-                    public abstract void goo(string x = "x");
+                public abstract void goo(string x = "x");
                 }
 
                 class [|b|] : d
@@ -274,15 +274,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class d
                 {
-                    public abstract void goo(string x = "x");
+                public abstract void goo(string x = "x");
                 }
 
                 class b : d
                 {
-                    public override void goo(string x = "x")
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void goo(string x = "x")
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """
             );
@@ -295,7 +295,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class d
                 {
-                    public abstract void goo(short x = 3);
+                public abstract void goo(short x = 3);
                 }
 
                 class [|b|] : d
@@ -305,15 +305,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class d
                 {
-                    public abstract void goo(short x = 3);
+                public abstract void goo(short x = 3);
                 }
 
                 class b : d
                 {
-                    public override void goo(short x = 3)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void goo(short x = 3)
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """
             );
@@ -326,7 +326,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class d
                 {
-                    public abstract void goo(decimal x = 3);
+                public abstract void goo(decimal x = 3);
                 }
 
                 class [|b|] : d
@@ -336,15 +336,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class d
                 {
-                    public abstract void goo(decimal x = 3);
+                public abstract void goo(decimal x = 3);
                 }
 
                 class b : d
                 {
-                    public override void goo(decimal x = 3)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void goo(decimal x = 3)
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """
             );
@@ -357,7 +357,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class d
                 {
-                    public abstract void goo(double x = 3);
+                public abstract void goo(double x = 3);
                 }
 
                 class [|b|] : d
@@ -367,15 +367,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class d
                 {
-                    public abstract void goo(double x = 3);
+                public abstract void goo(double x = 3);
                 }
 
                 class b : d
                 {
-                    public override void goo(double x = 3)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void goo(double x = 3)
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """
             );
@@ -388,7 +388,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class d
                 {
-                    public abstract void goo(long x = 3);
+                public abstract void goo(long x = 3);
                 }
 
                 class [|b|] : d
@@ -398,15 +398,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class d
                 {
-                    public abstract void goo(long x = 3);
+                public abstract void goo(long x = 3);
                 }
 
                 class b : d
                 {
-                    public override void goo(long x = 3)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void goo(long x = 3)
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """
             );
@@ -419,7 +419,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class d
                 {
-                    public abstract void goo(float x = 3);
+                public abstract void goo(float x = 3);
                 }
 
                 class [|b|] : d
@@ -429,15 +429,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class d
                 {
-                    public abstract void goo(float x = 3);
+                public abstract void goo(float x = 3);
                 }
 
                 class b : d
                 {
-                    public override void goo(float x = 3)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void goo(float x = 3)
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """
             );
@@ -450,7 +450,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class d
                 {
-                    public abstract void goo(ushort x = 3);
+                public abstract void goo(ushort x = 3);
                 }
 
                 class [|b|] : d
@@ -460,15 +460,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class d
                 {
-                    public abstract void goo(ushort x = 3);
+                public abstract void goo(ushort x = 3);
                 }
 
                 class b : d
                 {
-                    public override void goo(ushort x = 3)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void goo(ushort x = 3)
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """
             );
@@ -481,7 +481,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class d
                 {
-                    public abstract void goo(uint x = 3);
+                public abstract void goo(uint x = 3);
                 }
 
                 class [|b|] : d
@@ -491,15 +491,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class d
                 {
-                    public abstract void goo(uint x = 3);
+                public abstract void goo(uint x = 3);
                 }
 
                 class b : d
                 {
-                    public override void goo(uint x = 3)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void goo(uint x = 3)
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """
             );
@@ -512,7 +512,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class d
                 {
-                    public abstract void goo(ulong x = 3);
+                public abstract void goo(ulong x = 3);
                 }
 
                 class [|b|] : d
@@ -522,15 +522,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class d
                 {
-                    public abstract void goo(ulong x = 3);
+                public abstract void goo(ulong x = 3);
                 }
 
                 class b : d
                 {
-                    public override void goo(ulong x = 3)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void goo(ulong x = 3)
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """
             );
@@ -547,7 +547,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 abstract class d
                 {
-                    public abstract void goo(b x = new b());
+                public abstract void goo(b x = new b());
                 }
 
                 class [|c|] : d
@@ -561,15 +561,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 abstract class d
                 {
-                    public abstract void goo(b x = new b());
+                public abstract void goo(b x = new b());
                 }
 
                 class c : d
                 {
-                    public override void goo(b x = default(b))
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void goo(b x = default(b))
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """,
                 parseOptions: TestOptions.Regular7
@@ -587,7 +587,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 abstract class d
                 {
-                    public abstract void goo(b x = new b());
+                public abstract void goo(b x = new b());
                 }
 
                 class [|c|] : d
@@ -601,15 +601,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 abstract class d
                 {
-                    public abstract void goo(b x = new b());
+                public abstract void goo(b x = new b());
                 }
 
                 class c : d
                 {
-                    public override void goo(b x = default)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void goo(b x = default)
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """
             );
@@ -626,7 +626,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 abstract class d
                 {
-                    public abstract void m(b? x = null, b? y = default(b?));
+                public abstract void m(b? x = null, b? y = default(b?));
                 }
 
                 class [|c|] : d
@@ -640,15 +640,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 abstract class d
                 {
-                    public abstract void m(b? x = null, b? y = default(b?));
+                public abstract void m(b? x = null, b? y = default(b?));
                 }
 
                 class c : d
                 {
-                    public override void m(b? x = null, b? y = null)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void m(b? x = null, b? y = null)
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """
             );
@@ -661,7 +661,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class d
                 {
-                    public abstract void m(int? x = 5, int? y = default(int?));
+                public abstract void m(int? x = 5, int? y = default(int?));
                 }
 
                 class [|c|] : d
@@ -671,15 +671,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class d
                 {
-                    public abstract void m(int? x = 5, int? y = default(int?));
+                public abstract void m(int? x = 5, int? y = default(int?));
                 }
 
                 class c : d
                 {
-                    public override void m(int? x = 5, int? y = null)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void m(int? x = 5, int? y = null)
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """
             );
@@ -696,7 +696,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 abstract class d
                 {
-                    public abstract void goo(b x = null);
+                public abstract void goo(b x = null);
                 }
 
                 class [|c|] : d
@@ -710,15 +710,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 abstract class d
                 {
-                    public abstract void goo(b x = null);
+                public abstract void goo(b x = null);
                 }
 
                 class c : d
                 {
-                    public override void goo(b x = null)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void goo(b x = null)
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """
             );
@@ -731,7 +731,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class c1
                 {
-                    public abstract c1 this[c1 x] { get; internal set; }
+                public abstract c1 this[c1 x] { get; internal set; }
                 }
 
                 class [|c2|] : c1
@@ -741,23 +741,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class c1
                 {
-                    public abstract c1 this[c1 x] { get; internal set; }
+                public abstract c1 this[c1 x] { get; internal set; }
                 }
 
                 class c2 : c1
                 {
-                    public override c1 this[c1 x]
-                    {
-                        get
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                public override c1 this[c1 x]
+                {
+                get
+                {
+                throw new System.NotImplementedException();
+                }
 
-                        internal set
-                        {
-                            throw new System.NotImplementedException();
-                        }
-                    }
+                internal set
+                {
+                throw new System.NotImplementedException();
+                }
+                }
                 }
                 """
             );
@@ -772,7 +772,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 abstract class C
                 {
-                    public abstract event Action E;
+                public abstract event Action E;
                 }
 
                 class [|D|] : C
@@ -784,12 +784,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 abstract class C
                 {
-                    public abstract event Action E;
+                public abstract event Action E;
                 }
 
                 class D : C
                 {
-                    public override event Action E;
+                public override event Action E;
                 }
                 """
             );
@@ -804,16 +804,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 abstract class C
                 {
-                    public abstract int this[string s]
-                    {
-                        get
-                        {
-                        }
+                public abstract int this[string s]
+                {
+                get
+                {
+                }
 
-                        internal set
-                        {
-                        }
-                    }
+                internal set
+                {
+                }
+                }
                 }
 
                 class [|D|] : C
@@ -825,32 +825,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 abstract class C
                 {
-                    public abstract int this[string s]
-                    {
-                        get
-                        {
-                        }
+                public abstract int this[string s]
+                {
+                get
+                {
+                }
 
-                        internal set
-                        {
-                        }
-                    }
+                internal set
+                {
+                }
+                }
                 }
 
                 class D : C
                 {
-                    public override int this[string s]
-                    {
-                        get
-                        {
-                            throw new NotImplementedException();
-                        }
+                public override int this[string s]
+                {
+                get
+                {
+                throw new NotImplementedException();
+                }
 
-                        internal set
-                        {
-                            throw new NotImplementedException();
-                        }
-                    }
+                internal set
+                {
+                throw new NotImplementedException();
+                }
+                }
                 }
                 """
             );
@@ -865,7 +865,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 abstract class Goo
                 {
-                    public abstract void F();
+                public abstract void F();
                 }
 
                 class [|Program|] : Goo
@@ -889,9 +889,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 partial class [|Program|] : Goo
                 {
-                    void Bar()
-                    {
-                    }
+                void Bar()
+                {
+                }
 
                 #line hidden
                 }
@@ -905,14 +905,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 partial class Program : Goo
                 {
-                    public override void F()
-                    {
-                        throw new NotImplementedException();
-                    }
+                public override void F()
+                {
+                throw new NotImplementedException();
+                }
 
-                    void Bar()
-                    {
-                    }
+                void Bar()
+                {
+                }
 
                 #line hidden
                 }
@@ -930,18 +930,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 abstract class A
                 {
-                    public abstract int X { get; set; }
+                public abstract int X { get; set; }
                 }
 
                 abstract class B : A
                 {
-                    public override int X
-                    {
-                        get
-                        {
-                            throw new NotImplementedException();
-                        }
-                    }
+                public override int X
+                {
+                get
+                {
+                throw new NotImplementedException();
+                }
+                }
                 }
 
                 class [|C|] : B
@@ -953,29 +953,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 abstract class A
                 {
-                    public abstract int X { get; set; }
+                public abstract int X { get; set; }
                 }
 
                 abstract class B : A
                 {
-                    public override int X
-                    {
-                        get
-                        {
-                            throw new NotImplementedException();
-                        }
-                    }
+                public override int X
+                {
+                get
+                {
+                throw new NotImplementedException();
+                }
+                }
                 }
 
                 class C : B
                 {
-                    public override int X
-                    {
-                        set
-                        {
-                            throw new NotImplementedException();
-                        }
-                    }
+                public override int X
+                {
+                set
+                {
+                throw new NotImplementedException();
+                }
+                }
                 }
                 """
             );
@@ -988,14 +988,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 class A
                 {
-                    public virtual void Goo(int x, params int[] y)
-                    {
-                    }
+                public virtual void Goo(int x, params int[] y)
+                {
+                }
                 }
 
                 abstract class B : A
                 {
-                    public abstract override void Goo(int x, int[] y = null);
+                public abstract override void Goo(int x, int[] y = null);
                 }
 
                 class [|C|] : B
@@ -1005,22 +1005,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 class A
                 {
-                    public virtual void Goo(int x, params int[] y)
-                    {
-                    }
+                public virtual void Goo(int x, params int[] y)
+                {
+                }
                 }
 
                 abstract class B : A
                 {
-                    public abstract override void Goo(int x, int[] y = null);
+                public abstract override void Goo(int x, int[] y = null);
                 }
 
                 class C : B
                 {
-                    public override void Goo(int x, params int[] y)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void Goo(int x, params int[] y)
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """
             );
@@ -1033,7 +1033,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class C
                 {
-                    unsafe public abstract void Goo(int* x = null);
+                unsafe public abstract void Goo(int* x = null);
                 }
 
                 class [|D|] : C
@@ -1043,15 +1043,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class C
                 {
-                    unsafe public abstract void Goo(int* x = null);
+                unsafe public abstract void Goo(int* x = null);
                 }
 
                 class D : C
                 {
-                    public override unsafe void Goo(int* x = null)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override unsafe void Goo(int* x = null)
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """
             );
@@ -1066,7 +1066,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 abstract class C
                 {
-                    public abstract void Goo(var::X x);
+                public abstract void Goo(var::X x);
                 }
 
                 class [|D|] : C
@@ -1078,15 +1078,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 abstract class C
                 {
-                    public abstract void Goo(var::X x);
+                public abstract void Goo(var::X x);
                 }
 
                 class D : C
                 {
-                    public override void Goo(X x)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void Goo(X x)
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """
             );
@@ -1099,31 +1099,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class A<T>
                 {
-                    public abstract void M(T x);
+                public abstract void M(T x);
 
-                    abstract class B : A<B>
-                    {
-                        class [|T|] : A<T>
-                        {
-                        }
-                    }
+                abstract class B : A<B>
+                {
+                class [|T|] : A<T>
+                {
+                }
+                }
                 }
                 """,
                 """
                 abstract class A<T>
                 {
-                    public abstract void M(T x);
+                public abstract void M(T x);
 
-                    abstract class B : A<B>
-                    {
-                        class T : A<T>
-                        {
-                            public override void M(B.T x)
-                            {
-                                throw new System.NotImplementedException();
-                            }
-                        }
-                    }
+                abstract class B : A<B>
+                {
+                class T : A<T>
+                {
+                public override void M(B.T x)
+                {
+                throw new System.NotImplementedException();
+                }
+                }
+                }
                 }
                 """
             );
@@ -1136,27 +1136,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class A<T>
                 {
-                    public abstract void M(T x);
-                    abstract class B : A<B>
-                    {
-                        class [|T|] : A<B.T> { }
-                    }
+                public abstract void M(T x);
+                abstract class B : A<B>
+                {
+                class [|T|] : A<B.T> { }
+                }
                 }
                 """,
                 """
                 abstract class A<T>
                 {
-                    public abstract void M(T x);
-                    abstract class B : A<B>
-                    {
-                        class T : A<B.T>
-                        {
-                            public override void M(A<A<T>.B>.B.T x)
-                            {
-                                throw new System.NotImplementedException();
-                            }
-                        }
-                    }
+                public abstract void M(T x);
+                abstract class B : A<B>
+                {
+                class T : A<B.T>
+                {
+                public override void M(A<A<T>.B>.B.T x)
+                {
+                throw new System.NotImplementedException();
+                }
+                }
+                }
                 }
                 """
             );
@@ -1180,73 +1180,73 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 public class x : EastAsianLunisolarCalendar
                 {
-                    public override int[] Eras
-                    {
-                        get
-                        {
-                            throw new NotImplementedException();
-                        }
-                    }
+                public override int[] Eras
+                {
+                get
+                {
+                throw new NotImplementedException();
+                }
+                }
 
-                    internal override int MinCalendarYear
-                    {
-                        get
-                        {
-                            throw new NotImplementedException();
-                        }
-                    }
+                internal override int MinCalendarYear
+                {
+                get
+                {
+                throw new NotImplementedException();
+                }
+                }
 
-                    internal override int MaxCalendarYear
-                    {
-                        get
-                        {
-                            throw new NotImplementedException();
-                        }
-                    }
+                internal override int MaxCalendarYear
+                {
+                get
+                {
+                throw new NotImplementedException();
+                }
+                }
 
-                    internal override EraInfo[] CalEraInfo
-                    {
-                        get
-                        {
-                            throw new NotImplementedException();
-                        }
-                    }
+                internal override EraInfo[] CalEraInfo
+                {
+                get
+                {
+                throw new NotImplementedException();
+                }
+                }
 
-                    internal override DateTime MinDate
-                    {
-                        get
-                        {
-                            throw new NotImplementedException();
-                        }
-                    }
+                internal override DateTime MinDate
+                {
+                get
+                {
+                throw new NotImplementedException();
+                }
+                }
 
-                    internal override DateTime MaxDate
-                    {
-                        get
-                        {
-                            throw new NotImplementedException();
-                        }
-                    }
+                internal override DateTime MaxDate
+                {
+                get
+                {
+                throw new NotImplementedException();
+                }
+                }
 
-                    public override int GetEra(DateTime time)
-                    {
-                        throw new NotImplementedException();
-                    }
+                public override int GetEra(DateTime time)
+                {
+                throw new NotImplementedException();
+                }
 
-                    internal override int GetGregorianYear(int year, int era)
-                    {
-                        throw new NotImplementedException();
-                    }
+                internal override int GetGregorianYear(int year, int era)
+                {
+                throw new NotImplementedException();
+                }
 
-                    internal override int GetYear(int year, DateTime time)
-                    {
-                        throw new NotImplementedException();
-                    }
+                internal override int GetYear(int year, DateTime time)
+                {
+                throw new NotImplementedException();
+                }
 
-                    internal override int GetYearInfo(int LunarYear, int Index)
-                    {
-                        throw new NotImplementedException();
-                    }
+                internal override int GetYearInfo(int LunarYear, int Index)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """
             );
@@ -1261,7 +1261,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 public abstract class Base
                 {
-                    public abstract void Dispose();
+                public abstract void Dispose();
                 }
 
                 partial class [|A|] : Base
@@ -1277,15 +1277,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 public abstract class Base
                 {
-                    public abstract void Dispose();
+                public abstract void Dispose();
                 }
 
                 partial class A : Base
                 {
-                    public override void Dispose()
-                    {
-                        throw new NotImplementedException();
-                    }
+                public override void Dispose()
+                {
+                throw new NotImplementedException();
+                }
                 }
 
                 partial class A
@@ -1304,7 +1304,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 public abstract class Base
                 {
-                    public abstract void Dispose();
+                public abstract void Dispose();
                 }
 
                 partial class [|A|]
@@ -1320,15 +1320,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 public abstract class Base
                 {
-                    public abstract void Dispose();
+                public abstract void Dispose();
                 }
 
                 partial class A
                 {
-                    public override void Dispose()
-                    {
-                        throw new NotImplementedException();
-                    }
+                public override void Dispose()
+                {
+                throw new NotImplementedException();
+                }
                 }
 
                 partial class A : Base
@@ -1345,7 +1345,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class A
                 {
-                    public abstract void M(int x);
+                public abstract void M(int x);
                 }
 
                 class [|T|] : A
@@ -1355,12 +1355,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class A
                 {
-                    public abstract void M(int x);
+                public abstract void M(int x);
                 }
 
                 class T : A
                 {
-                    public override void M(int x) => throw new System.NotImplementedException();
+                public override void M(int x) => throw new System.NotImplementedException();
                 }
                 """,
                 options: Option(
@@ -1377,7 +1377,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class A
                 {
-                    public abstract int M { get; }
+                public abstract int M { get; }
                 }
 
                 class [|T|] : A
@@ -1387,12 +1387,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class A
                 {
-                    public abstract int M { get; }
+                public abstract int M { get; }
                 }
 
                 class T : A
                 {
-                    public override int M => throw new System.NotImplementedException();
+                public override int M => throw new System.NotImplementedException();
                 }
                 """,
                 options: Option(
@@ -1409,7 +1409,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class A
                 {
-                    public abstract int M { set; }
+                public abstract int M { set; }
                 }
 
                 class [|T|] : A
@@ -1419,18 +1419,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class A
                 {
-                    public abstract int M { set; }
+                public abstract int M { set; }
                 }
 
                 class T : A
                 {
-                    public override int M
-                    {
-                        set
-                        {
-                            throw new System.NotImplementedException();
-                        }
-                    }
+                public override int M
+                {
+                set
+                {
+                throw new System.NotImplementedException();
+                }
+                }
                 }
                 """,
                 options: new OptionsCollection(GetLanguage())
@@ -1456,7 +1456,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class A
                 {
-                    public abstract int M { get; set; }
+                public abstract int M { get; set; }
                 }
 
                 class [|T|] : A
@@ -1466,23 +1466,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class A
                 {
-                    public abstract int M { get; set; }
+                public abstract int M { get; set; }
                 }
 
                 class T : A
                 {
-                    public override int M
-                    {
-                        get
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                public override int M
+                {
+                get
+                {
+                throw new System.NotImplementedException();
+                }
 
-                        set
-                        {
-                            throw new System.NotImplementedException();
-                        }
-                    }
+                set
+                {
+                throw new System.NotImplementedException();
+                }
+                }
                 }
                 """,
                 options: new OptionsCollection(GetLanguage())
@@ -1508,7 +1508,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class A
                 {
-                    public abstract int this[int i] { get; }
+                public abstract int this[int i] { get; }
                 }
 
                 class [|T|] : A
@@ -1518,12 +1518,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class A
                 {
-                    public abstract int this[int i] { get; }
+                public abstract int this[int i] { get; }
                 }
 
                 class T : A
                 {
-                    public override int this[int i] => throw new System.NotImplementedException();
+                public override int this[int i] => throw new System.NotImplementedException();
                 }
                 """,
                 options: Option(
@@ -1540,7 +1540,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class A
                 {
-                    public abstract int this[int i] { set; }
+                public abstract int this[int i] { set; }
                 }
 
                 class [|T|] : A
@@ -1550,18 +1550,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class A
                 {
-                    public abstract int this[int i] { set; }
+                public abstract int this[int i] { set; }
                 }
 
                 class T : A
                 {
-                    public override int this[int i]
-                    {
-                        set
-                        {
-                            throw new System.NotImplementedException();
-                        }
-                    }
+                public override int this[int i]
+                {
+                set
+                {
+                throw new System.NotImplementedException();
+                }
+                }
                 }
                 """,
                 options: new OptionsCollection(GetLanguage())
@@ -1587,7 +1587,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class A
                 {
-                    public abstract int this[int i] { get; set; }
+                public abstract int this[int i] { get; set; }
                 }
 
                 class [|T|] : A
@@ -1597,23 +1597,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class A
                 {
-                    public abstract int this[int i] { get; set; }
+                public abstract int this[int i] { get; set; }
                 }
 
                 class T : A
                 {
-                    public override int this[int i]
-                    {
-                        get
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                public override int this[int i]
+                {
+                get
+                {
+                throw new System.NotImplementedException();
+                }
 
-                        set
-                        {
-                            throw new System.NotImplementedException();
-                        }
-                    }
+                set
+                {
+                throw new System.NotImplementedException();
+                }
+                }
                 }
                 """,
                 options: new OptionsCollection(GetLanguage())
@@ -1639,7 +1639,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class A
                 {
-                    public abstract int M { get; }
+                public abstract int M { get; }
                 }
 
                 class [|T|] : A
@@ -1649,12 +1649,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class A
                 {
-                    public abstract int M { get; }
+                public abstract int M { get; }
                 }
 
                 class T : A
                 {
-                    public override int M { get => throw new System.NotImplementedException(); }
+                public override int M { get => throw new System.NotImplementedException(); }
                 }
                 """,
                 options: new OptionsCollection(GetLanguage())
@@ -1680,7 +1680,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class A
                 {
-                    public abstract int M { set; }
+                public abstract int M { set; }
                 }
 
                 class [|T|] : A
@@ -1690,12 +1690,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class A
                 {
-                    public abstract int M { set; }
+                public abstract int M { set; }
                 }
 
                 class T : A
                 {
-                    public override int M { set => throw new System.NotImplementedException(); }
+                public override int M { set => throw new System.NotImplementedException(); }
                 }
                 """,
                 options: Option(
@@ -1712,7 +1712,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class A
                 {
-                    public abstract int M { get; set; }
+                public abstract int M { get; set; }
                 }
 
                 class [|T|] : A
@@ -1722,12 +1722,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class A
                 {
-                    public abstract int M { get; set; }
+                public abstract int M { get; set; }
                 }
 
                 class T : A
                 {
-                    public override int M { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+                public override int M { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
                 }
                 """,
                 options: Option(
@@ -1749,25 +1749,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    public abstract int Prop { get; }
+                public abstract int Prop { get; }
                 }
 
                 class [|Derived|] : Base
                 {
-                    void Goo() { }
+                void Goo() { }
                 }
                 """,
                 """
                 abstract class Base
                 {
-                    public abstract int Prop { get; }
+                public abstract int Prop { get; }
                 }
 
                 class Derived : Base
                 {
-                    void Goo() { }
+                void Goo() { }
 
-                    public override int Prop => throw new System.NotImplementedException();
+                public override int Prop => throw new System.NotImplementedException();
                 }
                 """,
                 globalOptions: options
@@ -1785,14 +1785,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 namespace My
                 {
-                    public abstract class Goo
-                    {
-                        public abstract void Bar(System.Collections.Generic.List<object> values);
-                    }
+                public abstract class Goo
+                {
+                public abstract void Bar(System.Collections.Generic.List<object> values);
+                }
 
-                    public class [|Goo2|] : Goo // Implement Abstract Class
-                    {
-                    }
+                public class [|Goo2|] : Goo // Implement Abstract Class
+                {
+                }
                 }
                 """,
                 """
@@ -1803,18 +1803,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 namespace My
                 {
-                    public abstract class Goo
-                    {
-                        public abstract void Bar(System.Collections.Generic.List<object> values);
-                    }
+                public abstract class Goo
+                {
+                public abstract void Bar(System.Collections.Generic.List<object> values);
+                }
 
-                    public class Goo2 : Goo // Implement Abstract Class
-                    {
-                        public override void Bar(List<object> values)
-                        {
-                            throw new System.NotImplementedException();
-                        }
-                    }
+                public class Goo2 : Goo // Implement Abstract Class
+                {
+                public override void Bar(List<object> values)
+                {
+                throw new System.NotImplementedException();
+                }
+                }
                 }
                 """
             );
@@ -1828,8 +1828,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 struct V { }
                 abstract class B
                 {
-                    public abstract void M1(int i = 0, string s = null, int? j = null, V v = default(V));
-                    public abstract void M2<T>(T? i = null) where T : struct;
+                public abstract void M1(int i = 0, string s = null, int? j = null, V v = default(V));
+                public abstract void M2<T>(T? i = null) where T : struct;
                 }
                 sealed class [|D|] : B
                 {
@@ -1839,20 +1839,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 struct V { }
                 abstract class B
                 {
-                    public abstract void M1(int i = 0, string s = null, int? j = null, V v = default(V));
-                    public abstract void M2<T>(T? i = null) where T : struct;
+                public abstract void M1(int i = 0, string s = null, int? j = null, V v = default(V));
+                public abstract void M2<T>(T? i = null) where T : struct;
                 }
                 sealed class D : B
                 {
-                    public override void M1(int i = 0, string s = null, int? j = null, V v = default(V))
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void M1(int i = 0, string s = null, int? j = null, V v = default(V))
+                {
+                throw new System.NotImplementedException();
+                }
 
-                    public override void M2<T>(T? i = null)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void M2<T>(T? i = null)
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """,
                 parseOptions: TestOptions.Regular7
@@ -1867,8 +1867,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 struct V { }
                 abstract class B
                 {
-                    public abstract void M1(int i = 0, string s = null, int? j = null, V v = default(V));
-                    public abstract void M2<T>(T? i = null) where T : struct;
+                public abstract void M1(int i = 0, string s = null, int? j = null, V v = default(V));
+                public abstract void M2<T>(T? i = null) where T : struct;
                 }
                 sealed class [|D|] : B
                 {
@@ -1878,20 +1878,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 struct V { }
                 abstract class B
                 {
-                    public abstract void M1(int i = 0, string s = null, int? j = null, V v = default(V));
-                    public abstract void M2<T>(T? i = null) where T : struct;
+                public abstract void M1(int i = 0, string s = null, int? j = null, V v = default(V));
+                public abstract void M2<T>(T? i = null) where T : struct;
                 }
                 sealed class D : B
                 {
-                    public override void M1(int i = 0, string s = null, int? j = null, V v = default(V))
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void M1(int i = 0, string s = null, int? j = null, V v = default(V))
+                {
+                throw new System.NotImplementedException();
+                }
 
-                    public override void M2<T>(T? i = null)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void M2<T>(T? i = null)
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """,
                 parseOptions: new CSharpParseOptions(LanguageVersion.CSharp7)
@@ -1906,8 +1906,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 struct V { }
                 abstract class B
                 {
-                    public abstract void M1(int i = 0, string s = null, int? j = null, V v = default(V));
-                    public abstract void M2<T>(T? i = null) where T : struct;
+                public abstract void M1(int i = 0, string s = null, int? j = null, V v = default(V));
+                public abstract void M2<T>(T? i = null) where T : struct;
                 }
                 sealed class [|D|] : B
                 {
@@ -1917,20 +1917,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 struct V { }
                 abstract class B
                 {
-                    public abstract void M1(int i = 0, string s = null, int? j = null, V v = default(V));
-                    public abstract void M2<T>(T? i = null) where T : struct;
+                public abstract void M1(int i = 0, string s = null, int? j = null, V v = default(V));
+                public abstract void M2<T>(T? i = null) where T : struct;
                 }
                 sealed class D : B
                 {
-                    public override void M1(int i = 0, string s = null, int? j = null, V v = default)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void M1(int i = 0, string s = null, int? j = null, V v = default)
+                {
+                throw new System.NotImplementedException();
+                }
 
-                    public override void M2<T>(T? i = null)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void M2<T>(T? i = null)
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """
             );
@@ -1953,9 +1953,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class AbstractClass
                 {
-                    public abstract int ReadOnlyProp { get; }
-                    public abstract int ReadWriteProp { get; set; }
-                    public abstract int WriteOnlyProp { set; }
+                public abstract int ReadOnlyProp { get; }
+                public abstract int ReadWriteProp { get; set; }
+                public abstract int WriteOnlyProp { set; }
                 }
 
                 class [|C|] : AbstractClass
@@ -1965,16 +1965,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class AbstractClass
                 {
-                    public abstract int ReadOnlyProp { get; }
-                    public abstract int ReadWriteProp { get; set; }
-                    public abstract int WriteOnlyProp { set; }
+                public abstract int ReadOnlyProp { get; }
+                public abstract int ReadWriteProp { get; set; }
+                public abstract int WriteOnlyProp { set; }
                 }
 
                 class C : AbstractClass
                 {
-                    public override int ReadOnlyProp { get; }
-                    public override int ReadWriteProp { get; set; }
-                    public override int WriteOnlyProp { set => throw new System.NotImplementedException(); }
+                public override int ReadOnlyProp { get; }
+                public override int ReadWriteProp { get; set; }
+                public override int WriteOnlyProp { set => throw new System.NotImplementedException(); }
                 }
                 """,
                 parameters: new TestParameters(globalOptions: options)
@@ -2019,7 +2019,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class TestParent
                 {
-                    public abstract ref readonly int Method();
+                public abstract ref readonly int Method();
                 }
                 public class [|Test|] : TestParent
                 {
@@ -2028,14 +2028,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class TestParent
                 {
-                    public abstract ref readonly int Method();
+                public abstract ref readonly int Method();
                 }
                 public class Test : TestParent
                 {
-                    public override ref readonly int Method()
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override ref readonly int Method()
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """
             );
@@ -2048,7 +2048,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class TestParent
                 {
-                    public abstract ref readonly int Property { get; }
+                public abstract ref readonly int Property { get; }
                 }
                 public class [|Test|] : TestParent
                 {
@@ -2057,11 +2057,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class TestParent
                 {
-                    public abstract ref readonly int Property { get; }
+                public abstract ref readonly int Property { get; }
                 }
                 public class Test : TestParent
                 {
-                    public override ref readonly int Property => throw new System.NotImplementedException();
+                public override ref readonly int Property => throw new System.NotImplementedException();
                 }
                 """
             );
@@ -2102,7 +2102,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class TestParent
                 {
-                    public abstract ref readonly int this[int p] { get; }
+                public abstract ref readonly int this[int p] { get; }
                 }
                 public class [|Test|] : TestParent
                 {
@@ -2111,11 +2111,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class TestParent
                 {
-                    public abstract ref readonly int this[int p] { get; }
+                public abstract ref readonly int this[int p] { get; }
                 }
                 public class Test : TestParent
                 {
-                    public override ref readonly int this[int p] => throw new System.NotImplementedException();
+                public override ref readonly int this[int p] => throw new System.NotImplementedException();
                 }
                 """
             );
@@ -2128,7 +2128,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 public abstract class ParentTest
                 {
-                    public abstract void M<T>() where T : unmanaged;
+                public abstract void M<T>() where T : unmanaged;
                 }
                 public class [|Test|] : ParentTest
                 {
@@ -2137,14 +2137,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 public abstract class ParentTest
                 {
-                    public abstract void M<T>() where T : unmanaged;
+                public abstract void M<T>() where T : unmanaged;
                 }
                 public class Test : ParentTest
                 {
-                    public override void M<T>()
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void M<T>()
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """
             );
@@ -2156,22 +2156,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
             await TestMissingAsync(
                 """
                 <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                        <Document>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document>
                 public abstract class Base
                 {
-                    internal abstract void Method();
+                internal abstract void Method();
                 }
-                        </Document>
-                    </Project>
-                    <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
-                        <Document>
+                </Document>
+                </Project>
+                <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
+                <Document>
                 class [|Derived|] : Base
                 {
-                    Base inner;
+                Base inner;
                 }
-                        </Document>
-                    </Project>
+                </Document>
+                </Project>
                 </Workspace>
                 """
             );
@@ -2184,7 +2184,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class A<T>
                 {
-                    public abstract void AbstractMethod();
+                public abstract void AbstractMethod();
                 }
 
                 class [|B|] : A<int
@@ -2195,15 +2195,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class A<T>
                 {
-                    public abstract void AbstractMethod();
+                public abstract void AbstractMethod();
                 }
 
                 class B : A<int
                 {
-                    public override void AbstractMethod()
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void AbstractMethod()
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """
             );
@@ -2216,7 +2216,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract record A
                 {
-                    public abstract void AbstractMethod();
+                public abstract void AbstractMethod();
                 }
 
                 record [|B|] : A
@@ -2227,15 +2227,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract record A
                 {
-                    public abstract void AbstractMethod();
+                public abstract void AbstractMethod();
                 }
 
                 record B : A
                 {
-                    public override void AbstractMethod()
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void AbstractMethod()
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """,
                 parseOptions: TestOptions.RegularPreview
@@ -2249,7 +2249,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract record A
                 {
-                    public abstract void AbstractMethod();
+                public abstract void AbstractMethod();
                 }
 
                 record [|B|](int i) : A
@@ -2260,15 +2260,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract record A
                 {
-                    public abstract void AbstractMethod();
+                public abstract void AbstractMethod();
                 }
 
                 record B(int i) : A
                 {
-                    public override void AbstractMethod()
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void AbstractMethod()
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """,
                 parseOptions: TestOptions.RegularPreview
@@ -2282,7 +2282,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class A
                 {
-                    public abstract void AbstractMethod();
+                public abstract void AbstractMethod();
                 }
 
                 class [|B|](int i) : A
@@ -2293,15 +2293,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class A
                 {
-                    public abstract void AbstractMethod();
+                public abstract void AbstractMethod();
                 }
 
                 class B(int i) : A
                 {
-                    public override void AbstractMethod()
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void AbstractMethod()
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """,
                 parseOptions: TestOptions.RegularPreview
@@ -2315,7 +2315,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class A
                 {
-                    public abstract void AbstractMethod();
+                public abstract void AbstractMethod();
                 }
 
                 class [|B|] : A;
@@ -2323,15 +2323,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class A
                 {
-                    public abstract void AbstractMethod();
+                public abstract void AbstractMethod();
                 }
 
                 class B : A
                 {
-                    public override void AbstractMethod()
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void AbstractMethod()
+                {
+                throw new System.NotImplementedException();
+                }
                 }
 
                 """,
@@ -2348,7 +2348,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 abstract class B<T>
                 {
-                    public abstract T? M();
+                public abstract T? M();
                 }
 
                 class [|D|] : B<int>
@@ -2360,15 +2360,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 abstract class B<T>
                 {
-                    public abstract T? M();
+                public abstract T? M();
                 }
 
                 class D : B<int>
                 {
-                    public override int M()
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override int M()
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """
             );
@@ -2383,7 +2383,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 abstract class B<T>
                 {
-                    public abstract T? M();
+                public abstract T? M();
                 }
 
                 class [|D<T>|] : B<T> where T : struct
@@ -2395,15 +2395,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 abstract class B<T>
                 {
-                    public abstract T? M();
+                public abstract T? M();
                 }
 
                 class D<T> : B<T> where T : struct
                 {
-                    public override T M()
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override T M()
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """
             );
@@ -2418,7 +2418,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 abstract class B<T>
                 {
-                    public abstract T? M();
+                public abstract T? M();
                 }
 
                 class [|D<T>|] : B<(T, T)>
@@ -2430,15 +2430,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 abstract class B<T>
                 {
-                    public abstract T? M();
+                public abstract T? M();
                 }
 
                 class D<T> : B<(T, T)>
                 {
-                    public override (T, T) M()
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override (T, T) M()
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """
             );
@@ -2490,7 +2490,7 @@ class D<T> : B<{passToBase}>{constraint}
                 """
                 abstract class C
                 {
-                    public abstract void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d);
+                public abstract void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d);
                 }
                 class [|D|] : C
                 {
@@ -2499,16 +2499,16 @@ class D<T> : B<{passToBase}>{constraint}
                 """
                 abstract class C
                 {
-                    public abstract void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d);
+                public abstract void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d);
                 }
                 class D : C
                 {
-                    public override void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d)
-                        where T1 : default
-                        where T3 : default
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                public override void M<T1, T2, T3>(T1? a, T2 b, T1? c, T3? d)
+                where T1 : default
+                where T3 : default
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """
             );
@@ -2523,8 +2523,8 @@ class D<T> : B<{passToBase}>{constraint}
 
                 abstract class C
                 {
-                    protected abstract void M1<T>(T? t);
-                    protected abstract void M2<T>(I<T?> i);
+                protected abstract void M1<T>(T? t);
+                protected abstract void M2<T>(I<T?> i);
                 }
 
                 class [|C2|] : C
@@ -2536,21 +2536,21 @@ class D<T> : B<{passToBase}>{constraint}
 
                 abstract class C
                 {
-                    protected abstract void M1<T>(T? t);
-                    protected abstract void M2<T>(I<T?> i);
+                protected abstract void M1<T>(T? t);
+                protected abstract void M2<T>(I<T?> i);
                 }
 
                 class C2 : C
                 {
-                    protected override void M1<T>(T? t) where T : default
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                protected override void M1<T>(T? t) where T : default
+                {
+                throw new System.NotImplementedException();
+                }
 
-                    protected override void M2<T>(I<T?> i) where T : default
-                    {
-                        throw new System.NotImplementedException();
-                    }
+                protected override void M2<T>(I<T?> i) where T : default
+                {
+                throw new System.NotImplementedException();
+                }
                 }
                 """
             );
@@ -2563,7 +2563,7 @@ class D<T> : B<{passToBase}>{constraint}
                 """
                 abstract class C
                 {
-                    public abstract required int Property { get; set; }
+                public abstract required int Property { get; set; }
                 }
                 class [|D|] : C
                 {
@@ -2572,22 +2572,22 @@ class D<T> : B<{passToBase}>{constraint}
                 """
                 abstract class C
                 {
-                    public abstract required int Property { get; set; }
+                public abstract required int Property { get; set; }
                 }
                 class D : C
                 {
-                    public override required int Property
-                    {
-                        get
-                        {
-                            throw new System.NotImplementedException();
-                        }
+                public override required int Property
+                {
+                get
+                {
+                throw new System.NotImplementedException();
+                }
 
-                        set
-                        {
-                            throw new System.NotImplementedException();
-                        }
-                    }
+                set
+                {
+                throw new System.NotImplementedException();
+                }
+                }
                 }
                 """
             );

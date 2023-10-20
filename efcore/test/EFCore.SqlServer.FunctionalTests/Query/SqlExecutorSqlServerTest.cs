@@ -31,10 +31,10 @@ public class SqlExecutorSqlServerTest
 
         AssertSql(
             """
-@CustomerID='ALFKI' (Nullable = false) (Size = 5)
+            @CustomerID='ALFKI' (Nullable = false) (Size = 5)
 
-[dbo].[CustOrderHist] @CustomerID
-"""
+            [dbo].[CustOrderHist] @CustomerID
+            """
         );
     }
 
@@ -44,10 +44,10 @@ public class SqlExecutorSqlServerTest
 
         AssertSql(
             """
-@p0='ALFKI' (Size = 4000)
+            @p0='ALFKI' (Size = 4000)
 
-[dbo].[CustOrderHist] @CustomerID = @p0
-"""
+            [dbo].[CustOrderHist] @CustomerID = @p0
+            """
         );
     }
 
@@ -57,11 +57,11 @@ public class SqlExecutorSqlServerTest
 
         AssertSql(
             """
-@p0='London' (Size = 4000)
-@p1='Sales Representative' (Size = 4000)
+            @p0='London' (Size = 4000)
+            @p1='Sales Representative' (Size = 4000)
 
-SELECT COUNT(*) FROM "Customers" WHERE "City" = @p0 AND "ContactTitle" = @p1
-"""
+            SELECT COUNT(*) FROM "Customers" WHERE "City" = @p0 AND "ContactTitle" = @p1
+            """
         );
     }
 
@@ -71,10 +71,10 @@ SELECT COUNT(*) FROM "Customers" WHERE "City" = @p0 AND "ContactTitle" = @p1
 
         AssertSql(
             """
-@city='London' (Nullable = false) (Size = 6)
+            @city='London' (Nullable = false) (Size = 6)
 
-SELECT COUNT(*) FROM "Customers" WHERE "City" = @city
-"""
+            SELECT COUNT(*) FROM "Customers" WHERE "City" = @city
+            """
         );
     }
 
@@ -84,10 +84,10 @@ SELECT COUNT(*) FROM "Customers" WHERE "City" = @city
 
         AssertSql(
             """
-@city='London' (Nullable = false) (Size = 6)
+            @city='London' (Nullable = false) (Size = 6)
 
-SELECT COUNT(*) FROM "Customers" WHERE "City" = @city
-"""
+            SELECT COUNT(*) FROM "Customers" WHERE "City" = @city
+            """
         );
     }
 
@@ -97,10 +97,10 @@ SELECT COUNT(*) FROM "Customers" WHERE "City" = @city
 
         AssertSql(
             """
-@p0='London' (Nullable = false) (Size = 6)
+            @p0='London' (Nullable = false) (Size = 6)
 
-SELECT COUNT(*) FROM "Customers" WHERE "City" = @p0
-"""
+            SELECT COUNT(*) FROM "Customers" WHERE "City" = @p0
+            """
         );
     }
 
@@ -110,18 +110,18 @@ SELECT COUNT(*) FROM "Customers" WHERE "City" = @p0
 
         AssertSql(
             """
-@p0='London' (Size = 4000)
-@contactTitle='Sales Representative' (Nullable = false) (Size = 20)
+            @p0='London' (Size = 4000)
+            @contactTitle='Sales Representative' (Nullable = false) (Size = 20)
 
-SELECT COUNT(*) FROM "Customers" WHERE "City" = @p0 AND "ContactTitle" = @contactTitle
-""",
+            SELECT COUNT(*) FROM "Customers" WHERE "City" = @p0 AND "ContactTitle" = @contactTitle
+            """,
             //
             """
-@city='London' (Nullable = false) (Size = 6)
-@p0='Sales Representative' (Size = 4000)
+            @city='London' (Nullable = false) (Size = 6)
+            @p0='Sales Representative' (Size = 4000)
 
-SELECT COUNT(*) FROM "Customers" WHERE "City" = @city AND "ContactTitle" = @p0
-"""
+            SELECT COUNT(*) FROM "Customers" WHERE "City" = @city AND "ContactTitle" = @p0
+            """
         );
     }
 
@@ -131,11 +131,11 @@ SELECT COUNT(*) FROM "Customers" WHERE "City" = @city AND "ContactTitle" = @p0
 
         AssertSql(
             """
-@p0='London' (Size = 4000)
-@p1='Sales Representative' (Size = 4000)
+            @p0='London' (Size = 4000)
+            @p1='Sales Representative' (Size = 4000)
 
-SELECT COUNT(*) FROM "Customers" WHERE "City" = @p0 AND "ContactTitle" = @p1
-"""
+            SELECT COUNT(*) FROM "Customers" WHERE "City" = @p0 AND "ContactTitle" = @p1
+            """
         );
     }
 
@@ -145,11 +145,11 @@ SELECT COUNT(*) FROM "Customers" WHERE "City" = @p0 AND "ContactTitle" = @p1
 
         AssertSql(
             """
-city='London' (Nullable = false) (Size = 6)
-contactTitle='Sales Representative' (Nullable = false) (Size = 20)
+            city='London' (Nullable = false) (Size = 6)
+            contactTitle='Sales Representative' (Nullable = false) (Size = 20)
 
-SELECT COUNT(*) FROM "Customers" WHERE "City" = @city AND "ContactTitle" = @contactTitle
-"""
+            SELECT COUNT(*) FROM "Customers" WHERE "City" = @city AND "ContactTitle" = @contactTitle
+            """
         );
     }
 

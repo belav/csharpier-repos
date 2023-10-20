@@ -17,12 +17,12 @@ public class ToSqlQuerySqliteTest : ToSqlQueryTestBase
 
         AssertSql(
             """
-SELECT "a"."Id", "a"."Name", "a"."PostStatAuthorId", "m"."Count" AS "PostCount"
-FROM "Authors" AS "a"
-LEFT JOIN (
-    SELECT * FROM PostStats
-) AS "m" ON "a"."PostStatAuthorId" = "m"."AuthorId"
-"""
+            SELECT "a"."Id", "a"."Name", "a"."PostStatAuthorId", "m"."Count" AS "PostCount"
+            FROM "Authors" AS "a"
+            LEFT JOIN (
+            SELECT * FROM PostStats
+            ) AS "m" ON "a"."PostStatAuthorId" = "m"."AuthorId"
+            """
         );
     }
 

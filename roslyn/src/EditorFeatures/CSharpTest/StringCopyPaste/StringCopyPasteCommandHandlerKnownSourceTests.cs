@@ -65,7 +65,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """
                 Debug.Assert(adjustment != 0, $"Indentation with no adjustment should be represented by {nameof(BaseIndentationData)} directly.");
                 Debug.Assert(adjustment != 0, $"Indentation with[||] no adjustment should be represented by {nameof(BaseIndentationData)} directly.");
-                
+
                 """,
                 """
                 Debug.Assert(adjustment != 0, $"Indentation with[||] no adjustment should be represented by {nameof(BaseIndentationData)} directly.");

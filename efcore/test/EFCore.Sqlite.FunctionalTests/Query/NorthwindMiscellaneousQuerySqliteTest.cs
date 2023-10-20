@@ -27,10 +27,10 @@ public class NorthwindMiscellaneousQuerySqliteTest
 
         AssertSql(
             """
-SELECT "o"."CustomerID"
-FROM "Orders" AS "o"
-WHERE "o"."OrderDate" IS NOT NULL AND "o"."EmployeeID" IS NOT NULL AND instr(CAST("o"."EmployeeID" AS TEXT), '10') > 0
-"""
+            SELECT "o"."CustomerID"
+            FROM "Orders" AS "o"
+            WHERE "o"."OrderDate" IS NOT NULL AND "o"."EmployeeID" IS NOT NULL AND instr(CAST("o"."EmployeeID" AS TEXT), '10') > 0
+            """
         );
     }
 
@@ -40,19 +40,19 @@ WHERE "o"."OrderDate" IS NOT NULL AND "o"."EmployeeID" IS NOT NULL AND instr(CAS
 
         AssertSql(
             """
-@__p_0='10'
-@__p_1='5'
+            @__p_0='10'
+            @__p_1='5'
 
-SELECT "t"."CustomerID", "t"."Address", "t"."City", "t"."CompanyName", "t"."ContactName", "t"."ContactTitle", "t"."Country", "t"."Fax", "t"."Phone", "t"."PostalCode", "t"."Region"
-FROM (
-    SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-    FROM "Customers" AS "c"
-    ORDER BY "c"."ContactName"
-    LIMIT @__p_0
-) AS "t"
-ORDER BY "t"."ContactName"
-LIMIT -1 OFFSET @__p_1
-"""
+            SELECT "t"."CustomerID", "t"."Address", "t"."City", "t"."CompanyName", "t"."ContactName", "t"."ContactTitle", "t"."Country", "t"."Fax", "t"."Phone", "t"."PostalCode", "t"."Region"
+            FROM (
+            SELECT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            ORDER BY "c"."ContactName"
+            LIMIT @__p_0
+            ) AS "t"
+            ORDER BY "t"."ContactName"
+            LIMIT -1 OFFSET @__p_1
+            """
         );
     }
 
@@ -67,9 +67,9 @@ LIMIT -1 OFFSET @__p_1
 
         AssertSql(
             """
-SELECT (CAST(strftime('%f', "o"."OrderDate", CAST(1 AS TEXT) || ' years') AS REAL) * 1000.0) % 1000.0
-FROM "Orders" AS "o"
-"""
+            SELECT (CAST(strftime('%f', "o"."OrderDate", CAST(1 AS TEXT) || ' years') AS REAL) * 1000.0) % 1000.0
+            FROM "Orders" AS "o"
+            """
         );
     }
 
@@ -84,9 +84,9 @@ FROM "Orders" AS "o"
 
         AssertSql(
             """
-SELECT rtrim(rtrim(strftime('%H:%M:%f', "o"."OrderDate", CAST(1 AS TEXT) || ' years'), '0'), '.')
-FROM "Orders" AS "o"
-"""
+            SELECT rtrim(rtrim(strftime('%H:%M:%f', "o"."OrderDate", CAST(1 AS TEXT) || ' years'), '0'), '.')
+            FROM "Orders" AS "o"
+            """
         );
     }
 
@@ -96,10 +96,10 @@ FROM "Orders" AS "o"
 
         AssertSql(
             """
-SELECT rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', "o"."OrderDate", CAST(1 AS TEXT) || ' years'), '0'), '.') AS "OrderDate"
-FROM "Orders" AS "o"
-WHERE "o"."OrderDate" IS NOT NULL
-"""
+            SELECT rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', "o"."OrderDate", CAST(1 AS TEXT) || ' years'), '0'), '.') AS "OrderDate"
+            FROM "Orders" AS "o"
+            WHERE "o"."OrderDate" IS NOT NULL
+            """
         );
     }
 
@@ -133,10 +133,10 @@ WHERE "o"."OrderDate" IS NOT NULL
 
         AssertSql(
             """
-SELECT rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', "o"."OrderDate", CAST(1 AS TEXT) || ' months'), '0'), '.') AS "OrderDate"
-FROM "Orders" AS "o"
-WHERE "o"."OrderDate" IS NOT NULL
-"""
+            SELECT rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', "o"."OrderDate", CAST(1 AS TEXT) || ' months'), '0'), '.') AS "OrderDate"
+            FROM "Orders" AS "o"
+            WHERE "o"."OrderDate" IS NOT NULL
+            """
         );
     }
 
@@ -146,10 +146,10 @@ WHERE "o"."OrderDate" IS NOT NULL
 
         AssertSql(
             """
-SELECT rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', "o"."OrderDate", CAST(1.0 AS TEXT) || ' hours'), '0'), '.') AS "OrderDate"
-FROM "Orders" AS "o"
-WHERE "o"."OrderDate" IS NOT NULL
-"""
+            SELECT rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', "o"."OrderDate", CAST(1.0 AS TEXT) || ' hours'), '0'), '.') AS "OrderDate"
+            FROM "Orders" AS "o"
+            WHERE "o"."OrderDate" IS NOT NULL
+            """
         );
     }
 
@@ -159,10 +159,10 @@ WHERE "o"."OrderDate" IS NOT NULL
 
         AssertSql(
             """
-SELECT rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', "o"."OrderDate", CAST(1.0 AS TEXT) || ' minutes'), '0'), '.') AS "OrderDate"
-FROM "Orders" AS "o"
-WHERE "o"."OrderDate" IS NOT NULL
-"""
+            SELECT rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', "o"."OrderDate", CAST(1.0 AS TEXT) || ' minutes'), '0'), '.') AS "OrderDate"
+            FROM "Orders" AS "o"
+            WHERE "o"."OrderDate" IS NOT NULL
+            """
         );
     }
 
@@ -172,10 +172,10 @@ WHERE "o"."OrderDate" IS NOT NULL
 
         AssertSql(
             """
-SELECT rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', "o"."OrderDate", CAST(1.0 AS TEXT) || ' seconds'), '0'), '.') AS "OrderDate"
-FROM "Orders" AS "o"
-WHERE "o"."OrderDate" IS NOT NULL
-"""
+            SELECT rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', "o"."OrderDate", CAST(1.0 AS TEXT) || ' seconds'), '0'), '.') AS "OrderDate"
+            FROM "Orders" AS "o"
+            WHERE "o"."OrderDate" IS NOT NULL
+            """
         );
     }
 
@@ -199,10 +199,10 @@ WHERE "o"."OrderDate" IS NOT NULL
 
         AssertSql(
             """
-SELECT rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', "o"."OrderDate", CAST(100000000 / 10000000 AS TEXT) || ' seconds'), '0'), '.') AS "OrderDate"
-FROM "Orders" AS "o"
-WHERE "o"."OrderDate" IS NOT NULL
-"""
+            SELECT rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', "o"."OrderDate", CAST(100000000 / 10000000 AS TEXT) || ' seconds'), '0'), '.') AS "OrderDate"
+            FROM "Orders" AS "o"
+            WHERE "o"."OrderDate" IS NOT NULL
+            """
         );
     }
 
@@ -212,10 +212,10 @@ WHERE "o"."OrderDate" IS NOT NULL
 
         AssertSql(
             """
-SELECT rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', "o"."OrderDate", CAST(1000000000000.0 / 1000.0 AS TEXT) || ' seconds'), '0'), '.') AS "OrderDate"
-FROM "Orders" AS "o"
-WHERE "o"."OrderDate" IS NOT NULL
-"""
+            SELECT rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', "o"."OrderDate", CAST(1000000000000.0 / 1000.0 AS TEXT) || ' seconds'), '0'), '.') AS "OrderDate"
+            FROM "Orders" AS "o"
+            WHERE "o"."OrderDate" IS NOT NULL
+            """
         );
     }
 
@@ -225,10 +225,10 @@ WHERE "o"."OrderDate" IS NOT NULL
 
         AssertSql(
             """
-SELECT rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', "o"."OrderDate", CAST(-1000000000000.0 / 1000.0 AS TEXT) || ' seconds'), '0'), '.') AS "OrderDate"
-FROM "Orders" AS "o"
-WHERE "o"."OrderDate" IS NOT NULL
-"""
+            SELECT rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', "o"."OrderDate", CAST(-1000000000000.0 / 1000.0 AS TEXT) || ' seconds'), '0'), '.') AS "OrderDate"
+            FROM "Orders" AS "o"
+            WHERE "o"."OrderDate" IS NOT NULL
+            """
         );
     }
 
@@ -240,12 +240,12 @@ WHERE "o"."OrderDate" IS NOT NULL
 
         AssertSql(
             """
-@__millisecondsPerDay_0='86400000'
+            @__millisecondsPerDay_0='86400000'
 
-SELECT rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', "o"."OrderDate", COALESCE(CAST(CAST(CAST((CAST(strftime('%f', "o"."OrderDate") AS REAL) * 1000.0) % 1000.0 AS INTEGER) / @__millisecondsPerDay_0 AS REAL) AS TEXT), '') || ' days', COALESCE(CAST(CAST(CAST((CAST(strftime('%f', "o"."OrderDate") AS REAL) * 1000.0) % 1000.0 AS INTEGER) % @__millisecondsPerDay_0 AS REAL) / 1000.0 AS TEXT), '') || ' seconds'), '0'), '.') AS "OrderDate"
-FROM "Orders" AS "o"
-WHERE "o"."OrderDate" IS NOT NULL
-"""
+            SELECT rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', "o"."OrderDate", COALESCE(CAST(CAST(CAST((CAST(strftime('%f', "o"."OrderDate") AS REAL) * 1000.0) % 1000.0 AS INTEGER) / @__millisecondsPerDay_0 AS REAL) AS TEXT), '') || ' days', COALESCE(CAST(CAST(CAST((CAST(strftime('%f', "o"."OrderDate") AS REAL) * 1000.0) % 1000.0 AS INTEGER) % @__millisecondsPerDay_0 AS REAL) / 1000.0 AS TEXT), '') || ' seconds'), '0'), '.') AS "OrderDate"
+            FROM "Orders" AS "o"
+            WHERE "o"."OrderDate" IS NOT NULL
+            """
         );
     }
 
@@ -255,11 +255,11 @@ WHERE "o"."OrderDate" IS NOT NULL
 
         AssertSql(
             """
-SELECT rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', '1900-01-01 00:00:00', CAST(CAST("o"."OrderID" % 25 AS REAL) AS TEXT) || ' minutes'), '0'), '.') AS "Test"
-FROM "Orders" AS "o"
-WHERE "o"."OrderID" < 10500
-ORDER BY "o"."OrderID"
-"""
+            SELECT rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', '1900-01-01 00:00:00', CAST(CAST("o"."OrderID" % 25 AS REAL) AS TEXT) || ' minutes'), '0'), '.') AS "Test"
+            FROM "Orders" AS "o"
+            WHERE "o"."OrderID" < 10500
+            ORDER BY "o"."OrderID"
+            """
         );
     }
 
@@ -269,12 +269,12 @@ ORDER BY "o"."OrderID"
 
         AssertSql(
             """
-SELECT COUNT(*)
-FROM (
-    SELECT DISTINCT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
-    FROM "Customers" AS "c"
-) AS "t"
-"""
+            SELECT COUNT(*)
+            FROM (
+            SELECT DISTINCT "c"."CustomerID", "c"."Address", "c"."City", "c"."CompanyName", "c"."ContactName", "c"."ContactTitle", "c"."Country", "c"."Fax", "c"."Phone", "c"."PostalCode", "c"."Region"
+            FROM "Customers" AS "c"
+            ) AS "t"
+            """
         );
     }
 
@@ -284,16 +284,16 @@ FROM (
 
         AssertSql(
             """
-@__p_0='7'
+            @__p_0='7'
 
-SELECT COUNT(*)
-FROM (
-    SELECT "c"."CustomerID"
-    FROM "Customers" AS "c"
-    ORDER BY "c"."Country"
-    LIMIT -1 OFFSET @__p_0
-) AS "t"
-"""
+            SELECT COUNT(*)
+            FROM (
+            SELECT "c"."CustomerID"
+            FROM "Customers" AS "c"
+            ORDER BY "c"."Country"
+            LIMIT -1 OFFSET @__p_0
+            ) AS "t"
+            """
         );
     }
 
@@ -303,16 +303,16 @@ FROM (
 
         AssertSql(
             """
-@__p_0='7'
+            @__p_0='7'
 
-SELECT COUNT(*)
-FROM (
-    SELECT "c"."CustomerID"
-    FROM "Customers" AS "c"
-    ORDER BY "c"."Country"
-    LIMIT @__p_0
-) AS "t"
-"""
+            SELECT COUNT(*)
+            FROM (
+            SELECT "c"."CustomerID"
+            FROM "Customers" AS "c"
+            ORDER BY "c"."Country"
+            LIMIT @__p_0
+            ) AS "t"
+            """
         );
     }
 
@@ -322,15 +322,15 @@ FROM (
 
         AssertSql(
             """
-@__p_0='7'
+            @__p_0='7'
 
-SELECT COUNT(*)
-FROM (
-    SELECT "c"."CustomerID"
-    FROM "Customers" AS "c"
-    LIMIT -1 OFFSET @__p_0
-) AS "t"
-"""
+            SELECT COUNT(*)
+            FROM (
+            SELECT "c"."CustomerID"
+            FROM "Customers" AS "c"
+            LIMIT -1 OFFSET @__p_0
+            ) AS "t"
+            """
         );
     }
 
@@ -340,15 +340,15 @@ FROM (
 
         AssertSql(
             """
-@__p_0='7'
+            @__p_0='7'
 
-SELECT COUNT(*)
-FROM (
-    SELECT "c"."CustomerID"
-    FROM "Customers" AS "c"
-    LIMIT @__p_0
-) AS "t"
-"""
+            SELECT COUNT(*)
+            FROM (
+            SELECT "c"."CustomerID"
+            FROM "Customers" AS "c"
+            LIMIT @__p_0
+            ) AS "t"
+            """
         );
     }
 
@@ -364,9 +364,9 @@ FROM (
 
         AssertSql(
             """
-SELECT CAST("o"."OrderID" AS TEXT) || COALESCE("o"."CustomerID", '')
-FROM "Orders" AS "o"
-"""
+            SELECT CAST("o"."OrderID" AS TEXT) || COALESCE("o"."CustomerID", '')
+            FROM "Orders" AS "o"
+            """
         );
     }
 
@@ -376,9 +376,9 @@ FROM "Orders" AS "o"
 
         AssertSql(
             """
-SELECT COALESCE("o"."CustomerID", '') || CAST("o"."OrderID" AS TEXT)
-FROM "Orders" AS "o"
-"""
+            SELECT COALESCE("o"."CustomerID", '') || CAST("o"."OrderID" AS TEXT)
+            FROM "Orders" AS "o"
+            """
         );
     }
 
@@ -388,11 +388,11 @@ FROM "Orders" AS "o"
 
         AssertSql(
             """
-@__parameter_0='-' (Size = 1)
+            @__parameter_0='-' (Size = 1)
 
-SELECT @__parameter_0 || CAST("o"."OrderID" AS TEXT)
-FROM "Orders" AS "o"
-"""
+            SELECT @__parameter_0 || CAST("o"."OrderID" AS TEXT)
+            FROM "Orders" AS "o"
+            """
         );
     }
 
@@ -402,9 +402,9 @@ FROM "Orders" AS "o"
 
         AssertSql(
             """
-SELECT '-' || CAST("o"."OrderID" AS TEXT)
-FROM "Orders" AS "o"
-"""
+            SELECT '-' || CAST("o"."OrderID" AS TEXT)
+            FROM "Orders" AS "o"
+            """
         );
     }
 

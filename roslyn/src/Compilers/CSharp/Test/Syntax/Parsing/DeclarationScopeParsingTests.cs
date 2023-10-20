@@ -1781,15 +1781,15 @@ ref @scoped F4() { }";
         public void Local_02_RefScoped(LanguageVersion langVersion)
         {
             string source = """
-class Program
-{
-    static void Main()
-    {
-        ref scoped int d;
-        ref readonly scoped int e;
-    }
-}
-""";
+            class Program
+            {
+            static void Main()
+            {
+            ref scoped int d;
+            ref readonly scoped int e;
+            }
+            }
+            """;
             UsingTree(
                 source,
                 TestOptions.Regular.WithLanguageVersion(langVersion),

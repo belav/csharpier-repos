@@ -30,11 +30,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task ClassWithNoMembers()
         {
             var code = """
-                class C
-                {
-                $$
-                }
-                """;
+            class C
+            {
+            $$
+            }
+            """;
             Assert.Null(await GetTargetPositionAsync(code, next: true));
         }
 
@@ -42,12 +42,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task BeforeClassWithMember()
         {
             var code = """
-                $$
-                class C
-                {
-                    [||]void M() { }
-                }
-                """;
+            $$
+            class C
+            {
+            [||]void M() { }
+            }
+            """;
 
             await AssertNavigatedAsync(code, next: true);
         }
@@ -56,13 +56,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task AfterClassWithMember()
         {
             var code = """
-                class C
-                {
-                    [||]void M() { }
-                }
+            class C
+            {
+            [||]void M() { }
+            }
 
-                $$
-                """;
+            $$
+            """;
 
             await AssertNavigatedAsync(code, next: true);
         }
@@ -71,18 +71,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task BetweenClasses()
         {
             var code = """
-                class C1
-                {
-                    void M() { }
-                }
+            class C1
+            {
+            void M() { }
+            }
 
-                $$
+            $$
 
-                class C2
-                {
-                    [||]void M() { }
-                }
-                """;
+            class C2
+            {
+            [||]void M() { }
+            }
+            """;
 
             await AssertNavigatedAsync(code, next: true);
         }
@@ -91,18 +91,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task BetweenClassesPrevious()
         {
             var code = """
-                class C1
-                {
-                    [||]void M() { }
-                }
+            class C1
+            {
+            [||]void M() { }
+            }
 
-                $$
+            $$
 
-                class C2
-                {
-                    void M() { }
-                }
-                """;
+            class C2
+            {
+            void M() { }
+            }
+            """;
 
             await AssertNavigatedAsync(code, next: false);
         }
@@ -111,12 +111,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task FromFirstMemberToSecond()
         {
             var code = """
-                class C
-                {
-                    $$void M1() { }
-                    [||]void M2() { }
-                }
-                """;
+            class C
+            {
+            $$void M1() { }
+            [||]void M2() { }
+            }
+            """;
 
             await AssertNavigatedAsync(code, next: true);
         }
@@ -125,12 +125,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task FromSecondToFirst()
         {
             var code = """
-                class C
-                {
-                    [||]void M1() { }
-                    $$void M2() { }
-                }
-                """;
+            class C
+            {
+            [||]void M1() { }
+            $$void M2() { }
+            }
+            """;
 
             await AssertNavigatedAsync(code, next: false);
         }
@@ -139,12 +139,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task NextWraps()
         {
             var code = """
-                class C
-                {
-                    [||]void M1() { }
-                    $$void M2() { }
-                }
-                """;
+            class C
+            {
+            [||]void M1() { }
+            $$void M2() { }
+            }
+            """;
 
             await AssertNavigatedAsync(code, next: true);
         }
@@ -153,12 +153,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task PreviousWraps()
         {
             var code = """
-                class C
-                {
-                    $$void M1() { }
-                    [||]void M2() { }
-                }
-                """;
+            class C
+            {
+            $$void M1() { }
+            [||]void M2() { }
+            }
+            """;
 
             await AssertNavigatedAsync(code, next: false);
         }
@@ -167,16 +167,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task DescendsIntoNestedType()
         {
             var code = """
-                class C
-                {
-                    $$void M1() { }
+            class C
+            {
+            $$void M1() { }
 
-                    class N
-                    {
-                        [||]void M2() { }
-                    }
-                }
-                """;
+            class N
+            {
+            [||]void M2() { }
+            }
+            }
+            """;
 
             await AssertNavigatedAsync(code, next: true);
         }
@@ -185,12 +185,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task StopsAtConstructor()
         {
             var code = """
-                class C
-                {
-                    $$void M1() { }
-                    [||]public C() { }
-                }
-                """;
+            class C
+            {
+            $$void M1() { }
+            [||]public C() { }
+            }
+            """;
             await AssertNavigatedAsync(code, next: true);
         }
 
@@ -198,12 +198,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task StopsAtDestructor()
         {
             var code = """
-                class C
-                {
-                    $$void M1() { }
-                    [||]~C() { }
-                }
-                """;
+            class C
+            {
+            $$void M1() { }
+            [||]~C() { }
+            }
+            """;
             await AssertNavigatedAsync(code, next: true);
         }
 
@@ -211,12 +211,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task StopsAtOperator()
         {
             var code = """
-                class C
-                {
-                    $$void M1() { }
-                    [||]static C operator+(C left, C right) { throw new System.NotImplementedException(); }
-                }
-                """;
+            class C
+            {
+            $$void M1() { }
+            [||]static C operator+(C left, C right) { throw new System.NotImplementedException(); }
+            }
+            """;
             await AssertNavigatedAsync(code, next: true);
         }
 
@@ -224,12 +224,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task StopsAtField()
         {
             var code = """
-                class C
-                {
-                    $$void M1() { }
-                    [||]int F;
-                }
-                """;
+            class C
+            {
+            $$void M1() { }
+            [||]int F;
+            }
+            """;
             await AssertNavigatedAsync(code, next: true);
         }
 
@@ -237,12 +237,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task StopsAtFieldlikeEvent()
         {
             var code = """
-                class C
-                {
-                    $$void M1() { }
-                    [||]event System.EventHandler E;
-                }
-                """;
+            class C
+            {
+            $$void M1() { }
+            [||]event System.EventHandler E;
+            }
+            """;
             await AssertNavigatedAsync(code, next: true);
         }
 
@@ -250,12 +250,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task StopsAtAutoProperty()
         {
             var code = """
-                class C
-                {
-                    $$void M1() { }
-                    [||]int P { get; set ; }
-                }
-                """;
+            class C
+            {
+            $$void M1() { }
+            [||]int P { get; set ; }
+            }
+            """;
             await AssertNavigatedAsync(code, next: true);
         }
 
@@ -263,17 +263,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task StopsAtPropertyWithAccessors()
         {
             var code = """
-                class C
-                {
-                    $$void M1() { }
+            class C
+            {
+            $$void M1() { }
 
-                    [||]int P
-                    {
-                        get { return 42; }
-                        set { }
-                    }
-                }
-                """;
+            [||]int P
+            {
+            get { return 42; }
+            set { }
+            }
+            }
+            """;
 
             await AssertNavigatedAsync(code, next: true);
         }
@@ -282,19 +282,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task SkipsPropertyAccessors()
         {
             var code = """
-                class C
-                {
-                    void M1() { }
+            class C
+            {
+            void M1() { }
 
-                    $$int P
-                    {
-                        get { return 42; }
-                        set { }
-                    }
+            $$int P
+            {
+            get { return 42; }
+            set { }
+            }
 
-                    [||]void M2() { }
-                }
-                """;
+            [||]void M2() { }
+            }
+            """;
 
             await AssertNavigatedAsync(code, next: true);
         }
@@ -303,19 +303,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task FromInsideAccessor()
         {
             var code = """
-                class C
-                {
-                    void M1() { }
+            class C
+            {
+            void M1() { }
 
-                    int P
-                    {
-                        get { return $$42; }
-                        set { }
-                    }
+            int P
+            {
+            get { return $$42; }
+            set { }
+            }
 
-                    [||]void M2() { }
-                }
-                """;
+            [||]void M2() { }
+            }
+            """;
 
             await AssertNavigatedAsync(code, next: true);
         }
@@ -324,17 +324,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task StopsAtIndexerWithAccessors()
         {
             var code = """
-                class C
-                {
-                    $$void M1() { }
+            class C
+            {
+            $$void M1() { }
 
-                    [||]int this[int i]
-                    {
-                        get { return 42; }
-                        set { }
-                    }
-                }
-                """;
+            [||]int this[int i]
+            {
+            get { return 42; }
+            set { }
+            }
+            }
+            """;
 
             await AssertNavigatedAsync(code, next: true);
         }
@@ -343,19 +343,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task SkipsIndexerAccessors()
         {
             var code = """
-                class C
-                {
-                    void M1() { }
+            class C
+            {
+            void M1() { }
 
-                    $$int this[int i]
-                    {
-                        get { return 42; }
-                        set { }
-                    }
+            $$int this[int i]
+            {
+            get { return 42; }
+            set { }
+            }
 
-                    [||]void M2() { }
-                }
-                """;
+            [||]void M2() { }
+            }
+            """;
 
             await AssertNavigatedAsync(code, next: true);
         }
@@ -364,17 +364,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task StopsAtEventWithAddRemove()
         {
             var code = """
-                class C
-                {
-                    $$void M1() { }
+            class C
+            {
+            $$void M1() { }
 
-                    [||]event EventHandler E
-                    {
-                        add { }
-                        remove { }
-                    }
-                }
-                """;
+            [||]event EventHandler E
+            {
+            add { }
+            remove { }
+            }
+            }
+            """;
 
             await AssertNavigatedAsync(code, next: true);
         }
@@ -383,19 +383,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task SkipsEventAddRemove()
         {
             var code = """
-                class C
-                {
-                    void M1() { }
+            class C
+            {
+            void M1() { }
 
-                    $$event EventHandler E
-                    {
-                        add { }
-                        remove { }
-                    }
+            $$event EventHandler E
+            {
+            add { }
+            remove { }
+            }
 
-                    [||]void M2() { }
-                }
-                """;
+            [||]void M2() { }
+            }
+            """;
 
             await AssertNavigatedAsync(code, next: true);
         }
@@ -404,16 +404,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task FromInsideMethod()
         {
             var code = """
-                class C
-                {
-                    void M1()
-                    {
-                        $$System.Console.WriteLine();
-                    }
+            class C
+            {
+            void M1()
+            {
+            $$System.Console.WriteLine();
+            }
 
-                    [||]void M2() { }
-                }
-                """;
+            [||]void M2() { }
+            }
+            """;
 
             await AssertNavigatedAsync(code, next: true);
         }
@@ -422,15 +422,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task NextFromBetweenMethods()
         {
             var code = """
-                class C
-                {
-                    void M1() { }
+            class C
+            {
+            void M1() { }
 
-                    $$
+            $$
 
-                    [||]void M2() { }
-                }
-                """;
+            [||]void M2() { }
+            }
+            """;
 
             await AssertNavigatedAsync(code, next: true);
         }
@@ -439,15 +439,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task PreviousFromBetweenMethods()
         {
             var code = """
-                class C
-                {
-                    [||]void M1() { }
+            class C
+            {
+            [||]void M1() { }
 
-                    $$
+            $$
 
-                    void M2() { }
-                }
-                """;
+            void M2() { }
+            }
+            """;
 
             await AssertNavigatedAsync(code, next: false);
         }
@@ -456,15 +456,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task NextFromBetweenMethodsInTrailingTrivia()
         {
             var code = """
-                class C
-                {
-                    void M1()
-                    {
-                    } $$
+            class C
+            {
+            void M1()
+            {
+            } $$
 
-                    [||]void M2() { }
-                }
-                """;
+            [||]void M2() { }
+            }
+            """;
 
             await AssertNavigatedAsync(code, next: true);
         }
@@ -473,15 +473,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task PreviousFromBetweenMethodsInTrailingTrivia()
         {
             var code = """
-                class C
-                {
-                    [||]void M1()
-                    {
-                    } $$
+            class C
+            {
+            [||]void M1()
+            {
+            } $$
 
-                    void M2() { }
-                }
-                """;
+            void M2() { }
+            }
+            """;
 
             await AssertNavigatedAsync(code, next: false);
         }
@@ -490,13 +490,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task StopsAtExpressionBodiedMember()
         {
             var code = """
-                class C
-                {
-                    int M1() => $$42;
+            class C
+            {
+            int M1() => $$42;
 
-                    [||]int M2() => 42;
-                }
-                """;
+            [||]int M2() => 42;
+            }
+            """;
 
             await AssertNavigatedAsync(code, next: true);
         }
@@ -506,18 +506,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task PreviousFromInsideCurrent()
         {
             var code = """
-                class C
-                {
-                    [||]void M1()
-                    {
-                        Console.WriteLine($$);
-                    }
+            class C
+            {
+            [||]void M1()
+            {
+            Console.WriteLine($$);
+            }
 
-                    void M2()
-                    {
-                    }
-                }
-                """;
+            void M2()
+            {
+            }
+            }
+            """;
 
             await AssertNavigatedAsync(code, next: false);
         }
@@ -526,10 +526,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task NextInScript()
         {
             var code = """
-                $$void M1() { }
+            $$void M1() { }
 
-                [||]void M2() { }
-                """;
+            [||]void M2() { }
+            """;
 
             await AssertNavigatedAsync(code, next: true, sourceCodeKind: SourceCodeKind.Script);
         }
@@ -538,10 +538,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
         public async Task PrevInScript()
         {
             var code = """
-                [||]void M1() { }
+            [||]void M1() { }
 
-                $$void M2() { }
-                """;
+            $$void M2() { }
+            """;
 
             await AssertNavigatedAsync(code, next: false, sourceCodeKind: SourceCodeKind.Script);
         }

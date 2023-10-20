@@ -27,8 +27,8 @@ public class NorthwindSqlQuerySqlServerTest
 
         AssertSql(
             """
-SELECT "ProductID" FROM "Products"
-"""
+            SELECT "ProductID" FROM "Products"
+            """
         );
     }
 
@@ -38,15 +38,15 @@ SELECT "ProductID" FROM "Products"
 
         AssertSql(
             """
-SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
-FROM [Orders] AS [o]
-WHERE [o].[OrderID] IN (
-    SELECT [t].[Value]
-    FROM (
-        SELECT "ProductID" AS "Value" FROM "Products"
-    ) AS [t]
-)
-"""
+            SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
+            FROM [Orders] AS [o]
+            WHERE [o].[OrderID] IN (
+            SELECT [t].[Value]
+            FROM (
+            SELECT "ProductID" AS "Value" FROM "Products"
+            ) AS [t]
+            )
+            """
         );
     }
 
@@ -56,12 +56,12 @@ WHERE [o].[OrderID] IN (
 
         AssertSql(
             """
-SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate], CAST([t].[Value] AS int) AS [p]
-FROM [Orders] AS [o]
-INNER JOIN (
-    SELECT "ProductID" AS "Value" FROM "Products"
-) AS [t] ON [o].[OrderID] = CAST([t].[Value] AS int)
-"""
+            SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate], CAST([t].[Value] AS int) AS [p]
+            FROM [Orders] AS [o]
+            INNER JOIN (
+            SELECT "ProductID" AS "Value" FROM "Products"
+            ) AS [t] ON [o].[OrderID] = CAST([t].[Value] AS int)
+            """
         );
     }
 
@@ -71,10 +71,10 @@ INNER JOIN (
 
         AssertSql(
             """
-p0='10'
+            p0='10'
 
-SELECT "ProductID" FROM "Products" WHERE "ProductID" = @p0
-"""
+            SELECT "ProductID" FROM "Products" WHERE "ProductID" = @p0
+            """
         );
     }
 

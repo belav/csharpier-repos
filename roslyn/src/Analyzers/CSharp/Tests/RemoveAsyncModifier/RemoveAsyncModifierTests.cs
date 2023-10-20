@@ -30,50 +30,50 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    async Task {|CS1998:Goo|}()
-                    {
-                        if (DateTime.Now.Ticks > 0)
-                        {
-                            return;
-                        }
-                    }
+                async Task {|CS1998:Goo|}()
+                {
+                if (DateTime.Now.Ticks > 0)
+                {
+                return;
+                }
+                }
 
-                    async Task {|CS1998:Foo|}()
-                    {
-                        Console.WriteLine(1);
-                    }
+                async Task {|CS1998:Foo|}()
+                {
+                Console.WriteLine(1);
+                }
 
-                    async Task {|CS1998:Bar|}()
-                    {
-                        async Task {|CS1998:Baz|}()
-                        {
-                            Func<Task<int>> g = async () {|CS1998:=>|} 5;
-                        }
-                    }
+                async Task {|CS1998:Bar|}()
+                {
+                async Task {|CS1998:Baz|}()
+                {
+                Func<Task<int>> g = async () {|CS1998:=>|} 5;
+                }
+                }
 
-                    async Task<string> {|CS1998:Tur|}()
-                    {
-                        async Task<string> {|CS1998:Duck|}()
-                        {
-                            async Task<string> {|CS1998:En|}()
-                            {
-                                return "Developers!";
-                            }
+                async Task<string> {|CS1998:Tur|}()
+                {
+                async Task<string> {|CS1998:Duck|}()
+                {
+                async Task<string> {|CS1998:En|}()
+                {
+                return "Developers!";
+                }
 
-                            return "Developers! Developers!";
-                        }
+                return "Developers! Developers!";
+                }
 
-                        return "Developers! Developers! Developers!";
-                    }
+                return "Developers! Developers! Developers!";
+                }
 
-                    async Task {|CS1998:Nurk|}()
-                    {
-                        Func<Task<int>> f = async () {|CS1998:=>|} 4;
+                async Task {|CS1998:Nurk|}()
+                {
+                Func<Task<int>> f = async () {|CS1998:=>|} 4;
 
-                        if (DateTime.Now.Ticks > f().Result)
-                        {
-                        }
-                    }
+                if (DateTime.Now.Ticks > f().Result)
+                {
+                }
+                }
                 }
                 """,
                 """
@@ -82,58 +82,58 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    Task Goo()
-                    {
-                        if (DateTime.Now.Ticks > 0)
-                        {
-                            return Task.CompletedTask;
-                        }
+                Task Goo()
+                {
+                if (DateTime.Now.Ticks > 0)
+                {
+                return Task.CompletedTask;
+                }
 
-                        return Task.CompletedTask;
-                    }
+                return Task.CompletedTask;
+                }
 
-                    Task Foo()
-                    {
-                        Console.WriteLine(1);
-                        return Task.CompletedTask;
-                    }
+                Task Foo()
+                {
+                Console.WriteLine(1);
+                return Task.CompletedTask;
+                }
 
-                    Task Bar()
-                    {
-                        Task Baz()
-                        {
-                            Func<Task<int>> g = () => Task.FromResult(5);
-                            return Task.CompletedTask;
-                        }
+                Task Bar()
+                {
+                Task Baz()
+                {
+                Func<Task<int>> g = () => Task.FromResult(5);
+                return Task.CompletedTask;
+                }
 
-                        return Task.CompletedTask;
-                    }
+                return Task.CompletedTask;
+                }
 
-                    Task<string> Tur()
-                    {
-                        Task<string> Duck()
-                        {
-                            Task<string> En()
-                            {
-                                return Task.FromResult("Developers!");
-                            }
+                Task<string> Tur()
+                {
+                Task<string> Duck()
+                {
+                Task<string> En()
+                {
+                return Task.FromResult("Developers!");
+                }
 
-                            return Task.FromResult("Developers! Developers!");
-                        }
+                return Task.FromResult("Developers! Developers!");
+                }
 
-                        return Task.FromResult("Developers! Developers! Developers!");
-                    }
+                return Task.FromResult("Developers! Developers! Developers!");
+                }
 
-                    Task Nurk()
-                    {
-                        Func<Task<int>> f = () => Task.FromResult(4);
+                Task Nurk()
+                {
+                Func<Task<int>> f = () => Task.FromResult(4);
 
-                        if (DateTime.Now.Ticks > f().Result)
-                        {
-                        }
+                if (DateTime.Now.Ticks > f().Result)
+                {
+                }
 
-                        return Task.CompletedTask;
-                    }
+                return Task.CompletedTask;
+                }
                 }
                 """
             );
@@ -148,7 +148,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    async Task {|CS1998:Goo|}(){}
+                async Task {|CS1998:Goo|}(){}
                 }
                 """,
                 """
@@ -156,10 +156,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    Task Goo()
-                    {
-                        return Task.CompletedTask;
-                    }
+                Task Goo()
+                {
+                return Task.CompletedTask;
+                }
                 }
                 """
             );
@@ -174,13 +174,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    async Task {|CS1998:Goo|}()
-                    {
-                        if (System.DateTime.Now.Ticks > 0)
-                        {
-                            return;
-                        }
-                    }
+                async Task {|CS1998:Goo|}()
+                {
+                if (System.DateTime.Now.Ticks > 0)
+                {
+                return;
+                }
+                }
                 }
                 """,
                 """
@@ -188,15 +188,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    Task Goo()
-                    {
-                        if (System.DateTime.Now.Ticks > 0)
-                        {
-                            return Task.CompletedTask;
-                        }
+                Task Goo()
+                {
+                if (System.DateTime.Now.Ticks > 0)
+                {
+                return Task.CompletedTask;
+                }
 
-                        return Task.CompletedTask;
-                    }
+                return Task.CompletedTask;
+                }
                 }
                 """
             );
@@ -206,36 +206,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
         public async Task Method_ValueTask_BlockBody()
         {
             var source = """
-                using System.Threading.Tasks;
+            using System.Threading.Tasks;
 
-                class C
-                {
-                    async ValueTask {|CS1998:Goo|}()
-                    {
-                        if (System.DateTime.Now.Ticks > 0)
-                        {
-                            return;
-                        }
-                    }
-                }
-                """;
+            class C
+            {
+            async ValueTask {|CS1998:Goo|}()
+            {
+            if (System.DateTime.Now.Ticks > 0)
+            {
+            return;
+            }
+            }
+            }
+            """;
 
             var expected = """
-                using System.Threading.Tasks;
+            using System.Threading.Tasks;
 
-                class C
-                {
-                    ValueTask Goo()
-                    {
-                        if (System.DateTime.Now.Ticks > 0)
-                        {
-                            return new ValueTask();
-                        }
+            class C
+            {
+            ValueTask Goo()
+            {
+            if (System.DateTime.Now.Ticks > 0)
+            {
+            return new ValueTask();
+            }
 
-                        return new ValueTask();
-                    }
-                }
-                """;
+            return new ValueTask();
+            }
+            }
+            """;
 
             await new VerifyCS.Test
             {
@@ -249,37 +249,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
         public async Task Method_ValueTaskOfT_BlockBody()
         {
             var source = """
-                using System.Threading.Tasks;
+            using System.Threading.Tasks;
 
-                class C
-                {
-                    async ValueTask<int> {|CS1998:Goo|}()
-                    {
-                        if (System.DateTime.Now.Ticks > 0)
-                        {
-                            return 2;
-                        }
+            class C
+            {
+            async ValueTask<int> {|CS1998:Goo|}()
+            {
+            if (System.DateTime.Now.Ticks > 0)
+            {
+            return 2;
+            }
 
-                        return 3;
-                    }
-                }
-                """;
+            return 3;
+            }
+            }
+            """;
             var expected = """
-                using System.Threading.Tasks;
+            using System.Threading.Tasks;
 
-                class C
-                {
-                    ValueTask<int> Goo()
-                    {
-                        if (System.DateTime.Now.Ticks > 0)
-                        {
-                            return new ValueTask<int>(2);
-                        }
+            class C
+            {
+            ValueTask<int> Goo()
+            {
+            if (System.DateTime.Now.Ticks > 0)
+            {
+            return new ValueTask<int>(2);
+            }
 
-                        return new ValueTask<int>(3);
-                    }
-                }
-                """;
+            return new ValueTask<int>(3);
+            }
+            }
+            """;
 
             await new VerifyCS.Test
             {
@@ -293,26 +293,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
         public async Task Method_ValueTask_ExpressionBody()
         {
             var source = """
-                using System.Threading.Tasks;
+            using System.Threading.Tasks;
 
-                class C
-                {
-                    async ValueTask {|CS1998:Goo|}() => System.Console.WriteLine(1);
-                }
-                """;
+            class C
+            {
+            async ValueTask {|CS1998:Goo|}() => System.Console.WriteLine(1);
+            }
+            """;
 
             var expected = """
-                using System.Threading.Tasks;
+            using System.Threading.Tasks;
 
-                class C
-                {
-                    ValueTask Goo()
-                    {
-                        System.Console.WriteLine(1);
-                        return new ValueTask();
-                    }
-                }
-                """;
+            class C
+            {
+            ValueTask Goo()
+            {
+            System.Console.WriteLine(1);
+            return new ValueTask();
+            }
+            }
+            """;
 
             await new VerifyCS.Test
             {
@@ -326,22 +326,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
         public async Task Method_ValueTaskOfT_ExpressionBody()
         {
             var source = """
-                using System.Threading.Tasks;
+            using System.Threading.Tasks;
 
-                class C
-                {
-                    async ValueTask<int> {|CS1998:Goo|}() => 3;
-                }
-                """;
+            class C
+            {
+            async ValueTask<int> {|CS1998:Goo|}() => 3;
+            }
+            """;
 
             var expected = """
-                using System.Threading.Tasks;
+            using System.Threading.Tasks;
 
-                class C
-                {
-                    ValueTask<int> Goo() => new ValueTask<int>(3);
-                }
-                """;
+            class C
+            {
+            ValueTask<int> Goo() => new ValueTask<int>(3);
+            }
+            """;
 
             await new VerifyCS.Test
             {
@@ -360,15 +360,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    async Task {|CS1998:Goo|}()
-                    {
-                        if (System.DateTime.Now.Ticks > 0)
-                        {
-                            return;
-                        }
+                async Task {|CS1998:Goo|}()
+                {
+                if (System.DateTime.Now.Ticks > 0)
+                {
+                return;
+                }
 
-                        throw new System.ApplicationException();
-                    }
+                throw new System.ApplicationException();
+                }
                 }
                 """,
                 """
@@ -376,15 +376,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    Task Goo()
-                    {
-                        if (System.DateTime.Now.Ticks > 0)
-                        {
-                            return Task.CompletedTask;
-                        }
+                Task Goo()
+                {
+                if (System.DateTime.Now.Ticks > 0)
+                {
+                return Task.CompletedTask;
+                }
 
-                        throw new System.ApplicationException();
-                    }
+                throw new System.ApplicationException();
+                }
                 }
                 """
             );
@@ -399,18 +399,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    async Task {|CS1998:Goo|}()
-                    {
-                        if (GetTicks() > 0)
-                        {
-                            return;
-                        }
+                async Task {|CS1998:Goo|}()
+                {
+                if (GetTicks() > 0)
+                {
+                return;
+                }
 
-                        long GetTicks()
-                        {
-                            return System.DateTime.Now.Ticks;
-                        }
-                    }
+                long GetTicks()
+                {
+                return System.DateTime.Now.Ticks;
+                }
+                }
                 }
                 """,
                 """
@@ -418,20 +418,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    Task Goo()
-                    {
-                        if (GetTicks() > 0)
-                        {
-                            return Task.CompletedTask;
-                        }
+                Task Goo()
+                {
+                if (GetTicks() > 0)
+                {
+                return Task.CompletedTask;
+                }
 
-                        long GetTicks()
-                        {
-                            return System.DateTime.Now.Ticks;
-                        }
+                long GetTicks()
+                {
+                return System.DateTime.Now.Ticks;
+                }
 
-                        return Task.CompletedTask;
-                    }
+                return Task.CompletedTask;
+                }
                 }
                 """
             );
@@ -446,18 +446,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    async Task {|CS1998:Goo|}()
-                    {
-                        System.Func<long> getTicks = () => {
-                            return System.DateTime.Now.Ticks;
-                        };
+                async Task {|CS1998:Goo|}()
+                {
+                System.Func<long> getTicks = () => {
+                return System.DateTime.Now.Ticks;
+                };
 
-                        if (getTicks() > 0)
-                        {
-                            return;
-                        }
+                if (getTicks() > 0)
+                {
+                return;
+                }
 
-                    }
+                }
                 }
                 """,
                 """
@@ -465,19 +465,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    Task Goo()
-                    {
-                        System.Func<long> getTicks = () => {
-                            return System.DateTime.Now.Ticks;
-                        };
+                Task Goo()
+                {
+                System.Func<long> getTicks = () => {
+                return System.DateTime.Now.Ticks;
+                };
 
-                        if (getTicks() > 0)
-                        {
-                            return Task.CompletedTask;
-                        }
+                if (getTicks() > 0)
+                {
+                return Task.CompletedTask;
+                }
 
-                        return Task.CompletedTask;
-                    }
+                return Task.CompletedTask;
+                }
                 }
                 """
             );
@@ -492,15 +492,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    async Task<int> {|CS1998:Goo|}()
-                    {
-                        if (System.DateTime.Now.Ticks > 0)
-                        {
-                            return 2;
-                        }
+                async Task<int> {|CS1998:Goo|}()
+                {
+                if (System.DateTime.Now.Ticks > 0)
+                {
+                return 2;
+                }
 
-                        return 3;
-                    }
+                return 3;
+                }
                 }
                 """,
                 """
@@ -508,15 +508,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    Task<int> Goo()
-                    {
-                        if (System.DateTime.Now.Ticks > 0)
-                        {
-                            return Task.FromResult(2);
-                        }
+                Task<int> Goo()
+                {
+                if (System.DateTime.Now.Ticks > 0)
+                {
+                return Task.FromResult(2);
+                }
 
-                        return Task.FromResult(3);
-                    }
+                return Task.FromResult(3);
+                }
                 }
                 """
             );
@@ -531,7 +531,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    async Task<int> {|CS1998:Goo|}() => 2;
+                async Task<int> {|CS1998:Goo|}() => 2;
                 }
                 """,
                 """
@@ -539,7 +539,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    Task<int> Goo() => Task.FromResult(2);
+                Task<int> Goo() => Task.FromResult(2);
                 }
                 """
             );
@@ -555,7 +555,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    async Task {|CS1998:Goo|}() => Console.WriteLine("Hello");
+                async Task {|CS1998:Goo|}() => Console.WriteLine("Hello");
                 }
                 """,
                 """
@@ -564,11 +564,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    Task Goo()
-                    {
-                        Console.WriteLine("Hello");
-                        return Task.CompletedTask;
-                    }
+                Task Goo()
+                {
+                Console.WriteLine("Hello");
+                return Task.CompletedTask;
+                }
                 }
                 """
             );
@@ -583,16 +583,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    public void M1()
-                    {
-                        async Task {|CS1998:Goo|}()
-                        {
-                            if (System.DateTime.Now.Ticks > 0)
-                            {
-                                return;
-                            }
-                        }
-                    }
+                public void M1()
+                {
+                async Task {|CS1998:Goo|}()
+                {
+                if (System.DateTime.Now.Ticks > 0)
+                {
+                return;
+                }
+                }
+                }
                 }
                 """,
                 """
@@ -600,18 +600,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    public void M1()
-                    {
-                        Task Goo()
-                        {
-                            if (System.DateTime.Now.Ticks > 0)
-                            {
-                                return Task.CompletedTask;
-                            }
+                public void M1()
+                {
+                Task Goo()
+                {
+                if (System.DateTime.Now.Ticks > 0)
+                {
+                return Task.CompletedTask;
+                }
 
-                            return Task.CompletedTask;
-                        }
-                    }
+                return Task.CompletedTask;
+                }
+                }
                 }
                 """
             );
@@ -627,10 +627,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    public void M1()
-                    {
-                        async Task {|CS1998:Goo|}() => Console.WriteLine(1);
-                    }
+                public void M1()
+                {
+                async Task {|CS1998:Goo|}() => Console.WriteLine(1);
+                }
                 }
                 """,
                 """
@@ -639,10 +639,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    public void M1()
-                    {
-                        Task Goo() { Console.WriteLine(1); return Task.CompletedTask; }
-                    }
+                public void M1()
+                {
+                Task Goo() { Console.WriteLine(1); return Task.CompletedTask; }
+                }
                 }
                 """
             );
@@ -657,13 +657,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    public void M1()
-                    {
-                        async Task<int> {|CS1998:Goo|}()
-                        {
-                            return 1;
-                        }
-                    }
+                public void M1()
+                {
+                async Task<int> {|CS1998:Goo|}()
+                {
+                return 1;
+                }
+                }
                 }
                 """,
                 """
@@ -671,13 +671,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    public void M1()
-                    {
-                        Task<int> Goo()
-                        {
-                            return Task.FromResult(1);
-                        }
-                    }
+                public void M1()
+                {
+                Task<int> Goo()
+                {
+                return Task.FromResult(1);
+                }
+                }
                 }
                 """
             );
@@ -692,10 +692,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    public void M1()
-                    {
-                        async Task<int> {|CS1998:Goo|}() => 1;
-                    }
+                public void M1()
+                {
+                async Task<int> {|CS1998:Goo|}() => 1;
+                }
                 }
                 """,
                 """
@@ -703,10 +703,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    public void M1()
-                    {
-                        Task<int> Goo() => Task.FromResult(1);
-                    }
+                public void M1()
+                {
+                Task<int> Goo() => Task.FromResult(1);
+                }
                 }
                 """
             );
@@ -722,15 +722,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    public void M1()
-                    {
-                        Func<Task> foo = (Func<Task>)async {|CS1998:delegate|} {
-                            if (System.DateTime.Now.Ticks > 0)
-                            {
-                                return;
-                            }
-                        };
-                    }
+                public void M1()
+                {
+                Func<Task> foo = (Func<Task>)async {|CS1998:delegate|} {
+                if (System.DateTime.Now.Ticks > 0)
+                {
+                return;
+                }
+                };
+                }
                 }
                 """,
                 """
@@ -739,18 +739,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    public void M1()
-                    {
-                        Func<Task> foo = (Func<Task>)delegate
-                        {
-                            if (System.DateTime.Now.Ticks > 0)
-                            {
-                                return Task.CompletedTask;
-                            }
+                public void M1()
+                {
+                Func<Task> foo = (Func<Task>)delegate
+                {
+                if (System.DateTime.Now.Ticks > 0)
+                {
+                return Task.CompletedTask;
+                }
 
-                            return Task.CompletedTask;
-                        };
-                    }
+                return Task.CompletedTask;
+                };
+                }
                 }
                 """
             );
@@ -766,13 +766,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    public void M1()
-                    {
-                        Func<Task<int>> foo = (Func<Task<int>>)async {|CS1998:delegate|}
-                        {
-                            return 1;
-                        };
-                    }
+                public void M1()
+                {
+                Func<Task<int>> foo = (Func<Task<int>>)async {|CS1998:delegate|}
+                {
+                return 1;
+                };
+                }
                 }
                 """,
                 """
@@ -781,13 +781,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    public void M1()
-                    {
-                        Func<Task<int>> foo = (Func<Task<int>>)delegate
-                        {
-                            return Task.FromResult(1);
-                        };
-                    }
+                public void M1()
+                {
+                Func<Task<int>> foo = (Func<Task<int>>)delegate
+                {
+                return Task.FromResult(1);
+                };
+                }
                 }
                 """
             );
@@ -803,10 +803,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    public void M1()
-                    {
-                        Func<int, Task<int>> foo = async x {|CS1998:=>|} 1;
-                    }
+                public void M1()
+                {
+                Func<int, Task<int>> foo = async x {|CS1998:=>|} 1;
+                }
                 }
                 """,
                 """
@@ -815,10 +815,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    public void M1()
-                    {
-                        Func<int, Task<int>> foo = x => Task.FromResult(1);
-                    }
+                public void M1()
+                {
+                Func<int, Task<int>> foo = x => Task.FromResult(1);
+                }
                 }
                 """
             );
@@ -834,12 +834,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    public void M1()
-                    {
-                        Func<int, Task<int>> foo = async x {|CS1998:=>|} {
-                            return 1;
-                        };
-                    }
+                public void M1()
+                {
+                Func<int, Task<int>> foo = async x {|CS1998:=>|} {
+                return 1;
+                };
+                }
                 }
                 """,
                 """
@@ -848,13 +848,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    public void M1()
-                    {
-                        Func<int, Task<int>> foo = x =>
-                        {
-                            return Task.FromResult(1);
-                        };
-                    }
+                public void M1()
+                {
+                Func<int, Task<int>> foo = x =>
+                {
+                return Task.FromResult(1);
+                };
+                }
                 }
                 """
             );
@@ -870,10 +870,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    public void M1()
-                    {
-                        Func<int, Task> foo = async x {|CS1998:=>|} Console.WriteLine(1);
-                    }
+                public void M1()
+                {
+                Func<int, Task> foo = async x {|CS1998:=>|} Console.WriteLine(1);
+                }
                 }
                 """,
                 """
@@ -882,10 +882,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    public void M1()
-                    {
-                        Func<int, Task> foo = x => { Console.WriteLine(1); return Task.CompletedTask; };
-                    }
+                public void M1()
+                {
+                Func<int, Task> foo = x => { Console.WriteLine(1); return Task.CompletedTask; };
+                }
                 }
                 """
             );
@@ -901,16 +901,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    public void M1()
-                    {
-                        Func<int, Task> foo = async x {|CS1998:=>|}
-                        {
-                            if (System.DateTime.Now.Ticks > 0)
-                            {
-                                return;
-                            }
-                        };
-                    }
+                public void M1()
+                {
+                Func<int, Task> foo = async x {|CS1998:=>|}
+                {
+                if (System.DateTime.Now.Ticks > 0)
+                {
+                return;
+                }
+                };
+                }
                 }
                 """,
                 """
@@ -919,17 +919,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    public void M1()
-                    {
-                        Func<int, Task> foo = x => {
-                            if (System.DateTime.Now.Ticks > 0)
-                            {
-                                return Task.CompletedTask;
-                            }
+                public void M1()
+                {
+                Func<int, Task> foo = x => {
+                if (System.DateTime.Now.Ticks > 0)
+                {
+                return Task.CompletedTask;
+                }
 
-                            return Task.CompletedTask;
-                        };
-                    }
+                return Task.CompletedTask;
+                };
+                }
                 }
                 """
             );
@@ -945,10 +945,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    public void M1()
-                    {
-                        Func<Task<int>> foo = async () {|CS1998:=>|} 1;
-                    }
+                public void M1()
+                {
+                Func<Task<int>> foo = async () {|CS1998:=>|} 1;
+                }
                 }
                 """,
                 """
@@ -957,10 +957,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    public void M1()
-                    {
-                        Func<Task<int>> foo = () => Task.FromResult(1);
-                    }
+                public void M1()
+                {
+                Func<Task<int>> foo = () => Task.FromResult(1);
+                }
                 }
                 """
             );
@@ -976,12 +976,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    public void M1()
-                    {
-                        Func<Task<int>> foo = async () {|CS1998:=>|} {
-                            return 1;
-                        };
-                    }
+                public void M1()
+                {
+                Func<Task<int>> foo = async () {|CS1998:=>|} {
+                return 1;
+                };
+                }
                 }
                 """,
                 """
@@ -990,13 +990,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    public void M1()
-                    {
-                        Func<Task<int>> foo = () =>
-                        {
-                            return Task.FromResult(1);
-                        };
-                    }
+                public void M1()
+                {
+                Func<Task<int>> foo = () =>
+                {
+                return Task.FromResult(1);
+                };
+                }
                 }
                 """
             );
@@ -1012,10 +1012,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    public void M1()
-                    {
-                        Func<Task> foo = async () {|CS1998:=>|} Console.WriteLine(1);
-                    }
+                public void M1()
+                {
+                Func<Task> foo = async () {|CS1998:=>|} Console.WriteLine(1);
+                }
                 }
                 """,
                 """
@@ -1024,10 +1024,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    public void M1()
-                    {
-                        Func<Task> foo = () => { Console.WriteLine(1); return Task.CompletedTask; };
-                    }
+                public void M1()
+                {
+                Func<Task> foo = () => { Console.WriteLine(1); return Task.CompletedTask; };
+                }
                 }
                 """
             );
@@ -1043,16 +1043,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    public void M1()
-                    {
-                        Func<Task> foo = async () {|CS1998:=>|}
-                        {
-                            if (System.DateTime.Now.Ticks > 0)
-                            {
-                                return;
-                            }
-                        };
-                    }
+                public void M1()
+                {
+                Func<Task> foo = async () {|CS1998:=>|}
+                {
+                if (System.DateTime.Now.Ticks > 0)
+                {
+                return;
+                }
+                };
+                }
                 }
                 """,
                 """
@@ -1061,17 +1061,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    public void M1()
-                    {
-                        Func<Task> foo = () => {
-                            if (System.DateTime.Now.Ticks > 0)
-                            {
-                                return Task.CompletedTask;
-                            }
+                public void M1()
+                {
+                Func<Task> foo = () => {
+                if (System.DateTime.Now.Ticks > 0)
+                {
+                return Task.CompletedTask;
+                }
 
-                            return Task.CompletedTask;
-                        };
-                    }
+                return Task.CompletedTask;
+                };
+                }
                 }
                 """
             );
@@ -1084,27 +1084,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
                 """
                 class C
                 {
-                    async System.Threading.Tasks.Task {|CS1998:Goo|}()
-                    {
-                        if (System.DateTime.Now.Ticks > 0)
-                        {
-                            return;
-                        }
-                    }
+                async System.Threading.Tasks.Task {|CS1998:Goo|}()
+                {
+                if (System.DateTime.Now.Ticks > 0)
+                {
+                return;
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    System.Threading.Tasks.Task Goo()
-                    {
-                        if (System.DateTime.Now.Ticks > 0)
-                        {
-                            return System.Threading.Tasks.Task.CompletedTask;
-                        }
+                System.Threading.Tasks.Task Goo()
+                {
+                if (System.DateTime.Now.Ticks > 0)
+                {
+                return System.Threading.Tasks.Task.CompletedTask;
+                }
 
-                        return System.Threading.Tasks.Task.CompletedTask;
-                    }
+                return System.Threading.Tasks.Task.CompletedTask;
+                }
                 }
                 """
             );
@@ -1117,29 +1117,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
                 """
                 class C
                 {
-                    async System.Threading.Tasks.Task<int> {|CS1998:Goo|}()
-                    {
-                        if (System.DateTime.Now.Ticks > 0)
-                        {
-                            return 1;
-                        }
+                async System.Threading.Tasks.Task<int> {|CS1998:Goo|}()
+                {
+                if (System.DateTime.Now.Ticks > 0)
+                {
+                return 1;
+                }
 
-                        return 2;
-                    }
+                return 2;
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    System.Threading.Tasks.Task<int> Goo()
-                    {
-                        if (System.DateTime.Now.Ticks > 0)
-                        {
-                            return System.Threading.Tasks.Task.FromResult(1);
-                        }
+                System.Threading.Tasks.Task<int> Goo()
+                {
+                if (System.DateTime.Now.Ticks > 0)
+                {
+                return System.Threading.Tasks.Task.FromResult(1);
+                }
 
-                        return System.Threading.Tasks.Task.FromResult(2);
-                    }
+                return System.Threading.Tasks.Task.FromResult(2);
+                }
                 }
                 """
             );
@@ -1155,22 +1155,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    public async Task<IReadOnlyCollection<int>> {|CS1998:M|}()
-                    {
-                        return new int[0];
-                    }
+                public async Task<IReadOnlyCollection<int>> {|CS1998:M|}()
+                {
+                return new int[0];
+                }
                 }
                 """,
                 """
                 using System.Threading.Tasks;
                 using System.Collections.Generic;
-                
+
                 class C
                 {
-                    public Task<IReadOnlyCollection<int>> M()
-                    {
-                        return Task.FromResult<IReadOnlyCollection<int>>(new int[0]);
-                    }
+                public Task<IReadOnlyCollection<int>> M()
+                {
+                return Task.FromResult<IReadOnlyCollection<int>>(new int[0]);
+                }
                 }
                 """
             );
@@ -1186,10 +1186,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
 
                 class C
                 {
-                    async IAsyncEnumerable<int> M()
-                    {
-                        yield return 1;
-                    }
+                async IAsyncEnumerable<int> M()
+                {
+                yield return 1;
+                }
                 }
                 """ + AsyncStreamsTypes;
 
@@ -1210,16 +1210,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
         public async Task Method_AsyncVoid_Missing()
         {
             var source = """
-                using System.Threading.Tasks;
+            using System.Threading.Tasks;
 
-                class C
-                {
-                    async void M()
-                    {
-                        System.Console.WriteLine(1);
-                    }
-                }
-                """;
+            class C
+            {
+            async void M()
+            {
+            System.Console.WriteLine(1);
+            }
+            }
+            """;
 
             await new VerifyCS.Test
             {
@@ -1238,17 +1238,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
         public async Task ParenthesisedLambda_AsyncVoid_Missing()
         {
             var source = """
-                using System;
-                using System.Threading.Tasks;
+            using System;
+            using System.Threading.Tasks;
 
-                class C
-                {
-                    void M()
-                    {
-                        Action a = async () => Console.WriteLine(1);
-                    }
-                }
-                """;
+            class C
+            {
+            void M()
+            {
+            Action a = async () => Console.WriteLine(1);
+            }
+            }
+            """;
 
             await new VerifyCS.Test
             {
@@ -1267,17 +1267,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveAsyncModifier
         public async Task SimpleLambda_AsyncVoid_Missing()
         {
             var source = """
-                using System;
-                using System.Threading.Tasks;
+            using System;
+            using System.Threading.Tasks;
 
-                class C
-                {
-                    void M()
-                    {
-                        Action<int> a = async x => Console.WriteLine(x);
-                    }
-                }
-                """;
+            class C
+            {
+            void M()
+            {
+            Action<int> a = async x => Console.WriteLine(x);
+            }
+            }
+            """;
 
             await new VerifyCS.Test
             {

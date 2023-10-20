@@ -9763,30 +9763,30 @@ class C
         public async Task TestPropertyPatternAssignment1()
         {
             var source = """
-                class C
-                {
-                    void M(object obj)
-                    {
-                        if (obj is string { } {|IDE0059:str|})
-                        {
+            class C
+            {
+            void M(object obj)
+            {
+            if (obj is string { } {|IDE0059:str|})
+            {
 
-                        }
-                    }
-                }
-                """;
+            }
+            }
+            }
+            """;
 
             var fixedSource = """
-                class C
-                {
-                    void M(object obj)
-                    {
-                        if (obj is string { })
-                        {
+            class C
+            {
+            void M(object obj)
+            {
+            if (obj is string { })
+            {
 
-                        }
-                    }
-                }
-                """;
+            }
+            }
+            }
+            """;
 
             await new VerifyCS.Test
             {
@@ -9807,30 +9807,30 @@ class C
         public async Task TestPropertyPatternAssignment2()
         {
             var source = """
-                class C
-                {
-                    void M(object obj)
-                    {
-                        if (obj is string { Length: > 0 } {|IDE0059:str|})
-                        {
+            class C
+            {
+            void M(object obj)
+            {
+            if (obj is string { Length: > 0 } {|IDE0059:str|})
+            {
 
-                        }
-                    }
-                }
-                """;
+            }
+            }
+            }
+            """;
 
             var fixedSource = """
-                class C
-                {
-                    void M(object obj)
-                    {
-                        if (obj is string { Length: > 0 })
-                        {
+            class C
+            {
+            void M(object obj)
+            {
+            if (obj is string { Length: > 0 })
+            {
 
-                        }
-                    }
-                }
-                """;
+            }
+            }
+            }
+            """;
 
             await new VerifyCS.Test
             {
@@ -9851,30 +9851,30 @@ class C
         public async Task TestPropertyPatternAssignment3()
         {
             var source = """
-                class C
-                {
-                    void M(object obj)
-                    {
-                        if (obj is string { Length: { } {|IDE0059:length|} })
-                        {
+            class C
+            {
+            void M(object obj)
+            {
+            if (obj is string { Length: { } {|IDE0059:length|} })
+            {
 
-                        }
-                    }
-                }
-                """;
+            }
+            }
+            }
+            """;
 
             var fixedSource = """
-                class C
-                {
-                    void M(object obj)
-                    {
-                        if (obj is string { Length: { } })
-                        {
+            class C
+            {
+            void M(object obj)
+            {
+            if (obj is string { Length: { } })
+            {
 
-                        }
-                    }
-                }
-                """;
+            }
+            }
+            }
+            """;
 
             await new VerifyCS.Test
             {
@@ -9895,30 +9895,30 @@ class C
         public async Task TestPropertyPatternAssignment4()
         {
             var source = """
-                class C
-                {
-                    void M(object obj)
-                    {
-                        if (obj is string { Length: { } {|IDE0059:length|} } {|IDE0059:str|})
-                        {
+            class C
+            {
+            void M(object obj)
+            {
+            if (obj is string { Length: { } {|IDE0059:length|} } {|IDE0059:str|})
+            {
 
-                        }
-                    }
-                }
-                """;
+            }
+            }
+            }
+            """;
 
             var fixedSource = """
-                class C
-                {
-                    void M(object obj)
-                    {
-                        if (obj is string { Length: { } })
-                        {
+            class C
+            {
+            void M(object obj)
+            {
+            if (obj is string { Length: { } })
+            {
 
-                        }
-                    }
-                }
-                """;
+            }
+            }
+            }
+            """;
 
             await new VerifyCS.Test
             {
@@ -9939,30 +9939,30 @@ class C
         public async Task TestListPatternAssignment1()
         {
             var source = """
-                class C
-                {
-                    void M(string s)
-                    {
-                        if (s is [] {|IDE0059:str|})
-                        {
+            class C
+            {
+            void M(string s)
+            {
+            if (s is [] {|IDE0059:str|})
+            {
 
-                        }
-                    }
-                }
-                """;
+            }
+            }
+            }
+            """;
 
             var fixedSource = """
-                class C
-                {
-                    void M(string s)
-                    {
-                        if (s is [])
-                        {
+            class C
+            {
+            void M(string s)
+            {
+            if (s is [])
+            {
 
-                        }
-                    }
-                }
-                """;
+            }
+            }
+            }
+            """;
 
             await new VerifyCS.Test
             {
@@ -9984,30 +9984,30 @@ class C
         public async Task TestListPatternAssignment2()
         {
             var source = """
-                class C
-                {
-                    void M(string[] ss)
-                    {
-                        if (ss is [[] {|IDE0059:str|}])
-                        {
+            class C
+            {
+            void M(string[] ss)
+            {
+            if (ss is [[] {|IDE0059:str|}])
+            {
 
-                        }
-                    }
-                }
-                """;
+            }
+            }
+            }
+            """;
 
             var fixedSource = """
-                class C
-                {
-                    void M(string[] ss)
-                    {
-                        if (ss is [[]])
-                        {
+            class C
+            {
+            void M(string[] ss)
+            {
+            if (ss is [[]])
+            {
 
-                        }
-                    }
-                }
-                """;
+            }
+            }
+            }
+            """;
 
             await new VerifyCS.Test
             {
@@ -10029,30 +10029,30 @@ class C
         public async Task TestListPatternAssignment3()
         {
             var source = """
-                class C
-                {
-                    void M(string[] ss)
-                    {
-                        if (ss is [[] {|IDE0059:str|}] {|IDE0059:strings|})
-                        {
+            class C
+            {
+            void M(string[] ss)
+            {
+            if (ss is [[] {|IDE0059:str|}] {|IDE0059:strings|})
+            {
 
-                        }
-                    }
-                }
-                """;
+            }
+            }
+            }
+            """;
 
             var fixedSource = """
-                class C
-                {
-                    void M(string[] ss)
-                    {
-                        if (ss is [[]])
-                        {
+            class C
+            {
+            void M(string[] ss)
+            {
+            if (ss is [[]])
+            {
 
-                        }
-                    }
-                }
-                """;
+            }
+            }
+            }
+            """;
 
             await new VerifyCS.Test
             {
@@ -10074,12 +10074,12 @@ class C
         public async Task TestPrimaryConstructorParameterAssignment()
         {
             var source = """
-                class C(string str) {
-                	public void Reset() {
-                		str = string.Empty;
-                	}
-                }
-                """;
+            class C(string str) {
+            public void Reset() {
+            str = string.Empty;
+            }
+            }
+            """;
 
             await new VerifyCS.Test
             {

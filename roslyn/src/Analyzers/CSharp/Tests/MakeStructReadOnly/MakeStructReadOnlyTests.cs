@@ -48,7 +48,7 @@ public class MakeStructReadOnlyTests
             """
             struct S
             {
-                readonly int i;
+            readonly int i;
             }
             """,
             LanguageVersion.CSharp7_1
@@ -62,13 +62,13 @@ public class MakeStructReadOnlyTests
             """
             struct [|S|]
             {
-                readonly int i;
+            readonly int i;
             }
             """,
             """
             readonly struct S
             {
-                readonly int i;
+            readonly int i;
             }
             """,
             LanguageVersion.CSharp7_2
@@ -82,7 +82,7 @@ public class MakeStructReadOnlyTests
             """
             readonly struct S
             {
-                readonly int i;
+            readonly int i;
             }
             """
         );
@@ -95,7 +95,7 @@ public class MakeStructReadOnlyTests
             """
             readonly record struct S
             {
-                readonly int i;
+            readonly int i;
             }
             """
         );
@@ -108,7 +108,7 @@ public class MakeStructReadOnlyTests
             """
             struct S
             {
-                int i;
+            int i;
             }
             """
         );
@@ -121,7 +121,7 @@ public class MakeStructReadOnlyTests
             """
             record struct S
             {
-                int i;
+            int i;
             }
             """
         );
@@ -134,8 +134,8 @@ public class MakeStructReadOnlyTests
             """
             struct S
             {
-                int i;
-                readonly int j;
+            int i;
+            readonly int j;
             }
             """
         );
@@ -148,8 +148,8 @@ public class MakeStructReadOnlyTests
             """
             record struct S
             {
-                int i;
-                readonly int j;
+            int i;
+            readonly int j;
             }
             """
         );
@@ -162,7 +162,7 @@ public class MakeStructReadOnlyTests
             """
             record struct S(int j)
             {
-                int i;
+            int i;
             }
             """
         );
@@ -186,7 +186,7 @@ public class MakeStructReadOnlyTests
             """
             struct S
             {
-                int P { get; set; }
+            int P { get; set; }
             }
             """
         );
@@ -199,7 +199,7 @@ public class MakeStructReadOnlyTests
             """
             record struct S
             {
-                int P { get; set; }
+            int P { get; set; }
             }
             """
         );
@@ -212,7 +212,7 @@ public class MakeStructReadOnlyTests
             """
             record struct S(int q)
             {
-                int P { get; set; }
+            int P { get; set; }
             }
             """
         );
@@ -282,7 +282,7 @@ public class MakeStructReadOnlyTests
             """
             partial struct S
             {
-                readonly int i;
+            readonly int i;
             }
 
             readonly partial struct S
@@ -299,13 +299,13 @@ public class MakeStructReadOnlyTests
             """
             struct [|S|]
             {
-                readonly int i;
+            readonly int i;
             }
             """,
             """
             readonly struct S
             {
-                readonly int i;
+            readonly int i;
             }
             """
         );
@@ -318,13 +318,13 @@ public class MakeStructReadOnlyTests
             """
             record struct [|S|]
             {
-                readonly int i;
+            readonly int i;
             }
             """,
             """
             readonly record struct S
             {
-                readonly int i;
+            readonly int i;
             }
             """
         );
@@ -337,13 +337,13 @@ public class MakeStructReadOnlyTests
             """
             struct [|S|]
             {
-                int P { get; }
+            int P { get; }
             }
             """,
             """
             readonly struct S
             {
-                int P { get; }
+            int P { get; }
             }
             """
         );
@@ -356,13 +356,13 @@ public class MakeStructReadOnlyTests
             """
             record struct [|S|]
             {
-                int P { get; }
+            int P { get; }
             }
             """,
             """
             readonly record struct S
             {
-                int P { get; }
+            int P { get; }
             }
             """
         );
@@ -375,13 +375,13 @@ public class MakeStructReadOnlyTests
             """
             struct [|S|]
             {
-                int P { get; init; }
+            int P { get; init; }
             }
             """,
             """
             readonly struct S
             {
-                int P { get; init; }
+            int P { get; init; }
             }
             """
         );
@@ -394,13 +394,13 @@ public class MakeStructReadOnlyTests
             """
             record struct [|S|]
             {
-                int P { get; init; }
+            int P { get; init; }
             }
             """,
             """
             readonly record struct S
             {
-                int P { get; init; }
+            int P { get; init; }
             }
             """
         );
@@ -413,13 +413,13 @@ public class MakeStructReadOnlyTests
             """
             record struct [|S|]
             {
-                readonly int i;
+            readonly int i;
             }
             """,
             """
             readonly record struct S
             {
-                readonly int i;
+            readonly int i;
             }
             """
         );
@@ -454,7 +454,7 @@ public class MakeStructReadOnlyTests
             """
             record struct S(int i)
             {
-                readonly int j;
+            readonly int j;
             }
             """
         );
@@ -483,23 +483,23 @@ public class MakeStructReadOnlyTests
             """
             struct [|S|]
             {
-                readonly int i;
+            readonly int i;
 
-                struct [|T|]
-                {
-                    readonly int j;
-                }
+            struct [|T|]
+            {
+            readonly int j;
+            }
             }
             """,
             """
             readonly struct S
             {
-                readonly int i;
+            readonly int i;
 
-                readonly struct T
-                {
-                    readonly int j;
-                }
+            readonly struct T
+            {
+            readonly int j;
+            }
             }
             """
         );
@@ -512,23 +512,23 @@ public class MakeStructReadOnlyTests
             """
             struct [|S|]
             {
-                readonly int i;
+            readonly int i;
 
-                struct T
-                {
-                    int j;
-                }
+            struct T
+            {
+            int j;
+            }
             }
             """,
             """
             readonly struct S
             {
-                readonly int i;
+            readonly int i;
 
-                struct T
-                {
-                    int j;
-                }
+            struct T
+            {
+            int j;
+            }
             }
             """
         );
@@ -541,23 +541,23 @@ public class MakeStructReadOnlyTests
             """
             struct S
             {
-                int i;
+            int i;
 
-                struct [|T|]
-                {
-                    readonly int j;
-                }
+            struct [|T|]
+            {
+            readonly int j;
+            }
             }
             """,
             """
             struct S
             {
-                int i;
+            int i;
 
-                readonly struct T
-                {
-                    readonly int j;
-                }
+            readonly struct T
+            {
+            readonly int j;
+            }
             }
             """
         );
@@ -570,33 +570,33 @@ public class MakeStructReadOnlyTests
             """
             struct [|S|]
             {
-                readonly int i;
+            readonly int i;
 
-                struct T
-                {
-                    readonly int j;
+            struct T
+            {
+            readonly int j;
 
-                    void M()
-                    {
-                        this = default;
-                    }
-                }
+            void M()
+            {
+            this = default;
+            }
+            }
             }
             """,
             """
             readonly struct S
             {
-                readonly int i;
+            readonly int i;
 
-                struct T
-                {
-                    readonly int j;
+            struct T
+            {
+            readonly int j;
 
-                    void M()
-                    {
-                        this = default;
-                    }
-                }
+            void M()
+            {
+            this = default;
+            }
+            }
             }
             """
         );
@@ -610,14 +610,14 @@ public class MakeStructReadOnlyTests
             /// <summary>docs</summary>
             record struct [|S|]
             {
-                readonly int j;
+            readonly int j;
             }
             """,
             """
             /// <summary>docs</summary>
             readonly record struct S
             {
-                readonly int j;
+            readonly int j;
             }
             """
         );
@@ -630,21 +630,21 @@ public class MakeStructReadOnlyTests
             """
             namespace N
             {
-                /// <summary>docs</summary>
-                record struct [|S|]
-                {
-                    readonly int j;
-                }
+            /// <summary>docs</summary>
+            record struct [|S|]
+            {
+            readonly int j;
+            }
             }
             """,
             """
             namespace N
             {
-                /// <summary>docs</summary>
-                readonly record struct S
-                {
-                    readonly int j;
-                }
+            /// <summary>docs</summary>
+            readonly record struct S
+            {
+            readonly int j;
+            }
             }
             """
         );
@@ -657,13 +657,13 @@ public class MakeStructReadOnlyTests
             """
             public record struct [|S|]
             {
-                readonly int j;
+            readonly int j;
             }
             """,
             """
             public readonly record struct S
             {
-                readonly int j;
+            readonly int j;
             }
             """
         );
@@ -676,19 +676,19 @@ public class MakeStructReadOnlyTests
             """
             namespace N
             {
-                public record struct [|S|]
-                {
-                    readonly int j;
-                }
+            public record struct [|S|]
+            {
+            readonly int j;
+            }
             }
             """,
             """
             namespace N
             {
-                public readonly record struct S
-                {
-                    readonly int j;
-                }
+            public readonly record struct S
+            {
+            readonly int j;
+            }
             }
             """
         );
@@ -701,17 +701,17 @@ public class MakeStructReadOnlyTests
             """
             struct [|S|]
             {
-                readonly int i;
+            readonly int i;
 
-                int P { set { } }
+            int P { set { } }
             }
             """,
             """
             readonly struct S
             {
-                readonly int i;
+            readonly int i;
 
-                int P { set { } }
+            int P { set { } }
             }
             """
         );
@@ -724,9 +724,9 @@ public class MakeStructReadOnlyTests
             """
             struct S
             {
-                readonly int i;
+            readonly int i;
 
-                int P { get; set; }
+            int P { get; set; }
             }
             """
         );
@@ -739,12 +739,12 @@ public class MakeStructReadOnlyTests
             """
             struct S
             {
-                readonly int i;
+            readonly int i;
 
-                void M()
-                {
-                    this = default;
-                }
+            void M()
+            {
+            this = default;
+            }
             }
             """
         );
@@ -757,17 +757,17 @@ public class MakeStructReadOnlyTests
             """
             struct S
             {
-                readonly int i;
+            readonly int i;
 
-                void M()
-                {
-                    this.ByRef();
-                }
+            void M()
+            {
+            this.ByRef();
+            }
             }
 
             static class Extensions
             {
-                public static void ByRef(ref this S s) { }
+            public static void ByRef(ref this S s) { }
             }
             """
         );
@@ -780,14 +780,14 @@ public class MakeStructReadOnlyTests
             """
             struct S
             {
-                readonly int i;
+            readonly int i;
 
-                void M()
-                {
-                    Goo(ref this);
-                }
+            void M()
+            {
+            Goo(ref this);
+            }
 
-                void Goo(ref S s) { }
+            void Goo(ref S s) { }
             }
             """
         );
@@ -800,14 +800,14 @@ public class MakeStructReadOnlyTests
             """
             struct S
             {
-                readonly int i;
+            readonly int i;
 
-                void M()
-                {
-                    Goo(out this);
-                }
+            void M()
+            {
+            Goo(out this);
+            }
 
-                void Goo(out S s) { s = default; }
+            void Goo(out S s) { s = default; }
             }
             """
         );
@@ -820,12 +820,12 @@ public class MakeStructReadOnlyTests
             """
             struct S
             {
-                readonly int i;
+            readonly int i;
 
-                void M()
-                {
-                    ref S s = ref this;
-                }
+            void M()
+            {
+            ref S s = ref this;
+            }
             }
             """
         );
@@ -838,14 +838,14 @@ public class MakeStructReadOnlyTests
             """
             struct S
             {
-                readonly int i;
+            readonly int i;
 
-                void M()
-                {
-                    this++;
-                }
+            void M()
+            {
+            this++;
+            }
 
-                public static S operator++(S s) => default;
+            public static S operator++(S s) => default;
             }
             """
         );
@@ -858,27 +858,27 @@ public class MakeStructReadOnlyTests
             """
             struct [|S|]
             {
-                readonly int i;
+            readonly int i;
 
-                void M()
-                {
-                    Goo(in this);
-                }
+            void M()
+            {
+            Goo(in this);
+            }
 
-                void Goo(in S s) { }
+            void Goo(in S s) { }
             }
             """,
             """
             readonly struct S
             {
-                readonly int i;
+            readonly int i;
 
-                void M()
-                {
-                    Goo(in this);
-                }
+            void M()
+            {
+            Goo(in this);
+            }
 
-                void Goo(in S s) { }
+            void Goo(in S s) { }
             }
             """
         );
@@ -891,27 +891,27 @@ public class MakeStructReadOnlyTests
             """
             struct [|S|]
             {
-                readonly int i;
+            readonly int i;
 
-                void M()
-                {
-                    this.Goo();
-                }
+            void M()
+            {
+            this.Goo();
+            }
 
-                void Goo() { }
+            void Goo() { }
             }
             """,
             """
             readonly struct S
             {
-                readonly int i;
+            readonly int i;
 
-                void M()
-                {
-                    this.Goo();
-                }
+            void M()
+            {
+            this.Goo();
+            }
 
-                void Goo() { }
+            void Goo() { }
             }
             """
         );
@@ -924,33 +924,33 @@ public class MakeStructReadOnlyTests
             """
             struct [|S|]
             {
-                readonly int i;
+            readonly int i;
 
-                void M()
-                {
-                    this.Goo();
-                }
+            void M()
+            {
+            this.Goo();
+            }
             }
 
             static class Extensions
             {
-                public static void Goo(this S s) { }
+            public static void Goo(this S s) { }
             }
             """,
             """
             readonly struct S
             {
-                readonly int i;
+            readonly int i;
 
-                void M()
-                {
-                    this.Goo();
-                }
+            void M()
+            {
+            this.Goo();
+            }
             }
 
             static class Extensions
             {
-                public static void Goo(this S s) { }
+            public static void Goo(this S s) { }
             }
             """
         );
@@ -963,23 +963,23 @@ public class MakeStructReadOnlyTests
             """
             struct [|S|]
             {
-                readonly int i;
+            readonly int i;
 
-                void M()
-                {
-                    ref readonly S s = ref this;
-                }
+            void M()
+            {
+            ref readonly S s = ref this;
+            }
             }
             """,
             """
             readonly struct S
             {
-                readonly int i;
+            readonly int i;
 
-                void M()
-                {
-                    ref readonly S s = ref this;
-                }
+            void M()
+            {
+            ref readonly S s = ref this;
+            }
             }
             """
         );
@@ -994,9 +994,9 @@ public class MakeStructReadOnlyTests
 
             public struct MyStruct
             {
-                public event Action MyEvent;
+            public event Action MyEvent;
 
-                public readonly int MyInt;
+            public readonly int MyInt;
             }
             """
         );
@@ -1011,9 +1011,9 @@ public class MakeStructReadOnlyTests
 
             public struct [|MyStruct|]
             {
-                public event Action MyEvent { add { } remove { } }
+            public event Action MyEvent { add { } remove { } }
 
-                public readonly int MyInt;
+            public readonly int MyInt;
             }
             """,
             """
@@ -1021,9 +1021,9 @@ public class MakeStructReadOnlyTests
 
             public readonly struct MyStruct
             {
-                public event Action MyEvent { add { } remove { } }
+            public event Action MyEvent { add { } remove { } }
 
-                public readonly int MyInt;
+            public readonly int MyInt;
             }
             """
         );
@@ -1039,11 +1039,11 @@ public class MakeStructReadOnlyTests
 
             public struct [|MyStruct|]
             {
-                private readonly List<Action> actions = new();
+            private readonly List<Action> actions = new();
 
-                public event Action MyEvent { add => actions.Add(value); remove => actions.Remove(value); }
+            public event Action MyEvent { add => actions.Add(value); remove => actions.Remove(value); }
 
-                public MyStruct() { }
+            public MyStruct() { }
             }
             """,
             """
@@ -1052,11 +1052,11 @@ public class MakeStructReadOnlyTests
 
             public readonly struct MyStruct
             {
-                private readonly List<Action> actions = new();
-            
-                public event Action MyEvent { add => actions.Add(value); remove => actions.Remove(value); }
-            
-                public MyStruct() { }
+            private readonly List<Action> actions = new();
+
+            public event Action MyEvent { add => actions.Add(value); remove => actions.Remove(value); }
+
+            public MyStruct() { }
             }
             """
         );
@@ -1072,11 +1072,11 @@ public class MakeStructReadOnlyTests
 
             public struct MyStruct
             {
-                private List<Action> actions = new();
+            private List<Action> actions = new();
 
-                public event Action MyEvent { add => actions.Add(value); remove => actions.Remove(value); }
-            
-                public MyStruct() { }
+            public event Action MyEvent { add => actions.Add(value); remove => actions.Remove(value); }
+
+            public MyStruct() { }
             }
             """
         );

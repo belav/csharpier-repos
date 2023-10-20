@@ -84,9 +84,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    public Base Inner;
+                public Base Inner;
 
-                    public abstract void Method();
+                public abstract void Method();
                 }
 
                 class [|Derived|] : Base
@@ -104,12 +104,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    public abstract void Method();
+                public abstract void Method();
                 }
 
                 abstract class Middle : Base
                 {
-                    public Base Inner;
+                public Base Inner;
                 }
 
                 class [|Derived|] : Base
@@ -127,28 +127,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    public abstract void Method();
+                public abstract void Method();
                 }
 
                 class [|Derived|] : Base
                 {
-                    Derived inner;
+                Derived inner;
                 }
                 """,
                 """
                 abstract class Base
                 {
-                    public abstract void Method();
+                public abstract void Method();
                 }
 
                 class Derived : Base
                 {
-                    Derived inner;
+                Derived inner;
 
-                    public override void Method()
-                    {
-                        inner.Method();
-                    }
+                public override void Method()
+                {
+                inner.Method();
+                }
                 }
                 """,
                 index: 1,
@@ -163,28 +163,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    public abstract void Method(int a, ref int b, in int c, ref readonly int d, out int e);
+                public abstract void Method(int a, ref int b, in int c, ref readonly int d, out int e);
                 }
 
                 class [|Derived|] : Base
                 {
-                    Derived inner;
+                Derived inner;
                 }
                 """,
                 """
                 abstract class Base
                 {
-                    public abstract void Method(int a, ref int b, in int c, ref readonly int d, out int e);
+                public abstract void Method(int a, ref int b, in int c, ref readonly int d, out int e);
                 }
 
                 class Derived : Base
                 {
-                    Derived inner;
+                Derived inner;
 
-                    public override void Method(int a, ref int b, in int c, ref readonly int d, out int e)
-                    {
-                        inner.Method(a, ref b, c, in d, out e);
-                    }
+                public override void Method(int a, ref int b, in int c, ref readonly int d, out int e)
+                {
+                inner.Method(a, ref b, c, in d, out e);
+                }
                 }
                 """,
                 index: 1,
@@ -199,25 +199,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    public abstract int this[int a, in int b, ref readonly int c, out int d] { get; }
+                public abstract int this[int a, in int b, ref readonly int c, out int d] { get; }
                 }
 
                 class [|Derived|] : Base
                 {
-                    Derived inner;
+                Derived inner;
                 }
                 """,
                 """
                 abstract class Base
                 {
-                    public abstract int this[int a, in int b, ref readonly int c, out int d] { get; }
+                public abstract int this[int a, in int b, ref readonly int c, out int d] { get; }
                 }
 
                 class Derived : Base
                 {
-                    Derived inner;
+                Derived inner;
 
-                    public override int this[int a, in int b, ref readonly int c, out int d] => inner[a, b, in c, out d];
+                public override int this[int a, in int b, ref readonly int c, out int d] => inner[a, b, in c, out d];
                 }
                 """,
                 index: 1,
@@ -232,30 +232,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    public abstract void Method1();
-                    protected abstract void Method2();
+                public abstract void Method1();
+                protected abstract void Method2();
                 }
 
                 class [|Derived|] : Base
                 {
-                    Base inner;
+                Base inner;
                 }
                 """,
                 """
                 abstract class Base
                 {
-                    public abstract void Method1();
-                    protected abstract void Method2();
+                public abstract void Method1();
+                protected abstract void Method2();
                 }
 
                 class {|Conflict:Derived|} : Base
                 {
-                    Base inner;
+                Base inner;
 
-                    public override void Method1()
-                    {
-                        inner.Method1();
-                    }
+                public override void Method1()
+                {
+                inner.Method1();
+                }
                 }
                 """,
                 index: 1,
@@ -270,18 +270,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    public abstract void Method1();
-                    protected abstract void Method2();
+                public abstract void Method1();
+                protected abstract void Method2();
                 }
 
                 class [|Derived|] : Base
                 {
-                    Base inner;
+                Base inner;
 
-                    public override void Method1()
-                    {
-                        inner.Method1();
-                    }
+                public override void Method1()
+                {
+                inner.Method1();
+                }
                 }
                 """,
                 new string[] { FeaturesResources.Implement_abstract_class }
@@ -295,12 +295,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    public abstract void Method();
+                public abstract void Method();
                 }
 
                 class [|Derived|] : Base
                 {
-                    DerivedAgain inner;
+                DerivedAgain inner;
                 }
 
                 class DerivedAgain : Derived
@@ -310,17 +310,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    public abstract void Method();
+                public abstract void Method();
                 }
 
                 class Derived : Base
                 {
-                    DerivedAgain inner;
+                DerivedAgain inner;
 
-                    public override void Method()
-                    {
-                        inner.Method();
-                    }
+                public override void Method()
+                {
+                inner.Method();
+                }
                 }
 
                 class DerivedAgain : Derived
@@ -339,28 +339,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    public abstract void Method();
+                public abstract void Method();
                 }
 
                 class [|Derived|]<T> : Base where T : Base
                 {
-                    T inner;
+                T inner;
                 }
                 """,
                 """
                 abstract class Base
                 {
-                    public abstract void Method();
+                public abstract void Method();
                 }
 
                 class Derived<T> : Base where T : Base
                 {
-                    T inner;
+                T inner;
 
-                    public override void Method()
-                    {
-                        inner.Method();
-                    }
+                public override void Method()
+                {
+                inner.Method();
+                }
                 }
                 """,
                 index: 1,
@@ -375,19 +375,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    public abstract void Method();
+                public abstract void Method();
                 }
 
                 interface IInterface
                 {
-                    Inner { get; }
+                Inner { get; }
                 }
 
                 class [|Derived|] : Base, IInterface
                 {
-                    Base Inner { get; }
+                Base Inner { get; }
 
-                    Base IInterface.Inner { get; }
+                Base IInterface.Inner { get; }
                 }
                 """,
                 new[]
@@ -406,12 +406,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    public abstract void Method();
+                public abstract void Method();
                 }
 
                 class [|Derived|] : Base
                 {
-                    dynamic inner;
+                dynamic inner;
                 }
                 """,
                 new[] { FeaturesResources.Implement_abstract_class }
@@ -425,28 +425,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    public abstract void Method();
+                public abstract void Method();
                 }
 
                 class [|Derived|] : Base
                 {
-                    static Base inner;
+                static Base inner;
                 }
                 """,
                 """
                 abstract class Base
                 {
-                    public abstract void Method();
+                public abstract void Method();
                 }
 
                 class Derived : Base
                 {
-                    static Base inner;
+                static Base inner;
 
-                    public override void Method()
-                    {
-                        inner.Method();
-                    }
+                public override void Method()
+                {
+                inner.Method();
+                }
                 }
                 """,
                 index: 1,
@@ -461,25 +461,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    public abstract int Property { get; set; }
+                public abstract int Property { get; set; }
                 }
 
                 class [|Derived|] : Base
                 {
-                    Base inner;
+                Base inner;
                 }
                 """,
                 """
                 abstract class Base
                 {
-                    public abstract int Property { get; set; }
+                public abstract int Property { get; set; }
                 }
 
                 class Derived : Base
                 {
-                    Base inner;
+                Base inner;
 
-                    public override int Property { get => inner.Property; set => inner.Property = value; }
+                public override int Property { get => inner.Property; set => inner.Property = value; }
                 }
                 """,
                 index: 1,
@@ -494,36 +494,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    public abstract int Property { get; set; }
+                public abstract int Property { get; set; }
                 }
 
                 class [|Derived|] : Base
                 {
-                    Base inner;
+                Base inner;
                 }
                 """,
                 """
                 abstract class Base
                 {
-                    public abstract int Property { get; set; }
+                public abstract int Property { get; set; }
                 }
 
                 class Derived : Base
                 {
-                    Base inner;
+                Base inner;
 
-                    public override int Property
-                    {
-                        get
-                        {
-                            return inner.Property;
-                        }
+                public override int Property
+                {
+                get
+                {
+                return inner.Property;
+                }
 
-                        set
-                        {
-                            inner.Property = value;
-                        }
-                    }
+                set
+                {
+                inner.Property = value;
+                }
+                }
                 }
                 """
             );
@@ -536,29 +536,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    public abstract int GetOnly { get; }
-                    public abstract int SetOnly { set; }
+                public abstract int GetOnly { get; }
+                public abstract int SetOnly { set; }
                 }
 
                 class [|Derived|] : Base
                 {
-                    Base inner;
+                Base inner;
                 }
                 """,
                 """
                 abstract class Base
                 {
-                    public abstract int GetOnly { get; }
-                    public abstract int SetOnly { set; }
+                public abstract int GetOnly { get; }
+                public abstract int SetOnly { set; }
                 }
 
                 class Derived : Base
                 {
-                    Base inner;
+                Base inner;
 
-                    public override int GetOnly => inner.GetOnly;
+                public override int GetOnly => inner.GetOnly;
 
-                    public override int SetOnly { set => inner.SetOnly = value; }
+                public override int SetOnly { set => inner.SetOnly = value; }
                 }
                 """,
                 index: 1,
@@ -573,41 +573,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    public abstract int GetOnly { get; }
-                    public abstract int SetOnly { set; }
+                public abstract int GetOnly { get; }
+                public abstract int SetOnly { set; }
                 }
 
                 class [|Derived|] : Base
                 {
-                    Base inner;
+                Base inner;
                 }
                 """,
                 """
                 abstract class Base
                 {
-                    public abstract int GetOnly { get; }
-                    public abstract int SetOnly { set; }
+                public abstract int GetOnly { get; }
+                public abstract int SetOnly { set; }
                 }
 
                 class Derived : Base
                 {
-                    Base inner;
+                Base inner;
 
-                    public override int GetOnly
-                    {
-                        get
-                        {
-                            return inner.GetOnly;
-                        }
-                    }
+                public override int GetOnly
+                {
+                get
+                {
+                return inner.GetOnly;
+                }
+                }
 
-                    public override int SetOnly
-                    {
-                        set
-                        {
-                            inner.SetOnly = value;
-                        }
-                    }
+                public override int SetOnly
+                {
+                set
+                {
+                inner.SetOnly = value;
+                }
+                }
                 }
                 """
             );
@@ -622,12 +622,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 abstract class Base
                 {
-                    public abstract event Action Event;
+                public abstract event Action Event;
                 }
 
                 class [|Derived|] : Base
                 {
-                    Base inner;
+                Base inner;
                 }
                 """,
                 """
@@ -635,25 +635,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
                 abstract class Base
                 {
-                    public abstract event Action Event;
+                public abstract event Action Event;
                 }
 
                 class Derived : Base
                 {
-                    Base inner;
+                Base inner;
 
-                    public override event Action Event
-                    {
-                        add
-                        {
-                            inner.Event += value;
-                        }
+                public override event Action Event
+                {
+                add
+                {
+                inner.Event += value;
+                }
 
-                        remove
-                        {
-                            inner.Event -= value;
-                        }
-                    }
+                remove
+                {
+                inner.Event -= value;
+                }
+                }
                 }
                 """,
                 index: 1,
@@ -668,32 +668,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    public abstract void Method();
+                public abstract void Method();
 
-                    public void NonVirtualMethod();
+                public void NonVirtualMethod();
                 }
 
                 class [|Derived|] : Base
                 {
-                    Base inner;
+                Base inner;
                 }
                 """,
                 """
                 abstract class Base
                 {
-                    public abstract void Method();
+                public abstract void Method();
 
-                    public void NonVirtualMethod();
+                public void NonVirtualMethod();
                 }
 
                 class Derived : Base
                 {
-                    Base inner;
+                Base inner;
 
-                    public override void Method()
-                    {
-                        inner.Method();
-                    }
+                public override void Method()
+                {
+                inner.Method();
+                }
                 }
                 """,
                 index: 1,
@@ -708,12 +708,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    protected abstract void Method();
+                protected abstract void Method();
                 }
 
                 class [|Derived|] : Base
                 {
-                    Base inner;
+                Base inner;
                 }
                 """,
                 new[] { FeaturesResources.Implement_abstract_class }
@@ -727,28 +727,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    protected abstract void Method();
+                protected abstract void Method();
                 }
 
                 class [|Derived|] : Base
                 {
-                    Derived inner;
+                Derived inner;
                 }
                 """,
                 """
                 abstract class Base
                 {
-                    protected abstract void Method();
+                protected abstract void Method();
                 }
 
                 class Derived : Base
                 {
-                    Derived inner;
+                Derived inner;
 
-                    protected override void Method()
-                    {
-                        inner.Method();
-                    }
+                protected override void Method()
+                {
+                inner.Method();
+                }
                 }
                 """,
                 index: 1,
@@ -763,28 +763,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    protected internal abstract void Method();
+                protected internal abstract void Method();
                 }
 
                 class [|Derived|] : Base
                 {
-                    Base inner;
+                Base inner;
                 }
                 """,
                 """
                 abstract class Base
                 {
-                    protected internal abstract void Method();
+                protected internal abstract void Method();
                 }
 
                 class Derived : Base
                 {
-                    Base inner;
+                Base inner;
 
-                    protected internal override void Method()
-                    {
-                        inner.Method();
-                    }
+                protected internal override void Method()
+                {
+                inner.Method();
+                }
                 }
                 """,
                 index: 1,
@@ -799,28 +799,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    internal abstract void Method();
+                internal abstract void Method();
                 }
 
                 class [|Derived|] : Base
                 {
-                    Base inner;
+                Base inner;
                 }
                 """,
                 """
                 abstract class Base
                 {
-                    internal abstract void Method();
+                internal abstract void Method();
                 }
 
                 class Derived : Base
                 {
-                    Base inner;
+                Base inner;
 
-                    internal override void Method()
-                    {
-                        inner.Method();
-                    }
+                internal override void Method()
+                {
+                inner.Method();
+                }
                 }
                 """,
                 index: 1,
@@ -835,12 +835,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    private protected abstract void Method();
+                private protected abstract void Method();
                 }
 
                 class [|Derived|] : Base
                 {
-                    Base inner;
+                Base inner;
                 }
                 """,
                 new[] { FeaturesResources.Implement_abstract_class }
@@ -854,28 +854,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    private protected abstract void Method();
+                private protected abstract void Method();
                 }
 
                 class [|Derived|] : Base
                 {
-                    Derived inner;
+                Derived inner;
                 }
                 """,
                 """
                 abstract class Base
                 {
-                    private protected abstract void Method();
+                private protected abstract void Method();
                 }
 
                 class Derived : Base
                 {
-                    Derived inner;
+                Derived inner;
 
-                    private protected override void Method()
-                    {
-                        inner.Method();
-                    }
+                private protected override void Method()
+                {
+                inner.Method();
+                }
                 }
                 """,
                 index: 1,
@@ -890,28 +890,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    public abstract int InternalGet { internal get; set; }
-                    public abstract int InternalSet { get; internal set; }
+                public abstract int InternalGet { internal get; set; }
+                public abstract int InternalSet { get; internal set; }
                 }
 
                 class [|Derived|] : Base
                 {
-                    Base inner;
+                Base inner;
                 }
                 """,
                 """
                 abstract class Base
                 {
-                    public abstract int InternalGet { internal get; set; }
-                    public abstract int InternalSet { get; internal set; }
+                public abstract int InternalGet { internal get; set; }
+                public abstract int InternalSet { get; internal set; }
                 }
 
                 class Derived : Base
                 {
-                    Base inner;
+                Base inner;
 
-                    public override int InternalGet { internal get => inner.InternalGet; set => inner.InternalGet = value; }
-                    public override int InternalSet { get => inner.InternalSet; internal set => inner.InternalSet = value; }
+                public override int InternalGet { internal get => inner.InternalGet; set => inner.InternalGet = value; }
+                public override int InternalSet { get => inner.InternalSet; internal set => inner.InternalSet = value; }
                 }
                 """,
                 index: 1,
@@ -925,51 +925,51 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
             await TestInRegularAndScriptAsync(
                 """
                 <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                        <Document>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document>
                 public abstract class Base
                 {
-                    public abstract void Method1();
-                    internal abstract void Method2();
+                public abstract void Method1();
+                internal abstract void Method2();
                 }
-                        </Document>
-                    </Project>
-                    <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
-                        <ProjectReference>Assembly1</ProjectReference>
-                        <Document>
+                </Document>
+                </Project>
+                <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
+                <ProjectReference>Assembly1</ProjectReference>
+                <Document>
                 class [|Derived|] : Base
                 {
-                    Base inner;
+                Base inner;
                 }
-                        </Document>
-                    </Project>
+                </Document>
+                </Project>
                 </Workspace>
                 """,
                 """
                 <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                        <Document>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document>
                 public abstract class Base
                 {
-                    public abstract void Method1();
-                    internal abstract void Method2();
+                public abstract void Method1();
+                internal abstract void Method2();
                 }
-                        </Document>
-                    </Project>
-                    <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
-                        <ProjectReference>Assembly1</ProjectReference>
-                        <Document>
+                </Document>
+                </Project>
+                <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
+                <ProjectReference>Assembly1</ProjectReference>
+                <Document>
                 class {|Conflict:Derived|} : Base
                 {
-                    Base inner;
+                Base inner;
 
-                    public override void Method1()
-                    {
-                        inner.Method1();
-                    }
+                public override void Method1()
+                {
+                inner.Method1();
                 }
-                        </Document>
-                    </Project>
+                }
+                </Document>
+                </Project>
                 </Workspace>
                 """,
                 index: 1
@@ -983,7 +983,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    public abstract int Method();
+                public abstract int Method();
                 }
 
                 class [|Program|](Base base1) : Base
@@ -993,15 +993,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    public abstract int Method();
+                public abstract int Method();
                 }
 
                 class Program(Base base1) : Base
                 {
-                    public override int Method()
-                    {
-                        return base1.Method();
-                    }
+                public override int Method()
+                {
+                return base1.Method();
+                }
                 }
                 """,
                 index: 1
@@ -1016,12 +1016,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    public abstract int Method();
+                public abstract int Method();
                 }
 
                 class [|Program|](Base base1) : Base
                 {
-                    private Base _base = base1;
+                private Base _base = base1;
                 }
                 """,
                 new[]
@@ -1040,12 +1040,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    public abstract int Method();
+                public abstract int Method();
                 }
 
                 class [|Program|](Base base1) : Base
                 {
-                    private Base _base = (base1);
+                private Base _base = (base1);
                 }
                 """,
                 new[]
@@ -1064,12 +1064,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    public abstract int Method();
+                public abstract int Method();
                 }
 
                 class [|Program|](Base base1) : Base
                 {
-                    private Base B { get; } = base1;
+                private Base B { get; } = base1;
                 }
                 """,
                 new[]
@@ -1088,12 +1088,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    public abstract int Method();
+                public abstract int Method();
                 }
 
                 class [|Program|](Base base1) : Base
                 {
-                    private Base B { get; } = (base1);
+                private Base B { get; } = (base1);
                 }
                 """,
                 new[]
@@ -1111,28 +1111,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 """
                 abstract class Base
                 {
-                    public abstract int Method();
+                public abstract int Method();
                 }
 
                 class [|Program|](Base base1) : Base
                 {
-                    private readonly int base1Hash = base1.GetHashCode();
+                private readonly int base1Hash = base1.GetHashCode();
                 }
                 """,
                 """
                 abstract class Base
                 {
-                    public abstract int Method();
+                public abstract int Method();
                 }
 
                 class Program(Base base1) : Base
                 {
-                    private readonly int base1Hash = base1.GetHashCode();
+                private readonly int base1Hash = base1.GetHashCode();
 
-                    public override int Method()
-                    {
-                        return base1.Method();
-                    }
+                public override int Method()
+                {
+                return base1.Method();
+                }
                 }
                 """,
                 index: 1

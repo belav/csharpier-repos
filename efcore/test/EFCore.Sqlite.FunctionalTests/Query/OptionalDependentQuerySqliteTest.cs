@@ -22,9 +22,9 @@ public class OptionalDependentQuerySqliteTest
 
         AssertSql(
             """
-SELECT "e"."Id", "e"."Name", "e"."Json"
-FROM "EntitiesAllOptional" AS "e"
-"""
+            SELECT "e"."Id", "e"."Name", "e"."Json"
+            FROM "EntitiesAllOptional" AS "e"
+            """
         );
     }
 
@@ -34,9 +34,9 @@ FROM "EntitiesAllOptional" AS "e"
 
         AssertSql(
             """
-SELECT "e"."Id", "e"."Name", "e"."Json"
-FROM "EntitiesSomeRequired" AS "e"
-"""
+            SELECT "e"."Id", "e"."Name", "e"."Json"
+            FROM "EntitiesSomeRequired" AS "e"
+            """
         );
     }
 
@@ -48,10 +48,10 @@ FROM "EntitiesSomeRequired" AS "e"
 
         AssertSql(
             """
-SELECT "e"."Id", "e"."Name", "e"."Json"
-FROM "EntitiesAllOptional" AS "e"
-WHERE "e"."Json" IS NULL
-"""
+            SELECT "e"."Id", "e"."Name", "e"."Json"
+            FROM "EntitiesAllOptional" AS "e"
+            WHERE "e"."Json" IS NULL
+            """
         );
     }
 
@@ -63,10 +63,10 @@ WHERE "e"."Json" IS NULL
 
         AssertSql(
             """
-SELECT "e"."Id", "e"."Name", "e"."Json"
-FROM "EntitiesAllOptional" AS "e"
-WHERE "e"."Json" IS NOT NULL
-"""
+            SELECT "e"."Id", "e"."Name", "e"."Json"
+            FROM "EntitiesAllOptional" AS "e"
+            WHERE "e"."Json" IS NOT NULL
+            """
         );
     }
 
@@ -78,10 +78,10 @@ WHERE "e"."Json" IS NOT NULL
 
         AssertSql(
             """
-SELECT "e"."Id", "e"."Name", "e"."Json"
-FROM "EntitiesSomeRequired" AS "e"
-WHERE "e"."Json" IS NULL
-"""
+            SELECT "e"."Id", "e"."Name", "e"."Json"
+            FROM "EntitiesSomeRequired" AS "e"
+            WHERE "e"."Json" IS NULL
+            """
         );
     }
 
@@ -93,10 +93,10 @@ WHERE "e"."Json" IS NULL
 
         AssertSql(
             """
-SELECT "e"."Id", "e"."Name", "e"."Json"
-FROM "EntitiesSomeRequired" AS "e"
-WHERE "e"."Json" IS NOT NULL
-"""
+            SELECT "e"."Id", "e"."Name", "e"."Json"
+            FROM "EntitiesSomeRequired" AS "e"
+            WHERE "e"."Json" IS NOT NULL
+            """
         );
     }
 
@@ -108,10 +108,10 @@ WHERE "e"."Json" IS NOT NULL
 
         AssertSql(
             """
-SELECT "e"."Id", "e"."Name", "e"."Json"
-FROM "EntitiesAllOptional" AS "e"
-WHERE "e"."Json" ->> 'OpNav1' IS NULL
-"""
+            SELECT "e"."Id", "e"."Name", "e"."Json"
+            FROM "EntitiesAllOptional" AS "e"
+            WHERE "e"."Json" ->> 'OpNav1' IS NULL
+            """
         );
     }
 
@@ -123,10 +123,10 @@ WHERE "e"."Json" ->> 'OpNav1' IS NULL
 
         AssertSql(
             """
-SELECT "e"."Id", "e"."Name", "e"."Json"
-FROM "EntitiesAllOptional" AS "e"
-WHERE "e"."Json" ->> 'OpNav2' IS NOT NULL
-"""
+            SELECT "e"."Id", "e"."Name", "e"."Json"
+            FROM "EntitiesAllOptional" AS "e"
+            WHERE "e"."Json" ->> 'OpNav2' IS NOT NULL
+            """
         );
     }
 
@@ -138,10 +138,10 @@ WHERE "e"."Json" ->> 'OpNav2' IS NOT NULL
 
         AssertSql(
             """
-SELECT "e"."Id", "e"."Name", "e"."Json"
-FROM "EntitiesSomeRequired" AS "e"
-WHERE "e"."Json" ->> 'ReqNav1' IS NULL
-"""
+            SELECT "e"."Id", "e"."Name", "e"."Json"
+            FROM "EntitiesSomeRequired" AS "e"
+            WHERE "e"."Json" ->> 'ReqNav1' IS NULL
+            """
         );
     }
 
@@ -153,10 +153,10 @@ WHERE "e"."Json" ->> 'ReqNav1' IS NULL
 
         AssertSql(
             """
-SELECT "e"."Id", "e"."Name", "e"."Json"
-FROM "EntitiesSomeRequired" AS "e"
-WHERE "e"."Json" ->> 'ReqNav2' IS NOT NULL
-"""
+            SELECT "e"."Id", "e"."Name", "e"."Json"
+            FROM "EntitiesSomeRequired" AS "e"
+            WHERE "e"."Json" ->> 'ReqNav2' IS NOT NULL
+            """
         );
     }
 

@@ -23,13 +23,13 @@ public class MethodDeclarationStructureTests
     public async Task TestMethod1()
     {
         var code = """
-                class C
-                {
-                    {|hint:$$public string Goo(){|textspan:
-                    {
-                    }|}|}
-                }
-                """;
+        class C
+        {
+        {|hint:$$public string Goo(){|textspan:
+        {
+        }|}|}
+        }
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -41,16 +41,16 @@ public class MethodDeclarationStructureTests
     public async Task TestMethod2()
     {
         var code = """
-                class C
-                {
-                    {|hint:$$public string Goo(){|textspan:
-                    {
-                    }|}|}
-                    public string Goo2()
-                    {
-                    }
-                }
-                """;
+        class C
+        {
+        {|hint:$$public string Goo(){|textspan:
+        {
+        }|}|}
+        public string Goo2()
+        {
+        }
+        }
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -62,17 +62,17 @@ public class MethodDeclarationStructureTests
     public async Task TestMethod3()
     {
         var code = """
-                class C
-                {
-                    {|hint:$$public string Goo(){|textspan:
-                    {
-                    }|}|}
+        class C
+        {
+        {|hint:$$public string Goo(){|textspan:
+        {
+        }|}|}
 
-                    public string Goo2()
-                    {
-                    }
-                }
-                """;
+        public string Goo2()
+        {
+        }
+        }
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -84,15 +84,15 @@ public class MethodDeclarationStructureTests
     public async Task TestMethod4()
     {
         var code = """
-                class C
-                {
-                    {|hint:$$public string Goo(){|textspan:
-                    {
-                    }|}|}
+        class C
+        {
+        {|hint:$$public string Goo(){|textspan:
+        {
+        }|}|}
 
-                    public string Goo2 => null;
-                }
-                """;
+        public string Goo2 => null;
+        }
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -104,14 +104,14 @@ public class MethodDeclarationStructureTests
     public async Task TestMethod5()
     {
         var code = """
-                class C
-                {
-                    {|hint:$$public void Goo(){|textspan:
-                    // .ctor
-                    {
-                    }|}|} // .ctor
-                }
-                """;
+        class C
+        {
+        {|hint:$$public void Goo(){|textspan:
+        // .ctor
+        {
+        }|}|} // .ctor
+        }
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -123,14 +123,14 @@ public class MethodDeclarationStructureTests
     public async Task TestMethod6()
     {
         var code = """
-                class C
-                {
-                    {|hint:$$public void Goo(){|textspan:
-                    /* .ctor */
-                    {
-                    }|}|} // .ctor
-                }
-                """;
+        class C
+        {
+        {|hint:$$public void Goo(){|textspan:
+        /* .ctor */
+        {
+        }|}|} // .ctor
+        }
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -142,13 +142,13 @@ public class MethodDeclarationStructureTests
     public async Task TestMethodWithTrailingSpaces()
     {
         var code = """
-                class C
-                {
-                    {|hint:$$public string Goo()    {|textspan:
-                    {
-                    }|}|}
-                }
-                """;
+        class C
+        {
+        {|hint:$$public string Goo()    {|textspan:
+        {
+        }|}|}
+        }
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -160,15 +160,15 @@ public class MethodDeclarationStructureTests
     public async Task TestMethodWithLeadingComments()
     {
         var code = """
-                class C
-                {
-                    {|span1:// Goo
-                    // Bar|}
-                    {|hint2:$$public string Goo(){|textspan2:
-                    {
-                    }|}|}
-                }
-                """;
+        class C
+        {
+        {|span1:// Goo
+        // Bar|}
+        {|hint2:$$public string Goo(){|textspan2:
+        {
+        }|}|}
+        }
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -181,13 +181,13 @@ public class MethodDeclarationStructureTests
     public async Task TestMethodWithWithExpressionBodyAndComments()
     {
         var code = """
-                class C
-                {
-                    {|span:// Goo
-                    // Bar|}
-                    $$public string Goo() => "Goo";
-                }
-                """;
+        class C
+        {
+        {|span:// Goo
+        // Bar|}
+        $$public string Goo() => "Goo";
+        }
+        """;
 
         await VerifyBlockSpansAsync(code, Region("span", "// Goo ...", autoCollapse: true));
     }

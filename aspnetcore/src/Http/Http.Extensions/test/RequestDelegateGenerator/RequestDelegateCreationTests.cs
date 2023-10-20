@@ -54,8 +54,8 @@ app.MapGet("/hello", ({parameterType} p) => p == null ? "null!" : "Hello world!"
     {
         var (results, compilation) = await RunGeneratorAsync(
             """
-app.MapGet("/hello", (HttpRequest req, HttpResponse res) => req is null || res is null ? "null!" : "Hello world!");
-"""
+            app.MapGet("/hello", (HttpRequest req, HttpResponse res) => req is null || res is null ? "null!" : "Hello world!");
+            """
         );
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -91,11 +91,11 @@ app.MapGet("/hello", (HttpRequest req, HttpResponse res) => req is null || res i
     public async Task MapAction_MultilineLambda()
     {
         var source = """
-app.MapGet("/hello", () =>
-{
-    return "Hello world!";
-});
-""";
+        app.MapGet("/hello", () =>
+        {
+        return "Hello world!";
+        });
+        """;
         var (result, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -116,11 +116,11 @@ app.MapGet("/hello", () =>
     public async Task Multiple_MapAction_NoParam_StringReturn()
     {
         var source = """
-app.MapGet("/en", () => "Hello world!");
-app.MapGet("/es", () => "Hola mundo!");
-app.MapGet("/en-task", () => Task.FromResult("Hello world!"));
-app.MapGet("/es-task", () => new ValueTask<string>("Hola mundo!"));
-""";
+        app.MapGet("/en", () => "Hello world!");
+        app.MapGet("/es", () => "Hola mundo!");
+        app.MapGet("/en-task", () => Task.FromResult("Hello world!"));
+        app.MapGet("/es-task", () => new ValueTask<string>("Hola mundo!"));
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
 
         await VerifyAgainstBaselineUsingFile(compilation);
@@ -130,10 +130,10 @@ app.MapGet("/es-task", () => new ValueTask<string>("Hola mundo!"));
     public async Task Multiple_MapAction_WithParams_StringReturn()
     {
         var source = """
-app.MapGet("/en", (HttpRequest req) => "Hello world!");
-app.MapGet("/es", (HttpResponse res) => "Hola mundo!");
-app.MapGet("/zh", (HttpRequest req, HttpResponse res) => "你好世界！");
-""";
+        app.MapGet("/en", (HttpRequest req) => "Hello world!");
+        app.MapGet("/es", (HttpResponse res) => "Hola mundo!");
+        app.MapGet("/zh", (HttpRequest req, HttpResponse res) => "你好世界！");
+        """;
         var (results, compilation) = await RunGeneratorAsync(source);
         var endpoints = GetEndpointsFromCompilation(compilation);
 
@@ -205,11 +205,11 @@ app.MapGet("/zh", (HttpRequest req, HttpResponse res) => "你好世界！");
             var fromHeaderNullableSource =
                 """app.MapGet("/", ([FromHeader] string? headerValue) => headerValue ?? string.Empty);""";
             var fromHeaderDefaultValueSource = """
-#nullable disable
-string getHeaderWithDefault([FromHeader] string headerValue = null) => headerValue ?? string.Empty;
-app.MapGet("/", getHeaderWithDefault);
-#nullable restore
-""";
+            #nullable disable
+            string getHeaderWithDefault([FromHeader] string headerValue = null) => headerValue ?? string.Empty;
+            app.MapGet("/", getHeaderWithDefault);
+            #nullable restore
+            """;
 
             return new[]
             {
@@ -264,22 +264,22 @@ app.MapGet("/", getHeaderWithDefault);
             var fromServiceNullableSource =
                 """app.MapPost("/", ([FromServices]TestService? svc) => svc?.TestServiceMethod() ?? string.Empty);""";
             var fromServiceDefaultValueSource = """
-#nullable disable
-string postServiceWithDefault([FromServices]TestService svc = null) => svc?.TestServiceMethod() ?? string.Empty;
-app.MapPost("/", postServiceWithDefault);
-#nullable restore
-""";
+            #nullable disable
+            string postServiceWithDefault([FromServices]TestService svc = null) => svc?.TestServiceMethod() ?? string.Empty;
+            app.MapPost("/", postServiceWithDefault);
+            #nullable restore
+            """;
 
             var fromServiceEnumerableRequiredSource =
                 """app.MapPost("/", ([FromServices]IEnumerable<TestService>  svc) => svc.FirstOrDefault()?.TestServiceMethod() ?? string.Empty);""";
             var fromServiceEnumerableNullableSource =
                 """app.MapPost("/", ([FromServices]IEnumerable<TestService>? svc) => svc?.FirstOrDefault()?.TestServiceMethod() ?? string.Empty);""";
             var fromServiceEnumerableDefaultValueSource = """
-#nullable disable
-string postServiceWithDefault([FromServices]IEnumerable<TestService> svc = null) => svc?.FirstOrDefault()?.TestServiceMethod() ?? string.Empty;
-app.MapPost("/", postServiceWithDefault);
-#nullable restore
-""";
+            #nullable disable
+            string postServiceWithDefault([FromServices]IEnumerable<TestService> svc = null) => svc?.FirstOrDefault()?.TestServiceMethod() ?? string.Empty;
+            app.MapPost("/", postServiceWithDefault);
+            #nullable restore
+            """;
 
             return new[]
             {
@@ -340,11 +340,11 @@ app.MapPost("/", postServiceWithDefault);
     public async Task MapAction_ExplicitServiceParam_SimpleReturn_Snapshot()
     {
         var source = """
-app.MapGet("/fromServiceRequired", ([FromServices]TestService svc) => svc.TestServiceMethod());
-app.MapGet("/enumerableFromService", ([FromServices]IEnumerable<TestService> svc) => svc?.FirstOrDefault()?.TestServiceMethod() ?? string.Empty);
-app.MapGet("/multipleFromService", ([FromServices]TestService? svc, [FromServices]IEnumerable<TestService> svcs) =>
-    $"{(svcs?.FirstOrDefault()?.TestServiceMethod() ?? string.Empty)}, {svc?.TestServiceMethod()}");
-""";
+        app.MapGet("/fromServiceRequired", ([FromServices]TestService svc) => svc.TestServiceMethod());
+        app.MapGet("/enumerableFromService", ([FromServices]IEnumerable<TestService> svc) => svc?.FirstOrDefault()?.TestServiceMethod() ?? string.Empty);
+        app.MapGet("/multipleFromService", ([FromServices]TestService? svc, [FromServices]IEnumerable<TestService> svcs) =>
+        $"{(svcs?.FirstOrDefault()?.TestServiceMethod() ?? string.Empty)}, {svc?.TestServiceMethod()}");
+        """;
         var httpContext = CreateHttpContext();
         var expectedBody = "Produced from service!";
         var serviceCollection = new ServiceCollection();
@@ -390,12 +390,12 @@ app.MapGet("/multipleFromService", ([FromServices]TestService? svc, [FromService
     public async Task MapAction_ExplicitSource_SimpleReturn_Snapshot()
     {
         var source = """
-app.MapGet("/fromQuery", ([FromQuery] string queryValue) => queryValue ?? string.Empty);
-app.MapGet("/fromHeader", ([FromHeader] string headerValue) => headerValue ?? string.Empty);
-app.MapGet("/fromRoute/{routeValue}", ([FromRoute] string routeValue) => routeValue ?? string.Empty);
-app.MapGet("/fromRouteRequiredImplicit/{value}", (string value) => value);
-app.MapGet("/fromQueryRequiredImplicit", (string value) => value);
-""";
+        app.MapGet("/fromQuery", ([FromQuery] string queryValue) => queryValue ?? string.Empty);
+        app.MapGet("/fromHeader", ([FromHeader] string headerValue) => headerValue ?? string.Empty);
+        app.MapGet("/fromRoute/{routeValue}", ([FromRoute] string routeValue) => routeValue ?? string.Empty);
+        app.MapGet("/fromRouteRequiredImplicit/{value}", (string value) => value);
+        app.MapGet("/fromQueryRequiredImplicit", (string value) => value);
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
 
         await VerifyAgainstBaselineUsingFile(compilation);
@@ -406,19 +406,19 @@ app.MapGet("/fromQueryRequiredImplicit", (string value) => value);
         get
         {
             var tooManyArguments = """
-string HelloName([FromQuery] int? one, [FromQuery] string? two, [FromQuery] int? three, [FromQuery] string? four,
-    [FromQuery] int? five, [FromQuery] bool? six, [FromQuery] string? seven, [FromQuery] string? eight,
-    [FromQuery] int? nine, [FromQuery] string? ten, [FromQuery] int? eleven) =>
-    "Too many arguments";
-""";
+            string HelloName([FromQuery] int? one, [FromQuery] string? two, [FromQuery] int? three, [FromQuery] string? four,
+            [FromQuery] int? five, [FromQuery] bool? six, [FromQuery] string? seven, [FromQuery] string? eight,
+            [FromQuery] int? nine, [FromQuery] string? ten, [FromQuery] int? eleven) =>
+            "Too many arguments";
+            """;
             var noArguments = """
-string HelloName() => "No arguments";
-""";
+            string HelloName() => "No arguments";
+            """;
             var justRightArguments = """
-string HelloName([FromQuery] int? one, [FromQuery] string? two, [FromQuery] int? three, [FromQuery] string? four,
-    [FromQuery] int? five, [FromQuery] bool? six, [FromQuery] string? seven) =>
-    "Just right arguments";
-""";
+            string HelloName([FromQuery] int? one, [FromQuery] string? two, [FromQuery] int? three, [FromQuery] string? four,
+            [FromQuery] int? five, [FromQuery] bool? six, [FromQuery] string? seven) =>
+            "Just right arguments";
+            """;
             return new object[][]
             {
                 new[] { tooManyArguments, "True, 11, Too many arguments" },
@@ -475,11 +475,11 @@ app.MapGet("/", () => GetString())
     public async Task MapAction_InferredTryParse_NonOptional_Provided()
     {
         var source = """
-app.MapGet("/", (HttpContext httpContext, int id) =>
-{
-    httpContext.Items["id"] = id;
-});
-""";
+        app.MapGet("/", (HttpContext httpContext, int id) =>
+        {
+        httpContext.Items["id"] = id;
+        });
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -499,12 +499,12 @@ app.MapGet("/", (HttpContext httpContext, int id) =>
     public async Task RequestDelegateCreation_SupportMapMethods()
     {
         var source = """
-var supportedMethods = new[] { "GET", "POST" };
-app.MapMethods("/", supportedMethods, (HttpContext httpContext, int id) =>
-{
-    httpContext.Items["id"] = id;
-});
-""";
+        var supportedMethods = new[] { "GET", "POST" };
+        app.MapMethods("/", supportedMethods, (HttpContext httpContext, int id) =>
+        {
+        httpContext.Items["id"] = id;
+        });
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -524,12 +524,12 @@ app.MapMethods("/", supportedMethods, (HttpContext httpContext, int id) =>
     public async Task RequestDelegateCreation_SupportMapMethods_InvalidRequestMethod()
     {
         var source = """
-var supportedMethods = new[] { "DELETE", "PATCH" };
-app.MapMethods("/", supportedMethods, (HttpContext httpContext, int id) =>
-{
-    httpContext.Items["id"] = id;
-});
-""";
+        var supportedMethods = new[] { "DELETE", "PATCH" };
+        app.MapMethods("/", supportedMethods, (HttpContext httpContext, int id) =>
+        {
+        httpContext.Items["id"] = id;
+        });
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -546,11 +546,11 @@ app.MapMethods("/", supportedMethods, (HttpContext httpContext, int id) =>
     public async Task RequestDelegateCreation_SupportsMap()
     {
         var source = """
-app.Map("/", (HttpContext httpContext, int id) =>
-{
-    httpContext.Items["id"] = id;
-});
-""";
+        app.Map("/", (HttpContext httpContext, int id) =>
+        {
+        httpContext.Items["id"] = id;
+        });
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -570,11 +570,11 @@ app.Map("/", (HttpContext httpContext, int id) =>
     public async Task RequestDelegateCreation_SupportsMapFallback()
     {
         var source = """
-app.MapFallback("/", (HttpContext httpContext, int id) =>
-{
-    httpContext.Items["id"] = id;
-});
-""";
+        app.MapFallback("/", (HttpContext httpContext, int id) =>
+        {
+        httpContext.Items["id"] = id;
+        });
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -594,11 +594,11 @@ app.MapFallback("/", (HttpContext httpContext, int id) =>
     public async Task RequestDelegateCreation_SupportsMapFallback_NoRoute()
     {
         var source = """
-app.MapFallback((HttpContext httpContext, int id) =>
-{
-    httpContext.Items["id"] = id;
-});
-""";
+        app.MapFallback((HttpContext httpContext, int id) =>
+        {
+        httpContext.Items["id"] = id;
+        });
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -618,16 +618,16 @@ app.MapFallback((HttpContext httpContext, int id) =>
     public async Task RequestDelegateHandlesStringValuesFromExplicitQueryStringSource()
     {
         var source = """
-app.MapPost("/", (HttpContext context,
-    [FromHeader(Name = "Custom")] int[] headerValues,
-    [FromQuery(Name = "a")] int[] queryValues,
-    [FromForm(Name = "form")] int[] formValues) =>
-{
-    context.Items["headers"] = headerValues;
-    context.Items["query"] = queryValues;
-    context.Items["form"] = formValues;
-});
-""";
+        app.MapPost("/", (HttpContext context,
+        [FromHeader(Name = "Custom")] int[] headerValues,
+        [FromQuery(Name = "a")] int[] queryValues,
+        [FromForm(Name = "form")] int[] formValues) =>
+        {
+        context.Items["headers"] = headerValues;
+        context.Items["query"] = queryValues;
+        context.Items["form"] = formValues;
+        });
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
         var httpContext = CreateHttpContext();

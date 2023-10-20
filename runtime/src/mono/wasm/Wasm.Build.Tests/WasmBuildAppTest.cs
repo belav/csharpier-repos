@@ -133,7 +133,7 @@ namespace Wasm.Build.Tests
                 using System.Threading.Tasks;
 
                 public class TestClass {
-                    public static int Main() => throw new Exception("MessageFromMyException");
+                public static int Main() => throw new Exception("MessageFromMyException");
                 }
                 """,
                 buildArgs,

@@ -28,23 +28,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         public void UncommentAndFormat1()
         {
             var code = """
-                class A
-                {
-                    [|          //            void  Method  (   )
-                                // {
-                                //
-                                //                      }|]
-                }
-                """;
+            class A
+            {
+            [|          //            void  Method  (   )
+            // {
+            //
+            //                      }|]
+            }
+            """;
             var expected = """
-                class A
-                {
-                    void Method()
-                    {
+            class A
+            {
+            void Method()
+            {
 
-                    }
-                }
-                """;
+            }
+            }
+            """;
             UncommentSelection(code, expected);
         }
 
@@ -52,23 +52,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         public void UncommentAndFormat2()
         {
             var code = """
-                class A
-                {
-                    [|          /*            void  Method  (   )
-                                 {
+            class A
+            {
+            [|          /*            void  Method  (   )
+            {
 
-                                                      } */|]
-                }
-                """;
+            } */|]
+            }
+            """;
             var expected = """
-                class A
-                {
-                    void Method()
-                    {
+            class A
+            {
+            void Method()
+            {
 
-                    }
-                }
-                """;
+            }
+            }
+            """;
             UncommentSelection(code, expected);
         }
 
@@ -76,28 +76,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         public void UncommentSingleLineCommentInPseudoBlockComment()
         {
             var code = """
-                class C
-                {
-                    /// <include file='doc\Control.uex' path='docs/doc[@for="Control.RtlTranslateAlignment1"]/*' />
-                    protected void RtlTranslateAlignment2()
-                    {
-                        //[|int x = 0;|]
-                    }
-                    /* Hello world */
-                }
-                """;
+            class C
+            {
+            /// <include file='doc\Control.uex' path='docs/doc[@for="Control.RtlTranslateAlignment1"]/*' />
+            protected void RtlTranslateAlignment2()
+            {
+            //[|int x = 0;|]
+            }
+            /* Hello world */
+            }
+            """;
 
             var expected = """
-                class C
-                {
-                    /// <include file='doc\Control.uex' path='docs/doc[@for="Control.RtlTranslateAlignment1"]/*' />
-                    protected void RtlTranslateAlignment2()
-                    {
-                        int x = 0;
-                    }
-                    /* Hello world */
-                }
-                """;
+            class C
+            {
+            /// <include file='doc\Control.uex' path='docs/doc[@for="Control.RtlTranslateAlignment1"]/*' />
+            protected void RtlTranslateAlignment2()
+            {
+            int x = 0;
+            }
+            /* Hello world */
+            }
+            """;
 
             UncommentSelection(code, expected);
         }
@@ -106,23 +106,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         public void UncommentAndFormat3()
         {
             var code = """
-                class A
-                {
-                    [|          //            void  Method  (   )       |]
-                    [|            // {                                  |]
-                    [|            //                                    |]
-                    [|            //                      }             |]
-                }
-                """;
+            class A
+            {
+            [|          //            void  Method  (   )       |]
+            [|            // {                                  |]
+            [|            //                                    |]
+            [|            //                      }             |]
+            }
+            """;
             var expected = """
-                class A
-                {
-                    void Method()
-                    {
+            class A
+            {
+            void Method()
+            {
 
-                    }
-                }
-                """;
+            }
+            }
+            """;
             UncommentSelection(code, expected);
         }
 

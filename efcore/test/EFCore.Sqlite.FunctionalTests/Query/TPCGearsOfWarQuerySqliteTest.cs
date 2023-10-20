@@ -370,9 +370,9 @@ public class TPCGearsOfWarQuerySqliteTest
 
         AssertSql(
             """
-SELECT "m"."Timeline"
-FROM "Missions" AS "m"
-"""
+            SELECT "m"."Timeline"
+            FROM "Missions" AS "m"
+            """
         );
     }
 
@@ -382,10 +382,10 @@ FROM "Missions" AS "m"
 
         AssertSql(
             """
-SELECT "s"."Id", "s"."Banner", "s"."Banner5", "s"."InternalNumber", "s"."Name"
-FROM "Squads" AS "s"
-WHERE instr("s"."Banner", X'01') > 0
-"""
+            SELECT "s"."Id", "s"."Banner", "s"."Banner5", "s"."InternalNumber", "s"."Name"
+            FROM "Squads" AS "s"
+            WHERE instr("s"."Banner", X'01') > 0
+            """
         );
     }
 
@@ -395,12 +395,12 @@ WHERE instr("s"."Banner", X'01') > 0
 
         AssertSql(
             """
-@__someByte_0='1'
+            @__someByte_0='1'
 
-SELECT "s"."Id", "s"."Banner", "s"."Banner5", "s"."InternalNumber", "s"."Name"
-FROM "Squads" AS "s"
-WHERE instr("s"."Banner", char(@__someByte_0)) > 0
-"""
+            SELECT "s"."Id", "s"."Banner", "s"."Banner5", "s"."InternalNumber", "s"."Name"
+            FROM "Squads" AS "s"
+            WHERE instr("s"."Banner", char(@__someByte_0)) > 0
+            """
         );
     }
 
@@ -410,10 +410,10 @@ WHERE instr("s"."Banner", char(@__someByte_0)) > 0
 
         AssertSql(
             """
-SELECT "s"."Id", "s"."Banner", "s"."Banner5", "s"."InternalNumber", "s"."Name"
-FROM "Squads" AS "s"
-WHERE length("s"."Banner") = 1
-"""
+            SELECT "s"."Id", "s"."Banner", "s"."Banner5", "s"."InternalNumber", "s"."Name"
+            FROM "Squads" AS "s"
+            WHERE length("s"."Banner") = 1
+            """
         );
     }
 
@@ -423,12 +423,12 @@ WHERE length("s"."Banner") = 1
 
         AssertSql(
             """
-@__p_0='1'
+            @__p_0='1'
 
-SELECT "s"."Id", "s"."Banner", "s"."Banner5", "s"."InternalNumber", "s"."Name"
-FROM "Squads" AS "s"
-WHERE length("s"."Banner") = @__p_0
-"""
+            SELECT "s"."Id", "s"."Banner", "s"."Banner5", "s"."InternalNumber", "s"."Name"
+            FROM "Squads" AS "s"
+            WHERE length("s"."Banner") = @__p_0
+            """
         );
     }
 
@@ -438,12 +438,12 @@ WHERE length("s"."Banner") = @__p_0
 
         AssertSql(
             """
-@__byteArrayParam='0x2A80' (Size = 2)
+            @__byteArrayParam='0x2A80' (Size = 2)
 
-SELECT COUNT(*)
-FROM "Squads" AS "s"
-WHERE length("s"."Banner") = length(@__byteArrayParam)
-"""
+            SELECT COUNT(*)
+            FROM "Squads" AS "s"
+            WHERE length("s"."Banner") = length(@__byteArrayParam)
+            """
         );
     }
 
@@ -453,12 +453,12 @@ WHERE length("s"."Banner") = length(@__byteArrayParam)
 
         AssertSql(
             """
-@__byteArrayParam_0='0x0405060708' (Size = 5)
+            @__byteArrayParam_0='0x0405060708' (Size = 5)
 
-SELECT "s"."Id", "s"."Banner", "s"."Banner5", "s"."InternalNumber", "s"."Name"
-FROM "Squads" AS "s"
-WHERE "s"."Banner5" = @__byteArrayParam_0
-"""
+            SELECT "s"."Id", "s"."Banner", "s"."Banner5", "s"."InternalNumber", "s"."Name"
+            FROM "Squads" AS "s"
+            WHERE "s"."Banner5" = @__byteArrayParam_0
+            """
         );
     }
 
@@ -549,21 +549,21 @@ WHERE "s"."Banner5" = @__byteArrayParam_0
 
         AssertSql(
             """
-SELECT "s"."Id", "s"."Banner", "s"."Banner5", "s"."InternalNumber", "s"."Name"
-FROM "Squads" AS "s"
-WHERE (
-    SELECT "t"."Nickname"
-    FROM (
-        SELECT "g"."Nickname", "g"."SquadId", "g"."AssignedCityName", "g"."CityOfBirthName", "g"."FullName", "g"."HasSoulPatch", "g"."LeaderNickname", "g"."LeaderSquadId", "g"."Rank", 'Gear' AS "Discriminator"
-        FROM "Gears" AS "g"
-        UNION ALL
-        SELECT "o"."Nickname", "o"."SquadId", "o"."AssignedCityName", "o"."CityOfBirthName", "o"."FullName", "o"."HasSoulPatch", "o"."LeaderNickname", "o"."LeaderSquadId", "o"."Rank", 'Officer' AS "Discriminator"
-        FROM "Officers" AS "o"
-    ) AS "t"
-    WHERE "s"."Id" = "t"."SquadId"
-    ORDER BY "t"."Nickname"
-    LIMIT 1 OFFSET "s"."Id") = 'Cole Train'
-"""
+            SELECT "s"."Id", "s"."Banner", "s"."Banner5", "s"."InternalNumber", "s"."Name"
+            FROM "Squads" AS "s"
+            WHERE (
+            SELECT "t"."Nickname"
+            FROM (
+            SELECT "g"."Nickname", "g"."SquadId", "g"."AssignedCityName", "g"."CityOfBirthName", "g"."FullName", "g"."HasSoulPatch", "g"."LeaderNickname", "g"."LeaderSquadId", "g"."Rank", 'Gear' AS "Discriminator"
+            FROM "Gears" AS "g"
+            UNION ALL
+            SELECT "o"."Nickname", "o"."SquadId", "o"."AssignedCityName", "o"."CityOfBirthName", "o"."FullName", "o"."HasSoulPatch", "o"."LeaderNickname", "o"."LeaderSquadId", "o"."Rank", 'Officer' AS "Discriminator"
+            FROM "Officers" AS "o"
+            ) AS "t"
+            WHERE "s"."Id" = "t"."SquadId"
+            ORDER BY "t"."Nickname"
+            LIMIT 1 OFFSET "s"."Id") = 'Cole Train'
+            """
         );
     }
 

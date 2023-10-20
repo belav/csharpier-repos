@@ -29,17 +29,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
             : base(logger) { }
 
         private const string SpanDeclarationSourceText = """
-            using System;
-            namespace System
-            {
-                public readonly ref struct Span<T> 
-                {
-                    unsafe public Span(void* pointer, int length) { }
-                }
-            }
+        using System;
+        namespace System
+        {
+        public readonly ref struct Span<T>
+        {
+        unsafe public Span(void* pointer, int length) { }
+        }
+        }
 
 
-            """;
+        """;
 
         internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace
@@ -52,7 +52,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
                 """
                 struct S
                 {
-                    Span<int>[||] m;
+                Span<int>[||] m;
                 }
                 """
             );
@@ -60,7 +60,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
                 """
                 ref struct S
                 {
-                    Span<int> m;
+                Span<int> m;
                 }
                 """
             );
@@ -74,7 +74,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
                 """
                 record struct S
                 {
-                    Span<int>[||] m;
+                Span<int>[||] m;
                 }
                 """
             );
@@ -93,10 +93,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
                 """
                 struct S
                 {
-                    class C
-                    {
-                        Span<int>[||] m;
-                    }
+                class C
+                {
+                Span<int>[||] m;
+                }
                 }
                 """
             );
@@ -111,7 +111,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
                 """
                 ref struct S
                 {
-                    static Span<int>[||] m;
+                static Span<int>[||] m;
                 }
                 """
             );
@@ -125,7 +125,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
                 """
                 struct S
                 {
-                    static Span<int>[||] m;
+                static Span<int>[||] m;
                 }
                 """
             );
@@ -134,7 +134,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
                 """
                 ref struct S
                 {
-                    static Span<int> m;
+                static Span<int> m;
                 }
                 """
             );
@@ -148,7 +148,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
                 """
                 struct S
                 {
-                    Span<int>[||] M { get; }
+                Span<int>[||] M { get; }
                 }
                 """
             );
@@ -156,7 +156,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
                 """
                 ref struct S
                 {
-                    Span<int> M { get; }
+                Span<int> M { get; }
                 }
                 """
             );
@@ -171,10 +171,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
                 """
                 struct S
                 {
-                    class C
-                    {
-                        Span<int>[||] M { get; }
-                    }
+                class C
+                {
+                Span<int>[||] M { get; }
+                }
                 }
                 """
             );
@@ -189,7 +189,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
                 """
                 ref struct S
                 {
-                    static Span<int>[||] M { get; }
+                static Span<int>[||] M { get; }
                 }
                 """
             );
@@ -203,7 +203,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
                 """
                 struct S
                 {
-                    static Span<int>[||] M { get; }
+                static Span<int>[||] M { get; }
                 }
                 """
             );
@@ -212,7 +212,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
                 """
                 ref struct S
                 {
-                    static Span<int> M { get; }
+                static Span<int> M { get; }
                 }
                 """
             );
@@ -230,7 +230,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
 
                 struct S
                 {
-                    Span<int>[||] M { get; }
+                Span<int>[||] M { get; }
                 }
                 """
             );
@@ -248,7 +248,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
 
                 partial struct S
                 {
-                    Span<int>[||] M { get; }
+                Span<int>[||] M { get; }
                 }
                 """
             );
@@ -260,7 +260,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
 
                 ref partial struct S
                 {
-                    Span<int>[||] M { get; }
+                Span<int>[||] M { get; }
                 }
                 """
             );
@@ -278,7 +278,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
 
                 readonly partial struct S
                 {
-                    Span<int>[||] M { get; }
+                Span<int>[||] M { get; }
                 }
                 """
             );
@@ -290,7 +290,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
 
                 readonly ref partial struct S
                 {
-                    Span<int>[||] M { get; }
+                Span<int>[||] M { get; }
                 }
                 """
             );

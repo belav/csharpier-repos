@@ -29,25 +29,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class C
                 {
-                    void M()
-                    {
-                        int [||]x;
-                        {
-                            Console.WriteLine(x);
-                        }
-                    }
+                void M()
+                {
+                int [||]x;
+                {
+                Console.WriteLine(x);
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        {
-                            int x;
-                            Console.WriteLine(x);
-                        }
-                    }
+                void M()
+                {
+                {
+                int x;
+                Console.WriteLine(x);
+                }
+                }
                 }
                 """
             );
@@ -60,13 +60,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 int [||]x;
                 {
-                    Console.WriteLine(x);
+                Console.WriteLine(x);
                 }
                 """,
                 """
                 {
-                    int x;
-                    Console.WriteLine(x);
+                int x;
+                Console.WriteLine(x);
                 }
                 """,
                 Options.Regular
@@ -80,23 +80,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class C
                 {
-                    void M()
-                    {
-                        int [||]x;
-                        Console.WriteLine();
-                        Console.WriteLine(x);
-                    }
+                void M()
+                {
+                int [||]x;
+                Console.WriteLine();
+                Console.WriteLine(x);
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        Console.WriteLine();
-                        int x;
-                        Console.WriteLine(x);
-                    }
+                void M()
+                {
+                Console.WriteLine();
+                int x;
+                Console.WriteLine(x);
+                }
                 }
                 """
             );
@@ -127,34 +127,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class C
                 {
-                    void M()
-                    {
-                        int [||]x;
-                        Console.WriteLine();
-                        {
-                            Console.WriteLine(x);
-                        }
+                void M()
+                {
+                int [||]x;
+                Console.WriteLine();
+                {
+                Console.WriteLine(x);
+                }
 
-                        {
-                            Console.WriteLine(x);
-                        }
-                    }
+                {
+                Console.WriteLine(x);
+                }
+                }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        Console.WriteLine();
-                        int x;
-                        {
-                            Console.WriteLine(x);
-                        }
+                void M()
+                {
+                Console.WriteLine();
+                int x;
+                {
+                Console.WriteLine(x);
+                }
 
-                        {
-                            Console.WriteLine(x);
-                        }
-                    }
+                {
+                Console.WriteLine(x);
+                }
+                }
                 """
             );
         }
@@ -167,11 +167,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 int [||]x;
                 Console.WriteLine();
                 {
-                    Console.WriteLine(x);
+                Console.WriteLine(x);
                 }
 
                 {
-                    Console.WriteLine(x);
+                Console.WriteLine(x);
                 }
                 """,
                 """
@@ -182,7 +182,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 }
 
                 {
-                    Console.WriteLine(x);
+                Console.WriteLine(x);
                 }
                 """,
                 Options.Regular
@@ -196,26 +196,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class C
                 {
-                    void M()
-                    {
-                        int [||]x;
-                        Console.WriteLine();
-                        {
-                            Console.WriteLine(x);
-                        }
-                    }
+                void M()
+                {
+                int [||]x;
+                Console.WriteLine();
+                {
+                Console.WriteLine(x);
+                }
+                }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        Console.WriteLine();
-                        {
-                            int x;
-                            Console.WriteLine(x);
-                        }
-                    }
+                void M()
+                {
+                Console.WriteLine();
+                {
+                int x;
+                Console.WriteLine(x);
+                }
+                }
                 """
             );
         }
@@ -228,14 +228,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 int [||]x;
                 Console.WriteLine();
                 {
-                    Console.WriteLine(x);
+                Console.WriteLine(x);
                 }
                 """,
                 """
                 Console.WriteLine();
                 {
-                    int x;
-                    Console.WriteLine(x);
+                int x;
+                Console.WriteLine(x);
                 }
                 """,
                 Options.Regular
@@ -249,26 +249,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class C
                 {
-                    void M()
-                    {
-                        int [||]x;
-                        {
-                            x = 5;
-                            Console.WriteLine(x);
-                        }
-                    }
+                void M()
+                {
+                int [||]x;
+                {
+                x = 5;
+                Console.WriteLine(x);
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        {
-                            int x = 5;
-                            Console.WriteLine(x);
-                        }
-                    }
+                void M()
+                {
+                {
+                int x = 5;
+                Console.WriteLine(x);
+                }
+                }
                 }
                 """
             );
@@ -281,26 +281,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class C
                 {
-                    void M()
-                    {
-                        int [||]x = 0;
-                        {
-                            x = 5;
-                            Console.WriteLine(x);
-                        }
-                    }
+                void M()
+                {
+                int [||]x = 0;
+                {
+                x = 5;
+                Console.WriteLine(x);
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        {
-                            int x = 5;
-                            Console.WriteLine(x);
-                        }
-                    }
+                void M()
+                {
+                {
+                int x = 5;
+                Console.WriteLine(x);
+                }
+                }
                 }
                 """
             );
@@ -313,27 +313,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class C
                 {
-                    void M()
-                    {
-                        var [||]x = (short)0;
-                        {
-                            x = 5;
-                            Console.WriteLine(x);
-                        }
-                    }
+                void M()
+                {
+                var [||]x = (short)0;
+                {
+                x = 5;
+                Console.WriteLine(x);
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        {
-                            var x = (short)0;
-                            x = 5;
-                            Console.WriteLine(x);
-                        }
-                    }
+                void M()
+                {
+                {
+                var x = (short)0;
+                x = 5;
+                Console.WriteLine(x);
+                }
+                }
                 }
                 """
             );
@@ -346,11 +346,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class C
                 {
-                    void M()
-                    {
-                        int [||]x;
-                        Console.WriteLine(x);
-                    }
+                void M()
+                {
+                int [||]x;
+                Console.WriteLine(x);
+                }
                 }
                 """
             );
@@ -374,13 +374,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        object[] [||]x = {
-                            x = null
-                        };
-                        x.ToString();
-                    }
+                static void Main()
+                {
+                object[] [||]x = {
+                x = null
+                };
+                x.ToString();
+                }
                 }
                 """
             );
@@ -393,12 +393,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        int [||]i = 5;
-                        int j = 10;
-                        Console.WriteLine(i);
-                    }
+                static void Main()
+                {
+                int [||]i = 5;
+                int j = 10;
+                Console.WriteLine(i);
+                }
                 }
                 """
             );
@@ -423,12 +423,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class Program
                 {
-                    void M()
-                    {
-                        {
-                            object x;
-                            [|object|] }
-                    }
+                void M()
+                {
+                {
+                object x;
+                [|object|] }
+                }
                 }
                 """
             );
@@ -441,21 +441,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        int [||]i = 5; Console.WriteLine();
-                        Console.Write(i);
-                    }
+                static void Main(string[] args)
+                {
+                int [||]i = 5; Console.WriteLine();
+                Console.Write(i);
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        Console.WriteLine();
-                        int i = 5; Console.Write(i);
-                    }
+                static void Main(string[] args)
+                {
+                Console.WriteLine();
+                int i = 5; Console.Write(i);
+                }
                 }
                 """
             );
@@ -485,13 +485,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 #line default
                 class Program
                 {
-                    void Main()
-                    {
-                        int [|x|] = 0;
-                        Goo();
+                void Main()
+                {
+                int [|x|] = 0;
+                Goo();
                 #line hidden
-                        Bar(x);
-                    }
+                Bar(x);
+                }
                 #line default
                 }
                 """
@@ -506,15 +506,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 #line default
                 class Program
                 {
-                    void Main()
-                    {
-                        int [|x|] = 0;
-                        Goo();
+                void Main()
+                {
+                int [|x|] = 0;
+                Goo();
                 #line hidden
-                        Goo();
+                Goo();
                 #line default
-                        Bar(x);
-                    }
+                Bar(x);
+                }
                 }
                 """
             );
@@ -545,13 +545,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 #line default
                 class Program
                 {
-                    void Main()
-                    {
-                        int [||]x = 0;
-                        Goo();
-                        Bar(x);
+                void Main()
+                {
+                int [||]x = 0;
+                Goo();
+                Bar(x);
                 #line hidden
-                    }
+                }
                 #line default
                 }
                 """,
@@ -559,13 +559,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 #line default
                 class Program
                 {
-                    void Main()
-                    {
-                        Goo();
-                        int x = 0;
-                        Bar(x);
+                void Main()
+                {
+                Goo();
+                int x = 0;
+                Bar(x);
                 #line hidden
-                    }
+                }
                 #line default
                 }
                 """
@@ -580,32 +580,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 #line default
                 class Program
                 {
-                    void Main()
-                    {
-                        int [||]x = 0;
-                        Goo();
+                void Main()
+                {
+                int [||]x = 0;
+                Goo();
                 #line hidden
-                        Goo();
+                Goo();
                 #line default
-                        Goo();
-                        Bar(x);
-                    }
+                Goo();
+                Bar(x);
+                }
                 }
                 """,
                 """
                 #line default
                 class Program
                 {
-                    void Main()
-                    {
-                        Goo();
+                void Main()
+                {
+                Goo();
                 #line hidden
-                        Goo();
+                Goo();
                 #line default
-                        Goo();
-                        int x = 0;
-                        Bar(x);
-                    }
+                Goo();
+                int x = 0;
+                Bar(x);
+                }
                 }
                 """
             );
@@ -652,15 +652,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
 
                 class Program
                 {
-                    void Main()
-                    {
-                        var [||]@lock = new object();
-                        new[] { 1 }.AsParallel().ForAll((i) => {
-                            lock (@lock)
-                            {
-                            }
-                        });
-                    }
+                void Main()
+                {
+                var [||]@lock = new object();
+                new[] { 1 }.AsParallel().ForAll((i) => {
+                lock (@lock)
+                {
+                }
+                });
+                }
                 }
                 """,
                 """
@@ -668,16 +668,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
 
                 class Program
                 {
-                    void Main()
-                    {
-                        new[] { 1 }.AsParallel().ForAll((i) =>
-                        {
-                            {|Warning:var @lock = new object();|}
-                            lock (@lock)
-                            {
-                            }
-                        });
-                    }
+                void Main()
+                {
+                new[] { 1 }.AsParallel().ForAll((i) =>
+                {
+                {|Warning:var @lock = new object();|}
+                lock (@lock)
+                {
+                }
+                });
+                }
                 }
                 """
             );
@@ -692,9 +692,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
 
                 var [||]@lock = new object();
                 new[] { 1 }.AsParallel().ForAll((i) => {
-                    lock (@lock)
-                    {
-                    }
+                lock (@lock)
+                {
+                }
                 });
                 """,
                 """
@@ -703,10 +703,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 new[] { 1 }.AsParallel().ForAll((i) =>
                 {
 
-                    {|Warning:var @lock = new object();|}
-                    lock (@lock)
-                    {
-                    }
+                {|Warning:var @lock = new object();|}
+                lock (@lock)
+                {
+                }
                 });
                 """,
                 Options.Regular
@@ -723,15 +723,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
 
                 class Program
                 {
-                    void Main()
-                    {
-                        var [||]i = 0;
-                        foreach (var v in new[] { 1 })
-                        {
-                            Console.Write(i);
-                            i++;
-                        }
-                    }
+                void Main()
+                {
+                var [||]i = 0;
+                foreach (var v in new[] { 1 })
+                {
+                Console.Write(i);
+                i++;
+                }
+                }
                 }
                 """,
                 """
@@ -740,15 +740,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
 
                 class Program
                 {
-                    void Main()
-                    {
-                        foreach (var v in new[] { 1 })
-                        {
-                            {|Warning:var i = 0;|}
-                            Console.Write(i);
-                            i++;
-                        }
-                    }
+                void Main()
+                {
+                foreach (var v in new[] { 1 })
+                {
+                {|Warning:var i = 0;|}
+                Console.Write(i);
+                i++;
+                }
+                }
                 }
                 """
             );
@@ -765,8 +765,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 var [||]i = 0;
                 foreach (var v in new[] { 1 })
                 {
-                    Console.Write(i);
-                    i++;
+                Console.Write(i);
+                i++;
                 }
                 """,
                 """
@@ -776,9 +776,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 foreach (var v in new[] { 1 })
                 {
 
-                    {|Warning:var i = 0;|}
-                    Console.Write(i);
-                    i++;
+                {|Warning:var i = 0;|}
+                Console.Write(i);
+                i++;
                 }
                 """,
                 Options.Regular
@@ -795,15 +795,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
 
                 class Program
                 {
-                    void Main()
-                    {
-                        var [||]i = 0;
-                        void LocalFunction()
-                        {
-                            Console.Write(i);
-                            i++;
-                        }
-                    }
+                void Main()
+                {
+                var [||]i = 0;
+                void LocalFunction()
+                {
+                Console.Write(i);
+                i++;
+                }
+                }
                 }
                 """,
                 """
@@ -812,15 +812,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
 
                 class Program
                 {
-                    void Main()
-                    {
-                        void LocalFunction()
-                        {
-                            {|Warning:var i = 0;|}
-                            Console.Write(i);
-                            i++;
-                        }
-                    }
+                void Main()
+                {
+                void LocalFunction()
+                {
+                {|Warning:var i = 0;|}
+                Console.Write(i);
+                i++;
+                }
+                }
                 }
                 """
             );
@@ -837,8 +837,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 var [||]i = 0;
                 void LocalFunction()
                 {
-                    Console.Write(i);
-                    i++;
+                Console.Write(i);
+                i++;
                 }
                 """,
                 """
@@ -848,9 +848,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 void LocalFunction()
                 {
 
-                    {|Warning:var i = 0;|}
-                    Console.Write(i);
-                    i++;
+                {|Warning:var i = 0;|}
+                Console.Write(i);
+                i++;
                 }
                 """,
                 Options.Regular
@@ -866,20 +866,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
 
                 static class C
                 {
-                    static int Outer(Action<int> x, object y) { return 1; }
-                    static int Outer(Action<string> x, string y) { return 2; }
+                static int Outer(Action<int> x, object y) { return 1; }
+                static int Outer(Action<string> x, string y) { return 2; }
 
-                    static void Inner(int x, int[] y) { }
-                    unsafe static void Inner(string x, int*[] y) { }
+                static void Inner(int x, int[] y) { }
+                unsafe static void Inner(string x, int*[] y) { }
 
-                    static void Main()
-                    {
-                        var [||]a = Outer(x => Inner(x, null), null);
-                        unsafe
-                        {
-                            Console.WriteLine(a);
-                        }
-                    }
+                static void Main()
+                {
+                var [||]a = Outer(x => Inner(x, null), null);
+                unsafe
+                {
+                Console.WriteLine(a);
+                }
+                }
                 }
                 """,
                 """
@@ -887,20 +887,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
 
                 static class C
                 {
-                    static int Outer(Action<int> x, object y) { return 1; }
-                    static int Outer(Action<string> x, string y) { return 2; }
+                static int Outer(Action<int> x, object y) { return 1; }
+                static int Outer(Action<string> x, string y) { return 2; }
 
-                    static void Inner(int x, int[] y) { }
-                    unsafe static void Inner(string x, int*[] y) { }
+                static void Inner(int x, int[] y) { }
+                unsafe static void Inner(string x, int*[] y) { }
 
-                    static void Main()
-                    {
-                        unsafe
-                        {
-                            var a = Outer(x => Inner(x, null), (object)null);
-                            Console.WriteLine(a);
-                        }
-                    }
+                static void Main()
+                {
+                unsafe
+                {
+                var a = Outer(x => Inner(x, null), (object)null);
+                Console.WriteLine(a);
+                }
+                }
                 }
                 """
             );
@@ -915,18 +915,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
 
                 class X
                 {
-                    static int Goo(Func<int?, byte> x, object y) { return 1; }
-                    static int Goo(Func<X, byte> x, string y) { return 2; }
+                static int Goo(Func<int?, byte> x, object y) { return 1; }
+                static int Goo(Func<X, byte> x, string y) { return 2; }
 
-                    const int Value = 1000;
-                    static void Main()
-                    {
-                        var [||]a = Goo(X => (byte)X.Value, null);
-                        unchecked
-                        {
-                            Console.WriteLine(a);
-                        }
-                    }
+                const int Value = 1000;
+                static void Main()
+                {
+                var [||]a = Goo(X => (byte)X.Value, null);
+                unchecked
+                {
+                Console.WriteLine(a);
+                }
+                }
                 }
                 """,
                 """
@@ -934,18 +934,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
 
                 class X
                 {
-                    static int Goo(Func<int?, byte> x, object y) { return 1; }
-                    static int Goo(Func<X, byte> x, string y) { return 2; }
+                static int Goo(Func<int?, byte> x, object y) { return 1; }
+                static int Goo(Func<X, byte> x, string y) { return 2; }
 
-                    const int Value = 1000;
-                    static void Main()
-                    {
-                        unchecked
-                        {
-                            {|Warning:var a = Goo(X => (byte)X.Value, (object)null);|}
-                            Console.WriteLine(a);
-                        }
-                    }
+                const int Value = 1000;
+                static void Main()
+                {
+                unchecked
+                {
+                {|Warning:var a = Goo(X => (byte)X.Value, (object)null);|}
+                Console.WriteLine(a);
+                }
+                }
                 }
                 """
             );
@@ -962,19 +962,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
 
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        // Comment [||]about goo!
-                        // Comment about goo!
-                        // Comment about goo!
-                        // Comment about goo!
-                        // Comment about goo!
-                        // Comment about goo!
-                        // Comment about goo!
-                        int goo;
-                        Console.WriteLine();
-                        Console.WriteLine(goo);
-                    }
+                static void Main(string[] args)
+                {
+                // Comment [||]about goo!
+                // Comment about goo!
+                // Comment about goo!
+                // Comment about goo!
+                // Comment about goo!
+                // Comment about goo!
+                // Comment about goo!
+                int goo;
+                Console.WriteLine();
+                Console.WriteLine(goo);
+                }
                 }
                 """
             );
@@ -987,25 +987,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class C
                 {
-                    void M()
-                    {
-                        (int, string) [||]x;
-                        {
-                            Console.WriteLine(x);
-                        }
-                    }
+                void M()
+                {
+                (int, string) [||]x;
+                {
+                Console.WriteLine(x);
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        {
-                            (int, string) x;
-                            Console.WriteLine(x);
-                        }
-                    }
+                void M()
+                {
+                {
+                (int, string) x;
+                Console.WriteLine(x);
+                }
+                }
                 }
                 """
             );
@@ -1018,25 +1018,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class C
                 {
-                    void M()
-                    {
-                        (int a, string b) [||]x;
-                        {
-                            Console.WriteLine(x);
-                        }
-                    }
+                void M()
+                {
+                (int a, string b) [||]x;
+                {
+                Console.WriteLine(x);
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        {
-                            (int a, string b) x;
-                            Console.WriteLine(x);
-                        }
-                    }
+                void M()
+                {
+                {
+                (int a, string b) x;
+                Console.WriteLine(x);
+                }
+                }
                 }
                 """
             );
@@ -1049,27 +1049,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
+                static void Main(string[] args)
+                {
+                // leading trivia
+                int [||]i = 5;
+                Console.WriteLine();
 
-                        Console.Write(i);
-                    }
+                Console.Write(i);
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        Console.WriteLine();
+                static void Main(string[] args)
+                {
+                Console.WriteLine();
 
-                        // leading trivia
-                        int i = 5;
-                        Console.Write(i);
-                    }
+                // leading trivia
+                int i = 5;
+                Console.Write(i);
+                }
                 }
                 """
             );
@@ -1082,31 +1082,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
+                static void Main(string[] args)
+                {
+                // leading trivia
+                int [||]i = 5;
+                Console.WriteLine();
 
-                        {
-                            Console.Write(i);
-                        }
-                    }
+                {
+                Console.Write(i);
+                }
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        Console.WriteLine();
+                static void Main(string[] args)
+                {
+                Console.WriteLine();
 
-                        {
-                            // leading trivia
-                            int i = 5;
-                            Console.Write(i);
-                        }
-                    }
+                {
+                // leading trivia
+                int i = 5;
+                Console.Write(i);
+                }
+                }
                 }
                 """
             );
@@ -1119,29 +1119,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
+                static void Main(string[] args)
+                {
+                // leading trivia
+                int [||]i = 5;
+                Console.WriteLine();
 
-                        // Existing trivia
-                        Console.Write(i);
-                    }
+                // Existing trivia
+                Console.Write(i);
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        Console.WriteLine();
+                static void Main(string[] args)
+                {
+                Console.WriteLine();
 
-                        // leading trivia
-                        int i = 5;
-                        // Existing trivia
-                        Console.Write(i);
-                    }
+                // leading trivia
+                int i = 5;
+                // Existing trivia
+                Console.Write(i);
+                }
                 }
                 """
             );
@@ -1154,33 +1154,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
+                static void Main(string[] args)
+                {
+                // leading trivia
+                int [||]i = 5;
+                Console.WriteLine();
 
-                        {
-                            // Existing trivia
-                            Console.Write(i);
-                        }
-                    }
+                {
+                // Existing trivia
+                Console.Write(i);
+                }
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        Console.WriteLine();
+                static void Main(string[] args)
+                {
+                Console.WriteLine();
 
-                        {
-                            // leading trivia
-                            int i = 5;
-                            // Existing trivia
-                            Console.Write(i);
-                        }
-                    }
+                {
+                // leading trivia
+                int i = 5;
+                // Existing trivia
+                Console.Write(i);
+                }
+                }
                 }
                 """
             );
@@ -1193,36 +1193,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        if (false)
-                        {
-                        }
+                static void Main(string[] args)
+                {
+                if (false)
+                {
+                }
 
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
+                // leading trivia
+                int [||]i = 5;
+                Console.WriteLine();
 
-                        i = 0;
-                        Console.Write(i);
-                    }
+                i = 0;
+                Console.Write(i);
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        if (false)
-                        {
-                        }
+                static void Main(string[] args)
+                {
+                if (false)
+                {
+                }
 
-                        Console.WriteLine();
+                Console.WriteLine();
 
-                        // leading trivia
-                        int i = 0;
-                        Console.Write(i);
-                    }
+                // leading trivia
+                int i = 0;
+                Console.Write(i);
+                }
                 }
                 """
             );
@@ -1235,40 +1235,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        if (false)
-                        {
-                        }
+                static void Main(string[] args)
+                {
+                if (false)
+                {
+                }
 
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
+                // leading trivia
+                int [||]i = 5;
+                Console.WriteLine();
 
-                        {
-                            i = 0;
-                            Console.Write(i);
-                        }
-                    }
+                {
+                i = 0;
+                Console.Write(i);
+                }
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        if (false)
-                        {
-                        }
+                static void Main(string[] args)
+                {
+                if (false)
+                {
+                }
 
-                        Console.WriteLine();
+                Console.WriteLine();
 
-                        {
-                            // leading trivia
-                            int i = 0;
-                            Console.Write(i);
-                        }
-                    }
+                {
+                // leading trivia
+                int i = 0;
+                Console.Write(i);
+                }
+                }
                 }
                 """
             );
@@ -1281,38 +1281,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        if (false)
-                        {
-                        }
+                static void Main(string[] args)
+                {
+                if (false)
+                {
+                }
 
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
+                // leading trivia
+                int [||]i = 5;
+                Console.WriteLine();
 
-                        // Existing trivia
-                        i = 0;
-                        Console.Write(i);
-                    }
+                // Existing trivia
+                i = 0;
+                Console.Write(i);
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        if (false)
-                        {
-                        }
+                static void Main(string[] args)
+                {
+                if (false)
+                {
+                }
 
-                        Console.WriteLine();
+                Console.WriteLine();
 
-                        // leading trivia
-                        // Existing trivia
-                        int i = 0;
-                        Console.Write(i);
-                    }
+                // leading trivia
+                // Existing trivia
+                int i = 0;
+                Console.Write(i);
+                }
                 }
                 """
             );
@@ -1325,42 +1325,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        if (false)
-                        {
-                        }
+                static void Main(string[] args)
+                {
+                if (false)
+                {
+                }
 
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
+                // leading trivia
+                int [||]i = 5;
+                Console.WriteLine();
 
-                        {
-                            // Existing trivia
-                            i = 0;
-                            Console.Write(i);
-                        }
-                    }
+                {
+                // Existing trivia
+                i = 0;
+                Console.Write(i);
+                }
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        if (false)
-                        {
-                        }
+                static void Main(string[] args)
+                {
+                if (false)
+                {
+                }
 
-                        Console.WriteLine();
+                Console.WriteLine();
 
-                        {
-                            // leading trivia
-                            // Existing trivia
-                            int i = 0;
-                            Console.Write(i);
-                        }
-                    }
+                {
+                // leading trivia
+                // Existing trivia
+                int i = 0;
+                Console.Write(i);
+                }
+                }
                 }
                 """
             );
@@ -1373,28 +1373,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
+                static void Main(string[] args)
+                {
+                // leading trivia
+                int [||]i = 5;
+                Console.WriteLine();
 
-                        i = 0;
-                        Console.Write(i);
-                    }
+                i = 0;
+                Console.Write(i);
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        Console.WriteLine();
+                static void Main(string[] args)
+                {
+                Console.WriteLine();
 
-                        // leading trivia
-                        int i = 0;
-                        Console.Write(i);
-                    }
+                // leading trivia
+                int i = 0;
+                Console.Write(i);
+                }
                 }
                 """
             );
@@ -1407,32 +1407,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
+                static void Main(string[] args)
+                {
+                // leading trivia
+                int [||]i = 5;
+                Console.WriteLine();
 
-                        {
-                            i = 0;
-                            Console.Write(i);
-                        }
-                    }
+                {
+                i = 0;
+                Console.Write(i);
+                }
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        Console.WriteLine();
+                static void Main(string[] args)
+                {
+                Console.WriteLine();
 
-                        {
-                            // leading trivia
-                            int i = 0;
-                            Console.Write(i);
-                        }
-                    }
+                {
+                // leading trivia
+                int i = 0;
+                Console.Write(i);
+                }
+                }
                 }
                 """
             );
@@ -1445,30 +1445,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
+                static void Main(string[] args)
+                {
+                // leading trivia
+                int [||]i = 5;
+                Console.WriteLine();
 
-                        // Existing trivia
-                        i = 0;
-                        Console.Write(i);
-                    }
+                // Existing trivia
+                i = 0;
+                Console.Write(i);
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        Console.WriteLine();
+                static void Main(string[] args)
+                {
+                Console.WriteLine();
 
-                        // leading trivia
-                        // Existing trivia
-                        int i = 0;
-                        Console.Write(i);
-                    }
+                // leading trivia
+                // Existing trivia
+                int i = 0;
+                Console.Write(i);
+                }
                 }
                 """
             );
@@ -1481,34 +1481,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
+                static void Main(string[] args)
+                {
+                // leading trivia
+                int [||]i = 5;
+                Console.WriteLine();
 
-                        {
-                            // Existing trivia
-                            i = 0;
-                            Console.Write(i);
-                        }
-                    }
+                {
+                // Existing trivia
+                i = 0;
+                Console.Write(i);
+                }
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        Console.WriteLine();
+                static void Main(string[] args)
+                {
+                Console.WriteLine();
 
-                        {
-                            // leading trivia
-                            // Existing trivia
-                            int i = 0;
-                            Console.Write(i);
-                        }
-                    }
+                {
+                // leading trivia
+                // Existing trivia
+                int i = 0;
+                Console.Write(i);
+                }
+                }
                 }
                 """
             );
@@ -1521,36 +1521,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        if (true)
-                        {
-                        }
+                static void Main(string[] args)
+                {
+                if (true)
+                {
+                }
 
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
+                // leading trivia
+                int [||]i = 5;
+                Console.WriteLine();
 
-                        i = 0;
-                        Console.Write(i);
-                    }
+                i = 0;
+                Console.Write(i);
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        if (true)
-                        {
-                        }
+                static void Main(string[] args)
+                {
+                if (true)
+                {
+                }
 
-                        Console.WriteLine();
+                Console.WriteLine();
 
-                        // leading trivia
-                        int i = 0;
-                        Console.Write(i);
-                    }
+                // leading trivia
+                int i = 0;
+                Console.Write(i);
+                }
                 }
                 """
             );
@@ -1563,40 +1563,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        if (true)
-                        {
-                        }
+                static void Main(string[] args)
+                {
+                if (true)
+                {
+                }
 
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
+                // leading trivia
+                int [||]i = 5;
+                Console.WriteLine();
 
-                        {
-                            i = 0;
-                            Console.Write(i);
-                        }
-                    }
+                {
+                i = 0;
+                Console.Write(i);
+                }
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        if (true)
-                        {
-                        }
+                static void Main(string[] args)
+                {
+                if (true)
+                {
+                }
 
-                        Console.WriteLine();
+                Console.WriteLine();
 
-                        {
-                            // leading trivia
-                            int i = 0;
-                            Console.Write(i);
-                        }
-                    }
+                {
+                // leading trivia
+                int i = 0;
+                Console.Write(i);
+                }
+                }
                 }
                 """
             );
@@ -1609,38 +1609,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        if (true)
-                        {
-                        }
+                static void Main(string[] args)
+                {
+                if (true)
+                {
+                }
 
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
+                // leading trivia
+                int [||]i = 5;
+                Console.WriteLine();
 
-                        // Existing trivia
-                        i = 0;
-                        Console.Write(i);
-                    }
+                // Existing trivia
+                i = 0;
+                Console.Write(i);
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        if (true)
-                        {
-                        }
+                static void Main(string[] args)
+                {
+                if (true)
+                {
+                }
 
-                        Console.WriteLine();
+                Console.WriteLine();
 
-                        // leading trivia
-                        // Existing trivia
-                        int i = 0;
-                        Console.Write(i);
-                    }
+                // leading trivia
+                // Existing trivia
+                int i = 0;
+                Console.Write(i);
+                }
                 }
                 """
             );
@@ -1686,42 +1686,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        if (true)
-                        {
-                        }
+                static void Main(string[] args)
+                {
+                if (true)
+                {
+                }
 
-                        // leading trivia
-                        int [||]i = 5;
-                        Console.WriteLine();
+                // leading trivia
+                int [||]i = 5;
+                Console.WriteLine();
 
-                        {
-                            // Existing trivia
-                            i = 0;
-                            Console.Write(i);
-                        }
-                    }
+                {
+                // Existing trivia
+                i = 0;
+                Console.Write(i);
+                }
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        if (true)
-                        {
-                        }
+                static void Main(string[] args)
+                {
+                if (true)
+                {
+                }
 
-                        Console.WriteLine();
+                Console.WriteLine();
 
-                        {
-                            // leading trivia
-                            // Existing trivia
-                            int i = 0;
-                            Console.Write(i);
-                        }
-                    }
+                {
+                // leading trivia
+                // Existing trivia
+                int i = 0;
+                Console.Write(i);
+                }
+                }
                 }
                 """
             );
@@ -1741,9 +1741,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 Console.WriteLine();
 
                 {
-                    // Existing trivia
-                    i = 0;
-                    Console.Write(i);
+                // Existing trivia
+                i = 0;
+                Console.Write(i);
                 }
                 """,
                 """
@@ -1754,10 +1754,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 Console.WriteLine();
 
                 {
-                    // leading trivia
-                    // Existing trivia
-                    int i = 0;
-                    Console.Write(i);
+                // leading trivia
+                // Existing trivia
+                int i = 0;
+                Console.Write(i);
                 }
                 """,
                 Options.Regular
@@ -1773,23 +1773,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
 
                 class Program
                 {
-                  static void Main(string[] args)
-                  {
-                    Method<string>();
-                  }
+                static void Main(string[] args)
+                {
+                Method<string>();
+                }
 
-                  public static void Method<T>()
-                  { 
-                    [|T t|];
-                    void Local<T>()
-                    {
-                      Out(out t);
-                      Console.WriteLine(t);
-                    }
-                    Local<int>();
-                  }
+                public static void Method<T>()
+                {
+                [|T t|];
+                void Local<T>()
+                {
+                Out(out t);
+                Console.WriteLine(t);
+                }
+                Local<int>();
+                }
 
-                  public static void Out<T>(out T t) => t = default;
+                public static void Out<T>(out T t) => t = default;
                 }
                 """
             );
@@ -1804,26 +1804,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
 
                 class Program
                 {
-                  static void Main(string[] args)
-                  {
-                    Method<string>();
-                  }
+                static void Main(string[] args)
+                {
+                Method<string>();
+                }
 
-                  public static void Method<T>()
-                  { 
-                    void Local<T>()
-                    {
-                        [|T t|];
-                        void InnerLocal<T>()
-                        {
-                          Out(out t);
-                          Console.WriteLine(t);
-                        }
-                    }
-                    Local<int>();
-                  }
+                public static void Method<T>()
+                {
+                void Local<T>()
+                {
+                [|T t|];
+                void InnerLocal<T>()
+                {
+                Out(out t);
+                Console.WriteLine(t);
+                }
+                }
+                Local<int>();
+                }
 
-                  public static void Out<T>(out T t) => t = default;
+                public static void Out<T>(out T t) => t = default;
                 }
                 """
             );
@@ -1838,25 +1838,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
 
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        Method<string>();
-                    }
+                static void Main(string[] args)
+                {
+                Method<string>();
+                }
 
-                    public static void Method<T>()
-                    { 
-                        [|T t|];
-                        void Local<T>()
-                        {
-                            { // <-- note this set of added braces
-                                Out(out t);
-                                Console.WriteLine(t);
-                            }
-                        }
-                        Local<int>();
-                    }
+                public static void Method<T>()
+                {
+                [|T t|];
+                void Local<T>()
+                {
+                { // <-- note this set of added braces
+                Out(out t);
+                Console.WriteLine(t);
+                }
+                }
+                Local<int>();
+                }
 
-                    public static void Out<T>(out T t) => t = default;
+                public static void Out<T>(out T t) => t = default;
                 }
                 """
             );
@@ -1871,27 +1871,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
 
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        Method<string>();
-                    }
+                static void Main(string[] args)
+                {
+                Method<string>();
+                }
 
-                    public static void Method<T>()
-                    {
-                        { // <-- note this set of added braces
-                            [|T t|];
-                            void Local<T>()
-                            {
-                                { // <-- and my axe
-                                    Out(out t);
-                                    Console.WriteLine(t);
-                                }
-                            }
-                            Local<int>();
-                        }
-                    }
+                public static void Method<T>()
+                {
+                { // <-- note this set of added braces
+                [|T t|];
+                void Local<T>()
+                {
+                { // <-- and my axe
+                Out(out t);
+                Console.WriteLine(t);
+                }
+                }
+                Local<int>();
+                }
+                }
 
-                    public static void Out<T>(out T t) => t = default;
+                public static void Out<T>(out T t) => t = default;
                 }
                 """
             );
@@ -1904,33 +1904,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class C
                 {
-                    void M()
-                    {
-                        switch (true)
-                        {
-                            case true:
-                                int [||]x = 0;
-                                System.Console.WriteLine();
-                                System.Console.WriteLine(x);
-                                break;
-                        }
-                    }
+                void M()
+                {
+                switch (true)
+                {
+                case true:
+                int [||]x = 0;
+                System.Console.WriteLine();
+                System.Console.WriteLine(x);
+                break;
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        switch (true)
-                        {
-                            case true:
-                                System.Console.WriteLine();
-                                int x = 0;
-                                System.Console.WriteLine(x);
-                                break;
-                        }
-                    }
+                void M()
+                {
+                switch (true)
+                {
+                case true:
+                System.Console.WriteLine();
+                int x = 0;
+                System.Console.WriteLine(x);
+                break;
+                }
+                }
                 }
                 """
             );
@@ -1943,30 +1943,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class C
                 {
-                    void M()
-                    {
-                        int [||]x;
-                        switch (true)
-                        {
-                            case true:
-                                x = 0;
-                                break;
-                        }
-                    }
+                void M()
+                {
+                int [||]x;
+                switch (true)
+                {
+                case true:
+                x = 0;
+                break;
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        switch (true)
-                        {
-                            case true:
-                                int x = 0;
-                                break;
-                        }
-                    }
+                void M()
+                {
+                switch (true)
+                {
+                case true:
+                int x = 0;
+                break;
+                }
+                }
                 }
                 """
             );
@@ -1980,17 +1980,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 int [||]x;
                 switch (true)
                 {
-                    case true:
-                        x = 0;
-                        break;
+                case true:
+                x = 0;
+                break;
                 }
                 """,
                 """
                 switch (true)
                 {
-                    case true:
-                        int x = 0;
-                        break;
+                case true:
+                int x = 0;
+                break;
                 }
                 """,
                 Options.Regular
@@ -2004,39 +2004,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class C
                 {
-                    void M()
-                    {
-                        int [||]x;
-                        System.Console.WriteLine();
-                        switch (true)
-                        {
-                            case true:
-                                x = 0;
-                                break;
-                            case false:
-                                x = 0;
-                                break;
-                        }
-                    }
+                void M()
+                {
+                int [||]x;
+                System.Console.WriteLine();
+                switch (true)
+                {
+                case true:
+                x = 0;
+                break;
+                case false:
+                x = 0;
+                break;
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        System.Console.WriteLine();
-                        int x;
-                        switch (true)
-                        {
-                            case true:
-                                x = 0;
-                                break;
-                            case false:
-                                x = 0;
-                                break;
-                        }
-                    }
+                void M()
+                {
+                System.Console.WriteLine();
+                int x;
+                switch (true)
+                {
+                case true:
+                x = 0;
+                break;
+                case false:
+                x = 0;
+                break;
+                }
+                }
                 }
                 """
             );
@@ -2051,12 +2051,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 System.Console.WriteLine();
                 switch (true)
                 {
-                    case true:
-                        x = 0;
-                        break;
-                    case false:
-                        x = 0;
-                        break;
+                case true:
+                x = 0;
+                break;
+                case false:
+                x = 0;
+                break;
                 }
                 """,
                 """
@@ -2064,12 +2064,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 int x;
                 switch (true)
                 {
-                    case true:
-                        x = 0;
-                        break;
-                    case false:
-                        x = 0;
-                        break;
+                case true:
+                x = 0;
+                break;
+                case false:
+                x = 0;
+                break;
                 }
                 """,
                 Options.Regular
@@ -2083,19 +2083,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 """
                 class C
                 {
-                    void M()
-                    {
-                        int [||]x;
-                        switch (true)
-                        {
-                            case true:
-                                x = 0;
-                                break;
-                            case false:
-                                x = 0;
-                                break;
-                        }
-                    }
+                void M()
+                {
+                int [||]x;
+                switch (true)
+                {
+                case true:
+                x = 0;
+                break;
+                case false:
+                x = 0;
+                break;
+                }
+                }
                 }
                 """
             );
@@ -2109,12 +2109,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
                 int [||]x;
                 switch (true)
                 {
-                    case true:
-                        x = 0;
-                        break;
-                    case false:
-                        x = 0;
-                        break;
+                case true:
+                x = 0;
+                break;
+                case false:
+                x = 0;
+                break;
                 }
                 """
             );

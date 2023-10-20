@@ -48,10 +48,10 @@ public class SqliteUpdateSqlGeneratorTest : UpdateSqlGeneratorTestBase
     ) =>
         AssertBaseline(
             """
-INSERT INTO "Ducks" ("Name", "Quacks", "ConcurrencyToken")
-VALUES (@p0, @p1, @p2)
-RETURNING "Id", "Computed";
-""",
+            INSERT INTO "Ducks" ("Name", "Quacks", "ConcurrencyToken")
+            VALUES (@p0, @p1, @p2)
+            RETURNING "Id", "Computed";
+            """,
             stringBuilder.ToString()
         );
 
@@ -60,10 +60,10 @@ RETURNING "Id", "Computed";
     ) =>
         AssertBaseline(
             """
-INSERT INTO "Ducks" ("Id", "Name", "Quacks", "ConcurrencyToken")
-VALUES (@p0, @p1, @p2, @p3)
-RETURNING "Computed";
-""",
+            INSERT INTO "Ducks" ("Id", "Name", "Quacks", "ConcurrencyToken")
+            VALUES (@p0, @p1, @p2, @p3)
+            RETURNING "Computed";
+            """,
             stringBuilder.ToString()
         );
 
@@ -72,10 +72,10 @@ RETURNING "Computed";
     ) =>
         AssertBaseline(
             """
-INSERT INTO "Ducks" ("Name", "Quacks", "ConcurrencyToken")
-VALUES (@p0, @p1, @p2)
-RETURNING "Id";
-""",
+            INSERT INTO "Ducks" ("Name", "Quacks", "ConcurrencyToken")
+            VALUES (@p0, @p1, @p2)
+            RETURNING "Id";
+            """,
             stringBuilder.ToString()
         );
 
@@ -84,10 +84,10 @@ RETURNING "Id";
     ) =>
         AssertBaseline(
             """
-INSERT INTO "Ducks"
-DEFAULT VALUES
-RETURNING "Id", "Computed";
-""",
+            INSERT INTO "Ducks"
+            DEFAULT VALUES
+            RETURNING "Id", "Computed";
+            """,
             stringBuilder.ToString()
         );
 
@@ -96,10 +96,10 @@ RETURNING "Id", "Computed";
     ) =>
         AssertBaseline(
             """
-INSERT INTO "Ducks"
-DEFAULT VALUES
-RETURNING "Id";
-""",
+            INSERT INTO "Ducks"
+            DEFAULT VALUES
+            RETURNING "Id";
+            """,
             stringBuilder.ToString()
         );
 
@@ -108,10 +108,10 @@ RETURNING "Id";
     ) =>
         AssertBaseline(
             """
-UPDATE "Ducks" SET "Name" = @p0, "Quacks" = @p1, "ConcurrencyToken" = @p2
-WHERE "Id" = @p3
-RETURNING "Computed";
-""",
+            UPDATE "Ducks" SET "Name" = @p0, "Quacks" = @p1, "ConcurrencyToken" = @p2
+            WHERE "Id" = @p3
+            RETURNING "Computed";
+            """,
             stringBuilder.ToString()
         );
 
@@ -120,10 +120,10 @@ RETURNING "Computed";
     ) =>
         AssertBaseline(
             """
-UPDATE "Ducks" SET "Name" = @p0, "Quacks" = @p1, "ConcurrencyToken" = @p2
-WHERE "Id" = @p3 AND "ConcurrencyToken" IS NULL
-RETURNING "Computed";
-""",
+            UPDATE "Ducks" SET "Name" = @p0, "Quacks" = @p1, "ConcurrencyToken" = @p2
+            WHERE "Id" = @p3 AND "ConcurrencyToken" IS NULL
+            RETURNING "Computed";
+            """,
             stringBuilder.ToString()
         );
 
@@ -132,10 +132,10 @@ RETURNING "Computed";
     ) =>
         AssertBaseline(
             """
-UPDATE "Ducks" SET "Name" = @p0, "Quacks" = @p1, "ConcurrencyToken" = @p2
-WHERE "Id" = @p3
-RETURNING 1;
-""",
+            UPDATE "Ducks" SET "Name" = @p0, "Quacks" = @p1, "ConcurrencyToken" = @p2
+            WHERE "Id" = @p3
+            RETURNING 1;
+            """,
             stringBuilder.ToString()
         );
 
@@ -144,10 +144,10 @@ RETURNING 1;
     ) =>
         AssertBaseline(
             """
-UPDATE "Ducks" SET "Name" = @p0, "Quacks" = @p1, "ConcurrencyToken" = @p2
-WHERE "Id" = @p3 AND "ConcurrencyToken" IS NULL
-RETURNING 1;
-""",
+            UPDATE "Ducks" SET "Name" = @p0, "Quacks" = @p1, "ConcurrencyToken" = @p2
+            WHERE "Id" = @p3 AND "ConcurrencyToken" IS NULL
+            RETURNING 1;
+            """,
             stringBuilder.ToString()
         );
 
@@ -156,10 +156,10 @@ RETURNING 1;
     ) =>
         AssertBaseline(
             """
-DELETE FROM "Ducks"
-WHERE "Id" = @p0
-RETURNING 1;
-""",
+            DELETE FROM "Ducks"
+            WHERE "Id" = @p0
+            RETURNING 1;
+            """,
             stringBuilder.ToString()
         );
 
@@ -168,10 +168,10 @@ RETURNING 1;
     ) =>
         AssertBaseline(
             """
-DELETE FROM "Ducks"
-WHERE "Id" = @p0 AND "ConcurrencyToken" IS NULL
-RETURNING 1;
-""",
+            DELETE FROM "Ducks"
+            WHERE "Id" = @p0 AND "ConcurrencyToken" IS NULL
+            RETURNING 1;
+            """,
             stringBuilder.ToString()
         );
 

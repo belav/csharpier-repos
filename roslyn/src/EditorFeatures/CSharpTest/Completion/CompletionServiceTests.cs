@@ -196,19 +196,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion
         public async Task GettingCompletionListPerformSort(bool performSort)
         {
             var sourceMarkup = """
-                using System;
+            using System;
 
-                namespace N
-                {
-                    public class C
-                    {
-                        void M()
-                        {
-                            $$
-                        }
-                    }
-                }
-                """;
+            namespace N
+            {
+            public class C
+            {
+            void M()
+            {
+            $$
+            }
+            }
+            }
+            """;
             MarkupTestFile.GetPosition(
                 sourceMarkup.NormalizeLineEndings(),
                 out var source,
@@ -243,16 +243,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion
         public async Task GettingCompletionListShouldNotRunSourceGenerator(bool forkBeforeFreeze)
         {
             var sourceMarkup = """
-                using System;
+            using System;
 
-                namespace N
-                {
-                    public class C1
-                    {
-                        $$
-                    }
-                }
-                """;
+            namespace N
+            {
+            public class C1
+            {
+            $$
+            }
+            }
+            """;
             MarkupTestFile.GetPosition(
                 sourceMarkup.NormalizeLineEndings(),
                 out var source,

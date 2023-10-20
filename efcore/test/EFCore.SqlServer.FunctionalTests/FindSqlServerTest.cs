@@ -48,12 +48,12 @@ public abstract class FindSqlServerTest : FindTestBase<FindSqlServerTest.FindSql
 
         AssertSql(
             """
-@__p_0='77'
+            @__p_0='77'
 
-SELECT TOP(1) [i].[Id], [i].[Foo]
-FROM [IntKey] AS [i]
-WHERE [i].[Id] = @__p_0
-"""
+            SELECT TOP(1) [i].[Id], [i].[Foo]
+            FROM [IntKey] AS [i]
+            WHERE [i].[Id] = @__p_0
+            """
         );
     }
 
@@ -63,12 +63,12 @@ WHERE [i].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='99'
+            @__p_0='99'
 
-SELECT TOP(1) [i].[Id], [i].[Foo]
-FROM [IntKey] AS [i]
-WHERE [i].[Id] = @__p_0
-"""
+            SELECT TOP(1) [i].[Id], [i].[Foo]
+            FROM [IntKey] AS [i]
+            WHERE [i].[Id] = @__p_0
+            """
         );
     }
 
@@ -85,12 +85,12 @@ WHERE [i].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='77'
+            @__p_0='77'
 
-SELECT TOP(1) [i].[Id], [i].[Foo]
-FROM [IntKey] AS [i]
-WHERE [i].[Id] = @__p_0
-"""
+            SELECT TOP(1) [i].[Id], [i].[Foo]
+            FROM [IntKey] AS [i]
+            WHERE [i].[Id] = @__p_0
+            """
         );
     }
 
@@ -100,12 +100,12 @@ WHERE [i].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='99'
+            @__p_0='99'
 
-SELECT TOP(1) [i].[Id], [i].[Foo]
-FROM [IntKey] AS [i]
-WHERE [i].[Id] = @__p_0
-"""
+            SELECT TOP(1) [i].[Id], [i].[Foo]
+            FROM [IntKey] AS [i]
+            WHERE [i].[Id] = @__p_0
+            """
         );
     }
 
@@ -122,12 +122,12 @@ WHERE [i].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='Cat' (Size = 450)
+            @__p_0='Cat' (Size = 450)
 
-SELECT TOP(1) [s].[Id], [s].[Foo]
-FROM [StringKey] AS [s]
-WHERE [s].[Id] = @__p_0
-"""
+            SELECT TOP(1) [s].[Id], [s].[Foo]
+            FROM [StringKey] AS [s]
+            WHERE [s].[Id] = @__p_0
+            """
         );
     }
 
@@ -137,12 +137,12 @@ WHERE [s].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='Fox' (Size = 450)
+            @__p_0='Fox' (Size = 450)
 
-SELECT TOP(1) [s].[Id], [s].[Foo]
-FROM [StringKey] AS [s]
-WHERE [s].[Id] = @__p_0
-"""
+            SELECT TOP(1) [s].[Id], [s].[Foo]
+            FROM [StringKey] AS [s]
+            WHERE [s].[Id] = @__p_0
+            """
         );
     }
 
@@ -159,13 +159,13 @@ WHERE [s].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='77'
-@__p_1='Dog' (Size = 450)
+            @__p_0='77'
+            @__p_1='Dog' (Size = 450)
 
-SELECT TOP(1) [c].[Id1], [c].[Id2], [c].[Foo]
-FROM [CompositeKey] AS [c]
-WHERE [c].[Id1] = @__p_0 AND [c].[Id2] = @__p_1
-"""
+            SELECT TOP(1) [c].[Id1], [c].[Id2], [c].[Foo]
+            FROM [CompositeKey] AS [c]
+            WHERE [c].[Id1] = @__p_0 AND [c].[Id2] = @__p_1
+            """
         );
     }
 
@@ -175,13 +175,13 @@ WHERE [c].[Id1] = @__p_0 AND [c].[Id2] = @__p_1
 
         AssertSql(
             """
-@__p_0='77'
-@__p_1='Fox' (Size = 450)
+            @__p_0='77'
+            @__p_1='Fox' (Size = 450)
 
-SELECT TOP(1) [c].[Id1], [c].[Id2], [c].[Foo]
-FROM [CompositeKey] AS [c]
-WHERE [c].[Id1] = @__p_0 AND [c].[Id2] = @__p_1
-"""
+            SELECT TOP(1) [c].[Id1], [c].[Id2], [c].[Foo]
+            FROM [CompositeKey] AS [c]
+            WHERE [c].[Id1] = @__p_0 AND [c].[Id2] = @__p_1
+            """
         );
     }
 
@@ -198,12 +198,12 @@ WHERE [c].[Id1] = @__p_0 AND [c].[Id2] = @__p_1
 
         AssertSql(
             """
-@__p_0='77'
+            @__p_0='77'
 
-SELECT TOP(1) [b].[Id], [b].[Discriminator], [b].[Foo], [b].[Boo]
-FROM [BaseType] AS [b]
-WHERE [b].[Id] = @__p_0
-"""
+            SELECT TOP(1) [b].[Id], [b].[Discriminator], [b].[Foo], [b].[Boo]
+            FROM [BaseType] AS [b]
+            WHERE [b].[Id] = @__p_0
+            """
         );
     }
 
@@ -213,12 +213,12 @@ WHERE [b].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='99'
+            @__p_0='99'
 
-SELECT TOP(1) [b].[Id], [b].[Discriminator], [b].[Foo], [b].[Boo]
-FROM [BaseType] AS [b]
-WHERE [b].[Id] = @__p_0
-"""
+            SELECT TOP(1) [b].[Id], [b].[Discriminator], [b].[Foo], [b].[Boo]
+            FROM [BaseType] AS [b]
+            WHERE [b].[Id] = @__p_0
+            """
         );
     }
 
@@ -235,12 +235,12 @@ WHERE [b].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='78'
+            @__p_0='78'
 
-SELECT TOP(1) [b].[Id], [b].[Discriminator], [b].[Foo], [b].[Boo]
-FROM [BaseType] AS [b]
-WHERE [b].[Discriminator] = N'DerivedType' AND [b].[Id] = @__p_0
-"""
+            SELECT TOP(1) [b].[Id], [b].[Discriminator], [b].[Foo], [b].[Boo]
+            FROM [BaseType] AS [b]
+            WHERE [b].[Discriminator] = N'DerivedType' AND [b].[Id] = @__p_0
+            """
         );
     }
 
@@ -250,12 +250,12 @@ WHERE [b].[Discriminator] = N'DerivedType' AND [b].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='99'
+            @__p_0='99'
 
-SELECT TOP(1) [b].[Id], [b].[Discriminator], [b].[Foo], [b].[Boo]
-FROM [BaseType] AS [b]
-WHERE [b].[Discriminator] = N'DerivedType' AND [b].[Id] = @__p_0
-"""
+            SELECT TOP(1) [b].[Id], [b].[Discriminator], [b].[Foo], [b].[Boo]
+            FROM [BaseType] AS [b]
+            WHERE [b].[Discriminator] = N'DerivedType' AND [b].[Id] = @__p_0
+            """
         );
     }
 
@@ -265,12 +265,12 @@ WHERE [b].[Discriminator] = N'DerivedType' AND [b].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='88'
+            @__p_0='88'
 
-SELECT TOP(1) [b].[Id], [b].[Discriminator], [b].[Foo], [b].[Boo]
-FROM [BaseType] AS [b]
-WHERE [b].[Discriminator] = N'DerivedType' AND [b].[Id] = @__p_0
-"""
+            SELECT TOP(1) [b].[Id], [b].[Discriminator], [b].[Foo], [b].[Boo]
+            FROM [BaseType] AS [b]
+            WHERE [b].[Discriminator] = N'DerivedType' AND [b].[Id] = @__p_0
+            """
         );
     }
 
@@ -280,12 +280,12 @@ WHERE [b].[Discriminator] = N'DerivedType' AND [b].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='77'
+            @__p_0='77'
 
-SELECT TOP(1) [b].[Id], [b].[Discriminator], [b].[Foo], [b].[Boo]
-FROM [BaseType] AS [b]
-WHERE [b].[Discriminator] = N'DerivedType' AND [b].[Id] = @__p_0
-"""
+            SELECT TOP(1) [b].[Id], [b].[Discriminator], [b].[Foo], [b].[Boo]
+            FROM [BaseType] AS [b]
+            WHERE [b].[Discriminator] = N'DerivedType' AND [b].[Id] = @__p_0
+            """
         );
     }
 
@@ -302,12 +302,12 @@ WHERE [b].[Discriminator] = N'DerivedType' AND [b].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='78'
+            @__p_0='78'
 
-SELECT TOP(1) [b].[Id], [b].[Discriminator], [b].[Foo], [b].[Boo]
-FROM [BaseType] AS [b]
-WHERE [b].[Id] = @__p_0
-"""
+            SELECT TOP(1) [b].[Id], [b].[Discriminator], [b].[Foo], [b].[Boo]
+            FROM [BaseType] AS [b]
+            WHERE [b].[Id] = @__p_0
+            """
         );
     }
 
@@ -324,12 +324,12 @@ WHERE [b].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='77'
+            @__p_0='77'
 
-SELECT TOP(1) [s].[Id], [s].[Foo]
-FROM [ShadowKey] AS [s]
-WHERE [s].[Id] = @__p_0
-"""
+            SELECT TOP(1) [s].[Id], [s].[Foo]
+            FROM [ShadowKey] AS [s]
+            WHERE [s].[Id] = @__p_0
+            """
         );
     }
 
@@ -339,12 +339,12 @@ WHERE [s].[Id] = @__p_0
 
         AssertSql(
             """
-@__p_0='99'
+            @__p_0='99'
 
-SELECT TOP(1) [s].[Id], [s].[Foo]
-FROM [ShadowKey] AS [s]
-WHERE [s].[Id] = @__p_0
-"""
+            SELECT TOP(1) [s].[Id], [s].[Foo]
+            FROM [ShadowKey] AS [s]
+            WHERE [s].[Id] = @__p_0
+            """
         );
     }
 

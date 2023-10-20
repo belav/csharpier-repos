@@ -6475,19 +6475,19 @@ class C
         public void LocalMethod_ParameterAttribute()
         {
             var source = """
-                using System;
-                using System.Runtime.InteropServices;
-                class Program
-                {
-                    static void Main()
-                    {
-                        const int N = 10;
-                        const int Unused = 20;
-                        void F([Optional, DefaultParameterValue(N)] int x) => Console.WriteLine(x);
-                        F();
-                    }
-                }
-                """;
+            using System;
+            using System.Runtime.InteropServices;
+            class Program
+            {
+            static void Main()
+            {
+            const int N = 10;
+            const int Unused = 20;
+            void F([Optional, DefaultParameterValue(N)] int x) => Console.WriteLine(x);
+            F();
+            }
+            }
+            """;
             CreateCompilation(source)
                 .VerifyDiagnostics(
                     // (8,19): warning CS0219: The variable 'Unused' is assigned but its value is never used
@@ -6502,19 +6502,19 @@ class C
         public void Lambda_ParameterAttribute()
         {
             var source = """
-                using System;
-                using System.Runtime.InteropServices;
-                class Program
-                {
-                    static void Main()
-                    {
-                        const int N = 10;
-                        const int Unused = 20;
-                        var lam = ([Optional, DefaultParameterValue(N)] int x) => Console.WriteLine(x);
-                        lam(100);
-                    }
-                }
-                """;
+            using System;
+            using System.Runtime.InteropServices;
+            class Program
+            {
+            static void Main()
+            {
+            const int N = 10;
+            const int Unused = 20;
+            var lam = ([Optional, DefaultParameterValue(N)] int x) => Console.WriteLine(x);
+            lam(100);
+            }
+            }
+            """;
             CreateCompilation(source)
                 .VerifyDiagnostics(
                     // (8,19): warning CS0219: The variable 'Unused' is assigned but its value is never used
@@ -6529,23 +6529,23 @@ class C
         public void LocalMethod_ParameterAttribute_NamedArguments()
         {
             var source = """
-                using System;
-                [AttributeUsage(AttributeTargets.Parameter)]
-                class A : Attribute
-                {
-                    public int Prop { get; set; }
-                }
-                class Program
-                {
-                    static void Main()
-                    {
-                        const int N = 10;
-                        const int Unused = 20;
-                        void F([A(Prop = N)] int x) { }
-                        F(100);
-                    }
-                }
-                """;
+            using System;
+            [AttributeUsage(AttributeTargets.Parameter)]
+            class A : Attribute
+            {
+            public int Prop { get; set; }
+            }
+            class Program
+            {
+            static void Main()
+            {
+            const int N = 10;
+            const int Unused = 20;
+            void F([A(Prop = N)] int x) { }
+            F(100);
+            }
+            }
+            """;
             CreateCompilation(source)
                 .VerifyDiagnostics(
                     // (12,19): warning CS0219: The variable 'Unused' is assigned but its value is never used
@@ -6560,23 +6560,23 @@ class C
         public void Lambda_ParameterAttribute_NamedArguments()
         {
             var source = """
-                using System;
-                [AttributeUsage(AttributeTargets.Parameter)]
-                class A : Attribute
-                {
-                    public int Prop { get; set; }
-                }
-                class Program
-                {
-                    static void Main()
-                    {
-                        const int N = 10;
-                        const int Unused = 20;
-                        var lam = ([A(Prop = N)] int x) => { };
-                        lam(100);
-                    }
-                }
-                """;
+            using System;
+            [AttributeUsage(AttributeTargets.Parameter)]
+            class A : Attribute
+            {
+            public int Prop { get; set; }
+            }
+            class Program
+            {
+            static void Main()
+            {
+            const int N = 10;
+            const int Unused = 20;
+            var lam = ([A(Prop = N)] int x) => { };
+            lam(100);
+            }
+            }
+            """;
             CreateCompilation(source)
                 .VerifyDiagnostics(
                     // (12,19): warning CS0219: The variable 'Unused' is assigned but its value is never used
@@ -6591,27 +6591,27 @@ class C
         public void LocalMethod_AttributeArguments()
         {
             var source = """
-                using System;
-                class A : Attribute
-                {
-                    public A(int param) { }
-                    public int Prop { get; set; }
-                }
-                class Program
-                {
-                    static void Main()
-                    {
-                        const int N1 = 10;
-                        const int N2 = 20;
-                        const int N3 = 30;
-                        const int N4 = 40;
-                        const int N5 = 50;
-                        const int N6 = 60;
-                        [A(N1, Prop = N2)][return: A(N3, Prop = N4)] int F() => N5;
-                        F();
-                    }
-                }
-                """;
+            using System;
+            class A : Attribute
+            {
+            public A(int param) { }
+            public int Prop { get; set; }
+            }
+            class Program
+            {
+            static void Main()
+            {
+            const int N1 = 10;
+            const int N2 = 20;
+            const int N3 = 30;
+            const int N4 = 40;
+            const int N5 = 50;
+            const int N6 = 60;
+            [A(N1, Prop = N2)][return: A(N3, Prop = N4)] int F() => N5;
+            F();
+            }
+            }
+            """;
             CreateCompilation(source)
                 .VerifyDiagnostics(
                     // (16,19): warning CS0219: The variable 'N6' is assigned but its value is never used
@@ -6626,20 +6626,20 @@ class C
         public void LocalMethod_AttributeArguments_GenericParameter()
         {
             var source = """
-                using System;
-                class A : Attribute
-                {
-                    public A(int param) { }
-                }
-                class Program
-                {
-                    static void Main()
-                    {
-                        [A(default(T))] void F<T>() { }
-                        F<int>();
-                    }
-                }
-                """;
+            using System;
+            class A : Attribute
+            {
+            public A(int param) { }
+            }
+            class Program
+            {
+            static void Main()
+            {
+            [A(default(T))] void F<T>() { }
+            F<int>();
+            }
+            }
+            """;
             CreateCompilation(source)
                 .VerifyDiagnostics(
                     // (10,20): error CS0246: The type or namespace name 'T' could not be found (are you missing a using directive or an assembly reference?)
@@ -6654,26 +6654,26 @@ class C
         public void LocalMethod_AttributeArguments_StringInterpolation()
         {
             var source = """
-                public class C
-                {
-                    public int P
-                    {
-                        get
-                        {
-                            const string X = "Hello";
-                            const string Y = "World";
-                            const string Z = "unused";
-                            [My($"{X}, World", Prop = $"Hello, {Y}")] int F() => 0;
-                            return F();
-                        }
-                    }
-                }
-                public class MyAttribute : System.Attribute
-                {
-                    public MyAttribute(string param) { }
-                    public string Prop { get; set; }
-                }
-                """;
+            public class C
+            {
+            public int P
+            {
+            get
+            {
+            const string X = "Hello";
+            const string Y = "World";
+            const string Z = "unused";
+            [My($"{X}, World", Prop = $"Hello, {Y}")] int F() => 0;
+            return F();
+            }
+            }
+            }
+            public class MyAttribute : System.Attribute
+            {
+            public MyAttribute(string param) { }
+            public string Prop { get; set; }
+            }
+            """;
             CreateCompilation(source)
                 .VerifyDiagnostics(
                     // (9,26): warning CS0219: The variable 'Z' is assigned but its value is never used
@@ -6688,27 +6688,27 @@ class C
         public void LambdaMethod_AttributeArguments()
         {
             var source = """
-                using System;
-                class A : Attribute
-                {
-                    public A(int param) { }
-                    public int Prop { get; set; }
-                }
-                class Program
-                {
-                    static void Main()
-                    {
-                        const int N1 = 10;
-                        const int N2 = 20;
-                        const int N3 = 30;
-                        const int N4 = 40;
-                        const int N5 = 50;
-                        const int N6 = 60;
-                        var lam = [A(N1, Prop = N2)][return: A(N3, Prop = N4)] () => N5;
-                        lam();
-                    }
-                }
-                """;
+            using System;
+            class A : Attribute
+            {
+            public A(int param) { }
+            public int Prop { get; set; }
+            }
+            class Program
+            {
+            static void Main()
+            {
+            const int N1 = 10;
+            const int N2 = 20;
+            const int N3 = 30;
+            const int N4 = 40;
+            const int N5 = 50;
+            const int N6 = 60;
+            var lam = [A(N1, Prop = N2)][return: A(N3, Prop = N4)] () => N5;
+            lam();
+            }
+            }
+            """;
             CreateCompilation(source)
                 .VerifyDiagnostics(
                     // (16,19): warning CS0219: The variable 'N6' is assigned but its value is never used
@@ -6723,26 +6723,26 @@ class C
         public void LambdaMethod_AttributeArguments_StringInterpolation()
         {
             var source = """
-                public class C
-                {
-                    public int P
-                    {
-                        get
-                        {
-                            const string X = "Hello";
-                            const string Y = "World";
-                            const string Z = "unused";
-                            var f = [My($"{X}, World", Prop = $"Hello, {Y}")] () => 0;
-                            return f();
-                        }
-                    }
-                }
-                public class MyAttribute : System.Attribute
-                {
-                    public MyAttribute(string param) { }
-                    public string Prop { get; set; }
-                }
-                """;
+            public class C
+            {
+            public int P
+            {
+            get
+            {
+            const string X = "Hello";
+            const string Y = "World";
+            const string Z = "unused";
+            var f = [My($"{X}, World", Prop = $"Hello, {Y}")] () => 0;
+            return f();
+            }
+            }
+            }
+            public class MyAttribute : System.Attribute
+            {
+            public MyAttribute(string param) { }
+            public string Prop { get; set; }
+            }
+            """;
             CreateCompilation(source)
                 .VerifyDiagnostics(
                     // (9,26): warning CS0219: The variable 'Z' is assigned but its value is never used
@@ -6757,30 +6757,30 @@ class C
         public void Setter_AttributeArguments()
         {
             var source = """
-                using System;
-                class A : Attribute
-                {
-                    public A(int param) { }
-                    public int Prop { get; set; }
-                }
-                class Program
-                {
-                    const int N1 = 10;
-                    const int N2 = 20;
-                    const int N3 = 30;
-                    const int N4 = 40;
-                    const int N5 = 50;
-                    const int N6 = 60;
-                    public int Prop
-                    {
-                        [A(N1, Prop = N4)][param: A(N2, Prop = N5)][return: A(N3, Prop = N6)]
-                        set
-                        {
-                            Console.WriteLine(value);
-                        }
-                    }
-                }
-                """;
+            using System;
+            class A : Attribute
+            {
+            public A(int param) { }
+            public int Prop { get; set; }
+            }
+            class Program
+            {
+            const int N1 = 10;
+            const int N2 = 20;
+            const int N3 = 30;
+            const int N4 = 40;
+            const int N5 = 50;
+            const int N6 = 60;
+            public int Prop
+            {
+            [A(N1, Prop = N4)][param: A(N2, Prop = N5)][return: A(N3, Prop = N6)]
+            set
+            {
+            Console.WriteLine(value);
+            }
+            }
+            }
+            """;
             var compilation = CreateCompilation(source).VerifyDiagnostics();
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
@@ -6872,13 +6872,13 @@ class C
         public void NameOf_Nested()
         {
             var source = """
-                System.Console.WriteLine(C.M());
-                public class C
-                {
-                    private C c;
-                    public static string M() => nameof(c.c.c);
-                }
-                """;
+            System.Console.WriteLine(C.M());
+            public class C
+            {
+            private C c;
+            public static string M() => nameof(c.c.c);
+            }
+            """;
 
             var expectedDiagnostic =
             // (4,15): warning CS0649: Field 'C.c' is never assigned to, and will always have its default value null

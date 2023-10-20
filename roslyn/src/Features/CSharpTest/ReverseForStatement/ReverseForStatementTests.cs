@@ -28,12 +28,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (; i < args.Length; i++)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (; i < args.Length; i++)
+                {
+                }
+                }
                 }
                 """
             );
@@ -46,12 +46,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (int i = 0; ; i++)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (int i = 0; ; i++)
+                {
+                }
+                }
                 }
                 """
             );
@@ -64,12 +64,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (int i = 0; i < args.Length; )
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (int i = 0; i < args.Length; )
+                {
+                }
+                }
                 }
                 """
             );
@@ -82,12 +82,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (int i = 0; j < args.Length; i++)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (int i = 0; j < args.Length; i++)
+                {
+                }
+                }
                 }
                 """
             );
@@ -100,12 +100,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (int i = 0; i < args.Length; j++)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (int i = 0; i < args.Length; j++)
+                {
+                }
+                }
                 }
                 """
             );
@@ -118,12 +118,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (int i; i < args.Length; i++)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (int i; i < args.Length; i++)
+                {
+                }
+                }
                 }
                 """
             );
@@ -136,12 +136,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (int i = 0; i < args.Length; i--)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (int i = 0; i < args.Length; i--)
+                {
+                }
+                }
                 }
                 """
             );
@@ -154,12 +154,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (int i = 0; i >= args.Length; i++)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (int i = 0; i >= args.Length; i++)
+                {
+                }
+                }
                 }
                 """
             );
@@ -172,23 +172,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (int i = 0; i < args.Length; i++)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (int i = 0; i < args.Length; i++)
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        for (int i = args.Length - 1; i >= 0; i--)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                for (int i = args.Length - 1; i >= 0; i--)
+                {
+                }
+                }
                 }
                 """
             );
@@ -201,23 +201,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (int i = 0; i < 10; i++)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (int i = 0; i < 10; i++)
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        for (int i = 10 - 1; i >= 0; i--)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                for (int i = 10 - 1; i >= 0; i--)
+                {
+                }
+                }
                 }
                 """
             );
@@ -230,23 +230,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (int i = 10 - 1; i >= 0; i--)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (int i = 10 - 1; i >= 0; i--)
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        for (int i = 0; i < 10; i++)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                for (int i = 0; i < 10; i++)
+                {
+                }
+                }
                 }
                 """
             );
@@ -259,23 +259,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (int i = 0; i < args.Length; ++i)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (int i = 0; i < args.Length; ++i)
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        for (int i = args.Length - 1; i >= 0; --i)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                for (int i = args.Length - 1; i >= 0; --i)
+                {
+                }
+                }
                 }
                 """
             );
@@ -288,23 +288,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (int i = 0; i < args.Length; i += 1)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (int i = 0; i < args.Length; i += 1)
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        for (int i = args.Length - 1; i >= 0; i -= 1)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                for (int i = args.Length - 1; i >= 0; i -= 1)
+                {
+                }
+                }
                 }
                 """
             );
@@ -317,12 +317,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (int i = 0; i < args.Length; i += 2)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (int i = 0; i < args.Length; i += 2)
+                {
+                }
+                }
                 }
                 """
             );
@@ -335,23 +335,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (int i = args.Length - 1; i >= 0; i--)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (int i = args.Length - 1; i >= 0; i--)
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        for (int i = 0; i < args.Length; i++)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                for (int i = 0; i < args.Length; i++)
+                {
+                }
+                }
                 }
                 """
             );
@@ -364,23 +364,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (int i = 0; i <= args.Length; i++)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (int i = 0; i <= args.Length; i++)
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        for (int i = args.Length; i >= 0; i--)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                for (int i = args.Length; i >= 0; i--)
+                {
+                }
+                }
                 }
                 """
             );
@@ -393,23 +393,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (int i = args.Length; i >= 0; i--)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (int i = args.Length; i >= 0; i--)
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        for (int i = 0; i <= args.Length; i++)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                for (int i = 0; i <= args.Length; i++)
+                {
+                }
+                }
                 }
                 """
             );
@@ -422,23 +422,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (/*t1*/int/*t2*/i/*t3*/=/*t4*/0/*t5*/;/*t6*/i/*t7*/</*t8*/args.Length/*t9*/;/*t10*/i/*t11*/++/*t12*/)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (/*t1*/int/*t2*/i/*t3*/=/*t4*/0/*t5*/;/*t6*/i/*t7*/</*t8*/args.Length/*t9*/;/*t10*/i/*t11*/++/*t12*/)
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        for (/*t1*/int/*t2*/i/*t3*/=/*t4*/args.Length/*t9*/- 1;/*t6*/i/*t7*/>=/*t8*/0/*t5*/;/*t10*/i/*t11*/--/*t12*/)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                for (/*t1*/int/*t2*/i/*t3*/=/*t4*/args.Length/*t9*/- 1;/*t6*/i/*t7*/>=/*t8*/0/*t5*/;/*t10*/i/*t11*/--/*t12*/)
+                {
+                }
+                }
                 }
                 """
             );
@@ -451,23 +451,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (int i = 0; args.Length > i; i++)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (int i = 0; args.Length > i; i++)
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        for (int i = args.Length - 1; 0 <= i; i--)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                for (int i = args.Length - 1; 0 <= i; i--)
+                {
+                }
+                }
                 }
                 """
             );
@@ -480,23 +480,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (int i = 0; args.Length >= i; i++)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (int i = 0; args.Length >= i; i++)
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        for (int i = args.Length; 0 <= i; i--)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                for (int i = args.Length; 0 <= i; i--)
+                {
+                }
+                }
                 }
                 """
             );
@@ -509,23 +509,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (byte i = 1; i <= 10; i++)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (byte i = 1; i <= 10; i++)
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        for (byte i = 10; i >= 1; i--)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                for (byte i = 10; i >= 1; i--)
+                {
+                }
+                }
                 }
                 """
             );
@@ -538,23 +538,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (ushort i = 1; i <= 10; i++)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (ushort i = 1; i <= 10; i++)
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        for (ushort i = 10; i >= 1; i--)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                for (ushort i = 10; i >= 1; i--)
+                {
+                }
+                }
                 }
                 """
             );
@@ -567,23 +567,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (uint i = 1; i <= 10; i++)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (uint i = 1; i <= 10; i++)
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        for (uint i = 10; i >= 1; i--)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                for (uint i = 10; i >= 1; i--)
+                {
+                }
+                }
                 }
                 """
             );
@@ -596,23 +596,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (ulong i = 1; i <= 10; i++)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (ulong i = 1; i <= 10; i++)
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        for (ulong i = 10; i >= 1; i--)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                for (ulong i = 10; i >= 1; i--)
+                {
+                }
+                }
                 }
                 """
             );
@@ -625,12 +625,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (byte i = 0; i <= 10; i++)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (byte i = 0; i <= 10; i++)
+                {
+                }
+                }
                 }
                 """
             );
@@ -643,12 +643,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (ushort i = 0; i <= 10; i++)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (ushort i = 0; i <= 10; i++)
+                {
+                }
+                }
                 }
                 """
             );
@@ -661,12 +661,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (uint i = 0; i <= 10; i++)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (uint i = 0; i <= 10; i++)
+                {
+                }
+                }
                 }
                 """
             );
@@ -679,12 +679,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (ulong i = 0; i <= 10; i++)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (ulong i = 0; i <= 10; i++)
+                {
+                }
+                }
                 }
                 """
             );
@@ -697,12 +697,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (byte x = byte.MaxValue; x >= 10; x--)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (byte x = byte.MaxValue; x >= 10; x--)
+                {
+                }
+                }
                 }
                 """
             );
@@ -715,12 +715,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (ushort x = ushort.MaxValue; x >= 10; x--)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (ushort x = ushort.MaxValue; x >= 10; x--)
+                {
+                }
+                }
                 }
                 """
             );
@@ -733,12 +733,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (uint x = uint.MaxValue; x >= 10; x--)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (uint x = uint.MaxValue; x >= 10; x--)
+                {
+                }
+                }
                 }
                 """
             );
@@ -751,12 +751,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (ulong x = ulong.MaxValue; x >= 10; x--)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (ulong x = ulong.MaxValue; x >= 10; x--)
+                {
+                }
+                }
                 }
                 """
             );
@@ -769,12 +769,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReverseForStatement
                 """
                 class C
                 {
-                    void M(string[] args)
-                    {
-                        [||]for (byte i = 10; i >= 0; i--)
-                        {
-                        }
-                    }
+                void M(string[] args)
+                {
+                [||]for (byte i = 10; i >= 0; i--)
+                {
+                }
+                }
                 }
                 """
             );

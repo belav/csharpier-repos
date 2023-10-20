@@ -70,30 +70,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configurati
             public async Task ConfigureEditorconfig_Empty_None()
             {
                 var input = """
-                    <Workspace>
-                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                            <Document FilePath="z:\\file.cs">
-                    [|class Program1 { }|]
-                            </Document>
-                            <AnalyzerConfigDocument FilePath="z:\\.editorconfig"></AnalyzerConfigDocument>
-                        </Project>
-                    </Workspace>
-                    """;
+                <Workspace>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document FilePath="z:\\file.cs">
+                [|class Program1 { }|]
+                </Document>
+                <AnalyzerConfigDocument FilePath="z:\\.editorconfig"></AnalyzerConfigDocument>
+                </Project>
+                </Workspace>
+                """;
 
                 var expected = """
-                    <Workspace>
-                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                             <Document FilePath="z:\\file.cs">
-                    class Program1 { }
-                            </Document>
-                            <AnalyzerConfigDocument FilePath="z:\\.editorconfig">[*.cs]
+                <Workspace>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document FilePath="z:\\file.cs">
+                class Program1 { }
+                </Document>
+                <AnalyzerConfigDocument FilePath="z:\\.editorconfig">[*.cs]
 
-                    # XYZ0001: Title
-                    dotnet_diagnostic.XYZ0001.severity = none
-                    </AnalyzerConfigDocument>
-                        </Project>
-                    </Workspace>
-                    """;
+                # XYZ0001: Title
+                dotnet_diagnostic.XYZ0001.severity = none
+                </AnalyzerConfigDocument>
+                </Project>
+                </Workspace>
+                """;
 
                 await TestInRegularAndScriptAsync(input, expected, CodeActionIndex);
             }
@@ -102,30 +102,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configurati
             public async Task ConfigureEditorconfig_RuleExists_None()
             {
                 var input = """
-                    <Workspace>
-                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                            <Document FilePath="z:\\file.cs">
-                    [|class Program1 { }|]
-                            </Document>
-                            <AnalyzerConfigDocument FilePath="z:\\.editorconfig">[*.cs]
-                    dotnet_diagnostic.XYZ0001.severity = suggestion   # Comment
-                    </AnalyzerConfigDocument>
-                        </Project>
-                    </Workspace>
-                    """;
+                <Workspace>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document FilePath="z:\\file.cs">
+                [|class Program1 { }|]
+                </Document>
+                <AnalyzerConfigDocument FilePath="z:\\.editorconfig">[*.cs]
+                dotnet_diagnostic.XYZ0001.severity = suggestion   # Comment
+                </AnalyzerConfigDocument>
+                </Project>
+                </Workspace>
+                """;
 
                 var expected = """
-                    <Workspace>
-                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                             <Document FilePath="z:\\file.cs">
-                    class Program1 { }
-                            </Document>
-                            <AnalyzerConfigDocument FilePath="z:\\.editorconfig">[*.cs]
-                    dotnet_diagnostic.XYZ0001.severity = none   # Comment
-                    </AnalyzerConfigDocument>
-                        </Project>
-                    </Workspace>
-                    """;
+                <Workspace>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document FilePath="z:\\file.cs">
+                class Program1 { }
+                </Document>
+                <AnalyzerConfigDocument FilePath="z:\\.editorconfig">[*.cs]
+                dotnet_diagnostic.XYZ0001.severity = none   # Comment
+                </AnalyzerConfigDocument>
+                </Project>
+                </Workspace>
+                """;
 
                 await TestInRegularAndScriptAsync(input, expected, CodeActionIndex);
             }
@@ -134,35 +134,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configurati
             public async Task ConfigureEditorconfig_InvalidHeader_None()
             {
                 var input = """
-                    <Workspace>
-                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                            <Document FilePath="z:\\file.cs">
-                    [|class Program1 { }|]
-                            </Document>
-                            <AnalyzerConfigDocument FilePath="z:\\.editorconfig">[*.vb]
-                    dotnet_diagnostic.XYZ0001.severity = suggestion
-                    </AnalyzerConfigDocument>
-                        </Project>
-                    </Workspace>
-                    """;
+                <Workspace>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document FilePath="z:\\file.cs">
+                [|class Program1 { }|]
+                </Document>
+                <AnalyzerConfigDocument FilePath="z:\\.editorconfig">[*.vb]
+                dotnet_diagnostic.XYZ0001.severity = suggestion
+                </AnalyzerConfigDocument>
+                </Project>
+                </Workspace>
+                """;
 
                 var expected = """
-                    <Workspace>
-                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                            <Document FilePath="z:\\file.cs">
-                    class Program1 { }
-                            </Document>
-                            <AnalyzerConfigDocument FilePath="z:\\.editorconfig">[*.vb]
-                    dotnet_diagnostic.XYZ0001.severity = suggestion
+                <Workspace>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document FilePath="z:\\file.cs">
+                class Program1 { }
+                </Document>
+                <AnalyzerConfigDocument FilePath="z:\\.editorconfig">[*.vb]
+                dotnet_diagnostic.XYZ0001.severity = suggestion
 
-                    [*.cs]
+                [*.cs]
 
-                    # XYZ0001: Title
-                    dotnet_diagnostic.XYZ0001.severity = none
-                    </AnalyzerConfigDocument>
-                        </Project>
-                    </Workspace>
-                    """;
+                # XYZ0001: Title
+                dotnet_diagnostic.XYZ0001.severity = none
+                </AnalyzerConfigDocument>
+                </Project>
+                </Workspace>
+                """;
 
                 await TestInRegularAndScriptAsync(input, expected, CodeActionIndex);
             }
@@ -171,17 +171,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configurati
             public async Task ConfigureEditorconfig_MaintainExistingEntry_None()
             {
                 var input = """
-                    <Workspace>
-                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                            <Document FilePath="z:\\file.cs">
-                    [|class Program1 { }|]
-                            </Document>
-                            <AnalyzerConfigDocument FilePath="z:\\.editorconfig">[*.{vb,cs}]
-                    dotnet_diagnostic.XYZ0001.severity = none
-                    </AnalyzerConfigDocument>
-                        </Project>
-                    </Workspace>
-                    """;
+                <Workspace>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document FilePath="z:\\file.cs">
+                [|class Program1 { }|]
+                </Document>
+                <AnalyzerConfigDocument FilePath="z:\\.editorconfig">[*.{vb,cs}]
+                dotnet_diagnostic.XYZ0001.severity = none
+                </AnalyzerConfigDocument>
+                </Project>
+                </Workspace>
+                """;
 
                 await TestMissingInRegularAndScriptAsync(input);
             }
@@ -190,33 +190,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configurati
             public async Task ConfigureEditorconfig_InvalidRule_None()
             {
                 var input = """
-                    <Workspace>
-                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                            <Document FilePath="z:\\file.cs">
-                    [|class Program1 { }|]
-                            </Document>
-                            <AnalyzerConfigDocument FilePath="z:\\.editorconfig">[*.{vb,cs}]
-                    dotnet_diagnostic.XYZ1111.severity = none
-                    </AnalyzerConfigDocument>
-                        </Project>
-                    </Workspace>
-                    """;
+                <Workspace>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document FilePath="z:\\file.cs">
+                [|class Program1 { }|]
+                </Document>
+                <AnalyzerConfigDocument FilePath="z:\\.editorconfig">[*.{vb,cs}]
+                dotnet_diagnostic.XYZ1111.severity = none
+                </AnalyzerConfigDocument>
+                </Project>
+                </Workspace>
+                """;
 
                 var expected = """
-                    <Workspace>
-                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                            <Document FilePath="z:\\file.cs">
-                    [|class Program1 { }|]
-                            </Document>
-                            <AnalyzerConfigDocument FilePath="z:\\.editorconfig">[*.{vb,cs}]
-                    dotnet_diagnostic.XYZ1111.severity = none
+                <Workspace>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document FilePath="z:\\file.cs">
+                [|class Program1 { }|]
+                </Document>
+                <AnalyzerConfigDocument FilePath="z:\\.editorconfig">[*.{vb,cs}]
+                dotnet_diagnostic.XYZ1111.severity = none
 
-                    # XYZ0001: Title
-                    dotnet_diagnostic.XYZ0001.severity = none
-                    </AnalyzerConfigDocument>
-                        </Project>
-                    </Workspace>
-                    """;
+                # XYZ0001: Title
+                dotnet_diagnostic.XYZ0001.severity = none
+                </AnalyzerConfigDocument>
+                </Project>
+                </Workspace>
+                """;
 
                 await TestInRegularAndScriptAsync(input, expected, CodeActionIndex);
             }
@@ -226,33 +226,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configurati
             public async Task ConfigureEditorconfig_MissingRule_None()
             {
                 var input = """
-                    <Workspace>
-                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                            <Document FilePath="z:\\file.cs">
-                    [|class Program1 { }|]
-                            </Document>
-                            <AnalyzerConfigDocument FilePath="z:\\.editorconfig">[*.{vb,cs}]
-                    dotnet_diagnostic.severity = none
-                    </AnalyzerConfigDocument>
-                        </Project>
-                    </Workspace>
-                    """;
+                <Workspace>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document FilePath="z:\\file.cs">
+                [|class Program1 { }|]
+                </Document>
+                <AnalyzerConfigDocument FilePath="z:\\.editorconfig">[*.{vb,cs}]
+                dotnet_diagnostic.severity = none
+                </AnalyzerConfigDocument>
+                </Project>
+                </Workspace>
+                """;
 
                 var expected = """
-                    <Workspace>
-                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                            <Document FilePath="z:\\file.cs">
-                    [|class Program1 { }|]
-                            </Document>
-                            <AnalyzerConfigDocument FilePath="z:\\.editorconfig">[*.{vb,cs}]
-                    dotnet_diagnostic.severity = none
+                <Workspace>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document FilePath="z:\\file.cs">
+                [|class Program1 { }|]
+                </Document>
+                <AnalyzerConfigDocument FilePath="z:\\.editorconfig">[*.{vb,cs}]
+                dotnet_diagnostic.severity = none
 
-                    # XYZ0001: Title
-                    dotnet_diagnostic.XYZ0001.severity = none
-                    </AnalyzerConfigDocument>
-                        </Project>
-                    </Workspace>
-                    """;
+                # XYZ0001: Title
+                dotnet_diagnostic.XYZ0001.severity = none
+                </AnalyzerConfigDocument>
+                </Project>
+                </Workspace>
+                """;
 
                 await TestInRegularAndScriptAsync(input, expected, CodeActionIndex);
             }
@@ -261,32 +261,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configurati
             public async Task ConfigureEditorconfig_RegexHeaderMatch_None()
             {
                 var input = """
-                    <Workspace>
-                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                            <Document FilePath="z:\\Program/file.cs">
-                    [|class Program1 { }|]
-                            </Document>
-                            <AnalyzerConfigDocument FilePath="z:\\.editorconfig">[*am/fi*e.cs]
-                    # XYZ0001: Title
-                    dotnet_diagnostic.XYZ0001.severity = warning
-                    </AnalyzerConfigDocument>
-                        </Project>
-                    </Workspace>
-                    """;
+                <Workspace>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document FilePath="z:\\Program/file.cs">
+                [|class Program1 { }|]
+                </Document>
+                <AnalyzerConfigDocument FilePath="z:\\.editorconfig">[*am/fi*e.cs]
+                # XYZ0001: Title
+                dotnet_diagnostic.XYZ0001.severity = warning
+                </AnalyzerConfigDocument>
+                </Project>
+                </Workspace>
+                """;
 
                 var expected = """
-                    <Workspace>
-                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                             <Document FilePath="z:\\Program/file.cs">
-                    class Program1 { }
-                            </Document>
-                            <AnalyzerConfigDocument FilePath="z:\\.editorconfig">[*am/fi*e.cs]
-                    # XYZ0001: Title
-                    dotnet_diagnostic.XYZ0001.severity = none
-                    </AnalyzerConfigDocument>
-                        </Project>
-                    </Workspace>
-                    """;
+                <Workspace>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document FilePath="z:\\Program/file.cs">
+                class Program1 { }
+                </Document>
+                <AnalyzerConfigDocument FilePath="z:\\.editorconfig">[*am/fi*e.cs]
+                # XYZ0001: Title
+                dotnet_diagnostic.XYZ0001.severity = none
+                </AnalyzerConfigDocument>
+                </Project>
+                </Workspace>
+                """;
 
                 await TestInRegularAndScriptAsync(input, expected, CodeActionIndex);
             }
@@ -295,37 +295,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configurati
             public async Task ConfigureEditorconfig_RegexHeaderNonMatch_None()
             {
                 var input = """
-                    <Workspace>
-                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                            <Document FilePath="z:\\Program/file.cs">
-                    [|class Program1 { }|]
-                            </Document>
-                            <AnalyzerConfigDocument FilePath="z:\\.editorconfig">[*am/fii*e.cs]
-                    # XYZ0001: Title
-                    dotnet_diagnostic.XYZ0001.severity = warning
-                    </AnalyzerConfigDocument>
-                        </Project>
-                    </Workspace>
-                    """;
+                <Workspace>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document FilePath="z:\\Program/file.cs">
+                [|class Program1 { }|]
+                </Document>
+                <AnalyzerConfigDocument FilePath="z:\\.editorconfig">[*am/fii*e.cs]
+                # XYZ0001: Title
+                dotnet_diagnostic.XYZ0001.severity = warning
+                </AnalyzerConfigDocument>
+                </Project>
+                </Workspace>
+                """;
 
                 var expected = """
-                    <Workspace>
-                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                             <Document FilePath="z:\\Program/file.cs">
-                    class Program1 { }
-                            </Document>
-                            <AnalyzerConfigDocument FilePath="z:\\.editorconfig">[*am/fii*e.cs]
-                    # XYZ0001: Title
-                    dotnet_diagnostic.XYZ0001.severity = warning
+                <Workspace>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document FilePath="z:\\Program/file.cs">
+                class Program1 { }
+                </Document>
+                <AnalyzerConfigDocument FilePath="z:\\.editorconfig">[*am/fii*e.cs]
+                # XYZ0001: Title
+                dotnet_diagnostic.XYZ0001.severity = warning
 
-                    [*.cs]
+                [*.cs]
 
-                    # XYZ0001: Title
-                    dotnet_diagnostic.XYZ0001.severity = none
-                    </AnalyzerConfigDocument>
-                        </Project>
-                    </Workspace>
-                    """;
+                # XYZ0001: Title
+                dotnet_diagnostic.XYZ0001.severity = none
+                </AnalyzerConfigDocument>
+                </Project>
+                </Workspace>
+                """;
 
                 await TestInRegularAndScriptAsync(input, expected, CodeActionIndex);
             }
@@ -334,30 +334,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configurati
             public async Task ConfigureGlobalconfig_Empty_None()
             {
                 var input = """
-                    <Workspace>
-                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                            <Document FilePath="z:\\file.cs">
-                    [|class Program1 { }|]
-                            </Document>
-                            <AnalyzerConfigDocument FilePath="z:\\.globalconfig">is_global = true</AnalyzerConfigDocument>
-                        </Project>
-                    </Workspace>
-                    """;
+                <Workspace>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document FilePath="z:\\file.cs">
+                [|class Program1 { }|]
+                </Document>
+                <AnalyzerConfigDocument FilePath="z:\\.globalconfig">is_global = true</AnalyzerConfigDocument>
+                </Project>
+                </Workspace>
+                """;
 
                 var expected = """
-                    <Workspace>
-                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                             <Document FilePath="z:\\file.cs">
-                    class Program1 { }
-                            </Document>
-                            <AnalyzerConfigDocument FilePath="z:\\.globalconfig">is_global = true
+                <Workspace>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document FilePath="z:\\file.cs">
+                class Program1 { }
+                </Document>
+                <AnalyzerConfigDocument FilePath="z:\\.globalconfig">is_global = true
 
-                    # XYZ0001: Title
-                    dotnet_diagnostic.XYZ0001.severity = none
-                    </AnalyzerConfigDocument>
-                        </Project>
-                    </Workspace>
-                    """;
+                # XYZ0001: Title
+                dotnet_diagnostic.XYZ0001.severity = none
+                </AnalyzerConfigDocument>
+                </Project>
+                </Workspace>
+                """;
 
                 await TestInRegularAndScriptAsync(input, expected, CodeActionIndex);
             }
@@ -366,30 +366,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configurati
             public async Task ConfigureGlobalconfig_RuleExists_None()
             {
                 var input = """
-                    <Workspace>
-                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                            <Document FilePath="z:\\file.cs">
-                    [|class Program1 { }|]
-                            </Document>
-                            <AnalyzerConfigDocument FilePath="z:\\.globalconfig">is_global = true   # Comment
-                    dotnet_diagnostic.XYZ0001.severity = suggestion   # Comment
-                    </AnalyzerConfigDocument>
-                        </Project>
-                    </Workspace>
-                    """;
+                <Workspace>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document FilePath="z:\\file.cs">
+                [|class Program1 { }|]
+                </Document>
+                <AnalyzerConfigDocument FilePath="z:\\.globalconfig">is_global = true   # Comment
+                dotnet_diagnostic.XYZ0001.severity = suggestion   # Comment
+                </AnalyzerConfigDocument>
+                </Project>
+                </Workspace>
+                """;
 
                 var expected = """
-                    <Workspace>
-                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                             <Document FilePath="z:\\file.cs">
-                    class Program1 { }
-                            </Document>
-                            <AnalyzerConfigDocument FilePath="z:\\.globalconfig">is_global = true   # Comment
-                    dotnet_diagnostic.XYZ0001.severity = none   # Comment
-                    </AnalyzerConfigDocument>
-                        </Project>
-                    </Workspace>
-                    """;
+                <Workspace>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document FilePath="z:\\file.cs">
+                class Program1 { }
+                </Document>
+                <AnalyzerConfigDocument FilePath="z:\\.globalconfig">is_global = true   # Comment
+                dotnet_diagnostic.XYZ0001.severity = none   # Comment
+                </AnalyzerConfigDocument>
+                </Project>
+                </Workspace>
+                """;
 
                 await TestInRegularAndScriptAsync(input, expected, CodeActionIndex);
             }
@@ -398,35 +398,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configurati
             public async Task ConfigureGlobalconfig_InvalidHeader_None()
             {
                 var input = """
-                    <Workspace>
-                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                            <Document FilePath="z:\\file.cs">
-                    [|class Program1 { }|]
-                            </Document>
-                            <AnalyzerConfigDocument FilePath="z:\\.globalconfig">[*.vb]
-                    dotnet_diagnostic.XYZ0001.severity = suggestion
-                    </AnalyzerConfigDocument>
-                        </Project>
-                    </Workspace>
-                    """;
+                <Workspace>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document FilePath="z:\\file.cs">
+                [|class Program1 { }|]
+                </Document>
+                <AnalyzerConfigDocument FilePath="z:\\.globalconfig">[*.vb]
+                dotnet_diagnostic.XYZ0001.severity = suggestion
+                </AnalyzerConfigDocument>
+                </Project>
+                </Workspace>
+                """;
 
                 var expected = """
-                    <Workspace>
-                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                            <Document FilePath="z:\\file.cs">
-                    class Program1 { }
-                            </Document>
-                            <AnalyzerConfigDocument FilePath="z:\\.globalconfig">[*.vb]
-                    dotnet_diagnostic.XYZ0001.severity = suggestion
+                <Workspace>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document FilePath="z:\\file.cs">
+                class Program1 { }
+                </Document>
+                <AnalyzerConfigDocument FilePath="z:\\.globalconfig">[*.vb]
+                dotnet_diagnostic.XYZ0001.severity = suggestion
 
-                    [*.cs]
+                [*.cs]
 
-                    # XYZ0001: Title
-                    dotnet_diagnostic.XYZ0001.severity = none
-                    </AnalyzerConfigDocument>
-                        </Project>
-                    </Workspace>
-                    """;
+                # XYZ0001: Title
+                dotnet_diagnostic.XYZ0001.severity = none
+                </AnalyzerConfigDocument>
+                </Project>
+                </Workspace>
+                """;
 
                 await TestInRegularAndScriptAsync(input, expected, CodeActionIndex);
             }

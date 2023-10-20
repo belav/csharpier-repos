@@ -77,9 +77,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                $$
-                return true;
-                """
+                    $$
+                    return true;
+                    """
                 )
             );
         }
@@ -90,9 +90,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                return true;
-                $$
-                """
+                    return true;
+                    $$
+                    """
                 )
             );
         }
@@ -103,10 +103,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                if (true) {
-                }
-                $$
-                """
+                    if (true) {
+                    }
+                    $$
+                    """
                 )
             );
         }
@@ -124,7 +124,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                  $$
+                $$
                 }
                 """
             );
@@ -136,15 +136,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                if (b != 0) {
+                    if (b != 0) {
                     count <<= 2;
                     char[] newBuffer = new char[count];
                     for (int copy = 0; copy < j; copy++)
-                      newBuffer[copy] = buffer[copy];
+                    newBuffer[copy] = buffer[copy];
                     buffer = newBuffer;
                     $$ Restart;
-                  }
-                """
+                    }
+                    """
                 )
             );
         }

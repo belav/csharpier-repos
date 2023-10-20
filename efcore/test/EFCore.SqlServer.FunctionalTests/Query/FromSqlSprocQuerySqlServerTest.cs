@@ -20,8 +20,8 @@ public class FromSqlSprocQuerySqlServerTest
 
         AssertSql(
             """
-[dbo].[Ten Most Expensive Products]
-"""
+            [dbo].[Ten Most Expensive Products]
+            """
         );
     }
 
@@ -31,10 +31,10 @@ public class FromSqlSprocQuerySqlServerTest
 
         AssertSql(
             """
--- Stored Procedure
+            -- Stored Procedure
 
-[dbo].[Ten Most Expensive Products]
-"""
+            [dbo].[Ten Most Expensive Products]
+            """
         );
     }
 
@@ -44,12 +44,12 @@ public class FromSqlSprocQuerySqlServerTest
 
         AssertSql(
             """
--- One
--- Two
--- Three
+            -- One
+            -- Two
+            -- Three
 
-[dbo].[Ten Most Expensive Products]
-"""
+            [dbo].[Ten Most Expensive Products]
+            """
         );
     }
 
@@ -59,10 +59,10 @@ public class FromSqlSprocQuerySqlServerTest
 
         AssertSql(
             """
--- File: SampleFileName:13
+            -- File: SampleFileName:13
 
-[dbo].[Ten Most Expensive Products]
-"""
+            [dbo].[Ten Most Expensive Products]
+            """
         );
     }
 
@@ -74,12 +74,12 @@ public class FromSqlSprocQuerySqlServerTest
 
         AssertSql(
             """
--- Before
--- File: SampleFileName:13
--- After
+            -- Before
+            -- File: SampleFileName:13
+            -- After
 
-[dbo].[Ten Most Expensive Products]
-"""
+            [dbo].[Ten Most Expensive Products]
+            """
         );
     }
 
@@ -89,10 +89,10 @@ public class FromSqlSprocQuerySqlServerTest
 
         AssertSql(
             """
-p0='ALFKI' (Size = 4000)
+            p0='ALFKI' (Size = 4000)
 
-[dbo].[CustOrderHist] @CustomerID = @p0
-"""
+            [dbo].[CustOrderHist] @CustomerID = @p0
+            """
         );
     }
 
@@ -104,8 +104,8 @@ p0='ALFKI' (Size = 4000)
 
         AssertSql(
             """
-[dbo].[Ten Most Expensive Products]
-"""
+            [dbo].[Ten Most Expensive Products]
+            """
         );
     }
 
@@ -115,8 +115,8 @@ p0='ALFKI' (Size = 4000)
 
         AssertSql(
             """
-[dbo].[Ten Most Expensive Products]
-"""
+            [dbo].[Ten Most Expensive Products]
+            """
         );
     }
 
@@ -128,10 +128,10 @@ p0='ALFKI' (Size = 4000)
 
         AssertSql(
             """
-p0='ALFKI' (Size = 4000)
+            p0='ALFKI' (Size = 4000)
 
-[dbo].[CustOrderHist] @CustomerID = @p0
-"""
+            [dbo].[CustOrderHist] @CustomerID = @p0
+            """
         );
     }
 
@@ -141,8 +141,8 @@ p0='ALFKI' (Size = 4000)
 
         AssertSql(
             """
-[dbo].[Ten Most Expensive Products]
-"""
+            [dbo].[Ten Most Expensive Products]
+            """
         );
     }
 
@@ -152,8 +152,8 @@ p0='ALFKI' (Size = 4000)
 
         AssertSql(
             """
-[dbo].[Ten Most Expensive Products]
-"""
+            [dbo].[Ten Most Expensive Products]
+            """
         );
     }
 

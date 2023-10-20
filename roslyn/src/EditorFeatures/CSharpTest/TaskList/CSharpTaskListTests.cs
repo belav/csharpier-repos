@@ -55,8 +55,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TaskList
         public async Task SingleLineTodoComment_Quote(TestHost host)
         {
             var code = """
-                // "TODO test"
-                """;
+            // "TODO test"
+            """;
 
             await TestAsync(code, host);
         }
@@ -137,12 +137,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TaskList
         public async Task MultilineTodoComment_Multiline(TestHost host)
         {
             var code = """
-                /* [|TODO: hello    |]
-                        [|TODO: hello    |]
-                [|TODO: hello    |]
-                    * [|TODO: hello    |]
-                    [|TODO: hello    |]*/
-                """;
+            /* [|TODO: hello    |]
+            [|TODO: hello    |]
+            [|TODO: hello    |]
+            * [|TODO: hello    |]
+            [|TODO: hello    |]*/
+            """;
 
             await TestAsync(code, host);
         }
@@ -151,12 +151,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TaskList
         public async Task MultilineTodoComment_Multiline_DocComment(TestHost host)
         {
             var code = """
-                /** [|TODO: hello    |]
-                        [|TODO: hello    |]
-                [|TODO: hello    |]
-                    * [|TODO: hello    |]
-                    [|TODO: hello    |]*/
-                """;
+            /** [|TODO: hello    |]
+            [|TODO: hello    |]
+            [|TODO: hello    |]
+            * [|TODO: hello    |]
+            [|TODO: hello    |]*/
+            """;
 
             await TestAsync(code, host);
         }
@@ -165,11 +165,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TaskList
         public async Task SinglelineDocumentComment_Multiline(TestHost host)
         {
             var code = """
-                /// <summary>
-                /// [|TODO : test       |]
-                /// </summary>
-                ///         [|UNDONE: test2             |]
-                """;
+            /// <summary>
+            /// [|TODO : test       |]
+            /// </summary>
+            ///         [|UNDONE: test2             |]
+            """;
 
             await TestAsync(code, host);
         }

@@ -50,41 +50,41 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         public static void CompilingEquivalentSourcesResultsInEqualModels()
         {
             string source1 = """
-                using System.Text.Json.Serialization;
-                
-                namespace Test
-                {
-                    [JsonSerializable(typeof(MyPoco))]
-                    public partial class JsonContext : JsonSerializerContext { }
-                
-                    public class MyPoco
-                    {
-                        public int MyProperty { get; set; } = 42;
-                    }
-                }
-                """;
+            using System.Text.Json.Serialization;
+
+            namespace Test
+            {
+            [JsonSerializable(typeof(MyPoco))]
+            public partial class JsonContext : JsonSerializerContext { }
+
+            public class MyPoco
+            {
+            public int MyProperty { get; set; } = 42;
+            }
+            }
+            """;
 
             string source2 = """
-                using System;
-                using System.Text.Json.Serialization;
-                
-                namespace Test
-                {
-                    // Same as above but with different implementation
-                    public class MyPoco
-                    {
-                        public int MyProperty
-                        {
-                            get => -1;
-                            set => throw new NotSupportedException();
-                        }
-                    }
+            using System;
+            using System.Text.Json.Serialization;
 
-                    // Changing location should produce identical SG model when no diagnostics are emitted.
-                    [JsonSerializable(typeof(MyPoco))]
-                    public partial class JsonContext : JsonSerializerContext { }
-                }
-                """;
+            namespace Test
+            {
+            // Same as above but with different implementation
+            public class MyPoco
+            {
+            public int MyProperty
+            {
+            get => -1;
+            set => throw new NotSupportedException();
+            }
+            }
+
+            // Changing location should produce identical SG model when no diagnostics are emitted.
+            [JsonSerializable(typeof(MyPoco))]
+            public partial class JsonContext : JsonSerializerContext { }
+            }
+            """;
 
             JsonSourceGeneratorResult result1 = CompilationHelper.RunJsonSourceGenerator(
                 CompilationHelper.CreateCompilation(source1)
@@ -110,34 +110,34 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         public static void CompilingDifferentSourcesResultsInUnequalModels()
         {
             string source1 = """
-                using System.Text.Json.Serialization;
-                
-                namespace Test
-                {
-                    [JsonSerializable(typeof(MyPoco))]
-                    public partial class JsonContext : JsonSerializerContext { }
-                
-                    public class MyPoco
-                    {
-                        public int MyProperty { get; set; } = 42;
-                    }
-                }
-                """;
+            using System.Text.Json.Serialization;
+
+            namespace Test
+            {
+            [JsonSerializable(typeof(MyPoco))]
+            public partial class JsonContext : JsonSerializerContext { }
+
+            public class MyPoco
+            {
+            public int MyProperty { get; set; } = 42;
+            }
+            }
+            """;
 
             string source2 = """
-                using System.Text.Json.Serialization;
-                
-                namespace Test
-                {
-                    [JsonSerializable(typeof(MyPoco))]
-                    public partial class JsonContext : JsonSerializerContext { }
-                
-                    public class MyPoco
-                    {
-                        public int MyProperty { get; } = 42; // same, but missing a getter
-                    }
-                }
-                """;
+            using System.Text.Json.Serialization;
+
+            namespace Test
+            {
+            [JsonSerializable(typeof(MyPoco))]
+            public partial class JsonContext : JsonSerializerContext { }
+
+            public class MyPoco
+            {
+            public int MyProperty { get; } = 42; // same, but missing a getter
+            }
+            }
+            """;
 
             JsonSourceGeneratorResult result1 = CompilationHelper.RunJsonSourceGenerator(
                 CompilationHelper.CreateCompilation(source1)
@@ -299,42 +299,42 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         public static void IncrementalGenerator_EquivalentSources_DoesNotRegenerate()
         {
             string source1 = """
-                using System;
-                using System.Text.Json.Serialization;
-                
-                namespace Test
-                {
-                    [JsonSerializable(typeof(MyPoco))]
-                    public partial class JsonContext : JsonSerializerContext { }
-                
-                    public class MyPoco
-                    {
-                        public string MyProperty { get; set; } = 42;
-                    }
-                }
-                """;
+            using System;
+            using System.Text.Json.Serialization;
+
+            namespace Test
+            {
+            [JsonSerializable(typeof(MyPoco))]
+            public partial class JsonContext : JsonSerializerContext { }
+
+            public class MyPoco
+            {
+            public string MyProperty { get; set; } = 42;
+            }
+            }
+            """;
 
             string source2 = """
-                using System;
-                using System.Text.Json.Serialization;
-                
-                namespace Test
-                {
-                    // Same as above but with different implementation
-                    public class MyPoco
-                    {
-                        public string MyProperty
-                        {
-                            get => -1;
-                            set => throw new NotSupportedException();
-                        }
-                    }
+            using System;
+            using System.Text.Json.Serialization;
 
-                    // Changing location should produce identical SG model when no diagnostics are emitted.
-                    [JsonSerializable(typeof(MyPoco))]
-                    public partial class JsonContext : JsonSerializerContext { }
-                }
-                """;
+            namespace Test
+            {
+            // Same as above but with different implementation
+            public class MyPoco
+            {
+            public string MyProperty
+            {
+            get => -1;
+            set => throw new NotSupportedException();
+            }
+            }
+
+            // Changing location should produce identical SG model when no diagnostics are emitted.
+            [JsonSerializable(typeof(MyPoco))]
+            public partial class JsonContext : JsonSerializerContext { }
+            }
+            """;
 
             Compilation compilation = CompilationHelper.CreateCompilation(source1);
             GeneratorDriver driver = CompilationHelper.CreateJsonSourceGeneratorDriver(compilation);
@@ -391,36 +391,36 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         public static void IncrementalGenerator_DifferentSources_Regenerates()
         {
             string source1 = """
-                using System;
-                using System.Text.Json.Serialization;
-                
-                namespace Test
-                {
-                    [JsonSerializable(typeof(MyPoco))]
-                    public partial class JsonContext : JsonSerializerContext { }
-                
-                    public class MyPoco
-                    {
-                        public string MyProperty { get; set; } = 42;
-                    }
-                }
-                """;
+            using System;
+            using System.Text.Json.Serialization;
+
+            namespace Test
+            {
+            [JsonSerializable(typeof(MyPoco))]
+            public partial class JsonContext : JsonSerializerContext { }
+
+            public class MyPoco
+            {
+            public string MyProperty { get; set; } = 42;
+            }
+            }
+            """;
 
             string source2 = """
-                using System;
-                using System.Text.Json.Serialization;
-                
-                namespace Test
-                {
-                    [JsonSerializable(typeof(MyPoco))]
-                    public partial class JsonContext : JsonSerializerContext { }
-                
-                    public class MyPoco
-                    {
-                        public string MyProperty { get; } = 42; // same, but missing a getter
-                    }
-                }
-                """;
+            using System;
+            using System.Text.Json.Serialization;
+
+            namespace Test
+            {
+            [JsonSerializable(typeof(MyPoco))]
+            public partial class JsonContext : JsonSerializerContext { }
+
+            public class MyPoco
+            {
+            public string MyProperty { get; } = 42; // same, but missing a getter
+            }
+            }
+            """;
 
             Compilation compilation = CompilationHelper.CreateCompilation(source1);
             GeneratorDriver driver = CompilationHelper.CreateJsonSourceGeneratorDriver(compilation);

@@ -101,13 +101,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|var|] x = o as string;
-                        if (x != null)
-                        {
-                        }
-                    }
+                void M()
+                {
+                [|var|] x = o as string;
+                if (x != null)
+                {
+                }
+                }
                 }
                 """,
                 new TestParameters(
@@ -125,13 +125,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|var|] y = o as string;
-                        if (x != null)
-                        {
-                        }
-                    }
+                void M()
+                {
+                [|var|] y = o as string;
+                if (x != null)
+                {
+                }
+                }
                 }
                 """
             );
@@ -144,32 +144,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M()
-                    {
-                        switch (o)
-                        {
-                            default:
-                                [|var|] x = o as string;
-                                if (x != null)
-                                {
-                                }
-                        }
-                    }
+                void M()
+                {
+                switch (o)
+                {
+                default:
+                [|var|] x = o as string;
+                if (x != null)
+                {
+                }
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        switch (o)
-                        {
-                            default:
-                                if (o is string x)
-                                {
-                                }
-                        }
-                    }
+                void M()
+                {
+                switch (o)
+                {
+                default:
+                if (o is string x)
+                {
+                }
+                }
+                }
                 }
                 """
             );
@@ -182,35 +182,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M()
-                    {
-                        switch (o)
-                        {
-                            default:
-                                [|var|] x = o as string;
+                void M()
+                {
+                switch (o)
+                {
+                default:
+                [|var|] x = o as string;
 
-                                //a comment
-                                if (x != null)
-                                {
-                                }
-                        }
-                    }
+                //a comment
+                if (x != null)
+                {
+                }
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        switch (o)
-                        {
-                            default:
-                                //a comment
-                                if (o is string x)
-                                {
-                                }
-                        }
-                    }
+                void M()
+                {
+                switch (o)
+                {
+                default:
+                //a comment
+                if (o is string x)
+                {
+                }
+                }
+                }
                 }
                 """
             );
@@ -223,13 +223,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|y|] = o as string;
-                        if (x != null)
-                        {
-                        }
-                    }
+                void M()
+                {
+                [|y|] = o as string;
+                if (x != null)
+                {
+                }
+                }
                 }
                 """
             );
@@ -242,10 +242,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|return;|]
-                    }
+                void M()
+                {
+                [|return;|]
+                }
                 }
                 """
             );
@@ -258,13 +258,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|var|] x = o is string;
-                        if (x != null)
-                        {
-                        }
-                    }
+                void M()
+                {
+                [|var|] x = o is string;
+                if (x != null)
+                {
+                }
+                }
                 }
                 """
             );
@@ -277,24 +277,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|var|] x = (o ? z : w) as string;
-                        if (x != null)
-                        {
-                        }
-                    }
+                void M()
+                {
+                [|var|] x = (o ? z : w) as string;
+                if (x != null)
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        if ((o ? z : w) is string x)
-                        {
-                        }
-                    }
+                void M()
+                {
+                if ((o ? z : w) is string x)
+                {
+                }
+                }
                 }
                 """
             );
@@ -307,30 +307,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|var|] x = o as string;
-                        if (null != x)
-                        {
-                        }
-                        else
-                        {
-                        }
-                    }
+                void M()
+                {
+                [|var|] x = o as string;
+                if (null != x)
+                {
+                }
+                else
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        if (o is string x)
-                        {
-                        }
-                        else
-                        {
-                        }
-                    }
+                void M()
+                {
+                if (o is string x)
+                {
+                }
+                else
+                {
+                }
+                }
                 }
                 """
             );
@@ -343,26 +343,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M()
-                    {
-                        // prefix comment
-                        [|var|] x = o as string;
-                        if (x != null)
-                        {
-                        }
-                    }
+                void M()
+                {
+                // prefix comment
+                [|var|] x = o as string;
+                if (x != null)
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        // prefix comment
-                        if (o is string x)
-                        {
-                        }
-                    }
+                void M()
+                {
+                // prefix comment
+                if (o is string x)
+                {
+                }
+                }
                 }
                 """
             );
@@ -375,25 +375,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|var|] x = o as string; // suffix comment
-                        if (x != null)
-                        {
-                        }
-                    }
+                void M()
+                {
+                [|var|] x = o as string; // suffix comment
+                if (x != null)
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        // suffix comment
-                        if (o is string x)
-                        {
-                        }
-                    }
+                void M()
+                {
+                // suffix comment
+                if (o is string x)
+                {
+                }
+                }
                 }
                 """
             );
@@ -406,27 +406,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M()
-                    {
-                        // prefix comment
-                        [|var|] x = o as string; // suffix comment
-                        if (x != null)
-                        {
-                        }
-                    }
+                void M()
+                {
+                // prefix comment
+                [|var|] x = o as string; // suffix comment
+                if (x != null)
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        // prefix comment
-                        // suffix comment
-                        if (o is string x)
-                        {
-                        }
-                    }
+                void M()
+                {
+                // prefix comment
+                // suffix comment
+                if (o is string x)
+                {
+                }
+                }
                 }
                 """
             );
@@ -439,27 +439,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|var|] x = o as string;
+                void M()
+                {
+                [|var|] x = o as string;
 
-                        //suffix comment
-                        if (x != null)
-                        {
-                        }
-                    }
+                //suffix comment
+                if (x != null)
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        //suffix comment
-                        if (o is string x)
-                        {
-                        }
-                    }
+                void M()
+                {
+                //suffix comment
+                if (o is string x)
+                {
+                }
+                }
                 }
                 """
             );
@@ -472,27 +472,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|var|] x = o as string;
+                void M()
+                {
+                [|var|] x = o as string;
 
-                        //suffix comment
-                        if (x != null)
-                        {
-                        }
-                    }
+                //suffix comment
+                if (x != null)
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        //suffix comment
-                        if (o is string x)
-                        {
-                        }
-                    }
+                void M()
+                {
+                //suffix comment
+                if (o is string x)
+                {
+                }
+                }
                 }
                 """
             );
@@ -505,30 +505,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M()
-                    {
-                        int a = 0;
-                        [|var|] x = o as string;
+                void M()
+                {
+                int a = 0;
+                [|var|] x = o as string;
 
-                        //suffix comment
-                        if (x != null)
-                        {
-                        }
-                    }
+                //suffix comment
+                if (x != null)
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        int a = 0;
+                void M()
+                {
+                int a = 0;
 
-                        //suffix comment
-                        if (o is string x)
-                        {
-                        }
-                    }
+                //suffix comment
+                if (o is string x)
+                {
+                }
+                }
                 }
                 """
             );
@@ -541,24 +541,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|var|] x = o as string;
-                        if (x != null ? 0 : 1)
-                        {
-                        }
-                    }
+                void M()
+                {
+                [|var|] x = o as string;
+                if (x != null ? 0 : 1)
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        if (o is string x ? 0 : 1)
-                        {
-                        }
-                    }
+                void M()
+                {
+                if (o is string x ? 0 : 1)
+                {
+                }
+                }
                 }
                 """
             );
@@ -571,24 +571,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|var|] x = o as string;
-                        if ((x != null))
-                        {
-                        }
-                    }
+                void M()
+                {
+                [|var|] x = o as string;
+                if ((x != null))
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        if ((o is string x))
-                        {
-                        }
-                    }
+                void M()
+                {
+                if ((o is string x))
+                {
+                }
+                }
                 }
                 """
             );
@@ -601,24 +601,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|var|] x = o as string;
-                        if (x != null && x.Length > 0)
-                        {
-                        }
-                    }
+                void M()
+                {
+                [|var|] x = o as string;
+                if (x != null && x.Length > 0)
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        if (o is string x && x.Length > 0)
-                        {
-                        }
-                    }
+                void M()
+                {
+                if (o is string x && x.Length > 0)
+                {
+                }
+                }
                 }
                 """
             );
@@ -631,16 +631,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|var|] x = o as string;
-                        if (x != null && x.Length > 0)
-                        {
-                        }
-                        else if (x != null)
-                        {
-                        }
-                    }
+                void M()
+                {
+                [|var|] x = o as string;
+                if (x != null && x.Length > 0)
+                {
+                }
+                else if (x != null)
+                {
+                }
+                }
                 }
                 """
             );
@@ -653,15 +653,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|var|] x = o as string;
-                        if (x != null && x.Length > 0)
-                        {
-                        }
+                void M()
+                {
+                [|var|] x = o as string;
+                if (x != null && x.Length > 0)
+                {
+                }
 
-                        Console.WriteLine(x);
-                    }
+                Console.WriteLine(x);
+                }
                 }
                 """
             );
@@ -674,30 +674,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|var|] x = o as string;
-                        if (x != null && x.Length > 0)
-                        {
-                        }
+                void M()
+                {
+                [|var|] x = o as string;
+                if (x != null && x.Length > 0)
+                {
+                }
 
-                        x = null;
-                        Console.WriteLine(x);
-                    }
+                x = null;
+                Console.WriteLine(x);
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        if (o is string x && x.Length > 0)
-                        {
-                        }
+                void M()
+                {
+                if (o is string x && x.Length > 0)
+                {
+                }
 
-                        x = null;
-                        Console.WriteLine(x);
-                    }
+                x = null;
+                Console.WriteLine(x);
+                }
                 }
                 """
             );
@@ -710,20 +710,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M(object o)
-                    {
-                        [|var|] s = o as string;
-                        if (s != null)
-                        {
+                void M(object o)
+                {
+                [|var|] s = o as string;
+                if (s != null)
+                {
 
-                        }
-                        else
-                        {
-                            if (o is int?)
-                                s = null;
-                            s.ToString();
-                        }
-                    }
+                }
+                else
+                {
+                if (o is int?)
+                s = null;
+                s.ToString();
+                }
+                }
                 }
                 """
             );
@@ -736,14 +736,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 public class Test
                 {
-                    public void TestIt(object o1, object o2)
-                    {
-                        [|var|] test = o1 as Test;
-                        if (test != null || o2 != null)
-                        {
-                            var o3 = test ?? o2;
-                        }
-                    }
+                public void TestIt(object o1, object o2)
+                {
+                [|var|] test = o1 as Test;
+                if (test != null || o2 != null)
+                {
+                var o3 = test ?? o2;
+                }
+                }
                 }
                 """
             );
@@ -756,17 +756,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    string Use(string x) => x;
+                string Use(string x) => x;
 
-                    void M()
-                    {
-                        [|var|] x = o as string;
-                        if (x != null && x.Length > 0)
-                        {
-                        }
+                void M()
+                {
+                [|var|] x = o as string;
+                if (x != null && x.Length > 0)
+                {
+                }
 
-                        Console.WriteLine(x = Use(x));
-                    }
+                Console.WriteLine(x = Use(x));
+                }
                 }
                 """
             );
@@ -779,16 +779,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|var|] x = o as string;
-                        if (x != null && x.Length > 0)
-                        {
-                        }
+                void M()
+                {
+                [|var|] x = o as string;
+                if (x != null && x.Length > 0)
+                {
+                }
 
-                        Console.WriteLine(x);
-                        x = "writeAfter";
-                    }
+                Console.WriteLine(x);
+                x = "writeAfter";
+                }
                 }
                 """
             );
@@ -801,22 +801,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class Program
                 {
-                    static void Goo(System.Activator bar)
-                    {
-                    }
+                static void Goo(System.Activator bar)
+                {
+                }
 
-                    static void Main(string[] args)
-                    {
-                        var a = new object();
-                        [|var|] b = a as System.Activator;
-                        if ((b == null) && false)
-                        {
-                        }
-                        else
-                        {
-                            Goo(b);
-                        }
-                    }
+                static void Main(string[] args)
+                {
+                var a = new object();
+                [|var|] b = a as System.Activator;
+                if ((b == null) && false)
+                {
+                }
+                else
+                {
+                Goo(b);
+                }
+                }
                 }
                 """
             );
@@ -829,19 +829,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class Goo
                 {
-                    object Data { get; set; }
+                object Data { get; set; }
 
-                    void DoGoo()
-                    {
-                        [|var|] oldData = this.Data as string;
+                void DoGoo()
+                {
+                [|var|] oldData = this.Data as string;
 
-                        Data = null;
+                Data = null;
 
-                        if (oldData != null)
-                        {
-                            // Do something
-                        }
-                    }
+                if (oldData != null)
+                {
+                // Do something
+                }
+                }
                 }
                 """
             );
@@ -854,32 +854,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M(object y)
-                    {
-                        if (y != null)
-                        {
-                        }
+                void M(object y)
+                {
+                if (y != null)
+                {
+                }
 
-                        [|var|] x = o as string;
-                        if (x != null)
-                        {
-                        }
-                    }
+                [|var|] x = o as string;
+                if (x != null)
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(object y)
-                    {
-                        if (y != null)
-                        {
-                        }
+                void M(object y)
+                {
+                if (y != null)
+                {
+                }
 
-                        if (o is string x)
-                        {
-                        }
-                    }
+                if (o is string x)
+                {
+                }
+                }
                 }
                 """
             );
@@ -893,41 +893,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 using System;
                 namespace N
                 {
-                    class Program
-                    {
-                        public static void Main()
-                        {
-                            object o = null;
-                            int i = 0;
-                            [|var|] s = o as string;
-                            if (s != null && i == 0 && i == 1 &&
-                                i == 2 && i == 3 &&
-                                i == 4 && i == 5)
-                            {
-                                Console.WriteLine();
-                            }
-                        }
-                    }
+                class Program
+                {
+                public static void Main()
+                {
+                object o = null;
+                int i = 0;
+                [|var|] s = o as string;
+                if (s != null && i == 0 && i == 1 &&
+                i == 2 && i == 3 &&
+                i == 4 && i == 5)
+                {
+                Console.WriteLine();
+                }
+                }
+                }
                 }
                 """,
                 """
                 using System;
                 namespace N
                 {
-                    class Program
-                    {
-                        public static void Main()
-                        {
-                            object o = null;
-                            int i = 0;
-                            if (o is string s && i == 0 && i == 1 &&
-                                i == 2 && i == 3 &&
-                                i == 4 && i == 5)
-                            {
-                                Console.WriteLine();
-                            }
-                        }
-                    }
+                class Program
+                {
+                public static void Main()
+                {
+                object o = null;
+                int i = 0;
+                if (o is string s && i == 0 && i == 1 &&
+                i == 2 && i == 3 &&
+                i == 4 && i == 5)
+                {
+                Console.WriteLine();
+                }
+                }
+                }
                 }
                 """
             );
@@ -941,16 +941,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 using System;
                 namespace N
                 {
-                    class Program
-                    {
-                        public static void Main()
-                        {
-                            object o = null;
-                            [|var|] i = o as int?;
-                            if (i != null)
-                                Console.WriteLine(i);
-                        }
-                    }
+                class Program
+                {
+                public static void Main()
+                {
+                object o = null;
+                [|var|] i = o as int?;
+                if (i != null)
+                Console.WriteLine(i);
+                }
+                }
                 }
                 """
             );
@@ -963,7 +963,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class SyntaxNode
                 {
-                    public SyntaxNode Parent;
+                public SyntaxNode Parent;
                 }
 
                 class BaseParameterListSyntax : SyntaxNode
@@ -977,15 +977,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
 
                 public static class C
                 {
-                    static void M(ParameterSyntax parameter)
-                    {
-                        [|SyntaxNode|] parent = parameter.Parent as BaseParameterListSyntax;
+                static void M(ParameterSyntax parameter)
+                {
+                [|SyntaxNode|] parent = parameter.Parent as BaseParameterListSyntax;
 
-                        if (parent != null)
-                        {
-                            parent = parent.Parent;
-                        }
-                    }
+                if (parent != null)
+                {
+                parent = parent.Parent;
+                }
+                }
                 }
                 """
             );
@@ -998,13 +998,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M(object o)
-                    {
-                        [|string|] x = o as string;
-                        while (x != null)
-                        {
-                        }
-                    }
+                void M(object o)
+                {
+                [|string|] x = o as string;
+                while (x != null)
+                {
+                }
+                }
                 }
                 """
             );
@@ -1017,15 +1017,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M(object o)
-                    {
-                        [|string|] x;
-                        while ((x = o as string) != null)
-                        {
-                        }
+                void M(object o)
+                {
+                [|string|] x;
+                while ((x = o as string) != null)
+                {
+                }
 
-                        var readAfterWhile = x;
-                    }
+                var readAfterWhile = x;
+                }
                 }
                 """
             );
@@ -1038,15 +1038,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M(object o)
-                    {
-                        [|string|] x;
-                        while ((x = o as string) != null)
-                        {
-                        }
+                void M(object o)
+                {
+                [|string|] x;
+                while ((x = o as string) != null)
+                {
+                }
 
-                        x = "writeAfterWhile";
-                    }
+                x = "writeAfterWhile";
+                }
                 }
                 """
             );
@@ -1059,14 +1059,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M(object o)
-                    {
-                        [|string|] x;
-                        x = "writeBeforeWhile";
-                        while ((x = o as string) != null)
-                        {
-                        }
-                    }
+                void M(object o)
+                {
+                [|string|] x;
+                x = "writeBeforeWhile";
+                while ((x = o as string) != null)
+                {
+                }
+                }
                 }
                 """
             );
@@ -1079,14 +1079,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M(object o)
-                    {
-                        [|string|] x = null;
-                        var readBeforeWhile = x;
-                        while ((x = o as string) != null)
-                        {
-                        }
-                    }
+                void M(object o)
+                {
+                [|string|] x = null;
+                var readBeforeWhile = x;
+                while ((x = o as string) != null)
+                {
+                }
+                }
                 }
                 """
             );
@@ -1099,28 +1099,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        object obj = "test";
+                static void Main(string[] args)
+                {
+                object obj = "test";
 
-                        [|var|] str = obj as string;
-                        var title = str != null
-                            ? str
-                            : ";
-                    }
+                [|var|] str = obj as string;
+                var title = str != null
+                ? str
+                : ";
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        object obj = "test";
+                static void Main(string[] args)
+                {
+                object obj = "test";
 
-                        var title = obj is string str
-                            ? str
-                            : ";
-                    }
+                var title = obj is string str
+                ? str
+                : ";
+                }
                 }
                 """
             );
@@ -1133,24 +1133,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        object obj = "test";
+                static void Main(string[] args)
+                {
+                object obj = "test";
 
-                        [|var|] str = obj as string;
-                        var title = str != null ? str : ";
-                    }
+                [|var|] str = obj as string;
+                var title = str != null ? str : ";
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        object obj = "test";
+                static void Main(string[] args)
+                {
+                object obj = "test";
 
-                        var title = obj is string str ? str : ";
-                    }
+                var title = obj is string str ? str : ";
+                }
                 }
                 """
             );
@@ -1163,13 +1163,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M(object o)
-                    {
-                        [|var|] x = o as dynamic;
-                        if (x != null)
-                        {
-                        }
-                    }
+                void M(object o)
+                {
+                [|var|] x = o as dynamic;
+                if (x != null)
+                {
+                }
+                }
                 }
                 """
             );
@@ -1182,16 +1182,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                  public static void Main()
-                  {
-                    object o = new C();
-                    [|var|] c = o as C;
-                    if (c != null)
-                      System.Console.WriteLine();
-                  }
+                public static void Main()
+                {
+                object o = new C();
+                [|var|] c = o as C;
+                if (c != null)
+                System.Console.WriteLine();
+                }
 
-                  public static bool operator ==(C c1, C c2) => false;
-                  public static bool operator !=(C c1, C c2) => false;
+                public static bool operator ==(C c1, C c2) => false;
+                public static bool operator !=(C c1, C c2) => false;
                 }
                 """
             );
@@ -1204,22 +1204,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    string M(object o)
-                    {
-                        [|var|] x = o as string;
-                        if (x == null) return null;
-                        return x;
-                    }
+                string M(object o)
+                {
+                [|var|] x = o as string;
+                if (x == null) return null;
+                return x;
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    string M(object o)
-                    {
-                        if (!(o is string x)) return null;
-                        return x;
-                    }
+                string M(object o)
+                {
+                if (!(o is string x)) return null;
+                return x;
+                }
                 }
                 """,
                 parameters: new TestParameters(
@@ -1235,34 +1235,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    string M(object o, bool b)
-                    {
-                        [|var|] x = o as string;
-                        if (((object)x == null) || b)
-                        {
-                            return null;
-                        }
-                        else
-                        {
-                            return x;
-                        }
-                    }
+                string M(object o, bool b)
+                {
+                [|var|] x = o as string;
+                if (((object)x == null) || b)
+                {
+                return null;
+                }
+                else
+                {
+                return x;
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    string M(object o, bool b)
-                    {
-                        if ((!(o is string x)) || b)
-                        {
-                            return null;
-                        }
-                        else
-                        {
-                            return x;
-                        }
-                    }
+                string M(object o, bool b)
+                {
+                if ((!(o is string x)) || b)
+                {
+                return null;
+                }
+                else
+                {
+                return x;
+                }
+                }
                 }
                 """,
                 parameters: new TestParameters(
@@ -1278,36 +1278,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M(object e)
-                    {
-                        var fe = e as C;
-                        [|var|] ae = e as C;
-                        if (fe != null)
-                        {
-                            M(fe); // fe is used
-                        }
-                        else if (ae != null)
-                        {
-                            M(ae); // ae is used
-                        }
-                    }
+                void M(object e)
+                {
+                var fe = e as C;
+                [|var|] ae = e as C;
+                if (fe != null)
+                {
+                M(fe); // fe is used
+                }
+                else if (ae != null)
+                {
+                M(ae); // ae is used
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(object e)
-                    {
-                        var fe = e as C;
-                        if (fe != null)
-                        {
-                            M(fe); // fe is used
-                        }
-                        else if (e is C ae)
-                        {
-                            M(ae); // ae is used
-                        }
-                    }
+                void M(object e)
+                {
+                var fe = e as C;
+                if (fe != null)
+                {
+                M(fe); // fe is used
+                }
+                else if (e is C ae)
+                {
+                M(ae); // ae is used
+                }
+                }
                 }
                 """
             );
@@ -1320,19 +1320,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M(object e)
-                    {
-                        var fe = e as C;
-                        [|var|] ae = e as C;
-                        if (fe != null)
-                        {
-                            M(ae); // ae is used
-                        }
-                        else if (ae != null)
-                        {
-                            M(ae); // ae is used
-                        }
-                    }
+                void M(object e)
+                {
+                var fe = e as C;
+                [|var|] ae = e as C;
+                if (fe != null)
+                {
+                M(ae); // ae is used
+                }
+                else if (ae != null)
+                {
+                M(ae); // ae is used
+                }
+                }
                 }
                 """
             );
@@ -1345,20 +1345,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M(object e)
-                    {
-                        [|var|] c = e as C;
-                        {
-                            {
-                                var x1 = c;
+                void M(object e)
+                {
+                [|var|] c = e as C;
+                {
+                {
+                var x1 = c;
 
-                                if (c != null)
-                                {
+                if (c != null)
+                {
 
-                                }
-                            }
-                        }
-                    }
+                }
+                }
+                }
+                }
 
                 }
                 """
@@ -1372,23 +1372,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M(object e)
-                    {
-                        [|var|] c = e as C;
-                        {
-                            {
-                                if (c != null)
-                                {
+                void M(object e)
+                {
+                [|var|] c = e as C;
+                {
+                {
+                if (c != null)
+                {
 
-                                }
+                }
 
-                                var x2 = c;
-                            }
+                var x2 = c;
+                }
 
-                            // out of scope
-                            var x3 = c;
-                        }
-                    }
+                // out of scope
+                var x3 = c;
+                }
+                }
                 }
                 """
             );
@@ -1401,21 +1401,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M(object e)
-                    {
-                        [|var|] c = e as C;
-                        {
-                            {
-                                if (c != null)
-                                {
+                void M(object e)
+                {
+                [|var|] c = e as C;
+                {
+                {
+                if (c != null)
+                {
 
-                                }
-                            }
+                }
+                }
 
-                            // out of scope
-                            var x3 = c;
-                        }
-                    }
+                // out of scope
+                var x3 = c;
+                }
+                }
                 }
                 """
             );
@@ -1428,34 +1428,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M(object e)
-                    {
-                        [|var|] c = e as C;
-                        {
-                            {
-                                if (c != null)
-                                {
+                void M(object e)
+                {
+                [|var|] c = e as C;
+                {
+                {
+                if (c != null)
+                {
 
-                                }
-                            }
-                        }
-                    }
+                }
+                }
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(object e)
-                    {
-                        {
-                            {
-                                if (e is C c)
-                                {
+                void M(object e)
+                {
+                {
+                {
+                if (e is C c)
+                {
 
-                                }
-                            }
-                        }
-                    }
+                }
+                }
+                }
+                }
                 }
                 """
             );
@@ -1468,20 +1468,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M(object e)
-                    {
-                        [|var|] c = e as C;
-                        M(c != null ? c : null);
-                    }
+                void M(object e)
+                {
+                [|var|] c = e as C;
+                M(c != null ? c : null);
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(object e)
-                    {
-                        M(e is C c ? c : null);
-                    }
+                void M(object e)
+                {
+                M(e is C c ? c : null);
+                }
                 }
                 """
             );
@@ -1494,11 +1494,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M(object e)
-                    {
-                        [|var|] c = e as C;
-                        M(c != null ? c : null, c);
-                    }
+                void M(object e)
+                {
+                [|var|] c = e as C;
+                M(c != null ? c : null, c);
+                }
                 }
                 """
             );
@@ -1511,11 +1511,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M(object e)
-                    {
-                        [|var|] c = e as C;
-                        for (;(c)!=null;) {}
-                    }
+                void M(object e)
+                {
+                [|var|] c = e as C;
+                for (;(c)!=null;) {}
+                }
                 }
                 """
             );
@@ -1528,20 +1528,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M(object e)
-                    {
-                        [|C|] c;
-                        for (; !((c = e as C)==null);) { }
-                    }
+                void M(object e)
+                {
+                [|C|] c;
+                for (; !((c = e as C)==null);) { }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(object e)
-                    {
-                        for (; !(!(e is C c));) { }
-                    }
+                void M(object e)
+                {
+                for (; !(!(e is C c));) { }
+                }
                 }
                 """,
                 parameters: new TestParameters(
@@ -1557,26 +1557,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M(object e)
-                    {
-                        [|C|] c = null;
-                        for (; !((c = e as C)==null);)
-                        {
-                            M(c);
-                        }
-                    }
+                void M(object e)
+                {
+                [|C|] c = null;
+                for (; !((c = e as C)==null);)
+                {
+                M(c);
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(object e)
-                    {
-                        for (; !(!(e is C c));)
-                        {
-                            M(c);
-                        }
-                    }
+                void M(object e)
+                {
+                for (; !(!(e is C c));)
+                {
+                M(c);
+                }
+                }
                 }
                 """,
                 parameters: new TestParameters(
@@ -1592,15 +1592,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M(object e)
-                    {
-                        [|C|] c = null;
-                        for (; ((c = e as C)==null);)
-                        {
-                            if (b) c = null;
-                            M(c);
-                        }
-                    }
+                void M(object e)
+                {
+                [|C|] c = null;
+                for (; ((c = e as C)==null);)
+                {
+                if (b) c = null;
+                M(c);
+                }
+                }
                 }
                 """
             );
@@ -1613,30 +1613,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M(object e, bool b)
-                    {
-                        [|C|] c = null;
-                        for (; (c = e as C)==null;)
-                        {
-                            if (b) c = null;
-                            else c = null;
-                            M(c);
-                        }
-                    }
+                void M(object e, bool b)
+                {
+                [|C|] c = null;
+                for (; (c = e as C)==null;)
+                {
+                if (b) c = null;
+                else c = null;
+                M(c);
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(object e, bool b)
-                    {
-                        for (; !(e is C c);)
-                        {
-                            if (b) c = null;
-                            else c = null;
-                            M(c);
-                        }
-                    }
+                void M(object e, bool b)
+                {
+                for (; !(e is C c);)
+                {
+                if (b) c = null;
+                else c = null;
+                M(c);
+                }
+                }
                 }
                 """,
                 parameters: new TestParameters(
@@ -1652,27 +1652,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M(object e)
-                    {
-                        [|C|] c = null, x = null;
-                        for (; !((c = e as C)==null);)
-                        {
-                            M(c);
-                        }
-                    }
+                void M(object e)
+                {
+                [|C|] c = null, x = null;
+                for (; !((c = e as C)==null);)
+                {
+                M(c);
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(object e)
-                    {
-                        C x = null;
-                        for (; !(!(e is C c));)
-                        {
-                            M(c);
-                        }
-                    }
+                void M(object e)
+                {
+                C x = null;
+                for (; !(!(e is C c));)
+                {
+                M(c);
+                }
+                }
                 }
                 """,
                 parameters: new TestParameters(
@@ -1688,14 +1688,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M(object e)
-                    {
-                        [|C|] c = null, x = c;
-                        for (; !((c = e as C)==null);)
-                        {
-                            M(c);
-                        }
-                    }
+                void M(object e)
+                {
+                [|C|] c = null, x = c;
+                for (; !((c = e as C)==null);)
+                {
+                M(c);
+                }
+                }
                 }
                 """
             );
@@ -1708,14 +1708,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M(object e)
-                    {
-                        [|C|] c;
-                        for (var i = !((c = e as C)==null); i != null; )
-                        {
-                            M(c);
-                        }
-                    }
+                void M(object e)
+                {
+                [|C|] c;
+                for (var i = !((c = e as C)==null); i != null; )
+                {
+                M(c);
+                }
+                }
                 }
                 """
             );
@@ -1728,20 +1728,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M(object e)
-                    {
-                        [||]var c = e as C;
-                        C F() => c == null ? null : c;
-                    }
+                void M(object e)
+                {
+                [||]var c = e as C;
+                C F() => c == null ? null : c;
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(object e)
-                    {
-                        C F() => !(e is C c) ? null : c;
-                    }
+                void M(object e)
+                {
+                C F() => !(e is C c) ? null : c;
+                }
                 }
                 """,
                 parameters: new TestParameters(
@@ -1757,12 +1757,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    C M(object e)
-                    {
-                        [||]var c = e as C;
-                        C F() => c == null ? null : c;
-                        return c;
-                    }
+                C M(object e)
+                {
+                [||]var c = e as C;
+                C F() => c == null ? null : c;
+                return c;
+                }
                 }
                 """
             );
@@ -1775,20 +1775,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M(object e)
-                    {
-                        [||]var c = e as C;
-                        System.Func<C> f = () => c == null ? null : c;
-                    }
+                void M(object e)
+                {
+                [||]var c = e as C;
+                System.Func<C> f = () => c == null ? null : c;
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(object e)
-                    {
-                        System.Func<C> f = () => !(e is C c) ? null : c;
-                    }
+                void M(object e)
+                {
+                System.Func<C> f = () => !(e is C c) ? null : c;
+                }
                 }
                 """,
                 parameters: new TestParameters(
@@ -1804,12 +1804,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    C M(object e)
-                    {
-                        [||]var c = e as C;
-                        System.Func<C> f = () => c == null ? null : c;
-                        return c;
-                    }
+                C M(object e)
+                {
+                [||]var c = e as C;
+                System.Func<C> f = () => c == null ? null : c;
+                return c;
+                }
                 }
                 """
             );
@@ -1822,17 +1822,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M(object o)
-                    {
-                        [|var|] c = o as C;
-                        M2(c != null);
-                        if (c == null)
-                        {
-                            return;
-                        }
-                    }
+                void M(object o)
+                {
+                [|var|] c = o as C;
+                M2(c != null);
+                if (c == null)
+                {
+                return;
+                }
+                }
 
-                    void M2(bool b) { }
+                void M2(bool b) { }
                 }
                 """
             );
@@ -1849,16 +1849,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
 
                 class Program
                 {
-                    static void Goo<TKey, TValue>(object items)
-                    {
-                        [|var|] itemsAsDictionary = items as IDictionary<TKey, TValue>;
-                        SortedDictionary<TKey, TValue>? dictionary = null;
-                        if (itemsAsDictionary != null)
-                        {
-                            dictionary = new SortedDictionary<TKey, TValue>();
-                        }
-                        return dictionary;
-                    }
+                static void Goo<TKey, TValue>(object items)
+                {
+                [|var|] itemsAsDictionary = items as IDictionary<TKey, TValue>;
+                SortedDictionary<TKey, TValue>? dictionary = null;
+                if (itemsAsDictionary != null)
+                {
+                dictionary = new SortedDictionary<TKey, TValue>();
+                }
+                return dictionary;
+                }
                 }
                 """,
                 """
@@ -1868,15 +1868,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
 
                 class Program
                 {
-                    static void Goo<TKey, TValue>(object items)
-                    {
-                        SortedDictionary<TKey, TValue>? dictionary = null;
-                        if (items is IDictionary<TKey, TValue> itemsAsDictionary)
-                        {
-                            dictionary = new SortedDictionary<TKey, TValue>();
-                        }
-                        return dictionary;
-                    }
+                static void Goo<TKey, TValue>(object items)
+                {
+                SortedDictionary<TKey, TValue>? dictionary = null;
+                if (items is IDictionary<TKey, TValue> itemsAsDictionary)
+                {
+                dictionary = new SortedDictionary<TKey, TValue>();
+                }
+                return dictionary;
+                }
                 }
                 """
             );
@@ -1889,13 +1889,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M()
-                    {
-                        using [|var|] x = o as IDisposable;
-                        if (x != null)
-                        {
-                        }
-                    }
+                void M()
+                {
+                using [|var|] x = o as IDisposable;
+                if (x != null)
+                {
+                }
+                }
                 }
                 """
             );
@@ -1908,15 +1908,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    void M()
-                    {
-                        using ([|var|] x = o as IDisposable)
-                        {
-                            if (x != null)
-                            {
-                            }
-                        }
-                    }
+                void M()
+                {
+                using ([|var|] x = o as IDisposable)
+                {
+                if (x != null)
+                {
+                }
+                }
+                }
                 }
                 """
             );
@@ -1929,34 +1929,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 """
                 class C
                 {
-                    public static void M(object o)
-                    {
+                public static void M(object o)
+                {
                 #if DEBUG
-                        Console.WriteLine("in debug");
+                Console.WriteLine("in debug");
                 #endif
 
-                        [|string|] s = o as string;
-                        if (s != null)
-                        {
+                [|string|] s = o as string;
+                if (s != null)
+                {
 
-                        }
-                    }
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    public static void M(object o)
-                    {
+                public static void M(object o)
+                {
                 #if DEBUG
-                        Console.WriteLine("in debug");
+                Console.WriteLine("in debug");
                 #endif
 
-                        if (o is string s)
-                        {
+                if (o is string s)
+                {
 
-                        }
-                    }
+                }
+                }
                 }
                 """
             );
@@ -1971,14 +1971,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
 
                 class Program
                 {
-                    static void Set(object obj, object? item)
-                    {
-                        [|object?[]?|] arr = obj as object[];
-                        if (arr != null)
-                        {
-                            arr[0] = item;
-                        }
-                    }
+                static void Set(object obj, object? item)
+                {
+                [|object?[]?|] arr = obj as object[];
+                if (arr != null)
+                {
+                arr[0] = item;
+                }
+                }
                 }
                 """,
                 """
@@ -1986,13 +1986,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
 
                 class Program
                 {
-                    static void Set(object obj, object? item)
-                    {
-                        if (obj is object?[] arr)
-                        {
-                            arr[0] = item;
-                        }
-                    }
+                static void Set(object obj, object? item)
+                {
+                if (obj is object?[] arr)
+                {
+                arr[0] = item;
+                }
+                }
                 }
                 """
             );
@@ -2002,47 +2002,47 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         public async Task TestLocalReferencedAcrossScopes1()
         {
             var code = """
-                using System.Transactions;
+            using System.Transactions;
 
-                class BaseObject { }
-                class ObjectFactory
-                {
-                    internal static BaseObject CreateObject(int x)
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
+            class BaseObject { }
+            class ObjectFactory
+            {
+            internal static BaseObject CreateObject(int x)
+            {
+            throw new NotImplementedException();
+            }
+            }
 
-                struct Repro
-                {
-                    static int Main(string[] args)
-                    {
-                        int x = 0;
-                        [|BaseObject|] obj;
+            struct Repro
+            {
+            static int Main(string[] args)
+            {
+            int x = 0;
+            [|BaseObject|] obj;
 
-                        var tso = new TransactionOptions { IsolationLevel = IsolationLevel.RepeatableRead };
-                        using (var trans = new TransactionScope(TransactionScopeOption.Required, tso))
-                        {
-                            try
-                            {
-                                if ((obj = ObjectFactory.CreateObject(x) as BaseObject) == null)
-                                {
-                                    return -1;
-                                }
-                                // uses of obj in the transaction
-                            }
-                            catch (TransactionAbortedException)
-                            {
-                                return -1;
-                            }
-                        }
+            var tso = new TransactionOptions { IsolationLevel = IsolationLevel.RepeatableRead };
+            using (var trans = new TransactionScope(TransactionScopeOption.Required, tso))
+            {
+            try
+            {
+            if ((obj = ObjectFactory.CreateObject(x) as BaseObject) == null)
+            {
+            return -1;
+            }
+            // uses of obj in the transaction
+            }
+            catch (TransactionAbortedException)
+            {
+            return -1;
+            }
+            }
 
-                        // local used here.
-                        Console.WriteLine(obj);
-                        return 0;
-                    }
-                }
-                """;
+            // local used here.
+            Console.WriteLine(obj);
+            return 0;
+            }
+            }
+            """;
 
             await TestMissingInRegularAndScriptAsync(code);
         }
@@ -2057,39 +2057,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 class BaseObject { }
                 class ObjectFactory
                 {
-                    internal static BaseObject CreateObject(int x)
-                    {
-                        throw new NotImplementedException();
-                    }
+                internal static BaseObject CreateObject(int x)
+                {
+                throw new NotImplementedException();
+                }
                 }
 
                 struct Repro
                 {
-                    static int Main(string[] args)
-                    {
-                        int x = 0;
-                        [|BaseObject|] obj;
+                static int Main(string[] args)
+                {
+                int x = 0;
+                [|BaseObject|] obj;
 
-                        var tso = new TransactionOptions { IsolationLevel = IsolationLevel.RepeatableRead };
-                        using (var trans = new TransactionScope(TransactionScopeOption.Required, tso))
-                        {
-                            try
-                            {
-                                if ((obj = ObjectFactory.CreateObject(x) as BaseObject) == null)
-                                {
-                                    return -1;
-                                }
-                                // uses of obj in the transaction
-                            }
-                            catch (TransactionAbortedException)
-                            {
-                                return -1;
-                            }
-                        }
+                var tso = new TransactionOptions { IsolationLevel = IsolationLevel.RepeatableRead };
+                using (var trans = new TransactionScope(TransactionScopeOption.Required, tso))
+                {
+                try
+                {
+                if ((obj = ObjectFactory.CreateObject(x) as BaseObject) == null)
+                {
+                return -1;
+                }
+                // uses of obj in the transaction
+                }
+                catch (TransactionAbortedException)
+                {
+                return -1;
+                }
+                }
 
-                        // not used
-                        return 0;
-                    }
+                // not used
+                return 0;
+                }
                 }
                 """,
                 """
@@ -2098,38 +2098,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
                 class BaseObject { }
                 class ObjectFactory
                 {
-                    internal static BaseObject CreateObject(int x)
-                    {
-                        throw new NotImplementedException();
-                    }
+                internal static BaseObject CreateObject(int x)
+                {
+                throw new NotImplementedException();
+                }
                 }
 
                 struct Repro
                 {
-                    static int Main(string[] args)
-                    {
-                        int x = 0;
+                static int Main(string[] args)
+                {
+                int x = 0;
 
-                        var tso = new TransactionOptions { IsolationLevel = IsolationLevel.RepeatableRead };
-                        using (var trans = new TransactionScope(TransactionScopeOption.Required, tso))
-                        {
-                            try
-                            {
-                                if (ObjectFactory.CreateObject(x) is not BaseObject obj)
-                                {
-                                    return -1;
-                                }
-                                // uses of obj in the transaction
-                            }
-                            catch (TransactionAbortedException)
-                            {
-                                return -1;
-                            }
-                        }
+                var tso = new TransactionOptions { IsolationLevel = IsolationLevel.RepeatableRead };
+                using (var trans = new TransactionScope(TransactionScopeOption.Required, tso))
+                {
+                try
+                {
+                if (ObjectFactory.CreateObject(x) is not BaseObject obj)
+                {
+                return -1;
+                }
+                // uses of obj in the transaction
+                }
+                catch (TransactionAbortedException)
+                {
+                return -1;
+                }
+                }
 
-                        // not used
-                        return 0;
-                    }
+                // not used
+                return 0;
+                }
                 }
                 """
             );
@@ -2145,27 +2145,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
 
                 class Program
                 {
-                    static void Goo(object o1, object o2)
-                    {
-                        [|string?|] s = o1 as string;
-                        if (s == null)
-                        {
-                        }
-                    }
+                static void Goo(object o1, object o2)
+                {
+                [|string?|] s = o1 as string;
+                if (s == null)
+                {
+                }
+                }
                 }
                 """,
                 """
                 #nullable enable
                 using System;
-                
+
                 class Program
                 {
-                    static void Goo(object o1, object o2)
-                    {
-                        if (o1 is not string s)
-                        {
-                        }
-                    }
+                static void Goo(object o1, object o2)
+                {
+                if (o1 is not string s)
+                {
+                }
+                }
                 }
                 """
             );
@@ -2181,29 +2181,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
 
                 class Program
                 {
-                    static void Goo(object o1, object o2)
-                    {
-                        [|string?|] s = o1 as string;
-                        if (s == null)
-                        {
-                            s = "";
-                        }
-                    }
+                static void Goo(object o1, object o2)
+                {
+                [|string?|] s = o1 as string;
+                if (s == null)
+                {
+                s = "";
+                }
+                }
                 }
                 """,
                 """
                 #nullable enable
                 using System;
-                
+
                 class Program
                 {
-                    static void Goo(object o1, object o2)
-                    {
-                        if (o1 is not string s)
-                        {
-                            s = "";
-                        }
-                    }
+                static void Goo(object o1, object o2)
+                {
+                if (o1 is not string s)
+                {
+                s = "";
+                }
+                }
                 }
                 """
             );
@@ -2219,14 +2219,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
 
                 class Program
                 {
-                    static void Goo(object o1, object o2)
-                    {
-                        [|string?|] s = o1 as string;
-                        if (s == null)
-                        {
-                            s = o2 as string;
-                        }
-                    }
+                static void Goo(object o1, object o2)
+                {
+                [|string?|] s = o1 as string;
+                if (s == null)
+                {
+                s = o2 as string;
+                }
+                }
                 }
                 """
             );
@@ -2242,14 +2242,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
 
                 class Program
                 {
-                    static void Goo(object o1, object o2)
-                    {
-                        [|string?|] s = o1 as string;
-                        if (s == null)
-                        {
-                            s = null;
-                        }
-                    }
+                static void Goo(object o1, object o2)
+                {
+                [|string?|] s = o1 as string;
+                if (s == null)
+                {
+                s = null;
+                }
+                }
                 }
                 """
             );

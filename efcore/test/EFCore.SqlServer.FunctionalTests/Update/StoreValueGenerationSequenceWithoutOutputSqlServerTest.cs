@@ -58,17 +58,17 @@ public class StoreValueGenerationSequenceWithoutOutputSqlServerTest
 
         AssertSql(
             """
-@p0='1000'
+            @p0='1000'
 
-SET NOCOUNT ON;
-DECLARE @inserted0 TABLE ([Id] int);
-INSERT INTO [WithSomeDatabaseGenerated] ([Data2])
-OUTPUT INSERTED.[Id]
-INTO @inserted0
-VALUES (@p0);
-SELECT [t].[Id], [t].[Data1] FROM [WithSomeDatabaseGenerated] t
-INNER JOIN @inserted0 i ON ([t].[Id] = [i].[Id]);
-"""
+            SET NOCOUNT ON;
+            DECLARE @inserted0 TABLE ([Id] int);
+            INSERT INTO [WithSomeDatabaseGenerated] ([Data2])
+            OUTPUT INSERTED.[Id]
+            INTO @inserted0
+            VALUES (@p0);
+            SELECT [t].[Id], [t].[Data1] FROM [WithSomeDatabaseGenerated] t
+            INNER JOIN @inserted0 i ON ([t].[Id] = [i].[Id]);
+            """
         );
     }
 
@@ -78,15 +78,15 @@ INNER JOIN @inserted0 i ON ([t].[Id] = [i].[Id]);
 
         AssertSql(
             """
-@p0='100'
-@p1='1000'
-@p2='1000'
+            @p0='100'
+            @p1='1000'
+            @p2='1000'
 
-SET IMPLICIT_TRANSACTIONS OFF;
-SET NOCOUNT ON;
-INSERT INTO [WithNoDatabaseGenerated] ([Id], [Data1], [Data2])
-VALUES (@p0, @p1, @p2);
-"""
+            SET IMPLICIT_TRANSACTIONS OFF;
+            SET NOCOUNT ON;
+            INSERT INTO [WithNoDatabaseGenerated] ([Id], [Data1], [Data2])
+            VALUES (@p0, @p1, @p2);
+            """
         );
     }
 
@@ -96,15 +96,15 @@ VALUES (@p0, @p1, @p2);
 
         AssertSql(
             """
-SET NOCOUNT ON;
-DECLARE @inserted0 TABLE ([Id] int);
-INSERT INTO [WithAllDatabaseGenerated]
-OUTPUT INSERTED.[Id]
-INTO @inserted0
-DEFAULT VALUES;
-SELECT [t].[Id], [t].[Data1], [t].[Data2] FROM [WithAllDatabaseGenerated] t
-INNER JOIN @inserted0 i ON ([t].[Id] = [i].[Id]);
-"""
+            SET NOCOUNT ON;
+            DECLARE @inserted0 TABLE ([Id] int);
+            INSERT INTO [WithAllDatabaseGenerated]
+            OUTPUT INSERTED.[Id]
+            INTO @inserted0
+            DEFAULT VALUES;
+            SELECT [t].[Id], [t].[Data1], [t].[Data2] FROM [WithAllDatabaseGenerated] t
+            INNER JOIN @inserted0 i ON ([t].[Id] = [i].[Id]);
+            """
         );
     }
 
@@ -114,16 +114,16 @@ INNER JOIN @inserted0 i ON ([t].[Id] = [i].[Id]);
 
         AssertSql(
             """
-@p1='5'
-@p0='1000'
+            @p1='5'
+            @p0='1000'
 
-SET NOCOUNT ON;
-UPDATE [WithSomeDatabaseGenerated] SET [Data2] = @p0
-WHERE [Id] = @p1;
-SELECT [Data1]
-FROM [WithSomeDatabaseGenerated]
-WHERE @@ROWCOUNT = 1 AND [Id] = @p1;
-"""
+            SET NOCOUNT ON;
+            UPDATE [WithSomeDatabaseGenerated] SET [Data2] = @p0
+            WHERE [Id] = @p1;
+            SELECT [Data1]
+            FROM [WithSomeDatabaseGenerated]
+            WHERE @@ROWCOUNT = 1 AND [Id] = @p1;
+            """
         );
     }
 
@@ -133,16 +133,16 @@ WHERE @@ROWCOUNT = 1 AND [Id] = @p1;
 
         AssertSql(
             """
-@p2='1'
-@p0='1000'
-@p1='1000'
+            @p2='1'
+            @p0='1000'
+            @p1='1000'
 
-SET IMPLICIT_TRANSACTIONS OFF;
-SET NOCOUNT ON;
-UPDATE [WithNoDatabaseGenerated] SET [Data1] = @p0, [Data2] = @p1
-WHERE [Id] = @p2;
-SELECT @@ROWCOUNT;
-"""
+            SET IMPLICIT_TRANSACTIONS OFF;
+            SET NOCOUNT ON;
+            UPDATE [WithNoDatabaseGenerated] SET [Data1] = @p0, [Data2] = @p1
+            WHERE [Id] = @p2;
+            SELECT @@ROWCOUNT;
+            """
         );
     }
 
@@ -152,14 +152,14 @@ SELECT @@ROWCOUNT;
 
         AssertSql(
             """
-@p0='5'
+            @p0='5'
 
-SET IMPLICIT_TRANSACTIONS OFF;
-SET NOCOUNT ON;
-DELETE FROM [WithSomeDatabaseGenerated]
-WHERE [Id] = @p0;
-SELECT @@ROWCOUNT;
-"""
+            SET IMPLICIT_TRANSACTIONS OFF;
+            SET NOCOUNT ON;
+            DELETE FROM [WithSomeDatabaseGenerated]
+            WHERE [Id] = @p0;
+            SELECT @@ROWCOUNT;
+            """
         );
     }
 
@@ -173,24 +173,24 @@ SELECT @@ROWCOUNT;
 
         AssertSql(
             """
-@p0='1000'
-@p1='1001'
+            @p0='1000'
+            @p1='1001'
 
-SET NOCOUNT ON;
-DECLARE @inserted0 TABLE ([Id] int, [_Position] [int]);
-MERGE [WithSomeDatabaseGenerated] USING (
-VALUES (@p0, 0),
-(@p1, 1)) AS i ([Data2], _Position) ON 1=0
-WHEN NOT MATCHED THEN
-INSERT ([Data2])
-VALUES (i.[Data2])
-OUTPUT INSERTED.[Id], i._Position
-INTO @inserted0;
+            SET NOCOUNT ON;
+            DECLARE @inserted0 TABLE ([Id] int, [_Position] [int]);
+            MERGE [WithSomeDatabaseGenerated] USING (
+            VALUES (@p0, 0),
+            (@p1, 1)) AS i ([Data2], _Position) ON 1=0
+            WHEN NOT MATCHED THEN
+            INSERT ([Data2])
+            VALUES (i.[Data2])
+            OUTPUT INSERTED.[Id], i._Position
+            INTO @inserted0;
 
-SELECT [t].[Id], [t].[Data1] FROM [WithSomeDatabaseGenerated] t
-INNER JOIN @inserted0 i ON ([t].[Id] = [i].[Id])
-ORDER BY [i].[_Position];
-"""
+            SELECT [t].[Id], [t].[Data1] FROM [WithSomeDatabaseGenerated] t
+            INNER JOIN @inserted0 i ON ([t].[Id] = [i].[Id])
+            ORDER BY [i].[_Position];
+            """
         );
     }
 
@@ -200,19 +200,19 @@ ORDER BY [i].[_Position];
 
         AssertSql(
             """
-@p0='100'
-@p1='1000'
-@p2='1000'
-@p3='101'
-@p4='1001'
-@p5='1001'
+            @p0='100'
+            @p1='1000'
+            @p2='1000'
+            @p3='101'
+            @p4='1001'
+            @p5='1001'
 
-SET IMPLICIT_TRANSACTIONS OFF;
-SET NOCOUNT ON;
-INSERT INTO [WithNoDatabaseGenerated] ([Id], [Data1], [Data2])
-VALUES (@p0, @p1, @p2),
-(@p3, @p4, @p5);
-"""
+            SET IMPLICIT_TRANSACTIONS OFF;
+            SET NOCOUNT ON;
+            INSERT INTO [WithNoDatabaseGenerated] ([Id], [Data1], [Data2])
+            VALUES (@p0, @p1, @p2),
+            (@p3, @p4, @p5);
+            """
         );
     }
 
@@ -222,16 +222,16 @@ VALUES (@p0, @p1, @p2),
 
         AssertSql(
             """
-SET NOCOUNT ON;
-DECLARE @inserted0 TABLE ([Id] int);
-INSERT INTO [WithAllDatabaseGenerated] ([Id])
-OUTPUT INSERTED.[Id]
-INTO @inserted0
-VALUES (DEFAULT),
-(DEFAULT);
-SELECT [t].[Id], [t].[Data1], [t].[Data2] FROM [WithAllDatabaseGenerated] t
-INNER JOIN @inserted0 i ON ([t].[Id] = [i].[Id]);
-"""
+            SET NOCOUNT ON;
+            DECLARE @inserted0 TABLE ([Id] int);
+            INSERT INTO [WithAllDatabaseGenerated] ([Id])
+            OUTPUT INSERTED.[Id]
+            INTO @inserted0
+            VALUES (DEFAULT),
+            (DEFAULT);
+            SELECT [t].[Id], [t].[Data1], [t].[Data2] FROM [WithAllDatabaseGenerated] t
+            INNER JOIN @inserted0 i ON ([t].[Id] = [i].[Id]);
+            """
         );
     }
 
@@ -241,24 +241,24 @@ INNER JOIN @inserted0 i ON ([t].[Id] = [i].[Id]);
 
         AssertSql(
             """
-@p1='5'
-@p0='1000'
-@p3='6'
-@p2='1001'
+            @p1='5'
+            @p0='1000'
+            @p3='6'
+            @p2='1001'
 
-SET NOCOUNT ON;
-UPDATE [WithSomeDatabaseGenerated] SET [Data2] = @p0
-WHERE [Id] = @p1;
-SELECT [Data1]
-FROM [WithSomeDatabaseGenerated]
-WHERE @@ROWCOUNT = 1 AND [Id] = @p1;
+            SET NOCOUNT ON;
+            UPDATE [WithSomeDatabaseGenerated] SET [Data2] = @p0
+            WHERE [Id] = @p1;
+            SELECT [Data1]
+            FROM [WithSomeDatabaseGenerated]
+            WHERE @@ROWCOUNT = 1 AND [Id] = @p1;
 
-UPDATE [WithSomeDatabaseGenerated] SET [Data2] = @p2
-WHERE [Id] = @p3;
-SELECT [Data1]
-FROM [WithSomeDatabaseGenerated]
-WHERE @@ROWCOUNT = 1 AND [Id] = @p3;
-"""
+            UPDATE [WithSomeDatabaseGenerated] SET [Data2] = @p2
+            WHERE [Id] = @p3;
+            SELECT [Data1]
+            FROM [WithSomeDatabaseGenerated]
+            WHERE @@ROWCOUNT = 1 AND [Id] = @p3;
+            """
         );
     }
 
@@ -270,22 +270,22 @@ WHERE @@ROWCOUNT = 1 AND [Id] = @p3;
 
         AssertSql(
             """
-@p2='1'
-@p0='1000'
-@p1='1000'
-@p5='2'
-@p3='1001'
-@p4='1001'
+            @p2='1'
+            @p0='1000'
+            @p1='1000'
+            @p5='2'
+            @p3='1001'
+            @p4='1001'
 
-SET NOCOUNT ON;
-UPDATE [WithNoDatabaseGenerated] SET [Data1] = @p0, [Data2] = @p1
-WHERE [Id] = @p2;
-SELECT @@ROWCOUNT;
+            SET NOCOUNT ON;
+            UPDATE [WithNoDatabaseGenerated] SET [Data1] = @p0, [Data2] = @p1
+            WHERE [Id] = @p2;
+            SELECT @@ROWCOUNT;
 
-UPDATE [WithNoDatabaseGenerated] SET [Data1] = @p3, [Data2] = @p4
-WHERE [Id] = @p5;
-SELECT @@ROWCOUNT;
-"""
+            UPDATE [WithNoDatabaseGenerated] SET [Data1] = @p3, [Data2] = @p4
+            WHERE [Id] = @p5;
+            SELECT @@ROWCOUNT;
+            """
         );
     }
 
@@ -295,18 +295,18 @@ SELECT @@ROWCOUNT;
 
         AssertSql(
             """
-@p0='5'
-@p1='6'
+            @p0='5'
+            @p1='6'
 
-SET NOCOUNT ON;
-DELETE FROM [WithSomeDatabaseGenerated]
-WHERE [Id] = @p0;
-SELECT @@ROWCOUNT;
+            SET NOCOUNT ON;
+            DELETE FROM [WithSomeDatabaseGenerated]
+            WHERE [Id] = @p0;
+            SELECT @@ROWCOUNT;
 
-DELETE FROM [WithSomeDatabaseGenerated]
-WHERE [Id] = @p1;
-SELECT @@ROWCOUNT;
-"""
+            DELETE FROM [WithSomeDatabaseGenerated]
+            WHERE [Id] = @p1;
+            SELECT @@ROWCOUNT;
+            """
         );
     }
 
@@ -320,26 +320,26 @@ SELECT @@ROWCOUNT;
 
         AssertSql(
             """
-@p0='1000'
-@p1='1001'
+            @p0='1000'
+            @p1='1001'
 
-SET NOCOUNT ON;
-DECLARE @inserted0 TABLE ([Id] int);
-INSERT INTO [WithSomeDatabaseGenerated] ([Data2])
-OUTPUT INSERTED.[Id]
-INTO @inserted0
-VALUES (@p0);
-SELECT [t].[Id], [t].[Data1] FROM [WithSomeDatabaseGenerated] t
-INNER JOIN @inserted0 i ON ([t].[Id] = [i].[Id]);
+            SET NOCOUNT ON;
+            DECLARE @inserted0 TABLE ([Id] int);
+            INSERT INTO [WithSomeDatabaseGenerated] ([Data2])
+            OUTPUT INSERTED.[Id]
+            INTO @inserted0
+            VALUES (@p0);
+            SELECT [t].[Id], [t].[Data1] FROM [WithSomeDatabaseGenerated] t
+            INNER JOIN @inserted0 i ON ([t].[Id] = [i].[Id]);
 
-DECLARE @inserted1 TABLE ([Id] int);
-INSERT INTO [WithSomeDatabaseGenerated2] ([Data2])
-OUTPUT INSERTED.[Id]
-INTO @inserted1
-VALUES (@p1);
-SELECT [t].[Id], [t].[Data1] FROM [WithSomeDatabaseGenerated2] t
-INNER JOIN @inserted1 i ON ([t].[Id] = [i].[Id]);
-"""
+            DECLARE @inserted1 TABLE ([Id] int);
+            INSERT INTO [WithSomeDatabaseGenerated2] ([Data2])
+            OUTPUT INSERTED.[Id]
+            INTO @inserted1
+            VALUES (@p1);
+            SELECT [t].[Id], [t].[Data1] FROM [WithSomeDatabaseGenerated2] t
+            INNER JOIN @inserted1 i ON ([t].[Id] = [i].[Id]);
+            """
         );
     }
 
@@ -351,19 +351,19 @@ INNER JOIN @inserted1 i ON ([t].[Id] = [i].[Id]);
 
         AssertSql(
             """
-@p0='100'
-@p1='1000'
-@p2='1000'
-@p3='101'
-@p4='1001'
-@p5='1001'
+            @p0='100'
+            @p1='1000'
+            @p2='1000'
+            @p3='101'
+            @p4='1001'
+            @p5='1001'
 
-SET NOCOUNT ON;
-INSERT INTO [WithNoDatabaseGenerated] ([Id], [Data1], [Data2])
-VALUES (@p0, @p1, @p2);
-INSERT INTO [WithNoDatabaseGenerated2] ([Id], [Data1], [Data2])
-VALUES (@p3, @p4, @p5);
-"""
+            SET NOCOUNT ON;
+            INSERT INTO [WithNoDatabaseGenerated] ([Id], [Data1], [Data2])
+            VALUES (@p0, @p1, @p2);
+            INSERT INTO [WithNoDatabaseGenerated2] ([Id], [Data1], [Data2])
+            VALUES (@p3, @p4, @p5);
+            """
         );
     }
 
@@ -375,23 +375,23 @@ VALUES (@p3, @p4, @p5);
 
         AssertSql(
             """
-SET NOCOUNT ON;
-DECLARE @inserted0 TABLE ([Id] int);
-INSERT INTO [WithAllDatabaseGenerated]
-OUTPUT INSERTED.[Id]
-INTO @inserted0
-DEFAULT VALUES;
-SELECT [t].[Id], [t].[Data1], [t].[Data2] FROM [WithAllDatabaseGenerated] t
-INNER JOIN @inserted0 i ON ([t].[Id] = [i].[Id]);
+            SET NOCOUNT ON;
+            DECLARE @inserted0 TABLE ([Id] int);
+            INSERT INTO [WithAllDatabaseGenerated]
+            OUTPUT INSERTED.[Id]
+            INTO @inserted0
+            DEFAULT VALUES;
+            SELECT [t].[Id], [t].[Data1], [t].[Data2] FROM [WithAllDatabaseGenerated] t
+            INNER JOIN @inserted0 i ON ([t].[Id] = [i].[Id]);
 
-DECLARE @inserted1 TABLE ([Id] int);
-INSERT INTO [WithAllDatabaseGenerated2]
-OUTPUT INSERTED.[Id]
-INTO @inserted1
-DEFAULT VALUES;
-SELECT [t].[Id], [t].[Data1], [t].[Data2] FROM [WithAllDatabaseGenerated2] t
-INNER JOIN @inserted1 i ON ([t].[Id] = [i].[Id]);
-"""
+            DECLARE @inserted1 TABLE ([Id] int);
+            INSERT INTO [WithAllDatabaseGenerated2]
+            OUTPUT INSERTED.[Id]
+            INTO @inserted1
+            DEFAULT VALUES;
+            SELECT [t].[Id], [t].[Data1], [t].[Data2] FROM [WithAllDatabaseGenerated2] t
+            INNER JOIN @inserted1 i ON ([t].[Id] = [i].[Id]);
+            """
         );
     }
 
@@ -403,24 +403,24 @@ INNER JOIN @inserted1 i ON ([t].[Id] = [i].[Id]);
 
         AssertSql(
             """
-@p1='5'
-@p0='1000'
-@p3='8'
-@p2='1001'
+            @p1='5'
+            @p0='1000'
+            @p3='8'
+            @p2='1001'
 
-SET NOCOUNT ON;
-UPDATE [WithSomeDatabaseGenerated] SET [Data2] = @p0
-WHERE [Id] = @p1;
-SELECT [Data1]
-FROM [WithSomeDatabaseGenerated]
-WHERE @@ROWCOUNT = 1 AND [Id] = @p1;
+            SET NOCOUNT ON;
+            UPDATE [WithSomeDatabaseGenerated] SET [Data2] = @p0
+            WHERE [Id] = @p1;
+            SELECT [Data1]
+            FROM [WithSomeDatabaseGenerated]
+            WHERE @@ROWCOUNT = 1 AND [Id] = @p1;
 
-UPDATE [WithSomeDatabaseGenerated2] SET [Data2] = @p2
-WHERE [Id] = @p3;
-SELECT [Data1]
-FROM [WithSomeDatabaseGenerated2]
-WHERE @@ROWCOUNT = 1 AND [Id] = @p3;
-"""
+            UPDATE [WithSomeDatabaseGenerated2] SET [Data2] = @p2
+            WHERE [Id] = @p3;
+            SELECT [Data1]
+            FROM [WithSomeDatabaseGenerated2]
+            WHERE @@ROWCOUNT = 1 AND [Id] = @p3;
+            """
         );
     }
 
@@ -432,22 +432,22 @@ WHERE @@ROWCOUNT = 1 AND [Id] = @p3;
 
         AssertSql(
             """
-@p2='1'
-@p0='1000'
-@p1='1000'
-@p5='2'
-@p3='1001'
-@p4='1001'
+            @p2='1'
+            @p0='1000'
+            @p1='1000'
+            @p5='2'
+            @p3='1001'
+            @p4='1001'
 
-SET NOCOUNT ON;
-UPDATE [WithNoDatabaseGenerated] SET [Data1] = @p0, [Data2] = @p1
-WHERE [Id] = @p2;
-SELECT @@ROWCOUNT;
+            SET NOCOUNT ON;
+            UPDATE [WithNoDatabaseGenerated] SET [Data1] = @p0, [Data2] = @p1
+            WHERE [Id] = @p2;
+            SELECT @@ROWCOUNT;
 
-UPDATE [WithNoDatabaseGenerated2] SET [Data1] = @p3, [Data2] = @p4
-WHERE [Id] = @p5;
-SELECT @@ROWCOUNT;
-"""
+            UPDATE [WithNoDatabaseGenerated2] SET [Data1] = @p3, [Data2] = @p4
+            WHERE [Id] = @p5;
+            SELECT @@ROWCOUNT;
+            """
         );
     }
 
@@ -457,18 +457,18 @@ SELECT @@ROWCOUNT;
 
         AssertSql(
             """
-@p0='5'
-@p1='8'
+            @p0='5'
+            @p1='8'
 
-SET NOCOUNT ON;
-DELETE FROM [WithSomeDatabaseGenerated]
-WHERE [Id] = @p0;
-SELECT @@ROWCOUNT;
+            SET NOCOUNT ON;
+            DELETE FROM [WithSomeDatabaseGenerated]
+            WHERE [Id] = @p0;
+            SELECT @@ROWCOUNT;
 
-DELETE FROM [WithSomeDatabaseGenerated2]
-WHERE [Id] = @p1;
-SELECT @@ROWCOUNT;
-"""
+            DELETE FROM [WithSomeDatabaseGenerated2]
+            WHERE [Id] = @p1;
+            SELECT @@ROWCOUNT;
+            """
         );
     }
 
@@ -480,26 +480,26 @@ SELECT @@ROWCOUNT;
 
         AssertSql(
             """
-@p0='0'
-@p1='0'
-@p2='0'
+            @p0='0'
+            @p1='0'
+            @p2='0'
 
-SET NOCOUNT ON;
-DECLARE @inserted0 TABLE ([Id] int, [_Position] [int]);
-MERGE [WithSomeDatabaseGenerated] USING (
-VALUES (@p0, 0),
-(@p1, 1),
-(@p2, 2)) AS i ([Data2], _Position) ON 1=0
-WHEN NOT MATCHED THEN
-INSERT ([Data2])
-VALUES (i.[Data2])
-OUTPUT INSERTED.[Id], i._Position
-INTO @inserted0;
+            SET NOCOUNT ON;
+            DECLARE @inserted0 TABLE ([Id] int, [_Position] [int]);
+            MERGE [WithSomeDatabaseGenerated] USING (
+            VALUES (@p0, 0),
+            (@p1, 1),
+            (@p2, 2)) AS i ([Data2], _Position) ON 1=0
+            WHEN NOT MATCHED THEN
+            INSERT ([Data2])
+            VALUES (i.[Data2])
+            OUTPUT INSERTED.[Id], i._Position
+            INTO @inserted0;
 
-SELECT [t].[Id], [t].[Data1] FROM [WithSomeDatabaseGenerated] t
-INNER JOIN @inserted0 i ON ([t].[Id] = [i].[Id])
-ORDER BY [i].[_Position];
-"""
+            SELECT [t].[Id], [t].[Data1] FROM [WithSomeDatabaseGenerated] t
+            INNER JOIN @inserted0 i ON ([t].[Id] = [i].[Id])
+            ORDER BY [i].[_Position];
+            """
         );
     }
 

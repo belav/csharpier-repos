@@ -36,12 +36,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        [|using|] (var a = {|CS0103:b|})
-                        {
-                        }
-                    }
+                void M()
+                {
+                [|using|] (var a = {|CS0103:b|})
+                {
+                }
+                }
                 }
                 """,
                 """
@@ -49,10 +49,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        using var a = {|CS0103:b|};
-                    }
+                void M()
+                {
+                using var a = {|CS0103:b|};
+                }
                 }
                 """
             );
@@ -64,18 +64,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
             await new VerifyCS.Test
             {
                 TestCode = """
-                    using System;
+                using System;
 
-                    class C
-                    {
-                        void M()
-                        {
-                            using (var a = {|CS0103:b|})
-                            {
-                            }
-                        }
-                    }
-                    """,
+                class C
+                {
+                void M()
+                {
+                using (var a = {|CS0103:b|})
+                {
+                }
+                }
+                }
+                """,
                 Options =
                 {
                     {
@@ -95,12 +95,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        [|using|] ({|CS0819:var a = {|CS0103:b|}, c = {|CS0103:d|}|})
-                        {
-                        }
-                    }
+                void M()
+                {
+                [|using|] ({|CS0819:var a = {|CS0103:b|}, c = {|CS0103:d|}|})
+                {
+                }
+                }
                 }
                 """,
                 """
@@ -108,10 +108,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        using {|CS0819:var a = {|CS0103:b|}, c = {|CS0103:d|}|};
-                    }
+                void M()
+                {
+                using {|CS0819:var a = {|CS0103:b|}, c = {|CS0103:d|}|};
+                }
                 }
                 """
             );
@@ -123,16 +123,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
             await new VerifyCS.Test
             {
                 TestCode = """
-                    using System;
+                using System;
 
-                    class C
-                    {
-                        void M()
-                        {
-                            using var a = {|CS0103:b|};
-                        }
-                    }
-                    """
+                class C
+                {
+                void M()
+                {
+                using var a = {|CS0103:b|};
+                }
+                }
+                """
             }.RunAsync();
         }
 
@@ -142,18 +142,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
             await new VerifyCS.Test
             {
                 TestCode = """
-                    using System;
+                using System;
 
-                    class C
-                    {
-                        void M()
-                        {
-                            using (var a = {|CS0103:b|})
-                            {
-                            }
-                        }
-                    }
-                    """,
+                class C
+                {
+                void M()
+                {
+                using (var a = {|CS0103:b|})
+                {
+                }
+                }
+                }
+                """,
                 LanguageVersion = LanguageVersion.CSharp7_2
             }.RunAsync();
         }
@@ -164,18 +164,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
             await new VerifyCS.Test
             {
                 TestCode = """
-                    using System;
+                using System;
 
-                    class C
-                    {
-                        void M()
-                        {
-                            using ({|CS0103:a|})
-                            {
-                            }
-                        }
-                    }
-                    """
+                class C
+                {
+                void M()
+                {
+                using ({|CS0103:a|})
+                {
+                }
+                }
+                }
+                """
             }.RunAsync();
         }
 
@@ -185,19 +185,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
             await new VerifyCS.Test
             {
                 TestCode = """
-                    using System;
+                using System;
 
-                    class C
-                    {
-                        void M()
-                        {
-                            using (var a = {|CS0103:b|})
-                            {
-                            }
-                            Console.WriteLine();
-                        }
-                    }
-                    """
+                class C
+                {
+                void M()
+                {
+                using (var a = {|CS0103:b|})
+                {
+                }
+                Console.WriteLine();
+                }
+                }
+                """
             }.RunAsync();
         }
 
@@ -212,12 +212,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        {|CS0103:async|} {|CS1002:[|using|]|} (var a = {|CS0103:b|})
-                        {
-                        }
-                    }
+                void M()
+                {
+                {|CS0103:async|} {|CS1002:[|using|]|} (var a = {|CS0103:b|})
+                {
+                }
+                }
                 }
                 """,
                 """
@@ -226,10 +226,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        {|CS0103:async|} {|CS1002:using|} var a = {|CS0103:b|};
-                    }
+                void M()
+                {
+                {|CS0103:async|} {|CS1002:using|} var a = {|CS0103:b|};
+                }
                 }
                 """
             );
@@ -245,12 +245,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        {|CS4033:await|} [|using|] (var a = {|CS0103:b|})
-                        {
-                        }
-                    }
+                void M()
+                {
+                {|CS4033:await|} [|using|] (var a = {|CS0103:b|})
+                {
+                }
+                }
                 }
                 """,
                 """
@@ -259,10 +259,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        {|CS4033:await|} using var a = {|CS0103:b|};
-                    }
+                void M()
+                {
+                {|CS4033:await|} using var a = {|CS0103:b|};
+                }
                 }
                 """
             );
@@ -277,13 +277,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        [|using|] (var a = {|CS0103:b|})
-                        {
-                            Console.WriteLine(a);
-                        }
-                    }
+                void M()
+                {
+                [|using|] (var a = {|CS0103:b|})
+                {
+                Console.WriteLine(a);
+                }
+                }
                 }
                 """,
                 """
@@ -291,11 +291,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        using var a = {|CS0103:b|};
-                        Console.WriteLine(a);
-                    }
+                void M()
+                {
+                using var a = {|CS0103:b|};
+                Console.WriteLine(a);
+                }
                 }
                 """
             );
@@ -310,11 +310,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        [|using|] (var a = {|CS0103:b|})
-                            Console.WriteLine(a);
-                    }
+                void M()
+                {
+                [|using|] (var a = {|CS0103:b|})
+                Console.WriteLine(a);
+                }
                 }
                 """,
                 """
@@ -322,11 +322,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        using var a = {|CS0103:b|};
-                        Console.WriteLine(a);
-                    }
+                void M()
+                {
+                using var a = {|CS0103:b|};
+                Console.WriteLine(a);
+                }
                 }
                 """
             );
@@ -341,14 +341,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        [|using|] (var a = {|CS0103:b|})
-                        using (var c = {|CS0103:d|})
-                        {
-                            Console.WriteLine(a);
-                        }
-                    }
+                void M()
+                {
+                [|using|] (var a = {|CS0103:b|})
+                using (var c = {|CS0103:d|})
+                {
+                Console.WriteLine(a);
+                }
+                }
                 }
                 """,
                 """
@@ -356,12 +356,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        using var a = {|CS0103:b|};
-                        using var c = {|CS0103:d|};
-                        Console.WriteLine(a);
-                    }
+                void M()
+                {
+                using var a = {|CS0103:b|};
+                using var c = {|CS0103:d|};
+                Console.WriteLine(a);
+                }
                 }
                 """
             );
@@ -376,16 +376,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        [|using|] (var a = {|CS0103:b|})
-                        {
-                            [|using|] (var c = {|CS0103:d|})
-                            {
-                                Console.WriteLine(a);
-                            }
-                        }
-                    }
+                void M()
+                {
+                [|using|] (var a = {|CS0103:b|})
+                {
+                [|using|] (var c = {|CS0103:d|})
+                {
+                Console.WriteLine(a);
+                }
+                }
+                }
                 }
                 """,
                 """
@@ -393,12 +393,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        using var a = {|CS0103:b|};
-                        using var c = {|CS0103:d|};
-                        Console.WriteLine(a);
-                    }
+                void M()
+                {
+                using var a = {|CS0103:b|};
+                using var c = {|CS0103:d|};
+                Console.WriteLine(a);
+                }
                 }
                 """
             );
@@ -413,18 +413,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        [|using|] (var a = {|CS0103:b|})
-                        using (var c = {|CS0103:d|})
-                        {
-                            [|using|] (var e = {|CS0103:f|})
-                            using (var g = {|CS0103:h|})
-                            {
-                                Console.WriteLine(a);
-                            }
-                        }
-                    }
+                void M()
+                {
+                [|using|] (var a = {|CS0103:b|})
+                using (var c = {|CS0103:d|})
+                {
+                [|using|] (var e = {|CS0103:f|})
+                using (var g = {|CS0103:h|})
+                {
+                Console.WriteLine(a);
+                }
+                }
+                }
                 }
                 """,
                 """
@@ -432,14 +432,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        using var a = {|CS0103:b|};
-                        using var c = {|CS0103:d|};
-                        using var e = {|CS0103:f|};
-                        using var g = {|CS0103:h|};
-                        Console.WriteLine(a);
-                    }
+                void M()
+                {
+                using var a = {|CS0103:b|};
+                using var c = {|CS0103:d|};
+                using var e = {|CS0103:f|};
+                using var g = {|CS0103:h|};
+                Console.WriteLine(a);
+                }
                 }
                 """
             );
@@ -454,18 +454,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        [|using|] (var a = {|CS0103:b|})
-                        using (var c = {|CS0103:d|})
-                        {
-                            using ({|CS0103:e|})
-                            using ({|CS0103:f|})
-                            {
-                                Console.WriteLine(a);
-                            }
-                        }
-                    }
+                void M()
+                {
+                [|using|] (var a = {|CS0103:b|})
+                using (var c = {|CS0103:d|})
+                {
+                using ({|CS0103:e|})
+                using ({|CS0103:f|})
+                {
+                Console.WriteLine(a);
+                }
+                }
+                }
                 }
                 """,
                 """
@@ -473,16 +473,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        using var a = {|CS0103:b|};
-                        using var c = {|CS0103:d|};
-                        using ({|CS0103:e|})
-                        using ({|CS0103:f|})
-                        {
-                            Console.WriteLine(a);
-                        }
-                    }
+                void M()
+                {
+                using var a = {|CS0103:b|};
+                using var c = {|CS0103:d|};
+                using ({|CS0103:e|})
+                using ({|CS0103:f|})
+                {
+                Console.WriteLine(a);
+                }
+                }
                 }
                 """
             );
@@ -497,11 +497,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        using (var a = {|CS0103:b|}) { }
-                        [|using|] (var c = {|CS0103:d|}) { }
-                    }
+                void M()
+                {
+                using (var a = {|CS0103:b|}) { }
+                [|using|] (var c = {|CS0103:d|}) { }
+                }
                 }
                 """,
                 """
@@ -509,11 +509,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        using (var a = {|CS0103:b|}) { }
-                        using var c = {|CS0103:d|};
-                    }
+                void M()
+                {
+                using (var a = {|CS0103:b|}) { }
+                using var c = {|CS0103:d|};
+                }
                 }
                 """
             );
@@ -528,13 +528,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        [|using|] (var a = {|CS0103:b|})
-                        {
-                        }
-                        return;
-                    }
+                void M()
+                {
+                [|using|] (var a = {|CS0103:b|})
+                {
+                }
+                return;
+                }
                 }
                 """,
                 """
@@ -542,11 +542,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        using var a = {|CS0103:b|};
-                        return;
-                    }
+                void M()
+                {
+                using var a = {|CS0103:b|};
+                return;
+                }
                 }
                 """
             );
@@ -561,19 +561,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        switch (0)
-                        {
-                            case 0:
-                                {
-                                    [|using|] (var a = {|CS0103:b|})
-                                    {
-                                    }
-                                    break;
-                                }
-                        }
-                    }
+                void M()
+                {
+                switch (0)
+                {
+                case 0:
+                {
+                [|using|] (var a = {|CS0103:b|})
+                {
+                }
+                break;
+                }
+                }
+                }
                 }
                 """,
                 """
@@ -581,17 +581,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        switch (0)
-                        {
-                            case 0:
-                                {
-                                    using var a = {|CS0103:b|};
-                                    break;
-                                }
-                        }
-                    }
+                void M()
+                {
+                switch (0)
+                {
+                case 0:
+                {
+                using var a = {|CS0103:b|};
+                break;
+                }
+                }
+                }
                 }
                 """
             );
@@ -603,23 +603,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
             await new VerifyCS.Test
             {
                 TestCode = """
-                    using System;
+                using System;
 
-                    class C
-                    {
-                        void M()
-                        {
-                            switch (0)
-                            {
-                                case 0:
-                                    using (var a = {|CS0103:b|})
-                                    {
-                                    }
-                                    break;
-                            }
-                        }
-                    }
-                    """
+                class C
+                {
+                void M()
+                {
+                switch (0)
+                {
+                case 0:
+                using (var a = {|CS0103:b|})
+                {
+                }
+                break;
+                }
+                }
+                }
+                """
             }.RunAsync();
         }
 
@@ -629,20 +629,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
             await new VerifyCS.Test
             {
                 TestCode = """
-                    using System;
+                using System;
 
-                    class C
-                    {
-                        void M()
-                        {
-                            label:
-                            using (var a = {|CS0103:b|})
-                            {
-                                goto label;
-                            }
-                        }
-                    }
-                    """
+                class C
+                {
+                void M()
+                {
+                label:
+                using (var a = {|CS0103:b|})
+                {
+                goto label;
+                }
+                }
+                }
+                """
             }.RunAsync();
         }
 
@@ -652,22 +652,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
             await new VerifyCS.Test
             {
                 TestCode = """
-                    using System;
+                using System;
 
-                    class C
-                    {
-                        void M()
-                        {
-                            {
-                                goto label;
-                                using (var a = {|CS0103:b|})
-                                {
-                                }
-                            }
-                            label:;
-                        }
-                    }
-                    """
+                class C
+                {
+                void M()
+                {
+                {
+                goto label;
+                using (var a = {|CS0103:b|})
+                {
+                }
+                }
+                label:;
+                }
+                }
+                """
             }.RunAsync();
         }
 
@@ -677,21 +677,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
             await new VerifyCS.Test
             {
                 TestCode = """
-                    using System.IO;
+                using System.IO;
 
-                    class Program
-                    {
-                        static void Main()
-                        {
-                            using (Stream stream = File.OpenRead("test"))
-                            {
-                            }
-                            using (Stream stream = File.OpenRead("test"))
-                            {
-                            }
-                        }
-                    }
-                    """
+                class Program
+                {
+                static void Main()
+                {
+                using (Stream stream = File.OpenRead("test"))
+                {
+                }
+                using (Stream stream = File.OpenRead("test"))
+                {
+                }
+                }
+                }
+                """
             }.RunAsync();
         }
 
@@ -704,15 +704,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class Program
                 {
-                    static void Main()
-                    {
-                        using (Stream stream = File.OpenRead("test"))
-                        {
-                        }
-                        [|using|] (Stream stream1 = File.OpenRead("test"))
-                        {
-                        }
-                    }
+                static void Main()
+                {
+                using (Stream stream = File.OpenRead("test"))
+                {
+                }
+                [|using|] (Stream stream1 = File.OpenRead("test"))
+                {
+                }
+                }
                 }
                 """,
                 """
@@ -720,13 +720,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class Program
                 {
-                    static void Main()
-                    {
-                        using (Stream stream = File.OpenRead("test"))
-                        {
-                        }
-                        using Stream stream1 = File.OpenRead("test");
-                    }
+                static void Main()
+                {
+                using (Stream stream = File.OpenRead("test"))
+                {
+                }
+                using Stream stream1 = File.OpenRead("test");
+                }
                 }
                 """
             );
@@ -738,22 +738,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
             await new VerifyCS.Test
             {
                 TestCode = """
-                    using System.IO;
+                using System.IO;
 
-                    class Program
-                    {
-                        static void Main()
-                        {
-                            using (Stream stream = File.OpenRead("test"))
-                            {
-                            }
-                            using (Stream stream1 = File.OpenRead("test"))
-                            {
-                                Stream stream;
-                            }
-                        }
-                    }
-                    """
+                class Program
+                {
+                static void Main()
+                {
+                using (Stream stream = File.OpenRead("test"))
+                {
+                }
+                using (Stream stream1 = File.OpenRead("test"))
+                {
+                Stream stream;
+                }
+                }
+                }
+                """
             }.RunAsync();
         }
 
@@ -766,16 +766,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class Program
                 {
-                    static void Main()
-                    {
-                        using (Stream stream = File.OpenRead("test"))
-                        {
-                        }
-                        [|using|] (Stream stream1 = File.OpenRead("test"))
-                        {
-                            Stream stream2;
-                        }
-                    }
+                static void Main()
+                {
+                using (Stream stream = File.OpenRead("test"))
+                {
+                }
+                [|using|] (Stream stream1 = File.OpenRead("test"))
+                {
+                Stream stream2;
+                }
+                }
                 }
                 """,
                 """
@@ -783,14 +783,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class Program
                 {
-                    static void Main()
-                    {
-                        using (Stream stream = File.OpenRead("test"))
-                        {
-                        }
-                        using Stream stream1 = File.OpenRead("test");
-                        Stream stream2;
-                    }
+                static void Main()
+                {
+                using (Stream stream = File.OpenRead("test"))
+                {
+                }
+                using Stream stream1 = File.OpenRead("test");
+                Stream stream2;
+                }
                 }
                 """
             );
@@ -802,22 +802,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
             await new VerifyCS.Test
             {
                 TestCode = """
-                    using System.IO;
+                using System.IO;
 
-                    class Program
-                    {
-                        static void Main()
-                        {
-                            using (Stream stream = File.OpenRead("test"))
-                            {
-                            }
-                            using (Stream stream1 = File.OpenRead("test"))
-                            {
-                                {|CS0103:Goo|}(out var stream);
-                            }
-                        }
-                    }
-                    """
+                class Program
+                {
+                static void Main()
+                {
+                using (Stream stream = File.OpenRead("test"))
+                {
+                }
+                using (Stream stream1 = File.OpenRead("test"))
+                {
+                {|CS0103:Goo|}(out var stream);
+                }
+                }
+                }
+                """
             }.RunAsync();
         }
 
@@ -830,16 +830,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class Program
                 {
-                    static void Main()
-                    {
-                        using (Stream stream = File.OpenRead("test"))
-                        {
-                        }
-                        [|using|] (Stream stream1 = File.OpenRead("test"))
-                        {
-                            {|CS0103:Goo|}(out var stream2);
-                        }
-                    }
+                static void Main()
+                {
+                using (Stream stream = File.OpenRead("test"))
+                {
+                }
+                [|using|] (Stream stream1 = File.OpenRead("test"))
+                {
+                {|CS0103:Goo|}(out var stream2);
+                }
+                }
                 }
                 """,
                 """
@@ -847,14 +847,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class Program
                 {
-                    static void Main()
-                    {
-                        using (Stream stream = File.OpenRead("test"))
-                        {
-                        }
-                        using Stream stream1 = File.OpenRead("test");
-                        {|CS0103:Goo|}(out var stream2);
-                    }
+                static void Main()
+                {
+                using (Stream stream = File.OpenRead("test"))
+                {
+                }
+                using Stream stream1 = File.OpenRead("test");
+                {|CS0103:Goo|}(out var stream2);
+                }
                 }
                 """
             );
@@ -866,20 +866,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
             await new VerifyCS.Test
             {
                 TestCode = """
-                    using System.IO;
+                using System.IO;
 
-                    class Program
-                    {
-                        static void Main()
-                        {
-                            using (Stream stream = File.OpenRead("test"))
-                            {
-                            }
-                            using (Stream stream1 = File.OpenRead("test"))
-                                {|CS0103:Goo|}(out var stream);
-                        }
-                    }
-                    """
+                class Program
+                {
+                static void Main()
+                {
+                using (Stream stream = File.OpenRead("test"))
+                {
+                }
+                using (Stream stream1 = File.OpenRead("test"))
+                {|CS0103:Goo|}(out var stream);
+                }
+                }
+                """
             }.RunAsync();
         }
 
@@ -892,14 +892,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class Program
                 {
-                    static void Main()
-                    {
-                        using (Stream stream = File.OpenRead("test"))
-                        {
-                        }
-                        [|using|] (Stream stream1 = File.OpenRead("test"))
-                            {|CS0103:Goo|}(out var stream2);
-                    }
+                static void Main()
+                {
+                using (Stream stream = File.OpenRead("test"))
+                {
+                }
+                [|using|] (Stream stream1 = File.OpenRead("test"))
+                {|CS0103:Goo|}(out var stream2);
+                }
                 }
                 """,
                 """
@@ -907,14 +907,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class Program
                 {
-                    static void Main()
-                    {
-                        using (Stream stream = File.OpenRead("test"))
-                        {
-                        }
-                        using Stream stream1 = File.OpenRead("test");
-                        {|CS0103:Goo|}(out var stream2);
-                    }
+                static void Main()
+                {
+                using (Stream stream = File.OpenRead("test"))
+                {
+                }
+                using Stream stream1 = File.OpenRead("test");
+                {|CS0103:Goo|}(out var stream2);
+                }
                 }
                 """
             );
@@ -926,22 +926,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
             await new VerifyCS.Test
             {
                 TestCode = """
-                    using System.IO;
+                using System.IO;
 
-                    class Program
-                    {
-                        static void Main()
-                        {
-                            using (Stream stream = File.OpenRead("test"))
-                            {
-                                Stream stream1;
-                            }
-                            using (Stream stream1 = File.OpenRead("test"))
-                            {
-                            }
-                        }
-                    }
-                    """
+                class Program
+                {
+                static void Main()
+                {
+                using (Stream stream = File.OpenRead("test"))
+                {
+                Stream stream1;
+                }
+                using (Stream stream1 = File.OpenRead("test"))
+                {
+                }
+                }
+                }
+                """
             }.RunAsync();
         }
 
@@ -954,16 +954,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class Program
                 {
-                    static void Main()
-                    {
-                        using (Stream stream = File.OpenRead("test"))
-                        {
-                            Stream stream1;
-                        }
-                        [|using|] (Stream stream2 = File.OpenRead("test"))
-                        {
-                        }
-                    }
+                static void Main()
+                {
+                using (Stream stream = File.OpenRead("test"))
+                {
+                Stream stream1;
+                }
+                [|using|] (Stream stream2 = File.OpenRead("test"))
+                {
+                }
+                }
                 }
                 """,
                 """
@@ -971,14 +971,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class Program
                 {
-                    static void Main()
-                    {
-                        using (Stream stream = File.OpenRead("test"))
-                        {
-                            Stream stream1;
-                        }
-                        using Stream stream2 = File.OpenRead("test");
-                    }
+                static void Main()
+                {
+                using (Stream stream = File.OpenRead("test"))
+                {
+                Stream stream1;
+                }
+                using Stream stream2 = File.OpenRead("test");
+                }
                 }
                 """
             );
@@ -991,23 +991,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        [|using|] (var x = {|CS0103:y|})
-                        {
-                            // comment
-                        }
-                    }
+                static void Main(string[] args)
+                {
+                [|using|] (var x = {|CS0103:y|})
+                {
+                // comment
+                }
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        using var x = {|CS0103:y|};
-                        // comment
-                    }
+                static void Main(string[] args)
+                {
+                using var x = {|CS0103:y|};
+                // comment
+                }
                 }
                 """
             );
@@ -1020,25 +1020,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        [|using|] (var x = {|CS0103:y|})
-                        using (var a = {|CS0103:b|})
-                        {
-                            // comment
-                        }
-                    }
+                static void Main(string[] args)
+                {
+                [|using|] (var x = {|CS0103:y|})
+                using (var a = {|CS0103:b|})
+                {
+                // comment
+                }
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        using var x = {|CS0103:y|};
-                        using var a = {|CS0103:b|};
-                        // comment
-                    }
+                static void Main(string[] args)
+                {
+                using var x = {|CS0103:y|};
+                using var a = {|CS0103:b|};
+                // comment
+                }
                 }
                 """
             );
@@ -1053,18 +1053,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        [|using|] (var a = {|CS0103:b|})
-                        {
-                            [|using|] (var c = {|CS0103:d|})
-                            {
-                                Console.WriteLine(a);
-                                // comment1
-                            }
-                            // comment2
-                        }
-                    }
+                void M()
+                {
+                [|using|] (var a = {|CS0103:b|})
+                {
+                [|using|] (var c = {|CS0103:d|})
+                {
+                Console.WriteLine(a);
+                // comment1
+                }
+                // comment2
+                }
+                }
                 }
                 """,
                 """
@@ -1072,14 +1072,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        using var a = {|CS0103:b|};
-                        using var c = {|CS0103:d|};
-                        Console.WriteLine(a);
-                        // comment1
-                        // comment2
-                    }
+                void M()
+                {
+                using var a = {|CS0103:b|};
+                using var c = {|CS0103:d|};
+                Console.WriteLine(a);
+                // comment1
+                // comment2
+                }
                 }
                 """
             );
@@ -1094,22 +1094,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    static void M()
-                    {
-                        [|using|] (var obj = Dummy())
-                        {
+                static void M()
+                {
+                [|using|] (var obj = Dummy())
+                {
                 #pragma warning disable CS0618, CS0612
                 #if !FOO
-                            LegacyMethod();
+                LegacyMethod();
                 #endif
                 #pragma warning restore CS0618, CS0612
-                        }
-                    }
+                }
+                }
 
-                    static IDisposable Dummy() => throw new NotImplementedException();
+                static IDisposable Dummy() => throw new NotImplementedException();
 
-                    [Obsolete]
-                    static void LegacyMethod() => throw new NotImplementedException();
+                [Obsolete]
+                static void LegacyMethod() => throw new NotImplementedException();
                 }
                 """,
                 """
@@ -1117,20 +1117,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    static void M()
-                    {
-                        using var obj = Dummy();
+                static void M()
+                {
+                using var obj = Dummy();
                 #pragma warning disable CS0618, CS0612
                 #if !FOO
-                        LegacyMethod();
+                LegacyMethod();
                 #endif
                 #pragma warning restore CS0618, CS0612
-                    }
+                }
 
-                    static IDisposable Dummy() => throw new NotImplementedException();
+                static IDisposable Dummy() => throw new NotImplementedException();
 
-                    [Obsolete]
-                    static void LegacyMethod() => throw new NotImplementedException();
+                [Obsolete]
+                static void LegacyMethod() => throw new NotImplementedException();
                 }
                 """
             );
@@ -1145,23 +1145,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    static void M()
-                    {
-                        [|using|] (var obj = Dummy())
-                        {
+                static void M()
+                {
+                [|using|] (var obj = Dummy())
+                {
                 #pragma warning disable CS0618, CS0612
                 #if !FOO
-                            LegacyMethod();
+                LegacyMethod();
                 #endif
                 #pragma warning restore CS0618, CS0612
-                        // comment
-                        }
-                    }
+                // comment
+                }
+                }
 
-                    static IDisposable Dummy() => throw new NotImplementedException();
+                static IDisposable Dummy() => throw new NotImplementedException();
 
-                    [Obsolete]
-                    static void LegacyMethod() => throw new NotImplementedException();
+                [Obsolete]
+                static void LegacyMethod() => throw new NotImplementedException();
                 }
                 """,
                 """
@@ -1169,21 +1169,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    static void M()
-                    {
-                        using var obj = Dummy();
+                static void M()
+                {
+                using var obj = Dummy();
                 #pragma warning disable CS0618, CS0612
                 #if !FOO
-                        LegacyMethod();
+                LegacyMethod();
                 #endif
                 #pragma warning restore CS0618, CS0612
-                        // comment
-                    }
+                // comment
+                }
 
-                    static IDisposable Dummy() => throw new NotImplementedException();
+                static IDisposable Dummy() => throw new NotImplementedException();
 
-                    [Obsolete]
-                    static void LegacyMethod() => throw new NotImplementedException();
+                [Obsolete]
+                static void LegacyMethod() => throw new NotImplementedException();
                 }
                 """
             );
@@ -1198,23 +1198,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    static void M()
-                    {
-                        [|using|] (var obj = Dummy())
-                        {
+                static void M()
+                {
+                [|using|] (var obj = Dummy())
+                {
                 #pragma warning disable CS0618, CS0612
                 #if !FOO
-                            LegacyMethod();
-                            // comment
+                LegacyMethod();
+                // comment
                 #endif
                 #pragma warning restore CS0618, CS0612
-                        }
-                    }
+                }
+                }
 
-                    static IDisposable Dummy() => throw new NotImplementedException();
+                static IDisposable Dummy() => throw new NotImplementedException();
 
-                    [Obsolete]
-                    static void LegacyMethod() => throw new NotImplementedException();
+                [Obsolete]
+                static void LegacyMethod() => throw new NotImplementedException();
                 }
                 """,
                 """
@@ -1222,21 +1222,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    static void M()
-                    {
-                        using var obj = Dummy();
+                static void M()
+                {
+                using var obj = Dummy();
                 #pragma warning disable CS0618, CS0612
                 #if !FOO
-                        LegacyMethod();
-                        // comment
+                LegacyMethod();
+                // comment
                 #endif
                 #pragma warning restore CS0618, CS0612
-                    }
+                }
 
-                    static IDisposable Dummy() => throw new NotImplementedException();
+                static IDisposable Dummy() => throw new NotImplementedException();
 
-                    [Obsolete]
-                    static void LegacyMethod() => throw new NotImplementedException();
+                [Obsolete]
+                static void LegacyMethod() => throw new NotImplementedException();
                 }
                 """
             );
@@ -1251,23 +1251,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    static void M()
-                    {
-                        [|using|] (var obj = Dummy())
-                        {
+                static void M()
+                {
+                [|using|] (var obj = Dummy())
+                {
                 #pragma warning disable CS0618, CS0612
                 #if !FOO
-                            // comment
-                            LegacyMethod();
+                // comment
+                LegacyMethod();
                 #endif
                 #pragma warning restore CS0618, CS0612
-                        }
-                    }
+                }
+                }
 
-                    static IDisposable Dummy() => throw new NotImplementedException();
+                static IDisposable Dummy() => throw new NotImplementedException();
 
-                    [Obsolete]
-                    static void LegacyMethod() => throw new NotImplementedException();
+                [Obsolete]
+                static void LegacyMethod() => throw new NotImplementedException();
                 }
                 """,
                 """
@@ -1275,21 +1275,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    static void M()
-                    {
-                        using var obj = Dummy();
+                static void M()
+                {
+                using var obj = Dummy();
                 #pragma warning disable CS0618, CS0612
                 #if !FOO
-                        // comment
-                        LegacyMethod();
+                // comment
+                LegacyMethod();
                 #endif
                 #pragma warning restore CS0618, CS0612
-                    }
+                }
 
-                    static IDisposable Dummy() => throw new NotImplementedException();
+                static IDisposable Dummy() => throw new NotImplementedException();
 
-                    [Obsolete]
-                    static void LegacyMethod() => throw new NotImplementedException();
+                [Obsolete]
+                static void LegacyMethod() => throw new NotImplementedException();
                 }
                 """
             );
@@ -1304,23 +1304,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    static void M()
-                    {
-                        [|using|] (var obj = Dummy())
-                        {
-                            // comment
+                static void M()
+                {
+                [|using|] (var obj = Dummy())
+                {
+                // comment
                 #pragma warning disable CS0618, CS0612
                 #if !FOO
-                            LegacyMethod();
+                LegacyMethod();
                 #endif
                 #pragma warning restore CS0618, CS0612
-                        }
-                    }
+                }
+                }
 
-                    static IDisposable Dummy() => throw new NotImplementedException();
+                static IDisposable Dummy() => throw new NotImplementedException();
 
-                    [Obsolete]
-                    static void LegacyMethod() => throw new NotImplementedException();
+                [Obsolete]
+                static void LegacyMethod() => throw new NotImplementedException();
                 }
                 """,
                 """
@@ -1328,21 +1328,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    static void M()
-                    {
-                        using var obj = Dummy();
-                        // comment
+                static void M()
+                {
+                using var obj = Dummy();
+                // comment
                 #pragma warning disable CS0618, CS0612
                 #if !FOO
-                        LegacyMethod();
+                LegacyMethod();
                 #endif
                 #pragma warning restore CS0618, CS0612
-                    }
+                }
 
-                    static IDisposable Dummy() => throw new NotImplementedException();
+                static IDisposable Dummy() => throw new NotImplementedException();
 
-                    [Obsolete]
-                    static void LegacyMethod() => throw new NotImplementedException();
+                [Obsolete]
+                static void LegacyMethod() => throw new NotImplementedException();
                 }
                 """
             );
@@ -1357,24 +1357,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    static void M()
-                    {
-                        [|using|] (var obj = Dummy())
-                        {
-                            LegacyMethod();
+                static void M()
+                {
+                [|using|] (var obj = Dummy())
+                {
+                LegacyMethod();
                 #pragma warning disable CS0618, CS0612
                 #if !FOO
-                            LegacyMethod();
+                LegacyMethod();
                 #endif
                 #pragma warning restore CS0618, CS0612
-                            LegacyMethod();
-                        }
-                    }
+                LegacyMethod();
+                }
+                }
 
-                    static IDisposable Dummy() => throw new NotImplementedException();
+                static IDisposable Dummy() => throw new NotImplementedException();
 
-                    [Obsolete]
-                    static void LegacyMethod() => throw new NotImplementedException();
+                [Obsolete]
+                static void LegacyMethod() => throw new NotImplementedException();
                 }
                 """,
                 """
@@ -1382,22 +1382,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    static void M()
-                    {
-                        using var obj = Dummy();
-                        LegacyMethod();
+                static void M()
+                {
+                using var obj = Dummy();
+                LegacyMethod();
                 #pragma warning disable CS0618, CS0612
                 #if !FOO
-                        LegacyMethod();
+                LegacyMethod();
                 #endif
                 #pragma warning restore CS0618, CS0612
-                        LegacyMethod();
-                    }
+                LegacyMethod();
+                }
 
-                    static IDisposable Dummy() => throw new NotImplementedException();
+                static IDisposable Dummy() => throw new NotImplementedException();
 
-                    [Obsolete]
-                    static void LegacyMethod() => throw new NotImplementedException();
+                [Obsolete]
+                static void LegacyMethod() => throw new NotImplementedException();
                 }
                 """
             );
@@ -1412,18 +1412,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void Goo(IDisposable disposable)
-                    {
-                        [|using|] (var v = disposable)
-                        {
-                            {|CS0103:Bar|}(1,
-                                2,
-                                3);
-                            {|CS1501:Goo|}(1,
-                                2,
-                                3);
-                        }
-                    }
+                void Goo(IDisposable disposable)
+                {
+                [|using|] (var v = disposable)
+                {
+                {|CS0103:Bar|}(1,
+                2,
+                3);
+                {|CS1501:Goo|}(1,
+                2,
+                3);
+                }
+                }
                 }
                 """,
                 """
@@ -1431,16 +1431,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void Goo(IDisposable disposable)
-                    {
-                        using var v = disposable;
-                        {|CS0103:Bar|}(1,
-                            2,
-                            3);
-                        {|CS1501:Goo|}(1,
-                            2,
-                            3);
-                    }
+                void Goo(IDisposable disposable)
+                {
+                using var v = disposable;
+                {|CS0103:Bar|}(1,
+                2,
+                3);
+                {|CS1501:Goo|}(1,
+                2,
+                3);
+                }
                 }
                 """
             );
@@ -1456,15 +1456,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    static void Main()
-                    {
-                        [|using|] (var stream = new MemoryStream())
-                        {
-                            _ = new Action(
-                                    () => { }
-                                );
-                        }
-                    }
+                static void Main()
+                {
+                [|using|] (var stream = new MemoryStream())
+                {
+                _ = new Action(
+                () => { }
+                );
+                }
+                }
                 }
                 """,
                 """
@@ -1473,13 +1473,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    static void Main()
-                    {
-                        using var stream = new MemoryStream();
-                        _ = new Action(
-                                () => { }
-                            );
-                    }
+                static void Main()
+                {
+                using var stream = new MemoryStream();
+                _ = new Action(
+                () => { }
+                );
+                }
                 }
                 """
             );
@@ -1494,13 +1494,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        [|using|] (var a = {|CS0103:b|})
-                        { // Make sure that...
-                            Console.WriteLine({|CS0103:s|}.CanRead);
-                        } // ...all comments remain
-                    }
+                void M()
+                {
+                [|using|] (var a = {|CS0103:b|})
+                { // Make sure that...
+                Console.WriteLine({|CS0103:s|}.CanRead);
+                } // ...all comments remain
+                }
                 }
                 """,
                 """
@@ -1508,13 +1508,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        using var a = {|CS0103:b|};
-                        // Make sure that...
-                        Console.WriteLine({|CS0103:s|}.CanRead);
-                        // ...all comments remain
-                    }
+                void M()
+                {
+                using var a = {|CS0103:b|};
+                // Make sure that...
+                Console.WriteLine({|CS0103:s|}.CanRead);
+                // ...all comments remain
+                }
                 }
                 """
             );
@@ -1529,15 +1529,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        // Make...
-                        [|using|] (var a = {|CS0103:b|}) // ...sure...
-                        { // ...that...
-                            Console.WriteLine({|CS0103:s|}.CanRead); // ...all...
-                        } // ...comments...
-                        // ...remain
-                    }
+                void M()
+                {
+                // Make...
+                [|using|] (var a = {|CS0103:b|}) // ...sure...
+                { // ...that...
+                Console.WriteLine({|CS0103:s|}.CanRead); // ...all...
+                } // ...comments...
+                // ...remain
+                }
                 }
                 """,
                 """
@@ -1545,15 +1545,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        // Make...
-                        using var a = {|CS0103:b|}; // ...sure...
-                                         // ...that...
-                        Console.WriteLine({|CS0103:s|}.CanRead); // ...all...
-                                                      // ...comments...
-                                                      // ...remain
-                    }
+                void M()
+                {
+                // Make...
+                using var a = {|CS0103:b|}; // ...sure...
+                // ...that...
+                Console.WriteLine({|CS0103:s|}.CanRead); // ...all...
+                // ...comments...
+                // ...remain
+                }
                 }
                 """
             );
@@ -1568,19 +1568,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        // Make...
-                        [|using|] (var a = {|CS0103:b|}) // ...sure...
-                        using (var c = {|CS0103:d|}) // ...that...
-                        // ...really...
-                        using (var e = {|CS0103:f|}) // ...all...
-                        { // ...comments...
-                            Console.WriteLine({|CS0103:s|}.CanRead); // ...are...
-                        } // ...kept...
-                        // ...during...
-                        // ...transformation
-                    }
+                void M()
+                {
+                // Make...
+                [|using|] (var a = {|CS0103:b|}) // ...sure...
+                using (var c = {|CS0103:d|}) // ...that...
+                // ...really...
+                using (var e = {|CS0103:f|}) // ...all...
+                { // ...comments...
+                Console.WriteLine({|CS0103:s|}.CanRead); // ...are...
+                } // ...kept...
+                // ...during...
+                // ...transformation
+                }
                 }
                 """,
                 """
@@ -1588,19 +1588,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        // Make...
-                        using var a = {|CS0103:b|}; // ...sure...
-                        using var c = {|CS0103:d|}; // ...that...
-                        // ...really...
-                        using var e = {|CS0103:f|}; // ...all...
-                                         // ...comments...
-                        Console.WriteLine({|CS0103:s|}.CanRead); // ...are...
-                                                      // ...kept...
-                                                      // ...during...
-                                                      // ...transformation
-                    }
+                void M()
+                {
+                // Make...
+                using var a = {|CS0103:b|}; // ...sure...
+                using var c = {|CS0103:d|}; // ...that...
+                // ...really...
+                using var e = {|CS0103:f|}; // ...all...
+                // ...comments...
+                Console.WriteLine({|CS0103:s|}.CanRead); // ...are...
+                // ...kept...
+                // ...during...
+                // ...transformation
+                }
                 }
                 """
             );
@@ -1615,12 +1615,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        [|using|] (var a = {|CS0103:b|}){
-                            Console.WriteLine(a);
-                        }
-                    }
+                void M()
+                {
+                [|using|] (var a = {|CS0103:b|}){
+                Console.WriteLine(a);
+                }
+                }
                 }
                 """,
                 """
@@ -1628,11 +1628,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        using var a = {|CS0103:b|};
-                        Console.WriteLine(a);
-                    }
+                void M()
+                {
+                using var a = {|CS0103:b|};
+                Console.WriteLine(a);
+                }
                 }
                 """
             );
@@ -1647,12 +1647,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        [|using|] (var a = {|CS0103:b|}) {
-                            Console.WriteLine(a);
-                        }
-                    }
+                void M()
+                {
+                [|using|] (var a = {|CS0103:b|}) {
+                Console.WriteLine(a);
+                }
+                }
                 }
                 """,
                 """
@@ -1660,11 +1660,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        using var a = {|CS0103:b|};
-                        Console.WriteLine(a);
-                    }
+                void M()
+                {
+                using var a = {|CS0103:b|};
+                Console.WriteLine(a);
+                }
                 }
                 """
             );
@@ -1679,12 +1679,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        [|using|] (var a = {|CS0103:b|}) { //comment
-                            Console.WriteLine(a);
-                        }
-                    }
+                void M()
+                {
+                [|using|] (var a = {|CS0103:b|}) { //comment
+                Console.WriteLine(a);
+                }
+                }
                 }
                 """,
                 """
@@ -1692,11 +1692,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        using var a = {|CS0103:b|};  //comment
-                        Console.WriteLine(a);
-                    }
+                void M()
+                {
+                using var a = {|CS0103:b|};  //comment
+                Console.WriteLine(a);
+                }
                 }
                 """
             );
@@ -1711,11 +1711,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        [|using|] (var a = {|CS0103:b|}) {
-                        }
-                    }
+                void M()
+                {
+                [|using|] (var a = {|CS0103:b|}) {
+                }
+                }
                 }
                 """,
                 """
@@ -1723,10 +1723,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        using var a = {|CS0103:b|};
-                    }
+                void M()
+                {
+                using var a = {|CS0103:b|};
+                }
                 }
                 """
             );
@@ -1741,12 +1741,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        [|using|] (var a = {|CS0103:b|}) {
-                            // intentionally empty
-                        }
-                    }
+                void M()
+                {
+                [|using|] (var a = {|CS0103:b|}) {
+                // intentionally empty
+                }
+                }
                 }
                 """,
                 """
@@ -1754,11 +1754,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        using var a = {|CS0103:b|};
-                        // intentionally empty
-                    }
+                void M()
+                {
+                using var a = {|CS0103:b|};
+                // intentionally empty
+                }
                 }
                 """
             );
@@ -1774,22 +1774,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 public class Test
                 {
-                    public IEnumerable<Test> Collection { get; } = new[]
-                    {
-                        new Test()
-                        {
-                            Prop = () =>
-                            {
-                                [|using|](var x = Get())
-                                {
-                                    int i = 0;
-                                }
-                            }
-                        }
-                    };
+                public IEnumerable<Test> Collection { get; } = new[]
+                {
+                new Test()
+                {
+                Prop = () =>
+                {
+                [|using|](var x = Get())
+                {
+                int i = 0;
+                }
+                }
+                }
+                };
 
-                    public Action Prop { get; set; }
-                    public static IDisposable Get() => throw new NotImplementedException();
+                public Action Prop { get; set; }
+                public static IDisposable Get() => throw new NotImplementedException();
                 }
                 """,
                 """
@@ -1798,20 +1798,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 public class Test
                 {
-                    public IEnumerable<Test> Collection { get; } = new[]
-                    {
-                        new Test()
-                        {
-                            Prop = () =>
-                            {
-                                using var x = Get();
-                                    int i = 0;
-                            }
-                        }
-                    };
+                public IEnumerable<Test> Collection { get; } = new[]
+                {
+                new Test()
+                {
+                Prop = () =>
+                {
+                using var x = Get();
+                int i = 0;
+                }
+                }
+                };
 
-                    public Action Prop { get; set; }
-                    public static IDisposable Get() => throw new NotImplementedException();
+                public Action Prop { get; set; }
+                public static IDisposable Get() => throw new NotImplementedException();
                 }
                 """
             );
@@ -1826,14 +1826,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    bool M()
-                    {
-                        [|using|] (var foo = new MemoryStream())
-                        {
-                        }
+                bool M()
+                {
+                [|using|] (var foo = new MemoryStream())
+                {
+                }
 
-                        return true;
-                    }
+                return true;
+                }
                 }
                 """,
                 """
@@ -1841,12 +1841,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    bool M()
-                    {
-                        using var foo = new MemoryStream();
+                bool M()
+                {
+                using var foo = new MemoryStream();
 
-                        return true;
-                    }
+                return true;
+                }
                 }
                 """
             );
@@ -1858,20 +1858,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
             await new VerifyCS.Test
             {
                 TestCode = """
-                    using System.IO;
+                using System.IO;
 
-                    class C
-                    {
-                        bool M(int a, int b)
-                        {
-                            using (var foo = new MemoryStream())
-                            {
-                            }
+                class C
+                {
+                bool M(int a, int b)
+                {
+                using (var foo = new MemoryStream())
+                {
+                }
 
-                            return a > b;
-                        }
-                    }
-                    """
+                return a > b;
+                }
+                }
+                """
             }.RunAsync();
         }
 
@@ -1884,15 +1884,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        [|using|] (var foo = new MemoryStream())
-                        {
-                        }
+                void M()
+                {
+                [|using|] (var foo = new MemoryStream())
+                {
+                }
 
-                        void Inner1() { }
-                        void Inner2() { }
-                    }
+                void Inner1() { }
+                void Inner2() { }
+                }
                 }
                 """,
                 """
@@ -1900,13 +1900,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    void M()
-                    {
-                        using var foo = new MemoryStream();
+                void M()
+                {
+                using var foo = new MemoryStream();
 
-                        void Inner1() { }
-                        void Inner2() { }
-                    }
+                void Inner1() { }
+                void Inner2() { }
+                }
                 }
                 """
             );
@@ -1918,23 +1918,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
             await new VerifyCS.Test
             {
                 TestCode = """
-                    using System.IO;
+                using System.IO;
 
-                    class C
-                    {
-                        bool M(int a, int b)
-                        {
-                            using (var foo = new MemoryStream())
-                            {
-                            }
+                class C
+                {
+                bool M(int a, int b)
+                {
+                using (var foo = new MemoryStream())
+                {
+                }
 
-                            void Inner1() { }
-                            void Inner2() { }
+                void Inner1() { }
+                void Inner2() { }
 
-                            return a > b;
-                        }
-                    }
-                    """
+                return a > b;
+                }
+                }
+                """
             }.RunAsync();
         }
 
@@ -1947,17 +1947,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    bool M(int a, int b)
-                    {
-                        [|using|] (var foo = new MemoryStream())
-                        {
-                        }
+                bool M(int a, int b)
+                {
+                [|using|] (var foo = new MemoryStream())
+                {
+                }
 
-                        void Inner1() { }
-                        void Inner2() { }
+                void Inner1() { }
+                void Inner2() { }
 
-                        return true;
-                    }
+                return true;
+                }
                 }
                 """,
                 """
@@ -1965,15 +1965,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    bool M(int a, int b)
-                    {
-                        using var foo = new MemoryStream();
+                bool M(int a, int b)
+                {
+                using var foo = new MemoryStream();
 
-                        void Inner1() { }
-                        void Inner2() { }
+                void Inner1() { }
+                void Inner2() { }
 
-                        return true;
-                    }
+                return true;
+                }
                 }
                 """
             );
@@ -1988,15 +1988,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    public static byte[] ComputeMD5Hash(byte[] source)
-                    {
+                public static byte[] ComputeMD5Hash(byte[] source)
+                {
                 #pragma warning disable CA5351 // Do Not Use Broken Cryptographic Algorithms
-                        [|using|] (var md5 = MD5.Create())
+                [|using|] (var md5 = MD5.Create())
                 #pragma warning restore CA5351 // Do Not Use Broken Cryptographic Algorithms
-                        {
-                            return md5.ComputeHash(source);
-                        }
-                    }
+                {
+                return md5.ComputeHash(source);
+                }
+                }
                 }
                 """,
                 """
@@ -2004,13 +2004,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    public static byte[] ComputeMD5Hash(byte[] source)
-                    {
+                public static byte[] ComputeMD5Hash(byte[] source)
+                {
                 #pragma warning disable CA5351 // Do Not Use Broken Cryptographic Algorithms
-                        using var md5 = MD5.Create();
+                using var md5 = MD5.Create();
                 #pragma warning restore CA5351 // Do Not Use Broken Cryptographic Algorithms
-                        return md5.ComputeHash(source);
-                    }
+                return md5.ComputeHash(source);
+                }
                 }
                 """
             );
@@ -2025,15 +2025,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    public static byte[] ComputeMD5Hash(byte[] source)
-                    {
+                public static byte[] ComputeMD5Hash(byte[] source)
+                {
                 #pragma warning disable CA5351 // Do Not Use Broken Cryptographic Algorithms
-                        [|using|] (var md5 = MD5.Create())
+                [|using|] (var md5 = MD5.Create())
                 #pragma warning restore CA5351 // Do Not Use Broken Cryptographic Algorithms
-                        { // comment
-                            return md5.ComputeHash(source);
-                        }
-                    }
+                { // comment
+                return md5.ComputeHash(source);
+                }
+                }
                 }
                 """,
                 """
@@ -2041,14 +2041,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 
                 class C
                 {
-                    public static byte[] ComputeMD5Hash(byte[] source)
-                    {
+                public static byte[] ComputeMD5Hash(byte[] source)
+                {
                 #pragma warning disable CA5351 // Do Not Use Broken Cryptographic Algorithms
-                        using var md5 = MD5.Create();
+                using var md5 = MD5.Create();
                 #pragma warning restore CA5351 // Do Not Use Broken Cryptographic Algorithms
-                        // comment
-                        return md5.ComputeHash(source);
-                    }
+                // comment
+                return md5.ComputeHash(source);
+                }
                 }
                 """
             );

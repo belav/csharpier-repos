@@ -25,40 +25,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EncapsulateField
         public async Task EncapsulatePrivateField()
         {
             var text = """
-                class C
-                {
-                    private int f$$ield;
+            class C
+            {
+            private int f$$ield;
 
-                    private void goo()
-                    {
-                        field = 3;
-                    }
-                }
-                """;
+            private void goo()
+            {
+            field = 3;
+            }
+            }
+            """;
             var expected = """
-                class C
-                {
-                    private int field;
+            class C
+            {
+            private int field;
 
-                    public int Field
-                    {
-                        get
-                        {
-                            return field;
-                        }
+            public int Field
+            {
+            get
+            {
+            return field;
+            }
 
-                        set
-                        {
-                            field = value;
-                        }
-                    }
+            set
+            {
+            field = value;
+            }
+            }
 
-                    private void goo()
-                    {
-                        Field = 3;
-                    }
-                }
-                """;
+            private void goo()
+            {
+            Field = 3;
+            }
+            }
+            """;
 
             using var state = EncapsulateFieldTestState.Create(text);
             await state.AssertEncapsulateAsAsync(expected);
@@ -68,40 +68,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EncapsulateField
         public async Task EncapsulateNonPrivateField()
         {
             var text = """
-                class C
-                {
-                    protected int fi$$eld;
+            class C
+            {
+            protected int fi$$eld;
 
-                    private void goo()
-                    {
-                        field = 3;
-                    }
-                }
-                """;
+            private void goo()
+            {
+            field = 3;
+            }
+            }
+            """;
             var expected = """
-                class C
-                {
-                    private int field;
+            class C
+            {
+            private int field;
 
-                    protected int Field
-                    {
-                        get
-                        {
-                            return field;
-                        }
+            protected int Field
+            {
+            get
+            {
+            return field;
+            }
 
-                        set
-                        {
-                            field = value;
-                        }
-                    }
+            set
+            {
+            field = value;
+            }
+            }
 
-                    private void goo()
-                    {
-                        Field = 3;
-                    }
-                }
-                """;
+            private void goo()
+            {
+            Field = 3;
+            }
+            }
+            """;
 
             using var state = EncapsulateFieldTestState.Create(text);
             await state.AssertEncapsulateAsAsync(expected);
@@ -111,16 +111,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EncapsulateField
         public async Task DialogShownIfNotFieldsFound()
         {
             var text = """
-                class$$ C
-                {
-                    private int field;
+            class$$ C
+            {
+            private int field;
 
-                    private void goo()
-                    {
-                        field = 3;
-                    }
-                }
-                """;
+            private void goo()
+            {
+            field = 3;
+            }
+            }
+            """;
 
             using var state = EncapsulateFieldTestState.Create(text);
             await state.AssertErrorAsync();
@@ -131,57 +131,57 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EncapsulateField
         public async Task EncapsulateTwoFields()
         {
             var text = """
-                class Program
-                {
-                    [|static int A = 1;
-                    static int B = A;|]
+            class Program
+            {
+            [|static int A = 1;
+            static int B = A;|]
 
-                    static void Main(string[] args)
-                    {
-                        System.Console.WriteLine(A);
-                        System.Console.WriteLine(B);
-                    }
-                }
-                """;
+            static void Main(string[] args)
+            {
+            System.Console.WriteLine(A);
+            System.Console.WriteLine(B);
+            }
+            }
+            """;
             var expected = """
-                class Program
-                {
-                    static int A = 1;
-                    static int B = A1;
+            class Program
+            {
+            static int A = 1;
+            static int B = A1;
 
-                    public static int A1
-                    {
-                        get
-                        {
-                            return A;
-                        }
+            public static int A1
+            {
+            get
+            {
+            return A;
+            }
 
-                        set
-                        {
-                            A = value;
-                        }
-                    }
+            set
+            {
+            A = value;
+            }
+            }
 
-                    public static int B1
-                    {
-                        get
-                        {
-                            return B;
-                        }
+            public static int B1
+            {
+            get
+            {
+            return B;
+            }
 
-                        set
-                        {
-                            B = value;
-                        }
-                    }
+            set
+            {
+            B = value;
+            }
+            }
 
-                    static void Main(string[] args)
-                    {
-                        System.Console.WriteLine(A1);
-                        System.Console.WriteLine(B1);
-                    }
-                }
-                """;
+            static void Main(string[] args)
+            {
+            System.Console.WriteLine(A1);
+            System.Console.WriteLine(B1);
+            }
+            }
+            """;
 
             using var state = EncapsulateFieldTestState.Create(text);
             await state.AssertEncapsulateAsAsync(expected);
@@ -195,15 +195,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EncapsulateField
             using var workspace = TestWorkspace.Create(
                 XElement.Parse(
                     """
-                <Workspace>
-                    <Submission Language="C#" CommonReferences="true">  
-                        class C
-                        {
-                            object $$goo;
-                        }
+                    <Workspace>
+                    <Submission Language="C#" CommonReferences="true">
+                    class C
+                    {
+                    object $$goo;
+                    }
                     </Submission>
-                </Workspace>
-                """
+                    </Workspace>
+                    """
                 ),
                 workspaceKind: WorkspaceKind.Interactive,
                 composition: EditorTestCompositions.EditorFeaturesWpf

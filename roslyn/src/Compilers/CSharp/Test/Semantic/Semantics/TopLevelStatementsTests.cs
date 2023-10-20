@@ -13266,9 +13266,9 @@ public class C
         public void EmptyLocalDeclaration()
         {
             var src = """
-struct S { }
-partial ext X
-""";
+            struct S { }
+            partial ext X
+            """;
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics(
                 // (1,13): error CS1031: Type expected

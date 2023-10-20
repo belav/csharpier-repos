@@ -54,10 +54,10 @@ public class QueryBugsTest : NonSharedModelTestBase
 
         AssertSql(
             """
-SELECT [d].[Id], [d].[DateTime], [d].[DateTime2], [d].[DateTime2_0], [d].[DateTime2_1], [d].[DateTime2_2], [d].[DateTime2_3], [d].[DateTime2_4], [d].[DateTime2_5], [d].[DateTime2_6], [d].[DateTime2_7], [d].[SmallDateTime]
-FROM [Dates] AS [d]
-WHERE [d].[DateTime2_2] = GETDATE() OR [d].[DateTime2_7] = GETDATE() OR [d].[DateTime] = GETDATE() OR [d].[SmallDateTime] = GETDATE()
-"""
+            SELECT [d].[Id], [d].[DateTime], [d].[DateTime2], [d].[DateTime2_0], [d].[DateTime2_1], [d].[DateTime2_2], [d].[DateTime2_3], [d].[DateTime2_4], [d].[DateTime2_5], [d].[DateTime2_6], [d].[DateTime2_7], [d].[SmallDateTime]
+            FROM [Dates] AS [d]
+            WHERE [d].[DateTime2_2] = GETDATE() OR [d].[DateTime2_7] = GETDATE() OR [d].[DateTime] = GETDATE() OR [d].[SmallDateTime] = GETDATE()
+            """
         );
     }
 
@@ -85,10 +85,10 @@ WHERE [d].[DateTime2_2] = GETDATE() OR [d].[DateTime2_7] = GETDATE() OR [d].[Dat
 
         AssertSql(
             """
-SELECT [d].[Id], [d].[DateTime], [d].[DateTime2], [d].[DateTime2_0], [d].[DateTime2_1], [d].[DateTime2_2], [d].[DateTime2_3], [d].[DateTime2_4], [d].[DateTime2_5], [d].[DateTime2_6], [d].[DateTime2_7], [d].[SmallDateTime]
-FROM [Dates] AS [d]
-WHERE [d].[DateTime2_2] <> GETDATE() AND [d].[DateTime2_7] <> GETDATE() AND [d].[DateTime] <> GETDATE() AND [d].[SmallDateTime] <> GETDATE()
-"""
+            SELECT [d].[Id], [d].[DateTime], [d].[DateTime2], [d].[DateTime2_0], [d].[DateTime2_1], [d].[DateTime2_2], [d].[DateTime2_3], [d].[DateTime2_4], [d].[DateTime2_5], [d].[DateTime2_6], [d].[DateTime2_7], [d].[SmallDateTime]
+            FROM [Dates] AS [d]
+            WHERE [d].[DateTime2_2] <> GETDATE() AND [d].[DateTime2_7] <> GETDATE() AND [d].[DateTime] <> GETDATE() AND [d].[SmallDateTime] <> GETDATE()
+            """
         );
     }
 
@@ -123,10 +123,10 @@ WHERE [d].[DateTime2_2] <> GETDATE() AND [d].[DateTime2_7] <> GETDATE() AND [d].
 
         AssertSql(
             """
-SELECT [d].[Id], [d].[DateTime], [d].[DateTime2], [d].[DateTime2_0], [d].[DateTime2_1], [d].[DateTime2_2], [d].[DateTime2_3], [d].[DateTime2_4], [d].[DateTime2_5], [d].[DateTime2_6], [d].[DateTime2_7], [d].[SmallDateTime]
-FROM [Dates] AS [d]
-WHERE [d].[SmallDateTime] = '1970-09-03T12:00:00' AND [d].[DateTime] = '1971-09-03T12:00:10.220' AND [d].[DateTime2] = '1972-09-03T12:00:10.3330000' AND [d].[DateTime2_0] = '1973-09-03T12:00:10' AND [d].[DateTime2_1] = '1974-09-03T12:00:10.5' AND [d].[DateTime2_2] = '1975-09-03T12:00:10.66' AND [d].[DateTime2_3] = '1976-09-03T12:00:10.777' AND [d].[DateTime2_4] = '1977-09-03T12:00:10.8880' AND [d].[DateTime2_5] = '1978-09-03T12:00:10.99900' AND [d].[DateTime2_6] = '1979-09-03T12:00:10.111000' AND [d].[DateTime2_7] = '1980-09-03T12:00:10.2220000'
-"""
+            SELECT [d].[Id], [d].[DateTime], [d].[DateTime2], [d].[DateTime2_0], [d].[DateTime2_1], [d].[DateTime2_2], [d].[DateTime2_3], [d].[DateTime2_4], [d].[DateTime2_5], [d].[DateTime2_6], [d].[DateTime2_7], [d].[SmallDateTime]
+            FROM [Dates] AS [d]
+            WHERE [d].[SmallDateTime] = '1970-09-03T12:00:00' AND [d].[DateTime] = '1971-09-03T12:00:10.220' AND [d].[DateTime2] = '1972-09-03T12:00:10.3330000' AND [d].[DateTime2_0] = '1973-09-03T12:00:10' AND [d].[DateTime2_1] = '1974-09-03T12:00:10.5' AND [d].[DateTime2_2] = '1975-09-03T12:00:10.66' AND [d].[DateTime2_3] = '1976-09-03T12:00:10.777' AND [d].[DateTime2_4] = '1977-09-03T12:00:10.8880' AND [d].[DateTime2_5] = '1978-09-03T12:00:10.99900' AND [d].[DateTime2_6] = '1979-09-03T12:00:10.111000' AND [d].[DateTime2_7] = '1980-09-03T12:00:10.2220000'
+            """
         );
     }
 
@@ -178,55 +178,55 @@ WHERE [d].[SmallDateTime] = '1970-09-03T12:00:00' AND [d].[DateTime] = '1971-09-
         // generating the JSON representation (#30677)
         AssertSql(
             """
-@__dateTimes_0='["1970-09-03T12:00:00","1971-09-03T12:00:10.22","1972-09-03T12:00:10.333","1973-09-03T12:00:10","1974-09-03T12:00:10.5","1975-09-03T12:00:10.66","1976-09-03T12:00:10.777","1977-09-03T12:00:10.888","1978-09-03T12:00:10.999","1979-09-03T12:00:10.111","1980-09-03T12:00:10.222"]' (Size = 4000)
-@__dateTimes_0_1='["1970-09-03T12:00:00","1971-09-03T12:00:10.22","1972-09-03T12:00:10.333","1973-09-03T12:00:10","1974-09-03T12:00:10.5","1975-09-03T12:00:10.66","1976-09-03T12:00:10.777","1977-09-03T12:00:10.888","1978-09-03T12:00:10.999","1979-09-03T12:00:10.111","1980-09-03T12:00:10.222"]' (Size = 4000)
-@__dateTimes_0_2='["1970-09-03T12:00:00","1971-09-03T12:00:10.22","1972-09-03T12:00:10.333","1973-09-03T12:00:10","1974-09-03T12:00:10.5","1975-09-03T12:00:10.66","1976-09-03T12:00:10.777","1977-09-03T12:00:10.888","1978-09-03T12:00:10.999","1979-09-03T12:00:10.111","1980-09-03T12:00:10.222"]' (Size = 4000)
-@__dateTimes_0_3='["1970-09-03T12:00:00","1971-09-03T12:00:10.22","1972-09-03T12:00:10.333","1973-09-03T12:00:10","1974-09-03T12:00:10.5","1975-09-03T12:00:10.66","1976-09-03T12:00:10.777","1977-09-03T12:00:10.888","1978-09-03T12:00:10.999","1979-09-03T12:00:10.111","1980-09-03T12:00:10.222"]' (Size = 4000)
-@__dateTimes_0_4='["1970-09-03T12:00:00","1971-09-03T12:00:10.22","1972-09-03T12:00:10.333","1973-09-03T12:00:10","1974-09-03T12:00:10.5","1975-09-03T12:00:10.66","1976-09-03T12:00:10.777","1977-09-03T12:00:10.888","1978-09-03T12:00:10.999","1979-09-03T12:00:10.111","1980-09-03T12:00:10.222"]' (Size = 4000)
-@__dateTimes_0_5='["1970-09-03T12:00:00","1971-09-03T12:00:10.22","1972-09-03T12:00:10.333","1973-09-03T12:00:10","1974-09-03T12:00:10.5","1975-09-03T12:00:10.66","1976-09-03T12:00:10.777","1977-09-03T12:00:10.888","1978-09-03T12:00:10.999","1979-09-03T12:00:10.111","1980-09-03T12:00:10.222"]' (Size = 4000)
-@__dateTimes_0_6='["1970-09-03T12:00:00","1971-09-03T12:00:10.22","1972-09-03T12:00:10.333","1973-09-03T12:00:10","1974-09-03T12:00:10.5","1975-09-03T12:00:10.66","1976-09-03T12:00:10.777","1977-09-03T12:00:10.888","1978-09-03T12:00:10.999","1979-09-03T12:00:10.111","1980-09-03T12:00:10.222"]' (Size = 4000)
-@__dateTimes_0_7='["1970-09-03T12:00:00","1971-09-03T12:00:10.22","1972-09-03T12:00:10.333","1973-09-03T12:00:10","1974-09-03T12:00:10.5","1975-09-03T12:00:10.66","1976-09-03T12:00:10.777","1977-09-03T12:00:10.888","1978-09-03T12:00:10.999","1979-09-03T12:00:10.111","1980-09-03T12:00:10.222"]' (Size = 4000)
-@__dateTimes_0_8='["1970-09-03T12:00:00","1971-09-03T12:00:10.22","1972-09-03T12:00:10.333","1973-09-03T12:00:10","1974-09-03T12:00:10.5","1975-09-03T12:00:10.66","1976-09-03T12:00:10.777","1977-09-03T12:00:10.888","1978-09-03T12:00:10.999","1979-09-03T12:00:10.111","1980-09-03T12:00:10.222"]' (Size = 4000)
-@__dateTimes_0_9='["1970-09-03T12:00:00","1971-09-03T12:00:10.22","1972-09-03T12:00:10.333","1973-09-03T12:00:10","1974-09-03T12:00:10.5","1975-09-03T12:00:10.66","1976-09-03T12:00:10.777","1977-09-03T12:00:10.888","1978-09-03T12:00:10.999","1979-09-03T12:00:10.111","1980-09-03T12:00:10.222"]' (Size = 4000)
-@__dateTimes_0_10='["1970-09-03T12:00:00","1971-09-03T12:00:10.22","1972-09-03T12:00:10.333","1973-09-03T12:00:10","1974-09-03T12:00:10.5","1975-09-03T12:00:10.66","1976-09-03T12:00:10.777","1977-09-03T12:00:10.888","1978-09-03T12:00:10.999","1979-09-03T12:00:10.111","1980-09-03T12:00:10.222"]' (Size = 4000)
+            @__dateTimes_0='["1970-09-03T12:00:00","1971-09-03T12:00:10.22","1972-09-03T12:00:10.333","1973-09-03T12:00:10","1974-09-03T12:00:10.5","1975-09-03T12:00:10.66","1976-09-03T12:00:10.777","1977-09-03T12:00:10.888","1978-09-03T12:00:10.999","1979-09-03T12:00:10.111","1980-09-03T12:00:10.222"]' (Size = 4000)
+            @__dateTimes_0_1='["1970-09-03T12:00:00","1971-09-03T12:00:10.22","1972-09-03T12:00:10.333","1973-09-03T12:00:10","1974-09-03T12:00:10.5","1975-09-03T12:00:10.66","1976-09-03T12:00:10.777","1977-09-03T12:00:10.888","1978-09-03T12:00:10.999","1979-09-03T12:00:10.111","1980-09-03T12:00:10.222"]' (Size = 4000)
+            @__dateTimes_0_2='["1970-09-03T12:00:00","1971-09-03T12:00:10.22","1972-09-03T12:00:10.333","1973-09-03T12:00:10","1974-09-03T12:00:10.5","1975-09-03T12:00:10.66","1976-09-03T12:00:10.777","1977-09-03T12:00:10.888","1978-09-03T12:00:10.999","1979-09-03T12:00:10.111","1980-09-03T12:00:10.222"]' (Size = 4000)
+            @__dateTimes_0_3='["1970-09-03T12:00:00","1971-09-03T12:00:10.22","1972-09-03T12:00:10.333","1973-09-03T12:00:10","1974-09-03T12:00:10.5","1975-09-03T12:00:10.66","1976-09-03T12:00:10.777","1977-09-03T12:00:10.888","1978-09-03T12:00:10.999","1979-09-03T12:00:10.111","1980-09-03T12:00:10.222"]' (Size = 4000)
+            @__dateTimes_0_4='["1970-09-03T12:00:00","1971-09-03T12:00:10.22","1972-09-03T12:00:10.333","1973-09-03T12:00:10","1974-09-03T12:00:10.5","1975-09-03T12:00:10.66","1976-09-03T12:00:10.777","1977-09-03T12:00:10.888","1978-09-03T12:00:10.999","1979-09-03T12:00:10.111","1980-09-03T12:00:10.222"]' (Size = 4000)
+            @__dateTimes_0_5='["1970-09-03T12:00:00","1971-09-03T12:00:10.22","1972-09-03T12:00:10.333","1973-09-03T12:00:10","1974-09-03T12:00:10.5","1975-09-03T12:00:10.66","1976-09-03T12:00:10.777","1977-09-03T12:00:10.888","1978-09-03T12:00:10.999","1979-09-03T12:00:10.111","1980-09-03T12:00:10.222"]' (Size = 4000)
+            @__dateTimes_0_6='["1970-09-03T12:00:00","1971-09-03T12:00:10.22","1972-09-03T12:00:10.333","1973-09-03T12:00:10","1974-09-03T12:00:10.5","1975-09-03T12:00:10.66","1976-09-03T12:00:10.777","1977-09-03T12:00:10.888","1978-09-03T12:00:10.999","1979-09-03T12:00:10.111","1980-09-03T12:00:10.222"]' (Size = 4000)
+            @__dateTimes_0_7='["1970-09-03T12:00:00","1971-09-03T12:00:10.22","1972-09-03T12:00:10.333","1973-09-03T12:00:10","1974-09-03T12:00:10.5","1975-09-03T12:00:10.66","1976-09-03T12:00:10.777","1977-09-03T12:00:10.888","1978-09-03T12:00:10.999","1979-09-03T12:00:10.111","1980-09-03T12:00:10.222"]' (Size = 4000)
+            @__dateTimes_0_8='["1970-09-03T12:00:00","1971-09-03T12:00:10.22","1972-09-03T12:00:10.333","1973-09-03T12:00:10","1974-09-03T12:00:10.5","1975-09-03T12:00:10.66","1976-09-03T12:00:10.777","1977-09-03T12:00:10.888","1978-09-03T12:00:10.999","1979-09-03T12:00:10.111","1980-09-03T12:00:10.222"]' (Size = 4000)
+            @__dateTimes_0_9='["1970-09-03T12:00:00","1971-09-03T12:00:10.22","1972-09-03T12:00:10.333","1973-09-03T12:00:10","1974-09-03T12:00:10.5","1975-09-03T12:00:10.66","1976-09-03T12:00:10.777","1977-09-03T12:00:10.888","1978-09-03T12:00:10.999","1979-09-03T12:00:10.111","1980-09-03T12:00:10.222"]' (Size = 4000)
+            @__dateTimes_0_10='["1970-09-03T12:00:00","1971-09-03T12:00:10.22","1972-09-03T12:00:10.333","1973-09-03T12:00:10","1974-09-03T12:00:10.5","1975-09-03T12:00:10.66","1976-09-03T12:00:10.777","1977-09-03T12:00:10.888","1978-09-03T12:00:10.999","1979-09-03T12:00:10.111","1980-09-03T12:00:10.222"]' (Size = 4000)
 
-SELECT [d].[Id], [d].[DateTime], [d].[DateTime2], [d].[DateTime2_0], [d].[DateTime2_1], [d].[DateTime2_2], [d].[DateTime2_3], [d].[DateTime2_4], [d].[DateTime2_5], [d].[DateTime2_6], [d].[DateTime2_7], [d].[SmallDateTime]
-FROM [Dates] AS [d]
-WHERE [d].[SmallDateTime] IN (
-    SELECT [d0].[value]
-    FROM OPENJSON(@__dateTimes_0) WITH ([value] smalldatetime '$') AS [d0]
-) AND [d].[DateTime] IN (
-    SELECT [d1].[value]
-    FROM OPENJSON(@__dateTimes_0_1) WITH ([value] datetime '$') AS [d1]
-) AND [d].[DateTime2] IN (
-    SELECT [d2].[value]
-    FROM OPENJSON(@__dateTimes_0_2) WITH ([value] datetime2 '$') AS [d2]
-) AND [d].[DateTime2_0] IN (
-    SELECT [d3].[value]
-    FROM OPENJSON(@__dateTimes_0_3) WITH ([value] datetime2(0) '$') AS [d3]
-) AND [d].[DateTime2_1] IN (
-    SELECT [d4].[value]
-    FROM OPENJSON(@__dateTimes_0_4) WITH ([value] datetime2(1) '$') AS [d4]
-) AND [d].[DateTime2_2] IN (
-    SELECT [d5].[value]
-    FROM OPENJSON(@__dateTimes_0_5) WITH ([value] datetime2(2) '$') AS [d5]
-) AND [d].[DateTime2_3] IN (
-    SELECT [d6].[value]
-    FROM OPENJSON(@__dateTimes_0_6) WITH ([value] datetime2(3) '$') AS [d6]
-) AND [d].[DateTime2_4] IN (
-    SELECT [d7].[value]
-    FROM OPENJSON(@__dateTimes_0_7) WITH ([value] datetime2(4) '$') AS [d7]
-) AND [d].[DateTime2_5] IN (
-    SELECT [d8].[value]
-    FROM OPENJSON(@__dateTimes_0_8) WITH ([value] datetime2(5) '$') AS [d8]
-) AND [d].[DateTime2_6] IN (
-    SELECT [d9].[value]
-    FROM OPENJSON(@__dateTimes_0_9) WITH ([value] datetime2(6) '$') AS [d9]
-) AND [d].[DateTime2_7] IN (
-    SELECT [d10].[value]
-    FROM OPENJSON(@__dateTimes_0_10) WITH ([value] datetime2(7) '$') AS [d10]
-)
-"""
+            SELECT [d].[Id], [d].[DateTime], [d].[DateTime2], [d].[DateTime2_0], [d].[DateTime2_1], [d].[DateTime2_2], [d].[DateTime2_3], [d].[DateTime2_4], [d].[DateTime2_5], [d].[DateTime2_6], [d].[DateTime2_7], [d].[SmallDateTime]
+            FROM [Dates] AS [d]
+            WHERE [d].[SmallDateTime] IN (
+            SELECT [d0].[value]
+            FROM OPENJSON(@__dateTimes_0) WITH ([value] smalldatetime '$') AS [d0]
+            ) AND [d].[DateTime] IN (
+            SELECT [d1].[value]
+            FROM OPENJSON(@__dateTimes_0_1) WITH ([value] datetime '$') AS [d1]
+            ) AND [d].[DateTime2] IN (
+            SELECT [d2].[value]
+            FROM OPENJSON(@__dateTimes_0_2) WITH ([value] datetime2 '$') AS [d2]
+            ) AND [d].[DateTime2_0] IN (
+            SELECT [d3].[value]
+            FROM OPENJSON(@__dateTimes_0_3) WITH ([value] datetime2(0) '$') AS [d3]
+            ) AND [d].[DateTime2_1] IN (
+            SELECT [d4].[value]
+            FROM OPENJSON(@__dateTimes_0_4) WITH ([value] datetime2(1) '$') AS [d4]
+            ) AND [d].[DateTime2_2] IN (
+            SELECT [d5].[value]
+            FROM OPENJSON(@__dateTimes_0_5) WITH ([value] datetime2(2) '$') AS [d5]
+            ) AND [d].[DateTime2_3] IN (
+            SELECT [d6].[value]
+            FROM OPENJSON(@__dateTimes_0_6) WITH ([value] datetime2(3) '$') AS [d6]
+            ) AND [d].[DateTime2_4] IN (
+            SELECT [d7].[value]
+            FROM OPENJSON(@__dateTimes_0_7) WITH ([value] datetime2(4) '$') AS [d7]
+            ) AND [d].[DateTime2_5] IN (
+            SELECT [d8].[value]
+            FROM OPENJSON(@__dateTimes_0_8) WITH ([value] datetime2(5) '$') AS [d8]
+            ) AND [d].[DateTime2_6] IN (
+            SELECT [d9].[value]
+            FROM OPENJSON(@__dateTimes_0_9) WITH ([value] datetime2(6) '$') AS [d9]
+            ) AND [d].[DateTime2_7] IN (
+            SELECT [d10].[value]
+            FROM OPENJSON(@__dateTimes_0_10) WITH ([value] datetime2(7) '$') AS [d10]
+            )
+            """
         );
     }
 
@@ -644,11 +644,11 @@ INSERT ZeroKey VALUES (NULL)"
 
         AssertSql(
             """
-SELECT [c].[FirstName], [c].[LastName], [o].[Id], [o].[CustomerFirstName], [o].[CustomerLastName], [o].[Name]
-FROM [Customer] AS [c]
-LEFT JOIN [Order] AS [o] ON [c].[FirstName] = [o].[CustomerFirstName] AND [c].[LastName] = [o].[CustomerLastName]
-ORDER BY [c].[FirstName], [c].[LastName]
-"""
+            SELECT [c].[FirstName], [c].[LastName], [o].[Id], [o].[CustomerFirstName], [o].[CustomerLastName], [o].[Name]
+            FROM [Customer] AS [c]
+            LEFT JOIN [Order] AS [o] ON [c].[FirstName] = [o].[CustomerFirstName] AND [c].[LastName] = [o].[CustomerLastName]
+            ORDER BY [c].[FirstName], [c].[LastName]
+            """
         );
     }
 
@@ -670,10 +670,10 @@ ORDER BY [c].[FirstName], [c].[LastName]
 
         AssertSql(
             """
-SELECT [o].[Id], [o].[CustomerFirstName], [o].[CustomerLastName], [o].[Name], [c].[FirstName], [c].[LastName]
-FROM [Order] AS [o]
-LEFT JOIN [Customer] AS [c] ON [o].[CustomerFirstName] = [c].[FirstName] AND [o].[CustomerLastName] = [c].[LastName]
-"""
+            SELECT [o].[Id], [o].[CustomerFirstName], [o].[CustomerLastName], [o].[Name], [c].[FirstName], [c].[LastName]
+            FROM [Order] AS [o]
+            LEFT JOIN [Customer] AS [c] ON [o].[CustomerFirstName] = [c].[FirstName] AND [o].[CustomerLastName] = [c].[LastName]
+            """
         );
     }
 
@@ -1980,10 +1980,10 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
 
             AssertSql(
                 """
-SELECT [e].[Id], [e].[Permission], [e].[PermissionByte], [e].[PermissionShort]
-FROM [Entity] AS [e]
-WHERE [e].[Permission] & CAST(17179869184 AS bigint) = CAST(17179869184 AS bigint)
-"""
+                SELECT [e].[Id], [e].[Permission], [e].[PermissionByte], [e].[PermissionShort]
+                FROM [Entity] AS [e]
+                WHERE [e].[Permission] & CAST(17179869184 AS bigint) = CAST(17179869184 AS bigint)
+                """
             );
         }
 
@@ -1999,10 +1999,10 @@ WHERE [e].[Permission] & CAST(17179869184 AS bigint) = CAST(17179869184 AS bigin
 
             AssertSql(
                 """
-SELECT [e].[Id], [e].[Permission], [e].[PermissionByte], [e].[PermissionShort]
-FROM [Entity] AS [e]
-WHERE [e].[PermissionShort] & CAST(4 AS smallint) = CAST(4 AS smallint)
-"""
+                SELECT [e].[Id], [e].[Permission], [e].[PermissionByte], [e].[PermissionShort]
+                FROM [Entity] AS [e]
+                WHERE [e].[PermissionShort] & CAST(4 AS smallint) = CAST(4 AS smallint)
+                """
             );
         }
     }
@@ -2020,10 +2020,10 @@ WHERE [e].[PermissionShort] & CAST(4 AS smallint) = CAST(4 AS smallint)
 
             AssertSql(
                 """
-SELECT [e].[Id], [e].[Permission], [e].[PermissionByte], [e].[PermissionShort]
-FROM [Entity] AS [e]
-WHERE [e].[Permission] & [e].[Permission] = [e].[Permission]
-"""
+                SELECT [e].[Id], [e].[Permission], [e].[PermissionByte], [e].[PermissionShort]
+                FROM [Entity] AS [e]
+                WHERE [e].[Permission] & [e].[Permission] = [e].[Permission]
+                """
             );
         }
 
@@ -2039,10 +2039,10 @@ WHERE [e].[Permission] & [e].[Permission] = [e].[Permission]
 
             AssertSql(
                 """
-SELECT [e].[Id], [e].[Permission], [e].[PermissionByte], [e].[PermissionShort]
-FROM [Entity] AS [e]
-WHERE [e].[PermissionByte] & [e].[PermissionByte] = [e].[PermissionByte]
-"""
+                SELECT [e].[Id], [e].[Permission], [e].[PermissionByte], [e].[PermissionShort]
+                FROM [Entity] AS [e]
+                WHERE [e].[PermissionByte] & [e].[PermissionByte] = [e].[PermissionByte]
+                """
             );
         }
     }
@@ -2136,20 +2136,20 @@ WHERE [e].[PermissionByte] & [e].[PermissionByte] = [e].[PermissionByte]
 
             AssertSql(
                 """
-@__id_0='1'
+                @__id_0='1'
 
-SELECT [e].[Id], [e].[Name]
-FROM [Entities] AS [e]
-WHERE [e].[Id] = @__id_0
-""",
+                SELECT [e].[Id], [e].[Name]
+                FROM [Entities] AS [e]
+                WHERE [e].[Id] = @__id_0
+                """,
                 //
                 """
-@__id_0='2'
+                @__id_0='2'
 
-SELECT [e].[Id], [e].[Name]
-FROM [Entities] AS [e]
-WHERE [e].[Id] = @__id_0
-"""
+                SELECT [e].[Id], [e].[Name]
+                FROM [Entities] AS [e]
+                WHERE [e].[Id] = @__id_0
+                """
             );
         }
 
@@ -2172,20 +2172,20 @@ WHERE [e].[Id] = @__id_0
 
             AssertSql(
                 """
-@__id_0='1'
+                @__id_0='1'
 
-SELECT [e].[Id], [e].[Name]
-FROM [Entities] AS [e]
-WHERE [e].[Id] = @__id_0
-""",
+                SELECT [e].[Id], [e].[Name]
+                FROM [Entities] AS [e]
+                WHERE [e].[Id] = @__id_0
+                """,
                 //
                 """
-@__id_0='2'
+                @__id_0='2'
 
-SELECT [e].[Id], [e].[Name]
-FROM [Entities] AS [e]
-WHERE [e].[Id] = @__id_0
-"""
+                SELECT [e].[Id], [e].[Name]
+                FROM [Entities] AS [e]
+                WHERE [e].[Id] = @__id_0
+                """
             );
         }
 
@@ -2210,28 +2210,28 @@ WHERE [e].[Id] = @__id_0
 
             AssertSql(
                 """
-@__id_0='1'
+                @__id_0='1'
 
-SELECT [e].[Id], [e].[Name]
-FROM [Entities] AS [e]
-WHERE [e].[Id] IN (
-    SELECT [e0].[Id]
-    FROM [Entities] AS [e0]
-    WHERE [e0].[Id] = @__id_0
-)
-""",
+                SELECT [e].[Id], [e].[Name]
+                FROM [Entities] AS [e]
+                WHERE [e].[Id] IN (
+                SELECT [e0].[Id]
+                FROM [Entities] AS [e0]
+                WHERE [e0].[Id] = @__id_0
+                )
+                """,
                 //
                 """
-@__id_0='2'
+                @__id_0='2'
 
-SELECT [e].[Id], [e].[Name]
-FROM [Entities] AS [e]
-WHERE [e].[Id] IN (
-    SELECT [e0].[Id]
-    FROM [Entities] AS [e0]
-    WHERE [e0].[Id] = @__id_0
-)
-"""
+                SELECT [e].[Id], [e].[Name]
+                FROM [Entities] AS [e]
+                WHERE [e].[Id] IN (
+                SELECT [e0].[Id]
+                FROM [Entities] AS [e0]
+                WHERE [e0].[Id] = @__id_0
+                )
+                """
             );
         }
     }
@@ -2256,18 +2256,18 @@ WHERE [e].[Id] IN (
 
             AssertSql(
                 """
-@__name_0='A' (Size = 4000)
+                @__name_0='A' (Size = 4000)
 
-SELECT [e].[Id], [e].[Name]
-FROM [Entities] AS [e]
-WHERE [e].[Name] = @__name_0
-""",
+                SELECT [e].[Id], [e].[Name]
+                FROM [Entities] AS [e]
+                WHERE [e].[Name] = @__name_0
+                """,
                 //
                 """
-SELECT [e].[Id], [e].[Name]
-FROM [Entities] AS [e]
-WHERE [e].[Name] IS NULL
-"""
+                SELECT [e].[Id], [e].[Name]
+                FROM [Entities] AS [e]
+                WHERE [e].[Name] IS NULL
+                """
             );
         }
     }
@@ -2384,11 +2384,11 @@ WHERE [e].[Name] IS NULL
 
             AssertSql(
                 """
-SELECT [m].[Id], [m].[Title], [m].[Details_Info], [m].[Details_Rating], [a].[Id], [a].[Movie9202Id], [a].[Name], [a].[Details_Info], [a].[Details_Rating]
-FROM [Movies] AS [m]
-LEFT JOIN [Actors] AS [a] ON [m].[Id] = [a].[Movie9202Id]
-ORDER BY [m].[Id]
-"""
+                SELECT [m].[Id], [m].[Title], [m].[Details_Info], [m].[Details_Rating], [a].[Id], [a].[Movie9202Id], [a].[Name], [a].[Details_Info], [a].[Details_Rating]
+                FROM [Movies] AS [m]
+                LEFT JOIN [Actors] AS [a] ON [m].[Id] = [a].[Movie9202Id]
+                ORDER BY [m].[Id]
+                """
             );
         }
 
@@ -2404,18 +2404,18 @@ ORDER BY [m].[Id]
 
             AssertSql(
                 """
-SELECT [m].[Id], [m].[Title], [m].[Details_Info], [m].[Details_Rating], [a].[Id], [a].[Movie9202Id], [a].[Name], [a].[Details_Info], [a].[Details_Rating]
-FROM [Movies] AS [m]
-LEFT JOIN [Actors] AS [a] ON [m].[Id] = [a].[Movie9202Id]
-ORDER BY [m].[Id]
-""",
+                SELECT [m].[Id], [m].[Title], [m].[Details_Info], [m].[Details_Rating], [a].[Id], [a].[Movie9202Id], [a].[Name], [a].[Details_Info], [a].[Details_Rating]
+                FROM [Movies] AS [m]
+                LEFT JOIN [Actors] AS [a] ON [m].[Id] = [a].[Movie9202Id]
+                ORDER BY [m].[Id]
+                """,
                 //
                 """
-SELECT [m].[Id], [m].[Title], [m].[Details_Info], [m].[Details_Rating], [a].[Id], [a].[Movie9202Id], [a].[Name], [a].[Details_Info], [a].[Details_Rating]
-FROM [Movies] AS [m]
-LEFT JOIN [Actors] AS [a] ON [m].[Id] = [a].[Movie9202Id]
-ORDER BY [m].[Id]
-"""
+                SELECT [m].[Id], [m].[Title], [m].[Details_Info], [m].[Details_Rating], [a].[Id], [a].[Movie9202Id], [a].[Name], [a].[Details_Info], [a].[Details_Rating]
+                FROM [Movies] AS [m]
+                LEFT JOIN [Actors] AS [a] ON [m].[Id] = [a].[Movie9202Id]
+                ORDER BY [m].[Id]
+                """
             );
         }
     }
@@ -2509,10 +2509,10 @@ ORDER BY [m].[Id]
 
             AssertSql(
                 """
-SELECT TOP(2) [foo].[AddOne]([w].[Val])
-FROM [foo].[Widgets] AS [w]
-WHERE [w].[Val] = 1
-"""
+                SELECT TOP(2) [foo].[AddOne]([w].[Val])
+                FROM [foo].[Widgets] AS [w]
+                WHERE [w].[Val] = 1
+                """
             );
         }
 
@@ -2529,10 +2529,10 @@ WHERE [w].[Val] = 1
 
             AssertSql(
                 """
-SELECT TOP(2) [dbo].[AddTwo]([w].[Val])
-FROM [foo].[Widgets] AS [w]
-WHERE [w].[Val] = 1
-"""
+                SELECT TOP(2) [dbo].[AddTwo]([w].[Val])
+                FROM [foo].[Widgets] AS [w]
+                WHERE [w].[Val] = 1
+                """
             );
         }
     }
@@ -2839,16 +2839,16 @@ BEGIN
 
             AssertSql(
                 """
-SELECT CASE
-    WHEN [c0].[Id] IS NOT NULL THEN CASE
-        WHEN [c0].[Processed] = CAST(0 AS bit) THEN CAST(1 AS bit)
-        ELSE CAST(0 AS bit)
-    END
-    ELSE NULL
-END AS [Processing]
-FROM [Carts] AS [c]
-LEFT JOIN [Configuration9468] AS [c0] ON [c].[ConfigurationId] = [c0].[Id]
-"""
+                SELECT CASE
+                WHEN [c0].[Id] IS NOT NULL THEN CASE
+                WHEN [c0].[Processed] = CAST(0 AS bit) THEN CAST(1 AS bit)
+                ELSE CAST(0 AS bit)
+                END
+                ELSE NULL
+                END AS [Processing]
+                FROM [Carts] AS [c]
+                LEFT JOIN [Configuration9468] AS [c0] ON [c].[ConfigurationId] = [c0].[Id]
+                """
             );
         }
     }
@@ -2900,11 +2900,11 @@ LEFT JOIN [Configuration9468] AS [c0] ON [c].[ConfigurationId] = [c0].[Id]
 
             AssertSql(
                 """
-SELECT [p].[Id], [p].[Name], [c].[Id], [c].[Name], [c].[Parent10635Id], [c].[ParentId]
-FROM [Parents] AS [p]
-LEFT JOIN [Children] AS [c] ON [p].[Id] = [c].[Parent10635Id]
-ORDER BY [p].[Id]
-"""
+                SELECT [p].[Id], [p].[Name], [c].[Id], [c].[Name], [c].[Parent10635Id], [c].[ParentId]
+                FROM [Parents] AS [p]
+                LEFT JOIN [Children] AS [c] ON [p].[Id] = [c].[Parent10635Id]
+                ORDER BY [p].[Id]
+                """
             );
         }
 
@@ -2919,11 +2919,11 @@ ORDER BY [p].[Id]
 
             AssertSql(
                 """
-SELECT [p].[Id], [c].[Id], [c].[Name], [c].[Parent10635Id], [c].[ParentId]
-FROM [Parents] AS [p]
-LEFT JOIN [Children] AS [c] ON [p].[Id] = [c].[Parent10635Id]
-ORDER BY [p].[Id]
-"""
+                SELECT [p].[Id], [c].[Id], [c].[Name], [c].[Parent10635Id], [c].[ParentId]
+                FROM [Parents] AS [p]
+                LEFT JOIN [Children] AS [c] ON [p].[Id] = [c].[Parent10635Id]
+                ORDER BY [p].[Id]
+                """
             );
         }
     }
@@ -2991,28 +2991,28 @@ ORDER BY [p].[Id]
 
             AssertSql(
                 """
-@__ef_filter__Tenant_0='0'
+                @__ef_filter__Tenant_0='0'
 
-SELECT [b].[Id], [b].[SomeValue]
-FROM [Blogs] AS [b]
-WHERE [b].[SomeValue] = @__ef_filter__Tenant_0
-""",
+                SELECT [b].[Id], [b].[SomeValue]
+                FROM [Blogs] AS [b]
+                WHERE [b].[SomeValue] = @__ef_filter__Tenant_0
+                """,
                 //
                 """
-@__ef_filter__Tenant_0='1'
+                @__ef_filter__Tenant_0='1'
 
-SELECT [b].[Id], [b].[SomeValue]
-FROM [Blogs] AS [b]
-WHERE [b].[SomeValue] = @__ef_filter__Tenant_0
-""",
+                SELECT [b].[Id], [b].[SomeValue]
+                FROM [Blogs] AS [b]
+                WHERE [b].[SomeValue] = @__ef_filter__Tenant_0
+                """,
                 //
                 """
-@__ef_filter__Tenant_0='2'
+                @__ef_filter__Tenant_0='2'
 
-SELECT COUNT(*)
-FROM [Blogs] AS [b]
-WHERE [b].[SomeValue] = @__ef_filter__Tenant_0
-"""
+                SELECT COUNT(*)
+                FROM [Blogs] AS [b]
+                WHERE [b].[SomeValue] = @__ef_filter__Tenant_0
+                """
             );
         }
     }
@@ -3071,9 +3071,9 @@ WHERE [b].[SomeValue] = @__ef_filter__Tenant_0
 
             AssertSql(
                 """
-SELECT [b].[Id], [b].[IsTwo], [b].[MoreStuffId]
-FROM [Bases] AS [b]
-"""
+                SELECT [b].[Id], [b].[IsTwo], [b].[MoreStuffId]
+                FROM [Bases] AS [b]
+                """
             );
         }
     }
@@ -3148,17 +3148,17 @@ FROM [Bases] AS [b]
 
             AssertSql(
                 """
-SELECT [t0].[AnotherEntity11818_Name] AS [Key], COUNT(*) + 5 AS [cnt]
-FROM [Table] AS [t]
-LEFT JOIN (
-    SELECT [t1].[Id], [t1].[Exists], [t1].[AnotherEntity11818_Name]
-    FROM [Table] AS [t1]
-    WHERE [t1].[Exists] IS NOT NULL
-) AS [t0] ON [t].[Id] = CASE
-    WHEN [t0].[Exists] IS NOT NULL THEN [t0].[Id]
-END
-GROUP BY [t0].[AnotherEntity11818_Name]
-"""
+                SELECT [t0].[AnotherEntity11818_Name] AS [Key], COUNT(*) + 5 AS [cnt]
+                FROM [Table] AS [t]
+                LEFT JOIN (
+                SELECT [t1].[Id], [t1].[Exists], [t1].[AnotherEntity11818_Name]
+                FROM [Table] AS [t1]
+                WHERE [t1].[Exists] IS NOT NULL
+                ) AS [t0] ON [t].[Id] = CASE
+                WHEN [t0].[Exists] IS NOT NULL THEN [t0].[Id]
+                END
+                GROUP BY [t0].[AnotherEntity11818_Name]
+                """
             );
         }
 
@@ -3185,24 +3185,24 @@ GROUP BY [t0].[AnotherEntity11818_Name]
 
             AssertSql(
                 """
-SELECT [t0].[AnotherEntity11818_Name] AS [MyKey], COUNT(*) + 5 AS [cnt]
-FROM [Table] AS [t]
-LEFT JOIN (
-    SELECT [t1].[Id], [t1].[Exists], [t1].[AnotherEntity11818_Name]
-    FROM [Table] AS [t1]
-    WHERE [t1].[Exists] IS NOT NULL
-) AS [t0] ON [t].[Id] = CASE
-    WHEN [t0].[Exists] IS NOT NULL THEN [t0].[Id]
-END
-LEFT JOIN (
-    SELECT [t3].[Id], [t3].[MaumarEntity11818_Exists], [t3].[MaumarEntity11818_Name]
-    FROM [Table] AS [t3]
-    WHERE [t3].[MaumarEntity11818_Exists] IS NOT NULL
-) AS [t2] ON [t].[Id] = CASE
-    WHEN [t2].[MaumarEntity11818_Exists] IS NOT NULL THEN [t2].[Id]
-END
-GROUP BY [t0].[AnotherEntity11818_Name], [t2].[MaumarEntity11818_Name]
-"""
+                SELECT [t0].[AnotherEntity11818_Name] AS [MyKey], COUNT(*) + 5 AS [cnt]
+                FROM [Table] AS [t]
+                LEFT JOIN (
+                SELECT [t1].[Id], [t1].[Exists], [t1].[AnotherEntity11818_Name]
+                FROM [Table] AS [t1]
+                WHERE [t1].[Exists] IS NOT NULL
+                ) AS [t0] ON [t].[Id] = CASE
+                WHEN [t0].[Exists] IS NOT NULL THEN [t0].[Id]
+                END
+                LEFT JOIN (
+                SELECT [t3].[Id], [t3].[MaumarEntity11818_Exists], [t3].[MaumarEntity11818_Name]
+                FROM [Table] AS [t3]
+                WHERE [t3].[MaumarEntity11818_Exists] IS NOT NULL
+                ) AS [t2] ON [t].[Id] = CASE
+                WHEN [t2].[MaumarEntity11818_Exists] IS NOT NULL THEN [t2].[Id]
+                END
+                GROUP BY [t0].[AnotherEntity11818_Name], [t2].[MaumarEntity11818_Name]
+                """
             );
         }
 
@@ -3230,24 +3230,24 @@ GROUP BY [t0].[AnotherEntity11818_Name], [t2].[MaumarEntity11818_Name]
 
             AssertSql(
                 """
-SELECT TOP(1) [t0].[AnotherEntity11818_Name] AS [MyKey], [t2].[MaumarEntity11818_Name] AS [cnt]
-FROM [Table] AS [t]
-LEFT JOIN (
-    SELECT [t1].[Id], [t1].[Exists], [t1].[AnotherEntity11818_Name]
-    FROM [Table] AS [t1]
-    WHERE [t1].[Exists] IS NOT NULL
-) AS [t0] ON [t].[Id] = CASE
-    WHEN [t0].[Exists] IS NOT NULL THEN [t0].[Id]
-END
-LEFT JOIN (
-    SELECT [t3].[Id], [t3].[MaumarEntity11818_Exists], [t3].[MaumarEntity11818_Name]
-    FROM [Table] AS [t3]
-    WHERE [t3].[MaumarEntity11818_Exists] IS NOT NULL
-) AS [t2] ON [t].[Id] = CASE
-    WHEN [t2].[MaumarEntity11818_Exists] IS NOT NULL THEN [t2].[Id]
-END
-GROUP BY [t0].[AnotherEntity11818_Name], [t2].[MaumarEntity11818_Name]
-"""
+                SELECT TOP(1) [t0].[AnotherEntity11818_Name] AS [MyKey], [t2].[MaumarEntity11818_Name] AS [cnt]
+                FROM [Table] AS [t]
+                LEFT JOIN (
+                SELECT [t1].[Id], [t1].[Exists], [t1].[AnotherEntity11818_Name]
+                FROM [Table] AS [t1]
+                WHERE [t1].[Exists] IS NOT NULL
+                ) AS [t0] ON [t].[Id] = CASE
+                WHEN [t0].[Exists] IS NOT NULL THEN [t0].[Id]
+                END
+                LEFT JOIN (
+                SELECT [t3].[Id], [t3].[MaumarEntity11818_Exists], [t3].[MaumarEntity11818_Name]
+                FROM [Table] AS [t3]
+                WHERE [t3].[MaumarEntity11818_Exists] IS NOT NULL
+                ) AS [t2] ON [t].[Id] = CASE
+                WHEN [t2].[MaumarEntity11818_Exists] IS NOT NULL THEN [t2].[Id]
+                END
+                GROUP BY [t0].[AnotherEntity11818_Name], [t2].[MaumarEntity11818_Name]
+                """
             );
         }
     }
@@ -3314,13 +3314,13 @@ GROUP BY [t0].[AnotherEntity11818_Name], [t2].[MaumarEntity11818_Name]
 
             AssertSql(
                 """
-SELECT [f].[Id], [f].[Name]
-FROM [Factions] AS [f]
-WHERE EXISTS (
-    SELECT 1
-    FROM [Leaders] AS [l]
-    WHERE [l].[Name] LIKE N'Bran%' AND [l].[Name] = N'Crach an Craite')
-"""
+                SELECT [f].[Id], [f].[Name]
+                FROM [Factions] AS [f]
+                WHERE EXISTS (
+                SELECT 1
+                FROM [Leaders] AS [l]
+                WHERE [l].[Name] LIKE N'Bran%' AND [l].[Name] = N'Crach an Craite')
+                """
             );
         }
     }
@@ -3338,14 +3338,14 @@ WHERE EXISTS (
 
             AssertSql(
                 """
-SELECT [t].[Name]
-FROM (
-    SELECT [l].[Name]
-    FROM [Leaders] AS [l]
-    WHERE ([l].[Name] LIKE N'Bran' + N'%' AND (LEFT([l].[Name], LEN(N'Bran')) = N'Bran')) AND (([l].[Name] <> N'Foo') OR [l].[Name] IS NULL)
-) AS [t]
-WHERE ([t].[Name] <> N'Bar') OR [t].[Name] IS NULL
-"""
+                SELECT [t].[Name]
+                FROM (
+                SELECT [l].[Name]
+                FROM [Leaders] AS [l]
+                WHERE ([l].[Name] LIKE N'Bran' + N'%' AND (LEFT([l].[Name], LEN(N'Bran')) = N'Bran')) AND (([l].[Name] <> N'Foo') OR [l].[Name] IS NULL)
+                ) AS [t]
+                WHERE ([t].[Name] <> N'Bar') OR [t].[Name] IS NULL
+                """
             );
         }
     }
@@ -3371,14 +3371,14 @@ WHERE ([t].[Name] <> N'Bar') OR [t].[Name] IS NULL
                 .HasNoKey()
                 .ToSqlQuery(
                     """
-SELECT [t].[Name]
-FROM (
-    SELECT [l].[Name]
-    FROM [Leaders] AS [l]
-    WHERE ([l].[Name] LIKE N'Bran' + N'%' AND (LEFT([l].[Name], LEN(N'Bran')) = N'Bran')) AND (([l].[Name] <> N'Foo') OR [l].[Name] IS NULL)
-) AS [t]
-WHERE ([t].[Name] <> N'Bar') OR [t].[Name] IS NULL
-"""
+                    SELECT [t].[Name]
+                    FROM (
+                    SELECT [l].[Name]
+                    FROM [Leaders] AS [l]
+                    WHERE ([l].[Name] LIKE N'Bran' + N'%' AND (LEFT([l].[Name], LEN(N'Bran')) = N'Bran')) AND (([l].[Name] <> N'Foo') OR [l].[Name] IS NULL)
+                    ) AS [t]
+                    WHERE ([t].[Name] <> N'Bar') OR [t].[Name] IS NULL
+                    """
                 );
         }
 
@@ -3633,59 +3633,59 @@ WHERE ([t].[Name] <> N'Bar') OR [t].[Name] IS NULL
 
             AssertSql(
                 """
-SELECT AVG([p].[Price])
-FROM [Prices] AS [p]
-""",
+                SELECT AVG([p].[Price])
+                FROM [Prices] AS [p]
+                """,
                 //
                 """
-SELECT AVG(CAST([p].[IntColumn] AS float))
-FROM [Prices] AS [p]
-""",
+                SELECT AVG(CAST([p].[IntColumn] AS float))
+                FROM [Prices] AS [p]
+                """,
                 //
                 """
-SELECT AVG(CAST([p].[NullableIntColumn] AS float))
-FROM [Prices] AS [p]
-""",
+                SELECT AVG(CAST([p].[NullableIntColumn] AS float))
+                FROM [Prices] AS [p]
+                """,
                 //
                 """
-SELECT AVG(CAST([p].[LongColumn] AS float))
-FROM [Prices] AS [p]
-""",
+                SELECT AVG(CAST([p].[LongColumn] AS float))
+                FROM [Prices] AS [p]
+                """,
                 //
                 """
-SELECT AVG(CAST([p].[NullableLongColumn] AS float))
-FROM [Prices] AS [p]
-""",
+                SELECT AVG(CAST([p].[NullableLongColumn] AS float))
+                FROM [Prices] AS [p]
+                """,
                 //
                 """
-SELECT CAST(AVG([p].[FloatColumn]) AS real)
-FROM [Prices] AS [p]
-""",
+                SELECT CAST(AVG([p].[FloatColumn]) AS real)
+                FROM [Prices] AS [p]
+                """,
                 //
                 """
-SELECT CAST(AVG([p].[NullableFloatColumn]) AS real)
-FROM [Prices] AS [p]
-""",
+                SELECT CAST(AVG([p].[NullableFloatColumn]) AS real)
+                FROM [Prices] AS [p]
+                """,
                 //
                 """
-SELECT AVG([p].[DoubleColumn])
-FROM [Prices] AS [p]
-""",
+                SELECT AVG([p].[DoubleColumn])
+                FROM [Prices] AS [p]
+                """,
                 //
                 """
-SELECT AVG([p].[NullableDoubleColumn])
-FROM [Prices] AS [p]
-""",
+                SELECT AVG([p].[NullableDoubleColumn])
+                FROM [Prices] AS [p]
+                """,
                 //
                 """
-SELECT AVG([p].[DecimalColumn])
-FROM [Prices] AS [p]
-""",
+                SELECT AVG([p].[DecimalColumn])
+                FROM [Prices] AS [p]
+                """,
                 //
                 """
-SELECT AVG([p].[NullableDecimalColumn])
-FROM [Prices] AS [p]
-"""
+                SELECT AVG([p].[NullableDecimalColumn])
+                FROM [Prices] AS [p]
+                """
             );
         }
     }
@@ -4167,15 +4167,15 @@ FROM [Prices] AS [p]
 
             AssertSql(
                 """
-@__testDateList_0='["2018-10-07T00:00:00"]' (Size = 4000)
+                @__testDateList_0='["2018-10-07T00:00:00"]' (Size = 4000)
 
-SELECT [r].[Id], [r].[MyTime]
-FROM [ReproEntity] AS [r]
-WHERE [r].[MyTime] IN (
-    SELECT [t].[value]
-    FROM OPENJSON(@__testDateList_0) WITH ([value] smalldatetime '$') AS [t]
-)
-"""
+                SELECT [r].[Id], [r].[MyTime]
+                FROM [ReproEntity] AS [r]
+                WHERE [r].[MyTime] IN (
+                SELECT [t].[value]
+                FROM OPENJSON(@__testDateList_0) WITH ([value] smalldatetime '$') AS [t]
+                )
+                """
             );
         }
     }
@@ -4235,19 +4235,19 @@ WHERE [r].[MyTime] IN (
 
             AssertSql(
                 """
-@__key_2='5f221fb9-66f4-442a-92c9-d97ed5989cc7'
-@__keys_0='["0a47bcb7-a1cb-4345-8944-c58f82d6aac7","5f221fb9-66f4-442a-92c9-d97ed5989cc7"]' (Size = 4000)
+                @__key_2='5f221fb9-66f4-442a-92c9-d97ed5989cc7'
+                @__keys_0='["0a47bcb7-a1cb-4345-8944-c58f82d6aac7","5f221fb9-66f4-442a-92c9-d97ed5989cc7"]' (Size = 4000)
 
-SELECT [t].[Id], [t].[Type]
-FROM [Todos] AS [t]
-WHERE CASE
-    WHEN [t].[Type] = 0 THEN @__key_2
-    ELSE @__key_2
-END IN (
-    SELECT [k].[value]
-    FROM OPENJSON(@__keys_0) WITH ([value] uniqueidentifier '$') AS [k]
-)
-"""
+                SELECT [t].[Id], [t].[Type]
+                FROM [Todos] AS [t]
+                WHERE CASE
+                WHEN [t].[Type] = 0 THEN @__key_2
+                ELSE @__key_2
+                END IN (
+                SELECT [k].[value]
+                FROM OPENJSON(@__keys_0) WITH ([value] uniqueidentifier '$') AS [k]
+                )
+                """
             );
         }
     }
@@ -4325,14 +4325,14 @@ END IN (
 
             AssertSql(
                 """
-SELECT [p].[Id], CASE
-    WHEN [a].[Turnovers_AmountIn] IS NULL THEN CAST(1 AS bit)
-    ELSE CAST(0 AS bit)
-END, [a].[Turnovers_AmountIn], [a].[Id]
-FROM [Partners] AS [p]
-LEFT JOIN [Address13157] AS [a] ON [p].[Id] = [a].[Partner13157Id]
-ORDER BY [p].[Id]
-"""
+                SELECT [p].[Id], CASE
+                WHEN [a].[Turnovers_AmountIn] IS NULL THEN CAST(1 AS bit)
+                ELSE CAST(0 AS bit)
+                END, [a].[Turnovers_AmountIn], [a].[Id]
+                FROM [Partners] AS [p]
+                LEFT JOIN [Address13157] AS [a] ON [p].[Id] = [a].[Partner13157Id]
+                ORDER BY [p].[Id]
+                """
             );
         }
     }
@@ -4397,14 +4397,14 @@ ORDER BY [p].[Id]
 
             AssertSql(
                 """
-@p0='BaseEntity13079' (Nullable = false) (Size = 21)
+                @p0='BaseEntity13079' (Nullable = false) (Size = 21)
 
-SET IMPLICIT_TRANSACTIONS OFF;
-SET NOCOUNT ON;
-INSERT INTO [BaseEntities] ([Discriminator])
-OUTPUT INSERTED.[Id]
-VALUES (@p0);
-"""
+                SET IMPLICIT_TRANSACTIONS OFF;
+                SET NOCOUNT ON;
+                INSERT INTO [BaseEntities] ([Discriminator])
+                OUTPUT INSERTED.[Id]
+                VALUES (@p0);
+                """
             );
         }
     }
@@ -4459,9 +4459,9 @@ VALUES (@p0);
 
             AssertSql(
                 """
-SELECT COALESCE(SUM(CAST([i].[Quantity] AS decimal(18,2))), 0.0)
-FROM [InventoryPools] AS [i]
-"""
+                SELECT COALESCE(SUM(CAST([i].[Quantity] AS decimal(18,2))), 0.0)
+                FROM [InventoryPools] AS [i]
+                """
             );
         }
     }
@@ -4502,11 +4502,11 @@ FROM [InventoryPools] AS [i]
 
             AssertSql(
                 """
-SELECT TOP(1) [p].[Id], [p].[ChildId], [c].[Id], [c].[ParentId], [c].[ULongRowVersion]
-FROM [Parents] AS [p]
-LEFT JOIN [Children] AS [c] ON [p].[ChildId] = [c].[Id]
-ORDER BY [p].[Id]
-"""
+                SELECT TOP(1) [p].[Id], [p].[ChildId], [c].[Id], [c].[ParentId], [c].[ULongRowVersion]
+                FROM [Parents] AS [p]
+                LEFT JOIN [Children] AS [c] ON [p].[ChildId] = [c].[Id]
+                ORDER BY [p].[Id]
+                """
             );
         }
     }
@@ -4526,11 +4526,11 @@ ORDER BY [p].[Id]
 
             AssertSql(
                 """
-SELECT TOP(1) [c].[ULongRowVersion]
-FROM [Parents] AS [p]
-LEFT JOIN [Children] AS [c] ON [p].[ChildId] = [c].[Id]
-ORDER BY [p].[Id]
-"""
+                SELECT TOP(1) [c].[ULongRowVersion]
+                FROM [Parents] AS [p]
+                LEFT JOIN [Children] AS [c] ON [p].[ChildId] = [c].[Id]
+                ORDER BY [p].[Id]
+                """
             );
         }
     }
@@ -4666,11 +4666,11 @@ ORDER BY [p].[Id]
 
             AssertSql(
                 """
-SELECT [b].[Id], [b].[Discriminator], [r].[Id], [r].[DerivedTypeId]
-FROM [Bases] AS [b]
-LEFT JOIN [Reference16233] AS [r] ON [b].[Id] = [r].[DerivedTypeId]
-ORDER BY [b].[Id]
-"""
+                SELECT [b].[Id], [b].[Discriminator], [r].[Id], [r].[DerivedTypeId]
+                FROM [Bases] AS [b]
+                LEFT JOIN [Reference16233] AS [r] ON [b].[Id] = [r].[DerivedTypeId]
+                ORDER BY [b].[Id]
+                """
             );
         }
 
@@ -4693,11 +4693,11 @@ ORDER BY [b].[Id]
 
             AssertSql(
                 """
-SELECT [b].[Id], [b].[Discriminator], [r].[Id], [r].[DerivedTypeId]
-FROM [Bases] AS [b]
-LEFT JOIN [Reference16233] AS [r] ON [b].[Id] = [r].[DerivedTypeId]
-ORDER BY [b].[Id]
-"""
+                SELECT [b].[Id], [b].[Discriminator], [r].[Id], [r].[DerivedTypeId]
+                FROM [Bases] AS [b]
+                LEFT JOIN [Reference16233] AS [r] ON [b].[Id] = [r].[DerivedTypeId]
+                ORDER BY [b].[Id]
+                """
             );
         }
     }
@@ -4767,16 +4767,16 @@ ORDER BY [b].[Id]
 
             AssertSql(
                 """
-SELECT [p].[Id], [p].[Name], CASE
-    WHEN [c].[Id] IS NULL THEN N'Other'
-    ELSE [c].[Name]
-END AS [CategoryName], CASE
-    WHEN [c].[Id] IS NULL THEN N'Active'
-    ELSE [c].[Status]
-END AS [CategoryStatus]
-FROM [Products] AS [p]
-LEFT JOIN [Categories] AS [c] ON [p].[CategoryId] = [c].[Id]
-"""
+                SELECT [p].[Id], [p].[Name], CASE
+                WHEN [c].[Id] IS NULL THEN N'Other'
+                ELSE [c].[Name]
+                END AS [CategoryName], CASE
+                WHEN [c].[Id] IS NULL THEN N'Active'
+                ELSE [c].[Status]
+                END AS [CategoryStatus]
+                FROM [Products] AS [p]
+                LEFT JOIN [Categories] AS [c] ON [p].[CategoryId] = [c].[Id]
+                """
             );
         }
     }
@@ -4917,13 +4917,13 @@ LEFT JOIN [Categories] AS [c] ON [p].[CategoryId] = [c].[Id]
 
             AssertSql(
                 """
-SELECT [b].[Id], [b].[BuilderId], [b].[Identity], [b].[LongName], [b].[MandatorId], [b0].[Id], [b0].[CityId], [b0].[Name], [c].[Id], [c].[Name], [m].[Id], [m].[Identity], [m].[Name]
-FROM [BuildingSet] AS [b]
-INNER JOIN [Builder] AS [b0] ON [b].[BuilderId] = [b0].[Id]
-INNER JOIN [City] AS [c] ON [b0].[CityId] = [c].[Id]
-INNER JOIN [MandatorSet] AS [m] ON [b].[MandatorId] = [m].[Id]
-WHERE [c].[Name] = N'Leeds'
-"""
+                SELECT [b].[Id], [b].[BuilderId], [b].[Identity], [b].[LongName], [b].[MandatorId], [b0].[Id], [b0].[CityId], [b0].[Name], [c].[Id], [c].[Name], [m].[Id], [m].[Identity], [m].[Name]
+                FROM [BuildingSet] AS [b]
+                INNER JOIN [Builder] AS [b0] ON [b].[BuilderId] = [b0].[Id]
+                INNER JOIN [City] AS [c] ON [b0].[CityId] = [c].[Id]
+                INNER JOIN [MandatorSet] AS [m] ON [b].[MandatorId] = [m].[Id]
+                WHERE [c].[Name] = N'Leeds'
+                """
             );
         }
     }
@@ -5157,9 +5157,9 @@ WHERE [c].[Name] = N'Leeds'
 
             AssertSql(
                 """
-SELECT [p].[Id], [p].[BlogId], [p].[Title]
-FROM [Posts] AS [p]
-"""
+                SELECT [p].[Id], [p].[BlogId], [p].[Title]
+                FROM [Posts] AS [p]
+                """
             );
         }
     }
@@ -5234,12 +5234,12 @@ FROM [Posts] AS [p]
 
             AssertSql(
                 """
-SELECT [e].[Id], [e].[Name]
-FROM [EntitiesWithQueryFilterSelfReference] AS [e]
-WHERE EXISTS (
-    SELECT 1
-    FROM [EntitiesWithQueryFilterSelfReference] AS [e0]) AND ([e].[Name] <> N'Foo' OR [e].[Name] IS NULL)
-"""
+                SELECT [e].[Id], [e].[Name]
+                FROM [EntitiesWithQueryFilterSelfReference] AS [e]
+                WHERE EXISTS (
+                SELECT 1
+                FROM [EntitiesWithQueryFilterSelfReference] AS [e0]) AND ([e].[Name] <> N'Foo' OR [e].[Name] IS NULL)
+                """
             );
         }
 
@@ -5253,15 +5253,15 @@ WHERE EXISTS (
 
             AssertSql(
                 """
-SELECT [e].[Id], [e].[Name]
-FROM [EntitiesReferencingEntityWithQueryFilterSelfReference] AS [e]
-WHERE EXISTS (
-    SELECT 1
-    FROM [EntitiesWithQueryFilterSelfReference] AS [e0]
-    WHERE EXISTS (
-        SELECT 1
-        FROM [EntitiesWithQueryFilterSelfReference] AS [e1])) AND ([e].[Name] <> N'Foo' OR [e].[Name] IS NULL)
-"""
+                SELECT [e].[Id], [e].[Name]
+                FROM [EntitiesReferencingEntityWithQueryFilterSelfReference] AS [e]
+                WHERE EXISTS (
+                SELECT 1
+                FROM [EntitiesWithQueryFilterSelfReference] AS [e0]
+                WHERE EXISTS (
+                SELECT 1
+                FROM [EntitiesWithQueryFilterSelfReference] AS [e1])) AND ([e].[Name] <> N'Foo' OR [e].[Name] IS NULL)
+                """
             );
         }
     }
@@ -5373,10 +5373,10 @@ WHERE EXISTS (
 
             AssertSql(
                 """
-SELECT [r].[Id], [r].[IsRemoved], [r].[Removed], [r].[RemovedByUser], [r].[OwnedEntity_Exists], [r].[OwnedEntity_OwnedValue]
-FROM [RemovableEntities] AS [r]
-WHERE [r].[IsRemoved] = CAST(0 AS bit)
-"""
+                SELECT [r].[Id], [r].[IsRemoved], [r].[Removed], [r].[RemovedByUser], [r].[OwnedEntity_Exists], [r].[OwnedEntity_OwnedValue]
+                FROM [RemovableEntities] AS [r]
+                WHERE [r].[IsRemoved] = CAST(0 AS bit)
+                """
             );
         }
 
@@ -5396,11 +5396,11 @@ WHERE [r].[IsRemoved] = CAST(0 AS bit)
 
             AssertSql(
                 """
-SELECT [p].[Id], [p].[RemovableEntityId]
-FROM [Parents] AS [p]
-LEFT JOIN [RemovableEntities] AS [r] ON [p].[RemovableEntityId] = [r].[Id]
-WHERE [r].[IsRemoved] = CAST(1 AS bit)
-"""
+                SELECT [p].[Id], [p].[RemovableEntityId]
+                FROM [Parents] AS [p]
+                LEFT JOIN [RemovableEntities] AS [r] ON [p].[RemovableEntityId] = [r].[Id]
+                WHERE [r].[IsRemoved] = CAST(1 AS bit)
+                """
             );
         }
 
@@ -5420,10 +5420,10 @@ WHERE [r].[IsRemoved] = CAST(1 AS bit)
 
             AssertSql(
                 """
-SELECT [r].[Id], [r].[IsRemoved], [r].[Removed], [r].[RemovedByUser], [r].[OwnedEntity_Exists], [r].[OwnedEntity_OwnedValue]
-FROM [RemovableEntities] AS [r]
-WHERE [r].[OwnedEntity_OwnedValue] = N'Abc'
-"""
+                SELECT [r].[Id], [r].[IsRemoved], [r].[Removed], [r].[RemovedByUser], [r].[OwnedEntity_Exists], [r].[OwnedEntity_OwnedValue]
+                FROM [RemovableEntities] AS [r]
+                WHERE [r].[OwnedEntity_OwnedValue] = N'Abc'
+                """
             );
         }
 
@@ -5441,12 +5441,12 @@ WHERE [r].[OwnedEntity_OwnedValue] = N'Abc'
 
             AssertSql(
                 """
-@__id_0='1'
+                @__id_0='1'
 
-SELECT [p].[Id], [p].[RemovableEntityId]
-FROM [Parents] AS [p]
-WHERE [p].[Id] = @__id_0
-"""
+                SELECT [p].[Id], [p].[RemovableEntityId]
+                FROM [Parents] AS [p]
+                WHERE [p].[Id] = @__id_0
+                """
             );
         }
     }
@@ -5537,10 +5537,10 @@ WHERE [p].[Id] = @__id_0
 
             AssertSql(
                 """
-SELECT [f].[Id], [f].[String]
-FROM [Foos] AS [f]
-WHERE [f].[String] = N'1337'
-"""
+                SELECT [f].[Id], [f].[String]
+                FROM [Foos] AS [f]
+                WHERE [f].[String] = N'1337'
+                """
             );
         }
 
@@ -5556,12 +5556,12 @@ WHERE [f].[String] = N'1337'
 
             AssertSql(
                 """
-@__bar_Value_0='1337' (Size = 4000)
+                @__bar_Value_0='1337' (Size = 4000)
 
-SELECT [f].[Id], [f].[String]
-FROM [Foos] AS [f]
-WHERE [f].[String] = @__bar_Value_0
-"""
+                SELECT [f].[Id], [f].[String]
+                FROM [Foos] AS [f]
+                WHERE [f].[String] = @__bar_Value_0
+                """
             );
         }
 
@@ -5577,12 +5577,12 @@ WHERE [f].[String] = @__bar_Value_0
 
             AssertSql(
                 """
-@__ToString_0='1337' (Size = 4000)
+                @__ToString_0='1337' (Size = 4000)
 
-SELECT [f].[Id], [f].[String]
-FROM [Foos] AS [f]
-WHERE [f].[String] = @__ToString_0
-"""
+                SELECT [f].[Id], [f].[String]
+                FROM [Foos] AS [f]
+                WHERE [f].[String] = @__ToString_0
+                """
             );
         }
 
@@ -5598,12 +5598,12 @@ WHERE [f].[String] = @__ToString_0
 
             AssertSql(
                 """
-@__p_0='1337' (Size = 4000)
+                @__p_0='1337' (Size = 4000)
 
-SELECT [f].[Id], [f].[String]
-FROM [Foos] AS [f]
-WHERE [f].[String] = @__p_0
-"""
+                SELECT [f].[Id], [f].[String]
+                FROM [Foos] AS [f]
+                WHERE [f].[String] = @__p_0
+                """
             );
         }
 
@@ -5621,10 +5621,10 @@ WHERE [f].[String] = @__p_0
 
             AssertSql(
                 """
-SELECT [f].[Id], [f].[String]
-FROM [Foos] AS [f]
-WHERE [f].[String] = N'1337'
-"""
+                SELECT [f].[Id], [f].[String]
+                FROM [Foos] AS [f]
+                WHERE [f].[String] = N'1337'
+                """
             );
         }
     }
@@ -5680,10 +5680,10 @@ WHERE [f].[String] = N'1337'
 
             AssertSql(
                 """
-SELECT [t].[Id], [t].[Nombre]
-FROM [TipoServicio9582] AS [t]
-WHERE [t].[Nombre] LIKE '%lla%'
-"""
+                SELECT [t].[Id], [t].[Nombre]
+                FROM [TipoServicio9582] AS [t]
+                WHERE [t].[Nombre] LIKE '%lla%'
+                """
             );
         }
     }
@@ -5736,9 +5736,9 @@ WHERE [t].[Nombre] LIKE '%lla%'
 
             AssertSql(
                 """
-SELECT [b].[Id]
-FROM [Blogs] AS [b]
-"""
+                SELECT [b].[Id]
+                FROM [Blogs] AS [b]
+                """
             );
         }
 
@@ -5786,10 +5786,10 @@ FROM [Blogs] AS [b]
 
             AssertSql(
                 """
-SELECT TOP(1) [p].[Name], [p].[Age]
-FROM [Persons] AS [p]
-WHERE [p].[Age] >= 21
-"""
+                SELECT TOP(1) [p].[Name], [p].[Age]
+                FROM [Persons] AS [p]
+                WHERE [p].[Age] >= 21
+                """
             );
         }
 
@@ -5806,10 +5806,10 @@ WHERE [p].[Age] >= 21
 
             AssertSql(
                 """
-SELECT TOP(1) [p].[Name], [p].[Age]
-FROM [Persons] AS [p]
-WHERE [p].[Age] >= 21
-"""
+                SELECT TOP(1) [p].[Name], [p].[Age]
+                FROM [Persons] AS [p]
+                WHERE [p].[Age] >= 21
+                """
             );
         }
 
@@ -5826,10 +5826,10 @@ WHERE [p].[Age] >= 21
 
             AssertSql(
                 """
-SELECT TOP(2) [p].[Name], [p].[Age]
-FROM [Persons] AS [p]
-WHERE [p].[Age] >= 21
-"""
+                SELECT TOP(2) [p].[Name], [p].[Age]
+                FROM [Persons] AS [p]
+                WHERE [p].[Age] >= 21
+                """
             );
         }
 
@@ -5846,10 +5846,10 @@ WHERE [p].[Age] >= 21
 
             AssertSql(
                 """
-SELECT TOP(2) [p].[Name], [p].[Age]
-FROM [Persons] AS [p]
-WHERE [p].[Age] >= 21
-"""
+                SELECT TOP(2) [p].[Name], [p].[Age]
+                FROM [Persons] AS [p]
+                WHERE [p].[Age] >= 21
+                """
             );
         }
 
@@ -5867,11 +5867,11 @@ WHERE [p].[Age] >= 21
 
             AssertSql(
                 """
-SELECT TOP(1) [p].[Name], [p].[Age]
-FROM [Persons] AS [p]
-WHERE [p].[Age] >= 21
-ORDER BY [p].[Id] DESC
-"""
+                SELECT TOP(1) [p].[Name], [p].[Age]
+                FROM [Persons] AS [p]
+                WHERE [p].[Age] >= 21
+                ORDER BY [p].[Id] DESC
+                """
             );
         }
 
@@ -5889,11 +5889,11 @@ ORDER BY [p].[Id] DESC
 
             AssertSql(
                 """
-SELECT TOP(1) [p].[Name], [p].[Age]
-FROM [Persons] AS [p]
-WHERE [p].[Age] >= 21
-ORDER BY [p].[Id] DESC
-"""
+                SELECT TOP(1) [p].[Name], [p].[Age]
+                FROM [Persons] AS [p]
+                WHERE [p].[Age] >= 21
+                ORDER BY [p].[Id] DESC
+                """
             );
         }
     }
@@ -5961,25 +5961,25 @@ ORDER BY [p].[Id] DESC
 
             AssertSql(
                 """
-SELECT [e].[Id], [t0].[ThingId], [t0].[Id], [t0].[Id0]
-FROM [Entities] AS [e]
-OUTER APPLY (
-    SELECT [s].[ThingId], [t].[Id], [s].[Id] AS [Id0]
-    FROM [Things] AS [t]
-    LEFT JOIN [Subthings] AS [s] ON [t].[Id] = [s].[ThingId]
-    WHERE (
-        SELECT TOP(1) [v].[Id]
-        FROM [Values] AS [v]
-        WHERE [e].[Id] = [v].[Entity11023Id]) IS NOT NULL AND ((
-        SELECT TOP(1) [v0].[Id]
-        FROM [Values] AS [v0]
-        WHERE [e].[Id] = [v0].[Entity11023Id]) = [t].[Value11023Id] OR ((
-        SELECT TOP(1) [v0].[Id]
-        FROM [Values] AS [v0]
-        WHERE [e].[Id] = [v0].[Entity11023Id]) IS NULL AND [t].[Value11023Id] IS NULL))
-) AS [t0]
-ORDER BY [e].[Id], [t0].[Id]
-"""
+                SELECT [e].[Id], [t0].[ThingId], [t0].[Id], [t0].[Id0]
+                FROM [Entities] AS [e]
+                OUTER APPLY (
+                SELECT [s].[ThingId], [t].[Id], [s].[Id] AS [Id0]
+                FROM [Things] AS [t]
+                LEFT JOIN [Subthings] AS [s] ON [t].[Id] = [s].[ThingId]
+                WHERE (
+                SELECT TOP(1) [v].[Id]
+                FROM [Values] AS [v]
+                WHERE [e].[Id] = [v].[Entity11023Id]) IS NOT NULL AND ((
+                SELECT TOP(1) [v0].[Id]
+                FROM [Values] AS [v0]
+                WHERE [e].[Id] = [v0].[Entity11023Id]) = [t].[Value11023Id] OR ((
+                SELECT TOP(1) [v0].[Id]
+                FROM [Values] AS [v0]
+                WHERE [e].[Id] = [v0].[Entity11023Id]) IS NULL AND [t].[Value11023Id] IS NULL))
+                ) AS [t0]
+                ORDER BY [e].[Id], [t0].[Id]
+                """
             );
         }
     }
@@ -6066,23 +6066,23 @@ ORDER BY [e].[Id], [t0].[Id]
 
             AssertSql(
                 """
-SELECT [u].[Id] AS [UserId], [t0].[Id] AS [OrgId]
-FROM [Users] AS [u]
-CROSS JOIN (
-    SELECT [t].[Id]
-    FROM (
-        SELECT NULL AS [empty]
-    ) AS [e]
-    LEFT JOIN (
-        SELECT [o].[Id]
-        FROM [Organisations] AS [o]
-        WHERE EXISTS (
-            SELECT 1
-            FROM [OrganisationUser7973] AS [o0]
-            WHERE [o].[Id] = [o0].[OrganisationId])
-    ) AS [t] ON 1 = 1
-) AS [t0]
-"""
+                SELECT [u].[Id] AS [UserId], [t0].[Id] AS [OrgId]
+                FROM [Users] AS [u]
+                CROSS JOIN (
+                SELECT [t].[Id]
+                FROM (
+                SELECT NULL AS [empty]
+                ) AS [e]
+                LEFT JOIN (
+                SELECT [o].[Id]
+                FROM [Organisations] AS [o]
+                WHERE EXISTS (
+                SELECT 1
+                FROM [OrganisationUser7973] AS [o0]
+                WHERE [o].[Id] = [o0].[OrganisationId])
+                ) AS [t] ON 1 = 1
+                ) AS [t0]
+                """
             );
         }
     }
@@ -6241,23 +6241,23 @@ CROSS JOIN (
 
             AssertSql(
                 """
-SELECT (
-    SELECT TOP(1) [c].[Id]
-    FROM [CompetitionSeasons] AS [c]
-    WHERE [c].[StartDate] <= [a].[DateTime] AND [a].[DateTime] < [c].[EndDate]), [a].[Id], [a0].[Id], [t].[Id], [t].[ActivityTypeId], [t].[CompetitionSeasonId], [t].[Points], [t].[Id0]
-FROM [Activities] AS [a]
-INNER JOIN [ActivityType12456] AS [a0] ON [a].[ActivityTypeId] = [a0].[Id]
-OUTER APPLY (
-    SELECT [a1].[Id], [a1].[ActivityTypeId], [a1].[CompetitionSeasonId], [a1].[Points], [c0].[Id] AS [Id0]
-    FROM [ActivityTypePoints12456] AS [a1]
-    INNER JOIN [CompetitionSeasons] AS [c0] ON [a1].[CompetitionSeasonId] = [c0].[Id]
-    WHERE [a0].[Id] = [a1].[ActivityTypeId] AND [c0].[Id] = (
-        SELECT TOP(1) [c1].[Id]
-        FROM [CompetitionSeasons] AS [c1]
-        WHERE [c1].[StartDate] <= [a].[DateTime] AND [a].[DateTime] < [c1].[EndDate])
-) AS [t]
-ORDER BY [a].[Id], [a0].[Id], [t].[Id]
-"""
+                SELECT (
+                SELECT TOP(1) [c].[Id]
+                FROM [CompetitionSeasons] AS [c]
+                WHERE [c].[StartDate] <= [a].[DateTime] AND [a].[DateTime] < [c].[EndDate]), [a].[Id], [a0].[Id], [t].[Id], [t].[ActivityTypeId], [t].[CompetitionSeasonId], [t].[Points], [t].[Id0]
+                FROM [Activities] AS [a]
+                INNER JOIN [ActivityType12456] AS [a0] ON [a].[ActivityTypeId] = [a0].[Id]
+                OUTER APPLY (
+                SELECT [a1].[Id], [a1].[ActivityTypeId], [a1].[CompetitionSeasonId], [a1].[Points], [c0].[Id] AS [Id0]
+                FROM [ActivityTypePoints12456] AS [a1]
+                INNER JOIN [CompetitionSeasons] AS [c0] ON [a1].[CompetitionSeasonId] = [c0].[Id]
+                WHERE [a0].[Id] = [a1].[ActivityTypeId] AND [c0].[Id] = (
+                SELECT TOP(1) [c1].[Id]
+                FROM [CompetitionSeasons] AS [c1]
+                WHERE [c1].[StartDate] <= [a].[DateTime] AND [a].[DateTime] < [c1].[EndDate])
+                ) AS [t]
+                ORDER BY [a].[Id], [a0].[Id], [t].[Id]
+                """
             );
         }
 
@@ -6295,20 +6295,20 @@ ORDER BY [a].[Id], [a0].[Id], [t].[Id]
 
             AssertSql(
                 """
-SELECT [a].[Id], [a].[ActivityTypeId], [a].[DateTime], [a].[Points], (
-    SELECT TOP(1) [c].[Id]
-    FROM [CompetitionSeasons] AS [c]
-    WHERE [c].[StartDate] <= [a].[DateTime] AND [a].[DateTime] < [c].[EndDate]) AS [CompetitionSeasonId], COALESCE([a].[Points], (
-    SELECT TOP(1) [a1].[Points]
-    FROM [ActivityTypePoints12456] AS [a1]
-    INNER JOIN [CompetitionSeasons] AS [c0] ON [a1].[CompetitionSeasonId] = [c0].[Id]
-    WHERE [a0].[Id] = [a1].[ActivityTypeId] AND [c0].[Id] = (
-        SELECT TOP(1) [c1].[Id]
-        FROM [CompetitionSeasons] AS [c1]
-        WHERE [c1].[StartDate] <= [a].[DateTime] AND [a].[DateTime] < [c1].[EndDate])), 0) AS [Points]
-FROM [Activities] AS [a]
-INNER JOIN [ActivityType12456] AS [a0] ON [a].[ActivityTypeId] = [a0].[Id]
-"""
+                SELECT [a].[Id], [a].[ActivityTypeId], [a].[DateTime], [a].[Points], (
+                SELECT TOP(1) [c].[Id]
+                FROM [CompetitionSeasons] AS [c]
+                WHERE [c].[StartDate] <= [a].[DateTime] AND [a].[DateTime] < [c].[EndDate]) AS [CompetitionSeasonId], COALESCE([a].[Points], (
+                SELECT TOP(1) [a1].[Points]
+                FROM [ActivityTypePoints12456] AS [a1]
+                INNER JOIN [CompetitionSeasons] AS [c0] ON [a1].[CompetitionSeasonId] = [c0].[Id]
+                WHERE [a0].[Id] = [a1].[ActivityTypeId] AND [c0].[Id] = (
+                SELECT TOP(1) [c1].[Id]
+                FROM [CompetitionSeasons] AS [c1]
+                WHERE [c1].[StartDate] <= [a].[DateTime] AND [a].[DateTime] < [c1].[EndDate])), 0) AS [Points]
+                FROM [Activities] AS [a]
+                INNER JOIN [ActivityType12456] AS [a0] ON [a].[ActivityTypeId] = [a0].[Id]
+                """
             );
         }
     }
@@ -6411,25 +6411,25 @@ INNER JOIN [ActivityType12456] AS [a0] ON [a].[ActivityTypeId] = [a0].[Id]
 
             AssertSql(
                 """
-SELECT [t0].[Id], [t1].[Id], [t1].[Id0], [t1].[Id1], [t1].[IsPastTradeDeadline]
-FROM (
-    SELECT TOP(2) [t].[Id]
-    FROM [Trades] AS [t]
-) AS [t0]
-LEFT JOIN (
-    SELECT [d].[Id], [d0].[Id] AS [Id0], [d1].[Id] AS [Id1], CASE
-        WHEN COALESCE((
-            SELECT MAX([d2].[GameNumber])
-            FROM [DbGame] AS [d2]
-            WHERE [d1].[Id] IS NOT NULL AND [d1].[Id] = [d2].[SeasonId]), 0) > 10 THEN CAST(1 AS bit)
-        ELSE CAST(0 AS bit)
-    END AS [IsPastTradeDeadline], [d].[DbTradeId]
-    FROM [DbTradeAsset] AS [d]
-    INNER JOIN [DbContract] AS [d0] ON [d].[ContractId] = [d0].[Id]
-    LEFT JOIN [DbSeason] AS [d1] ON [d0].[SeasonId] = [d1].[Id]
-) AS [t1] ON [t0].[Id] = [t1].[DbTradeId]
-ORDER BY [t0].[Id], [t1].[Id], [t1].[Id0]
-"""
+                SELECT [t0].[Id], [t1].[Id], [t1].[Id0], [t1].[Id1], [t1].[IsPastTradeDeadline]
+                FROM (
+                SELECT TOP(2) [t].[Id]
+                FROM [Trades] AS [t]
+                ) AS [t0]
+                LEFT JOIN (
+                SELECT [d].[Id], [d0].[Id] AS [Id0], [d1].[Id] AS [Id1], CASE
+                WHEN COALESCE((
+                SELECT MAX([d2].[GameNumber])
+                FROM [DbGame] AS [d2]
+                WHERE [d1].[Id] IS NOT NULL AND [d1].[Id] = [d2].[SeasonId]), 0) > 10 THEN CAST(1 AS bit)
+                ELSE CAST(0 AS bit)
+                END AS [IsPastTradeDeadline], [d].[DbTradeId]
+                FROM [DbTradeAsset] AS [d]
+                INNER JOIN [DbContract] AS [d0] ON [d].[ContractId] = [d0].[Id]
+                LEFT JOIN [DbSeason] AS [d1] ON [d0].[SeasonId] = [d1].[Id]
+                ) AS [t1] ON [t0].[Id] = [t1].[DbTradeId]
+                ORDER BY [t0].[Id], [t1].[Id], [t1].[Id0]
+                """
             );
         }
     }
@@ -6534,18 +6534,18 @@ ORDER BY [t0].[Id], [t1].[Id], [t1].[Id0]
 
             AssertSql(
                 """
-SELECT TOP(2) [e].[Id], CASE
-    WHEN [t].[Id] IS NULL THEN CAST(1 AS bit)
-    ELSE CAST(0 AS bit)
-END, [t].[Id], [t].[Public], [e].[RefEntityId]
-FROM [Entities] AS [e]
-LEFT JOIN (
-    SELECT [r].[Id], [r].[Public]
-    FROM [RefEntities] AS [r]
-    WHERE [r].[Public] = CAST(1 AS bit)
-) AS [t] ON [e].[RefEntityId] = [t].[Id]
-WHERE [e].[Id] = 1
-"""
+                SELECT TOP(2) [e].[Id], CASE
+                WHEN [t].[Id] IS NULL THEN CAST(1 AS bit)
+                ELSE CAST(0 AS bit)
+                END, [t].[Id], [t].[Public], [e].[RefEntityId]
+                FROM [Entities] AS [e]
+                LEFT JOIN (
+                SELECT [r].[Id], [r].[Public]
+                FROM [RefEntities] AS [r]
+                WHERE [r].[Public] = CAST(1 AS bit)
+                ) AS [t] ON [e].[RefEntityId] = [t].[Id]
+                WHERE [e].[Id] = 1
+                """
             );
         }
     }
@@ -6616,15 +6616,15 @@ WHERE [e].[Id] = 1
 
             AssertSql(
                 """
-@__action_0='1'
+                @__action_0='1'
 
-SELECT COUNT(*)
-FROM [Offers] AS [o]
-WHERE EXISTS (
-    SELECT 1
-    FROM [OfferActions] AS [o0]
-    WHERE [o].[Id] = [o0].[OfferId] AND [o0].[Action] = @__action_0)
-"""
+                SELECT COUNT(*)
+                FROM [Offers] AS [o]
+                WHERE EXISTS (
+                SELECT 1
+                FROM [OfferActions] AS [o0]
+                WHERE [o].[Id] = [o0].[OfferId] AND [o0].[Action] = @__action_0)
+                """
             );
         }
     }
@@ -6716,12 +6716,12 @@ WHERE EXISTS (
 
             AssertSql(
                 """
-@__id_0='1'
+                @__id_0='1'
 
-SELECT TOP(1) [m].[Id], [m].[Name], [m].[NavigationEntityId]
-FROM [MockEntities] AS [m]
-WHERE [m].[Id] = @__id_0
-"""
+                SELECT TOP(1) [m].[Id], [m].[Name], [m].[NavigationEntityId]
+                FROM [MockEntities] AS [m]
+                WHERE [m].[Id] = @__id_0
+                """
             );
         }
 
@@ -6736,9 +6736,9 @@ WHERE [m].[Id] = @__id_0
 
             AssertSql(
                 """
-SELECT COUNT(*)
-FROM [MockEntities] AS [m]
-"""
+                SELECT COUNT(*)
+                FROM [MockEntities] AS [m]
+                """
             );
         }
 
@@ -6819,11 +6819,11 @@ FROM [MockEntities] AS [m]
 
             AssertSql(
                 """
-SELECT [p].[Id], [p].[UserDeleteId]
-FROM [People] AS [p]
-LEFT JOIN [User18759] AS [u] ON [p].[UserDeleteId] = [u].[Id]
-WHERE [u].[Id] IS NOT NULL
-"""
+                SELECT [p].[Id], [p].[UserDeleteId]
+                FROM [People] AS [p]
+                LEFT JOIN [User18759] AS [u] ON [p].[UserDeleteId] = [u].[Id]
+                WHERE [u].[Id] IS NOT NULL
+                """
             );
         }
     }
@@ -6878,17 +6878,17 @@ WHERE [u].[Id] IS NOT NULL
 
             AssertSql(
                 """
-SELECT [t0].[Id], [t0].[OtherEntityData]
-FROM [BaseEntities] AS [b]
-LEFT JOIN (
-    SELECT [t].[Id], [t].[OtherEntityData]
-    FROM (
-        SELECT [o].[Id], [o].[OtherEntityData], ROW_NUMBER() OVER(PARTITION BY [o].[OtherEntityData] ORDER BY [o].[Id]) AS [row]
-        FROM [OtherEntities] AS [o]
-    ) AS [t]
-    WHERE [t].[row] <= 1
-) AS [t0] ON [b].[Data] = [t0].[OtherEntityData]
-"""
+                SELECT [t0].[Id], [t0].[OtherEntityData]
+                FROM [BaseEntities] AS [b]
+                LEFT JOIN (
+                SELECT [t].[Id], [t].[OtherEntityData]
+                FROM (
+                SELECT [o].[Id], [o].[OtherEntityData], ROW_NUMBER() OVER(PARTITION BY [o].[OtherEntityData] ORDER BY [o].[Id]) AS [row]
+                FROM [OtherEntities] AS [o]
+                ) AS [t]
+                WHERE [t].[row] <= 1
+                ) AS [t0] ON [b].[Data] = [t0].[OtherEntityData]
+                """
             );
         }
     }
@@ -6955,14 +6955,14 @@ LEFT JOIN (
 
             AssertSql(
                 """
-SELECT [c].[CustomerId], [c].[CustomerMembershipId]
-FROM [CustomerFilters] AS [c]
-WHERE (
-    SELECT COUNT(*)
-    FROM [Customers] AS [c0]
-    LEFT JOIN [CustomerMemberships] AS [c1] ON [c0].[Id] = [c1].[CustomerId]
-    WHERE [c1].[Id] IS NOT NULL AND [c0].[Id] = [c].[CustomerId]) > 0
-"""
+                SELECT [c].[CustomerId], [c].[CustomerMembershipId]
+                FROM [CustomerFilters] AS [c]
+                WHERE (
+                SELECT COUNT(*)
+                FROM [Customers] AS [c0]
+                LEFT JOIN [CustomerMemberships] AS [c1] ON [c0].[Id] = [c1].[CustomerId]
+                WHERE [c1].[Id] IS NOT NULL AND [c0].[Id] = [c].[CustomerId]) > 0
+                """
             );
         }
 
@@ -6995,13 +6995,13 @@ WHERE (
 
             AssertSql(
                 """
-SELECT [c].[Id], [c].[Name], [c0].[Id] AS [CustomerMembershipId], CASE
-    WHEN [c0].[Id] IS NOT NULL THEN [c0].[Name]
-    ELSE N''
-END AS [CustomerMembershipName]
-FROM [Customers] AS [c]
-LEFT JOIN [CustomerMemberships] AS [c0] ON [c].[Id] = [c0].[CustomerId]
-"""
+                SELECT [c].[Id], [c].[Name], [c0].[Id] AS [CustomerMembershipId], CASE
+                WHEN [c0].[Id] IS NOT NULL THEN [c0].[Name]
+                ELSE N''
+                END AS [CustomerMembershipName]
+                FROM [Customers] AS [c]
+                LEFT JOIN [CustomerMemberships] AS [c0] ON [c].[Id] = [c0].[CustomerId]
+                """
             );
         }
     }
@@ -7140,12 +7140,12 @@ LEFT JOIN [CustomerMemberships] AS [c0] ON [c].[Id] = [c0].[CustomerId]
 
             AssertSql(
                 """
-@__id_0='1'
+                @__id_0='1'
 
-SELECT [e].[Id]
-FROM [Entities] AS [e]
-WHERE [e].[Id] = @__id_0
-"""
+                SELECT [e].[Id]
+                FROM [Entities] AS [e]
+                WHERE [e].[Id] = @__id_0
+                """
             );
         }
 
@@ -7163,10 +7163,10 @@ WHERE [e].[Id] = @__id_0
 
             AssertSql(
                 """
-SELECT [e].[Id]
-FROM [Entities] AS [e]
-WHERE [e].[Id] = CAST(1 AS bigint)
-"""
+                SELECT [e].[Id]
+                FROM [Entities] AS [e]
+                WHERE [e].[Id] = CAST(1 AS bigint)
+                """
             );
         }
 
@@ -7184,10 +7184,10 @@ WHERE [e].[Id] = CAST(1 AS bigint)
 
             AssertSql(
                 """
-SELECT [e].[Id]
-FROM [Entities] AS [e]
-WHERE [e].[Id] = CAST(1 AS bigint)
-"""
+                SELECT [e].[Id]
+                FROM [Entities] AS [e]
+                WHERE [e].[Id] = CAST(1 AS bigint)
+                """
             );
         }
 
@@ -7205,10 +7205,10 @@ WHERE [e].[Id] = CAST(1 AS bigint)
 
             AssertSql(
                 """
-SELECT [e].[Id]
-FROM [Entities] AS [e]
-WHERE [e].[Id] = CAST(1 AS bigint)
-"""
+                SELECT [e].[Id]
+                FROM [Entities] AS [e]
+                WHERE [e].[Id] = CAST(1 AS bigint)
+                """
             );
         }
 
@@ -7225,10 +7225,10 @@ WHERE [e].[Id] = CAST(1 AS bigint)
 
             AssertSql(
                 """
-SELECT [e].[Id]
-FROM [Entities] AS [e]
-WHERE [e].[Id] = CAST(1 AS bigint)
-"""
+                SELECT [e].[Id]
+                FROM [Entities] AS [e]
+                WHERE [e].[Id] = CAST(1 AS bigint)
+                """
             );
         }
     }
@@ -7346,11 +7346,11 @@ WHERE [e].[Id] = CAST(1 AS bigint)
 
             AssertSql(
                 """
-SELECT [p].[Id], [c].[Id], [c].[ParentId]
-FROM [Parents] AS [p]
-LEFT JOIN [Child21355] AS [c] ON [p].[Id] = [c].[ParentId]
-ORDER BY [p].[Id]
-"""
+                SELECT [p].[Id], [c].[Id], [c].[ParentId]
+                FROM [Parents] AS [p]
+                LEFT JOIN [Child21355] AS [c] ON [p].[Id] = [c].[ParentId]
+                ORDER BY [p].[Id]
+                """
             );
         }
 
@@ -7361,16 +7361,16 @@ ORDER BY [p].[Id]
 
             AssertSql(
                 """
-SELECT [p].[Id]
-FROM [Parents] AS [p]
-ORDER BY [p].[Id]
-""",
+                SELECT [p].[Id]
+                FROM [Parents] AS [p]
+                ORDER BY [p].[Id]
+                """,
                 """
-SELECT [c].[Id], [c].[ParentId], [p].[Id]
-FROM [Parents] AS [p]
-INNER JOIN [Child21355] AS [c] ON [p].[Id] = [c].[ParentId]
-ORDER BY [p].[Id]
-"""
+                SELECT [c].[Id], [c].[ParentId], [p].[Id]
+                FROM [Parents] AS [p]
+                INNER JOIN [Child21355] AS [c] ON [p].[Id] = [c].[ParentId]
+                ORDER BY [p].[Id]
+                """
             );
         }
 
@@ -7381,12 +7381,12 @@ ORDER BY [p].[Id]
 
             AssertSql(
                 """
-SELECT [p].[Id], [c].[Id], [c].[ParentId], [a].[Id], [a].[ParentId]
-FROM [Parents] AS [p]
-LEFT JOIN [Child21355] AS [c] ON [p].[Id] = [c].[ParentId]
-LEFT JOIN [AnotherChild21355] AS [a] ON [p].[Id] = [a].[ParentId]
-ORDER BY [p].[Id], [c].[Id]
-"""
+                SELECT [p].[Id], [c].[Id], [c].[ParentId], [a].[Id], [a].[ParentId]
+                FROM [Parents] AS [p]
+                LEFT JOIN [Child21355] AS [c] ON [p].[Id] = [c].[ParentId]
+                LEFT JOIN [AnotherChild21355] AS [a] ON [p].[Id] = [a].[ParentId]
+                ORDER BY [p].[Id], [c].[Id]
+                """
             );
         }
     }
@@ -7408,17 +7408,17 @@ ORDER BY [p].[Id], [c].[Id]
 
             AssertSql(
                 """
-SELECT [p].[Id]
-FROM [Parents] AS [p]
-ORDER BY [p].[Id]
-""",
+                SELECT [p].[Id]
+                FROM [Parents] AS [p]
+                ORDER BY [p].[Id]
+                """,
                 //
                 """
-SELECT [c].[Id], [c].[ParentId], [p].[Id]
-FROM [Parents] AS [p]
-INNER JOIN [Child21355] AS [c] ON [p].[Id] = [c].[ParentId]
-ORDER BY [p].[Id]
-"""
+                SELECT [c].[Id], [c].[ParentId], [p].[Id]
+                FROM [Parents] AS [p]
+                INNER JOIN [Child21355] AS [c] ON [p].[Id] = [c].[ParentId]
+                ORDER BY [p].[Id]
+                """
             );
         }
 
@@ -7429,11 +7429,11 @@ ORDER BY [p].[Id]
 
             AssertSql(
                 """
-SELECT [p].[Id], [c].[Id], [c].[ParentId]
-FROM [Parents] AS [p]
-LEFT JOIN [Child21355] AS [c] ON [p].[Id] = [c].[ParentId]
-ORDER BY [p].[Id]
-"""
+                SELECT [p].[Id], [c].[Id], [c].[ParentId]
+                FROM [Parents] AS [p]
+                LEFT JOIN [Child21355] AS [c] ON [p].[Id] = [c].[ParentId]
+                ORDER BY [p].[Id]
+                """
             );
         }
 
@@ -7444,22 +7444,22 @@ ORDER BY [p].[Id]
 
             AssertSql(
                 """
-SELECT [p].[Id]
-FROM [Parents] AS [p]
-ORDER BY [p].[Id]
-""",
+                SELECT [p].[Id]
+                FROM [Parents] AS [p]
+                ORDER BY [p].[Id]
+                """,
                 """
-SELECT [c].[Id], [c].[ParentId], [p].[Id]
-FROM [Parents] AS [p]
-INNER JOIN [Child21355] AS [c] ON [p].[Id] = [c].[ParentId]
-ORDER BY [p].[Id]
-""",
+                SELECT [c].[Id], [c].[ParentId], [p].[Id]
+                FROM [Parents] AS [p]
+                INNER JOIN [Child21355] AS [c] ON [p].[Id] = [c].[ParentId]
+                ORDER BY [p].[Id]
+                """,
                 """
-SELECT [a].[Id], [a].[ParentId], [p].[Id]
-FROM [Parents] AS [p]
-INNER JOIN [AnotherChild21355] AS [a] ON [p].[Id] = [a].[ParentId]
-ORDER BY [p].[Id]
-"""
+                SELECT [a].[Id], [a].[ParentId], [p].[Id]
+                FROM [Parents] AS [p]
+                INNER JOIN [AnotherChild21355] AS [a] ON [p].[Id] = [a].[ParentId]
+                ORDER BY [p].[Id]
+                """
             );
         }
     }
@@ -7483,24 +7483,24 @@ ORDER BY [p].[Id]
 
             AssertSql(
                 """
-SELECT [p].[Id]
-FROM [Parents] AS [p]
-ORDER BY [p].[Id]
-""",
+                SELECT [p].[Id]
+                FROM [Parents] AS [p]
+                ORDER BY [p].[Id]
+                """,
                 //
                 """
-SELECT [c].[Id], [c].[ParentId], [p].[Id]
-FROM [Parents] AS [p]
-INNER JOIN [Child21355] AS [c] ON [p].[Id] = [c].[ParentId]
-ORDER BY [p].[Id]
-""",
+                SELECT [c].[Id], [c].[ParentId], [p].[Id]
+                FROM [Parents] AS [p]
+                INNER JOIN [Child21355] AS [c] ON [p].[Id] = [c].[ParentId]
+                ORDER BY [p].[Id]
+                """,
                 //
                 """
-SELECT [a].[Id], [a].[ParentId], [p].[Id]
-FROM [Parents] AS [p]
-INNER JOIN [AnotherChild21355] AS [a] ON [p].[Id] = [a].[ParentId]
-ORDER BY [p].[Id]
-"""
+                SELECT [a].[Id], [a].[ParentId], [p].[Id]
+                FROM [Parents] AS [p]
+                INNER JOIN [AnotherChild21355] AS [a] ON [p].[Id] = [a].[ParentId]
+                ORDER BY [p].[Id]
+                """
             );
         }
 
@@ -7542,12 +7542,12 @@ ORDER BY [p].[Id]
 
         AssertSql(
             """
-SELECT [p].[Id], [c].[Id], [c].[ParentId], [a].[Id], [a].[ParentId]
-FROM [Parents] AS [p]
-LEFT JOIN [Child21355] AS [c] ON [p].[Id] = [c].[ParentId]
-LEFT JOIN [AnotherChild21355] AS [a] ON [p].[Id] = [a].[ParentId]
-ORDER BY [p].[Id], [c].[Id]
-"""
+            SELECT [p].[Id], [c].[Id], [c].[ParentId], [a].[Id], [a].[ParentId]
+            FROM [Parents] AS [p]
+            LEFT JOIN [Child21355] AS [c] ON [p].[Id] = [c].[ParentId]
+            LEFT JOIN [AnotherChild21355] AS [a] ON [p].[Id] = [a].[ParentId]
+            ORDER BY [p].[Id], [c].[Id]
+            """
         );
     }
 
@@ -7687,17 +7687,17 @@ ORDER BY [p].[Id], [c].[Id]
 
             AssertSql(
                 """
-SELECT [p].[Id], [r].[Id], [c].[Id], [c].[ParentId], [p].[OwnedReference_Id], [r].[ParentId], [t].[Id], [t].[ParentId], [t].[OtherSideId]
-FROM [Parents] AS [p]
-LEFT JOIN [Reference21540] AS [r] ON [p].[Id] = [r].[ParentId]
-LEFT JOIN [Collection21540] AS [c] ON [p].[Id] = [c].[ParentId]
-LEFT JOIN (
-    SELECT [o].[Id], [j].[ParentId], [j].[OtherSideId]
-    FROM [JoinEntity21540] AS [j]
-    INNER JOIN [OtherSide21540] AS [o] ON [j].[OtherSideId] = [o].[Id]
-) AS [t] ON [p].[Id] = [t].[ParentId]
-ORDER BY [p].[Id], [r].[Id], [c].[Id], [t].[ParentId], [t].[OtherSideId]
-"""
+                SELECT [p].[Id], [r].[Id], [c].[Id], [c].[ParentId], [p].[OwnedReference_Id], [r].[ParentId], [t].[Id], [t].[ParentId], [t].[OtherSideId]
+                FROM [Parents] AS [p]
+                LEFT JOIN [Reference21540] AS [r] ON [p].[Id] = [r].[ParentId]
+                LEFT JOIN [Collection21540] AS [c] ON [p].[Id] = [c].[ParentId]
+                LEFT JOIN (
+                SELECT [o].[Id], [j].[ParentId], [j].[OtherSideId]
+                FROM [JoinEntity21540] AS [j]
+                INNER JOIN [OtherSide21540] AS [o] ON [j].[OtherSideId] = [o].[Id]
+                ) AS [t] ON [p].[Id] = [t].[ParentId]
+                ORDER BY [p].[Id], [r].[Id], [c].[Id], [t].[ParentId], [t].[OtherSideId]
+                """
             );
         }
 
@@ -7714,9 +7714,9 @@ ORDER BY [p].[Id], [r].[Id], [c].[Id], [t].[ParentId], [t].[OtherSideId]
 
             AssertSql(
                 """
-SELECT [p].[Id], [p].[OwnedReference_Id]
-FROM [Parents] AS [p]
-"""
+                SELECT [p].[Id], [p].[OwnedReference_Id]
+                FROM [Parents] AS [p]
+                """
             );
         }
     }
@@ -7823,9 +7823,9 @@ FROM [Parents] AS [p]
 
             AssertSql(
                 """
-SELECT [b].[Id], [b].[Name], [b].[Type], [b].[IsOnline]
-FROM [Businesses] AS [b]
-"""
+                SELECT [b].[Id], [b].[Name], [b].[Type], [b].[IsOnline]
+                FROM [Businesses] AS [b]
+                """
             );
         }
     }
@@ -7961,20 +7961,20 @@ FROM [Businesses] AS [b]
 
             AssertSql(
                 """
-SELECT TOP(2) CASE
-    WHEN EXISTS (
-        SELECT 1
-        FROM [CoverIllustrations] AS [c]
-        WHERE [b0].[Id] = [c].[CoverId] AND [c].[State] >= 2) THEN CAST(1 AS bit)
-    ELSE CAST(0 AS bit)
-END, (
-    SELECT TOP(1) [c0].[Uri]
-    FROM [CoverIllustrations] AS [c0]
-    WHERE [b0].[Id] = [c0].[CoverId] AND [c0].[State] >= 2)
-FROM [Books] AS [b]
-INNER JOIN [BookCovers] AS [b0] ON [b].[FrontCoverId] = [b0].[Id]
-WHERE [b].[Id] = 1
-"""
+                SELECT TOP(2) CASE
+                WHEN EXISTS (
+                SELECT 1
+                FROM [CoverIllustrations] AS [c]
+                WHERE [b0].[Id] = [c].[CoverId] AND [c].[State] >= 2) THEN CAST(1 AS bit)
+                ELSE CAST(0 AS bit)
+                END, (
+                SELECT TOP(1) [c0].[Uri]
+                FROM [CoverIllustrations] AS [c0]
+                WHERE [b0].[Id] = [c0].[CoverId] AND [c0].[State] >= 2)
+                FROM [Books] AS [b]
+                INNER JOIN [BookCovers] AS [b0] ON [b].[FrontCoverId] = [b0].[Id]
+                WHERE [b].[Id] = 1
+                """
             );
         }
     }
@@ -8109,17 +8109,17 @@ WHERE [b].[Id] = 1
 
             AssertSql(
                 """
-p0='0'
-p1='1'
+                p0='0'
+                p1='1'
 
-SELECT [m].[Id], [m].[Type], [m0].[Id], [m0].[Type]
-FROM (
-    Select * from Tests Where Type = @p0
-) AS [m]
-CROSS JOIN (
-    Select * from Tests Where Type = @p1
-) AS [m0]
-"""
+                SELECT [m].[Id], [m].[Type], [m0].[Id], [m0].[Type]
+                FROM (
+                Select * from Tests Where Type = @p0
+                ) AS [m]
+                CROSS JOIN (
+                Select * from Tests Where Type = @p1
+                ) AS [m0]
+                """
             );
         }
     }
@@ -8175,20 +8175,20 @@ CROSS JOIN (
 
             AssertSql(
                 """
-@__ef_filter__p_0='1'
+                @__ef_filter__p_0='1'
 
-SELECT [e].[Id], [e].[Name], [e].[TenantId]
-FROM [Entities] AS [e]
-WHERE ([e].[Name] <> N'Foo' OR [e].[Name] IS NULL) AND [e].[TenantId] = @__ef_filter__p_0
-""",
+                SELECT [e].[Id], [e].[Name], [e].[TenantId]
+                FROM [Entities] AS [e]
+                WHERE ([e].[Name] <> N'Foo' OR [e].[Name] IS NULL) AND [e].[TenantId] = @__ef_filter__p_0
+                """,
                 //
                 """
-@__ef_filter__p_0='2'
+                @__ef_filter__p_0='2'
 
-SELECT [e].[Id], [e].[Name], [e].[TenantId]
-FROM [Entities] AS [e]
-WHERE ([e].[Name] <> N'Foo' OR [e].[Name] IS NULL) AND [e].[TenantId] = @__ef_filter__p_0
-"""
+                SELECT [e].[Id], [e].[Name], [e].[TenantId]
+                FROM [Entities] AS [e]
+                WHERE ([e].[Name] <> N'Foo' OR [e].[Name] IS NULL) AND [e].[TenantId] = @__ef_filter__p_0
+                """
             );
         }
     }
@@ -8296,28 +8296,28 @@ WHERE ([e].[Name] <> N'Foo' OR [e].[Name] IS NULL) AND [e].[TenantId] = @__ef_fi
             {
                 AssertSql(
                     """
-SELECT [e].[Id]
-FROM [Entities] AS [e]
-ORDER BY [e].[Id]
-""",
+                    SELECT [e].[Id]
+                    FROM [Entities] AS [e]
+                    ORDER BY [e].[Id]
+                    """,
                     //
                     """
-SELECT [o].[Id], [o].[AppEntityId], [e].[Id]
-FROM [Entities] AS [e]
-INNER JOIN [OtherEntity21803] AS [o] ON [e].[Id] = [o].[AppEntityId]
-ORDER BY [e].[Id]
-"""
+                    SELECT [o].[Id], [o].[AppEntityId], [e].[Id]
+                    FROM [Entities] AS [e]
+                    INNER JOIN [OtherEntity21803] AS [o] ON [e].[Id] = [o].[AppEntityId]
+                    ORDER BY [e].[Id]
+                    """
                 );
             }
             else
             {
                 AssertSql(
                     """
-SELECT [e].[Id], [o].[Id], [o].[AppEntityId]
-FROM [Entities] AS [e]
-LEFT JOIN [OtherEntity21803] AS [o] ON [e].[Id] = [o].[AppEntityId]
-ORDER BY [e].[Id]
-"""
+                    SELECT [e].[Id], [o].[Id], [o].[AppEntityId]
+                    FROM [Entities] AS [e]
+                    LEFT JOIN [OtherEntity21803] AS [o] ON [e].[Id] = [o].[AppEntityId]
+                    ORDER BY [e].[Id]
+                    """
                 );
             }
         }
@@ -8379,9 +8379,9 @@ ORDER BY [e].[Id]
 
             AssertSql(
                 """
-SELECT [e].[Id], [e].[Contact_Name], [e].[Contact_Address_City], [e].[Contact_Address_State], [e].[Contact_Address_Street], [e].[Contact_Address_Zip]
-FROM [Entity21807] AS [e]
-"""
+                SELECT [e].[Id], [e].[Contact_Name], [e].[Contact_Address_City], [e].[Contact_Address_State], [e].[Contact_Address_Street], [e].[Contact_Address_Zip]
+                FROM [Entity21807] AS [e]
+                """
             );
         }
     }
@@ -8470,10 +8470,10 @@ FROM [Entity21807] AS [e]
 
             AssertSql(
                 """
-SELECT [u].[Id], [u].[RowVersion], [u].[Contact_MobileNumber], [u].[SharedProperty], [u].[Contact_Address_City], [u].[Contact_Address_Zip], [u].[Data_Data], [u].[Data_Exists], [u].[RowVersion]
-FROM [User22054] AS [u]
-ORDER BY [u].[Id] DESC
-"""
+                SELECT [u].[Id], [u].[RowVersion], [u].[Contact_MobileNumber], [u].[SharedProperty], [u].[Contact_Address_City], [u].[Contact_Address_Zip], [u].[Data_Data], [u].[Data_Exists], [u].[RowVersion]
+                FROM [User22054] AS [u]
+                ORDER BY [u].[Id] DESC
+                """
             );
         }
     }
@@ -8627,30 +8627,30 @@ ORDER BY [u].[Id] DESC
 
             AssertSql(
                 """
-SELECT [t].[Id], [t].[FirstValueObject_Value], [t2].[Id], [t2].[AggregateId], [t2].[FourthValueObject_Value], [t2].[Id0], [t2].[AnyValue], [t2].[SecondValueObjectId], [t2].[Id1], [t2].[SecondValueObjectId0], [t2].[FourthValueObject_Value0], [t2].[Id00], [t2].[AnyValue0], [t2].[ThirdValueObjectId]
-FROM (
-    SELECT TOP(1) [a].[Id], [a].[FirstValueObject_Value]
-    FROM [Aggregates] AS [a]
-    ORDER BY [a].[Id] DESC
-) AS [t]
-LEFT JOIN (
-    SELECT [s].[Id], [s].[AggregateId], [s].[FourthValueObject_Value], [f].[Id] AS [Id0], [f].[AnyValue], [f].[SecondValueObjectId], [t1].[Id] AS [Id1], [t1].[SecondValueObjectId] AS [SecondValueObjectId0], [t1].[FourthValueObject_Value] AS [FourthValueObject_Value0], [t1].[Id0] AS [Id00], [t1].[AnyValue] AS [AnyValue0], [t1].[ThirdValueObjectId]
-    FROM [SecondValueObjects] AS [s]
-    LEFT JOIN [FourthFifthValueObjects] AS [f] ON CASE
-        WHEN [s].[FourthValueObject_Value] IS NOT NULL THEN [s].[Id]
-    END = [f].[SecondValueObjectId]
-    LEFT JOIN (
-        SELECT [t0].[Id], [t0].[SecondValueObjectId], [t0].[FourthValueObject_Value], [t3].[Id] AS [Id0], [t3].[AnyValue], [t3].[ThirdValueObjectId]
-        FROM [ThirdValueObjects] AS [t0]
-        LEFT JOIN [ThirdFifthValueObjects] AS [t3] ON CASE
-            WHEN [t0].[FourthValueObject_Value] IS NOT NULL THEN [t0].[Id]
-        END = [t3].[ThirdValueObjectId]
-    ) AS [t1] ON [s].[Id] = [t1].[SecondValueObjectId]
-) AS [t2] ON CASE
-    WHEN [t].[FirstValueObject_Value] IS NOT NULL THEN [t].[Id]
-END = [t2].[AggregateId]
-ORDER BY [t].[Id] DESC, [t2].[Id], [t2].[Id0], [t2].[Id1]
-"""
+                SELECT [t].[Id], [t].[FirstValueObject_Value], [t2].[Id], [t2].[AggregateId], [t2].[FourthValueObject_Value], [t2].[Id0], [t2].[AnyValue], [t2].[SecondValueObjectId], [t2].[Id1], [t2].[SecondValueObjectId0], [t2].[FourthValueObject_Value0], [t2].[Id00], [t2].[AnyValue0], [t2].[ThirdValueObjectId]
+                FROM (
+                SELECT TOP(1) [a].[Id], [a].[FirstValueObject_Value]
+                FROM [Aggregates] AS [a]
+                ORDER BY [a].[Id] DESC
+                ) AS [t]
+                LEFT JOIN (
+                SELECT [s].[Id], [s].[AggregateId], [s].[FourthValueObject_Value], [f].[Id] AS [Id0], [f].[AnyValue], [f].[SecondValueObjectId], [t1].[Id] AS [Id1], [t1].[SecondValueObjectId] AS [SecondValueObjectId0], [t1].[FourthValueObject_Value] AS [FourthValueObject_Value0], [t1].[Id0] AS [Id00], [t1].[AnyValue] AS [AnyValue0], [t1].[ThirdValueObjectId]
+                FROM [SecondValueObjects] AS [s]
+                LEFT JOIN [FourthFifthValueObjects] AS [f] ON CASE
+                WHEN [s].[FourthValueObject_Value] IS NOT NULL THEN [s].[Id]
+                END = [f].[SecondValueObjectId]
+                LEFT JOIN (
+                SELECT [t0].[Id], [t0].[SecondValueObjectId], [t0].[FourthValueObject_Value], [t3].[Id] AS [Id0], [t3].[AnyValue], [t3].[ThirdValueObjectId]
+                FROM [ThirdValueObjects] AS [t0]
+                LEFT JOIN [ThirdFifthValueObjects] AS [t3] ON CASE
+                WHEN [t0].[FourthValueObject_Value] IS NOT NULL THEN [t0].[Id]
+                END = [t3].[ThirdValueObjectId]
+                ) AS [t1] ON [s].[Id] = [t1].[SecondValueObjectId]
+                ) AS [t2] ON CASE
+                WHEN [t].[FirstValueObject_Value] IS NOT NULL THEN [t].[Id]
+                END = [t2].[AggregateId]
+                ORDER BY [t].[Id] DESC, [t2].[Id], [t2].[Id0], [t2].[Id1]
+                """
             );
         }
     }
@@ -8830,31 +8830,31 @@ ORDER BY [t].[Id] DESC, [t2].[Id], [t2].[Id0], [t2].[Id1]
 
             AssertSql(
                 """
-@__k_0='1'
+                @__k_0='1'
 
-SELECT TOP(1) [a].[Id], [a].[Name]
-FROM [Autos] AS [a]
-WHERE [a].[Id] = @__k_0
-""",
+                SELECT TOP(1) [a].[Id], [a].[Name]
+                FROM [Autos] AS [a]
+                WHERE [a].[Id] = @__k_0
+                """,
                 //
                 """
-@__p_0='2'
+                @__p_0='2'
 
-SELECT TOP(1) [a].[Id], [a].[Name]
-FROM [Autos] AS [a]
-WHERE [a].[Id] = @__p_0
-""",
+                SELECT TOP(1) [a].[Id], [a].[Name]
+                FROM [Autos] AS [a]
+                WHERE [a].[Id] = @__p_0
+                """,
                 //
                 """
-@__entity_equality_a_0_Id='1' (Nullable = true)
-@__entity_equality_b_1_Id='2' (Nullable = true)
+                @__entity_equality_a_0_Id='1' (Nullable = true)
+                @__entity_equality_b_1_Id='2' (Nullable = true)
 
-SELECT [e].[Id], [e].[AnotherAutoId], [e].[AutoId]
-FROM [EqualAutos] AS [e]
-LEFT JOIN [Autos] AS [a] ON [e].[AutoId] = [a].[Id]
-LEFT JOIN [Autos] AS [a0] ON [e].[AnotherAutoId] = [a0].[Id]
-WHERE ([a].[Id] = @__entity_equality_a_0_Id AND [a0].[Id] = @__entity_equality_b_1_Id) OR ([a].[Id] = @__entity_equality_b_1_Id AND [a0].[Id] = @__entity_equality_a_0_Id)
-"""
+                SELECT [e].[Id], [e].[AnotherAutoId], [e].[AutoId]
+                FROM [EqualAutos] AS [e]
+                LEFT JOIN [Autos] AS [a] ON [e].[AutoId] = [a].[Id]
+                LEFT JOIN [Autos] AS [a0] ON [e].[AnotherAutoId] = [a0].[Id]
+                WHERE ([a].[Id] = @__entity_equality_a_0_Id AND [a0].[Id] = @__entity_equality_b_1_Id) OR ([a].[Id] = @__entity_equality_b_1_Id AND [a0].[Id] = @__entity_equality_a_0_Id)
+                """
             );
         }
     }
@@ -8918,18 +8918,18 @@ WHERE ([a].[Id] = @__entity_equality_a_0_Id AND [a0].[Id] = @__entity_equality_b
 
             AssertSql(
                 """
-SELECT [t].[Id], [t].[MasterTrunk22340Id], [t].[MasterTrunk22340Id0], [f0].[CurrencyBag22340MasterTrunk22340Id], [f0].[Id], [f0].[Amount], [f0].[Code], [s0].[CurrencyBag22340MasterTrunk22340Id], [s0].[Id], [s0].[Amount], [s0].[Code]
-FROM (
-    SELECT TOP(1) [m].[Id], [f].[MasterTrunk22340Id], [s].[MasterTrunk22340Id] AS [MasterTrunk22340Id0]
-    FROM [MasterTrunk] AS [m]
-    LEFT JOIN [FungibleBag] AS [f] ON [m].[Id] = [f].[MasterTrunk22340Id]
-    LEFT JOIN [StaticBag] AS [s] ON [m].[Id] = [s].[MasterTrunk22340Id]
-    ORDER BY [m].[Id]
-) AS [t]
-LEFT JOIN [FungibleBag_Currencies] AS [f0] ON [t].[MasterTrunk22340Id] = [f0].[CurrencyBag22340MasterTrunk22340Id]
-LEFT JOIN [StaticBag_Currencies] AS [s0] ON [t].[MasterTrunk22340Id0] = [s0].[CurrencyBag22340MasterTrunk22340Id]
-ORDER BY [t].[Id], [t].[MasterTrunk22340Id], [t].[MasterTrunk22340Id0], [f0].[CurrencyBag22340MasterTrunk22340Id], [f0].[Id], [s0].[CurrencyBag22340MasterTrunk22340Id]
-"""
+                SELECT [t].[Id], [t].[MasterTrunk22340Id], [t].[MasterTrunk22340Id0], [f0].[CurrencyBag22340MasterTrunk22340Id], [f0].[Id], [f0].[Amount], [f0].[Code], [s0].[CurrencyBag22340MasterTrunk22340Id], [s0].[Id], [s0].[Amount], [s0].[Code]
+                FROM (
+                SELECT TOP(1) [m].[Id], [f].[MasterTrunk22340Id], [s].[MasterTrunk22340Id] AS [MasterTrunk22340Id0]
+                FROM [MasterTrunk] AS [m]
+                LEFT JOIN [FungibleBag] AS [f] ON [m].[Id] = [f].[MasterTrunk22340Id]
+                LEFT JOIN [StaticBag] AS [s] ON [m].[Id] = [s].[MasterTrunk22340Id]
+                ORDER BY [m].[Id]
+                ) AS [t]
+                LEFT JOIN [FungibleBag_Currencies] AS [f0] ON [t].[MasterTrunk22340Id] = [f0].[CurrencyBag22340MasterTrunk22340Id]
+                LEFT JOIN [StaticBag_Currencies] AS [s0] ON [t].[MasterTrunk22340Id0] = [s0].[CurrencyBag22340MasterTrunk22340Id]
+                ORDER BY [t].[Id], [t].[MasterTrunk22340Id], [t].[MasterTrunk22340Id0], [f0].[CurrencyBag22340MasterTrunk22340Id], [f0].[Id], [s0].[CurrencyBag22340MasterTrunk22340Id]
+                """
             );
         }
     }
@@ -9047,16 +9047,16 @@ ORDER BY [t].[Id], [t].[MasterTrunk22340Id], [t].[MasterTrunk22340Id0], [f0].[Cu
 
             AssertSql(
                 """
-SELECT [p].[Id], [d].[Id], [d].[PrincipalId]
-FROM [PrincipalOneToOne] AS [p]
-LEFT JOIN [DependentOneToOne] AS [d] ON [p].[Id] = [d].[PrincipalId]
-""",
+                SELECT [p].[Id], [d].[Id], [d].[PrincipalId]
+                FROM [PrincipalOneToOne] AS [p]
+                LEFT JOIN [DependentOneToOne] AS [d] ON [p].[Id] = [d].[PrincipalId]
+                """,
                 //
                 """
-SELECT [d].[Id], [d].[PrincipalId], [p].[Id]
-FROM [DependentOneToOne] AS [d]
-INNER JOIN [PrincipalOneToOne] AS [p] ON [d].[PrincipalId] = [p].[Id]
-"""
+                SELECT [d].[Id], [d].[PrincipalId], [p].[Id]
+                FROM [DependentOneToOne] AS [d]
+                INNER JOIN [PrincipalOneToOne] AS [p] ON [d].[PrincipalId] = [p].[Id]
+                """
             );
         }
 
@@ -9076,19 +9076,19 @@ INNER JOIN [PrincipalOneToOne] AS [p] ON [d].[PrincipalId] = [p].[Id]
 
             AssertSql(
                 """
-SELECT [p].[Id], [d].[Id], [d].[PrincipalId]
-FROM [PrincipalOneToMany] AS [p]
-LEFT JOIN [DependentOneToMany] AS [d] ON [p].[Id] = [d].[PrincipalId]
-ORDER BY [p].[Id]
-""",
+                SELECT [p].[Id], [d].[Id], [d].[PrincipalId]
+                FROM [PrincipalOneToMany] AS [p]
+                LEFT JOIN [DependentOneToMany] AS [d] ON [p].[Id] = [d].[PrincipalId]
+                ORDER BY [p].[Id]
+                """,
                 //
                 """
-SELECT [d].[Id], [d].[PrincipalId], [p].[Id], [d0].[Id], [d0].[PrincipalId]
-FROM [DependentOneToMany] AS [d]
-INNER JOIN [PrincipalOneToMany] AS [p] ON [d].[PrincipalId] = [p].[Id]
-LEFT JOIN [DependentOneToMany] AS [d0] ON [p].[Id] = [d0].[PrincipalId]
-ORDER BY [d].[Id], [p].[Id]
-"""
+                SELECT [d].[Id], [d].[PrincipalId], [p].[Id], [d0].[Id], [d0].[PrincipalId]
+                FROM [DependentOneToMany] AS [d]
+                INNER JOIN [PrincipalOneToMany] AS [p] ON [d].[PrincipalId] = [p].[Id]
+                LEFT JOIN [DependentOneToMany] AS [d0] ON [p].[Id] = [d0].[PrincipalId]
+                ORDER BY [d].[Id], [p].[Id]
+                """
             );
         }
 
@@ -9122,14 +9122,14 @@ ORDER BY [d].[Id], [p].[Id]
 
             AssertSql(
                 """
-SELECT [p].[Id]
-FROM [PrincipalManyToMany] AS [p]
-""",
+                SELECT [p].[Id]
+                FROM [PrincipalManyToMany] AS [p]
+                """,
                 //
                 """
-SELECT [d].[Id]
-FROM [DependentManyToMany] AS [d]
-"""
+                SELECT [d].[Id]
+                FROM [DependentManyToMany] AS [d]
+                """
             );
         }
 
@@ -9169,19 +9169,19 @@ FROM [DependentManyToMany] AS [d]
 
             AssertSql(
                 """
-SELECT [c].[Id], [c].[CycleCId]
-FROM [CycleA] AS [c]
-""",
+                SELECT [c].[Id], [c].[CycleCId]
+                FROM [CycleA] AS [c]
+                """,
                 //
                 """
-SELECT [c].[Id], [c].[CId], [c].[CycleAId]
-FROM [CycleB] AS [c]
-""",
+                SELECT [c].[Id], [c].[CId], [c].[CycleAId]
+                FROM [CycleB] AS [c]
+                """,
                 //
                 """
-SELECT [c].[Id], [c].[BId]
-FROM [CycleC] AS [c]
-"""
+                SELECT [c].[Id], [c].[BId]
+                FROM [CycleC] AS [c]
+                """
             );
         }
     }
@@ -9376,15 +9376,15 @@ FROM [CycleC] AS [c]
 
             AssertSql(
                 """
-SELECT [b].[Id], [t].[Id], [t].[BlogId], [t].[Name]
-FROM [Blogs] AS [b]
-LEFT JOIN (
-    SELECT [p].[Id], [p].[BlogId], [p].[Name]
-    FROM [Posts] AS [p]
-    WHERE [p].[Name] LIKE N'%2%'
-) AS [t] ON [b].[Id] = [t].[BlogId]
-ORDER BY [b].[Id]
-"""
+                SELECT [b].[Id], [t].[Id], [t].[BlogId], [t].[Name]
+                FROM [Blogs] AS [b]
+                LEFT JOIN (
+                SELECT [p].[Id], [p].[BlogId], [p].[Name]
+                FROM [Posts] AS [p]
+                WHERE [p].[Name] LIKE N'%2%'
+                ) AS [t] ON [b].[Id] = [t].[BlogId]
+                ORDER BY [b].[Id]
+                """
             );
         }
 
@@ -9406,13 +9406,13 @@ ORDER BY [b].[Id]
 
             AssertSql(
                 """
-SELECT [b].[Id], (
-    SELECT TOP(1) [p].[Name]
-    FROM [Posts] AS [p]
-    WHERE [b].[Id] = [p].[BlogId]
-    ORDER BY [p].[Id])
-FROM [Blogs] AS [b]
-"""
+                SELECT [b].[Id], (
+                SELECT TOP(1) [p].[Name]
+                FROM [Posts] AS [p]
+                WHERE [b].[Id] = [p].[BlogId]
+                ORDER BY [p].[Id])
+                FROM [Blogs] AS [b]
+                """
             );
         }
     }
@@ -9485,25 +9485,25 @@ FROM [Blogs] AS [b]
 
             AssertSql(
                 """
-SELECT TOP(2) [o].[Id], [o0].[Owner23211Id], [o0].[Value], [o1].[Owner23211Id], [o1].[Value]
-FROM [Owner23211] AS [o]
-LEFT JOIN [Owned123211] AS [o0] ON [o].[Id] = [o0].[Owner23211Id]
-LEFT JOIN [Owned223211] AS [o1] ON [o].[Id] = [o1].[Owner23211Id]
-ORDER BY [o].[Id], [o0].[Owner23211Id], [o1].[Owner23211Id]
-""",
+                SELECT TOP(2) [o].[Id], [o0].[Owner23211Id], [o0].[Value], [o1].[Owner23211Id], [o1].[Value]
+                FROM [Owner23211] AS [o]
+                LEFT JOIN [Owned123211] AS [o0] ON [o].[Id] = [o0].[Owner23211Id]
+                LEFT JOIN [Owned223211] AS [o1] ON [o].[Id] = [o1].[Owner23211Id]
+                ORDER BY [o].[Id], [o0].[Owner23211Id], [o1].[Owner23211Id]
+                """,
                 //
                 """
-SELECT [d].[Id], [d].[Owner23211Id], [t].[Id], [t].[Owner23211Id], [t].[Owner23211Id0]
-FROM (
-    SELECT TOP(1) [o].[Id], [o0].[Owner23211Id], [o1].[Owner23211Id] AS [Owner23211Id0]
-    FROM [Owner23211] AS [o]
-    LEFT JOIN [Owned123211] AS [o0] ON [o].[Id] = [o0].[Owner23211Id]
-    LEFT JOIN [Owned223211] AS [o1] ON [o].[Id] = [o1].[Owner23211Id]
-    ORDER BY [o].[Id]
-) AS [t]
-INNER JOIN [Dependent23211] AS [d] ON [t].[Id] = [d].[Owner23211Id]
-ORDER BY [t].[Id], [t].[Owner23211Id], [t].[Owner23211Id0]
-"""
+                SELECT [d].[Id], [d].[Owner23211Id], [t].[Id], [t].[Owner23211Id], [t].[Owner23211Id0]
+                FROM (
+                SELECT TOP(1) [o].[Id], [o0].[Owner23211Id], [o1].[Owner23211Id] AS [Owner23211Id0]
+                FROM [Owner23211] AS [o]
+                LEFT JOIN [Owned123211] AS [o0] ON [o].[Id] = [o0].[Owner23211Id]
+                LEFT JOIN [Owned223211] AS [o1] ON [o].[Id] = [o1].[Owner23211Id]
+                ORDER BY [o].[Id]
+                ) AS [t]
+                INNER JOIN [Dependent23211] AS [d] ON [t].[Id] = [d].[Owner23211Id]
+                ORDER BY [t].[Id], [t].[Owner23211Id], [t].[Owner23211Id0]
+                """
             );
         }
 
@@ -9523,23 +9523,23 @@ ORDER BY [t].[Id], [t].[Owner23211Id], [t].[Owner23211Id0]
 
             AssertSql(
                 """
-SELECT TOP(2) [s].[Id], [o].[SecondOwner23211Id], [o].[Value]
-FROM [SecondOwner23211] AS [s]
-LEFT JOIN [Owned23211] AS [o] ON [s].[Id] = [o].[SecondOwner23211Id]
-ORDER BY [s].[Id], [o].[SecondOwner23211Id]
-""",
+                SELECT TOP(2) [s].[Id], [o].[SecondOwner23211Id], [o].[Value]
+                FROM [SecondOwner23211] AS [s]
+                LEFT JOIN [Owned23211] AS [o] ON [s].[Id] = [o].[SecondOwner23211Id]
+                ORDER BY [s].[Id], [o].[SecondOwner23211Id]
+                """,
                 //
                 """
-SELECT [s0].[Id], [s0].[SecondOwner23211Id], [t].[Id], [t].[SecondOwner23211Id]
-FROM (
-    SELECT TOP(1) [s].[Id], [o].[SecondOwner23211Id]
-    FROM [SecondOwner23211] AS [s]
-    LEFT JOIN [Owned23211] AS [o] ON [s].[Id] = [o].[SecondOwner23211Id]
-    ORDER BY [s].[Id]
-) AS [t]
-INNER JOIN [SecondDependent23211] AS [s0] ON [t].[Id] = [s0].[SecondOwner23211Id]
-ORDER BY [t].[Id], [t].[SecondOwner23211Id]
-"""
+                SELECT [s0].[Id], [s0].[SecondOwner23211Id], [t].[Id], [t].[SecondOwner23211Id]
+                FROM (
+                SELECT TOP(1) [s].[Id], [o].[SecondOwner23211Id]
+                FROM [SecondOwner23211] AS [s]
+                LEFT JOIN [Owned23211] AS [o] ON [s].[Id] = [o].[SecondOwner23211Id]
+                ORDER BY [s].[Id]
+                ) AS [t]
+                INNER JOIN [SecondDependent23211] AS [s0] ON [t].[Id] = [s0].[SecondOwner23211Id]
+                ORDER BY [t].[Id], [t].[SecondOwner23211Id]
+                """
             );
         }
     }
@@ -9627,15 +9627,15 @@ ORDER BY [t].[Id], [t].[SecondOwner23211Id]
 
             AssertSql(
                 """
-@__ef_filter___ids_0='[1,7]' (Size = 4000)
+                @__ef_filter___ids_0='[1,7]' (Size = 4000)
 
-SELECT [e].[Id], [e].[Name]
-FROM [Entities] AS [e]
-WHERE [e].[Id] NOT IN (
-    SELECT [e0].[value]
-    FROM OPENJSON(@__ef_filter___ids_0) WITH ([value] int '$') AS [e0]
-)
-"""
+                SELECT [e].[Id], [e].[Name]
+                FROM [Entities] AS [e]
+                WHERE [e].[Id] NOT IN (
+                SELECT [e0].[value]
+                FROM OPENJSON(@__ef_filter___ids_0) WITH ([value] int '$') AS [e0]
+                )
+                """
             );
         }
     }
@@ -9688,10 +9688,10 @@ WHERE [e].[Id] NOT IN (
 
             AssertSql(
                 """
-SELECT TOP(1) [l].[Id], [l].[Name], [l].[Address_County], [l].[Address_Line1], [l].[Address_Line2], [l].[Address_Point], [l].[Address_Postcode], [l].[Address_Town], [l].[Address_Value]
-FROM [Locations] AS [l]
-WHERE [l].[Name] = N'My Location'
-"""
+                SELECT TOP(1) [l].[Id], [l].[Name], [l].[Address_County], [l].[Address_Line1], [l].[Address_Line2], [l].[Address_Point], [l].[Address_Postcode], [l].[Address_Town], [l].[Address_Value]
+                FROM [Locations] AS [l]
+                WHERE [l].[Name] = N'My Location'
+                """
             );
         }
     }
@@ -9809,15 +9809,15 @@ WHERE [l].[Name] = N'My Location'
 
             AssertSql(
                 """
-SELECT [a].[Id], [a].[a], [a].[a1], [a].[forkey], [b].[Id] AS [Id0], [b].[b], [b].[b1], [b].[forkey] AS [forkey0]
-FROM [A] AS [a]
-LEFT JOIN [B] AS [b] ON [a].[forkey] = [b].[forkey]
-UNION ALL
-SELECT [a0].[Id], [a0].[a], [a0].[a1], [a0].[forkey], [b0].[Id] AS [Id0], [b0].[b], [b0].[b1], [b0].[forkey] AS [forkey0]
-FROM [B] AS [b0]
-LEFT JOIN [A] AS [a0] ON [b0].[forkey] = [a0].[forkey]
-WHERE [a0].[Id] IS NULL
-"""
+                SELECT [a].[Id], [a].[a], [a].[a1], [a].[forkey], [b].[Id] AS [Id0], [b].[b], [b].[b1], [b].[forkey] AS [forkey0]
+                FROM [A] AS [a]
+                LEFT JOIN [B] AS [b] ON [a].[forkey] = [b].[forkey]
+                UNION ALL
+                SELECT [a0].[Id], [a0].[a], [a0].[a1], [a0].[forkey], [b0].[Id] AS [Id0], [b0].[b], [b0].[b1], [b0].[forkey] AS [forkey0]
+                FROM [B] AS [b0]
+                LEFT JOIN [A] AS [a0] ON [b0].[forkey] = [a0].[forkey]
+                WHERE [a0].[Id] IS NULL
+                """
             );
         }
 
@@ -9876,15 +9876,15 @@ WHERE [a0].[Id] IS NULL
 
             AssertSql(
                 """
-SELECT [a].[Id], [a].[a], [a].[a1], [a].[forkey], [b].[Id] AS [Id0], [b].[b], [b].[b1], [b].[forkey] AS [forkey0]
-FROM [A] AS [a]
-LEFT JOIN [B] AS [b] ON [a].[forkey] = [b].[forkey]
-UNION
-SELECT [a0].[Id], [a0].[a], [a0].[a1], [a0].[forkey], [b0].[Id] AS [Id0], [b0].[b], [b0].[b1], [b0].[forkey] AS [forkey0]
-FROM [B] AS [b0]
-LEFT JOIN [A] AS [a0] ON [b0].[forkey] = [a0].[forkey]
-WHERE [a0].[Id] IS NULL
-"""
+                SELECT [a].[Id], [a].[a], [a].[a1], [a].[forkey], [b].[Id] AS [Id0], [b].[b], [b].[b1], [b].[forkey] AS [forkey0]
+                FROM [A] AS [a]
+                LEFT JOIN [B] AS [b] ON [a].[forkey] = [b].[forkey]
+                UNION
+                SELECT [a0].[Id], [a0].[a], [a0].[a1], [a0].[forkey], [b0].[Id] AS [Id0], [b0].[b], [b0].[b1], [b0].[forkey] AS [forkey0]
+                FROM [B] AS [b0]
+                LEFT JOIN [A] AS [a0] ON [b0].[forkey] = [a0].[forkey]
+                WHERE [a0].[Id] IS NULL
+                """
             );
         }
 
@@ -9942,14 +9942,14 @@ WHERE [a0].[Id] IS NULL
 
             AssertSql(
                 """
-SELECT [a].[Id], [a].[a], [a].[a1], [a].[forkey], [b].[Id] AS [Id0], [b].[b], [b].[b1], [b].[forkey] AS [forkey0]
-FROM [A] AS [a]
-LEFT JOIN [B] AS [b] ON [a].[forkey] = [b].[forkey]
-EXCEPT
-SELECT [a0].[Id], [a0].[a], [a0].[a1], [a0].[forkey], [b0].[Id] AS [Id0], [b0].[b], [b0].[b1], [b0].[forkey] AS [forkey0]
-FROM [B] AS [b0]
-LEFT JOIN [A] AS [a0] ON [b0].[forkey] = [a0].[forkey]
-"""
+                SELECT [a].[Id], [a].[a], [a].[a1], [a].[forkey], [b].[Id] AS [Id0], [b].[b], [b].[b1], [b].[forkey] AS [forkey0]
+                FROM [A] AS [a]
+                LEFT JOIN [B] AS [b] ON [a].[forkey] = [b].[forkey]
+                EXCEPT
+                SELECT [a0].[Id], [a0].[a], [a0].[a1], [a0].[forkey], [b0].[Id] AS [Id0], [b0].[b], [b0].[b1], [b0].[forkey] AS [forkey0]
+                FROM [B] AS [b0]
+                LEFT JOIN [A] AS [a0] ON [b0].[forkey] = [a0].[forkey]
+                """
             );
         }
 
@@ -10007,14 +10007,14 @@ LEFT JOIN [A] AS [a0] ON [b0].[forkey] = [a0].[forkey]
 
             AssertSql(
                 """
-SELECT [a].[Id], [a].[a], [a].[a1], [a].[forkey], [b].[Id] AS [Id0], [b].[b], [b].[b1], [b].[forkey] AS [forkey0]
-FROM [A] AS [a]
-LEFT JOIN [B] AS [b] ON [a].[forkey] = [b].[forkey]
-INTERSECT
-SELECT [a0].[Id], [a0].[a], [a0].[a1], [a0].[forkey], [b0].[Id] AS [Id0], [b0].[b], [b0].[b1], [b0].[forkey] AS [forkey0]
-FROM [B] AS [b0]
-LEFT JOIN [A] AS [a0] ON [b0].[forkey] = [a0].[forkey]
-"""
+                SELECT [a].[Id], [a].[a], [a].[a1], [a].[forkey], [b].[Id] AS [Id0], [b].[b], [b].[b1], [b].[forkey] AS [forkey0]
+                FROM [A] AS [a]
+                LEFT JOIN [B] AS [b] ON [a].[forkey] = [b].[forkey]
+                INTERSECT
+                SELECT [a0].[Id], [a0].[a], [a0].[a1], [a0].[forkey], [b0].[Id] AS [Id0], [b0].[b], [b0].[b1], [b0].[forkey] AS [forkey0]
+                FROM [B] AS [b0]
+                LEFT JOIN [A] AS [a0] ON [b0].[forkey] = [a0].[forkey]
+                """
             );
         }
     }
@@ -10119,10 +10119,10 @@ LEFT JOIN [A] AS [a0] ON [b0].[forkey] = [a0].[forkey]
 
             AssertSql(
                 """
-SELECT TOP(1) [b].[Id], [b].[JObject], [b].[Name]
-FROM [Blogs] AS [b]
-WHERE JSON_VALUE([b].[JObject], '$.Author') = N'Maumar'
-"""
+                SELECT TOP(1) [b].[Id], [b].[JObject], [b].[Name]
+                FROM [Blogs] AS [b]
+                WHERE JSON_VALUE([b].[JObject], '$.Author') = N'Maumar'
+                """
             );
         }
     }
@@ -10348,23 +10348,23 @@ WHERE JSON_VALUE([b].[JObject], '$.Author') = N'Maumar'
 
             AssertSql(
                 """
-@p0='10.0999' (Nullable = true) (DbType = Object)
-@p1='-12345' (Nullable = true) (DbType = Object)
-@p2='String Value' (Size = 12) (DbType = Object)
-@p3='2020-01-01T00:00:00.0000000' (Nullable = true) (DbType = Object)
+                @p0='10.0999' (Nullable = true) (DbType = Object)
+                @p1='-12345' (Nullable = true) (DbType = Object)
+                @p2='String Value' (Size = 12) (DbType = Object)
+                @p3='2020-01-01T00:00:00.0000000' (Nullable = true) (DbType = Object)
 
-SET IMPLICIT_TRANSACTIONS OFF;
-SET NOCOUNT ON;
-MERGE [BaseEntities] USING (
-VALUES (@p0, 0),
-(@p1, 1),
-(@p2, 2),
-(@p3, 3)) AS i ([Value], _Position) ON 1=0
-WHEN NOT MATCHED THEN
-INSERT ([Value])
-VALUES (i.[Value])
-OUTPUT INSERTED.[Id], i._Position;
-"""
+                SET IMPLICIT_TRANSACTIONS OFF;
+                SET NOCOUNT ON;
+                MERGE [BaseEntities] USING (
+                VALUES (@p0, 0),
+                (@p1, 1),
+                (@p2, 2),
+                (@p3, 3)) AS i ([Value], _Position) ON 1=0
+                WHEN NOT MATCHED THEN
+                INSERT ([Value])
+                VALUES (i.[Value])
+                OUTPUT INSERTED.[Id], i._Position;
+                """
             );
         }
     }
@@ -10578,30 +10578,30 @@ OUTPUT INSERTED.[Id], i._Position;
         // Verify the valid generated SQL
         AssertSql(
             """
-@__id_0='1'
+            @__id_0='1'
 
-SELECT [t].[Id], [t].[Name], [t].[Surname], [t].[Birthday], [t].[Hometown], [t].[Bio], [t].[AvatarUrl], [t].[Id0], [t].[Id1], [p0].[Id], [p0].[ImageUrl], [p0].[Height], [p0].[Width], [t0].[Id], [t0].[Name], [t0].[PosterUrl], [t0].[Rating]
-FROM (
-    SELECT TOP(1) [p].[Id], [p].[Name], [p].[Surname], [p].[Birthday], [p].[Hometown], [p].[Bio], [p].[AvatarUrl], [a].[Id] AS [Id0], [d].[Id] AS [Id1]
-    FROM [Persons] AS [p]
-    LEFT JOIN [ActorEntity] AS [a] ON [p].[Id] = [a].[PersonId]
-    LEFT JOIN [DirectorEntity] AS [d] ON [p].[Id] = [d].[PersonId]
-    WHERE [p].[Id] = @__id_0
-) AS [t]
-LEFT JOIN [PersonImageEntity] AS [p0] ON [t].[Id] = [p0].[PersonId]
-OUTER APPLY (
-    SELECT [m0].[Id], [m0].[Budget], [m0].[Description], [m0].[DurationInMins], [m0].[Name], [m0].[PosterUrl], [m0].[Rating], [m0].[ReleaseDate], [m0].[Revenue]
-    FROM [MovieActorEntity] AS [m]
-    INNER JOIN [MovieEntity] AS [m0] ON [m].[MovieId] = [m0].[Id]
-    WHERE [t].[Id0] IS NOT NULL AND [t].[Id0] = [m].[ActorId]
-    UNION
-    SELECT [m2].[Id], [m2].[Budget], [m2].[Description], [m2].[DurationInMins], [m2].[Name], [m2].[PosterUrl], [m2].[Rating], [m2].[ReleaseDate], [m2].[Revenue]
-    FROM [MovieDirectorEntity] AS [m1]
-    INNER JOIN [MovieEntity] AS [m2] ON [m1].[MovieId] = [m2].[Id]
-    WHERE [t].[Id1] IS NOT NULL AND [t].[Id1] = [m1].[DirectorId]
-) AS [t0]
-ORDER BY [t].[Id], [t].[Id0], [t].[Id1], [p0].[Id]
-"""
+            SELECT [t].[Id], [t].[Name], [t].[Surname], [t].[Birthday], [t].[Hometown], [t].[Bio], [t].[AvatarUrl], [t].[Id0], [t].[Id1], [p0].[Id], [p0].[ImageUrl], [p0].[Height], [p0].[Width], [t0].[Id], [t0].[Name], [t0].[PosterUrl], [t0].[Rating]
+            FROM (
+            SELECT TOP(1) [p].[Id], [p].[Name], [p].[Surname], [p].[Birthday], [p].[Hometown], [p].[Bio], [p].[AvatarUrl], [a].[Id] AS [Id0], [d].[Id] AS [Id1]
+            FROM [Persons] AS [p]
+            LEFT JOIN [ActorEntity] AS [a] ON [p].[Id] = [a].[PersonId]
+            LEFT JOIN [DirectorEntity] AS [d] ON [p].[Id] = [d].[PersonId]
+            WHERE [p].[Id] = @__id_0
+            ) AS [t]
+            LEFT JOIN [PersonImageEntity] AS [p0] ON [t].[Id] = [p0].[PersonId]
+            OUTER APPLY (
+            SELECT [m0].[Id], [m0].[Budget], [m0].[Description], [m0].[DurationInMins], [m0].[Name], [m0].[PosterUrl], [m0].[Rating], [m0].[ReleaseDate], [m0].[Revenue]
+            FROM [MovieActorEntity] AS [m]
+            INNER JOIN [MovieEntity] AS [m0] ON [m].[MovieId] = [m0].[Id]
+            WHERE [t].[Id0] IS NOT NULL AND [t].[Id0] = [m].[ActorId]
+            UNION
+            SELECT [m2].[Id], [m2].[Budget], [m2].[Description], [m2].[DurationInMins], [m2].[Name], [m2].[PosterUrl], [m2].[Rating], [m2].[ReleaseDate], [m2].[Revenue]
+            FROM [MovieDirectorEntity] AS [m1]
+            INNER JOIN [MovieEntity] AS [m2] ON [m1].[MovieId] = [m2].[Id]
+            WHERE [t].[Id1] IS NOT NULL AND [t].[Id1] = [m1].[DirectorId]
+            ) AS [t0]
+            ORDER BY [t].[Id], [t].[Id0], [t].[Id1], [p0].[Id]
+            """
         );
     }
 
@@ -10739,28 +10739,28 @@ ORDER BY [t].[Id], [t].[Id0], [t].[Id1], [p0].[Id]
         // Verify the valid generated SQL
         AssertSql(
             """
-SELECT [t].[Id], [t1].[Rate], [t1].[UserRateText], [t1].[UserId], [t1].[Id], [t1].[Id0], [t].[c]
-FROM (
-    SELECT TOP(2) (
-        SELECT COUNT(*)
-        FROM [Cars] AS [c]
-        INNER JOIN [Taxis] AS [t0] ON [c].[Id] = [t0].[CarId]
-        WHERE [u].[Id] = [c].[EUserId] AND ([t0].[ReportText] <> N'' OR [t0].[ReportText] IS NULL)) AS [c], [u].[Id]
-    FROM [Users] AS [u]
-) AS [t]
-OUTER APPLY (
-    SELECT [t2].[UserRate] AS [Rate], [t2].[UserTextRate] AS [UserRateText], [u0].[Id] AS [UserId], [t2].[Id], [t2].[Id0], [t2].[DateArrived]
-    FROM (
-        SELECT TOP(12) [c0].[Id], [t3].[Id] AS [Id0], [t3].[DateArrived], [t3].[UserEUserId], [t3].[UserRate], [t3].[UserTextRate]
-        FROM [Cars] AS [c0]
-        INNER JOIN [Taxis] AS [t3] ON [c0].[Id] = [t3].[CarId]
-        WHERE [t].[Id] = [c0].[EUserId]
-        ORDER BY [t3].[DateArrived] DESC
-    ) AS [t2]
-    LEFT JOIN [Users] AS [u0] ON [t2].[UserEUserId] = [u0].[Id]
-) AS [t1]
-ORDER BY [t].[Id], [t1].[DateArrived] DESC, [t1].[Id], [t1].[Id0]
-"""
+            SELECT [t].[Id], [t1].[Rate], [t1].[UserRateText], [t1].[UserId], [t1].[Id], [t1].[Id0], [t].[c]
+            FROM (
+            SELECT TOP(2) (
+            SELECT COUNT(*)
+            FROM [Cars] AS [c]
+            INNER JOIN [Taxis] AS [t0] ON [c].[Id] = [t0].[CarId]
+            WHERE [u].[Id] = [c].[EUserId] AND ([t0].[ReportText] <> N'' OR [t0].[ReportText] IS NULL)) AS [c], [u].[Id]
+            FROM [Users] AS [u]
+            ) AS [t]
+            OUTER APPLY (
+            SELECT [t2].[UserRate] AS [Rate], [t2].[UserTextRate] AS [UserRateText], [u0].[Id] AS [UserId], [t2].[Id], [t2].[Id0], [t2].[DateArrived]
+            FROM (
+            SELECT TOP(12) [c0].[Id], [t3].[Id] AS [Id0], [t3].[DateArrived], [t3].[UserEUserId], [t3].[UserRate], [t3].[UserTextRate]
+            FROM [Cars] AS [c0]
+            INNER JOIN [Taxis] AS [t3] ON [c0].[Id] = [t3].[CarId]
+            WHERE [t].[Id] = [c0].[EUserId]
+            ORDER BY [t3].[DateArrived] DESC
+            ) AS [t2]
+            LEFT JOIN [Users] AS [u0] ON [t2].[UserEUserId] = [u0].[Id]
+            ) AS [t1]
+            ORDER BY [t].[Id], [t1].[DateArrived] DESC, [t1].[Id], [t1].[Id0]
+            """
         );
     }
 
@@ -10798,24 +10798,24 @@ ORDER BY [t].[Id], [t1].[DateArrived] DESC, [t1].[Id], [t1].[Id0]
         // Verify the valid generated SQL
         AssertSql(
             """
-SELECT [t].[Id], [t1].[Rate], [t1].[UserRateText], [t1].[UserId], [t1].[Id], [t1].[Id0]
-FROM (
-    SELECT TOP(2) [u].[Id]
-    FROM [Users] AS [u]
-) AS [t]
-OUTER APPLY (
-    SELECT [t0].[UserRate] AS [Rate], [t0].[UserTextRate] AS [UserRateText], [u0].[Id] AS [UserId], [t0].[Id], [t0].[Id0], [t0].[DateArrived]
-    FROM (
-        SELECT TOP(12) [c].[Id], [t2].[Id] AS [Id0], [t2].[DateArrived], [t2].[UserEUserId], [t2].[UserRate], [t2].[UserTextRate]
-        FROM [Cars] AS [c]
-        INNER JOIN [Taxis] AS [t2] ON [c].[Id] = [t2].[CarId]
-        WHERE [t].[Id] = [c].[EUserId]
-        ORDER BY [t2].[DateArrived] DESC
-    ) AS [t0]
-    LEFT JOIN [Users] AS [u0] ON [t0].[UserEUserId] = [u0].[Id]
-) AS [t1]
-ORDER BY [t].[Id], [t1].[DateArrived] DESC, [t1].[Id], [t1].[Id0]
-"""
+            SELECT [t].[Id], [t1].[Rate], [t1].[UserRateText], [t1].[UserId], [t1].[Id], [t1].[Id0]
+            FROM (
+            SELECT TOP(2) [u].[Id]
+            FROM [Users] AS [u]
+            ) AS [t]
+            OUTER APPLY (
+            SELECT [t0].[UserRate] AS [Rate], [t0].[UserTextRate] AS [UserRateText], [u0].[Id] AS [UserId], [t0].[Id], [t0].[Id0], [t0].[DateArrived]
+            FROM (
+            SELECT TOP(12) [c].[Id], [t2].[Id] AS [Id0], [t2].[DateArrived], [t2].[UserEUserId], [t2].[UserRate], [t2].[UserTextRate]
+            FROM [Cars] AS [c]
+            INNER JOIN [Taxis] AS [t2] ON [c].[Id] = [t2].[CarId]
+            WHERE [t].[Id] = [c].[EUserId]
+            ORDER BY [t2].[DateArrived] DESC
+            ) AS [t0]
+            LEFT JOIN [Users] AS [u0] ON [t0].[UserEUserId] = [u0].[Id]
+            ) AS [t1]
+            ORDER BY [t].[Id], [t1].[DateArrived] DESC, [t1].[Id], [t1].[Id0]
+            """
         );
     }
 
@@ -10889,28 +10889,28 @@ ORDER BY [t].[Id], [t1].[DateArrived] DESC, [t1].[Id], [t1].[Id0]
         // Verify the valid generated SQL
         AssertSql(
             """
-@__referenceId_0='a' (Size = 4000)
-@__customerId_1='1115c816-6c4c-4016-94df-d8b60a22ffa1'
+            @__referenceId_0='a' (Size = 4000)
+            @__customerId_1='1115c816-6c4c-4016-94df-d8b60a22ffa1'
 
-SELECT [t].[Id], [t0].[Id], [t0].[Image], [t0].[Id0], [t0].[Id00]
-FROM (
-    SELECT TOP(2) [o].[Id]
-    FROM [Orders] AS [o]
-    WHERE [o].[ExternalReferenceId] = @__referenceId_0 AND [o].[CustomerId] = @__customerId_1
-) AS [t]
-OUTER APPLY (
-    SELECT [i].[Id], [t1].[Image], [t1].[Id] AS [Id0], [t1].[Id0] AS [Id00]
-    FROM [IdentityDocument] AS [i]
-    OUTER APPLY (
-        SELECT [i1].[Image], [i0].[Id], [i1].[Id] AS [Id0]
-        FROM [IdentityDocument] AS [i0]
-        INNER JOIN [IdentityDocumentImage] AS [i1] ON [i0].[Id] = [i1].[IdentityDocumentId]
-        WHERE [t].[Id] = [i0].[OrderId]
-    ) AS [t1]
-    WHERE [t].[Id] = [i].[OrderId]
-) AS [t0]
-ORDER BY [t].[Id], [t0].[Id], [t0].[Id0]
-"""
+            SELECT [t].[Id], [t0].[Id], [t0].[Image], [t0].[Id0], [t0].[Id00]
+            FROM (
+            SELECT TOP(2) [o].[Id]
+            FROM [Orders] AS [o]
+            WHERE [o].[ExternalReferenceId] = @__referenceId_0 AND [o].[CustomerId] = @__customerId_1
+            ) AS [t]
+            OUTER APPLY (
+            SELECT [i].[Id], [t1].[Image], [t1].[Id] AS [Id0], [t1].[Id0] AS [Id00]
+            FROM [IdentityDocument] AS [i]
+            OUTER APPLY (
+            SELECT [i1].[Image], [i0].[Id], [i1].[Id] AS [Id0]
+            FROM [IdentityDocument] AS [i0]
+            INNER JOIN [IdentityDocumentImage] AS [i1] ON [i0].[Id] = [i1].[IdentityDocumentId]
+            WHERE [t].[Id] = [i0].[OrderId]
+            ) AS [t1]
+            WHERE [t].[Id] = [i].[OrderId]
+            ) AS [t0]
+            ORDER BY [t].[Id], [t0].[Id], [t0].[Id0]
+            """
         );
     }
 
@@ -11005,25 +11005,25 @@ ORDER BY [t].[Id], [t0].[Id], [t0].[Id0]
         // Verify the valid generated SQL
         AssertSql(
             """
-@__p_0='5'
+            @__p_0='5'
 
-SELECT [t].[Id], [t0].[Name]
-FROM (
-    SELECT TOP(@__p_0) [s].[Id], [s].[InCategoryId], [s].[OutCategoryId]
-    FROM [StudentGameMapper] AS [s]
-    ORDER BY [s].[Id]
-) AS [t]
-OUTER APPLY (
-    SELECT [i].[Name]
-    FROM [InDoorSports] AS [i]
-    WHERE [i].[Id] = [t].[InCategoryId]
-    UNION
-    SELECT [o].[Name]
-    FROM [OutDoorSports] AS [o]
-    WHERE [o].[Id] = [t].[OutCategoryId]
-) AS [t0]
-ORDER BY [t].[Id]
-"""
+            SELECT [t].[Id], [t0].[Name]
+            FROM (
+            SELECT TOP(@__p_0) [s].[Id], [s].[InCategoryId], [s].[OutCategoryId]
+            FROM [StudentGameMapper] AS [s]
+            ORDER BY [s].[Id]
+            ) AS [t]
+            OUTER APPLY (
+            SELECT [i].[Name]
+            FROM [InDoorSports] AS [i]
+            WHERE [i].[Id] = [t].[InCategoryId]
+            UNION
+            SELECT [o].[Name]
+            FROM [OutDoorSports] AS [o]
+            WHERE [o].[Id] = [t].[OutCategoryId]
+            ) AS [t0]
+            ORDER BY [t].[Id]
+            """
         );
     }
 
@@ -11116,20 +11116,20 @@ ORDER BY [t].[Id]
         // Verify the valid generated SQL
         AssertSql(
             """
-@__p_0='10'
+            @__p_0='10'
 
-SELECT (
-    SELECT TOP(1) [g0].[Description]
-    FROM [Gender] AS [g0]
-    WHERE [g0].[Id] = [g].[GenderId]) AS [Gender]
-FROM (
-    SELECT TOP(@__p_0) [m].[Id], [m].[PersonId], [m].[Timestamp]
-    FROM [Message] AS [m]
-    ORDER BY [m].[Id]
-) AS [t]
-CROSS APPLY [dbo].[GetPersonStatusAsOf]([t].[PersonId], [t].[Timestamp]) AS [g]
-ORDER BY [t].[Id]
-"""
+            SELECT (
+            SELECT TOP(1) [g0].[Description]
+            FROM [Gender] AS [g0]
+            WHERE [g0].[Id] = [g].[GenderId]) AS [Gender]
+            FROM (
+            SELECT TOP(@__p_0) [m].[Id], [m].[PersonId], [m].[Timestamp]
+            FROM [Message] AS [m]
+            ORDER BY [m].[Id]
+            ) AS [t]
+            CROSS APPLY [dbo].[GetPersonStatusAsOf]([t].[PersonId], [t].[Timestamp]) AS [g]
+            ORDER BY [t].[Id]
+            """
         );
     }
 
@@ -11263,10 +11263,10 @@ ORDER BY [t].[Id]
 
             AssertSql(
                 """
-SELECT [c].[Id], [c].[Json], [o].[Value]
-FROM [Cars] AS [c]
-CROSS APPLY OPENJSON([c].[Json], N'$.items') AS [o]
-"""
+                SELECT [c].[Id], [c].[Json], [o].[Value]
+                FROM [Cars] AS [c]
+                CROSS APPLY OPENJSON([c].[Json], N'$.items') AS [o]
+                """
             );
         }
     }
@@ -11341,10 +11341,10 @@ CROSS APPLY OPENJSON([c].[Json], N'$.items') AS [o]
 
             AssertSql(
                 """
-SELECT TOP(1) [t].[Id], [t].[Value]
-FROM [Tests] AS [t]
-ORDER BY [t].[Id]
-"""
+                SELECT TOP(1) [t].[Id], [t].[Value]
+                FROM [Tests] AS [t]
+                ORDER BY [t].[Id]
+                """
             );
         }
     }

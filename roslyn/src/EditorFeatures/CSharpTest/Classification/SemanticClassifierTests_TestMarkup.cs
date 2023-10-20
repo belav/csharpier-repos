@@ -27,7 +27,7 @@ public partial class SemanticClassifierTests : AbstractCSharpClassifierTests
 
         static class Test
         {
-            public static void M([System.Diagnostics.CodeAnalysis.StringSyntax("C#-test")] string code) { }
+        public static void M([System.Diagnostics.CodeAnalysis.StringSyntax("C#-test")] string code) { }
         }
         """ + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp;
 
@@ -125,7 +125,7 @@ public partial class SemanticClassifierTests : AbstractCSharpClassifierTests
             """
             class D
             {
-                $$
+            $$
             }
             """,
             testHost,
@@ -166,7 +166,7 @@ public partial class SemanticClassifierTests : AbstractCSharpClassifierTests
             """
             class D
             {
-                [|System.Int32 i;|]
+            [|System.Int32 i;|]
             }
             """,
             testHost,
@@ -194,7 +194,7 @@ public partial class SemanticClassifierTests : AbstractCSharpClassifierTests
             """
             class D
             {
-                {|Example:System.Int32 i;|}
+            {|Example:System.Int32 i;|}
             }
             """,
             testHost,
@@ -222,7 +222,7 @@ public partial class SemanticClassifierTests : AbstractCSharpClassifierTests
             """
             class D
             {
-                [|System.Int32 i;
+            [|System.Int32 i;
             }
             """,
             testHost,
@@ -249,7 +249,7 @@ public partial class SemanticClassifierTests : AbstractCSharpClassifierTests
             """
             class D
             {
-                System.Int32 i;|]
+            System.Int32 i;|]
             }
             """,
             testHost,
@@ -276,7 +276,7 @@ public partial class SemanticClassifierTests : AbstractCSharpClassifierTests
             """
             class D
             {
-                {|Example:System.Int32 i;
+            {|Example:System.Int32 i;
             }
             """,
             testHost,
@@ -303,7 +303,7 @@ public partial class SemanticClassifierTests : AbstractCSharpClassifierTests
             """
             class D
             {
-                System.Int32 i;|}
+            System.Int32 i;|}
             }
             """,
             testHost,
@@ -330,7 +330,7 @@ public partial class SemanticClassifierTests : AbstractCSharpClassifierTests
             """
             class D
             {
-                {|Example System.Int32 i;|}
+            {|Example System.Int32 i;|}
             }
             """,
             testHost,
@@ -361,7 +361,7 @@ public partial class SemanticClassifierTests : AbstractCSharpClassifierTests
             """
             class D
             {
-                Sys[|tem.In$$t3|]2 i;
+            Sys[|tem.In$$t3|]2 i;
             }
             """,
             testHost,
@@ -393,8 +393,8 @@ public partial class SemanticClassifierTests : AbstractCSharpClassifierTests
             """
             class D
             {
-                // Embedded escapes not classified.
-                string s = "\r\n";
+            // Embedded escapes not classified.
+            string s = "\r\n";
             }
             """,
             testHost,
@@ -424,9 +424,9 @@ public partial class SemanticClassifierTests : AbstractCSharpClassifierTests
             """"
             class D
             {
-                string s = """
-                    Goo
-                    """;
+            string s = """
+            Goo
+            """;
             }
             """",
             testHost,
@@ -443,10 +443,10 @@ public partial class SemanticClassifierTests : AbstractCSharpClassifierTests
             TestCode(" "),
             String(
                 """"
-                    """
-                            Goo
-                            """
-                    """"
+                """
+                Goo
+                """
+                """"
             ),
             Punctuation.Semicolon,
             Punctuation.CloseCurly

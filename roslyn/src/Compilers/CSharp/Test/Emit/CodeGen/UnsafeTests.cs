@@ -12142,27 +12142,27 @@ delegate void F2(int x);
         public void ParameterContainsPointer()
         {
             var source = """
-class C<T> { }
-class D
-{
-    public static void M1()
-    {
-        var lam1 = (int* ptr) => ptr; // 1
-    }
-    public static void M2()
-    {
-        var lam2 = (int*[] a) => a; // 2
-    }
-    public static void M3()
-    {
-        var lam3 = (delegate*<void> ptr) => ptr; // 3
-    }
-    public static void M4()
-    {
-        var lam4 = (C<delegate*<void>[]> a) => a; // 4
-    }
-}
-""";
+            class C<T> { }
+            class D
+            {
+            public static void M1()
+            {
+            var lam1 = (int* ptr) => ptr; // 1
+            }
+            public static void M2()
+            {
+            var lam2 = (int*[] a) => a; // 2
+            }
+            public static void M3()
+            {
+            var lam3 = (delegate*<void> ptr) => ptr; // 3
+            }
+            public static void M4()
+            {
+            var lam4 = (C<delegate*<void>[]> a) => a; // 4
+            }
+            }
+            """;
             var comp = CreateCompilation(source, options: TestOptions.UnsafeDebugDll);
             comp.VerifyDiagnostics(
                 // (6,21): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
@@ -12208,32 +12208,32 @@ class D
         public void DelegateConversionContainsPointer()
         {
             var source = """
-class C<T> { }
-unsafe delegate int* D1(int* ptr);
-unsafe delegate int*[] D2(int*[] a);
-unsafe delegate delegate*<void> D3(delegate*<void> ptr);
-unsafe delegate C<delegate*<void>[]> D4(C<delegate*<void>[]> a);
+            class C<T> { }
+            unsafe delegate int* D1(int* ptr);
+            unsafe delegate int*[] D2(int*[] a);
+            unsafe delegate delegate*<void> D3(delegate*<void> ptr);
+            unsafe delegate C<delegate*<void>[]> D4(C<delegate*<void>[]> a);
 
-class D
-{
-    public static D1 M1()
-    {
-        return (ptr) => ptr; // 1
-    }
-    public static D2 M2()
-    {
-        return (a) => a; // 2
-    }
-    public static D3 M3()
-    {
-        return (ptr) => ptr; // 3
-    }
-    public static D4 M4()
-    {
-        return (a) => a; // 4
-    }
-}
-""";
+            class D
+            {
+            public static D1 M1()
+            {
+            return (ptr) => ptr; // 1
+            }
+            public static D2 M2()
+            {
+            return (a) => a; // 2
+            }
+            public static D3 M3()
+            {
+            return (ptr) => ptr; // 3
+            }
+            public static D4 M4()
+            {
+            return (a) => a; // 4
+            }
+            }
+            """;
             var comp = CreateCompilation(source, options: TestOptions.UnsafeDebugDll);
             comp.VerifyDiagnostics(
                 // (11,17): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
@@ -12463,9 +12463,9 @@ public class Test
                     verify: Verification.FailsPEVerify with
                     {
                         PEVerifyMessage = """
-                    [ : ChannelServices::.cctor][offset 0x0000000C][found unmanaged pointer][expected unmanaged pointer] Unexpected type on the stack.
-                    [ : ChannelServices::GetPrivateContextsPerfCounters][offset 0x00000002][found Native Int][expected unmanaged pointer] Unexpected type on the stack.
-                    """,
+                        [ : ChannelServices::.cctor][offset 0x0000000C][found unmanaged pointer][expected unmanaged pointer] Unexpected type on the stack.
+                        [ : ChannelServices::GetPrivateContextsPerfCounters][offset 0x00000002][found Native Int][expected unmanaged pointer] Unexpected type on the stack.
+                        """,
                     }
                 )
                 .VerifyDiagnostics();

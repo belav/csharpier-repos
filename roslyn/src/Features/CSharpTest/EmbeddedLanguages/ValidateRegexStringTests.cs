@@ -37,10 +37,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
 
                 class Program
                 {
-                    void Main()
-                    {
-                        var r = new Regex(@"[|)|]");
-                    }     
+                void Main()
+                {
+                var r = new Regex(@"[|)|]");
+                }
                 }
                 """,
                 globalOptions: OptionOn(),
@@ -62,10 +62,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
 
                 class Program
                 {
-                    void Main()
-                    {
-                        var r = new Regex("[|\u0029|]");
-                    }     
+                void Main()
+                {
+                var r = new Regex("[|\u0029|]");
+                }
                 }
                 """,
                 globalOptions: OptionOn(),
@@ -87,10 +87,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
 
                 class Program
                 {
-                    void Main()
-                    {
-                        var r = new Regex(@"[|\u0029|]");
-                    }     
+                void Main()
+                {
+                var r = new Regex(@"[|\u0029|]");
+                }
                 }
                 """
             );

@@ -24,28 +24,28 @@ public class ReplaceConditionalWithStatementsTests
             """
             class C
             {
-                void M(bool b)
-                {
-                    object a;
-                    a = $$b ? 0 : 1L;
-                }
+            void M(bool b)
+            {
+            object a;
+            a = $$b ? 0 : 1L;
+            }
             }
             """,
             """
             class C
             {
-                void M(bool b)
-                {
-                    object a;
-                    if (b)
-                    {
-                        a = (long)0;
-                    }
-                    else
-                    {
-                        a = 1L;
-                    }
-                }
+            void M(bool b)
+            {
+            object a;
+            if (b)
+            {
+            a = (long)0;
+            }
+            else
+            {
+            a = 1L;
+            }
+            }
             }
             """
         );
@@ -58,28 +58,28 @@ public class ReplaceConditionalWithStatementsTests
             """
             class C
             {
-                void M(bool b)
-                {
-                    object a;
-                    $$a = b ? 0 : 1L;
-                }
+            void M(bool b)
+            {
+            object a;
+            $$a = b ? 0 : 1L;
+            }
             }
             """,
             """
             class C
             {
-                void M(bool b)
-                {
-                    object a;
-                    if (b)
-                    {
-                        a = (long)0;
-                    }
-                    else
-                    {
-                        a = 1L;
-                    }
-                }
+            void M(bool b)
+            {
+            object a;
+            if (b)
+            {
+            a = (long)0;
+            }
+            else
+            {
+            a = 1L;
+            }
+            }
             }
             """
         );
@@ -92,28 +92,28 @@ public class ReplaceConditionalWithStatementsTests
             """
             class C
             {
-                void M(bool b)
-                {
-                    long a;
-                    a = $$b ? 0 : 1L;
-                }
+            void M(bool b)
+            {
+            long a;
+            a = $$b ? 0 : 1L;
+            }
             }
             """,
             """
             class C
             {
-                void M(bool b)
-                {
-                    long a;
-                    if (b)
-                    {
-                        a = 0;
-                    }
-                    else
-                    {
-                        a = 1L;
-                    }
-                }
+            void M(bool b)
+            {
+            long a;
+            if (b)
+            {
+            a = 0;
+            }
+            else
+            {
+            a = 1L;
+            }
+            }
             }
             """
         );
@@ -128,11 +128,11 @@ public class ReplaceConditionalWithStatementsTests
 
             public class C
             {
-                private C? y, z;
-                void M(bool b, ref C? x)
-                {
-                    x = ref ($$b ? ref y : ref z);
-                }
+            private C? y, z;
+            void M(bool b, ref C? x)
+            {
+            x = ref ($$b ? ref y : ref z);
+            }
             }
             """,
             """
@@ -140,18 +140,18 @@ public class ReplaceConditionalWithStatementsTests
 
             public class C
             {
-                private C? y, z;
-                void M(bool b, ref C? x)
-                {
-                    if (b)
-                    {
-                        x = ref (y);
-                    }
-                    else
-                    {
-                        x = ref (z);
-                    }
-                }
+            private C? y, z;
+            void M(bool b, ref C? x)
+            {
+            if (b)
+            {
+            x = ref (y);
+            }
+            else
+            {
+            x = ref (z);
+            }
+            }
             }
             """
         );
@@ -164,26 +164,26 @@ public class ReplaceConditionalWithStatementsTests
             """
             class C
             {
-                void M(bool b)
-                {
-                    _ = $$b ? 0 : 1L;
-                }
+            void M(bool b)
+            {
+            _ = $$b ? 0 : 1L;
+            }
             }
             """,
             """
             class C
             {
-                void M(bool b)
-                {
-                    if (b)
-                    {
-                        _ = (long)0;
-                    }
-                    else
-                    {
-                        _ = 1L;
-                    }
-                }
+            void M(bool b)
+            {
+            if (b)
+            {
+            _ = (long)0;
+            }
+            else
+            {
+            _ = 1L;
+            }
+            }
             }
             """
         );
@@ -206,11 +206,11 @@ public class ReplaceConditionalWithStatementsTests
             long a;
             if (b)
             {
-                a = 0;
+            a = 0;
             }
             else
             {
-                a = 1L;
+            a = 1L;
             }
             """
         }.RunAsync();
@@ -233,11 +233,11 @@ public class ReplaceConditionalWithStatementsTests
             long a;
             if (b)
             {
-                a = 0;
+            a = 0;
             }
             else
             {
-                a = 1L;
+            a = 1L;
             }
             """
         }.RunAsync();
@@ -247,16 +247,16 @@ public class ReplaceConditionalWithStatementsTests
     public async Task TestRefLocalDeclaration1()
     {
         var source = """
-            class C
-            {
-                void M(bool b)
-                {
-                    var y = new C();
-                    var z = new C();
-                    ref var x = ref ($$b ? ref y : ref z);
-                }
-            }
-            """;
+        class C
+        {
+        void M(bool b)
+        {
+        var y = new C();
+        var z = new C();
+        ref var x = ref ($$b ? ref y : ref z);
+        }
+        }
+        """;
         await VerifyCS.VerifyRefactoringAsync(source, source);
     }
 
@@ -264,15 +264,15 @@ public class ReplaceConditionalWithStatementsTests
     public async Task TestUsingLocalDeclaration1()
     {
         var source = """
-            using System;
-            class C
-            {
-                void M(bool b, IDisposable d1, IDisposable d2)
-                {
-                    using var x = $$b ? d1 : d2;
-                }
-            }
-            """;
+        using System;
+        class C
+        {
+        void M(bool b, IDisposable d1, IDisposable d2)
+        {
+        using var x = $$b ? d1 : d2;
+        }
+        }
+        """;
         await VerifyCS.VerifyRefactoringAsync(source, source);
     }
 
@@ -283,28 +283,28 @@ public class ReplaceConditionalWithStatementsTests
             """
             class C
             {
-                void M(bool b)
-                {
-                    int a = 0;
-                    a += $$b ? 1 : 2;
-                }
+            void M(bool b)
+            {
+            int a = 0;
+            a += $$b ? 1 : 2;
+            }
             }
             """,
             """
             class C
             {
-                void M(bool b)
-                {
-                    int a = 0;
-                    if (b)
-                    {
-                        a += 1;
-                    }
-                    else
-                    {
-                        a += 2;
-                    }
-                }
+            void M(bool b)
+            {
+            int a = 0;
+            if (b)
+            {
+            a += 1;
+            }
+            else
+            {
+            a += 2;
+            }
+            }
             }
             """
         );
@@ -320,39 +320,39 @@ public class ReplaceConditionalWithStatementsTests
             record X(int A);
             class C
             {
-                void M(bool b, X x)
-                {
-                    x = x with { A = $$b ? 1 : 2 };
-                }
+            void M(bool b, X x)
+            {
+            x = x with { A = $$b ? 1 : 2 };
+            }
             }
             namespace System.Runtime.CompilerServices
             {
-                public sealed class IsExternalInit
-                {
-                }
+            public sealed class IsExternalInit
+            {
+            }
             }
             """,
             FixedCode = """
             record X(int A);
             class C
             {
-                void M(bool b, X x)
-                {
-                    if (b)
-                    {
-                        x = x with { A = 1 };
-                    }
-                    else
-                    {
-                        x = x with { A = 2 };
-                    }
-                }
+            void M(bool b, X x)
+            {
+            if (b)
+            {
+            x = x with { A = 1 };
+            }
+            else
+            {
+            x = x with { A = 2 };
+            }
+            }
             }
             namespace System.Runtime.CompilerServices
             {
-                public sealed class IsExternalInit
-                {
-                }
+            public sealed class IsExternalInit
+            {
+            }
             }
             """
         }.RunAsync();
@@ -365,27 +365,27 @@ public class ReplaceConditionalWithStatementsTests
             """
             class C
             {
-                void M(bool b)
-                {
-                    object a = $$b ? 0 : 1L;
-                }
+            void M(bool b)
+            {
+            object a = $$b ? 0 : 1L;
+            }
             }
             """,
             """
             class C
             {
-                void M(bool b)
-                {
-                    object a;
-                    if (b)
-                    {
-                        a = (long)0;
-                    }
-                    else
-                    {
-                        a = 1L;
-                    }
-                }
+            void M(bool b)
+            {
+            object a;
+            if (b)
+            {
+            a = (long)0;
+            }
+            else
+            {
+            a = 1L;
+            }
+            }
             }
             """
         );
@@ -398,27 +398,27 @@ public class ReplaceConditionalWithStatementsTests
             """
             class C
             {
-                void M(bool b)
-                {
-                    $$object a = b ? 0 : 1L;
-                }
+            void M(bool b)
+            {
+            $$object a = b ? 0 : 1L;
+            }
             }
             """,
             """
             class C
             {
-                void M(bool b)
-                {
-                    object a;
-                    if (b)
-                    {
-                        a = (long)0;
-                    }
-                    else
-                    {
-                        a = 1L;
-                    }
-                }
+            void M(bool b)
+            {
+            object a;
+            if (b)
+            {
+            a = (long)0;
+            }
+            else
+            {
+            a = 1L;
+            }
+            }
             }
             """
         );
@@ -431,27 +431,27 @@ public class ReplaceConditionalWithStatementsTests
             """
             class C
             {
-                void M(bool b)
-                {
-                    var a = $$b ? 0 : 1L;
-                }
+            void M(bool b)
+            {
+            var a = $$b ? 0 : 1L;
+            }
             }
             """,
             """
             class C
             {
-                void M(bool b)
-                {
-                    long a;
-                    if (b)
-                    {
-                        a = 0;
-                    }
-                    else
-                    {
-                        a = 1L;
-                    }
-                }
+            void M(bool b)
+            {
+            long a;
+            if (b)
+            {
+            a = 0;
+            }
+            else
+            {
+            a = 1L;
+            }
+            }
             }
             """
         );
@@ -465,32 +465,32 @@ public class ReplaceConditionalWithStatementsTests
             using System;
             class C
             {
-                void M(bool b)
-                {
-                    int v = N(N($$b ? 42 : throw new Exception()));
-                }
+            void M(bool b)
+            {
+            int v = N(N($$b ? 42 : throw new Exception()));
+            }
 
-                int N(int v) => v;
+            int N(int v) => v;
             }
             """,
             """
             using System;
             class C
             {
-                void M(bool b)
-                {
-                    int v;
-                    if (b)
-                    {
-                        v = N(N(42));
-                    }
-                    else
-                    {
-                        throw new Exception();
-                    }
-                }
-            
-                int N(int v) => v;
+            void M(bool b)
+            {
+            int v;
+            if (b)
+            {
+            v = N(N(42));
+            }
+            else
+            {
+            throw new Exception();
+            }
+            }
+
+            int N(int v) => v;
             }
             """
         );
@@ -513,11 +513,11 @@ public class ReplaceConditionalWithStatementsTests
 
             if (b)
             {
-                a = (long)0;
+            a = (long)0;
             }
             else
             {
-                a = 1L;
+            a = 1L;
             }
             """
         }.RunAsync();
@@ -540,11 +540,11 @@ public class ReplaceConditionalWithStatementsTests
 
             if (b)
             {
-                a = (long)0;
+            a = (long)0;
             }
             else
             {
-                a = 1L;
+            a = 1L;
             }
             """
         }.RunAsync();
@@ -567,11 +567,11 @@ public class ReplaceConditionalWithStatementsTests
 
             if (b)
             {
-                a = 0;
+            a = 0;
             }
             else
             {
-                a = 1L;
+            a = 1L;
             }
             """
         }.RunAsync();
@@ -584,26 +584,26 @@ public class ReplaceConditionalWithStatementsTests
             """
             class C
             {
-                object M(bool b)
-                {
-                    return $$b ? 0 : 1L;
-                }
+            object M(bool b)
+            {
+            return $$b ? 0 : 1L;
+            }
             }
             """,
             """
             class C
             {
-                object M(bool b)
-                {
-                    if (b)
-                    {
-                        return (long)0;
-                    }
-                    else
-                    {
-                        return 1L;
-                    }
-                }
+            object M(bool b)
+            {
+            if (b)
+            {
+            return (long)0;
+            }
+            else
+            {
+            return 1L;
+            }
+            }
             }
             """
         );
@@ -616,26 +616,26 @@ public class ReplaceConditionalWithStatementsTests
             """
             class C
             {
-                object M(bool b)
-                {
-                    $$return b ? 0 : 1L;
-                }
+            object M(bool b)
+            {
+            $$return b ? 0 : 1L;
+            }
             }
             """,
             """
             class C
             {
-                object M(bool b)
-                {
-                    if (b)
-                    {
-                        return (long)0;
-                    }
-                    else
-                    {
-                        return 1L;
-                    }
-                }
+            object M(bool b)
+            {
+            if (b)
+            {
+            return (long)0;
+            }
+            else
+            {
+            return 1L;
+            }
+            }
             }
             """
         );
@@ -648,26 +648,26 @@ public class ReplaceConditionalWithStatementsTests
             """
             class C
             {
-                long M(bool b)
-                {
-                    return $$b ? 0 : 1L;
-                }
+            long M(bool b)
+            {
+            return $$b ? 0 : 1L;
+            }
             }
             """,
             """
             class C
             {
-                long M(bool b)
-                {
-                    if (b)
-                    {
-                        return 0;
-                    }
-                    else
-                    {
-                        return 1L;
-                    }
-                }
+            long M(bool b)
+            {
+            if (b)
+            {
+            return 0;
+            }
+            else
+            {
+            return 1L;
+            }
+            }
             }
             """
         );
@@ -681,27 +681,27 @@ public class ReplaceConditionalWithStatementsTests
             using System;
             class C
             {
-                void M(bool b)
-                {
-                    Console.WriteLine($$b ? 0 : 1L);
-                }
+            void M(bool b)
+            {
+            Console.WriteLine($$b ? 0 : 1L);
+            }
             }
             """,
             """
             using System;
             class C
             {
-                void M(bool b)
-                {
-                    if (b)
-                    {
-                        Console.WriteLine((long)0);
-                    }
-                    else
-                    {
-                        Console.WriteLine(1L);
-                    }
-                }
+            void M(bool b)
+            {
+            if (b)
+            {
+            Console.WriteLine((long)0);
+            }
+            else
+            {
+            Console.WriteLine(1L);
+            }
+            }
             }
             """
         );
@@ -715,27 +715,27 @@ public class ReplaceConditionalWithStatementsTests
             using System;
             class C
             {
-                void M(bool b, bool c)
-                {
-                    Console.WriteLine($$b ? c ? 0 : 1 : c ? 2 : 3);
-                }
+            void M(bool b, bool c)
+            {
+            Console.WriteLine($$b ? c ? 0 : 1 : c ? 2 : 3);
+            }
             }
             """,
             """
             using System;
             class C
             {
-                void M(bool b, bool c)
-                {
-                    if (b)
-                    {
-                        Console.WriteLine(c ? 0 : 1);
-                    }
-                    else
-                    {
-                        Console.WriteLine(c ? 2 : 3);
-                    }
-                }
+            void M(bool b, bool c)
+            {
+            if (b)
+            {
+            Console.WriteLine(c ? 0 : 1);
+            }
+            else
+            {
+            Console.WriteLine(c ? 2 : 3);
+            }
+            }
             }
             """
         );
@@ -749,27 +749,27 @@ public class ReplaceConditionalWithStatementsTests
             using System;
             class C
             {
-                void M(bool b, bool c)
-                {
-                    Console.WriteLine(b ? $$c ? 0 : 1 : c ? 2 : 3);
-                }
+            void M(bool b, bool c)
+            {
+            Console.WriteLine(b ? $$c ? 0 : 1 : c ? 2 : 3);
+            }
             }
             """,
             """
             using System;
             class C
             {
-                void M(bool b, bool c)
-                {
-                    if (c)
-                    {
-                        Console.WriteLine(b ? 0 : c ? 2 : 3);
-                    }
-                    else
-                    {
-                        Console.WriteLine(b ? 1 : c ? 2 : 3);
-                    }
-                }
+            void M(bool b, bool c)
+            {
+            if (c)
+            {
+            Console.WriteLine(b ? 0 : c ? 2 : 3);
+            }
+            else
+            {
+            Console.WriteLine(b ? 1 : c ? 2 : 3);
+            }
+            }
             }
             """
         );
@@ -783,27 +783,27 @@ public class ReplaceConditionalWithStatementsTests
             using System;
             class C
             {
-                void M(bool b, bool c)
-                {
-                    Console.WriteLine(b ? c ? 0 : 1 : $$c ? 2 : 3);
-                }
+            void M(bool b, bool c)
+            {
+            Console.WriteLine(b ? c ? 0 : 1 : $$c ? 2 : 3);
+            }
             }
             """,
             """
             using System;
             class C
             {
-                void M(bool b, bool c)
-                {
-                    if (c)
-                    {
-                        Console.WriteLine(b ? c ? 0 : 1 : 2);
-                    }
-                    else
-                    {
-                        Console.WriteLine(b ? c ? 0 : 1 : 3);
-                    }
-                }
+            void M(bool b, bool c)
+            {
+            if (c)
+            {
+            Console.WriteLine(b ? c ? 0 : 1 : 2);
+            }
+            else
+            {
+            Console.WriteLine(b ? c ? 0 : 1 : 3);
+            }
+            }
             }
             """
         );
@@ -817,31 +817,31 @@ public class ReplaceConditionalWithStatementsTests
             using System;
             class C
             {
-                void M(bool b)
-                {
-                    F($$b ? (int)42 : (int?)null);
-                }
+            void M(bool b)
+            {
+            F($$b ? (int)42 : (int?)null);
+            }
 
-                void F<T>(T value) => Console.WriteLine(typeof(T));
+            void F<T>(T value) => Console.WriteLine(typeof(T));
             }
             """,
             """
             using System;
             class C
             {
-                void M(bool b)
-                {
-                    if (b)
-                    {
-                        F((int?)(int)42);
-                    }
-                    else
-                    {
-                        F((int?)null);
-                    }
-                }
-            
-                void F<T>(T value) => Console.WriteLine(typeof(T));
+            void M(bool b)
+            {
+            if (b)
+            {
+            F((int?)(int)42);
+            }
+            else
+            {
+            F((int?)null);
+            }
+            }
+
+            void F<T>(T value) => Console.WriteLine(typeof(T));
             }
             """
         );
@@ -855,12 +855,12 @@ public class ReplaceConditionalWithStatementsTests
             using System;
             class C
             {
-                void M(bool b)
-                {
-                    F($$b ? new X() : new());
-                }
+            void M(bool b)
+            {
+            F($$b ? new X() : new());
+            }
 
-                void F(object value) => Console.WriteLine(value.GetType());
+            void F(object value) => Console.WriteLine(value.GetType());
             }
             class X { }
             """,
@@ -868,19 +868,19 @@ public class ReplaceConditionalWithStatementsTests
             using System;
             class C
             {
-                void M(bool b)
-                {
-                    if (b)
-                    {
-                        F(new X());
-                    }
-                    else
-                    {
-                        F((X)new());
-                    }
-                }
-            
-                void F(object value) => Console.WriteLine(value.GetType());
+            void M(bool b)
+            {
+            if (b)
+            {
+            F(new X());
+            }
+            else
+            {
+            F((X)new());
+            }
+            }
+
+            void F(object value) => Console.WriteLine(value.GetType());
             }
             """
         );
@@ -894,27 +894,27 @@ public class ReplaceConditionalWithStatementsTests
             using System;
             class C
             {
-                void M(bool b)
-                {
-                    $$Console.WriteLine(b ? 0 : 1L);
-                }
+            void M(bool b)
+            {
+            $$Console.WriteLine(b ? 0 : 1L);
+            }
             }
             """,
             """
             using System;
             class C
             {
-                void M(bool b)
-                {
-                    if (b)
-                    {
-                        Console.WriteLine((long)0);
-                    }
-                    else
-                    {
-                        Console.WriteLine(1L);
-                    }
-                }
+            void M(bool b)
+            {
+            if (b)
+            {
+            Console.WriteLine((long)0);
+            }
+            else
+            {
+            Console.WriteLine(1L);
+            }
+            }
             }
             """
         );
@@ -928,27 +928,27 @@ public class ReplaceConditionalWithStatementsTests
             using System;
             class C
             {
-                void M(bool b)
-                {
-                    Console.WriteLine(b ? "" : "", $$b ? 0 : 1L);
-                }
+            void M(bool b)
+            {
+            Console.WriteLine(b ? "" : "", $$b ? 0 : 1L);
+            }
             }
             """,
             """
             using System;
             class C
             {
-                void M(bool b)
-                {
-                    if (b)
-                    {
-                        Console.WriteLine(b ? "" : "", (long)0);
-                    }
-                    else
-                    {
-                        Console.WriteLine(b ? "" : "", 1L);
-                    }
-                }
+            void M(bool b)
+            {
+            if (b)
+            {
+            Console.WriteLine(b ? "" : "", (long)0);
+            }
+            else
+            {
+            Console.WriteLine(b ? "" : "", 1L);
+            }
+            }
             }
             """
         );
@@ -962,29 +962,29 @@ public class ReplaceConditionalWithStatementsTests
             using System;
             class C
             {
-                bool M(bool b)
-                {
-                    M(M(M($$b ? true : false)));
-                    return default;
-                }
+            bool M(bool b)
+            {
+            M(M(M($$b ? true : false)));
+            return default;
+            }
             }
             """,
             """
             using System;
             class C
             {
-                bool M(bool b)
-                {
-                    if (b)
-                    {
-                        M(M(M(true)));
-                    }
-                    else
-                    {
-                        M(M(M(false)));
-                    }
-                    return default;
-                }
+            bool M(bool b)
+            {
+            if (b)
+            {
+            M(M(M(true)));
+            }
+            else
+            {
+            M(M(M(false)));
+            }
+            return default;
+            }
             }
             """
         );
@@ -999,10 +999,10 @@ public class ReplaceConditionalWithStatementsTests
             using System.Threading.Tasks;
             class C
             {
-                async void M(bool b, Task x, Task y)
-                {
-                    await ($$b ? x : y);
-                }
+            async void M(bool b, Task x, Task y)
+            {
+            await ($$b ? x : y);
+            }
             }
             """,
             """
@@ -1010,17 +1010,17 @@ public class ReplaceConditionalWithStatementsTests
             using System.Threading.Tasks;
             class C
             {
-                async void M(bool b, Task x, Task y)
-                {
-                    if (b)
-                    {
-                        await (x);
-                    }
-                    else
-                    {
-                        await (y);
-                    }
-                }
+            async void M(bool b, Task x, Task y)
+            {
+            if (b)
+            {
+            await (x);
+            }
+            else
+            {
+            await (y);
+            }
+            }
             }
             """
         );
@@ -1035,10 +1035,10 @@ public class ReplaceConditionalWithStatementsTests
             using System.Threading.Tasks;
             class C
             {
-                async void M(bool b, Task x, Task y)
-                {
-                    $$await (b ? x : y);
-                }
+            async void M(bool b, Task x, Task y)
+            {
+            $$await (b ? x : y);
+            }
             }
             """,
             """
@@ -1046,17 +1046,17 @@ public class ReplaceConditionalWithStatementsTests
             using System.Threading.Tasks;
             class C
             {
-                async void M(bool b, Task x, Task y)
-                {
-                    if (b)
-                    {
-                        await (x);
-                    }
-                    else
-                    {
-                        await (y);
-                    }
-                }
+            async void M(bool b, Task x, Task y)
+            {
+            if (b)
+            {
+            await (x);
+            }
+            else
+            {
+            await (y);
+            }
+            }
             }
             """
         );
@@ -1070,27 +1070,27 @@ public class ReplaceConditionalWithStatementsTests
             using System;
             class C
             {
-                void M(bool b)
-                {
-                    throw $$b ? new Exception("x") : new Exception("y");
-                }
+            void M(bool b)
+            {
+            throw $$b ? new Exception("x") : new Exception("y");
+            }
             }
             """,
             """
             using System;
             class C
             {
-                void M(bool b)
-                {
-                    if (b)
-                    {
-                        throw new Exception("x");
-                    }
-                    else
-                    {
-                        throw new Exception("y");
-                    }
-                }
+            void M(bool b)
+            {
+            if (b)
+            {
+            throw new Exception("x");
+            }
+            else
+            {
+            throw new Exception("y");
+            }
+            }
             }
             """
         );
@@ -1104,27 +1104,27 @@ public class ReplaceConditionalWithStatementsTests
             using System;
             class C
             {
-                void M(bool b)
-                {
-                    $$throw b ? new Exception("x") : new Exception("y");
-                }
+            void M(bool b)
+            {
+            $$throw b ? new Exception("x") : new Exception("y");
+            }
             }
             """,
             """
             using System;
             class C
             {
-                void M(bool b)
-                {
-                    if (b)
-                    {
-                        throw new Exception("x");
-                    }
-                    else
-                    {
-                        throw new Exception("y");
-                    }
-                }
+            void M(bool b)
+            {
+            if (b)
+            {
+            throw new Exception("x");
+            }
+            else
+            {
+            throw new Exception("y");
+            }
+            }
             }
             """
         );
@@ -1138,31 +1138,31 @@ public class ReplaceConditionalWithStatementsTests
             using System;
             class C
             {
-                int M(bool b)
-                {
-                    return N(N($$b ? 42 : throw new Exception()));
-                }
+            int M(bool b)
+            {
+            return N(N($$b ? 42 : throw new Exception()));
+            }
 
-                int N(int v) => v;
+            int N(int v) => v;
             }
             """,
             """
             using System;
             class C
             {
-                int M(bool b)
-                {
-                    if (b)
-                    {
-                        return N(N(42));
-                    }
-                    else
-                    {
-                        throw new Exception();
-                    }
-                }
+            int M(bool b)
+            {
+            if (b)
+            {
+            return N(N(42));
+            }
+            else
+            {
+            throw new Exception();
+            }
+            }
 
-                int N(int v) => v;
+            int N(int v) => v;
             }
             """
         );
@@ -1176,32 +1176,32 @@ public class ReplaceConditionalWithStatementsTests
             using System;
             class C
             {
-                void M(bool b)
-                {
-                    int v = N(N($$b ? 42 : throw new Exception()));
-                }
+            void M(bool b)
+            {
+            int v = N(N($$b ? 42 : throw new Exception()));
+            }
 
-                int N(int v) => v;
+            int N(int v) => v;
             }
             """,
             """
             using System;
             class C
             {
-                void M(bool b)
-                {
-                    int v;
-                    if (b)
-                    {
-                        v = N(N(42));
-                    }
-                    else
-                    {
-                        throw new Exception();
-                    }
-                }
+            void M(bool b)
+            {
+            int v;
+            if (b)
+            {
+            v = N(N(42));
+            }
+            else
+            {
+            throw new Exception();
+            }
+            }
 
-                int N(int v) => v;
+            int N(int v) => v;
             }
             """
         );
@@ -1216,10 +1216,10 @@ public class ReplaceConditionalWithStatementsTests
             using System.Collections.Generic;
             class C
             {
-                IEnumerable<object> M(bool b)
-                {
-                    yield return $$b ? 0 : 1L;
-                }
+            IEnumerable<object> M(bool b)
+            {
+            yield return $$b ? 0 : 1L;
+            }
             }
             """,
             """
@@ -1227,17 +1227,17 @@ public class ReplaceConditionalWithStatementsTests
             using System.Collections.Generic;
             class C
             {
-                IEnumerable<object> M(bool b)
-                {
-                    if (b)
-                    {
-                        yield return (long)0;
-                    }
-                    else
-                    {
-                        yield return 1L;
-                    }
-                }
+            IEnumerable<object> M(bool b)
+            {
+            if (b)
+            {
+            yield return (long)0;
+            }
+            else
+            {
+            yield return 1L;
+            }
+            }
             }
             """
         );
@@ -1252,10 +1252,10 @@ public class ReplaceConditionalWithStatementsTests
             using System.Collections.Generic;
             class C
             {
-                IEnumerable<object> M(bool b)
-                {
-                    $$yield return b ? 0 : 1L;
-                }
+            IEnumerable<object> M(bool b)
+            {
+            $$yield return b ? 0 : 1L;
+            }
             }
             """,
             """
@@ -1263,17 +1263,17 @@ public class ReplaceConditionalWithStatementsTests
             using System.Collections.Generic;
             class C
             {
-                IEnumerable<object> M(bool b)
-                {
-                    if (b)
-                    {
-                        yield return (long)0;
-                    }
-                    else
-                    {
-                        yield return 1L;
-                    }
-                }
+            IEnumerable<object> M(bool b)
+            {
+            if (b)
+            {
+            yield return (long)0;
+            }
+            else
+            {
+            yield return 1L;
+            }
+            }
             }
             """
         );

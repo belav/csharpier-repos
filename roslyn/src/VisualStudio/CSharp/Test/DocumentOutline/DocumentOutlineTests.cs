@@ -23,33 +23,33 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
     public class DocumentOutlineTests : DocumentOutlineTestsBase
     {
         private const string TestCode = """
-            private class MyClass
-            {
-                int _x;
+        private class MyClass
+        {
+        int _x;
 
-                static void Method1(string[] args) {}
+        static void Method1(string[] args) {}
 
-                private class MyClass2 {}
+        private class MyClass2 {}
 
-                static void Method2(string[] args) {}
-            }
+        static void Method2(string[] args) {}
+        }
 
-            class App
-            {
-                void Method() {}
+        class App
+        {
+        void Method() {}
 
-                void Z() {}
-            }
+        void Z() {}
+        }
 
-            interface foo
-            {
-                void z() {}
+        interface foo
+        {
+        void z() {}
 
-                private static int apple = 9, b = 4, c = 6;
+        private static int apple = 9, b = 4, c = 6;
 
-                void r() {}
-            }
-            """;
+        void r() {}
+        }
+        """;
 
         public DocumentOutlineTests(ITestOutputHelper testOutputHelper)
             : base(testOutputHelper) { }
@@ -235,7 +235,7 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
             var (_, _, items) = await InitializeMocksAndDataModelAndUIItems(
                 """
                 enum Test
-                  { a, b }
+                { a, b }
                 """
             );
 

@@ -378,7 +378,7 @@ internal partial class RedisOutputCacheStore
                     const string ZADD_GT = """
                     local oldScore = tonumber(redis.call('ZSCORE', KEYS[1], ARGV[2]))
                     if oldScore == nil or oldScore < tonumber(ARGV[1]) then
-                        redis.call('ZADD', KEYS[1], ARGV[1], ARGV[2])
+                    redis.call('ZADD', KEYS[1], ARGV[1], ARGV[2])
                     end
                     """;
 

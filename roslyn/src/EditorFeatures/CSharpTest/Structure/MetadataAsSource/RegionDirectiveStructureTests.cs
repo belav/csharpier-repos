@@ -25,10 +25,10 @@ public class RegionDirectiveStructureTests
     public async Task FileHeader()
     {
         var code = """
-                {|span:#re$$gion Assembly mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-                // C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\mscorlib.dll
-                #endregion|}
-                """;
+        {|span:#re$$gion Assembly mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+        // C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\mscorlib.dll
+        #endregion|}
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -45,10 +45,10 @@ public class RegionDirectiveStructureTests
     public async Task EmptyFileHeader()
     {
         var code = """
-                {|span:#re$$gion
-                // C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\mscorlib.dll
-                #endregion|}
-                """;
+        {|span:#re$$gion
+        // C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\mscorlib.dll
+        #endregion|}
+        """;
 
         await VerifyBlockSpansAsync(
             code,

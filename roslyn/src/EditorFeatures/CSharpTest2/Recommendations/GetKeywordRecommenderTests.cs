@@ -77,7 +77,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   int Goo { $$
+                int Goo { $$
                 """
             );
         }
@@ -88,7 +88,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   int Goo { private $$
+                int Goo { private $$
                 """
             );
         }
@@ -99,7 +99,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   int Goo { [Bar] $$
+                int Goo { [Bar] $$
                 """
             );
         }
@@ -110,7 +110,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   int Goo { [Bar] private $$
+                int Goo { [Bar] private $$
                 """
             );
         }
@@ -121,7 +121,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   int Goo { set; $$
+                int Goo { set; $$
                 """
             );
         }
@@ -132,7 +132,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   int Goo { set; private $$
+                int Goo { set; private $$
                 """
             );
         }
@@ -143,7 +143,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   int Goo { set; [Bar] $$
+                int Goo { set; [Bar] $$
                 """
             );
         }
@@ -154,7 +154,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   int Goo { set; [Bar] private $$
+                int Goo { set; [Bar] private $$
                 """
             );
         }
@@ -165,7 +165,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   int Goo { set { } $$
+                int Goo { set { } $$
                 """
             );
         }
@@ -176,7 +176,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   int Goo { set { } private $$
+                int Goo { set { } private $$
                 """
             );
         }
@@ -187,7 +187,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   int Goo { set { } [Bar] $$
+                int Goo { set { } [Bar] $$
                 """
             );
         }
@@ -198,7 +198,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   int Goo { set { } [Bar] private $$
+                int Goo { set { } [Bar] private $$
                 """
             );
         }
@@ -209,7 +209,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                   int Goo { get $$
+                int Goo { get $$
                 """
             );
         }
@@ -220,7 +220,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                   int Goo { get; $$
+                int Goo { get; $$
                 """
             );
         }
@@ -231,7 +231,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                   event Goo E { $$
+                event Goo E { $$
                 """
             );
         }
@@ -242,7 +242,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   int this[int i] { $$
+                int this[int i] { $$
                 """
             );
         }
@@ -253,7 +253,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   int this[int i] { private $$
+                int this[int i] { private $$
                 """
             );
         }
@@ -264,7 +264,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   int this[int i] { [Bar] $$
+                int this[int i] { [Bar] $$
                 """
             );
         }
@@ -275,7 +275,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   int this[int i] { [Bar] private $$
+                int this[int i] { [Bar] private $$
                 """
             );
         }
@@ -286,7 +286,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   int this[int i] { set; $$
+                int this[int i] { set; $$
                 """
             );
         }
@@ -297,7 +297,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   int this[int i] { set; private $$
+                int this[int i] { set; private $$
                 """
             );
         }
@@ -308,7 +308,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   int this[int i] { set; [Bar] $$
+                int this[int i] { set; [Bar] $$
                 """
             );
         }
@@ -319,7 +319,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   int this[int i] { set; [Bar] private $$
+                int this[int i] { set; [Bar] private $$
                 """
             );
         }
@@ -330,7 +330,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   int this[int i] { set { } $$
+                int this[int i] { set { } $$
                 """
             );
         }
@@ -341,7 +341,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   int this[int i] { set { } private $$
+                int this[int i] { set { } private $$
                 """
             );
         }
@@ -352,7 +352,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   int this[int i] { set { } [Bar] $$
+                int this[int i] { set { } [Bar] $$
                 """
             );
         }
@@ -363,7 +363,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   int this[int i] { set { } [Bar] private $$
+                int this[int i] { set { } [Bar] private $$
                 """
             );
         }
@@ -374,7 +374,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                   int this[int i] { get $$
+                int this[int i] { get $$
                 """
             );
         }
@@ -385,7 +385,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                   int this[int i] { get; $$
+                int this[int i] { get; $$
                 """
             );
         }
@@ -396,7 +396,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   int this[int i] { $$; }
+                int this[int i] { $$; }
                 """
             );
         }
@@ -407,7 +407,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   int this[int i] { protected internal $$ }
+                int this[int i] { protected internal $$ }
                 """
             );
         }
@@ -418,7 +418,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   int this[int i] { internal protected $$ }
+                int this[int i] { internal protected $$ }
                 """
             );
         }

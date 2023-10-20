@@ -37,8 +37,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         public async Task TestNotInDirective()
         {
             var code = """
-                #line 1 [||]"goo.cs"
-                """;
+            #line 1 [||]"goo.cs"
+            """;
 
             await VerifyRefactoringAsync(code, code);
         }
@@ -47,14 +47,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         public async Task TestNotOnEmptyString()
         {
             var code = """
-                public class C
-                {
-                    void M()
-                    {
-                        var v = [||]"";
-                    }
-                }
-                """;
+            public class C
+            {
+            void M()
+            {
+            var v = [||]"";
+            }
+            }
+            """;
 
             await VerifyRefactoringAsync(code, code);
         }
@@ -63,14 +63,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         public async Task TestNotOnEmptyVerbatimString()
         {
             var code = """
-                public class C
-                {
-                    void M()
-                    {
-                        var v = [||]@"";
-                    }
-                }
-                """;
+            public class C
+            {
+            void M()
+            {
+            var v = [||]@"";
+            }
+            }
+            """;
 
             await VerifyRefactoringAsync(code, code);
         }
@@ -79,14 +79,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         public async Task TestNotOnHighSurrogateChar()
         {
             var code = """
-                public class C
-                {
-                    void M()
-                    {
-                        var v = [||]"\uD800";
-                    }
-                }
-                """;
+            public class C
+            {
+            void M()
+            {
+            var v = [||]"\uD800";
+            }
+            }
+            """;
 
             await VerifyRefactoringAsync(code, code);
         }
@@ -95,14 +95,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         public async Task TestNotOnLowSurrogateChar1()
         {
             var code = """
-                public class C
-                {
-                    void M()
-                    {
-                        var v = [||]"\uDC00";
-                    }
-                }
-                """;
+            public class C
+            {
+            void M()
+            {
+            var v = [||]"\uDC00";
+            }
+            }
+            """;
 
             await VerifyRefactoringAsync(code, code);
         }
@@ -114,19 +114,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 """
                 public class C
                 {
-                    void M()
-                    {
-                        var v = [||]"\uD83D\uDC69";
-                    }
+                void M()
+                {
+                var v = [||]"\uD83D\uDC69";
+                }
                 }
                 """,
                 """"
                 public class C
                 {
-                    void M()
-                    {
-                        var v = """👩""";
-                    }
+                void M()
+                {
+                var v = """👩""";
+                }
                 }
                 """"
             );
@@ -136,14 +136,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         public async Task TestNotOnNullChar()
         {
             var code = """
-                public class C
-                {
-                    void M()
-                    {
-                        var v = [||]"\u0000";
-                    }
-                }
-                """;
+            public class C
+            {
+            void M()
+            {
+            var v = [||]"\u0000";
+            }
+            }
+            """;
 
             await VerifyRefactoringAsync(code, code);
         }
@@ -152,14 +152,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         public async Task TestNotOnControlCharacter()
         {
             var code = """
-                public class C
-                {
-                    void M()
-                    {
-                        var v = [||]"\u007F";
-                    }
-                }
-                """;
+            public class C
+            {
+            void M()
+            {
+            var v = [||]"\u007F";
+            }
+            }
+            """;
 
             await VerifyRefactoringAsync(code, code);
         }
@@ -171,19 +171,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 """
                 public class C
                 {
-                    void M()
-                    {
-                        var v = [||]"a";
-                    }
+                void M()
+                {
+                var v = [||]"a";
+                }
                 }
                 """,
                 """"
                 public class C
                 {
-                    void M()
-                    {
-                        var v = """a""";
-                    }
+                void M()
+                {
+                var v = """a""";
+                }
                 }
                 """"
             );
@@ -196,19 +196,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 """
                 public class C
                 {
-                    void M()
-                    {
-                        var v = [||]@"a";
-                    }
+                void M()
+                {
+                var v = [||]@"a";
+                }
                 }
                 """,
                 """"
                 public class C
                 {
-                    void M()
-                    {
-                        var v = """a""";
-                    }
+                void M()
+                {
+                var v = """a""";
+                }
                 }
                 """"
             );
@@ -235,19 +235,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 """
                 public class C
                 {
-                    void M()
-                    {
-                        var v = [||]"goo\"bar";
-                    }
+                void M()
+                {
+                var v = [||]"goo\"bar";
+                }
                 }
                 """,
                 """"
                 public class C
                 {
-                    void M()
-                    {
-                        var v = """goo"bar""";
-                    }
+                void M()
+                {
+                var v = """goo"bar""";
+                }
                 }
                 """"
             );
@@ -260,19 +260,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 """
                 public class C
                 {
-                    void M()
-                    {
-                        var v = [||]@"goo""bar";
-                    }
+                void M()
+                {
+                var v = [||]@"goo""bar";
+                }
                 }
                 """,
                 """"
                 public class C
                 {
-                    void M()
-                    {
-                        var v = """goo"bar""";
-                    }
+                void M()
+                {
+                var v = """goo"bar""";
+                }
                 }
                 """"
             );
@@ -285,21 +285,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 """
                 public class C
                 {
-                    void M()
-                    {
-                        var v = [||]"\"goobar";
-                    }
+                void M()
+                {
+                var v = [||]"\"goobar";
+                }
                 }
                 """,
                 """"
                 public class C
                 {
-                    void M()
-                    {
-                        var v = """
-                            "goobar
-                            """;
-                    }
+                void M()
+                {
+                var v = """
+                "goobar
+                """;
+                }
                 }
                 """"
             );
@@ -312,21 +312,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 """"
                 public class C
                 {
-                    void M()
-                    {
-                        var v = [||]@"""goobar";
-                    }
+                void M()
+                {
+                var v = [||]@"""goobar";
+                }
                 }
                 """",
                 """"
                 public class C
                 {
-                    void M()
-                    {
-                        var v = """
-                            "goobar
-                            """;
-                    }
+                void M()
+                {
+                var v = """
+                "goobar
+                """;
+                }
                 }
                 """"
             );
@@ -339,21 +339,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 """
                 public class C
                 {
-                    void M()
-                    {
-                        var v = [||]"goobar\"";
-                    }
+                void M()
+                {
+                var v = [||]"goobar\"";
+                }
                 }
                 """,
                 """"
                 public class C
                 {
-                    void M()
-                    {
-                        var v = """
-                            goobar"
-                            """;
-                    }
+                void M()
+                {
+                var v = """
+                goobar"
+                """;
+                }
                 }
                 """"
             );
@@ -366,21 +366,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 """"
                 public class C
                 {
-                    void M()
-                    {
-                        var v = [||]@"goobar""";
-                    }
+                void M()
+                {
+                var v = [||]@"goobar""";
+                }
                 }
                 """",
                 """"
                 public class C
                 {
-                    void M()
-                    {
-                        var v = """
-                            goobar"
-                            """;
-                    }
+                void M()
+                {
+                var v = """
+                goobar"
+                """;
+                }
                 }
                 """"
             );
@@ -393,22 +393,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 """
                 public class C
                 {
-                    void M()
-                    {
-                        var v = [||]"goo\r\nbar";
-                    }
+                void M()
+                {
+                var v = [||]"goo\r\nbar";
+                }
                 }
                 """,
                 """"
                 public class C
                 {
-                    void M()
-                    {
-                        var v = """
-                            goo
-                            bar
-                            """;
-                    }
+                void M()
+                {
+                var v = """
+                goo
+                bar
+                """;
+                }
                 }
                 """"
             );
@@ -421,23 +421,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 """
                 public class C
                 {
-                    void M()
-                    {
-                        var v = [||]@"goo
+                void M()
+                {
+                var v = [||]@"goo
                 bar";
-                    }
+                }
                 }
                 """,
                 """"
                 public class C
                 {
-                    void M()
-                    {
-                        var v = """
-                            goo
-                            bar
-                            """;
-                    }
+                void M()
+                {
+                var v = """
+                goo
+                bar
+                """;
+                }
                 }
                 """"
             );
@@ -450,23 +450,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 """
                 public class C
                 {
-                    void M()
-                    {
-                        var v = [||]"\r\ngoobar\r\n";
-                    }
+                void M()
+                {
+                var v = [||]"\r\ngoobar\r\n";
+                }
                 }
                 """,
                 """"
                 public class C
                 {
-                    void M()
-                    {
-                        var v = """
+                void M()
+                {
+                var v = """
 
-                            goobar
+                goobar
 
-                            """;
-                    }
+                """;
+                }
                 }
                 """"
             );
@@ -479,25 +479,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 """
                 public class C
                 {
-                    void M()
-                    {
-                        var v = [||]@"
+                void M()
+                {
+                var v = [||]@"
                 goobar
                 ";
-                    }
+                }
                 }
                 """,
                 """"
                 public class C
                 {
-                    void M()
-                    {
-                        var v = """
+                void M()
+                {
+                var v = """
 
-                            goobar
+                goobar
 
-                            """;
-                    }
+                """;
+                }
                 }
                 """"
             );
@@ -510,23 +510,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 """
                 public class C
                 {
-                    void M()
-                    {
-                        var v = [||]@"
+                void M()
+                {
+                var v = [||]@"
                 goobar
                 ";
-                    }
+                }
                 }
                 """,
                 """"
                 public class C
                 {
-                    void M()
-                    {
-                        var v = """
-                            goobar
-                            """;
-                    }
+                void M()
+                {
+                var v = """
+                goobar
+                """;
+                }
                 }
                 """",
                 index: 1
@@ -540,22 +540,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 """
                 public class C
                 {
-                    void M()
-                    {
-                        var v = [||]"goo\r\nbar";
-                    }
+                void M()
+                {
+                var v = [||]"goo\r\nbar";
+                }
                 }
                 """,
                 """"
                 public class C
                 {
-                    void M()
-                    {
-                        var v = """
-                            goo
-                            bar
-                            """;
-                    }
+                void M()
+                {
+                var v = """
+                goo
+                bar
+                """;
+                }
                 }
                 """"
             );
@@ -568,26 +568,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 """
                 public class C
                 {
-                    void M()
-                    {
-                        var v = [||]@"
+                void M()
+                {
+                var v = [||]@"
                 from x in y
                 where x > 0
                 select x";
-                    }
+                }
                 }
                 """,
                 """"
                 public class C
                 {
-                    void M()
-                    {
-                        var v = """
-                            from x in y
-                            where x > 0
-                            select x
-                            """;
-                    }
+                void M()
+                {
+                var v = """
+                from x in y
+                where x > 0
+                select x
+                """;
+                }
                 }
                 """",
                 index: 1
@@ -603,9 +603,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 """,
                 """"
                 var v = """
-                    goo
-                    bar
-                    """;
+                goo
+                bar
+                """;
                 """",
                 outputKind: OutputKind.ConsoleApplication
             );
@@ -623,10 +623,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 """,
                 """"
                 var v = """
-                    from x in y
-                    where x > 0
-                    select x
-                    """;
+                from x in y
+                where x > 0
+                select x
+                """;
                 """",
                 index: 1,
                 outputKind: OutputKind.ConsoleApplication
@@ -640,23 +640,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 """
                 public class C
                 {
-                    void M()
-                    {
-                        var v = [||]@"goo
+                void M()
+                {
+                var v = [||]@"goo
                 bar";
-                    }
+                }
                 }
                 """,
                 """"
                 public class C
                 {
-                    void M()
-                    {
-                        var v = """
-                            goo
-                            bar
-                            """;
-                    }
+                void M()
+                {
+                var v = """
+                goo
+                bar
+                """;
+                }
                 }
                 """"
             );
@@ -669,24 +669,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 """
                 public class C
                 {
-                    void M()
-                    {
-                        var v =
-                                [||]"goo\r\nbar";
-                    }
+                void M()
+                {
+                var v =
+                [||]"goo\r\nbar";
+                }
                 }
                 """,
                 """"
                 public class C
                 {
-                    void M()
-                    {
-                        var v =
-                                """
-                                goo
-                                bar
-                                """;
-                    }
+                void M()
+                {
+                var v =
+                """
+                goo
+                bar
+                """;
+                }
                 }
                 """"
             );
@@ -699,25 +699,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 """
                 public class C
                 {
-                    void M()
-                    {
-                        var v =
-                                [||]@"goo
+                void M()
+                {
+                var v =
+                [||]@"goo
                 bar";
-                    }
+                }
                 }
                 """,
                 """"
                 public class C
                 {
-                    void M()
-                    {
-                        var v =
-                                """
-                                goo
-                                bar
-                                """;
-                    }
+                void M()
+                {
+                var v =
+                """
+                goo
+                bar
+                """;
+                }
                 }
                 """"
             );
@@ -730,26 +730,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 """
                 public class C
                 {
-                    void M()
-                    {
-                        var v = [||]@"
-                            from x in y
-                            where x > 0
-                            select x";
-                    }
+                void M()
+                {
+                var v = [||]@"
+                from x in y
+                where x > 0
+                select x";
+                }
                 }
                 """,
                 """"
                 public class C
                 {
-                    void M()
-                    {
-                        var v = """
-                            from x in y
-                            where x > 0
-                            select x
-                            """;
-                    }
+                void M()
+                {
+                var v = """
+                from x in y
+                where x > 0
+                select x
+                """;
+                }
                 }
                 """",
                 index: 1
@@ -763,27 +763,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 """
                 public class C
                 {
-                    void M()
-                    {
-                        var v = [||]@"
-                            from x in y
-                            where x > 0
-                            select x
-                            ";
-                    }
+                void M()
+                {
+                var v = [||]@"
+                from x in y
+                where x > 0
+                select x
+                ";
+                }
                 }
                 """,
                 """"
                 public class C
                 {
-                    void M()
-                    {
-                        var v = """
-                            from x in y
-                            where x > 0
-                            select x
-                            """;
-                    }
+                void M()
+                {
+                var v = """
+                from x in y
+                where x > 0
+                select x
+                """;
+                }
                 }
                 """",
                 index: 1
@@ -797,27 +797,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 """
                 public class C
                 {
-                    void M()
-                    {
-                        var v = [||]@"
-                            from x in y
-                                where x > 0
-                                select x
-                            ";
-                    }
+                void M()
+                {
+                var v = [||]@"
+                from x in y
+                where x > 0
+                select x
+                ";
+                }
                 }
                 """,
                 """"
                 public class C
                 {
-                    void M()
-                    {
-                        var v = """
-                            from x in y
-                                where x > 0
-                                select x
-                            """;
-                    }
+                void M()
+                {
+                var v = """
+                from x in y
+                where x > 0
+                select x
+                """;
+                }
                 }
                 """",
                 index: 1
@@ -831,27 +831,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 """
                 public class C
                 {
-                    void M()
-                    {
-                        var v = [||]@"
-                                from x in y
-                            where x > 0
-                            select x
-                            ";
-                    }
+                void M()
+                {
+                var v = [||]@"
+                from x in y
+                where x > 0
+                select x
+                ";
+                }
                 }
                 """,
                 """"
                 public class C
                 {
-                    void M()
-                    {
-                        var v = """
-                                from x in y
-                            where x > 0
-                            select x
-                            """;
-                    }
+                void M()
+                {
+                var v = """
+                from x in y
+                where x > 0
+                select x
+                """;
+                }
                 }
                 """",
                 index: 1
@@ -865,31 +865,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 """
                 public class C
                 {
-                    void M()
-                    {
-                        var v = [||]@"
-                            from x in y
+                void M()
+                {
+                var v = [||]@"
+                from x in y
 
-                            where x > 0
+                where x > 0
 
-                            select x
-                            ";
-                    }
+                select x
+                ";
+                }
                 }
                 """,
                 """"
                 public class C
                 {
-                    void M()
-                    {
-                        var v = """
-                            from x in y
+                void M()
+                {
+                var v = """
+                from x in y
 
-                            where x > 0
+                where x > 0
 
-                            select x
-                            """;
-                    }
+                select x
+                """;
+                }
                 }
                 """",
                 index: 1

@@ -22,54 +22,54 @@ namespace LibraryImportGenerator.UnitTests
         public async Task ModeThatUsesManagedToUnmanagedShape_Missing_AllMethods_ReportsDiagnostic()
         {
             string source = """
-                using System.Runtime.InteropServices.Marshalling;
-                
-                class ManagedType {}
-                
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof({|#0:MarshallerType<>|}))]
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof({|#1:MarshallerType<>|}))]
-                [ContiguousCollectionMarshaller]
-                struct MarshallerType<T>
-                {
-                }
-                """;
+            using System.Runtime.InteropServices.Marshalling;
+
+            class ManagedType {}
+
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof({|#0:MarshallerType<>|}))]
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof({|#1:MarshallerType<>|}))]
+            [ContiguousCollectionMarshaller]
+            struct MarshallerType<T>
+            {
+            }
+            """;
 
             string fixedSource = """
-                using System.Runtime.InteropServices.Marshalling;
-                
-                class ManagedType {}
-                
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof(MarshallerType<>))]
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof(MarshallerType<>))]
-                [ContiguousCollectionMarshaller]
-                struct MarshallerType<T>
-                {
-                    public void FromManaged(ManagedType managed)
-                    {
-                        throw new System.NotImplementedException();
-                    }
-                
-                    public nint ToUnmanaged()
-                    {
-                        throw new System.NotImplementedException();
-                    }
+            using System.Runtime.InteropServices.Marshalling;
 
-                    public System.ReadOnlySpan<nint> GetManagedValuesSource()
-                    {
-                        throw new System.NotImplementedException();
-                    }
+            class ManagedType {}
 
-                    public System.Span<T> GetUnmanagedValuesDestination()
-                    {
-                        throw new System.NotImplementedException();
-                    }
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof(MarshallerType<>))]
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof(MarshallerType<>))]
+            [ContiguousCollectionMarshaller]
+            struct MarshallerType<T>
+            {
+            public void FromManaged(ManagedType managed)
+            {
+            throw new System.NotImplementedException();
+            }
 
-                    public void Free()
-                    {
-                        throw new System.NotImplementedException();
-                    }
-                }
-                """;
+            public nint ToUnmanaged()
+            {
+            throw new System.NotImplementedException();
+            }
+
+            public System.ReadOnlySpan<nint> GetManagedValuesSource()
+            {
+            throw new System.NotImplementedException();
+            }
+
+            public System.Span<T> GetUnmanagedValuesDestination()
+            {
+            throw new System.NotImplementedException();
+            }
+
+            public void Free()
+            {
+            throw new System.NotImplementedException();
+            }
+            }
+            """;
 
             await CustomMarshallerAttributeFixerTest.VerifyCodeFixAsync(
                 source,
@@ -141,46 +141,46 @@ namespace LibraryImportGenerator.UnitTests
         public async Task ModeThatUsesManagedToUnmanagedShape_Missing_ContainerMethods_ReportsDiagnostic()
         {
             string source = """
-                using System.Runtime.InteropServices.Marshalling;
-                
-                class ManagedType {}
-                
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof({|#0:MarshallerType<>|}))]
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof({|#1:MarshallerType<>|}))]
-                [ContiguousCollectionMarshaller]
-                struct MarshallerType<T>
-                {
-                    public void FromManaged(ManagedType m) {}
-                    public nint ToUnmanaged() => default;
-                    public void Free() {}
-                }
-                """;
+            using System.Runtime.InteropServices.Marshalling;
+
+            class ManagedType {}
+
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof({|#0:MarshallerType<>|}))]
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof({|#1:MarshallerType<>|}))]
+            [ContiguousCollectionMarshaller]
+            struct MarshallerType<T>
+            {
+            public void FromManaged(ManagedType m) {}
+            public nint ToUnmanaged() => default;
+            public void Free() {}
+            }
+            """;
 
             string fixedSource = """
-                using System.Runtime.InteropServices.Marshalling;
-                
-                class ManagedType {}
-                
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof(MarshallerType<>))]
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof(MarshallerType<>))]
-                [ContiguousCollectionMarshaller]
-                struct MarshallerType<T>
-                {
-                    public void FromManaged(ManagedType m) {}
-                    public nint ToUnmanaged() => default;
-                    public void Free() {}
-                
-                    public System.ReadOnlySpan<nint> GetManagedValuesSource()
-                    {
-                        throw new System.NotImplementedException();
-                    }
-                
-                    public System.Span<T> GetUnmanagedValuesDestination()
-                    {
-                        throw new System.NotImplementedException();
-                    }
-                }
-                """;
+            using System.Runtime.InteropServices.Marshalling;
+
+            class ManagedType {}
+
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof(MarshallerType<>))]
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof(MarshallerType<>))]
+            [ContiguousCollectionMarshaller]
+            struct MarshallerType<T>
+            {
+            public void FromManaged(ManagedType m) {}
+            public nint ToUnmanaged() => default;
+            public void Free() {}
+
+            public System.ReadOnlySpan<nint> GetManagedValuesSource()
+            {
+            throw new System.NotImplementedException();
+            }
+
+            public System.Span<T> GetUnmanagedValuesDestination()
+            {
+            throw new System.NotImplementedException();
+            }
+            }
+            """;
 
             await CustomMarshallerAttributeFixerTest.VerifyCodeFixAsync(
                 source,
@@ -208,45 +208,45 @@ namespace LibraryImportGenerator.UnitTests
         public async Task ModeThatUsesManagedToUnmanagedShape_Missing_GetManagedValuesSource_ReportsDiagnostic()
         {
             string source = """
-                using System;
-                using System.Runtime.InteropServices.Marshalling;
-                
-                class ManagedType {}
-                
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof({|#0:MarshallerType<>|}))]
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof({|#1:MarshallerType<>|}))]
-                [ContiguousCollectionMarshaller]
-                struct MarshallerType<T>
-                {
-                    public void FromManaged(ManagedType m) {}
-                    public nint ToUnmanaged() => default;
-                    public void Free() {}
-                    public Span<T> GetUnmanagedValuesDestination() => default;
-                }
-                """;
+            using System;
+            using System.Runtime.InteropServices.Marshalling;
+
+            class ManagedType {}
+
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof({|#0:MarshallerType<>|}))]
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof({|#1:MarshallerType<>|}))]
+            [ContiguousCollectionMarshaller]
+            struct MarshallerType<T>
+            {
+            public void FromManaged(ManagedType m) {}
+            public nint ToUnmanaged() => default;
+            public void Free() {}
+            public Span<T> GetUnmanagedValuesDestination() => default;
+            }
+            """;
 
             string fixedSource = """
-                using System;
-                using System.Runtime.InteropServices.Marshalling;
-                
-                class ManagedType {}
-                
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof(MarshallerType<>))]
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof(MarshallerType<>))]
-                [ContiguousCollectionMarshaller]
-                struct MarshallerType<T>
-                {
-                    public void FromManaged(ManagedType m) {}
-                    public nint ToUnmanaged() => default;
-                    public void Free() {}
-                    public Span<T> GetUnmanagedValuesDestination() => default;
-                
-                    public ReadOnlySpan<nint> GetManagedValuesSource()
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """;
+            using System;
+            using System.Runtime.InteropServices.Marshalling;
+
+            class ManagedType {}
+
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof(MarshallerType<>))]
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof(MarshallerType<>))]
+            [ContiguousCollectionMarshaller]
+            struct MarshallerType<T>
+            {
+            public void FromManaged(ManagedType m) {}
+            public nint ToUnmanaged() => default;
+            public void Free() {}
+            public Span<T> GetUnmanagedValuesDestination() => default;
+
+            public ReadOnlySpan<nint> GetManagedValuesSource()
+            {
+            throw new NotImplementedException();
+            }
+            }
+            """;
 
             await CustomMarshallerAttributeFixerTest.VerifyCodeFixAsync(
                 source,
@@ -274,45 +274,45 @@ namespace LibraryImportGenerator.UnitTests
         public async Task ModeThatUsesManagedToUnmanagedShape_Missing_GetUnmanagedValuesDestination_ReportsDiagnostic()
         {
             string source = """
-                using System;
-                using System.Runtime.InteropServices.Marshalling;
-                
-                class ManagedType {}
-                
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof({|#0:MarshallerType<>|}))]
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof({|#1:MarshallerType<>|}))]
-                [ContiguousCollectionMarshaller]
-                struct MarshallerType<T>
-                {
-                    public void FromManaged(ManagedType m) {}
-                    public nint ToUnmanaged() => default;
-                    public void Free() {}
-                    public ReadOnlySpan<byte> GetManagedValuesSource() => default;
-                }
-                """;
+            using System;
+            using System.Runtime.InteropServices.Marshalling;
+
+            class ManagedType {}
+
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof({|#0:MarshallerType<>|}))]
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof({|#1:MarshallerType<>|}))]
+            [ContiguousCollectionMarshaller]
+            struct MarshallerType<T>
+            {
+            public void FromManaged(ManagedType m) {}
+            public nint ToUnmanaged() => default;
+            public void Free() {}
+            public ReadOnlySpan<byte> GetManagedValuesSource() => default;
+            }
+            """;
 
             string fixedSource = """
-                using System;
-                using System.Runtime.InteropServices.Marshalling;
-                
-                class ManagedType {}
-                
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof(MarshallerType<>))]
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof(MarshallerType<>))]
-                [ContiguousCollectionMarshaller]
-                struct MarshallerType<T>
-                {
-                    public void FromManaged(ManagedType m) {}
-                    public nint ToUnmanaged() => default;
-                    public void Free() {}
-                    public ReadOnlySpan<byte> GetManagedValuesSource() => default;
-                
-                    public Span<T> GetUnmanagedValuesDestination()
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """;
+            using System;
+            using System.Runtime.InteropServices.Marshalling;
+
+            class ManagedType {}
+
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof(MarshallerType<>))]
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof(MarshallerType<>))]
+            [ContiguousCollectionMarshaller]
+            struct MarshallerType<T>
+            {
+            public void FromManaged(ManagedType m) {}
+            public nint ToUnmanaged() => default;
+            public void Free() {}
+            public ReadOnlySpan<byte> GetManagedValuesSource() => default;
+
+            public Span<T> GetUnmanagedValuesDestination()
+            {
+            throw new NotImplementedException();
+            }
+            }
+            """;
 
             await CustomMarshallerAttributeFixerTest.VerifyCodeFixAsync(
                 source,
@@ -340,23 +340,23 @@ namespace LibraryImportGenerator.UnitTests
         public async Task ModeThatUsesManagedToUnmanagedShape_DoesNotReportDiagnostic()
         {
             string source = """
-                using System;
-                using System.Runtime.InteropServices.Marshalling;
-                
-                class ManagedType {}
-                
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof(MarshallerType<>))]
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof(MarshallerType<>))]
-                [ContiguousCollectionMarshaller]
-                struct MarshallerType<T>
-                {
-                    public void FromManaged(ManagedType m) {}
-                    public nint ToUnmanaged() => default;
-                    public void Free() {}
-                    public ReadOnlySpan<byte> GetManagedValuesSource() => default;
-                    public Span<T> GetUnmanagedValuesDestination() => default;
-                }
-                """;
+            using System;
+            using System.Runtime.InteropServices.Marshalling;
+
+            class ManagedType {}
+
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof(MarshallerType<>))]
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof(MarshallerType<>))]
+            [ContiguousCollectionMarshaller]
+            struct MarshallerType<T>
+            {
+            public void FromManaged(ManagedType m) {}
+            public nint ToUnmanaged() => default;
+            public void Free() {}
+            public ReadOnlySpan<byte> GetManagedValuesSource() => default;
+            public Span<T> GetUnmanagedValuesDestination() => default;
+            }
+            """;
 
             await VerifyCS.VerifyAnalyzerAsync(source);
         }
@@ -365,23 +365,23 @@ namespace LibraryImportGenerator.UnitTests
         public async Task ModeThatUsesManagedToUnmanagedShape_InvalidCollectionElementType_DoesNotReportDiagnostic()
         {
             string source = """
-                using System;
-                using System.Runtime.InteropServices.Marshalling;
-                
-                class ManagedType {}
-                
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof({|#0:MarshallerType<>|}))]
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof({|#1:MarshallerType<>|}))]
-                [ContiguousCollectionMarshaller]
-                struct MarshallerType<T>
-                {
-                    public void FromManaged(ManagedType m) {}
-                    public nint ToUnmanaged() => default;
-                    public void Free() {}
-                    public ReadOnlySpan<byte> GetManagedValuesSource() => default;
-                    public Span<byte> GetUnmanagedValuesDestination() => default;
-                }
-                """;
+            using System;
+            using System.Runtime.InteropServices.Marshalling;
+
+            class ManagedType {}
+
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof({|#0:MarshallerType<>|}))]
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof({|#1:MarshallerType<>|}))]
+            [ContiguousCollectionMarshaller]
+            struct MarshallerType<T>
+            {
+            public void FromManaged(ManagedType m) {}
+            public nint ToUnmanaged() => default;
+            public void Free() {}
+            public ReadOnlySpan<byte> GetManagedValuesSource() => default;
+            public Span<byte> GetUnmanagedValuesDestination() => default;
+            }
+            """;
 
             await VerifyCS.VerifyAnalyzerAsync(
                 source,
@@ -406,54 +406,54 @@ namespace LibraryImportGenerator.UnitTests
         public async Task ModeThatUsesUnmanagedToManagedShape_Missing_AllMethods_ReportsDiagnostic()
         {
             string source = """
-                using System.Runtime.InteropServices.Marshalling;
-                
-                class ManagedType {}
-                
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof({|#0:MarshallerType<>|}))]
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof({|#1:MarshallerType<>|}))]
-                [ContiguousCollectionMarshaller]
-                struct MarshallerType<T>
-                {
-                }
-                """;
+            using System.Runtime.InteropServices.Marshalling;
+
+            class ManagedType {}
+
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof({|#0:MarshallerType<>|}))]
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof({|#1:MarshallerType<>|}))]
+            [ContiguousCollectionMarshaller]
+            struct MarshallerType<T>
+            {
+            }
+            """;
 
             string fixedSource = """
-                using System.Runtime.InteropServices.Marshalling;
-                
-                class ManagedType {}
-                
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof(MarshallerType<>))]
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof(MarshallerType<>))]
-                [ContiguousCollectionMarshaller]
-                struct MarshallerType<T>
-                {
-                    public void FromUnmanaged(nint unmanaged)
-                    {
-                        throw new System.NotImplementedException();
-                    }
+            using System.Runtime.InteropServices.Marshalling;
 
-                    public ManagedType ToManaged()
-                    {
-                        throw new System.NotImplementedException();
-                    }
-                
-                    public System.ReadOnlySpan<T> GetUnmanagedValuesSource(int numElements)
-                    {
-                        throw new System.NotImplementedException();
-                    }
-                
-                    public System.Span<nint> GetManagedValuesDestination(int numElements)
-                    {
-                        throw new System.NotImplementedException();
-                    }
-                
-                    public void Free()
-                    {
-                        throw new System.NotImplementedException();
-                    }
-                }
-                """;
+            class ManagedType {}
+
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof(MarshallerType<>))]
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof(MarshallerType<>))]
+            [ContiguousCollectionMarshaller]
+            struct MarshallerType<T>
+            {
+            public void FromUnmanaged(nint unmanaged)
+            {
+            throw new System.NotImplementedException();
+            }
+
+            public ManagedType ToManaged()
+            {
+            throw new System.NotImplementedException();
+            }
+
+            public System.ReadOnlySpan<T> GetUnmanagedValuesSource(int numElements)
+            {
+            throw new System.NotImplementedException();
+            }
+
+            public System.Span<nint> GetManagedValuesDestination(int numElements)
+            {
+            throw new System.NotImplementedException();
+            }
+
+            public void Free()
+            {
+            throw new System.NotImplementedException();
+            }
+            }
+            """;
 
             await CustomMarshallerAttributeFixerTest.VerifyCodeFixAsync(
                 source,
@@ -525,46 +525,46 @@ namespace LibraryImportGenerator.UnitTests
         public async Task ModeThatUsesUnmanagedToManagedShape_Missing_ContainerMethods_ReportsDiagnostic()
         {
             string source = """
-                using System.Runtime.InteropServices.Marshalling;
-                
-                class ManagedType {}
-                
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof({|#0:MarshallerType<>|}))]
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof({|#1:MarshallerType<>|}))]
-                [ContiguousCollectionMarshaller]
-                struct MarshallerType<T>
-                {
-                    public void FromUnmanaged(int f) {}
-                    public ManagedType ToManaged() => default;
-                    public void Free() {}
-                }
-                """;
+            using System.Runtime.InteropServices.Marshalling;
+
+            class ManagedType {}
+
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof({|#0:MarshallerType<>|}))]
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof({|#1:MarshallerType<>|}))]
+            [ContiguousCollectionMarshaller]
+            struct MarshallerType<T>
+            {
+            public void FromUnmanaged(int f) {}
+            public ManagedType ToManaged() => default;
+            public void Free() {}
+            }
+            """;
 
             string fixedSource = """
-                using System.Runtime.InteropServices.Marshalling;
-                
-                class ManagedType {}
-                
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof(MarshallerType<>))]
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof(MarshallerType<>))]
-                [ContiguousCollectionMarshaller]
-                struct MarshallerType<T>
-                {
-                    public void FromUnmanaged(int f) {}
-                    public ManagedType ToManaged() => default;
-                    public void Free() {}
-                
-                    public System.ReadOnlySpan<T> GetUnmanagedValuesSource(int numElements)
-                    {
-                        throw new System.NotImplementedException();
-                    }
-                
-                    public System.Span<nint> GetManagedValuesDestination(int numElements)
-                    {
-                        throw new System.NotImplementedException();
-                    }
-                }
-                """;
+            using System.Runtime.InteropServices.Marshalling;
+
+            class ManagedType {}
+
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof(MarshallerType<>))]
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof(MarshallerType<>))]
+            [ContiguousCollectionMarshaller]
+            struct MarshallerType<T>
+            {
+            public void FromUnmanaged(int f) {}
+            public ManagedType ToManaged() => default;
+            public void Free() {}
+
+            public System.ReadOnlySpan<T> GetUnmanagedValuesSource(int numElements)
+            {
+            throw new System.NotImplementedException();
+            }
+
+            public System.Span<nint> GetManagedValuesDestination(int numElements)
+            {
+            throw new System.NotImplementedException();
+            }
+            }
+            """;
 
             await CustomMarshallerAttributeFixerTest.VerifyCodeFixAsync(
                 source,
@@ -592,45 +592,45 @@ namespace LibraryImportGenerator.UnitTests
         public async Task ModeThatUsesUnmanagedToManagedShape_Missing_GetUnmanagedValuesSource_ReportsDiagnostic()
         {
             string source = """
-                using System;
-                using System.Runtime.InteropServices.Marshalling;
-                
-                class ManagedType {}
-                
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof({|#0:MarshallerType<>|}))]
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof({|#1:MarshallerType<>|}))]
-                [ContiguousCollectionMarshaller]
-                struct MarshallerType<T>
-                {
-                    public void FromUnmanaged(int f) {}
-                    public ManagedType ToManaged() => default;
-                    public void Free() {}
-                    public Span<byte> GetManagedValuesDestination(int numElements) => default;
-                }
-                """;
+            using System;
+            using System.Runtime.InteropServices.Marshalling;
+
+            class ManagedType {}
+
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof({|#0:MarshallerType<>|}))]
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof({|#1:MarshallerType<>|}))]
+            [ContiguousCollectionMarshaller]
+            struct MarshallerType<T>
+            {
+            public void FromUnmanaged(int f) {}
+            public ManagedType ToManaged() => default;
+            public void Free() {}
+            public Span<byte> GetManagedValuesDestination(int numElements) => default;
+            }
+            """;
 
             string fixedSource = """
-                using System;
-                using System.Runtime.InteropServices.Marshalling;
-                
-                class ManagedType {}
-                
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof(MarshallerType<>))]
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof(MarshallerType<>))]
-                [ContiguousCollectionMarshaller]
-                struct MarshallerType<T>
-                {
-                    public void FromUnmanaged(int f) {}
-                    public ManagedType ToManaged() => default;
-                    public void Free() {}
-                    public Span<byte> GetManagedValuesDestination(int numElements) => default;
+            using System;
+            using System.Runtime.InteropServices.Marshalling;
 
-                    public ReadOnlySpan<T> GetUnmanagedValuesSource(int numElements)
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """;
+            class ManagedType {}
+
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof(MarshallerType<>))]
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof(MarshallerType<>))]
+            [ContiguousCollectionMarshaller]
+            struct MarshallerType<T>
+            {
+            public void FromUnmanaged(int f) {}
+            public ManagedType ToManaged() => default;
+            public void Free() {}
+            public Span<byte> GetManagedValuesDestination(int numElements) => default;
+
+            public ReadOnlySpan<T> GetUnmanagedValuesSource(int numElements)
+            {
+            throw new NotImplementedException();
+            }
+            }
+            """;
 
             await CustomMarshallerAttributeFixerTest.VerifyCodeFixAsync(
                 source,
@@ -658,45 +658,45 @@ namespace LibraryImportGenerator.UnitTests
         public async Task ModeThatUsesUnmanagedToManagedShape_Missing_GetManagedValuesDestination_ReportsDiagnostic()
         {
             string source = """
-                using System;
-                using System.Runtime.InteropServices.Marshalling;
-                
-                class ManagedType {}
-                
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof({|#0:MarshallerType<>|}))]
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof({|#1:MarshallerType<>|}))]
-                [ContiguousCollectionMarshaller]
-                struct MarshallerType<T>
-                {
-                    public void FromUnmanaged(int f) {}
-                    public ManagedType ToManaged() => default;
-                    public void Free() {}
-                    public ReadOnlySpan<T> GetUnmanagedValuesSource(int numElements) => default;
-                }
-                """;
+            using System;
+            using System.Runtime.InteropServices.Marshalling;
+
+            class ManagedType {}
+
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof({|#0:MarshallerType<>|}))]
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof({|#1:MarshallerType<>|}))]
+            [ContiguousCollectionMarshaller]
+            struct MarshallerType<T>
+            {
+            public void FromUnmanaged(int f) {}
+            public ManagedType ToManaged() => default;
+            public void Free() {}
+            public ReadOnlySpan<T> GetUnmanagedValuesSource(int numElements) => default;
+            }
+            """;
 
             string fixedSource = """
-                using System;
-                using System.Runtime.InteropServices.Marshalling;
-                
-                class ManagedType {}
-                
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof(MarshallerType<>))]
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof(MarshallerType<>))]
-                [ContiguousCollectionMarshaller]
-                struct MarshallerType<T>
-                {
-                    public void FromUnmanaged(int f) {}
-                    public ManagedType ToManaged() => default;
-                    public void Free() {}
-                    public ReadOnlySpan<T> GetUnmanagedValuesSource(int numElements) => default;
-                
-                    public Span<nint> GetManagedValuesDestination(int numElements)
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-                """;
+            using System;
+            using System.Runtime.InteropServices.Marshalling;
+
+            class ManagedType {}
+
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof(MarshallerType<>))]
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof(MarshallerType<>))]
+            [ContiguousCollectionMarshaller]
+            struct MarshallerType<T>
+            {
+            public void FromUnmanaged(int f) {}
+            public ManagedType ToManaged() => default;
+            public void Free() {}
+            public ReadOnlySpan<T> GetUnmanagedValuesSource(int numElements) => default;
+
+            public Span<nint> GetManagedValuesDestination(int numElements)
+            {
+            throw new NotImplementedException();
+            }
+            }
+            """;
 
             await CustomMarshallerAttributeFixerTest.VerifyCodeFixAsync(
                 source,
@@ -724,23 +724,23 @@ namespace LibraryImportGenerator.UnitTests
         public async Task ModeThatUsesUnmanagedToManagedShape_DoesNotReportDiagnostic()
         {
             string source = """
-                using System;
-                using System.Runtime.InteropServices.Marshalling;
-                
-                class ManagedType {}
-                
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof(MarshallerType<>))]
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof(MarshallerType<>))]
-                [ContiguousCollectionMarshaller]
-                struct MarshallerType<T>
-                {
-                    public void FromUnmanaged(int f) {}
-                    public ManagedType ToManaged() => default;
-                    public void Free() {}
-                    public Span<byte> GetManagedValuesDestination(int numElements) => default;
-                    public ReadOnlySpan<T> GetUnmanagedValuesSource(int numElements) => default;
-                }
-                """;
+            using System;
+            using System.Runtime.InteropServices.Marshalling;
+
+            class ManagedType {}
+
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof(MarshallerType<>))]
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof(MarshallerType<>))]
+            [ContiguousCollectionMarshaller]
+            struct MarshallerType<T>
+            {
+            public void FromUnmanaged(int f) {}
+            public ManagedType ToManaged() => default;
+            public void Free() {}
+            public Span<byte> GetManagedValuesDestination(int numElements) => default;
+            public ReadOnlySpan<T> GetUnmanagedValuesSource(int numElements) => default;
+            }
+            """;
 
             await VerifyCS.VerifyAnalyzerAsync(source);
         }
@@ -749,23 +749,23 @@ namespace LibraryImportGenerator.UnitTests
         public async Task ModeThatUsesUnmanagedToManagedShape_InvalidCollectionElementType_ReportsDiagnostic()
         {
             string source = """
-                using System;
-                using System.Runtime.InteropServices.Marshalling;
-                
-                class ManagedType {}
-                
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof({|#0:MarshallerType<>|}))]
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof({|#1:MarshallerType<>|}))]
-                [ContiguousCollectionMarshaller]
-                struct MarshallerType<T>
-                {
-                    public void FromUnmanaged(int f) {}
-                    public ManagedType ToManaged() => default;
-                    public void Free() {}
-                    public Span<byte> GetManagedValuesDestination(int numElements) => default;
-                    public ReadOnlySpan<int> GetUnmanagedValuesSource(int numElements) => default;
-                }
-                """;
+            using System;
+            using System.Runtime.InteropServices.Marshalling;
+
+            class ManagedType {}
+
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof({|#0:MarshallerType<>|}))]
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof({|#1:MarshallerType<>|}))]
+            [ContiguousCollectionMarshaller]
+            struct MarshallerType<T>
+            {
+            public void FromUnmanaged(int f) {}
+            public ManagedType ToManaged() => default;
+            public void Free() {}
+            public Span<byte> GetManagedValuesDestination(int numElements) => default;
+            public ReadOnlySpan<int> GetUnmanagedValuesSource(int numElements) => default;
+            }
+            """;
 
             await VerifyCS.VerifyAnalyzerAsync(
                 source,
@@ -790,48 +790,48 @@ namespace LibraryImportGenerator.UnitTests
         public async Task CallerAllocatedBuffer_NoBufferSize_ReportsDiagnostic()
         {
             string source = """
-                using System;
-                using System.Runtime.InteropServices.Marshalling;
-                
-                class ManagedType {}
-                
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof({|#0:MarshallerType<>|}))]
-                [ContiguousCollectionMarshaller]
-                struct MarshallerType<T>
-                {
-                    public void FromManaged(ManagedType m, Span<byte> buffer) {}
-                    public nint ToUnmanaged() => default;
-                    public void Free() {}
-                    public ReadOnlySpan<byte> GetManagedValuesSource() => default;
-                    public Span<T> GetUnmanagedValuesDestination() => default;
-                }
-                """;
+            using System;
+            using System.Runtime.InteropServices.Marshalling;
+
+            class ManagedType {}
+
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof({|#0:MarshallerType<>|}))]
+            [ContiguousCollectionMarshaller]
+            struct MarshallerType<T>
+            {
+            public void FromManaged(ManagedType m, Span<byte> buffer) {}
+            public nint ToUnmanaged() => default;
+            public void Free() {}
+            public ReadOnlySpan<byte> GetManagedValuesSource() => default;
+            public Span<T> GetUnmanagedValuesDestination() => default;
+            }
+            """;
 
             string fixedSource = """
-                using System;
-                using System.Runtime.InteropServices.Marshalling;
-                
-                class ManagedType {}
-                
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof(MarshallerType<>))]
-                [ContiguousCollectionMarshaller]
-                struct MarshallerType<T>
-                {
-                    public void FromManaged(ManagedType m, Span<byte> buffer) {}
-                    public nint ToUnmanaged() => default;
-                    public void Free() {}
-                    public ReadOnlySpan<byte> GetManagedValuesSource() => default;
-                    public Span<T> GetUnmanagedValuesDestination() => default;
+            using System;
+            using System.Runtime.InteropServices.Marshalling;
 
-                    public static int BufferSize
-                    {
-                        get
-                        {
-                            throw new NotImplementedException();
-                        }
-                    }
-                }
-                """;
+            class ManagedType {}
+
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof(MarshallerType<>))]
+            [ContiguousCollectionMarshaller]
+            struct MarshallerType<T>
+            {
+            public void FromManaged(ManagedType m, Span<byte> buffer) {}
+            public nint ToUnmanaged() => default;
+            public void Free() {}
+            public ReadOnlySpan<byte> GetManagedValuesSource() => default;
+            public Span<T> GetUnmanagedValuesDestination() => default;
+
+            public static int BufferSize
+            {
+            get
+            {
+            throw new NotImplementedException();
+            }
+            }
+            }
+            """;
 
             await CustomMarshallerAttributeFixerTest.VerifyCodeFixAsync(
                 source,
@@ -847,27 +847,27 @@ namespace LibraryImportGenerator.UnitTests
         public async Task ModeThatUsesBidirectionalShape_DoesNotReportDiagnostic()
         {
             string source = """
-                using System;
-                using System.Runtime.InteropServices.Marshalling;
-                
-                class ManagedType {}
-                
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedRef, typeof({|#0:MarshallerType<>|}))]
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedRef, typeof({|#1:MarshallerType<>|}))]
-                [ContiguousCollectionMarshaller]
-                struct MarshallerType<T>
-                {
-                    public void FromManaged(ManagedType m) {}
-                    public nint ToUnmanaged() => default;
-                    public ReadOnlySpan<byte> GetManagedValuesSource() => default;
-                    public Span<T> GetUnmanagedValuesDestination() => default;
-                    public void FromUnmanaged(nint i) {}
-                    public ManagedType ToManaged() => default;
-                    public Span<byte> GetManagedValuesDestination(int numElements) => default;
-                    public ReadOnlySpan<T> GetUnmanagedValuesSource(int numElements) => default;
-                    public void Free() {}
-                }
-                """;
+            using System;
+            using System.Runtime.InteropServices.Marshalling;
+
+            class ManagedType {}
+
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedRef, typeof({|#0:MarshallerType<>|}))]
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedRef, typeof({|#1:MarshallerType<>|}))]
+            [ContiguousCollectionMarshaller]
+            struct MarshallerType<T>
+            {
+            public void FromManaged(ManagedType m) {}
+            public nint ToUnmanaged() => default;
+            public ReadOnlySpan<byte> GetManagedValuesSource() => default;
+            public Span<T> GetUnmanagedValuesDestination() => default;
+            public void FromUnmanaged(nint i) {}
+            public ManagedType ToManaged() => default;
+            public Span<byte> GetManagedValuesDestination(int numElements) => default;
+            public ReadOnlySpan<T> GetUnmanagedValuesSource(int numElements) => default;
+            public void Free() {}
+            }
+            """;
 
             await VerifyCS.VerifyAnalyzerAsync(source);
         }
@@ -876,27 +876,27 @@ namespace LibraryImportGenerator.UnitTests
         public async Task ModeThatUsesBidirectionalShape_MismatchedManagedElementTypes_ReportsDiagnostic()
         {
             string source = """
-                using System;
-                using System.Runtime.InteropServices.Marshalling;
-                
-                class ManagedType {}
-                
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedRef, typeof({|#0:MarshallerType<>|}))]
-                [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedRef, typeof({|#1:MarshallerType<>|}))]
-                [ContiguousCollectionMarshaller]
-                struct MarshallerType<T>
-                {
-                    public void FromManaged(ManagedType m) {}
-                    public nint ToUnmanaged() => default;
-                    public ReadOnlySpan<byte> GetManagedValuesSource() => default;
-                    public Span<T> GetUnmanagedValuesDestination() => default;
-                    public void FromUnmanaged(nint i) {}
-                    public ManagedType ToManaged() => default;
-                    public Span<int> GetManagedValuesDestination(int numElements) => default;
-                    public ReadOnlySpan<T> GetUnmanagedValuesSource(int numElements) => default;
-                    public void Free() {}
-                }
-                """;
+            using System;
+            using System.Runtime.InteropServices.Marshalling;
+
+            class ManagedType {}
+
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedRef, typeof({|#0:MarshallerType<>|}))]
+            [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedRef, typeof({|#1:MarshallerType<>|}))]
+            [ContiguousCollectionMarshaller]
+            struct MarshallerType<T>
+            {
+            public void FromManaged(ManagedType m) {}
+            public nint ToUnmanaged() => default;
+            public ReadOnlySpan<byte> GetManagedValuesSource() => default;
+            public Span<T> GetUnmanagedValuesDestination() => default;
+            public void FromUnmanaged(nint i) {}
+            public ManagedType ToManaged() => default;
+            public Span<int> GetManagedValuesDestination(int numElements) => default;
+            public ReadOnlySpan<T> GetUnmanagedValuesSource(int numElements) => default;
+            public void Free() {}
+            }
+            """;
 
             await VerifyCS.VerifyAnalyzerAsync(
                 source,
@@ -921,25 +921,25 @@ namespace LibraryImportGenerator.UnitTests
         public async Task ModeThatUsesBidirectionalShape_ArrayTarget_DoesNotReportDiagnostic()
         {
             string source = """
-                using System;
-                using System.Runtime.InteropServices.Marshalling;
-                
-                [CustomMarshaller(typeof(CustomMarshallerAttribute.GenericPlaceholder[]), MarshalMode.ManagedToUnmanagedRef, typeof({|#0:MarshallerType<,>|}))]
-                [CustomMarshaller(typeof(CustomMarshallerAttribute.GenericPlaceholder[]), MarshalMode.UnmanagedToManagedRef, typeof({|#1:MarshallerType<,>|}))]
-                [ContiguousCollectionMarshaller]
-                struct MarshallerType<T, TNative>
-                {
-                    public void FromManaged(T[] m) {}
-                    public nint ToUnmanaged() => default;
-                    public ReadOnlySpan<T> GetManagedValuesSource() => default;
-                    public Span<TNative> GetUnmanagedValuesDestination() => default;
-                    public void FromUnmanaged(nint i) {}
-                    public T[] ToManaged() => default;
-                    public Span<T> GetManagedValuesDestination(int numElements) => default;
-                    public ReadOnlySpan<TNative> GetUnmanagedValuesSource(int numElements) => default;
-                    public void Free() {}
-                }
-                """;
+            using System;
+            using System.Runtime.InteropServices.Marshalling;
+
+            [CustomMarshaller(typeof(CustomMarshallerAttribute.GenericPlaceholder[]), MarshalMode.ManagedToUnmanagedRef, typeof({|#0:MarshallerType<,>|}))]
+            [CustomMarshaller(typeof(CustomMarshallerAttribute.GenericPlaceholder[]), MarshalMode.UnmanagedToManagedRef, typeof({|#1:MarshallerType<,>|}))]
+            [ContiguousCollectionMarshaller]
+            struct MarshallerType<T, TNative>
+            {
+            public void FromManaged(T[] m) {}
+            public nint ToUnmanaged() => default;
+            public ReadOnlySpan<T> GetManagedValuesSource() => default;
+            public Span<TNative> GetUnmanagedValuesDestination() => default;
+            public void FromUnmanaged(nint i) {}
+            public T[] ToManaged() => default;
+            public Span<T> GetManagedValuesDestination(int numElements) => default;
+            public ReadOnlySpan<TNative> GetUnmanagedValuesSource(int numElements) => default;
+            public void Free() {}
+            }
+            """;
 
             await VerifyCS.VerifyAnalyzerAsync(source);
         }

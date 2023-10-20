@@ -1283,15 +1283,15 @@ namespace NS
         public void UnterminatedRawString1()
         {
             var code = """""""
-                var x = """"""
-                    1
-                    2
-                    3
-                    4
-                    5
-                    """;
+            var x = """"""
+            1
+            2
+            3
+            4
+            5
+            """;
 
-                """"""";
+            """"""";
 
             AssertSmartIndent(code, indentationLine: 3, expectedIndentation: 4);
         }
@@ -1300,15 +1300,15 @@ namespace NS
         public void UnterminatedInterpolatedRawString1()
         {
             var code = """""""
-                var x = $""""""
-                    1
-                    2
-                    3
-                    4
-                    5
-                    """;
+            var x = $""""""
+            1
+            2
+            3
+            4
+            5
+            """;
 
-                """"""";
+            """"""";
 
             AssertSmartIndent(code, indentationLine: 3, expectedIndentation: 4);
         }

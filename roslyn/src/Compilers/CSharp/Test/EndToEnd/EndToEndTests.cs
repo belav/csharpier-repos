@@ -243,14 +243,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EndToEnd
                     """
                     static class E
                     {
-                        public static C M(this C c, string x) { return c; }
+                    public static C M(this C c, string x) { return c; }
                     }
                     class C
                     {
-                        static C GetC() => new C();
-                        void M2()
-                        {
-                            GetC()
+                    static C GetC() => new C();
+                    void M2()
+                    {
+                    GetC()
                     """
                 );
                 for (int i = 0; i < depth; i++)
@@ -414,9 +414,9 @@ public class Test
             */
             var declarations = new string[number];
             declarations[0] = """
-                Class C0(Of T0)
-                End Class
-                """;
+            Class C0(Of T0)
+            End Class
+            """;
             for (int i = 1; i < number; i++)
             {
                 declarations[
@@ -566,9 +566,9 @@ public class Test
             var sb = new StringBuilder();
             sb.AppendLine(
                 """
-                    _ = new System.Collections.Generic.Dictionary<string, string>
-                    {
-                    """
+                _ = new System.Collections.Generic.Dictionary<string, string>
+                {
+                """
             );
 
             for (int i = 0; i < 100; i++)
@@ -626,19 +626,19 @@ public class Test
             files.Add(
                 (
                     """
-                class C
-                {
+                    class C
+                    {
                     public static void M() => throw null!;
-                }
+                    }
 
-                namespace System.Runtime.CompilerServices
-                {
+                    namespace System.Runtime.CompilerServices
+                    {
                     public class InterceptsLocationAttribute : Attribute
                     {
-                        public InterceptsLocationAttribute(string path, int line, int column) { }
+                    public InterceptsLocationAttribute(string path, int line, int column) { }
                     }
-                }
-                """,
+                    }
+                    """,
                     "C.cs"
                 )
             );
@@ -729,14 +729,14 @@ public class Test
                 ? """
                 M2(x, L0);
                 static I0 L0(string arg) {
-                    arg = arg + "0";
-                    return default;
+                arg = arg + "0";
+                return default;
                 }
                 """
                 : """
                 M2(x, static I0 (string arg) => {
-                    arg = arg + "0";
-                    return default;
+                arg = arg + "0";
+                return default;
                 });
                 """;
 

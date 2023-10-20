@@ -17,18 +17,18 @@ namespace ComInterfaceGenerator.Unit.Tests
         public async Task NonPartialClassWarns()
         {
             string source = """
-                using System.Runtime.InteropServices;
-                using System.Runtime.InteropServices.Marshalling;
+            using System.Runtime.InteropServices;
+            using System.Runtime.InteropServices.Marshalling;
 
-                [GeneratedComInterface]
-                partial interface INativeAPI
-                {
-                }
+            [GeneratedComInterface]
+            partial interface INativeAPI
+            {
+            }
 
-                [GeneratedComClass]
-                internal class {|#0:C|} : INativeAPI {}
+            [GeneratedComClass]
+            internal class {|#0:C|} : INativeAPI {}
 
-                """;
+            """;
 
             await VerifyCS.VerifySourceGeneratorAsync(
                 source,
@@ -44,21 +44,21 @@ namespace ComInterfaceGenerator.Unit.Tests
         public async Task NonPartialContainingTypeWarns()
         {
             string source = """
-                using System.Runtime.InteropServices;
-                using System.Runtime.InteropServices.Marshalling;
+            using System.Runtime.InteropServices;
+            using System.Runtime.InteropServices.Marshalling;
 
-                public class Test
-                {
-                    [GeneratedComInterface]
-                    partial interface INativeAPI
-                    {
-                    }
+            public class Test
+            {
+            [GeneratedComInterface]
+            partial interface INativeAPI
+            {
+            }
 
-                    [GeneratedComClass]
-                    internal partial class {|#0:C|} : INativeAPI {}
-                }
+            [GeneratedComClass]
+            internal partial class {|#0:C|} : INativeAPI {}
+            }
 
-                """;
+            """;
 
             await VerifyCS.VerifySourceGeneratorAsync(
                 source,
@@ -86,21 +86,21 @@ namespace ComInterfaceGenerator.Unit.Tests
         public async Task UnsafeCodeNotEnabledWarns()
         {
             string source = """
-                using System.Runtime.InteropServices;
-                using System.Runtime.InteropServices.Marshalling;
+            using System.Runtime.InteropServices;
+            using System.Runtime.InteropServices.Marshalling;
 
-                public partial class Test
-                {
-                    [GeneratedComInterface]
-                    internal partial interface INativeAPI
-                    {
-                    }
+            public partial class Test
+            {
+            [GeneratedComInterface]
+            internal partial interface INativeAPI
+            {
+            }
 
-                    [GeneratedComClass]
-                    internal partial class {|#0:C|} : INativeAPI {}
-                }
+            [GeneratedComClass]
+            internal partial class {|#0:C|} : INativeAPI {}
+            }
 
-                """;
+            """;
 
             var test = new UnsafeBlocksNotAllowedTest(false);
             test.TestState.Sources.Add(source);
@@ -117,19 +117,19 @@ namespace ComInterfaceGenerator.Unit.Tests
         public async Task ClassThatDoesNotInheritFromGeneratedInterfaceWarns()
         {
             string source = """
-                using System.Runtime.InteropServices;
-                using System.Runtime.InteropServices.Marshalling;
+            using System.Runtime.InteropServices;
+            using System.Runtime.InteropServices.Marshalling;
 
-                public partial class Test{
-                    internal interface INativeAPI
-                    {
-                    }
+            public partial class Test{
+            internal interface INativeAPI
+            {
+            }
 
-                    [GeneratedComClass]
-                    internal partial class {|#0:C|} : INativeAPI {}
-                }
+            [GeneratedComClass]
+            internal partial class {|#0:C|} : INativeAPI {}
+            }
 
-                """;
+            """;
 
             await VerifyCS.VerifySourceGeneratorAsync(
                 source,

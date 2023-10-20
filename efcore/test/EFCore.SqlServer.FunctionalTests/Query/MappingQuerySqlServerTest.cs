@@ -12,9 +12,9 @@ public class MappingQuerySqlServerTest
 
         AssertSql(
             """
-SELECT [c].[CustomerID], [c].[CompanyName]
-FROM [dbo].[Customers] AS [c]
-"""
+            SELECT [c].[CustomerID], [c].[CompanyName]
+            FROM [dbo].[Customers] AS [c]
+            """
         );
     }
 
@@ -24,9 +24,9 @@ FROM [dbo].[Customers] AS [c]
 
         AssertSql(
             """
-SELECT [e].[EmployeeID], [e].[City]
-FROM [dbo].[Employees] AS [e]
-"""
+            SELECT [e].[EmployeeID], [e].[City]
+            FROM [dbo].[Employees] AS [e]
+            """
         );
     }
 
@@ -36,9 +36,9 @@ FROM [dbo].[Employees] AS [e]
 
         AssertSql(
             """
-SELECT [o].[OrderID], [o].[ShipVia]
-FROM [dbo].[Orders] AS [o]
-"""
+            SELECT [o].[OrderID], [o].[ShipVia]
+            FROM [dbo].[Orders] AS [o]
+            """
         );
     }
 
@@ -48,9 +48,9 @@ FROM [dbo].[Orders] AS [o]
 
         AssertSql(
             """
-SELECT [o].[ShipVia]
-FROM [dbo].[Orders] AS [o]
-"""
+            SELECT [o].[ShipVia]
+            FROM [dbo].[Orders] AS [o]
+            """
         );
     }
 

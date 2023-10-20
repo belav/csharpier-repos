@@ -405,11 +405,11 @@ namespace Wasm.Build.Tests
                 Path.Combine(_projectDir, "Directory.Build.targets"),
                 """
                 <Project>
-                  <Target Name="PrintRuntimePackPath" BeforeTargets="Build">
-                      <Message Text="** MicrosoftNetCoreAppRuntimePackDir : '@(ResolvedRuntimePack -> '%(PackageDirectory)')'" Importance="High" Condition="@(ResolvedRuntimePack->Count()) > 0" />
-                  </Target>
+                <Target Name="PrintRuntimePackPath" BeforeTargets="Build">
+                <Message Text="** MicrosoftNetCoreAppRuntimePackDir : '@(ResolvedRuntimePack -> '%(PackageDirectory)')'" Importance="High" Condition="@(ResolvedRuntimePack->Count()) > 0" />
+                </Target>
 
-                  <Import Project="WasmOverridePacks.targets" />
+                <Import Project="WasmOverridePacks.targets" />
                 </Project>
                 """
             );

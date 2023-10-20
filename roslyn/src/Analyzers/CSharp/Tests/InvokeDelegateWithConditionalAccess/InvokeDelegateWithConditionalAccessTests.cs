@@ -36,27 +36,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        [||]var v = a;
-                        if (v != null)
-                        {
-                            v();
-                        }
-                    }
+                void Goo()
+                {
+                [||]var v = a;
+                if (v != null)
+                {
+                v();
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        a?.Invoke();
-                    }
+                void Goo()
+                {
+                a?.Invoke();
+                }
                 }
                 """
             );
@@ -69,27 +69,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        var v = a;
-                        [||]if (v != null)
-                        {
-                            v();
-                        }
-                    }
+                void Goo()
+                {
+                var v = a;
+                [||]if (v != null)
+                {
+                v();
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        a?.Invoke();
-                    }
+                void Goo()
+                {
+                a?.Invoke();
+                }
                 }
                 """
             );
@@ -102,27 +102,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        var v = a;
-                        if (v != null)
-                        {
-                            [||]v();
-                        }
-                    }
+                void Goo()
+                {
+                var v = a;
+                if (v != null)
+                {
+                [||]v();
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        a?.Invoke();
-                    }
+                void Goo()
+                {
+                a?.Invoke();
+                }
                 }
                 """
             );
@@ -135,16 +135,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        [||]var v = a;
-                        if (v != null)
-                        {
-                            v();
-                        }
-                    }
+                void Goo()
+                {
+                [||]var v = a;
+                if (v != null)
+                {
+                v();
+                }
+                }
                 }
                 """,
                 new TestParameters(
@@ -160,27 +160,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        [||]var v = a;
-                        if (null != v)
-                        {
-                            v();
-                        }
-                    }
+                void Goo()
+                {
+                [||]var v = a;
+                if (null != v)
+                {
+                v();
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        a?.Invoke();
-                    }
+                void Goo()
+                {
+                a?.Invoke();
+                }
                 }
                 """
             );
@@ -193,25 +193,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        [||]var v = a;
-                        if (null != v)
-                            v();
-                    }
+                void Goo()
+                {
+                [||]var v = a;
+                if (null != v)
+                v();
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        a?.Invoke();
-                    }
+                void Goo()
+                {
+                a?.Invoke();
+                }
                 }
                 """
             );
@@ -224,29 +224,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        bool b = true;
-                        [||]var v = b ? a : null;
-                        if (v != null)
-                        {
-                            v();
-                        }
-                    }
+                void Goo()
+                {
+                bool b = true;
+                [||]var v = b ? a : null;
+                if (v != null)
+                {
+                v();
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        bool b = true;
-                        (b ? a : null)?.Invoke();
-                    }
+                void Goo()
+                {
+                bool b = true;
+                (b ? a : null)?.Invoke();
+                }
                 }
                 """
             );
@@ -259,19 +259,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        [||]var v = a;
-                        if (v != null)
-                        {
-                            v();
-                        }
-                        else
-                        {
-                        }
-                    }
+                void Goo()
+                {
+                [||]var v = a;
+                if (v != null)
+                {
+                v();
+                }
+                else
+                {
+                }
+                }
                 }
                 """
             );
@@ -284,16 +284,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        [||]var v = a, x = a;
-                        if (v != null)
-                        {
-                            v();
-                        }
-                    }
+                void Goo()
+                {
+                [||]var v = a, x = a;
+                if (v != null)
+                {
+                v();
+                }
+                }
                 }
                 """
             );
@@ -310,28 +310,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        var v = a, x = a;
-                        [||]if (v != null)
-                        {
-                            v();
-                        }
-                    }
+                void Goo()
+                {
+                var v = a, x = a;
+                [||]if (v != null)
+                {
+                v();
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        var v = a, x = a;
-                        v?.Invoke();
-                    }
+                void Goo()
+                {
+                var v = a, x = a;
+                v?.Invoke();
+                }
                 }
                 """
             );
@@ -348,18 +348,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        [||]var v = a;
-                        if (v != null)
-                        {
-                            v();
-                        }
+                void Goo()
+                {
+                [||]var v = a;
+                if (v != null)
+                {
+                v();
+                }
 
-                        v = null;
-                    }
+                v = null;
+                }
                 }
                 """
             );
@@ -377,32 +377,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        var v = a;
-                        [||]if (v != null)
-                        {
-                            v();
-                        }
+                void Goo()
+                {
+                var v = a;
+                [||]if (v != null)
+                {
+                v();
+                }
 
-                        v = null;
-                    }
+                v = null;
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        var v = a;
-                        v?.Invoke();
+                void Goo()
+                {
+                var v = a;
+                v?.Invoke();
 
-                        v = null;
-                    }
+                v = null;
+                }
                 }
                 """
             );
@@ -417,15 +417,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
 
                 class C
                 {
-                    public event EventHandler E;
+                public event EventHandler E;
 
-                    void M()
-                    {
-                        [||]if (this.E != null)
-                        {
-                            this.E(this, EventArgs.Empty);
-                        }
-                    }
+                void M()
+                {
+                [||]if (this.E != null)
+                {
+                this.E(this, EventArgs.Empty);
+                }
+                }
                 }
                 """,
                 """
@@ -433,12 +433,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
 
                 class C
                 {
-                    public event EventHandler E;
+                public event EventHandler E;
 
-                    void M()
-                    {
-                        this.E?.Invoke(this, EventArgs.Empty);
-                    }
+                void M()
+                {
+                this.E?.Invoke(this, EventArgs.Empty);
+                }
                 }
                 """
             );
@@ -453,15 +453,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
 
                 class C
                 {
-                    public event EventHandler E;
+                public event EventHandler E;
 
-                    void M()
-                    {
-                        if (this.E != null)
-                        {
-                            [||]this.E(this, EventArgs.Empty);
-                        }
-                    }
+                void M()
+                {
+                if (this.E != null)
+                {
+                [||]this.E(this, EventArgs.Empty);
+                }
+                }
                 }
                 """,
                 """
@@ -469,12 +469,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
 
                 class C
                 {
-                    public event EventHandler E;
+                public event EventHandler E;
 
-                    void M()
-                    {
-                        this.E?.Invoke(this, EventArgs.Empty);
-                    }
+                void M()
+                {
+                this.E?.Invoke(this, EventArgs.Empty);
+                }
                 }
                 """
             );
@@ -489,18 +489,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
 
                 class C
                 {
-                    public event EventHandler E;
+                public event EventHandler E;
 
-                    void M()
-                    {
-                        if (true != true)
-                        {
-                        }
-                        else [||]if (this.E != null)
-                        {
-                            this.E(this, EventArgs.Empty);
-                        }
-                    }
+                void M()
+                {
+                if (true != true)
+                {
+                }
+                else [||]if (this.E != null)
+                {
+                this.E(this, EventArgs.Empty);
+                }
+                }
                 }
                 """,
                 """
@@ -508,18 +508,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
 
                 class C
                 {
-                    public event EventHandler E;
+                public event EventHandler E;
 
-                    void M()
-                    {
-                        if (true != true)
-                        {
-                        }
-                        else
-                        {
-                            this.E?.Invoke(this, EventArgs.Empty);
-                        }
-                    }
+                void M()
+                {
+                if (true != true)
+                {
+                }
+                else
+                {
+                this.E?.Invoke(this, EventArgs.Empty);
+                }
+                }
                 }
                 """
             );
@@ -534,16 +534,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
 
                 class C
                 {
-                    public event EventHandler E;
+                public event EventHandler E;
 
-                    void M()
-                    {
-                        if (true != true)
-                        {
-                        }
-                        else [||]if (this.E != null)
-                            this.E(this, EventArgs.Empty);
-                    }
+                void M()
+                {
+                if (true != true)
+                {
+                }
+                else [||]if (this.E != null)
+                this.E(this, EventArgs.Empty);
+                }
                 }
                 """,
                 """
@@ -551,15 +551,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
 
                 class C
                 {
-                    public event EventHandler E;
+                public event EventHandler E;
 
-                    void M()
-                    {
-                        if (true != true)
-                        {
-                        }
-                        else this.E?.Invoke(this, EventArgs.Empty);
-                    }
+                void M()
+                {
+                if (true != true)
+                {
+                }
+                else this.E?.Invoke(this, EventArgs.Empty);
+                }
                 }
                 """
             );
@@ -572,27 +572,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                 """
                 class C
                 {
-                    System.Action a;
-                    void Goo()
-                    {
-                        // Comment
-                        [||]var v = a;
-                        if (v != null)
-                        {
-                            v(); // Comment2
-                        }
-                    }
+                System.Action a;
+                void Goo()
+                {
+                // Comment
+                [||]var v = a;
+                if (v != null)
+                {
+                v(); // Comment2
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    System.Action a;
-                    void Goo()
-                    {
-                        // Comment
-                        a?.Invoke(); // Comment2
-                    }
+                System.Action a;
+                void Goo()
+                {
+                // Comment
+                a?.Invoke(); // Comment2
+                }
                 }
                 """
             );
@@ -605,26 +605,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                 """
                 class C
                 {
-                    System.Action a;
-                    void Goo()
-                    {
-                        // Comment
-                        [||]if (a != null)
-                        {
-                            a(); // Comment2
-                        }
-                    }
+                System.Action a;
+                void Goo()
+                {
+                // Comment
+                [||]if (a != null)
+                {
+                a(); // Comment2
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    System.Action a;
-                    void Goo()
-                    {
-                        // Comment
-                        a?.Invoke(); // Comment2
-                    }
+                System.Action a;
+                void Goo()
+                {
+                // Comment
+                a?.Invoke(); // Comment2
+                }
                 }
                 """
             );
@@ -637,26 +637,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                 """
                 class C
                 {
-                    System.Action a;
-                    void Goo()
-                    {
-                        // Comment
-                        [||]var v = a;
-                        if (v != null) { v(); /* 123 */ } // trails
-                        System.Console.WriteLine();
-                    }
+                System.Action a;
+                void Goo()
+                {
+                // Comment
+                [||]var v = a;
+                if (v != null) { v(); /* 123 */ } // trails
+                System.Console.WriteLine();
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    System.Action a;
-                    void Goo()
-                    {
-                        // Comment
-                        a?.Invoke(); /* 123 */  // trails
-                        System.Console.WriteLine();
-                    }
+                System.Action a;
+                void Goo()
+                {
+                // Comment
+                a?.Invoke(); /* 123 */  // trails
+                System.Console.WriteLine();
+                }
                 }
                 """
             );
@@ -669,23 +669,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                 """
                 class C
                 {
-                    System.Action a;
-                    void Goo()
-                    {
-                        [||]if (a != null) { a(); /* 123 */ } // trails
-                        System.Console.WriteLine();
-                    }
+                System.Action a;
+                void Goo()
+                {
+                [||]if (a != null) { a(); /* 123 */ } // trails
+                System.Console.WriteLine();
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    System.Action a;
-                    void Goo()
-                    {
-                        a?.Invoke(); /* 123 */  // trails
-                        System.Console.WriteLine();
-                    }
+                System.Action a;
+                void Goo()
+                {
+                a?.Invoke(); /* 123 */  // trails
+                System.Console.WriteLine();
+                }
                 }
                 """
             );
@@ -701,27 +701,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        var v = a;
-                        [||]if (v != null)
-                        {
-                            v();
-                        }
-                    }
+                void Goo()
+                {
+                var v = a;
+                [||]if (v != null)
+                {
+                v();
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        a?.Invoke();
-                    }
+                void Goo()
+                {
+                a?.Invoke();
+                }
                 }
                 """
             );
@@ -737,27 +737,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        var v = a;
-                        if (v != null)
-                        {
-                            [||]v();
-                        }
-                    }
+                void Goo()
+                {
+                var v = a;
+                if (v != null)
+                {
+                [||]v();
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        a?.Invoke();
-                    }
+                void Goo()
+                {
+                a?.Invoke();
+                }
                 }
                 """
             );
@@ -770,13 +770,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        [||]var v = a;
-                        v?.Invoke();
-                    }
+                void Goo()
+                {
+                [||]var v = a;
+                v?.Invoke();
+                }
                 }
                 """
             );
@@ -789,13 +789,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        var v = a;
-                        [||]v?.Invoke();
-                    }
+                void Goo()
+                {
+                var v = a;
+                [||]v?.Invoke();
+                }
                 }
                 """
             );
@@ -808,12 +808,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        [||]a?.Invoke();
-                    }
+                void Goo()
+                {
+                [||]a?.Invoke();
+                }
                 }
                 """
             );
@@ -826,16 +826,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        var v = a;
-                        if (v == a)
-                        {
-                            [||]v();
-                        }
-                    }
+                void Goo()
+                {
+                var v = a;
+                if (v == a)
+                {
+                [||]v();
+                }
+                }
                 }
                 """
             );
@@ -848,16 +848,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        var v = a;
-                        if (v == null)
-                        {
-                            [||]v();
-                        }
-                    }
+                void Goo()
+                {
+                var v = a;
+                if (v == null)
+                {
+                [||]v();
+                }
+                }
                 }
                 """
             );
@@ -874,17 +874,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        [||]var v = a;
-                        int x;
-                        if (v != null)
-                        {
-                            v();
-                        }
-                    }
+                void Goo()
+                {
+                [||]var v = a;
+                int x;
+                if (v != null)
+                {
+                v();
+                }
+                }
                 }
                 """
             );
@@ -901,30 +901,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        var v = a;
-                        int x;
-                        [||]if (v != null)
-                        {
-                            v();
-                        }
-                    }
+                void Goo()
+                {
+                var v = a;
+                int x;
+                [||]if (v != null)
+                {
+                v();
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        var v = a;
-                        int x;
-                        v?.Invoke();
-                    }
+                void Goo()
+                {
+                var v = a;
+                int x;
+                v?.Invoke();
+                }
                 }
                 """
             );
@@ -937,16 +937,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                 """
                 class C
                 {
-                    System.Func<int> a;
+                System.Func<int> a;
 
-                    int Goo()
-                    {
-                        var v = a;
-                        [||]if (v != null)
-                        {
-                            return v();
-                        }
-                    }
+                int Goo()
+                {
+                var v = a;
+                [||]if (v != null)
+                {
+                return v();
+                }
+                }
                 }
                 """
             );
@@ -961,14 +961,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Action v = () => {};
-                        [||]if (v != null)
-                        {
-                            v();
-                        }
-                    }
+                void Goo()
+                {
+                Action v = () => {};
+                [||]if (v != null)
+                {
+                v();
+                }
+                }
                 }
                 """,
                 """
@@ -976,11 +976,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Action v = () => {};
-                        v?.Invoke();
-                    }
+                void Goo()
+                {
+                Action v = () => {};
+                v?.Invoke();
+                }
                 }
                 """
             );
@@ -995,14 +995,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Action v = (() => {});
-                        [||]if (v != null)
-                        {
-                            v();
-                        }
-                    }
+                void Goo()
+                {
+                Action v = (() => {});
+                [||]if (v != null)
+                {
+                v();
+                }
+                }
                 }
                 """,
                 """
@@ -1010,11 +1010,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Action v = (() => {});
-                        v?.Invoke();
-                    }
+                void Goo()
+                {
+                Action v = (() => {});
+                v?.Invoke();
+                }
                 }
                 """
             );
@@ -1029,14 +1029,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Action v = delegate {};
-                        [||]if (v != null)
-                        {
-                            v();
-                        }
-                    }
+                void Goo()
+                {
+                Action v = delegate {};
+                [||]if (v != null)
+                {
+                v();
+                }
+                }
                 }
                 """,
                 """
@@ -1044,11 +1044,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Action v = delegate {};
-                        v?.Invoke();
-                    }
+                void Goo()
+                {
+                Action v = delegate {};
+                v?.Invoke();
+                }
                 }
                 """
             );
@@ -1063,14 +1063,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Action v = Console.WriteLine;
-                        [||]if (v != null)
-                        {
-                            v();
-                        }
-                    }
+                void Goo()
+                {
+                Action v = Console.WriteLine;
+                [||]if (v != null)
+                {
+                v();
+                }
+                }
                 }
                 """,
                 """
@@ -1078,11 +1078,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Action v = Console.WriteLine;
-                        v?.Invoke();
-                    }
+                void Goo()
+                {
+                Action v = Console.WriteLine;
+                v?.Invoke();
+                }
                 }
                 """
             );
@@ -1097,13 +1097,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
 
                 class C
                 {
-                    void M()
-                    {
-                        [||]if (Event != null)
-                            Event.Invoke(this, EventArgs.Empty);
-                    }
+                void M()
+                {
+                [||]if (Event != null)
+                Event.Invoke(this, EventArgs.Empty);
+                }
 
-                    event EventHandler Event;
+                event EventHandler Event;
                 }
                 """,
                 """
@@ -1111,12 +1111,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
 
                 class C
                 {
-                    void M()
-                    {
-                        Event?.Invoke(this, EventArgs.Empty);
-                    }
+                void M()
+                {
+                Event?.Invoke(this, EventArgs.Empty);
+                }
 
-                    event EventHandler Event;
+                event EventHandler Event;
                 }
                 """
             );
@@ -1129,27 +1129,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        [||]var v = a;
-                        if (v != null)
-                        {
-                            v.Invoke();
-                        }
-                    }
+                void Goo()
+                {
+                [||]var v = a;
+                if (v != null)
+                {
+                v.Invoke();
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    System.Action a;
+                System.Action a;
 
-                    void Goo()
-                    {
-                        a?.Invoke();
-                    }
+                void Goo()
+                {
+                a?.Invoke();
+                }
                 }
                 """
             );
@@ -1162,13 +1162,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                 """
                 class C
                 {
-                    unsafe void M(delegate* managed<void> func)
-                    {
-                        if (func != null)
-                        {
-                            [||]func();
-                        }
-                    }
+                unsafe void M(delegate* managed<void> func)
+                {
+                if (func != null)
+                {
+                [||]func();
+                }
+                }
                 }
                 """
             );

@@ -36,13 +36,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        [|if|] (true)
-                        {
-                            return;
-                        }
-                    }
+                static void Main()
+                {
+                [|if|] (true)
+                {
+                return;
+                }
+                }
                 }
                 """,
                 new TestParameters(
@@ -65,17 +65,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        if (true)
-                        {
-                            return;
-                        }
-                        [|else|]
-                        {
-                            return;
-                        }
-                    }
+                static void Main()
+                {
+                if (true)
+                {
+                return;
+                }
+                [|else|]
+                {
+                return;
+                }
+                }
                 }
                 """,
                 new TestParameters(
@@ -98,13 +98,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        if (true)
-                            return;
-                        [|else|] if (false)
-                            return;
-                    }
+                static void Main()
+                {
+                if (true)
+                return;
+                [|else|] if (false)
+                return;
+                }
                 }
                 """,
                 new TestParameters(
@@ -127,13 +127,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        [|for|] (var i = 0; i < 5; i++)
-                        {
-                            return;
-                        }
-                    }
+                static void Main()
+                {
+                [|for|] (var i = 0; i < 5; i++)
+                {
+                return;
+                }
+                }
                 }
                 """,
                 new TestParameters(
@@ -156,13 +156,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        [|foreach|] (var c in "test")
-                        {
-                            return;
-                        }
-                    }
+                static void Main()
+                {
+                [|foreach|] (var c in "test")
+                {
+                return;
+                }
+                }
                 }
                 """,
                 new TestParameters(
@@ -185,13 +185,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        [|while|] (true)
-                        {
-                            return;
-                        }
-                    }
+                static void Main()
+                {
+                [|while|] (true)
+                {
+                return;
+                }
+                }
                 }
                 """,
                 new TestParameters(
@@ -214,14 +214,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        [|do|]
-                        {
-                            return;
-                        }
-                        while (true);
-                    }
+                static void Main()
+                {
+                [|do|]
+                {
+                return;
+                }
+                while (true);
+                }
                 }
                 """,
                 new TestParameters(
@@ -244,21 +244,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        [|using|] (var f = new Fizz())
-                        {
-                            return;
-                        }
-                    }
+                static void Main()
+                {
+                [|using|] (var f = new Fizz())
+                {
+                return;
+                }
+                }
                 }
 
                 class Fizz : IDisposable
                 {
-                    public void Dispose()
-                    {
-                        throw new NotImplementedException();
-                    }
+                public void Dispose()
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """,
                 new TestParameters(
@@ -281,28 +281,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        [|using|] (var f = new Fizz())
-                        using (var b = new Buzz())
-                            return;
-                    }
+                static void Main()
+                {
+                [|using|] (var f = new Fizz())
+                using (var b = new Buzz())
+                return;
+                }
                 }
 
                 class Fizz : IDisposable
                 {
-                    public void Dispose()
-                    {
-                        throw new NotImplementedException();
-                    }
+                public void Dispose()
+                {
+                throw new NotImplementedException();
+                }
                 }
 
                 class Buzz : IDisposable
                 {
-                    public void Dispose()
-                    {
-                        throw new NotImplementedException();
-                    }
+                public void Dispose()
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """,
                 new TestParameters(
@@ -325,14 +325,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        var str = "test";
-                        [|lock|] (str)
-                        {
-                            return;
-                        }
-                    }
+                static void Main()
+                {
+                var str = "test";
+                [|lock|] (str)
+                {
+                return;
+                }
+                }
                 }
                 """,
                 new TestParameters(
@@ -355,14 +355,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        var str1 = "test";
-                        var str2 = "test";
-                        [|lock|] (str1)
-                            lock (str2)
-                                return;
-                    }
+                static void Main()
+                {
+                var str1 = "test";
+                var str2 = "test";
+                [|lock|] (str1)
+                lock (str2)
+                return;
+                }
                 }
                 """,
                 new TestParameters(
@@ -385,13 +385,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    unsafe static void Main()
-                    {
-                        [|fixed|] (int* p = null)
-                        fixed (int* q = null)
-                        {
-                        }
-                    }
+                unsafe static void Main()
+                {
+                [|fixed|] (int* p = null)
+                fixed (int* q = null)
+                {
+                }
+                }
                 }
                 """,
                 new TestParameters(
@@ -414,25 +414,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    unsafe static void Main()
-                    {
-                        fixed (int* p = null)
-                        [|fixed|] (int* q = null)
-                            return;
-                    }
+                unsafe static void Main()
+                {
+                fixed (int* p = null)
+                [|fixed|] (int* q = null)
+                return;
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    unsafe static void Main()
-                    {
-                        fixed (int* p = null)
-                        fixed (int* q = null)
-                        {
-                            return;
-                        }
-                    }
+                unsafe static void Main()
+                {
+                fixed (int* p = null)
+                fixed (int* q = null)
+                {
+                return;
+                }
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -450,22 +450,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        [|if|] (true) return;
-                    }
+                static void Main()
+                {
+                [|if|] (true) return;
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        if (true)
-                        {
-                            return;
-                        }
-                    }
+                static void Main()
+                {
+                if (true)
+                {
+                return;
+                }
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -489,7 +489,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 if (true)
                 {
-                    return;
+                return;
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -510,24 +510,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        if (true) { return; }
-                        [|else|] return;
-                    }
+                static void Main()
+                {
+                if (true) { return; }
+                [|else|] return;
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        if (true) { return; }
-                        else
-                        {
-                            return;
-                        }
-                    }
+                static void Main()
+                {
+                if (true) { return; }
+                else
+                {
+                return;
+                }
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -545,24 +545,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        if (true) return;
-                        [|else|] return;
-                    }
+                static void Main()
+                {
+                if (true) return;
+                [|else|] return;
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        if (true) return;
-                        else
-                        {
-                            return;
-                        }
-                    }
+                static void Main()
+                {
+                if (true) return;
+                else
+                {
+                return;
+                }
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -583,23 +583,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        [|else|]
-                            return;
-                    }
+                static void Main()
+                {
+                [|else|]
+                return;
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        else
-                        {
-                            return;
-                        }
-                    }
+                static void Main()
+                {
+                else
+                {
+                return;
+                }
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -620,24 +620,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        if (true) return;
-                        else [|if|] (false) return;
-                    }
+                static void Main()
+                {
+                if (true) return;
+                else [|if|] (false) return;
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        if (true) return;
-                        else if (false)
-                        {
-                            return;
-                        }
-                    }
+                static void Main()
+                {
+                if (true) return;
+                else if (false)
+                {
+                return;
+                }
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -658,32 +658,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        if (true)
-                            if (true)   // This multiline statement does not directly impact the other nested statement
-                                return;
-                            else
-                                return;
-                        else [|if|] (false) return;
-                    }
+                static void Main()
+                {
+                if (true)
+                if (true)   // This multiline statement does not directly impact the other nested statement
+                return;
+                else
+                return;
+                else [|if|] (false) return;
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        if (true)
-                            if (true)   // This multiline statement does not directly impact the other nested statement
-                                return;
-                            else
-                                return;
-                        else if (false)
-                        {
-                            return;
-                        }
-                    }
+                static void Main()
+                {
+                if (true)
+                if (true)   // This multiline statement does not directly impact the other nested statement
+                return;
+                else
+                return;
+                else if (false)
+                {
+                return;
+                }
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -704,36 +704,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        if (true)
-                        {
-                            if (true)
-                                return;
-                            else
-                                return;
-                        }
-                        else [|if|] (false) return;
-                    }
+                static void Main()
+                {
+                if (true)
+                {
+                if (true)
+                return;
+                else
+                return;
+                }
+                else [|if|] (false) return;
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        if (true)
-                        {
-                            if (true)
-                                return;
-                            else
-                                return;
-                        }
-                        else if (false)
-                        {
-                            return;
-                        }
-                    }
+                static void Main()
+                {
+                if (true)
+                {
+                if (true)
+                return;
+                else
+                return;
+                }
+                else if (false)
+                {
+                return;
+                }
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -754,35 +754,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        if (true)
-                        {
-                            [|if|] (true)
-                                return;
-                            else
-                                return;
-                        }
-                        else if (false) return;
-                    }
+                static void Main()
+                {
+                if (true)
+                {
+                [|if|] (true)
+                return;
+                else
+                return;
+                }
+                else if (false) return;
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        if (true)
-                        {
-                            if (true)
-                            {
-                                return;
-                            }
-                            else
-                                return;
-                        }
-                        else if (false) return;
-                    }
+                static void Main()
+                {
+                if (true)
+                {
+                if (true)
+                {
+                return;
+                }
+                else
+                return;
+                }
+                else if (false) return;
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -803,35 +803,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        if (true)
-                        {
-                            if (true)
-                                return;
-                            [|else|]
-                                return;
-                        }
-                        else if (false) return;
-                    }
+                static void Main()
+                {
+                if (true)
+                {
+                if (true)
+                return;
+                [|else|]
+                return;
+                }
+                else if (false) return;
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        if (true)
-                        {
-                            if (true)
-                                return;
-                            else
-                            {
-                                return;
-                            }
-                        }
-                        else if (false) return;
-                    }
+                static void Main()
+                {
+                if (true)
+                {
+                if (true)
+                return;
+                else
+                {
+                return;
+                }
+                }
+                else if (false) return;
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -860,35 +860,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        if (true)
-                        {
-                            if (true)
-                                if (true) { return; } else { return; }
-                            [|else|]
-                                return;
-                        }
-                        else if (false) return;
-                    }
+                static void Main()
+                {
+                if (true)
+                {
+                if (true)
+                if (true) { return; } else { return; }
+                [|else|]
+                return;
+                }
+                else if (false) return;
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        if (true)
-                        {
-                            if (true)
-                                if (true) { return; } else { return; }
-                            else
-                            {
-                                return;
-                            }
-                        }
-                        else if (false) return;
-                    }
+                static void Main()
+                {
+                if (true)
+                {
+                if (true)
+                if (true) { return; } else { return; }
+                else
+                {
+                return;
+                }
+                }
+                else if (false) return;
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -906,22 +906,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        [|for|] (var i = 0; i < 5; i++) return;
-                    }
+                static void Main()
+                {
+                [|for|] (var i = 0; i < 5; i++) return;
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        for (var i = 0; i < 5; i++)
-                        {
-                            return;
-                        }
-                    }
+                static void Main()
+                {
+                for (var i = 0; i < 5; i++)
+                {
+                return;
+                }
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -942,26 +942,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        [|for|] (var i = 0;
-                            i < 5;
-                            i++) return;
-                    }
+                static void Main()
+                {
+                [|for|] (var i = 0;
+                i < 5;
+                i++) return;
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        for (var i = 0;
-                            i < 5;
-                            i++)
-                        {
-                            return;
-                        }
-                    }
+                static void Main()
+                {
+                for (var i = 0;
+                i < 5;
+                i++)
+                {
+                return;
+                }
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -982,24 +982,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        [|for|] (var i = 0; i < 5; i++) if (true)
-                            return;
-                    }
+                static void Main()
+                {
+                [|for|] (var i = 0; i < 5; i++) if (true)
+                return;
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        for (var i = 0; i < 5; i++)
-                        {
-                            if (true)
-                            return;
-                        }
-                    }
+                static void Main()
+                {
+                for (var i = 0; i < 5; i++)
+                {
+                if (true)
+                return;
+                }
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -1020,25 +1020,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        [|for|] (var i = 0; i < 5; i++)
-                            if (true)
-                                return;
-                    }
+                static void Main()
+                {
+                [|for|] (var i = 0; i < 5; i++)
+                if (true)
+                return;
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        for (var i = 0; i < 5; i++)
-                        {
-                            if (true)
-                                return;
-                        }
-                    }
+                static void Main()
+                {
+                for (var i = 0; i < 5; i++)
+                {
+                if (true)
+                return;
+                }
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -1056,22 +1056,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        [|foreach|] (var c in "test") return;
-                    }
+                static void Main()
+                {
+                [|foreach|] (var c in "test") return;
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        foreach (var c in "test")
-                        {
-                            return;
-                        }
-                    }
+                static void Main()
+                {
+                foreach (var c in "test")
+                {
+                return;
+                }
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -1089,22 +1089,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        [|while|] (true) return;
-                    }
+                static void Main()
+                {
+                [|while|] (true) return;
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        while (true)
-                        {
-                            return;
-                        }
-                    }
+                static void Main()
+                {
+                while (true)
+                {
+                return;
+                }
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -1122,23 +1122,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        [|do|] return; while (true);
-                    }
+                static void Main()
+                {
+                [|do|] return; while (true);
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        do
-                        {
-                            return;
-                        }
-                        while (true);
-                    }
+                static void Main()
+                {
+                do
+                {
+                return;
+                }
+                while (true);
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -1156,25 +1156,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        [|do|]
-                            return;
-                        while (true);
-                    }
+                static void Main()
+                {
+                [|do|]
+                return;
+                while (true);
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        do
-                        {
-                            return;
-                        }
-                        while (true);
-                    }
+                static void Main()
+                {
+                do
+                {
+                return;
+                }
+                while (true);
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -1195,25 +1195,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        [|do|] return; while (true ||
-                            true);
-                    }
+                static void Main()
+                {
+                [|do|] return; while (true ||
+                true);
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        do
-                        {
-                            return;
-                        }
-                        while (true ||
-                            true);
-                    }
+                static void Main()
+                {
+                do
+                {
+                return;
+                }
+                while (true ||
+                true);
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -1231,39 +1231,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        [|using|] (var f = new Fizz())
-                            return;
-                    }
+                static void Main()
+                {
+                [|using|] (var f = new Fizz())
+                return;
+                }
                 }
 
                 class Fizz : IDisposable
                 {
-                    public void Dispose()
-                    {
-                        throw new NotImplementedException();
-                    }
+                public void Dispose()
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        using (var f = new Fizz())
-                        {
-                            return;
-                        }
-                    }
+                static void Main()
+                {
+                using (var f = new Fizz())
+                {
+                return;
+                }
+                }
                 }
 
                 class Fizz : IDisposable
                 {
-                    public void Dispose()
-                    {
-                        throw new NotImplementedException();
-                    }
+                public void Dispose()
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -1284,57 +1284,57 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        using (var f = new Fizz())
-                        [|using|] (var b = new Buzz())
-                            return;
-                    }
+                static void Main()
+                {
+                using (var f = new Fizz())
+                [|using|] (var b = new Buzz())
+                return;
+                }
                 }
 
                 class Fizz : IDisposable
                 {
-                    public void Dispose()
-                    {
-                        throw new NotImplementedException();
-                    }
+                public void Dispose()
+                {
+                throw new NotImplementedException();
+                }
                 }
 
                 class Buzz : IDisposable
                 {
-                    public void Dispose()
-                    {
-                        throw new NotImplementedException();
-                    }
+                public void Dispose()
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        using (var f = new Fizz())
-                        using (var b = new Buzz())
-                        {
-                            return;
-                        }
-                    }
+                static void Main()
+                {
+                using (var f = new Fizz())
+                using (var b = new Buzz())
+                {
+                return;
+                }
+                }
                 }
 
                 class Fizz : IDisposable
                 {
-                    public void Dispose()
-                    {
-                        throw new NotImplementedException();
-                    }
+                public void Dispose()
+                {
+                throw new NotImplementedException();
+                }
                 }
 
                 class Buzz : IDisposable
                 {
-                    public void Dispose()
-                    {
-                        throw new NotImplementedException();
-                    }
+                public void Dispose()
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -1355,59 +1355,59 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        using (var f        // <-- This multiline condition doesn't trigger a multiline braces requirement when it's the outer 'using' statement
-                            = new Fizz())
-                        [|using|] (var b = new Buzz())
-                            return;
-                    }
+                static void Main()
+                {
+                using (var f        // <-- This multiline condition doesn't trigger a multiline braces requirement when it's the outer 'using' statement
+                = new Fizz())
+                [|using|] (var b = new Buzz())
+                return;
+                }
                 }
 
                 class Fizz : IDisposable
                 {
-                    public void Dispose()
-                    {
-                        throw new NotImplementedException();
-                    }
+                public void Dispose()
+                {
+                throw new NotImplementedException();
+                }
                 }
 
                 class Buzz : IDisposable
                 {
-                    public void Dispose()
-                    {
-                        throw new NotImplementedException();
-                    }
+                public void Dispose()
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        using (var f        // <-- This multiline condition doesn't trigger a multiline braces requirement when it's the outer 'using' statement
-                            = new Fizz())
-                        using (var b = new Buzz())
-                        {
-                            return;
-                        }
-                    }
+                static void Main()
+                {
+                using (var f        // <-- This multiline condition doesn't trigger a multiline braces requirement when it's the outer 'using' statement
+                = new Fizz())
+                using (var b = new Buzz())
+                {
+                return;
+                }
+                }
                 }
 
                 class Fizz : IDisposable
                 {
-                    public void Dispose()
-                    {
-                        throw new NotImplementedException();
-                    }
+                public void Dispose()
+                {
+                throw new NotImplementedException();
+                }
                 }
 
                 class Buzz : IDisposable
                 {
-                    public void Dispose()
-                    {
-                        throw new NotImplementedException();
-                    }
+                public void Dispose()
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -1428,59 +1428,59 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        using (var f = new Fizz())
-                        [|using|] (var b        // <-- This multiline condition triggers a multiline braces requirement because it's the inner 'using' statement
-                            = new Buzz())
-                            return;
-                    }
+                static void Main()
+                {
+                using (var f = new Fizz())
+                [|using|] (var b        // <-- This multiline condition triggers a multiline braces requirement because it's the inner 'using' statement
+                = new Buzz())
+                return;
+                }
                 }
 
                 class Fizz : IDisposable
                 {
-                    public void Dispose()
-                    {
-                        throw new NotImplementedException();
-                    }
+                public void Dispose()
+                {
+                throw new NotImplementedException();
+                }
                 }
 
                 class Buzz : IDisposable
                 {
-                    public void Dispose()
-                    {
-                        throw new NotImplementedException();
-                    }
+                public void Dispose()
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        using (var f = new Fizz())
-                        using (var b        // <-- This multiline condition triggers a multiline braces requirement because it's the inner 'using' statement
-                            = new Buzz())
-                        {
-                            return;
-                        }
-                    }
+                static void Main()
+                {
+                using (var f = new Fizz())
+                using (var b        // <-- This multiline condition triggers a multiline braces requirement because it's the inner 'using' statement
+                = new Buzz())
+                {
+                return;
+                }
+                }
                 }
 
                 class Fizz : IDisposable
                 {
-                    public void Dispose()
-                    {
-                        throw new NotImplementedException();
-                    }
+                public void Dispose()
+                {
+                throw new NotImplementedException();
+                }
                 }
 
                 class Buzz : IDisposable
                 {
-                    public void Dispose()
-                    {
-                        throw new NotImplementedException();
-                    }
+                public void Dispose()
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -1498,25 +1498,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        var str = "test";
-                        [|lock|] (str)
-                            return;
-                    }
+                static void Main()
+                {
+                var str = "test";
+                [|lock|] (str)
+                return;
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        var str = "test";
-                        lock (str)
-                        {
-                            return;
-                        }
-                    }
+                static void Main()
+                {
+                var str = "test";
+                lock (str)
+                {
+                return;
+                }
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -1537,31 +1537,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        var str1 = "test";
-                        var str2 = "test";
+                static void Main()
+                {
+                var str1 = "test";
+                var str2 = "test";
 
-                        lock (str1)
-                        [|lock|] (str2) // VS thinks this should be indented one more level
-                            return;
-                    }
+                lock (str1)
+                [|lock|] (str2) // VS thinks this should be indented one more level
+                return;
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    static void Main()
-                    {
-                        var str1 = "test";
-                        var str2 = "test";
+                static void Main()
+                {
+                var str1 = "test";
+                var str2 = "test";
 
-                        lock (str1)
-                        lock (str2) // VS thinks this should be indented one more level
-                            {
-                                return;
-                            }
-                    }
+                lock (str1)
+                lock (str2) // VS thinks this should be indented one more level
+                {
+                return;
+                }
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -1581,13 +1581,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 #define test
                 class Program
                 {
-                    static void Main()
-                    {
+                static void Main()
+                {
                 #if test
-                        [|if (true)|]
+                [|if (true)|]
                 #endif
-                            return;
-                    }
+                return;
+                }
                 }
                 """,
                 new TestParameters(
@@ -1612,13 +1612,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 #define test
                 class Program
                 {
-                    static void Main()
-                    {
-                        [|if (true)|]
+                static void Main()
+                {
+                [|if (true)|]
                 #if test
-                            return;
+                return;
                 #endif
-                    }
+                }
                 }
                 """,
                 new TestParameters(
@@ -1643,15 +1643,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 #define test
                 class Program
                 {
-                    static void Main()
-                    {
-                        [|if (true)
+                static void Main()
+                {
+                [|if (true)
                 #if test
-                            return;
-                        else|]
+                return;
+                else|]
                 #endif
-                            return;
-                    }
+                return;
+                }
                 }
                 """,
                 new TestParameters(
@@ -1679,32 +1679,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 #define test
                 class Program
                 {
-                    static void Main()
-                    {
+                static void Main()
+                {
                 #if test
-                        [|if (true)
-                            return;
-                        else|]
+                [|if (true)
+                return;
+                else|]
                 #endif
-                            return;
-                    }
+                return;
+                }
                 }
                 """,
                 """
                 #define test
                 class Program
                 {
-                    static void Main()
-                    {
+                static void Main()
+                {
                 #if test
-                        if (true)
-                        {
-                            return;
-                        }
-                        else
+                if (true)
+                {
+                return;
+                }
+                else
                 #endif
-                            return;
-                    }
+                return;
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -1727,32 +1727,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 #define test
                 class Program
                 {
-                    static void Main()
-                    {
-                        [|if (true)
+                static void Main()
+                {
+                [|if (true)
                 #if test
-                            return;
-                        else|]
-                            return;
+                return;
+                else|]
+                return;
                 #endif
-                    }
+                }
                 }
                 """,
                 """
                 #define test
                 class Program
                 {
-                    static void Main()
-                    {
-                        if (true)
+                static void Main()
+                {
+                if (true)
                 #if test
-                            return;
-                        else
-                        {
-                            return;
-                        }
+                return;
+                else
+                {
+                return;
+                }
                 #endif
-                    }
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -1775,32 +1775,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 #define test
                 class Program
                 {
-                    static void Main()
-                    {
+                static void Main()
+                {
                 #if test
-                        [|if (true)
+                [|if (true)
                 #endif
-                            return;
-                        else|]
-                            return;
-                    }
+                return;
+                else|]
+                return;
+                }
                 }
                 """,
                 """
                 #define test
                 class Program
                 {
-                    static void Main()
-                    {
+                static void Main()
+                {
                 #if test
-                        if (true)
+                if (true)
                 #endif
-                            return;
-                        else
-                        {
-                            return;
-                        }
-                    }
+                return;
+                else
+                {
+                return;
+                }
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -1823,32 +1823,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 #define test
                 class Program
                 {
-                    static void Main()
-                    {
-                        [|if (true)
-                            return;
-                        else|]
+                static void Main()
+                {
+                [|if (true)
+                return;
+                else|]
                 #if test
-                            return;
+                return;
                 #endif
-                    }
+                }
                 }
                 """,
                 """
                 #define test
                 class Program
                 {
-                    static void Main()
-                    {
-                        if (true)
-                        {
-                            return;
-                        }
-                        else
+                static void Main()
+                {
+                if (true)
+                {
+                return;
+                }
+                else
                 #if test
-                            return;
+                return;
                 #endif
-                    }
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -1871,36 +1871,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 #define test
                 class Program
                 {
-                    static void Main()
-                    {
+                static void Main()
+                {
                 #if test
-                        [|if (true)
-                            return;
+                [|if (true)
+                return;
                 #endif
-                        else|]
-                        {
-                            return;
-                        }
-                    }
+                else|]
+                {
+                return;
+                }
+                }
                 }
                 """,
                 """
                 #define test
                 class Program
                 {
-                    static void Main()
-                    {
+                static void Main()
+                {
                 #if test
-                        if (true)
-                        {
-                            return;
-                        }
+                if (true)
+                {
+                return;
+                }
                 #endif
-                        else
-                        {
-                            return;
-                        }
-                    }
+                else
+                {
+                return;
+                }
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -1923,36 +1923,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 #define test
                 class Program
                 {
-                    static void Main()
-                    {
-                        [|if (true)
-                        {
-                            return;
-                        }
+                static void Main()
+                {
+                [|if (true)
+                {
+                return;
+                }
                 #if test
-                        else|]
-                            return;
+                else|]
+                return;
                 #endif
-                    }
+                }
                 }
                 """,
                 """
                 #define test
                 class Program
                 {
-                    static void Main()
-                    {
-                        if (true)
-                        {
-                            return;
-                        }
+                static void Main()
+                {
+                if (true)
+                {
+                return;
+                }
                 #if test
-                        else
-                        {
-                            return;
-                        }
+                else
+                {
+                return;
+                }
                 #endif
-                    }
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -1975,28 +1975,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 #define test
                 class Program
                 {
-                    static void Main()
-                    {
+                static void Main()
+                {
                 #if test
                 #endif
-                        [|if (true)|]
-                            return;
-                    }
+                [|if (true)|]
+                return;
+                }
                 }
                 """,
                 """
                 #define test
                 class Program
                 {
-                    static void Main()
-                    {
+                static void Main()
+                {
                 #if test
                 #endif
-                        if (true)
-                        {
-                            return;
-                        }
-                    }
+                if (true)
+                {
+                return;
+                }
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -2019,28 +2019,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 #define test
                 class Program
                 {
-                    static void Main()
-                    {
-                        [|if (true)|]
-                            return;
+                static void Main()
+                {
+                [|if (true)|]
+                return;
                 #if test
                 #endif
-                    }
+                }
                 }
                 """,
                 """
                 #define test
                 class Program
                 {
-                    static void Main()
-                    {
-                        if (true)
-                        {
-                            return;
-                        }
+                static void Main()
+                {
+                if (true)
+                {
+                return;
+                }
                 #if test
                 #endif
-                    }
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -2063,30 +2063,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 #define test
                 class Program
                 {
-                    static void Main()
-                    {
-                        [|while (true)
+                static void Main()
+                {
+                [|while (true)
                 #if test
-                            if (true)|]
-                                return;
+                if (true)|]
+                return;
                 #endif
-                    }
+                }
                 }
                 """,
                 """
                 #define test
                 class Program
                 {
-                    static void Main()
-                    {
-                        while (true)
+                static void Main()
+                {
+                while (true)
                 #if test
-                            if (true)
-                            {
-                                return;
-                            }
+                if (true)
+                {
+                return;
+                }
                 #endif
-                    }
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,
@@ -2109,30 +2109,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
                 #define test
                 class Program
                 {
-                    static void Main()
-                    {
-                        [|while (true)
+                static void Main()
+                {
+                [|while (true)
                 #if test
-                            if (true)|]
+                if (true)|]
                 #endif
-                                return;
-                    }
+                return;
+                }
                 }
                 """,
                 """
                 #define test
                 class Program
                 {
-                    static void Main()
-                    {
-                        while (true)
-                        {
+                static void Main()
+                {
+                while (true)
+                {
                 #if test
-                            if (true)
+                if (true)
                 #endif
-                                return;
-                        }
-                    }
+                return;
+                }
+                }
                 }
                 """,
                 (PreferBracesPreference)bracesPreference,

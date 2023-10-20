@@ -18,8 +18,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.RazorCompiler.UnitTests
         public void Added()
         {
             var source = """
-                class C { }
-                """;
+            class C { }
+            """;
             var parseOptions = TestOptions.Regular;
             var compilation = CreateCompilation(
                 source,

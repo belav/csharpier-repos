@@ -24,11 +24,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    {|Cursor:[|#region|]|} Main
-                    static void Main()
-                    {
-                    }
-                    [|#endregion|]
+                {|Cursor:[|#region|]|} Main
+                static void Main()
+                {
+                }
+                [|#endregion|]
                 }
                 """
             );
@@ -41,11 +41,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    [|#region|] Main
-                    static void Main()
-                    {
-                    }
-                    {|Cursor:[|#endregion|]|}
+                [|#region|] Main
+                static void Main()
+                {
+                }
+                {|Cursor:[|#endregion|]|}
                 }
                 """
             );
@@ -58,13 +58,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    {|Cursor:[|#region|]|} Main
-                    static void Main()
-                    {
-                        #region body
-                        #endregion
-                    }
-                    [|#endregion|]
+                {|Cursor:[|#region|]|} Main
+                static void Main()
+                {
+                #region body
+                #endregion
+                }
+                [|#endregion|]
                 }
                 """
             );
@@ -77,13 +77,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    #region Main
-                    static void Main()
-                    {
-                        {|Cursor:[|#region|]|} body
-                        [|#endregion|]
-                    }
-                    #endregion
+                #region Main
+                static void Main()
+                {
+                {|Cursor:[|#region|]|} body
+                [|#endregion|]
+                }
+                #endregion
                 }
                 """
             );
@@ -96,13 +96,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    #region Main
-                    static void Main()
-                    {
-                        [|#region|] body
-                        {|Cursor:[|#endregion|]|}
-                    }
-                    #endregion
+                #region Main
+                static void Main()
+                {
+                [|#region|] body
+                {|Cursor:[|#endregion|]|}
+                }
+                #endregion
                 }
                 """
             );
@@ -115,13 +115,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    [|#region|] Main
-                    static void Main()
-                    {
-                        #region body
-                        #endregion
-                    }
-                    {|Cursor:[|#endregion|]|}
+                [|#region|] Main
+                static void Main()
+                {
+                #region body
+                #endregion
+                }
+                {|Cursor:[|#endregion|]|}
                 }
                 """
             );

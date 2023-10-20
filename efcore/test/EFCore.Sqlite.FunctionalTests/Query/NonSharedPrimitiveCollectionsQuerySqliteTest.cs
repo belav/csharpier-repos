@@ -14,14 +14,14 @@ public class NonSharedPrimitiveCollectionsQuerySqliteTest
 
         AssertSql(
             """
-SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
-FROM "TestEntity" AS "t"
-WHERE (
-    SELECT COUNT(*)
-    FROM json_each("t"."SomeArray") AS "s"
-    WHERE "s"."value" = 1) = 2
-LIMIT 2
-"""
+            SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
+            FROM "TestEntity" AS "t"
+            WHERE (
+            SELECT COUNT(*)
+            FROM json_each("t"."SomeArray") AS "s"
+            WHERE "s"."value" = 1) = 2
+            LIMIT 2
+            """
         );
     }
 
@@ -31,14 +31,14 @@ LIMIT 2
 
         AssertSql(
             """
-SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
-FROM "TestEntity" AS "t"
-WHERE (
-    SELECT COUNT(*)
-    FROM json_each("t"."SomeArray") AS "s"
-    WHERE "s"."value" = 1) = 2
-LIMIT 2
-"""
+            SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
+            FROM "TestEntity" AS "t"
+            WHERE (
+            SELECT COUNT(*)
+            FROM json_each("t"."SomeArray") AS "s"
+            WHERE "s"."value" = 1) = 2
+            LIMIT 2
+            """
         );
     }
 
@@ -48,14 +48,14 @@ LIMIT 2
 
         AssertSql(
             """
-SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
-FROM "TestEntity" AS "t"
-WHERE (
-    SELECT COUNT(*)
-    FROM json_each("t"."SomeArray") AS "s"
-    WHERE "s"."value" = 1) = 2
-LIMIT 2
-"""
+            SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
+            FROM "TestEntity" AS "t"
+            WHERE (
+            SELECT COUNT(*)
+            FROM json_each("t"."SomeArray") AS "s"
+            WHERE "s"."value" = 1) = 2
+            LIMIT 2
+            """
         );
     }
 
@@ -65,14 +65,14 @@ LIMIT 2
 
         AssertSql(
             """
-SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
-FROM "TestEntity" AS "t"
-WHERE (
-    SELECT COUNT(*)
-    FROM json_each("t"."SomeArray") AS "s"
-    WHERE "s"."value" = 1.0) = 2
-LIMIT 2
-"""
+            SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
+            FROM "TestEntity" AS "t"
+            WHERE (
+            SELECT COUNT(*)
+            FROM json_each("t"."SomeArray") AS "s"
+            WHERE "s"."value" = 1.0) = 2
+            LIMIT 2
+            """
         );
     }
 
@@ -82,14 +82,14 @@ LIMIT 2
 
         AssertSql(
             """
-SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
-FROM "TestEntity" AS "t"
-WHERE (
-    SELECT COUNT(*)
-    FROM json_each("t"."SomeArray") AS "s"
-    WHERE "s"."value" = 1) = 2
-LIMIT 2
-"""
+            SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
+            FROM "TestEntity" AS "t"
+            WHERE (
+            SELECT COUNT(*)
+            FROM json_each("t"."SomeArray") AS "s"
+            WHERE "s"."value" = 1) = 2
+            LIMIT 2
+            """
         );
     }
 
@@ -101,14 +101,14 @@ LIMIT 2
 
         AssertSql(
             """
-SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
-FROM "TestEntity" AS "t"
-WHERE (
-    SELECT COUNT(*)
-    FROM json_each("t"."SomeArray") AS "s"
-    WHERE "s"."value" = '1.0') = 2
-LIMIT 2
-"""
+            SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
+            FROM "TestEntity" AS "t"
+            WHERE (
+            SELECT COUNT(*)
+            FROM json_each("t"."SomeArray") AS "s"
+            WHERE "s"."value" = '1.0') = 2
+            LIMIT 2
+            """
         );
     }
 
@@ -118,14 +118,14 @@ LIMIT 2
 
         AssertSql(
             """
-SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
-FROM "TestEntity" AS "t"
-WHERE (
-    SELECT COUNT(*)
-    FROM json_each("t"."SomeArray") AS "s"
-    WHERE "s"."value" = '2023-01-01 12:30:00') = 2
-LIMIT 2
-"""
+            SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
+            FROM "TestEntity" AS "t"
+            WHERE (
+            SELECT COUNT(*)
+            FROM json_each("t"."SomeArray") AS "s"
+            WHERE "s"."value" = '2023-01-01 12:30:00') = 2
+            LIMIT 2
+            """
         );
     }
 
@@ -135,14 +135,14 @@ LIMIT 2
 
         AssertSql(
             """
-SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
-FROM "TestEntity" AS "t"
-WHERE (
-    SELECT COUNT(*)
-    FROM json_each("t"."SomeArray") AS "s"
-    WHERE "s"."value" = '2023-01-01 12:30:00.123') = 2
-LIMIT 2
-"""
+            SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
+            FROM "TestEntity" AS "t"
+            WHERE (
+            SELECT COUNT(*)
+            FROM json_each("t"."SomeArray") AS "s"
+            WHERE "s"."value" = '2023-01-01 12:30:00.123') = 2
+            LIMIT 2
+            """
         );
     }
 
@@ -152,14 +152,14 @@ LIMIT 2
 
         AssertSql(
             """
-SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
-FROM "TestEntity" AS "t"
-WHERE (
-    SELECT COUNT(*)
-    FROM json_each("t"."SomeArray") AS "s"
-    WHERE "s"."value" = '2023-01-01 12:30:00.123456') = 2
-LIMIT 2
-"""
+            SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
+            FROM "TestEntity" AS "t"
+            WHERE (
+            SELECT COUNT(*)
+            FROM json_each("t"."SomeArray") AS "s"
+            WHERE "s"."value" = '2023-01-01 12:30:00.123456') = 2
+            LIMIT 2
+            """
         );
     }
 
@@ -169,14 +169,14 @@ LIMIT 2
 
         AssertSql(
             """
-SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
-FROM "TestEntity" AS "t"
-WHERE (
-    SELECT COUNT(*)
-    FROM json_each("t"."SomeArray") AS "s"
-    WHERE "s"."value" = '2023-01-01') = 2
-LIMIT 2
-"""
+            SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
+            FROM "TestEntity" AS "t"
+            WHERE (
+            SELECT COUNT(*)
+            FROM json_each("t"."SomeArray") AS "s"
+            WHERE "s"."value" = '2023-01-01') = 2
+            LIMIT 2
+            """
         );
     }
 
@@ -187,14 +187,14 @@ LIMIT 2
 
         AssertSql(
             """
-SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
-FROM "TestEntity" AS "t"
-WHERE (
-    SELECT COUNT(*)
-    FROM json_each("t"."SomeArray") AS "s"
-    WHERE "s"."value" = '12:30:00') = 2
-LIMIT 2
-"""
+            SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
+            FROM "TestEntity" AS "t"
+            WHERE (
+            SELECT COUNT(*)
+            FROM json_each("t"."SomeArray") AS "s"
+            WHERE "s"."value" = '12:30:00') = 2
+            LIMIT 2
+            """
         );
     }
 
@@ -204,14 +204,14 @@ LIMIT 2
 
         AssertSql(
             """
-SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
-FROM "TestEntity" AS "t"
-WHERE (
-    SELECT COUNT(*)
-    FROM json_each("t"."SomeArray") AS "s"
-    WHERE "s"."value" = '12:30:00.1230000') = 2
-LIMIT 2
-"""
+            SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
+            FROM "TestEntity" AS "t"
+            WHERE (
+            SELECT COUNT(*)
+            FROM json_each("t"."SomeArray") AS "s"
+            WHERE "s"."value" = '12:30:00.1230000') = 2
+            LIMIT 2
+            """
         );
     }
 
@@ -221,14 +221,14 @@ LIMIT 2
 
         AssertSql(
             """
-SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
-FROM "TestEntity" AS "t"
-WHERE (
-    SELECT COUNT(*)
-    FROM json_each("t"."SomeArray") AS "s"
-    WHERE "s"."value" = '12:30:00.1234560') = 2
-LIMIT 2
-"""
+            SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
+            FROM "TestEntity" AS "t"
+            WHERE (
+            SELECT COUNT(*)
+            FROM json_each("t"."SomeArray") AS "s"
+            WHERE "s"."value" = '12:30:00.1234560') = 2
+            LIMIT 2
+            """
         );
     }
 
@@ -238,14 +238,14 @@ LIMIT 2
 
         AssertSql(
             """
-SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
-FROM "TestEntity" AS "t"
-WHERE (
-    SELECT COUNT(*)
-    FROM json_each("t"."SomeArray") AS "s"
-    WHERE "s"."value" = '2023-01-01 12:30:00+02:00') = 2
-LIMIT 2
-"""
+            SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
+            FROM "TestEntity" AS "t"
+            WHERE (
+            SELECT COUNT(*)
+            FROM json_each("t"."SomeArray") AS "s"
+            WHERE "s"."value" = '2023-01-01 12:30:00+02:00') = 2
+            LIMIT 2
+            """
         );
     }
 
@@ -255,14 +255,14 @@ LIMIT 2
 
         AssertSql(
             """
-SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
-FROM "TestEntity" AS "t"
-WHERE (
-    SELECT COUNT(*)
-    FROM json_each("t"."SomeArray") AS "s"
-    WHERE "s"."value") = 2
-LIMIT 2
-"""
+            SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
+            FROM "TestEntity" AS "t"
+            WHERE (
+            SELECT COUNT(*)
+            FROM json_each("t"."SomeArray") AS "s"
+            WHERE "s"."value") = 2
+            LIMIT 2
+            """
         );
     }
 
@@ -272,14 +272,14 @@ LIMIT 2
 
         AssertSql(
             """
-SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
-FROM "TestEntity" AS "t"
-WHERE (
-    SELECT COUNT(*)
-    FROM json_each("t"."SomeArray") AS "s"
-    WHERE "s"."value" = 'DC8C903D-D655-4144-A0FD-358099D40AE1') = 2
-LIMIT 2
-"""
+            SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
+            FROM "TestEntity" AS "t"
+            WHERE (
+            SELECT COUNT(*)
+            FROM json_each("t"."SomeArray") AS "s"
+            WHERE "s"."value" = 'DC8C903D-D655-4144-A0FD-358099D40AE1') = 2
+            LIMIT 2
+            """
         );
     }
 
@@ -289,14 +289,14 @@ LIMIT 2
 
         AssertSql(
             """
-SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
-FROM "TestEntity" AS "t"
-WHERE (
-    SELECT COUNT(*)
-    FROM json_each("t"."SomeArray") AS "s"
-    WHERE unhex("s"."value") = X'0102') = 2
-LIMIT 2
-"""
+            SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
+            FROM "TestEntity" AS "t"
+            WHERE (
+            SELECT COUNT(*)
+            FROM json_each("t"."SomeArray") AS "s"
+            WHERE unhex("s"."value") = X'0102') = 2
+            LIMIT 2
+            """
         );
     }
 
@@ -306,14 +306,14 @@ LIMIT 2
 
         AssertSql(
             """
-SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
-FROM "TestEntity" AS "t"
-WHERE (
-    SELECT COUNT(*)
-    FROM json_each("t"."SomeArray") AS "s"
-    WHERE "s"."value" = 0) = 2
-LIMIT 2
-"""
+            SELECT "t"."Id", "t"."Ints", "t"."SomeArray"
+            FROM "TestEntity" AS "t"
+            WHERE (
+            SELECT COUNT(*)
+            FROM json_each("t"."SomeArray") AS "s"
+            WHERE "s"."value" = 0) = 2
+            LIMIT 2
+            """
         );
     }
 
@@ -325,18 +325,18 @@ LIMIT 2
 
         AssertSql(
             """
-SELECT "t"."Id", "t"."Owned"
-FROM "TestOwner" AS "t"
-WHERE json_array_length("t"."Owned" ->> 'Strings') = 2
-LIMIT 2
-""",
+            SELECT "t"."Id", "t"."Owned"
+            FROM "TestOwner" AS "t"
+            WHERE json_array_length("t"."Owned" ->> 'Strings') = 2
+            LIMIT 2
+            """,
             //
             """
-SELECT "t"."Id", "t"."Owned"
-FROM "TestOwner" AS "t"
-WHERE "t"."Owned" ->> 'Strings' ->> 1 = 'bar'
-LIMIT 2
-"""
+            SELECT "t"."Id", "t"."Owned"
+            FROM "TestOwner" AS "t"
+            WHERE "t"."Owned" ->> 'Strings' ->> 1 = 'bar'
+            LIMIT 2
+            """
         );
     }
 

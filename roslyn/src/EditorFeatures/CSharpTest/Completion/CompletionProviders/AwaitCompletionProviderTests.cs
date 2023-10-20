@@ -106,7 +106,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Program
                 {
-                    $$
+                $$
                 }
                 """
             );
@@ -119,9 +119,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                  void F()
-                  {
-                    $$  }
+                void F()
+                {
+                $$  }
                 }
                 """,
                 LanguageVersion.CSharp9
@@ -135,9 +135,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                  async Task F()
-                  {
-                    $$  }
+                async Task F()
+                {
+                $$  }
                 }
                 """,
                 LanguageVersion.CSharp9
@@ -157,9 +157,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                  async Task F()
-                  {
-                    var z = $$  }
+                async Task F()
+                {
+                var z = $$  }
                 }
                 """,
                 LanguageVersion.CSharp9
@@ -173,9 +173,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                  Task F()
-                  {
-                    var z = $$  }
+                Task F()
+                {
+                var z = $$  }
                 }
                 """,
                 LanguageVersion.CSharp9
@@ -195,9 +195,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                  async Task F()
-                  {
-                    using $$  }
+                async Task F()
+                {
+                using $$  }
                 }
                 """,
                 LanguageVersion.CSharp9
@@ -223,9 +223,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                  async Task F()
-                  {
-                    foreach $$  }
+                async Task F()
+                {
+                foreach $$  }
                 }
                 """,
                 LanguageVersion.CSharp9
@@ -245,11 +245,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                  async Task F()
-                  {
-                    var z = from a in "char"
-                          select $$  }
-                    }
+                async Task F()
+                {
+                var z = from a in "char"
+                select $$  }
+                }
                 """,
                 LanguageVersion.CSharp9
             );
@@ -261,7 +261,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 var z = from a in "char"
-                          select $$
+                select $$
                 """,
                 LanguageVersion.CSharp9
             );
@@ -274,9 +274,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                  async Task F()
-                  {
-                    try { }
+                async Task F()
+                {
+                try { }
                 finally { $$ }  }
                 }
                 """,
@@ -303,9 +303,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                  async Task F()
-                  {
-                    try { }
+                async Task F()
+                {
+                try { }
                 catch { $$ }  }
                 }
                 """,
@@ -332,9 +332,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                  async Task F()
-                  {
-                    lock(this) { $$ }  }
+                async Task F()
+                {
+                lock(this) { $$ }  }
                 }
                 """,
                 LanguageVersion.CSharp9
@@ -354,9 +354,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                  async Task F()
-                  {
-                    try { }
+                async Task F()
+                {
+                try { }
                 catch { var z = async () => $$ }  }
                 }
                 """,
@@ -383,9 +383,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                  async Task F()
-                  {
-                    lock($$  }
+                async Task F()
+                {
+                lock($$  }
                 }
                 """,
                 LanguageVersion.CSharp9
@@ -407,10 +407,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
 
                 class C
                 {
-                  async Task F(Task someTask)
-                  {
-                    someTask.$$
-                  }
+                async Task F(Task someTask)
+                {
+                someTask.$$
+                }
                 }
                 """,
                 dotAwait: true,
@@ -427,10 +427,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
 
                 class C
                 {
-                  async Task F(Task<int> someTask)
-                  {
-                    someTask.$$
-                  }
+                async Task F(Task<int> someTask)
+                {
+                someTask.$$
+                }
                 }
                 """,
                 dotAwait: true,
@@ -475,23 +475,23 @@ class C
                 using System.Threading.Tasks;
 
                 public class DummyAwaiter: INotifyCompletion {
-                    public bool IsCompleted => true;
-                    public void OnCompleted(Action continuation) => continuation();
-                    public void GetResult() {}
+                public bool IsCompleted => true;
+                public void OnCompleted(Action continuation) => continuation();
+                public void GetResult() {}
                 }
 
                 public class CustomAwaitable
                 {
-                    public DummyAwaiter GetAwaiter() => new DummyAwaiter();
+                public DummyAwaiter GetAwaiter() => new DummyAwaiter();
                 }
 
                 static class Program
                 {
-                    static async Task Main()
-                    {
-                        var awaitable = new CustomAwaitable();
-                        awaitable.$$;
-                    }
+                static async Task Main()
+                {
+                var awaitable = new CustomAwaitable();
+                awaitable.$$;
+                }
                 }
                 """,
                 dotAwait: true
@@ -508,24 +508,24 @@ class C
                 using System.Threading.Tasks;
 
                 public class DummyAwaiter: INotifyCompletion {
-                    public bool IsCompleted => true;
-                    public void OnCompleted(Action continuation) => continuation();
-                    public void GetResult() {}
+                public bool IsCompleted => true;
+                public void OnCompleted(Action continuation) => continuation();
+                public void GetResult() {}
                 }
 
                 public class CustomAwaitable
                 {
-                    public DummyAwaiter GetAwaiter() => new DummyAwaiter();
-                    public ConfiguredTaskAwaitable ConfigureAwait(bool continueOnCapturedContext) => default;
+                public DummyAwaiter GetAwaiter() => new DummyAwaiter();
+                public ConfiguredTaskAwaitable ConfigureAwait(bool continueOnCapturedContext) => default;
                 }
 
                 static class Program
                 {
-                    static async Task Main()
-                    {
-                        var awaitable = new CustomAwaitable();
-                        awaitable.$$;
-                    }
+                static async Task Main()
+                {
+                var awaitable = new CustomAwaitable();
+                awaitable.$$;
+                }
                 }
                 """,
                 dotAwait: true,
@@ -542,10 +542,10 @@ class C
 
                 static class Program
                 {
-                    static async Task Main(Task someTask)
-                    {
-                        someTask.$$.;
-                    }
+                static async Task Main(Task someTask)
+                {
+                someTask.$$.;
+                }
                 }
                 """,
                 dotAwait: true,
@@ -563,11 +563,11 @@ class C
 
                 static class Program
                 {
-                    static async Task Main(Task someTask)
-                    {
-                        someTask.$$
-                        Int32 i = 0;
-                    }
+                static async Task Main(Task someTask)
+                {
+                someTask.$$
+                Int32 i = 0;
+                }
                 }
                 """,
                 dotAwait: true,
@@ -585,13 +585,13 @@ class C
 
                 static class Program
                 {
-                    static async Task Main(Task someTask)
-                    {
-                        someTask.$$
-                        await Test();
-                    }
+                static async Task Main(Task someTask)
+                {
+                someTask.$$
+                await Test();
+                }
 
-                    async Task Test() { }
+                async Task Test() { }
                 }
                 """,
                 dotAwait: true,
@@ -711,13 +711,13 @@ static class Program
 
                 static class Program
                 {
-                    static async Task Main()
-                    {
-                        var local = Task.CompletedTask;
-                        local.a$$
+                static async Task Main()
+                {
+                var local = Task.CompletedTask;
+                local.a$$
 
-                        Task LocalFunction() => Task.CompletedTask;
-                    }
+                Task LocalFunction() => Task.CompletedTask;
+                }
                 }
                 """
             );
@@ -759,10 +759,10 @@ static class Program
 
                 class C
                 {
-                  async Task F(Task someTask)
-                  {
-                    await someTask.$$
-                  }
+                async Task F(Task someTask)
+                {
+                await someTask.$$
+                }
                 }
                 """
             );
@@ -777,10 +777,10 @@ static class Program
 
                 class C
                 {
-                  async Task F()
-                  {
-                    Task.$$
-                  }
+                async Task F()
+                {
+                Task.$$
+                }
                 }
                 """
             );
@@ -795,10 +795,10 @@ static class Program
 
                 class C
                 {
-                  async Task F(Task someTask)
-                  {
-                    lock(this) { someTask.$$ }
-                  }
+                async Task F(Task someTask)
+                {
+                lock(this) { someTask.$$ }
+                }
                 }
                 """
             );
@@ -826,11 +826,11 @@ static class Program
 
                 class C
                 {
-                  async Task F()
-                  {
-                    var z = from t in new[] { Task.CompletedTask }
-                            select t.$$
-                  }
+                async Task F()
+                {
+                var z = from t in new[] { Task.CompletedTask }
+                select t.$$
+                }
                 }
                 """
             );
@@ -846,12 +846,12 @@ static class Program
 
                 class C
                 {
-                    async Task F()
-                    {
-                        var arrayTask2 = Task.FromResult(new int[0]);
-                        var z = from t in arrayTask2.$$
-                                select t;
-                    }
+                async Task F()
+                {
+                var arrayTask2 = Task.FromResult(new int[0]);
+                var z = from t in arrayTask2.$$
+                select t;
+                }
                 }
                 """,
                 dotAwait: true,
@@ -869,14 +869,14 @@ static class Program
 
                 class C
                 {
-                    async Task F()
-                    {
-                        var array1 = new int[0];
-                        var arrayTask2 = Task.FromResult(new int[0]);
-                        var z = from i1 in array1
-                                from i2 in arrayTask2.$$
-                                select i2;
-                    }
+                async Task F()
+                {
+                var array1 = new int[0];
+                var arrayTask2 = Task.FromResult(new int[0]);
+                var z = from i1 in array1
+                from i2 in arrayTask2.$$
+                select i2;
+                }
                 }
                 """
             );
@@ -892,15 +892,15 @@ static class Program
 
                 class C
                 {
-                    async Task F()
-                    {
-                        var array1 = new int[0];
-                        var arrayTask2 = Task.FromResult(new int[0]);
-                        var z = from i1 in array1
-                                select i1 into c
-                                from i2 in arrayTask2.$$
-                                select i2;
-                    }
+                async Task F()
+                {
+                var array1 = new int[0];
+                var arrayTask2 = Task.FromResult(new int[0]);
+                var z = from i1 in array1
+                select i1 into c
+                from i2 in arrayTask2.$$
+                select i2;
+                }
                 }
                 """
             );
@@ -916,14 +916,14 @@ static class Program
 
                 class C
                 {
-                    async Task F()
-                    {
-                        var array1 = new int[0];
-                        var arrayTask2 = Task.FromResult(new int[0]);
-                        var z = from i1 in array1
-                                join i2 in arrayTask2.$$ on i1 equals i2
-                                select i1;
-                    }
+                async Task F()
+                {
+                var array1 = new int[0];
+                var arrayTask2 = Task.FromResult(new int[0]);
+                var z = from i1 in array1
+                join i2 in arrayTask2.$$ on i1 equals i2
+                select i1;
+                }
                 }
                 """,
                 dotAwait: true,
@@ -941,14 +941,14 @@ static class Program
 
                 class C
                 {
-                    async Task F()
-                    {
-                        var array1 = new int[0];
-                        var arrayTask2 = Task.FromResult(new int[0]);
-                        var z = from i1 in array1
-                                join i2 in arrayTask2.$$ on i1 equals i2 into g
-                                select g;
-                    }
+                async Task F()
+                {
+                var array1 = new int[0];
+                var arrayTask2 = Task.FromResult(new int[0]);
+                var z = from i1 in array1
+                join i2 in arrayTask2.$$ on i1 equals i2 into g
+                select g;
+                }
                 }
                 """,
                 dotAwait: true,
@@ -973,10 +973,10 @@ static class Program
 
                 class C
                 {
-                  async Task F(Task someTask)
-                  {
-                    someTask?.$$
-                  }
+                async Task F(Task someTask)
+                {
+                someTask?.$$
+                }
                 }
                 """
             );

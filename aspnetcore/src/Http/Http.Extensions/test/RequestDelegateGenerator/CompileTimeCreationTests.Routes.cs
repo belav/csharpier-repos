@@ -8,12 +8,12 @@ public partial class CompileTimeCreationTests : RequestDelegateCreationTests
     public async Task SupportsRoutePatternInVariable()
     {
         var source = """
-var route = "/hello";
-app.MapGet(route, () =>
-{
-    return "Hello world!";
-});
-""";
+        var route = "/hello";
+        app.MapGet(route, () =>
+        {
+        return "Hello world!";
+        });
+        """;
         var (result, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -34,12 +34,12 @@ app.MapGet(route, () =>
     public async Task SupportsRoutePatternInConst()
     {
         var source = """
-const string route = "/hello";
-app.MapGet(route, () =>
-{
-    return "Hello world!";
-});
-""";
+        const string route = "/hello";
+        app.MapGet(route, () =>
+        {
+        return "Hello world!";
+        });
+        """;
         var (result, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -60,15 +60,15 @@ app.MapGet(route, () =>
     public async Task SupportsComputedRoutePattern()
     {
         var source = """
-for (int i = 0; i < 5; i++)
-{
-    var route = $"/hello/{i}";
-    app.MapGet(route, () =>
-    {
+        for (int i = 0; i < 5; i++)
+        {
+        var route = $"/hello/{i}";
+        app.MapGet(route, () =>
+        {
         return $"Hello world!";
-    });
-}
-""";
+        });
+        }
+        """;
         var (result, compilation) = await RunGeneratorAsync(source);
         var endpoints = GetEndpointsFromCompilation(compilation);
 

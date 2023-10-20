@@ -1528,7 +1528,7 @@ End Class
                 class G<T0,T1> { }
                 class C<T3>
                 {
-                    G<int,int> M<T4>(G<T3, T4[]> g) { }
+                G<int,int> M<T4>(G<T3, T4[]> g) { }
                 }
                 """,
                 LanguageNames.CSharp,
@@ -1541,8 +1541,8 @@ End Class
                 Class G(Of T0, T1)
                 End Class
                 Class C(Of T3)
-                	Private Function M(Of T4)(g As G(Of T3, T4())) As G(Of Integer, Integer)
-                	End Function
+                Private Function M(Of T4)(g As G(Of T3, T4())) As G(Of Integer, Integer)
+                End Function
                 End Class
                 """,
                 LanguageNames.VisualBasic,

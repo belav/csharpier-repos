@@ -29,10 +29,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         public async Task TestEmptyClass()
         {
             var file = """
-                class C
-                {
-                }
-                """;
+            class C
+            {
+            }
+            """;
             await AssertTagsOnBracesOrSemicolonsAsync(file, 0);
         }
 
@@ -40,13 +40,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         public async Task TestClassWithOneMethod()
         {
             var file = """
-                class C
-                {
-                    void M()
-                    {
-                    }
-                }
-                """;
+            class C
+            {
+            void M()
+            {
+            }
+            }
+            """;
             await AssertTagsOnBracesOrSemicolonsAsync(file, 1);
         }
 
@@ -54,17 +54,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         public async Task TestClassWithTwoMethods()
         {
             var file = """
-                class C
-                {
-                    void M()
-                    {
-                    }
+            class C
+            {
+            void M()
+            {
+            }
 
-                    void N()
-                    {
-                    }
-                }
-                """;
+            void N()
+            {
+            }
+            }
+            """;
             await AssertTagsOnBracesOrSemicolonsAsync(file, 0, 2);
         }
 
@@ -72,19 +72,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         public async Task TestClassWithTwoNonEmptyMethods()
         {
             var file = """
-                class C
-                {
-                    void M()
-                    {
-                        N();
-                    }
+            class C
+            {
+            void M()
+            {
+            N();
+            }
 
-                    void N()
-                    {
-                        M();
-                    }
-                }
-                """;
+            void N()
+            {
+            M();
+            }
+            }
+            """;
             await AssertTagsOnBracesOrSemicolonsAsync(file, 1, 4);
         }
 
@@ -92,15 +92,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         public async Task TestClassWithMethodAndField()
         {
             var file = """
-                class C
-                {
-                    void M()
-                    {
-                    }
+            class C
+            {
+            void M()
+            {
+            }
 
-                    int field;
-                }
-                """;
+            int field;
+            }
+            """;
             await AssertTagsOnBracesOrSemicolonsAsync(file, 0, 2);
         }
 
@@ -108,10 +108,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         public async Task TestEmptyNamespace()
         {
             var file = """
-                namespace N
-                {
-                }
-                """;
+            namespace N
+            {
+            }
+            """;
             await AssertTagsOnBracesOrSemicolonsAsync(file, 0);
         }
 
@@ -119,13 +119,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         public async Task TestNamespaceAndClass()
         {
             var file = """
-                namespace N
-                {
-                    class C
-                    {
-                    }
-                }
-                """;
+            namespace N
+            {
+            class C
+            {
+            }
+            }
+            """;
             await AssertTagsOnBracesOrSemicolonsAsync(file, 1);
         }
 
@@ -133,17 +133,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         public async Task TestNamespaceAndTwoClasses()
         {
             var file = """
-                namespace N
-                {
-                    class C
-                    {
-                    }
+            namespace N
+            {
+            class C
+            {
+            }
 
-                    class D
-                    {
-                    }
-                }
-                """;
+            class D
+            {
+            }
+            }
+            """;
             await AssertTagsOnBracesOrSemicolonsAsync(file, 0, 2);
         }
 
@@ -151,19 +151,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         public async Task TestNamespaceAndTwoClassesAndDelegate()
         {
             var file = """
-                namespace N
-                {
-                    class C
-                    {
-                    }
+            namespace N
+            {
+            class C
+            {
+            }
 
-                    class D
-                    {
-                    }
+            class D
+            {
+            }
 
-                    delegate void Del();
-                }
-                """;
+            delegate void Del();
+            }
+            """;
             await AssertTagsOnBracesOrSemicolonsAsync(file, 0, 1, 3);
         }
 
@@ -171,13 +171,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         public async Task TestNestedClass()
         {
             var file = """
-                class C
-                {
-                    class N
-                    {
-                    }
-                }
-                """;
+            class C
+            {
+            class N
+            {
+            }
+            }
+            """;
             await AssertTagsOnBracesOrSemicolonsAsync(file, 1);
         }
 
@@ -185,17 +185,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         public async Task TestTwoNestedClasses()
         {
             var file = """
-                class C
-                {
-                    class N
-                    {
-                    }
+            class C
+            {
+            class N
+            {
+            }
 
-                    class N2
-                    {
-                    }
-                }
-                """;
+            class N2
+            {
+            }
+            }
+            """;
             await AssertTagsOnBracesOrSemicolonsAsync(file, 0, 2);
         }
 
@@ -203,10 +203,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         public async Task TestStruct()
         {
             var file = """
-                struct S
-                {
-                }
-                """;
+            struct S
+            {
+            }
+            """;
             await AssertTagsOnBracesOrSemicolonsAsync(file, 0);
         }
 
@@ -214,10 +214,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         public async Task TestInterface()
         {
             var file = """
-                interface I
-                {
-                }
-                """;
+            interface I
+            {
+            }
+            """;
             await AssertTagsOnBracesOrSemicolonsAsync(file, 0);
         }
 
@@ -225,10 +225,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         public async Task TestEnum()
         {
             var file = """
-                enum E
-                {
-                }
-                """;
+            enum E
+            {
+            }
+            """;
             await AssertTagsOnBracesOrSemicolonsAsync(file, 0);
         }
 
@@ -236,20 +236,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         public async Task TestProperty()
         {
             var file = """
-                class C
-                {
-                    int Prop
-                    {
-                        get
-                        {
-                            return 0;
-                        }
-                        set
-                        {
-                        }
-                    }
-                }
-                """;
+            class C
+            {
+            int Prop
+            {
+            get
+            {
+            return 0;
+            }
+            set
+            {
+            }
+            }
+            }
+            """;
             await AssertTagsOnBracesOrSemicolonsAsync(file, 4);
         }
 
@@ -257,22 +257,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         public async Task TestPropertyAndField()
         {
             var file = """
-                class C
-                {
-                    int Prop
-                    {
-                        get
-                        {
-                            return 0;
-                        }
-                        set
-                        {
-                        }
-                    }
+            class C
+            {
+            int Prop
+            {
+            get
+            {
+            return 0;
+            }
+            set
+            {
+            }
+            }
 
-                    int field;
-                }
-                """;
+            int field;
+            }
+            """;
             await AssertTagsOnBracesOrSemicolonsAsync(file, 3, 5);
         }
 
@@ -280,15 +280,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         public async Task TestClassWithFieldAndMethod()
         {
             var file = """
-                class C
-                {
-                    int field;
+            class C
+            {
+            int field;
 
-                    void M()
-                    {
-                    }
-                }
-                """;
+            void M()
+            {
+            }
+            }
+            """;
             await AssertTagsOnBracesOrSemicolonsAsync(file, 0, 2);
         }
 
@@ -296,12 +296,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         public async Task UsingDirective()
         {
             var file = """
-                using System;
+            using System;
 
-                class C
-                {
-                }
-                """;
+            class C
+            {
+            }
+            """;
             await AssertTagsOnBracesOrSemicolonsAsync(file, 0, 1);
         }
 
@@ -309,15 +309,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         public async Task UsingDirectiveInNamespace()
         {
             var file = """
-                namespace N
-                {
-                    using System;
+            namespace N
+            {
+            using System;
 
-                    class C
-                    {
-                    }
-                }
-                """;
+            class C
+            {
+            }
+            }
+            """;
             await AssertTagsOnBracesOrSemicolonsAsync(file, 0, 2);
         }
 
@@ -325,14 +325,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         public async Task UsingDirectiveInFileScopedNamespace()
         {
             var file = """
-                namespace N;
+            namespace N;
 
-                using System;
+            using System;
 
-                class C
-                {
-                }
-                """;
+            class C
+            {
+            }
+            """;
             await AssertTagsOnBracesOrSemicolonsAsync(file, 1);
         }
 
@@ -340,17 +340,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         public async Task PropertyStyleEventDeclaration()
         {
             var file = """
-                class C
-                {
-                    event EventHandler E
-                    {
-                        add { }
-                        remove { }
-                    }
+            class C
+            {
+            event EventHandler E
+            {
+            add { }
+            remove { }
+            }
 
-                    int i;
-                }
-                """;
+            int i;
+            }
+            """;
             await AssertTagsOnBracesOrSemicolonsAsync(file, 2, 4);
         }
 
@@ -358,17 +358,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         public async Task IndexerDeclaration()
         {
             var file = """
-                class C
-                {
-                    int this[int i]
-                    {
-                        get { return i; }
-                        set { }
-                    }
+            class C
+            {
+            int this[int i]
+            {
+            get { return i; }
+            set { }
+            }
 
-                    int i;
-                }
-                """;
+            int i;
+            }
+            """;
             await AssertTagsOnBracesOrSemicolonsAsync(file, 3, 5);
         }
 
@@ -376,15 +376,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         public async Task Constructor()
         {
             var file = """
-                class C
-                {
-                    C()
-                    {
-                    }
+            class C
+            {
+            C()
+            {
+            }
 
-                    int i;
-                }
-                """;
+            int i;
+            }
+            """;
             await AssertTagsOnBracesOrSemicolonsAsync(file, 0, 2);
         }
 
@@ -392,15 +392,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         public async Task Destructor()
         {
             var file = """
-                class C
-                {
-                    ~C()
-                    {
-                    }
+            class C
+            {
+            ~C()
+            {
+            }
 
-                    int i;
-                }
-                """;
+            int i;
+            }
+            """;
             await AssertTagsOnBracesOrSemicolonsAsync(file, 0, 2);
         }
 
@@ -408,15 +408,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         public async Task Operator()
         {
             var file = """
-                class C
-                {
-                    static C operator +(C lhs, C rhs)
-                    {
-                    }
+            class C
+            {
+            static C operator +(C lhs, C rhs)
+            {
+            }
 
-                    int i;
-                }
-                """;
+            int i;
+            }
+            """;
             await AssertTagsOnBracesOrSemicolonsAsync(file, 0, 2);
         }
 
@@ -424,15 +424,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         public async Task ConversionOperator()
         {
             var file = """
-                class C
-                {
-                    static implicit operator C(int i)
-                    {
-                    }
+            class C
+            {
+            static implicit operator C(int i)
+            {
+            }
 
-                    int i;
-                }
-                """;
+            int i;
+            }
+            """;
             await AssertTagsOnBracesOrSemicolonsAsync(file, 0, 2);
         }
 
@@ -440,14 +440,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         public async Task Bug930292()
         {
             var file = """
-                class Program
-                {
-                void A() { }
-                void B() { }
-                void C() { }
-                void D() { }
-                }
-                """;
+            class Program
+            {
+            void A() { }
+            void B() { }
+            void C() { }
+            void D() { }
+            }
+            """;
             await AssertTagsOnBracesOrSemicolonsAsync(file, 4);
         }
 
@@ -455,16 +455,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         public async Task Bug930289()
         {
             var file = """
-                namespace Roslyn.Compilers.CSharp
-                {
-                internal struct ArrayElement<T>
-                {
-                internal T Value;
-                internal ArrayElement(T value) { this.Value = value; }
-                public static implicit operator ArrayElement<T>(T value) { return new ArrayElement<T>(value); }
-                }
-                }
-                """;
+            namespace Roslyn.Compilers.CSharp
+            {
+            internal struct ArrayElement<T>
+            {
+            internal T Value;
+            internal ArrayElement(T value) { this.Value = value; }
+            public static implicit operator ArrayElement<T>(T value) { return new ArrayElement<T>(value); }
+            }
+            }
+            """;
             await AssertTagsOnBracesOrSemicolonsAsync(file, 6);
         }
 
@@ -472,17 +472,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         public async Task TestConsoleApp()
         {
             var file = """
-                using System;
-                using System.Collections.Generic;
-                using System.Linq;
+            using System;
+            using System.Collections.Generic;
+            using System.Linq;
 
-                class Program
-                {
-                    static void Main(string[] args)
-                    {
-                    }
-                }
-                """;
+            class Program
+            {
+            static void Main(string[] args)
+            {
+            }
+            }
+            """;
             await AssertTagsOnBracesOrSemicolonsAsync(file, 2, 4);
         }
 
@@ -493,11 +493,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
                 """
                 class C
                 {
-                    int Prop => 3;
+                int Prop => 3;
 
-                    void M()
-                    {
-                    }
+                void M()
+                {
+                }
                 }
                 """,
                 0,
@@ -512,11 +512,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
                 """
                 class C
                 {
-                    int this[int i] => 3;
+                int this[int i] => 3;
 
-                    void M()
-                    {
-                    }
+                void M()
+                {
+                }
                 }
                 """,
                 0,
@@ -533,11 +533,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
                 """
                 class C
                 {
-                    event EventHandler MyEvent => 3;
+                event EventHandler MyEvent => 3;
 
-                    void M()
-                    {
-                    }
+                void M()
+                {
+                }
                 }
                 """,
                 3

@@ -44,8 +44,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
             await TestAsync(
                 """
                 {|Comment:/*
-                   Goo
-                 */|}
+                Goo
+                */|}
                 """
             );
         }
@@ -56,8 +56,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
             await TestAsync(
                 """
                 {|Comment:/*
-                   Goo
-                 |}
+                Goo
+                |}
                 """
             );
         }
@@ -220,8 +220,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
             await TestAsync(
                 """"
                 {|String:"""
-                    goo 
-                    """|}
+                goo
+                """|}
                 """"
             );
         }
@@ -232,8 +232,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
             await TestAsync(
                 """"
                 """
-                    goo
-                    ""
+                goo
+                ""
                 """"
             );
         }
@@ -244,8 +244,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
             await TestAsync(
                 """"
                 """
-                    goo
-                    "
+                goo
+                "
                 """"
             );
         }
@@ -256,7 +256,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
             await TestAsync(
                 """"
                 """
-                    goo
+                goo
                 """"
             );
         }
@@ -426,7 +426,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
                 """
                 enum {|Identifier:C|}
                 {
-                    {|Identifier:D|}
+                {|Identifier:D|}
                 }
                 """
             );
@@ -439,7 +439,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
                 """
                 enum {|Identifier:C|}
                 {
-                    {|Identifier:D|}, {|Identifier:E|}
+                {|Identifier:D|}, {|Identifier:E|}
                 }
                 """
             );
@@ -492,7 +492,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
                 """
                 class {|Identifier:C|}
                 {
-                    private int {|Identifier:X|};
+                private int {|Identifier:X|};
                 }
                 """
             );
@@ -505,7 +505,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
                 """
                 class {|Identifier:C|}
                 {
-                    private int {|Identifier:X|}, {|Identifier:Y|};
+                private int {|Identifier:X|}, {|Identifier:Y|};
                 }
                 """
             );
@@ -518,7 +518,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
                 """
                 class {|Identifier:C|}
                 {
-                    private const int {|Identifier:X|};
+                private const int {|Identifier:X|};
                 }
                 """
             );
@@ -531,7 +531,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
                 """
                 class {|Identifier:C|}
                 {
-                    private const int {|Identifier:X|}, {|Identifier:Y|};
+                private const int {|Identifier:X|}, {|Identifier:Y|};
                 }
                 """
             );
@@ -544,7 +544,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
                 """
                 class {|Identifier:C|}
                 {
-                    private int {|Identifier:X|} => 0;
+                private int {|Identifier:X|} => 0;
                 }
                 """
             );
@@ -557,7 +557,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
                 """
                 class {|Identifier:C|}
                 {
-                    private event Action {|Identifier:X|};
+                private event Action {|Identifier:X|};
                 }
                 """
             );
@@ -570,7 +570,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
                 """
                 class {|Identifier:C|}
                 {
-                    private event Action {|Identifier:X|}, {|Identifier:Y|};
+                private event Action {|Identifier:X|}, {|Identifier:Y|};
                 }
                 """
             );
@@ -583,7 +583,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
                 """
                 class {|Identifier:C|}
                 {
-                    private event Action {|Identifier:X|} { add { } remove { } }
+                private event Action {|Identifier:X|} { add { } remove { } }
                 }
                 """
             );
@@ -596,10 +596,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
                 """
                 class {|Identifier:C|}
                 {
-                    void {|Identifier:D|}()
-                    {
-                        int {|Identifier:E|};
-                    }
+                void {|Identifier:D|}()
+                {
+                int {|Identifier:E|};
+                }
                 }
                 """
             );
@@ -612,10 +612,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
                 """
                 class {|Identifier:C|}
                 {
-                    void {|Identifier:D|}()
-                    {
-                        int {|Identifier:E|}, {|Identifier:F|};
-                    }
+                void {|Identifier:D|}()
+                {
+                int {|Identifier:E|}, {|Identifier:F|};
+                }
                 }
                 """
             );
@@ -628,11 +628,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
                 """
                 class {|Identifier:C|}
                 {
-                    void {|Identifier:D|}()
-                    {
+                void {|Identifier:D|}()
+                {
                 {|Identifier:E|}:
-                        return;
-                    }
+                return;
+                }
                 }
                 """
             );
@@ -645,9 +645,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
                 """
                 class {|Identifier:C|}
                 {
-                    void {|Identifier:D|}(int {|Identifier:E|})
-                    {
-                    }
+                void {|Identifier:D|}(int {|Identifier:E|})
+                {
+                }
                 }
                 """
             );
@@ -660,9 +660,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
                 """
                 class {|Identifier:C|}
                 {
-                    void {|Identifier:D|}(int {|Identifier:E|})
-                    {
-                    }
+                void {|Identifier:D|}(int {|Identifier:E|})
+                {
+                }
                 }
                 """
             );
@@ -675,9 +675,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
                 """
                 class {|Identifier:C|}
                 {
-                    void {|Identifier:D|}(int {|Identifier:E|}, int {|Identifier:F|})
-                    {
-                    }
+                void {|Identifier:D|}(int {|Identifier:E|}, int {|Identifier:F|})
+                {
+                }
                 }
                 """
             );
@@ -690,9 +690,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
                 """
                 static class {|Identifier:C|}
                 {
-                    static void {|Identifier:D|}(this int {|Identifier:E|})
-                    {
-                    }
+                static void {|Identifier:D|}(this int {|Identifier:E|})
+                {
+                }
                 }
                 """
             );
@@ -729,12 +729,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
                 """
                 class {|Identifier:C|}
                 {
-                    void {|Identifier:D|}()
-                    {
-                        for (int {|Identifier:E|} = 0; E < 10; E++)
-                        {
-                        }
-                    }
+                void {|Identifier:D|}()
+                {
+                for (int {|Identifier:E|} = 0; E < 10; E++)
+                {
+                }
+                }
                 }
                 """
             );
@@ -747,10 +747,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SpellCheck
                 """
                 class {|Identifier:C|}
                 {
-                    void {|Identifier:D|}()
-                    {
-                        Goo(out var {|Identifier:E|});
-                    }
+                void {|Identifier:D|}()
+                {
+                Goo(out var {|Identifier:E|});
+                }
                 }
                 """
             );

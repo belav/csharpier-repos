@@ -28,8 +28,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
             await TestMissingAsync(
                 """
                 class C {
-                    void Goo([||]int i, int j {
-                    }
+                void Goo([||]int i, int j {
+                }
                 }
                 """
             );
@@ -41,8 +41,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
             await TestMissingAsync(
                 """
                 class C {
-                    void Goo([|int|] i, int j) {
-                    }
+                void Goo([|int|] i, int j) {
+                }
                 }
                 """
             );
@@ -54,8 +54,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
             await TestMissingAsync(
                 """
                 class C {
-                    void Goo(int i, int j) {[||]
-                    }
+                void Goo(int i, int j) {[||]
+                }
                 }
                 """
             );
@@ -67,9 +67,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
             await TestMissingAsync(
                 """
                 class C {
-                    [||][Attr]
-                    void Goo(int i, int j) {
-                    }
+                [||][Attr]
+                void Goo(int i, int j) {
+                }
                 }
                 """
             );
@@ -81,8 +81,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
             await TestMissingAsync(
                 """
                 class C {
-                    void Goo([||]/**/int i, int j) {
-                    }
+                void Goo([||]/**/int i, int j) {
+                }
                 }
                 """
             );
@@ -94,9 +94,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
             await TestMissingAsync(
                 """
                 class C {
-                    void Goo([||]
-                        /**/int i, int j) {
-                    }
+                void Goo([||]
+                /**/int i, int j) {
+                }
                 }
                 """
             );
@@ -108,9 +108,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
             await TestMissingAsync(
                 """
                 class C {
-                    void Goo([||]
-                        int i/**/, int j) {
-                    }
+                void Goo([||]
+                int i/**/, int j) {
+                }
                 }
                 """
             );
@@ -122,9 +122,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
             await TestMissingAsync(
                 """
                 class C {
-                    void Goo([||]
-                        int i,/**/int j) {
-                    }
+                void Goo([||]
+                int i,/**/int j) {
+                }
                 }
                 """
             );
@@ -136,10 +136,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
             await TestMissingAsync(
                 """
                 class C {
-                    void Goo([||]
-                        int i, int j/**/
-                        ) {
-                    }
+                void Goo([||]
+                int i, int j/**/
+                ) {
+                }
                 }
                 """
             );
@@ -151,10 +151,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
             await TestMissingAsync(
                 """
                 class C {
-                    void Goo([||]
-                        int i, int j
-                        /**/) {
-                    }
+                void Goo([||]
+                int i, int j
+                /**/) {
+                }
                 }
                 """
             );
@@ -166,15 +166,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
             await TestInRegularAndScript1Async(
                 """
                 class C {
-                    void Goo/**/([||]int i, int j) {
-                    }
+                void Goo/**/([||]int i, int j) {
+                }
                 }
                 """,
                 """
                 class C {
-                    void Goo/**/(int i,
-                                 int j) {
-                    }
+                void Goo/**/(int i,
+                int j) {
+                }
                 }
                 """
             );
@@ -186,15 +186,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
             await TestInRegularAndScript1Async(
                 """
                 class C {
-                    void Goo([||]int i, int j)/**/ {
-                    }
+                void Goo([||]int i, int j)/**/ {
+                }
                 }
                 """,
                 """
                 class C {
-                    void Goo(int i,
-                             int j)/**/ {
-                    }
+                void Goo(int i,
+                int j)/**/ {
+                }
                 }
                 """
             );
@@ -206,8 +206,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
             await TestMissingAsync(
                 """
                 class C {
-                    void Goo([||]int i) {
-                    }
+                void Goo([||]int i) {
+                }
                 }
                 """
             );
@@ -219,9 +219,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
             await TestMissingAsync(
                 """
                 class C {
-                    void Goo([||]int i, int j =
-                        initializer) {
-                    }
+                void Goo([||]int i, int j =
+                initializer) {
+                }
                 }
                 """
             );
@@ -233,15 +233,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
             await TestInRegularAndScript1Async(
                 """
                 class C {
-                    [||]void Goo(int i, int j) {
-                    }
+                [||]void Goo(int i, int j) {
+                }
                 }
                 """,
                 """
                 class C {
-                    void Goo(int i,
-                             int j) {
-                    }
+                void Goo(int i,
+                int j) {
+                }
                 }
                 """
             );
@@ -253,15 +253,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
             await TestInRegularAndScript1Async(
                 """
                 class C {
-                    void [||]Goo(int i, int j) {
-                    }
+                void [||]Goo(int i, int j) {
+                }
                 }
                 """,
                 """
                 class C {
-                    void Goo(int i,
-                             int j) {
-                    }
+                void Goo(int i,
+                int j) {
+                }
                 }
                 """
             );
@@ -273,15 +273,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
             await TestInRegularAndScript1Async(
                 """
                 class C {
-                    [||]public void Goo(int i, int j) {
-                    }
+                [||]public void Goo(int i, int j) {
+                }
                 }
                 """,
                 """
                 class C {
-                    public void Goo(int i,
-                                    int j) {
-                    }
+                public void Goo(int i,
+                int j) {
+                }
                 }
                 """
             );
@@ -293,15 +293,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
             await TestInRegularAndScript1Async(
                 """
                 class C {
-                    public void Goo(int i, int j)[||] {
-                    }
+                public void Goo(int i, int j)[||] {
+                }
                 }
                 """,
                 """
                 class C {
-                    public void Goo(int i,
-                                    int j) {
-                    }
+                public void Goo(int i,
+                int j) {
+                }
                 }
                 """
             );
@@ -313,37 +313,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
             await TestAllWrappingCasesAsync(
                 """
                 class C {
-                    void Goo([||]int i, int j) {
-                    }
+                void Goo([||]int i, int j) {
+                }
                 }
                 """,
                 """
                 class C {
-                    void Goo(int i,
-                             int j) {
-                    }
+                void Goo(int i,
+                int j) {
+                }
                 }
                 """,
                 """
                 class C {
-                    void Goo(
-                        int i,
-                        int j) {
-                    }
+                void Goo(
+                int i,
+                int j) {
+                }
                 }
                 """,
                 """
                 class C {
-                    void Goo(int i,
-                        int j) {
-                    }
+                void Goo(int i,
+                int j) {
+                }
                 }
                 """,
                 """
                 class C {
-                    void Goo(
-                        int i, int j) {
-                    }
+                void Goo(
+                int i, int j) {
+                }
                 }
                 """
             );
@@ -355,40 +355,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
             await TestAllWrappingCasesAsync(
                 """
                 class C {
-                    void Goo([||]int i, int j, int k) {
-                    }
+                void Goo([||]int i, int j, int k) {
+                }
                 }
                 """,
                 """
                 class C {
-                    void Goo(int i,
-                             int j,
-                             int k) {
-                    }
+                void Goo(int i,
+                int j,
+                int k) {
+                }
                 }
                 """,
                 """
                 class C {
-                    void Goo(
-                        int i,
-                        int j,
-                        int k) {
-                    }
+                void Goo(
+                int i,
+                int j,
+                int k) {
+                }
                 }
                 """,
                 """
                 class C {
-                    void Goo(int i,
-                        int j,
-                        int k) {
-                    }
+                void Goo(int i,
+                int j,
+                int k) {
+                }
                 }
                 """,
                 """
                 class C {
-                    void Goo(
-                        int i, int j, int k) {
-                    }
+                void Goo(
+                int i, int j, int k) {
+                }
                 }
                 """
             );
@@ -400,49 +400,49 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
             await TestAllWrappingCasesAsync(
                 """
                 class C {
-                    void Goo([||]
-                        int i,
-                            int j,
-                                int k) {
-                    }
+                void Goo([||]
+                int i,
+                int j,
+                int k) {
+                }
                 }
                 """,
                 """
                 class C {
-                    void Goo(int i,
-                             int j,
-                             int k) {
-                    }
+                void Goo(int i,
+                int j,
+                int k) {
+                }
                 }
                 """,
                 """
                 class C {
-                    void Goo(
-                        int i,
-                        int j,
-                        int k) {
-                    }
+                void Goo(
+                int i,
+                int j,
+                int k) {
+                }
                 }
                 """,
                 """
                 class C {
-                    void Goo(int i,
-                        int j,
-                        int k) {
-                    }
+                void Goo(int i,
+                int j,
+                int k) {
+                }
                 }
                 """,
                 """
                 class C {
-                    void Goo(int i, int j, int k) {
-                    }
+                void Goo(int i, int j, int k) {
+                }
                 }
                 """,
                 """
                 class C {
-                    void Goo(
-                        int i, int j, int k) {
-                    }
+                void Goo(
+                int i, int j, int k) {
+                }
                 }
                 """
             );
@@ -454,84 +454,84 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
             await TestAllWrappingCasesAsync(
                 """
                 class C {
-                    void Goo([||]
-                        int i, int j, int k, int l, int m,
-                        int n) {
-                    }
+                void Goo([||]
+                int i, int j, int k, int l, int m,
+                int n) {
+                }
                 }
                 """,
                 GetIndentionColumn(30),
                 """
-class C {
-    void Goo(int i,
-             int j,
-             int k,
-             int l,
-             int m,
-             int n) {
-    }
-}
-""",
+                class C {
+                void Goo(int i,
+                int j,
+                int k,
+                int l,
+                int m,
+                int n) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(
-        int i,
-        int j,
-        int k,
-        int l,
-        int m,
-        int n) {
-    }
-}
-""",
+                class C {
+                void Goo(
+                int i,
+                int j,
+                int k,
+                int l,
+                int m,
+                int n) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(int i,
-        int j,
-        int k,
-        int l,
-        int m,
-        int n) {
-    }
-}
-""",
+                class C {
+                void Goo(int i,
+                int j,
+                int k,
+                int l,
+                int m,
+                int n) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(int i, int j, int k, int l, int m, int n) {
-    }
-}
-""",
+                class C {
+                void Goo(int i, int j, int k, int l, int m, int n) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(
-        int i, int j, int k, int l, int m, int n) {
-    }
-}
-""",
+                class C {
+                void Goo(
+                int i, int j, int k, int l, int m, int n) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(int i, int j,
-             int k, int l,
-             int m, int n) {
-    }
-}
-""",
+                class C {
+                void Goo(int i, int j,
+                int k, int l,
+                int m, int n) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(
-        int i, int j, int k,
-        int l, int m, int n) {
-    }
-}
-""",
+                class C {
+                void Goo(
+                int i, int j, int k,
+                int l, int m, int n) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(int i, int j,
-        int k, int l, int m,
-        int n) {
-    }
-}
-"""
+                class C {
+                void Goo(int i, int j,
+                int k, int l, int m,
+                int n) {
+                }
+                }
+                """
             );
         }
 
@@ -541,89 +541,89 @@ class C {
             await TestAllWrappingCasesAsync(
                 """
                 class C {
-                    void Goo([||]
-                        int i, int jj, int kkkk, int llllllll, int mmmmmmmmmmmmmmmm,
-                        int nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn) {
-                    }
+                void Goo([||]
+                int i, int jj, int kkkk, int llllllll, int mmmmmmmmmmmmmmmm,
+                int nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn) {
+                }
                 }
                 """,
                 GetIndentionColumn(30),
                 """
-class C {
-    void Goo(int i,
-             int jj,
-             int kkkk,
-             int llllllll,
-             int mmmmmmmmmmmmmmmm,
-             int nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn) {
-    }
-}
-""",
+                class C {
+                void Goo(int i,
+                int jj,
+                int kkkk,
+                int llllllll,
+                int mmmmmmmmmmmmmmmm,
+                int nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(
-        int i,
-        int jj,
-        int kkkk,
-        int llllllll,
-        int mmmmmmmmmmmmmmmm,
-        int nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn) {
-    }
-}
-""",
+                class C {
+                void Goo(
+                int i,
+                int jj,
+                int kkkk,
+                int llllllll,
+                int mmmmmmmmmmmmmmmm,
+                int nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(int i,
-        int jj,
-        int kkkk,
-        int llllllll,
-        int mmmmmmmmmmmmmmmm,
-        int nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn) {
-    }
-}
-""",
+                class C {
+                void Goo(int i,
+                int jj,
+                int kkkk,
+                int llllllll,
+                int mmmmmmmmmmmmmmmm,
+                int nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(int i, int jj, int kkkk, int llllllll, int mmmmmmmmmmmmmmmm, int nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn) {
-    }
-}
-""",
+                class C {
+                void Goo(int i, int jj, int kkkk, int llllllll, int mmmmmmmmmmmmmmmm, int nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(
-        int i, int jj, int kkkk, int llllllll, int mmmmmmmmmmmmmmmm, int nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn) {
-    }
-}
-""",
+                class C {
+                void Goo(
+                int i, int jj, int kkkk, int llllllll, int mmmmmmmmmmmmmmmm, int nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(int i, int jj,
-             int kkkk,
-             int llllllll,
-             int mmmmmmmmmmmmmmmm,
-             int nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn) {
-    }
-}
-""",
+                class C {
+                void Goo(int i, int jj,
+                int kkkk,
+                int llllllll,
+                int mmmmmmmmmmmmmmmm,
+                int nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(
-        int i, int jj,
-        int kkkk, int llllllll,
-        int mmmmmmmmmmmmmmmm,
-        int nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn) {
-    }
-}
-""",
+                class C {
+                void Goo(
+                int i, int jj,
+                int kkkk, int llllllll,
+                int mmmmmmmmmmmmmmmm,
+                int nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(int i, int jj,
-        int kkkk, int llllllll,
-        int mmmmmmmmmmmmmmmm,
-        int nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn) {
-    }
-}
-"""
+                class C {
+                void Goo(int i, int jj,
+                int kkkk, int llllllll,
+                int mmmmmmmmmmmmmmmm,
+                int nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn) {
+                }
+                }
+                """
             );
         }
 
@@ -633,78 +633,78 @@ class C {
             await TestAllWrappingCasesAsync(
                 """
                 class C {
-                    void Goo([||]
-                        int iiiii, int jjjjj, int kkkkk, int lllll, int mmmmm,
-                        int nnnnn) {
-                    }
+                void Goo([||]
+                int iiiii, int jjjjj, int kkkkk, int lllll, int mmmmm,
+                int nnnnn) {
+                }
                 }
                 """,
                 GetIndentionColumn(30),
                 """
-class C {
-    void Goo(int iiiii,
-             int jjjjj,
-             int kkkkk,
-             int lllll,
-             int mmmmm,
-             int nnnnn) {
-    }
-}
-""",
+                class C {
+                void Goo(int iiiii,
+                int jjjjj,
+                int kkkkk,
+                int lllll,
+                int mmmmm,
+                int nnnnn) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(
-        int iiiii,
-        int jjjjj,
-        int kkkkk,
-        int lllll,
-        int mmmmm,
-        int nnnnn) {
-    }
-}
-""",
+                class C {
+                void Goo(
+                int iiiii,
+                int jjjjj,
+                int kkkkk,
+                int lllll,
+                int mmmmm,
+                int nnnnn) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(int iiiii,
-        int jjjjj,
-        int kkkkk,
-        int lllll,
-        int mmmmm,
-        int nnnnn) {
-    }
-}
-""",
+                class C {
+                void Goo(int iiiii,
+                int jjjjj,
+                int kkkkk,
+                int lllll,
+                int mmmmm,
+                int nnnnn) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(int iiiii, int jjjjj, int kkkkk, int lllll, int mmmmm, int nnnnn) {
-    }
-}
-""",
+                class C {
+                void Goo(int iiiii, int jjjjj, int kkkkk, int lllll, int mmmmm, int nnnnn) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(
-        int iiiii, int jjjjj, int kkkkk, int lllll, int mmmmm, int nnnnn) {
-    }
-}
-""",
+                class C {
+                void Goo(
+                int iiiii, int jjjjj, int kkkkk, int lllll, int mmmmm, int nnnnn) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(
-        int iiiii, int jjjjj,
-        int kkkkk, int lllll,
-        int mmmmm, int nnnnn) {
-    }
-}
-""",
+                class C {
+                void Goo(
+                int iiiii, int jjjjj,
+                int kkkkk, int lllll,
+                int mmmmm, int nnnnn) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(int iiiii,
-        int jjjjj, int kkkkk,
-        int lllll, int mmmmm,
-        int nnnnn) {
-    }
-}
-"""
+                class C {
+                void Goo(int iiiii,
+                int jjjjj, int kkkkk,
+                int lllll, int mmmmm,
+                int nnnnn) {
+                }
+                }
+                """
             );
         }
 
@@ -714,60 +714,60 @@ class C {
             await TestAllWrappingCasesAsync(
                 """
                 class C {
-                    void Goo([||]
-                        int iiiii, int jjjjj, int kkkkk, int lllll, int mmmmm,
-                        int nnnnn) {
-                    }
+                void Goo([||]
+                int iiiii, int jjjjj, int kkkkk, int lllll, int mmmmm,
+                int nnnnn) {
+                }
                 }
                 """,
                 GetIndentionColumn(20),
                 """
-class C {
-    void Goo(int iiiii,
-             int jjjjj,
-             int kkkkk,
-             int lllll,
-             int mmmmm,
-             int nnnnn) {
-    }
-}
-""",
+                class C {
+                void Goo(int iiiii,
+                int jjjjj,
+                int kkkkk,
+                int lllll,
+                int mmmmm,
+                int nnnnn) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(
-        int iiiii,
-        int jjjjj,
-        int kkkkk,
-        int lllll,
-        int mmmmm,
-        int nnnnn) {
-    }
-}
-""",
+                class C {
+                void Goo(
+                int iiiii,
+                int jjjjj,
+                int kkkkk,
+                int lllll,
+                int mmmmm,
+                int nnnnn) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(int iiiii,
-        int jjjjj,
-        int kkkkk,
-        int lllll,
-        int mmmmm,
-        int nnnnn) {
-    }
-}
-""",
+                class C {
+                void Goo(int iiiii,
+                int jjjjj,
+                int kkkkk,
+                int lllll,
+                int mmmmm,
+                int nnnnn) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(int iiiii, int jjjjj, int kkkkk, int lllll, int mmmmm, int nnnnn) {
-    }
-}
-""",
+                class C {
+                void Goo(int iiiii, int jjjjj, int kkkkk, int lllll, int mmmmm, int nnnnn) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(
-        int iiiii, int jjjjj, int kkkkk, int lllll, int mmmmm, int nnnnn) {
-    }
-}
-"""
+                class C {
+                void Goo(
+                int iiiii, int jjjjj, int kkkkk, int lllll, int mmmmm, int nnnnn) {
+                }
+                }
+                """
             );
         }
 
@@ -777,85 +777,85 @@ class C {
             await TestAllWrappingCasesAsync(
                 """
                 class C {
-                    void Goo([||]
-                        int i, int jj, int kkkk, int lll, int mm,
-                        int n) {
-                    }
+                void Goo([||]
+                int i, int jj, int kkkk, int lll, int mm,
+                int n) {
+                }
                 }
                 """,
                 GetIndentionColumn(30),
                 """
-class C {
-    void Goo(int i,
-             int jj,
-             int kkkk,
-             int lll,
-             int mm,
-             int n) {
-    }
-}
-""",
+                class C {
+                void Goo(int i,
+                int jj,
+                int kkkk,
+                int lll,
+                int mm,
+                int n) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(
-        int i,
-        int jj,
-        int kkkk,
-        int lll,
-        int mm,
-        int n) {
-    }
-}
-""",
+                class C {
+                void Goo(
+                int i,
+                int jj,
+                int kkkk,
+                int lll,
+                int mm,
+                int n) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(int i,
-        int jj,
-        int kkkk,
-        int lll,
-        int mm,
-        int n) {
-    }
-}
-""",
+                class C {
+                void Goo(int i,
+                int jj,
+                int kkkk,
+                int lll,
+                int mm,
+                int n) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(int i, int jj, int kkkk, int lll, int mm, int n) {
-    }
-}
-""",
+                class C {
+                void Goo(int i, int jj, int kkkk, int lll, int mm, int n) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(
-        int i, int jj, int kkkk, int lll, int mm, int n) {
-    }
-}
-""",
+                class C {
+                void Goo(
+                int i, int jj, int kkkk, int lll, int mm, int n) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(int i, int jj,
-             int kkkk, int lll,
-             int mm, int n) {
-    }
-}
-""",
+                class C {
+                void Goo(int i, int jj,
+                int kkkk, int lll,
+                int mm, int n) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(
-        int i, int jj,
-        int kkkk, int lll,
-        int mm, int n) {
-    }
-}
-""",
+                class C {
+                void Goo(
+                int i, int jj,
+                int kkkk, int lll,
+                int mm, int n) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(int i, int jj,
-        int kkkk, int lll,
-        int mm, int n) {
-    }
-}
-"""
+                class C {
+                void Goo(int i, int jj,
+                int kkkk, int lll,
+                int mm, int n) {
+                }
+                }
+                """
             );
         }
 
@@ -865,77 +865,77 @@ class C {
             await TestAllWrappingCasesAsync(
                 """
                 class C {
-                    void Goo([||]int i,
-                             int jj,
-                             int kkkk,
-                             int lll,
-                             int mm,
-                             int n) {
-                    }
+                void Goo([||]int i,
+                int jj,
+                int kkkk,
+                int lll,
+                int mm,
+                int n) {
+                }
                 }
                 """,
                 GetIndentionColumn(30),
                 """
-class C {
-    void Goo(
-        int i,
-        int jj,
-        int kkkk,
-        int lll,
-        int mm,
-        int n) {
-    }
-}
-""",
+                class C {
+                void Goo(
+                int i,
+                int jj,
+                int kkkk,
+                int lll,
+                int mm,
+                int n) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(int i,
-        int jj,
-        int kkkk,
-        int lll,
-        int mm,
-        int n) {
-    }
-}
-""",
+                class C {
+                void Goo(int i,
+                int jj,
+                int kkkk,
+                int lll,
+                int mm,
+                int n) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(int i, int jj, int kkkk, int lll, int mm, int n) {
-    }
-}
-""",
+                class C {
+                void Goo(int i, int jj, int kkkk, int lll, int mm, int n) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(
-        int i, int jj, int kkkk, int lll, int mm, int n) {
-    }
-}
-""",
+                class C {
+                void Goo(
+                int i, int jj, int kkkk, int lll, int mm, int n) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(int i, int jj,
-             int kkkk, int lll,
-             int mm, int n) {
-    }
-}
-""",
+                class C {
+                void Goo(int i, int jj,
+                int kkkk, int lll,
+                int mm, int n) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(
-        int i, int jj,
-        int kkkk, int lll,
-        int mm, int n) {
-    }
-}
-""",
+                class C {
+                void Goo(
+                int i, int jj,
+                int kkkk, int lll,
+                int mm, int n) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(int i, int jj,
-        int kkkk, int lll,
-        int mm, int n) {
-    }
-}
-"""
+                class C {
+                void Goo(int i, int jj,
+                int kkkk, int lll,
+                int mm, int n) {
+                }
+                }
+                """
             );
         }
 
@@ -945,77 +945,77 @@ class C {
             await TestAllWrappingCasesAsync(
                 """
                 class C {
-                    void Goo([||]
-                        int i,
-                        int jj,
-                        int kkkk,
-                        int lll,
-                        int mm,
-                        int n) {
-                    }
+                void Goo([||]
+                int i,
+                int jj,
+                int kkkk,
+                int lll,
+                int mm,
+                int n) {
+                }
                 }
                 """,
                 GetIndentionColumn(30),
                 """
-class C {
-    void Goo(int i,
-             int jj,
-             int kkkk,
-             int lll,
-             int mm,
-             int n) {
-    }
-}
-""",
+                class C {
+                void Goo(int i,
+                int jj,
+                int kkkk,
+                int lll,
+                int mm,
+                int n) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(int i,
-        int jj,
-        int kkkk,
-        int lll,
-        int mm,
-        int n) {
-    }
-}
-""",
+                class C {
+                void Goo(int i,
+                int jj,
+                int kkkk,
+                int lll,
+                int mm,
+                int n) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(int i, int jj, int kkkk, int lll, int mm, int n) {
-    }
-}
-""",
+                class C {
+                void Goo(int i, int jj, int kkkk, int lll, int mm, int n) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(
-        int i, int jj, int kkkk, int lll, int mm, int n) {
-    }
-}
-""",
+                class C {
+                void Goo(
+                int i, int jj, int kkkk, int lll, int mm, int n) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(int i, int jj,
-             int kkkk, int lll,
-             int mm, int n) {
-    }
-}
-""",
+                class C {
+                void Goo(int i, int jj,
+                int kkkk, int lll,
+                int mm, int n) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(
-        int i, int jj,
-        int kkkk, int lll,
-        int mm, int n) {
-    }
-}
-""",
+                class C {
+                void Goo(
+                int i, int jj,
+                int kkkk, int lll,
+                int mm, int n) {
+                }
+                }
+                """,
                 """
-class C {
-    void Goo(int i, int jj,
-        int kkkk, int lll,
-        int mm, int n) {
-    }
-}
-"""
+                class C {
+                void Goo(int i, int jj,
+                int kkkk, int lll,
+                int mm, int n) {
+                }
+                }
+                """
             );
         }
 
@@ -1025,15 +1025,15 @@ class C {
             await TestInRegularAndScript1Async(
                 """
                 class C {
-                    public [||]C(int i, int j) {
-                    }
+                public [||]C(int i, int j) {
+                }
                 }
                 """,
                 """
                 class C {
-                    public C(int i,
-                             int j) {
-                    }
+                public C(int i,
+                int j) {
+                }
                 }
                 """
             );
@@ -1045,15 +1045,15 @@ class C {
             await TestInRegularAndScript1Async(
                 """
                 class C {
-                    public [||]C(int i, int j) : base(,) {
-                    }
+                public [||]C(int i, int j) : base(,) {
+                }
                 }
                 """,
                 """
                 class C {
-                    public C(int i,
-                             int j) : base(,) {
-                    }
+                public C(int i,
+                int j) : base(,) {
+                }
                 }
                 """
             );
@@ -1065,13 +1065,13 @@ class C {
             await TestInRegularAndScript1Async(
                 """
                 class C {
-                    public int [||]this[int i, int j] => 0;
+                public int [||]this[int i, int j] => 0;
                 }
                 """,
                 """
                 class C {
-                    public int this[int i,
-                                    int j] => 0;
+                public int this[int i,
+                int j] => 0;
                 }
                 """
             );
@@ -1083,13 +1083,13 @@ class C {
             await TestInRegularAndScript1Async(
                 """
                 class C {
-                    public shared int operator [||]+(C c1, C c2) => 0;
+                public shared int operator [||]+(C c1, C c2) => 0;
                 }
                 """,
                 """
                 class C {
-                    public shared int operator +(C c1,
-                                                 C c2) => 0;
+                public shared int operator +(C c1,
+                C c2) => 0;
                 }
                 """
             );
@@ -1101,13 +1101,13 @@ class C {
             await TestInRegularAndScript1Async(
                 """
                 class C {
-                    public delegate int [||]D(C c1, C c2);
+                public delegate int [||]D(C c1, C c2);
                 }
                 """,
                 """
                 class C {
-                    public delegate int D(C c1,
-                                          C c2);
+                public delegate int D(C c1,
+                C c2);
                 }
                 """
             );
@@ -1119,21 +1119,21 @@ class C {
             await TestInRegularAndScript1Async(
                 """
                 class C {
-                    void Goo()
-                    {
-                        var v = ([||]C c, C d) => {
-                        };
-                    }
+                void Goo()
+                {
+                var v = ([||]C c, C d) => {
+                };
+                }
                 }
                 """,
                 """
                 class C {
-                    void Goo()
-                    {
-                        var v = (C c,
-                                 C d) => {
-                        };
-                    }
+                void Goo()
+                {
+                var v = (C c,
+                C d) => {
+                };
+                }
                 }
                 """
             );
@@ -1145,21 +1145,21 @@ class C {
             await TestInRegularAndScript1Async(
                 """
                 class C {
-                    void Goo()
-                    {
-                        var v = ([||]c, d) => {
-                        };
-                    }
+                void Goo()
+                {
+                var v = ([||]c, d) => {
+                };
+                }
                 }
                 """,
                 """
                 class C {
-                    void Goo()
-                    {
-                        var v = (c,
-                                 d) => {
-                        };
-                    }
+                void Goo()
+                {
+                var v = (c,
+                d) => {
+                };
+                }
                 }
                 """
             );
@@ -1171,11 +1171,11 @@ class C {
             await TestMissingAsync(
                 """
                 class C {
-                    void Goo()
-                    {
-                        var v = [||]c => {
-                        };
-                    }
+                void Goo()
+                {
+                var v = [||]c => {
+                };
+                }
                 }
                 """
             );
@@ -1187,21 +1187,21 @@ class C {
             await TestInRegularAndScript1Async(
                 """
                 class C {
-                    void Goo()
-                    {
-                        void Local([||]C c, C d) {
-                        }
-                    }
+                void Goo()
+                {
+                void Local([||]C c, C d) {
+                }
+                }
                 }
                 """,
                 """
                 class C {
-                    void Goo()
-                    {
-                        void Local(C c,
-                                   C d) {
-                        }
-                    }
+                void Goo()
+                {
+                void Local(C c,
+                C d) {
+                }
+                }
                 }
                 """
             );
@@ -1213,9 +1213,9 @@ class C {
             await TestInRegularAndScript1Async(
                 "record R([||]int I, string S);",
                 """
-record R(int I,
-         string S);
-"""
+                record R(int I,
+                string S);
+                """
             );
         }
 
@@ -1225,9 +1225,9 @@ record R(int I,
             await TestInRegularAndScript1Async(
                 "class R([||]int I, string S);",
                 """
-class R(int I,
-        string S);
-"""
+                class R(int I,
+                string S);
+                """
             );
         }
 
@@ -1237,9 +1237,9 @@ class R(int I,
             await TestInRegularAndScript1Async(
                 "interface R([||]int I, string S);",
                 """
-interface R(int I,
-            string S);
-"""
+                interface R(int I,
+                string S);
+                """
             );
         }
 
@@ -1249,9 +1249,9 @@ interface R(int I,
             await TestInRegularAndScript1Async(
                 "record R([||]int I, string S) { }",
                 """
-record R(int I,
-         string S) { }
-"""
+                record R(int I,
+                string S) { }
+                """
             );
         }
 
@@ -1261,9 +1261,9 @@ record R(int I,
             await TestInRegularAndScript1Async(
                 "class R([||]int I, string S) { }",
                 """
-class R(int I,
-        string S) { }
-"""
+                class R(int I,
+                string S) { }
+                """
             );
         }
 
@@ -1273,9 +1273,9 @@ class R(int I,
             await TestInRegularAndScript1Async(
                 "interface R([||]int I, string S) { }",
                 """
-interface R(int I,
-            string S) { }
-"""
+                interface R(int I,
+                string S) { }
+                """
             );
         }
 
@@ -1285,9 +1285,9 @@ interface R(int I,
             await TestInRegularAndScript1Async(
                 "record struct R([||]int I, string S);",
                 """
-record struct R(int I,
+                record struct R(int I,
                 string S);
-""",
+                """,
                 new TestParameters(TestOptions.RegularPreview)
             );
         }
@@ -1298,9 +1298,9 @@ record struct R(int I,
             await TestInRegularAndScript1Async(
                 "struct R([||]int I, string S);",
                 """
-struct R(int I,
-         string S);
-""",
+                struct R(int I,
+                string S);
+                """,
                 new TestParameters(TestOptions.RegularPreview)
             );
         }
@@ -1311,9 +1311,9 @@ struct R(int I,
             await TestInRegularAndScript1Async(
                 "record struct R([||]int I, string S) { }",
                 """
-record struct R(int I,
+                record struct R(int I,
                 string S) { }
-""",
+                """,
                 new TestParameters(TestOptions.RegularPreview)
             );
         }
@@ -1324,9 +1324,9 @@ record struct R(int I,
             await TestInRegularAndScript1Async(
                 "struct R([||]int I, string S) { }",
                 """
-struct R(int I,
-         string S) { }
-""",
+                struct R(int I,
+                string S) { }
+                """,
                 new TestParameters(TestOptions.RegularPreview)
             );
         }
@@ -1337,7 +1337,7 @@ struct R(int I,
             await TestMissingAsync(
                 """
                 class C {
-                    public void UpsertRecord<T>[||]
+                public void UpsertRecord<T>[||]
                 }
                 """
             );
@@ -1349,7 +1349,7 @@ struct R(int I,
             await TestMissingAsync(
                 """
                 class C {
-                    public void UpsertRecord<T>[||])
+                public void UpsertRecord<T>[||])
                 }
                 """
             );
@@ -1361,7 +1361,7 @@ struct R(int I,
             await TestMissingAsync(
                 """
                 class C {
-                    public void UpsertRecord<T>[||] int i, int j)
+                public void UpsertRecord<T>[||] int i, int j)
                 }
                 """
             );
@@ -1373,7 +1373,7 @@ struct R(int I,
             await TestMissingAsync(
                 """
                 class C {
-                    public void UpsertRecord<T>([||]
+                public void UpsertRecord<T>([||]
                 }
                 """
             );
@@ -1385,7 +1385,7 @@ struct R(int I,
             await TestMissingAsync(
                 """
                 class C {
-                    public void UpsertRecord<T>([||]int i, int j
+                public void UpsertRecord<T>([||]int i, int j
                 }
                 """
             );

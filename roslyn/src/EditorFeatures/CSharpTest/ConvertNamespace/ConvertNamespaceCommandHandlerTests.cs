@@ -41,12 +41,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 XElement.Parse(
                     string.Format(
                         """
-                    <Workspace>
+                        <Workspace>
                         <Project Language="C#" CommonReferences="true">
-                            <Document>{0}</Document>
+                        <Document>{0}</Document>
                         </Project>
-                    </Workspace>
-                    """,
+                        </Workspace>
+                        """,
                         markup
                     )
                 );
@@ -73,9 +73,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 """
                 namespace N$$
                 {
-                    class C
-                    {
-                    }
+                class C
+                {
+                }
                 }
                 """
             );
@@ -99,9 +99,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 """
                 namespace N$$
                 {
-                    class C
-                    {
-                    }
+                class C
+                {
+                }
                 }
                 """
             );
@@ -119,9 +119,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 """
                 namespace N;$$
                 {
-                    class C
-                    {
-                    }
+                class C
+                {
+                }
                 }
                 """
             );
@@ -134,9 +134,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 """
                 namespace A.B$$
                 {
-                    class C
-                    {
-                    }
+                class C
+                {
+                }
                 }
                 """
             );
@@ -160,9 +160,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 """
                 namespace A.$$B
                 {
-                    class C
-                    {
-                    }
+                class C
+                {
+                }
                 }
                 """
             );
@@ -172,9 +172,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 """
                 namespace A.;$$B
                 {
-                    class C
-                    {
-                    }
+                class C
+                {
+                }
                 }
                 """
             );
@@ -187,9 +187,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 """
                 namespace A$$.B
                 {
-                    class C
-                    {
-                    }
+                class C
+                {
+                }
                 }
                 """
             );
@@ -199,9 +199,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 """
                 namespace A;$$.B
                 {
-                    class C
-                    {
-                    }
+                class C
+                {
+                }
                 }
                 """
             );
@@ -214,9 +214,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 """
                 namespace $$A.B
                 {
-                    class C
-                    {
-                    }
+                class C
+                {
+                }
                 }
                 """
             );
@@ -226,9 +226,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 """
                 namespace ;$$A.B
                 {
-                    class C
-                    {
-                    }
+                class C
+                {
+                }
                 }
                 """
             );
@@ -241,9 +241,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 """
                 namespace A.B  $$
                 {
-                    class C
-                    {
-                    }
+                class C
+                {
+                }
                 }
                 """
             );
@@ -251,7 +251,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
                 """
-                namespace A.B;$$  
+                namespace A.B;$$
 
                 class C
                 {
@@ -267,9 +267,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 """
                 namespace $$N
                 {
-                    class C
-                    {
-                    }
+                class C
+                {
+                }
                 }
                 """
             );
@@ -279,9 +279,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 """
                 namespace ;$$N
                 {
-                    class C
-                    {
-                    }
+                class C
+                {
+                }
                 }
                 """
             );
@@ -294,12 +294,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 """
                 namespace N$$
                 {
-                    namespace N2
-                    {
-                        class C
-                        {
-                        }
-                    }
+                namespace N2
+                {
+                class C
+                {
+                }
+                }
                 }
                 """
             );
@@ -309,12 +309,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 """
                 namespace N;$$
                 {
-                    namespace N2
-                    {
-                        class C
-                        {
-                        }
-                    }
+                namespace N2
+                {
+                class C
+                {
+                }
+                }
                 }
                 """
             );
@@ -331,9 +331,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
 
                 namespace N2
                 {
-                    class C
-                    {
-                    }
+                class C
+                {
+                }
                 }
                 """
             );
@@ -347,9 +347,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
 
                 namespace N2
                 {
-                    class C
-                    {
-                    }
+                class C
+                {
+                }
                 }
                 """
             );
@@ -365,9 +365,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
 
                 namespace N$$
                 {
-                    class C
-                    {
-                    }
+                class C
+                {
+                }
                 }
                 """
             );
@@ -394,12 +394,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 """
                 namespace N$$
                 {
-                    using A;
-                    using B;
+                using A;
+                using B;
 
-                    class C
-                    {
-                    }
+                class C
+                {
+                }
                 }
                 """
             );
@@ -426,9 +426,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 """
                 namespace N$$ // Goo
                 {
-                    class C
-                    {
-                    }
+                class C
+                {
+                }
                 }
                 """
             );

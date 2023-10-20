@@ -27,25 +27,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
                 TestCode = """
                 class C
                 {
-                    void M()
-                    {
-                        var item = FindItem() as C;
-                        [|if|] (item == null)
-                            throw new System.InvalidOperationException();
-                    }
+                void M()
+                {
+                var item = FindItem() as C;
+                [|if|] (item == null)
+                throw new System.InvalidOperationException();
+                }
 
-                    object FindItem() => null;
+                object FindItem() => null;
                 }
                 """,
                 FixedCode = """
                 class C
                 {
-                    void M()
-                    {
-                        var item = FindItem() as C ?? throw new System.InvalidOperationException();
-                    }
-                
-                    object FindItem() => null;
+                void M()
+                {
+                var item = FindItem() as C ?? throw new System.InvalidOperationException();
+                }
+
+                object FindItem() => null;
                 }
                 """
             }.RunAsync();
@@ -59,27 +59,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
                 TestCode = """
                 class C
                 {
-                    void M()
-                    {
-                        var item = FindItem() as C;
-                        [|if|] (item == null)
-                        {
-                            throw new System.InvalidOperationException();
-                        }
-                    }
+                void M()
+                {
+                var item = FindItem() as C;
+                [|if|] (item == null)
+                {
+                throw new System.InvalidOperationException();
+                }
+                }
 
-                    object FindItem() => null;
+                object FindItem() => null;
                 }
                 """,
                 FixedCode = """
                 class C
                 {
-                    void M()
-                    {
-                        var item = FindItem() as C ?? throw new System.InvalidOperationException();
-                    }
-                
-                    object FindItem() => null;
+                void M()
+                {
+                var item = FindItem() as C ?? throw new System.InvalidOperationException();
+                }
+
+                object FindItem() => null;
                 }
                 """
             }.RunAsync();
@@ -93,25 +93,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
                 TestCode = """
                 class C
                 {
-                    void M()
-                    {
-                        var item = FindItem() as C;
-                        [|if|] (item is null)
-                            throw new System.InvalidOperationException();
-                    }
+                void M()
+                {
+                var item = FindItem() as C;
+                [|if|] (item is null)
+                throw new System.InvalidOperationException();
+                }
 
-                    object FindItem() => null;
+                object FindItem() => null;
                 }
                 """,
                 FixedCode = """
                 class C
                 {
-                    void M()
-                    {
-                        var item = FindItem() as C ?? throw new System.InvalidOperationException();
-                    }
-                
-                    object FindItem() => null;
+                void M()
+                {
+                var item = FindItem() as C ?? throw new System.InvalidOperationException();
+                }
+
+                object FindItem() => null;
                 }
                 """
             }.RunAsync();
@@ -125,25 +125,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
                 TestCode = """
                 class C
                 {
-                    void M()
-                    {
-                        var item = FindItem() as C;
-                        [|if|] (item == null)
-                            item = new C();
-                    }
+                void M()
+                {
+                var item = FindItem() as C;
+                [|if|] (item == null)
+                item = new C();
+                }
 
-                    object FindItem() => null;
+                object FindItem() => null;
                 }
                 """,
                 FixedCode = """
                 class C
                 {
-                    void M()
-                    {
-                        var item = FindItem() as C ?? new C();
-                    }
-                
-                    object FindItem() => null;
+                void M()
+                {
+                var item = FindItem() as C ?? new C();
+                }
+
+                object FindItem() => null;
                 }
                 """
             }.RunAsync();
@@ -157,25 +157,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
                 TestCode = """
                 class C
                 {
-                    void M()
-                    {
-                        var item = FindItem() as C;
-                        [|if|] (item == null)
-                            item = new();
-                    }
+                void M()
+                {
+                var item = FindItem() as C;
+                [|if|] (item == null)
+                item = new();
+                }
 
-                    object FindItem() => null;
+                object FindItem() => null;
                 }
                 """,
                 FixedCode = """
                 class C
                 {
-                    void M()
-                    {
-                        var item = FindItem() as C ?? new();
-                    }
-                
-                    object FindItem() => null;
+                void M()
+                {
+                var item = FindItem() as C ?? new();
+                }
+
+                object FindItem() => null;
                 }
                 """,
                 LanguageVersion = LanguageVersion.CSharp9,
@@ -186,18 +186,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
         public async Task TestLocalDeclaration_NotWithWrongItemChecked()
         {
             var text = """
-                class C
-                {
-                    void M(C item1)
-                    {
-                        var item = FindItem() as C;
-                        if (item1 == null)
-                            throw new System.InvalidOperationException();
-                    }
+            class C
+            {
+            void M(C item1)
+            {
+            var item = FindItem() as C;
+            if (item1 == null)
+            throw new System.InvalidOperationException();
+            }
 
-                    object FindItem() => null;
-                }
-                """;
+            object FindItem() => null;
+            }
+            """;
 
             await new VerifyCS.Test { TestCode = text, FixedCode = text, }.RunAsync();
         }
@@ -206,18 +206,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
         public async Task TestLocalDeclaration_NotWithWrongCondition()
         {
             var text = """
-                class C
-                {
-                    void M()
-                    {
-                        var item = FindItem() as C;
-                        if (item != null)
-                            throw new System.InvalidOperationException();
-                    }
+            class C
+            {
+            void M()
+            {
+            var item = FindItem() as C;
+            if (item != null)
+            throw new System.InvalidOperationException();
+            }
 
-                    object FindItem() => null;
-                }
-                """;
+            object FindItem() => null;
+            }
+            """;
 
             await new VerifyCS.Test { TestCode = text, FixedCode = text, }.RunAsync();
         }
@@ -226,18 +226,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
         public async Task TestLocalDeclaration_NotWithWrongPattern()
         {
             var text = """
-                class C
-                {
-                    void M()
-                    {
-                        var item = FindItem() as C;
-                        if (item is not null)
-                            throw new System.InvalidOperationException();
-                    }
+            class C
+            {
+            void M()
+            {
+            var item = FindItem() as C;
+            if (item is not null)
+            throw new System.InvalidOperationException();
+            }
 
-                    object FindItem() => null;
-                }
-                """;
+            object FindItem() => null;
+            }
+            """;
 
             await new VerifyCS.Test
             {
@@ -251,18 +251,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
         public async Task TestLocalDeclaration_NotWithWrongAssignment()
         {
             var text = """
-                class C
-                {
-                    void M(C item1)
-                    {
-                        var item = FindItem() as C;
-                        if (item == null)
-                            item1 = new C();
-                    }
+            class C
+            {
+            void M(C item1)
+            {
+            var item = FindItem() as C;
+            if (item == null)
+            item1 = new C();
+            }
 
-                    object FindItem() => null;
-                }
-                """;
+            object FindItem() => null;
+            }
+            """;
 
             await new VerifyCS.Test { TestCode = text, FixedCode = text, }.RunAsync();
         }
@@ -271,20 +271,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
         public async Task TestLocalDeclaration_NotWithElseBlock()
         {
             var text = """
-                class C
-                {
-                    void M(C item1)
-                    {
-                        var item = FindItem() as C;
-                        if (item == null)
-                            item = new C();
-                        else
-                            item = null;
-                    }
+            class C
+            {
+            void M(C item1)
+            {
+            var item = FindItem() as C;
+            if (item == null)
+            item = new C();
+            else
+            item = null;
+            }
 
-                    object FindItem() => null;
-                }
-                """;
+            object FindItem() => null;
+            }
+            """;
 
             await new VerifyCS.Test { TestCode = text, FixedCode = text, }.RunAsync();
         }
@@ -293,21 +293,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
         public async Task TestLocalDeclaration_NotWithMultipleWhenTrueStatements()
         {
             var text = """
-                class C
-                {
-                    void M(C item1)
-                    {
-                        var item = FindItem() as C;
-                        if (item == null)
-                        {
-                            item = new C();
-                            item = null;
-                        }
-                    }
+            class C
+            {
+            void M(C item1)
+            {
+            var item = FindItem() as C;
+            if (item == null)
+            {
+            item = new C();
+            item = null;
+            }
+            }
 
-                    object FindItem() => null;
-                }
-                """;
+            object FindItem() => null;
+            }
+            """;
 
             await new VerifyCS.Test { TestCode = text, FixedCode = text, }.RunAsync();
         }
@@ -316,19 +316,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
         public async Task TestLocalDeclaration_NotWithNoWhenTrueStatements()
         {
             var text = """
-                class C
-                {
-                    void M(C item1)
-                    {
-                        var item = FindItem() as C;
-                        if (item == null)
-                        {
-                        }
-                    }
+            class C
+            {
+            void M(C item1)
+            {
+            var item = FindItem() as C;
+            if (item == null)
+            {
+            }
+            }
 
-                    object FindItem() => null;
-                }
-                """;
+            object FindItem() => null;
+            }
+            """;
 
             await new VerifyCS.Test { TestCode = text, FixedCode = text, }.RunAsync();
         }
@@ -337,24 +337,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
         public async Task TestLocalDeclaration_NotWithThrowWithoutExpression()
         {
             var text = """
-                class C
-                {
-                    void M()
-                    {
-                        try
-                        {
-                        }
-                        catch
-                        {
-                            var item = FindItem() as C;
-                            if (item == null)
-                                throw;
-                        }
-                    }
+            class C
+            {
+            void M()
+            {
+            try
+            {
+            }
+            catch
+            {
+            var item = FindItem() as C;
+            if (item == null)
+            throw;
+            }
+            }
 
-                    object FindItem() => null;
-                }
-                """;
+            object FindItem() => null;
+            }
+            """;
 
             await new VerifyCS.Test { TestCode = text, FixedCode = text, }.RunAsync();
         }
@@ -363,18 +363,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
         public async Task TestLocalDeclaration_NotWithLocalWithoutInitializer()
         {
             var text = """
-                class C
-                {
-                    void M()
-                    {
-                        C item;
-                        if ({|CS0165:item|} == null)
-                            throw new System.InvalidOperationException();
-                    }
+            class C
+            {
+            void M()
+            {
+            C item;
+            if ({|CS0165:item|} == null)
+            throw new System.InvalidOperationException();
+            }
 
-                    object FindItem() => null;
-                }
-                """;
+            object FindItem() => null;
+            }
+            """;
 
             await new VerifyCS.Test { TestCode = text, FixedCode = text, }.RunAsync();
         }
@@ -383,18 +383,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
         public async Task TestLocalDeclaration_NotWithValueTypeInitializer()
         {
             var text = """
-                class C
-                {
-                    void M()
-                    {
-                        object item = 0;
-                        if (item == null)
-                            item = null;
-                    }
+            class C
+            {
+            void M()
+            {
+            object item = 0;
+            if (item == null)
+            item = null;
+            }
 
-                    object FindItem() => null;
-                }
-                """;
+            object FindItem() => null;
+            }
+            """;
 
             await new VerifyCS.Test { TestCode = text, FixedCode = text, }.RunAsync();
         }
@@ -403,18 +403,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCoalesceExpressio
         public async Task TestLocalDeclaration_NotWithReferenceToVariableInThrow()
         {
             var text = """
-                class C
-                {
-                    void M()
-                    {
-                        var item = FindItem() as C;
-                        if (item is null)
-                            throw new System.InvalidOperationException(nameof(item));
-                    }
+            class C
+            {
+            void M()
+            {
+            var item = FindItem() as C;
+            if (item is null)
+            throw new System.InvalidOperationException(nameof(item));
+            }
 
-                    object FindItem() => null;
-                }
-                """;
+            object FindItem() => null;
+            }
+            """;
 
             await new VerifyCS.Test
             {

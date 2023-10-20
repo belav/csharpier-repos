@@ -23,24 +23,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class Account
                 {
-                    object lockObj = new object();
-                    int balance;
+                object lockObj = new object();
+                int balance;
 
-                    int Withdraw(int amount)
-                    {
-                        {|Cursor:[|lock|]|} (lockObj)
-                        {
-                            if (balance >= amount)
-                            {
-                                balance = balance – amount;
-                                return amount;
-                            }
-                            else
-                            {
-                                return -1;
-                            }
-                        }
-                    }
+                int Withdraw(int amount)
+                {
+                {|Cursor:[|lock|]|} (lockObj)
+                {
+                if (balance >= amount)
+                {
+                balance = balance – amount;
+                return amount;
+                }
+                else
+                {
+                return -1;
+                }
+                }
+                }
                 }
                 """
             );

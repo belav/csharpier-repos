@@ -30,10 +30,10 @@ public class PrimitiveCollectionsQueryOldSqlServerTest
 
         AssertSql(
             """
-SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
-FROM [PrimitiveCollectionsEntity] AS [p]
-WHERE [p].[Int] IN (10, 999)
-"""
+            SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            WHERE [p].[Int] IN (10, 999)
+            """
         );
     }
 
@@ -43,10 +43,10 @@ WHERE [p].[Int] IN (10, 999)
 
         AssertSql(
             """
-SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
-FROM [PrimitiveCollectionsEntity] AS [p]
-WHERE [p].[NullableInt] IN (10, 999)
-"""
+            SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            WHERE [p].[NullableInt] IN (10, 999)
+            """
         );
     }
 
@@ -56,10 +56,10 @@ WHERE [p].[NullableInt] IN (10, 999)
 
         AssertSql(
             """
-SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
-FROM [PrimitiveCollectionsEntity] AS [p]
-WHERE [p].[NullableInt] IS NULL OR [p].[NullableInt] = 999
-"""
+            SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            WHERE [p].[NullableInt] IS NULL OR [p].[NullableInt] = 999
+            """
         );
     }
 
@@ -75,13 +75,13 @@ WHERE [p].[NullableInt] IS NULL OR [p].[NullableInt] = 999
 
         AssertSql(
             """
-SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
-FROM [PrimitiveCollectionsEntity] AS [p]
-WHERE (
-    SELECT COUNT(*)
-    FROM (VALUES (CAST(2 AS int))) AS [v]([Value])
-    WHERE [v].[Value] > [p].[Id]) = 1
-"""
+            SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            WHERE (
+            SELECT COUNT(*)
+            FROM (VALUES (CAST(2 AS int))) AS [v]([Value])
+            WHERE [v].[Value] > [p].[Id]) = 1
+            """
         );
     }
 
@@ -91,13 +91,13 @@ WHERE (
 
         AssertSql(
             """
-SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
-FROM [PrimitiveCollectionsEntity] AS [p]
-WHERE (
-    SELECT COUNT(*)
-    FROM (VALUES (CAST(2 AS int)), (999)) AS [v]([Value])
-    WHERE [v].[Value] > [p].[Id]) = 1
-"""
+            SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            WHERE (
+            SELECT COUNT(*)
+            FROM (VALUES (CAST(2 AS int)), (999)) AS [v]([Value])
+            WHERE [v].[Value] > [p].[Id]) = 1
+            """
         );
     }
 
@@ -107,13 +107,13 @@ WHERE (
 
         AssertSql(
             """
-SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
-FROM [PrimitiveCollectionsEntity] AS [p]
-WHERE (
-    SELECT COUNT(*)
-    FROM (VALUES (CAST(2 AS int)), (999), (1000)) AS [v]([Value])
-    WHERE [v].[Value] > [p].[Id]) = 2
-"""
+            SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            WHERE (
+            SELECT COUNT(*)
+            FROM (VALUES (CAST(2 AS int)), (999), (1000)) AS [v]([Value])
+            WHERE [v].[Value] > [p].[Id]) = 2
+            """
         );
     }
 
@@ -129,10 +129,10 @@ WHERE (
 
         AssertSql(
             """
-SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
-FROM [PrimitiveCollectionsEntity] AS [p]
-WHERE [p].[Id] = 2
-"""
+            SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            WHERE [p].[Id] = 2
+            """
         );
     }
 
@@ -142,10 +142,10 @@ WHERE [p].[Id] = 2
 
         AssertSql(
             """
-SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
-FROM [PrimitiveCollectionsEntity] AS [p]
-WHERE [p].[Id] IN (2, 999)
-"""
+            SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            WHERE [p].[Id] IN (2, 999)
+            """
         );
     }
 
@@ -155,10 +155,10 @@ WHERE [p].[Id] IN (2, 999)
 
         AssertSql(
             """
-SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
-FROM [PrimitiveCollectionsEntity] AS [p]
-WHERE [p].[Id] IN (2, 999, 1000)
-"""
+            SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            WHERE [p].[Id] IN (2, 999, 1000)
+            """
         );
     }
 
@@ -168,13 +168,13 @@ WHERE [p].[Id] IN (2, 999, 1000)
 
         AssertSql(
             """
-@__i_0='2'
-@__j_1='999'
+            @__i_0='2'
+            @__j_1='999'
 
-SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
-FROM [PrimitiveCollectionsEntity] AS [p]
-WHERE [p].[Id] IN (@__i_0, @__j_1)
-"""
+            SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            WHERE [p].[Id] IN (@__i_0, @__j_1)
+            """
         );
     }
 
@@ -184,12 +184,12 @@ WHERE [p].[Id] IN (@__i_0, @__j_1)
 
         AssertSql(
             """
-@__j_0='999'
+            @__j_0='999'
 
-SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
-FROM [PrimitiveCollectionsEntity] AS [p]
-WHERE [p].[Id] IN (2, @__j_0)
-"""
+            SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            WHERE [p].[Id] IN (2, @__j_0)
+            """
         );
     }
 
@@ -199,12 +199,12 @@ WHERE [p].[Id] IN (2, @__j_0)
 
         AssertSql(
             """
-@__i_0='11'
+            @__i_0='11'
 
-SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
-FROM [PrimitiveCollectionsEntity] AS [p]
-WHERE [p].[Int] IN (999, @__i_0, [p].[Id], [p].[Id] + [p].[Int])
-"""
+            SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            WHERE [p].[Int] IN (999, @__i_0, [p].[Id], [p].[Id] + [p].[Int])
+            """
         );
     }
 
@@ -214,10 +214,10 @@ WHERE [p].[Int] IN (999, @__i_0, [p].[Id], [p].[Id] + [p].[Int])
 
         AssertSql(
             """
-SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
-FROM [PrimitiveCollectionsEntity] AS [p]
-WHERE [p].[Id] IN (2, 999)
-"""
+            SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            WHERE [p].[Id] IN (2, 999)
+            """
         );
     }
 
@@ -227,10 +227,10 @@ WHERE [p].[Id] IN (2, 999)
 
         AssertSql(
             """
-SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
-FROM [PrimitiveCollectionsEntity] AS [p]
-WHERE [p].[Id] NOT IN (2, 999)
-"""
+            SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            WHERE [p].[Id] NOT IN (2, 999)
+            """
         );
     }
 
@@ -243,10 +243,10 @@ WHERE [p].[Id] NOT IN (2, 999)
 
         AssertSql(
             """
-SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
-FROM [PrimitiveCollectionsEntity] AS [p]
-WHERE [p].[Int] IN (10, 999)
-"""
+            SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            WHERE [p].[Int] IN (10, 999)
+            """
         );
     }
 
@@ -256,10 +256,10 @@ WHERE [p].[Int] IN (10, 999)
 
         AssertSql(
             """
-SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
-FROM [PrimitiveCollectionsEntity] AS [p]
-WHERE [p].[Int] IN (10, 999)
-"""
+            SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            WHERE [p].[Int] IN (10, 999)
+            """
         );
     }
 
@@ -271,10 +271,10 @@ WHERE [p].[Int] IN (10, 999)
 
         AssertSql(
             """
-SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
-FROM [PrimitiveCollectionsEntity] AS [p]
-WHERE [p].[NullableInt] IS NULL OR [p].[NullableInt] = 999
-"""
+            SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            WHERE [p].[NullableInt] IS NULL OR [p].[NullableInt] = 999
+            """
         );
     }
 
@@ -286,10 +286,10 @@ WHERE [p].[NullableInt] IS NULL OR [p].[NullableInt] = 999
 
         AssertSql(
             """
-SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
-FROM [PrimitiveCollectionsEntity] AS [p]
-WHERE [p].[String] IN (N'10', N'999')
-"""
+            SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            WHERE [p].[String] IN (N'10', N'999')
+            """
         );
     }
 
@@ -299,10 +299,10 @@ WHERE [p].[String] IN (N'10', N'999')
 
         AssertSql(
             """
-SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
-FROM [PrimitiveCollectionsEntity] AS [p]
-WHERE [p].[NullableString] IS NULL OR [p].[NullableString] = N'999'
-"""
+            SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            WHERE [p].[NullableString] IS NULL OR [p].[NullableString] = N'999'
+            """
         );
     }
 
@@ -312,10 +312,10 @@ WHERE [p].[NullableString] IS NULL OR [p].[NullableString] = N'999'
 
         AssertSql(
             """
-SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
-FROM [PrimitiveCollectionsEntity] AS [p]
-WHERE [p].[DateTime] IN ('2020-01-10T12:30:00.0000000Z', '9999-01-01T00:00:00.0000000Z')
-"""
+            SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            WHERE [p].[DateTime] IN ('2020-01-10T12:30:00.0000000Z', '9999-01-01T00:00:00.0000000Z')
+            """
         );
     }
 
@@ -325,10 +325,10 @@ WHERE [p].[DateTime] IN ('2020-01-10T12:30:00.0000000Z', '9999-01-01T00:00:00.00
 
         AssertSql(
             """
-SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
-FROM [PrimitiveCollectionsEntity] AS [p]
-WHERE [p].[Bool] = CAST(1 AS bit)
-"""
+            SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            WHERE [p].[Bool] = CAST(1 AS bit)
+            """
         );
     }
 
@@ -338,10 +338,10 @@ WHERE [p].[Bool] = CAST(1 AS bit)
 
         AssertSql(
             """
-SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
-FROM [PrimitiveCollectionsEntity] AS [p]
-WHERE [p].[Enum] IN (0, 3)
-"""
+            SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            WHERE [p].[Enum] IN (0, 3)
+            """
         );
     }
 
@@ -351,10 +351,10 @@ WHERE [p].[Enum] IN (0, 3)
 
         AssertSql(
             """
-SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
-FROM [PrimitiveCollectionsEntity] AS [p]
-WHERE 0 = 1
-"""
+            SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            WHERE 0 = 1
+            """
         );
     }
 
@@ -428,14 +428,14 @@ WHERE 0 = 1
 
         AssertSql(
             """
-SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
-FROM [PrimitiveCollectionsEntity] AS [p]
-WHERE (
-    SELECT [v].[Value]
-    FROM (VALUES (0, CAST(1 AS int)), (1, 2), (2, 3)) AS [v]([_ord], [Value])
-    ORDER BY [v].[_ord]
-    OFFSET [p].[Int] ROWS FETCH NEXT 1 ROWS ONLY) = 1
-"""
+            SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            WHERE (
+            SELECT [v].[Value]
+            FROM (VALUES (0, CAST(1 AS int)), (1, 2), (2, 3)) AS [v]([_ord], [Value])
+            ORDER BY [v].[_ord]
+            OFFSET [p].[Int] ROWS FETCH NEXT 1 ROWS ONLY) = 1
+            """
         );
     }
 
@@ -476,10 +476,10 @@ WHERE (
 
         AssertSql(
             """
-SELECT [p].[Ints]
-FROM [PrimitiveCollectionsEntity] AS [p]
-ORDER BY [p].[Id]
-"""
+            SELECT [p].[Ints]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            ORDER BY [p].[Id]
+            """
         );
     }
 
@@ -517,12 +517,12 @@ ORDER BY [p].[Id]
 
         AssertSql(
             """
-@__ints_0='[1,10]' (Size = 4000)
+            @__ints_0='[1,10]' (Size = 4000)
 
-SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
-FROM [PrimitiveCollectionsEntity] AS [p]
-WHERE [p].[Ints] = @__ints_0
-"""
+            SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            WHERE [p].[Ints] = @__ints_0
+            """
         );
     }
 
@@ -541,10 +541,10 @@ WHERE [p].[Ints] = @__ints_0
 
         AssertSql(
             """
-SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
-FROM [PrimitiveCollectionsEntity] AS [p]
-WHERE [p].[Ints] = N'[1,10]'
-"""
+            SELECT [p].[Id], [p].[Bool], [p].[Bools], [p].[DateTime], [p].[DateTimes], [p].[Enum], [p].[Enums], [p].[Int], [p].[Ints], [p].[NullableInt], [p].[NullableInts], [p].[NullableString], [p].[NullableStrings], [p].[String], [p].[Strings]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            WHERE [p].[Ints] = N'[1,10]'
+            """
         );
     }
 
@@ -611,10 +611,10 @@ WHERE [p].[Ints] = N'[1,10]'
 
         AssertSql(
             """
-SELECT [p].[Ints]
-FROM [PrimitiveCollectionsEntity] AS [p]
-ORDER BY [p].[Id]
-"""
+            SELECT [p].[Ints]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            ORDER BY [p].[Id]
+            """
         );
     }
 
@@ -635,10 +635,10 @@ ORDER BY [p].[Id]
         // client eval
         AssertSql(
             """
-SELECT [p].[NullableInts]
-FROM [PrimitiveCollectionsEntity] AS [p]
-ORDER BY [p].[Id]
-"""
+            SELECT [p].[NullableInts]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            ORDER BY [p].[Id]
+            """
         );
     }
 
@@ -654,10 +654,10 @@ ORDER BY [p].[Id]
         // client eval
         AssertSql(
             """
-SELECT [p].[NullableInts]
-FROM [PrimitiveCollectionsEntity] AS [p]
-ORDER BY [p].[Id]
-"""
+            SELECT [p].[NullableInts]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            ORDER BY [p].[Id]
+            """
         );
     }
 
@@ -668,10 +668,10 @@ ORDER BY [p].[Id]
         // client eval
         AssertSql(
             """
-SELECT [p].[Ints]
-FROM [PrimitiveCollectionsEntity] AS [p]
-ORDER BY [p].[Id]
-"""
+            SELECT [p].[Ints]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            ORDER BY [p].[Id]
+            """
         );
     }
 
@@ -705,11 +705,11 @@ ORDER BY [p].[Id]
 
         AssertSql(
             """
-SELECT [p].[Ints], [p].[DateTimes], [p].[Strings]
-FROM [PrimitiveCollectionsEntity] AS [p]
-WHERE [p].[Id] < 4
-ORDER BY [p].[Id]
-"""
+            SELECT [p].[Ints], [p].[DateTimes], [p].[Strings]
+            FROM [PrimitiveCollectionsEntity] AS [p]
+            WHERE [p].[Id] < 4
+            ORDER BY [p].[Id]
+            """
         );
     }
 

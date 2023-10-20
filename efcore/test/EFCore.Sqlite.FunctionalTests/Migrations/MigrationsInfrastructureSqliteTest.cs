@@ -19,13 +19,13 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             Assert.Equal(
                 """
-CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
-    "MigrationId" TEXT NOT NULL CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY,
-    "ProductVersion" TEXT NOT NULL
-);
+                CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+                "MigrationId" TEXT NOT NULL CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY,
+                "ProductVersion" TEXT NOT NULL
+                );
 
 
-""",
+                """,
                 Sql,
                 ignoreLineEndingDifferences: true
             );
@@ -37,13 +37,13 @@ CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
 
             Assert.Equal(
                 """
-CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
-    "MigrationId" TEXT NOT NULL CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY,
-    "ProductVersion" TEXT NOT NULL
-);
+                CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+                "MigrationId" TEXT NOT NULL CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY,
+                "ProductVersion" TEXT NOT NULL
+                );
 
 
-""",
+                """,
                 Sql,
                 ignoreLineEndingDifferences: true
             );
@@ -55,41 +55,41 @@ CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
 
             Assert.Equal(
                 """
-CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
-    "MigrationId" TEXT NOT NULL CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY,
-    "ProductVersion" TEXT NOT NULL
-);
+                CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+                "MigrationId" TEXT NOT NULL CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY,
+                "ProductVersion" TEXT NOT NULL
+                );
 
-BEGIN TRANSACTION;
+                BEGIN TRANSACTION;
 
-CREATE TABLE "Table1" (
-    "Id" INTEGER NOT NULL CONSTRAINT "PK_Table1" PRIMARY KEY,
-    "Foo" INTEGER NOT NULL
-);
+                CREATE TABLE "Table1" (
+                "Id" INTEGER NOT NULL CONSTRAINT "PK_Table1" PRIMARY KEY,
+                "Foo" INTEGER NOT NULL
+                );
 
-INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
-VALUES ('00000000000001_Migration1', '7.0.0-test');
+                INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+                VALUES ('00000000000001_Migration1', '7.0.0-test');
 
-COMMIT;
+                COMMIT;
 
-BEGIN TRANSACTION;
+                BEGIN TRANSACTION;
 
-ALTER TABLE "Table1" RENAME COLUMN "Foo" TO "Bar";
+                ALTER TABLE "Table1" RENAME COLUMN "Foo" TO "Bar";
 
-INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
-VALUES ('00000000000002_Migration2', '7.0.0-test');
+                INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+                VALUES ('00000000000002_Migration2', '7.0.0-test');
 
-COMMIT;
+                COMMIT;
 
-BEGIN TRANSACTION;
+                BEGIN TRANSACTION;
 
-INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
-VALUES ('00000000000003_Migration3', '7.0.0-test');
+                INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+                VALUES ('00000000000003_Migration3', '7.0.0-test');
 
-COMMIT;
+                COMMIT;
 
 
-""",
+                """,
                 Sql,
                 ignoreLineEndingDifferences: true
             );
@@ -101,29 +101,29 @@ COMMIT;
 
             Assert.Equal(
                 """
-CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
-    "MigrationId" TEXT NOT NULL CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY,
-    "ProductVersion" TEXT NOT NULL
-);
+                CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+                "MigrationId" TEXT NOT NULL CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY,
+                "ProductVersion" TEXT NOT NULL
+                );
 
-CREATE TABLE "Table1" (
-    "Id" INTEGER NOT NULL CONSTRAINT "PK_Table1" PRIMARY KEY,
-    "Foo" INTEGER NOT NULL
-);
+                CREATE TABLE "Table1" (
+                "Id" INTEGER NOT NULL CONSTRAINT "PK_Table1" PRIMARY KEY,
+                "Foo" INTEGER NOT NULL
+                );
 
-INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
-VALUES ('00000000000001_Migration1', '7.0.0-test');
+                INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+                VALUES ('00000000000001_Migration1', '7.0.0-test');
 
-ALTER TABLE "Table1" RENAME COLUMN "Foo" TO "Bar";
+                ALTER TABLE "Table1" RENAME COLUMN "Foo" TO "Bar";
 
-INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
-VALUES ('00000000000002_Migration2', '7.0.0-test');
+                INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+                VALUES ('00000000000002_Migration2', '7.0.0-test');
 
-INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
-VALUES ('00000000000003_Migration3', '7.0.0-test');
+                INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+                VALUES ('00000000000003_Migration3', '7.0.0-test');
 
 
-""",
+                """,
                 Sql,
                 ignoreLineEndingDifferences: true
             );
@@ -135,17 +135,17 @@ VALUES ('00000000000003_Migration3', '7.0.0-test');
 
             Assert.Equal(
                 """
-BEGIN TRANSACTION;
+                BEGIN TRANSACTION;
 
-ALTER TABLE "Table1" RENAME COLUMN "Foo" TO "Bar";
+                ALTER TABLE "Table1" RENAME COLUMN "Foo" TO "Bar";
 
-INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
-VALUES ('00000000000002_Migration2', '7.0.0-test');
+                INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+                VALUES ('00000000000002_Migration2', '7.0.0-test');
 
-COMMIT;
+                COMMIT;
 
 
-""",
+                """,
                 Sql,
                 ignoreLineEndingDifferences: true
             );
@@ -157,17 +157,17 @@ COMMIT;
 
             Assert.Equal(
                 """
-BEGIN TRANSACTION;
+                BEGIN TRANSACTION;
 
-ALTER TABLE "Table1" RENAME COLUMN "Foo" TO "Bar";
+                ALTER TABLE "Table1" RENAME COLUMN "Foo" TO "Bar";
 
-INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
-VALUES ('00000000000002_Migration2', '7.0.0-test');
+                INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+                VALUES ('00000000000002_Migration2', '7.0.0-test');
 
-COMMIT;
+                COMMIT;
 
 
-""",
+                """,
                 Sql,
                 ignoreLineEndingDifferences: true
             );
@@ -187,26 +187,26 @@ COMMIT;
 
             Assert.Equal(
                 """
-BEGIN TRANSACTION;
+                BEGIN TRANSACTION;
 
-ALTER TABLE "Table1" RENAME COLUMN "Bar" TO "Foo";
+                ALTER TABLE "Table1" RENAME COLUMN "Bar" TO "Foo";
 
-DELETE FROM "__EFMigrationsHistory"
-WHERE "MigrationId" = '00000000000002_Migration2';
+                DELETE FROM "__EFMigrationsHistory"
+                WHERE "MigrationId" = '00000000000002_Migration2';
 
-COMMIT;
+                COMMIT;
 
-BEGIN TRANSACTION;
+                BEGIN TRANSACTION;
 
-DROP TABLE "Table1";
+                DROP TABLE "Table1";
 
-DELETE FROM "__EFMigrationsHistory"
-WHERE "MigrationId" = '00000000000001_Migration1';
+                DELETE FROM "__EFMigrationsHistory"
+                WHERE "MigrationId" = '00000000000001_Migration1';
 
-COMMIT;
+                COMMIT;
 
 
-""",
+                """,
                 Sql,
                 ignoreLineEndingDifferences: true
             );
@@ -218,17 +218,17 @@ COMMIT;
 
             Assert.Equal(
                 """
-BEGIN TRANSACTION;
+                BEGIN TRANSACTION;
 
-ALTER TABLE "Table1" RENAME COLUMN "Bar" TO "Foo";
+                ALTER TABLE "Table1" RENAME COLUMN "Bar" TO "Foo";
 
-DELETE FROM "__EFMigrationsHistory"
-WHERE "MigrationId" = '00000000000002_Migration2';
+                DELETE FROM "__EFMigrationsHistory"
+                WHERE "MigrationId" = '00000000000002_Migration2';
 
-COMMIT;
+                COMMIT;
 
 
-""",
+                """,
                 Sql,
                 ignoreLineEndingDifferences: true
             );
@@ -240,17 +240,17 @@ COMMIT;
 
             Assert.Equal(
                 """
-BEGIN TRANSACTION;
+                BEGIN TRANSACTION;
 
-ALTER TABLE "Table1" RENAME COLUMN "Bar" TO "Foo";
+                ALTER TABLE "Table1" RENAME COLUMN "Bar" TO "Foo";
 
-DELETE FROM "__EFMigrationsHistory"
-WHERE "MigrationId" = '00000000000002_Migration2';
+                DELETE FROM "__EFMigrationsHistory"
+                WHERE "MigrationId" = '00000000000002_Migration2';
 
-COMMIT;
+                COMMIT;
 
 
-""",
+                """,
                 Sql,
                 ignoreLineEndingDifferences: true
             );

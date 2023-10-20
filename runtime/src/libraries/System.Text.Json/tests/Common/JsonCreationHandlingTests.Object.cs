@@ -1454,17 +1454,17 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
     {
         JsonSerializerOptions options = Serializer.CreateOptions();
         string json = """
-            {
-                "PopulatedPropertyReadOnly":
-                {
-                    "IntValue": 43
-                },
-                "PopulatedPropertySimple":
-                {
-                    "IntValue": 44
-                }
-            }
-            """;
+        {
+        "PopulatedPropertyReadOnly":
+        {
+        "IntValue": 43
+        },
+        "PopulatedPropertySimple":
+        {
+        "IntValue": 44
+        }
+        }
+        """;
 
         var obj = await Serializer.DeserializeWrapper<ClassWithClassProperty>(json, options);
         Assert.NotNull(obj);

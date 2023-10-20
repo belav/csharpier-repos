@@ -32,16 +32,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedMembers
         public async Task FieldReadViaSuppression()
         {
             var code = """
-                #nullable enable
-                class MyClass
-                {
-                    string? _field = null;
-                    public void M()
-                    {
-                        _field!.ToString();
-                    }
-                }
-                """;
+            #nullable enable
+            class MyClass
+            {
+            string? _field = null;
+            public void M()
+            {
+            _field!.ToString();
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -176,7 +176,7 @@ class MyClass
                 """
                 class MyClass
                 {
-                    private int [|_goo|];
+                private int [|_goo|];
                 }
                 """,
                 """
@@ -194,7 +194,7 @@ class MyClass
                 """
                 class MyClass
                 {
-                    private int [|M|]() => 0;
+                private int [|M|]() => 0;
                 }
                 """,
                 """
@@ -212,7 +212,7 @@ class MyClass
                 """
                 class MyClass
                 {
-                    private int [|M|]<T>() => 0;
+                private int [|M|]<T>() => 0;
                 }
                 """,
                 """
@@ -230,7 +230,7 @@ class MyClass
                 """
                 class MyClass<T>
                 {
-                    private int [|M|]() => 0;
+                private int [|M|]() => 0;
                 }
                 """,
                 """
@@ -246,11 +246,11 @@ class MyClass
         {
             // We only flag constructors with arguments.
             var code = """
-                class MyClass
-                {
-                    private MyClass() { }
-                }
-                """;
+            class MyClass
+            {
+            private MyClass() { }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -262,7 +262,7 @@ class MyClass
                 """
                 class MyClass
                 {
-                    private [|MyClass|](int i) { }
+                private [|MyClass|](int i) { }
                 }
                 """,
                 """
@@ -277,11 +277,11 @@ class MyClass
         public async Task StaticConstructorIsNotFlagged()
         {
             var code = """
-                class MyClass
-                {
-                    static MyClass() { }
-                }
-                """;
+            class MyClass
+            {
+            static MyClass() { }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -290,11 +290,11 @@ class MyClass
         public async Task DestructorIsNotFlagged()
         {
             var code = """
-                class MyClass
-                {
-                    ~MyClass() { }
-                }
-                """;
+            class MyClass
+            {
+            ~MyClass() { }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -306,7 +306,7 @@ class MyClass
                 """
                 class MyClass
                 {
-                    private int [|P|] { get; set; }
+                private int [|P|] { get; set; }
                 }
                 """,
                 """
@@ -324,7 +324,7 @@ class MyClass
                 """
                 class MyClass
                 {
-                    private int [|this|][int x] { get { return 0; } set { } }
+                private int [|this|][int x] { get { return 0; } set { } }
                 }
                 """,
                 """
@@ -342,7 +342,7 @@ class MyClass
                 """
                 class MyClass
                 {
-                    private event System.EventHandler [|e|];
+                private event System.EventHandler [|e|];
                 }
                 """,
                 """
@@ -357,11 +357,11 @@ class MyClass
         public async Task EntryPointMethodNotFlagged()
         {
             var code = """
-                class MyClass
-                {
-                    private static void Main() { }
-                }
-                """;
+            class MyClass
+            {
+            private static void Main() { }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -370,13 +370,13 @@ class MyClass
         public async Task EntryPointMethodNotFlagged_02()
         {
             var code = """
-                using System.Threading.Tasks;
+            using System.Threading.Tasks;
 
-                class MyClass
-                {
-                    private static async Task Main() => await Task.CompletedTask;
-                }
-                """;
+            class MyClass
+            {
+            private static async Task Main() => await Task.CompletedTask;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -385,13 +385,13 @@ class MyClass
         public async Task EntryPointMethodNotFlagged_03()
         {
             var code = """
-                using System.Threading.Tasks;
+            using System.Threading.Tasks;
 
-                class MyClass
-                {
-                    private static async Task<int> Main() => await Task.FromResult(0);
-                }
-                """;
+            class MyClass
+            {
+            private static async Task<int> Main() => await Task.FromResult(0);
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -400,13 +400,13 @@ class MyClass
         public async Task EntryPointMethodNotFlagged_04()
         {
             var code = """
-                using System.Threading.Tasks;
+            using System.Threading.Tasks;
 
-                class MyClass
-                {
-                    private static Task Main() => Task.CompletedTask;
-                }
-                """;
+            class MyClass
+            {
+            private static Task Main() => Task.CompletedTask;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -415,13 +415,13 @@ class MyClass
         public async Task EntryPointMethodNotFlagged_05()
         {
             var code = """
-                using System.Threading.Tasks;
+            using System.Threading.Tasks;
 
-                class MyClass
-                {
-                    private static int Main() => 0;
-                }
-                """;
+            class MyClass
+            {
+            private static int Main() => 0;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -430,8 +430,8 @@ class MyClass
         public async Task EntryPointMethodNotFlagged_06()
         {
             var code = """
-                return 0;
-                """;
+            return 0;
+            """;
 
             await new VerifyCS.Test
             {
@@ -450,8 +450,8 @@ class MyClass
         public async Task EntryPointMethodNotFlagged_07()
         {
             var code = """
-                return 0;
-                """;
+            return 0;
+            """;
 
             await new VerifyCS.Test
             {
@@ -472,8 +472,8 @@ class MyClass
         public async Task EntryPointMethodNotFlagged_08()
         {
             var code = """
-                return 0;
-                """;
+            return 0;
+            """;
 
             await new VerifyCS.Test
             {
@@ -487,8 +487,8 @@ class MyClass
         public async Task EntryPointMethodNotFlagged_09()
         {
             var code = """
-                return 0;
-                """;
+            return 0;
+            """;
 
             await new VerifyCS.Test
             {
@@ -514,7 +514,7 @@ class MyClass
                 """
                 class MyClass
                 {
-                    private readonly int [|_goo|];
+                private readonly int [|_goo|];
                 }
                 """,
                 """
@@ -532,7 +532,7 @@ class MyClass
                 """
                 class MyClass
                 {
-                    private int [|P|] { get; }
+                private int [|P|] { get; }
                 }
                 """,
                 """
@@ -550,8 +550,8 @@ class MyClass
                 """
                 class MyClass
                 {
-                    // error CS0106: The modifier 'readonly' is not valid for this item
-                    private readonly event System.EventHandler {|CS0106:[|E|]|};
+                // error CS0106: The modifier 'readonly' is not valid for this item
+                private readonly event System.EventHandler {|CS0106:[|E|]|};
                 }
                 """,
                 """
@@ -569,7 +569,7 @@ class MyClass
                 """
                 class MyClass
                 {
-                    private static int [|_goo|];
+                private static int [|_goo|];
                 }
                 """,
                 """
@@ -587,7 +587,7 @@ class MyClass
                 """
                 class MyClass
                 {
-                    private static void [|M|]() { }
+                private static void [|M|]() { }
                 }
                 """,
                 """
@@ -605,7 +605,7 @@ class MyClass
                 """
                 class MyClass
                 {
-                    private static int [|P|] { get { return 0; } }
+                private static int [|P|] { get { return 0; } }
                 }
                 """,
                 """
@@ -623,8 +623,8 @@ class MyClass
                 """
                 class MyClass
                 {
-                    // error CS0106: The modifier 'static' is not valid for this item
-                    private static int {|CS0106:[|this|]|}[int x] { get { return 0; } set { } }
+                // error CS0106: The modifier 'static' is not valid for this item
+                private static int {|CS0106:[|this|]|}[int x] { get { return 0; } set { } }
                 }
                 """,
                 """
@@ -642,7 +642,7 @@ class MyClass
                 """
                 class MyClass
                 {
-                    private static event System.EventHandler [|e1|];
+                private static event System.EventHandler [|e1|];
                 }
                 """,
                 """
@@ -657,14 +657,14 @@ class MyClass
         public async Task MethodIsUnused_Extern()
         {
             var code = """
-                using System.Runtime.InteropServices;
+            using System.Runtime.InteropServices;
 
-                class C
-                {
-                    [DllImport("Assembly.dll")]
-                    private static extern void M();
-                }
-                """;
+            class C
+            {
+            [DllImport("Assembly.dll")]
+            private static extern void M();
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -673,11 +673,11 @@ class MyClass
         public async Task MethodIsUnused_Abstract()
         {
             var code = """
-                abstract class C
-                {
-                    protected abstract void M();
-                }
-                """;
+            abstract class C
+            {
+            protected abstract void M();
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -686,11 +686,11 @@ class MyClass
         public async Task MethodIsUnused_InterfaceMethod()
         {
             var code = """
-                interface I
-                {
-                    void M();
-                }
-                """;
+            interface I
+            {
+            void M();
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -699,16 +699,16 @@ class MyClass
         public async Task MethodIsUnused_ExplicitInterfaceImplementation()
         {
             var code = """
-                interface I
-                {
-                    void M();
-                }
+            interface I
+            {
+            void M();
+            }
 
-                class C : I
-                {
-                    void I.M() { }
-                }
-                """;
+            class C : I
+            {
+            void I.M() { }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -717,16 +717,16 @@ class MyClass
         public async Task PropertyIsUnused_ExplicitInterfaceImplementation()
         {
             var code = """
-                interface I
-                {
-                    int P { get; set; }
-                }
+            interface I
+            {
+            int P { get; set; }
+            }
 
-                class C : I
-                {
-                    int I.P { get { return 0; } set { } }
-                }
-                """;
+            class C : I
+            {
+            int I.P { get { return 0; } set { } }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -735,20 +735,20 @@ class MyClass
         public async Task EventIsUnused_ExplicitInterfaceImplementation()
         {
             var code = """
-                interface I
-                {
-                    event System.Action E;
-                }
+            interface I
+            {
+            event System.Action E;
+            }
 
-                class C : I
-                {
-                    event System.Action I.E
-                    {
-                        add { }
-                        remove { }
-                    }
-                }
-                """;
+            class C : I
+            {
+            event System.Action I.E
+            {
+            add { }
+            remove { }
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -760,7 +760,7 @@ class MyClass
                 """
                 class C
                 {
-                    int [|P|] { set { } }
+                int [|P|] { set { } }
                 }
                 """,
                 """
@@ -775,12 +775,12 @@ class MyClass
         public async Task WriteOnlyProperty_Written()
         {
             var code = """
-                class C
-                {
-                    int P { set { } }
-                    public void M(int i) => P = i;
-                }
-                """;
+            class C
+            {
+            int P { set { } }
+            public void M(int i) => P = i;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -792,7 +792,7 @@ class MyClass
                 """
                 class MyClass
                 {
-                    private const int [|_goo|] = 0;
+                private const int [|_goo|] = 0;
                 }
                 """,
                 """
@@ -807,12 +807,12 @@ class MyClass
         public async Task FieldIsRead_ExpressionBody()
         {
             var code = """
-                class MyClass
-                {
-                    private int _goo;
-                    public int M() => _goo;
-                }
-                """;
+            class MyClass
+            {
+            private int _goo;
+            public int M() => _goo;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -821,12 +821,12 @@ class MyClass
         public async Task FieldIsRead_BlockBody()
         {
             var code = """
-                class MyClass
-                {
-                    private int _goo;
-                    public int M() { return _goo; }
-                }
-                """;
+            class MyClass
+            {
+            private int _goo;
+            public int M() { return _goo; }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -835,16 +835,16 @@ class MyClass
         public async Task FieldIsRead_ExpressionLambda()
         {
             var code = """
-                using System;
-                class MyClass
-                {
-                    private int _goo;
-                    public void M()
-                    {
-                        Func<int> getGoo = () => _goo;
-                    }
-                }
-                """;
+            using System;
+            class MyClass
+            {
+            private int _goo;
+            public void M()
+            {
+            Func<int> getGoo = () => _goo;
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -853,16 +853,16 @@ class MyClass
         public async Task FieldIsRead_BlockLambda()
         {
             var code = """
-                using System;
-                class MyClass
-                {
-                    private int _goo;
-                    public void M()
-                    {
-                        Func<int> getGoo = () => { return _goo; };
-                    }
-                }
-                """;
+            using System;
+            class MyClass
+            {
+            private int _goo;
+            public void M()
+            {
+            Func<int> getGoo = () => { return _goo; };
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -871,16 +871,16 @@ class MyClass
         public async Task FieldIsRead_Delegate()
         {
             var code = """
-                using System;
-                class MyClass
-                {
-                    private int _goo;
-                    public void M()
-                    {
-                        Func<int> getGoo = delegate { return _goo; };
-                    }
-                }
-                """;
+            using System;
+            class MyClass
+            {
+            private int _goo;
+            public void M()
+            {
+            Func<int> getGoo = delegate { return _goo; };
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -889,16 +889,16 @@ class MyClass
         public async Task FieldIsRead_ExpressionBodyLocalFunction()
         {
             var code = """
-                class MyClass
-                {
-                    private int _goo;
-                    public int M()
-                    {
-                        int LocalFunction() => _goo;
-                        return LocalFunction();
-                    }
-                }
-                """;
+            class MyClass
+            {
+            private int _goo;
+            public int M()
+            {
+            int LocalFunction() => _goo;
+            return LocalFunction();
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -907,16 +907,16 @@ class MyClass
         public async Task FieldIsRead_BlockBodyLocalFunction()
         {
             var code = """
-                class MyClass
-                {
-                    private int _goo;
-                    public int M()
-                    {
-                        int LocalFunction() { return _goo; }
-                        return LocalFunction();
-                    }
-                }
-                """;
+            class MyClass
+            {
+            private int _goo;
+            public int M()
+            {
+            int LocalFunction() { return _goo; }
+            return LocalFunction();
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -925,18 +925,18 @@ class MyClass
         public async Task FieldIsRead_Accessor()
         {
             var code = """
-                class MyClass
-                {
-                    private int _goo;
-                    public int Goo
-                    {
-                        get
-                        {
-                            return _goo;
-                        }
-                    }
-                }
-                """;
+            class MyClass
+            {
+            private int _goo;
+            public int Goo
+            {
+            get
+            {
+            return _goo;
+            }
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -945,15 +945,15 @@ class MyClass
         public async Task FieldIsRead_Deconstruction()
         {
             var code = """
-                class MyClass
-                {
-                    private int _goo;
-                    public void M(int x)
-                    {
-                        var y = (_goo, x);
-                    }
-                }
-                """;
+            class MyClass
+            {
+            private int _goo;
+            public void M(int x)
+            {
+            var y = (_goo, x);
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -962,12 +962,12 @@ class MyClass
         public async Task FieldIsRead_DifferentInstance()
         {
             var code = """
-                class MyClass
-                {
-                    private int _goo;
-                    public int M() => new MyClass()._goo;
-                }
-                """;
+            class MyClass
+            {
+            private int _goo;
+            public int M() => new MyClass()._goo;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -976,16 +976,16 @@ class MyClass
         public async Task FieldIsRead_ObjectInitializer()
         {
             var code = """
-                class C
-                {
-                    public int F;
-                }
-                class MyClass
-                {
-                    private int _goo;
-                    public C M() => new C() { F = _goo };
-                }
-                """;
+            class C
+            {
+            public int F;
+            }
+            class MyClass
+            {
+            private int _goo;
+            public C M() => new C() { F = _goo };
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -994,12 +994,12 @@ class MyClass
         public async Task FieldIsRead_ThisInstance()
         {
             var code = """
-                class MyClass
-                {
-                    private int _goo;
-                    public int M() => this._goo;
-                }
-                """;
+            class MyClass
+            {
+            private int _goo;
+            public int M() => this._goo;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1008,14 +1008,14 @@ class MyClass
         public async Task FieldIsRead_Attribute()
         {
             var code = """
-                class MyClass
-                {
-                    private const string _goo = "";
+            class MyClass
+            {
+            private const string _goo = "";
 
-                    [System.Obsolete(_goo)]
-                    public void M() { }
-                }
-                """;
+            [System.Obsolete(_goo)]
+            public void M() { }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1024,12 +1024,12 @@ class MyClass
         public async Task MethodIsInvoked()
         {
             var code = """
-                class MyClass
-                {
-                    private int M1() => 0;
-                    public int M2() => M1();
-                }
-                """;
+            class MyClass
+            {
+            private int M1() => 0;
+            public int M2() => M1();
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1038,15 +1038,15 @@ class MyClass
         public async Task MethodIsAddressTaken()
         {
             var code = """
-                class MyClass
-                {
-                    private int M1() => 0;
-                    public void M2()
-                    {
-                        System.Func<int> m1 = M1;
-                    }
-                }
-                """;
+            class MyClass
+            {
+            private int M1() => 0;
+            public void M2()
+            {
+            System.Func<int> m1 = M1;
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1055,12 +1055,12 @@ class MyClass
         public async Task GenericMethodIsInvoked_ExplicitTypeArguments()
         {
             var code = """
-                class MyClass
-                {
-                    private int M1<T>() => 0;
-                    public int M2() => M1<int>();
-                }
-                """;
+            class MyClass
+            {
+            private int M1<T>() => 0;
+            public int M2() => M1<int>();
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1069,12 +1069,12 @@ class MyClass
         public async Task GenericMethodIsInvoked_ImplicitTypeArguments()
         {
             var code = """
-                class MyClass
-                {
-                    private T M1<T>(T t) => t;
-                    public int M2() => M1(0);
-                }
-                """;
+            class MyClass
+            {
+            private T M1<T>(T t) => t;
+            public int M2() => M1(0);
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1083,12 +1083,12 @@ class MyClass
         public async Task MethodInGenericTypeIsInvoked_NoTypeArguments()
         {
             var code = """
-                class MyClass<T>
-                {
-                    private int M1() => 0;
-                    public int M2() => M1();
-                }
-                """;
+            class MyClass<T>
+            {
+            private int M1() => 0;
+            public int M2() => M1();
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1097,12 +1097,12 @@ class MyClass
         public async Task MethodInGenericTypeIsInvoked_NonConstructedType()
         {
             var code = """
-                class MyClass<T>
-                {
-                    private int M1() => 0;
-                    public int M2(MyClass<T> m) => m.M1();
-                }
-                """;
+            class MyClass<T>
+            {
+            private int M1() => 0;
+            public int M2(MyClass<T> m) => m.M1();
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1111,12 +1111,12 @@ class MyClass
         public async Task MethodInGenericTypeIsInvoked_ConstructedType()
         {
             var code = """
-                class MyClass<T>
-                {
-                    private int M1() => 0;
-                    public int M2(MyClass<int> m) => m.M1();
-                }
-                """;
+            class MyClass<T>
+            {
+            private int M1() => 0;
+            public int M2(MyClass<int> m) => m.M1();
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1125,12 +1125,12 @@ class MyClass
         public async Task InstanceConstructorIsUsed_NoArguments()
         {
             var code = """
-                class MyClass
-                {
-                    private MyClass() { }
-                    public static readonly MyClass Instance = new MyClass();
-                }
-                """;
+            class MyClass
+            {
+            private MyClass() { }
+            public static readonly MyClass Instance = new MyClass();
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1139,12 +1139,12 @@ class MyClass
         public async Task InstanceConstructorIsUsed_WithArguments()
         {
             var code = """
-                class MyClass
-                {
-                    private MyClass(int i) { }
-                    public static readonly MyClass Instance = new MyClass(0);
-                }
-                """;
+            class MyClass
+            {
+            private MyClass(int i) { }
+            public static readonly MyClass Instance = new MyClass(0);
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1153,12 +1153,12 @@ class MyClass
         public async Task PropertyIsRead()
         {
             var code = """
-                class MyClass
-                {
-                    private int P => 0;
-                    public int M() => P;
-                }
-                """;
+            class MyClass
+            {
+            private int P => 0;
+            public int M() => P;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1167,12 +1167,12 @@ class MyClass
         public async Task IndexerIsRead()
         {
             var code = """
-                class MyClass
-                {
-                    private int this[int x] { get { return 0; } set { } }
-                    public int M(int x) => this[x];
-                }
-                """;
+            class MyClass
+            {
+            private int this[int x] { get { return 0; } set { } }
+            public int M(int x) => this[x];
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1181,14 +1181,14 @@ class MyClass
         public async Task EventIsRead()
         {
             var code = """
-                using System;
+            using System;
 
-                class MyClass
-                {
-                    private event EventHandler e;
-                    public EventHandler P => e;
-                }
-                """;
+            class MyClass
+            {
+            private event EventHandler e;
+            public EventHandler P => e;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1197,21 +1197,21 @@ class MyClass
         public async Task EventIsSubscribed()
         {
             var code = """
-                using System;
+            using System;
 
-                class MyClass
-                {
-                    private event EventHandler e;
-                    public void M()
-                    {
-                        e += MyHandler;
-                    }
+            class MyClass
+            {
+            private event EventHandler e;
+            public void M()
+            {
+            e += MyHandler;
+            }
 
-                    static void MyHandler(object sender, EventArgs e)
-                    {
-                    }
-                }
-                """;
+            static void MyHandler(object sender, EventArgs e)
+            {
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1220,18 +1220,18 @@ class MyClass
         public async Task EventIsRaised()
         {
             var code = """
-                using System;
+            using System;
 
-                class MyClass
-                {
-                    private event EventHandler _eventHandler;
+            class MyClass
+            {
+            private event EventHandler _eventHandler;
 
-                    public void RaiseEvent(EventArgs e)
-                    {
-                        _eventHandler(this, e);
-                    }
-                }
-                """;
+            public void RaiseEvent(EventArgs e)
+            {
+            _eventHandler(this, e);
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1240,12 +1240,12 @@ class MyClass
         public async Task FieldInNameOf()
         {
             var code = """
-                class MyClass
-                {
-                    private int _goo;
-                    public string _goo2 = nameof(_goo);
-                }
-                """;
+            class MyClass
+            {
+            private int _goo;
+            public string _goo2 = nameof(_goo);
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1254,12 +1254,12 @@ class MyClass
         public async Task GenericFieldInNameOf()
         {
             var code = """
-                class MyClass<T>
-                {
-                    private T _goo;
-                    public string _goo2 = nameof(MyClass<int>._goo);
-                }
-                """;
+            class MyClass<T>
+            {
+            private T _goo;
+            public string _goo2 = nameof(MyClass<int>._goo);
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1268,12 +1268,12 @@ class MyClass
         public async Task MethodInNameOf()
         {
             var code = """
-                class MyClass
-                {
-                    private void M() { }
-                    private string _goo = nameof(M);
-                }
-                """;
+            class MyClass
+            {
+            private void M() { }
+            private string _goo = nameof(M);
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1282,12 +1282,12 @@ class MyClass
         public async Task GenericMethodInNameOf()
         {
             var code = """
-                class MyClass<T>
-                {
-                    private void M() { }
-                    private string _goo2 = nameof(MyClass<int>.M);
-                }
-                """;
+            class MyClass<T>
+            {
+            private void M() { }
+            private string _goo2 = nameof(MyClass<int>.M);
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1296,12 +1296,12 @@ class MyClass
         public async Task PropertyInNameOf()
         {
             var code = """
-                class MyClass
-                {
-                    private int P { get; }
-                    public string _goo = nameof(P);
-                }
-                """;
+            class MyClass
+            {
+            private int P { get; }
+            public string _goo = nameof(P);
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1310,12 +1310,12 @@ class MyClass
         public async Task TestDynamicInvocation()
         {
             var code = """
-                class MyClass
-                {
-                    private void M(dynamic d) { }
-                    public void M2(dynamic d) => M(d);
-                }
-                """;
+            class MyClass
+            {
+            private void M(dynamic d) { }
+            public void M2(dynamic d) => M(d);
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1324,12 +1324,12 @@ class MyClass
         public async Task TestDynamicObjectCreation()
         {
             var code = """
-                class MyClass
-                {
-                    private MyClass(int i) { }
-                    public static MyClass Create(dynamic d) => new MyClass(d);
-                }
-                """;
+            class MyClass
+            {
+            private MyClass(int i) { }
+            public static MyClass Create(dynamic d) => new MyClass(d);
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1338,13 +1338,13 @@ class MyClass
         public async Task TestDynamicIndexerAccess()
         {
             var code = """
-                class MyClass
-                {
-                    private int[] _list;
-                    private int this[int index] => _list[index];
-                    public int M2(dynamic d) => this[d];
-                }
-                """;
+            class MyClass
+            {
+            private int[] _list;
+            private int this[int index] => _list[index];
+            public int M2(dynamic d) => this[d];
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1353,14 +1353,14 @@ class MyClass
         public async Task FieldInDocComment()
         {
             var code = """
-                /// <summary>
-                /// <see cref="C._goo"/>
-                /// </summary>
-                class C
-                {
-                    private static int {|IDE0052:_goo|};
-                }
-                """;
+            /// <summary>
+            /// <see cref="C._goo"/>
+            /// </summary>
+            class C
+            {
+            private static int {|IDE0052:_goo|};
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1369,14 +1369,14 @@ class MyClass
         public async Task FieldInDocComment_02()
         {
             var code = """
-                class C
-                {
-                    /// <summary>
-                    /// <see cref="_goo"/>
-                    /// </summary>
-                    private static int {|IDE0052:_goo|};
-                }
-                """;
+            class C
+            {
+            /// <summary>
+            /// <see cref="_goo"/>
+            /// </summary>
+            private static int {|IDE0052:_goo|};
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1385,16 +1385,16 @@ class MyClass
         public async Task FieldInDocComment_03()
         {
             var code = """
-                class C
-                {
-                    /// <summary>
-                    /// <see cref="_goo"/>
-                    /// </summary>
-                    public void M() { }
+            class C
+            {
+            /// <summary>
+            /// <see cref="_goo"/>
+            /// </summary>
+            public void M() { }
 
-                    private static int {|IDE0052:_goo|};
-                }
-                """;
+            private static int {|IDE0052:_goo|};
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1403,16 +1403,16 @@ class MyClass
         public async Task GenericMethodInDocComment()
         {
             var code = """
-                class C<T>
-                {
-                    /// <summary>
-                    /// <see cref="C{Int32}.M2()"/>
-                    /// </summary>
-                    public void M1() { }
+            class C<T>
+            {
+            /// <summary>
+            /// <see cref="C{Int32}.M2()"/>
+            /// </summary>
+            public void M1() { }
 
-                    private void {|IDE0052:M2|}() { }
-                }
-                """;
+            private void {|IDE0052:M2|}() { }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1421,15 +1421,15 @@ class MyClass
         public async Task FieldIsOnlyWritten()
         {
             var code = """
-                class MyClass
-                {
-                    private int {|IDE0052:_goo|};
-                    public void M()
-                    {
-                        _goo = 0;
-                    }
-                }
-                """;
+            class MyClass
+            {
+            private int {|IDE0052:_goo|};
+            public void M()
+            {
+            _goo = 0;
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1438,15 +1438,15 @@ class MyClass
         public async Task PropertyIsOnlyWritten()
         {
             var source = """
-                class MyClass
-                {
-                    private int {|#0:P|} { get; set; }
-                    public void M()
-                    {
-                        P = 0;
-                    }
-                }
-                """;
+            class MyClass
+            {
+            private int {|#0:P|} { get; set; }
+            public void M()
+            {
+            P = 0;
+            }
+            }
+            """;
 
             var descriptor = new CSharpRemoveUnusedMembersDiagnosticAnalyzer()
                 .SupportedDiagnostics
@@ -1472,15 +1472,15 @@ class MyClass
         public async Task IndexerIsOnlyWritten()
         {
             var code = """
-                class MyClass
-                {
-                    private int {|IDE0052:this|}[int x] { get { return 0; } set { } }
-                    public void M(int x, int y)
-                    {
-                        this[x] = y;
-                    }
-                }
-                """;
+            class MyClass
+            {
+            private int {|IDE0052:this|}[int x] { get { return 0; } set { } }
+            public void M(int x, int y)
+            {
+            this[x] = y;
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1489,16 +1489,16 @@ class MyClass
         public async Task EventIsOnlyWritten()
         {
             var code = """
-                class MyClass
-                {
-                    private event System.EventHandler e { add { } remove { } }
-                    public void M()
-                    {
-                        // CS0079: The event 'MyClass.e' can only appear on the left hand side of += or -=
-                        {|CS0079:e|} = null;
-                    }
-                }
-                """;
+            class MyClass
+            {
+            private event System.EventHandler e { add { } remove { } }
+            public void M()
+            {
+            // CS0079: The event 'MyClass.e' can only appear on the left hand side of += or -=
+            {|CS0079:e|} = null;
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1507,12 +1507,12 @@ class MyClass
         public async Task FieldIsOnlyInitialized_NonConstant()
         {
             var code = """
-                class MyClass
-                {
-                    private int {|IDE0052:_goo|} = M();
-                    public static int M() => 0;
-                }
-                """;
+            class MyClass
+            {
+            private int {|IDE0052:_goo|} = M();
+            public static int M() => 0;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1521,16 +1521,16 @@ class MyClass
         public async Task FieldIsOnlyWritten_Deconstruction()
         {
             var code = """
-                class MyClass
-                {
-                    private int {|IDE0052:_goo|};
-                    public void M()
-                    {
-                        int x;
-                        (_goo, x) = (0, 0);
-                    }
-                }
-                """;
+            class MyClass
+            {
+            private int {|IDE0052:_goo|};
+            public void M()
+            {
+            int x;
+            (_goo, x) = (0, 0);
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1539,12 +1539,12 @@ class MyClass
         public async Task FieldIsOnlyWritten_ObjectInitializer()
         {
             var code = """
-                class MyClass
-                {
-                    private int {|IDE0052:_goo|};
-                    public MyClass M() => new MyClass() { _goo = 0 };
-                }
-                """;
+            class MyClass
+            {
+            private int {|IDE0052:_goo|};
+            public MyClass M() => new MyClass() { _goo = 0 };
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1553,16 +1553,16 @@ class MyClass
         public async Task FieldIsOnlyWritten_InProperty()
         {
             var code = """
-                class MyClass
-                {
-                    private int {|IDE0052:_goo|};
-                    public int Goo
-                    {
-                        get { return 0; }
-                        set { _goo = value; }
-                    }
-                }
-                """;
+            class MyClass
+            {
+            private int {|IDE0052:_goo|};
+            public int Goo
+            {
+            get { return 0; }
+            set { _goo = value; }
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1571,16 +1571,16 @@ class MyClass
         public async Task FieldIsReadAndWritten()
         {
             var code = """
-                class MyClass
-                {
-                    private int _goo;
-                    public void M()
-                    {
-                        _goo = 0;
-                        System.Console.WriteLine(_goo);
-                    }
-                }
-                """;
+            class MyClass
+            {
+            private int _goo;
+            public void M()
+            {
+            _goo = 0;
+            System.Console.WriteLine(_goo);
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1589,16 +1589,16 @@ class MyClass
         public async Task PropertyIsReadAndWritten()
         {
             var code = """
-                class MyClass
-                {
-                    private int P { get; set; }
-                    public void M()
-                    {
-                        P = 0;
-                        System.Console.WriteLine(P);
-                    }
-                }
-                """;
+            class MyClass
+            {
+            private int P { get; set; }
+            public void M()
+            {
+            P = 0;
+            System.Console.WriteLine(P);
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1607,16 +1607,16 @@ class MyClass
         public async Task IndexerIsReadAndWritten()
         {
             var code = """
-                class MyClass
-                {
-                    private int this[int x] { get { return 0; } set { } }
-                    public void M(int x)
-                    {
-                        this[x] = 0;
-                        System.Console.WriteLine(this[x]);
-                    }
-                }
-                """;
+            class MyClass
+            {
+            private int this[int x] { get { return 0; } set { } }
+            public void M(int x)
+            {
+            this[x] = 0;
+            System.Console.WriteLine(this[x]);
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1625,16 +1625,16 @@ class MyClass
         public async Task FieldIsReadAndWritten_InProperty()
         {
             var code = """
-                class MyClass
-                {
-                    private int _goo;
-                    public int Goo
-                    {
-                        get { return _goo; }
-                        set { _goo = value; }
-                    }
-                }
-                """;
+            class MyClass
+            {
+            private int _goo;
+            public int Goo
+            {
+            get { return _goo; }
+            set { _goo = value; }
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1643,12 +1643,12 @@ class MyClass
         public async Task FieldIsIncrementedAndValueUsed()
         {
             var code = """
-                class MyClass
-                {
-                    private int _goo;
-                    public int M1() => ++_goo;
-                }
-                """;
+            class MyClass
+            {
+            private int _goo;
+            public int M1() => ++_goo;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1657,12 +1657,12 @@ class MyClass
         public async Task FieldIsIncrementedAndValueUsed_02()
         {
             var code = """
-                class MyClass
-                {
-                    private int _goo;
-                    public int M1() { return ++_goo; }
-                }
-                """;
+            class MyClass
+            {
+            private int _goo;
+            public int M1() { return ++_goo; }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1671,12 +1671,12 @@ class MyClass
         public async Task FieldIsIncrementedAndValueDropped()
         {
             var code = """
-                class MyClass
-                {
-                    private int {|IDE0052:_goo|};
-                    public void M1() => ++_goo;
-                }
-                """;
+            class MyClass
+            {
+            private int {|IDE0052:_goo|};
+            public void M1() => ++_goo;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1685,12 +1685,12 @@ class MyClass
         public async Task FieldIsIncrementedAndValueDropped_02()
         {
             var code = """
-                class MyClass
-                {
-                    private int {|IDE0052:_goo|};
-                    public void M1() { ++_goo; }
-                }
-                """;
+            class MyClass
+            {
+            private int {|IDE0052:_goo|};
+            public void M1() { ++_goo; }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1699,12 +1699,12 @@ class MyClass
         public async Task PropertyIsIncrementedAndValueUsed()
         {
             var code = """
-                class MyClass
-                {
-                    private int P { get; set; }
-                    public int M1() => ++P;
-                }
-                """;
+            class MyClass
+            {
+            private int P { get; set; }
+            public int M1() => ++P;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1713,12 +1713,12 @@ class MyClass
         public async Task PropertyIsIncrementedAndValueDropped()
         {
             var code = """
-                class MyClass
-                {
-                    private int {|IDE0052:P|} { get; set; }
-                    public void M1() { ++P; }
-                }
-                """;
+            class MyClass
+            {
+            private int {|IDE0052:P|} { get; set; }
+            public void M1() { ++P; }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1727,12 +1727,12 @@ class MyClass
         public async Task PropertyIsIncrementedAndValueDropped_VerifyAnalizerMessage()
         {
             var code = """
-                class MyClass
-                {
-                    private int P { get; set; }
-                    public void M1() { ++P; }
-                }
-                """;
+            class MyClass
+            {
+            private int P { get; set; }
+            public void M1() { ++P; }
+            }
+            """;
 
             await VerifyCS.VerifyAnalyzerAsync(
                 code,
@@ -1748,13 +1748,13 @@ class MyClass
         public async Task PropertyIsIncrementedAndValueDropped_NoDiagnosticWhenPropertyIsReadSomewhereElse()
         {
             var code = """
-                class MyClass
-                {
-                    private int P { get; set; }
-                    public void M1() { ++P; }
-                    public int M2() => P;
-                }
-                """;
+            class MyClass
+            {
+            private int P { get; set; }
+            public void M1() { ++P; }
+            public int M2() => P;
+            }
+            """;
 
             await VerifyCS.VerifyAnalyzerAsync(code, Array.Empty<DiagnosticResult>());
         }
@@ -1763,12 +1763,12 @@ class MyClass
         public async Task IndexerIsIncrementedAndValueUsed()
         {
             var code = """
-                class MyClass
-                {
-                    private int this[int x] { get { return 0; } set { } }
-                    public int M1(int x) => ++this[x];
-                }
-                """;
+            class MyClass
+            {
+            private int this[int x] { get { return 0; } set { } }
+            public int M1(int x) => ++this[x];
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1777,12 +1777,12 @@ class MyClass
         public async Task IndexerIsIncrementedAndValueDropped()
         {
             var code = """
-                class MyClass
-                {
-                    private int {|IDE0052:this|}[int x] { get { return 0; } set { } }
-                    public void M1(int x) => ++this[x];
-                }
-                """;
+            class MyClass
+            {
+            private int {|IDE0052:this|}[int x] { get { return 0; } set { } }
+            public void M1(int x) => ++this[x];
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1791,12 +1791,12 @@ class MyClass
         public async Task IndexerIsIncrementedAndValueDropped_VerifyAnalizerMessage()
         {
             var code = """
-                class MyClass
-                {
-                    private int this[int x] { get { return 0; } set { } }
-                    public void M1(int x) => ++this[x];
-                }
-                """;
+            class MyClass
+            {
+            private int this[int x] { get { return 0; } set { } }
+            public void M1(int x) => ++this[x];
+            }
+            """;
 
             await VerifyCS.VerifyAnalyzerAsync(
                 code,
@@ -1812,13 +1812,13 @@ class MyClass
         public async Task IndexerIsIncrementedAndValueDropped_NoDiagnosticWhenIndexerIsReadSomewhereElse()
         {
             var code = """
-                class MyClass
-                {
-                    private int this[int x] { get { return 0; } set { } }
-                    public void M1(int x) => ++this[x];
-                    public int M2(int x) => this[x];
-                }
-                """;
+            class MyClass
+            {
+            private int this[int x] { get { return 0; } set { } }
+            public void M1(int x) => ++this[x];
+            public int M2(int x) => this[x];
+            }
+            """;
 
             await VerifyCS.VerifyAnalyzerAsync(code, Array.Empty<DiagnosticResult>());
         }
@@ -1827,12 +1827,12 @@ class MyClass
         public async Task FieldIsTargetOfCompoundAssignmentAndValueUsed()
         {
             var code = """
-                class MyClass
-                {
-                    private int _goo;
-                    public int M1(int x) => _goo += x;
-                }
-                """;
+            class MyClass
+            {
+            private int _goo;
+            public int M1(int x) => _goo += x;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1841,12 +1841,12 @@ class MyClass
         public async Task FieldIsTargetOfCompoundAssignmentAndValueUsed_02()
         {
             var code = """
-                class MyClass
-                {
-                    private int _goo;
-                    public int M1(int x) { return _goo += x; }
-                }
-                """;
+            class MyClass
+            {
+            private int _goo;
+            public int M1(int x) { return _goo += x; }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1855,12 +1855,12 @@ class MyClass
         public async Task FieldIsTargetOfCompoundAssignmentAndValueDropped()
         {
             var code = """
-                class MyClass
-                {
-                    private int {|IDE0052:_goo|};
-                    public void M1(int x) => _goo += x;
-                }
-                """;
+            class MyClass
+            {
+            private int {|IDE0052:_goo|};
+            public void M1(int x) => _goo += x;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1869,12 +1869,12 @@ class MyClass
         public async Task FieldIsTargetOfCompoundAssignmentAndValueDropped_02()
         {
             var code = """
-                class MyClass
-                {
-                    private int {|IDE0052:_goo|};
-                    public void M1(int x) { _goo += x; }
-                }
-                """;
+            class MyClass
+            {
+            private int {|IDE0052:_goo|};
+            public void M1(int x) { _goo += x; }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1883,12 +1883,12 @@ class MyClass
         public async Task PropertyIsTargetOfCompoundAssignmentAndValueUsed()
         {
             var code = """
-                class MyClass
-                {
-                    private int P { get; set; }
-                    public int M1(int x) => P += x;
-                }
-                """;
+            class MyClass
+            {
+            private int P { get; set; }
+            public int M1(int x) => P += x;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1897,12 +1897,12 @@ class MyClass
         public async Task PropertyIsTargetOfCompoundAssignmentAndValueDropped()
         {
             var code = """
-                class MyClass
-                {
-                    private int {|IDE0052:P|} { get; set; }
-                    public void M1(int x) { P += x; }
-                }
-                """;
+            class MyClass
+            {
+            private int {|IDE0052:P|} { get; set; }
+            public void M1(int x) { P += x; }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1911,12 +1911,12 @@ class MyClass
         public async Task PropertyIsTargetOfCompoundAssignmentAndValueDropped_VerifyAnalizerMessage()
         {
             var code = """
-                class MyClass
-                {
-                    private int P { get; set; }
-                    public void M1(int x) { P += x; }
-                }
-                """;
+            class MyClass
+            {
+            private int P { get; set; }
+            public void M1(int x) { P += x; }
+            }
+            """;
 
             await VerifyCS.VerifyAnalyzerAsync(
                 code,
@@ -1932,13 +1932,13 @@ class MyClass
         public async Task PropertyIsTargetOfCompoundAssignmentAndValueDropped_NoDiagnosticWhenPropertyIsReadSomewhereElse()
         {
             var code = """
-                class MyClass
-                {
-                    private int P { get; set; }
-                    public void M1(int x) { P += x; }
-                    public int M2() => P;
-                }
-                """;
+            class MyClass
+            {
+            private int P { get; set; }
+            public void M1(int x) { P += x; }
+            public int M2() => P;
+            }
+            """;
 
             await VerifyCS.VerifyAnalyzerAsync(code, Array.Empty<DiagnosticResult>());
         }
@@ -1947,12 +1947,12 @@ class MyClass
         public async Task IndexerIsTargetOfCompoundAssignmentAndValueUsed()
         {
             var code = """
-                class MyClass
-                {
-                    private int this[int x] { get { return 0; } set { } }
-                    public int M1(int x, int y) => this[x] += y;
-                }
-                """;
+            class MyClass
+            {
+            private int this[int x] { get { return 0; } set { } }
+            public int M1(int x, int y) => this[x] += y;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1961,12 +1961,12 @@ class MyClass
         public async Task IndexerIsTargetOfCompoundAssignmentAndValueDropped()
         {
             var code = """
-                class MyClass
-                {
-                    private int {|IDE0052:this|}[int x] { get { return 0; } set { } }
-                    public void M1(int x, int y) => this[x] += y;
-                }
-                """;
+            class MyClass
+            {
+            private int {|IDE0052:this|}[int x] { get { return 0; } set { } }
+            public void M1(int x, int y) => this[x] += y;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -1975,12 +1975,12 @@ class MyClass
         public async Task IndexerIsTargetOfCompoundAssignmentAndValueDropped_VerifyAnalyzerMessage()
         {
             var code = """
-                class MyClass
-                {
-                    private int this[int x] { get { return 0; } set { } }
-                    public void M1(int x, int y) => this[x] += y;
-                }
-                """;
+            class MyClass
+            {
+            private int this[int x] { get { return 0; } set { } }
+            public void M1(int x, int y) => this[x] += y;
+            }
+            """;
 
             await VerifyCS.VerifyAnalyzerAsync(
                 code,
@@ -1996,13 +1996,13 @@ class MyClass
         public async Task IndexerIsTargetOfCompoundAssignmentAndValueDropped_NoDiagnosticWhenIndexerIsReadSomewhereElse()
         {
             var code = """
-                class MyClass
-                {
-                    private int this[int x] { get { return 0; } set { } }
-                    public void M1(int x, int y) => this[x] += y;
-                    public int M2(int x) => this[x];
-                }
-                """;
+            class MyClass
+            {
+            private int this[int x] { get { return 0; } set { } }
+            public void M1(int x, int y) => this[x] += y;
+            public int M2(int x) => this[x];
+            }
+            """;
 
             await VerifyCS.VerifyAnalyzerAsync(code, Array.Empty<DiagnosticResult>());
         }
@@ -2011,12 +2011,12 @@ class MyClass
         public async Task FieldIsTargetOfAssignmentAndParenthesized()
         {
             var code = """
-                class MyClass
-                {
-                    private int {|IDE0052:_goo|};
-                    public void M1(int x) => (_goo) = x;
-                }
-                """;
+            class MyClass
+            {
+            private int {|IDE0052:_goo|};
+            public void M1(int x) => (_goo) = x;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2025,13 +2025,13 @@ class MyClass
         public async Task FieldIsTargetOfAssignmentAndHasImplicitConversion()
         {
             var code = """
-                class MyClass
-                {
-                    private int {|IDE0052:_goo|};
-                    public static implicit operator int(MyClass c) => 0;
-                    public void M1(MyClass c) => _goo = c;
-                }
-                """;
+            class MyClass
+            {
+            private int {|IDE0052:_goo|};
+            public static implicit operator int(MyClass c) => 0;
+            public void M1(MyClass c) => _goo = c;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2040,13 +2040,13 @@ class MyClass
         public async Task FieldIsArg()
         {
             var code = """
-                class MyClass
-                {
-                    private int _goo;
-                    public int M1() => M2(_goo);
-                    public int M2(int i) { i = 0; return i; }
-                }
-                """;
+            class MyClass
+            {
+            private int _goo;
+            public int M1() => M2(_goo);
+            public int M2(int i) { i = 0; return i; }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2055,13 +2055,13 @@ class MyClass
         public async Task FieldIsInArg()
         {
             var code = """
-                class MyClass
-                {
-                    private int _goo;
-                    public int M1() => M2(_goo);
-                    public int M2(in int i) { return i; }
-                }
-                """;
+            class MyClass
+            {
+            private int _goo;
+            public int M1() => M2(_goo);
+            public int M2(in int i) { return i; }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2070,13 +2070,13 @@ class MyClass
         public async Task FieldIsRefArg()
         {
             var code = """
-                class MyClass
-                {
-                    private int _goo;
-                    public int M1() => M2(ref _goo);
-                    public int M2(ref int i) => i;
-                }
-                """;
+            class MyClass
+            {
+            private int _goo;
+            public int M1() => M2(ref _goo);
+            public int M2(ref int i) => i;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2085,13 +2085,13 @@ class MyClass
         public async Task FieldIsOutArg()
         {
             var code = """
-                class MyClass
-                {
-                    private int {|IDE0052:_goo|};
-                    public int M1() => M2(out _goo);
-                    public int M2(out int i) { i = 0; return i; }
-                }
-                """;
+            class MyClass
+            {
+            private int {|IDE0052:_goo|};
+            public int M1() => M2(out _goo);
+            public int M2(out int i) { i = 0; return i; }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2100,13 +2100,13 @@ class MyClass
         public async Task MethodIsArg()
         {
             var code = """
-                class MyClass
-                {
-                    private int M() => 0;
-                    public int M1() => M2(M);
-                    public int M2(System.Func<int> m) => m();
-                }
-                """;
+            class MyClass
+            {
+            private int M() => 0;
+            public int M1() => M2(M);
+            public int M2(System.Func<int> m) => m();
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2115,13 +2115,13 @@ class MyClass
         public async Task PropertyIsArg()
         {
             var code = """
-                class MyClass
-                {
-                    private int P => 0;
-                    public int M1() => M2(P);
-                    public int M2(int p) => p;
-                }
-                """;
+            class MyClass
+            {
+            private int P => 0;
+            public int M1() => M2(P);
+            public int M2(int p) => p;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2130,13 +2130,13 @@ class MyClass
         public async Task IndexerIsArg()
         {
             var code = """
-                class MyClass
-                {
-                    private int this[int x] { get { return 0; } set { } }
-                    public int M1(int x) => M2(this[x]);
-                    public int M2(int p) => p;
-                }
-                """;
+            class MyClass
+            {
+            private int this[int x] { get { return 0; } set { } }
+            public int M1(int x) => M2(this[x]);
+            public int M2(int p) => p;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2145,15 +2145,15 @@ class MyClass
         public async Task EventIsArg()
         {
             var code = """
-                using System;
+            using System;
 
-                class MyClass
-                {
-                    private event EventHandler _e;
-                    public EventHandler M1() => M2(_e);
-                    public EventHandler M2(EventHandler e) => e;
-                }
-                """;
+            class MyClass
+            {
+            private event EventHandler _e;
+            public EventHandler M1() => M2(_e);
+            public EventHandler M2(EventHandler e) => e;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2165,7 +2165,7 @@ class MyClass
                 """
                 class MyClass
                 {
-                    private int [|_goo|] = 0, [|_bar|] = 0;
+                private int [|_goo|] = 0, [|_bar|] = 0;
                 }
                 """,
                 """
@@ -2195,10 +2195,10 @@ class MyClass
     private int {(diagnosticIndex == 0 ? secondField : firstField)};
 }}";
             var batchFixedSource = """
-                class MyClass
-                {
-                }
-                """;
+            class MyClass
+            {
+            }
+            """;
 
             await new VerifyCS.Test
             {
@@ -2217,15 +2217,15 @@ class MyClass
                 """
                 class MyClass
                 {
-                    private int [|_goo|] = 0, _bar = 0;
-                    public int M() => _bar;
+                private int [|_goo|] = 0, _bar = 0;
+                public int M() => _bar;
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private int _bar = 0;
-                    public int M() => _bar;
+                private int _bar = 0;
+                public int M() => _bar;
                 }
                 """
             );
@@ -2238,15 +2238,15 @@ class MyClass
                 """
                 class MyClass
                 {
-                    private int _goo = 0, [|_bar|] = 0;
-                    public int M() => _goo;
+                private int _goo = 0, [|_bar|] = 0;
+                public int M() => _goo;
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private int _goo = 0;
-                    public int M() => _goo;
+                private int _goo = 0;
+                public int M() => _goo;
                 }
                 """
             );
@@ -2256,16 +2256,16 @@ class MyClass
         public async Task FieldIsRead_InNestedType()
         {
             var code = """
-                class MyClass
-                {
-                    private int _goo;
+            class MyClass
+            {
+            private int _goo;
 
-                    class Derived : MyClass
-                    {
-                        public int M() => _goo;
-                    }
-                }
-                """;
+            class Derived : MyClass
+            {
+            public int M() => _goo;
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2274,16 +2274,16 @@ class MyClass
         public async Task MethodIsInvoked_InNestedType()
         {
             var code = """
-                class MyClass
-                {
-                    private int M1() => 0;
+            class MyClass
+            {
+            private int M1() => 0;
 
-                    class Derived : MyClass
-                    {
-                        public int M2() => M1();
-                    }
-                }
-                """;
+            class Derived : MyClass
+            {
+            public int M2() => M1();
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2295,18 +2295,18 @@ class MyClass
                 """
                 class MyClass
                 {
-                    class NestedType
-                    {
-                        private int [|_goo|];
-                    }
+                class NestedType
+                {
+                private int [|_goo|];
+                }
                 }
                 """,
                 """
                 class MyClass
                 {
-                    class NestedType
-                    {
-                    }
+                class NestedType
+                {
+                }
                 }
                 """
             );
@@ -2316,16 +2316,16 @@ class MyClass
         public async Task FieldOfNestedTypeIsRead()
         {
             var code = """
-                class MyClass
-                {
-                    class NestedType
-                    {
-                        private int _goo;
+            class MyClass
+            {
+            class NestedType
+            {
+            private int _goo;
 
-                        public int M() => _goo;
-                    }
-                }
-                """;
+            public int M() => _goo;
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2337,7 +2337,7 @@ class MyClass
                 """
                 partial class MyClass
                 {
-                    private int [|_goo|];
+                private int [|_goo|];
                 }
                 """,
                 """
@@ -2352,15 +2352,15 @@ class MyClass
         public async Task FieldIsRead_PartialClass()
         {
             var code = """
-                partial class MyClass
-                {
-                    private int _goo;
-                }
-                partial class MyClass
-                {
-                    public int M() => _goo;
-                }
-                """;
+            partial class MyClass
+            {
+            private int _goo;
+            }
+            partial class MyClass
+            {
+            public int M() => _goo;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2369,17 +2369,17 @@ class MyClass
         public async Task FieldIsRead_PartialClass_DifferentFile()
         {
             var source1 = """
-                partial class MyClass
-                {
-                    private int _goo;
-                }
-                """;
+            partial class MyClass
+            {
+            private int _goo;
+            }
+            """;
             var source2 = """
-                partial class MyClass
-                {
-                    public int M() => _goo;
-                }
-                """;
+            partial class MyClass
+            {
+            public int M() => _goo;
+            }
+            """;
 
             await new VerifyCS.Test
             {
@@ -2392,17 +2392,17 @@ class MyClass
         public async Task FieldIsOnlyWritten_PartialClass_DifferentFile()
         {
             var source1 = """
-                partial class MyClass
-                {
-                    private int {|IDE0052:_goo|};
-                }
-                """;
+            partial class MyClass
+            {
+            private int {|IDE0052:_goo|};
+            }
+            """;
             var source2 = """
-                partial class MyClass
-                {
-                    public void M() { _goo = 0; }
-                }
-                """;
+            partial class MyClass
+            {
+            public void M() { _goo = 0; }
+            }
+            """;
 
             await new VerifyCS.Test
             {
@@ -2415,12 +2415,12 @@ class MyClass
         public async Task FieldIsRead_InParens()
         {
             var code = """
-                class MyClass
-                {
-                    private int _goo;
-                    public int M() => (_goo);
-                }
-                """;
+            class MyClass
+            {
+            private int _goo;
+            public int M() => (_goo);
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2429,12 +2429,12 @@ class MyClass
         public async Task FieldIsWritten_InParens()
         {
             var code = """
-                class MyClass
-                {
-                    private int {|IDE0052:_goo|};
-                    public void M() { (_goo) = 1; }
-                }
-                """;
+            class MyClass
+            {
+            private int {|IDE0052:_goo|};
+            public void M() { (_goo) = 1; }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2443,12 +2443,12 @@ class MyClass
         public async Task FieldIsWritten_InParens_02()
         {
             var code = """
-                class MyClass
-                {
-                    private int {|IDE0052:_goo|};
-                    public int M() => (_goo) = 1;
-                }
-                """;
+            class MyClass
+            {
+            private int {|IDE0052:_goo|};
+            public int M() => (_goo) = 1;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2457,16 +2457,16 @@ class MyClass
         public async Task FieldIsRead_InDeconstruction_InParens()
         {
             var code = """
-                class C
-                {
-                    private int i;
+            class C
+            {
+            private int i;
 
-                    public void M()
-                    {
-                        var x = ((i, 0), 0);
-                    }
-                }
-                """;
+            public void M()
+            {
+            var x = ((i, 0), 0);
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2478,25 +2478,25 @@ class MyClass
                 """
                 class C
                 {
-                    private int [|i|];
+                private int [|i|];
 
-                    [System.CodeDom.Compiler.GeneratedCodeAttribute("", "")]
-                    private int j;
+                [System.CodeDom.Compiler.GeneratedCodeAttribute("", "")]
+                private int j;
 
-                    public void M()
-                    {
-                    }
+                public void M()
+                {
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    [System.CodeDom.Compiler.GeneratedCodeAttribute("", "")]
-                    private int j;
+                [System.CodeDom.Compiler.GeneratedCodeAttribute("", "")]
+                private int j;
 
-                    public void M()
-                    {
-                    }
+                public void M()
+                {
+                }
                 }
                 """
             );
@@ -2506,16 +2506,16 @@ class MyClass
         public async Task FieldIsGeneratedCode()
         {
             var code = """
-                class C
-                {
-                    [System.CodeDom.Compiler.GeneratedCodeAttribute("", "")]
-                    private int i;
+            class C
+            {
+            [System.CodeDom.Compiler.GeneratedCodeAttribute("", "")]
+            private int i;
 
-                    public void M()
-                    {
-                    }
-                }
-                """;
+            public void M()
+            {
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2524,14 +2524,14 @@ class MyClass
         public async Task FieldUsedInGeneratedCode()
         {
             var code = """
-                class C
-                {
-                    private int i;
+            class C
+            {
+            private int i;
 
-                    [System.CodeDom.Compiler.GeneratedCodeAttribute("", "")]
-                    public int M() => i;
-                }
-                """;
+            [System.CodeDom.Compiler.GeneratedCodeAttribute("", "")]
+            public int M() => i;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2540,13 +2540,13 @@ class MyClass
         public async Task FieldIsUnusedInType_SyntaxError()
         {
             var code = """
-                class C
-                {
-                    private int i;
+            class C
+            {
+            private int i;
 
-                    public int M() { return {|CS1525:=|} {|CS1525:;|} }
-                }
-                """;
+            public int M() { return {|CS1525:=|} {|CS1525:;|} }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2555,14 +2555,14 @@ class MyClass
         public async Task FieldIsUnusedInType_SemanticError()
         {
             var code = """
-                class C
-                {
-                    private int i;
+            class C
+            {
+            private int i;
 
-                    // 'ii' is undefined.
-                    public int M() => {|CS0103:ii|};
-                }
-                """;
+            // 'ii' is undefined.
+            public int M() => {|CS0103:ii|};
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2574,13 +2574,13 @@ class MyClass
                 """
                 class C
                 {
-                    private int [|i|];
+                private int [|i|];
                 }
 
                 class C2
                 {
-                    // 'ii' is undefined.
-                    public int M() => {|CS0103:ii|};
+                // 'ii' is undefined.
+                public int M() => {|CS0103:ii|};
                 }
                 """,
                 """
@@ -2590,8 +2590,8 @@ class MyClass
 
                 class C2
                 {
-                    // 'ii' is undefined.
-                    public int M() => {|CS0103:ii|};
+                // 'ii' is undefined.
+                public int M() => {|CS0103:ii|};
                 }
                 """
             );
@@ -2601,18 +2601,18 @@ class MyClass
         public async Task StructLayoutAttribute_ExplicitLayout()
         {
             var code = """
-                using System.Runtime.InteropServices;
+            using System.Runtime.InteropServices;
 
-                [StructLayoutAttribute(LayoutKind.Explicit)]
-                class C
-                {
-                    [FieldOffset(0)]
-                    private int i;
+            [StructLayoutAttribute(LayoutKind.Explicit)]
+            class C
+            {
+            [FieldOffset(0)]
+            private int i;
 
-                    [FieldOffset(4)]
-                    private int i2;
-                }
-                """;
+            [FieldOffset(4)]
+            private int i2;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2621,15 +2621,15 @@ class MyClass
         public async Task StructLayoutAttribute_SequentialLayout()
         {
             var code = """
-                using System.Runtime.InteropServices;
+            using System.Runtime.InteropServices;
 
-                [StructLayoutAttribute(LayoutKind.Sequential)]
-                struct S
-                {
-                    private int i;
-                    private int i2;
-                }
-                """;
+            [StructLayoutAttribute(LayoutKind.Sequential)]
+            struct S
+            {
+            private int i;
+            private int i2;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2638,12 +2638,12 @@ class MyClass
         public async Task DebuggerDisplayAttribute_OnType_ReferencesField()
         {
             var code = """
-                [System.Diagnostics.DebuggerDisplayAttribute("{s}")]
-                class C
-                {
-                    private string s;
-                }
-                """;
+            [System.Diagnostics.DebuggerDisplayAttribute("{s}")]
+            class C
+            {
+            private string s;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2652,12 +2652,12 @@ class MyClass
         public async Task DebuggerDisplayAttribute_OnType_ReferencesMethod()
         {
             var code = """
-                [System.Diagnostics.DebuggerDisplayAttribute("{GetString()}")]
-                class C
-                {
-                    private string GetString() => "";
-                }
-                """;
+            [System.Diagnostics.DebuggerDisplayAttribute("{GetString()}")]
+            class C
+            {
+            private string GetString() => "";
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2666,12 +2666,12 @@ class MyClass
         public async Task DebuggerDisplayAttribute_OnType_ReferencesProperty()
         {
             var code = """
-                [System.Diagnostics.DebuggerDisplayAttribute("{MyString}")]
-                class C
-                {
-                    private string MyString => "";
-                }
-                """;
+            [System.Diagnostics.DebuggerDisplayAttribute("{MyString}")]
+            class C
+            {
+            private string MyString => "";
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2680,14 +2680,14 @@ class MyClass
         public async Task DebuggerDisplayAttribute_OnField_ReferencesField()
         {
             var code = """
-                class C
-                {
-                    private string s;
+            class C
+            {
+            private string s;
 
-                    [System.Diagnostics.DebuggerDisplayAttribute("{s}")]
-                    public int M;
-                }
-                """;
+            [System.Diagnostics.DebuggerDisplayAttribute("{s}")]
+            public int M;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2696,14 +2696,14 @@ class MyClass
         public async Task DebuggerDisplayAttribute_OnProperty_ReferencesMethod()
         {
             var code = """
-                class C
-                {
-                    private string GetString() => "";
+            class C
+            {
+            private string GetString() => "";
 
-                    [System.Diagnostics.DebuggerDisplayAttribute("{GetString()}")]
-                    public int M => 0;
-                }
-                """;
+            [System.Diagnostics.DebuggerDisplayAttribute("{GetString()}")]
+            public int M => 0;
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2712,14 +2712,14 @@ class MyClass
         public async Task DebuggerDisplayAttribute_OnProperty_ReferencesProperty()
         {
             var code = """
-                class C
-                {
-                    private string MyString { get { return ""; } }
+            class C
+            {
+            private string MyString { get { return ""; } }
 
-                    [System.Diagnostics.DebuggerDisplayAttribute("{MyString}")]
-                    public int M { get { return 0; } }
-                }
-                """;
+            [System.Diagnostics.DebuggerDisplayAttribute("{MyString}")]
+            public int M { get { return 0; } }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2728,17 +2728,17 @@ class MyClass
         public async Task DebuggerDisplayAttribute_OnNestedTypeMember_ReferencesField()
         {
             var code = """
-                class C
-                {
-                    private static string s;
+            class C
+            {
+            private static string s;
 
-                    class Nested
-                    {
-                        [System.Diagnostics.DebuggerDisplayAttribute("{C.s}")]
-                        public int M;
-                    }
-                }
-                """;
+            class Nested
+            {
+            [System.Diagnostics.DebuggerDisplayAttribute("{C.s}")]
+            public int M;
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2747,23 +2747,23 @@ class MyClass
         public async Task SerializableConstructor_TypeImplementsISerializable()
         {
             var code = """
-                using System.Runtime.Serialization;
+            using System.Runtime.Serialization;
 
-                class C : ISerializable
-                {
-                    public C()
-                    {
-                    }
+            class C : ISerializable
+            {
+            public C()
+            {
+            }
 
-                    private C(SerializationInfo info, StreamingContext context)
-                    {
-                    }
+            private C(SerializationInfo info, StreamingContext context)
+            {
+            }
 
-                    public void GetObjectData(SerializationInfo info, StreamingContext context)
-                    {
-                    }
-                }
-                """;
+            public void GetObjectData(SerializationInfo info, StreamingContext context)
+            {
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2772,25 +2772,25 @@ class MyClass
         public async Task SerializableConstructor_BaseTypeImplementsISerializable()
         {
             var code = """
-                using System;
-                using System.Runtime.Serialization;
+            using System;
+            using System.Runtime.Serialization;
 
-                class C : Exception 
-                {
-                    public C()
-                    {
-                    }
+            class C : Exception
+            {
+            public C()
+            {
+            }
 
-                    private C(SerializationInfo info, StreamingContext context)
-                        : base(info, context)
-                    {
-                    }
+            private C(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+            {
+            }
 
-                    public void GetObjectData(SerializationInfo info, StreamingContext context)
-                    {
-                    }
-                }
-                """;
+            public void GetObjectData(SerializationInfo info, StreamingContext context)
+            {
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2820,16 +2820,16 @@ class MyClass
         public async Task ShouldSerializePropertyMethod()
         {
             var code = """
-                class C
-                {
-                    private bool ShouldSerializeData()
-                    {
-                        return true;
-                    }
+            class C
+            {
+            private bool ShouldSerializeData()
+            {
+            return true;
+            }
 
-                    public int Data { get; private set; }
-                }
-                """;
+            public int Data { get; private set; }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2838,16 +2838,16 @@ class MyClass
         public async Task ResetPropertyMethod()
         {
             var code = """
-                class C
-                {
-                    private void ResetData()
-                    {
-                        return;
-                    }
+            class C
+            {
+            private void ResetData()
+            {
+            return;
+            }
 
-                    public int Data { get; private set; }
-                }
-                """;
+            public int Data { get; private set; }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2856,15 +2856,15 @@ class MyClass
         public async Task EventHandlerMethod()
         {
             var code = """
-                using System;
+            using System;
 
-                class C
-                {
-                    private void M(object o, EventArgs args)
-                    {
-                    }
-                }
-                """;
+            class C
+            {
+            private void M(object o, EventArgs args)
+            {
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2873,20 +2873,20 @@ class MyClass
         public async Task NestedStructLayoutTypeWithReference()
         {
             var code = """
-                using System.Runtime.InteropServices;
+            using System.Runtime.InteropServices;
 
-                class Program
-                {
-                    private const int MAX_PATH = 260;
+            class Program
+            {
+            private const int MAX_PATH = 260;
 
-                    [StructLayout(LayoutKind.Sequential)]
-                    internal struct ProcessEntry32
-                    {
-                        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = MAX_PATH)]
-                        public string szExeFile;
-                    }
-                }
-                """;
+            [StructLayout(LayoutKind.Sequential)]
+            internal struct ProcessEntry32
+            {
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = MAX_PATH)]
+            public string szExeFile;
+            }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -2898,19 +2898,19 @@ class MyClass
                 """
                 class MyClass
                 {
-                    private int [|_goo|] = 0, [|_bar|];
-                    private int [|_x|] = 0, [|_y|], _z = 0;
-                    private string [|_fizz|] = null;
+                private int [|_goo|] = 0, [|_bar|];
+                private int [|_x|] = 0, [|_y|], _z = 0;
+                private string [|_fizz|] = null;
 
-                    public int Method() => _z;
+                public int Method() => _z;
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private int _z = 0;
+                private int _z = 0;
 
-                    public int Method() => _z;
+                public int Method() => _z;
                 }
                 """
             );
@@ -2923,21 +2923,21 @@ class MyClass
                 """
                 class MyClass
                 {
-                    private int [|M1|]() => 0;
-                    private void [|M2|]() { }
-                    private static void [|M3|]() { }
-                    private class NestedClass
-                    {
-                        private void [|M4|]() { }
-                    }
+                private int [|M1|]() => 0;
+                private void [|M2|]() { }
+                private static void [|M3|]() { }
+                private class NestedClass
+                {
+                private void [|M4|]() { }
+                }
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private class NestedClass
-                    {
-                    }
+                private class NestedClass
+                {
+                }
                 }
                 """
             );
@@ -2950,10 +2950,10 @@ class MyClass
                 """
                 class MyClass
                 {
-                    private int [|P1|] => 0;
-                    private int [|P2|] { get; set; }
-                    private int [|P3|] { get { return 0; } set { } }
-                    private int [|this|][int i] { get { return 0; } }
+                private int [|P1|] => 0;
+                private int [|P2|] { get; set; }
+                private int [|P3|] { get { return 0; } set { } }
+                private int [|this|][int i] { get { return 0; } }
                 }
                 """,
                 """
@@ -2973,18 +2973,18 @@ class MyClass
 
                 class MyClass
                 {
-                    private event EventHandler [|E1|], E2 = null, [|E3|];
-                    private event EventHandler [|E4|], [|E5|] = null;
-                    private event EventHandler [|E|]
-                    {
-                        add { }
-                        remove { }
-                    }
+                private event EventHandler [|E1|], E2 = null, [|E3|];
+                private event EventHandler [|E4|], [|E5|] = null;
+                private event EventHandler [|E|]
+                {
+                add { }
+                remove { }
+                }
 
-                    public void M()
-                    {
-                        EventHandler handler = E2;
-                    }
+                public void M()
+                {
+                EventHandler handler = E2;
+                }
                 }
                 """,
                 """
@@ -2992,12 +2992,12 @@ class MyClass
 
                 class MyClass
                 {
-                    private event EventHandler E2 = null;
+                private event EventHandler E2 = null;
 
-                    public void M()
-                    {
-                        EventHandler handler = E2;
-                    }
+                public void M()
+                {
+                EventHandler handler = E2;
+                }
                 }
                 """
             );
@@ -3007,56 +3007,56 @@ class MyClass
         public async Task FixAllMembers_Project()
         {
             var source1 = """
-                using System;
+            using System;
 
-                partial class MyClass
-                {
-                    private int [|f1|], f2 = 0, [|f3|];
-                    private void [|M1|]() { }
-                    private int [|P1|] => 0;
-                    private int [|this|][int x] { get { return 0; } set { } }
-                    private event EventHandler [|e1|], [|e2|] = null;
-                }
+            partial class MyClass
+            {
+            private int [|f1|], f2 = 0, [|f3|];
+            private void [|M1|]() { }
+            private int [|P1|] => 0;
+            private int [|this|][int x] { get { return 0; } set { } }
+            private event EventHandler [|e1|], [|e2|] = null;
+            }
 
-                class MyClass2
-                {
-                    private void [|M2|]() { }
-                }
-                """;
+            class MyClass2
+            {
+            private void [|M2|]() { }
+            }
+            """;
             var source2 = """
-                partial class MyClass
-                {
-                    private void [|M3|]() { }
-                    public int M4() => f2;
-                }
+            partial class MyClass
+            {
+            private void [|M3|]() { }
+            public int M4() => f2;
+            }
 
-                static class MyClass3
-                {
-                    private static void [|M5|]() { }
-                }
-                """;
+            static class MyClass3
+            {
+            private static void [|M5|]() { }
+            }
+            """;
             var fixedSource1 = """
-                using System;
+            using System;
 
-                partial class MyClass
-                {
-                    private int f2 = 0;
-                }
+            partial class MyClass
+            {
+            private int f2 = 0;
+            }
 
-                class MyClass2
-                {
-                }
-                """;
+            class MyClass2
+            {
+            }
+            """;
             var fixedSource2 = """
-                partial class MyClass
-                {
-                    public int M4() => f2;
-                }
+            partial class MyClass
+            {
+            public int M4() => f2;
+            }
 
-                static class MyClass3
-                {
-                }
-                """;
+            static class MyClass3
+            {
+            }
+            """;
 
             await new VerifyCS.Test
             {
@@ -3069,23 +3069,23 @@ class MyClass
         public async Task UsedExtensionMethod_ReferencedFromPartialMethod()
         {
             var source1 = """
-                static partial class B
-                {
-                    public static void Entry() => PartialMethod();
-                    static partial void PartialMethod();
-                }
-                """;
+            static partial class B
+            {
+            public static void Entry() => PartialMethod();
+            static partial void PartialMethod();
+            }
+            """;
             var source2 = """
-                static partial class B
-                {
-                    static partial void PartialMethod()
-                    {
-                        UsedMethod();
-                    }
+            static partial class B
+            {
+            static partial void PartialMethod()
+            {
+            UsedMethod();
+            }
 
-                    private static void UsedMethod() { }
-                }
-                """;
+            private static void UsedMethod() { }
+            }
+            """;
 
             await new VerifyCS.Test
             {
@@ -3098,23 +3098,23 @@ class MyClass
         public async Task UsedExtensionMethod_ReferencedFromExtendedPartialMethod()
         {
             var source1 = """
-                static partial class B
-                {
-                    public static void Entry() => PartialMethod();
-                    public static partial void PartialMethod();
-                }
-                """;
+            static partial class B
+            {
+            public static void Entry() => PartialMethod();
+            public static partial void PartialMethod();
+            }
+            """;
             var source2 = """
-                static partial class B
-                {
-                    public static partial void PartialMethod()
-                    {
-                        UsedMethod();
-                    }
+            static partial class B
+            {
+            public static partial void PartialMethod()
+            {
+            UsedMethod();
+            }
 
-                    private static void UsedMethod() { }
-                }
-                """;
+            private static void UsedMethod() { }
+            }
+            """;
 
             await new VerifyCS.Test
             {
@@ -3128,12 +3128,12 @@ class MyClass
         public async Task FieldIsRead_NullCoalesceAssignment()
         {
             var code = """
-                public class MyClass
-                {
-                    private MyClass _field;
-                    public MyClass Property => _field ??= new MyClass();
-                }
-                """;
+            public class MyClass
+            {
+            private MyClass _field;
+            public MyClass Property => _field ??= new MyClass();
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -3143,12 +3143,12 @@ class MyClass
         public async Task FieldIsNotRead_NullCoalesceAssignment()
         {
             var code = """
-                public class MyClass
-                {
-                    private MyClass _field;
-                    public void M() => _field ??= new MyClass();
-                }
-                """;
+            public class MyClass
+            {
+            private MyClass _field;
+            public void M() => _field ??= new MyClass();
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -3157,12 +3157,12 @@ class MyClass
         public async Task UsedPrivateExtensionMethod()
         {
             var code = """
-                public static class B
-                {
-                    public static void PublicExtensionMethod(this string s) => s.PrivateExtensionMethod();
-                    private static void PrivateExtensionMethod(this string s) { }
-                }
-                """;
+            public static class B
+            {
+            public static void PublicExtensionMethod(this string s) => s.PrivateExtensionMethod();
+            private static void PrivateExtensionMethod(this string s) { }
+            }
+            """;
 
             await VerifyCS.VerifyCodeFixAsync(code, code);
         }
@@ -3174,7 +3174,7 @@ class MyClass
                 """
                 class C
                 {
-                    private C(int i) { }
+                private C(int i) { }
                 }
                 """,
                 // /0/Test0.cs(3,13): info IDE0051: Private member 'C.C' is unused

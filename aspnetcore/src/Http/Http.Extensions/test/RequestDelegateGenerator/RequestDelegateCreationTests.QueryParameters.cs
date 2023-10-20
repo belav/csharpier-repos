@@ -141,8 +141,8 @@ app.MapGet("/", handler);
     {
         var (results, compilation) = await RunGeneratorAsync(
             """
-app.MapGet("/hello", ([FromQuery]string? p) => p == string.Empty ? "No value, but not null!" : "Was null!");
-"""
+            app.MapGet("/hello", ([FromQuery]string? p) => p == string.Empty ? "No value, but not null!" : "Was null!");
+            """
         );
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -170,8 +170,8 @@ app.MapGet("/hello", ([FromQuery]string? p) => p == string.Empty ? "No value, bu
     {
         var (results, compilation) = await RunGeneratorAsync(
             """
-app.MapGet("/hello", ([FromQuery]string p1, [FromQuery]string p2) => $"{p1} {p2}");
-"""
+            app.MapGet("/hello", ([FromQuery]string p1, [FromQuery]string p2) => $"{p1} {p2}");
+            """
         );
         var endpoint = GetEndpointFromCompilation(compilation);
 

@@ -22,24 +22,24 @@ public class SpatialQuerySqliteTest : SpatialQueryRelationalTestBase<SpatialQuer
 
         AssertSql(
             """
-SELECT "p"."Id", "p"."Geometry", "p"."Group", "p"."Point", "p"."PointM", "p"."PointZ", "p"."PointZM"
-FROM "PointEntity" AS "p"
-""",
+            SELECT "p"."Id", "p"."Geometry", "p"."Group", "p"."Point", "p"."PointM", "p"."PointZ", "p"."PointZM"
+            FROM "PointEntity" AS "p"
+            """,
             //
             """
-SELECT "l"."Id", "l"."LineString"
-FROM "LineStringEntity" AS "l"
-""",
+            SELECT "l"."Id", "l"."LineString"
+            FROM "LineStringEntity" AS "l"
+            """,
             //
             """
-SELECT "p"."Id", "p"."Polygon"
-FROM "PolygonEntity" AS "p"
-""",
+            SELECT "p"."Id", "p"."Polygon"
+            FROM "PolygonEntity" AS "p"
+            """,
             //
             """
-SELECT "m"."Id", "m"."MultiLineString"
-FROM "MultiLineStringEntity" AS "m"
-"""
+            SELECT "m"."Id", "m"."MultiLineString"
+            FROM "MultiLineStringEntity" AS "m"
+            """
         );
     }
 
@@ -49,11 +49,11 @@ FROM "MultiLineStringEntity" AS "m"
 
         AssertSql(
             """
-@__point_0='0x0001000000000000000000000000000000000000F03F00000000000000000000...' (Nullable = false) (Size = 60) (DbType = String)
+            @__point_0='0x0001000000000000000000000000000000000000F03F00000000000000000000...' (Nullable = false) (Size = 60) (DbType = String)
 
-SELECT "g"."Id", Distance("g"."Location", @__point_0) AS "Distance"
-FROM "GeoPointEntity" AS "g"
-"""
+            SELECT "g"."Id", Distance("g"."Location", @__point_0) AS "Distance"
+            FROM "GeoPointEntity" AS "g"
+            """
         );
     }
 
@@ -63,11 +63,11 @@ FROM "GeoPointEntity" AS "g"
 
         AssertSql(
             """
-@__point_0='0x0001000000000000000000000000000000000000F03F00000000000000000000...' (Nullable = false) (Size = 60) (DbType = String)
+            @__point_0='0x0001000000000000000000000000000000000000F03F00000000000000000000...' (Nullable = false) (Size = 60) (DbType = String)
 
-SELECT "g"."Id", Distance(@__point_0, "g"."Location") AS "Distance"
-FROM "GeoPointEntity" AS "g"
-"""
+            SELECT "g"."Id", Distance(@__point_0, "g"."Location") AS "Distance"
+            FROM "GeoPointEntity" AS "g"
+            """
         );
     }
 
@@ -77,9 +77,9 @@ FROM "GeoPointEntity" AS "g"
 
         AssertSql(
             """
-SELECT "g"."Id", Distance("g"."Location", GeomFromText('POINT (0 1)')) AS "Distance"
-FROM "GeoPointEntity" AS "g"
-"""
+            SELECT "g"."Id", Distance("g"."Location", GeomFromText('POINT (0 1)')) AS "Distance"
+            FROM "GeoPointEntity" AS "g"
+            """
         );
     }
 
@@ -89,9 +89,9 @@ FROM "GeoPointEntity" AS "g"
 
         AssertSql(
             """
-SELECT "g"."Id", Distance(GeomFromText('POINT (0 1)'), "g"."Location") AS "Distance"
-FROM "GeoPointEntity" AS "g"
-"""
+            SELECT "g"."Id", Distance(GeomFromText('POINT (0 1)'), "g"."Location") AS "Distance"
+            FROM "GeoPointEntity" AS "g"
+            """
         );
     }
 
@@ -101,9 +101,9 @@ FROM "GeoPointEntity" AS "g"
 
         AssertSql(
             """
-SELECT "g"."Id", "g"."Location"
-FROM "GeoPointEntity" AS "g"
-"""
+            SELECT "g"."Id", "g"."Location"
+            FROM "GeoPointEntity" AS "g"
+            """
         );
     }
 
@@ -113,9 +113,9 @@ FROM "GeoPointEntity" AS "g"
 
         AssertSql(
             """
-SELECT "p"."Id", Area("p"."Polygon") AS "Area"
-FROM "PolygonEntity" AS "p"
-"""
+            SELECT "p"."Id", Area("p"."Polygon") AS "Area"
+            FROM "PolygonEntity" AS "p"
+            """
         );
     }
 
@@ -125,9 +125,9 @@ FROM "PolygonEntity" AS "p"
 
         AssertSql(
             """
-SELECT "p"."Id", AsBinary("p"."Point") AS "Binary"
-FROM "PointEntity" AS "p"
-"""
+            SELECT "p"."Id", AsBinary("p"."Point") AS "Binary"
+            FROM "PointEntity" AS "p"
+            """
         );
     }
 
@@ -137,12 +137,12 @@ FROM "PointEntity" AS "p"
 
         AssertSql(
             """
-SELECT "p"."Id", CASE
-    WHEN "p"."Point" IS NULL THEN NULL
-    ELSE AsBinary("p"."Point")
-END AS "Binary"
-FROM "PointEntity" AS "p"
-"""
+            SELECT "p"."Id", CASE
+            WHEN "p"."Point" IS NULL THEN NULL
+            ELSE AsBinary("p"."Point")
+            END AS "Binary"
+            FROM "PointEntity" AS "p"
+            """
         );
     }
 
@@ -152,9 +152,9 @@ FROM "PointEntity" AS "p"
 
         AssertSql(
             """
-SELECT "p"."Id", AsText("p"."Point") AS "Text"
-FROM "PointEntity" AS "p"
-"""
+            SELECT "p"."Id", AsText("p"."Point") AS "Text"
+            FROM "PointEntity" AS "p"
+            """
         );
     }
 
@@ -164,9 +164,9 @@ FROM "PointEntity" AS "p"
 
         AssertSql(
             """
-SELECT "p"."Id", Boundary("p"."Polygon") AS "Boundary"
-FROM "PolygonEntity" AS "p"
-"""
+            SELECT "p"."Id", Boundary("p"."Polygon") AS "Boundary"
+            FROM "PolygonEntity" AS "p"
+            """
         );
     }
 
@@ -176,9 +176,9 @@ FROM "PolygonEntity" AS "p"
 
         AssertSql(
             """
-SELECT "p"."Id", Buffer("p"."Polygon", 1.0) AS "Buffer"
-FROM "PolygonEntity" AS "p"
-"""
+            SELECT "p"."Id", Buffer("p"."Polygon", 1.0) AS "Buffer"
+            FROM "PolygonEntity" AS "p"
+            """
         );
     }
 
@@ -188,9 +188,9 @@ FROM "PolygonEntity" AS "p"
 
         AssertSql(
             """
-SELECT "p"."Id", Buffer("p"."Polygon", 1.0, 8) AS "Buffer"
-FROM "PolygonEntity" AS "p"
-"""
+            SELECT "p"."Id", Buffer("p"."Polygon", 1.0, 8) AS "Buffer"
+            FROM "PolygonEntity" AS "p"
+            """
         );
     }
 
@@ -200,9 +200,9 @@ FROM "PolygonEntity" AS "p"
 
         AssertSql(
             """
-SELECT "p"."Id", Centroid("p"."Polygon") AS "Centroid"
-FROM "PolygonEntity" AS "p"
-"""
+            SELECT "p"."Id", Centroid("p"."Polygon") AS "Centroid"
+            FROM "PolygonEntity" AS "p"
+            """
         );
     }
 
@@ -212,11 +212,11 @@ FROM "PolygonEntity" AS "p"
 
         AssertSql(
             """
-SELECT "p"."Group" AS "Id", Collect("p"."Point") AS "Combined"
-FROM "PointEntity" AS "p"
-WHERE "p"."Point" IS NOT NULL
-GROUP BY "p"."Group"
-"""
+            SELECT "p"."Group" AS "Id", Collect("p"."Point") AS "Combined"
+            FROM "PointEntity" AS "p"
+            WHERE "p"."Point" IS NOT NULL
+            GROUP BY "p"."Group"
+            """
         );
     }
 
@@ -226,11 +226,11 @@ GROUP BY "p"."Group"
 
         AssertSql(
             """
-SELECT "p"."Group" AS "Id", Extent("p"."Point") AS "Combined"
-FROM "PointEntity" AS "p"
-WHERE "p"."Point" IS NOT NULL
-GROUP BY "p"."Group"
-"""
+            SELECT "p"."Group" AS "Id", Extent("p"."Point") AS "Combined"
+            FROM "PointEntity" AS "p"
+            WHERE "p"."Point" IS NOT NULL
+            GROUP BY "p"."Group"
+            """
         );
     }
 
@@ -240,13 +240,13 @@ GROUP BY "p"."Group"
 
         AssertSql(
             """
-@__point_0='0x000100000000000000000000D03F000000000000D03F000000000000D03F0000...' (Size = 60) (DbType = String)
+            @__point_0='0x000100000000000000000000D03F000000000000D03F000000000000D03F0000...' (Size = 60) (DbType = String)
 
-SELECT "p"."Id", CASE
-    WHEN "p"."Polygon" IS NOT NULL THEN Contains("p"."Polygon", @__point_0)
-END AS "Contains"
-FROM "PolygonEntity" AS "p"
-"""
+            SELECT "p"."Id", CASE
+            WHEN "p"."Polygon" IS NOT NULL THEN Contains("p"."Polygon", @__point_0)
+            END AS "Contains"
+            FROM "PolygonEntity" AS "p"
+            """
         );
     }
 
@@ -256,9 +256,9 @@ FROM "PolygonEntity" AS "p"
 
         AssertSql(
             """
-SELECT "p"."Id", ConvexHull("p"."Polygon") AS "ConvexHull"
-FROM "PolygonEntity" AS "p"
-"""
+            SELECT "p"."Id", ConvexHull("p"."Polygon") AS "ConvexHull"
+            FROM "PolygonEntity" AS "p"
+            """
         );
     }
 
@@ -268,11 +268,11 @@ FROM "PolygonEntity" AS "p"
 
         AssertSql(
             """
-SELECT "p"."Group" AS "Id", ConvexHull(Collect("p"."Point")) AS "ConvexHull"
-FROM "PointEntity" AS "p"
-WHERE "p"."Point" IS NOT NULL
-GROUP BY "p"."Group"
-"""
+            SELECT "p"."Group" AS "Id", ConvexHull(Collect("p"."Point")) AS "ConvexHull"
+            FROM "PointEntity" AS "p"
+            WHERE "p"."Point" IS NOT NULL
+            GROUP BY "p"."Group"
+            """
         );
     }
 
@@ -282,9 +282,9 @@ GROUP BY "p"."Group"
 
         AssertSql(
             """
-SELECT "m"."Id", NumGeometries("m"."MultiLineString") AS "Count"
-FROM "MultiLineStringEntity" AS "m"
-"""
+            SELECT "m"."Id", NumGeometries("m"."MultiLineString") AS "Count"
+            FROM "MultiLineStringEntity" AS "m"
+            """
         );
     }
 
@@ -294,9 +294,9 @@ FROM "MultiLineStringEntity" AS "m"
 
         AssertSql(
             """
-SELECT "l"."Id", NumPoints("l"."LineString") AS "Count"
-FROM "LineStringEntity" AS "l"
-"""
+            SELECT "l"."Id", NumPoints("l"."LineString") AS "Count"
+            FROM "LineStringEntity" AS "l"
+            """
         );
     }
 
@@ -306,13 +306,13 @@ FROM "LineStringEntity" AS "l"
 
         AssertSql(
             """
-@__polygon_0='0x000100000000000000000000F0BF000000000000F0BF00000000000000400000...' (Size = 132) (DbType = String)
+            @__polygon_0='0x000100000000000000000000F0BF000000000000F0BF00000000000000400000...' (Size = 132) (DbType = String)
 
-SELECT "p"."Id", CASE
-    WHEN "p"."Point" IS NOT NULL THEN CoveredBy("p"."Point", @__polygon_0)
-END AS "CoveredBy"
-FROM "PointEntity" AS "p"
-"""
+            SELECT "p"."Id", CASE
+            WHEN "p"."Point" IS NOT NULL THEN CoveredBy("p"."Point", @__polygon_0)
+            END AS "CoveredBy"
+            FROM "PointEntity" AS "p"
+            """
         );
     }
 
@@ -322,13 +322,13 @@ FROM "PointEntity" AS "p"
 
         AssertSql(
             """
-@__point_0='0x000100000000000000000000D03F000000000000D03F000000000000D03F0000...' (Size = 60) (DbType = String)
+            @__point_0='0x000100000000000000000000D03F000000000000D03F000000000000D03F0000...' (Size = 60) (DbType = String)
 
-SELECT "p"."Id", CASE
-    WHEN "p"."Polygon" IS NOT NULL THEN Covers("p"."Polygon", @__point_0)
-END AS "Covers"
-FROM "PolygonEntity" AS "p"
-"""
+            SELECT "p"."Id", CASE
+            WHEN "p"."Polygon" IS NOT NULL THEN Covers("p"."Polygon", @__point_0)
+            END AS "Covers"
+            FROM "PolygonEntity" AS "p"
+            """
         );
     }
 
@@ -338,13 +338,13 @@ FROM "PolygonEntity" AS "p"
 
         AssertSql(
             """
-@__lineString_0='0x000100000000000000000000E03F000000000000E0BF000000000000E03F0000...' (Size = 80) (DbType = String)
+            @__lineString_0='0x000100000000000000000000E03F000000000000E0BF000000000000E03F0000...' (Size = 80) (DbType = String)
 
-SELECT "l"."Id", CASE
-    WHEN "l"."LineString" IS NOT NULL THEN Crosses("l"."LineString", @__lineString_0)
-END AS "Crosses"
-FROM "LineStringEntity" AS "l"
-"""
+            SELECT "l"."Id", CASE
+            WHEN "l"."LineString" IS NOT NULL THEN Crosses("l"."LineString", @__lineString_0)
+            END AS "Crosses"
+            FROM "LineStringEntity" AS "l"
+            """
         );
     }
 
@@ -354,11 +354,11 @@ FROM "LineStringEntity" AS "l"
 
         AssertSql(
             """
-@__polygon_0='0x00010000000000000000000000000000000000000000000000000000F03F0000...' (Size = 116) (DbType = String)
+            @__polygon_0='0x00010000000000000000000000000000000000000000000000000000F03F0000...' (Size = 116) (DbType = String)
 
-SELECT "p"."Id", Difference("p"."Polygon", @__polygon_0) AS "Difference"
-FROM "PolygonEntity" AS "p"
-"""
+            SELECT "p"."Id", Difference("p"."Polygon", @__polygon_0) AS "Difference"
+            FROM "PolygonEntity" AS "p"
+            """
         );
     }
 
@@ -368,9 +368,9 @@ FROM "PolygonEntity" AS "p"
 
         AssertSql(
             """
-SELECT "p"."Id", Dimension("p"."Point") AS "Dimension"
-FROM "PointEntity" AS "p"
-"""
+            SELECT "p"."Id", Dimension("p"."Point") AS "Dimension"
+            FROM "PointEntity" AS "p"
+            """
         );
     }
 
@@ -380,13 +380,13 @@ FROM "PointEntity" AS "p"
 
         AssertSql(
             """
-@__point_0='0x000100000000000000000000F03F000000000000F03F000000000000F03F0000...' (Size = 60) (DbType = String)
+            @__point_0='0x000100000000000000000000F03F000000000000F03F000000000000F03F0000...' (Size = 60) (DbType = String)
 
-SELECT "p"."Id", CASE
-    WHEN "p"."Polygon" IS NOT NULL THEN Disjoint("p"."Polygon", @__point_0)
-END AS "Disjoint"
-FROM "PolygonEntity" AS "p"
-"""
+            SELECT "p"."Id", CASE
+            WHEN "p"."Polygon" IS NOT NULL THEN Disjoint("p"."Polygon", @__point_0)
+            END AS "Disjoint"
+            FROM "PolygonEntity" AS "p"
+            """
         );
     }
 
@@ -396,14 +396,14 @@ FROM "PolygonEntity" AS "p"
 
         AssertSql(
             """
-@__point_0='0x000100000000000000000000F03F000000000000F03F000000000000F03F0000...' (Size = 60) (DbType = String)
+            @__point_0='0x000100000000000000000000F03F000000000000F03F000000000000F03F0000...' (Size = 60) (DbType = String)
 
-SELECT "p"."Id", CASE
-    WHEN "p"."Polygon" IS NULL THEN NULL
-    WHEN "p"."Polygon" IS NOT NULL THEN Disjoint("p"."Polygon", @__point_0)
-END AS "Disjoint"
-FROM "PolygonEntity" AS "p"
-"""
+            SELECT "p"."Id", CASE
+            WHEN "p"."Polygon" IS NULL THEN NULL
+            WHEN "p"."Polygon" IS NOT NULL THEN Disjoint("p"."Polygon", @__point_0)
+            END AS "Disjoint"
+            FROM "PolygonEntity" AS "p"
+            """
         );
     }
 
@@ -413,11 +413,11 @@ FROM "PolygonEntity" AS "p"
 
         AssertSql(
             """
-@__point_0='0x0001000000000000000000000000000000000000F03F00000000000000000000...' (Size = 60) (DbType = String)
+            @__point_0='0x0001000000000000000000000000000000000000F03F00000000000000000000...' (Size = 60) (DbType = String)
 
-SELECT "p"."Id", Distance("p"."Point", @__point_0) AS "Distance"
-FROM "PointEntity" AS "p"
-"""
+            SELECT "p"."Id", Distance("p"."Point", @__point_0) AS "Distance"
+            FROM "PointEntity" AS "p"
+            """
         );
     }
 
@@ -427,11 +427,11 @@ FROM "PointEntity" AS "p"
 
         AssertSql(
             """
-@__point_0='0x0001000000000000000000000000000000000000F03F00000000000000000000...' (Size = 60) (DbType = String)
+            @__point_0='0x0001000000000000000000000000000000000000F03F00000000000000000000...' (Size = 60) (DbType = String)
 
-SELECT "p"."Id", Distance("p"."Point", @__point_0) AS "Distance"
-FROM "PointEntity" AS "p"
-"""
+            SELECT "p"."Id", Distance("p"."Point", @__point_0) AS "Distance"
+            FROM "PointEntity" AS "p"
+            """
         );
     }
 
@@ -441,11 +441,11 @@ FROM "PointEntity" AS "p"
 
         AssertSql(
             """
-@__point_0='0x0001000000000000000000000000000000000000F03F00000000000000000000...' (Size = 60) (DbType = String)
+            @__point_0='0x0001000000000000000000000000000000000000F03F00000000000000000000...' (Size = 60) (DbType = String)
 
-SELECT "p"."Id", Distance("p"."Geometry", @__point_0) AS "Distance"
-FROM "PointEntity" AS "p"
-"""
+            SELECT "p"."Id", Distance("p"."Geometry", @__point_0) AS "Distance"
+            FROM "PointEntity" AS "p"
+            """
         );
     }
 
@@ -455,9 +455,9 @@ FROM "PointEntity" AS "p"
 
         AssertSql(
             """
-SELECT "p"."Id", Distance("p"."Point", GeomFromText('POINT (0 1)')) AS "Distance"
-FROM "PointEntity" AS "p"
-"""
+            SELECT "p"."Id", Distance("p"."Point", GeomFromText('POINT (0 1)')) AS "Distance"
+            FROM "PointEntity" AS "p"
+            """
         );
     }
 
@@ -467,9 +467,9 @@ FROM "PointEntity" AS "p"
 
         AssertSql(
             """
-SELECT "p"."Id", Distance("p"."Point", GeomFromText('POINT (1 1)', 4326)) AS "Distance"
-FROM "PointEntity" AS "p"
-"""
+            SELECT "p"."Id", Distance("p"."Point", GeomFromText('POINT (1 1)', 4326)) AS "Distance"
+            FROM "PointEntity" AS "p"
+            """
         );
     }
 
@@ -479,9 +479,9 @@ FROM "PointEntity" AS "p"
 
         AssertSql(
             """
-SELECT "p"."Id", Distance(GeomFromText('POINT (0 1)'), "p"."Point") AS "Distance"
-FROM "PointEntity" AS "p"
-"""
+            SELECT "p"."Id", Distance(GeomFromText('POINT (0 1)'), "p"."Point") AS "Distance"
+            FROM "PointEntity" AS "p"
+            """
         );
     }
 
@@ -491,9 +491,9 @@ FROM "PointEntity" AS "p"
 
         AssertSql(
             """
-SELECT "l"."Id", EndPoint("l"."LineString") AS "EndPoint"
-FROM "LineStringEntity" AS "l"
-"""
+            SELECT "l"."Id", EndPoint("l"."LineString") AS "EndPoint"
+            FROM "LineStringEntity" AS "l"
+            """
         );
     }
 
@@ -503,9 +503,9 @@ FROM "LineStringEntity" AS "l"
 
         AssertSql(
             """
-SELECT "p"."Id", Envelope("p"."Polygon") AS "Envelope"
-FROM "PolygonEntity" AS "p"
-"""
+            SELECT "p"."Id", Envelope("p"."Polygon") AS "Envelope"
+            FROM "PolygonEntity" AS "p"
+            """
         );
     }
 
@@ -515,13 +515,13 @@ FROM "PolygonEntity" AS "p"
 
         AssertSql(
             """
-@__point_0='0x0001000000000000000000000000000000000000000000000000000000000000...' (Size = 60) (DbType = String)
+            @__point_0='0x0001000000000000000000000000000000000000000000000000000000000000...' (Size = 60) (DbType = String)
 
-SELECT "p"."Id", CASE
-    WHEN "p"."Point" IS NOT NULL THEN Equals("p"."Point", @__point_0)
-END AS "EqualsTopologically"
-FROM "PointEntity" AS "p"
-"""
+            SELECT "p"."Id", CASE
+            WHEN "p"."Point" IS NOT NULL THEN Equals("p"."Point", @__point_0)
+            END AS "EqualsTopologically"
+            FROM "PointEntity" AS "p"
+            """
         );
     }
 
@@ -531,9 +531,9 @@ FROM "PointEntity" AS "p"
 
         AssertSql(
             """
-SELECT "p"."Id", ExteriorRing("p"."Polygon") AS "ExteriorRing"
-FROM "PolygonEntity" AS "p"
-"""
+            SELECT "p"."Id", ExteriorRing("p"."Polygon") AS "ExteriorRing"
+            FROM "PolygonEntity" AS "p"
+            """
         );
     }
 
@@ -543,17 +543,17 @@ FROM "PolygonEntity" AS "p"
 
         AssertSql(
             """
-SELECT "p"."Id", CASE rtrim(GeometryType("p"."Point"), ' ZM')
-    WHEN 'POINT' THEN 'Point'
-    WHEN 'LINESTRING' THEN 'LineString'
-    WHEN 'POLYGON' THEN 'Polygon'
-    WHEN 'MULTIPOINT' THEN 'MultiPoint'
-    WHEN 'MULTILINESTRING' THEN 'MultiLineString'
-    WHEN 'MULTIPOLYGON' THEN 'MultiPolygon'
-    WHEN 'GEOMETRYCOLLECTION' THEN 'GeometryCollection'
-END AS "GeometryType"
-FROM "PointEntity" AS "p"
-"""
+            SELECT "p"."Id", CASE rtrim(GeometryType("p"."Point"), ' ZM')
+            WHEN 'POINT' THEN 'Point'
+            WHEN 'LINESTRING' THEN 'LineString'
+            WHEN 'POLYGON' THEN 'Polygon'
+            WHEN 'MULTIPOINT' THEN 'MultiPoint'
+            WHEN 'MULTILINESTRING' THEN 'MultiLineString'
+            WHEN 'MULTIPOLYGON' THEN 'MultiPolygon'
+            WHEN 'GEOMETRYCOLLECTION' THEN 'GeometryCollection'
+            END AS "GeometryType"
+            FROM "PointEntity" AS "p"
+            """
         );
     }
 
@@ -563,9 +563,9 @@ FROM "PointEntity" AS "p"
 
         AssertSql(
             """
-SELECT "m"."Id", GeometryN("m"."MultiLineString", 0 + 1) AS "Geometry0"
-FROM "MultiLineStringEntity" AS "m"
-"""
+            SELECT "m"."Id", GeometryN("m"."MultiLineString", 0 + 1) AS "Geometry0"
+            FROM "MultiLineStringEntity" AS "m"
+            """
         );
     }
 
@@ -575,12 +575,12 @@ FROM "MultiLineStringEntity" AS "m"
 
         AssertSql(
             """
-SELECT "m"."Id", GeometryN("m"."MultiLineString", (
-    SELECT MAX("m0"."Id")
-    FROM "MultiLineStringEntity" AS "m0"
-    WHERE 0) + 1) AS "Geometry0"
-FROM "MultiLineStringEntity" AS "m"
-"""
+            SELECT "m"."Id", GeometryN("m"."MultiLineString", (
+            SELECT MAX("m0"."Id")
+            FROM "MultiLineStringEntity" AS "m0"
+            WHERE 0) + 1) AS "Geometry0"
+            FROM "MultiLineStringEntity" AS "m"
+            """
         );
     }
 
@@ -590,12 +590,12 @@ FROM "MultiLineStringEntity" AS "m"
 
         AssertSql(
             """
-SELECT "p"."Id", CASE
-    WHEN NumInteriorRing("p"."Polygon") = 0 THEN NULL
-    ELSE InteriorRingN("p"."Polygon", 0 + 1)
-END AS "InteriorRing0"
-FROM "PolygonEntity" AS "p"
-"""
+            SELECT "p"."Id", CASE
+            WHEN NumInteriorRing("p"."Polygon") = 0 THEN NULL
+            ELSE InteriorRingN("p"."Polygon", 0 + 1)
+            END AS "InteriorRing0"
+            FROM "PolygonEntity" AS "p"
+            """
         );
     }
 
@@ -605,9 +605,9 @@ FROM "PolygonEntity" AS "p"
 
         AssertSql(
             """
-SELECT "l"."Id", PointN("l"."LineString", 0 + 1) AS "Point0"
-FROM "LineStringEntity" AS "l"
-"""
+            SELECT "l"."Id", PointN("l"."LineString", 0 + 1) AS "Point0"
+            FROM "LineStringEntity" AS "l"
+            """
         );
     }
 
@@ -617,9 +617,9 @@ FROM "LineStringEntity" AS "l"
 
         AssertSql(
             """
-SELECT "p"."Id", PointOnSurface("p"."Polygon") AS "InteriorPoint", "p"."Polygon"
-FROM "PolygonEntity" AS "p"
-"""
+            SELECT "p"."Id", PointOnSurface("p"."Polygon") AS "InteriorPoint", "p"."Polygon"
+            FROM "PolygonEntity" AS "p"
+            """
         );
     }
 
@@ -629,11 +629,11 @@ FROM "PolygonEntity" AS "p"
 
         AssertSql(
             """
-@__polygon_0='0x00010000000000000000000000000000000000000000000000000000F03F0000...' (Size = 116) (DbType = String)
+            @__polygon_0='0x00010000000000000000000000000000000000000000000000000000F03F0000...' (Size = 116) (DbType = String)
 
-SELECT "p"."Id", Intersection("p"."Polygon", @__polygon_0) AS "Intersection"
-FROM "PolygonEntity" AS "p"
-"""
+            SELECT "p"."Id", Intersection("p"."Polygon", @__polygon_0) AS "Intersection"
+            FROM "PolygonEntity" AS "p"
+            """
         );
     }
 
@@ -643,13 +643,13 @@ FROM "PolygonEntity" AS "p"
 
         AssertSql(
             """
-@__lineString_0='0x000100000000000000000000E03F000000000000E0BF000000000000E03F0000...' (Size = 80) (DbType = String)
+            @__lineString_0='0x000100000000000000000000E03F000000000000E0BF000000000000E03F0000...' (Size = 80) (DbType = String)
 
-SELECT "l"."Id", CASE
-    WHEN "l"."LineString" IS NOT NULL THEN Intersects("l"."LineString", @__lineString_0)
-END AS "Intersects"
-FROM "LineStringEntity" AS "l"
-"""
+            SELECT "l"."Id", CASE
+            WHEN "l"."LineString" IS NOT NULL THEN Intersects("l"."LineString", @__lineString_0)
+            END AS "Intersects"
+            FROM "LineStringEntity" AS "l"
+            """
         );
     }
 
@@ -659,11 +659,11 @@ FROM "LineStringEntity" AS "l"
 
         AssertSql(
             """
-SELECT "l"."Id", CASE
-    WHEN "l"."LineString" IS NOT NULL THEN IsClosed("l"."LineString")
-END AS "IsClosed"
-FROM "LineStringEntity" AS "l"
-"""
+            SELECT "l"."Id", CASE
+            WHEN "l"."LineString" IS NOT NULL THEN IsClosed("l"."LineString")
+            END AS "IsClosed"
+            FROM "LineStringEntity" AS "l"
+            """
         );
     }
 
@@ -673,11 +673,11 @@ FROM "LineStringEntity" AS "l"
 
         AssertSql(
             """
-SELECT "m"."Id", CASE
-    WHEN "m"."MultiLineString" IS NOT NULL THEN IsClosed("m"."MultiLineString")
-END AS "IsClosed"
-FROM "MultiLineStringEntity" AS "m"
-"""
+            SELECT "m"."Id", CASE
+            WHEN "m"."MultiLineString" IS NOT NULL THEN IsClosed("m"."MultiLineString")
+            END AS "IsClosed"
+            FROM "MultiLineStringEntity" AS "m"
+            """
         );
     }
 
@@ -687,11 +687,11 @@ FROM "MultiLineStringEntity" AS "m"
 
         AssertSql(
             """
-SELECT "m"."Id", CASE
-    WHEN "m"."MultiLineString" IS NOT NULL THEN IsEmpty("m"."MultiLineString")
-END AS "IsEmpty"
-FROM "MultiLineStringEntity" AS "m"
-"""
+            SELECT "m"."Id", CASE
+            WHEN "m"."MultiLineString" IS NOT NULL THEN IsEmpty("m"."MultiLineString")
+            END AS "IsEmpty"
+            FROM "MultiLineStringEntity" AS "m"
+            """
         );
     }
 
@@ -701,11 +701,11 @@ FROM "MultiLineStringEntity" AS "m"
 
         AssertSql(
             """
-SELECT "l"."Id", CASE
-    WHEN "l"."LineString" IS NOT NULL THEN IsRing("l"."LineString")
-END AS "IsRing"
-FROM "LineStringEntity" AS "l"
-"""
+            SELECT "l"."Id", CASE
+            WHEN "l"."LineString" IS NOT NULL THEN IsRing("l"."LineString")
+            END AS "IsRing"
+            FROM "LineStringEntity" AS "l"
+            """
         );
     }
 
@@ -715,11 +715,11 @@ FROM "LineStringEntity" AS "l"
 
         AssertSql(
             """
-SELECT "l"."Id", CASE
-    WHEN "l"."LineString" IS NOT NULL THEN IsSimple("l"."LineString")
-END AS "IsSimple"
-FROM "LineStringEntity" AS "l"
-"""
+            SELECT "l"."Id", CASE
+            WHEN "l"."LineString" IS NOT NULL THEN IsSimple("l"."LineString")
+            END AS "IsSimple"
+            FROM "LineStringEntity" AS "l"
+            """
         );
     }
 
@@ -729,11 +729,11 @@ FROM "LineStringEntity" AS "l"
 
         AssertSql(
             """
-SELECT "p"."Id", CASE
-    WHEN "p"."Point" IS NOT NULL THEN IsValid("p"."Point")
-END AS "IsValid"
-FROM "PointEntity" AS "p"
-"""
+            SELECT "p"."Id", CASE
+            WHEN "p"."Point" IS NOT NULL THEN IsValid("p"."Point")
+            END AS "IsValid"
+            FROM "PointEntity" AS "p"
+            """
         );
     }
 
@@ -743,11 +743,11 @@ FROM "PointEntity" AS "p"
 
         AssertSql(
             """
-@__point_0='0x0001000000000000000000000000000000000000F03F00000000000000000000...' (Size = 60) (DbType = String)
+            @__point_0='0x0001000000000000000000000000000000000000F03F00000000000000000000...' (Size = 60) (DbType = String)
 
-SELECT "p"."Id", Distance("p"."Point", @__point_0) <= 1.0 AS "IsWithinDistance"
-FROM "PointEntity" AS "p"
-"""
+            SELECT "p"."Id", Distance("p"."Point", @__point_0) <= 1.0 AS "IsWithinDistance"
+            FROM "PointEntity" AS "p"
+            """
         );
     }
 
@@ -757,9 +757,9 @@ FROM "PointEntity" AS "p"
 
         AssertSql(
             """
-SELECT "m"."Id", GeometryN("m"."MultiLineString", 0 + 1) AS "Item0"
-FROM "MultiLineStringEntity" AS "m"
-"""
+            SELECT "m"."Id", GeometryN("m"."MultiLineString", 0 + 1) AS "Item0"
+            FROM "MultiLineStringEntity" AS "m"
+            """
         );
     }
 
@@ -769,9 +769,9 @@ FROM "MultiLineStringEntity" AS "m"
 
         AssertSql(
             """
-SELECT "l"."Id", GLength("l"."LineString") AS "Length"
-FROM "LineStringEntity" AS "l"
-"""
+            SELECT "l"."Id", GLength("l"."LineString") AS "Length"
+            FROM "LineStringEntity" AS "l"
+            """
         );
     }
 
@@ -781,9 +781,9 @@ FROM "LineStringEntity" AS "l"
 
         AssertSql(
             """
-SELECT "p"."Id", M("p"."Point") AS "M"
-FROM "PointEntity" AS "p"
-"""
+            SELECT "p"."Id", M("p"."Point") AS "M"
+            FROM "PointEntity" AS "p"
+            """
         );
     }
 
@@ -796,9 +796,9 @@ FROM "PointEntity" AS "p"
 
         AssertSql(
             """
-SELECT "m"."Id", NumGeometries("m"."MultiLineString") AS "NumGeometries"
-FROM "MultiLineStringEntity" AS "m"
-"""
+            SELECT "m"."Id", NumGeometries("m"."MultiLineString") AS "NumGeometries"
+            FROM "MultiLineStringEntity" AS "m"
+            """
         );
     }
 
@@ -808,9 +808,9 @@ FROM "MultiLineStringEntity" AS "m"
 
         AssertSql(
             """
-SELECT "p"."Id", NumInteriorRing("p"."Polygon") AS "NumInteriorRings"
-FROM "PolygonEntity" AS "p"
-"""
+            SELECT "p"."Id", NumInteriorRing("p"."Polygon") AS "NumInteriorRings"
+            FROM "PolygonEntity" AS "p"
+            """
         );
     }
 
@@ -820,9 +820,9 @@ FROM "PolygonEntity" AS "p"
 
         AssertSql(
             """
-SELECT "l"."Id", NumPoints("l"."LineString") AS "NumPoints"
-FROM "LineStringEntity" AS "l"
-"""
+            SELECT "l"."Id", NumPoints("l"."LineString") AS "NumPoints"
+            FROM "LineStringEntity" AS "l"
+            """
         );
     }
 
@@ -832,17 +832,17 @@ FROM "LineStringEntity" AS "l"
 
         AssertSql(
             """
-SELECT "p"."Id", CASE rtrim(GeometryType("p"."Point"), ' ZM')
-    WHEN 'POINT' THEN 1
-    WHEN 'LINESTRING' THEN 2
-    WHEN 'POLYGON' THEN 3
-    WHEN 'MULTIPOINT' THEN 4
-    WHEN 'MULTILINESTRING' THEN 5
-    WHEN 'MULTIPOLYGON' THEN 6
-    WHEN 'GEOMETRYCOLLECTION' THEN 7
-END AS "OgcGeometryType"
-FROM "PointEntity" AS "p"
-"""
+            SELECT "p"."Id", CASE rtrim(GeometryType("p"."Point"), ' ZM')
+            WHEN 'POINT' THEN 1
+            WHEN 'LINESTRING' THEN 2
+            WHEN 'POLYGON' THEN 3
+            WHEN 'MULTIPOINT' THEN 4
+            WHEN 'MULTILINESTRING' THEN 5
+            WHEN 'MULTIPOLYGON' THEN 6
+            WHEN 'GEOMETRYCOLLECTION' THEN 7
+            END AS "OgcGeometryType"
+            FROM "PointEntity" AS "p"
+            """
         );
     }
 
@@ -852,13 +852,13 @@ FROM "PointEntity" AS "p"
 
         AssertSql(
             """
-@__polygon_0='0x00010000000000000000000000000000000000000000000000000000F03F0000...' (Size = 116) (DbType = String)
+            @__polygon_0='0x00010000000000000000000000000000000000000000000000000000F03F0000...' (Size = 116) (DbType = String)
 
-SELECT "p"."Id", CASE
-    WHEN "p"."Polygon" IS NOT NULL THEN Overlaps("p"."Polygon", @__polygon_0)
-END AS "Overlaps"
-FROM "PolygonEntity" AS "p"
-"""
+            SELECT "p"."Id", CASE
+            WHEN "p"."Polygon" IS NOT NULL THEN Overlaps("p"."Polygon", @__polygon_0)
+            END AS "Overlaps"
+            FROM "PolygonEntity" AS "p"
+            """
         );
     }
 
@@ -868,9 +868,9 @@ FROM "PolygonEntity" AS "p"
 
         AssertSql(
             """
-SELECT "p"."Id", PointOnSurface("p"."Polygon") AS "PointOnSurface", "p"."Polygon"
-FROM "PolygonEntity" AS "p"
-"""
+            SELECT "p"."Id", PointOnSurface("p"."Polygon") AS "PointOnSurface", "p"."Polygon"
+            FROM "PolygonEntity" AS "p"
+            """
         );
     }
 
@@ -880,13 +880,13 @@ FROM "PolygonEntity" AS "p"
 
         AssertSql(
             """
-@__polygon_0='0x00010000000000000000000000000000000000000000000000000000F03F0000...' (Size = 116) (DbType = String)
+            @__polygon_0='0x00010000000000000000000000000000000000000000000000000000F03F0000...' (Size = 116) (DbType = String)
 
-SELECT "p"."Id", CASE
-    WHEN "p"."Polygon" IS NOT NULL THEN Relate("p"."Polygon", @__polygon_0, '212111212')
-END AS "Relate"
-FROM "PolygonEntity" AS "p"
-"""
+            SELECT "p"."Id", CASE
+            WHEN "p"."Polygon" IS NOT NULL THEN Relate("p"."Polygon", @__polygon_0, '212111212')
+            END AS "Relate"
+            FROM "PolygonEntity" AS "p"
+            """
         );
     }
 
@@ -896,9 +896,9 @@ FROM "PolygonEntity" AS "p"
 
         AssertSql(
             """
-SELECT "l"."Id", ST_Reverse("l"."LineString") AS "Reverse"
-FROM "LineStringEntity" AS "l"
-"""
+            SELECT "l"."Id", ST_Reverse("l"."LineString") AS "Reverse"
+            FROM "LineStringEntity" AS "l"
+            """
         );
     }
 
@@ -908,9 +908,9 @@ FROM "LineStringEntity" AS "l"
 
         AssertSql(
             """
-SELECT "p"."Id", SRID("p"."Point") AS "SRID"
-FROM "PointEntity" AS "p"
-"""
+            SELECT "p"."Id", SRID("p"."Point") AS "SRID"
+            FROM "PointEntity" AS "p"
+            """
         );
     }
 
@@ -920,9 +920,9 @@ FROM "PointEntity" AS "p"
 
         AssertSql(
             """
-SELECT "p"."Id", SRID("p"."Geometry") AS "SRID"
-FROM "PointEntity" AS "p"
-"""
+            SELECT "p"."Id", SRID("p"."Geometry") AS "SRID"
+            FROM "PointEntity" AS "p"
+            """
         );
     }
 
@@ -932,9 +932,9 @@ FROM "PointEntity" AS "p"
 
         AssertSql(
             """
-SELECT "l"."Id", StartPoint("l"."LineString") AS "StartPoint"
-FROM "LineStringEntity" AS "l"
-"""
+            SELECT "l"."Id", StartPoint("l"."LineString") AS "StartPoint"
+            FROM "LineStringEntity" AS "l"
+            """
         );
     }
 
@@ -944,11 +944,11 @@ FROM "LineStringEntity" AS "l"
 
         AssertSql(
             """
-@__polygon_0='0x00010000000000000000000000000000000000000000000000000000F03F0000...' (Size = 116) (DbType = String)
+            @__polygon_0='0x00010000000000000000000000000000000000000000000000000000F03F0000...' (Size = 116) (DbType = String)
 
-SELECT "p"."Id", SymDifference("p"."Polygon", @__polygon_0) AS "SymmetricDifference"
-FROM "PolygonEntity" AS "p"
-"""
+            SELECT "p"."Id", SymDifference("p"."Polygon", @__polygon_0) AS "SymmetricDifference"
+            FROM "PolygonEntity" AS "p"
+            """
         );
     }
 
@@ -958,9 +958,9 @@ FROM "PolygonEntity" AS "p"
 
         AssertSql(
             """
-SELECT "p"."Id", AsBinary("p"."Point") AS "Binary"
-FROM "PointEntity" AS "p"
-"""
+            SELECT "p"."Id", AsBinary("p"."Point") AS "Binary"
+            FROM "PointEntity" AS "p"
+            """
         );
     }
 
@@ -970,9 +970,9 @@ FROM "PointEntity" AS "p"
 
         AssertSql(
             """
-SELECT "p"."Id", AsText("p"."Point") AS "Text"
-FROM "PointEntity" AS "p"
-"""
+            SELECT "p"."Id", AsText("p"."Point") AS "Text"
+            FROM "PointEntity" AS "p"
+            """
         );
     }
 
@@ -982,13 +982,13 @@ FROM "PointEntity" AS "p"
 
         AssertSql(
             """
-@__polygon_0='0x00010000000000000000000000000000000000000000000000000000F03F0000...' (Size = 116) (DbType = String)
+            @__polygon_0='0x00010000000000000000000000000000000000000000000000000000F03F0000...' (Size = 116) (DbType = String)
 
-SELECT "p"."Id", CASE
-    WHEN "p"."Polygon" IS NOT NULL THEN Touches("p"."Polygon", @__polygon_0)
-END AS "Touches"
-FROM "PolygonEntity" AS "p"
-"""
+            SELECT "p"."Id", CASE
+            WHEN "p"."Polygon" IS NOT NULL THEN Touches("p"."Polygon", @__polygon_0)
+            END AS "Touches"
+            FROM "PolygonEntity" AS "p"
+            """
         );
     }
 
@@ -998,11 +998,11 @@ FROM "PolygonEntity" AS "p"
 
         AssertSql(
             """
-@__polygon_0='0x00010000000000000000000000000000000000000000000000000000F03F0000...' (Size = 116) (DbType = String)
+            @__polygon_0='0x00010000000000000000000000000000000000000000000000000000F03F0000...' (Size = 116) (DbType = String)
 
-SELECT "p"."Id", GUnion("p"."Polygon", @__polygon_0) AS "Union"
-FROM "PolygonEntity" AS "p"
-"""
+            SELECT "p"."Id", GUnion("p"."Polygon", @__polygon_0) AS "Union"
+            FROM "PolygonEntity" AS "p"
+            """
         );
     }
 
@@ -1012,11 +1012,11 @@ FROM "PolygonEntity" AS "p"
 
         AssertSql(
             """
-SELECT "p"."Group" AS "Id", GUnion("p"."Point") AS "Union"
-FROM "PointEntity" AS "p"
-WHERE "p"."Point" IS NOT NULL
-GROUP BY "p"."Group"
-"""
+            SELECT "p"."Group" AS "Id", GUnion("p"."Point") AS "Union"
+            FROM "PointEntity" AS "p"
+            WHERE "p"."Point" IS NOT NULL
+            GROUP BY "p"."Group"
+            """
         );
     }
 
@@ -1026,9 +1026,9 @@ GROUP BY "p"."Group"
 
         AssertSql(
             """
-SELECT "m"."Id", UnaryUnion("m"."MultiLineString") AS "Union"
-FROM "MultiLineStringEntity" AS "m"
-"""
+            SELECT "m"."Id", UnaryUnion("m"."MultiLineString") AS "Union"
+            FROM "MultiLineStringEntity" AS "m"
+            """
         );
     }
 
@@ -1038,13 +1038,13 @@ FROM "MultiLineStringEntity" AS "m"
 
         AssertSql(
             """
-@__polygon_0='0x000100000000000000000000F0BF000000000000F0BF00000000000000400000...' (Size = 132) (DbType = String)
+            @__polygon_0='0x000100000000000000000000F0BF000000000000F0BF00000000000000400000...' (Size = 132) (DbType = String)
 
-SELECT "p"."Id", CASE
-    WHEN "p"."Point" IS NOT NULL THEN Within("p"."Point", @__polygon_0)
-END AS "Within"
-FROM "PointEntity" AS "p"
-"""
+            SELECT "p"."Id", CASE
+            WHEN "p"."Point" IS NOT NULL THEN Within("p"."Point", @__polygon_0)
+            END AS "Within"
+            FROM "PointEntity" AS "p"
+            """
         );
     }
 
@@ -1054,9 +1054,9 @@ FROM "PointEntity" AS "p"
 
         AssertSql(
             """
-SELECT "p"."Id", X("p"."Point") AS "X"
-FROM "PointEntity" AS "p"
-"""
+            SELECT "p"."Id", X("p"."Point") AS "X"
+            FROM "PointEntity" AS "p"
+            """
         );
     }
 
@@ -1066,9 +1066,9 @@ FROM "PointEntity" AS "p"
 
         AssertSql(
             """
-SELECT "p"."Id", Y("p"."Point") AS "Y"
-FROM "PointEntity" AS "p"
-"""
+            SELECT "p"."Id", Y("p"."Point") AS "Y"
+            FROM "PointEntity" AS "p"
+            """
         );
     }
 
@@ -1078,9 +1078,9 @@ FROM "PointEntity" AS "p"
 
         AssertSql(
             """
-SELECT "p"."Id", Z("p"."Point") AS "Z"
-FROM "PointEntity" AS "p"
-"""
+            SELECT "p"."Id", Z("p"."Point") AS "Z"
+            FROM "PointEntity" AS "p"
+            """
         );
     }
 
@@ -1090,12 +1090,12 @@ FROM "PointEntity" AS "p"
 
         AssertSql(
             """
-SELECT "p"."Id"
-FROM "PointEntity" AS "p"
-WHERE CASE
-    WHEN "p"."Point" IS NOT NULL THEN IsEmpty("p"."Point")
-END IS NULL
-"""
+            SELECT "p"."Id"
+            FROM "PointEntity" AS "p"
+            WHERE CASE
+            WHEN "p"."Point" IS NOT NULL THEN IsEmpty("p"."Point")
+            END IS NULL
+            """
         );
     }
 
@@ -1105,12 +1105,12 @@ END IS NULL
 
         AssertSql(
             """
-SELECT "p"."Id"
-FROM "PointEntity" AS "p"
-WHERE CASE
-    WHEN "p"."Point" IS NOT NULL THEN IsEmpty("p"."Point")
-END IS NOT NULL
-"""
+            SELECT "p"."Id"
+            FROM "PointEntity" AS "p"
+            WHERE CASE
+            WHEN "p"."Point" IS NOT NULL THEN IsEmpty("p"."Point")
+            END IS NOT NULL
+            """
         );
     }
 
@@ -1120,24 +1120,24 @@ END IS NOT NULL
 
         AssertSql(
             """
-@__lineString_0='0x000100000000000000000000E03F000000000000E0BF000000000000E03F0000...' (Size = 80) (DbType = String)
+            @__lineString_0='0x000100000000000000000000E03F000000000000E0BF000000000000E03F0000...' (Size = 80) (DbType = String)
 
-SELECT "l"."Id"
-FROM "LineStringEntity" AS "l"
-WHERE CASE
-    WHEN "l"."LineString" IS NOT NULL THEN Intersects("l"."LineString", @__lineString_0)
-END IS NULL
-""",
+            SELECT "l"."Id"
+            FROM "LineStringEntity" AS "l"
+            WHERE CASE
+            WHEN "l"."LineString" IS NOT NULL THEN Intersects("l"."LineString", @__lineString_0)
+            END IS NULL
+            """,
             //
             """
-@__lineString_0='0x000100000000000000000000E03F000000000000E0BF000000000000E03F0000...' (Size = 80) (DbType = String)
+            @__lineString_0='0x000100000000000000000000E03F000000000000E0BF000000000000E03F0000...' (Size = 80) (DbType = String)
 
-SELECT "l"."Id"
-FROM "LineStringEntity" AS "l"
-WHERE CASE
-    WHEN "l"."LineString" IS NOT NULL THEN Intersects(@__lineString_0, "l"."LineString")
-END IS NULL
-"""
+            SELECT "l"."Id"
+            FROM "LineStringEntity" AS "l"
+            WHERE CASE
+            WHEN "l"."LineString" IS NOT NULL THEN Intersects(@__lineString_0, "l"."LineString")
+            END IS NULL
+            """
         );
     }
 
@@ -1147,24 +1147,24 @@ END IS NULL
 
         AssertSql(
             """
-@__lineString_0='0x000100000000000000000000E03F000000000000E0BF000000000000E03F0000...' (Size = 80) (DbType = String)
+            @__lineString_0='0x000100000000000000000000E03F000000000000E0BF000000000000E03F0000...' (Size = 80) (DbType = String)
 
-SELECT "l"."Id"
-FROM "LineStringEntity" AS "l"
-WHERE CASE
-    WHEN "l"."LineString" IS NOT NULL THEN Intersects("l"."LineString", @__lineString_0)
-END IS NOT NULL
-""",
+            SELECT "l"."Id"
+            FROM "LineStringEntity" AS "l"
+            WHERE CASE
+            WHEN "l"."LineString" IS NOT NULL THEN Intersects("l"."LineString", @__lineString_0)
+            END IS NOT NULL
+            """,
             //
             """
-@__lineString_0='0x000100000000000000000000E03F000000000000E0BF000000000000E03F0000...' (Size = 80) (DbType = String)
+            @__lineString_0='0x000100000000000000000000E03F000000000000E0BF000000000000E03F0000...' (Size = 80) (DbType = String)
 
-SELECT "l"."Id"
-FROM "LineStringEntity" AS "l"
-WHERE CASE
-    WHEN "l"."LineString" IS NOT NULL THEN Intersects(@__lineString_0, "l"."LineString")
-END IS NOT NULL
-"""
+            SELECT "l"."Id"
+            FROM "LineStringEntity" AS "l"
+            WHERE CASE
+            WHEN "l"."LineString" IS NOT NULL THEN Intersects(@__lineString_0, "l"."LineString")
+            END IS NOT NULL
+            """
         );
     }
 

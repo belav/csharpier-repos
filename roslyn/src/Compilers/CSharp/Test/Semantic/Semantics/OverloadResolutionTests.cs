@@ -10473,14 +10473,14 @@ public static class Program
                 "Program.Main",
                 """
                 {
-                  // Code size       10 (0xa)
-                  .maxstack  1
-                  .locals init (int V_0) //x
-                  IL_0000:  ldc.i4.5
-                  IL_0001:  stloc.0
-                  IL_0002:  ldloca.s   V_0
-                  IL_0004:  call       "void Program.Method(in int)"
-                  IL_0009:  ret
+                // Code size       10 (0xa)
+                .maxstack  1
+                .locals init (int V_0) //x
+                IL_0000:  ldc.i4.5
+                IL_0001:  stloc.0
+                IL_0002:  ldloca.s   V_0
+                IL_0004:  call       "void Program.Method(in int)"
+                IL_0009:  ret
                 }
                 """
             );
@@ -10490,19 +10490,19 @@ public static class Program
         public void PassingArgumentsToInParameters_RefKind_Ref_ReadonlyRef()
         {
             var code = """
-                public static class Program
-                {
-                    public static void Method(in int p)
-                    {
-                        System.Console.WriteLine(p);
-                    }
-                    static readonly int x = 5;
-                    public static void Main()
-                    {
-                        Method(ref x);
-                    }
-                }
-                """;
+            public static class Program
+            {
+            public static void Method(in int p)
+            {
+            System.Console.WriteLine(p);
+            }
+            static readonly int x = 5;
+            public static void Main()
+            {
+            Method(ref x);
+            }
+            }
+            """;
 
             var expectedDiagnostics = new[]
             {
@@ -10522,18 +10522,18 @@ public static class Program
         public void PassingArgumentsToInParameters_RefKind_Ref_RValue()
         {
             var code = """
-                public static class Program
-                {
-                    public static void Method(in int p)
-                    {
-                        System.Console.WriteLine(p);
-                    }
-                    public static void Main()
-                    {
-                        Method(ref 5);
-                    }
-                }
-                """;
+            public static class Program
+            {
+            public static void Method(in int p)
+            {
+            System.Console.WriteLine(p);
+            }
+            public static void Main()
+            {
+            Method(ref 5);
+            }
+            }
+            """;
 
             var expectedDiagnostics = new[]
             {
@@ -10553,18 +10553,18 @@ public static class Program
         public void PassingArgumentsToInParameters_CrossAssembly()
         {
             var source1 = """
-                public class C
-                {
-                    public void M(in int p) { }
-                    void M2()
-                    {
-                        int x = 5;
-                        M(x);
-                        M(ref x);
-                        M(in x);
-                    }
-                }
-                """;
+            public class C
+            {
+            public void M(in int p) { }
+            void M2()
+            {
+            int x = 5;
+            M(x);
+            M(ref x);
+            M(in x);
+            }
+            }
+            """;
             var comp1 = CreateCompilation(source1)
                 .VerifyDiagnostics(
                     // (8,15): warning CS9191: The 'ref' modifier for argument 1 corresponding to 'in' parameter is equivalent to 'in'. Consider using 'in' instead.
@@ -10576,17 +10576,17 @@ public static class Program
             var comp1Ref = comp1.ToMetadataReference();
 
             var source2 = """
-                class D
-                {
-                    void M(C c)
-                    {
-                        int x = 6;
-                        c.M(x);
-                        c.M(ref x);
-                        c.M(in x);
-                    }
-                }
-                """;
+            class D
+            {
+            void M(C c)
+            {
+            int x = 6;
+            c.M(x);
+            c.M(ref x);
+            c.M(in x);
+            }
+            }
+            """;
             CreateCompilation(source2, new[] { comp1Ref }, parseOptions: TestOptions.Regular11)
                 .VerifyDiagnostics(
                     // (7,17): error CS9194: Argument 1 may not be passed with the 'ref' keyword in language version 11.0. To pass 'ref' arguments to 'in' parameters, upgrade to language version 12.0 or greater.
@@ -10612,18 +10612,18 @@ public static class Program
         public void PassingArgumentsToInParameters_Ctor()
         {
             var source = """
-                class C
-                {
-                    private C(in int p) => System.Console.Write(p);
-                    static void Main()
-                    {
-                        int x = 5;
-                        new C(x);
-                        new C(ref x);
-                        new C(in x);
-                    }
-                }
-                """;
+            class C
+            {
+            private C(in int p) => System.Console.Write(p);
+            static void Main()
+            {
+            int x = 5;
+            new C(x);
+            new C(ref x);
+            new C(in x);
+            }
+            }
+            """;
             CreateCompilation(source, parseOptions: TestOptions.Regular11)
                 .VerifyDiagnostics(
                     // (8,19): error CS9194: Argument 1 may not be passed with the 'ref' keyword in language version 11.0. To pass 'ref' arguments to 'in' parameters, upgrade to language version 12.0 or greater.
@@ -10649,25 +10649,25 @@ public static class Program
         public void PassingArgumentsToInParameters_Indexer()
         {
             var source = """
-                class C
-                {
-                    private int this[in int p]
-                    {
-                        get
-                        {
-                            System.Console.Write(p);
-                            return 0;
-                        }
-                    }
-                    static void Main()
-                    {
-                        int x = 5;
-                        _ = new C()[x];
-                        _ = new C()[ref x];
-                        _ = new C()[in x];
-                    }
-                }
-                """;
+            class C
+            {
+            private int this[in int p]
+            {
+            get
+            {
+            System.Console.Write(p);
+            return 0;
+            }
+            }
+            static void Main()
+            {
+            int x = 5;
+            _ = new C()[x];
+            _ = new C()[ref x];
+            _ = new C()[in x];
+            }
+            }
+            """;
             CreateCompilation(source, parseOptions: TestOptions.Regular11)
                 .VerifyDiagnostics(
                     // (15,25): error CS9194: Argument 1 may not be passed with the 'ref' keyword in language version 11.0. To pass 'ref' arguments to 'in' parameters, upgrade to language version 12.0 or greater.
@@ -10693,19 +10693,19 @@ public static class Program
         public void PassingArgumentsToInParameters_FunctionPointer()
         {
             var source = """
-                class C
-                {
-                    static void M(in int p) => System.Console.Write(p);
-                    static unsafe void Main()
-                    {
-                        delegate*<in int, void> f = &M;
-                        int x = 5;
-                        f(x);
-                        f(ref x);
-                        f(in x);
-                    }
-                }
-                """;
+            class C
+            {
+            static void M(in int p) => System.Console.Write(p);
+            static unsafe void Main()
+            {
+            delegate*<in int, void> f = &M;
+            int x = 5;
+            f(x);
+            f(ref x);
+            f(in x);
+            }
+            }
+            """;
             CreateCompilation(
                     source,
                     options: TestOptions.UnsafeReleaseExe,
@@ -10751,18 +10751,18 @@ public static class Program
         public void PassingArgumentsToInParameters_Arglist()
         {
             var source = """
-                class C
-                {
-                    static void M(in int p, __arglist) => System.Console.Write(p);
-                    static void Main()
-                    {
-                        int x = 5;
-                        M(x, __arglist(x));
-                        M(ref x, __arglist(x));
-                        M(in x, __arglist(x));
-                    }
-                }
-                """;
+            class C
+            {
+            static void M(in int p, __arglist) => System.Console.Write(p);
+            static void Main()
+            {
+            int x = 5;
+            M(x, __arglist(x));
+            M(ref x, __arglist(x));
+            M(in x, __arglist(x));
+            }
+            }
+            """;
             CreateCompilation(source, parseOptions: TestOptions.Regular11)
                 .VerifyDiagnostics(
                     // (8,15): error CS9194: Argument 1 may not be passed with the 'ref' keyword in language version 11.0. To pass 'ref' arguments to 'in' parameters, upgrade to language version 12.0 or greater.
@@ -10794,24 +10794,24 @@ public static class Program
         public void PassingArgumentsToInParameters_RefKind_Ref_NamedArguments()
         {
             var source = """
-                class C
-                {
-                    static void M(in int a, ref int b)
-                    {
-                        System.Console.Write(a);
-                        System.Console.Write(b);
-                    }
-                    static void Main()
-                    {
-                        int x = 5;
-                        int y = 6;
-                        M(b: ref x, a: y); // 1
-                        M(b: ref x, a: ref y); // 2
-                        M(a: x, ref y); // 3
-                        M(a: ref x, ref y); // 4
-                    }
-                }
-                """;
+            class C
+            {
+            static void M(in int a, ref int b)
+            {
+            System.Console.Write(a);
+            System.Console.Write(b);
+            }
+            static void Main()
+            {
+            int x = 5;
+            int y = 6;
+            M(b: ref x, a: y); // 1
+            M(b: ref x, a: ref y); // 2
+            M(a: x, ref y); // 3
+            M(a: ref x, ref y); // 4
+            }
+            }
+            """;
             CompileAndVerify(source, expectedOutput: "65655656")
                 .VerifyDiagnostics(
                     // (13,28): warning CS9191: The 'ref' modifier for argument 2 corresponding to 'in' parameter is equivalent to 'in'. Consider using 'in' instead.
@@ -10831,17 +10831,17 @@ public static class Program
         public void PassingArgumentsToInParameters_RefKind_Ref_01()
         {
             var source = """
-                class C
-                {
-                    static string M1(string s, ref int i) => "string" + i;
-                    static string M1(object o, in int i) => "object" + i;
-                    static void Main()
-                    {
-                        int i = 5;
-                        System.Console.WriteLine(M1(null, ref i));
-                    }
-                }
-                """;
+            class C
+            {
+            static string M1(string s, ref int i) => "string" + i;
+            static string M1(object o, in int i) => "object" + i;
+            static void Main()
+            {
+            int i = 5;
+            System.Console.WriteLine(M1(null, ref i));
+            }
+            }
+            """;
             CompileAndVerify(source, expectedOutput: "string5", parseOptions: TestOptions.Regular11)
                 .VerifyDiagnostics();
             CompileAndVerify(source, expectedOutput: "string5", parseOptions: TestOptions.Regular12)
@@ -10853,17 +10853,17 @@ public static class Program
         public void PassingArgumentsToInParameters_RefKind_Ref_01_Ctor()
         {
             var source = """
-                class C
-                {
-                    private C(string s, ref int i) => System.Console.WriteLine("string" + i);
-                    private C(object o, in int i) => System.Console.WriteLine("object" + i);
-                    static void Main()
-                    {
-                        int i = 5;
-                        new C(null, ref i);
-                    }
-                }
-                """;
+            class C
+            {
+            private C(string s, ref int i) => System.Console.WriteLine("string" + i);
+            private C(object o, in int i) => System.Console.WriteLine("object" + i);
+            static void Main()
+            {
+            int i = 5;
+            new C(null, ref i);
+            }
+            }
+            """;
             CompileAndVerify(source, expectedOutput: "string5", parseOptions: TestOptions.Regular11)
                 .VerifyDiagnostics();
             CompileAndVerify(source, expectedOutput: "string5", parseOptions: TestOptions.Regular12)
@@ -10875,17 +10875,17 @@ public static class Program
         public void PassingArgumentsToInParameters_RefKind_Ref_02()
         {
             var source = """
-                class C
-                {
-                    static string M1(string s, ref int i) => "string" + i;
-                    static string M1(object o, in int i) => "object" + i;
-                    static void Main()
-                    {
-                        int i = 5;
-                        System.Console.WriteLine(M1(default(object), ref i));
-                    }
-                }
-                """;
+            class C
+            {
+            static string M1(string s, ref int i) => "string" + i;
+            static string M1(object o, in int i) => "object" + i;
+            static void Main()
+            {
+            int i = 5;
+            System.Console.WriteLine(M1(default(object), ref i));
+            }
+            }
+            """;
             CreateCompilation(source, parseOptions: TestOptions.Regular11)
                 .VerifyDiagnostics(
                     // (8,37): error CS1503: Argument 1: cannot convert from 'object' to 'string'
@@ -10912,17 +10912,17 @@ public static class Program
         public void PassingArgumentsToInParameters_RefKind_Ref_02_Ctor()
         {
             var source = """
-                class C
-                {
-                    private C(string s, ref int i) => System.Console.WriteLine("string" + i);
-                    private C(object o, in int i) => System.Console.WriteLine("object" + i);
-                    static void Main()
-                    {
-                        int i = 5;
-                        new C(default(object), ref i);
-                    }
-                }
-                """;
+            class C
+            {
+            private C(string s, ref int i) => System.Console.WriteLine("string" + i);
+            private C(object o, in int i) => System.Console.WriteLine("object" + i);
+            static void Main()
+            {
+            int i = 5;
+            new C(default(object), ref i);
+            }
+            }
+            """;
             CreateCompilation(source, parseOptions: TestOptions.Regular11)
                 .VerifyDiagnostics(
                     // (8,15): error CS1503: Argument 1: cannot convert from 'object' to 'string'

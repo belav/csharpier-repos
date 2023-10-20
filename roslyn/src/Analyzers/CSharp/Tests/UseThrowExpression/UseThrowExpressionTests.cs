@@ -42,12 +42,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 
                 class C
                 {
-                    void M(string s)
-                    {
-                        if (s == null)
-                            [|throw|] new ArgumentNullException(nameof(s));
-                        _s = s;
-                    }
+                void M(string s)
+                {
+                if (s == null)
+                [|throw|] new ArgumentNullException(nameof(s));
+                _s = s;
+                }
                 }
                 """,
                 """
@@ -55,10 +55,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 
                 class C
                 {
-                    void M(string s)
-                    {
-                        _s = s ?? throw new ArgumentNullException(nameof(s));
-                    }
+                void M(string s)
+                {
+                _s = s ?? throw new ArgumentNullException(nameof(s));
+                }
                 }
                 """
             );
@@ -73,12 +73,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 
                 class C
                 {
-                    void M(string s)
-                    {
-                        [|if|] (s == null)
-                            throw new ArgumentNullException(nameof(s));
-                        _s = s;
-                    }
+                void M(string s)
+                {
+                [|if|] (s == null)
+                throw new ArgumentNullException(nameof(s));
+                _s = s;
+                }
                 }
                 """
             );
@@ -93,15 +93,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 
                 class C
                 {
-                    void M(string s)
-                    {
-                        if (s == null)
-                        {
-                            [|throw|] new ArgumentNullException(nameof(s));
-                        }
+                void M(string s)
+                {
+                if (s == null)
+                {
+                [|throw|] new ArgumentNullException(nameof(s));
+                }
 
-                        _s = s;
-                    }
+                _s = s;
+                }
                 }
                 """,
                 """
@@ -109,10 +109,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 
                 class C
                 {
-                    void M(string s)
-                    {
-                        _s = s ?? throw new ArgumentNullException(nameof(s));
-                    }
+                void M(string s)
+                {
+                _s = s ?? throw new ArgumentNullException(nameof(s));
+                }
                 }
                 """
             );
@@ -127,12 +127,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 
                 class C
                 {
-                    void M(string s)
-                    {
-                        if (s == null)
-                            throw new ArgumentNullException(nameof(s));
-                        _s = [|s|];
-                    }
+                void M(string s)
+                {
+                if (s == null)
+                throw new ArgumentNullException(nameof(s));
+                _s = [|s|];
+                }
                 }
                 """
             );
@@ -147,13 +147,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 
                 class C
                 {
-                    void M(string s)
-                    {
-                        if (s == null)
-                        {
-                            [|throw|] new ArgumentNullException(nameof(s)) };
-                        _s = s;
-                    }
+                void M(string s)
+                {
+                if (s == null)
+                {
+                [|throw|] new ArgumentNullException(nameof(s)) };
+                _s = s;
+                }
                 }
                 """,
                 new TestParameters(
@@ -171,20 +171,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 
                 class C
                 {
-                    void M(string s, string t)
-                    {
-                        if (s == null)
-                        {
-                            [|throw|] new ArgumentNullException(nameof(s));
-                        }
+                void M(string s, string t)
+                {
+                if (s == null)
+                {
+                [|throw|] new ArgumentNullException(nameof(s));
+                }
 
-                        if (t == null)
-                        {
-                            throw new ArgumentNullException(nameof(t));
-                        }
+                if (t == null)
+                {
+                throw new ArgumentNullException(nameof(t));
+                }
 
-                        _s = s;
-                    }
+                _s = s;
+                }
                 }
                 """,
                 """
@@ -192,15 +192,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 
                 class C
                 {
-                    void M(string s, string t)
-                    {
-                        if (t == null)
-                        {
-                            throw new ArgumentNullException(nameof(t));
-                        }
+                void M(string s, string t)
+                {
+                if (t == null)
+                {
+                throw new ArgumentNullException(nameof(t));
+                }
 
-                        _s = s ?? throw new ArgumentNullException(nameof(s));
-                    }
+                _s = s ?? throw new ArgumentNullException(nameof(s));
+                }
                 }
                 """
             );
@@ -215,15 +215,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 
                 class C
                 {
-                    void M(string s, string t)
-                    {
-                        if (s == null)
-                        {
-                            [|throw|] new ArgumentNullException(nameof(s));
-                        };
-                        s = "something";
-                        _s = s;
-                    }
+                void M(string s, string t)
+                {
+                if (s == null)
+                {
+                [|throw|] new ArgumentNullException(nameof(s));
+                };
+                s = "something";
+                _s = s;
+                }
                 }
                 """
             );
@@ -238,15 +238,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 
                 class C
                 {
-                    void M(string s, string t)
-                    {
-                        if (s == null)
-                        {
-                            [|throw|] new ArgumentNullException(nameof(s));
-                        };
-                        s.ToString();
-                        _s = s;
-                    }
+                void M(string s, string t)
+                {
+                if (s == null)
+                {
+                [|throw|] new ArgumentNullException(nameof(s));
+                };
+                s.ToString();
+                _s = s;
+                }
                 }
                 """
             );
@@ -261,12 +261,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 
                 class C
                 {
-                    void M(string s)
-                    {
-                        if (null == s)
-                            [|throw|] new ArgumentNullException(nameof(s));
-                        _s = s;
-                    }
+                void M(string s)
+                {
+                if (null == s)
+                [|throw|] new ArgumentNullException(nameof(s));
+                _s = s;
+                }
                 }
                 """,
                 """
@@ -274,10 +274,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 
                 class C
                 {
-                    void M(string s)
-                    {
-                        _s = s ?? throw new ArgumentNullException(nameof(s));
-                    }
+                void M(string s)
+                {
+                _s = s ?? throw new ArgumentNullException(nameof(s));
+                }
                 }
                 """
             );
@@ -292,13 +292,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 
                 class C
                 {
-                    void M()
-                    {
-                        string s = null;
-                        if (null == s)
-                            [|throw|] new ArgumentNullException(nameof(s));
-                        _s = s;
-                    }
+                void M()
+                {
+                string s = null;
+                if (null == s)
+                [|throw|] new ArgumentNullException(nameof(s));
+                _s = s;
+                }
                 }
                 """,
                 """
@@ -306,11 +306,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 
                 class C
                 {
-                    void M()
-                    {
-                        string s = null;
-                        _s = s ?? throw new ArgumentNullException(nameof(s));
-                    }
+                void M()
+                {
+                string s = null;
+                _s = s ?? throw new ArgumentNullException(nameof(s));
+                }
                 }
                 """
             );
@@ -325,14 +325,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 
                 class C
                 {
-                    string s;
+                string s;
 
-                    void M()
-                    {
-                        if (null == s)
-                            [|throw|] new ArgumentNullException(nameof(s));
-                        _s = s;
-                    }
+                void M()
+                {
+                if (null == s)
+                [|throw|] new ArgumentNullException(nameof(s));
+                _s = s;
+                }
                 }
                 """
             );
@@ -347,12 +347,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 
                 class C
                 {
-                    void M(string s)
-                    {
-                        _s = s;
-                        if (s == null)
-                            [|throw|] new ArgumentNullException(nameof(s));
-                    }
+                void M(string s)
+                {
+                _s = s;
+                if (s == null)
+                [|throw|] new ArgumentNullException(nameof(s));
+                }
                 }
                 """
             );
@@ -368,18 +368,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 
                 class C
                 {
-                    private string _s;
+                private string _s;
 
-                    void Goo()
-                    {
-                        Expression<Action<string>> e = s =>
-                        {
-                            if (s == null)
-                                [|throw|] new ArgumentNullException(nameof(s));
+                void Goo()
+                {
+                Expression<Action<string>> e = s =>
+                {
+                if (s == null)
+                [|throw|] new ArgumentNullException(nameof(s));
 
-                            _s = s;
-                        };
-                    }
+                _s = s;
+                };
+                }
                 }
                 """
             );
@@ -394,20 +394,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 
                 class BswParser3
                 {
-                    private ParserSyntax m_syntax;
+                private ParserSyntax m_syntax;
 
-                    public BswParser3(ISyntax syntax)
-                    {
-                        if (syntax == null)
-                        {
-                            [|throw|] new ArgumentNullException(nameof(syntax));
-                        }
+                public BswParser3(ISyntax syntax)
+                {
+                if (syntax == null)
+                {
+                [|throw|] new ArgumentNullException(nameof(syntax));
+                }
 
-                        m_syntax = syntax as ParserSyntax;
+                m_syntax = syntax as ParserSyntax;
 
-                        if (m_syntax == null)
-                            throw new ArgumentException();
-                    }
+                if (m_syntax == null)
+                throw new ArgumentException();
+                }
                 }
 
                 internal class ParserSyntax
@@ -430,21 +430,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 
                 class C
                 {
-                    int? _x;
+                int? _x;
 
-                    public C(int? x)
-                    {
-                        if (x == null)
-                        {
-                            [|throw|] new ArgumentNullException(nameof(x));
-                        }
-                        else
-                        {
-                            Console.WriteLine();
-                        }
+                public C(int? x)
+                {
+                if (x == null)
+                {
+                [|throw|] new ArgumentNullException(nameof(x));
+                }
+                else
+                {
+                Console.WriteLine();
+                }
 
-                        _x = x;
-                    }
+                _x = x;
+                }
                 }
                 """
             );
@@ -459,15 +459,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 
                 class C
                 {
-                    void M(string s)
-                    {
-                        if (s == null)
-                        {
-                            Console.WriteLine();
-                            [|throw|] new ArgumentNullException(nameof(s));
-                        }
-                        _s = s;
-                    }
+                void M(string s)
+                {
+                if (s == null)
+                {
+                Console.WriteLine();
+                [|throw|] new ArgumentNullException(nameof(s));
+                }
+                _s = s;
+                }
                 }
                 """
             );
@@ -482,15 +482,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 
                 class C
                 {
-                    void M(string s)
-                    {
-                        if (s == null)
-                        {
-                            [|throw|] new ArgumentNullException(nameof(s));
-                            Console.WriteLine();
-                        }
-                        _s = s;
-                    }
+                void M(string s)
+                {
+                if (s == null)
+                {
+                [|throw|] new ArgumentNullException(nameof(s));
+                Console.WriteLine();
+                }
+                _s = s;
+                }
                 }
                 """
             );
@@ -506,17 +506,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 
                 class A
                 {
-                    public string Id;
+                public string Id;
                 }
 
                 class B
                 {
-                    private Dictionary<string, A> map = new Dictionary<string, A>();
-                    public B(A a)
-                    {
-                        if (a == null) [|throw|] new ArgumentNullException();
-                        map[a.Id] = a;
-                    }
+                private Dictionary<string, A> map = new Dictionary<string, A>();
+                public B(A a)
+                {
+                if (a == null) [|throw|] new ArgumentNullException();
+                map[a.Id] = a;
+                }
                 }
                 """
             );
@@ -532,16 +532,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 
                 class B
                 {
-                    public B(object arg)
-                    {
-                        Dictionary<object, object> map = null;
+                public B(object arg)
+                {
+                Dictionary<object, object> map = null;
 
-                        if (arg == null) [|throw|] new ArgumentNullException();
-                        var key = MakeKey(arg);
-                        map[key] = arg;
-                    }
+                if (arg == null) [|throw|] new ArgumentNullException();
+                var key = MakeKey(arg);
+                map[key] = arg;
+                }
 
-                    object MakeKey(object x) => null;
+                object MakeKey(object x) => null;
                 }
                 """
             );
@@ -555,12 +555,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
                 using System;
                 class A<T>
                 {
-                    T x;
-                    public A(T t)
-                    {
-                        if (t == null) [|throw|] new ArgumentNullException();
-                        x = t;
-                    }
+                T x;
+                public A(T t)
+                {
+                if (t == null) [|throw|] new ArgumentNullException();
+                x = t;
+                }
                 }
                 """
             );
@@ -574,23 +574,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
                 using System;
                 class A<T> where T: class
                 {
-                    T x;
-                    public A(T t)
-                    {
-                        if (t == null) [|throw|] new ArgumentNullException();
-                        x = t;
-                    }
+                T x;
+                public A(T t)
+                {
+                if (t == null) [|throw|] new ArgumentNullException();
+                x = t;
+                }
                 }
                 """,
                 """
                 using System;
                 class A<T> where T: class
                 {
-                    T x;
-                    public A(T t)
-                    {
-                        x = t ?? throw new ArgumentNullException();
-                    }
+                T x;
+                public A(T t)
+                {
+                x = t ?? throw new ArgumentNullException();
+                }
                 }
                 """
             );
@@ -604,23 +604,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
                 using System;
                 class A<T> where T: struct
                 {
-                    T? x;
-                    public A(T? t)
-                    {
-                        if (t == null) [|throw|] new ArgumentNullException();
-                        x = t;
-                    }
+                T? x;
+                public A(T? t)
+                {
+                if (t == null) [|throw|] new ArgumentNullException();
+                x = t;
+                }
                 }
                 """,
                 """
                 using System;
                 class A<T> where T: struct
                 {
-                    T? x;
-                    public A(T? t)
-                    {
-                        x = t ?? throw new ArgumentNullException();
-                    }
+                T? x;
+                public A(T? t)
+                {
+                x = t ?? throw new ArgumentNullException();
+                }
                 }
                 """
             );
@@ -657,16 +657,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 
                 class Program
                 {
-                    object _arg;
+                object _arg;
 
-                    public Program(object arg)
-                    {
-                        if (arg == null)
-                        {
-                            [|throw|] new ArgumentNullException(nameof(arg)); // Oh no!
-                        }
-                        _arg = arg;
-                    }
+                public Program(object arg)
+                {
+                if (arg == null)
+                {
+                [|throw|] new ArgumentNullException(nameof(arg)); // Oh no!
+                }
+                _arg = arg;
+                }
                 }
                 """,
                 """
@@ -674,12 +674,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 
                 class Program
                 {
-                    object _arg;
+                object _arg;
 
-                    public Program(object arg)
-                    {
-                        _arg = arg ?? throw new ArgumentNullException(nameof(arg)); // Oh no!
-                    }
+                public Program(object arg)
+                {
+                _arg = arg ?? throw new ArgumentNullException(nameof(arg)); // Oh no!
+                }
                 }
                 """,
                 TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9)
@@ -695,16 +695,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 
                 class Program
                 {
-                    object _arg;
+                object _arg;
 
-                    public Program(object arg)
-                    {
-                        if (arg == null)
-                        {
-                            [|throw|] new ArgumentNullException(nameof(arg)); // Oh no!
-                        }
-                        _arg = arg; // oh yes!
-                    }
+                public Program(object arg)
+                {
+                if (arg == null)
+                {
+                [|throw|] new ArgumentNullException(nameof(arg)); // Oh no!
+                }
+                _arg = arg; // oh yes!
+                }
                 }
                 """,
                 """
@@ -712,13 +712,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseThrowExpression
 
                 class Program
                 {
-                    object _arg;
+                object _arg;
 
-                    public Program(object arg)
-                    {
-                        // Oh no!
-                        _arg = arg ?? throw new ArgumentNullException(nameof(arg)); // oh yes!
-                    }
+                public Program(object arg)
+                {
+                // Oh no!
+                _arg = arg ?? throw new ArgumentNullException(nameof(arg)); // oh yes!
+                }
                 }
                 """,
                 TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9)

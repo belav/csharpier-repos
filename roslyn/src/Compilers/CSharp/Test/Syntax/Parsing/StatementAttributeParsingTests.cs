@@ -5887,10 +5887,10 @@ class C
                 """
                 class C
                 {
-                    void Goo(int i)
-                    {
-                        [A]++i;
-                    }
+                void Goo(int i)
+                {
+                [A]++i;
+                }
                 }
                 """,
                 // (5,14): error CS1002: ; expected

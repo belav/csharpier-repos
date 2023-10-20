@@ -393,17 +393,17 @@ WHERE name = '{connection.Database}';
         );
 
         command.CommandText = """
-SELECT
-    SCHEMA_NAME([t].[schema_id]) AS [schema_name],
-    [t].[name] AS [type_name],
-    [t2].[name] AS [underlying_system_type],
-    CAST([t].[max_length] AS int) AS [max_length],
-    CAST([t].[precision] AS int) AS [precision],
-    CAST([t].[scale] AS int) AS [scale]
-FROM [sys].[types] AS [t]
-JOIN [sys].[types] AS [t2] ON [t].[system_type_id] = [t2].[user_type_id]
-WHERE [t].[is_user_defined] = 1 OR [t].[system_type_id] <> [t].[user_type_id];
-""";
+        SELECT
+        SCHEMA_NAME([t].[schema_id]) AS [schema_name],
+        [t].[name] AS [type_name],
+        [t2].[name] AS [underlying_system_type],
+        CAST([t].[max_length] AS int) AS [max_length],
+        CAST([t].[precision] AS int) AS [precision],
+        CAST([t].[scale] AS int) AS [scale]
+        FROM [sys].[types] AS [t]
+        JOIN [sys].[types] AS [t2] ON [t].[system_type_id] = [t2].[user_type_id]
+        WHERE [t].[is_user_defined] = 1 OR [t].[system_type_id] <> [t].[user_type_id];
+        """;
 
         using var reader = command.ExecuteReader();
         while (reader.Read())
@@ -434,33 +434,33 @@ WHERE [t].[is_user_defined] = 1 OR [t].[system_type_id] <> [t].[user_type_id];
     {
         using var command = connection.CreateCommand();
         command.CommandText = """
-SELECT
-    OBJECT_SCHEMA_NAME([s].[object_id]) AS [schema_name],
-    [s].[name],
-    SCHEMA_NAME([t].[schema_id]) AS [type_schema],
-    TYPE_NAME([s].[user_type_id]) AS [type_name],
-    CAST([s].[precision] AS int) AS [precision],
-    CAST([s].[scale] AS int) AS [scale],
-    [s].[is_cycling],
-    CAST([s].[increment] AS int) AS [increment],
-    CAST(CASE
+        SELECT
+        OBJECT_SCHEMA_NAME([s].[object_id]) AS [schema_name],
+        [s].[name],
+        SCHEMA_NAME([t].[schema_id]) AS [type_schema],
+        TYPE_NAME([s].[user_type_id]) AS [type_name],
+        CAST([s].[precision] AS int) AS [precision],
+        CAST([s].[scale] AS int) AS [scale],
+        [s].[is_cycling],
+        CAST([s].[increment] AS int) AS [increment],
+        CAST(CASE
         WHEN [s].[start_value] >  9223372036854775807 THEN  9223372036854775807
         WHEN [s].[start_value] < -9223372036854775808 THEN -9223372036854775808
         ELSE [s].[start_value]
         END AS bigint) AS start_value,
-    CAST(CASE
+        CAST(CASE
         WHEN [s].[minimum_value] >  9223372036854775807 THEN  9223372036854775807
         WHEN [s].[minimum_value] < -9223372036854775808 THEN -9223372036854775808
         ELSE [s].[minimum_value]
         END AS bigint) AS minimum_value,
-    CAST(CASE
+        CAST(CASE
         WHEN [s].[maximum_value] >  9223372036854775807 THEN  9223372036854775807
         WHEN [s].[maximum_value] < -9223372036854775808 THEN -9223372036854775808
         ELSE [s].[maximum_value]
         END AS bigint) AS maximum_value
-FROM [sys].[sequences] AS [s]
-JOIN [sys].[types] AS [t] ON [s].[user_type_id] = [t].[user_type_id]
-""";
+        FROM [sys].[sequences] AS [s]
+        JOIN [sys].[types] AS [t] ON [s].[user_type_id] = [t].[user_type_id]
+        """;
 
         if (schemaFilter != null)
         {
@@ -548,12 +548,12 @@ WHERE " + schemaFilter("OBJECT_SCHEMA_NAME([s].[object_id])");
 
         var builder = new StringBuilder(
             """
-SELECT
-    SCHEMA_NAME([t].[schema_id]) AS [schema],
-    [t].[name],
-    CAST([e].[value] AS nvarchar(MAX)) AS [comment],
-    'table' AS [type]
-"""
+            SELECT
+            SCHEMA_NAME([t].[schema_id]) AS [schema],
+            [t].[name],
+            CAST([e].[value] AS nvarchar(MAX)) AS [comment],
+            'table' AS [type]
+            """
         );
 
         if (supportsMemoryOptimizedTable)
@@ -567,12 +567,12 @@ SELECT
                 .AppendLine(",")
                 .Append(
                     """
-    [t].[temporal_type],
-    (SELECT [t2].[name] FROM [sys].[tables] AS t2 WHERE [t2].[object_id] = [t].[history_table_id]) AS [history_table_name],
-    (SELECT SCHEMA_NAME([t2].[schema_id]) FROM [sys].[tables] AS t2 WHERE [t2].[object_id] = [t].[history_table_id]) AS [history_table_schema],
-    (SELECT [c].[name] FROM [sys].[columns] as [c] WHERE [c].[object_id] = [t].[object_id] AND [c].[generated_always_type] = 1) as [period_start_column],
-    (SELECT [c].[name] FROM [sys].[columns] as [c] WHERE [c].[object_id] = [t].[object_id] AND [c].[generated_always_type] = 2) as [period_end_column]
-"""
+                    [t].[temporal_type],
+                    (SELECT [t2].[name] FROM [sys].[tables] AS t2 WHERE [t2].[object_id] = [t].[history_table_id]) AS [history_table_name],
+                    (SELECT SCHEMA_NAME([t2].[schema_id]) FROM [sys].[tables] AS t2 WHERE [t2].[object_id] = [t].[history_table_id]) AS [history_table_schema],
+                    (SELECT [c].[name] FROM [sys].[columns] as [c] WHERE [c].[object_id] = [t].[object_id] AND [c].[generated_always_type] = 1) as [period_start_column],
+                    (SELECT [c].[name] FROM [sys].[columns] as [c] WHERE [c].[object_id] = [t].[object_id] AND [c].[generated_always_type] = 2) as [period_end_column]
+                    """
                 );
         }
 
@@ -580,9 +580,9 @@ SELECT
             .AppendLine()
             .Append(
                 """
-FROM [sys].[tables] AS [t]
-LEFT JOIN [sys].[extended_properties] AS [e] ON [e].[major_id] = [t].[object_id] AND [e].[minor_id] = 0 AND [e].[class] = 1 AND [e].[name] = 'MS_Description'
-"""
+                FROM [sys].[tables] AS [t]
+                LEFT JOIN [sys].[extended_properties] AS [e] ON [e].[major_id] = [t].[object_id] AND [e].[minor_id] = 0 AND [e].[class] = 1 AND [e].[name] = 'MS_Description'
+                """
             );
 
         var tableFilterBuilder = new StringBuilder(
@@ -625,13 +625,13 @@ AND [t].[name] <> '{HistoryRepository.DefaultTableName}'
                 .AppendLine()
                 .Append(
                     """
-UNION
-SELECT
-    SCHEMA_NAME([v].[schema_id]) AS [schema],
-    [v].[name],
-    CAST([e].[value] AS nvarchar(MAX)) AS [comment],
-    'view' AS [type]
-"""
+                    UNION
+                    SELECT
+                    SCHEMA_NAME([v].[schema_id]) AS [schema],
+                    [v].[name],
+                    CAST([e].[value] AS nvarchar(MAX)) AS [comment],
+                    'view' AS [type]
+                    """
                 );
 
             if (supportsMemoryOptimizedTable)
@@ -645,27 +645,27 @@ SELECT
                     .AppendLine(",")
                     .Append(
                         """
-     1 AS [temporal_type],
-     NULL AS [history_table_name],
-     NULL AS [history_table_schema],
-     NULL AS [period_start_column],
-     NULL AS [period_end_column]
-"""
+                        1 AS [temporal_type],
+                        NULL AS [history_table_name],
+                        NULL AS [history_table_schema],
+                        NULL AS [period_start_column],
+                        NULL AS [period_end_column]
+                        """
                     );
             }
 
             builder.Append(
                 """
-FROM [sys].[views] AS [v]
-LEFT JOIN [sys].[extended_properties] AS [e] ON [e].[major_id] = [v].[object_id] AND [e].[minor_id] = 0 AND [e].[class] = 1 AND [e].[name] = 'MS_Description'
-"""
+                FROM [sys].[views] AS [v]
+                LEFT JOIN [sys].[extended_properties] AS [e] ON [e].[major_id] = [v].[object_id] AND [e].[minor_id] = 0 AND [e].[class] = 1 AND [e].[name] = 'MS_Description'
+                """
             );
 
             var viewFilterBuilder = new StringBuilder(
                 """
-[v].[is_ms_shipped] = 0
-AND [v].[is_date_correlation_view] = 0
-"""
+                [v].[is_ms_shipped] = 0
+                AND [v].[is_date_correlation_view] = 0
+                """
             );
 
             if (tableFilter != null)
@@ -825,13 +825,13 @@ FROM
             .AppendLine()
             .Append(
                 """
-) o
-JOIN [sys].[columns] AS [c] ON [o].[object_id] = [c].[object_id]
-LEFT JOIN [sys].[types] AS [tp] ON [c].[user_type_id] = [tp].[user_type_id]
-LEFT JOIN [sys].[extended_properties] AS [e] ON [e].[major_id] = [o].[object_id] AND [e].[minor_id] = [c].[column_id] AND [e].[class] = 1 AND [e].[name] = 'MS_Description'
-LEFT JOIN [sys].[computed_columns] AS [cc] ON [c].[object_id] = [cc].[object_id] AND [c].[column_id] = [cc].[column_id]
-LEFT JOIN [sys].[default_constraints] AS [dc] ON [c].[object_id] = [dc].[parent_object_id] AND [c].[column_id] = [dc].[parent_column_id]
-"""
+                ) o
+                JOIN [sys].[columns] AS [c] ON [o].[object_id] = [c].[object_id]
+                LEFT JOIN [sys].[types] AS [tp] ON [c].[user_type_id] = [tp].[user_type_id]
+                LEFT JOIN [sys].[extended_properties] AS [e] ON [e].[major_id] = [o].[object_id] AND [e].[minor_id] = [c].[column_id] AND [e].[class] = 1 AND [e].[name] = 'MS_Description'
+                LEFT JOIN [sys].[computed_columns] AS [cc] ON [c].[object_id] = [cc].[object_id] AND [c].[column_id] = [cc].[column_id]
+                LEFT JOIN [sys].[default_constraints] AS [dc] ON [c].[object_id] = [dc].[parent_object_id] AND [c].[column_id] = [dc].[parent_column_id]
+                """
             );
 
         if (SupportsTemporalTable())

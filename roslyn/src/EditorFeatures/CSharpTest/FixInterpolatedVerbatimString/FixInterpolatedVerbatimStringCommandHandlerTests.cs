@@ -127,19 +127,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
                 """
                 class C
                 {
-                    void M()
-                    {
-                        var v = @$[||]
-                    }
+                void M()
+                {
+                var v = @$[||]
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        var v = $@"[||]
-                    }
+                void M()
+                {
+                var v = $@"[||]
+                }
                 }
                 """
             );
@@ -152,10 +152,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
                 """
                 class C
                 {
-                    void M()
-                    {
-                        var v = $@[||]
-                    }
+                void M()
+                {
+                var v = $@[||]
+                }
                 }
                 """
             );
@@ -168,10 +168,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
                 """
                 class C
                 {
-                    void M()
-                    {
-                        var v = @[||]
-                    }
+                void M()
+                {
+                var v = @[||]
+                }
                 }
                 """
             );
@@ -184,10 +184,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
                 """
                 class C
                 {
-                    void M()
-                    {
-                        var v = $[||]
-                    }
+                void M()
+                {
+                var v = $[||]
+                }
                 }
                 """
             );
@@ -210,16 +210,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
                 """
                 class C
                 {
-                    void M()
-                    {
-                        var v = @$[||]
+                void M()
+                {
+                var v = @$[||]
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        var v = $@"[||]
+                void M()
+                {
+                var v = $@"[||]
                 """
             );
         }
@@ -231,7 +231,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
                 """
                 class C
                 {
-                    @$[||]
+                @$[||]
                 }
                 """
             );
@@ -244,10 +244,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
                 """
                 class C
                 {
-                    void M()
-                    {
-                        var v = // @$[||]
-                    }
+                void M()
+                {
+                var v = // @$[||]
+                }
                 }
                 """
             );
@@ -260,10 +260,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
                 """
                 class C
                 {
-                    void M()
-                    {
-                        var v = /* @$[||]
-                    }
+                void M()
+                {
+                var v = /* @$[||]
+                }
                 }
                 """
             );
@@ -276,10 +276,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
                 """
                 class C
                 {
-                    void M()
-                    {
-                        var v = "@$[||]
-                    }
+                void M()
+                {
+                var v = "@$[||]
+                }
                 }
                 """
             );
@@ -292,10 +292,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
                 """
                 class C
                 {
-                    void M()
-                    {
-                        var v = @"@$[||]
-                    }
+                void M()
+                {
+                var v = @"@$[||]
+                }
                 }
                 """
             );
@@ -308,10 +308,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
                 """
                 class C
                 {
-                    void M()
-                    {
-                        var v = $"@$[||]
-                    }
+                void M()
+                {
+                var v = $"@$[||]
+                }
                 }
                 """
             );
@@ -324,10 +324,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
                 """
                 class C
                 {
-                    void M()
-                    {
-                        var v = $@"@$[||]
-                    }
+                void M()
+                {
+                var v = $@"@$[||]
+                }
                 }
                 """
             );
@@ -340,10 +340,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
                 """
                 class C
                 {
-                    void M()
-                    {
-                        var v = @$"@$[||]
-                    }
+                void M()
+                {
+                var v = @$"@$[||]
+                }
                 }
                 """
             );
@@ -356,21 +356,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixInterpolatedVerbatim
                 """
                 class C
                 {
-                    void M()
-                    {
-                        var v = // a
-                                /* b */ @$[||] // c
-                    }
+                void M()
+                {
+                var v = // a
+                /* b */ @$[||] // c
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        var v = // a
-                                /* b */ $@"[||] // c
-                    }
+                void M()
+                {
+                var v = // a
+                /* b */ $@"[||] // c
+                }
                 }
                 """
             );

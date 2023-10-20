@@ -72,29 +72,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestSingleMethod()
         {
             var input = """
-                class Test
-                {
-                    int [||]Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            class Test
+            {
+            int [||]Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             var expected1 = """
-                class Test : MyBase
-                {
-                }
-                """;
+            class Test : MyBase
+            {
+            }
+            """;
             var expected2 = """
-                internal class MyBase
-                {
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            internal class MyBase
+            {
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             await new Test
             {
@@ -108,18 +108,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestErrorBaseMethod()
         {
             var input = """
-                class ErrorBase
-                {
-                }
+            class ErrorBase
+            {
+            }
 
-                class Test : ErrorBase
-                {
-                    int [||]Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            class Test : ErrorBase
+            {
+            int [||]Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
             await new Test { TestCode = input, FixedCode = input, }.RunAsync();
         }
 
@@ -127,14 +127,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestMiscellaneousFiles()
         {
             var input = """
-                class Test
-                {
-                    int [||]Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            class Test
+            {
+            int [||]Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             await new Test
             {
@@ -148,47 +148,47 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestPartialClass()
         {
             var input1 = """
-                partial class Test
-                {
-                    int [||]Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            partial class Test
+            {
+            int [||]Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
             var input2 = """
-                partial class Test
-                {
-                    int Method2()
-                    {
-                        return 5;
-                    }
-                }
-                """;
+            partial class Test
+            {
+            int Method2()
+            {
+            return 5;
+            }
+            }
+            """;
 
             var expected1 = """
-                partial class Test : MyBase
-                {
-                }
-                """;
+            partial class Test : MyBase
+            {
+            }
+            """;
             var expected2 = """
-                partial class Test
-                {
-                }
-                """;
+            partial class Test
+            {
+            }
+            """;
             var expected3 = """
-                internal class MyBase
-                {
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                    int Method2()
-                    {
-                        return 5;
-                    }
-                }
-                """;
+            internal class MyBase
+            {
+            int Method()
+            {
+            return 1 + 1;
+            }
+            int Method2()
+            {
+            return 5;
+            }
+            }
+            """;
 
             await new Test
             {
@@ -203,29 +203,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestRecord_Method()
         {
             var input = """
-                record R(string S)
-                {
-                    void $$M()
-                    {
-                    }
-                }
-                """;
+            record R(string S)
+            {
+            void $$M()
+            {
+            }
+            }
+            """;
 
             var expected1 = """
-                record R(string S) : MyBase
-                {
-                }
-                """;
+            record R(string S) : MyBase
+            {
+            }
+            """;
 
             var expected2 = """
-                internal record MyBase
-                {
-                    void M()
-                    {
-                    }
-                }
+            internal record MyBase
+            {
+            void M()
+            {
+            }
+            }
 
-                """;
+            """;
 
             await new Test
             {
@@ -241,28 +241,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestClass_Method()
         {
             var input = """
-                class R(string S)
-                {
-                    void $$M()
-                    {
-                    }
-                }
-                """;
+            class R(string S)
+            {
+            void $$M()
+            {
+            }
+            }
+            """;
 
             var expected1 = """
-                class R(string S) : MyBase
-                {
-                }
-                """;
+            class R(string S) : MyBase
+            {
+            }
+            """;
 
             var expected2 = """
-                internal class MyBase
-                {
-                    void M()
-                    {
-                    }
-                }
-                """;
+            internal class MyBase
+            {
+            void M()
+            {
+            }
+            }
+            """;
 
             await new Test
             {
@@ -278,25 +278,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestRecord_Property()
         {
             var input = """
-                record R
-                {
-                    public string $$S { get; set; }
-                }
-                """;
+            record R
+            {
+            public string $$S { get; set; }
+            }
+            """;
 
             var expected1 = """
-                record R : MyBase
-                {
-                }
-                """;
+            record R : MyBase
+            {
+            }
+            """;
 
             var expected2 = """
-                internal record MyBase
-                {
-                    public string S { get; set; }
-                }
+            internal record MyBase
+            {
+            public string S { get; set; }
+            }
 
-                """;
+            """;
 
             await new Test
             {
@@ -312,25 +312,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestRecord_PropertyAndImplicitField()
         {
             var input = """
-                record R(string S)
-                {
-                    public string $$S { get; set; } = S;
-                }
-                """;
+            record R(string S)
+            {
+            public string $$S { get; set; } = S;
+            }
+            """;
 
             var expected1 = """
-                record R(string S) : MyBase(S)
-                {
-                }
-                """;
+            record R(string S) : MyBase(S)
+            {
+            }
+            """;
 
             var expected2 = """
-                record MyBase(string S)
-                {
-                    public string S { get; set; } = S;
-                }
+            record MyBase(string S)
+            {
+            public string S { get; set; } = S;
+            }
 
-                """;
+            """;
 
             await new Test
             {
@@ -345,24 +345,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestClass_PropertyAndImplicitField()
         {
             var input = """
-                class R(string S)
-                {
-                    public string $$S { get; set; } = S;
-                }
-                """;
+            class R(string S)
+            {
+            public string $$S { get; set; } = S;
+            }
+            """;
 
             var expected1 = """
-                class R(string S) : MyBase(S)
-                {
-                }
-                """;
+            class R(string S) : MyBase(S)
+            {
+            }
+            """;
 
             var expected2 = """
-                class MyBase(string S)
-                {
-                    public string S { get; set; } = S;
-                }
-                """;
+            class MyBase(string S)
+            {
+            public string S { get; set; } = S;
+            }
+            """;
 
             await new Test
             {
@@ -378,10 +378,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         {
             // https://github.com/dotnet/roslyn/issues/62415 to make this scenario work
             var input = """
-                record R(string $$S)
-                {
-                }
-                """;
+            record R(string $$S)
+            {
+            }
+            """;
 
             await new Test
             {
@@ -396,10 +396,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestClassParam1()
         {
             var input = """
-                class R(string $$S)
-                {
-                }
-                """;
+            class R(string $$S)
+            {
+            }
+            """;
 
             await new Test
             {
@@ -414,8 +414,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestClassParam2()
         {
             var input = """
-                class R(string $$S);
-                """;
+            class R(string $$S);
+            """;
 
             await new Test
             {
@@ -430,10 +430,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestStructParam1()
         {
             var input = """
-                struct R(string $$S)
-                {
-                }
-                """;
+            struct R(string $$S)
+            {
+            }
+            """;
 
             await new Test
             {
@@ -448,8 +448,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestStructParam2()
         {
             var input = """
-                struct R(string $$S);
-                """;
+            struct R(string $$S);
+            """;
 
             await new Test
             {
@@ -464,13 +464,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestRecordStruct()
         {
             var input = """
-                record struct R(string S)
-                {
-                    void $$M()
-                    {
-                    }
-                }
-                """;
+            record struct R(string S)
+            {
+            void $$M()
+            {
+            }
+            }
+            """;
 
             await new Test
             {
@@ -485,13 +485,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestStruct()
         {
             var input = """
-                struct R(string S)
-                {
-                    void $$M()
-                    {
-                    }
-                }
-                """;
+            struct R(string S)
+            {
+            void $$M()
+            {
+            }
+            }
+            """;
 
             await new Test
             {
@@ -506,38 +506,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestInNamespace()
         {
             var input = """
-                namespace MyNamespace
-                {
-                    class Test
-                    {
-                        int [||]Method()
-                        {
-                            return 1 + 1;
-                        }
-                    }
-                }
-                """;
+            namespace MyNamespace
+            {
+            class Test
+            {
+            int [||]Method()
+            {
+            return 1 + 1;
+            }
+            }
+            }
+            """;
 
             var expected1 = """
-                namespace MyNamespace
-                {
-                    class Test : MyBase
-                    {
-                    }
-                }
-                """;
+            namespace MyNamespace
+            {
+            class Test : MyBase
+            {
+            }
+            }
+            """;
             var expected2 = """
-                namespace MyNamespace
-                {
-                    internal class MyBase
-                    {
-                        int Method()
-                        {
-                            return 1 + 1;
-                        }
-                    }
-                }
-                """;
+            namespace MyNamespace
+            {
+            internal class MyBase
+            {
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            }
+            """;
 
             await new Test
             {
@@ -551,37 +551,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestInNamespace_FileScopedNamespace1()
         {
             var input = """
-                namespace MyNamespace
-                {
-                    class Test
-                    {
-                        int [||]Method()
-                        {
-                            return 1 + 1;
-                        }
-                    }
-                }
-                """;
+            namespace MyNamespace
+            {
+            class Test
+            {
+            int [||]Method()
+            {
+            return 1 + 1;
+            }
+            }
+            }
+            """;
 
             var expected1 = """
-                namespace MyNamespace
-                {
-                    class Test : MyBase
-                    {
-                    }
-                }
-                """;
+            namespace MyNamespace
+            {
+            class Test : MyBase
+            {
+            }
+            }
+            """;
             var expected2 = """
-                namespace MyNamespace;
+            namespace MyNamespace;
 
-                internal class MyBase
-                {
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            internal class MyBase
+            {
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             await new Test
             {
@@ -604,38 +604,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestInNamespace_FileScopedNamespace2()
         {
             var input = """
-                namespace MyNamespace
-                {
-                    class Test
-                    {
-                        int [||]Method()
-                        {
-                            return 1 + 1;
-                        }
-                    }
-                }
-                """;
+            namespace MyNamespace
+            {
+            class Test
+            {
+            int [||]Method()
+            {
+            return 1 + 1;
+            }
+            }
+            }
+            """;
 
             var expected1 = """
-                namespace MyNamespace
-                {
-                    class Test : MyBase
-                    {
-                    }
-                }
-                """;
+            namespace MyNamespace
+            {
+            class Test : MyBase
+            {
+            }
+            }
+            """;
             var expected2 = """
-                namespace MyNamespace
-                {
-                    internal class MyBase
-                    {
-                        int Method()
-                        {
-                            return 1 + 1;
-                        }
-                    }
-                }
-                """;
+            namespace MyNamespace
+            {
+            internal class MyBase
+            {
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            }
+            """;
 
             await new Test
             {
@@ -658,38 +658,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestInNamespace_FileScopedNamespace3()
         {
             var input = """
-                namespace MyNamespace
-                {
-                    class Test
-                    {
-                        int [||]Method()
-                        {
-                            return 1 + 1;
-                        }
-                    }
-                }
-                """;
+            namespace MyNamespace
+            {
+            class Test
+            {
+            int [||]Method()
+            {
+            return 1 + 1;
+            }
+            }
+            }
+            """;
 
             var expected1 = """
-                namespace MyNamespace
-                {
-                    class Test : MyBase
-                    {
-                    }
-                }
-                """;
+            namespace MyNamespace
+            {
+            class Test : MyBase
+            {
+            }
+            }
+            """;
             var expected2 = """
-                namespace MyNamespace
-                {
-                    internal class MyBase
-                    {
-                        int Method()
-                        {
-                            return 1 + 1;
-                        }
-                    }
-                }
-                """;
+            namespace MyNamespace
+            {
+            internal class MyBase
+            {
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            }
+            """;
 
             await new Test
             {
@@ -712,29 +712,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestAccessibility()
         {
             var input = """
-                public class Test
-                {
-                    int [||]Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            public class Test
+            {
+            int [||]Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             var expected1 = """
-                public class Test : MyBase
-                {
-                }
-                """;
+            public class Test : MyBase
+            {
+            }
+            """;
             var expected2 = """
-                public class MyBase
-                {
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            public class MyBase
+            {
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             await new Test
             {
@@ -748,29 +748,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestEvent()
         {
             var input = """
-                using System;
+            using System;
 
-                class Test
-                {
-                    private event EventHandler [||]Event1;
-                }
-                """;
+            class Test
+            {
+            private event EventHandler [||]Event1;
+            }
+            """;
 
             var expected1 = """
-                using System;
+            using System;
 
-                class Test : MyBase
-                {
-                }
-                """;
+            class Test : MyBase
+            {
+            }
+            """;
             var expected2 = """
-                using System;
+            using System;
 
-                internal class MyBase
-                {
-                    private event EventHandler Event1;
-                }
-                """;
+            internal class MyBase
+            {
+            private event EventHandler Event1;
+            }
+            """;
 
             await new Test
             {
@@ -784,23 +784,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestProperty()
         {
             var input = """
-                class Test
-                {
-                    int [||]MyProperty { get; set; }
-                }
-                """;
+            class Test
+            {
+            int [||]MyProperty { get; set; }
+            }
+            """;
 
             var expected1 = """
-                class Test : MyBase
-                {
-                }
-                """;
+            class Test : MyBase
+            {
+            }
+            """;
             var expected2 = """
-                internal class MyBase
-                {
-                    int MyProperty { get; set; }
-                }
-                """;
+            internal class MyBase
+            {
+            int MyProperty { get; set; }
+            }
+            """;
 
             await new Test
             {
@@ -814,23 +814,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestField()
         {
             var input = """
-                class Test
-                {
-                    int [||]MyField;
-                }
-                """;
+            class Test
+            {
+            int [||]MyField;
+            }
+            """;
 
             var expected1 = """
-                class Test : MyBase
-                {
-                }
-                """;
+            class Test : MyBase
+            {
+            }
+            """;
             var expected2 = """
-                internal class MyBase
-                {
-                    int MyField;
-                }
-                """;
+            internal class MyBase
+            {
+            int MyField;
+            }
+            """;
 
             await new Test
             {
@@ -844,23 +844,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestFieldSelectInKeywords()
         {
             var input = """
-                class Test
-                {
-                    priva[||]te int MyField;
-                }
-                """;
+            class Test
+            {
+            priva[||]te int MyField;
+            }
+            """;
 
             var expected1 = """
-                class Test : MyBase
-                {
-                }
-                """;
+            class Test : MyBase
+            {
+            }
+            """;
             var expected2 = """
-                internal class MyBase
-                {
-                    private int MyField;
-                }
-                """;
+            internal class MyBase
+            {
+            private int MyField;
+            }
+            """;
 
             await new Test
             {
@@ -874,23 +874,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestFieldSelectAfterSemicolon()
         {
             var input = """
-                class Test
-                {
-                    private int MyField;[||]
-                }
-                """;
+            class Test
+            {
+            private int MyField;[||]
+            }
+            """;
 
             var expected1 = """
-                class Test : MyBase
-                {
-                }
-                """;
+            class Test : MyBase
+            {
+            }
+            """;
             var expected2 = """
-                internal class MyBase
-                {
-                    private int MyField;
-                }
-                """;
+            internal class MyBase
+            {
+            private int MyField;
+            }
+            """;
 
             await new Test
             {
@@ -904,23 +904,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestFieldSelectEntireDeclaration()
         {
             var input = """
-                class Test
-                {
-                    [|private int MyField;|]
-                }
-                """;
+            class Test
+            {
+            [|private int MyField;|]
+            }
+            """;
 
             var expected1 = """
-                class Test : MyBase
-                {
-                }
-                """;
+            class Test : MyBase
+            {
+            }
+            """;
             var expected2 = """
-                internal class MyBase
-                {
-                    private int MyField;
-                }
-                """;
+            internal class MyBase
+            {
+            private int MyField;
+            }
+            """;
 
             await new Test
             {
@@ -934,24 +934,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestFieldSelectMultipleVariables1()
         {
             var input = """
-                class Test
-                {
-                    [|private int MyField1, MyField2;|]
-                }
-                """;
+            class Test
+            {
+            [|private int MyField1, MyField2;|]
+            }
+            """;
 
             var expected1 = """
-                class Test : MyBase
-                {
-                }
-                """;
+            class Test : MyBase
+            {
+            }
+            """;
             var expected2 = """
-                internal class MyBase
-                {
-                    private int MyField1;
-                    private int MyField2;
-                }
-                """;
+            internal class MyBase
+            {
+            private int MyField1;
+            private int MyField2;
+            }
+            """;
 
             await new Test
             {
@@ -965,24 +965,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestFieldSelectMultipleVariables2()
         {
             var input = """
-                class Test
-                {
-                    private int MyField1, [|MyField2;|]
-                }
-                """;
+            class Test
+            {
+            private int MyField1, [|MyField2;|]
+            }
+            """;
 
             var expected1 = """
-                class Test : MyBase
-                {
-                    private int MyField1;
-                }
-                """;
+            class Test : MyBase
+            {
+            private int MyField1;
+            }
+            """;
             var expected2 = """
-                internal class MyBase
-                {
-                    private int MyField2;
-                }
-                """;
+            internal class MyBase
+            {
+            private int MyField2;
+            }
+            """;
 
             await new Test
             {
@@ -996,38 +996,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestFileHeader_FromExistingFile()
         {
             var input = """
-                // this is my document header
-                // that should be copied over
+            // this is my document header
+            // that should be copied over
 
-                class Test
-                {
-                    int [||]Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            class Test
+            {
+            int [||]Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             var expected1 = """
-                // this is my document header
-                // that should be copied over
+            // this is my document header
+            // that should be copied over
 
-                class Test : MyBase
-                {
-                }
-                """;
+            class Test : MyBase
+            {
+            }
+            """;
             var expected2 = """
-                // this is my document header
-                // that should be copied over
+            // this is my document header
+            // that should be copied over
 
-                internal class MyBase
-                {
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            internal class MyBase
+            {
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             await new Test
             {
@@ -1041,37 +1041,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestFileHeader_FromOption()
         {
             var input = """
-                // this is my document header
-                // that should be ignored
+            // this is my document header
+            // that should be ignored
 
-                class Test
-                {
-                    int [||]Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            class Test
+            {
+            int [||]Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             var expected1 = """
-                // this is my document header
-                // that should be ignored
+            // this is my document header
+            // that should be ignored
 
-                class Test : MyBase
-                {
-                }
-                """;
+            class Test : MyBase
+            {
+            }
+            """;
             var expected2 = """
-                // this is my real document header
+            // this is my real document header
 
-                internal class MyBase
-                {
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            internal class MyBase
+            {
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             await new Test
             {
@@ -1089,52 +1089,52 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestUsingsInsideNamespace()
         {
             var input = """
-                // this is my document header
+            // this is my document header
 
-                using System;
-                using System.Collections.Generic;
+            using System;
+            using System.Collections.Generic;
 
-                namespace ConsoleApp185
-                {
-                    class Program
-                    {
-                        static void [|Main|](string[] args)
-                        {
-                            Console.WriteLine(new List<int>());
-                        }
-                    }
-                }
-                """;
+            namespace ConsoleApp185
+            {
+            class Program
+            {
+            static void [|Main|](string[] args)
+            {
+            Console.WriteLine(new List<int>());
+            }
+            }
+            }
+            """;
 
             var expected1 = """
-                // this is my document header
+            // this is my document header
 
-                using System;
-                using System.Collections.Generic;
+            using System;
+            using System.Collections.Generic;
 
-                namespace ConsoleApp185
-                {
-                    class Program : MyBase
-                    {
-                    }
-                }
-                """;
+            namespace ConsoleApp185
+            {
+            class Program : MyBase
+            {
+            }
+            }
+            """;
 
             var expected2 = """
-                // this is my real document header
+            // this is my real document header
 
-                namespace ConsoleApp185;
-                using System;
-                using System.Collections.Generic;
+            namespace ConsoleApp185;
+            using System;
+            using System.Collections.Generic;
 
-                internal class MyBase
-                {
-                    static void Main(string[] args)
-                    {
-                        Console.WriteLine(new List<int>());
-                    }
-                }
-                """;
+            internal class MyBase
+            {
+            static void Main(string[] args)
+            {
+            Console.WriteLine(new List<int>());
+            }
+            }
+            """;
 
             await new Test
             {
@@ -1162,54 +1162,54 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestUsingsInsideNamespace_FileScopedNamespace()
         {
             var input = """
-                // this is my document header
+            // this is my document header
 
-                using System;
-                using System.Collections.Generic;
+            using System;
+            using System.Collections.Generic;
 
-                namespace ConsoleApp185
-                {
-                    class Program
-                    {
-                        static void [|Main|](string[] args)
-                        {
-                            Console.WriteLine(new List<int>());
-                        }
-                    }
-                }
-                """;
+            namespace ConsoleApp185
+            {
+            class Program
+            {
+            static void [|Main|](string[] args)
+            {
+            Console.WriteLine(new List<int>());
+            }
+            }
+            }
+            """;
 
             var expected1 = """
-                // this is my document header
+            // this is my document header
 
-                using System;
-                using System.Collections.Generic;
+            using System;
+            using System.Collections.Generic;
 
-                namespace ConsoleApp185
-                {
-                    class Program : MyBase
-                    {
-                    }
-                }
-                """;
+            namespace ConsoleApp185
+            {
+            class Program : MyBase
+            {
+            }
+            }
+            """;
 
             var expected2 = """
-                // this is my real document header
+            // this is my real document header
 
-                namespace ConsoleApp185
-                {
-                    using System;
-                    using System.Collections.Generic;
+            namespace ConsoleApp185
+            {
+            using System;
+            using System.Collections.Generic;
 
-                    internal class MyBase
-                    {
-                        static void Main(string[] args)
-                        {
-                            Console.WriteLine(new List<int>());
-                        }
-                    }
-                }
-                """;
+            internal class MyBase
+            {
+            static void Main(string[] args)
+            {
+            Console.WriteLine(new List<int>());
+            }
+            }
+            }
+            """;
 
             await new Test
             {
@@ -1232,39 +1232,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestUsingsInsideNamespace_NoNamespace()
         {
             var input = """
-                using System;
-                using System.Collections.Generic;
+            using System;
+            using System.Collections.Generic;
 
-                class Program
-                {
-                    static void [|Main|](string[] args)
-                    {
-                        Console.WriteLine(new List<int>());
-                    }
-                }
-                """;
+            class Program
+            {
+            static void [|Main|](string[] args)
+            {
+            Console.WriteLine(new List<int>());
+            }
+            }
+            """;
 
             var expected1 = """
-                using System;
-                using System.Collections.Generic;
+            using System;
+            using System.Collections.Generic;
 
-                class Program : MyBase
-                {
-                }
-                """;
+            class Program : MyBase
+            {
+            }
+            """;
 
             var expected2 = """
-                using System;
-                using System.Collections.Generic;
+            using System;
+            using System.Collections.Generic;
 
-                internal class MyBase
-                {
-                    static void Main(string[] args)
-                    {
-                        Console.WriteLine(new List<int>());
-                    }
-                }
-                """;
+            internal class MyBase
+            {
+            static void Main(string[] args)
+            {
+            Console.WriteLine(new List<int>());
+            }
+            }
+            """;
 
             await new Test
             {
@@ -1286,54 +1286,54 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestUsingsInsideNamespace_MultipleNamespaces()
         {
             var input = """
-                using System;
-                using System.Collections.Generic;
+            using System;
+            using System.Collections.Generic;
 
-                namespace N1
-                {
-                    namespace N2
-                    {
-                        class Program
-                        {
-                            static void [|Main|](string[] args)
-                            {
-                                Console.WriteLine(new List<int>());
-                            }
-                        }
-                    }
-                }
-                """;
+            namespace N1
+            {
+            namespace N2
+            {
+            class Program
+            {
+            static void [|Main|](string[] args)
+            {
+            Console.WriteLine(new List<int>());
+            }
+            }
+            }
+            }
+            """;
 
             var expected1 = """
-                using System;
-                using System.Collections.Generic;
+            using System;
+            using System.Collections.Generic;
 
-                namespace N1
-                {
-                    namespace N2
-                    {
-                        class Program : MyBase
-                        {
-                        }
-                    }
-                }
-                """;
+            namespace N1
+            {
+            namespace N2
+            {
+            class Program : MyBase
+            {
+            }
+            }
+            }
+            """;
 
             var expected2 = """
-                namespace N1.N2
-                {
-                    using System;
-                    using System.Collections.Generic;
+            namespace N1.N2
+            {
+            using System;
+            using System.Collections.Generic;
 
-                    internal class MyBase
-                    {
-                        static void Main(string[] args)
-                        {
-                            Console.WriteLine(new List<int>());
-                        }
-                    }
-                }
-                """;
+            internal class MyBase
+            {
+            static void Main(string[] args)
+            {
+            Console.WriteLine(new List<int>());
+            }
+            }
+            }
+            """;
 
             await new Test
             {
@@ -1355,39 +1355,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestWithInterface()
         {
             var input = """
-                interface ITest
-                {
-                    int Method();
-                }
+            interface ITest
+            {
+            int Method();
+            }
 
-                class Test : ITest
-                {
-                    public int [||]Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            class Test : ITest
+            {
+            public int [||]Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             var expected1 = """
-                interface ITest
-                {
-                    int Method();
-                }
+            interface ITest
+            {
+            int Method();
+            }
 
-                class Test : MyBase, ITest
-                {
-                }
-                """;
+            class Test : MyBase, ITest
+            {
+            }
+            """;
             var expected2 = """
-                internal class MyBase
-                {
-                    public int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            internal class MyBase
+            {
+            public int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             await new Test
             {
@@ -1401,40 +1401,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestRegion()
         {
             var input = """
-                class Test
-                {
-                    #region MyRegion
-                    int [||]Method()
-                    {
-                        return 1 + 1;
-                    }
+            class Test
+            {
+            #region MyRegion
+            int [||]Method()
+            {
+            return 1 + 1;
+            }
 
-                    void OtherMethiod() { }
-                    #endregion
-                }
-                """;
+            void OtherMethiod() { }
+            #endregion
+            }
+            """;
 
             var expected1 = """
-                class Test : MyBase
-                {
+            class Test : MyBase
+            {
 
-                    #region MyRegion
+            #region MyRegion
 
-                    void OtherMethiod() { }
-                    #endregion
-                }
-                """;
+            void OtherMethiod() { }
+            #endregion
+            }
+            """;
             var expected2 = """
-                internal class MyBase
-                {
-                    #region MyRegion
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                    #endregion
-                }
-                """;
+            internal class MyBase
+            {
+            #region MyRegion
+            int Method()
+            {
+            return 1 + 1;
+            }
+            #endregion
+            }
+            """;
 
             await new Test
             {
@@ -1448,30 +1448,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestMakeAbstract_SingleMethod()
         {
             var input = """
-                class Test
-                {
-                    public int [||]Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            class Test
+            {
+            public int [||]Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             var expected1 = """
-                class Test : MyBase
-                {
-                    public override int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            class Test : MyBase
+            {
+            public override int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
             var expected2 = """
-                internal abstract class MyBase
-                {
-                    public abstract int Method();
-                }
-                """;
+            internal abstract class MyBase
+            {
+            public abstract int Method();
+            }
+            """;
 
             await new Test
             {
@@ -1486,38 +1486,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestMakeAbstract_MultipleMethods()
         {
             var input = """
-                class Test
-                {
-                    public int [||]Method()
-                    {
-                        return 1 + 1;
-                    }
+            class Test
+            {
+            public int [||]Method()
+            {
+            return 1 + 1;
+            }
 
-                    public int Method2() => 2;
-                    public int Method3() => 3;
-                }
-                """;
+            public int Method2() => 2;
+            public int Method3() => 3;
+            }
+            """;
 
             var expected1 = """
-                class Test : MyBase
-                {
-                    public override int Method()
-                    {
-                        return 1 + 1;
-                    }
+            class Test : MyBase
+            {
+            public override int Method()
+            {
+            return 1 + 1;
+            }
 
-                    public override int Method2() => 2;
-                    public override int Method3() => 3;
-                }
-                """;
+            public override int Method2() => 2;
+            public override int Method3() => 3;
+            }
+            """;
             var expected2 = """
-                internal abstract class MyBase
-                {
-                    public abstract int Method();
-                    public abstract int Method2();
-                    public abstract int Method3();
-                }
-                """;
+            internal abstract class MyBase
+            {
+            public abstract int Method();
+            public abstract int Method2();
+            public abstract int Method3();
+            }
+            """;
 
             await new Test
             {
@@ -1532,33 +1532,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestMultipleMethods()
         {
             var input = """
-                class Test
-                {
-                    int [||]Method()
-                    {
-                        return Method2() + 1;
-                    }
+            class Test
+            {
+            int [||]Method()
+            {
+            return Method2() + 1;
+            }
 
-                    int Method2() => 1;
-                }
-                """;
+            int Method2() => 1;
+            }
+            """;
 
             var expected1 = """
-                class Test : MyBase
-                {
-                }
-                """;
+            class Test : MyBase
+            {
+            }
+            """;
             var expected2 = """
-                internal class MyBase
-                {
-                    int Method()
-                    {
-                        return Method2() + 1;
-                    }
+            internal class MyBase
+            {
+            int Method()
+            {
+            return Method2() + 1;
+            }
 
-                    int Method2() => 1;
-                }
-                """;
+            int Method2() => 1;
+            }
+            """;
 
             await new Test
             {
@@ -1573,33 +1573,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestMultipleMethods_SomeSelected()
         {
             var input = """
-                class Test
-                {
-                    int [||]Method()
-                    {
-                        return Method2() + 1;
-                    }
+            class Test
+            {
+            int [||]Method()
+            {
+            return Method2() + 1;
+            }
 
-                    int Method2() => 1;
-                }
-                """;
+            int Method2() => 1;
+            }
+            """;
 
             var expected1 = """
-                class Test : MyBase
-                {
-                    int Method()
-                    {
-                        return {|CS0122:Method2|}() + 1;
-                    }
-                }
-                """;
+            class Test : MyBase
+            {
+            int Method()
+            {
+            return {|CS0122:Method2|}() + 1;
+            }
+            }
+            """;
             var expected2 = """
-                internal class MyBase
-                {
+            internal class MyBase
+            {
 
-                    int Method2() => 1;
-                }
-                """;
+            int Method2() => 1;
+            }
+            """;
 
             await new Test
             {
@@ -1614,35 +1614,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestSelection_CompleteMethodAndComments()
         {
             var input = """
-                class Test
-                {
-                    [|/// <summary>
-                    /// this is a test method
-                    /// </summary>
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }|]
-                }
-                """;
+            class Test
+            {
+            [|/// <summary>
+            /// this is a test method
+            /// </summary>
+            int Method()
+            {
+            return 1 + 1;
+            }|]
+            }
+            """;
 
             var expected1 = """
-                class Test : MyBase
-                {
-                }
-                """;
+            class Test : MyBase
+            {
+            }
+            """;
             var expected2 = """
-                internal class MyBase
-                {
-                    /// <summary>
-                    /// this is a test method
-                    /// </summary>
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            internal class MyBase
+            {
+            /// <summary>
+            /// this is a test method
+            /// </summary>
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             await new Test
             {
@@ -1656,35 +1656,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestSelection_PartialMethodAndComments()
         {
             var input = """
-                class Test
-                {
-                    [|/// <summary>
-                    /// this is a test method
-                    /// </summary>
-                    int Method()
-                    {|]
-                        return 1 + 1;
-                    }
-                }
-                """;
+            class Test
+            {
+            [|/// <summary>
+            /// this is a test method
+            /// </summary>
+            int Method()
+            {|]
+            return 1 + 1;
+            }
+            }
+            """;
 
             var expected1 = """
-                class Test : MyBase
-                {
-                }
-                """;
+            class Test : MyBase
+            {
+            }
+            """;
             var expected2 = """
-                internal class MyBase
-                {
-                    /// <summary>
-                    /// this is a test method
-                    /// </summary>
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            internal class MyBase
+            {
+            /// <summary>
+            /// this is a test method
+            /// </summary>
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             await new Test
             {
@@ -1698,35 +1698,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestSelection_PartialMethodAndComments2()
         {
             var input = """
-                class Test
-                {
-                    /// <summary>
-                    /// [|this is a test method
-                    /// </summary>
-                    int Method()
-                    {|]
-                        return 1 + 1;
-                    }
-                }
-                """;
+            class Test
+            {
+            /// <summary>
+            /// [|this is a test method
+            /// </summary>
+            int Method()
+            {|]
+            return 1 + 1;
+            }
+            }
+            """;
 
             var expected1 = """
-                class Test : MyBase
-                {
-                }
-                """;
+            class Test : MyBase
+            {
+            }
+            """;
             var expected2 = """
-                internal class MyBase
-                {
-                    /// <summary>
-                    /// this is a test method
-                    /// </summary>
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            internal class MyBase
+            {
+            /// <summary>
+            /// this is a test method
+            /// </summary>
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             await new Test
             {
@@ -1740,35 +1740,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestSelection_PartialMethodAndComments3()
         {
             var input = """
-                class Test
-                {
-                    /// <summary>
-                    /// [|this is a test method
-                    /// </summary>
-                    int Method()|]
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            class Test
+            {
+            /// <summary>
+            /// [|this is a test method
+            /// </summary>
+            int Method()|]
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             var expected1 = """
-                class Test : MyBase
-                {
-                }
-                """;
+            class Test : MyBase
+            {
+            }
+            """;
             var expected2 = """
-                internal class MyBase
-                {
-                    /// <summary>
-                    /// this is a test method
-                    /// </summary>
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            internal class MyBase
+            {
+            /// <summary>
+            /// this is a test method
+            /// </summary>
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             await new Test
             {
@@ -1782,45 +1782,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestAttributes()
         {
             var input = """
-                using System;
+            using System;
 
-                class TestAttribute : Attribute { }
+            class TestAttribute : Attribute { }
 
-                class Test
-                {
-                    /// <summary>
-                    /// this is a test method
-                    /// </summary>
-                    [||][TestAttribute]
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            class Test
+            {
+            /// <summary>
+            /// this is a test method
+            /// </summary>
+            [||][TestAttribute]
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             var expected1 = """
-                using System;
+            using System;
 
-                class TestAttribute : Attribute { }
+            class TestAttribute : Attribute { }
 
-                class Test : MyBase
-                {
-                }
-                """;
+            class Test : MyBase
+            {
+            }
+            """;
             var expected2 = """
-                internal class MyBase
-                {
-                    /// <summary>
-                    /// this is a test method
-                    /// </summary>
-                    [TestAttribute]
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            internal class MyBase
+            {
+            /// <summary>
+            /// this is a test method
+            /// </summary>
+            [TestAttribute]
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             await new Test
             {
@@ -1834,49 +1834,49 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestAttributes2()
         {
             var input = """
-                using System;
+            using System;
 
-                class TestAttribute : Attribute { }
-                class TestAttribute2 : Attribute { }
+            class TestAttribute : Attribute { }
+            class TestAttribute2 : Attribute { }
 
-                class Test
-                {
-                    /// <summary>
-                    /// this is a test method
-                    /// </summary>
-                    [||][TestAttribute]
-                    [TestAttribute2]
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            class Test
+            {
+            /// <summary>
+            /// this is a test method
+            /// </summary>
+            [||][TestAttribute]
+            [TestAttribute2]
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             var expected1 = """
-                using System;
+            using System;
 
-                class TestAttribute : Attribute { }
-                class TestAttribute2 : Attribute { }
+            class TestAttribute : Attribute { }
+            class TestAttribute2 : Attribute { }
 
-                class Test : MyBase
-                {
-                }
-                """;
+            class Test : MyBase
+            {
+            }
+            """;
             var expected2 = """
-                internal class MyBase
-                {
-                    /// <summary>
-                    /// this is a test method
-                    /// </summary>
-                    [TestAttribute]
-                    [TestAttribute2]
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            internal class MyBase
+            {
+            /// <summary>
+            /// this is a test method
+            /// </summary>
+            [TestAttribute]
+            [TestAttribute2]
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             await new Test
             {
@@ -1890,50 +1890,50 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestAttributes3()
         {
             var input = """
-                using System;
+            using System;
 
-                class TestAttribute : Attribute { }
-                class TestAttribute2 : Attribute { }
+            class TestAttribute : Attribute { }
+            class TestAttribute2 : Attribute { }
 
-                class Test
-                {
-                    /// <summary>
-                    /// this is a test method
-                    /// </summary>
-                    [TestAttribute]
-                    [||][TestAttribute2]
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            class Test
+            {
+            /// <summary>
+            /// this is a test method
+            /// </summary>
+            [TestAttribute]
+            [||][TestAttribute2]
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             var expected1 = """
-                using System;
+            using System;
 
-                class TestAttribute : Attribute { }
+            class TestAttribute : Attribute { }
 
-                class Test : MyBase
-                {
-                }
-                """;
+            class Test : MyBase
+            {
+            }
+            """;
             var expected2 = """
-                using System;
+            using System;
 
-                internal class MyBase
-                {
-                    /// <summary>
-                    /// this is a test method
-                    /// </summary>
-                    [TestAttribute]
-                    [TestAttribute2]
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            internal class MyBase
+            {
+            /// <summary>
+            /// this is a test method
+            /// </summary>
+            [TestAttribute]
+            [TestAttribute2]
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             await new Test
             {
@@ -1946,48 +1946,48 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestAttributes4()
         {
             var input = """
-                using System;
+            using System;
 
-                class TestAttribute : Attribute { }
-                class TestAttribute2 : Attribute { }
+            class TestAttribute : Attribute { }
+            class TestAttribute2 : Attribute { }
 
-                class Test
-                {
-                    /// <summary>
-                    /// this is a test method
-                    /// </summary>
-                    [TestAttribute]
-                    [TestAttribute2][||]
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            class Test
+            {
+            /// <summary>
+            /// this is a test method
+            /// </summary>
+            [TestAttribute]
+            [TestAttribute2][||]
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             var expected1 = """
-                using System;
+            using System;
 
-                class TestAttribute : Attribute { }
+            class TestAttribute : Attribute { }
 
-                class Test : MyBase
-                {
-                }
-                """;
+            class Test : MyBase
+            {
+            }
+            """;
             var expected2 = """
-                internal class MyBase
-                {
-                    /// <summary>
-                    /// this is a test method
-                    /// </summary>
-                    [TestAttribute]
-                    [TestAttribute2]
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            internal class MyBase
+            {
+            /// <summary>
+            /// this is a test method
+            /// </summary>
+            [TestAttribute]
+            [TestAttribute2]
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             await new Test
             {
@@ -2000,25 +2000,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestSameFile()
         {
             var input = """
-                class Test
-                {
-                    void Method[||]()
-                    {
-                    }
-                }
-                """;
+            class Test
+            {
+            void Method[||]()
+            {
+            }
+            }
+            """;
             var expected = """
-                internal class MyBase
-                {
-                    void Method()
-                    {
-                    }
-                }
+            internal class MyBase
+            {
+            void Method()
+            {
+            }
+            }
 
-                class Test : MyBase
-                {
-                }
-                """;
+            class Test : MyBase
+            {
+            }
+            """;
 
             await new Test
             {
@@ -2032,29 +2032,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestClassDeclaration()
         {
             var input = """
-                class Test[||]
-                {
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            class Test[||]
+            {
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             var expected1 = """
-                class Test : MyBase
-                {
-                }
-                """;
+            class Test : MyBase
+            {
+            }
+            """;
             var expected2 = """
-                internal class MyBase
-                {
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            internal class MyBase
+            {
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             await new Test
             {
@@ -2069,29 +2069,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestClassDeclaration2()
         {
             var input = """
-                class [||]Test
-                {
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            class [||]Test
+            {
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             var expected1 = """
-                class Test : MyBase
-                {
-                }
-                """;
+            class Test : MyBase
+            {
+            }
+            """;
             var expected2 = """
-                internal class MyBase
-                {
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            internal class MyBase
+            {
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             await new Test
             {
@@ -2106,29 +2106,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestClassDeclaration3()
         {
             var input = """
-                [||]class Test
-                {
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            [||]class Test
+            {
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             var expected1 = """
-                class Test : MyBase
-                {
-                }
-                """;
+            class Test : MyBase
+            {
+            }
+            """;
             var expected2 = """
-                internal class MyBase
-                {
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            internal class MyBase
+            {
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             await new Test
             {
@@ -2143,29 +2143,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestClassDeclaration4()
         {
             var input = """
-                class[||] Test
-                {
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            class[||] Test
+            {
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             var expected1 = """
-                class Test : MyBase
-                {
-                }
-                """;
+            class Test : MyBase
+            {
+            }
+            """;
             var expected2 = """
-                internal class MyBase
-                {
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            internal class MyBase
+            {
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             await new Test
             {
@@ -2180,39 +2180,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestClassDeclaration_Comment()
         {
             var input = """
-                using System;
+            using System;
 
-                /// <summary>
-                /// [|This is a test class
-                /// </summary>
-                class Test|]
-                {
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            /// <summary>
+            /// [|This is a test class
+            /// </summary>
+            class Test|]
+            {
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             var expected1 = """
-                using System;
+            using System;
 
-                /// <summary>
-                /// This is a test class
-                /// </summary>
-                class Test : MyBase
-                {
-                }
-                """;
+            /// <summary>
+            /// This is a test class
+            /// </summary>
+            class Test : MyBase
+            {
+            }
+            """;
             var expected2 = """
-                internal class MyBase
-                {
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            internal class MyBase
+            {
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             await new Test
             {
@@ -2227,39 +2227,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestClassDeclaration_Comment2()
         {
             var input = """
-                using System;
+            using System;
 
-                /// <summary>
-                /// This is a test class
-                /// [|</summary>
-                class Test|]
-                {
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            /// <summary>
+            /// This is a test class
+            /// [|</summary>
+            class Test|]
+            {
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             var expected1 = """
-                using System;
+            using System;
 
-                /// <summary>
-                /// This is a test class
-                /// </summary>
-                class Test : MyBase
-                {
-                }
-                """;
+            /// <summary>
+            /// This is a test class
+            /// </summary>
+            class Test : MyBase
+            {
+            }
+            """;
             var expected2 = """
-                internal class MyBase
-                {
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            internal class MyBase
+            {
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             await new Test
             {
@@ -2274,39 +2274,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestClassDeclaration_Comment3()
         {
             var input = """
-                using System;
+            using System;
 
-                /// <summary>
-                /// This is a [|test class
-                /// </summary>
-                class|] Test
-                {
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            /// <summary>
+            /// This is a [|test class
+            /// </summary>
+            class|] Test
+            {
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             var expected1 = """
-                using System;
+            using System;
 
-                /// <summary>
-                /// This is a test class
-                /// </summary>
-                class Test : MyBase
-                {
-                }
-                """;
+            /// <summary>
+            /// This is a test class
+            /// </summary>
+            class Test : MyBase
+            {
+            }
+            """;
             var expected2 = """
-                internal class MyBase
-                {
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            internal class MyBase
+            {
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             await new Test
             {
@@ -2321,40 +2321,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestClassDeclaration_Attribute()
         {
             var input = """
-                using System;
+            using System;
 
-                public class MyAttribute : Attribute { }
+            public class MyAttribute : Attribute { }
 
-                [||][MyAttribute]
-                class Test
-                {
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            [||][MyAttribute]
+            class Test
+            {
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             var expected1 = """
-                using System;
+            using System;
 
-                public class MyAttribute : Attribute { }
+            public class MyAttribute : Attribute { }
 
-                [MyAttribute]
-                class Test : MyBase
-                {
-                }
-                """;
+            [MyAttribute]
+            class Test : MyBase
+            {
+            }
+            """;
             var expected2 = """
-                [My]
-                internal class MyBase
-                {
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            [My]
+            internal class MyBase
+            {
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             await new Test
             {
@@ -2369,29 +2369,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestClassDeclaration_SelectWithMembers()
         {
             var input = """
-                [|class Test
-                {
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }|]
-                """;
+            [|class Test
+            {
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }|]
+            """;
 
             var expected1 = """
-                class Test : MyBase
-                {
-                }
-                """;
+            class Test : MyBase
+            {
+            }
+            """;
             var expected2 = """
-                internal class MyBase
-                {
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            internal class MyBase
+            {
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             await new Test
             {
@@ -2406,29 +2406,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestClassDeclaration_SelectWithMembers2()
         {
             var input = """
-                [|class Test
-                {
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }|]
-                }
-                """;
+            [|class Test
+            {
+            int Method()
+            {
+            return 1 + 1;
+            }|]
+            }
+            """;
 
             var expected1 = """
-                class Test : MyBase
-                {
-                }
-                """;
+            class Test : MyBase
+            {
+            }
+            """;
             var expected2 = """
-                internal class MyBase
-                {
-                    int Method()
-                    {
-                        return 1 + 1;
-                    }
-                }
-                """;
+            internal class MyBase
+            {
+            int Method()
+            {
+            return 1 + 1;
+            }
+            }
+            """;
 
             await new Test
             {
@@ -2443,38 +2443,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestGenericClass()
         {
             var input = """
-                using System.Collections.Generic;
+            using System.Collections.Generic;
 
-                [|class C<T1, T2, T3>
-                {
-                    public List<T1> Field1;
-                    public T2 Field2;
-                    public T3 Method()
-                    {
-                        return default;
-                    }|]
-                }
-                """;
+            [|class C<T1, T2, T3>
+            {
+            public List<T1> Field1;
+            public T2 Field2;
+            public T3 Method()
+            {
+            return default;
+            }|]
+            }
+            """;
             var expected1 = """
-                using System.Collections.Generic;
+            using System.Collections.Generic;
 
-                class C<T1, T2, T3> : MyBase<T1, T3>
-                {
-                    public T2 Field2;
-                }
-                """;
+            class C<T1, T2, T3> : MyBase<T1, T3>
+            {
+            public T2 Field2;
+            }
+            """;
             var expected2 = """
-                using System.Collections.Generic;
+            using System.Collections.Generic;
 
-                internal class MyBase<T1, T3>
-                {
-                    public List<T1> Field1;
-                    public T3 Method()
-                    {
-                        return default;
-                    }
-                }
-                """;
+            internal class MyBase<T1, T3>
+            {
+            public List<T1> Field1;
+            public T3 Method()
+            {
+            return default;
+            }
+            }
+            """;
             await new Test
             {
                 TestCode = input,
@@ -2488,11 +2488,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestIncompleteFieldSelection_NoAction1()
         {
             var input = """
-                class C
-                {
-                    pub[||] {|CS1519:int|} Foo = 0;
-                }
-                """;
+            class C
+            {
+            pub[||] {|CS1519:int|} Foo = 0;
+            }
+            """;
             await new Test { TestCode = input, FixedCode = input }.RunAsync();
         }
 
@@ -2500,14 +2500,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestIncompleteMethodSelection_NoAction()
         {
             var input = """
-                class C
-                {
-                    pub[||] {|CS1519:int|} Foo()
-                    {
-                        return 5;
-                    }
-                }
-                """;
+            class C
+            {
+            pub[||] {|CS1519:int|} Foo()
+            {
+            return 5;
+            }
+            }
+            """;
             await new Test { TestCode = input, FixedCode = input }.RunAsync();
         }
 
@@ -2515,8 +2515,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestTopLevelStatementSelection_NoAction()
         {
             var input = """
-                [||]_ = 42;
-                """;
+            [||]_ = 42;
+            """;
             await new Test
             {
                 TestCode = input,
@@ -2530,28 +2530,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestSealed()
         {
             var input = """
-                internal sealed class MyClass
-                {
-                    public void [||]M()
-                    {
-                    }
-                }
-                """;
+            internal sealed class MyClass
+            {
+            public void [||]M()
+            {
+            }
+            }
+            """;
 
             var expected1 = """
-                internal sealed class MyClass : MyBase
-                {
-                }
-                """;
+            internal sealed class MyClass : MyBase
+            {
+            }
+            """;
 
             var expected2 = """
-                internal class MyBase
-                {
-                    public void M()
-                    {
-                    }
-                }
-                """;
+            internal class MyBase
+            {
+            public void M()
+            {
+            }
+            }
+            """;
 
             await new Test
             {
@@ -2566,17 +2566,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestMethodInsideNamespace_NoException()
         {
             var code = """
-                namespace N
-                {
-                    class C
-                    {
-                    }
+            namespace N
+            {
+            class C
+            {
+            }
 
-                    public void $$N
-                    {
-                    }
-                }
-                """;
+            public void $$N
+            {
+            }
+            }
+            """;
 
             await new Test()
             {
@@ -2605,16 +2605,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestMultipleMethodsSelected_WithTypeContainingBaseClass()
         {
             var code = """
-                class Base
-                {
-                }
+            class Base
+            {
+            }
 
-                class Derived : Base
-                {
-                    [|public void M() { }
-                    public void N() { }|]
-                }
-                """;
+            class Derived : Base
+            {
+            [|public void M() { }
+            public void N() { }|]
+            }
+            """;
 
             await new Test() { TestCode = code, FixedCode = code }.RunAsync();
         }
@@ -2624,16 +2624,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestClassSelected_WithTypeContainingBaseClass()
         {
             var code = """
-                class Base
-                {
-                }
+            class Base
+            {
+            }
 
-                class $$Derived : Base
-                {
-                    public void M() { }
-                    public void N() { }
-                }
-                """;
+            class $$Derived : Base
+            {
+            public void M() { }
+            public void N() { }
+            }
+            """;
 
             await new Test() { TestCode = code, FixedCode = code }.RunAsync();
         }
@@ -2642,28 +2642,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestMultipleMethodsSelected_HighlightedMembersAreSelected()
         {
             var code = """
-                class C
-                {
-                    [|public void M() { }
-                    public void N() { }|]
-                    public void O() { }
-                }
-                """;
+            class C
+            {
+            [|public void M() { }
+            public void N() { }|]
+            public void O() { }
+            }
+            """;
 
             var expected1 = """
-                class C : MyBase
-                {
-                    public void O() { }
-                }
-                """;
+            class C : MyBase
+            {
+            public void O() { }
+            }
+            """;
 
             var expected2 = """
-                internal class MyBase
-                {
-                    public void M() { }
-                    public void N() { }
-                }
-                """;
+            internal class MyBase
+            {
+            public void M() { }
+            public void N() { }
+            }
+            """;
 
             await new Test()
             {
@@ -2678,24 +2678,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
         public async Task TestMemberKeyword()
         {
             var code = """
-                class C
-                {
-                    $$public void M() { }
-                }
-                """;
+            class C
+            {
+            $$public void M() { }
+            }
+            """;
 
             var expected1 = """
-                class C : MyBase
-                {
-                }
-                """;
+            class C : MyBase
+            {
+            }
+            """;
 
             var expected2 = """
-                internal class MyBase
-                {
-                    public void M() { }
-                }
-                """;
+            internal class MyBase
+            {
+            public void M() { }
+            }
+            """;
 
             await new Test
             {

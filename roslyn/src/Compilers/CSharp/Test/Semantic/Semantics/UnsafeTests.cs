@@ -772,16 +772,16 @@ unsafe class C<T>
         public void UnsafeTypeArguments()
         {
             var template = """
-                {0} interface I<T>
-                {{
-                    {1} void Test(I<int*> i);
-                }}
+            {0} interface I<T>
+            {{
+            {1} void Test(I<int*> i);
+            }}
 
-                {0} class C<T>
-                {{
-                    {1} void Test(C<int*> c) {{ }}
-                }}
-                """;
+            {0} class C<T>
+            {{
+            {1} void Test(C<int*> c) {{ }}
+            }}
+            """;
 
             CompareUnsafeDiagnostics(
                 template,
@@ -4144,14 +4144,14 @@ public unsafe class C
             );
 
             var src = """
-unsafe class D
-{
-    System.TypedReference* M(System.TypedReference* r)
-    {
-        return C.M(r);
-    }
-}
-""";
+            unsafe class D
+            {
+            System.TypedReference* M(System.TypedReference* r)
+            {
+            return C.M(r);
+            }
+            }
+            """;
             var comp = CreateCompilation(
                 src,
                 options: TestOptions.UnsafeDebugDll,
@@ -4243,27 +4243,27 @@ public unsafe class C
             verifier.VerifyIL(
                 "C.M",
                 """
-{
-  // Code size       32 (0x20)
-  .maxstack  1
-  .locals init (System.TypedReference* V_0, //trp
+                {
+                // Code size       32 (0x20)
+                .maxstack  1
+                .locals init (System.TypedReference* V_0, //trp
                 System.TypedReference V_1) //tr
-  IL_0000:  nop
-  IL_0001:  ldc.i4.0
-  IL_0002:  conv.u
-  IL_0003:  stloc.0
-  IL_0004:  ldloca.s   V_1
-  IL_0006:  initobj    "System.TypedReference"
-  IL_000c:  ldloc.0
-  IL_000d:  ldobj      "System.TypedReference"
-  IL_0012:  call       "void C.M2(System.TypedReference)"
-  IL_0017:  nop
-  IL_0018:  ldloc.1
-  IL_0019:  call       "void C.M2(System.TypedReference)"
-  IL_001e:  nop
-  IL_001f:  ret
-}
-"""
+                IL_0000:  nop
+                IL_0001:  ldc.i4.0
+                IL_0002:  conv.u
+                IL_0003:  stloc.0
+                IL_0004:  ldloca.s   V_1
+                IL_0006:  initobj    "System.TypedReference"
+                IL_000c:  ldloc.0
+                IL_000d:  ldobj      "System.TypedReference"
+                IL_0012:  call       "void C.M2(System.TypedReference)"
+                IL_0017:  nop
+                IL_0018:  ldloc.1
+                IL_0019:  call       "void C.M2(System.TypedReference)"
+                IL_001e:  nop
+                IL_001f:  ret
+                }
+                """
             );
         }
 

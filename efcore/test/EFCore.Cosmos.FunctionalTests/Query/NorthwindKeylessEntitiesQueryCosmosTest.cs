@@ -28,10 +28,10 @@ public class NorthwindKeylessEntitiesQueryCosmosTest
 
         AssertSql(
             """
-SELECT c
-FROM root c
-WHERE (c["Discriminator"] = "Customer")
-"""
+            SELECT c
+            FROM root c
+            WHERE (c["Discriminator"] = "Customer")
+            """
         );
     }
 
@@ -41,10 +41,10 @@ WHERE (c["Discriminator"] = "Customer")
 
         AssertSql(
             """
-SELECT c
-FROM root c
-WHERE ((c["Discriminator"] = "Customer") AND (c["City"] = "London"))
-"""
+            SELECT c
+            FROM root c
+            WHERE ((c["Discriminator"] = "Customer") AND (c["City"] = "London"))
+            """
         );
     }
 
@@ -62,10 +62,10 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["City"] = "London"))
 
         AssertSql(
             """
-SELECT c
-FROM root c
-WHERE (c["Discriminator"] = "ProductView")
-"""
+            SELECT c
+            FROM root c
+            WHERE (c["Discriminator"] = "ProductView")
+            """
         );
     }
 
@@ -91,10 +91,10 @@ WHERE (c["Discriminator"] = "ProductView")
 
         AssertSql(
             """
-SELECT c
-FROM root c
-WHERE ((c["Discriminator"] = "Customer") AND (c["OrderCount"] > 0))
-"""
+            SELECT c
+            FROM root c
+            WHERE ((c["Discriminator"] = "Customer") AND (c["OrderCount"] > 0))
+            """
         );
     }
 
@@ -120,10 +120,10 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["OrderCount"] > 0))
 
         AssertSql(
             """
-SELECT c
-FROM root c
-WHERE ((c["Discriminator"] = "Order") AND (c["CustomerID"] = "ALFKI"))
-"""
+            SELECT c
+            FROM root c
+            WHERE ((c["Discriminator"] = "Order") AND (c["CustomerID"] = "ALFKI"))
+            """
         );
     }
 
@@ -193,10 +193,10 @@ WHERE ((c["Discriminator"] = "Order") AND (c["CustomerID"] = "ALFKI"))
 
         AssertSql(
             """
-SELECT c
-FROM root c
-WHERE (c["Discriminator"] = "Customer")
-"""
+            SELECT c
+            FROM root c
+            WHERE (c["Discriminator"] = "Customer")
+            """
         );
     }
 
@@ -206,10 +206,10 @@ WHERE (c["Discriminator"] = "Customer")
 
         AssertSql(
             """
-SELECT COUNT(1) AS c
-FROM root c
-WHERE (c["Discriminator"] = "Customer")
-"""
+            SELECT COUNT(1) AS c
+            FROM root c
+            WHERE (c["Discriminator"] = "Customer")
+            """
         );
     }
 

@@ -21,8 +21,8 @@ public class GearsOfWarFromSqlQuerySqlServerTest
 
         Assert.Equal(
             """
-SELECT "Id", "Name", "IsAutomatic", "AmmunitionType", "OwnerFullName", "SynergyWithId" FROM "Weapons" ORDER BY "Name"
-""",
+            SELECT "Id", "Name", "IsAutomatic", "AmmunitionType", "OwnerFullName", "SynergyWithId" FROM "Weapons" ORDER BY "Name"
+            """,
             Sql
         );
     }

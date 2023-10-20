@@ -60,49 +60,49 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         [InlineData(
             """
             public class C $$[|{|]
-              public void Goo(){}
+            public void Goo(){}
             [|}|]
             """
         )]
         [InlineData(
             """
             public class C {$$
-              public void Goo(){}
+            public void Goo(){}
             }
             """
         )]
         [InlineData(
             """
             public class C {
-              public void Goo$$[|(|][|)|]{}
+            public void Goo$$[|(|][|)|]{}
             }
             """
         )]
         [InlineData(
             """
             public class C {
-              public void Goo($$){}
+            public void Goo($$){}
             }
             """
         )]
         [InlineData(
             """
             public class C {
-              public void Goo[|(|][|)|]$$[|{|][|}|]
+            public void Goo[|(|][|)|]$$[|{|][|}|]
             }
             """
         )]
         [InlineData(
             """
             public class C {
-              public void Goo(){$$}
+            public void Goo(){$$}
             }
             """
         )]
         [InlineData(
             """
             public class C {
-              public void Goo()[|{|][|}|]$$
+            public void Goo()[|{|][|}|]$$
             }
             """
         )]
@@ -142,11 +142,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                 """
                 class C
                 {
-                    void Goo()
-                    {
-                        bool a = b $$< c;
-                        bool d = e > f;
-                    }
+                void Goo()
+                {
+                bool a = b $$< c;
+                bool d = e > f;
+                }
                 }
                 """
             );
@@ -154,11 +154,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                 """
                 class C
                 {
-                    void Goo()
-                    {
-                        bool a = b <$$ c;
-                        bool d = e > f;
-                    }
+                void Goo()
+                {
+                bool a = b <$$ c;
+                bool d = e > f;
+                }
                 }
                 """
             );
@@ -166,11 +166,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                 """
                 class C
                 {
-                    void Goo()
-                    {
-                        bool a = b < c;
-                        bool d = e $$> f;
-                    }
+                void Goo()
+                {
+                bool a = b < c;
+                bool d = e $$> f;
+                }
                 }
                 """
             );
@@ -178,11 +178,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                 """
                 class C
                 {
-                    void Goo()
-                    {
-                        bool a = b < c;
-                        bool d = e >$$ f;
-                    }
+                void Goo()
+                {
+                bool a = b < c;
+                bool d = e >$$ f;
+                }
                 }
                 """
             );
@@ -195,14 +195,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                 """
                 class C
                 {
-                    void M(int variable)
-                    {
-                        switch $$[|(|]variable[|)|]
-                        {
-                            case 0:
-                                break;
-                        }
-                    }
+                void M(int variable)
+                {
+                switch $$[|(|]variable[|)|]
+                {
+                case 0:
+                break;
+                }
+                }
                 }
                 """
             );
@@ -210,14 +210,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                 """
                 class C
                 {
-                    void M(int variable)
-                    {
-                        switch ($$variable)
-                        {
-                            case 0:
-                                break;
-                        }
-                    }
+                void M(int variable)
+                {
+                switch ($$variable)
+                {
+                case 0:
+                break;
+                }
+                }
                 }
                 """
             );
@@ -225,14 +225,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                 """
                 class C
                 {
-                    void M(int variable)
-                    {
-                        switch (variable$$)
-                        {
-                            case 0:
-                                break;
-                        }
-                    }
+                void M(int variable)
+                {
+                switch (variable$$)
+                {
+                case 0:
+                break;
+                }
+                }
                 }
                 """
             );
@@ -240,14 +240,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                 """
                 class C
                 {
-                    void M(int variable)
-                    {
-                        switch [|(|]variable[|)$$|]
-                        {
-                            case 0:
-                                break;
-                        }
-                    }
+                void M(int variable)
+                {
+                switch [|(|]variable[|)$$|]
+                {
+                case 0:
+                break;
+                }
+                }
                 }
                 """
             );
@@ -255,14 +255,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                 """
                 class C
                 {
-                    void M(int variable)
-                    {
-                        switch (variable)
-                        $$[|{|]
-                            case 0:
-                                break;
-                        [|}|]
-                    }
+                void M(int variable)
+                {
+                switch (variable)
+                $$[|{|]
+                case 0:
+                break;
+                [|}|]
+                }
                 }
                 """
             );
@@ -270,14 +270,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                 """
                 class C
                 {
-                    void M(int variable)
-                    {
-                        switch (variable)
-                        {$$
-                            case 0:
-                                break;
-                        }
-                    }
+                void M(int variable)
+                {
+                switch (variable)
+                {$$
+                case 0:
+                break;
+                }
+                }
                 }
                 """
             );
@@ -285,14 +285,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                 """
                 class C
                 {
-                    void M(int variable)
-                    {
-                        switch (variable)
-                        {
-                            case 0:
-                                break;
-                        $$}
-                    }
+                void M(int variable)
+                {
+                switch (variable)
+                {
+                case 0:
+                break;
+                $$}
+                }
                 }
                 """
             );
@@ -300,14 +300,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                 """
                 class C
                 {
-                    void M(int variable)
-                    {
-                        switch (variable)
-                        [|{|]
-                            case 0:
-                                break;
-                        [|}$$|]
-                    }
+                void M(int variable)
+                {
+                switch (variable)
+                [|{|]
+                case 0:
+                break;
+                [|}$$|]
+                }
                 }
                 """
             );
@@ -325,7 +325,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
             await TestBraceHighlightingAsync(
                 """
                 public class C [|{|]
-                 void Goo(){}[|}|]$$
+                void Goo(){}[|}|]$$
                 """
             );
         }
@@ -337,7 +337,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                 """
                 class C
                 {
-                    [|(|]int, int[|)$$|] x = (1, 2);
+                [|(|]int, int[|)$$|] x = (1, 2);
                 }
                 """,
                 TestOptions.Regular
@@ -346,7 +346,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                 """
                 class C
                 {
-                    (int, int) x = [|(|]1, 2[|)$$|];
+                (int, int) x = [|(|]1, 2[|)$$|];
                 }
                 """,
                 TestOptions.Regular
@@ -360,7 +360,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                 """
                 class C
                 {
-                    ([|(|]int, int[|)$$|], string) x = ((1, 2), "hello";
+                ([|(|]int, int[|)$$|], string) x = ((1, 2), "hello";
                 }
                 """,
                 TestOptions.Regular
@@ -369,7 +369,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                 """
                 class C
                 {
-                    ((int, int), string) x = ([|(|]1, 2[|)$$|], "hello";
+                ((int, int), string) x = ([|(|]1, 2[|)$$|], "hello";
                 }
                 """,
                 TestOptions.Regular
@@ -383,7 +383,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                 """
                 class C
                 {
-                    [|(|]Dictionary<int, string>, List<int>[|)$$|] x = (null, null);
+                [|(|]Dictionary<int, string>, List<int>[|)$$|] x = (null, null);
                 }
                 """,
                 TestOptions.Regular
@@ -392,7 +392,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                 """
                 class C
                 {
-                    var x = [|(|]new Dictionary<int, string>(), new List<int>()[|)$$|];
+                var x = [|(|]new Dictionary<int, string>(), new List<int>()[|)$$|];
                 }
                 """,
                 TestOptions.Regular
@@ -403,16 +403,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         public async Task TestRegexGroupBracket1()
         {
             var input = """
-                using System.Text.RegularExpressions;
+            using System.Text.RegularExpressions;
 
-                class C
-                {
-                    void Goo()
-                    {
-                        var r = new Regex(@"$$[|(|]a[|)|]");
-                    }
-                }
-                """;
+            class C
+            {
+            void Goo()
+            {
+            var r = new Regex(@"$$[|(|]a[|)|]");
+            }
+            }
+            """;
 
             await TestBraceHighlightingAsync(input);
         }
@@ -421,16 +421,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         public async Task TestRegexGroupBracket2()
         {
             var input = """
-                using System.Text.RegularExpressions;
+            using System.Text.RegularExpressions;
 
-                class C
-                {
-                    void Goo()
-                    {
-                        var r = new Regex(@"[|(|]a[|)|]$$");
-                    }
-                }
-                """;
+            class C
+            {
+            void Goo()
+            {
+            var r = new Regex(@"[|(|]a[|)|]$$");
+            }
+            }
+            """;
 
             await TestBraceHighlightingAsync(input);
         }
@@ -439,16 +439,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         public async Task TestRegexUnclosedGroupBracket1()
         {
             var input = """
-                using System.Text.RegularExpressions;
+            using System.Text.RegularExpressions;
 
-                class C
-                {
-                    void Goo()
-                    {
-                        var r = new Regex(@"$$(a");
-                    }
-                }
-                """;
+            class C
+            {
+            void Goo()
+            {
+            var r = new Regex(@"$$(a");
+            }
+            }
+            """;
 
             await TestBraceHighlightingAsync(input);
         }
@@ -457,16 +457,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         public async Task TestRegexCommentBracket1()
         {
             var input = """
-                using System.Text.RegularExpressions;
+            using System.Text.RegularExpressions;
 
-                class C
-                {
-                    void Goo()
-                    {
-                        var r = new Regex(@"$$[|(|]?#a[|)|]");
-                    }
-                }
-                """;
+            class C
+            {
+            void Goo()
+            {
+            var r = new Regex(@"$$[|(|]?#a[|)|]");
+            }
+            }
+            """;
 
             await TestBraceHighlightingAsync(input);
         }
@@ -475,16 +475,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         public async Task TestRegexCommentBracket2()
         {
             var input = """
-                using System.Text.RegularExpressions;
+            using System.Text.RegularExpressions;
 
-                class C
-                {
-                    void Goo()
-                    {
-                        var r = new Regex(@"[|(|]?#a[|)|]$$");
-                    }
-                }
-                """;
+            class C
+            {
+            void Goo()
+            {
+            var r = new Regex(@"[|(|]?#a[|)|]$$");
+            }
+            }
+            """;
 
             await TestBraceHighlightingAsync(input);
         }
@@ -493,16 +493,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         public async Task TestRegexUnclosedCommentBracket()
         {
             var input = """
-                using System.Text.RegularExpressions;
+            using System.Text.RegularExpressions;
 
-                class C
-                {
-                    void Goo()
-                    {
-                        var r = new Regex(@"$$(?#a");
-                    }
-                }
-                """;
+            class C
+            {
+            void Goo()
+            {
+            var r = new Regex(@"$$(?#a");
+            }
+            }
+            """;
 
             await TestBraceHighlightingAsync(input);
         }
@@ -511,16 +511,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         public async Task TestRegexCharacterClassBracket1()
         {
             var input = """
-                using System.Text.RegularExpressions;
+            using System.Text.RegularExpressions;
 
-                class C
-                {
-                    void Goo()
-                    {
-                        var r = new Regex(@"$$[|<|]a[|>|]");
-                    }
-                }
-                """;
+            class C
+            {
+            void Goo()
+            {
+            var r = new Regex(@"$$[|<|]a[|>|]");
+            }
+            }
+            """;
 
             await TestBraceHighlightingAsync(input, swapAnglesWithBrackets: true);
         }
@@ -529,16 +529,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         public async Task TestRegexCharacterClassBracket2()
         {
             var input = """
-                using System.Text.RegularExpressions;
+            using System.Text.RegularExpressions;
 
-                class C
-                {
-                    void Goo()
-                    {
-                        var r = new Regex(@"[|<|]a[|>|]$$");
-                    }
-                }
-                """;
+            class C
+            {
+            void Goo()
+            {
+            var r = new Regex(@"[|<|]a[|>|]$$");
+            }
+            }
+            """;
             await TestBraceHighlightingAsync(input, swapAnglesWithBrackets: true);
         }
 
@@ -546,16 +546,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         public async Task TestRegexUnclosedCharacterClassBracket1()
         {
             var input = """
-                using System.Text.RegularExpressions;
+            using System.Text.RegularExpressions;
 
-                class C
-                {
-                    void Goo()
-                    {
-                        var r = new Regex(@"$$<a");
-                    }
-                }
-                """;
+            class C
+            {
+            void Goo()
+            {
+            var r = new Regex(@"$$<a");
+            }
+            }
+            """;
 
             await TestBraceHighlightingAsync(input, swapAnglesWithBrackets: true);
         }
@@ -564,16 +564,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         public async Task TestRegexNegativeCharacterClassBracket1()
         {
             var input = """
-                using System.Text.RegularExpressions;
+            using System.Text.RegularExpressions;
 
-                class C
-                {
-                    void Goo()
-                    {
-                        var r = new Regex(@"$$[|<|]^a[|>|]");
-                    }
-                }
-                """;
+            class C
+            {
+            void Goo()
+            {
+            var r = new Regex(@"$$[|<|]^a[|>|]");
+            }
+            }
+            """;
 
             await TestBraceHighlightingAsync(input, swapAnglesWithBrackets: true);
         }
@@ -582,16 +582,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         public async Task TestRegexNegativeCharacterClassBracket2()
         {
             var input = """
-                using System.Text.RegularExpressions;
+            using System.Text.RegularExpressions;
 
-                class C
-                {
-                    void Goo()
-                    {
-                        var r = new Regex(@"[|<|]^a[|>|]$$");
-                    }
-                }
-                """;
+            class C
+            {
+            void Goo()
+            {
+            var r = new Regex(@"[|<|]^a[|>|]$$");
+            }
+            }
+            """;
 
             await TestBraceHighlightingAsync(input, swapAnglesWithBrackets: true);
         }
@@ -600,14 +600,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         public async Task TestJsonBracket1()
         {
             var input = """
-                class C
-                {
-                    void Goo()
-                    {
-                        var r = /*lang=json*/ @"new Json[|$$(|]1, 2, 3[|)|]";
-                    }
-                }
-                """;
+            class C
+            {
+            void Goo()
+            {
+            var r = /*lang=json*/ @"new Json[|$$(|]1, 2, 3[|)|]";
+            }
+            }
+            """;
             await TestBraceHighlightingAsync(input);
         }
 
@@ -615,14 +615,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         public async Task TestJsonBracket2()
         {
             var input = """
-                class C
-                {
-                    void Goo()
-                    {
-                        var r = /*lang=json*/ @"new Json[|(|]1, 2, 3[|)|]$$";
-                    }
-                }
-                """;
+            class C
+            {
+            void Goo()
+            {
+            var r = /*lang=json*/ @"new Json[|(|]1, 2, 3[|)|]$$";
+            }
+            }
+            """;
             await TestBraceHighlightingAsync(input);
         }
 
@@ -630,14 +630,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         public async Task TestJsonBracket_RawStrings()
         {
             var input = """"
-                class C
-                {
-                    void Goo()
-                    {
-                        var r = /*lang=json*/ """new Json[|$$(|]1, 2, 3[|)|]""";
-                    }
-                }
-                """";
+            class C
+            {
+            void Goo()
+            {
+            var r = /*lang=json*/ """new Json[|$$(|]1, 2, 3[|)|]""";
+            }
+            }
+            """";
             await TestBraceHighlightingAsync(input);
         }
 
@@ -645,14 +645,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         public async Task TestUnmatchedJsonBracket1()
         {
             var input = """
-                class C
-                {
-                    void Goo()
-                    {
-                        var r = /*lang=json*/ @"new Json$$(1, 2, 3";
-                    }
-                }
-                """;
+            class C
+            {
+            void Goo()
+            {
+            var r = /*lang=json*/ @"new Json$$(1, 2, 3";
+            }
+            }
+            """;
             await TestBraceHighlightingAsync(input);
         }
 
@@ -660,14 +660,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         public async Task TestJsonBracket_NoComment_NotLikelyJson()
         {
             var input = """
-                class C
-                {
-                    void Goo()
-                    {
-                        var r = @"$$[ 1, 2, 3 ]";
-                    }
-                }
-                """;
+            class C
+            {
+            void Goo()
+            {
+            var r = @"$$[ 1, 2, 3 ]";
+            }
+            }
+            """;
             await TestBraceHighlightingAsync(input);
         }
 
@@ -675,14 +675,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         public async Task TestJsonBracket_NoComment_LikelyJson()
         {
             var input = """
-                class C
-                {
-                    void Goo()
-                    {
-                        var r = @"[ { prop: 0 }, new Json[|$$(|]1, 2, 3[|)|], 3 ]";
-                    }
-                }
-                """;
+            class C
+            {
+            void Goo()
+            {
+            var r = @"[ { prop: 0 }, new Json[|$$(|]1, 2, 3[|)|], 3 ]";
+            }
+            }
+            """;
             await TestBraceHighlightingAsync(input);
         }
 

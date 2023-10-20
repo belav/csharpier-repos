@@ -88105,40 +88105,40 @@ public struct S : MyEnumerable
             verifier.VerifyIL(
                 "C.M",
                 """
-{
-  // Code size       51 (0x33)
-  .maxstack  1
-  .locals init (System.Collections.Generic.IEnumerator<int> V_0,
+                {
+                // Code size       51 (0x33)
+                .maxstack  1
+                .locals init (System.Collections.Generic.IEnumerator<int> V_0,
                 S V_1)
-  IL_0000:  ldarg.0
-  IL_0001:  ldobj      "S"
-  IL_0006:  stloc.1
-  IL_0007:  ldloca.s   V_1
-  IL_0009:  constrained. "S"
-  IL_000f:  callvirt   "System.Collections.Generic.IEnumerator<int> System.Collections.Generic.IEnumerable<int>.GetEnumerator()"
-  IL_0014:  stloc.0
-  .try
-  {
-    IL_0015:  br.s       IL_001e
-    IL_0017:  ldloc.0
-    IL_0018:  callvirt   "int System.Collections.Generic.IEnumerator<int>.Current.get"
-    IL_001d:  pop
-    IL_001e:  ldloc.0
-    IL_001f:  callvirt   "bool System.Collections.IEnumerator.MoveNext()"
-    IL_0024:  brtrue.s   IL_0017
-    IL_0026:  leave.s    IL_0032
-  }
-  finally
-  {
-    IL_0028:  ldloc.0
-    IL_0029:  brfalse.s  IL_0031
-    IL_002b:  ldloc.0
-    IL_002c:  callvirt   "void System.IDisposable.Dispose()"
-    IL_0031:  endfinally
-  }
-  IL_0032:  ret
-}
-"""
+                IL_0000:  ldarg.0
+                IL_0001:  ldobj      "S"
+                IL_0006:  stloc.1
+                IL_0007:  ldloca.s   V_1
+                IL_0009:  constrained. "S"
+                IL_000f:  callvirt   "System.Collections.Generic.IEnumerator<int> System.Collections.Generic.IEnumerable<int>.GetEnumerator()"
+                IL_0014:  stloc.0
+                .try
+                {
+                IL_0015:  br.s       IL_001e
+                IL_0017:  ldloc.0
+                IL_0018:  callvirt   "int System.Collections.Generic.IEnumerator<int>.Current.get"
+                IL_001d:  pop
+                IL_001e:  ldloc.0
+                IL_001f:  callvirt   "bool System.Collections.IEnumerator.MoveNext()"
+                IL_0024:  brtrue.s   IL_0017
+                IL_0026:  leave.s    IL_0032
+                }
+                finally
+                {
+                IL_0028:  ldloc.0
+                IL_0029:  brfalse.s  IL_0031
+                IL_002b:  ldloc.0
+                IL_002c:  callvirt   "void System.IDisposable.Dispose()"
+                IL_0031:  endfinally
+                }
+                IL_0032:  ret
+                }
+                """
             );
         }
 

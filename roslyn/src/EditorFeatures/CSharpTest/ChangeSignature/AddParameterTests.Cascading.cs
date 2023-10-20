@@ -20,17 +20,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
         public async Task AddParameter_Cascade_ToImplementedMethod()
         {
             var markup = """
-                interface I
-                {
-                    void M(int x, string y);
-                }
+            interface I
+            {
+            void M(int x, string y);
+            }
 
-                class C : I
-                {
-                    $$public void M(int x, string y)
-                    { }
-                }
-                """;
+            class C : I
+            {
+            $$public void M(int x, string y)
+            { }
+            }
+            """;
             var permutation = new[]
             {
                 new AddedParameterOrExistingIndex(1),
@@ -47,17 +47,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 new AddedParameterOrExistingIndex(0)
             };
             var updatedCode = """
-                interface I
-                {
-                    void M(string y, int newIntegerParameter, int x);
-                }
+            interface I
+            {
+            void M(string y, int newIntegerParameter, int x);
+            }
 
-                class C : I
-                {
-                    public void M(string y, int newIntegerParameter, int x)
-                    { }
-                }
-                """;
+            class C : I
+            {
+            public void M(string y, int newIntegerParameter, int x)
+            { }
+            }
+            """;
 
             await TestChangeSignatureViaCommandAsync(
                 LanguageNames.CSharp,
@@ -71,17 +71,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
         public async Task AddParameter_Cascade_ToImplementedMethod_WithTuples()
         {
             var markup = """
-                interface I
-                {
-                    void M((int, int) x, (string a, string b) y);
-                }
+            interface I
+            {
+            void M((int, int) x, (string a, string b) y);
+            }
 
-                class C : I
-                {
-                    $$public void M((int, int) x, (string a, string b) y)
-                    { }
-                }
-                """;
+            class C : I
+            {
+            $$public void M((int, int) x, (string a, string b) y)
+            { }
+            }
+            """;
             var permutation = new[]
             {
                 new AddedParameterOrExistingIndex(1),
@@ -98,17 +98,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 new AddedParameterOrExistingIndex(0)
             };
             var updatedCode = """
-                interface I
-                {
-                    void M((string a, string b) y, int newIntegerParameter, (int, int) x);
-                }
+            interface I
+            {
+            void M((string a, string b) y, int newIntegerParameter, (int, int) x);
+            }
 
-                class C : I
-                {
-                    public void M((string a, string b) y, int newIntegerParameter, (int, int) x)
-                    { }
-                }
-                """;
+            class C : I
+            {
+            public void M((string a, string b) y, int newIntegerParameter, (int, int) x)
+            { }
+            }
+            """;
 
             await TestChangeSignatureViaCommandAsync(
                 LanguageNames.CSharp,
@@ -122,17 +122,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
         public async Task AddParameter_Cascade_ToImplementingMethod()
         {
             var markup = """
-                interface I
-                {
-                    $$void M(int x, string y);
-                }
+            interface I
+            {
+            $$void M(int x, string y);
+            }
 
-                class C : I
-                {
-                    public void M(int x, string y)
-                    { }
-                }
-                """;
+            class C : I
+            {
+            public void M(int x, string y)
+            { }
+            }
+            """;
             var permutation = new[]
             {
                 new AddedParameterOrExistingIndex(1),
@@ -149,17 +149,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 new AddedParameterOrExistingIndex(0)
             };
             var updatedCode = """
-                interface I
-                {
-                    void M(string y, int newIntegerParameter, int x);
-                }
+            interface I
+            {
+            void M(string y, int newIntegerParameter, int x);
+            }
 
-                class C : I
-                {
-                    public void M(string y, int newIntegerParameter, int x)
-                    { }
-                }
-                """;
+            class C : I
+            {
+            public void M(string y, int newIntegerParameter, int x)
+            { }
+            }
+            """;
 
             await TestChangeSignatureViaCommandAsync(
                 LanguageNames.CSharp,
@@ -173,18 +173,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
         public async Task AddParameter_Cascade_ToOverriddenMethod()
         {
             var markup = """
-                class B
-                {
-                    public virtual void M(int x, string y)
-                    { }
-                }
+            class B
+            {
+            public virtual void M(int x, string y)
+            { }
+            }
 
-                class D : B
-                {
-                    $$public override void M(int x, string y)
-                    { }
-                }
-                """;
+            class D : B
+            {
+            $$public override void M(int x, string y)
+            { }
+            }
+            """;
             var permutation = new[]
             {
                 new AddedParameterOrExistingIndex(1),
@@ -201,18 +201,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 new AddedParameterOrExistingIndex(0)
             };
             var updatedCode = """
-                class B
-                {
-                    public virtual void M(string y, int newIntegerParameter, int x)
-                    { }
-                }
+            class B
+            {
+            public virtual void M(string y, int newIntegerParameter, int x)
+            { }
+            }
 
-                class D : B
-                {
-                    public override void M(string y, int newIntegerParameter, int x)
-                    { }
-                }
-                """;
+            class D : B
+            {
+            public override void M(string y, int newIntegerParameter, int x)
+            { }
+            }
+            """;
 
             await TestChangeSignatureViaCommandAsync(
                 LanguageNames.CSharp,
@@ -226,18 +226,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
         public async Task AddParameter_Cascade_ToOverridingMethod()
         {
             var markup = """
-                class B
-                {
-                    $$public virtual void M(int x, string y)
-                    { }
-                }
+            class B
+            {
+            $$public virtual void M(int x, string y)
+            { }
+            }
 
-                class D : B
-                {
-                    public override void M(int x, string y)
-                    { }
-                }
-                """;
+            class D : B
+            {
+            public override void M(int x, string y)
+            { }
+            }
+            """;
             var permutation = new[]
             {
                 new AddedParameterOrExistingIndex(1),
@@ -254,18 +254,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 new AddedParameterOrExistingIndex(0)
             };
             var updatedCode = """
-                class B
-                {
-                    public virtual void M(string y, int newIntegerParameter, int x)
-                    { }
-                }
+            class B
+            {
+            public virtual void M(string y, int newIntegerParameter, int x)
+            { }
+            }
 
-                class D : B
-                {
-                    public override void M(string y, int newIntegerParameter, int x)
-                    { }
-                }
-                """;
+            class D : B
+            {
+            public override void M(string y, int newIntegerParameter, int x)
+            { }
+            }
+            """;
 
             await TestChangeSignatureViaCommandAsync(
                 LanguageNames.CSharp,
@@ -279,24 +279,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
         public async Task AddParameter_Cascade_ToOverriddenMethod_Transitive()
         {
             var markup = """
-                class B
-                {
-                    public virtual void M(int x, string y)
-                    { }
-                }
+            class B
+            {
+            public virtual void M(int x, string y)
+            { }
+            }
 
-                class D : B
-                {
-                    public override void M(int x, string y)
-                    { }
-                }
+            class D : B
+            {
+            public override void M(int x, string y)
+            { }
+            }
 
-                class D2 : D
-                {
-                    $$public override void M(int x, string y)
-                    { }
-                }
-                """;
+            class D2 : D
+            {
+            $$public override void M(int x, string y)
+            { }
+            }
+            """;
             var permutation = new[]
             {
                 new AddedParameterOrExistingIndex(1),
@@ -313,24 +313,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 new AddedParameterOrExistingIndex(0)
             };
             var updatedCode = """
-                class B
-                {
-                    public virtual void M(string y, int newIntegerParameter, int x)
-                    { }
-                }
+            class B
+            {
+            public virtual void M(string y, int newIntegerParameter, int x)
+            { }
+            }
 
-                class D : B
-                {
-                    public override void M(string y, int newIntegerParameter, int x)
-                    { }
-                }
+            class D : B
+            {
+            public override void M(string y, int newIntegerParameter, int x)
+            { }
+            }
 
-                class D2 : D
-                {
-                    public override void M(string y, int newIntegerParameter, int x)
-                    { }
-                }
-                """;
+            class D2 : D
+            {
+            public override void M(string y, int newIntegerParameter, int x)
+            { }
+            }
+            """;
 
             await TestChangeSignatureViaCommandAsync(
                 LanguageNames.CSharp,
@@ -344,24 +344,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
         public async Task AddParameter_Cascade_ToOverridingMethod_Transitive()
         {
             var markup = """
-                class B
-                {
-                    $$public virtual void M(int x, string y)
-                    { }
-                }
+            class B
+            {
+            $$public virtual void M(int x, string y)
+            { }
+            }
 
-                class D : B
-                {
-                    public override void M(int x, string y)
-                    { }
-                }
+            class D : B
+            {
+            public override void M(int x, string y)
+            { }
+            }
 
-                class D2 : D
-                {
-                    public override void M(int x, string y)
-                    { }
-                }
-                """;
+            class D2 : D
+            {
+            public override void M(int x, string y)
+            { }
+            }
+            """;
             var permutation = new[]
             {
                 new AddedParameterOrExistingIndex(1),
@@ -378,24 +378,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 new AddedParameterOrExistingIndex(0)
             };
             var updatedCode = """
-                class B
-                {
-                    public virtual void M(string y, int newIntegerParameter, int x)
-                    { }
-                }
+            class B
+            {
+            public virtual void M(string y, int newIntegerParameter, int x)
+            { }
+            }
 
-                class D : B
-                {
-                    public override void M(string y, int newIntegerParameter, int x)
-                    { }
-                }
+            class D : B
+            {
+            public override void M(string y, int newIntegerParameter, int x)
+            { }
+            }
 
-                class D2 : D
-                {
-                    public override void M(string y, int newIntegerParameter, int x)
-                    { }
-                }
-                """;
+            class D2 : D
+            {
+            public override void M(string y, int newIntegerParameter, int x)
+            { }
+            }
+            """;
 
             await TestChangeSignatureViaCommandAsync(
                 LanguageNames.CSharp,
@@ -415,15 +415,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
             ////   $$D2  D3  C
 
             var markup = """
-                class B { public virtual void M(int x, string y) { } }
-                class D : B, I { public override void M(int x, string y) { } }
-                class D2 : D { public override void $$M(int x, string y) { } }
-                class D3 : D { public override void M(int x, string y) { } }
-                interface I { void M(int x, string y); }
-                interface I2 { void M(int x, string y); }
-                interface I3 : I, I2 { }
-                class C : I3 { public void M(int x, string y) { } }
-                """;
+            class B { public virtual void M(int x, string y) { } }
+            class D : B, I { public override void M(int x, string y) { } }
+            class D2 : D { public override void $$M(int x, string y) { } }
+            class D3 : D { public override void M(int x, string y) { } }
+            interface I { void M(int x, string y); }
+            interface I2 { void M(int x, string y); }
+            interface I3 : I, I2 { }
+            class C : I3 { public void M(int x, string y) { } }
+            """;
 
             var permutation = new[]
             {
@@ -441,15 +441,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 new AddedParameterOrExistingIndex(0)
             };
             var updatedCode = """
-                class B { public virtual void M(string y, int newIntegerParameter, int x) { } }
-                class D : B, I { public override void M(string y, int newIntegerParameter, int x) { } }
-                class D2 : D { public override void M(string y, int newIntegerParameter, int x) { } }
-                class D3 : D { public override void M(string y, int newIntegerParameter, int x) { } }
-                interface I { void M(string y, int newIntegerParameter, int x); }
-                interface I2 { void M(string y, int newIntegerParameter, int x); }
-                interface I3 : I, I2 { }
-                class C : I3 { public void M(string y, int newIntegerParameter, int x) { } }
-                """;
+            class B { public virtual void M(string y, int newIntegerParameter, int x) { } }
+            class D : B, I { public override void M(string y, int newIntegerParameter, int x) { } }
+            class D2 : D { public override void M(string y, int newIntegerParameter, int x) { } }
+            class D3 : D { public override void M(string y, int newIntegerParameter, int x) { } }
+            interface I { void M(string y, int newIntegerParameter, int x); }
+            interface I2 { void M(string y, int newIntegerParameter, int x); }
+            interface I3 : I, I2 { }
+            class C : I3 { public void M(string y, int newIntegerParameter, int x) { } }
+            """;
 
             await TestChangeSignatureViaCommandAsync(
                 LanguageNames.CSharp,
@@ -463,44 +463,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
         public async Task AddParameter_Cascade_ToMethods_WithDifferentParameterNames()
         {
             var markup = """
-                public class B
-                {
-                    /// <param name="x"></param>
-                    /// <param name="y"></param>
-                    public virtual int M(int x, string y)
-                    {
-                        return 1;
-                    }
-                }
+            public class B
+            {
+            /// <param name="x"></param>
+            /// <param name="y"></param>
+            public virtual int M(int x, string y)
+            {
+            return 1;
+            }
+            }
 
-                public class D : B
-                {
-                    /// <param name="a"></param>
-                    /// <param name="b"></param>
-                    public override int M(int a, string b)
-                    {
-                        return 1;
-                    }
-                }
+            public class D : B
+            {
+            /// <param name="a"></param>
+            /// <param name="b"></param>
+            public override int M(int a, string b)
+            {
+            return 1;
+            }
+            }
 
-                public class D2 : D
-                {
-                    /// <param name="y"></param>
-                    /// <param name="x"></param>
-                    public override int $$M(int y, string x)
-                    {
-                        M(1, "Two");
-                        ((D)this).M(1, "Two");
-                        ((B)this).M(1, "Two");
+            public class D2 : D
+            {
+            /// <param name="y"></param>
+            /// <param name="x"></param>
+            public override int $$M(int y, string x)
+            {
+            M(1, "Two");
+            ((D)this).M(1, "Two");
+            ((B)this).M(1, "Two");
 
-                        M(1, x: "Two");
-                        ((D)this).M(1, b: "Two");
-                        ((B)this).M(1, y: "Two");
+            M(1, x: "Two");
+            ((D)this).M(1, b: "Two");
+            ((B)this).M(1, y: "Two");
 
-                        return 1;
-                    }
-                }
-                """;
+            return 1;
+            }
+            }
+            """;
             var permutation = new[]
             {
                 new AddedParameterOrExistingIndex(1),
@@ -517,47 +517,47 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 new AddedParameterOrExistingIndex(0)
             };
             var updatedCode = """
-                public class B
-                {
-                    /// <param name="y"></param>
-                    /// <param name="newIntegerParameter"></param>
-                    /// <param name="x"></param>
-                    public virtual int M(string y, int newIntegerParameter, int x)
-                    {
-                        return 1;
-                    }
-                }
+            public class B
+            {
+            /// <param name="y"></param>
+            /// <param name="newIntegerParameter"></param>
+            /// <param name="x"></param>
+            public virtual int M(string y, int newIntegerParameter, int x)
+            {
+            return 1;
+            }
+            }
 
-                public class D : B
-                {
-                    /// <param name="b"></param>
-                    /// <param name="newIntegerParameter"></param>
-                    /// <param name="a"></param>
-                    public override int M(string b, int newIntegerParameter, int a)
-                    {
-                        return 1;
-                    }
-                }
+            public class D : B
+            {
+            /// <param name="b"></param>
+            /// <param name="newIntegerParameter"></param>
+            /// <param name="a"></param>
+            public override int M(string b, int newIntegerParameter, int a)
+            {
+            return 1;
+            }
+            }
 
-                public class D2 : D
-                {
-                    /// <param name="x"></param>
-                    /// <param name="newIntegerParameter"></param>
-                    /// <param name="y"></param>
-                    public override int M(string x, int newIntegerParameter, int y)
-                    {
-                        M("Two", 12345, 1);
-                        ((D)this).M("Two", 12345, 1);
-                        ((B)this).M("Two", 12345, 1);
+            public class D2 : D
+            {
+            /// <param name="x"></param>
+            /// <param name="newIntegerParameter"></param>
+            /// <param name="y"></param>
+            public override int M(string x, int newIntegerParameter, int y)
+            {
+            M("Two", 12345, 1);
+            ((D)this).M("Two", 12345, 1);
+            ((B)this).M("Two", 12345, 1);
 
-                        M(x: "Two", newIntegerParameter: 12345, y: 1);
-                        ((D)this).M(b: "Two", newIntegerParameter: 12345, a: 1);
-                        ((B)this).M(y: "Two", newIntegerParameter: 12345, x: 1);
+            M(x: "Two", newIntegerParameter: 12345, y: 1);
+            ((D)this).M(b: "Two", newIntegerParameter: 12345, a: 1);
+            ((B)this).M(y: "Two", newIntegerParameter: 12345, x: 1);
 
-                        return 1;
-                    }
-                }
-                """;
+            return 1;
+            }
+            }
+            """;
             await TestChangeSignatureViaCommandAsync(
                 LanguageNames.CSharp,
                 markup,
@@ -570,10 +570,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
         public async Task AddParameter_Cascade_Record()
         {
             var markup = """
-                record $$BaseR(int A, int B);
+            record $$BaseR(int A, int B);
 
-                record DerivedR() : BaseR(0, 1);
-                """;
+            record DerivedR() : BaseR(0, 1);
+            """;
             var permutation = new AddedParameterOrExistingIndex[]
             {
                 new(1),
@@ -581,10 +581,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 new(0)
             };
             var updatedCode = """
-                record BaseR(int B, int C, int A);
+            record BaseR(int B, int C, int A);
 
-                record DerivedR() : BaseR(1, 3, 0);
-                """;
+            record DerivedR() : BaseR(1, 3, 0);
+            """;
 
             await TestChangeSignatureViaCommandAsync(
                 LanguageNames.CSharp,
@@ -598,10 +598,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
         public async Task AddParameter_Cascade_PrimaryConstructor()
         {
             var markup = """
-                class $$BaseR(int A, int B);
+            class $$BaseR(int A, int B);
 
-                class DerivedR() : BaseR(0, 1);
-                """;
+            class DerivedR() : BaseR(0, 1);
+            """;
             var permutation = new AddedParameterOrExistingIndex[]
             {
                 new(1),
@@ -609,10 +609,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 new(0)
             };
             var updatedCode = """
-                class BaseR(int B, int C, int A);
+            class BaseR(int B, int C, int A);
 
-                class DerivedR() : BaseR(1, 3, 0);
-                """;
+            class DerivedR() : BaseR(1, 3, 0);
+            """;
 
             await TestChangeSignatureViaCommandAsync(
                 LanguageNames.CSharp,

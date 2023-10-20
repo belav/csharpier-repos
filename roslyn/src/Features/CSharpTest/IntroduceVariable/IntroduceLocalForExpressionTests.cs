@@ -69,10 +69,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    void M()
-                    {
-                        new DateTime()[||]
-                    }
+                void M()
+                {
+                new DateTime()[||]
+                }
                 }
                 """,
                 """
@@ -80,10 +80,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    void M()
-                    {
-                        DateTime {|Rename:dateTime|} = new DateTime();
-                    }
+                void M()
+                {
+                DateTime {|Rename:dateTime|} = new DateTime();
+                }
                 }
                 """
             );
@@ -98,11 +98,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    void M()
-                    {
-                        new DateTime()[||]
+                void M()
+                {
+                new DateTime()[||]
 
-                    }
+                }
                 }
                 """,
                 """
@@ -110,11 +110,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    void M()
-                    {
-                        DateTime {|Rename:dateTime|} = new DateTime();
+                void M()
+                {
+                DateTime {|Rename:dateTime|} = new DateTime();
 
-                    }
+                }
                 }
                 """
             );
@@ -129,10 +129,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    void M()
-                    {
-                        [|new DateTime()|]
-                    }
+                void M()
+                {
+                [|new DateTime()|]
+                }
                 }
                 """,
                 """
@@ -140,10 +140,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    void M()
-                    {
-                        DateTime {|Rename:dateTime|} = new DateTime();
-                    }
+                void M()
+                {
+                DateTime {|Rename:dateTime|} = new DateTime();
+                }
                 }
                 """
             );
@@ -158,10 +158,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    void M()
-                    {
-                        new TimeSpan() +[||] new TimeSpan();
-                    }
+                void M()
+                {
+                new TimeSpan() +[||] new TimeSpan();
+                }
                 }
                 """,
                 """
@@ -169,10 +169,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    void M()
-                    {
-                        TimeSpan {|Rename:timeSpan|} = new TimeSpan() + new TimeSpan();
-                    }
+                void M()
+                {
+                TimeSpan {|Rename:timeSpan|} = new TimeSpan() + new TimeSpan();
+                }
                 }
                 """
             );
@@ -187,10 +187,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    void M()
-                    {
-                        new DateTime();[||]
-                    }
+                void M()
+                {
+                new DateTime();[||]
+                }
                 }
                 """,
                 """
@@ -198,10 +198,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    void M()
-                    {
-                        DateTime {|Rename:dateTime|} = new DateTime();
-                    }
+                void M()
+                {
+                DateTime {|Rename:dateTime|} = new DateTime();
+                }
                 }
                 """
             );
@@ -216,11 +216,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    void M()
-                    {
-                        new DateTime();[||]
+                void M()
+                {
+                new DateTime();[||]
 
-                    }
+                }
                 }
                 """,
                 """
@@ -228,11 +228,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    void M()
-                    {
-                        DateTime {|Rename:dateTime|} = new DateTime();
+                void M()
+                {
+                DateTime {|Rename:dateTime|} = new DateTime();
 
-                    }
+                }
                 }
                 """
             );
@@ -247,10 +247,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    void M()
-                    {
-                        [|new DateTime()|];
-                    }
+                void M()
+                {
+                [|new DateTime()|];
+                }
                 }
                 """,
                 """
@@ -258,10 +258,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    void M()
-                    {
-                        DateTime {|Rename:dateTime|} = new DateTime();
-                    }
+                void M()
+                {
+                DateTime {|Rename:dateTime|} = new DateTime();
+                }
                 }
                 """
             );
@@ -276,10 +276,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    void M()
-                    {
-                        [|new DateTime();|]
-                    }
+                void M()
+                {
+                [|new DateTime();|]
+                }
                 }
                 """,
                 """
@@ -287,10 +287,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    void M()
-                    {
-                        DateTime {|Rename:dateTime|} = new DateTime();
-                    }
+                void M()
+                {
+                DateTime {|Rename:dateTime|} = new DateTime();
+                }
                 }
                 """
             );
@@ -305,11 +305,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    void M()
-                    {
-                        int a = 42;
-                        [||]a = 42;
-                    }
+                void M()
+                {
+                int a = 42;
+                [||]a = 42;
+                }
                 }
                 """
             );
@@ -324,10 +324,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    void M()
-                    {
-                        new DateTime(); [||]
-                    }
+                void M()
+                {
+                new DateTime(); [||]
+                }
                 }
                 """,
                 """
@@ -335,10 +335,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    void M()
-                    {
-                        DateTime {|Rename:dateTime|} = new DateTime(); 
-                    }
+                void M()
+                {
+                DateTime {|Rename:dateTime|} = new DateTime();
+                }
                 }
                 """
             );
@@ -353,11 +353,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    void M()
-                    {
-                        // Comment
-                        new DateTime();[||]
-                    }
+                void M()
+                {
+                // Comment
+                new DateTime();[||]
+                }
                 }
                 """,
                 """
@@ -365,11 +365,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    void M()
-                    {
-                        // Comment
-                        DateTime {|Rename:dateTime|} = new DateTime();
-                    }
+                void M()
+                {
+                // Comment
+                DateTime {|Rename:dateTime|} = new DateTime();
+                }
                 }
                 """
             );
@@ -384,10 +384,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    void M()
-                    {
-                        new DateTime();[||]
-                    }
+                void M()
+                {
+                new DateTime();[||]
+                }
                 }
                 """,
                 """
@@ -395,10 +395,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    void M()
-                    {
-                        var {|Rename:dateTime|} = new DateTime();
-                    }
+                void M()
+                {
+                var {|Rename:dateTime|} = new DateTime();
+                }
                 }
                 """,
                 options: new OptionsCollection(GetLanguage())
@@ -424,10 +424,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    void M()
-                    {
-                        Console.WriteLine();[||]
-                    }
+                void M()
+                {
+                Console.WriteLine();[||]
+                }
                 }
                 """
             );
@@ -442,10 +442,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    void M()
-                    {
-                        var v = new DateTime()[||]
-                    }
+                void M()
+                {
+                var v = new DateTime()[||]
+                }
                 }
                 """
             );
@@ -460,10 +460,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    void M()
-                    {
-                        1 + 1[||]
-                    }
+                void M()
+                {
+                1 + 1[||]
+                }
                 }
                 """,
                 """
@@ -471,10 +471,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    void M()
-                    {
-                        int {|Rename:v|} = 1 + 1;
-                    }
+                void M()
+                {
+                int {|Rename:v|} = 1 + 1;
+                }
                 }
                 """
             );
@@ -489,12 +489,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    (string someString, int someInt) X() => default;
+                (string someString, int someInt) X() => default;
 
-                    void M()
-                    {
-                        X()[||]
-                    }
+                void M()
+                {
+                X()[||]
+                }
                 }
                 """,
                 """
@@ -502,12 +502,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    (string someString, int someInt) X() => default;
+                (string someString, int someInt) X() => default;
 
-                    void M()
-                    {
-                        (string someString, int someInt) = X();
-                    }
+                void M()
+                {
+                (string someString, int someInt) = X();
+                }
                 }
                 """
             );
@@ -522,12 +522,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    (string someString, int someInt) X() => default;
+                (string someString, int someInt) X() => default;
 
-                    void M()
-                    {
-                        X()[||]
-                    }
+                void M()
+                {
+                X()[||]
+                }
                 }
                 """,
                 """
@@ -535,12 +535,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    (string someString, int someInt) X() => default;
+                (string someString, int someInt) X() => default;
 
-                    void M()
-                    {
-                        (string someString, int someInt) {|Rename:value|} = X();
-                    }
+                void M()
+                {
+                (string someString, int someInt) {|Rename:value|} = X();
+                }
                 }
                 """,
                 index: 1
@@ -556,12 +556,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    (string someString, int someInt) X() => default;
+                (string someString, int someInt) X() => default;
 
-                    void M()
-                    {
-                        X()[||]
-                    }
+                void M()
+                {
+                X()[||]
+                }
                 }
                 """,
                 """
@@ -569,12 +569,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    (string someString, int someInt) X() => default;
+                (string someString, int someInt) X() => default;
 
-                    void M()
-                    {
-                        var (someString, someInt) = X();
-                    }
+                void M()
+                {
+                var (someString, someInt) = X();
+                }
                 }
                 """,
                 options: ImplicitTypeEverywhere()
@@ -590,12 +590,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    (string someString, int someInt) X() => default;
+                (string someString, int someInt) X() => default;
 
-                    void M()
-                    {
-                        X();[||]
-                    }
+                void M()
+                {
+                X();[||]
+                }
                 }
                 """,
                 """
@@ -603,12 +603,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    (string someString, int someInt) X() => default;
+                (string someString, int someInt) X() => default;
 
-                    void M()
-                    {
-                        (string someString, int someInt) = X();
-                    }
+                void M()
+                {
+                (string someString, int someInt) = X();
+                }
                 }
                 """
             );
@@ -623,12 +623,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    (string someString, int someInt) X() => default;
+                (string someString, int someInt) X() => default;
 
-                    void M()
-                    {
-                        X();[||]
-                    }
+                void M()
+                {
+                X();[||]
+                }
                 }
                 """,
                 """
@@ -636,12 +636,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    (string someString, int someInt) X() => default;
+                (string someString, int someInt) X() => default;
 
-                    void M()
-                    {
-                        (string someString, int someInt) {|Rename:value|} = X();
-                    }
+                void M()
+                {
+                (string someString, int someInt) {|Rename:value|} = X();
+                }
                 }
                 """,
                 index: 1
@@ -657,12 +657,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    (string someString, int someInt) X() => default;
+                (string someString, int someInt) X() => default;
 
-                    void M()
-                    {
-                        X();[||]
-                    }
+                void M()
+                {
+                X();[||]
+                }
                 }
                 """,
                 """
@@ -670,12 +670,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    (string someString, int someInt) X() => default;
+                (string someString, int someInt) X() => default;
 
-                    void M()
-                    {
-                        var (someString, someInt) = X();
-                    }
+                void M()
+                {
+                var (someString, someInt) = X();
+                }
                 }
                 """,
                 options: ImplicitTypeEverywhere()
@@ -691,14 +691,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    (string someString, int someInt) X() => default;
+                (string someString, int someInt) X() => default;
 
-                    void M()
-                    {
-                        X()[||]
+                void M()
+                {
+                X()[||]
 
-                        string someString;
-                    }
+                string someString;
+                }
                 }
                 """,
                 """
@@ -706,14 +706,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    (string someString, int someInt) X() => default;
+                (string someString, int someInt) X() => default;
 
-                    void M()
-                    {
-                        (string someString1, int someInt) = X();
+                void M()
+                {
+                (string someString1, int someInt) = X();
 
-                        string someString;
-                    }
+                string someString;
+                }
                 }
                 """
             );
@@ -728,14 +728,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    (string someString, int someInt) X() => default;
+                (string someString, int someInt) X() => default;
 
-                    void M()
-                    {
-                        X()[||]
+                void M()
+                {
+                X()[||]
 
-                        string someString;
-                    }
+                string someString;
+                }
                 }
                 """,
                 """
@@ -743,14 +743,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    (string someString, int someInt) X() => default;
+                (string someString, int someInt) X() => default;
 
-                    void M()
-                    {
-                        (string someString, int someInt) {|Rename:value|} = X();
+                void M()
+                {
+                (string someString, int someInt) {|Rename:value|} = X();
 
-                        string someString;
-                    }
+                string someString;
+                }
                 }
                 """,
                 index: 1
@@ -766,14 +766,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    (string someString, int someInt) X() => default;
+                (string someString, int someInt) X() => default;
 
-                    void M()
-                    {
-                        X()[||]
+                void M()
+                {
+                X()[||]
 
-                        string someString;
-                    }
+                string someString;
+                }
                 }
                 """,
                 """
@@ -781,14 +781,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    (string someString, int someInt) X() => default;
+                (string someString, int someInt) X() => default;
 
-                    void M()
-                    {
-                        var (someString1, someInt) = X();
+                void M()
+                {
+                var (someString1, someInt) = X();
 
-                        string someString;
-                    }
+                string someString;
+                }
                 }
                 """,
                 options: ImplicitTypeEverywhere()
@@ -804,12 +804,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    ValueTuple<string, int> X() => default;
+                ValueTuple<string, int> X() => default;
 
-                    void M()
-                    {
-                        X()[||]
-                    }
+                void M()
+                {
+                X()[||]
+                }
                 }
                 """,
                 """
@@ -817,12 +817,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    ValueTuple<string, int> X() => default;
+                ValueTuple<string, int> X() => default;
 
-                    void M()
-                    {
-                        (string item1, int item2) = X();
-                    }
+                void M()
+                {
+                (string item1, int item2) = X();
+                }
                 }
                 """
             );
@@ -837,12 +837,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    ValueTuple<string, int> X() => default;
+                ValueTuple<string, int> X() => default;
 
-                    void M()
-                    {
-                        X()[||]
-                    }
+                void M()
+                {
+                X()[||]
+                }
                 }
                 """,
                 """
@@ -850,12 +850,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    ValueTuple<string, int> X() => default;
+                ValueTuple<string, int> X() => default;
 
-                    void M()
-                    {
-                        (string, int) {|Rename:value|} = X();
-                    }
+                void M()
+                {
+                (string, int) {|Rename:value|} = X();
+                }
                 }
                 """,
                 index: 1
@@ -871,12 +871,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    ValueTuple<string, int> X() => default;
+                ValueTuple<string, int> X() => default;
 
-                    void M()
-                    {
-                        X()[||]
-                    }
+                void M()
+                {
+                X()[||]
+                }
                 }
                 """,
                 """
@@ -884,12 +884,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    ValueTuple<string, int> X() => default;
+                ValueTuple<string, int> X() => default;
 
-                    void M()
-                    {
-                        var (item1, item2) = X();
-                    }
+                void M()
+                {
+                var (item1, item2) = X();
+                }
                 }
                 """,
                 options: ImplicitTypeEverywhere()
@@ -905,12 +905,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    (string, int) X() => default;
+                (string, int) X() => default;
 
-                    void M()
-                    {
-                        X()[||]
-                    }
+                void M()
+                {
+                X()[||]
+                }
                 }
                 """,
                 """
@@ -918,12 +918,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    (string, int) X() => default;
+                (string, int) X() => default;
 
-                    void M()
-                    {
-                        (string item1, int item2) = X();
-                    }
+                void M()
+                {
+                (string item1, int item2) = X();
+                }
                 }
                 """
             );
@@ -938,12 +938,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    (string, int) X() => default;
+                (string, int) X() => default;
 
-                    void M()
-                    {
-                        X()[||]
-                    }
+                void M()
+                {
+                X()[||]
+                }
                 }
                 """,
                 """
@@ -951,12 +951,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    (string, int) X() => default;
+                (string, int) X() => default;
 
-                    void M()
-                    {
-                        (string, int) {|Rename:value|} = X();
-                    }
+                void M()
+                {
+                (string, int) {|Rename:value|} = X();
+                }
                 }
                 """,
                 index: 1
@@ -972,12 +972,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    (string, int) X() => default;
+                (string, int) X() => default;
 
-                    void M()
-                    {
-                        X()[||]
-                    }
+                void M()
+                {
+                X()[||]
+                }
                 }
                 """,
                 """
@@ -985,12 +985,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    (string, int) X() => default;
+                (string, int) X() => default;
 
-                    void M()
-                    {
-                        var (item1, item2) = X();
-                    }
+                void M()
+                {
+                var (item1, item2) = X();
+                }
                 }
                 """,
                 options: ImplicitTypeEverywhere()
@@ -1006,12 +1006,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    (string someString, int someInt) X() => default;
+                (string someString, int someInt) X() => default;
 
-                    void M()
-                    {
-                        X()[||]
-                    }
+                void M()
+                {
+                X()[||]
+                }
                 }
                 """,
                 """
@@ -1019,12 +1019,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    (string someString, int someInt) X() => default;
+                (string someString, int someInt) X() => default;
 
-                    void M()
-                    {
-                        var (someString, someInt) = X();
-                    }
+                void M()
+                {
+                var (someString, someInt) = X();
+                }
                 }
                 """,
                 options: ImplicitTypeForIntrinsics()
@@ -1040,13 +1040,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    (string someString, C c) X() => default;
+                (string someString, C c) X() => default;
 
-                    void M()
-                    {
-                        // don't use `var (...)` here as not all the individual types will be 'var'
-                        X()[||]
-                    }
+                void M()
+                {
+                // don't use `var (...)` here as not all the individual types will be 'var'
+                X()[||]
+                }
                 }
                 """,
                 """
@@ -1054,13 +1054,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    (string someString, C c) X() => default;
+                (string someString, C c) X() => default;
 
-                    void M()
-                    {
-                        // don't use `var (...)` here as not all the individual types will be 'var'
-                        (var someString, C c) = X();
-                    }
+                void M()
+                {
+                // don't use `var (...)` here as not all the individual types will be 'var'
+                (var someString, C c) = X();
+                }
                 }
                 """,
                 options: ImplicitTypeForIntrinsics()
@@ -1076,12 +1076,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    (string someString, int someInt) X() => default;
+                (string someString, int someInt) X() => default;
 
-                    void M()
-                    {
-                        X()[||]
-                    }
+                void M()
+                {
+                X()[||]
+                }
                 }
                 """,
                 """
@@ -1089,12 +1089,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    (string someString, int someInt) X() => default;
+                (string someString, int someInt) X() => default;
 
-                    void M()
-                    {
-                        (string someString, int someInt) = X();
-                    }
+                void M()
+                {
+                (string someString, int someInt) = X();
+                }
                 }
                 """,
                 options: ImplicitTypeForApparent()
@@ -1110,11 +1110,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    void M()
-                    {
-                        // literal is not apparent (it is builtin). default(...) is both apparent
-                        (someString: "", someC: default(C))[||]
-                    }
+                void M()
+                {
+                // literal is not apparent (it is builtin). default(...) is both apparent
+                (someString: "", someC: default(C))[||]
+                }
                 }
                 """,
                 """
@@ -1122,11 +1122,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    void M()
-                    {
-                        // literal is not apparent (it is builtin). default(...) is both apparent
-                        (string someString, C someC) = (someString: "", someC: default(C));
-                    }
+                void M()
+                {
+                // literal is not apparent (it is builtin). default(...) is both apparent
+                (string someString, C someC) = (someString: "", someC: default(C));
+                }
                 }
                 """,
                 options: ImplicitTypeForApparent()
@@ -1142,11 +1142,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    void M()
-                    {
-                        // literal is is builtin, as is default(...)
-                        (someString: "", someC: default(C))[||]
-                    }
+                void M()
+                {
+                // literal is is builtin, as is default(...)
+                (someString: "", someC: default(C))[||]
+                }
                 }
                 """,
                 """
@@ -1154,11 +1154,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceVariable
 
                 class C
                 {
-                    void M()
-                    {
-                        // literal is is builtin, as is default(...)
-                        var (someString, someC) = (someString: "", someC: default(C));
-                    }
+                void M()
+                {
+                // literal is is builtin, as is default(...)
+                var (someString, someC) = (someString: "", someC: default(C));
+                }
                 }
                 """,
                 options: ImplicitTypeForApparentAndBuiltIn()

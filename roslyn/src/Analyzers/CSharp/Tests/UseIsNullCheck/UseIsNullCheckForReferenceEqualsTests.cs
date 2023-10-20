@@ -49,11 +49,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 
                 class C
                 {
-                    void M(string s)
-                    {
-                        if ([||]ReferenceEquals(s, null))
-                            return;
-                    }
+                void M(string s)
+                {
+                if ([||]ReferenceEquals(s, null))
+                return;
+                }
                 }
                 """,
                 """
@@ -61,11 +61,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 
                 class C
                 {
-                    void M(string s)
-                    {
-                        if (s is null)
-                            return;
-                    }
+                void M(string s)
+                {
+                if (s is null)
+                return;
+                }
                 }
                 """
             );
@@ -80,11 +80,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 
                 class C
                 {
-                    void M(string s)
-                    {
-                        if ([||]ReferenceEquals(s, null))
-                            return;
-                    }
+                void M(string s)
+                {
+                if ([||]ReferenceEquals(s, null))
+                return;
+                }
                 }
                 """,
                 new[] { CSharpAnalyzersResources.Use_is_null_check }
@@ -100,11 +100,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 
                 class C
                 {
-                    void M(string s)
-                    {
-                        if (![||]ReferenceEquals(s, null))
-                            return;
-                    }
+                void M(string s)
+                {
+                if (![||]ReferenceEquals(s, null))
+                return;
+                }
                 }
                 """,
                 new[] { CSharpAnalyzersResources.Use_is_object_check },
@@ -125,11 +125,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 
                 class C
                 {
-                    void M(string s)
-                    {
-                        if (![||]ReferenceEquals(s, null))
-                            return;
-                    }
+                void M(string s)
+                {
+                if (![||]ReferenceEquals(s, null))
+                return;
+                }
                 }
                 """,
                 new[] { CSharpAnalyzersResources.Use_is_not_null_check },
@@ -150,11 +150,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 
                 class C
                 {
-                    void M(string s)
-                    {
-                        if (object.[||]ReferenceEquals(s, null))
-                            return;
-                    }
+                void M(string s)
+                {
+                if (object.[||]ReferenceEquals(s, null))
+                return;
+                }
                 }
                 """,
                 """
@@ -162,11 +162,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 
                 class C
                 {
-                    void M(string s)
-                    {
-                        if (s is null)
-                            return;
-                    }
+                void M(string s)
+                {
+                if (s is null)
+                return;
+                }
                 }
                 """
             );
@@ -181,11 +181,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 
                 class C
                 {
-                    void M(string s)
-                    {
-                        if (Object.[||]ReferenceEquals(s, null))
-                            return;
-                    }
+                void M(string s)
+                {
+                if (Object.[||]ReferenceEquals(s, null))
+                return;
+                }
                 }
                 """,
                 """
@@ -193,11 +193,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 
                 class C
                 {
-                    void M(string s)
-                    {
-                        if (s is null)
-                            return;
-                    }
+                void M(string s)
+                {
+                if (s is null)
+                return;
+                }
                 }
                 """
             );
@@ -212,11 +212,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 
                 class C
                 {
-                    void M(string s)
-                    {
-                        if ([||]ReferenceEquals(null, s))
-                            return;
-                    }
+                void M(string s)
+                {
+                if ([||]ReferenceEquals(null, s))
+                return;
+                }
                 }
                 """,
                 """
@@ -224,11 +224,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 
                 class C
                 {
-                    void M(string s)
-                    {
-                        if (s is null)
-                            return;
-                    }
+                void M(string s)
+                {
+                if (s is null)
+                return;
+                }
                 }
                 """
             );
@@ -243,11 +243,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 
                 class C
                 {
-                    void M(string s)
-                    {
-                        if (![||]ReferenceEquals(null, s))
-                            return;
-                    }
+                void M(string s)
+                {
+                if (![||]ReferenceEquals(null, s))
+                return;
+                }
                 }
                 """,
                 """
@@ -255,11 +255,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 
                 class C
                 {
-                    void M(string s)
-                    {
-                        if (s is object)
-                            return;
-                    }
+                void M(string s)
+                {
+                if (s is object)
+                return;
+                }
                 }
                 """,
                 new TestParameters(parseOptions: CSharp7)
@@ -275,11 +275,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 
                 class C
                 {
-                    void M(string s)
-                    {
-                        if (![||]ReferenceEquals(null, s))
-                            return;
-                    }
+                void M(string s)
+                {
+                if (![||]ReferenceEquals(null, s))
+                return;
+                }
                 }
                 """,
                 """
@@ -287,11 +287,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 
                 class C
                 {
-                    void M(string s)
-                    {
-                        if (s is not null)
-                            return;
-                    }
+                void M(string s)
+                {
+                if (s is not null)
+                return;
+                }
                 }
                 """,
                 new TestParameters(parseOptions: CSharp9)
@@ -307,11 +307,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 
                 class C
                 {
-                    void M(string s)
-                    {
-                        if ([||]ReferenceEquals(null, s))
-                            return;
-                    }
+                void M(string s)
+                {
+                if ([||]ReferenceEquals(null, s))
+                return;
+                }
                 }
                 """,
                 parameters: new TestParameters(
@@ -331,12 +331,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 
                 class C
                 {
-                    void M(string s1, string s2)
-                    {
-                        if ({|FixAllInDocument:ReferenceEquals|}(s1, null) ||
-                            ReferenceEquals(s2, null))
-                            return;
-                    }
+                void M(string s1, string s2)
+                {
+                if ({|FixAllInDocument:ReferenceEquals|}(s1, null) ||
+                ReferenceEquals(s2, null))
+                return;
+                }
                 }
                 """,
                 """
@@ -344,12 +344,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 
                 class C
                 {
-                    void M(string s1, string s2)
-                    {
-                        if (s1 is null ||
-                            s2 is null)
-                            return;
-                    }
+                void M(string s1, string s2)
+                {
+                if (s1 is null ||
+                s2 is null)
+                return;
+                }
                 }
                 """
             );
@@ -364,12 +364,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 
                 class C
                 {
-                    void M(string s1, string s2)
-                    {
-                        if (ReferenceEquals(s1, null) ||
-                            {|FixAllInDocument:ReferenceEquals|}(s2, null))
-                            return;
-                    }
+                void M(string s1, string s2)
+                {
+                if (ReferenceEquals(s1, null) ||
+                {|FixAllInDocument:ReferenceEquals|}(s2, null))
+                return;
+                }
                 }
                 """,
                 """
@@ -377,12 +377,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 
                 class C
                 {
-                    void M(string s1, string s2)
-                    {
-                        if (s1 is null ||
-                            s2 is null)
-                            return;
-                    }
+                void M(string s1, string s2)
+                {
+                if (s1 is null ||
+                s2 is null)
+                return;
+                }
                 }
                 """
             );
@@ -395,25 +395,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
                 """
                 class C
                 {
-                    public static void NotNull<T>(T value)
-                    {
-                        if ([||]ReferenceEquals(value, null))
-                        {
-                            return;
-                        }
-                    }
+                public static void NotNull<T>(T value)
+                {
+                if ([||]ReferenceEquals(value, null))
+                {
+                return;
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    public static void NotNull<T>(T value)
-                    {
-                        if (value == null)
-                        {
-                            return;
-                        }
-                    }
+                public static void NotNull<T>(T value)
+                {
+                if (value == null)
+                {
+                return;
+                }
+                }
                 }
                 """,
                 new TestParameters(parseOptions: CSharp7)
@@ -429,13 +429,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 
                 class C
                 {
-                    public static void NotNull<T>(T value)
-                    {
-                        if ({|FixAllInDocument:ReferenceEquals|}(value, null))
-                        {
-                            return;
-                        }
-                    }
+                public static void NotNull<T>(T value)
+                {
+                if ({|FixAllInDocument:ReferenceEquals|}(value, null))
+                {
+                return;
+                }
+                }
                 }
                 """,
                 """
@@ -443,13 +443,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 
                 class C
                 {
-                    public static void NotNull<T>(T value)
-                    {
-                        if (value is null)
-                        {
-                            return;
-                        }
-                    }
+                public static void NotNull<T>(T value)
+                {
+                if (value is null)
+                {
+                return;
+                }
+                }
                 }
                 """,
                 new TestParameters(parseOptions: CSharp8)
@@ -463,25 +463,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
                 """
                 class C
                 {
-                    public static void NotNull<T>(T value)
-                    {
-                        if (![||]ReferenceEquals(value, null))
-                        {
-                            return;
-                        }
-                    }
+                public static void NotNull<T>(T value)
+                {
+                if (![||]ReferenceEquals(value, null))
+                {
+                return;
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    public static void NotNull<T>(T value)
-                    {
-                        if (value is object)
-                        {
-                            return;
-                        }
-                    }
+                public static void NotNull<T>(T value)
+                {
+                if (value is object)
+                {
+                return;
+                }
+                }
                 }
                 """,
                 new TestParameters(parseOptions: CSharp7)
@@ -495,25 +495,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
                 """
                 class C
                 {
-                    public static void NotNull<T>(T value)
-                    {
-                        if (![||]ReferenceEquals(value, null))
-                        {
-                            return;
-                        }
-                    }
+                public static void NotNull<T>(T value)
+                {
+                if (![||]ReferenceEquals(value, null))
+                {
+                return;
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    public static void NotNull<T>(T value)
-                    {
-                        if (value is not null)
-                        {
-                            return;
-                        }
-                    }
+                public static void NotNull<T>(T value)
+                {
+                if (value is not null)
+                {
+                return;
+                }
+                }
                 }
                 """,
                 new TestParameters(parseOptions: CSharp9)
@@ -527,25 +527,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
                 """
                 class C
                 {
-                    public static void NotNull<T>(T value) where T:class
-                    {
-                        if ([||]ReferenceEquals(value, null))
-                        {
-                            return;
-                        }
-                    }
+                public static void NotNull<T>(T value) where T:class
+                {
+                if ([||]ReferenceEquals(value, null))
+                {
+                return;
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    public static void NotNull<T>(T value) where T:class
-                    {
-                        if (value is null)
-                        {
-                            return;
-                        }
-                    }
+                public static void NotNull<T>(T value) where T:class
+                {
+                if (value is null)
+                {
+                return;
+                }
+                }
                 }
                 """
             );
@@ -558,25 +558,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
                 """
                 class C
                 {
-                    public static void NotNull<T>(T value) where T:class
-                    {
-                        if (![||]ReferenceEquals(value, null))
-                        {
-                            return;
-                        }
-                    }
+                public static void NotNull<T>(T value) where T:class
+                {
+                if (![||]ReferenceEquals(value, null))
+                {
+                return;
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    public static void NotNull<T>(T value) where T:class
-                    {
-                        if (value is object)
-                        {
-                            return;
-                        }
-                    }
+                public static void NotNull<T>(T value) where T:class
+                {
+                if (value is object)
+                {
+                return;
+                }
+                }
                 }
                 """,
                 new TestParameters(parseOptions: CSharp7)
@@ -590,25 +590,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
                 """
                 class C
                 {
-                    public static void NotNull<T>(T value) where T:class
-                    {
-                        if (![||]ReferenceEquals(value, null))
-                        {
-                            return;
-                        }
-                    }
+                public static void NotNull<T>(T value) where T:class
+                {
+                if (![||]ReferenceEquals(value, null))
+                {
+                return;
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    public static void NotNull<T>(T value) where T:class
-                    {
-                        if (value is not null)
-                        {
-                            return;
-                        }
-                    }
+                public static void NotNull<T>(T value) where T:class
+                {
+                if (value is not null)
+                {
+                return;
+                }
+                }
                 }
                 """,
                 new TestParameters(parseOptions: CSharp9)
@@ -622,13 +622,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
                 """
                 class C
                 {
-                    public static void NotNull<T>(T value) where T:struct
-                    {
-                        if ([||]ReferenceEquals(value, null))
-                        {
-                            return;
-                        }
-                    }
+                public static void NotNull<T>(T value) where T:struct
+                {
+                if ([||]ReferenceEquals(value, null))
+                {
+                return;
+                }
+                }
                 }
                 """
             );
@@ -641,13 +641,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
                 """
                 class C
                 {
-                    public static void NotNull<T>(T value) where T:struct
-                    {
-                        if (![||]ReferenceEquals(value, null))
-                        {
-                            return;
-                        }
-                    }
+                public static void NotNull<T>(T value) where T:struct
+                {
+                if (![||]ReferenceEquals(value, null))
+                {
+                return;
+                }
+                }
                 }
                 """
             );
@@ -662,11 +662,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 
                 class C
                 {
-                    void M(string s2)
-                    {
-                        if ({|FixAllInDocument:ReferenceEquals|}(ReferenceEquals(s2, null), null))
-                            return;
-                    }
+                void M(string s2)
+                {
+                if ({|FixAllInDocument:ReferenceEquals|}(ReferenceEquals(s2, null), null))
+                return;
+                }
                 }
                 """,
                 """
@@ -674,11 +674,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 
                 class C
                 {
-                    void M(string s2)
-                    {
-                        if (ReferenceEquals(s2, null) is null)
-                            return;
-                    }
+                void M(string s2)
+                {
+                if (ReferenceEquals(s2, null) is null)
+                return;
+                }
                 }
                 """
             );
@@ -693,13 +693,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 
                 class C
                 {
-                    public static void NotNull<T>(T value) where T:C
-                    {
-                        if ({|FixAllInDocument:ReferenceEquals|}(value, null))
-                        {
-                            return;
-                        }
-                    }
+                public static void NotNull<T>(T value) where T:C
+                {
+                if ({|FixAllInDocument:ReferenceEquals|}(value, null))
+                {
+                return;
+                }
+                }
                 }
                 """,
                 """
@@ -707,13 +707,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 
                 class C
                 {
-                    public static void NotNull<T>(T value) where T:C
-                    {
-                        if (value is null)
-                        {
-                            return;
-                        }
-                    }
+                public static void NotNull<T>(T value) where T:C
+                {
+                if (value is null)
+                {
+                return;
+                }
+                }
                 }
                 """,
                 new TestParameters(parseOptions: CSharp7)

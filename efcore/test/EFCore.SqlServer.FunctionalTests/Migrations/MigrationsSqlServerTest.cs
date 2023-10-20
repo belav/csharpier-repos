@@ -34,12 +34,12 @@ public class MigrationsSqlServerTest
 
         AssertSql(
             """
-CREATE TABLE [People] (
-    [Id] int NOT NULL IDENTITY,
-    [Name] nvarchar(max) NULL,
-    CONSTRAINT [PK_People] PRIMARY KEY ([Id])
-);
-"""
+            CREATE TABLE [People] (
+            [Id] int NOT NULL IDENTITY,
+            [Name] nvarchar(max) NULL,
+            CONSTRAINT [PK_People] PRIMARY KEY ([Id])
+            );
+            """
         );
     }
 
@@ -49,29 +49,29 @@ CREATE TABLE [People] (
 
         AssertSql(
             """
-IF SCHEMA_ID(N'dbo2') IS NULL EXEC(N'CREATE SCHEMA [dbo2];');
-""",
+            IF SCHEMA_ID(N'dbo2') IS NULL EXEC(N'CREATE SCHEMA [dbo2];');
+            """,
             //
             """
-CREATE TABLE [dbo2].[People] (
-    [CustomId] int NOT NULL IDENTITY,
-    [EmployerId] int NOT NULL,
-    [SSN] nvarchar(11) COLLATE German_PhoneBook_CI_AS NOT NULL,
-    CONSTRAINT [PK_People] PRIMARY KEY ([CustomId]),
-    CONSTRAINT [AK_People_SSN] UNIQUE ([SSN]),
-    CONSTRAINT [CK_People_EmployerId] CHECK ([EmployerId] > 0),
-    CONSTRAINT [FK_People_Employers_EmployerId] FOREIGN KEY ([EmployerId]) REFERENCES [Employers] ([Id]) ON DELETE CASCADE
-);
-DECLARE @description AS sql_variant;
-SET @description = N'Table comment';
-EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', N'dbo2', 'TABLE', N'People';
-SET @description = N'Employer ID comment';
-EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', N'dbo2', 'TABLE', N'People', 'COLUMN', N'EmployerId';
-""",
+            CREATE TABLE [dbo2].[People] (
+            [CustomId] int NOT NULL IDENTITY,
+            [EmployerId] int NOT NULL,
+            [SSN] nvarchar(11) COLLATE German_PhoneBook_CI_AS NOT NULL,
+            CONSTRAINT [PK_People] PRIMARY KEY ([CustomId]),
+            CONSTRAINT [AK_People_SSN] UNIQUE ([SSN]),
+            CONSTRAINT [CK_People_EmployerId] CHECK ([EmployerId] > 0),
+            CONSTRAINT [FK_People_Employers_EmployerId] FOREIGN KEY ([EmployerId]) REFERENCES [Employers] ([Id]) ON DELETE CASCADE
+            );
+            DECLARE @description AS sql_variant;
+            SET @description = N'Table comment';
+            EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', N'dbo2', 'TABLE', N'People';
+            SET @description = N'Employer ID comment';
+            EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', N'dbo2', 'TABLE', N'People', 'COLUMN', N'EmployerId';
+            """,
             //
             """
-CREATE INDEX [IX_People_EmployerId] ON [dbo2].[People] ([EmployerId]);
-"""
+            CREATE INDEX [IX_People_EmployerId] ON [dbo2].[People] ([EmployerId]);
+            """
         );
     }
 
@@ -81,10 +81,10 @@ CREATE INDEX [IX_People_EmployerId] ON [dbo2].[People] ([EmployerId]);
 
         AssertSql(
             """
-CREATE TABLE [Anonymous] (
-    [SomeColumn] int NOT NULL
-);
-"""
+            CREATE TABLE [Anonymous] (
+            [SomeColumn] int NOT NULL
+            );
+            """
         );
     }
 
@@ -94,19 +94,19 @@ CREATE TABLE [Anonymous] (
 
         AssertSql(
             """
-CREATE TABLE [People] (
-    [Id] int NOT NULL IDENTITY,
-    [Name] nvarchar(max) NULL,
-    CONSTRAINT [PK_People] PRIMARY KEY ([Id])
-);
-DECLARE @defaultSchema AS sysname;
-SET @defaultSchema = SCHEMA_NAME();
-DECLARE @description AS sql_variant;
-SET @description = N'Table comment';
-EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People';
-SET @description = N'Column comment';
-EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People', 'COLUMN', N'Name';
-"""
+            CREATE TABLE [People] (
+            [Id] int NOT NULL IDENTITY,
+            [Name] nvarchar(max) NULL,
+            CONSTRAINT [PK_People] PRIMARY KEY ([Id])
+            );
+            DECLARE @defaultSchema AS sysname;
+            SET @defaultSchema = SCHEMA_NAME();
+            DECLARE @description AS sql_variant;
+            SET @description = N'Table comment';
+            EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People';
+            SET @description = N'Column comment';
+            EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People', 'COLUMN', N'Name';
+            """
         );
     }
 
@@ -116,19 +116,19 @@ EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSc
 
         AssertSql(
             """
-CREATE TABLE [People] (
-    [Id] int NOT NULL IDENTITY,
-    [Name] nvarchar(max) NULL,
-    CONSTRAINT [PK_People] PRIMARY KEY ([Id])
-);
-DECLARE @defaultSchema AS sysname;
-SET @defaultSchema = SCHEMA_NAME();
-DECLARE @description AS sql_variant;
-SET @description = CONCAT(N'This is a multi-line', NCHAR(13), NCHAR(10), N'table comment.', NCHAR(13), NCHAR(10), N'More information can', NCHAR(13), NCHAR(10), N'be found in the docs.');
-EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People';
-SET @description = CONCAT(N'This is a multi-line', NCHAR(10), N'column comment.', NCHAR(10), N'More information can', NCHAR(10), N'be found in the docs.');
-EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People', 'COLUMN', N'Name';
-"""
+            CREATE TABLE [People] (
+            [Id] int NOT NULL IDENTITY,
+            [Name] nvarchar(max) NULL,
+            CONSTRAINT [PK_People] PRIMARY KEY ([Id])
+            );
+            DECLARE @defaultSchema AS sysname;
+            SET @defaultSchema = SCHEMA_NAME();
+            DECLARE @description AS sql_variant;
+            SET @description = CONCAT(N'This is a multi-line', NCHAR(13), NCHAR(10), N'table comment.', NCHAR(13), NCHAR(10), N'More information can', NCHAR(13), NCHAR(10), N'be found in the docs.');
+            EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People';
+            SET @description = CONCAT(N'This is a multi-line', NCHAR(10), N'column comment.', NCHAR(10), N'More information can', NCHAR(10), N'be found in the docs.');
+            EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People', 'COLUMN', N'Name';
+            """
         );
     }
 
@@ -167,10 +167,10 @@ CREATE TABLE [People] (
 
         AssertSql(
             """
-CREATE TABLE [People] (
-    [SomeProperty] nvarchar(max) SPARSE NULL
-);
-"""
+            CREATE TABLE [People] (
+            [SomeProperty] nvarchar(max) SPARSE NULL
+            );
+            """
         );
     }
 
@@ -196,10 +196,10 @@ CREATE TABLE [People] (
 
         AssertSql(
             """
-CREATE TABLE [People] (
-    [IdentityColumn] smallint NOT NULL IDENTITY
-);
-"""
+            CREATE TABLE [People] (
+            [IdentityColumn] smallint NOT NULL IDENTITY
+            );
+            """
         );
     }
 
@@ -229,50 +229,50 @@ CREATE TABLE [People] (
 
         AssertSql(
             """
-IF SERVERPROPERTY('IsXTPSupported') = 1 AND SERVERPROPERTY('EngineEdition') <> 5
-    BEGIN
-    IF NOT EXISTS (
-        SELECT 1 FROM [sys].[filegroups] [FG] JOIN [sys].[database_files] [F] ON [FG].[data_space_id] = [F].[data_space_id] WHERE [FG].[type] = N'FX' AND [F].[type] = 2)
-        BEGIN
-        ALTER DATABASE CURRENT SET AUTO_CLOSE OFF;
-        DECLARE @db_name nvarchar(max) = DB_NAME();
-        DECLARE @fg_name nvarchar(max);
-        SELECT TOP(1) @fg_name = [name] FROM [sys].[filegroups] WHERE [type] = N'FX';
+            IF SERVERPROPERTY('IsXTPSupported') = 1 AND SERVERPROPERTY('EngineEdition') <> 5
+            BEGIN
+            IF NOT EXISTS (
+            SELECT 1 FROM [sys].[filegroups] [FG] JOIN [sys].[database_files] [F] ON [FG].[data_space_id] = [F].[data_space_id] WHERE [FG].[type] = N'FX' AND [F].[type] = 2)
+            BEGIN
+            ALTER DATABASE CURRENT SET AUTO_CLOSE OFF;
+            DECLARE @db_name nvarchar(max) = DB_NAME();
+            DECLARE @fg_name nvarchar(max);
+            SELECT TOP(1) @fg_name = [name] FROM [sys].[filegroups] WHERE [type] = N'FX';
 
-        IF @fg_name IS NULL
+            IF @fg_name IS NULL
             BEGIN
             SET @fg_name = @db_name + N'_MODFG';
             EXEC(N'ALTER DATABASE CURRENT ADD FILEGROUP [' + @fg_name + '] CONTAINS MEMORY_OPTIMIZED_DATA;');
             END
 
-        DECLARE @path nvarchar(max);
-        SELECT TOP(1) @path = [physical_name] FROM [sys].[database_files] WHERE charindex('\', [physical_name]) > 0 ORDER BY [file_id];
-        IF (@path IS NULL)
+            DECLARE @path nvarchar(max);
+            SELECT TOP(1) @path = [physical_name] FROM [sys].[database_files] WHERE charindex('\', [physical_name]) > 0 ORDER BY [file_id];
+            IF (@path IS NULL)
             SET @path = '\' + @db_name;
 
-        DECLARE @filename nvarchar(max) = right(@path, charindex('\', reverse(@path)) - 1);
-        SET @filename = REPLACE(left(@filename, len(@filename) - charindex('.', reverse(@filename))), '''', '''''') + N'_MOD';
-        DECLARE @new_path nvarchar(max) = REPLACE(CAST(SERVERPROPERTY('InstanceDefaultDataPath') AS nvarchar(max)), '''', '''''') + @filename;
+            DECLARE @filename nvarchar(max) = right(@path, charindex('\', reverse(@path)) - 1);
+            SET @filename = REPLACE(left(@filename, len(@filename) - charindex('.', reverse(@filename))), '''', '''''') + N'_MOD';
+            DECLARE @new_path nvarchar(max) = REPLACE(CAST(SERVERPROPERTY('InstanceDefaultDataPath') AS nvarchar(max)), '''', '''''') + @filename;
 
-        EXEC(N'
+            EXEC(N'
             ALTER DATABASE CURRENT
             ADD FILE (NAME=''' + @filename + ''', filename=''' + @new_path + ''')
             TO FILEGROUP [' + @fg_name + '];')
-        END
-    END
+            END
+            END
 
-IF SERVERPROPERTY('IsXTPSupported') = 1
-EXEC(N'
-    ALTER DATABASE CURRENT
-    SET MEMORY_OPTIMIZED_ELEVATE_TO_SNAPSHOT ON;')
-""",
+            IF SERVERPROPERTY('IsXTPSupported') = 1
+            EXEC(N'
+            ALTER DATABASE CURRENT
+            SET MEMORY_OPTIMIZED_ELEVATE_TO_SNAPSHOT ON;')
+            """,
             //
             """
-CREATE TABLE [People] (
-    [Id] int NOT NULL IDENTITY,
-    CONSTRAINT [PK_People] PRIMARY KEY NONCLUSTERED ([Id])
-) WITH (MEMORY_OPTIMIZED = ON);
-"""
+            CREATE TABLE [People] (
+            [Id] int NOT NULL IDENTITY,
+            CONSTRAINT [PK_People] PRIMARY KEY NONCLUSTERED ([Id])
+            ) WITH (MEMORY_OPTIMIZED = ON);
+            """
         );
     }
 
@@ -302,57 +302,57 @@ CREATE TABLE [People] (
 
         AssertSql(
             """
-IF SERVERPROPERTY('IsXTPSupported') = 1 AND SERVERPROPERTY('EngineEdition') <> 5
-    BEGIN
-    IF NOT EXISTS (
-        SELECT 1 FROM [sys].[filegroups] [FG] JOIN [sys].[database_files] [F] ON [FG].[data_space_id] = [F].[data_space_id] WHERE [FG].[type] = N'FX' AND [F].[type] = 2)
-        BEGIN
-        ALTER DATABASE CURRENT SET AUTO_CLOSE OFF;
-        DECLARE @db_name nvarchar(max) = DB_NAME();
-        DECLARE @fg_name nvarchar(max);
-        SELECT TOP(1) @fg_name = [name] FROM [sys].[filegroups] WHERE [type] = N'FX';
+            IF SERVERPROPERTY('IsXTPSupported') = 1 AND SERVERPROPERTY('EngineEdition') <> 5
+            BEGIN
+            IF NOT EXISTS (
+            SELECT 1 FROM [sys].[filegroups] [FG] JOIN [sys].[database_files] [F] ON [FG].[data_space_id] = [F].[data_space_id] WHERE [FG].[type] = N'FX' AND [F].[type] = 2)
+            BEGIN
+            ALTER DATABASE CURRENT SET AUTO_CLOSE OFF;
+            DECLARE @db_name nvarchar(max) = DB_NAME();
+            DECLARE @fg_name nvarchar(max);
+            SELECT TOP(1) @fg_name = [name] FROM [sys].[filegroups] WHERE [type] = N'FX';
 
-        IF @fg_name IS NULL
+            IF @fg_name IS NULL
             BEGIN
             SET @fg_name = @db_name + N'_MODFG';
             EXEC(N'ALTER DATABASE CURRENT ADD FILEGROUP [' + @fg_name + '] CONTAINS MEMORY_OPTIMIZED_DATA;');
             END
 
-        DECLARE @path nvarchar(max);
-        SELECT TOP(1) @path = [physical_name] FROM [sys].[database_files] WHERE charindex('\', [physical_name]) > 0 ORDER BY [file_id];
-        IF (@path IS NULL)
+            DECLARE @path nvarchar(max);
+            SELECT TOP(1) @path = [physical_name] FROM [sys].[database_files] WHERE charindex('\', [physical_name]) > 0 ORDER BY [file_id];
+            IF (@path IS NULL)
             SET @path = '\' + @db_name;
 
-        DECLARE @filename nvarchar(max) = right(@path, charindex('\', reverse(@path)) - 1);
-        SET @filename = REPLACE(left(@filename, len(@filename) - charindex('.', reverse(@filename))), '''', '''''') + N'_MOD';
-        DECLARE @new_path nvarchar(max) = REPLACE(CAST(SERVERPROPERTY('InstanceDefaultDataPath') AS nvarchar(max)), '''', '''''') + @filename;
+            DECLARE @filename nvarchar(max) = right(@path, charindex('\', reverse(@path)) - 1);
+            SET @filename = REPLACE(left(@filename, len(@filename) - charindex('.', reverse(@filename))), '''', '''''') + N'_MOD';
+            DECLARE @new_path nvarchar(max) = REPLACE(CAST(SERVERPROPERTY('InstanceDefaultDataPath') AS nvarchar(max)), '''', '''''') + @filename;
 
-        EXEC(N'
+            EXEC(N'
             ALTER DATABASE CURRENT
             ADD FILE (NAME=''' + @filename + ''', filename=''' + @new_path + ''')
             TO FILEGROUP [' + @fg_name + '];')
-        END
-    END
+            END
+            END
 
-IF SERVERPROPERTY('IsXTPSupported') = 1
-EXEC(N'
-    ALTER DATABASE CURRENT
-    SET MEMORY_OPTIMIZED_ELEVATE_TO_SNAPSHOT ON;')
-""",
+            IF SERVERPROPERTY('IsXTPSupported') = 1
+            EXEC(N'
+            ALTER DATABASE CURRENT
+            SET MEMORY_OPTIMIZED_ELEVATE_TO_SNAPSHOT ON;')
+            """,
             //
             """
-DECLARE @historyTableSchema sysname = SCHEMA_NAME()
-EXEC(N'CREATE TABLE [Customers] (
-    [Id] int NOT NULL IDENTITY,
-    [PeriodEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
-    [PeriodStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
-    CONSTRAINT [PK_Customers] PRIMARY KEY NONCLUSTERED ([Id]),
-    PERIOD FOR SYSTEM_TIME([PeriodStart], [PeriodEnd])
-) WITH (
-    SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + N'].[CustomersHistory]),
-    MEMORY_OPTIMIZED = ON
-)');
-"""
+            DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+            EXEC(N'CREATE TABLE [Customers] (
+            [Id] int NOT NULL IDENTITY,
+            [PeriodEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
+            [PeriodStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+            CONSTRAINT [PK_Customers] PRIMARY KEY NONCLUSTERED ([Id]),
+            PERIOD FOR SYSTEM_TIME([PeriodStart], [PeriodEnd])
+            ) WITH (
+            SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + N'].[CustomersHistory]),
+            MEMORY_OPTIMIZED = ON
+            )');
+            """
         );
     }
 
@@ -362,8 +362,8 @@ EXEC(N'CREATE TABLE [Customers] (
 
         AssertSql(
             """
-DROP TABLE [People];
-"""
+            DROP TABLE [People];
+            """
         );
     }
 
@@ -373,12 +373,12 @@ DROP TABLE [People];
 
         AssertSql(
             """
-DECLARE @defaultSchema AS sysname;
-SET @defaultSchema = SCHEMA_NAME();
-DECLARE @description AS sql_variant;
-SET @description = N'Table comment';
-EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People';
-"""
+            DECLARE @defaultSchema AS sysname;
+            SET @defaultSchema = SCHEMA_NAME();
+            DECLARE @description AS sql_variant;
+            SET @description = N'Table comment';
+            EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People';
+            """
         );
     }
 
@@ -388,10 +388,10 @@ EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSc
 
         AssertSql(
             """
-DECLARE @description AS sql_variant;
-SET @description = N'Table comment';
-EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', N'SomeOtherSchema', 'TABLE', N'People';
-"""
+            DECLARE @description AS sql_variant;
+            SET @description = N'Table comment';
+            EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', N'SomeOtherSchema', 'TABLE', N'People';
+            """
         );
     }
 
@@ -401,13 +401,13 @@ EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', N'SomeOthe
 
         AssertSql(
             """
-DECLARE @defaultSchema AS sysname;
-SET @defaultSchema = SCHEMA_NAME();
-DECLARE @description AS sql_variant;
-EXEC sp_dropextendedproperty 'MS_Description', 'SCHEMA', @defaultSchema, 'TABLE', N'People';
-SET @description = N'Table comment2';
-EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People';
-"""
+            DECLARE @defaultSchema AS sysname;
+            SET @defaultSchema = SCHEMA_NAME();
+            DECLARE @description AS sql_variant;
+            EXEC sp_dropextendedproperty 'MS_Description', 'SCHEMA', @defaultSchema, 'TABLE', N'People';
+            SET @description = N'Table comment2';
+            EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People';
+            """
         );
     }
 
@@ -417,11 +417,11 @@ EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSc
 
         AssertSql(
             """
-DECLARE @defaultSchema AS sysname;
-SET @defaultSchema = SCHEMA_NAME();
-DECLARE @description AS sql_variant;
-EXEC sp_dropextendedproperty 'MS_Description', 'SCHEMA', @defaultSchema, 'TABLE', N'People';
-"""
+            DECLARE @defaultSchema AS sysname;
+            SET @defaultSchema = SCHEMA_NAME();
+            DECLARE @description AS sql_variant;
+            EXEC sp_dropextendedproperty 'MS_Description', 'SCHEMA', @defaultSchema, 'TABLE', N'People';
+            """
         );
     }
 
@@ -431,16 +431,16 @@ EXEC sp_dropextendedproperty 'MS_Description', 'SCHEMA', @defaultSchema, 'TABLE'
 
         AssertSql(
             """
-ALTER TABLE [People] DROP CONSTRAINT [PK_People];
-""",
+            ALTER TABLE [People] DROP CONSTRAINT [PK_People];
+            """,
             //
             """
-EXEC sp_rename N'[People]', N'Persons';
-""",
+            EXEC sp_rename N'[People]', N'Persons';
+            """,
             //
             """
-ALTER TABLE [Persons] ADD CONSTRAINT [PK_Persons] PRIMARY KEY ([Id]);
-"""
+            ALTER TABLE [Persons] ADD CONSTRAINT [PK_Persons] PRIMARY KEY ([Id]);
+            """
         );
     }
 
@@ -450,16 +450,16 @@ ALTER TABLE [Persons] ADD CONSTRAINT [PK_Persons] PRIMARY KEY ([Id]);
 
         AssertSql(
             """
-ALTER TABLE [People] DROP CONSTRAINT [PK_People];
-""",
+            ALTER TABLE [People] DROP CONSTRAINT [PK_People];
+            """,
             //
             """
-EXEC sp_rename N'[People]', N'Persons';
-""",
+            EXEC sp_rename N'[People]', N'Persons';
+            """,
             //
             """
-ALTER TABLE [Persons] ADD CONSTRAINT [PK_Persons] PRIMARY KEY ([Id]);
-"""
+            ALTER TABLE [Persons] ADD CONSTRAINT [PK_Persons] PRIMARY KEY ([Id]);
+            """
         );
     }
 
@@ -469,12 +469,12 @@ ALTER TABLE [Persons] ADD CONSTRAINT [PK_Persons] PRIMARY KEY ([Id]);
 
         AssertSql(
             """
-IF SCHEMA_ID(N'TestTableSchema') IS NULL EXEC(N'CREATE SCHEMA [TestTableSchema];');
-""",
+            IF SCHEMA_ID(N'TestTableSchema') IS NULL EXEC(N'CREATE SCHEMA [TestTableSchema];');
+            """,
             //
             """
-ALTER SCHEMA [TestTableSchema] TRANSFER [TestTable];
-"""
+            ALTER SCHEMA [TestTableSchema] TRANSFER [TestTable];
+            """
         );
     }
 
@@ -498,9 +498,9 @@ ALTER SCHEMA [TestTableSchema] TRANSFER [TestTable];
 
         AssertSql(
             """
-DECLARE @defaultSchema sysname = SCHEMA_NAME();
-EXEC(N'ALTER SCHEMA [' + @defaultSchema + N'] TRANSFER [TestTableSchema].[TestTable];');
-"""
+            DECLARE @defaultSchema sysname = SCHEMA_NAME();
+            EXEC(N'ALTER SCHEMA [' + @defaultSchema + N'] TRANSFER [TestTableSchema].[TestTable];');
+            """
         );
     }
 
@@ -510,15 +510,15 @@ EXEC(N'ALTER SCHEMA [' + @defaultSchema + N'] TRANSFER [TestTableSchema].[TestTa
 
         AssertSql(
             """
-IF SCHEMA_ID(N'SomeOtherSchema') IS NULL EXEC(N'CREATE SCHEMA [SomeOtherSchema];');
-""",
+            IF SCHEMA_ID(N'SomeOtherSchema') IS NULL EXEC(N'CREATE SCHEMA [SomeOtherSchema];');
+            """,
             //
             """
-CREATE TABLE [SomeOtherSchema].[People] (
-    [Id] int NOT NULL IDENTITY,
-    CONSTRAINT [PK_People] PRIMARY KEY ([Id])
-);
-"""
+            CREATE TABLE [SomeOtherSchema].[People] (
+            [Id] int NOT NULL IDENTITY,
+            CONSTRAINT [PK_People] PRIMARY KEY ([Id])
+            );
+            """
         );
     }
 
@@ -533,11 +533,11 @@ CREATE TABLE [SomeOtherSchema].[People] (
 
         AssertSql(
             """
-CREATE TABLE [dbo].[People] (
-    [Id] int NOT NULL IDENTITY,
-    CONSTRAINT [PK_People] PRIMARY KEY ([Id])
-);
-"""
+            CREATE TABLE [dbo].[People] (
+            [Id] int NOT NULL IDENTITY,
+            CONSTRAINT [PK_People] PRIMARY KEY ([Id])
+            );
+            """
         );
     }
 
@@ -547,8 +547,8 @@ CREATE TABLE [dbo].[People] (
 
         AssertSql(
             """
-ALTER TABLE [People] ADD [Name] nvarchar(max) NOT NULL DEFAULT N'John Doe';
-"""
+            ALTER TABLE [People] ADD [Name] nvarchar(max) NOT NULL DEFAULT N'John Doe';
+            """
         );
     }
 
@@ -558,8 +558,8 @@ ALTER TABLE [People] ADD [Name] nvarchar(max) NOT NULL DEFAULT N'John Doe';
 
         AssertSql(
             """
-ALTER TABLE [People] ADD [Birthday] datetime2 NOT NULL DEFAULT '2015-04-12T17:05:00.0000000';
-"""
+            ALTER TABLE [People] ADD [Birthday] datetime2 NOT NULL DEFAULT '2015-04-12T17:05:00.0000000';
+            """
         );
     }
 
@@ -717,8 +717,8 @@ ALTER TABLE [People] ADD [Age] time({precision}) NOT NULL DEFAULT '12:34:56{frac
 
         AssertSql(
             """
-ALTER TABLE [People] ADD [Birthday] datetime NOT NULL DEFAULT '2019-01-01T00:00:00.000';
-"""
+            ALTER TABLE [People] ADD [Birthday] datetime NOT NULL DEFAULT '2019-01-01T00:00:00.000';
+            """
         );
     }
 
@@ -744,8 +744,8 @@ ALTER TABLE [People] ADD [Birthday] datetime NOT NULL DEFAULT '2019-01-01T00:00:
 
         AssertSql(
             """
-ALTER TABLE [People] ADD [Birthday] smalldatetime NOT NULL DEFAULT '2019-01-01T00:00:00';
-"""
+            ALTER TABLE [People] ADD [Birthday] smalldatetime NOT NULL DEFAULT '2019-01-01T00:00:00';
+            """
         );
     }
 
@@ -767,8 +767,8 @@ ALTER TABLE [People] ADD [Birthday] smalldatetime NOT NULL DEFAULT '2019-01-01T0
 
         AssertSql(
             """
-ALTER TABLE [People] ADD [RowVersion] rowversion NULL;
-"""
+            ALTER TABLE [People] ADD [RowVersion] rowversion NULL;
+            """
         );
     }
 
@@ -795,8 +795,8 @@ ALTER TABLE [People] ADD [RowVersion] rowversion NULL;
 
         AssertSql(
             """
-ALTER TABLE [People] ADD [RowVersion] rowversion NOT NULL;
-"""
+            ALTER TABLE [People] ADD [RowVersion] rowversion NOT NULL;
+            """
         );
     }
 
@@ -806,8 +806,8 @@ ALTER TABLE [People] ADD [RowVersion] rowversion NOT NULL;
 
         AssertSql(
             """
-ALTER TABLE [People] ADD [Sum] int NOT NULL DEFAULT (1 + 2);
-"""
+            ALTER TABLE [People] ADD [Sum] int NOT NULL DEFAULT (1 + 2);
+            """
         );
     }
 
@@ -845,8 +845,8 @@ ALTER TABLE [People] ADD [Sum] AS [X] + [Y]{computedColumnTypeSql};
 
         AssertSql(
             """
-EXEC(N'ALTER TABLE [People] ADD [IdPlusOne] AS [Id] + 1');
-"""
+            EXEC(N'ALTER TABLE [People] ADD [IdPlusOne] AS [Id] + 1');
+            """
         );
     }
 
@@ -856,8 +856,8 @@ EXEC(N'ALTER TABLE [People] ADD [IdPlusOne] AS [Id] + 1');
 
         AssertSql(
             """
-ALTER TABLE [People] ADD [Name] nvarchar(max) NOT NULL DEFAULT N'';
-"""
+            ALTER TABLE [People] ADD [Name] nvarchar(max) NOT NULL DEFAULT N'';
+            """
         );
     }
 
@@ -867,8 +867,8 @@ ALTER TABLE [People] ADD [Name] nvarchar(max) NOT NULL DEFAULT N'';
 
         AssertSql(
             """
-ALTER TABLE [People] ADD [Name] varchar(max) NULL;
-"""
+            ALTER TABLE [People] ADD [Name] varchar(max) NULL;
+            """
         );
     }
 
@@ -878,8 +878,8 @@ ALTER TABLE [People] ADD [Name] varchar(max) NULL;
 
         AssertSql(
             """
-ALTER TABLE [People] ADD [Name] nvarchar(30) NULL;
-"""
+            ALTER TABLE [People] ADD [Name] nvarchar(30) NULL;
+            """
         );
     }
 
@@ -896,8 +896,8 @@ ALTER TABLE [People] ADD [Name] nvarchar(30) NULL;
 
         AssertSql(
             """
-ALTER TABLE [People] ADD [Name] nchar(100) NULL;
-"""
+            ALTER TABLE [People] ADD [Name] nchar(100) NULL;
+            """
         );
     }
 
@@ -907,13 +907,13 @@ ALTER TABLE [People] ADD [Name] nchar(100) NULL;
 
         AssertSql(
             """
-ALTER TABLE [People] ADD [FullName] nvarchar(max) NULL;
-DECLARE @defaultSchema AS sysname;
-SET @defaultSchema = SCHEMA_NAME();
-DECLARE @description AS sql_variant;
-SET @description = N'My comment';
-EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People', 'COLUMN', N'FullName';
-"""
+            ALTER TABLE [People] ADD [FullName] nvarchar(max) NULL;
+            DECLARE @defaultSchema AS sysname;
+            SET @defaultSchema = SCHEMA_NAME();
+            DECLARE @description AS sql_variant;
+            SET @description = N'My comment';
+            EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People', 'COLUMN', N'FullName';
+            """
         );
     }
 
@@ -923,8 +923,8 @@ EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSc
 
         AssertSql(
             """
-ALTER TABLE [People] ADD [Name] nvarchar(max) COLLATE German_PhoneBook_CI_AS NULL;
-"""
+            ALTER TABLE [People] ADD [Name] nvarchar(max) COLLATE German_PhoneBook_CI_AS NULL;
+            """
         );
     }
 
@@ -952,12 +952,12 @@ ALTER TABLE [People] ADD [Name] nvarchar(max) COLLATE German_PhoneBook_CI_AS NUL
 
         AssertSql(
             """
-ALTER TABLE [People] ADD [DriverLicense] int NOT NULL DEFAULT 0;
-""",
+            ALTER TABLE [People] ADD [DriverLicense] int NOT NULL DEFAULT 0;
+            """,
             //
             """
-ALTER TABLE [People] ADD CONSTRAINT [CK_People_Foo] CHECK ([DriverLicense] > 0);
-"""
+            ALTER TABLE [People] ADD CONSTRAINT [CK_People_Foo] CHECK ([DriverLicense] > 0);
+            """
         );
     }
 
@@ -978,8 +978,8 @@ ALTER TABLE [People] ADD CONSTRAINT [CK_People_Foo] CHECK ([DriverLicense] > 0);
 
         AssertSql(
             """
-ALTER TABLE [People] ADD [IdentityColumn] int NOT NULL IDENTITY;
-"""
+            ALTER TABLE [People] ADD [IdentityColumn] int NOT NULL IDENTITY;
+            """
         );
     }
 
@@ -1004,8 +1004,8 @@ ALTER TABLE [People] ADD [IdentityColumn] int NOT NULL IDENTITY;
 
         AssertSql(
             """
-ALTER TABLE [People] ADD [IdentityColumn] int NOT NULL IDENTITY(100, 5);
-"""
+            ALTER TABLE [People] ADD [IdentityColumn] int NOT NULL IDENTITY(100, 5);
+            """
         );
     }
 
@@ -1064,16 +1064,16 @@ ALTER TABLE [People] ADD [IdentityColumn] int NOT NULL IDENTITY(100, 5);
 
         AssertSql(
             """
-ALTER TABLE [Dogs] ADD [IdentityColumn] int NOT NULL IDENTITY(2, 2);
-""",
+            ALTER TABLE [Dogs] ADD [IdentityColumn] int NOT NULL IDENTITY(2, 2);
+            """,
             //
             """
-ALTER TABLE [Cats] ADD [IdentityColumn] int NOT NULL IDENTITY(1, 2);
-""",
+            ALTER TABLE [Cats] ADD [IdentityColumn] int NOT NULL IDENTITY(1, 2);
+            """,
             //
             """
-ALTER TABLE [Animal] ADD [IdentityColumn] int NOT NULL DEFAULT 0;
-"""
+            ALTER TABLE [Animal] ADD [IdentityColumn] int NOT NULL DEFAULT 0;
+            """
         );
     }
 
@@ -1096,12 +1096,12 @@ ALTER TABLE [Animal] ADD [IdentityColumn] int NOT NULL DEFAULT 0;
 
         AssertSql(
             """
-CREATE SEQUENCE [PeopleSequence] START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE NO CYCLE;
-""",
+            CREATE SEQUENCE [PeopleSequence] START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE NO CYCLE;
+            """,
             //
             """
-ALTER TABLE [People] ADD [SequenceColumn] int NOT NULL DEFAULT (NEXT VALUE FOR [PeopleSequence]);
-"""
+            ALTER TABLE [People] ADD [SequenceColumn] int NOT NULL DEFAULT (NEXT VALUE FOR [PeopleSequence]);
+            """
         );
     }
 
@@ -1120,12 +1120,12 @@ ALTER TABLE [People] ADD [SequenceColumn] int NOT NULL DEFAULT (NEXT VALUE FOR [
 
         AssertSql(
             """
-CREATE SEQUENCE [EntityFrameworkHiLoSequence] START WITH 1 INCREMENT BY 10 NO MINVALUE NO MAXVALUE NO CYCLE;
-""",
+            CREATE SEQUENCE [EntityFrameworkHiLoSequence] START WITH 1 INCREMENT BY 10 NO MINVALUE NO MAXVALUE NO CYCLE;
+            """,
             //
             """
-ALTER TABLE [People] ADD [SequenceColumn] int NOT NULL DEFAULT 0;
-"""
+            ALTER TABLE [People] ADD [SequenceColumn] int NOT NULL DEFAULT 0;
+            """
         );
     }
 
@@ -1135,14 +1135,14 @@ ALTER TABLE [People] ADD [SequenceColumn] int NOT NULL DEFAULT 0;
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'SomeColumn');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] ALTER COLUMN [SomeColumn] bigint NOT NULL;
-"""
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'SomeColumn');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] ALTER COLUMN [SomeColumn] bigint NOT NULL;
+            """
         );
     }
 
@@ -1152,16 +1152,16 @@ ALTER TABLE [People] ALTER COLUMN [SomeColumn] bigint NOT NULL;
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'SomeColumn');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-UPDATE [People] SET [SomeColumn] = N'' WHERE [SomeColumn] IS NULL;
-ALTER TABLE [People] ALTER COLUMN [SomeColumn] nvarchar(max) NOT NULL;
-ALTER TABLE [People] ADD DEFAULT N'' FOR [SomeColumn];
-"""
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'SomeColumn');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            UPDATE [People] SET [SomeColumn] = N'' WHERE [SomeColumn] IS NULL;
+            ALTER TABLE [People] ALTER COLUMN [SomeColumn] nvarchar(max) NOT NULL;
+            ALTER TABLE [People] ADD DEFAULT N'' FOR [SomeColumn];
+            """
         );
     }
 
@@ -1171,16 +1171,16 @@ ALTER TABLE [People] ADD DEFAULT N'' FOR [SomeColumn];
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'SomeColumn');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-UPDATE [People] SET [SomeColumn] = N'' WHERE [SomeColumn] IS NULL;
-ALTER TABLE [People] ALTER COLUMN [SomeColumn] nvarchar(max) NOT NULL;
-ALTER TABLE [People] ADD DEFAULT N'' FOR [SomeColumn];
-"""
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'SomeColumn');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            UPDATE [People] SET [SomeColumn] = N'' WHERE [SomeColumn] IS NULL;
+            ALTER TABLE [People] ALTER COLUMN [SomeColumn] nvarchar(max) NOT NULL;
+            ALTER TABLE [People] ADD DEFAULT N'' FOR [SomeColumn];
+            """
         );
     }
 
@@ -1191,18 +1191,18 @@ ALTER TABLE [People] ADD DEFAULT N'' FOR [SomeColumn];
 
         AssertSql(
             """
-DROP INDEX [IX_People_SomeColumn] ON [People];
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'SomeColumn');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-UPDATE [People] SET [SomeColumn] = N'' WHERE [SomeColumn] IS NULL;
-ALTER TABLE [People] ALTER COLUMN [SomeColumn] nvarchar(450) NOT NULL;
-ALTER TABLE [People] ADD DEFAULT N'' FOR [SomeColumn];
-CREATE INDEX [IX_People_SomeColumn] ON [People] ([SomeColumn]);
-"""
+            DROP INDEX [IX_People_SomeColumn] ON [People];
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'SomeColumn');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            UPDATE [People] SET [SomeColumn] = N'' WHERE [SomeColumn] IS NULL;
+            ALTER TABLE [People] ALTER COLUMN [SomeColumn] nvarchar(450) NOT NULL;
+            ALTER TABLE [People] ADD DEFAULT N'' FOR [SomeColumn];
+            CREATE INDEX [IX_People_SomeColumn] ON [People] ([SomeColumn]);
+            """
         );
     }
 
@@ -1213,18 +1213,18 @@ CREATE INDEX [IX_People_SomeColumn] ON [People] ([SomeColumn]);
 
         AssertSql(
             """
-DROP INDEX [IX_People_FirstName_LastName] ON [People];
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'FirstName');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-UPDATE [People] SET [FirstName] = N'' WHERE [FirstName] IS NULL;
-ALTER TABLE [People] ALTER COLUMN [FirstName] nvarchar(450) NOT NULL;
-ALTER TABLE [People] ADD DEFAULT N'' FOR [FirstName];
-CREATE INDEX [IX_People_FirstName_LastName] ON [People] ([FirstName], [LastName]);
-"""
+            DROP INDEX [IX_People_FirstName_LastName] ON [People];
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'FirstName');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            UPDATE [People] SET [FirstName] = N'' WHERE [FirstName] IS NULL;
+            ALTER TABLE [People] ALTER COLUMN [FirstName] nvarchar(450) NOT NULL;
+            ALTER TABLE [People] ADD DEFAULT N'' FOR [FirstName];
+            CREATE INDEX [IX_People_FirstName_LastName] ON [People] ([FirstName], [LastName]);
+            """
         );
     }
 
@@ -1254,15 +1254,15 @@ ALTER TABLE [People] ADD [Sum] AS [X] + [Y]{computedColumnTypeSql};
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Sum');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] DROP COLUMN [Sum];
-ALTER TABLE [People] ADD [Sum] AS [X] - [Y];
-"""
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Sum');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] DROP COLUMN [Sum];
+            ALTER TABLE [People] ADD [Sum] AS [X] - [Y];
+            """
         );
     }
 
@@ -1272,20 +1272,20 @@ ALTER TABLE [People] ADD [Sum] AS [X] - [Y];
 
         AssertSql(
             """
-DROP INDEX [IX_People_Sum] ON [People];
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Sum');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] DROP COLUMN [Sum];
-ALTER TABLE [People] ADD [Sum] AS [X] - [Y];
-""",
+            DROP INDEX [IX_People_Sum] ON [People];
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Sum');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] DROP COLUMN [Sum];
+            ALTER TABLE [People] ADD [Sum] AS [X] - [Y];
+            """,
             //
             """
-CREATE INDEX [IX_People_Sum] ON [People] ([Sum]);
-"""
+            CREATE INDEX [IX_People_Sum] ON [People] ([Sum]);
+            """
         );
     }
 
@@ -1295,15 +1295,15 @@ CREATE INDEX [IX_People_Sum] ON [People] ([Sum]);
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Sum');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] DROP COLUMN [Sum];
-ALTER TABLE [People] ADD [Sum] AS [X] + [Y] PERSISTED;
-"""
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Sum');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] DROP COLUMN [Sum];
+            ALTER TABLE [People] ADD [Sum] AS [X] + [Y] PERSISTED;
+            """
         );
     }
 
@@ -1313,15 +1313,15 @@ ALTER TABLE [People] ADD [Sum] AS [X] + [Y] PERSISTED;
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Sum');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] DROP COLUMN [Sum];
-ALTER TABLE [People] ADD [Sum] int NOT NULL;
-"""
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Sum');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] DROP COLUMN [Sum];
+            ALTER TABLE [People] ADD [Sum] int NOT NULL;
+            """
         );
     }
 
@@ -1332,12 +1332,12 @@ ALTER TABLE [People] ADD [Sum] int NOT NULL;
 
         AssertSql(
             """
-DECLARE @defaultSchema AS sysname;
-SET @defaultSchema = SCHEMA_NAME();
-DECLARE @description AS sql_variant;
-SET @description = N'Some comment';
-EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People', 'COLUMN', N'Id';
-"""
+            DECLARE @defaultSchema AS sysname;
+            SET @defaultSchema = SCHEMA_NAME();
+            DECLARE @description AS sql_variant;
+            SET @description = N'Some comment';
+            EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People', 'COLUMN', N'Id';
+            """
         );
     }
 
@@ -1348,12 +1348,12 @@ EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSc
 
         AssertSql(
             """
-DECLARE @defaultSchema AS sysname;
-SET @defaultSchema = SCHEMA_NAME();
-DECLARE @description AS sql_variant;
-SET @description = N'Some comment';
-EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People', 'COLUMN', N'SomeColumn';
-"""
+            DECLARE @defaultSchema AS sysname;
+            SET @defaultSchema = SCHEMA_NAME();
+            DECLARE @description AS sql_variant;
+            SET @description = N'Some comment';
+            EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People', 'COLUMN', N'SomeColumn';
+            """
         );
     }
 
@@ -1364,13 +1364,13 @@ EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSc
 
         AssertSql(
             """
-DECLARE @defaultSchema AS sysname;
-SET @defaultSchema = SCHEMA_NAME();
-DECLARE @description AS sql_variant;
-EXEC sp_dropextendedproperty 'MS_Description', 'SCHEMA', @defaultSchema, 'TABLE', N'People', 'COLUMN', N'Id';
-SET @description = N'Some comment2';
-EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People', 'COLUMN', N'Id';
-"""
+            DECLARE @defaultSchema AS sysname;
+            SET @defaultSchema = SCHEMA_NAME();
+            DECLARE @description AS sql_variant;
+            EXEC sp_dropextendedproperty 'MS_Description', 'SCHEMA', @defaultSchema, 'TABLE', N'People', 'COLUMN', N'Id';
+            SET @description = N'Some comment2';
+            EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People', 'COLUMN', N'Id';
+            """
         );
     }
 
@@ -1381,11 +1381,11 @@ EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSc
 
         AssertSql(
             """
-DECLARE @defaultSchema AS sysname;
-SET @defaultSchema = SCHEMA_NAME();
-DECLARE @description AS sql_variant;
-EXEC sp_dropextendedproperty 'MS_Description', 'SCHEMA', @defaultSchema, 'TABLE', N'People', 'COLUMN', N'Id';
-"""
+            DECLARE @defaultSchema AS sysname;
+            SET @defaultSchema = SCHEMA_NAME();
+            DECLARE @description AS sql_variant;
+            EXEC sp_dropextendedproperty 'MS_Description', 'SCHEMA', @defaultSchema, 'TABLE', N'People', 'COLUMN', N'Id';
+            """
         );
     }
 
@@ -1396,14 +1396,14 @@ EXEC sp_dropextendedproperty 'MS_Description', 'SCHEMA', @defaultSchema, 'TABLE'
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(max) COLLATE German_PhoneBook_CI_AS NULL;
-"""
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(max) COLLATE German_PhoneBook_CI_AS NULL;
+            """
         );
     }
 
@@ -1432,16 +1432,16 @@ ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(max) COLLATE German_PhoneBook_
 
         AssertSql(
             """
-DROP INDEX [IX_People_Name] ON [People];
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) COLLATE German_PhoneBook_CI_AS NULL;
-CREATE INDEX [IX_People_Name] ON [People] ([Name]);
-"""
+            DROP INDEX [IX_People_Name] ON [People];
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) COLLATE German_PhoneBook_CI_AS NULL;
+            CREATE INDEX [IX_People_Name] ON [People] ([Name]);
+            """
         );
     }
 
@@ -1452,14 +1452,14 @@ CREATE INDEX [IX_People_Name] ON [People] ([Name]);
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(max) NULL;
-"""
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(max) NULL;
+            """
         );
     }
 
@@ -1496,18 +1496,18 @@ ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(max) NULL;
 
         AssertSql(
             """
-DROP INDEX [IX_People_SomeColumn] ON [People];
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'SomeColumn');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-UPDATE [People] SET [SomeColumn] = N'' WHERE [SomeColumn] IS NULL;
-ALTER TABLE [People] ALTER COLUMN [SomeColumn] nvarchar(450) NOT NULL;
-ALTER TABLE [People] ADD DEFAULT N'' FOR [SomeColumn];
-CREATE INDEX [IX_People_SomeColumn] ON [People] ([SomeColumn]) INCLUDE ([SomeOtherColumn]);
-"""
+            DROP INDEX [IX_People_SomeColumn] ON [People];
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'SomeColumn');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            UPDATE [People] SET [SomeColumn] = N'' WHERE [SomeColumn] IS NULL;
+            ALTER TABLE [People] ALTER COLUMN [SomeColumn] nvarchar(450) NOT NULL;
+            ALTER TABLE [People] ADD DEFAULT N'' FOR [SomeColumn];
+            CREATE INDEX [IX_People_SomeColumn] ON [People] ([SomeColumn]) INCLUDE ([SomeOtherColumn]);
+            """
         );
     }
 
@@ -1540,16 +1540,16 @@ CREATE INDEX [IX_People_SomeColumn] ON [People] ([SomeColumn]) INCLUDE ([SomeOth
 
         AssertSql(
             """
-ALTER TABLE [People] DROP INDEX [IX_People_Name];
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(30) NULL;
-ALTER TABLE [People] ADD INDEX [IX_People_Name] NONCLUSTERED ([Name]);
-"""
+            ALTER TABLE [People] DROP INDEX [IX_People_Name];
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(30) NULL;
+            ALTER TABLE [People] ADD INDEX [IX_People_Name] NONCLUSTERED ([Name]);
+            """
         );
     }
 
@@ -1579,14 +1579,14 @@ ALTER TABLE [People] ADD INDEX [IX_People_Name] NONCLUSTERED ([Name]);
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;
-"""
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;
+            """
         );
     }
 
@@ -1623,16 +1623,16 @@ ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;
 
         AssertSql(
             """
-DROP INDEX [IX_People_FirstName_LastName] ON [People];
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(30) NULL;
-CREATE INDEX [IX_People_FirstName_LastName] ON [People] ([FirstName], [LastName]) INCLUDE ([Name]);
-"""
+            DROP INDEX [IX_People_FirstName_LastName] ON [People];
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(30) NULL;
+            CREATE INDEX [IX_People_FirstName_LastName] ON [People] ([FirstName], [LastName]) INCLUDE ([Name]);
+            """
         );
     }
 
@@ -1691,14 +1691,14 @@ CREATE INDEX [IX_People_FirstName_LastName] ON [People] ([FirstName], [LastName]
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'IdentityColumn');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] ALTER COLUMN [IdentityColumn] bigint NOT NULL;
-"""
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'IdentityColumn');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] ALTER COLUMN [IdentityColumn] bigint NOT NULL;
+            """
         );
     }
 
@@ -1718,14 +1718,14 @@ ALTER TABLE [People] ALTER COLUMN [IdentityColumn] bigint NOT NULL;
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] ADD DEFAULT N'Doe' FOR [Name];
-"""
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] ADD DEFAULT N'Doe' FOR [Name];
+            """
         );
     }
 
@@ -1746,12 +1746,12 @@ ALTER TABLE [People] ADD DEFAULT N'Doe' FOR [Name];
 
         AssertSql(
             """
-DECLARE @defaultSchema AS sysname;
-SET @defaultSchema = SCHEMA_NAME();
-DECLARE @description AS sql_variant;
-SET @description = N'Some comment';
-EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People', 'COLUMN', N'Name';
-"""
+            DECLARE @defaultSchema AS sysname;
+            SET @defaultSchema = SCHEMA_NAME();
+            DECLARE @description AS sql_variant;
+            SET @description = N'Some comment';
+            EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People', 'COLUMN', N'Name';
+            """
         );
     }
 
@@ -1771,14 +1771,14 @@ EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSc
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'SomeProperty');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] ALTER COLUMN [SomeProperty] nvarchar(max) SPARSE NULL;
-"""
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'SomeProperty');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] ALTER COLUMN [SomeProperty] nvarchar(max) SPARSE NULL;
+            """
         );
     }
 
@@ -1788,14 +1788,14 @@ ALTER TABLE [People] ALTER COLUMN [SomeProperty] nvarchar(max) SPARSE NULL;
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'SomeColumn');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] DROP COLUMN [SomeColumn];
-"""
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'SomeColumn');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] DROP COLUMN [SomeColumn];
+            """
         );
     }
 
@@ -1805,18 +1805,18 @@ ALTER TABLE [People] DROP COLUMN [SomeColumn];
 
         AssertSql(
             """
-ALTER TABLE [People] DROP CONSTRAINT [PK_People];
-""",
+            ALTER TABLE [People] DROP CONSTRAINT [PK_People];
+            """,
             //
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Id');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] DROP COLUMN [Id];
-"""
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Id');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] DROP COLUMN [Id];
+            """
         );
     }
 
@@ -1826,24 +1826,24 @@ ALTER TABLE [People] DROP COLUMN [Id];
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Y');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] DROP COLUMN [Y];
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Y');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] DROP COLUMN [Y];
+            """,
             //
             """
-DECLARE @var1 sysname;
-SELECT @var1 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'X');
-IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var1 + '];');
-ALTER TABLE [People] DROP COLUMN [X];
-"""
+            DECLARE @var1 sysname;
+            SELECT @var1 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'X');
+            IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var1 + '];');
+            ALTER TABLE [People] DROP COLUMN [X];
+            """
         );
     }
 
@@ -1853,8 +1853,8 @@ ALTER TABLE [People] DROP COLUMN [X];
 
         AssertSql(
             """
-EXEC sp_rename N'[People].[SomeColumn]', N'SomeOtherColumn', N'COLUMN';
-"""
+            EXEC sp_rename N'[People].[SomeColumn]', N'SomeOtherColumn', N'COLUMN';
+            """
         );
     }
 
@@ -1864,18 +1864,18 @@ EXEC sp_rename N'[People].[SomeColumn]', N'SomeOtherColumn', N'COLUMN';
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'FirstName');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] ALTER COLUMN [FirstName] nvarchar(450) NULL;
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'FirstName');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] ALTER COLUMN [FirstName] nvarchar(450) NULL;
+            """,
             //
             """
-CREATE INDEX [IX_People_FirstName] ON [People] ([FirstName]);
-"""
+            CREATE INDEX [IX_People_FirstName] ON [People] ([FirstName]);
+            """
         );
     }
 
@@ -1885,28 +1885,28 @@ CREATE INDEX [IX_People_FirstName] ON [People] ([FirstName]);
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'LastName');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] ALTER COLUMN [LastName] nvarchar(450) NULL;
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'LastName');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] ALTER COLUMN [LastName] nvarchar(450) NULL;
+            """,
             //
             """
-DECLARE @var1 sysname;
-SELECT @var1 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'FirstName');
-IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var1 + '];');
-ALTER TABLE [People] ALTER COLUMN [FirstName] nvarchar(450) NULL;
-""",
+            DECLARE @var1 sysname;
+            SELECT @var1 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'FirstName');
+            IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var1 + '];');
+            ALTER TABLE [People] ALTER COLUMN [FirstName] nvarchar(450) NULL;
+            """,
             //
             """
-CREATE UNIQUE INDEX [IX_People_FirstName_LastName] ON [People] ([FirstName], [LastName]) WHERE [FirstName] IS NOT NULL AND [LastName] IS NOT NULL;
-"""
+            CREATE UNIQUE INDEX [IX_People_FirstName_LastName] ON [People] ([FirstName], [LastName]) WHERE [FirstName] IS NOT NULL AND [LastName] IS NOT NULL;
+            """
         );
     }
 
@@ -1916,8 +1916,8 @@ CREATE UNIQUE INDEX [IX_People_FirstName_LastName] ON [People] ([FirstName], [La
 
         AssertSql(
             """
-CREATE INDEX [IX_People_X] ON [People] ([X] DESC);
-"""
+            CREATE INDEX [IX_People_X] ON [People] ([X] DESC);
+            """
         );
     }
 
@@ -1927,8 +1927,8 @@ CREATE INDEX [IX_People_X] ON [People] ([X] DESC);
 
         AssertSql(
             """
-CREATE INDEX [IX_People_X_Y_Z] ON [People] ([X], [Y] DESC, [Z]);
-"""
+            CREATE INDEX [IX_People_X_Y_Z] ON [People] ([X], [Y] DESC, [Z]);
+            """
         );
     }
 
@@ -1938,12 +1938,12 @@ CREATE INDEX [IX_People_X_Y_Z] ON [People] ([X], [Y] DESC, [Z]);
 
         AssertSql(
             """
-DROP INDEX [IX_People_X] ON [People];
-""",
+            DROP INDEX [IX_People_X] ON [People];
+            """,
             //
             """
-CREATE UNIQUE INDEX [IX_People_X] ON [People] ([X]);
-"""
+            CREATE UNIQUE INDEX [IX_People_X] ON [People] ([X]);
+            """
         );
     }
 
@@ -1953,12 +1953,12 @@ CREATE UNIQUE INDEX [IX_People_X] ON [People] ([X]);
 
         AssertSql(
             """
-DROP INDEX [IX_People_X_Y_Z] ON [People];
-""",
+            DROP INDEX [IX_People_X_Y_Z] ON [People];
+            """,
             //
             """
-CREATE INDEX [IX_People_X_Y_Z] ON [People] ([X], [Y] DESC, [Z]);
-"""
+            CREATE INDEX [IX_People_X_Y_Z] ON [People] ([X], [Y] DESC, [Z]);
+            """
         );
     }
 
@@ -1968,18 +1968,18 @@ CREATE INDEX [IX_People_X_Y_Z] ON [People] ([X], [Y] DESC, [Z]);
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;
+            """,
             //
             """
-CREATE INDEX [IX_People_Name] ON [People] ([Name]) WHERE [Name] IS NOT NULL;
-"""
+            CREATE INDEX [IX_People_Name] ON [People] ([Name]) WHERE [Name] IS NOT NULL;
+            """
         );
     }
 
@@ -2013,18 +2013,18 @@ CREATE INDEX [IX_People_Name] ON [People] ([Name]) WHERE [Name] IS NOT NULL;
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;
+            """,
             //
             """
-EXEC(N'CREATE INDEX [IX_People_Name] ON [People] ([Name]) WHERE [Name] IS NOT NULL');
-"""
+            EXEC(N'CREATE INDEX [IX_People_Name] ON [People] ([Name]) WHERE [Name] IS NOT NULL');
+            """
         );
     }
 
@@ -2034,18 +2034,18 @@ EXEC(N'CREATE INDEX [IX_People_Name] ON [People] ([Name]) WHERE [Name] IS NOT NU
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;
+            """,
             //
             """
-CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) WHERE [Name] IS NOT NULL AND [Name] <> '';
-"""
+            CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) WHERE [Name] IS NOT NULL AND [Name] <> '';
+            """
         );
     }
 
@@ -2067,18 +2067,18 @@ CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) WHERE [Name] IS NOT NU
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'FirstName');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] ALTER COLUMN [FirstName] nvarchar(450) NULL;
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'FirstName');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] ALTER COLUMN [FirstName] nvarchar(450) NULL;
+            """,
             //
             """
-CREATE CLUSTERED INDEX [IX_People_FirstName] ON [People] ([FirstName]);
-"""
+            CREATE CLUSTERED INDEX [IX_People_FirstName] ON [People] ([FirstName]);
+            """
         );
     }
 
@@ -2100,18 +2100,18 @@ CREATE CLUSTERED INDEX [IX_People_FirstName] ON [People] ([FirstName]);
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'FirstName');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] ALTER COLUMN [FirstName] nvarchar(450) NULL;
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'FirstName');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] ALTER COLUMN [FirstName] nvarchar(450) NULL;
+            """,
             //
             """
-CREATE UNIQUE CLUSTERED INDEX [IX_People_FirstName] ON [People] ([FirstName]);
-"""
+            CREATE UNIQUE CLUSTERED INDEX [IX_People_FirstName] ON [People] ([FirstName]);
+            """
         );
     }
 
@@ -2150,18 +2150,18 @@ CREATE UNIQUE CLUSTERED INDEX [IX_People_FirstName] ON [People] ([FirstName]);
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;
+            """,
             //
             """
-CREATE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], [LastName]);
-"""
+            CREATE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], [LastName]);
+            """
         );
     }
 
@@ -2202,18 +2202,18 @@ CREATE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], [LastNa
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;
+            """,
             //
             """
-CREATE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], [LastName]) WHERE [Name] IS NOT NULL;
-"""
+            CREATE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], [LastName]) WHERE [Name] IS NOT NULL;
+            """
         );
     }
 
@@ -2254,18 +2254,18 @@ CREATE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], [LastNa
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NOT NULL;
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NOT NULL;
+            """,
             //
             """
-CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], [LastName]);
-"""
+            CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], [LastName]);
+            """
         );
     }
 
@@ -2308,18 +2308,18 @@ CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], 
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NOT NULL;
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NOT NULL;
+            """,
             //
             """
-CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], [LastName]) WHERE [Name] IS NOT NULL;
-"""
+            CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], [LastName]) WHERE [Name] IS NOT NULL;
+            """
         );
     }
 
@@ -2367,18 +2367,18 @@ CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], 
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NOT NULL;
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NOT NULL;
+            """,
             //
             """
-CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], [LastName]) WHERE [Name] IS NOT NULL WITH (ONLINE = ON);
-"""
+            CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], [LastName]) WHERE [Name] IS NOT NULL WITH (ONLINE = ON);
+            """
         );
     }
 
@@ -2427,18 +2427,18 @@ CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], 
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NOT NULL;
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NOT NULL;
+            """,
             //
             """
-CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], [LastName]) WHERE [Name] IS NOT NULL WITH (FILLFACTOR = 90, ONLINE = ON);
-"""
+            CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], [LastName]) WHERE [Name] IS NOT NULL WITH (FILLFACTOR = 90, ONLINE = ON);
+            """
         );
     }
 
@@ -2483,18 +2483,18 @@ CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], 
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NOT NULL;
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NOT NULL;
+            """,
             //
             """
-CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], [LastName]) WHERE [Name] IS NOT NULL WITH (FILLFACTOR = 90);
-"""
+            CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], [LastName]) WHERE [Name] IS NOT NULL WITH (FILLFACTOR = 90);
+            """
         );
     }
 
@@ -2540,18 +2540,18 @@ CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], 
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NOT NULL;
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NOT NULL;
+            """,
             //
             """
-CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], [LastName]) WITH (FILLFACTOR = 75, SORT_IN_TEMPDB = ON);
-"""
+            CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], [LastName]) WITH (FILLFACTOR = 75, SORT_IN_TEMPDB = ON);
+            """
         );
     }
 
@@ -2603,14 +2603,14 @@ CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], 
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NOT NULL;
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NOT NULL;
+            """,
             //
             $"""
 CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], [LastName]) WITH (SORT_IN_TEMPDB = ON, DATA_COMPRESSION = {dataCompressionSql});
@@ -2650,18 +2650,18 @@ CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], 
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;
+            """,
             //
             """
-ALTER TABLE [People] ADD INDEX [IX_People_Name] NONCLUSTERED ([Name]);
-"""
+            ALTER TABLE [People] ADD INDEX [IX_People_Name] NONCLUSTERED ([Name]);
+            """
         );
     }
 
@@ -2703,18 +2703,18 @@ ALTER TABLE [People] ADD INDEX [IX_People_Name] NONCLUSTERED ([Name]);
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;
+            """,
             //
             """
-ALTER TABLE [People] ADD INDEX [IX_People_Name] NONCLUSTERED ([Name]);
-"""
+            ALTER TABLE [People] ADD INDEX [IX_People_Name] NONCLUSTERED ([Name]);
+            """
         );
     }
 
@@ -2750,8 +2750,8 @@ ALTER TABLE [People] ADD INDEX [IX_People_Name] NONCLUSTERED ([Name]);
 
         AssertSql(
             """
-ALTER TABLE [People] ADD INDEX [IX_People_Name] UNIQUE NONCLUSTERED ([Name]);
-"""
+            ALTER TABLE [People] ADD INDEX [IX_People_Name] UNIQUE NONCLUSTERED ([Name]);
+            """
         );
     }
 
@@ -2761,8 +2761,8 @@ ALTER TABLE [People] ADD INDEX [IX_People_Name] UNIQUE NONCLUSTERED ([Name]);
 
         AssertSql(
             """
-DROP INDEX [IX_People_SomeField] ON [People];
-"""
+            DROP INDEX [IX_People_SomeField] ON [People];
+            """
         );
     }
 
@@ -2772,8 +2772,8 @@ DROP INDEX [IX_People_SomeField] ON [People];
 
         AssertSql(
             """
-EXEC sp_rename N'[People].[Foo]', N'foo', N'INDEX';
-"""
+            EXEC sp_rename N'[People].[Foo]', N'foo', N'INDEX';
+            """
         );
     }
 
@@ -2792,18 +2792,18 @@ EXEC sp_rename N'[People].[Foo]', N'foo', N'INDEX';
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'SomeField');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] ALTER COLUMN [SomeField] nvarchar(450) NOT NULL;
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'SomeField');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] ALTER COLUMN [SomeField] nvarchar(450) NOT NULL;
+            """,
             //
             """
-ALTER TABLE [People] ADD CONSTRAINT [PK_People] PRIMARY KEY ([SomeField]);
-"""
+            ALTER TABLE [People] ADD CONSTRAINT [PK_People] PRIMARY KEY ([SomeField]);
+            """
         );
     }
 
@@ -2813,20 +2813,20 @@ ALTER TABLE [People] ADD CONSTRAINT [PK_People] PRIMARY KEY ([SomeField]);
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'SomeField');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-UPDATE [People] SET [SomeField] = N'' WHERE [SomeField] IS NULL;
-ALTER TABLE [People] ALTER COLUMN [SomeField] nvarchar(450) NOT NULL;
-ALTER TABLE [People] ADD DEFAULT N'' FOR [SomeField];
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'SomeField');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            UPDATE [People] SET [SomeField] = N'' WHERE [SomeField] IS NULL;
+            ALTER TABLE [People] ALTER COLUMN [SomeField] nvarchar(450) NOT NULL;
+            ALTER TABLE [People] ADD DEFAULT N'' FOR [SomeField];
+            """,
             //
             """
-ALTER TABLE [People] ADD CONSTRAINT [PK_Foo] PRIMARY KEY ([SomeField]);
-"""
+            ALTER TABLE [People] ADD CONSTRAINT [PK_Foo] PRIMARY KEY ([SomeField]);
+            """
         );
     }
 
@@ -2836,8 +2836,8 @@ ALTER TABLE [People] ADD CONSTRAINT [PK_Foo] PRIMARY KEY ([SomeField]);
 
         AssertSql(
             """
-ALTER TABLE [People] ADD CONSTRAINT [PK_Foo] PRIMARY KEY ([SomeField1], [SomeField2]);
-"""
+            ALTER TABLE [People] ADD CONSTRAINT [PK_Foo] PRIMARY KEY ([SomeField1], [SomeField2]);
+            """
         );
     }
 
@@ -2864,8 +2864,8 @@ ALTER TABLE [People] ADD CONSTRAINT [PK_Foo] PRIMARY KEY ([SomeField1], [SomeFie
 
         AssertSql(
             """
-ALTER TABLE [People] ADD CONSTRAINT [PK_People] PRIMARY KEY NONCLUSTERED ([SomeField]);
-"""
+            ALTER TABLE [People] ADD CONSTRAINT [PK_People] PRIMARY KEY NONCLUSTERED ([SomeField]);
+            """
         );
     }
 
@@ -2884,18 +2884,18 @@ ALTER TABLE [People] ADD CONSTRAINT [PK_People] PRIMARY KEY NONCLUSTERED ([SomeF
 
         AssertSql(
             """
-ALTER TABLE [People] DROP CONSTRAINT [PK_People];
-""",
+            ALTER TABLE [People] DROP CONSTRAINT [PK_People];
+            """,
             //
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'SomeField');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] ALTER COLUMN [SomeField] nvarchar(max) NOT NULL;
-"""
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'SomeField');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] ALTER COLUMN [SomeField] nvarchar(max) NOT NULL;
+            """
         );
     }
 
@@ -2905,12 +2905,12 @@ ALTER TABLE [People] ALTER COLUMN [SomeField] nvarchar(max) NOT NULL;
 
         AssertSql(
             """
-CREATE INDEX [IX_Orders_CustomerId] ON [Orders] ([CustomerId]);
-""",
+            CREATE INDEX [IX_Orders_CustomerId] ON [Orders] ([CustomerId]);
+            """,
             //
             """
-ALTER TABLE [Orders] ADD CONSTRAINT [FK_Orders_Customers_CustomerId] FOREIGN KEY ([CustomerId]) REFERENCES [Customers] ([Id]) ON DELETE CASCADE;
-"""
+            ALTER TABLE [Orders] ADD CONSTRAINT [FK_Orders_Customers_CustomerId] FOREIGN KEY ([CustomerId]) REFERENCES [Customers] ([Id]) ON DELETE CASCADE;
+            """
         );
     }
 
@@ -2925,12 +2925,12 @@ ALTER TABLE [Orders] ADD CONSTRAINT [FK_Orders_Customers_CustomerId] FOREIGN KEY
 
         AssertSql(
             """
-CREATE INDEX [IX_Orders_CustomerId] ON [Orders] ([CustomerId]);
-""",
+            CREATE INDEX [IX_Orders_CustomerId] ON [Orders] ([CustomerId]);
+            """,
             //
             """
-ALTER TABLE [Orders] ADD CONSTRAINT [FK_Foo] FOREIGN KEY ([CustomerId]) REFERENCES [Customers] ([Id]) ON DELETE CASCADE;
-"""
+            ALTER TABLE [Orders] ADD CONSTRAINT [FK_Foo] FOREIGN KEY ([CustomerId]) REFERENCES [Customers] ([Id]) ON DELETE CASCADE;
+            """
         );
     }
 
@@ -2940,12 +2940,12 @@ ALTER TABLE [Orders] ADD CONSTRAINT [FK_Foo] FOREIGN KEY ([CustomerId]) REFERENC
 
         AssertSql(
             """
-ALTER TABLE [Orders] DROP CONSTRAINT [FK_Orders_Customers_CustomerId];
-""",
+            ALTER TABLE [Orders] DROP CONSTRAINT [FK_Orders_Customers_CustomerId];
+            """,
             //
             """
-DROP INDEX [IX_Orders_CustomerId] ON [Orders];
-"""
+            DROP INDEX [IX_Orders_CustomerId] ON [Orders];
+            """
         );
     }
 
@@ -2955,8 +2955,8 @@ DROP INDEX [IX_Orders_CustomerId] ON [Orders];
 
         AssertSql(
             """
-ALTER TABLE [People] ADD CONSTRAINT [AK_People_AlternateKeyColumn] UNIQUE ([AlternateKeyColumn]);
-"""
+            ALTER TABLE [People] ADD CONSTRAINT [AK_People_AlternateKeyColumn] UNIQUE ([AlternateKeyColumn]);
+            """
         );
     }
 
@@ -2966,8 +2966,8 @@ ALTER TABLE [People] ADD CONSTRAINT [AK_People_AlternateKeyColumn] UNIQUE ([Alte
 
         AssertSql(
             """
-ALTER TABLE [People] ADD CONSTRAINT [AK_Foo] UNIQUE ([AlternateKeyColumn1], [AlternateKeyColumn2]);
-"""
+            ALTER TABLE [People] ADD CONSTRAINT [AK_Foo] UNIQUE ([AlternateKeyColumn1], [AlternateKeyColumn2]);
+            """
         );
     }
 
@@ -2977,8 +2977,8 @@ ALTER TABLE [People] ADD CONSTRAINT [AK_Foo] UNIQUE ([AlternateKeyColumn1], [Alt
 
         AssertSql(
             """
-ALTER TABLE [People] DROP CONSTRAINT [AK_People_AlternateKeyColumn];
-"""
+            ALTER TABLE [People] DROP CONSTRAINT [AK_People_AlternateKeyColumn];
+            """
         );
     }
 
@@ -2988,8 +2988,8 @@ ALTER TABLE [People] DROP CONSTRAINT [AK_People_AlternateKeyColumn];
 
         AssertSql(
             """
-ALTER TABLE [People] ADD CONSTRAINT [CK_People_Foo] CHECK ([DriverLicense] > 0);
-"""
+            ALTER TABLE [People] ADD CONSTRAINT [CK_People_Foo] CHECK ([DriverLicense] > 0);
+            """
         );
     }
 
@@ -3020,8 +3020,8 @@ ALTER TABLE [People] ADD CONSTRAINT [CK_People_Foo] CHECK ([DriverLicense] > 0);
 
         AssertSql(
             """
-EXEC(N'ALTER TABLE [People] ADD CONSTRAINT [CK_People_Foo] CHECK ([DriverLicense] > 0)');
-"""
+            EXEC(N'ALTER TABLE [People] ADD CONSTRAINT [CK_People_Foo] CHECK ([DriverLicense] > 0)');
+            """
         );
     }
 
@@ -3031,12 +3031,12 @@ EXEC(N'ALTER TABLE [People] ADD CONSTRAINT [CK_People_Foo] CHECK ([DriverLicense
 
         AssertSql(
             """
-ALTER TABLE [People] DROP CONSTRAINT [CK_People_Foo];
-""",
+            ALTER TABLE [People] DROP CONSTRAINT [CK_People_Foo];
+            """,
             //
             """
-ALTER TABLE [People] ADD CONSTRAINT [CK_People_Foo] CHECK ([DriverLicense] > 1);
-"""
+            ALTER TABLE [People] ADD CONSTRAINT [CK_People_Foo] CHECK ([DriverLicense] > 1);
+            """
         );
     }
 
@@ -3046,8 +3046,8 @@ ALTER TABLE [People] ADD CONSTRAINT [CK_People_Foo] CHECK ([DriverLicense] > 1);
 
         AssertSql(
             """
-ALTER TABLE [People] DROP CONSTRAINT [CK_People_Foo];
-"""
+            ALTER TABLE [People] DROP CONSTRAINT [CK_People_Foo];
+            """
         );
     }
 
@@ -3057,8 +3057,8 @@ ALTER TABLE [People] DROP CONSTRAINT [CK_People_Foo];
 
         AssertSql(
             """
-CREATE SEQUENCE [TestSequence] AS int START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE NO CYCLE;
-"""
+            CREATE SEQUENCE [TestSequence] AS int START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE NO CYCLE;
+            """
         );
     }
 
@@ -3076,8 +3076,8 @@ CREATE SEQUENCE [TestSequence] AS int START WITH 1 INCREMENT BY 1 NO MINVALUE NO
         );
         AssertSql(
             """
-CREATE SEQUENCE [TestSequence] AS tinyint START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE NO CYCLE;
-"""
+            CREATE SEQUENCE [TestSequence] AS tinyint START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE NO CYCLE;
+            """
         );
     }
 
@@ -3096,8 +3096,8 @@ CREATE SEQUENCE [TestSequence] AS tinyint START WITH 1 INCREMENT BY 1 NO MINVALU
 
         AssertSql(
             """
-CREATE SEQUENCE [TestSequence] AS decimal START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE NO CYCLE;
-"""
+            CREATE SEQUENCE [TestSequence] AS decimal START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE NO CYCLE;
+            """
         );
     }
 
@@ -3107,8 +3107,8 @@ CREATE SEQUENCE [TestSequence] AS decimal START WITH 1 INCREMENT BY 1 NO MINVALU
 
         AssertSql(
             """
-CREATE SEQUENCE [TestSequence] START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE NO CYCLE;
-"""
+            CREATE SEQUENCE [TestSequence] START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE NO CYCLE;
+            """
         );
     }
 
@@ -3118,8 +3118,8 @@ CREATE SEQUENCE [TestSequence] START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVAL
 
         AssertSql(
             """
-CREATE SEQUENCE [TestSequence] AS smallint START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE NO CYCLE;
-"""
+            CREATE SEQUENCE [TestSequence] AS smallint START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE NO CYCLE;
+            """
         );
     }
 
@@ -3129,12 +3129,12 @@ CREATE SEQUENCE [TestSequence] AS smallint START WITH 1 INCREMENT BY 1 NO MINVAL
 
         AssertSql(
             """
-IF SCHEMA_ID(N'dbo2') IS NULL EXEC(N'CREATE SCHEMA [dbo2];');
-""",
+            IF SCHEMA_ID(N'dbo2') IS NULL EXEC(N'CREATE SCHEMA [dbo2];');
+            """,
             //
             """
-CREATE SEQUENCE [dbo2].[TestSequence] START WITH 3 INCREMENT BY 2 MINVALUE 2 MAXVALUE 916 CYCLE;
-"""
+            CREATE SEQUENCE [dbo2].[TestSequence] START WITH 3 INCREMENT BY 2 MINVALUE 2 MAXVALUE 916 CYCLE;
+            """
         );
     }
 
@@ -3144,12 +3144,12 @@ CREATE SEQUENCE [dbo2].[TestSequence] START WITH 3 INCREMENT BY 2 MINVALUE 2 MAX
 
         AssertSql(
             """
-ALTER SEQUENCE [foo] INCREMENT BY 2 MINVALUE -5 MAXVALUE 10 CYCLE;
-""",
+            ALTER SEQUENCE [foo] INCREMENT BY 2 MINVALUE -5 MAXVALUE 10 CYCLE;
+            """,
             //
             """
-ALTER SEQUENCE [foo] RESTART WITH -3;
-"""
+            ALTER SEQUENCE [foo] RESTART WITH -3;
+            """
         );
     }
 
@@ -3159,8 +3159,8 @@ ALTER SEQUENCE [foo] RESTART WITH -3;
 
         AssertSql(
             """
-ALTER SEQUENCE [foo] INCREMENT BY 2 NO MINVALUE NO MAXVALUE NO CYCLE;
-"""
+            ALTER SEQUENCE [foo] INCREMENT BY 2 NO MINVALUE NO MAXVALUE NO CYCLE;
+            """
         );
     }
 
@@ -3177,8 +3177,8 @@ ALTER SEQUENCE [foo] INCREMENT BY 2 NO MINVALUE NO MAXVALUE NO CYCLE;
 
         AssertSql(
             """
-DROP SEQUENCE [TestSequence];
-"""
+            DROP SEQUENCE [TestSequence];
+            """
         );
     }
 
@@ -3188,8 +3188,8 @@ DROP SEQUENCE [TestSequence];
 
         AssertSql(
             """
-EXEC sp_rename N'[TestSequence]', N'testsequence';
-"""
+            EXEC sp_rename N'[TestSequence]', N'testsequence';
+            """
         );
     }
 
@@ -3199,12 +3199,12 @@ EXEC sp_rename N'[TestSequence]', N'testsequence';
 
         AssertSql(
             """
-IF SCHEMA_ID(N'TestSequenceSchema') IS NULL EXEC(N'CREATE SCHEMA [TestSequenceSchema];');
-""",
+            IF SCHEMA_ID(N'TestSequenceSchema') IS NULL EXEC(N'CREATE SCHEMA [TestSequenceSchema];');
+            """,
             //
             """
-ALTER SCHEMA [TestSequenceSchema] TRANSFER [TestSequence];
-"""
+            ALTER SCHEMA [TestSequenceSchema] TRANSFER [TestSequence];
+            """
         );
     }
 
@@ -3224,9 +3224,9 @@ ALTER SCHEMA [TestSequenceSchema] TRANSFER [TestSequence];
 
         AssertSql(
             """
-DECLARE @defaultSchema sysname = SCHEMA_NAME();
-EXEC(N'ALTER SCHEMA [' + @defaultSchema + N'] TRANSFER [TestSequenceSchema].[TestSequence];');
-"""
+            DECLARE @defaultSchema sysname = SCHEMA_NAME();
+            EXEC(N'ALTER SCHEMA [' + @defaultSchema + N'] TRANSFER [TestSequenceSchema].[TestSequence];');
+            """
         );
     }
 
@@ -3253,12 +3253,12 @@ EXEC(N'ALTER SCHEMA [' + @defaultSchema + N'] TRANSFER [TestSequenceSchema].[Tes
 
         AssertSql(
             """
-CREATE SEQUENCE [TestSequence] AS int START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE NO CYCLE;
-""",
+            CREATE SEQUENCE [TestSequence] AS int START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE NO CYCLE;
+            """,
             //
             """
-ALTER TABLE [People] ADD [SeqProp] int NOT NULL DEFAULT (NEXT VALUE FOR TestSequence);
-"""
+            ALTER TABLE [People] ADD [SeqProp] int NOT NULL DEFAULT (NEXT VALUE FOR TestSequence);
+            """
         );
     }
 
@@ -3281,18 +3281,18 @@ ALTER TABLE [People] ADD [SeqProp] int NOT NULL DEFAULT (NEXT VALUE FOR TestSequ
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'SeqProp');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [People] DROP COLUMN [SeqProp];
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'SeqProp');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [People] DROP COLUMN [SeqProp];
+            """,
             //
             """
-DROP SEQUENCE [TestSequence];
-"""
+            DROP SEQUENCE [TestSequence];
+            """
         );
     }
 
@@ -3302,17 +3302,17 @@ DROP SEQUENCE [TestSequence];
 
         AssertSql(
             """
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Name') AND [object_id] = OBJECT_ID(N'[Person]'))
-    SET IDENTITY_INSERT [Person] ON;
-INSERT INTO [Person] ([Id], [Name])
-VALUES (1, N'Daenerys Targaryen'),
-(2, N'John Snow'),
-(3, N'Arya Stark'),
-(4, N'Harry Strickland'),
-(5, NULL);
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Name') AND [object_id] = OBJECT_ID(N'[Person]'))
-    SET IDENTITY_INSERT [Person] OFF;
-"""
+            IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Name') AND [object_id] = OBJECT_ID(N'[Person]'))
+            SET IDENTITY_INSERT [Person] ON;
+            INSERT INTO [Person] ([Id], [Name])
+            VALUES (1, N'Daenerys Targaryen'),
+            (2, N'John Snow'),
+            (3, N'Arya Stark'),
+            (4, N'Harry Strickland'),
+            (5, NULL);
+            IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Name') AND [object_id] = OBJECT_ID(N'[Person]'))
+            SET IDENTITY_INSERT [Person] OFF;
+            """
         );
     }
 
@@ -3323,10 +3323,10 @@ IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Name
         // TODO remove rowcount
         AssertSql(
             """
-DELETE FROM [Person]
-WHERE [Id] = 2;
-SELECT @@ROWCOUNT;
-"""
+            DELETE FROM [Person]
+            WHERE [Id] = 2;
+            SELECT @@ROWCOUNT;
+            """
         );
     }
 
@@ -3337,10 +3337,10 @@ SELECT @@ROWCOUNT;
         // TODO remove rowcount
         AssertSql(
             """
-DELETE FROM [Person]
-WHERE [AnotherId] = 12 AND [Id] = 2;
-SELECT @@ROWCOUNT;
-"""
+            DELETE FROM [Person]
+            WHERE [AnotherId] = 12 AND [Id] = 2;
+            SELECT @@ROWCOUNT;
+            """
         );
     }
 
@@ -3351,10 +3351,10 @@ SELECT @@ROWCOUNT;
         // TODO remove rowcount
         AssertSql(
             """
-UPDATE [Person] SET [Name] = N'Another John Snow'
-WHERE [Id] = 2;
-SELECT @@ROWCOUNT;
-"""
+            UPDATE [Person] SET [Name] = N'Another John Snow'
+            WHERE [Id] = 2;
+            SELECT @@ROWCOUNT;
+            """
         );
     }
 
@@ -3365,10 +3365,10 @@ SELECT @@ROWCOUNT;
         // TODO remove rowcount
         AssertSql(
             """
-UPDATE [Person] SET [Name] = N'Another John Snow'
-WHERE [AnotherId] = 11 AND [Id] = 2;
-SELECT @@ROWCOUNT;
-"""
+            UPDATE [Person] SET [Name] = N'Another John Snow'
+            WHERE [AnotherId] = 11 AND [Id] = 2;
+            SELECT @@ROWCOUNT;
+            """
         );
     }
 
@@ -3379,10 +3379,10 @@ SELECT @@ROWCOUNT;
         // TODO remove rowcount
         AssertSql(
             """
-UPDATE [Person] SET [Age] = 21, [Name] = N'Another John Snow'
-WHERE [Id] = 2;
-SELECT @@ROWCOUNT;
-"""
+            UPDATE [Person] SET [Age] = 21, [Name] = N'Another John Snow'
+            WHERE [Id] = 2;
+            SELECT @@ROWCOUNT;
+            """
         );
     }
 
@@ -3417,17 +3417,17 @@ SELECT @@ROWCOUNT;
 
         AssertSql(
             """
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Name') AND [object_id] = OBJECT_ID(N'[Person]'))
-    SET IDENTITY_INSERT [Person] ON;
-EXEC(N'INSERT INTO [Person] ([Id], [Name])
-VALUES (1, N''Daenerys Targaryen''),
-(2, N''John Snow''),
-(3, N''Arya Stark''),
-(4, N''Harry Strickland''),
-(5, NULL)');
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Name') AND [object_id] = OBJECT_ID(N'[Person]'))
-    SET IDENTITY_INSERT [Person] OFF;
-"""
+            IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Name') AND [object_id] = OBJECT_ID(N'[Person]'))
+            SET IDENTITY_INSERT [Person] ON;
+            EXEC(N'INSERT INTO [Person] ([Id], [Name])
+            VALUES (1, N''Daenerys Targaryen''),
+            (2, N''John Snow''),
+            (3, N''Arya Stark''),
+            (4, N''Harry Strickland''),
+            (5, NULL)');
+            IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Name') AND [object_id] = OBJECT_ID(N'[Person]'))
+            SET IDENTITY_INSERT [Person] OFF;
+            """
         );
     }
 
@@ -3454,10 +3454,10 @@ IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Name
 
         AssertSql(
             """
-EXEC(N'DELETE FROM [Person]
-WHERE [Id] = 2;
-SELECT @@ROWCOUNT');
-"""
+            EXEC(N'DELETE FROM [Person]
+            WHERE [Id] = 2;
+            SELECT @@ROWCOUNT');
+            """
         );
     }
 
@@ -3485,10 +3485,10 @@ SELECT @@ROWCOUNT');
 
         AssertSql(
             """
-EXEC(N'UPDATE [Person] SET [Name] = N''Another John Snow''
-WHERE [Id] = 2;
-SELECT @@ROWCOUNT');
-"""
+            EXEC(N'UPDATE [Person] SET [Name] = N''Another John Snow''
+            WHERE [Id] = 2;
+            SELECT @@ROWCOUNT');
+            """
         );
     }
 
@@ -3550,16 +3550,16 @@ SELECT @@ROWCOUNT');
 
         AssertSql(
             """
-DECLARE @historyTableSchema sysname = SCHEMA_NAME()
-EXEC(N'CREATE TABLE [Customer] (
-    [Id] int NOT NULL IDENTITY,
-    [Name] nvarchar(max) NULL,
-    [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
-    [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
-    CONSTRAINT [PK_Customer] PRIMARY KEY ([Id]),
-    PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
-) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + N'].[CustomerHistory]))');
-"""
+            DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+            EXEC(N'CREATE TABLE [Customer] (
+            [Id] int NOT NULL IDENTITY,
+            [Name] nvarchar(max) NULL,
+            [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
+            [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+            CONSTRAINT [PK_Customer] PRIMARY KEY ([Id]),
+            PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
+            ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + N'].[CustomerHistory]))');
+            """
         );
     }
 
@@ -3618,16 +3618,16 @@ EXEC(N'CREATE TABLE [Customer] (
 
         AssertSql(
             """
-DECLARE @historyTableSchema sysname = SCHEMA_NAME()
-EXEC(N'CREATE TABLE [Customer] (
-    [Id] int NOT NULL IDENTITY,
-    [Name] nvarchar(max) NULL,
-    [End] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
-    [Start] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
-    CONSTRAINT [PK_Customer] PRIMARY KEY ([Id]),
-    PERIOD FOR SYSTEM_TIME([Start], [End])
-) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + N'].[CustomerHistory]))');
-"""
+            DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+            EXEC(N'CREATE TABLE [Customer] (
+            [Id] int NOT NULL IDENTITY,
+            [Name] nvarchar(max) NULL,
+            [End] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
+            [Start] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+            CONSTRAINT [PK_Customer] PRIMARY KEY ([Id]),
+            PERIOD FOR SYSTEM_TIME([Start], [End])
+            ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + N'].[CustomerHistory]))');
+            """
         );
     }
 
@@ -3690,16 +3690,16 @@ EXEC(N'CREATE TABLE [Customer] (
 
         AssertSql(
             """
-DECLARE @historyTableSchema sysname = SCHEMA_NAME()
-EXEC(N'CREATE TABLE [Customer] (
-    [Id] int NOT NULL IDENTITY,
-    [Name] nvarchar(max) NULL,
-    [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
-    [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
-    CONSTRAINT [PK_Customer] PRIMARY KEY ([Id]),
-    PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
-) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + N'].[HistoryTable]))');
-"""
+            DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+            EXEC(N'CREATE TABLE [Customer] (
+            [Id] int NOT NULL IDENTITY,
+            [Name] nvarchar(max) NULL,
+            [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
+            [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+            CONSTRAINT [PK_Customer] PRIMARY KEY ([Id]),
+            PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
+            ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + N'].[HistoryTable]))');
+            """
         );
     }
 
@@ -3764,19 +3764,19 @@ EXEC(N'CREATE TABLE [Customer] (
 
         AssertSql(
             """
-IF SCHEMA_ID(N'mySchema') IS NULL EXEC(N'CREATE SCHEMA [mySchema];');
-""",
+            IF SCHEMA_ID(N'mySchema') IS NULL EXEC(N'CREATE SCHEMA [mySchema];');
+            """,
             //
             """
-CREATE TABLE [mySchema].[Customers] (
-    [Id] int NOT NULL IDENTITY,
-    [Name] nvarchar(max) NULL,
-    [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
-    [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
-    CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
-    PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
-) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema].[CustomersHistory]));
-"""
+            CREATE TABLE [mySchema].[Customers] (
+            [Id] int NOT NULL IDENTITY,
+            [Name] nvarchar(max) NULL,
+            [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
+            [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+            CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
+            PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
+            ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema].[CustomersHistory]));
+            """
         );
     }
 
@@ -3843,19 +3843,19 @@ CREATE TABLE [mySchema].[Customers] (
 
         AssertSql(
             """
-IF SCHEMA_ID(N'myDefaultSchema') IS NULL EXEC(N'CREATE SCHEMA [myDefaultSchema];');
-""",
+            IF SCHEMA_ID(N'myDefaultSchema') IS NULL EXEC(N'CREATE SCHEMA [myDefaultSchema];');
+            """,
             //
             """
-CREATE TABLE [myDefaultSchema].[Customers] (
-    [Id] int NOT NULL IDENTITY,
-    [Name] nvarchar(max) NULL,
-    [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
-    [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
-    CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
-    PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
-) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myDefaultSchema].[CustomersHistory]));
-"""
+            CREATE TABLE [myDefaultSchema].[Customers] (
+            [Id] int NOT NULL IDENTITY,
+            [Name] nvarchar(max) NULL,
+            [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
+            [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+            CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
+            PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
+            ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myDefaultSchema].[CustomersHistory]));
+            """
         );
     }
 
@@ -3923,19 +3923,19 @@ CREATE TABLE [myDefaultSchema].[Customers] (
 
         AssertSql(
             """
-IF SCHEMA_ID(N'mySchema') IS NULL EXEC(N'CREATE SCHEMA [mySchema];');
-""",
+            IF SCHEMA_ID(N'mySchema') IS NULL EXEC(N'CREATE SCHEMA [mySchema];');
+            """,
             //
             """
-CREATE TABLE [mySchema].[Customers] (
-    [Id] int NOT NULL IDENTITY,
-    [Name] nvarchar(max) NULL,
-    [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
-    [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
-    CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
-    PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
-) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema].[CustomersHistory]));
-"""
+            CREATE TABLE [mySchema].[Customers] (
+            [Id] int NOT NULL IDENTITY,
+            [Name] nvarchar(max) NULL,
+            [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
+            [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+            CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
+            PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
+            ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema].[CustomersHistory]));
+            """
         );
     }
 
@@ -4006,19 +4006,19 @@ CREATE TABLE [mySchema].[Customers] (
 
         AssertSql(
             """
-IF SCHEMA_ID(N'myDefaultSchema') IS NULL EXEC(N'CREATE SCHEMA [myDefaultSchema];');
-""",
+            IF SCHEMA_ID(N'myDefaultSchema') IS NULL EXEC(N'CREATE SCHEMA [myDefaultSchema];');
+            """,
             //
             """
-CREATE TABLE [myDefaultSchema].[Customers] (
-    [Id] int NOT NULL IDENTITY,
-    [Name] nvarchar(max) NULL,
-    [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
-    [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
-    CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
-    PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
-) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myDefaultSchema].[CustomersHistory]));
-"""
+            CREATE TABLE [myDefaultSchema].[Customers] (
+            [Id] int NOT NULL IDENTITY,
+            [Name] nvarchar(max) NULL,
+            [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
+            [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+            CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
+            PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
+            ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myDefaultSchema].[CustomersHistory]));
+            """
         );
     }
 
@@ -4092,19 +4092,19 @@ CREATE TABLE [myDefaultSchema].[Customers] (
 
         AssertSql(
             """
-IF SCHEMA_ID(N'myDefaultSchema') IS NULL EXEC(N'CREATE SCHEMA [myDefaultSchema];');
-""",
+            IF SCHEMA_ID(N'myDefaultSchema') IS NULL EXEC(N'CREATE SCHEMA [myDefaultSchema];');
+            """,
             //
             """
-CREATE TABLE [myDefaultSchema].[Customers] (
-    [Id] int NOT NULL IDENTITY,
-    [Name] nvarchar(max) NULL,
-    [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
-    [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
-    CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
-    PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
-) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myDefaultSchema].[CustomersHistory]));
-"""
+            CREATE TABLE [myDefaultSchema].[Customers] (
+            [Id] int NOT NULL IDENTITY,
+            [Name] nvarchar(max) NULL,
+            [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
+            [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+            CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
+            PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
+            ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myDefaultSchema].[CustomersHistory]));
+            """
         );
     }
 
@@ -4176,23 +4176,23 @@ CREATE TABLE [myDefaultSchema].[Customers] (
 
         AssertSql(
             """
-IF SCHEMA_ID(N'myDefaultSchema') IS NULL EXEC(N'CREATE SCHEMA [myDefaultSchema];');
-""",
+            IF SCHEMA_ID(N'myDefaultSchema') IS NULL EXEC(N'CREATE SCHEMA [myDefaultSchema];');
+            """,
             //
             """
-IF SCHEMA_ID(N'myHistorySchema') IS NULL EXEC(N'CREATE SCHEMA [myHistorySchema];');
-""",
+            IF SCHEMA_ID(N'myHistorySchema') IS NULL EXEC(N'CREATE SCHEMA [myHistorySchema];');
+            """,
             //
             """
-CREATE TABLE [myDefaultSchema].[Customers] (
-    [Id] int NOT NULL IDENTITY,
-    [Name] nvarchar(max) NULL,
-    [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
-    [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
-    CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
-    PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
-) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myHistorySchema].[History]));
-"""
+            CREATE TABLE [myDefaultSchema].[Customers] (
+            [Id] int NOT NULL IDENTITY,
+            [Name] nvarchar(max) NULL,
+            [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
+            [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+            CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
+            PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
+            ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myHistorySchema].[History]));
+            """
         );
     }
 
@@ -4265,19 +4265,19 @@ CREATE TABLE [myDefaultSchema].[Customers] (
 
         AssertSql(
             """
-IF SCHEMA_ID(N'myDefaultSchema') IS NULL EXEC(N'CREATE SCHEMA [myDefaultSchema];');
-""",
+            IF SCHEMA_ID(N'myDefaultSchema') IS NULL EXEC(N'CREATE SCHEMA [myDefaultSchema];');
+            """,
             //
             """
-CREATE TABLE [myDefaultSchema].[Customers] (
-    [Id] int NOT NULL IDENTITY,
-    [Name] nvarchar(max) NULL,
-    [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
-    [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
-    CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
-    PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
-) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myDefaultSchema].[CustomersHistory]));
-"""
+            CREATE TABLE [myDefaultSchema].[Customers] (
+            [Id] int NOT NULL IDENTITY,
+            [Name] nvarchar(max) NULL,
+            [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
+            [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+            CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
+            PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
+            ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myDefaultSchema].[CustomersHistory]));
+            """
         );
     }
 
@@ -4348,19 +4348,19 @@ CREATE TABLE [myDefaultSchema].[Customers] (
 
         AssertSql(
             """
-IF SCHEMA_ID(N'myDefaultSchema') IS NULL EXEC(N'CREATE SCHEMA [myDefaultSchema];');
-""",
+            IF SCHEMA_ID(N'myDefaultSchema') IS NULL EXEC(N'CREATE SCHEMA [myDefaultSchema];');
+            """,
             //
             """
-CREATE TABLE [myDefaultSchema].[Customers] (
-    [Id] int NOT NULL IDENTITY,
-    [Name] nvarchar(max) NULL,
-    [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
-    [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
-    CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
-    PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
-) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myDefaultSchema].[HistoryTable]));
-"""
+            CREATE TABLE [myDefaultSchema].[Customers] (
+            [Id] int NOT NULL IDENTITY,
+            [Name] nvarchar(max) NULL,
+            [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
+            [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+            CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
+            PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
+            ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myDefaultSchema].[HistoryTable]));
+            """
         );
     }
 
@@ -4431,23 +4431,23 @@ CREATE TABLE [myDefaultSchema].[Customers] (
 
         AssertSql(
             """
-IF SCHEMA_ID(N'myDefaultSchema') IS NULL EXEC(N'CREATE SCHEMA [myDefaultSchema];');
-""",
+            IF SCHEMA_ID(N'myDefaultSchema') IS NULL EXEC(N'CREATE SCHEMA [myDefaultSchema];');
+            """,
             //
             """
-IF SCHEMA_ID(N'historySchema') IS NULL EXEC(N'CREATE SCHEMA [historySchema];');
-""",
+            IF SCHEMA_ID(N'historySchema') IS NULL EXEC(N'CREATE SCHEMA [historySchema];');
+            """,
             //
             """
-CREATE TABLE [myDefaultSchema].[Customers] (
-    [Id] int NOT NULL IDENTITY,
-    [Name] nvarchar(max) NULL,
-    [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
-    [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
-    CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
-    PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
-) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [historySchema].[HistoryTable]));
-"""
+            CREATE TABLE [myDefaultSchema].[Customers] (
+            [Id] int NOT NULL IDENTITY,
+            [Name] nvarchar(max) NULL,
+            [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
+            [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+            CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
+            PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
+            ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [historySchema].[HistoryTable]));
+            """
         );
     }
 
@@ -4517,19 +4517,19 @@ CREATE TABLE [myDefaultSchema].[Customers] (
 
         AssertSql(
             """
-IF SCHEMA_ID(N'historySchema') IS NULL EXEC(N'CREATE SCHEMA [historySchema];');
-""",
+            IF SCHEMA_ID(N'historySchema') IS NULL EXEC(N'CREATE SCHEMA [historySchema];');
+            """,
             //
             """
-CREATE TABLE [Customers] (
-    [Id] int NOT NULL IDENTITY,
-    [Name] nvarchar(max) NULL,
-    [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
-    [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
-    CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
-    PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
-) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [historySchema].[HistoryTable]));
-"""
+            CREATE TABLE [Customers] (
+            [Id] int NOT NULL IDENTITY,
+            [Name] nvarchar(max) NULL,
+            [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
+            [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+            CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
+            PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
+            ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [historySchema].[HistoryTable]));
+            """
         );
     }
 
@@ -4567,16 +4567,16 @@ CREATE TABLE [Customers] (
 
         AssertSql(
             """
-ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-DROP TABLE [Customer];
-""",
+            DROP TABLE [Customer];
+            """,
             //
             """
-DROP TABLE [CustomerHistory];
-"""
+            DROP TABLE [CustomerHistory];
+            """
         );
     }
 
@@ -4615,16 +4615,16 @@ DROP TABLE [CustomerHistory];
 
         AssertSql(
             """
-ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-DROP TABLE [Customer];
-""",
+            DROP TABLE [Customer];
+            """,
             //
             """
-DROP TABLE [HistoryTable];
-"""
+            DROP TABLE [HistoryTable];
+            """
         );
     }
 
@@ -4663,16 +4663,16 @@ DROP TABLE [HistoryTable];
 
         AssertSql(
             """
-ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-DROP TABLE [Customer];
-""",
+            DROP TABLE [Customer];
+            """,
             //
             """
-DROP TABLE [historySchema].[HistoryTable];
-"""
+            DROP TABLE [historySchema].[HistoryTable];
+            """
         );
     }
 
@@ -4747,25 +4747,25 @@ DROP TABLE [historySchema].[HistoryTable];
 
         AssertSql(
             """
-ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-ALTER TABLE [Customers] DROP CONSTRAINT [PK_Customers];
-""",
+            ALTER TABLE [Customers] DROP CONSTRAINT [PK_Customers];
+            """,
             //
             """
-EXEC sp_rename N'[Customers]', N'RenamedCustomers';
-""",
+            EXEC sp_rename N'[Customers]', N'RenamedCustomers';
+            """,
             //
             """
-ALTER TABLE [RenamedCustomers] ADD CONSTRAINT [PK_RenamedCustomers] PRIMARY KEY ([Id]);
-""",
+            ALTER TABLE [RenamedCustomers] ADD CONSTRAINT [PK_RenamedCustomers] PRIMARY KEY ([Id]);
+            """,
             //
             """
-DECLARE @historyTableSchema sysname = SCHEMA_NAME()
-EXEC(N'ALTER TABLE [RenamedCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-"""
+            DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+            EXEC(N'ALTER TABLE [RenamedCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
+            """
         );
     }
 
@@ -4845,49 +4845,49 @@ EXEC(N'ALTER TABLE [RenamedCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE
 
         AssertSql(
             """
-ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-ALTER TABLE [Customers] DROP CONSTRAINT [PK_Customers];
-""",
+            ALTER TABLE [Customers] DROP CONSTRAINT [PK_Customers];
+            """,
             //
             """
-EXEC sp_rename N'[Customers]', N'RenamedCustomers';
-""",
+            EXEC sp_rename N'[Customers]', N'RenamedCustomers';
+            """,
             //
             """
-EXEC sp_rename N'[RenamedCustomers].[DoB]', N'DateOfBirth', N'COLUMN';
-""",
+            EXEC sp_rename N'[RenamedCustomers].[DoB]', N'DateOfBirth', N'COLUMN';
+            """,
             //
             """
-EXEC sp_rename N'[HistoryTable].[DoB]', N'DateOfBirth', N'COLUMN';
-""",
+            EXEC sp_rename N'[HistoryTable].[DoB]', N'DateOfBirth', N'COLUMN';
+            """,
             //
             """
-DECLARE @defaultSchema AS sysname;
-SET @defaultSchema = SCHEMA_NAME();
-DECLARE @description AS sql_variant;
-SET @description = N'for VIP only';
-EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'RenamedCustomers', 'COLUMN', N'Discount';
-""",
+            DECLARE @defaultSchema AS sysname;
+            SET @defaultSchema = SCHEMA_NAME();
+            DECLARE @description AS sql_variant;
+            SET @description = N'for VIP only';
+            EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'RenamedCustomers', 'COLUMN', N'Discount';
+            """,
             //
             """
-DECLARE @defaultSchema AS sysname;
-SET @defaultSchema = SCHEMA_NAME();
-DECLARE @description AS sql_variant;
-SET @description = N'for VIP only';
-EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'HistoryTable', 'COLUMN', N'Discount';
-""",
+            DECLARE @defaultSchema AS sysname;
+            SET @defaultSchema = SCHEMA_NAME();
+            DECLARE @description AS sql_variant;
+            SET @description = N'for VIP only';
+            EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'HistoryTable', 'COLUMN', N'Discount';
+            """,
             //
             """
-ALTER TABLE [RenamedCustomers] ADD CONSTRAINT [PK_RenamedCustomers] PRIMARY KEY ([Id]);
-""",
+            ALTER TABLE [RenamedCustomers] ADD CONSTRAINT [PK_RenamedCustomers] PRIMARY KEY ([Id]);
+            """,
             //
             """
-DECLARE @historyTableSchema sysname = SCHEMA_NAME()
-EXEC(N'ALTER TABLE [RenamedCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-"""
+            DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+            EXEC(N'ALTER TABLE [RenamedCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
+            """
         );
     }
 
@@ -4962,24 +4962,24 @@ EXEC(N'ALTER TABLE [RenamedCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE
 
         AssertSql(
             """
-ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-ALTER TABLE [Customers] DROP CONSTRAINT [PK_Customers];
-""",
+            ALTER TABLE [Customers] DROP CONSTRAINT [PK_Customers];
+            """,
             //
             """
-EXEC sp_rename N'[Customers]', N'RenamedCustomers';
-""",
+            EXEC sp_rename N'[Customers]', N'RenamedCustomers';
+            """,
             //
             """
-ALTER TABLE [RenamedCustomers] ADD CONSTRAINT [PK_RenamedCustomers] PRIMARY KEY ([Id]);
-""",
+            ALTER TABLE [RenamedCustomers] ADD CONSTRAINT [PK_RenamedCustomers] PRIMARY KEY ([Id]);
+            """,
             //
             """
-ALTER TABLE [RenamedCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [historySchema].[HistoryTable]))
-"""
+            ALTER TABLE [RenamedCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [historySchema].[HistoryTable]))
+            """
         );
     }
 
@@ -5053,24 +5053,24 @@ ALTER TABLE [RenamedCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [his
 
         AssertSql(
             """
-IF SCHEMA_ID(N'mySchema2') IS NULL EXEC(N'CREATE SCHEMA [mySchema2];');
-""",
+            IF SCHEMA_ID(N'mySchema2') IS NULL EXEC(N'CREATE SCHEMA [mySchema2];');
+            """,
             //
             """
-ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-ALTER SCHEMA [mySchema2] TRANSFER [mySchema].[Customers];
-""",
+            ALTER SCHEMA [mySchema2] TRANSFER [mySchema].[Customers];
+            """,
             //
             """
-ALTER SCHEMA [mySchema2] TRANSFER [mySchema].[HistoryTable];
-""",
+            ALTER SCHEMA [mySchema2] TRANSFER [mySchema].[HistoryTable];
+            """,
             //
             """
-ALTER TABLE [mySchema2].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema2].[HistoryTable]))
-"""
+            ALTER TABLE [mySchema2].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema2].[HistoryTable]))
+            """
         );
     }
 
@@ -5145,20 +5145,20 @@ ALTER TABLE [mySchema2].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE =
 
         AssertSql(
             """
-IF SCHEMA_ID(N'mySchema2') IS NULL EXEC(N'CREATE SCHEMA [mySchema2];');
-""",
+            IF SCHEMA_ID(N'mySchema2') IS NULL EXEC(N'CREATE SCHEMA [mySchema2];');
+            """,
             //
             """
-ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-ALTER SCHEMA [mySchema2] TRANSFER [mySchema].[Customers];
-""",
+            ALTER SCHEMA [mySchema2] TRANSFER [mySchema].[Customers];
+            """,
             //
             """
-ALTER TABLE [mySchema2].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myHistorySchema].[HistoryTable]))
-"""
+            ALTER TABLE [mySchema2].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myHistorySchema].[HistoryTable]))
+            """
         );
     }
 
@@ -5248,25 +5248,25 @@ ALTER TABLE [mySchema2].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE =
 
         AssertSql(
             """
-IF SCHEMA_ID(N'mySchema2') IS NULL EXEC(N'CREATE SCHEMA [mySchema2];');
-""",
+            IF SCHEMA_ID(N'mySchema2') IS NULL EXEC(N'CREATE SCHEMA [mySchema2];');
+            """,
             //
             """
-ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-ALTER SCHEMA [mySchema2] TRANSFER [mySchema].[Customers];
-""",
+            ALTER SCHEMA [mySchema2] TRANSFER [mySchema].[Customers];
+            """,
             //
             """
-EXEC sp_rename N'[mySchema].[HistoryTable]', N'HistoryTable2';
-ALTER SCHEMA [mySchema2] TRANSFER [mySchema].[HistoryTable2];
-""",
+            EXEC sp_rename N'[mySchema].[HistoryTable]', N'HistoryTable2';
+            ALTER SCHEMA [mySchema2] TRANSFER [mySchema].[HistoryTable2];
+            """,
             //
             """
-ALTER TABLE [mySchema2].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema2].[HistoryTable2]))
-"""
+            ALTER TABLE [mySchema2].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema2].[HistoryTable2]))
+            """
         );
     }
 
@@ -5356,25 +5356,25 @@ ALTER TABLE [mySchema2].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE =
 
         AssertSql(
             """
-IF SCHEMA_ID(N'mySchema2') IS NULL EXEC(N'CREATE SCHEMA [mySchema2];');
-""",
+            IF SCHEMA_ID(N'mySchema2') IS NULL EXEC(N'CREATE SCHEMA [mySchema2];');
+            """,
             //
             """
-ALTER TABLE [defaultSchema].[Customers] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [defaultSchema].[Customers] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-ALTER SCHEMA [mySchema2] TRANSFER [defaultSchema].[Customers];
-""",
+            ALTER SCHEMA [mySchema2] TRANSFER [defaultSchema].[Customers];
+            """,
             //
             """
-EXEC sp_rename N'[defaultSchema].[HistoryTable]', N'HistoryTable2';
-ALTER SCHEMA [mySchema2] TRANSFER [defaultSchema].[HistoryTable2];
-""",
+            EXEC sp_rename N'[defaultSchema].[HistoryTable]', N'HistoryTable2';
+            ALTER SCHEMA [mySchema2] TRANSFER [defaultSchema].[HistoryTable2];
+            """,
             //
             """
-ALTER TABLE [mySchema2].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema2].[HistoryTable2]))
-"""
+            ALTER TABLE [mySchema2].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema2].[HistoryTable2]))
+            """
         );
     }
 
@@ -5467,25 +5467,25 @@ ALTER TABLE [mySchema2].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE =
 
         AssertSql(
             """
-IF SCHEMA_ID(N'mySchema2') IS NULL EXEC(N'CREATE SCHEMA [mySchema2];');
-""",
+            IF SCHEMA_ID(N'mySchema2') IS NULL EXEC(N'CREATE SCHEMA [mySchema2];');
+            """,
             //
             """
-ALTER TABLE [modifiedSchema].[Customers] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [modifiedSchema].[Customers] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-ALTER SCHEMA [mySchema2] TRANSFER [modifiedSchema].[Customers];
-""",
+            ALTER SCHEMA [mySchema2] TRANSFER [modifiedSchema].[Customers];
+            """,
             //
             """
-EXEC sp_rename N'[modifiedSchema].[HistoryTable]', N'HistoryTable2';
-ALTER SCHEMA [mySchema2] TRANSFER [modifiedSchema].[HistoryTable2];
-""",
+            EXEC sp_rename N'[modifiedSchema].[HistoryTable]', N'HistoryTable2';
+            ALTER SCHEMA [mySchema2] TRANSFER [modifiedSchema].[HistoryTable2];
+            """,
             //
             """
-ALTER TABLE [mySchema2].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema2].[HistoryTable2]))
-"""
+            ALTER TABLE [mySchema2].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema2].[HistoryTable2]))
+            """
         );
     }
 
@@ -5576,24 +5576,24 @@ ALTER TABLE [mySchema2].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE =
 
         AssertSql(
             """
-IF SCHEMA_ID(N'mySchema2') IS NULL EXEC(N'CREATE SCHEMA [mySchema2];');
-""",
+            IF SCHEMA_ID(N'mySchema2') IS NULL EXEC(N'CREATE SCHEMA [mySchema2];');
+            """,
             //
             """
-ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-ALTER SCHEMA [mySchema2] TRANSFER [mySchema].[Customers];
-""",
+            ALTER SCHEMA [mySchema2] TRANSFER [mySchema].[Customers];
+            """,
             //
             """
-ALTER SCHEMA [mySchema2] TRANSFER [mySchema].[CustomersHistory];
-""",
+            ALTER SCHEMA [mySchema2] TRANSFER [mySchema].[CustomersHistory];
+            """,
             //
             """
-ALTER TABLE [mySchema2].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema2].[CustomersHistory]))
-"""
+            ALTER TABLE [mySchema2].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema2].[CustomersHistory]))
+            """
         );
     }
 
@@ -5676,8 +5676,8 @@ ALTER TABLE [mySchema2].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE =
 
         AssertSql(
             """
-EXEC sp_rename N'[HistoryTable]', N'RenamedHistoryTable';
-"""
+            EXEC sp_rename N'[HistoryTable]', N'RenamedHistoryTable';
+            """
         );
     }
 
@@ -5764,12 +5764,12 @@ EXEC sp_rename N'[HistoryTable]', N'RenamedHistoryTable';
 
         AssertSql(
             """
-IF SCHEMA_ID(N'modifiedHistorySchema') IS NULL EXEC(N'CREATE SCHEMA [modifiedHistorySchema];');
-""",
+            IF SCHEMA_ID(N'modifiedHistorySchema') IS NULL EXEC(N'CREATE SCHEMA [modifiedHistorySchema];');
+            """,
             //
             """
-ALTER SCHEMA [modifiedHistorySchema] TRANSFER [historySchema].[HistoryTable];
-"""
+            ALTER SCHEMA [modifiedHistorySchema] TRANSFER [historySchema].[HistoryTable];
+            """
         );
     }
 
@@ -5861,38 +5861,38 @@ ALTER SCHEMA [modifiedHistorySchema] TRANSFER [historySchema].[HistoryTable];
 
         AssertSql(
             """
-ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-ALTER TABLE [Customers] DROP CONSTRAINT [PK_Customers];
-""",
+            ALTER TABLE [Customers] DROP CONSTRAINT [PK_Customers];
+            """,
             //
             """
-IF SCHEMA_ID(N'newSchema') IS NULL EXEC(N'CREATE SCHEMA [newSchema];');
-""",
+            IF SCHEMA_ID(N'newSchema') IS NULL EXEC(N'CREATE SCHEMA [newSchema];');
+            """,
             //
             """
-EXEC sp_rename N'[Customers]', N'RenamedCustomers';
-ALTER SCHEMA [newSchema] TRANSFER [RenamedCustomers];
-""",
+            EXEC sp_rename N'[Customers]', N'RenamedCustomers';
+            ALTER SCHEMA [newSchema] TRANSFER [RenamedCustomers];
+            """,
             //
             """
-IF SCHEMA_ID(N'newHistorySchema') IS NULL EXEC(N'CREATE SCHEMA [newHistorySchema];');
-""",
+            IF SCHEMA_ID(N'newHistorySchema') IS NULL EXEC(N'CREATE SCHEMA [newHistorySchema];');
+            """,
             //
             """
-EXEC sp_rename N'[historySchema].[HistoryTable]', N'RenamedHistoryTable';
-ALTER SCHEMA [newHistorySchema] TRANSFER [historySchema].[RenamedHistoryTable];
-""",
+            EXEC sp_rename N'[historySchema].[HistoryTable]', N'RenamedHistoryTable';
+            ALTER SCHEMA [newHistorySchema] TRANSFER [historySchema].[RenamedHistoryTable];
+            """,
             //
             """
-ALTER TABLE [newSchema].[RenamedCustomers] ADD CONSTRAINT [PK_RenamedCustomers] PRIMARY KEY ([Id]);
-""",
+            ALTER TABLE [newSchema].[RenamedCustomers] ADD CONSTRAINT [PK_RenamedCustomers] PRIMARY KEY ([Id]);
+            """,
             //
             """
-ALTER TABLE [newSchema].[RenamedCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [newHistorySchema].[RenamedHistoryTable]))
-"""
+            ALTER TABLE [newSchema].[RenamedCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [newHistorySchema].[RenamedHistoryTable]))
+            """
         );
     }
 
@@ -5957,53 +5957,53 @@ ALTER TABLE [newSchema].[RenamedCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_
 
         AssertSql(
             """
-ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Name');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [Customers] DROP COLUMN [Name];
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Name');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [Customers] DROP COLUMN [Name];
+            """,
             //
             """
-DECLARE @var1 sysname;
-SELECT @var1 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[HistoryTable]') AND [c].[name] = N'Name');
-IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [HistoryTable] DROP CONSTRAINT [' + @var1 + '];');
-ALTER TABLE [HistoryTable] DROP COLUMN [Name];
-""",
+            DECLARE @var1 sysname;
+            SELECT @var1 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[HistoryTable]') AND [c].[name] = N'Name');
+            IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [HistoryTable] DROP CONSTRAINT [' + @var1 + '];');
+            ALTER TABLE [HistoryTable] DROP COLUMN [Name];
+            """,
             //
             """
-DECLARE @var2 sysname;
-SELECT @var2 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Number');
-IF @var2 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var2 + '];');
-ALTER TABLE [Customers] DROP COLUMN [Number];
-""",
+            DECLARE @var2 sysname;
+            SELECT @var2 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Number');
+            IF @var2 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var2 + '];');
+            ALTER TABLE [Customers] DROP COLUMN [Number];
+            """,
             //
             """
-DECLARE @var3 sysname;
-SELECT @var3 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[HistoryTable]') AND [c].[name] = N'Number');
-IF @var3 IS NOT NULL EXEC(N'ALTER TABLE [HistoryTable] DROP CONSTRAINT [' + @var3 + '];');
-ALTER TABLE [HistoryTable] DROP COLUMN [Number];
-""",
+            DECLARE @var3 sysname;
+            SELECT @var3 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[HistoryTable]') AND [c].[name] = N'Number');
+            IF @var3 IS NOT NULL EXEC(N'ALTER TABLE [HistoryTable] DROP CONSTRAINT [' + @var3 + '];');
+            ALTER TABLE [HistoryTable] DROP COLUMN [Number];
+            """,
             //
             """
-DECLARE @historyTableSchema sysname = SCHEMA_NAME()
-EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-"""
+            DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+            EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
+            """
         );
     }
 
@@ -6068,52 +6068,52 @@ EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' +
 
         AssertSql(
             """
-ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Name');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [Customers] DROP COLUMN [Name];
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Name');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [Customers] DROP COLUMN [Name];
+            """,
             //
             """
-DECLARE @var1 sysname;
-SELECT @var1 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[myHistorySchema].[HistoryTable]') AND [c].[name] = N'Name');
-IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [myHistorySchema].[HistoryTable] DROP CONSTRAINT [' + @var1 + '];');
-ALTER TABLE [myHistorySchema].[HistoryTable] DROP COLUMN [Name];
-""",
+            DECLARE @var1 sysname;
+            SELECT @var1 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[myHistorySchema].[HistoryTable]') AND [c].[name] = N'Name');
+            IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [myHistorySchema].[HistoryTable] DROP CONSTRAINT [' + @var1 + '];');
+            ALTER TABLE [myHistorySchema].[HistoryTable] DROP COLUMN [Name];
+            """,
             //
             """
-DECLARE @var2 sysname;
-SELECT @var2 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Number');
-IF @var2 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var2 + '];');
-ALTER TABLE [Customers] DROP COLUMN [Number];
-""",
+            DECLARE @var2 sysname;
+            SELECT @var2 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Number');
+            IF @var2 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var2 + '];');
+            ALTER TABLE [Customers] DROP COLUMN [Number];
+            """,
             //
             """
-DECLARE @var3 sysname;
-SELECT @var3 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[myHistorySchema].[HistoryTable]') AND [c].[name] = N'Number');
-IF @var3 IS NOT NULL EXEC(N'ALTER TABLE [myHistorySchema].[HistoryTable] DROP CONSTRAINT [' + @var3 + '];');
-ALTER TABLE [myHistorySchema].[HistoryTable] DROP COLUMN [Number];
-""",
+            DECLARE @var3 sysname;
+            SELECT @var3 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[myHistorySchema].[HistoryTable]') AND [c].[name] = N'Number');
+            IF @var3 IS NOT NULL EXEC(N'ALTER TABLE [myHistorySchema].[HistoryTable] DROP CONSTRAINT [' + @var3 + '];');
+            ALTER TABLE [myHistorySchema].[HistoryTable] DROP COLUMN [Number];
+            """,
             //
             """
-ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myHistorySchema].[HistoryTable]))
-"""
+            ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myHistorySchema].[HistoryTable]))
+            """
         );
     }
 
@@ -6179,52 +6179,52 @@ ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myHistoryS
 
         AssertSql(
             """
-ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[mySchema].[Customers]') AND [c].[name] = N'Name');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [mySchema].[Customers] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [mySchema].[Customers] DROP COLUMN [Name];
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[mySchema].[Customers]') AND [c].[name] = N'Name');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [mySchema].[Customers] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [mySchema].[Customers] DROP COLUMN [Name];
+            """,
             //
             """
-DECLARE @var1 sysname;
-SELECT @var1 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[mySchema].[HistoryTable]') AND [c].[name] = N'Name');
-IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [mySchema].[HistoryTable] DROP CONSTRAINT [' + @var1 + '];');
-ALTER TABLE [mySchema].[HistoryTable] DROP COLUMN [Name];
-""",
+            DECLARE @var1 sysname;
+            SELECT @var1 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[mySchema].[HistoryTable]') AND [c].[name] = N'Name');
+            IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [mySchema].[HistoryTable] DROP CONSTRAINT [' + @var1 + '];');
+            ALTER TABLE [mySchema].[HistoryTable] DROP COLUMN [Name];
+            """,
             //
             """
-DECLARE @var2 sysname;
-SELECT @var2 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[mySchema].[Customers]') AND [c].[name] = N'Number');
-IF @var2 IS NOT NULL EXEC(N'ALTER TABLE [mySchema].[Customers] DROP CONSTRAINT [' + @var2 + '];');
-ALTER TABLE [mySchema].[Customers] DROP COLUMN [Number];
-""",
+            DECLARE @var2 sysname;
+            SELECT @var2 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[mySchema].[Customers]') AND [c].[name] = N'Number');
+            IF @var2 IS NOT NULL EXEC(N'ALTER TABLE [mySchema].[Customers] DROP CONSTRAINT [' + @var2 + '];');
+            ALTER TABLE [mySchema].[Customers] DROP COLUMN [Number];
+            """,
             //
             """
-DECLARE @var3 sysname;
-SELECT @var3 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[mySchema].[HistoryTable]') AND [c].[name] = N'Number');
-IF @var3 IS NOT NULL EXEC(N'ALTER TABLE [mySchema].[HistoryTable] DROP CONSTRAINT [' + @var3 + '];');
-ALTER TABLE [mySchema].[HistoryTable] DROP COLUMN [Number];
-""",
+            DECLARE @var3 sysname;
+            SELECT @var3 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[mySchema].[HistoryTable]') AND [c].[name] = N'Number');
+            IF @var3 IS NOT NULL EXEC(N'ALTER TABLE [mySchema].[HistoryTable] DROP CONSTRAINT [' + @var3 + '];');
+            ALTER TABLE [mySchema].[HistoryTable] DROP COLUMN [Number];
+            """,
             //
             """
-ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema].[HistoryTable]))
-"""
+            ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema].[HistoryTable]))
+            """
         );
     }
 
@@ -6293,52 +6293,52 @@ ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = 
 
         AssertSql(
             """
-ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[mySchema].[Customers]') AND [c].[name] = N'Name');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [mySchema].[Customers] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [mySchema].[Customers] DROP COLUMN [Name];
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[mySchema].[Customers]') AND [c].[name] = N'Name');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [mySchema].[Customers] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [mySchema].[Customers] DROP COLUMN [Name];
+            """,
             //
             """
-DECLARE @var1 sysname;
-SELECT @var1 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[mySchema].[HistoryTable]') AND [c].[name] = N'Name');
-IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [mySchema].[HistoryTable] DROP CONSTRAINT [' + @var1 + '];');
-ALTER TABLE [mySchema].[HistoryTable] DROP COLUMN [Name];
-""",
+            DECLARE @var1 sysname;
+            SELECT @var1 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[mySchema].[HistoryTable]') AND [c].[name] = N'Name');
+            IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [mySchema].[HistoryTable] DROP CONSTRAINT [' + @var1 + '];');
+            ALTER TABLE [mySchema].[HistoryTable] DROP COLUMN [Name];
+            """,
             //
             """
-DECLARE @var2 sysname;
-SELECT @var2 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[mySchema].[Customers]') AND [c].[name] = N'Number');
-IF @var2 IS NOT NULL EXEC(N'ALTER TABLE [mySchema].[Customers] DROP CONSTRAINT [' + @var2 + '];');
-ALTER TABLE [mySchema].[Customers] DROP COLUMN [Number];
-""",
+            DECLARE @var2 sysname;
+            SELECT @var2 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[mySchema].[Customers]') AND [c].[name] = N'Number');
+            IF @var2 IS NOT NULL EXEC(N'ALTER TABLE [mySchema].[Customers] DROP CONSTRAINT [' + @var2 + '];');
+            ALTER TABLE [mySchema].[Customers] DROP COLUMN [Number];
+            """,
             //
             """
-DECLARE @var3 sysname;
-SELECT @var3 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[mySchema].[HistoryTable]') AND [c].[name] = N'Number');
-IF @var3 IS NOT NULL EXEC(N'ALTER TABLE [mySchema].[HistoryTable] DROP CONSTRAINT [' + @var3 + '];');
-ALTER TABLE [mySchema].[HistoryTable] DROP COLUMN [Number];
-""",
+            DECLARE @var3 sysname;
+            SELECT @var3 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[mySchema].[HistoryTable]') AND [c].[name] = N'Number');
+            IF @var3 IS NOT NULL EXEC(N'ALTER TABLE [mySchema].[HistoryTable] DROP CONSTRAINT [' + @var3 + '];');
+            ALTER TABLE [mySchema].[HistoryTable] DROP COLUMN [Number];
+            """,
             //
             """
-ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema].[HistoryTable]))
-"""
+            ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema].[HistoryTable]))
+            """
         );
     }
 
@@ -6407,52 +6407,52 @@ ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = 
 
         AssertSql(
             """
-ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[mySchema].[Customers]') AND [c].[name] = N'Name');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [mySchema].[Customers] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [mySchema].[Customers] DROP COLUMN [Name];
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[mySchema].[Customers]') AND [c].[name] = N'Name');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [mySchema].[Customers] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [mySchema].[Customers] DROP COLUMN [Name];
+            """,
             //
             """
-DECLARE @var1 sysname;
-SELECT @var1 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[myHistorySchema].[HistoryTable]') AND [c].[name] = N'Name');
-IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [myHistorySchema].[HistoryTable] DROP CONSTRAINT [' + @var1 + '];');
-ALTER TABLE [myHistorySchema].[HistoryTable] DROP COLUMN [Name];
-""",
+            DECLARE @var1 sysname;
+            SELECT @var1 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[myHistorySchema].[HistoryTable]') AND [c].[name] = N'Name');
+            IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [myHistorySchema].[HistoryTable] DROP CONSTRAINT [' + @var1 + '];');
+            ALTER TABLE [myHistorySchema].[HistoryTable] DROP COLUMN [Name];
+            """,
             //
             """
-DECLARE @var2 sysname;
-SELECT @var2 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[mySchema].[Customers]') AND [c].[name] = N'Number');
-IF @var2 IS NOT NULL EXEC(N'ALTER TABLE [mySchema].[Customers] DROP CONSTRAINT [' + @var2 + '];');
-ALTER TABLE [mySchema].[Customers] DROP COLUMN [Number];
-""",
+            DECLARE @var2 sysname;
+            SELECT @var2 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[mySchema].[Customers]') AND [c].[name] = N'Number');
+            IF @var2 IS NOT NULL EXEC(N'ALTER TABLE [mySchema].[Customers] DROP CONSTRAINT [' + @var2 + '];');
+            ALTER TABLE [mySchema].[Customers] DROP COLUMN [Number];
+            """,
             //
             """
-DECLARE @var3 sysname;
-SELECT @var3 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[myHistorySchema].[HistoryTable]') AND [c].[name] = N'Number');
-IF @var3 IS NOT NULL EXEC(N'ALTER TABLE [myHistorySchema].[HistoryTable] DROP CONSTRAINT [' + @var3 + '];');
-ALTER TABLE [myHistorySchema].[HistoryTable] DROP COLUMN [Number];
-""",
+            DECLARE @var3 sysname;
+            SELECT @var3 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[myHistorySchema].[HistoryTable]') AND [c].[name] = N'Number');
+            IF @var3 IS NOT NULL EXEC(N'ALTER TABLE [myHistorySchema].[HistoryTable] DROP CONSTRAINT [' + @var3 + '];');
+            ALTER TABLE [myHistorySchema].[HistoryTable] DROP COLUMN [Number];
+            """,
             //
             """
-ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myHistorySchema].[HistoryTable]))
-"""
+            ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myHistorySchema].[HistoryTable]))
+            """
         );
     }
 
@@ -6522,12 +6522,12 @@ ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = 
 
         AssertSql(
             """
-ALTER TABLE [Customers] ADD [Name] nvarchar(max) NULL;
-""",
+            ALTER TABLE [Customers] ADD [Name] nvarchar(max) NULL;
+            """,
             //
             """
-ALTER TABLE [Customers] ADD [Number] int NOT NULL DEFAULT 0;
-"""
+            ALTER TABLE [Customers] ADD [Number] int NOT NULL DEFAULT 0;
+            """
         );
     }
 
@@ -6592,16 +6592,16 @@ ALTER TABLE [Customers] ADD [Number] int NOT NULL DEFAULT 0;
 
         AssertSql(
             """
-ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-ALTER TABLE [Customer] DROP PERIOD FOR SYSTEM_TIME
-""",
+            ALTER TABLE [Customer] DROP PERIOD FOR SYSTEM_TIME
+            """,
             //
             """
-DROP TABLE [HistoryTable];
-"""
+            DROP TABLE [HistoryTable];
+            """
         );
     }
 
@@ -6661,36 +6661,36 @@ DROP TABLE [HistoryTable];
 
         AssertSql(
             """
-ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-ALTER TABLE [Customer] DROP PERIOD FOR SYSTEM_TIME
-""",
+            ALTER TABLE [Customer] DROP PERIOD FOR SYSTEM_TIME
+            """,
             //
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customer]') AND [c].[name] = N'PeriodEnd');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customer] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [Customer] DROP COLUMN [PeriodEnd];
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customer]') AND [c].[name] = N'PeriodEnd');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customer] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [Customer] DROP COLUMN [PeriodEnd];
+            """,
             //
             """
-DECLARE @var1 sysname;
-SELECT @var1 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customer]') AND [c].[name] = N'PeriodStart');
-IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Customer] DROP CONSTRAINT [' + @var1 + '];');
-ALTER TABLE [Customer] DROP COLUMN [PeriodStart];
-""",
+            DECLARE @var1 sysname;
+            SELECT @var1 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customer]') AND [c].[name] = N'PeriodStart');
+            IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Customer] DROP CONSTRAINT [' + @var1 + '];');
+            ALTER TABLE [Customer] DROP COLUMN [PeriodStart];
+            """,
             //
             """
-DROP TABLE [CustomerHistory];
-"""
+            DROP TABLE [CustomerHistory];
+            """
         );
     }
 
@@ -6750,36 +6750,36 @@ DROP TABLE [CustomerHistory];
 
         AssertSql(
             """
-ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-ALTER TABLE [Customer] DROP PERIOD FOR SYSTEM_TIME
-""",
+            ALTER TABLE [Customer] DROP PERIOD FOR SYSTEM_TIME
+            """,
             //
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customer]') AND [c].[name] = N'PeriodEnd');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customer] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [Customer] DROP COLUMN [PeriodEnd];
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customer]') AND [c].[name] = N'PeriodEnd');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customer] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [Customer] DROP COLUMN [PeriodEnd];
+            """,
             //
             """
-DECLARE @var1 sysname;
-SELECT @var1 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customer]') AND [c].[name] = N'PeriodStart');
-IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Customer] DROP CONSTRAINT [' + @var1 + '];');
-ALTER TABLE [Customer] DROP COLUMN [PeriodStart];
-""",
+            DECLARE @var1 sysname;
+            SELECT @var1 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customer]') AND [c].[name] = N'PeriodStart');
+            IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Customer] DROP CONSTRAINT [' + @var1 + '];');
+            ALTER TABLE [Customer] DROP COLUMN [PeriodStart];
+            """,
             //
             """
-DROP TABLE [HistoryTable];
-"""
+            DROP TABLE [HistoryTable];
+            """
         );
     }
 
@@ -6844,16 +6844,16 @@ DROP TABLE [HistoryTable];
 
         AssertSql(
             """
-ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-ALTER TABLE [Customer] DROP PERIOD FOR SYSTEM_TIME
-""",
+            ALTER TABLE [Customer] DROP PERIOD FOR SYSTEM_TIME
+            """,
             //
             """
-DROP TABLE [historySchema].[HistoryTable];
-"""
+            DROP TABLE [historySchema].[HistoryTable];
+            """
         );
     }
 
@@ -6921,16 +6921,16 @@ DROP TABLE [historySchema].[HistoryTable];
 
         AssertSql(
             """
-ALTER TABLE [mySchema].[Customer] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [mySchema].[Customer] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-ALTER TABLE [mySchema].[Customer] DROP PERIOD FOR SYSTEM_TIME
-""",
+            ALTER TABLE [mySchema].[Customer] DROP PERIOD FOR SYSTEM_TIME
+            """,
             //
             """
-DROP TABLE [mySchema].[HistoryTable];
-"""
+            DROP TABLE [mySchema].[HistoryTable];
+            """
         );
     }
 
@@ -6998,16 +6998,16 @@ DROP TABLE [mySchema].[HistoryTable];
 
         AssertSql(
             """
-ALTER TABLE [myDefaultSchema].[Customer] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [myDefaultSchema].[Customer] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-ALTER TABLE [myDefaultSchema].[Customer] DROP PERIOD FOR SYSTEM_TIME
-""",
+            ALTER TABLE [myDefaultSchema].[Customer] DROP PERIOD FOR SYSTEM_TIME
+            """,
             //
             """
-DROP TABLE [myDefaultSchema].[HistoryTable];
-"""
+            DROP TABLE [myDefaultSchema].[HistoryTable];
+            """
         );
     }
 
@@ -7075,16 +7075,16 @@ DROP TABLE [myDefaultSchema].[HistoryTable];
 
         AssertSql(
             """
-ALTER TABLE [myDefaultSchema].[Customer] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [myDefaultSchema].[Customer] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-ALTER TABLE [myDefaultSchema].[Customer] DROP PERIOD FOR SYSTEM_TIME
-""",
+            ALTER TABLE [myDefaultSchema].[Customer] DROP PERIOD FOR SYSTEM_TIME
+            """,
             //
             """
-DROP TABLE [mySchema].[HistoryTable];
-"""
+            DROP TABLE [mySchema].[HistoryTable];
+            """
         );
     }
 
@@ -7144,29 +7144,29 @@ DROP TABLE [mySchema].[HistoryTable];
 
         AssertSql(
             """
-ALTER TABLE [Customer] ADD [PeriodEnd] datetime2 NOT NULL DEFAULT '9999-12-31T23:59:59.9999999';
-""",
+            ALTER TABLE [Customer] ADD [PeriodEnd] datetime2 NOT NULL DEFAULT '9999-12-31T23:59:59.9999999';
+            """,
             //
             """
-ALTER TABLE [Customer] ADD [PeriodStart] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
-""",
+            ALTER TABLE [Customer] ADD [PeriodStart] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
+            """,
             //
             """
-ALTER TABLE [Customer] ADD PERIOD FOR SYSTEM_TIME ([PeriodStart], [PeriodEnd])
-""",
+            ALTER TABLE [Customer] ADD PERIOD FOR SYSTEM_TIME ([PeriodStart], [PeriodEnd])
+            """,
             //
             """
-ALTER TABLE [Customer] ALTER COLUMN [PeriodStart] ADD HIDDEN
-""",
+            ALTER TABLE [Customer] ALTER COLUMN [PeriodStart] ADD HIDDEN
+            """,
             //
             """
-ALTER TABLE [Customer] ALTER COLUMN [PeriodEnd] ADD HIDDEN
-""",
+            ALTER TABLE [Customer] ALTER COLUMN [PeriodEnd] ADD HIDDEN
+            """,
             //
             """
-DECLARE @historyTableSchema sysname = SCHEMA_NAME()
-EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[CustomerHistory]))')
-"""
+            DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+            EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[CustomerHistory]))')
+            """
         );
     }
 
@@ -7227,29 +7227,29 @@ EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + 
 
         AssertSql(
             """
-ALTER TABLE [Customer] ADD [PeriodEnd] datetime2 NOT NULL DEFAULT '9999-12-31T23:59:59.9999999';
-""",
+            ALTER TABLE [Customer] ADD [PeriodEnd] datetime2 NOT NULL DEFAULT '9999-12-31T23:59:59.9999999';
+            """,
             //
             """
-ALTER TABLE [Customer] ADD [PeriodStart] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
-""",
+            ALTER TABLE [Customer] ADD [PeriodStart] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
+            """,
             //
             """
-EXEC(N'ALTER TABLE [Customer] ADD PERIOD FOR SYSTEM_TIME ([PeriodStart], [PeriodEnd])')
-""",
+            EXEC(N'ALTER TABLE [Customer] ADD PERIOD FOR SYSTEM_TIME ([PeriodStart], [PeriodEnd])')
+            """,
             //
             """
-ALTER TABLE [Customer] ALTER COLUMN [PeriodStart] ADD HIDDEN
-""",
+            ALTER TABLE [Customer] ALTER COLUMN [PeriodStart] ADD HIDDEN
+            """,
             //
             """
-ALTER TABLE [Customer] ALTER COLUMN [PeriodEnd] ADD HIDDEN
-""",
+            ALTER TABLE [Customer] ALTER COLUMN [PeriodEnd] ADD HIDDEN
+            """,
             //
             """
-DECLARE @historyTableSchema sysname = SCHEMA_NAME()
-EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[CustomerHistory]))')
-"""
+            DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+            EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[CustomerHistory]))')
+            """
         );
     }
 
@@ -7314,21 +7314,21 @@ EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + 
 
         AssertSql(
             """
-ALTER TABLE [Customer] ADD PERIOD FOR SYSTEM_TIME ([Start], [End])
-""",
+            ALTER TABLE [Customer] ADD PERIOD FOR SYSTEM_TIME ([Start], [End])
+            """,
             //
             """
-ALTER TABLE [Customer] ALTER COLUMN [Start] ADD HIDDEN
-""",
+            ALTER TABLE [Customer] ALTER COLUMN [Start] ADD HIDDEN
+            """,
             //
             """
-ALTER TABLE [Customer] ALTER COLUMN [End] ADD HIDDEN
-""",
+            ALTER TABLE [Customer] ALTER COLUMN [End] ADD HIDDEN
+            """,
             //
             """
-DECLARE @historyTableSchema sysname = SCHEMA_NAME()
-EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[CustomerHistory]))')
-"""
+            DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+            EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[CustomerHistory]))')
+            """
         );
     }
 
@@ -7399,21 +7399,21 @@ EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + 
 
         AssertSql(
             """
-ALTER TABLE [Customer] ADD PERIOD FOR SYSTEM_TIME ([Start], [End])
-""",
+            ALTER TABLE [Customer] ADD PERIOD FOR SYSTEM_TIME ([Start], [End])
+            """,
             //
             """
-ALTER TABLE [Customer] ALTER COLUMN [Start] ADD HIDDEN
-""",
+            ALTER TABLE [Customer] ALTER COLUMN [Start] ADD HIDDEN
+            """,
             //
             """
-ALTER TABLE [Customer] ALTER COLUMN [End] ADD HIDDEN
-""",
+            ALTER TABLE [Customer] ALTER COLUMN [End] ADD HIDDEN
+            """,
             //
             """
-DECLARE @historyTableSchema sysname = SCHEMA_NAME()
-EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-"""
+            DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+            EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
+            """
         );
     }
 
@@ -7478,29 +7478,29 @@ EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + 
 
         AssertSql(
             """
-ALTER TABLE [Customer] ADD [End] datetime2 NOT NULL DEFAULT '9999-12-31T23:59:59.9999999';
-""",
+            ALTER TABLE [Customer] ADD [End] datetime2 NOT NULL DEFAULT '9999-12-31T23:59:59.9999999';
+            """,
             //
             """
-ALTER TABLE [Customer] ADD [Start] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
-""",
+            ALTER TABLE [Customer] ADD [Start] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
+            """,
             //
             """
-ALTER TABLE [Customer] ADD PERIOD FOR SYSTEM_TIME ([Start], [End])
-""",
+            ALTER TABLE [Customer] ADD PERIOD FOR SYSTEM_TIME ([Start], [End])
+            """,
             //
             """
-ALTER TABLE [Customer] ALTER COLUMN [Start] ADD HIDDEN
-""",
+            ALTER TABLE [Customer] ALTER COLUMN [Start] ADD HIDDEN
+            """,
             //
             """
-ALTER TABLE [Customer] ALTER COLUMN [End] ADD HIDDEN
-""",
+            ALTER TABLE [Customer] ALTER COLUMN [End] ADD HIDDEN
+            """,
             //
             """
-DECLARE @historyTableSchema sysname = SCHEMA_NAME()
-EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[CustomerHistory]))')
-"""
+            DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+            EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[CustomerHistory]))')
+            """
         );
     }
 
@@ -7569,29 +7569,29 @@ EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + 
 
         AssertSql(
             """
-ALTER TABLE [Customer] ADD [End] datetime2 NOT NULL DEFAULT '9999-12-31T23:59:59.9999999';
-""",
+            ALTER TABLE [Customer] ADD [End] datetime2 NOT NULL DEFAULT '9999-12-31T23:59:59.9999999';
+            """,
             //
             """
-ALTER TABLE [Customer] ADD [Start] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
-""",
+            ALTER TABLE [Customer] ADD [Start] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
+            """,
             //
             """
-ALTER TABLE [Customer] ADD PERIOD FOR SYSTEM_TIME ([Start], [End])
-""",
+            ALTER TABLE [Customer] ADD PERIOD FOR SYSTEM_TIME ([Start], [End])
+            """,
             //
             """
-ALTER TABLE [Customer] ALTER COLUMN [Start] ADD HIDDEN
-""",
+            ALTER TABLE [Customer] ALTER COLUMN [Start] ADD HIDDEN
+            """,
             //
             """
-ALTER TABLE [Customer] ALTER COLUMN [End] ADD HIDDEN
-""",
+            ALTER TABLE [Customer] ALTER COLUMN [End] ADD HIDDEN
+            """,
             //
             """
-DECLARE @historyTableSchema sysname = SCHEMA_NAME()
-EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-"""
+            DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+            EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
+            """
         );
     }
 
@@ -7675,12 +7675,12 @@ EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + 
 
         AssertSql(
             """
-EXEC sp_rename N'[Customer].[Start]', N'ModifiedStart', N'COLUMN';
-""",
+            EXEC sp_rename N'[Customer].[Start]', N'ModifiedStart', N'COLUMN';
+            """,
             //
             """
-EXEC sp_rename N'[Customer].[End]', N'ModifiedEnd', N'COLUMN';
-"""
+            EXEC sp_rename N'[Customer].[End]', N'ModifiedEnd', N'COLUMN';
+            """
         );
     }
 
@@ -7764,12 +7764,12 @@ EXEC sp_rename N'[Customer].[End]', N'ModifiedEnd', N'COLUMN';
 
         AssertSql(
             """
-EXEC sp_rename N'[Customer].[Start]', N'ModifiedStart', N'COLUMN';
-""",
+            EXEC sp_rename N'[Customer].[Start]', N'ModifiedStart', N'COLUMN';
+            """,
             //
             """
-EXEC sp_rename N'[Customer].[End]', N'ModifiedEnd', N'COLUMN';
-"""
+            EXEC sp_rename N'[Customer].[End]', N'ModifiedEnd', N'COLUMN';
+            """
         );
     }
 
@@ -7835,12 +7835,12 @@ EXEC sp_rename N'[Customer].[End]', N'ModifiedEnd', N'COLUMN';
 
         AssertSql(
             """
-DECLARE @defaultSchema AS sysname;
-SET @defaultSchema = SCHEMA_NAME();
-DECLARE @description AS sql_variant;
-SET @description = N'My comment';
-EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'Customers', 'COLUMN', N'End';
-"""
+            DECLARE @defaultSchema AS sysname;
+            SET @defaultSchema = SCHEMA_NAME();
+            DECLARE @description AS sql_variant;
+            SET @description = N'My comment';
+            EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'Customers', 'COLUMN', N'End';
+            """
         );
     }
 
@@ -7914,8 +7914,8 @@ EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSc
 
         AssertSql(
             """
-EXEC sp_rename N'[Customer].[Name]', N'FullName', N'COLUMN';
-"""
+            EXEC sp_rename N'[Customer].[Name]', N'FullName', N'COLUMN';
+            """
         );
     }
 
@@ -7975,23 +7975,23 @@ EXEC sp_rename N'[Customer].[Name]', N'FullName', N'COLUMN';
 
         AssertSql(
             """
-DECLARE @historyTableSchema sysname = SCHEMA_NAME()
-EXEC(N'CREATE TABLE [Customer] (
-    [Id] int NOT NULL IDENTITY,
-    [Name] nvarchar(max) NULL,
-    [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
-    [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
-    CONSTRAINT [PK_Customer] PRIMARY KEY ([Id]),
-    PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
-) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + N'].[CustomerHistory]))');
-DECLARE @defaultSchema AS sysname;
-SET @defaultSchema = SCHEMA_NAME();
-DECLARE @description AS sql_variant;
-SET @description = N'Table comment';
-EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'Customer';
-SET @description = N'Column comment';
-EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'Customer', 'COLUMN', N'Name';
-"""
+            DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+            EXEC(N'CREATE TABLE [Customer] (
+            [Id] int NOT NULL IDENTITY,
+            [Name] nvarchar(max) NULL,
+            [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
+            [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+            CONSTRAINT [PK_Customer] PRIMARY KEY ([Id]),
+            PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
+            ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + N'].[CustomerHistory]))');
+            DECLARE @defaultSchema AS sysname;
+            SET @defaultSchema = SCHEMA_NAME();
+            DECLARE @description AS sql_variant;
+            SET @description = N'Table comment';
+            EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'Customer';
+            SET @description = N'Column comment';
+            EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'Customer', 'COLUMN', N'Name';
+            """
         );
     }
 
@@ -8061,48 +8061,48 @@ EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSc
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customer]') AND [c].[name] = N'Name');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customer] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [Customer] ALTER COLUMN [Name] nvarchar(450) NULL;
-DECLARE @defaultSchema AS sysname;
-SET @defaultSchema = SCHEMA_NAME();
-DECLARE @description AS sql_variant;
-SET @description = N'Column comment';
-EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'Customer', 'COLUMN', N'Name';
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customer]') AND [c].[name] = N'Name');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customer] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [Customer] ALTER COLUMN [Name] nvarchar(450) NULL;
+            DECLARE @defaultSchema AS sysname;
+            SET @defaultSchema = SCHEMA_NAME();
+            DECLARE @description AS sql_variant;
+            SET @description = N'Column comment';
+            EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'Customer', 'COLUMN', N'Name';
+            """,
             //
             """
-ALTER TABLE [Customer] ADD [End] datetime2 NOT NULL DEFAULT '9999-12-31T23:59:59.9999999';
-""",
+            ALTER TABLE [Customer] ADD [End] datetime2 NOT NULL DEFAULT '9999-12-31T23:59:59.9999999';
+            """,
             //
             """
-ALTER TABLE [Customer] ADD [Start] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
-""",
+            ALTER TABLE [Customer] ADD [Start] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
+            """,
             //
             """
-CREATE INDEX [IX_Customer_Name] ON [Customer] ([Name]);
-""",
+            CREATE INDEX [IX_Customer_Name] ON [Customer] ([Name]);
+            """,
             //
             """
-ALTER TABLE [Customer] ADD PERIOD FOR SYSTEM_TIME ([Start], [End])
-""",
+            ALTER TABLE [Customer] ADD PERIOD FOR SYSTEM_TIME ([Start], [End])
+            """,
             //
             """
-ALTER TABLE [Customer] ALTER COLUMN [Start] ADD HIDDEN
-""",
+            ALTER TABLE [Customer] ALTER COLUMN [Start] ADD HIDDEN
+            """,
             //
             """
-ALTER TABLE [Customer] ALTER COLUMN [End] ADD HIDDEN
-""",
+            ALTER TABLE [Customer] ALTER COLUMN [End] ADD HIDDEN
+            """,
             //
             """
-DECLARE @historyTableSchema sysname = SCHEMA_NAME()
-EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-"""
+            DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+            EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
+            """
         );
     }
 
@@ -8178,22 +8178,22 @@ EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + 
 
         AssertSql(
             """
-DECLARE @defaultSchema AS sysname;
-SET @defaultSchema = SCHEMA_NAME();
-DECLARE @description AS sql_variant;
-EXEC sp_dropextendedproperty 'MS_Description', 'SCHEMA', @defaultSchema, 'TABLE', N'Customer';
-SET @description = N'Modified table comment';
-EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'Customer';
-""",
+            DECLARE @defaultSchema AS sysname;
+            SET @defaultSchema = SCHEMA_NAME();
+            DECLARE @description AS sql_variant;
+            EXEC sp_dropextendedproperty 'MS_Description', 'SCHEMA', @defaultSchema, 'TABLE', N'Customer';
+            SET @description = N'Modified table comment';
+            EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'Customer';
+            """,
             //
             """
-DECLARE @defaultSchema AS sysname;
-SET @defaultSchema = SCHEMA_NAME();
-DECLARE @description AS sql_variant;
-EXEC sp_dropextendedproperty 'MS_Description', 'SCHEMA', @defaultSchema, 'TABLE', N'Customer', 'COLUMN', N'Name';
-SET @description = N'Modified column comment';
-EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'Customer', 'COLUMN', N'Name';
-"""
+            DECLARE @defaultSchema AS sysname;
+            SET @defaultSchema = SCHEMA_NAME();
+            DECLARE @description AS sql_variant;
+            EXEC sp_dropextendedproperty 'MS_Description', 'SCHEMA', @defaultSchema, 'TABLE', N'Customer', 'COLUMN', N'Name';
+            SET @description = N'Modified column comment';
+            EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'Customer', 'COLUMN', N'Name';
+            """
         );
     }
 
@@ -8266,22 +8266,22 @@ EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSc
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Name');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [Customers] ALTER COLUMN [Name] nvarchar(450) NULL;
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Name');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [Customers] ALTER COLUMN [Name] nvarchar(450) NULL;
+            """,
             //
             """
-CREATE INDEX [IX_Customers_Name] ON [Customers] ([Name]);
-""",
+            CREATE INDEX [IX_Customers_Name] ON [Customers] ([Name]);
+            """,
             //
             """
-CREATE UNIQUE INDEX [IX_Customers_Number] ON [Customers] ([Number]);
-"""
+            CREATE UNIQUE INDEX [IX_Customers_Number] ON [Customers] ([Number]);
+            """
         );
     }
 
@@ -8356,22 +8356,22 @@ CREATE UNIQUE INDEX [IX_Customers_Number] ON [Customers] ([Number]);
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Name');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [Customers] ALTER COLUMN [Name] nvarchar(450) NULL;
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Name');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [Customers] ALTER COLUMN [Name] nvarchar(450) NULL;
+            """,
             //
             """
-CREATE INDEX [IX_Customers_End_Name] ON [Customers] ([End], [Name]);
-""",
+            CREATE INDEX [IX_Customers_End_Name] ON [Customers] ([End], [Name]);
+            """,
             //
             """
-CREATE INDEX [IX_Customers_Start] ON [Customers] ([Start]);
-"""
+            CREATE INDEX [IX_Customers_Start] ON [Customers] ([Start]);
+            """
         );
     }
 
@@ -8419,23 +8419,23 @@ CREATE INDEX [IX_Customers_Start] ON [Customers] ([Start]);
 
         AssertSql(
             """
-IF SCHEMA_ID(N'mySchema') IS NULL EXEC(N'CREATE SCHEMA [mySchema];');
-""",
+            IF SCHEMA_ID(N'mySchema') IS NULL EXEC(N'CREATE SCHEMA [mySchema];');
+            """,
             //
             """
-IF SCHEMA_ID(N'mySchema2') IS NULL EXEC(N'CREATE SCHEMA [mySchema2];');
-""",
+            IF SCHEMA_ID(N'mySchema2') IS NULL EXEC(N'CREATE SCHEMA [mySchema2];');
+            """,
             //
             """
-CREATE TABLE [mySchema].[Customers] (
-    [Id] int NOT NULL IDENTITY,
-    [Name] nvarchar(max) NULL,
-    [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
-    [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
-    CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
-    PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
-) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema2].[MyHistoryTable]));
-"""
+            CREATE TABLE [mySchema].[Customers] (
+            [Id] int NOT NULL IDENTITY,
+            [Name] nvarchar(max) NULL,
+            [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
+            [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+            CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
+            PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
+            ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema2].[MyHistoryTable]));
+            """
         );
     }
 
@@ -8510,30 +8510,30 @@ CREATE TABLE [mySchema].[Customers] (
 
         AssertSql(
             """
-IF SCHEMA_ID(N'mySchema') IS NULL EXEC(N'CREATE SCHEMA [mySchema];');
-""",
+            IF SCHEMA_ID(N'mySchema') IS NULL EXEC(N'CREATE SCHEMA [mySchema];');
+            """,
             //
             """
-CREATE TABLE [mySchema].[Customers] (
-    [Id] int NOT NULL IDENTITY,
-    [Name] nvarchar(max) NULL,
-    [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
-    [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
-    CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
-    PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
-) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema].[CustomersHistory]));
-""",
+            CREATE TABLE [mySchema].[Customers] (
+            [Id] int NOT NULL IDENTITY,
+            [Name] nvarchar(max) NULL,
+            [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
+            [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+            CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
+            PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
+            ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema].[CustomersHistory]));
+            """,
             //
             """
-CREATE TABLE [mySchema].[Orders] (
-    [Id] int NOT NULL IDENTITY,
-    [Name] nvarchar(max) NULL,
-    [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
-    [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
-    CONSTRAINT [PK_Orders] PRIMARY KEY ([Id]),
-    PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
-) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema].[OrdersHistory]));
-"""
+            CREATE TABLE [mySchema].[Orders] (
+            [Id] int NOT NULL IDENTITY,
+            [Name] nvarchar(max) NULL,
+            [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
+            [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+            CONSTRAINT [PK_Orders] PRIMARY KEY ([Id]),
+            PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
+            ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema].[OrdersHistory]));
+            """
         );
     }
 
@@ -8610,34 +8610,34 @@ CREATE TABLE [mySchema].[Orders] (
 
         AssertSql(
             """
-IF SCHEMA_ID(N'mySchema') IS NULL EXEC(N'CREATE SCHEMA [mySchema];');
-""",
+            IF SCHEMA_ID(N'mySchema') IS NULL EXEC(N'CREATE SCHEMA [mySchema];');
+            """,
             //
             """
-IF SCHEMA_ID(N'mySchema2') IS NULL EXEC(N'CREATE SCHEMA [mySchema2];');
-""",
+            IF SCHEMA_ID(N'mySchema2') IS NULL EXEC(N'CREATE SCHEMA [mySchema2];');
+            """,
             //
             """
-CREATE TABLE [mySchema].[Customers] (
-    [Id] int NOT NULL IDENTITY,
-    [Name] nvarchar(max) NULL,
-    [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
-    [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
-    CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
-    PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
-) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema2].[CustomersHistoryTable]));
-""",
+            CREATE TABLE [mySchema].[Customers] (
+            [Id] int NOT NULL IDENTITY,
+            [Name] nvarchar(max) NULL,
+            [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
+            [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+            CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
+            PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
+            ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema2].[CustomersHistoryTable]));
+            """,
             //
             """
-CREATE TABLE [mySchema].[Orders] (
-    [Id] int NOT NULL IDENTITY,
-    [Name] nvarchar(max) NULL,
-    [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
-    [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
-    CONSTRAINT [PK_Orders] PRIMARY KEY ([Id]),
-    PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
-) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema2].[OrdersHistoryTable]));
-"""
+            CREATE TABLE [mySchema].[Orders] (
+            [Id] int NOT NULL IDENTITY,
+            [Name] nvarchar(max) NULL,
+            [SystemTimeEnd] datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,
+            [SystemTimeStart] datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,
+            CONSTRAINT [PK_Orders] PRIMARY KEY ([Id]),
+            PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
+            ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema2].[OrdersHistoryTable]));
+            """
         );
     }
 
@@ -8767,12 +8767,12 @@ CREATE TABLE [mySchema].[Orders] (
         // TODO: we could avoid creating the schema if we peek into the model
         AssertSql(
             """
-IF SCHEMA_ID(N'mySchema') IS NULL EXEC(N'CREATE SCHEMA [mySchema];');
-""",
+            IF SCHEMA_ID(N'mySchema') IS NULL EXEC(N'CREATE SCHEMA [mySchema];');
+            """,
             //
             """
-ALTER SCHEMA [mySchema] TRANSFER [mySchema2].[OrdersHistoryTable];
-"""
+            ALTER SCHEMA [mySchema] TRANSFER [mySchema2].[OrdersHistoryTable];
+            """
         );
     }
 
@@ -8850,24 +8850,24 @@ ALTER SCHEMA [mySchema] TRANSFER [mySchema2].[OrdersHistoryTable];
 
         AssertSql(
             """
-IF SCHEMA_ID(N'myModifiedDefaultSchema') IS NULL EXEC(N'CREATE SCHEMA [myModifiedDefaultSchema];');
-""",
+            IF SCHEMA_ID(N'myModifiedDefaultSchema') IS NULL EXEC(N'CREATE SCHEMA [myModifiedDefaultSchema];');
+            """,
             //
             """
-ALTER TABLE [myDefaultSchema].[Customers] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [myDefaultSchema].[Customers] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-ALTER SCHEMA [myModifiedDefaultSchema] TRANSFER [myDefaultSchema].[Customers];
-""",
+            ALTER SCHEMA [myModifiedDefaultSchema] TRANSFER [myDefaultSchema].[Customers];
+            """,
             //
             """
-ALTER SCHEMA [myModifiedDefaultSchema] TRANSFER [myDefaultSchema].[CustomersHistory];
-""",
+            ALTER SCHEMA [myModifiedDefaultSchema] TRANSFER [myDefaultSchema].[CustomersHistory];
+            """,
             //
             """
-ALTER TABLE [myModifiedDefaultSchema].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myModifiedDefaultSchema].[CustomersHistory]))
-"""
+            ALTER TABLE [myModifiedDefaultSchema].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myModifiedDefaultSchema].[CustomersHistory]))
+            """
         );
     }
 
@@ -8946,49 +8946,49 @@ ALTER TABLE [myModifiedDefaultSchema].[Customers] SET (SYSTEM_VERSIONING = ON (H
 
         AssertSql(
             """
-ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Number');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [Customers] DROP COLUMN [Number];
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Number');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [Customers] DROP COLUMN [Number];
+            """,
             //
             """
-DECLARE @var1 sysname;
-SELECT @var1 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[HistoryTable]') AND [c].[name] = N'Number');
-IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [HistoryTable] DROP CONSTRAINT [' + @var1 + '];');
-ALTER TABLE [HistoryTable] DROP COLUMN [Number];
-""",
+            DECLARE @var1 sysname;
+            SELECT @var1 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[HistoryTable]') AND [c].[name] = N'Number');
+            IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [HistoryTable] DROP CONSTRAINT [' + @var1 + '];');
+            ALTER TABLE [HistoryTable] DROP COLUMN [Number];
+            """,
             //
             """
-EXEC sp_rename N'[Customers].[Name]', N'FullName', N'COLUMN';
-""",
+            EXEC sp_rename N'[Customers].[Name]', N'FullName', N'COLUMN';
+            """,
             //
             """
-EXEC sp_rename N'[HistoryTable].[Name]', N'FullName', N'COLUMN';
-""",
+            EXEC sp_rename N'[HistoryTable].[Name]', N'FullName', N'COLUMN';
+            """,
             //
             """
-EXEC sp_rename N'[Customers].[Dob]', N'DateOfBirth', N'COLUMN';
-""",
+            EXEC sp_rename N'[Customers].[Dob]', N'DateOfBirth', N'COLUMN';
+            """,
             //
             """
-EXEC sp_rename N'[HistoryTable].[Dob]', N'DateOfBirth', N'COLUMN';
-""",
+            EXEC sp_rename N'[HistoryTable].[Dob]', N'DateOfBirth', N'COLUMN';
+            """,
             //
             """
-DECLARE @historyTableSchema sysname = SCHEMA_NAME()
-EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-"""
+            DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+            EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
+            """
         );
     }
 
@@ -9074,53 +9074,53 @@ EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' +
 
         AssertSql(
             """
-ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-ALTER TABLE [Customers] DROP CONSTRAINT [PK_Customers];
-""",
+            ALTER TABLE [Customers] DROP CONSTRAINT [PK_Customers];
+            """,
             //
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Number');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [Customers] DROP COLUMN [Number];
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Number');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [Customers] DROP COLUMN [Number];
+            """,
             //
             """
-DECLARE @var1 sysname;
-SELECT @var1 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[HistoryTable]') AND [c].[name] = N'Number');
-IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [HistoryTable] DROP CONSTRAINT [' + @var1 + '];');
-ALTER TABLE [HistoryTable] DROP COLUMN [Number];
-""",
+            DECLARE @var1 sysname;
+            SELECT @var1 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[HistoryTable]') AND [c].[name] = N'Number');
+            IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [HistoryTable] DROP CONSTRAINT [' + @var1 + '];');
+            ALTER TABLE [HistoryTable] DROP COLUMN [Number];
+            """,
             //
             """
-EXEC sp_rename N'[Customers]', N'ModifiedCustomers';
-""",
+            EXEC sp_rename N'[Customers]', N'ModifiedCustomers';
+            """,
             //
             """
-EXEC sp_rename N'[ModifiedCustomers].[Name]', N'FullName', N'COLUMN';
-""",
+            EXEC sp_rename N'[ModifiedCustomers].[Name]', N'FullName', N'COLUMN';
+            """,
             //
             """
-EXEC sp_rename N'[HistoryTable].[Name]', N'FullName', N'COLUMN';
-""",
+            EXEC sp_rename N'[HistoryTable].[Name]', N'FullName', N'COLUMN';
+            """,
             //
             """
-ALTER TABLE [ModifiedCustomers] ADD CONSTRAINT [PK_ModifiedCustomers] PRIMARY KEY ([Id]);
-""",
+            ALTER TABLE [ModifiedCustomers] ADD CONSTRAINT [PK_ModifiedCustomers] PRIMARY KEY ([Id]);
+            """,
             //
             """
-DECLARE @historyTableSchema sysname = SCHEMA_NAME()
-EXEC(N'ALTER TABLE [ModifiedCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-"""
+            DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+            EXEC(N'ALTER TABLE [ModifiedCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
+            """
         );
     }
 
@@ -9206,45 +9206,45 @@ EXEC(N'ALTER TABLE [ModifiedCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABL
 
         AssertSql(
             """
-ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Number');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [Customers] DROP COLUMN [Number];
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Number');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [Customers] DROP COLUMN [Number];
+            """,
             //
             """
-DECLARE @var1 sysname;
-SELECT @var1 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[HistoryTable]') AND [c].[name] = N'Number');
-IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [HistoryTable] DROP CONSTRAINT [' + @var1 + '];');
-ALTER TABLE [HistoryTable] DROP COLUMN [Number];
-""",
+            DECLARE @var1 sysname;
+            SELECT @var1 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[HistoryTable]') AND [c].[name] = N'Number');
+            IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [HistoryTable] DROP CONSTRAINT [' + @var1 + '];');
+            ALTER TABLE [HistoryTable] DROP COLUMN [Number];
+            """,
             //
             """
-EXEC sp_rename N'[Customers].[Name]', N'FullName', N'COLUMN';
-""",
+            EXEC sp_rename N'[Customers].[Name]', N'FullName', N'COLUMN';
+            """,
             //
             """
-EXEC sp_rename N'[HistoryTable].[Name]', N'FullName', N'COLUMN';
-""",
+            EXEC sp_rename N'[HistoryTable].[Name]', N'FullName', N'COLUMN';
+            """,
             //
             """
-EXEC sp_rename N'[HistoryTable]', N'ModifiedHistoryTable';
-""",
+            EXEC sp_rename N'[HistoryTable]', N'ModifiedHistoryTable';
+            """,
             //
             """
-DECLARE @historyTableSchema sysname = SCHEMA_NAME()
-EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[ModifiedHistoryTable]))')
-"""
+            DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+            EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[ModifiedHistoryTable]))')
+            """
         );
     }
 
@@ -9322,41 +9322,41 @@ EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' +
 
         AssertSql(
             """
-ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Number');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [Customers] DROP COLUMN [Number];
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Number');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [Customers] DROP COLUMN [Number];
+            """,
             //
             """
-DECLARE @var1 sysname;
-SELECT @var1 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[HistoryTable]') AND [c].[name] = N'Number');
-IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [HistoryTable] DROP CONSTRAINT [' + @var1 + '];');
-ALTER TABLE [HistoryTable] DROP COLUMN [Number];
-""",
+            DECLARE @var1 sysname;
+            SELECT @var1 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[HistoryTable]') AND [c].[name] = N'Number');
+            IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [HistoryTable] DROP CONSTRAINT [' + @var1 + '];');
+            ALTER TABLE [HistoryTable] DROP COLUMN [Number];
+            """,
             //
             """
-ALTER TABLE [Customers] ADD [DateOfBirth] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
-""",
+            ALTER TABLE [Customers] ADD [DateOfBirth] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
+            """,
             //
             """
-ALTER TABLE [HistoryTable] ADD [DateOfBirth] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
-""",
+            ALTER TABLE [HistoryTable] ADD [DateOfBirth] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
+            """,
             //
             """
-DECLARE @historyTableSchema sysname = SCHEMA_NAME()
-EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-"""
+            DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+            EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
+            """
         );
     }
 
@@ -9435,49 +9435,49 @@ EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' +
 
         AssertSql(
             """
-ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Number');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [Customers] DROP COLUMN [Number];
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Number');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [Customers] DROP COLUMN [Number];
+            """,
             //
             """
-DECLARE @var1 sysname;
-SELECT @var1 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[HistoryTable]') AND [c].[name] = N'Number');
-IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [HistoryTable] DROP CONSTRAINT [' + @var1 + '];');
-ALTER TABLE [HistoryTable] DROP COLUMN [Number];
-""",
+            DECLARE @var1 sysname;
+            SELECT @var1 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[HistoryTable]') AND [c].[name] = N'Number');
+            IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [HistoryTable] DROP CONSTRAINT [' + @var1 + '];');
+            ALTER TABLE [HistoryTable] DROP COLUMN [Number];
+            """,
             //
             """
-DECLARE @defaultSchema AS sysname;
-SET @defaultSchema = SCHEMA_NAME();
-DECLARE @description AS sql_variant;
-SET @description = N'My comment';
-EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'Customers', 'COLUMN', N'Name';
-""",
+            DECLARE @defaultSchema AS sysname;
+            SET @defaultSchema = SCHEMA_NAME();
+            DECLARE @description AS sql_variant;
+            SET @description = N'My comment';
+            EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'Customers', 'COLUMN', N'Name';
+            """,
             //
             """
-DECLARE @defaultSchema AS sysname;
-SET @defaultSchema = SCHEMA_NAME();
-DECLARE @description AS sql_variant;
-SET @description = N'My comment';
-EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'HistoryTable', 'COLUMN', N'Name';
-""",
+            DECLARE @defaultSchema AS sysname;
+            SET @defaultSchema = SCHEMA_NAME();
+            DECLARE @description AS sql_variant;
+            SET @description = N'My comment';
+            EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'HistoryTable', 'COLUMN', N'Name';
+            """,
             //
             """
-DECLARE @historyTableSchema sysname = SCHEMA_NAME()
-EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-"""
+            DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+            EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
+            """
         );
     }
 
@@ -9560,16 +9560,16 @@ EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' +
 
         AssertSql(
             """
-EXEC sp_rename N'[Customers].[Start]', N'ModifiedStart', N'COLUMN';
-""",
+            EXEC sp_rename N'[Customers].[Start]', N'ModifiedStart', N'COLUMN';
+            """,
             //
             """
-DECLARE @defaultSchema AS sysname;
-SET @defaultSchema = SCHEMA_NAME();
-DECLARE @description AS sql_variant;
-SET @description = N'My comment';
-EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'Customers', 'COLUMN', N'End';
-"""
+            DECLARE @defaultSchema AS sysname;
+            SET @defaultSchema = SCHEMA_NAME();
+            DECLARE @description AS sql_variant;
+            SET @description = N'My comment';
+            EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'Customers', 'COLUMN', N'End';
+            """
         );
     }
 
@@ -9653,57 +9653,57 @@ EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSc
 
         AssertSql(
             """
-ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
-""",
+            ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
+            """,
             //
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'DateOfBirth');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [Customers] DROP COLUMN [DateOfBirth];
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'DateOfBirth');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [Customers] DROP COLUMN [DateOfBirth];
+            """,
             //
             """
-DECLARE @var1 sysname;
-SELECT @var1 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[HistoryTable]') AND [c].[name] = N'DateOfBirth');
-IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [HistoryTable] DROP CONSTRAINT [' + @var1 + '];');
-ALTER TABLE [HistoryTable] DROP COLUMN [DateOfBirth];
-""",
+            DECLARE @var1 sysname;
+            SELECT @var1 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[HistoryTable]') AND [c].[name] = N'DateOfBirth');
+            IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [HistoryTable] DROP CONSTRAINT [' + @var1 + '];');
+            ALTER TABLE [HistoryTable] DROP COLUMN [DateOfBirth];
+            """,
             //
             """
-EXEC sp_rename N'[Customers].[Start]', N'ModifiedStart', N'COLUMN';
-""",
+            EXEC sp_rename N'[Customers].[Start]', N'ModifiedStart', N'COLUMN';
+            """,
             //
             """
-EXEC sp_rename N'[HistoryTable].[Start]', N'ModifiedStart', N'COLUMN';
-""",
+            EXEC sp_rename N'[HistoryTable].[Start]', N'ModifiedStart', N'COLUMN';
+            """,
             //
             """
-DECLARE @defaultSchema AS sysname;
-SET @defaultSchema = SCHEMA_NAME();
-DECLARE @description AS sql_variant;
-SET @description = N'My comment';
-EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'Customers', 'COLUMN', N'End';
-""",
+            DECLARE @defaultSchema AS sysname;
+            SET @defaultSchema = SCHEMA_NAME();
+            DECLARE @description AS sql_variant;
+            SET @description = N'My comment';
+            EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'Customers', 'COLUMN', N'End';
+            """,
             //
             """
-DECLARE @defaultSchema AS sysname;
-SET @defaultSchema = SCHEMA_NAME();
-DECLARE @description AS sql_variant;
-SET @description = N'My comment';
-EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'HistoryTable', 'COLUMN', N'End';
-""",
+            DECLARE @defaultSchema AS sysname;
+            SET @defaultSchema = SCHEMA_NAME();
+            DECLARE @description AS sql_variant;
+            SET @description = N'My comment';
+            EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'HistoryTable', 'COLUMN', N'End';
+            """,
             //
             """
-DECLARE @historyTableSchema sysname = SCHEMA_NAME()
-EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-"""
+            DECLARE @historyTableSchema sysname = SCHEMA_NAME()
+            EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
+            """
         );
     }
 
@@ -9823,15 +9823,15 @@ EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' +
 
         AssertSql(
             """
-CREATE TABLE [Entity] (
-    [Id] int NOT NULL IDENTITY,
-    [Name] nvarchar(max) NULL,
-    [OwnedCollection] nvarchar(max) NULL,
-    [OwnedReference] nvarchar(max) NULL,
-    [OwnedRequiredReference] nvarchar(max) NOT NULL,
-    CONSTRAINT [PK_Entity] PRIMARY KEY ([Id])
-);
-"""
+            CREATE TABLE [Entity] (
+            [Id] int NOT NULL IDENTITY,
+            [Name] nvarchar(max) NULL,
+            [OwnedCollection] nvarchar(max) NULL,
+            [OwnedReference] nvarchar(max) NULL,
+            [OwnedRequiredReference] nvarchar(max) NOT NULL,
+            CONSTRAINT [PK_Entity] PRIMARY KEY ([Id])
+            );
+            """
         );
     }
 
@@ -9932,14 +9932,14 @@ CREATE TABLE [Entity] (
 
         AssertSql(
             """
-CREATE TABLE [Entity] (
-    [Id] int NOT NULL IDENTITY,
-    [Name] nvarchar(max) NULL,
-    [json_collection] nvarchar(max) NULL,
-    [json_reference] nvarchar(max) NULL,
-    CONSTRAINT [PK_Entity] PRIMARY KEY ([Id])
-);
-"""
+            CREATE TABLE [Entity] (
+            [Id] int NOT NULL IDENTITY,
+            [Name] nvarchar(max) NULL,
+            [json_collection] nvarchar(max) NULL,
+            [json_reference] nvarchar(max) NULL,
+            CONSTRAINT [PK_Entity] PRIMARY KEY ([Id])
+            );
+            """
         );
     }
 
@@ -10069,16 +10069,16 @@ CREATE TABLE [Entity] (
 
         AssertSql(
             """
-ALTER TABLE [Entity] ADD [OwnedCollection] nvarchar(max) NULL;
-""",
+            ALTER TABLE [Entity] ADD [OwnedCollection] nvarchar(max) NULL;
+            """,
             //
             """
-ALTER TABLE [Entity] ADD [OwnedReference] nvarchar(max) NULL;
-""",
+            ALTER TABLE [Entity] ADD [OwnedReference] nvarchar(max) NULL;
+            """,
             //
             """
-ALTER TABLE [Entity] ADD [OwnedRequiredReference] nvarchar(max) NOT NULL DEFAULT N'';
-"""
+            ALTER TABLE [Entity] ADD [OwnedRequiredReference] nvarchar(max) NOT NULL DEFAULT N'';
+            """
         );
     }
 
@@ -10178,24 +10178,24 @@ ALTER TABLE [Entity] ADD [OwnedRequiredReference] nvarchar(max) NOT NULL DEFAULT
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Entity]') AND [c].[name] = N'OwnedCollection');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Entity] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [Entity] DROP COLUMN [OwnedCollection];
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Entity]') AND [c].[name] = N'OwnedCollection');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Entity] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [Entity] DROP COLUMN [OwnedCollection];
+            """,
             //
             """
-DECLARE @var1 sysname;
-SELECT @var1 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Entity]') AND [c].[name] = N'OwnedReference');
-IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Entity] DROP CONSTRAINT [' + @var1 + '];');
-ALTER TABLE [Entity] DROP COLUMN [OwnedReference];
-"""
+            DECLARE @var1 sysname;
+            SELECT @var1 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Entity]') AND [c].[name] = N'OwnedReference');
+            IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Entity] DROP CONSTRAINT [' + @var1 + '];');
+            ALTER TABLE [Entity] DROP COLUMN [OwnedReference];
+            """
         );
     }
 
@@ -10360,12 +10360,12 @@ ALTER TABLE [Entity] DROP COLUMN [OwnedReference];
 
         AssertSql(
             """
-EXEC sp_rename N'[Entity].[json_reference]', N'new_json_reference', N'COLUMN';
-""",
+            EXEC sp_rename N'[Entity].[json_reference]', N'new_json_reference', N'COLUMN';
+            """,
             //
             """
-EXEC sp_rename N'[Entity].[json_collection]', N'new_json_collection', N'COLUMN';
-"""
+            EXEC sp_rename N'[Entity].[json_collection]', N'new_json_collection', N'COLUMN';
+            """
         );
     }
 
@@ -10532,16 +10532,16 @@ EXEC sp_rename N'[Entity].[json_collection]', N'new_json_collection', N'COLUMN';
 
         AssertSql(
             """
-ALTER TABLE [Entities] DROP CONSTRAINT [PK_Entities];
-""",
+            ALTER TABLE [Entities] DROP CONSTRAINT [PK_Entities];
+            """,
             //
             """
-EXEC sp_rename N'[Entities]', N'NewEntities';
-""",
+            EXEC sp_rename N'[Entities]', N'NewEntities';
+            """,
             //
             """
-ALTER TABLE [NewEntities] ADD CONSTRAINT [PK_NewEntities] PRIMARY KEY ([Id]);
-"""
+            ALTER TABLE [NewEntities] ADD CONSTRAINT [PK_NewEntities] PRIMARY KEY ([Id]);
+            """
         );
     }
 
@@ -10704,44 +10704,44 @@ ALTER TABLE [NewEntities] ADD CONSTRAINT [PK_NewEntities] PRIMARY KEY ([Id]);
 
         AssertSql(
             """
-DROP TABLE [Entity_NestedCollection];
-""",
+            DROP TABLE [Entity_NestedCollection];
+            """,
             //
             """
-DROP TABLE [Entity_OwnedCollection_NestedCollection2];
-""",
+            DROP TABLE [Entity_OwnedCollection_NestedCollection2];
+            """,
             //
             """
-DROP TABLE [Entity_OwnedCollection];
-""",
+            DROP TABLE [Entity_OwnedCollection];
+            """,
             //
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Entity]') AND [c].[name] = N'OwnedReference_Date');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Entity] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [Entity] DROP COLUMN [OwnedReference_Date];
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Entity]') AND [c].[name] = N'OwnedReference_Date');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Entity] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [Entity] DROP COLUMN [OwnedReference_Date];
+            """,
             //
             """
-DECLARE @var1 sysname;
-SELECT @var1 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Entity]') AND [c].[name] = N'OwnedReference_NestedReference_Number');
-IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Entity] DROP CONSTRAINT [' + @var1 + '];');
-ALTER TABLE [Entity] DROP COLUMN [OwnedReference_NestedReference_Number];
-""",
+            DECLARE @var1 sysname;
+            SELECT @var1 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Entity]') AND [c].[name] = N'OwnedReference_NestedReference_Number');
+            IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Entity] DROP CONSTRAINT [' + @var1 + '];');
+            ALTER TABLE [Entity] DROP COLUMN [OwnedReference_NestedReference_Number];
+            """,
             //
             """
-ALTER TABLE [Entity] ADD [OwnedCollection] nvarchar(max) NULL;
-""",
+            ALTER TABLE [Entity] ADD [OwnedCollection] nvarchar(max) NULL;
+            """,
             //
             """
-ALTER TABLE [Entity] ADD [OwnedReference] nvarchar(max) NULL;
-"""
+            ALTER TABLE [Entity] ADD [OwnedReference] nvarchar(max) NULL;
+            """
         );
     }
 
@@ -10883,64 +10883,64 @@ ALTER TABLE [Entity] ADD [OwnedReference] nvarchar(max) NULL;
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Entity]') AND [c].[name] = N'OwnedCollection');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Entity] DROP CONSTRAINT [' + @var0 + '];');
-ALTER TABLE [Entity] DROP COLUMN [OwnedCollection];
-""",
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Entity]') AND [c].[name] = N'OwnedCollection');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Entity] DROP CONSTRAINT [' + @var0 + '];');
+            ALTER TABLE [Entity] DROP COLUMN [OwnedCollection];
+            """,
             //
             """
-DECLARE @var1 sysname;
-SELECT @var1 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Entity]') AND [c].[name] = N'OwnedReference');
-IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Entity] DROP CONSTRAINT [' + @var1 + '];');
-ALTER TABLE [Entity] DROP COLUMN [OwnedReference];
-""",
+            DECLARE @var1 sysname;
+            SELECT @var1 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Entity]') AND [c].[name] = N'OwnedReference');
+            IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Entity] DROP CONSTRAINT [' + @var1 + '];');
+            ALTER TABLE [Entity] DROP COLUMN [OwnedReference];
+            """,
             //
             """
-ALTER TABLE [Entity] ADD [OwnedReference_Date] datetime2 NULL;
-""",
+            ALTER TABLE [Entity] ADD [OwnedReference_Date] datetime2 NULL;
+            """,
             //
             """
-ALTER TABLE [Entity] ADD [OwnedReference_NestedReference_Number] int NULL;
-""",
+            ALTER TABLE [Entity] ADD [OwnedReference_NestedReference_Number] int NULL;
+            """,
             //
             """
-CREATE TABLE [Entity_NestedCollection] (
-    [OwnedEntityId] int NOT NULL,
-    [Id] int NOT NULL IDENTITY,
-    [Number2] int NOT NULL,
-    CONSTRAINT [PK_Entity_NestedCollection] PRIMARY KEY ([OwnedEntityId], [Id]),
-    CONSTRAINT [FK_Entity_NestedCollection_Entity_OwnedEntityId] FOREIGN KEY ([OwnedEntityId]) REFERENCES [Entity] ([Id]) ON DELETE CASCADE
-);
-""",
+            CREATE TABLE [Entity_NestedCollection] (
+            [OwnedEntityId] int NOT NULL,
+            [Id] int NOT NULL IDENTITY,
+            [Number2] int NOT NULL,
+            CONSTRAINT [PK_Entity_NestedCollection] PRIMARY KEY ([OwnedEntityId], [Id]),
+            CONSTRAINT [FK_Entity_NestedCollection_Entity_OwnedEntityId] FOREIGN KEY ([OwnedEntityId]) REFERENCES [Entity] ([Id]) ON DELETE CASCADE
+            );
+            """,
             //
             """
-CREATE TABLE [Entity_OwnedCollection] (
-    [EntityId] int NOT NULL,
-    [Id] int NOT NULL IDENTITY,
-    [Date2] datetime2 NOT NULL,
-    [NestedReference2_Number3] int NULL,
-    CONSTRAINT [PK_Entity_OwnedCollection] PRIMARY KEY ([EntityId], [Id]),
-    CONSTRAINT [FK_Entity_OwnedCollection_Entity_EntityId] FOREIGN KEY ([EntityId]) REFERENCES [Entity] ([Id]) ON DELETE CASCADE
-);
-""",
+            CREATE TABLE [Entity_OwnedCollection] (
+            [EntityId] int NOT NULL,
+            [Id] int NOT NULL IDENTITY,
+            [Date2] datetime2 NOT NULL,
+            [NestedReference2_Number3] int NULL,
+            CONSTRAINT [PK_Entity_OwnedCollection] PRIMARY KEY ([EntityId], [Id]),
+            CONSTRAINT [FK_Entity_OwnedCollection_Entity_EntityId] FOREIGN KEY ([EntityId]) REFERENCES [Entity] ([Id]) ON DELETE CASCADE
+            );
+            """,
             //
             """
-CREATE TABLE [Entity_OwnedCollection_NestedCollection2] (
-    [Owned2EntityId] int NOT NULL,
-    [Owned2Id] int NOT NULL,
-    [Id] int NOT NULL IDENTITY,
-    [Number4] int NOT NULL,
-    CONSTRAINT [PK_Entity_OwnedCollection_NestedCollection2] PRIMARY KEY ([Owned2EntityId], [Owned2Id], [Id]),
-    CONSTRAINT [FK_Entity_OwnedCollection_NestedCollection2_Entity_OwnedCollection_Owned2EntityId_Owned2Id] FOREIGN KEY ([Owned2EntityId], [Owned2Id]) REFERENCES [Entity_OwnedCollection] ([EntityId], [Id]) ON DELETE CASCADE
-);
-"""
+            CREATE TABLE [Entity_OwnedCollection_NestedCollection2] (
+            [Owned2EntityId] int NOT NULL,
+            [Owned2Id] int NOT NULL,
+            [Id] int NOT NULL IDENTITY,
+            [Number4] int NOT NULL,
+            CONSTRAINT [PK_Entity_OwnedCollection_NestedCollection2] PRIMARY KEY ([Owned2EntityId], [Owned2Id], [Id]),
+            CONSTRAINT [FK_Entity_OwnedCollection_NestedCollection2_Entity_OwnedCollection_Owned2EntityId_Owned2Id] FOREIGN KEY ([Owned2EntityId], [Owned2Id]) REFERENCES [Entity_OwnedCollection] ([EntityId], [Id]) ON DELETE CASCADE
+            );
+            """
         );
     }
 
@@ -11079,16 +11079,16 @@ CREATE TABLE [Entity_OwnedCollection_NestedCollection2] (
 
         AssertSql(
             """
-DECLARE @var0 sysname;
-SELECT @var0 = [d].[name]
-FROM [sys].[default_constraints] [d]
-INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
-WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Entity]') AND [c].[name] = N'Name');
-IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Entity] DROP CONSTRAINT [' + @var0 + '];');
-UPDATE [Entity] SET [Name] = N'' WHERE [Name] IS NULL;
-ALTER TABLE [Entity] ALTER COLUMN [Name] nvarchar(max) NOT NULL;
-ALTER TABLE [Entity] ADD DEFAULT N'' FOR [Name];
-"""
+            DECLARE @var0 sysname;
+            SELECT @var0 = [d].[name]
+            FROM [sys].[default_constraints] [d]
+            INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+            WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Entity]') AND [c].[name] = N'Name');
+            IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Entity] DROP CONSTRAINT [' + @var0 + '];');
+            UPDATE [Entity] SET [Name] = N'' WHERE [Name] IS NULL;
+            ALTER TABLE [Entity] ALTER COLUMN [Name] nvarchar(max) NOT NULL;
+            ALTER TABLE [Entity] ADD DEFAULT N'' FOR [Name];
+            """
         );
     }
 

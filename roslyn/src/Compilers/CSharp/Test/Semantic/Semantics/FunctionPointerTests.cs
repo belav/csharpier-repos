@@ -47,12 +47,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void LangVersion()
         {
             var src = """
-                #pragma warning disable 169 // Unused field
-                unsafe class C
-                {
-                    delegate*<void> f;
-                }
-                """;
+            #pragma warning disable 169 // Unused field
+            unsafe class C
+            {
+            delegate*<void> f;
+            }
+            """;
 
             var comp = CreateCompilationWithFunctionPointers(
                 src,

@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                    $$
+                $$
                 }
                 """
             );
@@ -32,7 +32,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                    public $$
+                public $$
                 }
                 """
             );
@@ -45,7 +45,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                    $$ public void goo() { }
+                $$ public void goo() { }
                 }
                 """
             );
@@ -58,7 +58,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                    public $$ async void goo() { }
+                public $$ async void goo() { }
                 }
                 """
             );
@@ -71,7 +71,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 interface C
                 {
-                    $$
+                $$
                 }
                 """
             );
@@ -98,10 +98,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                    void goo()
-                    {
-                        goo($$
-                    }
+                void goo()
+                {
+                goo($$
+                }
                 }
                 """
             );
@@ -114,9 +114,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                    void goo($$)
-                    {
-                    }
+                void goo($$)
+                {
+                }
                 }
                 """
             );
@@ -129,10 +129,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        var z =  $$ () => 2;
-                    }
+                static void Main(string[] args)
+                {
+                var z =  $$ () => 2;
+                }
                 }
                 """
             );
@@ -145,10 +145,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        var z =  $$ static () => 2;
-                    }
+                static void Main(string[] args)
+                {
+                var z =  $$ static () => 2;
+                }
                 }
                 """
             );
@@ -161,10 +161,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        var z =  static $$ () => 2;
-                    }
+                static void Main(string[] args)
+                {
+                var z =  static $$ () => 2;
+                }
                 }
                 """
             );
@@ -177,10 +177,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        var z = static $$
-                    }
+                static void Main(string[] args)
+                {
+                var z = static $$
+                }
                 }
                 """
             );
@@ -193,10 +193,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        var z = static static $$
-                    }
+                static void Main(string[] args)
+                {
+                var z = static static $$
+                }
                 }
                 """
             );
@@ -209,10 +209,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        var z = static async $$
-                    }
+                static void Main(string[] args)
+                {
+                var z = static async $$
+                }
                 }
                 """
             );
@@ -225,10 +225,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        var z = async static $$
-                    }
+                static void Main(string[] args)
+                {
+                var z = async static $$
+                }
                 }
                 """
             );
@@ -241,10 +241,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                    [$$
-                    void M()
-                    {
-                    }
+                [$$
+                void M()
+                {
+                }
                 }
                 """
             );
@@ -257,10 +257,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                    [Attr($$
-                    void M()
-                    {
-                    }
+                [Attr($$
+                void M()
+                {
+                }
                 }
                 """
             );
@@ -273,10 +273,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        var z = $$ static
-                    }
+                static void Main(string[] args)
+                {
+                var z = $$ static
+                }
                 }
                 """
             );
@@ -289,10 +289,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        var z = async $$ () => 2;
-                    }
+                static void Main(string[] args)
+                {
+                var z = async $$ () => 2;
+                }
                 }
                 """
             );
@@ -305,9 +305,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Program
                 {
-                    async $$    
+                async $$
 
-                    public void M() {}
+                public void M() {}
                 }
                 """
             );
@@ -320,7 +320,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Program
                 {
-                    async $$
+                async $$
                 }
                 """
             );
@@ -333,7 +333,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 namespace Goo
                 {
-                    $$
+                $$
                 }
                 """
             );
@@ -346,7 +346,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 namespace Goo
                 {
-                    partial $$
+                partial $$
                 }
                 """
             );
@@ -359,7 +359,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Goo
                 {
-                    partial $$
+                partial $$
                 }
                 """
             );
@@ -372,7 +372,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Goo
                 {
-                    [Attr] $$
+                [Attr] $$
                 }
                 """
             );
@@ -434,13 +434,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Goo
                 {
-                    public void M(Action<int> a)
-                    {
-                        M(async () =>
-                        {
-                            $$
-                        });
-                    }
+                public void M(Action<int> a)
+                {
+                M(async () =>
+                {
+                $$
+                });
+                }
                 }
                 """
             );

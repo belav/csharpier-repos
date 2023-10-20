@@ -42,11 +42,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
 
                 class C : IGoo, IBar
                 {
-                    void IGoo.[||]Goo1() { }
+                void IGoo.[||]Goo1() { }
 
-                    void IGoo.Goo2() { }
+                void IGoo.Goo2() { }
 
-                    void IBar.Bar() { }
+                void IBar.Bar() { }
                 }
                 """,
                 """
@@ -55,11 +55,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
 
                 class C : IGoo, IBar
                 {
-                    public void Goo1() { }
+                public void Goo1() { }
 
-                    void IGoo.Goo2() { }
+                void IGoo.Goo2() { }
 
-                    void IBar.Bar() { }
+                void IBar.Bar() { }
                 }
                 """,
                 index: SingleMember
@@ -76,11 +76,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
 
                 class C : IGoo, IBar
                 {
-                    void IGoo.[||]Goo1() { }
+                void IGoo.[||]Goo1() { }
 
-                    void IGoo.Goo2() { }
+                void IGoo.Goo2() { }
 
-                    void IBar.Bar() { }
+                void IBar.Bar() { }
                 }
                 """,
                 """
@@ -89,11 +89,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
 
                 class C : IGoo, IBar
                 {
-                    public void Goo1() { }
+                public void Goo1() { }
 
-                    public void Goo2() { }
+                public void Goo2() { }
 
-                    void IBar.Bar() { }
+                void IBar.Bar() { }
                 }
                 """,
                 index: SameInterface
@@ -110,11 +110,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
 
                 class C : IGoo, IBar
                 {
-                    void IGoo.[||]Goo1() { }
+                void IGoo.[||]Goo1() { }
 
-                    void IGoo.Goo2() { }
+                void IGoo.Goo2() { }
 
-                    void IBar.Bar() { }
+                void IBar.Bar() { }
                 }
                 """,
                 """
@@ -123,11 +123,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
 
                 class C : IGoo, IBar
                 {
-                    public void Goo1() { }
+                public void Goo1() { }
 
-                    public void Goo2() { }
+                public void Goo2() { }
 
-                    public void Bar() { }
+                public void Bar() { }
                 }
                 """,
                 index: AllInterfaces
@@ -143,7 +143,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
 
                 class C : IGoo
                 {
-                    int IGoo.[||]Goo1 { get { } }
+                int IGoo.[||]Goo1 { get { } }
                 }
                 """,
                 """
@@ -151,7 +151,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
 
                 class C : IGoo
                 {
-                    public int Goo1 { get { } }
+                public int Goo1 { get { } }
                 }
                 """,
                 index: SingleMember
@@ -167,7 +167,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
 
                 class C : IGoo
                 {
-                    event Action IGoo.[||]E { add { } remove { } }
+                event Action IGoo.[||]E { add { } remove { } }
                 }
                 """,
                 """
@@ -175,7 +175,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
 
                 class C : IGoo
                 {
-                    public event Action E { add { } remove { } }
+                public event Action E { add { } remove { } }
                 }
                 """,
                 index: SingleMember
@@ -191,7 +191,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
 
                 class C : IGoo
                 {
-                    public void [||]Goo1() { }
+                public void [||]Goo1() { }
                 }
                 """
             );
@@ -204,7 +204,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
                 """
                 class C : IGoo
                 {
-                    void IGoo.[||]Goo1() { }
+                void IGoo.[||]Goo1() { }
                 }
                 """
             );
@@ -221,9 +221,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
 
                 class C : IGoo
                 {
-                    void IGoo.[||]Goo1() { }
+                void IGoo.[||]Goo1() { }
 
-                    private void Goo1() { }
+                private void Goo1() { }
                 }
                 """,
                 """
@@ -231,9 +231,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
 
                 class C : IGoo
                 {
-                    public void Goo1() { }
+                public void Goo1() { }
 
-                    private void Goo1() { }
+                private void Goo1() { }
                 }
                 """,
                 index: SingleMember
@@ -250,10 +250,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
 
                 class C
                 {
-                    IEnumerator IEnumerable.[||]GetEnumerator()
-                    {
-                        throw new NotImplementedException();
-                    }
+                IEnumerator IEnumerable.[||]GetEnumerator()
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """
             );
@@ -268,7 +268,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
 
                 class C : IGoo
                 {
-                    readonly void IGoo.[||]Goo1() { }
+                readonly void IGoo.[||]Goo1() { }
                 }
                 """,
                 """
@@ -276,7 +276,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
 
                 class C : IGoo
                 {
-                    public readonly void Goo1() { }
+                public readonly void Goo1() { }
                 }
                 """
             );

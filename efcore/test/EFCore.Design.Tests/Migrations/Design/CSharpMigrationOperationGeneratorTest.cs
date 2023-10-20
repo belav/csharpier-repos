@@ -41,10 +41,10 @@ public class CSharpMigrationOperationGeneratorTest
 
         Assert.Equal(
             """
-mb.Sql("-- Don't stand so");
+            mb.Sql("-- Don't stand so");
 
-mb.Sql("-- close to me");
-""",
+            mb.Sql("-- close to me");
+            """,
             builder.ToString(),
             ignoreLineEndingDifferences: true
         );
@@ -60,11 +60,11 @@ mb.Sql("-- close to me");
                 ClrType = typeof(int)
             },
             """
-mb.AddColumn<int>(
-    name: "Id",
-    table: "Post",
-    nullable: false);
-""",
+            mb.AddColumn<int>(
+            name: "Id",
+            table: "Post",
+            nullable: false);
+            """,
             o =>
             {
                 Assert.Equal("Id", o.Name);
@@ -95,22 +95,22 @@ mb.AddColumn<int>(
                 Collation = "Some Collation"
             },
             """
-mb.AddColumn<int>(
-    name: "Id",
-    schema: "dbo",
-    table: "Post",
-    type: "int",
-    unicode: false,
-    fixedLength: true,
-    maxLength: 30,
-    precision: 10,
-    scale: 5,
-    rowVersion: true,
-    nullable: true,
-    defaultValue: 1,
-    comment: "My Comment",
-    collation: "Some Collation");
-""",
+            mb.AddColumn<int>(
+            name: "Id",
+            schema: "dbo",
+            table: "Post",
+            type: "int",
+            unicode: false,
+            fixedLength: true,
+            maxLength: 30,
+            precision: 10,
+            scale: 5,
+            rowVersion: true,
+            nullable: true,
+            defaultValue: 1,
+            comment: "My Comment",
+            collation: "Some Collation");
+            """,
             o =>
             {
                 Assert.Equal("Id", o.Name);
@@ -138,12 +138,12 @@ mb.AddColumn<int>(
                 DefaultValueSql = "1"
             },
             """
-mb.AddColumn<int>(
-    name: "Id",
-    table: "Post",
-    nullable: false,
-    defaultValueSql: "1");
-""",
+            mb.AddColumn<int>(
+            name: "Id",
+            table: "Post",
+            nullable: false,
+            defaultValueSql: "1");
+            """,
             o =>
             {
                 Assert.Equal("Id", o.Name);
@@ -165,13 +165,13 @@ mb.AddColumn<int>(
                 IsStored = true
             },
             """
-mb.AddColumn<int>(
-    name: "Id",
-    table: "Post",
-    nullable: false,
-    computedColumnSql: "1",
-    stored: true);
-""",
+            mb.AddColumn<int>(
+            name: "Id",
+            table: "Post",
+            nullable: false,
+            computedColumnSql: "1",
+            stored: true);
+            """,
             o =>
             {
                 Assert.Equal("Id", o.Name);
@@ -193,12 +193,12 @@ mb.AddColumn<int>(
                 PrincipalTable = "Blog"
             },
             """
-mb.AddForeignKey(
-    name: "FK_Post_Blog_BlogId",
-    table: "Post",
-    column: "BlogId",
-    principalTable: "Blog");
-""",
+            mb.AddForeignKey(
+            name: "FK_Post_Blog_BlogId",
+            table: "Post",
+            column: "BlogId",
+            principalTable: "Blog");
+            """,
             o =>
             {
                 Assert.Equal("FK_Post_Blog_BlogId", o.Name);
@@ -220,12 +220,12 @@ mb.AddForeignKey(
                 PrincipalTable = "Blog"
             },
             """
-mb.AddForeignKey(
-    name: "FK_Post_Blog_BlogId1_BlogId2",
-    table: "Post",
-    columns: new[] { "BlogId1", "BlogId2" },
-    principalTable: "Blog");
-""",
+            mb.AddForeignKey(
+            name: "FK_Post_Blog_BlogId1_BlogId2",
+            table: "Post",
+            columns: new[] { "BlogId1", "BlogId2" },
+            principalTable: "Blog");
+            """,
             o =>
             {
                 Assert.Equal("FK_Post_Blog_BlogId1_BlogId2", o.Name);
@@ -252,17 +252,17 @@ mb.AddForeignKey(
                 OnDelete = ReferentialAction.Cascade
             },
             """
-mb.AddForeignKey(
-    name: "FK_Post_Blog_BlogId",
-    schema: "dbo",
-    table: "Post",
-    column: "BlogId",
-    principalSchema: "my",
-    principalTable: "Blog",
-    principalColumn: "Id",
-    onUpdate: ReferentialAction.Restrict,
-    onDelete: ReferentialAction.Cascade);
-""",
+            mb.AddForeignKey(
+            name: "FK_Post_Blog_BlogId",
+            schema: "dbo",
+            table: "Post",
+            column: "BlogId",
+            principalSchema: "my",
+            principalTable: "Blog",
+            principalColumn: "Id",
+            onUpdate: ReferentialAction.Restrict,
+            onDelete: ReferentialAction.Cascade);
+            """,
             o =>
             {
                 Assert.Equal("FK_Post_Blog_BlogId", o.Name);
@@ -293,17 +293,17 @@ mb.AddForeignKey(
                 OnDelete = ReferentialAction.Cascade
             },
             """
-mb.AddForeignKey(
-    name: "FK_Post_Blog_BlogId1_BlogId2",
-    schema: "dbo",
-    table: "Post",
-    columns: new[] { "BlogId1", "BlogId2" },
-    principalSchema: "my",
-    principalTable: "Blog",
-    principalColumns: new[] { "Id1", "Id2" },
-    onUpdate: ReferentialAction.Restrict,
-    onDelete: ReferentialAction.Cascade);
-""",
+            mb.AddForeignKey(
+            name: "FK_Post_Blog_BlogId1_BlogId2",
+            schema: "dbo",
+            table: "Post",
+            columns: new[] { "BlogId1", "BlogId2" },
+            principalSchema: "my",
+            principalTable: "Blog",
+            principalColumns: new[] { "Id1", "Id2" },
+            onUpdate: ReferentialAction.Restrict,
+            onDelete: ReferentialAction.Cascade);
+            """,
             o =>
             {
                 Assert.Equal("FK_Post_Blog_BlogId1_BlogId2", o.Name);
@@ -328,11 +328,11 @@ mb.AddForeignKey(
                 Columns = new[] { "Id" }
             },
             """
-mb.AddPrimaryKey(
-    name: "PK_Post",
-    table: "Post",
-    column: "Id");
-""",
+            mb.AddPrimaryKey(
+            name: "PK_Post",
+            table: "Post",
+            column: "Id");
+            """,
             o =>
             {
                 Assert.Equal("PK_Post", o.Name);
@@ -352,12 +352,12 @@ mb.AddPrimaryKey(
                 Columns = new[] { "Id" }
             },
             """
-mb.AddPrimaryKey(
-    name: "PK_Post",
-    schema: "dbo",
-    table: "Post",
-    column: "Id");
-""",
+            mb.AddPrimaryKey(
+            name: "PK_Post",
+            schema: "dbo",
+            table: "Post",
+            column: "Id");
+            """,
             o =>
             {
                 Assert.Equal("PK_Post", o.Name);
@@ -377,11 +377,11 @@ mb.AddPrimaryKey(
                 Columns = new[] { "Id1", "Id2" }
             },
             """
-mb.AddPrimaryKey(
-    name: "PK_Post",
-    table: "Post",
-    columns: new[] { "Id1", "Id2" });
-""",
+            mb.AddPrimaryKey(
+            name: "PK_Post",
+            table: "Post",
+            columns: new[] { "Id1", "Id2" });
+            """,
             o =>
             {
                 Assert.Equal("PK_Post", o.Name);
@@ -400,11 +400,11 @@ mb.AddPrimaryKey(
                 Columns = new[] { "AltId" }
             },
             """
-mb.AddUniqueConstraint(
-    name: "AK_Post_AltId",
-    table: "Post",
-    column: "AltId");
-""",
+            mb.AddUniqueConstraint(
+            name: "AK_Post_AltId",
+            table: "Post",
+            column: "AltId");
+            """,
             o =>
             {
                 Assert.Equal("AK_Post_AltId", o.Name);
@@ -424,12 +424,12 @@ mb.AddUniqueConstraint(
                 Columns = new[] { "AltId" }
             },
             """
-mb.AddUniqueConstraint(
-    name: "AK_Post_AltId",
-    schema: "dbo",
-    table: "Post",
-    column: "AltId");
-""",
+            mb.AddUniqueConstraint(
+            name: "AK_Post_AltId",
+            schema: "dbo",
+            table: "Post",
+            column: "AltId");
+            """,
             o =>
             {
                 Assert.Equal("AK_Post_AltId", o.Name);
@@ -449,11 +449,11 @@ mb.AddUniqueConstraint(
                 Columns = new[] { "AltId1", "AltId2" }
             },
             """
-mb.AddUniqueConstraint(
-    name: "AK_Post_AltId1_AltId2",
-    table: "Post",
-    columns: new[] { "AltId1", "AltId2" });
-""",
+            mb.AddUniqueConstraint(
+            name: "AK_Post_AltId1_AltId2",
+            table: "Post",
+            columns: new[] { "AltId1", "AltId2" });
+            """,
             o =>
             {
                 Assert.Equal("AK_Post_AltId1_AltId2", o.Name);
@@ -472,11 +472,11 @@ mb.AddUniqueConstraint(
                 Sql = "AltId1 > AltId2"
             },
             """
-mb.AddCheckConstraint(
-    name: "CK_Post_AltId1_AltId2",
-    table: "Post",
-    sql: "AltId1 > AltId2");
-""",
+            mb.AddCheckConstraint(
+            name: "CK_Post_AltId1_AltId2",
+            table: "Post",
+            sql: "AltId1 > AltId2");
+            """,
             o =>
             {
                 Assert.Equal("CK_Post_AltId1_AltId2", o.Name);
@@ -496,12 +496,12 @@ mb.AddCheckConstraint(
                 Sql = "AltId1 > AltId2"
             },
             """
-mb.AddCheckConstraint(
-    name: "CK_Post_AltId1_AltId2",
-    schema: "dbo",
-    table: "Post",
-    sql: "AltId1 > AltId2");
-""",
+            mb.AddCheckConstraint(
+            name: "CK_Post_AltId1_AltId2",
+            schema: "dbo",
+            table: "Post",
+            sql: "AltId1 > AltId2");
+            """,
             o =>
             {
                 Assert.Equal("CK_Post_AltId1_AltId2", o.Name);
@@ -521,11 +521,11 @@ mb.AddCheckConstraint(
                 ClrType = typeof(int)
             },
             """
-mb.AlterColumn<int>(
-    name: "Id",
-    table: "Post",
-    nullable: false);
-""",
+            mb.AlterColumn<int>(
+            name: "Id",
+            table: "Post",
+            nullable: false);
+            """,
             o =>
             {
                 Assert.Equal("Id", o.Name);
@@ -598,34 +598,34 @@ mb.AlterColumn<int>(
                 }
             },
             """
-mb.AlterColumn<int>(
-    name: "Id",
-    schema: "dbo",
-    table: "Post",
-    type: "int",
-    unicode: false,
-    fixedLength: true,
-    maxLength: 30,
-    precision: 10,
-    scale: 5,
-    rowVersion: true,
-    nullable: true,
-    defaultValue: 1,
-    comment: "My Comment 2",
-    collation: "Some Collation 2",
-    oldClrType: typeof(string),
-    oldType: "string",
-    oldUnicode: false,
-    oldFixedLength: true,
-    oldMaxLength: 20,
-    oldPrecision: 5,
-    oldScale: 1,
-    oldRowVersion: true,
-    oldNullable: true,
-    oldDefaultValue: 0,
-    oldComment: "My Comment",
-    oldCollation: "Some Collation");
-""",
+            mb.AlterColumn<int>(
+            name: "Id",
+            schema: "dbo",
+            table: "Post",
+            type: "int",
+            unicode: false,
+            fixedLength: true,
+            maxLength: 30,
+            precision: 10,
+            scale: 5,
+            rowVersion: true,
+            nullable: true,
+            defaultValue: 1,
+            comment: "My Comment 2",
+            collation: "Some Collation 2",
+            oldClrType: typeof(string),
+            oldType: "string",
+            oldUnicode: false,
+            oldFixedLength: true,
+            oldMaxLength: 20,
+            oldPrecision: 5,
+            oldScale: 1,
+            oldRowVersion: true,
+            oldNullable: true,
+            oldDefaultValue: 0,
+            oldComment: "My Comment",
+            oldCollation: "Some Collation");
+            """,
             o =>
             {
                 Assert.Equal("Id", o.Name);
@@ -673,12 +673,12 @@ mb.AlterColumn<int>(
                 DefaultValueSql = "1"
             },
             """
-mb.AlterColumn<int>(
-    name: "Id",
-    table: "Post",
-    nullable: false,
-    defaultValueSql: "1");
-""",
+            mb.AlterColumn<int>(
+            name: "Id",
+            table: "Post",
+            nullable: false,
+            defaultValueSql: "1");
+            """,
             o =>
             {
                 Assert.Equal("Id", o.Name);
@@ -718,13 +718,13 @@ mb.AlterColumn<int>(
                 IsStored = true
             },
             """
-mb.AlterColumn<int>(
-    name: "Id",
-    table: "Post",
-    nullable: false,
-    computedColumnSql: "1",
-    stored: true);
-""",
+            mb.AlterColumn<int>(
+            name: "Id",
+            table: "Post",
+            nullable: false,
+            computedColumnSql: "1",
+            stored: true);
+            """,
             o =>
             {
                 Assert.Equal("Id", o.Name);
@@ -766,12 +766,12 @@ mb.AlterColumn<int>(
                 OldDatabase = { Collation = "Some other collation", ["bar"] = "foo" }
             },
             """
-mb.AlterDatabase(
-    collation: "Some collation",
-    oldCollation: "Some other collation")
-    .Annotation("foo", "bar")
-    .OldAnnotation("bar", "foo");
-""",
+            mb.AlterDatabase(
+            collation: "Some collation",
+            oldCollation: "Some other collation")
+            .Annotation("foo", "bar")
+            .OldAnnotation("bar", "foo");
+            """,
             o =>
             {
                 Assert.Equal("Some collation", o.Collation);
@@ -786,9 +786,9 @@ mb.AlterDatabase(
         Test(
             new AlterDatabaseOperation { Collation = "Some collation" },
             """
-mb.AlterDatabase(
-    collation: "Some collation");
-""",
+            mb.AlterDatabase(
+            collation: "Some collation");
+            """,
             o =>
             {
                 Assert.Equal("Some collation", o.Collation);
@@ -801,9 +801,9 @@ mb.AlterDatabase(
         Test(
             new AlterDatabaseOperation { OldDatabase = { Collation = "Some collation" } },
             """
-mb.AlterDatabase(
-    oldCollation: "Some collation");
-""",
+            mb.AlterDatabase(
+            oldCollation: "Some collation");
+            """,
             o =>
             {
                 Assert.Null(o.Collation);
@@ -816,9 +816,9 @@ mb.AlterDatabase(
         Test(
             new AlterSequenceOperation { Name = "EntityFrameworkHiLoSequence" },
             """
-mb.AlterSequence(
-    name: "EntityFrameworkHiLoSequence");
-""",
+            mb.AlterSequence(
+            name: "EntityFrameworkHiLoSequence");
+            """,
             o =>
             {
                 Assert.Equal("EntityFrameworkHiLoSequence", o.Name);
@@ -854,18 +854,18 @@ mb.AlterSequence(
                 }
             },
             """
-mb.AlterSequence(
-    name: "EntityFrameworkHiLoSequence",
-    schema: "dbo",
-    incrementBy: 3,
-    minValue: 2L,
-    maxValue: 4L,
-    cyclic: true,
-    oldIncrementBy: 4,
-    oldMinValue: 3L,
-    oldMaxValue: 5L,
-    oldCyclic: true);
-""",
+            mb.AlterSequence(
+            name: "EntityFrameworkHiLoSequence",
+            schema: "dbo",
+            incrementBy: 3,
+            minValue: 2L,
+            maxValue: 4L,
+            cyclic: true,
+            oldIncrementBy: 4,
+            oldMinValue: 3L,
+            oldMaxValue: 5L,
+            oldCyclic: true);
+            """,
             o =>
             {
                 Assert.Equal("EntityFrameworkHiLoSequence", o.Name);
@@ -886,9 +886,9 @@ mb.AlterSequence(
         Test(
             new AlterTableOperation { Name = "Customer" },
             """
-mb.AlterTable(
-    name: "Customer");
-""",
+            mb.AlterTable(
+            name: "Customer");
+            """,
             o =>
             {
                 Assert.Equal("Customer", o.Name);
@@ -906,12 +906,12 @@ mb.AlterTable(
                 OldTable = { Comment = "My Comment" }
             },
             """
-mb.AlterTable(
-    name: "Customer",
-    schema: "dbo",
-    comment: "My Comment 2",
-    oldComment: "My Comment");
-""",
+            mb.AlterTable(
+            name: "Customer",
+            schema: "dbo",
+            comment: "My Comment 2",
+            oldComment: "My Comment");
+            """,
             o =>
             {
                 Assert.Equal("Customer", o.Name);
@@ -931,11 +931,11 @@ mb.AlterTable(
                 Columns = new[] { "Title" }
             },
             """
-mb.CreateIndex(
-    name: "IX_Post_Title",
-    table: "Post",
-    column: "Title");
-""",
+            mb.CreateIndex(
+            name: "IX_Post_Title",
+            table: "Post",
+            column: "Title");
+            """,
             o =>
             {
                 Assert.Equal("IX_Post_Title", o.Name);
@@ -961,15 +961,15 @@ mb.CreateIndex(
                 Filter = "[Title] IS NOT NULL"
             },
             """
-mb.CreateIndex(
-    name: "IX_Post_Title",
-    schema: "dbo",
-    table: "Post",
-    columns: new[] { "Title", "Name" },
-    unique: true,
-    descending: new[] { true, false },
-    filter: "[Title] IS NOT NULL");
-""",
+            mb.CreateIndex(
+            name: "IX_Post_Title",
+            schema: "dbo",
+            table: "Post",
+            columns: new[] { "Title", "Name" },
+            unique: true,
+            descending: new[] { true, false },
+            filter: "[Title] IS NOT NULL");
+            """,
             o =>
             {
                 Assert.Equal("IX_Post_Title", o.Name);
@@ -992,11 +992,11 @@ mb.CreateIndex(
                 Columns = new[] { "Title", "Subtitle" }
             },
             """
-mb.CreateIndex(
-    name: "IX_Post_Title_Subtitle",
-    table: "Post",
-    columns: new[] { "Title", "Subtitle" });
-""",
+            mb.CreateIndex(
+            name: "IX_Post_Title_Subtitle",
+            table: "Post",
+            columns: new[] { "Title", "Subtitle" });
+            """,
             o =>
             {
                 Assert.Equal("IX_Post_Title_Subtitle", o.Name);
@@ -1010,9 +1010,9 @@ mb.CreateIndex(
         Test(
             new EnsureSchemaOperation { Name = "my" },
             """
-mb.EnsureSchema(
-    name: "my");
-""",
+            mb.EnsureSchema(
+            name: "my");
+            """,
             o => Assert.Equal("my", o.Name)
         );
 
@@ -1025,9 +1025,9 @@ mb.EnsureSchema(
                 ClrType = typeof(long)
             },
             """
-mb.CreateSequence(
-    name: "EntityFrameworkHiLoSequence");
-""",
+            mb.CreateSequence(
+            name: "EntityFrameworkHiLoSequence");
+            """,
             o =>
             {
                 Assert.Equal("EntityFrameworkHiLoSequence", o.Name);
@@ -1044,9 +1044,9 @@ mb.CreateSequence(
                 ClrType = typeof(int)
             },
             """
-mb.CreateSequence<int>(
-    name: "EntityFrameworkHiLoSequence");
-""",
+            mb.CreateSequence<int>(
+            name: "EntityFrameworkHiLoSequence");
+            """,
             o =>
             {
                 Assert.Equal("EntityFrameworkHiLoSequence", o.Name);
@@ -1069,15 +1069,15 @@ mb.CreateSequence<int>(
                 IsCyclic = true
             },
             """
-mb.CreateSequence(
-    name: "EntityFrameworkHiLoSequence",
-    schema: "dbo",
-    startValue: 3L,
-    incrementBy: 5,
-    minValue: 2L,
-    maxValue: 4L,
-    cyclic: true);
-""",
+            mb.CreateSequence(
+            name: "EntityFrameworkHiLoSequence",
+            schema: "dbo",
+            startValue: 3L,
+            incrementBy: 5,
+            minValue: 2L,
+            maxValue: 4L,
+            cyclic: true);
+            """,
             o =>
             {
                 Assert.Equal("EntityFrameworkHiLoSequence", o.Name);
@@ -1106,15 +1106,15 @@ mb.CreateSequence(
                 IsCyclic = true
             },
             """
-mb.CreateSequence<int>(
-    name: "EntityFrameworkHiLoSequence",
-    schema: "dbo",
-    startValue: 3L,
-    incrementBy: 5,
-    minValue: 2L,
-    maxValue: 4L,
-    cyclic: true);
-""",
+            mb.CreateSequence<int>(
+            name: "EntityFrameworkHiLoSequence",
+            schema: "dbo",
+            startValue: 3L,
+            incrementBy: 5,
+            minValue: 2L,
+            maxValue: 4L,
+            cyclic: true);
+            """,
             o =>
             {
                 Assert.Equal("EntityFrameworkHiLoSequence", o.Name);
@@ -1145,16 +1145,16 @@ mb.CreateSequence<int>(
                 }
             },
             """
-mb.CreateTable(
-    name: "Post",
-    columns: table => new
-    {
-        Id = table.Column<int>(nullable: false)
-    },
-    constraints: table =>
-    {
-    });
-""",
+            mb.CreateTable(
+            name: "Post",
+            columns: table => new
+            {
+            Id = table.Column<int>(nullable: false)
+            },
+            constraints: table =>
+            {
+            });
+            """,
             o =>
             {
                 Assert.Equal("Post", o.Name);
@@ -1196,17 +1196,17 @@ mb.CreateTable(
                 }
             },
             """
-mb.CreateTable(
-    name: "Post",
-    schema: "dbo",
-    columns: table => new
-    {
-        PostId = table.Column<int>(name: "Post Id", type: "int", unicode: false, fixedLength: true, maxLength: 30, precision: 20, scale: 10, rowVersion: true, nullable: true, defaultValue: 1, comment: "My Comment", collation: "Some Collation")
-    },
-    constraints: table =>
-    {
-    });
-""",
+            mb.CreateTable(
+            name: "Post",
+            schema: "dbo",
+            columns: table => new
+            {
+            PostId = table.Column<int>(name: "Post Id", type: "int", unicode: false, fixedLength: true, maxLength: 30, precision: 20, scale: 10, rowVersion: true, nullable: true, defaultValue: 1, comment: "My Comment", collation: "Some Collation")
+            },
+            constraints: table =>
+            {
+            });
+            """,
             o =>
             {
                 Assert.Equal("Post", o.Name);
@@ -1245,16 +1245,16 @@ mb.CreateTable(
                 }
             },
             """
-mb.CreateTable(
-    name: "Post",
-    columns: table => new
-    {
-        Id = table.Column<int>(nullable: false, defaultValueSql: "1")
-    },
-    constraints: table =>
-    {
-    });
-""",
+            mb.CreateTable(
+            name: "Post",
+            columns: table => new
+            {
+            Id = table.Column<int>(nullable: false, defaultValueSql: "1")
+            },
+            constraints: table =>
+            {
+            });
+            """,
             o =>
             {
                 Assert.Single(o.Columns);
@@ -1285,16 +1285,16 @@ mb.CreateTable(
                 }
             },
             """
-mb.CreateTable(
-    name: "Post",
-    columns: table => new
-    {
-        Id = table.Column<int>(nullable: false, computedColumnSql: "1", stored: true)
-    },
-    constraints: table =>
-    {
-    });
-""",
+            mb.CreateTable(
+            name: "Post",
+            columns: table => new
+            {
+            Id = table.Column<int>(nullable: false, computedColumnSql: "1", stored: true)
+            },
+            constraints: table =>
+            {
+            });
+            """,
             o =>
             {
                 Assert.Single(o.Columns);
@@ -1329,20 +1329,20 @@ mb.CreateTable(
                 }
             },
             """
-mb.CreateTable(
-    name: "Post",
-    columns: table => new
-    {
-        BlogId = table.Column<int>(nullable: false)
-    },
-    constraints: table =>
-    {
-        table.ForeignKey(
+            mb.CreateTable(
+            name: "Post",
+            columns: table => new
+            {
+            BlogId = table.Column<int>(nullable: false)
+            },
+            constraints: table =>
+            {
+            table.ForeignKey(
             name: "FK_Post_Blog_BlogId",
             column: x => x.BlogId,
             principalTable: "Blog");
-    });
-""",
+            });
+            """,
             o =>
             {
                 Assert.Single(o.ForeignKeys);
@@ -1383,16 +1383,16 @@ mb.CreateTable(
                 }
             },
             """
-mb.CreateTable(
-    name: "Post",
-    schema: "dbo",
-    columns: table => new
-    {
-        BlogId = table.Column<int>(nullable: false)
-    },
-    constraints: table =>
-    {
-        table.ForeignKey(
+            mb.CreateTable(
+            name: "Post",
+            schema: "dbo",
+            columns: table => new
+            {
+            BlogId = table.Column<int>(nullable: false)
+            },
+            constraints: table =>
+            {
+            table.ForeignKey(
             name: "FK_Post_Blog_BlogId",
             column: x => x.BlogId,
             principalSchema: "my",
@@ -1400,8 +1400,8 @@ mb.CreateTable(
             principalColumn: "Id",
             onUpdate: ReferentialAction.SetNull,
             onDelete: ReferentialAction.SetDefault);
-    });
-""",
+            });
+            """,
             o =>
             {
                 Assert.Single(o.ForeignKeys);
@@ -1443,22 +1443,22 @@ mb.CreateTable(
                 }
             },
             """
-mb.CreateTable(
-    name: "Post",
-    columns: table => new
-    {
-        BlogId1 = table.Column<int>(nullable: false),
-        BlogId2 = table.Column<int>(nullable: false)
-    },
-    constraints: table =>
-    {
-        table.ForeignKey(
+            mb.CreateTable(
+            name: "Post",
+            columns: table => new
+            {
+            BlogId1 = table.Column<int>(nullable: false),
+            BlogId2 = table.Column<int>(nullable: false)
+            },
+            constraints: table =>
+            {
+            table.ForeignKey(
             name: "FK_Post_Blog_BlogId1_BlogId2",
             columns: x => new { x.BlogId1, x.BlogId2 },
             principalTable: "Blog",
             principalColumns: new[] { "Id1", "Id2" });
-    });
-""",
+            });
+            """,
             o =>
             {
                 Assert.Single(o.ForeignKeys);
@@ -1494,21 +1494,21 @@ mb.CreateTable(
                 }
             },
             """
-mb.CreateTable(
-    name: "Post",
-    columns: table => new
-    {
-        BlogId1 = table.Column<int>(nullable: false),
-        BlogId2 = table.Column<int>(nullable: false)
-    },
-    constraints: table =>
-    {
-        table.ForeignKey(
+            mb.CreateTable(
+            name: "Post",
+            columns: table => new
+            {
+            BlogId1 = table.Column<int>(nullable: false),
+            BlogId2 = table.Column<int>(nullable: false)
+            },
+            constraints: table =>
+            {
+            table.ForeignKey(
             name: "FK_Post_Blog_BlogId1_BlogId2",
             column: x => new { x.BlogId1, x.BlogId2 },
             principalTable: "Blog");
-    });
-""",
+            });
+            """,
             o =>
             {
                 Assert.Single(o.ForeignKeys);
@@ -1538,17 +1538,17 @@ mb.CreateTable(
                 }
             },
             """
-mb.CreateTable(
-    name: "Post",
-    columns: table => new
-    {
-        Id = table.Column<int>(nullable: false)
-    },
-    constraints: table =>
-    {
-        table.PrimaryKey("PK_Post", x => x.Id);
-    });
-""",
+            mb.CreateTable(
+            name: "Post",
+            columns: table => new
+            {
+            Id = table.Column<int>(nullable: false)
+            },
+            constraints: table =>
+            {
+            table.PrimaryKey("PK_Post", x => x.Id);
+            });
+            """,
             o =>
             {
                 Assert.NotNull(o.PrimaryKey);
@@ -1579,18 +1579,18 @@ mb.CreateTable(
                 }
             },
             """
-mb.CreateTable(
-    name: "Post",
-    schema: "dbo",
-    columns: table => new
-    {
-        Id = table.Column<int>(nullable: false)
-    },
-    constraints: table =>
-    {
-        table.PrimaryKey("PK_Post", x => x.Id);
-    });
-""",
+            mb.CreateTable(
+            name: "Post",
+            schema: "dbo",
+            columns: table => new
+            {
+            Id = table.Column<int>(nullable: false)
+            },
+            constraints: table =>
+            {
+            table.PrimaryKey("PK_Post", x => x.Id);
+            });
+            """,
             o =>
             {
                 Assert.NotNull(o.PrimaryKey);
@@ -1621,18 +1621,18 @@ mb.CreateTable(
                 }
             },
             """
-mb.CreateTable(
-    name: "Post",
-    columns: table => new
-    {
-        Id1 = table.Column<int>(nullable: false),
-        Id2 = table.Column<int>(nullable: false)
-    },
-    constraints: table =>
-    {
-        table.PrimaryKey("PK_Post", x => new { x.Id1, x.Id2 });
-    });
-""",
+            mb.CreateTable(
+            name: "Post",
+            columns: table => new
+            {
+            Id1 = table.Column<int>(nullable: false),
+            Id2 = table.Column<int>(nullable: false)
+            },
+            constraints: table =>
+            {
+            table.PrimaryKey("PK_Post", x => new { x.Id1, x.Id2 });
+            });
+            """,
             o =>
             {
                 Assert.NotNull(o.PrimaryKey);
@@ -1664,17 +1664,17 @@ mb.CreateTable(
                 }
             },
             """
-mb.CreateTable(
-    name: "Post",
-    columns: table => new
-    {
-        AltId = table.Column<int>(nullable: false)
-    },
-    constraints: table =>
-    {
-        table.UniqueConstraint("AK_Post_AltId", x => x.AltId);
-    });
-""",
+            mb.CreateTable(
+            name: "Post",
+            columns: table => new
+            {
+            AltId = table.Column<int>(nullable: false)
+            },
+            constraints: table =>
+            {
+            table.UniqueConstraint("AK_Post_AltId", x => x.AltId);
+            });
+            """,
             o =>
             {
                 Assert.Single(o.UniqueConstraints);
@@ -1708,18 +1708,18 @@ mb.CreateTable(
                 }
             },
             """
-mb.CreateTable(
-    name: "Post",
-    schema: "dbo",
-    columns: table => new
-    {
-        AltId = table.Column<int>(nullable: false)
-    },
-    constraints: table =>
-    {
-        table.UniqueConstraint("AK_Post_AltId", x => x.AltId);
-    });
-""",
+            mb.CreateTable(
+            name: "Post",
+            schema: "dbo",
+            columns: table => new
+            {
+            AltId = table.Column<int>(nullable: false)
+            },
+            constraints: table =>
+            {
+            table.UniqueConstraint("AK_Post_AltId", x => x.AltId);
+            });
+            """,
             o =>
             {
                 Assert.Single(o.UniqueConstraints);
@@ -1753,18 +1753,18 @@ mb.CreateTable(
                 }
             },
             """
-mb.CreateTable(
-    name: "Post",
-    columns: table => new
-    {
-        AltId1 = table.Column<int>(nullable: false),
-        AltId2 = table.Column<int>(nullable: false)
-    },
-    constraints: table =>
-    {
-        table.UniqueConstraint("AK_Post_AltId1_AltId2", x => new { x.AltId1, x.AltId2 });
-    });
-""",
+            mb.CreateTable(
+            name: "Post",
+            columns: table => new
+            {
+            AltId1 = table.Column<int>(nullable: false),
+            AltId2 = table.Column<int>(nullable: false)
+            },
+            constraints: table =>
+            {
+            table.UniqueConstraint("AK_Post_AltId1_AltId2", x => new { x.AltId1, x.AltId2 });
+            });
+            """,
             o =>
             {
                 Assert.Single(o.UniqueConstraints);
@@ -1797,18 +1797,18 @@ mb.CreateTable(
                 }
             },
             """
-mb.CreateTable(
-    name: "Post",
-    columns: table => new
-    {
-        AltId1 = table.Column<int>(nullable: false),
-        AltId2 = table.Column<int>(nullable: false)
-    },
-    constraints: table =>
-    {
-        table.CheckConstraint("CK_Post_AltId1_AltId2", "AltId1 > AltId2");
-    });
-""",
+            mb.CreateTable(
+            name: "Post",
+            columns: table => new
+            {
+            AltId1 = table.Column<int>(nullable: false),
+            AltId2 = table.Column<int>(nullable: false)
+            },
+            constraints: table =>
+            {
+            table.CheckConstraint("CK_Post_AltId1_AltId2", "AltId1 > AltId2");
+            });
+            """,
             o =>
             {
                 Assert.Single(o.CheckConstraints);
@@ -1843,19 +1843,19 @@ mb.CreateTable(
                 }
             },
             """
-mb.CreateTable(
-    name: "Post",
-    schema: "dbo",
-    columns: table => new
-    {
-        AltId1 = table.Column<int>(nullable: false),
-        AltId2 = table.Column<int>(nullable: false)
-    },
-    constraints: table =>
-    {
-        table.CheckConstraint("CK_Post_AltId1_AltId2", "AltId1 > AltId2");
-    });
-""",
+            mb.CreateTable(
+            name: "Post",
+            schema: "dbo",
+            columns: table => new
+            {
+            AltId1 = table.Column<int>(nullable: false),
+            AltId2 = table.Column<int>(nullable: false)
+            },
+            constraints: table =>
+            {
+            table.CheckConstraint("CK_Post_AltId1_AltId2", "AltId1 > AltId2");
+            });
+            """,
             o =>
             {
                 Assert.Single(o.CheckConstraints);
@@ -1881,18 +1881,18 @@ mb.CreateTable(
                 Comment = "My Comment"
             },
             """
-mb.CreateTable(
-    name: "Post",
-    schema: "dbo",
-    columns: table => new
-    {
-        AltId1 = table.Column<int>(nullable: false)
-    },
-    constraints: table =>
-    {
-    },
-    comment: "My Comment");
-""",
+            mb.CreateTable(
+            name: "Post",
+            schema: "dbo",
+            columns: table => new
+            {
+            AltId1 = table.Column<int>(nullable: false)
+            },
+            constraints: table =>
+            {
+            },
+            comment: "My Comment");
+            """,
             o =>
             {
                 Assert.Equal("My Comment", o.Comment);
@@ -1918,18 +1918,18 @@ mb.CreateTable(
                 Comment = "My Operation Comment"
             },
             """
-mb.CreateTable(
-    name: "Post",
-    schema: "dbo",
-    columns: table => new
-    {
-        AltId1 = table.Column<int>(nullable: false, comment: "My Column comment")
-    },
-    constraints: table =>
-    {
-    },
-    comment: "My Operation Comment");
-""",
+            mb.CreateTable(
+            name: "Post",
+            schema: "dbo",
+            columns: table => new
+            {
+            AltId1 = table.Column<int>(nullable: false, comment: "My Column comment")
+            },
+            constraints: table =>
+            {
+            },
+            comment: "My Operation Comment");
+            """,
             o =>
             {
                 Assert.Equal("My Operation Comment", o.Comment);
@@ -1942,10 +1942,10 @@ mb.CreateTable(
         Test(
             new DropColumnOperation { Name = "Id", Table = "Post" },
             """
-mb.DropColumn(
-    name: "Id",
-    table: "Post");
-""",
+            mb.DropColumn(
+            name: "Id",
+            table: "Post");
+            """,
             o =>
             {
                 Assert.Equal("Id", o.Name);
@@ -1963,11 +1963,11 @@ mb.DropColumn(
                 Table = "Post"
             },
             """
-mb.DropColumn(
-    name: "Id",
-    schema: "dbo",
-    table: "Post");
-""",
+            mb.DropColumn(
+            name: "Id",
+            schema: "dbo",
+            table: "Post");
+            """,
             o =>
             {
                 Assert.Equal("Id", o.Name);
@@ -1981,10 +1981,10 @@ mb.DropColumn(
         Test(
             new DropForeignKeyOperation { Name = "FK_Post_BlogId", Table = "Post" },
             """
-mb.DropForeignKey(
-    name: "FK_Post_BlogId",
-    table: "Post");
-""",
+            mb.DropForeignKey(
+            name: "FK_Post_BlogId",
+            table: "Post");
+            """,
             o =>
             {
                 Assert.Equal("FK_Post_BlogId", o.Name);
@@ -2002,11 +2002,11 @@ mb.DropForeignKey(
                 Table = "Post"
             },
             """
-mb.DropForeignKey(
-    name: "FK_Post_BlogId",
-    schema: "dbo",
-    table: "Post");
-""",
+            mb.DropForeignKey(
+            name: "FK_Post_BlogId",
+            schema: "dbo",
+            table: "Post");
+            """,
             o =>
             {
                 Assert.Equal("FK_Post_BlogId", o.Name);
@@ -2020,9 +2020,9 @@ mb.DropForeignKey(
         Test(
             new DropIndexOperation { Name = "IX_Post_Title" },
             """
-mb.DropIndex(
-    name: "IX_Post_Title");
-""",
+            mb.DropIndex(
+            name: "IX_Post_Title");
+            """,
             o =>
             {
                 Assert.Equal("IX_Post_Title", o.Name);
@@ -2039,11 +2039,11 @@ mb.DropIndex(
                 Table = "Post"
             },
             """
-mb.DropIndex(
-    name: "IX_Post_Title",
-    schema: "dbo",
-    table: "Post");
-""",
+            mb.DropIndex(
+            name: "IX_Post_Title",
+            schema: "dbo",
+            table: "Post");
+            """,
             o =>
             {
                 Assert.Equal("IX_Post_Title", o.Name);
@@ -2057,10 +2057,10 @@ mb.DropIndex(
         Test(
             new DropPrimaryKeyOperation { Name = "PK_Post", Table = "Post" },
             """
-mb.DropPrimaryKey(
-    name: "PK_Post",
-    table: "Post");
-""",
+            mb.DropPrimaryKey(
+            name: "PK_Post",
+            table: "Post");
+            """,
             o =>
             {
                 Assert.Equal("PK_Post", o.Name);
@@ -2078,11 +2078,11 @@ mb.DropPrimaryKey(
                 Table = "Post"
             },
             """
-mb.DropPrimaryKey(
-    name: "PK_Post",
-    schema: "dbo",
-    table: "Post");
-""",
+            mb.DropPrimaryKey(
+            name: "PK_Post",
+            schema: "dbo",
+            table: "Post");
+            """,
             o =>
             {
                 Assert.Equal("PK_Post", o.Name);
@@ -2096,9 +2096,9 @@ mb.DropPrimaryKey(
         Test(
             new DropSchemaOperation { Name = "my" },
             """
-mb.DropSchema(
-    name: "my");
-""",
+            mb.DropSchema(
+            name: "my");
+            """,
             o => Assert.Equal("my", o.Name)
         );
 
@@ -2107,9 +2107,9 @@ mb.DropSchema(
         Test(
             new DropSequenceOperation { Name = "EntityFrameworkHiLoSequence" },
             """
-mb.DropSequence(
-    name: "EntityFrameworkHiLoSequence");
-""",
+            mb.DropSequence(
+            name: "EntityFrameworkHiLoSequence");
+            """,
             o => Assert.Equal("EntityFrameworkHiLoSequence", o.Name)
         );
 
@@ -2118,10 +2118,10 @@ mb.DropSequence(
         Test(
             new DropSequenceOperation { Name = "EntityFrameworkHiLoSequence", Schema = "dbo" },
             """
-mb.DropSequence(
-    name: "EntityFrameworkHiLoSequence",
-    schema: "dbo");
-""",
+            mb.DropSequence(
+            name: "EntityFrameworkHiLoSequence",
+            schema: "dbo");
+            """,
             o =>
             {
                 Assert.Equal("EntityFrameworkHiLoSequence", o.Name);
@@ -2134,9 +2134,9 @@ mb.DropSequence(
         Test(
             new DropTableOperation { Name = "Post" },
             """
-mb.DropTable(
-    name: "Post");
-""",
+            mb.DropTable(
+            name: "Post");
+            """,
             o => Assert.Equal("Post", o.Name)
         );
 
@@ -2145,10 +2145,10 @@ mb.DropTable(
         Test(
             new DropTableOperation { Name = "Post", Schema = "dbo" },
             """
-mb.DropTable(
-    name: "Post",
-    schema: "dbo");
-""",
+            mb.DropTable(
+            name: "Post",
+            schema: "dbo");
+            """,
             o =>
             {
                 Assert.Equal("Post", o.Name);
@@ -2161,10 +2161,10 @@ mb.DropTable(
         Test(
             new DropUniqueConstraintOperation { Name = "AK_Post_AltId", Table = "Post" },
             """
-mb.DropUniqueConstraint(
-    name: "AK_Post_AltId",
-    table: "Post");
-""",
+            mb.DropUniqueConstraint(
+            name: "AK_Post_AltId",
+            table: "Post");
+            """,
             o =>
             {
                 Assert.Equal("AK_Post_AltId", o.Name);
@@ -2182,11 +2182,11 @@ mb.DropUniqueConstraint(
                 Table = "Post"
             },
             """
-mb.DropUniqueConstraint(
-    name: "AK_Post_AltId",
-    schema: "dbo",
-    table: "Post");
-""",
+            mb.DropUniqueConstraint(
+            name: "AK_Post_AltId",
+            schema: "dbo",
+            table: "Post");
+            """,
             o =>
             {
                 Assert.Equal("AK_Post_AltId", o.Name);
@@ -2200,10 +2200,10 @@ mb.DropUniqueConstraint(
         Test(
             new DropCheckConstraintOperation { Name = "CK_Post_AltId1_AltId2", Table = "Post" },
             """
-mb.DropCheckConstraint(
-    name: "CK_Post_AltId1_AltId2",
-    table: "Post");
-""",
+            mb.DropCheckConstraint(
+            name: "CK_Post_AltId1_AltId2",
+            table: "Post");
+            """,
             o =>
             {
                 Assert.Equal("CK_Post_AltId1_AltId2", o.Name);
@@ -2221,11 +2221,11 @@ mb.DropCheckConstraint(
                 Table = "Post"
             },
             """
-mb.DropCheckConstraint(
-    name: "CK_Post_AltId1_AltId2",
-    schema: "dbo",
-    table: "Post");
-""",
+            mb.DropCheckConstraint(
+            name: "CK_Post_AltId1_AltId2",
+            schema: "dbo",
+            table: "Post");
+            """,
             o =>
             {
                 Assert.Equal("CK_Post_AltId1_AltId2", o.Name);
@@ -2244,11 +2244,11 @@ mb.DropCheckConstraint(
                 NewName = "PostId"
             },
             """
-mb.RenameColumn(
-    name: "Id",
-    table: "Post",
-    newName: "PostId");
-""",
+            mb.RenameColumn(
+            name: "Id",
+            table: "Post",
+            newName: "PostId");
+            """,
             o =>
             {
                 Assert.Equal("Id", o.Name);
@@ -2268,12 +2268,12 @@ mb.RenameColumn(
                 NewName = "PostId"
             },
             """
-mb.RenameColumn(
-    name: "Id",
-    schema: "dbo",
-    table: "Post",
-    newName: "PostId");
-""",
+            mb.RenameColumn(
+            name: "Id",
+            schema: "dbo",
+            table: "Post",
+            newName: "PostId");
+            """,
             o =>
             {
                 Assert.Equal("Id", o.Name);
@@ -2288,10 +2288,10 @@ mb.RenameColumn(
         Test(
             new RenameIndexOperation { Name = "IX_Post_Title", NewName = "IX_Post_PostTitle" },
             """
-mb.RenameIndex(
-    name: "IX_Post_Title",
-    newName: "IX_Post_PostTitle");
-""",
+            mb.RenameIndex(
+            name: "IX_Post_Title",
+            newName: "IX_Post_PostTitle");
+            """,
             o =>
             {
                 Assert.Equal("IX_Post_Title", o.Name);
@@ -2310,12 +2310,12 @@ mb.RenameIndex(
                 NewName = "IX_dbo.Post_PostTitle"
             },
             """
-mb.RenameIndex(
-    name: "IX_dbo.Post_Title",
-    schema: "dbo",
-    table: "Post",
-    newName: "IX_dbo.Post_PostTitle");
-""",
+            mb.RenameIndex(
+            name: "IX_dbo.Post_Title",
+            schema: "dbo",
+            table: "Post",
+            newName: "IX_dbo.Post_PostTitle");
+            """,
             o =>
             {
                 Assert.Equal("IX_dbo.Post_Title", o.Name);
@@ -2330,9 +2330,9 @@ mb.RenameIndex(
         Test(
             new RenameSequenceOperation { Name = "EntityFrameworkHiLoSequence" },
             """
-mb.RenameSequence(
-    name: "EntityFrameworkHiLoSequence");
-""",
+            mb.RenameSequence(
+            name: "EntityFrameworkHiLoSequence");
+            """,
             o => Assert.Equal("EntityFrameworkHiLoSequence", o.Name)
         );
 
@@ -2347,12 +2347,12 @@ mb.RenameSequence(
                 NewSchema = "my"
             },
             """
-mb.RenameSequence(
-    name: "EntityFrameworkHiLoSequence",
-    schema: "dbo",
-    newName: "MySequence",
-    newSchema: "my");
-""",
+            mb.RenameSequence(
+            name: "EntityFrameworkHiLoSequence",
+            schema: "dbo",
+            newName: "MySequence",
+            newSchema: "my");
+            """,
             o =>
             {
                 Assert.Equal("EntityFrameworkHiLoSequence", o.Name);
@@ -2367,9 +2367,9 @@ mb.RenameSequence(
         Test(
             new RenameTableOperation { Name = "Post" },
             """
-mb.RenameTable(
-    name: "Post");
-""",
+            mb.RenameTable(
+            name: "Post");
+            """,
             o => Assert.Equal("Post", o.Name)
         );
 
@@ -2384,12 +2384,12 @@ mb.RenameTable(
                 NewSchema = "my"
             },
             """
-mb.RenameTable(
-    name: "Post",
-    schema: "dbo",
-    newName: "Posts",
-    newSchema: "my");
-""",
+            mb.RenameTable(
+            name: "Post",
+            schema: "dbo",
+            newName: "Posts",
+            newSchema: "my");
+            """,
             o =>
             {
                 Assert.Equal("Post", o.Name);
@@ -2404,10 +2404,10 @@ mb.RenameTable(
         Test(
             new RestartSequenceOperation { Name = "EntityFrameworkHiLoSequence", StartValue = 1 },
             """
-mb.RestartSequence(
-    name: "EntityFrameworkHiLoSequence",
-    startValue: 1L);
-""",
+            mb.RestartSequence(
+            name: "EntityFrameworkHiLoSequence",
+            startValue: 1L);
+            """,
             o =>
             {
                 Assert.Equal("EntityFrameworkHiLoSequence", o.Name);
@@ -2425,11 +2425,11 @@ mb.RestartSequence(
                 StartValue = 1
             },
             """
-mb.RestartSequence(
-    name: "EntityFrameworkHiLoSequence",
-    schema: "dbo",
-    startValue: 1L);
-""",
+            mb.RestartSequence(
+            name: "EntityFrameworkHiLoSequence",
+            schema: "dbo",
+            startValue: 1L);
+            """,
             o =>
             {
                 Assert.Equal("EntityFrameworkHiLoSequence", o.Name);
@@ -2559,22 +2559,22 @@ mb.RestartSequence(
                 }
             },
             """
-mb.InsertData(
-    schema: "dbo",
-    table: "People",
-    columns: new[] { "Id", "Full Name", "Geometry" },
-    values: new object[,]
-    {
-        { 0, null, null },
-        { 1, "Daenerys Targaryen", (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT Z(1.1 2.2 3.3)") },
-        { 2, "John Snow", (NetTopologySuite.Geometries.Polygon)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POLYGON ((1.1 2.2, 2.2 2.2, 2.2 1.1, 1.1 2.2))") },
-        { 3, "Arya Stark", (NetTopologySuite.Geometries.LineString)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;LINESTRING (1.1 2.2, 2.2 2.2, 2.2 1.1, 7.1 7.2)") },
-        { 4, "Harry Strickland", (NetTopologySuite.Geometries.MultiPoint)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;MULTIPOINT ((1.1 2.2), (2.2 2.2), (2.2 1.1))") },
-        { 5, "The Imp", (NetTopologySuite.Geometries.MultiPolygon)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;MULTIPOLYGON (((10.1 20.2, 20.2 20.2, 20.2 10.1, 10.1 20.2)), ((1.1 2.2, 2.2 2.2, 2.2 1.1, 1.1 2.2)))") },
-        { 6, "The Kingslayer", (NetTopologySuite.Geometries.MultiLineString)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;MULTILINESTRING ((1.1 2.2, 2.2 2.2, 2.2 1.1, 7.1 7.2), (7.1 7.2, 20.2 20.2, 20.2 1.1, 70.1 70.2))") },
-        { 7, "Aemon Targaryen", (NetTopologySuite.Geometries.GeometryCollection)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;GEOMETRYCOLLECTION Z(LINESTRING Z(1.1 2.2 NaN, 2.2 2.2 NaN, 2.2 1.1 NaN, 7.1 7.2 NaN), LINESTRING Z(7.1 7.2 NaN, 20.2 20.2 NaN, 20.2 1.1 NaN, 70.1 70.2 NaN), MULTIPOINT Z((1.1 2.2 NaN), (2.2 2.2 NaN), (2.2 1.1 NaN)), POLYGON Z((1.1 2.2 NaN, 2.2 2.2 NaN, 2.2 1.1 NaN, 1.1 2.2 NaN)), POLYGON Z((10.1 20.2 NaN, 20.2 20.2 NaN, 20.2 10.1 NaN, 10.1 20.2 NaN)), POINT Z(1.1 2.2 3.3), MULTILINESTRING Z((1.1 2.2 NaN, 2.2 2.2 NaN, 2.2 1.1 NaN, 7.1 7.2 NaN), (7.1 7.2 NaN, 20.2 20.2 NaN, 20.2 1.1 NaN, 70.1 70.2 NaN)), MULTIPOLYGON Z(((10.1 20.2 NaN, 20.2 20.2 NaN, 20.2 10.1 NaN, 10.1 20.2 NaN)), ((1.1 2.2 NaN, 2.2 2.2 NaN, 2.2 1.1 NaN, 1.1 2.2 NaN))))") }
-    });
-""",
+            mb.InsertData(
+            schema: "dbo",
+            table: "People",
+            columns: new[] { "Id", "Full Name", "Geometry" },
+            values: new object[,]
+            {
+            { 0, null, null },
+            { 1, "Daenerys Targaryen", (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT Z(1.1 2.2 3.3)") },
+            { 2, "John Snow", (NetTopologySuite.Geometries.Polygon)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POLYGON ((1.1 2.2, 2.2 2.2, 2.2 1.1, 1.1 2.2))") },
+            { 3, "Arya Stark", (NetTopologySuite.Geometries.LineString)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;LINESTRING (1.1 2.2, 2.2 2.2, 2.2 1.1, 7.1 7.2)") },
+            { 4, "Harry Strickland", (NetTopologySuite.Geometries.MultiPoint)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;MULTIPOINT ((1.1 2.2), (2.2 2.2), (2.2 1.1))") },
+            { 5, "The Imp", (NetTopologySuite.Geometries.MultiPolygon)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;MULTIPOLYGON (((10.1 20.2, 20.2 20.2, 20.2 10.1, 10.1 20.2)), ((1.1 2.2, 2.2 2.2, 2.2 1.1, 1.1 2.2)))") },
+            { 6, "The Kingslayer", (NetTopologySuite.Geometries.MultiLineString)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;MULTILINESTRING ((1.1 2.2, 2.2 2.2, 2.2 1.1, 7.1 7.2), (7.1 7.2, 20.2 20.2, 20.2 1.1, 70.1 70.2))") },
+            { 7, "Aemon Targaryen", (NetTopologySuite.Geometries.GeometryCollection)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;GEOMETRYCOLLECTION Z(LINESTRING Z(1.1 2.2 NaN, 2.2 2.2 NaN, 2.2 1.1 NaN, 7.1 7.2 NaN), LINESTRING Z(7.1 7.2 NaN, 20.2 20.2 NaN, 20.2 1.1 NaN, 70.1 70.2 NaN), MULTIPOINT Z((1.1 2.2 NaN), (2.2 2.2 NaN), (2.2 1.1 NaN)), POLYGON Z((1.1 2.2 NaN, 2.2 2.2 NaN, 2.2 1.1 NaN, 1.1 2.2 NaN)), POLYGON Z((10.1 20.2 NaN, 20.2 20.2 NaN, 20.2 10.1 NaN, 10.1 20.2 NaN)), POINT Z(1.1 2.2 3.3), MULTILINESTRING Z((1.1 2.2 NaN, 2.2 2.2 NaN, 2.2 1.1 NaN, 7.1 7.2 NaN), (7.1 7.2 NaN, 20.2 20.2 NaN, 20.2 1.1 NaN, 70.1 70.2 NaN)), MULTIPOLYGON Z(((10.1 20.2 NaN, 20.2 20.2 NaN, 20.2 10.1 NaN, 10.1 20.2 NaN)), ((1.1 2.2 NaN, 2.2 2.2 NaN, 2.2 1.1 NaN, 1.1 2.2 NaN))))") }
+            });
+            """,
             o =>
             {
                 Assert.Equal("dbo", o.Schema);
@@ -2606,11 +2606,11 @@ mb.InsertData(
                 }
             },
             """
-mb.InsertData(
-    table: "People",
-    column: "Geometry",
-    value: (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT Z(1.1 2.2 3.3)"));
-""",
+            mb.InsertData(
+            table: "People",
+            column: "Geometry",
+            value: (NetTopologySuite.Geometries.Point)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POINT Z(1.1 2.2 3.3)"));
+            """,
             o =>
             {
                 Assert.Equal("People", o.Table);
@@ -2634,11 +2634,11 @@ mb.InsertData(
                 }
             },
             """
-mb.InsertData(
-    table: "People",
-    column: "Tags",
-    value: new string[0]);
-""",
+            mb.InsertData(
+            table: "People",
+            column: "Tags",
+            value: new string[0]);
+            """,
             o =>
             {
                 Assert.Equal("People", o.Table);
@@ -2662,11 +2662,11 @@ mb.InsertData(
                 }
             },
             """
-mb.InsertData(
-    table: "People",
-    columns: new[] { "First Name", "Last Name", "Geometry" },
-    values: new object[] { "John", null, new string[0] });
-""",
+            mb.InsertData(
+            table: "People",
+            columns: new[] { "First Name", "Last Name", "Geometry" },
+            values: new object[] { "John", null, new string[0] });
+            """,
             o =>
             {
                 Assert.Equal("People", o.Table);
@@ -2691,11 +2691,11 @@ mb.InsertData(
                 }
             },
             """
-mb.InsertData(
-    table: "People",
-    columns: new[] { "First Name", "Last Name", "Geometry" },
-    values: new object[] { "John", "Snow", (NetTopologySuite.Geometries.Polygon)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POLYGON ((1.1 2.2, 2.2 2.2, 2.2 1.1, 1.1 2.2))") });
-""",
+            mb.InsertData(
+            table: "People",
+            columns: new[] { "First Name", "Last Name", "Geometry" },
+            values: new object[] { "John", "Snow", (NetTopologySuite.Geometries.Polygon)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;POLYGON ((1.1 2.2, 2.2 2.2, 2.2 1.1, 1.1 2.2))") });
+            """,
             o =>
             {
                 Assert.Equal("People", o.Table);
@@ -2721,15 +2721,15 @@ mb.InsertData(
                 }
             },
             """
-mb.InsertData(
-    table: "People",
-    column: "Geometries",
-    values: new object[]
-    {
-        (NetTopologySuite.Geometries.LineString)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;LINESTRING (1.1 2.2, 2.2 2.2, 2.2 1.1, 7.1 7.2)"),
-        (NetTopologySuite.Geometries.MultiPoint)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;MULTIPOINT ((1.1 2.2), (2.2 2.2), (2.2 1.1))")
-    });
-""",
+            mb.InsertData(
+            table: "People",
+            column: "Geometries",
+            values: new object[]
+            {
+            (NetTopologySuite.Geometries.LineString)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;LINESTRING (1.1 2.2, 2.2 2.2, 2.2 1.1, 7.1 7.2)"),
+            (NetTopologySuite.Geometries.MultiPoint)new NetTopologySuite.IO.WKTReader().Read("SRID=4326;MULTIPOINT ((1.1 2.2), (2.2 2.2), (2.2 1.1))")
+            });
+            """,
             o =>
             {
                 Assert.Equal("People", o.Table);
@@ -2803,20 +2803,20 @@ mb.InsertData(
                 }
             },
             """
-mb.DeleteData(
-    schema: "dbo",
-    table: "People",
-    keyColumn: "First Name",
-    keyColumnType: "string",
-    keyValues: new object[]
-    {
-        "Hodor",
-        "Daenerys",
-        "John",
-        "Arya",
-        "Harry"
-    });
-""",
+            mb.DeleteData(
+            schema: "dbo",
+            table: "People",
+            keyColumn: "First Name",
+            keyColumnType: "string",
+            keyValues: new object[]
+            {
+            "Hodor",
+            "Daenerys",
+            "John",
+            "Arya",
+            "Harry"
+            });
+            """,
             o =>
             {
                 Assert.Equal("dbo", o.Schema);
@@ -2846,19 +2846,19 @@ mb.DeleteData(
                 }
             },
             """
-mb.DeleteData(
-    table: "People",
-    keyColumns: new[] { "First Name", "Last Name" },
-    keyColumnTypes: new[] { "string", "string" },
-    keyValues: new object[,]
-    {
-        { "Hodor", null },
-        { "Daenerys", "Targaryen" },
-        { "John", "Snow" },
-        { "Arya", "Stark" },
-        { "Harry", "Strickland" }
-    });
-""",
+            mb.DeleteData(
+            table: "People",
+            keyColumns: new[] { "First Name", "Last Name" },
+            keyColumnTypes: new[] { "string", "string" },
+            keyValues: new object[,]
+            {
+            { "Hodor", null },
+            { "Daenerys", "Targaryen" },
+            { "John", "Snow" },
+            { "Arya", "Stark" },
+            { "Harry", "Strickland" }
+            });
+            """,
             o =>
             {
                 Assert.Equal("People", o.Table);
@@ -2882,11 +2882,11 @@ mb.DeleteData(
                 }
             },
             """
-mb.DeleteData(
-    table: "People",
-    keyColumn: "Last Name",
-    keyValue: "Snow");
-""",
+            mb.DeleteData(
+            table: "People",
+            keyColumn: "Last Name",
+            keyValue: "Snow");
+            """,
             o =>
             {
                 Assert.Equal("People", o.Table);
@@ -2910,11 +2910,11 @@ mb.DeleteData(
                 }
             },
             """
-mb.DeleteData(
-    table: "People",
-    keyColumns: new[] { "First Name", "Last Name" },
-    keyValues: new object[] { "John", "Snow" });
-""",
+            mb.DeleteData(
+            table: "People",
+            keyColumns: new[] { "First Name", "Last Name" },
+            keyValues: new object[] { "John", "Snow" });
+            """,
             o =>
             {
                 Assert.Equal("People", o.Table);
@@ -2986,22 +2986,22 @@ mb.DeleteData(
                 }
             },
             """
-mb.UpdateData(
-    schema: "dbo",
-    table: "People",
-    keyColumn: "First Name",
-    keyValues: new object[]
-    {
-        "Hodor",
-        "Daenerys"
-    },
-    columns: new[] { "Birthplace", "House Allegiance", "Culture" },
-    values: new object[,]
-    {
-        { "Winterfell", "Stark", "Northmen" },
-        { "Dragonstone", "Targaryen", "Valyrian" }
-    });
-""",
+            mb.UpdateData(
+            schema: "dbo",
+            table: "People",
+            keyColumn: "First Name",
+            keyValues: new object[]
+            {
+            "Hodor",
+            "Daenerys"
+            },
+            columns: new[] { "Birthplace", "House Allegiance", "Culture" },
+            values: new object[,]
+            {
+            { "Winterfell", "Stark", "Northmen" },
+            { "Dragonstone", "Targaryen", "Valyrian" }
+            });
+            """,
             o =>
             {
                 Assert.Equal("dbo", o.Schema);
@@ -3037,21 +3037,21 @@ mb.UpdateData(
                 }
             },
             """
-mb.UpdateData(
-    table: "People",
-    keyColumns: new[] { "First Name", "Last Name" },
-    keyValues: new object[,]
-    {
-        { "Hodor", null },
-        { "Daenerys", "Targaryen" }
-    },
-    column: "House Allegiance",
-    values: new object[]
-    {
-        "Stark",
-        "Targaryen"
-    });
-""",
+            mb.UpdateData(
+            table: "People",
+            keyColumns: new[] { "First Name", "Last Name" },
+            keyValues: new object[,]
+            {
+            { "Hodor", null },
+            { "Daenerys", "Targaryen" }
+            },
+            column: "House Allegiance",
+            values: new object[]
+            {
+            "Stark",
+            "Targaryen"
+            });
+            """,
             o =>
             {
                 Assert.Equal("People", o.Table);
@@ -3086,21 +3086,21 @@ mb.UpdateData(
                 }
             },
             """
-mb.UpdateData(
-    table: "People",
-    keyColumns: new[] { "First Name", "Last Name" },
-    keyValues: new object[,]
-    {
-        { "Hodor", null },
-        { "Daenerys", "Targaryen" }
-    },
-    columns: new[] { "Birthplace", "House Allegiance", "Culture" },
-    values: new object[,]
-    {
-        { "Winterfell", "Stark", "Northmen" },
-        { "Dragonstone", "Targaryen", "Valyrian" }
-    });
-""",
+            mb.UpdateData(
+            table: "People",
+            keyColumns: new[] { "First Name", "Last Name" },
+            keyValues: new object[,]
+            {
+            { "Hodor", null },
+            { "Daenerys", "Targaryen" }
+            },
+            columns: new[] { "Birthplace", "House Allegiance", "Culture" },
+            values: new object[,]
+            {
+            { "Winterfell", "Stark", "Northmen" },
+            { "Dragonstone", "Targaryen", "Valyrian" }
+            });
+            """,
             o =>
             {
                 Assert.Equal("People", o.Table);
@@ -3134,14 +3134,14 @@ mb.UpdateData(
                 }
             },
             """
-mb.UpdateData(
-    schema: "dbo",
-    table: "People",
-    keyColumn: "Full Name",
-    keyValue: "Daenerys Targaryen",
-    columns: new[] { "Birthplace", "House Allegiance", "Culture" },
-    values: new object[] { "Dragonstone", "Targaryen", "Valyrian" });
-""",
+            mb.UpdateData(
+            schema: "dbo",
+            table: "People",
+            keyColumn: "Full Name",
+            keyValue: "Daenerys Targaryen",
+            columns: new[] { "Birthplace", "House Allegiance", "Culture" },
+            values: new object[] { "Dragonstone", "Targaryen", "Valyrian" });
+            """,
             o =>
             {
                 Assert.Equal("dbo", o.Schema);
@@ -3175,13 +3175,13 @@ mb.UpdateData(
                 }
             },
             """
-mb.UpdateData(
-    table: "People",
-    keyColumn: "First Name",
-    keyValue: "Daenerys",
-    column: "House Allegiance",
-    value: "Targaryen");
-""",
+            mb.UpdateData(
+            table: "People",
+            keyColumn: "First Name",
+            keyValue: "Daenerys",
+            column: "House Allegiance",
+            value: "Targaryen");
+            """,
             o =>
             {
                 Assert.Equal("People", o.Table);
@@ -3216,21 +3216,21 @@ mb.UpdateData(
                 }
             },
             """
-mb.UpdateData(
-    table: "People",
-    keyColumn: "First Name",
-    keyValues: new object[]
-    {
-        "Hodor",
-        "Daenerys"
-    },
-    column: "House Allegiance",
-    values: new object[]
-    {
-        "Stark",
-        "Targaryen"
-    });
-""",
+            mb.UpdateData(
+            table: "People",
+            keyColumn: "First Name",
+            keyValues: new object[]
+            {
+            "Hodor",
+            "Daenerys"
+            },
+            column: "House Allegiance",
+            values: new object[]
+            {
+            "Stark",
+            "Targaryen"
+            });
+            """,
             o =>
             {
                 Assert.Equal("People", o.Table);
@@ -3263,13 +3263,13 @@ mb.UpdateData(
                 }
             },
             """
-mb.UpdateData(
-    table: "People",
-    keyColumns: new[] { "First Name", "Last Name" },
-    keyValues: new object[] { "Daenerys", "Targaryen" },
-    column: "House Allegiance",
-    value: "Targaryen");
-""",
+            mb.UpdateData(
+            table: "People",
+            keyColumns: new[] { "First Name", "Last Name" },
+            keyValues: new object[] { "Daenerys", "Targaryen" },
+            column: "House Allegiance",
+            value: "Targaryen");
+            """,
             o =>
             {
                 Assert.Equal("People", o.Table);
@@ -3302,13 +3302,13 @@ mb.UpdateData(
                 }
             },
             """
-mb.UpdateData(
-    table: "People",
-    keyColumns: new[] { "First Name", "Last Name" },
-    keyValues: new object[] { "Daenerys", "Targaryen" },
-    columns: new[] { "Birthplace", "House Allegiance", "Culture" },
-    values: new object[] { "Dragonstone", "Targaryen", "Valyrian" });
-""",
+            mb.UpdateData(
+            table: "People",
+            keyColumns: new[] { "First Name", "Last Name" },
+            keyValues: new object[] { "Daenerys", "Targaryen" },
+            columns: new[] { "Birthplace", "House Allegiance", "Culture" },
+            values: new object[] { "Dragonstone", "Targaryen", "Valyrian" });
+            """,
             o =>
             {
                 Assert.Equal("People", o.Table);
@@ -3341,13 +3341,13 @@ mb.UpdateData(
                 }
             },
             """
-mb.UpdateData(
-    table: "People",
-    keyColumn: "Full Name",
-    keyValue: "Daenerys Targaryen",
-    columns: new[] { "Birthplace", "House Allegiance", "Culture" },
-    values: new object[] { "Dragonstone", "Targaryen", "Valyrian" });
-""",
+            mb.UpdateData(
+            table: "People",
+            keyColumn: "Full Name",
+            keyValue: "Daenerys Targaryen",
+            columns: new[] { "Birthplace", "House Allegiance", "Culture" },
+            values: new object[] { "Dragonstone", "Targaryen", "Valyrian" });
+            """,
             o =>
             {
                 Assert.Equal("People", o.Table);
@@ -3437,13 +3437,13 @@ mb.UpdateData(
         Test(
             alterTable,
             """
-mb.AlterTable(
-    name: "NewCustomer")
-    .Annotation("MyAnnotation1", null)
-    .Annotation("MyAnnotation2", "Foo")
-    .OldAnnotation("MyAnnotation1", "Bar")
-    .OldAnnotation("MyAnnotation2", null);
-""",
+            mb.AlterTable(
+            name: "NewCustomer")
+            .Annotation("MyAnnotation1", null)
+            .Annotation("MyAnnotation2", "Foo")
+            .OldAnnotation("MyAnnotation1", "Bar")
+            .OldAnnotation("MyAnnotation2", null);
+            """,
             operation =>
             {
                 Assert.Equal("NewCustomer", operation.Name);

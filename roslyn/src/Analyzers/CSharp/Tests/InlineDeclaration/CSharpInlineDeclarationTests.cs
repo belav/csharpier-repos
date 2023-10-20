@@ -39,24 +39,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|int|] i;
-                        if (int.TryParse(v, out i))
-                        {
-                        }
-                    }
+                void M()
+                {
+                [|int|] i;
+                if (int.TryParse(v, out i))
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        if (int.TryParse(v, out int i))
-                        {
-                        }
-                    }
+                void M()
+                {
+                if (int.TryParse(v, out int i))
+                {
+                }
+                }
                 }
                 """
             );
@@ -69,24 +69,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|int|] i;
-                        if (Goo(int.TryParse(v, out i)))
-                        {
-                        }
-                    }
+                void M()
+                {
+                [|int|] i;
+                if (Goo(int.TryParse(v, out i)))
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        if (Goo(int.TryParse(v, out int i)))
-                        {
-                        }
-                    }
+                void M()
+                {
+                if (Goo(int.TryParse(v, out int i)))
+                {
+                }
+                }
                 }
                 """
             );
@@ -99,28 +99,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C1
                 {
-                    public C1(int v, out int i) {}
+                public C1(int v, out int i) {}
 
-                    void M(int v)
-                    {
-                        [|int|] i;
-                        if (new C1(v, out i))
-                        {
-                        }
-                    }
+                void M(int v)
+                {
+                [|int|] i;
+                if (new C1(v, out i))
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C1
                 {
-                    public C1(int v, out int i) {}
+                public C1(int v, out int i) {}
 
-                    void M(int v)
-                    {
-                        if (new C1(v, out int i))
-                        {
-                        }
-                    }
+                void M(int v)
+                {
+                if (new C1(v, out int i))
+                {
+                }
+                }
                 }
                 """
             );
@@ -133,13 +133,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|int|] i;
-                        if (this[out i])
-                        {
-                        }
-                    }
+                void M()
+                {
+                [|int|] i;
+                if (this[out i])
+                {
+                }
+                }
                 }
                 """
             );
@@ -152,24 +152,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|int|] i;
-                        if (int.TryParse(v, out i, out i))
-                        {
-                        }
-                    }
+                void M()
+                {
+                [|int|] i;
+                if (int.TryParse(v, out i, out i))
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        if (int.TryParse(v, out int i, out i))
-                        {
-                        }
-                    }
+                void M()
+                {
+                if (int.TryParse(v, out int i, out i))
+                {
+                }
+                }
                 }
                 """
             );
@@ -182,32 +182,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|int|] i;
-                        if (int.TryParse(v, out i))
-                        {
-                        }
+                void M()
+                {
+                [|int|] i;
+                if (int.TryParse(v, out i))
+                {
+                }
 
-                        if (int.TryParse(v, out i))
-                        {
-                        }
-                    }
+                if (int.TryParse(v, out i))
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        if (int.TryParse(v, out int i))
-                        {
-                        }
+                void M()
+                {
+                if (int.TryParse(v, out int i))
+                {
+                }
 
-                        if (int.TryParse(v, out i))
-                        {
-                        }
-                    }
+                if (int.TryParse(v, out i))
+                {
+                }
+                }
                 }
                 """
             );
@@ -220,13 +220,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|int|] i;
-                        if (int.TryParse(v, out i))
-                        {
-                        }
-                    }
+                void M()
+                {
+                [|int|] i;
+                if (int.TryParse(v, out i))
+                {
+                }
+                }
                 }
                 """,
                 new TestParameters(
@@ -244,24 +244,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M(string v)
-                    {
-                        [|int|] i;
-                        if (int.TryParse(v, out i))
-                        {
-                        }
-                    }
+                void M(string v)
+                {
+                [|int|] i;
+                if (int.TryParse(v, out i))
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(string v)
-                    {
-                        if (int.TryParse(v, out var i))
-                        {
-                        }
-                    }
+                void M(string v)
+                {
+                if (int.TryParse(v, out var i))
+                {
+                }
+                }
                 }
                 """,
                 new TestParameters(options: new UseImplicitTypeTests().ImplicitTypeEverywhere())
@@ -275,24 +275,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M(string v)
-                    {
-                        [|int|] i;
-                        if (int.TryParse(v, out i))
-                        {
-                        }
-                    }
+                void M(string v)
+                {
+                [|int|] i;
+                if (int.TryParse(v, out i))
+                {
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(string v)
-                    {
-                        if (int.TryParse(v, out int i))
-                        {
-                        }
-                    }
+                void M(string v)
+                {
+                if (int.TryParse(v, out int i))
+                {
+                }
+                }
                 }
                 """,
                 new TestParameters(
@@ -308,28 +308,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|int|] i;
-                        if (int.TryParse(v, out i))
-                        {
-                        }
+                void M()
+                {
+                [|int|] i;
+                if (int.TryParse(v, out i))
+                {
+                }
 
-                        i = 0;
-                    }
+                i = 0;
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        if (int.TryParse(v, out int i))
-                        {
-                        }
+                void M()
+                {
+                if (int.TryParse(v, out int i))
+                {
+                }
 
-                        i = 0;
-                    }
+                i = 0;
+                }
                 }
                 """
             );
@@ -342,14 +342,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|int|] i;
-                        i = 0;
-                        if (int.TryParse(v, out i))
-                        {
-                        }
-                    }
+                void M()
+                {
+                [|int|] i;
+                i = 0;
+                if (int.TryParse(v, out i))
+                {
+                }
+                }
                 }
                 """
             );
@@ -362,18 +362,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|int|] i = 0;
-                        M1(i);
-                        if (int.TryParse(v, out i))
-                        {
-                        }
-                    }
+                void M()
+                {
+                [|int|] i = 0;
+                M1(i);
+                if (int.TryParse(v, out i))
+                {
+                }
+                }
 
-                    void M1(int i)
-                    {
-                    }
+                void M1(int i)
+                {
+                }
                 }
                 """
             );
@@ -386,17 +386,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|int|] i = M1();
-                        if (int.TryParse(v, out i))
-                        {
-                        }
-                    }
+                void M()
+                {
+                [|int|] i = M1();
+                if (int.TryParse(v, out i))
+                {
+                }
+                }
 
-                    int M1()
-                    {
-                    }
+                int M1()
+                {
+                }
                 }
                 """
             );
@@ -409,17 +409,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|int|] i = 0;
-                        {
-                            if (int.TryParse(v, out i))
-                            {
-                            }
+                void M()
+                {
+                [|int|] i = 0;
+                {
+                if (int.TryParse(v, out i))
+                {
+                }
 
-                            i = 1;
-                        }
-                    }
+                i = 1;
+                }
+                }
                 }
                 """
             );
@@ -432,17 +432,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|int|] i = 0;
-                        {
-                            if (int.TryParse(v, out i))
-                            {
-                            }
-                        }
+                void M()
+                {
+                [|int|] i = 0;
+                {
+                if (int.TryParse(v, out i))
+                {
+                }
+                }
 
-                        i = 1;
-                    }
+                i = 1;
+                }
                 }
                 """
             );
@@ -455,16 +455,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|int|] i = 0;
-                        {
-                            i = 1;
-                            if (int.TryParse(v, out i))
-                            {
-                            }
-                        }
-                    }
+                void M()
+                {
+                [|int|] i = 0;
+                {
+                i = 1;
+                if (int.TryParse(v, out i))
+                {
+                }
+                }
+                }
                 }
                 """
             );
@@ -477,13 +477,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|int|] i;
-                        if (int.TryParse(v, i))
-                        {
-                        }
-                    }
+                void M()
+                {
+                [|int|] i;
+                if (int.TryParse(v, i))
+                {
+                }
+                }
                 }
                 """
             );
@@ -496,14 +496,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    [|int|] i;
+                [|int|] i;
 
-                    void M()
-                    {
-                        if (int.TryParse(v, out this.i))
-                        {
-                        }
-                    }
+                void M()
+                {
+                if (int.TryParse(v, out this.i))
+                {
+                }
+                }
                 }
                 """
             );
@@ -516,14 +516,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    [|int|] i;
+                [|int|] i;
 
-                    void M()
-                    {
-                        if (int.TryParse(v, out i))
-                        {
-                        }
-                    }
+                void M()
+                {
+                if (int.TryParse(v, out i))
+                {
+                }
+                }
                 }
                 """
             );
@@ -536,15 +536,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M()
-                    {
-                        foreach ([|int|] i in e)
-                        {
-                            if (int.TryParse(v, out i))
-                            {
-                            }
-                        }
-                    }
+                void M()
+                {
+                foreach ([|int|] i in e)
+                {
+                if (int.TryParse(v, out i))
+                {
+                }
+                }
+                }
                 }
                 """
             );
@@ -557,16 +557,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|int|] i;
-                        while (true)
-                            if (int.TryParse(v, out i))
-                            {
-                            }
+                void M()
+                {
+                [|int|] i;
+                while (true)
+                if (int.TryParse(v, out i))
+                {
+                }
 
-                        i = 1;
-                    }
+                i = 1;
+                }
                 }
                 """
             );
@@ -579,28 +579,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|int|] i;
-                        while (true)
-                            if (int.TryParse(v, out i))
-                            {
-                                i = 1;
-                            }
-                    }
+                void M()
+                {
+                [|int|] i;
+                while (true)
+                if (int.TryParse(v, out i))
+                {
+                i = 1;
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        while (true)
-                            if (int.TryParse(v, out int i))
-                            {
-                                i = 1;
-                            }
-                    }
+                void M()
+                {
+                while (true)
+                if (int.TryParse(v, out int i))
+                {
+                i = 1;
+                }
+                }
                 }
                 """
             );
@@ -613,30 +613,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|int|] i;
-                        while (true)
-                        {
-                            if (int.TryParse(v, out i))
-                            {
-                            }
-                        }
-                    }
+                void M()
+                {
+                [|int|] i;
+                while (true)
+                {
+                if (int.TryParse(v, out i))
+                {
+                }
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        while (true)
-                        {
-                            if (int.TryParse(v, out int i))
-                            {
-                            }
-                        }
-                    }
+                void M()
+                {
+                while (true)
+                {
+                if (int.TryParse(v, out int i))
+                {
+                }
+                }
+                }
                 }
                 """
             );
@@ -649,40 +649,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|int|] i;
-                        if (M2(out i))
-                        {
-                        }
-                    }
+                void M()
+                {
+                [|int|] i;
+                if (M2(out i))
+                {
+                }
+                }
 
-                    void M2(out int i)
-                    {
-                    }
+                void M2(out int i)
+                {
+                }
 
-                    void M2(out string s)
-                    {
-                    }
+                void M2(out string s)
+                {
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        if (M2(out int i))
-                        {
-                        }
-                    }
+                void M()
+                {
+                if (M2(out int i))
+                {
+                }
+                }
 
-                    void M2(out int i)
-                    {
-                    }
+                void M2(out int i)
+                {
+                }
 
-                    void M2(out string s)
-                    {
-                    }
+                void M2(out string s)
+                {
+                }
                 }
                 """,
                 new TestParameters(options: new UseImplicitTypeTests().ImplicitTypeEverywhere())
@@ -696,40 +696,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|var|] i = 0;
-                        if (M2(out i))
-                        {
-                        }
-                    }
+                void M()
+                {
+                [|var|] i = 0;
+                if (M2(out i))
+                {
+                }
+                }
 
-                    void M2(out int i)
-                    {
-                    }
+                void M2(out int i)
+                {
+                }
 
-                    void M2(out string s)
-                    {
-                    }
+                void M2(out string s)
+                {
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        if (M2(out int i))
-                        {
-                        }
-                    }
+                void M()
+                {
+                if (M2(out int i))
+                {
+                }
+                }
 
-                    void M2(out int i)
-                    {
-                    }
+                void M2(out int i)
+                {
+                }
 
-                    void M2(out string s)
-                    {
-                    }
+                void M2(out string s)
+                {
+                }
                 }
                 """,
                 new TestParameters(options: new UseImplicitTypeTests().ImplicitTypeEverywhere())
@@ -743,32 +743,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|int|] i;
-                        if (M2(out i))
-                        {
-                        }
-                    }
+                void M()
+                {
+                [|int|] i;
+                if (M2(out i))
+                {
+                }
+                }
 
-                    void M2<T>(out T i)
-                    {
-                    }
+                void M2<T>(out T i)
+                {
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        if (M2(out int i))
-                        {
-                        }
-                    }
+                void M()
+                {
+                if (M2(out int i))
+                {
+                }
+                }
 
-                    void M2<T>(out T i)
-                    {
-                    }
+                void M2<T>(out T i)
+                {
+                }
                 }
                 """,
                 new TestParameters(options: new UseImplicitTypeTests().ImplicitTypeEverywhere())
@@ -782,30 +782,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M()
-                    {
-                        // prefix comment
-                        [|int|] i;
-                        {
-                            if (int.TryParse(v, out i))
-                            {
-                            }
-                        }
-                    }
+                void M()
+                {
+                // prefix comment
+                [|int|] i;
+                {
+                if (int.TryParse(v, out i))
+                {
+                }
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        // prefix comment
-                        {
-                            if (int.TryParse(v, out int i))
-                            {
-                            }
-                        }
-                    }
+                void M()
+                {
+                // prefix comment
+                {
+                if (int.TryParse(v, out int i))
+                {
+                }
+                }
+                }
                 }
                 """
             );
@@ -818,29 +818,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|int|] i; // suffix comment
-                        {
-                            if (int.TryParse(v, out i))
-                            {
-                            }
-                        }
-                    }
+                void M()
+                {
+                [|int|] i; // suffix comment
+                {
+                if (int.TryParse(v, out i))
+                {
+                }
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        // suffix comment
-                        {
-                            if (int.TryParse(v, out int i))
-                            {
-                            }
-                        }
-                    }
+                void M()
+                {
+                // suffix comment
+                {
+                if (int.TryParse(v, out int i))
+                {
+                }
+                }
+                }
                 }
                 """
             );
@@ -853,31 +853,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M()
-                    {
-                        // prefix comment
-                        [|int|] i; // suffix comment
-                        {
-                            if (int.TryParse(v, out i))
-                            {
-                            }
-                        }
-                    }
+                void M()
+                {
+                // prefix comment
+                [|int|] i; // suffix comment
+                {
+                if (int.TryParse(v, out i))
+                {
+                }
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        // prefix comment
-                        // suffix comment
-                        {
-                            if (int.TryParse(v, out int i))
-                            {
-                            }
-                        }
-                    }
+                void M()
+                {
+                // prefix comment
+                // suffix comment
+                {
+                if (int.TryParse(v, out int i))
+                {
+                }
+                }
+                }
                 }
                 """
             );
@@ -890,29 +890,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M()
-                    {
-                        int [|i|] /*suffix*/, j;
-                        {
-                            if (int.TryParse(v, out i))
-                            {
-                            }
-                        }
-                    }
+                void M()
+                {
+                int [|i|] /*suffix*/, j;
+                {
+                if (int.TryParse(v, out i))
+                {
+                }
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        int j;
-                        {
-                            if (int.TryParse(v, out int i /*suffix*/))
-                            {
-                            }
-                        }
-                    }
+                void M()
+                {
+                int j;
+                {
+                if (int.TryParse(v, out int i /*suffix*/))
+                {
+                }
+                }
+                }
                 }
                 """
             );
@@ -925,29 +925,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M()
-                    {
-                        int /*prefix*/ [|i|], j;
-                        {
-                            if (int.TryParse(v, out i))
-                            {
-                            }
-                        }
-                    }
+                void M()
+                {
+                int /*prefix*/ [|i|], j;
+                {
+                if (int.TryParse(v, out i))
+                {
+                }
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        int j;
-                        {
-                            if (int.TryParse(v, out int /*prefix*/ i))
-                            {
-                            }
-                        }
-                    }
+                void M()
+                {
+                int j;
+                {
+                if (int.TryParse(v, out int /*prefix*/ i))
+                {
+                }
+                }
+                }
                 }
                 """
             );
@@ -960,29 +960,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M()
-                    {
-                        int /*prefix*/ [|i|] /*suffix*/, j;
-                        {
-                            if (int.TryParse(v, out i))
-                            {
-                            }
-                        }
-                    }
+                void M()
+                {
+                int /*prefix*/ [|i|] /*suffix*/, j;
+                {
+                if (int.TryParse(v, out i))
+                {
+                }
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        int j;
-                        {
-                            if (int.TryParse(v, out int /*prefix*/ i /*suffix*/))
-                            {
-                            }
-                        }
-                    }
+                void M()
+                {
+                int j;
+                {
+                if (int.TryParse(v, out int /*prefix*/ i /*suffix*/))
+                {
+                }
+                }
+                }
                 }
                 """
             );
@@ -995,29 +995,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M()
-                    {
-                        int j, /*prefix*/ [|i|] /*suffix*/;
-                        {
-                            if (int.TryParse(v, out i))
-                            {
-                            }
-                        }
-                    }
+                void M()
+                {
+                int j, /*prefix*/ [|i|] /*suffix*/;
+                {
+                if (int.TryParse(v, out i))
+                {
+                }
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        int j;
-                        {
-                            if (int.TryParse(v, out int /*prefix*/ i /*suffix*/))
-                            {
-                            }
-                        }
-                    }
+                void M()
+                {
+                int j;
+                {
+                if (int.TryParse(v, out int /*prefix*/ i /*suffix*/))
+                {
+                }
+                }
+                }
                 }
                 """
             );
@@ -1030,31 +1030,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M()
-                    {
-                        // prefix
-                        int j, [|i|]; // suffix
-                        {
-                            if (int.TryParse(v, out i))
-                            {
-                            }
-                        }
-                    }
+                void M()
+                {
+                // prefix
+                int j, [|i|]; // suffix
+                {
+                if (int.TryParse(v, out i))
+                {
+                }
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        // prefix
-                        int j; // suffix
-                        {
-                            if (int.TryParse(v, out int i))
-                            {
-                            }
-                        }
-                    }
+                void M()
+                {
+                // prefix
+                int j; // suffix
+                {
+                if (int.TryParse(v, out int i))
+                {
+                }
+                }
+                }
                 }
                 """
             );
@@ -1067,32 +1067,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void M()
-                    {
-                        int /*int comment*/
-                            /*prefix*/ [|i|] /*suffix*/,
-                            j;
-                        {
-                            if (int.TryParse(v, out i))
-                            {
-                            }
-                        }
-                    }
+                void M()
+                {
+                int /*int comment*/
+                /*prefix*/ [|i|] /*suffix*/,
+                j;
+                {
+                if (int.TryParse(v, out i))
+                {
+                }
+                }
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        int /*int comment*/
-                            j;
-                        {
-                            if (int.TryParse(v, out int /*prefix*/ i /*suffix*/))
-                            {
-                            }
-                        }
-                    }
+                void M()
+                {
+                int /*int comment*/
+                j;
+                {
+                if (int.TryParse(v, out int /*prefix*/ i /*suffix*/))
+                {
+                }
+                }
+                }
                 }
                 """
             );
@@ -1107,16 +1107,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        Console.WriteLine("Goo");
+                static void Main(string[] args)
+                {
+                Console.WriteLine("Goo");
 
-                        int [|result|];
-                        if (int.TryParse("12", out result))
-                        {
+                int [|result|];
+                if (int.TryParse("12", out result))
+                {
 
-                        }
-                    }
+                }
+                }
                 }
                 """,
                 """
@@ -1124,15 +1124,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        Console.WriteLine("Goo");
+                static void Main(string[] args)
+                {
+                Console.WriteLine("Goo");
 
-                        if (int.TryParse("12", out int result))
-                        {
+                if (int.TryParse("12", out int result))
+                {
 
-                        }
-                    }
+                }
+                }
                 }
                 """
             );
@@ -1147,24 +1147,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        Console.WriteLine("Goo");
+                static void Main(string[] args)
+                {
+                Console.WriteLine("Goo");
 
 
 
 
 
-                        // Goo
+                // Goo
 
 
 
-                        int [|result|];
-                        if (int.TryParse("12", out result))
-                        {
+                int [|result|];
+                if (int.TryParse("12", out result))
+                {
 
-                        }
-                    }
+                }
+                }
                 }
                 """,
                 """
@@ -1172,23 +1172,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        Console.WriteLine("Goo");
+                static void Main(string[] args)
+                {
+                Console.WriteLine("Goo");
 
 
 
 
 
-                        // Goo
+                // Goo
 
 
 
-                        if (int.TryParse("12", out int result))
-                        {
+                if (int.TryParse("12", out int result))
+                {
 
-                        }
-                    }
+                }
+                }
                 }
                 """
             );
@@ -1203,15 +1203,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    void M()
-                    {
-                        string [|s|];  
-                        Bar(() => Baz(out s));
-                    }
+                void M()
+                {
+                string [|s|];
+                Bar(() => Baz(out s));
+                }
 
-                    void Baz(out string s) { }
+                void Baz(out string s) { }
 
-                    void Bar(Action a) { }
+                void Bar(Action a) { }
                 }
                 """,
                 """
@@ -1219,14 +1219,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    void M()
-                    {
-                        Bar(() => Baz(out string s));
-                    }
+                void M()
+                {
+                Bar(() => Baz(out string s));
+                }
 
-                    void Baz(out string s) { }
+                void Baz(out string s) { }
 
-                    void Bar(Action a) { }
+                void Bar(Action a) { }
                 }
                 """
             );
@@ -1241,16 +1241,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    void M()
-                    {
-                        string [|s|];  
-                        Bar(() => Baz(out s));
-                        Console.WriteLine(s);
-                    }
+                void M()
+                {
+                string [|s|];
+                Bar(() => Baz(out s));
+                Console.WriteLine(s);
+                }
 
-                    void Baz(out string s) { }
+                void Baz(out string s) { }
 
-                    void Bar(Action a) { }
+                void Bar(Action a) { }
                 }
                 """
             );
@@ -1265,19 +1265,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    void Goo(string x)
-                    {
-                        object [|s|] = null; 
-                        if (x != null || TryBaz(out s))
-                        {
-                            Console.WriteLine(s); 
-                        }
-                    }
+                void Goo(string x)
+                {
+                object [|s|] = null;
+                if (x != null || TryBaz(out s))
+                {
+                Console.WriteLine(s);
+                }
+                }
 
-                    private bool TryBaz(out object s)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private bool TryBaz(out object s)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """
             );
@@ -1292,19 +1292,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    void Goo(string x)
-                    {
-                        object [|s|] = null; 
-                        if (x != null && TryBaz(out s))
-                        {
-                            Console.WriteLine(s); 
-                        }
-                    }
+                void Goo(string x)
+                {
+                object [|s|] = null;
+                if (x != null && TryBaz(out s))
+                {
+                Console.WriteLine(s);
+                }
+                }
 
-                    private bool TryBaz(out object s)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private bool TryBaz(out object s)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """,
                 """
@@ -1312,18 +1312,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    void Goo(string x)
-                    {
-                        if (x != null && TryBaz(out object s))
-                        {
-                            Console.WriteLine(s);
-                        }
-                    }
+                void Goo(string x)
+                {
+                if (x != null && TryBaz(out object s))
+                {
+                Console.WriteLine(s);
+                }
+                }
 
-                    private bool TryBaz(out object s)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private bool TryBaz(out object s)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """
             );
@@ -1339,21 +1339,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        int [|result|];
-                        Method(() => GetValue(out result));
-                    }
+                static void Main(string[] args)
+                {
+                int [|result|];
+                Method(() => GetValue(out result));
+                }
 
-                    public static void GetValue(out int result)
-                    {
-                        result = 0;
-                    }
+                public static void GetValue(out int result)
+                {
+                result = 0;
+                }
 
-                    public static void Method(Expression<Action> expression)
-                    {
+                public static void Method(Expression<Action> expression)
+                {
 
-                    }
+                }
                 }
                 """
             );
@@ -1368,14 +1368,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    private int Bar()
-                    {
-                        IProjectRuleSnapshot [|unresolvedReferenceSnapshot|] = null;
-                        var itemType = GetUnresolvedReferenceItemType(originalItemSpec,
-                                                                      updatedUnresolvedSnapshots,
-                                                                      catalogs,
-                                                                      out unresolvedReferenceSnapshot);
-                    }
+                private int Bar()
+                {
+                IProjectRuleSnapshot [|unresolvedReferenceSnapshot|] = null;
+                var itemType = GetUnresolvedReferenceItemType(originalItemSpec,
+                updatedUnresolvedSnapshots,
+                catalogs,
+                out unresolvedReferenceSnapshot);
+                }
                 }
                 """,
                 """
@@ -1383,13 +1383,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    private int Bar()
-                    {
-                        var itemType = GetUnresolvedReferenceItemType(originalItemSpec,
-                                                                      updatedUnresolvedSnapshots,
-                                                                      catalogs,
-                                                                      out IProjectRuleSnapshot unresolvedReferenceSnapshot);
-                    }
+                private int Bar()
+                {
+                var itemType = GetUnresolvedReferenceItemType(originalItemSpec,
+                updatedUnresolvedSnapshots,
+                catalogs,
+                out IProjectRuleSnapshot unresolvedReferenceSnapshot);
+                }
                 }
                 """
             );
@@ -1404,21 +1404,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    static void Main(string[] args)
-                    {
-                        string [|token|];
-                        do
-                        {
-                        }
-                        while (!TryExtractTokenFromEmail(out token));
+                static void Main(string[] args)
+                {
+                string [|token|];
+                do
+                {
+                }
+                while (!TryExtractTokenFromEmail(out token));
 
-                        Console.WriteLine(token == "Test");
-                    }
+                Console.WriteLine(token == "Test");
+                }
 
-                    private static bool TryExtractTokenFromEmail(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private static bool TryExtractTokenFromEmail(out string token)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """
             );
@@ -1433,20 +1433,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    static void Main(string[] args)
-                    {
-                        string [|token|];
-                        while (!TryExtractTokenFromEmail(out token))
-                        {
-                        }
+                static void Main(string[] args)
+                {
+                string [|token|];
+                while (!TryExtractTokenFromEmail(out token))
+                {
+                }
 
-                        Console.WriteLine(token == "Test");
-                    }
+                Console.WriteLine(token == "Test");
+                }
 
-                    private static bool TryExtractTokenFromEmail(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private static bool TryExtractTokenFromEmail(out string token)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """
             );
@@ -1462,20 +1462,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    static void Main(string[] args)
-                    {
-                        string [|token|];
-                        foreach (var v in TryExtractTokenFromEmail(out token))
-                        {
-                        }
+                static void Main(string[] args)
+                {
+                string [|token|];
+                foreach (var v in TryExtractTokenFromEmail(out token))
+                {
+                }
 
-                        Console.WriteLine(token == "Test");
-                    }
+                Console.WriteLine(token == "Test");
+                }
 
-                    private static IEnumerable<bool> TryExtractTokenFromEmail(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private static IEnumerable<bool> TryExtractTokenFromEmail(out string token)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """
             );
@@ -1491,20 +1491,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    static void Main(string[] args)
-                    {
-                        string [|token|];
-                        for ( ; TryExtractTokenFromEmail(out token); )
-                        {
-                        }
+                static void Main(string[] args)
+                {
+                string [|token|];
+                for ( ; TryExtractTokenFromEmail(out token); )
+                {
+                }
 
-                        Console.WriteLine(token == "Test");
-                    }
+                Console.WriteLine(token == "Test");
+                }
 
-                    private static bool TryExtractTokenFromEmail(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private static bool TryExtractTokenFromEmail(out string token)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """
             );
@@ -1519,20 +1519,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    static void Main(string[] args)
-                    {
-                        string [|token|];
-                        using (GetDisposableAndValue(out token))
-                        {
-                        }
+                static void Main(string[] args)
+                {
+                string [|token|];
+                using (GetDisposableAndValue(out token))
+                {
+                }
 
-                        Console.WriteLine(token);
-                    }
+                Console.WriteLine(token);
+                }
 
-                    private static IDisposable GetDisposableAndValue(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private static IDisposable GetDisposableAndValue(out string token)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """
             );
@@ -1547,23 +1547,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    static void Main(string[] args)
-                    {
-                        string [|token|];
-                        try
-                        {
-                        }
-                        catch when (GetValue(out token))
-                        {
-                        }
+                static void Main(string[] args)
+                {
+                string [|token|];
+                try
+                {
+                }
+                catch when (GetValue(out token))
+                {
+                }
 
-                        Console.WriteLine(token);
-                    }
+                Console.WriteLine(token);
+                }
 
-                    private static bool GetValue(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private static bool GetValue(out string token)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """
             );
@@ -1578,17 +1578,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    static void Main(string[] args)
-                    {
-                        string [|token|] = null;
-                        bool condition = false && GetValue(out token);
-                        Console.WriteLine(token);
-                    }
+                static void Main(string[] args)
+                {
+                string [|token|] = null;
+                bool condition = false && GetValue(out token);
+                Console.WriteLine(token);
+                }
 
-                    private static bool GetValue(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private static bool GetValue(out string token)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """
             );
@@ -1603,17 +1603,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    static void Main(string[] args)
-                    {
-                        string [|token|];
-                        bool condition = false && GetValue(out token);
-                        Console.WriteLine(token);
-                    }
+                static void Main(string[] args)
+                {
+                string [|token|];
+                bool condition = false && GetValue(out token);
+                Console.WriteLine(token);
+                }
 
-                    private static bool GetValue(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private static bool GetValue(out string token)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """
             );
@@ -1628,20 +1628,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    static unsafe void Main(string[] args)
-                    {
-                        string [|token|];
-                        fixed (int* p = GetValue(out token))
-                        {
-                        }
+                static unsafe void Main(string[] args)
+                {
+                string [|token|];
+                fixed (int* p = GetValue(out token))
+                {
+                }
 
-                        Console.WriteLine(token);
-                    }
+                Console.WriteLine(token);
+                }
 
-                    private static int[] GetValue(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private static int[] GetValue(out string token)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """
             );
@@ -1656,19 +1656,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    static void Main(string[] args)
-                    {
-                        string [|token|];
-                        do
-                        {
-                        }
-                        while (!TryExtractTokenFromEmail(out token));
-                    }
+                static void Main(string[] args)
+                {
+                string [|token|];
+                do
+                {
+                }
+                while (!TryExtractTokenFromEmail(out token));
+                }
 
-                    private static bool TryExtractTokenFromEmail(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private static bool TryExtractTokenFromEmail(out string token)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """,
                 """
@@ -1676,18 +1676,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    static void Main(string[] args)
-                    {
-                        do
-                        {
-                        }
-                        while (!TryExtractTokenFromEmail(out string token));
-                    }
+                static void Main(string[] args)
+                {
+                do
+                {
+                }
+                while (!TryExtractTokenFromEmail(out string token));
+                }
 
-                    private static bool TryExtractTokenFromEmail(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private static bool TryExtractTokenFromEmail(out string token)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """
             );
@@ -1702,18 +1702,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    static void Main(string[] args)
-                    {
-                        string [|token|];
-                        while (!TryExtractTokenFromEmail(out token))
-                        {
-                        }
-                    }
+                static void Main(string[] args)
+                {
+                string [|token|];
+                while (!TryExtractTokenFromEmail(out token))
+                {
+                }
+                }
 
-                    private static bool TryExtractTokenFromEmail(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private static bool TryExtractTokenFromEmail(out string token)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """,
                 """
@@ -1721,17 +1721,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    static void Main(string[] args)
-                    {
-                        while (!TryExtractTokenFromEmail(out string token))
-                        {
-                        }
-                    }
+                static void Main(string[] args)
+                {
+                while (!TryExtractTokenFromEmail(out string token))
+                {
+                }
+                }
 
-                    private static bool TryExtractTokenFromEmail(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private static bool TryExtractTokenFromEmail(out string token)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """
             );
@@ -1747,18 +1747,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    static void Main(string[] args)
-                    {
-                        string [|token|];
-                        foreach (var v in TryExtractTokenFromEmail(out token))
-                        {
-                        }
-                    }
+                static void Main(string[] args)
+                {
+                string [|token|];
+                foreach (var v in TryExtractTokenFromEmail(out token))
+                {
+                }
+                }
 
-                    private static IEnumerable<bool> TryExtractTokenFromEmail(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private static IEnumerable<bool> TryExtractTokenFromEmail(out string token)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """,
                 """
@@ -1767,17 +1767,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    static void Main(string[] args)
-                    {
-                        foreach (var v in TryExtractTokenFromEmail(out string token))
-                        {
-                        }
-                    }
+                static void Main(string[] args)
+                {
+                foreach (var v in TryExtractTokenFromEmail(out string token))
+                {
+                }
+                }
 
-                    private static IEnumerable<bool> TryExtractTokenFromEmail(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private static IEnumerable<bool> TryExtractTokenFromEmail(out string token)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """
             );
@@ -1793,18 +1793,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    static void Main(string[] args)
-                    {
-                        string [|token|];
-                        for ( ; TryExtractTokenFromEmail(out token); )
-                        {
-                        }
-                    }
+                static void Main(string[] args)
+                {
+                string [|token|];
+                for ( ; TryExtractTokenFromEmail(out token); )
+                {
+                }
+                }
 
-                    private static bool TryExtractTokenFromEmail(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private static bool TryExtractTokenFromEmail(out string token)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """,
                 """
@@ -1813,17 +1813,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    static void Main(string[] args)
-                    {
-                        for (; TryExtractTokenFromEmail(out string token);)
-                        {
-                        }
-                    }
+                static void Main(string[] args)
+                {
+                for (; TryExtractTokenFromEmail(out string token);)
+                {
+                }
+                }
 
-                    private static bool TryExtractTokenFromEmail(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private static bool TryExtractTokenFromEmail(out string token)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """
             );
@@ -1838,18 +1838,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    static void Main(string[] args)
-                    {
-                        string [|token|];
-                        using (GetDisposableAndValue(out token))
-                        {
-                        }
-                    }
+                static void Main(string[] args)
+                {
+                string [|token|];
+                using (GetDisposableAndValue(out token))
+                {
+                }
+                }
 
-                    private static IDisposable GetDisposableAndValue(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private static IDisposable GetDisposableAndValue(out string token)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """,
                 """
@@ -1857,17 +1857,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    static void Main(string[] args)
-                    {
-                        using (GetDisposableAndValue(out string token))
-                        {
-                        }
-                    }
+                static void Main(string[] args)
+                {
+                using (GetDisposableAndValue(out string token))
+                {
+                }
+                }
 
-                    private static IDisposable GetDisposableAndValue(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private static IDisposable GetDisposableAndValue(out string token)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """
             );
@@ -1882,21 +1882,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    static void Main(string[] args)
-                    {
-                        string [|token|];
-                        try
-                        {
-                        }
-                        catch when (GetValue(out token))
-                        {
-                        }
-                    }
+                static void Main(string[] args)
+                {
+                string [|token|];
+                try
+                {
+                }
+                catch when (GetValue(out token))
+                {
+                }
+                }
 
-                    private static bool GetValue(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private static bool GetValue(out string token)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """,
                 """
@@ -1904,20 +1904,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    static void Main(string[] args)
-                    {
-                        try
-                        {
-                        }
-                        catch when (GetValue(out string token))
-                        {
-                        }
-                    }
+                static void Main(string[] args)
+                {
+                try
+                {
+                }
+                catch when (GetValue(out string token))
+                {
+                }
+                }
 
-                    private static bool GetValue(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private static bool GetValue(out string token)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """
             );
@@ -1932,16 +1932,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    static void Main(string[] args)
-                    {
-                        string [|token|] = null;
-                        bool condition = false && GetValue(out token);
-                    }
+                static void Main(string[] args)
+                {
+                string [|token|] = null;
+                bool condition = false && GetValue(out token);
+                }
 
-                    private static bool GetValue(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private static bool GetValue(out string token)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """,
                 """
@@ -1949,15 +1949,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    static void Main(string[] args)
-                    {
-                        bool condition = false && GetValue(out string token);
-                    }
+                static void Main(string[] args)
+                {
+                bool condition = false && GetValue(out string token);
+                }
 
-                    private static bool GetValue(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private static bool GetValue(out string token)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """
             );
@@ -1972,16 +1972,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    static void Main(string[] args)
-                    {
-                        string [|token|];
-                        bool condition = false && GetValue(out token);
-                    }
+                static void Main(string[] args)
+                {
+                string [|token|];
+                bool condition = false && GetValue(out token);
+                }
 
-                    private static bool GetValue(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private static bool GetValue(out string token)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """,
                 """
@@ -1989,15 +1989,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    static void Main(string[] args)
-                    {
-                        bool condition = false && GetValue(out string token);
-                    }
+                static void Main(string[] args)
+                {
+                bool condition = false && GetValue(out string token);
+                }
 
-                    private static bool GetValue(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private static bool GetValue(out string token)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """
             );
@@ -2012,18 +2012,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    static void Main(string[] args)
-                    {
-                        string [|token|];
-                        fixed (int* p = GetValue(out token))
-                        {
-                        }
-                    }
+                static void Main(string[] args)
+                {
+                string [|token|];
+                fixed (int* p = GetValue(out token))
+                {
+                }
+                }
 
-                    private static int[] GetValue(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private static int[] GetValue(out string token)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """,
                 """
@@ -2031,17 +2031,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    static void Main(string[] args)
-                    {
-                        fixed (int* p = GetValue(out string token))
-                        {
-                        }
-                    }
+                static void Main(string[] args)
+                {
+                fixed (int* p = GetValue(out string token))
+                {
+                }
+                }
 
-                    private static int[] GetValue(out string token)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private static int[] GetValue(out string token)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """
             );
@@ -2057,20 +2057,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class Demo
                 {
-                    static void Main()
-                    {
-                        F();
-                        void F()
-                        {
-                            Action f = () =>
-                            {
-                                Dictionary<int, int> dict = null;
-                                int [|x|] = 0;
-                                dict?.TryGetValue(0, out x);
-                                Console.WriteLine(x);
-                            };
-                        }
-                    }
+                static void Main()
+                {
+                F();
+                void F()
+                {
+                Action f = () =>
+                {
+                Dictionary<int, int> dict = null;
+                int [|x|] = 0;
+                dict?.TryGetValue(0, out x);
+                Console.WriteLine(x);
+                };
+                }
+                }
                 }
                 """
             );
@@ -2086,20 +2086,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class Demo
                 {
-                    static void Main()
-                    {
-                        F();
-                        void F()
-                        {
-                            Action f = () =>
-                            {
-                                Dictionary<int, int> dict = null;
-                                int [|x|] = 0;
-                                dict.TryGetValue(0, out x);
-                                Console.WriteLine(x);
-                            };
-                        }
-                    }
+                static void Main()
+                {
+                F();
+                void F()
+                {
+                Action f = () =>
+                {
+                Dictionary<int, int> dict = null;
+                int [|x|] = 0;
+                dict.TryGetValue(0, out x);
+                Console.WriteLine(x);
+                };
+                }
+                }
                 }
                 """,
                 """
@@ -2108,19 +2108,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class Demo
                 {
-                    static void Main()
-                    {
-                        F();
-                        void F()
-                        {
-                            Action f = () =>
-                            {
-                                Dictionary<int, int> dict = null;
-                                dict.TryGetValue(0, out int x);
-                                Console.WriteLine(x);
-                            };
-                        }
-                    }
+                static void Main()
+                {
+                F();
+                void F()
+                {
+                Action f = () =>
+                {
+                Dictionary<int, int> dict = null;
+                dict.TryGetValue(0, out int x);
+                Console.WriteLine(x);
+                };
+                }
+                }
                 }
                 """
             );
@@ -2133,21 +2133,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void Goo()
-                    {
-                        string a; string [|b|];
-                        Method(out a, out b);
-                    }
+                void Goo()
+                {
+                string a; string [|b|];
+                Method(out a, out b);
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void Goo()
-                    {
-                        string a; 
-                        Method(out a, out string b);
-                    }
+                void Goo()
+                {
+                string a;
+                Method(out a, out string b);
+                }
                 }
                 """
             );
@@ -2160,21 +2160,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void Goo()
-                    {
-                        string a; /*leading*/ string [|b|]; // trailing
-                        Method(out a, out b);
-                    }
+                void Goo()
+                {
+                string a; /*leading*/ string [|b|]; // trailing
+                Method(out a, out b);
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void Goo()
-                    {
-                        string a; /*leading*/  // trailing
-                        Method(out a, out string b);
-                    }
+                void Goo()
+                {
+                string a; /*leading*/  // trailing
+                Method(out a, out string b);
+                }
                 }
                 """
             );
@@ -2187,23 +2187,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
                 """
                 class C
                 {
-                    void Goo()
-                    {
-                        string a;
-                        /*leading*/ string [|b|]; // trailing
-                        Method(out a, out b);
-                    }
+                void Goo()
+                {
+                string a;
+                /*leading*/ string [|b|]; // trailing
+                Method(out a, out b);
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void Goo()
-                    {
-                        string a;
-                        /*leading*/ // trailing
-                        Method(out a, out string b);
-                    }
+                void Goo()
+                {
+                string a;
+                /*leading*/ // trailing
+                Method(out a, out string b);
+                }
                 }
                 """
             );
@@ -2218,14 +2218,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    void M()
-                    {
-                        [|int|] _;
-                        if (N(out _)
-                        {
-                            Console.WriteLine(_);
-                        }
-                    }
+                void M()
+                {
+                [|int|] _;
+                if (N(out _)
+                {
+                Console.WriteLine(_);
+                }
+                }
                 }
                 """
             );
@@ -2240,12 +2240,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    static void M(bool condition)
-                    {
-                        [|var|] x = 1;
-                        var result = condition && int.TryParse("2", out x);
-                        Console.WriteLine(x);
-                    }
+                static void M(bool condition)
+                {
+                [|var|] x = 1;
+                var result = condition && int.TryParse("2", out x);
+                Console.WriteLine(x);
+                }
                 }
                 """
             );
@@ -2260,12 +2260,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    static void M(bool condition)
-                    {
-                        [|int|] x = 1;
-                        var result = condition && int.TryParse("2", out x);
-                        Console.WriteLine(x);
-                    }
+                static void M(bool condition)
+                {
+                [|int|] x = 1;
+                var result = condition && int.TryParse("2", out x);
+                Console.WriteLine(x);
+                }
                 }
                 """
             );
@@ -2280,23 +2280,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class Program
                 {
-                  static void Main(string[] args)
-                  {
-                    Method<string>();
-                  }
+                static void Main(string[] args)
+                {
+                Method<string>();
+                }
 
-                  public static void Method<T>()
-                  { 
-                    [|T t|];
-                    void Local<T>()
-                    {
-                      Out(out t);
-                      Console.WriteLine(t);
-                    }
-                    Local<int>();
-                  }
+                public static void Method<T>()
+                {
+                [|T t|];
+                void Local<T>()
+                {
+                Out(out t);
+                Console.WriteLine(t);
+                }
+                Local<int>();
+                }
 
-                  public static void Out<T>(out T t) => t = default;
+                public static void Out<T>(out T t) => t = default;
                 }
                 """
             );
@@ -2311,26 +2311,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class Program
                 {
-                  static void Main(string[] args)
-                  {
-                    Method<string>();
-                  }
+                static void Main(string[] args)
+                {
+                Method<string>();
+                }
 
-                  public static void Method<T>()
-                  { 
-                    void Local<T>()
-                    {
-                        [|T t|];
-                        void InnerLocal<T>()
-                        {
-                          Out(out t);
-                          Console.WriteLine(t);
-                        }
-                    }
-                    Local<int>();
-                  }
+                public static void Method<T>()
+                {
+                void Local<T>()
+                {
+                [|T t|];
+                void InnerLocal<T>()
+                {
+                Out(out t);
+                Console.WriteLine(t);
+                }
+                }
+                Local<int>();
+                }
 
-                  public static void Out<T>(out T t) => t = default;
+                public static void Out<T>(out T t) => t = default;
                 }
                 """
             );
@@ -2345,25 +2345,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        Method<string>();
-                    }
+                static void Main(string[] args)
+                {
+                Method<string>();
+                }
 
-                    public static void Method<T>()
-                    { 
-                        [|T t|];
-                        void Local<T>()
-                        {
-                            { // <-- note this set of added braces
-                                Out(out t);
-                                Console.WriteLine(t);
-                            }
-                        }
-                        Local<int>();
-                    }
+                public static void Method<T>()
+                {
+                [|T t|];
+                void Local<T>()
+                {
+                { // <-- note this set of added braces
+                Out(out t);
+                Console.WriteLine(t);
+                }
+                }
+                Local<int>();
+                }
 
-                    public static void Out<T>(out T t) => t = default;
+                public static void Out<T>(out T t) => t = default;
                 }
                 """
             );
@@ -2378,27 +2378,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        Method<string>();
-                    }
+                static void Main(string[] args)
+                {
+                Method<string>();
+                }
 
-                    public static void Method<T>()
-                    {
-                        { // <-- note this set of added braces
-                            [|T t|];
-                            void Local<T>()
-                            {
-                                { // <-- and my axe
-                                    Out(out t);
-                                    Console.WriteLine(t);
-                                }
-                            }
-                            Local<int>();
-                        }
-                    }
+                public static void Method<T>()
+                {
+                { // <-- note this set of added braces
+                [|T t|];
+                void Local<T>()
+                {
+                { // <-- and my axe
+                Out(out t);
+                Console.WriteLine(t);
+                }
+                }
+                Local<int>();
+                }
+                }
 
-                    public static void Out<T>(out T t) => t = default;
+                public static void Out<T>(out T t) => t = default;
                 }
                 """
             );
@@ -2413,16 +2413,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    static bool M(out bool i) => throw null;
+                static bool M(out bool i) => throw null;
 
-                    static void M(bool condition)
-                    {
-                        [|bool|] x = false;
-                        if (condition || M(out x))
-                        {
-                            Console.WriteLine(x);
-                        }
-                    }
+                static void M(bool condition)
+                {
+                [|bool|] x = false;
+                if (condition || M(out x))
+                {
+                Console.WriteLine(x);
+                }
+                }
                 }
                 """
             );
@@ -2437,17 +2437,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
 
                 class C
                 {
-                    static bool M(out bool i) => throw null;
-                    static bool Use(bool i) => throw null;
+                static bool M(out bool i) => throw null;
+                static bool Use(bool i) => throw null;
 
-                    static void M(bool condition)
-                    {
-                        [|bool|] x = false;
-                        if (condition || M(out x))
-                        {
-                            x = Use(x);
-                        }
-                    }
+                static void M(bool condition)
+                {
+                [|bool|] x = false;
+                if (condition || M(out x))
+                {
+                x = Use(x);
+                }
+                }
                 }
                 """
             );
@@ -2504,23 +2504,23 @@ class C
                 #nullable enable
                 class C
                 {
-                    void M(out C c2)
-                    {
-                        [|C|] c;
-                        M(out c);
-                        c2 = c;
-                    }
+                void M(out C c2)
+                {
+                [|C|] c;
+                M(out c);
+                c2 = c;
+                }
                 }
                 """,
                 """
                 #nullable enable
                 class C
                 {
-                    void M(out C c2)
-                    {
-                        M(out C c);
-                        c2 = c;
-                    }
+                void M(out C c2)
+                {
+                M(out C c);
+                c2 = c;
+                }
                 }
                 """
             );
@@ -2547,19 +2547,19 @@ class C
                 """
                 class C
                 {
-                    private List<Func<string, bool>> _funcs2 = new List<Func<string, bool>>()
-                    {
-                        s => { int [|i|] = 0; return int.TryParse(s, out i); }
-                    };
+                private List<Func<string, bool>> _funcs2 = new List<Func<string, bool>>()
+                {
+                s => { int [|i|] = 0; return int.TryParse(s, out i); }
+                };
                 }
                 """,
                 """
                 class C
                 {
-                    private List<Func<string, bool>> _funcs2 = new List<Func<string, bool>>()
-                    {
-                        s => { return int.TryParse(s, out int i); }
-                    };
+                private List<Func<string, bool>> _funcs2 = new List<Func<string, bool>>()
+                {
+                s => { return int.TryParse(s, out int i); }
+                };
                 }
                 """
             );
@@ -2572,40 +2572,40 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        #region test
+                void M()
+                {
+                #region test
 
-                        int i = 0;
+                int i = 0;
 
-                        #endregion
+                #endregion
 
-                        int [|hello|];
-                        TestMethod(out hello);
-                    }
+                int [|hello|];
+                TestMethod(out hello);
+                }
 
-                    private void TestMethod(out int hello)
-                    {
-                    }
+                private void TestMethod(out int hello)
+                {
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        #region test
+                void M()
+                {
+                #region test
 
-                        int i = 0;
+                int i = 0;
 
-                        #endregion
+                #endregion
 
-                        TestMethod(out int hello);
-                    }
+                TestMethod(out int hello);
+                }
 
-                    private void TestMethod(out int hello)
-                    {
-                    }
+                private void TestMethod(out int hello)
+                {
+                }
                 }
                 """
             );

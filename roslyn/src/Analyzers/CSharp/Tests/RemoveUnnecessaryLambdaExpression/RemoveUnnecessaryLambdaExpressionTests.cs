@@ -54,13 +54,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(s => Quux(s));
-                    }
+                void Goo()
+                {
+                Bar(s => Quux(s));
+                }
 
-                    void Bar(Func<int, string> f) { }
-                    string Quux(int i) => default;
+                void Bar(Func<int, string> f) { }
+                string Quux(int i) => default;
                 }
                 """,
                 LanguageVersion.CSharp10
@@ -76,13 +76,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar([|s => |]Quux(s));
-                    }
+                void Goo()
+                {
+                Bar([|s => |]Quux(s));
+                }
 
-                    void Bar(Func<int, string> f) { }
-                    string Quux(int i) => default;
+                void Bar(Func<int, string> f) { }
+                string Quux(int i) => default;
                 }
                 """,
                 """
@@ -90,13 +90,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(Quux);
-                    }
+                void Goo()
+                {
+                Bar(Quux);
+                }
 
-                    void Bar(Func<int, string> f) { }
-                    string Quux(int i) => default;
+                void Bar(Func<int, string> f) { }
+                string Quux(int i) => default;
                 }
                 """
             );
@@ -106,19 +106,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
         public async Task TestWithOptionOff()
         {
             var code = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void Goo()
-                    {
-                        Bar(s => Quux(s));
-                    }
+            class C
+            {
+            void Goo()
+            {
+            Bar(s => Quux(s));
+            }
 
-                    void Bar(Func<int, string> f) { }
-                    string Quux(int i) => default;
-                }
-                """;
+            void Bar(Func<int, string> f) { }
+            string Quux(int i) => default;
+            }
+            """;
             await new VerifyCS.Test
             {
                 TestCode = code,
@@ -143,13 +143,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(static s => Quux(s));
-                    }
+                void Goo()
+                {
+                Bar(static s => Quux(s));
+                }
 
-                    void Bar(Func<int, string> f) { }
-                    static string Quux(int i) => default;
+                void Bar(Func<int, string> f) { }
+                static string Quux(int i) => default;
                 }
                 """
             );
@@ -164,13 +164,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(s => Quux(s));
-                    }
+                void Goo()
+                {
+                Bar(s => Quux(s));
+                }
 
-                    void Bar(Func<int, string> f) { }
-                    static string Quux(int i, int j = 0) => default;
+                void Bar(Func<int, string> f) { }
+                static string Quux(int i, int j = 0) => default;
                 }
                 """
             );
@@ -185,13 +185,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(s => Quux(s));
-                    }
+                void Goo()
+                {
+                Bar(s => Quux(s));
+                }
 
-                    void Bar(Func<int, string> f) { }
-                    static string Quux(int i, params int[] j) => default;
+                void Bar(Func<int, string> f) { }
+                static string Quux(int i, params int[] j) => default;
                 }
                 """
             );
@@ -206,13 +206,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(s => Quux(s));
-                    }
+                void Goo()
+                {
+                Bar(s => Quux(s));
+                }
 
-                    void Bar(Func<object, string> f) { }
-                    static string Quux(params object[] j) => default;
+                void Bar(Func<object, string> f) { }
+                static string Quux(params object[] j) => default;
                 }
                 """
             );
@@ -227,13 +227,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar([|s => |]Quux(s));
-                    }
+                void Goo()
+                {
+                Bar([|s => |]Quux(s));
+                }
 
-                    void Bar(Func<object[], string> f) { }
-                    string Quux(params object[] o) => default;
+                void Bar(Func<object[], string> f) { }
+                string Quux(params object[] o) => default;
                 }
                 """,
                 """
@@ -241,13 +241,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(Quux);
-                    }
+                void Goo()
+                {
+                Bar(Quux);
+                }
 
-                    void Bar(Func<object[], string> f) { }
-                    string Quux(params object[] o) => default;
+                void Bar(Func<object[], string> f) { }
+                string Quux(params object[] o) => default;
                 }
                 """
             );
@@ -262,13 +262,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(s => Quux(ref s));
-                    }
+                void Goo()
+                {
+                Bar(s => Quux(ref s));
+                }
 
-                    void Bar(Func<int, string> f) { }
-                    static string Quux(ref int i) => default;
+                void Bar(Func<int, string> f) { }
+                static string Quux(ref int i) => default;
                 }
                 """
             );
@@ -285,13 +285,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar((ref int s) => Quux(s));
-                    }
+                void Goo()
+                {
+                Bar((ref int s) => Quux(s));
+                }
 
-                    void Bar(X x) { }
-                    static string Quux(int i) => default;
+                void Bar(X x) { }
+                static string Quux(int i) => default;
                 }
                 """
             );
@@ -308,13 +308,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar([|(ref int s) => |]Quux(ref s));
-                    }
+                void Goo()
+                {
+                Bar([|(ref int s) => |]Quux(ref s));
+                }
 
-                    void Bar(X x) { }
-                    static string Quux(ref int i) => default;
+                void Bar(X x) { }
+                static string Quux(ref int i) => default;
                 }
                 """,
                 """
@@ -324,13 +324,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(Quux);
-                    }
+                void Goo()
+                {
+                Bar(Quux);
+                }
 
-                    void Bar(X x) { }
-                    static string Quux(ref int i) => default;
+                void Bar(X x) { }
+                static string Quux(ref int i) => default;
                 }
                 """
             );
@@ -345,13 +345,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        object o = (int s) => Quux(s);
-                    }
+                void Goo()
+                {
+                object o = (int s) => Quux(s);
+                }
 
-                    void Bar(Func<int, string> f) { }
-                    static string Quux(int i) => default;
+                void Bar(Func<int, string> f) { }
+                static string Quux(int i) => default;
                 }
                 """
             );
@@ -366,13 +366,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar([|(int s) => |]Quux(s));
-                    }
+                void Goo()
+                {
+                Bar([|(int s) => |]Quux(s));
+                }
 
-                    void Bar(Func<int, string> f) { }
-                    string Quux(int i) => default;
+                void Bar(Func<int, string> f) { }
+                string Quux(int i) => default;
                 }
                 """,
                 """
@@ -380,13 +380,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(Quux);
-                    }
+                void Goo()
+                {
+                Bar(Quux);
+                }
 
-                    void Bar(Func<int, string> f) { }
-                    string Quux(int i) => default;
+                void Bar(Func<int, string> f) { }
+                string Quux(int i) => default;
                 }
                 """
             );
@@ -401,13 +401,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar([|delegate (int s) { return |]Quux(s); });
-                    }
+                void Goo()
+                {
+                Bar([|delegate (int s) { return |]Quux(s); });
+                }
 
-                    void Bar(Func<int, string> f) { }
-                    string Quux(int i) => default;
+                void Bar(Func<int, string> f) { }
+                string Quux(int i) => default;
                 }
                 """,
                 """
@@ -415,13 +415,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(Quux);
-                    }
+                void Goo()
+                {
+                Bar(Quux);
+                }
 
-                    void Bar(Func<int, string> f) { }
-                    string Quux(int i) => default;
+                void Bar(Func<int, string> f) { }
+                string Quux(int i) => default;
                 }
                 """
             );
@@ -436,13 +436,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar([|delegate { return |]Quux(); });
-                    }
+                void Goo()
+                {
+                Bar([|delegate { return |]Quux(); });
+                }
 
-                    void Bar(Func<string> f) { }
-                    string Quux() => default;
+                void Bar(Func<string> f) { }
+                string Quux() => default;
                 }
                 """,
                 """
@@ -450,13 +450,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(Quux);
-                    }
+                void Goo()
+                {
+                Bar(Quux);
+                }
 
-                    void Bar(Func<string> f) { }
-                    string Quux() => default;
+                void Bar(Func<string> f) { }
+                string Quux() => default;
                 }
                 """
             );
@@ -471,13 +471,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar([|s => |]Quux(s));
-                    }
+                void Goo()
+                {
+                Bar([|s => |]Quux(s));
+                }
 
-                    void Bar(Func<object, string> f) { }
-                    string Quux(object o) => default;
+                void Bar(Func<object, string> f) { }
+                string Quux(object o) => default;
                 }
                 """,
                 """
@@ -485,13 +485,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(Quux);
-                    }
+                void Goo()
+                {
+                Bar(Quux);
+                }
 
-                    void Bar(Func<object, string> f) { }
-                    string Quux(object o) => default;
+                void Bar(Func<object, string> f) { }
+                string Quux(object o) => default;
                 }
                 """
             );
@@ -506,13 +506,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar([|s => |]Quux(s));
-                    }
+                void Goo()
+                {
+                Bar([|s => |]Quux(s));
+                }
 
-                    void Bar(Func<string, object> f) { }
-                    string Quux(object o) => default;
+                void Bar(Func<string, object> f) { }
+                string Quux(object o) => default;
                 }
                 """,
                 """
@@ -520,13 +520,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(Quux);
-                    }
+                void Goo()
+                {
+                Bar(Quux);
+                }
 
-                    void Bar(Func<string, object> f) { }
-                    string Quux(object o) => default;
+                void Bar(Func<string, object> f) { }
+                string Quux(object o) => default;
                 }
                 """
             );
@@ -541,13 +541,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(s => {|CS1662:{|CS0266:Quux(s)|}|});
-                    }
+                void Goo()
+                {
+                Bar(s => {|CS1662:{|CS0266:Quux(s)|}|});
+                }
 
-                    void Bar(Func<string, string> f) { }
-                    object Quux(object o) => default;
+                void Bar(Func<string, string> f) { }
+                object Quux(object o) => default;
                 }
                 """
             );
@@ -562,13 +562,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(s => Quux({|CS1503:s|}));
-                    }
+                void Goo()
+                {
+                Bar(s => Quux({|CS1503:s|}));
+                }
 
-                    void Bar(Func<object, object> f) { }
-                    string Quux(string o) => default;
+                void Bar(Func<object, object> f) { }
+                string Quux(string o) => default;
                 }
                 """
             );
@@ -583,13 +583,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(s => Quux({|CS1503:s|}));
-                    }
+                void Goo()
+                {
+                Bar(s => Quux({|CS1503:s|}));
+                }
 
-                    void Bar(Func<object, string> f) { }
-                    object Quux(string o) => default;
+                void Bar(Func<object, string> f) { }
+                object Quux(string o) => default;
                 }
                 """
             );
@@ -604,13 +604,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar([|(s1, s2) => |]Quux(s1, s2));
-                    }
+                void Goo()
+                {
+                Bar([|(s1, s2) => |]Quux(s1, s2));
+                }
 
-                    void Bar(Func<int, bool, string> f) { }
-                    string Quux(int i, bool b) => default;
+                void Bar(Func<int, bool, string> f) { }
+                string Quux(int i, bool b) => default;
                 }
                 """,
                 """
@@ -618,13 +618,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(Quux);
-                    }
+                void Goo()
+                {
+                Bar(Quux);
+                }
 
-                    void Bar(Func<int, bool, string> f) { }
-                    string Quux(int i, bool b) => default;
+                void Bar(Func<int, bool, string> f) { }
+                string Quux(int i, bool b) => default;
                 }
                 """
             );
@@ -639,13 +639,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar((s1, s2) => Quux(s2, s1));
-                    }
+                void Goo()
+                {
+                Bar((s1, s2) => Quux(s2, s1));
+                }
 
-                    void Bar(Func<int, int, string> f) { }
-                    string Quux(int i, int b) => default;
+                void Bar(Func<int, int, string> f) { }
+                string Quux(int i, int b) => default;
                 }
                 """
             );
@@ -660,13 +660,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar((s1, s2) => Quux(s1, s1));
-                    }
+                void Goo()
+                {
+                Bar((s1, s2) => Quux(s1, s1));
+                }
 
-                    void Bar(Func<int, int, string> f) { }
-                    string Quux(int i, int b) => default;
+                void Bar(Func<int, int, string> f) { }
+                string Quux(int i, int b) => default;
                 }
                 """
             );
@@ -681,13 +681,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar((s1, s2) => Quux(s1, true));
-                    }
+                void Goo()
+                {
+                Bar((s1, s2) => Quux(s1, true));
+                }
 
-                    void Bar(Func<int, bool, string> f) { }
-                    string Quux(int i, bool b) => default;
+                void Bar(Func<int, bool, string> f) { }
+                string Quux(int i, bool b) => default;
                 }
                 """
             );
@@ -702,15 +702,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar([|(s1, s2) => {
-                            return |]Quux(s1, s2);
-                        });
-                    }
+                void Goo()
+                {
+                Bar([|(s1, s2) => {
+                return |]Quux(s1, s2);
+                });
+                }
 
-                    void Bar(Func<int, bool, string> f) { }
-                    string Quux(int i, bool b) => default;
+                void Bar(Func<int, bool, string> f) { }
+                string Quux(int i, bool b) => default;
                 }
                 """,
                 """
@@ -718,13 +718,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(Quux);
-                    }
+                void Goo()
+                {
+                Bar(Quux);
+                }
 
-                    void Bar(Func<int, bool, string> f) { }
-                    string Quux(int i, bool b) => default;
+                void Bar(Func<int, bool, string> f) { }
+                string Quux(int i, bool b) => default;
                 }
                 """
             );
@@ -739,15 +739,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar([|(s1, s2) => {
-                            return |]this.Quux(s1, s2);
-                        });
-                    }
+                void Goo()
+                {
+                Bar([|(s1, s2) => {
+                return |]this.Quux(s1, s2);
+                });
+                }
 
-                    void Bar(Func<int, bool, string> f) { }
-                    string Quux(int i, bool b) => default;
+                void Bar(Func<int, bool, string> f) { }
+                string Quux(int i, bool b) => default;
                 }
                 """,
                 """
@@ -755,13 +755,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(this.Quux);
-                    }
+                void Goo()
+                {
+                Bar(this.Quux);
+                }
 
-                    void Bar(Func<int, bool, string> f) { }
-                    string Quux(int i, bool b) => default;
+                void Bar(Func<int, bool, string> f) { }
+                string Quux(int i, bool b) => default;
                 }
                 """
             );
@@ -776,22 +776,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class A
                 {
-                    static void Goo<T>(T x)
-                    {
-                    }
+                static void Goo<T>(T x)
+                {
+                }
 
-                    static void Bar(Action<int> x)
-                    {
-                    }
+                static void Bar(Action<int> x)
+                {
+                }
 
-                    static void Bar(Action<string> x)
-                    {
-                    }
+                static void Bar(Action<string> x)
+                {
+                }
 
-                    static void Main()
-                    {
-                        {|CS0121:Bar|}(x => Goo(x));
-                    }
+                static void Main()
+                {
+                {|CS0121:Bar|}(x => Goo(x));
+                }
                 }
                 """
             );
@@ -801,50 +801,50 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
         public async Task TestWithConstraint1()
         {
             var code = """
-                using System;
-                class A
-                {
-                    static void Goo<T>(T x) where T : class
-                    {
-                    }
+            using System;
+            class A
+            {
+            static void Goo<T>(T x) where T : class
+            {
+            }
 
-                    static void Bar(Action<int> x)
-                    {
-                    }
+            static void Bar(Action<int> x)
+            {
+            }
 
-                    static void Bar(Action<string> x)
-                    {
-                    }
+            static void Bar(Action<string> x)
+            {
+            }
 
-                    static void Main()
-                    {
-                        Bar([|x => |]Goo<string>(x));
-                    }
-                }
-                """;
+            static void Main()
+            {
+            Bar([|x => |]Goo<string>(x));
+            }
+            }
+            """;
 
             var expected = """
-                using System;
-                class A
-                {
-                    static void Goo<T>(T x) where T : class
-                    {
-                    }
+            using System;
+            class A
+            {
+            static void Goo<T>(T x) where T : class
+            {
+            }
 
-                    static void Bar(Action<int> x)
-                    {
-                    }
+            static void Bar(Action<int> x)
+            {
+            }
 
-                    static void Bar(Action<string> x)
-                    {
-                    }
+            static void Bar(Action<string> x)
+            {
+            }
 
-                    static void Main()
-                    {
-                        Bar(Goo<string>);
-                    }
-                }
-                """;
+            static void Main()
+            {
+            Bar(Goo<string>);
+            }
+            }
+            """;
             await TestInRegularAndScriptAsync(code, expected);
         }
 
@@ -852,27 +852,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
         public async Task TestWithConstraint2()
         {
             var code = """
-                using System;
-                class A
-                {
-                    static void Goo<T>(T x) where T : class
-                    {
-                    }
+            using System;
+            class A
+            {
+            static void Goo<T>(T x) where T : class
+            {
+            }
 
-                    static void Bar(Action<int> x)
-                    {
-                    }
+            static void Bar(Action<int> x)
+            {
+            }
 
-                    static void Bar(Action<string> x)
-                    {
-                    }
+            static void Bar(Action<string> x)
+            {
+            }
 
-                    static void Main()
-                    {
-                        Bar(x => Goo(x));
-                    }
-                }
-                """;
+            static void Main()
+            {
+            Bar(x => Goo(x));
+            }
+            }
+            """;
             await TestMissingInRegularAndScriptAsync(code);
         }
 
@@ -885,29 +885,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class Program
                 {
-                    static void Main()
-                    {
-                        C<string>.InvokeGoo();
-                    }
+                static void Main()
+                {
+                C<string>.InvokeGoo();
+                }
                 }
 
                 class C<T>
                 {
-                    public static void InvokeGoo()
-                    {
-                        Action<dynamic, string> goo = (x, y) => C<T>.Goo(x, y); // Simplify lambda expression
-                        goo(1, "");
-                    }
+                public static void InvokeGoo()
+                {
+                Action<dynamic, string> goo = (x, y) => C<T>.Goo(x, y); // Simplify lambda expression
+                goo(1, "");
+                }
 
-                    static void Goo(object x, object y)
-                    {
-                        Console.WriteLine("Goo(object x, object y)");
-                    }
+                static void Goo(object x, object y)
+                {
+                Console.WriteLine("Goo(object x, object y)");
+                }
 
-                    static void Goo(object x, T y)
-                    {
-                        Console.WriteLine("Goo(object x, T y)");
-                    }
+                static void Goo(object x, T y)
+                {
+                Console.WriteLine("Goo(object x, T y)");
+                }
                 }
                 """
             );
@@ -922,34 +922,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class Program
                 {
-                    static void Main()
-                    {
-                        C<string>.InvokeGoo();
-                    }
+                static void Main()
+                {
+                C<string>.InvokeGoo();
+                }
                 }
 
                 class C<T>
                 {
-                    public static void InvokeGoo()
-                    {
-                        Action<dynamic> goo = [|x => |]C<T>.Goo(x); // Simplify lambda expression
-                        goo(1);
-                    }
+                public static void InvokeGoo()
+                {
+                Action<dynamic> goo = [|x => |]C<T>.Goo(x); // Simplify lambda expression
+                goo(1);
+                }
 
-                    private static void Goo(dynamic x)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private static void Goo(dynamic x)
+                {
+                throw new NotImplementedException();
+                }
 
-                    static void Goo(object x, object y)
-                    {
-                        Console.WriteLine("Goo(object x, object y)");
-                    }
+                static void Goo(object x, object y)
+                {
+                Console.WriteLine("Goo(object x, object y)");
+                }
 
-                    static void Goo(object x, T y)
-                    {
-                        Console.WriteLine("Goo(object x, T y)");
-                    }
+                static void Goo(object x, T y)
+                {
+                Console.WriteLine("Goo(object x, T y)");
+                }
                 }
                 """,
                 """
@@ -957,34 +957,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class Program
                 {
-                    static void Main()
-                    {
-                        C<string>.InvokeGoo();
-                    }
+                static void Main()
+                {
+                C<string>.InvokeGoo();
+                }
                 }
 
                 class C<T>
                 {
-                    public static void InvokeGoo()
-                    {
-                        Action<dynamic> goo = C<T>.Goo; // Simplify lambda expression
-                        goo(1);
-                    }
+                public static void InvokeGoo()
+                {
+                Action<dynamic> goo = C<T>.Goo; // Simplify lambda expression
+                goo(1);
+                }
 
-                    private static void Goo(dynamic x)
-                    {
-                        throw new NotImplementedException();
-                    }
+                private static void Goo(dynamic x)
+                {
+                throw new NotImplementedException();
+                }
 
-                    static void Goo(object x, object y)
-                    {
-                        Console.WriteLine("Goo(object x, object y)");
-                    }
+                static void Goo(object x, object y)
+                {
+                Console.WriteLine("Goo(object x, object y)");
+                }
 
-                    static void Goo(object x, T y)
-                    {
-                        Console.WriteLine("Goo(object x, T y)");
-                    }
+                static void Goo(object x, T y)
+                {
+                Console.WriteLine("Goo(object x, T y)");
+                }
                 }
                 """
             );
@@ -994,38 +994,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
         public async Task ParenthesizeIfParseChanges()
         {
             var code = """
-                using System;
-                class C
-                {
-                    static void M()
-                    {
-                        C x = new C();
-                        int y = 1;
-                        Bar([|() => { return |]Console.ReadLine(); } < x, y > (1 + 2));
-                    }
+            using System;
+            class C
+            {
+            static void M()
+            {
+            C x = new C();
+            int y = 1;
+            Bar([|() => { return |]Console.ReadLine(); } < x, y > (1 + 2));
+            }
 
-                    static void Bar(object a, object b) { }
-                    public static bool operator <(Func<string> y, C x) { return true; }
-                    public static bool operator >(Func<string> y, C x) { return true; }
-                }
-                """;
+            static void Bar(object a, object b) { }
+            public static bool operator <(Func<string> y, C x) { return true; }
+            public static bool operator >(Func<string> y, C x) { return true; }
+            }
+            """;
 
             var expected = """
-                using System;
-                class C
-                {
-                    static void M()
-                    {
-                        C x = new C();
-                        int y = 1;
-                        Bar((Console.ReadLine) < x, y > (1 + 2));
-                    }
+            using System;
+            class C
+            {
+            static void M()
+            {
+            C x = new C();
+            int y = 1;
+            Bar((Console.ReadLine) < x, y > (1 + 2));
+            }
 
-                    static void Bar(object a, object b) { }
-                    public static bool operator <(Func<string> y, C x) { return true; }
-                    public static bool operator >(Func<string> y, C x) { return true; }
-                }
-                """;
+            static void Bar(object a, object b) { }
+            public static bool operator <(Func<string> y, C x) { return true; }
+            public static bool operator >(Func<string> y, C x) { return true; }
+            }
+            """;
 
             await TestInRegularAndScriptAsync(code, expected);
         }
@@ -1039,10 +1039,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Main()
-                    {
-                        Func<string> a = () => new C().ToString();
-                    }
+                void Main()
+                {
+                Func<string> a = () => new C().ToString();
+                }
                 }
                 """
             );
@@ -1057,12 +1057,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class Program
                 {
-                    static void Main()
-                    {
-                        Action a = [|() => {
-                            |]Console.WriteLine();
-                        };
-                    }
+                static void Main()
+                {
+                Action a = [|() => {
+                |]Console.WriteLine();
+                };
+                }
                 }
                 """,
                 """
@@ -1070,10 +1070,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class Program
                 {
-                    static void Main()
-                    {
-                        Action a = Console.WriteLine;
-                    }
+                static void Main()
+                {
+                Action a = Console.WriteLine;
+                }
                 }
                 """
             );
@@ -1089,13 +1089,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar([|s => |]Quux(s));
-                    }
+                void Goo()
+                {
+                Bar([|s => |]Quux(s));
+                }
 
-                    void Bar(Func<int, Task<string>> f) { }
-                    Task<string> Quux(int i) => default;
+                void Bar(Func<int, Task<string>> f) { }
+                Task<string> Quux(int i) => default;
                 }
                 """,
                 """
@@ -1104,13 +1104,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(Quux);
-                    }
+                void Goo()
+                {
+                Bar(Quux);
+                }
 
-                    void Bar(Func<int, Task<string>> f) { }
-                    Task<string> Quux(int i) => default;
+                void Bar(Func<int, Task<string>> f) { }
+                Task<string> Quux(int i) => default;
                 }
                 """
             );
@@ -1126,13 +1126,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar([|async s => await |]Quux(s));
-                    }
+                void Goo()
+                {
+                Bar([|async s => await |]Quux(s));
+                }
 
-                    void Bar(Func<int, Task<string>> f) { }
-                    Task<string> Quux(int i) => default;
+                void Bar(Func<int, Task<string>> f) { }
+                Task<string> Quux(int i) => default;
                 }
                 """,
                 """
@@ -1141,13 +1141,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(Quux);
-                    }
+                void Goo()
+                {
+                Bar(Quux);
+                }
 
-                    void Bar(Func<int, Task<string>> f) { }
-                    Task<string> Quux(int i) => default;
+                void Bar(Func<int, Task<string>> f) { }
+                Task<string> Quux(int i) => default;
                 }
                 """
             );
@@ -1163,13 +1163,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar([|async s => await |]Quux(s).ConfigureAwait(false));
-                    }
+                void Goo()
+                {
+                Bar([|async s => await |]Quux(s).ConfigureAwait(false));
+                }
 
-                    void Bar(Func<int, Task<string>> f) { }
-                    Task<string> Quux(int i) => default;
+                void Bar(Func<int, Task<string>> f) { }
+                Task<string> Quux(int i) => default;
                 }
                 """,
                 """
@@ -1178,13 +1178,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(Quux);
-                    }
+                void Goo()
+                {
+                Bar(Quux);
+                }
 
-                    void Bar(Func<int, Task<string>> f) { }
-                    Task<string> Quux(int i) => default;
+                void Bar(Func<int, Task<string>> f) { }
+                Task<string> Quux(int i) => default;
                 }
                 """
             );
@@ -1200,13 +1200,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(async s => Quux(s));
-                    }
+                void Goo()
+                {
+                Bar(async s => Quux(s));
+                }
 
-                    void Bar(Func<int, Task<string>> f) { }
-                    string Quux(int i) => default;
+                void Bar(Func<int, Task<string>> f) { }
+                string Quux(int i) => default;
                 }
                 """
             );
@@ -1222,13 +1222,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar([|s => { return |]Quux(s); });
-                    }
+                void Goo()
+                {
+                Bar([|s => { return |]Quux(s); });
+                }
 
-                    void Bar(Func<int, Task<string>> f) { }
-                    Task<string> Quux(int i) => default;
+                void Bar(Func<int, Task<string>> f) { }
+                Task<string> Quux(int i) => default;
                 }
                 """,
                 """
@@ -1237,13 +1237,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(Quux);
-                    }
+                void Goo()
+                {
+                Bar(Quux);
+                }
 
-                    void Bar(Func<int, Task<string>> f) { }
-                    Task<string> Quux(int i) => default;
+                void Bar(Func<int, Task<string>> f) { }
+                Task<string> Quux(int i) => default;
                 }
                 """
             );
@@ -1259,13 +1259,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar([|async s => { return await |]Quux(s); });
-                    }
+                void Goo()
+                {
+                Bar([|async s => { return await |]Quux(s); });
+                }
 
-                    void Bar(Func<int, Task<string>> f) { }
-                    Task<string> Quux(int i) => default;
+                void Bar(Func<int, Task<string>> f) { }
+                Task<string> Quux(int i) => default;
                 }
                 """,
                 """
@@ -1274,13 +1274,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(Quux);
-                    }
+                void Goo()
+                {
+                Bar(Quux);
+                }
 
-                    void Bar(Func<int, Task<string>> f) { }
-                    Task<string> Quux(int i) => default;
+                void Bar(Func<int, Task<string>> f) { }
+                Task<string> Quux(int i) => default;
                 }
                 """
             );
@@ -1296,13 +1296,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar([|async s => { return await |]Quux(s).ConfigureAwait(false); });
-                    }
+                void Goo()
+                {
+                Bar([|async s => { return await |]Quux(s).ConfigureAwait(false); });
+                }
 
-                    void Bar(Func<int, Task<string>> f) { }
-                    Task<string> Quux(int i) => default;
+                void Bar(Func<int, Task<string>> f) { }
+                Task<string> Quux(int i) => default;
                 }
                 """,
                 """
@@ -1311,13 +1311,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(Quux);
-                    }
+                void Goo()
+                {
+                Bar(Quux);
+                }
 
-                    void Bar(Func<int, Task<string>> f) { }
-                    Task<string> Quux(int i) => default;
+                void Bar(Func<int, Task<string>> f) { }
+                Task<string> Quux(int i) => default;
                 }
                 """
             );
@@ -1333,13 +1333,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(async s => { return Quux(s); });
-                    }
+                void Goo()
+                {
+                Bar(async s => { return Quux(s); });
+                }
 
-                    void Bar(Func<int, Task<string>> f) { }
-                    string Quux(int i) => default;
+                void Bar(Func<int, Task<string>> f) { }
+                string Quux(int i) => default;
                 }
                 """
             );
@@ -1355,13 +1355,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar([|s => |]Quux(s));
-                    }
+                void Goo()
+                {
+                Bar([|s => |]Quux(s));
+                }
 
-                    void Bar(Func<int, Task> f) { }
-                    Task Quux(int i) => default;
+                void Bar(Func<int, Task> f) { }
+                Task Quux(int i) => default;
                 }
                 """,
                 """
@@ -1370,13 +1370,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(Quux);
-                    }
+                void Goo()
+                {
+                Bar(Quux);
+                }
 
-                    void Bar(Func<int, Task> f) { }
-                    Task Quux(int i) => default;
+                void Bar(Func<int, Task> f) { }
+                Task Quux(int i) => default;
                 }
                 """
             );
@@ -1392,13 +1392,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar([|async s => await |]Quux(s));
-                    }
+                void Goo()
+                {
+                Bar([|async s => await |]Quux(s));
+                }
 
-                    void Bar(Func<int, Task> f) { }
-                    Task Quux(int i) => default;
+                void Bar(Func<int, Task> f) { }
+                Task Quux(int i) => default;
                 }
                 """,
                 """
@@ -1407,13 +1407,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(Quux);
-                    }
+                void Goo()
+                {
+                Bar(Quux);
+                }
 
-                    void Bar(Func<int, Task> f) { }
-                    Task Quux(int i) => default;
+                void Bar(Func<int, Task> f) { }
+                Task Quux(int i) => default;
                 }
                 """
             );
@@ -1429,13 +1429,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar([|async s => await |]Quux(s).ConfigureAwait(false));
-                    }
+                void Goo()
+                {
+                Bar([|async s => await |]Quux(s).ConfigureAwait(false));
+                }
 
-                    void Bar(Func<int, Task> f) { }
-                    Task Quux(int i) => default;
+                void Bar(Func<int, Task> f) { }
+                Task Quux(int i) => default;
                 }
                 """,
                 """
@@ -1444,13 +1444,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(Quux);
-                    }
+                void Goo()
+                {
+                Bar(Quux);
+                }
 
-                    void Bar(Func<int, Task> f) { }
-                    Task Quux(int i) => default;
+                void Bar(Func<int, Task> f) { }
+                Task Quux(int i) => default;
                 }
                 """
             );
@@ -1466,13 +1466,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(s {|CS1643:=>|} { Quux(s); });
-                    }
+                void Goo()
+                {
+                Bar(s {|CS1643:=>|} { Quux(s); });
+                }
 
-                    void Bar(Func<int, Task> f) { }
-                    Task Quux(int i) => default;
+                void Bar(Func<int, Task> f) { }
+                Task Quux(int i) => default;
                 }
                 """
             );
@@ -1488,13 +1488,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar([|async s => { await |]Quux(s); });
-                    }
+                void Goo()
+                {
+                Bar([|async s => { await |]Quux(s); });
+                }
 
-                    void Bar(Func<int, Task> f) { }
-                    Task Quux(int i) => default;
+                void Bar(Func<int, Task> f) { }
+                Task Quux(int i) => default;
                 }
                 """,
                 """
@@ -1503,13 +1503,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(Quux);
-                    }
+                void Goo()
+                {
+                Bar(Quux);
+                }
 
-                    void Bar(Func<int, Task> f) { }
-                    Task Quux(int i) => default;
+                void Bar(Func<int, Task> f) { }
+                Task Quux(int i) => default;
                 }
                 """
             );
@@ -1525,13 +1525,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar([|async s => { await |]Quux(s).ConfigureAwait(false); });
-                    }
+                void Goo()
+                {
+                Bar([|async s => { await |]Quux(s).ConfigureAwait(false); });
+                }
 
-                    void Bar(Func<int, Task> f) { }
-                    Task Quux(int i) => default;
+                void Bar(Func<int, Task> f) { }
+                Task Quux(int i) => default;
                 }
                 """,
                 """
@@ -1540,13 +1540,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(Quux);
-                    }
+                void Goo()
+                {
+                Bar(Quux);
+                }
 
-                    void Bar(Func<int, Task> f) { }
-                    Task Quux(int i) => default;
+                void Bar(Func<int, Task> f) { }
+                Task Quux(int i) => default;
                 }
                 """
             );
@@ -1562,13 +1562,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(async s => { Quux(s); });
-                    }
+                void Goo()
+                {
+                Bar(async s => { Quux(s); });
+                }
 
-                    void Bar(Func<int, Task> f) { }
-                    void Quux(int i) { }
+                void Bar(Func<int, Task> f) { }
+                void Quux(int i) { }
                 }
                 """
             );
@@ -1583,12 +1583,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Action a = [|() => |]Quux<int>();
-                    }
+                void Goo()
+                {
+                Action a = [|() => |]Quux<int>();
+                }
 
-                    void Quux<T>() { }
+                void Quux<T>() { }
                 }
                 """,
                 """
@@ -1596,12 +1596,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Action a = Quux<int>;
-                    }
+                void Goo()
+                {
+                Action a = Quux<int>;
+                }
 
-                    void Quux<T>() { }
+                void Quux<T>() { }
                 }
                 """
             );
@@ -1616,12 +1616,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Action<int> a = b => Quux(b);
-                    }
+                void Goo()
+                {
+                Action<int> a = b => Quux(b);
+                }
 
-                    void Quux<T>(T t) { }
+                void Quux<T>(T t) { }
                 }
                 """
             );
@@ -1640,31 +1640,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo(List<string> assemblies, HashSet<string> usedProjectFileNames)
-                    {
-                        var projectAssemblyFileNames = Select(assemblies, a => GetFileName(a));
-                        var v = Any(projectAssemblyFileNames, usedProjectFileNames.Contains);
-                    }
+                void Goo(List<string> assemblies, HashSet<string> usedProjectFileNames)
+                {
+                var projectAssemblyFileNames = Select(assemblies, a => GetFileName(a));
+                var v = Any(projectAssemblyFileNames, usedProjectFileNames.Contains);
+                }
 
-                    static List<TResult> Select<TItem, TResult>(List<TItem> items, Func<TItem, TResult> map) => new();
+                static List<TResult> Select<TItem, TResult>(List<TItem> items, Func<TItem, TResult> map) => new();
 
-                    [return: NotNullIfNotNull("path")]
-                    static string? GetFileName(string? path) => path;
+                [return: NotNullIfNotNull("path")]
+                static string? GetFileName(string? path) => path;
 
-                    static bool Any<T>(List<T> immutableArray, Func<T, bool> predicate) => true;
+                static bool Any<T>(List<T> immutableArray, Func<T, bool> predicate) => true;
                 }
 
                 namespace System.Diagnostics.CodeAnalysis
                 {
-                    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Parameter | AttributeTargets.ReturnValue, AllowMultiple = true, Inherited = false)]
-                    public sealed class NotNullIfNotNullAttribute : Attribute
-                    {
-                        public string ParameterName => "";
+                [AttributeUsage(AttributeTargets.Property | AttributeTargets.Parameter | AttributeTargets.ReturnValue, AllowMultiple = true, Inherited = false)]
+                public sealed class NotNullIfNotNullAttribute : Attribute
+                {
+                public string ParameterName => "";
 
-                        public NotNullIfNotNullAttribute(string parameterName)
-                        {
-                        }
-                    }
+                public NotNullIfNotNullAttribute(string parameterName)
+                {
+                }
+                }
                 }
                 """
             );
@@ -1679,13 +1679,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(/*before*/[|s => |]Quux(s)/*after*/);
-                    }
+                void Goo()
+                {
+                Bar(/*before*/[|s => |]Quux(s)/*after*/);
+                }
 
-                    void Bar(Func<int, string> f) { }
-                    string Quux(int i) => default;
+                void Bar(Func<int, string> f) { }
+                string Quux(int i) => default;
                 }
                 """,
                 """
@@ -1693,13 +1693,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void Goo()
-                    {
-                        Bar(/*before*/Quux/*after*/);
-                    }
+                void Goo()
+                {
+                Bar(/*before*/Quux/*after*/);
+                }
 
-                    void Bar(Func<int, string> f) { }
-                    string Quux(int i) => default;
+                void Bar(Func<int, string> f) { }
+                string Quux(int i) => default;
                 }
                 """
             );
@@ -1715,14 +1715,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 public partial class C
                 {
-                    internal void M1()
-                    {
-                        M2(x => M3(x));
-                    }
+                internal void M1()
+                {
+                M2(x => M3(x));
+                }
 
-                    partial void M3(string s);
+                partial void M3(string s);
 
-                    private static void M2(Action<string> a) { }
+                private static void M2(Action<string> a) { }
                 }
                 """
             );
@@ -1738,15 +1738,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 public partial class C
                 {
-                    internal void M1()
-                    {
-                        M2([|x => |]M3(x));
-                    }
+                internal void M1()
+                {
+                M2([|x => |]M3(x));
+                }
 
-                    partial void M3(string s);
-                    partial void M3(string s) { }
+                partial void M3(string s);
+                partial void M3(string s) { }
 
-                    private static void M2(Action<string> a) { }
+                private static void M2(Action<string> a) { }
                 }
                 """,
                 """
@@ -1755,15 +1755,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 public partial class C
                 {
-                    internal void M1()
-                    {
-                        M2(M3);
-                    }
+                internal void M1()
+                {
+                M2(M3);
+                }
 
-                    partial void M3(string s);
-                    partial void M3(string s) { }
+                partial void M3(string s);
+                partial void M3(string s) { }
 
-                    private static void M2(Action<string> a) { }
+                private static void M2(Action<string> a) { }
                 }
                 """
             );
@@ -1779,15 +1779,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 public class C
                 {
-                    internal void M1()
-                    {
-                        M2(x => M3(x));
-                    }
+                internal void M1()
+                {
+                M2(x => M3(x));
+                }
 
-                    [Conditional("DEBUG")]
-                    internal void M3(string s) { }
+                [Conditional("DEBUG")]
+                internal void M3(string s) { }
 
-                    private static void M2(Action<string> a) { }
+                private static void M2(Action<string> a) { }
                 }
                 """
             );
@@ -1809,15 +1809,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class Helper
                 {
-                   private readonly Action<bool> action;
-                   internal Helper(Action<bool> action)
-                   {
-                     this.action = action;
-                   }
-
-                   internal void Set(bool value) => action(value);
+                private readonly Action<bool> action;
+                internal Helper(Action<bool> action)
+                {
+                this.action = action;
                 }
-                
+
+                internal void Set(bool value) => action(value);
+                }
+
                 """,
                 outputKind: OutputKind.ConsoleApplication
             );
@@ -1838,15 +1838,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class Helper
                 {
-                   private readonly Action<bool> action;
-                   internal Helper(Action<bool> action)
-                   {
-                     this.action = action;
-                   }
-
-                   internal void Set(bool value) => action(value);
+                private readonly Action<bool> action;
+                internal Helper(Action<bool> action)
+                {
+                this.action = action;
                 }
-                
+
+                internal void Set(bool value) => action(value);
+                }
+
                 """,
                 """
                 using System;
@@ -1859,15 +1859,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class Helper
                 {
-                   private readonly Action<bool> action;
-                   internal Helper(Action<bool> action)
-                   {
-                     this.action = action;
-                   }
-
-                   internal void Set(bool value) => action(value);
+                private readonly Action<bool> action;
+                internal Helper(Action<bool> action)
+                {
+                this.action = action;
                 }
-                
+
+                internal void Set(bool value) => action(value);
+                }
+
                 """,
                 outputKind: OutputKind.ConsoleApplication
             );
@@ -1883,27 +1883,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void M()
-                    {
-                        TaskCompletionSource<bool> valueSet = new();
-                        Helper helper = new(v => valueSet.SetResult(v));
-                        helper.Set(true);
-                        valueSet = new();
-                        helper.Set(false);
-                    }
+                void M()
+                {
+                TaskCompletionSource<bool> valueSet = new();
+                Helper helper = new(v => valueSet.SetResult(v));
+                helper.Set(true);
+                valueSet = new();
+                helper.Set(false);
+                }
                 }
 
                 class Helper
                 {
-                   private readonly Action<bool> action;
-                   internal Helper(Action<bool> action)
-                   {
-                     this.action = action;
-                   }
-
-                   internal void Set(bool value) => action(value);
+                private readonly Action<bool> action;
+                internal Helper(Action<bool> action)
+                {
+                this.action = action;
                 }
-                
+
+                internal void Set(bool value) => action(value);
+                }
+
                 """
             );
         }
@@ -1918,26 +1918,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void M()
-                    {
-                        TaskCompletionSource<bool> valueSet = new();
-                        Helper helper = new([|v => |]valueSet.SetResult(v));
-                        helper.Set(true);
-                        helper.Set(false);
-                    }
+                void M()
+                {
+                TaskCompletionSource<bool> valueSet = new();
+                Helper helper = new([|v => |]valueSet.SetResult(v));
+                helper.Set(true);
+                helper.Set(false);
+                }
                 }
 
                 class Helper
                 {
-                   private readonly Action<bool> action;
-                   internal Helper(Action<bool> action)
-                   {
-                     this.action = action;
-                   }
-
-                   internal void Set(bool value) => action(value);
+                private readonly Action<bool> action;
+                internal Helper(Action<bool> action)
+                {
+                this.action = action;
                 }
-                
+
+                internal void Set(bool value) => action(value);
+                }
+
                 """,
                 """
                 using System;
@@ -1945,26 +1945,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void M()
-                    {
-                        TaskCompletionSource<bool> valueSet = new();
-                        Helper helper = new(valueSet.SetResult);
-                        helper.Set(true);
-                        helper.Set(false);
-                    }
+                void M()
+                {
+                TaskCompletionSource<bool> valueSet = new();
+                Helper helper = new(valueSet.SetResult);
+                helper.Set(true);
+                helper.Set(false);
+                }
                 }
 
                 class Helper
                 {
-                   private readonly Action<bool> action;
-                   internal Helper(Action<bool> action)
-                   {
-                     this.action = action;
-                   }
-
-                   internal void Set(bool value) => action(value);
+                private readonly Action<bool> action;
+                internal Helper(Action<bool> action)
+                {
+                this.action = action;
                 }
-                
+
+                internal void Set(bool value) => action(value);
+                }
+
                 """
             );
         }
@@ -1979,33 +1979,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void M()
-                    {
-                        TaskCompletionSource<bool> valueSet = new();
-                        Helper helper = new([|v => |]valueSet.SetResult(v));
-                        helper.Set(true);
-                        helper.Set(false);
+                void M()
+                {
+                TaskCompletionSource<bool> valueSet = new();
+                Helper helper = new([|v => |]valueSet.SetResult(v));
+                helper.Set(true);
+                helper.Set(false);
 
-                        var v = () =>
-                        {
-                            // this is a different local.  it should not impact the outer simplification
-                            TaskCompletionSource<bool> valueSet = new();
-                            valueSet = new();
-                        };
-                    }
+                var v = () =>
+                {
+                // this is a different local.  it should not impact the outer simplification
+                TaskCompletionSource<bool> valueSet = new();
+                valueSet = new();
+                };
+                }
                 }
 
                 class Helper
                 {
-                   private readonly Action<bool> action;
-                   internal Helper(Action<bool> action)
-                   {
-                     this.action = action;
-                   }
-
-                   internal void Set(bool value) => action(value);
+                private readonly Action<bool> action;
+                internal Helper(Action<bool> action)
+                {
+                this.action = action;
                 }
-                
+
+                internal void Set(bool value) => action(value);
+                }
+
                 """,
                 """
                 using System;
@@ -2013,33 +2013,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                 class C
                 {
-                    void M()
-                    {
-                        TaskCompletionSource<bool> valueSet = new();
-                        Helper helper = new(valueSet.SetResult);
-                        helper.Set(true);
-                        helper.Set(false);
-                
-                        var v = () =>
-                        {
-                            // this is a different local.  it should not impact the outer simplification
-                            TaskCompletionSource<bool> valueSet = new();
-                            valueSet = new();
-                        };
-                    }
+                void M()
+                {
+                TaskCompletionSource<bool> valueSet = new();
+                Helper helper = new(valueSet.SetResult);
+                helper.Set(true);
+                helper.Set(false);
+
+                var v = () =>
+                {
+                // this is a different local.  it should not impact the outer simplification
+                TaskCompletionSource<bool> valueSet = new();
+                valueSet = new();
+                };
+                }
                 }
 
                 class Helper
                 {
-                   private readonly Action<bool> action;
-                   internal Helper(Action<bool> action)
-                   {
-                     this.action = action;
-                   }
-
-                   internal void Set(bool value) => action(value);
+                private readonly Action<bool> action;
+                internal Helper(Action<bool> action)
+                {
+                this.action = action;
                 }
-                
+
+                internal void Set(bool value) => action(value);
+                }
+
                 """
             );
         }

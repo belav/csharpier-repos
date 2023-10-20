@@ -23,12 +23,12 @@ public class FromSqlQuerySqliteTest
 
         AssertSql(
             """
-SELECT "m"."CustomerID", "m"."Address", "m"."City", "m"."CompanyName", "m"."ContactName", "m"."ContactTitle", "m"."Country", "m"."Fax", "m"."Phone", "m"."PostalCode", "m"."Region"
-FROM (
-    SELECT * FROM "Customers"
-) AS "m"
-WHERE "m"."ContactName" IS NOT NULL AND instr("m"."ContactName", 'z') > 0
-"""
+            SELECT "m"."CustomerID", "m"."Address", "m"."City", "m"."CompanyName", "m"."ContactName", "m"."ContactTitle", "m"."Country", "m"."Fax", "m"."Phone", "m"."PostalCode", "m"."Region"
+            FROM (
+            SELECT * FROM "Customers"
+            ) AS "m"
+            WHERE "m"."ContactName" IS NOT NULL AND instr("m"."ContactName", 'z') > 0
+            """
         );
     }
 
@@ -78,15 +78,15 @@ WHERE ""m"".""ContactTitle"" = @__contactTitle_1",
 
         AssertSql(
             """
-SELECT "m"."CustomerID", "m"."Address", "m"."City", "m"."CompanyName", "m"."ContactName", "m"."ContactTitle", "m"."Country", "m"."Fax", "m"."Phone", "m"."PostalCode", "m"."Region"
-FROM (
-    WITH "Customers2" AS (
-        SELECT * FROM "Customers"
-    )
-    SELECT * FROM "Customers2"
-) AS "m"
-WHERE "m"."ContactName" IS NOT NULL AND instr("m"."ContactName", 'z') > 0
-"""
+            SELECT "m"."CustomerID", "m"."Address", "m"."City", "m"."CompanyName", "m"."ContactName", "m"."ContactTitle", "m"."Country", "m"."Fax", "m"."Phone", "m"."PostalCode", "m"."Region"
+            FROM (
+            WITH "Customers2" AS (
+            SELECT * FROM "Customers"
+            )
+            SELECT * FROM "Customers2"
+            ) AS "m"
+            WHERE "m"."ContactName" IS NOT NULL AND instr("m"."ContactName", 'z') > 0
+            """
         );
     }
 

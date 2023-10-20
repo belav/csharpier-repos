@@ -155,8 +155,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 public class goo
                 {
-                    /// $$
-                    public void bar() { }
+                /// $$
+                public void bar() { }
                 }
                 """,
                 "inheritdoc",
@@ -174,8 +174,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 public class goo
                 {
-                    /// <summary> $$ </summary>
-                    public void bar() { }
+                /// <summary> $$ </summary>
+                public void bar() { }
                 }
                 """,
                 "inheritdoc",
@@ -193,8 +193,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 public class goo
                 {
-                    /// <summary> $$ </summary>
-                    public void bar() { }
+                /// <summary> $$ </summary>
+                public void bar() { }
                 }
                 """,
                 "c",
@@ -211,8 +211,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 public class goo
                 {
-                    /// $$ 
-                    public void bar() { }
+                /// $$
+                public void bar() { }
                 }
                 """,
                 "c",
@@ -231,8 +231,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 public class goo
                 {
-                    /// $$ 
-                    public void bar() { }
+                /// $$
+                public void bar() { }
                 }
                 """,
                 "exception",
@@ -248,8 +248,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 public class goo
                 {
-                    /// <summary> $$ </summary>
-                    public void bar() { }
+                /// <summary> $$ </summary>
+                public void bar() { }
                 }
                 """,
                 "exception",
@@ -265,8 +265,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 public class goo
                 {
-                    ///  $$
-                    public void bar() { }
+                ///  $$
+                public void bar() { }
                 }
                 """,
                 "example",
@@ -282,8 +282,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 public class goo
                 {
-                    ///  <summary> $$ </summary>
-                    public void bar() { }
+                ///  <summary> $$ </summary>
+                public void bar() { }
                 }
                 """,
                 "example",
@@ -299,11 +299,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 public class goo
                 {
-                    ///  <summary> $$ </summary>
-                    /// <example></example>
-                    /// <remarks></remarks>
+                ///  <summary> $$ </summary>
+                /// <example></example>
+                /// <remarks></remarks>
 
-                    public void bar() { }
+                public void bar() { }
                 }
                 """,
                 "example",
@@ -319,11 +319,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 public class goo
                 {
-                    ///  <summary> $$ </summary>
-                    /// <example></example>
-                    /// <remarks></remarks>
+                ///  <summary> $$ </summary>
+                /// <example></example>
+                /// <remarks></remarks>
 
-                    public void bar() { }
+                public void bar() { }
                 }
                 """,
                 "listheader",
@@ -340,9 +340,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 public class goo
                 {
-                    ///   $$ 
+                ///   $$
 
-                    public void bar() { }
+                public void bar() { }
                 }
                 """,
                 "listheader",
@@ -359,9 +359,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 public class goo
                 {
-                    ///   <list>$$</list>
+                ///   <list>$$</list>
 
-                    public void bar() { }
+                public void bar() { }
                 }
                 """,
                 "listheader",
@@ -378,9 +378,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 public class goo
                 {
-                    ///   <list><$$</list>
+                ///   <list><$$</list>
 
-                    public void bar() { }
+                public void bar() { }
                 }
                 """,
                 "listheader",
@@ -397,13 +397,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 public class goo
                 {
-                    ///  <summary>
-                    ///  <list><listheader> $$ </listheader></list>
-                    ///  </summary>
-                    /// <example></example>
-                    /// <remarks></remarks>
+                ///  <summary>
+                ///  <list><listheader> $$ </listheader></list>
+                ///  </summary>
+                /// <example></example>
+                /// <remarks></remarks>
 
-                    public void bar() { }
+                public void bar() { }
                 }
                 """,
                 "term",
@@ -419,8 +419,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 public class goo
                 {
 
-                    /// $$
-                    public void bar() { }
+                /// $$
+                public void bar() { }
                 }
                 """,
                 "returns"
@@ -435,8 +435,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 public class goo
                 {
 
-                    /// $$
-                    public int bar() { }
+                /// $$
+                public int bar() { }
                 }
                 """,
                 "returns"
@@ -451,8 +451,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 public class goo
                 {
 
-                    /// $$
-                    public int bar { get; set; }
+                /// $$
+                public int bar { get; set; }
                 }
                 """,
                 "returns"
@@ -467,8 +467,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 public class goo
                 {
 
-                    /// $$
-                    public int bar { get; set; }
+                /// $$
+                public int bar { get; set; }
                 }
                 """,
                 "value"
@@ -483,8 +483,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 public class goo
                 {
 
-                    /// $$
-                    public int bar { get; }
+                /// $$
+                public int bar { get; }
                 }
                 """,
                 "returns"
@@ -499,8 +499,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 public class goo
                 {
 
-                    /// $$
-                    public int bar { get; }
+                /// $$
+                public int bar { get; }
                 }
                 """,
                 "value"
@@ -515,8 +515,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 public class goo
                 {
 
-                    /// $$
-                    public int bar { set; }
+                /// $$
+                public int bar { set; }
                 }
                 """,
                 "returns"
@@ -531,8 +531,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 public class goo
                 {
 
-                    /// $$
-                    public int bar { set; }
+                /// $$
+                public int bar { set; }
                 }
                 """,
                 "value"
@@ -543,13 +543,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task MethodParamTypeParam()
         {
             var text = """
-                public class goo<TGoo>
-                {
+            public class goo<TGoo>
+            {
 
-                    /// $$
-                    public int bar<TBar>(TBar green) { }
-                }
-                """;
+            /// $$
+            public int bar<TBar>(TBar green) { }
+            }
+            """;
 
             await VerifyItemsExistAsync(
                 text,
@@ -576,8 +576,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 public class goo<T>
                 {
 
-                    /// $$
-                    public int this[T green] { get { } set { } }
+                /// $$
+                public int this[T green] { get { } set { } }
                 }
                 """,
                 """
@@ -590,17 +590,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task MethodParamRefName()
         {
             var text = """
-                public class Outer<TOuter>
-                {
-                    public class Inner<TInner>
-                    {
-                        /// <summary>
-                        /// $$
-                        /// </summary>
-                        public int Method<TMethod>(T green) { }
-                    }
-                }
-                """;
+            public class Outer<TOuter>
+            {
+            public class Inner<TInner>
+            {
+            /// <summary>
+            /// $$
+            /// </summary>
+            public int Method<TMethod>(T green) { }
+            }
+            }
+            """;
             await VerifyItemsExistAsync(
                 text,
                 """
@@ -628,7 +628,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 /// </summary>
                 public class goo<T>
                 {
-                    public int bar<T>(T green) { }
+                public int bar<T>(T green) { }
                 }
                 """,
                 """
@@ -645,7 +645,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 /// $$
                 public class goo<T>
                 {
-                    public int bar<T>(T green) { }
+                public int bar<T>(T green) { }
                 }
                 """,
                 """
@@ -658,11 +658,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task TagsAfterSameLineClosedTag()
         {
             var text = """
-                /// <summary>
-                /// <goo></goo>$$
-                /// 
-                /// </summary>
-                """;
+            /// <summary>
+            /// <goo></goo>$$
+            ///
+            /// </summary>
+            """;
 
             await VerifyItemsExistAsync(
                 text,
@@ -682,15 +682,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task EnumMember()
         {
             var text = """
-                public enum z
-                {
-                    /// <summary>
-                    /// 
-                    /// </summary>
-                    /// <$$
-                    a
-                }
-                """;
+            public enum z
+            {
+            /// <summary>
+            ///
+            /// </summary>
+            /// <$$
+            a
+            }
+            """;
 
             await VerifyItemsExistAsync(text);
         }
@@ -795,17 +795,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task TypeParamRefNamesInEmptyAttribute()
         {
             var text = """
-                public class Outer<TOuter>
-                {
-                    public class Inner<TInner>
-                    {
-                        /// <summary>
-                        /// <typeparamref name="$$"/>
-                        /// </summary>
-                        public int Method<TMethod>(T green) { }
-                    }
-                }
-                """;
+            public class Outer<TOuter>
+            {
+            public class Inner<TInner>
+            {
+            /// <summary>
+            /// <typeparamref name="$$"/>
+            /// </summary>
+            public int Method<TMethod>(T green) { }
+            }
+            }
+            """;
 
             await VerifyItemsExistAsync(text, "TOuter", "TInner", "TMethod");
         }
@@ -814,17 +814,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task TypeParamRefNamesPartiallyTyped()
         {
             var text = """
-                public class Outer<TOuter>
-                {
-                    public class Inner<TInner>
-                    {
-                        /// <summary>
-                        /// <typeparamref name="T$$"/>
-                        /// </summary>
-                        public int Method<TMethod>(T green) { }
-                    }
-                }
-                """;
+            public class Outer<TOuter>
+            {
+            public class Inner<TInner>
+            {
+            /// <summary>
+            /// <typeparamref name="T$$"/>
+            /// </summary>
+            public int Method<TMethod>(T green) { }
+            }
+            }
+            """;
 
             await VerifyItemsExistAsync(text, "TOuter", "TInner", "TMethod");
         }
@@ -833,15 +833,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task TypeParamNamesInEmptyAttribute()
         {
             var text = """
-                public class Outer<TOuter>
-                {
-                    public class Inner<TInner>
-                    {
-                        /// <typeparam name="$$"/>
-                        public int Method<TMethod>(T green) { }
-                    }
-                }
-                """;
+            public class Outer<TOuter>
+            {
+            public class Inner<TInner>
+            {
+            /// <typeparam name="$$"/>
+            public int Method<TMethod>(T green) { }
+            }
+            }
+            """;
 
             await VerifyItemsExistAsync(text, "TMethod");
             await VerifyItemsAbsentAsync(text, "TOuter", "TInner");
@@ -851,17 +851,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task TypeParamNamesInWrongScope()
         {
             var text = """
-                public class Outer<TOuter>
-                {
-                    public class Inner<TInner>
-                    {
-                        /// <summary>
-                        /// <typeparam name="$$"/>
-                        /// </summary>
-                        public int Method<TMethod>(T green) { }
-                    }
-                }
-                """;
+            public class Outer<TOuter>
+            {
+            public class Inner<TInner>
+            {
+            /// <summary>
+            /// <typeparam name="$$"/>
+            /// </summary>
+            public int Method<TMethod>(T green) { }
+            }
+            }
+            """;
 
             await VerifyItemsExistAsync(text, "TMethod");
             await VerifyItemsAbsentAsync(text, "TOuter", "TInner");
@@ -871,15 +871,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task TypeParamNamesPartiallyTyped()
         {
             var text = """
-                public class Outer<TOuter>
-                {
-                    public class Inner<TInner>
-                    {
-                        /// <typeparam name="T$$"/>
-                        public int Method<TMethod>(T green) { }
-                    }
-                }
-                """;
+            public class Outer<TOuter>
+            {
+            public class Inner<TInner>
+            {
+            /// <typeparam name="T$$"/>
+            public int Method<TMethod>(T green) { }
+            }
+            }
+            """;
 
             await VerifyItemsExistAsync(text, "TMethod");
             await VerifyItemsAbsentAsync(text, "TOuter", "TInner");
@@ -892,8 +892,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 public class goo
                 {
-                    /// <r$$
-                    public void bar() { }
+                /// <r$$
+                public void bar() { }
                 }
                 """,
                 "!--",
@@ -918,10 +918,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 public class goo
                 {
-                    /// <summary>
-                    /// <r$$
-                    /// </summary>
-                    public void bar() { }
+                /// <summary>
+                /// <r$$
+                /// </summary>
+                public void bar() { }
                 }
                 """,
                 "!--",
@@ -979,12 +979,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 class C
                 {
-                    /// <summary>
-                    /// <list $$></list>
-                    /// </summary>
-                    static void Goo()
-                    {
-                    }
+                /// <summary>
+                /// <list $$></list>
+                /// </summary>
+                static void Goo()
+                {
+                }
                 }
                 """,
                 "type"
@@ -998,12 +998,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 class C
                 {
-                    /// <summary>
-                    /// <list type="$$"></list>
-                    /// </summary>
-                    static void Goo()
-                    {
-                    }
+                /// <summary>
+                /// <list type="$$"></list>
+                /// </summary>
+                static void Goo()
+                {
+                }
                 }
                 """,
                 "bullet",
@@ -1020,12 +1020,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 class C
                 {
-                    /// <summary>
-                    /// <see $$/>
-                    /// </summary>
-                    static void Goo()
-                    {
-                    }
+                /// <summary>
+                /// <see $$/>
+                /// </summary>
+                static void Goo()
+                {
+                }
                 }
                 """,
                 "cref",
@@ -1041,12 +1041,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 class C
                 {
-                    /// <summary>
-                    /// <seealso $$/>
-                    /// </summary>
-                    static void Goo()
-                    {
-                    }
+                /// <summary>
+                /// <seealso $$/>
+                /// </summary>
+                static void Goo()
+                {
+                }
                 }
                 """,
                 "cref",
@@ -1061,12 +1061,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 class C
                 {
-                    /// <summary>
-                    /// Some text $$
-                    /// </summary>
-                    static void Goo()
-                    {
-                    }
+                /// <summary>
+                /// Some text $$
+                /// </summary>
+                static void Goo()
+                {
+                }
                 }
                 """,
                 "null",
@@ -1084,12 +1084,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 class C
                 {
-                    /// <summary>
-                    /// Some text <$$
-                    /// </summary>
-                    static void Goo()
-                    {
-                    }
+                /// <summary>
+                /// Some text <$$
+                /// </summary>
+                static void Goo()
+                {
+                }
                 }
                 """,
                 "null",
@@ -1107,12 +1107,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 class C
                 {
-                    /// <summary>
-                    /// Some text <s$$
-                    /// </summary>
-                    static void Goo()
-                    {
-                    }
+                /// <summary>
+                /// Some text <s$$
+                /// </summary>
+                static void Goo()
+                {
+                }
                 }
                 """,
                 "null",
@@ -1130,12 +1130,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 class C
                 {
-                    /// <summary>
-                    /// Some text < $$
-                    /// </summary>
-                    static void Goo()
-                    {
-                    }
+                /// <summary>
+                /// Some text < $$
+                /// </summary>
+                static void Goo()
+                {
+                }
                 }
                 """,
                 "null",
@@ -1153,12 +1153,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 class C
                 {
-                    /// <summary>
-                    /// <see langword="$$"/>
-                    /// </summary>
-                    static void Goo()
-                    {
-                    }
+                /// <summary>
+                /// <see langword="$$"/>
+                /// </summary>
+                static void Goo()
+                {
+                }
                 }
                 """,
                 "null",
@@ -1175,12 +1175,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 class C
                 {
-                    /// <summary>
-                    /// <inheritdoc $$/>
-                    /// </summary>
-                    static void Goo()
-                    {
-                    }
+                /// <summary>
+                /// <inheritdoc $$/>
+                /// </summary>
+                static void Goo()
+                {
+                }
                 }
                 """,
                 "cref",
@@ -1195,10 +1195,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 class C
                 {
-                    /// <inheritdoc $$/>
-                    static void Goo()
-                    {
-                    }
+                /// <inheritdoc $$/>
+                static void Goo()
+                {
+                }
                 }
                 """,
                 "cref",
@@ -1210,14 +1210,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task AttributeNameAfterTagNameInIncompleteTag()
         {
             var text = """
-                class C
-                {
-                    /// <exception $$
-                    static void Goo()
-                    {
-                    }
-                }
-                """;
+            class C
+            {
+            /// <exception $$
+            static void Goo()
+            {
+            }
+            }
+            """;
             await VerifyItemExistsAsync(text, "cref", usePreviousCharAsTrigger: true);
         }
 
@@ -1225,12 +1225,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task AttributeNameAfterTagNameInElementStartTag()
         {
             var text = """
-                class C
-                {
-                    /// <exception $$>
-                    void Goo() { }
-                }
-                """;
+            class C
+            {
+            /// <exception $$>
+            void Goo() { }
+            }
+            """;
             await VerifyItemExistsAsync(text, "cref");
         }
 
@@ -1238,12 +1238,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task AttributeNameAfterTagNameInEmptyElement()
         {
             var text = """
-                class C
-                {
-                    /// <see $$/>
-                    void Goo() { }
-                }
-                """;
+            class C
+            {
+            /// <see $$/>
+            void Goo() { }
+            }
+            """;
             await VerifyItemExistsAsync(text, "cref");
         }
 
@@ -1251,12 +1251,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task AttributeNameAfterTagNamePartiallyTyped()
         {
             var text = """
-                class C
-                {
-                    /// <exception c$$
-                    void Goo() { }
-                }
-                """;
+            class C
+            {
+            /// <exception c$$
+            void Goo() { }
+            }
+            """;
             await VerifyItemExistsAsync(text, "cref");
         }
 
@@ -1264,14 +1264,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task AttributeNameAfterSpecialCrefAttribute()
         {
             var text = """
-                class C
-                {
-                    /// <summary>
-                    /// <list cref="String" $$
-                    /// </summary>
-                    void Goo() { }
-                }
-                """;
+            class C
+            {
+            /// <summary>
+            /// <list cref="String" $$
+            /// </summary>
+            void Goo() { }
+            }
+            """;
             await VerifyItemExistsAsync(text, "type");
         }
 
@@ -1279,14 +1279,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task AttributeNameAfterSpecialNameAttribute()
         {
             var text = """
-                class C
-                {
-                    /// <summary>
-                    /// <list name="goo" $$
-                    /// </summary>
-                    void Goo() { }
-                }
-                """;
+            class C
+            {
+            /// <summary>
+            /// <list name="goo" $$
+            /// </summary>
+            void Goo() { }
+            }
+            """;
             await VerifyItemExistsAsync(text, "type");
         }
 
@@ -1294,14 +1294,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task AttributeNameAfterTextAttribute()
         {
             var text = """
-                class C
-                {
-                    /// <summary>
-                    /// <list goo="" $$
-                    /// </summary>
-                    void Goo() { }
-                }
-                """;
+            class C
+            {
+            /// <summary>
+            /// <list goo="" $$
+            /// </summary>
+            void Goo() { }
+            }
+            """;
             await VerifyItemExistsAsync(text, "type");
         }
 
@@ -1309,14 +1309,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task AttributeNameInWrongTagTypeEmptyElement()
         {
             var text = """
-                class C
-                {
-                    /// <summary>
-                    /// <list $$/>
-                    /// </summary>
-                    void Goo() { }
-                }
-                """;
+            class C
+            {
+            /// <summary>
+            /// <list $$/>
+            /// </summary>
+            void Goo() { }
+            }
+            """;
             await VerifyItemExistsAsync(text, "type");
         }
 
@@ -1324,14 +1324,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task AttributeNameInWrongTagTypeElementStartTag()
         {
             var text = """
-                class C
-                {
-                    /// <summary>
-                    /// <see $$>
-                    /// </summary>
-                    void Goo() { }
-                }
-                """;
+            class C
+            {
+            /// <summary>
+            /// <see $$>
+            /// </summary>
+            void Goo() { }
+            }
+            """;
             await VerifyItemExistsAsync(text, "langword");
         }
 
@@ -1339,16 +1339,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task AttributeValueOnQuote()
         {
             var text = """
-                class C
-                {
-                    /// <summary>
-                    /// <see langword="$$
-                    /// </summary>
-                    static void Goo()
-                    {
-                    }
-                }
-                """;
+            class C
+            {
+            /// <summary>
+            /// <see langword="$$
+            /// </summary>
+            static void Goo()
+            {
+            }
+            }
+            """;
             await VerifyItemExistsAsync(text, "await", usePreviousCharAsTrigger: true);
         }
 
@@ -1356,20 +1356,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task TermAndDescriptionInsideItem()
         {
             var text = """
-                class C
-                {
-                    /// <summary>
-                    ///     <list type="table">
-                    ///         <item>
-                    ///             $$
-                    ///         </item>
-                    ///     </list>
-                    /// </summary>
-                    static void Goo()
-                    {
-                    }
-                }
-                """;
+            class C
+            {
+            /// <summary>
+            ///     <list type="table">
+            ///         <item>
+            ///             $$
+            ///         </item>
+            ///     </list>
+            /// </summary>
+            static void Goo()
+            {
+            }
+            }
+            """;
             await VerifyItemExistsAsync(text, "term");
             await VerifyItemExistsAsync(text, "description");
         }

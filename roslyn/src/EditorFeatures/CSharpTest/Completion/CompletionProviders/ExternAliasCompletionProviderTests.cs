@@ -35,8 +35,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task ExternAlias()
         {
             var markup = """
-                extern alias $$
-                """;
+            extern alias $$
+            """;
             await VerifyItemWithAliasedMetadataReferencesAsync(markup, "goo", "goo", 1, "C#", "C#");
         }
 
@@ -44,8 +44,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task NotAfterExternAlias()
         {
             var markup = """
-                extern alias goo $$
-                """;
+            extern alias goo $$
+            """;
             await VerifyItemWithAliasedMetadataReferencesAsync(markup, "goo", "goo", 0, "C#", "C#");
         }
 
@@ -53,8 +53,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task NotGlobal()
         {
             var markup = """
-                extern alias $$
-                """;
+            extern alias $$
+            """;
             await VerifyItemWithAliasedMetadataReferencesAsync(
                 markup,
                 "goo",
@@ -69,9 +69,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task NotIfAlreadyUsed()
         {
             var markup = """
-                extern alias goo;
-                extern alias $$
-                """;
+            extern alias goo;
+            extern alias $$
+            """;
             await VerifyItemWithAliasedMetadataReferencesAsync(markup, "goo", "goo", 0, "C#", "C#");
         }
 
@@ -79,8 +79,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task NotInComment()
         {
             var markup = """
-                extern alias // $$
-                """;
+            extern alias // $$
+            """;
             await VerifyNoItemsExistAsync(markup);
         }
     }

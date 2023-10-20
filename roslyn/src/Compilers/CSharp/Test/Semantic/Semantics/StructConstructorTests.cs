@@ -4644,20 +4644,20 @@ public struct S
         public void ImplicitlyInitializedField_Pointer()
         {
             var source = """
-using System;
+            using System;
 
-_ = new R();
+            _ = new R();
 
-unsafe struct R
-{
-    public int* field;
+            unsafe struct R
+            {
+            public int* field;
 
-    public R()
-    {
-        Console.WriteLine("explicit ctor");
-    }
-}
-""";
+            public R()
+            {
+            Console.WriteLine("explicit ctor");
+            }
+            }
+            """;
             var comp = CreateCompilation(source, options: TestOptions.UnsafeDebugExe);
             comp.VerifyDiagnostics(
                 // (7,17): warning CS0649: Field 'R.field' is never assigned to, and will always have its default value
@@ -4882,15 +4882,15 @@ public struct S
         public void ImplicitlyInitializedField_ConstructorInitializer_01()
         {
             var source = """
-public struct S1
-{
-    public int F;
+            public struct S1
+            {
+            public int F;
 
-    S1(int x) {}
+            S1(int x) {}
 
-    public S1() : this(F) {}
-}
-""";
+            public S1() : this(F) {}
+            }
+            """;
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
                 // (7,24): error CS0120: An object reference is required for the non-static field, method, or property 'S1.F'
@@ -4905,17 +4905,17 @@ public struct S1
         public void ImplicitlyInitializedField_ConstructorInitializer_02()
         {
             var source = """
-public struct S1
-{
-    public int F;
+            public struct S1
+            {
+            public int F;
 
-    S1(int x) {}
+            S1(int x) {}
 
-    public static int M(int y) => y;
+            public static int M(int y) => y;
 
-    public S1() : this(M(F)) {}
-}
-""";
+            public S1() : this(M(F)) {}
+            }
+            """;
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
                 // (9,26): error CS0120: An object reference is required for the non-static field, method, or property 'S1.F'
@@ -4930,15 +4930,15 @@ public struct S1
         public void ImplicitlyInitializedField_ConstructorInitializer_03()
         {
             var source = """
-public struct S1
-{
-    public int F;
+            public struct S1
+            {
+            public int F;
 
-    S1(int x) {}
+            S1(int x) {}
 
-    public S1() : base(F) {}
-}
-""";
+            public S1() : base(F) {}
+            }
+            """;
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
                 // (7,12): error CS0522: 'S1': structs cannot call base class constructors

@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 readonly struct MyStruct
                 {
-                    $$
+                $$
                 }
                 """
             );
@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 interface MyInterface
                 {
-                    $$
+                $$
                 }
                 """
             );

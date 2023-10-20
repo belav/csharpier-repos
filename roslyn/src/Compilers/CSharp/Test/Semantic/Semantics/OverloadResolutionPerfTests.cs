@@ -987,61 +987,61 @@ class C
             //     public static void F3(this object obj) { }
             // }
             string sourceA = """
-                .assembly extern mscorlib { .ver 4:0:0:0 .publickeytoken = (B7 7A 5C 56 19 34 E0 89) }
-                .assembly extern System.Core { }
-                .assembly '<<GeneratedFileName>>'
-                {
-                    .custom instance void [System.Core]System.Runtime.CompilerServices.ExtensionAttribute::.ctor() = ( 01 00 00 00 )
-                }
-                .class public abstract A
-                {
-                  .custom instance void [System.Core]System.Runtime.CompilerServices.ExtensionAttribute::.ctor() = ( 01 00 00 00 )
-                  .method public hidebysig specialname rtspecialname instance void .ctor() { ret }
-                  .method public static void F1(object o)
-                  {
-                    .custom instance void [System.Core]System.Runtime.CompilerServices.ExtensionAttribute::.ctor() = ( 01 00 00 00 )
-                    ret
-                  }
-                  .method public static void F3(object o)
-                  {
-                    .custom instance void [System.Core]System.Runtime.CompilerServices.ExtensionAttribute::.ctor() = ( 01 00 00 00 )
-                    ret
-                  }
-                }
-                .class public abstract B extends A
-                {
-                  .custom instance void [System.Core]System.Runtime.CompilerServices.ExtensionAttribute::.ctor() = ( 01 00 00 00 )
-                  .method public hidebysig specialname rtspecialname instance void .ctor() { ret }
-                  .method public static void F2(object o)
-                  {
-                    .custom instance void [System.Core]System.Runtime.CompilerServices.ExtensionAttribute::.ctor() = ( 01 00 00 00 )
-                    ret
-                  }
-                  .method public static void F3(object o)
-                  {
-                    .custom instance void [System.Core]System.Runtime.CompilerServices.ExtensionAttribute::.ctor() = ( 01 00 00 00 )
-                    ret
-                  }
-                }
-                """;
+            .assembly extern mscorlib { .ver 4:0:0:0 .publickeytoken = (B7 7A 5C 56 19 34 E0 89) }
+            .assembly extern System.Core { }
+            .assembly '<<GeneratedFileName>>'
+            {
+            .custom instance void [System.Core]System.Runtime.CompilerServices.ExtensionAttribute::.ctor() = ( 01 00 00 00 )
+            }
+            .class public abstract A
+            {
+            .custom instance void [System.Core]System.Runtime.CompilerServices.ExtensionAttribute::.ctor() = ( 01 00 00 00 )
+            .method public hidebysig specialname rtspecialname instance void .ctor() { ret }
+            .method public static void F1(object o)
+            {
+            .custom instance void [System.Core]System.Runtime.CompilerServices.ExtensionAttribute::.ctor() = ( 01 00 00 00 )
+            ret
+            }
+            .method public static void F3(object o)
+            {
+            .custom instance void [System.Core]System.Runtime.CompilerServices.ExtensionAttribute::.ctor() = ( 01 00 00 00 )
+            ret
+            }
+            }
+            .class public abstract B extends A
+            {
+            .custom instance void [System.Core]System.Runtime.CompilerServices.ExtensionAttribute::.ctor() = ( 01 00 00 00 )
+            .method public hidebysig specialname rtspecialname instance void .ctor() { ret }
+            .method public static void F2(object o)
+            {
+            .custom instance void [System.Core]System.Runtime.CompilerServices.ExtensionAttribute::.ctor() = ( 01 00 00 00 )
+            ret
+            }
+            .method public static void F3(object o)
+            {
+            .custom instance void [System.Core]System.Runtime.CompilerServices.ExtensionAttribute::.ctor() = ( 01 00 00 00 )
+            ret
+            }
+            }
+            """;
             var refA = CompileIL(sourceA, prependDefaultHeader: false);
 
             // The calls to B.F3(o) and o.F3() should bind to B.F3 and should not be
             // considered ambiguous with A.F3 because B is derived from A.
             string sourceB = """
-                class Program
-                {
-                    static void M(object o)
-                    {
-                        B.F1(o);
-                        B.F2(o);
-                        B.F3(o);
-                        o.F1();
-                        o.F2();
-                        o.F3();
-                    }
-                }
-                """;
+            class Program
+            {
+            static void M(object o)
+            {
+            B.F1(o);
+            B.F2(o);
+            B.F3(o);
+            o.F1();
+            o.F2();
+            o.F3();
+            }
+            }
+            """;
             var comp = CreateCompilation(sourceB, references: new[] { refA });
             comp.VerifyDiagnostics();
             var tree = comp.SyntaxTrees.Single();

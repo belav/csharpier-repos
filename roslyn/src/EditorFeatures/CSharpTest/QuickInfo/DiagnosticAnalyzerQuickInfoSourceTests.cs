@@ -36,7 +36,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QuickInfo
             await TestInMethodAsync(
                 """
                 #pragma warning disable CS0219$$
-                            var i = 0;
+                var i = 0;
                 #pragma warning restore CS0219
                 """,
                 GetFormattedErrorTitle(ErrorCode.WRN_UnreferencedVarAssg)
@@ -50,7 +50,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QuickInfo
             await TestInMethodAsync(
                 """
                 #pragma warning disable CS0219
-                            var i = 0;
+                var i = 0;
                 #pragma warning restore CS0219$$
                 """,
                 GetFormattedErrorTitle(ErrorCode.WRN_UnreferencedVarAssg)
@@ -151,11 +151,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QuickInfo
                 using System.Diagnostics.CodeAnalysis;
                 namespace T
                 {
-                    [SuppressMessage("CodeQuality", "IDE0051$$")]
-                    public class C
-                    {
-                        private int _i;
-                    }
+                [SuppressMessage("CodeQuality", "IDE0051$$")]
+                public class C
+                {
+                private int _i;
+                }
                 }
                 """,
                 GetFormattedIDEAnalyzerTitle(

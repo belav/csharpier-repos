@@ -22,10 +22,10 @@ public class JsonQuerySqliteTest : JsonQueryTestBase<JsonQuerySqliteFixture>
 
         AssertSql(
             """
-SELECT "j"."Name"
-FROM "JsonEntitiesBasic" AS "j"
-WHERE length("j"."OwnedReferenceRoot" ->> 'Name') > 2
-"""
+            SELECT "j"."Name"
+            FROM "JsonEntitiesBasic" AS "j"
+            WHERE length("j"."OwnedReferenceRoot" ->> 'Name') > 2
+            """
         );
     }
 
@@ -35,9 +35,9 @@ WHERE length("j"."OwnedReferenceRoot" ->> 'Name') > 2
 
         AssertSql(
             """
-SELECT "j"."Id", "j"."OwnedReferenceRoot" ->> '$.OwnedReferenceBranch.Enum' AS "Enum"
-FROM "JsonEntitiesBasic" AS "j"
-"""
+            SELECT "j"."Id", "j"."OwnedReferenceRoot" ->> '$.OwnedReferenceBranch.Enum' AS "Enum"
+            FROM "JsonEntitiesBasic" AS "j"
+            """
         );
     }
 
@@ -99,16 +99,16 @@ FROM "JsonEntitiesBasic" AS "j"
 
         AssertSql(
             """
-SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
-FROM "JsonEntitiesBasic" AS "j"
-WHERE EXISTS (
-    SELECT 1
-    FROM (
-        SELECT "o"."value" ->> 'Date' AS "Date", "o"."value" ->> 'Enum' AS "Enum", "o"."value" ->> 'Enums' AS "Enums", "o"."value" ->> 'Fraction' AS "Fraction", "o"."value" ->> 'NullableEnum' AS "NullableEnum", "o"."value" ->> 'NullableEnums' AS "NullableEnums", "o"."value" ->> 'OwnedCollectionLeaf' AS "OwnedCollectionLeaf", "o"."value" ->> 'OwnedReferenceLeaf' AS "OwnedReferenceLeaf", "o"."key"
-        FROM json_each("j"."OwnedReferenceRoot", '$.OwnedCollectionBranch') AS "o"
-    ) AS "t"
-    WHERE "t"."OwnedReferenceLeaf" ->> 'SomethingSomething' = 'e1_c2_c1_c1')
-"""
+            SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
+            FROM "JsonEntitiesBasic" AS "j"
+            WHERE EXISTS (
+            SELECT 1
+            FROM (
+            SELECT "o"."value" ->> 'Date' AS "Date", "o"."value" ->> 'Enum' AS "Enum", "o"."value" ->> 'Enums' AS "Enums", "o"."value" ->> 'Fraction' AS "Fraction", "o"."value" ->> 'NullableEnum' AS "NullableEnum", "o"."value" ->> 'NullableEnums' AS "NullableEnums", "o"."value" ->> 'OwnedCollectionLeaf' AS "OwnedCollectionLeaf", "o"."value" ->> 'OwnedReferenceLeaf' AS "OwnedReferenceLeaf", "o"."key"
+            FROM json_each("j"."OwnedReferenceRoot", '$.OwnedCollectionBranch') AS "o"
+            ) AS "t"
+            WHERE "t"."OwnedReferenceLeaf" ->> 'SomethingSomething' = 'e1_c2_c1_c1')
+            """
         );
     }
 
@@ -118,18 +118,18 @@ WHERE EXISTS (
 
         AssertSql(
             """
-SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
-FROM "JsonEntitiesBasic" AS "j"
-WHERE (
-    SELECT "t"."OwnedReferenceLeaf" ->> 'SomethingSomething'
-    FROM (
-        SELECT "o"."value" ->> 'Date' AS "Date", "o"."value" ->> 'Enum' AS "Enum", "o"."value" ->> 'Enums' AS "Enums", "o"."value" ->> 'Fraction' AS "Fraction", "o"."value" ->> 'NullableEnum' AS "NullableEnum", "o"."value" ->> 'NullableEnums' AS "NullableEnums", "o"."value" ->> 'OwnedCollectionLeaf' AS "OwnedCollectionLeaf", "o"."value" ->> 'OwnedReferenceLeaf' AS "OwnedReferenceLeaf", "o"."key"
-        FROM json_each("j"."OwnedReferenceRoot", '$.OwnedCollectionBranch') AS "o"
-    ) AS "t"
-    WHERE "t"."Enum" = 2
-    ORDER BY "t"."key"
-    LIMIT 1 OFFSET 0) = 'e1_r_c2_r'
-"""
+            SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
+            FROM "JsonEntitiesBasic" AS "j"
+            WHERE (
+            SELECT "t"."OwnedReferenceLeaf" ->> 'SomethingSomething'
+            FROM (
+            SELECT "o"."value" ->> 'Date' AS "Date", "o"."value" ->> 'Enum' AS "Enum", "o"."value" ->> 'Enums' AS "Enums", "o"."value" ->> 'Fraction' AS "Fraction", "o"."value" ->> 'NullableEnum' AS "NullableEnum", "o"."value" ->> 'NullableEnums' AS "NullableEnums", "o"."value" ->> 'OwnedCollectionLeaf' AS "OwnedCollectionLeaf", "o"."value" ->> 'OwnedReferenceLeaf' AS "OwnedReferenceLeaf", "o"."key"
+            FROM json_each("j"."OwnedReferenceRoot", '$.OwnedCollectionBranch') AS "o"
+            ) AS "t"
+            WHERE "t"."Enum" = 2
+            ORDER BY "t"."key"
+            LIMIT 1 OFFSET 0) = 'e1_r_c2_r'
+            """
         );
     }
 
@@ -139,22 +139,22 @@ WHERE (
 
         AssertSql(
             """
-SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
-FROM "JsonEntitiesBasic" AS "j"
-WHERE (
-    SELECT "t0"."c"
-    FROM (
-        SELECT "t"."OwnedReferenceLeaf" ->> 'SomethingSomething' AS "c", "t"."key", "t"."key" AS "key0"
-        FROM (
+            SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
+            FROM "JsonEntitiesBasic" AS "j"
+            WHERE (
+            SELECT "t0"."c"
+            FROM (
+            SELECT "t"."OwnedReferenceLeaf" ->> 'SomethingSomething' AS "c", "t"."key", "t"."key" AS "key0"
+            FROM (
             SELECT "o"."value" ->> 'Date' AS "Date", "o"."value" ->> 'Enum' AS "Enum", "o"."value" ->> 'Enums' AS "Enums", "o"."value" ->> 'Fraction' AS "Fraction", "o"."value" ->> 'NullableEnum' AS "NullableEnum", "o"."value" ->> 'NullableEnums' AS "NullableEnums", "o"."value" ->> 'OwnedCollectionLeaf' AS "OwnedCollectionLeaf", "o"."value" ->> 'OwnedReferenceLeaf' AS "OwnedReferenceLeaf", "o"."key"
             FROM json_each("j"."OwnedReferenceRoot", '$.OwnedCollectionBranch') AS "o"
-        ) AS "t"
-        ORDER BY "t"."key"
-        LIMIT -1 OFFSET 1
-    ) AS "t0"
-    ORDER BY "t0"."key0"
-    LIMIT 1 OFFSET 0) = 'e1_r_c2_r'
-"""
+            ) AS "t"
+            ORDER BY "t"."key"
+            LIMIT -1 OFFSET 1
+            ) AS "t0"
+            ORDER BY "t0"."key0"
+            LIMIT 1 OFFSET 0) = 'e1_r_c2_r'
+            """
         );
     }
 
@@ -164,22 +164,22 @@ WHERE (
 
         AssertSql(
             """
-SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
-FROM "JsonEntitiesBasic" AS "j"
-WHERE (
-    SELECT "t0"."c"
-    FROM (
-        SELECT "t"."OwnedReferenceLeaf" ->> 'SomethingSomething' AS "c", "t"."key", "t"."Date" AS "c0"
-        FROM (
+            SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
+            FROM "JsonEntitiesBasic" AS "j"
+            WHERE (
+            SELECT "t0"."c"
+            FROM (
+            SELECT "t"."OwnedReferenceLeaf" ->> 'SomethingSomething' AS "c", "t"."key", "t"."Date" AS "c0"
+            FROM (
             SELECT "o"."value" ->> 'Date' AS "Date", "o"."value" ->> 'Enum' AS "Enum", "o"."value" ->> 'Enums' AS "Enums", "o"."value" ->> 'Fraction' AS "Fraction", "o"."value" ->> 'NullableEnum' AS "NullableEnum", "o"."value" ->> 'NullableEnums' AS "NullableEnums", "o"."value" ->> 'OwnedCollectionLeaf' AS "OwnedCollectionLeaf", "o"."value" ->> 'OwnedReferenceLeaf' AS "OwnedReferenceLeaf", "o"."key"
             FROM json_each("j"."OwnedReferenceRoot", '$.OwnedCollectionBranch') AS "o"
-        ) AS "t"
-        ORDER BY "t"."Date" DESC
-        LIMIT -1 OFFSET 1
-    ) AS "t0"
-    ORDER BY "t0"."c0" DESC
-    LIMIT 1 OFFSET 0) = 'e1_r_c1_r'
-"""
+            ) AS "t"
+            ORDER BY "t"."Date" DESC
+            LIMIT -1 OFFSET 1
+            ) AS "t0"
+            ORDER BY "t0"."c0" DESC
+            LIMIT 1 OFFSET 0) = 'e1_r_c1_r'
+            """
         );
     }
 
@@ -189,21 +189,21 @@ WHERE (
 
         AssertSql(
             """
-SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
-FROM "JsonEntitiesBasic" AS "j"
-WHERE EXISTS (
-    SELECT 1
-    FROM (
-        SELECT "o"."value" ->> 'Name' AS "Name", "o"."value" ->> 'Names' AS "Names", "o"."value" ->> 'Number' AS "Number", "o"."value" ->> 'Numbers' AS "Numbers", "o"."value" ->> 'OwnedCollectionBranch' AS "OwnedCollectionBranch", "o"."value" ->> 'OwnedReferenceBranch' AS "OwnedReferenceBranch", "o"."key"
-        FROM json_each("j"."OwnedCollectionRoot", '$') AS "o"
-    ) AS "t"
-    WHERE (
-        SELECT COUNT(*)
-        FROM (
+            SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
+            FROM "JsonEntitiesBasic" AS "j"
+            WHERE EXISTS (
+            SELECT 1
+            FROM (
+            SELECT "o"."value" ->> 'Name' AS "Name", "o"."value" ->> 'Names' AS "Names", "o"."value" ->> 'Number' AS "Number", "o"."value" ->> 'Numbers' AS "Numbers", "o"."value" ->> 'OwnedCollectionBranch' AS "OwnedCollectionBranch", "o"."value" ->> 'OwnedReferenceBranch' AS "OwnedReferenceBranch", "o"."key"
+            FROM json_each("j"."OwnedCollectionRoot", '$') AS "o"
+            ) AS "t"
+            WHERE (
+            SELECT COUNT(*)
+            FROM (
             SELECT "o0"."value" ->> 'Date' AS "Date", "o0"."value" ->> 'Enum' AS "Enum", "o0"."value" ->> 'Enums' AS "Enums", "o0"."value" ->> 'Fraction' AS "Fraction", "o0"."value" ->> 'NullableEnum' AS "NullableEnum", "o0"."value" ->> 'NullableEnums' AS "NullableEnums", "o0"."value" ->> 'OwnedCollectionLeaf' AS "OwnedCollectionLeaf", "o0"."value" ->> 'OwnedReferenceLeaf' AS "OwnedReferenceLeaf", "o0"."key"
             FROM json_each("t"."OwnedCollectionBranch", '$') AS "o0"
-        ) AS "t0") = 2)
-"""
+            ) AS "t0") = 2)
+            """
         );
     }
 
@@ -240,13 +240,13 @@ WHERE EXISTS (
 
         AssertSql(
             """
-prm='1' (DbType = String)
+            prm='1' (DbType = String)
 
-SELECT "m"."Id", "m"."EntityBasicId", "m"."Name", "m"."OwnedCollectionRoot", "m"."OwnedReferenceRoot"
-FROM (
-    SELECT * FROM "JsonEntitiesBasic" AS j WHERE "j"."Id" = @prm
-) AS "m"
-"""
+            SELECT "m"."Id", "m"."EntityBasicId", "m"."Name", "m"."OwnedCollectionRoot", "m"."OwnedReferenceRoot"
+            FROM (
+            SELECT * FROM "JsonEntitiesBasic" AS j WHERE "j"."Id" = @prm
+            ) AS "m"
+            """
         );
     }
 
@@ -256,12 +256,12 @@ FROM (
 
         AssertSql(
             """
-@__prm_0='0'
+            @__prm_0='0'
 
-SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
-FROM "JsonEntitiesBasic" AS "j"
-WHERE "j"."OwnedCollectionRoot" ->> '$[1].OwnedCollectionBranch' ->> @__prm_0 ->> 'OwnedCollectionLeaf' ->> ("j"."Id" - 1) ->> 'SomethingSomething' = 'e1_c2_c1_c1'
-"""
+            SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
+            FROM "JsonEntitiesBasic" AS "j"
+            WHERE "j"."OwnedCollectionRoot" ->> '$[1].OwnedCollectionBranch' ->> @__prm_0 ->> 'OwnedCollectionLeaf' ->> ("j"."Id" - 1) ->> 'SomethingSomething' = 'e1_c2_c1_c1'
+            """
         );
     }
 
@@ -271,10 +271,10 @@ WHERE "j"."OwnedCollectionRoot" ->> '$[1].OwnedCollectionBranch' ->> @__prm_0 ->
 
         AssertSql(
             """
-SELECT "j"."Id", "j"."Reference"
-FROM "JsonEntitiesConverters" AS "j"
-WHERE "j"."Reference" ->> 'BoolConvertedToIntZeroOne' = 1
-"""
+            SELECT "j"."Id", "j"."Reference"
+            FROM "JsonEntitiesConverters" AS "j"
+            WHERE "j"."Reference" ->> 'BoolConvertedToIntZeroOne' = 1
+            """
         );
     }
 
@@ -284,10 +284,10 @@ WHERE "j"."Reference" ->> 'BoolConvertedToIntZeroOne' = 1
 
         AssertSql(
             """
-SELECT "j"."Id", "j"."Reference"
-FROM "JsonEntitiesConverters" AS "j"
-WHERE "j"."Reference" ->> 'BoolConvertedToStringTrueFalse' = 'True'
-"""
+            SELECT "j"."Id", "j"."Reference"
+            FROM "JsonEntitiesConverters" AS "j"
+            WHERE "j"."Reference" ->> 'BoolConvertedToStringTrueFalse' = 'True'
+            """
         );
     }
 
@@ -297,10 +297,10 @@ WHERE "j"."Reference" ->> 'BoolConvertedToStringTrueFalse' = 'True'
 
         AssertSql(
             """
-SELECT "j"."Id", "j"."Reference"
-FROM "JsonEntitiesConverters" AS "j"
-WHERE "j"."Reference" ->> 'BoolConvertedToStringYN' = 'Y'
-"""
+            SELECT "j"."Id", "j"."Reference"
+            FROM "JsonEntitiesConverters" AS "j"
+            WHERE "j"."Reference" ->> 'BoolConvertedToStringYN' = 'Y'
+            """
         );
     }
 

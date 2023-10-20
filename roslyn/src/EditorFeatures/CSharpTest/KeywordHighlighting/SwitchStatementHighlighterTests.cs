@@ -25,21 +25,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    void M()
-                    {
-                        {|Cursor:[|switch|]|} (i)
-                        {
-                            [|case|] 0:
-                                CaseZero();
-                                [|break|];
-                            [|case|] 1:
-                                CaseOne();
-                                [|break|];
-                            [|default|]:
-                                CaseOthers();
-                                [|break|];
-                        }
-                    }
+                void M()
+                {
+                {|Cursor:[|switch|]|} (i)
+                {
+                [|case|] 0:
+                CaseZero();
+                [|break|];
+                [|case|] 1:
+                CaseOne();
+                [|break|];
+                [|default|]:
+                CaseOthers();
+                [|break|];
+                }
+                }
                 }
                 """
             );
@@ -52,21 +52,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|switch|] (i)
-                        {
-                            {|Cursor:[|case|]|} 0:
-                                CaseZero();
-                                [|break|];
-                            [|case|] 1:
-                                CaseOne();
-                                [|break|];
-                            [|default|]:
-                                CaseOthers();
-                                [|break|];
-                        }
-                    }
+                void M()
+                {
+                [|switch|] (i)
+                {
+                {|Cursor:[|case|]|} 0:
+                CaseZero();
+                [|break|];
+                [|case|] 1:
+                CaseOne();
+                [|break|];
+                [|default|]:
+                CaseOthers();
+                [|break|];
+                }
+                }
                 }
                 """
             );
@@ -79,21 +79,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|switch|] (i)
-                        {
-                            [|case|] 0:{|Cursor:|}
-                                CaseZero();
-                                [|break|];
-                            [|case|] 1:
-                                CaseOne();
-                                [|break|];
-                            [|default|]:
-                                CaseOthers();
-                                [|break|];
-                        }
-                    }
+                void M()
+                {
+                [|switch|] (i)
+                {
+                [|case|] 0:{|Cursor:|}
+                CaseZero();
+                [|break|];
+                [|case|] 1:
+                CaseOne();
+                [|break|];
+                [|default|]:
+                CaseOthers();
+                [|break|];
+                }
+                }
                 }
                 """
             );
@@ -106,21 +106,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    void M()
-                    {
-                        switch (i)
-                        {
-                            case {|Cursor:0|}:
-                                CaseZero();
-                                break;
-                            case 1:
-                                CaseOne();
-                                break;
-                            default:
-                                CaseOthers();
-                                break;
-                        }
-                    }
+                void M()
+                {
+                switch (i)
+                {
+                case {|Cursor:0|}:
+                CaseZero();
+                break;
+                case 1:
+                CaseOne();
+                break;
+                default:
+                CaseOthers();
+                break;
+                }
+                }
                 }
                 """
             );
@@ -133,21 +133,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|switch|] (i)
-                        {
-                            [|case|] 0:
-                                CaseZero();
-                                {|Cursor:[|break|];|}
-                            [|case|] 1:
-                                CaseOne();
-                                [|break|];
-                            [|default|]:
-                                CaseOthers();
-                                [|break|];
-                        }
-                    }
+                void M()
+                {
+                [|switch|] (i)
+                {
+                [|case|] 0:
+                CaseZero();
+                {|Cursor:[|break|];|}
+                [|case|] 1:
+                CaseOne();
+                [|break|];
+                [|default|]:
+                CaseOthers();
+                [|break|];
+                }
+                }
                 }
                 """
             );
@@ -160,21 +160,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|switch|] (i)
-                        {
-                            [|case|] 0:
-                                CaseZero();
-                                [|break|];
-                            [|case|] 1:
-                                CaseOne();
-                                [|break|];
-                            {|Cursor:[|default|]:|}
-                                CaseOthers();
-                                [|break|];
-                        }
-                    }
+                void M()
+                {
+                [|switch|] (i)
+                {
+                [|case|] 0:
+                CaseZero();
+                [|break|];
+                [|case|] 1:
+                CaseOne();
+                [|break|];
+                {|Cursor:[|default|]:|}
+                CaseOthers();
+                [|break|];
+                }
+                }
                 }
                 """
             );
@@ -187,21 +187,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|switch|] (i)
-                        {
-                            [|case|] 0:
-                                CaseZero();
-                                {|Cursor:[|goto case|]|} 1;
-                            [|case|] 1:
-                                CaseOne();
-                                [|goto default|];
-                            [|default|]:
-                                CaseOthers();
-                                [|break|];
-                        }
-                    }
+                void M()
+                {
+                [|switch|] (i)
+                {
+                [|case|] 0:
+                CaseZero();
+                {|Cursor:[|goto case|]|} 1;
+                [|case|] 1:
+                CaseOne();
+                [|goto default|];
+                [|default|]:
+                CaseOthers();
+                [|break|];
+                }
+                }
                 }
                 """
             );
@@ -214,21 +214,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|switch|] (i)
-                        {
-                            [|case|] 0:
-                                CaseZero();
-                                [|goto case|] 1;{|Cursor:|}
-                            [|case|] 1:
-                                CaseOne();
-                                [|goto default|];
-                            [|default|]:
-                                CaseOthers();
-                                [|break|];
-                        }
-                    }
+                void M()
+                {
+                [|switch|] (i)
+                {
+                [|case|] 0:
+                CaseZero();
+                [|goto case|] 1;{|Cursor:|}
+                [|case|] 1:
+                CaseOne();
+                [|goto default|];
+                [|default|]:
+                CaseOthers();
+                [|break|];
+                }
+                }
                 }
                 """
             );
@@ -241,21 +241,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    void M()
-                    {
-                        switch (i)
-                        {
-                            case 0:
-                                CaseZero();
-                                goto case {|Cursor:1|};
-                            case 1:
-                                CaseOne();
-                                goto default;
-                            default:
-                                CaseOthers();
-                                break;
-                        }
-                    }
+                void M()
+                {
+                switch (i)
+                {
+                case 0:
+                CaseZero();
+                goto case {|Cursor:1|};
+                case 1:
+                CaseOne();
+                goto default;
+                default:
+                CaseOthers();
+                break;
+                }
+                }
                 }
                 """
             );
@@ -268,21 +268,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|switch|] (i)
-                        {
-                            [|case|] 0:
-                                CaseZero();
-                                [|goto case|] 1;
-                            [|case|] 1:
-                                CaseOne();
-                                {|Cursor:[|goto default|];|}
-                            [|default|]:
-                                CaseOthers();
-                                [|break|];
-                        }
-                    }
+                void M()
+                {
+                [|switch|] (i)
+                {
+                [|case|] 0:
+                CaseZero();
+                [|goto case|] 1;
+                [|case|] 1:
+                CaseOne();
+                {|Cursor:[|goto default|];|}
+                [|default|]:
+                CaseOthers();
+                [|break|];
+                }
+                }
                 }
                 """
             );
@@ -295,39 +295,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    void M()
-                    {
-                        foreach (var a in x)
-                        {
-                            if (a)
-                            {
-                                break;
-                            }
-                            else
-                            {
-                                {|Cursor:[|switch|]|} (b)
-                                {
-                                    [|case|] 0:
-                                        while (true)
-                                        {
-                                            do
-                                            {
-                                                break;
-                                            }
-                                            while (false);
-                                            break;
-                                        }
+                void M()
+                {
+                foreach (var a in x)
+                {
+                if (a)
+                {
+                break;
+                }
+                else
+                {
+                {|Cursor:[|switch|]|} (b)
+                {
+                [|case|] 0:
+                while (true)
+                {
+                do
+                {
+                break;
+                }
+                while (false);
+                break;
+                }
 
-                                        [|break|];
-                                }
-                            }
+                [|break|];
+                }
+                }
 
-                            for (int i = 0; i < 10; i++)
-                            {
-                                break;
-                            }
-                        }
-                    }
+                for (int i = 0; i < 10; i++)
+                {
+                break;
+                }
+                }
+                }
                 }
                 """
             );
@@ -340,39 +340,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    void M()
-                    {
-                        foreach (var a in x)
-                        {
-                            if (a)
-                            {
-                                break;
-                            }
-                            else
-                            {
-                                [|switch|] (b)
-                                {
-                                    {|Cursor:[|case|]|} 0:
-                                        while (true)
-                                        {
-                                            do
-                                            {
-                                                break;
-                                            }
-                                            while (false);
-                                            break;
-                                        }
+                void M()
+                {
+                foreach (var a in x)
+                {
+                if (a)
+                {
+                break;
+                }
+                else
+                {
+                [|switch|] (b)
+                {
+                {|Cursor:[|case|]|} 0:
+                while (true)
+                {
+                do
+                {
+                break;
+                }
+                while (false);
+                break;
+                }
 
-                                        [|break|];
-                                }
-                            }
+                [|break|];
+                }
+                }
 
-                            for (int i = 0; i < 10; i++)
-                            {
-                                break;
-                            }
-                        }
-                    }
+                for (int i = 0; i < 10; i++)
+                {
+                break;
+                }
+                }
+                }
                 }
                 """
             );
@@ -385,39 +385,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    void M()
-                    {
-                        foreach (var a in x)
-                        {
-                            if (a)
-                            {
-                                break;
-                            }
-                            else
-                            {
-                                switch (b)
-                                {
-                                    case {|Cursor:|}0:
-                                        while (true)
-                                        {
-                                            do
-                                            {
-                                                break;
-                                            }
-                                            while (false);
-                                            break;
-                                        }
+                void M()
+                {
+                foreach (var a in x)
+                {
+                if (a)
+                {
+                break;
+                }
+                else
+                {
+                switch (b)
+                {
+                case {|Cursor:|}0:
+                while (true)
+                {
+                do
+                {
+                break;
+                }
+                while (false);
+                break;
+                }
 
-                                        break;
-                                }
-                            }
+                break;
+                }
+                }
 
-                            for (int i = 0; i < 10; i++)
-                            {
-                                break;
-                            }
-                        }
-                    }
+                for (int i = 0; i < 10; i++)
+                {
+                break;
+                }
+                }
+                }
                 }
                 """
             );
@@ -430,39 +430,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    void M()
-                    {
-                        foreach (var a in x)
-                        {
-                            if (a)
-                            {
-                                break;
-                            }
-                            else
-                            {
-                                [|switch|] (b)
-                                {
-                                    [|case|] 0:{|Cursor:|}
-                                        while (true)
-                                        {
-                                            do
-                                            {
-                                                break;
-                                            }
-                                            while (false);
-                                            break;
-                                        }
+                void M()
+                {
+                foreach (var a in x)
+                {
+                if (a)
+                {
+                break;
+                }
+                else
+                {
+                [|switch|] (b)
+                {
+                [|case|] 0:{|Cursor:|}
+                while (true)
+                {
+                do
+                {
+                break;
+                }
+                while (false);
+                break;
+                }
 
-                                        [|break|];
-                                }
-                            }
+                [|break|];
+                }
+                }
 
-                            for (int i = 0; i < 10; i++)
-                            {
-                                break;
-                            }
-                        }
-                    }
+                for (int i = 0; i < 10; i++)
+                {
+                break;
+                }
+                }
+                }
                 }
                 """
             );
@@ -475,39 +475,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    void M()
-                    {
-                        foreach (var a in x)
-                        {
-                            if (a)
-                            {
-                                break;
-                            }
-                            else
-                            {
-                                [|switch|] (b)
-                                {
-                                    [|case|] 0:
-                                        while (true)
-                                        {
-                                            do
-                                            {
-                                                break;
-                                            }
-                                            while (false);
-                                            break;
-                                        }
+                void M()
+                {
+                foreach (var a in x)
+                {
+                if (a)
+                {
+                break;
+                }
+                else
+                {
+                [|switch|] (b)
+                {
+                [|case|] 0:
+                while (true)
+                {
+                do
+                {
+                break;
+                }
+                while (false);
+                break;
+                }
 
-                                        {|Cursor:[|break|];|}
-                                }
-                            }
+                {|Cursor:[|break|];|}
+                }
+                }
 
-                            for (int i = 0; i < 10; i++)
-                            {
-                                break;
-                            }
-                        }
-                    }
+                for (int i = 0; i < 10; i++)
+                {
+                break;
+                }
+                }
+                }
                 }
                 """
             );
@@ -520,14 +520,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    static void M()
-                    {
-                        [|switch|] (2)
-                        {
-                            [|case|] 1:
-                                {|Cursor:[|goto|]|}
-                        }
-                    }
+                static void M()
+                {
+                [|switch|] (2)
+                {
+                [|case|] 1:
+                {|Cursor:[|goto|]|}
+                }
+                }
                 }
                 """
             );
@@ -540,22 +540,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    void M()
-                    {
-                        label:
-                        [|switch|] (i)
-                        {
-                            [|case|] 0:
-                                CaseZero();
-                                [|{|Cursor:goto|} case|] 1;
-                            [|case|] 1:
-                                CaseOne();
-                                [|goto default|];
-                            [|default|]:
-                                CaseOthers();
-                                goto label;
-                        }
-                    }
+                void M()
+                {
+                label:
+                [|switch|] (i)
+                {
+                [|case|] 0:
+                CaseZero();
+                [|{|Cursor:goto|} case|] 1;
+                [|case|] 1:
+                CaseOne();
+                [|goto default|];
+                [|default|]:
+                CaseOthers();
+                goto label;
+                }
+                }
                 }
                 """
             );
@@ -568,22 +568,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    void M()
-                    {
-                        label:
-                        [|switch|] (i)
-                        {
-                            [|case|] 0:
-                                CaseZero();
-                                [|goto case|] 1;
-                            [|case|] 1:
-                                CaseOne();
-                                [|{|Cursor:goto|} default|];
-                            [|default|]:
-                                CaseOthers();
-                                goto label;
-                        }
-                    }
+                void M()
+                {
+                label:
+                [|switch|] (i)
+                {
+                [|case|] 0:
+                CaseZero();
+                [|goto case|] 1;
+                [|case|] 1:
+                CaseOne();
+                [|{|Cursor:goto|} default|];
+                [|default|]:
+                CaseOthers();
+                goto label;
+                }
+                }
                 }
                 """
             );
@@ -596,22 +596,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    void M()
-                    {
-                        label:
-                        switch (i)
-                        {
-                            case 0:
-                                CaseZero();
-                                goto case 1;
-                            case 1:
-                                CaseOne();
-                                goto default;
-                            default:
-                                CaseOthers();
-                                {|Cursor:goto|} label;
-                        }
-                    }
+                void M()
+                {
+                label:
+                switch (i)
+                {
+                case 0:
+                CaseZero();
+                goto case 1;
+                case 1:
+                CaseOne();
+                goto default;
+                default:
+                CaseOthers();
+                {|Cursor:goto|} label;
+                }
+                }
                 }
                 """
             );
@@ -624,27 +624,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    void M()
-                    {
-                        {|Cursor:[|switch|]|} (i)
-                        {
-                            [|case|] 0:
-                            {
-                                CaseZero();
-                                [|goto case|] 1;
-                            }
-                            [|case|] 1:
-                            {
-                                CaseOne();
-                                [|goto default|];
-                            }
-                            [|default|]:
-                            {
-                                CaseOthers();
-                                [|break|];
-                            }
-                        }
-                    }
+                void M()
+                {
+                {|Cursor:[|switch|]|} (i)
+                {
+                [|case|] 0:
+                {
+                CaseZero();
+                [|goto case|] 1;
+                }
+                [|case|] 1:
+                {
+                CaseOne();
+                [|goto default|];
+                }
+                [|default|]:
+                {
+                CaseOthers();
+                [|break|];
+                }
+                }
+                }
                 }
                 """
             );
@@ -657,27 +657,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|switch|] (i)
-                        {
-                            [|case|] 0:
-                            {
-                                CaseZero();
-                                [|goto case|] 1;
-                            }
-                            [|case|] 1:
-                            {
-                                CaseOne();
-                                [|goto default|];
-                            }
-                            [|default|]:
-                            {
-                                CaseOthers();
-                                {|Cursor:[|break|]|};
-                            }
-                        }
-                    }
+                void M()
+                {
+                [|switch|] (i)
+                {
+                [|case|] 0:
+                {
+                CaseZero();
+                [|goto case|] 1;
+                }
+                [|case|] 1:
+                {
+                CaseOne();
+                [|goto default|];
+                }
+                [|default|]:
+                {
+                CaseOthers();
+                {|Cursor:[|break|]|};
+                }
+                }
+                }
                 }
                 """
             );
@@ -690,25 +690,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    void M()
-                    {
-                        {|Cursor:[|switch|]|} (true)
-                        {
-                            [|case|] true:
-                                while (true)
-                                {
-                                    [|goto case|] true;
-                                    break;
+                void M()
+                {
+                {|Cursor:[|switch|]|} (true)
+                {
+                [|case|] true:
+                while (true)
+                {
+                [|goto case|] true;
+                break;
 
-                                    switch (true)
-                                    {
-                                        case true:
-                                            goto case true;
-                                            break;
-                                    }
-                                }
-                        }
-                    }
+                switch (true)
+                {
+                case true:
+                goto case true;
+                break;
+                }
+                }
+                }
+                }
                 }
                 """
             );
@@ -721,25 +721,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|switch|] (true)
-                        {
-                            [|case|] true:
-                                while (true)
-                                {
-                                    [|{|Cursor:goto|} case|] true;
-                                    break;
+                void M()
+                {
+                [|switch|] (true)
+                {
+                [|case|] true:
+                while (true)
+                {
+                [|{|Cursor:goto|} case|] true;
+                break;
 
-                                    switch (true)
-                                    {
-                                        case true:
-                                            goto case true;
-                                            break;
-                                    }
-                                }
-                        }
-                    }
+                switch (true)
+                {
+                case true:
+                goto case true;
+                break;
+                }
+                }
+                }
+                }
                 }
                 """
             );
@@ -752,25 +752,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    void M()
-                    {
-                        switch (true)
-                        {
-                            case true:
-                                while (true)
-                                {
-                                    goto case true;
-                                    {|Cursor:break|};
+                void M()
+                {
+                switch (true)
+                {
+                case true:
+                while (true)
+                {
+                goto case true;
+                {|Cursor:break|};
 
-                                    switch (true)
-                                    {
-                                        case true:
-                                            goto case true;
-                                            break;
-                                    }
-                                }
-                        }
-                    }
+                switch (true)
+                {
+                case true:
+                goto case true;
+                break;
+                }
+                }
+                }
+                }
                 }
                 """
             );
@@ -783,16 +783,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    void M()
-                    {
-                        {|Cursor:[|switch|]|} (true)
-                        {
-                            [|case|] true when true:
-                                [|break|];
-                            [|case|] bool b:
-                                [|break|];
-                        }
-                    }
+                void M()
+                {
+                {|Cursor:[|switch|]|} (true)
+                {
+                [|case|] true when true:
+                [|break|];
+                [|case|] bool b:
+                [|break|];
+                }
+                }
                 }
                 """
             );
@@ -805,16 +805,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    void M()
-                    {
-                        switch (true)
-                        {
-                            case true {|Cursor:when|} true:
-                                break;
-                            case bool b:
-                                break;
-                        }
-                    }
+                void M()
+                {
+                switch (true)
+                {
+                case true {|Cursor:when|} true:
+                break;
+                case bool b:
+                break;
+                }
+                }
                 }
                 """
             );
@@ -827,16 +827,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|switch|] (true)
-                        {
-                            [|case|] true when true:{|Cursor:|}
-                                [|break|];
-                            [|case|] bool b:
-                                [|break|];
-                        }
-                    }
+                void M()
+                {
+                [|switch|] (true)
+                {
+                [|case|] true when true:{|Cursor:|}
+                [|break|];
+                [|case|] bool b:
+                [|break|];
+                }
+                }
                 }
                 """
             );
@@ -849,16 +849,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    void M()
-                    {
-                        [|switch|] (true)
-                        {
-                            [|case|] true when true:
-                                [|break|];
-                            [|case|] bool b:{|Cursor:|}
-                                [|break|];
-                        }
-                    }
+                void M()
+                {
+                [|switch|] (true)
+                {
+                [|case|] true when true:
+                [|break|];
+                [|case|] bool b:{|Cursor:|}
+                [|break|];
+                }
+                }
                 }
                 """
             );
@@ -871,16 +871,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    void M()
-                    {
-                        switch (true)
-                        {
-                            case true when {|Cursor:true|}:
-                                break;
-                            case bool b:
-                                break;
-                        }
-                    }
+                void M()
+                {
+                switch (true)
+                {
+                case true when {|Cursor:true|}:
+                break;
+                case bool b:
+                break;
+                }
+                }
                 }
                 """
             );
@@ -893,16 +893,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 class C
                 {
-                    void M()
-                    {
-                        switch (true)
-                        {
-                            case true when true:
-                                break;
-                            case {|Cursor:bool b|}:
-                                break;
-                        }
-                    }
+                void M()
+                {
+                switch (true)
+                {
+                case true when true:
+                break;
+                case {|Cursor:bool b|}:
+                break;
+                }
+                }
                 }
                 """
             );

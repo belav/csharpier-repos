@@ -1539,26 +1539,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                 """,
                 """
                 <Tree>
-                  <CompilationUnit>
-                    <Sequence>
-                      <ConditionalExpressionGrouping>
-                        <OpenParenToken>(</OpenParenToken>
-                        <QuestionToken>?</QuestionToken>
-                        <SimpleOptionsGrouping>
-                          <OpenParenToken>(</OpenParenToken>
-                          <QuestionToken>?</QuestionToken>
-                          <OptionsToken>i</OptionsToken>
-                          <CloseParenToken>)</CloseParenToken>
-                        </SimpleOptionsGrouping>
-                        <Sequence />
-                        <CloseParenToken>)</CloseParenToken>
-                      </ConditionalExpressionGrouping>
-                    </Sequence>
-                    <EndOfFile />
-                  </CompilationUnit>
-                  <Captures>
-                    <Capture Name="0" Span="[10..17)" Text="(?(?i))" />
-                  </Captures>
+                <CompilationUnit>
+                <Sequence>
+                <ConditionalExpressionGrouping>
+                <OpenParenToken>(</OpenParenToken>
+                <QuestionToken>?</QuestionToken>
+                <SimpleOptionsGrouping>
+                <OpenParenToken>(</OpenParenToken>
+                <QuestionToken>?</QuestionToken>
+                <OptionsToken>i</OptionsToken>
+                <CloseParenToken>)</CloseParenToken>
+                </SimpleOptionsGrouping>
+                <Sequence />
+                <CloseParenToken>)</CloseParenToken>
+                </ConditionalExpressionGrouping>
+                </Sequence>
+                <EndOfFile />
+                </CompilationUnit>
+                <Captures>
+                <Capture Name="0" Span="[10..17)" Text="(?(?i))" />
+                </Captures>
                 </Tree>
                 """,
                 RegexOptions.None,
@@ -1614,26 +1614,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                 """,
                 """
                 <Tree>
-                  <CompilationUnit>
-                    <Sequence>
-                      <ConditionalExpressionGrouping>
-                        <OpenParenToken>(</OpenParenToken>
-                        <QuestionToken>?</QuestionToken>
-                        <SimpleOptionsGrouping>
-                          <OpenParenToken>(</OpenParenToken>
-                          <QuestionToken>?</QuestionToken>
-                          <OptionsToken>I</OptionsToken>
-                          <CloseParenToken>)</CloseParenToken>
-                        </SimpleOptionsGrouping>
-                        <Sequence />
-                        <CloseParenToken>)</CloseParenToken>
-                      </ConditionalExpressionGrouping>
-                    </Sequence>
-                    <EndOfFile />
-                  </CompilationUnit>
-                  <Captures>
-                    <Capture Name="0" Span="[10..17)" Text="(?(?I))" />
-                  </Captures>
+                <CompilationUnit>
+                <Sequence>
+                <ConditionalExpressionGrouping>
+                <OpenParenToken>(</OpenParenToken>
+                <QuestionToken>?</QuestionToken>
+                <SimpleOptionsGrouping>
+                <OpenParenToken>(</OpenParenToken>
+                <QuestionToken>?</QuestionToken>
+                <OptionsToken>I</OptionsToken>
+                <CloseParenToken>)</CloseParenToken>
+                </SimpleOptionsGrouping>
+                <Sequence />
+                <CloseParenToken>)</CloseParenToken>
+                </ConditionalExpressionGrouping>
+                </Sequence>
+                <EndOfFile />
+                </CompilationUnit>
+                <Captures>
+                <Capture Name="0" Span="[10..17)" Text="(?(?I))" />
+                </Captures>
                 </Tree>
                 """,
                 RegexOptions.None,
@@ -1650,26 +1650,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                 """,
                 """
                 <Tree>
-                  <CompilationUnit>
-                    <Sequence>
-                      <ConditionalExpressionGrouping>
-                        <OpenParenToken>(</OpenParenToken>
-                        <QuestionToken>?</QuestionToken>
-                        <SimpleOptionsGrouping>
-                          <OpenParenToken>(</OpenParenToken>
-                          <QuestionToken>?</QuestionToken>
-                          <OptionsToken>M</OptionsToken>
-                          <CloseParenToken>)</CloseParenToken>
-                        </SimpleOptionsGrouping>
-                        <Sequence />
-                        <CloseParenToken>)</CloseParenToken>
-                      </ConditionalExpressionGrouping>
-                    </Sequence>
-                    <EndOfFile />
-                  </CompilationUnit>
-                  <Captures>
-                    <Capture Name="0" Span="[10..17)" Text="(?(?M))" />
-                  </Captures>
+                <CompilationUnit>
+                <Sequence>
+                <ConditionalExpressionGrouping>
+                <OpenParenToken>(</OpenParenToken>
+                <QuestionToken>?</QuestionToken>
+                <SimpleOptionsGrouping>
+                <OpenParenToken>(</OpenParenToken>
+                <QuestionToken>?</QuestionToken>
+                <OptionsToken>M</OptionsToken>
+                <CloseParenToken>)</CloseParenToken>
+                </SimpleOptionsGrouping>
+                <Sequence />
+                <CloseParenToken>)</CloseParenToken>
+                </ConditionalExpressionGrouping>
+                </Sequence>
+                <EndOfFile />
+                </CompilationUnit>
+                <Captures>
+                <Capture Name="0" Span="[10..17)" Text="(?(?M))" />
+                </Captures>
                 </Tree>
                 """,
                 RegexOptions.None,
@@ -1686,26 +1686,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                 """,
                 """
                 <Tree>
-                  <CompilationUnit>
-                    <Sequence>
-                      <ConditionalExpressionGrouping>
-                        <OpenParenToken>(</OpenParenToken>
-                        <QuestionToken>?</QuestionToken>
-                        <SimpleOptionsGrouping>
-                          <OpenParenToken>(</OpenParenToken>
-                          <QuestionToken>?</QuestionToken>
-                          <OptionsToken>s</OptionsToken>
-                          <CloseParenToken>)</CloseParenToken>
-                        </SimpleOptionsGrouping>
-                        <Sequence />
-                        <CloseParenToken>)</CloseParenToken>
-                      </ConditionalExpressionGrouping>
-                    </Sequence>
-                    <EndOfFile />
-                  </CompilationUnit>
-                  <Captures>
-                    <Capture Name="0" Span="[10..17)" Text="(?(?s))" />
-                  </Captures>
+                <CompilationUnit>
+                <Sequence>
+                <ConditionalExpressionGrouping>
+                <OpenParenToken>(</OpenParenToken>
+                <QuestionToken>?</QuestionToken>
+                <SimpleOptionsGrouping>
+                <OpenParenToken>(</OpenParenToken>
+                <QuestionToken>?</QuestionToken>
+                <OptionsToken>s</OptionsToken>
+                <CloseParenToken>)</CloseParenToken>
+                </SimpleOptionsGrouping>
+                <Sequence />
+                <CloseParenToken>)</CloseParenToken>
+                </ConditionalExpressionGrouping>
+                </Sequence>
+                <EndOfFile />
+                </CompilationUnit>
+                <Captures>
+                <Capture Name="0" Span="[10..17)" Text="(?(?s))" />
+                </Captures>
                 </Tree>
                 """,
                 RegexOptions.None,
@@ -1722,26 +1722,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                 """,
                 """
                 <Tree>
-                  <CompilationUnit>
-                    <Sequence>
-                      <ConditionalExpressionGrouping>
-                        <OpenParenToken>(</OpenParenToken>
-                        <QuestionToken>?</QuestionToken>
-                        <SimpleOptionsGrouping>
-                          <OpenParenToken>(</OpenParenToken>
-                          <QuestionToken>?</QuestionToken>
-                          <OptionsToken>S</OptionsToken>
-                          <CloseParenToken>)</CloseParenToken>
-                        </SimpleOptionsGrouping>
-                        <Sequence />
-                        <CloseParenToken>)</CloseParenToken>
-                      </ConditionalExpressionGrouping>
-                    </Sequence>
-                    <EndOfFile />
-                  </CompilationUnit>
-                  <Captures>
-                    <Capture Name="0" Span="[10..17)" Text="(?(?S))" />
-                  </Captures>
+                <CompilationUnit>
+                <Sequence>
+                <ConditionalExpressionGrouping>
+                <OpenParenToken>(</OpenParenToken>
+                <QuestionToken>?</QuestionToken>
+                <SimpleOptionsGrouping>
+                <OpenParenToken>(</OpenParenToken>
+                <QuestionToken>?</QuestionToken>
+                <OptionsToken>S</OptionsToken>
+                <CloseParenToken>)</CloseParenToken>
+                </SimpleOptionsGrouping>
+                <Sequence />
+                <CloseParenToken>)</CloseParenToken>
+                </ConditionalExpressionGrouping>
+                </Sequence>
+                <EndOfFile />
+                </CompilationUnit>
+                <Captures>
+                <Capture Name="0" Span="[10..17)" Text="(?(?S))" />
+                </Captures>
                 </Tree>
                 """,
                 RegexOptions.None,
@@ -1758,26 +1758,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                 """,
                 """
                 <Tree>
-                  <CompilationUnit>
-                    <Sequence>
-                      <ConditionalExpressionGrouping>
-                        <OpenParenToken>(</OpenParenToken>
-                        <QuestionToken>?</QuestionToken>
-                        <SimpleOptionsGrouping>
-                          <OpenParenToken>(</OpenParenToken>
-                          <QuestionToken>?</QuestionToken>
-                          <OptionsToken>x</OptionsToken>
-                          <CloseParenToken>)</CloseParenToken>
-                        </SimpleOptionsGrouping>
-                        <Sequence />
-                        <CloseParenToken>)</CloseParenToken>
-                      </ConditionalExpressionGrouping>
-                    </Sequence>
-                    <EndOfFile />
-                  </CompilationUnit>
-                  <Captures>
-                    <Capture Name="0" Span="[10..17)" Text="(?(?x))" />
-                  </Captures>
+                <CompilationUnit>
+                <Sequence>
+                <ConditionalExpressionGrouping>
+                <OpenParenToken>(</OpenParenToken>
+                <QuestionToken>?</QuestionToken>
+                <SimpleOptionsGrouping>
+                <OpenParenToken>(</OpenParenToken>
+                <QuestionToken>?</QuestionToken>
+                <OptionsToken>x</OptionsToken>
+                <CloseParenToken>)</CloseParenToken>
+                </SimpleOptionsGrouping>
+                <Sequence />
+                <CloseParenToken>)</CloseParenToken>
+                </ConditionalExpressionGrouping>
+                </Sequence>
+                <EndOfFile />
+                </CompilationUnit>
+                <Captures>
+                <Capture Name="0" Span="[10..17)" Text="(?(?x))" />
+                </Captures>
                 </Tree>
                 """,
                 RegexOptions.None,
@@ -1794,26 +1794,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                 """,
                 """
                 <Tree>
-                  <CompilationUnit>
-                    <Sequence>
-                      <ConditionalExpressionGrouping>
-                        <OpenParenToken>(</OpenParenToken>
-                        <QuestionToken>?</QuestionToken>
-                        <SimpleOptionsGrouping>
-                          <OpenParenToken>(</OpenParenToken>
-                          <QuestionToken>?</QuestionToken>
-                          <OptionsToken>X</OptionsToken>
-                          <CloseParenToken>)</CloseParenToken>
-                        </SimpleOptionsGrouping>
-                        <Sequence />
-                        <CloseParenToken>)</CloseParenToken>
-                      </ConditionalExpressionGrouping>
-                    </Sequence>
-                    <EndOfFile />
-                  </CompilationUnit>
-                  <Captures>
-                    <Capture Name="0" Span="[10..17)" Text="(?(?X))" />
-                  </Captures>
+                <CompilationUnit>
+                <Sequence>
+                <ConditionalExpressionGrouping>
+                <OpenParenToken>(</OpenParenToken>
+                <QuestionToken>?</QuestionToken>
+                <SimpleOptionsGrouping>
+                <OpenParenToken>(</OpenParenToken>
+                <QuestionToken>?</QuestionToken>
+                <OptionsToken>X</OptionsToken>
+                <CloseParenToken>)</CloseParenToken>
+                </SimpleOptionsGrouping>
+                <Sequence />
+                <CloseParenToken>)</CloseParenToken>
+                </ConditionalExpressionGrouping>
+                </Sequence>
+                <EndOfFile />
+                </CompilationUnit>
+                <Captures>
+                <Capture Name="0" Span="[10..17)" Text="(?(?X))" />
+                </Captures>
                 </Tree>
                 """,
                 RegexOptions.None,
@@ -1830,26 +1830,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                 """,
                 """
                 <Tree>
-                  <CompilationUnit>
-                    <Sequence>
-                      <ConditionalExpressionGrouping>
-                        <OpenParenToken>(</OpenParenToken>
-                        <QuestionToken>?</QuestionToken>
-                        <SimpleOptionsGrouping>
-                          <OpenParenToken>(</OpenParenToken>
-                          <QuestionToken>?</QuestionToken>
-                          <OptionsToken>n</OptionsToken>
-                          <CloseParenToken>)</CloseParenToken>
-                        </SimpleOptionsGrouping>
-                        <Sequence />
-                        <CloseParenToken>)</CloseParenToken>
-                      </ConditionalExpressionGrouping>
-                    </Sequence>
-                    <EndOfFile />
-                  </CompilationUnit>
-                  <Captures>
-                    <Capture Name="0" Span="[10..17)" Text="(?(?n))" />
-                  </Captures>
+                <CompilationUnit>
+                <Sequence>
+                <ConditionalExpressionGrouping>
+                <OpenParenToken>(</OpenParenToken>
+                <QuestionToken>?</QuestionToken>
+                <SimpleOptionsGrouping>
+                <OpenParenToken>(</OpenParenToken>
+                <QuestionToken>?</QuestionToken>
+                <OptionsToken>n</OptionsToken>
+                <CloseParenToken>)</CloseParenToken>
+                </SimpleOptionsGrouping>
+                <Sequence />
+                <CloseParenToken>)</CloseParenToken>
+                </ConditionalExpressionGrouping>
+                </Sequence>
+                <EndOfFile />
+                </CompilationUnit>
+                <Captures>
+                <Capture Name="0" Span="[10..17)" Text="(?(?n))" />
+                </Captures>
                 </Tree>
                 """,
                 RegexOptions.None,
@@ -1866,26 +1866,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                 """,
                 """
                 <Tree>
-                  <CompilationUnit>
-                    <Sequence>
-                      <ConditionalExpressionGrouping>
-                        <OpenParenToken>(</OpenParenToken>
-                        <QuestionToken>?</QuestionToken>
-                        <SimpleOptionsGrouping>
-                          <OpenParenToken>(</OpenParenToken>
-                          <QuestionToken>?</QuestionToken>
-                          <OptionsToken>m</OptionsToken>
-                          <CloseParenToken>)</CloseParenToken>
-                        </SimpleOptionsGrouping>
-                        <Sequence />
-                        <CloseParenToken>)</CloseParenToken>
-                      </ConditionalExpressionGrouping>
-                    </Sequence>
-                    <EndOfFile />
-                  </CompilationUnit>
-                  <Captures>
-                    <Capture Name="0" Span="[10..17)" Text="(?(?m))" />
-                  </Captures>
+                <CompilationUnit>
+                <Sequence>
+                <ConditionalExpressionGrouping>
+                <OpenParenToken>(</OpenParenToken>
+                <QuestionToken>?</QuestionToken>
+                <SimpleOptionsGrouping>
+                <OpenParenToken>(</OpenParenToken>
+                <QuestionToken>?</QuestionToken>
+                <OptionsToken>m</OptionsToken>
+                <CloseParenToken>)</CloseParenToken>
+                </SimpleOptionsGrouping>
+                <Sequence />
+                <CloseParenToken>)</CloseParenToken>
+                </ConditionalExpressionGrouping>
+                </Sequence>
+                <EndOfFile />
+                </CompilationUnit>
+                <Captures>
+                <Capture Name="0" Span="[10..17)" Text="(?(?m))" />
+                </Captures>
                 </Tree>
                 """,
                 RegexOptions.None,
@@ -2661,26 +2661,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
                 """,
                 """
                 <Tree>
-                  <CompilationUnit>
-                    <Sequence>
-                      <ConditionalExpressionGrouping>
-                        <OpenParenToken>(</OpenParenToken>
-                        <QuestionToken>?</QuestionToken>
-                        <SimpleOptionsGrouping>
-                          <OpenParenToken>(</OpenParenToken>
-                          <QuestionToken>?</QuestionToken>
-                          <OptionsToken>N</OptionsToken>
-                          <CloseParenToken>)</CloseParenToken>
-                        </SimpleOptionsGrouping>
-                        <Sequence />
-                        <CloseParenToken>)</CloseParenToken>
-                      </ConditionalExpressionGrouping>
-                    </Sequence>
-                    <EndOfFile />
-                  </CompilationUnit>
-                  <Captures>
-                    <Capture Name="0" Span="[10..17)" Text="(?(?N))" />
-                  </Captures>
+                <CompilationUnit>
+                <Sequence>
+                <ConditionalExpressionGrouping>
+                <OpenParenToken>(</OpenParenToken>
+                <QuestionToken>?</QuestionToken>
+                <SimpleOptionsGrouping>
+                <OpenParenToken>(</OpenParenToken>
+                <QuestionToken>?</QuestionToken>
+                <OptionsToken>N</OptionsToken>
+                <CloseParenToken>)</CloseParenToken>
+                </SimpleOptionsGrouping>
+                <Sequence />
+                <CloseParenToken>)</CloseParenToken>
+                </ConditionalExpressionGrouping>
+                </Sequence>
+                <EndOfFile />
+                </CompilationUnit>
+                <Captures>
+                <Capture Name="0" Span="[10..17)" Text="(?(?N))" />
+                </Captures>
                 </Tree>
                 """,
                 RegexOptions.None,

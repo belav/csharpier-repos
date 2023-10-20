@@ -25,20 +25,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
         public void GenericType_NotMissingWithMissingTypeArgument()
         {
             var source = """
-                namespace N
-                {
-                    public class C
-                    {
-                        public void M(D<string> x)
-                        {
-                        }
-                    }
+            namespace N
+            {
+            public class C
+            {
+            public void M(D<string> x)
+            {
+            }
+            }
 
-                    public class D<T>
-                    {
-                    }
-                }
-                """;
+            public class D<T>
+            {
+            }
+            }
+            """;
 
             VerifyResolution(source, c => c.GetMember("N.C.M"));
         }
@@ -47,22 +47,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
         public void GenericType_MissingWithNonMissingTypeArgument()
         {
             var source = """
-                using System.Collections.Generic;
+            using System.Collections.Generic;
 
-                namespace N
-                {
-                    public class C
-                    {
-                        public void M(List<D> x)
-                        {
-                        }
-                    }
+            namespace N
+            {
+            public class C
+            {
+            public void M(List<D> x)
+            {
+            }
+            }
 
-                    public class D
-                    {
-                    }
-                }
-                """;
+            public class D
+            {
+            }
+            }
+            """;
 
             VerifyResolution(source, c => c.GetMember("N.C.M"));
         }
@@ -71,18 +71,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
         public void GenericType_MissingWithMissingTypeArgument()
         {
             var source = """
-                using System.Collections.Generic;
+            using System.Collections.Generic;
 
-                namespace N
-                {
-                    public class C
-                    {
-                        public void M(List<string> x)
-                        {
-                        }
-                    }
-                }
-                """;
+            namespace N
+            {
+            public class C
+            {
+            public void M(List<string> x)
+            {
+            }
+            }
+            }
+            """;
 
             VerifyResolution(source, c => c.GetMember("N.C.M"));
         }
@@ -91,16 +91,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
         public void Tuple_MissingTypes()
         {
             var source = """
-                namespace N
-                {
-                    public class C
-                    {
-                        public void M((string, int) x)
-                        {
-                        }
-                    }
-                }
-                """;
+            namespace N
+            {
+            public class C
+            {
+            public void M((string, int) x)
+            {
+            }
+            }
+            }
+            """;
 
             VerifyResolution(source, c => c.GetMember("N.C.M"));
         }
@@ -109,20 +109,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
         public void Tuple_NonMissingTypes()
         {
             var source = """
-                namespace N
-                {
-                    public class C
-                    {
-                        public void M((C, D) x)
-                        {
-                        }
-                    }
+            namespace N
+            {
+            public class C
+            {
+            public void M((C, D) x)
+            {
+            }
+            }
 
-                    public class D
-                    {
-                    }
-                }
-                """;
+            public class D
+            {
+            }
+            }
+            """;
 
             VerifyResolution(source, c => c.GetMember("N.C.M"));
         }
@@ -131,16 +131,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
         public void Array_MissingElementType()
         {
             var source = """
-                namespace N
-                {
-                    public class C
-                    {
-                        public void M(string[] x)
-                        {
-                        }
-                    }
-                }
-                """;
+            namespace N
+            {
+            public class C
+            {
+            public void M(string[] x)
+            {
+            }
+            }
+            }
+            """;
 
             VerifyResolution(source, c => c.GetMember("N.C.M"));
         }
@@ -149,20 +149,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
         public void Array_NonMissingElementType()
         {
             var source = """
-                namespace N
-                {
-                    public class C
-                    {
-                        public void M(D[] x)
-                        {
-                        }
-                    }
+            namespace N
+            {
+            public class C
+            {
+            public void M(D[] x)
+            {
+            }
+            }
 
-                    public class D
-                    {
-                    }
-                }
-                """;
+            public class D
+            {
+            }
+            }
+            """;
 
             VerifyResolution(source, c => c.GetMember("N.C.M"));
         }
@@ -171,16 +171,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
         public void Pointer_MissingType()
         {
             var source = """
-                namespace N
-                {
-                    public class C
-                    {
-                        public unsafe void M(int *x)
-                        {
-                        }
-                    }
-                }
-                """;
+            namespace N
+            {
+            public class C
+            {
+            public unsafe void M(int *x)
+            {
+            }
+            }
+            }
+            """;
 
             VerifyResolution(source, c => c.GetMember("N.C.M"));
         }
@@ -189,20 +189,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
         public void Pointer_NonMissingType()
         {
             var source = """
-                namespace N
-                {
-                    public class C
-                    {
-                        public unsafe void M(S *x)
-                        {
-                        }
-                    }
+            namespace N
+            {
+            public class C
+            {
+            public unsafe void M(S *x)
+            {
+            }
+            }
 
-                    public struct S
-                    {
-                    }
-                }
-                """;
+            public struct S
+            {
+            }
+            }
+            """;
 
             VerifyResolution(source, c => c.GetMember("N.C.M"));
         }
@@ -211,18 +211,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
         public void NestedType_MissingInGenericContainer()
         {
             var source = """
-                using System.Collections.Generic;
+            using System.Collections.Generic;
 
-                namespace N
-                {
-                    public class C
-                    {
-                        public void M(List<int>.Enumerator x)
-                        {
-                        }
-                    }
-                }
-                """;
+            namespace N
+            {
+            public class C
+            {
+            public void M(List<int>.Enumerator x)
+            {
+            }
+            }
+            }
+            """;
 
             VerifyResolution(source, c => c.GetMember("N.C.M"));
         }
@@ -231,18 +231,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
         public void NestedType_MissingInNonGenericContainer()
         {
             var source = """
-                using System.Diagnostics;
+            using System.Diagnostics;
 
-                namespace N
-                {
-                    public class C
-                    {
-                        public void M(DebuggableAttribute.DebuggingModes x)
-                        {
-                        }
-                    }
-                }
-                """;
+            namespace N
+            {
+            public class C
+            {
+            public void M(DebuggableAttribute.DebuggingModes x)
+            {
+            }
+            }
+            }
+            """;
 
             VerifyResolution(source, c => c.GetMember("N.C.M"));
         }
@@ -251,17 +251,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
         public void Method_MissingReturnType()
         {
             var source = """
-                namespace N
-                {
-                    public class C
-                    {
-                        public string Create()
-                        {
-                            return new string('c', 1);
-                        }
-                    }
-                }
-                """;
+            namespace N
+            {
+            public class C
+            {
+            public string Create()
+            {
+            return new string('c', 1);
+            }
+            }
+            }
+            """;
 
             VerifyResolution(source, c => c.GetMember("N.C.Create"));
         }
@@ -270,17 +270,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
         public void Method_MissingParameterType()
         {
             var source = """
-                namespace N
-                {
-                    public class C
-                    {
-                        public C Create(string x)
-                        {
-                            return new C();
-                        }
-                    }
-                }
-                """;
+            namespace N
+            {
+            public class C
+            {
+            public C Create(string x)
+            {
+            return new C();
+            }
+            }
+            }
+            """;
 
             VerifyResolution(source, c => c.GetMember("N.C.Create"));
         }
@@ -289,13 +289,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
         public void Constructor_MissingParameterType()
         {
             var source = """
-                public class C
-                {
-                    public C(string x)
-                    {
-                    }
-                }
-                """;
+            public class C
+            {
+            public C(string x)
+            {
+            }
+            }
+            """;
 
             VerifyResolution(source, c => c.GetMember("C..ctor"));
         }
@@ -304,18 +304,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
         public void Indexer_MissingParameterType()
         {
             var source = """
-                namespace N
-                {
-                    public class C
-                    {
-                        public C this[string x]
-                        {
-                            get { return null; }
-                            set { }
-                        }
-                    }
-                }
-                """;
+            namespace N
+            {
+            public class C
+            {
+            public C this[string x]
+            {
+            get { return null; }
+            set { }
+            }
+            }
+            }
+            """;
 
             VerifyResolution(source, c => c.GetMember("N.C.this[]"));
         }
@@ -324,18 +324,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
         public void Indexer_MissingReturnType()
         {
             var source = """
-                namespace N
-                {
-                    public class C
-                    {
-                        public string this[C x]
-                        {
-                            get { return null; }
-                            set { }
-                        }
-                    }
-                }
-                """;
+            namespace N
+            {
+            public class C
+            {
+            public string this[C x]
+            {
+            get { return null; }
+            set { }
+            }
+            }
+            }
+            """;
 
             VerifyResolution(source, c => c.GetMember("N.C.this[]"));
         }
@@ -344,18 +344,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
         public void Property_MissingReturnType()
         {
             var source = """
-                namespace N
-                {
-                    public class C
-                    {
-                        public string P
-                        {
-                            get { return null; }
-                            set { }
-                        }
-                    }
-                }
-                """;
+            namespace N
+            {
+            public class C
+            {
+            public string P
+            {
+            get { return null; }
+            set { }
+            }
+            }
+            }
+            """;
 
             VerifyResolution(source, c => c.GetMember("N.C.P"));
         }
@@ -364,14 +364,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
         public void EventField_MissingReturnType()
         {
             var source = """
-                namespace N
-                {
-                    public class C
-                    {
-                        public event System.EventHandler E;
-                    }
-                }
-                """;
+            namespace N
+            {
+            public class C
+            {
+            public event System.EventHandler E;
+            }
+            }
+            """;
 
             VerifyResolution(source, c => c.GetMember("N.C.E"));
         }

@@ -82,9 +82,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          group a $$
-                """,
+                    var q = from x in y
+                    group a $$
+                    """,
                     topLevelStatement: topLevelStatement
                 ),
                 options: CSharp9ParseOptions
@@ -98,9 +98,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          group $$
-                """,
+                    var q = from x in y
+                    group $$
+                    """,
                     topLevelStatement: topLevelStatement
                 ),
                 options: CSharp9ParseOptions
@@ -114,9 +114,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          group a by $$
-                """,
+                    var q = from x in y
+                    group a by $$
+                    """,
                     topLevelStatement: topLevelStatement
                 ),
                 options: CSharp9ParseOptions

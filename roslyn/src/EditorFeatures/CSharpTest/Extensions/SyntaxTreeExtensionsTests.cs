@@ -35,12 +35,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Extensions
         public void SimpleInactive()
         {
             var code = """
-                #if false
-                This is inactive
-                #else
-                // This is active
-                #endif
-                """;
+            #if false
+            This is inactive
+            #else
+            // This is active
+            #endif
+            """;
             var tree = CSharpSyntaxTree.ParseText(code);
             VerifyWholeLineIsActive(tree, 0);
             VerifyWholeLineIsInactive(tree, 1);
@@ -53,9 +53,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Extensions
         public void InactiveEof()
         {
             var code = """
-                #if false
-                This is inactive
-                """;
+            #if false
+            This is inactive
+            """;
             var tree = CSharpSyntaxTree.ParseText(code);
             VerifyWholeLineIsActive(tree, 0);
             VerifyWholeLineIsInactive(tree, 1);
@@ -65,11 +65,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Extensions
         public void InactiveEof2()
         {
             var code = """
-                #if false
-                This is inactive
-                #endif
-                // This is active
-                """;
+            #if false
+            This is inactive
+            #endif
+            // This is active
+            """;
 
             var tree = CSharpSyntaxTree.ParseText(code);
             VerifyWholeLineIsActive(tree, 0);

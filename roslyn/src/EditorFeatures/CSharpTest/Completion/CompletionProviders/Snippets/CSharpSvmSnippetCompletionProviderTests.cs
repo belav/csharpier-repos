@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 namespace Test
                 {
-                    $$
+                $$
                 }
                 """,
                 ItemToCommit
@@ -34,7 +34,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             await VerifyItemIsAbsentAsync(
                 """
                 namespace Test;
-                
+
                 $$
                 """,
                 ItemToCommit
@@ -89,7 +89,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 enum MyEnum
                 {
-                    $$
+                $$
                 }
                 """,
                 ItemToCommit
@@ -103,10 +103,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 class Program
                 {
-                    void M()
-                    {
-                        $$
-                    }
+                void M()
+                {
+                $$
+                }
                 }
                 """,
                 ItemToCommit
@@ -120,10 +120,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 class Program
                 {
-                    public Program()
-                    {
-                        $$
-                    }
+                public Program()
+                {
+                $$
+                }
                 }
                 """,
                 ItemToCommit
@@ -184,9 +184,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 class Program
                 {
-                    public int Main => 0;
+                public int Main => 0;
 
-                    $$
+                $$
                 }
                 """,
                 ItemToCommit
@@ -199,10 +199,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             await VerifyItemIsAbsentAsync(
                 """
                 System.Console.WriteLine();
-                
+
                 class Program
                 {
-                    $$
+                $$
                 }
                 """,
                 ItemToCommit

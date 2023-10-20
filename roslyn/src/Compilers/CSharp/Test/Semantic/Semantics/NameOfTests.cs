@@ -1083,18 +1083,18 @@ public class Program
         public void SymbolInfo_InstanceMemberFromStatic_Flat()
         {
             var source = """
-                public class C
-                {
-                    public int Property { get; }
-                    public int Field;
-                    public event System.Action Event;
+            public class C
+            {
+            public int Property { get; }
+            public int Field;
+            public event System.Action Event;
 
-                    public static string StaticField =
-                        nameof(Property) +
-                        nameof(Field) +
-                        nameof(Event);
-                }
-                """;
+            public static string StaticField =
+            nameof(Property) +
+            nameof(Field) +
+            nameof(Event);
+            }
+            """;
             var comp = CreateCompilation(source).VerifyDiagnostics();
 
             var cProperty = comp.GetMember("C.Property");
@@ -1182,18 +1182,18 @@ public class Program
         public void SymbolInfo_InstanceMemberFromStatic_Flat_MethodGroup()
         {
             var source = """
-                public class C
-                {
-                    public void Method1() { }
-                    public void Method1(int i) { }
-                    public void Method2() { }
-                    public static void Method2(int i) { }
-                
-                    public static string StaticField =
-                        nameof(Method1) +
-                        nameof(Method2);
-                }
-                """;
+            public class C
+            {
+            public void Method1() { }
+            public void Method1(int i) { }
+            public void Method2() { }
+            public static void Method2(int i) { }
+
+            public static string StaticField =
+            nameof(Method1) +
+            nameof(Method2);
+            }
+            """;
             var comp = CreateCompilation(source).VerifyDiagnostics();
 
             var cMethods1 = comp.GetMembers("C.Method1");
@@ -1286,27 +1286,27 @@ public class Program
         public void SymbolInfo_InstanceMemberFromStatic_Nested()
         {
             var source = """
-                public class C
-                {
-                    public C1 Property { get; }
-                    public C1 Field;
+            public class C
+            {
+            public C1 Property { get; }
+            public C1 Field;
 
-                    public static string StaticField =
-                        nameof(Property.Property) +
-                        nameof(Property.Field) +
-                        nameof(Property.Event) +
-                        nameof(Field.Property) +
-                        nameof(Field.Field) +
-                        nameof(Field.Event);
-                }
-                
-                public class C1
-                {
-                    public int Property { get; }
-                    public int Field;
-                    public event System.Action Event;
-                }
-                """;
+            public static string StaticField =
+            nameof(Property.Property) +
+            nameof(Property.Field) +
+            nameof(Property.Event) +
+            nameof(Field.Property) +
+            nameof(Field.Field) +
+            nameof(Field.Event);
+            }
+
+            public class C1
+            {
+            public int Property { get; }
+            public int Field;
+            public event System.Action Event;
+            }
+            """;
             var comp = CreateCompilation(source).VerifyDiagnostics();
 
             var c1Property = comp.GetMember("C1.Property");
@@ -1397,24 +1397,24 @@ public class Program
         public void SymbolInfo_InstanceMemberFromStatic_Nested_MethodGroup()
         {
             var source = """
-                public class C
-                {
-                    public C1 Property { get; }
-                    public C1 Field;
-                    public event System.Action Event;
-                
-                    public static string StaticField =
-                        nameof(Property.Method) +
-                        nameof(Field.Method) +
-                        nameof(Event.Invoke);
-                }
-                
-                public class C1
-                {
-                    public void Method() { }
-                    public void Method(int i) { }
-                }
-                """;
+            public class C
+            {
+            public C1 Property { get; }
+            public C1 Field;
+            public event System.Action Event;
+
+            public static string StaticField =
+            nameof(Property.Method) +
+            nameof(Field.Method) +
+            nameof(Event.Invoke);
+            }
+
+            public class C1
+            {
+            public void Method() { }
+            public void Method(int i) { }
+            }
+            """;
             var comp = CreateCompilation(source).VerifyDiagnostics();
 
             var c1Methods = comp.GetMembers("C1.Method").ToArray();
@@ -2233,24 +2233,24 @@ public class C1
         public void InstanceFromStatic_Lambdas()
         {
             var source = """
-                using System;
-                Console.Write(C.Names());
-                public class C
-                {
-                    public object Property { get; }
-                    public object Field;
-                    public event Action Event;
-                    public void Method() { }
-                    public static string Names()
-                    {
-                        var lambda1 = static () => nameof(Property);
-                        var lambda2 = static (string f = nameof(Field)) => f;
-                        var lambda3 = static () => nameof(Event.Invoke);
-                        var lambda4 = static (string i = nameof(Event.Invoke)) => i;
-                        return lambda1() + "," + lambda2() + "," + lambda3() + "," + lambda4();
-                    }
-                }
-                """;
+            using System;
+            Console.Write(C.Names());
+            public class C
+            {
+            public object Property { get; }
+            public object Field;
+            public event Action Event;
+            public void Method() { }
+            public static string Names()
+            {
+            var lambda1 = static () => nameof(Property);
+            var lambda2 = static (string f = nameof(Field)) => f;
+            var lambda3 = static () => nameof(Event.Invoke);
+            var lambda4 = static (string i = nameof(Event.Invoke)) => i;
+            return lambda1() + "," + lambda2() + "," + lambda3() + "," + lambda4();
+            }
+            }
+            """;
             var expectedOutput = "Property,Field,Invoke,Invoke";
 
             CompileAndVerify(
@@ -2294,24 +2294,24 @@ public class C1
         public void InstanceFromStatic_LocalFunctions()
         {
             var source = """
-                using System;
-                Console.Write(C.Names());
-                public class C
-                {
-                    public object Property { get; }
-                    public object Field;
-                    public event Action Event;
-                    public void Method() { }
-                    public static string Names()
-                    {
-                        static string local1() => nameof(Property);
-                        static string local2(string f = nameof(Field)) => f;
-                        static string local3() => nameof(Event.Invoke);
-                        static string local4(string i = nameof(Event.Invoke)) => i;
-                        return local1() + "," + local2() + "," + local3() + "," + local4();
-                    }
-                }
-                """;
+            using System;
+            Console.Write(C.Names());
+            public class C
+            {
+            public object Property { get; }
+            public object Field;
+            public event Action Event;
+            public void Method() { }
+            public static string Names()
+            {
+            static string local1() => nameof(Property);
+            static string local2(string f = nameof(Field)) => f;
+            static string local3() => nameof(Event.Invoke);
+            static string local4(string i = nameof(Event.Invoke)) => i;
+            return local1() + "," + local2() + "," + local3() + "," + local4();
+            }
+            }
+            """;
             var expectedOutput = "Property,Field,Invoke,Invoke";
 
             CompileAndVerify(

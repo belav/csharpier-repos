@@ -22,11 +22,11 @@ public abstract partial class RequestDelegateCreationTests
             var fromRouteNullableSource =
                 """app.MapGet("/{routeValue}", ([FromRoute] string? routeValue) => routeValue ?? string.Empty);""";
             var fromRouteDefaultValueSource = """
-#nullable disable
-string getRouteWithDefault([FromRoute] string routeValue = null) => routeValue ?? string.Empty;
-app.MapGet("/{routeValue}", getRouteWithDefault);
-#nullable restore
-""";
+            #nullable disable
+            string getRouteWithDefault([FromRoute] string routeValue = null) => routeValue ?? string.Empty;
+            app.MapGet("/{routeValue}", getRouteWithDefault);
+            #nullable restore
+            """;
 
             return new[]
             {
@@ -85,18 +85,18 @@ app.MapGet("/{routeValue}", getRouteWithDefault);
             var implicitQueryNullableSource =
                 """app.MapGet("/", (string? value) => value ?? string.Empty);""";
             var implicitRouteDefaultValueSource = """
-#nullable disable
-string getRouteWithDefault(string value = null) => value ?? string.Empty;
-app.MapGet("/{value}", getRouteWithDefault);
-#nullable restore
-""";
+            #nullable disable
+            string getRouteWithDefault(string value = null) => value ?? string.Empty;
+            app.MapGet("/{value}", getRouteWithDefault);
+            #nullable restore
+            """;
 
             var implicitQueryDefaultValueSource = """
-#nullable disable
-string getQueryWithDefault(string value = null) => value ?? string.Empty;
-app.MapGet("/", getQueryWithDefault);
-#nullable restore
-""";
+            #nullable disable
+            string getQueryWithDefault(string value = null) => value ?? string.Empty;
+            app.MapGet("/", getQueryWithDefault);
+            #nullable restore
+            """;
 
             return new[]
             {
@@ -148,8 +148,8 @@ app.MapGet("/", getQueryWithDefault);
     public async Task SpecifiedQueryParametersDoNotFallbackToRouteValues()
     {
         var source = """
-app.MapGet("/", (string value, HttpContext httpContext) => value);
-""";
+        app.MapGet("/", (string value, HttpContext httpContext) => value);
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -165,8 +165,8 @@ app.MapGet("/", (string value, HttpContext httpContext) => value);
     public async Task SpecifiedRouteParametersDoNotFallbackToQueryString()
     {
         var source = """
-app.MapGet("/{value}", (string value, HttpContext httpContext) => value);
-""";
+        app.MapGet("/{value}", (string value, HttpContext httpContext) => value);
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 

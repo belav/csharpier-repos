@@ -8080,20 +8080,20 @@ class Test
         public void CRef_RefReadonlyParameter()
         {
             var source = """
-                class Test
-                {
-                    void M(ref readonly int x)
-                    {
-                    }
+            class Test
+            {
+            void M(ref readonly int x)
+            {
+            }
 
-                    /// <summary>
-                    /// <see cref="M(ref readonly int)"/>
-                    /// </summary>
-                    void S()
-                    {
-                    }
-                }
-                """;
+            /// <summary>
+            /// <see cref="M(ref readonly int)"/>
+            /// </summary>
+            void S()
+            {
+            }
+            }
+            """;
 
             verify(
                 CreateCompilation(
@@ -8158,20 +8158,20 @@ class Test
         public void CRef_RefReadonlyParameter_ReadonlyRef()
         {
             var source = """
-                class Test
-                {
-                    void M(ref readonly int x)
-                    {
-                    }
+            class Test
+            {
+            void M(ref readonly int x)
+            {
+            }
 
-                    /// <summary>
-                    /// <see cref="M(readonly ref int)"/>
-                    /// </summary>
-                    void S()
-                    {
-                    }
-                }
-                """;
+            /// <summary>
+            /// <see cref="M(readonly ref int)"/>
+            /// </summary>
+            void S()
+            {
+            }
+            }
+            """;
 
             verify(
                 CreateCompilation(
@@ -8243,20 +8243,20 @@ class Test
         public void CRef_ReadonlyRefParameter()
         {
             var source = """
-                class Test
-                {
-                    void M(readonly ref int x)
-                    {
-                    }
+            class Test
+            {
+            void M(readonly ref int x)
+            {
+            }
 
-                    /// <summary>
-                    /// <see cref="M(readonly ref int)"/>
-                    /// </summary>
-                    void S()
-                    {
-                    }
-                }
-                """;
+            /// <summary>
+            /// <see cref="M(readonly ref int)"/>
+            /// </summary>
+            void S()
+            {
+            }
+            }
+            """;
 
             var expectedDiagnostics = new[]
             {
@@ -8315,20 +8315,20 @@ class Test
         public void CRef_ReadonlyRefParameter_RefReadonly()
         {
             var source = """
-                class Test
-                {
-                    void M(readonly ref int x)
-                    {
-                    }
+            class Test
+            {
+            void M(readonly ref int x)
+            {
+            }
 
-                    /// <summary>
-                    /// <see cref="M(ref readonly int)"/>
-                    /// </summary>
-                    void S()
-                    {
-                    }
-                }
-                """;
+            /// <summary>
+            /// <see cref="M(ref readonly int)"/>
+            /// </summary>
+            void S()
+            {
+            }
+            }
+            """;
 
             verify(
                 CreateCompilation(

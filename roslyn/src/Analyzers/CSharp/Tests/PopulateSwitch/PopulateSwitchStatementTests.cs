@@ -35,27 +35,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                 """
                 namespace ConsoleApplication1
                 {
-                    enum MyEnum
-                    {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
+                enum MyEnum
+                {
+                Fizz,
+                Buzz,
+                FizzBuzz
+                }
 
-                    class MyClass
-                    {
-                        void Method()
-                        {
-                            var e = MyEnum.Fizz;
-                            switch ([||]e)
-                            {
-                                case MyEnum.Fizz:
-                                case MyEnum.Buzz:
-                                default:
-                                    break;
-                            }
-                        }
-                    }
+                class MyClass
+                {
+                void Method()
+                {
+                var e = MyEnum.Fizz;
+                switch ([||]e)
+                {
+                case MyEnum.Fizz:
+                case MyEnum.Buzz:
+                default:
+                break;
+                }
+                }
+                }
                 }
                 """
             );
@@ -68,28 +68,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                 """
                 namespace ConsoleApplication1
                 {
-                    enum MyEnum
-                    {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
+                enum MyEnum
+                {
+                Fizz,
+                Buzz,
+                FizzBuzz
+                }
 
-                    class MyClass
-                    {
-                        void Method()
-                        {
-                            var e = MyEnum.Fizz;
-                            [||]switch (e)
-                            {
-                                case MyEnum.Fizz:
-                                case MyEnum.Buzz:
-                                case MyEnum.FizzBuzz:
-                                default:
-                                    break;
-                            }
-                        }
-                    }
+                class MyClass
+                {
+                void Method()
+                {
+                var e = MyEnum.Fizz;
+                [||]switch (e)
+                {
+                case MyEnum.Fizz:
+                case MyEnum.Buzz:
+                case MyEnum.FizzBuzz:
+                default:
+                break;
+                }
+                }
+                }
                 }
                 """
             );
@@ -102,55 +102,55 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                 """
                 namespace ConsoleApplication1
                 {
-                    enum MyEnum
-                    {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
+                enum MyEnum
+                {
+                Fizz,
+                Buzz,
+                FizzBuzz
+                }
 
-                    class MyClass
-                    {
-                        void Method()
-                        {
-                            var e = MyEnum.Fizz;
-                            [||]switch (e)
-                            {
-                                case MyEnum.Fizz:
-                                case MyEnum.Buzz:
-                                case MyEnum.FizzBuzz:
-                                    break;
-                            }
-                        }
-                    }
+                class MyClass
+                {
+                void Method()
+                {
+                var e = MyEnum.Fizz;
+                [||]switch (e)
+                {
+                case MyEnum.Fizz:
+                case MyEnum.Buzz:
+                case MyEnum.FizzBuzz:
+                break;
+                }
+                }
+                }
                 }
                 """,
                 """
                 namespace ConsoleApplication1
                 {
-                    enum MyEnum
-                    {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
+                enum MyEnum
+                {
+                Fizz,
+                Buzz,
+                FizzBuzz
+                }
 
-                    class MyClass
-                    {
-                        void Method()
-                        {
-                            var e = MyEnum.Fizz;
-                            switch (e)
-                            {
-                                case MyEnum.Fizz:
-                                case MyEnum.Buzz:
-                                case MyEnum.FizzBuzz:
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    }
+                class MyClass
+                {
+                void Method()
+                {
+                var e = MyEnum.Fizz;
+                switch (e)
+                {
+                case MyEnum.Fizz:
+                case MyEnum.Buzz:
+                case MyEnum.FizzBuzz:
+                break;
+                default:
+                break;
+                }
+                }
+                }
                 }
                 """
             );
@@ -163,55 +163,55 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                 """
                 namespace ConsoleApplication1
                 {
-                    enum MyEnum
-                    {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
+                enum MyEnum
+                {
+                Fizz,
+                Buzz,
+                FizzBuzz
+                }
 
-                    class MyClass
-                    {
-                        void Method()
-                        {
-                            var e = MyEnum.Fizz;
-                            [||]switch (e)
-                            {
-                                case MyEnum.Fizz:
-                                case MyEnum.Buzz:
-                                    break;
-                            }
-                        }
-                    }
+                class MyClass
+                {
+                void Method()
+                {
+                var e = MyEnum.Fizz;
+                [||]switch (e)
+                {
+                case MyEnum.Fizz:
+                case MyEnum.Buzz:
+                break;
+                }
+                }
+                }
                 }
                 """,
                 """
                 namespace ConsoleApplication1
                 {
-                    enum MyEnum
-                    {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
+                enum MyEnum
+                {
+                Fizz,
+                Buzz,
+                FizzBuzz
+                }
 
-                    class MyClass
-                    {
-                        void Method()
-                        {
-                            var e = MyEnum.Fizz;
-                            switch (e)
-                            {
-                                case MyEnum.Fizz:
-                                case MyEnum.Buzz:
-                                    break;
-                                case MyEnum.FizzBuzz:
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    }
+                class MyClass
+                {
+                void Method()
+                {
+                var e = MyEnum.Fizz;
+                switch (e)
+                {
+                case MyEnum.Fizz:
+                case MyEnum.Buzz:
+                break;
+                case MyEnum.FizzBuzz:
+                break;
+                default:
+                break;
+                }
+                }
+                }
                 }
                 """,
                 index: 2
@@ -225,57 +225,57 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                 """
                 namespace ConsoleApplication1
                 {
-                    enum MyEnum
-                    {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
+                enum MyEnum
+                {
+                Fizz,
+                Buzz,
+                FizzBuzz
+                }
 
-                    class MyClass
-                    {
-                        void Method()
-                        {
-                            var e = MyEnum.Fizz;
-                            [||]switch (e)
-                            {
-                                case MyEnum.Fizz:
-                                case MyEnum.Buzz:
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    }
+                class MyClass
+                {
+                void Method()
+                {
+                var e = MyEnum.Fizz;
+                [||]switch (e)
+                {
+                case MyEnum.Fizz:
+                case MyEnum.Buzz:
+                break;
+                default:
+                break;
+                }
+                }
+                }
                 }
                 """,
                 """
                 namespace ConsoleApplication1
                 {
-                    enum MyEnum
-                    {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
+                enum MyEnum
+                {
+                Fizz,
+                Buzz,
+                FizzBuzz
+                }
 
-                    class MyClass
-                    {
-                        void Method()
-                        {
-                            var e = MyEnum.Fizz;
-                            switch (e)
-                            {
-                                case MyEnum.Fizz:
-                                case MyEnum.Buzz:
-                                    break;
-                                case MyEnum.FizzBuzz:
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    }
+                class MyClass
+                {
+                void Method()
+                {
+                var e = MyEnum.Fizz;
+                switch (e)
+                {
+                case MyEnum.Fizz:
+                case MyEnum.Buzz:
+                break;
+                case MyEnum.FizzBuzz:
+                break;
+                default:
+                break;
+                }
+                }
+                }
                 }
                 """
             );
@@ -288,55 +288,55 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                 """
                 namespace ConsoleApplication1
                 {
-                    enum MyEnum : long
-                    {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
+                enum MyEnum : long
+                {
+                Fizz,
+                Buzz,
+                FizzBuzz
+                }
 
-                    class MyClass
-                    {
-                        void Method()
-                        {
-                            var e = MyEnum.Fizz;
-                            [||]switch (e)
-                            {
-                                case MyEnum.Fizz:
-                                case MyEnum.Buzz:
-                                    break;
-                            }
-                        }
-                    }
+                class MyClass
+                {
+                void Method()
+                {
+                var e = MyEnum.Fizz;
+                [||]switch (e)
+                {
+                case MyEnum.Fizz:
+                case MyEnum.Buzz:
+                break;
+                }
+                }
+                }
                 }
                 """,
                 """
                 namespace ConsoleApplication1
                 {
-                    enum MyEnum : long
-                    {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
+                enum MyEnum : long
+                {
+                Fizz,
+                Buzz,
+                FizzBuzz
+                }
 
-                    class MyClass
-                    {
-                        void Method()
-                        {
-                            var e = MyEnum.Fizz;
-                            switch (e)
-                            {
-                                case MyEnum.Fizz:
-                                case MyEnum.Buzz:
-                                    break;
-                                case MyEnum.FizzBuzz:
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    }
+                class MyClass
+                {
+                void Method()
+                {
+                var e = MyEnum.Fizz;
+                switch (e)
+                {
+                case MyEnum.Fizz:
+                case MyEnum.Buzz:
+                break;
+                case MyEnum.FizzBuzz:
+                break;
+                default:
+                break;
+                }
+                }
+                }
                 }
                 """,
                 index: 2
@@ -350,55 +350,55 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                 """
                 namespace ConsoleApplication1
                 {
-                    enum MyEnum
-                    {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
+                enum MyEnum
+                {
+                Fizz,
+                Buzz,
+                FizzBuzz
+                }
 
-                    class MyClass
-                    {
-                        void Method()
-                        {
-                            var e = MyEnum.Fizz;
-                            [||]switch (e)
-                            {
-                                case MyEnum.Fizz:
-                                case MyEnum.Buzz:
-                                default:
-                                    break;
-                            }
-                        }
-                    }
+                class MyClass
+                {
+                void Method()
+                {
+                var e = MyEnum.Fizz;
+                [||]switch (e)
+                {
+                case MyEnum.Fizz:
+                case MyEnum.Buzz:
+                default:
+                break;
+                }
+                }
+                }
                 }
                 """,
                 """
                 namespace ConsoleApplication1
                 {
-                    enum MyEnum
-                    {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
+                enum MyEnum
+                {
+                Fizz,
+                Buzz,
+                FizzBuzz
+                }
 
-                    class MyClass
-                    {
-                        void Method()
-                        {
-                            var e = MyEnum.Fizz;
-                            switch (e)
-                            {
-                                case MyEnum.FizzBuzz:
-                                    break;
-                                case MyEnum.Fizz:
-                                case MyEnum.Buzz:
-                                default:
-                                    break;
-                            }
-                        }
-                    }
+                class MyClass
+                {
+                void Method()
+                {
+                var e = MyEnum.Fizz;
+                switch (e)
+                {
+                case MyEnum.FizzBuzz:
+                break;
+                case MyEnum.Fizz:
+                case MyEnum.Buzz:
+                default:
+                break;
+                }
+                }
+                }
                 }
                 """
             );
@@ -411,57 +411,57 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                 """
                 namespace ConsoleApplication1
                 {
-                    enum MyEnum
-                    {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
+                enum MyEnum
+                {
+                Fizz,
+                Buzz,
+                FizzBuzz
+                }
 
-                    class MyClass
-                    {
-                        void Method()
-                        {
-                            var e = MyEnum.Fizz;
-                            [||]switch (e)
-                            {
-                                default:
-                                    break;
-                                case MyEnum.Fizz:
-                                case MyEnum.Buzz:
-                                    break;
-                            }
-                        }
-                    }
+                class MyClass
+                {
+                void Method()
+                {
+                var e = MyEnum.Fizz;
+                [||]switch (e)
+                {
+                default:
+                break;
+                case MyEnum.Fizz:
+                case MyEnum.Buzz:
+                break;
+                }
+                }
+                }
                 }
                 """,
                 """
                 namespace ConsoleApplication1
                 {
-                    enum MyEnum
-                    {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
+                enum MyEnum
+                {
+                Fizz,
+                Buzz,
+                FizzBuzz
+                }
 
-                    class MyClass
-                    {
-                        void Method()
-                        {
-                            var e = MyEnum.Fizz;
-                            switch (e)
-                            {
-                                default:
-                                    break;
-                                case MyEnum.Fizz:
-                                case MyEnum.Buzz:
-                                    break;
-                                case MyEnum.FizzBuzz:
-                                    break;
-                            }
-                        }
-                    }
+                class MyClass
+                {
+                void Method()
+                {
+                var e = MyEnum.Fizz;
+                switch (e)
+                {
+                default:
+                break;
+                case MyEnum.Fizz:
+                case MyEnum.Buzz:
+                break;
+                case MyEnum.FizzBuzz:
+                break;
+                }
+                }
+                }
                 }
                 """
             );
@@ -474,51 +474,51 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                 """
                 namespace ConsoleApplication1
                 {
-                    enum MyEnum
-                    {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
+                enum MyEnum
+                {
+                Fizz,
+                Buzz,
+                FizzBuzz
+                }
 
-                    class MyClass
-                    {
-                        void Method()
-                        {
-                            var e = MyEnum.Fizz;
-                            [||]switch (e)
-                            {
-                            }
-                        }
-                    }
+                class MyClass
+                {
+                void Method()
+                {
+                var e = MyEnum.Fizz;
+                [||]switch (e)
+                {
+                }
+                }
+                }
                 }
                 """,
                 """
                 namespace ConsoleApplication1
                 {
-                    enum MyEnum
-                    {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
+                enum MyEnum
+                {
+                Fizz,
+                Buzz,
+                FizzBuzz
+                }
 
-                    class MyClass
-                    {
-                        void Method()
-                        {
-                            var e = MyEnum.Fizz;
-                            switch (e)
-                            {
-                                case MyEnum.Fizz:
-                                    break;
-                                case MyEnum.Buzz:
-                                    break;
-                                case MyEnum.FizzBuzz:
-                                    break;
-                            }
-                        }
-                    }
+                class MyClass
+                {
+                void Method()
+                {
+                var e = MyEnum.Fizz;
+                switch (e)
+                {
+                case MyEnum.Fizz:
+                break;
+                case MyEnum.Buzz:
+                break;
+                case MyEnum.FizzBuzz:
+                break;
+                }
+                }
+                }
                 }
                 """,
                 index: 0
@@ -532,47 +532,47 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                 """
                 namespace ConsoleApplication1
                 {
-                    enum MyEnum
-                    {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
+                enum MyEnum
+                {
+                Fizz,
+                Buzz,
+                FizzBuzz
+                }
 
-                    class MyClass
-                    {
-                        void Method()
-                        {
-                            var e = MyEnum.Fizz;
-                            [||]switch (e)
-                            {
-                            }
-                        }
-                    }
+                class MyClass
+                {
+                void Method()
+                {
+                var e = MyEnum.Fizz;
+                [||]switch (e)
+                {
+                }
+                }
+                }
                 }
                 """,
                 """
                 namespace ConsoleApplication1
                 {
-                    enum MyEnum
-                    {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
+                enum MyEnum
+                {
+                Fizz,
+                Buzz,
+                FizzBuzz
+                }
 
-                    class MyClass
-                    {
-                        void Method()
-                        {
-                            var e = MyEnum.Fizz;
-                            switch (e)
-                            {
-                                default:
-                                    break;
-                            }
-                        }
-                    }
+                class MyClass
+                {
+                void Method()
+                {
+                var e = MyEnum.Fizz;
+                switch (e)
+                {
+                default:
+                break;
+                }
+                }
+                }
                 }
                 """,
                 index: 1
@@ -586,53 +586,53 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                 """
                 namespace ConsoleApplication1
                 {
-                    enum MyEnum
-                    {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
+                enum MyEnum
+                {
+                Fizz,
+                Buzz,
+                FizzBuzz
+                }
 
-                    class MyClass
-                    {
-                        void Method()
-                        {
-                            var e = MyEnum.Fizz;
-                            [||]switch (e)
-                            {
-                            }
-                        }
-                    }
+                class MyClass
+                {
+                void Method()
+                {
+                var e = MyEnum.Fizz;
+                [||]switch (e)
+                {
+                }
+                }
+                }
                 }
                 """,
                 """
                 namespace ConsoleApplication1
                 {
-                    enum MyEnum
-                    {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
+                enum MyEnum
+                {
+                Fizz,
+                Buzz,
+                FizzBuzz
+                }
 
-                    class MyClass
-                    {
-                        void Method()
-                        {
-                            var e = MyEnum.Fizz;
-                            switch (e)
-                            {
-                                case MyEnum.Fizz:
-                                    break;
-                                case MyEnum.Buzz:
-                                    break;
-                                case MyEnum.FizzBuzz:
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    }
+                class MyClass
+                {
+                void Method()
+                {
+                var e = MyEnum.Fizz;
+                switch (e)
+                {
+                case MyEnum.Fizz:
+                break;
+                case MyEnum.Buzz:
+                break;
+                case MyEnum.FizzBuzz:
+                break;
+                default:
+                break;
+                }
+                }
+                }
                 }
                 """,
                 index: 2
@@ -648,30 +648,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
 
                 namespace ConsoleApplication1
                 {
-                    class MyClass
-                    {
-                        void Method()
-                        {
-                            var e = Append;
-                            [||]switch (e)
-                            {
-                                case CreateNew:
-                                    break;
-                                case Create:
-                                    break;
-                                case Open:
-                                    break;
-                                case OpenOrCreate:
-                                    break;
-                                case Truncate:
-                                    break;
-                                case Append:
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    }
+                class MyClass
+                {
+                void Method()
+                {
+                var e = Append;
+                [||]switch (e)
+                {
+                case CreateNew:
+                break;
+                case Create:
+                break;
+                case Open:
+                break;
+                case OpenOrCreate:
+                break;
+                case Truncate:
+                break;
+                case Append:
+                break;
+                default:
+                break;
+                }
+                }
+                }
                 }
                 """
             );
@@ -686,30 +686,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
 
                 namespace ConsoleApplication1
                 {
-                    class MyClass
-                    {
-                        void Method()
-                        {
-                            var e = Append;
-                            [||]switch (e)
-                            {
-                                case CreateNew:
-                                    break;
-                                case OpenOrCreate:
-                                    break;
-                                case Truncate:
-                                    break;
-                                case Open:
-                                    break;
-                                case Append:
-                                    break;
-                                case Create:
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    }
+                class MyClass
+                {
+                void Method()
+                {
+                var e = Append;
+                [||]switch (e)
+                {
+                case CreateNew:
+                break;
+                case OpenOrCreate:
+                break;
+                case Truncate:
+                break;
+                case Open:
+                break;
+                case Append:
+                break;
+                case Create:
+                break;
+                default:
+                break;
+                }
+                }
+                }
                 }
                 """
             );
@@ -724,26 +724,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
 
                 namespace ConsoleApplication1
                 {
-                    class MyClass
-                    {
-                        void Method()
-                        {
-                            var e = Append;
-                            [||]switch (e)
-                            {
-                                case CreateNew:
-                                    break;
-                                case Create:
-                                    break;
-                                case Open:
-                                    break;
-                                case OpenOrCreate:
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    }
+                class MyClass
+                {
+                void Method()
+                {
+                var e = Append;
+                [||]switch (e)
+                {
+                case CreateNew:
+                break;
+                case Create:
+                break;
+                case Open:
+                break;
+                case OpenOrCreate:
+                break;
+                default:
+                break;
+                }
+                }
+                }
                 }
                 """,
                 """
@@ -751,30 +751,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
 
                 namespace ConsoleApplication1
                 {
-                    class MyClass
-                    {
-                        void Method()
-                        {
-                            var e = Append;
-                            switch (e)
-                            {
-                                case CreateNew:
-                                    break;
-                                case Create:
-                                    break;
-                                case Open:
-                                    break;
-                                case OpenOrCreate:
-                                    break;
-                                case Truncate:
-                                    break;
-                                case Append:
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    }
+                class MyClass
+                {
+                void Method()
+                {
+                var e = Append;
+                switch (e)
+                {
+                case CreateNew:
+                break;
+                case Create:
+                break;
+                case Open:
+                break;
+                case OpenOrCreate:
+                break;
+                case Truncate:
+                break;
+                case Append:
+                break;
+                default:
+                break;
+                }
+                }
+                }
                 }
                 """
             );
@@ -789,16 +789,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
 
                 namespace ConsoleApplication1
                 {
-                    class MyClass
-                    {
-                        void Method()
-                        {
-                            var e = Append;
-                            [||]switch (e)
-                            {
-                            }
-                        }
-                    }
+                class MyClass
+                {
+                void Method()
+                {
+                var e = Append;
+                [||]switch (e)
+                {
+                }
+                }
+                }
                 }
                 """,
                 """
@@ -806,30 +806,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
 
                 namespace ConsoleApplication1
                 {
-                    class MyClass
-                    {
-                        void Method()
-                        {
-                            var e = Append;
-                            switch (e)
-                            {
-                                case CreateNew:
-                                    break;
-                                case Create:
-                                    break;
-                                case Open:
-                                    break;
-                                case OpenOrCreate:
-                                    break;
-                                case Truncate:
-                                    break;
-                                case Append:
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    }
+                class MyClass
+                {
+                void Method()
+                {
+                var e = Append;
+                switch (e)
+                {
+                case CreateNew:
+                break;
+                case Create:
+                break;
+                case Open:
+                break;
+                case OpenOrCreate:
+                break;
+                case Truncate:
+                break;
+                case Append:
+                break;
+                default:
+                break;
+                }
+                }
+                }
                 }
                 """,
                 index: 2
@@ -843,57 +843,57 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                 """
                 namespace ConsoleApplication1
                 {
-                    [System.Obsolete]
-                    enum MyEnum
-                    {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
+                [System.Obsolete]
+                enum MyEnum
+                {
+                Fizz,
+                Buzz,
+                FizzBuzz
+                }
 
-                    class MyClass
-                    {
-                        void Method()
-                        {
-                            var e = MyEnum.Fizz;
-                            [||]switch (e)
-                            {
-                                case MyEnum.Fizz:
-                                case MyEnum.Buzz:
-                                    break;
-                            }
-                        }
-                    }
+                class MyClass
+                {
+                void Method()
+                {
+                var e = MyEnum.Fizz;
+                [||]switch (e)
+                {
+                case MyEnum.Fizz:
+                case MyEnum.Buzz:
+                break;
+                }
+                }
+                }
                 }
                 """,
                 """
                 namespace ConsoleApplication1
                 {
-                    [System.Obsolete]
-                    enum MyEnum
-                    {
-                        Fizz,
-                        Buzz,
-                        FizzBuzz
-                    }
+                [System.Obsolete]
+                enum MyEnum
+                {
+                Fizz,
+                Buzz,
+                FizzBuzz
+                }
 
-                    class MyClass
-                    {
-                        void Method()
-                        {
-                            var e = MyEnum.Fizz;
-                            switch (e)
-                            {
-                                case MyEnum.Fizz:
-                                case MyEnum.Buzz:
-                                    break;
-                                case MyEnum.FizzBuzz:
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    }
+                class MyClass
+                {
+                void Method()
+                {
+                var e = MyEnum.Fizz;
+                switch (e)
+                {
+                case MyEnum.Fizz:
+                case MyEnum.Buzz:
+                break;
+                case MyEnum.FizzBuzz:
+                break;
+                default:
+                break;
+                }
+                }
+                }
                 }
                 """,
                 index: 2
@@ -907,55 +907,55 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                 """
                 namespace ConsoleApplication1
                 {
-                    class MyClass
-                    {
-                        enum MyEnum
-                        {
-                            Fizz,
-                            Buzz,
-                            FizzBuzz
-                        }
+                class MyClass
+                {
+                enum MyEnum
+                {
+                Fizz,
+                Buzz,
+                FizzBuzz
+                }
 
-                        void Method()
-                        {
-                            var e = MyEnum.Fizz;
-                            [||]switch (e)
-                            {
-                                case MyEnum.Fizz:
-                                case MyEnum.Buzz:
-                                    break;
-                            }
-                        }
-                    }
+                void Method()
+                {
+                var e = MyEnum.Fizz;
+                [||]switch (e)
+                {
+                case MyEnum.Fizz:
+                case MyEnum.Buzz:
+                break;
+                }
+                }
+                }
                 }
                 """,
                 """
                 namespace ConsoleApplication1
                 {
-                    class MyClass
-                    {
-                        enum MyEnum
-                        {
-                            Fizz,
-                            Buzz,
-                            FizzBuzz
-                        }
+                class MyClass
+                {
+                enum MyEnum
+                {
+                Fizz,
+                Buzz,
+                FizzBuzz
+                }
 
-                        void Method()
-                        {
-                            var e = MyEnum.Fizz;
-                            switch (e)
-                            {
-                                case MyEnum.Fizz:
-                                case MyEnum.Buzz:
-                                    break;
-                                case MyEnum.FizzBuzz:
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    }
+                void Method()
+                {
+                var e = MyEnum.Fizz;
+                switch (e)
+                {
+                case MyEnum.Fizz:
+                case MyEnum.Buzz:
+                break;
+                case MyEnum.FizzBuzz:
+                break;
+                default:
+                break;
+                }
+                }
+                }
                 }
                 """,
                 index: 2
@@ -971,20 +971,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
 
                 namespace ConsoleApplication1
                 {
-                    class MyClass
-                    {
-                        void Method()
-                        {
-                            var e = "test";
-                            [||]switch (e)
-                            {
-                                case "test1":
-                                case "test1":
-                                default:
-                                    break;
-                            }
-                        }
-                    }
+                class MyClass
+                {
+                void Method()
+                {
+                var e = "test";
+                [||]switch (e)
+                {
+                case "test1":
+                case "test1":
+                default:
+                break;
+                }
+                }
+                }
                 }
                 """
             );
@@ -997,49 +997,49 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                 """
                 enum MyEnum
                 {
-                    Fizz,
-                    Buzz,
-                    FizzBuzz
+                Fizz,
+                Buzz,
+                FizzBuzz
                 }
 
                 class MyClass
                 {
-                    void Method()
-                    {
-                        var e = MyEnum.Fizz;
-                        [||]switch (e)
-                        {
-                            case (MyEnum)0:
-                            case (MyEnum)1:
-                                break;
-                        }
-                    }
+                void Method()
+                {
+                var e = MyEnum.Fizz;
+                [||]switch (e)
+                {
+                case (MyEnum)0:
+                case (MyEnum)1:
+                break;
+                }
+                }
                 }
                 """,
                 """
                 enum MyEnum
                 {
-                    Fizz,
-                    Buzz,
-                    FizzBuzz
+                Fizz,
+                Buzz,
+                FizzBuzz
                 }
 
                 class MyClass
                 {
-                    void Method()
-                    {
-                        var e = MyEnum.Fizz;
-                        switch (e)
-                        {
-                            case (MyEnum)0:
-                            case (MyEnum)1:
-                                break;
-                            case MyEnum.FizzBuzz:
-                                break;
-                            default:
-                                break;
-                        }
-                    }
+                void Method()
+                {
+                var e = MyEnum.Fizz;
+                switch (e)
+                {
+                case (MyEnum)0:
+                case (MyEnum)1:
+                break;
+                case MyEnum.FizzBuzz:
+                break;
+                default:
+                break;
+                }
+                }
                 }
                 """,
                 index: 2
@@ -1051,37 +1051,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         {
             await TestInRegularAndScriptAsync(
                 """
-            enum MyEnum
-            {
+                enum MyEnum
+                {
                 Fizz
-            }
-            class MyClass
-            {
+                }
+                class MyClass
+                {
                 void Method()
                 {
-                    var e = MyEnum.Fizz;
-                    [||]switch (e)
+                var e = MyEnum.Fizz;
+                [||]switch (e)
                 }
-            }
-            """,
+                }
+                """,
                 """
-            enum MyEnum
-            {
+                enum MyEnum
+                {
                 Fizz
-            }
-            class MyClass
-            {
+                }
+                class MyClass
+                {
                 void Method()
                 {
-                    var e = MyEnum.Fizz;
-                    switch (e)
-                    {
-                        case MyEnum.Fizz:
-                            break;
-                    }
+                var e = MyEnum.Fizz;
+                switch (e)
+                {
+                case MyEnum.Fizz:
+                break;
                 }
-            }
-            """
+                }
+                }
+                """
             );
         }
 
@@ -1092,53 +1092,53 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                 """
                 public class Program
                 {
-                    void Main() 
-                    {
-                        Bar? bar;
-                        [||]switch (bar)
-                        {
-                            case Bar.Option1:
-                                break;
-                            case Bar.Option2:
-                                break;
-                            case null:
-                                break;
-                        }
-                    }
+                void Main()
+                {
+                Bar? bar;
+                [||]switch (bar)
+                {
+                case Bar.Option1:
+                break;
+                case Bar.Option2:
+                break;
+                case null:
+                break;
+                }
+                }
                 }
 
                 public enum Bar
                 {
-                    Option1, 
-                    Option2, 
-                    Option3,
+                Option1,
+                Option2,
+                Option3,
                 }
                 """,
                 """
                 public class Program
                 {
-                    void Main() 
-                    {
-                        Bar? bar;
-                        switch (bar)
-                        {
-                            case Bar.Option1:
-                                break;
-                            case Bar.Option2:
-                                break;
-                            case null:
-                                break;
-                            case Bar.Option3:
-                                break;
-                        }
-                    }
+                void Main()
+                {
+                Bar? bar;
+                switch (bar)
+                {
+                case Bar.Option1:
+                break;
+                case Bar.Option2:
+                break;
+                case null:
+                break;
+                case Bar.Option3:
+                break;
+                }
+                }
                 }
 
                 public enum Bar
                 {
-                    Option1, 
-                    Option2, 
-                    Option3,
+                Option1,
+                Option2,
+                Option3,
                 }
                 """
             );
@@ -1153,17 +1153,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
 
                 static class TestClass
                 {
-                    public static void Test(MyEnum? myEnumValue)
-                    {
-                        [||]switch (myEnumValue)
-                        {
-                        }
-                    }
+                public static void Test(MyEnum? myEnumValue)
+                {
+                [||]switch (myEnumValue)
+                {
+                }
+                }
                 }
 
                 enum MyEnum
                 {
-                    Value1, Value2
+                Value1, Value2
                 }
                 """,
                 """
@@ -1171,23 +1171,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
 
                 static class TestClass
                 {
-                    public static void Test(MyEnum? myEnumValue)
-                    {
-                        switch (myEnumValue)
-                        {
-                            case MyEnum.Value1:
-                                break;
-                            case MyEnum.Value2:
-                                break;
-                            case null:
-                                break;
-                        }
-                    }
+                public static void Test(MyEnum? myEnumValue)
+                {
+                switch (myEnumValue)
+                {
+                case MyEnum.Value1:
+                break;
+                case MyEnum.Value2:
+                break;
+                case null:
+                break;
+                }
+                }
                 }
 
                 enum MyEnum
                 {
-                    Value1, Value2
+                Value1, Value2
                 }
                 """
             );
@@ -1202,19 +1202,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
 
                 static class TestClass
                 {
-                    public static void Test(MyEnum? myEnumValue)
-                    {
-                        [||]switch (myEnumValue)
-                        {
-                            case null:
-                                throw null;
-                        }
-                    }
+                public static void Test(MyEnum? myEnumValue)
+                {
+                [||]switch (myEnumValue)
+                {
+                case null:
+                throw null;
+                }
+                }
                 }
 
                 enum MyEnum
                 {
-                    Value1, Value2
+                Value1, Value2
                 }
                 """,
                 """
@@ -1222,23 +1222,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
 
                 static class TestClass
                 {
-                    public static void Test(MyEnum? myEnumValue)
-                    {
-                        switch (myEnumValue)
-                        {
-                            case null:
-                                throw null;
-                            case MyEnum.Value1:
-                                break;
-                            case MyEnum.Value2:
-                                break;
-                        }
-                    }
+                public static void Test(MyEnum? myEnumValue)
+                {
+                switch (myEnumValue)
+                {
+                case null:
+                throw null;
+                case MyEnum.Value1:
+                break;
+                case MyEnum.Value2:
+                break;
+                }
+                }
                 }
 
                 enum MyEnum
                 {
-                    Value1, Value2
+                Value1, Value2
                 }
                 """
             );
@@ -1253,17 +1253,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
 
                 static class TestClass
                 {
-                    public static void Test(MyEnum? myEnumValue)
-                    {
-                        [||]switch (myEnumValue)
-                        {
-                        }
-                    }
+                public static void Test(MyEnum? myEnumValue)
+                {
+                [||]switch (myEnumValue)
+                {
+                }
+                }
                 }
 
                 enum MyEnum
                 {
-                    Value1, Value2
+                Value1, Value2
                 }
                 """,
                 """
@@ -1271,23 +1271,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
 
                 static class TestClass
                 {
-                    public static void Test(MyEnum? myEnumValue)
-                    {
-                        switch (myEnumValue)
-                        {
-                            case MyEnum.Value1:
-                                break;
-                            case MyEnum.Value2:
-                                break;
-                            case null:
-                                break;
-                        }
-                    }
+                public static void Test(MyEnum? myEnumValue)
+                {
+                switch (myEnumValue)
+                {
+                case MyEnum.Value1:
+                break;
+                case MyEnum.Value2:
+                break;
+                case null:
+                break;
+                }
+                }
                 }
 
                 enum MyEnum
                 {
-                    Value1, Value2
+                Value1, Value2
                 }
                 """
             );
@@ -1302,19 +1302,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
 
                 static class TestClass
                 {
-                    public static void Test(MyEnum? myEnumValue)
-                    {
-                        [||]switch (myEnumValue)
-                        {
-                            case null:
-                                throw null;
-                        }
-                    }
+                public static void Test(MyEnum? myEnumValue)
+                {
+                [||]switch (myEnumValue)
+                {
+                case null:
+                throw null;
+                }
+                }
                 }
 
                 enum MyEnum
                 {
-                    Value1, Value2
+                Value1, Value2
                 }
                 """,
                 """
@@ -1322,23 +1322,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
 
                 static class TestClass
                 {
-                    public static void Test(MyEnum? myEnumValue)
-                    {
-                        switch (myEnumValue)
-                        {
-                            case null:
-                                throw null;
-                            case MyEnum.Value1:
-                                break;
-                            case MyEnum.Value2:
-                                break;
-                        }
-                    }
+                public static void Test(MyEnum? myEnumValue)
+                {
+                switch (myEnumValue)
+                {
+                case null:
+                throw null;
+                case MyEnum.Value1:
+                break;
+                case MyEnum.Value2:
+                break;
+                }
+                }
                 }
 
                 enum MyEnum
                 {
-                    Value1, Value2
+                Value1, Value2
                 }
                 """
             );
@@ -1351,10 +1351,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                 """
                 class C
                 {
-                    void M()
-                    {
-                        switch[||]
-                    }
+                void M()
+                {
+                switch[||]
+                }
                 }
                 """
             );
@@ -1373,10 +1373,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                 """
                 class C
                 {
-                    void M()
-                    {
-                        var v = null switch[||]
-                    }
+                void M()
+                {
+                var v = null switch[||]
+                }
                 }
                 """
             );
@@ -1389,14 +1389,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                 """
                 public class Sample
                 {
-                    public string Method(bool boolean)
-                    {
-                        [||]switch (boolean)
-                        {
-                            case true: return "true";
-                            case false: "false";
-                        }
-                    }
+                public string Method(bool boolean)
+                {
+                [||]switch (boolean)
+                {
+                case true: return "true";
+                case false: "false";
+                }
+                }
                 }
                 """
             );
@@ -1409,15 +1409,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                 """
                 public class Sample
                 {
-                    public string Method(bool? boolean)
-                    {
-                        [||]switch (boolean)
-                        {
-                            case true: return "true";
-                            case false: return "false";
-                            case null: return "null";
-                        }
-                    }
+                public string Method(bool? boolean)
+                {
+                [||]switch (boolean)
+                {
+                case true: return "true";
+                case false: return "false";
+                case null: return "null";
+                }
+                }
                 }
                 """
             );
@@ -1430,27 +1430,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                 """
                 public class Sample
                 {
-                    public string Method(bool boolean)
-                    {
-                        [||]switch (boolean)
-                        {
-                            case true: return "true";
-                        }
-                    }
+                public string Method(bool boolean)
+                {
+                [||]switch (boolean)
+                {
+                case true: return "true";
+                }
+                }
                 }
                 """,
                 """
                 public class Sample
                 {
-                    public string Method(bool boolean)
-                    {
-                        switch (boolean)
-                        {
-                            case true: return "true";
-                            default:
-                                break;
-                        }
-                    }
+                public string Method(bool boolean)
+                {
+                switch (boolean)
+                {
+                case true: return "true";
+                default:
+                break;
+                }
+                }
                 }
                 """
             );
@@ -1463,29 +1463,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                 """
                 public class Sample
                 {
-                    public string Method(bool? boolean)
-                    {
-                        [||]switch (boolean)
-                        {
-                            case true: return "true";
-                            case false: return "false";
-                        }
-                    }
+                public string Method(bool? boolean)
+                {
+                [||]switch (boolean)
+                {
+                case true: return "true";
+                case false: return "false";
+                }
+                }
                 }
                 """,
                 """
                 public class Sample
                 {
-                    public string Method(bool? boolean)
-                    {
-                        switch (boolean)
-                        {
-                            case true: return "true";
-                            case false: return "false";
-                            default:
-                                break;
-                        }
-                    }
+                public string Method(bool? boolean)
+                {
+                switch (boolean)
+                {
+                case true: return "true";
+                case false: return "false";
+                default:
+                break;
+                }
+                }
                 }
                 """
             );

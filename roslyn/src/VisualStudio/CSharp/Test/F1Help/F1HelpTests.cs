@@ -935,9 +935,9 @@ class Program
                 """
                 class C
                 {
-                    void M(r[||]ef readonly int x)
-                    {
-                    }
+                void M(r[||]ef readonly int x)
+                {
+                }
                 }
                 """,
                 "ref_CSharpKeyword"
@@ -951,9 +951,9 @@ class Program
                 """
                 class C
                 {
-                    void M(ref read[||]only int x)
-                    {
-                    }
+                void M(ref read[||]only int x)
+                {
+                }
                 }
                 """,
                 "readonly_CSharpKeyword"
@@ -2040,7 +2040,7 @@ class C
                 """
                 public class C
                 {
-                    re[||]quired int Field;
+                re[||]quired int Field;
                 }
                 """,
                 "required"
@@ -2054,11 +2054,11 @@ class C
                 """
                 public class Base
                 {
-                    virtual void M<T>(T? t) { }
+                virtual void M<T>(T? t) { }
                 }
                 public class C
                 {
-                    override void M<T>() where T : def[||]ault { }
+                override void M<T>() where T : def[||]ault { }
                 }
                 """,
                 expectedText: "defaultconstraint"
@@ -2072,16 +2072,16 @@ class C
                 """
                 public class C
                 {
-                    void M(object o)
-                    {
-                        switch (o)
-                        {
-                            case 1:
-                                goto def[||]ault;
-                            default:
-                                return;
-                        }
-                    }
+                void M(object o)
+                {
+                switch (o)
+                {
+                case 1:
+                goto def[||]ault;
+                default:
+                return;
+                }
+                }
                 }
                 """,
                 expectedText: "defaultcase"
@@ -2095,16 +2095,16 @@ class C
                 """
                 public class C
                 {
-                    void M(object o)
-                    {
-                        switch (o)
-                        {
-                            case 1:
-                                goto default;
-                            def[||]ault:
-                                return;
-                        }
-                    }
+                void M(object o)
+                {
+                switch (o)
+                {
+                case 1:
+                goto default;
+                def[||]ault:
+                return;
+                }
+                }
                 }
                 """,
                 expectedText: "defaultcase"
@@ -2142,9 +2142,9 @@ class C
                 """
                 public class C
                 {
-                    void M<T>() where T : not[||]null
-                    {
-                    }
+                void M<T>() where T : not[||]null
+                {
+                }
                 }
                 """,
                 expectedText: "notnull"
@@ -2158,7 +2158,7 @@ class C
                 """
                 public class C
                 {
-                    int not[||]null = 0;
+                int not[||]null = 0;
                 }
                 """,
                 expectedText: "C.notnull"
@@ -2185,9 +2185,9 @@ class C
                 """
                 public class C
                 {
-                    void M<T>() where T : un[||]managed
-                    {
-                    }
+                void M<T>() where T : un[||]managed
+                {
+                }
                 }
                 """,
                 expectedText: "unmanaged"

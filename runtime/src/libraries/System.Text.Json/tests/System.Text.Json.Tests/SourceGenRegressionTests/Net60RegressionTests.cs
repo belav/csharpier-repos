@@ -68,18 +68,18 @@ namespace System.Text.Json.Tests.SourceGenRegressionTests
                     SummaryWords = new[] { "word1", "word2" },
                 },
                 """
-            {
+                {
                 "Date" : "0001-01-01T00:00:00+00:00",
                 "TemperatureCelsius" : 10,
                 "Summary" : "I am a string",
                 "DatesAvailable" : [ "0001-01-01T00:00:00+00:00" ],
                 "TemperatureRanges" :
                 {
-                    "key" : { "Low" : 0, "High" : 5 }
+                "key" : { "Low" : 0, "High" : 5 }
                 },
                 "SummaryWords" : [ "word1", "word2" ]
-            }
-            """
+                }
+                """
             );
 
             static object[] Wrap<T>(JsonTypeInfo<T> jsonTypeInfo, T value, string expectedJson) =>
@@ -137,18 +137,18 @@ namespace System.Text.Json.Tests.SourceGenRegressionTests
                     SummaryWords = new[] { "word1", "word2" },
                 },
                 """
-            {
+                {
                 "Date" : "0001-01-01T00:00:00+00:00",
                 "TemperatureCelsius" : 10,
                 "Summary" : "I am a string",
                 "DatesAvailable" : [ "0001-01-01T00:00:00+00:00" ],
                 "TemperatureRanges" :
                 {
-                    "key" : { "Low" : 0, "High" : 5 }
+                "key" : { "Low" : 0, "High" : 5 }
                 },
                 "SummaryWords" : [ "word1", "word2" ]
-            }
-            """
+                }
+                """
             );
 
             static object[] Wrap<T>(T value, string expectedJson) =>

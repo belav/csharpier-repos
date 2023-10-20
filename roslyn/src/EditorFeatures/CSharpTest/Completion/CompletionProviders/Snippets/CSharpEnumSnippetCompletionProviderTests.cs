@@ -20,17 +20,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 namespace Namespace
                 {
-                    $$
+                $$
                 }
                 """,
                 ItemToCommit,
                 """
                 namespace Namespace
                 {
-                    enum MyEnum
-                    {
-                        $$
-                    }
+                enum MyEnum
+                {
+                $$
+                }
                 }
                 """
             );
@@ -42,16 +42,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             await VerifyCustomCommitProviderAsync(
                 """
                 namespace Namespace;
-                
+
                 $$
                 """,
                 ItemToCommit,
                 """
                 namespace Namespace;
-                
+
                 enum MyEnum
                 {
-                    $$
+                $$
                 }
                 """
             );
@@ -68,7 +68,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 enum MyEnum
                 {
-                    $$
+                $$
                 }
                 """
             );
@@ -87,7 +87,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 System.Console.WriteLine();
                 enum MyEnum
                 {
-                    $$
+                $$
                 }
                 """
             );
@@ -100,17 +100,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 class MyClass
                 {
-                    $$
+                $$
                 }
                 """,
                 ItemToCommit,
                 """
                 class MyClass
                 {
-                    enum MyEnum
-                    {
-                        $$
-                    }
+                enum MyEnum
+                {
+                $$
+                }
                 }
                 """
             );
@@ -123,17 +123,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 record MyRecord
                 {
-                    $$
+                $$
                 }
                 """,
                 ItemToCommit,
                 """
                 record MyRecord
                 {
-                    enum MyEnum
-                    {
-                        $$
-                    }
+                enum MyEnum
+                {
+                $$
+                }
                 }
                 """
             );
@@ -146,17 +146,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 struct MyStruct
                 {
-                    $$
+                $$
                 }
                 """,
                 ItemToCommit,
                 """
                 struct MyStruct
                 {
-                    enum MyEnum
-                    {
-                        $$
-                    }
+                enum MyEnum
+                {
+                $$
+                }
                 }
                 """
             );
@@ -169,17 +169,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 interface MyInterface
                 {
-                    $$
+                $$
                 }
                 """,
                 ItemToCommit,
                 """
                 interface MyInterface
                 {
-                    enum MyEnum
-                    {
-                        $$
-                    }
+                enum MyEnum
+                {
+                $$
+                }
                 }
                 """
             );
@@ -191,23 +191,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             await VerifyCustomCommitProviderAsync(
                 """
                 <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                    <Document FilePath="/0/Test0.cs">$$</Document>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document FilePath="/0/Test0.cs">$$</Document>
                 <AnalyzerConfigDocument FilePath="/.editorconfig">
                 root = true
-                
+
                 [*]
                 # IDE0008: Use explicit type
                 dotnet_style_require_accessibility_modifiers = always
-                    </AnalyzerConfigDocument>
-                    </Project>
+                </AnalyzerConfigDocument>
+                </Project>
                 </Workspace>
                 """,
                 ItemToCommit,
                 """
                 public enum MyEnum
                 {
-                    $$
+                $$
                 }
                 """
             );
@@ -220,7 +220,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 enum MyEnum
                 {
-                    $$
+                $$
                 }
                 """,
                 ItemToCommit
@@ -234,10 +234,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 class Program
                 {
-                    public void Method()
-                    {
-                        $$
-                    }
+                public void Method()
+                {
+                $$
+                }
                 }
                 """,
                 ItemToCommit
@@ -251,10 +251,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """
                 class Program
                 {
-                    public Program()
-                    {
-                        $$
-                    }
+                public Program()
+                {
+                $$
+                }
                 }
                 """,
                 ItemToCommit

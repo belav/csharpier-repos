@@ -177,8 +177,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                  void Goo() {}
-                  $$
+                void Goo() {}
+                $$
                 """
             );
         }
@@ -189,8 +189,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                  int i;
-                  $$
+                int i;
+                $$
                 """
             );
         }
@@ -201,8 +201,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                  int i { get; }
-                  $$
+                int i { get; }
+                $$
                 """
             );
         }
@@ -289,8 +289,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                  [goo]
-                  $$
+                [goo]
+                $$
                 """
             );
         }
@@ -301,7 +301,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 struct S {
-                   $$
+                $$
                 """
             );
         }
@@ -312,7 +312,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 interface I {
-                   $$
+                $$
                 """
             );
         }
@@ -323,7 +323,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 enum E {
-                   $$
+                $$
                 """
             );
         }
@@ -334,7 +334,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   $$
+                $$
                 """
             );
         }
@@ -354,7 +354,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    internal $$
+                internal $$
                 """
             );
         }
@@ -372,7 +372,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    public $$
+                public $$
                 """
             );
         }
@@ -389,7 +389,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    private $$
+                private $$
                 """
             );
         }
@@ -406,7 +406,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    protected $$
+                protected $$
                 """
             );
         }
@@ -420,7 +420,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    sealed $$
+                sealed $$
                 """
             );
         }
@@ -434,7 +434,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    static $$
+                static $$
                 """
             );
         }
@@ -448,7 +448,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    static public $$
+                static public $$
                 """
             );
         }
@@ -462,7 +462,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                    event $$
+                event $$
                 """
             );
         }
@@ -473,7 +473,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                    const $$
+                const $$
                 """
             );
         }
@@ -484,7 +484,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    readonly $$
+                readonly $$
                 """
             );
         }
@@ -495,7 +495,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                    volatile $$
+                volatile $$
                 """
             );
         }
@@ -523,7 +523,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                   new $$
+                new $$
                 """
             );
         }
@@ -534,8 +534,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                   void Goo() {
-                     $$
+                void Goo() {
+                $$
                 """
             );
         }
@@ -548,7 +548,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Program
                 {
-                    public static void Test(ref $$ p) { }
+                public static void Test(ref $$ p) { }
                 }
                 """
             );
@@ -562,7 +562,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Program
                 {
-                    public static void Test(int p1, ref $$ p2) { }
+                public static void Test(int p1, ref $$ p2) { }
                 }
                 """
             );
@@ -603,10 +603,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
 
                 class Program
                 {
-                    public static void Test()
-                    {
-                        Delegate lambda = (ref $$ int p) => p;
-                    }
+                public static void Test()
+                {
+                Delegate lambda = (ref $$ int p) => p;
+                }
                 }
                 """
             );
@@ -622,10 +622,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
 
                 class Program
                 {
-                    public static void Test()
-                    {
-                        Delegate anonymousDelegate = delegate (ref $$ int p) { return p; };
-                    }
+                public static void Test()
+                {
+                Delegate anonymousDelegate = delegate (ref $$ int p) { return p; };
+                }
                 }
                 """
             );
@@ -639,10 +639,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Program
                 {
-                    public ref $$ int Test()
-                    {
-                        return ref x;
-                    }
+                public ref $$ int Test()
+                {
+                return ref x;
+                }
                 }
                 """
             );
@@ -682,7 +682,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Program
                 {
-                    public ref $$ int Test { get; set; }
+                public ref $$ int Test { get; set; }
                 }
                 """
             );
@@ -753,7 +753,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                    delegate*<ref $$
+                delegate*<ref $$
                 """
             );
         }
@@ -765,7 +765,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                    delegate*<$$
+                delegate*<$$
                 """
             );
         }

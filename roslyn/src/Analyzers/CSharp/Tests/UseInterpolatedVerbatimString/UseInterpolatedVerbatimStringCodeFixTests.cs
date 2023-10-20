@@ -32,19 +32,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseInterpolatedVerbatim
                 """
                 class C
                 {
-                    void M()
-                    {
-                        var s = @[||]$"hello";
-                    }
+                void M()
+                {
+                var s = @[||]$"hello";
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        var s = $@"hello";
-                    }
+                void M()
+                {
+                var s = $@"hello";
+                }
                 }
                 """,
                 parameters: new TestParameters().WithParseOptions(
@@ -60,10 +60,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseInterpolatedVerbatim
                 """
                 class C
                 {
-                    void M()
-                    {
-                        var s = @$"hello"[||];
-                    }
+                void M()
+                {
+                var s = @$"hello"[||];
+                }
                 }
                 """,
                 parameters: new TestParameters().WithParseOptions(
@@ -79,19 +79,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseInterpolatedVerbatim
                 """
                 class C
                 {
-                    void M(string x)
-                    {
-                        var s = M(@[||]$"hello");
-                    }
+                void M(string x)
+                {
+                var s = M(@[||]$"hello");
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(string x)
-                    {
-                        var s = M($@"hello");
-                    }
+                void M(string x)
+                {
+                var s = M($@"hello");
+                }
                 }
                 """,
                 parameters: new TestParameters().WithParseOptions(
@@ -107,21 +107,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseInterpolatedVerbatim
                 """
                 class C
                 {
-                    void M()
-                    {
-                        var s = {|FixAllInDocument:@$"|}hello";
-                        var s2 = @$"hello";
-                    }
+                void M()
+                {
+                var s = {|FixAllInDocument:@$"|}hello";
+                var s2 = @$"hello";
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        var s = $@"hello";
-                        var s2 = $@"hello";
-                    }
+                void M()
+                {
+                var s = $@"hello";
+                var s2 = $@"hello";
+                }
                 }
                 """,
                 parameters: new TestParameters().WithParseOptions(
@@ -137,10 +137,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseInterpolatedVerbatim
                 """
                 class C
                 {
-                    void M()
-                    {
-                        var s = $[||]@"hello";
-                    }
+                void M()
+                {
+                var s = $[||]@"hello";
+                }
                 }
                 """,
                 parameters: new TestParameters().WithParseOptions(
@@ -156,10 +156,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseInterpolatedVerbatim
                 """
                 class C
                 {
-                    void M()
-                    {
-                        var s = @[||]$"hello";
-                    }
+                void M()
+                {
+                var s = @[||]$"hello";
+                }
                 }
                 """,
                 parameters: new TestParameters().WithParseOptions(

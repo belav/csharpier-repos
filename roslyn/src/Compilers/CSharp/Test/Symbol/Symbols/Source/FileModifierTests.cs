@@ -24,8 +24,8 @@ public class FileModifierTests : CSharpTestBase
     public void LangVersion()
     {
         var source = """
-            file class C { }
-            """;
+        file class C { }
+        """;
 
         var comp = CreateCompilation(source, parseOptions: TestOptions.Regular10);
         comp.VerifyDiagnostics(
@@ -44,11 +44,11 @@ public class FileModifierTests : CSharpTestBase
     public void Nested_01()
     {
         var source = """
-            class Outer
-            {
-                file class C { }
-            }
-            """;
+        class Outer
+        {
+        file class C { }
+        }
+        """;
 
         var comp = CreateCompilation(source, parseOptions: TestOptions.Regular10);
         comp.VerifyDiagnostics(
@@ -78,11 +78,11 @@ public class FileModifierTests : CSharpTestBase
     public void Nested_02()
     {
         var source = """
-            file class Outer
-            {
-                class C { }
-            }
-            """;
+        file class Outer
+        {
+        class C { }
+        }
+        """;
 
         var comp = CreateCompilation(source, parseOptions: TestOptions.Regular10);
         comp.VerifyDiagnostics(
@@ -114,11 +114,11 @@ public class FileModifierTests : CSharpTestBase
     public void Nested_03()
     {
         var source = """
-            file class Outer
-            {
-                file class C { }
-            }
-            """;
+        file class Outer
+        {
+        file class C { }
+        }
+        """;
 
         var comp = CreateCompilation(source, parseOptions: TestOptions.Regular10);
         comp.VerifyDiagnostics(
@@ -153,16 +153,16 @@ public class FileModifierTests : CSharpTestBase
     public void Nested_04()
     {
         var source = """
-            file class Outer
-            {
-                public class C { }
-            }
+        file class Outer
+        {
+        public class C { }
+        }
 
-            class D
-            {
-                void M(Outer.C c) { } // 1
-            }
-            """;
+        class D
+        {
+        void M(Outer.C c) { } // 1
+        }
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics(
@@ -178,15 +178,15 @@ public class FileModifierTests : CSharpTestBase
     public void Nested_05()
     {
         var source = """
-            file class Outer
-            {
-                public class C
-                {
-                    void M1(Outer outer) { } // ok
-                    void M2(C outer) { } // ok
-                }
-            }
-            """;
+        file class Outer
+        {
+        public class C
+        {
+        void M1(Outer outer) { } // ok
+        void M2(C outer) { } // ok
+        }
+        }
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics();
@@ -196,17 +196,17 @@ public class FileModifierTests : CSharpTestBase
     public void Nested_06()
     {
         var source = """
-            class A1
-            {
-                internal class A2 { }
-            }
-            file class B : A1
-            {
-            }
-            class C : B.A2 // ok: base type is bound as A1.A2
-            {
-            }
-            """;
+        class A1
+        {
+        internal class A2 { }
+        }
+        file class B : A1
+        {
+        }
+        class C : B.A2 // ok: base type is bound as A1.A2
+        {
+        }
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics();
@@ -216,24 +216,24 @@ public class FileModifierTests : CSharpTestBase
     public void SameFileUse_01()
     {
         var source = """
-            using System;
+        using System;
 
-            file class C
-            {
-                public static void M()
-                {
-                    Console.Write(1);
-                }
-            }
+        file class C
+        {
+        public static void M()
+        {
+        Console.Write(1);
+        }
+        }
 
-            class Program
-            {
-                static void Main()
-                {
-                    C.M();
-                }
-            }
-            """;
+        class Program
+        {
+        static void Main()
+        {
+        C.M();
+        }
+        }
+        """;
 
         var verifier = CompileAndVerify(
             source,
@@ -279,24 +279,24 @@ public class FileModifierTests : CSharpTestBase
     public void SameFileUse_02()
     {
         var source = """
-            using System;
+        using System;
 
-            file class C
-            {
-                public static void M()
-                {
-                    Console.Write(1);
-                }
-            }
+        file class C
+        {
+        public static void M()
+        {
+        Console.Write(1);
+        }
+        }
 
-            class Program
-            {
-                static void Main()
-                {
-                    C.M();
-                }
-            }
-            """;
+        class Program
+        {
+        static void Main()
+        {
+        C.M();
+        }
+        }
+        """;
 
         var verifier = CompileAndVerify(
             new[] { ("", "file1.cs"), (source, "file2.cs") },
@@ -342,21 +342,21 @@ public class FileModifierTests : CSharpTestBase
     public void FileEnum_01()
     {
         var source = """
-            using System;
+        using System;
 
-            file enum E
-            {
-                E1, E2
-            }
+        file enum E
+        {
+        E1, E2
+        }
 
-            class Program
-            {
-                static void Main()
-                {
-                    Console.Write(E.E2);
-                }
-            }
-            """;
+        class Program
+        {
+        static void Main()
+        {
+        Console.Write(E.E2);
+        }
+        }
+        """;
 
         var verifier = CompileAndVerify(
             source,
@@ -400,28 +400,28 @@ public class FileModifierTests : CSharpTestBase
     public void FileEnum_02()
     {
         var source = """
-            using System;
+        using System;
 
-            file enum E
-            {
-                E1, E2
-            }
+        file enum E
+        {
+        E1, E2
+        }
 
-            file class Attr : Attribute
-            {
-                public Attr(E e) { }
-            }
+        file class Attr : Attribute
+        {
+        public Attr(E e) { }
+        }
 
-            [Attr(E.E2)]
-            class Program
-            {
-                static void Main()
-                {
-                    var data = typeof(Program).GetCustomAttributesData();
-                    Console.Write(data[0].ConstructorArguments[0]);
-                }
-            }
-            """;
+        [Attr(E.E2)]
+        class Program
+        {
+        static void Main()
+        {
+        var data = typeof(Program).GetCustomAttributesData();
+        Console.Write(data[0].ConstructorArguments[0]);
+        }
+        }
+        """;
 
         var verifier = CompileAndVerify(
             source,
@@ -452,28 +452,28 @@ public class FileModifierTests : CSharpTestBase
     public void FileEnum_03()
     {
         var source = """
-            using System;
+        using System;
 
-            file enum E
-            {
-                E1, E2
-            }
+        file enum E
+        {
+        E1, E2
+        }
 
-            class Attr : Attribute
-            {
-                public Attr(E e) { } // 1
-            }
+        class Attr : Attribute
+        {
+        public Attr(E e) { } // 1
+        }
 
-            [Attr(E.E2)]
-            class Program
-            {
-                static void Main()
-                {
-                    var data = typeof(Program).GetCustomAttributesData();
-                    Console.Write(data[0].ConstructorArguments[0]);
-                }
-            }
-            """;
+        [Attr(E.E2)]
+        class Program
+        {
+        static void Main()
+        {
+        var data = typeof(Program).GetCustomAttributesData();
+        Console.Write(data[0].ConstructorArguments[0]);
+        }
+        }
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics(
@@ -489,28 +489,28 @@ public class FileModifierTests : CSharpTestBase
     public void FileEnum_04()
     {
         var source = """
-            using System;
+        using System;
 
-            file enum E
-            {
-                E1, E2
-            }
+        file enum E
+        {
+        E1, E2
+        }
 
-            class Attr : Attribute
-            {
-                public Attr(object obj) { }
-            }
+        class Attr : Attribute
+        {
+        public Attr(object obj) { }
+        }
 
-            [Attr(E.E2)]
-            class Program
-            {
-                static void Main()
-                {
-                    var data = typeof(Program).GetCustomAttributesData();
-                    Console.Write(data[0].ConstructorArguments[0]);
-                }
-            }
-            """;
+        [Attr(E.E2)]
+        class Program
+        {
+        static void Main()
+        {
+        var data = typeof(Program).GetCustomAttributesData();
+        Console.Write(data[0].ConstructorArguments[0]);
+        }
+        }
+        """;
 
         var verifier = CompileAndVerify(
             source,
@@ -811,26 +811,26 @@ public partial class C
     public void OtherFileUse()
     {
         var source1 = """
-            using System;
+        using System;
 
-            file class C
-            {
-                public static void M()
-                {
-                    Console.Write(1);
-                }
-            }
-            """;
+        file class C
+        {
+        public static void M()
+        {
+        Console.Write(1);
+        }
+        }
+        """;
 
         var source2 = """
-            class Program
-            {
-                static void Main()
-                {
-                    C.M(); // 1
-                }
-            }
-            """;
+        class Program
+        {
+        static void Main()
+        {
+        C.M(); // 1
+        }
+        }
+        """;
 
         var comp = CreateCompilation(new[] { (source1, "file1.cs"), (source2, "file2.cs") });
         comp.VerifyDiagnostics(
@@ -850,7 +850,7 @@ public partial class C
 
         file class C<T>
         {
-            public static void M(T t) { Console.Write(t); }
+        public static void M(T t) { Console.Write(t); }
         }
         """;
 
@@ -913,7 +913,7 @@ public partial class C
 
         file class C
         {
-            public static void M() { Console.Write(1); }
+        public static void M() { Console.Write(1); }
         }
         """;
 
@@ -958,7 +958,7 @@ public partial class C
 
         file class C
         {
-            public static void M() { Console.Write(1); }
+        public static void M() { Console.Write(1); }
         }
         """;
 
@@ -1009,7 +1009,7 @@ public partial class C
 
             file class C
             {
-                public static void M() { Console.Write(1); }
+            public static void M() { Console.Write(1); }
             }
             """,
             options: TestOptions.RegularPreview,
@@ -1060,7 +1060,7 @@ public partial class C
 
             file class C
             {
-                public static void M() { Console.Write(1); }
+            public static void M() { Console.Write(1); }
             }
             """,
             options: TestOptions.RegularPreview,
@@ -1075,7 +1075,7 @@ public partial class C
 
             file class C
             {
-                public static void M() { Console.Write(2); }
+            public static void M() { Console.Write(2); }
             }
             """,
             options: TestOptions.RegularPreview,
@@ -1125,7 +1125,7 @@ public partial class C
 
             file class C<T>
             {
-                public static void M() { Console.Write(1); }
+            public static void M() { Console.Write(1); }
             }
             """,
             options: TestOptions.RegularPreview,
@@ -1175,7 +1175,7 @@ public partial class C
 
             file class C
             {
-                public static void M() { Console.Write(1); }
+            public static void M() { Console.Write(1); }
             }
             """,
             options: TestOptions.RegularPreview,
@@ -1211,26 +1211,26 @@ public partial class C
     public void DuplicateFileNames_05()
     {
         var source1 = """
-            using System;
+        using System;
 
-            file class C // 1
-            {
-                public static void M()
-                {
-                    Console.Write(1);
-                }
-            }
-            """;
+        file class C // 1
+        {
+        public static void M()
+        {
+        Console.Write(1);
+        }
+        }
+        """;
 
         var source2 = """
-            class Program
-            {
-                static void Main()
-                {
-                    C.M();
-                }
-            }
-            """;
+        class Program
+        {
+        static void Main()
+        {
+        C.M();
+        }
+        }
+        """;
 
         var comp = CreateCompilation(new[] { (source1, "file1.cs"), (source2, "file1.cs") });
         comp.VerifyDiagnostics();
@@ -1284,7 +1284,7 @@ public partial class C
 
         file class C
         {
-            public static void M() { Console.Write(1); }
+        public static void M() { Console.Write(1); }
         }
         """;
 
@@ -1327,10 +1327,10 @@ public partial class C
     public void BadFileNames_04()
     {
         var source1 = """
-            new C(); // 1
+        new C(); // 1
 
-            file class C { } // 2
-            """;
+        file class C { } // 2
+        """;
 
         var comp = CreateCompilation(
             SyntaxFactory.ParseSyntaxTree(
@@ -1372,7 +1372,7 @@ public partial class C
 
         file class C
         {
-            public static void M() { Console.Write(1); }
+        public static void M() { Console.Write(1); }
         }
         """;
 
@@ -1460,14 +1460,14 @@ public partial class C
 
         var main = """
 
-            class Program
-            {
-                static void Main()
-                {
-                    C.M();
-                }
-            }
-            """;
+        class Program
+        {
+        static void Main()
+        {
+        C.M();
+        }
+        }
+        """;
 
         var verifier = CompileAndVerify(
             new[] { (source1 + main, "file1.cs"), (source2, "file2.cs") },
@@ -1514,39 +1514,39 @@ public partial class C
     {
         // As a sanity check, demonstrate that non-file classes with the same name across different files are disallowed.
         var source1 = """
-            using System;
+        using System;
 
-            class C
-            {
-                public static void M()
-                {
-                    Console.Write(1);
-                }
-            }
-            """;
+        class C
+        {
+        public static void M()
+        {
+        Console.Write(1);
+        }
+        }
+        """;
 
         var source2 = """
-            using System;
+        using System;
 
-            class C
-            {
-                public static void M()
-                {
-                    Console.Write(2);
-                }
-            }
-            """;
+        class C
+        {
+        public static void M()
+        {
+        Console.Write(2);
+        }
+        }
+        """;
 
         var main = """
 
-            class Program
-            {
-                static void Main()
-                {
-                    C.M();
-                }
-            }
-            """;
+        class Program
+        {
+        static void Main()
+        {
+        C.M();
+        }
+        }
+        """;
 
         var comp = CreateCompilation(new[] { source1 + main, source2 });
         verify();
@@ -1586,42 +1586,42 @@ public partial class C
     public void Duplication_03()
     {
         var source1 = """
-            using System;
+        using System;
 
-            partial class C
-            {
-                public static void M()
-                {
-                    Console.Write(1);
-                }
-            }
-            """;
+        partial class C
+        {
+        public static void M()
+        {
+        Console.Write(1);
+        }
+        }
+        """;
 
         var source2 = """
-            partial class C
-            {
-            }
-            """;
+        partial class C
+        {
+        }
+        """;
 
         var main = """
-            using System;
+        using System;
 
-            file class C
-            {
-                public static void M()
-                {
-                    Console.Write(2);
-                }
-            }
+        file class C
+        {
+        public static void M()
+        {
+        Console.Write(2);
+        }
+        }
 
-            class Program
-            {
-                static void Main()
-                {
-                    C.M();
-                }
-            }
-            """;
+        class Program
+        {
+        static void Main()
+        {
+        C.M();
+        }
+        }
+        """;
 
         var verifier = CompileAndVerify(
             new[] { (source1, "file1.cs"), (source2, "file2.cs"), (main, "file3.cs") },
@@ -1660,41 +1660,41 @@ public partial class C
     public void Duplication_04()
     {
         var source1 = """
-            using System;
+        using System;
 
-            class C
-            {
-                public static void M()
-                {
-                    Console.Write(1);
-                }
-            }
-            """;
+        class C
+        {
+        public static void M()
+        {
+        Console.Write(1);
+        }
+        }
+        """;
 
         var main = """
-            using System;
+        using System;
 
-            file partial class C
-            {
-                public static void M()
-                {
-                    Console.Write(Number);
-                }
-            }
+        file partial class C
+        {
+        public static void M()
+        {
+        Console.Write(Number);
+        }
+        }
 
-            file partial class C
-            {
-                private static int Number => 2;
-            }
+        file partial class C
+        {
+        private static int Number => 2;
+        }
 
-            class Program
-            {
-                static void Main()
-                {
-                    C.M();
-                }
-            }
-            """;
+        class Program
+        {
+        static void Main()
+        {
+        C.M();
+        }
+        }
+        """;
 
         var verifier = CompileAndVerify(
             new[] { (source1, "file1.cs"), (main, "file2.cs") },
@@ -1746,24 +1746,24 @@ public partial class C
             """;
 
         var main = """
-            using System;
+        using System;
 
-            file partial class C
-            {
-                public static void M()
-                {
-                    Console.Write(2);
-                }
-            }
+        file partial class C
+        {
+        public static void M()
+        {
+        Console.Write(2);
+        }
+        }
 
-            class Program
-            {
-                static void Main()
-                {
-                    C.M();
-                }
-            }
-            """;
+        class Program
+        {
+        static void Main()
+        {
+        C.M();
+        }
+        }
+        """;
 
         var verifier = CompileAndVerify(
             new[] { (source1, "file1.cs"), (main, "file2.cs") },
@@ -1799,33 +1799,33 @@ public partial class C
     {
         // note: we avoid `using System;` here because we don't want to attempt to bind to `System.Number`
         var source1 = """
-            namespace NS;
+        namespace NS;
 
-            partial class C
-            {
-                public static void M()
-                {
-                    System.Console.Write(Number);
-                }
-            }
-            """;
+        partial class C
+        {
+        public static void M()
+        {
+        System.Console.Write(Number);
+        }
+        }
+        """;
 
         var source2 = """
-            namespace NS;
+        namespace NS;
 
-            partial class C
-            {
-                private static int Number => 1;
-            }
+        partial class C
+        {
+        private static int Number => 1;
+        }
 
-            file class C
-            {
-                public static void M()
-                {
-                    System.Console.Write(2);
-                }
-            }
-            """;
+        file class C
+        {
+        public static void M()
+        {
+        System.Console.Write(2);
+        }
+        }
+        """;
 
         var comp = CreateCompilation(new[] { (source1, "file1.cs"), (source2, "file2.cs") });
         comp.VerifyDiagnostics(
@@ -1880,33 +1880,33 @@ public partial class C
     public void Duplication_07()
     {
         var source1 = """
-            using System;
+        using System;
 
-            file partial class C
-            {
-                public static void M()
-                {
-                    Console.Write(1);
-                }
-            }
-            """;
+        file partial class C
+        {
+        public static void M()
+        {
+        Console.Write(1);
+        }
+        }
+        """;
 
         var source2 = """
-            using System;
+        using System;
 
-            file partial class C
-            {
-                public static void M()
-                {
-                    Console.Write(Number);
-                }
-            }
+        file partial class C
+        {
+        public static void M()
+        {
+        Console.Write(Number);
+        }
+        }
 
-            file class C
-            {
-                private static int Number => 2;
-            }
-            """;
+        file class C
+        {
+        private static int Number => 2;
+        }
+        """;
 
         var comp = CreateCompilation(new[] { (source1, "file1.cs"), (source2, "file2.cs") });
         comp.VerifyDiagnostics(
@@ -1955,34 +1955,34 @@ public partial class C
     public void Duplication_08()
     {
         var source1 = """
-            partial class Outer
-            {
-                file class C
-                {
-                    public static void M() { }
-                }
-            }
-            """;
+        partial class Outer
+        {
+        file class C
+        {
+        public static void M() { }
+        }
+        }
+        """;
 
         var source2 = """
-            partial class Outer
-            {
-                file class C
-                {
-                    public static void M() { }
-                }
-            }
-            """;
+        partial class Outer
+        {
+        file class C
+        {
+        public static void M() { }
+        }
+        }
+        """;
 
         var source3 = """
-            partial class Outer
-            {
-                public class C
-                {
-                    public static void M() { }
-                }
-            }
-            """;
+        partial class Outer
+        {
+        public class C
+        {
+        public static void M() { }
+        }
+        }
+        """;
 
         var compilation = CreateCompilation(
             new[] { (source1, "file1.cs"), (source2, "file2.cs"), (source3, "file3.cs") }
@@ -2012,34 +2012,34 @@ public partial class C
     public void Duplication_09()
     {
         var source1 = """
-            namespace NS
-            {
-                file class C
-                {
-                    public static void M() { }
-                }
-            }
-            """;
+        namespace NS
+        {
+        file class C
+        {
+        public static void M() { }
+        }
+        }
+        """;
 
         var source2 = """
-            namespace NS
-            {
-                file class C
-                {
-                    public static void M() { }
-                }
-            }
-            """;
+        namespace NS
+        {
+        file class C
+        {
+        public static void M() { }
+        }
+        }
+        """;
 
         var source3 = """
-            namespace NS
-            {
-                public class C
-                {
-                    public static void M() { }
-                }
-            }
-            """;
+        namespace NS
+        {
+        public class C
+        {
+        public static void M() { }
+        }
+        }
+        """;
 
         var compilation = CreateCompilation(
             new[] { (source1, "file1.cs"), (source2, "file2.cs"), (source3, "file3.cs") }
@@ -2091,14 +2091,14 @@ public partial class C
             """;
 
         var main = """
-            partial class Program
-            {
-                static void Main()
-                {
-                    Program.C.M();
-                }
-            }
-            """;
+        partial class Program
+        {
+        static void Main()
+        {
+        Program.C.M();
+        }
+        }
+        """;
 
         var comp = CreateCompilation(new[] { (source1 + main, "file1.cs"), (source2, "file2.cs") });
         var cs = comp.GetMembers("Program.C");
@@ -2168,14 +2168,14 @@ public partial class C
             """;
 
         var main = """
-            class Program
-            {
-                static void Main()
-                {
-                    Outer.C.M();
-                }
-            }
-            """;
+        class Program
+        {
+        static void Main()
+        {
+        Outer.C.M();
+        }
+        }
+        """;
 
         var comp = CreateCompilation(
             new[] { (source1 + main, "file1.cs"), (source2, "file2.cs") },
@@ -2221,20 +2221,20 @@ public partial class C
     public void Duplication_13(string fileModifier)
     {
         var userCode = """
-            using System;
+        using System;
 
-            UserCode.Print();
+        UserCode.Print();
 
-            partial class UserCode
-            {
-                public static partial void Print();
+        partial class UserCode
+        {
+        public static partial void Print();
 
-                private class C
-                {
-                    public static void M() => Console.Write("Program.cs");
-                }
-            }
-            """;
+        private class C
+        {
+        public static void M() => Console.Write("Program.cs");
+        }
+        }
+        """;
 
         // A source generator must assume that partial classes and namespaces may bring user-defined types into scope.
         // Therefore, generators should reference types they introduce with a `global::`-qualified name.
@@ -2269,19 +2269,19 @@ public partial class C
     public void Duplication_14(string fileModifier)
     {
         var userCode = """
-            using System;
-            using UserNamespace;
+        using System;
+        using UserNamespace;
 
-            GeneratedClass.Print();
+        GeneratedClass.Print();
 
-            namespace UserNamespace
-            {
-                class C
-                {
-                    public static void M() => Console.Write("Program.cs");
-                }
-            }
-            """;
+        namespace UserNamespace
+        {
+        class C
+        {
+        public static void M() => Console.Write("Program.cs");
+        }
+        }
+        """;
 
         // A source generator must assume that partial classes and namespaces may bring user-defined types into scope.
         // Therefore, generators should reference types they introduce with a `global::`-qualified name.
@@ -2317,19 +2317,19 @@ public partial class C
     public void Duplication_15()
     {
         var userCode = """
-            using System;
-            using UserNamespace;
+        using System;
+        using UserNamespace;
 
-            GeneratedClass.Print();
+        GeneratedClass.Print();
 
-            namespace UserNamespace
-            {
-                class C
-                {
-                    public static void M() => Console.Write("Program.cs");
-                }
-            }
-            """;
+        namespace UserNamespace
+        {
+        class C
+        {
+        public static void M() => Console.Write("Program.cs");
+        }
+        }
+        """;
 
         // Generators can also mitigate the "nearer scope" problem by ensuring no namespace or partial class scopes lie between the declaration and usage of a file type.
         var generatedCode = $$"""
@@ -2364,11 +2364,11 @@ public partial class C
     public void Duplication_16()
     {
         var source = """
-            namespace NS;
+        namespace NS;
 
-            file class C { }
-            class C { }
-            """;
+        file class C { }
+        class C { }
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics(
@@ -2384,11 +2384,11 @@ public partial class C
     public void Duplication_17()
     {
         var source = """
-            namespace NS;
+        namespace NS;
 
-            class C { }
-            file class C { }
-            """;
+        class C { }
+        file class C { }
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics(
@@ -2404,12 +2404,12 @@ public partial class C
     public void Duplication_18()
     {
         var source = """
-            namespace NS;
+        namespace NS;
 
-            file class C { }
-            class C { }
-            class C { }
-            """;
+        file class C { }
+        class C { }
+        class C { }
+        """;
 
         var comp = CreateCompilation((source, "file1.cs"));
         comp.VerifyDiagnostics(
@@ -2430,12 +2430,12 @@ public partial class C
     public void Duplication_19()
     {
         var source = """
-            namespace NS;
+        namespace NS;
 
-            class C { }
-            file class C { }
-            class C { }
-            """;
+        class C { }
+        file class C { }
+        class C { }
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics(
@@ -2456,16 +2456,16 @@ public partial class C
     public void SignatureUsage_01()
     {
         var source = """
-            file class C
-            {
-            }
+        file class C
+        {
+        }
 
-            class D
-            {
-                public void M1(C c) { } // 1
-                private void M2(C c) { } // 2
-            }
-            """;
+        class D
+        {
+        public void M1(C c) { } // 1
+        private void M2(C c) { } // 2
+        }
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics(
@@ -2486,16 +2486,16 @@ public partial class C
     public void SignatureUsage_02()
     {
         var source = """
-            file class C
-            {
-            }
+        file class C
+        {
+        }
 
-            class D
-            {
-                public C M1() => new C(); // 1
-                private C M2() => new C(); // 2
-            }
-            """;
+        class D
+        {
+        public C M1() => new C(); // 1
+        private C M2() => new C(); // 2
+        }
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics(
@@ -2516,19 +2516,19 @@ public partial class C
     public void SignatureUsage_03()
     {
         var source = """
-            file class C
-            {
-            }
-            file delegate void D();
+        file class C
+        {
+        }
+        file delegate void D();
 
-            public class E
-            {
-                C field; // 1
-                C property { get; set; } // 2
-                object this[C c] { get => c; set { } } // 3
-                event D @event; // 4
-            }
-            """;
+        public class E
+        {
+        C field; // 1
+        C property { get; set; } // 2
+        object this[C c] { get => c; set { } } // 3
+        event D @event; // 4
+        }
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics(
@@ -2569,20 +2569,20 @@ public partial class C
     public void SignatureUsage_04()
     {
         var source = """
-            file class C
-            {
-                public class Inner { }
-                public delegate void InnerDelegate();
-            }
+        file class C
+        {
+        public class Inner { }
+        public delegate void InnerDelegate();
+        }
 
-            public class E
-            {
-                C.Inner field; // 1
-                C.Inner property { get; set; } // 2
-                object this[C.Inner inner] { get => inner; set { } } // 3
-                event C.InnerDelegate @event; // 4
-            }
-            """;
+        public class E
+        {
+        C.Inner field; // 1
+        C.Inner property { get; set; } // 2
+        object this[C.Inner inner] { get => inner; set { } } // 3
+        event C.InnerDelegate @event; // 4
+        }
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics(
@@ -2623,36 +2623,36 @@ public partial class C
     public void SignatureUsage_05()
     {
         var source = """
-            #pragma warning disable 67, 169 // unused event, field
+        #pragma warning disable 67, 169 // unused event, field
 
-            file class C
-            {
-                public class Inner { }
-                public delegate void InnerDelegate();
-            }
+        file class C
+        {
+        public class Inner { }
+        public delegate void InnerDelegate();
+        }
 
-            file class D
-            {
-                public class Inner
-                {
-                    C.Inner field;
-                    C.Inner property { get; set; }
-                    object this[C.Inner inner] { get => inner; set { } }
-                    event C.InnerDelegate @event;
-                }
-            }
+        file class D
+        {
+        public class Inner
+        {
+        C.Inner field;
+        C.Inner property { get; set; }
+        object this[C.Inner inner] { get => inner; set { } }
+        event C.InnerDelegate @event;
+        }
+        }
 
-            class E
-            {
-                public class Inner
-                {
-                    C.Inner field; // 1
-                    C.Inner property { get; set; } // 2
-                    object this[C.Inner inner] { get => inner; set { } } // 3
-                    event C.InnerDelegate @event; // 4
-                }
-            }
-            """;
+        class E
+        {
+        public class Inner
+        {
+        C.Inner field; // 1
+        C.Inner property { get; set; } // 2
+        object this[C.Inner inner] { get => inner; set { } } // 3
+        event C.InnerDelegate @event; // 4
+        }
+        }
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics(
@@ -2683,13 +2683,13 @@ public partial class C
     public void SignatureUsage_06()
     {
         var source = """
-            file class C
-            {
-            }
+        file class C
+        {
+        }
 
-            delegate void Del1(C c); // 1
-            delegate C Del2(); // 2
-            """;
+        delegate void Del1(C c); // 1
+        delegate C Del2(); // 2
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics(
@@ -2710,16 +2710,16 @@ public partial class C
     public void SignatureUsage_06_2()
     {
         var source = """
-            file class C<T>
-            {
-            }
+        file class C<T>
+        {
+        }
 
-            delegate void Del1(C<int> c); // 1
-            delegate C<int> Del2(); // 2
+        delegate void Del1(C<int> c); // 1
+        delegate C<int> Del2(); // 2
 
-            file delegate void Del3(C<int> c); // ok
-            file delegate C<int> Del4(); // ok
-            """;
+        file delegate void Del3(C<int> c); // ok
+        file delegate C<int> Del4(); // ok
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics(
@@ -2744,16 +2744,16 @@ public partial class C
     public void SignatureUsage_07()
     {
         var source = """
-            file class C
-            {
-            }
+        file class C
+        {
+        }
 
-            class D
-            {
-                public static D operator +(D d, C c) => d; // 1
-                public static C operator -(D d1, D d2) => new C(); // 2
-            }
-            """;
+        class D
+        {
+        public static D operator +(D d, C c) => d; // 1
+        public static C operator -(D d1, D d2) => new C(); // 2
+        }
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics(
@@ -2774,15 +2774,15 @@ public partial class C
     public void SignatureUsage_08()
     {
         var source = """
-            file class C
-            {
-            }
+        file class C
+        {
+        }
 
-            class D
-            {
-                public D(C c) { } // 1
-            }
-            """;
+        class D
+        {
+        public D(C c) { } // 1
+        }
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics(
@@ -2798,15 +2798,15 @@ public partial class C
     public void SignatureUsage_09()
     {
         var source = """
-            file class C
-            {
-            }
+        file class C
+        {
+        }
 
-            class D
-            {
-                public C M(C c1, C c2) => c1; // 1, 2, 3
-            }
-            """;
+        class D
+        {
+        public C M(C c1, C c2) => c1; // 1, 2, 3
+        }
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics(
@@ -2832,33 +2832,33 @@ public partial class C
     public void SignatureUsage_10()
     {
         var source = """
-            #pragma warning disable 67, 169 // unused event, field
+        #pragma warning disable 67, 169 // unused event, field
 
-            file class C<T> { }
-            file delegate void Del<T>(T input);
+        file class C<T> { }
+        file delegate void Del<T>(T input);
 
-            class C1
-            {
-                private C<int> F; // 1
-                private event Del<int> E; // 2
-                private void M1(C<int> input) { } // 3
-                private C<int> M2() => throw null!; // 4
+        class C1
+        {
+        private C<int> F; // 1
+        private event Del<int> E; // 2
+        private void M1(C<int> input) { } // 3
+        private C<int> M2() => throw null!; // 4
 
-                private C<int> P { get; set; } // 5
-                private C<int> this[int i] => throw null!; // 6
-            }
+        private C<int> P { get; set; } // 5
+        private C<int> this[int i] => throw null!; // 6
+        }
 
-            file class FC
-            {
-                private C<int> F;
-                private event Del<int> E;
-                private void M1(C<int> input) { }
-                private C<int> M2() => throw null!;
+        file class FC
+        {
+        private C<int> F;
+        private event Del<int> E;
+        private void M1(C<int> input) { }
+        private C<int> M2() => throw null!;
 
-                private C<int> P { get; set; }
-                private C<int> this[int i] => throw null!;
-            }
-            """;
+        private C<int> P { get; set; }
+        private C<int> this[int i] => throw null!;
+        }
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics(
@@ -2912,11 +2912,11 @@ public partial class C
     public void AccessModifiers_01()
     {
         var source = """
-            public file class C { } // 1
-            file internal class D { } // 2
-            private file class E { } // 3, 4
-            file class F { } // ok
-            """;
+        public file class C { } // 1
+        file internal class D { } // 2
+        private file class E { } // 3, 4
+        file class F { } // ok
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics(
@@ -2945,9 +2945,9 @@ public partial class C
     public void DuplicateModifiers_01()
     {
         var source = """
-            file file class C { } // 1
-            file readonly file struct D { } // 2
-            """;
+        file file class C { } // 1
+        file readonly file struct D { } // 2
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics(
@@ -2968,11 +2968,11 @@ public partial class C
     public void BaseClause_01()
     {
         var source = """
-            file class Base { }
-            class Derived1 : Base { } // 1
-            public class Derived2 : Base { } // 2, 3
-            file class Derived3 : Base { } // ok
-            """;
+        file class Base { }
+        class Derived1 : Base { } // 1
+        public class Derived2 : Base { } // 2, 3
+        file class Derived3 : Base { } // ok
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics(
@@ -2998,14 +2998,14 @@ public partial class C
     public void BaseClause_02()
     {
         var source = """
-            file interface Interface { }
+        file interface Interface { }
 
-            class Derived1 : Interface { } // ok
-            file class Derived2 : Interface { } // ok
+        class Derived1 : Interface { } // ok
+        file class Derived2 : Interface { } // ok
 
-            interface Derived3 : Interface { } // 1
-            file interface Derived4 : Interface { } // ok
-            """;
+        interface Derived3 : Interface { } // 1
+        file interface Derived4 : Interface { } // ok
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics(
@@ -3021,33 +3021,33 @@ public partial class C
     public void BaseClause_03()
     {
         var source1 = """
-            using System;
-            class Base
-            {
-                public static void M0()
-                {
-                    Console.Write(1);
-                }
-            }
-            """;
+        using System;
+        class Base
+        {
+        public static void M0()
+        {
+        Console.Write(1);
+        }
+        }
+        """;
         var source2 = """
-            using System;
+        using System;
 
-            file class Base
-            {
-                public static void M0()
-                {
-                    Console.Write(2);
-                }
-            }
-            file class Program : Base
-            {
-                static void Main()
-                {
-                    M0();
-                }
-            }
-            """;
+        file class Base
+        {
+        public static void M0()
+        {
+        Console.Write(2);
+        }
+        }
+        file class Program : Base
+        {
+        static void Main()
+        {
+        M0();
+        }
+        }
+        """;
 
         var verifier = CompileAndVerify(
             new[] { (source1, "file1.cs"), (source2, "file2.cs") },
@@ -3073,24 +3073,24 @@ public partial class C
     public void BaseClause_04()
     {
         var source1 = """
-            using System;
-            class Base
-            {
-                public static void M0()
-                {
-                    Console.Write(1);
-                }
-            }
-            """;
+        using System;
+        class Base
+        {
+        public static void M0()
+        {
+        Console.Write(1);
+        }
+        }
+        """;
         var source2 = """
-            file class Program : Base
-            {
-                static void Main()
-                {
-                    M0();
-                }
-            }
-            """;
+        file class Program : Base
+        {
+        static void Main()
+        {
+        M0();
+        }
+        }
+        """;
 
         var verifier = CompileAndVerify(
             new[] { (source1, "file1.cs"), (source2, "file2.cs") },
@@ -3115,11 +3115,11 @@ public partial class C
     public void BaseClause_05()
     {
         var source = """
-            interface I2 { }
-            file interface I1 { }
-            partial interface Derived : I1 { } // 1
-            partial interface Derived : I2 { }
-            """;
+        interface I2 { }
+        file interface I1 { }
+        partial interface Derived : I1 { } // 1
+        partial interface Derived : I2 { }
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics(
@@ -3180,15 +3180,15 @@ public partial class C
     public void InterfaceImplementation_01()
     {
         var source = """
-            file interface I
-            {
-                void F();
-            }
-            class C : I
-            {
-                public void F() { }
-            }
-            """;
+        file interface I
+        {
+        void F();
+        }
+        class C : I
+        {
+        public void F() { }
+        }
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics();
@@ -3198,15 +3198,15 @@ public partial class C
     public void InterfaceImplementation_02()
     {
         var source = """
-            file interface I
-            {
-                void F(I i);
-            }
-            class C : I
-            {
-                public void F(I i) { } // 1
-            }
-            """;
+        file interface I
+        {
+        void F(I i);
+        }
+        class C : I
+        {
+        public void F(I i) { } // 1
+        }
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics(
@@ -3222,15 +3222,15 @@ public partial class C
     public void InterfaceImplementation_03()
     {
         var source = """
-            file interface I
-            {
-                void F(I i);
-            }
-            class C : I
-            {
-                void I.F(I i) { }
-            }
-            """;
+        file interface I
+        {
+        void F(I i);
+        }
+        class C : I
+        {
+        void I.F(I i) { }
+        }
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics(
@@ -3246,21 +3246,21 @@ public partial class C
     public void InterfaceImplementation_04()
     {
         var source1 = """
-            file interface I
-            {
-                void F();
-            }
-            partial class C : I
-            {
-            }
-            """;
+        file interface I
+        {
+        void F();
+        }
+        partial class C : I
+        {
+        }
+        """;
 
         var source2 = """
-            partial class C
-            {
-                public void F() { }
-            }
-            """;
+        partial class C
+        {
+        public void F() { }
+        }
+        """;
 
         // This is similar to how a base class may not have access to an interface (by being from another assembly, etc.),
         // but a derived class might add that interface to its list, and a base member implicitly implements an interface member.
@@ -3272,21 +3272,21 @@ public partial class C
     public void InterfaceImplementation_05()
     {
         var source1 = """
-            file interface I
-            {
-                void F();
-            }
-            partial class C : I // 1
-            {
-            }
-            """;
+        file interface I
+        {
+        void F();
+        }
+        partial class C : I // 1
+        {
+        }
+        """;
 
         var source2 = """
-            partial class C
-            {
-                void I.F() { } // 2, 3
-            }
-            """;
+        partial class C
+        {
+        void I.F() { } // 2, 3
+        }
+        """;
 
         var comp = CreateCompilation(new[] { (source1, "file1.cs"), (source2, "file2.cs") });
         comp.VerifyDiagnostics(
@@ -3313,17 +3313,17 @@ public partial class C
     {
         // Ensure that appropriate error is given for duplicate implementations which have a type difference which is insignificant to the runtime.
         var source1 = """
-            file interface FI<T>
-            {
-                public T Prop { get; }
-            }
+        file interface FI<T>
+        {
+        public T Prop { get; }
+        }
 
-            internal class C : FI<object>
-            {
-                object FI<object>.Prop { get; }
-                dynamic FI<dynamic>.Prop { get; }
-            }
-            """;
+        internal class C : FI<object>
+        {
+        object FI<object>.Prop { get; }
+        dynamic FI<dynamic>.Prop { get; }
+        }
+        """;
 
         var comp = CreateCompilation(
             new[] { (source1, "F1.cs") },
@@ -3348,19 +3348,19 @@ public partial class C
     {
         // Ensure that appropriate error is given for duplicate implementations which have a type difference which is insignificant to the runtime.
         var source1 = """
-            using System;
+        using System;
 
-            file interface FI<T>
-            {
-                public T Prop { get; }
-            }
+        file interface FI<T>
+        {
+        public T Prop { get; }
+        }
 
-            internal class C : FI<nint>, FI<IntPtr>
-            {
-                nint FI<nint>.Prop { get; }
-                IntPtr FI<IntPtr>.Prop { get; }
-            }
-            """;
+        internal class C : FI<nint>, FI<IntPtr>
+        {
+        nint FI<nint>.Prop { get; }
+        IntPtr FI<IntPtr>.Prop { get; }
+        }
+        """;
 
         var comp = CreateCompilation(
             new[] { (source1, "F1.cs") },
@@ -3392,17 +3392,17 @@ public partial class C
     public void TypeArguments_01()
     {
         var source = """
-            file struct S { public int X; }
-            class Container<T> { }
-            unsafe class Program
-            {
-                Container<S> M1() => new Container<S>(); // 1
-                S[] M2() => new S[0]; // 2
-                (S, S) M3() => (new S(), new S()); // 3
-                S* M4() => null; // 4
-                delegate*<S, void> M5() => null; // 5
-            }
-            """;
+        file struct S { public int X; }
+        class Container<T> { }
+        unsafe class Program
+        {
+        Container<S> M1() => new Container<S>(); // 1
+        S[] M2() => new S[0]; // 2
+        (S, S) M3() => (new S(), new S()); // 3
+        S* M4() => null; // 4
+        delegate*<S, void> M5() => null; // 5
+        }
+        """;
 
         var comp = CreateCompilation(source, options: TestOptions.UnsafeDebugDll);
         comp.VerifyDiagnostics(
@@ -3443,18 +3443,18 @@ public partial class C
     public void Constraints_01()
     {
         var source = """
-            file class C { }
+        file class C { }
 
-            file class D
-            {
-                void M<T>(T t) where T : C { } // ok
-            }
+        file class D
+        {
+        void M<T>(T t) where T : C { } // ok
+        }
 
-            class E
-            {
-                void M<T>(T t) where T : C { } // 1
-            }
-            """;
+        class E
+        {
+        void M<T>(T t) where T : C { } // 1
+        }
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics(
@@ -3500,26 +3500,26 @@ public partial class C
     public void Constraints_03()
     {
         var source = """
-            file class C { }
+        file class C { }
 
-            file class D
-            {
-                void M()
-                {
-                    local(new C());
-                    void local<T>(T t) where T : C { } // ok
-                }
-            }
+        file class D
+        {
+        void M()
+        {
+        local(new C());
+        void local<T>(T t) where T : C { } // ok
+        }
+        }
 
-            class E
-            {
-                void M()
-                {
-                    local(new C());
-                    void local<T>(T t) where T : C { } // ok
-                }
-            }
-            """;
+        class E
+        {
+        void M()
+        {
+        local(new C());
+        void local<T>(T t) where T : C { } // ok
+        }
+        }
+        """;
 
         // Local functions aren't members, so we don't give any diagnostics when their signatures contain file types.
         var comp = CreateCompilation(source);
@@ -3530,12 +3530,12 @@ public partial class C
     public void Constraints_04()
     {
         var source = """
-            file class C { }
+        file class C { }
 
-            file delegate void D1<T>(T t) where T : C; // ok
+        file delegate void D1<T>(T t) where T : C; // ok
 
-            delegate void D2<T>(T t) where T : C; // 1
-            """;
+        delegate void D2<T>(T t) where T : C; // 1
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics(
@@ -3551,18 +3551,18 @@ public partial class C
     public void Constraints_05()
     {
         var source = """
-            file class C<T> { }
+        file class C<T> { }
 
-            class D
-            {
-                private void M<T>(T t) where T : C<int> { } // 1
-            }
+        class D
+        {
+        private void M<T>(T t) where T : C<int> { } // 1
+        }
 
-            file class E
-            {
-                private void M<T>(T t) where T : C<int> { } // ok
-            }
-            """;
+        file class E
+        {
+        private void M<T>(T t) where T : C<int> { } // ok
+        }
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics(
@@ -3585,12 +3585,12 @@ public partial class C
     public void Constraints_06()
     {
         var source = """
-            file class C<T> { }
+        file class C<T> { }
 
-            class D<T> where T : C<int> { } // 1
+        class D<T> where T : C<int> { } // 1
 
-            file class E<T> where T : C<int> { } // ok
-            """;
+        file class E<T> where T : C<int> { } // ok
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics(
@@ -3613,14 +3613,14 @@ public partial class C
     public void PrimaryConstructor_01()
     {
         var source = """
-            file class C { }
+        file class C { }
 
-            record R1(C c); // 1
-            record struct R2(C c); // 2
+        record R1(C c); // 1
+        record struct R2(C c); // 2
 
-            file record R3(C c);
-            file record struct R4(C c);
-            """;
+        file record R3(C c);
+        file record struct R4(C c);
+        """;
 
         var comp = CreateCompilation(
             new[] { (source, "file1.cs"), (IsExternalInitTypeDefinition, "file2.cs") }
@@ -3653,16 +3653,16 @@ public partial class C
     public void Lambda_01()
     {
         var source = """
-            file class C { }
+        file class C { }
 
-            class Program
-            {
-                void M()
-                {
-                    var lambda = C (C c) => c; // ok
-                }
-            }
-            """;
+        class Program
+        {
+        void M()
+        {
+        var lambda = C (C c) => c; // ok
+        }
+        }
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics();
@@ -3672,17 +3672,17 @@ public partial class C
     public void LocalFunction_01()
     {
         var source = """
-            file class C { }
+        file class C { }
 
-            class Program
-            {
-                void M()
-                {
-                    local(null!);
-                    C local(C c) => c; // ok
-                }
-            }
-            """;
+        class Program
+        {
+        void M()
+        {
+        local(null!);
+        C local(C c) => c; // ok
+        }
+        }
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics();
@@ -3692,24 +3692,24 @@ public partial class C
     public void AccessThroughNamespace_01()
     {
         var source = """
-            using System;
+        using System;
 
-            namespace NS
-            {
-                file class C
-                {
-                    public static void M() => Console.Write(1);
-                }
-            }
+        namespace NS
+        {
+        file class C
+        {
+        public static void M() => Console.Write(1);
+        }
+        }
 
-            class Program
-            {
-                public static void Main()
-                {
-                    NS.C.M();
-                }
-            }
-            """;
+        class Program
+        {
+        public static void Main()
+        {
+        NS.C.M();
+        }
+        }
+        """;
 
         var verifier = CompileAndVerify(source, expectedOutput: "1");
         verifier.VerifyDiagnostics();
@@ -3719,29 +3719,29 @@ public partial class C
     public void AccessThroughNamespace_02()
     {
         var source1 = """
-            using System;
+        using System;
 
-            namespace NS
-            {
-                file class C
-                {
-                    public static void M()
-                    {
-                        Console.Write(1);
-                    }
-                }
-            }
-            """;
+        namespace NS
+        {
+        file class C
+        {
+        public static void M()
+        {
+        Console.Write(1);
+        }
+        }
+        }
+        """;
 
         var source2 = """
-            class Program
-            {
-                static void Main()
-                {
-                    NS.C.M(); // 1
-                }
-            }
-            """;
+        class Program
+        {
+        static void Main()
+        {
+        NS.C.M(); // 1
+        }
+        }
+        """;
 
         var comp = CreateCompilation(new[] { (source1, "file1.cs"), (source2, "file2.cs") });
         comp.VerifyDiagnostics(
@@ -3757,24 +3757,24 @@ public partial class C
     public void AccessThroughType_01()
     {
         var source = """
-            using System;
+        using System;
 
-            class Outer
-            {
-                file class C // 1
-                {
-                    public static void M() => Console.Write(1);
-                }
-            }
+        class Outer
+        {
+        file class C // 1
+        {
+        public static void M() => Console.Write(1);
+        }
+        }
 
-            class Program
-            {
-                public static void Main()
-                {
-                    Outer.C.M(); // 2
-                }
-            }
-            """;
+        class Program
+        {
+        public static void Main()
+        {
+        Outer.C.M(); // 2
+        }
+        }
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics(
@@ -3793,29 +3793,29 @@ public partial class C
     public void AccessThroughType_02()
     {
         var source1 = """
-            using System;
+        using System;
 
-            class Outer
-            {
-                file class C
-                {
-                    public static void M()
-                    {
-                        Console.Write(1);
-                    }
-                }
-            }
-            """;
+        class Outer
+        {
+        file class C
+        {
+        public static void M()
+        {
+        Console.Write(1);
+        }
+        }
+        }
+        """;
 
         var source2 = """
-            class Program
-            {
-                static void Main()
-                {
-                    Outer.C.M(); // 1
-                }
-            }
-            """;
+        class Program
+        {
+        static void Main()
+        {
+        Outer.C.M(); // 1
+        }
+        }
+        """;
 
         var comp = CreateCompilation(new[] { (source1, "file1.cs"), (source2, "file2.cs") });
         comp.VerifyDiagnostics(
@@ -3836,28 +3836,28 @@ public partial class C
     public void AccessThroughGlobalUsing_01()
     {
         var usings = """
-            global using NS;
-            """;
+        global using NS;
+        """;
 
         var source = """
-            using System;
+        using System;
 
-            namespace NS
-            {
-                file class C
-                {
-                    public static void M() => Console.Write(1);
-                }
-            }
+        namespace NS
+        {
+        file class C
+        {
+        public static void M() => Console.Write(1);
+        }
+        }
 
-            class Program
-            {
-                public static void Main()
-                {
-                    C.M();
-                }
-            }
-            """;
+        class Program
+        {
+        public static void Main()
+        {
+        C.M();
+        }
+        }
+        """;
 
         var verifier = CompileAndVerify(
             new[]
@@ -3913,23 +3913,23 @@ public partial class C
     public void GlobalUsingStatic_01()
     {
         var source = """
-            global using static C;
+        global using static C;
 
-            file class C
-            {
-                public static void M() { }
-            }
-            """;
+        file class C
+        {
+        public static void M() { }
+        }
+        """;
 
         var main = """
-            class Program
-            {
-                public static void Main()
-                {
-                    M();
-                }
-            }
-            """;
+        class Program
+        {
+        public static void Main()
+        {
+        M();
+        }
+        }
+        """;
 
         var compilation = CreateCompilation(new[] { (source, "file1.cs"), (main, "file2.cs") });
         compilation.VerifyDiagnostics(
@@ -3952,27 +3952,27 @@ public partial class C
     public void GlobalUsingStatic_02()
     {
         var source = """
-            global using static Container<C>;
+        global using static Container<C>;
 
-            public class Container<T>
-            {
-            }
+        public class Container<T>
+        {
+        }
 
-            file class C
-            {
-                public static void M() { }
-            }
-            """;
+        file class C
+        {
+        public static void M() { }
+        }
+        """;
 
         var main = """
-            class Program
-            {
-                public static void Main()
-                {
-                    M();
-                }
-            }
-            """;
+        class Program
+        {
+        public static void Main()
+        {
+        M();
+        }
+        }
+        """;
 
         var compilation = CreateCompilation(new[] { (source, "file1.cs"), (main, "file2.cs") });
         compilation.VerifyDiagnostics(
@@ -3995,23 +3995,23 @@ public partial class C
     public void GlobalUsingStatic_03()
     {
         var source = """
-            global using static C<int>;
+        global using static C<int>;
 
-            file class C<T>
-            {
-                public static void M() { }
-            }
-            """;
+        file class C<T>
+        {
+        public static void M() { }
+        }
+        """;
 
         var main = """
-            class Program
-            {
-                public static void Main()
-                {
-                    M();
-                }
-            }
-            """;
+        class Program
+        {
+        public static void Main()
+        {
+        M();
+        }
+        }
+        """;
 
         var compilation = CreateCompilation(new[] { (source, "file1.cs"), (main, "file2.cs") });
         compilation.VerifyDiagnostics(
@@ -4034,25 +4034,25 @@ public partial class C
     public void UsingStatic_01()
     {
         var source = """
-            using System;
-            using static C;
+        using System;
+        using static C;
 
-            file class C
-            {
-                public static void M()
-                {
-                    Console.Write(1);
-                }
-            }
+        file class C
+        {
+        public static void M()
+        {
+        Console.Write(1);
+        }
+        }
 
-            class Program
-            {
-                public static void Main()
-                {
-                    M();
-                }
-            }
-            """;
+        class Program
+        {
+        public static void Main()
+        {
+        M();
+        }
+        }
+        """;
 
         var verifier = CompileAndVerify(source, expectedOutput: "1");
         verifier.VerifyDiagnostics();
@@ -4062,31 +4062,31 @@ public partial class C
     public void UsingStatic_02()
     {
         var source1 = """
-            using System;
-            using static C.D;
+        using System;
+        using static C.D;
 
-            M();
+        M();
 
-            file class C
-            {
-                public class D
-                {
-                    public static void M() { Console.Write(1); }
-                }
-            }
-            """;
+        file class C
+        {
+        public class D
+        {
+        public static void M() { Console.Write(1); }
+        }
+        }
+        """;
 
         var source2 = """
-            using System;
+        using System;
 
-            class C
-            {
-                public class D
-                {
-                    public static void M() { Console.Write(2); }
-                }
-            }
-            """;
+        class C
+        {
+        public class D
+        {
+        public static void M() { Console.Write(2); }
+        }
+        }
+        """;
 
         var verifier = CompileAndVerify(
             new[] { (source1, "file1.cs"), (source2, "file2.cs") },
@@ -4134,13 +4134,13 @@ public partial class C
             """;
 
         var source2 = """
-            using System;
+        using System;
 
-            class D
-            {
-                public static void M() { Console.Write(2); }
-            }
-            """;
+        class D
+        {
+        public static void M() { Console.Write(2); }
+        }
+        """;
 
         var verifier = CompileAndVerify(
             new[] { (source1, "file1.cs"), (source2, "file2.cs") },
@@ -4172,36 +4172,36 @@ public partial class C
     public void TypeShadowing()
     {
         var source = """
-            using System;
+        using System;
 
-            class Base
-            {
-                internal class C
-                {
-                    public static void M()
-                    {
-                        Console.Write(1);
-                    }
-                }
-            }
+        class Base
+        {
+        internal class C
+        {
+        public static void M()
+        {
+        Console.Write(1);
+        }
+        }
+        }
 
-            class Derived : Base
-            {
-                new file class C
-                {
-                }
-            }
-            """;
+        class Derived : Base
+        {
+        new file class C
+        {
+        }
+        }
+        """;
 
         var main = """
-            class Program
-            {
-                public static void Main()
-                {
-                    Derived.C.M();
-                }
-            }
-            """;
+        class Program
+        {
+        public static void Main()
+        {
+        Derived.C.M();
+        }
+        }
+        """;
 
         // 'Derived.C' is not actually accessible from 'Program', so we just bind to 'Base.C'.
         var compilation = CreateCompilation(new[] { (source, "file.cs"), (main, "file2.cs") });
@@ -4230,21 +4230,21 @@ public partial class C
     public void SemanticModel_01()
     {
         var source = """
-            namespace NS;
+        namespace NS;
 
-            file class C
-            {
-                public static void M() { }
-            }
+        file class C
+        {
+        public static void M() { }
+        }
 
-            class Program
-            {
-                public void M()
-                {
-                    C.M();
-                }
-            }
-            """;
+        class Program
+        {
+        public void M()
+        {
+        C.M();
+        }
+        }
+        """;
 
         var compilation = CreateCompilation(source);
         compilation.VerifyDiagnostics();
@@ -4302,25 +4302,25 @@ public partial class C
     public void SemanticModel_02()
     {
         var source = """
-            namespace NS;
+        namespace NS;
 
-            file class C
-            {
-                public static void M() { }
-            }
-            """;
+        file class C
+        {
+        public static void M() { }
+        }
+        """;
 
         var main = """
-            namespace NS;
+        namespace NS;
 
-            class Program
-            {
-                public void M()
-                {
-                    C.M(); // 1
-                }
-            }
-            """;
+        class Program
+        {
+        public void M()
+        {
+        C.M(); // 1
+        }
+        }
+        """;
 
         var compilation = CreateCompilation(new[] { (source, "file1.cs"), (main, "file2.cs") });
         compilation.VerifyDiagnostics(
@@ -4384,19 +4384,19 @@ public partial class C
     public void Speculation_01()
     {
         var source = """
-            file class C
-            {
-                public static void M() { }
-            }
+        file class C
+        {
+        public static void M() { }
+        }
 
-            class Program
-            {
-                public void M()
-                {
+        class Program
+        {
+        public void M()
+        {
 
-                }
-            }
-            """;
+        }
+        }
+        """;
 
         var compilation = CreateCompilation(source);
         compilation.VerifyDiagnostics();
@@ -4431,21 +4431,21 @@ public partial class C
     public void Speculation_02()
     {
         var source = """
-            file class C
-            {
-                public static void M() { }
-            }
-            """;
+        file class C
+        {
+        public static void M() { }
+        }
+        """;
 
         var main = """
-            class Program
-            {
-                public void M()
-                {
+        class Program
+        {
+        public void M()
+        {
 
-                }
-            }
-            """;
+        }
+        }
+        """;
 
         var compilation = CreateCompilation(new[] { (source, "file1.cs"), (main, "file2.cs") });
         compilation.VerifyDiagnostics();
@@ -4481,22 +4481,22 @@ public partial class C
     public void Cref_01()
     {
         var source = """
-            file class C
-            {
-                public static void M() { }
-            }
+        file class C
+        {
+        public static void M() { }
+        }
 
-            class Program
-            {
-                /// <summary>
-                /// In the same file as <see cref="C"/>.
-                /// </summary>
-                public static void M()
-                {
+        class Program
+        {
+        /// <summary>
+        /// In the same file as <see cref="C"/>.
+        /// </summary>
+        public static void M()
+        {
 
-                }
-            }
-            """;
+        }
+        }
+        """;
 
         var compilation = CreateCompilation(
             source,
@@ -4511,24 +4511,24 @@ public partial class C
     public void Cref_02()
     {
         var source = """
-            file class C
-            {
-                public static void M() { }
-            }
-            """;
+        file class C
+        {
+        public static void M() { }
+        }
+        """;
 
         var main = """
-            class Program
-            {
-                /// <summary>
-                /// In a different file than <see cref="C"/>.
-                /// </summary>
-                public static void M()
-                {
+        class Program
+        {
+        /// <summary>
+        /// In a different file than <see cref="C"/>.
+        /// </summary>
+        public static void M()
+        {
 
-                }
-            }
-            """;
+        }
+        }
+        """;
 
         var compilation = CreateCompilation(
             new[] { (source, "file1.cs"), (main, "file2.cs") },
@@ -4547,18 +4547,18 @@ public partial class C
     public void TopLevelStatements()
     {
         var source = """
-            using System;
+        using System;
 
-            C.M();
+        C.M();
 
-            file class C
-            {
-                public static void M()
-                {
-                    Console.Write(1);
-                }
-            }
-            """;
+        file class C
+        {
+        public static void M()
+        {
+        Console.Write(1);
+        }
+        }
+        """;
 
         var verifier = CompileAndVerify(source, expectedOutput: "1");
         verifier.VerifyDiagnostics();
@@ -4568,18 +4568,18 @@ public partial class C
     public void StaticFileClass()
     {
         var source = """
-            using System;
+        using System;
 
-            C.M();
+        C.M();
 
-            static file class C
-            {
-                public static void M()
-                {
-                    Console.Write(1);
-                }
-            }
-            """;
+        static file class C
+        {
+        public static void M()
+        {
+        Console.Write(1);
+        }
+        }
+        """;
 
         var verifier = CompileAndVerify(source, expectedOutput: "1");
         verifier.VerifyDiagnostics();
@@ -4589,18 +4589,18 @@ public partial class C
     public void ExtensionMethod_01()
     {
         var source = """
-            using System;
+        using System;
 
-            "a".M();
+        "a".M();
 
-            static file class C
-            {
-                public static void M(this string s)
-                {
-                    Console.Write(1);
-                }
-            }
-            """;
+        static file class C
+        {
+        public static void M(this string s)
+        {
+        Console.Write(1);
+        }
+        }
+        """;
 
         var verifier = CompileAndVerify(source, expectedOutput: "1");
         verifier.VerifyDiagnostics();
@@ -4610,20 +4610,20 @@ public partial class C
     public void ExtensionMethod_02()
     {
         var source1 = """
-            "a".M(); // 1
-            """;
+        "a".M(); // 1
+        """;
 
         var source2 = """
-            using System;
+        using System;
 
-            static file class C
-            {
-                public static void M(this string s)
-                {
-                    Console.Write(1);
-                }
-            }
-            """;
+        static file class C
+        {
+        public static void M(this string s)
+        {
+        Console.Write(1);
+        }
+        }
+        """;
 
         var comp = CreateCompilation(new[] { (source1, "file1.cs"), (source2, "file2.cs") });
         comp.VerifyDiagnostics(
@@ -4654,23 +4654,23 @@ public partial class C
     public void ExtensionMethod_03()
     {
         var source1 = """
-            "a".M(); // 1
-            """;
+        "a".M(); // 1
+        """;
 
         var source2 = """
-            using System;
+        using System;
 
-            file class C
-            {
-                static class D
-                {
-                    public static void M(this string s) // 2
-                    {
-                        Console.Write(1);
-                    }
-                }
-            }
-            """;
+        file class C
+        {
+        static class D
+        {
+        public static void M(this string s) // 2
+        {
+        Console.Write(1);
+        }
+        }
+        }
+        """;
 
         var comp = CreateCompilation(new[] { (source1, "file1.cs"), (source2, "file2.cs") });
         comp.VerifyDiagnostics(
@@ -4691,15 +4691,15 @@ public partial class C
     public void Alias_01()
     {
         var source = """
-            namespace NS;
-            using C1 = NS.C;
+        namespace NS;
+        using C1 = NS.C;
 
-            file class C
-            {
-            }
+        file class C
+        {
+        }
 
-            class D : C1 { } // 1
-            """;
+        class D : C1 { } // 1
+        """;
 
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics(
@@ -4715,18 +4715,18 @@ public partial class C
     public void SymbolDisplay()
     {
         var source1 = """
-            file class C1
-            {
-                public static void M() { }
-            }
-            """;
+        file class C1
+        {
+        public static void M() { }
+        }
+        """;
 
         var source2 = """
-            file class C2
-            {
-                public static void M() { }
-            }
-            """;
+        file class C2
+        {
+        public static void M() { }
+        }
+        """;
 
         var comp = CreateCompilation(
             new[]
@@ -4754,15 +4754,15 @@ public partial class C
     public void Script_01()
     {
         var source1 = """
-            using System;
+        using System;
 
-            C1.M("a");
+        C1.M("a");
 
-            static file class C1
-            {
-                public static void M(this string s) { }
-            }
-            """;
+        static file class C1
+        {
+        public static void M(this string s) { }
+        }
+        """;
 
         var comp = CreateSubmission(
             source1,
@@ -4786,15 +4786,15 @@ public partial class C
     public void SystemVoid_01()
     {
         var source1 = """
-            using System;
+        using System;
 
-            void M(Void v) { }
+        void M(Void v) { }
 
-            namespace System
-            {
-                file class Void { }
-            }
-            """;
+        namespace System
+        {
+        file class Void { }
+        }
+        """;
 
         // https://github.com/dotnet/roslyn/issues/62331
         // Ideally we would give an error about use of System.Void here.
@@ -4834,8 +4834,8 @@ public partial class C
     public void GetTypeByMetadataName_01()
     {
         var source1 = """
-            file class C { }
-            """;
+        file class C { }
+        """;
 
         // from source
         var comp = CreateCompilation(source1);
@@ -4883,8 +4883,8 @@ public partial class C
     public void GetTypeByMetadataName_02()
     {
         var source1 = """
-            file class C<T> { }
-            """;
+        file class C<T> { }
+        """;
 
         // from source
         var comp = CreateCompilation(source1);
@@ -4929,11 +4929,11 @@ public partial class C
     public void GetTypeByMetadataName_03()
     {
         var source1 = """
-            class Outer
-            {
-                file class C { } // 1
-            }
-            """;
+        class Outer
+        {
+        file class C { } // 1
+        }
+        """;
 
         // from source
         var comp = CreateCompilation(source1);
@@ -4964,12 +4964,12 @@ public partial class C
     public void GetTypeByMetadataName_04()
     {
         var source1 = """
-            file class C { }
-            """;
+        file class C { }
+        """;
 
         var source2 = """
-            class C { }
-            """;
+        class C { }
+        """;
 
         // from source
         var comp = CreateCompilation(new[] { (source1, "file1.cs"), (source2, "file2.cs") });
@@ -5020,8 +5020,8 @@ public partial class C
     )
     {
         var source1 = """
-            file class C { }
-            """;
+        file class C { }
+        """;
 
         // Create two references containing identically-named file types
         var ref1 = CreateCompilation(source1, assemblyName: "ref1");
@@ -5062,9 +5062,9 @@ public partial class C
     public void GetTypeByMetadataName_06()
     {
         var source1 = """
-            file class C { }
-            file class C { }
-            """;
+        file class C { }
+        file class C { }
+        """;
 
         var comp = CreateCompilation(source1);
         comp.VerifyDiagnostics(
@@ -5093,8 +5093,8 @@ public partial class C
     public void GetTypeByMetadataName_07()
     {
         var source1 = """
-            file class C { }
-            """;
+        file class C { }
+        """;
 
         var comp = CreateCompilation(
             SyntaxFactory.ParseSyntaxTree(
@@ -5124,8 +5124,8 @@ public partial class C
     public void GetTypeByMetadataName_08()
     {
         var source1 = """
-            file class C { public static void M() { } }
-            """;
+        file class C { public static void M() { } }
+        """;
 
         var comp = CreateCompilation(source1, targetFramework: TargetFramework.Mscorlib40);
         comp.VerifyDiagnostics();
@@ -5140,14 +5140,14 @@ public partial class C
         Assert.Equal(member, comp.GetTypeByMetadataName(metadataName));
 
         var source2 = """
-            class C2
-            {
-                void M()
-                {
-                    C.M();
-                }
-            }
-            """;
+        class C2
+        {
+        void M()
+        {
+        C.M();
+        }
+        }
+        """;
 
         var comp2 = CreateCompilation(
             source2,
@@ -5174,13 +5174,13 @@ public partial class C
     public void AssociatedSyntaxTree_01()
     {
         var source = """
-            file class C
-            {
-                void M(C c)
-                {
-                }
-            }
-            """;
+        file class C
+        {
+        void M(C c)
+        {
+        }
+        }
+        """;
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics();
 
@@ -5257,13 +5257,13 @@ public partial class C
     public void AssociatedSyntaxTree_02()
     {
         var source = """
-            class C
-            {
-                void M(C c)
-                {
-                }
-            }
-            """;
+        class C
+        {
+        void M(C c)
+        {
+        }
+        }
+        """;
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics();
 
@@ -5280,13 +5280,13 @@ public partial class C
     public void AssociatedSyntaxTree_03()
     {
         var source = """
-            file class C<T>
-            {
-                void M(C<int> c)
-                {
-                }
-            }
-            """;
+        file class C<T>
+        {
+        void M(C<int> c)
+        {
+        }
+        }
+        """;
         var comp = CreateCompilation(source);
         comp.VerifyDiagnostics();
 
@@ -5345,9 +5345,9 @@ public partial class C
     {
         // Compare to 'InternalsVisibleToAndStrongNameTests.IVTBasicMetadata'
         var fileTypeSource = """
-            [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("HasIVTAccess")]
-            file class C1 { public static void M1() {} }
-            """;
+        [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("HasIVTAccess")]
+        file class C1 { public static void M1() {} }
+        """;
 
         // reused across all compilations to try and trick the binder into thinking it's binding from the same file as 'file class C'.
         var filePath = "file1.cs";
@@ -5363,14 +5363,14 @@ public partial class C
             : comp0.EmitToImageReference();
 
         var useFileTypeSource = """
-            class C2
-            {
-                void M2()
-                {
-                    C1.M1();
-                }
-            }
-            """;
+        class C2
+        {
+        void M2()
+        {
+        C1.M1();
+        }
+        }
+        """;
 
         // Whether or not you have an IVT, the compiler won't bind to a file type from a different compilation.
         verify("DoesNotHaveIVTAccess");
@@ -5397,8 +5397,8 @@ public partial class C
     public void CannotAccessFromMetadata_02()
     {
         var fileTypeSource = """
-            file class C1 { public static void M1() {} }
-            """;
+        file class C1 { public static void M1() {} }
+        """;
 
         // reused across all compilations to try and trick the binder into thinking it's binding from the same file
         var filePath = "file1.cs";
@@ -5414,14 +5414,14 @@ public partial class C
         var reference = comp0.ToMetadataReference();
 
         var useFileTypeSource = """
-            class C2
-            {
-                void M2()
-                {
-                    C1.M1();
-                }
-            }
-            """;
+        class C2
+        {
+        void M2()
+        {
+        C1.M1();
+        }
+        }
+        """;
 
         var comp1 = CreateCompilation(
             (useFileTypeSource, filePath),
@@ -5475,42 +5475,42 @@ public partial class C
     public void PartialExplicitImplementation_01()
     {
         var source0 = """
-            var c = new C();
-            c.Use1();
-            c.Use2();
-            """;
+        var c = new C();
+        c.Use1();
+        c.Use2();
+        """;
 
         var source1 = """
-            using System;
+        using System;
 
-            file interface FI
-            {
-                void M();
-            }
+        file interface FI
+        {
+        void M();
+        }
 
-            partial class C : FI
-            {
-                void FI.M() { Console.Write(1); }
+        partial class C : FI
+        {
+        void FI.M() { Console.Write(1); }
 
-                public void Use1() { ((FI)this).M(); }
-            }
-            """;
+        public void Use1() { ((FI)this).M(); }
+        }
+        """;
 
         var source2 = """
-            using System;
+        using System;
 
-            file interface FI
-            {
-                void M();
-            }
+        file interface FI
+        {
+        void M();
+        }
 
-            partial class C : FI
-            {
-                void FI.M() { Console.Write(2); }
+        partial class C : FI
+        {
+        void FI.M() { Console.Write(2); }
 
-                public void Use2() { ((FI)this).M(); }
-            }
-            """;
+        public void Use2() { ((FI)this).M(); }
+        }
+        """;
 
         var verifier = CompileAndVerify(
             new[] { (source0, "F0.cs"), (source1, "F1.cs"), (source2, "F2.cs") },
@@ -5523,28 +5523,28 @@ public partial class C
     public void PartialExplicitImplementation_02()
     {
         var source1 = """
-            file interface FI
-            {
-                void M();
-            }
+        file interface FI
+        {
+        void M();
+        }
 
-            partial class C : FI
-            {
-                void FI.M() => throw null!;
-            }
-            """;
+        partial class C : FI
+        {
+        void FI.M() => throw null!;
+        }
+        """;
 
         // Explicit implementation of 'FI.M()' in 'source1' does not implement 'FI.M()' in 'source2'.
         var source2 = """
-            file interface FI
-            {
-                void M();
-            }
+        file interface FI
+        {
+        void M();
+        }
 
-            partial class C : FI
-            {
-            }
-            """;
+        partial class C : FI
+        {
+        }
+        """;
 
         var comp = CreateCompilation(new[] { (source1, "F1.cs"), (source2, "F2.cs") });
         comp.VerifyDiagnostics(
@@ -5560,33 +5560,33 @@ public partial class C
     public void PartialExplicitImplementation_03()
     {
         var source1 = """
-            using System.Collections.Generic;
+        using System.Collections.Generic;
 
-            file interface I
-            {
-                IReadOnlyDictionary<int, string> P { get; }
-            }
+        file interface I
+        {
+        IReadOnlyDictionary<int, string> P { get; }
+        }
 
-            internal partial class C : I
-            {
-                private readonly Dictionary<int, string> _p = new() { { 1, "one" }, { 2, "two" } };
-                IReadOnlyDictionary<int, string> I.P => _p;
-            }
-            """;
+        internal partial class C : I
+        {
+        private readonly Dictionary<int, string> _p = new() { { 1, "one" }, { 2, "two" } };
+        IReadOnlyDictionary<int, string> I.P => _p;
+        }
+        """;
 
         var source2 = """
-            using System.Collections.Generic;
+        using System.Collections.Generic;
 
-            file interface I
-            {
-                IReadOnlyDictionary<int, string> P { get; }
-            }
+        file interface I
+        {
+        IReadOnlyDictionary<int, string> P { get; }
+        }
 
-            internal partial class C : I
-            {
-                IReadOnlyDictionary<int, string> I.P => _p;
-            }
-            """;
+        internal partial class C : I
+        {
+        IReadOnlyDictionary<int, string> I.P => _p;
+        }
+        """;
 
         var comp = CreateCompilation(new[] { (source1, "F1.cs"), (source2, "F2.cs") });
         comp.VerifyDiagnostics();
@@ -5596,28 +5596,28 @@ public partial class C
     public void PartialExplicitImplementation_04()
     {
         var source1 = """
-            file interface I
-            {
-                int P { get; }
-            }
+        file interface I
+        {
+        int P { get; }
+        }
 
-            internal partial class C : I
-            {
-            }
-            """;
+        internal partial class C : I
+        {
+        }
+        """;
 
         var source2 = """
-            file interface I
-            {
-                int P { get; }
-            }
+        file interface I
+        {
+        int P { get; }
+        }
 
-            internal partial class C : I
-            {
-                int I.P => 1;
-                int I.P => 2;
-            }
-            """;
+        internal partial class C : I
+        {
+        int I.P => 1;
+        int I.P => 2;
+        }
+        """;
 
         var comp = CreateCompilation(new[] { (source1, "F1.cs"), (source2, "F2.cs") });
         comp.VerifyDiagnostics(
@@ -5646,40 +5646,40 @@ public partial class C
     public void PartialExplicitImplementation_05()
     {
         var source0 = """
-            var c = new C();
-            c.Use1();
-            c.Use2();
-            """;
+        var c = new C();
+        c.Use1();
+        c.Use2();
+        """;
 
         var source1 = """
-            using System;
+        using System;
 
-            file interface FI
-            {
-                int Bar { get; }
-            }
+        file interface FI
+        {
+        int Bar { get; }
+        }
 
-            internal partial class C : FI
-            {
-                int FI.Bar => 1;
-                public void Use1() => Console.Write(((FI)this).Bar);
-            }
-            """;
+        internal partial class C : FI
+        {
+        int FI.Bar => 1;
+        public void Use1() => Console.Write(((FI)this).Bar);
+        }
+        """;
 
         var source2 = """
-            using System;
+        using System;
 
-            file interface FI
-            {
-                int Bar { get; }
-            }
+        file interface FI
+        {
+        int Bar { get; }
+        }
 
-            internal partial class C : FI
-            {
-                int FI.Bar => 2;
-                public void Use2() => Console.Write(((FI)this).Bar);
-            }
-            """;
+        internal partial class C : FI
+        {
+        int FI.Bar => 2;
+        public void Use2() => Console.Write(((FI)this).Bar);
+        }
+        """;
 
         var verifier = CompileAndVerify(
             new[] { (source0, "F0.cs"), (source1, "F1.cs"), (source2, "F2.cs") },
@@ -5692,40 +5692,40 @@ public partial class C
     public void PartialExplicitImplementation_06()
     {
         var source0 = """
-            var c = new C();
-            c.Use1();
-            c.Use2();
-            """;
+        var c = new C();
+        c.Use1();
+        c.Use2();
+        """;
 
         var source1 = """
-            using System;
+        using System;
 
-            file interface FI
-            {
-                event Action E;
-            }
+        file interface FI
+        {
+        event Action E;
+        }
 
-            internal partial class C : FI
-            {
-                event Action FI.E { add { Console.Write(1); } remove { } }
-                public void Use1() => ((FI)this).E += () => { };
-            }
-            """;
+        internal partial class C : FI
+        {
+        event Action FI.E { add { Console.Write(1); } remove { } }
+        public void Use1() => ((FI)this).E += () => { };
+        }
+        """;
 
         var source2 = """
-            using System;
+        using System;
 
-            file interface FI
-            {
-                event Action E;
-            }
+        file interface FI
+        {
+        event Action E;
+        }
 
-            internal partial class C : FI
-            {
-                event Action FI.E { add { Console.Write(2); } remove { } }
-                public void Use2() => ((FI)this).E += () => { };
-            }
-            """;
+        internal partial class C : FI
+        {
+        event Action FI.E { add { Console.Write(2); } remove { } }
+        public void Use2() => ((FI)this).E += () => { };
+        }
+        """;
 
         var verifier = CompileAndVerify(
             new[] { (source0, "F0.cs"), (source1, "F1.cs"), (source2, "F2.cs") },
@@ -5738,40 +5738,40 @@ public partial class C
     public void PartialExplicitImplementation_07()
     {
         var source0 = """
-            var c = new C();
-            c.Use1();
-            c.Use2();
-            """;
+        var c = new C();
+        c.Use1();
+        c.Use2();
+        """;
 
         var source1 = """
-            using System;
+        using System;
 
-            file interface FI
-            {
-                int this[int i] { get; }
-            }
+        file interface FI
+        {
+        int this[int i] { get; }
+        }
 
-            internal partial class C : FI
-            {
-                int FI.this[int i] => 1;
-                public void Use1() => Console.Write(((FI)this)[0]);
-            }
-            """;
+        internal partial class C : FI
+        {
+        int FI.this[int i] => 1;
+        public void Use1() => Console.Write(((FI)this)[0]);
+        }
+        """;
 
         var source2 = """
-            using System;
+        using System;
 
-            file interface FI
-            {
-                int this[int i] { get; }
-            }
+        file interface FI
+        {
+        int this[int i] { get; }
+        }
 
-            internal partial class C : FI
-            {
-                int FI.this[int i] => 2;
-                public void Use2() => Console.Write(((FI)this)[0]);
-            }
-            """;
+        internal partial class C : FI
+        {
+        int FI.this[int i] => 2;
+        public void Use2() => Console.Write(((FI)this)[0]);
+        }
+        """;
 
         var verifier = CompileAndVerify(
             new[] { (source0, "F0.cs"), (source1, "F1.cs"), (source2, "F2.cs") },
@@ -5787,28 +5787,28 @@ public partial class C
         // File types can't be used in signatures of non-file types, so this scenario isn't allowed currently,
         // but we'd like to make sure that redundant/invalid duplicate member name diagnostics aren't given here.
         var source1 = """
-            file interface FI
-            {
-                static abstract int operator +(FI fi, int i);
-            }
+        file interface FI
+        {
+        static abstract int operator +(FI fi, int i);
+        }
 
-            internal partial class C : FI
-            {
-                static int FI.operator +(FI fi, int i) => throw null!; // 1
-            }
-            """;
+        internal partial class C : FI
+        {
+        static int FI.operator +(FI fi, int i) => throw null!; // 1
+        }
+        """;
 
         var source2 = """
-            file interface FI
-            {
-                static abstract int operator +(FI fi, int i);
-            }
+        file interface FI
+        {
+        static abstract int operator +(FI fi, int i);
+        }
 
-            internal partial class C : FI
-            {
-                static int FI.operator +(FI fi, int i) => throw null!; // 2
-            }
-            """;
+        internal partial class C : FI
+        {
+        static int FI.operator +(FI fi, int i) => throw null!; // 2
+        }
+        """;
 
         var comp = CreateCompilation(
             new[] { (source1, "F1.cs"), (source2, "F2.cs") },
@@ -5833,28 +5833,28 @@ public partial class C
     {
         // Similar to PartialExplicitImplementation_08, except only one of the files contains duplicate operator implementations.
         var source1 = """
-            file interface FI
-            {
-                static abstract int operator +(FI fi, int i);
-            }
+        file interface FI
+        {
+        static abstract int operator +(FI fi, int i);
+        }
 
-            internal partial class C : FI // 1, 2
-            {
-            }
-            """;
+        internal partial class C : FI // 1, 2
+        {
+        }
+        """;
 
         var source2 = """
-            file interface FI
-            {
-                static abstract int operator +(FI fi, int i);
-            }
+        file interface FI
+        {
+        static abstract int operator +(FI fi, int i);
+        }
 
-            internal partial class C : FI
-            {
-                static int FI.operator +(FI fi, int i) => throw null!; // 3
-                static int FI.operator +(FI fi, int i) => throw null!; // 4, 5
-            }
-            """;
+        internal partial class C : FI
+        {
+        static int FI.operator +(FI fi, int i) => throw null!; // 3
+        static int FI.operator +(FI fi, int i) => throw null!; // 4, 5
+        }
+        """;
 
         var comp = CreateCompilation(
             new[] { (source1, "F1.cs"), (source2, "F2.cs") },
@@ -5900,28 +5900,28 @@ public partial class C
         // File types can't be used in signatures of non-file types, so this scenario isn't allowed currently,
         // but we'd like to make sure that redundant/invalid duplicate member name diagnostics aren't given here.
         var source1 = """
-            file interface FI
-            {
-                static abstract int operator +(FI fi, int i);
-            }
+        file interface FI
+        {
+        static abstract int operator +(FI fi, int i);
+        }
 
-            internal partial class C : FI
-            {
-                static int FI.operator +(FI fi, int i) => throw null!;
-            }
-            """;
+        internal partial class C : FI
+        {
+        static int FI.operator +(FI fi, int i) => throw null!;
+        }
+        """;
 
         var source2 = """
-            file interface FI
-            {
-                static abstract int op_Addition(FI fi, int i);
-            }
+        file interface FI
+        {
+        static abstract int op_Addition(FI fi, int i);
+        }
 
-            internal partial class C : FI
-            {
-                static int FI.op_Addition(FI fi, int i) => throw null!;
-            }
-            """;
+        internal partial class C : FI
+        {
+        static int FI.op_Addition(FI fi, int i) => throw null!;
+        }
+        """;
 
         var comp = CreateCompilation(
             new[] { (source1, "F1.cs"), (source2, "F2.cs") },
@@ -5945,41 +5945,41 @@ public partial class C
     public void PartialExplicitImplementation_11()
     {
         var source0 = """
-            var c = new C();
-            c.Use1();
-            c.Use2();
+        var c = new C();
+        c.Use1();
+        c.Use2();
 
-            interface I<T>
-            {
-                void M();
-            }
-            """;
+        interface I<T>
+        {
+        void M();
+        }
+        """;
 
         var source1 = """
-            using System;
+        using System;
 
-            file interface FI { }
+        file interface FI { }
 
-            partial class C : I<FI>
-            {
-                void I<FI>.M() { Console.Write(1); }
+        partial class C : I<FI>
+        {
+        void I<FI>.M() { Console.Write(1); }
 
-                public void Use1() { ((I<FI>)this).M(); }
-            }
-            """;
+        public void Use1() { ((I<FI>)this).M(); }
+        }
+        """;
 
         var source2 = """
-            using System;
+        using System;
 
-            file interface FI { }
+        file interface FI { }
 
-            partial class C : I<FI>
-            {
-                void I<FI>.M() { Console.Write(2); }
+        partial class C : I<FI>
+        {
+        void I<FI>.M() { Console.Write(2); }
 
-                public void Use2() { ((I<FI>)this).M(); }
-            }
-            """;
+        public void Use2() { ((I<FI>)this).M(); }
+        }
+        """;
 
         var verifier = CompileAndVerify(
             new[] { (source0, "F0.cs"), (source1, "F1.cs"), (source2, "F2.cs") },
@@ -5992,20 +5992,20 @@ public partial class C
     public void ShadowNamespace_01()
     {
         var source1 = """
-            namespace App.Widget
-            {
-                class Inner { }
-            }
+        namespace App.Widget
+        {
+        class Inner { }
+        }
 
-            """;
+        """;
 
         var source2 = """
-            namespace App
-            {
-                file class Widget { }
-            }
+        namespace App
+        {
+        file class Widget { }
+        }
 
-            """;
+        """;
 
         var comp = CreateCompilation(new[] { (source1, "File1.cs"), (source2, "File2.cs") });
         comp.VerifyDiagnostics();
@@ -6033,20 +6033,20 @@ public partial class C
     public void ShadowNamespace_02(bool useMetadataReference)
     {
         var source1 = """
-            namespace App.Widget
-            {
-                public class Inner { }
-            }
+        namespace App.Widget
+        {
+        public class Inner { }
+        }
 
-            """;
+        """;
 
         var source2 = """
-            namespace App
-            {
-                file class Widget { }
-            }
+        namespace App
+        {
+        file class Widget { }
+        }
 
-            """;
+        """;
 
         var comp1 = CreateCompilation(new[] { (source1, "File1.cs") });
         comp1.VerifyEmitDiagnostics();
@@ -6077,36 +6077,36 @@ public partial class C
     public void ShadowNamespace_03()
     {
         var source1 = """
-            namespace App.Widget
-            {
-                class Inner { }
-            }
+        namespace App.Widget
+        {
+        class Inner { }
+        }
 
-            class C1
-            {
-                static void M1()
-                {
-                    new App.Widget(); // 1
-                    new App.Widget.Inner();
-                }
-            }
-            """;
+        class C1
+        {
+        static void M1()
+        {
+        new App.Widget(); // 1
+        new App.Widget.Inner();
+        }
+        }
+        """;
 
         var source2 = """
-            namespace App
-            {
-                file class Widget { }
-            }
+        namespace App
+        {
+        file class Widget { }
+        }
 
-            class C2
-            {
-                static void M2()
-                {
-                    new App.Widget();
-                    new App.Widget.Inner(); // 2
-                }
-            }
-            """;
+        class C2
+        {
+        static void M2()
+        {
+        new App.Widget();
+        new App.Widget.Inner(); // 2
+        }
+        }
+        """;
 
         var comp = CreateCompilation(new[] { (source1, "File1.cs"), (source2, "File2.cs") });
         comp.VerifyDiagnostics(

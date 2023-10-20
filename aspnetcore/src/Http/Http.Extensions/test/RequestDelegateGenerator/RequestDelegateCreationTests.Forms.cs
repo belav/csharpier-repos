@@ -133,14 +133,14 @@ public abstract partial class RequestDelegateCreationTests : RequestDelegateCrea
     public async Task RequestDelegatePopulatesFromOptionalIFormFileParameter()
     {
         var source = """
-app.MapPost("/", (IFormFile? file, HttpContext httpContext) =>
-{
-    if (file is not null)
-    {
+        app.MapPost("/", (IFormFile? file, HttpContext httpContext) =>
+        {
+        if (file is not null)
+        {
         httpContext.Items["formFiles"] = file;
-    }
-});
-""";
+        }
+        });
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -173,12 +173,12 @@ app.MapPost("/", (IFormFile? file, HttpContext httpContext) =>
     public async Task RequestDelegatePopulatesFromMultipleRequiredIFormFileParameters()
     {
         var source = """
-app.MapPost("/", (IFormFile file1, IFormFile file2, HttpContext httpContext) =>
-{
-    httpContext.Items["file1"] = file1;
-    httpContext.Items["file2"] = file2;
-});
-""";
+        app.MapPost("/", (IFormFile file1, IFormFile file2, HttpContext httpContext) =>
+        {
+        httpContext.Items["file1"] = file1;
+        httpContext.Items["file2"] = file2;
+        });
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -218,12 +218,12 @@ app.MapPost("/", (IFormFile file1, IFormFile file2, HttpContext httpContext) =>
     public async Task RequestDelegatePopulatesFromOptionalMissingIFormFileParameter()
     {
         var source = """
-app.MapPost("/", (IFormFile? file1, IFormFile? file2, HttpContext httpContext) =>
-{
-    httpContext.Items["file1"] = file1;
-    httpContext.Items["file2"] = file2;
-});
-""";
+        app.MapPost("/", (IFormFile? file1, IFormFile? file2, HttpContext httpContext) =>
+        {
+        httpContext.Items["file1"] = file1;
+        httpContext.Items["file2"] = file2;
+        });
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -296,12 +296,12 @@ app.MapPost("/", (IFormFile? file1, IFormFile? file2, HttpContext httpContext) =
     public async Task RequestDelegatePopulatesFromIFormFileAndBoundParameter()
     {
         var source = """
-app.MapPost("/", (IFormFile? file, TraceIdentifier traceId, HttpContext httpContext) =>
-{
-    httpContext.Items["formFiles"] = file;
-    httpContext.Items["traceId"] = traceId;
-});
-""";
+        app.MapPost("/", (IFormFile? file, TraceIdentifier traceId, HttpContext httpContext) =>
+        {
+        httpContext.Items["formFiles"] = file;
+        httpContext.Items["traceId"] = traceId;
+        });
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -421,12 +421,12 @@ app.MapPost("/", (IFormFile? file, TraceIdentifier traceId, HttpContext httpCont
     public async Task RequestDelegatePopulatesFromBothFormFileCollectionAndFormFileParameters()
     {
         var source = """
-app.MapPost("/", (IFormFile file, IFormFileCollection formFiles, HttpContext httpContext) =>
-{
-    httpContext.Items["file"] = file;
-    httpContext.Items["formFiles"] = formFiles;
-});
-""";
+        app.MapPost("/", (IFormFile file, IFormFileCollection formFiles, HttpContext httpContext) =>
+        {
+        httpContext.Items["file"] = file;
+        httpContext.Items["formFiles"] = formFiles;
+        });
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -473,12 +473,12 @@ app.MapPost("/", (IFormFile file, IFormFileCollection formFiles, HttpContext htt
     )
     {
         var source = """
-app.MapPost("/", (IFormFile? file, TraceIdentifier traceId, HttpContext httpContext) =>
-{
-    httpContext.Items["file"] = file;
-    httpContext.Items["traceId"] = traceId;
-});
-""";
+        app.MapPost("/", (IFormFile? file, TraceIdentifier traceId, HttpContext httpContext) =>
+        {
+        httpContext.Items["file"] = file;
+        httpContext.Items["traceId"] = traceId;
+        });
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -517,12 +517,12 @@ app.MapPost("/", (IFormFile? file, TraceIdentifier traceId, HttpContext httpCont
     public async Task RequestDelegatePopulatesFromIFormFileParameterIfRequestHasClientCertificate()
     {
         var source = """
-app.MapPost("/", (IFormFile? file, TraceIdentifier traceId, HttpContext httpContext) =>
-{
-    httpContext.Items["file"] = file;
-    httpContext.Items["traceId"] = traceId;
-});
-""";
+        app.MapPost("/", (IFormFile? file, TraceIdentifier traceId, HttpContext httpContext) =>
+        {
+        httpContext.Items["file"] = file;
+        httpContext.Items["traceId"] = traceId;
+        });
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -592,11 +592,11 @@ app.MapPost("/", (IFormFile? file, TraceIdentifier traceId, HttpContext httpCont
     )
     {
         var source = """
-app.MapPost("/", (IFormCollection formFiles, HttpContext httpContext) =>
-{
-    httpContext.Items["formFiles"] = formFiles;
-});
-""";
+        app.MapPost("/", (IFormCollection formFiles, HttpContext httpContext) =>
+        {
+        httpContext.Items["formFiles"] = formFiles;
+        });
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -649,11 +649,11 @@ app.MapPost("/", (IFormCollection formFiles, HttpContext httpContext) =>
     )
     {
         var source = """
-app.MapPost("/", ([FromForm] IFormCollection formFiles, HttpContext httpContext) =>
-{
-    httpContext.Items["formFiles"] = formFiles;
-});
-""";
+        app.MapPost("/", ([FromForm] IFormCollection formFiles, HttpContext httpContext) =>
+        {
+        httpContext.Items["formFiles"] = formFiles;
+        });
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -706,11 +706,11 @@ app.MapPost("/", ([FromForm] IFormCollection formFiles, HttpContext httpContext)
     )
     {
         var source = """
-app.MapPost("/", ([FromForm] string? message, HttpContext httpContext) =>
-{
-    httpContext.Items["message"] = message;
-});
-""";
+        app.MapPost("/", ([FromForm] string? message, HttpContext httpContext) =>
+        {
+        httpContext.Items["message"] = message;
+        });
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -739,12 +739,12 @@ app.MapPost("/", ([FromForm] string? message, HttpContext httpContext) =>
     )
     {
         var source = """
-app.MapPost("/", ([FromForm] string message, [FromForm] string name, HttpContext httpContext) =>
-{
-    httpContext.Items["message"] = message;
-    httpContext.Items["name"] = name;
-});
-""";
+        app.MapPost("/", ([FromForm] string message, [FromForm] string name, HttpContext httpContext) =>
+        {
+        httpContext.Items["message"] = message;
+        httpContext.Items["name"] = name;
+        });
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -777,12 +777,12 @@ app.MapPost("/", ([FromForm] string message, [FromForm] string name, HttpContext
     )
     {
         var source = """
-app.MapPost("/", ([FromForm] string? message, [FromForm] string? additionalMessage, HttpContext httpContext) =>
-{
-    httpContext.Items["message"] = message;
-    httpContext.Items["additionalMessage"] = additionalMessage;
-});
-""";
+        app.MapPost("/", ([FromForm] string? message, [FromForm] string? additionalMessage, HttpContext httpContext) =>
+        {
+        httpContext.Items["message"] = message;
+        httpContext.Items["additionalMessage"] = additionalMessage;
+        });
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -813,11 +813,11 @@ app.MapPost("/", ([FromForm] string? message, [FromForm] string? additionalMessa
     )
     {
         var source = """
-app.MapPost("/", ([FromForm(Name = "message")] string text, HttpContext httpContext) =>
-{
-    httpContext.Items["message"] = text;
-});
-""";
+        app.MapPost("/", ([FromForm(Name = "message")] string text, HttpContext httpContext) =>
+        {
+        httpContext.Items["message"] = text;
+        });
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -847,12 +847,12 @@ app.MapPost("/", ([FromForm(Name = "message")] string text, HttpContext httpCont
     )
     {
         var source = """
-app.MapPost("/", ([FromForm] string? message, TraceIdentifier traceId, HttpContext httpContext) =>
-{
-    httpContext.Items["message"] = message;
-    httpContext.Items["traceId"] = traceId;
-});
-""";
+        app.MapPost("/", ([FromForm] string? message, TraceIdentifier traceId, HttpContext httpContext) =>
+        {
+        httpContext.Items["message"] = message;
+        httpContext.Items["traceId"] = traceId;
+        });
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -882,20 +882,20 @@ app.MapPost("/", ([FromForm] string? message, TraceIdentifier traceId, HttpConte
         get
         {
             var source = """
-void TestAction(HttpContext context, IFormCollection form, IFormFileCollection formFiles)
-{
-    context.Items["FormFilesArgument"] = formFiles;
-    context.Items["FormArgument"] = form;
-}
-""";
+            void TestAction(HttpContext context, IFormCollection form, IFormFileCollection formFiles)
+            {
+            context.Items["FormFilesArgument"] = formFiles;
+            context.Items["FormArgument"] = form;
+            }
+            """;
 
             var sourceDifferentOrder = """
-void TestAction(HttpContext context, IFormFileCollection formFiles, IFormCollection form)
-{
-    context.Items["FormFilesArgument"] = formFiles;
-    context.Items["FormArgument"] = form;
-}
-""";
+            void TestAction(HttpContext context, IFormFileCollection formFiles, IFormCollection form)
+            {
+            context.Items["FormFilesArgument"] = formFiles;
+            context.Items["FormArgument"] = form;
+            }
+            """;
 
             return new List<object[]>
             {
@@ -974,8 +974,8 @@ app.MapPost("/", TestAction);
     )
     {
         var source = """
-app.MapPost("/", ([FromForm] string unknownParameter, HttpContext httpContext) => httpContext.Items["invoked"] = true);
-""";
+        app.MapPost("/", ([FromForm] string unknownParameter, HttpContext httpContext) => httpContext.Items["invoked"] = true);
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -1002,11 +1002,11 @@ app.MapPost("/", ([FromForm] string unknownParameter, HttpContext httpContext) =
     public async Task RequestDelegatePopulatesTryParsableParametersFromForm()
     {
         var source = """
-app.MapPost("/", (HttpContext httpContext, [FromForm] MyTryParseRecord tryParsable) =>
-{
-    httpContext.Items["tryParsable"] = tryParsable;
-});
-""";
+        app.MapPost("/", (HttpContext httpContext, [FromForm] MyTryParseRecord tryParsable) =>
+        {
+        httpContext.Items["tryParsable"] = tryParsable;
+        });
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -1030,12 +1030,12 @@ app.MapPost("/", (HttpContext httpContext, [FromForm] MyTryParseRecord tryParsab
     )
     {
         var source = """
-void TestAction(HttpContext httpContext, IFormFile file)
-{
-    httpContext.Items["invoked"] = true;
-}
-app.MapPost("/", TestAction);
-""";
+        void TestAction(HttpContext httpContext, IFormFile file)
+        {
+        httpContext.Items["invoked"] = true;
+        }
+        app.MapPost("/", TestAction);
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {
@@ -1071,12 +1071,12 @@ app.MapPost("/", TestAction);
     public async Task RequestDelegateLogsMalformedFormAsDebugAndSets400Response()
     {
         var source = """
-void TestAction(HttpContext httpContext, IFormFile file)
-{
-    httpContext.Items["invoked"] = true;
-}
-app.MapPost("/", TestAction);
-""";
+        void TestAction(HttpContext httpContext, IFormFile file)
+        {
+        httpContext.Items["invoked"] = true;
+        }
+        app.MapPost("/", TestAction);
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider();
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
@@ -1110,12 +1110,12 @@ app.MapPost("/", TestAction);
     public async Task RequestDelegateThrowsForMalformedFormIfThrowOnBadRequest()
     {
         var source = """
-void TestAction(HttpContext httpContext, IFormFile file)
-{
-    httpContext.Items["invoked"] = true;
-}
-app.MapPost("/", TestAction);
-""";
+        void TestAction(HttpContext httpContext, IFormFile file)
+        {
+        httpContext.Items["invoked"] = true;
+        }
+        app.MapPost("/", TestAction);
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {
@@ -1159,12 +1159,12 @@ app.MapPost("/", TestAction);
     public async Task RequestDelegateValidateGeneratedFormCode()
     {
         var source = """
-void TestAction(HttpContext httpContext, IFormFile file, IFormFileCollection fileCollection, IFormCollection collection, [FromForm] MyTryParseRecord tryParseRecord)
-{
-    httpContext.Items["invoked"] = true;
-}
-app.MapPost("/", TestAction);
-""";
+        void TestAction(HttpContext httpContext, IFormFile file, IFormFileCollection fileCollection, IFormCollection collection, [FromForm] MyTryParseRecord tryParseRecord)
+        {
+        httpContext.Items["invoked"] = true;
+        }
+        app.MapPost("/", TestAction);
+        """;
         var (_, compilation) = await RunGeneratorAsync(source);
 
         await VerifyAgainstBaselineUsingFile(compilation);

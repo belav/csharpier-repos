@@ -41,11 +41,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyThisOrMe
 
                 class C
                 {
-                    private int x = 0;
-                    public void z()
-                    {
-                        var a = [|this.x|];
-                    }
+                private int x = 0;
+                public void z()
+                {
+                var a = [|this.x|];
+                }
                 }
                 """,
                 """
@@ -53,11 +53,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyThisOrMe
 
                 class C
                 {
-                    private int x = 0;
-                    public void z()
-                    {
-                        var a = x;
-                    }
+                private int x = 0;
+                public void z()
+                {
+                var a = x;
+                }
                 }
                 """
             );
@@ -71,23 +71,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyThisOrMe
                 """
                 class Program
                 {
-                    dynamic x = 7;
+                dynamic x = 7;
 
-                    static void Main(string[] args)
-                    {
-                        [|this|].x = default(dynamic);
-                    }
+                static void Main(string[] args)
+                {
+                [|this|].x = default(dynamic);
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    dynamic x = 7;
+                dynamic x = 7;
 
-                    static void Main(string[] args)
-                    {
-                        x = default(dynamic);
-                    }
+                static void Main(string[] args)
+                {
+                x = default(dynamic);
+                }
                 }
                 """
             );
@@ -100,12 +100,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyThisOrMe
                 """
                 class C
                 {
-                    int SomeProperty { get; set; }
+                int SomeProperty { get; set; }
 
-                    void M()
-                    {
-                        [|this|].SomeProperty = 1;
-                    }
+                void M()
+                {
+                [|this|].SomeProperty = 1;
+                }
                 }
                 """,
                 options: Option(
@@ -124,250 +124,250 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyThisOrMe
         public async Task TestFixAllInSolution_RemoveThis()
         {
             var input = """
-                <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                        <Document>
-                using System;
-                class ProgramA
-                {
-                    private int x = 0;
-                    private int y = 0;
-                    private int z = 0;
+            <Workspace>
+            <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+            <Document>
+            using System;
+            class ProgramA
+            {
+            private int x = 0;
+            private int y = 0;
+            private int z = 0;
 
-                    private System.Int32 F(System.Int32 p1, System.Int16 p2)
-                    {
-                        System.Int32 i1 = {|FixAllInSolution:this.x|};
-                        System.Int16 s1 = this.y;
-                        System.Int32 i2 = this.z;
-                        System.Console.Write(i1 + s1 + i2);
-                        System.Console.WriteLine(i1 + s1 + i2);
-                        System.Exception ex = null;
-                        return i1 + s1 + i2;
-                    }
-                }
+            private System.Int32 F(System.Int32 p1, System.Int16 p2)
+            {
+            System.Int32 i1 = {|FixAllInSolution:this.x|};
+            System.Int16 s1 = this.y;
+            System.Int32 i2 = this.z;
+            System.Console.Write(i1 + s1 + i2);
+            System.Console.WriteLine(i1 + s1 + i2);
+            System.Exception ex = null;
+            return i1 + s1 + i2;
+            }
+            }
 
-                class ProgramB
-                {
-                    private int x2 = 0;
-                    private int y2 = 0;
-                    private int z2 = 0;
+            class ProgramB
+            {
+            private int x2 = 0;
+            private int y2 = 0;
+            private int z2 = 0;
 
-                    private System.Int32 F(System.Int32 p1, System.Int16 p2)
-                    {
-                        System.Int32 i1 = this.x2;
-                        System.Int16 s1 = this.y2;
-                        System.Int32 i2 = this.z2;
-                        System.Console.Write(i1 + s1 + i2);
-                        System.Console.WriteLine(i1 + s1 + i2);
-                        System.Exception ex = null;
-                        return i1 + s1 + i2;
-                    }
-                }
-                        </Document>
-                        <Document>
-                using System;
-                class ProgramA2
-                {
-                    private int x = 0;
-                    private int y = 0;
-                    private int z = 0;
+            private System.Int32 F(System.Int32 p1, System.Int16 p2)
+            {
+            System.Int32 i1 = this.x2;
+            System.Int16 s1 = this.y2;
+            System.Int32 i2 = this.z2;
+            System.Console.Write(i1 + s1 + i2);
+            System.Console.WriteLine(i1 + s1 + i2);
+            System.Exception ex = null;
+            return i1 + s1 + i2;
+            }
+            }
+            </Document>
+            <Document>
+            using System;
+            class ProgramA2
+            {
+            private int x = 0;
+            private int y = 0;
+            private int z = 0;
 
-                    private System.Int32 F(System.Int32 p1, System.Int16 p2)
-                    {
-                        System.Int32 i1 = this.x;
-                        System.Int16 s1 = this.y;
-                        System.Int32 i2 = this.z;
-                        System.Console.Write(i1 + s1 + i2);
-                        System.Console.WriteLine(i1 + s1 + i2);
-                        System.Exception ex = null;
-                        return i1 + s1 + i2;
-                    }
-                }
+            private System.Int32 F(System.Int32 p1, System.Int16 p2)
+            {
+            System.Int32 i1 = this.x;
+            System.Int16 s1 = this.y;
+            System.Int32 i2 = this.z;
+            System.Console.Write(i1 + s1 + i2);
+            System.Console.WriteLine(i1 + s1 + i2);
+            System.Exception ex = null;
+            return i1 + s1 + i2;
+            }
+            }
 
-                class ProgramB2
-                {
-                    private int x2 = 0;
-                    private int y2 = 0;
-                    private int z2 = 0;
+            class ProgramB2
+            {
+            private int x2 = 0;
+            private int y2 = 0;
+            private int z2 = 0;
 
-                    private System.Int32 F(System.Int32 p1, System.Int16 p2)
-                    {
-                        System.Int32 i1 = this.x2;
-                        System.Int16 s1 = this.y2;
-                        System.Int32 i2 = this.z2;
-                        System.Console.Write(i1 + s1 + i2);
-                        System.Console.WriteLine(i1 + s1 + i2);
-                        System.Exception ex = null;
-                        return i1 + s1 + i2;
-                    }
-                }
-                        </Document>
-                    </Project>
-                    <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
-                        <Document>
-                using System;
-                class ProgramA3
-                {
-                    private int x = 0;
-                    private int y = 0;
-                    private int z = 0;
+            private System.Int32 F(System.Int32 p1, System.Int16 p2)
+            {
+            System.Int32 i1 = this.x2;
+            System.Int16 s1 = this.y2;
+            System.Int32 i2 = this.z2;
+            System.Console.Write(i1 + s1 + i2);
+            System.Console.WriteLine(i1 + s1 + i2);
+            System.Exception ex = null;
+            return i1 + s1 + i2;
+            }
+            }
+            </Document>
+            </Project>
+            <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
+            <Document>
+            using System;
+            class ProgramA3
+            {
+            private int x = 0;
+            private int y = 0;
+            private int z = 0;
 
-                    private System.Int32 F(System.Int32 p1, System.Int16 p2)
-                    {
-                        System.Int32 i1 = this.x;
-                        System.Int16 s1 = this.y;
-                        System.Int32 i2 = this.z;
-                        System.Console.Write(i1 + s1 + i2);
-                        System.Console.WriteLine(i1 + s1 + i2);
-                        System.Exception ex = null;
-                        return i1 + s1 + i2;
-                    }
-                }
+            private System.Int32 F(System.Int32 p1, System.Int16 p2)
+            {
+            System.Int32 i1 = this.x;
+            System.Int16 s1 = this.y;
+            System.Int32 i2 = this.z;
+            System.Console.Write(i1 + s1 + i2);
+            System.Console.WriteLine(i1 + s1 + i2);
+            System.Exception ex = null;
+            return i1 + s1 + i2;
+            }
+            }
 
-                class ProgramB3
-                {
-                    private int x2 = 0;
-                    private int y2 = 0;
-                    private int z2 = 0;
+            class ProgramB3
+            {
+            private int x2 = 0;
+            private int y2 = 0;
+            private int z2 = 0;
 
-                    private System.Int32 F(System.Int32 p1, System.Int16 p2)
-                    {
-                        System.Int32 i1 = this.x2;
-                        System.Int16 s1 = this.y2;
-                        System.Int32 i2 = this.z2;
-                        System.Console.Write(i1 + s1 + i2);
-                        System.Console.WriteLine(i1 + s1 + i2);
-                        System.Exception ex = null;
-                        return i1 + s1 + i2;
-                    }
-                }
-                        </Document>
-                    </Project>
-                </Workspace>
-                """;
+            private System.Int32 F(System.Int32 p1, System.Int16 p2)
+            {
+            System.Int32 i1 = this.x2;
+            System.Int16 s1 = this.y2;
+            System.Int32 i2 = this.z2;
+            System.Console.Write(i1 + s1 + i2);
+            System.Console.WriteLine(i1 + s1 + i2);
+            System.Exception ex = null;
+            return i1 + s1 + i2;
+            }
+            }
+            </Document>
+            </Project>
+            </Workspace>
+            """;
 
             var expected = """
-                <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                        <Document>
-                using System;
-                class ProgramA
-                {
-                    private int x = 0;
-                    private int y = 0;
-                    private int z = 0;
+            <Workspace>
+            <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+            <Document>
+            using System;
+            class ProgramA
+            {
+            private int x = 0;
+            private int y = 0;
+            private int z = 0;
 
-                    private System.Int32 F(System.Int32 p1, System.Int16 p2)
-                    {
-                        System.Int32 i1 = x;
-                        System.Int16 s1 = y;
-                        System.Int32 i2 = z;
-                        System.Console.Write(i1 + s1 + i2);
-                        System.Console.WriteLine(i1 + s1 + i2);
-                        System.Exception ex = null;
-                        return i1 + s1 + i2;
-                    }
-                }
+            private System.Int32 F(System.Int32 p1, System.Int16 p2)
+            {
+            System.Int32 i1 = x;
+            System.Int16 s1 = y;
+            System.Int32 i2 = z;
+            System.Console.Write(i1 + s1 + i2);
+            System.Console.WriteLine(i1 + s1 + i2);
+            System.Exception ex = null;
+            return i1 + s1 + i2;
+            }
+            }
 
-                class ProgramB
-                {
-                    private int x2 = 0;
-                    private int y2 = 0;
-                    private int z2 = 0;
+            class ProgramB
+            {
+            private int x2 = 0;
+            private int y2 = 0;
+            private int z2 = 0;
 
-                    private System.Int32 F(System.Int32 p1, System.Int16 p2)
-                    {
-                        System.Int32 i1 = x2;
-                        System.Int16 s1 = y2;
-                        System.Int32 i2 = z2;
-                        System.Console.Write(i1 + s1 + i2);
-                        System.Console.WriteLine(i1 + s1 + i2);
-                        System.Exception ex = null;
-                        return i1 + s1 + i2;
-                    }
-                }
-                        </Document>
-                        <Document>
-                using System;
-                class ProgramA2
-                {
-                    private int x = 0;
-                    private int y = 0;
-                    private int z = 0;
+            private System.Int32 F(System.Int32 p1, System.Int16 p2)
+            {
+            System.Int32 i1 = x2;
+            System.Int16 s1 = y2;
+            System.Int32 i2 = z2;
+            System.Console.Write(i1 + s1 + i2);
+            System.Console.WriteLine(i1 + s1 + i2);
+            System.Exception ex = null;
+            return i1 + s1 + i2;
+            }
+            }
+            </Document>
+            <Document>
+            using System;
+            class ProgramA2
+            {
+            private int x = 0;
+            private int y = 0;
+            private int z = 0;
 
-                    private System.Int32 F(System.Int32 p1, System.Int16 p2)
-                    {
-                        System.Int32 i1 = x;
-                        System.Int16 s1 = y;
-                        System.Int32 i2 = z;
-                        System.Console.Write(i1 + s1 + i2);
-                        System.Console.WriteLine(i1 + s1 + i2);
-                        System.Exception ex = null;
-                        return i1 + s1 + i2;
-                    }
-                }
+            private System.Int32 F(System.Int32 p1, System.Int16 p2)
+            {
+            System.Int32 i1 = x;
+            System.Int16 s1 = y;
+            System.Int32 i2 = z;
+            System.Console.Write(i1 + s1 + i2);
+            System.Console.WriteLine(i1 + s1 + i2);
+            System.Exception ex = null;
+            return i1 + s1 + i2;
+            }
+            }
 
-                class ProgramB2
-                {
-                    private int x2 = 0;
-                    private int y2 = 0;
-                    private int z2 = 0;
+            class ProgramB2
+            {
+            private int x2 = 0;
+            private int y2 = 0;
+            private int z2 = 0;
 
-                    private System.Int32 F(System.Int32 p1, System.Int16 p2)
-                    {
-                        System.Int32 i1 = x2;
-                        System.Int16 s1 = y2;
-                        System.Int32 i2 = z2;
-                        System.Console.Write(i1 + s1 + i2);
-                        System.Console.WriteLine(i1 + s1 + i2);
-                        System.Exception ex = null;
-                        return i1 + s1 + i2;
-                    }
-                }
-                        </Document>
-                    </Project>
-                    <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
-                        <Document>
-                using System;
-                class ProgramA3
-                {
-                    private int x = 0;
-                    private int y = 0;
-                    private int z = 0;
+            private System.Int32 F(System.Int32 p1, System.Int16 p2)
+            {
+            System.Int32 i1 = x2;
+            System.Int16 s1 = y2;
+            System.Int32 i2 = z2;
+            System.Console.Write(i1 + s1 + i2);
+            System.Console.WriteLine(i1 + s1 + i2);
+            System.Exception ex = null;
+            return i1 + s1 + i2;
+            }
+            }
+            </Document>
+            </Project>
+            <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true">
+            <Document>
+            using System;
+            class ProgramA3
+            {
+            private int x = 0;
+            private int y = 0;
+            private int z = 0;
 
-                    private System.Int32 F(System.Int32 p1, System.Int16 p2)
-                    {
-                        System.Int32 i1 = x;
-                        System.Int16 s1 = y;
-                        System.Int32 i2 = z;
-                        System.Console.Write(i1 + s1 + i2);
-                        System.Console.WriteLine(i1 + s1 + i2);
-                        System.Exception ex = null;
-                        return i1 + s1 + i2;
-                    }
-                }
+            private System.Int32 F(System.Int32 p1, System.Int16 p2)
+            {
+            System.Int32 i1 = x;
+            System.Int16 s1 = y;
+            System.Int32 i2 = z;
+            System.Console.Write(i1 + s1 + i2);
+            System.Console.WriteLine(i1 + s1 + i2);
+            System.Exception ex = null;
+            return i1 + s1 + i2;
+            }
+            }
 
-                class ProgramB3
-                {
-                    private int x2 = 0;
-                    private int y2 = 0;
-                    private int z2 = 0;
+            class ProgramB3
+            {
+            private int x2 = 0;
+            private int y2 = 0;
+            private int z2 = 0;
 
-                    private System.Int32 F(System.Int32 p1, System.Int16 p2)
-                    {
-                        System.Int32 i1 = x2;
-                        System.Int16 s1 = y2;
-                        System.Int32 i2 = z2;
-                        System.Console.Write(i1 + s1 + i2);
-                        System.Console.WriteLine(i1 + s1 + i2);
-                        System.Exception ex = null;
-                        return i1 + s1 + i2;
-                    }
-                }
-                        </Document>
-                    </Project>
-                </Workspace>
-                """;
+            private System.Int32 F(System.Int32 p1, System.Int16 p2)
+            {
+            System.Int32 i1 = x2;
+            System.Int16 s1 = y2;
+            System.Int32 i2 = z2;
+            System.Console.Write(i1 + s1 + i2);
+            System.Console.WriteLine(i1 + s1 + i2);
+            System.Exception ex = null;
+            return i1 + s1 + i2;
+            }
+            }
+            </Document>
+            </Project>
+            </Workspace>
+            """;
 
             await TestInRegularAndScriptAsync(input, expected);
         }
@@ -378,78 +378,78 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyThisOrMe
         public async Task TestFixAllInSolution_RemoveMemberAccessQualification()
         {
             var input = """
-                <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                        <Document>
-                using System;
+            <Workspace>
+            <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+            <Document>
+            using System;
 
-                class C
-                {
-                    int Property { get; set; }
-                    int OtherProperty { get; set; }
+            class C
+            {
+            int Property { get; set; }
+            int OtherProperty { get; set; }
 
-                    void M()
-                    {
-                        {|FixAllInSolution:this.Property|} = 1;
-                        var x = this.OtherProperty;
-                    }
-                }
-                        </Document>
-                        <Document>
-                using System;
+            void M()
+            {
+            {|FixAllInSolution:this.Property|} = 1;
+            var x = this.OtherProperty;
+            }
+            }
+            </Document>
+            <Document>
+            using System;
 
-                class D
-                {
-                    string StringProperty { get; set; }
-                    int field;
+            class D
+            {
+            string StringProperty { get; set; }
+            int field;
 
-                    void N()
-                    {
-                        this.StringProperty = string.Empty;
-                        this.field = 0; // ensure qualification isn't removed
-                    }
-                }
-                        </Document>
-                    </Project>
-                </Workspace>
-                """;
+            void N()
+            {
+            this.StringProperty = string.Empty;
+            this.field = 0; // ensure qualification isn't removed
+            }
+            }
+            </Document>
+            </Project>
+            </Workspace>
+            """;
 
             var expected = """
-                <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                        <Document>
-                using System;
+            <Workspace>
+            <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+            <Document>
+            using System;
 
-                class C
-                {
-                    int Property { get; set; }
-                    int OtherProperty { get; set; }
+            class C
+            {
+            int Property { get; set; }
+            int OtherProperty { get; set; }
 
-                    void M()
-                    {
-                        Property = 1;
-                        var x = OtherProperty;
-                    }
-                }
-                        </Document>
-                        <Document>
-                using System;
+            void M()
+            {
+            Property = 1;
+            var x = OtherProperty;
+            }
+            }
+            </Document>
+            <Document>
+            using System;
 
-                class D
-                {
-                    string StringProperty { get; set; }
-                    int field;
+            class D
+            {
+            string StringProperty { get; set; }
+            int field;
 
-                    void N()
-                    {
-                        StringProperty = string.Empty;
-                        this.field = 0; // ensure qualification isn't removed
-                    }
-                }
-                        </Document>
-                    </Project>
-                </Workspace>
-                """;
+            void N()
+            {
+            StringProperty = string.Empty;
+            this.field = 0; // ensure qualification isn't removed
+            }
+            }
+            </Document>
+            </Project>
+            </Workspace>
+            """;
 
             var options = new OptionsCollection(GetLanguage())
             {

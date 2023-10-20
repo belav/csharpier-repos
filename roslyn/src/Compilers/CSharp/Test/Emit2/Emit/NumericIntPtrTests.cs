@@ -2252,19 +2252,19 @@ public class A
         public void IntPtrOperator_OnPlatformWithNumericIntPtr()
         {
             var source = """
-using System;
+            using System;
 
-class C
-{
-    public static void M()
-    {
-        IntPtr a = default;
-        bool b = a == IntPtr.Zero;
-        a += 1;
-        _ = a + 1;
-    }
-}
-""";
+            class C
+            {
+            public static void M()
+            {
+            IntPtr a = default;
+            bool b = a == IntPtr.Zero;
+            a += 1;
+            _ = a + 1;
+            }
+            }
+            """;
             var comp = CreateCompilation(
                 source,
                 parseOptions: TestOptions.Regular7_3,
@@ -2280,19 +2280,19 @@ class C
         public void IntPtrOperator_OnPlatformWithoutNumericIntPtr()
         {
             var source = """
-using System;
+            using System;
 
-class C
-{
-    public static void M()
-    {
-        IntPtr a = default;
-        bool b = a == IntPtr.Zero;
-        a += 1;
-        _ = a + 1;
-    }
-}
-""";
+            class C
+            {
+            public static void M()
+            {
+            IntPtr a = default;
+            bool b = a == IntPtr.Zero;
+            a += 1;
+            _ = a + 1;
+            }
+            }
+            """;
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular7_3);
             comp.VerifyDiagnostics();
 
@@ -23049,11 +23049,11 @@ public class C
         public void RetargetingFromNonNumericToNumericIntPtrCorlib()
         {
             string lib_cs = """
-public class Base
-{
-    public virtual nint M() => 0;
-}
-""";
+            public class Base
+            {
+            public virtual nint M() => 0;
+            }
+            """;
             var libComp = CreateEmptyCompilation(
                 lib_cs,
                 references: new[] { MscorlibRef_v20 },
@@ -23062,11 +23062,11 @@ public class Base
             libComp.VerifyDiagnostics();
 
             string source = """
-public class Derived : Base
-{
-    public override nint M() => 0;
-}
-""";
+            public class Derived : Base
+            {
+            public override nint M() => 0;
+            }
+            """;
             var comp = CreateCompilation(
                 source,
                 references: new[] { libComp.ToMetadataReference() },
@@ -23088,11 +23088,11 @@ public class Derived : Base
         public void RetargetingFromNumericIntPtrToNonNumericCorlib()
         {
             string lib_cs = """
-public class Base
-{
-    public virtual nint M() => 0;
-}
-""";
+            public class Base
+            {
+            public virtual nint M() => 0;
+            }
+            """;
             var libComp = CreateCompilation(
                 lib_cs,
                 assemblyName: "lib",
@@ -23101,11 +23101,11 @@ public class Base
             libComp.VerifyDiagnostics();
 
             string source = """
-public class Derived : Base
-{
-    public override nint M() => 0;
-}
-""";
+            public class Derived : Base
+            {
+            public override nint M() => 0;
+            }
+            """;
             var comp = CreateEmptyCompilation(
                 source,
                 references: new[] { libComp.ToMetadataReference(), MscorlibRef_v46 }
@@ -23136,17 +23136,17 @@ public class Derived : Base
         public void UnsignedRightShift()
         {
             string source = """
-public class C
-{
-    nint M1(nint x, int count) => x >>> count;
-    nuint M2(nuint x, int count) => x >>> count;
-    nint M3(nint x, int count) => checked(x >>> count);
-    nuint M4(nuint x, int count) => checked(x >>> count);
+            public class C
+            {
+            nint M1(nint x, int count) => x >>> count;
+            nuint M2(nuint x, int count) => x >>> count;
+            nint M3(nint x, int count) => checked(x >>> count);
+            nuint M4(nuint x, int count) => checked(x >>> count);
 
-    System.IntPtr M5(System.IntPtr x, int count) => x >>> count;
-    System.UIntPtr M6(System.UIntPtr x, int count) => x >>> count;
-}
-""";
+            System.IntPtr M5(System.IntPtr x, int count) => x >>> count;
+            System.UIntPtr M6(System.UIntPtr x, int count) => x >>> count;
+            }
+            """;
             var comp = CreateCompilation(source, targetFramework: TargetFramework.Net70);
             comp.VerifyDiagnostics();
             var verifier = CompileAndVerify(comp, verify: Verification.FailsPEVerify);
@@ -23185,30 +23185,30 @@ public class C
         {
             // Breaking change
             string source = """
-using System;
-class C
-{
-    public unsafe static void Main()
-    {
-        void* ptr = (void*)ulong.MaxValue;
+            using System;
+            class C
+            {
+            public unsafe static void Main()
+            {
+            void* ptr = (void*)ulong.MaxValue;
 
-        try
-        {
+            try
+            {
             IntPtr i = checked((IntPtr)ptr);
-        }
-        catch (System.OverflowException)
-        {
+            }
+            catch (System.OverflowException)
+            {
             Console.Write("OVERFLOW ");
-        }
+            }
 
-        IntPtr j = unchecked((IntPtr)ptr);
-        if (j == (IntPtr)(-1))
-        {
+            IntPtr j = unchecked((IntPtr)ptr);
+            if (j == (IntPtr)(-1))
+            {
             Console.Write("RAN");
-        }
-    }
-}
-""";
+            }
+            }
+            }
+            """;
             var comp = CreateCompilation(
                 source,
                 options: TestOptions.UnsafeReleaseExe,
@@ -23376,11 +23376,11 @@ class C { }
         public void XmlDoc_Cref_Alias()
         {
             var src = """
-using @nint = System.String;
+            using @nint = System.String;
 
-/// <summary>Summary <see cref="nint"/>.</summary>
-class C { }
-""";
+            /// <summary>Summary <see cref="nint"/>.</summary>
+            class C { }
+            """;
 
             var comp = CreateCompilation(
                 src,
@@ -23451,13 +23451,13 @@ public class C
         public void XmlDoc_Cref_Member_Escaped()
         {
             var src = """
-/// <summary>Summary <see cref="@nint"/>.</summary>
-public class C
-{
-    /// <summary></summary>
-    public int nint;
-}
-""";
+            /// <summary>Summary <see cref="@nint"/>.</summary>
+            public class C
+            {
+            /// <summary></summary>
+            public int nint;
+            }
+            """;
 
             var comp = CreateCompilation(
                 src,
@@ -23512,13 +23512,13 @@ public class C
         public void XmlDoc_Cref_Member_NintZero()
         {
             var src = """
-/// <summary>Summary <see cref="nint.Zero"/>.</summary>
-public class C
-{
-    /// <summary></summary>
-    public int nint;
-}
-""";
+            /// <summary>Summary <see cref="nint.Zero"/>.</summary>
+            public class C
+            {
+            /// <summary></summary>
+            public int nint;
+            }
+            """;
 
             var comp = CreateCompilation(
                 src,
@@ -24020,11 +24020,11 @@ public class C
             // lifted count
             compileAndVerify(
                     """
-class C
-{
-    nint? M(nint value, int? count) => value >> count;
-}
-"""
+                    class C
+                    {
+                    nint? M(nint value, int? count) => value >> count;
+                    }
+                    """
                 )
                 .VerifyIL(
                     "C.M",
@@ -24065,11 +24065,11 @@ class C
             // lifted value and lifted count
             compileAndVerify(
                     """
-class C
-{
-    nint? M(nint? value, int? count) => value >> count;
-}
-"""
+                    class C
+                    {
+                    nint? M(nint? value, int? count) => value >> count;
+                    }
+                    """
                 )
                 .VerifyIL(
                     "C.M",
@@ -24374,13 +24374,13 @@ class C
         public void MaskShiftCount_NegativeCount()
         {
             var source = """
-System.Console.WriteLine(C.ShiftRight(255));
+            System.Console.WriteLine(C.ShiftRight(255));
 
-static class C
-{
-    public static nint ShiftRight(nint x) => x >> (-62);
-}
-""";
+            static class C
+            {
+            public static nint ShiftRight(nint x) => x >> (-62);
+            }
+            """;
             var comp = CreateCompilation(
                 source,
                 options: TestOptions.UnsafeReleaseExe,
@@ -24457,41 +24457,41 @@ class Program
                 verifier.VerifyIL(
                     "Program.F",
                     """
-{
-  // Code size       48 (0x30)
-  .maxstack  3
-  .locals init (System.Span<char> V_0, //s
-                System.Span<char> V_1,
-                int V_2)
-  IL_0000:  ldarg.0
-  IL_0001:  ldc.i4.s   10
-  IL_0003:  bge.s      IL_0016
-  IL_0005:  ldarg.0
-  IL_0006:  stloc.2
-  IL_0007:  ldloc.2
-  IL_0008:  conv.u
-  IL_0009:  ldc.i4.2
-  IL_000a:  mul.ovf.un
-  IL_000b:  localloc
-  IL_000d:  ldloc.2
-  IL_000e:  newobj     "System.Span<char>..ctor(void*, int)"
-  IL_0013:  stloc.1
-  IL_0014:  br.s       IL_0022
-  IL_0016:  ldarg.0
-  IL_0017:  newarr     "char"
-  IL_001c:  call       "System.Span<char> System.Span<char>.op_Implicit(char[])"
-  IL_0021:  stloc.1
-  IL_0022:  ldloc.1
-  IL_0023:  stloc.0
-  IL_0024:  ldloca.s   V_0
-  IL_0026:  ldarg.0
-  IL_0027:  ldc.i4.1
-  IL_0028:  sub
-  IL_0029:  call       "ref char System.Span<char>.this[int].get"
-  IL_002e:  ldind.u2
-  IL_002f:  ret
-}
-"""
+                    {
+                    // Code size       48 (0x30)
+                    .maxstack  3
+                    .locals init (System.Span<char> V_0, //s
+                    System.Span<char> V_1,
+                    int V_2)
+                    IL_0000:  ldarg.0
+                    IL_0001:  ldc.i4.s   10
+                    IL_0003:  bge.s      IL_0016
+                    IL_0005:  ldarg.0
+                    IL_0006:  stloc.2
+                    IL_0007:  ldloc.2
+                    IL_0008:  conv.u
+                    IL_0009:  ldc.i4.2
+                    IL_000a:  mul.ovf.un
+                    IL_000b:  localloc
+                    IL_000d:  ldloc.2
+                    IL_000e:  newobj     "System.Span<char>..ctor(void*, int)"
+                    IL_0013:  stloc.1
+                    IL_0014:  br.s       IL_0022
+                    IL_0016:  ldarg.0
+                    IL_0017:  newarr     "char"
+                    IL_001c:  call       "System.Span<char> System.Span<char>.op_Implicit(char[])"
+                    IL_0021:  stloc.1
+                    IL_0022:  ldloc.1
+                    IL_0023:  stloc.0
+                    IL_0024:  ldloca.s   V_0
+                    IL_0026:  ldarg.0
+                    IL_0027:  ldc.i4.1
+                    IL_0028:  sub
+                    IL_0029:  call       "ref char System.Span<char>.this[int].get"
+                    IL_002e:  ldind.u2
+                    IL_002f:  ret
+                    }
+                    """
                 );
             }
         }
@@ -24502,16 +24502,16 @@ class Program
         public void PointerSubtraction(bool useNumericIntPtr)
         {
             var source = """
-                class Program
-                {
-                    static unsafe long F(int* p1)
-                    {
-                        byte* p2 = (byte*)p1;
-                        p2++;
-                        return p2 - (byte*)p1;
-                    }
-                }
-                """;
+            class Program
+            {
+            static unsafe long F(int* p1)
+            {
+            byte* p2 = (byte*)p1;
+            p2++;
+            return p2 - (byte*)p1;
+            }
+            }
+            """;
             var comp = CreateCompilation(
                 source,
                 options: TestOptions.UnsafeReleaseDll,

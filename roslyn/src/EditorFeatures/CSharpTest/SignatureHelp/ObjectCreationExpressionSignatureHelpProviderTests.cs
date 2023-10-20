@@ -28,14 +28,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task TestInvocationWithoutParameters()
         {
             var markup = """
-                class C
-                {
-                    void goo()
-                    {
-                        var c = [|new C($$|]);
-                    }
-                }
-                """;
+            class C
+            {
+            void goo()
+            {
+            var c = [|new C($$|]);
+            }
+            }
+            """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
             expectedOrderedItems.Add(
@@ -49,20 +49,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task TestImplicitInvocationWithoutParameters()
         {
             var markup = """
-                <Workspace>
-                    <Project Language="C#" LanguageVersion="Preview" CommonReferences="true">
-                        <Document FilePath="SourceDocument"><![CDATA[
-                class C
-                {
-                    void M()
-                    {
-                        C c = [|new($$|]);
-                    }
-                }
-                        </Document>
-                    </Project>
-                </Workspace>
-                """;
+            <Workspace>
+            <Project Language="C#" LanguageVersion="Preview" CommonReferences="true">
+            <Document FilePath="SourceDocument"><![CDATA[
+            class C
+            {
+            void M()
+            {
+            C c = [|new($$|]);
+            }
+            }
+            </Document>
+            </Project>
+            </Workspace>
+            """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
             expectedOrderedItems.Add(
@@ -76,19 +76,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task TestInvocationWithoutParametersMethodXmlComments()
         {
             var markup = """
-                class C
-                {
-                    /// <summary>
-                    /// Summary for C
-                    /// </summary>
-                    C() { }
+            class C
+            {
+            /// <summary>
+            /// Summary for C
+            /// </summary>
+            C() { }
 
-                    void Goo()
-                    {
-                        C c = [|new C($$|]);
-                    }
-                }
-                """;
+            void Goo()
+            {
+            C c = [|new C($$|]);
+            }
+            }
+            """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
             expectedOrderedItems.Add(
@@ -101,16 +101,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task TestInvocationWithParametersOn1()
         {
             var markup = """
-                class C
-                {
-                    C(int a, int b) { }
+            class C
+            {
+            C(int a, int b) { }
 
-                    void Goo()
-                    {
-                        C c = [|new C($$2, 3|]);
-                    }
-                }
-                """;
+            void Goo()
+            {
+            C c = [|new C($$2, 3|]);
+            }
+            }
+            """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
             expectedOrderedItems.Add(
@@ -129,16 +129,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task TestImplicitInvocationWithParametersOn1()
         {
             var markup = """
-                class C
-                {
-                    C(int a, int b) { }
+            class C
+            {
+            C(int a, int b) { }
 
-                    void M()
-                    {
-                        C c = [|new($$2, 3|]);
-                    }
-                }
-                """;
+            void M()
+            {
+            C c = [|new($$2, 3|]);
+            }
+            }
+            """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
             expectedOrderedItems.Add(
@@ -157,21 +157,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task TestInvocationWithParametersXmlCommentsOn1()
         {
             var markup = """
-                class C
-                {
-                    /// <summary>
-                    /// Summary for C
-                    /// </summary>
-                    /// <param name="a">Param a</param>
-                    /// <param name="b">Param b</param>
-                    C(int a, int b) { }
+            class C
+            {
+            /// <summary>
+            /// Summary for C
+            /// </summary>
+            /// <param name="a">Param a</param>
+            /// <param name="b">Param b</param>
+            C(int a, int b) { }
 
-                    void Goo()
-                    {
-                        C c = [|new C($$2, 3|]);
-                    }
-                }
-                """;
+            void Goo()
+            {
+            C c = [|new C($$2, 3|]);
+            }
+            }
+            """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
             expectedOrderedItems.Add(
@@ -190,16 +190,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task TestInvocationWithParametersOn2()
         {
             var markup = """
-                class C
-                {
-                    C(int a, int b) { }
+            class C
+            {
+            C(int a, int b) { }
 
-                    void Goo()
-                    {
-                        C c = [|new C(2, $$3|]);
-                    }
-                }
-                """;
+            void Goo()
+            {
+            C c = [|new C(2, $$3|]);
+            }
+            }
+            """;
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
             expectedOrderedItems.Add(
                 new SignatureHelpTestItem(
@@ -217,21 +217,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task TestInvocationWithParametersXmlComentsOn2()
         {
             var markup = """
-                class C
-                {
-                    /// <summary>
-                    /// Summary for C
-                    /// </summary>
-                    /// <param name="a">Param a</param>
-                    /// <param name="b">Param b</param>
-                    C(int a, int b) { }
+            class C
+            {
+            /// <summary>
+            /// Summary for C
+            /// </summary>
+            /// <param name="a">Param a</param>
+            /// <param name="b">Param b</param>
+            C(int a, int b) { }
 
-                    void Goo()
-                    {
-                        C c = [|new C(2, $$3|]);
-                    }
-                }
-                """;
+            void Goo()
+            {
+            C c = [|new C(2, $$3|]);
+            }
+            }
+            """;
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
             expectedOrderedItems.Add(
                 new SignatureHelpTestItem(
@@ -249,17 +249,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task PickCorrectOverload_PickFirst()
         {
             var markup = """
-                class D
-                {
-                    void M()
-                    {
-                        [|new D(i: 1$$|]);
-                    }
-                    D(D filtered) => throw null;
-                    D(string i) => throw null;
-                    D(int i) => throw null;
-                }
-                """;
+            class D
+            {
+            void M()
+            {
+            [|new D(i: 1$$|]);
+            }
+            D(D filtered) => throw null;
+            D(string i) => throw null;
+            D(int i) => throw null;
+            }
+            """;
             var expectedOrderedItems = new List<SignatureHelpTestItem>
             {
                 new SignatureHelpTestItem("D(int i)", currentParameterIndex: 0, isSelected: true),
@@ -273,17 +273,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task PickCorrectOverload_PickFirst_ImplicitObjectCreation()
         {
             var markup = """
-                class D
-                {
-                    void M()
-                    {
-                        D d = [|new(i: 1$$|]);
-                    }
-                    D(D filtered) => throw null;
-                    D(string i) => throw null;
-                    D(int i) => throw null;
-                }
-                """;
+            class D
+            {
+            void M()
+            {
+            D d = [|new(i: 1$$|]);
+            }
+            D(D filtered) => throw null;
+            D(string i) => throw null;
+            D(int i) => throw null;
+            }
+            """;
             var expectedOrderedItems = new List<SignatureHelpTestItem>
             {
                 new SignatureHelpTestItem("D(int i)", currentParameterIndex: 0, isSelected: true),
@@ -297,17 +297,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task PickCorrectOverload_PickSecond()
         {
             var markup = """
-                class D
-                {
-                    void M()
-                    {
-                        [|new D(i: null$$|]);
-                    }
-                    D(D filtered) => throw null;
-                    D(string i) => throw null;
-                    D(int i) => throw null;
-                }
-                """;
+            class D
+            {
+            void M()
+            {
+            [|new D(i: null$$|]);
+            }
+            D(D filtered) => throw null;
+            D(string i) => throw null;
+            D(int i) => throw null;
+            }
+            """;
             var expectedOrderedItems = new List<SignatureHelpTestItem>
             {
                 new SignatureHelpTestItem("D(int i)", currentParameterIndex: 0),
@@ -325,17 +325,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task PickCorrectOverload_PickSecond_ImplicitObjectCreation()
         {
             var markup = """
-                class D
-                {
-                    void M()
-                    {
-                        D d = [|new(i: null$$|]);
-                    }
-                    D(D filtered) => throw null;
-                    D(string i) => throw null;
-                    D(int i) => throw null;
-                }
-                """;
+            class D
+            {
+            void M()
+            {
+            D d = [|new(i: null$$|]);
+            }
+            D(D filtered) => throw null;
+            D(string i) => throw null;
+            D(int i) => throw null;
+            }
+            """;
             var expectedOrderedItems = new List<SignatureHelpTestItem>
             {
                 new SignatureHelpTestItem("D(int i)", currentParameterIndex: 0),
@@ -353,14 +353,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task TestInvocationWithoutClosingParen()
         {
             var markup = """
-                class C
-                {
-                    void goo()
-                    {
-                        var c = [|new C($$
-                    |]}
-                }
-                """;
+            class C
+            {
+            void goo()
+            {
+            var c = [|new C($$
+            |]}
+            }
+            """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
             expectedOrderedItems.Add(
@@ -374,16 +374,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task TestInvocationWithoutClosingParenWithParameters()
         {
             var markup = """
-                class C
-                {
-                    C(int a, int b) { }
+            class C
+            {
+            C(int a, int b) { }
 
-                    void Goo()
-                    {
-                        C c = [|new C($$2, 3
-                    |]}
-                }
-                """;
+            void Goo()
+            {
+            C c = [|new C($$2, 3
+            |]}
+            }
+            """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
             expectedOrderedItems.Add(
@@ -402,16 +402,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task TestInvocationWithoutClosingParenWithParametersOn2()
         {
             var markup = """
-                class C
-                {
-                    C(int a, int b) { }
+            class C
+            {
+            C(int a, int b) { }
 
-                    void Goo()
-                    {
-                        C c = [|new C(2, $$3
-                    |]}
-                }
-                """;
+            void Goo()
+            {
+            C c = [|new C(2, $$3
+            |]}
+            }
+            """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
             expectedOrderedItems.Add(
@@ -430,16 +430,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task TestInvocationOnLambda()
         {
             var markup = """
-                using System;
+            using System;
 
-                class C
-                {
-                    void goo()
-                    {
-                        var bar = [|new Action<int, int>($$
-                    |]}
-                }
-                """;
+            class C
+            {
+            void goo()
+            {
+            var bar = [|new Action<int, int>($$
+            |]}
+            }
+            """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
             expectedOrderedItems.Add(
@@ -463,18 +463,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task TestCurrentParameterName()
         {
             var markup = """
-                class C
-                {
-                    C(int a, string b)
-                    {
-                    }
+            class C
+            {
+            C(int a, string b)
+            {
+            }
 
-                    void goo()
-                    {
-                        var c = [|new C(b: string.Empty, $$a: 2|]);
-                    }
-                }
-                """;
+            void goo()
+            {
+            var c = [|new C(b: string.Empty, $$a: 2|]);
+            }
+            }
+            """;
 
             await VerifyCurrentParameterNameAsync(markup, "a");
         }
@@ -487,14 +487,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task TestInvocationOnTriggerParens()
         {
             var markup = """
-                class C
-                {
-                    void goo()
-                    {
-                        var c = [|new C($$|]);
-                    }
-                }
-                """;
+            class C
+            {
+            void goo()
+            {
+            var c = [|new C($$|]);
+            }
+            }
+            """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
             expectedOrderedItems.Add(
@@ -508,18 +508,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task TestInvocationOnTriggerComma()
         {
             var markup = """
-                class C
-                {
-                    C(int a, string b)
-                    {
-                    }
+            class C
+            {
+            C(int a, string b)
+            {
+            }
 
-                    void goo()
-                    {
-                        var c = [|new C(2,$$string.Empty|]);
-                    }
-                }
-                """;
+            void goo()
+            {
+            var c = [|new C(2,$$string.Empty|]);
+            }
+            }
+            """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
             expectedOrderedItems.Add(
@@ -538,18 +538,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task TestNoInvocationOnSpace()
         {
             var markup = """
-                class C
-                {
-                    C(int a, string b)
-                    {
-                    }
+            class C
+            {
+            C(int a, string b)
+            {
+            }
 
-                    void goo()
-                    {
-                        var c = [|new C(2, $$string.Empty|]);
-                    }
-                }
-                """;
+            void goo()
+            {
+            var c = [|new C(2, $$string.Empty|]);
+            }
+            }
+            """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
             await TestAsync(markup, expectedOrderedItems, usePreviousCharAsTrigger: true);
@@ -571,24 +571,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task EditorBrowsable_Constructor_BrowsableAlways()
         {
             var markup = """
-                class Program
-                {
-                    void M()
-                    {
-                        new Goo($$
-                    }
-                }
-                """;
+            class Program
+            {
+            void M()
+            {
+            new Goo($$
+            }
+            }
+            """;
 
             var referencedCode = """
-                public class Goo
-                {
-                    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Always)]
-                    public Goo(int x)
-                    {
-                    }
-                }
-                """;
+            public class Goo
+            {
+            [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Always)]
+            public Goo(int x)
+            {
+            }
+            }
+            """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
             expectedOrderedItems.Add(
@@ -614,24 +614,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task EditorBrowsable_Constructor_BrowsableNever()
         {
             var markup = """
-                class Program
-                {
-                    void M()
-                    {
-                        new Goo($$
-                    }
-                }
-                """;
+            class Program
+            {
+            void M()
+            {
+            new Goo($$
+            }
+            }
+            """;
 
             var referencedCode = """
-                public class Goo
-                {
-                    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
-                    public Goo(int x)
-                    {
-                    }
-                }
-                """;
+            public class Goo
+            {
+            [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+            public Goo(int x)
+            {
+            }
+            }
+            """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
             expectedOrderedItems.Add(
@@ -657,24 +657,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task EditorBrowsable_Constructor_BrowsableAdvanced()
         {
             var markup = """
-                class Program
-                {
-                    void M()
-                    {
-                        new Goo($$
-                    }
-                }
-                """;
+            class Program
+            {
+            void M()
+            {
+            new Goo($$
+            }
+            }
+            """;
 
             var referencedCode = """
-                public class Goo
-                {
-                    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-                    public Goo()
-                    {
-                    }
-                }
-                """;
+            public class Goo
+            {
+            [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+            public Goo()
+            {
+            }
+            }
+            """;
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
             expectedOrderedItems.Add(
                 new SignatureHelpTestItem("Goo()", string.Empty, null, currentParameterIndex: 0)
@@ -705,28 +705,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task EditorBrowsable_Constructor_BrowsableMixed()
         {
             var markup = """
-                class Program
-                {
-                    void M()
-                    {
-                        new Goo($$
-                    }
-                }
-                """;
+            class Program
+            {
+            void M()
+            {
+            new Goo($$
+            }
+            }
+            """;
 
             var referencedCode = """
-                public class Goo
-                {
-                    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Always)]
-                    public Goo(int x)
-                    {
-                    }
-                    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
-                    public Goo(long y)
-                    {
-                    }
-                }
-                """;
+            public class Goo
+            {
+            [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Always)]
+            public Goo(int x)
+            {
+            }
+            [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+            public Goo(long y)
+            {
+            }
+            }
+            """;
             var expectedOrderedItemsMetadataReference = new List<SignatureHelpTestItem>();
             expectedOrderedItemsMetadataReference.Add(
                 new SignatureHelpTestItem(
@@ -771,29 +771,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task FieldUnavailableInOneLinkedFile()
         {
             var markup = """
-                <Workspace>
-                    <Project Language="C#" CommonReferences="true" AssemblyName="Proj1" PreprocessorSymbols="GOO">
-                        <Document FilePath="SourceDocument"><![CDATA[
-                class C
-                {
-                #if GOO
-                    class D
-                    {
-                    }
-                #endif
-                    void goo()
-                    {
-                        var x = new D($$
-                    }
-                }
-                ]]>
-                        </Document>
-                    </Project>
-                    <Project Language="C#" CommonReferences="true" AssemblyName="Proj2">
-                        <Document IsLinkFile="true" LinkAssemblyName="Proj1" LinkFilePath="SourceDocument"/>
-                    </Project>
-                </Workspace>
-                """;
+            <Workspace>
+            <Project Language="C#" CommonReferences="true" AssemblyName="Proj1" PreprocessorSymbols="GOO">
+            <Document FilePath="SourceDocument"><![CDATA[
+            class C
+            {
+            #if GOO
+            class D
+            {
+            }
+            #endif
+            void goo()
+            {
+            var x = new D($$
+            }
+            }
+            ]]>
+            </Document>
+            </Project>
+            <Project Language="C#" CommonReferences="true" AssemblyName="Proj2">
+            <Document IsLinkFile="true" LinkAssemblyName="Proj1" LinkFilePath="SourceDocument"/>
+            </Project>
+            </Workspace>
+            """;
             var expectedDescription = new SignatureHelpTestItem(
                 $"D()\r\n\r\n{string.Format(FeaturesResources._0_1, "Proj1", FeaturesResources.Available)}\r\n{string.Format(FeaturesResources._0_1, "Proj2", FeaturesResources.Not_Available)}\r\n\r\n{FeaturesResources.You_can_use_the_navigation_bar_to_switch_contexts}",
                 currentParameterIndex: 0
@@ -805,35 +805,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task ExcludeFilesWithInactiveRegions()
         {
             var markup = """
-                <Workspace>
-                    <Project Language="C#" CommonReferences="true" AssemblyName="Proj1" PreprocessorSymbols="GOO,BAR">
-                        <Document FilePath="SourceDocument"><![CDATA[
-                class C
-                {
-                #if GOO
-                    class D
-                    {
-                    }
-                #endif
+            <Workspace>
+            <Project Language="C#" CommonReferences="true" AssemblyName="Proj1" PreprocessorSymbols="GOO,BAR">
+            <Document FilePath="SourceDocument"><![CDATA[
+            class C
+            {
+            #if GOO
+            class D
+            {
+            }
+            #endif
 
-                #if BAR
-                    void goo()
-                    {
-                        var x = new D($$
-                    }
-                #endif
-                }
-                ]]>
-                        </Document>
-                    </Project>
-                    <Project Language="C#" CommonReferences="true" AssemblyName="Proj2">
-                        <Document IsLinkFile="true" LinkAssemblyName="Proj1" LinkFilePath="SourceDocument" />
-                    </Project>
-                    <Project Language="C#" CommonReferences="true" AssemblyName="Proj3" PreprocessorSymbols="BAR">
-                        <Document IsLinkFile="true" LinkAssemblyName="Proj1" LinkFilePath="SourceDocument"/>
-                    </Project>
-                </Workspace>
-                """;
+            #if BAR
+            void goo()
+            {
+            var x = new D($$
+            }
+            #endif
+            }
+            ]]>
+            </Document>
+            </Project>
+            <Project Language="C#" CommonReferences="true" AssemblyName="Proj2">
+            <Document IsLinkFile="true" LinkAssemblyName="Proj1" LinkFilePath="SourceDocument" />
+            </Project>
+            <Project Language="C#" CommonReferences="true" AssemblyName="Proj3" PreprocessorSymbols="BAR">
+            <Document IsLinkFile="true" LinkAssemblyName="Proj1" LinkFilePath="SourceDocument"/>
+            </Project>
+            </Workspace>
+            """;
 
             var expectedDescription = new SignatureHelpTestItem(
                 $"D()\r\n\r\n{string.Format(FeaturesResources._0_1, "Proj1", FeaturesResources.Available)}\r\n{string.Format(FeaturesResources._0_1, "Proj3", FeaturesResources.Not_Available)}\r\n\r\n{FeaturesResources.You_can_use_the_navigation_bar_to_switch_contexts}",
@@ -846,8 +846,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task InvokedWithNoToken()
         {
             var markup = """
-                // new goo($$
-                """;
+            // new goo($$
+            """;
 
             await TestAsync(markup);
         }
@@ -856,14 +856,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task TestSigHelpInIncorrectObjectCreationExpression()
         {
             var markup = """
-                class C
-                {
-                    void goo(C c)
-                    {
-                        goo([|new C{$$|]
-                    }
-                }
-                """;
+            class C
+            {
+            void goo(C c)
+            {
+            goo([|new C{$$|]
+            }
+            }
+            """;
 
             await TestAsync(markup);
         }
@@ -872,16 +872,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task TypingTupleDoesNotDismiss1()
         {
             var markup = """
-                class C
-                {
-                    public C(object o) { }
-                    public C M()
-                    {
-                        return [|new C(($$)
-                    |]}
+            class C
+            {
+            public C(object o) { }
+            public C M()
+            {
+            return [|new C(($$)
+            |]}
 
-                }
-                """;
+            }
+            """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
             expectedOrderedItems.Add(
@@ -895,16 +895,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task TypingTupleDoesNotDismiss2()
         {
             var markup = """
-                class C
-                {
-                    public C(object o) { }
-                    public C M()
-                    {
-                        return [|new C((1,$$)
-                    |]}
+            class C
+            {
+            public C(object o) { }
+            public C M()
+            {
+            return [|new C((1,$$)
+            |]}
 
-                }
-                """;
+            }
+            """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
             expectedOrderedItems.Add(
@@ -918,16 +918,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task TypingTupleDoesNotDismiss3()
         {
             var markup = """
-                class C
-                {
-                    public C(object o) { }
-                    public C M()
-                    {
-                        return [|new C((1, ($$)
-                    |]}
+            class C
+            {
+            public C(object o) { }
+            public C M()
+            {
+            return [|new C((1, ($$)
+            |]}
 
-                }
-                """;
+            }
+            """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
             expectedOrderedItems.Add(
@@ -941,16 +941,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         public async Task TypingTupleDoesNotDismiss4()
         {
             var markup = """
-                class C
-                {
-                    public C(object o) { }
-                    public C M()
-                    {
-                        return [|new C((1, (2,$$)
-                    |]}
+            class C
+            {
+            public C(object o) { }
+            public C M()
+            {
+            return [|new C((1, (2,$$)
+            |]}
 
-                }
-                """;
+            }
+            """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>();
             expectedOrderedItems.Add(
@@ -982,16 +982,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         )
         {
             var markup = """
-                class Program
-                {
-                    static void M()
-                    {
-                        [|new Program(ARGUMENTS|]);
-                    }
-                    Program(int i, string s) { }
-                    Program(string s, string s2) { }
-                }
-                """;
+            class Program
+            {
+            static void M()
+            {
+            [|new Program(ARGUMENTS|]);
+            }
+            Program(int i, string s) { }
+            Program(string s, string s2) { }
+            }
+            """;
 
             var index = 0;
             var expectedOrderedItems = new List<SignatureHelpTestItem>
@@ -1023,16 +1023,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
         )
         {
             var markup = """
-                class Program
-                {
-                    void M()
-                    {
-                        [|new Program(ARGUMENTS|]);
-                    }
-                    Program(int i, string s) { }
-                    Program(string s, string s2) { }
-                }
-                """;
+            class Program
+            {
+            void M()
+            {
+            [|new Program(ARGUMENTS|]);
+            }
+            Program(int i, string s) { }
+            Program(string s, string s2) { }
+            }
+            """;
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>
             {

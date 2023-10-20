@@ -91,7 +91,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UpgradeProject
                 """
                 class C
                 {
-                    object F = [|null!|];
+                object F = [|null!|];
                 }
                 """,
                 LanguageVersion.CSharp8,
@@ -106,7 +106,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UpgradeProject
                 """
                 class C
                 {
-                    object F = [|null!|];
+                object F = [|null!|];
                 }
                 """,
                 LanguageVersion.CSharp8,
@@ -121,10 +121,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UpgradeProject
                 """
                 class Program
                 {
-                    void A()
-                    {
-                        var x = [|(1, 2)|];
-                    }
+                void A()
+                {
+                var x = [|(1, 2)|];
+                }
                 }
                 """,
                 LanguageVersion.CSharp7,
@@ -139,10 +139,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UpgradeProject
                 """
                 class Program
                 {
-                    void A()
-                    {
-                        var x = [|nameof(A)|];
-                    }
+                void A()
+                {
+                var x = [|nameof(A)|];
+                }
                 }
                 """,
                 LanguageVersion.CSharp6,
@@ -157,10 +157,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UpgradeProject
                 """
                 class Program
                 {
-                    void A()
-                    {
-                        Func<int, Task<int>> f = [|async|] x => x;
-                    }
+                void A()
+                {
+                Func<int, Task<int>> f = [|async|] x => x;
+                }
                 }
                 """,
                 LanguageVersion.CSharp5,
@@ -189,27 +189,27 @@ class Program
                 """
                 class Program
                 {
-                    void M()
-                    {
-                        int b = 2;
-                        var t = (1, b);
-                        System.Console.Write(t.[|b|]);
-                    }
+                void M()
+                {
+                int b = 2;
+                var t = (1, b);
+                System.Console.Write(t.[|b|]);
+                }
                 }
 
                 namespace System
                 {
-                    public struct ValueTuple<T1, T2>
-                    {
-                        public T1 Item1;
-                        public T2 Item2;
+                public struct ValueTuple<T1, T2>
+                {
+                public T1 Item1;
+                public T2 Item2;
 
-                        public ValueTuple(T1 item1, T2 item2)
-                        {
-                            this.Item1 = item1;
-                            this.Item2 = item2;
-                        }
-                    }
+                public ValueTuple(T1 item1, T2 item2)
+                {
+                this.Item1 = item1;
+                this.Item2 = item2;
+                }
+                }
                 }
                 """,
                 LanguageVersion.CSharp7_1,
@@ -253,10 +253,10 @@ class Program
                 """
                 class Program
                 {
-                    void M()
-                    {
-                        [|M2(a: 1, 2);|]
-                    }
+                void M()
+                {
+                [|M2(a: 1, 2);|]
+                }
                 }
                 """,
                 LanguageVersion.CSharp7_2,
@@ -273,10 +273,10 @@ class Program
                 public class Derived : Base { }
                 public class Program
                 {
-                    public static void M<T>(T x) where T: Base
-                    {
-                        System.Console.Write(x is [|Derived|] b0);
-                    }
+                public static void M<T>(T x) where T: Base
+                {
+                System.Console.Write(x is [|Derived|] b0);
+                }
                 }
                 """,
                 LanguageVersion.CSharp7_1,
@@ -307,8 +307,8 @@ class Program
                 class A : System.Attribute { }
                 class Program
                 {
-                    [|[field: A]|]
-                    int P { get; set; }
+                [|[field: A]|]
+                int P { get; set; }
                 }
                 """,
                 LanguageVersion.CSharp7_3,
@@ -395,10 +395,10 @@ class Program
                 """
                 class Program
                 {
-                    void A()
-                    {
-                        var x = [|@$"hello"|];
-                    }
+                void A()
+                {
+                var x = [|@$"hello"|];
+                }
                 }
                 """,
                 expected: LanguageVersion.CSharp8,
@@ -413,23 +413,23 @@ class Program
             await TestLanguageVersionUpgradedAsync(
                 """
                 <Workspace>
-                    <Project Language="C#" LanguageVersion="6" CommonReferences="true">
-                        <Document>
+                <Project Language="C#" LanguageVersion="6" CommonReferences="true">
+                <Document>
                 class C
                 {
-                    void A()
-                    {
-                        var x = [|(1, 2)|];
-                    }
+                void A()
+                {
+                var x = [|(1, 2)|];
                 }
-                        </Document>
-                    </Project>
-                    <Project Language="C#" LanguageVersion="6" CommonReferences="true">
-                    </Project>
-                    <Project Language="C#" LanguageVersion="7" CommonReferences="true">
-                    </Project>
-                    <Project Language="Visual Basic">
-                    </Project>
+                }
+                </Document>
+                </Project>
+                <Project Language="C#" LanguageVersion="6" CommonReferences="true">
+                </Project>
+                <Project Language="C#" LanguageVersion="7" CommonReferences="true">
+                </Project>
+                <Project Language="Visual Basic">
+                </Project>
                 </Workspace>
                 """,
                 LanguageVersion.CSharp7,
@@ -444,20 +444,20 @@ class Program
             await TestLanguageVersionUpgradedAsync(
                 """
                 <Workspace>
-                    <Project Language="C#" LanguageVersion="6" CommonReferences="true">
-                        <Document>
+                <Project Language="C#" LanguageVersion="6" CommonReferences="true">
+                <Document>
                 class C
                 {
-                    object F = [|null!|];
+                object F = [|null!|];
                 }
-                        </Document>
-                    </Project>
-                    <Project Language="C#" LanguageVersion="6" CommonReferences="true">
-                    </Project>
-                    <Project Language="C#" LanguageVersion="7" CommonReferences="true">
-                    </Project>
-                    <Project Language="Visual Basic" CommonReferences="true">
-                    </Project>
+                </Document>
+                </Project>
+                <Project Language="C#" LanguageVersion="6" CommonReferences="true">
+                </Project>
+                <Project Language="C#" LanguageVersion="7" CommonReferences="true">
+                </Project>
+                <Project Language="Visual Basic" CommonReferences="true">
+                </Project>
                 </Workspace>
                 """,
                 LanguageVersion.CSharp8,
@@ -472,24 +472,24 @@ class Program
             await TestLanguageVersionUpgradedAsync(
                 """
                 <Workspace>
-                    <Project Language="C#" LanguageVersion="6" CommonReferences="True">
-                        <Document>
+                <Project Language="C#" LanguageVersion="6" CommonReferences="True">
+                <Document>
                 class C
                 {
-                    void A(string[|?|] s)
-                    {
-                    }
+                void A(string[|?|] s)
+                {
                 }
-                        </Document>
-                    </Project>
-                    <Project Language="C#" LanguageVersion="6">
-                    </Project>
-                    <Project Language="C#" LanguageVersion="7">
-                    </Project>
-                    <Project Language="C#" LanguageVersion="8">
-                    </Project>
-                    <Project Language="Visual Basic">
-                    </Project>
+                }
+                </Document>
+                </Project>
+                <Project Language="C#" LanguageVersion="6">
+                </Project>
+                <Project Language="C#" LanguageVersion="7">
+                </Project>
+                <Project Language="C#" LanguageVersion="8">
+                </Project>
+                <Project Language="Visual Basic">
+                </Project>
                 </Workspace>
                 """,
                 LanguageVersion.CSharp8,
@@ -504,19 +504,19 @@ class Program
             await TestLanguageVersionUpgradedAsync(
                 """
                 <Workspace>
-                    <Project Language="C#" LanguageVersion="6" CommonReferences="true">
-                        <Document>
+                <Project Language="C#" LanguageVersion="6" CommonReferences="true">
+                <Document>
                 [|System.Console.WriteLine();|]
-                        </Document>
-                    </Project>
-                    <Project Language="C#" LanguageVersion="6" CommonReferences="true">
-                    </Project>
-                    <Project Language="C#" LanguageVersion="7" CommonReferences="true">
-                    </Project>
-                    <Project Language="C#" LanguageVersion="8" CommonReferences="true">
-                    </Project>
-                    <Project Language="Visual Basic" CommonReferences="true">
-                    </Project>
+                </Document>
+                </Project>
+                <Project Language="C#" LanguageVersion="6" CommonReferences="true">
+                </Project>
+                <Project Language="C#" LanguageVersion="7" CommonReferences="true">
+                </Project>
+                <Project Language="C#" LanguageVersion="8" CommonReferences="true">
+                </Project>
+                <Project Language="Visual Basic" CommonReferences="true">
+                </Project>
                 </Workspace>
                 """,
                 LanguageVersion.CSharp9,
@@ -531,21 +531,21 @@ class Program
             await TestExactActionSetOfferedAsync(
                 """
                 <Workspace>
-                    <Project Language="C#" LanguageVersion="6" CommonReferences="true">
-                        <Document>
+                <Project Language="C#" LanguageVersion="6" CommonReferences="true">
+                <Document>
                 class C
                 {
-                    void A()
-                    {
-                        var x = [|(1, 2)|];
-                    }
+                void A()
+                {
+                var x = [|(1, 2)|];
                 }
-                        </Document>
-                    </Project>
-                    <Project Language="C#" LanguageVersion="7" CommonReferences="true">
-                    </Project>
-                    <Project Language="C#" LanguageVersion="6" CommonReferences="true">
-                    </Project>
+                }
+                </Document>
+                </Project>
+                <Project Language="C#" LanguageVersion="7" CommonReferences="true">
+                </Project>
+                <Project Language="C#" LanguageVersion="6" CommonReferences="true">
+                </Project>
                 </Workspace>
                 """,
                 new[]
@@ -568,21 +568,21 @@ class Program
             await TestExactActionSetOfferedAsync(
                 """
                 <Workspace>
-                    <Project Language="C#" LanguageVersion="6">
-                        <Document>
+                <Project Language="C#" LanguageVersion="6">
+                <Document>
                 class C
                 {
-                    void A()
-                    {
+                void A()
+                {
                 #error version:[|8|]
-                    }
                 }
-                        </Document>
-                    </Project>
-                    <Project Language="C#" LanguageVersion="7">
-                    </Project>
-                    <Project Language="C#" LanguageVersion="8">
-                    </Project>
+                }
+                </Document>
+                </Project>
+                <Project Language="C#" LanguageVersion="7">
+                </Project>
+                <Project Language="C#" LanguageVersion="8">
+                </Project>
                 </Workspace>
                 """,
                 new[]
@@ -605,19 +605,19 @@ class Program
             await TestExactActionSetOfferedAsync(
                 """
                 <Workspace>
-                    <Project Language="C#" LanguageVersion="6" CommonReferences="true">
-                        <Document>
+                <Project Language="C#" LanguageVersion="6" CommonReferences="true">
+                <Document>
                 class C
                 {
-                    void A()
-                    {
-                        var x = [|(1, 2)|];
-                    }
+                void A()
+                {
+                var x = [|(1, 2)|];
                 }
-                        </Document>
-                    </Project>
-                    <Project Language="Visual Basic" CommonReferences="true">
-                    </Project>
+                }
+                </Document>
+                </Project>
+                <Project Language="Visual Basic" CommonReferences="true">
+                </Project>
                 </Workspace>
                 """,
                 new[]
@@ -636,21 +636,21 @@ class Program
             await TestExactActionSetOfferedAsync(
                 """
                 <Workspace>
-                    <Project Language="C#" LanguageVersion="6" CommonReferences="true">
-                        <Document>
+                <Project Language="C#" LanguageVersion="6" CommonReferences="true">
+                <Document>
                 class C
                 {
-                    void A()
-                    {
-                        var x = [|(1, 2)|];
-                    }
+                void A()
+                {
+                var x = [|(1, 2)|];
                 }
-                        </Document>
-                    </Project>
-                    <Project Language="C#" LanguageVersion="7" CommonReferences="true">
-                    </Project>
-                    <Project Language="Visual Basic" CommonReferences="true">
-                    </Project>
+                }
+                </Document>
+                </Project>
+                <Project Language="C#" LanguageVersion="7" CommonReferences="true">
+                </Project>
+                <Project Language="Visual Basic" CommonReferences="true">
+                </Project>
                 </Workspace>
                 """,
                 new[]
@@ -708,18 +708,18 @@ class C
             await TestExactActionSetOfferedAsync(
                 """
                 <Workspace>
-                    <Project Language="C#" LanguageVersion="6" CommonReferences="true">
-                        <Document>
+                <Project Language="C#" LanguageVersion="6" CommonReferences="true">
+                <Document>
                 class C
                 {
-                    object F = [|null!|];
+                object F = [|null!|];
                 }
-                        </Document>
-                    </Project>
-                    <Project Language="C#" LanguageVersion="8" CommonReferences="true">
-                    </Project>
-                    <Project Language="Visual Basic" CommonReferences="true">
-                    </Project>
+                </Document>
+                </Project>
+                <Project Language="C#" LanguageVersion="8" CommonReferences="true">
+                </Project>
+                <Project Language="Visual Basic" CommonReferences="true">
+                </Project>
                 </Workspace>
                 """,
                 new[]
@@ -779,7 +779,7 @@ class C
                 #nullable enable
                 class C<T>
                 {
-                    static void F([|T?|] t) { }
+                static void F([|T?|] t) { }
                 }
                 """,
                 LanguageVersion.CSharp9,
@@ -807,14 +807,14 @@ class C
             await TestExactActionSetOfferedAsync(
                 """
                 <Workspace>
-                    <Project Language="C#" LanguageVersion="7">
-                        <Document>
+                <Project Language="C#" LanguageVersion="7">
+                <Document>
                 interface unmanaged { }
                 class Test&lt;T&gt; where T : [|unmanaged|]
                 {
                 }
-                        </Document>
-                    </Project>
+                </Document>
+                </Project>
                 </Workspace>
                 """,
                 expectedActionSet: Enumerable.Empty<string>()
@@ -828,7 +828,7 @@ class C
                 """
                 class Test
                 {
-                    public void M<T>() where T : [|unmanaged|] { }
+                public void M<T>() where T : [|unmanaged|] { }
                 }
                 """,
                 LanguageVersion.CSharp7_3,
@@ -842,15 +842,15 @@ class C
             await TestExactActionSetOfferedAsync(
                 """
                 <Workspace>
-                    <Project Language="C#" LanguageVersion="7">
-                        <Document>
+                <Project Language="C#" LanguageVersion="7">
+                <Document>
                 interface unmanaged { }
                 class Test
                 {
-                    public void M&lt;T&gt;() where T : [|unmanaged|] { }
+                public void M&lt;T&gt;() where T : [|unmanaged|] { }
                 }
-                        </Document>
-                    </Project>
+                </Document>
+                </Project>
                 </Workspace>
                 """,
                 expectedActionSet: Enumerable.Empty<string>()
@@ -873,12 +873,12 @@ class C
             await TestExactActionSetOfferedAsync(
                 """
                 <Workspace>
-                    <Project Language="C#" LanguageVersion="7">
-                        <Document>
+                <Project Language="C#" LanguageVersion="7">
+                <Document>
                 interface unmanaged { }
                 delegate void D&lt;T&gt;() where T : [| unmanaged |];
-                        </Document>
-                    </Project>
+                </Document>
+                </Project>
                 </Workspace>
                 """,
                 expectedActionSet: Enumerable.Empty<string>()
@@ -892,10 +892,10 @@ class C
                 """
                 class Test
                 {
-                    public void N()
-                    {
-                        void M<T>() where T : [|unmanaged|] { }
-                    }
+                public void N()
+                {
+                void M<T>() where T : [|unmanaged|] { }
+                }
                 }
                 """,
                 LanguageVersion.CSharp7_3,
@@ -909,18 +909,18 @@ class C
             await TestExactActionSetOfferedAsync(
                 """
                 <Workspace>
-                    <Project Language="C#" LanguageVersion="7">
-                        <Document>
+                <Project Language="C#" LanguageVersion="7">
+                <Document>
                 interface unmanaged { }
                 class Test
                 {
-                    public void N()
-                    {
-                        void M&lt;T&gt;() where T : [|unmanaged|] { }
-                    }
+                public void N()
+                {
+                void M&lt;T&gt;() where T : [|unmanaged|] { }
                 }
-                        </Document>
-                    </Project>
+                }
+                </Document>
+                </Project>
                 </Workspace>
                 """,
                 expectedActionSet: Enumerable.Empty<string>()
@@ -934,7 +934,7 @@ class C
                 """
                 public interface I1
                 {
-                    public void [|M01|]();
+                public void [|M01|]();
                 }
                 """,
                 expected: LanguageVersion.CSharp8,
@@ -948,23 +948,23 @@ class C
             await TestLanguageVersionNotUpgradedAsync(
                 """
                 <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                        <ProjectReference>Assembly2</ProjectReference>
-                        <Document FilePath="Test1.cs">
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <ProjectReference>Assembly2</ProjectReference>
+                <Document FilePath="Test1.cs">
                 class Test1 : [|I1|]
                 {}
-                        </Document>
-                    </Project>
-                    <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true" LanguageVersion="Preview">
-                        <Document FilePath="Test2.cs">
+                </Document>
+                </Project>
+                <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true" LanguageVersion="Preview">
+                <Document FilePath="Test2.cs">
                 public interface I1
                 {
-                    void M1() 
-                    {
-                    }
+                void M1()
+                {
                 }
-                        </Document>
-                    </Project>
+                }
+                </Document>
+                </Project>
                 </Workspace>
                 """,
                 new CSharpParseOptions(LanguageVersion.CSharp7_3)
@@ -978,7 +978,7 @@ class C
                 """
                 class Test
                 {
-                    bool M<T>(T t) => t is [|null|];
+                bool M<T>(T t) => t is [|null|];
                 }
                 """,
                 LanguageVersion.CSharp8,
@@ -993,7 +993,7 @@ class C
                 """
                 class Test
                 {
-                    bool M<T>(T t) => t is [|100|];
+                bool M<T>(T t) => t is [|100|];
                 }
                 """,
                 LanguageVersion.CSharp8,
@@ -1008,7 +1008,7 @@ class C
                 """
                 class Test
                 {
-                    bool M<T>(T t) => t is [|"frog"|];
+                bool M<T>(T t) => t is [|"frog"|];
                 }
                 """,
                 LanguageVersion.CSharp8,
@@ -1036,14 +1036,14 @@ class C
             await TestExactActionSetOfferedAsync(
                 """
                 <Workspace>
-                    <Project Language="C#" LanguageVersion="7.3">
-                        <Document>
+                <Project Language="C#" LanguageVersion="7.3">
+                <Document>
                 interface notnull { }
                 class Test&lt;T&gt; where T : [|notnull|]
                 {
                 }
-                        </Document>
-                    </Project>
+                </Document>
+                </Project>
                 </Workspace>
                 """,
                 expectedActionSet: Enumerable.Empty<string>()
@@ -1057,7 +1057,7 @@ class C
                 """
                 class Test
                 {
-                    public void M<T>() where T : [|notnull|] { }
+                public void M<T>() where T : [|notnull|] { }
                 }
                 """,
                 LanguageVersion.CSharp8,
@@ -1071,15 +1071,15 @@ class C
             await TestExactActionSetOfferedAsync(
                 """
                 <Workspace>
-                    <Project Language="C#" LanguageVersion="7.3">
-                        <Document>
+                <Project Language="C#" LanguageVersion="7.3">
+                <Document>
                 interface notnull { }
                 class Test
                 {
-                    public void M&lt;T&gt;() where T : [|notnull|] { }
+                public void M&lt;T&gt;() where T : [|notnull|] { }
                 }
-                        </Document>
-                    </Project>
+                </Document>
+                </Project>
                 </Workspace>
                 """,
                 expectedActionSet: Enumerable.Empty<string>()
@@ -1102,12 +1102,12 @@ class C
             await TestExactActionSetOfferedAsync(
                 """
                 <Workspace>
-                    <Project Language="C#" LanguageVersion="7.3">
-                        <Document>
+                <Project Language="C#" LanguageVersion="7.3">
+                <Document>
                 interface notnull { }
                 delegate void D&lt;T&gt;() where T : [| notnull |];
-                        </Document>
-                    </Project>
+                </Document>
+                </Project>
                 </Workspace>
                 """,
                 expectedActionSet: Enumerable.Empty<string>()
@@ -1121,10 +1121,10 @@ class C
                 """
                 class Test
                 {
-                    public void N()
-                    {
-                        void M<T>() where T : [|notnull|] { }
-                    }
+                public void N()
+                {
+                void M<T>() where T : [|notnull|] { }
+                }
                 }
                 """,
                 LanguageVersion.CSharp8,
@@ -1138,18 +1138,18 @@ class C
             await TestExactActionSetOfferedAsync(
                 """
                 <Workspace>
-                    <Project Language="C#" LanguageVersion="7.3">
-                        <Document>
+                <Project Language="C#" LanguageVersion="7.3">
+                <Document>
                 interface notnull { }
                 class Test
                 {
-                    public void N()
-                    {
-                        void M&lt;T&gt;() where T : [|notnull|] { }
-                    }
+                public void N()
+                {
+                void M&lt;T&gt;() where T : [|notnull|] { }
                 }
-                        </Document>
-                    </Project>
+                }
+                </Document>
+                </Project>
                 </Workspace>
                 """,
                 expectedActionSet: Enumerable.Empty<string>()
@@ -1163,7 +1163,7 @@ class C
                 """
                 interface I2<out T1>
                 {
-                    static T1 M1([|T1|] x) => x;
+                static T1 M1([|T1|] x) => x;
                 }
                 """,
                 expected: LanguageVersion.CSharp9,
@@ -1177,20 +1177,20 @@ class C
             await TestLanguageVersionUpgradedAsync(
                 """
                 <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true" LanguageVersion="9">
-                        <ProjectReference>Assembly2</ProjectReference>
-                        <Document FilePath="Derived.cs">
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true" LanguageVersion="9">
+                <ProjectReference>Assembly2</ProjectReference>
+                <Document FilePath="Derived.cs">
                 record [|Derived|] : Base;
-                        </Document>
-                    </Project>
-                    <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true" LanguageVersion="10">
-                        <Document FilePath="Base.cs">
+                </Document>
+                </Project>
+                <Project Language="C#" AssemblyName="Assembly2" CommonReferences="true" LanguageVersion="10">
+                <Document FilePath="Base.cs">
                 public record Base
                 {
-                    public sealed override string ToString() => throw null;
+                public sealed override string ToString() => throw null;
                 }
-                        </Document>
-                    </Project>
+                </Document>
+                </Project>
                 </Workspace>
                 """,
                 expected: LanguageVersion.CSharp10,
@@ -1271,7 +1271,7 @@ enum Program[|;|]",
                 """
                 class Test
                 {
-                    Test t = [|new()|];
+                Test t = [|new()|];
                 }
                 """,
                 LanguageVersion.CSharp9,
@@ -1298,12 +1298,12 @@ enum Program[|;|]",
                 """
                 public interface I1
                 {
-                    protected void M01();
+                protected void M01();
                 }
 
                 class C1 : I1
                 {
-                    public void [|M01|]() {}
+                public void [|M01|]() {}
                 }
                 """,
                 expected: LanguageVersion.CSharp10,
@@ -1318,10 +1318,10 @@ enum Program[|;|]",
                 """
                 class C
                 {
-                    void M(bool b)
-                    {
-                        int? i = [|b ? 1 : null|];
-                    }
+                void M(bool b)
+                {
+                int? i = [|b ? 1 : null|];
+                }
                 }
                 """,
                 expected: LanguageVersion.CSharp9,
@@ -1336,12 +1336,12 @@ enum Program[|;|]",
                 """
                 class Test
                 {
-                    void M()
-                    {
-                        var v = $"x{
-                                    1 + 1
-                                 [|}|]y";
-                    }
+                void M()
+                {
+                var v = $"x{
+                1 + 1
+                [|}|]y";
+                }
                 }
                 """,
                 expected: LanguageVersion.CSharp11,
@@ -1356,8 +1356,8 @@ enum Program[|;|]",
                 """
                 struct Test
                 {
-                    public int X;
-                    public [|Test|]() { }
+                public int X;
+                public [|Test|]() { }
                 }
                 """,
                 expected: LanguageVersion.CSharp11,
@@ -1372,8 +1372,8 @@ enum Program[|;|]",
                 """
                 struct Test
                 {
-                    public int X;
-                    public [|Test|]() { this.ToString(); }
+                public int X;
+                public [|Test|]() { this.ToString(); }
                 }
                 """,
                 expected: LanguageVersion.CSharp11,
@@ -1388,8 +1388,8 @@ enum Program[|;|]",
                 """
                 struct Test
                 {
-                    public int X { get; set; }
-                    public [|Test|]() { this.ToString(); }
+                public int X { get; set; }
+                public [|Test|]() { this.ToString(); }
                 }
                 """,
                 expected: LanguageVersion.CSharp11,
@@ -1404,11 +1404,11 @@ enum Program[|;|]",
                 """
                 class C
                 {
-                    void M1(in int x) { }
-                    void M2(ref int y)
-                    {
-                        M1(ref [|y|]);
-                    }
+                void M1(in int x) { }
+                void M2(ref int y)
+                {
+                M1(ref [|y|]);
+                }
                 }
                 """,
                 expected: LanguageVersion.CSharp12,

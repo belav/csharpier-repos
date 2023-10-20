@@ -18,10 +18,10 @@ public class ComplexTypeBulkUpdatesSqlServerTest
 
         AssertSql(
             """
-DELETE FROM [c]
-FROM [Customer] AS [c]
-WHERE [c].[Name] = N'Monty Elias'
-"""
+            DELETE FROM [c]
+            FROM [Customer] AS [c]
+            WHERE [c].[Name] = N'Monty Elias'
+            """
         );
     }
 
@@ -38,11 +38,11 @@ WHERE [c].[Name] = N'Monty Elias'
 
         AssertExecuteUpdateSql(
             """
-UPDATE [c]
-SET [c].[ShippingAddress_ZipCode] = 12345
-FROM [Customer] AS [c]
-WHERE [c].[ShippingAddress_ZipCode] = 7728
-"""
+            UPDATE [c]
+            SET [c].[ShippingAddress_ZipCode] = 12345
+            FROM [Customer] AS [c]
+            WHERE [c].[ShippingAddress_ZipCode] = 7728
+            """
         );
     }
 
@@ -52,11 +52,11 @@ WHERE [c].[ShippingAddress_ZipCode] = 7728
 
         AssertExecuteUpdateSql(
             """
-UPDATE [c]
-SET [c].[ShippingAddress_Country_FullName] = N'United States Modified'
-FROM [Customer] AS [c]
-WHERE [c].[ShippingAddress_Country_Code] = N'US'
-"""
+            UPDATE [c]
+            SET [c].[ShippingAddress_Country_FullName] = N'United States Modified'
+            FROM [Customer] AS [c]
+            WHERE [c].[ShippingAddress_Country_Code] = N'US'
+            """
         );
     }
 
@@ -70,13 +70,13 @@ WHERE [c].[ShippingAddress_Country_Code] = N'US'
 
         AssertExecuteUpdateSql(
             """
-UPDATE [c]
-SET [c].[BillingAddress_ZipCode] = 54321,
-    [c].[ShippingAddress_ZipCode] = [c].[BillingAddress_ZipCode],
-    [c].[Name] = [c].[Name] + N'Modified'
-FROM [Customer] AS [c]
-WHERE [c].[ShippingAddress_ZipCode] = 7728
-"""
+            UPDATE [c]
+            SET [c].[BillingAddress_ZipCode] = 54321,
+            [c].[ShippingAddress_ZipCode] = [c].[BillingAddress_ZipCode],
+            [c].[Name] = [c].[Name] + N'Modified'
+            FROM [Customer] AS [c]
+            WHERE [c].[ShippingAddress_ZipCode] = 7728
+            """
         );
     }
 
@@ -86,10 +86,10 @@ WHERE [c].[ShippingAddress_ZipCode] = 7728
 
         AssertExecuteUpdateSql(
             """
-UPDATE [c]
-SET [c].[ShippingAddress_ZipCode] = 12345
-FROM [Customer] AS [c]
-"""
+            UPDATE [c]
+            SET [c].[ShippingAddress_ZipCode] = 12345
+            FROM [Customer] AS [c]
+            """
         );
     }
 
@@ -101,11 +101,11 @@ FROM [Customer] AS [c]
 
         AssertExecuteUpdateSql(
             """
-UPDATE [c]
-SET [c].[BillingAddress_ZipCode] = 54321,
-    [c].[ShippingAddress_ZipCode] = [c].[BillingAddress_ZipCode]
-FROM [Customer] AS [c]
-"""
+            UPDATE [c]
+            SET [c].[BillingAddress_ZipCode] = 54321,
+            [c].[ShippingAddress_ZipCode] = [c].[BillingAddress_ZipCode]
+            FROM [Customer] AS [c]
+            """
         );
     }
 

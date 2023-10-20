@@ -4528,21 +4528,21 @@ End Class";
                 (language == LanguageNames.CSharp)
                     ? CS.SyntaxFactory.ParseCompilationUnit(
                         """
-                #define X
-                #if X
-                class NewType {}
-                #endif
-                """
+                        #define X
+                        #if X
+                        class NewType {}
+                        #endif
+                        """
                     )
                     : (SyntaxNode)
                         VB.SyntaxFactory.ParseCompilationUnit(
                             """
-                #Define X
-                #If X
-                Class C
-                End Class
-                #End If
-                """
+                            #Define X
+                            #If X
+                            Class C
+                            End Class
+                            #End If
+                            """
                         );
 
             Assert.True(newRoot.ContainsDirectives);

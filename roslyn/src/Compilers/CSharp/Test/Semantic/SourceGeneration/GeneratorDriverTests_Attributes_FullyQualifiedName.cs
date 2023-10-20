@@ -2068,15 +2068,15 @@ class YAttribute : System.Attribute { }
         var parseOptions = TestOptions.RegularPreview;
 
         var source1 = """
-            [Generate]
-            [System.Obsolete]
-            public partial class Class1 { }
-            """;
+        [Generate]
+        [System.Obsolete]
+        public partial class Class1 { }
+        """;
         var source2 = """
-            [Generate]
-            [System.Obsolete]
-            public partial class Class2 { }
-            """;
+        [Generate]
+        [System.Obsolete]
+        public partial class Class2 { }
+        """;
 
         Compilation compilation = CreateCompilation(
             new[] { source1, source2 },

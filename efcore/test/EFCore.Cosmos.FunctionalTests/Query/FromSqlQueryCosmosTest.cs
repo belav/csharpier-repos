@@ -40,11 +40,11 @@ public class FromSqlQueryCosmosTest
 
         AssertSql(
             """
-SELECT c
-FROM (
-    SELECT * FROM root c WHERE c["Discriminator"] = "Customer" AND c["ContactName"] LIKE '%z%'
-) c
-"""
+            SELECT c
+            FROM (
+            SELECT * FROM root c WHERE c["Discriminator"] = "Customer" AND c["ContactName"] LIKE '%z%'
+            ) c
+            """
         );
     }
 
@@ -88,11 +88,11 @@ FROM (
 
         AssertSql(
             """
-SELECT c
-FROM (
-    SELECT c["id"], c["Discriminator"], c["Region"], c["PostalCode"], c["Phone"], c["Fax"], c["CustomerID"], c["Country"], c["ContactTitle"], c["ContactName"], c["CompanyName"], c["City"], c["Address"] FROM root c WHERE c["Discriminator"] = "Customer"
-) c
-"""
+            SELECT c
+            FROM (
+            SELECT c["id"], c["Discriminator"], c["Region"], c["PostalCode"], c["Phone"], c["Fax"], c["CustomerID"], c["Country"], c["ContactTitle"], c["ContactName"], c["CompanyName"], c["City"], c["Address"] FROM root c WHERE c["Discriminator"] = "Customer"
+            ) c
+            """
         );
     }
 
@@ -114,11 +114,11 @@ FROM (
 
         AssertSql(
             """
-SELECT c
-FROM (
-    SELECT c["id"], c["Discriminator"], c["Region"], c["PostalCode"], c["PostalCode"] AS Foo, c["Phone"], c["Fax"], c["CustomerID"], c["Country"], c["ContactTitle"], c["ContactName"], c["CompanyName"], c["City"], c["Address"] FROM root c WHERE c["Discriminator"] = "Customer"
-) c
-"""
+            SELECT c
+            FROM (
+            SELECT c["id"], c["Discriminator"], c["Region"], c["PostalCode"], c["PostalCode"] AS Foo, c["Phone"], c["Fax"], c["CustomerID"], c["Country"], c["ContactTitle"], c["ContactName"], c["CompanyName"], c["City"], c["Address"] FROM root c WHERE c["Discriminator"] = "Customer"
+            ) c
+            """
         );
     }
 
@@ -141,12 +141,12 @@ FROM (
 
         AssertSql(
             """
-SELECT c
-FROM (
-    SELECT * FROM root c WHERE c["Discriminator"] = "Customer"
-) c
-WHERE CONTAINS(c["ContactName"], "z")
-"""
+            SELECT c
+            FROM (
+            SELECT * FROM root c WHERE c["Discriminator"] = "Customer"
+            ) c
+            WHERE CONTAINS(c["ContactName"], "z")
+            """
         );
     }
 
@@ -233,12 +233,12 @@ WHERE CONTAINS(c[""ContactName""], ""z"")"
 
         AssertSql(
             """
-SELECT c
-FROM (
-    SELECT * FROM root c WHERE c["Discriminator"] = "Customer"
-) c
-WHERE CONTAINS(c["ContactName"], "z")
-"""
+            SELECT c
+            FROM (
+            SELECT * FROM root c WHERE c["Discriminator"] = "Customer"
+            ) c
+            WHERE CONTAINS(c["ContactName"], "z")
+            """
         );
     }
 
@@ -289,12 +289,12 @@ WHERE CONTAINS(c["ContactName"], "z")
 
         AssertSql(
             """
-SELECT c
-FROM (
-    SELECT * FROM root c WHERE c["Discriminator"] = "Customer" AND c["CustomerID"] = "CONSH"
-) c
-WHERE CONTAINS(c["ContactName"], "z")
-"""
+            SELECT c
+            FROM (
+            SELECT * FROM root c WHERE c["Discriminator"] = "Customer" AND c["CustomerID"] = "CONSH"
+            ) c
+            WHERE CONTAINS(c["ContactName"], "z")
+            """
         );
     }
 
@@ -307,10 +307,10 @@ WHERE CONTAINS(c["ContactName"], "z")
             .Set<Customer>()
             .FromSqlRaw(
                 """
-SELECT *
-FROM root c
-WHERE c["Discriminator"] = "Customer" AND c["City"] = 'London'
-"""
+                SELECT *
+                FROM root c
+                WHERE c["Discriminator"] = "Customer" AND c["City"] = 'London'
+                """
             );
 
         var actual = async ? await query.ToArrayAsync() : query.ToArray();
@@ -320,13 +320,13 @@ WHERE c["Discriminator"] = "Customer" AND c["City"] = 'London'
 
         AssertSql(
             """
-SELECT c
-FROM (
-    SELECT *
-    FROM root c
-    WHERE c["Discriminator"] = "Customer" AND c["City"] = 'London'
-) c
-"""
+            SELECT c
+            FROM (
+            SELECT *
+            FROM root c
+            WHERE c["Discriminator"] = "Customer" AND c["City"] = 'London'
+            ) c
+            """
         );
     }
 
@@ -339,10 +339,10 @@ FROM (
             .Set<Customer>()
             .FromSqlRaw(
                 """
-SELECT *
-FROM root c
-WHERE c["Discriminator"] = "Customer"
-"""
+                SELECT *
+                FROM root c
+                WHERE c["Discriminator"] = "Customer"
+                """
             )
             .Where(c => c.City == "London");
 
@@ -353,14 +353,14 @@ WHERE c["Discriminator"] = "Customer"
 
         AssertSql(
             """
-SELECT c
-FROM (
-    SELECT *
-    FROM root c
-    WHERE c["Discriminator"] = "Customer"
-) c
-WHERE (c["City"] = "London")
-"""
+            SELECT c
+            FROM (
+            SELECT *
+            FROM root c
+            WHERE c["Discriminator"] = "Customer"
+            ) c
+            WHERE (c["City"] = "London")
+            """
         );
     }
 
@@ -388,14 +388,14 @@ WHERE (c["City"] = "London")
 
         AssertSql(
             """
-@p0='London'
-@p1='Sales Representative'
+            @p0='London'
+            @p1='Sales Representative'
 
-SELECT c
-FROM (
-    SELECT * FROM root c WHERE c["Discriminator"] = "Customer" AND c["City"] = @p0 AND c["ContactTitle"] = @p1
-) c
-"""
+            SELECT c
+            FROM (
+            SELECT * FROM root c WHERE c["Discriminator"] = "Customer" AND c["City"] = @p0 AND c["ContactTitle"] = @p1
+            ) c
+            """
         );
     }
 
@@ -420,14 +420,14 @@ FROM (
 
         AssertSql(
             """
-@p0='London'
-@p1='Sales Representative'
+            @p0='London'
+            @p1='Sales Representative'
 
-SELECT c
-FROM (
-    SELECT * FROM root c WHERE c["Discriminator"] = "Customer" AND c["City"] = @p0 AND c["ContactTitle"] = @p1
-) c
-"""
+            SELECT c
+            FROM (
+            SELECT * FROM root c WHERE c["Discriminator"] = "Customer" AND c["City"] = @p0 AND c["ContactTitle"] = @p1
+            ) c
+            """
         );
     }
 
@@ -451,13 +451,13 @@ FROM (
 
         AssertSql(
             """
-@p0=null
+            @p0=null
 
-SELECT c
-FROM (
-    SELECT * FROM root c WHERE c["Discriminator"] = "Employee" AND c["ReportsTo"] = @p0 OR (IS_NULL(c["ReportsTo"]) AND IS_NULL(@p0))
-) c
-"""
+            SELECT c
+            FROM (
+            SELECT * FROM root c WHERE c["Discriminator"] = "Employee" AND c["ReportsTo"] = @p0 OR (IS_NULL(c["ReportsTo"]) AND IS_NULL(@p0))
+            ) c
+            """
         );
     }
 
@@ -486,15 +486,15 @@ FROM (
 
         AssertSql(
             """
-@p0='London'
-@__contactTitle_1='Sales Representative'
+            @p0='London'
+            @__contactTitle_1='Sales Representative'
 
-SELECT c
-FROM (
-    SELECT * FROM root c WHERE c["Discriminator"] = "Customer" AND c["City"] = @p0
-) c
-WHERE (c["ContactTitle"] = @__contactTitle_1)
-"""
+            SELECT c
+            FROM (
+            SELECT * FROM root c WHERE c["Discriminator"] = "Customer" AND c["City"] = @p0
+            ) c
+            WHERE (c["ContactTitle"] = @__contactTitle_1)
+            """
         );
     }
 
@@ -529,18 +529,18 @@ WHERE (c["ContactTitle"] = @__contactTitle_1)
 
         AssertSql(
             """
-SELECT c
-FROM (
-    SELECT * FROM root c WHERE c["Discriminator"] = "Customer" AND c["City"] = 'London'
-) c
-""",
+            SELECT c
+            FROM (
+            SELECT * FROM root c WHERE c["Discriminator"] = "Customer" AND c["City"] = 'London'
+            ) c
+            """,
             //
             """
-SELECT c
-FROM (
-    SELECT * FROM root c WHERE c["Discriminator"] = "Customer" AND c["City"] = 'Seattle'
-) c
-"""
+            SELECT c
+            FROM (
+            SELECT * FROM root c WHERE c["Discriminator"] = "Customer" AND c["City"] = 'Seattle'
+            ) c
+            """
         );
     }
 
@@ -577,24 +577,24 @@ FROM (
 
         AssertSql(
             """
-@p0='London'
-@p1='Sales Representative'
+            @p0='London'
+            @p1='Sales Representative'
 
-SELECT c
-FROM (
-    SELECT * FROM root c WHERE c["Discriminator"] = "Customer" AND c["City"] = @p0 AND c["ContactTitle"] = @p1
-) c
-""",
+            SELECT c
+            FROM (
+            SELECT * FROM root c WHERE c["Discriminator"] = "Customer" AND c["City"] = @p0 AND c["ContactTitle"] = @p1
+            ) c
+            """,
             //
             """
-@p0='Madrid'
-@p1='Accounting Manager'
+            @p0='Madrid'
+            @p1='Accounting Manager'
 
-SELECT c
-FROM (
-    SELECT * FROM root c WHERE c["Discriminator"] = "Customer" AND c["City"] = @p0 AND c["ContactTitle"] = @p1
-) c
-"""
+            SELECT c
+            FROM (
+            SELECT * FROM root c WHERE c["Discriminator"] = "Customer" AND c["City"] = @p0 AND c["ContactTitle"] = @p1
+            ) c
+            """
         );
     }
 
@@ -615,11 +615,11 @@ FROM (
 
         AssertSql(
             """
-SELECT c
-FROM (
-    SELECT * FROM root c WHERE c["Discriminator"] = "Customer"
-) c
-"""
+            SELECT c
+            FROM (
+            SELECT * FROM root c WHERE c["Discriminator"] = "Customer"
+            ) c
+            """
         );
     }
 
@@ -643,13 +643,13 @@ WHERE c[""Discriminator""] = ""Product"" AND NOT c[""Discontinued""] AND ((c[""U
 
         AssertSql(
             """
-SELECT c["ProductName"]
-FROM (
-    SELECT *
-    FROM root c
-    WHERE c["Discriminator"] = "Product" AND NOT c["Discontinued"] AND ((c["UnitsInStock"] + c["UnitsOnOrder"]) < c["ReorderLevel"])
-) c
-"""
+            SELECT c["ProductName"]
+            FROM (
+            SELECT *
+            FROM root c
+            WHERE c["Discriminator"] = "Product" AND NOT c["Discontinued"] AND ((c["UnitsInStock"] + c["UnitsOnOrder"]) < c["ReorderLevel"])
+            ) c
+            """
         );
     }
 
@@ -669,12 +669,12 @@ FROM (
 
         AssertSql(
             """
-SELECT c
-FROM (
-    SELECT * FROM root c WHERE c["Discriminator"] = "Customer"
-) c
-WHERE (c["ContactName"] = c["CompanyName"])
-"""
+            SELECT c
+            FROM (
+            SELECT * FROM root c WHERE c["Discriminator"] = "Customer"
+            ) c
+            WHERE (c["ContactName"] = c["CompanyName"])
+            """
         );
     }
 
@@ -715,11 +715,11 @@ WHERE (c["ContactName"] = c["CompanyName"])
 
         AssertSql(
             """
-SELECT c["CustomerID"], c["City"]
-FROM (
-    SELECT * FROM root c WHERE c["Discriminator"] = "Customer"
-) c
-"""
+            SELECT c["CustomerID"], c["City"]
+            FROM (
+            SELECT * FROM root c WHERE c["Discriminator"] = "Customer"
+            ) c
+            """
         );
     }
 

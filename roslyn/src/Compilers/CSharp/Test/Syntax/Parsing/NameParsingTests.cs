@@ -825,14 +825,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void ParseGenericNameInvocationWithOmittedTypeArguments()
         {
             var source = """
-                class C
-                {
-                    void M<T1, T2>()
-                    {
-                        M<,>();
-                    }
-                }
-                """;
+            class C
+            {
+            void M<T1, T2>()
+            {
+            M<,>();
+            }
+            }
+            """;
 
             UsingTree(source);
             N(SyntaxKind.CompilationUnit);
@@ -924,14 +924,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void ParseGenericNameInvocationWithOmittedTypeArguments_CSharp1()
         {
             var source = """
-                class C
-                {
-                    void M<T1, T2>()
-                    {
-                        M<,>();
-                    }
-                }
-                """;
+            class C
+            {
+            void M<T1, T2>()
+            {
+            M<,>();
+            }
+            }
+            """;
 
             UsingTree(
                 source,
@@ -1041,18 +1041,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void ParseGenericNameInvocationWithOmittedTypeArguments2()
         {
             var source = """
-                class X<T>
-                {
-                }
+            class X<T>
+            {
+            }
 
-                class C
-                {
-                    void M<T1, T2>()
-                    {
-                        M<int,X<>>();
-                    }
-                }
-                """;
+            class C
+            {
+            void M<T1, T2>()
+            {
+            M<int,X<>>();
+            }
+            }
+            """;
 
             UsingTree(source);
 
@@ -1169,18 +1169,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void ParseGenericNameInvocationWithOmittedTypeArguments3()
         {
             var source = """
-                class X<T>
-                {
-                }
+            class X<T>
+            {
+            }
 
-                class C
-                {
-                    void M<T1, T2>()
-                    {
-                        M<X<>, int>();
-                    }
-                }
-                """;
+            class C
+            {
+            void M<T1, T2>()
+            {
+            M<X<>, int>();
+            }
+            }
+            """;
 
             UsingTree(source);
 
@@ -1297,22 +1297,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void ParseGenericNameInvocationWithOmittedTypeArguments4()
         {
             var source = """
-                class X<T>
-                {
-                }
+            class X<T>
+            {
+            }
 
-                class Y<A, B>
-                {
-                }
+            class Y<A, B>
+            {
+            }
 
-                class C
-                {
-                    void M<T1, T2>()
-                    {
-                        M<X<>, Y<,>>();
-                    }
-                }
-                """;
+            class C
+            {
+            void M<T1, T2>()
+            {
+            M<X<>, Y<,>>();
+            }
+            }
+            """;
 
             UsingTree(source);
 

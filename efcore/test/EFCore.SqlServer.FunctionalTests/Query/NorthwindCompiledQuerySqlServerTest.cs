@@ -26,14 +26,14 @@ public class NorthwindCompiledQuerySqlServerTest
 
         AssertSql(
             """
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-""",
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            """,
             //
             """
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-"""
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            """
         );
     }
 
@@ -43,10 +43,10 @@ FROM [Customers] AS [c]
 
         AssertSql(
             """
-SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-ORDER BY [c].[CustomerID]
-"""
+            SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            ORDER BY [c].[CustomerID]
+            """
         );
     }
 
@@ -56,18 +56,18 @@ ORDER BY [c].[CustomerID]
 
         AssertSql(
             """
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region], [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
-FROM [Customers] AS [c]
-LEFT JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
-ORDER BY [c].[CustomerID]
-""",
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region], [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
+            FROM [Customers] AS [c]
+            LEFT JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
+            ORDER BY [c].[CustomerID]
+            """,
             //
             """
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region], [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
-FROM [Customers] AS [c]
-LEFT JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
-ORDER BY [c].[CustomerID]
-"""
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region], [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
+            FROM [Customers] AS [c]
+            LEFT JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
+            ORDER BY [c].[CustomerID]
+            """
         );
     }
 
@@ -77,14 +77,14 @@ ORDER BY [c].[CustomerID]
 
         AssertSql(
             """
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-""",
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            """,
             //
             """
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-"""
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            """
         );
     }
 
@@ -94,20 +94,20 @@ FROM [Customers] AS [c]
 
         AssertSql(
             """
-@__customerID='ALFKI' (Size = 5) (DbType = StringFixedLength)
+            @__customerID='ALFKI' (Size = 5) (DbType = StringFixedLength)
 
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = @__customerID
-""",
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = @__customerID
+            """,
             //
             """
-@__customerID='ANATR' (Size = 5) (DbType = StringFixedLength)
+            @__customerID='ANATR' (Size = 5) (DbType = StringFixedLength)
 
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = @__customerID
-"""
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = @__customerID
+            """
         );
     }
 
@@ -117,20 +117,20 @@ WHERE [c].[CustomerID] = @__customerID
 
         AssertSql(
             """
-@__customerID='ALFKI' (Size = 5) (DbType = StringFixedLength)
+            @__customerID='ALFKI' (Size = 5) (DbType = StringFixedLength)
 
-SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = @__customerID
-""",
+            SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = @__customerID
+            """,
             //
             """
-@__customerID='ANATR' (Size = 5) (DbType = StringFixedLength)
+            @__customerID='ANATR' (Size = 5) (DbType = StringFixedLength)
 
-SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = @__customerID
-"""
+            SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = @__customerID
+            """
         );
     }
 
@@ -140,20 +140,20 @@ WHERE [c].[CustomerID] = @__customerID
 
         AssertSql(
             """
-@__customerID='ALFKI' (Size = 5) (DbType = StringFixedLength)
+            @__customerID='ALFKI' (Size = 5) (DbType = StringFixedLength)
 
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = @__customerID
-""",
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = @__customerID
+            """,
             //
             """
-@__customerID='ANATR' (Size = 5) (DbType = StringFixedLength)
+            @__customerID='ANATR' (Size = 5) (DbType = StringFixedLength)
 
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = @__customerID
-"""
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = @__customerID
+            """
         );
     }
 
@@ -163,20 +163,20 @@ WHERE [c].[CustomerID] = @__customerID
 
         AssertSql(
             """
-@__customerID='ALFKI' (Size = 5) (DbType = StringFixedLength)
+            @__customerID='ALFKI' (Size = 5) (DbType = StringFixedLength)
 
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = @__customerID
-""",
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = @__customerID
+            """,
             //
             """
-@__customerID='ANATR' (Size = 5) (DbType = StringFixedLength)
+            @__customerID='ANATR' (Size = 5) (DbType = StringFixedLength)
 
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = @__customerID
-"""
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = @__customerID
+            """
         );
     }
 
@@ -186,26 +186,26 @@ WHERE [c].[CustomerID] = @__customerID
 
         AssertSql(
             """
-@__args='["ALFKI"]' (Size = 4000)
+            @__args='["ALFKI"]' (Size = 4000)
 
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] IN (
-    SELECT [a].[value]
-    FROM OPENJSON(@__args) WITH ([value] nchar(5) '$') AS [a]
-)
-""",
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] IN (
+            SELECT [a].[value]
+            FROM OPENJSON(@__args) WITH ([value] nchar(5) '$') AS [a]
+            )
+            """,
             //
             """
-@__args='["ANATR"]' (Size = 4000)
+            @__args='["ANATR"]' (Size = 4000)
 
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] IN (
-    SELECT [a].[value]
-    FROM OPENJSON(@__args) WITH ([value] nchar(5) '$') AS [a]
-)
-"""
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] IN (
+            SELECT [a].[value]
+            FROM OPENJSON(@__args) WITH ([value] nchar(5) '$') AS [a]
+            )
+            """
         );
     }
 
@@ -215,16 +215,16 @@ WHERE [c].[CustomerID] IN (
 
         AssertSql(
             """
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = N'ALFKI'
-""",
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = N'ALFKI'
+            """,
             //
             """
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = N'ALFKI'
-"""
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = N'ALFKI'
+            """
         );
     }
 
@@ -234,12 +234,12 @@ WHERE [c].[CustomerID] = N'ALFKI'
 
         AssertSql(
             """
-@__customerID='ALFKI' (Size = 5) (DbType = StringFixedLength)
+            @__customerID='ALFKI' (Size = 5) (DbType = StringFixedLength)
 
-SELECT COUNT(*)
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = @__customerID
-"""
+            SELECT COUNT(*)
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = @__customerID
+            """
         );
     }
 
@@ -249,161 +249,161 @@ WHERE [c].[CustomerID] = @__customerID
 
         AssertSql(
             """
-@__s1='ALFKI' (Size = 5) (DbType = StringFixedLength)
-@__s2='ANATR' (Size = 5) (DbType = StringFixedLength)
-@__s3='ANTON' (Size = 5) (DbType = StringFixedLength)
-@__s4='AROUT' (Size = 5) (DbType = StringFixedLength)
-@__s5='BERGS' (Size = 5) (DbType = StringFixedLength)
-@__s6='BLAUS' (Size = 5) (DbType = StringFixedLength)
-@__s7='BLONP' (Size = 5) (DbType = StringFixedLength)
-@__s8='BOLID' (Size = 5) (DbType = StringFixedLength)
-@__s9='BONAP' (Size = 5) (DbType = StringFixedLength)
-@__s10='BSBEV' (Size = 5) (DbType = StringFixedLength)
-@__s11='CACTU' (Size = 5) (DbType = StringFixedLength)
-@__s12='CENTC' (Size = 5) (DbType = StringFixedLength)
-@__s13='CHOPS' (Size = 5) (DbType = StringFixedLength)
-@__s14='CONSH' (Size = 5) (DbType = StringFixedLength)
-@__s15='RANDM' (Size = 5) (DbType = StringFixedLength)
+            @__s1='ALFKI' (Size = 5) (DbType = StringFixedLength)
+            @__s2='ANATR' (Size = 5) (DbType = StringFixedLength)
+            @__s3='ANTON' (Size = 5) (DbType = StringFixedLength)
+            @__s4='AROUT' (Size = 5) (DbType = StringFixedLength)
+            @__s5='BERGS' (Size = 5) (DbType = StringFixedLength)
+            @__s6='BLAUS' (Size = 5) (DbType = StringFixedLength)
+            @__s7='BLONP' (Size = 5) (DbType = StringFixedLength)
+            @__s8='BOLID' (Size = 5) (DbType = StringFixedLength)
+            @__s9='BONAP' (Size = 5) (DbType = StringFixedLength)
+            @__s10='BSBEV' (Size = 5) (DbType = StringFixedLength)
+            @__s11='CACTU' (Size = 5) (DbType = StringFixedLength)
+            @__s12='CENTC' (Size = 5) (DbType = StringFixedLength)
+            @__s13='CHOPS' (Size = 5) (DbType = StringFixedLength)
+            @__s14='CONSH' (Size = 5) (DbType = StringFixedLength)
+            @__s15='RANDM' (Size = 5) (DbType = StringFixedLength)
 
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = @__s1 OR [c].[CustomerID] = @__s2 OR [c].[CustomerID] = @__s3 OR [c].[CustomerID] = @__s4 OR [c].[CustomerID] = @__s5 OR [c].[CustomerID] = @__s6 OR [c].[CustomerID] = @__s7 OR [c].[CustomerID] = @__s8 OR [c].[CustomerID] = @__s9 OR [c].[CustomerID] = @__s10 OR [c].[CustomerID] = @__s11 OR [c].[CustomerID] = @__s12 OR [c].[CustomerID] = @__s13 OR [c].[CustomerID] = @__s14 OR [c].[CustomerID] = @__s15
-""",
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = @__s1 OR [c].[CustomerID] = @__s2 OR [c].[CustomerID] = @__s3 OR [c].[CustomerID] = @__s4 OR [c].[CustomerID] = @__s5 OR [c].[CustomerID] = @__s6 OR [c].[CustomerID] = @__s7 OR [c].[CustomerID] = @__s8 OR [c].[CustomerID] = @__s9 OR [c].[CustomerID] = @__s10 OR [c].[CustomerID] = @__s11 OR [c].[CustomerID] = @__s12 OR [c].[CustomerID] = @__s13 OR [c].[CustomerID] = @__s14 OR [c].[CustomerID] = @__s15
+            """,
             //
             """
-@__s1='ALFKI' (Size = 5) (DbType = StringFixedLength)
-@__s2='ANATR' (Size = 5) (DbType = StringFixedLength)
-@__s3='ANTON' (Size = 5) (DbType = StringFixedLength)
-@__s4='AROUT' (Size = 5) (DbType = StringFixedLength)
-@__s5='BERGS' (Size = 5) (DbType = StringFixedLength)
-@__s6='BLAUS' (Size = 5) (DbType = StringFixedLength)
-@__s7='BLONP' (Size = 5) (DbType = StringFixedLength)
-@__s8='BOLID' (Size = 5) (DbType = StringFixedLength)
-@__s9='BONAP' (Size = 5) (DbType = StringFixedLength)
-@__s10='BSBEV' (Size = 5) (DbType = StringFixedLength)
-@__s11='CACTU' (Size = 5) (DbType = StringFixedLength)
-@__s12='CENTC' (Size = 5) (DbType = StringFixedLength)
-@__s13='CHOPS' (Size = 5) (DbType = StringFixedLength)
-@__s14='CONSH' (Size = 5) (DbType = StringFixedLength)
-@__s15='RANDM' (Size = 5) (DbType = StringFixedLength)
+            @__s1='ALFKI' (Size = 5) (DbType = StringFixedLength)
+            @__s2='ANATR' (Size = 5) (DbType = StringFixedLength)
+            @__s3='ANTON' (Size = 5) (DbType = StringFixedLength)
+            @__s4='AROUT' (Size = 5) (DbType = StringFixedLength)
+            @__s5='BERGS' (Size = 5) (DbType = StringFixedLength)
+            @__s6='BLAUS' (Size = 5) (DbType = StringFixedLength)
+            @__s7='BLONP' (Size = 5) (DbType = StringFixedLength)
+            @__s8='BOLID' (Size = 5) (DbType = StringFixedLength)
+            @__s9='BONAP' (Size = 5) (DbType = StringFixedLength)
+            @__s10='BSBEV' (Size = 5) (DbType = StringFixedLength)
+            @__s11='CACTU' (Size = 5) (DbType = StringFixedLength)
+            @__s12='CENTC' (Size = 5) (DbType = StringFixedLength)
+            @__s13='CHOPS' (Size = 5) (DbType = StringFixedLength)
+            @__s14='CONSH' (Size = 5) (DbType = StringFixedLength)
+            @__s15='RANDM' (Size = 5) (DbType = StringFixedLength)
 
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region], [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
-FROM [Customers] AS [c]
-LEFT JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
-WHERE [c].[CustomerID] = @__s1 OR [c].[CustomerID] = @__s2 OR [c].[CustomerID] = @__s3 OR [c].[CustomerID] = @__s4 OR [c].[CustomerID] = @__s5 OR [c].[CustomerID] = @__s6 OR [c].[CustomerID] = @__s7 OR [c].[CustomerID] = @__s8 OR [c].[CustomerID] = @__s9 OR [c].[CustomerID] = @__s10 OR [c].[CustomerID] = @__s11 OR [c].[CustomerID] = @__s12 OR [c].[CustomerID] = @__s13 OR [c].[CustomerID] = @__s14 OR [c].[CustomerID] = @__s15
-ORDER BY [c].[CustomerID]
-""",
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region], [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
+            FROM [Customers] AS [c]
+            LEFT JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
+            WHERE [c].[CustomerID] = @__s1 OR [c].[CustomerID] = @__s2 OR [c].[CustomerID] = @__s3 OR [c].[CustomerID] = @__s4 OR [c].[CustomerID] = @__s5 OR [c].[CustomerID] = @__s6 OR [c].[CustomerID] = @__s7 OR [c].[CustomerID] = @__s8 OR [c].[CustomerID] = @__s9 OR [c].[CustomerID] = @__s10 OR [c].[CustomerID] = @__s11 OR [c].[CustomerID] = @__s12 OR [c].[CustomerID] = @__s13 OR [c].[CustomerID] = @__s14 OR [c].[CustomerID] = @__s15
+            ORDER BY [c].[CustomerID]
+            """,
             //
             """
-@__s1='ALFKI' (Size = 5) (DbType = StringFixedLength)
-@__s2='ANATR' (Size = 5) (DbType = StringFixedLength)
-@__s3='ANTON' (Size = 5) (DbType = StringFixedLength)
-@__s4='AROUT' (Size = 5) (DbType = StringFixedLength)
-@__s5='BERGS' (Size = 5) (DbType = StringFixedLength)
-@__s6='BLAUS' (Size = 5) (DbType = StringFixedLength)
-@__s7='BLONP' (Size = 5) (DbType = StringFixedLength)
-@__s8='BOLID' (Size = 5) (DbType = StringFixedLength)
-@__s9='BONAP' (Size = 5) (DbType = StringFixedLength)
-@__s10='BSBEV' (Size = 5) (DbType = StringFixedLength)
-@__s11='CACTU' (Size = 5) (DbType = StringFixedLength)
-@__s12='CENTC' (Size = 5) (DbType = StringFixedLength)
-@__s13='CHOPS' (Size = 5) (DbType = StringFixedLength)
-@__s14='CONSH' (Size = 5) (DbType = StringFixedLength)
-@__s15='RANDM' (Size = 5) (DbType = StringFixedLength)
+            @__s1='ALFKI' (Size = 5) (DbType = StringFixedLength)
+            @__s2='ANATR' (Size = 5) (DbType = StringFixedLength)
+            @__s3='ANTON' (Size = 5) (DbType = StringFixedLength)
+            @__s4='AROUT' (Size = 5) (DbType = StringFixedLength)
+            @__s5='BERGS' (Size = 5) (DbType = StringFixedLength)
+            @__s6='BLAUS' (Size = 5) (DbType = StringFixedLength)
+            @__s7='BLONP' (Size = 5) (DbType = StringFixedLength)
+            @__s8='BOLID' (Size = 5) (DbType = StringFixedLength)
+            @__s9='BONAP' (Size = 5) (DbType = StringFixedLength)
+            @__s10='BSBEV' (Size = 5) (DbType = StringFixedLength)
+            @__s11='CACTU' (Size = 5) (DbType = StringFixedLength)
+            @__s12='CENTC' (Size = 5) (DbType = StringFixedLength)
+            @__s13='CHOPS' (Size = 5) (DbType = StringFixedLength)
+            @__s14='CONSH' (Size = 5) (DbType = StringFixedLength)
+            @__s15='RANDM' (Size = 5) (DbType = StringFixedLength)
 
-SELECT COUNT(*)
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = @__s1 OR [c].[CustomerID] = @__s2 OR [c].[CustomerID] = @__s3 OR [c].[CustomerID] = @__s4 OR [c].[CustomerID] = @__s5 OR [c].[CustomerID] = @__s6 OR [c].[CustomerID] = @__s7 OR [c].[CustomerID] = @__s8 OR [c].[CustomerID] = @__s9 OR [c].[CustomerID] = @__s10 OR [c].[CustomerID] = @__s11 OR [c].[CustomerID] = @__s12 OR [c].[CustomerID] = @__s13 OR [c].[CustomerID] = @__s14 OR [c].[CustomerID] = @__s15
-""",
+            SELECT COUNT(*)
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = @__s1 OR [c].[CustomerID] = @__s2 OR [c].[CustomerID] = @__s3 OR [c].[CustomerID] = @__s4 OR [c].[CustomerID] = @__s5 OR [c].[CustomerID] = @__s6 OR [c].[CustomerID] = @__s7 OR [c].[CustomerID] = @__s8 OR [c].[CustomerID] = @__s9 OR [c].[CustomerID] = @__s10 OR [c].[CustomerID] = @__s11 OR [c].[CustomerID] = @__s12 OR [c].[CustomerID] = @__s13 OR [c].[CustomerID] = @__s14 OR [c].[CustomerID] = @__s15
+            """,
             //
             """
-@__s1='ALFKI' (Size = 5) (DbType = StringFixedLength)
-@__s2='ANATR' (Size = 5) (DbType = StringFixedLength)
-@__s3='ANTON' (Size = 5) (DbType = StringFixedLength)
-@__s4='AROUT' (Size = 5) (DbType = StringFixedLength)
-@__s5='BERGS' (Size = 5) (DbType = StringFixedLength)
-@__s6='BLAUS' (Size = 5) (DbType = StringFixedLength)
-@__s7='BLONP' (Size = 5) (DbType = StringFixedLength)
-@__s8='BOLID' (Size = 5) (DbType = StringFixedLength)
-@__s9='BONAP' (Size = 5) (DbType = StringFixedLength)
-@__s10='BSBEV' (Size = 5) (DbType = StringFixedLength)
-@__s11='CACTU' (Size = 5) (DbType = StringFixedLength)
-@__s12='CENTC' (Size = 5) (DbType = StringFixedLength)
-@__s13='CHOPS' (Size = 5) (DbType = StringFixedLength)
-@__s14='CONSH' (Size = 5) (DbType = StringFixedLength)
-@__s15='RANDM' (Size = 5) (DbType = StringFixedLength)
+            @__s1='ALFKI' (Size = 5) (DbType = StringFixedLength)
+            @__s2='ANATR' (Size = 5) (DbType = StringFixedLength)
+            @__s3='ANTON' (Size = 5) (DbType = StringFixedLength)
+            @__s4='AROUT' (Size = 5) (DbType = StringFixedLength)
+            @__s5='BERGS' (Size = 5) (DbType = StringFixedLength)
+            @__s6='BLAUS' (Size = 5) (DbType = StringFixedLength)
+            @__s7='BLONP' (Size = 5) (DbType = StringFixedLength)
+            @__s8='BOLID' (Size = 5) (DbType = StringFixedLength)
+            @__s9='BONAP' (Size = 5) (DbType = StringFixedLength)
+            @__s10='BSBEV' (Size = 5) (DbType = StringFixedLength)
+            @__s11='CACTU' (Size = 5) (DbType = StringFixedLength)
+            @__s12='CENTC' (Size = 5) (DbType = StringFixedLength)
+            @__s13='CHOPS' (Size = 5) (DbType = StringFixedLength)
+            @__s14='CONSH' (Size = 5) (DbType = StringFixedLength)
+            @__s15='RANDM' (Size = 5) (DbType = StringFixedLength)
 
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = @__s1 OR [c].[CustomerID] = @__s2 OR [c].[CustomerID] = @__s3 OR [c].[CustomerID] = @__s4 OR [c].[CustomerID] = @__s5 OR [c].[CustomerID] = @__s6 OR [c].[CustomerID] = @__s7 OR [c].[CustomerID] = @__s8 OR [c].[CustomerID] = @__s9 OR [c].[CustomerID] = @__s10 OR [c].[CustomerID] = @__s11 OR [c].[CustomerID] = @__s12 OR [c].[CustomerID] = @__s13 OR [c].[CustomerID] = @__s14 OR [c].[CustomerID] = @__s15
-""",
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = @__s1 OR [c].[CustomerID] = @__s2 OR [c].[CustomerID] = @__s3 OR [c].[CustomerID] = @__s4 OR [c].[CustomerID] = @__s5 OR [c].[CustomerID] = @__s6 OR [c].[CustomerID] = @__s7 OR [c].[CustomerID] = @__s8 OR [c].[CustomerID] = @__s9 OR [c].[CustomerID] = @__s10 OR [c].[CustomerID] = @__s11 OR [c].[CustomerID] = @__s12 OR [c].[CustomerID] = @__s13 OR [c].[CustomerID] = @__s14 OR [c].[CustomerID] = @__s15
+            """,
             //
             """
-@__s1='ALFKI' (Size = 5) (DbType = StringFixedLength)
-@__s2='ANATR' (Size = 5) (DbType = StringFixedLength)
-@__s3='ANTON' (Size = 5) (DbType = StringFixedLength)
-@__s4='AROUT' (Size = 5) (DbType = StringFixedLength)
-@__s5='BERGS' (Size = 5) (DbType = StringFixedLength)
-@__s6='BLAUS' (Size = 5) (DbType = StringFixedLength)
-@__s7='BLONP' (Size = 5) (DbType = StringFixedLength)
-@__s8='BOLID' (Size = 5) (DbType = StringFixedLength)
-@__s9='BONAP' (Size = 5) (DbType = StringFixedLength)
-@__s10='BSBEV' (Size = 5) (DbType = StringFixedLength)
-@__s11='CACTU' (Size = 5) (DbType = StringFixedLength)
-@__s12='CENTC' (Size = 5) (DbType = StringFixedLength)
-@__s13='CHOPS' (Size = 5) (DbType = StringFixedLength)
-@__s14='CONSH' (Size = 5) (DbType = StringFixedLength)
-@__s15='RANDM' (Size = 5) (DbType = StringFixedLength)
+            @__s1='ALFKI' (Size = 5) (DbType = StringFixedLength)
+            @__s2='ANATR' (Size = 5) (DbType = StringFixedLength)
+            @__s3='ANTON' (Size = 5) (DbType = StringFixedLength)
+            @__s4='AROUT' (Size = 5) (DbType = StringFixedLength)
+            @__s5='BERGS' (Size = 5) (DbType = StringFixedLength)
+            @__s6='BLAUS' (Size = 5) (DbType = StringFixedLength)
+            @__s7='BLONP' (Size = 5) (DbType = StringFixedLength)
+            @__s8='BOLID' (Size = 5) (DbType = StringFixedLength)
+            @__s9='BONAP' (Size = 5) (DbType = StringFixedLength)
+            @__s10='BSBEV' (Size = 5) (DbType = StringFixedLength)
+            @__s11='CACTU' (Size = 5) (DbType = StringFixedLength)
+            @__s12='CENTC' (Size = 5) (DbType = StringFixedLength)
+            @__s13='CHOPS' (Size = 5) (DbType = StringFixedLength)
+            @__s14='CONSH' (Size = 5) (DbType = StringFixedLength)
+            @__s15='RANDM' (Size = 5) (DbType = StringFixedLength)
 
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region], [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
-FROM [Customers] AS [c]
-LEFT JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
-WHERE [c].[CustomerID] = @__s1 OR [c].[CustomerID] = @__s2 OR [c].[CustomerID] = @__s3 OR [c].[CustomerID] = @__s4 OR [c].[CustomerID] = @__s5 OR [c].[CustomerID] = @__s6 OR [c].[CustomerID] = @__s7 OR [c].[CustomerID] = @__s8 OR [c].[CustomerID] = @__s9 OR [c].[CustomerID] = @__s10 OR [c].[CustomerID] = @__s11 OR [c].[CustomerID] = @__s12 OR [c].[CustomerID] = @__s13 OR [c].[CustomerID] = @__s14 OR [c].[CustomerID] = @__s15
-ORDER BY [c].[CustomerID]
-""",
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region], [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
+            FROM [Customers] AS [c]
+            LEFT JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
+            WHERE [c].[CustomerID] = @__s1 OR [c].[CustomerID] = @__s2 OR [c].[CustomerID] = @__s3 OR [c].[CustomerID] = @__s4 OR [c].[CustomerID] = @__s5 OR [c].[CustomerID] = @__s6 OR [c].[CustomerID] = @__s7 OR [c].[CustomerID] = @__s8 OR [c].[CustomerID] = @__s9 OR [c].[CustomerID] = @__s10 OR [c].[CustomerID] = @__s11 OR [c].[CustomerID] = @__s12 OR [c].[CustomerID] = @__s13 OR [c].[CustomerID] = @__s14 OR [c].[CustomerID] = @__s15
+            ORDER BY [c].[CustomerID]
+            """,
             //
             """
-@__s1='ALFKI' (Size = 5) (DbType = StringFixedLength)
-@__s2='ANATR' (Size = 5) (DbType = StringFixedLength)
-@__s3='ANTON' (Size = 5) (DbType = StringFixedLength)
-@__s4='AROUT' (Size = 5) (DbType = StringFixedLength)
-@__s5='BERGS' (Size = 5) (DbType = StringFixedLength)
-@__s6='BLAUS' (Size = 5) (DbType = StringFixedLength)
-@__s7='BLONP' (Size = 5) (DbType = StringFixedLength)
-@__s8='BOLID' (Size = 5) (DbType = StringFixedLength)
-@__s9='BONAP' (Size = 5) (DbType = StringFixedLength)
-@__s10='BSBEV' (Size = 5) (DbType = StringFixedLength)
-@__s11='CACTU' (Size = 5) (DbType = StringFixedLength)
-@__s12='CENTC' (Size = 5) (DbType = StringFixedLength)
-@__s13='CHOPS' (Size = 5) (DbType = StringFixedLength)
-@__s14='CONSH' (Size = 5) (DbType = StringFixedLength)
-@__s15='RANDM' (Size = 5) (DbType = StringFixedLength)
+            @__s1='ALFKI' (Size = 5) (DbType = StringFixedLength)
+            @__s2='ANATR' (Size = 5) (DbType = StringFixedLength)
+            @__s3='ANTON' (Size = 5) (DbType = StringFixedLength)
+            @__s4='AROUT' (Size = 5) (DbType = StringFixedLength)
+            @__s5='BERGS' (Size = 5) (DbType = StringFixedLength)
+            @__s6='BLAUS' (Size = 5) (DbType = StringFixedLength)
+            @__s7='BLONP' (Size = 5) (DbType = StringFixedLength)
+            @__s8='BOLID' (Size = 5) (DbType = StringFixedLength)
+            @__s9='BONAP' (Size = 5) (DbType = StringFixedLength)
+            @__s10='BSBEV' (Size = 5) (DbType = StringFixedLength)
+            @__s11='CACTU' (Size = 5) (DbType = StringFixedLength)
+            @__s12='CENTC' (Size = 5) (DbType = StringFixedLength)
+            @__s13='CHOPS' (Size = 5) (DbType = StringFixedLength)
+            @__s14='CONSH' (Size = 5) (DbType = StringFixedLength)
+            @__s15='RANDM' (Size = 5) (DbType = StringFixedLength)
 
-SELECT COUNT(*)
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = @__s1 OR [c].[CustomerID] = @__s2 OR [c].[CustomerID] = @__s3 OR [c].[CustomerID] = @__s4 OR [c].[CustomerID] = @__s5 OR [c].[CustomerID] = @__s6 OR [c].[CustomerID] = @__s7 OR [c].[CustomerID] = @__s8 OR [c].[CustomerID] = @__s9 OR [c].[CustomerID] = @__s10 OR [c].[CustomerID] = @__s11 OR [c].[CustomerID] = @__s12 OR [c].[CustomerID] = @__s13 OR [c].[CustomerID] = @__s14 OR [c].[CustomerID] = @__s15
-""",
+            SELECT COUNT(*)
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = @__s1 OR [c].[CustomerID] = @__s2 OR [c].[CustomerID] = @__s3 OR [c].[CustomerID] = @__s4 OR [c].[CustomerID] = @__s5 OR [c].[CustomerID] = @__s6 OR [c].[CustomerID] = @__s7 OR [c].[CustomerID] = @__s8 OR [c].[CustomerID] = @__s9 OR [c].[CustomerID] = @__s10 OR [c].[CustomerID] = @__s11 OR [c].[CustomerID] = @__s12 OR [c].[CustomerID] = @__s13 OR [c].[CustomerID] = @__s14 OR [c].[CustomerID] = @__s15
+            """,
             //
             """
-@__s1='ALFKI' (Size = 5) (DbType = StringFixedLength)
-@__s2='ANATR' (Size = 5) (DbType = StringFixedLength)
-@__s3='ANTON' (Size = 5) (DbType = StringFixedLength)
-@__s4='AROUT' (Size = 5) (DbType = StringFixedLength)
-@__s5='BERGS' (Size = 5) (DbType = StringFixedLength)
-@__s6='BLAUS' (Size = 5) (DbType = StringFixedLength)
-@__s7='BLONP' (Size = 5) (DbType = StringFixedLength)
-@__s8='BOLID' (Size = 5) (DbType = StringFixedLength)
-@__s9='BONAP' (Size = 5) (DbType = StringFixedLength)
-@__s10='BSBEV' (Size = 5) (DbType = StringFixedLength)
-@__s11='CACTU' (Size = 5) (DbType = StringFixedLength)
-@__s12='CENTC' (Size = 5) (DbType = StringFixedLength)
-@__s13='CHOPS' (Size = 5) (DbType = StringFixedLength)
-@__s14='CONSH' (Size = 5) (DbType = StringFixedLength)
+            @__s1='ALFKI' (Size = 5) (DbType = StringFixedLength)
+            @__s2='ANATR' (Size = 5) (DbType = StringFixedLength)
+            @__s3='ANTON' (Size = 5) (DbType = StringFixedLength)
+            @__s4='AROUT' (Size = 5) (DbType = StringFixedLength)
+            @__s5='BERGS' (Size = 5) (DbType = StringFixedLength)
+            @__s6='BLAUS' (Size = 5) (DbType = StringFixedLength)
+            @__s7='BLONP' (Size = 5) (DbType = StringFixedLength)
+            @__s8='BOLID' (Size = 5) (DbType = StringFixedLength)
+            @__s9='BONAP' (Size = 5) (DbType = StringFixedLength)
+            @__s10='BSBEV' (Size = 5) (DbType = StringFixedLength)
+            @__s11='CACTU' (Size = 5) (DbType = StringFixedLength)
+            @__s12='CENTC' (Size = 5) (DbType = StringFixedLength)
+            @__s13='CHOPS' (Size = 5) (DbType = StringFixedLength)
+            @__s14='CONSH' (Size = 5) (DbType = StringFixedLength)
 
-SELECT COUNT(*)
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = @__s1 OR [c].[CustomerID] = @__s2 OR [c].[CustomerID] = @__s3 OR [c].[CustomerID] = @__s4 OR [c].[CustomerID] = @__s5 OR [c].[CustomerID] = @__s6 OR [c].[CustomerID] = @__s7 OR [c].[CustomerID] = @__s8 OR [c].[CustomerID] = @__s9 OR [c].[CustomerID] = @__s10 OR [c].[CustomerID] = @__s11 OR [c].[CustomerID] = @__s12 OR [c].[CustomerID] = @__s13 OR [c].[CustomerID] = @__s14
-"""
+            SELECT COUNT(*)
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = @__s1 OR [c].[CustomerID] = @__s2 OR [c].[CustomerID] = @__s3 OR [c].[CustomerID] = @__s4 OR [c].[CustomerID] = @__s5 OR [c].[CustomerID] = @__s6 OR [c].[CustomerID] = @__s7 OR [c].[CustomerID] = @__s8 OR [c].[CustomerID] = @__s9 OR [c].[CustomerID] = @__s10 OR [c].[CustomerID] = @__s11 OR [c].[CustomerID] = @__s12 OR [c].[CustomerID] = @__s13 OR [c].[CustomerID] = @__s14
+            """
         );
     }
 
@@ -413,20 +413,20 @@ WHERE [c].[CustomerID] = @__s1 OR [c].[CustomerID] = @__s2 OR [c].[CustomerID] =
 
         AssertSql(
             """
-@__args='["ALFKI"]' (Size = 4000)
+            @__args='["ALFKI"]' (Size = 4000)
 
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = JSON_VALUE(@__args, '$[0]')
-""",
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = JSON_VALUE(@__args, '$[0]')
+            """,
             //
             """
-@__args='["ANATR"]' (Size = 4000)
+            @__args='["ANATR"]' (Size = 4000)
 
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = JSON_VALUE(@__args, '$[0]')
-"""
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = JSON_VALUE(@__args, '$[0]')
+            """
         );
     }
 
@@ -436,20 +436,20 @@ WHERE [c].[CustomerID] = JSON_VALUE(@__args, '$[0]')
 
         AssertSql(
             """
-@__args='["ALFKI"]' (Size = 4000)
+            @__args='["ALFKI"]' (Size = 4000)
 
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = JSON_VALUE(@__args, '$[0]')
-""",
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = JSON_VALUE(@__args, '$[0]')
+            """,
             //
             """
-@__args='["ANATR"]' (Size = 4000)
+            @__args='["ANATR"]' (Size = 4000)
 
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = JSON_VALUE(@__args, '$[0]')
-"""
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = JSON_VALUE(@__args, '$[0]')
+            """
         );
     }
 
@@ -459,28 +459,28 @@ WHERE [c].[CustomerID] = JSON_VALUE(@__args, '$[0]')
 
         AssertSql(
             """
-SELECT TOP(1) [c].[CustomerID]
-FROM [Customers] AS [c]
-ORDER BY [c].[CustomerID]
-""",
+            SELECT TOP(1) [c].[CustomerID]
+            FROM [Customers] AS [c]
+            ORDER BY [c].[CustomerID]
+            """,
             //
             """
-SELECT TOP(1) [o].[CustomerID]
-FROM [Orders] AS [o]
-ORDER BY [o].[CustomerID]
-""",
+            SELECT TOP(1) [o].[CustomerID]
+            FROM [Orders] AS [o]
+            ORDER BY [o].[CustomerID]
+            """,
             //
             """
-SELECT TOP(1) [c].[CustomerID]
-FROM [Customers] AS [c]
-ORDER BY [c].[CustomerID]
-""",
+            SELECT TOP(1) [c].[CustomerID]
+            FROM [Customers] AS [c]
+            ORDER BY [c].[CustomerID]
+            """,
             //
             """
-SELECT TOP(1) [o].[CustomerID]
-FROM [Orders] AS [o]
-ORDER BY [o].[CustomerID]
-"""
+            SELECT TOP(1) [o].[CustomerID]
+            FROM [Orders] AS [o]
+            ORDER BY [o].[CustomerID]
+            """
         );
     }
 
@@ -490,16 +490,16 @@ ORDER BY [o].[CustomerID]
 
         AssertSql(
             """
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] LIKE N'A%'
-""",
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] LIKE N'A%'
+            """,
             //
             """
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] LIKE N'A%'
-"""
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] LIKE N'A%'
+            """
         );
     }
 
@@ -509,20 +509,20 @@ WHERE [c].[CustomerID] LIKE N'A%'
 
         AssertSql(
             """
-@__customerID='ALFKI' (Size = 5) (DbType = StringFixedLength)
+            @__customerID='ALFKI' (Size = 5) (DbType = StringFixedLength)
 
-SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = @__customerID
-""",
+            SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = @__customerID
+            """,
             //
             """
-@__customerID='ANATR' (Size = 5) (DbType = StringFixedLength)
+            @__customerID='ANATR' (Size = 5) (DbType = StringFixedLength)
 
-SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = @__customerID
-"""
+            SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = @__customerID
+            """
         );
     }
 
@@ -532,10 +532,10 @@ WHERE [c].[CustomerID] = @__customerID
 
         AssertSql(
             """
-SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-ORDER BY [c].[CustomerID]
-"""
+            SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            ORDER BY [c].[CustomerID]
+            """
         );
     }
 
@@ -545,20 +545,20 @@ ORDER BY [c].[CustomerID]
 
         AssertSql(
             """
-@__customerID='ALFKI' (Size = 5) (DbType = StringFixedLength)
+            @__customerID='ALFKI' (Size = 5) (DbType = StringFixedLength)
 
-SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = @__customerID
-""",
+            SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = @__customerID
+            """,
             //
             """
-@__customerID='ANATR' (Size = 5) (DbType = StringFixedLength)
+            @__customerID='ANATR' (Size = 5) (DbType = StringFixedLength)
 
-SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = @__customerID
-"""
+            SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = @__customerID
+            """
         );
     }
 
@@ -568,12 +568,12 @@ WHERE [c].[CustomerID] = @__customerID
 
         AssertSql(
             """
-SELECT TOP(1) [m].[Address], [m].[City], [m].[CompanyName], [m].[ContactName], [m].[ContactTitle]
-FROM (
-    SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region] FROM [Customers] AS [c]
-) AS [m]
-ORDER BY [m].[CompanyName]
-"""
+            SELECT TOP(1) [m].[Address], [m].[City], [m].[CompanyName], [m].[ContactName], [m].[ContactTitle]
+            FROM (
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region] FROM [Customers] AS [c]
+            ) AS [m]
+            ORDER BY [m].[CompanyName]
+            """
         );
     }
 
@@ -583,10 +583,10 @@ ORDER BY [m].[CompanyName]
 
         AssertSql(
             """
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE 0 = 1
-"""
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE 0 = 1
+            """
         );
     }
 
@@ -596,20 +596,20 @@ WHERE 0 = 1
 
         AssertSql(
             """
-@__customerID='ALFKI' (Size = 5) (DbType = StringFixedLength)
+            @__customerID='ALFKI' (Size = 5) (DbType = StringFixedLength)
 
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = @__customerID
-""",
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = @__customerID
+            """,
             //
             """
-@__customerID='ANATR' (Size = 5) (DbType = StringFixedLength)
+            @__customerID='ANATR' (Size = 5) (DbType = StringFixedLength)
 
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = @__customerID
-"""
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = @__customerID
+            """
         );
     }
 
@@ -619,20 +619,20 @@ WHERE [c].[CustomerID] = @__customerID
 
         AssertSql(
             """
-@__customerID='ALFKI' (Size = 5) (DbType = StringFixedLength)
+            @__customerID='ALFKI' (Size = 5) (DbType = StringFixedLength)
 
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = @__customerID
-""",
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = @__customerID
+            """,
             //
             """
-@__customerID='ANATR' (Size = 5) (DbType = StringFixedLength)
+            @__customerID='ANATR' (Size = 5) (DbType = StringFixedLength)
 
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = @__customerID
-"""
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = @__customerID
+            """
         );
     }
 
@@ -642,12 +642,12 @@ WHERE [c].[CustomerID] = @__customerID
 
         AssertSql(
             """
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region] FROM [Customers] AS [c]
-""",
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region] FROM [Customers] AS [c]
+            """,
             //
             """
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region] FROM [Customers] AS [c]
-"""
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region] FROM [Customers] AS [c]
+            """
         );
     }
 
@@ -657,20 +657,20 @@ SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[Cont
 
         AssertSql(
             """
-@__customerID='ALFKI' (Size = 5) (DbType = StringFixedLength)
+            @__customerID='ALFKI' (Size = 5) (DbType = StringFixedLength)
 
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = @__customerID
-""",
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = @__customerID
+            """,
             //
             """
-@__customerID='ANATR' (Size = 5) (DbType = StringFixedLength)
+            @__customerID='ANATR' (Size = 5) (DbType = StringFixedLength)
 
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = @__customerID
-"""
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = @__customerID
+            """
         );
     }
 
@@ -680,12 +680,12 @@ WHERE [c].[CustomerID] = @__customerID
 
         AssertSql(
             """
-SELECT TOP(1) [m].[Address], [m].[City], [m].[CompanyName], [m].[ContactName], [m].[ContactTitle]
-FROM (
-    SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region] FROM [Customers] AS [c]
-) AS [m]
-ORDER BY [m].[CompanyName]
-"""
+            SELECT TOP(1) [m].[Address], [m].[City], [m].[CompanyName], [m].[ContactName], [m].[ContactTitle]
+            FROM (
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region] FROM [Customers] AS [c]
+            ) AS [m]
+            ORDER BY [m].[CompanyName]
+            """
         );
     }
 
@@ -695,10 +695,10 @@ ORDER BY [m].[CompanyName]
 
         AssertSql(
             """
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE 0 = 1
-"""
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE 0 = 1
+            """
         );
     }
 
@@ -708,16 +708,16 @@ WHERE 0 = 1
 
         AssertSql(
             """
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = N'ALFKI'
-""",
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = N'ALFKI'
+            """,
             //
             """
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = N'ALFKI'
-"""
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            WHERE [c].[CustomerID] = N'ALFKI'
+            """
         );
     }
 
@@ -727,14 +727,14 @@ WHERE [c].[CustomerID] = N'ALFKI'
 
         AssertSql(
             """
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-""",
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            """,
             //
             """
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-"""
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            """
         );
     }
 
@@ -744,14 +744,14 @@ FROM [Customers] AS [c]
 
         AssertSql(
             """
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-""",
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            """,
             //
             """
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-"""
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
+            FROM [Customers] AS [c]
+            """
         );
     }
 
@@ -761,12 +761,12 @@ FROM [Customers] AS [c]
 
         AssertSql(
             """
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region] FROM [Customers] AS [c]
-""",
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region] FROM [Customers] AS [c]
+            """,
             //
             """
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region] FROM [Customers] AS [c]
-"""
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region] FROM [Customers] AS [c]
+            """
         );
     }
 
@@ -776,24 +776,24 @@ SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[Cont
 
         AssertSql(
             """
-@__customerID='ALFKI' (Size = 5) (DbType = StringFixedLength)
+            @__customerID='ALFKI' (Size = 5) (DbType = StringFixedLength)
 
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region], [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
-FROM [Customers] AS [c]
-LEFT JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
-WHERE [c].[CustomerID] = @__customerID
-ORDER BY [c].[CustomerID]
-""",
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region], [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
+            FROM [Customers] AS [c]
+            LEFT JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
+            WHERE [c].[CustomerID] = @__customerID
+            ORDER BY [c].[CustomerID]
+            """,
             //
             """
-@__customerID='ANATR' (Size = 5) (DbType = StringFixedLength)
+            @__customerID='ANATR' (Size = 5) (DbType = StringFixedLength)
 
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region], [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
-FROM [Customers] AS [c]
-LEFT JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
-WHERE [c].[CustomerID] = @__customerID
-ORDER BY [c].[CustomerID]
-"""
+            SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region], [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
+            FROM [Customers] AS [c]
+            LEFT JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
+            WHERE [c].[CustomerID] = @__customerID
+            ORDER BY [c].[CustomerID]
+            """
         );
     }
 

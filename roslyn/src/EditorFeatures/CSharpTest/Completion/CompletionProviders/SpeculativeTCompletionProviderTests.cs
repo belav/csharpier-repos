@@ -24,11 +24,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task IsCommitCharacterTest()
         {
             const string markup = """
-                class C
-                {
-                    $$
-                }
-                """;
+            class C
+            {
+            $$
+            }
+            """;
 
             await VerifyCommonCommitCharactersAsync(markup, textTypedSoFar: "");
         }
@@ -40,11 +40,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task SendEnterThroughToEditorTest()
         {
             const string markup = """
-                class C
-                {
-                    $$
-                }
-                """;
+            class C
+            {
+            $$
+            }
+            """;
 
             await VerifySendEnterThroughToEnterAsync(
                 markup,
@@ -70,11 +70,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InClass()
         {
             var markup = """
-                class C
-                {
-                    $$
-                }
-                """;
+            class C
+            {
+            $$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -83,11 +83,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InInterface()
         {
             var markup = """
-                interface I
-                {
-                    $$
-                }
-                """;
+            interface I
+            {
+            $$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -96,11 +96,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InStruct()
         {
             var markup = """
-                struct S
-                {
-                    $$
-                }
-                """;
+            struct S
+            {
+            $$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -109,11 +109,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task NotInNamespace()
         {
             var markup = """
-                namespace N
-                {
-                    $$
-                }
-                """;
+            namespace N
+            {
+            $$
+            }
+            """;
 
             await VerifyItemIsAbsentAsync(markup, "T");
         }
@@ -122,11 +122,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task NotInEnum()
         {
             var markup = """
-                enum E
-                {
-                    $$
-                }
-                """;
+            enum E
+            {
+            $$
+            }
+            """;
 
             await VerifyItemIsAbsentAsync(markup, "T");
         }
@@ -135,11 +135,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task AfterDelegate()
         {
             var markup = """
-                class C
-                {
-                    delegate $$
-                }
-                """;
+            class C
+            {
+            delegate $$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -148,11 +148,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task NotAfterVoid()
         {
             var markup = """
-                class C
-                {
-                    void $$
-                }
-                """;
+            class C
+            {
+            void $$
+            }
+            """;
 
             await VerifyItemIsAbsentAsync(markup, "T");
         }
@@ -161,11 +161,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task NotAfterInt()
         {
             var markup = """
-                class C
-                {
-                    int $$
-                }
-                """;
+            class C
+            {
+            int $$
+            }
+            """;
 
             await VerifyItemIsAbsentAsync(markup, "T");
         }
@@ -174,12 +174,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InGeneric()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    Func<$$
-                }
-                """;
+            using System;
+            class C
+            {
+            Func<$$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -189,12 +189,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InRef0()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    ref $$
-                }
-                """;
+            using System;
+            class C
+            {
+            ref $$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -204,12 +204,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InRef1()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    ref T$$
-                }
-                """;
+            using System;
+            class C
+            {
+            ref T$$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -219,12 +219,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InRefGeneric0()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    ref Func<$$
-                }
-                """;
+            using System;
+            class C
+            {
+            ref Func<$$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -234,12 +234,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InRefGeneric1()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    ref Func<$$>
-                }
-                """;
+            using System;
+            class C
+            {
+            ref Func<$$>
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -249,12 +249,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InRefGeneric2()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    ref Func<T$$>
-                }
-                """;
+            using System;
+            class C
+            {
+            ref Func<T$$>
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -264,12 +264,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InRefGeneric3()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    ref Func<int, $$
-                }
-                """;
+            using System;
+            class C
+            {
+            ref Func<int, $$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -279,12 +279,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InRefReadonlyGeneric()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    ref readonly Func<$$
-                }
-                """;
+            using System;
+            class C
+            {
+            ref readonly Func<$$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -294,12 +294,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InQualifiedGeneric0()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    System.Func<$$
-                }
-                """;
+            using System;
+            class C
+            {
+            System.Func<$$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -309,12 +309,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InQualifiedGeneric1()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    System.Collections.Generic.List<$$
-                }
-                """;
+            using System;
+            class C
+            {
+            System.Collections.Generic.List<$$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -325,12 +325,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InRefAndQualifiedGeneric0()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    ref System.Func<$$
-                }
-                """;
+            using System;
+            class C
+            {
+            ref System.Func<$$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -341,12 +341,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InRefAndQualifiedGeneric1()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    internal ref System.Func<int,$$
-                }
-                """;
+            using System;
+            class C
+            {
+            internal ref System.Func<int,$$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -357,12 +357,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InRefAndQualifiedNestedGeneric0()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    partial ref System.Func<Func<$$
-                }
-                """;
+            using System;
+            class C
+            {
+            partial ref System.Func<Func<$$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -373,12 +373,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InRefAndQualifiedNestedGeneric1()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    private ref Func<System.Func<int,$$
-                }
-                """;
+            using System;
+            class C
+            {
+            private ref Func<System.Func<int,$$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -389,12 +389,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InRefAndQualifiedNestedGeneric2()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    public ref Func<int, System.Func<int,$$
-                }
-                """;
+            using System;
+            class C
+            {
+            public ref Func<int, System.Func<int,$$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -405,12 +405,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InRefAndQualifiedNestedGeneric3()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    private protected ref Func<int, System.Func<$$
-                }
-                """;
+            using System;
+            class C
+            {
+            private protected ref Func<int, System.Func<$$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -420,12 +420,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InTuple0()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    protected ($$
-                }
-                """;
+            using System;
+            class C
+            {
+            protected ($$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -435,15 +435,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task TupleInMethod0()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    void M()
-                    {
-                        ($$
-                    }
-                }
-                """;
+            using System;
+            class C
+            {
+            void M()
+            {
+            ($$
+            }
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -453,16 +453,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task TupleInMethod1()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    void M()
-                    {
-                        var a = 0;
-                        ($$
-                    }
-                }
-                """;
+            using System;
+            class C
+            {
+            void M()
+            {
+            var a = 0;
+            ($$
+            }
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -472,15 +472,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task TupleInMethod2()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    void M()
-                    {
-                        ($$)
-                    }
-                }
-                """;
+            using System;
+            class C
+            {
+            void M()
+            {
+            ($$)
+            }
+            }
+            """;
             await VerifyItemExistsAsync(markup, "T");
         }
 
@@ -489,19 +489,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task TupleInMethod3()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    void M()
-                    {
-                        var a = 0;
+            using System;
+            class C
+            {
+            void M()
+            {
+            var a = 0;
 
-                        (T$$)
+            (T$$)
 
-                        a = 1;
-                    }
-                }
-                """;
+            a = 1;
+            }
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -511,12 +511,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InTupleNot0()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    protected sealed (int $$
-                }
-                """;
+            using System;
+            class C
+            {
+            protected sealed (int $$
+            }
+            """;
 
             await VerifyItemIsAbsentAsync(markup, "T");
         }
@@ -526,12 +526,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InTuple1()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    sealed (int, $$
-                }
-                """;
+            using System;
+            class C
+            {
+            sealed (int, $$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -541,12 +541,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InTupleNot1()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    virtual (int x, C $$
-                }
-                """;
+            using System;
+            class C
+            {
+            virtual (int x, C $$
+            }
+            """;
 
             await VerifyItemIsAbsentAsync(markup, "T");
         }
@@ -556,12 +556,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InTupleGeneric0()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    (Func<$$
-                }
-                """;
+            using System;
+            class C
+            {
+            (Func<$$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -571,12 +571,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InTupleGeneric1()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    (int, Func<$$
-                }
-                """;
+            using System;
+            class C
+            {
+            (int, Func<$$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -586,12 +586,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InTupleGeneric2()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    (int, Func<int, $$
-                }
-                """;
+            using System;
+            class C
+            {
+            (int, Func<int, $$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -601,12 +601,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InGenericTuple0()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    Func<($$
-                }
-                """;
+            using System;
+            class C
+            {
+            Func<($$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -616,12 +616,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InGenericTuple1()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    Func<int, ($$
-                }
-                """;
+            using System;
+            class C
+            {
+            Func<int, ($$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -631,12 +631,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InGenericTuple1Not()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    Func<int, (T $$
-                }
-                """;
+            using System;
+            class C
+            {
+            Func<int, (T $$
+            }
+            """;
 
             await VerifyItemIsAbsentAsync(markup, "T");
         }
@@ -646,12 +646,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InGenericTuple2()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    Func<(int, $$
-                }
-                """;
+            using System;
+            class C
+            {
+            Func<(int, $$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -661,12 +661,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InGenericTuple2Not()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    Func<(C c, int $$
-                }
-                """;
+            using System;
+            class C
+            {
+            Func<(C c, int $$
+            }
+            """;
 
             await VerifyItemIsAbsentAsync(markup, "T");
         }
@@ -676,12 +676,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InGenericTuple3()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    Func<int, (int,$$
-                }
-                """;
+            using System;
+            class C
+            {
+            Func<int, (int,$$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -691,12 +691,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InGenericTuple3Not()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    Func<C, (int, C $$
-                }
-                """;
+            using System;
+            class C
+            {
+            Func<C, (int, C $$
+            }
+            """;
 
             await VerifyItemIsAbsentAsync(markup, "T");
         }
@@ -706,12 +706,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InRefTupleQualifiedNestedGeneric0()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    ref (Func<System.Func<int,$$
-                }
-                """;
+            using System;
+            class C
+            {
+            ref (Func<System.Func<int,$$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -721,12 +721,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InRefTupleQualifiedNestedGeneric1()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    ref (C c, Func<System.Func<int,$$
-                }
-                """;
+            using System;
+            class C
+            {
+            ref (C c, Func<System.Func<int,$$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -736,12 +736,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InRefTupleQualifiedNestedGeneric2()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    ref (C c, Func<int, System.Func<(int,T$$
-                }
-                """;
+            using System;
+            class C
+            {
+            ref (C c, Func<int, System.Func<(int,T$$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -751,12 +751,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InRefTupleQualifiedNestedGeneric3()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    ref (C c, System.Func<Func<int,(T$$
-                }
-                """;
+            using System;
+            class C
+            {
+            ref (C c, System.Func<Func<int,(T$$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -766,12 +766,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InRefTupleQualifiedNestedGeneric4()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    ref (System.Func<(int,C), (Func<int,T$$
-                }
-                """;
+            using System;
+            class C
+            {
+            ref (System.Func<(int,C), (Func<int,T$$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -781,12 +781,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InRefTupleQualifiedNestedGeneric5()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    ref readonly (System.Func<(int, (C, (Func<int,T$$
-                }
-                """;
+            using System;
+            class C
+            {
+            ref readonly (System.Func<(int, (C, (Func<int,T$$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -796,12 +796,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InRefTupleQualifiedNestedGeneric6()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    ref readonly (System.Collections.Generic.List<(int, (C, (Func<int,T$$
-                }
-                """;
+            using System;
+            class C
+            {
+            ref readonly (System.Collections.Generic.List<(int, (C, (Func<int,T$$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -810,12 +810,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InNestedGeneric1()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    Func<Func<$$
-                }
-                """;
+            using System;
+            class C
+            {
+            Func<Func<$$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -824,12 +824,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InNestedGeneric2()
         {
             var markup = """
-                using System;
-                class C
-                {
-                    Func<Func<int,$$
-                }
-                """;
+            using System;
+            class C
+            {
+            Func<Func<int,$$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -877,9 +877,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InGenericInScript()
         {
             var markup = """
-                using System;
-                Func<$$
-                """;
+            using System;
+            Func<$$
+            """;
 
             await VerifyItemExistsAsync(
                 markup,
@@ -893,9 +893,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InNestedGenericInScript1()
         {
             var markup = """
-                using System;
-                Func<Func<$$
-                """;
+            using System;
+            Func<Func<$$
+            """;
 
             await VerifyItemExistsAsync(
                 markup,
@@ -909,9 +909,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InNestedGenericInScript2()
         {
             var markup = """
-                using System;
-                Func<Func<int,$$
-                """;
+            using System;
+            Func<Func<int,$$
+            """;
 
             await VerifyItemExistsAsync(
                 markup,
@@ -925,11 +925,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task NotInComment()
         {
             var markup = """
-                class C
-                {
-                    // $$
-                }
-                """;
+            class C
+            {
+            // $$
+            }
+            """;
 
             await VerifyItemIsAbsentAsync(markup, "T");
         }
@@ -938,14 +938,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task NotInXmlDocComment()
         {
             var markup = """
-                class C
-                {
-                    /// <summary>
-                    /// $$
-                    /// </summary>
-                    void Goo() { }
-                }
-                """;
+            class C
+            {
+            /// <summary>
+            /// $$
+            /// </summary>
+            void Goo() { }
+            }
+            """;
 
             await VerifyItemIsAbsentAsync(markup, "T");
         }
@@ -954,12 +954,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task AfterAsyncTask()
         {
             var markup = """
-                using System.Threading.Tasks;
-                class Program
-                {
-                    async Task<$$
-                }
-                """;
+            using System.Threading.Tasks;
+            class Program
+            {
+            async Task<$$
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -968,12 +968,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task NotOkAfterAsync()
         {
             var markup = """
-                using System.Threading.Tasks;
-                class Program
-                {
-                    async $$
-                }
-                """;
+            using System.Threading.Tasks;
+            class Program
+            {
+            async $$
+            }
+            """;
 
             await VerifyItemIsAbsentAsync(markup, "T");
         }
@@ -983,29 +983,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task UnionOfItemsFromBothContexts()
         {
             var markup = """
-                <Workspace>
-                    <Project Language="C#" CommonReferences="true" AssemblyName="Proj1" PreprocessorSymbols="GOO">
-                        <Document FilePath="CurrentDocument.cs"><![CDATA[
-                class C
-                {
-                #if GOO
-                    void goo() {
-                #endif
+            <Workspace>
+            <Project Language="C#" CommonReferences="true" AssemblyName="Proj1" PreprocessorSymbols="GOO">
+            <Document FilePath="CurrentDocument.cs"><![CDATA[
+            class C
+            {
+            #if GOO
+            void goo() {
+            #endif
 
-                $$
+            $$
 
-                #if GOO
-                    }
-                #endif
-                }
-                ]]>
-                        </Document>
-                    </Project>
-                    <Project Language="C#" CommonReferences="true" AssemblyName="Proj2">
-                        <Document IsLinkFile="true" LinkAssemblyName="Proj1" LinkFilePath="CurrentDocument.cs"/>
-                    </Project>
-                </Workspace>
-                """;
+            #if GOO
+            }
+            #endif
+            }
+            ]]>
+            </Document>
+            </Project>
+            <Project Language="C#" CommonReferences="true" AssemblyName="Proj2">
+            <Document IsLinkFile="true" LinkAssemblyName="Proj1" LinkFilePath="CurrentDocument.cs"/>
+            </Project>
+            </Workspace>
+            """;
             await VerifyItemInLinkedFilesAsync(markup, "T", null);
         }
 
@@ -1014,12 +1014,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task AfterAsyncTaskWithBraceCompletion()
         {
             var markup = """
-                using System.Threading.Tasks;
-                class Program
-                {
-                    async Task<$$>
-                }
-                """;
+            using System.Threading.Tasks;
+            class Program
+            {
+            async Task<$$>
+            }
+            """;
 
             await VerifyItemExistsAsync(markup, "T");
         }
@@ -1029,14 +1029,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task LocalFunctionReturnType()
         {
             var markup = """
-                class C
-                {
-                    public void M()
-                    {
-                        $$
-                    }
-                }
-                """;
+            class C
+            {
+            public void M()
+            {
+            $$
+            }
+            }
+            """;
             await VerifyItemExistsAsync(markup, "T");
         }
 
@@ -1045,14 +1045,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task LocalFunctionAfterAyncTask()
         {
             var markup = """
-                class C
-                {
-                    public void M()
-                    {
-                        async Task<$$>
-                    }
-                }
-                """;
+            class C
+            {
+            public void M()
+            {
+            async Task<$$>
+            }
+            }
+            """;
             await VerifyItemExistsAsync(markup, "T");
         }
 
@@ -1061,14 +1061,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task LocalFunctionAfterAsync()
         {
             var markup = """
-                class C
-                {
-                    public void M()
-                    {
-                        async $$
-                    }
-                }
-                """;
+            class C
+            {
+            public void M()
+            {
+            async $$
+            }
+            }
+            """;
             await VerifyItemExistsAsync(markup, "T");
         }
     }

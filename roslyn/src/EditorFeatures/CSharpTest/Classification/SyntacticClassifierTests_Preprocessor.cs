@@ -19,9 +19,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfTrue(TestHost testHost)
         {
             var code = """
-                #if true
-                #endif
-                """;
+            #if true
+            #endif
+            """;
             await TestInMethodAsync(
                 code,
                 testHost,
@@ -37,9 +37,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfTrueWithComment(TestHost testHost)
         {
             var code = """
-                #if true //Goo
-                #endif
-                """;
+            #if true //Goo
+            #endif
+            """;
             await TestInMethodAsync(
                 code,
                 testHost,
@@ -56,9 +56,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfFalse(TestHost testHost)
         {
             var code = """
-                #if false
-                #endif
-                """;
+            #if false
+            #endif
+            """;
             await TestInMethodAsync(
                 code,
                 testHost,
@@ -74,9 +74,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfGOO(TestHost testHost)
         {
             var code = """
-                #if GOO
-                #endif
-                """;
+            #if GOO
+            #endif
+            """;
             await TestInMethodAsync(
                 code,
                 testHost,
@@ -92,9 +92,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfNotTrue(TestHost testHost)
         {
             var code = """
-                #if !true
-                #endif
-                """;
+            #if !true
+            #endif
+            """;
             await TestInMethodAsync(
                 code,
                 testHost,
@@ -111,9 +111,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfNotFalse(TestHost testHost)
         {
             var code = """
-                #if !false
-                #endif
-                """;
+            #if !false
+            #endif
+            """;
             await TestInMethodAsync(
                 code,
                 testHost,
@@ -130,9 +130,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfNotGOO(TestHost testHost)
         {
             var code = """
-                #if !GOO
-                #endif
-                """;
+            #if !GOO
+            #endif
+            """;
             await TestInMethodAsync(
                 code,
                 testHost,
@@ -149,9 +149,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfTrueWithParens(TestHost testHost)
         {
             var code = """
-                #if (true)
-                #endif
-                """;
+            #if (true)
+            #endif
+            """;
             await TestInMethodAsync(
                 code,
                 testHost,
@@ -169,9 +169,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfFalseWithParens(TestHost testHost)
         {
             var code = """
-                #if (false)
-                #endif
-                """;
+            #if (false)
+            #endif
+            """;
             await TestInMethodAsync(
                 code,
                 testHost,
@@ -189,9 +189,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfGOOWithParens(TestHost testHost)
         {
             var code = """
-                #if (GOO)
-                #endif
-                """;
+            #if (GOO)
+            #endif
+            """;
             await TestInMethodAsync(
                 code,
                 testHost,
@@ -209,9 +209,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfOrExpression(TestHost testHost)
         {
             var code = """
-                #if GOO || BAR
-                #endif
-                """;
+            #if GOO || BAR
+            #endif
+            """;
 
             await TestInMethodAsync(
                 code,
@@ -230,9 +230,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfAndExpression(TestHost testHost)
         {
             var code = """
-                #if GOO && BAR
-                #endif
-                """;
+            #if GOO && BAR
+            #endif
+            """;
 
             await TestInMethodAsync(
                 code,
@@ -251,9 +251,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfOrAndExpression(TestHost testHost)
         {
             var code = """
-                #if GOO || BAR && BAZ
-                #endif
-                """;
+            #if GOO || BAR && BAZ
+            #endif
+            """;
 
             await TestInMethodAsync(
                 code,
@@ -274,9 +274,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfOrExpressionWithParens(TestHost testHost)
         {
             var code = """
-                #if (GOO || BAR)
-                #endif
-                """;
+            #if (GOO || BAR)
+            #endif
+            """;
 
             await TestInMethodAsync(
                 code,
@@ -297,9 +297,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfAndExpressionWithParens(TestHost testHost)
         {
             var code = """
-                #if (GOO && BAR)
-                #endif
-                """;
+            #if (GOO && BAR)
+            #endif
+            """;
 
             await TestInMethodAsync(
                 code,
@@ -320,9 +320,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfOrAndExpressionWithParens(TestHost testHost)
         {
             var code = """
-                #if GOO || (BAR && BAZ)
-                #endif
-                """;
+            #if GOO || (BAR && BAZ)
+            #endif
+            """;
 
             await TestInMethodAsync(
                 code,
@@ -369,9 +369,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_If3(TestHost testHost)
         {
             var code = """
-                #if goo
-                #endif
-                """;
+            #if goo
+            #endif
+            """;
             await TestAsync(
                 code,
                 testHost,
@@ -387,9 +387,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_If4(TestHost testHost)
         {
             var code = """
-                #if
-                #endif
-                """;
+            #if
+            #endif
+            """;
             await TestAsync(
                 code,
                 testHost,
@@ -404,11 +404,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_If5(TestHost testHost)
         {
             var code = """
-                #if
-                aoeu
-                aoeu
-                #endif
-                """;
+            #if
+            aoeu
+            aoeu
+            #endif
+            """;
             await TestAsync(
                 code,
                 testHost,
@@ -430,10 +430,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_If6(TestHost testHost)
         {
             var code = """
-                #if
-                #else
-                aeu
-                """;
+            #if
+            #else
+            aeu
+            """;
             await TestAsync(
                 code,
                 testHost,
@@ -449,11 +449,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_If7(TestHost testHost)
         {
             var code = """
-                #if
-                #else
-                #endif
-                aeu
-                """;
+            #if
+            #else
+            #endif
+            aeu
+            """;
             await TestAsync(
                 code,
                 testHost,
@@ -472,14 +472,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_If8(bool script, TestHost testHost)
         {
             var code = """
-                #if
-                #else
-                aoeu
-                aoeu
-                aou
-                #endif
-                aeu
-                """;
+            #if
+            #else
+            aoeu
+            aoeu
+            aou
+            #endif
+            aeu
+            """;
 
             var parseOptions = script ? Options.Script : null;
 
@@ -506,14 +506,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_If9(bool script, TestHost testHost)
         {
             var code = """
-                #if //Goo1
-                #else //Goo2
-                aoeu
-                aoeu
-                aou
-                #endif //Goo3
-                aeu
-                """;
+            #if //Goo1
+            #else //Goo2
+            aoeu
+            aoeu
+            aou
+            #endif //Goo3
+            aeu
+            """;
 
             var parseOptions = script ? Options.Script : null;
 
@@ -704,11 +704,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_IfElseEndIfDirectives(TestHost testHost)
         {
             var code = """
-                #if true
-                #elif DEBUG
-                #else
-                #endif
-                """;
+            #if true
+            #elif DEBUG
+            #else
+            #endif
+            """;
             await TestAsync(
                 code,
                 testHost,
@@ -905,8 +905,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_LineNumberWithFilename(TestHost testHost)
         {
             var code = """
-                #line 100 "C:\Goo"
-                """;
+            #line 100 "C:\Goo"
+            """;
 
             await TestAsync(
                 code,
@@ -946,8 +946,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task PP_LineSpanWithCharacterOffset(TestHost testHost)
         {
             var code = """
-                #line (1, 2) - (3, 4) 5 "file.txt"
-                """;
+            #line (1, 2) - (3, 4) 5 "file.txt"
+            """;
 
             await TestAsync(
                 code,

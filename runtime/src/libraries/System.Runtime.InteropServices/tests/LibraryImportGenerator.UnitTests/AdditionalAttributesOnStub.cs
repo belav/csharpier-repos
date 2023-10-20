@@ -22,33 +22,33 @@ namespace LibraryImportGenerator.UnitTests
         public async Task SkipLocalsInitAdded()
         {
             string source = """
-                using System.Runtime.CompilerServices;
-                using System.Runtime.InteropServices;
-                using System.Runtime.InteropServices.Marshalling;
-                [assembly:DisableRuntimeMarshalling]
-                partial class C
-                {
-                    [LibraryImportAttribute("DoesNotExist")]
-                    public static partial S Method();
-                }
+            using System.Runtime.CompilerServices;
+            using System.Runtime.InteropServices;
+            using System.Runtime.InteropServices.Marshalling;
+            [assembly:DisableRuntimeMarshalling]
+            partial class C
+            {
+            [LibraryImportAttribute("DoesNotExist")]
+            public static partial S Method();
+            }
 
-                [NativeMarshalling(typeof(Marshaller))]
-                struct S
-                {
-                }
+            [NativeMarshalling(typeof(Marshaller))]
+            struct S
+            {
+            }
 
-                struct Native
-                {
-                }
+            struct Native
+            {
+            }
 
-                [CustomMarshaller(typeof(S), MarshalMode.Default, typeof(Marshaller))]
-                static class Marshaller
-                {
-                    public static Native ConvertToUnmanaged(S s) => default;
+            [CustomMarshaller(typeof(S), MarshalMode.Default, typeof(Marshaller))]
+            static class Marshaller
+            {
+            public static Native ConvertToUnmanaged(S s) => default;
 
-                    public static S ConvertToManaged(Native n) => default;
-                }
-                """;
+            public static S ConvertToManaged(Native n) => default;
+            }
+            """;
             await VerifySourceGeneratorAsync(
                 source,
                 "C",
@@ -63,13 +63,13 @@ namespace LibraryImportGenerator.UnitTests
         public async Task SkipLocalsInitNotAddedOnForwardingStub()
         {
             string source = """
-                using System.Runtime.InteropServices;
-                partial class C
-                {
-                    [LibraryImportAttribute("DoesNotExist")]
-                    public static partial void Method();
-                }
-                """;
+            using System.Runtime.InteropServices;
+            partial class C
+            {
+            [LibraryImportAttribute("DoesNotExist")]
+            public static partial void Method();
+            }
+            """;
             await VerifySourceGeneratorAsync(
                 source,
                 "C",
@@ -84,33 +84,33 @@ namespace LibraryImportGenerator.UnitTests
         public async Task GeneratedCodeAdded()
         {
             string source = """
-                using System.Runtime.CompilerServices;
-                using System.Runtime.InteropServices;
-                using System.Runtime.InteropServices.Marshalling;
-                [assembly:DisableRuntimeMarshalling]
-                partial class C
-                {
-                    [LibraryImportAttribute("DoesNotExist")]
-                    public static partial S Method();
-                }
+            using System.Runtime.CompilerServices;
+            using System.Runtime.InteropServices;
+            using System.Runtime.InteropServices.Marshalling;
+            [assembly:DisableRuntimeMarshalling]
+            partial class C
+            {
+            [LibraryImportAttribute("DoesNotExist")]
+            public static partial S Method();
+            }
 
-                [NativeMarshalling(typeof(Marshaller))]
-                struct S
-                {
-                }
+            [NativeMarshalling(typeof(Marshaller))]
+            struct S
+            {
+            }
 
-                struct Native
-                {
-                }
+            struct Native
+            {
+            }
 
-                [CustomMarshaller(typeof(S), MarshalMode.Default, typeof(Marshaller))]
-                static class Marshaller
-                {
-                    public static Native ConvertToUnmanaged(S s) => default;
+            [CustomMarshaller(typeof(S), MarshalMode.Default, typeof(Marshaller))]
+            static class Marshaller
+            {
+            public static Native ConvertToUnmanaged(S s) => default;
 
-                    public static S ConvertToManaged(Native n) => default;
-                }
-                """;
+            public static S ConvertToManaged(Native n) => default;
+            }
+            """;
             await VerifySourceGeneratorAsync(
                 source,
                 "C",
@@ -125,13 +125,13 @@ namespace LibraryImportGenerator.UnitTests
         public async Task GeneratedCodeNotAddedOnForwardingStub()
         {
             string source = """
-                using System.Runtime.InteropServices;
-                partial class C
-                {
-                    [LibraryImportAttribute("DoesNotExist")]
-                    public static partial void Method();
-                }
-                """;
+            using System.Runtime.InteropServices;
+            partial class C
+            {
+            [LibraryImportAttribute("DoesNotExist")]
+            public static partial void Method();
+            }
+            """;
             await VerifySourceGeneratorAsync(
                 source,
                 "C",
@@ -183,33 +183,33 @@ namespace LibraryImportGenerator.UnitTests
         public async Task SkipLocalsInitNotAddedWhenDefinedAtModuleLevel()
         {
             string source = """
-                using System.Runtime.InteropServices;
-                using System.Runtime.InteropServices.Marshalling;
-                using System.Runtime.CompilerServices;
-                [module:SkipLocalsInit]
-                partial class C
-                {
-                    [LibraryImportAttribute("DoesNotExist")]
-                    public static partial S Method();
-                }
+            using System.Runtime.InteropServices;
+            using System.Runtime.InteropServices.Marshalling;
+            using System.Runtime.CompilerServices;
+            [module:SkipLocalsInit]
+            partial class C
+            {
+            [LibraryImportAttribute("DoesNotExist")]
+            public static partial S Method();
+            }
 
-                [NativeMarshalling(typeof(Marshaller))]
-                struct S
-                {
-                }
+            [NativeMarshalling(typeof(Marshaller))]
+            struct S
+            {
+            }
 
-                struct Native
-                {
-                }
+            struct Native
+            {
+            }
 
-                [CustomMarshaller(typeof(S), MarshalMode.Default, typeof(Marshaller))]
-                static class Marshaller
-                {
-                    public static Native ConvertToUnmanaged(S s) => default;
+            [CustomMarshaller(typeof(S), MarshalMode.Default, typeof(Marshaller))]
+            static class Marshaller
+            {
+            public static Native ConvertToUnmanaged(S s) => default;
 
-                    public static S ConvertToManaged(Native n) => default;
-                }
-                """;
+            public static S ConvertToManaged(Native n) => default;
+            }
+            """;
             await VerifySourceGeneratorAsync(
                 source,
                 "C",
@@ -224,33 +224,33 @@ namespace LibraryImportGenerator.UnitTests
         public async Task SkipLocalsInitNotAddedWhenDefinedAtClassLevel()
         {
             string source = """
-                using System.Runtime.InteropServices;
-                using System.Runtime.InteropServices.Marshalling;
-                using System.Runtime.CompilerServices;
-                [SkipLocalsInit]
-                partial class C
-                {
-                    [LibraryImportAttribute("DoesNotExist")]
-                    public static partial S Method();
-                }
+            using System.Runtime.InteropServices;
+            using System.Runtime.InteropServices.Marshalling;
+            using System.Runtime.CompilerServices;
+            [SkipLocalsInit]
+            partial class C
+            {
+            [LibraryImportAttribute("DoesNotExist")]
+            public static partial S Method();
+            }
 
-                [NativeMarshalling(typeof(Marshaller))]
-                struct S
-                {
-                }
+            [NativeMarshalling(typeof(Marshaller))]
+            struct S
+            {
+            }
 
-                struct Native
-                {
-                }
+            struct Native
+            {
+            }
 
-                [CustomMarshaller(typeof(S), MarshalMode.Default, typeof(Marshaller))]
-                static class Marshaller
-                {
-                    public static Native ConvertToUnmanaged(S s) => default;
+            [CustomMarshaller(typeof(S), MarshalMode.Default, typeof(Marshaller))]
+            static class Marshaller
+            {
+            public static Native ConvertToUnmanaged(S s) => default;
 
-                    public static S ConvertToManaged(Native n) => default;
-                }
-                """;
+            public static S ConvertToManaged(Native n) => default;
+            }
+            """;
             await VerifySourceGeneratorAsync(
                 source,
                 "C",
@@ -265,33 +265,33 @@ namespace LibraryImportGenerator.UnitTests
         public async Task SkipLocalsInitNotAddedWhenDefinedOnMethodByUser()
         {
             string source = """
-                using System.Runtime.InteropServices;
-                using System.Runtime.InteropServices.Marshalling;
-                using System.Runtime.CompilerServices;
-                partial class C
-                {
-                    [SkipLocalsInit]
-                    [LibraryImportAttribute("DoesNotExist")]
-                    public static partial S Method();
-                }
+            using System.Runtime.InteropServices;
+            using System.Runtime.InteropServices.Marshalling;
+            using System.Runtime.CompilerServices;
+            partial class C
+            {
+            [SkipLocalsInit]
+            [LibraryImportAttribute("DoesNotExist")]
+            public static partial S Method();
+            }
 
-                [NativeMarshalling(typeof(Marshaller))]
-                struct S
-                {
-                }
+            [NativeMarshalling(typeof(Marshaller))]
+            struct S
+            {
+            }
 
-                struct Native
-                {
-                }
+            struct Native
+            {
+            }
 
-                [CustomMarshaller(typeof(S), MarshalMode.Default, typeof(Marshaller))]
-                static class Marshaller
-                {
-                    public static Native ConvertToUnmanaged(S s) => default;
+            [CustomMarshaller(typeof(S), MarshalMode.Default, typeof(Marshaller))]
+            static class Marshaller
+            {
+            public static Native ConvertToUnmanaged(S s) => default;
 
-                    public static S ConvertToManaged(Native n) => default;
-                }
-                """;
+            public static S ConvertToManaged(Native n) => default;
+            }
+            """;
             // Verify that we get no diagnostics from applying the attribute twice.
             await VerifyCS.VerifySourceGeneratorAsync(source);
         }

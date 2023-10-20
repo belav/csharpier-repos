@@ -3883,17 +3883,17 @@ static void Main(string[] args)
             await AssertFormatAsync(
                 """
                 F(stackalloc int[]
-                    {
-                        1,
-                        2,
-                    });
+                {
+                1,
+                2,
+                });
                 """,
                 """
                 F(stackalloc int[]
-                    {
-                        1,
-                        2,
-                    }                );
+                {
+                1,
+                2,
+                }                );
                 """
             );
         }
@@ -3904,18 +3904,18 @@ static void Main(string[] args)
             await AssertFormatAsync(
                 """
                 F(stackalloc[]
-                    {
-                        1,
-                        2,
-                    }
+                {
+                1,
+                2,
+                }
                 );
                 """,
                 """
                 F(                    stackalloc []
-                    {
-                        1,
-                        2,
-                    }
+                {
+                1,
+                2,
+                }
                 );
                 """
             );
@@ -3927,20 +3927,20 @@ static void Main(string[] args)
             await AssertFormatAsync(
                 """
                 F(
-                    stackalloc int[]
-                    {
-                        1,2,
-                        3,4
-                    }
+                stackalloc int[]
+                {
+                1,2,
+                3,4
+                }
                 );
                 """,
                 """
                 F(
-                    stackalloc int[]
-                    {
-                        1,2,
-                        3,4
-                    }
+                stackalloc int[]
+                {
+                1,2,
+                3,4
+                }
                 );
                 """
             );
@@ -3952,20 +3952,20 @@ static void Main(string[] args)
             await AssertFormatAsync(
                 """
                 F(
-                    stackalloc[]
-                    {
-                        1,2,
-                        3,4
-                    }
+                stackalloc[]
+                {
+                1,2,
+                3,4
+                }
                 );
                 """,
                 """
                 F(
-                    stackalloc []
-                    {
-                        1,2,
-                        3,4
-                    }
+                stackalloc []
+                {
+                1,2,
+                3,4
+                }
                 );
                 """
             );
@@ -3977,12 +3977,12 @@ static void Main(string[] args)
             await AssertFormatAsync(
                 """
                 var x = (stackalloc int[] {1,2,
-                     3
+                3
                 });
                 """,
                 """
                 var x = (stackalloc int[] {1,2,
-                     3
+                3
                 });
                 """
             );
@@ -3995,13 +3995,13 @@ static void Main(string[] args)
                 """
                 var x = (stackalloc[]
                 {1,
-                    2, 3
+                2, 3
                 });
                 """,
                 """
                 var x = (stackalloc []
                 {1,
-                    2, 3
+                2, 3
                 });
                 """
             );
@@ -4457,19 +4457,19 @@ public       void       Method      (       )           {
         public async Task RefReadonlyParameters()
         {
             var code = """
-                class C
-                {
-                    int   this  [   ref     readonly    int      x   ,   ref    readonly   int   y   ]   {   get ;   set ;  }
-                    void    M  (   ref    readonly     int   x    ,   ref    readonly   int   y   )  {   }
-                }
-                """;
+            class C
+            {
+            int   this  [   ref     readonly    int      x   ,   ref    readonly   int   y   ]   {   get ;   set ;  }
+            void    M  (   ref    readonly     int   x    ,   ref    readonly   int   y   )  {   }
+            }
+            """;
             var expected = """
-                class C
-                {
-                    int this[ref readonly int x, ref readonly int y] { get; set; }
-                    void M(ref readonly int x, ref readonly int y) { }
-                }
-                """;
+            class C
+            {
+            int this[ref readonly int x, ref readonly int y] { get; set; }
+            void M(ref readonly int x, ref readonly int y) { }
+            }
+            """;
             await AssertFormatAsync(expected, code);
         }
 

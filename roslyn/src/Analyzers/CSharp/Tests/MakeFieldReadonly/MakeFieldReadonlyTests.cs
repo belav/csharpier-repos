@@ -58,7 +58,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private event System.EventHandler [|Goo|];
+                private event System.EventHandler [|Goo|];
                 }
                 """
             );
@@ -71,7 +71,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private readonly int [|_goo|];
+                private readonly int [|_goo|];
                 }
                 """
             );
@@ -84,7 +84,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private const int [|_goo|];
+                private const int [|_goo|];
                 }
                 """
             );
@@ -97,13 +97,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|];
+                private int [|_goo|];
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private readonly int _goo;
+                private readonly int _goo;
                 }
                 """
             );
@@ -116,13 +116,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 struct MyStruct
                 {
-                    private int [|_goo|];
+                private int [|_goo|];
                 }
                 """,
                 """
                 struct MyStruct
                 {
-                    private readonly int _goo;
+                private readonly int _goo;
                 }
                 """
             );
@@ -135,13 +135,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|] = 0;
+                private int [|_goo|] = 0;
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private readonly int _goo = 0;
+                private readonly int _goo = 0;
                 }
                 """
             );
@@ -154,14 +154,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|] = 0, _bar = 0;
+                private int [|_goo|] = 0, _bar = 0;
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private readonly int _goo = 0;
-                    private int _bar = 0;
+                private readonly int _goo = 0;
+                private int _bar = 0;
                 }
                 """
             );
@@ -174,15 +174,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int _goo = 0, [|_bar|] = 0, _fizz = 0;
+                private int _goo = 0, [|_bar|] = 0, _fizz = 0;
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private int _goo = 0;
-                    private readonly int _bar = 0;
-                    private int _fizz = 0;
+                private int _goo = 0;
+                private readonly int _bar = 0;
+                private int _fizz = 0;
                 }
                 """
             );
@@ -195,23 +195,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int _goo = 0, [|_bar|] = 0;
-                    Goo()
-                    {
-                        _goo = 0;
-                    }
+                private int _goo = 0, [|_bar|] = 0;
+                Goo()
+                {
+                _goo = 0;
+                }
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private int _goo = 0;
-                    private readonly int _bar = 0;
+                private int _goo = 0;
+                private readonly int _bar = 0;
 
-                    Goo()
-                    {
-                        _goo = 0;
-                    }
+                Goo()
+                {
+                _goo = 0;
+                }
                 }
                 """
             );
@@ -224,14 +224,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|], _bar = 0;
+                private int [|_goo|], _bar = 0;
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private readonly int _goo;
-                    private int _bar = 0;
+                private readonly int _goo;
+                private int _bar = 0;
                 }
                 """
             );
@@ -267,21 +267,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|];
-                    MyClass()
-                    {
-                        _goo = 0;
-                    }
+                private int [|_goo|];
+                MyClass()
+                {
+                _goo = 0;
+                }
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private readonly int _goo;
-                    MyClass()
-                    {
-                        _goo = 0;
-                    }
+                private readonly int _goo;
+                MyClass()
+                {
+                _goo = 0;
+                }
                 }
                 """
             );
@@ -294,13 +294,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 public class MyClass
                 {
-                    private int [|_goo|];
-                    public MyClass()
-                    {
-                        this.E = x => this._goo = 0;
-                    }
+                private int [|_goo|];
+                public MyClass()
+                {
+                this.E = x => this._goo = 0;
+                }
 
-                    public Action<int> E;
+                public Action<int> E;
                 }
                 """
             );
@@ -313,13 +313,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 public class MyClass
                 {
-                    private int [|_goo|];
-                    public MyClass()
-                    {
-                        this.E += (_, __) => this._goo = 0;
-                    }
+                private int [|_goo|];
+                public MyClass()
+                {
+                this.E += (_, __) => this._goo = 0;
+                }
 
-                    public event EventHandler E;
+                public event EventHandler E;
                 }
                 """
             );
@@ -332,13 +332,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 public class MyClass
                 {
-                    private int [|_goo|];
-                    public MyClass()
-                    {
-                        this.E += (_, __) => { this._goo = 0; }
-                    }
+                private int [|_goo|];
+                public MyClass()
+                {
+                this.E += (_, __) => { this._goo = 0; }
+                }
 
-                    public event EventHandler E;
+                public event EventHandler E;
                 }
                 """
             );
@@ -351,13 +351,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 public class MyClass
                 {
-                    private int [|_goo|];
-                    public MyClass()
-                    {
-                        this.E = delegate { this._goo = 0; };
-                    }
+                private int [|_goo|];
+                public MyClass()
+                {
+                this.E = delegate { this._goo = 0; };
+                }
 
-                    public Action<int> E;
+                public Action<int> E;
                 }
                 """
             );
@@ -370,11 +370,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 public class MyClass
                 {
-                    private int [|_goo|];
-                    public MyClass()
-                    {
-                        void LocalFunction() => this._goo = 0;
-                    }
+                private int [|_goo|];
+                public MyClass()
+                {
+                void LocalFunction() => this._goo = 0;
+                }
                 }
                 """
             );
@@ -387,11 +387,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 public class MyClass
                 {
-                    private int [|_goo|];
-                    public MyClass()
-                    {
-                        void LocalFunction() { this._goo = 0; }
-                    }
+                private int [|_goo|];
+                public MyClass()
+                {
+                void LocalFunction() { this._goo = 0; }
+                }
                 }
                 """
             );
@@ -404,12 +404,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|];
-                    MyClass()
-                    {
-                        var goo = new MyClass();
-                        goo._goo = 0;
-                    }
+                private int [|_goo|];
+                MyClass()
+                {
+                var goo = new MyClass();
+                goo._goo = 0;
+                }
                 }
                 """
             );
@@ -422,11 +422,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|];
-                    MyClass()
-                    {
-                        var goo = new MyClass { _goo = 0 };
-                    }
+                private int [|_goo|];
+                MyClass()
+                {
+                var goo = new MyClass { _goo = 0 };
+                }
                 }
                 """
             );
@@ -439,21 +439,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|];
-                    MyClass()
-                    {
-                        this._goo = 0;
-                    }
+                private int [|_goo|];
+                MyClass()
+                {
+                this._goo = 0;
+                }
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private readonly int _goo;
-                    MyClass()
-                    {
-                        this._goo = 0;
-                    }
+                private readonly int _goo;
+                MyClass()
+                {
+                this._goo = 0;
+                }
                 }
                 """
             );
@@ -466,21 +466,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|];
-                    int Goo
-                    {
-                        get { return _goo; }
-                    }
+                private int [|_goo|];
+                int Goo
+                {
+                get { return _goo; }
+                }
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private readonly int _goo;
-                    int Goo
-                    {
-                        get { return _goo; }
-                    }
+                private readonly int _goo;
+                int Goo
+                {
+                get { return _goo; }
+                }
                 }
                 """
             );
@@ -493,23 +493,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private string [|_s|];
-                    public MyClass(string s) => _s = s;
-                    public string Method()
-                    {
-                        return _s;
-                    }
+                private string [|_s|];
+                public MyClass(string s) => _s = s;
+                public string Method()
+                {
+                return _s;
+                }
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private readonly string [|_s|];
-                    public MyClass(string s) => _s = s;
-                    public string Method()
-                    {
-                        return _s;
-                    }
+                private readonly string [|_s|];
+                public MyClass(string s) => _s = s;
+                public string Method()
+                {
+                return _s;
+                }
                 }
                 """
             );
@@ -522,23 +522,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private string [|_s|];
-                    public MyClass(string s) => _s = s;
-                    public string Method()
-                    {
-                        return _s.ToUpper();
-                    }
+                private string [|_s|];
+                public MyClass(string s) => _s = s;
+                public string Method()
+                {
+                return _s.ToUpper();
+                }
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private readonly string [|_s|];
-                    public MyClass(string s) => _s = s;
-                    public string Method()
-                    {
-                        return _s.ToUpper();
-                    }
+                private readonly string [|_s|];
+                public MyClass(string s) => _s = s;
+                public string Method()
+                {
+                return _s.ToUpper();
+                }
                 }
                 """
             );
@@ -551,12 +551,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|];
-                    int Goo
-                    {
-                        get { return _goo; }
-                        set { _goo = value; }
-                    }
+                private int [|_goo|];
+                int Goo
+                {
+                get { return _goo; }
+                set { _goo = value; }
+                }
                 }
                 """
             );
@@ -569,11 +569,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|];
-                    int Goo()
-                    {
-                        _goo = 0;
-                    }
+                private int [|_goo|];
+                int Goo()
+                {
+                _goo = 0;
+                }
                 }
                 """
             );
@@ -586,15 +586,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|];
+                private int [|_goo|];
 
-                    class Derived : MyClass
-                    {
-                        Derived()
-                        {
-                            _goo = 1;
-                        }
-                    }
+                class Derived : MyClass
+                {
+                Derived()
+                {
+                _goo = 1;
+                }
+                }
                 }
                 """
             );
@@ -607,15 +607,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|];
+                private int [|_goo|];
 
-                    class Derived : MyClass
-                    {
-                        void Method()
-                        {
-                            _goo = 1;
-                        }
-                    }
+                class Derived : MyClass
+                {
+                void Method()
+                {
+                _goo = 1;
+                }
+                }
                 }
                 """
             );
@@ -628,29 +628,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    class NestedType
-                    {
-                        private int [|_goo|];
+                class NestedType
+                {
+                private int [|_goo|];
 
-                        public NestedType()
-                        {
-                            _goo = 0;
-                        }
-                    }
+                public NestedType()
+                {
+                _goo = 0;
+                }
+                }
                 }
                 """,
                 """
                 class MyClass
                 {
-                    class NestedType
-                    {
-                        private readonly int _goo;
+                class NestedType
+                {
+                private readonly int _goo;
 
-                        public NestedType()
-                        {
-                            _goo = 0;
-                        }
-                    }
+                public NestedType()
+                {
+                _goo = 0;
+                }
+                }
                 }
                 """
             );
@@ -663,21 +663,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|];
-                    int Goo()
-                    {
-                        var i = _goo;
-                    }
+                private int [|_goo|];
+                int Goo()
+                {
+                var i = _goo;
+                }
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private readonly int _goo;
-                    int Goo()
-                    {
-                        var i = _goo;
-                    }
+                private readonly int _goo;
+                int Goo()
+                {
+                var i = _goo;
+                }
                 }
                 """
             );
@@ -690,11 +690,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|] = 0;
-                    int Goo(int value)
-                    {
-                        _goo += value;
-                    }
+                private int [|_goo|] = 0;
+                int Goo(int value)
+                {
+                _goo += value;
+                }
                 }
                 """
             );
@@ -707,11 +707,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|] = 0;
-                    int Goo(int value)
-                    {
-                        _goo++;
-                    }
+                private int [|_goo|] = 0;
+                int Goo(int value)
+                {
+                _goo++;
+                }
                 }
                 """
             );
@@ -724,11 +724,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|] = 0;
-                    int Goo(int value)
-                    {
-                        --_goo;
-                    }
+                private int [|_goo|] = 0;
+                int Goo(int value)
+                {
+                --_goo;
+                }
                 }
                 """
             );
@@ -741,13 +741,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 partial class MyClass
                 {
-                    private int [|_goo|];
+                private int [|_goo|];
                 }
                 """,
                 """
                 partial class MyClass
                 {
-                    private readonly int _goo;
+                private readonly int _goo;
                 }
                 """
             );
@@ -760,7 +760,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 partial class MyClass
                 {
-                    private int [|_goo|];
+                private int [|_goo|];
                 }
                 partial class MyClass
                 {
@@ -769,7 +769,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 partial class MyClass
                 {
-                    private readonly int _goo;
+                private readonly int _goo;
                 }
                 partial class MyClass
                 {
@@ -784,38 +784,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
             await TestInRegularAndScript1Async(
                 """
                 <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                        <Document>partial class MyClass
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document>partial class MyClass
                 {
-                    private int [|_goo|];
+                private int [|_goo|];
                 }
-                        </Document>
-                        <Document>partial class MyClass
+                </Document>
+                <Document>partial class MyClass
                 {
-                    void M()
-                    {
-                    }
+                void M()
+                {
                 }
-                        </Document>
-                    </Project>
+                }
+                </Document>
+                </Project>
                 </Workspace>
                 """,
                 """
                 <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                        <Document>partial class MyClass
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document>partial class MyClass
                 {
-                    private readonly int _goo;
+                private readonly int _goo;
                 }
-                        </Document>
-                        <Document>partial class MyClass
+                </Document>
+                <Document>partial class MyClass
                 {
-                    void M()
-                    {
-                    }
+                void M()
+                {
                 }
-                        </Document>
-                    </Project>
+                }
+                </Document>
+                </Project>
                 </Workspace>
                 """
             );
@@ -828,12 +828,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 partial class MyClass
                 {
-                    private int [|_goo|];
+                private int [|_goo|];
 
-                    void SetGoo()
-                    {
-                        _goo = 0;
-                    }
+                void SetGoo()
+                {
+                _goo = 0;
+                }
                 }
                 """
             );
@@ -846,14 +846,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 partial class MyClass
                 {
-                    private int [|_goo|];
+                private int [|_goo|];
                 }
                 partial class MyClass
                 {
-                    void SetGoo()
-                    {
-                        _goo = 0;
-                    }
+                void SetGoo()
+                {
+                _goo = 0;
+                }
                 }
                 """
             );
@@ -865,21 +865,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
             await TestMissingInRegularAndScriptAsync(
                 """
                 <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                        <Document>partial class MyClass
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document>partial class MyClass
                 {
-                    private int [|_goo|];
+                private int [|_goo|];
                 }
-                        </Document>
-                        <Document>partial class MyClass
+                </Document>
+                <Document>partial class MyClass
                 {
-                    void SetGoo()
-                    {
-                        _goo = 0;
-                    }
+                void SetGoo()
+                {
+                _goo = 0;
                 }
-                        </Document>
-                    </Project>
+                }
+                </Document>
+                </Project>
                 </Workspace>
                 """
             );
@@ -892,27 +892,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|];
-                    void Goo()
-                    {
-                        Bar(_goo);
-                    }
-                    void Bar(int goo)
-                    {
-                    }
+                private int [|_goo|];
+                void Goo()
+                {
+                Bar(_goo);
+                }
+                void Bar(int goo)
+                {
+                }
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private readonly int _goo;
-                    void Goo()
-                    {
-                        Bar(_goo);
-                    }
-                    void Bar(int goo)
-                    {
-                    }
+                private readonly int _goo;
+                void Goo()
+                {
+                Bar(_goo);
+                }
+                void Bar(int goo)
+                {
+                }
                 }
                 """
             );
@@ -925,11 +925,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|];
-                    void Goo()
-                    {
-                        int.TryParse("123", out _goo);
-                    }
+                private int [|_goo|];
+                void Goo()
+                {
+                int.TryParse("123", out _goo);
+                }
                 }
                 """
             );
@@ -942,14 +942,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|];
-                    void Goo()
-                    {
-                        Bar(ref _goo);
-                    }
-                    void Bar(ref int goo)
-                    {
-                    }
+                private int [|_goo|];
+                void Goo()
+                {
+                Bar(ref _goo);
+                }
+                void Bar(ref int goo)
+                {
+                }
                 }
                 """
             );
@@ -962,11 +962,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|];
-                    internal ref int Goo()
-                    {
-                        return ref _goo;
-                    }
+                private int [|_goo|];
+                internal ref int Goo()
+                {
+                return ref _goo;
+                }
                 }
                 """
             );
@@ -979,9 +979,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|];
-                    internal ref int Goo()
-                        => ref _goo;
+                private int [|_goo|];
+                internal ref int Goo()
+                => ref _goo;
                 }
                 """
             );
@@ -994,12 +994,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|];
-                    internal struct Accessor
-                    {
-                        private MyClass _instance;
-                        internal ref int Goo => ref _instance._goo;
-                    }
+                private int [|_goo|];
+                internal struct Accessor
+                {
+                private MyClass _instance;
+                internal ref int Goo => ref _instance._goo;
+                }
                 }
                 """
             );
@@ -1012,12 +1012,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_a|];
-                    private int _b;
-                    internal ref int Goo(bool first)
-                    {
-                        return ref (first ? ref _a : ref _b);
-                    }
+                private int [|_a|];
+                private int _b;
+                internal ref int Goo(bool first)
+                {
+                return ref (first ? ref _a : ref _b);
+                }
                 }
                 """
             );
@@ -1026,12 +1026,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int _a;
-                    private int [|_b|];
-                    internal ref int Goo(bool first)
-                    {
-                        return ref (first ? ref _a : ref _b);
-                    }
+                private int _a;
+                private int [|_b|];
+                internal ref int Goo(bool first)
+                {
+                return ref (first ? ref _a : ref _b);
+                }
                 }
                 """
             );
@@ -1044,10 +1044,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_a|];
-                    private int _b;
-                    internal ref int Goo(bool first)
-                        => ref (first ? ref _a : ref _b);
+                private int [|_a|];
+                private int _b;
+                internal ref int Goo(bool first)
+                => ref (first ? ref _a : ref _b);
                 }
                 """
             );
@@ -1056,10 +1056,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int _a;
-                    private int [|_b|];
-                    internal ref int Goo(bool first)
-                        => ref (first ? ref _a : ref _b);
+                private int _a;
+                private int [|_b|];
+                internal ref int Goo(bool first)
+                => ref (first ? ref _a : ref _b);
                 }
                 """
             );
@@ -1072,16 +1072,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|];
-                    internal int Goo()
-                    {
-                        return Local();
+                private int [|_goo|];
+                internal int Goo()
+                {
+                return Local();
 
-                        ref int Local()
-                        {
-                            return ref _goo;
-                        }
-                    }
+                ref int Local()
+                {
+                return ref _goo;
+                }
+                }
                 }
                 """
             );
@@ -1094,15 +1094,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    delegate ref int D();
+                delegate ref int D();
 
-                    private int [|_goo|];
-                    internal int Goo()
-                    {
-                        D d = () => ref _goo;
+                private int [|_goo|];
+                internal int Goo()
+                {
+                D d = () => ref _goo;
 
-                        return d();
-                    }
+                return d();
+                }
                 }
                 """
             );
@@ -1115,15 +1115,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    delegate ref int D();
+                delegate ref int D();
 
-                    private int [|_goo|];
-                    internal int Goo()
-                    {
-                        D d = delegate { return ref _goo; };
+                private int [|_goo|];
+                internal int Goo()
+                {
+                D d = delegate { return ref _goo; };
 
-                        return d();
-                    }
+                return d();
+                }
                 }
                 """
             );
@@ -1136,21 +1136,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|];
-                    internal ref readonly int Goo()
-                    {
-                        return ref _goo;
-                    }
+                private int [|_goo|];
+                internal ref readonly int Goo()
+                {
+                return ref _goo;
+                }
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private readonly int _goo;
-                    internal ref readonly int Goo()
-                    {
-                        return ref _goo;
-                    }
+                private readonly int _goo;
+                internal ref readonly int Goo()
+                {
+                return ref _goo;
+                }
                 }
                 """
             );
@@ -1163,17 +1163,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|];
-                    internal ref readonly int Goo()
-                        => ref _goo;
+                private int [|_goo|];
+                internal ref readonly int Goo()
+                => ref _goo;
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private readonly int _goo;
-                    internal ref readonly int Goo()
-                        => ref _goo;
+                private readonly int _goo;
+                internal ref readonly int Goo()
+                => ref _goo;
                 }
                 """
             );
@@ -1186,23 +1186,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|];
-                    internal struct Accessor
-                    {
-                        private MyClass _instance;
-                        internal ref readonly int Goo => ref _instance._goo;
-                    }
+                private int [|_goo|];
+                internal struct Accessor
+                {
+                private MyClass _instance;
+                internal ref readonly int Goo => ref _instance._goo;
+                }
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private readonly int _goo;
-                    internal struct Accessor
-                    {
-                        private MyClass _instance;
-                        internal ref readonly int Goo => ref _instance._goo;
-                    }
+                private readonly int _goo;
+                internal struct Accessor
+                {
+                private MyClass _instance;
+                internal ref readonly int Goo => ref _instance._goo;
+                }
                 }
                 """
             );
@@ -1215,23 +1215,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_a|];
-                    private int _b;
-                    internal ref readonly int Goo(bool first)
-                    {
-                        return ref (first ? ref _a : ref _b);
-                    }
+                private int [|_a|];
+                private int _b;
+                internal ref readonly int Goo(bool first)
+                {
+                return ref (first ? ref _a : ref _b);
+                }
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private readonly int _a;
-                    private int _b;
-                    internal ref readonly int Goo(bool first)
-                    {
-                        return ref (first ? ref _a : ref _b);
-                    }
+                private readonly int _a;
+                private int _b;
+                internal ref readonly int Goo(bool first)
+                {
+                return ref (first ? ref _a : ref _b);
+                }
                 }
                 """
             );
@@ -1240,23 +1240,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int _a;
-                    private int [|_b|];
-                    internal ref readonly int Goo(bool first)
-                    {
-                        return ref (first ? ref _a : ref _b);
-                    }
+                private int _a;
+                private int [|_b|];
+                internal ref readonly int Goo(bool first)
+                {
+                return ref (first ? ref _a : ref _b);
+                }
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private int _a;
-                    private readonly int _b;
-                    internal ref readonly int Goo(bool first)
-                    {
-                        return ref (first ? ref _a : ref _b);
-                    }
+                private int _a;
+                private readonly int _b;
+                internal ref readonly int Goo(bool first)
+                {
+                return ref (first ? ref _a : ref _b);
+                }
                 }
                 """
             );
@@ -1269,19 +1269,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_a|];
-                    private int _b;
-                    internal ref readonly int Goo(bool first)
-                        => ref (first ? ref _a : ref _b);
+                private int [|_a|];
+                private int _b;
+                internal ref readonly int Goo(bool first)
+                => ref (first ? ref _a : ref _b);
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private readonly int _a;
-                    private int _b;
-                    internal ref readonly int Goo(bool first)
-                        => ref (first ? ref _a : ref _b);
+                private readonly int _a;
+                private int _b;
+                internal ref readonly int Goo(bool first)
+                => ref (first ? ref _a : ref _b);
                 }
                 """
             );
@@ -1290,19 +1290,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int _a;
-                    private int [|_b|];
-                    internal ref readonly int Goo(bool first)
-                        => ref (first ? ref _a : ref _b);
+                private int _a;
+                private int [|_b|];
+                internal ref readonly int Goo(bool first)
+                => ref (first ? ref _a : ref _b);
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private int _a;
-                    private readonly int _b;
-                    internal ref readonly int Goo(bool first)
-                        => ref (first ? ref _a : ref _b);
+                private int _a;
+                private readonly int _b;
+                internal ref readonly int Goo(bool first)
+                => ref (first ? ref _a : ref _b);
                 }
                 """
             );
@@ -1315,31 +1315,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|];
-                    internal int Goo()
-                    {
-                        return Local();
+                private int [|_goo|];
+                internal int Goo()
+                {
+                return Local();
 
-                        ref readonly int Local()
-                        {
-                            return ref _goo;
-                        }
-                    }
+                ref readonly int Local()
+                {
+                return ref _goo;
+                }
+                }
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private readonly int _goo;
-                    internal int Goo()
-                    {
-                        return Local();
+                private readonly int _goo;
+                internal int Goo()
+                {
+                return Local();
 
-                        ref readonly int Local()
-                        {
-                            return ref _goo;
-                        }
-                    }
+                ref readonly int Local()
+                {
+                return ref _goo;
+                }
+                }
                 }
                 """
             );
@@ -1352,29 +1352,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    delegate ref readonly int D();
+                delegate ref readonly int D();
 
-                    private int [|_goo|];
-                    internal int Goo()
-                    {
-                        D d = () => ref _goo;
+                private int [|_goo|];
+                internal int Goo()
+                {
+                D d = () => ref _goo;
 
-                        return d();
-                    }
+                return d();
+                }
                 }
                 """,
                 """
                 class MyClass
                 {
-                    delegate ref readonly int D();
+                delegate ref readonly int D();
 
-                    private readonly int _goo;
-                    internal int Goo()
-                    {
-                        D d = () => ref _goo;
+                private readonly int _goo;
+                internal int Goo()
+                {
+                D d = () => ref _goo;
 
-                        return d();
-                    }
+                return d();
+                }
                 }
                 """
             );
@@ -1387,29 +1387,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    delegate ref readonly int D();
+                delegate ref readonly int D();
 
-                    private int [|_goo|];
-                    internal int Goo()
-                    {
-                        D d = delegate { return ref _goo; };
+                private int [|_goo|];
+                internal int Goo()
+                {
+                D d = delegate { return ref _goo; };
 
-                        return d();
-                    }
+                return d();
+                }
                 }
                 """,
                 """
                 class MyClass
                 {
-                    delegate ref readonly int D();
+                delegate ref readonly int D();
 
-                    private readonly int _goo;
-                    internal int Goo()
-                    {
-                        D d = delegate { return ref _goo; };
+                private readonly int _goo;
+                internal int Goo()
+                {
+                D d = delegate { return ref _goo; };
 
-                        return d();
-                    }
+                return d();
+                }
                 }
                 """
             );
@@ -1422,23 +1422,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private bool [|_a|];
-                    private int _b;
-                    internal ref int Goo()
-                    {
-                        return ref (_a ? ref _b : ref _b);
-                    }
+                private bool [|_a|];
+                private int _b;
+                internal ref int Goo()
+                {
+                return ref (_a ? ref _b : ref _b);
+                }
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private readonly bool _a;
-                    private int _b;
-                    internal ref int Goo()
-                    {
-                        return ref (_a ? ref _b : ref _b);
-                    }
+                private readonly bool _a;
+                private int _b;
+                internal ref int Goo()
+                {
+                return ref (_a ? ref _b : ref _b);
+                }
                 }
                 """
             );
@@ -1451,19 +1451,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private bool [|_a|];
-                    private int _b;
-                    internal ref int Goo()
-                        => ref (_a ? ref _b : ref _b);
+                private bool [|_a|];
+                private int _b;
+                internal ref int Goo()
+                => ref (_a ? ref _b : ref _b);
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private readonly bool _a;
-                    private int _b;
-                    internal ref int Goo()
-                        => ref (_a ? ref _b : ref _b);
+                private readonly bool _a;
+                private int _b;
+                internal ref int Goo()
+                => ref (_a ? ref _b : ref _b);
                 }
                 """
             );
@@ -1476,21 +1476,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|];
-                    MyClass()
-                    {
-                        int.TryParse("123", out _goo);
-                    }
+                private int [|_goo|];
+                MyClass()
+                {
+                int.TryParse("123", out _goo);
+                }
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private readonly int _goo;
-                    MyClass()
-                    {
-                        int.TryParse("123", out _goo);
-                    }
+                private readonly int _goo;
+                MyClass()
+                {
+                int.TryParse("123", out _goo);
+                }
                 }
                 """
             );
@@ -1503,27 +1503,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|];
-                    MyClass()
-                    {
-                        Bar(ref _goo);
-                    }
-                    void Bar(ref int goo)
-                    {
-                    }
+                private int [|_goo|];
+                MyClass()
+                {
+                Bar(ref _goo);
+                }
+                void Bar(ref int goo)
+                {
+                }
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private readonly int _goo;
-                    MyClass()
-                    {
-                        Bar(ref _goo);
-                    }
-                    void Bar(ref int goo)
-                    {
-                    }
+                private readonly int _goo;
+                MyClass()
+                {
+                Bar(ref _goo);
+                }
+                void Bar(ref int goo)
+                {
+                }
                 }
                 """
             );
@@ -1536,21 +1536,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private static int [|_goo|];
-                    static MyClass()
-                    {
-                        _goo = 0;
-                    }
+                private static int [|_goo|];
+                static MyClass()
+                {
+                _goo = 0;
+                }
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private static readonly int _goo;
-                    static MyClass()
-                    {
-                        _goo = 0;
-                    }
+                private static readonly int _goo;
+                static MyClass()
+                {
+                _goo = 0;
+                }
                 }
                 """
             );
@@ -1563,11 +1563,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private static int [|_goo|];
-                    MyClass()
-                    {
-                        _goo = 0;
-                    }
+                private static int [|_goo|];
+                MyClass()
+                {
+                _goo = 0;
+                }
                 }
                 """
             );
@@ -1580,11 +1580,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 struct MyStruct
                 {
-                    private int _goo;
+                private int _goo;
                 }
                 class MyClass
                 {
-                    private MyStruct [|_goo|];
+                private MyStruct [|_goo|];
                 }
                 """
             );
@@ -1597,25 +1597,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 struct MyStruct
                 {
-                    private readonly int _goo;
-                    private const int _bar = 0;
-                    private static int _fizz;
+                private readonly int _goo;
+                private const int _bar = 0;
+                private static int _fizz;
                 }
                 class MyClass
                 {
-                    private MyStruct [|_goo|];
+                private MyStruct [|_goo|];
                 }
                 """,
                 """
                 struct MyStruct
                 {
-                    private readonly int _goo;
-                    private const int _bar = 0;
-                    private static int _fizz;
+                private readonly int _goo;
+                private const int _bar = 0;
+                private static int _fizz;
                 }
                 class MyClass
                 {
-                    private readonly MyStruct _goo;
+                private readonly MyStruct _goo;
                 }
                 """
             );
@@ -1628,23 +1628,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int {|FixAllInDocument:_goo|} = 0, _bar = 0;
-                    private int _x = 0, _y = 0, _z = 0;
-                    private int _fizz = 0;
+                private int {|FixAllInDocument:_goo|} = 0, _bar = 0;
+                private int _x = 0, _y = 0, _z = 0;
+                private int _fizz = 0;
 
-                    void Method() { _z = 1; }
+                void Method() { _z = 1; }
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private readonly int _goo = 0, _bar = 0;
-                    private readonly int _x = 0;
-                    private readonly int _y = 0;
-                    private int _z = 0;
-                    private readonly int _fizz = 0;
+                private readonly int _goo = 0, _bar = 0;
+                private readonly int _x = 0;
+                private readonly int _y = 0;
+                private int _z = 0;
+                private readonly int _fizz = 0;
 
-                    void Method() { _z = 1; }
+                void Method() { _z = 1; }
                 }
                 """
             );
@@ -1657,44 +1657,44 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 using System;
 
-                  partial struct MyClass
-                  {
-                      private static Func<int, bool> {|FixAllInDocument:_test1|} = x => x > 0;
-                      private static Func<int, bool> _test2 = x => x < 0;
+                partial struct MyClass
+                {
+                private static Func<int, bool> {|FixAllInDocument:_test1|} = x => x > 0;
+                private static Func<int, bool> _test2 = x => x < 0;
 
-                      private static Func<int, bool> _test3 = x =>
-                      {
-                          return x == 0;
-                      };
+                private static Func<int, bool> _test3 = x =>
+                {
+                return x == 0;
+                };
 
-                      private static Func<int, bool> _test4 = x =>
-                      {
-                          return x != 0;
-                      };
-                  }
+                private static Func<int, bool> _test4 = x =>
+                {
+                return x != 0;
+                };
+                }
 
-                  partial struct MyClass { }
+                partial struct MyClass { }
                 """,
                 """
                 using System;
 
-                  partial struct MyClass
-                  {
-                      private static readonly Func<int, bool> _test1 = x => x > 0;
-                      private static readonly Func<int, bool> _test2 = x => x < 0;
+                partial struct MyClass
+                {
+                private static readonly Func<int, bool> _test1 = x => x > 0;
+                private static readonly Func<int, bool> _test2 = x => x < 0;
 
-                      private static readonly Func<int, bool> _test3 = x =>
-                      {
-                          return x == 0;
-                      };
+                private static readonly Func<int, bool> _test3 = x =>
+                {
+                return x == 0;
+                };
 
-                      private static readonly Func<int, bool> _test4 = x =>
-                      {
-                          return x != 0;
-                      };
-                  }
+                private static readonly Func<int, bool> _test4 = x =>
+                {
+                return x != 0;
+                };
+                }
 
-                  partial struct MyClass { }
+                partial struct MyClass { }
                 """
             );
         }
@@ -1706,21 +1706,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|];
-                    MyClass()
-                    {
-                        (_goo) = 0;
-                    }
+                private int [|_goo|];
+                MyClass()
+                {
+                (_goo) = 0;
+                }
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private readonly int _goo;
-                    MyClass()
-                    {
-                        (_goo) = 0;
-                    }
+                private readonly int _goo;
+                MyClass()
+                {
+                (_goo) = 0;
+                }
                 }
                 """
             );
@@ -1733,21 +1733,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class MyClass
                 {
-                    private int [|_goo|];
-                    MyClass()
-                    {
-                        (this._goo) = 0;
-                    }
+                private int [|_goo|];
+                MyClass()
+                {
+                (this._goo) = 0;
+                }
                 }
                 """,
                 """
                 class MyClass
                 {
-                    private readonly int _goo;
-                    MyClass()
-                    {
-                        (this._goo) = 0;
-                    }
+                private readonly int _goo;
+                MyClass()
+                {
+                (this._goo) = 0;
+                }
                 }
                 """
             );
@@ -1760,13 +1760,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class C
                 {
-                    [|int i;|]
-                    int j;
+                [|int i;|]
+                int j;
 
-                    void M()
-                    {
-                        (i, j) = (1, 2);
-                    }
+                void M()
+                {
+                (i, j) = (1, 2);
+                }
                 }
                 """
             );
@@ -1779,13 +1779,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class C
                 {
-                    [|int i;|]
-                    int j;
+                [|int i;|]
+                int j;
 
-                    void M()
-                    {
-                        ((i, j), j) = ((1, 2), 3);
-                    }
+                void M()
+                {
+                ((i, j), j) = ((1, 2), 3);
+                }
                 }
                 """
             );
@@ -1798,13 +1798,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class C
                 {
-                    [|int i;|]
-                    int j;
+                [|int i;|]
+                int j;
 
-                    void M()
-                    {
-                        ((this.i, j), j) = (1, 2);
-                    }
+                void M()
+                {
+                ((this.i, j), j) = (1, 2);
+                }
                 }
                 """
             );
@@ -1817,25 +1817,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class C
                 {
-                    [|int i;|]
-                    int j;
+                [|int i;|]
+                int j;
 
-                    void M()
-                    {
-                        (j, j) = (i, i);
-                    }
+                void M()
+                {
+                (j, j) = (i, i);
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    readonly int i;
-                    int j;
+                readonly int i;
+                int j;
 
-                    void M()
-                    {
-                        (j, j) = (i, i);
-                    }
+                void M()
+                {
+                (j, j) = (i, i);
+                }
                 }
                 """
             );
@@ -1848,27 +1848,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class C
                 {
-                    [|private int i;|]
+                [|private int i;|]
 
-                    [System.CodeDom.Compiler.GeneratedCodeAttribute("", "")]
-                    private int j;
+                [System.CodeDom.Compiler.GeneratedCodeAttribute("", "")]
+                private int j;
 
-                    void M()
-                    {
-                    }
+                void M()
+                {
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    private readonly int i;
+                private readonly int i;
 
-                    [System.CodeDom.Compiler.GeneratedCodeAttribute("", "")]
-                    private int j;
+                [System.CodeDom.Compiler.GeneratedCodeAttribute("", "")]
+                private int j;
 
-                    void M()
-                    {
-                    }
+                void M()
+                {
+                }
                 }
                 """
             );
@@ -1881,7 +1881,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 unsafe struct S
                 {
-                    [|private fixed byte b[8];|]
+                [|private fixed byte b[8];|]
                 }
                 """
             );
@@ -1894,13 +1894,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class Program
                 {
-                    [|int i;|]
+                [|int i;|]
 
-                    void M()
-                    {
-                        ref var value = ref i;
-                        value += 1;
-                    }
+                void M()
+                {
+                ref var value = ref i;
+                value += 1;
+                }
                 }
                 """
             );
@@ -1913,23 +1913,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class Program
                 {
-                    [|int i;|]
+                [|int i;|]
 
-                    void M()
-                    {
-                        ref readonly var value = ref i;
-                    }
+                void M()
+                {
+                ref readonly var value = ref i;
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    [|readonly int i;|]
+                [|readonly int i;|]
 
-                    void M()
-                    {
-                        ref readonly var value = ref i;
-                    }
+                void M()
+                {
+                ref readonly var value = ref i;
+                }
                 }
                 """
             );
@@ -1942,33 +1942,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 interface IFaceServiceClient
                 {
-                    void DetectAsync();
+                void DetectAsync();
                 }
 
                 public class Repro
                 {
-                    private static IFaceServiceClient [|faceServiceClient|] = null;
+                private static IFaceServiceClient [|faceServiceClient|] = null;
 
-                    public static void Run()
-                    {
-                        faceServiceClient.DetectAsync();
-                    }
+                public static void Run()
+                {
+                faceServiceClient.DetectAsync();
+                }
                 }
                 """,
                 """
                 interface IFaceServiceClient
                 {
-                    void DetectAsync();
+                void DetectAsync();
                 }
 
                 public class Repro
                 {
-                    private static readonly IFaceServiceClient faceServiceClient = null;
+                private static readonly IFaceServiceClient faceServiceClient = null;
 
-                    public static void Run()
-                    {
-                        faceServiceClient.DetectAsync();
-                    }
+                public static void Run()
+                {
+                faceServiceClient.DetectAsync();
+                }
                 }
                 """
             );
@@ -1981,13 +1981,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class TestClass
                 {
-                    private volatile object [|first|]; 
+                private volatile object [|first|];
                 }
                 """,
                 """
                 class TestClass
                 {
-                    private readonly object first; 
+                private readonly object first;
                 }
                 """
             );
@@ -2000,14 +2000,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class TestClass
                 {
-                    private volatile object [|first|], second; 
+                private volatile object [|first|], second;
                 }
                 """,
                 """
                 class TestClass
                 {
-                    private readonly object first;
-                    private volatile object second;
+                private readonly object first;
+                private volatile object second;
                 }
                 """
             );
@@ -2020,14 +2020,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 class TestClass
                 {
-                    private volatile object first, [|second|]; 
+                private volatile object first, [|second|];
                 }
                 """,
                 """
                 class TestClass
                 {
-                    private volatile object first;
-                    private readonly object second;
+                private volatile object first;
+                private readonly object second;
                 }
                 """
             );
@@ -2040,13 +2040,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 public class C
                 {
-                    private string [|x|] = string.Empty;
+                private string [|x|] = string.Empty;
 
-                    public bool M()
-                    {
-                        ref var myVar = ref x;
-                        return myVar is null;
-                    }
+                public bool M()
+                {
+                ref var myVar = ref x;
+                return myVar is null;
+                }
                 }
                 """
             );
@@ -2061,14 +2061,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
 
                 public class Test
                 {
-                    private ulong [|nextD3D12ComputeFenceValue|];
+                private ulong [|nextD3D12ComputeFenceValue|];
 
-                    internal void Repro()
-                    {
-                        ref ulong d3D12FenceValue = ref Unsafe.NullRef<ulong>();
-                        d3D12FenceValue = ref nextD3D12ComputeFenceValue;
-                        d3D12FenceValue++;
-                    }
+                internal void Repro()
+                {
+                ref ulong d3D12FenceValue = ref Unsafe.NullRef<ulong>();
+                d3D12FenceValue = ref nextD3D12ComputeFenceValue;
+                d3D12FenceValue++;
+                }
                 }
                 """
             );
@@ -2083,8 +2083,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
 
                 class Program
                 {
-                    [ThreadStatic]
-                    private static object [|t_obj|];
+                [ThreadStatic]
+                private static object [|t_obj|];
                 }
                 """
             );
@@ -2096,30 +2096,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
             await TestMissingInRegularAndScriptAsync(
                 """
                 <Workspace>
-                    <Project Language = "C#" AssemblyName="Assembly1" CommonReferences="true">
-                        <Document FilePath = "z:\\File1.cs">
+                <Project Language = "C#" AssemblyName="Assembly1" CommonReferences="true">
+                <Document FilePath = "z:\\File1.cs">
                 public sealed partial class Test
                 {
-                    private int [|_value|];
+                private int [|_value|];
 
-                    public static void M()
-                        => _ = new Test { Value = 1 };
+                public static void M()
+                => _ = new Test { Value = 1 };
                 }
-                        </Document>
-                        <Document FilePath = "z:\\File2.g.cs">
+                </Document>
+                <Document FilePath = "z:\\File2.g.cs">
                 using System.CodeDom.Compiler;
 
                 [GeneratedCode(null, null)]
                 public sealed partial class Test
                 {
-                    public int Value
-                    {
-                        get => _value;
-                        set => _value = value;
-                    }
+                public int Value
+                {
+                get => _value;
+                set => _value = value;
                 }
-                        </Document>
-                    </Project>
+                }
+                </Document>
+                </Project>
                 </Workspace>
                 """
             );
@@ -2131,16 +2131,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
             await TestMissingAsync(
                 """
                 <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferencesNet45="true">
-                        <Document>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferencesNet45="true">
+                <Document>
                 [System.Runtime.Serialization.DataContractAttribute]
                 public class MyClass
                 {
-                    [System.Runtime.Serialization.DataMember]
-                    private bool [|isReadOnly|];
+                [System.Runtime.Serialization.DataMember]
+                private bool [|isReadOnly|];
                 }
-                        </Document>
-                    </Project>
+                </Document>
+                </Project>
                 </Workspace>
                 """
             );
@@ -2152,28 +2152,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
             await TestInRegularAndScript1Async(
                 """
                 <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferencesNet45="true">
-                        <Document>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferencesNet45="true">
+                <Document>
                 public class MyClass
                 {
-                    [System.Runtime.Serialization.DataMember]
-                    private bool [|isReadOnly|];
+                [System.Runtime.Serialization.DataMember]
+                private bool [|isReadOnly|];
                 }
-                        </Document>
-                    </Project>
+                </Document>
+                </Project>
                 </Workspace>
                 """,
                 """
                 <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferencesNet45="true">
-                        <Document>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferencesNet45="true">
+                <Document>
                 public class MyClass
                 {
-                    [System.Runtime.Serialization.DataMember]
-                    private readonly bool isReadOnly;
+                [System.Runtime.Serialization.DataMember]
+                private readonly bool isReadOnly;
                 }
-                        </Document>
-                    </Project>
+                </Document>
+                </Project>
                 </Workspace>
                 """
             );
@@ -2185,34 +2185,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
             await TestInRegularAndScript1Async(
                 """
                 <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferencesNet45="true">
-                        <Document>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferencesNet45="true">
+                <Document>
                 [System.Runtime.Serialization.DataContractAttribute]
                 public class MyClass
                 {
-                    [System.Runtime.Serialization.DataMember]
-                    private bool isReadOnly;
+                [System.Runtime.Serialization.DataMember]
+                private bool isReadOnly;
 
-                    private bool [|isReadOnly2|];
+                private bool [|isReadOnly2|];
                 }
-                        </Document>
-                    </Project>
+                </Document>
+                </Project>
                 </Workspace>
                 """,
                 """
                 <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferencesNet45="true">
-                        <Document>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferencesNet45="true">
+                <Document>
                 [System.Runtime.Serialization.DataContractAttribute]
                 public class MyClass
                 {
-                    [System.Runtime.Serialization.DataMember]
-                    private bool isReadOnly;
+                [System.Runtime.Serialization.DataMember]
+                private bool isReadOnly;
 
-                    private readonly bool isReadOnly2;
+                private readonly bool isReadOnly2;
                 }
-                        </Document>
-                    </Project>
+                </Document>
+                </Project>
                 </Workspace>
                 """
             );
@@ -2224,15 +2224,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
             await TestMissingAsync(
                 """
                 <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferencesNet45="true">
-                        <Document>
+                <Project Language="C#" AssemblyName="Assembly1" CommonReferencesNet45="true">
+                <Document>
                 [System.Runtime.Serialization.DataContractAttribute]
                 public class MyClass
                 {
-                    public bool [|isReadOnly|];
+                public bool [|isReadOnly|];
                 }
-                        </Document>
-                    </Project>
+                </Document>
+                </Project>
                 </Workspace>
                 """
             );
@@ -2245,13 +2245,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 struct MyClass
                 {
-                    private int [|_goo|];
+                private int [|_goo|];
                 }
                 """,
                 """
                 struct MyClass
                 {
-                    private readonly int _goo;
+                private readonly int _goo;
                 }
                 """
             );
@@ -2264,12 +2264,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 struct MyClass
                 {
-                    private int [|_goo|];
+                private int [|_goo|];
 
-                    void M()
-                    {
-                        this = default;
-                    }
+                void M()
+                {
+                this = default;
+                }
                 }
                 """
             );
@@ -2282,17 +2282,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
                 """
                 public class C
                 {
-                    int x;
+                int x;
 
-                    int [|y|];
+                int [|y|];
                 }
                 """,
                 """
                 public class C
                 {
-                    int x;
+                int x;
 
-                    readonly int y;
+                readonly int y;
                 }
                 """
             );
@@ -2308,12 +2308,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
 
                 class C<T>
                 {
-                    private static IEqualityComparer<T> [|s_value|];
+                private static IEqualityComparer<T> [|s_value|];
 
-                    static C()
-                    {
-                        C<T>.s_value = null;
-                    }
+                static C()
+                {
+                C<T>.s_value = null;
+                }
                 }
                 """,
                 """
@@ -2322,12 +2322,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
 
                 class C<T>
                 {
-                    private static readonly IEqualityComparer<T> s_value;
+                private static readonly IEqualityComparer<T> s_value;
 
-                    static C()
-                    {
-                        C<T>.s_value = null;
-                    }
+                static C()
+                {
+                C<T>.s_value = null;
+                }
                 }
                 """,
                 parseOptions: s_strictFeatureFlag
@@ -2344,12 +2344,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
 
                 class C<T>
                 {
-                    private static IEqualityComparer<T> [|s_value|];
+                private static IEqualityComparer<T> [|s_value|];
 
-                    static C()
-                    {
-                        C<string>.s_value = null;
-                    }
+                static C()
+                {
+                C<string>.s_value = null;
+                }
                 }
                 """,
                 new TestParameters(parseOptions: s_strictFeatureFlag)
@@ -2366,12 +2366,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeFieldReadonly
 
                 class C<T>
                 {
-                    private static IEqualityComparer<T> [|s_value|];
+                private static IEqualityComparer<T> [|s_value|];
 
-                    static C()
-                    {
-                        C<string>.s_value = null;
-                    }
+                static C()
+                {
+                C<string>.s_value = null;
+                }
                 }
                 """
             );

@@ -9733,19 +9733,19 @@ class Context
 
                 class E
                 {
-                    void M(string s)
-                    {
-                        var v = s switch
-                        {
-                            "" => [|Goo()|],
-                            "a" => Bar(),
-                        };
-                    }
+                void M(string s)
+                {
+                var v = s switch
+                {
+                "" => [|Goo()|],
+                "a" => Bar(),
+                };
+                }
 
-                    private int Bar()
-                    {
-                        throw new NotImplementedException();
-                    }
+                private int Bar()
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """,
                 """
@@ -9753,24 +9753,24 @@ class Context
 
                 class E
                 {
-                    void M(string s)
-                    {
-                        var v = s switch
-                        {
-                            "" => Goo(),
-                            "a" => Bar(),
-                        };
-                    }
+                void M(string s)
+                {
+                var v = s switch
+                {
+                "" => Goo(),
+                "a" => Bar(),
+                };
+                }
 
-                    private int Goo()
-                    {
-                        throw new NotImplementedException();
-                    }
+                private int Goo()
+                {
+                throw new NotImplementedException();
+                }
 
-                    private int Bar()
-                    {
-                        throw new NotImplementedException();
-                    }
+                private int Bar()
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """
             );
@@ -9785,14 +9785,14 @@ class Context
 
                 class E
                 {
-                    void M(string s)
-                    {
-                        var v = s switch
-                        {
-                            "" => [|Goo()|],
-                            "a" => Bar(),
-                        };
-                    }
+                void M(string s)
+                {
+                var v = s switch
+                {
+                "" => [|Goo()|],
+                "a" => Bar(),
+                };
+                }
                 }
                 """,
                 """
@@ -9800,19 +9800,19 @@ class Context
 
                 class E
                 {
-                    void M(string s)
-                    {
-                        var v = s switch
-                        {
-                            "" => Goo(),
-                            "a" => Bar(),
-                        };
-                    }
+                void M(string s)
+                {
+                var v = s switch
+                {
+                "" => Goo(),
+                "a" => Bar(),
+                };
+                }
 
-                    private object Goo()
-                    {
-                        throw new NotImplementedException();
-                    }
+                private object Goo()
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """
             );
@@ -9827,14 +9827,14 @@ class Context
 
                 class E
                 {
-                    void M(string s)
-                    {
-                        var v = s switch
-                        {
-                            "" => Goo(),
-                            "a" => [|Bar()|],
-                        };
-                    }
+                void M(string s)
+                {
+                var v = s switch
+                {
+                "" => Goo(),
+                "a" => [|Bar()|],
+                };
+                }
                 }
                 """,
                 """
@@ -9842,19 +9842,19 @@ class Context
 
                 class E
                 {
-                    void M(string s)
-                    {
-                        var v = s switch
-                        {
-                            "" => Goo(),
-                            "a" => Bar(),
-                        };
-                    }
+                void M(string s)
+                {
+                var v = s switch
+                {
+                "" => Goo(),
+                "a" => Bar(),
+                };
+                }
 
-                    private object Bar()
-                    {
-                        throw new NotImplementedException();
-                    }
+                private object Bar()
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """
             );
@@ -9869,10 +9869,10 @@ class Context
 
                 public unsafe class Bar
                 {
-                    public static ZZZ()
-                    {
-                         int* i = &[|Goo|]();
-                    }
+                public static ZZZ()
+                {
+                int* i = &[|Goo|]();
+                }
                 }
                 """,
                 """
@@ -9880,15 +9880,15 @@ class Context
 
                 public unsafe class Bar
                 {
-                    public static ZZZ()
-                    {
-                         int* i = &Goo();
-                    }
-                
-                    private static int Goo()
-                    {
-                        throw new NotImplementedException();
-                    }
+                public static ZZZ()
+                {
+                int* i = &Goo();
+                }
+
+                private static int Goo()
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """
             );
@@ -9900,29 +9900,29 @@ class Context
             await TestInRegularAndScriptAsync(
                 """
                 using System;
-                
+
                 public unsafe class Bar
                 {
-                    public static ZZZ()
-                    {
-                         delegate*<void> i = &[|Goo|];
-                    }
+                public static ZZZ()
+                {
+                delegate*<void> i = &[|Goo|];
+                }
                 }
                 """,
                 """
                 using System;
-                
+
                 public unsafe class Bar
                 {
-                    public static ZZZ()
-                    {
-                         delegate*<void> i = &Goo;
-                    }
+                public static ZZZ()
+                {
+                delegate*<void> i = &Goo;
+                }
 
-                    private static void Goo()
-                    {
-                        throw new NotImplementedException();
-                    }
+                private static void Goo()
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """
             );
@@ -9934,29 +9934,29 @@ class Context
             await TestInRegularAndScriptAsync(
                 """
                 using System;
-                
+
                 public unsafe class Bar
                 {
-                    public static ZZZ()
-                    {
-                         delegate*<int, bool> i = &[|Goo|];
-                    }
+                public static ZZZ()
+                {
+                delegate*<int, bool> i = &[|Goo|];
+                }
                 }
                 """,
                 """
                 using System;
-                
+
                 public unsafe class Bar
                 {
-                    public static ZZZ()
-                    {
-                         delegate*<int, bool> i = &Goo;
-                    }
-                
-                    private static bool Goo(int arg)
-                    {
-                        throw new NotImplementedException();
-                    }
+                public static ZZZ()
+                {
+                delegate*<int, bool> i = &Goo;
+                }
+
+                private static bool Goo(int arg)
+                {
+                throw new NotImplementedException();
+                }
                 }
                 """
             );

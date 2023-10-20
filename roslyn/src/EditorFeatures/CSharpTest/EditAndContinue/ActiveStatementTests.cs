@@ -10820,42 +10820,42 @@ class C
         public void Lambdas_EditAroundTry_WithActiveStatement()
         {
             var src1 = """
-                Action F = () =>
-                {
-                    try
-                    {
-                        <AS:1>G();</AS:1>
-                    }
-                    <ER:1.0>catch
-                    {
-                    }</ER:1.0>
-                };
+            Action F = () =>
+            {
+            try
+            {
+            <AS:1>G();</AS:1>
+            }
+            <ER:1.0>catch
+            {
+            }</ER:1.0>
+            };
 
-                <AS:0>F();</AS:0>
+            <AS:0>F();</AS:0>
 
-                void G()
-                <AS:2>{</AS:2>
-                }
-                """;
+            void G()
+            <AS:2>{</AS:2>
+            }
+            """;
             var src2 = """
-                Action F = () =>
-                {
-                    System.Console.WriteLine(1);
-                    try
-                    {
-                        <AS:1>G();</AS:1>
-                    }
-                    <ER:1.0>catch
-                    {
-                    }</ER:1.0>
-                };
-                
-                <AS:0>F();</AS:0>
-                
-                void G()
-                <AS:2>{</AS:2>
-                }
-                """;
+            Action F = () =>
+            {
+            System.Console.WriteLine(1);
+            try
+            {
+            <AS:1>G();</AS:1>
+            }
+            <ER:1.0>catch
+            {
+            }</ER:1.0>
+            };
+
+            <AS:0>F();</AS:0>
+
+            void G()
+            <AS:2>{</AS:2>
+            }
+            """;
 
             var edits = GetTopEdits(src1, src2);
             var active = GetActiveStatements(src1, src2);
@@ -12311,42 +12311,42 @@ class C
         public void LocalFunction_EditAroundTry_WithActiveStatement()
         {
             var src1 = """
-                <AS:0>F();</AS:0>
+            <AS:0>F();</AS:0>
 
-                void F()
-                {
-                    try
-                    {
-                        <AS:1>G();</AS:1>
-                    }
-                    <ER:1.0>catch
-                    {
-                    }</ER:1.0>
-                }
+            void F()
+            {
+            try
+            {
+            <AS:1>G();</AS:1>
+            }
+            <ER:1.0>catch
+            {
+            }</ER:1.0>
+            }
 
-                void G()
-                <AS:2>{</AS:2>
-                }
-                """;
+            void G()
+            <AS:2>{</AS:2>
+            }
+            """;
             var src2 = """
-                <AS:0>F();</AS:0>
+            <AS:0>F();</AS:0>
 
-                void F()
-                {
-                    System.Console.WriteLine(1);
-                    try
-                    {
-                        <AS:1>G();</AS:1>
-                    }
-                    <ER:1.0>catch
-                    {
-                    }</ER:1.0>
-                }
+            void F()
+            {
+            System.Console.WriteLine(1);
+            try
+            {
+            <AS:1>G();</AS:1>
+            }
+            <ER:1.0>catch
+            {
+            }</ER:1.0>
+            }
 
-                void G()
-                <AS:2>{</AS:2>
-                }
-                """;
+            void G()
+            <AS:2>{</AS:2>
+            }
+            """;
 
             var edits = GetTopEdits(src1, src2);
             var active = GetActiveStatements(src1, src2);

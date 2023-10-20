@@ -2400,24 +2400,24 @@ int         nextLine            =           30          ;$$
         public async Task DisappearedTokens2()
         {
             var code = """
-                class Class1
-                {
-                    void Goo()
-                    {
-                        Object o=new Object);$$
-                    }
-                }
-                """;
+            class Class1
+            {
+            void Goo()
+            {
+            Object o=new Object);$$
+            }
+            }
+            """;
 
             var expected = """
-                class Class1
-                {
-                    void Goo()
-                    {
-                        Object o = new Object);
-                    }
-                }
-                """;
+            class Class1
+            {
+            void Goo()
+            {
+            Object o = new Object);
+            }
+            }
+            """;
 
             await AutoFormatOnSemicolonAsync(code, expected, SyntaxKind.OpenBraceToken);
         }

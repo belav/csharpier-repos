@@ -96,9 +96,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          join $$
-                """
+                    var q = from x in y
+                    join $$
+                    """
                 )
             );
         }
@@ -109,9 +109,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          join z $$
-                """
+                    var q = from x in y
+                    join z $$
+                    """
                 )
             );
         }
@@ -122,9 +122,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          join int z $$
-                """
+                    var q = from x in y
+                    join int z $$
+                    """
                 )
             );
         }
@@ -135,9 +135,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 AddInsideMethod(
                     """
-                var q = from x in y
-                          join z in $$
-                """
+                    var q = from x in y
+                    join z in $$
+                    """
                 )
             );
         }
@@ -151,10 +151,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 using System;
                 using System.Linq;
                 class C {
-                    void M()
-                    {
-                        var q = from x in y
-                                join int $$
+                void M()
+                {
+                var q = from x in y
+                join int $$
                 """
             );
         }
@@ -168,10 +168,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 using System;
                 using System.Linq;
                 class C {
-                    void M()
-                    {
-                        var q = from x in y
-                                join Int32 $$
+                void M()
+                {
+                var q = from x in y
+                join Int32 $$
                 """
             );
         }
@@ -284,7 +284,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 interface IGoo {
-                    void Goo<$$
+                void Goo<$$
                 """
             );
         }
@@ -312,9 +312,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 using System;
                 using System.Linq;
                 class C {
-                    void M()
-                    {
-                        var q = from int $$
+                void M()
+                {
+                var q = from int $$
                 """
             );
         }
@@ -328,9 +328,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 using System;
                 using System.Linq;
                 class C {
-                    void M()
-                    {
-                        var q = from Int32 $$
+                void M()
+                {
+                var q = from Int32 $$
                 """
             );
         }
@@ -343,7 +343,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Program
                 {
-                    public static void Test($$ p) { }
+                public static void Test($$ p) { }
                 }
                 """
             );
@@ -357,7 +357,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Program
                 {
-                    public static void Test(int p1, $$ p2) { }
+                public static void Test(int p1, $$ p2) { }
                 }
                 """
             );
@@ -382,10 +382,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Program
                 {
-                    public static void Test()
-                    {
-                        void localFunc($$ int p) { }
-                    }
+                public static void Test()
+                {
+                void localFunc($$ int p) { }
+                }
                 }
                 """
             );
@@ -401,10 +401,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
 
                 class Program
                 {
-                    public static void Test()
-                    {
-                        Delegate lambda = ($$ int p) => p;
-                    }
+                public static void Test()
+                {
+                Delegate lambda = ($$ int p) => p;
+                }
                 }
                 """
             );
@@ -420,10 +420,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
 
                 class Program
                 {
-                    public static void Test()
-                    {
-                        Delegate anonymousDelegate = delegate ($$ int p) { return p; };
-                    }
+                public static void Test()
+                {
+                Delegate anonymousDelegate = delegate ($$ int p) { return p; };
+                }
                 }
                 """
             );
@@ -437,10 +437,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Program
                 {
-                    public $$ int Test()
-                    {
-                        return ref x;
-                    }
+                public $$ int Test()
+                {
+                return ref x;
+                }
                 }
                 """
             );
@@ -481,7 +481,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Program
                 {
-                    public $$ int Test { get; set; }
+                public $$ int Test { get; set; }
                 }
                 """
             );
@@ -494,8 +494,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    void M() {
-                        Call($$
+                void M() {
+                Call($$
                 """
             );
         }
@@ -507,8 +507,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    void M(object arg1) {
-                        Call(arg1, $$
+                void M(object arg1) {
+                Call(arg1, $$
                 """
             );
         }
@@ -520,7 +520,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    public C() : base($$
+                public C() : base($$
                 """
             );
         }
@@ -532,7 +532,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    public C(object arg1) : base(arg1, $$
+                public C(object arg1) : base(arg1, $$
                 """
             );
         }
@@ -544,7 +544,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    public C() : this($$
+                public C() : this($$
                 """
             );
         }
@@ -556,7 +556,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    public C(object arg1) : this(arg1, $$
+                public C(object arg1) : this(arg1, $$
                 """
             );
         }
@@ -570,7 +570,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Program
                 {
-                    public static explicit operator double($$) { }
+                public static explicit operator double($$) { }
                 }
                 """
             );
@@ -585,7 +585,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Program
                 {
-                    public static Program operator +($$) { }
+                public static Program operator +($$) { }
                 }
                 """
             );
@@ -598,8 +598,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    void M() {
-                        new MyType($$
+                void M() {
+                new MyType($$
                 """
             );
         }
@@ -611,8 +611,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    void M(object arg1) {
-                        new MyType(arg1, $$
+                void M(object arg1) {
+                new MyType(arg1, $$
                 """
             );
         }
@@ -624,8 +624,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    void M() {
-                        Call(a: $$
+                void M() {
+                Call(a: $$
                 """
             );
         }
@@ -637,8 +637,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    void M(object arg1) {
-                        Call(a: arg1, b: $$
+                void M(object arg1) {
+                Call(a: arg1, b: $$
                 """
             );
         }
@@ -650,7 +650,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    public C() : base(a: $$
+                public C() : base(a: $$
                 """
             );
         }
@@ -662,7 +662,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    public C(object arg1) : base(a: arg1, b: $$
+                public C(object arg1) : base(a: arg1, b: $$
                 """
             );
         }
@@ -674,7 +674,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    public C() : this(a: $$
+                public C() : this(a: $$
                 """
             );
         }
@@ -686,7 +686,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    public C(object arg1) : this(a: arg1, b: $$
+                public C(object arg1) : this(a: arg1, b: $$
                 """
             );
         }
@@ -698,8 +698,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    void M() {
-                        new MyType(a: $$
+                void M() {
+                new MyType(a: $$
                 """
             );
         }
@@ -711,8 +711,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    void M(object arg1) {
-                        new MyType(a: arg1, b: $$
+                void M(object arg1) {
+                new MyType(a: arg1, b: $$
                 """
             );
         }
@@ -723,7 +723,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 static class Extensions {
-                    static void Extension($$
+                static void Extension($$
                 """
             );
         }
@@ -735,7 +735,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 static class Extensions {
-                    static void Extension(this $$
+                static void Extension(this $$
                 """
             );
         }
@@ -746,7 +746,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 static class Extensions {
-                    static void Extension(this int i, $$
+                static void Extension(this int i, $$
                 """
             );
         }
@@ -757,7 +757,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 static class Extensions {
-                    static void Extension(this int i, this $$
+                static void Extension(this int i, this $$
                 """
             );
         }
@@ -768,7 +768,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class Extensions {
-                    static void Extension($$
+                static void Extension($$
                 """
             );
         }
@@ -779,7 +779,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class Extensions {
-                    static void Extension(this $$
+                static void Extension(this $$
                 """
             );
         }
@@ -790,7 +790,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class Extensions {
-                    static void Extension(this int i, $$
+                static void Extension(this int i, $$
                 """
             );
         }
@@ -801,7 +801,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class Extensions {
-                    static void Extension(this int i, this $$
+                static void Extension(this int i, this $$
                 """
             );
         }
@@ -812,7 +812,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 static class Extensions {
-                    void Extension($$
+                void Extension($$
                 """
             );
         }
@@ -823,7 +823,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 static class Extensions {
-                    void Extension(this $$
+                void Extension(this $$
                 """
             );
         }
@@ -834,7 +834,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 static class Extensions {
-                    void Extension(this int i, $$
+                void Extension(this int i, $$
                 """
             );
         }
@@ -845,7 +845,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 static class Extensions {
-                    void Extension(this int i, this $$
+                void Extension(this int i, this $$
                 """
             );
         }
@@ -857,7 +857,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C
                 {
-                    delegate*<$$
+                delegate*<$$
                 """
             );
         }
@@ -884,7 +884,7 @@ class C
                 """
                 class C
                 {
-                    void M(scoped $$)
+                void M(scoped $$)
                 }
                 """
             );
@@ -897,7 +897,7 @@ class C
                 """
                 static class C
                 {
-                    static void M(this scoped $$)
+                static void M(this scoped $$)
                 }
                 """
             );
@@ -910,10 +910,10 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        var x = delegate (scoped $$) { };
-                    }
+                void M()
+                {
+                var x = delegate (scoped $$) { };
+                }
                 }
                 """
             );

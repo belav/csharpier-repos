@@ -21,8 +21,8 @@ public class RawSqlServerTest : NonSharedModelTestBase
 
             AssertSql(
                 """
-SELECT o.Amount From Orders AS o -- RAW
-"""
+                SELECT o.Amount From Orders AS o -- RAW
+                """
             );
         }
     }

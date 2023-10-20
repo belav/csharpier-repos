@@ -2066,10 +2066,10 @@ namespace Microsoft.Extensions
         public void ForClasses_ParameterlessConstructorIsPickedOverParameterized()
         {
             string data = """
-                {
-                    "MyInt": 9,
-                }
-                """;
+            {
+            "MyInt": 9,
+            }
+            """;
 
             var configuration = TestHelpers.GetConfigurationFromJsonString(data);
             var obj = configuration.Get<ClassWithParameterlessAndParameterizedCtor>();
@@ -2080,10 +2080,10 @@ namespace Microsoft.Extensions
         public void ForStructs_ParameterlessConstructorIsPickedOverParameterized()
         {
             string data = """
-                {
-                    "MyInt": 10,
-                }
-                """;
+            {
+            "MyInt": 10,
+            }
+            """;
 
             var configuration = TestHelpers.GetConfigurationFromJsonString(data);
             var obj = configuration.Get<ClassWithParameterlessAndParameterizedCtor>();
@@ -2096,8 +2096,8 @@ namespace Microsoft.Extensions
             var configuration = TestHelpers.GetConfigurationFromJsonString(
                 """
                 {
-                    "Int32": 9,
-                    "Boolean": true,
+                "Int32": 9,
+                "Boolean": true,
                 }
                 """
             );
@@ -2121,7 +2121,7 @@ namespace Microsoft.Extensions
             var configuration = TestHelpers.GetConfigurationFromJsonString(
                 """
                 {
-                    "vaLue": "MyString",
+                "vaLue": "MyString",
                 }
                 """
             );
@@ -2145,11 +2145,11 @@ namespace Microsoft.Extensions
             var configuration = TestHelpers.GetConfigurationFromJsonString(
                 """
                 {
-                    "Location":
-                    {
-                        "Latitude": 3,
-                        "Longitude": 4,
-                    }
+                "Location":
+                {
+                "Latitude": 3,
+                "Longitude": 4,
+                }
                 }
                 """
             );
@@ -2172,11 +2172,11 @@ namespace Microsoft.Extensions
             var configuration = TestHelpers.GetConfigurationFromJsonString(
                 """
                 {
-                    "First":
-                    {
-                        "Latitude": 3,
-                        "Longitude": 4,
-                    }
+                "First":
+                {
+                "Latitude": 3,
+                "Longitude": 4,
+                }
                 }
                 """
             );
@@ -2547,7 +2547,7 @@ namespace Microsoft.Extensions
             var configuration = TestHelpers.GetConfigurationFromJsonString(
                 """
                 {
-                    "vaLue": "MyString",
+                "vaLue": "MyString",
                 }
                 """
             );
@@ -2558,7 +2558,7 @@ namespace Microsoft.Extensions
             configuration = TestHelpers.GetConfigurationFromJsonString(
                 """
                 {
-                    "vaLue": [ "MyString", { "nested": "value" } ],
+                "vaLue": [ "MyString", { "nested": "value" } ],
                 }
                 """
             );
@@ -2600,9 +2600,9 @@ namespace Microsoft.Extensions
             var configuration = TestHelpers.GetConfigurationFromJsonString(
                 """
                 {
-                    "MySection": "MySection",
-                    "MyObject": "MyObject",
-                    "MyString": "MyString",
+                "MySection": "MySection",
+                "MyObject": "MyObject",
+                "MyString": "MyString",
                 }
                 """
             );

@@ -23,20 +23,20 @@ public sealed class IfDirectiveTriviaStructureTests
     public async Task TestEnabledIfDisabledElifDisabledElse()
     {
         var code = """
-                #$$if true
-                {|span:class C
-                {
-                }|}
-                #elif false
-                class D
-                {
-                }
-                #else
-                class E
-                {
-                }
-                #endif
-                """;
+        #$$if true
+        {|span:class C
+        {
+        }|}
+        #elif false
+        class D
+        {
+        }
+        #else
+        class E
+        {
+        }
+        #endif
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -48,20 +48,20 @@ public sealed class IfDirectiveTriviaStructureTests
     public async Task TestDisabledIfEnabledElifDisabledElse()
     {
         var code = """
-                #$$if false
-                class C
-                {
-                }
-                #elif true
-                {|span:class D
-                {
-                }|}
-                #else
-                class E
-                {
-                }
-                #endif
-                """;
+        #$$if false
+        class C
+        {
+        }
+        #elif true
+        {|span:class D
+        {
+        }|}
+        #else
+        class E
+        {
+        }
+        #endif
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -73,20 +73,20 @@ public sealed class IfDirectiveTriviaStructureTests
     public async Task TestDisabledIfDisabledElifEnabledElse()
     {
         var code = """
-                #$$if false
-                class C
-                {
-                }
-                #elif false
-                class D
-                {
-                }
-                #else
-                {|span:class E
-                {
-                }|}
-                #endif
-                """;
+        #$$if false
+        class C
+        {
+        }
+        #elif false
+        class D
+        {
+        }
+        #else
+        {|span:class E
+        {
+        }|}
+        #endif
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -98,17 +98,17 @@ public sealed class IfDirectiveTriviaStructureTests
     public async Task TestEmptyEnabledRegion()
     {
         var code = """
-                #$$if true
-                #elif false
-                class D
-                {
-                }
-                #else
-                class E
-                {
-                }
-                #endif
-                """;
+        #$$if true
+        #elif false
+        class D
+        {
+        }
+        #else
+        class E
+        {
+        }
+        #endif
+        """;
 
         await VerifyBlockSpansAsync(code);
     }
@@ -117,11 +117,11 @@ public sealed class IfDirectiveTriviaStructureTests
     public async Task TestMissingEndif1()
     {
         var code = """
-                #$$if true
-                class C
-                {
-                }
-                """;
+        #$$if true
+        class C
+        {
+        }
+        """;
 
         await VerifyBlockSpansAsync(code);
     }
@@ -130,19 +130,19 @@ public sealed class IfDirectiveTriviaStructureTests
     public async Task TestMissingEndif2()
     {
         var code = """
-                #$$if true
-                {|span:class C
-                {
-                }|}
-                #elif false
-                class D
-                {
-                }
-                #else
-                class E
-                {
-                }
-                """;
+        #$$if true
+        {|span:class C
+        {
+        }|}
+        #elif false
+        class D
+        {
+        }
+        #else
+        class E
+        {
+        }
+        """;
 
         await VerifyBlockSpansAsync(
             code,
@@ -154,19 +154,19 @@ public sealed class IfDirectiveTriviaStructureTests
     public async Task TestMissingEndif3()
     {
         var code = """
-                #$$if false
-                class C
-                {
-                }
-                #elif false
-                class D
-                {
-                }
-                #else
-                class E
-                {
-                }
-                """;
+        #$$if false
+        class C
+        {
+        }
+        #elif false
+        class D
+        {
+        }
+        #else
+        class E
+        {
+        }
+        """;
 
         await VerifyBlockSpansAsync(code);
     }

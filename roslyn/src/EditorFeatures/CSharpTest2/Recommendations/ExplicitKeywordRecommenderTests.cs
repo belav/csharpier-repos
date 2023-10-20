@@ -147,8 +147,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                  void Goo() {}
-                  $$
+                void Goo() {}
+                $$
                 """
             );
         }
@@ -159,8 +159,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 partial class C {
-                  void Goo() {}
-                  $$
+                void Goo() {}
+                $$
                 """
             );
         }
@@ -171,8 +171,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 partial class C {
-                  int i;
-                  $$
+                int i;
+                $$
                 """
             );
         }
@@ -183,8 +183,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 partial class C {
-                  int i { get; }
-                  $$
+                int i { get; }
+                $$
                 """
             );
         }
@@ -239,8 +239,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 partial class C {
-                  [goo]
-                  $$
+                [goo]
+                $$
                 """
             );
         }
@@ -252,7 +252,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 struct S {
-                   $$
+                $$
                 """
             );
         }
@@ -264,7 +264,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 partial struct S {
-                   $$
+                $$
                 """
             );
         }
@@ -275,7 +275,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 interface I {
-                   $$
+                $$
                 """
             );
         }
@@ -286,7 +286,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 partial class C {
-                   $$
+                $$
                 """
             );
         }
@@ -313,7 +313,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    static public $$
+                static public $$
                 """
             );
         }
@@ -324,7 +324,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 interface C {
-                    static public $$
+                static public $$
                 """
             );
         }
@@ -335,7 +335,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 interface C {
-                    abstract public $$
+                abstract public $$
                 """
             );
         }
@@ -346,7 +346,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 interface C {
-                    static abstract public $$
+                static abstract public $$
                 """
             );
         }
@@ -357,7 +357,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 interface C {
-                    abstract static public $$
+                abstract static public $$
                 """
             );
         }
@@ -368,7 +368,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 interface C {
-                    static abstract $$
+                static abstract $$
                 """
             );
         }
@@ -379,7 +379,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 interface C {
-                    abstract static $$
+                abstract static $$
                 """
             );
         }
@@ -390,7 +390,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 interface C {
-                    static $$
+                static $$
                 """
             );
         }
@@ -405,7 +405,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                    public static $$
+                public static $$
                 """
             );
         }
@@ -416,7 +416,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 interface C {
-                    public static $$
+                public static $$
                 """
             );
         }
@@ -427,7 +427,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 interface C {
-                    public abstract $$
+                public abstract $$
                 """
             );
         }
@@ -438,7 +438,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 interface C {
-                    public static abstract $$
+                public static abstract $$
                 """
             );
         }
@@ -449,7 +449,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 interface C {
-                    public abstract static $$
+                public abstract static $$
                 """
             );
         }
@@ -518,7 +518,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                    abstract $$
+                abstract $$
                 """
             );
         }
@@ -529,7 +529,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                    virtual $$
+                virtual $$
                 """
             );
         }
@@ -540,7 +540,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                    override $$
+                override $$
                 """
             );
         }
@@ -551,7 +551,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                    sealed $$
+                sealed $$
                 """
             );
         }
@@ -562,7 +562,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 class C {
-                    readonly $$
+                readonly $$
                 """
             );
         }
@@ -573,7 +573,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 class C {
-                     unsafe static public $$
+                unsafe static public $$
                 """
             );
         }
@@ -584,7 +584,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 interface C {
-                    abstract $$
+                abstract $$
                 """
             );
         }
@@ -595,7 +595,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 interface C {
-                    virtual $$
+                virtual $$
                 """
             );
         }
@@ -606,7 +606,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 interface C {
-                    override $$
+                override $$
                 """
             );
         }
@@ -617,7 +617,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 interface C {
-                    sealed $$
+                sealed $$
                 """
             );
         }
@@ -628,7 +628,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 interface C {
-                    readonly $$
+                readonly $$
                 """
             );
         }
@@ -639,7 +639,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyKeywordAsync(
                 """
                 interface C {
-                     unsafe static abstract $$
+                unsafe static abstract $$
                 """
             );
         }
@@ -650,7 +650,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             await VerifyAbsenceAsync(
                 """
                 interface C {
-                     extern static abstract $$
+                extern static abstract $$
                 """
             );
         }

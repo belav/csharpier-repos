@@ -39,7 +39,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    [|int a;|]
+                [|int a;|]
                 }
                 """,
                 """
@@ -47,12 +47,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
+                int a;
 
-                    public Z(int a{|Navigation:)|}
-                    {
-                        this.a = a;
-                    }
+                public Z(int a{|Navigation:)|}
+                {
+                this.a = a;
+                }
                 }
                 """
             );
@@ -67,7 +67,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    [|int a;|]
+                [|int a;|]
                 }
                 """,
                 """
@@ -75,9 +75,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
+                int a;
 
-                    public Z(int a{|Navigation:)|} => this.a = a;
+                public Z(int a{|Navigation:)|} => this.a = a;
                 }
                 """,
                 options: Option(
@@ -96,7 +96,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    [|int a;|]
+                [|int a;|]
                 }
                 """,
                 """
@@ -104,9 +104,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
+                int a;
 
-                    public Z(int a{|Navigation:)|} => this.a = a;
+                public Z(int a{|Navigation:)|} => this.a = a;
                 }
                 """,
                 options: Option(
@@ -125,8 +125,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    [|int a;
-                    int b;|]
+                [|int a;
+                int b;|]
                 }
                 """,
                 """
@@ -134,14 +134,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
-                    int b;
+                int a;
+                int b;
 
-                    public Z(int a, int b{|Navigation:)|}
-                    {
-                        this.a = a;
-                        this.b = b;
-                    }
+                public Z(int a, int b{|Navigation:)|}
+                {
+                this.a = a;
+                this.b = b;
+                }
                 }
                 """,
                 options: Option(
@@ -160,8 +160,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    [|int a;
-                    string b;|]
+                [|int a;
+                string b;|]
                 }
                 """,
                 """
@@ -169,14 +169,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
-                    string b;
+                int a;
+                string b;
 
-                    public Z(int a, string b{|Navigation:)|}
-                    {
-                        this.a = a;
-                        this.b = b;
-                    }
+                public Z(int a, string b{|Navigation:)|}
+                {
+                this.a = a;
+                this.b = b;
+                }
                 }
                 """
             );
@@ -191,8 +191,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {[|
-                    int a;
-                    string b;|]
+                int a;
+                string b;|]
                 }
                 """,
                 """
@@ -200,14 +200,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
-                    string b;
+                int a;
+                string b;
 
-                    public Z(int a, string b{|Navigation:)|}
-                    {
-                        this.a = a;
-                        this.b = b;
-                    }
+                public Z(int a, string b{|Navigation:)|}
+                {
+                this.a = a;
+                this.b = b;
+                }
                 }
                 """
             );
@@ -222,9 +222,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;[|
-                    string b;
-                    string c;|]
+                int a;[|
+                string b;
+                string c;|]
                 }
                 """,
                 """
@@ -232,15 +232,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
-                    string b;
-                    string c;
+                int a;
+                string b;
+                string c;
 
-                    public Z(string b, string c{|Navigation:)|}
-                    {
-                        this.b = b;
-                        this.c = c;
-                    }
+                public Z(string b, string c{|Navigation:)|}
+                {
+                this.b = b;
+                this.c = c;
+                }
                 }
                 """
             );
@@ -255,9 +255,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    void Goo() { }[|
-                    int a;
-                    string b;|]
+                void Goo() { }[|
+                int a;
+                string b;|]
                 }
                 """,
                 """
@@ -265,15 +265,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    void Goo() { }
-                    int a;
-                    string b;
+                void Goo() { }
+                int a;
+                string b;
 
-                    public Z(int a, string b{|Navigation:)|}
-                    {
-                        this.a = a;
-                        this.b = b;
-                    }
+                public Z(int a, string b{|Navigation:)|}
+                {
+                this.a = a;
+                this.b = b;
+                }
                 }
                 """
             );
@@ -288,8 +288,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 [|{
-                    int a;
-                    string b;|]
+                int a;
+                string b;|]
                 }
                 """
             );
@@ -304,13 +304,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
-                    [|string b;|]
+                int a;
+                [|string b;|]
 
-                    public Z(int a)
-                    {
-                        this.a = a;
-                    }
+                public Z(int a)
+                {
+                this.a = a;
+                }
                 }
                 """,
                 """
@@ -318,18 +318,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
-                    string b;
+                int a;
+                string b;
 
-                    public Z(int a)
-                    {
-                        this.a = a;
-                    }
+                public Z(int a)
+                {
+                this.a = a;
+                }
 
-                    public Z(string b{|Navigation:)|}
-                    {
-                        this.b = b;
-                    }
+                public Z(string b{|Navigation:)|}
+                {
+                this.b = b;
+                }
                 }
                 """
             );
@@ -344,13 +344,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    [|int a;
-                    string b;|]
+                [|int a;
+                string b;|]
 
-                    public Z(int a)
-                    {
-                        this.a = a;
-                    }
+                public Z(int a)
+                {
+                this.a = a;
+                }
                 }
                 """,
                 """
@@ -358,19 +358,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
-                    string b;
+                int a;
+                string b;
 
-                    public Z(int a)
-                    {
-                        this.a = a;
-                    }
+                public Z(int a)
+                {
+                this.a = a;
+                }
 
-                    public Z(int a, string b{|Navigation:)|}
-                    {
-                        this.a = a;
-                        this.b = b;
-                    }
+                public Z(int a, string b{|Navigation:)|}
+                {
+                this.a = a;
+                this.b = b;
+                }
                 }
                 """
             );
@@ -385,13 +385,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    [|int a;
-                    string b;|]
+                [|int a;
+                string b;|]
 
-                    public Z(int a)
-                    {
-                        this.a = a;
-                    }
+                public Z(int a)
+                {
+                this.a = a;
+                }
                 }
                 """,
                 """
@@ -399,19 +399,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
-                    string b;
+                int a;
+                string b;
 
-                    public Z(int a)
-                    {
-                        this.a = a;
-                    }
+                public Z(int a)
+                {
+                this.a = a;
+                }
 
-                    public Z(int a, string b{|Navigation:)|}
-                    {
-                        this.a = a;
-                        this.b = b;
-                    }
+                public Z(int a, string b{|Navigation:)|}
+                {
+                this.a = a;
+                this.b = b;
+                }
                 }
                 """
             );
@@ -426,13 +426,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    [|int a;
-                    string b;|]
+                [|int a;
+                string b;|]
 
-                    public Z(int a)
-                    {
-                        this.a = a;
-                    }
+                public Z(int a)
+                {
+                this.a = a;
+                }
                 }
                 """,
                 """
@@ -440,18 +440,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
-                    string b;
+                int a;
+                string b;
 
-                    public Z(int a)
-                    {
-                        this.a = a;
-                    }
+                public Z(int a)
+                {
+                this.a = a;
+                }
 
-                    public Z(int a, string b{|Navigation:)|} : this(a)
-                    {
-                        this.b = b;
-                    }
+                public Z(int a, string b{|Navigation:)|} : this(a)
+                {
+                this.b = b;
+                }
                 }
                 """,
                 index: 1
@@ -472,13 +472,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    [|string? a;
-                    int b;|]
+                [|string? a;
+                int b;|]
 
-                    public Z(string a)
-                    {
-                        this.a = a;
-                    }
+                public Z(string a)
+                {
+                this.a = a;
+                }
                 }
                 """,
                 """
@@ -488,18 +488,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    string? a;
-                    int b;
+                string? a;
+                int b;
 
-                    public Z(string a)
-                    {
-                        this.a = a;
-                    }
+                public Z(string a)
+                {
+                this.a = a;
+                }
 
-                    public Z(string? a, int b{|Navigation:)|} : this(a)
-                    {
-                        this.b = b;
-                    }
+                public Z(string? a, int b{|Navigation:)|} : this(a)
+                {
+                this.b = b;
+                }
                 }
                 """,
                 index: 1
@@ -515,19 +515,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    [|int a;
-                    string b;|]
+                [|int a;
+                string b;|]
 
-                    public Z(int a)
-                    {
-                        this.a = a;
-                    }
+                public Z(int a)
+                {
+                this.a = a;
+                }
 
-                    public Z(int a, string b{|Navigation:)|}
-                    {
-                        this.a = a;
-                        this.b = b;
-                    }
+                public Z(int a, string b{|Navigation:)|}
+                {
+                this.a = a;
+                this.b = b;
+                }
                 }
                 """
             );
@@ -540,21 +540,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Z
                 {
-                    [|public int A { get; private set; }
-                    public string B { get; private set; }|]
+                [|public int A { get; private set; }
+                public string B { get; private set; }|]
                 }
                 """,
                 """
                 class Z
                 {
-                    public Z(int a, string b{|Navigation:)|}
-                    {
-                        A = a;
-                        B = b;
-                    }
+                public Z(int a, string b{|Navigation:)|}
+                {
+                A = a;
+                B = b;
+                }
 
-                    public int A { get; private set; }
-                    public string B { get; private set; }
+                public int A { get; private set; }
+                public string B { get; private set; }
                 }
                 """
             );
@@ -567,21 +567,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Z
                 {
-                    [|public int A { get; private set; }
-                    public string B { get; private set; }|]
+                [|public int A { get; private set; }
+                public string B { get; private set; }|]
                 }
                 """,
                 """
                 class Z
                 {
-                    public Z(int a, string b{|Navigation:)|}
-                    {
-                        this.A = a;
-                        this.B = b;
-                    }
+                public Z(int a, string b{|Navigation:)|}
+                {
+                this.A = a;
+                this.B = b;
+                }
 
-                    public int A { get; private set; }
-                    public string B { get; private set; }
+                public int A { get; private set; }
+                public string B { get; private set; }
                 }
                 """,
                 options: Option(
@@ -601,7 +601,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 struct S
                 {
-                    [|int i;|]
+                [|int i;|]
                 }
                 """,
                 """
@@ -609,12 +609,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 struct S
                 {
-                    int i;
+                int i;
 
-                    public S(int i{|Navigation:)|}
-                    {
-                        this.i = i;
-                    }
+                public S(int i{|Navigation:)|}
+                {
+                this.i = i;
+                }
                 }
                 """
             );
@@ -629,7 +629,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 struct S
                 {
-                    [|int i { get; set; }|]
+                [|int i { get; set; }|]
                 }
                 """,
                 """
@@ -637,12 +637,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 struct S
                 {
-                    public S(int i{|Navigation:)|}
-                    {
-                        this.i = i;
-                    }
+                public S(int i{|Navigation:)|}
+                {
+                this.i = i;
+                }
 
-                    int i { get; set; }
+                int i { get; set; }
                 }
                 """
             );
@@ -657,8 +657,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 struct S
                 {
-                    [|int i { get => f; set => f = value; }|]
-                    int j { get; set; }
+                [|int i { get => f; set => f = value; }|]
+                int j { get; set; }
                 }
                 """,
                 """
@@ -666,13 +666,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 struct S
                 {
-                    public S(int i{|Navigation:)|} : this()
-                    {
-                        this.i = i;
-                    }
+                public S(int i{|Navigation:)|} : this()
+                {
+                this.i = i;
+                }
 
-                    int i { get => f; set => f = value; }
-                    int j { get; set; }
+                int i { get => f; set => f = value; }
+                int j { get; set; }
                 }
                 """
             );
@@ -687,9 +687,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 struct S
                 {
-                    int i { get; set; }
+                int i { get; set; }
 
-                    [|int y;|]
+                [|int y;|]
                 }
                 """,
                 """
@@ -697,14 +697,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 struct S
                 {
-                    int i { get; set; }
+                int i { get; set; }
 
-                    int y;
+                int y;
 
-                    public S(int y{|Navigation:)|} : this()
-                    {
-                        this.y = y;
-                    }
+                public S(int y{|Navigation:)|} : this()
+                {
+                this.y = y;
+                }
                 }
                 """
             );
@@ -719,9 +719,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 struct S
                 {
-                    [|int i { get; set; }|]
+                [|int i { get; set; }|]
 
-                    int y;
+                int y;
                 }
                 """,
                 """
@@ -729,14 +729,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 struct S
                 {
-                    int i { get; set; }
+                int i { get; set; }
 
-                    int y;
+                int y;
 
-                    public S(int i{|Navigation:)|} : this()
-                    {
-                        this.i = i;
-                    }
+                public S(int i{|Navigation:)|} : this()
+                {
+                this.i = i;
+                }
                 }
                 """
             );
@@ -751,7 +751,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Program<T>
                 {
-                    [|int i;|]
+                [|int i;|]
                 }
                 """,
                 """
@@ -759,12 +759,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Program<T>
                 {
-                    int i;
+                int i;
 
-                    public Program(int i{|Navigation:)|}
-                    {
-                        this.i = i;
-                    }
+                public Program(int i{|Navigation:)|}
+                {
+                this.i = i;
+                }
                 }
                 """
             );
@@ -779,8 +779,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Program
                 {
-                    [|bool b;
-                    HashSet<string> s;|]
+                [|bool b;
+                HashSet<string> s;|]
                 }
                 """,
                 string.Format(
@@ -800,13 +800,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Program
                 {
-                    [|bool b;
-                    HashSet<string> s;|]
+                [|bool b;
+                HashSet<string> s;|]
 
-                    public Program(bool b)
-                    {
-                        this.b = b;
-                    }
+                public Program(bool b)
+                {
+                this.b = b;
+                }
                 }
                 """,
                 string.Format(
@@ -826,13 +826,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Program
                 {
-                    [|bool b;
-                    HashSet<string> s;|]
+                [|bool b;
+                HashSet<string> s;|]
 
-                    public Program(bool b)
-                    {
-                        this.b = b;
-                    }
+                public Program(bool b)
+                {
+                this.b = b;
+                }
                 }
                 """,
                 string.Format(
@@ -851,18 +851,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Program
                 {
-                    [|int yield;|]
+                [|int yield;|]
                 }
                 """,
                 """
                 class Program
                 {
-                    int yield;
+                int yield;
 
-                    public Program(int yield{|Navigation:)|}
-                    {
-                        this.yield = yield;
-                    }
+                public Program(int yield{|Navigation:)|}
+                {
+                this.yield = yield;
+                }
                 }
                 """
             );
@@ -877,14 +877,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class X
                 {
-                    public X(string v)
-                    {
-                    }
+                public X(string v)
+                {
+                }
 
-                    static void Test()
-                    {
-                        new X(new [|string|]());
-                    }
+                static void Test()
+                {
+                new X(new [|string|]());
+                }
                 }
                 """
             );
@@ -899,7 +899,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    [|(int, string) a;|]
+                [|(int, string) a;|]
                 }
                 """,
                 """
@@ -907,12 +907,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    (int, string) a;
+                (int, string) a;
 
-                    public Z((int, string) a{|Navigation:)|}
-                    {
-                        this.a = a;
-                    }
+                public Z((int, string) a{|Navigation:)|}
+                {
+                this.a = a;
+                }
                 }
                 """
             );
@@ -927,7 +927,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    [|string? a;|]
+                [|string? a;|]
                 }
                 """,
                 """
@@ -935,12 +935,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    string? a;
+                string? a;
 
-                    public Z(string? a{|Navigation:)|}
-                    {
-                        this.a = a;
-                    }
+                public Z(string? a{|Navigation:)|}
+                {
+                this.a = a;
+                }
                 }
                 """
             );
@@ -953,18 +953,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Program
                 {
-                    [|int _field;|]
+                [|int _field;|]
                 }
                 """,
                 """
                 class Program
                 {
-                    int _field;
+                int _field;
 
-                    public Program(int field{|Navigation:)|}
-                    {
-                        _field = field;
-                    }
+                public Program(int field{|Navigation:)|}
+                {
+                _field = field;
+                }
                 }
                 """
             );
@@ -977,18 +977,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Program
                 {
-                    [|int _0;|]
+                [|int _0;|]
                 }
                 """,
                 """
                 class Program
                 {
-                    int _0;
+                int _0;
 
-                    public Program(int _0{|Navigation:)|}
-                    {
-                        this._0 = _0;
-                    }
+                public Program(int _0{|Navigation:)|}
+                {
+                this._0 = _0;
+                }
                 }
                 """
             );
@@ -1026,18 +1026,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Program
                 {
-                    [|int _field;|]
+                [|int _field;|]
                 }
                 """,
                 """
                 class Program
                 {
-                    int _field;
+                int _field;
 
-                    public Program(int field{|Navigation:)|}
-                    {
-                        this._field = field;
-                    }
+                public Program(int field{|Navigation:)|}
+                {
+                this._field = field;
+                }
                 }
                 """,
                 options: Option(
@@ -1054,21 +1054,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 abstract class Contribution
                 {
-                  [|public string Title { get; }
-                    public int Number { get; }|]
+                [|public string Title { get; }
+                public int Number { get; }|]
                 }
                 """,
                 """
                 abstract class Contribution
                 {
-                    protected Contribution(string title, int number{|Navigation:)|}
-                    {
-                        Title = title;
-                        Number = number;
-                    }
+                protected Contribution(string title, int number{|Navigation:)|}
+                {
+                Title = title;
+                Number = number;
+                }
 
-                    public string Title { get; }
-                    public int Number { get; }
+                public string Title { get; }
+                public int Number { get; }
                 }
                 """,
                 options: Option(
@@ -1085,8 +1085,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 abstract class Contribution
                 {
-                  [|public abstract string Title { get; }
-                    public int Number { get; }|]
+                [|public abstract string Title { get; }
+                public int Number { get; }|]
                 }
                 """,
                 new TestParameters(
@@ -1107,8 +1107,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
-                    [||]
+                int a;
+                [||]
                 }
                 """,
                 """
@@ -1116,12 +1116,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
+                int a;
 
-                    public Z(int a{|Navigation:)|}
-                    {
-                        this.a = a;
-                    }
+                public Z(int a{|Navigation:)|}
+                {
+                this.a = a;
+                }
                 }
                 """,
                 chosenSymbols: new[] { "a" }
@@ -1137,7 +1137,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class [||]Z
                 {
-                    int a;
+                int a;
                 }
                 """,
                 """
@@ -1145,12 +1145,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
+                int a;
 
-                    public Z(int a{|Navigation:)|}
-                    {
-                        this.a = a;
-                    }
+                public Z(int a{|Navigation:)|}
+                {
+                this.a = a;
+                }
                 }
                 """,
                 chosenSymbols: new[] { "a" }
@@ -1167,7 +1167,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 [X][||]
                 class Z
                 {
-                    int a;
+                int a;
                 }
                 """
             );
@@ -1182,8 +1182,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
-                    [||]
+                int a;
+                [||]
                 }
                 """,
                 """
@@ -1191,11 +1191,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
+                int a;
 
-                    public Z({|Navigation:)|}
-                    {
-                    }
+                public Z({|Navigation:)|}
+                {
+                }
                 }
                 """,
                 chosenSymbols: new string[] { }
@@ -1211,9 +1211,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
-                    string b;
-                    [||]
+                int a;
+                string b;
+                [||]
                 }
                 """,
                 """
@@ -1221,14 +1221,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
-                    string b;
+                int a;
+                string b;
 
-                    public Z(string b, int a{|Navigation:)|}
-                    {
-                        this.b = b;
-                        this.a = a;
-                    }
+                public Z(string b, int a{|Navigation:)|}
+                {
+                this.b = b;
+                this.a = a;
+                }
                 }
                 """,
                 chosenSymbols: new string[] { "b", "a" }
@@ -1245,9 +1245,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
-                    string b;
-                    [||]
+                int a;
+                string b;
+                [||]
                 }
                 """,
                 """
@@ -1256,14 +1256,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
-                    string b;
+                int a;
+                string b;
 
-                    public Z(int a, string b{|Navigation:)|}
-                    {
-                        this.a = a;
-                        this.b = b ?? throw new ArgumentNullException(nameof(b));
-                    }
+                public Z(int a, string b{|Navigation:)|}
+                {
+                this.a = a;
+                this.b = b ?? throw new ArgumentNullException(nameof(b));
+                }
                 }
                 """,
                 chosenSymbols: new string[] { "a", "b" },
@@ -1282,10 +1282,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
-                    string b;
-                    string? c;
-                    [||]
+                int a;
+                string b;
+                string? c;
+                [||]
                 }
                 """,
                 """
@@ -1295,16 +1295,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
-                    string b;
-                    string? c;
+                int a;
+                string b;
+                string? c;
 
-                    public Z(int a, string b, string? c{|Navigation:)|}
-                    {
-                        this.a = a;
-                        this.b = b ?? throw new ArgumentNullException(nameof(b));
-                        this.c = c;
-                    }
+                public Z(int a, string b, string? c{|Navigation:)|}
+                {
+                this.a = a;
+                this.b = b ?? throw new ArgumentNullException(nameof(b));
+                this.c = c;
+                }
                 }
                 """,
                 chosenSymbols: new string[] { "a", "b", "c" },
@@ -1323,10 +1323,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z<T> where T : class
                 {
-                    int a;
-                    string b;
-                    T? c;
-                    [||]
+                int a;
+                string b;
+                T? c;
+                [||]
                 }
                 """,
                 """
@@ -1336,16 +1336,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z<T> where T : class
                 {
-                    int a;
-                    string b;
-                    T? c;
+                int a;
+                string b;
+                T? c;
 
-                    public Z(int a, string b, T? c{|Navigation:)|}
-                    {
-                        this.a = a;
-                        this.b = b ?? throw new ArgumentNullException(nameof(b));
-                        this.c = c;
-                    }
+                public Z(int a, string b, T? c{|Navigation:)|}
+                {
+                this.a = a;
+                this.b = b ?? throw new ArgumentNullException(nameof(b));
+                this.c = c;
+                }
                 }
                 """,
                 chosenSymbols: new string[] { "a", "b", "c" },
@@ -1363,9 +1363,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
-                    string b;
-                    [||]
+                int a;
+                string b;
+                [||]
                 }
                 """,
                 """
@@ -1374,19 +1374,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
-                    string b;
+                int a;
+                string b;
 
-                    public Z(int a, string b{|Navigation:)|}
-                    {
-                        if (b is null)
-                        {
-                            throw new ArgumentNullException(nameof(b));
-                        }
+                public Z(int a, string b{|Navigation:)|}
+                {
+                if (b is null)
+                {
+                throw new ArgumentNullException(nameof(b));
+                }
 
-                        this.a = a;
-                        this.b = b;
-                    }
+                this.a = a;
+                this.b = b;
+                }
                 }
                 """,
                 chosenSymbols: new string[] { "a", "b" },
@@ -1410,9 +1410,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
-                    int? b;
-                    [||]
+                int a;
+                int? b;
+                [||]
                 }
                 """,
                 """
@@ -1421,14 +1421,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
-                    int? b;
+                int a;
+                int? b;
 
-                    public Z(int a, int? b{|Navigation:)|}
-                    {
-                        this.a = a;
-                        this.b = b;
-                    }
+                public Z(int a, int? b{|Navigation:)|}
+                {
+                this.a = a;
+                this.b = b;
+                }
                 }
                 """,
                 chosenSymbols: new string[] { "a", "b" },
@@ -1452,9 +1452,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
-                    string b;
-                    [||]
+                int a;
+                string b;
+                [||]
                 }
                 """,
                 """
@@ -1463,19 +1463,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
-                    string b;
+                int a;
+                string b;
 
-                    public Z(int a, string b{|Navigation:)|}
-                    {
-                        if (b == null)
-                        {
-                            throw new ArgumentNullException(nameof(b));
-                        }
+                public Z(int a, string b{|Navigation:)|}
+                {
+                if (b == null)
+                {
+                throw new ArgumentNullException(nameof(b));
+                }
 
-                        this.a = a;
-                        this.b = b;
-                    }
+                this.a = a;
+                this.b = b;
+                }
                 }
                 """,
                 chosenSymbols: new string[] { "a", "b" },
@@ -1501,9 +1501,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
-                    string b;
-                    [||]public void M() { }
+                int a;
+                string b;
+                [||]public void M() { }
                 }
                 """
             );
@@ -1518,13 +1518,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
-                    string b;
-                    public void M()
-                    {
-                    }[||]
+                int a;
+                string b;
+                public void M()
+                {
+                }[||]
 
-                    public void N() { }
+                public void N() { }
                 }
                 """
             );
@@ -1539,14 +1539,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
-                    string b;
-                    public void M()
-                    {
-                 [||] 
-                    }
+                int a;
+                string b;
+                public void M()
+                {
+                [||]
+                }
 
-                    public void N() { }
+                public void N() { }
                 }
                 """
             );
@@ -1561,7 +1561,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    [|int a;|]
+                [|int a;|]
                 }
                 """,
                 """
@@ -1569,12 +1569,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
 
                 class Z
                 {
-                    int a;
+                int a;
 
-                    public Z(int a{|Navigation:)|}
-                    {
-                        this.a = a;
-                    }
+                public Z(int a{|Navigation:)|}
+                {
+                this.a = a;
+                }
                 }
                 """
             );
@@ -1585,20 +1585,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
         {
             await TestInRegularAndScriptAsync(
                 """
-                abstract class C 
+                abstract class C
                 {
-                    [|public int Prop { get; set; }|]
+                [|public int Prop { get; set; }|]
                 }
                 """,
                 """
-                abstract class C 
+                abstract class C
                 {
-                    protected C(int prop{|Navigation:)|}
-                    {
-                        Prop = prop;
-                    }
+                protected C(int prop{|Navigation:)|}
+                {
+                Prop = prop;
+                }
 
-                    public int Prop { get; set; }
+                public int Prop { get; set; }
                 }
                 """,
                 options: Option(
@@ -1615,19 +1615,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Program
                 {
-                    public int F { get; set; }
-                    [||]
+                public int F { get; set; }
+                [||]
                 }
                 """,
                 """
                 class Program
                 {
-                    public int F { get; set; }
+                public int F { get; set; }
 
-                    public Program(int f{|Navigation:)|}
-                    {
-                        F = f;
-                    }
+                public Program(int f{|Navigation:)|}
+                {
+                F = f;
+                }
                 }
                 """,
                 chosenSymbols: null
@@ -1641,21 +1641,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Program
                 {
-                    public int P { get => 0; set { } }
-                    public int this[int index] { get => 0; set { } }
-                    [||]
+                public int P { get => 0; set { } }
+                public int this[int index] { get => 0; set { } }
+                [||]
                 }
                 """,
                 """
                 class Program
                 {
-                    public int P { get => 0; set { } }
-                    public int this[int index] { get => 0; set { } }
+                public int P { get => 0; set { } }
+                public int this[int index] { get => 0; set { } }
 
-                    public Program(int p{|Navigation:)|}
-                    {
-                        P = p;
-                    }
+                public Program(int p{|Navigation:)|}
+                {
+                P = p;
+                }
                 }
                 """,
                 chosenSymbols: null
@@ -1669,22 +1669,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Program
                 {
-                    public int P { get => 0; set { } }
-                    public int S { set { } }
-                    [||]
+                public int P { get => 0; set { } }
+                public int S { set { } }
+                [||]
                 }
                 """,
                 """
                 class Program
                 {
-                    public int P { get => 0; set { } }
-                    public int S { set { } }
+                public int P { get => 0; set { } }
+                public int S { set { } }
 
-                    public Program(int p, int s{|Navigation:)|}
-                    {
-                        P = p;
-                        S = s;
-                    }
+                public Program(int p, int s{|Navigation:)|}
+                {
+                P = p;
+                S = s;
+                }
                 }
                 """,
                 chosenSymbols: null
@@ -1698,18 +1698,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Z
                 {
-                    int [|a|];
+                int [|a|];
                 }
                 """,
                 """
                 class Z
                 {
-                    int a;
+                int a;
 
-                    public Z(int a{|Navigation:)|}
-                    {
-                        this.a = a;
-                    }
+                public Z(int a{|Navigation:)|}
+                {
+                this.a = a;
+                }
                 }
                 """
             );
@@ -1722,18 +1722,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Z
                 {
-                    int [|a|]bcdefg;
+                int [|a|]bcdefg;
                 }
                 """,
                 """
                 class Z
                 {
-                    int abcdefg;
+                int abcdefg;
 
-                    public Z(int abcdefg{|Navigation:)|}
-                    {
-                        this.abcdefg = abcdefg;
-                    }
+                public Z(int abcdefg{|Navigation:)|}
+                {
+                this.abcdefg = abcdefg;
+                }
                 }
                 """
             );
@@ -1746,18 +1746,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Z
                 {
-                    int abcdef[|g|];
+                int abcdef[|g|];
                 }
                 """,
                 """
                 class Z
                 {
-                    int abcdefg;
+                int abcdefg;
 
-                    public Z(int abcdefg{|Navigation:)|}
-                    {
-                        this.abcdefg = abcdefg;
-                    }
+                public Z(int abcdefg{|Navigation:)|}
+                {
+                this.abcdefg = abcdefg;
+                }
                 }
                 """
             );
@@ -1770,18 +1770,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Z
                 {
-                    int [||]a;
+                int [||]a;
                 }
                 """,
                 """
                 class Z
                 {
-                    int a;
+                int a;
 
-                    public Z(int a{|Navigation:)|}
-                    {
-                        this.a = a;
-                    }
+                public Z(int a{|Navigation:)|}
+                {
+                this.a = a;
+                }
                 }
                 """
             );
@@ -1794,18 +1794,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Z
                 {
-                    int a[||];
+                int a[||];
                 }
                 """,
                 """
                 class Z
                 {
-                    int a;
+                int a;
 
-                    public Z(int a{|Navigation:)|}
-                    {
-                        this.a = a;
-                    }
+                public Z(int a{|Navigation:)|}
+                {
+                this.a = a;
+                }
                 }
                 """
             );
@@ -1818,7 +1818,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Z
                 {
-                    in[|t|] a;
+                in[|t|] a;
                 }
                 """
             );
@@ -1831,7 +1831,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Z
                 {
-                    int a [|= 3|];
+                int a [|= 3|];
                 }
                 """
             );
@@ -1844,21 +1844,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Z
                 {
-                    int [|a;
-                    int b|];
+                int [|a;
+                int b|];
                 }
                 """,
                 """
                 class Z
                 {
-                    int a;
-                    int b;
+                int a;
+                int b;
 
-                    public Z(int a, int b{|Navigation:)|}
-                    {
-                        this.a = a;
-                        this.b = b;
-                    }
+                public Z(int a, int b{|Navigation:)|}
+                {
+                this.a = a;
+                this.b = b;
+                }
                 }
                 """
             );
@@ -1871,20 +1871,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Z
                 {
-                    int [|a = 2;
-                    int|] b;
+                int [|a = 2;
+                int|] b;
                 }
                 """,
                 """
                 class Z
                 {
-                    int a = 2;
-                    int b;
+                int a = 2;
+                int b;
 
-                    public Z(int a{|Navigation:)|}
-                    {
-                        this.a = a;
-                    }
+                public Z(int a{|Navigation:)|}
+                {
+                this.a = a;
+                }
                 }
                 """
             );
@@ -1897,18 +1897,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Z
                 {
-                    int [|a|] = 2, b = 3;
+                int [|a|] = 2, b = 3;
                 }
                 """,
                 """
                 class Z
                 {
-                    int a = 2, b = 3;
+                int a = 2, b = 3;
 
-                    public Z(int a{|Navigation:)|}
-                    {
-                        this.a = a;
-                    }
+                public Z(int a{|Navigation:)|}
+                {
+                this.a = a;
+                }
                 }
                 """
             );
@@ -1921,19 +1921,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Z
                 {
-                    int [|a = 2, b|] = 3;
+                int [|a = 2, b|] = 3;
                 }
                 """,
                 """
                 class Z
                 {
-                    int a = 2, b = 3;
+                int a = 2, b = 3;
 
-                    public Z(int a, int b{|Navigation:)|}
-                    {
-                        this.a = a;
-                        this.b = b;
-                    }
+                public Z(int a, int b{|Navigation:)|}
+                {
+                this.a = a;
+                this.b = b;
+                }
                 }
                 """
             );
@@ -1946,7 +1946,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Z
                 {
-                    int a = [|2|], b = 3;
+                int a = [|2|], b = 3;
                 }
                 """
             );
@@ -1959,18 +1959,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Z
                 {
-                    int [|a|] = 2;
+                int [|a|] = 2;
                 }
                 """,
                 """
                 class Z
                 {
-                    int a = 2;
+                int a = 2;
 
-                    public Z(int p_a{|Navigation:)|}
-                    {
-                        a = p_a;
-                    }
+                public Z(int p_a{|Navigation:)|}
+                {
+                a = p_a;
+                }
                 }
                 """,
                 options: options.ParameterNamesAreCamelCaseWithPUnderscorePrefix
@@ -1984,18 +1984,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Z
                 {
-                    int [|s_a|] = 2;
+                int [|s_a|] = 2;
                 }
                 """,
                 """
                 class Z
                 {
-                    int s_a = 2;
+                int s_a = 2;
 
-                    public Z(int p_a{|Navigation:)|}
-                    {
-                        s_a = p_a;
-                    }
+                public Z(int p_a{|Navigation:)|}
+                {
+                s_a = p_a;
+                }
                 }
                 """,
                 options: options.ParameterNamesAreCamelCaseWithPUnderscorePrefix
@@ -2009,18 +2009,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Z
                 {
-                    int [|field_a|] = 2;
+                int [|field_a|] = 2;
                 }
                 """,
                 """
                 class Z
                 {
-                    int field_a = 2;
+                int field_a = 2;
 
-                    public Z(int p_a_End{|Navigation:)|}
-                    {
-                        field_a = p_a_End;
-                    }
+                public Z(int p_a_End{|Navigation:)|}
+                {
+                field_a = p_a_End;
+                }
                 }
                 """,
                 options: options.MergeStyles(
@@ -2037,18 +2037,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Z
                 {
-                    int [|field_s_a|] = 2;
+                int [|field_s_a|] = 2;
                 }
                 """,
                 """
                 class Z
                 {
-                    int field_s_a = 2;
+                int field_s_a = 2;
 
-                    public Z(int p_a_End{|Navigation:)|}
-                    {
-                        field_s_a = p_a_End;
-                    }
+                public Z(int p_a_End{|Navigation:)|}
+                {
+                field_s_a = p_a_End;
+                }
                 }
                 """,
                 options: options.MergeStyles(
@@ -2065,18 +2065,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Z
                 {
-                    int [|s_field_a|] = 2;
+                int [|s_field_a|] = 2;
                 }
                 """,
                 """
                 class Z
                 {
-                    int s_field_a = 2;
+                int s_field_a = 2;
 
-                    public Z(int p_a_End{|Navigation:)|}
-                    {
-                        s_field_a = p_a_End;
-                    }
+                public Z(int p_a_End{|Navigation:)|}
+                {
+                s_field_a = p_a_End;
+                }
                 }
                 """,
                 options: options.MergeStyles(
@@ -2093,7 +2093,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Z
                 {
-                    int [|field__End|] = 2;
+                int [|field__End|] = 2;
                 }
                 """,
                 new TestParameters(
@@ -2112,20 +2112,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Z
                 {
-                    int [|s_field_a = 2;
-                    int field__End |]= 3;
+                int [|s_field_a = 2;
+                int field__End |]= 3;
                 }
                 """,
                 """
                 class Z
                 {
-                    int s_field_a = 2;
-                    int field__End = 3;
+                int s_field_a = 2;
+                int field__End = 3;
 
-                    public Z(int p_a{|Navigation:)|}
-                    {
-                        s_field_a = p_a;
-                    }
+                public Z(int p_a{|Navigation:)|}
+                {
+                s_field_a = p_a;
+                }
                 }
                 """,
                 options: options.MergeStyles(
@@ -2142,18 +2142,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Z
                 {
-                    [|unsafe int* a;|]
+                [|unsafe int* a;|]
                 }
                 """,
                 """
                 class Z
                 {
-                    unsafe int* a;
+                unsafe int* a;
 
-                    public unsafe Z(int* a{|Navigation:)|}
-                    {
-                        this.a = a;
-                    }
+                public unsafe Z(int* a{|Navigation:)|}
+                {
+                this.a = a;
+                }
                 }
                 """,
                 compilationOptions: new CSharpCompilationOptions(
@@ -2170,18 +2170,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 unsafe class Z
                 {
-                    [|int* a;|]
+                [|int* a;|]
                 }
                 """,
                 """
                 unsafe class Z
                 {
-                    int* a;
+                int* a;
 
-                    public Z(int* a{|Navigation:)|}
-                    {
-                        this.a = a;
-                    }
+                public Z(int* a{|Navigation:)|}
+                {
+                this.a = a;
+                }
                 }
                 """,
                 compilationOptions: new CSharpCompilationOptions(
@@ -2197,21 +2197,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
             await TestMissingAsync(
                 """
                 <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1">
-                        <Document>
+                <Project Language="C#" AssemblyName="Assembly1">
+                <Document>
                 using System;
                 using System.Collections.Generic;
                 #nullable enable
 
                 <![CDATA[ class Z<T> where T : class ]]>
                 {
-                    int a;
-                    string b;
-                    T? c;
-                    [||]
+                int a;
+                string b;
+                T? c;
+                [||]
                 }
-                        </Document>
-                    </Project>
+                </Document>
+                </Project>
                 </Workspace>
                 """
             );
@@ -2224,28 +2224,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Program
                 {
-                    private int _value;
+                private int _value;
 
-                    [|public int Goo
-                    {
-                        get { return _value; }
-                    }|]
+                [|public int Goo
+                {
+                get { return _value; }
+                }|]
                 }
                 """,
                 """
                 class Program
                 {
-                    private int _value;
+                private int _value;
 
-                    public Program(int value{|Navigation:)|}
-                    {
-                        _value = value;
-                    }
+                public Program(int value{|Navigation:)|}
+                {
+                _value = value;
+                }
 
-                    public int Goo
-                    {
-                        get { return _value; }
-                    }
+                public int Goo
+                {
+                get { return _value; }
+                }
                 }
                 """
             );
@@ -2258,28 +2258,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Program
                 {
-                    private int _value;
+                private int _value;
 
-                    [|public int Goo
-                    {
-                        get { return this._value; }
-                    }|]
+                [|public int Goo
+                {
+                get { return this._value; }
+                }|]
                 }
                 """,
                 """
                 class Program
                 {
-                    private int _value;
+                private int _value;
 
-                    public Program(int value{|Navigation:)|}
-                    {
-                        _value = value;
-                    }
+                public Program(int value{|Navigation:)|}
+                {
+                _value = value;
+                }
 
-                    public int Goo
-                    {
-                        get { return this._value; }
-                    }
+                public int Goo
+                {
+                get { return this._value; }
+                }
                 }
                 """
             );
@@ -2292,28 +2292,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Program
                 {
-                    private int _value;
+                private int _value;
 
-                    [|public int Goo
-                    {
-                        get => this._value;
-                    }|]
+                [|public int Goo
+                {
+                get => this._value;
+                }|]
                 }
                 """,
                 """
                 class Program
                 {
-                    private int _value;
+                private int _value;
 
-                    public Program(int value{|Navigation:)|}
-                    {
-                        _value = value;
-                    }
+                public Program(int value{|Navigation:)|}
+                {
+                _value = value;
+                }
 
-                    public int Goo
-                    {
-                        get => this._value;
-                    }
+                public int Goo
+                {
+                get => this._value;
+                }
                 }
                 """
             );
@@ -2326,22 +2326,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Program
                 {
-                    private int _value;
+                private int _value;
 
-                    [|public int Goo => this._value;|]
+                [|public int Goo => this._value;|]
                 }
                 """,
                 """
                 class Program
                 {
-                    private int _value;
+                private int _value;
 
-                    public Program(int value{|Navigation:)|}
-                    {
-                        _value = value;
-                    }
+                public Program(int value{|Navigation:)|}
+                {
+                _value = value;
+                }
 
-                    public int Goo => this._value;
+                public int Goo => this._value;
                 }
                 """
             );
@@ -2354,28 +2354,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Program
                 {
-                    [|private int _value;
+                [|private int _value;
 
-                    public int Goo
-                    {
-                        get { return _value; }
-                    }|]
+                public int Goo
+                {
+                get { return _value; }
+                }|]
                 }
                 """,
                 """
                 class Program
                 {
-                    private int _value;
+                private int _value;
 
-                    public Program(int value{|Navigation:)|}
-                    {
-                        _value = value;
-                    }
+                public Program(int value{|Navigation:)|}
+                {
+                _value = value;
+                }
 
-                    public int Goo
-                    {
-                        get { return _value; }
-                    }
+                public int Goo
+                {
+                get { return _value; }
+                }
                 }
                 """
             );
@@ -2388,30 +2388,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
                 """
                 class Program
                 {
-                    private int _value;
+                private int _value;
 
-                    [|public int Goo
-                    {
-                        get { return _value; }
-                        set { _value = value; }
-                    }|]
+                [|public int Goo
+                {
+                get { return _value; }
+                set { _value = value; }
+                }|]
                 }
                 """,
                 """
                 class Program
                 {
-                    private int _value;
+                private int _value;
 
-                    public Program(int goo{|Navigation:)|}
-                    {
-                        Goo = goo;
-                    }
+                public Program(int goo{|Navigation:)|}
+                {
+                Goo = goo;
+                }
 
-                    public int Goo
-                    {
-                        get { return _value; }
-                        set { _value = value; }
-                    }
+                public int Goo
+                {
+                get { return _value; }
+                set { _value = value; }
+                }
                 }
                 """
             );

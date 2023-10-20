@@ -39,26 +39,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructor
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new [|C|](1);
-                    }
+                void M()
+                {
+                new [|C|](1);
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    private int v;
+                private int v;
 
-                    public C(int v)
-                    {
-                        this.v = v;
-                    }
+                public C(int v)
+                {
+                this.v = v;
+                }
 
-                    void M()
-                    {
-                        new C(1);
-                    }
+                void M()
+                {
+                new C(1);
+                }
                 }
                 """
             );
@@ -71,26 +71,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructor
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new [|C|](1);
-                    }
+                void M()
+                {
+                new [|C|](1);
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    public C(int v)
-                    {
-                        V = v;
-                    }
+                public C(int v)
+                {
+                V = v;
+                }
 
-                    public int V { get; }
+                public int V { get; }
 
-                    void M()
-                    {
-                        new C(1);
-                    }
+                void M()
+                {
+                new C(1);
+                }
                 }
                 """,
                 index: 1
@@ -104,23 +104,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructor
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new [|C|](1);
-                    }
+                void M()
+                {
+                new [|C|](1);
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    public C(int v)
-                    {
-                    }
+                public C(int v)
+                {
+                }
 
-                    void M()
-                    {
-                        new C(1);
-                    }
+                void M()
+                {
+                new C(1);
+                }
                 }
                 """,
                 index: 2
@@ -134,23 +134,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructor
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new [|C|](1);
-                    }
+                void M()
+                {
+                new [|C|](1);
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    private int v;
+                private int v;
 
-                    public C(int v) => this.v = v;
+                public C(int v) => this.v = v;
 
-                    void M()
-                    {
-                        new C(1);
-                    }
+                void M()
+                {
+                new C(1);
+                }
                 }
                 """,
                 options: Option(
@@ -164,39 +164,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructor
         public async Task TestWithNoArgs()
         {
             var input = """
-                class C
-                {
-                    public C(int v)
-                    {
-                    }
+            class C
+            {
+            public C(int v)
+            {
+            }
 
-                    void M()
-                    {
-                        new [|C|]();
-                    }
-                }
-                """;
+            void M()
+            {
+            new [|C|]();
+            }
+            }
+            """;
 
             await TestActionCountAsync(input, 1);
             await TestInRegularAndScriptAsync(
                 input,
                 """
-class C
-{
-    public C()
-    {
-    }
+                class C
+                {
+                public C()
+                {
+                }
 
-    public C(int v)
-    {
-    }
+                public C(int v)
+                {
+                }
 
-    void M()
-    {
-        new C();
-    }
-}
-"""
+                void M()
+                {
+                new C();
+                }
+                }
+                """
             );
         }
 
@@ -207,26 +207,26 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new [|C(goo: 1)|];
-                    }
+                void M()
+                {
+                new [|C(goo: 1)|];
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    private int goo;
+                private int goo;
 
-                    public C(int goo)
-                    {
-                        this.goo = goo;
-                    }
+                public C(int goo)
+                {
+                this.goo = goo;
+                }
 
-                    void M()
-                    {
-                        new C(goo: 1);
-                    }
+                void M()
+                {
+                new C(goo: 1);
+                }
                 }
                 """
             );
@@ -236,41 +236,41 @@ class C
         public async Task TestWithExistingField1()
         {
             const string input = """
-                class C
-                {
-                    void M()
-                    {
-                        new [|D(goo: 1)|];
-                    }
-                }
+            class C
+            {
+            void M()
+            {
+            new [|D(goo: 1)|];
+            }
+            }
 
-                class D
-                {
-                    private int goo;
-                }
-                """;
+            class D
+            {
+            private int goo;
+            }
+            """;
             await TestActionCountAsync(input, 1);
             await TestInRegularAndScriptAsync(
                 input,
                 """
-         class C
-         {
-             void M()
-             {
-                 new D(goo: 1);
-             }
-         }
+                class C
+                {
+                void M()
+                {
+                new D(goo: 1);
+                }
+                }
 
-         class D
-         {
-             private int goo;
+                class D
+                {
+                private int goo;
 
-             public D(int goo)
-             {
-                 this.goo = goo;
-             }
-         }
-         """
+                public D(int goo)
+                {
+                this.goo = goo;
+                }
+                }
+                """
             );
         }
 
@@ -281,35 +281,35 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new [|D|](1);
-                    }
+                void M()
+                {
+                new [|D|](1);
+                }
                 }
 
                 class D
                 {
-                    private string v;
+                private string v;
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new D(1);
-                    }
+                void M()
+                {
+                new D(1);
+                }
                 }
 
                 class D
                 {
-                    private string v;
-                    private int v1;
+                private string v;
+                private int v1;
 
-                    public D(int v1)
-                    {
-                        this.v1 = v1;
-                    }
+                public D(int v1)
+                {
+                this.v1 = v1;
+                }
                 }
                 """
             );
@@ -322,36 +322,36 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new [|D|](1);
-                    }
+                void M()
+                {
+                new [|D|](1);
+                }
                 }
 
                 class D
                 {
-                    private string v;
+                private string v;
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new D(1);
-                    }
+                void M()
+                {
+                new D(1);
+                }
                 }
 
                 class D
                 {
-                    private string v;
+                private string v;
 
-                    public D(int v1)
-                    {
-                        V = v1;
-                    }
+                public D(int v1)
+                {
+                V = v1;
+                }
 
-                    public int V { get; }
+                public int V { get; }
                 }
                 """,
                 index: 1
@@ -365,33 +365,33 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new [|D|](1);
-                    }
+                void M()
+                {
+                new [|D|](1);
+                }
                 }
 
                 class D
                 {
-                    private string v;
+                private string v;
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new D(1);
-                    }
+                void M()
+                {
+                new D(1);
+                }
                 }
 
                 class D
                 {
-                    private string v;
+                private string v;
 
-                    public D(int v1)
-                    {
-                    }
+                public D(int v1)
+                {
+                }
                 }
                 """,
                 index: 2
@@ -405,15 +405,15 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new [|D|](1);
-                    }
+                void M()
+                {
+                new [|D|](1);
+                }
                 }
 
                 class B
                 {
-                    protected int v;
+                protected int v;
                 }
 
                 class D : B
@@ -423,23 +423,23 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new D(1);
-                    }
+                void M()
+                {
+                new D(1);
+                }
                 }
 
                 class B
                 {
-                    protected int v;
+                protected int v;
                 }
 
                 class D : B
                 {
-                    public D(int v)
-                    {
-                        this.v = v;
-                    }
+                public D(int v)
+                {
+                this.v = v;
+                }
                 }
                 """
             );
@@ -452,15 +452,15 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new [|D|](1);
-                    }
+                void M()
+                {
+                new [|D|](1);
+                }
                 }
 
                 class B
                 {
-                    private int v;
+                private int v;
                 }
 
                 class D : B
@@ -470,25 +470,25 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new D(1);
-                    }
+                void M()
+                {
+                new D(1);
+                }
                 }
 
                 class B
                 {
-                    private int v;
+                private int v;
                 }
 
                 class D : B
                 {
-                    private int v;
+                private int v;
 
-                    public D(int v)
-                    {
-                        this.v = v;
-                    }
+                public D(int v)
+                {
+                this.v = v;
+                }
                 }
                 """
             );
@@ -501,34 +501,34 @@ class C
                 """
                 class C
                 {
-                    void M(int X)
-                    {
-                        new [|D|](X);
-                    }
+                void M(int X)
+                {
+                new [|D|](X);
+                }
                 }
 
                 class D
                 {
-                    int X;
+                int X;
                 }
                 """,
                 """
                 class C
                 {
-                    void M(int X)
-                    {
-                        new D(X);
-                    }
+                void M(int X)
+                {
+                new D(X);
+                }
                 }
 
                 class D
                 {
-                    int X;
+                int X;
 
-                    public D(int x)
-                    {
-                        X = x;
-                    }
+                public D(int x)
+                {
+                X = x;
+                }
                 }
                 """
             );
@@ -541,34 +541,34 @@ class C
                 """
                 class C
                 {
-                    void M(int X)
-                    {
-                        new [|D|](X);
-                    }
+                void M(int X)
+                {
+                new [|D|](X);
+                }
                 }
 
                 class D
                 {
-                    int X;
+                int X;
                 }
                 """,
                 """
                 class C
                 {
-                    void M(int X)
-                    {
-                        new D(X);
-                    }
+                void M(int X)
+                {
+                new D(X);
+                }
                 }
 
                 class D
                 {
-                    int X;
+                int X;
 
-                    public D(int x)
-                    {
-                        this.X = x;
-                    }
+                public D(int x)
+                {
+                this.X = x;
+                }
                 }
                 """,
                 options: Option(
@@ -586,15 +586,15 @@ class C
                 """
                 class C
                 {
-                    void M(int X)
-                    {
-                        new [|D|](X);
-                    }
+                void M(int X)
+                {
+                new [|D|](X);
+                }
                 }
 
                 class B
                 {
-                    private int X;
+                private int X;
                 }
 
                 class D : B
@@ -604,25 +604,25 @@ class C
                 """
                 class C
                 {
-                    void M(int X)
-                    {
-                        new D(X);
-                    }
+                void M(int X)
+                {
+                new D(X);
+                }
                 }
 
                 class B
                 {
-                    private int X;
+                private int X;
                 }
 
                 class D : B
                 {
-                    private int x;
+                private int x;
 
-                    public D(int x)
-                    {
-                        this.x = x;
-                    }
+                public D(int x)
+                {
+                this.x = x;
+                }
                 }
                 """
             );
@@ -635,15 +635,15 @@ class C
                 """
                 class C
                 {
-                    void M(int X)
-                    {
-                        new [|D|](X);
-                    }
+                void M(int X)
+                {
+                new [|D|](X);
+                }
                 }
 
                 class B
                 {
-                    protected int X;
+                protected int X;
                 }
 
                 class D : B
@@ -653,23 +653,23 @@ class C
                 """
                 class C
                 {
-                    void M(int X)
-                    {
-                        new D(X);
-                    }
+                void M(int X)
+                {
+                new D(X);
+                }
                 }
 
                 class B
                 {
-                    protected int X;
+                protected int X;
                 }
 
                 class D : B
                 {
-                    public D(int x)
-                    {
-                        X = x;
-                    }
+                public D(int x)
+                {
+                X = x;
+                }
                 }
                 """
             );
@@ -682,15 +682,15 @@ class C
                 """
                 class C
                 {
-                    void M(int X)
-                    {
-                        new [|D|](X);
-                    }
+                void M(int X)
+                {
+                new [|D|](X);
+                }
                 }
 
                 class B
                 {
-                    protected int X;
+                protected int X;
                 }
 
                 class D : B
@@ -700,23 +700,23 @@ class C
                 """
                 class C
                 {
-                    void M(int X)
-                    {
-                        new D(X);
-                    }
+                void M(int X)
+                {
+                new D(X);
+                }
                 }
 
                 class B
                 {
-                    protected int X;
+                protected int X;
                 }
 
                 class D : B
                 {
-                    public D(int x)
-                    {
-                        this.X = x;
-                    }
+                public D(int x)
+                {
+                this.X = x;
+                }
                 }
                 """,
                 options: Option(
@@ -734,15 +734,15 @@ class C
                 """
                 class C
                 {
-                    void M(int X)
-                    {
-                        new [|D|](X);
-                    }
+                void M(int X)
+                {
+                new [|D|](X);
+                }
                 }
 
                 class B
                 {
-                    protected static int x;
+                protected static int x;
                 }
 
                 class D : B
@@ -752,25 +752,25 @@ class C
                 """
                 class C
                 {
-                    void M(int X)
-                    {
-                        new D(X);
-                    }
+                void M(int X)
+                {
+                new D(X);
+                }
                 }
 
                 class B
                 {
-                    protected static int x;
+                protected static int x;
                 }
 
                 class D : B
                 {
-                    private int x1;
+                private int x1;
 
-                    public D(int x1)
-                    {
-                        this.x1 = x1;
-                    }
+                public D(int x1)
+                {
+                this.x1 = x1;
+                }
                 }
                 """
             );
@@ -783,44 +783,44 @@ class C
                 """
                 class C
                 {
-                    void M(int X)
-                    {
-                        new [|D|](X);
-                    }
+                void M(int X)
+                {
+                new [|D|](X);
+                }
                 }
 
                 class B
                 {
-                    protected int x;
+                protected int x;
                 }
 
                 class D : B
                 {
-                    int X;
+                int X;
                 }
                 """,
                 """
                 class C
                 {
-                    void M(int X)
-                    {
-                        new D(X);
-                    }
+                void M(int X)
+                {
+                new D(X);
+                }
                 }
 
                 class B
                 {
-                    protected int x;
+                protected int x;
                 }
 
                 class D : B
                 {
-                    int X;
+                int X;
 
-                    public D(int x)
-                    {
-                        this.x = x;
-                    }
+                public D(int x)
+                {
+                this.x = x;
+                }
                 }
                 """
             );
@@ -833,34 +833,34 @@ class C
                 """
                 class C
                 {
-                    void M(int X)
-                    {
-                        new [|D|](X);
-                    }
+                void M(int X)
+                {
+                new [|D|](X);
+                }
                 }
 
                 class D
                 {
-                    public int X { get; private set; }
+                public int X { get; private set; }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(int X)
-                    {
-                        new D(X);
-                    }
+                void M(int X)
+                {
+                new D(X);
+                }
                 }
 
                 class D
                 {
-                    public D(int x)
-                    {
-                        X = x;
-                    }
+                public D(int x)
+                {
+                X = x;
+                }
 
-                    public int X { get; private set; }
+                public int X { get; private set; }
                 }
                 """
             );
@@ -873,34 +873,34 @@ class C
                 """
                 class C
                 {
-                    void M(int X)
-                    {
-                        new [|D|](X);
-                    }
+                void M(int X)
+                {
+                new [|D|](X);
+                }
                 }
 
                 class D
                 {
-                    public int X { get; private set; }
+                public int X { get; private set; }
                 }
                 """,
                 """
                 class C
                 {
-                    void M(int X)
-                    {
-                        new D(X);
-                    }
+                void M(int X)
+                {
+                new D(X);
+                }
                 }
 
                 class D
                 {
-                    public D(int x)
-                    {
-                        this.X = x;
-                    }
+                public D(int x)
+                {
+                this.X = x;
+                }
 
-                    public int X { get; private set; }
+                public int X { get; private set; }
                 }
                 """,
                 options: Option(
@@ -918,15 +918,15 @@ class C
                 """
                 class C
                 {
-                    void M(int X)
-                    {
-                        new [|D|](X);
-                    }
+                void M(int X)
+                {
+                new [|D|](X);
+                }
                 }
 
                 class B
                 {
-                    public int X { get; private set; }
+                public int X { get; private set; }
                 }
 
                 class D : B
@@ -936,25 +936,25 @@ class C
                 """
                 class C
                 {
-                    void M(int X)
-                    {
-                        new D(X);
-                    }
+                void M(int X)
+                {
+                new D(X);
+                }
                 }
 
                 class B
                 {
-                    public int X { get; private set; }
+                public int X { get; private set; }
                 }
 
                 class D : B
                 {
-                    private int x;
+                private int x;
 
-                    public D(int x)
-                    {
-                        this.x = x;
-                    }
+                public D(int x)
+                {
+                this.x = x;
+                }
                 }
                 """
             );
@@ -967,15 +967,15 @@ class C
                 """
                 class C
                 {
-                    void M(int X)
-                    {
-                        new [|D|](X);
-                    }
+                void M(int X)
+                {
+                new [|D|](X);
+                }
                 }
 
                 class B
                 {
-                    public int X { get; protected set; }
+                public int X { get; protected set; }
                 }
 
                 class D : B
@@ -985,23 +985,23 @@ class C
                 """
                 class C
                 {
-                    void M(int X)
-                    {
-                        new D(X);
-                    }
+                void M(int X)
+                {
+                new D(X);
+                }
                 }
 
                 class B
                 {
-                    public int X { get; protected set; }
+                public int X { get; protected set; }
                 }
 
                 class D : B
                 {
-                    public D(int x)
-                    {
-                        X = x;
-                    }
+                public D(int x)
+                {
+                X = x;
+                }
                 }
                 """
             );
@@ -1014,15 +1014,15 @@ class C
                 """
                 class C
                 {
-                    void M(int X)
-                    {
-                        new [|D|](X);
-                    }
+                void M(int X)
+                {
+                new [|D|](X);
+                }
                 }
 
                 class B
                 {
-                    public int X { get; protected set; }
+                public int X { get; protected set; }
                 }
 
                 class D : B
@@ -1032,23 +1032,23 @@ class C
                 """
                 class C
                 {
-                    void M(int X)
-                    {
-                        new D(X);
-                    }
+                void M(int X)
+                {
+                new D(X);
+                }
                 }
 
                 class B
                 {
-                    public int X { get; protected set; }
+                public int X { get; protected set; }
                 }
 
                 class D : B
                 {
-                    public D(int x)
-                    {
-                        this.X = x;
-                    }
+                public D(int x)
+                {
+                this.X = x;
+                }
                 }
                 """,
                 options: Option(
@@ -1066,15 +1066,15 @@ class C
                 """
                 class C
                 {
-                    void M(int X)
-                    {
-                        new [|D|](X);
-                    }
+                void M(int X)
+                {
+                new [|D|](X);
+                }
                 }
 
                 class B
                 {
-                    protected int X { get; set; }
+                protected int X { get; set; }
                 }
 
                 class D : B
@@ -1084,23 +1084,23 @@ class C
                 """
                 class C
                 {
-                    void M(int X)
-                    {
-                        new D(X);
-                    }
+                void M(int X)
+                {
+                new D(X);
+                }
                 }
 
                 class B
                 {
-                    protected int X { get; set; }
+                protected int X { get; set; }
                 }
 
                 class D : B
                 {
-                    public D(int x)
-                    {
-                        X = x;
-                    }
+                public D(int x)
+                {
+                X = x;
+                }
                 }
                 """
             );
@@ -1113,15 +1113,15 @@ class C
                 """
                 class C
                 {
-                    void M(int X)
-                    {
-                        new [|D|](X);
-                    }
+                void M(int X)
+                {
+                new [|D|](X);
+                }
                 }
 
                 class B
                 {
-                    protected int X { get; set; }
+                protected int X { get; set; }
                 }
 
                 class D : B
@@ -1131,23 +1131,23 @@ class C
                 """
                 class C
                 {
-                    void M(int X)
-                    {
-                        new D(X);
-                    }
+                void M(int X)
+                {
+                new D(X);
+                }
                 }
 
                 class B
                 {
-                    protected int X { get; set; }
+                protected int X { get; set; }
                 }
 
                 class D : B
                 {
-                    public D(int x)
-                    {
-                        this.X = x;
-                    }
+                public D(int x)
+                {
+                this.X = x;
+                }
                 }
                 """,
                 options: Option(
@@ -1165,15 +1165,15 @@ class C
                 """
                 class C
                 {
-                    void M(int X)
-                    {
-                        new [|D|](X);
-                    }
+                void M(int X)
+                {
+                new [|D|](X);
+                }
                 }
 
                 class B
                 {
-                    protected int X { get; }
+                protected int X { get; }
                 }
 
                 class D : B
@@ -1183,25 +1183,25 @@ class C
                 """
                 class C
                 {
-                    void M(int X)
-                    {
-                        new D(X);
-                    }
+                void M(int X)
+                {
+                new D(X);
+                }
                 }
 
                 class B
                 {
-                    protected int X { get; }
+                protected int X { get; }
                 }
 
                 class D : B
                 {
-                    private int x;
+                private int x;
 
-                    public D(int x)
-                    {
-                        this.x = x;
-                    }
+                public D(int x)
+                {
+                this.x = x;
+                }
                 }
                 """
             );
@@ -1214,10 +1214,10 @@ class C
                 """
                 class C
                 {
-                    void M(int i)
-                    {
-                        new [|D|](out i);
-                    }
+                void M(int i)
+                {
+                new [|D|](out i);
+                }
                 }
 
                 class D
@@ -1227,18 +1227,18 @@ class C
                 """
                 class C
                 {
-                    void M(int i)
-                    {
-                        new D(out i);
-                    }
+                void M(int i)
+                {
+                new D(out i);
+                }
                 }
 
                 class D
                 {
-                    public D(out int i)
-                    {
-                        i = 0;
-                    }
+                public D(out int i)
+                {
+                i = 0;
+                }
                 }
                 """
             );
@@ -1248,52 +1248,52 @@ class C
         public async Task TestWithBaseDelegatingConstructor1()
         {
             const string input = """
-                class C
-                {
-                    void M()
-                    {
-                        new [|D|](1);
-                    }
-                }
+            class C
+            {
+            void M()
+            {
+            new [|D|](1);
+            }
+            }
 
-                class B
-                {
-                    protected B(int x)
-                    {
-                    }
-                }
+            class B
+            {
+            protected B(int x)
+            {
+            }
+            }
 
-                class D : B
-                {
-                }
-                """;
+            class D : B
+            {
+            }
+            """;
 
             await TestActionCountAsync(input, 1);
             await TestInRegularAndScriptAsync(
                 input,
                 """
-         class C
-         {
-             void M()
-             {
-                 new D(1);
-             }
-         }
+                class C
+                {
+                void M()
+                {
+                new D(1);
+                }
+                }
 
-         class B
-         {
-             protected B(int x)
-             {
-             }
-         }
+                class B
+                {
+                protected B(int x)
+                {
+                }
+                }
 
-         class D : B
-         {
-             public D(int x) : base(x)
-             {
-             }
-         }
-         """
+                class D : B
+                {
+                public D(int x) : base(x)
+                {
+                }
+                }
+                """
             );
         }
 
@@ -1304,17 +1304,17 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new [|D|](1);
-                    }
+                void M()
+                {
+                new [|D|](1);
+                }
                 }
 
                 class B
                 {
-                    private B(int x)
-                    {
-                    }
+                private B(int x)
+                {
+                }
                 }
 
                 class D : B
@@ -1324,27 +1324,27 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new D(1);
-                    }
+                void M()
+                {
+                new D(1);
+                }
                 }
 
                 class B
                 {
-                    private B(int x)
-                    {
-                    }
+                private B(int x)
+                {
+                }
                 }
 
                 class D : B
                 {
-                    private int v;
+                private int v;
 
-                    public D(int v)
-                    {
-                        this.v = v;
-                    }
+                public D(int v)
+                {
+                this.v = v;
+                }
                 }
                 """
             );
@@ -1357,17 +1357,17 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new [|D|](1);
-                    }
+                void M()
+                {
+                new [|D|](1);
+                }
                 }
 
                 class B
                 {
-                    private B(int x)
-                    {
-                    }
+                private B(int x)
+                {
+                }
                 }
 
                 class D : B
@@ -1377,27 +1377,27 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new D(1);
-                    }
+                void M()
+                {
+                new D(1);
+                }
                 }
 
                 class B
                 {
-                    private B(int x)
-                    {
-                    }
+                private B(int x)
+                {
+                }
                 }
 
                 class D : B
                 {
-                    public D(int v)
-                    {
-                        V = v;
-                    }
+                public D(int v)
+                {
+                V = v;
+                }
 
-                    public int V { get; }
+                public int V { get; }
                 }
                 """,
                 index: 1
@@ -1411,17 +1411,17 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new [|D|](1);
-                    }
+                void M()
+                {
+                new [|D|](1);
+                }
                 }
 
                 class B
                 {
-                    private B(int x)
-                    {
-                    }
+                private B(int x)
+                {
+                }
                 }
 
                 class D : B
@@ -1431,24 +1431,24 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new D(1);
-                    }
+                void M()
+                {
+                new D(1);
+                }
                 }
 
                 class B
                 {
-                    private B(int x)
-                    {
-                    }
+                private B(int x)
+                {
+                }
                 }
 
                 class D : B
                 {
-                    public D(int v)
-                    {
-                    }
+                public D(int v)
+                {
+                }
                 }
                 """,
                 index: 2
@@ -1462,10 +1462,10 @@ class C
                 """
                 struct S
                 {
-                    void M()
-                    {
-                        S s = new [|S|](System.DateTime.Now);
-                    }
+                void M()
+                {
+                S s = new [|S|](System.DateTime.Now);
+                }
                 }
                 """,
                 """
@@ -1473,17 +1473,17 @@ class C
 
                 struct S
                 {
-                    private DateTime now;
+                private DateTime now;
 
-                    public S(DateTime now)
-                    {
-                        this.now = now;
-                    }
+                public S(DateTime now)
+                {
+                this.now = now;
+                }
 
-                    void M()
-                    {
-                        S s = new S(System.DateTime.Now);
-                    }
+                void M()
+                {
+                S s = new S(System.DateTime.Now);
+                }
                 }
                 """
             );
@@ -1496,26 +1496,26 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new [|@C|](1);
-                    }
+                void M()
+                {
+                new [|@C|](1);
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    private int v;
+                private int v;
 
-                    public C(int v)
-                    {
-                        this.v = v;
-                    }
+                public C(int v)
+                {
+                this.v = v;
+                }
 
-                    void M()
-                    {
-                        new @C(1);
-                    }
+                void M()
+                {
+                new @C(1);
+                }
                 }
                 """
             );
@@ -1528,26 +1528,26 @@ class C
                 """
                 class @int
                 {
-                    void M()
-                    {
-                        new [|@int|](1);
-                    }
+                void M()
+                {
+                new [|@int|](1);
+                }
                 }
                 """,
                 """
                 class @int
                 {
-                    private int v;
+                private int v;
 
-                    public @int(int v)
-                    {
-                        this.v = v;
-                    }
+                public @int(int v)
+                {
+                this.v = v;
+                }
 
-                    void M()
-                    {
-                        new @int(1);
-                    }
+                void M()
+                {
+                new @int(1);
+                }
                 }
                 """
             );
@@ -1560,13 +1560,13 @@ class C
                 """
                 class Base
                 {
-                    internal long field;
+                internal long field;
 
-                    void Main()
-                    {
-                        int field = 5;
-                        new [|Derived|](field);
-                    }
+                void Main()
+                {
+                int field = 5;
+                new [|Derived|](field);
+                }
                 }
 
                 class Derived : Base
@@ -1576,21 +1576,21 @@ class C
                 """
                 class Base
                 {
-                    internal long field;
+                internal long field;
 
-                    void Main()
-                    {
-                        int field = 5;
-                        new Derived(field);
-                    }
+                void Main()
+                {
+                int field = 5;
+                new Derived(field);
+                }
                 }
 
                 class Derived : Base
                 {
-                    public Derived(int field)
-                    {
-                        this.field = field;
-                    }
+                public Derived(int field)
+                {
+                this.field = field;
+                }
                 }
                 """
             );
@@ -1603,26 +1603,26 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new [|C|](1);
-                    }
+                void M()
+                {
+                new [|C|](1);
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    private int v;
+                private int v;
 
-                    public C(int v)
-                    {
-                        this.v = v;
-                    }
+                public C(int v)
+                {
+                this.v = v;
+                }
 
-                    void M()
-                    {
-                        new C(1);
-                    }
+                void M()
+                {
+                new C(1);
+                }
                 }
                 """
             );
@@ -1635,10 +1635,10 @@ class C
                 """
                 struct Struct
                 {
-                    void Main()
-                    {
-                        Struct s = new [|Struct|]();
-                    }
+                void Main()
+                {
+                Struct s = new [|Struct|]();
+                }
                 }
                 """
             );
@@ -1655,10 +1655,10 @@ class C
 
                 partial class C
                 {
-                    void Method()
-                    {
-                        C c = new [|C|]("a");
-                    }
+                void Method()
+                {
+                C c = new [|C|]("a");
+                }
                 }
                 """,
                 """
@@ -1668,17 +1668,17 @@ class C
 
                 partial class C
                 {
-                    private string v;
+                private string v;
 
-                    public C(string v)
-                    {
-                        this.v = v;
-                    }
+                public C(string v)
+                {
+                this.v = v;
+                }
 
-                    void Method()
-                    {
-                        C c = new C("a");
-                    }
+                void Method()
+                {
+                C c = new C("a");
+                }
                 }
                 """
             );
@@ -1691,51 +1691,51 @@ class C
                 """
                 class A
                 {
-                    void M()
-                    {
-                        Delta d1 = new Delta("ss", 3);
-                        Delta d2 = new [|Delta|]("ss", 5, true);
-                    }
+                void M()
+                {
+                Delta d1 = new Delta("ss", 3);
+                Delta d2 = new [|Delta|]("ss", 5, true);
+                }
                 }
 
                 class Delta
                 {
-                    private string v1;
-                    private int v2;
+                private string v1;
+                private int v2;
 
-                    public Delta(string v1, int v2)
-                    {
-                        this.v1 = v1;
-                        this.v2 = v2;
-                    }
+                public Delta(string v1, int v2)
+                {
+                this.v1 = v1;
+                this.v2 = v2;
+                }
                 }
                 """,
                 """
                 class A
                 {
-                    void M()
-                    {
-                        Delta d1 = new Delta("ss", 3);
-                        Delta d2 = new Delta("ss", 5, true);
-                    }
+                void M()
+                {
+                Delta d1 = new Delta("ss", 3);
+                Delta d2 = new Delta("ss", 5, true);
+                }
                 }
 
                 class Delta
                 {
-                    private string v1;
-                    private int v2;
-                    private bool v;
+                private string v1;
+                private int v2;
+                private bool v;
 
-                    public Delta(string v1, int v2)
-                    {
-                        this.v1 = v1;
-                        this.v2 = v2;
-                    }
+                public Delta(string v1, int v2)
+                {
+                this.v1 = v1;
+                this.v2 = v2;
+                }
 
-                    public Delta(string v1, int v2, bool v) : this(v1, v2)
-                    {
-                        this.v = v;
-                    }
+                public Delta(string v1, int v2, bool v) : this(v1, v2)
+                {
+                this.v = v;
+                }
                 }
                 """
             );
@@ -1748,52 +1748,52 @@ class C
                 """
                 class A
                 {
-                    void M()
-                    {
-                        Delta d1 = new Delta("ss", 3);
-                        Delta d2 = new [|Delta|]("ss", 5, true);
-                    }
+                void M()
+                {
+                Delta d1 = new Delta("ss", 3);
+                Delta d2 = new [|Delta|]("ss", 5, true);
+                }
                 }
 
                 class Delta
                 {
-                    private string v1;
-                    private int v2;
+                private string v1;
+                private int v2;
 
-                    public Delta(string v1, int v2)
-                    {
-                        this.v1 = v1;
-                        this.v2 = v2;
-                    }
+                public Delta(string v1, int v2)
+                {
+                this.v1 = v1;
+                this.v2 = v2;
+                }
                 }
                 """,
                 """
                 class A
                 {
-                    void M()
-                    {
-                        Delta d1 = new Delta("ss", 3);
-                        Delta d2 = new Delta("ss", 5, true);
-                    }
+                void M()
+                {
+                Delta d1 = new Delta("ss", 3);
+                Delta d2 = new Delta("ss", 5, true);
+                }
                 }
 
                 class Delta
                 {
-                    private string v1;
-                    private int v2;
+                private string v1;
+                private int v2;
 
-                    public Delta(string v1, int v2)
-                    {
-                        this.v1 = v1;
-                        this.v2 = v2;
-                    }
+                public Delta(string v1, int v2)
+                {
+                this.v1 = v1;
+                this.v2 = v2;
+                }
 
-                    public Delta(string v1, int v2, bool v) : this(v1, v2)
-                    {
-                        V = v;
-                    }
+                public Delta(string v1, int v2, bool v) : this(v1, v2)
+                {
+                V = v;
+                }
 
-                    public bool V { get; }
+                public bool V { get; }
                 }
                 """,
                 index: 1
@@ -1807,49 +1807,49 @@ class C
                 """
                 class A
                 {
-                    void M()
-                    {
-                        Delta d1 = new Delta("ss", 3);
-                        Delta d2 = new [|Delta|]("ss", 5, true);
-                    }
+                void M()
+                {
+                Delta d1 = new Delta("ss", 3);
+                Delta d2 = new [|Delta|]("ss", 5, true);
+                }
                 }
 
                 class Delta
                 {
-                    private string v1;
-                    private int v2;
+                private string v1;
+                private int v2;
 
-                    public Delta(string v1, int v2)
-                    {
-                        this.v1 = v1;
-                        this.v2 = v2;
-                    }
+                public Delta(string v1, int v2)
+                {
+                this.v1 = v1;
+                this.v2 = v2;
+                }
                 }
                 """,
                 """
                 class A
                 {
-                    void M()
-                    {
-                        Delta d1 = new Delta("ss", 3);
-                        Delta d2 = new Delta("ss", 5, true);
-                    }
+                void M()
+                {
+                Delta d1 = new Delta("ss", 3);
+                Delta d2 = new Delta("ss", 5, true);
+                }
                 }
 
                 class Delta
                 {
-                    private string v1;
-                    private int v2;
+                private string v1;
+                private int v2;
 
-                    public Delta(string v1, int v2)
-                    {
-                        this.v1 = v1;
-                        this.v2 = v2;
-                    }
+                public Delta(string v1, int v2)
+                {
+                this.v1 = v1;
+                this.v2 = v2;
+                }
 
-                    public Delta(string v1, int v2, bool v) : this(v1, v2)
-                    {
-                    }
+                public Delta(string v1, int v2, bool v) : this(v1, v2)
+                {
+                }
                 }
                 """,
                 index: 2
@@ -1863,51 +1863,51 @@ class C
                 """
                 class A
                 {
-                    void M()
-                    {
-                        Delta d1 = new Delta("ss", 3);
-                        Delta d2 = new [|Delta|]("ss", 5, true);
-                    }
+                void M()
+                {
+                Delta d1 = new Delta("ss", 3);
+                Delta d2 = new [|Delta|]("ss", 5, true);
+                }
                 }
 
                 class Delta
                 {
-                    private string a;
-                    private int b;
+                private string a;
+                private int b;
 
-                    public Delta(string a, int b)
-                    {
-                        this.a = a;
-                        this.b = b;
-                    }
+                public Delta(string a, int b)
+                {
+                this.a = a;
+                this.b = b;
+                }
                 }
                 """,
                 """
                 class A
                 {
-                    void M()
-                    {
-                        Delta d1 = new Delta("ss", 3);
-                        Delta d2 = new Delta("ss", 5, true);
-                    }
+                void M()
+                {
+                Delta d1 = new Delta("ss", 3);
+                Delta d2 = new Delta("ss", 5, true);
+                }
                 }
 
                 class Delta
                 {
-                    private string a;
-                    private int b;
-                    private bool v;
+                private string a;
+                private int b;
+                private bool v;
 
-                    public Delta(string a, int b)
-                    {
-                        this.a = a;
-                        this.b = b;
-                    }
+                public Delta(string a, int b)
+                {
+                this.a = a;
+                this.b = b;
+                }
 
-                    public Delta(string a, int b, bool v) : this(a, b)
-                    {
-                        this.v = v;
-                    }
+                public Delta(string a, int b, bool v) : this(a, b)
+                {
+                this.v = v;
+                }
                 }
                 """
             );
@@ -1920,23 +1920,23 @@ class C
                 """
                 class A
                 {
-                    void M()
-                    {
-                        var d1 = new Base("ss", 3);
-                        var d2 = new [|Delta|]("ss", 5, true);
-                    }
+                void M()
+                {
+                var d1 = new Base("ss", 3);
+                var d2 = new [|Delta|]("ss", 5, true);
+                }
                 }
 
                 class Base
                 {
-                    private string v1;
-                    private int v2;
+                private string v1;
+                private int v2;
 
-                    public Base(string v1, int v2)
-                    {
-                        this.v1 = v1;
-                        this.v2 = v2;
-                    }
+                public Base(string v1, int v2)
+                {
+                this.v1 = v1;
+                this.v2 = v2;
+                }
                 }
 
                 class Delta : Base
@@ -1946,33 +1946,33 @@ class C
                 """
                 class A
                 {
-                    void M()
-                    {
-                        var d1 = new Base("ss", 3);
-                        var d2 = new Delta("ss", 5, true);
-                    }
+                void M()
+                {
+                var d1 = new Base("ss", 3);
+                var d2 = new Delta("ss", 5, true);
+                }
                 }
 
                 class Base
                 {
-                    private string v1;
-                    private int v2;
+                private string v1;
+                private int v2;
 
-                    public Base(string v1, int v2)
-                    {
-                        this.v1 = v1;
-                        this.v2 = v2;
-                    }
+                public Base(string v1, int v2)
+                {
+                this.v1 = v1;
+                this.v2 = v2;
+                }
                 }
 
                 class Delta : Base
                 {
-                    private bool v;
+                private bool v;
 
-                    public Delta(string v1, int v2, bool v) : base(v1, v2)
-                    {
-                        this.v = v;
-                    }
+                public Delta(string v1, int v2, bool v) : base(v1, v2)
+                {
+                this.v = v;
+                }
                 }
                 """
             );
@@ -1985,51 +1985,51 @@ class C
                 """
                 class A
                 {
-                    void M()
-                    {
-                        Delta d1 = new Delta("ss", 3);
-                        Delta d2 = new [|Delta|]("ss", 5, true);
-                    }
+                void M()
+                {
+                Delta d1 = new Delta("ss", 3);
+                Delta d2 = new [|Delta|]("ss", 5, true);
+                }
                 }
 
                 class Delta
                 {
-                    private string v1;
-                    private int v2;
+                private string v1;
+                private int v2;
 
-                    public Delta(string v1, int v2)
-                    {
-                        this.v1 = v1;
-                        this.v2 = v2;
-                    }
+                public Delta(string v1, int v2)
+                {
+                this.v1 = v1;
+                this.v2 = v2;
+                }
                 }
                 """,
                 """
                 class A
                 {
-                    void M()
-                    {
-                        Delta d1 = new Delta("ss", 3);
-                        Delta d2 = new Delta("ss", 5, true);
-                    }
+                void M()
+                {
+                Delta d1 = new Delta("ss", 3);
+                Delta d2 = new Delta("ss", 5, true);
+                }
                 }
 
                 class Delta
                 {
-                    private string v1;
-                    private int v2;
-                    private bool v;
+                private string v1;
+                private int v2;
+                private bool v;
 
-                    public Delta(string v1, int v2)
-                    {
-                        this.v1 = v1;
-                        this.v2 = v2;
-                    }
+                public Delta(string v1, int v2)
+                {
+                this.v1 = v1;
+                this.v2 = v2;
+                }
 
-                    public Delta(string v1, int v2, bool v) : this(v1, v2)
-                    {
-                        this.v = v;
-                    }
+                public Delta(string v1, int v2, bool v) : this(v1, v2)
+                {
+                this.v = v;
+                }
                 }
                 """
             );
@@ -2042,24 +2042,24 @@ class C
                 """
                 class C
                 {
-                    public C() [|: this(4)|]
-                    {
-                    }
+                public C() [|: this(4)|]
+                {
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    private int v;
+                private int v;
 
-                    public C() : this(4)
-                    {
-                    }
+                public C() : this(4)
+                {
+                }
 
-                    public C(int v)
-                    {
-                        this.v = v;
-                    }
+                public C(int v)
+                {
+                this.v = v;
+                }
                 }
                 """
             );
@@ -2072,24 +2072,24 @@ class C
                 """
                 class C
                 {
-                    public C() [|: this(4)|]
-                    {
-                    }
+                public C() [|: this(4)|]
+                {
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    public C() : this(4)
-                    {
-                    }
+                public C() : this(4)
+                {
+                }
 
-                    public C(int v)
-                    {
-                        V = v;
-                    }
+                public C(int v)
+                {
+                V = v;
+                }
 
-                    public int V { get; }
+                public int V { get; }
                 }
                 """,
                 index: 1
@@ -2103,21 +2103,21 @@ class C
                 """
                 class C
                 {
-                    public C() [|: this(4)|]
-                    {
-                    }
+                public C() [|: this(4)|]
+                {
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    public C() : this(4)
-                    {
-                    }
+                public C() : this(4)
+                {
+                }
 
-                    public C(int v)
-                    {
-                    }
+                public C(int v)
+                {
+                }
                 }
                 """,
                 index: 2
@@ -2131,21 +2131,21 @@ class C
                 """
                 class C
                 {
-                    public C(int i) [|: this()|]
-                    {
-                    }
+                public C(int i) [|: this()|]
+                {
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    public C()
-                    {
-                    }
+                public C()
+                {
+                }
 
-                    public C(int i) : this()
-                    {
-                    }
+                public C(int i) : this()
+                {
+                }
                 }
                 """
             );
@@ -2158,9 +2158,9 @@ class C
                 """
                 class C : B
                 {
-                    public C(int i) [|: base(i)|]
-                    {
-                    }
+                public C(int i) [|: base(i)|]
+                {
+                }
                 }
 
                 class B
@@ -2170,19 +2170,19 @@ class C
                 """
                 class C : B
                 {
-                    public C(int i) : base(i)
-                    {
-                    }
+                public C(int i) : base(i)
+                {
+                }
                 }
 
                 class B
                 {
-                    private int i;
+                private int i;
 
-                    public B(int i)
-                    {
-                        this.i = i;
-                    }
+                public B(int i)
+                {
+                this.i = i;
+                }
                 }
                 """
             );
@@ -2195,32 +2195,32 @@ class C
                 """
                 class C : B
                 {
-                    public C(int i) [|: base(i)|]
-                    {
-                    }
+                public C(int i) [|: base(i)|]
+                {
+                }
                 }
 
                 class B
                 {
-                    int i;
+                int i;
                 }
                 """,
                 """
                 class C : B
                 {
-                    public C(int i) : base(i)
-                    {
-                    }
+                public C(int i) : base(i)
+                {
+                }
                 }
 
                 class B
                 {
-                    int i;
+                int i;
 
-                    public B(int i)
-                    {
-                        this.i = i;
-                    }
+                public B(int i)
+                {
+                this.i = i;
+                }
                 }
                 """
             );
@@ -2233,17 +2233,17 @@ class C
                 """
                 class C
                 {
-                    private class D
-                    {
-                    }
+                private class D
+                {
+                }
                 }
 
                 class A
                 {
-                    void M()
-                    {
-                        C.D d = new C.[|D|]();
-                    }
+                void M()
+                {
+                C.D d = new C.[|D|]();
+                }
                 }
                 """
             );
@@ -2256,10 +2256,10 @@ class C
                 """
                 class C<T1, T2>
                 {
-                    public void Goo(T1 t1, T2 t2)
-                    {
-                        A a = new [|A|](t1, t2);
-                    }
+                public void Goo(T1 t1, T2 t2)
+                {
+                A a = new [|A|](t1, t2);
+                }
                 }
 
                 internal class A
@@ -2269,22 +2269,22 @@ class C
                 """
                 class C<T1, T2>
                 {
-                    public void Goo(T1 t1, T2 t2)
-                    {
-                        A a = new A(t1, t2);
-                    }
+                public void Goo(T1 t1, T2 t2)
+                {
+                A a = new A(t1, t2);
+                }
                 }
 
                 internal class A
                 {
-                    private object t1;
-                    private object t2;
+                private object t1;
+                private object t2;
 
-                    public A(object t1, object t2)
-                    {
-                        this.t1 = t1;
-                        this.t2 = t2;
-                    }
+                public A(object t1, object t2)
+                {
+                this.t1 = t1;
+                this.t2 = t2;
+                }
                 }
                 """
             );
@@ -2297,10 +2297,10 @@ class C
                 """
                 class C<T1, T2>
                 {
-                    public void Goo(T1 t1, T2 t2)
-                    {
-                        A a = new [|A|](t1, t2);
-                    }
+                public void Goo(T1 t1, T2 t2)
+                {
+                A a = new [|A|](t1, t2);
+                }
                 }
 
                 internal class A
@@ -2310,22 +2310,22 @@ class C
                 """
                 class C<T1, T2>
                 {
-                    public void Goo(T1 t1, T2 t2)
-                    {
-                        A a = new A(t1, t2);
-                    }
+                public void Goo(T1 t1, T2 t2)
+                {
+                A a = new A(t1, t2);
+                }
                 }
 
                 internal class A
                 {
-                    public A(object t1, object t2)
-                    {
-                        T1 = t1;
-                        T2 = t2;
-                    }
+                public A(object t1, object t2)
+                {
+                T1 = t1;
+                T2 = t2;
+                }
 
-                    public object T1 { get; }
-                    public object T2 { get; }
+                public object T1 { get; }
+                public object T2 { get; }
                 }
                 """,
                 index: 1
@@ -2339,10 +2339,10 @@ class C
                 """
                 class C<T1, T2>
                 {
-                    public void Goo(T1 t1, T2 t2)
-                    {
-                        A a = new [|A|](t1, t2);
-                    }
+                public void Goo(T1 t1, T2 t2)
+                {
+                A a = new [|A|](t1, t2);
+                }
                 }
 
                 internal class A
@@ -2352,17 +2352,17 @@ class C
                 """
                 class C<T1, T2>
                 {
-                    public void Goo(T1 t1, T2 t2)
-                    {
-                        A a = new A(t1, t2);
-                    }
+                public void Goo(T1 t1, T2 t2)
+                {
+                A a = new A(t1, t2);
+                }
                 }
 
                 internal class A
                 {
-                    public A(object t1, object t2)
-                    {
-                    }
+                public A(object t1, object t2)
+                {
+                }
                 }
                 """,
                 index: 2
@@ -2376,45 +2376,45 @@ class C
                 """
                 class Program
                 {
-                    void Main()
-                    {
-                        Apartment Metropolitan = new Apartment([|"Pine"|]);
-                    }
+                void Main()
+                {
+                Apartment Metropolitan = new Apartment([|"Pine"|]);
+                }
                 }
 
                 struct Apartment
                 {
-                    private int v1;
+                private int v1;
 
-                    public Apartment(int v1)
-                    {
-                        this.v1 = v1;
-                    }
+                public Apartment(int v1)
+                {
+                this.v1 = v1;
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    void Main()
-                    {
-                        Apartment Metropolitan = new Apartment("Pine");
-                    }
+                void Main()
+                {
+                Apartment Metropolitan = new Apartment("Pine");
+                }
                 }
 
                 struct Apartment
                 {
-                    private int v1;
-                    private string v;
+                private int v1;
+                private string v;
 
-                    public Apartment(int v1)
-                    {
-                        this.v1 = v1;
-                    }
+                public Apartment(int v1)
+                {
+                this.v1 = v1;
+                }
 
-                    public Apartment(string v) : this()
-                    {
-                        this.v = v;
-                    }
+                public Apartment(string v) : this()
+                {
+                this.v = v;
+                }
                 }
                 """
             );
@@ -2427,30 +2427,30 @@ class C
                 """
                 class C
                 {
-                    private readonly int x;
+                private readonly int x;
 
-                    void Test()
-                    {
-                        int x = 10;
-                        C c = new [|C|](x);
-                    }
+                void Test()
+                {
+                int x = 10;
+                C c = new [|C|](x);
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    private readonly int x;
+                private readonly int x;
 
-                    public C(int x)
-                    {
-                        this.x = x;
-                    }
+                public C(int x)
+                {
+                this.x = x;
+                }
 
-                    void Test()
-                    {
-                        int x = 10;
-                        C c = new C(x);
-                    }
+                void Test()
+                {
+                int x = 10;
+                C c = new C(x);
+                }
                 }
                 """
             );
@@ -2463,10 +2463,10 @@ class C
                 """
                 class C
                 {
-                    void Goo()
-                    {
-                        new [|D|](1, 2, 3);
-                    }
+                void Goo()
+                {
+                new [|D|](1, 2, 3);
+                }
                 }
 
                 #line hidden
@@ -2485,43 +2485,43 @@ class C
                 """
                 class C
                 {
-                    void Goo()
-                    {
-                        var d = new D([|v|]: new D(u: 1));
-                    }
+                void Goo()
+                {
+                var d = new D([|v|]: new D(u: 1));
+                }
                 }
 
                 class D
                 {
-                    private int u;
+                private int u;
 
-                    public D(int u)
-                    {
-                    }
+                public D(int u)
+                {
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    void Goo()
-                    {
-                        var d = new D(v: new D(u: 1));
-                    }
+                void Goo()
+                {
+                var d = new D(v: new D(u: 1));
+                }
                 }
 
                 class D
                 {
-                    private int u;
-                    private D v;
+                private int u;
+                private D v;
 
-                    public D(int u)
-                    {
-                    }
+                public D(int u)
+                {
+                }
 
-                    public D(D v)
-                    {
-                        this.v = v;
-                    }
+                public D(D v)
+                {
+                this.v = v;
+                }
                 }
                 """
             );
@@ -2550,12 +2550,12 @@ class C
                 [AttributeUsage(AttributeTargets.Class)]
                 class MyAttribute : Attribute
                 {
-                    private int v;
+                private int v;
 
-                    public MyAttribute(int v)
-                    {
-                        this.v = v;
-                    }
+                public MyAttribute(int v)
+                {
+                this.v = v;
+                }
                 }
 
                 [MyAttribute(123)]
@@ -2589,12 +2589,12 @@ class C
                 [AttributeUsage(AttributeTargets.Class)]
                 class MyAttribute : Attribute
                 {
-                    public MyAttribute(int v)
-                    {
-                        V = v;
-                    }
+                public MyAttribute(int v)
+                {
+                V = v;
+                }
 
-                    public int V { get; }
+                public int V { get; }
                 }
 
                 [MyAttribute(123)]
@@ -2629,9 +2629,9 @@ class C
                 [AttributeUsage(AttributeTargets.Class)]
                 class MyAttribute : Attribute
                 {
-                    public MyAttribute(int v)
-                    {
-                    }
+                public MyAttribute(int v)
+                {
+                }
                 }
 
                 [MyAttribute(123)]
@@ -2666,16 +2666,16 @@ class C
                 [AttributeUsage(AttributeTargets.Class)]
                 class MyAttribute : Attribute
                 {
-                    private bool v1;
-                    private int v2;
-                    private string v3;
+                private bool v1;
+                private int v2;
+                private string v3;
 
-                    public MyAttribute(bool v1, int v2, string v3)
-                    {
-                        this.v1 = v1;
-                        this.v2 = v2;
-                        this.v3 = v3;
-                    }
+                public MyAttribute(bool v1, int v2, string v3)
+                {
+                this.v1 = v1;
+                this.v2 = v2;
+                this.v3 = v3;
+                }
                 }
 
                 [MyAttribute(true, 1, "hello")]
@@ -2709,16 +2709,16 @@ class C
                 [AttributeUsage(AttributeTargets.Class)]
                 class MyAttribute : Attribute
                 {
-                    private bool v1;
-                    private int v2;
-                    private string topic;
+                private bool v1;
+                private int v2;
+                private string topic;
 
-                    public MyAttribute(bool v1, int v2, string topic)
-                    {
-                        this.v1 = v1;
-                        this.v2 = v2;
-                        this.topic = topic;
-                    }
+                public MyAttribute(bool v1, int v2, string topic)
+                {
+                this.v1 = v1;
+                this.v2 = v2;
+                this.topic = topic;
+                }
                 }
 
                 [MyAttribute(true, 1, topic = "hello")]
@@ -2739,12 +2739,12 @@ class C
                 [AttributeUsage(AttributeTargets.Class)]
                 class MyAttribute : Attribute
                 {
-                    private int v;
+                private int v;
 
-                    public MyAttribute(int v)
-                    {
-                        this.v = v;
-                    }
+                public MyAttribute(int v)
+                {
+                this.v = v;
+                }
                 }
 
                 [[|MyAttribute(true, 1)|]]
@@ -2758,20 +2758,20 @@ class C
                 [AttributeUsage(AttributeTargets.Class)]
                 class MyAttribute : Attribute
                 {
-                    private int v;
-                    private bool v1;
-                    private int v2;
+                private int v;
+                private bool v1;
+                private int v2;
 
-                    public MyAttribute(int v)
-                    {
-                        this.v = v;
-                    }
+                public MyAttribute(int v)
+                {
+                this.v = v;
+                }
 
-                    public MyAttribute(bool v1, int v2)
-                    {
-                        this.v1 = v1;
-                        this.v2 = v2;
-                    }
+                public MyAttribute(bool v1, int v2)
+                {
+                this.v1 = v1;
+                this.v2 = v2;
+                }
                 }
 
                 [MyAttribute(true, 1)]
@@ -2792,12 +2792,12 @@ class C
                 [AttributeUsage(AttributeTargets.Class)]
                 class MyAttribute : Attribute
                 {
-                    private int v;
+                private int v;
 
-                    public MyAttribute(int v)
-                    {
-                        this.v = v;
-                    }
+                public MyAttribute(int v)
+                {
+                this.v = v;
+                }
                 }
 
                 [[|MyAttribute(true)|]]
@@ -2811,18 +2811,18 @@ class C
                 [AttributeUsage(AttributeTargets.Class)]
                 class MyAttribute : Attribute
                 {
-                    private int v;
-                    private bool v1;
+                private int v;
+                private bool v1;
 
-                    public MyAttribute(int v)
-                    {
-                        this.v = v;
-                    }
+                public MyAttribute(int v)
+                {
+                this.v = v;
+                }
 
-                    public MyAttribute(bool v1)
-                    {
-                        this.v1 = v1;
-                    }
+                public MyAttribute(bool v1)
+                {
+                this.v1 = v1;
+                }
                 }
 
                 [MyAttribute(true)]
@@ -2843,14 +2843,14 @@ class C
                 [AttributeUsage(AttributeTargets.Class)]
                 class MyAttrAttribute : Attribute
                 {
-                    private bool v1;
-                    private int v2;
+                private bool v1;
+                private int v2;
 
-                    public MyAttrAttribute(bool v1, int v2)
-                    {
-                        this.v1 = v1;
-                        this.v2 = v2;
-                    }
+                public MyAttrAttribute(bool v1, int v2)
+                {
+                this.v1 = v1;
+                this.v2 = v2;
+                }
                 }
 
                 [|[MyAttrAttribute(1, true)]|]
@@ -2864,22 +2864,22 @@ class C
                 [AttributeUsage(AttributeTargets.Class)]
                 class MyAttrAttribute : Attribute
                 {
-                    private bool v1;
-                    private int v2;
-                    private int v;
-                    private bool v3;
+                private bool v1;
+                private int v2;
+                private int v;
+                private bool v3;
 
-                    public MyAttrAttribute(bool v1, int v2)
-                    {
-                        this.v1 = v1;
-                        this.v2 = v2;
-                    }
+                public MyAttrAttribute(bool v1, int v2)
+                {
+                this.v1 = v1;
+                this.v2 = v2;
+                }
 
-                    public MyAttrAttribute(int v, bool v3)
-                    {
-                        this.v = v;
-                        this.v3 = v3;
-                    }
+                public MyAttrAttribute(int v, bool v3)
+                {
+                this.v = v;
+                this.v3 = v3;
+                }
                 }
 
                 [MyAttrAttribute(1, true)]
@@ -2899,7 +2899,7 @@ class C
 
                 enum A
                 {
-                    A1
+                A1
                 }
 
                 [AttributeUsage(AttributeTargets.Class)]
@@ -2917,38 +2917,38 @@ class C
 
                 enum A
                 {
-                    A1
+                A1
                 }
 
                 [AttributeUsage(AttributeTargets.Class)]
                 class MyAttrAttribute : Attribute
                 {
-                    private int[] ints;
-                    private A a1;
-                    private bool v1;
-                    private byte v2;
-                    private char v3;
-                    private short v4;
-                    private int v5;
-                    private long v6;
-                    private double v7;
-                    private float v8;
-                    private string v9;
+                private int[] ints;
+                private A a1;
+                private bool v1;
+                private byte v2;
+                private char v3;
+                private short v4;
+                private int v5;
+                private long v6;
+                private double v7;
+                private float v8;
+                private string v9;
 
-                    public MyAttrAttribute(int[] ints, A a1, bool v1, byte v2, char v3, short v4, int v5, long v6, double v7, float v8, string v9)
-                    {
-                        this.ints = ints;
-                        this.a1 = a1;
-                        this.v1 = v1;
-                        this.v2 = v2;
-                        this.v3 = v3;
-                        this.v4 = v4;
-                        this.v5 = v5;
-                        this.v6 = v6;
-                        this.v7 = v7;
-                        this.v8 = v8;
-                        this.v9 = v9;
-                    }
+                public MyAttrAttribute(int[] ints, A a1, bool v1, byte v2, char v3, short v4, int v5, long v6, double v7, float v8, string v9)
+                {
+                this.ints = ints;
+                this.a1 = a1;
+                this.v1 = v1;
+                this.v2 = v2;
+                this.v3 = v3;
+                this.v4 = v4;
+                this.v5 = v5;
+                this.v6 = v6;
+                this.v7 = v7;
+                this.v8 = v8;
+                this.v9 = v9;
+                }
                 }
 
                 [MyAttrAttribute(new int[] { 1, 2, 3 }, A.A1, true, (byte)1, 'a', (short)12, (int)1, (long)5L, 5D, 3.5F, "hello")]
@@ -2972,7 +2972,7 @@ class C
                 }
 
                 [|[MyAttrAttribute(() => {
-                    return;
+                return;
                 })]|]
                 class D
                 {
@@ -3008,36 +3008,36 @@ class C
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        var ss = new [|Program(wde: 1)|];
-                    }
+                static void Main(string[] args)
+                {
+                var ss = new [|Program(wde: 1)|];
+                }
 
-                    Program(int s)
-                    {
+                Program(int s)
+                {
 
-                    }
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    private int wde;
+                private int wde;
 
-                    static void Main(string[] args)
-                    {
-                        var ss = new Program(wde: 1);
-                    }
+                static void Main(string[] args)
+                {
+                var ss = new Program(wde: 1);
+                }
 
-                    Program(int s)
-                    {
+                Program(int s)
+                {
 
-                    }
+                }
 
-                    public Program(int wde)
-                    {
-                        this.wde = wde;
-                    }
+                public Program(int wde)
+                {
+                this.wde = wde;
+                }
                 }
                 """
             );
@@ -3050,39 +3050,39 @@ class C
                 """
                 class Goo
                 {
-                    class Bar
-                    {
-                    }
+                class Bar
+                {
+                }
                 }
 
                 class A
                 {
-                    static void Main(string[] args)
-                    {
-                        var s = new [|Goo.Bar(5)|];
-                    }
+                static void Main(string[] args)
+                {
+                var s = new [|Goo.Bar(5)|];
+                }
                 }
                 """,
                 """
                 class Goo
                 {
-                    class Bar
-                    {
-                        private int v;
+                class Bar
+                {
+                private int v;
 
-                        public Bar(int v)
-                        {
-                            this.v = v;
-                        }
-                    }
+                public Bar(int v)
+                {
+                this.v = v;
+                }
+                }
                 }
 
                 class A
                 {
-                    static void Main(string[] args)
-                    {
-                        var s = new Goo.Bar(5);
-                    }
+                static void Main(string[] args)
+                {
+                var s = new Goo.Bar(5);
+                }
                 }
                 """
             );
@@ -3097,11 +3097,11 @@ class C
 
                 class C
                 {
-                    C()
-                    {
-                        Task.Run(() => {
-                            new [|C|](0) });
-                    }
+                C()
+                {
+                Task.Run(() => {
+                new [|C|](0) });
+                }
                 }
                 """,
                 """
@@ -3109,18 +3109,18 @@ class C
 
                 class C
                 {
-                    private int v;
+                private int v;
 
-                    public C(int v)
-                    {
-                        this.v = v;
-                    }
+                public C(int v)
+                {
+                this.v = v;
+                }
 
-                    C()
-                    {
-                        Task.Run(() => {
-                            new C(0) });
-                    }
+                C()
+                {
+                Task.Run(() => {
+                new C(0) });
+                }
                 }
                 """
             );
@@ -3133,53 +3133,53 @@ class C
                 """
                 class Class1
                 {
-                    private void Goo(string value)
-                    {
-                        var rewriter = new [|Derived|](value);
-                    }
+                private void Goo(string value)
+                {
+                var rewriter = new [|Derived|](value);
+                }
 
-                    private class Derived : Base
-                    {
-                    }
+                private class Derived : Base
+                {
+                }
 
-                    public abstract partial class Base
-                    {
-                        private readonly bool _val;
+                public abstract partial class Base
+                {
+                private readonly bool _val;
 
-                        public Base(bool val = false)
-                        {
-                            _val = val;
-                        }
-                    }
+                public Base(bool val = false)
+                {
+                _val = val;
+                }
+                }
                 }
                 """,
                 """
                 class Class1
                 {
-                    private void Goo(string value)
-                    {
-                        var rewriter = new Derived(value);
-                    }
+                private void Goo(string value)
+                {
+                var rewriter = new Derived(value);
+                }
 
-                    private class Derived : Base
-                    {
-                        private string value;
+                private class Derived : Base
+                {
+                private string value;
 
-                        public Derived(string value)
-                        {
-                            this.value = value;
-                        }
-                    }
+                public Derived(string value)
+                {
+                this.value = value;
+                }
+                }
 
-                    public abstract partial class Base
-                    {
-                        private readonly bool _val;
+                public abstract partial class Base
+                {
+                private readonly bool _val;
 
-                        public Base(bool val = false)
-                        {
-                            _val = val;
-                        }
-                    }
+                public Base(bool val = false)
+                {
+                _val = val;
+                }
+                }
                 }
                 """
             );
@@ -3197,13 +3197,13 @@ class C
 
                 abstract class Y
                 {
-                    class X : Y
-                    {
-                        void M()
-                        {
-                            new X(new [|string|]());
-                        }
-                    }
+                class X : Y
+                {
+                void M()
+                {
+                new X(new [|string|]());
+                }
+                }
                 }
                 """,
                 """
@@ -3214,20 +3214,20 @@ class C
 
                 abstract class Y
                 {
-                    class X : Y
-                    {
-                        private string v;
+                class X : Y
+                {
+                private string v;
 
-                        public X(string v)
-                        {
-                            this.v = v;
-                        }
+                public X(string v)
+                {
+                this.v = v;
+                }
 
-                        void M()
-                        {
-                            new X(new string());
-                        }
-                    }
+                void M()
+                {
+                new X(new string());
+                }
+                }
                 }
                 """
             );
@@ -3240,14 +3240,14 @@ class C
                 """
                 class C
                 {
-                    public C(int arg)
-                    {
-                    }
+                public C(int arg)
+                {
+                }
 
-                    public bool M(string s, int i, bool b)
-                    {
-                        return [|M|](i, b);
-                    }
+                public bool M(string s, int i, bool b)
+                {
+                return [|M|](i, b);
+                }
                 }
                 """
             );
@@ -3260,28 +3260,28 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new [|C|]((1, "hello"), true);
-                    }
+                void M()
+                {
+                new [|C|]((1, "hello"), true);
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    private (int, string) value;
-                    private bool v;
+                private (int, string) value;
+                private bool v;
 
-                    public C((int, string) value, bool v)
-                    {
-                        this.value = value;
-                        this.v = v;
-                    }
+                public C((int, string) value, bool v)
+                {
+                this.value = value;
+                this.v = v;
+                }
 
-                    void M()
-                    {
-                        new C((1, "hello"), true);
-                    }
+                void M()
+                {
+                new C((1, "hello"), true);
+                }
                 }
                 """
             );
@@ -3294,26 +3294,26 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new [|C|]((a: 1, b: "hello"));
-                    }
+                void M()
+                {
+                new [|C|]((a: 1, b: "hello"));
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    private (int a, string b) value;
+                private (int a, string b) value;
 
-                    public C((int a, string b) value)
-                    {
-                        this.value = value;
-                    }
+                public C((int a, string b) value)
+                {
+                this.value = value;
+                }
 
-                    void M()
-                    {
-                        new C((a: 1, b: "hello"));
-                    }
+                void M()
+                {
+                new C((a: 1, b: "hello"));
+                }
                 }
                 """
             );
@@ -3326,26 +3326,26 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new [|C|]((a: 1, "hello"));
-                    }
+                void M()
+                {
+                new [|C|]((a: 1, "hello"));
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    private (int a, string) value;
+                private (int a, string) value;
 
-                    public C((int a, string) value)
-                    {
-                        this.value = value;
-                    }
+                public C((int a, string) value)
+                {
+                this.value = value;
+                }
 
-                    void M()
-                    {
-                        new C((a: 1, "hello"));
-                    }
+                void M()
+                {
+                new C((a: 1, "hello"));
+                }
                 }
                 """
             );
@@ -3358,34 +3358,34 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new [|D(existing: (1, "hello"))|];
-                    }
+                void M()
+                {
+                new [|D(existing: (1, "hello"))|];
+                }
                 }
 
                 class D
                 {
-                    private (int, string) existing;
+                private (int, string) existing;
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new D(existing: (1, "hello"));
-                    }
+                void M()
+                {
+                new D(existing: (1, "hello"));
+                }
                 }
 
                 class D
                 {
-                    private (int, string) existing;
+                private (int, string) existing;
 
-                    public D((int, string) existing)
-                    {
-                        this.existing = existing;
-                    }
+                public D((int, string) existing)
+                {
+                this.existing = existing;
+                }
                 }
                 """
             );
@@ -3398,34 +3398,34 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new [|D(existing: (a: 1, b: "hello"))|];
-                    }
+                void M()
+                {
+                new [|D(existing: (a: 1, b: "hello"))|];
+                }
                 }
 
                 class D
                 {
-                    private (int a, string b) existing;
+                private (int a, string b) existing;
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new D(existing: (a: 1, b: "hello"));
-                    }
+                void M()
+                {
+                new D(existing: (a: 1, b: "hello"));
+                }
                 }
 
                 class D
                 {
-                    private (int a, string b) existing;
+                private (int a, string b) existing;
 
-                    public D((int a, string b) existing)
-                    {
-                        this.existing = existing;
-                    }
+                public D((int a, string b) existing)
+                {
+                this.existing = existing;
+                }
                 }
                 """
             );
@@ -3438,34 +3438,34 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new [|D(existing: (a: 1, b: "hello"))|];
-                    }
+                void M()
+                {
+                new [|D(existing: (a: 1, b: "hello"))|];
+                }
                 }
 
                 class D
                 {
-                    private (int c, string d) existing;
+                private (int c, string d) existing;
                 }
                 """,
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new D(existing: (a: 1, b: "hello"));
-                    }
+                void M()
+                {
+                new D(existing: (a: 1, b: "hello"));
+                }
                 }
 
                 class D
                 {
-                    private (int c, string d) existing;
+                private (int c, string d) existing;
 
-                    public D((int a, string b) existing)
-                    {
-                        this.existing = existing;
-                    }
+                public D((int a, string b) existing)
+                {
+                this.existing = existing;
+                }
                 }
                 """
             );
@@ -3478,17 +3478,17 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new [|D|]((1, "hello"));
-                    }
+                void M()
+                {
+                new [|D|]((1, "hello"));
+                }
                 }
 
                 class B
                 {
-                    protected B((int, string) x)
-                    {
-                    }
+                protected B((int, string) x)
+                {
+                }
                 }
 
                 class D : B
@@ -3498,24 +3498,24 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new D((1, "hello"));
-                    }
+                void M()
+                {
+                new D((1, "hello"));
+                }
                 }
 
                 class B
                 {
-                    protected B((int, string) x)
-                    {
-                    }
+                protected B((int, string) x)
+                {
+                }
                 }
 
                 class D : B
                 {
-                    public D((int, string) x) : base(x)
-                    {
-                    }
+                public D((int, string) x) : base(x)
+                {
+                }
                 }
                 """
             );
@@ -3528,17 +3528,17 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new [|D|]((a: 1, b: "hello"));
-                    }
+                void M()
+                {
+                new [|D|]((a: 1, b: "hello"));
+                }
                 }
 
                 class B
                 {
-                    protected B((int a, string b) x)
-                    {
-                    }
+                protected B((int a, string b) x)
+                {
+                }
                 }
 
                 class D : B
@@ -3548,24 +3548,24 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new D((a: 1, b: "hello"));
-                    }
+                void M()
+                {
+                new D((a: 1, b: "hello"));
+                }
                 }
 
                 class B
                 {
-                    protected B((int a, string b) x)
-                    {
-                    }
+                protected B((int a, string b) x)
+                {
+                }
                 }
 
                 class D : B
                 {
-                    public D((int a, string b) x) : base(x)
-                    {
-                    }
+                public D((int a, string b) x) : base(x)
+                {
+                }
                 }
                 """
             );
@@ -3578,17 +3578,17 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new [|D|]((a: 1, b: "hello"));
-                    }
+                void M()
+                {
+                new [|D|]((a: 1, b: "hello"));
+                }
                 }
 
                 class B
                 {
-                    protected B((int c, string d) x)
-                    {
-                    }
+                protected B((int c, string d) x)
+                {
+                }
                 }
 
                 class D : B
@@ -3598,24 +3598,24 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new D((a: 1, b: "hello"));
-                    }
+                void M()
+                {
+                new D((a: 1, b: "hello"));
+                }
                 }
 
                 class B
                 {
-                    protected B((int c, string d) x)
-                    {
-                    }
+                protected B((int c, string d) x)
+                {
+                }
                 }
 
                 class D : B
                 {
-                    public D((int c, string d) x) : base(x)
-                    {
-                    }
+                public D((int c, string d) x) : base(x)
+                {
+                }
                 }
                 """
             );
@@ -3629,13 +3629,13 @@ class C
                 """
                 class C
                 {
-                    int _i;
-                    string _s;
+                int _i;
+                string _s;
 
-                    void M()
-                    {
-                        new [|D|](_i, _s);
-                    }
+                void M()
+                {
+                new [|D|](_i, _s);
+                }
                 }
 
                 class D
@@ -3645,25 +3645,25 @@ class C
                 """
                 class C
                 {
-                    int _i;
-                    string _s;
+                int _i;
+                string _s;
 
-                    void M()
-                    {
-                        new D(_i, _s);
-                    }
+                void M()
+                {
+                new D(_i, _s);
+                }
                 }
 
                 class D
                 {
-                    private int i;
-                    private string s;
+                private int i;
+                private string s;
 
-                    public D(int i, string s)
-                    {
-                        this.i = i;
-                        this.s = s;
-                    }
+                public D(int i, string s)
+                {
+                this.i = i;
+                this.s = s;
+                }
                 }
                 """
             );
@@ -3676,12 +3676,12 @@ class C
                 """
                 class C
                 {
-                    int _;
+                int _;
 
-                    void M()
-                    {
-                        new [|D|](_);
-                    }
+                void M()
+                {
+                new [|D|](_);
+                }
                 }
 
                 class D
@@ -3691,22 +3691,22 @@ class C
                 """
                 class C
                 {
-                    int _;
+                int _;
 
-                    void M()
-                    {
-                        new D(_);
-                    }
+                void M()
+                {
+                new D(_);
+                }
                 }
 
                 class D
                 {
-                    private int _;
+                private int _;
 
-                    public D(int _)
-                    {
-                        this._ = _;
-                    }
+                public D(int _)
+                {
+                this._ = _;
+                }
                 }
                 """
             );
@@ -3719,24 +3719,24 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new [|C|](out var a);
-                    }
+                void M()
+                {
+                new [|C|](out var a);
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    public C(out object a)
-                    {
-                        a = null;
-                    }
+                public C(out object a)
+                {
+                a = null;
+                }
 
-                    void M()
-                    {
-                        new C(out var a);
-                    }
+                void M()
+                {
+                new C(out var a);
+                }
                 }
                 """
             );
@@ -3749,24 +3749,24 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new C([|b|]: out var a);
-                    }
+                void M()
+                {
+                new C([|b|]: out var a);
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    public C(out object b)
-                    {
-                        b = null;
-                    }
+                public C(out object b)
+                {
+                b = null;
+                }
 
-                    void M()
-                    {
-                        new C(b: out var a);
-                    }
+                void M()
+                {
+                new C(b: out var a);
+                }
                 }
                 """
             );
@@ -3779,24 +3779,24 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new [|C|](out int a);
-                    }
+                void M()
+                {
+                new [|C|](out int a);
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    public C(out int a)
-                    {
-                        a = 0;
-                    }
+                public C(out int a)
+                {
+                a = 0;
+                }
 
-                    void M()
-                    {
-                        new C(out int a);
-                    }
+                void M()
+                {
+                new C(out int a);
+                }
                 }
                 """
             );
@@ -3809,24 +3809,24 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new C([|b|]: out int a);
-                    }
+                void M()
+                {
+                new C([|b|]: out int a);
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    public C(out int b)
-                    {
-                        b = 0;
-                    }
+                public C(out int b)
+                {
+                b = 0;
+                }
 
-                    void M()
-                    {
-                        new C(b: out int a);
-                    }
+                void M()
+                {
+                new C(b: out int a);
+                }
                 }
                 """
             );
@@ -3839,24 +3839,24 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new [|C|](out var a);
-                    }
+                void M()
+                {
+                new [|C|](out var a);
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    public C(out object a)
-                    {
-                        a = null;
-                    }
+                public C(out object a)
+                {
+                a = null;
+                }
 
-                    void M()
-                    {
-                        new C(out var a);
-                    }
+                void M()
+                {
+                new C(out var a);
+                }
                 }
                 """,
                 parseOptions: TestOptions
@@ -3872,24 +3872,24 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new C([|b|]: out var a);
-                    }
+                void M()
+                {
+                new C([|b|]: out var a);
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    public C(out object b)
-                    {
-                        b = null;
-                    }
+                public C(out object b)
+                {
+                b = null;
+                }
 
-                    void M()
-                    {
-                        new C(b: out var a);
-                    }
+                void M()
+                {
+                new C(b: out var a);
+                }
                 }
                 """,
                 parseOptions: TestOptions
@@ -3905,24 +3905,24 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new [|C|](out int a);
-                    }
+                void M()
+                {
+                new [|C|](out int a);
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    public C(out int a)
-                    {
-                        a = 0;
-                    }
+                public C(out int a)
+                {
+                a = 0;
+                }
 
-                    void M()
-                    {
-                        new C(out int a);
-                    }
+                void M()
+                {
+                new C(out int a);
+                }
                 }
                 """,
                 parseOptions: TestOptions
@@ -3938,24 +3938,24 @@ class C
                 """
                 class C
                 {
-                    void M()
-                    {
-                        new C([|b|]: out int a);
-                    }
+                void M()
+                {
+                new C([|b|]: out int a);
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    public C(out int b)
-                    {
-                        b = 0;
-                    }
+                public C(out int b)
+                {
+                b = 0;
+                }
 
-                    void M()
-                    {
-                        new C(b: out int a);
-                    }
+                void M()
+                {
+                new C(b: out int a);
+                }
                 }
                 """,
                 parseOptions: TestOptions
@@ -3970,31 +3970,31 @@ class C
             await TestInRegularAndScriptAsync(
                 """
                 class C {
-                    public int Prop { get ; }
+                public int Prop { get ; }
                 }
 
-                class P { 
-                    static void M ( ) { 
-                        var prop = 42 ;
-                        var c = new [|C|] ( prop ) ;
-                    }
+                class P {
+                static void M ( ) {
+                var prop = 42 ;
+                var c = new [|C|] ( prop ) ;
+                }
                 }
                 """,
                 """
                 class C {
-                    public C(int prop)
-                    {
-                        Prop = prop;
-                    }
-
-                    public int Prop { get ; }
+                public C(int prop)
+                {
+                Prop = prop;
                 }
 
-                class P { 
-                    static void M ( ) { 
-                        var prop = 42 ;
-                        var c = new C ( prop ) ;
-                    }
+                public int Prop { get ; }
+                }
+
+                class P {
+                static void M ( ) {
+                var prop = 42 ;
+                var c = new C ( prop ) ;
+                }
                 }
                 """
             );
@@ -4007,26 +4007,26 @@ class C
                 """
                 class A
                 {
-                    public A(int a) : [|this(a, 1)|]
-                    {
-                    }
+                public A(int a) : [|this(a, 1)|]
+                {
+                }
                 }
                 """,
                 """
                 class A
                 {
-                    private int a;
-                    private int v;
+                private int a;
+                private int v;
 
-                    public A(int a) : this(a, 1)
-                    {
-                    }
+                public A(int a) : this(a, 1)
+                {
+                }
 
-                    public A(int a, int v)
-                    {
-                        this.a = a;
-                        this.v = v;
-                    }
+                public A(int a, int v)
+                {
+                this.a = a;
+                this.v = v;
+                }
                 }
                 """
             );
@@ -4039,24 +4039,24 @@ class C
                 """
                 class C
                 {
-                    public C(int x) { }
+                public C(int x) { }
 
-                    public C(int x, int y, int z) : [|this(x, y)|] { }
+                public C(int x, int y, int z) : [|this(x, y)|] { }
                 }
                 """,
                 """
                 class C
                 {
-                    private int y;
+                private int y;
 
-                    public C(int x) { }
+                public C(int x) { }
 
-                    public C(int x, int y) : this(x)
-                    {
-                        this.y = y;
-                    }
+                public C(int x, int y) : this(x)
+                {
+                this.y = y;
+                }
 
-                    public C(int x, int y, int z) : this(x, y) { }
+                public C(int x, int y, int z) : this(x, y) { }
                 }
                 """
             );
@@ -4069,26 +4069,26 @@ class C
                 """
                 class C
                 {
-                    public C(int x) : this(x, 0, 0) { }
+                public C(int x) : this(x, 0, 0) { }
 
-                    public C(int x, int y, int z) : [|this(x, y)|] { }
+                public C(int x, int y, int z) : [|this(x, y)|] { }
                 }
                 """,
                 """
                 class C
                 {
-                    private int x;
-                    private int y;
+                private int x;
+                private int y;
 
-                    public C(int x) : this(x, 0, 0) { }
+                public C(int x) : this(x, 0, 0) { }
 
-                    public C(int x, int y)
-                    {
-                        this.x = x;
-                        this.y = y;
-                    }
+                public C(int x, int y)
+                {
+                this.x = x;
+                this.y = y;
+                }
 
-                    public C(int x, int y, int z) : this(x, y) { }
+                public C(int x, int y, int z) : this(x, y) { }
                 }
                 """
             );
@@ -4101,28 +4101,28 @@ class C
                 """
                 class C
                 {
-                    public C(int x) : this(x, 0) { }
+                public C(int x) : this(x, 0) { }
 
-                    public C(int x, int y) : [|this(x, y, 0)|] { }
+                public C(int x, int y) : [|this(x, y, 0)|] { }
                 }
                 """,
                 """
                 class C
                 {
-                    private int x;
-                    private int y;
-                    private int v;
+                private int x;
+                private int y;
+                private int v;
 
-                    public C(int x) : this(x, 0) { }
+                public C(int x) : this(x, 0) { }
 
-                    public C(int x, int y) : this(x, y, 0) { }
+                public C(int x, int y) : this(x, y, 0) { }
 
-                    public C(int x, int y, int v)
-                    {
-                        this.x = x;
-                        this.y = y;
-                        this.v = v;
-                    }
+                public C(int x, int y, int v)
+                {
+                this.x = x;
+                this.y = y;
+                this.v = v;
+                }
                 }
                 """
             );
@@ -4135,29 +4135,29 @@ class C
                 """
                 class C
                 {
-                    public C(int a) { }
-                    public C(bool b, bool a) : this(0, 0) { }
-                    public C(int i, int i1) : this(true, true) { }
-                    public C(int x, int y, int z, int e) : [|this(x, y, z)|] { }
+                public C(int a) { }
+                public C(bool b, bool a) : this(0, 0) { }
+                public C(int i, int i1) : this(true, true) { }
+                public C(int x, int y, int z, int e) : [|this(x, y, z)|] { }
                 }
                 """,
                 """
                 class C
                 {
-                    private int y;
-                    private int z;
+                private int y;
+                private int z;
 
-                    public C(int a) { }
-                    public C(bool b, bool a) : this(0, 0) { }
-                    public C(int i, int i1) : this(true, true) { }
+                public C(int a) { }
+                public C(bool b, bool a) : this(0, 0) { }
+                public C(int i, int i1) : this(true, true) { }
 
-                    public C(int a, int y, int z) : this(a)
-                    {
-                        this.y = y;
-                        this.z = z;
-                    }
+                public C(int a, int y, int z) : this(a)
+                {
+                this.y = y;
+                this.z = z;
+                }
 
-                    public C(int x, int y, int z, int e) : this(x, y, z) { }
+                public C(int x, int y, int z, int e) : this(x, y, z) { }
                 }
                 """
             );
@@ -4225,28 +4225,28 @@ internal class Class
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        string s = ";
-                        new Prog[||]ram(s);
-                    }
+                static void Main(string[] args)
+                {
+                string s = ";
+                new Prog[||]ram(s);
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    private string s;
+                private string s;
 
-                    public Program(string s)
-                    {
-                        this.s = s;
-                    }
+                public Program(string s)
+                {
+                this.s = s;
+                }
 
-                    static void Main(string[] args)
-                    {
-                        string s = ";
-                        new Program(s);
-                    }
+                static void Main(string[] args)
+                {
+                string s = ";
+                new Program(s);
+                }
                 }
                 """
             );
@@ -4259,28 +4259,28 @@ internal class Class
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        string S = ";
-                        new Prog[||]ram(S);
-                    }
+                static void Main(string[] args)
+                {
+                string S = ";
+                new Prog[||]ram(S);
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    private string s;
+                private string s;
 
-                    public Program(string s)
-                    {
-                        this.s = s;
-                    }
+                public Program(string s)
+                {
+                this.s = s;
+                }
 
-                    static void Main(string[] args)
-                    {
-                        string S = ";
-                        new Program(S);
-                    }
+                static void Main(string[] args)
+                {
+                string S = ";
+                new Program(S);
+                }
                 }
                 """
             );
@@ -4293,28 +4293,28 @@ internal class Class
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        string s = ";
-                        new Prog[||]ram(s);
-                    }
+                static void Main(string[] args)
+                {
+                string s = ";
+                new Prog[||]ram(s);
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    private string _s;
+                private string _s;
 
-                    public Program(string s)
-                    {
-                        _s = s;
-                    }
+                public Program(string s)
+                {
+                _s = s;
+                }
 
-                    static void Main(string[] args)
-                    {
-                        string s = ";
-                        new Program(s);
-                    }
+                static void Main(string[] args)
+                {
+                string s = ";
+                new Program(s);
+                }
                 }
                 """,
                 options: options.FieldNamesAreCamelCaseWithUnderscorePrefix
@@ -4328,30 +4328,30 @@ internal class Class
                 """
                 class Program
                 {
-                    private string _s;
+                private string _s;
 
-                    static void Main(string[] args)
-                    {
-                        string s = "";
-                        new Prog[||]ram(s);
-                    }
+                static void Main(string[] args)
+                {
+                string s = "";
+                new Prog[||]ram(s);
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    private string _s;
+                private string _s;
 
-                    public Program(string s)
-                    {
-                        _s = s;
-                    }
+                public Program(string s)
+                {
+                _s = s;
+                }
 
-                    static void Main(string[] args)
-                    {
-                        string s = "";
-                        new Program(s);
-                    }
+                static void Main(string[] args)
+                {
+                string s = "";
+                new Program(s);
+                }
                 }
                 """,
                 options: options.FieldNamesAreCamelCaseWithUnderscorePrefix
@@ -4365,28 +4365,28 @@ internal class Class
                 """
                 class Program
                 {
-                    static void Main(string[] args)
-                    {
-                        string s = "";
-                        new Prog[||]ram(s);
-                    }
+                static void Main(string[] args)
+                {
+                string s = "";
+                new Prog[||]ram(s);
+                }
                 }
                 """,
                 """
                 class Program
                 {
-                    private string _s;
+                private string _s;
 
-                    public Program(string p_s)
-                    {
-                        _s = p_s;
-                    }
+                public Program(string p_s)
+                {
+                _s = p_s;
+                }
 
-                    static void Main(string[] args)
-                    {
-                        string s = "";
-                        new Program(s);
-                    }
+                static void Main(string[] args)
+                {
+                string s = "";
+                new Program(s);
+                }
                 }
                 """,
                 options: options.MergeStyles(
@@ -4419,12 +4419,12 @@ internal class Class
                 [AttributeUsage(AttributeTargets.Class)]
                 class MyAttribute : Attribute
                 {
-                    private int _v;
+                private int _v;
 
-                    public MyAttribute(int p_v)
-                    {
-                        _v = p_v;
-                    }
+                public MyAttribute(int p_v)
+                {
+                _v = p_v;
+                }
                 }
 
                 [MyAttribute(123)]
@@ -4489,11 +4489,11 @@ class Program
 
                 class C
                 {
-                    void M()
-                    {
-                        string? s = null;
-                        new [|C|](s);
-                    }
+                void M()
+                {
+                string? s = null;
+                new [|C|](s);
+                }
                 }
                 """,
                 """
@@ -4501,18 +4501,18 @@ class Program
 
                 class C
                 {
-                    private string? s;
+                private string? s;
 
-                    public C(string? s)
-                    {
-                        this.s = s;
-                    }
+                public C(string? s)
+                {
+                this.s = s;
+                }
 
-                    void M()
-                    {
-                        string? s = null;
-                        new C(s);
-                    }
+                void M()
+                {
+                string? s = null;
+                new C(s);
+                }
                 }
                 """
             );
@@ -4529,11 +4529,11 @@ class Program
 
                 class C
                 {
-                    void M()
-                    {
-                        IEnumerable<string?> s;
-                        new [|C|](s);
-                    }
+                void M()
+                {
+                IEnumerable<string?> s;
+                new [|C|](s);
+                }
                 }
                 """,
                 """
@@ -4543,18 +4543,18 @@ class Program
 
                 class C
                 {
-                    private IEnumerable<string?> s;
+                private IEnumerable<string?> s;
 
-                    public C(IEnumerable<string?> s)
-                    {
-                        this.s = s;
-                    }
+                public C(IEnumerable<string?> s)
+                {
+                this.s = s;
+                }
 
-                    void M()
-                    {
-                        IEnumerable<string?> s;
-                        new C(s);
-                    }
+                void M()
+                {
+                IEnumerable<string?> s;
+                new C(s);
+                }
                 }
                 """
             );
@@ -4567,26 +4567,26 @@ class Program
                 """
                 class C
                 {
-                    unsafe void M(int* x)
-                    {
-                        new [|C|](x);
-                    }
+                unsafe void M(int* x)
+                {
+                new [|C|](x);
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    private unsafe int* x;
+                private unsafe int* x;
 
-                    public unsafe C(int* x)
-                    {
-                        this.x = x;
-                    }
+                public unsafe C(int* x)
+                {
+                this.x = x;
+                }
 
-                    unsafe void M(int* x)
-                    {
-                        new C(x);
-                    }
+                unsafe void M(int* x)
+                {
+                new C(x);
+                }
                 }
                 """
             );
@@ -4599,26 +4599,26 @@ class Program
                 """
                 class C
                 {
-                    unsafe void M(int* x)
-                    {
-                        new [|C|](x);
-                    }
+                unsafe void M(int* x)
+                {
+                new [|C|](x);
+                }
                 }
                 """,
                 """
                 class C
                 {
-                    public unsafe C(int* x)
-                    {
-                        X = x;
-                    }
+                public unsafe C(int* x)
+                {
+                X = x;
+                }
 
-                    public unsafe int* X { get; }
+                public unsafe int* X { get; }
 
-                    unsafe void M(int* x)
-                    {
-                        new C(x);
-                    }
+                unsafe void M(int* x)
+                {
+                new C(x);
+                }
                 }
                 """,
                 index: 1
@@ -4632,26 +4632,26 @@ class Program
                 """
                 unsafe class C
                 {
-                    void M(int* x)
-                    {
-                        new [|C|](x);
-                    }
+                void M(int* x)
+                {
+                new [|C|](x);
+                }
                 }
                 """,
                 """
                 unsafe class C
                 {
-                    private int* x;
+                private int* x;
 
-                    public C(int* x)
-                    {
-                        this.x = x;
-                    }
+                public C(int* x)
+                {
+                this.x = x;
+                }
 
-                    void M(int* x)
-                    {
-                        new C(x);
-                    }
+                void M(int* x)
+                {
+                new C(x);
+                }
                 }
                 """
             );
@@ -4662,30 +4662,30 @@ class Program
         {
             await TestInRegularAndScriptAsync(
                 """
-    unsafe class C
-    {
-        void M(int* x)
-        {
-            new [|C|](x);
-        }
-    }
-    """,
+                unsafe class C
+                {
+                void M(int* x)
+                {
+                new [|C|](x);
+                }
+                }
+                """,
                 """
-    unsafe class C
-    {
-        public C(int* x)
-        {
-            X = x;
-        }
+                unsafe class C
+                {
+                public C(int* x)
+                {
+                X = x;
+                }
 
-        public int* X { get; }
+                public int* X { get; }
 
-        void M(int* x)
-        {
-            new C(x);
-        }
-    }
-    """,
+                void M(int* x)
+                {
+                new C(x);
+                }
+                }
+                """,
                 index: 1
             );
         }
@@ -4697,24 +4697,24 @@ class Program
                 """
                 class A
                 {
-                    public unsafe A(int* a) { }
+                public unsafe A(int* a) { }
 
-                    public unsafe A(int* a, int b, int c) : [|this(a, b)|] { }
+                public unsafe A(int* a, int b, int c) : [|this(a, b)|] { }
                 }
                 """,
                 """
                 class A
                 {
-                    private int b;
+                private int b;
 
-                    public unsafe A(int* a) { }
+                public unsafe A(int* a) { }
 
-                    public unsafe A(int* a, int b) : this(a)
-                    {
-                        this.b = b;
-                    }
+                public unsafe A(int* a, int b) : this(a)
+                {
+                this.b = b;
+                }
 
-                    public unsafe A(int* a, int b, int c) : this(a, b) { }
+                public unsafe A(int* a, int b, int c) : this(a, b) { }
                 }
                 """
             );
@@ -4725,28 +4725,28 @@ class Program
         {
             await TestInRegularAndScriptAsync(
                 """
- unsafe class A
- {
-     public A(int* a) { }
+                unsafe class A
+                {
+                public A(int* a) { }
 
-     public A(int* a, int b, int c) : [|this(a, b)|] { }
- }
- """,
+                public A(int* a, int b, int c) : [|this(a, b)|] { }
+                }
+                """,
                 """
- unsafe class A
- {
-     private int b;
+                unsafe class A
+                {
+                private int b;
 
-     public A(int* a) { }
+                public A(int* a) { }
 
-     public A(int* a, int b) : this(a)
-     {
-         this.b = b;
-     }
+                public A(int* a, int b) : this(a)
+                {
+                this.b = b;
+                }
 
-     public A(int* a, int b, int c) : this(a, b) { }
- }
- """
+                public A(int* a, int b, int c) : this(a, b) { }
+                }
+                """
             );
         }
 
@@ -4755,32 +4755,32 @@ class Program
         {
             await TestInRegularAndScriptAsync(
                 """
- using System.Collections.Generic;
+                using System.Collections.Generic;
 
- class Frog { }
+                class Frog { }
 
- class C
- {
-     C M() => new [||]C(new List<Frog>());
- }
- """,
+                class C
+                {
+                C M() => new [||]C(new List<Frog>());
+                }
+                """,
                 """
- using System.Collections.Generic;
+                using System.Collections.Generic;
 
- class Frog { }
+                class Frog { }
 
- class C
- {
-     private List<Frog> frogs;
+                class C
+                {
+                private List<Frog> frogs;
 
-     public C(List<Frog> frogs)
-     {
-         this.frogs = frogs;
-     }
+                public C(List<Frog> frogs)
+                {
+                this.frogs = frogs;
+                }
 
-     C M() => new C(new List<Frog>());
- }
- """
+                C M() => new C(new List<Frog>());
+                }
+                """
             );
         }
 
@@ -4789,34 +4789,34 @@ class Program
         {
             await TestInRegularAndScriptAsync(
                 """
- class Frog<T> { }
+                class Frog<T> { }
 
- class C
- {
-     C M()
-     {
-         return new [||]C(new Frog<int>());
-     }
- }
- """,
+                class C
+                {
+                C M()
+                {
+                return new [||]C(new Frog<int>());
+                }
+                }
+                """,
                 """
- class Frog<T> { }
+                class Frog<T> { }
 
- class C
- {
-     private Frog<int> frog;
+                class C
+                {
+                private Frog<int> frog;
 
-     public C(Frog<int> frog)
-     {
-         this.frog = frog;
-     }
+                public C(Frog<int> frog)
+                {
+                this.frog = frog;
+                }
 
-     C M()
-     {
-         return new C(new Frog<int>());
-     }
- }
- """
+                C M()
+                {
+                return new C(new Frog<int>());
+                }
+                }
+                """
             );
         }
 
@@ -4825,32 +4825,32 @@ class Program
         {
             await TestInRegularAndScriptAsync(
                 """
- using System.Collections.Generic;
+                using System.Collections.Generic;
 
- class Frog { }
+                class Frog { }
 
- class C
- {
-     C M() => new [||]C(new List<>());
- }
- """,
+                class C
+                {
+                C M() => new [||]C(new List<>());
+                }
+                """,
                 """
- using System.Collections.Generic;
+                using System.Collections.Generic;
 
- class Frog { }
+                class Frog { }
 
- class C
- {
-     private List<T> ts;
+                class C
+                {
+                private List<T> ts;
 
-     public C(List<T> ts)
-     {
-         this.ts = ts;
-     }
+                public C(List<T> ts)
+                {
+                this.ts = ts;
+                }
 
-     C M() => new C(new List<>());
- }
- """
+                C M() => new C(new List<>());
+                }
+                """
             );
         }
 
@@ -4859,32 +4859,32 @@ class Program
         {
             await TestInRegularAndScriptAsync(
                 """
- using System.Collections.Generic;
+                using System.Collections.Generic;
 
- class Frog { }
+                class Frog { }
 
- class C
- {
-     C M() => new [||]C(new List<(int, string)>());
- }
- """,
+                class C
+                {
+                C M() => new [||]C(new List<(int, string)>());
+                }
+                """,
                 """
- using System.Collections.Generic;
+                using System.Collections.Generic;
 
- class Frog { }
+                class Frog { }
 
- class C
- {
-     private List<(int, string)> list;
+                class C
+                {
+                private List<(int, string)> list;
 
-     public C(List<(int, string)> list)
-     {
-         this.list = list;
-     }
+                public C(List<(int, string)> list)
+                {
+                this.list = list;
+                }
 
-     C M() => new C(new List<(int, string)>());
- }
- """
+                C M() => new C(new List<(int, string)>());
+                }
+                """
             );
         }
 
@@ -4893,36 +4893,36 @@ class Program
         {
             await TestInRegularAndScriptAsync(
                 """
- using System.Collections.Generic;
+                using System.Collections.Generic;
 
- namespace N {
-     class Frog { }
+                namespace N {
+                class Frog { }
 
-     class C
-     {
-         C M() => new [||]C(new List<Frog>());
-     }
- }
- """,
+                class C
+                {
+                C M() => new [||]C(new List<Frog>());
+                }
+                }
+                """,
                 """
- using System.Collections.Generic;
+                using System.Collections.Generic;
 
- namespace N {
-     class Frog { }
+                namespace N {
+                class Frog { }
 
-     class C
-     {
-         private List<Frog> frogs;
+                class C
+                {
+                private List<Frog> frogs;
 
-         public C(List<Frog> frogs)
-         {
-             this.frogs = frogs;
-         }
+                public C(List<Frog> frogs)
+                {
+                this.frogs = frogs;
+                }
 
-         C M() => new C(new List<Frog>());
-     }
- }
- """
+                C M() => new C(new List<Frog>());
+                }
+                }
+                """
             );
         }
 
@@ -4933,39 +4933,39 @@ class Program
                 """
                 namespace N
                 {
-                    public class B
-                    {
-                        void M()
-                        {
-                            C c = [||]new(0);
-                        }
-                    }
+                public class B
+                {
+                void M()
+                {
+                C c = [||]new(0);
+                }
+                }
 
-                    public class C
-                    {
-                    }
+                public class C
+                {
+                }
                 }
                 """,
                 """
                 namespace N
                 {
-                    public class B
-                    {
-                        void M()
-                        {
-                            C c = new(0);
-                        }
-                    }
+                public class B
+                {
+                void M()
+                {
+                C c = new(0);
+                }
+                }
 
-                    public class C
-                    {
-                        private int v;
+                public class C
+                {
+                private int v;
 
-                        public C(int v)
-                        {
-                            this.v = v;
-                        }
-                    }
+                public C(int v)
+                {
+                this.v = v;
+                }
+                }
                 }
                 """
             );
@@ -4978,39 +4978,39 @@ class Program
                 """
                 namespace N
                 {
-                    public class B
-                    {
-                        void M()
-                        {
-                            C c = [||]new(0);
-                        }
-                    }
+                public class B
+                {
+                void M()
+                {
+                C c = [||]new(0);
+                }
+                }
 
-                    public class C
-                    {
-                    }
+                public class C
+                {
+                }
                 }
                 """,
                 """
                 namespace N
                 {
-                    public class B
-                    {
-                        void M()
-                        {
-                            C c = new(0);
-                        }
-                    }
+                public class B
+                {
+                void M()
+                {
+                C c = new(0);
+                }
+                }
 
-                    public class C
-                    {
-                        public C(int v)
-                        {
-                            V = v;
-                        }
+                public class C
+                {
+                public C(int v)
+                {
+                V = v;
+                }
 
-                        public int V { get; }
-                    }
+                public int V { get; }
+                }
                 }
                 """,
                 index: 1
@@ -5024,36 +5024,36 @@ class Program
                 """
                 namespace N
                 {
-                    public class B
-                    {
-                        void M()
-                        {
-                            C c = [||]new(0);
-                        }
-                    }
+                public class B
+                {
+                void M()
+                {
+                C c = [||]new(0);
+                }
+                }
 
-                    public class C
-                    {
-                    }
+                public class C
+                {
+                }
                 }
                 """,
                 """
                 namespace N
                 {
-                    public class B
-                    {
-                        void M()
-                        {
-                            C c = new(0);
-                        }
-                    }
+                public class B
+                {
+                void M()
+                {
+                C c = new(0);
+                }
+                }
 
-                    public class C
-                    {
-                        public C(int v)
-                        {
-                        }
-                    }
+                public class C
+                {
+                public C(int v)
+                {
+                }
+                }
                 }
                 """,
                 index: 2
@@ -5067,17 +5067,17 @@ class Program
                 """
                 class C
                 {
-                    void M()
-                    {
-                        D d = [||]new(1);
-                    }
+                void M()
+                {
+                D d = [||]new(1);
+                }
                 }
 
                 class B
                 {
-                    protected B(int x)
-                    {
-                    }
+                protected B(int x)
+                {
+                }
                 }
 
                 class D : B
@@ -5087,24 +5087,24 @@ class Program
                 """
                 class C
                 {
-                    void M()
-                    {
-                        D d = new(1);
-                    }
+                void M()
+                {
+                D d = new(1);
+                }
                 }
 
                 class B
                 {
-                    protected B(int x)
-                    {
-                    }
+                protected B(int x)
+                {
+                }
                 }
 
                 class D : B
                 {
-                    public D(int x) : base(x)
-                    {
-                    }
+                public D(int x) : base(x)
+                {
+                }
                 }
                 """
             );
@@ -5114,52 +5114,52 @@ class Program
         public async Task TestGenerateConstructorFromImplicitObjectCreation_DelegatingFromParameter()
         {
             const string input = """
-                class C
-                {
-                    void M(D d)
-                    {
-                        M([||]new(1));
-                    }
-                }
+            class C
+            {
+            void M(D d)
+            {
+            M([||]new(1));
+            }
+            }
 
-                class B
-                {
-                    protected B(int x)
-                    {
-                    }
-                }
+            class B
+            {
+            protected B(int x)
+            {
+            }
+            }
 
-                class D : B
-                {
-                }
-                """;
+            class D : B
+            {
+            }
+            """;
 
             await TestActionCountAsync(input, 1);
             await TestInRegularAndScriptAsync(
                 input,
                 """
-         class C
-         {
-             void M(D d)
-             {
-                 M(new(1));
-             }
-         }
+                class C
+                {
+                void M(D d)
+                {
+                M(new(1));
+                }
+                }
 
-         class B
-         {
-             protected B(int x)
-             {
-             }
-         }
+                class B
+                {
+                protected B(int x)
+                {
+                }
+                }
 
-         class D : B
-         {
-             public D(int x) : base(x)
-             {
-             }
-         }
-         """
+                class D : B
+                {
+                public D(int x) : base(x)
+                {
+                }
+                }
+                """
             );
         }
 
@@ -5172,17 +5172,17 @@ class Program
 
                 class A
                 {
-                    void M()
-                    {
-                        Delta d1 = new [|Delta|](x => x.Length, 3);
-                    }
+                void M()
+                {
+                Delta d1 = new [|Delta|](x => x.Length, 3);
+                }
                 }
 
                 class Delta
                 {
-                    public Delta(Func<string, int> f)
-                    {
-                    }
+                public Delta(Func<string, int> f)
+                {
+                }
                 }
                 """,
                 """
@@ -5190,24 +5190,24 @@ class Program
 
                 class A
                 {
-                    void M()
-                    {
-                        Delta d1 = new Delta(x => x.Length, 3);
-                    }
+                void M()
+                {
+                Delta d1 = new Delta(x => x.Length, 3);
+                }
                 }
 
                 class Delta
                 {
-                    private int v;
+                private int v;
 
-                    public Delta(Func<string, int> f)
-                    {
-                    }
+                public Delta(Func<string, int> f)
+                {
+                }
 
-                    public Delta(Func<string, int> f, int v) : this(f)
-                    {
-                        this.v = v;
-                    }
+                public Delta(Func<string, int> f, int v) : this(f)
+                {
+                this.v = v;
+                }
                 }
                 """
             );
@@ -5222,12 +5222,12 @@ class Program
 
                 class A
                 {
-                    public A(Func<string, int> f) { }
+                public A(Func<string, int> f) { }
 
-                    void M()
-                    {
-                        Delta d1 = new [|Delta|](x => x.Length, 3);
-                    }
+                void M()
+                {
+                Delta d1 = new [|Delta|](x => x.Length, 3);
+                }
                 }
 
                 class Delta : A
@@ -5239,22 +5239,22 @@ class Program
 
                 class A
                 {
-                    public A(Func<string, int> f) { }
+                public A(Func<string, int> f) { }
 
-                    void M()
-                    {
-                        Delta d1 = new Delta(x => x.Length, 3);
-                    }
+                void M()
+                {
+                Delta d1 = new Delta(x => x.Length, 3);
+                }
                 }
 
                 class Delta : A
                 {
-                    private int v;
+                private int v;
 
-                    public Delta(Func<string, int> f, int v) : base(f)
-                    {
-                        this.v = v;
-                    }
+                public Delta(Func<string, int> f, int v) : base(f)
+                {
+                this.v = v;
+                }
                 }
                 """
             );
@@ -5268,48 +5268,48 @@ class Program
             await TestAsync(
                 """
                 <Workspace>
-                    <Project Language="C#" Name="CSharpProjectWithExtraType" CommonReferences="true">
-                        <Document>
+                <Project Language="C#" Name="CSharpProjectWithExtraType" CommonReferences="true">
+                <Document>
                 public class ExtraType { }
-                        </Document>
-                    </Project>
-                    <Project Language="C#" Name="CSharpProjectGeneratingInto" CommonReferences="true">
-                        <ProjectReference>CSharpProjectWithExtraType</ProjectReference>
-                        <Document>
+                </Document>
+                </Project>
+                <Project Language="C#" Name="CSharpProjectGeneratingInto" CommonReferences="true">
+                <ProjectReference>CSharpProjectWithExtraType</ProjectReference>
+                <Document>
                 public class C
                 {
-                    public C(ExtraType t) { }
-                    public C(string s, int i) { }
+                public C(ExtraType t) { }
+                public C(string s, int i) { }
                 }</Document>
-                    </Project>
-                    <Project Language="C#" CommonReferences="true">
-                        <ProjectReference>CSharpProjectGeneratingInto</ProjectReference>
-                        <Document>
+                </Project>
+                <Project Language="C#" CommonReferences="true">
+                <ProjectReference>CSharpProjectGeneratingInto</ProjectReference>
+                <Document>
                 public class InvokingConstructor
                 {
-                    public void M()
-                    {
-                        [|new C(42, 42)|];
-                    }
+                public void M()
+                {
+                [|new C(42, 42)|];
+                }
                 }</Document>
-                    </Project>
+                </Project>
                 </Workspace>
                 """,
                 """
 
                 public class C
                 {
-                    private int v1;
-                    private int v2;
+                private int v1;
+                private int v2;
 
-                    public C(ExtraType t) { }
-                    public C(string s, int i) { }
+                public C(ExtraType t) { }
+                public C(string s, int i) { }
 
-                    public C(int v1, int v2)
-                    {
-                        this.v1 = v1;
-                        this.v2 = v2;
-                    }
+                public C(int v1, int v2)
+                {
+                this.v1 = v1;
+                this.v2 = v2;
+                }
                 }
                 """,
                 parseOptions: TestOptions.Regular
@@ -5325,19 +5325,19 @@ class Program
 
                 public class InstanceType
                 {
-                    public InstanceType(object? a = null) { }
+                public InstanceType(object? a = null) { }
                 }
 
                 public static class Example
                 {
-                    public static void Test()
-                    {
-                        Action lambda = () =>
-                        {
-                            var _ = new [|InstanceType|]();
-                            var _ = 0
-                        };
-                    }
+                public static void Test()
+                {
+                Action lambda = () =>
+                {
+                var _ = new [|InstanceType|]();
+                var _ = 0
+                };
+                }
                 }
                 """
             );
