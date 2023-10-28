@@ -31,11 +31,19 @@ public class WebSocketsTests : VerifiableLoggedTest
         using (StartVerifiableLog())
         {
             var pair = DuplexPipe.CreateConnectionPair(PipeOptions.Default, PipeOptions.Default);
-            var connection = CreateHttpConnectionContext(pair, loggerName: "HttpConnectionContext1");
+            var connection = CreateHttpConnectionContext(
+                pair,
+                loggerName: "HttpConnectionContext1"
+            );
 
             using (var feature = new TestWebSocketConnectionFeature())
             {
-                var ws = new WebSocketsServerTransport(new WebSocketOptions(), connection.Application, connection, LoggerFactory);
+                var ws = new WebSocketsServerTransport(
+                    new WebSocketOptions(),
+                    connection.Application,
+                    connection,
+                    LoggerFactory
+                );
 
                 // Give the server socket to the transport and run it
                 var transport = ws.ProcessSocketAsync(await feature.AcceptAsync());
@@ -44,12 +52,18 @@ public class WebSocketsTests : VerifiableLoggedTest
                 var client = feature.Client.ExecuteAndCaptureFramesAsync();
 
                 // Send a frame, then close
-                await feature.Client.SendAsync(
-                    buffer: new ArraySegment<byte>(Encoding.UTF8.GetBytes("Hello")),
-                    messageType: (WebSocketMessageType)Enum.Parse(typeof(WebSocketMessageType), webSocketMessageType),
-                    endOfMessage: true,
-                    cancellationToken: CancellationToken.None);
-                await feature.Client.CloseAsync(WebSocketCloseStatus.NormalClosure, "", CancellationToken.None);
+                await feature
+                    .Client
+                    .SendAsync(
+                        buffer: new ArraySegment<byte>(Encoding.UTF8.GetBytes("Hello")),
+                        messageType: (WebSocketMessageType)
+                            Enum.Parse(typeof(WebSocketMessageType), webSocketMessageType),
+                        endOfMessage: true,
+                        cancellationToken: CancellationToken.None
+                    );
+                await feature
+                    .Client
+                    .CloseAsync(WebSocketCloseStatus.NormalClosure, "", CancellationToken.None);
 
                 var result = await connection.Transport.Input.ReadAsync();
                 var buffer = result.Buffer;
@@ -64,7 +78,10 @@ public class WebSocketsTests : VerifiableLoggedTest
                 // The connection should close after this, which means the client will get a close frame.
                 var clientSummary = await client;
 
-                Assert.Equal(WebSocketCloseStatus.NormalClosure, clientSummary.CloseResult.CloseStatus);
+                Assert.Equal(
+                    WebSocketCloseStatus.NormalClosure,
+                    clientSummary.CloseResult.CloseStatus
+                );
             }
         }
     }
@@ -73,17 +90,28 @@ public class WebSocketsTests : VerifiableLoggedTest
     [Theory]
     [InlineData(TransferFormat.Text, nameof(WebSocketMessageType.Text))]
     [InlineData(TransferFormat.Binary, nameof(WebSocketMessageType.Binary))]
-    public async Task WebSocketTransportSetsMessageTypeBasedOnTransferFormatFeature(TransferFormat transferFormat, string expectedMessageType)
+    public async Task WebSocketTransportSetsMessageTypeBasedOnTransferFormatFeature(
+        TransferFormat transferFormat,
+        string expectedMessageType
+    )
     {
         using (StartVerifiableLog())
         {
             var pair = DuplexPipe.CreateConnectionPair(PipeOptions.Default, PipeOptions.Default);
-            var connection = CreateHttpConnectionContext(pair, loggerName: "HttpConnectionContext1");
+            var connection = CreateHttpConnectionContext(
+                pair,
+                loggerName: "HttpConnectionContext1"
+            );
 
             using (var feature = new TestWebSocketConnectionFeature())
             {
                 connection.ActiveFormat = transferFormat;
-                var ws = new WebSocketsServerTransport(new WebSocketOptions(), connection.Application, connection, LoggerFactory);
+                var ws = new WebSocketsServerTransport(
+                    new WebSocketOptions(),
+                    connection.Application,
+                    connection,
+                    LoggerFactory
+                );
 
                 // Give the server socket to the transport and run it
                 var transport = ws.ProcessSocketAsync(await feature.AcceptAsync());
@@ -97,21 +125,38 @@ public class WebSocketsTests : VerifiableLoggedTest
 
                 // The client should finish now, as should the server
                 var clientSummary = await client;
-                await feature.Client.CloseAsync(WebSocketCloseStatus.NormalClosure, "", CancellationToken.None);
+                await feature
+                    .Client
+                    .CloseAsync(WebSocketCloseStatus.NormalClosure, "", CancellationToken.None);
                 await transport;
 
                 Assert.Equal(1, clientSummary.Received.Count);
                 Assert.True(clientSummary.Received[0].EndOfMessage);
-                Assert.Equal((WebSocketMessageType)Enum.Parse(typeof(WebSocketMessageType), expectedMessageType), clientSummary.Received[0].MessageType);
+                Assert.Equal(
+                    (WebSocketMessageType)
+                        Enum.Parse(typeof(WebSocketMessageType), expectedMessageType),
+                    clientSummary.Received[0].MessageType
+                );
                 Assert.Equal("Hello", Encoding.UTF8.GetString(clientSummary.Received[0].Buffer));
             }
         }
     }
 
-    private HttpConnectionContext CreateHttpConnectionContext(DuplexPipe.DuplexPipePair pair, string loggerName = null)
+    private HttpConnectionContext CreateHttpConnectionContext(
+        DuplexPipe.DuplexPipePair pair,
+        string loggerName = null
+    )
     {
-        return new HttpConnectionContext("foo", connectionToken: null, LoggerFactory.CreateLogger(loggerName ?? nameof(HttpConnectionContext)),
-            metricsContext: default, pair.Transport, pair.Application, new(), useStatefulReconnect: false);
+        return new HttpConnectionContext(
+            "foo",
+            connectionToken: null,
+            LoggerFactory.CreateLogger(loggerName ?? nameof(HttpConnectionContext)),
+            metricsContext: default,
+            pair.Transport,
+            pair.Application,
+            new(),
+            useStatefulReconnect: false
+        );
     }
 
     [Fact]
@@ -120,7 +165,10 @@ public class WebSocketsTests : VerifiableLoggedTest
         using (StartVerifiableLog())
         {
             var pair = DuplexPipe.CreateConnectionPair(PipeOptions.Default, PipeOptions.Default);
-            var connection = CreateHttpConnectionContext(pair, loggerName: "HttpConnectionContext1");
+            var connection = CreateHttpConnectionContext(
+                pair,
+                loggerName: "HttpConnectionContext1"
+            );
 
             using (var feature = new TestWebSocketConnectionFeature())
             {
@@ -143,7 +191,12 @@ public class WebSocketsTests : VerifiableLoggedTest
                     }
                 }
 
-                var ws = new WebSocketsServerTransport(new WebSocketOptions(), connection.Application, connection, LoggerFactory);
+                var ws = new WebSocketsServerTransport(
+                    new WebSocketOptions(),
+                    connection.Application,
+                    connection,
+                    LoggerFactory
+                );
 
                 // Give the server socket to the transport and run it
                 var transport = ws.ProcessSocketAsync(await feature.AcceptAsync());
@@ -176,7 +229,12 @@ public class WebSocketsTests : VerifiableLoggedTest
 
             using (var feature = new TestWebSocketConnectionFeature())
             {
-                var ws = new WebSocketsServerTransport(new WebSocketOptions(), connection.Application, connection, LoggerFactory);
+                var ws = new WebSocketsServerTransport(
+                    new WebSocketOptions(),
+                    connection.Application,
+                    connection,
+                    LoggerFactory
+                );
 
                 // Give the server socket to the transport and run it
                 var transport = ws.ProcessSocketAsync(await feature.AcceptAsync());
@@ -185,12 +243,20 @@ public class WebSocketsTests : VerifiableLoggedTest
                 var client = feature.Client.ExecuteAndCaptureFramesAsync();
 
                 // Fail in the app
-                connection.Transport.Output.Complete(new InvalidOperationException("Catastrophic failure."));
+                connection
+                    .Transport
+                    .Output
+                    .Complete(new InvalidOperationException("Catastrophic failure."));
                 var clientSummary = await client.DefaultTimeout();
-                Assert.Equal(WebSocketCloseStatus.InternalServerError, clientSummary.CloseResult.CloseStatus);
+                Assert.Equal(
+                    WebSocketCloseStatus.InternalServerError,
+                    clientSummary.CloseResult.CloseStatus
+                );
 
                 // Close from the client
-                await feature.Client.CloseAsync(WebSocketCloseStatus.NormalClosure, "", CancellationToken.None);
+                await feature
+                    .Client
+                    .CloseAsync(WebSocketCloseStatus.NormalClosure, "", CancellationToken.None);
 
                 await transport.DefaultTimeout();
             }
@@ -207,12 +273,14 @@ public class WebSocketsTests : VerifiableLoggedTest
 
             using (var feature = new TestWebSocketConnectionFeature())
             {
-                var options = new WebSocketOptions()
-                {
-                    CloseTimeout = TimeSpan.FromSeconds(1)
-                };
+                var options = new WebSocketOptions() { CloseTimeout = TimeSpan.FromSeconds(1) };
 
-                var ws = new WebSocketsServerTransport(options, connection.Application, connection, LoggerFactory);
+                var ws = new WebSocketsServerTransport(
+                    options,
+                    connection.Application,
+                    connection,
+                    LoggerFactory
+                );
 
                 var serverSocket = await feature.AcceptAsync();
                 // Give the server socket to the transport and run it
@@ -241,12 +309,14 @@ public class WebSocketsTests : VerifiableLoggedTest
 
             using (var feature = new TestWebSocketConnectionFeature())
             {
-                var options = new WebSocketOptions
-                {
-                    CloseTimeout = TimeSpan.FromSeconds(1)
-                };
+                var options = new WebSocketOptions { CloseTimeout = TimeSpan.FromSeconds(1) };
 
-                var ws = new WebSocketsServerTransport(options, connection.Application, connection, LoggerFactory);
+                var ws = new WebSocketsServerTransport(
+                    options,
+                    connection.Application,
+                    connection,
+                    LoggerFactory
+                );
 
                 var serverSocket = await feature.AcceptAsync();
                 // Give the server socket to the transport and run it
@@ -281,7 +351,12 @@ public class WebSocketsTests : VerifiableLoggedTest
                     CloseTimeout = TimeSpan.FromSeconds(20)
                 };
 
-                var ws = new WebSocketsServerTransport(options, connection.Application, connection, LoggerFactory);
+                var ws = new WebSocketsServerTransport(
+                    options,
+                    connection.Application,
+                    connection,
+                    LoggerFactory
+                );
 
                 var serverSocket = await feature.AcceptAsync();
                 // Give the server socket to the transport and run it
@@ -295,7 +370,14 @@ public class WebSocketsTests : VerifiableLoggedTest
 
                 _ = await client.DefaultTimeout();
 
-                await feature.Client.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, null, CancellationToken.None).DefaultTimeout();
+                await feature
+                    .Client
+                    .CloseOutputAsync(
+                        WebSocketCloseStatus.NormalClosure,
+                        null,
+                        CancellationToken.None
+                    )
+                    .DefaultTimeout();
 
                 await transport.DefaultTimeout();
 
@@ -320,7 +402,12 @@ public class WebSocketsTests : VerifiableLoggedTest
                     CloseTimeout = TimeSpan.FromSeconds(20)
                 };
 
-                var ws = new WebSocketsServerTransport(options, connection.Application, connection, LoggerFactory);
+                var ws = new WebSocketsServerTransport(
+                    options,
+                    connection.Application,
+                    connection,
+                    LoggerFactory
+                );
 
                 var serverSocket = await feature.AcceptAsync();
                 // Give the server socket to the transport and run it
@@ -329,7 +416,14 @@ public class WebSocketsTests : VerifiableLoggedTest
                 // Run the client socket
                 var client = feature.Client.ExecuteAndCaptureFramesAsync();
 
-                await feature.Client.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, null, CancellationToken.None).DefaultTimeout();
+                await feature
+                    .Client
+                    .CloseOutputAsync(
+                        WebSocketCloseStatus.NormalClosure,
+                        null,
+                        CancellationToken.None
+                    )
+                    .DefaultTimeout();
 
                 // close the client to server channel
                 connection.Transport.Output.Complete();
@@ -367,11 +461,19 @@ public class WebSocketsTests : VerifiableLoggedTest
                     },
                 };
 
-                var ws = new WebSocketsServerTransport(options, connection.Application, connection, LoggerFactory);
+                var ws = new WebSocketsServerTransport(
+                    options,
+                    connection.Application,
+                    connection,
+                    LoggerFactory
+                );
 
                 // Create an HttpContext
                 var context = new DefaultHttpContext();
-                context.Request.Headers.Add(HeaderNames.WebSocketSubProtocols, providedSubProtocols.ToArray());
+                context
+                    .Request
+                    .Headers
+                    .Add(HeaderNames.WebSocketSubProtocols, providedSubProtocols.ToArray());
                 context.Features.Set<IHttpWebSocketFeature>(feature);
                 var transport = ws.ProcessRequestAsync(context, CancellationToken.None);
 
@@ -383,7 +485,14 @@ public class WebSocketsTests : VerifiableLoggedTest
                 // Run the client socket
                 var client = feature.Client.ExecuteAndCaptureFramesAsync();
 
-                await feature.Client.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, null, CancellationToken.None).DefaultTimeout();
+                await feature
+                    .Client
+                    .CloseOutputAsync(
+                        WebSocketCloseStatus.NormalClosure,
+                        null,
+                        CancellationToken.None
+                    )
+                    .DefaultTimeout();
 
                 // close the client to server channel
                 connection.Transport.Output.Complete();
@@ -401,7 +510,10 @@ public class WebSocketsTests : VerifiableLoggedTest
         using (var feature = new TestWebSocketConnectionFeature())
         {
             var serverSocket = await feature.AcceptAsync();
-            var sequence = ReadOnlySequenceFactory.CreateSegments(new byte[] { 1 }, new byte[] { 15 });
+            var sequence = ReadOnlySequenceFactory.CreateSegments(
+                new byte[] { 1 },
+                new byte[] { 15 }
+            );
             Assert.False(sequence.IsSingleSegment);
 
             await serverSocket.SendAsync(sequence, WebSocketMessageType.Text);

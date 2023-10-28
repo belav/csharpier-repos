@@ -8,12 +8,11 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Roslyn.Utilities;
-using System.Threading;
-
 #if DEBUG
 using System.Diagnostics;
 #endif
@@ -77,7 +76,9 @@ namespace Roslyn.Utilities
 
             if (items is ImmutableArray<T> array)
             {
-                return array.IsDefaultOrEmpty ? SpecializedCollections.EmptyBoxedImmutableArray<T>() : (IReadOnlyList<T>)items;
+                return array.IsDefaultOrEmpty
+                    ? SpecializedCollections.EmptyBoxedImmutableArray<T>()
+                    : (IReadOnlyList<T>)items;
             }
 
             if (items is ICollection<T> collection && collection.Count == 0)
@@ -118,7 +119,11 @@ namespace Roslyn.Utilities
             yield return value;
         }
 
-        public static bool SetEquals<T>(this IEnumerable<T> source1, IEnumerable<T> source2, IEqualityComparer<T>? comparer)
+        public static bool SetEquals<T>(
+            this IEnumerable<T> source1,
+            IEnumerable<T> source2,
+            IEqualityComparer<T>? comparer
+        )
         {
             if (source1 == null)
             {
@@ -168,10 +173,14 @@ namespace Roslyn.Utilities
             return source as ISet<T> ?? new HashSet<T>(source);
         }
 
-        public static IReadOnlyCollection<T> ToCollection<T>(this IEnumerable<T> sequence)
-            => (sequence is IReadOnlyCollection<T> collection) ? collection : sequence.ToList();
+        public static IReadOnlyCollection<T> ToCollection<T>(this IEnumerable<T> sequence) =>
+            (sequence is IReadOnlyCollection<T> collection) ? collection : sequence.ToList();
 
-        public static T? FirstOrDefault<T, TArg>(this IEnumerable<T> source, Func<T, TArg, bool> predicate, TArg arg)
+        public static T? FirstOrDefault<T, TArg>(
+            this IEnumerable<T> source,
+            Func<T, TArg, bool> predicate,
+            TArg arg
+        )
         {
             if (source == null)
             {
@@ -216,10 +225,16 @@ namespace Roslyn.Utilities
                 throw new ArgumentNullException(nameof(predicate));
             }
 
-            return source.Cast<T?>().FirstOrDefault(static (v, predicate) => predicate(v!.Value), predicate);
+            return source
+                .Cast<T?>()
+                .FirstOrDefault(static (v, predicate) => predicate(v!.Value), predicate);
         }
 
-        public static T? FirstOrNull<T, TArg>(this IEnumerable<T> source, Func<T, TArg, bool> predicate, TArg arg)
+        public static T? FirstOrNull<T, TArg>(
+            this IEnumerable<T> source,
+            Func<T, TArg, bool> predicate,
+            TArg arg
+        )
             where T : struct
         {
             if (source == null)
@@ -232,7 +247,12 @@ namespace Roslyn.Utilities
                 throw new ArgumentNullException(nameof(predicate));
             }
 
-            return source.Cast<T?>().FirstOrDefault(static (v, arg) => arg.predicate(v!.Value, arg.arg), (predicate, arg));
+            return source
+                .Cast<T?>()
+                .FirstOrDefault(
+                    static (v, arg) => arg.predicate(v!.Value, arg.arg),
+                    (predicate, arg)
+                );
         }
 
         public static T? LastOrNull<T>(this IEnumerable<T> source)
@@ -337,10 +357,13 @@ namespace Roslyn.Utilities
             return source.Where((Func<T?, bool>)s_notNullTest)!;
         }
 
-        public static T[] AsArray<T>(this IEnumerable<T> source)
-            => source as T[] ?? source.ToArray();
+        public static T[] AsArray<T>(this IEnumerable<T> source) =>
+            source as T[] ?? source.ToArray();
 
-        public static ImmutableArray<TResult> SelectAsArray<TSource, TResult>(this IEnumerable<TSource>? source, Func<TSource, TResult> selector)
+        public static ImmutableArray<TResult> SelectAsArray<TSource, TResult>(
+            this IEnumerable<TSource>? source,
+            Func<TSource, TResult> selector
+        )
         {
             if (source == null)
             {
@@ -353,7 +376,10 @@ namespace Roslyn.Utilities
             return builder.ToImmutableAndFree();
         }
 
-        public static ImmutableArray<TResult> SelectAsArray<TSource, TResult>(this IEnumerable<TSource>? source, Func<TSource, int, TResult> selector)
+        public static ImmutableArray<TResult> SelectAsArray<TSource, TResult>(
+            this IEnumerable<TSource>? source,
+            Func<TSource, int, TResult> selector
+        )
         {
             if (source == null)
                 return ImmutableArray<TResult>.Empty;
@@ -370,7 +396,10 @@ namespace Roslyn.Utilities
             return builder.ToImmutableAndFree();
         }
 
-        public static ImmutableArray<TResult> SelectAsArray<TSource, TResult>(this IReadOnlyCollection<TSource>? source, Func<TSource, TResult> selector)
+        public static ImmutableArray<TResult> SelectAsArray<TSource, TResult>(
+            this IReadOnlyCollection<TSource>? source,
+            Func<TSource, TResult> selector
+        )
         {
             if (source == null)
                 return ImmutableArray<TResult>.Empty;
@@ -382,7 +411,10 @@ namespace Roslyn.Utilities
             return builder.ToImmutableAndFree();
         }
 
-        public static ImmutableArray<TResult> SelectManyAsArray<TSource, TResult>(this IReadOnlyCollection<TSource>? source, Func<TSource, IEnumerable<TResult>> selector)
+        public static ImmutableArray<TResult> SelectManyAsArray<TSource, TResult>(
+            this IReadOnlyCollection<TSource>? source,
+            Func<TSource, IEnumerable<TResult>> selector
+        )
         {
             if (source == null)
                 return ImmutableArray<TResult>.Empty;
@@ -397,7 +429,10 @@ namespace Roslyn.Utilities
         /// <summary>
         /// Maps an immutable array through a function that returns ValueTask, returning the new ImmutableArray.
         /// </summary>
-        public static async ValueTask<ImmutableArray<TResult>> SelectAsArrayAsync<TItem, TResult>(this IEnumerable<TItem> source, Func<TItem, ValueTask<TResult>> selector)
+        public static async ValueTask<ImmutableArray<TResult>> SelectAsArrayAsync<TItem, TResult>(
+            this IEnumerable<TItem> source,
+            Func<TItem, ValueTask<TResult>> selector
+        )
         {
             var builder = ArrayBuilder<TResult>.GetInstance();
 
@@ -412,7 +447,11 @@ namespace Roslyn.Utilities
         /// <summary>
         /// Maps an immutable array through a function that returns ValueTask, returning the new ImmutableArray.
         /// </summary>
-        public static async ValueTask<ImmutableArray<TResult>> SelectAsArrayAsync<TItem, TResult>(this IEnumerable<TItem> source, Func<TItem, CancellationToken, ValueTask<TResult>> selector, CancellationToken cancellationToken)
+        public static async ValueTask<ImmutableArray<TResult>> SelectAsArrayAsync<TItem, TResult>(
+            this IEnumerable<TItem> source,
+            Func<TItem, CancellationToken, ValueTask<TResult>> selector,
+            CancellationToken cancellationToken
+        )
         {
             var builder = ArrayBuilder<TResult>.GetInstance();
 
@@ -427,7 +466,16 @@ namespace Roslyn.Utilities
         /// <summary>
         /// Maps an immutable array through a function that returns ValueTask, returning the new ImmutableArray.
         /// </summary>
-        public static async ValueTask<ImmutableArray<TResult>> SelectAsArrayAsync<TItem, TArg, TResult>(this IEnumerable<TItem> source, Func<TItem, TArg, CancellationToken, ValueTask<TResult>> selector, TArg arg, CancellationToken cancellationToken)
+        public static async ValueTask<ImmutableArray<TResult>> SelectAsArrayAsync<
+            TItem,
+            TArg,
+            TResult
+        >(
+            this IEnumerable<TItem> source,
+            Func<TItem, TArg, CancellationToken, ValueTask<TResult>> selector,
+            TArg arg,
+            CancellationToken cancellationToken
+        )
         {
             var builder = ArrayBuilder<TResult>.GetInstance();
 
@@ -439,24 +487,42 @@ namespace Roslyn.Utilities
             return builder.ToImmutableAndFree();
         }
 
-        public static async ValueTask<ImmutableArray<TResult>> SelectManyAsArrayAsync<TItem, TArg, TResult>(this IEnumerable<TItem> source, Func<TItem, TArg, CancellationToken, ValueTask<IEnumerable<TResult>>> selector, TArg arg, CancellationToken cancellationToken)
+        public static async ValueTask<ImmutableArray<TResult>> SelectManyAsArrayAsync<
+            TItem,
+            TArg,
+            TResult
+        >(
+            this IEnumerable<TItem> source,
+            Func<TItem, TArg, CancellationToken, ValueTask<IEnumerable<TResult>>> selector,
+            TArg arg,
+            CancellationToken cancellationToken
+        )
         {
             var builder = ArrayBuilder<TResult>.GetInstance();
 
             foreach (var item in source)
             {
-                builder.AddRange(await selector(item, arg, cancellationToken).ConfigureAwait(false));
+                builder.AddRange(
+                    await selector(item, arg, cancellationToken).ConfigureAwait(false)
+                );
             }
 
             return builder.ToImmutableAndFree();
         }
 
-        public static async ValueTask<IEnumerable<TResult>> SelectManyInParallelAsync<TItem, TResult>(
-           this IEnumerable<TItem> sequence,
-           Func<TItem, CancellationToken, Task<IEnumerable<TResult>>> selector,
-           CancellationToken cancellationToken)
+        public static async ValueTask<IEnumerable<TResult>> SelectManyInParallelAsync<
+            TItem,
+            TResult
+        >(
+            this IEnumerable<TItem> sequence,
+            Func<TItem, CancellationToken, Task<IEnumerable<TResult>>> selector,
+            CancellationToken cancellationToken
+        )
         {
-            return (await Task.WhenAll(sequence.Select(item => selector(item, cancellationToken))).ConfigureAwait(false)).Flatten();
+            return (
+                await Task.WhenAll(sequence.Select(item => selector(item, cancellationToken)))
+                    .ConfigureAwait(false)
+            ).Flatten();
         }
 
         public static bool All(this IEnumerable<bool> source)
@@ -482,12 +548,17 @@ namespace Roslyn.Utilities
             return sequence switch
             {
                 IList<T> list => list.IndexOf(value),
-                IReadOnlyList<T> readOnlyList => IndexOf(readOnlyList, value, EqualityComparer<T>.Default),
+                IReadOnlyList<T> readOnlyList
+                    => IndexOf(readOnlyList, value, EqualityComparer<T>.Default),
                 _ => EnumeratingIndexOf(sequence, value, EqualityComparer<T>.Default)
             };
         }
 
-        public static int IndexOf<T>(this IEnumerable<T> sequence, T value, IEqualityComparer<T> comparer)
+        public static int IndexOf<T>(
+            this IEnumerable<T> sequence,
+            T value,
+            IEqualityComparer<T> comparer
+        )
         {
             return sequence switch
             {
@@ -496,7 +567,11 @@ namespace Roslyn.Utilities
             };
         }
 
-        private static int EnumeratingIndexOf<T>(this IEnumerable<T> sequence, T value, IEqualityComparer<T> comparer)
+        private static int EnumeratingIndexOf<T>(
+            this IEnumerable<T> sequence,
+            T value,
+            IEqualityComparer<T> comparer
+        )
         {
             int i = 0;
             foreach (var item in sequence)
@@ -512,7 +587,11 @@ namespace Roslyn.Utilities
             return -1;
         }
 
-        public static int IndexOf<T>(this IReadOnlyList<T> list, T value, IEqualityComparer<T> comparer)
+        public static int IndexOf<T>(
+            this IReadOnlyList<T> list,
+            T value,
+            IEqualityComparer<T> comparer
+        )
         {
             for (int i = 0, length = list.Count; i < length; i++)
             {
@@ -535,51 +614,73 @@ namespace Roslyn.Utilities
             return sequence.SelectMany(s => s);
         }
 
-        public static IOrderedEnumerable<T> OrderBy<T>(this IEnumerable<T> source, IComparer<T>? comparer)
+        public static IOrderedEnumerable<T> OrderBy<T>(
+            this IEnumerable<T> source,
+            IComparer<T>? comparer
+        )
         {
             return source.OrderBy(Functions<T>.Identity, comparer);
         }
 
-        public static IOrderedEnumerable<T> OrderByDescending<T>(this IEnumerable<T> source, IComparer<T>? comparer)
+        public static IOrderedEnumerable<T> OrderByDescending<T>(
+            this IEnumerable<T> source,
+            IComparer<T>? comparer
+        )
         {
             return source.OrderByDescending(Functions<T>.Identity, comparer);
         }
 
-        public static IOrderedEnumerable<T> OrderBy<T>(this IEnumerable<T> source, Comparison<T> compare)
+        public static IOrderedEnumerable<T> OrderBy<T>(
+            this IEnumerable<T> source,
+            Comparison<T> compare
+        )
         {
             return source.OrderBy(Comparer<T>.Create(compare));
         }
 
-        public static IOrderedEnumerable<T> OrderByDescending<T>(this IEnumerable<T> source, Comparison<T> compare)
+        public static IOrderedEnumerable<T> OrderByDescending<T>(
+            this IEnumerable<T> source,
+            Comparison<T> compare
+        )
         {
             return source.OrderByDescending(Comparer<T>.Create(compare));
         }
 
 #if NET7_0_OR_GREATER
-        public static IOrderedEnumerable<T> Order<T>(IEnumerable<T> source) where T : IComparable<T>
+        public static IOrderedEnumerable<T> Order<T>(IEnumerable<T> source)
+            where T : IComparable<T>
 #else
-        public static IOrderedEnumerable<T> Order<T>(this IEnumerable<T> source) where T : IComparable<T>
+        public static IOrderedEnumerable<T> Order<T>(this IEnumerable<T> source)
+            where T : IComparable<T>
 #endif
         {
             return source.OrderBy(Comparisons<T>.Comparer);
         }
 
-        public static IOrderedEnumerable<T> ThenBy<T>(this IOrderedEnumerable<T> source, IComparer<T>? comparer)
+        public static IOrderedEnumerable<T> ThenBy<T>(
+            this IOrderedEnumerable<T> source,
+            IComparer<T>? comparer
+        )
         {
             return source.ThenBy(Functions<T>.Identity, comparer);
         }
 
-        public static IOrderedEnumerable<T> ThenBy<T>(this IOrderedEnumerable<T> source, Comparison<T> compare)
+        public static IOrderedEnumerable<T> ThenBy<T>(
+            this IOrderedEnumerable<T> source,
+            Comparison<T> compare
+        )
         {
             return source.ThenBy(Comparer<T>.Create(compare));
         }
 
-        public static IOrderedEnumerable<T> ThenBy<T>(this IOrderedEnumerable<T> source) where T : IComparable<T>
+        public static IOrderedEnumerable<T> ThenBy<T>(this IOrderedEnumerable<T> source)
+            where T : IComparable<T>
         {
             return source.ThenBy(Comparisons<T>.Comparer);
         }
 
-        private static class Comparisons<T> where T : IComparable<T>
+        private static class Comparisons<T>
+            where T : IComparable<T>
         {
             public static readonly Comparison<T> CompareTo = (t1, t2) => t1.CompareTo(t2);
 
@@ -631,7 +732,9 @@ namespace Roslyn.Utilities
             return Comparer<T>.Create(comparison);
         }
 
-        public static ImmutableDictionary<K, V> ToImmutableDictionaryOrEmpty<K, V>(this IEnumerable<KeyValuePair<K, V>>? items)
+        public static ImmutableDictionary<K, V> ToImmutableDictionaryOrEmpty<K, V>(
+            this IEnumerable<KeyValuePair<K, V>>? items
+        )
             where K : notnull
         {
             if (items == null)
@@ -642,7 +745,10 @@ namespace Roslyn.Utilities
             return ImmutableDictionary.CreateRange(items);
         }
 
-        public static ImmutableDictionary<K, V> ToImmutableDictionaryOrEmpty<K, V>(this IEnumerable<KeyValuePair<K, V>>? items, IEqualityComparer<K>? keyComparer)
+        public static ImmutableDictionary<K, V> ToImmutableDictionaryOrEmpty<K, V>(
+            this IEnumerable<KeyValuePair<K, V>>? items,
+            IEqualityComparer<K>? keyComparer
+        )
             where K : notnull
         {
             if (items == null)
@@ -663,7 +769,9 @@ namespace Roslyn.Utilities
             return TransposeInternal(data).ToArray();
         }
 
-        private static IEnumerable<IList<T>> TransposeInternal<T>(this IEnumerable<IEnumerable<T>> data)
+        private static IEnumerable<IList<T>> TransposeInternal<T>(
+            this IEnumerable<IEnumerable<T>> data
+        )
         {
             List<IEnumerator<T>> enumerators = new List<IEnumerator<T>>();
 
@@ -706,9 +814,14 @@ namespace Roslyn.Utilities
                 }
             }
         }
+
 #nullable enable
 
-        internal static Dictionary<K, ImmutableArray<T>> ToMultiDictionary<K, T>(this IEnumerable<T> data, Func<T, K> keySelector, IEqualityComparer<K>? comparer = null)
+        internal static Dictionary<K, ImmutableArray<T>> ToMultiDictionary<K, T>(
+            this IEnumerable<T> data,
+            Func<T, K> keySelector,
+            IEqualityComparer<K>? comparer = null
+        )
             where K : notnull
         {
             var dictionary = new Dictionary<K, ImmutableArray<T>>(comparer);
@@ -783,7 +896,11 @@ namespace System.Linq
     /// </summary>
     internal static class EnumerableExtensions
     {
-        public static bool SequenceEqual<T>(this IEnumerable<T>? first, IEnumerable<T>? second, Func<T, T, bool> comparer)
+        public static bool SequenceEqual<T>(
+            this IEnumerable<T>? first,
+            IEnumerable<T>? second,
+            Func<T, T, bool> comparer
+        )
         {
             RoslynDebug.Assert(comparer != null);
 
@@ -802,7 +919,10 @@ namespace System.Linq
             {
                 while (enumerator.MoveNext())
                 {
-                    if (!enumerator2.MoveNext() || !comparer(enumerator.Current, enumerator2.Current))
+                    if (
+                        !enumerator2.MoveNext()
+                        || !comparer(enumerator.Current, enumerator2.Current)
+                    )
                     {
                         return false;
                     }

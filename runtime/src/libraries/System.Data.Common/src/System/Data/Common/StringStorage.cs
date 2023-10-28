@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Diagnostics;
 using System.Collections;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 
 namespace System.Data.Common
@@ -13,9 +13,7 @@ namespace System.Data.Common
         private string?[] _values = default!; // Late-initialized
 
         public StringStorage(DataColumn column)
-        : base(column, typeof(string), string.Empty, StorageType.String)
-        {
-        }
+            : base(column, typeof(string), string.Empty, StorageType.String) { }
 
         public override object Aggregate(int[] recordNos, AggregateType kind)
         {
@@ -204,7 +202,12 @@ namespace System.Data.Common
             return new string[recordCount];
         }
 
-        protected override void CopyValue(int record, object store, BitArray nullbits, int storeIndex)
+        protected override void CopyValue(
+            int record,
+            object store,
+            BitArray nullbits,
+            int storeIndex
+        )
         {
             string?[] typedStore = (string?[])store;
             typedStore[storeIndex] = _values[record];

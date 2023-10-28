@@ -20,7 +20,10 @@ namespace System.Buffers
         private readonly AhoCorasickNode[] _nodes;
         private readonly IndexOfAnyAsciiSearcher.AsciiState _startingAsciiChars;
 
-        public AhoCorasick(AhoCorasickNode[] nodes, IndexOfAnyAsciiSearcher.AsciiState startingAsciiChars)
+        public AhoCorasick(
+            AhoCorasickNode[] nodes,
+            IndexOfAnyAsciiSearcher.AsciiState startingAsciiChars
+        )
         {
             _nodes = nodes;
             _startingAsciiChars = startingAsciiChars;
@@ -30,7 +33,10 @@ namespace System.Buffers
         {
             get
             {
-                if (IndexOfAnyAsciiSearcher.IsVectorizationSupported && _startingAsciiChars.Bitmap != default)
+                if (
+                    IndexOfAnyAsciiSearcher.IsVectorizationSupported
+                    && _startingAsciiChars.Bitmap != default
+                )
                 {
                     // If there are a lot of starting characters such that we often find one early,
                     // the ASCII fast scan may end up performing worse than checking one character at a time.
@@ -67,27 +73,35 @@ namespace System.Buffers
             where TCaseSensitivity : struct, StringSearchValuesHelper.ICaseSensitivity
             where TFastScanVariant : struct, IFastScan
         {
-            return typeof(TCaseSensitivity) == typeof(StringSearchValuesHelper.CaseInsensitiveUnicode)
+            return
+                typeof(TCaseSensitivity) == typeof(StringSearchValuesHelper.CaseInsensitiveUnicode)
                 ? IndexOfAnyCaseInsensitiveUnicode<TFastScanVariant>(span)
                 : IndexOfAnyCore<TCaseSensitivity, TFastScanVariant>(span);
         }
 
-        private readonly int IndexOfAnyCore<TCaseSensitivity, TFastScanVariant>(ReadOnlySpan<char> span)
+        private readonly int IndexOfAnyCore<TCaseSensitivity, TFastScanVariant>(
+            ReadOnlySpan<char> span
+        )
             where TCaseSensitivity : struct, StringSearchValuesHelper.ICaseSensitivity
             where TFastScanVariant : struct, IFastScan
         {
-            Debug.Assert(typeof(TCaseSensitivity) != typeof(StringSearchValuesHelper.CaseInsensitiveUnicode));
+            Debug.Assert(
+                typeof(TCaseSensitivity) != typeof(StringSearchValuesHelper.CaseInsensitiveUnicode)
+            );
 
             ref AhoCorasickNode nodes = ref MemoryMarshal.GetArrayDataReference(_nodes);
             int nodeIndex = 0;
             int result = -1;
             int i = 0;
 
-        FastScan:
+            FastScan:
             Debug.Assert(nodeIndex == 0);
             // We are currently in the root node and trying to find the next position of any starting character.
             // If all the values start with an ASCII character, use a vectorized helper to quickly skip over characters that can't start a match.
-            if (IndexOfAnyAsciiSearcher.IsVectorizationSupported && typeof(TFastScanVariant) == typeof(IndexOfAnyAsciiFastScan))
+            if (
+                IndexOfAnyAsciiSearcher.IsVectorizationSupported
+                && typeof(TFastScanVariant) == typeof(IndexOfAnyAsciiFastScan)
+            )
             {
                 int remainingLength = span.Length - i;
 
@@ -96,10 +110,16 @@ namespace System.Buffers
                     // If '\0' is one of the starting chars and we're running on Ssse3 hardware, this may return false-positives.
                     // False-positives here are okay, we'll just rule them out below. While we could flow the Ssse3AndWasmHandleZeroInNeedle
                     // generic through, we expect such values to be rare enough that introducing more code is not worth it.
-                    int offset = IndexOfAnyAsciiSearcher.IndexOfAnyVectorized<IndexOfAnyAsciiSearcher.DontNegate, IndexOfAnyAsciiSearcher.Default>(
-                        ref Unsafe.As<char, short>(ref Unsafe.Add(ref MemoryMarshal.GetReference(span), i)),
+                    int offset = IndexOfAnyAsciiSearcher.IndexOfAnyVectorized<
+                        IndexOfAnyAsciiSearcher.DontNegate,
+                        IndexOfAnyAsciiSearcher.Default
+                    >(
+                        ref Unsafe.As<char, short>(
+                            ref Unsafe.Add(ref MemoryMarshal.GetReference(span), i)
+                        ),
                         remainingLength,
-                        ref Unsafe.AsRef(in _startingAsciiChars));
+                        ref Unsafe.AsRef(in _startingAsciiChars)
+                    );
 
                     if (offset < 0)
                     {
@@ -111,16 +131,18 @@ namespace System.Buffers
                 }
             }
 
-        Loop:
+            Loop:
             if ((uint)i >= (uint)span.Length)
             {
                 goto Return;
             }
 
-        LoopWithoutRangeCheck:
+            LoopWithoutRangeCheck:
             // Read the next input character and either find the next potential match prefix or transition back to the root node.
             Debug.Assert((uint)i < (uint)span.Length);
-            char c = TCaseSensitivity.TransformInput(Unsafe.Add(ref MemoryMarshal.GetReference(span), i));
+            char c = TCaseSensitivity.TransformInput(
+                Unsafe.Add(ref MemoryMarshal.GetReference(span), i)
+            );
 
             while (true)
             {
@@ -173,12 +195,14 @@ namespace System.Buffers
                 // Try to match the current character again at the suffix link node.
             }
 
-        Return:
+            Return:
             return result;
         }
 
         // Mostly a copy of IndexOfAnyCore, but we may read two characters at a time in the case of surrogate pairs.
-        private readonly int IndexOfAnyCaseInsensitiveUnicode<TFastScanVariant>(ReadOnlySpan<char> span)
+        private readonly int IndexOfAnyCaseInsensitiveUnicode<TFastScanVariant>(
+            ReadOnlySpan<char> span
+        )
             where TFastScanVariant : struct, IFastScan
         {
             const char LowSurrogateNotSet = '\0';
@@ -189,10 +213,13 @@ namespace System.Buffers
             int i = 0;
             char lowSurrogateUpper = LowSurrogateNotSet;
 
-        FastScan:
+            FastScan:
             // We are currently in the root node and trying to find the next position of any starting character.
             // If all the values start with an ASCII character, use a vectorized helper to quickly skip over characters that can't start a match.
-            if (IndexOfAnyAsciiSearcher.IsVectorizationSupported && typeof(TFastScanVariant) == typeof(IndexOfAnyAsciiFastScan))
+            if (
+                IndexOfAnyAsciiSearcher.IsVectorizationSupported
+                && typeof(TFastScanVariant) == typeof(IndexOfAnyAsciiFastScan)
+            )
             {
                 if (lowSurrogateUpper != LowSurrogateNotSet)
                 {
@@ -205,10 +232,16 @@ namespace System.Buffers
 
                 if (remainingLength >= Vector128<ushort>.Count)
                 {
-                    int offset = IndexOfAnyAsciiSearcher.IndexOfAnyVectorized<IndexOfAnyAsciiSearcher.DontNegate, IndexOfAnyAsciiSearcher.Default>(
-                        ref Unsafe.As<char, short>(ref Unsafe.Add(ref MemoryMarshal.GetReference(span), i)),
+                    int offset = IndexOfAnyAsciiSearcher.IndexOfAnyVectorized<
+                        IndexOfAnyAsciiSearcher.DontNegate,
+                        IndexOfAnyAsciiSearcher.Default
+                    >(
+                        ref Unsafe.As<char, short>(
+                            ref Unsafe.Add(ref MemoryMarshal.GetReference(span), i)
+                        ),
                         remainingLength,
-                        ref Unsafe.AsRef(in _startingAsciiChars));
+                        ref Unsafe.AsRef(in _startingAsciiChars)
+                    );
 
                     if (offset < 0)
                     {
@@ -220,13 +253,13 @@ namespace System.Buffers
                 }
             }
 
-        Loop:
+            Loop:
             if ((uint)i >= (uint)span.Length)
             {
                 goto Return;
             }
 
-        LoopWithoutRangeCheck:
+            LoopWithoutRangeCheck:
             // Read the next input character and either find the next potential match prefix or transition back to the root node.
             Debug.Assert((uint)i < (uint)span.Length);
             char c;
@@ -242,9 +275,13 @@ namespace System.Buffers
                 c = Unsafe.Add(ref MemoryMarshal.GetReference(span), i);
                 char lowSurrogate;
 
-                if (char.IsHighSurrogate(c) &&
-                    (uint)(i + 1) < (uint)span.Length &&
-                    char.IsLowSurrogate(lowSurrogate = Unsafe.Add(ref MemoryMarshal.GetReference(span), i + 1)))
+                if (
+                    char.IsHighSurrogate(c)
+                    && (uint)(i + 1) < (uint)span.Length
+                    && char.IsLowSurrogate(
+                        lowSurrogate = Unsafe.Add(ref MemoryMarshal.GetReference(span), i + 1)
+                    )
+                )
                 {
                     if (GlobalizationMode.UseNls)
                     {
@@ -267,7 +304,9 @@ namespace System.Buffers
                 Span<char> destination = new char[2]; // Avoid stackalloc in a loop
                 Ordinal.ToUpperOrdinal(span.Slice(i, i + 1 == span.Length ? 1 : 2), destination);
                 Debug.Assert(c == destination[0]);
-                Debug.Assert(lowSurrogateUpper == LowSurrogateNotSet || lowSurrogateUpper == destination[1]);
+                Debug.Assert(
+                    lowSurrogateUpper == LowSurrogateNotSet || lowSurrogateUpper == destination[1]
+                );
 #endif
             }
 
@@ -322,7 +361,7 @@ namespace System.Buffers
                 // Try to match the current character again at the suffix link node.
             }
 
-        Return:
+            Return:
             return result;
         }
 

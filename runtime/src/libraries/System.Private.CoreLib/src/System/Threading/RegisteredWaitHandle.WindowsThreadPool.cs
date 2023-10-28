@@ -1,13 +1,13 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.Win32.SafeHandles;
 using System.Diagnostics;
 using System.Diagnostics.Tracing;
 using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+using Microsoft.Win32.SafeHandles;
 
 namespace System.Threading
 {
@@ -25,8 +25,12 @@ namespace System.Threading
         // Pointer to the TP_WAIT structure
         private IntPtr _tpWait;
 
-        internal unsafe RegisteredWaitHandle(SafeWaitHandle waitHandle, _ThreadPoolWaitOrTimerCallback callbackHelper,
-            uint millisecondsTimeout, bool repeating)
+        internal unsafe RegisteredWaitHandle(
+            SafeWaitHandle waitHandle,
+            _ThreadPoolWaitOrTimerCallback callbackHelper,
+            uint millisecondsTimeout,
+            bool repeating
+        )
         {
             Debug.Assert(ThreadPool.UseWindowsThreadPool);
 
@@ -42,7 +46,9 @@ namespace System.Threading
             // Allocate _gcHandle and _tpWait as the last step and make sure they are never leaked
             _gcHandle = GCHandle.Alloc(this);
 
-            _tpWait = Interop.Kernel32.CreateThreadpoolWait(&RegisteredWaitCallback, (IntPtr)_gcHandle, IntPtr.Zero);
+            _tpWait = Interop
+                .Kernel32
+                .CreateThreadpoolWait(&RegisteredWaitCallback, (IntPtr)_gcHandle, IntPtr.Zero);
 
             if (_tpWait == IntPtr.Zero)
             {
@@ -56,13 +62,20 @@ namespace System.Threading
 
 #pragma warning disable IDE0060 // Remove unused parameter
         [UnmanagedCallersOnly]
-        internal static void RegisteredWaitCallback(IntPtr instance, IntPtr context, IntPtr wait, uint waitResult)
+        internal static void RegisteredWaitCallback(
+            IntPtr instance,
+            IntPtr context,
+            IntPtr wait,
+            uint waitResult
+        )
         {
             var wrapper = ThreadPoolCallbackWrapper.Enter();
 
             GCHandle handle = (GCHandle)context;
             RegisteredWaitHandle registeredWaitHandle = (RegisteredWaitHandle)handle.Target!;
-            Debug.Assert((handle == registeredWaitHandle._gcHandle) && (wait == registeredWaitHandle._tpWait));
+            Debug.Assert(
+                (handle == registeredWaitHandle._gcHandle) && (wait == registeredWaitHandle._tpWait)
+            );
 
             bool timedOut = (waitResult == (uint)Interop.Kernel32.WAIT_TIMEOUT);
             registeredWaitHandle.PerformCallbackWindowsThreadPool(timedOut);
@@ -104,7 +117,7 @@ namespace System.Threading
         internal unsafe void RestartWait()
         {
             long timeout;
-            long* pTimeout = null;  // Null indicates infinite timeout
+            long* pTimeout = null; // Null indicates infinite timeout
 
             if (_millisecondsTimeout != Timeout.UnsignedInfinite)
             {
@@ -113,13 +126,15 @@ namespace System.Threading
             }
 
             // We can use DangerousGetHandle because of DangerousAddRef in the constructor
-            Interop.Kernel32.SetThreadpoolWait(_tpWait, _waitHandle!.DangerousGetHandle(), (IntPtr)pTimeout);
+            Interop
+                .Kernel32
+                .SetThreadpoolWait(_tpWait, _waitHandle!.DangerousGetHandle(), (IntPtr)pTimeout);
         }
 
         private bool UnregisterWindowsThreadPool(WaitHandle waitObject)
         {
             // Hold the lock during the synchronous part of Unregister (as in CoreCLR)
-            lock(_lock!)
+            lock (_lock!)
             {
                 if (!_unregistering)
                 {
@@ -131,7 +146,10 @@ namespace System.Threading
 
                     // Should we wait for callbacks synchronously? Note that we treat the zero handle as the asynchronous case.
                     SafeWaitHandle? safeWaitHandle = waitObject?.SafeWaitHandle;
-                    bool blocking = ((safeWaitHandle != null) && (safeWaitHandle.DangerousGetHandle() == new IntPtr(-1)));
+                    bool blocking = (
+                        (safeWaitHandle != null)
+                        && (safeWaitHandle.DangerousGetHandle() == new IntPtr(-1))
+                    );
 
                     if (blocking)
                     {
@@ -223,5 +241,4 @@ namespace System.Threading
             }
         }
     }
-
 }

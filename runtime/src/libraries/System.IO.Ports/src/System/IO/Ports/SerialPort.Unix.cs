@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.ComponentModel;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Runtime.InteropServices;
 
@@ -14,15 +14,23 @@ namespace System.IO.Ports
         public static string[] GetPortNames()
         {
 #if NETCOREAPP
-            return OperatingSystem.IsLinux() ? GetPortNames_Linux()
-                : OperatingSystem.IsMacOS() ? GetPortNames_OSX()
-                : OperatingSystem.IsFreeBSD() ? GetPortNames_FreeBSD()
+            return OperatingSystem.IsLinux()
+                ? GetPortNames_Linux()
+                : OperatingSystem.IsMacOS()
+                    ? GetPortNames_OSX()
+                    : OperatingSystem.IsFreeBSD()
+                        ? GetPortNames_FreeBSD()
 #else
-            return RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? GetPortNames_Linux()
-                : RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? GetPortNames_OSX()
-                : RuntimeInformation.IsOSPlatform(OSPlatform.Create("FREEBSD")) ? GetPortNames_FreeBSD()
+            return RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
+                ? GetPortNames_Linux()
+                : RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
+                    ? GetPortNames_OSX()
+                    : RuntimeInformation.IsOSPlatform(OSPlatform.Create("FREEBSD"))
+                        ? GetPortNames_FreeBSD()
 #endif
-                : throw new PlatformNotSupportedException(SR.PlatformNotSupported_SerialPort_GetPortNames);
+                        : throw new PlatformNotSupportedException(
+                            SR.PlatformNotSupported_SerialPort_GetPortNames
+                        );
         }
 
         private static string[] GetPortNames_Linux()
@@ -47,13 +55,20 @@ namespace System.IO.Ports
                     // checking for that for non-ttyS entries is incorrect as some uart
                     // devices are incorrectly filtered out
                     bool isTtyS = entry.Name.StartsWith("ttyS", StringComparison.Ordinal);
-                    bool isTtyGS = !isTtyS && entry.Name.StartsWith("ttyGS", StringComparison.Ordinal);
-                    if ((isTtyS &&
-                         (File.Exists(entry.FullName + "/device/id") ||
-                          Directory.Exists(entry.FullName + "/device/of_node"))) ||
-                        (!isTtyS && Directory.Exists(entry.FullName + "/device/tty")) ||
-                        Directory.Exists(sysUsbDir + entry.Name) ||
-                        (isTtyGS && (File.Exists(entry.FullName + "/dev"))))
+                    bool isTtyGS =
+                        !isTtyS && entry.Name.StartsWith("ttyGS", StringComparison.Ordinal);
+                    if (
+                        (
+                            isTtyS
+                            && (
+                                File.Exists(entry.FullName + "/device/id")
+                                || Directory.Exists(entry.FullName + "/device/of_node")
+                            )
+                        )
+                        || (!isTtyS && Directory.Exists(entry.FullName + "/device/tty"))
+                        || Directory.Exists(sysUsbDir + entry.Name)
+                        || (isTtyGS && (File.Exists(entry.FullName + "/dev")))
+                    )
                     {
                         string deviceName = devDir + entry.Name;
                         if (File.Exists(deviceName))
@@ -72,11 +87,13 @@ namespace System.IO.Ports
                 var ports = new List<string>();
                 foreach (var portName in Directory.EnumerateFiles(devDir, "tty*"))
                 {
-                    if (portName.StartsWith("/dev/ttyS", StringComparison.Ordinal) ||
-                        portName.StartsWith("/dev/ttyUSB", StringComparison.Ordinal) ||
-                        portName.StartsWith("/dev/ttyACM", StringComparison.Ordinal) ||
-                        portName.StartsWith("/dev/ttyAMA", StringComparison.Ordinal) ||
-                        portName.StartsWith("/dev/ttymxc", StringComparison.Ordinal))
+                    if (
+                        portName.StartsWith("/dev/ttyS", StringComparison.Ordinal)
+                        || portName.StartsWith("/dev/ttyUSB", StringComparison.Ordinal)
+                        || portName.StartsWith("/dev/ttyACM", StringComparison.Ordinal)
+                        || portName.StartsWith("/dev/ttyAMA", StringComparison.Ordinal)
+                        || portName.StartsWith("/dev/ttymxc", StringComparison.Ordinal)
+                    )
                     {
                         ports.Add(portName);
                     }
@@ -117,7 +134,10 @@ namespace System.IO.Ports
 
             foreach (string name in Directory.GetFiles("/dev", "ttyd*"))
             {
-                if (!name.EndsWith(".init", StringComparison.Ordinal) && !name.EndsWith(".lock", StringComparison.Ordinal))
+                if (
+                    !name.EndsWith(".init", StringComparison.Ordinal)
+                    && !name.EndsWith(".lock", StringComparison.Ordinal)
+                )
                 {
                     ports.Add(name);
                 }
@@ -125,7 +145,10 @@ namespace System.IO.Ports
 
             foreach (string name in Directory.GetFiles("/dev", "cuau*"))
             {
-                if (!name.EndsWith(".init", StringComparison.Ordinal) && !name.EndsWith(".lock", StringComparison.Ordinal))
+                if (
+                    !name.EndsWith(".init", StringComparison.Ordinal)
+                    && !name.EndsWith(".lock", StringComparison.Ordinal)
+                )
                 {
                     ports.Add(name);
                 }

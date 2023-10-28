@@ -19,17 +19,28 @@ namespace System.Net.Http.Headers
 
         public ContentDispositionHeaderValue? ContentDisposition
         {
-            get { return (ContentDispositionHeaderValue?)GetSingleParsedValue(KnownHeaders.ContentDisposition.Descriptor); }
+            get
+            {
+                return (ContentDispositionHeaderValue?)GetSingleParsedValue(
+                    KnownHeaders.ContentDisposition.Descriptor
+                );
+            }
             set { SetOrRemoveParsedValue(KnownHeaders.ContentDisposition.Descriptor, value); }
         }
 
         // Must be a collection (and not provide properties like "GZip", "Deflate", etc.) since the
         // order matters!
         public ICollection<string> ContentEncoding =>
-            _contentEncoding ??= new HttpHeaderValueCollection<string>(KnownHeaders.ContentEncoding.Descriptor, this);
+            _contentEncoding ??= new HttpHeaderValueCollection<string>(
+                KnownHeaders.ContentEncoding.Descriptor,
+                this
+            );
 
         public ICollection<string> ContentLanguage =>
-            _contentLanguage ??= new HttpHeaderValueCollection<string>(KnownHeaders.ContentLanguage.Descriptor, this);
+            _contentLanguage ??= new HttpHeaderValueCollection<string>(
+                KnownHeaders.ContentLanguage.Descriptor,
+                this
+            );
 
         public long? ContentLength
         {
@@ -48,7 +59,10 @@ namespace System.Net.Http.Headers
 
                     if (calculatedLength != null)
                     {
-                        SetParsedValue(KnownHeaders.ContentLength.Descriptor, (object)calculatedLength.Value);
+                        SetParsedValue(
+                            KnownHeaders.ContentLength.Descriptor,
+                            (object)calculatedLength.Value
+                        );
                     }
 
                     return calculatedLength;
@@ -84,25 +98,48 @@ namespace System.Net.Http.Headers
 
         public ContentRangeHeaderValue? ContentRange
         {
-            get { return (ContentRangeHeaderValue?)GetSingleParsedValue(KnownHeaders.ContentRange.Descriptor); }
+            get
+            {
+                return (ContentRangeHeaderValue?)GetSingleParsedValue(
+                    KnownHeaders.ContentRange.Descriptor
+                );
+            }
             set { SetOrRemoveParsedValue(KnownHeaders.ContentRange.Descriptor, value); }
         }
 
         public MediaTypeHeaderValue? ContentType
         {
-            get { return (MediaTypeHeaderValue?)GetSingleParsedValue(KnownHeaders.ContentType.Descriptor); }
+            get
+            {
+                return (MediaTypeHeaderValue?)GetSingleParsedValue(
+                    KnownHeaders.ContentType.Descriptor
+                );
+            }
             set { SetOrRemoveParsedValue(KnownHeaders.ContentType.Descriptor, value); }
         }
 
         public DateTimeOffset? Expires
         {
-            get { return HeaderUtilities.GetDateTimeOffsetValue(KnownHeaders.Expires.Descriptor, this, DateTimeOffset.MinValue); }
+            get
+            {
+                return HeaderUtilities.GetDateTimeOffsetValue(
+                    KnownHeaders.Expires.Descriptor,
+                    this,
+                    DateTimeOffset.MinValue
+                );
+            }
             set { SetOrRemoveParsedValue(KnownHeaders.Expires.Descriptor, value); }
         }
 
         public DateTimeOffset? LastModified
         {
-            get { return HeaderUtilities.GetDateTimeOffsetValue(KnownHeaders.LastModified.Descriptor, this); }
+            get
+            {
+                return HeaderUtilities.GetDateTimeOffsetValue(
+                    KnownHeaders.LastModified.Descriptor,
+                    this
+                );
+            }
             set { SetOrRemoveParsedValue(KnownHeaders.LastModified.Descriptor, value); }
         }
 

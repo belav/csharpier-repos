@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.ComponentModel;
-using System.Xml.Serialization;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace System.Xml.Schema
 {
@@ -49,7 +49,12 @@ namespace System.Xml.Schema
         [XmlIgnore]
         internal XmlSchemaContentProcessing ProcessContentsCorrect
         {
-            get { return _processContents == XmlSchemaContentProcessing.None ? XmlSchemaContentProcessing.Strict : _processContents; }
+            get
+            {
+                return _processContents == XmlSchemaContentProcessing.None
+                    ? XmlSchemaContentProcessing.Strict
+                    : _processContents;
+            }
         }
 
         internal override string NameString

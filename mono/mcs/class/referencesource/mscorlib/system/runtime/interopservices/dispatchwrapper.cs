@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
@@ -13,26 +13,29 @@
 **
 =============================================================================*/
 
-namespace System.Runtime.InteropServices {
-   
+namespace System.Runtime.InteropServices
+{
     using System;
     using System.Security;
     using System.Security.Permissions;
 
     [Serializable]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class DispatchWrapper
     {
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
 #pragma warning disable 618
-        [SecurityPermissionAttribute(SecurityAction.Demand,Flags=SecurityPermissionFlag.UnmanagedCode)]
+        [SecurityPermissionAttribute(
+            SecurityAction.Demand,
+            Flags = SecurityPermissionFlag.UnmanagedCode
+        )]
 #pragma warning restore 618
         public DispatchWrapper(Object obj)
         {
             if (obj != null)
             {
 #if FULL_AOT_RUNTIME || MONOTOUCH
-                throw new PlatformNotSupportedException ();
+                throw new PlatformNotSupportedException();
 #else
                 // Make sure this guy has an IDispatch
                 IntPtr pdisp = Marshal.GetIDispatchForObject(obj);
@@ -44,12 +47,9 @@ namespace System.Runtime.InteropServices {
             m_WrappedObject = obj;
         }
 
-        public Object WrappedObject 
+        public Object WrappedObject
         {
-            get 
-            {
-                return m_WrappedObject;
-            }
+            get { return m_WrappedObject; }
         }
 
         private Object m_WrappedObject;

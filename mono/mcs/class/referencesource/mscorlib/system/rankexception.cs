@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
@@ -14,31 +14,34 @@
 **
 =============================================================================*/
 
-namespace System {
-    
+namespace System
+{
     using System;
     using System.Runtime.Serialization;
-[System.Runtime.InteropServices.ComVisible(true)]
+
+    [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
     public class RankException : SystemException
     {
-        public RankException() 
-            : base(Environment.GetResourceString("Arg_RankException")) {
-            SetErrorCode(__HResults.COR_E_RANK);
-        }
-    
-        public RankException(String message) 
-            : base(message) {
-            SetErrorCode(__HResults.COR_E_RANK);
-        }
-        
-        public RankException(String message, Exception innerException) 
-            : base(message, innerException) {
+        public RankException()
+            : base(Environment.GetResourceString("Arg_RankException"))
+        {
             SetErrorCode(__HResults.COR_E_RANK);
         }
 
-        protected RankException(SerializationInfo info, StreamingContext context) : base(info, context) {
+        public RankException(String message)
+            : base(message)
+        {
+            SetErrorCode(__HResults.COR_E_RANK);
         }
 
+        public RankException(String message, Exception innerException)
+            : base(message, innerException)
+        {
+            SetErrorCode(__HResults.COR_E_RANK);
+        }
+
+        protected RankException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

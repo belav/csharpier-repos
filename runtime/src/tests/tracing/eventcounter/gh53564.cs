@@ -1,22 +1,22 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
 #if USE_MDT_EVENTSOURCE
 using Microsoft.Diagnostics.Tracing;
 #else
 using System.Diagnostics.Tracing;
 #endif
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Diagnostics;
 
 namespace gh53564Tests
 {
     public class RuntimeCounterListener : EventListener
     {
-        public RuntimeCounterListener(){}
+        public RuntimeCounterListener() { }
 
         private DateTime? setToZeroTimestamp = null;
         private DateTime? mostRecentTimestamp = null;
@@ -29,26 +29,47 @@ namespace gh53564Tests
             {
                 Dictionary<string, string> refreshInterval = new Dictionary<string, string>();
 
-                Console.WriteLine($"[{DateTime.UtcNow:hh:mm:ss.fff}] OnEventSourceCreated :: Setting interval to 1");
+                Console.WriteLine(
+                    $"[{DateTime.UtcNow:hh:mm:ss.fff}] OnEventSourceCreated :: Setting interval to 1"
+                );
                 // first set interval to 1 seconds
                 refreshInterval["EventCounterIntervalSec"] = "1";
-                EnableEvents(source, EventLevel.Informational, (EventKeywords)(-1), refreshInterval);
+                EnableEvents(
+                    source,
+                    EventLevel.Informational,
+                    (EventKeywords)(-1),
+                    refreshInterval
+                );
 
                 // wait a moment to get some events
                 Thread.Sleep(TimeSpan.FromSeconds(3));
 
                 // then set interval to 0
-                Console.WriteLine($"[{DateTime.UtcNow:hh:mm:ss.fff}] OnEventSourceCreated :: Setting interval to 0");
+                Console.WriteLine(
+                    $"[{DateTime.UtcNow:hh:mm:ss.fff}] OnEventSourceCreated :: Setting interval to 0"
+                );
                 refreshInterval["EventCounterIntervalSec"] = "0";
-                EnableEvents(source, EventLevel.Informational, (EventKeywords)(-1), refreshInterval);
+                EnableEvents(
+                    source,
+                    EventLevel.Informational,
+                    (EventKeywords)(-1),
+                    refreshInterval
+                );
                 setToZeroTimestamp = DateTime.UtcNow + TimeSpan.FromSeconds(1); // Stash timestamp 1 second after setting to 0
                 setToZero.Set();
 
                 // then attempt to set interval back to 1
                 Thread.Sleep(TimeSpan.FromSeconds(3));
-                Console.WriteLine($"[{DateTime.UtcNow:hh:mm:ss.fff}] OnEventSourceCreated :: Setting interval to 1");
+                Console.WriteLine(
+                    $"[{DateTime.UtcNow:hh:mm:ss.fff}] OnEventSourceCreated :: Setting interval to 1"
+                );
                 refreshInterval["EventCounterIntervalSec"] = "1";
-                EnableEvents(source, EventLevel.Informational, (EventKeywords)(-1), refreshInterval);
+                EnableEvents(
+                    source,
+                    EventLevel.Informational,
+                    (EventKeywords)(-1),
+                    refreshInterval
+                );
             }
         }
 
@@ -59,7 +80,9 @@ namespace gh53564Tests
                 mostRecentTimestamp = eventData.TimeStamp;
                 if (setToZero.WaitOne(0) && mostRecentTimestamp > setToZeroTimestamp)
                 {
-                    Console.WriteLine($"[{DateTime.UtcNow:hh:mm:ss.fff}] OnEventWritten :: Setting ReadyToVerify");
+                    Console.WriteLine(
+                        $"[{DateTime.UtcNow:hh:mm:ss.fff}] OnEventWritten :: Setting ReadyToVerify"
+                    );
                     ReadyToVerify.Set();
                 }
             }
@@ -71,10 +94,16 @@ namespace gh53564Tests
                 return false;
 
             Console.WriteLine($"[{DateTime.UtcNow:hh:mm:ss.fff}] Verify :: Verifying");
-            Console.WriteLine($"[{DateTime.UtcNow:hh:mm:ss.fff}]   setToZeroTimestamp = {setToZeroTimestamp?.ToString("hh:mm:ss.fff") ?? "NULL"}");
-            Console.WriteLine($"[{DateTime.UtcNow:hh:mm:ss.fff}]   mostRecentTimestamp = {mostRecentTimestamp?.ToString("hh:mm:ss.fff") ?? "NULL"}");
+            Console.WriteLine(
+                $"[{DateTime.UtcNow:hh:mm:ss.fff}]   setToZeroTimestamp = {setToZeroTimestamp?.ToString("hh:mm:ss.fff") ?? "NULL"}"
+            );
+            Console.WriteLine(
+                $"[{DateTime.UtcNow:hh:mm:ss.fff}]   mostRecentTimestamp = {mostRecentTimestamp?.ToString("hh:mm:ss.fff") ?? "NULL"}"
+            );
 
-            return (setToZeroTimestamp is null || mostRecentTimestamp is null) ? false : setToZeroTimestamp < mostRecentTimestamp;
+            return (setToZeroTimestamp is null || mostRecentTimestamp is null)
+                ? false
+                : setToZeroTimestamp < mostRecentTimestamp;
         }
     }
 
@@ -94,7 +123,9 @@ namespace gh53564Tests
                     }
                     else
                     {
-                        Console.WriteLine($"Test Failed - did not see one or more of the expected runtime counters.");
+                        Console.WriteLine(
+                            $"Test Failed - did not see one or more of the expected runtime counters."
+                        );
                         return 1;
                     }
                 }

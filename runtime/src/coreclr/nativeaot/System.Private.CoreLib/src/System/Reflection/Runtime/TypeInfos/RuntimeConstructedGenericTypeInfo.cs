@@ -2,16 +2,14 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Text;
-using System.Reflection;
-using System.Diagnostics;
-using System.Collections.Generic;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Reflection;
 using System.Reflection.Runtime.General;
 using System.Reflection.Runtime.TypeInfos;
-
+using System.Text;
 using Internal.Reflection.Core.Execution;
-
 using StructLayoutAttribute = System.Runtime.InteropServices.StructLayoutAttribute;
 
 namespace System.Reflection.Runtime.TypeInfos
@@ -20,7 +18,9 @@ namespace System.Reflection.Runtime.TypeInfos
     // TypeInfos that represent constructed generic types.
     //
     //
-    internal sealed partial class RuntimeConstructedGenericTypeInfo : RuntimeTypeInfo, IKeyedItem<RuntimeConstructedGenericTypeInfo.UnificationKey>
+    internal sealed partial class RuntimeConstructedGenericTypeInfo
+        : RuntimeTypeInfo,
+            IKeyedItem<RuntimeConstructedGenericTypeInfo.UnificationKey>
     {
         private RuntimeConstructedGenericTypeInfo(UnificationKey key)
         {
@@ -29,12 +29,18 @@ namespace System.Reflection.Runtime.TypeInfos
 
         public sealed override bool IsTypeDefinition => false;
         public sealed override bool IsGenericTypeDefinition => false;
+
         protected sealed override bool HasElementTypeImpl() => false;
+
         protected sealed override bool IsArrayImpl() => false;
+
         public sealed override bool IsSZArray => false;
         public sealed override bool IsVariableBoundArray => false;
+
         protected sealed override bool IsByRefImpl() => false;
+
         protected sealed override bool IsPointerImpl() => false;
+
         public sealed override bool IsConstructedGenericType => true;
         public sealed override bool IsGenericParameter => false;
         public sealed override bool IsGenericTypeParameter => false;
@@ -50,9 +56,7 @@ namespace System.Reflection.Runtime.TypeInfos
         //
         // PrepareKey() must be idempodent and thread-safe. It may be invoked multiple times and concurrently.
         //
-        public void PrepareKey()
-        {
-        }
+        public void PrepareKey() { }
 
         //
         // Implements IKeyedItem.Key.
@@ -63,19 +67,12 @@ namespace System.Reflection.Runtime.TypeInfos
         //
         public UnificationKey Key
         {
-            get
-            {
-                return _key;
-            }
+            get { return _key; }
         }
-
 
         public sealed override IEnumerable<CustomAttributeData> CustomAttributes
         {
-            get
-            {
-                return GenericTypeDefinitionTypeInfo.CustomAttributes;
-            }
+            get { return GenericTypeDefinitionTypeInfo.CustomAttributes; }
         }
 
         public sealed override string FullName
@@ -112,18 +109,12 @@ namespace System.Reflection.Runtime.TypeInfos
 
         public sealed override Guid GUID
         {
-            get
-            {
-                return GenericTypeDefinitionTypeInfo.GUID;
-            }
+            get { return GenericTypeDefinitionTypeInfo.GUID; }
         }
 
         public sealed override Assembly Assembly
         {
-            get
-            {
-                return GenericTypeDefinitionTypeInfo.Assembly;
-            }
+            get { return GenericTypeDefinitionTypeInfo.Assembly; }
         }
 
         public sealed override bool ContainsGenericParameters
@@ -146,26 +137,17 @@ namespace System.Reflection.Runtime.TypeInfos
 
         public sealed override string Namespace
         {
-            get
-            {
-                return GenericTypeDefinitionTypeInfo.Namespace;
-            }
+            get { return GenericTypeDefinitionTypeInfo.Namespace; }
         }
 
         public sealed override StructLayoutAttribute StructLayoutAttribute
         {
-            get
-            {
-                return GenericTypeDefinitionTypeInfo.StructLayoutAttribute;
-            }
+            get { return GenericTypeDefinitionTypeInfo.StructLayoutAttribute; }
         }
 
         public sealed override int MetadataToken
         {
-            get
-            {
-                return GenericTypeDefinitionTypeInfo.MetadataToken;
-            }
+            get { return GenericTypeDefinitionTypeInfo.MetadataToken; }
         }
 
         public sealed override string ToString()
@@ -211,50 +193,32 @@ namespace System.Reflection.Runtime.TypeInfos
         //
         internal sealed override RuntimeNamedTypeInfo AnchoringTypeDefinitionForDeclaredMembers
         {
-            get
-            {
-                return (RuntimeNamedTypeInfo)GenericTypeDefinitionTypeInfo;
-            }
+            get { return (RuntimeNamedTypeInfo)GenericTypeDefinitionTypeInfo; }
         }
 
         internal sealed override Type InternalDeclaringType
         {
-            get
-            {
-                return GenericTypeDefinitionTypeInfo.InternalDeclaringType;
-            }
+            get { return GenericTypeDefinitionTypeInfo.InternalDeclaringType; }
         }
 
         internal sealed override string InternalFullNameOfAssembly
         {
-            get
-            {
-                return GenericTypeDefinitionTypeInfo.InternalFullNameOfAssembly;
-            }
+            get { return GenericTypeDefinitionTypeInfo.InternalFullNameOfAssembly; }
         }
 
         public sealed override string Name
         {
-            get
-            {
-                return GenericTypeDefinitionTypeInfo.Name;
-            }
+            get { return GenericTypeDefinitionTypeInfo.Name; }
         }
 
         internal sealed override RuntimeTypeInfo[] InternalRuntimeGenericTypeArguments
         {
-            get
-            {
-                return _key.GenericTypeArguments;
-            }
+            get { return _key.GenericTypeArguments; }
         }
 
         internal sealed override RuntimeTypeHandle InternalTypeHandleIfAvailable
         {
-            get
-            {
-                return _key.TypeHandle;
-            }
+            get { return _key.TypeHandle; }
         }
 
         //
@@ -262,10 +226,7 @@ namespace System.Reflection.Runtime.TypeInfos
         //
         internal sealed override QTypeDefRefOrSpec TypeRefDefOrSpecForBaseType
         {
-            get
-            {
-                return this.GenericTypeDefinitionTypeInfo.TypeRefDefOrSpecForBaseType;
-            }
+            get { return this.GenericTypeDefinitionTypeInfo.TypeRefDefOrSpecForBaseType; }
         }
 
         //
@@ -285,18 +246,12 @@ namespace System.Reflection.Runtime.TypeInfos
         //
         internal sealed override TypeContext TypeContext
         {
-            get
-            {
-                return new TypeContext(this.InternalRuntimeGenericTypeArguments, null);
-            }
+            get { return new TypeContext(this.InternalRuntimeGenericTypeArguments, null); }
         }
 
         private RuntimeTypeInfo GenericTypeDefinitionTypeInfo
         {
-            get
-            {
-                return _key.GenericTypeDefinition;
-            }
+            get { return _key.GenericTypeDefinition; }
         }
 
         private readonly UnificationKey _key;

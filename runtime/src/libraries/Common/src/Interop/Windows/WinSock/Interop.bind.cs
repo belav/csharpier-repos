@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Runtime.InteropServices;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 
 internal static partial class Interop
 {
@@ -13,10 +13,12 @@ internal static partial class Interop
         private static partial SocketError bind(
             SafeSocketHandle socketHandle,
             ReadOnlySpan<byte> socketAddress,
-            int socketAddressSize);
+            int socketAddressSize
+        );
 
         internal static SocketError bind(
             SafeSocketHandle socketHandle,
-            ReadOnlySpan<byte> socketAddress) => bind(socketHandle, socketAddress, socketAddress.Length);
+            ReadOnlySpan<byte> socketAddress
+        ) => bind(socketHandle, socketAddress, socketAddress.Length);
     }
 }

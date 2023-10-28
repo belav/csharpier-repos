@@ -43,14 +43,24 @@ namespace System.Xml.Tests
         private static string s_EXP_NEMP1 = "<NONEMPTY1>ABCDE</NONEMPTY1>";
         private static string s_EXP_NEMP2 = "<NONEMPTY2 val=\"abc\">1234</NONEMPTY2>";
         private static string s_EXP_ELEM1 = "<CHARS2>xxx<MARKUP />yyy</CHARS2>";
-        private static string s_EXP_ELEM2 = "<SKIP3><ELEM1 /><ELEM2>xxx yyy</ELEM2><ELEM3 /></SKIP3>";
-        private static string s_EXP_ELEM3 = "<CONTENT><e1 a1='a1value' a2='a2value'><e2 a1='a1value' a2='a2value'><e3 a1='a1value' a2='a2value'>leave</e3></e2></e1></CONTENT>";
-        private static string s_EXP_ELEM4 = "<COMPLEX>Text<!-- comment --><![CDATA[cdata]]></COMPLEX>";
+        private static string s_EXP_ELEM2 =
+            "<SKIP3><ELEM1 /><ELEM2>xxx yyy</ELEM2><ELEM3 /></SKIP3>";
+        private static string s_EXP_ELEM3 =
+            "<CONTENT><e1 a1='a1value' a2='a2value'><e2 a1='a1value' a2='a2value'><e3 a1='a1value' a2='a2value'>leave</e3></e2></e1></CONTENT>";
+        private static string s_EXP_ELEM4 =
+            "<COMPLEX>Text<!-- comment --><![CDATA[cdata]]></COMPLEX>";
         private static string s_EXP_ELEM4_XSLT = "<COMPLEX>Text<!-- comment -->cdata</COMPLEX>";
-        private static string s_EXP_ENT1_EXPAND_ALL = "<ENTITY1 att1=\"xxx&lt;xxxAxxxCxxxNO_REFERENCEe1;xxx\">xxx&gt;xxxBxxxDxxxNO_REFERENCEe1;xxx</ENTITY1>";
-        private static string s_EXP_ENT1_EXPAND_CHAR = "<ENTITY1 att1=\"xxx&lt;xxxAxxxCxxx&e1;xxx\">xxx&gt;xxxBxxxDxxx&e1;xxx</ENTITY1>";
+        private static string s_EXP_ENT1_EXPAND_ALL =
+            "<ENTITY1 att1=\"xxx&lt;xxxAxxxCxxxNO_REFERENCEe1;xxx\">xxx&gt;xxxBxxxDxxxNO_REFERENCEe1;xxx</ENTITY1>";
+        private static string s_EXP_ENT1_EXPAND_CHAR =
+            "<ENTITY1 att1=\"xxx&lt;xxxAxxxCxxx&e1;xxx\">xxx&gt;xxxBxxxDxxx&e1;xxx</ENTITY1>";
 
-        private int TestOuterOnElement(string strElem, string strOuterXml, string strNextElemName, bool bWhitespace)
+        private int TestOuterOnElement(
+            string strElem,
+            string strOuterXml,
+            string strNextElemName,
+            bool bWhitespace
+        )
         {
             ReloadSource();
             DataReader.PositionOnElement(strElem);
@@ -59,20 +69,32 @@ namespace System.Xml.Tests
 
             if (bWhitespace)
             {
-                if (!(IsXsltReader() || IsXPathNavigatorReader()))// xslt doesn't return whitespace
+                if (!(IsXsltReader() || IsXPathNavigatorReader())) // xslt doesn't return whitespace
                 {
                     if (IsCoreReader())
                     {
-                        CError.Compare(DataReader.VerifyNode(XmlNodeType.Whitespace, string.Empty, "\n"), true, "vn");
+                        CError.Compare(
+                            DataReader.VerifyNode(XmlNodeType.Whitespace, string.Empty, "\n"),
+                            true,
+                            "vn"
+                        );
                     }
                     else
                     {
-                        CError.Compare(DataReader.VerifyNode(XmlNodeType.Whitespace, string.Empty, "\r\n"), true, "vn");
+                        CError.Compare(
+                            DataReader.VerifyNode(XmlNodeType.Whitespace, string.Empty, "\r\n"),
+                            true,
+                            "vn"
+                        );
                     }
                     DataReader.Read();
                 }
             }
-            CError.Compare(DataReader.VerifyNode(XmlNodeType.Element, strNextElemName, string.Empty), true, "vn2");
+            CError.Compare(
+                DataReader.VerifyNode(XmlNodeType.Element, strNextElemName, string.Empty),
+                true,
+                "vn2"
+            );
 
             return TEST_PASS;
         }
@@ -87,7 +109,11 @@ namespace System.Xml.Tests
             string strExpected = string.Format("{0}=\"{1}\"", strName, strValue);
 
             CError.Compare(DataReader.ReadOuterXml(), strExpected, "outer");
-            CError.Compare(DataReader.VerifyNode(XmlNodeType.Attribute, strName, strValue), true, "vn");
+            CError.Compare(
+                DataReader.VerifyNode(XmlNodeType.Attribute, strName, strValue),
+                true,
+                "vn"
+            );
 
             return TEST_PASS;
         }
@@ -206,7 +232,14 @@ namespace System.Xml.Tests
         {
             string strExpected;
 
-            if (IsXsltReader() || IsXmlNodeReader() || IsXmlNodeReaderDataDoc() || IsXmlValidatingReader() || IsCoreReader() || IsXPathNavigatorReader())
+            if (
+                IsXsltReader()
+                || IsXmlNodeReader()
+                || IsXmlNodeReaderDataDoc()
+                || IsXmlValidatingReader()
+                || IsCoreReader()
+                || IsXPathNavigatorReader()
+            )
             {
                 strExpected = s_EXP_ENT1_EXPAND_ALL;
             }
@@ -214,7 +247,6 @@ namespace System.Xml.Tests
             {
                 strExpected = s_EXP_ENT1_EXPAND_CHAR;
             }
-
 
             return TestOuterOnElement(s_ENT1, strExpected, s_NEXT6, false);
         }
@@ -237,7 +269,10 @@ namespace System.Xml.Tests
             return TestOuterOnAttribute(s_NEMP2, "val", "abc");
         }
 
-        [Variation("ReadOuterXml on attribute with entities, EntityHandling = ExpandEntities", Pri = 0)]
+        [Variation(
+            "ReadOuterXml on attribute with entities, EntityHandling = ExpandEntities",
+            Pri = 0
+        )]
         public int ReadOuterXml15()
         {
             ReloadSource();
@@ -246,7 +281,14 @@ namespace System.Xml.Tests
             DataReader.MoveToAttribute(DataReader.AttributeCount / 2);
 
             string strExpected;
-            if (IsXsltReader() || IsXmlNodeReader() || IsXmlNodeReaderDataDoc() || IsXmlValidatingReader() || IsCoreReader() || IsXPathNavigatorReader())
+            if (
+                IsXsltReader()
+                || IsXmlNodeReader()
+                || IsXmlNodeReaderDataDoc()
+                || IsXmlValidatingReader()
+                || IsCoreReader()
+                || IsXPathNavigatorReader()
+            )
                 strExpected = "att1=\"xxx&lt;xxxAxxxCxxxNO_REFERENCEe1;xxx\"";
             else
             {
@@ -254,9 +296,25 @@ namespace System.Xml.Tests
             }
             CError.Compare(DataReader.ReadOuterXml(), strExpected, "outer");
             if (IsXmlTextReader())
-                CError.Compare(DataReader.VerifyNode(XmlNodeType.Attribute, "att1", ST_ENT1_ATT_EXPAND_CHAR_ENTITIES), true, "vn");
+                CError.Compare(
+                    DataReader.VerifyNode(
+                        XmlNodeType.Attribute,
+                        "att1",
+                        ST_ENT1_ATT_EXPAND_CHAR_ENTITIES
+                    ),
+                    true,
+                    "vn"
+                );
             else
-                CError.Compare(DataReader.VerifyNode(XmlNodeType.Attribute, "att1", ST_ENT1_ATT_EXPAND_ENTITIES), true, "vn");
+                CError.Compare(
+                    DataReader.VerifyNode(
+                        XmlNodeType.Attribute,
+                        "att1",
+                        ST_ENT1_ATT_EXPAND_ENTITIES
+                    ),
+                    true,
+                    "vn"
+                );
 
             return TEST_PASS;
         }
@@ -306,7 +364,12 @@ namespace System.Xml.Tests
         [Variation("ReadOuterXml on EntityReference")]
         public int ReadOuterXml22()
         {
-            if (IsXsltReader() || IsXmlNodeReaderDataDoc() || IsCoreReader() || IsXPathNavigatorReader())
+            if (
+                IsXsltReader()
+                || IsXmlNodeReaderDataDoc()
+                || IsCoreReader()
+                || IsXPathNavigatorReader()
+            )
                 return TEST_SKIPPED;
 
             return TestOuterOnNodeType(XmlNodeType.EntityReference);
@@ -315,7 +378,13 @@ namespace System.Xml.Tests
         [Variation("ReadOuterXml on EndEntity")]
         public int ReadOuterXml23()
         {
-            if (IsXmlTextReader() || IsXsltReader() || IsXmlNodeReaderDataDoc() || IsCoreReader() || IsXPathNavigatorReader())
+            if (
+                IsXmlTextReader()
+                || IsXsltReader()
+                || IsXmlNodeReaderDataDoc()
+                || IsCoreReader()
+                || IsXPathNavigatorReader()
+            )
                 return TEST_SKIPPED;
 
             return TestOuterOnNodeType(XmlNodeType.EndEntity);
@@ -343,9 +412,17 @@ namespace System.Xml.Tests
 
             CError.Compare(DataReader.ReadOuterXml().ToLower(), "encoding=\"utf-8\"", "outer");
             if (IsBinaryReader())
-                CError.Compare(DataReader.VerifyNode(XmlNodeType.Attribute, "encoding", "utf-8"), true, "vn");
+                CError.Compare(
+                    DataReader.VerifyNode(XmlNodeType.Attribute, "encoding", "utf-8"),
+                    true,
+                    "vn"
+                );
             else
-                CError.Compare(DataReader.VerifyNode(XmlNodeType.Attribute, "encoding", "UTF-8"), true, "vn");
+                CError.Compare(
+                    DataReader.VerifyNode(XmlNodeType.Attribute, "encoding", "UTF-8"),
+                    true,
+                    "vn"
+                );
             return TEST_PASS;
         }
 
@@ -361,7 +438,11 @@ namespace System.Xml.Tests
             DataReader.MoveToAttribute(DataReader.AttributeCount / 2);
 
             CError.Compare(DataReader.ReadOuterXml(), "SYSTEM=\"AllNodeTypes.dtd\"", "outer");
-            CError.Compare(DataReader.VerifyNode(XmlNodeType.Attribute, "SYSTEM", "AllNodeTypes.dtd"), true, "vn");
+            CError.Compare(
+                DataReader.VerifyNode(XmlNodeType.Attribute, "SYSTEM", "AllNodeTypes.dtd"),
+                true,
+                "vn"
+            );
 
             return TEST_PASS;
         }
@@ -370,7 +451,12 @@ namespace System.Xml.Tests
         public int TRReadOuterXml27()
         {
             string strExpected;
-            if (IsXsltReader() || IsXmlNodeReaderDataDoc() || IsCoreReader() || IsXPathNavigatorReader())
+            if (
+                IsXsltReader()
+                || IsXmlNodeReaderDataDoc()
+                || IsCoreReader()
+                || IsXPathNavigatorReader()
+            )
                 strExpected = s_EXP_ENT1_EXPAND_ALL;
             else
             {
@@ -388,7 +474,11 @@ namespace System.Xml.Tests
             DataReader.PositionOnElement(s_ENT1);
 
             CError.Compare(DataReader.ReadOuterXml(), strExpected, "outer");
-            CError.Compare(DataReader.VerifyNode(XmlNodeType.Element, s_NEXT6, string.Empty), true, "vn");
+            CError.Compare(
+                DataReader.VerifyNode(XmlNodeType.Element, s_NEXT6, string.Empty),
+                true,
+                "vn"
+            );
 
             return TEST_PASS;
         }
@@ -397,7 +487,12 @@ namespace System.Xml.Tests
         public int TRReadOuterXml28()
         {
             string strExpected;
-            if (IsXsltReader() || IsXmlNodeReaderDataDoc() || IsCoreReader() || IsXPathNavigatorReader())
+            if (
+                IsXsltReader()
+                || IsXmlNodeReaderDataDoc()
+                || IsCoreReader()
+                || IsXPathNavigatorReader()
+            )
                 strExpected = "att1=\"xxx&lt;xxxAxxxCxxxNO_REFERENCEe1;xxx\"";
             else
             {
@@ -417,9 +512,25 @@ namespace System.Xml.Tests
             DataReader.MoveToAttribute(DataReader.AttributeCount / 2);
             CError.Compare(DataReader.ReadOuterXml(), strExpected, "outer");
             if (IsXmlTextReader())
-                CError.Compare(DataReader.VerifyNode(XmlNodeType.Attribute, "att1", ST_ENT1_ATT_EXPAND_CHAR_ENTITIES), true, "vn");
+                CError.Compare(
+                    DataReader.VerifyNode(
+                        XmlNodeType.Attribute,
+                        "att1",
+                        ST_ENT1_ATT_EXPAND_CHAR_ENTITIES
+                    ),
+                    true,
+                    "vn"
+                );
             else
-                CError.Compare(DataReader.VerifyNode(XmlNodeType.Attribute, "att1", ST_ENT1_ATT_EXPAND_ENTITIES), true, "vn");
+                CError.Compare(
+                    DataReader.VerifyNode(
+                        XmlNodeType.Attribute,
+                        "att1",
+                        ST_ENT1_ATT_EXPAND_ENTITIES
+                    ),
+                    true,
+                    "vn"
+                );
 
             return TEST_PASS;
         }
@@ -448,7 +559,9 @@ namespace System.Xml.Tests
         [Variation("Read OuterXml when Namespaces=false and has an attribute xmlns")]
         public int ReadOuterXmlWhenNamespacesIgnoredWorksWithXmlns()
         {
-            ReloadSourceStr("<?xml version='1.0' encoding='utf-8' ?> <foo xmlns='testing'><bar id='1'/></foo>");
+            ReloadSourceStr(
+                "<?xml version='1.0' encoding='utf-8' ?> <foo xmlns='testing'><bar id='1'/></foo>"
+            );
             if (IsXmlTextReader() || IsXmlValidatingReader())
                 DataReader.Namespaces = false;
             DataReader.MoveToContent();
@@ -456,26 +569,35 @@ namespace System.Xml.Tests
             return TEST_PASS;
         }
 
-        [Variation("XmlReader.ReadOuterXml outputs multiple namespace declarations if called within multiple XmlReader.ReadSubtree() calls")]
+        [Variation(
+            "XmlReader.ReadOuterXml outputs multiple namespace declarations if called within multiple XmlReader.ReadSubtree() calls"
+        )]
         public int SubtreeXmlReaderOutputsSingleNamespaceDeclaration()
         {
-            string xml = @"<root xmlns = ""http://www.test.com/"">    <device>        <thing>1</thing>    </device></root>";
+            string xml =
+                @"<root xmlns = ""http://www.test.com/"">    <device>        <thing>1</thing>    </device></root>";
             ReloadSourceStr(xml);
             DataReader.ReadToFollowing("device");
             Foo(DataReader.ReadSubtree());
             return TEST_PASS;
         }
+
         private void Foo(XmlReader reader)
         {
             reader.Read();
             Bar(reader.ReadSubtree());
         }
+
         private void Bar(XmlReader reader)
         {
             reader.Read();
             string foo = reader.ReadOuterXml();
-            CError.Compare(foo, "<device xmlns=\"http://www.test.com/\">        <thing>1</thing>    </device>",
-                "<device xmlns=\"http://www.test.com/\"><thing>1</thing></device>", "mismatch");
+            CError.Compare(
+                foo,
+                "<device xmlns=\"http://www.test.com/\">        <thing>1</thing>    </device>",
+                "<device xmlns=\"http://www.test.com/\"><thing>1</thing></device>",
+                "mismatch"
+            );
         }
     }
 }

@@ -31,50 +31,96 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Classification
             _service = service;
         }
 
-        public void AddLexicalClassifications(SourceText text, TextSpan textSpan, SegmentedList<ClassifiedSpan> result, CancellationToken cancellationToken)
+        public void AddLexicalClassifications(
+            SourceText text,
+            TextSpan textSpan,
+            SegmentedList<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        )
         {
             using var _ = s_listPool.GetPooledObject(out var list);
             _service.AddLexicalClassifications(text, textSpan, list, cancellationToken);
             result.AddRange(list);
         }
 
-        public async Task AddSemanticClassificationsAsync(Document document, TextSpan textSpan, ClassificationOptions options, SegmentedList<ClassifiedSpan> result, CancellationToken cancellationToken)
+        public async Task AddSemanticClassificationsAsync(
+            Document document,
+            TextSpan textSpan,
+            ClassificationOptions options,
+            SegmentedList<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        )
         {
             using var _ = s_listPool.GetPooledObject(out var list);
-            await _service.AddSemanticClassificationsAsync(document, textSpan, list, cancellationToken).ConfigureAwait(false);
+            await _service
+                .AddSemanticClassificationsAsync(document, textSpan, list, cancellationToken)
+                .ConfigureAwait(false);
             result.AddRange(list);
         }
 
-        public async Task AddSyntacticClassificationsAsync(Document document, TextSpan textSpan, SegmentedList<ClassifiedSpan> result, CancellationToken cancellationToken)
+        public async Task AddSyntacticClassificationsAsync(
+            Document document,
+            TextSpan textSpan,
+            SegmentedList<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        )
         {
             using var _ = s_listPool.GetPooledObject(out var list);
-            await _service.AddSyntacticClassificationsAsync(document, textSpan, list, cancellationToken).ConfigureAwait(false);
+            await _service
+                .AddSyntacticClassificationsAsync(document, textSpan, list, cancellationToken)
+                .ConfigureAwait(false);
             result.AddRange(list);
         }
 
-        public ClassifiedSpan AdjustStaleClassification(SourceText text, ClassifiedSpan classifiedSpan)
+        public ClassifiedSpan AdjustStaleClassification(
+            SourceText text,
+            ClassifiedSpan classifiedSpan
+        )
         {
             return _service.AdjustStaleClassification(text, classifiedSpan);
         }
 
-        public void AddSyntacticClassifications(SolutionServices services, SyntaxNode root, TextSpan textSpan, SegmentedList<ClassifiedSpan> result, CancellationToken cancellationToken)
+        public void AddSyntacticClassifications(
+            SolutionServices services,
+            SyntaxNode root,
+            TextSpan textSpan,
+            SegmentedList<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        )
         {
             // F# does not support syntax.
         }
 
-        public TextChangeRange? ComputeSyntacticChangeRange(SolutionServices services, SyntaxNode oldRoot, SyntaxNode newRoot, TimeSpan timeout, CancellationToken cancellationToken)
+        public TextChangeRange? ComputeSyntacticChangeRange(
+            SolutionServices services,
+            SyntaxNode oldRoot,
+            SyntaxNode newRoot,
+            TimeSpan timeout,
+            CancellationToken cancellationToken
+        )
         {
             // F# does not support syntax.
             return null;
         }
 
-        public ValueTask<TextChangeRange?> ComputeSyntacticChangeRangeAsync(Document oldDocument, Document newDocument, TimeSpan timeout, CancellationToken cancellationToken)
+        public ValueTask<TextChangeRange?> ComputeSyntacticChangeRangeAsync(
+            Document oldDocument,
+            Document newDocument,
+            TimeSpan timeout,
+            CancellationToken cancellationToken
+        )
         {
             // not currently supported by F#.
             return new();
         }
 
-        public Task AddEmbeddedLanguageClassificationsAsync(Document document, TextSpan textSpan, ClassificationOptions options, SegmentedList<ClassifiedSpan> result, CancellationToken cancellationToken)
+        public Task AddEmbeddedLanguageClassificationsAsync(
+            Document document,
+            TextSpan textSpan,
+            ClassificationOptions options,
+            SegmentedList<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        )
         {
             return Task.CompletedTask;
         }

@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Xml;
 using System.Text;
+using System.Xml;
 
 namespace System.Security.Cryptography.Xml
 {
@@ -23,13 +23,21 @@ namespace System.Security.Cryptography.Xml
             set { _isInNodeSet = value; }
         }
 
-        public void Write(StringBuilder strBuilder, DocPosition docPos, AncestralNamespaceContextManager anc)
+        public void Write(
+            StringBuilder strBuilder,
+            DocPosition docPos,
+            AncestralNamespaceContextManager anc
+        )
         {
             if (IsInNodeSet)
                 strBuilder.Append(Utils.EscapeTextData(Value));
         }
 
-        public void WriteHash(HashAlgorithm hash, DocPosition docPos, AncestralNamespaceContextManager anc)
+        public void WriteHash(
+            HashAlgorithm hash,
+            DocPosition docPos,
+            AncestralNamespaceContextManager anc
+        )
         {
             if (IsInNodeSet)
             {

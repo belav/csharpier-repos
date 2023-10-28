@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
     internal class DefaultNavigateToSearchHost(
         Solution solution,
         IAsynchronousOperationListener asyncListener,
-        CancellationToken disposalToken) : INavigateToSearcherHost
+        CancellationToken disposalToken
+    ) : INavigateToSearcherHost
     {
         private readonly Solution _solution = solution;
         private readonly IAsynchronousOperationListener _asyncListener = asyncListener;
@@ -44,8 +45,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
         private static readonly object s_gate = new();
         private static Task? s_remoteHostHydrateTask = null;
 
-        public INavigateToSearchService? GetNavigateToSearchService(Project project)
-            => project.GetLanguageService<INavigateToSearchService>();
+        public INavigateToSearchService? GetNavigateToSearchService(Project project) =>
+            project.GetLanguageService<INavigateToSearchService>();
 
         public async ValueTask<bool> IsFullyLoadedAsync(CancellationToken cancellationToken)
         {
@@ -54,7 +55,9 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             // We consider ourselves fully loaded when both the project system has completed loaded
             // us, and we've totally hydrated the oop side.  Until that happens, we'll attempt to
             // return cached data from languages that support that.
-            var isProjectSystemFullyLoaded = await service.IsFullyLoadedAsync(cancellationToken).ConfigureAwait(false);
+            var isProjectSystemFullyLoaded = await service
+                .IsFullyLoadedAsync(cancellationToken)
+                .ConfigureAwait(false);
             if (!isProjectSystemFullyLoaded)
                 return false;
 
@@ -85,26 +88,43 @@ namespace Microsoft.CodeAnalysis.NavigateTo
                 if (s_remoteHostHydrateTask == null)
                 {
                     // If there are no projects in this solution that use OOP, then there's nothing we need to do.
-                    if (_solution.Projects.All(p => !RemoteSupportedLanguages.IsSupported(p.Language)))
+                    if (
+                        _solution
+                            .Projects
+                            .All(p => !RemoteSupportedLanguages.IsSupported(p.Language))
+                    )
                     {
                         s_remoteHostHydrateTask = Task.CompletedTask;
                     }
                     else
                     {
-                        var asyncToken = _asyncListener.BeginAsyncOperation(nameof(GetRemoteHostHydrateTask));
+                        var asyncToken = _asyncListener.BeginAsyncOperation(
+                            nameof(GetRemoteHostHydrateTask)
+                        );
 
-                        s_remoteHostHydrateTask = Task.Run(async () =>
-                        {
-                            var client = await RemoteHostClient.TryGetClientAsync(_solution.Services, _disposalToken).ConfigureAwait(false);
-                            if (client != null)
+                        s_remoteHostHydrateTask = Task.Run(
+                            async () =>
                             {
-                                await client.TryInvokeAsync<IRemoteNavigateToSearchService>(
-                                    _solution,
-                                    (service, solutionInfo, cancellationToken) =>
-                                    service.HydrateAsync(solutionInfo, cancellationToken),
-                                    _disposalToken).ConfigureAwait(false);
-                            }
-                        }, _disposalToken);
+                                var client = await RemoteHostClient
+                                    .TryGetClientAsync(_solution.Services, _disposalToken)
+                                    .ConfigureAwait(false);
+                                if (client != null)
+                                {
+                                    await client
+                                        .TryInvokeAsync<IRemoteNavigateToSearchService>(
+                                            _solution,
+                                            (service, solutionInfo, cancellationToken) =>
+                                                service.HydrateAsync(
+                                                    solutionInfo,
+                                                    cancellationToken
+                                                ),
+                                            _disposalToken
+                                        )
+                                        .ConfigureAwait(false);
+                                }
+                            },
+                            _disposalToken
+                        );
                         s_remoteHostHydrateTask.CompletesAsyncOperation(asyncToken);
                     }
                 }

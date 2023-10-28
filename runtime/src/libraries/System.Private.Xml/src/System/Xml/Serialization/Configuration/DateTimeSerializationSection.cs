@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Configuration;
 using System.ComponentModel;
+using System.Configuration;
 using System.Globalization;
 using System.Reflection;
 
@@ -18,8 +18,6 @@ namespace System.Xml.Serialization.Configuration
             Local = 2,
         }
 
-        public DateTimeSerializationSection()
-        {
-        }
+        public DateTimeSerializationSection() { }
     }
 }

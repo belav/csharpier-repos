@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,14 +33,19 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Discovery
 {
-	public class ResolveCompletedEventArgs : AsyncCompletedEventArgs
-	{
-		internal ResolveCompletedEventArgs (ResolveResponse result, Exception error, bool cancelled, object userState)
-			: base (error, cancelled, userState)
-		{
-			this.Result = result;
-		}
+    public class ResolveCompletedEventArgs : AsyncCompletedEventArgs
+    {
+        internal ResolveCompletedEventArgs(
+            ResolveResponse result,
+            Exception error,
+            bool cancelled,
+            object userState
+        )
+            : base(error, cancelled, userState)
+        {
+            this.Result = result;
+        }
 
-		public ResolveResponse Result { get; private set; }
-	}
+        public ResolveResponse Result { get; private set; }
+    }
 }

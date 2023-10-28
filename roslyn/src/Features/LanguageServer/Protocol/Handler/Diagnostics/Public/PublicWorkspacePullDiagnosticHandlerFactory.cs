@@ -25,7 +25,8 @@ internal sealed class PublicWorkspacePullDiagnosticHandlerFactory : ILspServiceF
         LspWorkspaceRegistrationService registrationService,
         IDiagnosticAnalyzerService analyzerService,
         IDiagnosticsRefresher diagnosticsRefresher,
-        IGlobalOptionService globalOptions)
+        IGlobalOptionService globalOptions
+    )
     {
         _registrationService = registrationService;
         _analyzerService = analyzerService;
@@ -33,9 +34,18 @@ internal sealed class PublicWorkspacePullDiagnosticHandlerFactory : ILspServiceF
         _globalOptions = globalOptions;
     }
 
-    public ILspService CreateILspService(LspServices lspServices, WellKnownLspServerKinds serverKind)
+    public ILspService CreateILspService(
+        LspServices lspServices,
+        WellKnownLspServerKinds serverKind
+    )
     {
         var workspaceManager = lspServices.GetRequiredService<LspWorkspaceManager>();
-        return new PublicWorkspacePullDiagnosticsHandler(workspaceManager, _registrationService, _analyzerService, _diagnosticsRefresher, _globalOptions);
+        return new PublicWorkspacePullDiagnosticsHandler(
+            workspaceManager,
+            _registrationService,
+            _analyzerService,
+            _diagnosticsRefresher,
+            _globalOptions
+        );
     }
 }

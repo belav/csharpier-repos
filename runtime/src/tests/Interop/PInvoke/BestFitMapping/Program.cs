@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Text;
 using System.Runtime.InteropServices;
+using System.Text;
 using TestLibrary;
 
 public class Program
@@ -12,7 +12,9 @@ public class Program
     {
         if (System.Globalization.CultureInfo.CurrentCulture.Name != "en-US")
         {
-            Console.WriteLine("Non-US English platforms are not supported.\nPassing without running tests");
+            Console.WriteLine(
+                "Non-US English platforms are not supported.\nPassing without running tests"
+            );
 
             Console.WriteLine("--- Success");
             return 100;
@@ -34,7 +36,9 @@ public class Program
             LPStr.PInvoke_True_False.RunTest();
             LPStr.PInvoke_True_True.RunTest();
             return 100;
-        } catch (Exception e){
+        }
+        catch (Exception e)
+        {
             Console.WriteLine($"Test Failure: {e}");
             return 101;
         }

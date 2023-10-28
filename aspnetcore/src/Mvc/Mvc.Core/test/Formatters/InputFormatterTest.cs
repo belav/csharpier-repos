@@ -41,7 +41,8 @@ public class InputFormatterTest
             modelName: string.Empty,
             modelState: new ModelStateDictionary(),
             metadata: metadata,
-            readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader);
+            readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader
+        );
 
         // Act
         var result = formatter.CanRead(context);
@@ -61,7 +62,9 @@ public class InputFormatterTest
     [Theory]
     [InlineData("multipart/mixed; boundary=gc0p4Jq0M2Yt08j34c0p")]
     [InlineData("multipart/mixed; boundary=gc0p4Jq0M2Yt08j34c0p; undefined=ignored")]
-    public void MultipartFormatter_CanRead_ReturnsTrueForSupportedMediaTypes(string requestContentType)
+    public void MultipartFormatter_CanRead_ReturnsTrueForSupportedMediaTypes(
+        string requestContentType
+    )
     {
         // Arrange
         var formatter = new MultipartFormatter();
@@ -75,7 +78,8 @@ public class InputFormatterTest
             modelName: string.Empty,
             modelState: new ModelStateDictionary(),
             metadata: metadata,
-            readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader);
+            readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader
+        );
 
         // Act
         var result = formatter.CanRead(context);
@@ -92,7 +96,9 @@ public class InputFormatterTest
     [InlineData("application/xml")]
     [InlineData("application/xml-dtd; undefined=ignored")]
     [InlineData("text/html")]
-    public void MultipartFormatter_CanRead_ReturnsFalseForUnsupportedMediaTypes(string requestContentType)
+    public void MultipartFormatter_CanRead_ReturnsFalseForUnsupportedMediaTypes(
+        string requestContentType
+    )
     {
         // Arrange
         var formatter = new MultipartFormatter();
@@ -106,7 +112,8 @@ public class InputFormatterTest
             modelName: string.Empty,
             modelState: new ModelStateDictionary(),
             metadata: metadata,
-            readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader);
+            readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader
+        );
 
         // Act
         var result = formatter.CanRead(context);
@@ -126,7 +133,9 @@ public class InputFormatterTest
     [Theory]
     [InlineData("multipart/mixed; boundary=gc0p4Jq0M2Yt08j34c0p")]
     [InlineData("multipart/mixed; boundary=gc0p4Jq0M2Yt08j34c0p; undefined=ignored")]
-    public void MultipartMixedFormatter_CanRead_ReturnsTrueForSupportedMediaTypes(string requestContentType)
+    public void MultipartMixedFormatter_CanRead_ReturnsTrueForSupportedMediaTypes(
+        string requestContentType
+    )
     {
         // Arrange
         var formatter = new MultipartMixedFormatter();
@@ -140,7 +149,8 @@ public class InputFormatterTest
             modelName: string.Empty,
             modelState: new ModelStateDictionary(),
             metadata: metadata,
-            readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader);
+            readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader
+        );
 
         // Act
         var result = formatter.CanRead(context);
@@ -157,7 +167,9 @@ public class InputFormatterTest
     [InlineData("application/xml")]
     [InlineData("application/xml-dtd; undefined=ignored")]
     [InlineData("text/html")]
-    public void MultipartMixedFormatter_CanRead_ReturnsFalseForUnsupportedMediaTypes(string requestContentType)
+    public void MultipartMixedFormatter_CanRead_ReturnsFalseForUnsupportedMediaTypes(
+        string requestContentType
+    )
     {
         // Arrange
         var formatter = new MultipartMixedFormatter();
@@ -171,7 +183,8 @@ public class InputFormatterTest
             modelName: string.Empty,
             modelState: new ModelStateDictionary(),
             metadata: metadata,
-            readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader);
+            readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader
+        );
 
         // Act
         var result = formatter.CanRead(context);
@@ -185,7 +198,9 @@ public class InputFormatterTest
         public MathMLFormatter()
         {
             SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("application/mathml-content+xml"));
-            SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("application/mathml-presentation+xml"));
+            SupportedMediaTypes.Add(
+                MediaTypeHeaderValue.Parse("application/mathml-presentation+xml")
+            );
             SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("application/mathml+xml"));
         }
     }
@@ -208,7 +223,8 @@ public class InputFormatterTest
             modelName: string.Empty,
             modelState: new ModelStateDictionary(),
             metadata: metadata,
-            readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader);
+            readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader
+        );
 
         // Act
         var result = formatter.CanRead(context);
@@ -224,7 +240,9 @@ public class InputFormatterTest
     [InlineData("multipart/mixed; boundary=gc0p4Jq0M2Yt08j34c0p")]
     [InlineData("multipart/mixed; boundary=gc0p4Jq0M2Yt08j34c0p; undefined=ignored")]
     [InlineData("text/html")]
-    public void MathMLFormatter_CanRead_ReturnsFalseForUnsupportedMediaTypes(string requestContentType)
+    public void MathMLFormatter_CanRead_ReturnsFalseForUnsupportedMediaTypes(
+        string requestContentType
+    )
     {
         // Arrange
         var formatter = new MathMLFormatter();
@@ -238,7 +256,8 @@ public class InputFormatterTest
             modelName: string.Empty,
             modelState: new ModelStateDictionary(),
             metadata: metadata,
-            readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader);
+            readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader
+        );
 
         // Act
         var result = formatter.CanRead(context);
@@ -276,7 +295,8 @@ public class InputFormatterTest
             modelName: string.Empty,
             modelState: new ModelStateDictionary(),
             metadata: metadata,
-            readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader);
+            readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader
+        );
 
         // Act
         var result = formatter.CanRead(context);
@@ -305,7 +325,8 @@ public class InputFormatterTest
             modelName: string.Empty,
             modelState: new ModelStateDictionary(),
             metadata: metadata,
-            readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader);
+            readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader
+        );
 
         // Act
         var result = formatter.CanRead(context);
@@ -323,7 +344,10 @@ public class InputFormatterTest
         formatter.SupportedTypes.Add(typeof(string));
 
         // Act
-        var results = formatter.GetSupportedContentTypes(contentType: null, objectType: typeof(int));
+        var results = formatter.GetSupportedContentTypes(
+            contentType: null,
+            objectType: typeof(int)
+        );
 
         // Assert
         Assert.Null(results);
@@ -338,7 +362,10 @@ public class InputFormatterTest
         formatter.SupportedTypes.Add(typeof(string));
 
         // Act
-        var results = formatter.GetSupportedContentTypes(contentType: null, objectType: typeof(string));
+        var results = formatter.GetSupportedContentTypes(
+            contentType: null,
+            objectType: typeof(string)
+        );
 
         // Assert
         Assert.Collection(results, c => Assert.Equal("text/xml", c));
@@ -353,13 +380,17 @@ public class InputFormatterTest
         formatter.SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("text/xml"));
 
         // Act
-        var results = formatter.GetSupportedContentTypes(contentType: null, objectType: typeof(string));
+        var results = formatter.GetSupportedContentTypes(
+            contentType: null,
+            objectType: typeof(string)
+        );
 
         // Assert
         Assert.Collection(
             results.OrderBy(c => c.ToString()),
             c => Assert.Equal("application/xml", c),
-            c => Assert.Equal("text/xml", c));
+            c => Assert.Equal("text/xml", c)
+        );
     }
 
     [Fact]
@@ -387,7 +418,8 @@ public class InputFormatterTest
             string.Empty,
             new ModelStateDictionary(),
             new EmptyModelMetadataProvider().GetMetadataForType(typeof(object)),
-            (s, e) => new StreamReader(s, e));
+            (s, e) => new StreamReader(s, e)
+        );
 
         // Act & Assert
         Assert.Throws<InvalidOperationException>(() => formatter.CanRead(context));
@@ -401,13 +433,17 @@ public class InputFormatterTest
 
         // Act & Assert
         Assert.Throws<InvalidOperationException>(
-            () => formatter.GetSupportedContentTypes("application/json", typeof(object)));
+            () => formatter.GetSupportedContentTypes("application/json", typeof(object))
+        );
     }
 
     [Theory]
     [InlineData(true, true)]
     [InlineData(false, false)]
-    public async Task ReadAsync_WithEmptyRequest_ReturnsNoValueResultWhenExpected(bool allowEmptyInputValue, bool expectedIsModelSet)
+    public async Task ReadAsync_WithEmptyRequest_ReturnsNoValueResultWhenExpected(
+        bool allowEmptyInputValue,
+        bool expectedIsModelSet
+    )
     {
         // Arrange
         var formatter = new TestFormatter();
@@ -417,7 +453,8 @@ public class InputFormatterTest
             new ModelStateDictionary(),
             new EmptyModelMetadataProvider().GetMetadataForType(typeof(object)),
             (s, e) => new StreamReader(s, e),
-            allowEmptyInputValue);
+            allowEmptyInputValue
+        );
         context.HttpContext.Request.ContentLength = 0;
 
         // Act
@@ -431,7 +468,9 @@ public class InputFormatterTest
 
     private class BadConfigurationFormatter : InputFormatter
     {
-        public override Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context)
+        public override Task<InputFormatterResult> ReadRequestBodyAsync(
+            InputFormatterContext context
+        )
         {
             throw new NotImplementedException();
         }
@@ -446,7 +485,9 @@ public class InputFormatterTest
             return SupportedTypes.Count == 0 ? true : SupportedTypes.Contains(type);
         }
 
-        public override Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context)
+        public override Task<InputFormatterResult> ReadRequestBodyAsync(
+            InputFormatterContext context
+        )
         {
             throw new NotImplementedException();
         }

@@ -4,9 +4,9 @@
 namespace NetClient
 {
     using System;
-    using System.Threading;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+    using System.Threading;
 
     class Program
     {
@@ -20,7 +20,8 @@ namespace NetClient
 
             try
             {
-                var server = (Server.Contract.Servers.NumericTesting)new Server.Contract.Servers.NumericTestingClass();
+                var server = (Server.Contract.Servers.NumericTesting)
+                    new Server.Contract.Servers.NumericTestingClass();
             }
             catch (NotSupportedException) when (OperatingSystem.IsWindows())
             {

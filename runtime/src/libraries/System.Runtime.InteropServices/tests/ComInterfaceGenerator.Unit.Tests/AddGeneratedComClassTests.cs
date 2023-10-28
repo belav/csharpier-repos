@@ -4,8 +4,9 @@
 using System.Threading.Tasks;
 using Xunit;
 using VerifyCS = Microsoft.Interop.UnitTests.Verifiers.CSharpCodeFixVerifier<
-       Microsoft.Interop.Analyzers.AddGeneratedComClassAnalyzer,
-       Microsoft.Interop.Analyzers.AddGeneratedComClassFixer>;
+    Microsoft.Interop.Analyzers.AddGeneratedComClassAnalyzer,
+    Microsoft.Interop.Analyzers.AddGeneratedComClassFixer
+>;
 
 namespace ComInterfaceGenerator.Unit.Tests
 {

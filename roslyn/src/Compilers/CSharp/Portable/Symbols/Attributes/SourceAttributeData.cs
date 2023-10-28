@@ -5,10 +5,10 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
-using System.Linq;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System.Reflection.Metadata;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Reflection.Metadata;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
@@ -34,13 +34,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<int> constructorArgumentsSourceIndices,
             ImmutableArray<KeyValuePair<string, TypedConstant>> namedArguments,
             bool hasErrors,
-            bool isConditionallyOmitted)
+            bool isConditionallyOmitted
+        )
         {
-            Debug.Assert(!isConditionallyOmitted || attributeClass is object && attributeClass.IsConditional);
+            Debug.Assert(
+                !isConditionallyOmitted || attributeClass is object && attributeClass.IsConditional
+            );
             Debug.Assert(!constructorArguments.IsDefault);
             Debug.Assert(!namedArguments.IsDefault);
-            Debug.Assert(constructorArgumentsSourceIndices.IsDefault ||
-                constructorArgumentsSourceIndices.Any() && constructorArgumentsSourceIndices.Length == constructorArguments.Length);
+            Debug.Assert(
+                constructorArgumentsSourceIndices.IsDefault
+                    || constructorArgumentsSourceIndices.Any()
+                        && constructorArgumentsSourceIndices.Length == constructorArguments.Length
+            );
             Debug.Assert(attributeConstructor is object || hasErrors);
 
             _attributeClass = attributeClass;
@@ -53,41 +59,36 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             _applicationNode = applicationNode;
         }
 
-        internal SourceAttributeData(SyntaxReference applicationNode, NamedTypeSymbol attributeClass, MethodSymbol? attributeConstructor, bool hasErrors)
+        internal SourceAttributeData(
+            SyntaxReference applicationNode,
+            NamedTypeSymbol attributeClass,
+            MethodSymbol? attributeConstructor,
+            bool hasErrors
+        )
             : this(
-            applicationNode,
-            attributeClass,
-            attributeConstructor,
-            constructorArguments: ImmutableArray<TypedConstant>.Empty,
-            constructorArgumentsSourceIndices: default,
-            namedArguments: ImmutableArray<KeyValuePair<string, TypedConstant>>.Empty,
-            hasErrors: hasErrors,
-            isConditionallyOmitted: false)
-        {
-        }
+                applicationNode,
+                attributeClass,
+                attributeConstructor,
+                constructorArguments: ImmutableArray<TypedConstant>.Empty,
+                constructorArgumentsSourceIndices: default,
+                namedArguments: ImmutableArray<KeyValuePair<string, TypedConstant>>.Empty,
+                hasErrors: hasErrors,
+                isConditionallyOmitted: false
+            ) { }
 
         public override NamedTypeSymbol AttributeClass
         {
-            get
-            {
-                return _attributeClass;
-            }
+            get { return _attributeClass; }
         }
 
         public override MethodSymbol? AttributeConstructor
         {
-            get
-            {
-                return _attributeConstructor;
-            }
+            get { return _attributeConstructor; }
         }
 
         public override SyntaxReference? ApplicationSyntaxReference
         {
-            get
-            {
-                return _applicationNode;
-            }
+            get { return _applicationNode; }
         }
 
         /// <summary>
@@ -97,13 +98,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         internal ImmutableArray<int> ConstructorArgumentsSourceIndices
         {
-            get
-            {
-                return _constructorArgumentsSourceIndices;
-            }
+            get { return _constructorArgumentsSourceIndices; }
         }
 
-        internal CSharpSyntaxNode GetAttributeArgumentSyntax(int parameterIndex, AttributeSyntax attributeSyntax)
+        internal CSharpSyntaxNode GetAttributeArgumentSyntax(
+            int parameterIndex,
+            AttributeSyntax attributeSyntax
+        )
         {
             // This method is only called when decoding (non-erroneous) well-known attributes.
             Debug.Assert(!this.HasErrors);
@@ -116,7 +117,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 // We have no named ctor arguments AND no default arguments.
                 Debug.Assert(attributeSyntax.ArgumentList != null);
-                Debug.Assert(this.AttributeConstructor.ParameterCount <= attributeSyntax.ArgumentList.Arguments.Count);
+                Debug.Assert(
+                    this.AttributeConstructor.ParameterCount
+                        <= attributeSyntax.ArgumentList.Arguments.Count
+                );
 
                 return attributeSyntax.ArgumentList.Arguments[parameterIndex];
             }
@@ -141,10 +145,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override bool IsConditionallyOmitted
         {
-            get
-            {
-                return _isConditionallyOmitted;
-            }
+            get { return _isConditionallyOmitted; }
         }
 
         internal SourceAttributeData WithOmittedCondition(bool isConditionallyOmitted)
@@ -155,18 +156,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else
             {
-                return new SourceAttributeData(this.ApplicationSyntaxReference, this.AttributeClass, this.AttributeConstructor, this.CommonConstructorArguments,
-                    this.ConstructorArgumentsSourceIndices, this.CommonNamedArguments, this.HasErrors, isConditionallyOmitted);
+                return new SourceAttributeData(
+                    this.ApplicationSyntaxReference,
+                    this.AttributeClass,
+                    this.AttributeConstructor,
+                    this.CommonConstructorArguments,
+                    this.ConstructorArgumentsSourceIndices,
+                    this.CommonNamedArguments,
+                    this.HasErrors,
+                    isConditionallyOmitted
+                );
             }
         }
 
         [MemberNotNullWhen(true, nameof(AttributeClass), nameof(AttributeConstructor))]
         internal override bool HasErrors
         {
-            get
-            {
-                return _hasErrors;
-            }
+            get { return _hasErrors; }
         }
 
         protected internal sealed override ImmutableArray<TypedConstant> CommonConstructorArguments
@@ -174,7 +180,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return _constructorArguments; }
         }
 
-        protected internal sealed override ImmutableArray<KeyValuePair<string, TypedConstant>> CommonNamedArguments
+        protected internal sealed override ImmutableArray<
+            KeyValuePair<string, TypedConstant>
+        > CommonNamedArguments
         {
             get { return _namedArguments; }
         }
@@ -187,7 +195,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         /// <param name="targetSymbol">The symbol which is the target of the attribute</param>
         /// <param name="description">The attribute to match.</param>
-        internal override int GetTargetAttributeSignatureIndex(Symbol targetSymbol, AttributeDescription description)
+        internal override int GetTargetAttributeSignatureIndex(
+            Symbol targetSymbol,
+            AttributeDescription description
+        )
         {
             if (!IsTargetAttribute(description.Namespace, description.Name))
             {
@@ -207,7 +218,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             ImmutableArray<ParameterSymbol> parameters = ctor.Parameters;
 
-            for (int signatureIndex = 0; signatureIndex < description.Signatures.Length; signatureIndex++)
+            for (
+                int signatureIndex = 0;
+                signatureIndex < description.Signatures.Length;
+                signatureIndex++
+            )
             {
                 byte[] targetSignature = description.Signatures[signatureIndex];
 
@@ -219,7 +234,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             return -1;
 
-            bool matches(byte[] targetSignature, ImmutableArray<ParameterSymbol> parameters, ref TypeSymbol? lazySystemType)
+            bool matches(
+                byte[] targetSignature,
+                ImmutableArray<ParameterSymbol> parameters,
+                ref TypeSymbol? lazySystemType
+            )
             {
                 if (targetSignature[0] != (byte)SignatureAttributes.Instance)
                 {
@@ -238,7 +257,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
 
                 int parameterIndex = 0;
-                for (int signatureByteIndex = 3; signatureByteIndex < targetSignature.Length; signatureByteIndex++)
+                for (
+                    int signatureByteIndex = 3;
+                    signatureByteIndex < targetSignature.Length;
+                    signatureByteIndex++
+                )
                 {
                     if (parameterIndex >= parameters.Length)
                     {
@@ -253,18 +276,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     {
                         signatureByteIndex++;
 
-                        if (parameterType.Kind != SymbolKind.NamedType && parameterType.Kind != SymbolKind.ErrorType)
+                        if (
+                            parameterType.Kind != SymbolKind.NamedType
+                            && parameterType.Kind != SymbolKind.ErrorType
+                        )
                         {
                             return false;
                         }
 
                         var namedType = (NamedTypeSymbol)parameterType;
-                        AttributeDescription.TypeHandleTargetInfo targetInfo = AttributeDescription.TypeHandleTargets[targetSignature[signatureByteIndex]];
+                        AttributeDescription.TypeHandleTargetInfo targetInfo =
+                            AttributeDescription.TypeHandleTargets[
+                                targetSignature[signatureByteIndex]
+                            ];
 
                         // Compare name and containing symbol name. Uses HasNameQualifier
                         // extension method to avoid string allocations.
-                        if (!string.Equals(namedType.MetadataName, targetInfo.Name, System.StringComparison.Ordinal) ||
-                            !namedType.HasNameQualifier(targetInfo.Namespace))
+                        if (
+                            !string.Equals(
+                                namedType.MetadataName,
+                                targetInfo.Name,
+                                System.StringComparison.Ordinal
+                            ) || !namedType.HasNameQualifier(targetInfo.Namespace)
+                        )
                         {
                             return false;
                         }
@@ -276,9 +310,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             specType = parameterType.GetEnumUnderlyingType()!.SpecialType;
                         }
                     }
-                    else if (targetType != (byte)SignatureTypeCode.SZArray && parameterType.IsArray())
+                    else if (
+                        targetType != (byte)SignatureTypeCode.SZArray
+                        && parameterType.IsArray()
+                    )
                     {
-                        if (targetSignature[signatureByteIndex - 1] != (byte)SignatureTypeCode.SZArray)
+                        if (
+                            targetSignature[signatureByteIndex - 1]
+                            != (byte)SignatureTypeCode.SZArray
+                        )
                         {
                             return false;
                         }
@@ -403,7 +443,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         case (byte)SerializationTypeCode.Type:
                             lazySystemType ??= GetSystemType(targetSymbol);
 
-                            if (!TypeSymbol.Equals(parameterType, lazySystemType, TypeCompareKind.ConsiderEverything))
+                            if (
+                                !TypeSymbol.Equals(
+                                    parameterType,
+                                    lazySystemType,
+                                    TypeCompareKind.ConsiderEverything
+                                )
+                            )
                             {
                                 return false;
                             }

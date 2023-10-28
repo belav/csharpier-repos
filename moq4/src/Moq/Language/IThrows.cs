@@ -3,7 +3,6 @@
 
 using System;
 using System.ComponentModel;
-
 using Moq.Language.Flow;
 
 namespace Moq.Language
@@ -19,7 +18,7 @@ namespace Moq.Language
         /// </summary>
         /// <param name="exception">Exception instance to throw.</param>
         /// <example>
-        /// This example shows how to throw an exception when the method is 
+        /// This example shows how to throw an exception when the method is
         /// invoked with an empty string argument:
         /// <code>
         /// mock.Setup(x =&gt; x.Execute(""))
@@ -33,14 +32,15 @@ namespace Moq.Language
         /// </summary>
         /// <typeparam name="TException">Type of exception to instantiate and throw when the setup is matched.</typeparam>
         /// <example>
-        /// This example shows how to throw an exception when the method is 
+        /// This example shows how to throw an exception when the method is
         /// invoked with an empty string argument:
         /// <code>
         /// mock.Setup(x =&gt; x.Execute(""))
         ///     .Throws&lt;ArgumentException&gt;();
         /// </code>
         /// </example>
-        IThrowsResult Throws<TException>() where TException : Exception, new();
+        IThrowsResult Throws<TException>()
+            where TException : Exception, new();
 
         /// <summary>
         /// Specifies a function that will calculate the exception to throw when the method is invoked.
@@ -69,15 +69,16 @@ namespace Moq.Language
         /// mock.Setup(x => x.Execute("ping"))
         ///     .Throws(() => new Exception($"bad {returnValues[0]}"));
         /// </code>
-        /// The lambda expression to retrieve the exception is lazy-executed, 
-        /// meaning that its exception may change depending on the moment the method 
-        /// is executed and the value the <c>returnValues</c> array has at 
+        /// The lambda expression to retrieve the exception is lazy-executed,
+        /// meaning that its exception may change depending on the moment the method
+        /// is executed and the value the <c>returnValues</c> array has at
         /// that moment.
         /// </example>
-        IThrowsResult Throws<TException>(Func<TException> exceptionFunction) where TException : Exception;
+        IThrowsResult Throws<TException>(Func<TException> exceptionFunction)
+            where TException : Exception;
 
         /// <summary>
-        /// Specifies a function that will calculate the exception to throw when the method is invoked, 
+        /// Specifies a function that will calculate the exception to throw when the method is invoked,
         /// retrieving the arguments for the invocation.
         /// </summary>
         /// <typeparam name="T">The type of the argument of the invoked method.</typeparam>
@@ -86,9 +87,9 @@ namespace Moq.Language
         /// <example>
         /// Throw a calculated exception which is evaluated lazily at the time of the invocation.
         /// <para>
-        /// The lookup list can change between invocations and the setup 
-        /// will return different values accordingly. Also, notice how the specific 
-        /// string argument is retrieved by simply declaring it as part of the lambda 
+        /// The lookup list can change between invocations and the setup
+        /// will return different values accordingly. Also, notice how the specific
+        /// string argument is retrieved by simply declaring it as part of the lambda
         /// expression:
         /// </para>
         /// <code>
@@ -96,6 +97,7 @@ namespace Moq.Language
         ///     .Throws((string command) => new Exception(command));
         /// </code>
         /// </example>
-        IThrowsResult Throws<T, TException>(Func<T, TException> exceptionFunction) where TException : Exception;
+        IThrowsResult Throws<T, TException>(Func<T, TException> exceptionFunction)
+            where TException : Exception;
     }
 }

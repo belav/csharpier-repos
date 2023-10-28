@@ -27,7 +27,8 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     public static IEnumerable<IForeignKey> FindDeclaredReferencingRowInternalForeignKeys(
         this IEntityType entityType,
-        StoreObjectIdentifier storeObject)
+        StoreObjectIdentifier storeObject
+    )
     {
         if (entityType.IsMappedToJson())
         {
@@ -42,10 +43,12 @@ public static class RelationalEntityTypeExtensions
                 yield break;
             }
 
-            if (!foreignKey.PrincipalKey.IsPrimaryKey()
+            if (
+                !foreignKey.PrincipalKey.IsPrimaryKey()
                 || foreignKey.PrincipalEntityType.IsAssignableFrom(foreignKey.DeclaringEntityType)
                 || !foreignKey.Properties.SequenceEqual(dependentPrimaryKey.Properties)
-                || !IsMapped(foreignKey, storeObject))
+                || !IsMapped(foreignKey, storeObject)
+            )
             {
                 continue;
             }
@@ -53,13 +56,27 @@ public static class RelationalEntityTypeExtensions
             yield return foreignKey;
         }
 
-        static bool IsMapped(IReadOnlyForeignKey foreignKey, StoreObjectIdentifier storeObject)
-            => (StoreObjectIdentifier.Create(foreignKey.DeclaringEntityType, storeObject.StoreObjectType) == storeObject
-                    || foreignKey.DeclaringEntityType.GetMappingFragments(storeObject.StoreObjectType)
-                        .Any(f => f.StoreObject == storeObject))
-                && (StoreObjectIdentifier.Create(foreignKey.PrincipalEntityType, storeObject.StoreObjectType) == storeObject
-                    || foreignKey.PrincipalEntityType.GetMappingFragments(storeObject.StoreObjectType)
-                        .Any(f => f.StoreObject == storeObject));
+        static bool IsMapped(IReadOnlyForeignKey foreignKey, StoreObjectIdentifier storeObject) =>
+            (
+                StoreObjectIdentifier.Create(
+                    foreignKey.DeclaringEntityType,
+                    storeObject.StoreObjectType
+                ) == storeObject
+                || foreignKey
+                    .DeclaringEntityType
+                    .GetMappingFragments(storeObject.StoreObjectType)
+                    .Any(f => f.StoreObject == storeObject)
+            )
+            && (
+                StoreObjectIdentifier.Create(
+                    foreignKey.PrincipalEntityType,
+                    storeObject.StoreObjectType
+                ) == storeObject
+                || foreignKey
+                    .PrincipalEntityType
+                    .GetMappingFragments(storeObject.StoreObjectType)
+                    .Any(f => f.StoreObject == storeObject)
+            );
     }
 
     /// <summary>
@@ -68,7 +85,10 @@ public static class RelationalEntityTypeExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static List<IProperty> GetNonPrincipalSharedNonPkProperties(this IEntityType entityType, ITableBase table)
+    public static List<IProperty> GetNonPrincipalSharedNonPkProperties(
+        this IEntityType entityType,
+        ITableBase table
+    )
     {
         var principalEntityTypes = new HashSet<IEntityType>();
         PopulatePrincipalEntityTypes(table, entityType, principalEntityTypes);
@@ -87,8 +107,12 @@ public static class RelationalEntityTypeExtensions
             }
 
             var propertyMappings = column.PropertyMappings;
-            if (propertyMappings.Count() > 1
-                && propertyMappings.Any(pm => principalEntityTypes.Contains(pm.TableMapping.TypeBase)))
+            if (
+                propertyMappings.Count() > 1
+                && propertyMappings.Any(
+                    pm => principalEntityTypes.Contains(pm.TableMapping.TypeBase)
+                )
+            )
             {
                 continue;
             }
@@ -98,7 +122,11 @@ public static class RelationalEntityTypeExtensions
 
         return properties;
 
-        static void PopulatePrincipalEntityTypes(ITableBase table, IEntityType entityType, HashSet<IEntityType> entityTypes)
+        static void PopulatePrincipalEntityTypes(
+            ITableBase table,
+            IEntityType entityType,
+            HashSet<IEntityType> entityTypes
+        )
         {
             foreach (var linkingFk in table.GetRowInternalForeignKeys(entityType))
             {

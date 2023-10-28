@@ -35,7 +35,13 @@ namespace System.Buffers.Text
         /// - NeedMoreData - only if <paramref name="isFinalBlock"/> is <see langword="false"/>, otherwise the output is padded if the input is not a multiple of 3
         /// It does not return InvalidData since that is not possible for base64 encoding.
         /// </returns>
-        public static unsafe OperationStatus EncodeToUtf8(ReadOnlySpan<byte> bytes, Span<byte> utf8, out int bytesConsumed, out int bytesWritten, bool isFinalBlock = true)
+        public static unsafe OperationStatus EncodeToUtf8(
+            ReadOnlySpan<byte> bytes,
+            Span<byte> utf8,
+            out int bytesConsumed,
+            out int bytesWritten,
+            bool isFinalBlock = true
+        )
         {
             if (bytes.IsEmpty)
             {
@@ -51,7 +57,10 @@ namespace System.Buffers.Text
                 int destLength = utf8.Length;
                 int maxSrcLength;
 
-                if (srcLength <= MaximumEncodeLength && destLength >= GetMaxEncodedToUtf8Length(srcLength))
+                if (
+                    srcLength <= MaximumEncodeLength
+                    && destLength >= GetMaxEncodedToUtf8Length(srcLength)
+                )
                 {
                     maxSrcLength = srcLength;
                 }
@@ -70,16 +79,36 @@ namespace System.Buffers.Text
                     byte* end = srcMax - 32;
                     if (Avx2.IsSupported && (end >= src))
                     {
-                        Avx2Encode(ref src, ref dest, end, maxSrcLength, destLength, srcBytes, destBytes);
+                        Avx2Encode(
+                            ref src,
+                            ref dest,
+                            end,
+                            maxSrcLength,
+                            destLength,
+                            srcBytes,
+                            destBytes
+                        );
 
                         if (src == srcEnd)
                             goto DoneExit;
                     }
 
                     end = srcMax - 16;
-                    if ((Ssse3.IsSupported || AdvSimd.Arm64.IsSupported) && BitConverter.IsLittleEndian && (end >= src))
+                    if (
+                        (Ssse3.IsSupported || AdvSimd.Arm64.IsSupported)
+                        && BitConverter.IsLittleEndian
+                        && (end >= src)
+                    )
                     {
-                        Vector128Encode(ref src, ref dest, end, maxSrcLength, destLength, srcBytes, destBytes);
+                        Vector128Encode(
+                            ref src,
+                            ref dest,
+                            end,
+                            maxSrcLength,
+                            destLength,
+                            srcBytes,
+                            destBytes
+                        );
 
                         if (src == srcEnd)
                             goto DoneExit;
@@ -124,17 +153,17 @@ namespace System.Buffers.Text
                     dest += 4;
                 }
 
-            DoneExit:
+                DoneExit:
                 bytesConsumed = (int)(src - srcBytes);
                 bytesWritten = (int)(dest - destBytes);
                 return OperationStatus.Done;
 
-            DestinationTooSmallExit:
+                DestinationTooSmallExit:
                 bytesConsumed = (int)(src - srcBytes);
                 bytesWritten = (int)(dest - destBytes);
                 return OperationStatus.DestinationTooSmall;
 
-            NeedMoreData:
+                NeedMoreData:
                 bytesConsumed = (int)(src - srcBytes);
                 bytesWritten = (int)(dest - destBytes);
                 return OperationStatus.NeedMoreData;
@@ -171,7 +200,11 @@ namespace System.Buffers.Text
         /// It does not return NeedMoreData since this method tramples the data in the buffer and hence can only be called once with all the data in the buffer.
         /// It does not return InvalidData since that is not possible for base 64 encoding.
         /// </returns>
-        public static unsafe OperationStatus EncodeToUtf8InPlace(Span<byte> buffer, int dataLength, out int bytesWritten)
+        public static unsafe OperationStatus EncodeToUtf8InPlace(
+            Span<byte> buffer,
+            int dataLength,
+            out int bytesWritten
+        )
         {
             if (buffer.IsEmpty)
             {
@@ -220,7 +253,7 @@ namespace System.Buffers.Text
                 bytesWritten = encodedLength;
                 return OperationStatus.Done;
 
-            FalseExit:
+                FalseExit:
                 bytesWritten = 0;
                 return OperationStatus.DestinationTooSmall;
             }
@@ -228,7 +261,15 @@ namespace System.Buffers.Text
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CompExactlyDependsOn(typeof(Avx2))]
-        private static unsafe void Avx2Encode(ref byte* srcBytes, ref byte* destBytes, byte* srcEnd, int sourceLength, int destLength, byte* srcStart, byte* destStart)
+        private static unsafe void Avx2Encode(
+            ref byte* srcBytes,
+            ref byte* destBytes,
+            byte* srcEnd,
+            int sourceLength,
+            int destLength,
+            byte* srcStart,
+            byte* destStart
+        )
         {
             // If we have AVX2 support, pick off 24 bytes at a time for as long as we can.
             // But because we read 32 bytes at a time, ensure we have enough room to do a
@@ -244,24 +285,74 @@ namespace System.Buffers.Text
 
             // The JIT won't hoist these "constants", so help it
             Vector256<sbyte> shuffleVec = Vector256.Create(
-                5, 4, 6, 5,
-                8, 7, 9, 8,
-                11, 10, 12, 11,
-                14, 13, 15, 14,
-                1, 0, 2, 1,
-                4, 3, 5, 4,
-                7, 6, 8, 7,
-                10, 9, 11, 10);
+                5,
+                4,
+                6,
+                5,
+                8,
+                7,
+                9,
+                8,
+                11,
+                10,
+                12,
+                11,
+                14,
+                13,
+                15,
+                14,
+                1,
+                0,
+                2,
+                1,
+                4,
+                3,
+                5,
+                4,
+                7,
+                6,
+                8,
+                7,
+                10,
+                9,
+                11,
+                10
+            );
 
             Vector256<sbyte> lut = Vector256.Create(
-                65, 71, -4, -4,
-                -4, -4, -4, -4,
-                -4, -4, -4, -4,
-                -19, -16, 0, 0,
-                65, 71, -4, -4,
-                -4, -4, -4, -4,
-                -4, -4, -4, -4,
-                -19, -16, 0, 0);
+                65,
+                71,
+                -4,
+                -4,
+                -4,
+                -4,
+                -4,
+                -4,
+                -4,
+                -4,
+                -4,
+                -4,
+                -19,
+                -16,
+                0,
+                0,
+                65,
+                71,
+                -4,
+                -4,
+                -4,
+                -4,
+                -4,
+                -4,
+                -4,
+                -4,
+                -4,
+                -4,
+                -19,
+                -16,
+                0,
+                0
+            );
 
             Vector256<sbyte> maskAC = Vector256.Create(0x0fc0fc00).AsSByte();
             Vector256<sbyte> maskBB = Vector256.Create(0x003f03f0).AsSByte();
@@ -278,15 +369,46 @@ namespace System.Buffers.Text
             Vector256<sbyte> str = Avx.LoadVector256(src).AsSByte();
 
             // shift by 4 bytes, as required by Reshuffle
-            str = Avx2.PermuteVar8x32(str.AsInt32(), Vector256.Create(
-                0, 0, 0, 0,
-                0, 0, 0, 0,
-                1, 0, 0, 0,
-                2, 0, 0, 0,
-                3, 0, 0, 0,
-                4, 0, 0, 0,
-                5, 0, 0, 0,
-                6, 0, 0, 0).AsInt32()).AsSByte();
+            str = Avx2.PermuteVar8x32(
+                    str.AsInt32(),
+                    Vector256
+                        .Create(
+                            0,
+                            0,
+                            0,
+                            0,
+                            0,
+                            0,
+                            0,
+                            0,
+                            1,
+                            0,
+                            0,
+                            0,
+                            2,
+                            0,
+                            0,
+                            0,
+                            3,
+                            0,
+                            0,
+                            0,
+                            4,
+                            0,
+                            0,
+                            0,
+                            5,
+                            0,
+                            0,
+                            0,
+                            6,
+                            0,
+                            0,
+                            0
+                        )
+                        .AsInt32()
+                )
+                .AsSByte();
 
             // Next loads are done at src-4, as required by Reshuffle, so shift it once
             src -= 4;
@@ -400,7 +522,15 @@ namespace System.Buffers.Text
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CompExactlyDependsOn(typeof(Ssse3))]
         [CompExactlyDependsOn(typeof(AdvSimd.Arm64))]
-        private static unsafe void Vector128Encode(ref byte* srcBytes, ref byte* destBytes, byte* srcEnd, int sourceLength, int destLength, byte* srcStart, byte* destStart)
+        private static unsafe void Vector128Encode(
+            ref byte* srcBytes,
+            ref byte* destBytes,
+            byte* srcEnd,
+            int sourceLength,
+            int destLength,
+            byte* srcStart,
+            byte* destStart
+        )
         {
             // If we have SSSE3 support, pick off 12 bytes at a time for as long as we can.
             // But because we read 16 bytes at a time, ensure we have enough room to do a
@@ -410,15 +540,19 @@ namespace System.Buffers.Text
             // 0 0 0 0 l k j i h g f e d c b a
 
             // The JIT won't hoist these "constants", so help it
-            Vector128<byte>   shuffleVec = Vector128.Create(0x01020001, 0x04050304, 0x07080607, 0x0A0B090A).AsByte();
-            Vector128<byte>   lut = Vector128.Create(0xFCFC4741, 0xFCFCFCFC, 0xFCFCFCFC, 0x0000F0ED).AsByte();
-            Vector128<byte>   maskAC = Vector128.Create(0x0fc0fc00).AsByte();
-            Vector128<byte>   maskBB = Vector128.Create(0x003f03f0).AsByte();
+            Vector128<byte> shuffleVec = Vector128
+                .Create(0x01020001, 0x04050304, 0x07080607, 0x0A0B090A)
+                .AsByte();
+            Vector128<byte> lut = Vector128
+                .Create(0xFCFC4741, 0xFCFCFCFC, 0xFCFCFCFC, 0x0000F0ED)
+                .AsByte();
+            Vector128<byte> maskAC = Vector128.Create(0x0fc0fc00).AsByte();
+            Vector128<byte> maskBB = Vector128.Create(0x003f03f0).AsByte();
             Vector128<ushort> shiftAC = Vector128.Create(0x04000040).AsUInt16();
-            Vector128<short>  shiftBB = Vector128.Create(0x01000010).AsInt16();
-            Vector128<byte>   const51 = Vector128.Create((byte)51);
-            Vector128<sbyte>  const25 = Vector128.Create((sbyte)25);
-            Vector128<byte>   mask8F = Vector128.Create((byte)0x8F);
+            Vector128<short> shiftBB = Vector128.Create(0x01000010).AsInt16();
+            Vector128<byte> const51 = Vector128.Create((byte)51);
+            Vector128<sbyte> const25 = Vector128.Create((sbyte)25);
+            Vector128<byte> mask8F = Vector128.Create((byte)0x8F);
 
             byte* src = srcBytes;
             byte* dest = destBytes;
@@ -457,8 +591,14 @@ namespace System.Buffers.Text
                 }
                 else
                 {
-                    Vector128<ushort> odd =  Vector128.ShiftRightLogical(AdvSimd.Arm64.UnzipOdd(t0.AsUInt16(), t0.AsUInt16()), 6);
-                    Vector128<ushort> even = Vector128.ShiftRightLogical(AdvSimd.Arm64.UnzipEven(t0.AsUInt16(), t0.AsUInt16()), 10);
+                    Vector128<ushort> odd = Vector128.ShiftRightLogical(
+                        AdvSimd.Arm64.UnzipOdd(t0.AsUInt16(), t0.AsUInt16()),
+                        6
+                    );
+                    Vector128<ushort> even = Vector128.ShiftRightLogical(
+                        AdvSimd.Arm64.UnzipEven(t0.AsUInt16(), t0.AsUInt16()),
+                        10
+                    );
                     t1 = AdvSimd.Arm64.ZipLow(even, odd);
                 }
                 // 00000000 00kkkkLL 00000000 00JJJJJJ
@@ -514,8 +654,7 @@ namespace System.Buffers.Text
 
                 src += 12;
                 dest += 16;
-            }
-            while (src <= srcEnd);
+            } while (src <= srcEnd);
 
             srcBytes = src;
             destBytes = dest;
@@ -591,6 +730,7 @@ namespace System.Buffers.Text
 
         private const int MaximumEncodeLength = (int.MaxValue / 4) * 3; // 1610612733
 
-        internal static ReadOnlySpan<byte> EncodingMap => "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"u8;
+        internal static ReadOnlySpan<byte> EncodingMap =>
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"u8;
     }
 }

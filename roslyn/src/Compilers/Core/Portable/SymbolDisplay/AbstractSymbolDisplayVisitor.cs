@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.SymbolDisplay
             bool isFirstSymbolVisited,
             SemanticModel semanticModelOpt,
             int positionOpt,
-            bool inNamespaceOrType = false)
+            bool inNamespaceOrType = false
+        )
         {
             Debug.Assert(format != null);
 
@@ -68,17 +69,25 @@ namespace Microsoft.CodeAnalysis.SymbolDisplay
             {
                 if (_lazyNotFirstVisitorNamespaceOrType == null)
                 {
-                    _lazyNotFirstVisitorNamespaceOrType = MakeNotFirstVisitor(inNamespaceOrType: true);
+                    _lazyNotFirstVisitorNamespaceOrType = MakeNotFirstVisitor(
+                        inNamespaceOrType: true
+                    );
                 }
 
                 return _lazyNotFirstVisitorNamespaceOrType;
             }
         }
 
-        protected abstract AbstractSymbolDisplayVisitor MakeNotFirstVisitor(bool inNamespaceOrType = false);
+        protected abstract AbstractSymbolDisplayVisitor MakeNotFirstVisitor(
+            bool inNamespaceOrType = false
+        );
 
         protected abstract void AddLiteralValue(SpecialType type, object value);
-        protected abstract void AddExplicitlyCastedLiteralValue(INamedTypeSymbol namedType, SpecialType type, object value);
+        protected abstract void AddExplicitlyCastedLiteralValue(
+            INamedTypeSymbol namedType,
+            SpecialType type,
+            object value
+        );
         protected abstract void AddSpace();
         protected abstract void AddBitwiseOr();
 
@@ -86,7 +95,11 @@ namespace Microsoft.CodeAnalysis.SymbolDisplay
         /// Append a default argument (i.e. the default argument of an optional parameter).
         /// Assumed to be non-null.
         /// </summary>
-        protected void AddNonNullConstantValue(ITypeSymbol type, object constantValue, bool preferNumericValueOrExpandedFlagsForEnum = false)
+        protected void AddNonNullConstantValue(
+            ITypeSymbol type,
+            object constantValue,
+            bool preferNumericValueOrExpandedFlagsForEnum = false
+        )
         {
             Debug.Assert(constantValue != null);
 
@@ -97,7 +110,11 @@ namespace Microsoft.CodeAnalysis.SymbolDisplay
 
             if (type.TypeKind == TypeKind.Enum)
             {
-                AddEnumConstantValue((INamedTypeSymbol)type, constantValue, preferNumericValueOrExpandedFlagsForEnum);
+                AddEnumConstantValue(
+                    (INamedTypeSymbol)type,
+                    constantValue,
+                    preferNumericValueOrExpandedFlagsForEnum
+                );
             }
             else
             {
@@ -105,13 +122,21 @@ namespace Microsoft.CodeAnalysis.SymbolDisplay
             }
         }
 
-        private void AddEnumConstantValue(INamedTypeSymbol enumType, object constantValue, bool preferNumericValueOrExpandedFlags)
+        private void AddEnumConstantValue(
+            INamedTypeSymbol enumType,
+            object constantValue,
+            bool preferNumericValueOrExpandedFlags
+        )
         {
-            // Code copied from System.Enum            
+            // Code copied from System.Enum
             var isFlagsEnum = IsFlagsEnum(enumType);
             if (isFlagsEnum)
             {
-                AddFlagsEnumConstantValue(enumType, constantValue, preferNumericValueOrExpandedFlags);
+                AddFlagsEnumConstantValue(
+                    enumType,
+                    constantValue,
+                    preferNumericValueOrExpandedFlags
+                );
             }
             else if (preferNumericValueOrExpandedFlags)
             {
@@ -150,9 +175,13 @@ namespace Microsoft.CodeAnalysis.SymbolDisplay
                     if (!ctor.Parameters.Any() && type.Name == "FlagsAttribute")
                     {
                         var containingSymbol = type.ContainingSymbol;
-                        if (containingSymbol.Kind == SymbolKind.Namespace &&
-                            containingSymbol.Name == "System" &&
-                            ((INamespaceSymbol)containingSymbol.ContainingSymbol).IsGlobalNamespace)
+                        if (
+                            containingSymbol.Kind == SymbolKind.Namespace
+                            && containingSymbol.Name == "System"
+                            && (
+                                (INamespaceSymbol)containingSymbol.ContainingSymbol
+                            ).IsGlobalNamespace
+                        )
                         {
                             return true;
                         }
@@ -163,7 +192,11 @@ namespace Microsoft.CodeAnalysis.SymbolDisplay
             return false;
         }
 
-        private void AddFlagsEnumConstantValue(INamedTypeSymbol enumType, object constantValue, bool preferNumericValueOrExpandedFlags)
+        private void AddFlagsEnumConstantValue(
+            INamedTypeSymbol enumType,
+            object constantValue,
+            bool preferNumericValueOrExpandedFlags
+        )
         {
             // These values are sorted by value. Don't change this.
             var allFieldsAndValues = ArrayBuilder<EnumField>.GetInstance();
@@ -172,7 +205,13 @@ namespace Microsoft.CodeAnalysis.SymbolDisplay
             var usedFieldsAndValues = ArrayBuilder<EnumField>.GetInstance();
             try
             {
-                AddFlagsEnumConstantValue(enumType, constantValue, allFieldsAndValues, usedFieldsAndValues, preferNumericValueOrExpandedFlags);
+                AddFlagsEnumConstantValue(
+                    enumType,
+                    constantValue,
+                    allFieldsAndValues,
+                    usedFieldsAndValues,
+                    preferNumericValueOrExpandedFlags
+                );
             }
             finally
             {
@@ -182,13 +221,18 @@ namespace Microsoft.CodeAnalysis.SymbolDisplay
         }
 
         private void AddFlagsEnumConstantValue(
-            INamedTypeSymbol enumType, object constantValue,
+            INamedTypeSymbol enumType,
+            object constantValue,
             ArrayBuilder<EnumField> allFieldsAndValues,
             ArrayBuilder<EnumField> usedFieldsAndValues,
-            bool preferNumericValueOrExpandedFlags)
+            bool preferNumericValueOrExpandedFlags
+        )
         {
             var underlyingSpecialType = enumType.EnumUnderlyingType.SpecialType;
-            var constantValueULong = EnumUtilities.ConvertEnumUnderlyingTypeToUInt64(constantValue, underlyingSpecialType);
+            var constantValueULong = EnumUtilities.ConvertEnumUnderlyingTypeToUInt64(
+                constantValue,
+                underlyingSpecialType
+            );
 
             var result = constantValueULong;
 
@@ -213,7 +257,8 @@ namespace Microsoft.CodeAnalysis.SymbolDisplay
                     {
                         usedFieldsAndValues.Add(fieldAndValue);
                         result -= valueAtIndex;
-                        if (result == 0) break;
+                        if (result == 0)
+                            break;
                     }
                 }
             }
@@ -245,9 +290,10 @@ namespace Microsoft.CodeAnalysis.SymbolDisplay
                 }
 
                 // If we had 0 as the value, and there's an enum value equal to 0, then use that.
-                var zeroField = constantValueULong == 0
-                    ? EnumField.FindValue(allFieldsAndValues, 0)
-                    : default(EnumField);
+                var zeroField =
+                    constantValueULong == 0
+                        ? EnumField.FindValue(allFieldsAndValues, 0)
+                        : default(EnumField);
                 if (!zeroField.IsDefault)
                 {
                     ((IFieldSymbol)zeroField.IdentityOpt).Accept(this.NotFirstVisitor);
@@ -262,7 +308,8 @@ namespace Microsoft.CodeAnalysis.SymbolDisplay
 
         private static void GetSortedEnumFields(
             INamedTypeSymbol enumType,
-            ArrayBuilder<EnumField> enumFields)
+            ArrayBuilder<EnumField> enumFields
+        )
         {
             var underlyingSpecialType = enumType.EnumUnderlyingType.SpecialType;
             foreach (var member in enumType.GetMembers())
@@ -272,7 +319,14 @@ namespace Microsoft.CodeAnalysis.SymbolDisplay
                     var field = (IFieldSymbol)member;
                     if (field.HasConstantValue)
                     {
-                        var enumField = new EnumField(field.Name, EnumUtilities.ConvertEnumUnderlyingTypeToUInt64(field.ConstantValue, underlyingSpecialType), field);
+                        var enumField = new EnumField(
+                            field.Name,
+                            EnumUtilities.ConvertEnumUnderlyingTypeToUInt64(
+                                field.ConstantValue,
+                                underlyingSpecialType
+                            ),
+                            field
+                        );
                         enumFields.Add(enumField);
                     }
                 }
@@ -284,7 +338,10 @@ namespace Microsoft.CodeAnalysis.SymbolDisplay
         private void AddNonFlagsEnumConstantValue(INamedTypeSymbol enumType, object constantValue)
         {
             var underlyingSpecialType = enumType.EnumUnderlyingType.SpecialType;
-            var constantValueULong = EnumUtilities.ConvertEnumUnderlyingTypeToUInt64(constantValue, underlyingSpecialType);
+            var constantValueULong = EnumUtilities.ConvertEnumUnderlyingTypeToUInt64(
+                constantValue,
+                underlyingSpecialType
+            );
 
             var enumFields = ArrayBuilder<EnumField>.GetInstance();
             GetSortedEnumFields(enumType, enumFields);

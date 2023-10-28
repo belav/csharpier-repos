@@ -8,10 +8,11 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using System.Xml.Linq;
+using Newtonsoft.Json;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.BrokeredServices.Services.Definitions;
+
 /// <summary>
 /// Copied from https://devdiv.visualstudio.com/DevDiv/_git/CPS?path=/src/Microsoft.VisualStudio.ProjectSystem.Server/ProjectInitializationCompletionState.cs
 /// </summary>

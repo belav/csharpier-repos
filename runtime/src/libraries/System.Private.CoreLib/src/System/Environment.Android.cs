@@ -1,11 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.IO;
-using System.Threading;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Diagnostics;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace System
 {
@@ -13,11 +13,18 @@ namespace System
     {
         private static Dictionary<SpecialFolder, string>? s_specialFolders;
 
-        private static string GetFolderPathCore(SpecialFolder folder, SpecialFolderOption _ /*option*/)
+        private static string GetFolderPathCore(
+            SpecialFolder folder,
+            SpecialFolderOption _ /*option*/
+        )
         {
             if (s_specialFolders == null)
             {
-                Interlocked.CompareExchange(ref s_specialFolders, new Dictionary<SpecialFolder, string>(), null);
+                Interlocked.CompareExchange(
+                    ref s_specialFolders,
+                    new Dictionary<SpecialFolder, string>(),
+                    null
+                );
             }
 
             string? path;
@@ -64,7 +71,7 @@ namespace System
                 case SpecialFolder.DesktopDirectory:
                     return Path.Combine(home, "Desktop");
 
-                case SpecialFolder.MyDocuments:     // Same value as Personal
+                case SpecialFolder.MyDocuments: // Same value as Personal
                     return Path.Combine(home, "Documents");
 
                 case SpecialFolder.MyMusic:

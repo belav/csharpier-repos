@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Globalization;
 
 namespace System.IO
 {
@@ -23,7 +23,9 @@ namespace System.IO
             {
                 case Interop.Errors.ERROR_PATH_NOT_FOUND:
                 case Interop.Errors.ERROR_INVALID_DRIVE:
-                    return new DriveNotFoundException(SR.Format(SR.IO_DriveNotFound_Drive, driveName));
+                    return new DriveNotFoundException(
+                        SR.Format(SR.IO_DriveNotFound_Drive, driveName)
+                    );
 
                 default:
                     return Win32Marshal.GetExceptionForWin32Error(errorCode, driveName);

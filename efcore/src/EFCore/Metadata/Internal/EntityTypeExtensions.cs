@@ -22,7 +22,8 @@ public static class EntityTypeExtensions
     /// </summary>
     public static MemberInfo GetNavigationMemberInfo(
         this IReadOnlyEntityType entityType,
-        string navigationName)
+        string navigationName
+    )
     {
         MemberInfo? memberInfo;
         if (entityType.IsPropertyBag)
@@ -36,7 +37,8 @@ public static class EntityTypeExtensions
             if (memberInfo == null)
             {
                 throw new InvalidOperationException(
-                    CoreStrings.NoClrNavigation(navigationName, entityType.DisplayName()));
+                    CoreStrings.NoClrNavigation(navigationName, entityType.DisplayName())
+                );
             }
         }
 
@@ -49,8 +51,7 @@ public static class EntityTypeExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static bool IsOwned(this IReadOnlyEntityType entityType)
-        => entityType.IsOwned();
+    public static bool IsOwned(this IReadOnlyEntityType entityType) => entityType.IsOwned();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -58,8 +59,8 @@ public static class EntityTypeExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static IReadOnlyForeignKey? FindDeclaredOwnership(this IReadOnlyEntityType entityType)
-        => entityType.GetDeclaredForeignKeys().FirstOrDefault(fk => fk.IsOwnership);
+    public static IReadOnlyForeignKey? FindDeclaredOwnership(this IReadOnlyEntityType entityType) =>
+        entityType.GetDeclaredForeignKeys().FirstOrDefault(fk => fk.IsOwnership);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -67,8 +68,9 @@ public static class EntityTypeExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static IConventionForeignKey? FindDeclaredOwnership(this IConventionEntityType entityType)
-        => entityType.GetDeclaredForeignKeys().FirstOrDefault(fk => fk.IsOwnership);
+    public static IConventionForeignKey? FindDeclaredOwnership(
+        this IConventionEntityType entityType
+    ) => entityType.GetDeclaredForeignKeys().FirstOrDefault(fk => fk.IsOwnership);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -76,7 +78,10 @@ public static class EntityTypeExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static IReadOnlyEntityType? FindInOwnershipPath(this IReadOnlyEntityType entityType, Type targetType)
+    public static IReadOnlyEntityType? FindInOwnershipPath(
+        this IReadOnlyEntityType entityType,
+        Type targetType
+    )
     {
         if (entityType.ClrType == targetType)
         {
@@ -106,8 +111,8 @@ public static class EntityTypeExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static bool IsInOwnershipPath(this IReadOnlyEntityType entityType, Type targetType)
-        => entityType.FindInOwnershipPath(targetType) != null;
+    public static bool IsInOwnershipPath(this IReadOnlyEntityType entityType, Type targetType) =>
+        entityType.FindInOwnershipPath(targetType) != null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -115,7 +120,10 @@ public static class EntityTypeExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static bool IsInOwnershipPath(this IReadOnlyEntityType entityType, IReadOnlyEntityType targetType)
+    public static bool IsInOwnershipPath(
+        this IReadOnlyEntityType entityType,
+        IReadOnlyEntityType targetType
+    )
     {
         if (entityType == targetType)
         {
@@ -149,7 +157,9 @@ public static class EntityTypeExtensions
     {
         var changeTrackingStrategy = entityType.GetChangeTrackingStrategy();
 
-        return changeTrackingStrategy is ChangeTrackingStrategy.Snapshot or ChangeTrackingStrategy.ChangedNotifications;
+        return changeTrackingStrategy
+            is ChangeTrackingStrategy.Snapshot
+                or ChangeTrackingStrategy.ChangedNotifications;
     }
 
     /// <summary>
@@ -186,8 +196,11 @@ public static class EntityTypeExtensions
                 index: propertyIndex++,
                 originalValueIndex: property.RequiresOriginalValue() ? originalValueIndex++ : -1,
                 shadowIndex: property.IsShadowProperty() ? shadowIndex++ : -1,
-                relationshipIndex: property.IsKey() || property.IsForeignKey() ? relationshipIndex++ : -1,
-                storeGenerationIndex: property.MayBeStoreGenerated() ? storeGenerationIndex++ : -1);
+                relationshipIndex: property.IsKey() || property.IsForeignKey()
+                    ? relationshipIndex++
+                    : -1,
+                storeGenerationIndex: property.MayBeStoreGenerated() ? storeGenerationIndex++ : -1
+            );
 
             ((IRuntimePropertyBase)property).PropertyIndexes = indexes;
         }
@@ -196,15 +209,21 @@ public static class EntityTypeExtensions
 
         var isNotifying = entityType.GetChangeTrackingStrategy() != ChangeTrackingStrategy.Snapshot;
 
-        foreach (var navigation in entityType.GetDeclaredNavigations()
-                     .Union<IPropertyBase>(entityType.GetDeclaredSkipNavigations()))
+        foreach (
+            var navigation in entityType
+                .GetDeclaredNavigations()
+                .Union<IPropertyBase>(entityType.GetDeclaredSkipNavigations())
+        )
         {
             var indexes = new PropertyIndexes(
                 index: navigationIndex++,
                 originalValueIndex: -1,
                 shadowIndex: navigation.IsShadowProperty() ? shadowIndex++ : -1,
-                relationshipIndex: ((IReadOnlyNavigationBase)navigation).IsCollection && isNotifying ? -1 : relationshipIndex++,
-                storeGenerationIndex: -1);
+                relationshipIndex: ((IReadOnlyNavigationBase)navigation).IsCollection && isNotifying
+                    ? -1
+                    : relationshipIndex++,
+                storeGenerationIndex: -1
+            );
 
             ((IRuntimePropertyBase)navigation).PropertyIndexes = indexes;
         }
@@ -216,7 +235,8 @@ public static class EntityTypeExtensions
                 originalValueIndex: -1,
                 shadowIndex: -1,
                 relationshipIndex: -1,
-                storeGenerationIndex: -1);
+                storeGenerationIndex: -1
+            );
 
             ((IRuntimePropertyBase)serviceProperty).PropertyIndexes = indexes;
         }
@@ -228,7 +248,8 @@ public static class EntityTypeExtensions
             originalValueIndex,
             shadowIndex,
             relationshipIndex,
-            storeGenerationIndex);
+            storeGenerationIndex
+        );
 
         void CountComplexProperties(IEnumerable<IComplexProperty> complexProperties)
         {
@@ -239,7 +260,8 @@ public static class EntityTypeExtensions
                     originalValueIndex: -1,
                     shadowIndex: complexProperty.IsShadowProperty() ? shadowIndex++ : -1,
                     relationshipIndex: -1,
-                    storeGenerationIndex: -1);
+                    storeGenerationIndex: -1
+                );
 
                 ((IRuntimePropertyBase)complexProperty).PropertyIndexes = indexes;
 
@@ -248,10 +270,17 @@ public static class EntityTypeExtensions
                 {
                     var complexIndexes = new PropertyIndexes(
                         index: propertyIndex++,
-                        originalValueIndex: property.RequiresOriginalValue() ? originalValueIndex++ : -1,
+                        originalValueIndex: property.RequiresOriginalValue()
+                            ? originalValueIndex++
+                            : -1,
                         shadowIndex: property.IsShadowProperty() ? shadowIndex++ : -1,
-                        relationshipIndex: property.IsKey() || property.IsForeignKey() ? relationshipIndex++ : -1,
-                        storeGenerationIndex: property.MayBeStoreGenerated() ? storeGenerationIndex++ : -1);
+                        relationshipIndex: property.IsKey() || property.IsForeignKey()
+                            ? relationshipIndex++
+                            : -1,
+                        storeGenerationIndex: property.MayBeStoreGenerated()
+                            ? storeGenerationIndex++
+                            : -1
+                    );
 
                     ((IRuntimePropertyBase)property).PropertyIndexes = complexIndexes;
                 }
@@ -267,8 +296,10 @@ public static class EntityTypeExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static EntityType? LeastDerivedType(this EntityType entityType, EntityType otherEntityType)
-        => (EntityType?)((IReadOnlyEntityType)entityType).LeastDerivedType(otherEntityType);
+    public static EntityType? LeastDerivedType(
+        this EntityType entityType,
+        EntityType otherEntityType
+    ) => (EntityType?)((IReadOnlyEntityType)entityType).LeastDerivedType(otherEntityType);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -276,8 +307,10 @@ public static class EntityTypeExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static bool IsAssignableFrom(this EntityType entityType, IReadOnlyEntityType otherEntityType)
-        => ((IReadOnlyEntityType)entityType).IsAssignableFrom(otherEntityType);
+    public static bool IsAssignableFrom(
+        this EntityType entityType,
+        IReadOnlyEntityType otherEntityType
+    ) => ((IReadOnlyEntityType)entityType).IsAssignableFrom(otherEntityType);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -285,8 +318,10 @@ public static class EntityTypeExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static bool IsStrictlyDerivedFrom(this EntityType entityType, IReadOnlyEntityType otherEntityType)
-        => ((IReadOnlyEntityType)entityType).IsStrictlyDerivedFrom(otherEntityType);
+    public static bool IsStrictlyDerivedFrom(
+        this EntityType entityType,
+        IReadOnlyEntityType otherEntityType
+    ) => ((IReadOnlyEntityType)entityType).IsStrictlyDerivedFrom(otherEntityType);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -294,8 +329,8 @@ public static class EntityTypeExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static object? GetDiscriminatorValue(this EntityType entityType)
-        => ((IReadOnlyEntityType)entityType).GetDiscriminatorValue();
+    public static object? GetDiscriminatorValue(this EntityType entityType) =>
+        ((IReadOnlyEntityType)entityType).GetDiscriminatorValue();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -303,8 +338,8 @@ public static class EntityTypeExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static IReadOnlyKey? FindDeclaredPrimaryKey(this IReadOnlyEntityType entityType)
-        => entityType.BaseType == null ? entityType.FindPrimaryKey() : null;
+    public static IReadOnlyKey? FindDeclaredPrimaryKey(this IReadOnlyEntityType entityType) =>
+        entityType.BaseType == null ? entityType.FindPrimaryKey() : null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -314,8 +349,11 @@ public static class EntityTypeExtensions
     /// </summary>
     public static IEnumerable<IReadOnlyNavigation> FindDerivedNavigations(
         this IReadOnlyEntityType entityType,
-        string navigationName)
-        => entityType.GetDerivedTypes().Select(t => t.FindDeclaredNavigation(navigationName)!)
+        string navigationName
+    ) =>
+        entityType
+            .GetDerivedTypes()
+            .Select(t => t.FindDeclaredNavigation(navigationName)!)
             .Where(n => n != null);
 
     /// <summary>
@@ -326,14 +364,20 @@ public static class EntityTypeExtensions
     /// </summary>
     public static IProperty CheckPropertyBelongsToType(
         this IEntityType entityType,
-        IProperty property)
+        IProperty property
+    )
     {
         Check.NotNull(property, nameof(property));
 
         if ((property.DeclaringType as IEntityType)?.IsAssignableFrom(entityType) != true)
         {
             throw new InvalidOperationException(
-                CoreStrings.PropertyDoesNotBelong(property.Name, property.DeclaringType.DisplayName(), entityType.DisplayName()));
+                CoreStrings.PropertyDoesNotBelong(
+                    property.Name,
+                    property.DeclaringType.DisplayName(),
+                    entityType.DisplayName()
+                )
+            );
         }
 
         return property;

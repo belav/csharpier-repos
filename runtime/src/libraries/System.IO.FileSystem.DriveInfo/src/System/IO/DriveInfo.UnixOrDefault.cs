@@ -3,8 +3,8 @@
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Security;
 using System.Runtime.Versioning;
+using System.Security;
 
 namespace System.IO
 {
@@ -26,7 +26,10 @@ namespace System.IO
         {
             if (driveName.Contains('\0'))
             {
-                throw new ArgumentException(SR.Format(SR.Arg_InvalidDriveChars, driveName), nameof(driveName));
+                throw new ArgumentException(
+                    SR.Format(SR.Arg_InvalidDriveChars, driveName),
+                    nameof(driveName)
+                );
             }
             if (driveName.Length == 0)
             {
@@ -38,15 +41,9 @@ namespace System.IO
         [AllowNull]
         public string VolumeLabel
         {
-            get
-            {
-                return Name;
-            }
+            get { return Name; }
             [SupportedOSPlatform("windows")]
-            set
-            {
-                throw new PlatformNotSupportedException();
-            }
+            set { throw new PlatformNotSupportedException(); }
         }
     }
 }

@@ -24,8 +24,7 @@ namespace Microsoft.Extensions.Hosting.Systemd
         /// <returns>
         /// <see langword="true" /> if the current process is hosted as a systemd Service; otherwise, <see langword="false" />.
         /// </returns>
-        public static bool IsSystemdService()
-            => _isSystemdService ??= GetIsSystemdService();
+        public static bool IsSystemdService() => _isSystemdService ??= GetIsSystemdService();
 
         private static bool GetIsSystemdService()
         {
@@ -46,8 +45,8 @@ namespace Microsoft.Extensions.Hosting.Systemd
 
             if (processId == 1)
             {
-                return !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("NOTIFY_SOCKET")) ||
-                       !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("LISTEN_PID"));
+                return !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("NOTIFY_SOCKET"))
+                    || !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("LISTEN_PID"));
             }
 
             try
@@ -58,9 +57,7 @@ namespace Microsoft.Extensions.Hosting.Systemd
                 byte[] comm = File.ReadAllBytes("/proc/" + ppidString + "/comm");
                 return comm.AsSpan().SequenceEqual("systemd\n"u8);
             }
-            catch
-            {
-            }
+            catch { }
 
             return false;
         }

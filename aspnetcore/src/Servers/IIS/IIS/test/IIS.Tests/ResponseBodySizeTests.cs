@@ -7,7 +7,11 @@ using Microsoft.AspNetCore.Testing;
 namespace IIS.Tests;
 
 [SkipIfHostableWebCoreNotAvailable]
-[MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win8, SkipReason = "https://github.com/aspnet/IISIntegration/issues/866")]
+[MinimumOSVersion(
+    OperatingSystems.Windows,
+    WindowsVersions.Win8,
+    SkipReason = "https://github.com/aspnet/IISIntegration/issues/866"
+)]
 [SkipOnHelix("Unsupported queue", Queues = "Windows.Amd64.VS2022.Pre.Open;")]
 public class ResponseBodySizeTests : LoggedTest
 {
@@ -16,13 +20,16 @@ public class ResponseBodySizeTests : LoggedTest
     {
         const int bufferSize = 256 * 1024 * 1024;
 
-        using (var testServer = await TestServer.Create(
-            async ctx =>
-            {
-                var buffer = new byte[bufferSize];
-                await ctx.Response.Body.WriteAsync(buffer, 0, buffer.Length);
-
-            }, LoggerFactory))
+        using (
+            var testServer = await TestServer.Create(
+                async ctx =>
+                {
+                    var buffer = new byte[bufferSize];
+                    await ctx.Response.Body.WriteAsync(buffer, 0, buffer.Length);
+                },
+                LoggerFactory
+            )
+        )
         {
             var response = await testServer.HttpClient.GetAsync("/");
             var content = await response.Content.ReadAsByteArrayAsync();

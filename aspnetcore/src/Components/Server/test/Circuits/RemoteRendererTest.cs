@@ -22,9 +22,12 @@ public class RemoteRendererTest
 {
     // Nothing should exceed the timeout in a successful run of the the tests, this is just here to catch
     // failures.
-    private static readonly TimeSpan Timeout = Debugger.IsAttached ? System.Threading.Timeout.InfiniteTimeSpan : TimeSpan.FromSeconds(10);
+    private static readonly TimeSpan Timeout = Debugger.IsAttached
+        ? System.Threading.Timeout.InfiniteTimeSpan
+        : TimeSpan.FromSeconds(10);
 
-    private readonly IDataProtectionProvider _ephemeralDataProtectionProvider = new EphemeralDataProtectionProvider();
+    private readonly IDataProtectionProvider _ephemeralDataProtectionProvider =
+        new EphemeralDataProtectionProvider();
 
     [Fact]
     public void WritesAreBufferedWhenTheClientIsOffline()
@@ -65,7 +68,6 @@ public class RemoteRendererTest
         for (int i = 0; i < 20; i++)
         {
             component.TriggerRender();
-
         }
 
         // Assert
@@ -135,8 +137,19 @@ public class RemoteRendererTest
         var thirdBatchTCS = new TaskCompletionSource();
 
         var initialClient = new Mock<IClientProxy>();
-        initialClient.Setup(c => c.SendCoreAsync(It.IsAny<string>(), It.IsAny<object[]>(), It.IsAny<CancellationToken>()))
-            .Callback((string name, object[] value, CancellationToken token) => renderIds.Add((long)value[0]))
+        initialClient
+            .Setup(
+                c =>
+                    c.SendCoreAsync(
+                        It.IsAny<string>(),
+                        It.IsAny<object[]>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
+            .Callback(
+                (string name, object[] value, CancellationToken token) =>
+                    renderIds.Add((long)value[0])
+            )
             .Returns(firstBatchTCS.Task);
         var circuitClient = new CircuitClientProxy(initialClient.Object, "connection0");
         var renderer = GetRemoteRenderer(serviceProvider, circuitClient);
@@ -148,9 +161,22 @@ public class RemoteRendererTest
         });
 
         var client = new Mock<IClientProxy>();
-        client.Setup(c => c.SendCoreAsync(It.IsAny<string>(), It.IsAny<object[]>(), It.IsAny<CancellationToken>()))
-            .Callback((string name, object[] value, CancellationToken token) => renderIds.Add((long)value[0]))
-            .Returns<string, object[], CancellationToken>((n, v, t) => (long)v[0] == 3 ? secondBatchTCS.Task : thirdBatchTCS.Task);
+        client
+            .Setup(
+                c =>
+                    c.SendCoreAsync(
+                        It.IsAny<string>(),
+                        It.IsAny<object[]>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
+            .Callback(
+                (string name, object[] value, CancellationToken token) =>
+                    renderIds.Add((long)value[0])
+            )
+            .Returns<string, object[], CancellationToken>(
+                (n, v, t) => (long)v[0] == 3 ? secondBatchTCS.Task : thirdBatchTCS.Task
+            );
 
         var componentId = renderer.AssignRootComponentId(component);
         component.TriggerRender();
@@ -192,7 +218,10 @@ public class RemoteRendererTest
         var serviceProvider = CreateServiceProvider();
         var firstBatchTCS = new TaskCompletionSource();
         var secondBatchTCS = new TaskCompletionSource();
-        var offlineClient = new CircuitClientProxy(new Mock<IClientProxy>(MockBehavior.Strict).Object, "offline-client");
+        var offlineClient = new CircuitClientProxy(
+            new Mock<IClientProxy>(MockBehavior.Strict).Object,
+            "offline-client"
+        );
         offlineClient.SetDisconnected();
         var renderer = GetRemoteRenderer(serviceProvider, offlineClient);
         RenderFragment initialContent = (builder) =>
@@ -204,17 +233,38 @@ public class RemoteRendererTest
         var trigger = new Trigger();
         var renderIds = new List<long>();
         var onlineClient = new Mock<IClientProxy>();
-        onlineClient.Setup(c => c.SendCoreAsync(It.IsAny<string>(), It.IsAny<object[]>(), It.IsAny<CancellationToken>()))
-            .Callback((string name, object[] value, CancellationToken token) => renderIds.Add((long)value[1]))
-            .Returns<string, object[], CancellationToken>((n, v, t) => (long)v[1] == 2 ? firstBatchTCS.Task : secondBatchTCS.Task);
+        onlineClient
+            .Setup(
+                c =>
+                    c.SendCoreAsync(
+                        It.IsAny<string>(),
+                        It.IsAny<object[]>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
+            .Callback(
+                (string name, object[] value, CancellationToken token) =>
+                    renderIds.Add((long)value[1])
+            )
+            .Returns<string, object[], CancellationToken>(
+                (n, v, t) => (long)v[1] == 2 ? firstBatchTCS.Task : secondBatchTCS.Task
+            );
 
         // This produces the initial batch (id = 2)
-        await renderer.Dispatcher.InvokeAsync(() => renderer.RenderComponentAsync<AutoParameterTestComponent>(
-            ParameterView.FromDictionary(new Dictionary<string, object>
-            {
-                [nameof(AutoParameterTestComponent.Content)] = initialContent,
-                [nameof(AutoParameterTestComponent.Trigger)] = trigger
-            })));
+        await renderer
+            .Dispatcher
+            .InvokeAsync(
+                () =>
+                    renderer.RenderComponentAsync<AutoParameterTestComponent>(
+                        ParameterView.FromDictionary(
+                            new Dictionary<string, object>
+                            {
+                                [nameof(AutoParameterTestComponent.Content)] = initialContent,
+                                [nameof(AutoParameterTestComponent.Trigger)] = trigger
+                            }
+                        )
+                    )
+            );
         trigger.Component.Content = (builder) =>
         {
             builder.OpenElement(0, "offline element");
@@ -255,7 +305,10 @@ public class RemoteRendererTest
         var serviceProvider = CreateServiceProvider();
         var firstBatchTCS = new TaskCompletionSource();
         var secondBatchTCS = new TaskCompletionSource();
-        var offlineClient = new CircuitClientProxy(new Mock<IClientProxy>(MockBehavior.Strict).Object, "offline-client");
+        var offlineClient = new CircuitClientProxy(
+            new Mock<IClientProxy>(MockBehavior.Strict).Object,
+            "offline-client"
+        );
         offlineClient.SetDisconnected();
         var renderer = GetRemoteRenderer(serviceProvider, offlineClient);
         RenderFragment initialContent = (builder) =>
@@ -267,17 +320,38 @@ public class RemoteRendererTest
         var trigger = new Trigger();
         var renderIds = new List<long>();
         var onlineClient = new Mock<IClientProxy>();
-        onlineClient.Setup(c => c.SendCoreAsync(It.IsAny<string>(), It.IsAny<object[]>(), It.IsAny<CancellationToken>()))
-            .Callback((string name, object[] value, CancellationToken token) => renderIds.Add((long)value[1]))
-            .Returns<string, object[], CancellationToken>((n, v, t) => (long)v[1] == 2 ? firstBatchTCS.Task : secondBatchTCS.Task);
+        onlineClient
+            .Setup(
+                c =>
+                    c.SendCoreAsync(
+                        It.IsAny<string>(),
+                        It.IsAny<object[]>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
+            .Callback(
+                (string name, object[] value, CancellationToken token) =>
+                    renderIds.Add((long)value[1])
+            )
+            .Returns<string, object[], CancellationToken>(
+                (n, v, t) => (long)v[1] == 2 ? firstBatchTCS.Task : secondBatchTCS.Task
+            );
 
         // This produces the initial batch (id = 2)
-        await renderer.Dispatcher.InvokeAsync(() => renderer.RenderComponentAsync<AutoParameterTestComponent>(
-            ParameterView.FromDictionary(new Dictionary<string, object>
-            {
-                [nameof(AutoParameterTestComponent.Content)] = initialContent,
-                [nameof(AutoParameterTestComponent.Trigger)] = trigger
-            })));
+        await renderer
+            .Dispatcher
+            .InvokeAsync(
+                () =>
+                    renderer.RenderComponentAsync<AutoParameterTestComponent>(
+                        ParameterView.FromDictionary(
+                            new Dictionary<string, object>
+                            {
+                                [nameof(AutoParameterTestComponent.Content)] = initialContent,
+                                [nameof(AutoParameterTestComponent.Trigger)] = trigger
+                            }
+                        )
+                    )
+            );
         trigger.Component.Content = (builder) =>
         {
             builder.OpenElement(0, "offline element");
@@ -321,11 +395,27 @@ public class RemoteRendererTest
         var renderIds = new List<long>();
 
         var onlineClient = new Mock<IClientProxy>();
-        onlineClient.Setup(c => c.SendCoreAsync(It.IsAny<string>(), It.IsAny<object[]>(), It.IsAny<CancellationToken>()))
-            .Callback((string name, object[] value, CancellationToken token) => renderIds.Add((long)value[1]))
-            .Returns<string, object[], CancellationToken>((n, v, t) => (long)v[1] == 2 ? firstBatchTCS.Task : secondBatchTCS.Task);
+        onlineClient
+            .Setup(
+                c =>
+                    c.SendCoreAsync(
+                        It.IsAny<string>(),
+                        It.IsAny<object[]>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
+            .Callback(
+                (string name, object[] value, CancellationToken token) =>
+                    renderIds.Add((long)value[1])
+            )
+            .Returns<string, object[], CancellationToken>(
+                (n, v, t) => (long)v[1] == 2 ? firstBatchTCS.Task : secondBatchTCS.Task
+            );
 
-        var renderer = GetRemoteRenderer(serviceProvider, new CircuitClientProxy(onlineClient.Object, "online-client"));
+        var renderer = GetRemoteRenderer(
+            serviceProvider,
+            new CircuitClientProxy(onlineClient.Object, "online-client")
+        );
         RenderFragment initialContent = (builder) =>
         {
             builder.OpenElement(0, "my element");
@@ -335,12 +425,20 @@ public class RemoteRendererTest
         var trigger = new Trigger();
 
         // This produces the initial batch (id = 2)
-        await renderer.Dispatcher.InvokeAsync(() => renderer.RenderComponentAsync<AutoParameterTestComponent>(
-            ParameterView.FromDictionary(new Dictionary<string, object>
-            {
-                [nameof(AutoParameterTestComponent.Content)] = initialContent,
-                [nameof(AutoParameterTestComponent.Trigger)] = trigger
-            })));
+        await renderer
+            .Dispatcher
+            .InvokeAsync(
+                () =>
+                    renderer.RenderComponentAsync<AutoParameterTestComponent>(
+                        ParameterView.FromDictionary(
+                            new Dictionary<string, object>
+                            {
+                                [nameof(AutoParameterTestComponent.Content)] = initialContent,
+                                [nameof(AutoParameterTestComponent.Trigger)] = trigger
+                            }
+                        )
+                    )
+            );
         trigger.Component.Content = (builder) =>
         {
             builder.OpenElement(0, "offline element");
@@ -378,11 +476,27 @@ public class RemoteRendererTest
         var renderIds = new List<long>();
 
         var onlineClient = new Mock<IClientProxy>();
-        onlineClient.Setup(c => c.SendCoreAsync(It.IsAny<string>(), It.IsAny<object[]>(), It.IsAny<CancellationToken>()))
-            .Callback((string name, object[] value, CancellationToken token) => renderIds.Add((long)value[1]))
-            .Returns<string, object[], CancellationToken>((n, v, t) => (long)v[1] == 2 ? firstBatchTCS.Task : secondBatchTCS.Task);
+        onlineClient
+            .Setup(
+                c =>
+                    c.SendCoreAsync(
+                        It.IsAny<string>(),
+                        It.IsAny<object[]>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
+            .Callback(
+                (string name, object[] value, CancellationToken token) =>
+                    renderIds.Add((long)value[1])
+            )
+            .Returns<string, object[], CancellationToken>(
+                (n, v, t) => (long)v[1] == 2 ? firstBatchTCS.Task : secondBatchTCS.Task
+            );
 
-        var renderer = GetRemoteRenderer(serviceProvider, new CircuitClientProxy(onlineClient.Object, "online-client"));
+        var renderer = GetRemoteRenderer(
+            serviceProvider,
+            new CircuitClientProxy(onlineClient.Object, "online-client")
+        );
         RenderFragment initialContent = (builder) =>
         {
             builder.OpenElement(0, "my element");
@@ -392,12 +506,20 @@ public class RemoteRendererTest
         var trigger = new Trigger();
 
         // This produces the initial batch (id = 2)
-        await renderer.Dispatcher.InvokeAsync(() => renderer.RenderComponentAsync<AutoParameterTestComponent>(
-            ParameterView.FromDictionary(new Dictionary<string, object>
-            {
-                [nameof(AutoParameterTestComponent.Content)] = initialContent,
-                [nameof(AutoParameterTestComponent.Trigger)] = trigger
-            })));
+        await renderer
+            .Dispatcher
+            .InvokeAsync(
+                () =>
+                    renderer.RenderComponentAsync<AutoParameterTestComponent>(
+                        ParameterView.FromDictionary(
+                            new Dictionary<string, object>
+                            {
+                                [nameof(AutoParameterTestComponent.Content)] = initialContent,
+                                [nameof(AutoParameterTestComponent.Trigger)] = trigger
+                            }
+                        )
+                    )
+            );
         trigger.Component.Content = (builder) =>
         {
             builder.OpenElement(0, "offline element");
@@ -415,14 +537,17 @@ public class RemoteRendererTest
             exceptions.Add(e);
         };
 
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => renderer.OnRenderCompletedAsync(4, null));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => renderer.OnRenderCompletedAsync(4, null)
+        );
         firstBatchTCS.SetResult();
         secondBatchTCS.SetResult();
 
         // Assert
         Assert.Equal(
             "Received an acknowledgement for batch with id '4' when the last batch produced was '3'.",
-            exception.Message);
+            exception.Message
+        );
     }
 
     private IServiceProvider CreateServiceProvider()
@@ -432,7 +557,10 @@ public class RemoteRendererTest
         return serviceCollection.BuildServiceProvider();
     }
 
-    private TestRemoteRenderer GetRemoteRenderer(IServiceProvider serviceProvider, CircuitClientProxy circuitClient = null)
+    private TestRemoteRenderer GetRemoteRenderer(
+        IServiceProvider serviceProvider,
+        CircuitClientProxy circuitClient = null
+    )
     {
         var serverComponentDeserializer = new ServerComponentDeserializer(
             _ephemeralDataProtectionProvider,
@@ -440,7 +568,9 @@ public class RemoteRendererTest
             new RootComponentTypeCache(),
             new ComponentParameterDeserializer(
                 NullLogger<ComponentParameterDeserializer>.Instance,
-                new ComponentParametersTypeCache()));
+                new ComponentParametersTypeCache()
+            )
+        );
 
         return new TestRemoteRenderer(
             serviceProvider,
@@ -448,15 +578,30 @@ public class RemoteRendererTest
             new CircuitOptions(),
             circuitClient ?? new CircuitClientProxy(),
             serverComponentDeserializer,
-            NullLogger.Instance);
+            NullLogger.Instance
+        );
     }
 
     private class TestRemoteRenderer : RemoteRenderer
     {
-        public TestRemoteRenderer(IServiceProvider serviceProvider, ILoggerFactory loggerFactory, CircuitOptions options, CircuitClientProxy client, IServerComponentDeserializer serverComponentDeserializer, ILogger logger)
-            : base(serviceProvider, loggerFactory, options, client, serverComponentDeserializer, logger, CreateJSRuntime(options), new CircuitJSComponentInterop(options))
-        {
-        }
+        public TestRemoteRenderer(
+            IServiceProvider serviceProvider,
+            ILoggerFactory loggerFactory,
+            CircuitOptions options,
+            CircuitClientProxy client,
+            IServerComponentDeserializer serverComponentDeserializer,
+            ILogger logger
+        )
+            : base(
+                serviceProvider,
+                loggerFactory,
+                options,
+                client,
+                serverComponentDeserializer,
+                logger,
+                CreateJSRuntime(options),
+                new CircuitJSComponentInterop(options)
+            ) { }
 
         public async Task RenderComponentAsync<TComponent>(ParameterView initialParameters)
         {
@@ -465,17 +610,22 @@ public class RemoteRendererTest
             await RenderRootComponentAsync(componentId, initialParameters);
         }
 
-        protected override void AttachRootComponentToBrowser(int componentId, string domElementSelector)
-        {
-        }
+        protected override void AttachRootComponentToBrowser(
+            int componentId,
+            string domElementSelector
+        ) { }
 
         public new ComponentState GetComponentState(int componentId)
         {
             return base.GetComponentState(componentId);
         }
 
-        private static RemoteJSRuntime CreateJSRuntime(CircuitOptions options)
-            => new RemoteJSRuntime(Options.Create(options), Options.Create(new HubOptions<ComponentHub>()), null);
+        private static RemoteJSRuntime CreateJSRuntime(CircuitOptions options) =>
+            new RemoteJSRuntime(
+                Options.Create(options),
+                Options.Create(new HubOptions<ComponentHub>()),
+                null
+            );
     }
 
     private class TestComponent : IComponent, IHandleAfterRender
@@ -488,9 +638,7 @@ public class RemoteRendererTest
             builder.CloseElement();
         };
 
-        public TestComponent()
-        {
-        }
+        public TestComponent() { }
 
         public TestComponent(RenderFragment renderFragment)
         {
@@ -518,7 +666,9 @@ public class RemoteRendererTest
 
         public void TriggerRender()
         {
-            var task = _renderHandle.Dispatcher.InvokeAsync(() => _renderHandle.Render(_renderFragment));
+            var task = _renderHandle
+                .Dispatcher
+                .InvokeAsync(() => _renderHandle.Render(_renderFragment));
             Assert.True(task.IsCompletedSuccessfully);
         }
     }
@@ -527,9 +677,11 @@ public class RemoteRendererTest
     {
         private RenderHandle _renderHandle;
 
-        [Parameter] public RenderFragment Content { get; set; }
+        [Parameter]
+        public RenderFragment Content { get; set; }
 
-        [Parameter] public Trigger Trigger { get; set; }
+        [Parameter]
+        public Trigger Trigger { get; set; }
 
         public void Attach(RenderHandle renderHandle)
         {
@@ -555,6 +707,7 @@ public class RemoteRendererTest
     private class Trigger
     {
         public AutoParameterTestComponent Component { get; set; }
+
         public void TriggerRender()
         {
             Component.TriggerRender();

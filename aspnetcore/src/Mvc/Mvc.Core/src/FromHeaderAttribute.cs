@@ -9,8 +9,16 @@ namespace Microsoft.AspNetCore.Mvc;
 /// <summary>
 /// Specifies that a parameter or property should be bound using the request headers.
 /// </summary>
-[AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-public class FromHeaderAttribute : Attribute, IBindingSourceMetadata, IModelNameProvider, IFromHeaderMetadata
+[AttributeUsage(
+    AttributeTargets.Parameter | AttributeTargets.Property,
+    AllowMultiple = false,
+    Inherited = true
+)]
+public class FromHeaderAttribute
+    : Attribute,
+        IBindingSourceMetadata,
+        IModelNameProvider,
+        IFromHeaderMetadata
 {
     /// <inheritdoc />
     public BindingSource BindingSource => BindingSource.Header;

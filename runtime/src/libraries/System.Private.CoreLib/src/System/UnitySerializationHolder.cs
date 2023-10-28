@@ -10,7 +10,11 @@ namespace System
     /// This only exists for compatibility with .NET Framework.
     /// </summary>
     [Serializable]
-    [Obsolete(Obsoletions.LegacyFormatterMessage, DiagnosticId = Obsoletions.LegacyFormatterDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.LegacyFormatterMessage,
+        DiagnosticId = Obsoletions.LegacyFormatterDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
     // Needs to be public to support binary serialization compatibility
     public sealed class UnitySerializationHolder : ISerializable, IObjectReference
     {
@@ -49,7 +53,9 @@ namespace System
             // We are only support deserializing DBNull and throwing for everything else.
             if (_unityType != NullUnity)
             {
-                throw new ArgumentException(SR.Format(SR.Argument_InvalidUnity, _data ?? "UnityType"));
+                throw new ArgumentException(
+                    SR.Format(SR.Argument_InvalidUnity, _data ?? "UnityType")
+                );
             }
 
             // We are always returning the same DBNull instance.

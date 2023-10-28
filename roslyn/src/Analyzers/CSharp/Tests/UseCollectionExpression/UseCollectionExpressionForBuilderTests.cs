@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UseCollectionExpress
 
 using VerifyCS = CSharpCodeFixVerifier<
     CSharpUseCollectionExpressionForBuilderDiagnosticAnalyzer,
-    CSharpUseCollectionExpressionForBuilderCodeFixProvider>;
+    CSharpUseCollectionExpressionForBuilderCodeFixProvider
+>;
 
 [Trait(Traits.Feature, Traits.Features.CodeActionsUseCollectionInitializer)]
 public partial class UseCollectionExpressionForBuilderTests
@@ -51,16 +52,16 @@ public partial class UseCollectionExpressionForBuilderTests
 
     public static readonly IEnumerable<object[]> FailureCreationPatterns = new[]
     {
-        new[] {"var builder = ImmutableArray.CreateBuilder<int>();" },
-        new[] {"var builder = ArrayBuilder<int>.GetInstance();" },
-        new[] {"using var _ = ArrayBuilder<int>.GetInstance(out var builder);" },
+        new[] { "var builder = ImmutableArray.CreateBuilder<int>();" },
+        new[] { "var builder = ArrayBuilder<int>.GetInstance();" },
+        new[] { "using var _ = ArrayBuilder<int>.GetInstance(out var builder);" },
     };
 
     public static readonly IEnumerable<object[]> SuccessCreationPatterns = new[]
     {
-        new[] {"[|var builder = ImmutableArray.[|CreateBuilder|]<int>();|]" },
-        new[] {"[|var builder = ArrayBuilder<int>.[|GetInstance|]();|]" },
-        new[] {"[|using var _ = ArrayBuilder<int>.[|GetInstance|](out var builder);|]" },
+        new[] { "[|var builder = ImmutableArray.[|CreateBuilder|]<int>();|]" },
+        new[] { "[|var builder = ArrayBuilder<int>.[|GetInstance|]();|]" },
+        new[] { "[|using var _ = ArrayBuilder<int>.[|GetInstance|](out var builder);|]" },
     };
 
     [Theory, MemberData(nameof(FailureCreationPatterns))]
@@ -68,7 +69,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -80,7 +82,8 @@ public partial class UseCollectionExpressionForBuilderTests
                         return builder.ToImmutable();
                     }
                 }
-                """ + s_arrayBuilderApi,
+                """
+                + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp11,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -91,7 +94,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -103,7 +107,8 @@ public partial class UseCollectionExpressionForBuilderTests
                         return builder.ToImmutable();
                     }
                 }
-                """ + s_arrayBuilderApi,
+                """
+                + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
         }.RunAsync();
@@ -114,7 +119,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -126,8 +132,10 @@ public partial class UseCollectionExpressionForBuilderTests
                         return builder.ToImmutable();
                     }
                 }
-                """ + s_arrayBuilderApi,
-            FixedCode = """
+                """
+                + s_arrayBuilderApi,
+            FixedCode =
+                """
                 using System.Collections.Immutable;
 
                 class C
@@ -148,7 +156,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -160,8 +169,10 @@ public partial class UseCollectionExpressionForBuilderTests
                         var v = (ImmutableArray<int>)builder.ToImmutable();
                     }
                 }
-                """ + s_arrayBuilderApi,
-            FixedCode = """
+                """
+                + s_arrayBuilderApi,
+            FixedCode =
+                """
                 using System.Collections.Immutable;
 
                 class C
@@ -182,7 +193,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
                 using X = System.Collections.Immutable.ImmutableArray<int>;
 
@@ -195,7 +207,8 @@ public partial class UseCollectionExpressionForBuilderTests
                         var v = (X)builder.ToImmutable();
                     }
                 }
-                """ + s_arrayBuilderApi,
+                """
+                + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -206,7 +219,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -220,8 +234,10 @@ public partial class UseCollectionExpressionForBuilderTests
 
                     void Goo(ImmutableArray<int> values) { }
                 }
-                """ + s_arrayBuilderApi,
-            FixedCode = """
+                """
+                + s_arrayBuilderApi,
+            FixedCode =
+                """
                 using System.Collections.Immutable;
 
                 class C
@@ -244,7 +260,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -258,8 +275,10 @@ public partial class UseCollectionExpressionForBuilderTests
 
                     void Goo(ImmutableArray<int> values) { }
                 }
-                """ + s_arrayBuilderApi,
-            FixedCode = """
+                """
+                + s_arrayBuilderApi,
+            FixedCode =
+                """
                 using System.Collections.Immutable;
 
                 class C
@@ -282,7 +301,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -296,8 +316,10 @@ public partial class UseCollectionExpressionForBuilderTests
 
                     void Goo(ImmutableArray<int> values) { }
                 }
-                """ + s_arrayBuilderApi,
-            FixedCode = """
+                """
+                + s_arrayBuilderApi,
+            FixedCode =
+                """
                 using System.Collections.Immutable;
 
                 class C
@@ -320,7 +342,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -334,8 +357,10 @@ public partial class UseCollectionExpressionForBuilderTests
 
                     void Goo(ImmutableArray<int> values) { }
                 }
-                """ + s_arrayBuilderApi,
-            FixedCode = """
+                """
+                + s_arrayBuilderApi,
+            FixedCode =
+                """
                 using System.Collections.Immutable;
 
                 class C
@@ -358,7 +383,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -373,7 +399,8 @@ public partial class UseCollectionExpressionForBuilderTests
 
                     void Goo(ImmutableArray<int> values) { }
                 }
-                """ + s_arrayBuilderApi,
+                """
+                + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -384,7 +411,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -397,7 +425,8 @@ public partial class UseCollectionExpressionForBuilderTests
 
                     void Goo(ImmutableArray<int> values) { }
                 }
-                """ + s_arrayBuilderApi,
+                """
+                + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -408,7 +437,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -425,8 +455,10 @@ public partial class UseCollectionExpressionForBuilderTests
 
                     void Goo(ImmutableArray<int> values) { }
                 }
-                """ + s_arrayBuilderApi,
-            FixedCode = """
+                """
+                + s_arrayBuilderApi,
+            FixedCode =
+                """
                 using System.Collections.Immutable;
 
                 class C
@@ -449,7 +481,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -468,8 +501,10 @@ public partial class UseCollectionExpressionForBuilderTests
 
                     void Goo(ImmutableArray<int> values) { }
                 }
-                """ + s_arrayBuilderApi,
-            FixedCode = """
+                """
+                + s_arrayBuilderApi,
+            FixedCode =
+                """
                 using System.Collections.Immutable;
 
                 class C
@@ -492,7 +527,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -511,7 +547,8 @@ public partial class UseCollectionExpressionForBuilderTests
 
                     void Goo(ImmutableArray<int> values) { }
                 }
-                """ + s_arrayBuilderApi,
+                """
+                + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -522,7 +559,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -541,7 +579,8 @@ public partial class UseCollectionExpressionForBuilderTests
 
                     void Goo(ImmutableArray<int> values) { }
                 }
-                """ + s_arrayBuilderApi,
+                """
+                + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -552,7 +591,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -575,8 +615,10 @@ public partial class UseCollectionExpressionForBuilderTests
 
                     void Goo(ImmutableArray<int> values) { }
                 }
-                """ + s_arrayBuilderApi,
-            FixedCode = """
+                """
+                + s_arrayBuilderApi,
+            FixedCode =
+                """
                 using System.Collections.Immutable;
 
                 class C
@@ -599,7 +641,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -622,8 +665,10 @@ public partial class UseCollectionExpressionForBuilderTests
 
                     void Goo(ImmutableArray<int> values) { }
                 }
-                """ + s_arrayBuilderApi,
-            FixedCode = """
+                """
+                + s_arrayBuilderApi,
+            FixedCode =
+                """
                 using System.Collections.Immutable;
 
                 class C
@@ -646,7 +691,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -669,8 +715,10 @@ public partial class UseCollectionExpressionForBuilderTests
 
                     void Goo(ImmutableArray<int> values) { }
                 }
-                """ + s_arrayBuilderApi,
-            FixedCode = """
+                """
+                + s_arrayBuilderApi,
+            FixedCode =
+                """
                 using System.Collections.Immutable;
 
                 class C
@@ -688,12 +736,17 @@ public partial class UseCollectionExpressionForBuilderTests
         }.RunAsync();
     }
 
-    [Theory(Skip = "https://github.com/dotnet/roslyn/issues/70172"), MemberData(nameof(SuccessCreationPatterns)), WorkItem("https://github.com/dotnet/roslyn/issues/69277")]
+    [
+        Theory(Skip = "https://github.com/dotnet/roslyn/issues/70172"),
+        MemberData(nameof(SuccessCreationPatterns)),
+        WorkItem("https://github.com/dotnet/roslyn/issues/69277")
+    ]
     public async Task TestWithIfStatement1(string pattern)
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -709,8 +762,10 @@ public partial class UseCollectionExpressionForBuilderTests
 
                     void Goo(ImmutableArray<int> values) { }
                 }
-                """ + s_arrayBuilderApi,
-            FixedCode = """
+                """
+                + s_arrayBuilderApi,
+            FixedCode =
+                """
                 using System.Collections.Immutable;
 
                 class C
@@ -733,7 +788,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -751,8 +807,10 @@ public partial class UseCollectionExpressionForBuilderTests
 
                     void Goo(ImmutableArray<int> values) { }
                 }
-                """ + s_arrayBuilderApi,
-            FixedCode = """
+                """
+                + s_arrayBuilderApi,
+            FixedCode =
+                """
                 using System.Collections.Immutable;
 
                 class C
@@ -770,12 +828,17 @@ public partial class UseCollectionExpressionForBuilderTests
         }.RunAsync();
     }
 
-    [Theory(Skip = "https://github.com/dotnet/roslyn/issues/70172"), MemberData(nameof(SuccessCreationPatterns)), WorkItem("https://github.com/dotnet/roslyn/issues/69277")]
+    [
+        Theory(Skip = "https://github.com/dotnet/roslyn/issues/70172"),
+        MemberData(nameof(SuccessCreationPatterns)),
+        WorkItem("https://github.com/dotnet/roslyn/issues/69277")
+    ]
     public async Task TestWithIfStatement3(string pattern)
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -793,8 +856,10 @@ public partial class UseCollectionExpressionForBuilderTests
 
                     void Goo(ImmutableArray<int> values) { }
                 }
-                """ + s_arrayBuilderApi,
-            FixedCode = """
+                """
+                + s_arrayBuilderApi,
+            FixedCode =
+                """
                 using System.Collections.Immutable;
 
                 class C
@@ -817,7 +882,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -839,8 +905,10 @@ public partial class UseCollectionExpressionForBuilderTests
 
                     void Goo(ImmutableArray<int> values) { }
                 }
-                """ + s_arrayBuilderApi,
-            FixedCode = """
+                """
+                + s_arrayBuilderApi,
+            FixedCode =
+                """
                 using System.Collections.Immutable;
 
                 class C
@@ -863,7 +931,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -877,8 +946,10 @@ public partial class UseCollectionExpressionForBuilderTests
 
                     void Goo(ImmutableArray<int> values) { }
                 }
-                """ + s_arrayBuilderApi,
-            FixedCode = """
+                """
+                + s_arrayBuilderApi,
+            FixedCode =
+                """
                 using System.Collections.Immutable;
 
                 class C
@@ -901,7 +972,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -915,8 +987,10 @@ public partial class UseCollectionExpressionForBuilderTests
 
                     void Goo(ImmutableArray<int> values) { }
                 }
-                """ + s_arrayBuilderApi,
-            FixedCode = """
+                """
+                + s_arrayBuilderApi,
+            FixedCode =
+                """
                 using System.Collections.Immutable;
 
                 class C
@@ -939,7 +1013,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
                 
                 class C
@@ -953,8 +1028,10 @@ public partial class UseCollectionExpressionForBuilderTests
 
                     void Goo(ImmutableArray<int> values) { }
                 }
-                """ + s_arrayBuilderApi,
-            FixedCode = """
+                """
+                + s_arrayBuilderApi,
+            FixedCode =
+                """
                 using System.Collections.Immutable;
 
                 class C
@@ -977,7 +1054,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
                 
                 class C
@@ -991,7 +1069,8 @@ public partial class UseCollectionExpressionForBuilderTests
 
                     void Goo(ImmutableArray<int> values) { }
                 }
-                """ + s_arrayBuilderApi,
+                """
+                + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -1002,7 +1081,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -1016,8 +1096,10 @@ public partial class UseCollectionExpressionForBuilderTests
 
                     void Goo(ImmutableArray<int> values) { }
                 }
-                """ + s_arrayBuilderApi,
-            FixedCode = """
+                """
+                + s_arrayBuilderApi,
+            FixedCode =
+                """
                 using System.Collections.Immutable;
 
                 class C
@@ -1040,7 +1122,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -1054,8 +1137,10 @@ public partial class UseCollectionExpressionForBuilderTests
 
                     void Goo(ImmutableArray<int> values) { }
                 }
-                """ + s_arrayBuilderApi,
-            FixedCode = """
+                """
+                + s_arrayBuilderApi,
+            FixedCode =
+                """
                 using System.Collections.Immutable;
 
                 class C
@@ -1078,7 +1163,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -1092,8 +1178,10 @@ public partial class UseCollectionExpressionForBuilderTests
 
                     void Goo(ImmutableArray<int> values) { }
                 }
-                """ + s_arrayBuilderApi,
-            FixedCode = """
+                """
+                + s_arrayBuilderApi,
+            FixedCode =
+                """
                 using System.Collections.Immutable;
 
                 class C
@@ -1116,7 +1204,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -1130,8 +1219,10 @@ public partial class UseCollectionExpressionForBuilderTests
 
                     void Goo(int[] values) { }
                 }
-                """ + s_arrayBuilderApi,
-            FixedCode = """
+                """
+                + s_arrayBuilderApi,
+            FixedCode =
+                """
                 using System.Collections.Immutable;
 
                 class C
@@ -1154,7 +1245,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -1169,7 +1261,8 @@ public partial class UseCollectionExpressionForBuilderTests
 
                     void Goo(ImmutableArray<int> values) { }
                 }
-                """ + s_arrayBuilderApi,
+                """
+                + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -1180,7 +1273,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -1195,7 +1289,8 @@ public partial class UseCollectionExpressionForBuilderTests
 
                     void Goo(ImmutableArray<int> values) { }
                 }
-                """ + s_arrayBuilderApi,
+                """
+                + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -1206,7 +1301,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -1220,8 +1316,10 @@ public partial class UseCollectionExpressionForBuilderTests
                         return builder.ToImmutable();
                     }
                 }
-                """ + s_arrayBuilderApi,
-            FixedCode = """
+                """
+                + s_arrayBuilderApi,
+            FixedCode =
+                """
                 using System.Collections.Immutable;
 
                 class C
@@ -1246,7 +1344,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -1259,8 +1358,10 @@ public partial class UseCollectionExpressionForBuilderTests
                         return builder.ToImmutable();
                     }
                 }
-                """ + s_arrayBuilderApi,
-            FixedCode = """
+                """
+                + s_arrayBuilderApi,
+            FixedCode =
+                """
                 using System.Collections.Immutable;
 
                 class C
@@ -1285,7 +1386,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -1300,8 +1402,10 @@ public partial class UseCollectionExpressionForBuilderTests
                         return builder.ToImmutable();
                     }
                 }
-                """ + s_arrayBuilderApi,
-            FixedCode = """
+                """
+                + s_arrayBuilderApi,
+            FixedCode =
+                """
                 using System.Collections.Immutable;
 
                 class C
@@ -1328,7 +1432,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -1340,7 +1445,8 @@ public partial class UseCollectionExpressionForBuilderTests
                         return builder.ToImmutable();
                     }
                 }
-                """ + s_arrayBuilderApi,
+                """
+                + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
         }.RunAsync();
@@ -1351,24 +1457,24 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 {{pattern}}
                 [|builder.Add(|]0);
                 ImmutableArray<int> array = builder.ToImmutable();
-                """ + s_arrayBuilderApi,
-            FixedCode = """
+                """
+                + s_arrayBuilderApi,
+            FixedCode =
+                """
                 using System.Collections.Immutable;
 
                 ImmutableArray<int> array = [0];
                 """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
-            TestState =
-            {
-                OutputKind = OutputKind.ConsoleApplication,
-            },
+            TestState = { OutputKind = OutputKind.ConsoleApplication, },
         }.RunAsync();
     }
 
@@ -1377,7 +1483,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 {{pattern}}
@@ -1387,8 +1494,10 @@ public partial class UseCollectionExpressionForBuilderTests
                 [|builder.Add(|]3 +
                     4);
                 ImmutableArray<int> array = builder.ToImmutable();
-                """ + s_arrayBuilderApi,
-            FixedCode = """
+                """
+                + s_arrayBuilderApi,
+            FixedCode =
+                """
                 using System.Collections.Immutable;
 
                 ImmutableArray<int> array =
@@ -1402,10 +1511,7 @@ public partial class UseCollectionExpressionForBuilderTests
                 """ + s_arrayBuilderApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
-            TestState =
-            {
-                OutputKind = OutputKind.ConsoleApplication,
-            },
+            TestState = { OutputKind = OutputKind.ConsoleApplication, },
         }.RunAsync();
     }
 
@@ -1414,7 +1520,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = $$"""
+            TestCode =
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -1428,8 +1535,10 @@ public partial class UseCollectionExpressionForBuilderTests
                         return builder1.ToImmutable();
                     }
                 }
-                """ + s_arrayBuilderApi,
-            FixedCode = """
+                """
+                + s_arrayBuilderApi,
+            FixedCode =
+                """
                 using System.Collections.Immutable;
 
                 class C
@@ -1453,7 +1562,8 @@ public partial class UseCollectionExpressionForBuilderTests
     {
         await new VerifyCS.Test
         {
-            TestCode = ($$"""
+            TestCode = (
+                $$"""
                 using System.Collections.Immutable;
 
                 class C
@@ -1467,8 +1577,11 @@ public partial class UseCollectionExpressionForBuilderTests
                         return builder1.ToImmutable();
                     }
                 }
-                """ + s_arrayBuilderApi).ReplaceLineEndings(endOfLine),
-            FixedCode = ("""
+                """
+                + s_arrayBuilderApi
+            ).ReplaceLineEndings(endOfLine),
+            FixedCode = (
+                """
                 using System.Collections.Immutable;
 
                 class C
@@ -1478,7 +1591,8 @@ public partial class UseCollectionExpressionForBuilderTests
                         return [[0]];
                     }
                 }
-                """ + s_arrayBuilderApi).ReplaceLineEndings(endOfLine),
+                """ + s_arrayBuilderApi
+            ).ReplaceLineEndings(endOfLine),
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
             NumberOfFixAllIterations = 2,

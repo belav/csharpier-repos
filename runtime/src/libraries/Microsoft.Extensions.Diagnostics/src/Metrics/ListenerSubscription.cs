@@ -51,7 +51,10 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
 
                 if (_instruments.ContainsKey(instrument))
                 {
-                    Debug.Assert(false, "InstrumentPublished called for an instrument we're already listening to.");
+                    Debug.Assert(
+                        false,
+                        "InstrumentPublished called for an instrument we're already listening to."
+                    );
                     return;
                 }
 
@@ -130,8 +133,14 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
             InstrumentRule? best = null;
             foreach (var rule in _rules)
             {
-                if (RuleMatches(rule, instrument, _metricsListener.Name, _meterFactory)
-                    && IsMoreSpecific(rule, best, isLocalScope: instrument.Meter.Scope == _meterFactory))
+                if (
+                    RuleMatches(rule, instrument, _metricsListener.Name, _meterFactory)
+                    && IsMoreSpecific(
+                        rule,
+                        best,
+                        isLocalScope: instrument.Meter.Scope == _meterFactory
+                    )
+                )
                 {
                     best = rule;
                 }
@@ -141,24 +150,45 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
         }
 
         // internal for testing
-        internal static bool RuleMatches(InstrumentRule rule, Instrument instrument, string listenerName, IMeterFactory meterFactory)
+        internal static bool RuleMatches(
+            InstrumentRule rule,
+            Instrument instrument,
+            string listenerName,
+            IMeterFactory meterFactory
+        )
         {
             // Exact match or empty
-            if (!string.IsNullOrEmpty(rule.ListenerName)
-                && !string.Equals(rule.ListenerName, listenerName, StringComparison.OrdinalIgnoreCase))
+            if (
+                !string.IsNullOrEmpty(rule.ListenerName)
+                && !string.Equals(
+                    rule.ListenerName,
+                    listenerName,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 return false;
             }
 
             // Exact match or empty
-            if (!string.IsNullOrEmpty(rule.InstrumentName)
-                && !string.Equals(rule.InstrumentName, instrument.Name, StringComparison.OrdinalIgnoreCase))
+            if (
+                !string.IsNullOrEmpty(rule.InstrumentName)
+                && !string.Equals(
+                    rule.InstrumentName,
+                    instrument.Name,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 return false;
             }
 
-            if (!(rule.Scopes.HasFlag(MeterScope.Global) && instrument.Meter.Scope == null)
-                && !(rule.Scopes.HasFlag(MeterScope.Local) && instrument.Meter.Scope == meterFactory))
+            if (
+                !(rule.Scopes.HasFlag(MeterScope.Global) && instrument.Meter.Scope == null)
+                && !(
+                    rule.Scopes.HasFlag(MeterScope.Local) && instrument.Meter.Scope == meterFactory
+                )
+            )
             {
                 return false;
             }
@@ -172,13 +202,13 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
                 const char WildcardChar = '*';
 
                 int wildcardIndex = meterName.IndexOf(WildcardChar);
-                if (wildcardIndex >= 0 &&
-                    meterName.IndexOf(WildcardChar, wildcardIndex + 1) >= 0)
+                if (wildcardIndex >= 0 && meterName.IndexOf(WildcardChar, wildcardIndex + 1) >= 0)
                 {
                     throw new InvalidOperationException(SR.MoreThanOneWildcard);
                 }
 
-                ReadOnlySpan<char> prefix, suffix;
+                ReadOnlySpan<char> prefix,
+                    suffix;
                 if (wildcardIndex < 0)
                 {
                     prefix = meterName.AsSpan();
@@ -190,8 +220,18 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
                     suffix = meterName.AsSpan(wildcardIndex + 1);
                 }
 
-                if (!instrument.Meter.Name.AsSpan().StartsWith(prefix, StringComparison.OrdinalIgnoreCase) ||
-                    !instrument.Meter.Name.AsSpan().EndsWith(suffix, StringComparison.OrdinalIgnoreCase))
+                if (
+                    !instrument
+                        .Meter
+                        .Name
+                        .AsSpan()
+                        .StartsWith(prefix, StringComparison.OrdinalIgnoreCase)
+                    || !instrument
+                        .Meter
+                        .Name
+                        .AsSpan()
+                        .EndsWith(suffix, StringComparison.OrdinalIgnoreCase)
+                )
                 {
                     return false;
                 }
@@ -202,7 +242,11 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
 
         // Everything must already match the Instrument and listener, or be blank.
         // internal for testing
-        internal static bool IsMoreSpecific(InstrumentRule rule, InstrumentRule? best, bool isLocalScope)
+        internal static bool IsMoreSpecific(
+            InstrumentRule rule,
+            InstrumentRule? best,
+            bool isLocalScope
+        )
         {
             if (best == null)
             {
@@ -214,7 +258,9 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
             {
                 return true;
             }
-            else if (string.IsNullOrEmpty(rule.ListenerName) && !string.IsNullOrEmpty(best.ListenerName))
+            else if (
+                string.IsNullOrEmpty(rule.ListenerName) && !string.IsNullOrEmpty(best.ListenerName)
+            )
             {
                 return false;
             }
@@ -239,11 +285,17 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
             }
 
             // Instrument name
-            if (!string.IsNullOrEmpty(rule.InstrumentName) && string.IsNullOrEmpty(best.InstrumentName))
+            if (
+                !string.IsNullOrEmpty(rule.InstrumentName)
+                && string.IsNullOrEmpty(best.InstrumentName)
+            )
             {
                 return true;
             }
-            else if (string.IsNullOrEmpty(rule.InstrumentName) && !string.IsNullOrEmpty(best.InstrumentName))
+            else if (
+                string.IsNullOrEmpty(rule.InstrumentName)
+                && !string.IsNullOrEmpty(best.InstrumentName)
+            )
             {
                 return false;
             }
@@ -254,11 +306,17 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
             if (isLocalScope)
             {
                 // Local is more specific than Local+Global
-                if (!rule.Scopes.HasFlag(MeterScope.Global) && best.Scopes.HasFlag(MeterScope.Global))
+                if (
+                    !rule.Scopes.HasFlag(MeterScope.Global)
+                    && best.Scopes.HasFlag(MeterScope.Global)
+                )
                 {
                     return true;
                 }
-                else if (rule.Scopes.HasFlag(MeterScope.Global) && !best.Scopes.HasFlag(MeterScope.Global))
+                else if (
+                    rule.Scopes.HasFlag(MeterScope.Global)
+                    && !best.Scopes.HasFlag(MeterScope.Global)
+                )
                 {
                     return false;
                 }
@@ -271,7 +329,9 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
                 {
                     return true;
                 }
-                else if (rule.Scopes.HasFlag(MeterScope.Local) && !best.Scopes.HasFlag(MeterScope.Local))
+                else if (
+                    rule.Scopes.HasFlag(MeterScope.Local) && !best.Scopes.HasFlag(MeterScope.Local)
+                )
                 {
                     return false;
                 }

@@ -1,13 +1,13 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Xml;
-using System.IO;
-using System.Xml.Serialization;
+using System.Collections;
 using System.Data.SqlTypes;
 using System.Diagnostics;
-using System.Collections;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace System.Data.Common
 {
@@ -16,9 +16,7 @@ namespace System.Data.Common
         private SqlChars[] _values = default!; // Late-initialized
 
         public SqlCharsStorage(DataColumn column)
-        : base(column, typeof(SqlChars), SqlChars.Null, SqlChars.Null, StorageType.SqlChars)
-        {
-        }
+            : base(column, typeof(SqlChars), SqlChars.Null, SqlChars.Null, StorageType.SqlChars) { }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {
@@ -131,7 +129,12 @@ namespace System.Data.Common
             return new SqlChars[recordCount];
         }
 
-        protected override void CopyValue(int record, object store, BitArray nullbits, int storeIndex)
+        protected override void CopyValue(
+            int record,
+            object store,
+            BitArray nullbits,
+            int storeIndex
+        )
         {
             SqlChars[] typedStore = (SqlChars[])store;
             typedStore[storeIndex] = _values[record];

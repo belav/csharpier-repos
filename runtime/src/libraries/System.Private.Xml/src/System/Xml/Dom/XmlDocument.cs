@@ -6,13 +6,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.IO;
+using System.Runtime.Versioning;
+using System.Security;
 using System.Text;
 using System.Xml.Schema;
 using System.Xml.XPath;
-using System.Security;
-using System.Globalization;
-using System.Runtime.Versioning;
 
 namespace System.Xml
 {
@@ -53,23 +53,29 @@ namespace System.Xml
 
         // If changing the array below ensure that the seed indexes before match
         private static readonly (string key, int hash)[] s_nameTableSeeds = new[]
-            {
-                (DocumentName, System.Xml.NameTable.ComputeHash32(DocumentName)),
-                (DocumentFragmentName, System.Xml.NameTable.ComputeHash32(DocumentFragmentName)),
-                (CommentName, System.Xml.NameTable.ComputeHash32(CommentName)),
-                (TextName, System.Xml.NameTable.ComputeHash32(TextName)),
-                (CDataSectionName, System.Xml.NameTable.ComputeHash32(CDataSectionName)),
-                (EntityName, System.Xml.NameTable.ComputeHash32(EntityName)),
-                (ID, System.Xml.NameTable.ComputeHash32(ID)),
-                (Xmlns, System.Xml.NameTable.ComputeHash32(Xmlns)),
-                (Xml, System.Xml.NameTable.ComputeHash32(Xml)),
-                (Space, System.Xml.NameTable.ComputeHash32(Space)),
-                (Lang, System.Xml.NameTable.ComputeHash32(Lang)),
-                (NonSignificantWhitespaceName, System.Xml.NameTable.ComputeHash32(NonSignificantWhitespaceName)),
-                (SignificantWhitespaceName, System.Xml.NameTable.ComputeHash32(SignificantWhitespaceName)),
-                (XmlReservedNs.NsXmlNs, System.Xml.NameTable.ComputeHash32(XmlReservedNs.NsXmlNs)),
-                (XmlReservedNs.NsXml, System.Xml.NameTable.ComputeHash32(XmlReservedNs.NsXml))
-            };
+        {
+            (DocumentName, System.Xml.NameTable.ComputeHash32(DocumentName)),
+            (DocumentFragmentName, System.Xml.NameTable.ComputeHash32(DocumentFragmentName)),
+            (CommentName, System.Xml.NameTable.ComputeHash32(CommentName)),
+            (TextName, System.Xml.NameTable.ComputeHash32(TextName)),
+            (CDataSectionName, System.Xml.NameTable.ComputeHash32(CDataSectionName)),
+            (EntityName, System.Xml.NameTable.ComputeHash32(EntityName)),
+            (ID, System.Xml.NameTable.ComputeHash32(ID)),
+            (Xmlns, System.Xml.NameTable.ComputeHash32(Xmlns)),
+            (Xml, System.Xml.NameTable.ComputeHash32(Xml)),
+            (Space, System.Xml.NameTable.ComputeHash32(Space)),
+            (Lang, System.Xml.NameTable.ComputeHash32(Lang)),
+            (
+                NonSignificantWhitespaceName,
+                System.Xml.NameTable.ComputeHash32(NonSignificantWhitespaceName)
+            ),
+            (
+                SignificantWhitespaceName,
+                System.Xml.NameTable.ComputeHash32(SignificantWhitespaceName)
+            ),
+            (XmlReservedNs.NsXmlNs, System.Xml.NameTable.ComputeHash32(XmlReservedNs.NsXmlNs)),
+            (XmlReservedNs.NsXml, System.Xml.NameTable.ComputeHash32(XmlReservedNs.NsXml))
+        };
 
         private readonly XmlImplementation _implementation;
         private readonly DomNameTable _domNameTable; // hash table of XmlName
@@ -80,6 +86,7 @@ namespace System.Xml
         private SchemaInfo? _schemaInfo;
         private XmlSchemaSet? _schemas; // schemas associated with the cache
         private bool _reportValidity;
+
         //This variable represents the actual loading status. Since, IsLoading will
         //be manipulated sometimes for adding content to EntityReference this variable
         //has been added which would always represent the loading status of document.
@@ -126,22 +133,25 @@ namespace System.Xml
         private XmlAttribute? _namespaceXml;
 
         internal static EmptyEnumerator EmptyEnumerator = new EmptyEnumerator();
-        internal static IXmlSchemaInfo NotKnownSchemaInfo = new XmlSchemaInfo(XmlSchemaValidity.NotKnown);
+        internal static IXmlSchemaInfo NotKnownSchemaInfo = new XmlSchemaInfo(
+            XmlSchemaValidity.NotKnown
+        );
         internal static IXmlSchemaInfo ValidSchemaInfo = new XmlSchemaInfo(XmlSchemaValidity.Valid);
-        internal static IXmlSchemaInfo InvalidSchemaInfo = new XmlSchemaInfo(XmlSchemaValidity.Invalid);
+        internal static IXmlSchemaInfo InvalidSchemaInfo = new XmlSchemaInfo(
+            XmlSchemaValidity.Invalid
+        );
 
         // Initializes a new instance of the XmlDocument class.
-        public XmlDocument() : this(new XmlImplementation())
-        {
-        }
+        public XmlDocument()
+            : this(new XmlImplementation()) { }
 
         // Initializes a new instance
         // of the XmlDocument class with the specified XmlNameTable.
-        public XmlDocument(XmlNameTable nt) : this(new XmlImplementation(nt))
-        {
-        }
+        public XmlDocument(XmlNameTable nt)
+            : this(new XmlImplementation(nt)) { }
 
-        protected internal XmlDocument(XmlImplementation imp) : base()
+        protected internal XmlDocument(XmlImplementation imp)
+            : base()
         {
             _implementation = imp;
             _domNameTable = new DomNameTable(this);
@@ -158,21 +168,66 @@ namespace System.Xml
                 // When the name table being used is of type NameTable avoid re-calculating the hash codes.
                 NameTable nt = (NameTable)imp.NameTable;
 
-                strDocumentName = nt.GetOrAddEntry(s_nameTableSeeds[DocumentNameSeedIndex].key, s_nameTableSeeds[DocumentNameSeedIndex].hash);
-                strDocumentFragmentName = nt.GetOrAddEntry(s_nameTableSeeds[DocumentFragmentNameSeedIndex].key, s_nameTableSeeds[DocumentFragmentNameSeedIndex].hash);
-                strCommentName = nt.GetOrAddEntry(s_nameTableSeeds[CommentNameSeedIndex].key, s_nameTableSeeds[CommentNameSeedIndex].hash);
-                strTextName = nt.GetOrAddEntry(s_nameTableSeeds[TextNameSeedIndex].key, s_nameTableSeeds[TextNameSeedIndex].hash);
-                strCDataSectionName = nt.GetOrAddEntry(s_nameTableSeeds[CDataSectionNameSeedIndex].key, s_nameTableSeeds[CDataSectionNameSeedIndex].hash);
-                strEntityName = nt.GetOrAddEntry(s_nameTableSeeds[EntityNameSeedIndex].key, s_nameTableSeeds[EntityNameSeedIndex].hash);
-                strID = nt.GetOrAddEntry(s_nameTableSeeds[IDSeedIndex].key, s_nameTableSeeds[IDSeedIndex].hash);
-                strNonSignificantWhitespaceName = nt.GetOrAddEntry(s_nameTableSeeds[NonSignificantWhitespaceNameSeedIndex].key, s_nameTableSeeds[NonSignificantWhitespaceNameSeedIndex].hash);
-                strSignificantWhitespaceName = nt.GetOrAddEntry(s_nameTableSeeds[SignificantWhitespaceNameSeedIndex].key, s_nameTableSeeds[SignificantWhitespaceNameSeedIndex].hash);
-                strXmlns = nt.GetOrAddEntry(s_nameTableSeeds[XmlnsSeedIndex].key, s_nameTableSeeds[XmlnsSeedIndex].hash);
-                strXml = nt.GetOrAddEntry(s_nameTableSeeds[XmlSeedIndex].key, s_nameTableSeeds[XmlSeedIndex].hash);
-                strSpace = nt.GetOrAddEntry(s_nameTableSeeds[SpaceSeedIndex].key, s_nameTableSeeds[SpaceSeedIndex].hash);
-                strLang = nt.GetOrAddEntry(s_nameTableSeeds[LangSeedIndex].key, s_nameTableSeeds[LangSeedIndex].hash);
-                strReservedXmlns = nt.GetOrAddEntry(s_nameTableSeeds[NsXmlNsSeedIndex].key, s_nameTableSeeds[NsXmlNsSeedIndex].hash);
-                strReservedXml = nt.GetOrAddEntry(s_nameTableSeeds[NsXmlSeedIndex].key, s_nameTableSeeds[NsXmlSeedIndex].hash);
+                strDocumentName = nt.GetOrAddEntry(
+                    s_nameTableSeeds[DocumentNameSeedIndex].key,
+                    s_nameTableSeeds[DocumentNameSeedIndex].hash
+                );
+                strDocumentFragmentName = nt.GetOrAddEntry(
+                    s_nameTableSeeds[DocumentFragmentNameSeedIndex].key,
+                    s_nameTableSeeds[DocumentFragmentNameSeedIndex].hash
+                );
+                strCommentName = nt.GetOrAddEntry(
+                    s_nameTableSeeds[CommentNameSeedIndex].key,
+                    s_nameTableSeeds[CommentNameSeedIndex].hash
+                );
+                strTextName = nt.GetOrAddEntry(
+                    s_nameTableSeeds[TextNameSeedIndex].key,
+                    s_nameTableSeeds[TextNameSeedIndex].hash
+                );
+                strCDataSectionName = nt.GetOrAddEntry(
+                    s_nameTableSeeds[CDataSectionNameSeedIndex].key,
+                    s_nameTableSeeds[CDataSectionNameSeedIndex].hash
+                );
+                strEntityName = nt.GetOrAddEntry(
+                    s_nameTableSeeds[EntityNameSeedIndex].key,
+                    s_nameTableSeeds[EntityNameSeedIndex].hash
+                );
+                strID = nt.GetOrAddEntry(
+                    s_nameTableSeeds[IDSeedIndex].key,
+                    s_nameTableSeeds[IDSeedIndex].hash
+                );
+                strNonSignificantWhitespaceName = nt.GetOrAddEntry(
+                    s_nameTableSeeds[NonSignificantWhitespaceNameSeedIndex].key,
+                    s_nameTableSeeds[NonSignificantWhitespaceNameSeedIndex].hash
+                );
+                strSignificantWhitespaceName = nt.GetOrAddEntry(
+                    s_nameTableSeeds[SignificantWhitespaceNameSeedIndex].key,
+                    s_nameTableSeeds[SignificantWhitespaceNameSeedIndex].hash
+                );
+                strXmlns = nt.GetOrAddEntry(
+                    s_nameTableSeeds[XmlnsSeedIndex].key,
+                    s_nameTableSeeds[XmlnsSeedIndex].hash
+                );
+                strXml = nt.GetOrAddEntry(
+                    s_nameTableSeeds[XmlSeedIndex].key,
+                    s_nameTableSeeds[XmlSeedIndex].hash
+                );
+                strSpace = nt.GetOrAddEntry(
+                    s_nameTableSeeds[SpaceSeedIndex].key,
+                    s_nameTableSeeds[SpaceSeedIndex].hash
+                );
+                strLang = nt.GetOrAddEntry(
+                    s_nameTableSeeds[LangSeedIndex].key,
+                    s_nameTableSeeds[LangSeedIndex].hash
+                );
+                strReservedXmlns = nt.GetOrAddEntry(
+                    s_nameTableSeeds[NsXmlNsSeedIndex].key,
+                    s_nameTableSeeds[NsXmlNsSeedIndex].hash
+                );
+                strReservedXml = nt.GetOrAddEntry(
+                    s_nameTableSeeds[NsXmlSeedIndex].key,
+                    s_nameTableSeeds[NsXmlSeedIndex].hash
+                );
             }
             else
             {
@@ -207,34 +262,71 @@ namespace System.Xml
             int endPos = ValidateNames.ParseNmtoken(name, 0);
             if (endPos < name.Length)
             {
-                throw new XmlException(SR.Xml_BadNameChar, XmlException.BuildCharExceptionArgs(name, endPos));
+                throw new XmlException(
+                    SR.Xml_BadNameChar,
+                    XmlException.BuildCharExceptionArgs(name, endPos)
+                );
             }
         }
 
-        internal XmlName AddXmlName(string? prefix, string localName, string? namespaceURI, IXmlSchemaInfo? schemaInfo)
+        internal XmlName AddXmlName(
+            string? prefix,
+            string localName,
+            string? namespaceURI,
+            IXmlSchemaInfo? schemaInfo
+        )
         {
             XmlName n = _domNameTable.AddName(prefix, localName, namespaceURI, schemaInfo);
             Debug.Assert((prefix == null) ? (n.Prefix.Length == 0) : (prefix == n.Prefix));
             Debug.Assert(n.LocalName == localName);
-            Debug.Assert((namespaceURI == null) ? (n.NamespaceURI.Length == 0) : (n.NamespaceURI == namespaceURI));
+            Debug.Assert(
+                (namespaceURI == null)
+                    ? (n.NamespaceURI.Length == 0)
+                    : (n.NamespaceURI == namespaceURI)
+            );
             return n;
         }
 
-        internal XmlName? GetXmlName(string? prefix, string localName, string? namespaceURI, IXmlSchemaInfo? schemaInfo)
+        internal XmlName? GetXmlName(
+            string? prefix,
+            string localName,
+            string? namespaceURI,
+            IXmlSchemaInfo? schemaInfo
+        )
         {
             XmlName? n = _domNameTable.GetName(prefix, localName, namespaceURI, schemaInfo);
-            Debug.Assert(n == null || ((prefix == null) ? (n.Prefix.Length == 0) : (prefix == n.Prefix)));
+            Debug.Assert(
+                n == null || ((prefix == null) ? (n.Prefix.Length == 0) : (prefix == n.Prefix))
+            );
             Debug.Assert(n == null || n.LocalName == localName);
-            Debug.Assert(n == null || ((namespaceURI == null) ? (n.NamespaceURI.Length == 0) : (n.NamespaceURI == namespaceURI)));
+            Debug.Assert(
+                n == null
+                    || (
+                        (namespaceURI == null)
+                            ? (n.NamespaceURI.Length == 0)
+                            : (n.NamespaceURI == namespaceURI)
+                    )
+            );
             return n;
         }
 
-        internal XmlName AddAttrXmlName(string? prefix, string localName, string? namespaceURI, IXmlSchemaInfo? schemaInfo)
+        internal XmlName AddAttrXmlName(
+            string? prefix,
+            string localName,
+            string? namespaceURI,
+            IXmlSchemaInfo? schemaInfo
+        )
         {
             XmlName xmlName = AddXmlName(prefix, localName, namespaceURI, schemaInfo);
-            Debug.Assert((prefix == null) ? (xmlName.Prefix.Length == 0) : (prefix == xmlName.Prefix));
+            Debug.Assert(
+                (prefix == null) ? (xmlName.Prefix.Length == 0) : (prefix == xmlName.Prefix)
+            );
             Debug.Assert(xmlName.LocalName == localName);
-            Debug.Assert((namespaceURI == null) ? (xmlName.NamespaceURI.Length == 0) : (xmlName.NamespaceURI == namespaceURI));
+            Debug.Assert(
+                (namespaceURI == null)
+                    ? (xmlName.NamespaceURI.Length == 0)
+                    : (xmlName.NamespaceURI == namespaceURI)
+            );
 
             if (!this.IsLoading)
             {
@@ -242,8 +334,15 @@ namespace System.Xml
                 object oPrefix = xmlName.Prefix;
                 object oNamespaceURI = xmlName.NamespaceURI;
                 object oLocalName = xmlName.LocalName;
-                if ((oPrefix == (object)strXmlns || (xmlName.Prefix.Length == 0 && oLocalName == (object)strXmlns)) ^ (oNamespaceURI == (object)strReservedXmlns))
-                    throw new ArgumentException(SR.Format(SR.Xdom_Attr_Reserved_XmlNS, namespaceURI));
+                if (
+                    (
+                        oPrefix == (object)strXmlns
+                        || (xmlName.Prefix.Length == 0 && oLocalName == (object)strXmlns)
+                    ) ^ (oNamespaceURI == (object)strReservedXmlns)
+                )
+                    throw new ArgumentException(
+                        SR.Format(SR.Xdom_Attr_Reserved_XmlNS, namespaceURI)
+                    );
             }
             return xmlName;
         }
@@ -339,7 +438,6 @@ namespace System.Xml
                 }
             }
         }
-
 
         // Creates a duplicate of this node.
         public override XmlNode CloneNode(bool deep)
@@ -459,6 +557,7 @@ namespace System.Xml
                 }
             }
         }
+
         internal override bool IsValidChildType(XmlNodeType type)
         {
             switch (type)
@@ -488,6 +587,7 @@ namespace System.Xml
                     return false;
             }
         }
+
         // the function examines all the siblings before the refNode
         //  if any of the nodes has type equals to "nt", return true; otherwise, return false;
         private static bool HasNodeTypeInPrevSiblings(XmlNodeType nt, XmlNode? refNode)
@@ -540,17 +640,22 @@ namespace System.Xml
                     return refChild.NodeType != XmlNodeType.XmlDeclaration;
 
                 case XmlNodeType.DocumentType:
+
                     {
                         if (refChild.NodeType != XmlNodeType.XmlDeclaration)
                         {
                             //if refChild is not the XmlDeclaration node, only need to go through the sibling before and including refChild to
                             //  make sure no Element ( rootElem node ) before the current position
-                            return !HasNodeTypeInPrevSiblings(XmlNodeType.Element, refChild.PreviousSibling);
+                            return !HasNodeTypeInPrevSiblings(
+                                XmlNodeType.Element,
+                                refChild.PreviousSibling
+                            );
                         }
                     }
                     break;
 
                 case XmlNodeType.Element:
+
                     {
                         if (refChild.NodeType != XmlNodeType.XmlDeclaration)
                         {
@@ -581,16 +686,19 @@ namespace System.Xml
                     return true;
 
                 case XmlNodeType.DocumentType:
-                    {
-                        //we will have to go through all the siblings before the refChild just to make sure no Element node ( rootElem )
-                        //  before the current position
-                        return !HasNodeTypeInPrevSiblings(XmlNodeType.Element, refChild);
-                    }
+                {
+                    //we will have to go through all the siblings before the refChild just to make sure no Element node ( rootElem )
+                    //  before the current position
+                    return !HasNodeTypeInPrevSiblings(XmlNodeType.Element, refChild);
+                }
 
                 case XmlNodeType.Element:
-                    {
-                        return !HasNodeTypeInNextSiblings(XmlNodeType.DocumentType, refChild.NextSibling);
-                    }
+                {
+                    return !HasNodeTypeInNextSiblings(
+                        XmlNodeType.DocumentType,
+                        refChild.NextSibling
+                    );
+                }
             }
 
             return false;
@@ -636,7 +744,12 @@ namespace System.Xml
         }
 
         // Returns a new XmlDocumentType object.
-        public virtual XmlDocumentType CreateDocumentType(string name, string? publicId, string? systemId, string? internalSubset)
+        public virtual XmlDocumentType CreateDocumentType(
+            string name,
+            string? publicId,
+            string? systemId,
+            string? internalSubset
+        )
         {
             return new XmlDocumentType(name, publicId, systemId, internalSubset, this);
         }
@@ -656,7 +769,6 @@ namespace System.Xml
             return CreateElement(prefix, localName, string.Empty);
         }
 
-
         internal void AddDefaultAttributes(XmlElement elem)
         {
             SchemaInfo? schInfo = DtdSchemaInfo;
@@ -666,8 +778,10 @@ namespace System.Xml
                 foreach (KeyValuePair<XmlQualifiedName, SchemaAttDef> attrDefs in ed.AttDefs)
                 {
                     SchemaAttDef attdef = attrDefs.Value;
-                    if (attdef.Presence == SchemaDeclBase.Use.Default ||
-                         attdef.Presence == SchemaDeclBase.Use.Fixed)
+                    if (
+                        attdef.Presence == SchemaDeclBase.Use.Default
+                        || attdef.Presence == SchemaDeclBase.Use.Fixed
+                    )
                     {
                         //build a default attribute and return
                         string attrPrefix;
@@ -682,7 +796,12 @@ namespace System.Xml
                             attrPrefix = attdef.Prefix;
                             attrNamespaceURI = attdef.Name.Namespace;
                         }
-                        XmlAttribute defattr = PrepareDefaultAttribute(attdef, attrPrefix, attrLocalname, attrNamespaceURI);
+                        XmlAttribute defattr = PrepareDefaultAttribute(
+                            attdef,
+                            attrPrefix,
+                            attrLocalname,
+                            attrNamespaceURI
+                        );
                         elem.SetAttributeNode(defattr);
                     }
                 }
@@ -695,7 +814,10 @@ namespace System.Xml
             if (schInfo != null)
             {
                 //build XmlQualifiedName used to identify the element schema declaration
-                XmlQualifiedName qname = new XmlQualifiedName(elem.LocalName, schInfo.SchemaType == SchemaType.DTD ? elem.Prefix : elem.NamespaceURI);
+                XmlQualifiedName qname = new XmlQualifiedName(
+                    elem.LocalName,
+                    schInfo.SchemaType == SchemaType.DTD ? elem.Prefix : elem.NamespaceURI
+                );
                 //get the schema info for the element
                 SchemaElementDecl? elemDecl;
                 if (schInfo.ElementDecls.TryGetValue(qname, out elemDecl))
@@ -707,10 +829,19 @@ namespace System.Xml
         }
 
         //Will be used by AddDeafulatAttributes() and GetDefaultAttribute() methods
-        private XmlAttribute PrepareDefaultAttribute(SchemaAttDef attdef, string attrPrefix, string attrLocalname, string attrNamespaceURI)
+        private XmlAttribute PrepareDefaultAttribute(
+            SchemaAttDef attdef,
+            string attrPrefix,
+            string attrLocalname,
+            string attrNamespaceURI
+        )
         {
             SetDefaultNamespace(attrPrefix, attrLocalname, ref attrNamespaceURI);
-            XmlAttribute defattr = CreateDefaultAttribute(attrPrefix, attrLocalname, attrNamespaceURI);
+            XmlAttribute defattr = CreateDefaultAttribute(
+                attrPrefix,
+                attrLocalname,
+                attrNamespaceURI
+            );
             //parsing the default value for the default attribute
             defattr.InnerXml = attdef.DefaultValueRaw;
             //during the expansion of the tree, the flag could be set to true, we need to set it back.
@@ -727,14 +858,21 @@ namespace System.Xml
 
         // Creates a XmlProcessingInstruction with the specified name
         // and data strings.
-        public virtual XmlProcessingInstruction CreateProcessingInstruction(string target, string? data)
+        public virtual XmlProcessingInstruction CreateProcessingInstruction(
+            string target,
+            string? data
+        )
         {
             ArgumentNullException.ThrowIfNull(target);
             return new XmlProcessingInstruction(target, data, this);
         }
 
         // Creates a XmlDeclaration node with the specified values.
-        public virtual XmlDeclaration CreateXmlDeclaration(string version, string? encoding, string? standalone)
+        public virtual XmlDeclaration CreateXmlDeclaration(
+            string version,
+            string? encoding,
+            string? standalone
+        )
         {
             return new XmlDeclaration(version, encoding, standalone, this);
         }
@@ -791,8 +929,7 @@ namespace System.Xml
                             {
                                 break;
                             }
-                        }
-                        while (parent != null);
+                        } while (parent != null);
                     }
                     node = NormalizeText(node)!;
                     break;
@@ -803,8 +940,10 @@ namespace System.Xml
                         do
                         {
                             parentType = parent.NodeType;
-                            if (parentType == XmlNodeType.Document
-                                || parentType == XmlNodeType.Attribute)
+                            if (
+                                parentType == XmlNodeType.Document
+                                || parentType == XmlNodeType.Attribute
+                            )
                             {
                                 return null;
                             }
@@ -816,8 +955,7 @@ namespace System.Xml
                             {
                                 break;
                             }
-                        }
-                        while (parent != null);
+                        } while (parent != null);
                     }
                     node = NormalizeText(node)!;
                     break;
@@ -856,7 +994,10 @@ namespace System.Xml
                     XmlNode intnode = retnode;
                     while (true)
                     {
-                        if (intnode.ParentNode != null && intnode.ParentNode.NodeType == XmlNodeType.EntityReference)
+                        if (
+                            intnode.ParentNode != null
+                            && intnode.ParentNode.NodeType == XmlNodeType.EntityReference
+                        )
                         {
                             if (intnode.ParentNode.PreviousSibling != null)
                             {
@@ -990,14 +1131,23 @@ namespace System.Xml
                         break;
                     case XmlNodeType.XmlDeclaration:
                         XmlDeclaration decl = (XmlDeclaration)node;
-                        newNode = CreateXmlDeclaration(decl.Version, decl.Encoding, decl.Standalone);
+                        newNode = CreateXmlDeclaration(
+                            decl.Version,
+                            decl.Encoding,
+                            decl.Standalone
+                        );
                         break;
                     case XmlNodeType.CDATA:
                         newNode = CreateCDataSection(node.Value);
                         break;
                     case XmlNodeType.DocumentType:
                         XmlDocumentType docType = (XmlDocumentType)node;
-                        newNode = CreateDocumentType(docType.Name, docType.PublicId, docType.SystemId, docType.InternalSubset);
+                        newNode = CreateDocumentType(
+                            docType.Name,
+                            docType.PublicId,
+                            docType.SystemId,
+                            docType.InternalSubset
+                        );
                         break;
                     case XmlNodeType.DocumentFragment:
                         newNode = CreateDocumentFragment();
@@ -1020,7 +1170,9 @@ namespace System.Xml
                         break;
 
                     default:
-                        throw new InvalidOperationException(SR.Format(CultureInfo.InvariantCulture, SR.Xdom_Import, node.NodeType));
+                        throw new InvalidOperationException(
+                            SR.Format(CultureInfo.InvariantCulture, SR.Xdom_Import, node.NodeType)
+                        );
                 }
 
                 return newNode;
@@ -1033,7 +1185,9 @@ namespace System.Xml
             for (int iAttr = 0; iAttr < cAttr; iAttr++)
             {
                 if (fromElem.Attributes[iAttr].Specified)
-                    toElem.Attributes!.SetNamedItem(ImportNodeInternal(fromElem.Attributes[iAttr], true));
+                    toElem
+                        .Attributes!
+                        .SetNamedItem(ImportNodeInternal(fromElem.Attributes[iAttr], true));
             }
         }
 
@@ -1057,19 +1211,35 @@ namespace System.Xml
 
         // Creates a XmlAttribute with the specified Prefix, LocalName,
         // and NamespaceURI.
-        public virtual XmlAttribute CreateAttribute(string? prefix, string localName, string? namespaceURI)
+        public virtual XmlAttribute CreateAttribute(
+            string? prefix,
+            string localName,
+            string? namespaceURI
+        )
         {
             return new XmlAttribute(AddAttrXmlName(prefix, localName, namespaceURI, null), this);
         }
 
-        protected internal virtual XmlAttribute CreateDefaultAttribute(string? prefix, string localName, string? namespaceURI)
+        protected internal virtual XmlAttribute CreateDefaultAttribute(
+            string? prefix,
+            string localName,
+            string? namespaceURI
+        )
         {
             return new XmlUnspecifiedAttribute(prefix, localName, namespaceURI, this);
         }
 
-        public virtual XmlElement CreateElement(string? prefix, string localName, string? namespaceURI)
+        public virtual XmlElement CreateElement(
+            string? prefix,
+            string localName,
+            string? namespaceURI
+        )
         {
-            XmlElement elem = new XmlElement(AddXmlName(prefix, localName, namespaceURI, null), true, this);
+            XmlElement elem = new XmlElement(
+                AddXmlName(prefix, localName, namespaceURI, null),
+                true,
+                this
+            );
             if (!IsLoading)
                 AddDefaultAttributes(elem);
             return elem;
@@ -1106,9 +1276,13 @@ namespace System.Xml
             set { _actualLoadingStatus = value; }
         }
 
-
         // Creates a XmlNode with the specified XmlNodeType, Prefix, Name, and NamespaceURI.
-        public virtual XmlNode CreateNode(XmlNodeType type, string? prefix, string name, string? namespaceURI)
+        public virtual XmlNode CreateNode(
+            XmlNodeType type,
+            string? prefix,
+            string name,
+            string? namespaceURI
+        )
         {
             switch (type)
             {
@@ -1256,7 +1430,6 @@ namespace System.Xml
             throw new ArgumentException(SR.Format(SR.Xdom_Invalid_NT_String, nodeTypeString));
         }
 
-
         private XmlTextReader SetupReader(XmlTextReader tr)
         {
             tr.XmlValidatingReaderCompatibilityMode = true;
@@ -1366,22 +1539,13 @@ namespace System.Xml
         [AllowNull]
         public override string InnerText
         {
-            set
-            {
-                throw new InvalidOperationException(SR.Xdom_Document_Innertext);
-            }
+            set { throw new InvalidOperationException(SR.Xdom_Document_Innertext); }
         }
 
         public override string InnerXml
         {
-            get
-            {
-                return base.InnerXml;
-            }
-            set
-            {
-                LoadXml(value);
-            }
+            get { return base.InnerXml; }
+            set { LoadXml(value); }
         }
 
         // Saves the XML document to the specified file.
@@ -1493,13 +1657,19 @@ namespace System.Xml
             XmlDocument parentDocument = nodeToValidate.Document;
             if (parentDocument != this)
             {
-                throw new ArgumentException(SR.Format(SR.XmlDocument_NodeNotFromDocument, nameof(nodeToValidate)));
+                throw new ArgumentException(
+                    SR.Format(SR.XmlDocument_NodeNotFromDocument, nameof(nodeToValidate))
+                );
             }
             if (nodeToValidate == this)
             {
                 _reportValidity = false;
             }
-            DocumentSchemaValidator validator = new DocumentSchemaValidator(this, _schemas, validationEventHandler);
+            DocumentSchemaValidator validator = new DocumentSchemaValidator(
+                this,
+                _schemas,
+                validationEventHandler
+            );
             validator.Validate(nodeToValidate);
             if (nodeToValidate == this)
             {
@@ -1509,77 +1679,48 @@ namespace System.Xml
 
         public event XmlNodeChangedEventHandler NodeInserting
         {
-            add
-            {
-                _onNodeInsertingDelegate += value;
-            }
-            remove
-            {
-                _onNodeInsertingDelegate -= value;
-            }
+            add { _onNodeInsertingDelegate += value; }
+            remove { _onNodeInsertingDelegate -= value; }
         }
 
         public event XmlNodeChangedEventHandler NodeInserted
         {
-            add
-            {
-                _onNodeInsertedDelegate += value;
-            }
-            remove
-            {
-                _onNodeInsertedDelegate -= value;
-            }
+            add { _onNodeInsertedDelegate += value; }
+            remove { _onNodeInsertedDelegate -= value; }
         }
 
         public event XmlNodeChangedEventHandler NodeRemoving
         {
-            add
-            {
-                _onNodeRemovingDelegate += value;
-            }
-            remove
-            {
-                _onNodeRemovingDelegate -= value;
-            }
+            add { _onNodeRemovingDelegate += value; }
+            remove { _onNodeRemovingDelegate -= value; }
         }
 
         public event XmlNodeChangedEventHandler NodeRemoved
         {
-            add
-            {
-                _onNodeRemovedDelegate += value;
-            }
-            remove
-            {
-                _onNodeRemovedDelegate -= value;
-            }
+            add { _onNodeRemovedDelegate += value; }
+            remove { _onNodeRemovedDelegate -= value; }
         }
 
         public event XmlNodeChangedEventHandler NodeChanging
         {
-            add
-            {
-                _onNodeChangingDelegate += value;
-            }
-            remove
-            {
-                _onNodeChangingDelegate -= value;
-            }
+            add { _onNodeChangingDelegate += value; }
+            remove { _onNodeChangingDelegate -= value; }
         }
 
         public event XmlNodeChangedEventHandler NodeChanged
         {
-            add
-            {
-                _onNodeChangedDelegate += value;
-            }
-            remove
-            {
-                _onNodeChangedDelegate -= value;
-            }
+            add { _onNodeChangedDelegate += value; }
+            remove { _onNodeChangedDelegate -= value; }
         }
 
-        internal override XmlNodeChangedEventArgs? GetEventArgs(XmlNode node, XmlNode? oldParent, XmlNode? newParent, string? oldValue, string? newValue, XmlNodeChangedAction action)
+        internal override XmlNodeChangedEventArgs? GetEventArgs(
+            XmlNode node,
+            XmlNode? oldParent,
+            XmlNode? newParent,
+            string? oldValue,
+            string? newValue,
+            XmlNodeChangedAction action
+        )
         {
             _reportValidity = false;
 
@@ -1604,7 +1745,14 @@ namespace System.Xml
                     }
                     break;
             }
-            return new XmlNodeChangedEventArgs(node, oldParent, newParent, oldValue, newValue, action);
+            return new XmlNodeChangedEventArgs(
+                node,
+                oldParent,
+                newParent,
+                oldValue,
+                newValue,
+                action
+            );
         }
 
         internal XmlNodeChangedEventArgs? GetInsertEventArgsForLoad(XmlNode node, XmlNode newParent)
@@ -1614,7 +1762,14 @@ namespace System.Xml
                 return null;
             }
             string? nodeValue = node.Value;
-            return new XmlNodeChangedEventArgs(node, null, newParent, nodeValue, nodeValue, XmlNodeChangedAction.Insert);
+            return new XmlNodeChangedEventArgs(
+                node,
+                null,
+                newParent,
+                nodeValue,
+                nodeValue,
+                XmlNodeChangedAction.Insert
+            );
         }
 
         internal override void BeforeEvent(XmlNodeChangedEventArgs args)
@@ -1663,7 +1818,12 @@ namespace System.Xml
         // If so, return the newly created default attribute (with children tree);
         // Otherwise, return null.
 
-        internal XmlAttribute? GetDefaultAttribute(XmlElement elem, string attrPrefix, string attrLocalname, string attrNamespaceURI)
+        internal XmlAttribute? GetDefaultAttribute(
+            XmlElement elem,
+            string attrPrefix,
+            string attrLocalname,
+            string attrNamespaceURI
+        )
         {
             SchemaInfo? schInfo = DtdSchemaInfo;
             SchemaElementDecl? ed = GetSchemaElementDecl(elem);
@@ -1672,16 +1832,31 @@ namespace System.Xml
                 foreach (KeyValuePair<XmlQualifiedName, SchemaAttDef> attrDefs in ed.AttDefs)
                 {
                     SchemaAttDef attdef = attrDefs.Value;
-                    if (attdef.Presence == SchemaDeclBase.Use.Default ||
-                        attdef.Presence == SchemaDeclBase.Use.Fixed)
+                    if (
+                        attdef.Presence == SchemaDeclBase.Use.Default
+                        || attdef.Presence == SchemaDeclBase.Use.Fixed
+                    )
                     {
                         if (attdef.Name.Name == attrLocalname)
                         {
-                            if ((schInfo!.SchemaType == SchemaType.DTD && attdef.Name.Namespace == attrPrefix) ||
-                                 (schInfo.SchemaType != SchemaType.DTD && attdef.Name.Namespace == attrNamespaceURI))
+                            if (
+                                (
+                                    schInfo!.SchemaType == SchemaType.DTD
+                                    && attdef.Name.Namespace == attrPrefix
+                                )
+                                || (
+                                    schInfo.SchemaType != SchemaType.DTD
+                                    && attdef.Name.Namespace == attrNamespaceURI
+                                )
+                            )
                             {
                                 //find a def attribute with the same name, build a default attribute and return
-                                XmlAttribute defattr = PrepareDefaultAttribute(attdef, attrPrefix, attrLocalname, attrNamespaceURI);
+                                XmlAttribute defattr = PrepareDefaultAttribute(
+                                    attdef,
+                                    attrPrefix,
+                                    attrLocalname,
+                                    attrNamespaceURI
+                                );
                                 return defattr;
                             }
                         }
@@ -1803,14 +1978,14 @@ namespace System.Xml
             return newNode;
         }
 
-        internal override XPathNodeType XPNodeType { get { return XPathNodeType.Root; } }
+        internal override XPathNodeType XPNodeType
+        {
+            get { return XPathNodeType.Root; }
+        }
 
         internal bool HasEntityReferences
         {
-            get
-            {
-                return fEntRefNodesPresent;
-            }
+            get { return fEntRefNodesPresent; }
         }
 
         internal XmlAttribute NamespaceXml
@@ -1819,7 +1994,10 @@ namespace System.Xml
             {
                 if (_namespaceXml == null)
                 {
-                    _namespaceXml = new XmlAttribute(AddAttrXmlName(strXmlns, strXml, strReservedXmlns, null), this);
+                    _namespaceXml = new XmlAttribute(
+                        AddAttrXmlName(strXmlns, strXml, strReservedXmlns, null),
+                        this
+                    );
                     _namespaceXml.Value = strReservedXml;
                 }
                 return _namespaceXml;

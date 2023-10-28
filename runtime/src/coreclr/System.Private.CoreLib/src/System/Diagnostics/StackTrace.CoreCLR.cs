@@ -1,15 +1,20 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Runtime.CompilerServices;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace System.Diagnostics
 {
     public partial class StackTrace
     {
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern void GetStackFramesInternal(StackFrameHelper sfh, int iSkip, bool fNeedFileInfo, Exception? e);
+        internal static extern void GetStackFramesInternal(
+            StackFrameHelper sfh,
+            int iSkip,
+            bool fNeedFileInfo,
+            Exception? e
+        );
 
         internal static int CalculateFramesToSkip(StackFrameHelper StackF, int iNumFrames)
         {
@@ -39,7 +44,11 @@ namespace System.Diagnostics
             return iRetVal;
         }
 
-        private void InitializeForException(Exception? exception, int skipFrames, bool fNeedFileInfo)
+        private void InitializeForException(
+            Exception? exception,
+            int skipFrames,
+            bool fNeedFileInfo
+        )
         {
             CaptureStackTrace(skipFrames, fNeedFileInfo, exception);
         }

@@ -11,7 +11,10 @@ namespace Microsoft.Extensions.Options.Generators
 {
     internal static class ParserUtilities
     {
-        internal static AttributeData? GetSymbolAttributeAnnotationOrDefault(ISymbol? attribute, ISymbol symbol)
+        internal static AttributeData? GetSymbolAttributeAnnotationOrDefault(
+            ISymbol? attribute,
+            ISymbol symbol
+        )
         {
             if (attribute is null)
             {
@@ -21,7 +24,10 @@ namespace Microsoft.Extensions.Options.Generators
             var attrs = symbol.GetAttributes();
             foreach (var item in attrs)
             {
-                if (SymbolEqualityComparer.Default.Equals(attribute, item.AttributeClass) && item.AttributeConstructor != null)
+                if (
+                    SymbolEqualityComparer.Default.Equals(attribute, item.AttributeClass)
+                    && item.AttributeConstructor != null
+                )
                 {
                     return item;
                 }
@@ -30,12 +36,18 @@ namespace Microsoft.Extensions.Options.Generators
             return null;
         }
 
-        internal static bool PropertyHasModifier(ISymbol property, SyntaxKind modifierToSearch, CancellationToken token)
-            => property
+        internal static bool PropertyHasModifier(
+            ISymbol property,
+            SyntaxKind modifierToSearch,
+            CancellationToken token
+        ) =>
+            property
                 .DeclaringSyntaxReferences
-                .Any(x =>
-                    x.GetSyntax(token) is PropertyDeclarationSyntax syntax &&
-                    syntax.Modifiers.Any(m => m.IsKind(modifierToSearch)));
+                .Any(
+                    x =>
+                        x.GetSyntax(token) is PropertyDeclarationSyntax syntax
+                        && syntax.Modifiers.Any(m => m.IsKind(modifierToSearch))
+                );
 
         internal static Location? GetLocation(this ISymbol symbol)
         {
@@ -44,12 +56,14 @@ namespace Microsoft.Extensions.Options.Generators
                 return null;
             }
 
-            return symbol.Locations.IsDefaultOrEmpty
-                ? null
-                : symbol.Locations[0];
+            return symbol.Locations.IsDefaultOrEmpty ? null : symbol.Locations[0];
         }
 
-        internal static bool IsBaseOrIdentity(ITypeSymbol source, ITypeSymbol dest, Compilation comp)
+        internal static bool IsBaseOrIdentity(
+            ITypeSymbol source,
+            ITypeSymbol dest,
+            Compilation comp
+        )
         {
             var conversion = comp.ClassifyConversion(source, dest);
             return conversion.IsIdentity || (conversion.IsReference && conversion.IsImplicit);
@@ -69,7 +83,8 @@ namespace Microsoft.Extensions.Options.Generators
         }
 
         // Check if parameter has either simplified (i.e. "int?") or explicit (Nullable<int>) nullable type declaration:
-        internal static bool IsNullableOfT(this ITypeSymbol type)
-            => type.SpecialType == SpecialType.System_Nullable_T || type.OriginalDefinition.SpecialType == SpecialType.System_Nullable_T;
+        internal static bool IsNullableOfT(this ITypeSymbol type) =>
+            type.SpecialType == SpecialType.System_Nullable_T
+            || type.OriginalDefinition.SpecialType == SpecialType.System_Nullable_T;
     }
 }

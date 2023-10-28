@@ -19,7 +19,8 @@ public class SqlServerMemberTranslatorProvider : RelationalMemberTranslatorProvi
     /// </summary>
     public SqlServerMemberTranslatorProvider(
         RelationalMemberTranslatorProviderDependencies dependencies,
-        IRelationalTypeMappingSource typeMappingSource)
+        IRelationalTypeMappingSource typeMappingSource
+    )
         : base(dependencies)
     {
         var sqlExpressionFactory = dependencies.SqlExpressionFactory;
@@ -32,6 +33,7 @@ public class SqlServerMemberTranslatorProvider : RelationalMemberTranslatorProvi
                 new SqlServerStringMemberTranslator(sqlExpressionFactory),
                 new SqlServerTimeSpanMemberTranslator(sqlExpressionFactory),
                 new SqlServerTimeOnlyMemberTranslator(sqlExpressionFactory)
-            });
+            }
+        );
     }
 }

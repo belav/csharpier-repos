@@ -12,9 +12,9 @@ namespace Microsoft.EntityFrameworkCore.Storage.Json;
 /// <typeparam name="TCollection">The collection type.</typeparam>
 /// <typeparam name="TConcreteCollection">The collection type to create an index of, if needed.</typeparam>
 /// <typeparam name="TElement">The element type.</typeparam>
-public class JsonNullableStructCollectionReaderWriter<TCollection, TConcreteCollection, TElement> :
-    JsonValueReaderWriter<IEnumerable<TElement?>>,
-    ICompositeJsonValueReaderWriter
+public class JsonNullableStructCollectionReaderWriter<TCollection, TConcreteCollection, TElement>
+    : JsonValueReaderWriter<IEnumerable<TElement?>>,
+        ICompositeJsonValueReaderWriter
     where TElement : struct
     where TCollection : IEnumerable<TElement?>
 {
@@ -24,13 +24,18 @@ public class JsonNullableStructCollectionReaderWriter<TCollection, TConcreteColl
     ///     Creates a new instance of this collection reader/writer, using the given reader/writer for its elements.
     /// </summary>
     /// <param name="elementReaderWriter">The reader/writer to use for each element.</param>
-    public JsonNullableStructCollectionReaderWriter(JsonValueReaderWriter<TElement> elementReaderWriter)
+    public JsonNullableStructCollectionReaderWriter(
+        JsonValueReaderWriter<TElement> elementReaderWriter
+    )
     {
         _elementReaderWriter = elementReaderWriter;
     }
 
     /// <inheritdoc />
-    public override IEnumerable<TElement?> FromJsonTyped(ref Utf8JsonReaderManager manager, object? existingObject = null)
+    public override IEnumerable<TElement?> FromJsonTyped(
+        ref Utf8JsonReaderManager manager,
+        object? existingObject = null
+    )
     {
         IList<TElement?> collection;
         if (typeof(TCollection).IsArray)
@@ -87,6 +92,5 @@ public class JsonNullableStructCollectionReaderWriter<TCollection, TConcreteColl
         writer.WriteEndArray();
     }
 
-    JsonValueReaderWriter ICompositeJsonValueReaderWriter.InnerReaderWriter
-        => _elementReaderWriter;
+    JsonValueReaderWriter ICompositeJsonValueReaderWriter.InnerReaderWriter => _elementReaderWriter;
 }

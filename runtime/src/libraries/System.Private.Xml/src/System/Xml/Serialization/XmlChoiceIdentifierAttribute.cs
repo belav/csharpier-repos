@@ -2,16 +2,22 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Xml.Schema;
-using System.Reflection;
 using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
+using System.Xml.Schema;
 
 namespace System.Xml.Serialization
 {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Parameter | AttributeTargets.ReturnValue, AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Field
+            | AttributeTargets.Property
+            | AttributeTargets.Parameter
+            | AttributeTargets.ReturnValue,
+        AllowMultiple = false
+    )]
     public class XmlChoiceIdentifierAttribute : System.Attribute
     {
         private string? _name;
@@ -20,9 +26,7 @@ namespace System.Xml.Serialization
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlChoiceIdentifierAttribute()
-        {
-        }
+        public XmlChoiceIdentifierAttribute() { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>

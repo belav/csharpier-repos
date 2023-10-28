@@ -16,8 +16,15 @@ namespace Microsoft.AspNetCore.OutputCaching;
 internal sealed class OutputCacheMiddleware
 {
     // see https://tools.ietf.org/html/rfc7232#section-4.1
-    private static readonly string[] HeadersToIncludeIn304 =
-        new[] { "Cache-Control", "Content-Location", "Date", "ETag", "Expires", "Vary" };
+    private static readonly string[] HeadersToIncludeIn304 = new[]
+    {
+        "Cache-Control",
+        "Content-Location",
+        "Date",
+        "ETag",
+        "Expires",
+        "Vary"
+    };
 
     private readonly RequestDelegate _next;
     private readonly OutputCacheOptions _options;
@@ -41,14 +48,14 @@ internal sealed class OutputCacheMiddleware
         ILoggerFactory loggerFactory,
         IOutputCacheStore outputCache,
         ObjectPoolProvider poolProvider
-        )
+    )
         : this(
             next,
             options,
             loggerFactory,
             outputCache,
-            new OutputCacheKeyProvider(poolProvider, options))
-    { }
+            new OutputCacheKeyProvider(poolProvider, options)
+        ) { }
 
     // for testing
     internal OutputCacheMiddleware(
@@ -56,7 +63,8 @@ internal sealed class OutputCacheMiddleware
         IOptions<OutputCacheOptions> options,
         ILoggerFactory loggerFactory,
         IOutputCacheStore cache,
-        IOutputCacheKeyProvider keyProvider)
+        IOutputCacheKeyProvider keyProvider
+    )
     {
         ArgumentNullException.ThrowIfNull(next);
         ArgumentNullException.ThrowIfNull(options);
@@ -89,7 +97,10 @@ internal sealed class OutputCacheMiddleware
         return InvokeAwaited(httpContext, policies);
     }
 
-    private async Task InvokeAwaited(HttpContext httpContext, IReadOnlyList<IOutputCachePolicy> policies)
+    private async Task InvokeAwaited(
+        HttpContext httpContext,
+        IReadOnlyList<IOutputCachePolicy> policies
+    )
     {
         var context = new OutputCacheContext { HttpContext = httpContext };
 
@@ -135,7 +146,10 @@ internal sealed class OutputCacheMiddleware
 
                     if (context.AllowLocking)
                     {
-                        var cacheEntry = await _requestDispatcher.ScheduleAsync(context.CacheKey, key => ExecuteResponseAsync());
+                        var cacheEntry = await _requestDispatcher.ScheduleAsync(
+                            context.CacheKey,
+                            key => ExecuteResponseAsync()
+                        );
 
                         // The current request was processed, nothing more to do
                         if (executed)
@@ -167,7 +181,10 @@ internal sealed class OutputCacheMiddleware
                             // The next middleware might change the policy
                             foreach (var policy in policies)
                             {
-                                await policy.ServeResponseAsync(context, httpContext.RequestAborted);
+                                await policy.ServeResponseAsync(
+                                    context,
+                                    httpContext.RequestAborted
+                                );
                             }
 
                             // If there was no response body, check the response headers now. We can cache things like redirects.
@@ -211,7 +228,10 @@ internal sealed class OutputCacheMiddleware
         }
     }
 
-    internal bool TryGetRequestPolicies(HttpContext httpContext, out IReadOnlyList<IOutputCachePolicy> policies)
+    internal bool TryGetRequestPolicies(
+        HttpContext httpContext,
+        out IReadOnlyList<IOutputCachePolicy> policies
+    )
     {
         policies = Array.Empty<IOutputCachePolicy>();
         List<IOutputCachePolicy>? result = null;
@@ -249,7 +269,11 @@ internal sealed class OutputCacheMiddleware
         return false;
     }
 
-    internal async Task<bool> TryServeCachedResponseAsync(OutputCacheContext context, OutputCacheEntry? cacheEntry, IReadOnlyList<IOutputCachePolicy> policies)
+    internal async Task<bool> TryServeCachedResponseAsync(
+        OutputCacheContext context,
+        OutputCacheEntry? cacheEntry,
+        IReadOnlyList<IOutputCachePolicy> policies
+    )
     {
         if (cacheEntry == null)
         {
@@ -303,7 +327,9 @@ internal sealed class OutputCacheMiddleware
                 // Note: int64 division truncates result and errors may be up to 1 second. This reduction in
                 // accuracy of age calculation is considered appropriate since it is small compared to clock
                 // skews and the "Age" header is an estimate of the real age of cached content.
-                response.Headers.Age = HeaderUtilities.FormatNonNegativeInt64(context.CachedEntryAge.Ticks / TimeSpan.TicksPerSecond);
+                response.Headers.Age = HeaderUtilities.FormatNonNegativeInt64(
+                    context.CachedEntryAge.Ticks / TimeSpan.TicksPerSecond
+                );
 
                 // Copy the cached response body
                 var body = context.CachedResponse.Body;
@@ -312,7 +338,9 @@ internal sealed class OutputCacheMiddleware
                 {
                     try
                     {
-                        await context.CachedResponse.CopyToAsync(response.BodyWriter, context.HttpContext.RequestAborted);
+                        await context
+                            .CachedResponse
+                            .CopyToAsync(response.BodyWriter, context.HttpContext.RequestAborted);
                     }
                     catch (OperationCanceledException)
                     {
@@ -326,7 +354,10 @@ internal sealed class OutputCacheMiddleware
         return false;
     }
 
-    internal async Task<bool> TryServeFromCacheAsync(OutputCacheContext cacheContext, IReadOnlyList<IOutputCachePolicy> policies)
+    internal async Task<bool> TryServeFromCacheAsync(
+        OutputCacheContext cacheContext,
+        IReadOnlyList<IOutputCachePolicy> policies
+    )
     {
         CreateCacheKey(cacheContext);
 
@@ -342,7 +373,16 @@ internal sealed class OutputCacheMiddleware
         OutputCacheEntry? cacheEntry;
         try
         {
-            cacheEntry = await _outputCacheEntryDispatcher.ScheduleAsync(cacheContext.CacheKey, (Store: _store, CacheContext: cacheContext), static async (key, state) => await OutputCacheEntryFormatter.GetAsync(key, state.Store, state.CacheContext.HttpContext.RequestAborted));
+            cacheEntry = await _outputCacheEntryDispatcher.ScheduleAsync(
+                cacheContext.CacheKey,
+                (Store: _store, CacheContext: cacheContext),
+                static async (key, state) =>
+                    await OutputCacheEntryFormatter.GetAsync(
+                        key,
+                        state.Store,
+                        state.CacheContext.HttpContext.RequestAborted
+                    )
+            );
         }
         catch (OperationCanceledException)
         {
@@ -355,12 +395,20 @@ internal sealed class OutputCacheMiddleware
             cacheEntry = null;
         }
 
-        if (cacheEntry is not null && await TryServeCachedResponseAsync(cacheContext, cacheEntry, policies))
+        if (
+            cacheEntry is not null
+            && await TryServeCachedResponseAsync(cacheContext, cacheEntry, policies)
+        )
         {
             return true;
         }
 
-        if (HeaderUtilities.ContainsCacheDirective(cacheContext.HttpContext.Request.Headers.CacheControl, CacheControlHeaderValue.OnlyIfCachedString))
+        if (
+            HeaderUtilities.ContainsCacheDirective(
+                cacheContext.HttpContext.Request.Headers.CacheControl,
+                CacheControlHeaderValue.OnlyIfCachedString
+            )
+        )
         {
             _logger.GatewayTimeoutServed();
             cacheContext.HttpContext.Response.StatusCode = StatusCodes.Status504GatewayTimeout;
@@ -393,14 +441,17 @@ internal sealed class OutputCacheMiddleware
             var response = context.HttpContext.Response;
             var headers = response.Headers;
 
-            context.CachedResponseValidFor = context.ResponseExpirationTimeSpan ?? _options.DefaultExpirationTimeSpan;
+            context.CachedResponseValidFor =
+                context.ResponseExpirationTimeSpan ?? _options.DefaultExpirationTimeSpan;
 
             // Setting the date on the raw response headers.
             headers.Date = HeaderUtilities.FormatDate(context.ResponseTime!.Value);
 
             // Store the response on the state
-            var cacheEntry = new OutputCacheEntry(context.ResponseTime!.Value, response.StatusCode)
-                .CopyHeadersFrom(headers);
+            var cacheEntry = new OutputCacheEntry(
+                context.ResponseTime!.Value,
+                response.StatusCode
+            ).CopyHeadersFrom(headers);
             context.CachedResponse = cacheEntry;
 
             return;
@@ -414,8 +465,11 @@ internal sealed class OutputCacheMiddleware
     /// </summary>
     internal async ValueTask FinalizeCacheBodyAsync(OutputCacheContext context)
     {
-        if (context.AllowCacheStorage && context.OutputCacheStream.BufferingEnabled
-            && context.CachedResponse is not null)
+        if (
+            context.AllowCacheStorage
+            && context.OutputCacheStream.BufferingEnabled
+            && context.CachedResponse is not null
+        )
         {
             // If AllowCacheLookup is false, the cache key was not created
             CreateCacheKey(context);
@@ -423,9 +477,14 @@ internal sealed class OutputCacheMiddleware
             var contentLength = context.HttpContext.Response.ContentLength;
             var cachedResponseBody = context.OutputCacheStream.GetCachedResponseBody();
 
-            if (!contentLength.HasValue || contentLength == cachedResponseBody.Length
-                || (cachedResponseBody.Length == 0
-                    && HttpMethods.IsHead(context.HttpContext.Request.Method)))
+            if (
+                !contentLength.HasValue
+                || contentLength == cachedResponseBody.Length
+                || (
+                    cachedResponseBody.Length == 0
+                    && HttpMethods.IsHead(context.HttpContext.Request.Method)
+                )
+            )
             {
                 // transfer lifetime from the buffer to the cached response
                 context.CachedResponse.SetBody(cachedResponseBody, recycleBuffers: true);
@@ -438,8 +497,15 @@ internal sealed class OutputCacheMiddleware
                 {
                     _logger.ResponseCached();
 
-                    await OutputCacheEntryFormatter.StoreAsync(context.CacheKey, context.CachedResponse, context.Tags, context.CachedResponseValidFor,
-                        _store, _logger, context.HttpContext.RequestAborted);
+                    await OutputCacheEntryFormatter.StoreAsync(
+                        context.CacheKey,
+                        context.CachedResponse,
+                        context.Tags,
+                        context.CachedResponseValidFor,
+                        _store,
+                        _logger,
+                        context.HttpContext.RequestAborted
+                    );
                 }
             }
             else
@@ -482,7 +548,9 @@ internal sealed class OutputCacheMiddleware
     {
         if (context.HttpContext.Features.Get<IOutputCacheFeature>() != null)
         {
-            throw new InvalidOperationException($"Another instance of {nameof(OutputCacheFeature)} already exists. Only one instance of {nameof(OutputCacheMiddleware)} can be configured for an application.");
+            throw new InvalidOperationException(
+                $"Another instance of {nameof(OutputCacheFeature)} already exists. Only one instance of {nameof(OutputCacheMiddleware)} can be configured for an application."
+            );
         }
 
         context.HttpContext.Features.Set<IOutputCacheFeature>(new OutputCacheFeature(context));
@@ -496,7 +564,8 @@ internal sealed class OutputCacheMiddleware
             context.OriginalResponseStream,
             _options.MaximumBodySize,
             StreamUtilities.BodySegmentSize,
-            () => StartResponse(context));
+            () => StartResponse(context)
+        );
         context.HttpContext.Response.Body = context.OutputCacheStream;
     }
 
@@ -524,16 +593,25 @@ internal sealed class OutputCacheMiddleware
 
         if (!StringValues.IsNullOrEmpty(ifNoneMatchHeader))
         {
-            if (ifNoneMatchHeader.Count == 1 && StringSegment.Equals(ifNoneMatchHeader[0], EntityTagHeaderValue.Any.Tag, StringComparison.OrdinalIgnoreCase))
+            if (
+                ifNoneMatchHeader.Count == 1
+                && StringSegment.Equals(
+                    ifNoneMatchHeader[0],
+                    EntityTagHeaderValue.Any.Tag,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 _logger.NotModifiedIfNoneMatchStar();
                 return true;
             }
-            
-            if (cachedResponse.TryFindHeader(HeaderNames.ETag, out var raw)
+
+            if (
+                cachedResponse.TryFindHeader(HeaderNames.ETag, out var raw)
                 && !StringValues.IsNullOrEmpty(raw)
                 && EntityTagHeaderValue.TryParse(raw.ToString(), out var eTag)
-                && EntityTagHeaderValue.TryParseList(ifNoneMatchHeader, out var ifNoneMatchETags))
+                && EntityTagHeaderValue.TryParseList(ifNoneMatchHeader, out var ifNoneMatchETags)
+            )
             {
                 for (var i = 0; i < ifNoneMatchETags?.Count; i++)
                 {
@@ -551,14 +629,24 @@ internal sealed class OutputCacheMiddleware
             var ifModifiedSince = context.HttpContext.Request.Headers.IfModifiedSince;
             if (!StringValues.IsNullOrEmpty(ifModifiedSince))
             {
-                if (!HeaderUtilities.TryParseDate(cachedResponse.FindHeader(HeaderNames.LastModified).ToString(), out var modified) &&
-                    !HeaderUtilities.TryParseDate(cachedResponse.FindHeader(HeaderNames.Date).ToString(), out modified))
+                if (
+                    !HeaderUtilities.TryParseDate(
+                        cachedResponse.FindHeader(HeaderNames.LastModified).ToString(),
+                        out var modified
+                    )
+                    && !HeaderUtilities.TryParseDate(
+                        cachedResponse.FindHeader(HeaderNames.Date).ToString(),
+                        out modified
+                    )
+                )
                 {
                     return false;
                 }
 
-                if (HeaderUtilities.TryParseDate(ifModifiedSince.ToString(), out var modifiedSince) &&
-                    modified <= modifiedSince)
+                if (
+                    HeaderUtilities.TryParseDate(ifModifiedSince.ToString(), out var modifiedSince)
+                    && modified <= modifiedSince
+                )
                 {
                     _logger.NotModifiedIfModifiedSinceSatisfied(modified, modifiedSince);
                     return true;

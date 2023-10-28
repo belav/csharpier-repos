@@ -34,6 +34,8 @@ using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
+
+
 using JsonConstructor = Newtonsoft.Json.JsonConstructorAttribute;
 
 namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
@@ -47,9 +49,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             public string UserName { get; private set; }
             public bool Enabled { get; private set; }
 
-            public User()
-            {
-            }
+            public User() { }
 
             [JsonConstructor]
             public User(string userName, bool enabled)
@@ -64,7 +64,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            string json = @"{
+            string json =
+                @"{
               ""UserName"": ""domain\\username"",
               ""Enabled"": true
             }";

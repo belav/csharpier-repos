@@ -27,7 +27,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"string()";
             var expected = @"Test";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -146,7 +152,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"string(child::Para)";
             var expected = @"Test";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -198,7 +210,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"concat(string(child::*), ""BB"")";
             var expected = @"TestBB";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -250,7 +268,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"starts-with(""TestBB"", string(child::*))";
             var expected = true;
 
-            Utils.XPathBooleanTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathBooleanTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -302,7 +326,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"contains(""AATestBB"", string(child::*))";
             var expected = true;
 
-            Utils.XPathBooleanTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathBooleanTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -354,7 +384,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"substring-before(string(child::*), ""t"")";
             var expected = @"Tes";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -406,7 +442,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"substring-after(string(child::*), ""T"")";
             var expected = @"est";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -560,7 +602,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"substring(string(child::*), 2)";
             var expected = @"est";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -595,7 +643,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"string-length()";
             var expected = 4d;
 
-            Utils.XPathNumberTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNumberTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -630,7 +684,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"string-length(string(child::*))";
             var expected = 4d;
 
-            Utils.XPathNumberTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNumberTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -819,7 +879,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"normalize-space()";
             var expected = @"A B";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -922,7 +988,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"normalize-space(string(child::*))";
             var expected = @"A B";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -953,7 +1025,8 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
         public static void StringFunctionsTest2476(Utils.NavigatorKind kind)
         {
             var xml = "dummy.xml";
-            var testExpression = "translate(\"\0x03B1\0x03B2\0x03B3\", \"\0x03B1\0x03B2\0x03B3\", \"\0x0391\0x0392\0x0393\")";
+            var testExpression =
+                "translate(\"\0x03B1\0x03B2\0x03B3\", \"\0x03B1\0x03B2\0x03B3\", \"\0x0391\0x0392\0x0393\")";
             var expected = "\0x0391\0x0392\0x0393";
 
             Utils.XPathStringTest(kind, xml, testExpression, expected);
@@ -1061,7 +1134,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"translate(string(child::*), ""est"", ""EST"")";
             var expected = @"TEST";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -1227,8 +1306,14 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             namespaceManager.AddNamespace("ns", "http://default.htm");
             var expected = @"http://book.htm";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager,
-                startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -1249,8 +1334,14 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             namespaceManager.AddNamespace("ns", "http://default.htm");
             var expected = @"http://www.w3.org/XML/1998/namespace";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager,
-                startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -1271,8 +1362,14 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             namespaceManager.AddNamespace("ns", "http://default.htm");
             var expected = @"http://default.htm";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager,
-                startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -1292,7 +1389,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             namespaceManager.AddNamespace("ns", "http://default.htm");
             var expected = @"http://book.htm";
 
-            Utils.XPathStringTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager);
+            Utils.XPathStringTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager
+            );
         }
 
         /// <summary>

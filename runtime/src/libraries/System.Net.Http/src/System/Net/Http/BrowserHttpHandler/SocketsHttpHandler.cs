@@ -2,14 +2,14 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Metrics;
 using System.IO;
 using System.Net.Security;
 using System.Runtime.Versioning;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Diagnostics.CodeAnalysis;
-using System.Diagnostics;
-using System.Diagnostics.Metrics;
 
 namespace System.Net.Http
 {
@@ -188,7 +188,9 @@ namespace System.Net.Http
         }
 
         protected internal override Task<HttpResponseMessage> SendAsync(
-            HttpRequestMessage request, CancellationToken cancellationToken) => throw new PlatformNotSupportedException();
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        ) => throw new PlatformNotSupportedException();
 
         public bool EnableMultipleHttp2Connections
         {
@@ -196,13 +198,21 @@ namespace System.Net.Http
             set => throw new PlatformNotSupportedException();
         }
 
-        public Func<SocketsHttpConnectionContext, CancellationToken, ValueTask<Stream>>? ConnectCallback
+        public Func<
+            SocketsHttpConnectionContext,
+            CancellationToken,
+            ValueTask<Stream>
+        >? ConnectCallback
         {
             get => throw new PlatformNotSupportedException();
             set => throw new PlatformNotSupportedException();
         }
 
-        public Func<SocketsHttpPlaintextStreamFilterContext, CancellationToken, ValueTask<Stream>>? PlaintextStreamFilter
+        public Func<
+            SocketsHttpPlaintextStreamFilterContext,
+            CancellationToken,
+            ValueTask<Stream>
+        >? PlaintextStreamFilter
         {
             get => throw new PlatformNotSupportedException();
             set => throw new PlatformNotSupportedException();

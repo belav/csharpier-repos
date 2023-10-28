@@ -12,9 +12,11 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure;
 
 [Trait(Traits.Feature, Traits.Features.Outlining)]
-public class AnonymousMethodExpressionTests : AbstractCSharpSyntaxNodeStructureTests<AnonymousMethodExpressionSyntax>
+public class AnonymousMethodExpressionTests
+    : AbstractCSharpSyntaxNodeStructureTests<AnonymousMethodExpressionSyntax>
 {
-    internal override AbstractSyntaxStructureProvider CreateProvider() => new AnonymousMethodExpressionStructureProvider();
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new AnonymousMethodExpressionStructureProvider();
 
     [Fact]
     public async Task TestAnonymousMethod()
@@ -31,8 +33,10 @@ public class AnonymousMethodExpressionTests : AbstractCSharpSyntaxNodeStructureT
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -66,8 +70,10 @@ public class AnonymousMethodExpressionTests : AbstractCSharpSyntaxNodeStructureT
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -85,7 +91,9 @@ public class AnonymousMethodExpressionTests : AbstractCSharpSyntaxNodeStructureT
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 }

@@ -2,14 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Text;
-using System.Reflection;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Reflection;
 using System.Reflection.Runtime.General;
-using System.Reflection.Runtime.TypeInfos;
 using System.Reflection.Runtime.ParameterInfos;
-
+using System.Reflection.Runtime.TypeInfos;
+using System.Text;
 using Internal.Reflection.Core;
 using Internal.Reflection.Core.Execution;
 
@@ -22,16 +21,15 @@ namespace System.Reflection.Runtime.MethodInfos
             : this()
         {
             Debug.Assert(count >= 1);
-            Remainder = (count == 1) ? Array.Empty<RuntimeParameterInfo>() : new RuntimeParameterInfo[count - 1];
+            Remainder =
+                (count == 1)
+                    ? Array.Empty<RuntimeParameterInfo>()
+                    : new RuntimeParameterInfo[count - 1];
         }
 
         public RuntimeParameterInfo this[int index]
         {
-            get
-            {
-                return index == 0 ? First : Remainder[index - 1];
-            }
-
+            get { return index == 0 ? First : Remainder[index - 1]; }
             set
             {
                 if (index == 0)

@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections;
 using System.Diagnostics;
 using System.Xml;
 using System.Xml.XPath;
-using System.Collections;
 
 namespace System.Xml.Xsl.XsltOld
 {
@@ -14,7 +14,7 @@ namespace System.Xml.Xsl.XsltOld
         // Execution states:
         private const int Outputting = 2;
 
-        private readonly ArrayList _copyEvents;   // Copy code action events
+        private readonly ArrayList _copyEvents; // Copy code action events
 
         internal CopyCodeAction()
         {

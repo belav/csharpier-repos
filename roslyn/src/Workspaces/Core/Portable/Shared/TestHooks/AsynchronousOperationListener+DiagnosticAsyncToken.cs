@@ -10,7 +10,7 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
     internal sealed partial class AsynchronousOperationListener
     {
         /// <summary>
-        /// Stores the source information for an <see cref="IAsyncToken"/> value.  Helpful when 
+        /// Stores the source information for an <see cref="IAsyncToken"/> value.  Helpful when
         /// tracking down tokens which aren't properly disposed.
         /// </summary>
         internal sealed class DiagnosticAsyncToken(
@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
             string name,
             object? tag,
             string filePath,
-            int lineNumber) : AsyncToken(listener)
+            int lineNumber
+        ) : AsyncToken(listener)
         {
             public string Name { get; } = name;
             public string FilePath { get; } = filePath;
@@ -26,10 +27,10 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
             public object? Tag { get; } = tag;
             public Task? Task { get; set; }
 
-            internal void AssociateWithTask(Task task)
-                => Task = task;
+            internal void AssociateWithTask(Task task) => Task = task;
 
-            public override string ToString() => $"{Name} {Path.GetFileName(FilePath)} {LineNumber}";
+            public override string ToString() =>
+                $"{Name} {Path.GetFileName(FilePath)} {LineNumber}";
         }
     }
 }

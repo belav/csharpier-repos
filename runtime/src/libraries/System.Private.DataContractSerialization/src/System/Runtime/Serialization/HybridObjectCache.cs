@@ -2,9 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Xml;
 using System.Collections.Generic;
-
+using System.Xml;
 
 namespace System.Runtime.Serialization
 {
@@ -13,16 +12,16 @@ namespace System.Runtime.Serialization
         private Dictionary<string, object?>? _objectDictionary;
         private Dictionary<string, object?>? _referencedObjectDictionary;
 
-        internal HybridObjectCache()
-        {
-        }
+        internal HybridObjectCache() { }
 
         internal void Add(string id, object? obj)
         {
             _objectDictionary ??= new Dictionary<string, object?>();
 
             if (_objectDictionary.ContainsKey(id))
-                throw XmlObjectSerializer.CreateSerializationException(SR.Format(SR.MultipleIdDefinition, id));
+                throw XmlObjectSerializer.CreateSerializationException(
+                    SR.Format(SR.MultipleIdDefinition, id)
+                );
             _objectDictionary.Add(id, obj);
         }
 

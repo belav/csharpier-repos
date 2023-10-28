@@ -1,10 +1,10 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Runtime.InteropServices;
-using System.Buffers;
-using System.Text;
 using System;
+using System.Buffers;
+using System.Runtime.InteropServices;
+using System.Text;
 
 internal static partial class Interop
 {
@@ -20,7 +20,11 @@ internal static partial class Interop
         /// <returns>
         /// Returns the number of bytes placed into the buffer on success; bufferSize if the buffer is too small; and -1 on error.
         /// </returns>
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_ReadLink", SetLastError = true)]
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_ReadLink",
+            SetLastError = true
+        )]
         private static partial int ReadLink(ref byte path, ref byte buffer, int bufferSize);
 
         /// <summary>
@@ -37,13 +41,19 @@ internal static partial class Interop
             using var converter = new ValueUtf8Converter(stackalloc byte[StackBufferSize]);
             Span<byte> spanBuffer = stackalloc byte[StackBufferSize];
             byte[]? arrayBuffer = null;
-            ref byte pathReference = ref MemoryMarshal.GetReference(converter.ConvertAndTerminateString(path));
+            ref byte pathReference = ref MemoryMarshal.GetReference(
+                converter.ConvertAndTerminateString(path)
+            );
             while (true)
             {
                 int error = 0;
                 try
                 {
-                    int resultLength = ReadLink(ref pathReference, ref MemoryMarshal.GetReference(spanBuffer), spanBuffer.Length);
+                    int resultLength = ReadLink(
+                        ref pathReference,
+                        ref MemoryMarshal.GetReference(spanBuffer),
+                        spanBuffer.Length
+                    );
 
                     if (resultLength < 0)
                     {

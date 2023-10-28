@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using System;
 
 class Program
 {
@@ -15,11 +15,14 @@ class Program
             o.OptionValue = 99;
         });
         services.ConfigureOptions<OptionsAPostConfigure>();
-        services.AddOptions<OptionsB>()
-            .Configure<IOptions<OptionsA>>((b, a) =>
-            {
-                b.OptionString = a.Value.OptionValue.ToString();
-            });
+        services
+            .AddOptions<OptionsB>()
+            .Configure<IOptions<OptionsA>>(
+                (b, a) =>
+                {
+                    b.OptionString = a.Value.OptionValue.ToString();
+                }
+            );
 
         ServiceProvider provider = services.BuildServiceProvider();
 
@@ -28,11 +31,13 @@ class Program
         OptionsC optionsC = provider.GetService<IOptions<OptionsC>>().Value;
         OptionsD optionsD = provider.GetService<IOptionsFactory<OptionsD>>().Create(string.Empty);
 
-        if (optionsA.OptionValue != 99 ||
-            optionsA.PostConfigureOption != 101 ||
-            optionsB.OptionString != "99" ||
-            optionsC is null ||
-            optionsD is null)
+        if (
+            optionsA.OptionValue != 99
+            || optionsA.PostConfigureOption != 101
+            || optionsB.OptionString != "99"
+            || optionsC is null
+            || optionsD is null
+        )
         {
             return -1;
         }

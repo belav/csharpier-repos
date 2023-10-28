@@ -61,7 +61,9 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
 
         _connectionString = string.IsNullOrWhiteSpace(relationalOptions.ConnectionString)
             ? null
-            : dependencies.ConnectionStringResolver.ResolveConnectionString(relationalOptions.ConnectionString);
+            : dependencies
+                .ConnectionStringResolver
+                .ResolveConnectionString(relationalOptions.ConnectionString);
 
         if (relationalOptions.Connection != null)
         {
@@ -123,8 +125,7 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
     /// </summary>
     /// <returns>The connection string.</returns>
     /// <exception cref="InvalidOperationException">when connection string cannot be obtained.</exception>
-    protected virtual string GetValidatedConnectionString()
-        => ConnectionString!;
+    protected virtual string GetValidatedConnectionString() => ConnectionString!;
 
     /// <summary>
     ///     Gets or sets the underlying <see cref="System.Data.Common.DbConnection" /> used to connect to the database.
@@ -193,8 +194,7 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
     /// <summary>
     ///     The current ambient transaction. Defaults to <see cref="Transaction.Current" />.
     /// </summary>
-    public virtual Transaction? CurrentAmbientTransaction
-        => Transaction.Current;
+    public virtual Transaction? CurrentAmbientTransaction => Transaction.Current;
 
     /// <summary>
     ///     Gets the current transaction.
@@ -212,7 +212,10 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
             {
                 try
                 {
-                    if (_enlistedTransaction.TransactionInformation.Status != TransactionStatus.Active)
+                    if (
+                        _enlistedTransaction.TransactionInformation.Status
+                        != TransactionStatus.Active
+                    )
                     {
                         _enlistedTransaction = null;
                     }
@@ -255,14 +258,13 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
     ///     by providers to make a different call instead.
     /// </summary>
     /// <param name="transaction">The transaction to be used.</param>
-    protected virtual void ConnectionEnlistTransaction(Transaction? transaction)
-        => DbConnection.EnlistTransaction(transaction);
+    protected virtual void ConnectionEnlistTransaction(Transaction? transaction) =>
+        DbConnection.EnlistTransaction(transaction);
 
     /// <summary>
     ///     Indicates whether the store connection supports ambient transactions
     /// </summary>
-    protected virtual bool SupportsAmbientTransactions
-        => false;
+    protected virtual bool SupportsAmbientTransactions => false;
 
     /// <summary>
     ///     Gets the timeout for executing a command against the database.
@@ -301,15 +303,15 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
     /// <summary>
     ///     Returns a relational command to this connection, so that it can be reused in the future.
     /// </summary>
-    public virtual void ReturnCommand(IRelationalCommand command)
-        => _cachedRelationalCommand ??= command;
+    public virtual void ReturnCommand(IRelationalCommand command) =>
+        _cachedRelationalCommand ??= command;
 
     /// <summary>
     ///     Begins a new transaction.
     /// </summary>
     /// <returns>The newly created transaction.</returns>
-    public virtual IDbContextTransaction BeginTransaction()
-        => BeginTransaction(IsolationLevel.Unspecified);
+    public virtual IDbContextTransaction BeginTransaction() =>
+        BeginTransaction(IsolationLevel.Unspecified);
 
     /// <summary>
     ///     Asynchronously begins a new transaction.
@@ -319,8 +321,11 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
     ///     A task that represents the asynchronous operation. The task result contains the newly created transaction.
     /// </returns>
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
-    public virtual async Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default)
-        => await BeginTransactionAsync(IsolationLevel.Unspecified, cancellationToken).ConfigureAwait(false);
+    public virtual async Task<IDbContextTransaction> BeginTransactionAsync(
+        CancellationToken cancellationToken = default
+    ) =>
+        await BeginTransactionAsync(IsolationLevel.Unspecified, cancellationToken)
+            .ConfigureAwait(false);
 
     /// <summary>
     ///     Begins a new transaction.
@@ -338,22 +343,17 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
         var startTime = DateTimeOffset.UtcNow;
         var stopwatch = SharedStopwatch.StartNew();
 
-        var interceptionResult = Dependencies.TransactionLogger.TransactionStarting(
-            this,
-            isolationLevel,
-            transactionId,
-            startTime);
+        var interceptionResult = Dependencies
+            .TransactionLogger
+            .TransactionStarting(this, isolationLevel, transactionId, startTime);
 
         var dbTransaction = interceptionResult.HasResult
             ? interceptionResult.Result
             : ConnectionBeginTransaction(isolationLevel);
 
-        dbTransaction = Dependencies.TransactionLogger.TransactionStarted(
-            this,
-            dbTransaction,
-            transactionId,
-            startTime,
-            stopwatch.Elapsed);
+        dbTransaction = Dependencies
+            .TransactionLogger
+            .TransactionStarted(this, dbTransaction, transactionId, startTime, stopwatch.Elapsed);
 
         return CreateRelationalTransaction(dbTransaction, transactionId, true);
     }
@@ -364,8 +364,8 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
     /// </summary>
     /// <param name="isolationLevel">The isolation level to use for the transaction.</param>
     /// <returns>The newly created transaction.</returns>
-    protected virtual DbTransaction ConnectionBeginTransaction(IsolationLevel isolationLevel)
-        => DbConnection.BeginTransaction(isolationLevel);
+    protected virtual DbTransaction ConnectionBeginTransaction(IsolationLevel isolationLevel) =>
+        DbConnection.BeginTransaction(isolationLevel);
 
     /// <summary>
     ///     Asynchronously begins a new transaction.
@@ -379,7 +379,8 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
     public virtual async Task<IDbContextTransaction> BeginTransactionAsync(
         // ReSharper disable once RedundantNameQualifier
         IsolationLevel isolationLevel,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         await OpenAsync(cancellationToken).ConfigureAwait(false);
 
@@ -389,25 +390,32 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
         var startTime = DateTimeOffset.UtcNow;
         var stopwatch = SharedStopwatch.StartNew();
 
-        var interceptionResult = await Dependencies.TransactionLogger.TransactionStartingAsync(
+        var interceptionResult = await Dependencies
+            .TransactionLogger
+            .TransactionStartingAsync(
                 this,
                 isolationLevel,
                 transactionId,
                 startTime,
-                cancellationToken)
+                cancellationToken
+            )
             .ConfigureAwait(false);
 
         var dbTransaction = interceptionResult.HasResult
             ? interceptionResult.Result
-            : await ConnectionBeginTransactionAsync(isolationLevel, cancellationToken).ConfigureAwait(false);
+            : await ConnectionBeginTransactionAsync(isolationLevel, cancellationToken)
+                .ConfigureAwait(false);
 
-        dbTransaction = await Dependencies.TransactionLogger.TransactionStartedAsync(
+        dbTransaction = await Dependencies
+            .TransactionLogger
+            .TransactionStartedAsync(
                 this,
                 dbTransaction,
                 transactionId,
                 startTime,
                 stopwatch.Elapsed,
-                cancellationToken)
+                cancellationToken
+            )
             .ConfigureAwait(false);
 
         return CreateRelationalTransaction(dbTransaction, transactionId, true);
@@ -423,8 +431,8 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
     protected virtual ValueTask<DbTransaction> ConnectionBeginTransactionAsync(
         IsolationLevel isolationLevel,
-        CancellationToken cancellationToken = default)
-        => DbConnection.BeginTransactionAsync(isolationLevel, cancellationToken);
+        CancellationToken cancellationToken = default
+    ) => DbConnection.BeginTransactionAsync(isolationLevel, cancellationToken);
 
     private void EnsureNoTransactions()
     {
@@ -449,22 +457,28 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
         }
     }
 
-    private IDbContextTransaction CreateRelationalTransaction(DbTransaction transaction, Guid transactionId, bool transactionOwned)
-        => CurrentTransaction
-            = Dependencies.RelationalTransactionFactory.Create(
+    private IDbContextTransaction CreateRelationalTransaction(
+        DbTransaction transaction,
+        Guid transactionId,
+        bool transactionOwned
+    ) =>
+        CurrentTransaction = Dependencies
+            .RelationalTransactionFactory
+            .Create(
                 this,
                 transaction,
                 transactionId,
                 Dependencies.TransactionLogger,
-                transactionOwned: transactionOwned);
+                transactionOwned: transactionOwned
+            );
 
     /// <summary>
     ///     Specifies an existing <see cref="DbTransaction" /> to be used for database operations.
     /// </summary>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>An instance of <see cref="IDbTransaction" /> that wraps the provided transaction.</returns>
-    public virtual IDbContextTransaction? UseTransaction(DbTransaction? transaction)
-        => UseTransaction(transaction, Guid.NewGuid());
+    public virtual IDbContextTransaction? UseTransaction(DbTransaction? transaction) =>
+        UseTransaction(transaction, Guid.NewGuid());
 
     /// <summary>
     ///     Specifies an existing <see cref="DbTransaction" /> to be used for database operations.
@@ -476,19 +490,24 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
     ///     if <paramref name="transaction" /> is <see langword="null" />.
     /// </returns>
     [return: NotNullIfNotNull("transaction")]
-    public virtual IDbContextTransaction? UseTransaction(DbTransaction? transaction, Guid transactionId)
+    public virtual IDbContextTransaction? UseTransaction(
+        DbTransaction? transaction,
+        Guid transactionId
+    )
     {
         if (ShouldUseTransaction(transaction))
         {
             Open();
 
-            transaction = Dependencies.TransactionLogger.TransactionUsed(
-                this,
+            transaction = Dependencies
+                .TransactionLogger
+                .TransactionUsed(this, transaction, transactionId, DateTimeOffset.UtcNow);
+
+            CurrentTransaction = CreateRelationalTransaction(
                 transaction,
                 transactionId,
-                DateTimeOffset.UtcNow);
-
-            CurrentTransaction = CreateRelationalTransaction(transaction, transactionId, transactionOwned: false);
+                transactionOwned: false
+            );
         }
 
         return CurrentTransaction;
@@ -503,8 +522,8 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
     public virtual Task<IDbContextTransaction?> UseTransactionAsync(
         DbTransaction? transaction,
-        CancellationToken cancellationToken = default)
-        => UseTransactionAsync(transaction, Guid.NewGuid(), cancellationToken);
+        CancellationToken cancellationToken = default
+    ) => UseTransactionAsync(transaction, Guid.NewGuid(), cancellationToken);
 
     /// <summary>
     ///     Specifies an existing <see cref="DbTransaction" /> to be used for database operations.
@@ -517,21 +536,29 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
     public virtual async Task<IDbContextTransaction?> UseTransactionAsync(
         DbTransaction? transaction,
         Guid transactionId,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         if (ShouldUseTransaction(transaction))
         {
             await OpenAsync(cancellationToken).ConfigureAwait(false);
 
-            transaction = await Dependencies.TransactionLogger.TransactionUsedAsync(
+            transaction = await Dependencies
+                .TransactionLogger
+                .TransactionUsedAsync(
                     this,
                     transaction,
                     transactionId,
                     DateTimeOffset.UtcNow,
-                    cancellationToken)
+                    cancellationToken
+                )
                 .ConfigureAwait(false);
 
-            CurrentTransaction = CreateRelationalTransaction(transaction, transactionId, transactionOwned: false);
+            CurrentTransaction = CreateRelationalTransaction(
+                transaction,
+                transactionId,
+                transactionOwned: false
+            );
         }
 
         return CurrentTransaction;
@@ -652,7 +679,10 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
     ///     was actually opened.
     /// </returns>
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
-    public virtual async Task<bool> OpenAsync(CancellationToken cancellationToken, bool errorsExpected = false)
+    public virtual async Task<bool> OpenAsync(
+        CancellationToken cancellationToken,
+        bool errorsExpected = false
+    )
     {
         if (DbConnection.State == ConnectionState.Broken)
         {
@@ -745,8 +775,7 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
     ///     by providers to make a different call instead.
     /// </summary>
     /// <param name="errorsExpected">Indicates if the connection errors are expected and should be logged as debug message.</param>
-    protected virtual void OpenDbConnection(bool errorsExpected)
-        => DbConnection.Open();
+    protected virtual void OpenDbConnection(bool errorsExpected) => DbConnection.Open();
 
     private async Task OpenInternalAsync(bool errorsExpected, CancellationToken cancellationToken)
     {
@@ -758,31 +787,37 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
         {
             if (logger.ShouldLogConnectionOpen(startTime))
             {
-                var interceptionResult
-                    = await logger.ConnectionOpeningAsync(this, startTime, cancellationToken).ConfigureAwait(false);
+                var interceptionResult = await logger
+                    .ConnectionOpeningAsync(this, startTime, cancellationToken)
+                    .ConfigureAwait(false);
 
                 if (!interceptionResult.IsSuppressed)
                 {
-                    await OpenDbConnectionAsync(errorsExpected, cancellationToken).ConfigureAwait(false);
+                    await OpenDbConnectionAsync(errorsExpected, cancellationToken)
+                        .ConfigureAwait(false);
                 }
 
-                await logger.ConnectionOpenedAsync(this, startTime, stopwatch.Elapsed, cancellationToken)
+                await logger
+                    .ConnectionOpenedAsync(this, startTime, stopwatch.Elapsed, cancellationToken)
                     .ConfigureAwait(false);
             }
             else
             {
-                await OpenDbConnectionAsync(errorsExpected, cancellationToken).ConfigureAwait(false);
+                await OpenDbConnectionAsync(errorsExpected, cancellationToken)
+                    .ConfigureAwait(false);
             }
         }
         catch (Exception e)
         {
-            await logger.ConnectionErrorAsync(
+            await logger
+                .ConnectionErrorAsync(
                     this,
                     e,
                     startTime,
                     stopwatch.Elapsed,
                     errorsExpected,
-                    cancellationToken)
+                    cancellationToken
+                )
                 .ConfigureAwait(false);
 
             throw;
@@ -801,8 +836,10 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
     /// <param name="errorsExpected">Indicates if the connection errors are expected and should be logged as debug message.</param>
     /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
-    protected virtual Task OpenDbConnectionAsync(bool errorsExpected, CancellationToken cancellationToken)
-        => DbConnection.OpenAsync(cancellationToken);
+    protected virtual Task OpenDbConnectionAsync(
+        bool errorsExpected,
+        CancellationToken cancellationToken
+    ) => DbConnection.OpenAsync(cancellationToken);
 
     private void HandleAmbientTransactions()
     {
@@ -810,9 +847,10 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
 
         if (current == null)
         {
-            var rootTransaction = _ambientTransactions.Count > 0 && _ambientTransactions.TryPeek(out var transaction)
-                ? transaction
-                : null;
+            var rootTransaction =
+                _ambientTransactions.Count > 0 && _ambientTransactions.TryPeek(out var transaction)
+                    ? transaction
+                    : null;
 
             if (rootTransaction != null)
             {
@@ -914,8 +952,7 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
     ///     Template method that by default calls <see cref="System.Data.Common.DbConnection.Close" /> but can be overridden
     ///     by providers to make a different call instead.
     /// </summary>
-    protected virtual void CloseDbConnection()
-        => DbConnection.Close();
+    protected virtual void CloseDbConnection() => DbConnection.Close();
 
     /// <summary>
     ///     Closes the connection to the database.
@@ -948,7 +985,8 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
                 {
                     if (logger.ShouldLogConnectionClose(startTime))
                     {
-                        var interceptionResult = await logger.ConnectionClosingAsync(this, startTime)
+                        var interceptionResult = await logger
+                            .ConnectionClosingAsync(this, startTime)
                             .ConfigureAwait(false);
 
                         if (!interceptionResult.IsSuppressed)
@@ -956,7 +994,9 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
                             await CloseDbConnectionAsync().ConfigureAwait(false);
                         }
 
-                        await logger.ConnectionClosedAsync(this, startTime, stopwatch.Elapsed).ConfigureAwait(false);
+                        await logger
+                            .ConnectionClosedAsync(this, startTime, stopwatch.Elapsed)
+                            .ConfigureAwait(false);
                     }
                     else
                     {
@@ -967,12 +1007,8 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
                 }
                 catch (Exception e)
                 {
-                    await logger.ConnectionErrorAsync(
-                            this,
-                            e,
-                            startTime,
-                            stopwatch.Elapsed,
-                            false)
+                    await logger
+                        .ConnectionErrorAsync(this, e, startTime, stopwatch.Elapsed, false)
                         .ConfigureAwait(false);
 
                     throw;
@@ -989,34 +1025,27 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
     ///     Template method that by default calls <see cref="System.Data.Common.DbConnection.CloseAsync" /> but can be overridden
     ///     by providers to make a different call instead.
     /// </summary>
-    protected virtual Task CloseDbConnectionAsync()
-        => DbConnection.CloseAsync();
+    protected virtual Task CloseDbConnectionAsync() => DbConnection.CloseAsync();
 
-    private bool ShouldClose()
-        => (_openedCount == 0
-                || _openedCount > 0
-                && --_openedCount == 0)
-            && _openedInternally;
+    private bool ShouldClose() =>
+        (_openedCount == 0 || _openedCount > 0 && --_openedCount == 0) && _openedInternally;
 
-    void IResettableService.ResetState()
-        => ResetState(disposeDbConnection: false);
+    void IResettableService.ResetState() => ResetState(disposeDbConnection: false);
 
-    Task IResettableService.ResetStateAsync(CancellationToken cancellationToken)
-        => ResetStateAsync(disposeDbConnection: false).AsTask();
+    Task IResettableService.ResetStateAsync(CancellationToken cancellationToken) =>
+        ResetStateAsync(disposeDbConnection: false).AsTask();
 
     private Transaction? _enlistedTransaction;
 
     /// <summary>
     ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
     /// </summary>
-    public virtual void Dispose()
-        => ResetState(disposeDbConnection: true);
+    public virtual void Dispose() => ResetState(disposeDbConnection: true);
 
     /// <summary>
     ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
     /// </summary>
-    public virtual ValueTask DisposeAsync()
-        => ResetStateAsync(disposeDbConnection: true);
+    public virtual ValueTask DisposeAsync() => ResetStateAsync(disposeDbConnection: true);
 
     /// <summary>
     ///     Resets the connection state. Called by <see cref="Dispose" /> and <see cref="IResettableService.ResetState" />.
@@ -1035,8 +1064,7 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
         _openedCount = 0;
         _openedInternally = false;
 
-        if (_connectionOwned
-            && _connection is not null)
+        if (_connectionOwned && _connection is not null)
         {
             CloseDbConnection();
 
@@ -1068,8 +1096,7 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
 
         _commandTimeout = _defaultCommandTimeout;
 
-        if (_connectionOwned
-            && _connection is not null)
+        if (_connectionOwned && _connection is not null)
         {
             await CloseDbConnectionAsync().ConfigureAwait(continueOnCapturedContext: false);
 
@@ -1124,14 +1151,18 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
         {
             var stopwatch = SharedStopwatch.StartNew();
 
-            var interceptionResult = await logger.ConnectionDisposingAsync(this, startTime).ConfigureAwait(false);
+            var interceptionResult = await logger
+                .ConnectionDisposingAsync(this, startTime)
+                .ConfigureAwait(false);
 
             if (!interceptionResult.IsSuppressed)
             {
                 await DbConnection.DisposeAsync().ConfigureAwait(false);
             }
 
-            await logger.ConnectionDisposedAsync(this, startTime, stopwatch.Elapsed).ConfigureAwait(false);
+            await logger
+                .ConnectionDisposedAsync(this, startTime, stopwatch.Elapsed)
+                .ConfigureAwait(false);
         }
         else
         {

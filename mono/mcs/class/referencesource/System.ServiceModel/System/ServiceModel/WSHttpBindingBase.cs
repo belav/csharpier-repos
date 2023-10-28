@@ -4,9 +4,9 @@
 namespace System.ServiceModel
 {
     using System;
-    using System.Text;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Configuration;
     using System.Globalization;
     using System.Net;
@@ -16,13 +16,14 @@ namespace System.ServiceModel
     using System.ServiceModel.Channels;
     using System.ServiceModel.Configuration;
     using System.ServiceModel.Security;
-    using System.ComponentModel;
+    using System.Text;
     using System.Xml;
 
     public abstract class WSHttpBindingBase : Binding, IBindingRuntimePreferences
     {
         WSMessageEncoding messageEncoding;
         OptionalReliableSession reliableSession;
+
         // private BindingElements
         HttpTransportBindingElement httpTransport;
         HttpsTransportBindingElement httpsTransport;
@@ -91,9 +92,14 @@ namespace System.ServiceModel
             {
                 if (value > int.MaxValue)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value.MaxReceivedMessageSize",
-                        SR.GetString(SR.MaxReceivedMessageSizeMustBeInIntegerRange)));
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value.MaxReceivedMessageSize",
+                                SR.GetString(SR.MaxReceivedMessageSizeMustBeInIntegerRange)
+                            )
+                        );
                 }
                 httpTransport.MaxReceivedMessageSize = value;
                 httpsTransport.MaxReceivedMessageSize = value;
@@ -139,13 +145,18 @@ namespace System.ServiceModel
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("value"));
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("value"));
                 }
                 this.reliableSession.CopySettings(value);
             }
         }
 
-        public override string Scheme { get { return GetTransport().Scheme; } }
+        public override string Scheme
+        {
+            get { return GetTransport().Scheme; }
+        }
 
         public EnvelopeVersion EnvelopeVersion
         {
@@ -220,7 +231,12 @@ namespace System.ServiceModel
             reliableSession = new OptionalReliableSession(session);
         }
 
-        void InitializeFrom(HttpTransportBindingElement transport, MessageEncodingBindingElement encoding, TransactionFlowBindingElement txFlow, ReliableSessionBindingElement session)
+        void InitializeFrom(
+            HttpTransportBindingElement transport,
+            MessageEncodingBindingElement encoding,
+            TransactionFlowBindingElement txFlow,
+            ReliableSessionBindingElement session
+        )
         {
             // transport
             this.BypassProxyOnLocal = transport.BypassProxyOnLocal;
@@ -234,15 +250,16 @@ namespace System.ServiceModel
             if (encoding is TextMessageEncodingBindingElement)
             {
                 this.MessageEncoding = WSMessageEncoding.Text;
-                TextMessageEncodingBindingElement text = (TextMessageEncodingBindingElement)encoding;
+                TextMessageEncodingBindingElement text =
+                    (TextMessageEncodingBindingElement)encoding;
                 this.TextEncoding = text.WriteEncoding;
                 this.ReaderQuotas = text.ReaderQuotas;
-
             }
             else if (encoding is MtomMessageEncodingBindingElement)
             {
                 messageEncoding = WSMessageEncoding.Mtom;
-                MtomMessageEncodingBindingElement mtom = (MtomMessageEncodingBindingElement)encoding;
+                MtomMessageEncodingBindingElement mtom =
+                    (MtomMessageEncodingBindingElement)encoding;
                 this.TextEncoding = mtom.WriteEncoding;
                 this.ReaderQuotas = mtom.ReaderQuotas;
             }
@@ -258,12 +275,16 @@ namespace System.ServiceModel
             }
         }
 
-        // check that properties of the HttpTransportBindingElement and 
-        // MessageEncodingBindingElement not exposed as properties on BasicHttpBinding 
+        // check that properties of the HttpTransportBindingElement and
+        // MessageEncodingBindingElement not exposed as properties on BasicHttpBinding
         // match default values of the binding elements
-        bool IsBindingElementsMatch(HttpTransportBindingElement transport, MessageEncodingBindingElement encoding, TransactionFlowBindingElement txFlow, ReliableSessionBindingElement session)
+        bool IsBindingElementsMatch(
+            HttpTransportBindingElement transport,
+            MessageEncodingBindingElement encoding,
+            TransactionFlowBindingElement txFlow,
+            ReliableSessionBindingElement session
+        )
         {
-
             if (!this.GetTransport().IsMatch(transport))
                 return false;
             if (this.MessageEncoding == WSMessageEncoding.Text)
@@ -293,7 +314,7 @@ namespace System.ServiceModel
         }
 
         public override BindingElementCollection CreateBindingElements()
-        {   // return collection of BindingElements
+        { // return collection of BindingElements
             BindingElementCollection bindingElements = new BindingElementCollection();
             // order of BindingElements is important
             // context
@@ -313,7 +334,10 @@ namespace System.ServiceModel
             }
 
             // add encoding (text or mtom)
-            WSMessageEncodingHelper.SyncUpEncodingBindingElementProperties(textEncoding, mtomEncoding);
+            WSMessageEncodingHelper.SyncUpEncodingBindingElementProperties(
+                textEncoding,
+                mtomEncoding
+            );
             if (this.MessageEncoding == WSMessageEncoding.Text)
                 bindingElements.Add(textEncoding);
             else if (this.MessageEncoding == WSMessageEncoding.Mtom)
@@ -369,15 +393,51 @@ namespace System.ServiceModel
             }
 
             HttpsTransportBindingElement httpsTransport = transport as HttpsTransportBindingElement;
-            if ( ( security != null ) && ( httpsTransport != null ) && ( httpsTransport.RequireClientCertificate != TransportDefaults.RequireClientCertificate ) )
+            if (
+                (security != null)
+                && (httpsTransport != null)
+                && (
+                    httpsTransport.RequireClientCertificate
+                    != TransportDefaults.RequireClientCertificate
+                )
+            )
             {
                 return false;
             }
 
-            if (null != privacy || !WSHttpBinding.TryCreate(security, transport, session, txFlow, out binding))
-                if (!WSFederationHttpBinding.TryCreate(security, transport, privacy, session, txFlow, out binding))
-                    if (!WS2007HttpBinding.TryCreate(security, transport, session, txFlow, out binding))
-                        if (!WS2007FederationHttpBinding.TryCreate(security, transport, privacy, session, txFlow, out binding))
+            if (
+                null != privacy
+                || !WSHttpBinding.TryCreate(security, transport, session, txFlow, out binding)
+            )
+                if (
+                    !WSFederationHttpBinding.TryCreate(
+                        security,
+                        transport,
+                        privacy,
+                        session,
+                        txFlow,
+                        out binding
+                    )
+                )
+                    if (
+                        !WS2007HttpBinding.TryCreate(
+                            security,
+                            transport,
+                            session,
+                            txFlow,
+                            out binding
+                        )
+                    )
+                        if (
+                            !WS2007FederationHttpBinding.TryCreate(
+                                security,
+                                transport,
+                                privacy,
+                                session,
+                                txFlow,
+                                out binding
+                            )
+                        )
                             return false;
 
             if (txFlow == null)
@@ -416,7 +476,8 @@ namespace System.ServiceModel
         public bool ShouldSerializeReliableSession()
         {
             return this.ReliableSession.Ordered != ReliableSessionDefaults.Ordered
-                || this.ReliableSession.InactivityTimeout != ReliableSessionDefaults.InactivityTimeout
+                || this.ReliableSession.InactivityTimeout
+                    != ReliableSessionDefaults.InactivityTimeout
                 || this.ReliableSession.Enabled != ReliableSessionDefaults.Enabled;
         }
     }

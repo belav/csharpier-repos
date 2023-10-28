@@ -24,14 +24,13 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpKeywordHighlighting(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpKeywordHighlighting))
-        {
-        }
+            : base(instanceFactory, nameof(CSharpKeywordHighlighting)) { }
 
         [WpfFact]
         public void Foreach()
         {
-            var input = @"class C
+            var input =
+                @"class C
 {
     void M()
     {
@@ -52,7 +51,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         [WpfFact]
         public void PreprocessorConditionals()
         {
-            var input = @"
+            var input =
+                @"
 #define Debug
 #undef Trace
 class PurchaseTransaction
@@ -69,10 +69,13 @@ class PurchaseTransaction
         CommitHelper();
     }
 }";
-            Test.Utilities.MarkupTestFile.GetSpans(
-                input,
-                out var text,
-                out IDictionary<string, ImmutableArray<TextSpan>> spans);
+            Test.Utilities
+                .MarkupTestFile
+                .GetSpans(
+                    input,
+                    out var text,
+                    out IDictionary<string, ImmutableArray<TextSpan>> spans
+                );
 
             VisualStudio.Editor.SetText(text);
 
@@ -84,7 +87,8 @@ class PurchaseTransaction
         [WpfFact]
         public void PreprocessorRegions()
         {
-            var input = @"
+            var input =
+                @"
 class C
 {
     [|#region|] Main
@@ -105,13 +109,16 @@ class C
         private void Verify(string marker, ImmutableArray<TextSpan> expectedCount)
         {
             VisualStudio.Editor.PlaceCaret(marker, charsOffset: -1);
-            VisualStudio.Workspace.WaitForAllAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace,
-                FeatureAttribute.SolutionCrawlerLegacy,
-                FeatureAttribute.DiagnosticService,
-                FeatureAttribute.Classification,
-                FeatureAttribute.KeywordHighlighting);
+            VisualStudio
+                .Workspace
+                .WaitForAllAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.Workspace,
+                    FeatureAttribute.SolutionCrawlerLegacy,
+                    FeatureAttribute.DiagnosticService,
+                    FeatureAttribute.Classification,
+                    FeatureAttribute.KeywordHighlighting
+                );
 
             Assert.Equal(expectedCount, VisualStudio.Editor.GetKeywordHighlightTags());
         }

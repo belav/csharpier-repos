@@ -19,7 +19,12 @@ namespace TestAnonymousTypes
         [Fact]
         public static void TestEntryPoint()
         {
-            Customer c = new Customer { Name = "Sree", Address = "something somethwere", Zip = 98007 };
+            Customer c = new Customer
+            {
+                Name = "Sree",
+                Address = "something somethwere",
+                Zip = 98007
+            };
 
             var q = new
             {
@@ -108,4 +113,3 @@ namespace TestAnonymousTypes
         }
     }
 }
-

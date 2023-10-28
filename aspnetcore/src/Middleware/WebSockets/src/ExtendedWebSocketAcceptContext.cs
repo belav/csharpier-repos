@@ -8,7 +8,9 @@ namespace Microsoft.AspNetCore.WebSockets;
 /// <summary>
 /// Extends the <see cref="WebSocketAcceptContext"/> class with additional properties.
 /// </summary>
-[Obsolete("This type is obsolete and will be removed in a future version. The recommended alternative is Microsoft.AspNetCore.Http.WebSocketAcceptContext.")]
+[Obsolete(
+    "This type is obsolete and will be removed in a future version. The recommended alternative is Microsoft.AspNetCore.Http.WebSocketAcceptContext."
+)]
 public class ExtendedWebSocketAcceptContext : WebSocketAcceptContext
 {
     /// <inheritdoc />

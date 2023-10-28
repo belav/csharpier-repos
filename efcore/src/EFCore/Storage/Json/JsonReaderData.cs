@@ -56,7 +56,10 @@ public class JsonReaderData
     /// <returns>The new <see cref="Utf8JsonReader" />, having read my bytes from the stream.</returns>
     public virtual Utf8JsonReader ReadBytes(int bytesConsumed, JsonReaderState state)
     {
-        Check.DebugAssert(_stream != null, "Only needed when buffer doesn't contain full JSON document.");
+        Check.DebugAssert(
+            _stream != null,
+            "Only needed when buffer doesn't contain full JSON document."
+        );
 
         var buffer = _buffer;
         var totalConsumed = bytesConsumed + _positionInBuffer;
@@ -88,6 +91,10 @@ public class JsonReaderData
     ///     Creates a <see cref="Utf8JsonReader" /> for the current captured state.
     /// </summary>
     /// <returns>The new reader.</returns>
-    public virtual Utf8JsonReader CreateReader()
-        => new(_buffer.AsSpan(_positionInBuffer), isFinalBlock: _bytesAvailable != _buffer.Length, _readerState);
+    public virtual Utf8JsonReader CreateReader() =>
+        new(
+            _buffer.AsSpan(_positionInBuffer),
+            isFinalBlock: _bytesAvailable != _buffer.Length,
+            _readerState
+        );
 }

@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TransposeRecordKeyword
 {
     using VerifyCS = CSharpCodeFixVerifier<
         EmptyDiagnosticAnalyzer,
-        CSharpTransposeRecordKeywordCodeFixProvider>;
+        CSharpTransposeRecordKeywordCodeFixProvider
+    >;
 
     public class TransposeRecordKeywordTests
     {

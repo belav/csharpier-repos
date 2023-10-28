@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Reflection;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Reflection;
 
 namespace System.Reflection.Runtime.ParameterInfos
 {
@@ -46,17 +46,11 @@ namespace System.Reflection.Runtime.ParameterInfos
 
         public abstract override bool HasDefaultValue { get; }
 
-        public abstract override int MetadataToken
-        {
-            get;
-        }
+        public abstract override int MetadataToken { get; }
 
         public sealed override MemberInfo Member
         {
-            get
-            {
-                return _member;
-            }
+            get { return _member; }
         }
 
         public abstract override string Name { get; }
@@ -64,10 +58,7 @@ namespace System.Reflection.Runtime.ParameterInfos
 
         public sealed override int Position
         {
-            get
-            {
-                return _position;
-            }
+            get { return _position; }
         }
 
         public sealed override string ToString()

@@ -1,13 +1,13 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Xml;
+using System.Collections;
 using System.Data.SqlTypes;
 using System.Diagnostics;
-using System.IO;
-using System.Xml.Serialization;
-using System.Collections;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace System.Data.Common
 {
@@ -15,9 +15,9 @@ namespace System.Data.Common
     {
         private SqlBinary[] _values = default!; // Late-initialized
 
-        public SqlBinaryStorage(DataColumn column) : base(column, typeof(SqlBinary), SqlBinary.Null, SqlBinary.Null, StorageType.SqlBinary)
-        {
-        }
+        public SqlBinaryStorage(DataColumn column)
+            : base(column, typeof(SqlBinary), SqlBinary.Null, SqlBinary.Null, StorageType.SqlBinary)
+        { }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {
@@ -130,7 +130,12 @@ namespace System.Data.Common
             return new SqlBinary[recordCount];
         }
 
-        protected override void CopyValue(int record, object store, BitArray nullbits, int storeIndex)
+        protected override void CopyValue(
+            int record,
+            object store,
+            BitArray nullbits,
+            int storeIndex
+        )
         {
             SqlBinary[] typedStore = (SqlBinary[])store;
             typedStore[storeIndex] = _values[record];

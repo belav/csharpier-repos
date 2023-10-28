@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections;
 using System.Diagnostics;
 using System.Xml;
 using System.Xml.XPath;
-using System.Collections;
 
 namespace System.Xml.Xsl.XsltOld
 {
@@ -71,7 +71,9 @@ namespace System.Xml.Xsl.XsltOld
                 case ProcessingSets:
                     if (frame.Counter < _useAttributeSets!.Length)
                     {
-                        AttributeSetAction action = processor.RootAction!.GetAttributeSet(_useAttributeSets[frame.Counter]);
+                        AttributeSetAction action = processor
+                            .RootAction!
+                            .GetAttributeSet(_useAttributeSets[frame.Counter]);
                         frame.IncrementCounter();
                         processor.PushActionFrame(action, frame.NodeSet);
                     }

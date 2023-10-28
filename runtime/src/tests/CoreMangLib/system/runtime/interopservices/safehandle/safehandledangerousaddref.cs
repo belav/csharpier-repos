@@ -1,18 +1,15 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
-using System.Security;
 using System;
 using System.Runtime.InteropServices; // For SafeHandle
-
+using System.Security;
 
 [SecurityCritical]
 public class MySafeValidHandle : SafeHandle
 {
-	  [SecurityCritical]
+    [SecurityCritical]
     public MySafeValidHandle()
-        : base(IntPtr.Zero, true)
-    {
-    }
+        : base(IntPtr.Zero, true) { }
 
     public override bool IsInvalid
     {
@@ -27,18 +24,12 @@ public class MySafeValidHandle : SafeHandle
     }
 }
 
-
-
 [SecurityCritical]
 public class MySafeInValidHandle : SafeHandle
 {
-
-
-[SecurityCritical]
+    [SecurityCritical]
     public MySafeInValidHandle()
-        : base(IntPtr.Zero, true)
-    {
-    }
+        : base(IntPtr.Zero, true) { }
 
     public override bool IsInvalid
     {
@@ -91,7 +82,9 @@ public class SafeHandleDangerousAddRef
             handle.DangerousAddRef(ref success);
             if (!success)
             {
-                TestLibrary.TestFramework.LogInformation("success returns false after calling DangerousAddRef");
+                TestLibrary
+                    .TestFramework
+                    .LogInformation("success returns false after calling DangerousAddRef");
             }
         }
         catch (Exception e)
@@ -104,13 +97,14 @@ public class SafeHandleDangerousAddRef
         return retVal;
     }
 
-
     [SecuritySafeCritical]
     public bool PosTest2()
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario("PosTest2: Call DangerousAddRef on an invalid handle");
+        TestLibrary
+            .TestFramework
+            .BeginScenario("PosTest2: Call DangerousAddRef on an invalid handle");
 
         try
         {
@@ -120,7 +114,9 @@ public class SafeHandleDangerousAddRef
             handle.DangerousAddRef(ref success);
             if (!success)
             {
-                TestLibrary.TestFramework.LogInformation("success returns false after calling DangerousAddRef");
+                TestLibrary
+                    .TestFramework
+                    .LogInformation("success returns false after calling DangerousAddRef");
             }
         }
         catch (Exception e)
@@ -133,13 +129,14 @@ public class SafeHandleDangerousAddRef
         return retVal;
     }
 
-
     [SecuritySafeCritical]
     public bool PosTest3()
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario("PosTest3: Call DangerousAddRef twice on a valid handle");
+        TestLibrary
+            .TestFramework
+            .BeginScenario("PosTest3: Call DangerousAddRef twice on a valid handle");
 
         try
         {
@@ -149,12 +146,16 @@ public class SafeHandleDangerousAddRef
             handle.DangerousAddRef(ref success);
             if (!success)
             {
-                TestLibrary.TestFramework.LogInformation("success returns false after calling DangerousAddRef");
+                TestLibrary
+                    .TestFramework
+                    .LogInformation("success returns false after calling DangerousAddRef");
             }
             handle.DangerousAddRef(ref success);
             if (!success)
             {
-                TestLibrary.TestFramework.LogInformation("success returns false after calling DangerousAddRef");
+                TestLibrary
+                    .TestFramework
+                    .LogInformation("success returns false after calling DangerousAddRef");
             }
         }
         catch (Exception e)
@@ -167,13 +168,14 @@ public class SafeHandleDangerousAddRef
         return retVal;
     }
 
-
     [SecuritySafeCritical]
     public bool PosTest4()
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario("PosTest4: Call DangerousAddRef twice on an invalid handle");
+        TestLibrary
+            .TestFramework
+            .BeginScenario("PosTest4: Call DangerousAddRef twice on an invalid handle");
 
         try
         {
@@ -183,13 +185,17 @@ public class SafeHandleDangerousAddRef
             handle.DangerousAddRef(ref success);
             if (!success)
             {
-                TestLibrary.TestFramework.LogInformation("success returns false after calling DangerousAddRef");
+                TestLibrary
+                    .TestFramework
+                    .LogInformation("success returns false after calling DangerousAddRef");
             }
 
             handle.DangerousAddRef(ref success);
             if (!success)
             {
-                TestLibrary.TestFramework.LogInformation("success returns false after calling DangerousAddRef");
+                TestLibrary
+                    .TestFramework
+                    .LogInformation("success returns false after calling DangerousAddRef");
             }
         }
         catch (Exception e)

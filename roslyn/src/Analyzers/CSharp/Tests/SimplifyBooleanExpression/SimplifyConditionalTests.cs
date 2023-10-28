@@ -16,15 +16,19 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpression
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsSimplifyConditional)]
-    public partial class SimplifyConditionalTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class SimplifyConditionalTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public SimplifyConditionalTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpSimplifyConditionalDiagnosticAnalyzer(), new SimplifyConditionalCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpSimplifyConditionalDiagnosticAnalyzer(),
+                new SimplifyConditionalCodeFixProvider()
+            );
 
         [Fact]
         public async Task TestSimpleCase()
@@ -57,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
                     private bool X() => throw new NotImplementedException();
                     private bool Y() => throw new NotImplementedException();
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -91,7 +96,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
                     private bool X() => throw new NotImplementedException();
                     private bool Y() => throw new NotImplementedException();
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -111,7 +117,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
                     private bool X() => throw new NotImplementedException();
                     private bool Y() => throw new NotImplementedException();
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -131,7 +138,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
                     private bool X() => throw new NotImplementedException();
                     private bool Y() => throw new NotImplementedException();
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -165,7 +173,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
                     private bool X() => throw new NotImplementedException();
                     private bool Y() => throw new NotImplementedException();
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -199,7 +208,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
                     private bool X() => throw new NotImplementedException();
                     private bool Y() => throw new NotImplementedException();
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -233,7 +243,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
                     private bool X() => throw new NotImplementedException();
                     private bool Y() => throw new NotImplementedException();
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -267,7 +278,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
                     private bool X() => throw new NotImplementedException();
                     private bool Y() => throw new NotImplementedException();
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -301,7 +313,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
                     private bool X() => throw new NotImplementedException();
                     private bool Y() => throw new NotImplementedException();
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -335,7 +348,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
                     private bool X() => throw new NotImplementedException();
                     private bool Y() => throw new NotImplementedException();
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/62827")]
@@ -363,7 +377,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
                         return x != null && y != null && (isEqual == null ? x.Equals(y) : isEqual(x, y));
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

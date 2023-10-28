@@ -2,12 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 
+using System;
+using System.Runtime.CompilerServices;
+using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 using static System.Runtime.Intrinsics.X86.Avx;
 using static System.Runtime.Intrinsics.X86.Sse;
-using System.Runtime.Intrinsics.X86;
-using System.Runtime.Intrinsics;
-using System.Runtime.CompilerServices;
-using System;
 
 internal struct VectorPacket256
 {
@@ -17,14 +17,10 @@ internal struct VectorPacket256
     public Vector256<float> Lengths
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get
-        {
-            return Sqrt(DotProduct(this, this));
-        }
+        get { return Sqrt(DotProduct(this, this)); }
     }
 
-
-    public readonly static int Packet256Size = 8;
+    public static readonly int Packet256Size = 8;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VectorPacket256(Vector256<float> init)
@@ -57,7 +53,7 @@ internal struct VectorPacket256
         Vector256<float> m03 = LoadVector128(&vectors[0]).ToVector256(); // load lower halves
         Vector256<float> m14 = LoadVector128(&vectors[4]).ToVector256();
         Vector256<float> m25 = LoadVector128(&vectors[8]).ToVector256();
-        m03 = InsertVector128(m03, LoadVector128(&vectors[12]), 1);  // load higher halves
+        m03 = InsertVector128(m03, LoadVector128(&vectors[12]), 1); // load higher halves
         m14 = InsertVector128(m14, LoadVector128(&vectors[16]), 1);
         m25 = InsertVector128(m25, LoadVector128(&vectors[20]), 1);
 
@@ -116,19 +112,31 @@ internal struct VectorPacket256
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static VectorPacket256 operator +(VectorPacket256 left, VectorPacket256 right)
     {
-        return new VectorPacket256(Add(left.Xs, right.Xs), Add(left.Ys, right.Ys), Add(left.Zs, right.Zs));
+        return new VectorPacket256(
+            Add(left.Xs, right.Xs),
+            Add(left.Ys, right.Ys),
+            Add(left.Zs, right.Zs)
+        );
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static VectorPacket256 operator -(VectorPacket256 left, VectorPacket256 right)
     {
-        return new VectorPacket256(Subtract(left.Xs, right.Xs), Subtract(left.Ys, right.Ys), Subtract(left.Zs, right.Zs));
+        return new VectorPacket256(
+            Subtract(left.Xs, right.Xs),
+            Subtract(left.Ys, right.Ys),
+            Subtract(left.Zs, right.Zs)
+        );
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static VectorPacket256 operator /(VectorPacket256 left, VectorPacket256 right)
     {
-        return new VectorPacket256(Divide(left.Xs, right.Xs), Divide(left.Ys, right.Ys), Divide(left.Zs, right.Zs));
+        return new VectorPacket256(
+            Divide(left.Xs, right.Xs),
+            Divide(left.Ys, right.Ys),
+            Divide(left.Zs, right.Zs)
+        );
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -143,15 +151,21 @@ internal struct VectorPacket256
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static VectorPacket256 CrossProduct(VectorPacket256 left, VectorPacket256 right)
     {
-        return new VectorPacket256(Subtract(Multiply(left.Ys, right.Zs), Multiply(left.Zs, right.Ys)),
-                                   Subtract(Multiply(left.Zs, right.Xs), Multiply(left.Xs, right.Zs)),
-                                   Subtract(Multiply(left.Xs, right.Ys), Multiply(left.Ys, right.Xs)));
+        return new VectorPacket256(
+            Subtract(Multiply(left.Ys, right.Zs), Multiply(left.Zs, right.Ys)),
+            Subtract(Multiply(left.Zs, right.Xs), Multiply(left.Xs, right.Zs)),
+            Subtract(Multiply(left.Xs, right.Ys), Multiply(left.Ys, right.Xs))
+        );
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static VectorPacket256 operator *(Vector256<float> left, VectorPacket256 right)
     {
-        return new VectorPacket256(Multiply(left, right.Xs), Multiply(left, right.Ys), Multiply(left, right.Zs));
+        return new VectorPacket256(
+            Multiply(left, right.Xs),
+            Multiply(left, right.Ys),
+            Multiply(left, right.Zs)
+        );
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

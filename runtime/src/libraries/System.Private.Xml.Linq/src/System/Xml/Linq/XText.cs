@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using StringBuilder = System.Text.StringBuilder;
 using System.Threading;
 using System.Threading.Tasks;
+using StringBuilder = System.Text.StringBuilder;
 
 namespace System.Xml.Linq
 {
@@ -50,10 +50,7 @@ namespace System.Xml.Linq
         /// </remarks>
         public override XmlNodeType NodeType
         {
-            get
-            {
-                return XmlNodeType.Text;
-            }
+            get { return XmlNodeType.Text; }
         }
 
         /// <summary>
@@ -61,16 +58,14 @@ namespace System.Xml.Linq
         /// </summary>
         public string Value
         {
-            get
-            {
-                return text;
-            }
+            get { return text; }
             set
             {
                 ArgumentNullException.ThrowIfNull(value);
                 bool notify = NotifyChanging(this, XObjectChangeEventArgs.Value);
                 text = value;
-                if (notify) NotifyChanged(this, XObjectChangeEventArgs.Value);
+                if (notify)
+                    NotifyChanged(this, XObjectChangeEventArgs.Value);
             }
         }
 
@@ -110,9 +105,9 @@ namespace System.Xml.Linq
             if (cancellationToken.IsCancellationRequested)
                 return Task.FromCanceled(cancellationToken);
 
-            return parent is XDocument ?
-                writer.WriteWhitespaceAsync(text) :
-                writer.WriteStringAsync(text);
+            return parent is XDocument
+                ? writer.WriteWhitespaceAsync(text)
+                : writer.WriteStringAsync(text);
         }
 
         internal override void AppendText(StringBuilder sb)

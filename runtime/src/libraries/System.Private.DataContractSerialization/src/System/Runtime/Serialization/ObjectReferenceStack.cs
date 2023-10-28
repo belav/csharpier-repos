@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Xml;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Xml;
 
 namespace System.Runtime.Serialization
 {
@@ -94,7 +94,11 @@ namespace System.Runtime.Serialization
             }
             for (int i = (currentCount - 1); i >= 0; i--)
             {
-                if (object.ReferenceEquals(obj, _objectArray![i]) && _isReferenceArray != null && !_isReferenceArray[i])
+                if (
+                    object.ReferenceEquals(obj, _objectArray![i])
+                    && _isReferenceArray != null
+                    && !_isReferenceArray[i]
+                )
                     return true;
             }
             return false;

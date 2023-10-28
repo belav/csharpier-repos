@@ -10,27 +10,33 @@ namespace Microsoft.AspNetCore.Mvc.Filters;
 /// Similarly subclasses should override <see cref="OnResultExecuting"/>, <see cref="OnResultExecuted"/> or
 /// <see cref="OnResultExecutionAsync"/> but not <see cref="OnResultExecutionAsync"/> and either of the other two.
 /// </summary>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-public abstract class ActionFilterAttribute :
-    Attribute, IActionFilter, IAsyncActionFilter, IResultFilter, IAsyncResultFilter, IOrderedFilter
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Method,
+    AllowMultiple = true,
+    Inherited = true
+)]
+public abstract class ActionFilterAttribute
+    : Attribute,
+        IActionFilter,
+        IAsyncActionFilter,
+        IResultFilter,
+        IAsyncResultFilter,
+        IOrderedFilter
 {
     /// <inheritdoc />
     public int Order { get; set; }
 
     /// <inheritdoc />
-    public virtual void OnActionExecuting(ActionExecutingContext context)
-    {
-    }
+    public virtual void OnActionExecuting(ActionExecutingContext context) { }
 
     /// <inheritdoc />
-    public virtual void OnActionExecuted(ActionExecutedContext context)
-    {
-    }
+    public virtual void OnActionExecuted(ActionExecutedContext context) { }
 
     /// <inheritdoc />
     public virtual async Task OnActionExecutionAsync(
         ActionExecutingContext context,
-        ActionExecutionDelegate next)
+        ActionExecutionDelegate next
+    )
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(next);
@@ -43,19 +49,16 @@ public abstract class ActionFilterAttribute :
     }
 
     /// <inheritdoc />
-    public virtual void OnResultExecuting(ResultExecutingContext context)
-    {
-    }
+    public virtual void OnResultExecuting(ResultExecutingContext context) { }
 
     /// <inheritdoc />
-    public virtual void OnResultExecuted(ResultExecutedContext context)
-    {
-    }
+    public virtual void OnResultExecuted(ResultExecutedContext context) { }
 
     /// <inheritdoc />
     public virtual async Task OnResultExecutionAsync(
         ResultExecutingContext context,
-        ResultExecutionDelegate next)
+        ResultExecutionDelegate next
+    )
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(next);

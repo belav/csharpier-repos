@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection.TypeLoading;
 
 namespace System.Reflection
@@ -103,7 +103,10 @@ namespace System.Reflection
         /// <param name="coreAssemblyName">
         /// The name of the assembly that contains the core types such as System.Object. Typically, this would be "mscorlib".
         /// </param>
-        public MetadataLoadContext(MetadataAssemblyResolver resolver, string? coreAssemblyName = null)
+        public MetadataLoadContext(
+            MetadataAssemblyResolver resolver,
+            string? coreAssemblyName = null
+        )
         {
             if (resolver is null)
                 throw new ArgumentNullException(nameof(resolver));

@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,68 +28,73 @@ using System.ComponentModel;
 using System.Data;
 using System.Reflection;
 using System.Windows.Forms;
-
 using NUnit.Framework;
-
 using CategoryAttribute = NUnit.Framework.CategoryAttribute;
 
 namespace MonoTests.System.Windows.Forms.DataBinding
 {
-	[TestFixture]
-	public class BindingManagerBaseTest : TestHelper {
-		
-		[Test]
-		public void BindingsTest ()
-		{
-			Control c1 = new Control ();
-			Control c2 = new Control ();
+    [TestFixture]
+    public class BindingManagerBaseTest : TestHelper
+    {
+        [Test]
+        public void BindingsTest()
+        {
+            Control c1 = new Control();
+            Control c2 = new Control();
 
-			c1.CreateControl ();
-			c2.CreateControl ();
+            c1.CreateControl();
+            c2.CreateControl();
 
-			Binding binding;
-			BindingManagerBase bm, bm2;
+            Binding binding;
+            BindingManagerBase bm,
+                bm2;
 
-			c1.BindingContext = new BindingContext ();
-			c2.BindingContext = c1.BindingContext;
+            c1.BindingContext = new BindingContext();
+            c2.BindingContext = c1.BindingContext;
 
-			bm = c2.BindingContext[c1, "Text"];
-			bm2 = c2.BindingContext[c1];
+            bm = c2.BindingContext[c1, "Text"];
+            bm2 = c2.BindingContext[c1];
 
-			bm.BindingComplete += delegate (object sender, BindingCompleteEventArgs e) { Console.WriteLine (Environment.StackTrace); };
-			bm2.BindingComplete += delegate (object sender, BindingCompleteEventArgs e) { Console.WriteLine (Environment.StackTrace); };
+            bm.BindingComplete += delegate(object sender, BindingCompleteEventArgs e)
+            {
+                Console.WriteLine(Environment.StackTrace);
+            };
+            bm2.BindingComplete += delegate(object sender, BindingCompleteEventArgs e)
+            {
+                Console.WriteLine(Environment.StackTrace);
+            };
 
-			binding = c2.DataBindings.Add ("Text", c1, "Text");
+            binding = c2.DataBindings.Add("Text", c1, "Text");
 
-			Assert.AreEqual (0, bm.Bindings.Count, "1");
-			Assert.AreEqual (1, bm2.Bindings.Count, "2");
+            Assert.AreEqual(0, bm.Bindings.Count, "1");
+            Assert.AreEqual(1, bm2.Bindings.Count, "2");
 
-			Assert.AreEqual (bm2.Bindings[0], binding, "3");
-		}
+            Assert.AreEqual(bm2.Bindings[0], binding, "3");
+        }
 
-		[Test]
-		public void IsBindingSuspendedTest ()
-		{
-			Control c = new Control ();
-			c.BindingContext = new BindingContext ();
+        [Test]
+        public void IsBindingSuspendedTest()
+        {
+            Control c = new Control();
+            c.BindingContext = new BindingContext();
 
-			MockItem item = new MockItem ("A", 0);
-			MockItem [] items = new MockItem [] { item };
+            MockItem item = new MockItem("A", 0);
+            MockItem[] items = new MockItem[] { item };
 
-			BindingManagerBase manager = c.BindingContext [item];
-			BindingManagerBase manager2 = c.BindingContext [items];
-			Assert.IsFalse (manager.IsBindingSuspended, "#A1");
-			Assert.IsFalse (manager2.IsBindingSuspended, "#A2");
+            BindingManagerBase manager = c.BindingContext[item];
+            BindingManagerBase manager2 = c.BindingContext[items];
+            Assert.IsFalse(manager.IsBindingSuspended, "#A1");
+            Assert.IsFalse(manager2.IsBindingSuspended, "#A2");
 
-			manager.SuspendBinding ();
-			manager2.SuspendBinding ();
-			Assert.IsFalse (manager.IsBindingSuspended, "#B1");
-			Assert.IsTrue (manager2.IsBindingSuspended, "#B2");
+            manager.SuspendBinding();
+            manager2.SuspendBinding();
+            Assert.IsFalse(manager.IsBindingSuspended, "#B1");
+            Assert.IsTrue(manager2.IsBindingSuspended, "#B2");
 
-			manager.ResumeBinding ();
-			manager2.ResumeBinding ();
-			Assert.IsFalse (manager.IsBindingSuspended, "#C1");
-			Assert.IsFalse (manager2.IsBindingSuspended, "#C2");
-		}
-	}
+            manager.ResumeBinding();
+            manager2.ResumeBinding();
+            Assert.IsFalse(manager.IsBindingSuspended, "#C1");
+            Assert.IsFalse(manager2.IsBindingSuspended, "#C2");
+        }
+    }
 }

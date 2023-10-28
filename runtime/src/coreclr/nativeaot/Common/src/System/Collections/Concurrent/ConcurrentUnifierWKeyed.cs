@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Threading;
-using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading;
 
 namespace System.Collections.Concurrent
 {
@@ -102,7 +102,10 @@ namespace System.Collections.Concurrent
         public V GetOrAdd(K key)
         {
             Debug.Assert(key != null);
-            Debug.Assert(!_lock.IsAcquired, "GetOrAdd called while lock already acquired. A possible cause of this is an Equals or GetHashCode method that causes reentrancy in the table.");
+            Debug.Assert(
+                !_lock.IsAcquired,
+                "GetOrAdd called while lock already acquired. A possible cause of this is an Equals or GetHashCode method that causes reentrancy in the table."
+            );
 
             int hashCode = key.GetHashCode();
             V value;
@@ -135,10 +138,12 @@ namespace System.Collections.Concurrent
             value = this.Factory(key);
 
             // This doesn't catch every object that has a finalizer, but the old saying about half a loaf...
-            Debug.Assert(!(value is IDisposable),
-                "Values placed in this table should not have finalizers. ConcurrentUnifiers guarantee observational immortality only " +
-                "in the absence of finalizers. Or to speak more plainly, we can use WeakReferences to guarantee observational immortality " +
-                "without paying the cost of storage immortality.");
+            Debug.Assert(
+                !(value is IDisposable),
+                "Values placed in this table should not have finalizers. ConcurrentUnifiers guarantee observational immortality only "
+                    + "in the absence of finalizers. Or to speak more plainly, we can use WeakReferences to guarantee observational immortality "
+                    + "without paying the cost of storage immortality."
+            );
 
             if (value == null)
             {
@@ -185,7 +190,12 @@ namespace System.Collections.Concurrent
                 _owner = owner;
             }
 
-            private Container(ConcurrentUnifierWKeyed<K, V> owner, int[] buckets, Entry[] entries, int nextFreeEntry)
+            private Container(
+                ConcurrentUnifierWKeyed<K, V> owner,
+                int[] buckets,
+                Entry[] entries,
+                int nextFreeEntry
+            )
             {
                 _buckets = buckets;
                 _entries = entries;
@@ -202,7 +212,10 @@ namespace System.Collections.Concurrent
                 while (i != -1)
                 {
                     V? actualValue;
-                    if (hashCode == _entries[i]._hashCode && _entries[i]._weakValue.TryGetTarget(out actualValue))
+                    if (
+                        hashCode == _entries[i]._hashCode
+                        && _entries[i]._weakValue.TryGetTarget(out actualValue)
+                    )
                     {
                         K actualKey = actualValue.Key;
                         if (key.Equals(actualKey))
@@ -224,7 +237,10 @@ namespace System.Collections.Concurrent
 
                 int bucket = ComputeBucket(hashCode, _buckets.Length);
                 int newEntryIdx = _nextFreeEntry;
-                _entries[newEntryIdx]._weakValue = new WeakReference<V>(value, trackResurrection: false);
+                _entries[newEntryIdx]._weakValue = new WeakReference<V>(
+                    value,
+                    trackResurrection: false
+                );
                 _entries[newEntryIdx]._hashCode = hashCode;
                 _entries[newEntryIdx]._next = _buckets[bucket];
 
@@ -263,9 +279,13 @@ namespace System.Collections.Concurrent
                             estimatedNumLiveEntries++;
                     }
                 }
-                double estimatedLivePercentage = ((double)estimatedNumLiveEntries) / ((double)(_entries.Length));
+                double estimatedLivePercentage =
+                    ((double)estimatedNumLiveEntries) / ((double)(_entries.Length));
                 int newSize;
-                if (estimatedLivePercentage < _growThreshold && (_entries.Length - estimatedNumLiveEntries) > _initialCapacity)
+                if (
+                    estimatedLivePercentage < _growThreshold
+                    && (_entries.Length - estimatedNumLiveEntries) > _initialCapacity
+                )
                 {
                     newSize = _buckets.Length;
                 }
@@ -297,7 +317,10 @@ namespace System.Collections.Concurrent
                         {
                             newEntries[newNextFreeEntry]._weakValue = _entries[entry]._weakValue;
                             newEntries[newNextFreeEntry]._hashCode = _entries[entry]._hashCode;
-                            int newBucket = ComputeBucket(newEntries[newNextFreeEntry]._hashCode, newSize);
+                            int newBucket = ComputeBucket(
+                                newEntries[newNextFreeEntry]._hashCode,
+                                newSize
+                            );
                             newEntries[newNextFreeEntry]._next = newBuckets[newBucket];
                             newBuckets[newBucket] = newNextFreeEntry;
                             newNextFreeEntry++;
@@ -336,7 +359,7 @@ namespace System.Collections.Concurrent
                 for (int bucket = 0; bucket < _buckets.Length; bucket++)
                 {
                     int walk1 = _buckets[bucket];
-                    int walk2 = _buckets[bucket];  // walk2 advances two elements at a time - if walk1 ever meets walk2, we've detected a cycle.
+                    int walk2 = _buckets[bucket]; // walk2 advances two elements at a time - if walk1 ever meets walk2, we've detected a cycle.
                     while (walk1 != -1)
                     {
                         numEntriesEncountered++;
@@ -352,7 +375,10 @@ namespace System.Collections.Concurrent
                             Debug.Assert(hashCode == _entries[walk1]._hashCode);
                         }
 
-                        int storedBucket = ComputeBucket(_entries[walk1]._hashCode, _buckets.Length);
+                        int storedBucket = ComputeBucket(
+                            _entries[walk1]._hashCode,
+                            _buckets.Length
+                        );
                         Debug.Assert(storedBucket == bucket);
                         walk1 = _entries[walk1]._next;
                         if (walk2 != -1)

@@ -16,14 +16,17 @@ namespace System.Diagnostics
         #region Keep in sync with object-internals.h
         internal int ilOffset;
         internal int nativeOffset;
+
         // Unused
         internal long methodAddress;
+
         // Unused
         internal uint methodIndex;
         internal MethodBase? methodBase;
         internal string? fileName;
         internal int lineNumber;
         internal int columnNumber;
+
         // Unused
         internal string? internalMethodName;
         #endregion
@@ -34,10 +37,18 @@ namespace System.Diagnostics
     public partial class StackTrace
     {
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern void GetTrace(ObjectHandleOnStack ex, ObjectHandleOnStack res, int skipFrames, bool needFileInfo);
+        internal static extern void GetTrace(
+            ObjectHandleOnStack ex,
+            ObjectHandleOnStack res,
+            int skipFrames,
+            bool needFileInfo
+        );
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "StackFrame.GetMethod is getting compared to null but nothing else on it is touched.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "StackFrame.GetMethod is getting compared to null but nothing else on it is touched."
+        )]
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         private void InitializeForCurrentThread(int skipFrames, bool needFileInfo)
         {
@@ -63,7 +74,12 @@ namespace System.Diagnostics
         private void InitializeForException(Exception e, int skipFrames, bool needFileInfo)
         {
             MonoStackFrame[]? frames = null;
-            GetTrace (ObjectHandleOnStack.Create (ref e), ObjectHandleOnStack.Create (ref frames), skipFrames, needFileInfo);
+            GetTrace(
+                ObjectHandleOnStack.Create(ref e),
+                ObjectHandleOnStack.Create(ref frames),
+                skipFrames,
+                needFileInfo
+            );
             _numOfFrames = frames!.Length;
 
             int foreignFrames;

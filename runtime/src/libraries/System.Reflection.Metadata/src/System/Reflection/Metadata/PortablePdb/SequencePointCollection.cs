@@ -58,7 +58,10 @@ namespace System.Reflection.Metadata
                 }
 
                 DocumentHandle document = _current.Document;
-                int offset, deltaLines, deltaColumns, startLine;
+                int offset,
+                    deltaLines,
+                    deltaColumns,
+                    startLine;
                 ushort startColumn;
 
                 if (_reader.Offset == 0)
@@ -105,8 +108,14 @@ namespace System.Reflection.Metadata
                 }
                 else
                 {
-                    startLine = AddLines(_previousNonHiddenStartLine, _reader.ReadCompressedSignedInteger());
-                    startColumn = AddColumns(_previousNonHiddenStartColumn, _reader.ReadCompressedSignedInteger());
+                    startLine = AddLines(
+                        _previousNonHiddenStartLine,
+                        _reader.ReadCompressedSignedInteger()
+                    );
+                    startColumn = AddColumns(
+                        _previousNonHiddenStartColumn,
+                        _reader.ReadCompressedSignedInteger()
+                    );
                 }
 
                 _previousNonHiddenStartLine = startLine;
@@ -118,7 +127,8 @@ namespace System.Reflection.Metadata
                     startLine,
                     startColumn,
                     AddLines(startLine, deltaLines),
-                    AddColumns(startColumn, deltaColumns));
+                    AddColumns(startColumn, deltaColumns)
+                );
 
                 return true;
             }
@@ -126,7 +136,10 @@ namespace System.Reflection.Metadata
             private void ReadDeltaLinesAndColumns(out int deltaLines, out int deltaColumns)
             {
                 deltaLines = _reader.ReadCompressedInteger();
-                deltaColumns = (deltaLines == 0) ? _reader.ReadCompressedInteger() : _reader.ReadCompressedSignedInteger();
+                deltaColumns =
+                    (deltaLines == 0)
+                        ? _reader.ReadCompressedInteger()
+                        : _reader.ReadCompressedSignedInteger();
             }
 
             private int ReadLine()
@@ -205,9 +218,7 @@ namespace System.Reflection.Metadata
                 _current = default(SequencePoint);
             }
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
         }
     }
 }

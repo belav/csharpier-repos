@@ -119,7 +119,9 @@ namespace System.Security.Cryptography
             Debug.Assert(hashAlgorithm.Name is not null);
 
             byte[] buffer = new byte[hashSizeInBytes];
-            int written = HashProviderDispenser.OneShotHashProvider.HashData(hashAlgorithm.Name, source, buffer);
+            int written = HashProviderDispenser
+                .OneShotHashProvider
+                .HashData(hashAlgorithm.Name, source, buffer);
             Debug.Assert(written == hashSizeInBytes);
             return buffer;
         }
@@ -146,7 +148,11 @@ namespace System.Security.Cryptography
         /// <exception cref="CryptographicException">
         ///   <paramref name="hashAlgorithm"/> specifies an unknown hash algorithm.
         /// </exception>
-        public static int HashData(HashAlgorithmName hashAlgorithm, ReadOnlySpan<byte> source, Span<byte> destination)
+        public static int HashData(
+            HashAlgorithmName hashAlgorithm,
+            ReadOnlySpan<byte> source,
+            Span<byte> destination
+        )
         {
             if (!TryHashData(hashAlgorithm, source, destination, out int bytesWritten))
             {
@@ -182,7 +188,12 @@ namespace System.Security.Cryptography
         /// <exception cref="CryptographicException">
         ///   <paramref name="hashAlgorithm"/> specifies an unknown hash algorithm.
         /// </exception>
-        public static bool TryHashData(HashAlgorithmName hashAlgorithm, ReadOnlySpan<byte> source, Span<byte> destination, out int bytesWritten)
+        public static bool TryHashData(
+            HashAlgorithmName hashAlgorithm,
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             int hashSizeInBytes = CheckHashAndGetLength(hashAlgorithm);
             Debug.Assert(hashAlgorithm.Name is not null);
@@ -193,7 +204,9 @@ namespace System.Security.Cryptography
                 return false;
             }
 
-            bytesWritten = HashProviderDispenser.OneShotHashProvider.HashData(hashAlgorithm.Name, source, destination);
+            bytesWritten = HashProviderDispenser
+                .OneShotHashProvider
+                .HashData(hashAlgorithm.Name, source, destination);
             Debug.Assert(bytesWritten == hashSizeInBytes);
             return true;
         }
@@ -259,7 +272,11 @@ namespace System.Security.Cryptography
         /// <exception cref="CryptographicException">
         ///   <paramref name="hashAlgorithm"/> specifies an unknown hash algorithm.
         /// </exception>
-        public static int HashData(HashAlgorithmName hashAlgorithm, Stream source, Span<byte> destination)
+        public static int HashData(
+            HashAlgorithmName hashAlgorithm,
+            Stream source,
+            Span<byte> destination
+        )
         {
             int hashSizeInBytes = CheckHashAndGetLength(hashAlgorithm);
             CheckStream(source);
@@ -309,7 +326,8 @@ namespace System.Security.Cryptography
             HashAlgorithmName hashAlgorithm,
             Stream source,
             Memory<byte> destination,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             int hashSizeInBytes = CheckHashAndGetLength(hashAlgorithm);
             CheckStream(source);
@@ -320,7 +338,8 @@ namespace System.Security.Cryptography
                 hashAlgorithm.Name,
                 source,
                 destination,
-                cancellationToken);
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -357,7 +376,8 @@ namespace System.Security.Cryptography
         public static ValueTask<byte[]> HashDataAsync(
             HashAlgorithmName hashAlgorithm,
             Stream source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             CheckHashAndGetLength(hashAlgorithm);
             CheckStream(source);
@@ -394,7 +414,11 @@ namespace System.Security.Cryptography
         {
             ArgumentNullException.ThrowIfNull(key);
             ArgumentNullException.ThrowIfNull(source);
-            return HmacData(hashAlgorithm, new ReadOnlySpan<byte>(key), new ReadOnlySpan<byte>(source));
+            return HmacData(
+                hashAlgorithm,
+                new ReadOnlySpan<byte>(key),
+                new ReadOnlySpan<byte>(source)
+            );
         }
 
         /// <summary>
@@ -417,13 +441,19 @@ namespace System.Security.Cryptography
         /// <exception cref="CryptographicException">
         ///   <paramref name="hashAlgorithm"/> specifies an unknown hash algorithm.
         /// </exception>
-        public static byte[] HmacData(HashAlgorithmName hashAlgorithm, ReadOnlySpan<byte> key, ReadOnlySpan<byte> source)
+        public static byte[] HmacData(
+            HashAlgorithmName hashAlgorithm,
+            ReadOnlySpan<byte> key,
+            ReadOnlySpan<byte> source
+        )
         {
             int hashSizeInBytes = CheckHashAndGetLength(hashAlgorithm);
             Debug.Assert(hashAlgorithm.Name is not null);
             byte[] buffer = new byte[hashSizeInBytes];
 
-            int written = HashProviderDispenser.OneShotHashProvider.MacData(hashAlgorithm.Name, key, source, buffer);
+            int written = HashProviderDispenser
+                .OneShotHashProvider
+                .MacData(hashAlgorithm.Name, key, source, buffer);
             Debug.Assert(written == hashSizeInBytes);
             return buffer;
         }
@@ -455,7 +485,8 @@ namespace System.Security.Cryptography
             HashAlgorithmName hashAlgorithm,
             ReadOnlySpan<byte> key,
             ReadOnlySpan<byte> source,
-            Span<byte> destination)
+            Span<byte> destination
+        )
         {
             if (!TryHmacData(hashAlgorithm, key, source, destination, out int bytesWritten))
             {
@@ -497,7 +528,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> key,
             ReadOnlySpan<byte> source,
             Span<byte> destination,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             int hashSizeInBytes = CheckHashAndGetLength(hashAlgorithm);
             Debug.Assert(hashAlgorithm.Name is not null);
@@ -508,7 +540,9 @@ namespace System.Security.Cryptography
                 return false;
             }
 
-            bytesWritten = HashProviderDispenser.OneShotHashProvider.MacData(hashAlgorithm.Name, key, source, destination);
+            bytesWritten = HashProviderDispenser
+                .OneShotHashProvider
+                .MacData(hashAlgorithm.Name, key, source, destination);
             Debug.Assert(bytesWritten == hashSizeInBytes);
             return true;
         }
@@ -571,7 +605,11 @@ namespace System.Security.Cryptography
         /// <exception cref="CryptographicException">
         ///   <paramref name="hashAlgorithm"/> specifies an unknown hash algorithm.
         /// </exception>
-        public static byte[] HmacData(HashAlgorithmName hashAlgorithm, ReadOnlySpan<byte> key, Stream source)
+        public static byte[] HmacData(
+            HashAlgorithmName hashAlgorithm,
+            ReadOnlySpan<byte> key,
+            Stream source
+        )
         {
             int hashSizeInBytes = CheckHashAndGetLength(hashAlgorithm);
             CheckStream(source);
@@ -609,7 +647,12 @@ namespace System.Security.Cryptography
         /// <exception cref="CryptographicException">
         ///   <paramref name="hashAlgorithm"/> specifies an unknown hash algorithm.
         /// </exception>
-        public static int HmacData(HashAlgorithmName hashAlgorithm, ReadOnlySpan<byte> key, Stream source, Span<byte> destination)
+        public static int HmacData(
+            HashAlgorithmName hashAlgorithm,
+            ReadOnlySpan<byte> key,
+            Stream source,
+            Span<byte> destination
+        )
         {
             int hashSizeInBytes = CheckHashAndGetLength(hashAlgorithm);
             CheckStream(source);
@@ -655,10 +698,16 @@ namespace System.Security.Cryptography
             HashAlgorithmName hashAlgorithm,
             byte[] key,
             Stream source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             ArgumentNullException.ThrowIfNull(key);
-            return HmacDataAsync(hashAlgorithm, new ReadOnlyMemory<byte>(key), source, cancellationToken);
+            return HmacDataAsync(
+                hashAlgorithm,
+                new ReadOnlyMemory<byte>(key),
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -701,14 +750,21 @@ namespace System.Security.Cryptography
             ReadOnlyMemory<byte> key,
             Stream source,
             Memory<byte> destination,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             int hashSizeInBytes = CheckHashAndGetLength(hashAlgorithm);
             CheckStream(source);
             Debug.Assert(hashAlgorithm.Name is not null);
             CheckDestinationSize(hashSizeInBytes, destination.Length);
 
-            return LiteHashProvider.HmacStreamAsync(hashAlgorithm.Name, key.Span, source, destination, cancellationToken);
+            return LiteHashProvider.HmacStreamAsync(
+                hashAlgorithm.Name,
+                key.Span,
+                source,
+                destination,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -747,16 +803,22 @@ namespace System.Security.Cryptography
             HashAlgorithmName hashAlgorithm,
             ReadOnlyMemory<byte> key,
             Stream source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             CheckHashAndGetLength(hashAlgorithm);
             CheckStream(source);
             Debug.Assert(hashAlgorithm.Name is not null);
 
-            return LiteHashProvider.HmacStreamAsync(hashAlgorithm.Name, key.Span, source, cancellationToken);
+            return LiteHashProvider.HmacStreamAsync(
+                hashAlgorithm.Name,
+                key.Span,
+                source,
+                cancellationToken
+            );
         }
 
-        private static void CheckStream([NotNull]Stream source)
+        private static void CheckStream([NotNull] Stream source)
         {
             ArgumentNullException.ThrowIfNull(source);
 
@@ -806,7 +868,9 @@ namespace System.Security.Cryptography
                 case HashAlgorithmNames.MD5 when Helpers.HasMD5:
                     return MD5.HashSizeInBytes;
                 default:
-                    throw new CryptographicException(SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithm.Name));
+                    throw new CryptographicException(
+                        SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithm.Name)
+                    );
             }
         }
 

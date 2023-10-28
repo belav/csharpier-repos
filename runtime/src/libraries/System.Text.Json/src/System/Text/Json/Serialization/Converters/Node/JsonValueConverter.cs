@@ -8,7 +8,11 @@ namespace System.Text.Json.Serialization.Converters
 {
     internal sealed class JsonValueConverter : JsonConverter<JsonValue?>
     {
-        public override void Write(Utf8JsonWriter writer, JsonValue? value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            JsonValue? value,
+            JsonSerializerOptions options
+        )
         {
             if (value is null)
             {
@@ -19,7 +23,11 @@ namespace System.Text.Json.Serialization.Converters
             value.WriteTo(writer, options);
         }
 
-        public override JsonValue? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override JsonValue? Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             if (reader.TokenType is JsonTokenType.Null)
             {
@@ -27,7 +35,11 @@ namespace System.Text.Json.Serialization.Converters
             }
 
             JsonElement element = JsonElement.ParseValue(ref reader);
-            JsonValue value = new JsonValuePrimitive<JsonElement>(element, JsonMetadataServices.JsonElementConverter, options.GetNodeOptions());
+            JsonValue value = new JsonValuePrimitive<JsonElement>(
+                element,
+                JsonMetadataServices.JsonElementConverter,
+                options.GetNodeOptions()
+            );
             return value;
         }
     }

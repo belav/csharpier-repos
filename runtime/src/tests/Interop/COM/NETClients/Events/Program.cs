@@ -6,12 +6,11 @@ namespace NetClient
     using System;
     using System.Reflection;
     using System.Runtime.InteropServices;
-
+    using Server.Contract;
+    using Server.Contract.Events;
+    using Server.Contract.Servers;
     using TestLibrary;
     using Xunit;
-    using Server.Contract;
-    using Server.Contract.Servers;
-    using Server.Contract.Events;
 
     class Program
     {
@@ -61,7 +60,10 @@ namespace NetClient
             // Verify event handler subscription
 
             // Add event
-            var comAwareEventInfo = new ComAwareEventInfo(typeof(TestingEvents_Event), nameof(TestingEvents_Event.OnEvent));
+            var comAwareEventInfo = new ComAwareEventInfo(
+                typeof(TestingEvents_Event),
+                nameof(TestingEvents_Event.OnEvent)
+            );
             var handler = new TestingEvents_OnEventEventHandler(OnEventEventHandler);
             comAwareEventInfo.AddEventHandler(eventTesting, handler);
 

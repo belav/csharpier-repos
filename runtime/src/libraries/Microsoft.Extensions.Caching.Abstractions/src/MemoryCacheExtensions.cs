@@ -90,7 +90,12 @@ namespace Microsoft.Extensions.Caching.Memory
         /// <param name="value">The value to associate with the key.</param>
         /// <param name="absoluteExpiration">The point in time at which the cache entry will expire.</param>
         /// <returns>The value that was set.</returns>
-        public static TItem Set<TItem>(this IMemoryCache cache, object key, TItem value, DateTimeOffset absoluteExpiration)
+        public static TItem Set<TItem>(
+            this IMemoryCache cache,
+            object key,
+            TItem value,
+            DateTimeOffset absoluteExpiration
+        )
         {
             using ICacheEntry entry = cache.CreateEntry(key);
             entry.AbsoluteExpiration = absoluteExpiration;
@@ -108,7 +113,12 @@ namespace Microsoft.Extensions.Caching.Memory
         /// <param name="value">The value to associate with the key.</param>
         /// <param name="absoluteExpirationRelativeToNow">The duration from now after which the cache entry will expire.</param>
         /// <returns>The value that was set.</returns>
-        public static TItem Set<TItem>(this IMemoryCache cache, object key, TItem value, TimeSpan absoluteExpirationRelativeToNow)
+        public static TItem Set<TItem>(
+            this IMemoryCache cache,
+            object key,
+            TItem value,
+            TimeSpan absoluteExpirationRelativeToNow
+        )
         {
             using ICacheEntry entry = cache.CreateEntry(key);
             entry.AbsoluteExpirationRelativeToNow = absoluteExpirationRelativeToNow;
@@ -126,7 +136,12 @@ namespace Microsoft.Extensions.Caching.Memory
         /// <param name="value">The value to associate with the key.</param>
         /// <param name="expirationToken">The <see cref="IChangeToken"/> that causes the cache entry to expire.</param>
         /// <returns>The value that was set.</returns>
-        public static TItem Set<TItem>(this IMemoryCache cache, object key, TItem value, IChangeToken expirationToken)
+        public static TItem Set<TItem>(
+            this IMemoryCache cache,
+            object key,
+            TItem value,
+            IChangeToken expirationToken
+        )
         {
             using ICacheEntry entry = cache.CreateEntry(key);
             entry.AddExpirationToken(expirationToken);
@@ -144,7 +159,12 @@ namespace Microsoft.Extensions.Caching.Memory
         /// <param name="value">The value to associate with the key.</param>
         /// <param name="options">The existing <see cref="MemoryCacheEntryOptions"/> instance to apply to the new entry.</param>
         /// <returns>The value that was set.</returns>
-        public static TItem Set<TItem>(this IMemoryCache cache, object key, TItem value, MemoryCacheEntryOptions? options)
+        public static TItem Set<TItem>(
+            this IMemoryCache cache,
+            object key,
+            TItem value,
+            MemoryCacheEntryOptions? options
+        )
         {
             using ICacheEntry entry = cache.CreateEntry(key);
             if (options != null)
@@ -165,7 +185,11 @@ namespace Microsoft.Extensions.Caching.Memory
         /// <param name="key">The key of the entry to look for or create.</param>
         /// <param name="factory">The factory that creates the value associated with this key if the key does not exist in the cache.</param>
         /// <returns>The value associated with this key.</returns>
-        public static TItem? GetOrCreate<TItem>(this IMemoryCache cache, object key, Func<ICacheEntry, TItem> factory)
+        public static TItem? GetOrCreate<TItem>(
+            this IMemoryCache cache,
+            object key,
+            Func<ICacheEntry, TItem> factory
+        )
         {
             if (!cache.TryGetValue(key, out object? result))
             {
@@ -186,7 +210,11 @@ namespace Microsoft.Extensions.Caching.Memory
         /// <param name="key">The key of the entry to look for or create.</param>
         /// <param name="factory">The factory task that creates the value associated with this key if the key does not exist in the cache.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        public static async Task<TItem?> GetOrCreateAsync<TItem>(this IMemoryCache cache, object key, Func<ICacheEntry, Task<TItem>> factory)
+        public static async Task<TItem?> GetOrCreateAsync<TItem>(
+            this IMemoryCache cache,
+            object key,
+            Func<ICacheEntry, Task<TItem>> factory
+        )
         {
             if (!cache.TryGetValue(key, out object? result))
             {

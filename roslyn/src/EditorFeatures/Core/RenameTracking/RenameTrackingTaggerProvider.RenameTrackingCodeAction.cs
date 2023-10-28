@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 string title,
                 IEnumerable<IRefactorNotifyService> refactorNotifyServices,
                 ITextUndoHistoryRegistry undoHistoryRegistry,
-                IGlobalOptionService globalOptions)
+                IGlobalOptionService globalOptions
+            )
             {
                 _threadingContext = threadingContext;
                 _document = document;
@@ -51,10 +52,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
 
             public override string Title => _title;
 
-            protected sealed override CodeActionPriority ComputePriority()
-                => CodeActionPriority.High;
+            protected sealed override CodeActionPriority ComputePriority() =>
+                CodeActionPriority.High;
 
-            protected override Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(CancellationToken cancellationToken)
+            protected override Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
+                CancellationToken cancellationToken
+            )
             {
                 // Invoked directly without previewing.
                 if (_renameTrackingCommitter == null)
@@ -65,22 +68,40 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                     }
                 }
 
-                var committerOperation = new RenameTrackingCommitterOperation(_renameTrackingCommitter, _threadingContext);
-                return Task.FromResult(SpecializedCollections.SingletonEnumerable(committerOperation as CodeActionOperation));
+                var committerOperation = new RenameTrackingCommitterOperation(
+                    _renameTrackingCommitter,
+                    _threadingContext
+                );
+                return Task.FromResult(
+                    SpecializedCollections.SingletonEnumerable(
+                        committerOperation as CodeActionOperation
+                    )
+                );
             }
 
-            protected override async Task<IEnumerable<CodeActionOperation>> ComputePreviewOperationsAsync(CancellationToken cancellationToken)
+            protected override async Task<
+                IEnumerable<CodeActionOperation>
+            > ComputePreviewOperationsAsync(CancellationToken cancellationToken)
             {
-                if (!_globalOptions.GetOption(RenameTrackingOptionsStorage.RenameTrackingPreview, _document.Project.Language) ||
-                    !TryInitializeRenameTrackingCommitter(cancellationToken))
+                if (
+                    !_globalOptions.GetOption(
+                        RenameTrackingOptionsStorage.RenameTrackingPreview,
+                        _document.Project.Language
+                    ) || !TryInitializeRenameTrackingCommitter(cancellationToken)
+                )
                 {
-                    return await SpecializedTasks.EmptyEnumerable<CodeActionOperation>().ConfigureAwait(false);
+                    return await SpecializedTasks
+                        .EmptyEnumerable<CodeActionOperation>()
+                        .ConfigureAwait(false);
                 }
 
-                var solutionSet = await _renameTrackingCommitter.RenameSymbolAsync(cancellationToken).ConfigureAwait(false);
+                var solutionSet = await _renameTrackingCommitter
+                    .RenameSymbolAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
                 return SpecializedCollections.SingletonEnumerable(
-                    (CodeActionOperation)new ApplyChangesOperation(solutionSet.RenamedSolution));
+                    (CodeActionOperation)new ApplyChangesOperation(solutionSet.RenamedSolution)
+                );
             }
 
             private bool TryInitializeRenameTrackingCommitter(CancellationToken cancellationToken)
@@ -88,22 +109,51 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 if (_document.TryGetText(out var text))
                 {
                     var textBuffer = text.Container.GetTextBuffer();
-                    if (textBuffer.Properties.TryGetProperty(typeof(StateMachine), out StateMachine stateMachine))
+                    if (
+                        textBuffer
+                            .Properties
+                            .TryGetProperty(typeof(StateMachine), out StateMachine stateMachine)
+                    )
                     {
-                        if (!stateMachine.CanInvokeRename(out _, cancellationToken: cancellationToken))
+                        if (
+                            !stateMachine.CanInvokeRename(
+                                out _,
+                                cancellationToken: cancellationToken
+                            )
+                        )
                         {
                             // The rename tracking could be dismissed while a codefix is still cached
                             // in the lightbulb. If this happens, do not perform the rename requested
-                            // and instead let the user know their fix will not be applied. 
-                            _document.Project.Solution.Services.GetService<INotificationService>()
-                                ?.SendNotification(EditorFeaturesResources.The_rename_tracking_session_was_cancelled_and_is_no_longer_available, severity: NotificationSeverity.Error);
+                            // and instead let the user know their fix will not be applied.
+                            _document
+                                .Project
+                                .Solution
+                                .Services
+                                .GetService<INotificationService>()
+                                ?.SendNotification(
+                                    EditorFeaturesResources.The_rename_tracking_session_was_cancelled_and_is_no_longer_available,
+                                    severity: NotificationSeverity.Error
+                                );
                             return false;
                         }
 
-                        var snapshotSpan = stateMachine.TrackingSession.TrackingSpan.GetSpan(stateMachine.Buffer.CurrentSnapshot);
+                        var snapshotSpan = stateMachine
+                            .TrackingSession
+                            .TrackingSpan
+                            .GetSpan(stateMachine.Buffer.CurrentSnapshot);
                         var newName = snapshotSpan.GetText();
-                        var displayText = string.Format(EditorFeaturesResources.Rename_0_to_1, stateMachine.TrackingSession.OriginalName, newName);
-                        _renameTrackingCommitter = new RenameTrackingCommitter(stateMachine, snapshotSpan, _refactorNotifyServices, _undoHistoryRegistry, displayText);
+                        var displayText = string.Format(
+                            EditorFeaturesResources.Rename_0_to_1,
+                            stateMachine.TrackingSession.OriginalName,
+                            newName
+                        );
+                        _renameTrackingCommitter = new RenameTrackingCommitter(
+                            stateMachine,
+                            snapshotSpan,
+                            _refactorNotifyServices,
+                            _undoHistoryRegistry,
+                            displayText
+                        );
                         return true;
                     }
                 }
@@ -111,22 +161,36 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 return false;
             }
 
-            private sealed class RenameTrackingCommitterOperation(RenameTrackingCommitter committer, IThreadingContext threadingContext) : CodeActionOperation
+            private sealed class RenameTrackingCommitterOperation(
+                RenameTrackingCommitter committer,
+                IThreadingContext threadingContext
+            ) : CodeActionOperation
             {
                 private readonly RenameTrackingCommitter _committer = committer;
                 private readonly IThreadingContext _threadingContext = threadingContext;
 
                 internal override async Task<bool> TryApplyAsync(
-                    Workspace workspace, Solution originalSolution, IProgressTracker progressTracker, CancellationToken cancellationToken)
+                    Workspace workspace,
+                    Solution originalSolution,
+                    IProgressTracker progressTracker,
+                    CancellationToken cancellationToken
+                )
                 {
-                    var error = await _committer.TryCommitAsync(cancellationToken).ConfigureAwait(false);
+                    var error = await _committer
+                        .TryCommitAsync(cancellationToken)
+                        .ConfigureAwait(false);
                     if (error == null)
                         return true;
 
-                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+                    await _threadingContext
+                        .JoinableTaskFactory
+                        .SwitchToMainThreadAsync(cancellationToken);
                     var notificationService = workspace.Services.GetService<INotificationService>();
                     notificationService.SendNotification(
-                        error.Value.message, EditorFeaturesResources.Rename_Symbol, error.Value.severity);
+                        error.Value.message,
+                        EditorFeaturesResources.Rename_Symbol,
+                        error.Value.severity
+                    );
                     return false;
                 }
             }

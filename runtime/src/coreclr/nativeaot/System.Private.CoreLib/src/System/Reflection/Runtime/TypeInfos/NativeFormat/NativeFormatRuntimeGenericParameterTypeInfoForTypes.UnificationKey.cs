@@ -2,24 +2,28 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Reflection;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Reflection;
 using System.Reflection.Runtime.General;
 using System.Reflection.Runtime.TypeInfos;
-
 using Internal.Metadata.NativeFormat;
 
 namespace System.Reflection.Runtime.TypeInfos.NativeFormat
 {
-    internal sealed partial class NativeFormatRuntimeGenericParameterTypeInfoForTypes : NativeFormatRuntimeGenericParameterTypeInfo
+    internal sealed partial class NativeFormatRuntimeGenericParameterTypeInfoForTypes
+        : NativeFormatRuntimeGenericParameterTypeInfo
     {
         //
         // Key for unification.
         //
         internal struct UnificationKey : IEquatable<UnificationKey>
         {
-            public UnificationKey(MetadataReader reader, TypeDefinitionHandle typeDefinitionHandle, GenericParameterHandle genericParameterHandle)
+            public UnificationKey(
+                MetadataReader reader,
+                TypeDefinitionHandle typeDefinitionHandle,
+                GenericParameterHandle genericParameterHandle
+            )
             {
                 Reader = reader;
                 TypeDefinitionHandle = typeDefinitionHandle;

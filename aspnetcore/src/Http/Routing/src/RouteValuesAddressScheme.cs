@@ -7,7 +7,9 @@ using Microsoft.AspNetCore.Routing.Tree;
 
 namespace Microsoft.AspNetCore.Routing;
 
-internal sealed class RouteValuesAddressScheme : IEndpointAddressScheme<RouteValuesAddress>, IDisposable
+internal sealed class RouteValuesAddressScheme
+    : IEndpointAddressScheme<RouteValuesAddress>,
+        IDisposable
 {
     private readonly DataSourceDependentCache<StateEntry> _cache;
 
@@ -28,9 +30,9 @@ internal sealed class RouteValuesAddressScheme : IEndpointAddressScheme<RouteVal
         IList<OutboundMatchResult>? matchResults = null;
         if (string.IsNullOrEmpty(address.RouteName))
         {
-            matchResults = state.AllMatchesLinkGenerationTree.GetMatches(
-                address.ExplicitValues,
-                address.AmbientValues);
+            matchResults = state
+                .AllMatchesLinkGenerationTree
+                .GetMatches(address.ExplicitValues, address.AmbientValues);
         }
         else if (state.NamedMatches.TryGetValue(address.RouteName, out var namedMatchResults))
         {
@@ -58,7 +60,10 @@ internal sealed class RouteValuesAddressScheme : IEndpointAddressScheme<RouteVal
         return Array.Empty<Endpoint>();
     }
 
-    private static IEnumerable<Endpoint> GetEndpoints(IList<OutboundMatchResult> matchResults, int matchCount)
+    private static IEnumerable<Endpoint> GetEndpoints(
+        IList<OutboundMatchResult> matchResults,
+        int matchCount
+    )
     {
         for (var i = 0; i < matchCount; i++)
         {
@@ -69,7 +74,9 @@ internal sealed class RouteValuesAddressScheme : IEndpointAddressScheme<RouteVal
     private StateEntry Initialize(IReadOnlyList<Endpoint> endpoints)
     {
         var matchesWithRequiredValues = new List<OutboundMatch>();
-        var namedOutboundMatchResults = new Dictionary<string, List<OutboundMatchResult>>(StringComparer.OrdinalIgnoreCase);
+        var namedOutboundMatchResults = new Dictionary<string, List<OutboundMatchResult>>(
+            StringComparer.OrdinalIgnoreCase
+        );
 
         // Decision tree is built using the 'required values' of actions.
         // - When generating a url using route values, decision tree checks the explicitly supplied route values +
@@ -102,7 +109,12 @@ internal sealed class RouteValuesAddressScheme : IEndpointAddressScheme<RouteVal
                 continue;
             }
 
-            if (endpoint.Metadata.GetMetadata<ISuppressLinkGenerationMetadata>()?.SuppressLinkGeneration == true)
+            if (
+                endpoint
+                    .Metadata
+                    .GetMetadata<ISuppressLinkGenerationMetadata>()
+                    ?.SuppressLinkGeneration == true
+            )
             {
                 continue;
             }
@@ -110,7 +122,8 @@ internal sealed class RouteValuesAddressScheme : IEndpointAddressScheme<RouteVal
             var entry = CreateOutboundRouteEntry(
                 routeEndpoint,
                 routeEndpoint.RoutePattern.RequiredValues,
-                metadata?.RouteName);
+                metadata?.RouteName
+            );
 
             var outboundMatch = new OutboundMatch() { Entry = entry };
 
@@ -139,13 +152,15 @@ internal sealed class RouteValuesAddressScheme : IEndpointAddressScheme<RouteVal
         return new StateEntry(
             matchesWithRequiredValues,
             new LinkGenerationDecisionTree(matchesWithRequiredValues),
-            namedOutboundMatchResults);
+            namedOutboundMatchResults
+        );
     }
 
     private static OutboundRouteEntry CreateOutboundRouteEntry(
         RouteEndpoint endpoint,
         IReadOnlyDictionary<string, object?> requiredValues,
-        string? routeName)
+        string? routeName
+    )
     {
         var entry = new OutboundRouteEntry()
         {
@@ -176,7 +191,8 @@ internal sealed class RouteValuesAddressScheme : IEndpointAddressScheme<RouteVal
         public StateEntry(
             List<OutboundMatch> matchesWithRequiredValues,
             LinkGenerationDecisionTree allMatchesLinkGenerationTree,
-            Dictionary<string, List<OutboundMatchResult>> namedMatches)
+            Dictionary<string, List<OutboundMatchResult>> namedMatches
+        )
         {
             MatchesWithRequiredValues = matchesWithRequiredValues;
             AllMatchesLinkGenerationTree = allMatchesLinkGenerationTree;

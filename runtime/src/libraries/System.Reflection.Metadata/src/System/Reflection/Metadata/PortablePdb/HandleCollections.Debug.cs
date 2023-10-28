@@ -26,10 +26,7 @@ namespace System.Reflection.Metadata
 
         public int Count
         {
-            get
-            {
-                return _lastRowId - _firstRowId + 1;
-            }
+            get { return _lastRowId - _firstRowId + 1; }
         }
 
         public Enumerator GetEnumerator()
@@ -101,13 +98,12 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
         }
     }
 
-    public readonly struct MethodDebugInformationHandleCollection : IReadOnlyCollection<MethodDebugInformationHandle>
+    public readonly struct MethodDebugInformationHandleCollection
+        : IReadOnlyCollection<MethodDebugInformationHandle>
     {
         private readonly MetadataReader _reader;
 
@@ -125,10 +121,7 @@ namespace System.Reflection.Metadata
 
         public int Count
         {
-            get
-            {
-                return _lastRowId - _firstRowId + 1;
-            }
+            get { return _lastRowId - _firstRowId + 1; }
         }
 
         public Enumerator GetEnumerator()
@@ -170,7 +163,9 @@ namespace System.Reflection.Metadata
                 get
                 {
                     // PERF: keep this code small to enable inlining.
-                    return MethodDebugInformationHandle.FromRowId((int)(_currentRowId & TokenTypeIds.RIDMask));
+                    return MethodDebugInformationHandle.FromRowId(
+                        (int)(_currentRowId & TokenTypeIds.RIDMask)
+                    );
                 }
             }
 
@@ -200,9 +195,7 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
         }
     }
 
@@ -225,16 +218,15 @@ namespace System.Reflection.Metadata
             }
             else
             {
-                reader.LocalScopeTable.GetLocalScopeRange(methodDefinitionRowId, out _firstRowId, out _lastRowId);
+                reader
+                    .LocalScopeTable
+                    .GetLocalScopeRange(methodDefinitionRowId, out _firstRowId, out _lastRowId);
             }
         }
 
         public int Count
         {
-            get
-            {
-                return _lastRowId - _firstRowId + 1;
-            }
+            get { return _lastRowId - _firstRowId + 1; }
         }
 
         public Enumerator GetEnumerator()
@@ -306,9 +298,7 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
         }
 
         public struct ChildrenEnumerator : IEnumerator<LocalScopeHandle>, IEnumerator
@@ -368,8 +358,10 @@ namespace System.Reflection.Metadata
 
                 while (true)
                 {
-                    if (nextRowId > rowCount ||
-                        _parentMethodRowId != _reader.LocalScopeTable.GetMethod(nextRowId))
+                    if (
+                        nextRowId > rowCount
+                        || _parentMethodRowId != _reader.LocalScopeTable.GetMethod(nextRowId)
+                    )
                     {
                         _currentRowId = EnumEnded;
                         return false;
@@ -408,9 +400,7 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
         }
     }
 
@@ -439,10 +429,7 @@ namespace System.Reflection.Metadata
 
         public int Count
         {
-            get
-            {
-                return _lastRowId - _firstRowId + 1;
-            }
+            get { return _lastRowId - _firstRowId + 1; }
         }
 
         public Enumerator GetEnumerator()
@@ -484,7 +471,9 @@ namespace System.Reflection.Metadata
                 get
                 {
                     // PERF: keep this code small to enable inlining.
-                    return LocalVariableHandle.FromRowId((int)(_currentRowId & TokenTypeIds.RIDMask));
+                    return LocalVariableHandle.FromRowId(
+                        (int)(_currentRowId & TokenTypeIds.RIDMask)
+                    );
                 }
             }
 
@@ -514,9 +503,7 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
         }
     }
 
@@ -545,10 +532,7 @@ namespace System.Reflection.Metadata
 
         public int Count
         {
-            get
-            {
-                return _lastRowId - _firstRowId + 1;
-            }
+            get { return _lastRowId - _firstRowId + 1; }
         }
 
         public Enumerator GetEnumerator()
@@ -590,7 +574,9 @@ namespace System.Reflection.Metadata
                 get
                 {
                     // PERF: keep this code small to enable inlining.
-                    return LocalConstantHandle.FromRowId((int)(_currentRowId & TokenTypeIds.RIDMask));
+                    return LocalConstantHandle.FromRowId(
+                        (int)(_currentRowId & TokenTypeIds.RIDMask)
+                    );
                 }
             }
 
@@ -620,9 +606,7 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
         }
     }
 
@@ -644,10 +628,7 @@ namespace System.Reflection.Metadata
 
         public int Count
         {
-            get
-            {
-                return _lastRowId - _firstRowId + 1;
-            }
+            get { return _lastRowId - _firstRowId + 1; }
         }
 
         public Enumerator GetEnumerator()
@@ -719,13 +700,12 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
         }
     }
 
-    public readonly struct CustomDebugInformationHandleCollection : IReadOnlyCollection<CustomDebugInformationHandle>
+    public readonly struct CustomDebugInformationHandleCollection
+        : IReadOnlyCollection<CustomDebugInformationHandle>
     {
         private readonly MetadataReader _reader;
 
@@ -751,10 +731,7 @@ namespace System.Reflection.Metadata
 
         public int Count
         {
-            get
-            {
-                return _lastRowId - _firstRowId + 1;
-            }
+            get { return _lastRowId - _firstRowId + 1; }
         }
 
         public Enumerator GetEnumerator()
@@ -796,7 +773,9 @@ namespace System.Reflection.Metadata
                 get
                 {
                     // PERF: keep this code small to enable inlining.
-                    return CustomDebugInformationHandle.FromRowId((int)(_currentRowId & TokenTypeIds.RIDMask));
+                    return CustomDebugInformationHandle.FromRowId(
+                        (int)(_currentRowId & TokenTypeIds.RIDMask)
+                    );
                 }
             }
 
@@ -826,9 +805,7 @@ namespace System.Reflection.Metadata
                 throw new NotSupportedException();
             }
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
         }
     }
 }

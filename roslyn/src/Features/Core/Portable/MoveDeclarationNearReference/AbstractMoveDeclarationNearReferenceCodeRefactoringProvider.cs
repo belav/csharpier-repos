@@ -13,17 +13,19 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
 {
-    internal abstract class AbstractMoveDeclarationNearReferenceCodeRefactoringProvider<TLocalDeclaration> : CodeRefactoringProvider where TLocalDeclaration : SyntaxNode
+    internal abstract class AbstractMoveDeclarationNearReferenceCodeRefactoringProvider<TLocalDeclaration>
+        : CodeRefactoringProvider
+        where TLocalDeclaration : SyntaxNode
     {
         [ImportingConstructor]
-        public AbstractMoveDeclarationNearReferenceCodeRefactoringProvider()
-        {
-        }
+        public AbstractMoveDeclarationNearReferenceCodeRefactoringProvider() { }
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
             var (document, _, cancellationToken) = context;
-            var declaration = await context.TryGetRelevantNodeAsync<TLocalDeclaration>().ConfigureAwait(false);
+            var declaration = await context
+                .TryGetRelevantNodeAsync<TLocalDeclaration>()
+                .ConfigureAwait(false);
             if (declaration == null)
             {
                 return;
@@ -36,8 +38,13 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
                 return;
             }
 
-            var service = document.GetRequiredLanguageService<IMoveDeclarationNearReferenceService>();
-            if (!await service.CanMoveDeclarationNearReferenceAsync(document, declaration, cancellationToken).ConfigureAwait(false))
+            var service =
+                document.GetRequiredLanguageService<IMoveDeclarationNearReferenceService>();
+            if (
+                !await service
+                    .CanMoveDeclarationNearReferenceAsync(document, declaration, cancellationToken)
+                    .ConfigureAwait(false)
+            )
             {
                 return;
             }
@@ -47,15 +54,23 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
                     FeaturesResources.Move_declaration_near_reference,
                     c => MoveDeclarationNearReferenceAsync(document, declaration, c),
                     nameof(FeaturesResources.Move_declaration_near_reference),
-                    CodeActionPriority.Low),
-                declaration.Span);
+                    CodeActionPriority.Low
+                ),
+                declaration.Span
+            );
         }
 
         private static async Task<Document> MoveDeclarationNearReferenceAsync(
-            Document document, SyntaxNode statement, CancellationToken cancellationToken)
+            Document document,
+            SyntaxNode statement,
+            CancellationToken cancellationToken
+        )
         {
-            var service = document.GetRequiredLanguageService<IMoveDeclarationNearReferenceService>();
-            return await service.MoveDeclarationNearReferenceAsync(document, statement, cancellationToken).ConfigureAwait(false);
+            var service =
+                document.GetRequiredLanguageService<IMoveDeclarationNearReferenceService>();
+            return await service
+                .MoveDeclarationNearReferenceAsync(document, statement, cancellationToken)
+                .ConfigureAwait(false);
         }
     }
 }

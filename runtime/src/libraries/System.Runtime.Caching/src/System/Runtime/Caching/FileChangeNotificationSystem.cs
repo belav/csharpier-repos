@@ -2,12 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Runtime.Caching.Hosting;
-using System.Runtime.Caching.Resources;
 using System.Collections;
 using System.IO;
-using System.Security;
+using System.Runtime.Caching.Hosting;
+using System.Runtime.Caching.Resources;
 using System.Runtime.Versioning;
+using System.Security;
 
 namespace System.Runtime.Caching
 {
@@ -49,7 +49,8 @@ namespace System.Runtime.Caching
                 {
                     return false;
                 }
-                return 0 == string.Compare(s1, 0, s2, 0, s2.Length, StringComparison.OrdinalIgnoreCase);
+                return 0
+                    == string.Compare(s1, 0, s2, 0, s2.Length, StringComparison.OrdinalIgnoreCase);
             }
 
             private void OnChanged(object sender, FileSystemEventArgs e)
@@ -73,9 +74,18 @@ namespace System.Runtime.Caching
                 }
             }
 
-            internal FileSystemEventHandler ChangedHandler { get { return _changedHandler; } }
-            internal ErrorEventHandler ErrorHandler { get { return _errorHandler; } }
-            internal RenamedEventHandler RenamedHandler { get { return _renamedHandler; } }
+            internal FileSystemEventHandler ChangedHandler
+            {
+                get { return _changedHandler; }
+            }
+            internal ErrorEventHandler ErrorHandler
+            {
+                get { return _errorHandler; }
+            }
+            internal RenamedEventHandler RenamedHandler
+            {
+                get { return _renamedHandler; }
+            }
 
             internal FileChangeEventTarget(string fileName, OnChangedCallback onChangedCallback)
             {
@@ -93,7 +103,13 @@ namespace System.Runtime.Caching
             _lock = new object();
         }
 
-        void IFileChangeNotificationSystem.StartMonitoring(string filePath, OnChangedCallback onChangedCallback, out object state, out DateTimeOffset lastWriteTime, out long fileSize)
+        void IFileChangeNotificationSystem.StartMonitoring(
+            string filePath,
+            OnChangedCallback onChangedCallback,
+            out object state,
+            out DateTimeOffset lastWriteTime,
+            out long fileSize
+        )
         {
             if (filePath is null)
             {
@@ -116,19 +132,23 @@ namespace System.Runtime.Caching
                     {
                         dirMon = new DirectoryMonitor();
                         dirMon.Fsw = new FileSystemWatcher(dir);
-                        dirMon.Fsw.NotifyFilter = NotifyFilters.FileName
-                                                  | NotifyFilters.DirectoryName
-                                                  | NotifyFilters.CreationTime
-                                                  | NotifyFilters.Size
-                                                  | NotifyFilters.LastWrite
-                                                  | NotifyFilters.Security;
+                        dirMon.Fsw.NotifyFilter =
+                            NotifyFilters.FileName
+                            | NotifyFilters.DirectoryName
+                            | NotifyFilters.CreationTime
+                            | NotifyFilters.Size
+                            | NotifyFilters.LastWrite
+                            | NotifyFilters.Security;
                         dirMon.Fsw.EnableRaisingEvents = true;
                     }
                     _dirMonitors[dir] = dirMon;
                 }
             }
 
-            FileChangeEventTarget target = new FileChangeEventTarget(fileInfo.Name, onChangedCallback);
+            FileChangeEventTarget target = new FileChangeEventTarget(
+                fileInfo.Name,
+                onChangedCallback
+            );
 
             lock (dirMon)
             {

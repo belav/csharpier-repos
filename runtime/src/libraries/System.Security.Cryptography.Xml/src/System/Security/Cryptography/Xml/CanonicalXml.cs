@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Xml;
 using System.IO;
 using System.Text;
+using System.Xml;
 
 namespace System.Security.Cryptography.Xml
 {
@@ -17,7 +17,12 @@ namespace System.Security.Cryptography.Xml
         // private static string defaultXPathWithComments = "(//. | //@* | //namespace::*)";
         // private static string defaultXPathWithComments = "(//. | //@* | //namespace::*)";
 
-        internal CanonicalXml(Stream inputStream, bool includeComments, XmlResolver? resolver, string strBaseUri)
+        internal CanonicalXml(
+            Stream inputStream,
+            bool includeComments,
+            XmlResolver? resolver,
+            string strBaseUri
+        )
         {
             if (inputStream is null)
             {
@@ -30,7 +35,9 @@ namespace System.Security.Cryptography.Xml
             _ancMgr = new C14NAncestralNamespaceContextManager();
         }
 
-        internal CanonicalXml(XmlDocument document, XmlResolver? resolver) : this(document, resolver, false) { }
+        internal CanonicalXml(XmlDocument document, XmlResolver? resolver)
+            : this(document, resolver, false) { }
+
         internal CanonicalXml(XmlDocument document, XmlResolver? resolver, bool includeComments)
         {
             if (document is null)
@@ -69,7 +76,11 @@ namespace System.Security.Cryptography.Xml
                 ((ICanonicalizableNode)node).IsInNodeSet = true;
         }
 
-        private static void MarkInclusionStateForNodes(XmlNodeList nodeList, XmlDocument inputRoot, XmlDocument root)
+        private static void MarkInclusionStateForNodes(
+            XmlNodeList nodeList,
+            XmlDocument inputRoot,
+            XmlDocument root
+        )
         {
             CanonicalXmlNodeList elementList = new CanonicalXmlNodeList();
             CanonicalXmlNodeList elementListCanonical = new CanonicalXmlNodeList();

@@ -5,9 +5,7 @@ using System;
 using System.Buffers;
 using System.IO.Pipelines;
 using System.Runtime.CompilerServices;
-
 using BenchmarkDotNet.Attributes;
-
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Http.Features.Authentication;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
@@ -227,20 +225,27 @@ public class HttpProtocolFeatureCollection
     public HttpProtocolFeatureCollection()
     {
         var memoryPool = PinnedBlockMemoryPoolFactory.Create();
-        var options = new PipeOptions(memoryPool, readerScheduler: PipeScheduler.Inline, writerScheduler: PipeScheduler.Inline, useSynchronizationContext: false);
+        var options = new PipeOptions(
+            memoryPool,
+            readerScheduler: PipeScheduler.Inline,
+            writerScheduler: PipeScheduler.Inline,
+            useSynchronizationContext: false
+        );
         var pair = DuplexPipe.CreateConnectionPair(options, options);
 
         var serviceContext = TestContextFactory.CreateServiceContext(
             serverOptions: new KestrelServerOptions(),
             httpParser: new HttpParser<Http1ParsingHandler>(),
-            dateHeaderValueManager: new DateHeaderValueManager(TimeProvider.System));
+            dateHeaderValueManager: new DateHeaderValueManager(TimeProvider.System)
+        );
 
         var connectionContext = TestContextFactory.CreateHttpConnectionContext(
             serviceContext: serviceContext,
             connectionContext: null,
             transport: pair.Transport,
             memoryPool: memoryPool,
-            connectionFeatures: new FeatureCollection());
+            connectionFeatures: new FeatureCollection()
+        );
 
         var http1Connection = new Http1Connection(connectionContext);
 
@@ -249,7 +254,5 @@ public class HttpProtocolFeatureCollection
         _collection = http1Connection;
     }
 
-    public interface IHttpNotFoundFeature
-    {
-    }
+    public interface IHttpNotFoundFeature { }
 }

@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using SuppressMessageAttribute = System.Diagnostics.CodeAnalysis.SuppressMessageAttribute;
-using System.Runtime.Serialization;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.Serialization;
+using SuppressMessageAttribute = System.Diagnostics.CodeAnalysis.SuppressMessageAttribute;
 
 namespace System.Xml.Linq
 {
@@ -56,7 +56,8 @@ namespace System.Xml.Linq
         /// </summary>
         public override string ToString()
         {
-            if (_ns.NamespaceName.Length == 0) return _localName;
+            if (_ns.NamespaceName.Length == 0)
+                return _localName;
             return "{" + _ns.NamespaceName + "}" + _localName;
         }
 
@@ -75,8 +76,13 @@ namespace System.Xml.Linq
             if (expandedName[0] == '{')
             {
                 int i = expandedName.LastIndexOf('}');
-                if (i <= 1 || i == expandedName.Length - 1) throw new ArgumentException(SR.Format(SR.Argument_InvalidExpandedName, expandedName));
-                return XNamespace.Get(expandedName, 1, i - 1).GetName(expandedName, i + 1, expandedName.Length - i - 1);
+                if (i <= 1 || i == expandedName.Length - 1)
+                    throw new ArgumentException(
+                        SR.Format(SR.Argument_InvalidExpandedName, expandedName)
+                    );
+                return XNamespace
+                    .Get(expandedName, 1, i - 1)
+                    .GetName(expandedName, i + 1, expandedName.Length - i - 1);
             }
             else
             {

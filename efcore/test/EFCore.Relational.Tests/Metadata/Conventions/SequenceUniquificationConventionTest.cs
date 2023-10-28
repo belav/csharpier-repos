@@ -56,7 +56,8 @@ public class SequenceUniquificationConventionTest
             {
                 Assert.Equal("UniquifyM~", s5.Name);
                 Assert.Equal("TestSchema", s5.Schema);
-            });
+            }
+        );
     }
 
     private ModelBuilder GetModelBuilder()
@@ -66,15 +67,22 @@ public class SequenceUniquificationConventionTest
         var dependencies = CreateDependencies()
             .With(new CurrentDbContext(new DbContext(new DbContextOptions<DbContext>())));
         var relationalDependencies = CreateRelationalDependencies();
-        conventionSet.ModelFinalizingConventions.Add(
-            new SequenceUniquificationConvention(dependencies, relationalDependencies));
+        conventionSet
+            .ModelFinalizingConventions
+            .Add(new SequenceUniquificationConvention(dependencies, relationalDependencies));
 
         return new ModelBuilder(conventionSet);
     }
 
-    private ProviderConventionSetBuilderDependencies CreateDependencies()
-        => FakeRelationalTestHelpers.Instance.CreateContextServices().GetRequiredService<ProviderConventionSetBuilderDependencies>();
+    private ProviderConventionSetBuilderDependencies CreateDependencies() =>
+        FakeRelationalTestHelpers
+            .Instance
+            .CreateContextServices()
+            .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
-    private RelationalConventionSetBuilderDependencies CreateRelationalDependencies()
-        => FakeRelationalTestHelpers.Instance.CreateContextServices().GetRequiredService<RelationalConventionSetBuilderDependencies>();
+    private RelationalConventionSetBuilderDependencies CreateRelationalDependencies() =>
+        FakeRelationalTestHelpers
+            .Instance
+            .CreateContextServices()
+            .GetRequiredService<RelationalConventionSetBuilderDependencies>();
 }

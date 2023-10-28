@@ -35,16 +35,23 @@ public class OAuthPostConfigureOptions<TOptions, THandler> : IPostConfigureOptio
         options.DataProtectionProvider = options.DataProtectionProvider ?? _dp;
         if (options.Backchannel == null)
         {
-            options.Backchannel = new HttpClient(options.BackchannelHttpHandler ?? new HttpClientHandler());
-            options.Backchannel.DefaultRequestHeaders.UserAgent.ParseAdd("Microsoft ASP.NET Core OAuth handler");
+            options.Backchannel = new HttpClient(
+                options.BackchannelHttpHandler ?? new HttpClientHandler()
+            );
+            options
+                .Backchannel
+                .DefaultRequestHeaders
+                .UserAgent
+                .ParseAdd("Microsoft ASP.NET Core OAuth handler");
             options.Backchannel.Timeout = options.BackchannelTimeout;
             options.Backchannel.MaxResponseContentBufferSize = 1024 * 1024 * 10; // 10 MB
         }
 
         if (options.StateDataFormat == null)
         {
-            var dataProtector = options.DataProtectionProvider.CreateProtector(
-                typeof(THandler).FullName!, name, "v1");
+            var dataProtector = options
+                .DataProtectionProvider
+                .CreateProtector(typeof(THandler).FullName!, name, "v1");
             options.StateDataFormat = new PropertiesDataFormat(dataProtector);
         }
     }

@@ -13,9 +13,8 @@ namespace Microsoft.AspNetCore.Server.IIS.NewShim.FunctionalTests;
 [SkipOnHelix("Unsupported queue", Queues = "Windows.Amd64.VS2022.Pre.Open;")]
 public class NewShimTests : IISFunctionalTestBase
 {
-    public NewShimTests(PublishedSitesFixture fixture) : base(fixture)
-    {
-    }
+    public NewShimTests(PublishedSitesFixture fixture)
+        : base(fixture) { }
 
     [ConditionalFact]
     public async Task CheckNewShimIsUsed()
@@ -33,6 +32,8 @@ public class NewShimTests : IISFunctionalTestBase
             }
         }
 
-        throw new XunitException($"Could not find aspnetcorev2_inprocess.dll loaded in process {result.HostProcess.ProcessName}");
+        throw new XunitException(
+            $"Could not find aspnetcorev2_inprocess.dll loaded in process {result.HostProcess.ProcessName}"
+        );
     }
 }

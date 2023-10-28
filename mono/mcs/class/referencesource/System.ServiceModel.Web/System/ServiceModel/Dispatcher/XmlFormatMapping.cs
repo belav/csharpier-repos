@@ -12,14 +12,14 @@ namespace System.ServiceModel.Dispatcher
     class XmlFormatMapping : MultiplexingFormatMapping
     {
         public static readonly WebContentFormat WebContentFormat = WebContentFormat.Xml;
-        
+
         internal static readonly string defaultMediaType = "application/xml";
-        static Dictionary<Encoding, MessageEncoder> encoders = new Dictionary<Encoding, MessageEncoder>();
+        static Dictionary<Encoding, MessageEncoder> encoders =
+            new Dictionary<Encoding, MessageEncoder>();
         static object thisLock = new object();
 
         public XmlFormatMapping(Encoding writeEncoding, WebContentTypeMapper contentTypeMapper)
-            : base(writeEncoding, contentTypeMapper)
-        { }
+            : base(writeEncoding, contentTypeMapper) { }
 
         public override WebContentFormat ContentFormat
         {
@@ -44,7 +44,14 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (!XmlFormatMapping.encoders.ContainsKey(this.writeEncoding))
                     {
-                        XmlFormatMapping.encoders[this.writeEncoding] = new TextMessageEncoderFactory(MessageVersion.None, this.writeEncoding, 0, 0, new XmlDictionaryReaderQuotas()).Encoder;
+                        XmlFormatMapping.encoders[this.writeEncoding] =
+                            new TextMessageEncoderFactory(
+                                MessageVersion.None,
+                                this.writeEncoding,
+                                0,
+                                0,
+                                new XmlDictionaryReaderQuotas()
+                            ).Encoder;
                     }
                 }
                 return XmlFormatMapping.encoders[this.writeEncoding];

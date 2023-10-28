@@ -2,10 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Text;
 using System.Runtime.InteropServices;
+using System.Text;
 using Xunit;
-
 using static DelegateTestNative;
 
 class DelegateTest
@@ -19,7 +18,9 @@ class DelegateTest
 
         {
             TestDelegate localDelegate = TestFunction;
-            Assert.True(ReplaceDelegate(expectedValue, ref localDelegate, out int newExpectedValue));
+            Assert.True(
+                ReplaceDelegate(expectedValue, ref localDelegate, out int newExpectedValue)
+            );
             Assert.Equal(newExpectedValue, localDelegate());
         }
 
@@ -69,7 +70,9 @@ class DelegateTest
 
         {
             TestDelegate localDelegate = TestFunction;
-            Assert.True(ValidateDelegateValueMatchesExpectedAndClear(expectedValue, ref localDelegate));
+            Assert.True(
+                ValidateDelegateValueMatchesExpectedAndClear(expectedValue, ref localDelegate)
+            );
             Assert.Equal(null, localDelegate);
         }
 

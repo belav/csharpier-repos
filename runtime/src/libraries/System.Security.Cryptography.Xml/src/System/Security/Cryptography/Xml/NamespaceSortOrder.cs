@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Xml;
 using System.Collections;
+using System.Xml;
 
 namespace System.Security.Cryptography.Xml
 {
@@ -18,9 +18,12 @@ namespace System.Security.Cryptography.Xml
                 throw new ArgumentException();
             bool nodeAdefault = Utils.IsDefaultNamespaceNode(nodeA);
             bool nodeBdefault = Utils.IsDefaultNamespaceNode(nodeB);
-            if (nodeAdefault && nodeBdefault) return 0;
-            if (nodeAdefault) return -1;
-            if (nodeBdefault) return 1;
+            if (nodeAdefault && nodeBdefault)
+                return 0;
+            if (nodeAdefault)
+                return -1;
+            if (nodeBdefault)
+                return 1;
             return string.CompareOrdinal(nodeA.LocalName, nodeB.LocalName);
         }
     }

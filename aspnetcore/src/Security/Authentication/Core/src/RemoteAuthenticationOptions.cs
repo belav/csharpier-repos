@@ -52,7 +52,10 @@ public class RemoteAuthenticationOptions : AuthenticationSchemeOptions
         base.Validate();
         if (CallbackPath == null || !CallbackPath.HasValue)
         {
-            throw new ArgumentException(Resources.FormatException_OptionMustBeProvided(nameof(CallbackPath)), nameof(CallbackPath));
+            throw new ArgumentException(
+                Resources.FormatException_OptionMustBeProvided(nameof(CallbackPath)),
+                nameof(CallbackPath)
+            );
         }
     }
 

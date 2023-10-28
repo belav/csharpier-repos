@@ -16,17 +16,21 @@ public class ApiExplorerRouteChangeConvention : Attribute, IActionModelConventio
 
     public void Apply(ActionModel action)
     {
-        if (action.Attributes.OfType<ReloadAttribute>().Any() && ChangeToken.TokenSource.IsCancellationRequested)
+        if (
+            action.Attributes.OfType<ReloadAttribute>().Any()
+            && ChangeToken.TokenSource.IsCancellationRequested
+        )
         {
             action.ActionName = "NewIndex";
             action.Selectors.Clear();
-            action.Selectors.Add(new SelectorModel
-            {
-                AttributeRouteModel = new AttributeRouteModel
-                {
-                    Template = "NewIndex"
-                }
-            });
+            action
+                .Selectors
+                .Add(
+                    new SelectorModel
+                    {
+                        AttributeRouteModel = new AttributeRouteModel { Template = "NewIndex" }
+                    }
+                );
         }
     }
 }

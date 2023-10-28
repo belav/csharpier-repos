@@ -21,7 +21,6 @@ namespace System.Data.Mapping.ViewGeneration.Structures
 
     internal class ErrorLog : InternalBase
     {
-
         #region Constructors
         internal ErrorLog()
         {
@@ -39,7 +38,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             get { return m_log.Count; }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")] // referenced (indirectly) by System.Data.Entity.Design.dll
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Performance",
+            "CA1811:AvoidUncalledPrivateCode"
+        )] // referenced (indirectly) by System.Data.Entity.Design.dll
         internal IEnumerable<EdmSchemaError> Errors
         {
             get
@@ -101,21 +103,37 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             // effects: Creates an error record for wrappers, a debug message
             // and an error message given by "message". Note: wrappers cannot
             // be null
-            internal Record(bool isError, ViewGenErrorCode errorCode, string message,
-                            IEnumerable<LeftCellWrapper> wrappers, string debugMessage)
+            internal Record(
+                bool isError,
+                ViewGenErrorCode errorCode,
+                string message,
+                IEnumerable<LeftCellWrapper> wrappers,
+                string debugMessage
+            )
             {
                 Debug.Assert(wrappers != null);
                 IEnumerable<Cell> cells = LeftCellWrapper.GetInputCellsForWrappers(wrappers);
                 Init(isError, errorCode, message, cells, debugMessage);
             }
 
-            internal Record(bool isError, ViewGenErrorCode errorCode, string message, Cell sourceCell, string debugMessage)
+            internal Record(
+                bool isError,
+                ViewGenErrorCode errorCode,
+                string message,
+                Cell sourceCell,
+                string debugMessage
+            )
             {
                 Init(isError, errorCode, message, new Cell[] { sourceCell }, debugMessage);
             }
 
-            internal Record(bool isError, ViewGenErrorCode errorCode, string message, IEnumerable<Cell> sourceCells,
-                            string debugMessage)
+            internal Record(
+                bool isError,
+                ViewGenErrorCode errorCode,
+                string message,
+                IEnumerable<Cell> sourceCells,
+                string debugMessage
+            )
             {
                 Init(isError, errorCode, message, sourceCells, debugMessage);
             }
@@ -128,9 +146,13 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 m_mappingError = error;
             }
 
-
-            private void Init(bool isError, ViewGenErrorCode errorCode, string message,
-                              IEnumerable<Cell> sourceCells, string debugMessage)
+            private void Init(
+                bool isError,
+                ViewGenErrorCode errorCode,
+                string message,
+                IEnumerable<Cell> sourceCells,
+                string debugMessage
+            )
             {
                 m_sourceCells = new List<Cell>(sourceCells);
 
@@ -142,10 +164,32 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 int lineNumber = label.StartLineNumber;
                 int columnNumber = label.StartLinePosition;
 
-                string userMessage = InternalToString(message, debugMessage, m_sourceCells, sourceLocation, errorCode, isError, false);
-                m_debugMessage = InternalToString(message, debugMessage, m_sourceCells, sourceLocation, errorCode, isError, true);
-                m_mappingError = new EdmSchemaError(userMessage, (int)errorCode, EdmSchemaErrorSeverity.Error, sourceLocation,
-                                                      lineNumber, columnNumber);
+                string userMessage = InternalToString(
+                    message,
+                    debugMessage,
+                    m_sourceCells,
+                    sourceLocation,
+                    errorCode,
+                    isError,
+                    false
+                );
+                m_debugMessage = InternalToString(
+                    message,
+                    debugMessage,
+                    m_sourceCells,
+                    sourceLocation,
+                    errorCode,
+                    isError,
+                    true
+                );
+                m_mappingError = new EdmSchemaError(
+                    userMessage,
+                    (int)errorCode,
+                    EdmSchemaErrorSeverity.Error,
+                    sourceLocation,
+                    lineNumber,
+                    columnNumber
+                );
             }
             #endregion
 
@@ -156,7 +200,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             #endregion
 
             #region Properties
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")] // referenced (indirectly) by System.Data.Entity.Design.dll
+            [System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Performance",
+                "CA1811:AvoidUncalledPrivateCode"
+            )] // referenced (indirectly) by System.Data.Entity.Design.dll
             internal EdmSchemaError Error
             {
                 get { return m_mappingError; }
@@ -170,9 +217,16 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             }
 
             // effects: adds a comma-separated list of line numbers to the string builder
-            private static void GetUserLinesFromCells(IEnumerable<Cell> sourceCells, StringBuilder lineBuilder, bool isInvariant)
+            private static void GetUserLinesFromCells(
+                IEnumerable<Cell> sourceCells,
+                StringBuilder lineBuilder,
+                bool isInvariant
+            )
             {
-                var orderedCells = sourceCells.OrderBy<Cell, int>(cell => cell.CellLabel.StartLineNumber, Comparer<int>.Default);
+                var orderedCells = sourceCells.OrderBy<Cell, int>(
+                    cell => cell.CellLabel.StartLineNumber,
+                    Comparer<int>.Default
+                );
 
                 bool isFirst = true;
                 // Get the line numbers
@@ -180,10 +234,16 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 {
                     if (isFirst == false)
                     {
-                        lineBuilder.Append(isInvariant ? EntityRes.GetString(EntityRes.ViewGen_CommaBlank) : ", ");
+                        lineBuilder.Append(
+                            isInvariant ? EntityRes.GetString(EntityRes.ViewGen_CommaBlank) : ", "
+                        );
                     }
                     isFirst = false;
-                    lineBuilder.AppendFormat(CultureInfo.InvariantCulture, "{0}", cell.CellLabel.StartLineNumber);
+                    lineBuilder.AppendFormat(
+                        CultureInfo.InvariantCulture,
+                        "{0}",
+                        cell.CellLabel.StartLineNumber
+                    );
                 }
                 Debug.Assert(isFirst == false, "No cells");
             }
@@ -191,9 +251,15 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             // effects: Converts the message/debugMessage to a user-readable
             // message using resources (if isInvariant is false) or a test
             // message (if isInvariant is true)
-            static private string InternalToString(string message, string debugMessage,
-                                                   List<Cell> sourceCells, string sourceLocation, ViewGenErrorCode errorCode,
-                                                   bool isError, bool isInvariant)
+            static private string InternalToString(
+                string message,
+                string debugMessage,
+                List<Cell> sourceCells,
+                string sourceLocation,
+                ViewGenErrorCode errorCode,
+                bool isError,
+                bool isInvariant
+            )
             {
                 StringBuilder builder = new StringBuilder();
 
@@ -201,7 +267,9 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 {
                     builder.AppendLine(debugMessage);
 
-                    builder.Append(isInvariant ? "ERROR" : System.Data.Entity.Strings.ViewGen_Error);
+                    builder.Append(
+                        isInvariant ? "ERROR" : System.Data.Entity.Strings.ViewGen_Error
+                    );
                     StringUtil.FormatStringBuilder(builder, " ({0}): ", (int)errorCode);
                 }
 
@@ -212,11 +280,19 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 {
                     if (sourceCells.Count > 1)
                     {
-                        StringUtil.FormatStringBuilder(builder, "Problem in Mapping Fragments starting at lines {0}: ", lineBuilder.ToString());
+                        StringUtil.FormatStringBuilder(
+                            builder,
+                            "Problem in Mapping Fragments starting at lines {0}: ",
+                            lineBuilder.ToString()
+                        );
                     }
                     else
                     {
-                        StringUtil.FormatStringBuilder(builder, "Problem in Mapping Fragment starting at line {0}: ", lineBuilder.ToString());
+                        StringUtil.FormatStringBuilder(
+                            builder,
+                            "Problem in Mapping Fragment starting at line {0}: ",
+                            lineBuilder.ToString()
+                        );
                     }
                 }
                 else

@@ -4,10 +4,8 @@
 using System;
 using System.Buffers.Binary;
 using System.Linq;
-
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-
 using Xunit;
 
 namespace TypeSystemTests
@@ -182,7 +180,10 @@ namespace TypeSystemTests
             // are again offset from 0
             //
 
-            MetadataType t = _testModule.GetType("StaticFieldLayout", "EnsureInheritanceResetsStaticOffsets");
+            MetadataType t = _testModule.GetType(
+                "StaticFieldLayout",
+                "EnsureInheritanceResetsStaticOffsets"
+            );
 
             foreach (var field in t.GetFields())
             {
@@ -210,7 +211,10 @@ namespace TypeSystemTests
             // Test that literal fields are not laid out.
             //
 
-            MetadataType t = _testModule.GetType("StaticFieldLayout", "LiteralFieldsDontAffectLayout");
+            MetadataType t = _testModule.GetType(
+                "StaticFieldLayout",
+                "LiteralFieldsDontAffectLayout"
+            );
 
             Assert.Equal(4, t.GetFields().Count());
 

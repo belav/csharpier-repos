@@ -1,14 +1,14 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Reflection;
-using System.Collections;
-using System.IO;
-using System.Xml.Schema;
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Xml;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
+using System.Reflection;
+using System.Xml;
+using System.Xml.Schema;
 
 namespace System.Xml.Serialization
 {
@@ -22,9 +22,7 @@ namespace System.Xml.Serialization
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlSerializerNamespaces()
-        {
-        }
+        public XmlSerializerNamespaces() { }
 
         /// <internalonly/>
         /// <devdoc>
@@ -56,7 +54,6 @@ namespace System.Xml.Serialization
             foreach (var qname in namespaces)
                 _namespaces.Add(qname.Name, qname);
         }
-
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -98,9 +95,11 @@ namespace System.Xml.Serialization
             get { return (_namespaces == null) ? 0 : _namespaces.Count; }
         }
 
-        internal Dictionary<string, XmlQualifiedName>.ValueCollection Namespaces => NamespacesInternal.Values;
+        internal Dictionary<string, XmlQualifiedName>.ValueCollection Namespaces =>
+            NamespacesInternal.Values;
 
-        private Dictionary<string, XmlQualifiedName> NamespacesInternal => _namespaces ??= new Dictionary<string, XmlQualifiedName>();
+        private Dictionary<string, XmlQualifiedName> NamespacesInternal =>
+            _namespaces ??= new Dictionary<string, XmlQualifiedName>();
 
         internal ArrayList? NamespaceList
         {

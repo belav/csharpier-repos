@@ -1,10 +1,10 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using Xunit;
 using System.IO;
 using ApprovalTests;
 using ApprovalTests.Reporters;
+using Xunit;
 
 namespace System.CommandLine.Tests.Help
 {
@@ -35,14 +35,15 @@ namespace System.CommandLine.Tests.Help
                     DefaultValueFactory = (_) => FileAccess.Read,
                     Description = "the-root-arg-enum-default-description"
                 },
-                new CliOption<bool>("--the-root-option-no-arg", "-trna") 
+                new CliOption<bool>("--the-root-option-no-arg", "-trna")
                 {
                     Description = "the-root-option-no-arg-description",
                     Required = true
                 },
                 new CliOption<string>("--the-root-option-no-description-default-arg", "-trondda")
                 {
-                    DefaultValueFactory = (_) => "the-root-option--no-description-default-arg-value",
+                    DefaultValueFactory = (_) =>
+                        "the-root-option--no-description-default-arg-value",
                 },
                 new CliOption<string>("--the-root-option-no-default-arg", "-tronda")
                 {

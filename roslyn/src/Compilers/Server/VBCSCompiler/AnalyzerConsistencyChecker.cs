@@ -23,21 +23,28 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             string baseDirectory,
             IEnumerable<CommandLineAnalyzerReference> analyzerReferences,
             IAnalyzerAssemblyLoader loader,
-            ICompilerServerLogger? logger = null) => Check(baseDirectory, analyzerReferences, loader, logger, out var _);
+            ICompilerServerLogger? logger = null
+        ) => Check(baseDirectory, analyzerReferences, loader, logger, out var _);
 
         public static bool Check(
             string baseDirectory,
             IEnumerable<CommandLineAnalyzerReference> analyzerReferences,
             IAnalyzerAssemblyLoader loader,
             ICompilerServerLogger? logger,
-            [NotNullWhen(false)]
-            out List<string>? errorMessages)
+            [NotNullWhen(false)] out List<string>? errorMessages
+        )
         {
             errorMessages = null;
             try
             {
                 logger?.Log($"Begin Analyzer Consistency Check for {baseDirectory}");
-                return CheckCore(baseDirectory, analyzerReferences, loader, logger, out errorMessages);
+                return CheckCore(
+                    baseDirectory,
+                    analyzerReferences,
+                    loader,
+                    logger,
+                    out errorMessages
+                );
             }
             catch (Exception e)
             {
@@ -57,14 +64,21 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             IEnumerable<CommandLineAnalyzerReference> analyzerReferences,
             IAnalyzerAssemblyLoader loader,
             ICompilerServerLogger? logger,
-            [NotNullWhen(false)] out List<string>? errorMessages)
+            [NotNullWhen(false)] out List<string>? errorMessages
+        )
         {
             errorMessages = null;
             var resolvedPaths = new List<string>();
 
             foreach (var analyzerReference in analyzerReferences)
             {
-                string? resolvedPath = FileUtilities.ResolveRelativePath(analyzerReference.FilePath, basePath: null, baseDirectory: baseDirectory, searchPaths: SpecializedCollections.EmptyEnumerable<string>(), fileExists: File.Exists);
+                string? resolvedPath = FileUtilities.ResolveRelativePath(
+                    analyzerReference.FilePath,
+                    basePath: null,
+                    baseDirectory: baseDirectory,
+                    searchPaths: SpecializedCollections.EmptyEnumerable<string>(),
+                    fileExists: File.Exists
+                );
                 if (resolvedPath != null)
                 {
                     resolvedPath = FileUtilities.TryNormalizeAbsolutePath(resolvedPath);
@@ -77,7 +91,7 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                 // Don't worry about paths we can't resolve. The compiler will report an error for that later.
             }
 
-            // Register analyzers and their dependencies upfront, 
+            // Register analyzers and their dependencies upfront,
             // so that assembly references can be resolved:
             foreach (var resolvedPath in resolvedPaths)
             {
@@ -93,15 +107,17 @@ namespace Microsoft.CodeAnalysis.CompilerServer
 
             // Third, check that the MVIDs of the files on disk match the MVIDs of the loaded assemblies.
             var comparer = PathUtilities.Comparer;
-            var compilerDirectory = Path.GetDirectoryName(typeof(AnalyzerConsistencyChecker).Assembly.CodeBase);
+            var compilerDirectory = Path.GetDirectoryName(
+                typeof(AnalyzerConsistencyChecker).Assembly.CodeBase
+            );
 
             for (int i = 0; i < resolvedPaths.Count; i++)
             {
                 var resolvedPath = resolvedPaths[i];
                 var loadedAssembly = loadedAssemblies[i];
 
-                // When an assembly is loaded from the GAC then the load result would be the same if 
-                // this ran on command line compiler. So there is no consistency issue here, this 
+                // When an assembly is loaded from the GAC then the load result would be the same if
+                // this ran on command line compiler. So there is no consistency issue here, this
                 // is just runtime rules expressing themselves.
                 if (loadedAssembly.GlobalAssemblyCache)
                 {
@@ -111,7 +127,11 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                 // When an assembly is loaded from the compiler directory then this means it's assembly
                 // binding redirects taking over. For example it's moving from an older version of System.Memory
                 // to the one shipping in the compiler. This is not a consistency issue.
-                if (PathUtilities.Comparer.Equals(compilerDirectory, Path.GetDirectoryName(loadedAssembly.CodeBase)))
+                if (
+                    PathUtilities
+                        .Comparer
+                        .Equals(compilerDirectory, Path.GetDirectoryName(loadedAssembly.CodeBase))
+                )
                 {
                     continue;
                 }
@@ -120,7 +140,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                 var loadedAssemblyMvid = loadedAssembly.ManifestModule.ModuleVersionId;
                 if (resolvedPathMvid != loadedAssemblyMvid)
                 {
-                    var message = $"analyzer assembly '{resolvedPath}' has MVID '{resolvedPathMvid}' but loaded assembly '{loadedAssembly.Location}' has MVID '{loadedAssemblyMvid}'";
+                    var message =
+                        $"analyzer assembly '{resolvedPath}' has MVID '{resolvedPathMvid}' but loaded assembly '{loadedAssembly.Location}' has MVID '{loadedAssemblyMvid}'";
                     errorMessages ??= new List<string>();
                     errorMessages.Add(message);
                     logger.LogError(message);

@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Runtime.InteropServices;
 using System.Formats.Asn1;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using Microsoft.Win32.SafeHandles;
 
@@ -33,14 +33,14 @@ internal static partial class Interop
             byte[] derEncoded = OpenSslEncode(
                 GetAsn1IntegerDerSize,
                 EncodeAsn1Integer,
-                asn1Integer);
+                asn1Integer
+            );
 
             try
             {
-                return AsnDecoder.ReadIntegerBytes(
-                    derEncoded,
-                    AsnEncodingRules.DER,
-                    out _).ToArray();
+                return AsnDecoder
+                    .ReadIntegerBytes(derEncoded, AsnEncodingRules.DER, out _)
+                    .ToArray();
             }
             catch (AsnContentException e)
             {

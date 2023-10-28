@@ -15,22 +15,19 @@ public class CliConfigurationTests
         var option2 = new CliOption<string>("-y");
         option2.Aliases.Add("--dupe");
 
-        var command = new CliRootCommand
-        {
-            option1,
-            option2
-        };
+        var command = new CliRootCommand { option1, option2 };
 
         var config = new CliConfiguration(command);
 
         var validate = () => config.ThrowIfInvalid();
 
-        validate.Should()
-                .Throw<CliConfigurationException>()
-                .Which
-                .Message
-                .Should()
-                .Be($"Duplicate alias '--dupe' found on command '{command.Name}'.");
+        validate
+            .Should()
+            .Throw<CliConfigurationException>()
+            .Which
+            .Message
+            .Should()
+            .Be($"Duplicate alias '--dupe' found on command '{command.Name}'.");
     }
 
     [Fact]
@@ -42,23 +39,20 @@ public class CliConfigurationTests
 
         var command = new CliRootCommand
         {
-            new CliCommand("subcommand")
-            {
-                option1,
-                option2
-            }
+            new CliCommand("subcommand") { option1, option2 }
         };
 
         var config = new CliConfiguration(command);
 
         var validate = () => config.ThrowIfInvalid();
 
-        validate.Should()
-                .Throw<CliConfigurationException>()
-                .Which
-                .Message
-                .Should()
-                .Be("Duplicate alias '--dupe' found on command 'subcommand'.");
+        validate
+            .Should()
+            .Throw<CliConfigurationException>()
+            .Which
+            .Message
+            .Should()
+            .Be("Duplicate alias '--dupe' found on command 'subcommand'.");
     }
 
     [Fact]
@@ -68,22 +62,19 @@ public class CliConfigurationTests
         var command2 = new CliCommand("not-a-dupe");
         command2.Aliases.Add("dupe");
 
-        var rootCommand = new CliRootCommand
-        {
-            command1,
-            command2
-        };
+        var rootCommand = new CliRootCommand { command1, command2 };
 
         var config = new CliConfiguration(rootCommand);
 
         var validate = () => config.ThrowIfInvalid();
 
-        validate.Should()
-                .Throw<CliConfigurationException>()
-                .Which
-                .Message
-                .Should()
-                .Be($"Duplicate alias 'dupe' found on command '{rootCommand.Name}'.");
+        validate
+            .Should()
+            .Throw<CliConfigurationException>()
+            .Which
+            .Message
+            .Should()
+            .Be($"Duplicate alias 'dupe' found on command '{rootCommand.Name}'.");
     }
 
     [Fact]
@@ -102,12 +93,13 @@ public class CliConfigurationTests
 
         var validate = () => config.ThrowIfInvalid();
 
-        validate.Should()
-                .Throw<CliConfigurationException>()
-                .Which
-                .Message
-                .Should()
-                .Be("Duplicate alias 'dupe' found on command 'subcommand'.");
+        validate
+            .Should()
+            .Throw<CliConfigurationException>()
+            .Which
+            .Message
+            .Should()
+            .Be("Duplicate alias 'dupe' found on command 'subcommand'.");
     }
 
     [Fact]
@@ -117,22 +109,19 @@ public class CliConfigurationTests
         var command = new CliCommand("not-a-dupe");
         command.Aliases.Add("dupe");
 
-        var rootCommand = new CliRootCommand
-        {
-            option,
-            command
-        };
+        var rootCommand = new CliRootCommand { option, command };
 
         var config = new CliConfiguration(rootCommand);
 
         var validate = () => config.ThrowIfInvalid();
 
-        validate.Should()
-                .Throw<CliConfigurationException>()
-                .Which
-                .Message
-                .Should()
-                .Be($"Duplicate alias 'dupe' found on command '{rootCommand.Name}'.");
+        validate
+            .Should()
+            .Throw<CliConfigurationException>()
+            .Which
+            .Message
+            .Should()
+            .Be($"Duplicate alias 'dupe' found on command '{rootCommand.Name}'.");
     }
 
     [Fact]
@@ -144,23 +133,20 @@ public class CliConfigurationTests
 
         var rootCommand = new CliRootCommand
         {
-            new CliCommand("subcommand")
-            {
-                option,
-                command
-            }
+            new CliCommand("subcommand") { option, command }
         };
 
         var config = new CliConfiguration(rootCommand);
 
         var validate = () => config.ThrowIfInvalid();
 
-        validate.Should()
-                .Throw<CliConfigurationException>()
-                .Which
-                .Message
-                .Should()
-                .Be("Duplicate alias 'dupe' found on command 'subcommand'.");
+        validate
+            .Should()
+            .Throw<CliConfigurationException>()
+            .Which
+            .Message
+            .Should()
+            .Be("Duplicate alias 'dupe' found on command 'subcommand'.");
     }
 
     [Fact]
@@ -178,12 +164,13 @@ public class CliConfigurationTests
 
         var validate = () => config.ThrowIfInvalid();
 
-        validate.Should()
-                .Throw<CliConfigurationException>()
-                .Which
-                .Message
-                .Should()
-                .Be($"Duplicate alias '--dupe' found on command '{command.Name}'.");
+        validate
+            .Should()
+            .Throw<CliConfigurationException>()
+            .Which
+            .Message
+            .Should()
+            .Be($"Duplicate alias '--dupe' found on command '{command.Name}'.");
     }
 
     [Fact]
@@ -191,10 +178,7 @@ public class CliConfigurationTests
     {
         var rootCommand = new CliRootCommand
         {
-            new CliCommand("subcommand")
-            {
-                new CliOption<string>("--dupe")
-            }
+            new CliCommand("subcommand") { new CliOption<string>("--dupe") }
         };
         rootCommand.Options.Add(new CliOption<string>("--dupe") { Recursive = true });
 
@@ -210,10 +194,7 @@ public class CliConfigurationTests
     {
         var rootCommand = new CliRootCommand
         {
-            new CliCommand("subcommand")
-            {
-                new CliCommand("--dupe")
-            }
+            new CliCommand("subcommand") { new CliCommand("--dupe") }
         };
         rootCommand.Options.Add(new CliOption<string>("--dupe") { Recursive = true });
 
@@ -234,12 +215,13 @@ public class CliConfigurationTests
 
         var validate = () => config.ThrowIfInvalid();
 
-        validate.Should()
-                .Throw<CliConfigurationException>()
-                .Which
-                .Message
-                .Should()
-                .Be($"Cycle detected in command tree. Command '{command.Name}' is its own ancestor.");
+        validate
+            .Should()
+            .Throw<CliConfigurationException>()
+            .Which
+            .Message
+            .Should()
+            .Be($"Cycle detected in command tree. Command '{command.Name}' is its own ancestor.");
     }
 
     [Fact]
@@ -253,12 +235,15 @@ public class CliConfigurationTests
 
         var validate = () => config.ThrowIfInvalid();
 
-        validate.Should()
-                .Throw<CliConfigurationException>()
-                .Which
-                .Message
-                .Should()
-                .Be($"Cycle detected in command tree. Command '{rootCommand.Name}' is its own ancestor.");
+        validate
+            .Should()
+            .Throw<CliConfigurationException>()
+            .Which
+            .Message
+            .Should()
+            .Be(
+                $"Cycle detected in command tree. Command '{rootCommand.Name}' is its own ancestor."
+            );
     }
 
     [Fact]
@@ -287,7 +272,8 @@ public class CliConfigurationTests
 
 public class CustomAppConfiguration : CliConfiguration
 {
-    public CustomAppConfiguration(CliRootCommand command) : base(command)
+    public CustomAppConfiguration(CliRootCommand command)
+        : base(command)
     {
         EnableDefaultExceptionHandler = false;
     }

@@ -10,8 +10,13 @@ namespace System.Web.Http.ModelBinding.Binders
     public sealed class CollectionModelBinderProvider : ModelBinderProvider
     {
         public override IModelBinder GetBinder(HttpConfiguration configuration, Type modelType)
-        {            
-            return CollectionModelBinderUtil.GetGenericBinder(typeof(ICollection<>), typeof(List<>), typeof(CollectionModelBinder<>), modelType); 
+        {
+            return CollectionModelBinderUtil.GetGenericBinder(
+                typeof(ICollection<>),
+                typeof(List<>),
+                typeof(CollectionModelBinder<>),
+                modelType
+            );
         }
     }
 }

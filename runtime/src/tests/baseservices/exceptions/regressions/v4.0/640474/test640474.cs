@@ -2,12 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Runtime.CompilerServices;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 public class My
 {
-
     static void bar()
     {
         Other.field = 123;
@@ -16,7 +15,7 @@ public class My
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     static void foo(bool f)
     {
-        if (f) 
+        if (f)
             bar();
     }
 
@@ -53,10 +52,12 @@ public class My
             }
             else
             {
-                Console.WriteLine("FAILED: Wrong exception thrown. Expected: Exception with message 'Hello world'. Actual: " + inner.Message);
+                Console.WriteLine(
+                    "FAILED: Wrong exception thrown. Expected: Exception with message 'Hello world'. Actual: "
+                        + inner.Message
+                );
                 return 101;
             }
         }
     }
-
 }

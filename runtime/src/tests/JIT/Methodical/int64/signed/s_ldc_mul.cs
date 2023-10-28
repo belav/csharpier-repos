@@ -36,16 +36,30 @@ namespace JitTest_s_ldc_mul_signed_cs
                 goto fail;
             if (!check(0x3fffffffffffffff, 0x0000000000000002, 0x7ffffffffffffffe, false))
                 goto fail;
-            if (!check(unchecked((long)0xffffffffffffffff), unchecked((long)0xfffffffffffffffe), 2, false))
+            if (
+                !check(
+                    unchecked((long)0xffffffffffffffff),
+                    unchecked((long)0xfffffffffffffffe),
+                    2,
+                    false
+                )
+            )
                 goto fail;
             if (!check(0x0000000000100000, 0x0000001000000000, 0x0100000000000000, false))
                 goto fail;
-            if (!check(unchecked((long)0xffffffffffffffff), unchecked((long)0x8000000000000001), 0x7fffffffffffffff, false))
+            if (
+                !check(
+                    unchecked((long)0xffffffffffffffff),
+                    unchecked((long)0x8000000000000001),
+                    0x7fffffffffffffff,
+                    false
+                )
+            )
                 goto fail;
 
             Console.WriteLine("Test passed");
             return 100;
-        fail:
+            fail:
             Console.WriteLine("Test failed");
             return 1;
         }

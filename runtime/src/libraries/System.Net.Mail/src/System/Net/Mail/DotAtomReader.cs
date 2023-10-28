@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Text;
 using System.Diagnostics;
 using System.Net.Mime;
+using System.Text;
 
 namespace System.Net.Mail
 {
@@ -35,17 +35,27 @@ namespace System.Net.Mail
         // - The leading character is a dot.
         //   e.g. "a@.b.com", starting at index 7 (m), throws because the leading char (index 2) is a dot.
         //
-        internal static bool TryReadReverse(string data, int index, out int outIndex, bool throwExceptionIfFail)
+        internal static bool TryReadReverse(
+            string data,
+            int index,
+            out int outIndex,
+            bool throwExceptionIfFail
+        )
         {
-            Debug.Assert(0 <= index && index < data.Length, $"index was outside the bounds of the string: {index}");
+            Debug.Assert(
+                0 <= index && index < data.Length,
+                $"index was outside the bounds of the string: {index}"
+            );
 
             int startIndex = index;
 
             // Scan for the first invalid chars (including whitespace)
             for (; 0 <= index; index--)
             {
-                if (Ascii.IsValid(data[index]) // Any ASCII allowed
-                 && (data[index] != MailBnfHelper.Dot && !MailBnfHelper.Atext[data[index]])) // Invalid char
+                if (
+                    Ascii.IsValid(data[index]) // Any ASCII allowed
+                    && (data[index] != MailBnfHelper.Dot && !MailBnfHelper.Atext[data[index]])
+                ) // Invalid char
                 {
                     break;
                 }
@@ -56,7 +66,9 @@ namespace System.Net.Mail
             {
                 if (throwExceptionIfFail)
                 {
-                    throw new FormatException(SR.Format(SR.MailHeaderFieldInvalidCharacter, data[index]));
+                    throw new FormatException(
+                        SR.Format(SR.MailHeaderFieldInvalidCharacter, data[index])
+                    );
                 }
                 else
                 {
@@ -69,7 +81,9 @@ namespace System.Net.Mail
             {
                 if (throwExceptionIfFail)
                 {
-                    throw new FormatException(SR.Format(SR.MailHeaderFieldInvalidCharacter, MailBnfHelper.Dot));
+                    throw new FormatException(
+                        SR.Format(SR.MailHeaderFieldInvalidCharacter, MailBnfHelper.Dot)
+                    );
                 }
                 else
                 {

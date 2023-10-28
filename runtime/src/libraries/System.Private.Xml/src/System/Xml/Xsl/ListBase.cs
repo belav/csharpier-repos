@@ -2,13 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Xml;
-using System.Xml.Schema;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
-using System.Reflection;
 using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
+using System.Text;
+using System.Xml;
+using System.Xml.Schema;
 
 namespace System.Xml.Xsl
 {
@@ -24,7 +24,6 @@ namespace System.Xml.Xsl
         //-----------------------------------------------
         public abstract int Count { get; }
         public abstract T this[int index] { get; set; }
-
 
         //-----------------------------------------------
         // Implemented by base class -- accessible on
@@ -96,7 +95,6 @@ namespace System.Xml.Xsl
             for (int index = Count - 1; index >= 0; index--)
                 RemoveAt(index);
         }
-
 
         //-----------------------------------------------
         // Implemented by base class -- only accessible
@@ -186,7 +184,6 @@ namespace System.Xml.Xsl
             }
         }
 
-
         //-----------------------------------------------
         // Helper methods and classes
         //-----------------------------------------------
@@ -222,9 +219,7 @@ namespace System.Xml.Xsl
         /// <summary>
         /// No-op.
         /// </summary>
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         /// <summary>
         /// Return current item.  Return default value if before first item or after last item in the list.
@@ -242,10 +237,14 @@ namespace System.Xml.Xsl
             get
             {
                 if (_index == 0)
-                    throw new InvalidOperationException(SR.Format(SR.Sch_EnumNotStarted, string.Empty));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.Sch_EnumNotStarted, string.Empty)
+                    );
 
                 if (_index > _sequence.Count)
-                    throw new InvalidOperationException(SR.Format(SR.Sch_EnumFinished, string.Empty));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.Sch_EnumFinished, string.Empty)
+                    );
 
                 return _current!;
             }

@@ -22,17 +22,17 @@ public class SqlServerRuntimeModelConvention : RelationalRuntimeModelConvention
     /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
     public SqlServerRuntimeModelConvention(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
-        : base(dependencies, relationalDependencies)
-    {
-    }
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    )
+        : base(dependencies, relationalDependencies) { }
 
     /// <inheritdoc />
     protected override void ProcessModelAnnotations(
         Dictionary<string, object?> annotations,
         IModel model,
         RuntimeModel runtimeModel,
-        bool runtime)
+        bool runtime
+    )
     {
         base.ProcessModelAnnotations(annotations, model, runtimeModel, runtime);
 
@@ -51,7 +51,8 @@ public class SqlServerRuntimeModelConvention : RelationalRuntimeModelConvention
         Dictionary<string, object?> annotations,
         IProperty property,
         RuntimeProperty runtimeProperty,
-        bool runtime)
+        bool runtime
+    )
     {
         base.ProcessPropertyAnnotations(annotations, property, runtimeProperty, runtime);
 
@@ -63,7 +64,8 @@ public class SqlServerRuntimeModelConvention : RelationalRuntimeModelConvention
 
             if (!annotations.ContainsKey(SqlServerAnnotationNames.ValueGenerationStrategy))
             {
-                annotations[SqlServerAnnotationNames.ValueGenerationStrategy] = property.GetValueGenerationStrategy();
+                annotations[SqlServerAnnotationNames.ValueGenerationStrategy] =
+                    property.GetValueGenerationStrategy();
             }
         }
     }
@@ -73,9 +75,15 @@ public class SqlServerRuntimeModelConvention : RelationalRuntimeModelConvention
         Dictionary<string, object?> annotations,
         IRelationalPropertyOverrides propertyOverrides,
         RuntimeRelationalPropertyOverrides runtimePropertyOverrides,
-        bool runtime)
+        bool runtime
+    )
     {
-        base.ProcessPropertyOverridesAnnotations(annotations, propertyOverrides, runtimePropertyOverrides, runtime);
+        base.ProcessPropertyOverridesAnnotations(
+            annotations,
+            propertyOverrides,
+            runtimePropertyOverrides,
+            runtime
+        );
 
         if (!runtime)
         {
@@ -89,7 +97,8 @@ public class SqlServerRuntimeModelConvention : RelationalRuntimeModelConvention
         Dictionary<string, object?> annotations,
         IIndex index,
         RuntimeIndex runtimeIndex,
-        bool runtime)
+        bool runtime
+    )
     {
         base.ProcessIndexAnnotations(annotations, index, runtimeIndex, runtime);
 
@@ -109,7 +118,8 @@ public class SqlServerRuntimeModelConvention : RelationalRuntimeModelConvention
         Dictionary<string, object?> annotations,
         IKey key,
         RuntimeKey runtimeKey,
-        bool runtime)
+        bool runtime
+    )
     {
         base.ProcessKeyAnnotations(annotations, key, runtimeKey, runtime);
 
@@ -124,7 +134,8 @@ public class SqlServerRuntimeModelConvention : RelationalRuntimeModelConvention
         Dictionary<string, object?> annotations,
         IEntityType entityType,
         RuntimeEntityType runtimeEntityType,
-        bool runtime)
+        bool runtime
+    )
     {
         base.ProcessEntityTypeAnnotations(annotations, entityType, runtimeEntityType, runtime);
 

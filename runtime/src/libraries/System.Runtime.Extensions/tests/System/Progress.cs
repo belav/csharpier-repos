@@ -18,7 +18,11 @@ namespace System.Tests
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/91538", typeof(PlatformDetection), nameof(PlatformDetection.IsWasmThreadingSupported))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/91538",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWasmThreadingSupported)
+        )]
         public void NoWorkQueuedIfNoHandlers()
         {
             RunWithoutSyncCtx(() =>

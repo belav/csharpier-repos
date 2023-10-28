@@ -25,9 +25,11 @@ public class CurrentValueComparerFactory
         var nonNullableModelType = modelType.UnwrapNullableType();
         if (IsGenericComparable(modelType, nonNullableModelType))
         {
-            return (IComparer<IUpdateEntry>)Activator.CreateInstance(
-                typeof(EntryCurrentValueComparer<>).MakeGenericType(modelType),
-                propertyBase)!;
+            return (IComparer<IUpdateEntry>)
+                Activator.CreateInstance(
+                    typeof(EntryCurrentValueComparer<>).MakeGenericType(modelType),
+                    propertyBase
+                )!;
         }
 
         if (typeof(IStructuralComparable).IsAssignableFrom(nonNullableModelType))
@@ -50,17 +52,27 @@ public class CurrentValueComparerFactory
                 if (IsGenericComparable(providerType, nonNullableProviderType))
                 {
                     var elementType = property.GetElementType();
-                    var modelBaseType = elementType != null
-                        ? typeof(IEnumerable<>).MakeGenericType(elementType.ClrType)
-                        : modelType;
+                    var modelBaseType =
+                        elementType != null
+                            ? typeof(IEnumerable<>).MakeGenericType(elementType.ClrType)
+                            : modelType;
                     var comparerType = modelType.IsClass
-                        ? typeof(NullableClassCurrentProviderValueComparer<,>).MakeGenericType(modelBaseType, providerType)
+                        ? typeof(NullableClassCurrentProviderValueComparer<,>).MakeGenericType(
+                            modelBaseType,
+                            providerType
+                        )
                         : modelType == converter.ModelClrType
-                            ? typeof(CurrentProviderValueComparer<,>).MakeGenericType(modelBaseType, providerType)
+                            ? typeof(CurrentProviderValueComparer<,>).MakeGenericType(
+                                modelBaseType,
+                                providerType
+                            )
                             : typeof(NullableStructCurrentProviderValueComparer<,>).MakeGenericType(
-                                nonNullableModelType, providerType);
+                                nonNullableModelType,
+                                providerType
+                            );
 
-                    return (IComparer<IUpdateEntry>)Activator.CreateInstance(comparerType, propertyBase, converter)!;
+                    return (IComparer<IUpdateEntry>)
+                        Activator.CreateInstance(comparerType, propertyBase, converter)!;
                 }
 
                 if (typeof(IStructuralComparable).IsAssignableFrom(nonNullableProviderType))
@@ -78,7 +90,9 @@ public class CurrentValueComparerFactory
                         propertyBase.DeclaringType.DisplayName(),
                         propertyBase.Name,
                         modelType.ShortDisplayName(),
-                        providerType.ShortDisplayName()));
+                        providerType.ShortDisplayName()
+                    )
+                );
             }
         }
 
@@ -86,12 +100,16 @@ public class CurrentValueComparerFactory
             CoreStrings.NonComparableKeyType(
                 propertyBase.DeclaringType.DisplayName(),
                 propertyBase.Name,
-                modelType.ShortDisplayName()));
+                modelType.ShortDisplayName()
+            )
+        );
 
-        static bool IsGenericComparable(Type type, Type nonNullableType)
-            => typeof(IComparable<>).MakeGenericType(type).IsAssignableFrom(type)
-                || typeof(IComparable<>).MakeGenericType(nonNullableType).IsAssignableFrom(nonNullableType)
-                || type.IsEnum
-                || nonNullableType.IsEnum;
+        static bool IsGenericComparable(Type type, Type nonNullableType) =>
+            typeof(IComparable<>).MakeGenericType(type).IsAssignableFrom(type)
+            || typeof(IComparable<>)
+                .MakeGenericType(nonNullableType)
+                .IsAssignableFrom(nonNullableType)
+            || type.IsEnum
+            || nonNullableType.IsEnum;
     }
 }

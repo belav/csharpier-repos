@@ -7,7 +7,6 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Xml;
 using System.Xml.Linq;
-
 using CoreclrTestWrapperLib = CoreclrTestLib.CoreclrTestWrapperLib;
 
 public class XUnitLogChecker
@@ -30,7 +29,11 @@ public class XUnitLogChecker
         public TagCategory Category { get; init; }
     }
 
-    private enum TagCategory { OPENING, CLOSING }
+    private enum TagCategory
+    {
+        OPENING,
+        CLOSING
+    }
 
     private const int SUCCESS = 0;
     private const int MISSING_ARGS = -1;
@@ -40,9 +43,11 @@ public class XUnitLogChecker
     {
         if (args.Length < 2)
         {
-            WriteLineTimestamp("The path to the log file and"
-                               + " the name of the wrapper are required for an"
-                               + " accurate check and fixing.");
+            WriteLineTimestamp(
+                "The path to the log file and"
+                    + " the name of the wrapper are required for an"
+                    + " accurate check and fixing."
+            );
             return MISSING_ARGS;
         }
 
@@ -79,11 +84,12 @@ public class XUnitLogChecker
 
         if (!File.Exists(tempLogPath))
         {
-            WriteLineTimestamp("No logs were found. This work"
-                               + " item was skipped.");
-            WriteLineTimestamp($"If this is a mistake, then"
-                               + " something went very wrong. The expected temp"
-                               + $" log name would be: '{tempLogName}'");
+            WriteLineTimestamp("No logs were found. This work" + " item was skipped.");
+            WriteLineTimestamp(
+                $"If this is a mistake, then"
+                    + " something went very wrong. The expected temp"
+                    + $" log name would be: '{tempLogName}'"
+            );
             return SUCCESS;
         }
 
@@ -94,8 +100,10 @@ public class XUnitLogChecker
 
         if (!File.Exists(statsCsvPath))
         {
-            WriteLineTimestamp("An error occurred. No stats csv"
-                             + $" was found. The expected name would be '{statsCsvPath}'.");
+            WriteLineTimestamp(
+                "An error occurred. No stats csv"
+                    + $" was found. The expected name would be '{statsCsvPath}'."
+            );
             return FAILURE;
         }
 
@@ -104,8 +112,7 @@ public class XUnitLogChecker
 
         if (workItemStats is null)
         {
-            WriteLineTimestamp("Timed out trying to read the"
-                             + $" stats file '{statsCsvPath}'.");
+            WriteLineTimestamp("Timed out trying to read the" + $" stats file '{statsCsvPath}'.");
             return FAILURE;
         }
 
@@ -121,14 +128,16 @@ public class XUnitLogChecker
         // finished, successfully or not. It has the following format:
         //     (Tests Run, Tests Passed, Tests Failed, Tests Skipped)
 
-        int[] workItemEndStatus = workItemStats.Last()
-                                               .Split(',')
-                                               .Select(x => Int32.Parse(x))
-                                               .ToArray();
+        int[] workItemEndStatus = workItemStats
+            .Last()
+            .Split(',')
+            .Select(x => Int32.Parse(x))
+            .ToArray();
 
         // Here goes the main core of the XUnit Log Checker :)
-        WriteLineTimestamp($"Item '{wrapperName}' did not"
-                          + " finish running. Checking and fixing the log...");
+        WriteLineTimestamp(
+            $"Item '{wrapperName}' did not" + " finish running. Checking and fixing the log..."
+        );
 
         bool success = FixTheXml(tempLogPath);
         if (!success)
@@ -153,9 +162,11 @@ public class XUnitLogChecker
             }
             else
             {
-                WriteLineTimestamp("The provided dumps path"
-                                 + $" '{dumpsPath}' was not able to be read or"
-                                 + " found. Skipping stack traces search...");
+                WriteLineTimestamp(
+                    "The provided dumps path"
+                        + $" '{dumpsPath}' was not able to be read or"
+                        + " found. Skipping stack traces search..."
+                );
             }
         }
 
@@ -189,8 +200,7 @@ public class XUnitLogChecker
             }
             catch (IOException ioEx)
             {
-                WriteLineTimestamp("Could not read the"
-                                 + $" file {filePath}. Retrying...");
+                WriteLineTimestamp("Could not read the" + $" file {filePath}. Retrying...");
 
                 // Give it a couple seconds before trying again.
                 Thread.Sleep(2000);
@@ -215,8 +225,7 @@ public class XUnitLogChecker
 
         if (logLines is null)
         {
-            WriteLineTimestamp("Timed out trying to read the"
-                             + $" log file '{xFile}'.");
+            WriteLineTimestamp("Timed out trying to read the" + $" log file '{xFile}'.");
             return false;
         }
 
@@ -272,10 +281,8 @@ public class XUnitLogChecker
                     // the CDATA closing one doesn't have letters, so we treat it
                     // as a special case.
                     tagText = tr.Value.Equals("]]>")
-                              ? "CDATA"
-                              : new String(tr.Value
-                                           .Where(c => char.IsLetter(c))
-                                           .ToArray());
+                        ? "CDATA"
+                        : new String(tr.Value.Where(c => char.IsLetter(c)).ToArray());
 
                     if (inCData)
                     {
@@ -311,14 +318,14 @@ public class XUnitLogChecker
 
         // Write the missing closings for all the opened tags we found.
         using (StreamWriter xsw = File.AppendText(xFile))
-        while (tags.Count > 0)
-        {
-            string tag = tags.Pop();
-            if (tag.Equals("CDATA"))
-                xsw.WriteLine("]]>");
-            else
-                xsw.WriteLine($"</{tag}>");
-        }
+            while (tags.Count > 0)
+            {
+                string tag = tags.Pop();
+                if (tag.Equals("CDATA"))
+                    xsw.WriteLine("]]>");
+                else
+                    xsw.WriteLine($"</{tag}>");
+            }
 
         WriteLineTimestamp("XUnit log file has been fixed!");
         return true;
@@ -347,32 +354,35 @@ public class XUnitLogChecker
                 {
                     if (openingTags[opIndex].Index < closingTags[clIndex].Index)
                     {
-                        result[resIndex++] = new TagResult(openingTags[opIndex].Value,
-                                                           TagCategory.OPENING);
+                        result[resIndex++] = new TagResult(
+                            openingTags[opIndex].Value,
+                            TagCategory.OPENING
+                        );
                         opIndex++;
                     }
                     else
                     {
-                        result[resIndex++] = new TagResult(closingTags[clIndex].Value,
-                                                           TagCategory.CLOSING);
+                        result[resIndex++] = new TagResult(
+                            closingTags[clIndex].Value,
+                            TagCategory.CLOSING
+                        );
                         clIndex++;
                     }
                 }
-
                 // Only opening tags remaining, so just add them.
                 else
                 {
-                    result[resIndex++] = new TagResult(openingTags[opIndex].Value,
-                                                       TagCategory.OPENING);
+                    result[resIndex++] = new TagResult(
+                        openingTags[opIndex].Value,
+                        TagCategory.OPENING
+                    );
                     opIndex++;
                 }
             }
-
             // Only closing tags remaining, so just add them.
             else
             {
-                result[resIndex++] = new TagResult(closingTags[clIndex].Value,
-                                                   TagCategory.CLOSING);
+                result[resIndex++] = new TagResult(closingTags[clIndex].Value, TagCategory.CLOSING);
                 clIndex++;
             }
         }
@@ -390,33 +400,30 @@ public class XUnitLogChecker
 
         // We know from the XUnitWrapperGenerator that the top element
         // is the 'assembly' tag we're looking for.
-        var testRunDateTime = DateTime.ParseExact
-        (
+        var testRunDateTime = DateTime.ParseExact(
             fixedLogTree.Attribute("run-date-time").Value,
             "yyyy-MM-dd HH:mm:ss",
             System.Globalization.CultureInfo.InvariantCulture
         );
 
-        IEnumerable<string> dumpsFound =
-            Directory.GetFiles(dumpsPath, "*coredump*.dmp")
-                     .Where(dmp => DateTime.Compare(File.GetCreationTime(dmp), testRunDateTime) >= 0);
+        IEnumerable<string> dumpsFound = Directory
+            .GetFiles(dumpsPath, "*coredump*.dmp")
+            .Where(dmp => DateTime.Compare(File.GetCreationTime(dmp), testRunDateTime) >= 0);
 
         if (dumpsFound.Count() == 0)
         {
             WriteLineTimestamp("No crash dumps found. Continuing...");
-            return ;
+            return;
         }
 
         foreach (string dumpPath in dumpsFound)
         {
             if (OperatingSystem.IsWindows())
             {
-                WriteLineTimestamp("Reading crash dump"
-                                 + $" '{dumpPath}'...");
+                WriteLineTimestamp("Reading crash dump" + $" '{dumpPath}'...");
                 WriteLineTimestamp("Stack Trace Found:\n");
 
-                CoreclrTestWrapperLib.TryPrintStackTraceFromDmp(dumpPath,
-                                                                Console.Out);
+                CoreclrTestWrapperLib.TryPrintStackTraceFromDmp(dumpPath, Console.Out);
             }
             else
             {
@@ -424,19 +431,20 @@ public class XUnitLogChecker
 
                 if (!File.Exists(crashReportPath))
                 {
-                    WriteLineTimestamp("There was no crash"
-                                     + $" report for dump '{dumpPath}'. Skipping...");
+                    WriteLineTimestamp(
+                        "There was no crash" + $" report for dump '{dumpPath}'. Skipping..."
+                    );
                     continue;
                 }
 
-                WriteLineTimestamp("Reading crash report"
-                                 + $" '{crashReportPath}'...");
+                WriteLineTimestamp("Reading crash report" + $" '{crashReportPath}'...");
                 WriteLineTimestamp("Stack Trace Found:\n");
 
-                CoreclrTestWrapperLib.TryPrintStackTraceFromCrashReport(crashReportPath,
-                                                                        Console.Out);
+                CoreclrTestWrapperLib.TryPrintStackTraceFromCrashReport(
+                    crashReportPath,
+                    Console.Out
+                );
             }
         }
     }
 }
-

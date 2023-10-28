@@ -12,9 +12,11 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure;
 
 [Trait(Traits.Feature, Traits.Features.Outlining)]
-public class TypeDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTests<TypeDeclarationSyntax>
+public class TypeDeclarationStructureTests
+    : AbstractCSharpSyntaxNodeStructureTests<TypeDeclarationSyntax>
 {
-    internal override AbstractSyntaxStructureProvider CreateProvider() => new TypeDeclarationStructureProvider();
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new TypeDeclarationStructureProvider();
 
     [Fact]
     public async Task TestClass1()
@@ -25,8 +27,10 @@ public class TypeDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
                 }|}|}
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Theory]
@@ -39,7 +43,8 @@ public class TypeDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
     [InlineData("interface")]
     public async Task TestClass2(string typeKind)
     {
-        var code = $@"
+        var code =
+            $@"
 {{|hint:$$class C{{|textspan:
 {{
 }}|}}|}}
@@ -47,8 +52,10 @@ public class TypeDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
 {{
 }}";
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Theory]
@@ -61,7 +68,8 @@ public class TypeDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
     [InlineData("interface")]
     public async Task TestClass3(string typeKind)
     {
-        var code = $@"
+        var code =
+            $@"
 {{|hint:$$class C{{|textspan:
 {{
 }}|}}|}}
@@ -70,8 +78,10 @@ public class TypeDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
 {{
 }}";
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -85,9 +95,11 @@ public class TypeDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
                 }|}|}
                 """;
 
-        await VerifyBlockSpansAsync(code,
+        await VerifyBlockSpansAsync(
+            code,
             Region("span1", "// Goo ...", autoCollapse: true),
-            Region("textspan2", "hint2", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            Region("textspan2", "hint2", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -101,9 +113,11 @@ public class TypeDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
                 }|}|}
                 """;
 
-        await VerifyBlockSpansAsync(code,
+        await VerifyBlockSpansAsync(
+            code,
             Region("textspan1", "hint1", CSharpStructureHelpers.Ellipsis, autoCollapse: false),
-            Region("span2", "// Goo ...", autoCollapse: true));
+            Region("span2", "// Goo ...", autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -115,8 +129,10 @@ public class TypeDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
                 }|}|}
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Theory]
@@ -129,7 +145,8 @@ public class TypeDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
     [InlineData("interface")]
     public async Task TestInterface2(string typeKind)
     {
-        var code = $@"
+        var code =
+            $@"
 {{|hint:$$interface I{{|textspan:
 {{
 }}|}}|}}
@@ -137,8 +154,10 @@ public class TypeDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
 {{
 }}";
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Theory]
@@ -151,7 +170,8 @@ public class TypeDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
     [InlineData("interface")]
     public async Task TestInterface3(string typeKind)
     {
-        var code = $@"
+        var code =
+            $@"
 {{|hint:$$interface I{{|textspan:
 {{
 }}|}}|}}
@@ -160,8 +180,10 @@ public class TypeDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
 {{
 }}";
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -175,9 +197,11 @@ public class TypeDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
                 }|}|}
                 """;
 
-        await VerifyBlockSpansAsync(code,
+        await VerifyBlockSpansAsync(
+            code,
             Region("span1", "// Goo ...", autoCollapse: true),
-            Region("textspan2", "hint2", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            Region("textspan2", "hint2", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -191,9 +215,11 @@ public class TypeDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
                 }|}|}
                 """;
 
-        await VerifyBlockSpansAsync(code,
+        await VerifyBlockSpansAsync(
+            code,
             Region("textspan1", "hint1", CSharpStructureHelpers.Ellipsis, autoCollapse: false),
-            Region("span2", "// Goo ...", autoCollapse: true));
+            Region("span2", "// Goo ...", autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -205,8 +231,10 @@ public class TypeDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
                 }|}|}
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Theory]
@@ -219,7 +247,8 @@ public class TypeDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
     [InlineData("interface")]
     public async Task TestStruct2(string typeKind)
     {
-        var code = $@"
+        var code =
+            $@"
 {{|hint:$$struct C{{|textspan:
 {{
 }}|}}|}}
@@ -227,8 +256,10 @@ public class TypeDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
 {{
 }}";
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Theory]
@@ -241,7 +272,8 @@ public class TypeDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
     [InlineData("interface")]
     public async Task TestStruct3(string typeKind)
     {
-        var code = $@"
+        var code =
+            $@"
 {{|hint:$$struct C{{|textspan:
 {{
 }}|}}|}}
@@ -250,8 +282,10 @@ public class TypeDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
 {{
 }}";
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -265,9 +299,11 @@ public class TypeDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
                 }|}|}
                 """;
 
-        await VerifyBlockSpansAsync(code,
+        await VerifyBlockSpansAsync(
+            code,
             Region("span1", "// Goo ...", autoCollapse: true),
-            Region("textspan2", "hint2", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            Region("textspan2", "hint2", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -281,8 +317,10 @@ public class TypeDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTe
                 }|}|}
                 """;
 
-        await VerifyBlockSpansAsync(code,
+        await VerifyBlockSpansAsync(
+            code,
             Region("textspan1", "hint1", CSharpStructureHelpers.Ellipsis, autoCollapse: false),
-            Region("span2", "// Goo ...", autoCollapse: true));
+            Region("span2", "// Goo ...", autoCollapse: true)
+        );
     }
 }

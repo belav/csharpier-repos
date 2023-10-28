@@ -2,17 +2,16 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.IO;
-using System.Text;
-using System.Security;
-using System.Xml.Schema;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.Collections.Generic;
+using System.IO;
 using System.Runtime.Versioning;
-
+using System.Security;
+using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 
 namespace System.Xml
 {
@@ -28,12 +27,17 @@ namespace System.Xml
                 return _reader.DtdParserProxy_ReadDataAsync();
             }
 
-            Task<int> IDtdParserAdapter.ParseNumericCharRefAsync(StringBuilder? internalSubsetBuilder)
+            Task<int> IDtdParserAdapter.ParseNumericCharRefAsync(
+                StringBuilder? internalSubsetBuilder
+            )
             {
                 return _reader.DtdParserProxy_ParseNumericCharRefAsync(internalSubsetBuilder);
             }
 
-            Task<int> IDtdParserAdapter.ParseNamedCharRefAsync(bool expand, StringBuilder? internalSubsetBuilder)
+            Task<int> IDtdParserAdapter.ParseNamedCharRefAsync(
+                bool expand,
+                StringBuilder? internalSubsetBuilder
+            )
             {
                 return _reader.DtdParserProxy_ParseNamedCharRefAsync(expand, internalSubsetBuilder);
             }

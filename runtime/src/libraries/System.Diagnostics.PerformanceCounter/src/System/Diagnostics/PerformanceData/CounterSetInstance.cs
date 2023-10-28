@@ -24,7 +24,10 @@ namespace System.Diagnostics.PerformanceData
 
             if (instanceName.Length == 0)
             {
-                throw new ArgumentException(SR.Perflib_Argument_EmptyInstanceName, nameof(instanceName));
+                throw new ArgumentException(
+                    SR.Perflib_Argument_EmptyInstanceName,
+                    nameof(instanceName)
+                );
             }
 
             _counterSet = counterSetDefined;
@@ -32,9 +35,17 @@ namespace System.Diagnostics.PerformanceData
 
             Debug.Assert(sizeof(Interop.PerfCounter.PerfCounterSetInstanceStruct) == 32);
 
-            _nativeInst = Interop.PerfCounter.PerfCreateInstance(
-                    _counterSet._provider._hProvider, ref _counterSet._counterSet, _instName, 0);
-            int Status = (int)((_nativeInst != null) ? Interop.Errors.ERROR_SUCCESS : Marshal.GetLastWin32Error());
+            _nativeInst = Interop
+                .PerfCounter
+                .PerfCreateInstance(
+                    _counterSet._provider._hProvider,
+                    ref _counterSet._counterSet,
+                    _instName,
+                    0
+                );
+            int Status = (int)(
+                (_nativeInst != null) ? Interop.Errors.ERROR_SUCCESS : Marshal.GetLastWin32Error()
+            );
             if (_nativeInst != null)
             {
                 Counters = new CounterSetInstanceCounterDataSet(this);
@@ -49,15 +60,33 @@ namespace System.Diagnostics.PerformanceData
                 switch (Status)
                 {
                     case (int)Interop.Errors.ERROR_ALREADY_EXISTS:
-                        throw new ArgumentException(SR.Format(SR.Perflib_Argument_InstanceAlreadyExists, _instName, _counterSet._counterSet), nameof(instanceName));
+                        throw new ArgumentException(
+                            SR.Format(
+                                SR.Perflib_Argument_InstanceAlreadyExists,
+                                _instName,
+                                _counterSet._counterSet
+                            ),
+                            nameof(instanceName)
+                        );
 
                     case (int)Interop.Errors.ERROR_NOT_FOUND:
-                        throw new InvalidOperationException(SR.Format(SR.Perflib_InvalidOperation_CounterSetNotInstalled, _counterSet._counterSet));
+                        throw new InvalidOperationException(
+                            SR.Format(
+                                SR.Perflib_InvalidOperation_CounterSetNotInstalled,
+                                _counterSet._counterSet
+                            )
+                        );
 
                     case (int)Interop.Errors.ERROR_INVALID_PARAMETER:
                         if (_counterSet._instType == CounterSetInstanceType.Single)
                         {
-                            throw new ArgumentException(SR.Format(SR.Perflib_Argument_InvalidInstance, _counterSet._counterSet), nameof(instanceName));
+                            throw new ArgumentException(
+                                SR.Format(
+                                    SR.Perflib_Argument_InvalidInstance,
+                                    _counterSet._counterSet
+                                ),
+                                nameof(instanceName)
+                            );
                         }
                         else
                         {
@@ -101,7 +130,9 @@ namespace System.Diagnostics.PerformanceData
                     {
                         if (_counterSet._provider != null)
                         {
-                            Interop.PerfCounter.PerfDeleteInstance(_counterSet._provider._hProvider, _nativeInst);
+                            Interop
+                                .PerfCounter
+                                .PerfDeleteInstance(_counterSet._provider._hProvider, _nativeInst);
                         }
                         _nativeInst = null;
                     }

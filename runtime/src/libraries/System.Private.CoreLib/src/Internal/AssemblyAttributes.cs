@@ -3,13 +3,15 @@
 
 using System;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Resources;
+using System.Runtime.InteropServices;
 
 [assembly: CLSCompliant(true)]
 [assembly: ComVisible(false)]
 
-[assembly: DefaultDllImportSearchPaths(DllImportSearchPath.AssemblyDirectory | DllImportSearchPath.System32)]
+[assembly: DefaultDllImportSearchPaths(
+    DllImportSearchPath.AssemblyDirectory | DllImportSearchPath.System32
+)]
 
 [assembly: AssemblyMetadata("Serviceable", "True")]
 [assembly: AssemblyMetadata("IsTrimmable", "True")]

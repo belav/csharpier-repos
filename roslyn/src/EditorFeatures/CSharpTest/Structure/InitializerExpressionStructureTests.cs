@@ -12,10 +12,11 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure;
 
 [Trait(Traits.Feature, Traits.Features.Outlining)]
-public class InitializerExpressionStructureTests : AbstractCSharpSyntaxNodeStructureTests<InitializerExpressionSyntax>
+public class InitializerExpressionStructureTests
+    : AbstractCSharpSyntaxNodeStructureTests<InitializerExpressionSyntax>
 {
-    internal override AbstractSyntaxStructureProvider CreateProvider()
-        => new InitializerExpressionStructureProvider();
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new InitializerExpressionStructureProvider();
 
     [Fact]
     public async Task TestOuterInitializer()
@@ -33,7 +34,8 @@ public class InitializerExpressionStructureTests : AbstractCSharpSyntaxNodeStruc
                     }
                 }
                 """,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 
     [Fact]
@@ -54,6 +56,7 @@ public class InitializerExpressionStructureTests : AbstractCSharpSyntaxNodeStruc
                     }
                 }
                 """,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+        );
     }
 }

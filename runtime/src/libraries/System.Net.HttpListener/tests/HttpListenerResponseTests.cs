@@ -37,10 +37,17 @@ namespace System.Net.Tests
             int totalReceived = 0;
             while (totalReceived < expectedLength)
             {
-                int bytesReceived = Client.Receive(buffer, totalReceived, buffer.Length - totalReceived, SocketFlags.None);
+                int bytesReceived = Client.Receive(
+                    buffer,
+                    totalReceived,
+                    buffer.Length - totalReceived,
+                    SocketFlags.None
+                );
                 if (bytesReceived == 0)
                 {
-                    throw new Exception($"Unexpected early end of response: received {totalReceived} bytes, expected {expectedLength}");
+                    throw new Exception(
+                        $"Unexpected early end of response: received {totalReceived} bytes, expected {expectedLength}"
+                    );
                 }
                 totalReceived += bytesReceived;
             }
@@ -50,13 +57,25 @@ namespace System.Net.Tests
 
         protected async Task<HttpListenerResponse> GetResponse(string httpVersion = "1.1")
         {
-            Client.Send(Factory.GetContent(httpVersion, "POST", null, "Give me a context, please", null, headerOnly: false));
+            Client.Send(
+                Factory.GetContent(
+                    httpVersion,
+                    "POST",
+                    null,
+                    "Give me a context, please",
+                    null,
+                    headerOnly: false
+                )
+            );
             HttpListenerContext context = await Factory.GetListener().GetContextAsync();
             return context.Response;
         }
     }
 
-    [SkipOnCoreClr("System.Net.Tests may timeout in stress configurations", ~RuntimeConfiguration.Release)]
+    [SkipOnCoreClr(
+        "System.Net.Tests may timeout in stress configurations",
+        ~RuntimeConfiguration.Release
+    )]
     [ActiveIssue("https://github.com/dotnet/runtime/issues/2391", TestRuntimes.Mono)]
     [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer))] // httpsys component missing in Nano.
     public class HttpListenerResponseTests : HttpListenerResponseTestBase
@@ -65,7 +84,9 @@ namespace System.Net.Tests
         public async Task CopyFrom_AllValues_ReturnsClone()
         {
             using (HttpListenerResponse response1 = await GetResponse())
-            using (HttpListenerResponse response2 = await new HttpListenerResponseTests().GetResponse())
+            using (
+                HttpListenerResponse response2 = await new HttpListenerResponseTests().GetResponse()
+            )
             {
                 // CopyFrom overrides old headers.
                 response2.Headers.Add("Name2", "Value2");
@@ -113,7 +134,10 @@ namespace System.Net.Tests
         [InlineData(" \r \t \n", 123)]
         [InlineData("http://microsoft.com", 155)]
         [InlineData("  http://microsoft.com  ", 155)]
-        public async Task Redirect_Invoke_SetsRedirectionProperties(string url, int expectedNumberOfBytes)
+        public async Task Redirect_Invoke_SetsRedirectionProperties(
+            string url,
+            int expectedNumberOfBytes
+        )
         {
             string expectedUrl = url?.Trim() ?? "";
 
@@ -157,7 +181,16 @@ namespace System.Net.Tests
         [ConditionalFact(nameof(Helpers) + "." + nameof(Helpers.IsWindowsImplementation))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/21808", TestPlatforms.AnyUnix)]
         public async Task Abort_Invoke_ForciblyTerminatesConnection()
         {
-            Client.Send(Factory.GetContent("1.1", "POST", null, "Give me a context, please", null, headerOnly: false));
+            Client.Send(
+                Factory.GetContent(
+                    "1.1",
+                    "POST",
+                    null,
+                    "Give me a context, please",
+                    null,
+                    headerOnly: false
+                )
+            );
             HttpListenerContext context = await Factory.GetListener().GetContextAsync();
             HttpListenerResponse response = context.Response;
             Stream outputStream = response.OutputStream;
@@ -268,7 +301,9 @@ namespace System.Net.Tests
         [ConditionalTheory(nameof(Helpers) + "." + nameof(Helpers.IsWindowsImplementation))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/21918", TestPlatforms.AnyUnix)]
         [InlineData(true)]
         [InlineData(false)]
-        public async Task CloseResponseEntity_AllContentLengthAlreadySent_DoesNotSendEntity(bool willBlock)
+        public async Task CloseResponseEntity_AllContentLengthAlreadySent_DoesNotSendEntity(
+            bool willBlock
+        )
         {
             using (HttpListenerResponse response = await GetResponse())
             {
@@ -288,7 +323,9 @@ namespace System.Net.Tests
         [InlineData(true)]
         [InlineData(false)]
         [OuterLoop("Investigating reliability in CI.")]
-        public async Task CloseResponseEntity_NotChunkedSentHeaders_SendsEntityWithoutModifyingContentLength(bool willBlock)
+        public async Task CloseResponseEntity_NotChunkedSentHeaders_SendsEntityWithoutModifyingContentLength(
+            bool willBlock
+        )
         {
             using (HttpListenerResponse response = await GetResponse())
             {
@@ -308,7 +345,9 @@ namespace System.Net.Tests
         [InlineData(true)]
         [InlineData(false)]
         [OuterLoop("Investigating reliability in CI.")]
-        public async Task CloseResponseEntity_ChunkedNotSentHeaders_ModifiesContentLength(bool willBlock)
+        public async Task CloseResponseEntity_ChunkedNotSentHeaders_ModifiesContentLength(
+            bool willBlock
+        )
         {
             using (HttpListenerResponse response = await GetResponse())
             {
@@ -326,7 +365,9 @@ namespace System.Net.Tests
         [InlineData(true)]
         [InlineData(false)]
         [OuterLoop("Investigating reliability in CI.")]
-        public async Task CloseResponseEntity_ChunkedSentHeaders_DoesNotModifyContentLength(bool willBlock)
+        public async Task CloseResponseEntity_ChunkedSentHeaders_DoesNotModifyContentLength(
+            bool willBlock
+        )
         {
             using (HttpListenerResponse response = await GetResponse())
             {
@@ -355,14 +396,19 @@ namespace System.Net.Tests
         {
             using (HttpListenerResponse response = await GetResponse())
             {
-                AssertExtensions.Throws<ArgumentNullException>("responseEntity", () => response.Close(null, true));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "responseEntity",
+                    () => response.Close(null, true)
+                );
             }
         }
 
         [ConditionalTheory(nameof(Helpers) + "." + nameof(Helpers.IsWindowsImplementation))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/21918", TestPlatforms.AnyUnix)]
         [InlineData(true)]
         [InlineData(false)]
-        public async Task CloseResponseEntity_SendMoreThanContentLength_ThrowsInvalidOperationException(bool willBlock)
+        public async Task CloseResponseEntity_SendMoreThanContentLength_ThrowsInvalidOperationException(
+            bool willBlock
+        )
         {
             HttpListenerResponse response = await GetResponse();
             try
@@ -372,14 +418,18 @@ namespace System.Net.Tests
 
                 if (willBlock)
                 {
-                    Assert.Throws<InvalidOperationException>(() => response.Close(new byte[] { (byte)'a', (byte)'b' }, willBlock));
+                    Assert.Throws<InvalidOperationException>(
+                        () => response.Close(new byte[] { (byte)'a', (byte)'b' }, willBlock)
+                    );
                 }
                 else
                 {
                     // Since this is non-blocking, an InvalidOperation or ProtocolViolationException may be thrown,
                     // depending on timing. This is because any exceptions are swallowed up by NonBlockingCloseCallback,
                     // but the response could have closed before that.
-                    Assert.ThrowsAny<InvalidOperationException>(() => response.Close(new byte[] { (byte)'a', (byte)'b' }, willBlock));
+                    Assert.ThrowsAny<InvalidOperationException>(
+                        () => response.Close(new byte[] { (byte)'a', (byte)'b' }, willBlock)
+                    );
                 }
 
                 string clientResponse = GetClientResponse(110);

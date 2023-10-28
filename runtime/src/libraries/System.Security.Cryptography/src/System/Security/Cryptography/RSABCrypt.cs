@@ -10,13 +10,17 @@ namespace System.Security.Cryptography
 {
     internal sealed class RSABCrypt : RSA
     {
-        private static readonly SafeBCryptAlgorithmHandle s_algHandle =
-            Interop.BCrypt.BCryptOpenAlgorithmProvider(BCryptNative.AlgorithmName.RSA);
+        private static readonly SafeBCryptAlgorithmHandle s_algHandle = Interop
+            .BCrypt
+            .BCryptOpenAlgorithmProvider(BCryptNative.AlgorithmName.RSA);
 
         // See https://msdn.microsoft.com/en-us/library/windows/desktop/bb931354(v=vs.85).aspx
         // All values are in bits.
-        private static readonly KeySizes s_keySizes =
-            new KeySizes(minSize: 512, maxSize: 16384, skipSize: 64);
+        private static readonly KeySizes s_keySizes = new KeySizes(
+            minSize: 512,
+            maxSize: 16384,
+            skipSize: 64
+        );
 
         private SafeBCryptKeyHandle? _key;
         private int _lastKeySize;
@@ -59,9 +63,12 @@ namespace System.Security.Cryptography
         {
             Debug.Assert(!newKey.IsInvalid);
 
-            int keySize = Interop.BCrypt.BCryptGetDWordProperty(
-                newKey,
-                Interop.BCrypt.BCryptPropertyStrings.BCRYPT_KEY_STRENGTH);
+            int keySize = Interop
+                .BCrypt
+                .BCryptGetDWordProperty(
+                    newKey,
+                    Interop.BCrypt.BCryptPropertyStrings.BCRYPT_KEY_STRENGTH
+                );
 
             SafeBCryptKeyHandle? oldKey = Interlocked.Exchange(ref _key, newKey);
             ForceSetKeySize(keySize);
@@ -72,11 +79,14 @@ namespace System.Security.Cryptography
         {
             SafeBCryptKeyHandle key = GetKey();
 
-            ArraySegment<byte> keyBlob = Interop.BCrypt.BCryptExportKey(
-                key,
-                includePrivateParameters ?
-                    Interop.BCrypt.KeyBlobType.BCRYPT_RSAFULLPRIVATE_BLOB :
-                    Interop.BCrypt.KeyBlobType.BCRYPT_RSAPUBLIC_KEY_BLOB);
+            ArraySegment<byte> keyBlob = Interop
+                .BCrypt
+                .BCryptExportKey(
+                    key,
+                    includePrivateParameters
+                        ? Interop.BCrypt.KeyBlobType.BCRYPT_RSAFULLPRIVATE_BLOB
+                        : Interop.BCrypt.KeyBlobType.BCRYPT_RSAPUBLIC_KEY_BLOB
+                );
 
             RSAParameters ret = default;
             ret.FromBCryptBlob(keyBlob, includePrivateParameters);
@@ -98,12 +108,15 @@ namespace System.Security.Cryptography
 
             try
             {
-                newKey = Interop.BCrypt.BCryptImportKeyPair(
-                    s_algHandle,
-                    parameters.D != null ?
-                        Interop.BCrypt.KeyBlobType.BCRYPT_RSAPRIVATE_BLOB :
-                        Interop.BCrypt.KeyBlobType.BCRYPT_RSAPUBLIC_KEY_BLOB,
-                    keyBlob);
+                newKey = Interop
+                    .BCrypt
+                    .BCryptImportKeyPair(
+                        s_algHandle,
+                        parameters.D != null
+                            ? Interop.BCrypt.KeyBlobType.BCRYPT_RSAPRIVATE_BLOB
+                            : Interop.BCrypt.KeyBlobType.BCRYPT_RSAPUBLIC_KEY_BLOB,
+                        keyBlob
+                    );
             }
             finally
             {
@@ -138,7 +151,8 @@ namespace System.Security.Cryptography
         public override byte[] SignHash(
             byte[] hash,
             HashAlgorithmName hashAlgorithm,
-            RSASignaturePadding padding)
+            RSASignaturePadding padding
+        )
         {
             ArgumentNullException.ThrowIfNull(hash);
             ArgumentException.ThrowIfNullOrEmpty(hashAlgorithm.Name, nameof(hashAlgorithm));
@@ -150,7 +164,8 @@ namespace System.Security.Cryptography
                 new ReadOnlySpan<byte>(hash),
                 ret.AsSpan(),
                 hashAlgorithm,
-                padding);
+                padding
+            );
 
             VerifyWritten(ret, written);
             return ret;
@@ -160,7 +175,8 @@ namespace System.Security.Cryptography
             byte[] hash,
             byte[] signature,
             HashAlgorithmName hashAlgorithm,
-            RSASignaturePadding padding)
+            RSASignaturePadding padding
+        )
         {
             ArgumentNullException.ThrowIfNull(hash);
             ArgumentNullException.ThrowIfNull(signature);
@@ -171,14 +187,16 @@ namespace System.Security.Cryptography
                 new ReadOnlySpan<byte>(hash),
                 new ReadOnlySpan<byte>(signature),
                 hashAlgorithm,
-                padding);
+                padding
+            );
         }
 
         public override bool TryDecrypt(
             ReadOnlySpan<byte> data,
             Span<byte> destination,
             RSAEncryptionPadding padding,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             ArgumentNullException.ThrowIfNull(padding);
 
@@ -193,14 +211,19 @@ namespace System.Security.Cryptography
             switch (padding.Mode)
             {
                 case RSAEncryptionPaddingMode.Pkcs1:
-                    return Interop.BCrypt.BCryptDecryptPkcs1(key, data, destination, out bytesWritten);
+                    return Interop
+                        .BCrypt
+                        .BCryptDecryptPkcs1(key, data, destination, out bytesWritten);
                 case RSAEncryptionPaddingMode.Oaep:
-                    return Interop.BCrypt.BCryptDecryptOaep(
-                        key,
-                        data,
-                        destination,
-                        padding.OaepHashAlgorithm.Name,
-                        out bytesWritten);
+                    return Interop
+                        .BCrypt
+                        .BCryptDecryptOaep(
+                            key,
+                            data,
+                            destination,
+                            padding.OaepHashAlgorithm.Name,
+                            out bytesWritten
+                        );
             }
 
             throw new CryptographicException(SR.Cryptography_UnsupportedPaddingMode);
@@ -210,7 +233,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> data,
             Span<byte> destination,
             RSAEncryptionPadding padding,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             ArgumentNullException.ThrowIfNull(padding);
 
@@ -233,17 +257,17 @@ namespace System.Security.Cryptography
                         throw new CryptographicException(
                             SR.Format(
                                 SR.Cryptography_Encryption_MessageTooLong,
-                                modulusSizeInBytes - Pkcs1PaddingOverhead));
+                                modulusSizeInBytes - Pkcs1PaddingOverhead
+                            )
+                        );
                     }
 
                     bytesWritten = Interop.BCrypt.BCryptEncryptPkcs1(key, data, destination);
                     return true;
                 case RSAEncryptionPaddingMode.Oaep:
-                    bytesWritten = Interop.BCrypt.BCryptEncryptOaep(
-                        key,
-                        data,
-                        destination,
-                        padding.OaepHashAlgorithm.Name);
+                    bytesWritten = Interop
+                        .BCrypt
+                        .BCryptEncryptOaep(key, data, destination, padding.OaepHashAlgorithm.Name);
 
                     return true;
             }
@@ -256,7 +280,8 @@ namespace System.Security.Cryptography
             Span<byte> destination,
             HashAlgorithmName hashAlgorithm,
             RSASignaturePadding padding,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             string? hashAlgorithmName = hashAlgorithm.Name;
             ArgumentException.ThrowIfNullOrEmpty(hashAlgorithmName, nameof(hashAlgorithm));
@@ -275,21 +300,21 @@ namespace System.Security.Cryptography
             switch (padding.Mode)
             {
                 case RSASignaturePaddingMode.Pkcs1:
-                    status = Interop.BCrypt.BCryptSignHashPkcs1(
-                        key,
-                        hash,
-                        destination,
-                        hashAlgorithmName,
-                        out written);
+                    status = Interop
+                        .BCrypt
+                        .BCryptSignHashPkcs1(
+                            key,
+                            hash,
+                            destination,
+                            hashAlgorithmName,
+                            out written
+                        );
 
                     break;
                 case RSASignaturePaddingMode.Pss:
-                    status = Interop.BCrypt.BCryptSignHashPss(
-                        key,
-                        hash,
-                        destination,
-                        hashAlgorithmName,
-                        out written);
+                    status = Interop
+                        .BCrypt
+                        .BCryptSignHashPss(key, hash, destination, hashAlgorithmName, out written);
 
                     break;
                 default:
@@ -315,7 +340,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> hash,
             ReadOnlySpan<byte> signature,
             HashAlgorithmName hashAlgorithm,
-            RSASignaturePadding padding)
+            RSASignaturePadding padding
+        )
         {
             string? hashAlgorithmName = hashAlgorithm.Name;
             ArgumentException.ThrowIfNullOrEmpty(hashAlgorithmName, nameof(hashAlgorithm));
@@ -331,17 +357,13 @@ namespace System.Security.Cryptography
             switch (padding.Mode)
             {
                 case RSASignaturePaddingMode.Pkcs1:
-                    return Interop.BCrypt.BCryptVerifySignaturePkcs1(
-                        key,
-                        hash,
-                        signature,
-                        hashAlgorithmName);
+                    return Interop
+                        .BCrypt
+                        .BCryptVerifySignaturePkcs1(key, hash, signature, hashAlgorithmName);
                 case RSASignaturePaddingMode.Pss:
-                    return Interop.BCrypt.BCryptVerifySignaturePss(
-                        key,
-                        hash,
-                        signature,
-                        hashAlgorithmName);
+                    return Interop
+                        .BCrypt
+                        .BCryptVerifySignaturePss(key, hash, signature, hashAlgorithmName);
                 default:
                     throw new CryptographicException(SR.Cryptography_UnsupportedPaddingMode);
             }
@@ -352,7 +374,8 @@ namespace System.Security.Cryptography
         public override unsafe void ImportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<byte> passwordBytes,
             ReadOnlySpan<byte> source,
-            out int bytesRead)
+            out int bytesRead
+        )
         {
             ThrowIfDisposed();
             base.ImportEncryptedPkcs8PrivateKey(passwordBytes, source, out bytesRead);
@@ -361,13 +384,17 @@ namespace System.Security.Cryptography
         public override unsafe void ImportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<char> password,
             ReadOnlySpan<byte> source,
-            out int bytesRead)
+            out int bytesRead
+        )
         {
             ThrowIfDisposed();
             base.ImportEncryptedPkcs8PrivateKey(password, source, out bytesRead);
         }
 
-        public override unsafe void ImportPkcs8PrivateKey(ReadOnlySpan<byte> source, out int bytesRead)
+        public override unsafe void ImportPkcs8PrivateKey(
+            ReadOnlySpan<byte> source,
+            out int bytesRead
+        )
         {
             ThrowIfDisposed();
             base.ImportPkcs8PrivateKey(source, out bytesRead);
@@ -385,7 +412,10 @@ namespace System.Security.Cryptography
             base.ImportRSAPublicKey(source, out bytesRead);
         }
 
-        public override void ImportSubjectPublicKeyInfo(ReadOnlySpan<byte> source, out int bytesRead)
+        public override void ImportSubjectPublicKeyInfo(
+            ReadOnlySpan<byte> source,
+            out int bytesRead
+        )
         {
             ThrowIfDisposed();
             base.ImportSubjectPublicKeyInfo(source, out bytesRead);
@@ -416,7 +446,8 @@ namespace System.Security.Cryptography
             if (array.Length != written)
             {
                 Debug.Fail(
-                    $"An array-filling operation wrote {written} when {array.Length} was expected.");
+                    $"An array-filling operation wrote {written} when {array.Length} was expected."
+                );
 
                 throw new CryptographicException();
             }

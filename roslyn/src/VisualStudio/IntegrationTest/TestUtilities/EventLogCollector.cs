@@ -68,7 +68,14 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// The Event Id in the Event Log for .DotNetRuntime that we want to scope down to
         /// 1023 - ERT_UnmanagedFailFast, 1025 - ERT_ManagedFailFast, 1026 - ERT_UnhandledException, 1027 - ERT_StackOverflow, 1028 - ERT_CodeContractFailed
         /// </summary>
-        private static readonly ImmutableArray<int> s_dotNetEventId = ImmutableArray.Create(1023, 1024, 1025, 1026, 1027, 1028);
+        private static readonly ImmutableArray<int> s_dotNetEventId = ImmutableArray.Create(
+            1023,
+            1024,
+            1025,
+            1026,
+            1027,
+            1028
+        );
 
         /// <summary>
         /// List of EventNames to exclude from our search in the Event Log
@@ -82,38 +89,40 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// <summary>
         /// List of VS EXEs to search in the Event Log for
         /// </summary>
-        internal static HashSet<string> VsRelatedExes = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        internal static HashSet<string> VsRelatedExes = new HashSet<string>(
+            StringComparer.OrdinalIgnoreCase
+        )
         {
-                "devenv.exe",
-                "csc.exe",
-                "csi.exe",
-                "git.exe",
-                "msbuild.exe",
-                "MSBuildTaskHost.exe",
-                "mspdbsrv.exe",
-                "MStest.exe",
-                "RunTests.exe",
-                "ServiceHub.Host.CLR.exe",
-                "ServiceHub.Host.CLR.x64.exe",
-                "ServiceHub.Host.CLR.x86.exe",
-                "ServiceHub.IdentityHost.exe",
-                "ServiceHub.RoslynCodeAnalysisService.exe",
-                "ServiceHub.RoslynCodeAnalysisService32.exe",
-                "ServiceHub.SettingsHost.exe",
-                "ServiceHub.VSDetouredHost.exe",
-                "vbc.exe",
-                "VBCSCompiler.exe",
-                "VStest.Console.Exe",
-                "VSTest.DiscoveryEngine.exe",
-                "VSTest.DiscoveryEngine.x86.exe",
-                "vstest.executionengine.appcontainer.exe",
-                "vstest.executionengine.appcontainer.x86.exe",
-                "vstest.executionengine.clr20.exe",
-                "VSTest.executionEngine.exe",
-                "VSTest.executionEngine.x86.exe",
-                "xunit.console.exe",
-                "xunit.console.x86.exe",
-            };
+            "devenv.exe",
+            "csc.exe",
+            "csi.exe",
+            "git.exe",
+            "msbuild.exe",
+            "MSBuildTaskHost.exe",
+            "mspdbsrv.exe",
+            "MStest.exe",
+            "RunTests.exe",
+            "ServiceHub.Host.CLR.exe",
+            "ServiceHub.Host.CLR.x64.exe",
+            "ServiceHub.Host.CLR.x86.exe",
+            "ServiceHub.IdentityHost.exe",
+            "ServiceHub.RoslynCodeAnalysisService.exe",
+            "ServiceHub.RoslynCodeAnalysisService32.exe",
+            "ServiceHub.SettingsHost.exe",
+            "ServiceHub.VSDetouredHost.exe",
+            "vbc.exe",
+            "VBCSCompiler.exe",
+            "VStest.Console.Exe",
+            "VSTest.DiscoveryEngine.exe",
+            "VSTest.DiscoveryEngine.x86.exe",
+            "vstest.executionengine.appcontainer.exe",
+            "vstest.executionengine.appcontainer.x86.exe",
+            "vstest.executionengine.clr20.exe",
+            "VSTest.executionEngine.exe",
+            "VSTest.executionEngine.x86.exe",
+            "xunit.console.exe",
+            "xunit.console.x86.exe",
+        };
 
         /// <summary>
         /// Get the WER entries for VS and VS related EXEs from the Event Log and write them to a file
@@ -147,7 +156,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                             watsonEntries.Add(entry);
 
                             // If the entry doesn't have a valid BucketId, we don't want it to count towards the maxCount we send
-                            if (!string.IsNullOrWhiteSpace(GetEventRecordPropertyToString(eventLogRecord, FaultBucketIndex)))
+                            if (
+                                !string.IsNullOrWhiteSpace(
+                                    GetEventRecordPropertyToString(eventLogRecord, FaultBucketIndex)
+                                )
+                            )
                             {
                                 watsonEntriesCount++;
                             }
@@ -164,16 +177,30 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                     var watsonEntriesStringBuilder = new StringBuilder();
                     foreach (var entry in watsonEntries)
                     {
-                        watsonEntriesStringBuilder.AppendLine($"Event Time (UTC): {entry.EventTime}");
-                        watsonEntriesStringBuilder.AppendLine($"Application Name: {entry.ApplicationName}");
-                        watsonEntriesStringBuilder.AppendLine($"Application Version: {entry.ApplicationVersion}");
-                        watsonEntriesStringBuilder.AppendLine($"Faulting Module: {entry.FaultingModule}");
-                        watsonEntriesStringBuilder.AppendLine($"Faulting Module Version: {entry.FaultingModuleVersion}");
+                        watsonEntriesStringBuilder.AppendLine(
+                            $"Event Time (UTC): {entry.EventTime}"
+                        );
+                        watsonEntriesStringBuilder.AppendLine(
+                            $"Application Name: {entry.ApplicationName}"
+                        );
+                        watsonEntriesStringBuilder.AppendLine(
+                            $"Application Version: {entry.ApplicationVersion}"
+                        );
+                        watsonEntriesStringBuilder.AppendLine(
+                            $"Faulting Module: {entry.FaultingModule}"
+                        );
+                        watsonEntriesStringBuilder.AppendLine(
+                            $"Faulting Module Version: {entry.FaultingModuleVersion}"
+                        );
                         watsonEntriesStringBuilder.AppendLine($"Event Name: {entry.EventName}");
                         watsonEntriesStringBuilder.AppendLine($"Cab Id: {entry.CabId}");
                         watsonEntriesStringBuilder.AppendLine($"Fault Bucket: {entry.FaultBucket}");
-                        watsonEntriesStringBuilder.AppendLine($"Hashed Bucket: {entry.HashedBucket}");
-                        watsonEntriesStringBuilder.AppendLine($"Watson Report Id: {entry.WatsonReportId}");
+                        watsonEntriesStringBuilder.AppendLine(
+                            $"Hashed Bucket: {entry.HashedBucket}"
+                        );
+                        watsonEntriesStringBuilder.AppendLine(
+                            $"Watson Report Id: {entry.WatsonReportId}"
+                        );
                         watsonEntriesStringBuilder.AppendLine();
                     }
 
@@ -226,9 +253,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                     var dotNetEntriesStringBuilder = new StringBuilder();
                     foreach (var entry in dotNetEntries)
                     {
-                        dotNetEntriesStringBuilder.AppendLine($"Event Time (UTC): {entry.EventTime}");
+                        dotNetEntriesStringBuilder.AppendLine(
+                            $"Event Time (UTC): {entry.EventTime}"
+                        );
                         dotNetEntriesStringBuilder.AppendLine($"Event ID: {entry.EventId}");
-                        dotNetEntriesStringBuilder.AppendLine($"Data: {entry.Data.Replace("\n", "\r\n")}");
+                        dotNetEntriesStringBuilder.AppendLine(
+                            $"Data: {entry.Data.Replace("\n", "\r\n")}"
+                        );
                         dotNetEntriesStringBuilder.AppendLine();
                     }
 
@@ -246,12 +277,20 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// </summary>
         /// <param name="eventLogRecord">Event entry to be checked</param>
         /// <param name="entriesCount">List of already valid entries</param>
-        private static bool IsLastDayOrLastFiveRecentEntry(EventRecord eventLogRecord, int entriesCount)
+        private static bool IsLastDayOrLastFiveRecentEntry(
+            EventRecord eventLogRecord,
+            int entriesCount
+        )
         {
             // This is local time (it will be later converted to UTC when we send the feedback)
-            if (eventLogRecord.TimeCreated.HasValue
+            if (
+                eventLogRecord.TimeCreated.HasValue
                 && (eventLogRecord.TimeCreated.Value > DateTime.Now.AddDays(-MaxDaysToGetEventsFor))
-                && ((eventLogRecord.TimeCreated.Value > DateTime.Now.AddDays(-DaysToGetEventsFor)) || (entriesCount < MinimumEntries)))
+                && (
+                    (eventLogRecord.TimeCreated.Value > DateTime.Now.AddDays(-DaysToGetEventsFor))
+                    || (entriesCount < MinimumEntries)
+                )
+            )
             {
                 return true;
             }
@@ -266,11 +305,27 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// <param name="eventLogRecord">Entry to be checked</param>
         private static bool IsValidWatsonEntry(EventRecord eventLogRecord)
         {
-            if (StringComparer.InvariantCultureIgnoreCase.Equals(eventLogRecord.ProviderName, WatsonProviderName)
+            if (
+                StringComparer
+                    .InvariantCultureIgnoreCase
+                    .Equals(eventLogRecord.ProviderName, WatsonProviderName)
                 && (eventLogRecord.Id == WatsonEventId)
                 && (eventLogRecord.Properties.Count >= WatsonEventLogEntryPropertyCount)
-                && (!ExcludedEventNames.Contains(GetEventRecordPropertyToString(eventLogRecord, FeedbackItemWatsonEntry.EventNameIndex)))
-                && VsRelatedExes.Contains(GetEventRecordPropertyToString(eventLogRecord, FeedbackItemWatsonEntry.ApplicationNameIndex)))
+                && (
+                    !ExcludedEventNames.Contains(
+                        GetEventRecordPropertyToString(
+                            eventLogRecord,
+                            FeedbackItemWatsonEntry.EventNameIndex
+                        )
+                    )
+                )
+                && VsRelatedExes.Contains(
+                    GetEventRecordPropertyToString(
+                        eventLogRecord,
+                        FeedbackItemWatsonEntry.ApplicationNameIndex
+                    )
+                )
+            )
             {
                 return true;
             }
@@ -283,15 +338,25 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// the provider, if it's for certain event log IDs and for VS related EXEs
         /// </summary>
         /// <param name="eventLogRecord">Entry to be checked</param>
-        private static bool IsValidDotNetEntry(EventRecord eventLogRecord, [NotNullWhen(true)] out FeedbackItemDotNetEntry? dotNetEntry)
+        private static bool IsValidDotNetEntry(
+            EventRecord eventLogRecord,
+            [NotNullWhen(true)] out FeedbackItemDotNetEntry? dotNetEntry
+        )
         {
-            if (StringComparer.InvariantCultureIgnoreCase.Equals(eventLogRecord.ProviderName, DotNetProviderName)
-                 && s_dotNetEventId.Contains(eventLogRecord.Id))
+            if (
+                StringComparer
+                    .InvariantCultureIgnoreCase
+                    .Equals(eventLogRecord.ProviderName, DotNetProviderName)
+                && s_dotNetEventId.Contains(eventLogRecord.Id)
+            )
             {
                 dotNetEntry = new FeedbackItemDotNetEntry(eventLogRecord);
                 foreach (var app in VsRelatedExes)
                 {
-                    if (dotNetEntry.Data.IndexOf(app, StringComparison.InvariantCultureIgnoreCase) >= 0)
+                    if (
+                        dotNetEntry.Data.IndexOf(app, StringComparison.InvariantCultureIgnoreCase)
+                        >= 0
+                    )
                     {
                         return true;
                     }

@@ -4,15 +4,13 @@
 using System.Collections;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Text;
 using System.Runtime.InteropServices;
-using System.Security.Principal;
 using System.Runtime.Versioning;
+using System.Security.Principal;
+using System.Text;
 
 namespace System.DirectoryServices.Protocols
 {
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
-    internal partial struct SortKeyInterop
-    {
-    }
+    internal partial struct SortKeyInterop { }
 }

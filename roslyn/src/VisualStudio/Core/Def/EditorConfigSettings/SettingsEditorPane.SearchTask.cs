@@ -18,11 +18,13 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             private readonly IThreadingContext _threadingContext;
             private readonly IWpfTableControl[] _controls;
 
-            public SearchTask(uint dwCookie,
-                              IVsSearchQuery pSearchQuery,
-                              IVsSearchCallback pSearchCallback,
-                              IWpfTableControl[] controls,
-                              IThreadingContext threadingContext)
+            public SearchTask(
+                uint dwCookie,
+                IVsSearchQuery pSearchQuery,
+                IVsSearchCallback pSearchCallback,
+                IWpfTableControl[] controls,
+                IThreadingContext threadingContext
+            )
                 : base(dwCookie, pSearchQuery, pSearchCallback)
             {
                 _threadingContext = threadingContext;
@@ -31,13 +33,17 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
 
             protected override void OnStartSearch()
             {
-                _ = _threadingContext.JoinableTaskFactory.RunAsync(
-                    async () =>
+                _ = _threadingContext
+                    .JoinableTaskFactory
+                    .RunAsync(async () =>
                     {
                         await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
                         foreach (var control in _controls)
                         {
-                            _ = control.SetFilter(string.Empty, new SearchFilter(SearchQuery, control));
+                            _ = control.SetFilter(
+                                string.Empty,
+                                new SearchFilter(SearchQuery, control)
+                            );
                         }
 
                         await TaskScheduler.Default;
@@ -55,8 +61,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
 
             protected override void OnStopSearch()
             {
-                _ = _threadingContext.JoinableTaskFactory.RunAsync(
-                    async () =>
+                _ = _threadingContext
+                    .JoinableTaskFactory
+                    .RunAsync(async () =>
                     {
                         await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
                         foreach (var control in _controls)

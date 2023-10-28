@@ -25,9 +25,7 @@ public class UrlPrefixCollection : ICollection<UrlPrefix>
     private const int MaxRetries = 1000;
     private static int NextPortIndex;
 
-    internal UrlPrefixCollection()
-    {
-    }
+    internal UrlPrefixCollection() { }
 
     /// <inheritdoc />
     public int Count
@@ -80,7 +78,13 @@ public class UrlPrefixCollection : ICollection<UrlPrefix>
         }
     }
 
-    internal bool TryMatchLongestPrefix(bool isHttps, string host, string originalPath, [NotNullWhen(true)] out string? pathBase, [NotNullWhen(true)] out string? remainingPath)
+    internal bool TryMatchLongestPrefix(
+        bool isHttps,
+        string host,
+        string originalPath,
+        [NotNullWhen(true)] out string? pathBase,
+        [NotNullWhen(true)] out string? remainingPath
+    )
     {
         var originalPathString = new PathString(originalPath);
         var found = false;
@@ -92,10 +96,16 @@ public class UrlPrefixCollection : ICollection<UrlPrefix>
             {
                 // The scheme, host, port, and start of path must match.
                 // Note this does not currently handle prefixes with wildcard subdomains.
-                if (isHttps == prefix.IsHttps
+                if (
+                    isHttps == prefix.IsHttps
                     && string.Equals(host, prefix.HostAndPort, StringComparison.OrdinalIgnoreCase)
-                    && originalPathString.StartsWithSegments(new PathString(prefix.PathWithoutTrailingSlash), StringComparison.OrdinalIgnoreCase, out var remainder)
-                    && (!found || remainder.Value!.Length < remainingPath!.Length)) // Longest match
+                    && originalPathString.StartsWithSegments(
+                        new PathString(prefix.PathWithoutTrailingSlash),
+                        StringComparison.OrdinalIgnoreCase,
+                        out var remainder
+                    )
+                    && (!found || remainder.Value!.Length < remainingPath!.Length)
+                ) // Longest match
                 {
                     found = true;
                     pathBase = originalPath.Substring(0, prefix.PathWithoutTrailingSlash.Length); // Maintain the input casing
@@ -224,7 +234,12 @@ public class UrlPrefixCollection : ICollection<UrlPrefix>
 
                 Debug.Assert(port >= 5000 || port < 8000);
 
-                var newPrefix = UrlPrefix.Create(urlPrefix.Scheme, urlPrefix.Host, port, urlPrefix.Path);
+                var newPrefix = UrlPrefix.Create(
+                    urlPrefix.Scheme,
+                    urlPrefix.Host,
+                    port,
+                    urlPrefix.Path
+                );
                 _urlGroup.RegisterPrefix(newPrefix.FullPrefix, key);
                 _prefixes[key] = newPrefix;
 
@@ -233,9 +248,14 @@ public class UrlPrefixCollection : ICollection<UrlPrefix>
             }
             catch (HttpSysException ex)
             {
-                if ((ex.ErrorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_ACCESS_DENIED
-                    && ex.ErrorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SHARING_VIOLATION
-                    && ex.ErrorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_ALREADY_EXISTS) || index == MaxRetries - 1)
+                if (
+                    (
+                        ex.ErrorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_ACCESS_DENIED
+                        && ex.ErrorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SHARING_VIOLATION
+                        && ex.ErrorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_ALREADY_EXISTS
+                    )
+                    || index == MaxRetries - 1
+                )
                 {
                     throw;
                 }

@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Xml.XPath;
 
 namespace System.Xml
@@ -104,7 +104,7 @@ namespace System.Xml
         public bool MoveNext()
         {
             _index++;
-            int count = _list.ReadUntil(_index + 1);   // read past for delete-node case
+            int count = _list.ReadUntil(_index + 1); // read past for delete-node case
             if (count - 1 < _index)
             {
                 return false;

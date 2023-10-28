@@ -34,22 +34,33 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// Given an <see cref="IUIAutomationElement"/>, returns a descendant with the automation ID specified by <paramref name="automationId"/>.
         /// Throws an <see cref="InvalidOperationException"/> if no such descendant is found.
         /// </summary>
-        public static IUIAutomationElement FindDescendantByAutomationId(this IUIAutomationElement parent, string automationId)
+        public static IUIAutomationElement FindDescendantByAutomationId(
+            this IUIAutomationElement parent,
+            string automationId
+        )
         {
             if (parent == null)
             {
                 throw new ArgumentNullException(nameof(parent));
             }
 
-            var condition = Helper.Automation.CreatePropertyCondition(AutomationElementIdentifiers.AutomationIdProperty.Id, automationId);
+            var condition = Helper
+                .Automation
+                .CreatePropertyCondition(
+                    AutomationElementIdentifiers.AutomationIdProperty.Id,
+                    automationId
+                );
             var child = Helper.Retry(
                 () => parent.FindFirst(TreeScope.TreeScope_Descendants, condition),
                 AutomationRetryDelay,
-                retryCount: AutomationRetryCount);
+                retryCount: AutomationRetryCount
+            );
 
             if (child == null)
             {
-                throw new InvalidOperationException($"Could not find item with Automation ID '{automationId}' under '{parent.GetNameForExceptionMessage()}'.");
+                throw new InvalidOperationException(
+                    $"Could not find item with Automation ID '{automationId}' under '{parent.GetNameForExceptionMessage()}'."
+                );
             }
 
             return child;
@@ -59,22 +70,30 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// Given an <see cref="IUIAutomationElement"/>, returns a descendant with the automation ID specified by <paramref name="name"/>.
         /// Throws an <see cref="InvalidOperationException"/> if no such descendant is found.
         /// </summary>
-        public static IUIAutomationElement FindDescendantByName(this IUIAutomationElement parent, string name)
+        public static IUIAutomationElement FindDescendantByName(
+            this IUIAutomationElement parent,
+            string name
+        )
         {
             if (parent == null)
             {
                 throw new ArgumentNullException(nameof(parent));
             }
 
-            var condition = Helper.Automation.CreatePropertyCondition(AutomationElementIdentifiers.NameProperty.Id, name);
+            var condition = Helper
+                .Automation
+                .CreatePropertyCondition(AutomationElementIdentifiers.NameProperty.Id, name);
             var child = Helper.Retry(
                 () => parent.FindFirst(TreeScope.TreeScope_Descendants, condition),
                 AutomationRetryDelay,
-                retryCount: AutomationRetryCount);
+                retryCount: AutomationRetryCount
+            );
 
             if (child == null)
             {
-                throw new InvalidOperationException($"Could not find item with name '{name}' under '{parent.GetNameForExceptionMessage()}'.");
+                throw new InvalidOperationException(
+                    $"Could not find item with name '{name}' under '{parent.GetNameForExceptionMessage()}'."
+                );
             }
 
             return child;
@@ -84,22 +103,33 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// Given an <see cref="IUIAutomationElement"/>, returns a descendant with the className specified by <paramref name="className"/>.
         /// Throws an <see cref="InvalidOperationException"/> if no such descendant is found.
         /// </summary>
-        public static IUIAutomationElement FindDescendantByClass(this IUIAutomationElement parent, string className)
+        public static IUIAutomationElement FindDescendantByClass(
+            this IUIAutomationElement parent,
+            string className
+        )
         {
             if (parent == null)
             {
                 throw new ArgumentNullException(nameof(parent));
             }
 
-            var condition = Helper.Automation.CreatePropertyCondition(AutomationElementIdentifiers.ClassNameProperty.Id, className);
+            var condition = Helper
+                .Automation
+                .CreatePropertyCondition(
+                    AutomationElementIdentifiers.ClassNameProperty.Id,
+                    className
+                );
             var child = Helper.Retry(
                 () => parent.FindFirst(TreeScope.TreeScope_Descendants, condition),
                 AutomationRetryDelay,
-                retryCount: AutomationRetryCount);
+                retryCount: AutomationRetryCount
+            );
 
             if (child == null)
             {
-                throw new InvalidOperationException($"Could not find item with class '{className}' under '{parent.GetNameForExceptionMessage()}'.");
+                throw new InvalidOperationException(
+                    $"Could not find item with class '{className}' under '{parent.GetNameForExceptionMessage()}'."
+                );
             }
 
             return child;
@@ -110,22 +140,28 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// If none are found, the resulting collection will be empty.
         /// </summary>
         /// <returns></returns>
-        public static IUIAutomationElementArray FindDescendantsByClass(this IUIAutomationElement parent, string className)
+        public static IUIAutomationElementArray FindDescendantsByClass(
+            this IUIAutomationElement parent,
+            string className
+        )
         {
             if (parent == null)
             {
                 throw new ArgumentNullException(nameof(parent));
             }
 
-            var condition = Helper.Automation.CreatePropertyCondition(AutomationElementIdentifiers.ClassNameProperty.Id, className);
+            var condition = Helper
+                .Automation
+                .CreatePropertyCondition(
+                    AutomationElementIdentifiers.ClassNameProperty.Id,
+                    className
+                );
             return parent.FindAll(TreeScope.TreeScope_Descendants, condition);
         }
 
         public static T GetCurrentPattern<T>(this IUIAutomationElement element, int patternId)
         {
-            return RetryIfNotAvailable(
-                e => (T)element.GetCurrentPattern(patternId),
-                element);
+            return RetryIfNotAvailable(e => (T)element.GetCurrentPattern(patternId), element);
         }
 
         /// <summary>
@@ -135,16 +171,18 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// </summary>
         public static void Invoke(this IUIAutomationElement element)
         {
-            var invokePattern = element.GetCurrentPattern<IUIAutomationInvokePattern>(UIA_PatternIds.UIA_InvokePatternId);
+            var invokePattern = element.GetCurrentPattern<IUIAutomationInvokePattern>(
+                UIA_PatternIds.UIA_InvokePatternId
+            );
             if (invokePattern != null)
             {
-                RetryIfNotAvailable(
-                    pattern => pattern.Invoke(),
-                    invokePattern);
+                RetryIfNotAvailable(pattern => pattern.Invoke(), invokePattern);
             }
             else
             {
-                throw new InvalidOperationException($"The element '{element.GetNameForExceptionMessage()}' does not support the InvokePattern.");
+                throw new InvalidOperationException(
+                    $"The element '{element.GetNameForExceptionMessage()}' does not support the InvokePattern."
+                );
             }
         }
 
@@ -155,16 +193,19 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// </summary>
         public static void Expand(this IUIAutomationElement element)
         {
-            var expandCollapsePattern = element.GetCurrentPattern<IUIAutomationExpandCollapsePattern>(UIA_PatternIds.UIA_ExpandCollapsePatternId);
+            var expandCollapsePattern =
+                element.GetCurrentPattern<IUIAutomationExpandCollapsePattern>(
+                    UIA_PatternIds.UIA_ExpandCollapsePatternId
+                );
             if (expandCollapsePattern != null)
             {
-                RetryIfNotAvailable(
-                    pattern => pattern.Expand(),
-                    expandCollapsePattern);
+                RetryIfNotAvailable(pattern => pattern.Expand(), expandCollapsePattern);
             }
             else
             {
-                throw new InvalidOperationException($"The element '{element.GetNameForExceptionMessage()}' does not support the ExpandCollapsePattern.");
+                throw new InvalidOperationException(
+                    $"The element '{element.GetNameForExceptionMessage()}' does not support the ExpandCollapsePattern."
+                );
             }
         }
 
@@ -175,16 +216,19 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// </summary>
         public static void Collapse(this IUIAutomationElement element)
         {
-            var expandCollapsePattern = element.GetCurrentPattern<IUIAutomationExpandCollapsePattern>(UIA_PatternIds.UIA_ExpandCollapsePatternId);
+            var expandCollapsePattern =
+                element.GetCurrentPattern<IUIAutomationExpandCollapsePattern>(
+                    UIA_PatternIds.UIA_ExpandCollapsePatternId
+                );
             if (expandCollapsePattern != null)
             {
-                RetryIfNotAvailable(
-                    pattern => pattern.Collapse(),
-                    expandCollapsePattern);
+                RetryIfNotAvailable(pattern => pattern.Collapse(), expandCollapsePattern);
             }
             else
             {
-                throw new InvalidOperationException($"The element '{element.GetNameForExceptionMessage()}' does not support the ExpandCollapsePattern.");
+                throw new InvalidOperationException(
+                    $"The element '{element.GetNameForExceptionMessage()}' does not support the ExpandCollapsePattern."
+                );
             }
         }
 
@@ -195,16 +239,18 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// </summary>
         public static void Select(this IUIAutomationElement element)
         {
-            var selectionItemPattern = element.GetCurrentPattern<IUIAutomationSelectionItemPattern>(UIA_PatternIds.UIA_SelectionItemPatternId);
+            var selectionItemPattern = element.GetCurrentPattern<IUIAutomationSelectionItemPattern>(
+                UIA_PatternIds.UIA_SelectionItemPatternId
+            );
             if (selectionItemPattern != null)
             {
-                RetryIfNotAvailable(
-                    pattern => pattern.Select(),
-                    selectionItemPattern);
+                RetryIfNotAvailable(pattern => pattern.Select(), selectionItemPattern);
             }
             else
             {
-                throw new InvalidOperationException($"The element '{element.GetNameForExceptionMessage()}' does not support the SelectionItemPattern.");
+                throw new InvalidOperationException(
+                    $"The element '{element.GetNameForExceptionMessage()}' does not support the SelectionItemPattern."
+                );
             }
         }
 
@@ -215,16 +261,18 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// </summary>
         public static string GetValue(this IUIAutomationElement element)
         {
-            var valuePattern = element.GetCurrentPattern<IUIAutomationValuePattern>(UIA_PatternIds.UIA_ValuePatternId);
+            var valuePattern = element.GetCurrentPattern<IUIAutomationValuePattern>(
+                UIA_PatternIds.UIA_ValuePatternId
+            );
             if (valuePattern != null)
             {
-                return RetryIfNotAvailable(
-                    pattern => pattern.CurrentValue,
-                    valuePattern);
+                return RetryIfNotAvailable(pattern => pattern.CurrentValue, valuePattern);
             }
             else
             {
-                throw new InvalidOperationException($"The element '{element.GetNameForExceptionMessage()}' does not support the ValuePattern.");
+                throw new InvalidOperationException(
+                    $"The element '{element.GetNameForExceptionMessage()}' does not support the ValuePattern."
+                );
             }
         }
 
@@ -235,16 +283,18 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// </summary>
         public static void SetValue(this IUIAutomationElement element, string value)
         {
-            var valuePattern = element.GetCurrentPattern<IUIAutomationValuePattern>(UIA_PatternIds.UIA_ValuePatternId);
+            var valuePattern = element.GetCurrentPattern<IUIAutomationValuePattern>(
+                UIA_PatternIds.UIA_ValuePatternId
+            );
             if (valuePattern != null)
             {
-                RetryIfNotAvailable(
-                    pattern => pattern.SetValue(value),
-                    valuePattern);
+                RetryIfNotAvailable(pattern => pattern.SetValue(value), valuePattern);
             }
             else
             {
-                throw new InvalidOperationException($"The element '{element.GetNameForExceptionMessage()}' does not support the ValuePattern.");
+                throw new InvalidOperationException(
+                    $"The element '{element.GetNameForExceptionMessage()}' does not support the ValuePattern."
+                );
             }
         }
 
@@ -253,7 +303,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// Throws an <see cref="InvalidOperationException"/> if no such descendant is found.
         /// </summary>
 
-        public static IUIAutomationElement FindDescendantByPath(this IUIAutomationElement element, string path)
+        public static IUIAutomationElement FindDescendantByPath(
+            this IUIAutomationElement element,
+            string path
+        )
         {
             var pathParts = path.Split(".".ToCharArray());
 
@@ -261,7 +314,15 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             var item = element;
             foreach (var pathPart in pathParts)
             {
-                var next = item.FindFirst(TreeScope.TreeScope_Descendants, Helper.Automation.CreatePropertyCondition(AutomationElementIdentifiers.LocalizedControlTypeProperty.Id, pathPart));
+                var next = item.FindFirst(
+                    TreeScope.TreeScope_Descendants,
+                    Helper
+                        .Automation
+                        .CreatePropertyCondition(
+                            AutomationElementIdentifiers.LocalizedControlTypeProperty.Id,
+                            pathPart
+                        )
+                );
 
                 if (next == null)
                 {
@@ -293,14 +354,23 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                 // if the cached children can't be enumerated, don't blow up trying to display debug info
             }
 
-            throw new InvalidOperationException(string.Format("Unable to find a child named {0}.  Possible values: ({1}).",
-                path,
-                string.Join(", ", validChildren)));
+            throw new InvalidOperationException(
+                string.Format(
+                    "Unable to find a child named {0}.  Possible values: ({1}).",
+                    path,
+                    string.Join(", ", validChildren)
+                )
+            );
         }
 
         private static string? SimpleControlTypeName(IUIAutomationElement element)
         {
-            var type = ControlType.LookupById((int)element.GetCurrentPropertyValue(AutomationElementIdentifiers.ControlTypeProperty.Id));
+            var type = ControlType.LookupById(
+                (int)
+                    element.GetCurrentPropertyValue(
+                        AutomationElementIdentifiers.ControlTypeProperty.Id
+                    )
+            );
             return type?.LocalizedControlType;
         }
 
@@ -313,16 +383,21 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// <returns></returns>
         public static bool IsToggledOn(this IUIAutomationElement element)
         {
-            var togglePattern = element.GetCurrentPattern<IUIAutomationTogglePattern>(UIA_PatternIds.UIA_TogglePatternId);
+            var togglePattern = element.GetCurrentPattern<IUIAutomationTogglePattern>(
+                UIA_PatternIds.UIA_TogglePatternId
+            );
             if (togglePattern != null)
             {
                 return RetryIfNotAvailable(
                     pattern => pattern.CurrentToggleState == ToggleState.ToggleState_On,
-                    togglePattern);
+                    togglePattern
+                );
             }
             else
             {
-                throw new InvalidOperationException($"The element '{element.GetNameForExceptionMessage()}' does not support the TogglePattern.");
+                throw new InvalidOperationException(
+                    $"The element '{element.GetNameForExceptionMessage()}' does not support the TogglePattern."
+                );
             }
         }
 
@@ -333,16 +408,18 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// support the <see cref="IUIAutomationTogglePattern"/>.
         public static void Toggle(this IUIAutomationElement element)
         {
-            var togglePattern = element.GetCurrentPattern<IUIAutomationTogglePattern>(UIA_PatternIds.UIA_TogglePatternId);
+            var togglePattern = element.GetCurrentPattern<IUIAutomationTogglePattern>(
+                UIA_PatternIds.UIA_TogglePatternId
+            );
             if (togglePattern != null)
             {
-                RetryIfNotAvailable(
-                    pattern => pattern.Toggle(),
-                    togglePattern);
+                RetryIfNotAvailable(pattern => pattern.Toggle(), togglePattern);
             }
             else
             {
-                throw new InvalidOperationException($"The element '{element.GetNameForExceptionMessage()}' does not support the TogglePattern.");
+                throw new InvalidOperationException(
+                    $"The element '{element.GetNameForExceptionMessage()}' does not support the TogglePattern."
+                );
             }
         }
 
@@ -366,7 +443,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                     action(state);
                     return;
                 }
-                catch (COMException e) when (e.HResult == UIA_E_ELEMENTNOTAVAILABLE && i < AutomationRetryCount)
+                catch (COMException e)
+                    when (e.HResult == UIA_E_ELEMENTNOTAVAILABLE && i < AutomationRetryCount)
                 {
                     Thread.Sleep(AutomationRetryDelay);
                     continue;
@@ -383,7 +461,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                 {
                     return function(state);
                 }
-                catch (COMException e) when (e.HResult == UIA_E_ELEMENTNOTAVAILABLE && i < AutomationRetryCount)
+                catch (COMException e)
+                    when (e.HResult == UIA_E_ELEMENTNOTAVAILABLE && i < AutomationRetryCount)
                 {
                     Thread.Sleep(AutomationRetryDelay);
                     continue;

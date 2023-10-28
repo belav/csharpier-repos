@@ -11,7 +11,14 @@ namespace System.Runtime.Serialization.Tests
 {
     public static class DataContractSerializerHelper
     {
-        internal static T SerializeAndDeserialize<T>(T value, string baseline, DataContractSerializerSettings settings = null, Func<DataContractSerializer> serializerFactory = null, bool skipStringCompare = false, bool verifyBinaryRoundTrip = true)
+        internal static T SerializeAndDeserialize<T>(
+            T value,
+            string baseline,
+            DataContractSerializerSettings settings = null,
+            Func<DataContractSerializer> serializerFactory = null,
+            bool skipStringCompare = false,
+            bool verifyBinaryRoundTrip = true
+        )
         {
             DataContractSerializer dcs;
             if (serializerFactory != null)
@@ -20,7 +27,10 @@ namespace System.Runtime.Serialization.Tests
             }
             else
             {
-                dcs = (settings != null) ? new DataContractSerializer(typeof(T), settings) : new DataContractSerializer(typeof(T));
+                dcs =
+                    (settings != null)
+                        ? new DataContractSerializer(typeof(T), settings)
+                        : new DataContractSerializer(typeof(T));
             }
 
             T deserialized;
@@ -34,8 +44,17 @@ namespace System.Runtime.Serialization.Tests
                 if (!skipStringCompare)
                 {
                     Utils.CompareResult result = Utils.Compare(baseline, actualOutput);
-                    Assert.True(result.Equal, string.Format("{1}{0}Test failed for input: {2}{0}Expected: {3}{0}Actual: {4}",
-                        Environment.NewLine, result.ErrorMessage, value, baseline, actualOutput));
+                    Assert.True(
+                        result.Equal,
+                        string.Format(
+                            "{1}{0}Test failed for input: {2}{0}Expected: {3}{0}Actual: {4}",
+                            Environment.NewLine,
+                            result.ErrorMessage,
+                            value,
+                            baseline,
+                            actualOutput
+                        )
+                    );
                 }
 
                 ms.Position = 0;
@@ -50,7 +69,11 @@ namespace System.Runtime.Serialization.Tests
             return deserialized;
         }
 
-        internal static T RoundTripBinarySerialization<T>(T value, DataContractSerializerSettings settings = null, Func<DataContractSerializer> serializerFactory = null)
+        internal static T RoundTripBinarySerialization<T>(
+            T value,
+            DataContractSerializerSettings settings = null,
+            Func<DataContractSerializer> serializerFactory = null
+        )
         {
             DataContractSerializer dcs;
             if (serializerFactory != null)
@@ -59,7 +82,10 @@ namespace System.Runtime.Serialization.Tests
             }
             else
             {
-                dcs = (settings != null) ? new DataContractSerializer(typeof(T), settings) : new DataContractSerializer(typeof(T));
+                dcs =
+                    (settings != null)
+                        ? new DataContractSerializer(typeof(T), settings)
+                        : new DataContractSerializer(typeof(T));
             }
 
             using (MemoryStream ms = new MemoryStream())
@@ -68,10 +94,12 @@ namespace System.Runtime.Serialization.Tests
                 dcs.WriteObject(binWriter, value);
                 binWriter.Flush();
                 ms.Position = 0;
-                XmlDictionaryReader binReader = XmlDictionaryReader.CreateBinaryReader(ms, XmlDictionaryReaderQuotas.Max);
+                XmlDictionaryReader binReader = XmlDictionaryReader.CreateBinaryReader(
+                    ms,
+                    XmlDictionaryReaderQuotas.Max
+                );
                 return (T)dcs.ReadObject(binReader);
             }
         }
     }
-
 }

@@ -4,7 +4,6 @@
 namespace ComWrappersTests.GlobalInstance
 {
     using System;
-
     using ComWrappersTests.Common;
     using TestLibrary;
     using Xunit;
@@ -23,33 +22,34 @@ namespace ComWrappersTests.GlobalInstance
         {
             try
             {
-                bool builtInComDisabled=false;
-                var comConfig = AppContext.GetData("System.Runtime.InteropServices.BuiltInComInterop.IsSupported");
-                if(comConfig != null && !bool.Parse(comConfig.ToString()))
+                bool builtInComDisabled = false;
+                var comConfig = AppContext.GetData(
+                    "System.Runtime.InteropServices.BuiltInComInterop.IsSupported"
+                );
+                if (comConfig != null && !bool.Parse(comConfig.ToString()))
                 {
-                    builtInComDisabled=true;
+                    builtInComDisabled = true;
                 }
                 Console.WriteLine($"Built-in COM Disabled?: {builtInComDisabled}");
-
 
                 // The first test registers a global ComWrappers instance for marshalling
                 // Subsequents tests assume the global instance has already been registered.
                 ValidateRegisterForMarshalling();
 
                 ValidateMarshalAPIs(validateUseRegistered: true);
-                if(!builtInComDisabled)
+                if (!builtInComDisabled)
                 {
                     ValidateMarshalAPIs(validateUseRegistered: false);
                 }
 
                 ValidatePInvokes(validateUseRegistered: true);
-                if(!builtInComDisabled)
+                if (!builtInComDisabled)
                 {
                     ValidatePInvokes(validateUseRegistered: false);
                 }
 
                 // RegFree COM is not supported on Windows Nano Server
-                if(!builtInComDisabled && !Utilities.IsWindowsNanoServer)
+                if (!builtInComDisabled && !Utilities.IsWindowsNanoServer)
                 {
                     // This calls ValidateNativeServerActivation which calls Marshal.GetTypeFromCLSID that is not supported
                     ValidateComActivation(validateUseRegistered: true);
@@ -73,4 +73,3 @@ namespace ComWrappersTests.GlobalInstance
         }
     }
 }
-

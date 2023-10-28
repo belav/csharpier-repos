@@ -43,7 +43,7 @@ public class F
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static bool IsI<T,U>(I<U> i)
+    static bool IsI<T, U>(I<U> i)
     {
         return i is I<T>;
     }
@@ -84,14 +84,14 @@ public class F
         return l is I<string>;
     }
 
-    #pragma warning disable CS0184
+#pragma warning disable CS0184
     // warning CS0184: The given expression is never of the provided ('I<object>') type
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool IsJIObject(J j)
     {
         return j is I<object>;
     }
-    #pragma warning restore CS0184
+#pragma warning restore CS0184
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool IsKIObject(K k)
@@ -147,19 +147,19 @@ public class F
         var j = new J();
         var k = new K();
         var l = new L();
-        
+
         bool b0 = IsIString(j);
         bool b1 = IsIString(k);
         bool b2 = IsIString<string>(l);
         bool b3 = IsIString<object>(l);
 
-        bool c0 = IsI<string,string>(j);
-        bool c1 = IsI<string,string>(k);
-        bool c2 = IsI<string,string>(l);
+        bool c0 = IsI<string, string>(j);
+        bool c1 = IsI<string, string>(k);
+        bool c2 = IsI<string, string>(l);
 
-        bool d0 = IsI<object,string>(j);
-        bool d1 = IsI<object,string>(k);
-        bool d2 = IsI<object,string>(l);
+        bool d0 = IsI<object, string>(j);
+        bool d1 = IsI<object, string>(k);
+        bool d2 = IsI<object, string>(l);
 
         bool e0 = IsJI<string>(j);
         bool e1 = IsKI<string>(k);
@@ -196,21 +196,35 @@ public class F
         bool j2 = IsKIObject(l);
         bool j3 = IsLIObject(l);
 
-        bool pos = 
-        b0 & b1 & b2 & b3 
-        & c0 & c1 & c2
-        & d2
-        & e0 & e1 & e2 & e3 
-        & f0 & f1 & f2 & f3
-        & g0 & g4 & g5 & g8
-        & h0 & h4 & h5 & h8
-        & j2 & j3;
+        bool pos =
+            b0
+            & b1
+            & b2
+            & b3
+            & c0
+            & c1
+            & c2
+            & d2
+            & e0
+            & e1
+            & e2
+            & e3
+            & f0
+            & f1
+            & f2
+            & f3
+            & g0
+            & g4
+            & g5
+            & g8
+            & h0
+            & h4
+            & h5
+            & h8
+            & j2
+            & j3;
 
-        bool neg = 
-        d0 & d1
-        & g1 & g2 & g6 & g7
-        & h1 & h2 & h6 & h7
-        & j0 & j1;
+        bool neg = d0 & d1 & g1 & g2 & g6 & g7 & h1 & h2 & h6 & h7 & j0 & j1;
 
         return pos & !neg ? 100 : 0;
     }

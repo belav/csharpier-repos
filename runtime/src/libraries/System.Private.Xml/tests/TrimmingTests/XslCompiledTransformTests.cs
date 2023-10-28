@@ -10,8 +10,9 @@ class Program
 {
     static int Main(string[] args)
     {
-        using (StringReader text = new StringReader(
-    @"<?xml version=""1.0"" encoding=""UTF-8""?>
+        using (
+            StringReader text = new StringReader(
+                @"<?xml version=""1.0"" encoding=""UTF-8""?>
 <catalog>
     <cd>
         <title>Empire Burlesque</title>
@@ -21,14 +22,14 @@ class Program
         <price>10.90</price>
         <year>1985</year>
     </cd>
-</catalog>"))
+</catalog>"
+            )
+        )
         {
-
-
             XPathDocument myXPathDoc = new XPathDocument(text);
             XslCompiledTransform myXslTrans = new XslCompiledTransform();
             string xmlStr =
-@"<?xml version=""1.0""?>
+                @"<?xml version=""1.0""?>
 <xsl:stylesheet version=""1.0"" xmlns:xsl=""http://www.w3.org/1999/XSL/Transform"">
 <xsl:template match=""/"">
 <html>
@@ -61,8 +62,10 @@ class Program
                 myXslTrans.Transform(myXPathDoc, null, myWriter);
 
                 string result = myWriter.ToString();
-                if (result.Contains("<td>Empire Burlesque</td>") &&
-                    result.Contains("<td>Bob Dylan</td>"))
+                if (
+                    result.Contains("<td>Empire Burlesque</td>")
+                    && result.Contains("<td>Bob Dylan</td>")
+                )
                 {
                     return 100;
                 }

@@ -22,15 +22,18 @@ public class CommentTests : AbstractSyntaxStructureProviderTests
 {
     protected override string LanguageName => LanguageNames.CSharp;
 
-    private static ImmutableArray<BlockSpan> CreateCommentBlockSpan(
-        SyntaxTriviaList triviaList)
+    private static ImmutableArray<BlockSpan> CreateCommentBlockSpan(SyntaxTriviaList triviaList)
     {
         using var result = TemporaryArray<BlockSpan>.Empty;
         CSharpStructureHelpers.CollectCommentBlockSpans(triviaList, ref result.AsRef());
         return result.ToImmutableAndClear();
     }
 
-    internal override async Task<ImmutableArray<BlockSpan>> GetBlockSpansWorkerAsync(Document document, BlockStructureOptions options, int position)
+    internal override async Task<ImmutableArray<BlockSpan>> GetBlockSpansWorkerAsync(
+        Document document,
+        BlockStructureOptions options,
+        int position
+    )
     {
         var root = await document.GetRequiredSyntaxRootAsync(CancellationToken.None);
         var trivia = root.FindTrivia(position, findInsideTrivia: true);
@@ -60,8 +63,7 @@ public class CommentTests : AbstractSyntaxStructureProviderTests
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "// Hello ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(code, Region("span", "// Hello ...", autoCollapse: true));
     }
 
     [Fact]
@@ -76,8 +78,7 @@ public class CommentTests : AbstractSyntaxStructureProviderTests
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "// Hello ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(code, Region("span", "// Hello ...", autoCollapse: true));
     }
 
     [Fact]
@@ -92,8 +93,7 @@ public class CommentTests : AbstractSyntaxStructureProviderTests
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "// Hello ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(code, Region("span", "// Hello ...", autoCollapse: true));
     }
 
     [Fact]
@@ -109,7 +109,6 @@ public class CommentTests : AbstractSyntaxStructureProviderTests
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "// Hello ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(code, Region("span", "// Hello ...", autoCollapse: true));
     }
 }

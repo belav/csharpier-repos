@@ -21,18 +21,31 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
 {
     [Method(VSInternalMethods.WorkspacePullDiagnosticName)]
-    internal sealed partial class WorkspacePullDiagnosticHandler : AbstractPullDiagnosticHandler<VSInternalWorkspaceDiagnosticsParams, VSInternalWorkspaceDiagnosticReport[], VSInternalWorkspaceDiagnosticReport[]>
+    internal sealed partial class WorkspacePullDiagnosticHandler
+        : AbstractPullDiagnosticHandler<
+            VSInternalWorkspaceDiagnosticsParams,
+            VSInternalWorkspaceDiagnosticReport[],
+            VSInternalWorkspaceDiagnosticReport[]
+        >
     {
-        public WorkspacePullDiagnosticHandler(IDiagnosticAnalyzerService analyzerService, IDiagnosticsRefresher diagnosticsRefresher, IGlobalOptionService globalOptions)
-            : base(analyzerService, diagnosticsRefresher, globalOptions)
-        {
-        }
+        public WorkspacePullDiagnosticHandler(
+            IDiagnosticAnalyzerService analyzerService,
+            IDiagnosticsRefresher diagnosticsRefresher,
+            IGlobalOptionService globalOptions
+        )
+            : base(analyzerService, diagnosticsRefresher, globalOptions) { }
 
-        protected override string? GetDiagnosticCategory(VSInternalWorkspaceDiagnosticsParams diagnosticsParams)
-            => diagnosticsParams.QueryingDiagnosticKind?.Value;
+        protected override string? GetDiagnosticCategory(
+            VSInternalWorkspaceDiagnosticsParams diagnosticsParams
+        ) => diagnosticsParams.QueryingDiagnosticKind?.Value;
 
-        protected override VSInternalWorkspaceDiagnosticReport[] CreateReport(TextDocumentIdentifier identifier, VisualStudio.LanguageServer.Protocol.Diagnostic[]? diagnostics, string? resultId)
-            => new[] {
+        protected override VSInternalWorkspaceDiagnosticReport[] CreateReport(
+            TextDocumentIdentifier identifier,
+            VisualStudio.LanguageServer.Protocol.Diagnostic[]? diagnostics,
+            string? resultId
+        ) =>
+            new[]
+            {
                 new VSInternalWorkspaceDiagnosticReport
                 {
                     TextDocument = identifier,
@@ -44,14 +57,23 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
                 }
             };
 
-        protected override VSInternalWorkspaceDiagnosticReport[] CreateRemovedReport(TextDocumentIdentifier identifier)
-            => CreateReport(identifier, diagnostics: null, resultId: null);
+        protected override VSInternalWorkspaceDiagnosticReport[] CreateRemovedReport(
+            TextDocumentIdentifier identifier
+        ) => CreateReport(identifier, diagnostics: null, resultId: null);
 
-        protected override VSInternalWorkspaceDiagnosticReport[] CreateUnchangedReport(TextDocumentIdentifier identifier, string resultId)
-            => CreateReport(identifier, diagnostics: null, resultId);
+        protected override VSInternalWorkspaceDiagnosticReport[] CreateUnchangedReport(
+            TextDocumentIdentifier identifier,
+            string resultId
+        ) => CreateReport(identifier, diagnostics: null, resultId);
 
-        protected override ImmutableArray<PreviousPullResult>? GetPreviousResults(VSInternalWorkspaceDiagnosticsParams diagnosticsParams)
-            => diagnosticsParams.PreviousResults?.Where(d => d.PreviousResultId != null).Select(d => new PreviousPullResult(d.PreviousResultId!, d.TextDocument!)).ToImmutableArray();
+        protected override ImmutableArray<PreviousPullResult>? GetPreviousResults(
+            VSInternalWorkspaceDiagnosticsParams diagnosticsParams
+        ) =>
+            diagnosticsParams
+                .PreviousResults
+                ?.Where(d => d.PreviousResultId != null)
+                .Select(d => new PreviousPullResult(d.PreviousResultId!, d.TextDocument!))
+                .ToImmutableArray();
 
         protected override DiagnosticTag[] ConvertTags(DiagnosticData diagnosticData)
         {
@@ -60,10 +82,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
             return ConvertTags(diagnosticData, potentialDuplicate: true);
         }
 
-        protected override async ValueTask<ImmutableArray<IDiagnosticSource>> GetOrderedDiagnosticSourcesAsync(
+        protected override async ValueTask<
+            ImmutableArray<IDiagnosticSource>
+        > GetOrderedDiagnosticSourcesAsync(
             VSInternalWorkspaceDiagnosticsParams diagnosticsParams,
             RequestContext context,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // If we're being called from razor, we do not support WorkspaceDiagnostics at all.  For razor, workspace
             // diagnostics will be handled by razor itself, which will operate by calling into Roslyn and asking for
@@ -77,20 +102,28 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
                 return GetTaskListDiagnosticSources(context, GlobalOptions);
 
             // if this request doesn't have a category at all (legacy behavior, assume they're asking about everything).
-            if (category == null || category == PullDiagnosticCategories.WorkspaceDocumentsAndProject)
-                return await GetDiagnosticSourcesAsync(context, GlobalOptions, cancellationToken).ConfigureAwait(false);
+            if (
+                category == null
+                || category == PullDiagnosticCategories.WorkspaceDocumentsAndProject
+            )
+                return await GetDiagnosticSourcesAsync(context, GlobalOptions, cancellationToken)
+                    .ConfigureAwait(false);
 
             // if it's a category we don't recognize, return nothing.
             return ImmutableArray<IDiagnosticSource>.Empty;
         }
 
-        protected override VSInternalWorkspaceDiagnosticReport[]? CreateReturn(BufferedProgress<VSInternalWorkspaceDiagnosticReport[]> progress)
+        protected override VSInternalWorkspaceDiagnosticReport[]? CreateReturn(
+            BufferedProgress<VSInternalWorkspaceDiagnosticReport[]> progress
+        )
         {
             return progress.GetFlattenedValues();
         }
 
         private static IEnumerable<Project> GetProjectsInPriorityOrder(
-            Solution solution, ImmutableArray<string> supportedLanguages)
+            Solution solution,
+            ImmutableArray<string> supportedLanguages
+        )
         {
             return GetProjectsInPriorityOrderWorker(solution)
                 .WhereNotNull()
@@ -99,7 +132,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
 
             static IEnumerable<Project?> GetProjectsInPriorityOrderWorker(Solution solution)
             {
-                var documentTrackingService = solution.Services.GetRequiredService<IDocumentTrackingService>();
+                var documentTrackingService = solution
+                    .Services
+                    .GetRequiredService<IDocumentTrackingService>();
 
                 // Collect all the documents from the solution in the order we'd like to get diagnostics for.  This will
                 // prioritize the files from currently active projects, but then also include all other docs in all projects
@@ -136,7 +171,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
         }
 
         private static ImmutableArray<IDiagnosticSource> GetTaskListDiagnosticSources(
-            RequestContext context, IGlobalOptionService globalOptions)
+            RequestContext context,
+            IGlobalOptionService globalOptions
+        )
         {
             Contract.ThrowIfNull(context.Solution);
 
@@ -147,7 +184,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
 
             using var _ = ArrayBuilder<IDiagnosticSource>.GetInstance(out var result);
 
-            foreach (var project in GetProjectsInPriorityOrder(context.Solution, context.SupportedLanguages))
+            foreach (
+                var project in GetProjectsInPriorityOrder(
+                    context.Solution,
+                    context.SupportedLanguages
+                )
+            )
             {
                 foreach (var document in project.Documents)
                 {
@@ -160,41 +202,63 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
         }
 
         public static async ValueTask<ImmutableArray<IDiagnosticSource>> GetDiagnosticSourcesAsync(
-            RequestContext context, IGlobalOptionService globalOptions, CancellationToken cancellationToken)
+            RequestContext context,
+            IGlobalOptionService globalOptions,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(context.Solution);
 
             using var _ = ArrayBuilder<IDiagnosticSource>.GetInstance(out var result);
 
             var solution = context.Solution;
-            var enableDiagnosticsInSourceGeneratedFiles = solution.Services.GetService<ISolutionCrawlerOptionsService>()?.EnableDiagnosticsInSourceGeneratedFiles == true;
+            var enableDiagnosticsInSourceGeneratedFiles =
+                solution
+                    .Services
+                    .GetService<ISolutionCrawlerOptionsService>()
+                    ?.EnableDiagnosticsInSourceGeneratedFiles == true;
 
-            foreach (var project in GetProjectsInPriorityOrder(solution, context.SupportedLanguages))
+            foreach (
+                var project in GetProjectsInPriorityOrder(solution, context.SupportedLanguages)
+            )
                 await AddDocumentsAndProject(project, cancellationToken).ConfigureAwait(false);
 
             return result.ToImmutable();
 
             async Task AddDocumentsAndProject(Project project, CancellationToken cancellationToken)
             {
-                var fullSolutionAnalysisEnabled = globalOptions.IsFullSolutionAnalysisEnabled(project.Language, out var compilerFullSolutionAnalysisEnabled, out var analyzersFullSolutionAnalysisEnabled);
+                var fullSolutionAnalysisEnabled = globalOptions.IsFullSolutionAnalysisEnabled(
+                    project.Language,
+                    out var compilerFullSolutionAnalysisEnabled,
+                    out var analyzersFullSolutionAnalysisEnabled
+                );
                 if (!fullSolutionAnalysisEnabled)
                     return;
 
-                var documents = ImmutableArray<TextDocument>.Empty.AddRange(project.Documents).AddRange(project.AdditionalDocuments);
+                var documents = ImmutableArray<TextDocument>
+                    .Empty
+                    .AddRange(project.Documents)
+                    .AddRange(project.AdditionalDocuments);
 
                 // If all features are enabled for source generated documents, then compute todo-comments/diagnostics for them.
                 if (enableDiagnosticsInSourceGeneratedFiles)
                 {
-                    var sourceGeneratedDocuments = await project.GetSourceGeneratedDocumentsAsync(cancellationToken).ConfigureAwait(false);
+                    var sourceGeneratedDocuments = await project
+                        .GetSourceGeneratedDocumentsAsync(cancellationToken)
+                        .ConfigureAwait(false);
                     documents = documents.AddRange(sourceGeneratedDocuments);
                 }
 
-                Func<DiagnosticAnalyzer, bool>? shouldIncludeAnalyzer = !compilerFullSolutionAnalysisEnabled || !analyzersFullSolutionAnalysisEnabled
-                    ? ShouldIncludeAnalyzer : null;
+                Func<DiagnosticAnalyzer, bool>? shouldIncludeAnalyzer =
+                    !compilerFullSolutionAnalysisEnabled || !analyzersFullSolutionAnalysisEnabled
+                        ? ShouldIncludeAnalyzer
+                        : null;
                 foreach (var document in documents)
                 {
                     if (!ShouldSkipDocument(context, document))
-                        result.Add(new WorkspaceDocumentDiagnosticSource(document, shouldIncludeAnalyzer));
+                        result.Add(
+                            new WorkspaceDocumentDiagnosticSource(document, shouldIncludeAnalyzer)
+                        );
                 }
 
                 // Finally, add the project source to get project specific diagnostics, not associated with any document.

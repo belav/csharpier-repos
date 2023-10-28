@@ -26,7 +26,8 @@ public sealed class RouteEndpoint : Endpoint
         RoutePattern routePattern,
         int order,
         EndpointMetadataCollection? metadata,
-        string? displayName)
+        string? displayName
+    )
         : base(requestDelegate, metadata, displayName)
     {
         ArgumentNullException.ThrowIfNull(requestDelegate);

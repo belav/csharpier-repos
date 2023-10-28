@@ -3,8 +3,7 @@
 
 using System.Threading.Tasks;
 using Xunit;
-using VerifyCS = Microsoft.Interop.UnitTests.Verifiers.CSharpAnalyzerVerifier<
-       Microsoft.Interop.Analyzers.ComHostingDoesNotSupportGeneratedComInterfaceAnalyzer>;
+using VerifyCS = Microsoft.Interop.UnitTests.Verifiers.CSharpAnalyzerVerifier<Microsoft.Interop.Analyzers.ComHostingDoesNotSupportGeneratedComInterfaceAnalyzer>;
 
 namespace ComInterfaceGenerator.Unit.Tests
 {
@@ -13,7 +12,9 @@ namespace ComInterfaceGenerator.Unit.Tests
         [InlineData(true)]
         [InlineData(false)]
         [Theory]
-        public async Task ComVisibleType_ComImportInterfacesOnly_DoesNotReportDiagnostic(bool enableComHosting)
+        public async Task ComVisibleType_ComImportInterfacesOnly_DoesNotReportDiagnostic(
+            bool enableComHosting
+        )
         {
             string source = """
                 using System.Runtime.InteropServices;
@@ -120,10 +121,13 @@ namespace ComInterfaceGenerator.Unit.Tests
                     Sources = { source },
                     AnalyzerConfigFiles =
                     {
-                        ("/.editorconfig", $"""
+                        (
+                            "/.editorconfig",
+                            $"""
                                             is_global = true
                                             build_property.EnableComHosting = {enableComHosting}
-                                            """)
+                                            """
+                        )
                     }
                 }
             };

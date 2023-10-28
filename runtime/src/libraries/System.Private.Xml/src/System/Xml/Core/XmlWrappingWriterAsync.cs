@@ -2,12 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.IO;
-using System.Xml.Schema;
 using System.Collections;
 using System.Diagnostics;
-
+using System.IO;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 
 namespace System.Xml
 {
@@ -28,7 +27,12 @@ namespace System.Xml
             return writer.WriteEndDocumentAsync();
         }
 
-        public override Task WriteDocTypeAsync(string name, string? pubid, string? sysid, string? subset)
+        public override Task WriteDocTypeAsync(
+            string name,
+            string? pubid,
+            string? sysid,
+            string? subset
+        )
         {
             return writer.WriteDocTypeAsync(name, pubid, sysid, subset);
         }
@@ -48,7 +52,11 @@ namespace System.Xml
             return writer.WriteFullEndElementAsync();
         }
 
-        protected internal override Task WriteStartAttributeAsync(string? prefix, string localName, string? ns)
+        protected internal override Task WriteStartAttributeAsync(
+            string? prefix,
+            string localName,
+            string? ns
+        )
         {
             return writer.WriteStartAttributeAsync(prefix, localName, ns);
         }

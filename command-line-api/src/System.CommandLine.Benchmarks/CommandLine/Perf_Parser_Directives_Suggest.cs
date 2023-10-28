@@ -24,11 +24,7 @@ namespace System.CommandLine.Benchmarks.CommandLine
             CliOption<string> vegetableOption = new("--vegetable");
             vegetableOption.CompletionSources.Add("asparagus", "broccoli", "carrot");
 
-            var eatCommand = new CliCommand("eat")
-            {
-                fruitOption,
-                vegetableOption
-            };
+            var eatCommand = new CliCommand("eat") { fruitOption, vegetableOption };
 
             _configuration = new CliConfiguration(eatCommand)
             {
@@ -37,15 +33,10 @@ namespace System.CommandLine.Benchmarks.CommandLine
             };
         }
 
-        [Params(
-          "[suggest:4] \"eat\"",
-          "[suggest:13] \"eat --fruit\""
-        )]
+        [Params("[suggest:4] \"eat\"", "[suggest:13] \"eat --fruit\"")]
         public string TestCmdArgs;
 
         [Benchmark]
-        public Task InvokeSuggest()
-            => _configuration.InvokeAsync(TestCmdArgs);
-
+        public Task InvokeSuggest() => _configuration.InvokeAsync(TestCmdArgs);
     }
 }

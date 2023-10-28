@@ -10,30 +10,39 @@ public class ComponentApplicationBuilderTests
     {
         // Arrange
         var builder = new ComponentApplicationBuilder();
-        builder.AddLibrary(new AssemblyComponentLibraryDescriptor(
-            "App1",
-            CreateApp1Pages("App1"),
-            CreateApp1Components("App1")));
+        builder.AddLibrary(
+            new AssemblyComponentLibraryDescriptor(
+                "App1",
+                CreateApp1Pages("App1"),
+                CreateApp1Components("App1")
+            )
+        );
 
         var app = builder.Build();
 
         Assert.NotNull(app);
 
-        Assert.Collection(app.Pages,
+        Assert.Collection(
+            app.Pages,
             p => Assert.Equal(typeof(App1Test1), p.Type),
             p => Assert.Equal(typeof(App1Test2), p.Type),
-            p => Assert.Equal(typeof(App1Test3), p.Type));
+            p => Assert.Equal(typeof(App1Test3), p.Type)
+        );
 
-        Assert.Collection(app.Pages.Select(p => p.Route),
+        Assert.Collection(
+            app.Pages.Select(p => p.Route),
             r => Assert.Equal("/App1/Test1", r),
             r => Assert.Equal("/App1/Test2", r),
-            r => Assert.Equal("/App1/Test3", r));
+            r => Assert.Equal("/App1/Test3", r)
+        );
 
-        Assert.Collection(app.Components,
+        Assert.Collection(
+            app.Components,
             c => Assert.Equal(typeof(App1Test1), c.ComponentType),
             c => Assert.Equal(typeof(App1Test2), c.ComponentType),
             c => Assert.Equal(typeof(App1Test3), c.ComponentType),
-            c => Assert.Equal(typeof(App1OtherComponent), c.ComponentType));
+            c => Assert.Equal(typeof(App1OtherComponent), c.ComponentType)
+        );
     }
 
     [Fact]
@@ -41,15 +50,21 @@ public class ComponentApplicationBuilderTests
     {
         // Arrange
         var builder = new ComponentApplicationBuilder();
-        builder.AddLibrary(new AssemblyComponentLibraryDescriptor(
-            "App1",
-            CreateApp1Pages("App1"),
-            CreateApp1Components("App1")));
+        builder.AddLibrary(
+            new AssemblyComponentLibraryDescriptor(
+                "App1",
+                CreateApp1Pages("App1"),
+                CreateApp1Components("App1")
+            )
+        );
 
-        builder.AddLibrary(new AssemblyComponentLibraryDescriptor(
-            "App2",
-            CreateApp2Pages("App2"),
-            CreateApp2Components("App2")));
+        builder.AddLibrary(
+            new AssemblyComponentLibraryDescriptor(
+                "App2",
+                CreateApp2Pages("App2"),
+                CreateApp2Components("App2")
+            )
+        );
         var app = builder.Build();
 
         Assert.NotNull(app);
@@ -61,7 +76,8 @@ public class ComponentApplicationBuilderTests
             p => Assert.Equal(typeof(App1Test3), p.Type),
             p => Assert.Equal(typeof(App2Test1), p.Type),
             p => Assert.Equal(typeof(App2Test2), p.Type),
-            p => Assert.Equal(typeof(App2Test3), p.Type));
+            p => Assert.Equal(typeof(App2Test3), p.Type)
+        );
 
         Assert.Collection(
             app.Components,
@@ -72,7 +88,8 @@ public class ComponentApplicationBuilderTests
             c => Assert.Equal(typeof(App2Test1), c.ComponentType),
             c => Assert.Equal(typeof(App2Test2), c.ComponentType),
             c => Assert.Equal(typeof(App2Test3), c.ComponentType),
-            c => Assert.Equal(typeof(App2OtherComponent), c.ComponentType));
+            c => Assert.Equal(typeof(App2OtherComponent), c.ComponentType)
+        );
     }
 
     [Fact]
@@ -80,15 +97,21 @@ public class ComponentApplicationBuilderTests
     {
         // Arrange
         var builder = new ComponentApplicationBuilder();
-        builder.AddLibrary(new AssemblyComponentLibraryDescriptor(
-            "App1",
-            CreateApp1Pages("App1"),
-            CreateApp1Components("App1")));
+        builder.AddLibrary(
+            new AssemblyComponentLibraryDescriptor(
+                "App1",
+                CreateApp1Pages("App1"),
+                CreateApp1Components("App1")
+            )
+        );
 
-        builder.AddLibrary(new AssemblyComponentLibraryDescriptor(
-            "App2",
-            CreateApp2Pages("App2"),
-            CreateApp2Components("App2")));
+        builder.AddLibrary(
+            new AssemblyComponentLibraryDescriptor(
+                "App2",
+                CreateApp2Pages("App2"),
+                CreateApp2Components("App2")
+            )
+        );
 
         builder.RemoveLibrary("App1");
 
@@ -100,14 +123,16 @@ public class ComponentApplicationBuilderTests
             app.Pages,
             p => Assert.Equal(typeof(App2Test1), p.Type),
             p => Assert.Equal(typeof(App2Test2), p.Type),
-            p => Assert.Equal(typeof(App2Test3), p.Type));
+            p => Assert.Equal(typeof(App2Test3), p.Type)
+        );
 
         Assert.Collection(
             app.Components,
             c => Assert.Equal(typeof(App2Test1), c.ComponentType),
             c => Assert.Equal(typeof(App2Test2), c.ComponentType),
             c => Assert.Equal(typeof(App2Test3), c.ComponentType),
-            c => Assert.Equal(typeof(App2OtherComponent), c.ComponentType));
+            c => Assert.Equal(typeof(App2OtherComponent), c.ComponentType)
+        );
     }
 
     [Fact]
@@ -115,16 +140,22 @@ public class ComponentApplicationBuilderTests
     {
         // Arrange
         var builder = new ComponentApplicationBuilder();
-        builder.AddLibrary(new AssemblyComponentLibraryDescriptor(
-            "App1",
-            CreateApp1Pages("App1"),
-            CreateApp1Components("App1")));
+        builder.AddLibrary(
+            new AssemblyComponentLibraryDescriptor(
+                "App1",
+                CreateApp1Pages("App1"),
+                CreateApp1Components("App1")
+            )
+        );
 
         var builder2 = new ComponentApplicationBuilder();
-        builder2.AddLibrary(new AssemblyComponentLibraryDescriptor(
-            "App2",
-            CreateApp2Pages("App2"),
-            CreateApp2Components("App2")));
+        builder2.AddLibrary(
+            new AssemblyComponentLibraryDescriptor(
+                "App2",
+                CreateApp2Pages("App2"),
+                CreateApp2Components("App2")
+            )
+        );
         builder.Combine(builder2);
         var app = builder.Build();
 
@@ -137,7 +168,8 @@ public class ComponentApplicationBuilderTests
             p => Assert.Equal(typeof(App1Test3), p.Type),
             p => Assert.Equal(typeof(App2Test1), p.Type),
             p => Assert.Equal(typeof(App2Test2), p.Type),
-            p => Assert.Equal(typeof(App2Test3), p.Type));
+            p => Assert.Equal(typeof(App2Test3), p.Type)
+        );
 
         Assert.Collection(
             app.Components,
@@ -148,7 +180,8 @@ public class ComponentApplicationBuilderTests
             c => Assert.Equal(typeof(App2Test1), c.ComponentType),
             c => Assert.Equal(typeof(App2Test2), c.ComponentType),
             c => Assert.Equal(typeof(App2Test3), c.ComponentType),
-            c => Assert.Equal(typeof(App2OtherComponent), c.ComponentType));
+            c => Assert.Equal(typeof(App2OtherComponent), c.ComponentType)
+        );
     }
 
     [Fact]
@@ -156,26 +189,38 @@ public class ComponentApplicationBuilderTests
     {
         // Arrange
         var builder = new ComponentApplicationBuilder();
-        builder.AddLibrary(new AssemblyComponentLibraryDescriptor(
-            "App1",
-            CreateApp1Pages("App1"),
-            CreateApp1Components("App1")));
+        builder.AddLibrary(
+            new AssemblyComponentLibraryDescriptor(
+                "App1",
+                CreateApp1Pages("App1"),
+                CreateApp1Components("App1")
+            )
+        );
 
-        builder.AddLibrary(new AssemblyComponentLibraryDescriptor(
-            "Shared",
-            CreateSharedPages("Shared"),
-            CreateSharedComponents("Shared")));
+        builder.AddLibrary(
+            new AssemblyComponentLibraryDescriptor(
+                "Shared",
+                CreateSharedPages("Shared"),
+                CreateSharedComponents("Shared")
+            )
+        );
 
         var builder2 = new ComponentApplicationBuilder();
-        builder2.AddLibrary(new AssemblyComponentLibraryDescriptor(
-            "App2",
-            CreateApp2Pages("App2"),
-            CreateApp2Components("App2")));
+        builder2.AddLibrary(
+            new AssemblyComponentLibraryDescriptor(
+                "App2",
+                CreateApp2Pages("App2"),
+                CreateApp2Components("App2")
+            )
+        );
 
-        builder2.AddLibrary(new AssemblyComponentLibraryDescriptor(
-            "Shared",
-            CreateSharedPages("Shared"),
-            CreateSharedComponents("Shared")));
+        builder2.AddLibrary(
+            new AssemblyComponentLibraryDescriptor(
+                "Shared",
+                CreateSharedPages("Shared"),
+                CreateSharedComponents("Shared")
+            )
+        );
 
         builder.Combine(builder2);
         var app = builder.Build();
@@ -192,7 +237,8 @@ public class ComponentApplicationBuilderTests
             p => Assert.Equal(typeof(SharedTest3), p.Type),
             p => Assert.Equal(typeof(App2Test1), p.Type),
             p => Assert.Equal(typeof(App2Test2), p.Type),
-            p => Assert.Equal(typeof(App2Test3), p.Type));
+            p => Assert.Equal(typeof(App2Test3), p.Type)
+        );
 
         Assert.Collection(
             app.Components,
@@ -207,7 +253,8 @@ public class ComponentApplicationBuilderTests
             c => Assert.Equal(typeof(App2Test1), c.ComponentType),
             c => Assert.Equal(typeof(App2Test2), c.ComponentType),
             c => Assert.Equal(typeof(App2Test3), c.ComponentType),
-            c => Assert.Equal(typeof(App2OtherComponent), c.ComponentType));
+            c => Assert.Equal(typeof(App2OtherComponent), c.ComponentType)
+        );
     }
 
     [Fact]
@@ -215,31 +262,46 @@ public class ComponentApplicationBuilderTests
     {
         // Arrange
         var builder = new ComponentApplicationBuilder();
-        builder.AddLibrary(new AssemblyComponentLibraryDescriptor(
-            "App1",
-            CreateApp1Pages("App1"),
-            CreateApp1Components("App1")));
+        builder.AddLibrary(
+            new AssemblyComponentLibraryDescriptor(
+                "App1",
+                CreateApp1Pages("App1"),
+                CreateApp1Components("App1")
+            )
+        );
 
-        builder.AddLibrary(new AssemblyComponentLibraryDescriptor(
-            "App2",
-            CreateApp2Pages("App2"),
-            CreateApp2Components("App2")));
+        builder.AddLibrary(
+            new AssemblyComponentLibraryDescriptor(
+                "App2",
+                CreateApp2Pages("App2"),
+                CreateApp2Components("App2")
+            )
+        );
 
-        builder.AddLibrary(new AssemblyComponentLibraryDescriptor(
-            "Shared",
-            CreateSharedPages("Shared"),
-            CreateSharedComponents("Shared")));
+        builder.AddLibrary(
+            new AssemblyComponentLibraryDescriptor(
+                "Shared",
+                CreateSharedPages("Shared"),
+                CreateSharedComponents("Shared")
+            )
+        );
 
         var builder2 = new ComponentApplicationBuilder();
-        builder2.AddLibrary(new AssemblyComponentLibraryDescriptor(
-            "App2",
-            CreateApp2Pages("App2"),
-            CreateApp2Components("App2")));
+        builder2.AddLibrary(
+            new AssemblyComponentLibraryDescriptor(
+                "App2",
+                CreateApp2Pages("App2"),
+                CreateApp2Components("App2")
+            )
+        );
 
-        builder2.AddLibrary(new AssemblyComponentLibraryDescriptor(
-            "Shared",
-            CreateSharedPages("Shared"),
-            CreateSharedComponents("Shared")));
+        builder2.AddLibrary(
+            new AssemblyComponentLibraryDescriptor(
+                "Shared",
+                CreateSharedPages("Shared"),
+                CreateSharedComponents("Shared")
+            )
+        );
 
         builder.Exclude(builder2);
         var app = builder.Build();
@@ -250,14 +312,16 @@ public class ComponentApplicationBuilderTests
             app.Pages,
             p => Assert.Equal(typeof(App1Test1), p.Type),
             p => Assert.Equal(typeof(App1Test2), p.Type),
-            p => Assert.Equal(typeof(App1Test3), p.Type));
+            p => Assert.Equal(typeof(App1Test3), p.Type)
+        );
 
         Assert.Collection(
             app.Components,
             c => Assert.Equal(typeof(App1Test1), c.ComponentType),
             c => Assert.Equal(typeof(App1Test2), c.ComponentType),
             c => Assert.Equal(typeof(App1Test3), c.ComponentType),
-            c => Assert.Equal(typeof(App1OtherComponent), c.ComponentType));
+            c => Assert.Equal(typeof(App1OtherComponent), c.ComponentType)
+        );
     }
 
     private IReadOnlyList<ComponentBuilder> CreateApp1Components(string assemblyName)

@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Diagnostics;
 using System.Collections;
+using System.Diagnostics;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -108,8 +108,10 @@ namespace System.Xml.Xsl.XsltOld
                 switch (input.NodeType)
                 {
                     case XPathNodeType.Element:
-                        if (Ref.Equal(input.NamespaceURI, input.Atoms.UriXsl) &&
-                            Ref.Equal(input.LocalName, input.Atoms.Sort))
+                        if (
+                            Ref.Equal(input.NamespaceURI, input.Atoms.UriXsl)
+                            && Ref.Equal(input.LocalName, input.Atoms.Sort)
+                        )
                         {
                             _sortContainer ??= new ContainerAction();
                             _sortContainer.AddAction(compiler.CreateSortAction());
@@ -124,8 +126,7 @@ namespace System.Xml.Xsl.XsltOld
                     default:
                         continue;
                 }
-            }
-            while (input.Advance());
+            } while (input.Advance());
         }
     }
 }

@@ -41,7 +41,9 @@ namespace Microsoft.Extensions.Hosting.Tests
                 Verify(1, 1, 0, 0, 0, 0);
 
                 // Resume and check that both are not finished.
-                StartingTestClass<Impl1>.s_wait1.Release();
+                StartingTestClass<Impl1>
+                    .s_wait1
+                    .Release();
                 await StartingTestClass<Impl1>.s_wait2.WaitAsync();
                 Verify(1, 1, 1, 0, 0, 0);
 
@@ -50,7 +52,9 @@ namespace Microsoft.Extensions.Hosting.Tests
                 Verify(1, 1, 1, 1, 0, 0);
 
                 // Resume and verify they finish.
-                StartingTestClass<Impl1>.s_wait3.Release();
+                StartingTestClass<Impl1>
+                    .s_wait3
+                    .Release();
                 StartingTestClass<Impl2>.s_wait3.Release();
                 await start;
                 Verify(1, 1, 1, 1, 1, 1);
@@ -86,10 +90,15 @@ namespace Microsoft.Extensions.Hosting.Tests
                 await s_wait3.WaitAsync();
                 s_finalCount++;
             }
+
             public Task StartAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public Task StartedAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public Task StoppingAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public Task StoppedAsync(CancellationToken cancellationToken) => Task.CompletedTask;
         }
 
@@ -98,10 +107,10 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             var hostBuilder = CreateHostBuilder(services =>
             {
-                services.
-                    AddHostedService<StartTestClass<Impl1>>().
-                    AddHostedService<StartTestClass<Impl2>>().
-                    Configure<HostOptions>(opts => opts.ServicesStartConcurrently = true);
+                services
+                    .AddHostedService<StartTestClass<Impl1>>()
+                    .AddHostedService<StartTestClass<Impl2>>()
+                    .Configure<HostOptions>(opts => opts.ServicesStartConcurrently = true);
             });
 
             using (IHost host = hostBuilder.Build())
@@ -121,7 +130,9 @@ namespace Microsoft.Extensions.Hosting.Tests
                 Verify(1, 1, 0, 0, 0, 0);
 
                 // Resume and check that both are not finished.
-                StartTestClass<Impl1>.s_wait1.Release();
+                StartTestClass<Impl1>
+                    .s_wait1
+                    .Release();
                 await StartTestClass<Impl1>.s_wait2.WaitAsync();
                 Verify(1, 1, 1, 0, 0, 0);
 
@@ -130,7 +141,9 @@ namespace Microsoft.Extensions.Hosting.Tests
                 Verify(1, 1, 1, 1, 0, 0);
 
                 // Resume and verify they finish.
-                StartTestClass<Impl1>.s_wait3.Release();
+                StartTestClass<Impl1>
+                    .s_wait3
+                    .Release();
                 StartTestClass<Impl2>.s_wait3.Release();
                 await start;
                 Verify(1, 1, 1, 1, 1, 1);
@@ -158,6 +171,7 @@ namespace Microsoft.Extensions.Hosting.Tests
             public static SemaphoreSlim? s_wait3 = new SemaphoreSlim(1);
 
             public Task StartingAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public async Task StartAsync(CancellationToken cancellationToken)
             {
                 s_initialCount++;
@@ -167,9 +181,13 @@ namespace Microsoft.Extensions.Hosting.Tests
                 await s_wait3.WaitAsync();
                 s_finalCount++;
             }
+
             public Task StartedAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public Task StoppingAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public Task StoppedAsync(CancellationToken cancellationToken) => Task.CompletedTask;
         }
 
@@ -178,10 +196,10 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             var hostBuilder = CreateHostBuilder(services =>
             {
-                services.
-                    AddHostedService<StartNonconcurrentTestClass<Impl1>>().
-                    AddHostedService<StartNonconcurrentTestClass<Impl2>>().
-                    Configure<HostOptions>(opts => opts.ServicesStartConcurrently = false);
+                services
+                    .AddHostedService<StartNonconcurrentTestClass<Impl1>>()
+                    .AddHostedService<StartNonconcurrentTestClass<Impl2>>()
+                    .Configure<HostOptions>(opts => opts.ServicesStartConcurrently = false);
             });
 
             using (IHost host = hostBuilder.Build())
@@ -198,7 +216,9 @@ namespace Microsoft.Extensions.Hosting.Tests
                 Verify(1, 0);
 
                 // Resume and verify they finish.
-                StartNonconcurrentTestClass<Impl1>.s_wait.Release();
+                StartNonconcurrentTestClass<Impl1>
+                    .s_wait
+                    .Release();
                 StartNonconcurrentTestClass<Impl2>.s_wait.Release();
                 await start;
                 Verify(1, 1);
@@ -218,14 +238,19 @@ namespace Microsoft.Extensions.Hosting.Tests
             public static SemaphoreSlim? s_wait = new SemaphoreSlim(1);
 
             public Task StartingAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public async Task StartAsync(CancellationToken cancellationToken)
             {
                 s_count++;
                 await s_wait.WaitAsync();
             }
+
             public Task StartedAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public Task StoppingAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public Task StoppedAsync(CancellationToken cancellationToken) => Task.CompletedTask;
         }
 
@@ -258,7 +283,9 @@ namespace Microsoft.Extensions.Hosting.Tests
                 Verify(1, 1, 0, 0, 0, 0);
 
                 // Resume and check that both are not finished.
-                StartedTestClass<Impl1>.s_wait1.Release();
+                StartedTestClass<Impl1>
+                    .s_wait1
+                    .Release();
                 await StartedTestClass<Impl1>.s_wait2.WaitAsync();
                 Verify(1, 1, 1, 0, 0, 0);
 
@@ -267,7 +294,9 @@ namespace Microsoft.Extensions.Hosting.Tests
                 Verify(1, 1, 1, 1, 0, 0);
 
                 // Resume and verify they finish.
-                StartedTestClass<Impl1>.s_wait3.Release();
+                StartedTestClass<Impl1>
+                    .s_wait3
+                    .Release();
                 StartedTestClass<Impl2>.s_wait3.Release();
                 await start;
                 Verify(1, 1, 1, 1, 1, 1);
@@ -295,7 +324,9 @@ namespace Microsoft.Extensions.Hosting.Tests
             public static SemaphoreSlim? s_wait3 = new SemaphoreSlim(1);
 
             public Task StartingAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public Task StartAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public async Task StartedAsync(CancellationToken cancellationToken)
             {
                 s_initialCount++;
@@ -305,8 +336,11 @@ namespace Microsoft.Extensions.Hosting.Tests
                 await s_wait3.WaitAsync();
                 s_finalCount++;
             }
+
             public Task StoppingAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
             public Task StoppedAsync(CancellationToken cancellationToken) => Task.CompletedTask;
         }
 
@@ -315,8 +349,13 @@ namespace Microsoft.Extensions.Hosting.Tests
         [InlineData(false)]
         public async Task StartPhasesException_Starting(bool throwAfterAsyncCall)
         {
-            ExceptionImpl impl = new(throwAfterAsyncCall: throwAfterAsyncCall,
-                throwOnStarting: true, throwOnStart: false, throwOnStarted: false);
+            ExceptionImpl impl =
+                new(
+                    throwAfterAsyncCall: throwAfterAsyncCall,
+                    throwOnStarting: true,
+                    throwOnStart: false,
+                    throwOnStarted: false
+                );
 
             var hostBuilder = CreateHostBuilder(services =>
             {
@@ -325,7 +364,9 @@ namespace Microsoft.Extensions.Hosting.Tests
 
             using (IHost host = hostBuilder.Build())
             {
-                Exception ex = await Assert.ThrowsAnyAsync<Exception>(async () => await host.StartAsync());
+                Exception ex = await Assert.ThrowsAnyAsync<Exception>(
+                    async () => await host.StartAsync()
+                );
 
                 Assert.True(impl.StartingCalled);
                 Assert.False(impl.StartCalled);
@@ -340,8 +381,13 @@ namespace Microsoft.Extensions.Hosting.Tests
         [InlineData(false)]
         public async Task StartPhasesException_Start(bool throwAfterAsyncCall)
         {
-            ExceptionImpl impl = new(throwAfterAsyncCall: throwAfterAsyncCall,
-                throwOnStarting: false, throwOnStart: true, throwOnStarted: false);
+            ExceptionImpl impl =
+                new(
+                    throwAfterAsyncCall: throwAfterAsyncCall,
+                    throwOnStarting: false,
+                    throwOnStart: true,
+                    throwOnStarted: false
+                );
 
             var hostBuilder = CreateHostBuilder(services =>
             {
@@ -350,7 +396,9 @@ namespace Microsoft.Extensions.Hosting.Tests
 
             using (IHost host = hostBuilder.Build())
             {
-                Exception ex = await Assert.ThrowsAnyAsync<Exception>(async () => await host.StartAsync());
+                Exception ex = await Assert.ThrowsAnyAsync<Exception>(
+                    async () => await host.StartAsync()
+                );
 
                 Assert.True(impl.StartingCalled);
                 Assert.True(impl.StartCalled);
@@ -365,8 +413,13 @@ namespace Microsoft.Extensions.Hosting.Tests
         [InlineData(false)]
         public async Task StartPhasesException_Started(bool throwAfterAsyncCall)
         {
-            ExceptionImpl impl = new(throwAfterAsyncCall: throwAfterAsyncCall,
-                throwOnStarting: false, throwOnStart: false, throwOnStarted: true);
+            ExceptionImpl impl =
+                new(
+                    throwAfterAsyncCall: throwAfterAsyncCall,
+                    throwOnStarting: false,
+                    throwOnStart: false,
+                    throwOnStarted: true
+                );
 
             var hostBuilder = CreateHostBuilder(services =>
             {
@@ -375,7 +428,9 @@ namespace Microsoft.Extensions.Hosting.Tests
 
             using (IHost host = hostBuilder.Build())
             {
-                Exception ex = await Assert.ThrowsAnyAsync<Exception>(async () => await host.StartAsync());
+                Exception ex = await Assert.ThrowsAnyAsync<Exception>(
+                    async () => await host.StartAsync()
+                );
 
                 Assert.True(impl.StartingCalled);
                 Assert.True(impl.StartCalled);
@@ -388,18 +443,27 @@ namespace Microsoft.Extensions.Hosting.Tests
         [Fact]
         public async Task ValidateOnStartAbortsChain()
         {
-            ExceptionImpl impl = new(throwAfterAsyncCall: false, throwOnStarting: false, throwOnStart: false, throwOnStarted: false);
+            ExceptionImpl impl =
+                new(
+                    throwAfterAsyncCall: false,
+                    throwOnStarting: false,
+                    throwOnStart: false,
+                    throwOnStarted: false
+                );
             var hostBuilder = CreateHostBuilder(services =>
             {
-                services.AddHostedService((token) => impl)
-                .AddOptions<ComplexOptions>()
-                .Validate(o => o.Boolean)
-                .ValidateOnStart();
+                services
+                    .AddHostedService((token) => impl)
+                    .AddOptions<ComplexOptions>()
+                    .Validate(o => o.Boolean)
+                    .ValidateOnStart();
             });
 
             using (IHost host = hostBuilder.Build())
             {
-                await Assert.ThrowsAnyAsync<OptionsValidationException>(async () => await host.StartAsync());
+                await Assert.ThrowsAnyAsync<OptionsValidationException>(
+                    async () => await host.StartAsync()
+                );
                 Assert.False(impl.StartingCalled);
             }
         }

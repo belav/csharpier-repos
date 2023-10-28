@@ -95,7 +95,9 @@ public abstract class ControllerBase
         {
             if (_metadataProvider == null)
             {
-                _metadataProvider = HttpContext?.RequestServices?.GetRequiredService<IModelMetadataProvider>();
+                _metadataProvider = HttpContext
+                    ?.RequestServices
+                    ?.GetRequiredService<IModelMetadataProvider>();
             }
 
             return _metadataProvider!;
@@ -118,7 +120,9 @@ public abstract class ControllerBase
         {
             if (_modelBinderFactory == null)
             {
-                _modelBinderFactory = HttpContext?.RequestServices?.GetRequiredService<IModelBinderFactory>();
+                _modelBinderFactory = HttpContext
+                    ?.RequestServices
+                    ?.GetRequiredService<IModelBinderFactory>();
             }
 
             return _modelBinderFactory!;
@@ -165,7 +169,9 @@ public abstract class ControllerBase
         {
             if (_objectValidator == null)
             {
-                _objectValidator = HttpContext?.RequestServices?.GetRequiredService<IObjectModelValidator>();
+                _objectValidator = HttpContext
+                    ?.RequestServices
+                    ?.GetRequiredService<IObjectModelValidator>();
             }
 
             return _objectValidator!;
@@ -188,7 +194,9 @@ public abstract class ControllerBase
         {
             if (_problemDetailsFactory == null)
             {
-                _problemDetailsFactory = HttpContext?.RequestServices?.GetRequiredService<ProblemDetailsFactory>();
+                _problemDetailsFactory = HttpContext
+                    ?.RequestServices
+                    ?.GetRequiredService<ProblemDetailsFactory>();
             }
 
             return _problemDetailsFactory!;
@@ -217,8 +225,8 @@ public abstract class ControllerBase
     /// <param name="statusCode">The status code to set on the response.</param>
     /// <returns>The created <see cref="StatusCodeResult"/> object for the response.</returns>
     [NonAction]
-    public virtual StatusCodeResult StatusCode([ActionResultStatusCode] int statusCode)
-        => new StatusCodeResult(statusCode);
+    public virtual StatusCodeResult StatusCode([ActionResultStatusCode] int statusCode) =>
+        new StatusCodeResult(statusCode);
 
     /// <summary>
     /// Creates an <see cref="ObjectResult"/> object by specifying a <paramref name="statusCode"/> and <paramref name="value"/>
@@ -227,12 +235,12 @@ public abstract class ControllerBase
     /// <param name="value">The value to set on the <see cref="ObjectResult"/>.</param>
     /// <returns>The created <see cref="ObjectResult"/> object for the response.</returns>
     [NonAction]
-    public virtual ObjectResult StatusCode([ActionResultStatusCode] int statusCode, [ActionResultObjectValue] object? value)
+    public virtual ObjectResult StatusCode(
+        [ActionResultStatusCode] int statusCode,
+        [ActionResultObjectValue] object? value
+    )
     {
-        return new ObjectResult(value)
-        {
-            StatusCode = statusCode
-        };
+        return new ObjectResult(value) { StatusCode = statusCode };
     }
 
     /// <summary>
@@ -241,8 +249,8 @@ public abstract class ControllerBase
     /// <param name="content">The content to write to the response.</param>
     /// <returns>The created <see cref="ContentResult"/> object for the response.</returns>
     [NonAction]
-    public virtual ContentResult Content(string content)
-        => Content(content, (MediaTypeHeaderValue?)null);
+    public virtual ContentResult Content(string content) =>
+        Content(content, (MediaTypeHeaderValue?)null);
 
     /// <summary>
     /// Creates a <see cref="ContentResult"/> object by specifying a
@@ -252,8 +260,8 @@ public abstract class ControllerBase
     /// <param name="contentType">The content type (MIME type).</param>
     /// <returns>The created <see cref="ContentResult"/> object for the response.</returns>
     [NonAction]
-    public virtual ContentResult Content(string content, string contentType)
-        => Content(content, MediaTypeHeaderValue.Parse(contentType));
+    public virtual ContentResult Content(string content, string contentType) =>
+        Content(content, MediaTypeHeaderValue.Parse(contentType));
 
     /// <summary>
     /// Creates a <see cref="ContentResult"/> object by specifying a
@@ -268,7 +276,11 @@ public abstract class ControllerBase
     /// the <paramref name="contentEncoding"/> parameter is chosen as the final encoding.
     /// </remarks>
     [NonAction]
-    public virtual ContentResult Content(string content, string contentType, Encoding contentEncoding)
+    public virtual ContentResult Content(
+        string content,
+        string contentType,
+        Encoding contentEncoding
+    )
     {
         var mediaTypeHeaderValue = MediaTypeHeaderValue.Parse(contentType);
         mediaTypeHeaderValue.Encoding = contentEncoding ?? mediaTypeHeaderValue.Encoding;
@@ -285,11 +297,7 @@ public abstract class ControllerBase
     [NonAction]
     public virtual ContentResult Content(string content, MediaTypeHeaderValue? contentType)
     {
-        return new ContentResult
-        {
-            Content = content,
-            ContentType = contentType?.ToString()
-        };
+        return new ContentResult { Content = content, ContentType = contentType?.ToString() };
     }
 
     /// <summary>
@@ -298,16 +306,14 @@ public abstract class ControllerBase
     /// </summary>
     /// <returns>The created <see cref="NoContentResult"/> object for the response.</returns>
     [NonAction]
-    public virtual NoContentResult NoContent()
-        => new NoContentResult();
+    public virtual NoContentResult NoContent() => new NoContentResult();
 
     /// <summary>
     /// Creates an <see cref="OkResult"/> object that produces an empty <see cref="StatusCodes.Status200OK"/> response.
     /// </summary>
     /// <returns>The created <see cref="OkResult"/> for the response.</returns>
     [NonAction]
-    public virtual OkResult Ok()
-        => new OkResult();
+    public virtual OkResult Ok() => new OkResult();
 
     /// <summary>
     /// Creates an <see cref="OkObjectResult"/> object that produces a <see cref="StatusCodes.Status200OK"/> response.
@@ -315,8 +321,8 @@ public abstract class ControllerBase
     /// <param name="value">The content value to format in the entity body.</param>
     /// <returns>The created <see cref="OkObjectResult"/> for the response.</returns>
     [NonAction]
-    public virtual OkObjectResult Ok([ActionResultObjectValue] object? value)
-        => new OkObjectResult(value);
+    public virtual OkObjectResult Ok([ActionResultObjectValue] object? value) =>
+        new OkObjectResult(value);
 
     #region RedirectResult variants
     /// <summary>
@@ -343,7 +349,9 @@ public abstract class ControllerBase
     /// <param name="url">The URL to redirect to.</param>
     /// <returns>The created <see cref="RedirectResult"/> for the response.</returns>
     [NonAction]
-    public virtual RedirectResult RedirectPermanent([StringSyntax(StringSyntaxAttribute.Uri)] string url)
+    public virtual RedirectResult RedirectPermanent(
+        [StringSyntax(StringSyntaxAttribute.Uri)] string url
+    )
     {
         if (string.IsNullOrEmpty(url))
         {
@@ -361,7 +369,9 @@ public abstract class ControllerBase
     /// <param name="url">The URL to redirect to.</param>
     /// <returns>The created <see cref="RedirectResult"/> for the response.</returns>
     [NonAction]
-    public virtual RedirectResult RedirectPreserveMethod([StringSyntax(StringSyntaxAttribute.Uri)] string url)
+    public virtual RedirectResult RedirectPreserveMethod(
+        [StringSyntax(StringSyntaxAttribute.Uri)] string url
+    )
     {
         if (string.IsNullOrEmpty(url))
         {
@@ -379,7 +389,9 @@ public abstract class ControllerBase
     /// <param name="url">The URL to redirect to.</param>
     /// <returns>The created <see cref="RedirectResult"/> for the response.</returns>
     [NonAction]
-    public virtual RedirectResult RedirectPermanentPreserveMethod([StringSyntax(StringSyntaxAttribute.Uri)] string url)
+    public virtual RedirectResult RedirectPermanentPreserveMethod(
+        [StringSyntax(StringSyntaxAttribute.Uri)] string url
+    )
     {
         if (string.IsNullOrEmpty(url))
         {
@@ -396,7 +408,9 @@ public abstract class ControllerBase
     /// <param name="localUrl">The local URL to redirect to.</param>
     /// <returns>The created <see cref="LocalRedirectResult"/> for the response.</returns>
     [NonAction]
-    public virtual LocalRedirectResult LocalRedirect([StringSyntax(StringSyntaxAttribute.Uri, UriKind.Relative)] string localUrl)
+    public virtual LocalRedirectResult LocalRedirect(
+        [StringSyntax(StringSyntaxAttribute.Uri, UriKind.Relative)] string localUrl
+    )
     {
         if (string.IsNullOrEmpty(localUrl))
         {
@@ -413,7 +427,9 @@ public abstract class ControllerBase
     /// <param name="localUrl">The local URL to redirect to.</param>
     /// <returns>The created <see cref="LocalRedirectResult"/> for the response.</returns>
     [NonAction]
-    public virtual LocalRedirectResult LocalRedirectPermanent([StringSyntax(StringSyntaxAttribute.Uri, UriKind.Relative)] string localUrl)
+    public virtual LocalRedirectResult LocalRedirectPermanent(
+        [StringSyntax(StringSyntaxAttribute.Uri, UriKind.Relative)] string localUrl
+    )
     {
         if (string.IsNullOrEmpty(localUrl))
         {
@@ -431,7 +447,9 @@ public abstract class ControllerBase
     /// <param name="localUrl">The local URL to redirect to.</param>
     /// <returns>The created <see cref="LocalRedirectResult"/> for the response.</returns>
     [NonAction]
-    public virtual LocalRedirectResult LocalRedirectPreserveMethod([StringSyntax(StringSyntaxAttribute.Uri, UriKind.Relative)] string localUrl)
+    public virtual LocalRedirectResult LocalRedirectPreserveMethod(
+        [StringSyntax(StringSyntaxAttribute.Uri, UriKind.Relative)] string localUrl
+    )
     {
         if (string.IsNullOrEmpty(localUrl))
         {
@@ -449,7 +467,9 @@ public abstract class ControllerBase
     /// <param name="localUrl">The local URL to redirect to.</param>
     /// <returns>The created <see cref="LocalRedirectResult"/> for the response.</returns>
     [NonAction]
-    public virtual LocalRedirectResult LocalRedirectPermanentPreserveMethod([StringSyntax(StringSyntaxAttribute.Uri, UriKind.Relative)] string localUrl)
+    public virtual LocalRedirectResult LocalRedirectPermanentPreserveMethod(
+        [StringSyntax(StringSyntaxAttribute.Uri, UriKind.Relative)] string localUrl
+    )
     {
         if (string.IsNullOrEmpty(localUrl))
         {
@@ -484,8 +504,7 @@ public abstract class ControllerBase
     /// </code>
     /// </example>
     [NonAction]
-    public virtual RedirectToActionResult RedirectToAction()
-        => RedirectToAction(actionName: null);
+    public virtual RedirectToActionResult RedirectToAction() => RedirectToAction(actionName: null);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status302Found"/>) to the specified action using the <paramref name="actionName"/>.
@@ -493,8 +512,8 @@ public abstract class ControllerBase
     /// <param name="actionName">The name of the action.</param>
     /// <returns>The created <see cref="RedirectToActionResult"/> for the response.</returns>
     [NonAction]
-    public virtual RedirectToActionResult RedirectToAction(string? actionName)
-        => RedirectToAction(actionName, routeValues: null);
+    public virtual RedirectToActionResult RedirectToAction(string? actionName) =>
+        RedirectToAction(actionName, routeValues: null);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status302Found"/>) to the specified action using the
@@ -504,8 +523,10 @@ public abstract class ControllerBase
     /// <param name="routeValues">The parameters for a route.</param>
     /// <returns>The created <see cref="RedirectToActionResult"/> for the response.</returns>
     [NonAction]
-    public virtual RedirectToActionResult RedirectToAction(string? actionName, object? routeValues)
-        => RedirectToAction(actionName, controllerName: null, routeValues: routeValues);
+    public virtual RedirectToActionResult RedirectToAction(
+        string? actionName,
+        object? routeValues
+    ) => RedirectToAction(actionName, controllerName: null, routeValues: routeValues);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status302Found"/>) to the specified action using the
@@ -515,8 +536,10 @@ public abstract class ControllerBase
     /// <param name="controllerName">The name of the controller.</param>
     /// <returns>The created <see cref="RedirectToActionResult"/> for the response.</returns>
     [NonAction]
-    public virtual RedirectToActionResult RedirectToAction(string? actionName, string? controllerName)
-        => RedirectToAction(actionName, controllerName, routeValues: null);
+    public virtual RedirectToActionResult RedirectToAction(
+        string? actionName,
+        string? controllerName
+    ) => RedirectToAction(actionName, controllerName, routeValues: null);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status302Found"/>) to the specified action using the specified
@@ -530,8 +553,8 @@ public abstract class ControllerBase
     public virtual RedirectToActionResult RedirectToAction(
         string? actionName,
         string? controllerName,
-        object? routeValues)
-        => RedirectToAction(actionName, controllerName, routeValues, fragment: null);
+        object? routeValues
+    ) => RedirectToAction(actionName, controllerName, routeValues, fragment: null);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status302Found"/>) to the specified action using the specified
@@ -545,8 +568,8 @@ public abstract class ControllerBase
     public virtual RedirectToActionResult RedirectToAction(
         string? actionName,
         string? controllerName,
-        string? fragment)
-        => RedirectToAction(actionName, controllerName, routeValues: null, fragment: fragment);
+        string? fragment
+    ) => RedirectToAction(actionName, controllerName, routeValues: null, fragment: fragment);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status302Found"/>) to the specified action using the specified <paramref name="actionName"/>,
@@ -562,7 +585,8 @@ public abstract class ControllerBase
         string? actionName,
         string? controllerName,
         object? routeValues,
-        string? fragment)
+        string? fragment
+    )
     {
         return new RedirectToActionResult(actionName, controllerName, routeValues, fragment)
         {
@@ -586,7 +610,8 @@ public abstract class ControllerBase
         string? actionName = null,
         string? controllerName = null,
         object? routeValues = null,
-        string? fragment = null)
+        string? fragment = null
+    )
     {
         return new RedirectToActionResult(
             actionName: actionName,
@@ -594,7 +619,8 @@ public abstract class ControllerBase
             routeValues: routeValues,
             permanent: false,
             preserveMethod: true,
-            fragment: fragment)
+            fragment: fragment
+        )
         {
             UrlHelper = Url,
         };
@@ -607,8 +633,8 @@ public abstract class ControllerBase
     /// <param name="actionName">The name of the action.</param>
     /// <returns>The created <see cref="RedirectToActionResult"/> for the response.</returns>
     [NonAction]
-    public virtual RedirectToActionResult RedirectToActionPermanent(string? actionName)
-        => RedirectToActionPermanent(actionName, routeValues: null);
+    public virtual RedirectToActionResult RedirectToActionPermanent(string? actionName) =>
+        RedirectToActionPermanent(actionName, routeValues: null);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status301MovedPermanently"/>) to the specified action with
@@ -619,8 +645,10 @@ public abstract class ControllerBase
     /// <param name="routeValues">The parameters for a route.</param>
     /// <returns>The created <see cref="RedirectToActionResult"/> for the response.</returns>
     [NonAction]
-    public virtual RedirectToActionResult RedirectToActionPermanent(string? actionName, object? routeValues)
-        => RedirectToActionPermanent(actionName, controllerName: null, routeValues: routeValues);
+    public virtual RedirectToActionResult RedirectToActionPermanent(
+        string? actionName,
+        object? routeValues
+    ) => RedirectToActionPermanent(actionName, controllerName: null, routeValues: routeValues);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status301MovedPermanently"/>) to the specified action with
@@ -631,8 +659,10 @@ public abstract class ControllerBase
     /// <param name="controllerName">The name of the controller.</param>
     /// <returns>The created <see cref="RedirectToActionResult"/> for the response.</returns>
     [NonAction]
-    public virtual RedirectToActionResult RedirectToActionPermanent(string? actionName, string? controllerName)
-        => RedirectToActionPermanent(actionName, controllerName, routeValues: null);
+    public virtual RedirectToActionResult RedirectToActionPermanent(
+        string? actionName,
+        string? controllerName
+    ) => RedirectToActionPermanent(actionName, controllerName, routeValues: null);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status301MovedPermanently"/>) to the specified action with
@@ -647,8 +677,14 @@ public abstract class ControllerBase
     public virtual RedirectToActionResult RedirectToActionPermanent(
         string? actionName,
         string? controllerName,
-        string? fragment)
-        => RedirectToActionPermanent(actionName, controllerName, routeValues: null, fragment: fragment);
+        string? fragment
+    ) =>
+        RedirectToActionPermanent(
+            actionName,
+            controllerName,
+            routeValues: null,
+            fragment: fragment
+        );
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status301MovedPermanently"/>) to the specified action with
@@ -663,8 +699,8 @@ public abstract class ControllerBase
     public virtual RedirectToActionResult RedirectToActionPermanent(
         string? actionName,
         string? controllerName,
-        object? routeValues)
-        => RedirectToActionPermanent(actionName, controllerName, routeValues, fragment: null);
+        object? routeValues
+    ) => RedirectToActionPermanent(actionName, controllerName, routeValues, fragment: null);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status301MovedPermanently"/>) to the specified action with
@@ -681,14 +717,16 @@ public abstract class ControllerBase
         string? actionName,
         string? controllerName,
         object? routeValues,
-        string? fragment)
+        string? fragment
+    )
     {
         return new RedirectToActionResult(
             actionName,
             controllerName,
             routeValues,
             permanent: true,
-            fragment: fragment)
+            fragment: fragment
+        )
         {
             UrlHelper = Url,
         };
@@ -710,7 +748,8 @@ public abstract class ControllerBase
         string? actionName = null,
         string? controllerName = null,
         object? routeValues = null,
-        string? fragment = null)
+        string? fragment = null
+    )
     {
         return new RedirectToActionResult(
             actionName: actionName,
@@ -718,7 +757,8 @@ public abstract class ControllerBase
             routeValues: routeValues,
             permanent: true,
             preserveMethod: true,
-            fragment: fragment)
+            fragment: fragment
+        )
         {
             UrlHelper = Url,
         };
@@ -730,8 +770,8 @@ public abstract class ControllerBase
     /// <param name="routeName">The name of the route.</param>
     /// <returns>The created <see cref="RedirectToRouteResult"/> for the response.</returns>
     [NonAction]
-    public virtual RedirectToRouteResult RedirectToRoute(string? routeName)
-        => RedirectToRoute(routeName, routeValues: null);
+    public virtual RedirectToRouteResult RedirectToRoute(string? routeName) =>
+        RedirectToRoute(routeName, routeValues: null);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status302Found"/>) to the specified route using the specified <paramref name="routeValues"/>.
@@ -739,8 +779,8 @@ public abstract class ControllerBase
     /// <param name="routeValues">The parameters for a route.</param>
     /// <returns>The created <see cref="RedirectToRouteResult"/> for the response.</returns>
     [NonAction]
-    public virtual RedirectToRouteResult RedirectToRoute(object? routeValues)
-        => RedirectToRoute(routeName: null, routeValues: routeValues);
+    public virtual RedirectToRouteResult RedirectToRoute(object? routeValues) =>
+        RedirectToRoute(routeName: null, routeValues: routeValues);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status302Found"/>) to the specified route using the specified
@@ -750,8 +790,8 @@ public abstract class ControllerBase
     /// <param name="routeValues">The parameters for a route.</param>
     /// <returns>The created <see cref="RedirectToRouteResult"/> for the response.</returns>
     [NonAction]
-    public virtual RedirectToRouteResult RedirectToRoute(string? routeName, object? routeValues)
-        => RedirectToRoute(routeName, routeValues, fragment: null);
+    public virtual RedirectToRouteResult RedirectToRoute(string? routeName, object? routeValues) =>
+        RedirectToRoute(routeName, routeValues, fragment: null);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status302Found"/>) to the specified route using the specified
@@ -761,8 +801,8 @@ public abstract class ControllerBase
     /// <param name="fragment">The fragment to add to the URL.</param>
     /// <returns>The created <see cref="RedirectToRouteResult"/> for the response.</returns>
     [NonAction]
-    public virtual RedirectToRouteResult RedirectToRoute(string? routeName, string? fragment)
-        => RedirectToRoute(routeName, routeValues: null, fragment: fragment);
+    public virtual RedirectToRouteResult RedirectToRoute(string? routeName, string? fragment) =>
+        RedirectToRoute(routeName, routeValues: null, fragment: fragment);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status302Found"/>) to the specified route using the specified
@@ -776,12 +816,10 @@ public abstract class ControllerBase
     public virtual RedirectToRouteResult RedirectToRoute(
         string? routeName,
         object? routeValues,
-        string? fragment)
+        string? fragment
+    )
     {
-        return new RedirectToRouteResult(routeName, routeValues, fragment)
-        {
-            UrlHelper = Url,
-        };
+        return new RedirectToRouteResult(routeName, routeValues, fragment) { UrlHelper = Url, };
     }
 
     /// <summary>
@@ -797,14 +835,16 @@ public abstract class ControllerBase
     public virtual RedirectToRouteResult RedirectToRoutePreserveMethod(
         string? routeName = null,
         object? routeValues = null,
-        string? fragment = null)
+        string? fragment = null
+    )
     {
         return new RedirectToRouteResult(
             routeName: routeName,
             routeValues: routeValues,
             permanent: false,
             preserveMethod: true,
-            fragment: fragment)
+            fragment: fragment
+        )
         {
             UrlHelper = Url,
         };
@@ -817,8 +857,8 @@ public abstract class ControllerBase
     /// <param name="routeName">The name of the route.</param>
     /// <returns>The created <see cref="RedirectToRouteResult"/> for the response.</returns>
     [NonAction]
-    public virtual RedirectToRouteResult RedirectToRoutePermanent(string? routeName)
-        => RedirectToRoutePermanent(routeName, routeValues: null);
+    public virtual RedirectToRouteResult RedirectToRoutePermanent(string? routeName) =>
+        RedirectToRoutePermanent(routeName, routeValues: null);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status301MovedPermanently"/>) to the specified route with
@@ -827,8 +867,8 @@ public abstract class ControllerBase
     /// <param name="routeValues">The parameters for a route.</param>
     /// <returns>The created <see cref="RedirectToRouteResult"/> for the response.</returns>
     [NonAction]
-    public virtual RedirectToRouteResult RedirectToRoutePermanent(object? routeValues)
-        => RedirectToRoutePermanent(routeName: null, routeValues: routeValues);
+    public virtual RedirectToRouteResult RedirectToRoutePermanent(object? routeValues) =>
+        RedirectToRoutePermanent(routeName: null, routeValues: routeValues);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status301MovedPermanently"/>) to the specified route with
@@ -839,8 +879,10 @@ public abstract class ControllerBase
     /// <param name="routeValues">The parameters for a route.</param>
     /// <returns>The created <see cref="RedirectToRouteResult"/> for the response.</returns>
     [NonAction]
-    public virtual RedirectToRouteResult RedirectToRoutePermanent(string? routeName, object? routeValues)
-        => RedirectToRoutePermanent(routeName, routeValues, fragment: null);
+    public virtual RedirectToRouteResult RedirectToRoutePermanent(
+        string? routeName,
+        object? routeValues
+    ) => RedirectToRoutePermanent(routeName, routeValues, fragment: null);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status301MovedPermanently"/>) to the specified route with
@@ -851,8 +893,10 @@ public abstract class ControllerBase
     /// <param name="fragment">The fragment to add to the URL.</param>
     /// <returns>The created <see cref="RedirectToRouteResult"/> for the response.</returns>
     [NonAction]
-    public virtual RedirectToRouteResult RedirectToRoutePermanent(string? routeName, string? fragment)
-        => RedirectToRoutePermanent(routeName, routeValues: null, fragment: fragment);
+    public virtual RedirectToRouteResult RedirectToRoutePermanent(
+        string? routeName,
+        string? fragment
+    ) => RedirectToRoutePermanent(routeName, routeValues: null, fragment: fragment);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status301MovedPermanently"/>) to the specified route with
@@ -867,9 +911,15 @@ public abstract class ControllerBase
     public virtual RedirectToRouteResult RedirectToRoutePermanent(
         string? routeName,
         object? routeValues,
-        string? fragment)
+        string? fragment
+    )
     {
-        return new RedirectToRouteResult(routeName, routeValues, permanent: true, fragment: fragment)
+        return new RedirectToRouteResult(
+            routeName,
+            routeValues,
+            permanent: true,
+            fragment: fragment
+        )
         {
             UrlHelper = Url,
         };
@@ -888,14 +938,16 @@ public abstract class ControllerBase
     public virtual RedirectToRouteResult RedirectToRoutePermanentPreserveMethod(
         string? routeName = null,
         object? routeValues = null,
-        string? fragment = null)
+        string? fragment = null
+    )
     {
         return new RedirectToRouteResult(
             routeName: routeName,
             routeValues: routeValues,
             permanent: true,
             preserveMethod: true,
-            fragment: fragment)
+            fragment: fragment
+        )
         {
             UrlHelper = Url,
         };
@@ -907,8 +959,8 @@ public abstract class ControllerBase
     /// <param name="pageName">The name of the page.</param>
     /// <returns>The <see cref="RedirectToPageResult"/>.</returns>
     [NonAction]
-    public virtual RedirectToPageResult RedirectToPage(string pageName)
-        => RedirectToPage(pageName, routeValues: null);
+    public virtual RedirectToPageResult RedirectToPage(string pageName) =>
+        RedirectToPage(pageName, routeValues: null);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status302Found"/>) to the specified <paramref name="pageName"/>
@@ -918,8 +970,8 @@ public abstract class ControllerBase
     /// <param name="routeValues">The parameters for a route.</param>
     /// <returns>The <see cref="RedirectToPageResult"/>.</returns>
     [NonAction]
-    public virtual RedirectToPageResult RedirectToPage(string pageName, object? routeValues)
-        => RedirectToPage(pageName, pageHandler: null, routeValues: routeValues, fragment: null);
+    public virtual RedirectToPageResult RedirectToPage(string pageName, object? routeValues) =>
+        RedirectToPage(pageName, pageHandler: null, routeValues: routeValues, fragment: null);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status302Found"/>) to the specified <paramref name="pageName"/>
@@ -929,8 +981,8 @@ public abstract class ControllerBase
     /// <param name="pageHandler">The page handler to redirect to.</param>
     /// <returns>The <see cref="RedirectToPageResult"/>.</returns>
     [NonAction]
-    public virtual RedirectToPageResult RedirectToPage(string pageName, string? pageHandler)
-        => RedirectToPage(pageName, pageHandler, routeValues: null);
+    public virtual RedirectToPageResult RedirectToPage(string pageName, string? pageHandler) =>
+        RedirectToPage(pageName, pageHandler, routeValues: null);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status302Found"/>) to the specified <paramref name="pageName"/>.
@@ -940,8 +992,11 @@ public abstract class ControllerBase
     /// <param name="routeValues">The parameters for a route.</param>
     /// <returns>The <see cref="RedirectToPageResult"/>.</returns>
     [NonAction]
-    public virtual RedirectToPageResult RedirectToPage(string pageName, string? pageHandler, object? routeValues)
-        => RedirectToPage(pageName, pageHandler, routeValues, fragment: null);
+    public virtual RedirectToPageResult RedirectToPage(
+        string pageName,
+        string? pageHandler,
+        object? routeValues
+    ) => RedirectToPage(pageName, pageHandler, routeValues, fragment: null);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status302Found"/>) to the specified <paramref name="pageName"/>
@@ -952,8 +1007,11 @@ public abstract class ControllerBase
     /// <param name="fragment">The fragment to add to the URL.</param>
     /// <returns>The <see cref="RedirectToPageResult"/>.</returns>
     [NonAction]
-    public virtual RedirectToPageResult RedirectToPage(string pageName, string? pageHandler, string? fragment)
-        => RedirectToPage(pageName, pageHandler, routeValues: null, fragment: fragment);
+    public virtual RedirectToPageResult RedirectToPage(
+        string pageName,
+        string? pageHandler,
+        string? fragment
+    ) => RedirectToPage(pageName, pageHandler, routeValues: null, fragment: fragment);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status302Found"/>) to the specified <paramref name="pageName"/>
@@ -965,8 +1023,12 @@ public abstract class ControllerBase
     /// <param name="fragment">The fragment to add to the URL.</param>
     /// <returns>The <see cref="RedirectToPageResult"/>.</returns>
     [NonAction]
-    public virtual RedirectToPageResult RedirectToPage(string pageName, string? pageHandler, object? routeValues, string? fragment)
-        => new RedirectToPageResult(pageName, pageHandler, routeValues, fragment);
+    public virtual RedirectToPageResult RedirectToPage(
+        string pageName,
+        string? pageHandler,
+        object? routeValues,
+        string? fragment
+    ) => new RedirectToPageResult(pageName, pageHandler, routeValues, fragment);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status301MovedPermanently"/>) to the specified <paramref name="pageName"/>.
@@ -974,8 +1036,8 @@ public abstract class ControllerBase
     /// <param name="pageName">The name of the page.</param>
     /// <returns>The <see cref="RedirectToPageResult"/> with <see cref="RedirectToPageResult.Permanent"/> set.</returns>
     [NonAction]
-    public virtual RedirectToPageResult RedirectToPagePermanent(string pageName)
-        => RedirectToPagePermanent(pageName, routeValues: null);
+    public virtual RedirectToPageResult RedirectToPagePermanent(string pageName) =>
+        RedirectToPagePermanent(pageName, routeValues: null);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status301MovedPermanently"/>) to the specified <paramref name="pageName"/>
@@ -985,8 +1047,16 @@ public abstract class ControllerBase
     /// <param name="routeValues">The parameters for a route.</param>
     /// <returns>The <see cref="RedirectToPageResult"/> with <see cref="RedirectToPageResult.Permanent"/> set.</returns>
     [NonAction]
-    public virtual RedirectToPageResult RedirectToPagePermanent(string pageName, object? routeValues)
-        => RedirectToPagePermanent(pageName, pageHandler: null, routeValues: routeValues, fragment: null);
+    public virtual RedirectToPageResult RedirectToPagePermanent(
+        string pageName,
+        object? routeValues
+    ) =>
+        RedirectToPagePermanent(
+            pageName,
+            pageHandler: null,
+            routeValues: routeValues,
+            fragment: null
+        );
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status301MovedPermanently"/>) to the specified <paramref name="pageName"/>
@@ -996,8 +1066,10 @@ public abstract class ControllerBase
     /// <param name="pageHandler">The page handler to redirect to.</param>
     /// <returns>The <see cref="RedirectToPageResult"/> with <see cref="RedirectToPageResult.Permanent"/> set.</returns>
     [NonAction]
-    public virtual RedirectToPageResult RedirectToPagePermanent(string pageName, string? pageHandler)
-        => RedirectToPagePermanent(pageName, pageHandler, routeValues: null, fragment: null);
+    public virtual RedirectToPageResult RedirectToPagePermanent(
+        string pageName,
+        string? pageHandler
+    ) => RedirectToPagePermanent(pageName, pageHandler, routeValues: null, fragment: null);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status301MovedPermanently"/>) to the specified <paramref name="pageName"/>
@@ -1008,8 +1080,11 @@ public abstract class ControllerBase
     /// <param name="fragment">The fragment to add to the URL.</param>
     /// <returns>The <see cref="RedirectToPageResult"/> with <see cref="RedirectToPageResult.Permanent"/> set.</returns>
     [NonAction]
-    public virtual RedirectToPageResult RedirectToPagePermanent(string pageName, string? pageHandler, string? fragment)
-        => RedirectToPagePermanent(pageName, pageHandler, routeValues: null, fragment: fragment);
+    public virtual RedirectToPageResult RedirectToPagePermanent(
+        string pageName,
+        string? pageHandler,
+        string? fragment
+    ) => RedirectToPagePermanent(pageName, pageHandler, routeValues: null, fragment: fragment);
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status301MovedPermanently"/>) to the specified <paramref name="pageName"/>
@@ -1025,8 +1100,15 @@ public abstract class ControllerBase
         string pageName,
         string? pageHandler,
         object? routeValues,
-        string? fragment)
-        => new RedirectToPageResult(pageName, pageHandler, routeValues, permanent: true, fragment: fragment);
+        string? fragment
+    ) =>
+        new RedirectToPageResult(
+            pageName,
+            pageHandler,
+            routeValues,
+            permanent: true,
+            fragment: fragment
+        );
 
     /// <summary>
     /// Redirects (<see cref="StatusCodes.Status307TemporaryRedirect"/>) to the specified page with
@@ -1043,7 +1125,8 @@ public abstract class ControllerBase
         string pageName,
         string? pageHandler = null,
         object? routeValues = null,
-        string? fragment = null)
+        string? fragment = null
+    )
     {
         ArgumentNullException.ThrowIfNull(pageName);
 
@@ -1053,7 +1136,8 @@ public abstract class ControllerBase
             routeValues: routeValues,
             permanent: false,
             preserveMethod: true,
-            fragment: fragment);
+            fragment: fragment
+        );
     }
 
     /// <summary>
@@ -1071,7 +1155,8 @@ public abstract class ControllerBase
         string pageName,
         string? pageHandler = null,
         object? routeValues = null,
-        string? fragment = null)
+        string? fragment = null
+    )
     {
         ArgumentNullException.ThrowIfNull(pageName);
 
@@ -1081,7 +1166,8 @@ public abstract class ControllerBase
             routeValues: routeValues,
             permanent: true,
             preserveMethod: true,
-            fragment: fragment);
+            fragment: fragment
+        );
     }
     #endregion
 
@@ -1096,8 +1182,8 @@ public abstract class ControllerBase
     /// <param name="contentType">The Content-Type of the file.</param>
     /// <returns>The created <see cref="FileContentResult"/> for the response.</returns>
     [NonAction]
-    public virtual FileContentResult File(byte[] fileContents, string contentType)
-        => File(fileContents, contentType, fileDownloadName: null);
+    public virtual FileContentResult File(byte[] fileContents, string contentType) =>
+        File(fileContents, contentType, fileDownloadName: null);
 
     /// <summary>
     /// Returns a file with the specified <paramref name="fileContents" /> as content (<see cref="StatusCodes.Status200OK"/>),
@@ -1110,8 +1196,17 @@ public abstract class ControllerBase
     /// <param name="enableRangeProcessing">Set to <c>true</c> to enable range requests processing.</param>
     /// <returns>The created <see cref="FileContentResult"/> for the response.</returns>
     [NonAction]
-    public virtual FileContentResult File(byte[] fileContents, string contentType, bool enableRangeProcessing)
-        => File(fileContents, contentType, fileDownloadName: null, enableRangeProcessing: enableRangeProcessing);
+    public virtual FileContentResult File(
+        byte[] fileContents,
+        string contentType,
+        bool enableRangeProcessing
+    ) =>
+        File(
+            fileContents,
+            contentType,
+            fileDownloadName: null,
+            enableRangeProcessing: enableRangeProcessing
+        );
 
     /// <summary>
     /// Returns a file with the specified <paramref name="fileContents" /> as content (<see cref="StatusCodes.Status200OK"/>), the
@@ -1124,8 +1219,11 @@ public abstract class ControllerBase
     /// <param name="fileDownloadName">The suggested file name.</param>
     /// <returns>The created <see cref="FileContentResult"/> for the response.</returns>
     [NonAction]
-    public virtual FileContentResult File(byte[] fileContents, string contentType, string? fileDownloadName)
-        => new FileContentResult(fileContents, contentType) { FileDownloadName = fileDownloadName };
+    public virtual FileContentResult File(
+        byte[] fileContents,
+        string contentType,
+        string? fileDownloadName
+    ) => new FileContentResult(fileContents, contentType) { FileDownloadName = fileDownloadName };
 
     /// <summary>
     /// Returns a file with the specified <paramref name="fileContents" /> as content (<see cref="StatusCodes.Status200OK"/>), the
@@ -1139,8 +1237,13 @@ public abstract class ControllerBase
     /// <param name="enableRangeProcessing">Set to <c>true</c> to enable range requests processing.</param>
     /// <returns>The created <see cref="FileContentResult"/> for the response.</returns>
     [NonAction]
-    public virtual FileContentResult File(byte[] fileContents, string contentType, string? fileDownloadName, bool enableRangeProcessing)
-        => new FileContentResult(fileContents, contentType)
+    public virtual FileContentResult File(
+        byte[] fileContents,
+        string contentType,
+        string? fileDownloadName,
+        bool enableRangeProcessing
+    ) =>
+        new FileContentResult(fileContents, contentType)
         {
             FileDownloadName = fileDownloadName,
             EnableRangeProcessing = enableRangeProcessing,
@@ -1158,7 +1261,12 @@ public abstract class ControllerBase
     /// <param name="entityTag">The <see cref="EntityTagHeaderValue"/> associated with the file.</param>
     /// <returns>The created <see cref="FileContentResult"/> for the response.</returns>
     [NonAction]
-    public virtual FileContentResult File(byte[] fileContents, string contentType, DateTimeOffset? lastModified, EntityTagHeaderValue entityTag)
+    public virtual FileContentResult File(
+        byte[] fileContents,
+        string contentType,
+        DateTimeOffset? lastModified,
+        EntityTagHeaderValue entityTag
+    )
     {
         return new FileContentResult(fileContents, contentType)
         {
@@ -1180,7 +1288,13 @@ public abstract class ControllerBase
     /// <param name="enableRangeProcessing">Set to <c>true</c> to enable range requests processing.</param>
     /// <returns>The created <see cref="FileContentResult"/> for the response.</returns>
     [NonAction]
-    public virtual FileContentResult File(byte[] fileContents, string contentType, DateTimeOffset? lastModified, EntityTagHeaderValue entityTag, bool enableRangeProcessing)
+    public virtual FileContentResult File(
+        byte[] fileContents,
+        string contentType,
+        DateTimeOffset? lastModified,
+        EntityTagHeaderValue entityTag,
+        bool enableRangeProcessing
+    )
     {
         return new FileContentResult(fileContents, contentType)
         {
@@ -1203,7 +1317,13 @@ public abstract class ControllerBase
     /// <param name="entityTag">The <see cref="EntityTagHeaderValue"/> associated with the file.</param>
     /// <returns>The created <see cref="FileContentResult"/> for the response.</returns>
     [NonAction]
-    public virtual FileContentResult File(byte[] fileContents, string contentType, string? fileDownloadName, DateTimeOffset? lastModified, EntityTagHeaderValue entityTag)
+    public virtual FileContentResult File(
+        byte[] fileContents,
+        string contentType,
+        string? fileDownloadName,
+        DateTimeOffset? lastModified,
+        EntityTagHeaderValue entityTag
+    )
     {
         return new FileContentResult(fileContents, contentType)
         {
@@ -1227,7 +1347,14 @@ public abstract class ControllerBase
     /// <param name="enableRangeProcessing">Set to <c>true</c> to enable range requests processing.</param>
     /// <returns>The created <see cref="FileContentResult"/> for the response.</returns>
     [NonAction]
-    public virtual FileContentResult File(byte[] fileContents, string contentType, string? fileDownloadName, DateTimeOffset? lastModified, EntityTagHeaderValue entityTag, bool enableRangeProcessing)
+    public virtual FileContentResult File(
+        byte[] fileContents,
+        string contentType,
+        string? fileDownloadName,
+        DateTimeOffset? lastModified,
+        EntityTagHeaderValue entityTag,
+        bool enableRangeProcessing
+    )
     {
         return new FileContentResult(fileContents, contentType)
         {
@@ -1251,8 +1378,8 @@ public abstract class ControllerBase
     /// The <paramref name="fileStream" /> parameter is disposed after the response is sent.
     /// </remarks>
     [NonAction]
-    public virtual FileStreamResult File(Stream fileStream, string contentType)
-        => File(fileStream, contentType, fileDownloadName: null);
+    public virtual FileStreamResult File(Stream fileStream, string contentType) =>
+        File(fileStream, contentType, fileDownloadName: null);
 
     /// <summary>
     /// Returns a file in the specified <paramref name="fileStream" /> (<see cref="StatusCodes.Status200OK"/>), with the
@@ -1268,8 +1395,17 @@ public abstract class ControllerBase
     /// The <paramref name="fileStream" /> parameter is disposed after the response is sent.
     /// </remarks>
     [NonAction]
-    public virtual FileStreamResult File(Stream fileStream, string contentType, bool enableRangeProcessing)
-        => File(fileStream, contentType, fileDownloadName: null, enableRangeProcessing: enableRangeProcessing);
+    public virtual FileStreamResult File(
+        Stream fileStream,
+        string contentType,
+        bool enableRangeProcessing
+    ) =>
+        File(
+            fileStream,
+            contentType,
+            fileDownloadName: null,
+            enableRangeProcessing: enableRangeProcessing
+        );
 
     /// <summary>
     /// Returns a file in the specified <paramref name="fileStream" /> (<see cref="StatusCodes.Status200OK"/>) with the
@@ -1286,8 +1422,11 @@ public abstract class ControllerBase
     /// The <paramref name="fileStream" /> parameter is disposed after the response is sent.
     /// </remarks>
     [NonAction]
-    public virtual FileStreamResult File(Stream fileStream, string contentType, string? fileDownloadName)
-        => new FileStreamResult(fileStream, contentType) { FileDownloadName = fileDownloadName };
+    public virtual FileStreamResult File(
+        Stream fileStream,
+        string contentType,
+        string? fileDownloadName
+    ) => new FileStreamResult(fileStream, contentType) { FileDownloadName = fileDownloadName };
 
     /// <summary>
     /// Returns a file in the specified <paramref name="fileStream" /> (<see cref="StatusCodes.Status200OK"/>) with the
@@ -1305,8 +1444,13 @@ public abstract class ControllerBase
     /// The <paramref name="fileStream" /> parameter is disposed after the response is sent.
     /// </remarks>
     [NonAction]
-    public virtual FileStreamResult File(Stream fileStream, string contentType, string? fileDownloadName, bool enableRangeProcessing)
-        => new FileStreamResult(fileStream, contentType)
+    public virtual FileStreamResult File(
+        Stream fileStream,
+        string contentType,
+        string? fileDownloadName,
+        bool enableRangeProcessing
+    ) =>
+        new FileStreamResult(fileStream, contentType)
         {
             FileDownloadName = fileDownloadName,
             EnableRangeProcessing = enableRangeProcessing,
@@ -1327,7 +1471,12 @@ public abstract class ControllerBase
     /// The <paramref name="fileStream" /> parameter is disposed after the response is sent.
     /// </remarks>
     [NonAction]
-    public virtual FileStreamResult File(Stream fileStream, string contentType, DateTimeOffset? lastModified, EntityTagHeaderValue entityTag)
+    public virtual FileStreamResult File(
+        Stream fileStream,
+        string contentType,
+        DateTimeOffset? lastModified,
+        EntityTagHeaderValue entityTag
+    )
     {
         return new FileStreamResult(fileStream, contentType)
         {
@@ -1352,7 +1501,13 @@ public abstract class ControllerBase
     /// The <paramref name="fileStream" /> parameter is disposed after the response is sent.
     /// </remarks>
     [NonAction]
-    public virtual FileStreamResult File(Stream fileStream, string contentType, DateTimeOffset? lastModified, EntityTagHeaderValue entityTag, bool enableRangeProcessing)
+    public virtual FileStreamResult File(
+        Stream fileStream,
+        string contentType,
+        DateTimeOffset? lastModified,
+        EntityTagHeaderValue entityTag,
+        bool enableRangeProcessing
+    )
     {
         return new FileStreamResult(fileStream, contentType)
         {
@@ -1378,7 +1533,13 @@ public abstract class ControllerBase
     /// The <paramref name="fileStream" /> parameter is disposed after the response is sent.
     /// </remarks>
     [NonAction]
-    public virtual FileStreamResult File(Stream fileStream, string contentType, string? fileDownloadName, DateTimeOffset? lastModified, EntityTagHeaderValue entityTag)
+    public virtual FileStreamResult File(
+        Stream fileStream,
+        string contentType,
+        string? fileDownloadName,
+        DateTimeOffset? lastModified,
+        EntityTagHeaderValue entityTag
+    )
     {
         return new FileStreamResult(fileStream, contentType)
         {
@@ -1405,7 +1566,14 @@ public abstract class ControllerBase
     /// The <paramref name="fileStream" /> parameter is disposed after the response is sent.
     /// </remarks>
     [NonAction]
-    public virtual FileStreamResult File(Stream fileStream, string contentType, string? fileDownloadName, DateTimeOffset? lastModified, EntityTagHeaderValue entityTag, bool enableRangeProcessing)
+    public virtual FileStreamResult File(
+        Stream fileStream,
+        string contentType,
+        string? fileDownloadName,
+        DateTimeOffset? lastModified,
+        EntityTagHeaderValue entityTag,
+        bool enableRangeProcessing
+    )
     {
         return new FileStreamResult(fileStream, contentType)
         {
@@ -1426,8 +1594,8 @@ public abstract class ControllerBase
     /// <param name="contentType">The Content-Type of the file.</param>
     /// <returns>The created <see cref="VirtualFileResult"/> for the response.</returns>
     [NonAction]
-    public virtual VirtualFileResult File(string virtualPath, string contentType)
-        => File(virtualPath, contentType, fileDownloadName: null);
+    public virtual VirtualFileResult File(string virtualPath, string contentType) =>
+        File(virtualPath, contentType, fileDownloadName: null);
 
     /// <summary>
     /// Returns the file specified by <paramref name="virtualPath" /> (<see cref="StatusCodes.Status200OK"/>) with the
@@ -1440,8 +1608,17 @@ public abstract class ControllerBase
     /// <param name="enableRangeProcessing">Set to <c>true</c> to enable range requests processing.</param>
     /// <returns>The created <see cref="VirtualFileResult"/> for the response.</returns>
     [NonAction]
-    public virtual VirtualFileResult File(string virtualPath, string contentType, bool enableRangeProcessing)
-        => File(virtualPath, contentType, fileDownloadName: null, enableRangeProcessing: enableRangeProcessing);
+    public virtual VirtualFileResult File(
+        string virtualPath,
+        string contentType,
+        bool enableRangeProcessing
+    ) =>
+        File(
+            virtualPath,
+            contentType,
+            fileDownloadName: null,
+            enableRangeProcessing: enableRangeProcessing
+        );
 
     /// <summary>
     /// Returns the file specified by <paramref name="virtualPath" /> (<see cref="StatusCodes.Status200OK"/>) with the
@@ -1455,8 +1632,11 @@ public abstract class ControllerBase
     /// <param name="fileDownloadName">The suggested file name.</param>
     /// <returns>The created <see cref="VirtualFileResult"/> for the response.</returns>
     [NonAction]
-    public virtual VirtualFileResult File(string virtualPath, string contentType, string? fileDownloadName)
-        => new VirtualFileResult(virtualPath, contentType) { FileDownloadName = fileDownloadName };
+    public virtual VirtualFileResult File(
+        string virtualPath,
+        string contentType,
+        string? fileDownloadName
+    ) => new VirtualFileResult(virtualPath, contentType) { FileDownloadName = fileDownloadName };
 
     /// <summary>
     /// Returns the file specified by <paramref name="virtualPath" /> (<see cref="StatusCodes.Status200OK"/>) with the
@@ -1471,8 +1651,13 @@ public abstract class ControllerBase
     /// <param name="enableRangeProcessing">Set to <c>true</c> to enable range requests processing.</param>
     /// <returns>The created <see cref="VirtualFileResult"/> for the response.</returns>
     [NonAction]
-    public virtual VirtualFileResult File(string virtualPath, string contentType, string? fileDownloadName, bool enableRangeProcessing)
-        => new VirtualFileResult(virtualPath, contentType)
+    public virtual VirtualFileResult File(
+        string virtualPath,
+        string contentType,
+        string? fileDownloadName,
+        bool enableRangeProcessing
+    ) =>
+        new VirtualFileResult(virtualPath, contentType)
         {
             FileDownloadName = fileDownloadName,
             EnableRangeProcessing = enableRangeProcessing,
@@ -1490,7 +1675,12 @@ public abstract class ControllerBase
     /// <param name="entityTag">The <see cref="EntityTagHeaderValue"/> associated with the file.</param>
     /// <returns>The created <see cref="VirtualFileResult"/> for the response.</returns>
     [NonAction]
-    public virtual VirtualFileResult File(string virtualPath, string contentType, DateTimeOffset? lastModified, EntityTagHeaderValue entityTag)
+    public virtual VirtualFileResult File(
+        string virtualPath,
+        string contentType,
+        DateTimeOffset? lastModified,
+        EntityTagHeaderValue entityTag
+    )
     {
         return new VirtualFileResult(virtualPath, contentType)
         {
@@ -1512,7 +1702,13 @@ public abstract class ControllerBase
     /// <param name="enableRangeProcessing">Set to <c>true</c> to enable range requests processing.</param>
     /// <returns>The created <see cref="VirtualFileResult"/> for the response.</returns>
     [NonAction]
-    public virtual VirtualFileResult File(string virtualPath, string contentType, DateTimeOffset? lastModified, EntityTagHeaderValue entityTag, bool enableRangeProcessing)
+    public virtual VirtualFileResult File(
+        string virtualPath,
+        string contentType,
+        DateTimeOffset? lastModified,
+        EntityTagHeaderValue entityTag,
+        bool enableRangeProcessing
+    )
     {
         return new VirtualFileResult(virtualPath, contentType)
         {
@@ -1535,7 +1731,13 @@ public abstract class ControllerBase
     /// <param name="entityTag">The <see cref="EntityTagHeaderValue"/> associated with the file.</param>
     /// <returns>The created <see cref="VirtualFileResult"/> for the response.</returns>
     [NonAction]
-    public virtual VirtualFileResult File(string virtualPath, string contentType, string? fileDownloadName, DateTimeOffset? lastModified, EntityTagHeaderValue entityTag)
+    public virtual VirtualFileResult File(
+        string virtualPath,
+        string contentType,
+        string? fileDownloadName,
+        DateTimeOffset? lastModified,
+        EntityTagHeaderValue entityTag
+    )
     {
         return new VirtualFileResult(virtualPath, contentType)
         {
@@ -1559,7 +1761,14 @@ public abstract class ControllerBase
     /// <param name="enableRangeProcessing">Set to <c>true</c> to enable range requests processing.</param>
     /// <returns>The created <see cref="VirtualFileResult"/> for the response.</returns>
     [NonAction]
-    public virtual VirtualFileResult File(string virtualPath, string contentType, string? fileDownloadName, DateTimeOffset? lastModified, EntityTagHeaderValue entityTag, bool enableRangeProcessing)
+    public virtual VirtualFileResult File(
+        string virtualPath,
+        string contentType,
+        string? fileDownloadName,
+        DateTimeOffset? lastModified,
+        EntityTagHeaderValue entityTag,
+        bool enableRangeProcessing
+    )
     {
         return new VirtualFileResult(virtualPath, contentType)
         {
@@ -1580,8 +1789,8 @@ public abstract class ControllerBase
     /// <param name="contentType">The Content-Type of the file.</param>
     /// <returns>The created <see cref="PhysicalFileResult"/> for the response.</returns>
     [NonAction]
-    public virtual PhysicalFileResult PhysicalFile(string physicalPath, string contentType)
-        => PhysicalFile(physicalPath, contentType, fileDownloadName: null);
+    public virtual PhysicalFileResult PhysicalFile(string physicalPath, string contentType) =>
+        PhysicalFile(physicalPath, contentType, fileDownloadName: null);
 
     /// <summary>
     /// Returns the file specified by <paramref name="physicalPath" /> (<see cref="StatusCodes.Status200OK"/>) with the
@@ -1594,8 +1803,17 @@ public abstract class ControllerBase
     /// <param name="enableRangeProcessing">Set to <c>true</c> to enable range requests processing.</param>
     /// <returns>The created <see cref="PhysicalFileResult"/> for the response.</returns>
     [NonAction]
-    public virtual PhysicalFileResult PhysicalFile(string physicalPath, string contentType, bool enableRangeProcessing)
-        => PhysicalFile(physicalPath, contentType, fileDownloadName: null, enableRangeProcessing: enableRangeProcessing);
+    public virtual PhysicalFileResult PhysicalFile(
+        string physicalPath,
+        string contentType,
+        bool enableRangeProcessing
+    ) =>
+        PhysicalFile(
+            physicalPath,
+            contentType,
+            fileDownloadName: null,
+            enableRangeProcessing: enableRangeProcessing
+        );
 
     /// <summary>
     /// Returns the file specified by <paramref name="physicalPath" /> (<see cref="StatusCodes.Status200OK"/>) with the
@@ -1612,8 +1830,8 @@ public abstract class ControllerBase
     public virtual PhysicalFileResult PhysicalFile(
         string physicalPath,
         string contentType,
-        string? fileDownloadName)
-        => new PhysicalFileResult(physicalPath, contentType) { FileDownloadName = fileDownloadName };
+        string? fileDownloadName
+    ) => new PhysicalFileResult(physicalPath, contentType) { FileDownloadName = fileDownloadName };
 
     /// <summary>
     /// Returns the file specified by <paramref name="physicalPath" /> (<see cref="StatusCodes.Status200OK"/>) with the
@@ -1632,8 +1850,9 @@ public abstract class ControllerBase
         string physicalPath,
         string contentType,
         string? fileDownloadName,
-        bool enableRangeProcessing)
-        => new PhysicalFileResult(physicalPath, contentType)
+        bool enableRangeProcessing
+    ) =>
+        new PhysicalFileResult(physicalPath, contentType)
         {
             FileDownloadName = fileDownloadName,
             EnableRangeProcessing = enableRangeProcessing,
@@ -1651,7 +1870,12 @@ public abstract class ControllerBase
     /// <param name="entityTag">The <see cref="EntityTagHeaderValue"/> associated with the file.</param>
     /// <returns>The created <see cref="PhysicalFileResult"/> for the response.</returns>
     [NonAction]
-    public virtual PhysicalFileResult PhysicalFile(string physicalPath, string contentType, DateTimeOffset? lastModified, EntityTagHeaderValue entityTag)
+    public virtual PhysicalFileResult PhysicalFile(
+        string physicalPath,
+        string contentType,
+        DateTimeOffset? lastModified,
+        EntityTagHeaderValue entityTag
+    )
     {
         return new PhysicalFileResult(physicalPath, contentType)
         {
@@ -1673,7 +1897,13 @@ public abstract class ControllerBase
     /// <param name="enableRangeProcessing">Set to <c>true</c> to enable range requests processing.</param>
     /// <returns>The created <see cref="PhysicalFileResult"/> for the response.</returns>
     [NonAction]
-    public virtual PhysicalFileResult PhysicalFile(string physicalPath, string contentType, DateTimeOffset? lastModified, EntityTagHeaderValue entityTag, bool enableRangeProcessing)
+    public virtual PhysicalFileResult PhysicalFile(
+        string physicalPath,
+        string contentType,
+        DateTimeOffset? lastModified,
+        EntityTagHeaderValue entityTag,
+        bool enableRangeProcessing
+    )
     {
         return new PhysicalFileResult(physicalPath, contentType)
         {
@@ -1696,7 +1926,13 @@ public abstract class ControllerBase
     /// <param name="entityTag">The <see cref="EntityTagHeaderValue"/> associated with the file.</param>
     /// <returns>The created <see cref="PhysicalFileResult"/> for the response.</returns>
     [NonAction]
-    public virtual PhysicalFileResult PhysicalFile(string physicalPath, string contentType, string? fileDownloadName, DateTimeOffset? lastModified, EntityTagHeaderValue entityTag)
+    public virtual PhysicalFileResult PhysicalFile(
+        string physicalPath,
+        string contentType,
+        string? fileDownloadName,
+        DateTimeOffset? lastModified,
+        EntityTagHeaderValue entityTag
+    )
     {
         return new PhysicalFileResult(physicalPath, contentType)
         {
@@ -1720,7 +1956,14 @@ public abstract class ControllerBase
     /// <param name="enableRangeProcessing">Set to <c>true</c> to enable range requests processing.</param>
     /// <returns>The created <see cref="PhysicalFileResult"/> for the response.</returns>
     [NonAction]
-    public virtual PhysicalFileResult PhysicalFile(string physicalPath, string contentType, string? fileDownloadName, DateTimeOffset? lastModified, EntityTagHeaderValue entityTag, bool enableRangeProcessing)
+    public virtual PhysicalFileResult PhysicalFile(
+        string physicalPath,
+        string contentType,
+        string? fileDownloadName,
+        DateTimeOffset? lastModified,
+        EntityTagHeaderValue entityTag,
+        bool enableRangeProcessing
+    )
     {
         return new PhysicalFileResult(physicalPath, contentType)
         {
@@ -1737,40 +1980,37 @@ public abstract class ControllerBase
     /// </summary>
     /// <returns>The created <see cref="UnauthorizedResult"/> for the response.</returns>
     [NonAction]
-    public virtual UnauthorizedResult Unauthorized()
-        => new UnauthorizedResult();
+    public virtual UnauthorizedResult Unauthorized() => new UnauthorizedResult();
 
     /// <summary>
     /// Creates an <see cref="UnauthorizedObjectResult"/> that produces a <see cref="StatusCodes.Status401Unauthorized"/> response.
     /// </summary>
     /// <returns>The created <see cref="UnauthorizedObjectResult"/> for the response.</returns>
     [NonAction]
-    public virtual UnauthorizedObjectResult Unauthorized([ActionResultObjectValue] object? value)
-        => new UnauthorizedObjectResult(value);
+    public virtual UnauthorizedObjectResult Unauthorized([ActionResultObjectValue] object? value) =>
+        new UnauthorizedObjectResult(value);
 
     /// <summary>
     /// Creates a <see cref="NotFoundResult"/> that produces a <see cref="StatusCodes.Status404NotFound"/> response.
     /// </summary>
     /// <returns>The created <see cref="NotFoundResult"/> for the response.</returns>
     [NonAction]
-    public virtual NotFoundResult NotFound()
-        => new NotFoundResult();
+    public virtual NotFoundResult NotFound() => new NotFoundResult();
 
     /// <summary>
     /// Creates a <see cref="NotFoundObjectResult"/> that produces a <see cref="StatusCodes.Status404NotFound"/> response.
     /// </summary>
     /// <returns>The created <see cref="NotFoundObjectResult"/> for the response.</returns>
     [NonAction]
-    public virtual NotFoundObjectResult NotFound([ActionResultObjectValue] object? value)
-        => new NotFoundObjectResult(value);
+    public virtual NotFoundObjectResult NotFound([ActionResultObjectValue] object? value) =>
+        new NotFoundObjectResult(value);
 
     /// <summary>
     /// Creates a <see cref="BadRequestResult"/> that produces a <see cref="StatusCodes.Status400BadRequest"/> response.
     /// </summary>
     /// <returns>The created <see cref="BadRequestResult"/> for the response.</returns>
     [NonAction]
-    public virtual BadRequestResult BadRequest()
-        => new BadRequestResult();
+    public virtual BadRequestResult BadRequest() => new BadRequestResult();
 
     /// <summary>
     /// Creates a <see cref="BadRequestObjectResult"/> that produces a <see cref="StatusCodes.Status400BadRequest"/> response.
@@ -1778,8 +2018,8 @@ public abstract class ControllerBase
     /// <param name="error">An error object to be returned to the client.</param>
     /// <returns>The created <see cref="BadRequestObjectResult"/> for the response.</returns>
     [NonAction]
-    public virtual BadRequestObjectResult BadRequest([ActionResultObjectValue] object? error)
-        => new BadRequestObjectResult(error);
+    public virtual BadRequestObjectResult BadRequest([ActionResultObjectValue] object? error) =>
+        new BadRequestObjectResult(error);
 
     /// <summary>
     /// Creates a <see cref="BadRequestObjectResult"/> that produces a <see cref="StatusCodes.Status400BadRequest"/> response.
@@ -1787,7 +2027,9 @@ public abstract class ControllerBase
     /// <param name="modelState">The <see cref="ModelStateDictionary" /> containing errors to be returned to the client.</param>
     /// <returns>The created <see cref="BadRequestObjectResult"/> for the response.</returns>
     [NonAction]
-    public virtual BadRequestObjectResult BadRequest([ActionResultObjectValue] ModelStateDictionary modelState)
+    public virtual BadRequestObjectResult BadRequest(
+        [ActionResultObjectValue] ModelStateDictionary modelState
+    )
     {
         ArgumentNullException.ThrowIfNull(modelState);
 
@@ -1799,8 +2041,8 @@ public abstract class ControllerBase
     /// </summary>
     /// <returns>The created <see cref="UnprocessableEntityResult"/> for the response.</returns>
     [NonAction]
-    public virtual UnprocessableEntityResult UnprocessableEntity()
-        => new UnprocessableEntityResult();
+    public virtual UnprocessableEntityResult UnprocessableEntity() =>
+        new UnprocessableEntityResult();
 
     /// <summary>
     /// Creates an <see cref="UnprocessableEntityObjectResult"/> that produces a <see cref="StatusCodes.Status422UnprocessableEntity"/> response.
@@ -1808,8 +2050,9 @@ public abstract class ControllerBase
     /// <param name="error">An error object to be returned to the client.</param>
     /// <returns>The created <see cref="UnprocessableEntityObjectResult"/> for the response.</returns>
     [NonAction]
-    public virtual UnprocessableEntityObjectResult UnprocessableEntity([ActionResultObjectValue] object? error)
-        => new UnprocessableEntityObjectResult(error);
+    public virtual UnprocessableEntityObjectResult UnprocessableEntity(
+        [ActionResultObjectValue] object? error
+    ) => new UnprocessableEntityObjectResult(error);
 
     /// <summary>
     /// Creates an <see cref="UnprocessableEntityObjectResult"/> that produces a <see cref="StatusCodes.Status422UnprocessableEntity"/> response.
@@ -1817,7 +2060,9 @@ public abstract class ControllerBase
     /// <param name="modelState">The <see cref="ModelStateDictionary" /> containing errors to be returned to the client.</param>
     /// <returns>The created <see cref="UnprocessableEntityObjectResult"/> for the response.</returns>
     [NonAction]
-    public virtual UnprocessableEntityObjectResult UnprocessableEntity([ActionResultObjectValue] ModelStateDictionary modelState)
+    public virtual UnprocessableEntityObjectResult UnprocessableEntity(
+        [ActionResultObjectValue] ModelStateDictionary modelState
+    )
     {
         ArgumentNullException.ThrowIfNull(modelState);
 
@@ -1829,8 +2074,7 @@ public abstract class ControllerBase
     /// </summary>
     /// <returns>The created <see cref="ConflictResult"/> for the response.</returns>
     [NonAction]
-    public virtual ConflictResult Conflict()
-        => new ConflictResult();
+    public virtual ConflictResult Conflict() => new ConflictResult();
 
     /// <summary>
     /// Creates a <see cref="ConflictObjectResult"/> that produces a <see cref="StatusCodes.Status409Conflict"/> response.
@@ -1838,8 +2082,8 @@ public abstract class ControllerBase
     /// <param name="error">Contains errors to be returned to the client.</param>
     /// <returns>The created <see cref="ConflictObjectResult"/> for the response.</returns>
     [NonAction]
-    public virtual ConflictObjectResult Conflict([ActionResultObjectValue] object? error)
-        => new ConflictObjectResult(error);
+    public virtual ConflictObjectResult Conflict([ActionResultObjectValue] object? error) =>
+        new ConflictObjectResult(error);
 
     /// <summary>
     /// Creates a <see cref="ConflictObjectResult"/> that produces a <see cref="StatusCodes.Status409Conflict"/> response.
@@ -1847,8 +2091,9 @@ public abstract class ControllerBase
     /// <param name="modelState">The <see cref="ModelStateDictionary" /> containing errors to be returned to the client.</param>
     /// <returns>The created <see cref="ConflictObjectResult"/> for the response.</returns>
     [NonAction]
-    public virtual ConflictObjectResult Conflict([ActionResultObjectValue] ModelStateDictionary modelState)
-        => new ConflictObjectResult(modelState);
+    public virtual ConflictObjectResult Conflict(
+        [ActionResultObjectValue] ModelStateDictionary modelState
+    ) => new ConflictObjectResult(modelState);
 
     /// <summary>
     /// Creates an <see cref="ObjectResult"/> that produces a <see cref="ProblemDetails"/> response.
@@ -1865,7 +2110,8 @@ public abstract class ControllerBase
         string? instance = null,
         int? statusCode = null,
         string? title = null,
-        string? type = null)
+        string? type = null
+    )
     {
         ProblemDetails problemDetails;
         if (ProblemDetailsFactory == null)
@@ -1888,13 +2134,11 @@ public abstract class ControllerBase
                 title: title,
                 type: type,
                 detail: detail,
-                instance: instance);
+                instance: instance
+            );
         }
 
-        return new ObjectResult(problemDetails)
-        {
-            StatusCode = problemDetails.Status
-        };
+        return new ObjectResult(problemDetails) { StatusCode = problemDetails.Status };
     }
 
     /// <summary>
@@ -1903,7 +2147,9 @@ public abstract class ControllerBase
     /// <returns>The created <see cref="BadRequestObjectResult"/> for the response.</returns>
     [NonAction]
     [DefaultStatusCode(StatusCodes.Status400BadRequest)]
-    public virtual ActionResult ValidationProblem([ActionResultObjectValue] ValidationProblemDetails descriptor)
+    public virtual ActionResult ValidationProblem(
+        [ActionResultObjectValue] ValidationProblemDetails descriptor
+    )
     {
         ArgumentNullException.ThrowIfNull(descriptor);
 
@@ -1918,8 +2164,9 @@ public abstract class ControllerBase
     /// <returns>The created <see cref="BadRequestObjectResult"/> for the response.</returns>
     [NonAction]
     [DefaultStatusCode(StatusCodes.Status400BadRequest)]
-    public virtual ActionResult ValidationProblem([ActionResultObjectValue] ModelStateDictionary modelStateDictionary)
-         => ValidationProblem(detail: null, modelStateDictionary: modelStateDictionary);
+    public virtual ActionResult ValidationProblem(
+        [ActionResultObjectValue] ModelStateDictionary modelStateDictionary
+    ) => ValidationProblem(detail: null, modelStateDictionary: modelStateDictionary);
 
     /// <summary>
     /// Creates an <see cref="ActionResult"/> that produces a <see cref="StatusCodes.Status400BadRequest"/> response
@@ -1928,8 +2175,7 @@ public abstract class ControllerBase
     /// <returns>The created <see cref="ActionResult"/> for the response.</returns>
     [NonAction]
     [DefaultStatusCode(StatusCodes.Status400BadRequest)]
-    public virtual ActionResult ValidationProblem()
-        => ValidationProblem(ModelState);
+    public virtual ActionResult ValidationProblem() => ValidationProblem(ModelState);
 
     /// <summary>
     /// Creates an <see cref="ActionResult"/> that produces a <see cref="StatusCodes.Status400BadRequest"/> response
@@ -1951,7 +2197,8 @@ public abstract class ControllerBase
         int? statusCode = null,
         string? title = null,
         string? type = null,
-        [ActionResultObjectValue] ModelStateDictionary? modelStateDictionary = null)
+        [ActionResultObjectValue] ModelStateDictionary? modelStateDictionary = null
+    )
     {
         modelStateDictionary ??= ModelState;
 
@@ -1977,7 +2224,8 @@ public abstract class ControllerBase
                 title: title,
                 type: type,
                 detail: detail,
-                instance: instance);
+                instance: instance
+            );
         }
 
         if (validationProblem is { Status: 400 })
@@ -1986,10 +2234,7 @@ public abstract class ControllerBase
             return new BadRequestObjectResult(validationProblem);
         }
 
-        return new ObjectResult(validationProblem)
-        {
-            StatusCode = validationProblem?.Status
-        };
+        return new ObjectResult(validationProblem) { StatusCode = validationProblem?.Status };
     }
 
     /// <summary>
@@ -2033,8 +2278,10 @@ public abstract class ControllerBase
     /// <param name="value">The content value to format in the entity body.</param>
     /// <returns>The created <see cref="CreatedAtActionResult"/> for the response.</returns>
     [NonAction]
-    public virtual CreatedAtActionResult CreatedAtAction(string? actionName, [ActionResultObjectValue] object? value)
-        => CreatedAtAction(actionName, routeValues: null, value: value);
+    public virtual CreatedAtActionResult CreatedAtAction(
+        string? actionName,
+        [ActionResultObjectValue] object? value
+    ) => CreatedAtAction(actionName, routeValues: null, value: value);
 
     /// <summary>
     /// Creates a <see cref="CreatedAtActionResult"/> object that produces a <see cref="StatusCodes.Status201Created"/> response.
@@ -2044,8 +2291,11 @@ public abstract class ControllerBase
     /// <param name="value">The content value to format in the entity body.</param>
     /// <returns>The created <see cref="CreatedAtActionResult"/> for the response.</returns>
     [NonAction]
-    public virtual CreatedAtActionResult CreatedAtAction(string? actionName, object? routeValues, [ActionResultObjectValue] object? value)
-        => CreatedAtAction(actionName, controllerName: null, routeValues: routeValues, value: value);
+    public virtual CreatedAtActionResult CreatedAtAction(
+        string? actionName,
+        object? routeValues,
+        [ActionResultObjectValue] object? value
+    ) => CreatedAtAction(actionName, controllerName: null, routeValues: routeValues, value: value);
 
     /// <summary>
     /// Creates a <see cref="CreatedAtActionResult"/> object that produces a <see cref="StatusCodes.Status201Created"/> response.
@@ -2060,8 +2310,8 @@ public abstract class ControllerBase
         string? actionName,
         string? controllerName,
         object? routeValues,
-        [ActionResultObjectValue] object? value)
-        => new CreatedAtActionResult(actionName, controllerName, routeValues, value);
+        [ActionResultObjectValue] object? value
+    ) => new CreatedAtActionResult(actionName, controllerName, routeValues, value);
 
     /// <summary>
     /// Creates a <see cref="CreatedAtRouteResult"/> object that produces a <see cref="StatusCodes.Status201Created"/> response.
@@ -2070,8 +2320,10 @@ public abstract class ControllerBase
     /// <param name="value">The content value to format in the entity body.</param>
     /// <returns>The created <see cref="CreatedAtRouteResult"/> for the response.</returns>
     [NonAction]
-    public virtual CreatedAtRouteResult CreatedAtRoute(string? routeName, [ActionResultObjectValue] object? value)
-        => CreatedAtRoute(routeName, routeValues: null, value: value);
+    public virtual CreatedAtRouteResult CreatedAtRoute(
+        string? routeName,
+        [ActionResultObjectValue] object? value
+    ) => CreatedAtRoute(routeName, routeValues: null, value: value);
 
     /// <summary>
     /// Creates a <see cref="CreatedAtRouteResult"/> object that produces a <see cref="StatusCodes.Status201Created"/> response.
@@ -2080,8 +2332,10 @@ public abstract class ControllerBase
     /// <param name="value">The content value to format in the entity body.</param>
     /// <returns>The created <see cref="CreatedAtRouteResult"/> for the response.</returns>
     [NonAction]
-    public virtual CreatedAtRouteResult CreatedAtRoute(object? routeValues, [ActionResultObjectValue] object? value)
-        => CreatedAtRoute(routeName: null, routeValues: routeValues, value: value);
+    public virtual CreatedAtRouteResult CreatedAtRoute(
+        object? routeValues,
+        [ActionResultObjectValue] object? value
+    ) => CreatedAtRoute(routeName: null, routeValues: routeValues, value: value);
 
     /// <summary>
     /// Creates a <see cref="CreatedAtRouteResult"/> object that produces a <see cref="StatusCodes.Status201Created"/> response.
@@ -2091,16 +2345,18 @@ public abstract class ControllerBase
     /// <param name="value">The content value to format in the entity body.</param>
     /// <returns>The created <see cref="CreatedAtRouteResult"/> for the response.</returns>
     [NonAction]
-    public virtual CreatedAtRouteResult CreatedAtRoute(string? routeName, object? routeValues, [ActionResultObjectValue] object? value)
-        => new CreatedAtRouteResult(routeName, routeValues, value);
+    public virtual CreatedAtRouteResult CreatedAtRoute(
+        string? routeName,
+        object? routeValues,
+        [ActionResultObjectValue] object? value
+    ) => new CreatedAtRouteResult(routeName, routeValues, value);
 
     /// <summary>
     /// Creates an <see cref="AcceptedResult"/> object that produces a <see cref="StatusCodes.Status202Accepted"/> response.
     /// </summary>
     /// <returns>The created <see cref="AcceptedResult"/> for the response.</returns>
     [NonAction]
-    public virtual AcceptedResult Accepted()
-        => new AcceptedResult();
+    public virtual AcceptedResult Accepted() => new AcceptedResult();
 
     /// <summary>
     /// Creates an <see cref="AcceptedResult"/> object that produces a <see cref="StatusCodes.Status202Accepted"/> response.
@@ -2108,8 +2364,8 @@ public abstract class ControllerBase
     /// <param name="value">The optional content value to format in the entity body; may be null.</param>
     /// <returns>The created <see cref="AcceptedResult"/> for the response.</returns>
     [NonAction]
-    public virtual AcceptedResult Accepted([ActionResultObjectValue] object? value)
-        => new AcceptedResult(location: null, value: value);
+    public virtual AcceptedResult Accepted([ActionResultObjectValue] object? value) =>
+        new AcceptedResult(location: null, value: value);
 
     /// <summary>
     /// Creates an <see cref="AcceptedResult"/> object that produces a <see cref="StatusCodes.Status202Accepted"/> response.
@@ -2132,8 +2388,8 @@ public abstract class ControllerBase
     /// May be null.</param>
     /// <returns>The created <see cref="AcceptedResult"/> for the response.</returns>
     [NonAction]
-    public virtual AcceptedResult Accepted(string? uri)
-        => new AcceptedResult(location: uri, value: null);
+    public virtual AcceptedResult Accepted(string? uri) =>
+        new AcceptedResult(location: uri, value: null);
 
     /// <summary>
     /// Creates an <see cref="AcceptedResult"/> object that produces a <see cref="StatusCodes.Status202Accepted"/> response.
@@ -2142,8 +2398,8 @@ public abstract class ControllerBase
     /// <param name="value">The optional content value to format in the entity body; may be null.</param>
     /// <returns>The created <see cref="AcceptedResult"/> for the response.</returns>
     [NonAction]
-    public virtual AcceptedResult Accepted(string? uri, [ActionResultObjectValue] object? value)
-        => new AcceptedResult(uri, value);
+    public virtual AcceptedResult Accepted(string? uri, [ActionResultObjectValue] object? value) =>
+        new AcceptedResult(uri, value);
 
     /// <summary>
     /// Creates an <see cref="AcceptedResult"/> object that produces a <see cref="StatusCodes.Status202Accepted"/> response.
@@ -2165,8 +2421,8 @@ public abstract class ControllerBase
     /// <param name="actionName">The name of the action to use for generating the URL.</param>
     /// <returns>The created <see cref="AcceptedAtActionResult"/> for the response.</returns>
     [NonAction]
-    public virtual AcceptedAtActionResult AcceptedAtAction(string? actionName)
-        => AcceptedAtAction(actionName, routeValues: null, value: null);
+    public virtual AcceptedAtActionResult AcceptedAtAction(string? actionName) =>
+        AcceptedAtAction(actionName, routeValues: null, value: null);
 
     /// <summary>
     /// Creates an <see cref="AcceptedAtActionResult"/> object that produces a <see cref="StatusCodes.Status202Accepted"/> response.
@@ -2175,8 +2431,10 @@ public abstract class ControllerBase
     /// <param name="controllerName">The name of the controller to use for generating the URL.</param>
     /// <returns>The created <see cref="AcceptedAtActionResult"/> for the response.</returns>
     [NonAction]
-    public virtual AcceptedAtActionResult AcceptedAtAction(string? actionName, string? controllerName)
-        => AcceptedAtAction(actionName, controllerName, routeValues: null, value: null);
+    public virtual AcceptedAtActionResult AcceptedAtAction(
+        string? actionName,
+        string? controllerName
+    ) => AcceptedAtAction(actionName, controllerName, routeValues: null, value: null);
 
     /// <summary>
     /// Creates an <see cref="AcceptedAtActionResult"/> object that produces a <see cref="StatusCodes.Status202Accepted"/> response.
@@ -2185,8 +2443,10 @@ public abstract class ControllerBase
     /// <param name="value">The optional content value to format in the entity body; may be null.</param>
     /// <returns>The created <see cref="AcceptedAtActionResult"/> for the response.</returns>
     [NonAction]
-    public virtual AcceptedAtActionResult AcceptedAtAction(string? actionName, [ActionResultObjectValue] object? value)
-        => AcceptedAtAction(actionName, routeValues: null, value: value);
+    public virtual AcceptedAtActionResult AcceptedAtAction(
+        string? actionName,
+        [ActionResultObjectValue] object? value
+    ) => AcceptedAtAction(actionName, routeValues: null, value: value);
 
     /// <summary>
     /// Creates an <see cref="AcceptedAtActionResult"/> object that produces a <see cref="StatusCodes.Status202Accepted"/> response.
@@ -2196,8 +2456,11 @@ public abstract class ControllerBase
     /// <param name="routeValues">The route data to use for generating the URL.</param>
     /// <returns>The created <see cref="AcceptedAtActionResult"/> for the response.</returns>
     [NonAction]
-    public virtual AcceptedAtActionResult AcceptedAtAction(string? actionName, string? controllerName, [ActionResultObjectValue] object? routeValues)
-        => AcceptedAtAction(actionName, controllerName, routeValues, value: null);
+    public virtual AcceptedAtActionResult AcceptedAtAction(
+        string? actionName,
+        string? controllerName,
+        [ActionResultObjectValue] object? routeValues
+    ) => AcceptedAtAction(actionName, controllerName, routeValues, value: null);
 
     /// <summary>
     /// Creates an <see cref="AcceptedAtActionResult"/> object that produces a <see cref="StatusCodes.Status202Accepted"/> response.
@@ -2207,8 +2470,11 @@ public abstract class ControllerBase
     /// <param name="value">The optional content value to format in the entity body; may be null.</param>
     /// <returns>The created <see cref="AcceptedAtActionResult"/> for the response.</returns>
     [NonAction]
-    public virtual AcceptedAtActionResult AcceptedAtAction(string? actionName, object? routeValues, [ActionResultObjectValue] object? value)
-        => AcceptedAtAction(actionName, controllerName: null, routeValues: routeValues, value: value);
+    public virtual AcceptedAtActionResult AcceptedAtAction(
+        string? actionName,
+        object? routeValues,
+        [ActionResultObjectValue] object? value
+    ) => AcceptedAtAction(actionName, controllerName: null, routeValues: routeValues, value: value);
 
     /// <summary>
     /// Creates an <see cref="AcceptedAtActionResult"/> object that produces a <see cref="StatusCodes.Status202Accepted"/> response.
@@ -2223,8 +2489,8 @@ public abstract class ControllerBase
         string? actionName,
         string? controllerName,
         object? routeValues,
-        [ActionResultObjectValue] object? value)
-        => new AcceptedAtActionResult(actionName, controllerName, routeValues, value);
+        [ActionResultObjectValue] object? value
+    ) => new AcceptedAtActionResult(actionName, controllerName, routeValues, value);
 
     /// <summary>
     /// Creates an <see cref="AcceptedAtRouteResult"/> object that produces a <see cref="StatusCodes.Status202Accepted"/> response.
@@ -2232,8 +2498,9 @@ public abstract class ControllerBase
     /// <param name="routeValues">The route data to use for generating the URL.</param>
     /// <returns>The created <see cref="AcceptedAtRouteResult"/> for the response.</returns>
     [NonAction]
-    public virtual AcceptedAtRouteResult AcceptedAtRoute([ActionResultObjectValue] object? routeValues)
-        => AcceptedAtRoute(routeName: null, routeValues: routeValues, value: null);
+    public virtual AcceptedAtRouteResult AcceptedAtRoute(
+        [ActionResultObjectValue] object? routeValues
+    ) => AcceptedAtRoute(routeName: null, routeValues: routeValues, value: null);
 
     /// <summary>
     /// Creates an <see cref="AcceptedAtRouteResult"/> object that produces a <see cref="StatusCodes.Status202Accepted"/> response.
@@ -2241,8 +2508,8 @@ public abstract class ControllerBase
     /// <param name="routeName">The name of the route to use for generating the URL.</param>
     /// <returns>The created <see cref="AcceptedAtRouteResult"/> for the response.</returns>
     [NonAction]
-    public virtual AcceptedAtRouteResult AcceptedAtRoute(string? routeName)
-        => AcceptedAtRoute(routeName, routeValues: null, value: null);
+    public virtual AcceptedAtRouteResult AcceptedAtRoute(string? routeName) =>
+        AcceptedAtRoute(routeName, routeValues: null, value: null);
 
     /// <summary>
     /// Creates an <see cref="AcceptedAtRouteResult"/> object that produces a <see cref="StatusCodes.Status202Accepted"/> response.
@@ -2251,8 +2518,8 @@ public abstract class ControllerBase
     ///<param name="routeValues">The route data to use for generating the URL.</param>
     /// <returns>The created <see cref="AcceptedAtRouteResult"/> for the response.</returns>
     [NonAction]
-    public virtual AcceptedAtRouteResult AcceptedAtRoute(string? routeName, object? routeValues)
-        => AcceptedAtRoute(routeName, routeValues, value: null);
+    public virtual AcceptedAtRouteResult AcceptedAtRoute(string? routeName, object? routeValues) =>
+        AcceptedAtRoute(routeName, routeValues, value: null);
 
     /// <summary>
     /// Creates an <see cref="AcceptedAtRouteResult"/> object that produces a <see cref="StatusCodes.Status202Accepted"/> response.
@@ -2261,8 +2528,10 @@ public abstract class ControllerBase
     /// <param name="value">The optional content value to format in the entity body; may be null.</param>
     /// <returns>The created <see cref="AcceptedAtRouteResult"/> for the response.</returns>
     [NonAction]
-    public virtual AcceptedAtRouteResult AcceptedAtRoute(object? routeValues, [ActionResultObjectValue] object? value)
-        => AcceptedAtRoute(routeName: null, routeValues: routeValues, value: value);
+    public virtual AcceptedAtRouteResult AcceptedAtRoute(
+        object? routeValues,
+        [ActionResultObjectValue] object? value
+    ) => AcceptedAtRoute(routeName: null, routeValues: routeValues, value: value);
 
     /// <summary>
     /// Creates an <see cref="AcceptedAtRouteResult"/> object that produces a <see cref="StatusCodes.Status202Accepted"/> response.
@@ -2272,8 +2541,11 @@ public abstract class ControllerBase
     /// <param name="value">The optional content value to format in the entity body; may be null.</param>
     /// <returns>The created <see cref="AcceptedAtRouteResult"/> for the response.</returns>
     [NonAction]
-    public virtual AcceptedAtRouteResult AcceptedAtRoute(string? routeName, object? routeValues, [ActionResultObjectValue] object? value)
-        => new AcceptedAtRouteResult(routeName, routeValues, value);
+    public virtual AcceptedAtRouteResult AcceptedAtRoute(
+        string? routeName,
+        object? routeValues,
+        [ActionResultObjectValue] object? value
+    ) => new AcceptedAtRouteResult(routeName, routeValues, value);
 
     /// <summary>
     /// Creates a <see cref="ChallengeResult"/>.
@@ -2285,8 +2557,7 @@ public abstract class ControllerBase
     /// are among likely status results.
     /// </remarks>
     [NonAction]
-    public virtual ChallengeResult Challenge()
-        => new ChallengeResult();
+    public virtual ChallengeResult Challenge() => new ChallengeResult();
 
     /// <summary>
     /// Creates a <see cref="ChallengeResult"/> with the specified authentication schemes.
@@ -2299,8 +2570,8 @@ public abstract class ControllerBase
     /// are among likely status results.
     /// </remarks>
     [NonAction]
-    public virtual ChallengeResult Challenge(params string[] authenticationSchemes)
-        => new ChallengeResult(authenticationSchemes);
+    public virtual ChallengeResult Challenge(params string[] authenticationSchemes) =>
+        new ChallengeResult(authenticationSchemes);
 
     /// <summary>
     /// Creates a <see cref="ChallengeResult"/> with the specified <paramref name="properties" />.
@@ -2314,8 +2585,8 @@ public abstract class ControllerBase
     /// are among likely status results.
     /// </remarks>
     [NonAction]
-    public virtual ChallengeResult Challenge(AuthenticationProperties properties)
-        => new ChallengeResult(properties);
+    public virtual ChallengeResult Challenge(AuthenticationProperties properties) =>
+        new ChallengeResult(properties);
 
     /// <summary>
     /// Creates a <see cref="ChallengeResult"/> with the specified authentication schemes and
@@ -2333,8 +2604,8 @@ public abstract class ControllerBase
     [NonAction]
     public virtual ChallengeResult Challenge(
         AuthenticationProperties properties,
-        params string[] authenticationSchemes)
-        => new ChallengeResult(authenticationSchemes, properties);
+        params string[] authenticationSchemes
+    ) => new ChallengeResult(authenticationSchemes, properties);
 
     /// <summary>
     /// Creates a <see cref="ForbidResult"/> (<see cref="StatusCodes.Status403Forbidden"/> by default).
@@ -2345,8 +2616,7 @@ public abstract class ControllerBase
     /// a redirect to show a login page.
     /// </remarks>
     [NonAction]
-    public virtual ForbidResult Forbid()
-        => new ForbidResult();
+    public virtual ForbidResult Forbid() => new ForbidResult();
 
     /// <summary>
     /// Creates a <see cref="ForbidResult"/> (<see cref="StatusCodes.Status403Forbidden"/> by default) with the
@@ -2359,8 +2629,8 @@ public abstract class ControllerBase
     /// a redirect to show a login page.
     /// </remarks>
     [NonAction]
-    public virtual ForbidResult Forbid(params string[] authenticationSchemes)
-        => new ForbidResult(authenticationSchemes);
+    public virtual ForbidResult Forbid(params string[] authenticationSchemes) =>
+        new ForbidResult(authenticationSchemes);
 
     /// <summary>
     /// Creates a <see cref="ForbidResult"/> (<see cref="StatusCodes.Status403Forbidden"/> by default) with the
@@ -2374,8 +2644,8 @@ public abstract class ControllerBase
     /// a redirect to show a login page.
     /// </remarks>
     [NonAction]
-    public virtual ForbidResult Forbid(AuthenticationProperties properties)
-        => new ForbidResult(properties);
+    public virtual ForbidResult Forbid(AuthenticationProperties properties) =>
+        new ForbidResult(properties);
 
     /// <summary>
     /// Creates a <see cref="ForbidResult"/> (<see cref="StatusCodes.Status403Forbidden"/> by default) with the
@@ -2390,8 +2660,10 @@ public abstract class ControllerBase
     /// a redirect to show a login page.
     /// </remarks>
     [NonAction]
-    public virtual ForbidResult Forbid(AuthenticationProperties properties, params string[] authenticationSchemes)
-        => new ForbidResult(authenticationSchemes, properties);
+    public virtual ForbidResult Forbid(
+        AuthenticationProperties properties,
+        params string[] authenticationSchemes
+    ) => new ForbidResult(authenticationSchemes, properties);
 
     /// <summary>
     /// Creates a <see cref="SignInResult"/>.
@@ -2399,8 +2671,7 @@ public abstract class ControllerBase
     /// <param name="principal">The <see cref="ClaimsPrincipal"/> containing the user claims.</param>
     /// <returns>The created <see cref="SignInResult"/> for the response.</returns>
     [NonAction]
-    public virtual SignInResult SignIn(ClaimsPrincipal principal)
-        => new SignInResult(principal);
+    public virtual SignInResult SignIn(ClaimsPrincipal principal) => new SignInResult(principal);
 
     /// <summary>
     /// Creates a <see cref="SignInResult"/> with the specified authentication scheme.
@@ -2409,8 +2680,8 @@ public abstract class ControllerBase
     /// <param name="authenticationScheme">The authentication scheme to use for the sign-in operation.</param>
     /// <returns>The created <see cref="SignInResult"/> for the response.</returns>
     [NonAction]
-    public virtual SignInResult SignIn(ClaimsPrincipal principal, string authenticationScheme)
-        => new SignInResult(authenticationScheme, principal);
+    public virtual SignInResult SignIn(ClaimsPrincipal principal, string authenticationScheme) =>
+        new SignInResult(authenticationScheme, principal);
 
     /// <summary>
     /// Creates a <see cref="SignInResult"/> with <paramref name="properties"/>.
@@ -2421,8 +2692,8 @@ public abstract class ControllerBase
     [NonAction]
     public virtual SignInResult SignIn(
         ClaimsPrincipal principal,
-        AuthenticationProperties properties)
-        => new SignInResult(principal, properties);
+        AuthenticationProperties properties
+    ) => new SignInResult(principal, properties);
 
     /// <summary>
     /// Creates a <see cref="SignInResult"/> with the specified authentication scheme and
@@ -2436,16 +2707,15 @@ public abstract class ControllerBase
     public virtual SignInResult SignIn(
         ClaimsPrincipal principal,
         AuthenticationProperties properties,
-        string authenticationScheme)
-        => new SignInResult(authenticationScheme, principal, properties);
+        string authenticationScheme
+    ) => new SignInResult(authenticationScheme, principal, properties);
 
     /// <summary>
     /// Creates a <see cref="SignOutResult"/>.
     /// </summary>
     /// <returns>The created <see cref="SignOutResult"/> for the response.</returns>
     [NonAction]
-    public virtual SignOutResult SignOut()
-        => new SignOutResult();
+    public virtual SignOutResult SignOut() => new SignOutResult();
 
     /// <summary>
     /// Creates a <see cref="SignOutResult"/> with <paramref name="properties"/>.
@@ -2453,8 +2723,8 @@ public abstract class ControllerBase
     /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the sign-out operation.</param>
     /// <returns>The created <see cref="SignOutResult"/> for the response.</returns>
     [NonAction]
-    public virtual SignOutResult SignOut(AuthenticationProperties properties)
-        => new SignOutResult(properties);
+    public virtual SignOutResult SignOut(AuthenticationProperties properties) =>
+        new SignOutResult(properties);
 
     /// <summary>
     /// Creates a <see cref="SignOutResult"/> with the specified authentication schemes.
@@ -2462,8 +2732,8 @@ public abstract class ControllerBase
     /// <param name="authenticationSchemes">The authentication schemes to use for the sign-out operation.</param>
     /// <returns>The created <see cref="SignOutResult"/> for the response.</returns>
     [NonAction]
-    public virtual SignOutResult SignOut(params string[] authenticationSchemes)
-        => new SignOutResult(authenticationSchemes);
+    public virtual SignOutResult SignOut(params string[] authenticationSchemes) =>
+        new SignOutResult(authenticationSchemes);
 
     /// <summary>
     /// Creates a <see cref="SignOutResult"/> with the specified authentication schemes and
@@ -2473,8 +2743,10 @@ public abstract class ControllerBase
     /// <param name="authenticationSchemes">The authentication scheme to use for the sign-out operation.</param>
     /// <returns>The created <see cref="SignOutResult"/> for the response.</returns>
     [NonAction]
-    public virtual SignOutResult SignOut(AuthenticationProperties properties, params string[] authenticationSchemes)
-        => new SignOutResult(authenticationSchemes, properties);
+    public virtual SignOutResult SignOut(
+        AuthenticationProperties properties,
+        params string[] authenticationSchemes
+    ) => new SignOutResult(authenticationSchemes, properties);
 
     /// <summary>
     /// Updates the specified <paramref name="model"/> instance using values from the controller's current
@@ -2484,8 +2756,7 @@ public abstract class ControllerBase
     /// <param name="model">The model instance to update.</param>
     /// <returns>A <see cref="Task"/> that on completion returns <c>true</c> if the update is successful.</returns>
     [NonAction]
-    public virtual Task<bool> TryUpdateModelAsync<TModel>(
-        TModel model)
+    public virtual Task<bool> TryUpdateModelAsync<TModel>(TModel model)
         where TModel : class
     {
         ArgumentNullException.ThrowIfNull(model);
@@ -2503,15 +2774,16 @@ public abstract class ControllerBase
     /// </param>
     /// <returns>A <see cref="Task"/> that on completion returns <c>true</c> if the update is successful.</returns>
     [NonAction]
-    public virtual async Task<bool> TryUpdateModelAsync<TModel>(
-        TModel model,
-        string prefix)
+    public virtual async Task<bool> TryUpdateModelAsync<TModel>(TModel model, string prefix)
         where TModel : class
     {
         ArgumentNullException.ThrowIfNull(model);
         ArgumentNullException.ThrowIfNull(prefix);
 
-        var (success, valueProvider) = await CompositeValueProvider.TryCreateAsync(ControllerContext, ControllerContext.ValueProviderFactories);
+        var (success, valueProvider) = await CompositeValueProvider.TryCreateAsync(
+            ControllerContext,
+            ControllerContext.ValueProviderFactories
+        );
         if (!success)
         {
             return false;
@@ -2534,7 +2806,8 @@ public abstract class ControllerBase
     public virtual Task<bool> TryUpdateModelAsync<TModel>(
         TModel model,
         string prefix,
-        IValueProvider valueProvider)
+        IValueProvider valueProvider
+    )
         where TModel : class
     {
         ArgumentNullException.ThrowIfNull(model);
@@ -2548,7 +2821,8 @@ public abstract class ControllerBase
             MetadataProvider,
             ModelBinderFactory,
             valueProvider,
-            ObjectValidator);
+            ObjectValidator
+        );
     }
 
     /// <summary>
@@ -2566,13 +2840,17 @@ public abstract class ControllerBase
     public async Task<bool> TryUpdateModelAsync<TModel>(
         TModel model,
         string prefix,
-        params Expression<Func<TModel, object?>>[] includeExpressions)
-       where TModel : class
+        params Expression<Func<TModel, object?>>[] includeExpressions
+    )
+        where TModel : class
     {
         ArgumentNullException.ThrowIfNull(model);
         ArgumentNullException.ThrowIfNull(includeExpressions);
 
-        var (success, valueProvider) = await CompositeValueProvider.TryCreateAsync(ControllerContext, ControllerContext.ValueProviderFactories);
+        var (success, valueProvider) = await CompositeValueProvider.TryCreateAsync(
+            ControllerContext,
+            ControllerContext.ValueProviderFactories
+        );
         if (!success)
         {
             return false;
@@ -2586,7 +2864,8 @@ public abstract class ControllerBase
             ModelBinderFactory,
             valueProvider!,
             ObjectValidator,
-            includeExpressions);
+            includeExpressions
+        );
     }
 
     /// <summary>
@@ -2603,13 +2882,17 @@ public abstract class ControllerBase
     public async Task<bool> TryUpdateModelAsync<TModel>(
         TModel model,
         string prefix,
-        Func<ModelMetadata, bool> propertyFilter)
+        Func<ModelMetadata, bool> propertyFilter
+    )
         where TModel : class
     {
         ArgumentNullException.ThrowIfNull(model);
         ArgumentNullException.ThrowIfNull(propertyFilter);
 
-        var (success, valueProvider) = await CompositeValueProvider.TryCreateAsync(ControllerContext, ControllerContext.ValueProviderFactories);
+        var (success, valueProvider) = await CompositeValueProvider.TryCreateAsync(
+            ControllerContext,
+            ControllerContext.ValueProviderFactories
+        );
         if (!success)
         {
             return false;
@@ -2623,7 +2906,8 @@ public abstract class ControllerBase
             ModelBinderFactory,
             valueProvider!,
             ObjectValidator,
-            propertyFilter);
+            propertyFilter
+        );
     }
 
     /// <summary>
@@ -2643,8 +2927,9 @@ public abstract class ControllerBase
         TModel model,
         string prefix,
         IValueProvider valueProvider,
-        params Expression<Func<TModel, object?>>[] includeExpressions)
-       where TModel : class
+        params Expression<Func<TModel, object?>>[] includeExpressions
+    )
+        where TModel : class
     {
         ArgumentNullException.ThrowIfNull(model);
         ArgumentNullException.ThrowIfNull(valueProvider);
@@ -2658,7 +2943,8 @@ public abstract class ControllerBase
             ModelBinderFactory,
             valueProvider,
             ObjectValidator,
-            includeExpressions);
+            includeExpressions
+        );
     }
 
     /// <summary>
@@ -2677,7 +2963,8 @@ public abstract class ControllerBase
         TModel model,
         string prefix,
         IValueProvider valueProvider,
-        Func<ModelMetadata, bool> propertyFilter)
+        Func<ModelMetadata, bool> propertyFilter
+    )
         where TModel : class
     {
         ArgumentNullException.ThrowIfNull(model);
@@ -2692,7 +2979,8 @@ public abstract class ControllerBase
             ModelBinderFactory,
             valueProvider,
             ObjectValidator,
-            propertyFilter);
+            propertyFilter
+        );
     }
 
     /// <summary>
@@ -2705,15 +2993,15 @@ public abstract class ControllerBase
     /// </param>
     /// <returns>A <see cref="Task"/> that on completion returns <c>true</c> if the update is successful.</returns>
     [NonAction]
-    public virtual async Task<bool> TryUpdateModelAsync(
-        object model,
-        Type modelType,
-        string prefix)
+    public virtual async Task<bool> TryUpdateModelAsync(object model, Type modelType, string prefix)
     {
         ArgumentNullException.ThrowIfNull(model);
         ArgumentNullException.ThrowIfNull(modelType);
 
-        var (success, valueProvider) = await CompositeValueProvider.TryCreateAsync(ControllerContext, ControllerContext.ValueProviderFactories);
+        var (success, valueProvider) = await CompositeValueProvider.TryCreateAsync(
+            ControllerContext,
+            ControllerContext.ValueProviderFactories
+        );
         if (!success)
         {
             return false;
@@ -2727,7 +3015,8 @@ public abstract class ControllerBase
             MetadataProvider,
             ModelBinderFactory,
             valueProvider!,
-            ObjectValidator);
+            ObjectValidator
+        );
     }
 
     /// <summary>
@@ -2747,7 +3036,8 @@ public abstract class ControllerBase
         Type modelType,
         string prefix,
         IValueProvider valueProvider,
-        Func<ModelMetadata, bool> propertyFilter)
+        Func<ModelMetadata, bool> propertyFilter
+    )
     {
         ArgumentNullException.ThrowIfNull(model);
         ArgumentNullException.ThrowIfNull(modelType);
@@ -2763,7 +3053,8 @@ public abstract class ControllerBase
             ModelBinderFactory,
             valueProvider,
             ObjectValidator,
-            propertyFilter);
+            propertyFilter
+        );
     }
 
     /// <summary>
@@ -2772,8 +3063,7 @@ public abstract class ControllerBase
     /// <param name="model">The model to validate.</param>
     /// <returns><c>true</c> if the <see cref="ModelState"/> is valid; <c>false</c> otherwise.</returns>
     [NonAction]
-    public virtual bool TryValidateModel(
-        object model)
+    public virtual bool TryValidateModel(object model)
     {
         ArgumentNullException.ThrowIfNull(model);
 
@@ -2788,9 +3078,7 @@ public abstract class ControllerBase
     /// </param>
     /// <returns><c>true</c> if the <see cref="ModelState"/> is valid;<c>false</c> otherwise.</returns>
     [NonAction]
-    public virtual bool TryValidateModel(
-        object model,
-        string? prefix)
+    public virtual bool TryValidateModel(object model, string? prefix)
     {
         ArgumentNullException.ThrowIfNull(model);
 
@@ -2798,7 +3086,8 @@ public abstract class ControllerBase
             ControllerContext,
             validationState: null,
             prefix: prefix ?? string.Empty,
-            model: model);
+            model: model
+        );
         return ModelState.IsValid;
     }
 }

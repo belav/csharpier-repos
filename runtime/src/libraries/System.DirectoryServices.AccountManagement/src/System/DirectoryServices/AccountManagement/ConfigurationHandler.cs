@@ -3,10 +3,10 @@
 
 using System;
 using System.Collections;
-using System.Diagnostics;
-using System.Xml;
 using System.Configuration;
+using System.Diagnostics;
 using System.Globalization;
+using System.Xml;
 
 namespace System.DirectoryServices.AccountManagement
 {
@@ -18,9 +18,8 @@ namespace System.DirectoryServices.AccountManagement
             _debugLogFile = debugLogFile;
         }
 
-        public ConfigSettings() : this(GlobalConfig.DefaultDebugLevel, null)
-        {
-        }
+        public ConfigSettings()
+            : this(GlobalConfig.DefaultDebugLevel, null) { }
 
         public DebugLevel DebugLevel
         {

@@ -12,15 +12,22 @@ public class PasswordHasherTest
     public const string Plaintext_Password = "my password";
 
     // V2 Hashed versions of Plaintext_Password
-    public const string V2_SHA1_1000iter_128salt_256subkey = "AAABAgMEBQYHCAkKCwwNDg+ukCEMDf0yyQ29NYubggHIVY0sdEUfdyeM+E1LtH1uJg==";
+    public const string V2_SHA1_1000iter_128salt_256subkey =
+        "AAABAgMEBQYHCAkKCwwNDg+ukCEMDf0yyQ29NYubggHIVY0sdEUfdyeM+E1LtH1uJg==";
 
     // V3 Hashed versions of Plaintext_Password
-    public const string V3_SHA1_250iter_128salt_128subkey = "AQAAAAAAAAD6AAAAEAhftMyfTJylOlZT+eEotFXd1elee8ih5WsjXaR3PA9M";
-    public const string V3_SHA256_250000iter_256salt_256subkey = "AQAAAAEAA9CQAAAAIESkQuj2Du8Y+kbc5lcN/W/3NiAZFEm11P27nrSN5/tId+bR1SwV8CO1Jd72r4C08OLvplNlCDc3oQZ8efcW+jQ=";
-    public const string V3_SHA512_50iter_128salt_128subkey = "AQAAAAIAAAAyAAAAEOMwvh3+FZxqkdMBz2ekgGhwQ4B6pZWND6zgESBuWiHw";
-    public const string V3_SHA512_250iter_256salt_512subkey = "AQAAAAIAAAD6AAAAIJbVi5wbMR+htSfFp8fTw8N8GOS/Sje+S/4YZcgBfU7EQuqv4OkVYmc4VJl9AGZzmRTxSkP7LtVi9IWyUxX8IAAfZ8v+ZfhjCcudtC1YERSqE1OEdXLW9VukPuJWBBjLuw==";
-    public const string V3_SHA512_10000iter_128salt_256subkey = "AQAAAAIAACcQAAAAEAABAgMEBQYHCAkKCwwNDg9B0Oxwty+PGIDSp95gcCfzeDvA4sGapUIUov8usXfD6A==";
-    public const string V3_SHA512_100000iter_128salt_256subkey = "AQAAAAIAAYagAAAAEAABAgMEBQYHCAkKCwwNDg/Q8A0WMKbtHQJQ2DHCdoEeeFBrgNlldq6vH4qX/CGqGQ==";
+    public const string V3_SHA1_250iter_128salt_128subkey =
+        "AQAAAAAAAAD6AAAAEAhftMyfTJylOlZT+eEotFXd1elee8ih5WsjXaR3PA9M";
+    public const string V3_SHA256_250000iter_256salt_256subkey =
+        "AQAAAAEAA9CQAAAAIESkQuj2Du8Y+kbc5lcN/W/3NiAZFEm11P27nrSN5/tId+bR1SwV8CO1Jd72r4C08OLvplNlCDc3oQZ8efcW+jQ=";
+    public const string V3_SHA512_50iter_128salt_128subkey =
+        "AQAAAAIAAAAyAAAAEOMwvh3+FZxqkdMBz2ekgGhwQ4B6pZWND6zgESBuWiHw";
+    public const string V3_SHA512_250iter_256salt_512subkey =
+        "AQAAAAIAAAD6AAAAIJbVi5wbMR+htSfFp8fTw8N8GOS/Sje+S/4YZcgBfU7EQuqv4OkVYmc4VJl9AGZzmRTxSkP7LtVi9IWyUxX8IAAfZ8v+ZfhjCcudtC1YERSqE1OEdXLW9VukPuJWBBjLuw==";
+    public const string V3_SHA512_10000iter_128salt_256subkey =
+        "AQAAAAIAACcQAAAAEAABAgMEBQYHCAkKCwwNDg9B0Oxwty+PGIDSp95gcCfzeDvA4sGapUIUov8usXfD6A==";
+    public const string V3_SHA512_100000iter_128salt_256subkey =
+        "AQAAAAIAAYagAAAAEAABAgMEBQYHCAkKCwwNDg/Q8A0WMKbtHQJQ2DHCdoEeeFBrgNlldq6vH4qX/CGqGQ==";
 
     [Fact]
     public void Ctor_InvalidCompatMode_Throws()
@@ -148,12 +155,24 @@ public class PasswordHasherTest
     [InlineData(V2_SHA1_1000iter_128salt_256subkey, PasswordVerificationResult.SuccessRehashNeeded)]
     // Version 3 payloads
     [InlineData(V3_SHA1_250iter_128salt_128subkey, PasswordVerificationResult.SuccessRehashNeeded)]
-    [InlineData(V3_SHA256_250000iter_256salt_256subkey, PasswordVerificationResult.SuccessRehashNeeded)]
+    [InlineData(
+        V3_SHA256_250000iter_256salt_256subkey,
+        PasswordVerificationResult.SuccessRehashNeeded
+    )]
     [InlineData(V3_SHA512_50iter_128salt_128subkey, PasswordVerificationResult.SuccessRehashNeeded)]
-    [InlineData(V3_SHA512_250iter_256salt_512subkey, PasswordVerificationResult.SuccessRehashNeeded)]
-    [InlineData(V3_SHA512_10000iter_128salt_256subkey, PasswordVerificationResult.SuccessRehashNeeded)]
+    [InlineData(
+        V3_SHA512_250iter_256salt_512subkey,
+        PasswordVerificationResult.SuccessRehashNeeded
+    )]
+    [InlineData(
+        V3_SHA512_10000iter_128salt_256subkey,
+        PasswordVerificationResult.SuccessRehashNeeded
+    )]
     [InlineData(V3_SHA512_100000iter_128salt_256subkey, PasswordVerificationResult.Success)]
-    public void VerifyHashedPassword_Version3CompatMode_SuccessCases(string hashedPassword, PasswordVerificationResult expectedResult)
+    public void VerifyHashedPassword_Version3CompatMode_SuccessCases(
+        string hashedPassword,
+        PasswordVerificationResult expectedResult
+    )
     {
         // Arrange
         var hasher = new PasswordHasher(compatMode: PasswordHasherCompatibilityMode.IdentityV3);
@@ -167,12 +186,16 @@ public class PasswordHasherTest
 
     private sealed class PasswordHasher : PasswordHasher<object>
     {
-        public PasswordHasher(PasswordHasherCompatibilityMode? compatMode = null, int? iterCount = null)
-            : base(BuildOptions(compatMode, iterCount))
-        {
-        }
+        public PasswordHasher(
+            PasswordHasherCompatibilityMode? compatMode = null,
+            int? iterCount = null
+        )
+            : base(BuildOptions(compatMode, iterCount)) { }
 
-        private static IOptions<PasswordHasherOptions> BuildOptions(PasswordHasherCompatibilityMode? compatMode, int? iterCount)
+        private static IOptions<PasswordHasherOptions> BuildOptions(
+            PasswordHasherCompatibilityMode? compatMode,
+            int? iterCount
+        )
         {
             var options = new PasswordHasherOptionsAccessor();
             if (compatMode != null)

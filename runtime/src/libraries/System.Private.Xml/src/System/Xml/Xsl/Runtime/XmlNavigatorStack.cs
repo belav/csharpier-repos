@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Diagnostics;
 using System.Xml;
 using System.Xml.XPath;
-using System.Diagnostics;
 
 namespace System.Xml.Xsl.Runtime
 {
@@ -13,9 +13,8 @@ namespace System.Xml.Xsl.Runtime
     /// </summary>
     internal struct XmlNavigatorStack
     {
-        private XPathNavigator[] _stkNav;    // Stack of XPathNavigators
-        private int _sp;                     // Stack pointer (size of stack)
-
+        private XPathNavigator[] _stkNav; // Stack of XPathNavigators
+        private int _sp; // Stack pointer (size of stack)
 #if DEBUG
         private const int InitialStackSize = 2;
 #else

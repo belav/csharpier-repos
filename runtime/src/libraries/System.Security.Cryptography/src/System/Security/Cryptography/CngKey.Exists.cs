@@ -2,10 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Runtime.Versioning;
-using Microsoft.Win32.SafeHandles;
-
 using Internal.Cryptography;
-
+using Microsoft.Win32.SafeHandles;
 using ErrorCode = Interop.NCrypt.ErrorCode;
 
 namespace System.Security.Cryptography
@@ -42,7 +40,9 @@ namespace System.Security.Cryptography
                 SafeNCryptKeyHandle? keyHandle = null;
                 try
                 {
-                    ErrorCode errorCode = Interop.NCrypt.NCryptOpenKey(providerHandle, out keyHandle, keyName, 0, options);
+                    ErrorCode errorCode = Interop
+                        .NCrypt
+                        .NCryptOpenKey(providerHandle, out keyHandle, keyName, 0, options);
                     if (errorCode == ErrorCode.NTE_BAD_KEYSET)
                         return false;
                     if (errorCode != ErrorCode.ERROR_SUCCESS)

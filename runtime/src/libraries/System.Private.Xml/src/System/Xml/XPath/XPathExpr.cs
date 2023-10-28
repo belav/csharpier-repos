@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using MS.Internal.Xml.XPath;
 using System.Collections;
+using MS.Internal.Xml.XPath;
 
 namespace System.Xml.XPath
 {
@@ -44,7 +44,13 @@ namespace System.Xml.XPath
 
         public abstract void AddSort(object expr, IComparer comparer);
 
-        public abstract void AddSort(object expr, XmlSortOrder order, XmlCaseOrder caseOrder, string lang, XmlDataType dataType);
+        public abstract void AddSort(
+            object expr,
+            XmlSortOrder order,
+            XmlCaseOrder caseOrder,
+            string lang,
+            XmlDataType dataType
+        );
 
         public abstract XPathExpression Clone();
 
@@ -56,7 +62,10 @@ namespace System.Xml.XPath
 
         public static XPathExpression Compile(string xpath)
         {
-            return Compile(xpath, /*nsResolver:*/null);
+            return Compile(
+                xpath, /*nsResolver:*/
+                null
+            );
         }
 
         public static XPathExpression Compile(string xpath, IXmlNamespaceResolver? nsResolver)

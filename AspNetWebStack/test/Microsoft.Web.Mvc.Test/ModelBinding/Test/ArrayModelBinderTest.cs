@@ -17,7 +17,10 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ControllerContext controllerContext = new ControllerContext();
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(int[])),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(int[])
+                ),
                 ModelName = "someName",
                 ModelBinderProviders = new ModelBinderProviderCollection(),
                 ValueProvider = new SimpleValueProvider
@@ -29,14 +32,25 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             Mock<IExtensibleModelBinder> mockIntBinder = new Mock<IExtensibleModelBinder>();
             mockIntBinder
-                .Setup(o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>()))
+                .Setup(
+                    o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
+                )
                 .Returns(
                     delegate(ControllerContext cc, ExtensibleModelBindingContext mbc)
                     {
-                        mbc.Model = mbc.ValueProvider.GetValue(mbc.ModelName).ConvertTo(mbc.ModelType);
+                        mbc.Model = mbc.ValueProvider
+                            .GetValue(mbc.ModelName)
+                            .ConvertTo(mbc.ModelType);
                         return true;
-                    });
-            bindingContext.ModelBinderProviders.RegisterBinderForType(typeof(int), mockIntBinder.Object, false /* suppressPrefixCheck */);
+                    }
+                );
+            bindingContext
+                .ModelBinderProviders
+                .RegisterBinderForType(
+                    typeof(int),
+                    mockIntBinder.Object,
+                    false /* suppressPrefixCheck */
+                );
 
             // Act
             bool retVal = new ArrayModelBinder<int>().BindModel(controllerContext, bindingContext);

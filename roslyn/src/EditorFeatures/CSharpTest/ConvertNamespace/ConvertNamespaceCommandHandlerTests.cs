@@ -20,29 +20,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
     {
         internal sealed class ConvertNamespaceTestState : AbstractCommandHandlerTestState
         {
-            private static readonly TestComposition s_composition = EditorTestCompositions.EditorFeaturesWpf.AddParts(
-                typeof(ConvertNamespaceCommandHandler));
+            private static readonly TestComposition s_composition = EditorTestCompositions
+                .EditorFeaturesWpf
+                .AddParts(typeof(ConvertNamespaceCommandHandler));
 
             private readonly ConvertNamespaceCommandHandler _commandHandler;
 
             public ConvertNamespaceTestState(XElement workspaceElement)
                 : base(workspaceElement, s_composition)
             {
-                _commandHandler = (ConvertNamespaceCommandHandler)GetExportedValues<ICommandHandler>().
-                    Single(c => c is ConvertNamespaceCommandHandler);
+                _commandHandler = (ConvertNamespaceCommandHandler)
+                    GetExportedValues<ICommandHandler>()
+                        .Single(c => c is ConvertNamespaceCommandHandler);
             }
 
-            public static ConvertNamespaceTestState CreateTestState(string markup)
-                => new(GetWorkspaceXml(markup));
+            public static ConvertNamespaceTestState CreateTestState(string markup) =>
+                new(GetWorkspaceXml(markup));
 
-            public static XElement GetWorkspaceXml(string markup)
-                => XElement.Parse(string.Format("""
+            public static XElement GetWorkspaceXml(string markup) =>
+                XElement.Parse(
+                    string.Format(
+                        """
                     <Workspace>
                         <Project Language="C#" CommonReferences="true">
                             <Document>{0}</Document>
                         </Project>
                     </Workspace>
-                    """, markup));
+                    """,
+                        markup
+                    )
+                );
 
             internal void AssertCodeIs(string expectedCode)
             {
@@ -51,8 +58,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 Assert.Equal(caretPosition, TextView.Caret.Position.BufferPosition.Position);
             }
 
-            public void SendTypeChar(char ch)
-                => SendTypeChar(ch, _commandHandler.ExecuteCommand, () => EditorOperations.InsertText(ch.ToString()));
+            public void SendTypeChar(char ch) =>
+                SendTypeChar(
+                    ch,
+                    _commandHandler.ExecuteCommand,
+                    () => EditorOperations.InsertText(ch.ToString())
+                );
         }
 
         [WpfFact]
@@ -66,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                     {
                     }
                 }
-                """);
+                """
+            );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
@@ -76,7 +88,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 class C
                 {
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -90,9 +103,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                     {
                     }
                 }
-                """);
+                """
+            );
 
-            testState.Workspace.GlobalOptions.SetGlobalOption(CompleteStatementOptionsStorage.AutomaticallyCompleteStatementOnSemicolon, false);
+            testState
+                .Workspace
+                .GlobalOptions
+                .SetGlobalOption(
+                    CompleteStatementOptionsStorage.AutomaticallyCompleteStatementOnSemicolon,
+                    false
+                );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
@@ -103,7 +123,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -117,7 +138,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                     {
                     }
                 }
-                """);
+                """
+            );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
@@ -127,7 +149,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 class C
                 {
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -141,7 +164,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                     {
                     }
                 }
-                """);
+                """
+            );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
@@ -152,7 +176,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -166,7 +191,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                     {
                     }
                 }
-                """);
+                """
+            );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
@@ -177,7 +203,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -191,7 +218,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                     {
                     }
                 }
-                """);
+                """
+            );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
@@ -202,7 +230,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -216,7 +245,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                     {
                     }
                 }
-                """);
+                """
+            );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
@@ -226,7 +256,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 class C
                 {
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -240,7 +271,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                     {
                     }
                 }
-                """);
+                """
+            );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
@@ -251,7 +283,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -268,7 +301,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                         }
                     }
                 }
-                """);
+                """
+            );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
@@ -282,7 +316,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -300,7 +335,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                     {
                     }
                 }
-                """);
+                """
+            );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
@@ -315,7 +351,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -332,7 +369,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                     {
                     }
                 }
-                """);
+                """
+            );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
@@ -345,7 +383,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 class C
                 {
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -362,7 +401,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                     {
                     }
                 }
-                """);
+                """
+            );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
@@ -375,7 +415,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 class C
                 {
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -389,7 +430,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                     {
                     }
                 }
-                """);
+                """
+            );
 
             testState.SendTypeChar(';');
             testState.AssertCodeIs(
@@ -399,7 +441,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
                 class C
                 {
                 }
-                """);
+                """
+            );
         }
     }
 }

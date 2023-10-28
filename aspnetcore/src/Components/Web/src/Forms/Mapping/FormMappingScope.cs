@@ -19,14 +19,17 @@ public sealed class FormMappingScope : ICascadingValueSupplier, IComponent
     /// <summary>
     /// The mapping scope name.
     /// </summary>
-    [Parameter, EditorRequired] public string Name { get; set; } = default!;
+    [Parameter, EditorRequired]
+    public string Name { get; set; } = default!;
 
     /// <summary>
     /// Specifies the content to be rendered inside this <see cref="FormMappingScope"/>.
     /// </summary>
-    [Parameter] public RenderFragment<FormMappingContext> ChildContent { get; set; } = default!;
+    [Parameter]
+    public RenderFragment<FormMappingContext> ChildContent { get; set; } = default!;
 
-    [Inject] internal IFormValueMapper? FormValueModelBinder { get; set; } // Nonnull only on platforms that support HTTP form posts
+    [Inject]
+    internal IFormValueMapper? FormValueModelBinder { get; set; } // Nonnull only on platforms that support HTTP form posts
 
     void IComponent.Attach(RenderHandle renderHandle)
     {
@@ -41,21 +44,30 @@ public sealed class FormMappingScope : ICascadingValueSupplier, IComponent
         {
             if (string.IsNullOrEmpty(Name))
             {
-                throw new InvalidOperationException($"The {nameof(FormMappingScope)} component requires a nonempty {nameof(Name)} parameter value.");
+                throw new InvalidOperationException(
+                    $"The {nameof(FormMappingScope)} component requires a nonempty {nameof(Name)} parameter value."
+                );
             }
             else if (Name.StartsWith('['))
             {
                 // We use "scope-qualified form name starts with [" as a signal that there's a nonempty scope, so don't let the name itself start that way
                 // Alternatively we could avoid packing both the scope and form name into a single string, or use some encoding. However it's very unlikely
                 // this restriction will affect anyone, and the exact representation is an internal implementation detail.
-                throw new InvalidOperationException($"The mapping scope name '{Name}' starts with a disallowed character.");
+                throw new InvalidOperationException(
+                    $"The mapping scope name '{Name}' starts with a disallowed character."
+                );
             }
 
-            _cascadingValueSupplier = new SupplyParameterFromFormValueProvider(FormValueModelBinder, Name);
+            _cascadingValueSupplier = new SupplyParameterFromFormValueProvider(
+                FormValueModelBinder,
+                Name
+            );
         }
         else if (!string.Equals(Name, _cascadingValueSupplier.MappingScopeName))
         {
-            throw new InvalidOperationException($"{nameof(FormMappingScope)} '{nameof(Name)}' can't change after initialization.");
+            throw new InvalidOperationException(
+                $"{nameof(FormMappingScope)} '{nameof(Name)}' can't change after initialization."
+            );
         }
 
         if (!_hasPendingQueuedRender)
@@ -77,18 +89,21 @@ public sealed class FormMappingScope : ICascadingValueSupplier, IComponent
     // because it's only used by descendant components. So we know _cascadingValueSupplier will be
     // nonnull by that time.
 
-    bool ICascadingValueSupplier.IsFixed
-        => true;
+    bool ICascadingValueSupplier.IsFixed => true;
 
-    bool ICascadingValueSupplier.CanSupplyValue(in CascadingParameterInfo parameterInfo)
-        => _cascadingValueSupplier!.CanSupplyValue(parameterInfo);
+    bool ICascadingValueSupplier.CanSupplyValue(in CascadingParameterInfo parameterInfo) =>
+        _cascadingValueSupplier!.CanSupplyValue(parameterInfo);
 
-    object? ICascadingValueSupplier.GetCurrentValue(in CascadingParameterInfo parameterInfo)
-        => _cascadingValueSupplier!.GetCurrentValue(in parameterInfo);
+    object? ICascadingValueSupplier.GetCurrentValue(in CascadingParameterInfo parameterInfo) =>
+        _cascadingValueSupplier!.GetCurrentValue(in parameterInfo);
 
-    void ICascadingValueSupplier.Subscribe(ComponentState subscriber, in CascadingParameterInfo parameterInfo)
-        => throw new NotSupportedException();
+    void ICascadingValueSupplier.Subscribe(
+        ComponentState subscriber,
+        in CascadingParameterInfo parameterInfo
+    ) => throw new NotSupportedException();
 
-    void ICascadingValueSupplier.Unsubscribe(ComponentState subscriber, in CascadingParameterInfo parameterInfo)
-        => throw new NotSupportedException();
+    void ICascadingValueSupplier.Unsubscribe(
+        ComponentState subscriber,
+        in CascadingParameterInfo parameterInfo
+    ) => throw new NotSupportedException();
 }

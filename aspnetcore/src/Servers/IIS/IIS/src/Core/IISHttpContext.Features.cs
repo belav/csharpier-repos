@@ -5,34 +5,61 @@ namespace Microsoft.AspNetCore.Server.IIS.Core;
 
 internal partial class IISHttpContext
 {
-    private static readonly Type IHttpRequestFeatureType = typeof(global::Microsoft.AspNetCore.Http.Features.IHttpRequestFeature);
-    private static readonly Type IHttpRequestBodyDetectionFeature = typeof(global::Microsoft.AspNetCore.Http.Features.IHttpRequestBodyDetectionFeature);
-    private static readonly Type IHttpResponseFeatureType = typeof(global::Microsoft.AspNetCore.Http.Features.IHttpResponseFeature);
-    private static readonly Type IHttpResponseBodyFeatureType = typeof(global::Microsoft.AspNetCore.Http.Features.IHttpResponseBodyFeature);
-    private static readonly Type IHttpRequestIdentifierFeatureType = typeof(global::Microsoft.AspNetCore.Http.Features.IHttpRequestIdentifierFeature);
-    private static readonly Type IServiceProvidersFeatureType = typeof(global::Microsoft.AspNetCore.Http.Features.IServiceProvidersFeature);
-    private static readonly Type IHttpRequestLifetimeFeatureType = typeof(global::Microsoft.AspNetCore.Http.Features.IHttpRequestLifetimeFeature);
-    private static readonly Type IHttpConnectionFeatureType = typeof(global::Microsoft.AspNetCore.Http.Features.IHttpConnectionFeature);
-    private static readonly Type IHttpAuthenticationFeatureType = typeof(global::Microsoft.AspNetCore.Http.Features.Authentication.IHttpAuthenticationFeature);
-    private static readonly Type IQueryFeatureType = typeof(global::Microsoft.AspNetCore.Http.Features.IQueryFeature);
-    private static readonly Type IFormFeatureType = typeof(global::Microsoft.AspNetCore.Http.Features.IFormFeature);
-    private static readonly Type IHttpUpgradeFeatureType = typeof(global::Microsoft.AspNetCore.Http.Features.IHttpUpgradeFeature);
-    private static readonly Type IResponseCookiesFeatureType = typeof(global::Microsoft.AspNetCore.Http.Features.IResponseCookiesFeature);
-    private static readonly Type IItemsFeatureType = typeof(global::Microsoft.AspNetCore.Http.Features.IItemsFeature);
-    private static readonly Type ITlsConnectionFeatureType = typeof(global::Microsoft.AspNetCore.Http.Features.ITlsConnectionFeature);
-    private static readonly Type ITlsHandshakeFeatureType = typeof(global::Microsoft.AspNetCore.Connections.Features.ITlsHandshakeFeature);
-    private static readonly Type IHttpWebSocketFeatureType = typeof(global::Microsoft.AspNetCore.Http.Features.IHttpWebSocketFeature);
-    private static readonly Type ISessionFeatureType = typeof(global::Microsoft.AspNetCore.Http.Features.ISessionFeature);
-    private static readonly Type IHttpBodyControlFeatureType = typeof(global::Microsoft.AspNetCore.Http.Features.IHttpBodyControlFeature);
+    private static readonly Type IHttpRequestFeatureType =
+        typeof(global::Microsoft.AspNetCore.Http.Features.IHttpRequestFeature);
+    private static readonly Type IHttpRequestBodyDetectionFeature =
+        typeof(global::Microsoft.AspNetCore.Http.Features.IHttpRequestBodyDetectionFeature);
+    private static readonly Type IHttpResponseFeatureType =
+        typeof(global::Microsoft.AspNetCore.Http.Features.IHttpResponseFeature);
+    private static readonly Type IHttpResponseBodyFeatureType =
+        typeof(global::Microsoft.AspNetCore.Http.Features.IHttpResponseBodyFeature);
+    private static readonly Type IHttpRequestIdentifierFeatureType =
+        typeof(global::Microsoft.AspNetCore.Http.Features.IHttpRequestIdentifierFeature);
+    private static readonly Type IServiceProvidersFeatureType =
+        typeof(global::Microsoft.AspNetCore.Http.Features.IServiceProvidersFeature);
+    private static readonly Type IHttpRequestLifetimeFeatureType =
+        typeof(global::Microsoft.AspNetCore.Http.Features.IHttpRequestLifetimeFeature);
+    private static readonly Type IHttpConnectionFeatureType =
+        typeof(global::Microsoft.AspNetCore.Http.Features.IHttpConnectionFeature);
+    private static readonly Type IHttpAuthenticationFeatureType =
+        typeof(global::Microsoft.AspNetCore.Http.Features.Authentication.IHttpAuthenticationFeature);
+    private static readonly Type IQueryFeatureType =
+        typeof(global::Microsoft.AspNetCore.Http.Features.IQueryFeature);
+    private static readonly Type IFormFeatureType =
+        typeof(global::Microsoft.AspNetCore.Http.Features.IFormFeature);
+    private static readonly Type IHttpUpgradeFeatureType =
+        typeof(global::Microsoft.AspNetCore.Http.Features.IHttpUpgradeFeature);
+    private static readonly Type IResponseCookiesFeatureType =
+        typeof(global::Microsoft.AspNetCore.Http.Features.IResponseCookiesFeature);
+    private static readonly Type IItemsFeatureType =
+        typeof(global::Microsoft.AspNetCore.Http.Features.IItemsFeature);
+    private static readonly Type ITlsConnectionFeatureType =
+        typeof(global::Microsoft.AspNetCore.Http.Features.ITlsConnectionFeature);
+    private static readonly Type ITlsHandshakeFeatureType =
+        typeof(global::Microsoft.AspNetCore.Connections.Features.ITlsHandshakeFeature);
+    private static readonly Type IHttpWebSocketFeatureType =
+        typeof(global::Microsoft.AspNetCore.Http.Features.IHttpWebSocketFeature);
+    private static readonly Type ISessionFeatureType =
+        typeof(global::Microsoft.AspNetCore.Http.Features.ISessionFeature);
+    private static readonly Type IHttpBodyControlFeatureType =
+        typeof(global::Microsoft.AspNetCore.Http.Features.IHttpBodyControlFeature);
     private static readonly Type IISHttpContextType = typeof(IISHttpContext);
-    private static readonly Type IServerVariablesFeature = typeof(global::Microsoft.AspNetCore.Http.Features.IServerVariablesFeature);
-    private static readonly Type IHttpMaxRequestBodySizeFeature = typeof(global::Microsoft.AspNetCore.Http.Features.IHttpMaxRequestBodySizeFeature);
-    private static readonly Type IHttpResponseTrailersFeature = typeof(global::Microsoft.AspNetCore.Http.Features.IHttpResponseTrailersFeature);
-    private static readonly Type IHttpResetFeature = typeof(global::Microsoft.AspNetCore.Http.Features.IHttpResetFeature);
-    private static readonly Type IConnectionLifetimeNotificationFeature = typeof(global::Microsoft.AspNetCore.Connections.Features.IConnectionLifetimeNotificationFeature);
-    private static readonly Type IHttpActivityFeature = typeof(global::Microsoft.AspNetCore.Http.Features.IHttpActivityFeature);
-    private static readonly Type IHttpSysRequestInfoFeature = typeof(global::Microsoft.AspNetCore.Server.HttpSys.IHttpSysRequestInfoFeature);
-    private static readonly Type IHttpSysRequestTimingFeature = typeof(global::Microsoft.AspNetCore.Server.HttpSys.IHttpSysRequestTimingFeature);
+    private static readonly Type IServerVariablesFeature =
+        typeof(global::Microsoft.AspNetCore.Http.Features.IServerVariablesFeature);
+    private static readonly Type IHttpMaxRequestBodySizeFeature =
+        typeof(global::Microsoft.AspNetCore.Http.Features.IHttpMaxRequestBodySizeFeature);
+    private static readonly Type IHttpResponseTrailersFeature =
+        typeof(global::Microsoft.AspNetCore.Http.Features.IHttpResponseTrailersFeature);
+    private static readonly Type IHttpResetFeature =
+        typeof(global::Microsoft.AspNetCore.Http.Features.IHttpResetFeature);
+    private static readonly Type IConnectionLifetimeNotificationFeature =
+        typeof(global::Microsoft.AspNetCore.Connections.Features.IConnectionLifetimeNotificationFeature);
+    private static readonly Type IHttpActivityFeature =
+        typeof(global::Microsoft.AspNetCore.Http.Features.IHttpActivityFeature);
+    private static readonly Type IHttpSysRequestInfoFeature =
+        typeof(global::Microsoft.AspNetCore.Server.HttpSys.IHttpSysRequestInfoFeature);
+    private static readonly Type IHttpSysRequestTimingFeature =
+        typeof(global::Microsoft.AspNetCore.Server.HttpSys.IHttpSysRequestTimingFeature);
 
     private object? _currentIHttpRequestFeature;
     private object? _currentIHttpRequestBodyDetectionFeature;
@@ -354,39 +381,66 @@ internal partial class IISHttpContext
     {
         if (_currentIHttpRequestFeature != null)
         {
-            yield return new KeyValuePair<Type, object>(IHttpRequestFeatureType, _currentIHttpRequestFeature);
+            yield return new KeyValuePair<Type, object>(
+                IHttpRequestFeatureType,
+                _currentIHttpRequestFeature
+            );
         }
         if (_currentIHttpRequestBodyDetectionFeature != null)
         {
-            yield return new KeyValuePair<Type, object>(IHttpRequestBodyDetectionFeature, _currentIHttpRequestBodyDetectionFeature);
+            yield return new KeyValuePair<Type, object>(
+                IHttpRequestBodyDetectionFeature,
+                _currentIHttpRequestBodyDetectionFeature
+            );
         }
         if (_currentIHttpResponseFeature != null)
         {
-            yield return new KeyValuePair<Type, object>(IHttpResponseFeatureType, _currentIHttpResponseFeature);
+            yield return new KeyValuePair<Type, object>(
+                IHttpResponseFeatureType,
+                _currentIHttpResponseFeature
+            );
         }
         if (_currentIHttpResponseBodyFeature != null)
         {
-            yield return new KeyValuePair<Type, object>(IHttpResponseBodyFeatureType, _currentIHttpResponseBodyFeature);
+            yield return new KeyValuePair<Type, object>(
+                IHttpResponseBodyFeatureType,
+                _currentIHttpResponseBodyFeature
+            );
         }
         if (_currentIHttpRequestIdentifierFeature != null)
         {
-            yield return new KeyValuePair<Type, object>(IHttpRequestIdentifierFeatureType, _currentIHttpRequestIdentifierFeature);
+            yield return new KeyValuePair<Type, object>(
+                IHttpRequestIdentifierFeatureType,
+                _currentIHttpRequestIdentifierFeature
+            );
         }
         if (_currentIServiceProvidersFeature != null)
         {
-            yield return new KeyValuePair<Type, object>(IServiceProvidersFeatureType, _currentIServiceProvidersFeature);
+            yield return new KeyValuePair<Type, object>(
+                IServiceProvidersFeatureType,
+                _currentIServiceProvidersFeature
+            );
         }
         if (_currentIHttpRequestLifetimeFeature != null)
         {
-            yield return new KeyValuePair<Type, object>(IHttpRequestLifetimeFeatureType, _currentIHttpRequestLifetimeFeature);
+            yield return new KeyValuePair<Type, object>(
+                IHttpRequestLifetimeFeatureType,
+                _currentIHttpRequestLifetimeFeature
+            );
         }
         if (_currentIHttpConnectionFeature != null)
         {
-            yield return new KeyValuePair<Type, object>(IHttpConnectionFeatureType, _currentIHttpConnectionFeature);
+            yield return new KeyValuePair<Type, object>(
+                IHttpConnectionFeatureType,
+                _currentIHttpConnectionFeature
+            );
         }
         if (_currentIHttpAuthenticationFeature != null)
         {
-            yield return new KeyValuePair<Type, object>(IHttpAuthenticationFeatureType, _currentIHttpAuthenticationFeature);
+            yield return new KeyValuePair<Type, object>(
+                IHttpAuthenticationFeatureType,
+                _currentIHttpAuthenticationFeature
+            );
         }
         if (_currentIQueryFeature != null)
         {
@@ -398,11 +452,17 @@ internal partial class IISHttpContext
         }
         if (_currentIHttpUpgradeFeature != null)
         {
-            yield return new KeyValuePair<Type, object>(IHttpUpgradeFeatureType, _currentIHttpUpgradeFeature);
+            yield return new KeyValuePair<Type, object>(
+                IHttpUpgradeFeatureType,
+                _currentIHttpUpgradeFeature
+            );
         }
         if (_currentIResponseCookiesFeature != null)
         {
-            yield return new KeyValuePair<Type, object>(IResponseCookiesFeatureType, _currentIResponseCookiesFeature);
+            yield return new KeyValuePair<Type, object>(
+                IResponseCookiesFeatureType,
+                _currentIResponseCookiesFeature
+            );
         }
         if (_currentIItemsFeature != null)
         {
@@ -410,43 +470,73 @@ internal partial class IISHttpContext
         }
         if (_currentITlsConnectionFeature != null)
         {
-            yield return new KeyValuePair<Type, object>(ITlsConnectionFeatureType, _currentITlsConnectionFeature);
+            yield return new KeyValuePair<Type, object>(
+                ITlsConnectionFeatureType,
+                _currentITlsConnectionFeature
+            );
         }
         if (_currentITlsHandshakeFeature != null)
         {
-            yield return new KeyValuePair<Type, object>(ITlsHandshakeFeatureType, _currentITlsHandshakeFeature);
+            yield return new KeyValuePair<Type, object>(
+                ITlsHandshakeFeatureType,
+                _currentITlsHandshakeFeature
+            );
         }
         if (_currentIHttpWebSocketFeature != null)
         {
-            yield return new KeyValuePair<Type, object>(IHttpWebSocketFeatureType, _currentIHttpWebSocketFeature);
+            yield return new KeyValuePair<Type, object>(
+                IHttpWebSocketFeatureType,
+                _currentIHttpWebSocketFeature
+            );
         }
         if (_currentISessionFeature != null)
         {
-            yield return new KeyValuePair<Type, object>(ISessionFeatureType, _currentISessionFeature);
+            yield return new KeyValuePair<Type, object>(
+                ISessionFeatureType,
+                _currentISessionFeature
+            );
         }
         if (_currentIHttpBodyControlFeature != null)
         {
-            yield return new KeyValuePair<Type, object>(IHttpBodyControlFeatureType, _currentIHttpBodyControlFeature);
+            yield return new KeyValuePair<Type, object>(
+                IHttpBodyControlFeatureType,
+                _currentIHttpBodyControlFeature
+            );
         }
         if (_currentIServerVariablesFeature != null)
         {
-            yield return new KeyValuePair<Type, object>(IServerVariablesFeature, _currentIServerVariablesFeature);
+            yield return new KeyValuePair<Type, object>(
+                IServerVariablesFeature,
+                _currentIServerVariablesFeature
+            );
         }
         if (_currentIHttpMaxRequestBodySizeFeature != null)
         {
-            yield return new KeyValuePair<Type, object>(IHttpMaxRequestBodySizeFeature, _currentIHttpMaxRequestBodySizeFeature);
+            yield return new KeyValuePair<Type, object>(
+                IHttpMaxRequestBodySizeFeature,
+                _currentIHttpMaxRequestBodySizeFeature
+            );
         }
         if (_currentIHttpResponseTrailersFeature != null)
         {
-            yield return new KeyValuePair<Type, object>(IHttpResponseTrailersFeature, _currentIHttpResponseTrailersFeature);
+            yield return new KeyValuePair<Type, object>(
+                IHttpResponseTrailersFeature,
+                _currentIHttpResponseTrailersFeature
+            );
         }
         if (_currentIHttpResetFeature != null)
         {
-            yield return new KeyValuePair<Type, object>(IHttpResponseTrailersFeature, _currentIHttpResetFeature);
+            yield return new KeyValuePair<Type, object>(
+                IHttpResponseTrailersFeature,
+                _currentIHttpResetFeature
+            );
         }
         if (_currentIHttpActivityFeature != null)
         {
-            yield return new KeyValuePair<Type, object>(IHttpActivityFeature, _currentIHttpActivityFeature);
+            yield return new KeyValuePair<Type, object>(
+                IHttpActivityFeature,
+                _currentIHttpActivityFeature
+            );
         }
 
         if (MaybeExtra != null)

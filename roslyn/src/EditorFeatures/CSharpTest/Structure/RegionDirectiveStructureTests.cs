@@ -13,9 +13,11 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure;
 
 [Trait(Traits.Feature, Traits.Features.Outlining)]
-public class RegionDirectiveStructureTests : AbstractCSharpSyntaxNodeStructureTests<RegionDirectiveTriviaSyntax>
+public class RegionDirectiveStructureTests
+    : AbstractCSharpSyntaxNodeStructureTests<RegionDirectiveTriviaSyntax>
 {
-    internal override AbstractSyntaxStructureProvider CreateProvider() => new RegionDirectiveStructureProvider();
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new RegionDirectiveStructureProvider();
 
     [Fact]
     public async Task BrokenRegion()
@@ -35,8 +37,10 @@ public class RegionDirectiveStructureTests : AbstractCSharpSyntaxNodeStructureTe
                 #endregion|}
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "Goo", autoCollapse: false, isDefaultCollapsed: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span", "Goo", autoCollapse: false, isDefaultCollapsed: true)
+        );
     }
 
     [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539361")]
@@ -71,11 +75,17 @@ public class RegionDirectiveStructureTests : AbstractCSharpSyntaxNodeStructureTe
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "TaoRegion", autoCollapse: false, isDefaultCollapsed: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span", "TaoRegion", autoCollapse: false, isDefaultCollapsed: true)
+        );
     }
 
-    [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/953668"), CombinatorialData]
+    [
+        Theory,
+        WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/953668"),
+        CombinatorialData
+    ]
     public async Task RegionsShouldBeCollapsedByDefault(bool collapseRegionsWhenFirstOpened)
     {
         var code = """
@@ -94,8 +104,16 @@ public class RegionDirectiveStructureTests : AbstractCSharpSyntaxNodeStructureTe
             CollapseRegionsWhenFirstOpened = collapseRegionsWhenFirstOpened
         };
 
-        await VerifyBlockSpansAsync(code, options,
-            Region("span", "Region", autoCollapse: false, isDefaultCollapsed: collapseRegionsWhenFirstOpened));
+        await VerifyBlockSpansAsync(
+            code,
+            options,
+            Region(
+                "span",
+                "Region",
+                autoCollapse: false,
+                isDefaultCollapsed: collapseRegionsWhenFirstOpened
+            )
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/4105")]
@@ -112,7 +130,9 @@ public class RegionDirectiveStructureTests : AbstractCSharpSyntaxNodeStructureTe
                 }
                 """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "Region", autoCollapse: false, isDefaultCollapsed: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("span", "Region", autoCollapse: false, isDefaultCollapsed: true)
+        );
     }
 }

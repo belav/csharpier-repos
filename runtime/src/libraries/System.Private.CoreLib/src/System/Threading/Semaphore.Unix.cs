@@ -1,20 +1,27 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.Win32.SafeHandles;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
+using Microsoft.Win32.SafeHandles;
 
 namespace System.Threading
 {
     public sealed partial class Semaphore
     {
-        private void CreateSemaphoreCore(int initialCount, int maximumCount, string? name, out bool createdNew)
+        private void CreateSemaphoreCore(
+            int initialCount,
+            int maximumCount,
+            string? name,
+            out bool createdNew
+        )
         {
             if (name != null)
             {
-                throw new PlatformNotSupportedException(SR.PlatformNotSupported_NamedSynchronizationPrimitives);
+                throw new PlatformNotSupportedException(
+                    SR.PlatformNotSupported_NamedSynchronizationPrimitives
+                );
             }
 
             SafeWaitHandle = WaitSubsystem.NewSemaphore(initialCount, maximumCount);
@@ -24,7 +31,9 @@ namespace System.Threading
 #pragma warning disable IDE0060
         private static OpenExistingResult OpenExistingWorker(string name, out Semaphore? result)
         {
-            throw new PlatformNotSupportedException(SR.PlatformNotSupported_NamedSynchronizationPrimitives);
+            throw new PlatformNotSupportedException(
+                SR.PlatformNotSupported_NamedSynchronizationPrimitives
+            );
         }
 #pragma warning restore IDE0060
 
@@ -41,7 +50,10 @@ namespace System.Threading
             waitHandle.DangerousAddRef();
             try
             {
-                return WaitSubsystem.ReleaseSemaphore(waitHandle.DangerousGetHandle(), releaseCount);
+                return WaitSubsystem.ReleaseSemaphore(
+                    waitHandle.DangerousGetHandle(),
+                    releaseCount
+                );
             }
             finally
             {

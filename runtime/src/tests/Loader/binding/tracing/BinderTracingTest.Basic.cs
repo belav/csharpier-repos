@@ -8,7 +8,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
-
 using Xunit;
 
 namespace BinderTracingTests
@@ -163,7 +162,11 @@ namespace BinderTracingTests
             };
         }
 
-        [BinderTest(isolate: true, testSetup: nameof(PlatformAssembly), additionalLoadsToTrack: new string[] { "System.Xml" })]
+        [BinderTest(
+            isolate: true,
+            testSetup: nameof(PlatformAssembly),
+            additionalLoadsToTrack: new string[] { "System.Xml" }
+        )]
         public static BindOperation PlatformAssembly_Cached()
         {
             BindOperation bind = PlatformAssembly();
@@ -203,7 +206,10 @@ namespace BinderTracingTests
         {
             CustomALC alc = new CustomALC(nameof(Reflection_CustomALC));
             Type testClass = LoadTestClassInALC(alc);
-            MethodInfo method = testClass.GetMethod(nameof(GetDependentAssemblyType), BindingFlags.NonPublic | BindingFlags.Static);
+            MethodInfo method = testClass.GetMethod(
+                nameof(GetDependentAssemblyType),
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
             Type t = (Type)method.Invoke(null, new object[0]);
 
             return new BindOperation()
@@ -247,7 +253,10 @@ namespace BinderTracingTests
         {
             CustomALC alc = new CustomALC(nameof(ContextualReflection_CustomToDefaultALC));
             Type testClass = LoadTestClassInALC(alc);
-            MethodInfo method = testClass.GetMethod(nameof(GetDependentAssemblyType), BindingFlags.NonPublic | BindingFlags.Static);
+            MethodInfo method = testClass.GetMethod(
+                nameof(GetDependentAssemblyType),
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
 
             Type t;
             using (AssemblyLoadContext.Default.EnterContextualReflection())
@@ -290,8 +299,11 @@ namespace BinderTracingTests
         public static BindOperation JITLoad_CustomALC()
         {
             CustomALC alc = new CustomALC(nameof(JITLoad_CustomALC));
-            Type testClass= LoadTestClassInALC(alc);
-            MethodInfo method = testClass.GetMethod(nameof(UseDependentAssembly), BindingFlags.NonPublic | BindingFlags.Static);
+            Type testClass = LoadTestClassInALC(alc);
+            MethodInfo method = testClass.GetMethod(
+                nameof(UseDependentAssembly),
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
             Assembly asm = (Assembly)method.Invoke(null, new object[0]);
 
             return new BindOperation()

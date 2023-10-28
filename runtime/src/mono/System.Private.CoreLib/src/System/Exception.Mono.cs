@@ -4,10 +4,10 @@
 using System.Collections;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
 using System.Diagnostics.Tracing;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 namespace System
 {
@@ -16,7 +16,10 @@ namespace System
     {
         internal static uint GetExceptionCount()
         {
-            return (uint)EventPipeInternal.GetRuntimeCounterValue(EventPipeInternal.RuntimeCounters.EXCEPTION_COUNT);
+            return (uint)
+                EventPipeInternal.GetRuntimeCounterValue(
+                    EventPipeInternal.RuntimeCounters.EXCEPTION_COUNT
+                );
         }
 
         internal readonly struct DispatchState
@@ -71,7 +74,14 @@ namespace System
             {
                 Exception self = this;
                 MonoStackFrame[]? frames = null;
-                Diagnostics.StackTrace.GetTrace (ObjectHandleOnStack.Create (ref self), ObjectHandleOnStack.Create (ref frames), 0, true);
+                Diagnostics
+                    .StackTrace
+                    .GetTrace(
+                        ObjectHandleOnStack.Create(ref self),
+                        ObjectHandleOnStack.Create(ref frames),
+                        0,
+                        true
+                    );
                 stackFrames = frames!;
                 if (stackFrames.Length > 0)
                     stackFrames[stackFrames.Length - 1].isLastFrameFromForeignException = true;
@@ -84,9 +94,17 @@ namespace System
 
                 if (feFrames != null)
                 {
-                    var combinedStackFrames = new MonoStackFrame[stackFrames.Length + feFrames.Length];
+                    var combinedStackFrames = new MonoStackFrame[
+                        stackFrames.Length + feFrames.Length
+                    ];
                     Array.Copy(feFrames, 0, combinedStackFrames, 0, feFrames.Length);
-                    Array.Copy(stackFrames, 0, combinedStackFrames, feFrames.Length, stackFrames.Length);
+                    Array.Copy(
+                        stackFrames,
+                        0,
+                        combinedStackFrames,
+                        feFrames.Length,
+                        stackFrames.Length
+                    );
 
                     stackFrames = combinedStackFrames;
                 }

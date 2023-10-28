@@ -21,7 +21,10 @@ namespace System.Net.Mail.Tests
 
         public LinkedResourceTest()
         {
-            lr = LinkedResource.CreateLinkedResourceFromString("test", new ContentType("text/plain"));
+            lr = LinkedResource.CreateLinkedResourceFromString(
+                "test",
+                new ContentType("text/plain")
+            );
         }
 
         [Fact]

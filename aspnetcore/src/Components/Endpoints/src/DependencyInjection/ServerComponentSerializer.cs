@@ -16,16 +16,26 @@ internal sealed class ServerComponentSerializer
             .CreateProtector(ServerComponentSerializationSettings.DataProtectionProviderPurpose)
             .ToTimeLimitedDataProtector();
 
-    public void SerializeInvocation(ref ComponentMarker marker, ServerComponentInvocationSequence invocationId, Type type, ParameterView parameters)
+    public void SerializeInvocation(
+        ref ComponentMarker marker,
+        ServerComponentInvocationSequence invocationId,
+        Type type,
+        ParameterView parameters
+    )
     {
-        var (sequence, serverComponent) = CreateSerializedServerComponent(invocationId, type, parameters);
+        var (sequence, serverComponent) = CreateSerializedServerComponent(
+            invocationId,
+            type,
+            parameters
+        );
         marker.WriteServerData(sequence, serverComponent);
     }
 
     private (int sequence, string payload) CreateSerializedServerComponent(
         ServerComponentInvocationSequence invocationId,
         Type rootComponent,
-        ParameterView parameters)
+        ParameterView parameters
+    )
     {
         var sequence = invocationId.Next();
 
@@ -33,14 +43,27 @@ internal sealed class ServerComponentSerializer
 
         var serverComponent = new ServerComponent(
             sequence,
-            rootComponent.Assembly.GetName().Name ?? throw new InvalidOperationException("Cannot prerender components from assemblies with a null name"),
-            rootComponent.FullName ?? throw new InvalidOperationException("Cannot prerender component types with a null name"),
+            rootComponent.Assembly.GetName().Name
+                ?? throw new InvalidOperationException(
+                    "Cannot prerender components from assemblies with a null name"
+                ),
+            rootComponent.FullName
+                ?? throw new InvalidOperationException(
+                    "Cannot prerender component types with a null name"
+                ),
             definitions,
             values,
-            invocationId.Value);
+            invocationId.Value
+        );
 
-        var serializedServerComponentBytes = JsonSerializer.SerializeToUtf8Bytes(serverComponent, ServerComponentSerializationSettings.JsonSerializationOptions);
-        var protectedBytes = _dataProtector.Protect(serializedServerComponentBytes, ServerComponentSerializationSettings.DataExpiration);
+        var serializedServerComponentBytes = JsonSerializer.SerializeToUtf8Bytes(
+            serverComponent,
+            ServerComponentSerializationSettings.JsonSerializationOptions
+        );
+        var protectedBytes = _dataProtector.Protect(
+            serializedServerComponentBytes,
+            ServerComponentSerializationSettings.DataExpiration
+        );
         return (serverComponent.Sequence, Convert.ToBase64String(protectedBytes));
     }
 }

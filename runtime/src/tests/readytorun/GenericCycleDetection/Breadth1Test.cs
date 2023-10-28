@@ -13,7 +13,8 @@ internal class Program
     {
         public static int Construct(int seed)
         {
-            if (--seed <= 0) return 10;
+            if (--seed <= 0)
+                return 10;
             return seed switch
             {
                 1 => Assignment<U, T>.Construct(seed),
@@ -23,7 +24,7 @@ internal class Program
             };
         }
     }
-    
+
     private struct Assignment<T, U>
     {
         public static int Construct(int seed)
@@ -177,7 +178,7 @@ internal class Program
             };
         }
     }
-    
+
     private struct Nested<T, U>
     {
         public static int Construct(int seed)
@@ -191,13 +192,13 @@ internal class Program
             };
         }
     }
-    
+
     [Fact]
     public static int BreadthTest()
     {
         return Expression<long, int>.Construct(2) * Expression<float, double>.Construct(2);
     }
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static int ReturnTwoAndDontTellJIT() => 2;
 }

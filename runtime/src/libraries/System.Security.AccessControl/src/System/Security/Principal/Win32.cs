@@ -3,33 +3,50 @@
 
 //
 
-using Microsoft.Win32;
-using Microsoft.Win32.SafeHandles;
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Runtime.Versioning;
+using System.Text;
+using Microsoft.Win32;
+using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Principal
 {
     internal static class Win32
     {
-        internal static int OpenThreadToken(TokenAccessLevels dwDesiredAccess, WinSecurityContext dwOpenAs, out SafeTokenHandle? phThreadToken)
+        internal static int OpenThreadToken(
+            TokenAccessLevels dwDesiredAccess,
+            WinSecurityContext dwOpenAs,
+            out SafeTokenHandle? phThreadToken
+        )
         {
             int hr = 0;
             bool openAsSelf = true;
             if (dwOpenAs == WinSecurityContext.Thread)
                 openAsSelf = false;
 
-            if (!Interop.Advapi32.OpenThreadToken((IntPtr)(-2), dwDesiredAccess, openAsSelf, out phThreadToken))
+            if (
+                !Interop
+                    .Advapi32
+                    .OpenThreadToken((IntPtr)(-2), dwDesiredAccess, openAsSelf, out phThreadToken)
+            )
             {
                 if (dwOpenAs == WinSecurityContext.Both)
                 {
                     openAsSelf = false;
                     hr = 0;
                     phThreadToken.Dispose();
-                    if (!Interop.Advapi32.OpenThreadToken((IntPtr)(-2), dwDesiredAccess, openAsSelf, out phThreadToken))
+                    if (
+                        !Interop
+                            .Advapi32
+                            .OpenThreadToken(
+                                (IntPtr)(-2),
+                                dwDesiredAccess,
+                                openAsSelf,
+                                out phThreadToken
+                            )
+                    )
                         hr = Marshal.GetHRForLastWin32Error();
                 }
                 else

@@ -8,13 +8,18 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 {
     public sealed record ParameterSpec : MemberSpec
     {
-        public ParameterSpec(IParameterSymbol parameter) : base(parameter)
+        public ParameterSpec(IParameterSymbol parameter)
+            : base(parameter)
         {
             RefKind = parameter.RefKind;
 
             if (parameter.HasExplicitDefaultValue)
             {
-                string formatted = SymbolDisplay.FormatPrimitive(parameter.ExplicitDefaultValue!, quoteStrings: true, useHexadecimalNumbers: false);
+                string formatted = SymbolDisplay.FormatPrimitive(
+                    parameter.ExplicitDefaultValue!,
+                    quoteStrings: true,
+                    useHexadecimalNumbers: false
+                );
                 if (formatted is not "null")
                 {
                     DefaultValueExpr = formatted;

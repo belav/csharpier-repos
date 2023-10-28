@@ -15,13 +15,15 @@ namespace Microsoft.CodeAnalysis.ConvertLinq.ConvertForEachToLinqQuery
         ImmutableArray<SyntaxToken> identifiers,
         ImmutableArray<TStatement> statements,
         ImmutableArray<SyntaxToken> leadingTokens,
-        ImmutableArray<SyntaxToken> trailingTokens)
+        ImmutableArray<SyntaxToken> trailingTokens
+    )
     {
         public TForEachStatement ForEachStatement { get; } = forEachStatement;
 
         public SemanticModel SemanticModel { get; } = semanticModel;
 
-        public ImmutableArray<ExtendedSyntaxNode> ConvertingExtendedNodes { get; } = convertingExtendedNodes;
+        public ImmutableArray<ExtendedSyntaxNode> ConvertingExtendedNodes { get; } =
+            convertingExtendedNodes;
 
         public ImmutableArray<SyntaxToken> Identifiers { get; } = identifiers;
 

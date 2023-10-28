@@ -21,23 +21,33 @@ namespace System.ServiceModel.Activities.Description
             this.isWrappedMode = isWrappedMode;
         }
 
-        public void AddBindingParameters(OperationDescription operationDescription, BindingParameterCollection bindingParameters)
-        {
+        public void AddBindingParameters(
+            OperationDescription operationDescription,
+            BindingParameterCollection bindingParameters
+        ) { }
 
-        }
+        public void ApplyClientBehavior(
+            OperationDescription operationDescription,
+            ClientOperation clientOperation
+        ) { }
 
-        public void ApplyClientBehavior(OperationDescription operationDescription, ClientOperation clientOperation)
-        {
-
-        }
-
-        public void ApplyDispatchBehavior(OperationDescription operationDescription, DispatchOperation dispatchOperation)
+        public void ApplyDispatchBehavior(
+            OperationDescription operationDescription,
+            DispatchOperation dispatchOperation
+        )
         {
             ServiceHostBase serviceHost = dispatchOperation.Parent.ChannelDispatcher.Host;
             if (!(serviceHost is WorkflowServiceHost))
             {
-                throw FxTrace.Exception.AsError(
-                   new InvalidOperationException(SR.WorkflowBehaviorWithNonWorkflowHost(typeof(ControlOperationBehavior).Name)));
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.WorkflowBehaviorWithNonWorkflowHost(
+                                typeof(ControlOperationBehavior).Name
+                            )
+                        )
+                    );
             }
 
             ServiceEndpoint endpoint = null;
@@ -56,7 +66,9 @@ namespace System.ServiceModel.Activities.Description
 
                 if (endpoint != null)
                 {
-                    CorrelationQueryBehavior endpointQueryBehavior = endpoint.Behaviors.Find<CorrelationQueryBehavior>();
+                    CorrelationQueryBehavior endpointQueryBehavior = endpoint
+                        .Behaviors
+                        .Find<CorrelationQueryBehavior>();
 
                     if (endpointQueryBehavior != null)
                     {
@@ -70,7 +82,8 @@ namespace System.ServiceModel.Activities.Description
                     endpoint,
                     keyCalculator,
                     dispatchOperation.Invoker,
-                    serviceHost);
+                    serviceHost
+                );
             }
             else
             {
@@ -79,13 +92,11 @@ namespace System.ServiceModel.Activities.Description
                     operationDescription,
                     endpoint,
                     null,
-                    serviceHost);
+                    serviceHost
+                );
             }
         }
 
-        public void Validate(OperationDescription operationDescription)
-        {
-
-        }
+        public void Validate(OperationDescription operationDescription) { }
     }
 }

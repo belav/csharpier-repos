@@ -3,8 +3,8 @@
 
 using System;
 using System.Threading;
-using Microsoft.Extensions.Primitives;
 using Microsoft.Extensions.Internal;
+using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Extensions.Configuration
 {
@@ -41,7 +41,8 @@ namespace Microsoft.Extensions.Configuration
                 state,
                 _cts.Token,
                 static s => s.ActiveChangeCallbacks = false, // Reset the flag to indicate to future callers that this wouldn't work.
-                this);
+                this
+            );
         }
 
         /// <summary>

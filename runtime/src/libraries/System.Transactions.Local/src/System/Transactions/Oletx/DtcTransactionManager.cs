@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics.CodeAnalysis;
-using System.Runtime.InteropServices;
 using System.Globalization;
+using System.Runtime.InteropServices;
 using System.Transactions.DtcProxyShim;
 
 namespace System.Transactions.Oletx;
@@ -41,7 +41,8 @@ internal sealed class DtcTransactionManager
                 internalRM,
                 out nodeNameMatches,
                 out _whereabouts,
-                out ResourceManagerShim resourceManagerShim);
+                out ResourceManagerShim resourceManagerShim
+            );
 
             // If the node name does not match, throw.
             if (!nodeNameMatches)
@@ -64,7 +65,10 @@ internal sealed class DtcTransactionManager
 
             // Unfortunately MSDTCPRX may return unknown error codes when attempting to connect to MSDTC
             // that error should be propagated back as a TransactionManagerCommunicationException.
-            throw TransactionManagerCommunicationException.Create(SR.TransactionManagerCommunicationException, ex);
+            throw TransactionManagerCommunicationException.Create(
+                SR.TransactionManagerCommunicationException,
+                ex
+            );
         }
     }
 

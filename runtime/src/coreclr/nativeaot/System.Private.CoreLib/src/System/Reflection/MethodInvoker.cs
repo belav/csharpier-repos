@@ -1,10 +1,10 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Internal.Reflection.Core.Execution;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection.Runtime.MethodInfos;
+using Internal.Reflection.Core.Execution;
 using static System.Reflection.DynamicInvokeInfo;
 
 namespace System.Reflection
@@ -65,7 +65,10 @@ namespace System.Reflection
                 ThrowForArgCountMismatch();
             }
 
-            object? result = _methodBaseInvoker.InvokeDirectWithFewArgs(obj, new Span<object?>(ref arg1, _parameterCount));
+            object? result = _methodBaseInvoker.InvokeDirectWithFewArgs(
+                obj,
+                new Span<object?>(ref arg1, _parameterCount)
+            );
             DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
             return result;
         }
@@ -82,7 +85,10 @@ namespace System.Reflection
             argStorage._args.Set(0, arg1);
             argStorage._args.Set(1, arg2);
 
-            object? result = _methodBaseInvoker.InvokeDirectWithFewArgs(obj, argStorage._args.AsSpan(_parameterCount));
+            object? result = _methodBaseInvoker.InvokeDirectWithFewArgs(
+                obj,
+                argStorage._args.AsSpan(_parameterCount)
+            );
             DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
             return result;
         }
@@ -100,7 +106,10 @@ namespace System.Reflection
             argStorage._args.Set(1, arg2);
             argStorage._args.Set(2, arg3);
 
-            object? result = _methodBaseInvoker.InvokeDirectWithFewArgs(obj, argStorage._args.AsSpan(_parameterCount));
+            object? result = _methodBaseInvoker.InvokeDirectWithFewArgs(
+                obj,
+                argStorage._args.AsSpan(_parameterCount)
+            );
             DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
             return result;
         }
@@ -119,7 +128,10 @@ namespace System.Reflection
             argStorage._args.Set(2, arg3);
             argStorage._args.Set(3, arg4);
 
-            object? result = _methodBaseInvoker.InvokeDirectWithFewArgs(obj, argStorage._args.AsSpan(_parameterCount));
+            object? result = _methodBaseInvoker.InvokeDirectWithFewArgs(
+                obj,
+                argStorage._args.AsSpan(_parameterCount)
+            );
             DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
             return result;
         }

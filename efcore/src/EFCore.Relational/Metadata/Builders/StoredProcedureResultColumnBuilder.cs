@@ -24,7 +24,8 @@ public class StoredProcedureResultColumnBuilder : IInfrastructure<PropertyBuilde
     [EntityFrameworkInternal]
     public StoredProcedureResultColumnBuilder(
         InternalStoredProcedureResultColumnBuilder builder,
-        PropertyBuilder? propertyBuilder)
+        PropertyBuilder? propertyBuilder
+    )
     {
         Builder = builder;
         PropertyBuilder = propertyBuilder;
@@ -33,8 +34,7 @@ public class StoredProcedureResultColumnBuilder : IInfrastructure<PropertyBuilde
     /// <summary>
     ///     The stored procedure result column being configured.
     /// </summary>
-    public virtual IMutableStoredProcedureResultColumn Metadata
-        => Builder.Metadata;
+    public virtual IMutableStoredProcedureResultColumn Metadata => Builder.Metadata;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -73,7 +73,10 @@ public class StoredProcedureResultColumnBuilder : IInfrastructure<PropertyBuilde
     /// <param name="annotation">The key of the annotation to be added or updated.</param>
     /// <param name="value">The value to be stored in the annotation.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual StoredProcedureResultColumnBuilder HasAnnotation(string annotation, object? value)
+    public virtual StoredProcedureResultColumnBuilder HasAnnotation(
+        string annotation,
+        object? value
+    )
     {
         Check.NotEmpty(annotation, nameof(annotation));
 
@@ -82,8 +85,7 @@ public class StoredProcedureResultColumnBuilder : IInfrastructure<PropertyBuilde
         return this;
     }
 
-    PropertyBuilder? IInfrastructure<PropertyBuilder?>.Instance
-        => PropertyBuilder;
+    PropertyBuilder? IInfrastructure<PropertyBuilder?>.Instance => PropertyBuilder;
 
     #region Hidden System.Object members
 
@@ -92,8 +94,7 @@ public class StoredProcedureResultColumnBuilder : IInfrastructure<PropertyBuilde
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override string? ToString()
-        => base.ToString();
+    public override string? ToString() => base.ToString();
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
@@ -102,8 +103,7 @@ public class StoredProcedureResultColumnBuilder : IInfrastructure<PropertyBuilde
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectEqualsIsObjectEquals
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
@@ -111,8 +111,7 @@ public class StoredProcedureResultColumnBuilder : IInfrastructure<PropertyBuilde
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }

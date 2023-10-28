@@ -1,17 +1,17 @@
 //------------------------------------------------------------------------------
 // <copyright file="MobileTextWriter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.Mobile;
 using System.Web.UI;
 using System.Web.UI.MobileControls.Adapters;
-using System.Security.Permissions;
 
 #if COMPILING_FOR_SHIPPED_SOURCE
 namespace System.Web.UI.MobileControls.ShippedAdapterSource
@@ -20,7 +20,6 @@ namespace System.Web.UI.MobileControls.Adapters
 #endif
 
 {
-
     /*
      * MobileTextWriter class. All device-specific mobile text writers
      * inherit from this class.
@@ -29,9 +28,17 @@ namespace System.Web.UI.MobileControls.Adapters
      */
 
     /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class MobileTextWriter : MultiPartWriter
     {
         private MobileCapabilities _device;
@@ -41,28 +48,22 @@ namespace System.Web.UI.MobileControls.Adapters
         /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.Device"]/*' />
         public MobileCapabilities Device
         {
-            get
-            {
-                return _device;
-            }
+            get { return _device; }
         }
 
         /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.MobileTextWriter"]/*' />
-        public MobileTextWriter(TextWriter writer, MobileCapabilities device) : base(writer)
+        public MobileTextWriter(TextWriter writer, MobileCapabilities device)
+            : base(writer)
         {
             _multiPartWriter = writer as MultiPartWriter;
             _device = device;
         }
 
         /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.EnterLayout"]/*' />
-        public virtual void EnterLayout(Style style)
-        {
-        }
+        public virtual void EnterLayout(Style style) { }
 
         /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.ExitLayout"]/*' />
-        public virtual void ExitLayout(Style style, bool breakAfter)
-        {
-        }
+        public virtual void ExitLayout(Style style, bool breakAfter) { }
 
         /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.ExitLayout1"]/*' />
         public virtual void ExitLayout(Style style)
@@ -71,19 +72,13 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
         /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.EnterFormat"]/*' />
-        public virtual void EnterFormat(Style style)
-        {
-        }
+        public virtual void EnterFormat(Style style) { }
 
         /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.ExitFormat"]/*' />
-        public virtual void ExitFormat(Style style)
-        {
-        }
+        public virtual void ExitFormat(Style style) { }
 
         /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.ExitFormat1"]/*' />
-        public virtual void ExitFormat(Style style, bool breakAfter)
-        {
-        }
+        public virtual void ExitFormat(Style style, bool breakAfter) { }
 
         /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.EnterStyle"]/*' />
         public void EnterStyle(Style style)
@@ -99,7 +94,6 @@ namespace System.Web.UI.MobileControls.Adapters
             ExitLayout(style);
         }
 
-
         /////////////////////////////////////////////////////////////////////////
         //  MultiPartWriter implementation. The MobileTextWriter class itself
         //  does not support multipart writing, unless it is wrapped on top
@@ -109,10 +103,7 @@ namespace System.Web.UI.MobileControls.Adapters
         /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.SupportsMultiPart"]/*' />
         public override bool SupportsMultiPart
         {
-            get
-            {
-                return _multiPartWriter != null && _multiPartWriter.SupportsMultiPart;
-            }
+            get { return _multiPartWriter != null && _multiPartWriter.SupportsMultiPart; }
         }
 
         /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.BeginResponse"]/*' />
@@ -172,7 +163,4 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
     }
-
 }
-
-

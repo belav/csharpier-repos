@@ -1,16 +1,23 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Diagnostics;
-using System.Text;
-using System.Globalization;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
+using System.Text;
 
 namespace System.Reflection
 {
     internal static class AssemblyNameFormatter
     {
-        public static string ComputeDisplayName(string name, Version? version, string? cultureName, byte[]? pkt, AssemblyNameFlags flags = 0, AssemblyContentType contentType = 0)
+        public static string ComputeDisplayName(
+            string name,
+            Version? version,
+            string? cultureName,
+            byte[]? pkt,
+            AssemblyNameFlags flags = 0,
+            AssemblyContentType contentType = 0
+        )
         {
             const int PUBLIC_KEY_TOKEN_LEN = 8;
             Debug.Assert(name.Length != 0);
@@ -69,7 +76,11 @@ namespace System.Reflection
                 }
                 else
                 {
-                    HexConverter.EncodeToUtf16(pkt, vsb.AppendSpan(pkt.Length * 2), HexConverter.Casing.Lower);
+                    HexConverter.EncodeToUtf16(
+                        pkt,
+                        vsb.AppendSpan(pkt.Length * 2),
+                        HexConverter.Casing.Lower
+                    );
                 }
             }
 

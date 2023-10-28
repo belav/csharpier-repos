@@ -12,34 +12,36 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 {
     internal static class Extensions
     {
-        public static bool Succeeded(this OperationStatus status)
-            => status.Flag.Succeeded();
+        public static bool Succeeded(this OperationStatus status) => status.Flag.Succeeded();
 
-        public static bool FailedWithNoBestEffortSuggestion(this OperationStatus status)
-            => status.Flag.Failed() && !status.Flag.HasBestEffort();
+        public static bool FailedWithNoBestEffortSuggestion(this OperationStatus status) =>
+            status.Flag.Failed() && !status.Flag.HasBestEffort();
 
-        public static bool Failed(this OperationStatus status)
-            => status.Flag.Failed();
+        public static bool Failed(this OperationStatus status) => status.Flag.Failed();
 
-        public static bool Succeeded(this OperationStatusFlag flag)
-            => (flag & OperationStatusFlag.Succeeded) != 0;
+        public static bool Succeeded(this OperationStatusFlag flag) =>
+            (flag & OperationStatusFlag.Succeeded) != 0;
 
-        public static bool Failed(this OperationStatusFlag flag)
-            => !flag.Succeeded();
+        public static bool Failed(this OperationStatusFlag flag) => !flag.Succeeded();
 
-        public static bool HasBestEffort(this OperationStatusFlag flag)
-            => (flag & OperationStatusFlag.BestEffort) != 0;
+        public static bool HasBestEffort(this OperationStatusFlag flag) =>
+            (flag & OperationStatusFlag.BestEffort) != 0;
 
-        public static bool HasSuggestion(this OperationStatusFlag flag)
-            => (flag & OperationStatusFlag.Suggestion) != 0;
+        public static bool HasSuggestion(this OperationStatusFlag flag) =>
+            (flag & OperationStatusFlag.Suggestion) != 0;
 
-        public static bool HasMask(this OperationStatusFlag flag, OperationStatusFlag mask)
-            => (flag & mask) != 0x0;
+        public static bool HasMask(this OperationStatusFlag flag, OperationStatusFlag mask) =>
+            (flag & mask) != 0x0;
 
-        public static OperationStatusFlag RemoveFlag(this OperationStatusFlag baseFlag, OperationStatusFlag flagToRemove)
-            => baseFlag & ~flagToRemove;
+        public static OperationStatusFlag RemoveFlag(
+            this OperationStatusFlag baseFlag,
+            OperationStatusFlag flagToRemove
+        ) => baseFlag & ~flagToRemove;
 
-        public static ITypeSymbol? GetLambdaOrAnonymousMethodReturnType(this SemanticModel binding, SyntaxNode node)
+        public static ITypeSymbol? GetLambdaOrAnonymousMethodReturnType(
+            this SemanticModel binding,
+            SyntaxNode node
+        )
         {
             var info = binding.GetSymbolInfo(node);
             if (info.Symbol == null)
@@ -59,16 +61,20 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
         /// <summary>
         /// get tokens with given annotation in current document
         /// </summary>
-        public static SyntaxToken GetTokenWithAnnotation(this SemanticDocument document, SyntaxAnnotation annotation)
-            => document.Root.GetAnnotatedNodesAndTokens(annotation).Single().AsToken();
+        public static SyntaxToken GetTokenWithAnnotation(
+            this SemanticDocument document,
+            SyntaxAnnotation annotation
+        ) => document.Root.GetAnnotatedNodesAndTokens(annotation).Single().AsToken();
 
         /// <summary>
         /// resolve the given symbol against compilation this snapshot has
         /// </summary>
-        public static T ResolveType<T>(this SemanticModel semanticModel, T symbol) where T : class, ITypeSymbol
+        public static T ResolveType<T>(this SemanticModel semanticModel, T symbol)
+            where T : class, ITypeSymbol
         {
             // Can be cleaned up when https://github.com/dotnet/roslyn/issues/38061 is resolved
-            var typeSymbol = (T?)symbol.GetSymbolKey().Resolve(semanticModel.Compilation).GetAnySymbol();
+            var typeSymbol = (T?)
+                symbol.GetSymbolKey().Resolve(semanticModel.Compilation).GetAnySymbol();
             Contract.ThrowIfNull(typeSymbol);
             return (T)typeSymbol.WithNullableAnnotation(symbol.NullableAnnotation);
         }

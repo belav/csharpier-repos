@@ -18,10 +18,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
     [Trait(Traits.Feature, Traits.Features.CodeActionsInitializeParameter)]
     public partial class InitializeMemberFromParameterTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpInitializeMemberFromParameterCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpInitializeMemberFromParameterCodeRefactoringProvider();
 
-        private readonly NamingStylesTestOptionSets options = new NamingStylesTestOptionSets(LanguageNames.CSharp);
+        private readonly NamingStylesTestOptionSets options = new NamingStylesTestOptionSets(
+            LanguageNames.CSharp
+        );
 
         [Fact]
         public async Task TestInitializeFieldWithSameName()
@@ -47,7 +51,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         this.s = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -74,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         this.s = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -101,7 +107,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         this.s = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -128,7 +135,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         _s = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -155,7 +163,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         S = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -184,7 +193,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
 
                     public string S { get; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -213,7 +223,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         S1 = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -241,7 +252,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         S = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -270,7 +282,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
 
                     public string S { get; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -298,7 +311,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         s1 = s;
                     }
                 }
-                """, index: 1);
+                """,
+                index: 1
+            );
         }
 
         [Fact]
@@ -325,7 +340,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         this.s = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -343,7 +359,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         x = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -361,7 +378,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         x = s ?? throw new Exception();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -379,7 +397,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                     }
                 }
                 """,
-
                 """
                 class C
                 {
@@ -393,7 +410,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
 
                     public string S { get; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -424,7 +442,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         this.t = t;   
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -455,7 +474,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         this.t = t;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -485,7 +505,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         this.s = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -501,7 +522,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -530,7 +552,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         this.t = t;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -559,7 +582,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         this.t = t;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -589,7 +613,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                     public string S { get; }
                     public string T { get; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -619,7 +644,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                     public string S { get; }
                     public string T { get; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/19956")]
@@ -644,7 +670,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         this.s = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29190")]
@@ -671,7 +698,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         this.s = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29190")]
@@ -698,7 +726,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         this.s = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -727,7 +756,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
 
                     public int Test2 { get; }
                 }
-                """, index: 0, parameters: OmitIfDefault_Warning);
+                """,
+                index: 0,
+                parameters: OmitIfDefault_Warning
+            );
         }
 
         [Fact]
@@ -756,7 +788,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
 
                     public int Test2 { get; }
                 }
-                """, index: 0, parameters: Never_Warning);
+                """,
+                index: 0,
+                parameters: Never_Warning
+            );
         }
 
         [Fact]
@@ -785,7 +820,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
 
                     public int Test2 { get; }
                 }
-                """, index: 0, parameters: Always_Warning);
+                """,
+                index: 0,
+                parameters: Always_Warning
+            );
         }
 
         [Fact]
@@ -813,7 +851,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         this.test2 = test2;
                     }
                 }
-                """, index: 1, parameters: OmitIfDefault_Warning);
+                """,
+                index: 1,
+                parameters: OmitIfDefault_Warning
+            );
         }
 
         [Fact]
@@ -841,7 +882,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         this.test2 = test2;
                     }
                 }
-                """, index: 1, parameters: Never_Warning);
+                """,
+                index: 1,
+                parameters: Never_Warning
+            );
         }
 
         [Fact]
@@ -869,7 +913,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         this.test2 = test2;
                     }
                 }
-                """, index: 1, parameters: Always_Warning);
+                """,
+                index: 1,
+                parameters: Always_Warning
+            );
         }
 
         [Fact]
@@ -894,7 +941,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
 
                     public int Test { get; }
                 }
-                """, index: 0, parameters: OmitIfDefault_Warning);
+                """,
+                index: 0,
+                parameters: OmitIfDefault_Warning
+            );
         }
 
         [Fact]
@@ -919,7 +969,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
 
                     public int Test { get; }
                 }
-                """, index: 0, parameters: Never_Warning);
+                """,
+                index: 0,
+                parameters: Never_Warning
+            );
         }
 
         [Fact]
@@ -944,7 +997,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
 
                     public int Test { get; }
                 }
-                """, index: 0, parameters: Always_Warning);
+                """,
+                index: 0,
+                parameters: Always_Warning
+            );
         }
 
         [Fact]
@@ -969,7 +1025,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         this.test = test;
                     }
                 }
-                """, index: 1, parameters: OmitIfDefault_Warning);
+                """,
+                index: 1,
+                parameters: OmitIfDefault_Warning
+            );
         }
 
         [Fact]
@@ -994,7 +1053,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         this.test = test;
                     }
                 }
-                """, index: 1, parameters: Never_Warning);
+                """,
+                index: 1,
+                parameters: Never_Warning
+            );
         }
 
         [Fact]
@@ -1019,14 +1081,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         this.test = test;
                     }
                 }
-                """, index: 1, parameters: Always_Warning);
+                """,
+                index: 1,
+                parameters: Always_Warning
+            );
         }
 
         [Fact]
         public async Task TestNoParameterNamingStyle_CreateAndInitField()
         {
             await TestInRegularAndScript1Async(
-    """
+                """
     class C
     {
         public C([||]string s)
@@ -1034,7 +1099,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         }
     }
     """,
-    """
+                """
     class C
     {
         private readonly string _s;
@@ -1044,14 +1109,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
             _s = s;
         }
     }
-    """, index: 1, parameters: new TestParameters(options: options.FieldNamesAreCamelCaseWithUnderscorePrefix));
+    """,
+                index: 1,
+                parameters: new TestParameters(
+                    options: options.FieldNamesAreCamelCaseWithUnderscorePrefix
+                )
+            );
         }
 
         [Fact]
         public async Task TestCommonParameterNamingStyle_CreateAndInitField()
         {
             await TestInRegularAndScript1Async(
-    """
+                """
     class C
     {
         public C([||]string t_s)
@@ -1059,7 +1129,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         }
     }
     """,
-    """
+                """
     class C
     {
         private readonly string _s;
@@ -1069,14 +1139,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
             _s = t_s;
         }
     }
-    """, index: 1, parameters: new TestParameters(options: options.FieldNamesAreCamelCaseWithUnderscorePrefix));
+    """,
+                index: 1,
+                parameters: new TestParameters(
+                    options: options.FieldNamesAreCamelCaseWithUnderscorePrefix
+                )
+            );
         }
 
         [Fact]
         public async Task TestSpecifiedParameterNamingStyle_CreateAndInitField()
         {
             await TestInRegularAndScript1Async(
-    """
+                """
     class C
     {
         public C([||]string p_s_End)
@@ -1084,7 +1159,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         }
     }
     """,
-    """
+                """
     class C
     {
         private readonly string _s;
@@ -1094,14 +1169,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
             _s = p_s_End;
         }
     }
-    """, index: 1, parameters: new TestParameters(options: options.MergeStyles(options.FieldNamesAreCamelCaseWithUnderscorePrefix, options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix)));
+    """,
+                index: 1,
+                parameters: new TestParameters(
+                    options: options.MergeStyles(
+                        options.FieldNamesAreCamelCaseWithUnderscorePrefix,
+                        options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix
+                    )
+                )
+            );
         }
 
         [Fact]
         public async Task TestCommonAndSpecifiedParameterNamingStyle_CreateAndInitField()
         {
             await TestInRegularAndScript1Async(
-    """
+                """
     class C
     {
         public C([||]string t_p_s_End)
@@ -1109,7 +1192,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         }
     }
     """,
-    """
+                """
     class C
     {
         private readonly string _s;
@@ -1119,14 +1202,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
             _s = t_p_s_End;
         }
     }
-    """, index: 1, parameters: new TestParameters(options: options.MergeStyles(options.FieldNamesAreCamelCaseWithUnderscorePrefix, options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix)));
+    """,
+                index: 1,
+                parameters: new TestParameters(
+                    options: options.MergeStyles(
+                        options.FieldNamesAreCamelCaseWithUnderscorePrefix,
+                        options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix
+                    )
+                )
+            );
         }
 
         [Fact]
         public async Task TestCommonAndSpecifiedParameterNamingStyle2_CreateAndInitField()
         {
             await TestInRegularAndScript1Async(
-    """
+                """
     class C
     {
         public C([||]string p_t_s)
@@ -1134,7 +1225,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         }
     }
     """,
-        """
+                """
         class C
         {
             private readonly string _s;
@@ -1144,14 +1235,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                 _s = p_t_s;
             }
         }
-        """, index: 1, parameters: new TestParameters(options: options.MergeStyles(options.FieldNamesAreCamelCaseWithUnderscorePrefix, options.ParameterNamesAreCamelCaseWithPUnderscorePrefix)));
+        """,
+                index: 1,
+                parameters: new TestParameters(
+                    options: options.MergeStyles(
+                        options.FieldNamesAreCamelCaseWithUnderscorePrefix,
+                        options.ParameterNamesAreCamelCaseWithPUnderscorePrefix
+                    )
+                )
+            );
         }
 
         [Fact]
         public async Task TestNoParameterNamingStyle_CreateAndInitProperty()
         {
             await TestInRegularAndScript1Async(
-    """
+                """
     class C
     {
         public C([||]string s)
@@ -1159,7 +1258,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         }
     }
     """,
-    """
+                """
     class C
     {
         public C(string s)
@@ -1169,14 +1268,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
 
         public string S { get; }
     }
-    """, parameters: new TestParameters(options: options.PropertyNamesArePascalCase));
+    """,
+                parameters: new TestParameters(options: options.PropertyNamesArePascalCase)
+            );
         }
 
         [Fact]
         public async Task TestCommonParameterNamingStyle_CreateAndInitProperty()
         {
             await TestInRegularAndScript1Async(
-    """
+                """
     class C
     {
         public C([||]string t_s)
@@ -1184,7 +1285,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         }
     }
     """,
-    """
+                """
     class C
     {
         public C(string t_s)
@@ -1194,14 +1295,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
 
         public string S { get; }
     }
-    """, parameters: new TestParameters(options: options.PropertyNamesArePascalCase));
+    """,
+                parameters: new TestParameters(options: options.PropertyNamesArePascalCase)
+            );
         }
 
         [Fact]
         public async Task TestSpecifiedParameterNamingStyle_CreateAndInitProperty()
         {
             await TestInRegularAndScript1Async(
-    """
+                """
     class C
     {
         public C([||]string p_s_End)
@@ -1209,7 +1312,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         }
     }
     """,
-    """
+                """
     class C
     {
         public C(string p_s_End)
@@ -1219,14 +1322,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
 
         public string S { get; }
     }
-    """, parameters: new TestParameters(options: options.MergeStyles(options.PropertyNamesArePascalCase, options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix)));
+    """,
+                parameters: new TestParameters(
+                    options: options.MergeStyles(
+                        options.PropertyNamesArePascalCase,
+                        options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix
+                    )
+                )
+            );
         }
 
         [Fact]
         public async Task TestCommonAndSpecifiedParameterNamingStyle_CreateAndInitProperty()
         {
             await TestInRegularAndScript1Async(
-    """
+                """
     class C
     {
         public C([||]string t_p_s_End)
@@ -1234,7 +1344,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         }
     }
     """,
-    """
+                """
     class C
     {
         public C(string t_p_s_End)
@@ -1244,14 +1354,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
 
         public string S { get; }
     }
-    """, parameters: new TestParameters(options: options.MergeStyles(options.PropertyNamesArePascalCase, options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix)));
+    """,
+                parameters: new TestParameters(
+                    options: options.MergeStyles(
+                        options.PropertyNamesArePascalCase,
+                        options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix
+                    )
+                )
+            );
         }
 
         [Fact]
         public async Task TestCommonAndSpecifiedParameterNamingStyle2_CreateAndInitProperty()
         {
             await TestInRegularAndScript1Async(
-    """
+                """
     class C
     {
         public C([||]string p_t_s_End)
@@ -1259,7 +1376,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         }
     }
     """,
-        """
+                """
         class C
         {
             public C([||]string p_t_s_End)
@@ -1269,14 +1386,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
 
             public string S { get; }
         }
-        """, parameters: new TestParameters(options: options.MergeStyles(options.PropertyNamesArePascalCase, options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix)));
+        """,
+                parameters: new TestParameters(
+                    options: options.MergeStyles(
+                        options.PropertyNamesArePascalCase,
+                        options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix
+                    )
+                )
+            );
         }
 
         [Fact]
         public async Task TestNoParameterNamingStyle_InitializeField()
         {
             await TestInRegularAndScript1Async(
-    """
+                """
     class C
     {
         private readonly string _s;
@@ -1286,7 +1410,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         }
     }
     """,
-    """
+                """
     class C
     {
         private readonly string _s;
@@ -1296,14 +1420,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
             _s = s;
         }
     }
-    """, index: 0, parameters: new TestParameters(options: options.FieldNamesAreCamelCaseWithUnderscorePrefix));
+    """,
+                index: 0,
+                parameters: new TestParameters(
+                    options: options.FieldNamesAreCamelCaseWithUnderscorePrefix
+                )
+            );
         }
 
         [Fact]
         public async Task TestCommonParameterNamingStyle_InitializeField()
         {
             await TestInRegularAndScript1Async(
-    """
+                """
     class C
     {
         private readonly string _s;
@@ -1313,7 +1442,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         }
     }
     """,
-    """
+                """
     class C
     {
         private readonly string _s;
@@ -1323,14 +1452,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
             _s = t_s;
         }
     }
-    """, index: 0, parameters: new TestParameters(options: options.FieldNamesAreCamelCaseWithUnderscorePrefix));
+    """,
+                index: 0,
+                parameters: new TestParameters(
+                    options: options.FieldNamesAreCamelCaseWithUnderscorePrefix
+                )
+            );
         }
 
         [Fact]
         public async Task TestSpecifiedParameterNamingStyle_InitializeField()
         {
             await TestInRegularAndScript1Async(
-    """
+                """
     class C
     {
         private readonly string _s;
@@ -1340,7 +1474,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         }
     }
     """,
-    """
+                """
     class C
     {
         private readonly string _s;
@@ -1350,14 +1484,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
             _s = p_s_End;
         }
     }
-    """, index: 0, parameters: new TestParameters(options: options.MergeStyles(options.FieldNamesAreCamelCaseWithUnderscorePrefix, options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix)));
+    """,
+                index: 0,
+                parameters: new TestParameters(
+                    options: options.MergeStyles(
+                        options.FieldNamesAreCamelCaseWithUnderscorePrefix,
+                        options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix
+                    )
+                )
+            );
         }
 
         [Fact]
         public async Task TestCommonAndSpecifiedParameterNamingStyle_InitializeField()
         {
             await TestInRegularAndScript1Async(
-    """
+                """
     class C
     {
         private readonly string _s;
@@ -1367,7 +1509,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         }
     }
     """,
-    """
+                """
     class C
     {
         private readonly string _s;
@@ -1377,14 +1519,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
             _s = t_p_s_End;
         }
     }
-    """, index: 0, parameters: new TestParameters(options: options.MergeStyles(options.FieldNamesAreCamelCaseWithUnderscorePrefix, options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix)));
+    """,
+                index: 0,
+                parameters: new TestParameters(
+                    options: options.MergeStyles(
+                        options.FieldNamesAreCamelCaseWithUnderscorePrefix,
+                        options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix
+                    )
+                )
+            );
         }
 
         [Fact]
         public async Task TestCommonAndSpecifiedParameterNamingStyle2_InitializeField()
         {
             await TestInRegularAndScript1Async(
-    """
+                """
     class C
     {
         private readonly string _s;
@@ -1394,7 +1544,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         }
     }
     """,
-        """
+                """
         class C
         {
             private readonly string _s;
@@ -1404,14 +1554,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                 _s = p_t_s_End;
             }
         }
-        """, index: 0, parameters: new TestParameters(options: options.MergeStyles(options.FieldNamesAreCamelCaseWithUnderscorePrefix, options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix)));
+        """,
+                index: 0,
+                parameters: new TestParameters(
+                    options: options.MergeStyles(
+                        options.FieldNamesAreCamelCaseWithUnderscorePrefix,
+                        options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix
+                    )
+                )
+            );
         }
 
         [Fact]
         public async Task TestNoParameterNamingStyle_InitializeProperty()
         {
             await TestInRegularAndScript1Async(
-    """
+                """
     class C
     {
         public C([||]string s)
@@ -1421,7 +1579,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         public string S { get; }
     }
     """,
-    """
+                """
     class C
     {
         public C(string s)
@@ -1431,14 +1589,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
 
         public string S { get; }
     }
-    """, parameters: new TestParameters(options: options.PropertyNamesArePascalCase));
+    """,
+                parameters: new TestParameters(options: options.PropertyNamesArePascalCase)
+            );
         }
 
         [Fact]
         public async Task TestCommonParameterNamingStyle_InitializeProperty()
         {
             await TestInRegularAndScript1Async(
-    """
+                """
     class C
     {
         public C([||]string t_s)
@@ -1448,7 +1608,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         public string S { get; }
     }
     """,
-    """
+                """
     class C
     {
         public C(string t_s)
@@ -1458,14 +1618,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
 
         public string S { get; }
     }
-    """, parameters: new TestParameters(options: options.PropertyNamesArePascalCase));
+    """,
+                parameters: new TestParameters(options: options.PropertyNamesArePascalCase)
+            );
         }
 
         [Fact]
         public async Task TestSpecifiedParameterNamingStyle_InitializeProperty()
         {
             await TestInRegularAndScript1Async(
-    """
+                """
     class C
     {
         public C([||]string p_s_End)
@@ -1475,7 +1637,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         public string S { get; }
     }
     """,
-    """
+                """
     class C
     {
         public C(string p_s_End)
@@ -1485,14 +1647,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
 
         public string S { get; }
     }
-    """, parameters: new TestParameters(options: options.MergeStyles(options.PropertyNamesArePascalCase, options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix)));
+    """,
+                parameters: new TestParameters(
+                    options: options.MergeStyles(
+                        options.PropertyNamesArePascalCase,
+                        options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix
+                    )
+                )
+            );
         }
 
         [Fact]
         public async Task TestCommonAndSpecifiedParameterNamingStyle_InitializeProperty()
         {
             await TestInRegularAndScript1Async(
-    """
+                """
     class C
     {
         public C([||]string t_p_s_End)
@@ -1502,7 +1671,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         public string S { get; }
     }
     """,
-    """
+                """
     class C
     {
         public C(string t_p_s_End)
@@ -1512,14 +1681,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
 
         public string S { get; }
     }
-    """, parameters: new TestParameters(options: options.MergeStyles(options.PropertyNamesArePascalCase, options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix)));
+    """,
+                parameters: new TestParameters(
+                    options: options.MergeStyles(
+                        options.PropertyNamesArePascalCase,
+                        options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix
+                    )
+                )
+            );
         }
 
         [Fact]
         public async Task TestCommonAndSpecifiedParameterNamingStyle2_InitializeProperty()
         {
             await TestInRegularAndScript1Async(
-    """
+                """
     class C
     {
         public C([||]string p_t_s_End)
@@ -1529,7 +1705,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         public string S { get; }
     }
     """,
-        """
+                """
         class C
         {
             public C([||]string p_t_s_End)
@@ -1539,14 +1715,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
 
             public string S { get; }
         }
-        """, parameters: new TestParameters(options: options.MergeStyles(options.PropertyNamesArePascalCase, options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix)));
+        """,
+                parameters: new TestParameters(
+                    options: options.MergeStyles(
+                        options.PropertyNamesArePascalCase,
+                        options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix
+                    )
+                )
+            );
         }
 
         [Fact]
         public async Task TestBaseNameEmpty()
         {
             await TestMissingAsync(
-    """
+                """
     class C
     {
         public C([||]string p__End)
@@ -1555,35 +1738,70 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
 
         public string S { get; }
     }
-    """, parameters: new TestParameters(options: options.MergeStyles(options.PropertyNamesArePascalCase, options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix)));
+    """,
+                parameters: new TestParameters(
+                    options: options.MergeStyles(
+                        options.PropertyNamesArePascalCase,
+                        options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix
+                    )
+                )
+            );
         }
 
         [Fact]
         public async Task TestSomeBaseNamesEmpty()
         {
-            // Currently, this case does not offer a refactoring because selecting multiple parameters 
-            // is not supported. If multiple parameters are supported in the future, this case should 
+            // Currently, this case does not offer a refactoring because selecting multiple parameters
+            // is not supported. If multiple parameters are supported in the future, this case should
             // be updated to verify that only the parameter name that does not have an empty base is offered.
             await TestMissingAsync(
-    """
+                """
     class C
     {
         public C([|string p__End, string p_test_t|])
         {
         }
     }
-    """, parameters: new TestParameters(options: options.MergeStyles(options.PropertyNamesArePascalCase, options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix)));
+    """,
+                parameters: new TestParameters(
+                    options: options.MergeStyles(
+                        options.PropertyNamesArePascalCase,
+                        options.ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix
+                    )
+                )
+            );
         }
 
-        private TestParameters OmitIfDefault_Warning => new TestParameters(options: Option(CodeStyleOptions2.AccessibilityModifiersRequired, AccessibilityModifiersRequired.OmitIfDefault, NotificationOption2.Warning));
-        private TestParameters Never_Warning => new TestParameters(options: Option(CodeStyleOptions2.AccessibilityModifiersRequired, AccessibilityModifiersRequired.Never, NotificationOption2.Warning));
-        private TestParameters Always_Warning => new TestParameters(options: Option(CodeStyleOptions2.AccessibilityModifiersRequired, AccessibilityModifiersRequired.Always, NotificationOption2.Warning));
+        private TestParameters OmitIfDefault_Warning =>
+            new TestParameters(
+                options: Option(
+                    CodeStyleOptions2.AccessibilityModifiersRequired,
+                    AccessibilityModifiersRequired.OmitIfDefault,
+                    NotificationOption2.Warning
+                )
+            );
+        private TestParameters Never_Warning =>
+            new TestParameters(
+                options: Option(
+                    CodeStyleOptions2.AccessibilityModifiersRequired,
+                    AccessibilityModifiersRequired.Never,
+                    NotificationOption2.Warning
+                )
+            );
+        private TestParameters Always_Warning =>
+            new TestParameters(
+                options: Option(
+                    CodeStyleOptions2.AccessibilityModifiersRequired,
+                    AccessibilityModifiersRequired.Always,
+                    NotificationOption2.Warning
+                )
+            );
 
         [Fact]
         public async Task TestCreateFieldWithTopLevelNullability()
         {
             await TestInRegularAndScript1Async(
-    """
+                """
     #nullable enable
     class C
     {
@@ -1592,7 +1810,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         }
     }
     """,
-    """
+                """
     #nullable enable
     class C
     {
@@ -1603,14 +1821,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
             _s = s;
         }
     }
-    """, index: 1, parameters: new TestParameters(options: options.FieldNamesAreCamelCaseWithUnderscorePrefix));
+    """,
+                index: 1,
+                parameters: new TestParameters(
+                    options: options.FieldNamesAreCamelCaseWithUnderscorePrefix
+                )
+            );
         }
 
         [Fact]
         public async Task TestCreatePropertyWithTopLevelNullability()
         {
             await TestInRegularAndScript1Async(
-    """
+                """
     #nullable enable
     class C
     {
@@ -1619,7 +1842,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
         }
     }
     """,
-    """
+                """
     #nullable enable
     class C
     {
@@ -1630,7 +1853,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
 
         public string? S { get; }
     }
-    """, parameters: new TestParameters(options: options.PropertyNamesArePascalCase));
+    """,
+                parameters: new TestParameters(options: options.PropertyNamesArePascalCase)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/24526")]
@@ -1653,7 +1878,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
 
                     public string S { get; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/24526")]
@@ -1675,7 +1901,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
 
                     public string S { get; }
                 }
-                """, options: this.Option(CSharpFormattingOptions2.NewLineBeforeOpenBrace, NewLineBeforeOpenBracePlacement.All & ~NewLineBeforeOpenBracePlacement.Methods));
+                """,
+                options: this.Option(
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace,
+                    NewLineBeforeOpenBracePlacement.All & ~NewLineBeforeOpenBracePlacement.Methods
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23308")]
@@ -1705,7 +1936,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         this.i = i;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23308")]
@@ -1735,7 +1967,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         this.s = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23308")]
@@ -1766,7 +1999,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         (this.s, this.t, this.i) = (s, t, i);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23308")]
@@ -1793,7 +2027,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                     public C(string s, string t, int i) =>
                         (this.s, this.t, this.i) = (s, t, i);
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23308")]
@@ -1826,7 +2061,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         (this.s, this.t, this.i) = (s, t, i);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23308")]
@@ -1857,7 +2093,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         (this.i, this.s, this.t) = (i, s, t);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23308")]
@@ -1884,7 +2121,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                     public C(int i, string s, string t) =>
                         (this.i, this.s, this.t) = (i, s, t);
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23308")]
@@ -1915,7 +2153,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         (this.s, this.i, this.t) = (s, i, t);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23308")]
@@ -1942,7 +2181,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                     public C(string s, int i, string t) =>
                         (this.s, this.i, this.t) = (s, i, t);
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23308")]
@@ -1973,7 +2213,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         (S, T, I) = (s, t, i);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41824")]
@@ -1992,7 +2233,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35665")]
@@ -2021,7 +2263,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         this.k = k;
                     }
                 }
-                """, index: 3);
+                """,
+                index: 3
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35665")]
@@ -2053,7 +2297,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         this.k = k;
                     }
                 }
-                """, index: 2);
+                """,
+                index: 2
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35665")]
@@ -2085,7 +2331,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         this.k = k;
                     }
                 }
-                """, index: 2);
+                """,
+                index: 2
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35665")]
@@ -2117,7 +2365,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         this.k = k;
                     }
                 }
-                """, index: 2);
+                """,
+                index: 2
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35665")]
@@ -2146,7 +2396,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                     public int J { get; }
                     public int K { get; }
                 }
-                """, index: 2);
+                """,
+                index: 2
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35665")]
@@ -2179,7 +2431,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                     public int J { get; }
                     public int K { get; }
                 }
-                """, index: 3);
+                """,
+                index: 3
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35665")]
@@ -2212,7 +2466,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                     public int I { get; }
                     public int K { get; }
                 }
-                """, index: 3);
+                """,
+                index: 3
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35665")]
@@ -2245,7 +2501,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                     public int I { get; }
                     public int J { get; }
                 }
-                """, index: 3);
+                """,
+                index: 3
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/53467")]
@@ -2273,7 +2531,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         </Document>
                     </Project>
                 </Workspace>
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36998")]
@@ -2304,7 +2563,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         S = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36998")]
@@ -2341,7 +2601,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         S = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36998")]
@@ -2378,7 +2639,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         S = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36998")]
@@ -2417,7 +2679,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         S = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36998")]
@@ -2456,7 +2719,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         S = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36998")]
@@ -2489,7 +2753,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         S1 = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36998")]
@@ -2538,7 +2803,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InitializeParameter
                         </Document>
                     </Project>
                 </Workspace>
-                """);
+                """
+            );
         }
     }
 }

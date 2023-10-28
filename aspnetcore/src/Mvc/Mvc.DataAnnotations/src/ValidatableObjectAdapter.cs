@@ -21,7 +21,8 @@ internal sealed class ValidatableObjectAdapter : IModelValidator
         {
             var message = Resources.FormatValidatableObjectAdapter_IncompatibleType(
                 typeof(IValidatableObject).Name,
-                model.GetType());
+                model.GetType()
+            );
 
             throw new InvalidOperationException(message);
         }
@@ -33,7 +34,8 @@ internal sealed class ValidatableObjectAdapter : IModelValidator
         var validationContext = new ValidationContext(
             instance: validatable,
             serviceProvider: context.ActionContext?.HttpContext?.RequestServices,
-            items: null)
+            items: null
+        )
         {
             DisplayName = context.ModelMetadata.GetDisplayName(),
             MemberName = context.ModelMetadata.Name,
@@ -42,7 +44,9 @@ internal sealed class ValidatableObjectAdapter : IModelValidator
         return ConvertResults(validatable.Validate(validationContext));
     }
 
-    private static IEnumerable<ModelValidationResult> ConvertResults(IEnumerable<ValidationResult> results)
+    private static IEnumerable<ModelValidationResult> ConvertResults(
+        IEnumerable<ValidationResult> results
+    )
     {
         foreach (var result in results)
         {
@@ -50,7 +54,10 @@ internal sealed class ValidatableObjectAdapter : IModelValidator
             {
                 if (result.MemberNames == null || !result.MemberNames.Any())
                 {
-                    yield return new ModelValidationResult(memberName: null, message: result.ErrorMessage);
+                    yield return new ModelValidationResult(
+                        memberName: null,
+                        message: result.ErrorMessage
+                    );
                 }
                 else
                 {

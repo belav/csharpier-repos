@@ -7,7 +7,7 @@ namespace System.ServiceModel
     using System.Runtime;
 
     static class OSEnvironmentHelper
-    {        
+    {
         private static readonly OSVersion currentVersion;
         private static readonly byte currentServicePack;
 
@@ -42,8 +42,7 @@ namespace System.ServiceModel
             {
                 currentVersion = OSVersion.Win8;
             }
-            else if ((major > 6) ||
-                    ((major == 6) && (minor > 2)))
+            else if ((major > 6) || ((major == 6) && (minor > 2)))
             {
                 currentVersion = OSVersion.PostWin8;
             }
@@ -53,15 +52,11 @@ namespace System.ServiceModel
                 Fx.Assert(false, "Unknown OS");
                 currentVersion = OSVersion.Unknown;
             }
-
         }
 
         internal static bool IsVistaOrGreater
         {
-            get
-            {
-                return IsAtLeast(OSVersion.WinVista);
-            }
+            get { return IsAtLeast(OSVersion.WinVista); }
         }
 
         internal static bool IsApplicationTargeting45
@@ -74,13 +69,9 @@ namespace System.ServiceModel
             }
         }
 
-
         internal static int ProcessorCount
         {
-            get
-            {
-                return Environment.ProcessorCount;
-            }
+            get { return Environment.ProcessorCount; }
         }
 
         internal static bool IsAtLeast(OSVersion version)

@@ -7,6 +7,7 @@ namespace DebuggerTests
         int a;
         int b;
         int c;
+
         public ClassToInspectWithDebugTypeFull()
         {
             a = 10;

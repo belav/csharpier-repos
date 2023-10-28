@@ -2,11 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Diagnostics;
-using System.Collections.Generic;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
-
 using Internal.Runtime.Augments;
 
 namespace Internal.Reflection.Core.NonPortable
@@ -69,7 +68,8 @@ namespace Internal.Reflection.Core.NonPortable
                 return GetRuntimeTypeBypassCache(eeType);
             }
 
-            public static readonly RuntimeTypeHandleToTypeCache Table = new RuntimeTypeHandleToTypeCache();
+            public static readonly RuntimeTypeHandleToTypeCache Table =
+                new RuntimeTypeHandleToTypeCache();
         }
 
         // This bypasses the CoreLib's unifier, but there's another unifier deeper within the reflection stack:

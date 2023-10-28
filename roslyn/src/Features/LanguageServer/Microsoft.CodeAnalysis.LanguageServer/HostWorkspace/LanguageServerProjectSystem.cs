@@ -70,7 +70,8 @@ internal sealed class LanguageServerProjectSystem
         IGlobalOptionService globalOptionService,
         ILoggerFactory loggerFactory,
         IAsynchronousOperationListenerProvider listenerProvider,
-        ProjectLoadTelemetryReporter projectLoadTelemetry)
+        ProjectLoadTelemetryReporter projectLoadTelemetry
+    )
     {
         _workspaceFactory = workspaceFactory;
         _fileChangeWatcher = fileChangeWatcher;
@@ -84,7 +85,8 @@ internal sealed class LanguageServerProjectSystem
             LoadOrReloadProjectsAsync,
             ProjectToLoad.Comparer,
             listenerProvider.GetListener(FeatureAttribute.Workspace),
-            CancellationToken.None); // TODO: do we need to introduce a shutdown cancellation token for this?
+            CancellationToken.None
+        ); // TODO: do we need to introduce a shutdown cancellation token for this?
     }
 
     public async Task OpenSolutionAsync(string solutionFilePath)
@@ -104,12 +106,17 @@ internal sealed class LanguageServerProjectSystem
 
             foreach (var project in solutionFile.ProjectsInOrder)
             {
-                if (project.ProjectType == Microsoft.Build.Construction.SolutionProjectType.SolutionFolder)
+                if (
+                    project.ProjectType
+                    == Microsoft.Build.Construction.SolutionProjectType.SolutionFolder
+                )
                 {
                     continue;
                 }
 
-                _projectsToLoadAndReload.AddWork(new ProjectToLoad(project.AbsolutePath, project.ProjectGuid));
+                _projectsToLoadAndReload.AddWork(
+                    new ProjectToLoad(project.AbsolutePath, project.ProjectGuid)
+                );
             }
 
             // Wait for the in progress batch to complete and send a project initialized notification to the client.
@@ -125,7 +132,9 @@ internal sealed class LanguageServerProjectSystem
 
         using (await _gate.DisposableWaitAsync())
         {
-            _projectsToLoadAndReload.AddWork(projectFilePaths.Select(p => new ProjectToLoad(p, ProjectGuid: null)));
+            _projectsToLoadAndReload.AddWork(
+                projectFilePaths.Select(p => new ProjectToLoad(p, ProjectGuid: null))
+            );
 
             // Wait for the in progress batch to complete and send a project initialized notification to the client.
             await _projectsToLoadAndReload.WaitUntilCurrentBatchCompletesAsync();
@@ -143,22 +152,37 @@ internal sealed class LanguageServerProjectSystem
             }
             else
             {
-                var msbuildDiscoveryOptions = new VisualStudioInstanceQueryOptions { DiscoveryTypes = DiscoveryType.DotNetSdk, WorkingDirectory = workingDirectory };
-                var msbuildInstances = MSBuildLocator.QueryVisualStudioInstances(msbuildDiscoveryOptions);
+                var msbuildDiscoveryOptions = new VisualStudioInstanceQueryOptions
+                {
+                    DiscoveryTypes = DiscoveryType.DotNetSdk,
+                    WorkingDirectory = workingDirectory
+                };
+                var msbuildInstances = MSBuildLocator.QueryVisualStudioInstances(
+                    msbuildDiscoveryOptions
+                );
                 var msbuildInstance = msbuildInstances.FirstOrDefault();
 
                 if (msbuildInstance != null)
                 {
                     MSBuildLocator.RegisterInstance(msbuildInstance);
-                    _logger.LogInformation($"Loaded MSBuild in-process from {msbuildInstance.MSBuildPath}");
+                    _logger.LogInformation(
+                        $"Loaded MSBuild in-process from {msbuildInstance.MSBuildPath}"
+                    );
                     _msbuildLoaded = true;
 
                     return true;
                 }
                 else
                 {
-                    _logger.LogError($"Unable to find a MSBuild to use to load {workingDirectory}.");
-                    await ShowToastNotification.ShowToastNotificationAsync(LSP.MessageType.Error, LanguageServerResources.There_were_problems_loading_your_projects_See_log_for_details, CancellationToken.None, ShowToastNotification.ShowCSharpLogsCommand);
+                    _logger.LogError(
+                        $"Unable to find a MSBuild to use to load {workingDirectory}."
+                    );
+                    await ShowToastNotification.ShowToastNotificationAsync(
+                        LSP.MessageType.Error,
+                        LanguageServerResources.There_were_problems_loading_your_projects_See_log_for_details,
+                        CancellationToken.None,
+                        ShowToastNotification.ShowCSharpLogsCommand
+                    );
 
                     return false;
                 }
@@ -166,20 +190,29 @@ internal sealed class LanguageServerProjectSystem
         }
     }
 
-    private async ValueTask LoadOrReloadProjectsAsync(ImmutableSegmentedList<ProjectToLoad> projectPathsToLoadOrReload, CancellationToken cancellationToken)
+    private async ValueTask LoadOrReloadProjectsAsync(
+        ImmutableSegmentedList<ProjectToLoad> projectPathsToLoadOrReload,
+        CancellationToken cancellationToken
+    )
     {
         var stopwatch = Stopwatch.StartNew();
 
         // TODO: support configuration switching
 
         var binaryLogPath = GetMSBuildBinaryLogPath();
-        var runBuildInProcess = _globalOptionService.GetOption(LanguageServerProjectSystemOptionsStorage.LoadInProcess);
+        var runBuildInProcess = _globalOptionService.GetOption(
+            LanguageServerProjectSystemOptionsStorage.LoadInProcess
+        );
 
         if (runBuildInProcess)
             _logger.LogInformation("In-process project loading is enabled.");
 
-        await using var buildHostProcessManager = !runBuildInProcess ? new BuildHostProcessManager(_loggerFactory, binaryLogPath) : null;
-        var inProcessBuildHost = runBuildInProcess ? new BuildHost(_loggerFactory, binaryLogPath) : null;
+        await using var buildHostProcessManager = !runBuildInProcess
+            ? new BuildHostProcessManager(_loggerFactory, binaryLogPath)
+            : null;
+        var inProcessBuildHost = runBuildInProcess
+            ? new BuildHost(_loggerFactory, binaryLogPath)
+            : null;
 
         var displayedToast = 0;
 
@@ -189,20 +222,43 @@ internal sealed class LanguageServerProjectSystem
 
             foreach (var projectToLoad in projectPathsToLoadOrReload)
             {
-                tasks.Add(Task.Run(async () =>
-                {
-                    var errorKind = await LoadOrReloadProjectAsync(projectToLoad, buildHostProcessManager, inProcessBuildHost, cancellationToken);
-                    if (errorKind is LSP.MessageType.Error)
-                    {
-                        // We should display a toast when the value of displayedToast is 0.  This will also update the value to 1 meaning we won't send any more toasts.
-                        var shouldShowToast = Interlocked.CompareExchange(ref displayedToast, value: 1, comparand: 0) == 0;
-                        if (shouldShowToast)
+                tasks.Add(
+                    Task.Run(
+                        async () =>
                         {
-                            var message = string.Format(LanguageServerResources.There_were_problems_loading_project_0_See_log_for_details, Path.GetFileName(projectToLoad.Path));
-                            await ShowToastNotification.ShowToastNotificationAsync(errorKind.Value, message, cancellationToken, ShowToastNotification.ShowCSharpLogsCommand);
-                        }
-                    }
-                }, cancellationToken));
+                            var errorKind = await LoadOrReloadProjectAsync(
+                                projectToLoad,
+                                buildHostProcessManager,
+                                inProcessBuildHost,
+                                cancellationToken
+                            );
+                            if (errorKind is LSP.MessageType.Error)
+                            {
+                                // We should display a toast when the value of displayedToast is 0.  This will also update the value to 1 meaning we won't send any more toasts.
+                                var shouldShowToast =
+                                    Interlocked.CompareExchange(
+                                        ref displayedToast,
+                                        value: 1,
+                                        comparand: 0
+                                    ) == 0;
+                                if (shouldShowToast)
+                                {
+                                    var message = string.Format(
+                                        LanguageServerResources.There_were_problems_loading_project_0_See_log_for_details,
+                                        Path.GetFileName(projectToLoad.Path)
+                                    );
+                                    await ShowToastNotification.ShowToastNotificationAsync(
+                                        errorKind.Value,
+                                        message,
+                                        cancellationToken,
+                                        ShowToastNotification.ShowCSharpLogsCommand
+                                    );
+                                }
+                            }
+                        },
+                        cancellationToken
+                    )
+                );
             }
 
             await Task.WhenAll(tasks);
@@ -218,82 +274,145 @@ internal sealed class LanguageServerProjectSystem
 
     private string? GetMSBuildBinaryLogPath()
     {
-        if (_globalOptionService.GetOption(LanguageServerProjectSystemOptionsStorage.BinaryLogPath) is not string binaryLogDirectory)
+        if (
+            _globalOptionService.GetOption(LanguageServerProjectSystemOptionsStorage.BinaryLogPath)
+            is not string binaryLogDirectory
+        )
             return null;
 
         var numericSuffix = Interlocked.Increment(ref _binaryLogNumericSuffix);
-        var binaryLogPath = Path.Combine(binaryLogDirectory, $"LanguageServerDesignTimeBuild-{_binaryLogGuidSuffix}-{numericSuffix}.binlog");
+        var binaryLogPath = Path.Combine(
+            binaryLogDirectory,
+            $"LanguageServerDesignTimeBuild-{_binaryLogGuidSuffix}-{numericSuffix}.binlog"
+        );
 
         _logger.LogInformation($"Logging design-time builds to {binaryLogPath}");
 
         return binaryLogPath;
     }
 
-    private async Task<LSP.MessageType?> LoadOrReloadProjectAsync(ProjectToLoad projectToLoad, BuildHostProcessManager? buildHostProcessManager, BuildHost? inProcessBuildHost, CancellationToken cancellationToken)
+    private async Task<LSP.MessageType?> LoadOrReloadProjectAsync(
+        ProjectToLoad projectToLoad,
+        BuildHostProcessManager? buildHostProcessManager,
+        BuildHost? inProcessBuildHost,
+        CancellationToken cancellationToken
+    )
     {
         try
         {
             var projectPath = projectToLoad.Path;
 
             // If we have a process manager, then get an OOP process; otherwise we're still using in-proc builds so just fetch one in-process
-            var buildHost = inProcessBuildHost ?? await buildHostProcessManager!.GetBuildHostAsync(projectPath, cancellationToken);
+            var buildHost =
+                inProcessBuildHost
+                ?? await buildHostProcessManager!.GetBuildHostAsync(projectPath, cancellationToken);
 
             if (await buildHost.IsProjectFileSupportedAsync(projectPath, cancellationToken))
             {
-                var loadedFile = await buildHost.LoadProjectFileAsync(projectPath, cancellationToken);
-                var loadedProjectInfos = await loadedFile.GetProjectFileInfosAsync(cancellationToken);
+                var loadedFile = await buildHost.LoadProjectFileAsync(
+                    projectPath,
+                    cancellationToken
+                );
+                var loadedProjectInfos = await loadedFile.GetProjectFileInfosAsync(
+                    cancellationToken
+                );
 
                 // The out-of-proc build host supports more languages than we may actually have Workspace binaries for, so ensure we can actually process that
                 // language.
                 var projectLanguage = loadedProjectInfos.FirstOrDefault()?.Language;
-                if (projectLanguage != null && _workspaceFactory.Workspace.Services.GetLanguageService<ICommandLineParserService>(projectLanguage) == null)
+                if (
+                    projectLanguage != null
+                    && _workspaceFactory
+                        .Workspace
+                        .Services
+                        .GetLanguageService<ICommandLineParserService>(projectLanguage) == null
+                )
                 {
                     return null;
                 }
 
-                var existingProjects = _loadedProjects.GetOrAdd(projectPath, static _ => new List<LoadedProject>());
+                var existingProjects = _loadedProjects.GetOrAdd(
+                    projectPath,
+                    static _ => new List<LoadedProject>()
+                );
 
-                Dictionary<ProjectFileInfo, (ImmutableArray<CommandLineReference> MetadataReferences, OutputKind OutputKind)> projectFileInfos = new();
+                Dictionary<
+                    ProjectFileInfo,
+                    (ImmutableArray<CommandLineReference> MetadataReferences, OutputKind OutputKind)
+                > projectFileInfos = new();
                 foreach (var loadedProjectInfo in loadedProjectInfos)
                 {
                     // If we already have the project, just update it
-                    var existingProject = existingProjects.Find(p => p.GetTargetFramework() == loadedProjectInfo.TargetFramework);
+                    var existingProject = existingProjects.Find(
+                        p => p.GetTargetFramework() == loadedProjectInfo.TargetFramework
+                    );
 
                     if (existingProject != null)
                     {
-                        projectFileInfos[loadedProjectInfo] = await existingProject.UpdateWithNewProjectInfoAsync(loadedProjectInfo);
+                        projectFileInfos[loadedProjectInfo] =
+                            await existingProject.UpdateWithNewProjectInfoAsync(loadedProjectInfo);
                     }
                     else
                     {
-                        var projectSystemName = $"{projectPath} (${loadedProjectInfo.TargetFramework})";
-                        var projectCreationInfo = new ProjectSystemProjectCreationInfo { AssemblyName = projectSystemName, FilePath = projectPath };
+                        var projectSystemName =
+                            $"{projectPath} (${loadedProjectInfo.TargetFramework})";
+                        var projectCreationInfo = new ProjectSystemProjectCreationInfo
+                        {
+                            AssemblyName = projectSystemName,
+                            FilePath = projectPath
+                        };
 
-                        var projectSystemProject = await _workspaceFactory.ProjectSystemProjectFactory.CreateAndAddToWorkspaceAsync(
-                            projectSystemName,
-                            loadedProjectInfo.Language,
-                            projectCreationInfo,
-                            _workspaceFactory.ProjectSystemHostInfo);
+                        var projectSystemProject = await _workspaceFactory
+                            .ProjectSystemProjectFactory
+                            .CreateAndAddToWorkspaceAsync(
+                                projectSystemName,
+                                loadedProjectInfo.Language,
+                                projectCreationInfo,
+                                _workspaceFactory.ProjectSystemHostInfo
+                            );
 
-                        var loadedProject = new LoadedProject(projectSystemProject, _workspaceFactory.Workspace.Services.SolutionServices, _fileChangeWatcher, _workspaceFactory.TargetFrameworkManager);
-                        loadedProject.NeedsReload += (_, _) => _projectsToLoadAndReload.AddWork(projectToLoad);
+                        var loadedProject = new LoadedProject(
+                            projectSystemProject,
+                            _workspaceFactory.Workspace.Services.SolutionServices,
+                            _fileChangeWatcher,
+                            _workspaceFactory.TargetFrameworkManager
+                        );
+                        loadedProject.NeedsReload += (_, _) =>
+                            _projectsToLoadAndReload.AddWork(projectToLoad);
                         existingProjects.Add(loadedProject);
 
-                        projectFileInfos[loadedProjectInfo] = await loadedProject.UpdateWithNewProjectInfoAsync(loadedProjectInfo);
+                        projectFileInfos[loadedProjectInfo] =
+                            await loadedProject.UpdateWithNewProjectInfoAsync(loadedProjectInfo);
                     }
                 }
 
-                await _projectLoadTelemetryReporter.ReportProjectLoadTelemetryAsync(projectFileInfos, projectToLoad, cancellationToken);
+                await _projectLoadTelemetryReporter.ReportProjectLoadTelemetryAsync(
+                    projectFileInfos,
+                    projectToLoad,
+                    cancellationToken
+                );
 
-                var diagnosticLogItems = await loadedFile.GetDiagnosticLogItemsAsync(cancellationToken);
+                var diagnosticLogItems = await loadedFile.GetDiagnosticLogItemsAsync(
+                    cancellationToken
+                );
                 if (diagnosticLogItems.Any())
                 {
                     foreach (var logItem in diagnosticLogItems)
                     {
                         var projectName = Path.GetFileName(projectPath);
-                        _logger.Log(logItem.Kind is WorkspaceDiagnosticKind.Failure ? LogLevel.Error : LogLevel.Warning, $"{logItem.Kind} while loading {logItem.ProjectFilePath}: {logItem.Message}");
+                        _logger.Log(
+                            logItem.Kind is WorkspaceDiagnosticKind.Failure
+                                ? LogLevel.Error
+                                : LogLevel.Warning,
+                            $"{logItem.Kind} while loading {logItem.ProjectFilePath}: {logItem.Message}"
+                        );
                     }
 
-                    return diagnosticLogItems.Any(logItem => logItem.Kind is WorkspaceDiagnosticKind.Failure) ? LSP.MessageType.Error : LSP.MessageType.Warning;
+                    return diagnosticLogItems.Any(
+                        logItem => logItem.Kind is WorkspaceDiagnosticKind.Failure
+                    )
+                        ? LSP.MessageType.Error
+                        : LSP.MessageType.Warning;
                 }
                 else
                 {

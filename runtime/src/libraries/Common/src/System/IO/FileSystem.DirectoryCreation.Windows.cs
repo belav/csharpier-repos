@@ -1,19 +1,22 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.Win32.SafeHandles;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
+using Microsoft.Win32.SafeHandles;
 
 namespace System.IO
 {
     internal static partial class FileSystem
     {
-        public static unsafe void CreateDirectory(string fullPath, byte[]? securityDescriptor = null)
+        public static unsafe void CreateDirectory(
+            string fullPath,
+            byte[]? securityDescriptor = null
+        )
         {
             // We can save a bunch of work if the directory we want to create already exists.  This also
             // saves us in the case where sub paths are inaccessible (due to ERROR_ACCESS_DENIED) but the
@@ -77,11 +80,12 @@ namespace System.IO
 
             fixed (byte* pSecurityDescriptor = securityDescriptor)
             {
-                Interop.Kernel32.SECURITY_ATTRIBUTES secAttrs = new Interop.Kernel32.SECURITY_ATTRIBUTES
-                {
-                    nLength = (uint)sizeof(Interop.Kernel32.SECURITY_ATTRIBUTES),
-                    lpSecurityDescriptor = pSecurityDescriptor
-                };
+                Interop.Kernel32.SECURITY_ATTRIBUTES secAttrs =
+                    new Interop.Kernel32.SECURITY_ATTRIBUTES
+                    {
+                        nLength = (uint)sizeof(Interop.Kernel32.SECURITY_ATTRIBUTES),
+                        lpSecurityDescriptor = pSecurityDescriptor
+                    };
 
                 while (stackDir.Count > 0)
                 {
@@ -107,7 +111,13 @@ namespace System.IO
                         else
                         {
                             // If there's a file in this directory's place, or if we have ERROR_ACCESS_DENIED when checking if the directory already exists throw.
-                            if (FileExists(name) || (!DirectoryExists(name, out currentError) && currentError == Interop.Errors.ERROR_ACCESS_DENIED))
+                            if (
+                                FileExists(name)
+                                || (
+                                    !DirectoryExists(name, out currentError)
+                                    && currentError == Interop.Errors.ERROR_ACCESS_DENIED
+                                )
+                            )
                             {
                                 firstError = currentError;
                                 errorString = name;
@@ -125,7 +135,10 @@ namespace System.IO
 
                 if (!DirectoryExists(root))
                 {
-                    throw Win32Marshal.GetExceptionForWin32Error(Interop.Errors.ERROR_PATH_NOT_FOUND, root);
+                    throw Win32Marshal.GetExceptionForWin32Error(
+                        Interop.Errors.ERROR_PATH_NOT_FOUND,
+                        root
+                    );
                 }
 
                 return;

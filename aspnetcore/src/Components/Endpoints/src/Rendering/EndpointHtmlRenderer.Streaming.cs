@@ -36,19 +36,27 @@ internal partial class EndpointHtmlRenderer
         }
     }
 
-    public async Task SendStreamingUpdatesAsync(HttpContext httpContext, Task untilTaskCompleted, TextWriter writer)
+    public async Task SendStreamingUpdatesAsync(
+        HttpContext httpContext,
+        Task untilTaskCompleted,
+        TextWriter writer
+    )
     {
         SetHttpContext(httpContext);
 
         if (_streamingUpdatesWriter is not null)
         {
             // The framework is the only caller, so it's OK to have a nonobvious restriction like this
-            throw new InvalidOperationException($"{nameof(SendStreamingUpdatesAsync)} can only be called once.");
+            throw new InvalidOperationException(
+                $"{nameof(SendStreamingUpdatesAsync)} can only be called once."
+            );
         }
 
         if (_ssrFramingCommentMarkup is null)
         {
-            throw new InvalidOperationException("Cannot begin streaming rendering because no framing header was set.");
+            throw new InvalidOperationException(
+                "Cannot begin streaming rendering because no framing header was set."
+            );
         }
 
         _streamingUpdatesWriter = writer;
@@ -98,15 +106,21 @@ internal partial class EndpointHtmlRenderer
             // First, get a list of updated components in depth order
             // We'll stackalloc a buffer if it's small, otherwise take a buffer on the heap
             var bufSizeRequired = count * Marshal.SizeOf<ComponentIdAndDepth>();
-            var componentIdsInDepthOrder = bufSizeRequired < 1024
-                ? MemoryMarshal.Cast<byte, ComponentIdAndDepth>(stackalloc byte[bufSizeRequired])
-                : new ComponentIdAndDepth[count];
+            var componentIdsInDepthOrder =
+                bufSizeRequired < 1024
+                    ? MemoryMarshal.Cast<byte, ComponentIdAndDepth>(
+                        stackalloc byte[bufSizeRequired]
+                    )
+                    : new ComponentIdAndDepth[count];
             for (var i = 0; i < count; i++)
             {
                 var componentId = renderBatch.UpdatedComponents.Array[i].ComponentId;
                 componentIdsInDepthOrder[i] = new(componentId, GetComponentDepth(componentId));
             }
-            MemoryExtensions.Sort(componentIdsInDepthOrder, static (left, right) => left.Depth - right.Depth);
+            MemoryExtensions.Sort(
+                componentIdsInDepthOrder,
+                static (left, right) => left.Depth - right.Depth
+            );
 
             // Reset the component rendering tracker. This is safe to share as an instance field because batch-rendering
             // is synchronous only one batch can be rendered at a time.
@@ -173,12 +187,18 @@ internal partial class EndpointHtmlRenderer
         return depth;
     }
 
-    private static void HandleExceptionAfterResponseStarted(HttpContext httpContext, TextWriter writer, Exception exception)
+    private static void HandleExceptionAfterResponseStarted(
+        HttpContext httpContext,
+        TextWriter writer,
+        Exception exception
+    )
     {
         // We already started the response so we have no choice but to return a 200 with HTML and will
         // have to communicate the error information within that
         var env = httpContext.RequestServices.GetRequiredService<IWebHostEnvironment>();
-        var options = httpContext.RequestServices.GetRequiredService<IOptions<RazorComponentsServiceOptions>>();
+        var options = httpContext
+            .RequestServices
+            .GetRequiredService<IOptions<RazorComponentsServiceOptions>>();
         var showDetailedErrors = env.IsDevelopment() || options.Value.DetailedErrors;
         var message = showDetailedErrors
             ? exception.ToString()
@@ -189,7 +209,11 @@ internal partial class EndpointHtmlRenderer
         writer.Write("</template><blazor-ssr-end></blazor-ssr-end></blazor-ssr>");
     }
 
-    private static void HandleNavigationAfterResponseStarted(TextWriter writer, HttpContext httpContext, string destinationUrl)
+    private static void HandleNavigationAfterResponseStarted(
+        TextWriter writer,
+        HttpContext httpContext,
+        string destinationUrl
+    )
     {
         writer.Write("<blazor-ssr><template type=\"redirection\"");
 
@@ -204,21 +228,38 @@ internal partial class EndpointHtmlRenderer
         }
 
         writer.Write(">");
-        writer.Write(HtmlEncoder.Default.Encode(OpaqueRedirection.CreateProtectedRedirectionUrl(httpContext, destinationUrl)));
+        writer.Write(
+            HtmlEncoder
+                .Default
+                .Encode(
+                    OpaqueRedirection.CreateProtectedRedirectionUrl(httpContext, destinationUrl)
+                )
+        );
         writer.Write("</template><blazor-ssr-end></blazor-ssr-end></blazor-ssr>");
     }
 
-    protected override void WriteComponentHtml(int componentId, TextWriter output)
-        => WriteComponentHtml(componentId, output, allowBoundaryMarkers: true);
+    protected override void WriteComponentHtml(int componentId, TextWriter output) =>
+        WriteComponentHtml(componentId, output, allowBoundaryMarkers: true);
 
-    protected override void RenderChildComponent(TextWriter output, ref RenderTreeFrame componentFrame)
+    protected override void RenderChildComponent(
+        TextWriter output,
+        ref RenderTreeFrame componentFrame
+    )
     {
         var componentId = componentFrame.ComponentId;
-        var sequenceAndKey = new SequenceAndKey(componentFrame.Sequence, componentFrame.ComponentKey);
+        var sequenceAndKey = new SequenceAndKey(
+            componentFrame.Sequence,
+            componentFrame.ComponentKey
+        );
         WriteComponentHtml(componentId, output, allowBoundaryMarkers: true, sequenceAndKey);
     }
 
-    private void WriteComponentHtml(int componentId, TextWriter output, bool allowBoundaryMarkers, SequenceAndKey sequenceAndKey = default)
+    private void WriteComponentHtml(
+        int componentId,
+        TextWriter output,
+        bool allowBoundaryMarkers,
+        SequenceAndKey sequenceAndKey = default
+    )
     {
         _visitedComponentIdsInCurrentStreamingBatch?.Add(componentId);
 
@@ -229,15 +270,25 @@ internal partial class EndpointHtmlRenderer
 
         if (componentState.Component is SSRRenderModeBoundary boundary)
         {
-            var marker = boundary.ToMarker(_httpContext, sequenceAndKey.Sequence, sequenceAndKey.Key);
+            var marker = boundary.ToMarker(
+                _httpContext,
+                sequenceAndKey.Sequence,
+                sequenceAndKey.Key
+            );
             endMarkerOrNull = marker.ToEndMarker();
 
-            if (!_httpContext.Response.HasStarted && marker.Type is ComponentMarker.ServerMarkerType or ComponentMarker.AutoMarkerType)
+            if (
+                !_httpContext.Response.HasStarted
+                && marker.Type is ComponentMarker.ServerMarkerType or ComponentMarker.AutoMarkerType
+            )
             {
                 _httpContext.Response.Headers.CacheControl = "no-cache, no-store, max-age=0";
             }
 
-            var serializedStartRecord = JsonSerializer.Serialize(marker, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var serializedStartRecord = JsonSerializer.Serialize(
+                marker,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             output.Write("<!--Blazor:");
             output.Write(serializedStartRecord);
             output.Write("-->");
@@ -261,7 +312,10 @@ internal partial class EndpointHtmlRenderer
 
         if (endMarkerOrNull is { } endMarker)
         {
-            var serializedEndRecord = JsonSerializer.Serialize(endMarker, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var serializedEndRecord = JsonSerializer.Serialize(
+                endMarker,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             output.Write("<!--Blazor:");
             output.Write(serializedEndRecord);
             output.Write("-->");
@@ -272,7 +326,12 @@ internal partial class EndpointHtmlRenderer
     {
         // For enhanced nav, the Blazor JS code controls the "accept" header precisely, so we can be very specific about the format
         var accept = request.Headers.Accept;
-        return accept.Count == 1 && string.Equals(accept[0]!, "text/html;blazor-enhanced-nav=on", StringComparison.Ordinal);
+        return accept.Count == 1
+            && string.Equals(
+                accept[0]!,
+                "text/html;blazor-enhanced-nav=on",
+                StringComparison.Ordinal
+            );
     }
 
     private readonly struct ComponentIdAndDepth
